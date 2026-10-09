@@ -50,7 +50,7 @@ def run(name, arguments, company_id=COMPANY):
     return asyncio.run(call_tool(name, arguments, "user-token", "de", company_id))
 
 
-def test_a_list_is_trimmed_cut_and_shown_as_linked_rows(calls):
+def test_a_list_is_trimmed_and_cut_for_the_model_and_shows_nothing(calls):
     rows = [
         {"id": f"c{i}", "email": f"c{i}@example.com", "grade": 80, "passed": None, "secret": "x"}
         for i in range(4)
@@ -75,10 +75,7 @@ def test_a_list_is_trimmed_cut_and_shown_as_linked_rows(calls):
         "shown": 3,
         "more": True,
     }
-    assert result.block["kind"] == "candidate_rows"
-    assert result.block["links"][0] == (
-        f"/companies/{COMPANY}/interviews/{INTERVIEW}/candidates/c0"
-    )
+    assert result.block is None
 
 
 def test_a_limit_is_capped_at_the_tools_maximum_and_set_when_left_out(calls):
@@ -95,7 +92,7 @@ def test_the_platform_guide_is_read_whole_as_text(calls):
 
     assert calls[0][:3] == ("rounds", "/help/guide", {})
     assert result.content == {"data": guide, "source": "get_platform_guide"}
-    assert result.block == {"kind": "link", "items": [], "links": ["/faq"]}
+    assert result.block is None
 
 
 def test_a_services_error_reaches_the_model_in_the_users_language(calls):

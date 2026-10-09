@@ -77,7 +77,6 @@ def test_a_turns_events_come_in_order_and_end_with_the_saved_message(monkeypatch
         {"conversation": {"id": str(TURN.conversation_id)}},
         {"tool": {"name": "get_me", "state": "running", "label": "Reading your account…"}},
         {"tool": {"name": "get_me", "state": "done", "label": "Reading your account…"}},
-        {"block": {"kind": "link", "items": [], "links": ["/settings"]}},
         {"delta": "You're"},
         {"delta": " Ann."},
         {"done": {"message_id": str(MESSAGE_ID)}},

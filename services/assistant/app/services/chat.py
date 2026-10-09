@@ -15,9 +15,9 @@ from prepza_common.scope import SCOPE_RULE
 
 from app.constants.chat import COMPANY_NOT_FOUND, MAX_TOOL_STEPS, ToolState
 from app.constants.client_tools import SIGN_OUT, SIGN_OUT_DEFINITION, SIGN_OUT_FOR_MODEL
+from app.constants.show import SHOW, SHOW_DEFINITION
 from app.constants.tool_calls import INVALID_ARGUMENTS
 from app.constants.tool_labels import ACTION_LABEL, TOOL_LABELS, UNKNOWN_TOOL_LABEL
-from app.helpers.blocks import reference
 from app.helpers.history import history
 from app.integrations import llm
 from app.models.answers import Answer, Turn
@@ -32,6 +32,7 @@ from app.prompts.assistant import (
 )
 from app.services.actions import prepare
 from app.services.registry import tools
+from app.services.show import show
 from app.services.tenancy import foreign_company
 from app.services.tool_calls import call_tools
 
@@ -72,7 +73,8 @@ async def converse(messages: list[BaseMessage], turn: Turn, answer: Answer, emit
     """Asks the model, runs the tools it calls and asks again with their results, streaming its
     text, until it answers without tools. After MAX_TOOL_STEPS steps with tools, it must answer
     with what it has."""
-    definitions = [tool.definition for tool in tools().values()] + [SIGN_OUT_DEFINITION]
+    definitions = [tool.definition for tool in tools().values()]
+    definitions += [SIGN_OUT_DEFINITION, SHOW_DEFINITION]
     model = llm.get_chat_model()
 
     for step in range(MAX_TOOL_STEPS + 1):
@@ -114,7 +116,9 @@ def tool_event(name: str, state: ToolState, language: str) -> dict:
     return {"tool": {"name": name, "state": state, "label": label}}
 
 
-async def step_results(calls: list[tuple[str, dict]], turn: Turn) -> list[ToolResult]:
+async def step_results(
+    calls: list[tuple[str, dict]], turn: Turn, shown: set | None = None
+) -> list[ToolResult]:
     """One step's results, in order: a call naming a company that isn't the user's is refused
     before anything runs; an action is prepared for the user to confirm; reads are called."""
     results: list[ToolResult | None] = [None] * len(calls)
@@ -123,7 +127,11 @@ async def step_results(calls: list[tuple[str, dict]], turn: Turn) -> list[ToolRe
     for index, (name, arguments) in enumerate(calls):
         tool = tools().get(name)
 
-        if name == SIGN_OUT:
+        if name == SHOW:
+            # Rows or a link under the answer, which the model chose (one of each at most).
+            content, block = await show(arguments, turn, shown if shown is not None else set())
+            results[index] = ToolResult(name, arguments, 200, content, block, 0)
+        elif name == SIGN_OUT:
             # Signing out happens in the browser: the panel is told to (run_tools).
             content = {"detail": SIGN_OUT_FOR_MODEL}
             results[index] = ToolResult(name, {}, 200, content, None, 0)
@@ -155,7 +163,9 @@ async def run_tools(calls: list[dict], turn: Turn, answer: Answer, emit: Emit) -
         emit(tool_event(call["name"], ToolState.RUNNING, turn.language))
 
     valid = [call for call in calls if call.get("type") == "tool_call"]
-    results = await step_results([(call["name"], call["args"]) for call in valid], turn)
+    results = await step_results(
+        [(call["name"], call["args"]) for call in valid], turn, answer.shown
+    )
     replies = []
 
     for call, result in zip(valid, results, strict=True):
@@ -176,12 +186,12 @@ async def run_tools(calls: list[dict], turn: Turn, answer: Answer, emit: Emit) -
             answer.results.append(result)
 
         if result.block is not None:
-            emit({"block": result.block})
+            # What the answer keeps of a shown block is its reference (`ref`): ids and links.
+            ref = result.block.get("ref")
+            emit({"block": {key: value for key, value in result.block.items() if key != "ref"}})
 
-            if not pending:
-                # Kept as references only: the panel fetches them again when it's opened.
-                context = {"company_id": str(turn.company_id or ""), **call["args"]}
-                answer.blocks.append(reference(result.block, context))
+            if ref is not None:
+                answer.blocks.append(ref)
 
         content = json.dumps(result.content, ensure_ascii=False)
         replies.append(ToolMessage(content=content, tool_call_id=call["id"]))

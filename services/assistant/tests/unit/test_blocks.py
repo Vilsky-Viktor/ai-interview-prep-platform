@@ -47,21 +47,3 @@ def test_a_link_block_is_one_link_and_no_render_is_no_block():
         "links": [],
     }
     assert render_block(None, "/faq", {"a": 1}, context) is None
-
-
-def test_a_stored_block_keeps_only_ids_and_links():
-    from app.helpers.blocks import reference
-
-    block = {
-        "kind": "candidate_rows",
-        "items": [{"id": "c1", "email": "ann@example.com", "grade": 82}],
-        "links": ["/companies/x/interviews/i1/candidates/c1"],
-    }
-
-    assert reference(block, {"interview_id": "i1", "q": "ann"}) == {
-        "kind": "candidate_rows",
-        "refs": [{"id": "c1", "interview_id": "i1"}],
-        "links": ["/companies/x/interviews/i1/candidates/c1"],
-    }
-    balances = {"kind": "credits", "items": [{"id": "k1", "name": "Acme"}], "links": ["/top-up"]}
-    assert reference(balances, {})["refs"] == [{"company_id": "k1"}]

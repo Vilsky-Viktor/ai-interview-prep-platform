@@ -165,4 +165,5 @@ MESSAGES = {
     "Reading prepza's news…": "prepza のお知らせを確認しています…",
     "Reading your practice rounds…": "練習ラウンドを確認しています…",
     "Reading your practice progress…": "練習の進み具合を確認しています…",
+    "Preparing what to show…": "表示する内容を準備しています…",
 }

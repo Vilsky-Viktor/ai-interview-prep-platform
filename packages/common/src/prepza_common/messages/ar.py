@@ -165,4 +165,5 @@ MESSAGES = {
     "Reading prepza's news…": "جارٍ الاطلاع على أخبار prepza…",
     "Reading your practice rounds…": "جارٍ الاطلاع على جولات التدريب…",
     "Reading your practice progress…": "جارٍ الاطلاع على تقدّمك في التدريب…",
+    "Preparing what to show…": "جارٍ تجهيز ما سيُعرض…",
 }

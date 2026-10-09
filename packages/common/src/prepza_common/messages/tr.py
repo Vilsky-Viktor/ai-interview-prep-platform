@@ -165,4 +165,5 @@ MESSAGES = {
     "Reading prepza's news…": "prepza haberlerine bakılıyor…",
     "Reading your practice rounds…": "Pratik turlarına bakılıyor…",
     "Reading your practice progress…": "Pratik ilerlemene bakılıyor…",
+    "Preparing what to show…": "Gösterilecekler hazırlanıyor…",
 }

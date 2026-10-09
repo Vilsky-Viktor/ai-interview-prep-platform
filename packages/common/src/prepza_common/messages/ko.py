@@ -165,4 +165,5 @@ MESSAGES = {
     "Reading prepza's news…": "prepza 소식을 확인하는 중…",
     "Reading your practice rounds…": "연습 라운드를 확인하는 중…",
     "Reading your practice progress…": "연습 진행 상황을 확인하는 중…",
+    "Preparing what to show…": "보여 줄 내용을 준비하는 중…",
 }

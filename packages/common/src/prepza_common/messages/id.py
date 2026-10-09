@@ -165,4 +165,5 @@ MESSAGES = {
     "Reading prepza's news…": "Melihat berita prepza…",
     "Reading your practice rounds…": "Melihat ronde latihanmu…",
     "Reading your practice progress…": "Melihat progres latihanmu…",
+    "Preparing what to show…": "Menyiapkan yang akan ditampilkan…",
 }

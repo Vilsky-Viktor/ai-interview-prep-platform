@@ -23,8 +23,6 @@ INTERVIEW_FIELDS = [
     "question_seconds",
     "created_at",
 ]
-CANDIDATE_LINK = "/companies/{company_id}/interviews/{interview_id}/candidates/{id}"
-INTERVIEW_LINK = "/companies/{company_id}/interviews/{interview_id}"
 
 COMPANY_TOOLS = {
     "list_companies": {
@@ -41,8 +39,6 @@ COMPANY_TOOLS = {
             "verified_domain",
             "verification_status",
         ],
-        "render": "link",
-        "link": "/companies",
     },
     "get_company": {
         "service": "companies",
@@ -62,8 +58,6 @@ COMPANY_TOOLS = {
             "decline_reason",
             "created_at",
         ],
-        "render": "link",
-        "link": "/companies/{company_id}/interviews",
     },
     "list_company_balances": {
         "service": "companies",
@@ -71,24 +65,18 @@ COMPANY_TOOLS = {
         "path": "/companies/credits",
         "params": ["offset", "limit"],
         "fields": ["id", "name", "available", "low"],
-        "render": "credits",
-        "link": "/top-up",
     },
     "get_credits": {
         "service": "companies",
         "method": "GET",
         "path": "/companies/{company_id}/credits",
         "params": ["company_id"],
-        "render": "credits",
-        "link": "/top-up",
     },
     "get_referral": {
         "service": "companies",
         "method": "GET",
         "path": "/companies/{company_id}/referral",
         "params": ["company_id"],
-        "render": "link",
-        "link": "/companies/{company_id}/referrals",
     },
     "get_auto_top_up": {
         "service": "companies",
@@ -96,8 +84,6 @@ COMPANY_TOOLS = {
         "path": "/companies/{company_id}/auto-top-up",
         "params": ["company_id"],
         "fields": ["offered", "on", "waiting", "product", "threshold"],
-        "render": "link",
-        "link": "/top-up",
     },
     "list_members": {
         "service": "companies",
@@ -106,8 +92,6 @@ COMPANY_TOOLS = {
         "params": ["company_id", "offset", "limit"],
         # Never an admin invite's token.
         "fields": ["id", "email", "role", "joined", "created_at"],
-        "render": "link",
-        "link": "/companies/{company_id}/members",
     },
     "list_interviews": {
         "service": "companies",
@@ -115,8 +99,6 @@ COMPANY_TOOLS = {
         "path": "/interviews",
         "params": ["company_id", "offset", "limit"],
         "fields": INTERVIEW_FIELDS,
-        "render": "interview",
-        "link": "/companies/{company_id}/interviews/{id}",
     },
     "get_interview": {
         "service": "companies",
@@ -131,8 +113,6 @@ COMPANY_TOOLS = {
             "question_count",
             "question_limit",
         ],
-        "render": "interview",
-        "link": INTERVIEW_LINK,
     },
     "get_generation": {
         "service": "companies",
@@ -151,8 +131,6 @@ COMPANY_TOOLS = {
             "total",
             "topics_ready",
         ],
-        "render": "link",
-        "link": INTERVIEW_LINK,
     },
     "get_interview_report": {
         "service": "companies",
@@ -160,8 +138,6 @@ COMPANY_TOOLS = {
         "path": "/interviews/{interview_id}/report",
         "params": ["interview_id"],
         "fields": ["title", "pass_mark", "candidates", *CANDIDATE_FIELDS],
-        "render": "link",
-        "link": INTERVIEW_LINK + "/candidates",
     },
     "list_candidates": {
         "service": "companies",
@@ -169,8 +145,6 @@ COMPANY_TOOLS = {
         "path": "/interviews/{interview_id}/candidates",
         "params": ["interview_id", "q", "status", "sort", "offset", "limit"],
         "fields": CANDIDATE_FIELDS,
-        "render": "candidate_rows",
-        "link": CANDIDATE_LINK,
     },
     "search_candidates": {
         "service": "companies",
@@ -178,8 +152,6 @@ COMPANY_TOOLS = {
         "path": "/companies/{company_id}/candidates",
         "params": ["company_id", "q", "offset", "limit"],
         "fields": [*CANDIDATE_FIELDS, "interview_id", "interview_title"],
-        "render": "candidate_rows",
-        "link": CANDIDATE_LINK,
     },
     "get_scorecard": {
         "service": "companies",
@@ -202,8 +174,6 @@ COMPANY_TOOLS = {
             "copies",
             "fast_answers",
         ],
-        "render": "scorecard_summary",
-        "link": "/companies/{company_id}/interviews/{interview_id}/candidates/{invite_id}",
     },
     "get_pause": {
         "service": "companies",

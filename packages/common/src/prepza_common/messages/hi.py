@@ -165,4 +165,5 @@ MESSAGES = {
     "Reading prepza's news…": "prepza की खबरें देख रहा है…",
     "Reading your practice rounds…": "आपके अभ्यास राउंड देख रहा है…",
     "Reading your practice progress…": "आपकी अभ्यास प्रगति देख रहा है…",
+    "Preparing what to show…": "दिखाने के लिए तैयार कर रहा है…",
 }

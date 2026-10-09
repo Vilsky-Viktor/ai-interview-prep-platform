@@ -10,8 +10,6 @@ DETAIL_TOOLS = {
         "params": ["interview_id", "topic_id"],
         "fields": ["id", "text", "options", "likes", "dislikes", "reports"],
         "max_items": 30,
-        "render": "link",
-        "link": "/companies/{company_id}/interviews/{interview_id}",
     },
     "list_question_reports": {
         "service": "companies",
@@ -32,8 +30,6 @@ DETAIL_TOOLS = {
         "method": "GET",
         "path": "/me/email-preferences",
         "params": [],
-        "render": "link",
-        "link": "/settings",
     },
     "list_copyable_templates": {
         "service": "library",
@@ -56,8 +52,6 @@ DETAIL_TOOLS = {
         "params": ["offset", "limit"],
         "fields": ["id", "title", "text", "published_on"],
         "max_items": 10,
-        "render": "link",
-        "link": "/news",
     },
     "list_practice_rounds": {
         "service": "rounds",

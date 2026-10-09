@@ -1,5 +1,6 @@
 import httpx
 
+from app.constants.show import PAGE_NAMES
 from app.constants.welcome import WELCOME_LIMIT
 from app.helpers.trimming import trim
 from app.integrations import services
@@ -45,7 +46,7 @@ async def items_for(block: dict, token: str, language: str) -> list[dict | None]
     refs = block.get("refs", [])
     kind = block["kind"]
 
-    if kind in ("candidate_rows", "scorecard_summary"):
+    if kind == "candidate_rows":
         found = await candidates(refs, token, language)
         fields = tools()["list_candidates"].fields | {"interview_id"}
 
@@ -75,6 +76,25 @@ async def items_for(block: dict, token: str, language: str) -> list[dict | None]
     return []
 
 
+async def live_link(block: dict, token: str, language: str) -> dict | None:
+    """A stored link, named again with the viewer's token; None when what it names is gone."""
+    from app.services.show import page_name
+
+    page = block.get("page")
+    name = await page_name(page, block.get("ids", {}), token, language) if page else None
+
+    if page in PAGE_NAMES and name is None:
+        return None
+
+    return {
+        "kind": "link",
+        "items": [],
+        "links": block.get("links", []),
+        "page": page,
+        "label": name,
+    }
+
+
 async def live(blocks: list[dict], token: str, language: str) -> list[dict]:
     """A stored answer's blocks, fetched again with the viewer's token: what they may see now,
     without anything that's gone (a deleted candidate, a company they left)."""
@@ -82,7 +102,10 @@ async def live(blocks: list[dict], token: str, language: str) -> list[dict]:
 
     for block in blocks:
         if block["kind"] == "link":
-            shown.append({"kind": "link", "items": [], "links": block.get("links", [])})
+            found = await live_link(block, token, language)
+
+            if found is not None:
+                shown.append(found)
 
             continue
 

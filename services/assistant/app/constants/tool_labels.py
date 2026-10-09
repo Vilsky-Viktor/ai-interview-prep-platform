@@ -41,6 +41,7 @@ TOOL_LABELS = {
     "get_practice_progress": "Reading your practice progress…",
     # The panel's own: signing out.
     "sign_out": "Signing out…",
+    "show": "Preparing what to show…",
 }
 # Every action, while its card is prepared.
 ACTION_LABEL = "Preparing it for you to confirm…"

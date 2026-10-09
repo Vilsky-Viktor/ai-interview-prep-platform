@@ -67,7 +67,7 @@ def test_a_conversation_is_streamed_saved_listed_exported_and_deleted(run, user,
         ["conversation"],
         ["tool"],
         ["tool"],
-        ["block"],
+        # A read shows nothing itself.
         *[["delta"]] * 5,
         ["done"],
         # The first answer brings the conversation's title.
@@ -96,13 +96,11 @@ def test_a_conversation_is_streamed_saved_listed_exported_and_deleted(run, user,
         [],
         None,
     )
-    assert answer.blocks == [{"kind": "link", "refs": [], "links": ["/companies"]}]
+    assert answer.blocks == []
     [conversation] = exported["assistant_conversations"]
     assert len(conversation["messages"]) == 4
     # The text, and the blocks as references: never what the tools read.
-    assert conversation["messages"][1]["blocks"] == [
-        {"kind": "link", "refs": [], "links": ["/companies"]}
-    ]
+    assert conversation["messages"][1]["blocks"] == []
     assert "result" not in json.dumps(exported)
     assert deleted.status_code == 204
     assert after == []

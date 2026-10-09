@@ -165,4 +165,5 @@ MESSAGES = {
     "Reading prepza's news…": "Tinitingnan ang balita ng prepza…",
     "Reading your practice rounds…": "Tinitingnan ang mga practice round mo…",
     "Reading your practice progress…": "Tinitingnan ang progreso mo sa practice…",
+    "Preparing what to show…": "Inihahanda ang ipapakita…",
 }

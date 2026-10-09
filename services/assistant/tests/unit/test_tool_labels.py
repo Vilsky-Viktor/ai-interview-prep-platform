@@ -8,7 +8,7 @@ from app.constants.tools import TOOLS
 def test_every_tool_has_a_progress_label():
     reads = {name for name, entry in TOOLS.items() if entry["method"] == "GET"}
 
-    assert set(TOOL_LABELS) == {*reads, "sign_out"}
+    assert set(TOOL_LABELS) == {*reads, "sign_out", "show"}
     assert all(label.endswith("…") for label in TOOL_LABELS.values())
 
 

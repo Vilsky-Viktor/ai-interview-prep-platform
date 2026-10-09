@@ -165,4 +165,5 @@ MESSAGES = {
     "Reading prepza's news…": "Sprawdzam nowości prepza…",
     "Reading your practice rounds…": "Sprawdzam Twoje rundy ćwiczeń…",
     "Reading your practice progress…": "Sprawdzam Twoje postępy w ćwiczeniach…",
+    "Preparing what to show…": "Przygotowuję, co pokazać…",
 }

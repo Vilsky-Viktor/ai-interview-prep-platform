@@ -165,4 +165,5 @@ MESSAGES = {
     "Reading prepza's news…": "Đang xem tin tức prepza…",
     "Reading your practice rounds…": "Đang xem các lượt luyện tập của bạn…",
     "Reading your practice progress…": "Đang xem tiến độ luyện tập của bạn…",
+    "Preparing what to show…": "Đang chuẩn bị nội dung hiển thị…",
 }

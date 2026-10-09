@@ -96,15 +96,15 @@ def test_parallel_calls_run_in_one_step_and_the_model_reads_every_result(model, 
         "state": "running",
         "label": "Prüfe, ob Interviews pausiert sind…",
     }
-    # get_me's result links to the settings page; the answer streams after the tools.
-    assert events[4] == {"block": {"kind": "link", "items": [], "links": ["/settings"]}}
+    # Reads show nothing themselves: the answer streams right after the tools.
+    assert not [event for event in events if "block" in event]
     assert events[-1] == {"delta": " paused."}
     second = model.prompts[1]
     results = [message for message in second if isinstance(message, ToolMessage)]
     assert [message.tool_call_id for message in results] == ["call-1-0", "call-1-1"]
     assert json.loads(results[0].content) == {"data": {"paused": False}, "source": "get_pause"}
     assert [result.tool for result in answer.results] == ["get_pause", "get_me"]
-    assert answer.blocks == [{"kind": "link", "refs": [], "links": ["/settings"]}]
+    assert answer.blocks == []
     assert (answer.input_tokens, answer.output_tokens) == (20, 10)
 
 
@@ -212,3 +212,12 @@ def test_an_off_topic_request_calls_no_tool_and_is_declined():
 
     assert reply.tool_calls == []
     assert "prepza" in reply.text.lower()
+
+
+def test_the_prompt_answers_in_text_and_shows_only_what_answers():
+    system = build_messages(TURN, [], "Hi", None, 1_000)[0].content
+
+    assert "Tools are for you to read" in system
+    assert "or when one row is the answer" in system
+    assert "don't repeat them in" in system
+    assert "at most one link" in system

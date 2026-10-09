@@ -177,4 +177,5 @@ MESSAGES = {
     "Reading prepza's news…": "Vaatan prepza uudiseid…",
     "Reading your practice rounds…": "Vaatan sinu harjutusvoore…",
     "Reading your practice progress…": "Vaatan sinu harjutamise edenemist…",
+    "Preparing what to show…": "Valmistan näidatavat ette…",
 }
