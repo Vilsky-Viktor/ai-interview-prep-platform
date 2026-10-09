@@ -11,7 +11,11 @@ import {
  */
 export function contentSecurityPolicy(nonce: string, isDev: boolean) {
   const authDomain = process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
-  const emulator = process.env.NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_URL ?? ""
+  const emulatorUrl = process.env.NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_URL
+  // Locally, on whichever host the site was opened from (lib/firebase.ts).
+  const emulator = emulatorUrl
+    ? `${new URL(emulatorUrl).protocol}//*:${new URL(emulatorUrl).port}`
+    : ""
   // React needs eval in development only, and the dev server reloads through a websocket.
   const devScript = isDev ? " 'unsafe-eval'" : ""
   const devConnect = isDev ? " ws:" : ""

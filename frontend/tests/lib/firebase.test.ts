@@ -6,8 +6,11 @@ const connectAuthEmulator = vi.fn()
 vi.mock("firebase/app", () => ({ initializeApp: vi.fn(() => ({})) }))
 vi.mock("firebase/auth", () => ({ getAuth, connectAuthEmulator }))
 
+// The emulator is reached on the host the page was opened from: a phone on the local network
+// reaches the computer's emulator, not its own.
 it("loads Firebase Auth once, on first use, against the emulator when set", async () => {
   vi.stubEnv("NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_URL", "http://localhost:9099")
+  vi.stubGlobal("window", { location: { hostname: "192.168.1.25" } })
   const { firebaseAuth } = await import("@/lib/firebase")
 
   expect(getAuth).not.toHaveBeenCalled()
@@ -18,7 +21,7 @@ it("loads Firebase Auth once, on first use, against the emulator when set", asyn
   expect(getAuth).toHaveBeenCalledTimes(1)
   expect(connectAuthEmulator).toHaveBeenCalledWith(
     first,
-    "http://localhost:9099",
+    "http://192.168.1.25:9099",
     { disableWarnings: true }
   )
 })

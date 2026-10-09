@@ -28,6 +28,8 @@ docker compose up --build
 | http://localhost:4100 | Firebase Auth emulator UI (sign-in creates fake accounts here) |
 | http://localhost:8125 | Mailpit: every email sent locally, when `RESEND_API_KEY` is empty |
 
+To try the app on a phone, connect it to the same Wi-Fi and open `http://<your computer's local IP>:8090` (on a Mac, `ipconfig getifaddr en0` prints it). Signing in works there too: the page reaches the sign-in emulator on the host it was opened from, and the dev server serves its scripts to local-network addresses (`allowedDevOrigins` in `frontend/next.config.ts`).
+
 Without `RESEND_API_KEY`, emails go to Mailpit instead of real inboxes. To send real ones, see [Notifications and emails](features/notifications.md#sending-real-emails).
 
 ## Settings

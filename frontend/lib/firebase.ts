@@ -19,7 +19,10 @@ export function firebaseAuth() {
     const emulatorUrl = process.env.NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_URL
 
     if (emulatorUrl) {
-      connectAuthEmulator(auth, emulatorUrl, { disableWarnings: true })
+      // On the host the page was opened from, so a phone on the same network reaches it too.
+      const url = new URL(emulatorUrl)
+      url.hostname = window.location.hostname
+      connectAuthEmulator(auth, url.origin, { disableWarnings: true })
     }
 
     return auth

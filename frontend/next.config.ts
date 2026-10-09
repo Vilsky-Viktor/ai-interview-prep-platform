@@ -4,6 +4,8 @@ import createNextIntlPlugin from "next-intl/plugin"
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  // The dev server serves its scripts to a phone on the local network too (development only).
+  allowedDevOrigins: ["192.168.*.*", "10.*.*.*", "172.*.*.*"],
   // The preview pictures' font files, read at request time, go into the standalone server.
   outputFileTracingIncludes: {
     "/preview": ["./assets/fonts/**"],
