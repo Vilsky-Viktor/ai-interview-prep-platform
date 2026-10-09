@@ -560,18 +560,20 @@
     "candidateEmails": "Адреса кандидатов",
     "candidateEmail": "Эл. почта кандидата",
     "inviteTab": {
-      "one": "пригласить одного",
-      "many": "пригласить нескольких",
-      "file": "загрузить из файла"
+      "one": "один",
+      "many": "несколько",
+      "file": "загрузить"
     },
     "manyHint": "По одному кандидату в строке, с именем или без,\nдо 100 за раз:",
     "example": "пример",
     "uploadFile": "Загрузить файл",
     "fileFormats": "CSV или TXT, до 100 кандидатов. Имена можно указать в отдельном столбце или рядом с каждым адресом.",
     "fileTooLarge": "Файл слишком большой (макс. {kb} КБ).",
-    "lineSkips": {
-      "noEmail": "Пропущено строк: {count} — не найден адрес эл. почты ({shown, plural, one {строка {lines}} other {строки {lines}}})",
-      "unreadName": "Не прочитано имён: {count} ({shown, plural, one {строка {lines}} other {строки {lines}}})"
+    "lineProblems": {
+      "no_email": "Не найден адрес эл. почты: {line}",
+      "invalid_email": "Неверный адрес эл. почты: {line}",
+      "unclear_name": "Укажите имя в виде Имя '<email>': {line}",
+      "more": "и ещё {count}"
     },
     "exampleCsv": "пример .csv",
     "exampleTxt": "пример .txt",

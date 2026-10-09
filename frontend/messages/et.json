@@ -560,18 +560,20 @@
     "candidateEmails": "Kandidaatide e-posti aadressid",
     "candidateEmail": "Kandidaadi e-post",
     "inviteTab": {
-      "one": "kutsu üks",
-      "many": "kutsu mitu",
-      "file": "laadi failist"
+      "one": "üks",
+      "many": "mitu",
+      "file": "laadi üles"
     },
     "manyHint": "Üks kandidaat rea kohta, nimega või ilma,\nkorraga kuni 100:",
     "example": "näide",
     "uploadFile": "Laadi fail üles",
     "fileFormats": "CSV või TXT, kuni 100 kandidaati. Nimed võivad olla nimeveerus või iga e-posti aadressi kõrval.",
     "fileTooLarge": "Fail on liiga suur (kuni {kb} KB).",
-    "lineSkips": {
-      "noEmail": "{count, plural, one {# rida jäeti vahele} other {# rida jäeti vahele}}: e-posti aadressi ei leitud ({shown, plural, one {rida {lines}} other {read {lines}}})",
-      "unreadName": "{count, plural, one {# nime ei saanud lugeda} other {# nime ei saanud lugeda}} ({shown, plural, one {rida {lines}} other {read {lines}}})"
+    "lineProblems": {
+      "no_email": "E-posti aadressi ei leitud: {line}",
+      "invalid_email": "E-posti aadress pole korrektne: {line}",
+      "unclear_name": "Kirjuta nimi kujul Nimi '<e-post>': {line}",
+      "more": "ja veel {count}"
     },
     "exampleCsv": "näidis .csv",
     "exampleTxt": "näidis .txt",

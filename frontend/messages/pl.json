@@ -560,18 +560,20 @@
     "candidateEmails": "E-maile kandydatów",
     "candidateEmail": "E-mail kandydata",
     "inviteTab": {
-      "one": "zaproś jedną osobę",
-      "many": "zaproś wiele osób",
-      "file": "wgraj z pliku"
+      "one": "jeden",
+      "many": "kilku",
+      "file": "prześlij"
     },
     "manyHint": "Jeden kandydat w wierszu, z imieniem i nazwiskiem lub bez,\ndo 100 naraz:",
     "example": "przykład",
     "uploadFile": "Prześlij plik",
     "fileFormats": "CSV lub TXT, do 100 kandydatów. Imiona i nazwiska mogą być w osobnej kolumnie lub obok każdego adresu.",
     "fileTooLarge": "Plik jest za duży (maks. {kb} KB).",
-    "lineSkips": {
-      "noEmail": "Pominięte wiersze: {count} — nie znaleziono adresu e-mail ({shown, plural, one {wiersz {lines}} other {wiersze {lines}}})",
-      "unreadName": "Nieodczytane imiona i nazwiska: {count} ({shown, plural, one {wiersz {lines}} other {wiersze {lines}}})"
+    "lineProblems": {
+      "no_email": "Nie znaleziono adresu e-mail: {line}",
+      "invalid_email": "Nieprawidłowy adres e-mail: {line}",
+      "unclear_name": "Wpisz imię i nazwisko jako Imię Nazwisko '<e-mail>': {line}",
+      "more": "i jeszcze {count}"
     },
     "exampleCsv": "przykład .csv",
     "exampleTxt": "przykład .txt",

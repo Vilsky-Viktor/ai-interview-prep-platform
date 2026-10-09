@@ -560,18 +560,20 @@
     "candidateEmails": "Candidate emails",
     "candidateEmail": "Candidate email",
     "inviteTab": {
-      "one": "invite one",
-      "many": "invite many",
-      "file": "upload from file"
+      "one": "one",
+      "many": "many",
+      "file": "upload"
     },
     "manyHint": "One candidate per line, with or without a name,\nup to 100 at once:",
     "example": "example",
     "uploadFile": "Upload a file",
     "fileFormats": "CSV or TXT, up to 100 candidates. Names can go in a name column or beside each email.",
     "fileTooLarge": "The file is too large (max {kb} KB).",
-    "lineSkips": {
-      "noEmail": "{count, plural, one {# line skipped} other {# lines skipped}}: no email found ({shown, plural, one {line {lines}} other {lines {lines}}})",
-      "unreadName": "{count, plural, one {# name not read} other {# names not read}} ({shown, plural, one {line {lines}} other {lines {lines}}})"
+    "lineProblems": {
+      "no_email": "No email found: {line}",
+      "invalid_email": "Email isn't valid: {line}",
+      "unclear_name": "Write the name as Name '<email>': {line}",
+      "more": "and {count} more"
     },
     "exampleCsv": "example .csv",
     "exampleTxt": "example .txt",

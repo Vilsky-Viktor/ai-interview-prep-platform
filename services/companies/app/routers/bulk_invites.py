@@ -15,12 +15,11 @@ from app.constants.invites import (
     TOO_MANY_EMAILS,
     SkipReason,
 )
-from app.helpers.candidate_lists import candidates_in, line_report, unusable_lines
-from app.helpers.email_lists import is_email
+from app.helpers.candidate_lists import read_list
 from app.helpers.interviews import attach_set
 from app.helpers.list_files import list_refusal
 from app.integrations.redis import get_redis
-from app.schemas.invites import BulkInviteIn, BulkInviteOut, SkippedInvite
+from app.schemas.invites import BulkInviteIn, BulkInviteOut, LineProblemOut, SkippedInvite
 from app.services import candidate_invites
 from app.services import outbox as outbox_service
 from app.services.access import require_editor
@@ -54,17 +53,17 @@ async def invite_many(interview_id: UUID, body: BulkInviteIn, user: CurrentUser)
     if refusal:
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, refusal)
 
-    found = candidates_in(body.text)
+    found, problems = read_list(body.text)
     name = clean_name(body.name)
 
-    if not found:
+    if not found and not problems:
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, NO_EMAILS)
 
-    if name and len(found) > 1:
+    if name and len(found) + len(problems) > 1:
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, NAME_NEEDS_ONE_EMAIL)
 
     # The form's name field wins over a name in the text.
-    if name:
+    if name and found:
         found = [(found[0][0], name)]
 
     if len(found) > MAX_BULK_INVITES:
@@ -79,8 +78,6 @@ async def invite_many(interview_id: UUID, body: BulkInviteIn, user: CurrentUser)
 
         if out_of_credits:
             reason = SkipReason.NO_CREDITS
-        elif not is_email(email):
-            reason = SkipReason.INVALID
         elif await invites.status_of(interview.id, email.lower()) in STARTED:
             reason = SkipReason.STARTED
         else:
@@ -100,11 +97,8 @@ async def invite_many(interview_id: UUID, body: BulkInviteIn, user: CurrentUser)
 
     await outbox_service.flush_quietly()
 
-    no_email, unread_names = unusable_lines(body.text)
-
     return BulkInviteOut(
         invited=invited,
         skipped=skipped,
-        no_email=line_report(no_email),
-        unread_names=line_report(unread_names),
+        problems=[LineProblemOut(line=line, reason=reason) for line, reason in problems],
     )

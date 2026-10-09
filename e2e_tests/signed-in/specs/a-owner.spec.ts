@@ -34,27 +34,28 @@ test("owner creates a company, an interview from a template and invites a candid
 
   // Templates tab: the warning card and "Use template" on each row. Only templates a company can
   // copy are listed, so using one never fails: a throwaway one with too few questions isn't,
-  // though practice lists it; one with enough is, and opens as an interview.
+  // though practice lists it; one with enough is, and opens as an interview. They're German, so
+  // the lists are asked for German: they start in the visitor's language and English.
   const used = `E2E Copyable ${randomId()}`
   const uncopyable = `E2E Uncopyable ${randomId()}`
   const templateIds = [await addTemplate(used, 10), await addTemplate(uncopyable, 9)]
 
   try {
-    await visit(owner, `/practice?q=${encodeURIComponent(uncopyable)}`)
+    await visit(owner, `/practice?q=${encodeURIComponent(uncopyable)}&lang=de`)
     await expect(owner.getByText(uncopyable)).toBeVisible()
-    await visit(owner, `${companyUrl}/templates?q=${encodeURIComponent(uncopyable)}`)
+    await visit(owner, `${companyUrl}/templates?q=${encodeURIComponent(uncopyable)}&lang=de`)
     await expect(owner.getByText("No templates match.")).toBeVisible()
 
     await visit(owner, `${companyUrl}/interviews`)
     await openTab(owner, "Templates")
     await expect(owner.getByText("Templates are ready-made for common roles.")).toBeVisible()
-    // "all languages" is lowercase like "level: any level" beside it.
-    await expect(owner.getByRole("button", { name: "All languages" })).toHaveCSS(
+    // The filters are lowercase, "level: any level" among them (language names keep their capitals).
+    await expect(owner.getByRole("button", { name: /^level/i })).toHaveCSS(
       "text-transform",
       "lowercase"
     )
     await shot(owner, "templates")
-    await visit(owner, `${companyUrl}/templates?q=${encodeURIComponent(used)}`)
+    await visit(owner, `${companyUrl}/templates?q=${encodeURIComponent(used)}&lang=de`)
     const row = owner.getByRole("listitem").filter({ hasText: used })
     await row.getByRole("button", { name: "Use template" }).click()
     // The local dev server can take a while to build the interview page the first time.
@@ -92,7 +93,7 @@ test("owner creates a company, an interview from a template and invites a candid
   await shot(owner, "candidates-empty")
   const candidate = throwawayEmail("candidate")
   await owner.getByRole("button", { name: "New candidate(s)" }).click()
-  await owner.getByRole("dialog").getByRole("tab", { name: "invite one" }).click()
+  await owner.getByRole("dialog").getByRole("tab", { name: "one", exact: true }).click()
   await owner.getByRole("dialog").getByLabel("Candidate email").fill(candidate)
   await shot(owner, "invite-dialog")
   await owner.getByRole("dialog").getByRole("button", { name: "Invite" }).click()

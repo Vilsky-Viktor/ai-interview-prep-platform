@@ -560,18 +560,20 @@
     "candidateEmails": "بريد المرشحين الإلكتروني",
     "candidateEmail": "البريد الإلكتروني للمرشح",
     "inviteTab": {
-      "one": "دعوة شخص واحد",
-      "many": "دعوة عدة أشخاص",
-      "file": "رفع من ملف"
+      "one": "واحد",
+      "many": "عدة",
+      "file": "رفع"
     },
     "manyHint": "مرشح واحد في كل سطر، مع الاسم أو بدونه،\nحتى 100 مرشح في المرة:",
     "example": "مثال",
     "uploadFile": "ارفع ملفًا",
     "fileFormats": "CSV أو TXT، حتى 100 مرشح. يمكن وضع الأسماء في عمود للاسم أو بجانب كل بريد إلكتروني.",
     "fileTooLarge": "الملف كبير جدًا (الحد الأقصى {kb} كيلوبايت).",
-    "lineSkips": {
-      "noEmail": "أسطر تم تخطيها: {count}، لم يُعثر على بريد إلكتروني ({shown, plural, one {السطر {lines}} other {الأسطر {lines}}})",
-      "unreadName": "أسماء لم تُقرأ: {count} ({shown, plural, one {السطر {lines}} other {الأسطر {lines}}})"
+    "lineProblems": {
+      "no_email": "لم يُعثر على بريد إلكتروني: {line}",
+      "invalid_email": "البريد الإلكتروني غير صالح: {line}",
+      "unclear_name": "اكتب الاسم بالشكل: الاسم '<البريد الإلكتروني>': {line}",
+      "more": "و{count} أخرى"
     },
     "exampleCsv": "مثال .csv",
     "exampleTxt": "مثال .txt",

@@ -560,18 +560,20 @@
     "candidateEmails": "Email кандидатів",
     "candidateEmail": "Email кандидата",
     "inviteTab": {
-      "one": "запросити одного",
-      "many": "запросити кількох",
-      "file": "завантажити з файлу"
+      "one": "один",
+      "many": "кілька",
+      "file": "завантажити"
     },
     "manyHint": "По одному кандидату в рядку, з ім'ям або без,\nдо 100 за раз:",
     "example": "приклад",
     "uploadFile": "Завантажити файл",
     "fileFormats": "CSV або TXT, до 100 кандидатів. Імена можна вказати в окремому стовпці або поруч із кожною адресою.",
     "fileTooLarge": "Файл завеликий (макс. {kb} КБ).",
-    "lineSkips": {
-      "noEmail": "Пропущено рядків: {count} — не знайдено email ({shown, plural, one {рядок {lines}} other {рядки {lines}}})",
-      "unreadName": "Не прочитано імен: {count} ({shown, plural, one {рядок {lines}} other {рядки {lines}}})"
+    "lineProblems": {
+      "no_email": "Не знайдено email: {line}",
+      "invalid_email": "Неправильний email: {line}",
+      "unclear_name": "Вкажіть ім'я у вигляді Ім'я '<email>': {line}",
+      "more": "і ще {count}"
     },
     "exampleCsv": "приклад .csv",
     "exampleTxt": "приклад .txt",

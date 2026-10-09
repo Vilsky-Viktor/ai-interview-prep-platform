@@ -18,9 +18,11 @@ How candidates get to an interview, how they take it, and what the company sees 
 
 Owners and admins invite candidates by email, in the "New candidate(s)" dialog's three tabs (the last one used is remembered in the browser):
 
-- **invite one:** an email and an optional name,
-- **invite many:** a pasted list, one candidate per line (or several separated by commas or semicolons), with or without names (`Name <email>` or `email, Name`),
-- **upload from file:** a CSV or TXT file; the tab has buttons that download example files (`frontend/public/examples/prepza-candidates-example.csv` and `prepza-candidates-example.txt`).
+- **one:** an email and an optional name,
+- **many:** a pasted list, one candidate per line (or several separated by commas or semicolons), with or without names (`Name <email>` or `email, Name`),
+- **upload:** a CSV or TXT file (at most 50 KB; another type, or a file that isn't text, is refused); the tab has buttons that download example files (`frontend/public/examples/prepza-candidates-example.csv` and `prepza-candidates-example.txt`).
+
+Each line nobody can be invited from is named under the list with its one reason: no email found, an email that isn't valid, or a name not written as `Name <email>` (the first 10, then how many more). After inviting, the list keeps only those lines and the emails that weren't invited. The service reads the list and decides (`helpers/candidate_lists.py`, `helpers/list_files.py` in companies).
 
 A list or file takes up to 100 emails at once, and only the emails in it count, with the names written with them (see [Candidate names](#candidate-names)). A list skips candidates who already started, so they aren't emailed again.
 

@@ -560,18 +560,20 @@
     "candidateEmails": "候補者のメールアドレス",
     "candidateEmail": "候補者のメールアドレス",
     "inviteTab": {
-      "one": "1人を招待",
-      "many": "複数人を招待",
-      "file": "ファイルからアップロード"
+      "one": "1人",
+      "many": "複数",
+      "file": "アップロード"
     },
     "manyHint": "1行に1人。氏名は省略できます。\n一度に100人まで：",
     "example": "例",
     "uploadFile": "ファイルをアップロード",
     "fileFormats": "CSV または TXT、最大100人。氏名は氏名の列か、各メールアドレスの横に入力できます。",
     "fileTooLarge": "ファイルが大きすぎます（最大 {kb} KB）。",
-    "lineSkips": {
-      "noEmail": "{count} 行をスキップしました：メールアドレスがありません（{shown, plural, other {{lines} 行目}}）",
-      "unreadName": "{count} 件の氏名を読み取れませんでした（{shown, plural, other {{lines} 行目}}）"
+    "lineProblems": {
+      "no_email": "メールアドレスがありません：{line}",
+      "invalid_email": "メールアドレスが正しくありません：{line}",
+      "unclear_name": "氏名は「氏名 '<メールアドレス>'」の形で入力してください：{line}",
+      "more": "ほか {count} 件"
     },
     "exampleCsv": "サンプル .csv",
     "exampleTxt": "サンプル .txt",

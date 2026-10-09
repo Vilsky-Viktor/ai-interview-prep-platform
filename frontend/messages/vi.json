@@ -560,18 +560,20 @@
     "candidateEmails": "Email ứng viên",
     "candidateEmail": "Email ứng viên",
     "inviteTab": {
-      "one": "mời một người",
-      "many": "mời nhiều người",
-      "file": "tải lên từ tệp"
+      "one": "một người",
+      "many": "nhiều người",
+      "file": "tải lên"
     },
     "manyHint": "Mỗi dòng một ứng viên, có hoặc không kèm họ tên,\ntối đa 100 người mỗi lần:",
     "example": "ví dụ",
     "uploadFile": "Tải tệp lên",
     "fileFormats": "CSV hoặc TXT, tối đa 100 ứng viên. Họ tên có thể nằm trong cột tên hoặc cạnh mỗi email.",
     "fileTooLarge": "Tệp quá lớn (tối đa {kb} KB).",
-    "lineSkips": {
-      "noEmail": "Đã bỏ qua {count} dòng: không tìm thấy email ({shown, plural, other {dòng {lines}}})",
-      "unreadName": "Không đọc được {count} họ tên ({shown, plural, other {dòng {lines}}})"
+    "lineProblems": {
+      "no_email": "Không tìm thấy email: {line}",
+      "invalid_email": "Email không hợp lệ: {line}",
+      "unclear_name": "Hãy viết họ tên theo dạng Họ tên '<email>': {line}",
+      "more": "và {count} dòng khác"
     },
     "exampleCsv": "tệp mẫu .csv",
     "exampleTxt": "tệp mẫu .txt",

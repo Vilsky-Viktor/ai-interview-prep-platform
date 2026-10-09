@@ -560,18 +560,20 @@
     "candidateEmails": "อีเมลผู้สมัคร",
     "candidateEmail": "อีเมลของผู้สมัคร",
     "inviteTab": {
-      "one": "เชิญหนึ่งคน",
-      "many": "เชิญหลายคน",
-      "file": "อัปโหลดจากไฟล์"
+      "one": "หนึ่งคน",
+      "many": "หลายคน",
+      "file": "อัปโหลด"
     },
     "manyHint": "บรรทัดละหนึ่งคน จะใส่ชื่อหรือไม่ก็ได้\nครั้งละไม่เกิน 100 คน:",
     "example": "ตัวอย่าง",
     "uploadFile": "อัปโหลดไฟล์",
     "fileFormats": "CSV หรือ TXT ได้สูงสุด 100 คน ใส่ชื่อในคอลัมน์ชื่อหรือข้างอีเมลแต่ละรายการก็ได้",
     "fileTooLarge": "ไฟล์ใหญ่เกินไป (สูงสุด {kb} KB)",
-    "lineSkips": {
-      "noEmail": "ข้าม {count} บรรทัด: ไม่พบอีเมล ({shown, plural, other {บรรทัด {lines}}})",
-      "unreadName": "อ่านชื่อไม่ได้ {count} รายการ ({shown, plural, other {บรรทัด {lines}}})"
+    "lineProblems": {
+      "no_email": "ไม่พบอีเมล: {line}",
+      "invalid_email": "อีเมลไม่ถูกต้อง: {line}",
+      "unclear_name": "เขียนชื่อในรูปแบบ ชื่อ '<อีเมล>': {line}",
+      "more": "และอีก {count} รายการ"
     },
     "exampleCsv": "ตัวอย่าง .csv",
     "exampleTxt": "ตัวอย่าง .txt",

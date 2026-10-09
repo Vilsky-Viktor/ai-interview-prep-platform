@@ -6,13 +6,13 @@ import re
 
 from prepza_common.names import clean_name
 
-from app.constants.invites import EMAIL_PATTERN, MAX_REPORTED_LINES
+from app.constants.invites import EMAIL_PATTERN, LineProblem
 from app.constants.name_headers import (
     FIRST_NAME_HEADERS,
     FULL_NAME_HEADERS,
     LAST_NAME_HEADERS,
 )
-from app.helpers.email_lists import emails_in
+from app.helpers.email_lists import emails_in, is_email
 
 NAME_THEN_EMAIL = re.compile(rf'^\s*"?(?P<name>[^<>"@]*?)"?\s*<(?P<email>{EMAIL_PATTERN})>[\s,;]*$')
 EMAIL_THEN_NAME = re.compile(
@@ -21,17 +21,51 @@ EMAIL_THEN_NAME = re.compile(
 DELIMITERS = ",;\t"
 
 
-def candidates_in(text: str) -> list[tuple[str, str | None]]:
-    """Each email in the text once, lowercased, in the order it first appears, with the first
-    name given for it (None without one). Other text around the emails is ignored."""
-    lines = [line for line in text.splitlines() if line.strip()]
-    names = (csv_names(lines) if lines else None) or line_names(lines)
+def read_list(text: str) -> tuple[list[tuple[str, str | None]], list[tuple[str, str]]]:
+    """The candidates in a list: each email once, lowercased, in the order it first appears,
+    with the first name given for it (None without one); and the lines that can't be used, each
+    with its one reason (LineProblem): no email, an email that isn't valid, or a name not
+    written as "Name <email>". A line with a problem invites nobody. Empty lines and a CSV
+    header don't count; other text around the emails on a line is ignored."""
+    lines = [line.strip() for line in text.splitlines() if line.strip()]
+    from_csv = csv_names(lines) if lines else None
+    names = from_csv if from_csv is not None else line_names(lines)
     found: dict[str, str | None] = {}
+    problems = []
 
-    for email in emails_in(text):
-        found.setdefault(email, names.get(email))
+    for line in lines[1:] if from_csv is not None else lines:
+        problem = line_problem(line, from_csv is not None)
 
-    return list(found.items())
+        if problem:
+            problems.append((line, problem))
+
+            continue
+
+        for email in emails_in(line):
+            found.setdefault(email, names.get(email))
+
+    return list(found.items()), problems
+
+
+def line_problem(line: str, from_csv: bool) -> str | None:
+    """Why a line can't be used, or None. A "<" or ">" that doesn't make "Name <email>" or
+    "email, Name" means the name can't be told apart from the email (not in a CSV's rows)."""
+    emails = emails_in(line)
+
+    if not emails:
+        return LineProblem.NO_EMAIL
+
+    if not all(is_email(email) for email in emails):
+        return LineProblem.INVALID_EMAIL
+
+    if (
+        not from_csv
+        and ("<" in line or ">" in line)
+        and not (NAME_THEN_EMAIL.match(line) or EMAIL_THEN_NAME.match(line))
+    ):
+        return LineProblem.UNCLEAR_NAME
+
+    return None
 
 
 def line_names(lines: list[str]) -> dict[str, str]:
@@ -82,27 +116,3 @@ def csv_names(lines: list[str]) -> dict[str, str] | None:
             names.setdefault(emails[0], name)
 
     return names
-
-
-def unusable_lines(text: str) -> tuple[list[int], list[int]]:
-    """Line numbers (from 1) of lines with no email, not counting empty lines or a CSV header
-    with a name column, and of lines whose name couldn't be read: a "<" or ">" around the email
-    that doesn't make "Name <email>"."""
-    numbered = [(number, line) for number, line in enumerate(text.splitlines(), 1) if line.strip()]
-    no_email, unread = [], []
-
-    if numbered and csv_names([line for _, line in numbered]) is not None:
-        numbered = numbered[1:]
-
-    for number, line in numbered:
-        if not re.search(EMAIL_PATTERN, line):
-            no_email.append(number)
-        elif ("<" in line or ">" in line) and not NAME_THEN_EMAIL.match(line):
-            unread.append(number)
-
-    return no_email, unread
-
-
-def line_report(numbers: list[int]) -> dict:
-    """How many lines, and the first MAX_REPORTED_LINES of their numbers."""
-    return {"count": len(numbers), "lines": numbers[:MAX_REPORTED_LINES]}

@@ -560,18 +560,20 @@
     "candidateEmails": "כתובות האימייל של המועמדים",
     "candidateEmail": "אימייל המועמד",
     "inviteTab": {
-      "one": "הזמנת מועמד אחד",
-      "many": "הזמנת כמה מועמדים",
-      "file": "העלאה מקובץ"
+      "one": "אחד",
+      "many": "כמה",
+      "file": "העלאה"
     },
     "manyHint": "מועמד אחד בכל שורה, עם שם או בלי,\nעד 100 בבת אחת:",
     "example": "דוגמה",
     "uploadFile": "העלאת קובץ",
     "fileFormats": "CSV או TXT, עד 100 מועמדים. אפשר לכתוב שמות בעמודת שם או ליד כל אימייל.",
     "fileTooLarge": "הקובץ גדול מדי (עד {kb}KB).",
-    "lineSkips": {
-      "noEmail": "{count, plural, one {שורה אחת דולגה} other {# שורות דולגו}}: לא נמצא אימייל ({shown, plural, one {שורה {lines}} other {שורות {lines}}})",
-      "unreadName": "{count, plural, one {שם אחד לא נקרא} other {# שמות לא נקראו}} ({shown, plural, one {שורה {lines}} other {שורות {lines}}})"
+    "lineProblems": {
+      "no_email": "לא נמצא אימייל: {line}",
+      "invalid_email": "האימייל לא תקין: {line}",
+      "unclear_name": "יש לכתוב את השם כך: שם '<אימייל>': {line}",
+      "more": "ועוד {count}"
     },
     "exampleCsv": "דוגמה ‎.csv",
     "exampleTxt": "דוגמה ‎.txt",

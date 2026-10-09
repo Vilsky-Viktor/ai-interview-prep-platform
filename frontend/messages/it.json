@@ -560,18 +560,20 @@
     "candidateEmails": "Email dei candidati",
     "candidateEmail": "Email del candidato",
     "inviteTab": {
-      "one": "invita uno",
-      "many": "invita più persone",
-      "file": "carica da file"
+      "one": "uno",
+      "many": "più",
+      "file": "carica"
     },
     "manyHint": "Un candidato per riga, con o senza nome,\nfino a 100 alla volta:",
     "example": "esempio",
     "uploadFile": "Carica un file",
     "fileFormats": "CSV o TXT, fino a 100 candidati. I nomi possono stare in una colonna del nome o accanto a ogni email.",
     "fileTooLarge": "Il file è troppo grande (max {kb} KB).",
-    "lineSkips": {
-      "noEmail": "{count, plural, one {# riga saltata} other {# righe saltate}}: nessuna email trovata ({shown, plural, one {riga {lines}} other {righe {lines}}})",
-      "unreadName": "{count, plural, one {# nome non letto} other {# nomi non letti}} ({shown, plural, one {riga {lines}} other {righe {lines}}})"
+    "lineProblems": {
+      "no_email": "Nessuna email trovata: {line}",
+      "invalid_email": "Email non valida: {line}",
+      "unclear_name": "Scrivi il nome come Nome '<email>': {line}",
+      "more": "e altre {count}"
     },
     "exampleCsv": "esempio .csv",
     "exampleTxt": "esempio .txt",

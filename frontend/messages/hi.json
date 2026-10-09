@@ -560,18 +560,20 @@
     "candidateEmails": "उम्मीदवारों के ईमेल",
     "candidateEmail": "उम्मीदवार का ईमेल",
     "inviteTab": {
-      "one": "एक को आमंत्रित करें",
-      "many": "कई को आमंत्रित करें",
-      "file": "फ़ाइल से अपलोड करें"
+      "one": "एक",
+      "many": "कई",
+      "file": "अपलोड"
     },
     "manyHint": "हर पंक्ति में एक उम्मीदवार, नाम के साथ या बिना,\nएक बार में 100 तक:",
     "example": "उदाहरण",
     "uploadFile": "फ़ाइल अपलोड करें",
     "fileFormats": "CSV या TXT, अधिकतम 100 उम्मीदवार। नाम एक अलग कॉलम में या हर ईमेल के साथ लिखे जा सकते हैं।",
     "fileTooLarge": "फ़ाइल बहुत बड़ी है (अधिकतम {kb} KB)।",
-    "lineSkips": {
-      "noEmail": "{count} पंक्तियाँ छोड़ी गईं: कोई ईमेल नहीं मिला ({shown, plural, other {पंक्ति {lines}}})",
-      "unreadName": "{count} नाम पढ़े नहीं जा सके ({shown, plural, other {पंक्ति {lines}}})"
+    "lineProblems": {
+      "no_email": "कोई ईमेल नहीं मिला: {line}",
+      "invalid_email": "ईमेल मान्य नहीं है: {line}",
+      "unclear_name": "नाम को नाम '<ईमेल>' के रूप में लिखें: {line}",
+      "more": "और {count} अन्य"
     },
     "exampleCsv": "उदाहरण .csv",
     "exampleTxt": "उदाहरण .txt",

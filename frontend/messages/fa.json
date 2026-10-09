@@ -560,18 +560,20 @@
     "candidateEmails": "ایمیل متقاضیان",
     "candidateEmail": "ایمیل متقاضی",
     "inviteTab": {
-      "one": "دعوت یک نفر",
-      "many": "دعوت چند نفر",
-      "file": "بارگذاری از فایل"
+      "one": "یک نفر",
+      "many": "چند نفر",
+      "file": "بارگذاری"
     },
     "manyHint": "هر خط یک متقاضی، با نام یا بدون نام،\nتا ۱۰۰ نفر در هر بار:",
     "example": "نمونه",
     "uploadFile": "بارگذاری فایل",
     "fileFormats": "CSV یا TXT، تا ۱۰۰ متقاضی. نام‌ها می‌توانند در ستون نام یا کنار هر ایمیل باشند.",
     "fileTooLarge": "فایل خیلی بزرگ است (حداکثر {kb} کیلوبایت).",
-    "lineSkips": {
-      "noEmail": "{count} خط نادیده گرفته شد: ایمیلی پیدا نشد ({shown, plural, other {خط {lines}}})",
-      "unreadName": "{count} نام خوانده نشد ({shown, plural, other {خط {lines}}})"
+    "lineProblems": {
+      "no_email": "ایمیلی پیدا نشد: {line}",
+      "invalid_email": "ایمیل معتبر نیست: {line}",
+      "unclear_name": "نام را به شکل نام '<ایمیل>' بنویسید: {line}",
+      "more": "و {count} مورد دیگر"
     },
     "exampleCsv": "نمونه .csv",
     "exampleTxt": "نمونه .txt",

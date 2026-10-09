@@ -560,18 +560,20 @@
     "candidateEmails": "Email kandidat",
     "candidateEmail": "Email kandidat",
     "inviteTab": {
-      "one": "undang satu",
-      "many": "undang banyak",
-      "file": "unggah dari file"
+      "one": "satu",
+      "many": "banyak",
+      "file": "unggah"
     },
     "manyHint": "Satu kandidat per baris, dengan atau tanpa nama,\nhingga 100 sekaligus:",
     "example": "contoh",
     "uploadFile": "Unggah file",
     "fileFormats": "CSV atau TXT, hingga 100 kandidat. Nama bisa ditulis di kolom nama atau di samping setiap email.",
     "fileTooLarge": "File terlalu besar (maks. {kb} KB).",
-    "lineSkips": {
-      "noEmail": "{count} baris dilewati: tidak ada email ({shown, plural, other {baris {lines}}})",
-      "unreadName": "{count} nama tidak terbaca ({shown, plural, other {baris {lines}}})"
+    "lineProblems": {
+      "no_email": "Email tidak ditemukan: {line}",
+      "invalid_email": "Email tidak valid: {line}",
+      "unclear_name": "Tulis nama sebagai Nama '<email>': {line}",
+      "more": "dan {count} lainnya"
     },
     "exampleCsv": "contoh .csv",
     "exampleTxt": "contoh .txt",

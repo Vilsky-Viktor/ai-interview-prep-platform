@@ -1,6 +1,6 @@
 import uuid
 
-from app.helpers.candidate_lists import candidates_in
+from app.helpers.candidate_lists import read_list
 from app.storage import accounts, candidates, companies, interviews, invites
 
 
@@ -110,7 +110,7 @@ def test_a_csv_lists_names_are_stored_with_its_invites(run):
         interview = await interviews.create(company.id, uuid.uuid4(), "en")
         text = "Vorname;Nachname;E-Mail\nAnn;Lee;ann@example.com\n;;bob@example.com\n"
 
-        for email, name in candidates_in(text):
+        for email, name in read_list(text)[0]:
             await invites.upsert(interview.id, email, "B", "A", "en", name=name)
 
         rows = await candidates.page(interview.id, 0, 10, False)

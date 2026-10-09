@@ -560,18 +560,20 @@
     "candidateEmails": "Aday e-postaları",
     "candidateEmail": "Adayın e-postası",
     "inviteTab": {
-      "one": "tek kişi davet et",
-      "many": "çok kişi davet et",
-      "file": "dosyadan yükle"
+      "one": "tek",
+      "many": "çoklu",
+      "file": "yükle"
     },
     "manyHint": "Her satıra bir aday, ad soyadlı ya da adsız,\ntek seferde en fazla 100:",
     "example": "örnek",
     "uploadFile": "Dosya yükle",
     "fileFormats": "CSV veya TXT, en fazla 100 aday. Ad soyadlar ayrı bir sütunda ya da her e-postanın yanında olabilir.",
     "fileTooLarge": "Dosya çok büyük (en fazla {kb} KB).",
-    "lineSkips": {
-      "noEmail": "{count} satır atlandı: e-posta bulunamadı ({shown, plural, other {satır {lines}}})",
-      "unreadName": "{count} ad soyad okunamadı ({shown, plural, other {satır {lines}}})"
+    "lineProblems": {
+      "no_email": "E-posta bulunamadı: {line}",
+      "invalid_email": "E-posta geçersiz: {line}",
+      "unclear_name": "Adı Ad Soyad '<e-posta>' biçiminde yazın: {line}",
+      "more": "ve {count} tane daha"
     },
     "exampleCsv": "örnek .csv",
     "exampleTxt": "örnek .txt",

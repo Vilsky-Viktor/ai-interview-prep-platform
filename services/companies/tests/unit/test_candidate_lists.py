@@ -2,7 +2,7 @@
 
 from types import SimpleNamespace
 
-from app.helpers.candidate_lists import candidates_in
+from app.helpers.candidate_lists import read_list
 from app.services import candidate_invites
 from tests.unit.test_candidate_invites import INTERVIEW_ID, invite_setup
 
@@ -20,7 +20,7 @@ def test_name_then_email_and_email_then_name_lines_give_names():
         "Contacts: c@example.com and more\n"
     )
 
-    assert candidates_in(text) == [
+    assert read_list(text)[0] == [
         ("maria@example.com", "Maria Kowalska"),
         ("ann@example.com", "Lee, Ann"),
         ("bob@example.com", "Bob Stone"),
@@ -35,26 +35,26 @@ def test_name_then_email_and_email_then_name_lines_give_names():
 def test_a_csv_with_a_name_column_gives_names():
     text = "Email,Full Name,Role\nann@example.com,Ann Lee,Dev\nbob@example.com,,QA\n"
 
-    assert candidates_in(text) == [("ann@example.com", "Ann Lee"), ("bob@example.com", None)]
+    assert read_list(text)[0] == [("ann@example.com", "Ann Lee"), ("bob@example.com", None)]
 
 
 def test_a_csv_with_first_and_last_names_in_another_language_joins_them():
     text = "E-Mail;Vorname;Name\nmaria@example.com;Maria;Kowalska\n"
 
-    assert candidates_in(text) == [("maria@example.com", "Maria Kowalska")]
+    assert read_list(text)[0] == [("maria@example.com", "Maria Kowalska")]
 
 
 def test_localized_headers_count_too():
     text = "Имя,Фамилия,Email\nОльга,Петрова,olga@example.com\n"
 
-    assert candidates_in(text) == [("olga@example.com", "Ольга Петрова")]
+    assert read_list(text)[0] == [("olga@example.com", "Ольга Петрова")]
 
 
 def test_a_name_is_trimmed_cut_and_an_email_keeps_its_first_name():
     long = "x" * 300
     text = f"{long} <ann@example.com>\nann@example.com, Other"
 
-    assert candidates_in(text) == [("ann@example.com", "x" * 200)]
+    assert read_list(text)[0] == [("ann@example.com", "x" * 200)]
 
 
 def test_the_list_invites_each_candidate_with_their_name(client, monkeypatch):

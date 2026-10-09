@@ -560,18 +560,20 @@
     "candidateEmails": "Mga email ng aplikante",
     "candidateEmail": "Email ng aplikante",
     "inviteTab": {
-      "one": "mag-imbita ng isa",
-      "many": "mag-imbita ng marami",
-      "file": "mag-upload mula sa file"
+      "one": "isa",
+      "many": "marami",
+      "file": "i-upload"
     },
     "manyHint": "Isang aplikante bawat linya, may pangalan man o wala,\nhanggang 100 nang sabay-sabay:",
     "example": "halimbawa",
     "uploadFile": "Mag-upload ng file",
     "fileFormats": "CSV o TXT, hanggang 100 aplikante. Puwedeng ilagay ang pangalan sa isang column o katabi ng bawat email.",
     "fileTooLarge": "Masyadong malaki ang file (max {kb} KB).",
-    "lineSkips": {
-      "noEmail": "{count, plural, one {# linya ang nilaktawan} other {# linya ang nilaktawan}}: walang nakitang email ({shown, plural, one {linya {lines}} other {mga linya {lines}}})",
-      "unreadName": "{count, plural, one {# pangalan ang hindi nabasa} other {# pangalan ang hindi nabasa}} ({shown, plural, one {linya {lines}} other {mga linya {lines}}})"
+    "lineProblems": {
+      "no_email": "Walang nakitang email: {line}",
+      "invalid_email": "Hindi valid ang email: {line}",
+      "unclear_name": "Isulat ang pangalan bilang Pangalan '<email>': {line}",
+      "more": "at {count} pa"
     },
     "exampleCsv": "halimbawang .csv",
     "exampleTxt": "halimbawang .txt",

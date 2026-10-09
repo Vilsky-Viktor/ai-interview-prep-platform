@@ -560,18 +560,20 @@
     "candidateEmails": "候选人邮箱",
     "candidateEmail": "候选人邮箱",
     "inviteTab": {
-      "one": "邀请一位",
-      "many": "邀请多位",
-      "file": "从文件上传"
+      "one": "单个",
+      "many": "多个",
+      "file": "上传"
     },
     "manyHint": "每行一位候选人，可带姓名，也可不带，\n每次最多 100 位：",
     "example": "示例",
     "uploadFile": "上传文件",
     "fileFormats": "CSV 或 TXT，最多 100 位候选人。姓名可放在姓名列中，或写在每个邮箱旁边。",
     "fileTooLarge": "文件过大（最大 {kb} KB）。",
-    "lineSkips": {
-      "noEmail": "已跳过 {count} 行：未找到邮箱（{shown, plural, other {第 {lines} 行}}）",
-      "unreadName": "{count} 个姓名未能读取（{shown, plural, other {第 {lines} 行}}）"
+    "lineProblems": {
+      "no_email": "未找到邮箱：{line}",
+      "invalid_email": "邮箱无效：{line}",
+      "unclear_name": "请按“姓名 '<邮箱>'”格式填写：{line}",
+      "more": "还有 {count} 行"
     },
     "exampleCsv": "示例 .csv",
     "exampleTxt": "示例 .txt",

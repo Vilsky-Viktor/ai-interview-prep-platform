@@ -560,18 +560,20 @@
     "candidateEmails": "E-mailadressen van kandidaten",
     "candidateEmail": "E-mailadres van de kandidaat",
     "inviteTab": {
-      "one": "één uitnodigen",
-      "many": "meerdere uitnodigen",
-      "file": "uploaden uit bestand"
+      "one": "één",
+      "many": "meerdere",
+      "file": "uploaden"
     },
     "manyHint": "Eén kandidaat per regel, met of zonder naam,\ntot 100 tegelijk:",
     "example": "voorbeeld",
     "uploadFile": "Bestand uploaden",
     "fileFormats": "CSV of TXT, tot 100 kandidaten. Namen kunnen in een naamkolom of naast elk e-mailadres staan.",
     "fileTooLarge": "Het bestand is te groot (max. {kb} KB).",
-    "lineSkips": {
-      "noEmail": "{count, plural, one {# regel overgeslagen} other {# regels overgeslagen}}: geen e-mailadres gevonden ({shown, plural, one {regel {lines}} other {regels {lines}}})",
-      "unreadName": "{count, plural, one {# naam niet gelezen} other {# namen niet gelezen}} ({shown, plural, one {regel {lines}} other {regels {lines}}})"
+    "lineProblems": {
+      "no_email": "Geen e-mailadres gevonden: {line}",
+      "invalid_email": "Ongeldig e-mailadres: {line}",
+      "unclear_name": "Schrijf de naam als Naam '<e-mail>': {line}",
+      "more": "en nog {count}"
     },
     "exampleCsv": "voorbeeld .csv",
     "exampleTxt": "voorbeeld .txt",

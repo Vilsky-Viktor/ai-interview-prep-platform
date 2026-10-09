@@ -17,3 +17,6 @@ export const INVITE_EXAMPLES = [
   { href: "/examples/prepza-candidates-example.csv", label: "exampleCsv" },
   { href: "/examples/prepza-candidates-example.txt", label: "exampleTxt" },
 ] as const
+
+// How many unusable lines of a list the dialog names; the rest are counted.
+export const SHOWN_LINE_PROBLEMS = 10

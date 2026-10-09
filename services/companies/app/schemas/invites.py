@@ -108,20 +108,18 @@ class SkippedInvite(BaseModel):
     reason: str
 
 
-class LineReport(BaseModel):
-    """Lines of a list that couldn't be used: how many, and the first few line numbers."""
+class LineProblemOut(BaseModel):
+    """A line of the list that couldn't be used, as it was written, and why (LineProblem)."""
 
-    count: int = 0
-    lines: list[int] = []
+    line: str
+    reason: str
 
 
 class BulkInviteOut(BaseModel):
     invited: list[str]
     skipped: list[SkippedInvite]
-    # Lines with no email (not counting empty lines or a CSV header), and lines whose name
-    # couldn't be read (as "Ann <ann@example.com" without its ">").
-    no_email: LineReport = LineReport()
-    unread_names: LineReport = LineReport()
+    # Every line that couldn't be used, in the list's order: nobody on it was invited.
+    problems: list[LineProblemOut] = []
 
 
 class ExtraTimeIn(BaseModel):

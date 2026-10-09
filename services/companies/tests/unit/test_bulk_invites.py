@@ -23,9 +23,8 @@ def test_every_email_in_the_list_is_invited_and_bad_ones_are_said_why(client, mo
     assert response.status_code == 200
     assert response.json() == {
         "invited": ["ann@example.com", "bob@example.com"],
-        "skipped": [{"email": "bad@@example", "reason": "invalid"}],
-        "no_email": {"count": 0, "lines": []},
-        "unread_names": {"count": 0, "lines": []},
+        "skipped": [],
+        "problems": [{"line": "bad@@example", "reason": "invalid_email"}],
     }
     assert sent == ["ann@example.com", "bob@example.com"]
 
@@ -70,7 +69,8 @@ def test_a_list_without_emails_or_with_too_many_is_refused(client, monkeypatch):
     invite_setup(monkeypatch)
     many = " ".join(f"c{number}@example.com" for number in range(101))
 
-    assert client.post(URL, json={"text": "nobody here"}).status_code == 422
+    # Only blank lines: nothing to read. (Lines without an email are reported, not refused.)
+    assert client.post(URL, json={"text": " \n "}).status_code == 422
     assert client.post(URL, json={"text": many}).status_code == 422
 
 

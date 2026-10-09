@@ -560,18 +560,20 @@
     "candidateEmails": "지원자 이메일",
     "candidateEmail": "지원자 이메일",
     "inviteTab": {
-      "one": "한 명 초대",
-      "many": "여러 명 초대",
-      "file": "파일에서 업로드"
+      "one": "한 명",
+      "many": "여러 명",
+      "file": "업로드"
     },
     "manyHint": "한 줄에 한 명, 이름은 넣어도 되고 빼도 됩니다.\n한 번에 최대 100명:",
     "example": "예시",
     "uploadFile": "파일 업로드",
     "fileFormats": "CSV 또는 TXT, 최대 100명. 이름은 이름 열이나 각 이메일 옆에 넣을 수 있습니다.",
     "fileTooLarge": "파일이 너무 큽니다(최대 {kb}KB).",
-    "lineSkips": {
-      "noEmail": "{count}줄 건너뜀: 이메일 없음({shown, plural, other {{lines}번째 줄}})",
-      "unreadName": "이름 {count}개를 읽지 못함({shown, plural, other {{lines}번째 줄}})"
+    "lineProblems": {
+      "no_email": "이메일 없음: {line}",
+      "invalid_email": "이메일이 올바르지 않음: {line}",
+      "unclear_name": "이름을 이름 '<이메일>' 형식으로 입력하세요: {line}",
+      "more": "외 {count}개"
     },
     "exampleCsv": "예시 .csv",
     "exampleTxt": "예시 .txt",

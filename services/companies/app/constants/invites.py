@@ -57,10 +57,16 @@ LIST_TOO_LONG = "The list is too long (max 50,000 characters)."
 LIST_FILE_TYPES = (".csv", ".txt")
 NOT_A_LIST_FILE = "Only CSV or TXT files."
 MAX_UNREADABLE_SHARE = 0.05
-# How many line numbers a list's report gives for each kind of unusable line.
-MAX_REPORTED_LINES = 10
 # Anything in a list that looks like an email; each is checked properly after.
 EMAIL_PATTERN = r"[^\s,;<>()\"']+@[^\s,;<>()\"']+"
+
+
+# Why a line of a list can't be used (one reason a line): it has no email, an email that isn't
+# valid, or a name that isn't written as "Name <email>" or "email, Name".
+class LineProblem(StrEnum):
+    NO_EMAIL = "no_email"
+    INVALID_EMAIL = "invalid_email"
+    UNCLEAR_NAME = "unclear_name"
 
 
 # Why an email from a list wasn't invited.

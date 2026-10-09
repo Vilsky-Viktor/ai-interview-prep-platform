@@ -1647,19 +1647,10 @@ export interface components {
       /** Skipped */
       skipped: components["schemas"]["SkippedInvite"][]
       /**
-       * @default {
-       *       "count": 0,
-       *       "lines": []
-       *     }
+       * Problems
+       * @default []
        */
-      no_email: components["schemas"]["LineReport"]
-      /**
-       * @default {
-       *       "count": 0,
-       *       "lines": []
-       *     }
-       */
-      unread_names: components["schemas"]["LineReport"]
+      problems: components["schemas"]["LineProblemOut"][]
     }
     /**
      * CandidateFilter
@@ -2181,20 +2172,14 @@ export interface components {
       company_ids: string[]
     }
     /**
-     * LineReport
-     * @description Lines of a list that couldn't be used: how many, and the first few line numbers.
+     * LineProblemOut
+     * @description A line of the list that couldn't be used, as it was written, and why (LineProblem).
      */
-    LineReport: {
-      /**
-       * Count
-       * @default 0
-       */
-      count: number
-      /**
-       * Lines
-       * @default []
-       */
-      lines: number[]
+    LineProblemOut: {
+      /** Line */
+      line: string
+      /** Reason */
+      reason: string
     }
     /** LinkIn */
     LinkIn: {

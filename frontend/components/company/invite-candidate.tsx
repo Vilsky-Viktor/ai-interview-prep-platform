@@ -7,11 +7,9 @@ import { toast } from "sonner"
 
 import { InviteExample } from "@/components/company/invite-example"
 import { InviteFileTab } from "@/components/company/invite-file-tab"
-import {
-  LineSkips,
-  type LineReports,
-} from "@/components/company/invite-line-skips"
+import { InviteProblems } from "@/components/company/invite-problems"
 import { TabNav } from "@/components/tab-nav"
+import { INVITE_TAB_ICONS } from "@/components/company/invite-tab-icons"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -63,7 +61,7 @@ export function InviteCandidate({
   const [text, setText] = useState("")
   const [file, setFile] = useState<File | null>(null)
   const [skipped, setSkipped] = useState<BulkInviteResult["skipped"]>([])
-  const [lines, setLines] = useState<LineReports | null>(null)
+  const [problems, setProblems] = useState<BulkInviteResult["problems"]>([])
   const [error, setError] = useState("")
   const [sending, setSending] = useState(false)
 
@@ -74,7 +72,7 @@ export function InviteCandidate({
     }
 
     if (next) {
-      setLines(null)
+      setProblems([])
 
       try {
         const saved = localStorage.getItem(INVITE_TAB_KEY) as InviteTab
@@ -89,7 +87,7 @@ export function InviteCandidate({
   function choose(next: InviteTab) {
     setTab(next)
     setSkipped([])
-    setLines(null)
+    setProblems([])
     setError("")
 
     try {
@@ -126,16 +124,20 @@ export function InviteCandidate({
       }
 
       setSkipped(result.skipped)
-      const unusable = result.no_email.count + result.unread_names.count > 0
-      setLines(unusable ? result : null)
+      setProblems(result.problems)
 
-      // What wasn't invited from a list stays, to fix or send again later.
+      // Only what wasn't invited from a list stays, to fix or send again: its unusable lines
+      // and the emails that weren't invited.
       if (tab === "many") {
-        setText(result.skipped.map((row) => row.email).join("\n"))
+        setText(
+          [
+            ...result.problems.map((row) => row.line),
+            ...result.skipped.map((row) => row.email),
+          ].join("\n")
+        )
       }
 
-      // Unusable lines stay said, until the dialog is closed.
-      if (result.skipped.length === 0 && !unusable) {
+      if (result.skipped.length === 0 && result.problems.length === 0) {
         setEmail("")
         setName("")
         setFile(null)
@@ -151,12 +153,12 @@ export function InviteCandidate({
     }
   }
 
-  const reasons = [...new Set(skipped.map((row) => row.reason))]
-
   return (
     <Dialog open={open} onOpenChange={openDialog}>
       <DialogTrigger
-        render={<Button className="h-12 shrink-0 px-6 text-base" />}
+        render={
+          <Button className="h-12 shrink-0 px-6 text-base max-sm:basis-full" />
+        }
       >
         {t("newCandidate")}
       </DialogTrigger>
@@ -165,7 +167,11 @@ export function InviteCandidate({
           <DialogTitle>{t("newCandidate")}</DialogTitle>
         </DialogHeader>
         <TabNav
-          items={INVITE_TABS.map((id) => ({ id, label: t(`inviteTab.${id}`) }))}
+          items={INVITE_TABS.map((id) => ({
+            id,
+            label: t(`inviteTab.${id}`),
+            icon: INVITE_TAB_ICONS[id],
+          }))}
           current={tab}
           onSelect={(id) => choose(id as InviteTab)}
         />
@@ -220,25 +226,17 @@ export function InviteCandidate({
               onChoose={(chosen, tooLarge) => {
                 setFile(chosen)
                 setSkipped([])
-                setLines(null)
+                setProblems([])
                 setError(tooLarge)
               }}
             />
           )}
-          {error && <p className="px-6 text-sm text-destructive">{error}</p>}
-          {lines && <LineSkips report={lines} />}
-          {reasons.length > 0 && (
-            <ul className="space-y-1 px-6 text-sm text-destructive">
-              {reasons.map((reason) => (
-                <li key={reason}>
-                  {t(`skip.${reason}`, {
-                    count: skipped.filter((row) => row.reason === reason)
-                      .length,
-                  })}
-                </li>
-              ))}
-            </ul>
-          )}
+          <InviteProblems
+            error={error}
+            problems={problems}
+            skipped={skipped}
+            center={tab === "file"}
+          />
         </form>
         <DialogFooter>
           <DialogClose
