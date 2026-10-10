@@ -74,5 +74,8 @@ def message(event: dict, site: str) -> str | None:
     if text is None:
         return None
 
-    # Only the values people wrote are escaped: the link is ours.
-    return f"{escaped(text)} <{site}{event.get('link', '')}|Open in prepza>"
+    # A finished candidate opens their results; others, the notification's page. Only the values
+    # people wrote are escaped: the links are ours.
+    link = data.get("candidate_link") or event.get("link", "")
+
+    return f"{escaped(text)} <{site}{link}|Open in prepza>"

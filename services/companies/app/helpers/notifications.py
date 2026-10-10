@@ -1,6 +1,6 @@
 from prepza_common.notifications import NotificationKind, Recipient, notification
 
-from app.constants.notifications import INTERVIEW_LINK, INTERVIEWS_LINK
+from app.constants.notifications import CANDIDATE_LINK, INTERVIEW_LINK, INTERVIEWS_LINK
 from app.constants.roles import EDITORS
 from app.models.companies import Company
 from app.models.interviews import Interview
@@ -15,7 +15,13 @@ def candidate_finished(
 ) -> dict:
     """The grade and the candidate's name are left out while unknown. One per invite, though a
     retried event finishes the candidate again."""
-    data = {"email": email, "title": interview.title}
+    data = {
+        "email": email,
+        "title": interview.title,
+        "candidate_link": CANDIDATE_LINK.format(
+            company_id=interview.company_id, interview_id=interview.id, invite_id=invite_id
+        ),
+    }
 
     if grade is not None:
         data["grade"] = grade

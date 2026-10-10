@@ -44,6 +44,24 @@ def test_a_finished_candidate_reads_with_the_grade_and_links_to_prepza():
     )
 
 
+def test_a_finished_candidate_opens_their_results():
+    """The bell's notification opens the interview (it groups its candidates); Slack's, the
+    candidate's results."""
+    text = message(
+        event(
+            NotificationKind.CANDIDATE_FINISHED,
+            email="a@b.c",
+            title="Backend",
+            candidate_link="/companies/c1/interviews/i1/candidates/v1",
+        ),
+        "https://prepza.ai",
+    )
+
+    assert text.endswith(
+        "<https://prepza.ai/companies/c1/interviews/i1/candidates/v1|Open in prepza>"
+    )
+
+
 def test_a_candidate_with_a_name_reads_with_it_escaped():
     data = {"email": "a@b.c", "title": "Backend", "candidate_name": "Ann <Lee>"}
     text = message(event(NotificationKind.CANDIDATE_FINISHED, **data), "https://prepza.ai")

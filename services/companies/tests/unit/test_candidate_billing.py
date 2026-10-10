@@ -99,6 +99,8 @@ def test_a_finished_interview_with_an_answer_charges_and_tells_the_company(ledge
             key=str(invite.id),
             email="carol@example.com",
             title="Backend",
+            # Slack opens the candidate's results from it.
+            candidate_link=f"/companies/{COMPANY_ID}/interviews/{INTERVIEW_ID}/candidates/{invite.id}",
             grade=85,
             candidate_name="Carol Diaz",
         )
