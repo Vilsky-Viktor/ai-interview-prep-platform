@@ -137,17 +137,17 @@ Emails go out through Resend in two streams, each from its own domain, so spam c
 
 The DNS records below are what Gmail, Yahoo (their 2024 rules for bulk senders) and Outlook check. Add them in GoDaddy's DNS, where a record's name is relative to `prepza.ai` (`send` means `send.prepza.ai`):
 
-1. **Add both domains in Resend.** At resend.com/domains, `prepza.ai` is there; add `mail.prepza.ai` in the same region. Each domain's page lists its exact records: copy the values from there, as the DKIM key is unique to the domain and the bounce host depends on the region.
-2. **SPF and the bounce address (return path).** Resend sends with a bounce address on a `send` subdomain of each domain, so SPF is checked there, not on `prepza.ai` itself:
+1. **Add both domains in Resend, in the EU region.** At resend.com/domains, add `prepza.ai` and `mail.prepza.ai` with the region **Ireland (eu-west-1)**: a domain's region is set when it's added (to change it, delete the domain and add it again). Each domain's page lists its exact records: copy the values from there, as the DKIM key is unique to each domain.
+2. **Sending (SPF and the bounce address).** Two CNAME records per domain point the `send` and `rsend` subdomains at Resend, which publishes the SPF record and receives the bounces there, not on `prepza.ai` itself:
 
    | Type | Name | Value |
    | --- | --- | --- |
-   | MX (priority 10) | `send` | `feedback-smtp.eu-west-1.amazonses.com` (the host on Resend's page) |
-   | TXT | `send` | `v=spf1 include:amazonses.com ~all` |
-   | MX (priority 10) | `send.mail` | the same host |
-   | TXT | `send.mail` | `v=spf1 include:amazonses.com ~all` |
+   | CNAME | `send` | `send.forge.rmta.net` |
+   | CNAME | `rsend` | `rsend-euw1.forge.rmta.net` (the EU region's host) |
+   | CNAME | `send.mail` | `send.forge.rmta.net` |
+   | CNAME | `rsend.mail` | `rsend-euw1.forge.rmta.net` |
 
-   A name has at most one SPF record. If something else sends as `@prepza.ai` (the mailbox behind `hello@prepza.ai`), its own SPF record on `@` stays as its provider says.
+   A name has at most one SPF record. Whatever receives mail for `@prepza.ai` (the mailbox behind `hello@prepza.ai`) adds its own MX and SPF records on `@`, as its provider says.
 3. **DKIM.** One TXT record per domain, with the key from Resend's page:
 
    | Type | Name | Value |
