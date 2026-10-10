@@ -4,7 +4,7 @@ The `notifications` service sends prepza's emails and keeps the bell's notificat
 
 ## The bell
 
-A bell next to the account menu shows notifications live: it updates within a second, without reloading.
+A bell next to the account menu shows notifications live: it updates within a second, without reloading. Each open tab holds a stream; one user may hold 10 at once (`MAX_STREAMS_PER_USER`), so one account can't take every slot. A tab past that is refused, and keeps trying (at most once a minute) until a slot frees.
 
 - A badge counts the unread ones.
 - It shows the latest 10.

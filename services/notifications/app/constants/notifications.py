@@ -29,3 +29,8 @@ RESUBSCRIBE_SECONDS = 1
 # A stream sends a comment this often, so proxies (nginx, the load balancer) don't close it as
 # idle.
 HEARTBEAT_SECONDS = 20
+
+# Open bell streams one user may hold (a tab each), so one account can't take every slot the
+# stream service has; a slot left by a crash frees itself after the longest a stream lives.
+MAX_STREAMS_PER_USER = 10
+STREAM_SLOT_SECONDS = 3600

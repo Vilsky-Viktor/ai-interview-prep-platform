@@ -4,7 +4,7 @@ from prepza_common.auth import CurrentUser
 from prepza_common.sse import event_stream
 
 from app.schemas.notifications import FeedOut
-from app.services.feed import changes, feed
+from app.services.feed import feed, open_stream
 from app.storage import notifications
 
 router = APIRouter(prefix="/me", tags=["notifications"])
@@ -26,5 +26,6 @@ async def mark_seen(user: CurrentUser) -> None:
 @router.get("/stream")
 async def stream(user: CurrentUser) -> StreamingResponse:
     """Server-sent events while a tab is open: {"new": true} as soon as a notification comes,
-    so the bell reloads; heartbeat comments in between."""
-    return event_stream(changes(user.uid))
+    so the bell reloads; heartbeat comments in between. At most MAX_STREAMS_PER_USER at once;
+    the bell refreshes on its own without one."""
+    return event_stream(await open_stream(user.uid))

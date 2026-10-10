@@ -1,10 +1,18 @@
 import asyncio
 from collections.abc import AsyncIterator
 
+from fastapi import HTTPException, status
+from prepza_common.constants import RATE_LIMITED
 from prepza_common.notifications import Recipient
 from prepza_common.sse import sse_event
 
-from app.constants.notifications import CHANNEL, DROPDOWN_LIMIT, HEARTBEAT_SECONDS
+from app.constants.notifications import (
+    CHANNEL,
+    DROPDOWN_LIMIT,
+    HEARTBEAT_SECONDS,
+    MAX_STREAMS_PER_USER,
+    STREAM_SLOT_SECONDS,
+)
 from app.integrations import companies
 from app.integrations.redis import get_redis
 from app.integrations.subscription import listening
@@ -57,3 +65,27 @@ async def changes(user_id: str) -> AsyncIterator[str]:
             heard.clear()
 
             yield sse_event({"new": True})
+
+
+async def open_stream(user_id: str) -> AsyncIterator[str]:
+    """One open tab's stream, in one of the user's MAX_STREAMS_PER_USER slots; refused (429)
+    when they're all taken. The slot is given back when the stream ends."""
+    key = f"streams:user:{user_id}"
+    redis = get_redis()
+    taken = await redis.incr(key)
+    await redis.expire(key, STREAM_SLOT_SECONDS)
+
+    if taken > MAX_STREAMS_PER_USER:
+        await redis.decr(key)
+
+        raise HTTPException(status.HTTP_429_TOO_MANY_REQUESTS, RATE_LIMITED)
+
+    return in_slot(key, changes(user_id))
+
+
+async def in_slot(key: str, stream: AsyncIterator[str]) -> AsyncIterator[str]:
+    try:
+        async for chunk in stream:
+            yield chunk
+    finally:
+        await get_redis().decr(key)
