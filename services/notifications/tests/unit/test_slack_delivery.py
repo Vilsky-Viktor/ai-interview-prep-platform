@@ -11,7 +11,6 @@ from app.config.settings import settings
 from app.integrations import companies
 from app.integrations import slack as slack_api
 from app.services import slack
-from app.storage import notifications
 from app.storage import slack as storage
 
 # The real call to companies, before the fixture stands in for it.
@@ -29,7 +28,6 @@ def channel(monkeypatch):
         "claimed": set(),
         "answer": None,
         "left": set(),
-        "grouped": set(),
     }
     hook = SimpleNamespace(
         kinds=["candidate_finished"], webhook=encrypt(KEY, "https://hooks/x"), created_by="u1"
@@ -59,9 +57,6 @@ def channel(monkeypatch):
     async def access(company_id, user_id):
         return {"member": True, "editor": user_id not in found["left"]}
 
-    async def stands_alone(key):
-        return key not in found["grouped"]
-
     monkeypatch.setattr(settings, "slack_client_id", "client")
     monkeypatch.setattr(settings, "slack_client_secret", "secret")
     monkeypatch.setattr(settings, "slack_encryption_key", KEY)
@@ -71,7 +66,6 @@ def channel(monkeypatch):
     monkeypatch.setattr(storage, "release", release)
     monkeypatch.setattr(slack_api, "post", post)
     monkeypatch.setattr(companies, "access", access)
-    monkeypatch.setattr(notifications, "stands_alone", stands_alone)
 
     return found
 
@@ -91,13 +85,12 @@ def test_a_chosen_notification_reaches_the_channel_once(channel):
     assert [webhook for webhook, text in channel["posted"]] == ["https://hooks/x"]
 
 
-def test_an_event_that_added_to_a_grouped_notification_isnt_posted(channel):
-    channel["grouped"].add("e2")
+def test_every_event_is_posted_also_one_the_bell_groups(channel):
     deliver(key="e1")
     deliver(key="e2")
 
-    assert len(channel["posted"]) == 1
-    assert channel["claimed"] == {"e1"}
+    assert len(channel["posted"]) == 2
+    assert channel["claimed"] == {"e1", "e2"}
 
 
 def test_unchosen_kinds_other_companies_and_users_notifications_dont(channel):

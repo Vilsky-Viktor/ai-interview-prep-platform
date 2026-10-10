@@ -69,17 +69,6 @@ async def add(event_id: str, event: dict) -> bool:
     return True
 
 
-async def stands_alone(event_id: str) -> bool:
-    """Whether the event made a notification of its own, rather than adding to a group (or
-    arriving for a deleted company); on its retry too."""
-    async with Session() as session:
-        found = await session.scalar(
-            select(Notification.id).where(Notification.event_id == event_id)
-        )
-
-        return found is not None
-
-
 async def add_to_group(session, event: dict, now: datetime) -> bool:
     """Adds the event to the recipient's latest notification of its kind about the same page and
     title, if it came within GROUP_HOURS: one more in its count, the newest details, and back at
