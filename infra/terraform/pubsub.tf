@@ -14,6 +14,12 @@ resource "google_pubsub_subscription" "dead_letter" {
   name                       = "events-dead-letter"
   topic                      = google_pubsub_topic.dead_letter.id
   message_retention_duration = "604800s"
+
+  # Pulled only during a replay: without this, Pub/Sub deletes it after 31 idle days, and dead
+  # letters (and their alert) are lost.
+  expiration_policy {
+    ttl = ""
+  }
 }
 
 # The event types each consumer handles (its app/services/*events*.py, candidate_billing.py and
