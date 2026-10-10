@@ -1,7 +1,7 @@
 # Backlog alerts, by email like the others (monitoring.tf): work that waits too long to be done.
 
-# Events: a consumer's push subscription (pubsub.tf) holding an event unhandled for 15 minutes,
-# long before it would be dead-lettered.
+# Events: a consumer's push subscription (pubsub.tf), or the funnel's to BigQuery (analytics.tf),
+# holding an event unhandled for 15 minutes, long before it would be dead-lettered.
 resource "google_monitoring_alert_policy" "events_waiting" {
   display_name = "prepza events waiting"
   combiner     = "OR"
@@ -10,7 +10,7 @@ resource "google_monitoring_alert_policy" "events_waiting" {
     display_name = "An event waits unhandled for over 15 minutes"
 
     condition_threshold {
-      filter          = "metric.type=\"pubsub.googleapis.com/subscription/oldest_unacked_message_age\" AND resource.type=\"pubsub_subscription\" AND resource.label.subscription_id = one_of(${join(", ", [for subscription in google_pubsub_subscription.push : "\"${subscription.name}\""])})"
+      filter          = "metric.type=\"pubsub.googleapis.com/subscription/oldest_unacked_message_age\" AND resource.type=\"pubsub_subscription\" AND resource.label.subscription_id = one_of(${join(", ", concat([for subscription in google_pubsub_subscription.push : "\"${subscription.name}\""], ["\"${google_pubsub_subscription.funnel.name}\""]))})"
       duration        = "0s"
       comparison      = "COMPARISON_GT"
       threshold_value = 900
