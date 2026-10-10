@@ -5,6 +5,7 @@ from prepza_common.analytics import track
 from prepza_common.constants import LANGUAGE_CLAIM
 from prepza_common.user import Language, User
 
+from app.helpers.accounts import candidate_email
 from app.integrations import accounts as services
 from app.storage import accounts
 
@@ -52,7 +53,7 @@ async def delete_account(user: User) -> None:
     the sign-in, which lets the user retry, goes last.
     """
     for service in services.services():
-        await services.delete_user(service, user.uid, user.email)
+        await services.delete_user(service, user.uid, candidate_email(user))
 
     await accounts.delete_user(user.uid)
     await asyncio.to_thread(delete_sign_in, user.uid)
@@ -60,7 +61,10 @@ async def delete_account(user: User) -> None:
 
 async def export_account(user: User) -> dict:
     exports = await asyncio.gather(
-        *(services.export_user(name, user.uid, user.email) for name in services.services())
+        *(
+            services.export_user(name, user.uid, candidate_email(user))
+            for name in services.services()
+        )
     )
 
     return {

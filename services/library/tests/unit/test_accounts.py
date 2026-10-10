@@ -66,6 +66,34 @@ def test_a_failing_service_keeps_the_sign_in_so_the_user_can_retry(steps, monkey
     assert ("sign-in", "ann") not in steps
 
 
+@pytest.mark.parametrize("verified, sent", [(True, "Ann@Example.com"), (False, "")])
+def test_candidate_data_is_matched_by_a_verified_email_only(monkeypatch, verified, sent):
+    emails = set()
+
+    async def delete_in(service, user_id, email):
+        emails.add(email)
+
+    async def export_from(service, user_id, email):
+        emails.add(email)
+
+        return {}
+
+    async def nothing(user_id):
+        return {}
+
+    monkeypatch.setattr(account_services, "delete_user", delete_in)
+    monkeypatch.setattr(account_services, "export_user", export_from)
+    monkeypatch.setattr(accounts, "delete_user", nothing)
+    monkeypatch.setattr(accounts, "export", nothing)
+    monkeypatch.setattr(account_service, "delete_sign_in", lambda uid: None)
+    user = USER.model_copy(update={"email_verified": verified})
+
+    asyncio.run(account_service.export_account(user))
+    asyncio.run(account_service.delete_account(user))
+
+    assert emails == {sent}
+
+
 def test_the_export_holds_every_service_and_downloads_as_a_file(client, monkeypatch):
     async def export_from(service, user_id, email):
         return {"from": service}

@@ -76,7 +76,7 @@ Until all three are set, "Add to Slack" answers "Slack isn't set up yet" and not
 
 ### Erased candidates
 
-When a company erases a candidate (`candidate.removed` from companies), its notifications about them (their email and grade) go. When a candidate deletes their prepza account, every company's notifications about them go too.
+When a company erases a candidate (`candidate.removed` from companies), its notifications about them (their email and grade) go. When a candidate deletes their prepza account, every company's notifications about them go too (matched by their email when it's verified).
 
 ### Grouping
 
