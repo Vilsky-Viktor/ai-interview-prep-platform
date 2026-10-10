@@ -36,6 +36,7 @@ jobs:
     outputs:
       changed: ${{ steps.diff.outputs.changed }}
       stack: ${{ steps.diff.outputs.stack }}
+      infra: ${{ steps.diff.outputs.infra }}
       base: ${{ steps.diff.outputs.base }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -88,10 +89,18 @@ jobs:
             stack=true
           fi
 
+          # Terraform is checked when it changed, or when there's nothing to compare with.
+          infra=false
+
+          if [ -z "$base" ] || echo "${files:-}" | grep -q '^infra/terraform/'; then
+            infra=true
+          fi
+
           echo "Since ${base:-the start}: ${changed:-nothing}"
           {
             echo "changed=$(jq -nc --arg names "$changed" '$names | split(" ") | map(select(. != ""))')"
             echo "stack=$stack"
+            echo "infra=$infra"
             echo "base=$base"
           } >> "$GITHUB_OUTPUT"
 
@@ -103,6 +112,25 @@ jobs:
       - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
       - run: uvx ruff@${{ env.RUFF_VERSION }} check services packages evals
       - run: uvx ruff@${{ env.RUFF_VERSION }} format --check services packages evals
+
+  # Terraform's format and configuration, without credentials or state (no backend), so it runs
+  # on pull requests too. It always reports; unchanged, it skips its steps.
+  terraform:
+    name: terraform format and validate
+    needs: changes
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: infra/terraform
+    steps:
+      - if: needs.changes.outputs.infra == 'true'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - if: needs.changes.outputs.infra == 'true'
+        uses: hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e # v4.0.1
+      - if: needs.changes.outputs.infra == 'true'
+        run: terraform fmt -check -recursive
+      - if: needs.changes.outputs.infra == 'true'
+        run: terraform init -backend=false -input=false && terraform validate
 
   # Every part keeps its job, so required checks always report; an unchanged part skips its steps.
   tests:
@@ -251,7 +279,7 @@ jobs:
       # Waits for the services and the frontend's first compile, then checks pages and /ready.
       - name: Smoke test
         run: |
-          for attempt in $(seq 1 40); do
+          for _ in $(seq 1 40); do
             if ./e2e_tests/smoke.sh; then
               exit 0
             fi
