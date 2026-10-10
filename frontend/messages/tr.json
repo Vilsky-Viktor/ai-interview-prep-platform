@@ -589,6 +589,7 @@
   },
   "invite": {
     "invitedYou": "<b>{company}</b> sizi mülakata davet ediyor.",
+    "signInToStart": "Başlamak için giriş yap",
     "fallbackTitle": "bir mülakat",
     "timePerQuestion": "Soru başına süre:",
     "secondsUnit": "sn",

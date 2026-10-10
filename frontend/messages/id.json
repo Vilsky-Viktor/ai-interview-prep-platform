@@ -589,6 +589,7 @@
   },
   "invite": {
     "invitedYou": "<b>{company}</b> mengundangmu mengikuti wawancara.",
+    "signInToStart": "Masuk untuk memulai",
     "fallbackTitle": "sebuah wawancara",
     "timePerQuestion": "Waktu per soal:",
     "secondsUnit": "dtk",

@@ -589,6 +589,7 @@
   },
   "invite": {
     "invitedYou": "<b>{company}</b> приглашает вас на собеседование.",
+    "signInToStart": "Войдите, чтобы начать",
     "fallbackTitle": "Собеседование",
     "timePerQuestion": "Время на вопрос:",
     "secondsUnit": "с",

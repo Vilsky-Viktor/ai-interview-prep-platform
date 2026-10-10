@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, status
-from prepza_common.auth import CurrentUser
+from prepza_common.auth import CurrentUser, OptionalUser
 from prepza_common.pause import refuse_if_paused
 
 from app.constants.invites import InviteStatus
@@ -16,7 +16,9 @@ router = APIRouter(prefix="/invites", tags=["invites"])
 
 
 @router.get("/{token}")
-async def get_invite(token: str, user: CurrentUser) -> InviteView:
+async def get_invite(token: str, user: OptionalUser) -> InviteView:
+    """The invitation, also before signing in, so the page shows what it's for; the candidate's
+    email only once someone is signed in."""
     found = await invite_store.get_by_token(token)
 
     # An expired invite's link stops working until the company sends it again.
@@ -35,7 +37,7 @@ async def get_invite(token: str, user: CurrentUser) -> InviteView:
         company=company.name if company else "",
         logo_url=logo_path(company),
         verified_domain=company.verified_domain if company else None,
-        email=invite.email,
+        email=invite.email if user else None,
         status=invite.status,
         question_seconds=candidate_seconds(interview.question_seconds, invite.extra_time),
     )

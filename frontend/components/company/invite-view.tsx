@@ -7,8 +7,9 @@ import { toast } from "sonner"
 
 import { useAuth } from "@/components/auth-provider"
 import { InviteIntro } from "@/components/company/invite-intro"
-import { SignInPrompt } from "@/components/sign-in-prompt"
+import { useSignIn } from "@/components/sign-in-dialog"
 import { Button } from "@/components/ui/button"
+import { WarningCard } from "@/components/warning-card"
 import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
 import type { InviteView as Invite, SessionSummary } from "@/types/company"
 
@@ -18,17 +19,20 @@ export function InviteView({ token }: { token: string }) {
   const session = useTranslations("session")
   const router = useRouter()
   const { user, loading } = useAuth()
+  const signIn = useSignIn()
   const [invite, setInvite] = useState<Invite | null>(null)
   const [missing, setMissing] = useState(false)
   const [starting, setStarting] = useState(false)
 
+  // Read signed in or not, so a visitor sees what the invitation is for before signing in;
+  // again after signing in, for whose it is.
   useEffect(() => {
-    if (user) {
+    if (!loading) {
       apiFetch<Invite>(`/companies/invites/${token}`)
         .then(setInvite)
         .catch(() => setMissing(true))
     }
-  }, [user, token])
+  }, [loading, user, token])
 
   async function start() {
     setStarting(true)
@@ -62,10 +66,6 @@ export function InviteView({ token }: { token: string }) {
     }
   }
 
-  if (!loading && !user) {
-    return <SignInPrompt />
-  }
-
   if (missing) {
     return (
       <p className="py-24 text-center text-base text-muted-foreground">
@@ -89,7 +89,11 @@ export function InviteView({ token }: { token: string }) {
       questionSeconds={invite.question_seconds}
       finished={invite.status === "finished"}
       action={
-        matches ? (
+        !user ? (
+          <Button className="h-12 px-6 text-base" onClick={() => signIn()}>
+            {t("signInToStart")}
+          </Button>
+        ) : matches ? (
           <Button
             className="h-12 px-6 text-base"
             disabled={starting}
@@ -98,7 +102,8 @@ export function InviteView({ token }: { token: string }) {
             {invite.status === "in_process" ? t("continue") : t("start")}
           </Button>
         ) : (
-          <p className="text-base text-muted-foreground">{t("mismatch")}</p>
+          // Signed in with another email: a warning, in the warning card.
+          <WarningCard className="text-start">{t("mismatch")}</WarningCard>
         )
       }
     />

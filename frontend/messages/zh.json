@@ -589,6 +589,7 @@
   },
   "invite": {
     "invitedYou": "<b>{company}</b> 邀请你参加面试。",
+    "signInToStart": "登录后开始",
     "fallbackTitle": "面试",
     "timePerQuestion": "每题时间：",
     "secondsUnit": "秒",

@@ -589,6 +589,7 @@
   },
   "invite": {
     "invitedYou": "<b>{company}</b> شما را به مصاحبه دعوت می‌کند.",
+    "signInToStart": "برای شروع وارد شوید",
     "fallbackTitle": "یک مصاحبه",
     "timePerQuestion": "زمان هر پرسش:",
     "secondsUnit": "ث",

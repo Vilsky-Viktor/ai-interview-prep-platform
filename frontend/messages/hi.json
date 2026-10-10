@@ -589,6 +589,7 @@
   },
   "invite": {
     "invitedYou": "<b>{company}</b> ने आपको इंटरव्यू के लिए इनवाइट किया है।",
+    "signInToStart": "शुरू करने के लिए साइन इन करें",
     "fallbackTitle": "एक इंटरव्यू",
     "timePerQuestion": "प्रति सवाल समय:",
     "secondsUnit": "से.",

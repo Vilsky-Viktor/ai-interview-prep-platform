@@ -589,6 +589,7 @@
   },
   "invite": {
     "invitedYou": "Iniimbitahan ka ng <b>{company}</b> sa isang interview.",
+    "signInToStart": "Mag-sign in para magsimula",
     "fallbackTitle": "isang interview",
     "timePerQuestion": "Oras bawat tanong:",
     "secondsUnit": "s",

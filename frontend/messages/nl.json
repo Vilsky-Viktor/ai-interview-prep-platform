@@ -589,6 +589,7 @@
   },
   "invite": {
     "invitedYou": "<b>{company}</b> nodigt je uit voor een interview.",
+    "signInToStart": "Log in om te beginnen",
     "fallbackTitle": "een interview",
     "timePerQuestion": "Tijd per vraag:",
     "secondsUnit": "s",

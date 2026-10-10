@@ -589,6 +589,7 @@
   },
   "invite": {
     "invitedYou": "קיבלת הזמנה לראיון מ-<b>{company}</b>.",
+    "signInToStart": "התחברות כדי להתחיל",
     "fallbackTitle": "ראיון",
     "timePerQuestion": "זמן לכל שאלה:",
     "secondsUnit": "שנ׳",

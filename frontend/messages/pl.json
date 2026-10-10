@@ -589,6 +589,7 @@
   },
   "invite": {
     "invitedYou": "<b>{company}</b> zaprasza Cię na rozmowę.",
+    "signInToStart": "Zaloguj się, aby zacząć",
     "fallbackTitle": "rozmowa",
     "timePerQuestion": "Czas na pytanie:",
     "secondsUnit": "s",

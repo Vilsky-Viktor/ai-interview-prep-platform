@@ -589,6 +589,7 @@
   },
   "invite": {
     "invitedYou": "<b>{company}</b>から面接の招待が届いています。",
+    "signInToStart": "サインインして開始",
     "fallbackTitle": "面接",
     "timePerQuestion": "1 問あたりの時間：",
     "secondsUnit": "秒",

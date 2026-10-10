@@ -7,6 +7,7 @@ import type { ReactNode } from "react"
 
 import { CompanyLogo } from "@/components/company/company-logo"
 import { VerifiedBadge } from "@/components/company/verified-badge"
+import { InfoCard } from "@/components/warning-card"
 
 /** What a candidate sees before starting: who invited them, the test, the time per question and
  * the rules, then `action` (the start button). A company member's preview shows the same. */
@@ -81,7 +82,9 @@ export function InviteIntro({
     return (
       <div className="w-full space-y-8 text-center">
         {header}
-        <p className="text-base text-muted-foreground">{t("finished")}</p>
+        <InfoCard className="mx-auto w-fit text-start">
+          {t("finished")}
+        </InfoCard>
       </div>
     )
   }

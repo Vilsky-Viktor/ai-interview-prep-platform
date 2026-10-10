@@ -706,7 +706,11 @@ export interface paths {
       path?: never
       cookie?: never
     }
-    /** Get Invite */
+    /**
+     * Get Invite
+     * @description The invitation, also before signing in, so the page shows what it's for; the candidate's
+     *     email only once someone is signed in.
+     */
     get: operations["get_invite_invites__token__get"]
     put?: never
     post?: never
@@ -2157,7 +2161,7 @@ export interface components {
       /** Verified Domain */
       verified_domain?: string | null
       /** Email */
-      email: string
+      email?: string | null
       /** Status */
       status: string
       /** Question Seconds */

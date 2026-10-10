@@ -589,6 +589,7 @@
   },
   "invite": {
     "invitedYou": "تلقيت دعوة من <b>{company}</b> إلى مقابلة.",
+    "signInToStart": "سجّل الدخول للبدء",
     "fallbackTitle": "مقابلة",
     "timePerQuestion": "الوقت لكل سؤال:",
     "secondsUnit": "ث",

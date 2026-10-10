@@ -589,6 +589,7 @@
   },
   "invite": {
     "invitedYou": "<b>{company}</b> запрошує вас на співбесіду.",
+    "signInToStart": "Увійдіть, щоб почати",
     "fallbackTitle": "співбесіда",
     "timePerQuestion": "Час на питання:",
     "secondsUnit": "с",

@@ -589,6 +589,7 @@
   },
   "invite": {
     "invitedYou": "<b>{company}</b> kutsub sind intervjuule.",
+    "signInToStart": "Logi sisse, et alustada",
     "fallbackTitle": "intervjuu",
     "timePerQuestion": "Aeg küsimuse kohta:",
     "secondsUnit": "s",

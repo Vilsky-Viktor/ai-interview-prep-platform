@@ -47,7 +47,8 @@ class InviteView(BaseModel):
     logo_url: str | None = None
     # The company's verified domain, for the badge beside its name.
     verified_domain: str | None = None
-    email: str
+    # Only for a signed-in visitor, so the page tells whose invite it is.
+    email: str | None = None
     status: str
     # Shown before the candidate starts: the timer begins at start.
     question_seconds: int

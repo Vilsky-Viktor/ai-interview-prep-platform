@@ -26,7 +26,7 @@ Each line nobody can be invited from is named under the list with its one reason
 
 A list or file takes up to 100 emails at once, and only the emails in it count, with the names written with them (see [Candidate names](#candidate-names)). A list skips candidates who already started, so they aren't emailed again.
 
-An invite can be resent or revoked (see [Revoking a candidate](#revoking-a-candidate)). The invite page tells candidates what to expect before they start.
+An invite can be resent or revoked (see [Revoking a candidate](#revoking-a-candidate)). The invite page tells candidates what to expect before they start. A visitor who isn't signed in sees the invitation (the company, the interview and its rules, but not the invited email) with a **Sign in to start** button. Signed in with another email, the page explains in a warning that only the invited email can start; once the interview is finished, it says so in an info card.
 
 A candidate's credits are set aside on invite and given back if they never answer (see [Credits and payments](billing.md)).
 
@@ -93,7 +93,7 @@ Every interview is timed. Each question has its own countdown.
 - The countdown turns red for the last 10 seconds, or for the last third of a shorter question.
 - At zero, the pick on screen counts. If nothing is picked, the question counts as wrong.
 
-While the questions run, the page shows only them: no header, footer or "ask agent", nothing to leave the page through by accident (a page leave is recorded, and the clock keeps running). The same goes for practice rounds and a company's preview.
+While the questions run, the page shows only them: no header, footer or "ask agent", nothing to leave the page through by accident (a page leave is recorded, and the clock keeps running). The same goes for practice rounds and a company's preview. Once the interview is finished, the header and footer come back.
 
 ### Extra time
 

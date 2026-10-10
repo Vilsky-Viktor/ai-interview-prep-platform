@@ -589,6 +589,7 @@
   },
   "invite": {
     "invitedYou": "<b>{company}</b> เชิญคุณเข้าสัมภาษณ์",
+    "signInToStart": "ลงชื่อเข้าใช้เพื่อเริ่ม",
     "fallbackTitle": "การสัมภาษณ์",
     "timePerQuestion": "เวลาต่อคำถาม:",
     "secondsUnit": "วิ",

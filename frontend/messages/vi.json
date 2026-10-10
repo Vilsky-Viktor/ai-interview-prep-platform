@@ -589,6 +589,7 @@
   },
   "invite": {
     "invitedYou": "<b>{company}</b> mời bạn tham gia phỏng vấn.",
+    "signInToStart": "Đăng nhập để bắt đầu",
     "fallbackTitle": "một buổi phỏng vấn",
     "timePerQuestion": "Thời gian mỗi câu:",
     "secondsUnit": "giây",

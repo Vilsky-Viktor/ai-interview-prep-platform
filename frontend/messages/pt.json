@@ -589,6 +589,7 @@
   },
   "invite": {
     "invitedYou": "<b>{company}</b> convida você para uma entrevista.",
+    "signInToStart": "Entre para começar",
     "fallbackTitle": "uma entrevista",
     "timePerQuestion": "Tempo por questão:",
     "secondsUnit": "s",

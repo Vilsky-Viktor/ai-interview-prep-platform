@@ -589,6 +589,7 @@
   },
   "invite": {
     "invitedYou": "<b>{company}</b>에서 면접에 초대했습니다.",
+    "signInToStart": "로그인하고 시작하기",
     "fallbackTitle": "면접",
     "timePerQuestion": "문제당 시간:",
     "secondsUnit": "초",

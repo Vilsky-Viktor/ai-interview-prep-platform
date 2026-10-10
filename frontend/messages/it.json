@@ -589,6 +589,7 @@
   },
   "invite": {
     "invitedYou": "<b>{company}</b> ti invita a un colloquio.",
+    "signInToStart": "Accedi per iniziare",
     "fallbackTitle": "un colloquio",
     "timePerQuestion": "Tempo per domanda:",
     "secondsUnit": "s",

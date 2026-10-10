@@ -8,6 +8,7 @@ import { toast } from "sonner"
 import { useAuth } from "@/components/auth-provider"
 import { SignInPrompt } from "@/components/sign-in-prompt"
 import { Button } from "@/components/ui/button"
+import { WarningCard } from "@/components/warning-card"
 import { ApiError, apiFetch } from "@/lib/api"
 import type { AdminInvite as Invite } from "@/types/company"
 
@@ -91,7 +92,8 @@ export function AdminInvite({ token }: { token: string }) {
           {t("join")}
         </Button>
       ) : (
-        <p className="text-base text-muted-foreground">{share("mismatch")}</p>
+        // Signed in with another email: a warning, in the warning card.
+        <WarningCard className="text-start">{share("mismatch")}</WarningCard>
       )}
     </div>
   )
