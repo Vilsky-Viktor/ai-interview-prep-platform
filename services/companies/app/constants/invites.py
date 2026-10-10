@@ -110,6 +110,10 @@ TOO_MANY_WITHOUT_CANDIDATES = (
 LINK_CLOSED = "This interview isn't taking new candidates right now."
 # Random bytes in a shareable link's code.
 LINK_TOKEN_BYTES = 12
+# New candidates a job-ad link takes in an hour, and one address starts across all links: a
+# script with many accounts can't hold (or, picking an answer, spend) a company's credits faster.
+LINK_STARTS_PER_HOUR = 30
+LINK_STARTS_PER_IP_HOUR = 10
 
 
 # What a company can narrow its candidates to: an invite status, or a result: reached the pass

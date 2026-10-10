@@ -1,12 +1,22 @@
 import secrets
 from uuid import UUID
 
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, Request, status
 from prepza_common.analytics import track
 from prepza_common.auth import CurrentUser, OptionalUser
+from prepza_common.client_ip import client_ip
+from prepza_common.constants import HOUR_SECONDS
 from prepza_common.pause import refuse_if_paused
+from prepza_common.rate_limit import hit
 
-from app.constants.invites import LINK_CLOSED, LINK_TOKEN_BYTES, NOT_STARTED, InviteStatus
+from app.constants.invites import (
+    LINK_CLOSED,
+    LINK_STARTS_PER_HOUR,
+    LINK_STARTS_PER_IP_HOUR,
+    LINK_TOKEN_BYTES,
+    NOT_STARTED,
+    InviteStatus,
+)
 from app.helpers.candidates import hold_key, new_hold_key
 from app.helpers.interviews import attach_set, interview_title
 from app.helpers.logos import logo_path
@@ -64,7 +74,7 @@ async def get_link(token: str, user: OptionalUser) -> LinkView:
 
 
 @router.post("/links/{token}/start")
-async def start_link(token: str, user: CurrentUser) -> InviteStartOut:
+async def start_link(token: str, user: CurrentUser, request: Request) -> InviteStartOut:
     """The signed-in person becomes a candidate (their verified email, one attempt each) and
     starts, with credits set aside as for an email invite."""
     interview = await linked_interview(token)
@@ -85,6 +95,14 @@ async def start_link(token: str, user: CurrentUser) -> InviteStartOut:
     # Paused, nobody starts; a candidate already in the interview may finish it.
     if current != InviteStatus.IN_PROCESS:
         await refuse_if_paused(get_redis())
+
+    # A new candidate counts toward the link's and their address's hourly limits; one already
+    # invited is never held back by them.
+    if current is None:
+        redis = get_redis()
+        await hit(redis, f"rate:link-starts:{interview.id}", LINK_STARTS_PER_HOUR, HOUR_SECONDS)
+        address = client_ip(request)
+        await hit(redis, f"rate:link-starts:ip:{address}", LINK_STARTS_PER_IP_HOUR, HOUR_SECONDS)
 
     if current is None or current in NOT_STARTED:
         try:

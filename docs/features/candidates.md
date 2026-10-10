@@ -74,6 +74,7 @@ The shareable link (`/apply/{token}`) is one link per interview, for a job ad. O
 - Each verified email can take it once.
 - It is charged like an invited candidate.
 - Turning it off, or marking the interview as hired, stops it at once.
+- It takes at most 30 new candidates an hour, and one address starts at most 10 an hour across all links (`LINK_STARTS_PER_HOUR`, `LINK_STARTS_PER_IP_HOUR`), so a script with many accounts can't use up a company's credits; over either, a 429. A candidate already invited is never held back by them.
 
 ## Taking an interview
 
