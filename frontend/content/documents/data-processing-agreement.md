@@ -1,6 +1,6 @@
 # Data processing agreement
 
-Version: 2026-10-09\
+Version: 2026-10-10\
 Operator: Arcolabs OÜ (registry code 17587452), Sepapaja tn 6, 15551 Tallinn, Harju maakond, Estonia; hello@prepza.ai\
 Also online at https://prepza.ai/dpa
 
@@ -22,6 +22,7 @@ This agreement applies when a company uses prepza to assess candidates. The comp
 - We tell the company without undue delay, and within 48 hours where we can, after becoming aware of a breach of its data, with what we know.
 - At the end, the data is deleted as described above; the company can download its results before deleting its company.
 - Tools the company connects (an applicant tracking system, a Slack workspace, or its own systems through prepza's API and web hooks) are its own recipients, not our sub-processors: we send them data only on the company's instruction, given when its owner or admin connects them, and stop when they are disconnected. Where they are outside the EU, that transfer is the company's responsibility.
+- AI apps a member connects to their own prepza account (such as Claude or ChatGPT) are that member's recipients, not our sub-processors: only when a member connects one, it reads and changes the company's data that member asks it to, within their role, and the data it receives is then under that app's own terms. A connection stops when the member disconnects it or deletes their account. Deleting the account or a company is never done through such an app.
 - Invites and reminders sent on the company's behalf include links for the candidate to stop the company's emails, or that interview's reminders. After a candidate stops the company's emails, prepza doesn't email them for the company again and the company sees their invite as undelivered. The request is kept as a one-way hash of the email address until the company is deleted, also when the company erases the candidate.
 - We give the company the information needed to show that this agreement is kept, and answer reasonable audit questions in writing.
 
@@ -30,7 +31,7 @@ This agreement applies when a company uses prepza to assess candidates. The comp
 The company authorises these sub-processors, each bound by data protection terms at least as protective as these:
 
 - Google Cloud (hosting, database, events) and Google Firebase (sign-in).
-- OpenAI (writing and improving questions, including checking reported questions by the reasons given, never their comments; under its API terms nothing is used for training).
+- OpenAI (writing and improving questions, including checking reported questions by the reasons given, never their comments; the assistant's answers, from a member's questions and the data it reads with their access, and turning voice messages into text; told not to store it; under its API terms it keeps the data for at most 30 days, only to check for abuse, and uses nothing for training).
 - Resend (emails).
 - Sentry (error reports, without email addresses).
 - Upstash (short-lived counters for limits and live updates).
