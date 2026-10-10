@@ -28,6 +28,10 @@ def configure_logging() -> None:
     root = logging.getLogger()
     root.handlers = [handler]
     root.setLevel(logging.INFO)
+    # The HTTP client logs every request's full address at INFO, and some addresses are secrets
+    # (a company's Slack web hook): only its warnings and errors are kept.
+    for name in ("httpx", "httpcore"):
+        logging.getLogger(name).setLevel(logging.WARNING)
 
 
 class RequestLogMiddleware(BaseHTTPMiddleware):
