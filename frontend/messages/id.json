@@ -280,7 +280,8 @@
     "topUpTitle": "Isi ulang: {name}",
     "topUpNote": "Setiap isi ulang dihitung untuk jumlah kandidat yang utuh; makin besar isi ulangnya, makin murah per kandidat. Kredit tidak pernah kedaluwarsa.",
     "candidates": "{count, plural, other {# kandidat}}",
-    "each": "{price} per kandidat"
+    "each": "{price} per kandidat",
+    "reserved": "{count, plural, other {# kredit dicadangkan}}"
   },
   "deleteAccount": {
     "title": "Hapus akunmu?",
@@ -439,6 +440,7 @@
     "team": "Tim",
     "integrations": "Integrasi",
     "referrals": "Referal",
+    "billing": "Tagihan",
     "new": "Perusahaan baru",
     "name": "Nama perusahaan",
     "create": "Buat",
@@ -1781,6 +1783,40 @@
         "Kalian berdua mendapat kredit saat perusahaan yang kamu undang melakukan isi ulang pertamanya, berapa pun jumlahnya.",
         "Kredit masuk ke perusahaan ini dan tidak pernah kedaluwarsa."
       ]
+    },
+    "billing": {
+      "title": "Tagihan",
+      "text": "Dari mana kredit perusahaan ini berasal dan ke mana perginya.",
+      "actions": [
+        "Isi ulang, atau atur isi ulang otomatis.",
+        "Lihat kandidat yang kreditnya dicadangkan.",
+        "Buka faktur dari isi ulang mana pun."
+      ],
+      "tips": [
+        "Kredit kandidat dicadangkan saat ia diundang, dipotong setelah ia menjawab, dan dikembalikan jika tidak.",
+        "Hanya pemilik dan admin yang bisa melihat halaman ini."
+      ]
     }
+  },
+  "companyBilling": {
+    "reservedTab": "Dicadangkan ({count})",
+    "reservedEmpty": "Tidak ada kandidat yang memegang kredit.",
+    "reservedNote": "Kandidat yang diundang tetapi belum selesai. Kredit mereka dicadangkan: dipotong setelah mereka menjawab, dikembalikan jika tidak.",
+    "history": "Riwayat",
+    "empty": "Belum ada pergerakan kredit.",
+    "reasons": {
+      "welcome": "Hadiah sambutan",
+      "topup": "Isi ulang",
+      "candidate": "Kandidat",
+      "refund": "Pengembalian dana",
+      "chargeback": "Chargeback",
+      "chargeback_reversed": "Chargeback dibatalkan",
+      "referral": "Hadiah referal",
+      "referral_reversed": "Hadiah referal ditarik"
+    },
+    "automatic": "Isi ulang otomatis",
+    "invoice": "Faktur",
+    "invoiceFailed": "Tidak bisa membuka faktur. Silakan coba lagi.",
+    "deletedCandidate": "Kandidat yang dihapus"
   }
 }

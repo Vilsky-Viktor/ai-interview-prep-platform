@@ -1,12 +1,17 @@
 from fastapi import APIRouter, HTTPException, status
 from fastapi.encoders import jsonable_encoder
 from prepza_common.analytics import track
+from prepza_common.paging import PageParams
 
-from app.constants.credits import CANDIDATE_CREDITS, NOT_ENOUGH, Reason
+from app.constants.credits import CANDIDATE_CREDITS, CANDIDATE_PREFIX, NOT_ENOUGH, Reason
 from app.constants.products import OwnerType
+from app.helpers.history import history_entry_out
 from app.helpers.wallets import balance_out
+from app.integrations import paddle
 from app.schemas.billing import (
     BalanceOut,
+    HistoryEntryOut,
+    InvoiceOut,
     LowCompaniesOut,
     LowCompanyOut,
     OwnersIn,
@@ -16,7 +21,7 @@ from app.schemas.billing import (
 from app.service_auth import ServiceCaller
 from app.services import auto_top_ups
 from app.services.referrals import referral_out
-from app.storage import ledger, purchases, referrals
+from app.storage import history, ledger, purchases, referrals
 
 router = APIRouter(prefix="/internal", tags=["internal"])
 
@@ -40,18 +45,18 @@ async def take(owner_type: str, owner_id: str, amount: int, key: str, reason: st
 async def hold_candidate(company_id: str, key: str, caller: ServiceCaller) -> None:
     """Set aside on invite. Charged once the interview finishes with at least one answer."""
     await take(
-        OwnerType.COMPANY, company_id, CANDIDATE_CREDITS, f"candidate:{key}", Reason.CANDIDATE
+        OwnerType.COMPANY, company_id, CANDIDATE_CREDITS, CANDIDATE_PREFIX + key, Reason.CANDIDATE
     )
 
 
 @router.post("/candidates/charge", status_code=status.HTTP_204_NO_CONTENT)
 async def charge_candidate(key: str, caller: ServiceCaller) -> None:
-    await ledger.charge(f"candidate:{key}")
+    await ledger.charge(CANDIDATE_PREFIX + key)
 
 
 @router.post("/candidates/release", status_code=status.HTTP_204_NO_CONTENT)
 async def release_candidate(key: str, caller: ServiceCaller) -> None:
-    await ledger.release(f"candidate:{key}")
+    await ledger.release(CANDIDATE_PREFIX + key)
 
 
 @router.post("/companies/{company_id}/welcome", status_code=status.HTTP_204_NO_CONTENT)
@@ -70,6 +75,27 @@ async def company_referral(company_id: str, caller: ServiceCaller) -> ReferralOu
 @router.get("/companies/{company_id}/credits")
 async def company_credits(company_id: str, caller: ServiceCaller) -> BalanceOut:
     return balance_out(await ledger.wallet(OwnerType.COMPANY, company_id))
+
+
+@router.get("/companies/{company_id}/history")
+async def company_history(
+    company_id: str, page: PageParams, caller: ServiceCaller
+) -> list[HistoryEntryOut]:
+    """Every movement of the company's credits, newest first."""
+    rows = await history.page(OwnerType.COMPANY, company_id, page.offset, page.limit)
+
+    return [history_entry_out(row) for row in rows]
+
+
+@router.get("/companies/{company_id}/invoice")
+async def company_invoice(
+    company_id: str, transaction_id: str, caller: ServiceCaller
+) -> InvoiceOut:
+    """The invoice of one of the company's top-ups; 404 for anyone else's transaction."""
+    if not await purchases.owns(OwnerType.COMPANY, company_id, transaction_id):
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Not found")
+
+    return InvoiceOut(url=await paddle.invoice_url(transaction_id))
 
 
 @router.post("/companies/credits")

@@ -1,4 +1,5 @@
 from datetime import datetime
+from uuid import UUID
 
 from prepza_common.constants import MAX_PAGE_SIZE
 from pydantic import BaseModel, Field
@@ -116,3 +117,25 @@ class AutoTopUpOut(BaseModel):
     thresholds: list[int]
     # Only when turning it on still needs the checkout that saves the card.
     checkout: CheckoutOut | None = None
+
+
+class HistoryEntryOut(BaseModel):
+    """One movement of a wallet's credits. `total` (minor units, tax included) and `currency`
+    are what a top-up cost or an adjustment moved, when known; `transaction_id` is the Paddle
+    transaction of a top-up or adjustment, and `hold_key` the key of a candidate's credits."""
+
+    id: UUID
+    amount: int
+    reason: str
+    created_at: datetime
+    total: str | None
+    currency: str | None
+    automatic: bool
+    transaction_id: str | None
+    hold_key: str | None
+
+
+class InvoiceOut(BaseModel):
+    """A temporary link to the transaction's invoice PDF."""
+
+    url: str

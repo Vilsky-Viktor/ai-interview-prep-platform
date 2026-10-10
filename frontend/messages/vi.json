@@ -280,7 +280,8 @@
     "topUpTitle": "Nạp credit: {name}",
     "topUpNote": "Mỗi lần nạp mua trọn số ứng viên; nạp càng nhiều, giá mỗi ứng viên càng rẻ. Credit không bao giờ hết hạn.",
     "candidates": "{count, plural, other {# ứng viên}}",
-    "each": "{price} mỗi ứng viên"
+    "each": "{price} mỗi ứng viên",
+    "reserved": "{count, plural, other {Đã giữ # credit}}"
   },
   "deleteAccount": {
     "title": "Xóa tài khoản của bạn?",
@@ -439,6 +440,7 @@
     "team": "Nhóm",
     "integrations": "Tích hợp",
     "referrals": "Giới thiệu",
+    "billing": "Thanh toán",
     "new": "Công ty mới",
     "name": "Tên công ty",
     "create": "Tạo",
@@ -1777,6 +1779,40 @@
         "Cả hai bên nhận credit khi công ty bạn mời nạp credit lần đầu, với bất kỳ số tiền nào.",
         "Credit được cộng cho công ty này và không bao giờ hết hạn."
       ]
+    },
+    "billing": {
+      "title": "Thanh toán",
+      "text": "Credit của công ty này đến từ đâu và đã dùng vào đâu.",
+      "actions": [
+        "Nạp credit, hoặc thiết lập tự động nạp.",
+        "Xem các ứng viên đang được giữ credit.",
+        "Mở hóa đơn của bất kỳ lần nạp nào."
+      ],
+      "tips": [
+        "Credit cho một ứng viên được giữ lại khi mời, bị trừ khi ứng viên trả lời và được hoàn lại nếu không.",
+        "Chỉ chủ sở hữu và quản trị viên thấy trang này."
+      ]
     }
+  },
+  "companyBilling": {
+    "reservedTab": "Đang giữ ({count})",
+    "reservedEmpty": "Không có ứng viên nào đang được giữ credit.",
+    "reservedNote": "Các ứng viên đã được mời nhưng chưa hoàn thành. Credit của họ đang được giữ: bị trừ khi họ trả lời, được hoàn lại nếu không.",
+    "history": "Lịch sử",
+    "empty": "Chưa có biến động credit nào.",
+    "reasons": {
+      "welcome": "Quà chào mừng",
+      "topup": "Nạp credit",
+      "candidate": "Ứng viên",
+      "refund": "Hoàn tiền",
+      "chargeback": "Bồi hoàn thẻ",
+      "chargeback_reversed": "Hủy bồi hoàn thẻ",
+      "referral": "Thưởng giới thiệu",
+      "referral_reversed": "Thu hồi thưởng giới thiệu"
+    },
+    "automatic": "Tự động nạp",
+    "invoice": "Hóa đơn",
+    "invoiceFailed": "Không mở được hóa đơn. Vui lòng thử lại.",
+    "deletedCandidate": "Ứng viên đã bị xóa"
   }
 }

@@ -29,6 +29,9 @@ export type SessionAnswerResult = RoundSchemas["SessionAnswerResult"] & {
   option_index?: number | null
 }
 export type CompanyReferral = Schemas["ReferralOut"]
+// One movement of a company's credits, and a candidate whose invite holds or was charged credits.
+export type CreditHistoryEntry = Schemas["HistoryEntryOut"]
+export type CreditCandidate = Schemas["CreditCandidateOut"]
 export type AtsIntegrations = AtsSchemas["IntegrationsOut"]
 export type AtsConnection = AtsSchemas["ConnectionOut"]
 export type AtsItem = AtsSchemas["AtsItemOut"]

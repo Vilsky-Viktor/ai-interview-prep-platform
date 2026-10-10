@@ -15,6 +15,7 @@ from app.routers import (
     accommodations,
     audit,
     auto_top_ups,
+    billing,
     bulk_invites,
     candidates,
     companies,
@@ -66,6 +67,7 @@ app.add_middleware(RequestLogMiddleware)
 app.include_router(companies.router)
 app.include_router(audit.router)
 app.include_router(auto_top_ups.router)
+app.include_router(billing.router)
 app.include_router(members.router)
 app.include_router(interviews.router)
 app.include_router(candidates.router)

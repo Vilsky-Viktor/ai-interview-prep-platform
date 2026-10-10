@@ -280,7 +280,8 @@
     "topUpTitle": "Aufladen: {name}",
     "topUpNote": "Jede Aufladung reicht für eine feste Zahl von Kandidaten; größere Aufladungen kosten weniger pro Kandidat. Credits verfallen nie.",
     "candidates": "{count, plural, one {# Kandidat} other {# Kandidaten}}",
-    "each": "je {price}"
+    "each": "je {price}",
+    "reserved": "{count, plural, one {# Credit reserviert} other {# Credits reserviert}}"
   },
   "deleteAccount": {
     "title": "Dein Konto löschen?",
@@ -439,6 +440,7 @@
     "team": "Team",
     "integrations": "Integrationen",
     "referrals": "Empfehlungen",
+    "billing": "Abrechnung",
     "new": "Neues Unternehmen",
     "name": "Name des Unternehmens",
     "create": "Erstellen",
@@ -1781,6 +1783,40 @@
         "Ihr bekommt beide Credits, wenn das eingeladene Unternehmen zum ersten Mal auflädt, egal mit welchem Betrag.",
         "Die Credits gehen an dieses Unternehmen und verfallen nie."
       ]
+    },
+    "billing": {
+      "title": "Abrechnung",
+      "text": "Woher die Credits dieses Unternehmens kamen und wofür sie verwendet wurden.",
+      "actions": [
+        "Lade auf oder richte automatisches Aufladen ein.",
+        "Sieh dir die Kandidaten an, für die Credits reserviert sind.",
+        "Öffne die Rechnung jeder Aufladung."
+      ],
+      "tips": [
+        "Die Credits eines Kandidaten werden bei der Einladung reserviert, abgebucht, sobald er antwortet, und zurückgegeben, wenn nicht.",
+        "Nur Inhaber und Admins sehen diese Seite."
+      ]
     }
+  },
+  "companyBilling": {
+    "reservedTab": "Reserviert ({count})",
+    "reservedEmpty": "Für keinen Kandidaten sind Credits reserviert.",
+    "reservedNote": "Eingeladene Kandidaten, die noch nicht fertig sind. Ihre Credits sind reserviert: Sie werden abgebucht, sobald sie antworten, und zurückgegeben, wenn nicht.",
+    "history": "Verlauf",
+    "empty": "Bisher wurden keine Credits bewegt.",
+    "reasons": {
+      "welcome": "Willkommensgeschenk",
+      "topup": "Aufladung",
+      "candidate": "Kandidat",
+      "refund": "Erstattung",
+      "chargeback": "Rückbuchung",
+      "chargeback_reversed": "Rückbuchung aufgehoben",
+      "referral": "Empfehlungsprämie",
+      "referral_reversed": "Empfehlungsprämie zurückgenommen"
+    },
+    "automatic": "Automatisches Aufladen",
+    "invoice": "Rechnung",
+    "invoiceFailed": "Die Rechnung konnte nicht geöffnet werden. Bitte versuche es erneut.",
+    "deletedCandidate": "Ein gelöschter Kandidat"
   }
 }

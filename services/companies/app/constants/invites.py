@@ -33,6 +33,9 @@ class InviteStatus(StrEnum):
 # Statuses of an invite the candidate hasn't started: its credits are set aside, not charged.
 NOT_STARTED = (InviteStatus.INVITED, InviteStatus.UNDELIVERED, InviteStatus.EXPIRED)
 STARTED = (InviteStatus.IN_PROCESS, InviteStatus.FINISHED)
+# Statuses of an invite still open: its link works and its credits are set aside (an expired
+# one gave them back).
+OPEN = (InviteStatus.INVITED, InviteStatus.UNDELIVERED, InviteStatus.IN_PROCESS)
 
 
 # Candidate invites, with the candidate's results, are kept this long after they're sent.

@@ -48,7 +48,7 @@ Then open the app at http://localhost:8090. Sign-in uses the Firebase Auth emula
 | [Interviews](docs/features/interviews.md) | Making an interview, topic review, the interview page and its settings, preview |
 | [Candidates](docs/features/candidates.md) | Invites, the shareable link, taking an interview, timing, scorecards, reports |
 | [Templates and practice](docs/features/templates-and-practice.md) | The question bank, copying templates, slugs, free practice |
-| [Credits and payments](docs/features/billing.md) | Credits, top-ups, automatic top-up, referrals, setting up Paddle |
+| [Credits and payments](docs/features/billing.md) | Credits, top-ups, automatic top-up, referrals, a company's billing tab, setting up Paddle |
 | [ATS integrations](docs/features/ats.md) | Connecting Workable, Greenhouse, Teamtailor, Recruitee and Breezy HR, linked jobs, results back to the ATS |
 | [Public API](docs/features/api.md) | API keys and their expiry, the routes, signed web hooks, the API page and docs |
 | [Notifications and emails](docs/features/notifications.md) | The bell, emails, Slack, setting up Resend and Slack |

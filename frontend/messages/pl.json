@@ -280,7 +280,8 @@
     "topUpTitle": "Doładowanie: {name}",
     "topUpNote": "Każde doładowanie starcza na pełną liczbę kandydatów; przy większych koszt jednego kandydata jest niższy. Kredyty nie wygasają.",
     "candidates": "{count, plural, one {# kandydat} few {# kandydaci} many {# kandydatów} other {# kandydata}}",
-    "each": "{price} za każdego"
+    "each": "{price} za każdego",
+    "reserved": "{count, plural, one {# kredyt zarezerwowany} few {# kredyty zarezerwowane} many {# kredytów zarezerwowanych} other {# kredytu zarezerwowanego}}"
   },
   "deleteAccount": {
     "title": "Usunąć konto?",
@@ -439,6 +440,7 @@
     "team": "Zespół",
     "integrations": "Integracje",
     "referrals": "Polecenia",
+    "billing": "Rozliczenia",
     "new": "Nowa firma",
     "name": "Nazwa firmy",
     "create": "Utwórz",
@@ -1781,6 +1783,40 @@
         "Obie firmy dostają kredyty, gdy zaproszona firma zrobi pierwsze doładowanie, na dowolną kwotę.",
         "Kredyty trafiają do tej firmy i nigdy nie wygasają."
       ]
+    },
+    "billing": {
+      "title": "Rozliczenia",
+      "text": "Skąd pochodzą kredyty tej firmy i na co zostały wykorzystane.",
+      "actions": [
+        "Doładuj albo ustaw automatyczne doładowanie.",
+        "Zobacz kandydatów, dla których kredyty są zarezerwowane.",
+        "Otwórz fakturę dowolnego doładowania."
+      ],
+      "tips": [
+        "Kredyty kandydata są rezerwowane przy zaproszeniu, pobierane, gdy odpowie, i zwracane, jeśli nie odpowie.",
+        "Tę stronę widzą tylko właściciele i administratorzy."
+      ]
     }
+  },
+  "companyBilling": {
+    "reservedTab": "Zarezerwowane ({count})",
+    "reservedEmpty": "Żaden kandydat nie ma zarezerwowanych kredytów.",
+    "reservedNote": "Zaproszeni kandydaci, którzy jeszcze nie skończyli. Ich kredyty są zarezerwowane: zostaną pobrane, gdy odpowiedzą, i zwrócone, jeśli nie odpowiedzą.",
+    "history": "Historia",
+    "empty": "Nie było jeszcze żadnych ruchów kredytów.",
+    "reasons": {
+      "welcome": "Prezent powitalny",
+      "topup": "Doładowanie",
+      "candidate": "Kandydat",
+      "refund": "Zwrot",
+      "chargeback": "Obciążenie zwrotne",
+      "chargeback_reversed": "Cofnięte obciążenie zwrotne",
+      "referral": "Nagroda za polecenie",
+      "referral_reversed": "Cofnięta nagroda za polecenie"
+    },
+    "automatic": "Automatyczne doładowanie",
+    "invoice": "Faktura",
+    "invoiceFailed": "Nie udało się otworzyć faktury. Spróbuj ponownie.",
+    "deletedCandidate": "Usunięty kandydat"
   }
 }

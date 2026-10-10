@@ -4,12 +4,23 @@ import { useTranslations } from "next-intl"
 
 import { TabNav } from "@/components/tab-nav"
 
+export type CompanyTab =
+  | "interviews"
+  | "templates"
+  | "members"
+  | "integrations"
+  | "referrals"
+  | "billing"
+
+/** A company's tabs; billing only for owners and admins (`canEdit`), who top up. */
 export function CompanyNav({
   companyId,
   current,
+  canEdit,
 }: {
   companyId: string
-  current: "interviews" | "templates" | "members" | "integrations" | "referrals"
+  current: CompanyTab
+  canEdit: boolean
 }) {
   const t = useTranslations("company")
   const items = [
@@ -33,12 +44,21 @@ export function CompanyNav({
       href: `/companies/${companyId}/integrations`,
       label: t("integrations"),
     },
+    ...(canEdit
+      ? [
+          {
+            id: "billing",
+            href: `/companies/${companyId}/billing`,
+            label: t("billing"),
+          },
+        ]
+      : []),
     {
       id: "referrals",
       href: `/companies/${companyId}/referrals`,
       label: t("referrals"),
     },
-  ] as const
+  ]
 
   return <TabNav items={items} current={current} />
 }

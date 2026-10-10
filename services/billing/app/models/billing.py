@@ -83,7 +83,8 @@ class Hold(Base):
 
 class Entry(Base):
     """One movement of credits: a gift or top-up (positive), or a charge (negative). The key
-    makes a repeated call count once. Together they're the wallet's history."""
+    makes a repeated call count once. Together they're the wallet's history. A top-up, refund or
+    chargeback also keeps the money it moved, and a top-up whether it was automatic."""
 
     __tablename__ = "entries"
     __table_args__ = (UniqueConstraint("key", name="uq_entries_key"),)
@@ -94,6 +95,10 @@ class Entry(Base):
     owner_id: Mapped[str] = mapped_column(String(128), index=True)
     amount: Mapped[int]
     reason: Mapped[str] = mapped_column(String(64))
+    # In the currency's minor units, tax included, as Paddle gives it; None when not known.
+    total: Mapped[str | None] = mapped_column(Text)
+    currency: Mapped[str | None] = mapped_column(String(3))
+    automatic: Mapped[bool] = mapped_column(default=False, server_default="false")
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )

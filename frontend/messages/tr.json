@@ -280,7 +280,8 @@
     "topUpTitle": "Kredi yükle: {name}",
     "topUpNote": "Her yükleme tam sayıda aday satın alır; büyük yüklemelerde aday başına maliyet düşer. Krediler hiç sona ermez.",
     "candidates": "{count, plural, one {# aday} other {# aday}}",
-    "each": "tanesi {price}"
+    "each": "tanesi {price}",
+    "reserved": "{count, plural, one {# kredi ayrıldı} other {# kredi ayrıldı}}"
   },
   "deleteAccount": {
     "title": "Hesabınız silinsin mi?",
@@ -439,6 +440,7 @@
     "team": "Ekip",
     "integrations": "Entegrasyonlar",
     "referrals": "Davetler",
+    "billing": "Faturalandırma",
     "new": "Yeni şirket",
     "name": "Şirket adı",
     "create": "Oluştur",
@@ -1780,6 +1782,40 @@
         "Davet ettiğiniz şirket, tutar ne olursa olsun ilk kredi yüklemesini yaptığında ikiniz de kredi kazanırsınız.",
         "Krediler bu şirkete gider ve hiç sona ermez."
       ]
+    },
+    "billing": {
+      "title": "Faturalandırma",
+      "text": "Bu şirketin kredilerinin nereden geldiği ve nereye gittiği.",
+      "actions": [
+        "Kredi yükleyin veya otomatik yüklemeyi ayarlayın.",
+        "Kredileri ayrılmış adayları görün.",
+        "Herhangi bir yüklemenin faturasını açın."
+      ],
+      "tips": [
+        "Bir adayın kredileri davet edildiğinde ayrılır, yanıt verdiğinde düşülür, vermezse iade edilir.",
+        "Bu sayfayı yalnızca sahipler ve yöneticiler görür."
+      ]
     }
+  },
+  "companyBilling": {
+    "reservedTab": "Ayrılan ({count})",
+    "reservedEmpty": "Kredisi ayrılmış aday yok.",
+    "reservedNote": "Davet edilen ve henüz bitirmemiş adaylar. Kredileri ayrıldı: yanıt verdiklerinde düşülür, vermezlerse iade edilir.",
+    "history": "Geçmiş",
+    "empty": "Henüz kredi hareketi yok.",
+    "reasons": {
+      "welcome": "Hoş geldin hediyesi",
+      "topup": "Kredi yükleme",
+      "candidate": "Aday",
+      "refund": "İade",
+      "chargeback": "Ters ibraz",
+      "chargeback_reversed": "Ters ibraz geri alındı",
+      "referral": "Davet ödülü",
+      "referral_reversed": "Davet ödülü geri alındı"
+    },
+    "automatic": "Otomatik yükleme",
+    "invoice": "Fatura",
+    "invoiceFailed": "Fatura açılamadı. Lütfen tekrar deneyin.",
+    "deletedCandidate": "Silinmiş bir aday"
   }
 }

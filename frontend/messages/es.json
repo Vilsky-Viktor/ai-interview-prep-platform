@@ -280,7 +280,8 @@
     "topUpTitle": "Recargar: {name}",
     "topUpNote": "Cada recarga compra candidatos completos; las más grandes cuestan menos por candidato. Los créditos no caducan.",
     "candidates": "{count, plural, one {# candidato} other {# candidatos}}",
-    "each": "{price} cada uno"
+    "each": "{price} cada uno",
+    "reserved": "{count, plural, one {# crédito reservado} other {# créditos reservados}}"
   },
   "deleteAccount": {
     "title": "¿Eliminar tu cuenta?",
@@ -439,6 +440,7 @@
     "team": "Equipo",
     "integrations": "Integraciones",
     "referrals": "Recomendaciones",
+    "billing": "Facturación",
     "new": "Nueva empresa",
     "name": "Nombre de la empresa",
     "create": "Crear",
@@ -1781,6 +1783,40 @@
         "Las dos empresas reciben créditos cuando la invitada hace su primera recarga, de cualquier importe.",
         "Los créditos van a esta empresa y nunca caducan."
       ]
+    },
+    "billing": {
+      "title": "Facturación",
+      "text": "De dónde vinieron los créditos de esta empresa y en qué se usaron.",
+      "actions": [
+        "Recarga o configura la recarga automática.",
+        "Consulta los candidatos cuyos créditos están reservados.",
+        "Abre la factura de cualquier recarga."
+      ],
+      "tips": [
+        "Los créditos de un candidato se reservan al invitarlo, se cobran cuando responde y se devuelven si no lo hace.",
+        "Solo los propietarios y administradores ven esta página."
+      ]
     }
+  },
+  "companyBilling": {
+    "reservedTab": "Reservados ({count})",
+    "reservedEmpty": "Ningún candidato tiene créditos reservados.",
+    "reservedNote": "Candidatos invitados que aún no han terminado. Sus créditos están reservados: se cobran cuando responden y se devuelven si no lo hacen.",
+    "history": "Historial",
+    "empty": "Todavía no se han movido créditos.",
+    "reasons": {
+      "welcome": "Regalo de bienvenida",
+      "topup": "Recarga",
+      "candidate": "Candidato",
+      "refund": "Reembolso",
+      "chargeback": "Contracargo",
+      "chargeback_reversed": "Contracargo revertido",
+      "referral": "Recompensa por recomendación",
+      "referral_reversed": "Recompensa por recomendación retirada"
+    },
+    "automatic": "Recarga automática",
+    "invoice": "Factura",
+    "invoiceFailed": "No se pudo abrir la factura. Inténtalo de nuevo.",
+    "deletedCandidate": "Un candidato eliminado"
   }
 }

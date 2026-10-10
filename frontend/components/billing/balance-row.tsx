@@ -8,19 +8,23 @@ import { TopUpDialog } from "@/components/billing/top-up-dialog"
 import { useCountUp } from "@/hooks/use-count-up"
 import type { Catalog } from "@/types/billing"
 
-/** One balance on the top-up page: whose it is, how much, and a top-up next to it. */
+/** One balance on the top-up page: whose it is, how much, and a top-up next to it. With
+ * `reserved` (the billing page, under the company's own name), the credits set aside for
+ * candidates who haven't finished instead of the name. */
 export function BalanceRow({
   catalog,
   name,
   available,
   low,
   companyId,
+  reserved,
 }: {
   catalog: Catalog
   name: string
   available: number
   low: boolean
   companyId: string
+  reserved?: number
 }) {
   const t = useTranslations("billing")
   const locale = useLocale()
@@ -30,7 +34,14 @@ export function BalanceRow({
   return (
     <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 px-6 py-5 max-sm:gap-y-5 max-sm:py-7">
       <div className="min-w-0 flex-1 space-y-1 max-sm:basis-full max-sm:text-center">
-        <p className="truncate text-lg font-medium">{name}</p>
+        {reserved == null && (
+          <p className="truncate text-lg font-medium">{name}</p>
+        )}
+        {!!reserved && (
+          <p className="text-sm text-muted-foreground">
+            {t("reserved", { count: reserved })}
+          </p>
+        )}
         {low && (
           <p className="text-sm text-amber-600 dark:text-amber-400">
             {t("low")}

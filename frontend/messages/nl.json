@@ -280,7 +280,8 @@
     "topUpTitle": "Opwaarderen: {name}",
     "topUpNote": "Je koopt altijd voor hele kandidaten; hoe groter de opwaardering, hoe lager de prijs per kandidaat. Credits verlopen nooit.",
     "candidates": "{count, plural, one {# kandidaat} other {# kandidaten}}",
-    "each": "{price} per stuk"
+    "each": "{price} per stuk",
+    "reserved": "{count, plural, one {# credit gereserveerd} other {# credits gereserveerd}}"
   },
   "deleteAccount": {
     "title": "Je account verwijderen?",
@@ -439,6 +440,7 @@
     "team": "Team",
     "integrations": "Integraties",
     "referrals": "Doorverwijzingen",
+    "billing": "Facturering",
     "new": "Nieuw bedrijf",
     "name": "Bedrijfsnaam",
     "create": "Aanmaken",
@@ -1777,6 +1779,40 @@
         "Jullie krijgen allebei credits wanneer het uitgenodigde bedrijf voor het eerst opwaardeert, met welk bedrag ook.",
         "De credits gaan naar dit bedrijf en vervallen nooit."
       ]
+    },
+    "billing": {
+      "title": "Facturering",
+      "text": "Waar de credits van dit bedrijf vandaan kwamen en waar ze naartoe gingen.",
+      "actions": [
+        "Waardeer op, of stel automatisch opwaarderen in.",
+        "Bekijk de kandidaten van wie de credits gereserveerd zijn.",
+        "Open de factuur van elke opwaardering."
+      ],
+      "tips": [
+        "De credits van een kandidaat worden gereserveerd bij de uitnodiging, afgeschreven zodra die antwoordt en teruggegeven als dat niet gebeurt.",
+        "Alleen eigenaren en beheerders zien deze pagina."
+      ]
     }
+  },
+  "companyBilling": {
+    "reservedTab": "Gereserveerd ({count})",
+    "reservedEmpty": "Er zijn geen kandidaten met gereserveerde credits.",
+    "reservedNote": "Uitgenodigde kandidaten die nog niet klaar zijn. Hun credits zijn gereserveerd: afgeschreven zodra ze antwoorden, teruggegeven als ze dat niet doen.",
+    "history": "Geschiedenis",
+    "empty": "Er zijn nog geen credits bijgekomen of afgegaan.",
+    "reasons": {
+      "welcome": "Welkomstcadeau",
+      "topup": "Opwaardering",
+      "candidate": "Kandidaat",
+      "refund": "Terugbetaling",
+      "chargeback": "Terugboeking",
+      "chargeback_reversed": "Terugboeking teruggedraaid",
+      "referral": "Doorverwijsbeloning",
+      "referral_reversed": "Doorverwijsbeloning ingetrokken"
+    },
+    "automatic": "Automatisch opwaarderen",
+    "invoice": "Factuur",
+    "invoiceFailed": "De factuur kon niet worden geopend. Probeer het opnieuw.",
+    "deletedCandidate": "Een verwijderde kandidaat"
   }
 }

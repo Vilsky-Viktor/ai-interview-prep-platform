@@ -30,6 +30,12 @@ class Reason:
     REFERRAL_REVERSED = "referral_reversed"
 
 
+# Paddle's adjustments of a top-up.
+ADJUSTMENTS = (Reason.REFUND, Reason.CHARGEBACK, Reason.CHARGEBACK_REVERSED)
+
+# A candidate's hold and charge are keyed by this and the key companies gives the invite.
+CANDIDATE_PREFIX = "candidate:"
+
 # Names the welcome gift (helpers/gifts.py): a person's first company.
 WELCOME_GIFT = "company"
 

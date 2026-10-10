@@ -172,8 +172,12 @@ async def add(
     amount: int,
     key: str,
     reason: str,
+    total: str | None = None,
+    currency: str | None = None,
+    automatic: bool = False,
 ) -> bool:
-    """Records one movement and applies it to the balance, once per key."""
+    """Records one movement and applies it to the balance, once per key; a top-up, refund or
+    chargeback with the money it moved."""
     new = await session.scalar(
         insert(Entry)
         .values(
@@ -182,6 +186,9 @@ async def add(
             owner_id=owner_id,
             amount=amount,
             reason=reason,
+            total=total,
+            currency=currency,
+            automatic=automatic,
         )
         .on_conflict_do_nothing()
         .returning(Entry.id)

@@ -13,7 +13,7 @@ from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
 from app.routers import companies as companies_route
 from app.services.access import can_edit, is_owner
-from app.storage import companies, interviews, invites, members
+from app.storage import companies, credit_invites, interviews, invites, members
 from tests.unit import fake_candidates
 
 COMPANY_ID = uuid.uuid4()
@@ -118,9 +118,13 @@ def test_a_viewer_reads_the_company_without_verifying_it(client, viewer, monkeyp
     async def fake_list(company_id, offset, limit):
         return viewer.members
 
+    async def fake_holding(company_id):
+        return 0
+
     monkeypatch.setattr(interviews, "counts", fake_counts)
     monkeypatch.setattr(companies_route, "verify_by_email", fake_verify)
     monkeypatch.setattr(billing, "company_credits", fake_credits)
+    monkeypatch.setattr(credit_invites, "count_holding", fake_holding)
     monkeypatch.setattr(members, "list_for_company", fake_list)
 
     company = client.get(COMPANY)

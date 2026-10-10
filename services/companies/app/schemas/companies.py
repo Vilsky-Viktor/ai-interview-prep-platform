@@ -93,6 +93,10 @@ class ReferralOut(BaseModel):
 
 class CompanyCreditsOut(BaseModel):
     available: int
+    # Set aside for candidates invited who haven't finished.
+    reserved: int = 0
+    # How many candidates those are.
+    reserved_candidates: int = 0
     low: bool
     # Candidates the available credits pay for (billing works it out).
     candidates: int = 0

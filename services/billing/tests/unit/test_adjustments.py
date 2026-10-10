@@ -18,7 +18,7 @@ def moved(monkeypatch):
     taken = {}
 
     async def take_back_credits(
-        owner_type, owner_id, amount, transaction_id, adjustment_id, reason
+        owner_type, owner_id, amount, transaction_id, adjustment_id, reason, total, currency
     ):
         calls.append((owner_id, amount, f"adjustment:{transaction_id}:{adjustment_id}", reason))
         taken[transaction_id] = taken.get(transaction_id, 0) - amount
@@ -44,6 +44,25 @@ def test_an_approved_refund_takes_the_credits_back(moved):
         ("acme", -1_000, "adjustment:txn_01:adj_01", "refund"),
         ("referral taken back", "txn_01"),
     ]
+
+
+def test_a_refund_keeps_the_money_it_returned(monkeypatch):
+    kept = []
+
+    async def bought(transaction_id):
+        return ("company", "acme", 1_000, "1000")
+
+    async def take_back_credits(owner_type, owner_id, amount, *rest):
+        kept.append(rest[-2:])
+
+        return 0
+
+    monkeypatch.setattr(purchases, "for_transaction", bought)
+    monkeypatch.setattr(purchases, "take_back", take_back_credits)
+
+    asyncio.run(webhooks.handle(adjustment(total="250")))
+
+    assert kept == [("250", "USD")]
 
 
 def test_a_partial_refund_takes_back_its_share(moved):

@@ -6,7 +6,7 @@ import pytest
 from app.constants.products import WEBHOOK_TOLERANCE_SECONDS
 from app.helpers.paddle import signature_valid
 from app.services import webhooks
-from app.storage import purchases, referrals
+from app.storage import auto_top_ups, purchases, referrals
 from tests.unit.paddle_events import SECRET, completed, signed
 
 
@@ -57,6 +57,7 @@ def granted(monkeypatch):
         total,
         currency,
         now,
+        automatic=False,
     ):
         calls.append((transaction_id, product, quantity, credits, owner_id, buyer_id))
 
@@ -75,6 +76,39 @@ def test_a_completed_transaction_grants_what_its_prices_bought(granted):
     asyncio.run(webhooks.handle(completed(quantity=2)))
 
     assert granted == [("txn_01", "topup_30", 2, 6_000, "acme", "ann")]
+
+
+@pytest.fixture
+def money(monkeypatch):
+    """What each grant keeps on its history entry: the money paid and whether it was automatic."""
+    kept = []
+
+    async def fake_grant(*args):
+        kept.append(args[7:9] + args[10:])
+
+        return True
+
+    async def no_referral(owner_type, owner_id, transaction_id):
+        return None
+
+    async def owner_of(subscription_id):
+        return ("company", "acme")
+
+    monkeypatch.setattr(purchases, "grant", fake_grant)
+    monkeypatch.setattr(referrals, "reward", no_referral)
+    monkeypatch.setattr(auto_top_ups, "owner_of", owner_of)
+
+    return kept
+
+
+def test_a_top_up_keeps_what_it_cost_and_an_automatic_one_says_so(money):
+    automatic = completed()
+    automatic["data"]["subscription_id"] = "sub_01"
+
+    asyncio.run(webhooks.handle(completed()))
+    asyncio.run(webhooks.handle(automatic))
+
+    assert money == [("5000", "USD", False), ("5000", "USD", True)]
 
 
 @pytest.mark.parametrize(

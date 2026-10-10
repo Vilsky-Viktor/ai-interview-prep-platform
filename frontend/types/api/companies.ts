@@ -163,6 +163,66 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/companies/{company_id}/billing/history": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get History
+     * @description Every movement of the company's credits, newest first, a page at a time.
+     */
+    get: operations["get_history_companies__company_id__billing_history_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/companies/{company_id}/billing/reserved": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Reserved
+     * @description Candidates invited who haven't finished, whose credits are set aside, newest first.
+     */
+    get: operations["get_reserved_companies__company_id__billing_reserved_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/companies/{company_id}/billing/invoice": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Invoice
+     * @description A temporary link to the invoice of one of the company's top-ups.
+     */
+    get: operations["get_invoice_companies__company_id__billing_invoice_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/members": {
     parameters: {
       query?: never
@@ -1843,6 +1903,11 @@ export interface components {
     CompanyCreditsOut: {
       /** Available */
       available: number
+      /**
+       * Reserved
+       * @default 0
+       */
+      reserved: number
       /** Low */
       low: boolean
       /**
@@ -1911,6 +1976,28 @@ export interface components {
       /** Title */
       title: string
     }
+    /**
+     * CreditCandidateOut
+     * @description The candidate whose invite set credits aside or was charged for, and their interview.
+     */
+    CreditCandidateOut: {
+      /**
+       * Invite Id
+       * Format: uuid
+       */
+      invite_id: string
+      /**
+       * Interview Id
+       * Format: uuid
+       */
+      interview_id: string
+      /** Email */
+      email: string
+      /** Name */
+      name: string | null
+      /** Interview Title */
+      interview_title: string | null
+    }
     /** DeclineIn */
     DeclineIn: {
       /**
@@ -1976,6 +2063,41 @@ export interface components {
     HTTPValidationError: {
       /** Detail */
       detail?: components["schemas"]["ValidationError"][]
+    }
+    /**
+     * HistoryEntryOut
+     * @description One movement of the company's credits: `amount` is signed, `reason` says what it was.
+     *     `total` (minor units, tax included) and `currency` are the money a top-up cost or a refund
+     *     or chargeback moved, when known. `invoice_id` is the top-up's transaction, whose invoice
+     *     can be opened. A candidate's charge names the candidate, or `candidate_deleted` when their
+     *     invite is gone.
+     */
+    HistoryEntryOut: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string
+      /** Amount */
+      amount: number
+      /** Reason */
+      reason: string
+      /**
+       * Created At
+       * Format: date-time
+       */
+      created_at: string
+      /** Total */
+      total: string | null
+      /** Currency */
+      currency: string | null
+      /** Automatic */
+      automatic: boolean
+      /** Invoice Id */
+      invoice_id: string | null
+      candidate: components["schemas"]["CreditCandidateOut"] | null
+      /** Candidate Deleted */
+      candidate_deleted: boolean
     }
     /** InterviewBriefOut */
     InterviewBriefOut: {
@@ -2179,6 +2301,14 @@ export interface components {
     InvitedCompaniesOut: {
       /** Company Ids */
       company_ids: string[]
+    }
+    /**
+     * InvoiceOut
+     * @description A temporary link to the invoice PDF.
+     */
+    InvoiceOut: {
+      /** Url */
+      url: string
     }
     /**
      * LineProblemOut
@@ -3160,6 +3290,111 @@ export interface operations {
           [name: string]: unknown
         }
         content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_history_companies__company_id__billing_history_get: {
+    parameters: {
+      query?: {
+        /** @description Number of items to skip */
+        offset?: number
+        /** @description Number of items to return, up to 100 */
+        limit?: number
+      }
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HistoryEntryOut"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_reserved_companies__company_id__billing_reserved_get: {
+    parameters: {
+      query?: {
+        /** @description Number of items to skip */
+        offset?: number
+        /** @description Number of items to return, up to 100 */
+        limit?: number
+      }
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["CreditCandidateOut"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_invoice_companies__company_id__billing_invoice_get: {
+    parameters: {
+      query: {
+        transaction_id: string
+      }
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["InvoiceOut"]
+        }
       }
       /** @description Validation Error */
       422: {

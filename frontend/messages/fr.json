@@ -280,7 +280,8 @@
     "topUpTitle": "Recharger : {name}",
     "topUpNote": "Chaque recharge couvre un nombre entier de candidats ; les plus grosses coûtent moins cher par candidat. Les crédits n'expirent jamais.",
     "candidates": "{count, plural, one {# candidat} other {# candidats}}",
-    "each": "{price} chacun"
+    "each": "{price} chacun",
+    "reserved": "{count, plural, one {# crédit réservé} other {# crédits réservés}}"
   },
   "deleteAccount": {
     "title": "Supprimer votre compte ?",
@@ -439,6 +440,7 @@
     "team": "Équipe",
     "integrations": "Intégrations",
     "referrals": "Parrainage",
+    "billing": "Facturation",
     "new": "Nouvelle entreprise",
     "name": "Nom de l'entreprise",
     "create": "Créer",
@@ -1781,6 +1783,40 @@
         "Vous recevez chacun des crédits lors de la première recharge de l'entreprise invitée, quel que soit le montant.",
         "Les crédits vont à cette entreprise et n'expirent jamais."
       ]
+    },
+    "billing": {
+      "title": "Facturation",
+      "text": "D'où viennent les crédits de cette entreprise et où ils sont allés.",
+      "actions": [
+        "Rechargez, ou configurez la recharge automatique.",
+        "Consultez les candidats dont les crédits sont réservés.",
+        "Ouvrez la facture de n'importe quelle recharge."
+      ],
+      "tips": [
+        "Les crédits d'un candidat sont réservés à l'invitation, débités dès qu'il répond et rendus s'il ne répond pas.",
+        "Seuls les propriétaires et admins voient cette page."
+      ]
     }
+  },
+  "companyBilling": {
+    "reservedTab": "Réservés ({count})",
+    "reservedEmpty": "Aucun candidat ne bloque de crédits.",
+    "reservedNote": "Candidats invités qui n'ont pas encore terminé. Leurs crédits sont réservés : débités dès qu'ils répondent, rendus s'ils ne répondent pas.",
+    "history": "Historique",
+    "empty": "Aucun mouvement de crédits pour l'instant.",
+    "reasons": {
+      "welcome": "Cadeau de bienvenue",
+      "topup": "Recharge",
+      "candidate": "Candidat",
+      "refund": "Remboursement",
+      "chargeback": "Rétrofacturation",
+      "chargeback_reversed": "Rétrofacturation annulée",
+      "referral": "Récompense de parrainage",
+      "referral_reversed": "Récompense de parrainage annulée"
+    },
+    "automatic": "Recharge automatique",
+    "invoice": "Facture",
+    "invoiceFailed": "Impossible d'ouvrir la facture. Veuillez réessayer.",
+    "deletedCandidate": "Un candidat supprimé"
   }
 }

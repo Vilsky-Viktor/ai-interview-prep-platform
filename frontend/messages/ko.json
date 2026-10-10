@@ -280,7 +280,8 @@
     "topUpTitle": "충전: {name}",
     "topUpNote": "충전은 지원자 단위로 구매하며, 금액이 클수록 지원자당 비용이 낮아집니다. 크레딧은 만료되지 않습니다.",
     "candidates": "{count, plural, other {지원자 #명}}",
-    "each": "1명당 {price}"
+    "each": "1명당 {price}",
+    "reserved": "{count, plural, other {# 크레딧 예약됨}}"
   },
   "deleteAccount": {
     "title": "계정을 삭제할까요?",
@@ -439,6 +440,7 @@
     "team": "팀",
     "integrations": "연동",
     "referrals": "추천",
+    "billing": "결제",
     "new": "새 회사",
     "name": "회사 이름",
     "create": "만들기",
@@ -1772,6 +1774,40 @@
         "초대한 회사가 금액에 상관없이 첫 충전을 하면 양쪽 모두 크레딧을 받습니다.",
         "크레딧은 이 회사에 지급되며 만료되지 않습니다."
       ]
+    },
+    "billing": {
+      "title": "결제",
+      "text": "이 회사의 크레딧이 어디서 들어와 어디에 쓰였는지 보여 줍니다.",
+      "actions": [
+        "충전하거나 자동 충전을 설정합니다.",
+        "크레딧이 예약된 지원자를 확인합니다.",
+        "충전 건의 인보이스를 엽니다."
+      ],
+      "tips": [
+        "지원자의 크레딧은 초대할 때 예약되고, 응답하면 차감되며, 응답하지 않으면 반환됩니다.",
+        "이 페이지는 소유자와 관리자만 볼 수 있습니다."
+      ]
     }
+  },
+  "companyBilling": {
+    "reservedTab": "예약됨 ({count})",
+    "reservedEmpty": "크레딧이 예약된 지원자가 없습니다.",
+    "reservedNote": "초대했지만 아직 마치지 않은 지원자입니다. 크레딧은 예약되어 있으며, 응답하면 차감되고 응답하지 않으면 반환됩니다.",
+    "history": "내역",
+    "empty": "아직 크레딧 변동이 없습니다.",
+    "reasons": {
+      "welcome": "가입 선물",
+      "topup": "충전",
+      "candidate": "지원자",
+      "refund": "환불",
+      "chargeback": "지불 거절",
+      "chargeback_reversed": "지불 거절 취소",
+      "referral": "추천 보상",
+      "referral_reversed": "추천 보상 회수"
+    },
+    "automatic": "자동 충전",
+    "invoice": "인보이스",
+    "invoiceFailed": "인보이스를 열지 못했습니다. 다시 시도해 주세요.",
+    "deletedCandidate": "삭제된 지원자"
   }
 }

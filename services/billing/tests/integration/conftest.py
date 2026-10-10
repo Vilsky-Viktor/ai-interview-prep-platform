@@ -92,4 +92,8 @@ def paddle_calls(monkeypatch):
     monkeypatch.setattr(settings, "paddle_price_auto_top_up", "pri_plan")
     monkeypatch.setattr(settings, "paddle_price_topup_30", "pri_30")
 
+    # Only the $30 top-up is on sale, whatever the local settings have.
+    for product in ("topup_150", "topup_250", "topup_1000"):
+        monkeypatch.setattr(settings, f"paddle_price_{product}", "")
+
     return calls

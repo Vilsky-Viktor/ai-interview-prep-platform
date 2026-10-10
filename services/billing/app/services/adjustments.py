@@ -56,7 +56,14 @@ async def handle_adjustment(data: dict) -> None:
 
     # Several partial refunds of the whole top-up count as a full one.
     taken = await purchases.take_back(
-        owner_type, owner_id, sign * credits, data["transaction_id"], data["id"], reason
+        owner_type,
+        owner_id,
+        sign * credits,
+        data["transaction_id"],
+        data["id"],
+        reason,
+        data["totals"]["total"],
+        data.get("currency_code"),
     )
 
     # A chargeback reversed gives the credits back.

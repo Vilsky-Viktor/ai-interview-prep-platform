@@ -27,6 +27,7 @@ def adjustment(action="refund", status="approved", total="1000", adjustment_id="
             "action": action,
             "status": status,
             "transaction_id": "txn_01",
+            "currency_code": "USD",
             "totals": {"total": total, "currency_code": "USD"},
         },
     }

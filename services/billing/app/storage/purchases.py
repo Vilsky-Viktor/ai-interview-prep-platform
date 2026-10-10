@@ -22,6 +22,7 @@ async def grant(
     total: str,
     currency: str,
     now: datetime,
+    automatic: bool = False,
 ) -> bool:
     """Adds a paid top-up once per product of a transaction, however often Paddle retries.
     `credits` is what the whole line buys; `quantity` is kept for the accounts."""
@@ -56,6 +57,9 @@ async def grant(
             credits,
             f"{transaction_id}:{product}",
             Reason.TOPUP,
+            total,
+            currency,
+            automatic,
         )
         await session.commit()
 
@@ -90,6 +94,8 @@ async def take_back(
     transaction_id: str,
     adjustment_id: str,
     reason: str,
+    total: str | None = None,
+    currency: str | None = None,
 ) -> int:
     """Moves an adjustment's credits once, whatever the balance (a refund or chargeback may leave
     it negative), and returns how many credits the transaction's adjustments have taken back so
@@ -111,7 +117,16 @@ async def take_back(
 
         if counted is None:
             await ensure(session, owner_type, owner_id)
-            await add(session, owner_type, owner_id, amount, prefix + adjustment_id, reason)
+            await add(
+                session,
+                owner_type,
+                owner_id,
+                amount,
+                prefix + adjustment_id,
+                reason,
+                total,
+                currency,
+            )
 
         taken = await session.scalar(
             select(func.coalesce(-func.sum(Entry.amount), 0)).where(
@@ -121,6 +136,18 @@ async def take_back(
         await session.commit()
 
     return taken
+
+
+async def owns(owner_type: str, owner_id: str, transaction_id: str) -> bool:
+    """Whether the transaction topped up this wallet."""
+    query = select(Purchase.id).where(
+        Purchase.transaction_id == transaction_id,
+        Purchase.owner_type == owner_type,
+        Purchase.owner_id == owner_id,
+    )
+
+    async with Session() as session:
+        return await session.scalar(query.limit(1)) is not None
 
 
 async def purchases_of(user_id: str) -> list[Purchase]:

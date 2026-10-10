@@ -280,7 +280,8 @@
     "topUpTitle": "Laadi juurde: {name}",
     "topUpNote": "Iga juurdelaadimine ostab terve arvu kandidaate; suuremate puhul on kandidaat odavam. Krediidid ei aegu.",
     "candidates": "{count, plural, one {# kandidaat} other {# kandidaati}}",
-    "each": "{price} kandidaadi kohta"
+    "each": "{price} kandidaadi kohta",
+    "reserved": "{count, plural, one {# krediit broneeritud} other {# krediiti broneeritud}}"
   },
   "deleteAccount": {
     "title": "Kustutada sinu konto?",
@@ -439,6 +440,7 @@
     "team": "Meeskond",
     "integrations": "Integratsioonid",
     "referrals": "Soovitused",
+    "billing": "Arveldus",
     "new": "Uus ettevõte",
     "name": "Ettevõtte nimi",
     "create": "Loo",
@@ -1785,6 +1787,40 @@
         "Mõlemad saavad krediiti, kui kutsutud ettevõte teeb esimese juurdelaadimise mis tahes summas.",
         "Krediit läheb sellele ettevõttele ja ei aegu kunagi."
       ]
+    },
+    "billing": {
+      "title": "Arveldus",
+      "text": "Kust selle ettevõtte krediidid tulid ja kuhu need läksid.",
+      "actions": [
+        "Laadi juurde või seadista automaatne juurdelaadimine.",
+        "Vaata kandidaate, kelle krediidid on broneeritud.",
+        "Ava mis tahes juurdelaadimise arve."
+      ],
+      "tips": [
+        "Kandidaadi krediidid broneeritakse kutsumisel, arvestatakse maha, kui ta vastab, ja antakse tagasi, kui ta ei vasta.",
+        "Seda lehte näevad ainult omanikud ja administraatorid."
+      ]
     }
+  },
+  "companyBilling": {
+    "reservedTab": "Broneeritud ({count})",
+    "reservedEmpty": "Ühelgi kandidaadil pole krediiti broneeritud.",
+    "reservedNote": "Kutsutud kandidaadid, kes pole veel lõpetanud. Nende krediidid on broneeritud: need arvestatakse maha, kui kandidaat vastab, ja antakse tagasi, kui ta ei vasta.",
+    "history": "Ajalugu",
+    "empty": "Krediite pole veel liikunud.",
+    "reasons": {
+      "welcome": "Tervituskingitus",
+      "topup": "Juurdelaadimine",
+      "candidate": "Kandidaat",
+      "refund": "Tagasimakse",
+      "chargeback": "Makse vaidlustamine",
+      "chargeback_reversed": "Makse vaidlustamine tühistatud",
+      "referral": "Soovituspreemia",
+      "referral_reversed": "Soovituspreemia tagasi võetud"
+    },
+    "automatic": "Automaatne juurdelaadimine",
+    "invoice": "Arve",
+    "invoiceFailed": "Arvet ei õnnestunud avada. Proovi uuesti.",
+    "deletedCandidate": "Kustutatud kandidaat"
   }
 }

@@ -1,3 +1,4 @@
+import asyncio
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, Request, status
@@ -23,7 +24,7 @@ from app.schemas.companies import (
 from app.services import company_deletion
 from app.services.access import can_edit, is_owner, require_company, require_editor
 from app.services.verification import verify_by_email
-from app.storage import companies, interviews
+from app.storage import companies, credit_invites, interviews
 
 router = APIRouter(prefix="/companies", tags=["companies"])
 
@@ -121,8 +122,11 @@ async def delete_company(company_id: UUID, user: CurrentUser) -> None:
 async def get_credits(company_id: UUID, user: CurrentUser) -> CompanyCreditsOut:
     """Candidates the company can still invite; any member may see it."""
     await require_company(user, company_id)
+    credits, holding = await asyncio.gather(
+        billing.company_credits(company_id), credit_invites.count_holding(company_id)
+    )
 
-    return CompanyCreditsOut(**await billing.company_credits(company_id))
+    return CompanyCreditsOut(**credits, reserved_candidates=holding)
 
 
 @router.get("/{company_id}/referral")

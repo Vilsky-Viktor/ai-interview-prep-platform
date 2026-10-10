@@ -6,6 +6,7 @@ Companies pay per candidate from a wallet of credits. There's no paid subscripti
 - [Top-ups](#top-ups)
 - [Automatic top-up](#automatic-top-up)
 - [Referrals](#referrals)
+- [A company's billing tab](#a-companys-billing-tab)
 - [Refunds and chargebacks](#refunds-and-chargebacks)
 - [Deleting a company](#deleting-a-company)
 - [Setting up Paddle](#setting-up-paddle)
@@ -61,6 +62,21 @@ On the top-up page, under each balance, "Set up automatic top-up" opens the choi
 - A referrer earns the reward for at most 25 referrals in any 365 days; past that, only the new company gets its 500 credits.
 - If that top-up is refunded in full or charged back, both rewards are taken back.
 
+## A company's billing tab
+
+Owners and admins see a company's **billing** tab, before referrals; viewers don't, and its API answers them with 403.
+
+- At the top: the available credits, the credits reserved for candidates who haven't finished, the automatic top-up setting and the top-up button.
+- Two tabs under it, **history** first and **reserved (N)** beside it (`?tab=reserved`), so a long list of reserved candidates never pushes the history out of sight; only the open tab's list is loaded.
+- **Reserved**: an info card on what reserved credits are, then the candidates invited who haven't finished (invited, undelivered or in progress), each opening the candidate's page. Their count comes with the company's credits (`reserved_candidates`).
+- **History**: every movement of the company's credits, newest first, loading more as you scroll. Each shows the credits it moved (+3,000, −300), what it was and when:
+  - a top-up: what was paid (tax included), whether it was automatic, and its invoice, opened through a temporary Paddle link made on request;
+  - a candidate: the candidate and their test, opening the candidate's page, or "A deleted candidate" when the invite is gone;
+  - a refund, a chargeback, a chargeback reversed: the money it moved;
+  - a referral reward, a referral reward taken back, the welcome gift.
+
+Billing's history entries keep the money a top-up, refund or chargeback moved (`total`, in minor units, and `currency`) and whether a top-up was automatic; entries from before that was kept have the money of their top-up only. Companies' `GET /companies/{id}/billing/history`, `/billing/reserved` and `/billing/invoice?transaction_id=` serve the tab: the history comes from billing's internal `GET /internal/companies/{id}/history`, its candidates are matched to their invites by the key of their credits in one query, and the invoice from `GET /internal/companies/{id}/invoice`, which checks the transaction topped up that company.
+
 ## Refunds and chargebacks
 
 Refunds and chargebacks in Paddle take back the credits they bought.
@@ -82,7 +98,7 @@ Deleting a company deletes its credits: billing's internal `DELETE /internal/com
    | `adjustment.created`, `adjustment.updated` | Refunds and chargebacks, which take credits back |
    | `subscription.created`, `subscription.canceled` | Start and end automatic top-ups |
 
-3. For automatic top-up, create a $0 monthly price (its checkout saves the card) and a server-side API key with permission to read and update subscriptions. Without both, automatic top-up isn't offered.
+3. For automatic top-up, create a $0 monthly price (its checkout saves the card) and a server-side API key with permission to read and update subscriptions, and to read transactions (for invoices on the billing tab). Without both, automatic top-up isn't offered.
 4. Set these in `.env`, then restart billing:
 
    | Setting | Value |

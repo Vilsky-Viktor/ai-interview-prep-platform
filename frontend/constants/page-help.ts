@@ -20,6 +20,7 @@ export const PAGE_HELP_KEYS = [
   "slack",
   "api",
   "referrals",
+  "billing",
 ] as const
 
 // A company's tabs and an interview's tabs, each with its own text.
@@ -29,6 +30,7 @@ export const COMPANY_TAB_HELP = {
   members: "team",
   integrations: "integrations",
   referrals: "referrals",
+  billing: "billing",
 } as const
 
 export const INTERVIEW_TAB_HELP = {

@@ -63,6 +63,7 @@ async def handle_completed(data: dict) -> None:
             data["details"]["totals"]["grand_total"],
             data["currency_code"],
             datetime.now(UTC),
+            subscription_id is not None,
         )
 
         # Paid once (it's idempotent), also on Paddle's retry after a failure right after the

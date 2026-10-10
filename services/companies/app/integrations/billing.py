@@ -145,3 +145,33 @@ async def turn_off_auto_top_up(company_id: UUID, buyer_id: str | None = None) ->
     )
 
     response.raise_for_status()
+
+
+async def company_history(company_id: UUID, offset: int, limit: int) -> list[dict]:
+    """A page of the company's credit movements, newest first."""
+    response = await http.get_client().get(
+        f"{settings.billing_url}/internal/companies/{company_id}/history",
+        params={"offset": offset, "limit": limit},
+        headers=_headers(),
+    )
+
+    response.raise_for_status()
+
+    return response.json()
+
+
+async def company_invoice(company_id: UUID, transaction_id: str) -> str:
+    """A temporary link to the invoice of one of the company's top-ups; billing's 404 for any
+    other transaction reaches the user unchanged."""
+    response = await http.get_client().get(
+        f"{settings.billing_url}/internal/companies/{company_id}/invoice",
+        params={"transaction_id": transaction_id},
+        headers=_headers(),
+    )
+
+    if response.status_code == status.HTTP_404_NOT_FOUND:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, response.json()["detail"])
+
+    response.raise_for_status()
+
+    return response.json()["url"]

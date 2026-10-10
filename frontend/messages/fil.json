@@ -280,7 +280,8 @@
     "topUpTitle": "Mag-top up: {name}",
     "topUpNote": "Bawat top-up ay bumibili ng buong bilang ng aplikante; mas mura bawat aplikante sa mas malalaking top-up. Hindi nag-e-expire ang credits.",
     "candidates": "{count, plural, one {# aplikante} other {# aplikante}}",
-    "each": "{price} bawat isa"
+    "each": "{price} bawat isa",
+    "reserved": "{count, plural, one {# credit ang naka-reserve} other {# credits ang naka-reserve}}"
   },
   "deleteAccount": {
     "title": "Burahin ang iyong account?",
@@ -439,6 +440,7 @@
     "team": "Team",
     "integrations": "Mga integration",
     "referrals": "Referrals",
+    "billing": "Billing",
     "new": "Bagong kumpanya",
     "name": "Pangalan ng kumpanya",
     "create": "Gumawa",
@@ -1785,6 +1787,40 @@
         "Pareho kayong makakakuha ng credits kapag nag-top up sa unang pagkakataon ang kumpanyang inimbitahan mo, anumang halaga.",
         "Napupunta ang credits sa kumpanyang ito at hindi nag-e-expire."
       ]
+    },
+    "billing": {
+      "title": "Billing",
+      "text": "Kung saan nanggaling ang credits ng kumpanyang ito at saan napunta.",
+      "actions": [
+        "Mag-top up, o mag-set up ng awtomatikong top-up.",
+        "Tingnan ang mga aplikanteng may naka-reserve na credits.",
+        "Buksan ang invoice ng anumang top-up."
+      ],
+      "tips": [
+        "Nire-reserve ang credits ng aplikante kapag inimbitahan siya, sinisingil kapag sumagot siya, at ibinabalik kung hindi.",
+        "Ang mga may-ari at admin lang ang nakakakita ng page na ito."
+      ]
     }
+  },
+  "companyBilling": {
+    "reservedTab": "Naka-reserve ({count})",
+    "reservedEmpty": "Walang aplikanteng may naka-reserve na credits.",
+    "reservedNote": "Mga inimbitahang aplikante na hindi pa tapos. Naka-reserve ang credits nila: sisingilin kapag sumagot sila, ibabalik kung hindi.",
+    "history": "History",
+    "empty": "Wala pang galaw ang credits.",
+    "reasons": {
+      "welcome": "Welcome gift",
+      "topup": "Top-up",
+      "candidate": "Aplikante",
+      "refund": "Refund",
+      "chargeback": "Chargeback",
+      "chargeback_reversed": "Binawing chargeback",
+      "referral": "Referral reward",
+      "referral_reversed": "Binawing referral reward"
+    },
+    "automatic": "Awtomatikong top-up",
+    "invoice": "Invoice",
+    "invoiceFailed": "Hindi mabuksan ang invoice. Pakisubukan ulit.",
+    "deletedCandidate": "Isang na-delete na aplikante"
   }
 }

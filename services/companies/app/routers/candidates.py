@@ -13,6 +13,7 @@ from app.constants.invites import (
     EXTRA_TIME_OPTIONS,
     MAX_SEARCH_LENGTH,
     NOT_STARTED,
+    OPEN,
     CandidateFilter,
     CandidateSort,
     InviteStatus,
@@ -190,13 +191,7 @@ async def candidate_scorecard(
         extra_time_options=(
             list(EXTRA_TIME_OPTIONS) if invite.status in NOT_STARTED and can_edit(member) else []
         ),
-        invite_token=(
-            invite.token
-            if invite.status
-            in (InviteStatus.INVITED, InviteStatus.UNDELIVERED, InviteStatus.IN_PROCESS)
-            and can_edit(member)
-            else None
-        ),
+        invite_token=(invite.token if invite.status in OPEN and can_edit(member) else None),
         title=await interview_title(interview),
         company=company.name,
         logo_url=logo_path(company),

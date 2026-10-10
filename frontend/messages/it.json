@@ -280,7 +280,8 @@
     "topUpTitle": "Ricarica: {name}",
     "topUpNote": "Ogni ricarica copre un numero intero di candidati; quelle più grandi costano meno per candidato. I crediti non scadono.",
     "candidates": "{count, plural, one {# candidato} other {# candidati}}",
-    "each": "{price} ciascuno"
+    "each": "{price} ciascuno",
+    "reserved": "{count, plural, one {# credito riservato} other {# crediti riservati}}"
   },
   "deleteAccount": {
     "title": "Eliminare il tuo account?",
@@ -439,6 +440,7 @@
     "team": "Team",
     "integrations": "Integrazioni",
     "referrals": "Referral",
+    "billing": "Fatturazione",
     "new": "Nuova azienda",
     "name": "Nome dell'azienda",
     "create": "Crea",
@@ -1781,6 +1783,40 @@
         "Ricevete entrambi crediti quando l'azienda invitata fa la sua prima ricarica, di qualsiasi importo.",
         "I crediti vanno a questa azienda e non scadono mai."
       ]
+    },
+    "billing": {
+      "title": "Fatturazione",
+      "text": "Da dove sono arrivati i crediti di questa azienda e dove sono andati.",
+      "actions": [
+        "Ricarica, o imposta la ricarica automatica.",
+        "Vedi i candidati i cui crediti sono riservati.",
+        "Apri la fattura di qualsiasi ricarica."
+      ],
+      "tips": [
+        "I crediti di un candidato vengono riservati quando lo inviti, addebitati quando risponde e restituiti se non risponde.",
+        "Solo proprietari e amministratori vedono questa pagina."
+      ]
     }
+  },
+  "companyBilling": {
+    "reservedTab": "Riservati ({count})",
+    "reservedEmpty": "Nessun candidato ha crediti riservati.",
+    "reservedNote": "Candidati invitati che non hanno ancora finito. I loro crediti sono riservati: addebitati quando rispondono, restituiti se non rispondono.",
+    "history": "Cronologia",
+    "empty": "Nessun movimento di crediti finora.",
+    "reasons": {
+      "welcome": "Regalo di benvenuto",
+      "topup": "Ricarica",
+      "candidate": "Candidato",
+      "refund": "Rimborso",
+      "chargeback": "Chargeback",
+      "chargeback_reversed": "Chargeback annullato",
+      "referral": "Premio referral",
+      "referral_reversed": "Premio referral revocato"
+    },
+    "automatic": "Ricarica automatica",
+    "invoice": "Fattura",
+    "invoiceFailed": "Impossibile aprire la fattura. Riprova.",
+    "deletedCandidate": "Un candidato eliminato"
   }
 }

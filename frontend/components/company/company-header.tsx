@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl"
 import type { ReactNode } from "react"
 
 import { BackLink } from "@/components/back-link"
-import { CompanyNav } from "@/components/company/company-nav"
+import { CompanyNav, type CompanyTab } from "@/components/company/company-nav"
 import { LogoPicker } from "@/components/company/logo-picker"
 import { PendingBadge } from "@/components/company/pending-badge"
 import { VerifiedBadge } from "@/components/company/verified-badge"
@@ -35,7 +35,7 @@ export function CompanyHeader({
   websiteDomain: string | null
   verificationStatus: VerificationStatus
   declineReason: string | null
-  current: "interviews" | "templates" | "members" | "integrations" | "referrals"
+  current: CompanyTab
   action?: ReactNode
   // Owners and admins change the logo, name and website; viewers only see them.
   canEdit: boolean
@@ -101,7 +101,7 @@ export function CompanyHeader({
           </div>
         )}
       </div>
-      <CompanyNav companyId={companyId} current={current} />
+      <CompanyNav companyId={companyId} current={current} canEdit={canEdit} />
     </div>
   )
 }

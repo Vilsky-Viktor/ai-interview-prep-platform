@@ -150,6 +150,46 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/internal/companies/{company_id}/history": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Company History
+     * @description Every movement of the company's credits, newest first.
+     */
+    get: operations["company_history_internal_companies__company_id__history_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/companies/{company_id}/invoice": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Company Invoice
+     * @description The invoice of one of the company's top-ups; 404 for anyone else's transaction.
+     */
+    get: operations["company_invoice_internal_companies__company_id__invoice_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/internal/companies/credits": {
     parameters: {
       query?: never
@@ -164,6 +204,27 @@ export interface paths {
      * @description Several companies' balances at once, for the top-up page.
      */
     post: operations["companies_credits_internal_companies_credits_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/companies/low": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Low Companies
+     * @description Notifications, for its reminders: companies running low on credits that no automatic
+     *     top-up refills.
+     */
+    get: operations["low_companies_internal_companies_low_get"]
+    put?: never
+    post?: never
     delete?: never
     options?: never
     head?: never
@@ -215,13 +276,13 @@ export interface paths {
       path?: never
       cookie?: never
     }
+    get?: never
+    put?: never
     /**
      * Export User
      * @description What the user bought for their companies.
      */
-    get: operations["export_user_internal_users__user_id__export_get"]
-    put?: never
-    post?: never
+    post: operations["export_user_internal_users__user_id__export_post"]
     delete?: never
     options?: never
     head?: never
@@ -354,6 +415,11 @@ export interface components {
       available: number
       /** Low */
       low: boolean
+      /**
+       * Candidates
+       * @default 0
+       */
+      candidates: number
     }
     /**
      * CandidatePriceOut
@@ -409,6 +475,58 @@ export interface components {
     HTTPValidationError: {
       /** Detail */
       detail?: components["schemas"]["ValidationError"][]
+    }
+    /**
+     * HistoryEntryOut
+     * @description One movement of a wallet's credits. `total` (minor units, tax included) and `currency`
+     *     are what a top-up cost or an adjustment moved, when known; `transaction_id` is the Paddle
+     *     transaction of a top-up or adjustment, and `hold_key` the key of a candidate's credits.
+     */
+    HistoryEntryOut: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string
+      /** Amount */
+      amount: number
+      /** Reason */
+      reason: string
+      /**
+       * Created At
+       * Format: date-time
+       */
+      created_at: string
+      /** Total */
+      total: string | null
+      /** Currency */
+      currency: string | null
+      /** Automatic */
+      automatic: boolean
+      /** Transaction Id */
+      transaction_id: string | null
+      /** Hold Key */
+      hold_key: string | null
+    }
+    /**
+     * InvoiceOut
+     * @description A temporary link to the transaction's invoice PDF.
+     */
+    InvoiceOut: {
+      /** Url */
+      url: string
+    }
+    /** LowCompaniesOut */
+    LowCompaniesOut: {
+      /** Companies */
+      companies: components["schemas"]["LowCompanyOut"][]
+    }
+    /** LowCompanyOut */
+    LowCompanyOut: {
+      /** Company Id */
+      company_id: string
+      /** Available */
+      available: number
     }
     /** OwnersIn */
     OwnersIn: {
@@ -727,6 +845,75 @@ export interface operations {
       }
     }
   }
+  company_history_internal_companies__company_id__history_get: {
+    parameters: {
+      query?: {
+        /** @description Number of items to skip */
+        offset?: number
+        /** @description Number of items to return, up to 100 */
+        limit?: number
+      }
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HistoryEntryOut"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  company_invoice_internal_companies__company_id__invoice_get: {
+    parameters: {
+      query: {
+        transaction_id: string
+      }
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["InvoiceOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
   companies_credits_internal_companies_credits_post: {
     parameters: {
       query?: never
@@ -758,6 +945,26 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  low_companies_internal_companies_low_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["LowCompaniesOut"]
         }
       }
     }
@@ -820,7 +1027,7 @@ export interface operations {
       }
     }
   }
-  export_user_internal_users__user_id__export_get: {
+  export_user_internal_users__user_id__export_post: {
     parameters: {
       query?: never
       header?: never

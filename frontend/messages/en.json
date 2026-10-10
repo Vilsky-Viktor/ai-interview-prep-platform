@@ -280,7 +280,8 @@
     "topUpTitle": "Top up: {name}",
     "topUpNote": "Each top-up buys whole candidates; larger ones cost less per candidate. Credits never expire.",
     "candidates": "{count, plural, one {# candidate} other {# candidates}}",
-    "each": "{price} each"
+    "each": "{price} each",
+    "reserved": "{count, plural, one {# credit reserved} other {# credits reserved}}"
   },
   "deleteAccount": {
     "title": "Delete your account?",
@@ -439,6 +440,7 @@
     "team": "Team",
     "integrations": "Integrations",
     "referrals": "Referrals",
+    "billing": "Billing",
     "new": "New company",
     "name": "Company name",
     "create": "Create",
@@ -1781,6 +1783,40 @@
         "You both get credits when the company you invited makes its first top-up, of any amount.",
         "Credits go to this company and never expire."
       ]
+    },
+    "billing": {
+      "title": "Billing",
+      "text": "Where this company's credits came from and where they went.",
+      "actions": [
+        "Top up, or set up automatic top-ups.",
+        "See the candidates whose credits are reserved.",
+        "Open the invoice of any top-up."
+      ],
+      "tips": [
+        "A candidate's credits are reserved when they're invited, charged once they answer, and given back if they don't.",
+        "Only owners and admins see this page."
+      ]
     }
+  },
+  "companyBilling": {
+    "reservedTab": "Reserved ({count})",
+    "reservedEmpty": "No candidates are holding credits.",
+    "reservedNote": "Candidates invited who haven't finished yet. Their credits are reserved: charged once they answer, given back if they don't.",
+    "history": "History",
+    "empty": "No credits have moved yet.",
+    "reasons": {
+      "welcome": "Welcome gift",
+      "topup": "Top-up",
+      "candidate": "Candidate",
+      "refund": "Refund",
+      "chargeback": "Chargeback",
+      "chargeback_reversed": "Chargeback reversed",
+      "referral": "Referral reward",
+      "referral_reversed": "Referral reward taken back"
+    },
+    "automatic": "Automatic top-up",
+    "invoice": "Invoice",
+    "invoiceFailed": "Couldn't open the invoice. Please try again.",
+    "deletedCandidate": "A deleted candidate"
   }
 }

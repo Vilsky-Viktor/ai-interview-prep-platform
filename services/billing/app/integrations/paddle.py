@@ -48,3 +48,14 @@ async def subscription_status(subscription_id: str) -> str:
     response.raise_for_status()
 
     return response.json()["data"]["status"]
+
+
+async def invoice_url(transaction_id: str) -> str:
+    """A temporary link to the transaction's invoice PDF."""
+    response = await http.get_client().get(
+        _url(f"/transactions/{transaction_id}/invoice"), headers=_headers()
+    )
+
+    response.raise_for_status()
+
+    return response.json()["data"]["url"]
