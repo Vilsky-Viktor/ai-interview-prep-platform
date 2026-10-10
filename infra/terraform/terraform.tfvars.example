@@ -16,6 +16,7 @@ alert_email     = "you@example.com"
 billing_account = "XXXXXX-XXXXXX-XXXXXX"
 monthly_budget  = 300
 
+# "production" for the live site, with the production prices below (sandbox ones don't charge).
 paddle_environment  = "sandbox"
 paddle_client_token = ""
 paddle_prices = {
@@ -27,8 +28,9 @@ paddle_prices = {
   auto_top_up = ""
 }
 
-# Who may open the superadmin pages (templates, the question bank).
-superadmin_emails = []
+# Who may open the superadmin pages (templates, the question bank, the emergency pause and
+# maintenance mode). At least one is required.
+superadmin_emails = ["you@example.com"]
 
 # Sign in with GitHub and LinkedIn (README.md): empty leaves them off. Put the secrets in a
 # terraform.tfvars that's never committed, or pass them as TF_VAR_* environment variables.

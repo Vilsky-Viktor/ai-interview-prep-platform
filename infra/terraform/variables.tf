@@ -103,9 +103,14 @@ variable "monthly_budget" {
 }
 
 variable "superadmin_emails" {
-  description = "Superadmins, prepza's own team (templates, the question bank): verified Google emails."
+  description = "Superadmins, prepza's own team (templates, the question bank, the emergency pause and maintenance mode): verified Google emails."
   type        = list(string)
-  default     = []
+
+  # Without one, nobody can pause invites or turn maintenance mode on in an emergency.
+  validation {
+    condition     = length(var.superadmin_emails) > 0
+    error_message = "Set at least one superadmin email: the emergency pause and maintenance mode are switched only from the admin zone."
+  }
 }
 
 variable "github_client_id" {
