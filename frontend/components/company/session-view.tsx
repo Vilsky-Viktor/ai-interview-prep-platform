@@ -13,6 +13,7 @@ import { SignInPrompt } from "@/components/sign-in-prompt"
 import { Button } from "@/components/ui/button"
 import { useSessionPlayer } from "@/hooks/use-session-player"
 import { apiFetch } from "@/lib/api"
+import { setTimedPageOver } from "@/lib/timed-page"
 import type { Brand, Company } from "@/types/company"
 
 /** The test a candidate takes; for a company member's preview, `testHref` is the test's page:
@@ -82,6 +83,15 @@ export function SessionView({
     brandOf?.then(setBrand).catch(() => setBrand(null))
   }, [inviteId, previewCompany, practice])
 
+  // The header and footer come back once no question is on the clock: finished, or never started.
+  const over = (!loading && !user) || missing || failed || (done && !practice)
+
+  useEffect(() => {
+    setTimedPageOver(over)
+
+    return () => setTimedPageOver(false)
+  }, [over])
+
   if (!loading && !user) {
     return <SignInPrompt />
   }
@@ -124,8 +134,16 @@ export function SessionView({
     }
 
     return (
-      // Centered on the screen, like the home page's start.
-      <div className="flex min-h-[calc(100svh-3.5rem-6rem)] flex-col items-center justify-center gap-8 pb-24 text-center">
+      // Between the header and footer, which are back once it's finished.
+      <div className="flex flex-col items-center gap-8 py-24 text-center">
+        {/* The company's logo over the title, as on the invitation. */}
+        {brand?.logo_url && (
+          <CompanyLogo
+            url={brand.logo_url}
+            name={brand.company}
+            className="h-20 w-auto max-w-40 rounded-2xl object-contain"
+          />
+        )}
         <div className="space-y-3">
           <h1 className="font-heading text-3xl font-medium tracking-tight text-balance normal-case">
             {session.interview_title ?? session.topic_title}
