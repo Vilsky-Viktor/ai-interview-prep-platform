@@ -1,3 +1,4 @@
+import asyncio
 from functools import cache
 
 import httpx
@@ -16,17 +17,27 @@ async def post(url: str, address: str, body: bytes, signature: str) -> None:
     """Sends an event to a company's endpoint at `address`, the one its host was checked to have
     (see public_address), with the host's name in the Host header and TLS (SNI and the
     certificate check), without following redirects; anything but a 2xx answer raises an
-    httpx.HTTPError."""
+    httpx.HTTPError.
+
+    Only the answer's status is read, never its body, and the whole send has one time limit: an
+    endpoint that answers gigabytes, or a byte at a time, can't hold the service.
+    """
     target = httpx.URL(url)
-    response = await get_client().post(
-        target.copy_with(host=address),
-        content=body,
-        headers={
-            "Host": target.netloc.decode(),
-            "Content-Type": "application/json",
-            SIGNATURE_HEADER: signature,
-        },
-        extensions={"sni_hostname": target.raw_host.decode()},
-        timeout=WEBHOOK_TIMEOUT_SECONDS,
-    )
-    response.raise_for_status()
+
+    try:
+        async with asyncio.timeout(WEBHOOK_TIMEOUT_SECONDS):
+            async with get_client().stream(
+                "POST",
+                target.copy_with(host=address),
+                content=body,
+                headers={
+                    "Host": target.netloc.decode(),
+                    "Content-Type": "application/json",
+                    SIGNATURE_HEADER: signature,
+                },
+                extensions={"sni_hostname": target.raw_host.decode()},
+                timeout=WEBHOOK_TIMEOUT_SECONDS,
+            ) as response:
+                response.raise_for_status()
+    except TimeoutError:
+        raise httpx.TimeoutException("The web hook's endpoint took too long") from None

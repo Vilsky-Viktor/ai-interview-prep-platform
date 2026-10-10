@@ -36,7 +36,7 @@ MINUTE_SECONDS = 60
 ACCESS_CACHE_SECONDS = 60
 # A key's "last used" is written at most this often.
 LAST_USED_EVERY = timedelta(minutes=1)
-# How long a web hook's endpoint may take to answer.
+# How long a web hook's endpoint may take to answer, its whole answer included.
 WEBHOOK_TIMEOUT_SECONDS = 10
 # The header that carries a web hook's signature: t=<unix seconds>,v1=<hex HMAC-SHA256>.
 SIGNATURE_HEADER = "Prepza-Signature"

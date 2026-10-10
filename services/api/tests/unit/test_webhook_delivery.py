@@ -206,6 +206,37 @@ def test_a_send_goes_to_the_checked_address_under_the_hosts_name(monkeypatch):
     assert sent[0].headers["prepza-signature"] == "s"
 
 
+class Endless(httpx.AsyncByteStream):
+    """An answer's body that never ends: reading it would never finish."""
+
+    async def __aiter__(self):
+        while True:
+            yield b"x" * 65536
+
+
+def test_an_answers_body_is_never_read(monkeypatch):
+    client = httpx.AsyncClient(
+        transport=httpx.MockTransport(lambda request: httpx.Response(200, stream=Endless()))
+    )
+    monkeypatch.setattr(integration, "get_client", lambda: client)
+
+    asyncio.run(integration.post("https://hooks.example/x", "203.0.113.10", b"{}", "s"))
+
+
+def test_an_endpoint_too_slow_to_answer_fails_within_the_time_limit(monkeypatch):
+    async def slow(request):
+        await asyncio.sleep(5)
+
+        return httpx.Response(200)
+
+    client = httpx.AsyncClient(transport=httpx.MockTransport(slow))
+    monkeypatch.setattr(integration, "get_client", lambda: client)
+    monkeypatch.setattr(integration, "WEBHOOK_TIMEOUT_SECONDS", 0.1)
+
+    with pytest.raises(httpx.TimeoutException):
+        asyncio.run(integration.post("https://hooks.example/x", "203.0.113.10", b"{}", "s"))
+
+
 SECRET_URL = "https://hooks.example/in/s3cr3t-token"
 
 
