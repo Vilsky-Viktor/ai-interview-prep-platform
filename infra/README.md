@@ -180,7 +180,7 @@ What the emails do themselves: each has a plain-text part next to the HTML, `Aut
   ```
   [`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml) then checks that the tag is on `main` and CI passed on it, gives that commit's images the version as a tag (nothing is rebuilt), runs the `db-roles` job and then the 9 migration jobs, moves all 12 services to the images, smoke-tests the site and creates a GitHub release with the changes since the last tag.
 
-A failed step stops the deploy, and the services keep running the previous images.
+A failed step stops the deploy. Before the services step, nothing has changed for users. From the services step on, some or all services already run the new images, and nothing rolls back by itself: if the smoke test fails, roll back as below (the failed run says so). The smoke test checks the site, every API's `/ready` and the MCP paths.
 
 - **Rolling back:** in **Actions → Deploy → Run workflow**, enter an earlier version, for example `v1.3.2`, and leave **Run migrations** off. It redeploys that version's images in about a minute, on the newer schema (an older version's migrations would fail on it). So this is safe only while the newer migrations didn't remove anything the older code needs: keep migrations additive. Tick **Run migrations** only to redeploy a version whose migrations haven't run. For one service, you can also move it to an earlier revision in the Cloud Run console.
 - **Terraform never touches image tags,** so applying an infrastructure change doesn't roll anything back.
@@ -201,7 +201,22 @@ For an actual recovery, Cloud SQL can also restore to any second of the last 7 d
 gcloud sql instances clone prepza prepza-recovered --point-in-time="2026-10-02T12:00:00Z"
 ```
 
-Then point `DATABASE_URL` at the clone, or copy the needed data back.
+The services stay on the main instance (each mounts only its socket), so the clone is a source to copy from. To restore one service's database, say `companies`, without touching the other eight:
+
+1. Turn maintenance mode on in the admin zone, so nothing writes meanwhile.
+2. Dump the database from the clone and restore it over the main one, through the Cloud SQL Auth Proxy, as the admin (`database-admin-url`):
+   ```bash
+   cloud-sql-proxy --port 6544 prepza-prod:europe-west1:prepza-recovered &
+   cloud-sql-proxy --port 6543 prepza-prod:europe-west1:prepza &
+   pg_dump -h 127.0.0.1 -p 6544 -U prepza -Fc companies > companies.dump
+   pg_restore -h 127.0.0.1 -p 6543 -U prepza -d companies --clean --if-exists --no-owner \
+     --role=companies companies.dump
+   ```
+3. Turn maintenance mode off, then delete the clone (`gcloud sql instances delete prepza-recovered`).
+
+To restore everything, restore the instance from a backup instead (`gcloud sql backups restore`), which overwrites all nine databases.
+
+**Recovery targets.** At most a few seconds of data is lost (point-in-time recovery, 7 days back), and a restore takes about an hour (cloning or restoring takes 15–30 minutes, plus the copy). The instance is zonal (`db_high_availability` off): if its zone fails, Cloud SQL brings it back in another zone of the region with its data, after some downtime; `db_high_availability = true` makes that failover automatic, at twice the database cost. If the whole region fails, prepza is down until it returns: restoring elsewhere would mean recreating the infrastructure in another region from a backup (backups are kept in a multi-region location by default), which isn't scripted.
 
 ## Notes
 

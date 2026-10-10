@@ -139,6 +139,12 @@ jobs:
       - name: Smoke test
         run: ./e2e_tests/smoke.sh "${{ vars.SITE_URL }}"
 
+      # The services already run the new images: nothing rolls back by itself.
+      - name: How to roll back
+        if: failure()
+        run: |
+          echo "::error::The deploy failed after its first step, so services may run the new images. If the site is broken, roll back: Actions → Deploy → Run workflow with the previous version (the last v* tag before ${{ github.ref_name }}), Run migrations off. See infra/README.md (Rolling back)."
+
   release:
     name: GitHub release
     needs: deploy
