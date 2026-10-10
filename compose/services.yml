@@ -43,6 +43,7 @@ x-rounds-env: &rounds-env
   LANGSMITH_TRACING: ${LANGSMITH_TRACING}
   LANGSMITH_API_KEY: ${LANGSMITH_API_KEY}
   LANGSMITH_PROJECT: ${LANGSMITH_PROJECT}
+  LANGSMITH_ENDPOINT: ${LANGSMITH_ENDPOINT}
   HELP_MODEL: ${HELP_MODEL:-gpt-6-luna}
   HELP_REASONING_EFFORT: ${HELP_REASONING_EFFORT:-none}
   HELP_USER_LIMIT: ${HELP_USER_LIMIT:-30}
@@ -135,6 +136,7 @@ services:
       LANGSMITH_TRACING: ${LANGSMITH_TRACING}
       LANGSMITH_API_KEY: ${LANGSMITH_API_KEY}
       LANGSMITH_PROJECT: ${LANGSMITH_PROJECT}
+      LANGSMITH_ENDPOINT: ${LANGSMITH_ENDPOINT}
     depends_on:
       generation-migrate:
         condition: service_completed_successfully
@@ -160,6 +162,7 @@ services:
       LANGSMITH_TRACING: ${LANGSMITH_TRACING}
       LANGSMITH_API_KEY: ${LANGSMITH_API_KEY}
       LANGSMITH_PROJECT: ${LANGSMITH_PROJECT}
+      LANGSMITH_ENDPOINT: ${LANGSMITH_ENDPOINT}
     depends_on:
       generation-migrate:
         condition: service_completed_successfully

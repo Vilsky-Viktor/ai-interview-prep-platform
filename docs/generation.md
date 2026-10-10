@@ -76,7 +76,7 @@ These settings in `.env` shape every generation. Terraform passes none of them t
 | `INTERVIEW_QUESTIONS_PER_TOPIC` | 70 | Questions per topic of a company's interview, from which each candidate gets a random subset |
 | `TEMPLATE_QUESTIONS_PER_TOPIC` | 90 | Questions per topic of a template; a third is revealed for free practice, the rest is copied into companies' interviews |
 | `LLM_REQUESTS_PER_SECOND` | 8 | Generation's LLM requests a second, shared by the API and every worker through Redis; 0 turns it off. The help chat isn't limited by it, so it stays responsive during big generations |
-| `LANGSMITH_TRACING`, `LANGSMITH_API_KEY`, `LANGSMITH_PROJECT` | Off | Trace generation, help chat and assistant calls to LangSmith |
+| `LANGSMITH_TRACING`, `LANGSMITH_API_KEY`, `LANGSMITH_PROJECT`, `LANGSMITH_ENDPOINT` | Off | Trace generation, help chat and assistant calls to LangSmith; the endpoint is the key's region (US by default, `https://eu.api.smith.langchain.com` for EU) |
 
 ## Models
 
