@@ -1,9 +1,23 @@
 import uuid
+from datetime import UTC, datetime
 
 import pytest
+from cryptography.fernet import Fernet
 from fastapi import HTTPException
 
-from app.integrations import companies
+from app.config.settings import settings
+from app.integrations import companies, workable
+from app.main import app
+from app.models.ats import AtsConnection
+from app.storage import ats, ats_candidates
+from tests.unit.workable_setup import (
+    COMPANY_ID,
+    INTERVIEW_ID,
+    JOBS,
+    OTHER_COMPANY,
+    STAGES,
+    THEIR_INTERVIEW,
+)
 
 EDITORS = ("owner", "admin")
 
@@ -46,3 +60,112 @@ def companies_api(monkeypatch):
     monkeypatch.setattr(companies, "invite", invite)
 
     return state
+
+
+@pytest.fixture(autouse=True)
+def clear_overrides():
+    yield
+    app.dependency_overrides.clear()
+
+
+@pytest.fixture
+def key(monkeypatch):
+    """Integrations set up: an encryption key."""
+    value = Fernet.generate_key().decode()
+    monkeypatch.setattr(settings, "ats_encryption_key", value)
+
+    return value
+
+
+@pytest.fixture
+def stored(monkeypatch, companies_api):
+    """A company with an admin and a viewer, an interview of its own and one of another
+    company's, its ATS rows kept in memory, and Workable answering with one job and one stage
+    for the token "good"."""
+    companies_api["roles"] = {(COMPANY_ID, "ann"): "admin", (COMPANY_ID, "vic"): "viewer"}
+    companies_api["interviews"] = {
+        INTERVIEW_ID: interview(COMPANY_ID, interview_id=INTERVIEW_ID),
+        THEIR_INTERVIEW: interview(OTHER_COMPANY, "Theirs", interview_id=THEIR_INTERVIEW),
+    }
+    rows = {"connection": None, "links": [], "subscriptions": [], "targets": [], "read": []}
+
+    async def connect(company_id, provider, account, credentials, user_id, member_id=None):
+        rows["connection"] = AtsConnection(
+            member_id=member_id,
+            id=uuid.uuid4(),
+            company_id=company_id,
+            provider=provider,
+            account=account,
+            credentials=credentials,
+            status="connected",
+            created_by=user_id,
+            created_at=datetime.now(UTC),
+        )
+
+    async def connection(company_id, provider):
+        return rows["connection"]
+
+    async def connections(company_id):
+        return [rows["connection"]] if rows["connection"] else []
+
+    async def disconnect(company_id, provider):
+        rows["connection"] = None
+
+    async def add_link(connection_id, interview_id, job, stage):
+        rows["links"].append((interview_id, job["id"], stage["id"]))
+
+        return uuid.uuid4()
+
+    async def set_subscription(link_id, subscription_id):
+        rows["subscriptions"].append(subscription_id)
+
+    async def subscriptions(company_id, link_id=None):
+        return list(rows["subscriptions"])
+
+    async def no_counts(company_id):
+        return {}
+
+    async def member_id(subdomain, token, email):
+        return "member-1"
+
+    async def subscribe(subdomain, token, target, job_id, stage_id):
+        rows["targets"].append(target)
+
+        return "sub-1"
+
+    async def check(subdomain, token):
+        if token != "good":
+            raise workable.KeyRejected
+
+    async def jobs(subdomain, token):
+        rows["read"].append("every job")
+
+        return JOBS
+
+    async def job(subdomain, token, job_id):
+        rows["read"].append(job_id)
+
+        return {"name": "Accountant", "sections": []}
+
+    async def stages(subdomain, token, job_id):
+        return STAGES
+
+    for name, fake in {
+        "connect": connect,
+        "connection": connection,
+        "connections": connections,
+        "disconnect": disconnect,
+        "add_link": add_link,
+        "set_subscription": set_subscription,
+        "subscriptions": subscriptions,
+    }.items():
+        monkeypatch.setattr(ats, name, fake)
+    monkeypatch.setattr(workable, "check", check)
+    monkeypatch.setattr(workable, "jobs", jobs)
+    monkeypatch.setattr(workable, "job", job)
+    monkeypatch.setattr(workable, "stages", stages)
+    monkeypatch.setattr(workable, "member_id", member_id)
+    monkeypatch.setattr(workable, "subscribe", subscribe)
+    monkeypatch.setattr(ats_candidates, "counts", no_counts)
+
+    return rows

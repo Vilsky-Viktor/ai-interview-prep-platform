@@ -103,7 +103,8 @@ export interface paths {
      * Connect Breezy
      * @description Connects Breezy HR with a personal API key (it acts as the person who made it), checked
      *     with one read first, then creates the web hook that sends its stage changes, whose secret
-     *     Breezy gives only now. A reconnect replaces the earlier web hook.
+     *     Breezy gives only now. A reconnect replaces the earlier web hook; one that fails keeps the
+     *     earlier connection, marked for reconnecting.
      */
     put: operations["connect_breezy_breezy_put"]
     post?: never
@@ -455,9 +456,10 @@ export interface paths {
     put?: never
     /**
      * Recover
-     * @description Daily, from Cloud Scheduler: invites cut off midway start again (companies refuses them
-     *     during the emergency pause, and they're kept to retry), and candidates past their
-     *     retention period go.
+     * @description Every 10 minutes, from Cloud Scheduler: waiting candidates and invites cut off midway are
+     *     invited (companies refuses them during the emergency pause, and they're kept to retry),
+     *     results kept while a connection was broken or the ATS failed go back, and candidates past
+     *     their retention period go.
      */
     post: operations["recover_internal_schedules_recover_post"]
     delete?: never
@@ -478,7 +480,8 @@ export interface paths {
     post?: never
     /**
      * Delete User
-     * @description Library, deleting an account: an ATS's records of them as a candidate go.
+     * @description Library, deleting an account: an ATS's records of them as a candidate go; the ATS
+     *     connections they made stay with their companies, without their id.
      */
     delete: operations["delete_user_internal_users__user_id__delete"]
     options?: never
@@ -493,13 +496,14 @@ export interface paths {
       path?: never
       cookie?: never
     }
+    get?: never
+    put?: never
     /**
      * Export User
-     * @description Library, for "Download my data": what ATSs sent about them as a candidate.
+     * @description Library, for "Download my data": what ATSs sent about them as a candidate, and the ATS
+     *     connections they made.
      */
-    get: operations["export_user_internal_users__user_id__export_get"]
-    put?: never
-    post?: never
+    post: operations["export_user_internal_users__user_id__export_post"]
     delete?: never
     options?: never
     head?: never
@@ -578,6 +582,8 @@ export interface components {
       provider: components["schemas"]["AtsProvider"]
       /** Account */
       account: string
+      /** Connected By */
+      connected_by: string | null
       status: components["schemas"]["ConnectionStatus"]
       /**
        * Created At
@@ -702,6 +708,15 @@ export interface components {
     TeamtailorIn: {
       /** Key */
       key: string
+    }
+    /**
+     * UserEmailIn
+     * @description An email address sent in the body, so request logs don't record it: the account's, in
+     *     library's calls to delete or export a user's data, or the one a superadmin looks up.
+     */
+    UserEmailIn: {
+      /** Email */
+      email: string
     }
     /** ValidationError */
     ValidationError: {
@@ -1495,16 +1510,18 @@ export interface operations {
   }
   delete_user_internal_users__user_id__delete: {
     parameters: {
-      query: {
-        email: string
-      }
+      query?: never
       header?: never
       path: {
         user_id: string
       }
       cookie?: never
     }
-    requestBody?: never
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["UserEmailIn"]
+      }
+    }
     responses: {
       /** @description Successful Response */
       204: {
@@ -1524,18 +1541,20 @@ export interface operations {
       }
     }
   }
-  export_user_internal_users__user_id__export_get: {
+  export_user_internal_users__user_id__export_post: {
     parameters: {
-      query: {
-        email: string
-      }
+      query?: never
       header?: never
       path: {
         user_id: string
       }
       cookie?: never
     }
-    requestBody?: never
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["UserEmailIn"]
+      }
+    }
     responses: {
       /** @description Successful Response */
       200: {

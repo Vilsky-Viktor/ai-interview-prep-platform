@@ -37,6 +37,7 @@ async def connect(
     credentials: str,
     user_id: str,
     member_id: str | None = None,
+    user_name: str | None = None,
 ) -> None:
     """Saves the company's connection to `provider`, replacing an earlier one's key (a
     reconnect keeps its linked jobs)."""
@@ -45,6 +46,7 @@ async def connect(
         "credentials": credentials,
         "status": ConnectionStatus.CONNECTED,
         "created_by": user_id,
+        "created_by_name": user_name,
         "member_id": member_id,
     }
     query = (
@@ -81,6 +83,7 @@ async def restore_broken(earlier: AtsConnection) -> None:
             account=earlier.account,
             credentials=earlier.credentials,
             created_by=earlier.created_by,
+            created_by_name=earlier.created_by_name,
             member_id=earlier.member_id,
             status=ConnectionStatus.BROKEN,
         )

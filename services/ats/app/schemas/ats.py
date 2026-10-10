@@ -11,6 +11,8 @@ class ConnectionOut(BaseModel):
 
     provider: AtsProvider
     account: str
+    # Who connected it, shown when the ATS names no account (Greenhouse).
+    connected_by: str | None
     status: ConnectionStatus
     created_at: datetime
 

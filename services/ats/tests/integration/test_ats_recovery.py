@@ -12,7 +12,7 @@ def test_the_recovery_job_finds_waiting_candidates_of_working_connections_oldest
         company = uuid.uuid4()
         interview = uuid.uuid4()
         await ats.connect(company, AtsProvider.WORKABLE, "acme", "sealed", "ann")
-        await ats.connect(company, AtsProvider.GREENHOUSE, "…1234", "sealed", "ann")
+        await ats.connect(company, AtsProvider.GREENHOUSE, "", "sealed", "ann")
         working = await ats.connection(company, AtsProvider.WORKABLE)
         broken = await ats.connection(company, AtsProvider.GREENHOUSE)
         await ats.mark_broken(broken.id)
@@ -144,10 +144,12 @@ def test_a_failed_reconnect_puts_the_earlier_connection_back_marked_broken(run):
     async def scenario():
         company = uuid.uuid4()
         interview = uuid.uuid4()
-        await ats.connect(company, AtsProvider.BREEZY, "Acme", "sealed-1", "ann", "m-1")
+        await ats.connect(
+            company, AtsProvider.BREEZY, "Acme", "sealed-1", "ann", "m-1", user_name="Ann"
+        )
         earlier = await ats.connection(company, AtsProvider.BREEZY)
         await ats.add_link(earlier.id, interview, JOB, STAGE)
-        await ats.connect(company, AtsProvider.BREEZY, "Other", "sealed-2", "bob")
+        await ats.connect(company, AtsProvider.BREEZY, "Other", "sealed-2", "bob", user_name="Bob")
         await ats.restore_broken(earlier)
         found = await ats.connection(company, AtsProvider.BREEZY)
         links = await ats.links(company)
@@ -164,6 +166,8 @@ def test_a_failed_reconnect_puts_the_earlier_connection_back_marked_broken(run):
         "ann",
         "m-1",
     )
+    # Who connected it, by name, comes back with it.
+    assert found.created_by_name == "Ann"
     assert found.status == "broken"
     assert len(links) == 1
 
