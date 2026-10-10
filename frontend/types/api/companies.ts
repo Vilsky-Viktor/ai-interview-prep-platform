@@ -1155,7 +1155,7 @@ export interface paths {
     }
     /**
      * List Candidates
-     * @description The interview's candidates, newest first, with their results.
+     * @description The interview's candidates, newest first, with their results and invite links.
      */
     get: operations["list_candidates_internal_companies__company_id__interviews__interview_id__candidates_get"]
     put?: never
@@ -1801,6 +1801,8 @@ export interface components {
        * Format: date-time
        */
       created_at: string
+      /** Invite Token */
+      invite_token?: string | null
     }
     /**
      * CandidateSort
@@ -1886,6 +1888,8 @@ export interface components {
        * Format: date-time
        */
       created_at: string
+      /** Invite Token */
+      invite_token?: string | null
       /**
        * Interview Id
        * Format: uuid
@@ -1908,6 +1912,11 @@ export interface components {
        * @default 0
        */
       reserved: number
+      /**
+       * Reserved Candidates
+       * @default 0
+       */
+      reserved_candidates: number
       /** Low */
       low: boolean
       /**

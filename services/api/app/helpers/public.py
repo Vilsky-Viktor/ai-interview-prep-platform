@@ -1,4 +1,4 @@
-from app.constants.api import CANDIDATE_LINK
+from app.constants.api import CANDIDATE_LINK, INVITE_LINK
 from app.schemas.public import Candidate, Interview, Signals
 
 
@@ -16,7 +16,10 @@ def interview_of(found: dict) -> Interview:
 
 
 def candidate_of(found: dict, company_id, interview_id, site: str) -> Candidate:
-    """Companies' candidate, as the API shows it, with a link to their results in prepza."""
+    """Companies' candidate, as the API shows it, with a link to their results in prepza and,
+    until they finish, their invite link."""
+    token = found.get("invite_token")
+
     return Candidate(
         id=found["id"],
         email=found["email"],
@@ -33,5 +36,6 @@ def candidate_of(found: dict, company_id, interview_id, site: str) -> Candidate:
         results_url=CANDIDATE_LINK.format(
             site=site, company_id=company_id, interview_id=interview_id, invite_id=found["id"]
         ),
+        invite_url=INVITE_LINK.format(site=site, token=token) if token else None,
         created_at=found["created_at"],
     )

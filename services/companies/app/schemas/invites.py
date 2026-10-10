@@ -31,6 +31,9 @@ class CandidateOut(BaseModel):
     copies: int = 0
     fast_answers: int = 0
     created_at: datetime
+    # The invite link's token, only for the public API (`with_link`): until the candidate
+    # finishes, while the link works.
+    invite_token: str | None = None
 
 
 class CompanyCandidateOut(CandidateOut):

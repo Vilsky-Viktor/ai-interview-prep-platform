@@ -13,12 +13,11 @@ from app.constants.invites import (
     EXTRA_TIME_OPTIONS,
     MAX_SEARCH_LENGTH,
     NOT_STARTED,
-    OPEN,
     CandidateFilter,
     CandidateSort,
     InviteStatus,
 )
-from app.helpers.candidates import passed, section_passed
+from app.helpers.candidates import open_link_token, passed, section_passed
 from app.helpers.interviews import (
     attach_set,
     interview_title,
@@ -191,7 +190,7 @@ async def candidate_scorecard(
         extra_time_options=(
             list(EXTRA_TIME_OPTIONS) if invite.status in NOT_STARTED and can_edit(member) else []
         ),
-        invite_token=(invite.token if invite.status in OPEN and can_edit(member) else None),
+        invite_token=open_link_token(invite) if can_edit(member) else None,
         title=await interview_title(interview),
         company=company.name,
         logo_url=logo_path(company),

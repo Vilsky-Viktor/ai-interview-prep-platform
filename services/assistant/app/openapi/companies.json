@@ -644,6 +644,224 @@
     }
    }
   },
+  "/companies/{company_id}/billing/history": {
+   "get": {
+    "tags": [
+     "companies"
+    ],
+    "summary": "Get History",
+    "description": "Every movement of the company's credits, newest first, a page at a time.",
+    "operationId": "get_history_companies__company_id__billing_history_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/HistoryEntryOut"
+         },
+         "title": "Response Get History Companies  Company Id  Billing History Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/companies/{company_id}/billing/reserved": {
+   "get": {
+    "tags": [
+     "companies"
+    ],
+    "summary": "Get Reserved",
+    "description": "Candidates invited who haven't finished, whose credits are set aside, newest first.",
+    "operationId": "get_reserved_companies__company_id__billing_reserved_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/CreditCandidateOut"
+         },
+         "title": "Response Get Reserved Companies  Company Id  Billing Reserved Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/companies/{company_id}/billing/invoice": {
+   "get": {
+    "tags": [
+     "companies"
+    ],
+    "summary": "Get Invoice",
+    "description": "A temporary link to the invoice of one of the company's top-ups.",
+    "operationId": "get_invoice_companies__company_id__billing_invoice_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     },
+     {
+      "name": "transaction_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Transaction Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/InvoiceOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
   "/members": {
    "get": {
     "tags": [
@@ -727,7 +945,7 @@
      "members"
     ],
     "summary": "Invite Member",
-    "description": "The owner invites an admin or a viewer; the role applies once the invite is accepted.",
+    "description": "The owner invites an admin or a viewer, who is emailed the join link; the role applies\nonce the invite is accepted.",
     "operationId": "invite_member_members_post",
     "security": [
      {
@@ -900,6 +1118,7 @@
      "members"
     ],
     "summary": "Get Admin Invite",
+    "description": "Open to visitors, so they see what they're invited to before signing in; the invited\nemail only once signed in, so a visitor with the link doesn't learn it.",
     "operationId": "get_admin_invite_members_invites__token__get",
     "security": [
      {
@@ -2534,6 +2753,7 @@
      "invites"
     ],
     "summary": "Get Invite",
+    "description": "The invitation, also before signing in, so the page shows what it's for; the candidate's\nemail only once someone is signed in.",
     "operationId": "get_invite_invites__token__get",
     "security": [
      {
@@ -3670,7 +3890,7 @@
      "internal"
     ],
     "summary": "List Candidates",
-    "description": "The interview's candidates, newest first, with their results.",
+    "description": "The interview's candidates, newest first, with their results and invite links.",
     "operationId": "list_candidates_internal_companies__company_id__interviews__interview_id__candidates_get",
     "security": [
      {
@@ -4675,7 +4895,14 @@
       "title": "Company Name"
      },
      "email": {
-      "type": "string",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
       "title": "Email"
      },
      "joined": {
@@ -4686,7 +4913,6 @@
     "type": "object",
     "required": [
      "company_name",
-     "email",
      "joined"
     ],
     "title": "AdminInviteOut",
@@ -4926,7 +5152,7 @@
     "properties": {
      "text": {
       "type": "string",
-      "maxLength": 50000,
+      "maxLength": 200000,
       "minLength": 1,
       "title": "Text"
      },
@@ -4940,6 +5166,18 @@
        }
       ],
       "title": "Name"
+     },
+     "filename": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 255
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Filename"
      }
     },
     "type": "object",
@@ -4964,6 +5202,14 @@
       },
       "type": "array",
       "title": "Skipped"
+     },
+     "problems": {
+      "items": {
+       "$ref": "#/components/schemas/LineProblemOut"
+      },
+      "type": "array",
+      "title": "Problems",
+      "default": []
      }
     },
     "type": "object",
@@ -5115,6 +5361,17 @@
       "type": "string",
       "format": "date-time",
       "title": "Created At"
+     },
+     "invite_token": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Invite Token"
      }
     },
     "type": "object",
@@ -5275,6 +5532,17 @@
       "format": "date-time",
       "title": "Created At"
      },
+     "invite_token": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Invite Token"
+     },
      "interview_id": {
       "type": "string",
       "format": "uuid",
@@ -5325,9 +5593,24 @@
       "type": "integer",
       "title": "Available"
      },
+     "reserved": {
+      "type": "integer",
+      "title": "Reserved",
+      "default": 0
+     },
+     "reserved_candidates": {
+      "type": "integer",
+      "title": "Reserved Candidates",
+      "default": 0
+     },
      "low": {
       "type": "boolean",
       "title": "Low"
+     },
+     "candidates": {
+      "type": "integer",
+      "title": "Candidates",
+      "default": 0
      }
     },
     "type": "object",
@@ -5495,6 +5778,56 @@
     ],
     "title": "CompanyRename",
     "description": "A new name, edited in place like a test's title (hence `title`)."
+   },
+   "CreditCandidateOut": {
+    "properties": {
+     "invite_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Invite Id"
+     },
+     "interview_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Interview Id"
+     },
+     "email": {
+      "type": "string",
+      "title": "Email"
+     },
+     "name": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Name"
+     },
+     "interview_title": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Interview Title"
+     }
+    },
+    "type": "object",
+    "required": [
+     "invite_id",
+     "interview_id",
+     "email",
+     "name",
+     "interview_title"
+    ],
+    "title": "CreditCandidateOut",
+    "description": "The candidate whose invite set credits aside or was charged for, and their interview."
    },
    "DeclineIn": {
     "properties": {
@@ -5698,6 +6031,94 @@
     },
     "type": "object",
     "title": "HTTPValidationError"
+   },
+   "HistoryEntryOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "amount": {
+      "type": "integer",
+      "title": "Amount"
+     },
+     "reason": {
+      "type": "string",
+      "title": "Reason"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     },
+     "total": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Total"
+     },
+     "currency": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Currency"
+     },
+     "automatic": {
+      "type": "boolean",
+      "title": "Automatic"
+     },
+     "invoice_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Invoice Id"
+     },
+     "candidate": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/CreditCandidateOut"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "candidate_deleted": {
+      "type": "boolean",
+      "title": "Candidate Deleted"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "amount",
+     "reason",
+     "created_at",
+     "total",
+     "currency",
+     "automatic",
+     "invoice_id",
+     "candidate",
+     "candidate_deleted"
+    ],
+    "title": "HistoryEntryOut",
+    "description": "One movement of the company's credits: `amount` is signed, `reason` says what it was.\n`total` (minor units, tax included) and `currency` are the money a top-up cost or a refund\nor chargeback moved, when known. `invoice_id` is the top-up's transaction, whose invoice\ncan be opened. A candidate's charge names the candidate, or `candidate_deleted` when their\ninvite is gone."
    },
    "InterviewBriefOut": {
     "properties": {
@@ -6163,7 +6584,14 @@
       "title": "Verified Domain"
      },
      "email": {
-      "type": "string",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
       "title": "Email"
      },
      "status": {
@@ -6180,7 +6608,6 @@
      "interview_id",
      "title",
      "company",
-     "email",
      "status",
      "question_seconds"
     ],
@@ -6202,6 +6629,39 @@
     ],
     "title": "InvitedCompaniesOut",
     "description": "The companies that invited an address, for the notifications service."
+   },
+   "InvoiceOut": {
+    "properties": {
+     "url": {
+      "type": "string",
+      "title": "Url"
+     }
+    },
+    "type": "object",
+    "required": [
+     "url"
+    ],
+    "title": "InvoiceOut",
+    "description": "A temporary link to the invoice PDF."
+   },
+   "LineProblemOut": {
+    "properties": {
+     "line": {
+      "type": "string",
+      "title": "Line"
+     },
+     "reason": {
+      "type": "string",
+      "title": "Reason"
+     }
+    },
+    "type": "object",
+    "required": [
+     "line",
+     "reason"
+    ],
+    "title": "LineProblemOut",
+    "description": "A line of the list that couldn't be used, as it was written, and why (LineProblem)."
    },
    "LinkIn": {
     "properties": {
@@ -6968,6 +7428,17 @@
       },
       "type": "array",
       "title": "Extra Time Options"
+     },
+     "invite_token": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Invite Token"
      },
      "title": {
       "anyOf": [

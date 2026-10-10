@@ -320,6 +320,142 @@
     }
    }
   },
+  "/internal/companies/{company_id}/history": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Company History",
+    "description": "Every movement of the company's credits, newest first.",
+    "operationId": "company_history_internal_companies__company_id__history_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Company Id"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/HistoryEntryOut"
+         },
+         "title": "Response Company History Internal Companies  Company Id  History Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/companies/{company_id}/invoice": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Company Invoice",
+    "description": "The invoice of one of the company's top-ups; 404 for anyone else's transaction.",
+    "operationId": "company_invoice_internal_companies__company_id__invoice_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Company Id"
+      }
+     },
+     {
+      "name": "transaction_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Transaction Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/InvoiceOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
   "/internal/companies/credits": {
    "post": {
     "tags": [
@@ -905,6 +1041,11 @@
      "low": {
       "type": "boolean",
       "title": "Low"
+     },
+     "candidates": {
+      "type": "integer",
+      "title": "Candidates",
+      "default": 0
      }
     },
     "type": "object",
@@ -1039,6 +1180,104 @@
     },
     "type": "object",
     "title": "HTTPValidationError"
+   },
+   "HistoryEntryOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "amount": {
+      "type": "integer",
+      "title": "Amount"
+     },
+     "reason": {
+      "type": "string",
+      "title": "Reason"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     },
+     "total": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Total"
+     },
+     "currency": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Currency"
+     },
+     "automatic": {
+      "type": "boolean",
+      "title": "Automatic"
+     },
+     "transaction_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Transaction Id"
+     },
+     "hold_key": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Hold Key"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "amount",
+     "reason",
+     "created_at",
+     "total",
+     "currency",
+     "automatic",
+     "transaction_id",
+     "hold_key"
+    ],
+    "title": "HistoryEntryOut",
+    "description": "One movement of a wallet's credits. `total` (minor units, tax included) and `currency`\nare what a top-up cost or an adjustment moved, when known; `transaction_id` is the Paddle\ntransaction of a top-up or adjustment, and `hold_key` the key of a candidate's credits."
+   },
+   "InvoiceOut": {
+    "properties": {
+     "url": {
+      "type": "string",
+      "title": "Url"
+     }
+    },
+    "type": "object",
+    "required": [
+     "url"
+    ],
+    "title": "InvoiceOut",
+    "description": "A temporary link to the transaction's invoice PDF."
    },
    "LowCompaniesOut": {
     "properties": {

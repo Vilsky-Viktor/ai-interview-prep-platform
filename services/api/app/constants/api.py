@@ -55,3 +55,5 @@ RETRY_BATCH = 25
 RETRY_LEASE = timedelta(minutes=10)
 # Where a candidate's results are in prepza.
 CANDIDATE_LINK = "{site}/companies/{company_id}/interviews/{interview_id}/candidates/{invite_id}"
+# The candidate's own invite link, to send them yourself.
+INVITE_LINK = "{site}/invite/{token}"

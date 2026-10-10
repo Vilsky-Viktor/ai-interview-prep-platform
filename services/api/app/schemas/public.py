@@ -52,6 +52,13 @@ class Candidate(BaseModel):
     )
     signals: Signals
     results_url: str = Field(description="Link to the candidate's full results in prepza")
+    invite_url: str | None = Field(
+        default=None,
+        description=(
+            "The candidate's invite link, to send them yourself if the invite email didn't "
+            "arrive; null once they've finished or the invite has expired"
+        ),
+    )
     created_at: datetime = Field(description="When the invitation was first sent")
 
 

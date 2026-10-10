@@ -18,6 +18,7 @@ INVITE = SimpleNamespace(
     email="anna@example.com",
     name="Anna Nowak",
     status="finished",
+    token="tok-anna",
     created_at=datetime(2026, 10, 2, tzinfo=UTC),
 )
 TOKEN = issue_token("api", "companies", "test-secret-that-is-at-least-32-bytes")
@@ -63,8 +64,8 @@ def stored(monkeypatch):
     async def scores(ids):
         return {str(INVITE.id): {"finished": True, "grade": 86, "progress": 100, "copies": 1}}
 
-    async def page(interview, offset, limit, by_grade, q="", filter_by=None):
-        asked.append(("candidates", offset, limit, by_grade))
+    async def page(interview, offset, limit, by_grade, q="", filter_by=None, with_link=False):
+        asked.append(("candidates", offset, limit, by_grade, with_link))
 
         return []
 
@@ -90,7 +91,8 @@ def test_the_api_service_lists_a_companys_interviews_a_page_at_a_time(client, st
 def test_an_interview_and_its_candidates_newest_first(client, stored):
     assert client.get(f"{BASE}/{INTERVIEW.id}", headers=HEADERS).status_code == 200
     assert client.get(f"{BASE}/{INTERVIEW.id}/candidates", headers=HEADERS).json() == []
-    assert stored == [("candidates", 0, 100, False)]
+    # With the invite links, for the public API.
+    assert stored == [("candidates", 0, 100, False, True)]
 
 
 def test_a_candidate_comes_with_their_results(client):
@@ -98,6 +100,15 @@ def test_a_candidate_comes_with_their_results(client):
 
     assert (found["grade"], found["passed"], found["copies"]) == (86, True, 1)
     assert found["name"] == "Anna Nowak"
+    # Finished: no invite link.
+    assert found["invite_token"] is None
+
+
+def test_a_candidate_who_hasnt_finished_comes_with_their_invite_link(client, monkeypatch):
+    monkeypatch.setattr(INVITE, "status", "in_process")
+    found = client.get(f"{BASE}/{INTERVIEW.id}/candidates/{INVITE.id}", headers=HEADERS).json()
+
+    assert found["invite_token"] == "tok-anna"
 
 
 def test_another_companys_interview_or_an_unknown_candidate_is_not_found(client):

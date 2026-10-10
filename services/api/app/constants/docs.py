@@ -11,6 +11,12 @@ A candidate's `grade`, `passed` and `signals` help a person decide; they are not
 Don't reject candidates automatically on them: before rejecting anyone, a person should open the
 candidate's full results (`results_url`) and review them.
 
+## Invite links
+
+Until a candidate finishes, they come with their invite link (`invite_url`), the same link the
+invite email carries. Send it to them yourself if the email didn't reach them; only the invited
+email can use it. It's null once they've finished or the invite has expired.
+
 ## Getting an API key
 
 1. Sign in to prepza as an owner or admin of your company.

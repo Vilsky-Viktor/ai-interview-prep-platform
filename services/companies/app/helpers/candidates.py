@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 
-from app.constants.invites import SIGNAL_KEYS
+from app.constants.invites import OPEN, SIGNAL_KEYS
 from app.schemas.invites import CandidateOut, CompanyCandidateOut
 
 
@@ -78,8 +78,15 @@ def stored_results(totals: dict) -> tuple[int | None, bool]:
     return totals.get("grade"), flagged(totals)
 
 
-def candidate_out(invite, totals: dict, interview) -> CandidateOut:
-    """A candidate row: the invite, with their results from rounds."""
+def open_link_token(invite) -> str | None:
+    """The invite link's token while it still leads somewhere: until the candidate finishes, and
+    not once the invite expired (sending it again revives it)."""
+    return invite.token if invite.status in OPEN else None
+
+
+def candidate_out(invite, totals: dict, interview, with_link: bool = False) -> CandidateOut:
+    """A candidate row: the invite, with their results from rounds; `with_link` adds the invite
+    link's token (the public API)."""
     return CandidateOut(
         id=invite.id,
         email=invite.email,
@@ -90,6 +97,7 @@ def candidate_out(invite, totals: dict, interview) -> CandidateOut:
         passed=passed(totals, interview.pass_mark),
         **{key: totals.get(key, 0) for key in SIGNAL_KEYS},
         created_at=invite.created_at,
+        invite_token=open_link_token(invite) if with_link else None,
     )
 
 

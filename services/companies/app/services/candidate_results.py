@@ -53,7 +53,13 @@ async def backfill(interview_id) -> None:
 
 
 async def page(
-    interview, offset: int, limit: int, by_grade: bool, q: str = "", filter_by: str | None = None
+    interview,
+    offset: int,
+    limit: int,
+    by_grade: bool,
+    q: str = "",
+    filter_by: str | None = None,
+    with_link: bool = False,
 ) -> list:
     """A page of the interview's candidates with their results: best grade first or newest
     first, narrowed to an email containing `q` and a status or result, all in SQL on the results
@@ -67,7 +73,10 @@ async def page(
     totals = await rounds.invite_scores([invite.id for invite in listed])
     await sync(listed, totals)
 
-    return [candidate_out(invite, totals.get(str(invite.id)) or {}, interview) for invite in listed]
+    return [
+        candidate_out(invite, totals.get(str(invite.id)) or {}, interview, with_link)
+        for invite in listed
+    ]
 
 
 async def company_page(company_id, offset: int, limit: int, q: str = "") -> list:

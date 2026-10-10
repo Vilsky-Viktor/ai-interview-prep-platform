@@ -7,8 +7,9 @@ from redis.exceptions import ConnectionError as RedisConnectionError
 from app import auth
 from app.constants.api import LAST_USED_EVERY
 from app.helpers.keys import hashed
+from app.helpers.public import candidate_of
 from app.integrations import companies
-from tests.unit.conftest import CANDIDATE, COMPANY, INTERVIEW
+from tests.unit.conftest import CANDIDATE, COMPANY, INTERVIEW, candidate
 
 KEY = "pz_test-key"
 
@@ -56,6 +57,16 @@ def test_a_candidate_comes_with_signals_and_a_link_to_their_results(client, comp
         f"http://localhost:8090/companies/{COMPANY}/interviews/{INTERVIEW}/candidates/{CANDIDATE}"
     )
     assert "tab_leaves" not in found
+    # Finished: the invite link no longer leads anywhere.
+    assert found["invite_url"] is None
+
+
+def test_a_candidate_who_hasnt_finished_comes_with_their_invite_link():
+    found = candidate_of(
+        candidate(status="invited", invite_token="tok"), COMPANY, INTERVIEW, "https://prepza.ai"
+    )
+
+    assert found.invite_url == "https://prepza.ai/invite/tok"
 
 
 def test_an_invite_goes_out_as_the_keys_creator(client, companies_api, key):

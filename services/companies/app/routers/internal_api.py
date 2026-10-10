@@ -50,10 +50,12 @@ async def get_interview(
 async def list_candidates(
     company_id: UUID, interview_id: UUID, page: PageParams, caller: ServiceCaller
 ) -> list[CandidateOut]:
-    """The interview's candidates, newest first, with their results."""
+    """The interview's candidates, newest first, with their results and invite links."""
     interview = await company_interview(company_id, interview_id)
 
-    return await candidate_results.page(interview, page.offset, page.limit, by_grade=False)
+    return await candidate_results.page(
+        interview, page.offset, page.limit, by_grade=False, with_link=True
+    )
 
 
 @router.get("/{interview_id}/candidates/{invite_id}")
@@ -68,4 +70,4 @@ async def get_candidate(
 
     totals = await rounds.invite_scores([invite.id])
 
-    return candidate_out(invite, totals.get(str(invite.id)) or {}, interview)
+    return candidate_out(invite, totals.get(str(invite.id)) or {}, interview, with_link=True)

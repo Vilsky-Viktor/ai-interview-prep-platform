@@ -1050,7 +1050,7 @@
      "help"
     ],
     "summary": "Help Chat",
-    "description": "Answers questions about prepza, for visitors too. Streams server-sent events:\n{\"delta\"}..., then {\"done\"} or {\"error\"}. Refused during the emergency pause, as it's AI.",
+    "description": "Answers questions about prepza, for visitors too. Streams server-sent events:\n{\"delta\"}... (and a {\"block\"} sign-in card when a visitor asks to sign in or sign up), then\n{\"done\"} or {\"error\"}. Refused during the emergency pause, as it's AI. A conversation with a\nsecret in it (a key, a token, a password) is answered at once, before anything else, with a\nfixed reply ({\"removed\"} first: the panel drops that message), and nothing of it is used.",
     "operationId": "help_chat_help_chat_post",
     "requestBody": {
      "content": {

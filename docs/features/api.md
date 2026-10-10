@@ -25,7 +25,7 @@ Everything is under `https://<domain>/api/v1`, with `Authorization: Bearer pz_..
 |---|---|
 | `GET /interviews` | The company's interviews, newest first |
 | `GET /interviews/{id}` | One interview |
-| `GET /interviews/{id}/candidates` | Its candidates with progress, grade, pass, integrity signals and a link to their results, newest first |
+| `GET /interviews/{id}/candidates` | Its candidates with progress, grade, pass, integrity signals, a link to their results and, until they finish, their invite link (`invite_url`, null once finished or expired), newest first |
 | `GET /interviews/{id}/candidates/{candidate_id}` | One candidate |
 | `POST /interviews/{id}/candidates` | Invites a candidate by email, with an optional name (or sends the invite again), as the key's maker; credits are set aside as in the app |
 

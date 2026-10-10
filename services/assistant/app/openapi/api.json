@@ -736,6 +736,18 @@
       "title": "Results Url",
       "description": "Link to the candidate's full results in prepza"
      },
+     "invite_url": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Invite Url",
+      "description": "The candidate's invite link, to send them yourself if the invite email didn't arrive; null once they've finished or the invite has expired"
+     },
      "created_at": {
       "type": "string",
       "format": "date-time",
