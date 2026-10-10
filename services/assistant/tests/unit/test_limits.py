@@ -29,8 +29,12 @@ def counted(monkeypatch):
     async def spend(redis, key, amount, limit, window):
         made.append(("spend", key, amount, limit))
 
+    async def unpaid(redis, company_id):
+        return False
+
     monkeypatch.setattr(limits, "hit", hit)
     monkeypatch.setattr(limits, "spend", spend)
+    monkeypatch.setattr(limits, "company_paid", unpaid)
 
     return made
 
@@ -47,6 +51,45 @@ def test_a_message_checks_every_budget_then_counts_against_every_limit(counted):
         ("hit", f"rate:assistant:company:{COMPANY}", MESSAGES_PER_COMPANY_DAY),
         ("hit", "rate:assistant:all", MESSAGES_PER_DAY),
     ]
+
+
+def test_a_company_that_paid_isnt_held_to_everyones_limits(counted, monkeypatch):
+    async def paid(redis, company_id):
+        return True
+
+    monkeypatch.setattr(limits, "company_paid", paid)
+    asyncio.run(limits.check(None, "ann", COMPANY))
+
+    assert not any(item[1].endswith(":all") for item in counted)
+    assert ("hit", f"rate:assistant:company:{COMPANY}", MESSAGES_PER_COMPANY_DAY) in counted
+
+
+class FakeRedis:
+    def __init__(self):
+        self.values = {}
+
+    async def get(self, key):
+        return self.values.get(key)
+
+    async def set(self, key, value, ex):
+        self.values[key] = value
+
+
+def test_whether_a_company_paid_is_asked_of_billing_once_in_a_while(monkeypatch):
+    asked = []
+
+    async def from_billing(company_id):
+        asked.append(company_id)
+
+        return True
+
+    monkeypatch.setattr(limits.billing, "company_paid", from_billing)
+    redis = FakeRedis()
+
+    assert asyncio.run(limits.company_paid(redis, COMPANY)) is True
+    assert asyncio.run(limits.company_paid(redis, COMPANY)) is True
+    assert asyncio.run(limits.company_paid(redis, None)) is False
+    assert asked == [COMPANY]
 
 
 def test_without_a_company_only_the_users_and_everyones_count(counted):
@@ -67,7 +110,11 @@ def test_a_turns_tokens_are_added_and_going_over_never_fails_the_turn(monkeypatc
         if "all" in key:
             raise ConnectionError("Redis is down")
 
+    async def unpaid(redis, company_id):
+        return False
+
     monkeypatch.setattr(limits, "spend", spend)
+    monkeypatch.setattr(limits, "company_paid", unpaid)
     asyncio.run(limits.record(None, "ann", COMPANY, 1_234))
 
     assert added == [

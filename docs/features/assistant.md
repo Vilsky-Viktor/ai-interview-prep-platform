@@ -108,6 +108,8 @@ Constants in `app/constants/limits.py`, counted in Redis:
 | Messages per company (its members together) | 1,000 a day |
 | Messages for everyone | 20,000 a day |
 | Tokens per user, per company, for everyone | 2 million, 6 million, 200 million a day |
+
+The limits for everyone hold only people in a company that never topped up, so free accounts can't use them up for paying ones; whether a company paid is asked of billing at most every 10 minutes (`PAID_CACHE_SECONDS`), and counts as not when billing can't say.
 | Actions a user confirms | 30 an hour |
 | Voice messages a user has transcribed | 60 an hour |
 

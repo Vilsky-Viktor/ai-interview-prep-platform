@@ -63,8 +63,9 @@ locals {
     notifications-stream = ["companies", "library"]
     ats                  = ["companies"]
     api                  = ["companies"]
-    # Its X-Assistant header, so companies audits reads made through it as such.
-    assistant = ["companies"]
+    # Its X-Assistant header, so companies audits reads made through it as such; billing, whether
+    # a company ever paid (its limits).
+    assistant = ["companies", "billing"]
   }
 
   # Each service's own key checks calls to it. The worker and the stream share generation's and

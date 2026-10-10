@@ -12,6 +12,10 @@ MESSAGES_PER_DAY = 20_000
 TOKENS_PER_USER_DAY = 2_000_000
 TOKENS_PER_COMPANY_DAY = 6_000_000
 TOKENS_PER_DAY = 200_000_000
+# The limits for everyone (MESSAGES_PER_DAY, TOKENS_PER_DAY) hold only people working for a
+# company that never topped up, so free accounts can't use them up for paying ones. Whether a
+# company paid is asked of billing at most this often.
+PAID_CACHE_SECONDS = 600
 
 # The longest voice message (the panel stops recording then).
 MAX_AUDIO_SECONDS = 60
