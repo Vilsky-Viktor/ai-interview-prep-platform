@@ -868,9 +868,9 @@
       "title": "Gumagana sa mga tool mo",
       "text": "Makukuha ng mga aplikanteng inilipat mo sa ATS mo ang interview, at babalik ang mga resulta. Ikinokonekta ng Slack at API ang iba pa.",
       "points": {
-        "move": "Ilipat ang aplikante: ipapadala ang invite",
-        "back": "Grade at mga flag, papunta sa ATS mo",
-        "api": "Platform mo: mga key at webhook"
+        "ats": "ATS mo: natatanggap ng mga aplikante ang invite, bumabalik ang grade at mga flag",
+        "api": "Platform mo: mag-invite gamit ang API, dumarating ang resulta sa webhook",
+        "mcp": "AI chat mo: gamitin ang prepza sa Claude o ChatGPT gamit ang MCP"
       },
       "docs": "Dokumentasyon ng API",
       "apiName": "prepza API"
@@ -1132,6 +1132,7 @@
   },
   "ats": {
     "statusConnected": "naka-connect",
+    "connectedBy": "Ikinonekta ni {name}",
     "flowTitle": "Paano dumarating ang mga aplikante mula sa {ats}",
     "flowStage": "Sa {ats}, magdagdag ng stage para lang sa prepza sa pipeline ng job, halimbawa “prepza skills test”, para hindi ito kailanman mahalo sa iba mong tool.",
     "flowLink": "Dito, i-link ang job at piliin ang stage na iyon.",
@@ -1729,7 +1730,8 @@
       "actions": [
         "Slack: matanggap ang mga notification ng iyong kumpanya sa isang channel.",
         "ATS (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): makakatanggap ng interview ang mga aplikanteng inilipat mo sa isang stage, at babalik doon ang kanilang resulta.",
-        "API: mga key at webhook para ikonekta ang sarili mong platform."
+        "API: mga key at webhook para ikonekta ang sarili mong platform.",
+        "Mga AI app: gamitin ang prepza mula sa Claude, ChatGPT at iba pang AI app."
       ],
       "tips": [
         "Nakikita ng lahat sa kumpanya ang mga integration; ang mga may-ari at admin ang nagbabago ng mga ito."
@@ -1800,6 +1802,19 @@
         "Nire-reserve ang credits ng aplikante kapag inimbitahan siya, sinisingil kapag sumagot siya, at ibinabalik kung hindi.",
         "Ang mga may-ari at admin lang ang nakakakita ng page na ito."
       ]
+    },
+    "aiApps": {
+      "title": "Mga AI app",
+      "text": "Gamitin ang prepza mula sa AI chat mo: tanungin ang Claude o ChatGPT tungkol sa mga interview at aplikante mo, o ipagawa sa kanila ang mga pagbabago para sa iyo.",
+      "actions": [
+        "Kopyahin ang address ng server at idagdag ito sa Claude, Claude Code o ChatGPT, ayon sa mga hakbang.",
+        "Payagan ang app sa page ng prepza na magbubukas.",
+        "I-disconnect ang app na hindi mo na ginagamit."
+      ],
+      "tips": [
+        "Kumikilos ang app bilang ikaw, sa bawat kumpanyang kasali ka, at nagtatanong muna ito bago magbago ng anuman.",
+        "Hindi nito makikita ang password o mga API key mo, at hindi nito mabubura ang account mo o ang isang kumpanya."
+      ]
     }
   },
   "companyBilling": {
@@ -1822,5 +1837,56 @@
     "invoice": "Invoice",
     "invoiceFailed": "Hindi mabuksan ang invoice. Pakisubukan ulit.",
     "deletedCandidate": "Isang na-delete na aplikante"
+  },
+  "aiApps": {
+    "group": "Mga AI app",
+    "name": "MCP server",
+    "rowText": "Ikonekta ang Claude, ChatGPT at iba pang AI app sa prepza.",
+    "title": "Mga AI app",
+    "subtitle": "Kumikilos sila bilang ikaw, sa bawat kumpanyang kasali ka, gamit ang mga pahintulot mo.",
+    "instructionsTitle": "Ikonekta ang isang AI app sa prepza",
+    "serverTitle": "Address ng server",
+    "serverText": "I-paste ito sa AI app mo bilang custom connector (isang MCP server).",
+    "addTo": "Idagdag ito sa <app>{name}</app>",
+    "claudeOpen": "Sa Claude, buksan ang:",
+    "claudePaste": "Pangalanan itong {name}, i-paste ang address ng server at piliin ang “Add”.",
+    "allowOnPrepza": "Piliin ang “Connect”, pagkatapos ay “Payagan” sa page ng prepza na magbubukas.",
+    "claudeCode": "Sa Claude Code, patakbuhin ang:",
+    "copyCommand": "Kopyahin ang command",
+    "commandCopied": "Nakopya ang command",
+    "chatgptDeveloper": "Sa ChatGPT, i-on ang developer mode:",
+    "chatgptCreate": "Pagbalik sa Apps & Connectors, piliin ang:",
+    "chatgptPaste": "Pangalanan itong {name}, i-paste ang address ng server at piliin ang authentication na ito:",
+    "noConnected": "Wala pang naka-connect na app.",
+    "connectedOn": "na-connect noong {date}",
+    "lastUsed": "huling ginamit noong {date}",
+    "neverUsed": "hindi pa nagagamit",
+    "disconnectTitle": "I-disconnect ang {client}?",
+    "disconnectText": "Hihinto ang {client} sa paggana sa prepza hanggang i-connect mo ulit ito.",
+    "disconnectFailed": "Hindi ma-disconnect ang app. Pakisubukang muli."
+  },
+  "connect": {
+    "pageTitle": "Ikonekta ang isang AI app",
+    "title": "Ikonekta ang <name>{client}</name> sa prepza",
+    "titleAny": "Ikonekta ang isang AI app sa prepza",
+    "signInText": "Mag-sign in para piliin kung puwede nitong gamitin ang prepza account mo.",
+    "signIn": "Mag-sign in para magpatuloy",
+    "who": "Gustong gamitin ng {client} ({host}) ang prepza account mo, {email}.",
+    "canTitle": "Kaya nitong",
+    "can": [
+      "Basahin ang mga kumpanya, interview at resulta ng mga aplikante mo.",
+      "Gawin ang mga pagbabagong hinihiling mo, pagkatapos magtanong muna sa iyo."
+    ],
+    "cantTitle": "Hindi nito kayang",
+    "cant": [
+      "Makita ang password o mga API key mo.",
+      "Burahin ang account mo o ang isang kumpanya."
+    ],
+    "unknown": "Hindi kilala ng prepza ang app na ito. Payagan lang ito kung ikaw mismo ang nagsimulang mag-connect nito.",
+    "deny": "Tanggihan",
+    "allow": "Payagan",
+    "footnote": "I-disconnect ito anumang oras sa Mga integration → Mga AI app ng isang kumpanya.",
+    "expired": "Expired na o nagamit na ang link na ito. Simulan ulit ang pag-connect mula sa AI app mo.",
+    "loadFailed": "Hindi ma-load ang request na ito. Pakisubukang muli."
   }
 }

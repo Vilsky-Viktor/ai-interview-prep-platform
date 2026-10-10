@@ -868,9 +868,9 @@
       "title": "お使いのツールと連携",
       "text": "ATS で候補者を移動すると面接が届き、結果も戻ります。それ以外は Slack と API でつながります。",
       "points": {
-        "move": "候補者を移動するだけで招待を送信",
-        "back": "スコアと注意点が ATS に届く",
-        "api": "自社プラットフォーム：キーと Webhook"
+        "ats": "お使いの ATS：候補者に招待が届き、スコアと注意点が戻る",
+        "api": "自社プラットフォーム：API で招待し、結果は Webhook で届く",
+        "mcp": "AI チャット：MCP で Claude や ChatGPT から prepza を利用"
       },
       "docs": "API ドキュメント",
       "apiName": "prepza API"
@@ -1132,6 +1132,7 @@
   },
   "ats": {
     "statusConnected": "接続済み",
+    "connectedBy": "{name} が接続",
     "flowTitle": "{ats} から候補者が届く流れ",
     "flowStage": "{ats} で、求人の選考フローに prepza 専用の選考ステップ（例：「prepza スキルテスト」）を追加してください。ほかのツールと混ざることはありません。",
     "flowLink": "ここで求人を紐付け、その選考ステップを選びます。",
@@ -1729,7 +1730,8 @@
       "actions": [
         "Slack：会社のお知らせをチャンネルで受け取ります。",
         "ATS（Workable、Greenhouse、Teamtailor、Recruitee、Breezy HR）：選考ステップに移動した候補者に面接が送られ、結果が ATS に戻ります。",
-        "API：自社のプラットフォームとつなぐための API キーと Webhook。"
+        "API：自社のプラットフォームとつなぐための API キーと Webhook。",
+        "AI アプリ：Claude や ChatGPT などの AI アプリから prepza を使います。"
       ],
       "tips": ["連携は会社の全員が閲覧でき、所有者と管理者が変更できます。"]
     },
@@ -1798,6 +1800,19 @@
         "候補者のクレジットは招待時に確保され、回答すると消費され、回答しなければ返却されます。",
         "このページは所有者と管理者だけが閲覧できます。"
       ]
+    },
+    "aiApps": {
+      "title": "AI アプリ",
+      "text": "AI チャットから prepza を使えます。Claude や ChatGPT に面接や候補者について質問したり、変更を頼んだりできます。",
+      "actions": [
+        "サーバーのアドレスをコピーし、手順に沿って Claude、Claude Code、ChatGPT に追加します。",
+        "開いた prepza のページでアプリを許可します。",
+        "使わなくなったアプリの接続を解除します。"
+      ],
+      "tips": [
+        "アプリはあなたとして、所属するすべての会社で動作し、何かを変更する前に必ずあなたに確認します。",
+        "パスワードや API キーを見ることはできず、アカウントや会社を削除することもできません。"
+      ]
     }
   },
   "companyBilling": {
@@ -1820,5 +1835,53 @@
     "invoice": "請求書",
     "invoiceFailed": "請求書を開けませんでした。もう一度お試しください。",
     "deletedCandidate": "削除された候補者"
+  },
+  "aiApps": {
+    "group": "AI アプリ",
+    "name": "MCP サーバー",
+    "rowText": "Claude や ChatGPT などの AI アプリを prepza に接続します。",
+    "title": "AI アプリ",
+    "subtitle": "あなたとして、所属するすべての会社で、あなたの権限で動作します。",
+    "instructionsTitle": "AI アプリを prepza に接続",
+    "serverTitle": "サーバーのアドレス",
+    "serverText": "AI アプリにカスタムコネクタ（MCP サーバー）として貼り付けます。",
+    "addTo": "<app>{name}</app> に追加",
+    "claudeOpen": "Claude で次を開きます：",
+    "claudePaste": "名前を {name} にし、サーバーのアドレスを貼り付けて「Add」を選びます。",
+    "allowOnPrepza": "「Connect」を選び、開いた prepza のページで「許可」を選びます。",
+    "claudeCode": "Claude Code で次を実行します：",
+    "copyCommand": "コマンドをコピー",
+    "commandCopied": "コマンドをコピーしました",
+    "chatgptDeveloper": "ChatGPT で開発者モードをオンにします：",
+    "chatgptCreate": "Apps & Connectors に戻り、次を選びます：",
+    "chatgptPaste": "名前を {name} にし、サーバーのアドレスを貼り付けて、次の認証方式を選びます：",
+    "noConnected": "接続済みのアプリはまだありません。",
+    "connectedOn": "{date} に接続",
+    "lastUsed": "最終使用 {date}",
+    "neverUsed": "未使用",
+    "disconnectTitle": "{client} の接続を解除しますか？",
+    "disconnectText": "もう一度接続するまで、{client} から prepza は使えなくなります。",
+    "disconnectFailed": "アプリの接続を解除できませんでした。もう一度お試しください。"
+  },
+  "connect": {
+    "pageTitle": "AI アプリを接続",
+    "title": "<name>{client}</name> を prepza に接続",
+    "titleAny": "AI アプリを prepza に接続",
+    "signInText": "サインインして、このアプリに prepza アカウントの使用を許可するかどうかを選んでください。",
+    "signIn": "サインインして続行",
+    "who": "{client}（{host}）が、あなたの prepza アカウント（{email}）の使用を求めています。",
+    "canTitle": "できること",
+    "can": [
+      "会社、面接、候補者の結果を読み取る。",
+      "頼まれた変更を、事前にあなたに確認したうえで行う。"
+    ],
+    "cantTitle": "できないこと",
+    "cant": ["パスワードや API キーを見る。", "アカウントや会社を削除する。"],
+    "unknown": "prepza はこのアプリを認識していません。自分で接続を始めた場合にのみ許可してください。",
+    "deny": "拒否",
+    "allow": "許可",
+    "footnote": "会社の「連携」→「AI アプリ」から、いつでも接続を解除できます。",
+    "expired": "このリンクは期限切れか、すでに使用されています。AI アプリからもう一度接続を始めてください。",
+    "loadFailed": "このリクエストを読み込めませんでした。もう一度お試しください。"
   }
 }

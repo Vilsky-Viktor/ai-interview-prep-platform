@@ -860,9 +860,9 @@
       "title": "Hoạt động với các công cụ của bạn",
       "text": "Ứng viên bạn chuyển trong ATS sẽ nhận buổi phỏng vấn, và kết quả được gửi về. Slack và API kết nối phần còn lại.",
       "points": {
-        "move": "Chuyển ứng viên: lời mời được gửi đi",
-        "back": "Điểm và cảnh báo được gửi về ATS",
-        "api": "Nền tảng của bạn: khóa và webhook"
+        "ats": "ATS của bạn: ứng viên nhận lời mời, điểm và cảnh báo được gửi về",
+        "api": "Nền tảng của bạn: mời qua API, kết quả gửi về qua webhook",
+        "mcp": "Chat AI của bạn: dùng prepza trong Claude hoặc ChatGPT qua MCP"
       },
       "docs": "Tài liệu API",
       "apiName": "API prepza"
@@ -1124,6 +1124,7 @@
   },
   "ats": {
     "statusConnected": "đã kết nối",
+    "connectedBy": "Kết nối bởi {name}",
     "flowTitle": "Ứng viên đến từ {ats} như thế nào",
     "flowStage": "Trong {ats}, hãy thêm vào quy trình tuyển dụng của tin một giai đoạn riêng cho prepza, chẳng hạn “Kiểm tra kỹ năng prepza”, để không bao giờ lẫn với các công cụ khác của bạn.",
     "flowLink": "Tại đây, hãy liên kết tin tuyển dụng và chọn giai đoạn đó.",
@@ -1721,7 +1722,8 @@
       "actions": [
         "Slack: nhận thông báo của công ty trong một kênh.",
         "ATS (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): ứng viên bạn chuyển sang một giai đoạn sẽ nhận buổi phỏng vấn, và kết quả được gửi ngược lại.",
-        "API: khóa và webhook để kết nối nền tảng của riêng bạn."
+        "API: khóa và webhook để kết nối nền tảng của riêng bạn.",
+        "Ứng dụng AI: dùng prepza từ Claude, ChatGPT và các ứng dụng AI khác."
       ],
       "tips": [
         "Mọi người trong công ty đều thấy các tích hợp; chủ sở hữu và quản trị viên thay đổi chúng."
@@ -1792,6 +1794,19 @@
         "Credit cho một ứng viên được giữ lại khi mời, bị trừ khi ứng viên trả lời và được hoàn lại nếu không.",
         "Chỉ chủ sở hữu và quản trị viên thấy trang này."
       ]
+    },
+    "aiApps": {
+      "title": "Ứng dụng AI",
+      "text": "Dùng prepza ngay trong chat AI của bạn: hỏi Claude hoặc ChatGPT về các buổi phỏng vấn và ứng viên của bạn, hoặc nhờ chúng thực hiện thay đổi giúp bạn.",
+      "actions": [
+        "Sao chép địa chỉ máy chủ và thêm vào Claude, Claude Code hoặc ChatGPT theo các bước.",
+        "Cho phép ứng dụng trên trang prepza vừa mở.",
+        "Ngắt kết nối ứng dụng bạn không còn dùng."
+      ],
+      "tips": [
+        "Ứng dụng hành động thay mặt bạn, trong mọi công ty bạn tham gia, và hỏi bạn trước khi thay đổi bất cứ điều gì.",
+        "Ứng dụng không thể xem mật khẩu hay khóa API của bạn, và không thể xóa tài khoản của bạn hay một công ty."
+      ]
     }
   },
   "companyBilling": {
@@ -1814,5 +1829,56 @@
     "invoice": "Hóa đơn",
     "invoiceFailed": "Không mở được hóa đơn. Vui lòng thử lại.",
     "deletedCandidate": "Ứng viên đã bị xóa"
+  },
+  "aiApps": {
+    "group": "Ứng dụng AI",
+    "name": "Máy chủ MCP",
+    "rowText": "Kết nối Claude, ChatGPT và các ứng dụng AI khác với prepza.",
+    "title": "Ứng dụng AI",
+    "subtitle": "Chúng hành động thay mặt bạn, trong mọi công ty bạn tham gia, với quyền của bạn.",
+    "instructionsTitle": "Kết nối ứng dụng AI với prepza",
+    "serverTitle": "Địa chỉ máy chủ",
+    "serverText": "Dán vào ứng dụng AI của bạn dưới dạng custom connector (máy chủ MCP).",
+    "addTo": "Thêm vào <app>{name}</app>",
+    "claudeOpen": "Trong Claude, mở:",
+    "claudePaste": "Đặt tên là {name}, dán địa chỉ máy chủ rồi chọn “Add”.",
+    "allowOnPrepza": "Chọn “Connect”, rồi chọn “Cho phép” trên trang prepza vừa mở.",
+    "claudeCode": "Trong Claude Code, chạy:",
+    "copyCommand": "Sao chép lệnh",
+    "commandCopied": "Đã sao chép lệnh",
+    "chatgptDeveloper": "Trong ChatGPT, bật chế độ nhà phát triển:",
+    "chatgptCreate": "Quay lại Apps & Connectors, chọn:",
+    "chatgptPaste": "Đặt tên là {name}, dán địa chỉ máy chủ và chọn kiểu xác thực này:",
+    "noConnected": "Chưa có ứng dụng nào được kết nối.",
+    "connectedOn": "kết nối ngày {date}",
+    "lastUsed": "dùng lần cuối {date}",
+    "neverUsed": "chưa dùng",
+    "disconnectTitle": "Ngắt kết nối {client}?",
+    "disconnectText": "{client} sẽ không hoạt động với prepza cho đến khi bạn kết nối lại.",
+    "disconnectFailed": "Không thể ngắt kết nối ứng dụng. Vui lòng thử lại."
+  },
+  "connect": {
+    "pageTitle": "Kết nối ứng dụng AI",
+    "title": "Kết nối <name>{client}</name> với prepza",
+    "titleAny": "Kết nối ứng dụng AI với prepza",
+    "signInText": "Đăng nhập để chọn có cho ứng dụng này dùng tài khoản prepza của bạn hay không.",
+    "signIn": "Đăng nhập để tiếp tục",
+    "who": "{client} ({host}) muốn dùng tài khoản prepza của bạn, {email}.",
+    "canTitle": "Ứng dụng có thể",
+    "can": [
+      "Đọc các công ty, buổi phỏng vấn và kết quả ứng viên của bạn.",
+      "Thực hiện các thay đổi bạn yêu cầu, sau khi hỏi bạn trước."
+    ],
+    "cantTitle": "Ứng dụng không thể",
+    "cant": [
+      "Xem mật khẩu hay khóa API của bạn.",
+      "Xóa tài khoản của bạn hay một công ty."
+    ],
+    "unknown": "prepza không biết ứng dụng này. Chỉ cho phép nếu chính bạn bắt đầu kết nối nó.",
+    "deny": "Từ chối",
+    "allow": "Cho phép",
+    "footnote": "Ngắt kết nối bất cứ lúc nào trong Tích hợp → Ứng dụng AI của một công ty.",
+    "expired": "Liên kết này đã hết hạn hoặc đã được dùng. Hãy bắt đầu kết nối lại từ ứng dụng AI của bạn.",
+    "loadFailed": "Không thể tải yêu cầu này. Vui lòng thử lại."
   }
 }

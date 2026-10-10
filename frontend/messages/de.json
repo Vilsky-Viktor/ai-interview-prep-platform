@@ -864,9 +864,9 @@
       "title": "Passt zu deinen Tools",
       "text": "Kandidaten, die du in deinem ATS verschiebst, bekommen das Interview, und die Ergebnisse kommen zurück. Slack und die API verbinden den Rest.",
       "points": {
-        "move": "Kandidat verschoben: Einladung geht raus",
-        "back": "Ergebnis und Hinweise landen im ATS",
-        "api": "Deine Plattform: Schlüssel und Webhooks"
+        "ats": "Dein ATS: Kandidaten bekommen die Einladung, Ergebnis und Hinweise kommen zurück",
+        "api": "Deine Plattform: per API einladen, Ergebnisse kommen per Webhook",
+        "mcp": "Dein KI-Chat: prepza in Claude oder ChatGPT per MCP nutzen"
       },
       "docs": "API-Dokumentation",
       "apiName": "prepza API"
@@ -1128,6 +1128,7 @@
   },
   "ats": {
     "statusConnected": "verbunden",
+    "connectedBy": "Verbunden von {name}",
     "flowTitle": "Wie Kandidaten aus {ats} kommen",
     "flowStage": "Füge in {ats} der Pipeline der Stelle eine eigene Phase nur für prepza hinzu, etwa „prepza Skills-Test“, damit sie sich nie mit deinen anderen Tools vermischt.",
     "flowLink": "Verknüpfe hier die Stelle und wähle diese Phase.",
@@ -1725,7 +1726,8 @@
       "actions": [
         "Slack: Erhalte die Benachrichtigungen deines Unternehmens in einem Kanal.",
         "ATS (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): Kandidaten, die du in eine Phase verschiebst, bekommen das Interview, und ihre Ergebnisse gehen zurück.",
-        "API: Schlüssel und Webhooks, um deine eigene Plattform anzubinden."
+        "API: Schlüssel und Webhooks, um deine eigene Plattform anzubinden.",
+        "KI-Apps: Nutze prepza in Claude, ChatGPT und anderen KI-Apps."
       ],
       "tips": [
         "Alle im Unternehmen sehen die Integrationen; Inhaber und Admins ändern sie."
@@ -1796,6 +1798,19 @@
         "Die Credits eines Kandidaten werden bei der Einladung reserviert, abgebucht, sobald er antwortet, und zurückgegeben, wenn nicht.",
         "Nur Inhaber und Admins sehen diese Seite."
       ]
+    },
+    "aiApps": {
+      "title": "KI-Apps",
+      "text": "Nutze prepza in deinem KI-Chat: Frag Claude oder ChatGPT nach deinen Interviews und Kandidaten, oder lass sie Änderungen für dich vornehmen.",
+      "actions": [
+        "Kopiere die Serveradresse und füge sie nach den Schritten in Claude, Claude Code oder ChatGPT hinzu.",
+        "Lass die App auf der prepza-Seite zu, die sich dann öffnet.",
+        "Trenne eine App, die du nicht mehr nutzt."
+      ],
+      "tips": [
+        "Eine App handelt in deinem Namen, in jedem Unternehmen, in dem du Mitglied bist, und fragt dich, bevor sie etwas ändert.",
+        "Sie sieht weder dein Passwort noch deine API-Schlüssel und kann weder dein Konto noch ein Unternehmen löschen."
+      ]
     }
   },
   "companyBilling": {
@@ -1818,5 +1833,56 @@
     "invoice": "Rechnung",
     "invoiceFailed": "Die Rechnung konnte nicht geöffnet werden. Bitte versuche es erneut.",
     "deletedCandidate": "Ein gelöschter Kandidat"
+  },
+  "aiApps": {
+    "group": "KI-Apps",
+    "name": "MCP-Server",
+    "rowText": "Verbinde Claude, ChatGPT und andere KI-Apps mit prepza.",
+    "title": "KI-Apps",
+    "subtitle": "Sie handeln in deinem Namen, in jedem Unternehmen, in dem du Mitglied bist, mit deinen Berechtigungen.",
+    "instructionsTitle": "KI-App mit prepza verbinden",
+    "serverTitle": "Serveradresse",
+    "serverText": "Füge sie in deiner KI-App als eigenen Konnektor (einen MCP-Server) ein.",
+    "addTo": "Zu <app>{name}</app> hinzufügen",
+    "claudeOpen": "Öffne in Claude:",
+    "claudePaste": "Nenne ihn {name}, füge die Serveradresse ein und wähle „Add“.",
+    "allowOnPrepza": "Wähle „Connect“ und dann auf der prepza-Seite, die sich öffnet, „Zulassen“.",
+    "claudeCode": "Führe in Claude Code aus:",
+    "copyCommand": "Befehl kopieren",
+    "commandCopied": "Befehl kopiert",
+    "chatgptDeveloper": "Aktiviere in ChatGPT den Entwicklermodus:",
+    "chatgptCreate": "Wähle dann wieder unter Apps & Connectors:",
+    "chatgptPaste": "Nenne ihn {name}, füge die Serveradresse ein und wähle diese Authentifizierung:",
+    "noConnected": "Noch keine Apps verbunden.",
+    "connectedOn": "verbunden {date}",
+    "lastUsed": "zuletzt genutzt {date}",
+    "neverUsed": "noch nicht genutzt",
+    "disconnectTitle": "{client} trennen?",
+    "disconnectText": "{client} funktioniert nicht mehr mit prepza, bis du es wieder verbindest.",
+    "disconnectFailed": "Die App konnte nicht getrennt werden. Bitte versuche es erneut."
+  },
+  "connect": {
+    "pageTitle": "KI-App verbinden",
+    "title": "<name>{client}</name> mit prepza verbinden",
+    "titleAny": "KI-App mit prepza verbinden",
+    "signInText": "Melde dich an, um zu entscheiden, ob sie dein prepza-Konto nutzen darf.",
+    "signIn": "Anmelden und fortfahren",
+    "who": "{client} ({host}) möchte dein prepza-Konto {email} nutzen.",
+    "canTitle": "Sie kann",
+    "can": [
+      "Deine Unternehmen, Interviews und die Ergebnisse der Kandidaten lesen.",
+      "Die Änderungen vornehmen, um die du bittest, nachdem sie dich gefragt hat."
+    ],
+    "cantTitle": "Sie kann nicht",
+    "cant": [
+      "Dein Passwort oder deine API-Schlüssel sehen.",
+      "Dein Konto oder ein Unternehmen löschen."
+    ],
+    "unknown": "prepza kennt diese App nicht. Lass sie nur zu, wenn du die Verbindung selbst gestartet hast.",
+    "deny": "Ablehnen",
+    "allow": "Zulassen",
+    "footnote": "Du kannst sie jederzeit unter Integrationen → KI-Apps eines Unternehmens trennen.",
+    "expired": "Dieser Link ist abgelaufen oder wurde schon verwendet. Starte die Verbindung erneut in deiner KI-App.",
+    "loadFailed": "Diese Anfrage konnte nicht geladen werden. Bitte versuche es erneut."
   }
 }

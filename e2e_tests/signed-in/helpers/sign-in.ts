@@ -100,3 +100,11 @@ export async function tokenOf(page: Page): Promise<string> {
 
   return cookie.value
 }
+
+/** The signed-in user's id (their token's user_id claim), for rows saved straight into a
+ * database for them. */
+export async function uidOf(page: Page): Promise<string> {
+  const payload = (await tokenOf(page)).split(".")[1]
+
+  return JSON.parse(Buffer.from(payload, "base64url").toString()).user_id
+}

@@ -2,6 +2,7 @@ import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 import { getTranslations } from "next-intl/server"
 
+import { AiAppsRow } from "@/components/company/ai-apps-row"
 import { ApiRow } from "@/components/company/api-row"
 import { AtsConnectionRow } from "@/components/company/ats-connection"
 import { SlackRow } from "@/components/company/slack-connection"
@@ -13,13 +14,14 @@ import { serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
 import type { ApiSettings } from "@/types/api-access"
 import type { AtsIntegrations, Company } from "@/types/company"
+import type { AiConnection } from "@/types/connections"
 import type { SlackOverview } from "@/types/notifications"
 import { LIST_BOX } from "@/constants/lists"
 
 export const generateMetadata = () => translatedTitle("company", "integrations")
 
-/** The company's integrations: Slack, its ATSs and the API, a row each laid out like the
- * companies list, in three groups, messaging first; each opens its own page. Everyone in the company sees them; owners and admins change them. */
+/** The company's integrations: Slack, its ATSs, the API and AI apps, a row each laid out like
+ * the companies list, in four groups, messaging first; each opens its own page. Everyone in the company sees them; owners and admins change them. */
 export default async function IntegrationsPage({
   params,
 }: {
@@ -31,7 +33,8 @@ export default async function IntegrationsPage({
   const company = signedIn
     ? await serverFetch<Company>(`/companies/companies/${companyId}`)
     : null
-  const [integrations, slack, api] = company
+  const ai = await getTranslations("aiApps")
+  const [integrations, slack, api, connections] = company
     ? await Promise.all([
         serverFetch<AtsIntegrations>(
           `/ats/connections?company_id=${companyId}`
@@ -40,8 +43,9 @@ export default async function IntegrationsPage({
           `/notifications/slack?company_id=${companyId}`
         ),
         serverFetch<ApiSettings>(`/v1/manage?company_id=${companyId}`),
+        serverFetch<AiConnection[]>("/assistant/connections"),
       ])
-    : [null, null, null]
+    : [null, null, null, null]
 
   if (!signedIn) {
     return (
@@ -119,6 +123,15 @@ export default async function IntegrationsPage({
           </ul>
         </section>
       )}
+      <section className="space-y-6">
+        {/* "AI" keeps its capitals, though titles are lowercase. */}
+        <h2 className="font-heading text-2xl font-medium normal-case">
+          {ai("group")}
+        </h2>
+        <ul className={`${LIST_BOX} overflow-hidden`}>
+          <AiAppsRow companyId={companyId} connections={connections ?? []} />
+        </ul>
+      </section>
     </main>
   )
 }

@@ -7,25 +7,13 @@ import {
   createInterview,
   deleteOwnCompanies,
 } from "../helpers/api";
+import { box, PHONE } from "../helpers/layout";
 import { visit } from "../helpers/navigation";
 import { throwawayEmail } from "../helpers/users";
 
 // How the signed-in pages fit a phone: lists and panels out to the screen's edges, actions on
 // their own lines, dialogs across the screen with their buttons side by side, and timed questions
 // with nothing around them.
-
-const PHONE = { width: 390, height: 844 };
-
-async function box(locator: Locator) {
-  const found = (await locator.boundingBox({ timeout: 15_000 }))!;
-
-  return {
-    left: Math.round(found.x),
-    top: Math.round(found.y),
-    width: Math.round(found.width),
-    bottom: Math.round(found.y + found.height),
-  };
-}
 
 // The page's visible width: the header's, which spans it (without the scrollbar desktop Chrome
 // draws; phones draw none).
@@ -103,15 +91,18 @@ test("a company's pages on a phone", async ({ signInAs }) => {
     const role = await box(member.getByText("owner", { exact: true }));
     expect(role.top).toBeGreaterThanOrEqual(email.bottom);
 
-    // Integrations: the buttons beside the logo, under the name.
+    // Integrations: a small logo beside the name, the buttons on the line under both.
     await visit(user, `/companies/${company.id}/integrations`);
     const slack = user.getByRole("listitem").filter({ hasText: "Slack" });
     const slackName = await box(slack.getByText("Slack", { exact: true }));
+    const logo = await box(slack.getByRole("link").locator("span").first());
     const instructions = await box(
       slack.getByRole("button", { name: "Instructions" }),
     );
-    expect(instructions.top).toBeGreaterThan(slackName.top);
-    expect(instructions.left).toBeGreaterThan(40);
+    expect(logo.width).toBe(48);
+    expect(slackName.left).toBeGreaterThan(logo.right);
+    expect(instructions.top).toBeGreaterThan(logo.bottom);
+    expect(instructions.left).toBeLessThan(logo.right);
   } finally {
     await deleteOwnCompanies(user);
   }

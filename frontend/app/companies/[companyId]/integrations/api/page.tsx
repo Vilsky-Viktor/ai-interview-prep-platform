@@ -69,7 +69,8 @@ export default async function ApiPage({
             </BackLink>
           }
           title={
-            <div className="flex items-start justify-between gap-4">
+            // On phones the buttons go on their own line, full width, sharing it equally.
+            <div className="flex items-start justify-between gap-4 max-sm:flex-col max-sm:items-stretch">
               <div className="flex min-w-0 items-center gap-4">
                 <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-muted">
                   <CodeXmlIcon className="size-6" />
@@ -81,7 +82,7 @@ export default async function ApiPage({
                 </div>
               </div>
               {/* The docs, and the open tab's action for owners and admins. */}
-              <div className="flex shrink-0 items-center gap-3">
+              <div className="flex shrink-0 items-center gap-3 max-sm:mt-4 max-sm:*:flex-1">
                 <Button
                   variant="outline"
                   className="h-10 px-5 text-base"

@@ -44,7 +44,7 @@ test("an owner connects Breezy HR with one key", async ({ signInAs }) => {
   await connect.getByRole("button", { name: "Connect" }).click()
 
   // Connected, without a dialog to follow: the page lists the linked jobs.
-  await expect(owner.getByText("connected", { exact: true })).toBeVisible({ timeout: 60_000 })
+  await expect(owner.getByText("connected", { exact: true }).filter({ visible: true })).toBeVisible({ timeout: 60_000 })
   await expect(owner.getByRole("dialog")).toHaveCount(0)
   await expect(owner.getByText("E2E Backend developer")).toBeVisible()
   await shot(owner, "page")

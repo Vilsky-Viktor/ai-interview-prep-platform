@@ -13,6 +13,11 @@ import { Button } from "@/components/ui/button"
 import { SLACK } from "@/constants/slack"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 import type { SlackOverview } from "@/types/notifications"
+import {
+  INTEGRATION_LINK,
+  INTEGRATION_LOGO,
+  INTEGRATION_ROW,
+} from "@/constants/lists"
 
 const STEPS = ["stepAdd", "stepChannel", "stepKinds", "stepPrivacy"] as const
 
@@ -28,12 +33,12 @@ export function SlackRow({
   canEdit: boolean
 }) {
   return (
-    <li className="relative flex items-center justify-between gap-6 py-6 pe-4 transition-colors hover:bg-muted/50 active:bg-muted/50 max-sm:grid max-sm:grid-cols-[4.5rem_minmax(0,1fr)] max-sm:gap-x-4 max-sm:gap-y-3 sm:pe-6">
+    <li className={INTEGRATION_ROW}>
       <Link
         href={`/companies/${companyId}/integrations/slack`}
-        className="flex min-w-0 items-center gap-4 after:absolute after:inset-0 max-sm:contents"
+        className={INTEGRATION_LINK}
       >
-        <span className="-my-6 me-2 flex size-[6.25rem] shrink-0 items-center justify-center bg-muted p-6 max-sm:row-span-2 max-sm:me-0 max-sm:h-auto max-sm:w-auto max-sm:self-stretch max-sm:p-4">
+        <span className={INTEGRATION_LOGO + " p-6 max-sm:p-2"}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={SLACK.logo} alt="" className="size-full object-contain" />
         </span>
@@ -51,7 +56,7 @@ export function SlackRow({
       </Link>
       {/* On phones the logo spans the row, with the name and then these buttons beside it,
           sharing their line equally (each on its own line where both don't fit). */}
-      <span className="relative z-10 max-sm:col-start-2 max-sm:*:flex max-sm:*:w-full max-sm:*:flex-wrap max-sm:[&>*>*]:flex-1 max-sm:[&>*>*]:px-3">
+      <span className="relative z-10 max-sm:col-span-2 max-sm:*:flex max-sm:*:w-full max-sm:*:flex-wrap max-sm:[&>*>*]:flex-1 max-sm:[&>*>*]:px-3 max-sm:[&>*>*:nth-child(3)]:basis-full">
         <SlackActions companyId={companyId} slack={slack} canEdit={canEdit} />
       </span>
     </li>

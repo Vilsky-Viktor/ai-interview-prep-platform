@@ -1,6 +1,7 @@
 "use client"
 
 import { useTranslations } from "next-intl"
+import { useRef } from "react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -14,7 +15,7 @@ import {
 } from "@/components/ui/dialog"
 
 /** An integration's one Instructions button, beside Connect: a dialog with everything to know,
- * connected or not: `steps`, numbered, after any setup still to do (`children`, with the steps
+ * connected or not: `steps`, numbered (when it has a simple list), after any setup still to do (`children`, with the steps
  * then under their own `stepsTitle`). Open by itself after connecting when the caller says so. */
 export function InstructionsDialog({
   title,
@@ -25,7 +26,7 @@ export function InstructionsDialog({
   children,
 }: {
   title: string
-  steps: string[]
+  steps?: string[]
   stepsTitle?: string
   open?: boolean
   onOpenChange?: (open: boolean) => void
@@ -33,6 +34,8 @@ export function InstructionsDialog({
 }) {
   const t = useTranslations("ats")
   const common = useTranslations("common")
+  // Opens on the dialog itself, not its first field, so a copy field isn't selected and scrolled.
+  const popup = useRef<HTMLDivElement>(null)
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -44,8 +47,10 @@ export function InstructionsDialog({
         {t("instructions")}
       </DialogTrigger>
       <DialogContent
+        ref={popup}
+        initialFocus={popup}
         showCloseButton={false}
-        className="max-h-[90dvh] overflow-y-auto sm:max-w-2xl"
+        className="max-h-[90dvh] max-sm:h-dvh max-sm:max-h-dvh sm:max-w-2xl"
       >
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
@@ -54,11 +59,13 @@ export function InstructionsDialog({
         {children && stepsTitle && (
           <h3 className="text-lg font-medium">{stepsTitle}</h3>
         )}
-        <ol className="list-decimal space-y-3 ps-5 text-base text-muted-foreground">
-          {steps.map((step) => (
-            <li key={step}>{step}</li>
-          ))}
-        </ol>
+        {steps && (
+          <ol className="list-decimal space-y-3 ps-5 text-base text-muted-foreground">
+            {steps.map((step) => (
+              <li key={step}>{step}</li>
+            ))}
+          </ol>
+        )}
         <DialogFooter>
           <DialogClose
             render={

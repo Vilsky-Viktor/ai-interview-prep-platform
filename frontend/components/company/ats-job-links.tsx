@@ -39,7 +39,8 @@ export function AtsJobLinks({
 
   return (
     <section className="space-y-6">
-      <div className="flex items-center justify-between gap-4">
+      {/* On phones "Link a job" goes on its own line, full width. */}
+      <div className="flex items-center justify-between gap-4 max-sm:flex-col max-sm:items-stretch max-sm:[&>button]:w-full">
         <div className="space-y-1">
           <h2 className="font-heading text-2xl font-medium">{t("links")}</h2>
           <p className="text-base text-muted-foreground">
@@ -105,7 +106,7 @@ function LinkRow({
   }
 
   return (
-    <li className="flex items-center justify-between gap-6 p-4 sm:p-6">
+    <li className="flex items-center justify-between gap-6 p-4 max-sm:flex-col max-sm:items-stretch max-sm:gap-4 sm:p-6">
       <span className="min-w-0 space-y-1">
         <span className="block text-lg font-medium">{link.job_name}</span>
         <span className="block text-base text-muted-foreground">
@@ -123,8 +124,8 @@ function LinkRow({
           </span>
         )}
       </span>
-      {/* The stats, then Unlink, together at the row's end. */}
-      <span className="flex shrink-0 items-center gap-4">
+      {/* The stats, then Unlink, together at the row's end; on phones on a line of their own. */}
+      <span className="flex shrink-0 items-center gap-4 max-sm:justify-between">
         <InvitedCount count={link.invited} />
         {link.not_invited > 0 && (
           <NotInvited companyId={companyId} link={link} canEdit={canEdit} />

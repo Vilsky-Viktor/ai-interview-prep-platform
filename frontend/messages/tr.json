@@ -863,9 +863,9 @@
       "title": "Araçlarınızla çalışır",
       "text": "ATS sisteminizde taşıdığınız adaylar mülakatı alır ve sonuçlar geri gelir. Gerisini Slack ve API bağlar.",
       "points": {
-        "move": "Adayı taşıyın: davet gönderilir",
-        "back": "Not ve işaretler ATS sisteminize gelir",
-        "api": "Platformunuz: anahtarlar ve webhook'lar"
+        "ats": "ATS'niz: adaylar daveti alır, not ve işaretler geri gelir",
+        "api": "Platformunuz: API ile davet edin, sonuçlar webhook ile gelsin",
+        "mcp": "Yapay zekâ sohbetiniz: MCP ile Claude veya ChatGPT'de prepza"
       },
       "docs": "API belgeleri",
       "apiName": "prepza API"
@@ -1127,6 +1127,7 @@
   },
   "ats": {
     "statusConnected": "bağlı",
+    "connectedBy": "Bağlayan: {name}",
     "flowTitle": "Adaylar {ats} üzerinden nasıl gelir",
     "flowStage": "{ats} hesabınızda ilanın sürecine yalnızca prepza için bir aşama ekleyin, örneğin “prepza beceri testi”; böylece diğer araçlarınızla hiç karışmaz.",
     "flowLink": "Burada ilanı bağlayın ve o aşamayı seçin.",
@@ -1724,7 +1725,8 @@
       "actions": [
         "Slack: şirketinizin bildirimlerini bir kanalda alın.",
         "ATS (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): bir aşamaya taşıdığınız adaylar mülakatı alır, sonuçları ATS'e geri döner.",
-        "API: kendi platformunuzu bağlamak için anahtarlar ve webhook'lar."
+        "API: kendi platformunuzu bağlamak için anahtarlar ve webhook'lar.",
+        "Yapay zekâ uygulamaları: prepza'yı Claude, ChatGPT ve diğer yapay zekâ uygulamalarından kullanın."
       ],
       "tips": [
         "Şirketteki herkes entegrasyonları görür; sahipler ve yöneticiler değiştirebilir."
@@ -1795,6 +1797,19 @@
         "Bir adayın kredileri davet edildiğinde ayrılır, yanıt verdiğinde düşülür, vermezse iade edilir.",
         "Bu sayfayı yalnızca sahipler ve yöneticiler görür."
       ]
+    },
+    "aiApps": {
+      "title": "Yapay zekâ uygulamaları",
+      "text": "prepza'yı yapay zekâ sohbetinizden kullanın: Claude'a veya ChatGPT'ye mülakatlarınızı ve adaylarınızı sorun ya da sizin yerinize değişiklik yapmalarını isteyin.",
+      "actions": [
+        "Sunucu adresini kopyalayın ve adımları izleyerek Claude, Claude Code veya ChatGPT'ye ekleyin.",
+        "Açılan prepza sayfasında uygulamaya izin verin.",
+        "Artık kullanmadığınız bir uygulamanın bağlantısını kesin."
+      ],
+      "tips": [
+        "Uygulama, üyesi olduğunuz her şirkette sizin adınıza hareket eder ve bir şeyi değiştirmeden önce size sorar.",
+        "Şifrenizi veya API anahtarlarınızı göremez; hesabınızı veya bir şirketi silemez."
+      ]
     }
   },
   "companyBilling": {
@@ -1817,5 +1832,56 @@
     "invoice": "Fatura",
     "invoiceFailed": "Fatura açılamadı. Lütfen tekrar deneyin.",
     "deletedCandidate": "Silinmiş bir aday"
+  },
+  "aiApps": {
+    "group": "Yapay zekâ uygulamaları",
+    "name": "MCP sunucusu",
+    "rowText": "Claude, ChatGPT ve diğer yapay zekâ uygulamalarını prepza'ya bağlayın.",
+    "title": "Yapay zekâ uygulamaları",
+    "subtitle": "Üyesi olduğunuz her şirkette, sizin yetkilerinizle, sizin adınıza hareket ederler.",
+    "instructionsTitle": "Yapay zekâ uygulamasını prepza'ya bağla",
+    "serverTitle": "Sunucu adresi",
+    "serverText": "Bunu yapay zekâ uygulamanıza özel bağlayıcı (MCP sunucusu) olarak yapıştırın.",
+    "addTo": "<app>{name}</app> uygulamasına ekle",
+    "claudeOpen": "Claude'da şunu açın:",
+    "claudePaste": "Adını {name} koyun, sunucu adresini yapıştırın ve “Add” seçeneğini seçin.",
+    "allowOnPrepza": "“Connect” seçeneğini, ardından açılan prepza sayfasında “İzin ver”i seçin.",
+    "claudeCode": "Claude Code'da şunu çalıştırın:",
+    "copyCommand": "Komutu kopyala",
+    "commandCopied": "Komut kopyalandı",
+    "chatgptDeveloper": "ChatGPT'de geliştirici modunu açın:",
+    "chatgptCreate": "Apps & Connectors'a dönüp şunu seçin:",
+    "chatgptPaste": "Adını {name} koyun, sunucu adresini yapıştırın ve bu kimlik doğrulama yöntemini seçin:",
+    "noConnected": "Henüz bağlı uygulama yok.",
+    "connectedOn": "bağlanma: {date}",
+    "lastUsed": "son kullanım: {date}",
+    "neverUsed": "henüz kullanılmadı",
+    "disconnectTitle": "{client} bağlantısı kesilsin mi?",
+    "disconnectText": "{client}, siz yeniden bağlayana kadar prepza ile çalışmaz.",
+    "disconnectFailed": "Uygulamanın bağlantısı kesilemedi. Lütfen tekrar deneyin."
+  },
+  "connect": {
+    "pageTitle": "Yapay zekâ uygulaması bağla",
+    "title": "<name>{client}</name> uygulamasını prepza'ya bağla",
+    "titleAny": "Yapay zekâ uygulamasını prepza'ya bağla",
+    "signInText": "Uygulamanın prepza hesabınızı kullanıp kullanamayacağını seçmek için giriş yapın.",
+    "signIn": "Devam etmek için giriş yap",
+    "who": "{client} ({host}), {email} prepza hesabınızı kullanmak istiyor.",
+    "canTitle": "Yapabilecekleri",
+    "can": [
+      "Şirketlerinizi, mülakatlarınızı ve adayların sonuçlarını okumak.",
+      "İstediğiniz değişiklikleri, önce size sorarak yapmak."
+    ],
+    "cantTitle": "Yapamayacakları",
+    "cant": [
+      "Şifrenizi veya API anahtarlarınızı görmek.",
+      "Hesabınızı veya bir şirketi silmek."
+    ],
+    "unknown": "prepza bu uygulamayı tanımıyor. Yalnızca bağlamayı kendiniz başlattıysanız izin verin.",
+    "deny": "Reddet",
+    "allow": "İzin ver",
+    "footnote": "Bağlantısını istediğiniz zaman bir şirketin Entegrasyonlar → Yapay zekâ uygulamaları bölümünden kesebilirsiniz.",
+    "expired": "Bu bağlantının süresi dolmuş ya da bağlantı zaten kullanılmış. Bağlamaya yapay zekâ uygulamanızdan yeniden başlayın.",
+    "loadFailed": "Bu istek yüklenemedi. Lütfen tekrar deneyin."
   }
 }

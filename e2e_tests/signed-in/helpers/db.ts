@@ -1,3 +1,5 @@
+import { randomUUID } from "node:crypto"
+
 import pg from "pg"
 
 import { GREENHOUSE_E2E_SECRET, POSTGRES_HOST } from "../constants"
@@ -106,7 +108,7 @@ export async function addAtsConnection(
     : "placeholder"
   const account = {
     workable: "e2e-acme",
-    greenhouse: "…e2e1",
+    greenhouse: "",
     teamtailor: "E2E Acme",
     recruitee: "e2e-acme",
     breezy: "E2E Acme",
@@ -218,4 +220,58 @@ export async function addReplacedVersion(templateId: string, oldText: string) {
       [templateId, oldText]
     )
   )
+}
+
+/** Marks a throwaway company's ATS connection broken, as the ats service does when the ATS
+ * refuses its key. */
+export async function markAtsBroken(companyId: string) {
+  await withDatabase("ats", (client) =>
+    client.query("UPDATE ats_connections SET status = 'broken' WHERE company_id = $1", [companyId])
+  )
+}
+
+/** Names who made a throwaway company's ATS connection, as the ats service saves it on connecting. */
+export async function nameAtsConnectionMaker(companyId: string, name: string) {
+  await withDatabase("ats", (client) =>
+    client.query("UPDATE ats_connections SET created_by_name = $2 WHERE company_id = $1", [
+      companyId,
+      name,
+    ])
+  )
+}
+
+/** AI apps connected to a throwaway user's account, saved straight into the assistant database
+ * (a real one needs an AI app going through OAuth): an app and one connection each, the first
+ * named the latest. Their tokens are random hashes nothing holds. deleteAiConnections deletes
+ * them. */
+export async function addAiConnections(userId: string, names: string[]) {
+  await withDatabase("assistant", async (client) => {
+    for (const [index, name] of names.entries()) {
+      const clientId = `e2e-${randomUUID()}`
+      await client.query(
+        "INSERT INTO oauth_clients (client_id, info, created_at) VALUES ($1, $2, now())",
+        [clientId, JSON.stringify({ client_id: clientId, client_name: name, redirect_uris: [] })]
+      )
+      await client.query(
+        `INSERT INTO mcp_grants (id, user_id, client_id, client_name, redirect_host, created_at,
+           access_hash, access_expires_at, refresh_hash, refresh_expires_at)
+         VALUES (gen_random_uuid(), $1, $2, $3, 'e2e.example.com',
+           now() - make_interval(hours => $4), $5, now() + interval '1 hour', $6,
+           now() + interval '30 days')`,
+        [userId, clientId, name, index, randomUUID(), randomUUID()]
+      )
+    }
+  })
+}
+
+/** Deletes a throwaway user's AI apps and connections that addAiConnections made. */
+export async function deleteAiConnections(userId: string) {
+  await withDatabase("assistant", async (client) => {
+    await client.query("DELETE FROM mcp_grants WHERE user_id = $1", [userId])
+    // The tests' apps left without a connection (disconnected on the page or just now).
+    await client.query(
+      `DELETE FROM oauth_clients WHERE client_id LIKE 'e2e-%'
+         AND client_id NOT IN (SELECT client_id FROM mcp_grants)`
+    )
+  })
 }

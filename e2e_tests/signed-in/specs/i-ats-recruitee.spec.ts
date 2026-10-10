@@ -66,7 +66,7 @@ test("an owner connects Recruitee and saves its web hook's secret", async ({ sig
   await owner.keyboard.press("Escape")
 
   // Connected, the page lists its linked jobs instead.
-  await expect(owner.getByText("connected", { exact: true })).toBeVisible()
+  await expect(owner.getByText("connected", { exact: true }).filter({ visible: true })).toBeVisible()
   await expect(owner.getByText("E2E Backend developer")).toBeVisible()
   await expect(owner.getByText("isn't connected yet", { exact: false })).toHaveCount(0)
 })

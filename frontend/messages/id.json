@@ -864,9 +864,9 @@
       "title": "Bekerja dengan alat-alatmu",
       "text": "Kandidat yang kamu pindahkan di ATS-mu mendapat wawancara, dan hasilnya kembali. Slack dan API menghubungkan sisanya.",
       "points": {
-        "move": "Pindahkan kandidat: undangan terkirim",
-        "back": "Nilai dan tanda masuk ke ATS-mu",
-        "api": "Platformmu: kunci dan webhook"
+        "ats": "ATS-mu: kandidat menerima undangan, nilai dan tanda kembali",
+        "api": "Platformmu: undang lewat API, hasil datang lewat webhook",
+        "mcp": "Chat AI-mu: pakai prepza di Claude atau ChatGPT lewat MCP"
       },
       "docs": "Dokumentasi API",
       "apiName": "API prepza"
@@ -1128,6 +1128,7 @@
   },
   "ats": {
     "statusConnected": "terhubung",
+    "connectedBy": "Dihubungkan oleh {name}",
     "flowTitle": "Cara kandidat masuk dari {ats}",
     "flowStage": "Di {ats}, tambahkan tahap khusus untuk prepza ke pipeline lowongan, misalnya “Tes keterampilan prepza”, supaya tidak pernah tercampur dengan alat lain yang kamu pakai.",
     "flowLink": "Di sini, tautkan lowongan dan pilih tahap itu.",
@@ -1725,7 +1726,8 @@
       "actions": [
         "Slack: terima notifikasi perusahaanmu di sebuah channel.",
         "ATS (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): kandidat yang kamu pindahkan ke suatu tahap mendapat wawancara, dan hasilnya dikirim balik.",
-        "API: kunci dan webhook untuk menghubungkan platformmu sendiri."
+        "API: kunci dan webhook untuk menghubungkan platformmu sendiri.",
+        "Aplikasi AI: pakai prepza dari Claude, ChatGPT, dan aplikasi AI lainnya."
       ],
       "tips": [
         "Semua orang di perusahaan bisa melihat integrasi; pemilik dan admin yang mengubahnya."
@@ -1796,6 +1798,19 @@
         "Kredit kandidat dicadangkan saat ia diundang, dipotong setelah ia menjawab, dan dikembalikan jika tidak.",
         "Hanya pemilik dan admin yang bisa melihat halaman ini."
       ]
+    },
+    "aiApps": {
+      "title": "Aplikasi AI",
+      "text": "Pakai prepza dari chat AI-mu: tanya Claude atau ChatGPT tentang wawancara dan kandidatmu, atau minta mereka membuat perubahan untukmu.",
+      "actions": [
+        "Salin alamat server dan tambahkan ke Claude, Claude Code, atau ChatGPT sesuai langkah-langkahnya.",
+        "Izinkan aplikasinya di halaman prepza yang terbuka.",
+        "Putuskan aplikasi yang tidak kamu pakai lagi."
+      ],
+      "tips": [
+        "Aplikasi bertindak sebagai kamu, di setiap perusahaan tempatmu bergabung, dan bertanya dulu sebelum mengubah apa pun.",
+        "Aplikasi tidak bisa melihat kata sandi atau kunci API-mu, dan tidak bisa menghapus akunmu atau perusahaan."
+      ]
     }
   },
   "companyBilling": {
@@ -1818,5 +1833,56 @@
     "invoice": "Faktur",
     "invoiceFailed": "Tidak bisa membuka faktur. Silakan coba lagi.",
     "deletedCandidate": "Kandidat yang dihapus"
+  },
+  "aiApps": {
+    "group": "Aplikasi AI",
+    "name": "Server MCP",
+    "rowText": "Hubungkan Claude, ChatGPT, dan aplikasi AI lainnya ke prepza.",
+    "title": "Aplikasi AI",
+    "subtitle": "Aplikasi bertindak sebagai kamu, di setiap perusahaan tempatmu bergabung, dengan hak aksesmu.",
+    "instructionsTitle": "Hubungkan aplikasi AI ke prepza",
+    "serverTitle": "Alamat server",
+    "serverText": "Tempel di aplikasi AI-mu sebagai custom connector (server MCP).",
+    "addTo": "Tambahkan ke <app>{name}</app>",
+    "claudeOpen": "Di Claude, buka:",
+    "claudePaste": "Beri nama {name}, tempel alamat server, lalu pilih “Add”.",
+    "allowOnPrepza": "Pilih “Connect”, lalu “Izinkan” di halaman prepza yang terbuka.",
+    "claudeCode": "Di Claude Code, jalankan:",
+    "copyCommand": "Salin perintah",
+    "commandCopied": "Perintah tersalin",
+    "chatgptDeveloper": "Di ChatGPT, aktifkan mode developer:",
+    "chatgptCreate": "Kembali di Apps & Connectors, pilih:",
+    "chatgptPaste": "Beri nama {name}, tempel alamat server, lalu pilih autentikasi ini:",
+    "noConnected": "Belum ada aplikasi yang terhubung.",
+    "connectedOn": "terhubung {date}",
+    "lastUsed": "terakhir dipakai {date}",
+    "neverUsed": "belum dipakai",
+    "disconnectTitle": "Putuskan {client}?",
+    "disconnectText": "{client} berhenti bekerja dengan prepza sampai kamu menghubungkannya lagi.",
+    "disconnectFailed": "Aplikasi tidak bisa diputuskan. Coba lagi."
+  },
+  "connect": {
+    "pageTitle": "Hubungkan aplikasi AI",
+    "title": "Hubungkan <name>{client}</name> ke prepza",
+    "titleAny": "Hubungkan aplikasi AI ke prepza",
+    "signInText": "Masuk untuk memilih apakah aplikasi ini boleh memakai akun prepza-mu.",
+    "signIn": "Masuk untuk melanjutkan",
+    "who": "{client} ({host}) ingin memakai akun prepza-mu, {email}.",
+    "canTitle": "Aplikasi ini bisa",
+    "can": [
+      "Membaca perusahaan, wawancara, dan hasil kandidatmu.",
+      "Membuat perubahan yang kamu minta, setelah bertanya dulu."
+    ],
+    "cantTitle": "Aplikasi ini tidak bisa",
+    "cant": [
+      "Melihat kata sandi atau kunci API-mu.",
+      "Menghapus akunmu atau perusahaan."
+    ],
+    "unknown": "prepza tidak mengenal aplikasi ini. Izinkan hanya jika kamu sendiri yang mulai menghubungkannya.",
+    "deny": "Tolak",
+    "allow": "Izinkan",
+    "footnote": "Putuskan kapan saja di Integrasi → Aplikasi AI sebuah perusahaan.",
+    "expired": "Tautan ini sudah kedaluwarsa atau sudah dipakai. Mulai hubungkan lagi dari aplikasi AI-mu.",
+    "loadFailed": "Permintaan ini tidak bisa dimuat. Coba lagi."
   }
 }

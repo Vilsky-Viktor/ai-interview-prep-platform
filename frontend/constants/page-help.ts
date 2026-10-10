@@ -19,6 +19,7 @@ export const PAGE_HELP_KEYS = [
   "ats",
   "slack",
   "api",
+  "aiApps",
   "referrals",
   "billing",
 ] as const

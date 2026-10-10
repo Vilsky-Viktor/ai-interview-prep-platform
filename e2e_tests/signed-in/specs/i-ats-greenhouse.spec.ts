@@ -1,7 +1,7 @@
 import { expect, test } from "../fixtures"
 import { GREENHOUSE_E2E_SECRET } from "../constants"
 import { createCompany, createInterview } from "../helpers/api"
-import { addAtsConnection } from "../helpers/db"
+import { addAtsConnection, nameAtsConnectionMaker } from "../helpers/db"
 import { openDialog, visit } from "../helpers/navigation"
 import { shot } from "../helpers/screenshots"
 import { throwawayEmail } from "../helpers/users"
@@ -69,10 +69,23 @@ test("an owner connects Greenhouse and finds its web hook in the info dialog", a
   await owner.keyboard.press("Escape")
 
   // The page: the tag, Disconnect, no other setup button, and the linked job.
-  await expect(owner.getByText("connected", { exact: true })).toBeVisible()
+  await expect(owner.getByText("connected", { exact: true }).filter({ visible: true })).toBeVisible()
   await expect(owner.getByRole("button", { name: "Disconnect" })).toBeVisible()
   await expect(owner.getByRole("button", { name: /web hook/i })).toHaveCount(0)
   await expect(owner.getByText("E2E Backend developer")).toBeVisible()
   await expect(owner.getByLabel("2 invited")).toBeVisible()
   await shot(owner, "page")
+
+  // Greenhouse names no account: under the title is who connected it, or nothing when that's
+  // unknown.
+  const header = owner.getByRole("heading", { level: 1 }).locator("xpath=../..")
+  await expect(header).toHaveText(/^Greenhouse\s*connected$/, { useInnerText: true })
+  await nameAtsConnectionMaker(company.id, "E2E Maker")
+  await owner.reload()
+  await expect(header.getByText("Connected by E2E Maker")).toBeVisible()
+  await visit(owner, tab)
+  await expect(
+    owner.getByRole("link", { name: /^Greenhouse/ }).getByText("Connected by E2E Maker")
+  ).toBeVisible()
+  await shot(owner, "connected-by")
 })

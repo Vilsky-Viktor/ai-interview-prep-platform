@@ -6,7 +6,6 @@ import { toast } from "sonner"
 
 import { Checkbox } from "@/components/ui/checkbox"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
-import { LIST_BOX } from "@/constants/lists"
 
 /** Which of the company's notifications go to its Slack channel, one row each in a list like the
  * interview's settings; each change is saved at once. Viewers see them without changing. */
@@ -50,7 +49,7 @@ export function SlackKinds({
         <h2 className="font-heading text-2xl font-medium">{t("kindsTitle")}</h2>
         <p className="text-base text-muted-foreground">{t("kindsText")}</p>
       </div>
-      <div className={LIST_BOX}>
+      <div className="divide-y rounded-2xl border">
         {allKinds.map((kind) => (
           <label
             key={kind}

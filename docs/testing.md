@@ -27,6 +27,7 @@ prepza has unit, integration, browser, end-to-end and load tests, plus offline e
 | Signed-in pages | `./e2e_tests/signed-in.sh` | The running stack |
 | Translations | `cd frontend && pnpm check:messages` | Nothing running |
 | End-to-end | `python3 e2e_tests/flow.py` | `OPENAI_API_KEY` |
+| AI apps over MCP | `python3 e2e_tests/mcp.py` | The running stack |
 | Load tests | `./e2e_tests/load.sh candidates` | The local stack only |
 
 ## Unit tests and lint
@@ -84,7 +85,7 @@ They check:
 - the footer at the end,
 - lowercase titles (articles keep their capitals).
 
-Other specs check the home page's sections: the advantages' titles beside their icons in every language (`advantages.spec.ts`), the ATSs, Slack and the API (`ats.spec.ts`), the catalog's prices and free candidates on the home and pricing pages (`pricing.spec.ts`), the chat apps a report can be shared to (`reports.spec.ts`), smooth scrolling and back to top (`scroll.spec.ts`), and the API docs (`api-docs.spec.ts`). `news.spec.ts` checks the news page in English and German whatever posts exist: indexable, its title, description, canonical and hreflang addresses (x-default too), link-preview picture, `Blog` structured data, the RSS link in its head and its RSS icon; the RSS feed in both languages (content type, channel, items linking to the page); the sitemap listing the page but not the feed; and the footer's news link. `unsubscribe.spec.ts` checks the unsubscribe page: an invalid link says so, the page isn't indexed, and a candidate's link to a made-up company changes nothing until "Confirm". It signs that link with `EMAIL_LINK_SECRET`, which `pages.sh` passes from `.env` without printing it; each run leaves its made-up companies' opt-outs in the local notifications database.
+Other specs check the home page's sections: the advantages' titles beside their icons in every language (`advantages.spec.ts`), the ATSs, Slack, the API and MCP with a point each for the ATS, the API and MCP (`ats.spec.ts`), the catalog's prices and free candidates on the home and pricing pages (`pricing.spec.ts`), the chat apps a report can be shared to (`reports.spec.ts`), smooth scrolling and back to top (`scroll.spec.ts`), and the API docs (`api-docs.spec.ts`). `news.spec.ts` checks the news page in English and German whatever posts exist: indexable, its title, description, canonical and hreflang addresses (x-default too), link-preview picture, `Blog` structured data, the RSS link in its head and its RSS icon; the RSS feed in both languages (content type, channel, items linking to the page); the sitemap listing the page but not the feed; and the footer's news link. `connect.spec.ts` checks the AI app consent page signed out: without a request it says the link expired, with one it asks to sign in first (naming the app when the API does), and it isn't indexed. `unsubscribe.spec.ts` checks the unsubscribe page: an invalid link says so, the page isn't indexed, and a candidate's link to a made-up company changes nothing until "Confirm". It signs that link with `EMAIL_LINK_SECRET`, which `pages.sh` passes from `.env` without printing it; each run leaves its made-up companies' opt-outs in the local notifications database.
 
 `seo.spec.ts` checks language addresses and hreflang, titles, structured data, the sitemap, robots.txt, noindex on private pages and thin template pages, links and levels on a template's page in its language, redirects and the footer. `metadata.spec.ts` checks page descriptions, the compare hub's title, FAQ and article data, practice breadcrumbs, the direction of right-to-left template text, the preview picture's noindex and the footer's menu.
 
@@ -117,8 +118,10 @@ Playwright tests of the signed-in pages, in the same Docker image, against the r
 - a practice result leading to a company's test,
 - an interview's settings tab,
 - API keys and web hooks,
-- each ATS: Workable's linked jobs, and connecting Greenhouse, Teamtailor, Recruitee and Breezy HR,
+- each ATS: Workable's linked jobs, and connecting Greenhouse (with who connected it under its title), Teamtailor, Recruitee and Breezy HR,
 - Slack,
+- the MCP server: its row and Instructions (the server's address, Claude's and ChatGPT's steps, opening on the dialog itself with Close outside the scrolling body, full height on phones), the connected AI apps (saved straight into the assistant database and deleted at the end) and disconnecting them, and the consent page signed in (an expired request, and a request answered in the browser, denied),
+- the integrations pages on a phone: small logos beside the names with the buttons under them, the pages' buttons under their titles, Reconnect on its own line, the linked jobs, and full-height Instructions,
 - the automatic top-up,
 - an interview whose generation failed,
 - email settings: the defaults, each kind saved as it changes, the activity digest's box (all, none, some), and what the sign-in's email boxes turn on, at a first sign-in and a later one,
@@ -154,6 +157,16 @@ Its accounts, company and data are deleted at the end, however the run ends.
 python3 e2e_tests/flow.py
 ```
 
+## AI apps over MCP
+
+`e2e_tests/mcp.py` connects an app to the running stack through the gateway, as Claude or ChatGPT would: it registers itself without a secret, is allowed on the consent page's API with a throwaway emulator user's token, exchanges the code with PKCE (a wrong verifier and a second exchange are refused), lists the tools (without the account's and a company's deletion), calls `get_me`, `create_company` and `list_companies` as the user, refreshes (the old tokens stop working), revokes, and has the user disconnect a second app. The account is deleted at the end, with its company and connections. No OpenAI; CI runs it after the integration tests. Standard library only:
+
+```bash
+python3 e2e_tests/mcp.py
+```
+
+The assistant's integration tests also connect an app in-process with the MCP SDK's own OAuth client (`tests/integration/test_mcp.py`).
+
 ## Load tests
 
 Load tests with k6, in its Docker image, against the local stack only: never production, and not in CI.
@@ -178,7 +191,7 @@ CI runs all of these except the end-to-end test, which needs an OpenAI key, and 
 - A pull request compares with its base. `main` compares with the last commit CI passed on, so a failed run's changes are tested and built by the next one.
 - Each changed part's unit tests run and its production image is built. A changed frontend also gets lint, types and the translations check (`pnpm check:messages`). On `main`, an unchanged part's image is the last passing commit's, tagged with the new commit too.
 - Ruff runs on every change.
-- It starts the whole stack for the smoke, integration, page and signed-in tests when any part changed, or `e2e_tests/`, `gateway/`, `database/`, `firebase/`, `scripts/`, `compose/` or `docker-compose.yml` did. A change to docs alone skips it.
+- It starts the whole stack for the smoke, integration, MCP, page and signed-in tests when any part changed, or `e2e_tests/`, `gateway/`, `database/`, `firebase/`, `scripts/`, `compose/` or `docker-compose.yml` did. A change to docs alone skips it.
 - Its stack has no templates, so before the signed-in tests it adds a small English one (`e2e_tests/signed-in/seed/template.py`, no OpenAI).
 - Its superadmin is a CI-only emulator account.
 - On failure, the screenshots and traces are kept as the run's `signed-in-test-results` artifact.

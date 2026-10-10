@@ -6,6 +6,7 @@ export const PRIVATE_PATHS = [
   "/api/",
   "/apply",
   "/companies",
+  "/connect",
   "/generate",
   "/invite",
   "/join",

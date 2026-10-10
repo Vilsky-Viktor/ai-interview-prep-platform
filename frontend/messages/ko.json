@@ -855,9 +855,9 @@
       "title": "사용 중인 도구와 연동",
       "text": "ATS에서 지원자를 옮기면 면접이 전달되고 결과가 돌아옵니다. 나머지는 Slack과 API로 연결됩니다.",
       "points": {
-        "move": "지원자를 옮기면 초대 자동 발송",
-        "back": "점수와 주의 표시가 ATS로 전달",
-        "api": "자체 플랫폼: 키와 웹훅"
+        "ats": "사용 중인 ATS: 지원자에게 초대가 가고, 점수와 주의 표시가 돌아옴",
+        "api": "자체 플랫폼: API로 초대하고, 결과는 웹훅으로 수신",
+        "mcp": "AI 채팅: MCP로 Claude나 ChatGPT에서 prepza 사용"
       },
       "docs": "API 문서",
       "apiName": "prepza API"
@@ -1119,6 +1119,7 @@
   },
   "ats": {
     "statusConnected": "연동됨",
+    "connectedBy": "{name} 님이 연동함",
     "flowTitle": "{ats}에서 지원자가 들어오는 방식",
     "flowStage": "{ats}에서 채용 공고의 채용 프로세스에 prepza 전용 전형 단계를 추가하세요. 예를 들어 “prepza 역량 테스트”처럼 두면 다른 도구와 섞이지 않습니다.",
     "flowLink": "여기에서 채용 공고를 연결하고 그 단계를 선택하세요.",
@@ -1716,7 +1717,8 @@
       "actions": [
         "Slack: 회사 알림을 채널에서 받습니다.",
         "ATS(Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): 전형 단계로 옮긴 지원자에게 면접이 발송되고, 결과가 ATS로 돌아갑니다.",
-        "API: 자체 플랫폼을 연결하는 API 키와 웹훅."
+        "API: 자체 플랫폼을 연결하는 API 키와 웹훅.",
+        "AI 앱: Claude, ChatGPT 등 AI 앱에서 prepza를 사용합니다."
       ],
       "tips": [
         "연동은 회사의 모든 사람이 볼 수 있고, 소유자와 관리자가 변경할 수 있습니다."
@@ -1787,6 +1789,19 @@
         "지원자의 크레딧은 초대할 때 예약되고, 응답하면 차감되며, 응답하지 않으면 반환됩니다.",
         "이 페이지는 소유자와 관리자만 볼 수 있습니다."
       ]
+    },
+    "aiApps": {
+      "title": "AI 앱",
+      "text": "AI 채팅에서 prepza를 사용하세요. Claude나 ChatGPT에 면접과 지원자에 대해 묻거나 변경을 맡길 수 있습니다.",
+      "actions": [
+        "서버 주소를 복사해 안내에 따라 Claude, Claude Code 또는 ChatGPT에 추가합니다.",
+        "열리는 prepza 페이지에서 앱을 허용합니다.",
+        "더 이상 쓰지 않는 앱은 연동을 해제합니다."
+      ],
+      "tips": [
+        "앱은 내가 속한 모든 회사에서 나를 대신해 동작하며, 무엇이든 변경하기 전에 먼저 묻습니다.",
+        "비밀번호나 API 키를 볼 수 없고, 계정이나 회사를 삭제할 수 없습니다."
+      ]
     }
   },
   "companyBilling": {
@@ -1809,5 +1824,53 @@
     "invoice": "인보이스",
     "invoiceFailed": "인보이스를 열지 못했습니다. 다시 시도해 주세요.",
     "deletedCandidate": "삭제된 지원자"
+  },
+  "aiApps": {
+    "group": "AI 앱",
+    "name": "MCP 서버",
+    "rowText": "Claude, ChatGPT 등 AI 앱을 prepza와 연동합니다.",
+    "title": "AI 앱",
+    "subtitle": "내가 속한 모든 회사에서 내 권한으로 나를 대신해 동작합니다.",
+    "instructionsTitle": "AI 앱을 prepza와 연동하기",
+    "serverTitle": "서버 주소",
+    "serverText": "AI 앱에 사용자 지정 커넥터(MCP 서버)로 붙여 넣으세요.",
+    "addTo": "<app>{name}</app>에 추가",
+    "claudeOpen": "Claude에서 다음을 여세요:",
+    "claudePaste": "이름을 {name}(으)로 지정하고 서버 주소를 붙여 넣은 뒤 “Add”를 선택하세요.",
+    "allowOnPrepza": "“Connect”를 선택한 다음, 열리는 prepza 페이지에서 “허용”을 선택하세요.",
+    "claudeCode": "Claude Code에서 다음을 실행하세요:",
+    "copyCommand": "명령어 복사",
+    "commandCopied": "명령어 복사됨",
+    "chatgptDeveloper": "ChatGPT에서 개발자 모드를 켜세요:",
+    "chatgptCreate": "Apps & Connectors로 돌아와 다음을 선택하세요:",
+    "chatgptPaste": "이름을 {name}(으)로 지정하고 서버 주소를 붙여 넣은 뒤 이 인증 방식을 선택하세요:",
+    "noConnected": "아직 연동된 앱이 없습니다.",
+    "connectedOn": "{date} 연동",
+    "lastUsed": "마지막 사용 {date}",
+    "neverUsed": "아직 사용 안 함",
+    "disconnectTitle": "{client} 연동을 해제할까요?",
+    "disconnectText": "다시 연동할 때까지 {client}에서 prepza를 사용할 수 없습니다.",
+    "disconnectFailed": "앱 연동을 해제하지 못했습니다. 다시 시도해 주세요."
+  },
+  "connect": {
+    "pageTitle": "AI 앱 연동",
+    "title": "<name>{client}</name>을(를) prepza와 연동",
+    "titleAny": "AI 앱을 prepza와 연동",
+    "signInText": "로그인하고 이 앱이 내 prepza 계정을 사용해도 되는지 선택하세요.",
+    "signIn": "로그인하고 계속하기",
+    "who": "{client}({host})에서 내 prepza 계정 {email}을(를) 사용하려고 합니다.",
+    "canTitle": "할 수 있는 일",
+    "can": [
+      "회사, 면접, 지원자 결과 조회",
+      "요청한 변경 실행(실행 전에 먼저 확인)"
+    ],
+    "cantTitle": "할 수 없는 일",
+    "cant": ["비밀번호나 API 키 보기", "계정이나 회사 삭제"],
+    "unknown": "prepza가 모르는 앱입니다. 직접 연동을 시작한 경우에만 허용하세요.",
+    "deny": "거부",
+    "allow": "허용",
+    "footnote": "언제든 회사의 연동 → AI 앱에서 연동을 해제할 수 있습니다.",
+    "expired": "이 링크는 만료되었거나 이미 사용되었습니다. AI 앱에서 연동을 다시 시작하세요.",
+    "loadFailed": "이 요청을 불러오지 못했습니다. 다시 시도해 주세요."
   }
 }

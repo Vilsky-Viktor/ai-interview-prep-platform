@@ -864,9 +864,9 @@
       "title": "Funciona con tus herramientas",
       "text": "Los candidatos que muevas en tu ATS reciben la entrevista y los resultados vuelven. Slack y la API conectan el resto.",
       "points": {
-        "move": "Mueve un candidato: la invitación sale",
-        "back": "Nota y alertas llegan a tu ATS",
-        "api": "Tu plataforma: claves y webhooks"
+        "ats": "Tu ATS: los candidatos reciben la invitación y la nota y las alertas vuelven",
+        "api": "Tu plataforma: invita por API y recibe los resultados por webhook",
+        "mcp": "Tu chat de IA: usa prepza en Claude o ChatGPT por MCP"
       },
       "docs": "Documentación de la API",
       "apiName": "API de prepza"
@@ -1128,6 +1128,7 @@
   },
   "ats": {
     "statusConnected": "conectado",
+    "connectedBy": "Conectado por {name}",
     "flowTitle": "Cómo llegan los candidatos desde {ats}",
     "flowStage": "En {ats}, añade al pipeline de la vacante una etapa solo para prepza, por ejemplo «Prueba de habilidades prepza», para que nunca se mezcle con tus otras herramientas.",
     "flowLink": "Aquí, vincula la vacante y elige esa etapa.",
@@ -1725,7 +1726,8 @@
       "actions": [
         "Slack: recibe las notificaciones de tu empresa en un canal.",
         "ATS (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): los candidatos que pasas a una etapa reciben la entrevista, y sus resultados vuelven al ATS.",
-        "API: claves y webhooks para conectar tu propia plataforma."
+        "API: claves y webhooks para conectar tu propia plataforma.",
+        "Apps de IA: usa prepza desde Claude, ChatGPT y otras apps de IA."
       ],
       "tips": [
         "Todos en la empresa ven las integraciones; los propietarios y administradores las cambian."
@@ -1796,6 +1798,19 @@
         "Los créditos de un candidato se reservan al invitarlo, se cobran cuando responde y se devuelven si no lo hace.",
         "Solo los propietarios y administradores ven esta página."
       ]
+    },
+    "aiApps": {
+      "title": "Apps de IA",
+      "text": "Usa prepza desde tu chat de IA: pregunta a Claude o ChatGPT por tus entrevistas y candidatos, o pídeles que hagan cambios por ti.",
+      "actions": [
+        "Copia la dirección del servidor y añádela a Claude, Claude Code o ChatGPT siguiendo los pasos.",
+        "Permite la app en la página de prepza que se abre.",
+        "Desconecta una app que ya no uses."
+      ],
+      "tips": [
+        "Una app actúa en tu nombre, en todas las empresas de las que formas parte, y te pregunta antes de cambiar nada.",
+        "No puede ver tu contraseña ni tus claves de API, ni eliminar tu cuenta o una empresa."
+      ]
     }
   },
   "companyBilling": {
@@ -1818,5 +1833,56 @@
     "invoice": "Factura",
     "invoiceFailed": "No se pudo abrir la factura. Inténtalo de nuevo.",
     "deletedCandidate": "Un candidato eliminado"
+  },
+  "aiApps": {
+    "group": "Apps de IA",
+    "name": "Servidor MCP",
+    "rowText": "Conecta Claude, ChatGPT y otras apps de IA a prepza.",
+    "title": "Apps de IA",
+    "subtitle": "Actúan en tu nombre, en todas las empresas de las que formas parte, con tus permisos.",
+    "instructionsTitle": "Conectar una app de IA a prepza",
+    "serverTitle": "Dirección del servidor",
+    "serverText": "Pégala en tu app de IA como conector personalizado (un servidor MCP).",
+    "addTo": "Añadirlo a <app>{name}</app>",
+    "claudeOpen": "En Claude, abre:",
+    "claudePaste": "Llámalo {name}, pega la dirección del servidor y elige «Add».",
+    "allowOnPrepza": "Elige «Connect» y luego «Permitir» en la página de prepza que se abre.",
+    "claudeCode": "En Claude Code, ejecuta:",
+    "copyCommand": "Copiar comando",
+    "commandCopied": "Comando copiado",
+    "chatgptDeveloper": "En ChatGPT, activa el modo de desarrollador:",
+    "chatgptCreate": "De vuelta en Apps & Connectors, elige:",
+    "chatgptPaste": "Llámalo {name}, pega la dirección del servidor y elige esta autenticación:",
+    "noConnected": "Aún no hay apps conectadas.",
+    "connectedOn": "conectada el {date}",
+    "lastUsed": "último uso: {date}",
+    "neverUsed": "sin usar todavía",
+    "disconnectTitle": "¿Desconectar {client}?",
+    "disconnectText": "{client} deja de funcionar con prepza hasta que lo vuelvas a conectar.",
+    "disconnectFailed": "No se pudo desconectar la app. Inténtalo de nuevo."
+  },
+  "connect": {
+    "pageTitle": "Conectar una app de IA",
+    "title": "Conectar <name>{client}</name> a prepza",
+    "titleAny": "Conectar una app de IA a prepza",
+    "signInText": "Inicia sesión para decidir si puede usar tu cuenta de prepza.",
+    "signIn": "Inicia sesión para continuar",
+    "who": "{client} ({host}) quiere usar tu cuenta de prepza, {email}.",
+    "canTitle": "Puede",
+    "can": [
+      "Leer tus empresas, entrevistas y los resultados de los candidatos.",
+      "Hacer los cambios que le pidas, preguntándote antes."
+    ],
+    "cantTitle": "No puede",
+    "cant": [
+      "Ver tu contraseña ni tus claves de API.",
+      "Eliminar tu cuenta o una empresa."
+    ],
+    "unknown": "prepza no conoce esta app. Permítela solo si empezaste tú a conectarla.",
+    "deny": "Denegar",
+    "allow": "Permitir",
+    "footnote": "Desconéctala cuando quieras en Integraciones → Apps de IA de una empresa.",
+    "expired": "Este enlace ha caducado o ya se usó. Vuelve a empezar la conexión desde tu app de IA.",
+    "loadFailed": "No se pudo cargar esta solicitud. Inténtalo de nuevo."
   }
 }

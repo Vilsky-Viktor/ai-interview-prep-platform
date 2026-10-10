@@ -855,9 +855,9 @@
       "title": "与你的工具对接",
       "text": "你在 ATS 中移动的候选人会收到面试，结果也会回传。其余由 Slack 和 API 连接。",
       "points": {
-        "move": "移动候选人，邀请即自动发出",
-        "back": "成绩和标记回传到你的 ATS",
-        "api": "你的平台：密钥和 Webhook"
+        "ats": "你的 ATS：候选人收到邀请，成绩和标记回传",
+        "api": "你的平台：通过 API 邀请，结果经 Webhook 送达",
+        "mcp": "你的 AI 聊天：通过 MCP 在 Claude 或 ChatGPT 中使用 prepza"
       },
       "docs": "API 文档",
       "apiName": "prepza API"
@@ -1119,6 +1119,7 @@
   },
   "ats": {
     "statusConnected": "已连接",
+    "connectedBy": "由 {name} 连接",
     "flowTitle": "候选人如何从 {ats} 进入",
     "flowStage": "在 {ats} 中，为该职位的招聘流程添加一个 prepza 专用阶段，例如“prepza 技能测试”，这样就不会和你的其他工具混在一起。",
     "flowLink": "在这里关联该职位并选择这个阶段。",
@@ -1711,7 +1712,8 @@
       "actions": [
         "Slack：在频道中接收公司的通知。",
         "ATS（Workable、Greenhouse、Teamtailor、Recruitee、Breezy HR）：你移到某个阶段的候选人会收到面试，结果会同步回 ATS。",
-        "API：用于连接你自己平台的 API 密钥和 Webhook。"
+        "API：用于连接你自己平台的 API 密钥和 Webhook。",
+        "AI 应用：在 Claude、ChatGPT 等 AI 应用中使用 prepza。"
       ],
       "tips": ["公司里的每个人都能看到集成；所有者和管理员可以修改。"]
     },
@@ -1777,6 +1779,19 @@
         "邀请候选人时预留其点数，候选人作答后扣除，未作答则退回。",
         "只有所有者和管理员能看到此页面。"
       ]
+    },
+    "aiApps": {
+      "title": "AI 应用",
+      "text": "在你的 AI 聊天中使用 prepza：向 Claude 或 ChatGPT 询问你的面试和候选人，或让它们替你做出更改。",
+      "actions": [
+        "复制服务器地址，按步骤添加到 Claude、Claude Code 或 ChatGPT。",
+        "在打开的 prepza 页面上允许该应用。",
+        "断开不再使用的应用。"
+      ],
+      "tips": [
+        "应用以你的身份在你所在的每家公司中操作，更改任何内容前都会先询问你。",
+        "它看不到你的密码或 API 密钥，也不能删除你的账户或公司。"
+      ]
     }
   },
   "companyBilling": {
@@ -1799,5 +1814,53 @@
     "invoice": "发票",
     "invoiceFailed": "无法打开发票，请重试。",
     "deletedCandidate": "已删除的候选人"
+  },
+  "aiApps": {
+    "group": "AI 应用",
+    "name": "MCP 服务器",
+    "rowText": "将 Claude、ChatGPT 等 AI 应用连接到 prepza。",
+    "title": "AI 应用",
+    "subtitle": "它们以你的身份、按你的权限，在你所在的每家公司中操作。",
+    "instructionsTitle": "将 AI 应用连接到 prepza",
+    "serverTitle": "服务器地址",
+    "serverText": "在你的 AI 应用中把它粘贴为自定义连接器（MCP 服务器）。",
+    "addTo": "添加到 <app>{name}</app>",
+    "claudeOpen": "在 Claude 中打开：",
+    "claudePaste": "命名为 {name}，粘贴服务器地址，然后选择“Add”。",
+    "allowOnPrepza": "选择“Connect”，然后在打开的 prepza 页面上选择“允许”。",
+    "claudeCode": "在 Claude Code 中运行：",
+    "copyCommand": "复制命令",
+    "commandCopied": "命令已复制",
+    "chatgptDeveloper": "在 ChatGPT 中开启开发者模式：",
+    "chatgptCreate": "回到 Apps & Connectors，选择：",
+    "chatgptPaste": "命名为 {name}，粘贴服务器地址，并选择这种认证方式：",
+    "noConnected": "还没有连接任何应用。",
+    "connectedOn": "连接于 {date}",
+    "lastUsed": "上次使用 {date}",
+    "neverUsed": "尚未使用",
+    "disconnectTitle": "断开 {client}？",
+    "disconnectText": "在你重新连接之前，{client} 将无法使用 prepza。",
+    "disconnectFailed": "无法断开该应用，请重试。"
+  },
+  "connect": {
+    "pageTitle": "连接 AI 应用",
+    "title": "将 <name>{client}</name> 连接到 prepza",
+    "titleAny": "将 AI 应用连接到 prepza",
+    "signInText": "登录后选择是否允许它使用你的 prepza 账户。",
+    "signIn": "登录以继续",
+    "who": "{client}（{host}）想要使用你的 prepza 账户 {email}。",
+    "canTitle": "它可以",
+    "can": [
+      "读取你的公司、面试和候选人的结果。",
+      "进行你要求的更改，并会事先询问你。"
+    ],
+    "cantTitle": "它不能",
+    "cant": ["查看你的密码或 API 密钥。", "删除你的账户或公司。"],
+    "unknown": "prepza 不认识这个应用。只有在你自己发起连接时才允许它。",
+    "deny": "拒绝",
+    "allow": "允许",
+    "footnote": "随时可在公司的“集成 → AI 应用”中断开它。",
+    "expired": "此链接已过期或已被使用。请从你的 AI 应用重新开始连接。",
+    "loadFailed": "无法加载此请求，请重试。"
   }
 }

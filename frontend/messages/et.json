@@ -868,9 +868,9 @@
       "title": "Töötab sinu tööriistadega",
       "text": "Kandidaadid, keda ATS-süsteemis liigutad, saavad intervjuu ja tulemused jõuavad tagasi. Slack ja API ühendavad ülejäänu.",
       "points": {
-        "move": "Liiguta kandidaati: kutse läheb teele",
-        "back": "Hinne ja märked jõuavad ATS-süsteemi",
-        "api": "Sinu platvorm: võtmed ja webhookid"
+        "ats": "Sinu ATS: kandidaadid saavad kutse, hinne ja märked tulevad tagasi",
+        "api": "Sinu platvorm: kutsu API kaudu, tulemused saabuvad webhookiga",
+        "mcp": "Sinu AI-vestlus: kasuta prepzat Claude'is või ChatGPT-s MCP kaudu"
       },
       "docs": "API dokumentatsioon",
       "apiName": "prepza API"
@@ -1132,6 +1132,7 @@
   },
   "ats": {
     "statusConnected": "ühendatud",
+    "connectedBy": "Ühendas {name}",
     "flowTitle": "Kuidas kandidaadid {ats} keskkonnast tulevad",
     "flowStage": "Lisa {ats} keskkonnas töökuulutuse protsessi etapp ainult prepza jaoks, näiteks „prepza oskuste test“, et see ei läheks kunagi segamini sinu teiste tööriistadega.",
     "flowLink": "Seo siin töökuulutus ja vali see etapp.",
@@ -1729,7 +1730,8 @@
       "actions": [
         "Slack: saa ettevõtte teavitused kanalisse.",
         "ATS (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): etappi viidud kandidaadid saavad intervjuu ja nende tulemused jõuavad tagasi ATS-i.",
-        "API: võtmed ja webhookid oma platvormi ühendamiseks."
+        "API: võtmed ja webhookid oma platvormi ühendamiseks.",
+        "AI-rakendused: kasuta prepzat Claude'is, ChatGPT-s ja teistes AI-rakendustes."
       ],
       "tips": [
         "Integratsioone näevad kõik ettevõttes; muuta saavad neid omanikud ja administraatorid."
@@ -1800,6 +1802,19 @@
         "Kandidaadi krediidid broneeritakse kutsumisel, arvestatakse maha, kui ta vastab, ja antakse tagasi, kui ta ei vasta.",
         "Seda lehte näevad ainult omanikud ja administraatorid."
       ]
+    },
+    "aiApps": {
+      "title": "AI-rakendused",
+      "text": "Kasuta prepzat oma AI-vestluses: küsi Claude'ilt või ChatGPT-lt oma intervjuude ja kandidaatide kohta või palu neil sinu eest muudatusi teha.",
+      "actions": [
+        "Kopeeri serveri aadress ja lisa see sammude järgi Claude'i, Claude Code'i või ChatGPT-sse.",
+        "Luba rakendus avanevas prepza lehel.",
+        "Katkesta ühendus rakendusega, mida sa enam ei kasuta."
+      ],
+      "tips": [
+        "Rakendus tegutseb sinu nimel kõigis ettevõtetes, kuhu sa kuulud, ja küsib sinult enne, kui midagi muudab.",
+        "See ei näe sinu parooli ega API-võtmeid ega saa kustutada sinu kontot ega ettevõtet."
+      ]
     }
   },
   "companyBilling": {
@@ -1822,5 +1837,56 @@
     "invoice": "Arve",
     "invoiceFailed": "Arvet ei õnnestunud avada. Proovi uuesti.",
     "deletedCandidate": "Kustutatud kandidaat"
+  },
+  "aiApps": {
+    "group": "AI-rakendused",
+    "name": "MCP-server",
+    "rowText": "Ühenda Claude, ChatGPT ja teised AI-rakendused prepzaga.",
+    "title": "AI-rakendused",
+    "subtitle": "Need tegutsevad sinu nimel kõigis ettevõtetes, kuhu sa kuulud, sinu õigustega.",
+    "instructionsTitle": "Ühenda AI-rakendus prepzaga",
+    "serverTitle": "Serveri aadress",
+    "serverText": "Kleebi see oma AI-rakendusse kohandatud konnektorina (MCP-serverina).",
+    "addTo": "Lisa see rakendusse <app>{name}</app>",
+    "claudeOpen": "Ava Claude'is:",
+    "claudePaste": "Pane nimeks {name}, kleebi serveri aadress ja vali „Add“.",
+    "allowOnPrepza": "Vali „Connect“ ja seejärel avanevas prepza lehel „Luba“.",
+    "claudeCode": "Käivita Claude Code'is:",
+    "copyCommand": "Kopeeri käsk",
+    "commandCopied": "Käsk kopeeritud",
+    "chatgptDeveloper": "Lülita ChatGPT-s sisse arendajarežiim:",
+    "chatgptCreate": "Tagasi jaotises Apps & Connectors vali:",
+    "chatgptPaste": "Pane nimeks {name}, kleebi serveri aadress ja vali see autentimisviis:",
+    "noConnected": "Ühendatud rakendusi veel pole.",
+    "connectedOn": "ühendatud {date}",
+    "lastUsed": "viimati kasutatud {date}",
+    "neverUsed": "pole veel kasutatud",
+    "disconnectTitle": "Katkestada ühendus rakendusega {client}?",
+    "disconnectText": "{client} ei tööta prepzaga enne, kui selle uuesti ühendad.",
+    "disconnectFailed": "Rakenduse ühendust ei õnnestunud katkestada. Proovi uuesti."
+  },
+  "connect": {
+    "pageTitle": "Ühenda AI-rakendus",
+    "title": "Ühenda <name>{client}</name> prepzaga",
+    "titleAny": "Ühenda AI-rakendus prepzaga",
+    "signInText": "Logi sisse, et otsustada, kas see tohib sinu prepza kontot kasutada.",
+    "signIn": "Logi sisse, et jätkata",
+    "who": "{client} ({host}) soovib kasutada sinu prepza kontot {email}.",
+    "canTitle": "See saab",
+    "can": [
+      "Lugeda sinu ettevõtteid, intervjuusid ja kandidaatide tulemusi.",
+      "Teha muudatusi, mida palud, küsides enne sinult."
+    ],
+    "cantTitle": "See ei saa",
+    "cant": [
+      "Näha sinu parooli ega API-võtmeid.",
+      "Kustutada sinu kontot ega ettevõtet."
+    ],
+    "unknown": "prepza ei tunne seda rakendust. Luba see ainult siis, kui alustasid ühendamist ise.",
+    "deny": "Keeldu",
+    "allow": "Luba",
+    "footnote": "Ühenduse saad igal ajal katkestada ettevõtte vahekaardil Integratsioonid → AI-rakendused.",
+    "expired": "See link on aegunud või juba kasutatud. Alusta ühendamist uuesti oma AI-rakendusest.",
+    "loadFailed": "Seda päringut ei õnnestunud laadida. Proovi uuesti."
   }
 }

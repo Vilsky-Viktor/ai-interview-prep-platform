@@ -3,7 +3,11 @@ import { notFound, redirect } from "next/navigation"
 import { getTranslations } from "next-intl/server"
 
 import { BackLink } from "@/components/back-link"
-import { AtsActions, AtsStatus } from "@/components/company/ats-connection"
+import {
+  AtsAccount,
+  AtsActions,
+  AtsStatus,
+} from "@/components/company/ats-connection"
 import { AtsJobLinks } from "@/components/company/ats-job-links"
 import { PageHeader } from "@/components/page-header"
 import { SignInPrompt } from "@/components/sign-in-prompt"
@@ -86,7 +90,8 @@ export default async function AtsPage({ params }: { params: Params }) {
           </BackLink>
         }
         title={
-          <div className="flex items-start justify-between gap-4">
+          // On phones the buttons go on their own line, full width, sharing it equally.
+          <div className="flex items-start justify-between gap-4 max-sm:flex-col max-sm:items-stretch">
             <div className="flex min-w-0 items-center gap-4">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -99,21 +104,28 @@ export default async function AtsPage({ params }: { params: Params }) {
                   <h1 className="font-heading text-3xl font-medium tracking-tight normal-case">
                     {provider.name}
                   </h1>
-                  <AtsStatus connection={connection} />
+                  <span className="max-sm:hidden">
+                    <AtsStatus connection={connection} />
+                  </span>
                 </div>
-                {connection && (
-                  <p className="text-base text-muted-foreground">
-                    {connection.account}
-                  </p>
-                )}
+                <AtsAccount
+                  connection={connection}
+                  className="block text-base text-muted-foreground"
+                />
+                {/* On phones its status goes under the name and account. */}
+                <span className="mt-2 flex empty:hidden sm:hidden">
+                  <AtsStatus connection={connection} />
+                </span>
               </div>
             </div>
-            <AtsActions
-              companyId={companyId}
-              provider={provider}
-              connection={connection}
-              canEdit={company.can_edit}
-            />
+            <div className="max-sm:mt-4 max-sm:*:w-full max-sm:*:flex-wrap max-sm:[&>*>*]:flex-1 max-sm:[&>*>*:nth-child(3)]:basis-full">
+              <AtsActions
+                companyId={companyId}
+                provider={provider}
+                connection={connection}
+                canEdit={company.can_edit}
+              />
+            </div>
           </div>
         }
       />

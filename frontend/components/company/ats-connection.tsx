@@ -15,6 +15,11 @@ import { Button } from "@/components/ui/button"
 import { WEBHOOKS, type AtsProvider } from "@/constants/ats"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 import type { AtsConnection } from "@/types/company"
+import {
+  INTEGRATION_LINK,
+  INTEGRATION_LOGO,
+  INTEGRATION_ROW,
+} from "@/constants/lists"
 
 /** An ATS's row on the integrations tab: its logo, name and whether it's connected, laid out
  * like the companies list; the row opens the ATS's page (its linked jobs), its buttons sit on
@@ -31,14 +36,14 @@ export function AtsConnectionRow({
   canEdit: boolean
 }) {
   return (
-    <li className="relative flex items-center justify-between gap-6 py-6 pe-4 transition-colors hover:bg-muted/50 active:bg-muted/50 max-sm:grid max-sm:grid-cols-[4.5rem_minmax(0,1fr)] max-sm:gap-x-4 max-sm:gap-y-3 sm:pe-6">
+    <li className={INTEGRATION_ROW}>
       <Link
         href={`/companies/${companyId}/integrations/${provider.id}`}
-        className="flex min-w-0 items-center gap-4 after:absolute after:inset-0 max-sm:contents"
+        className={INTEGRATION_LINK}
       >
         {/* The ATS's own icon (public/ats), as the companies list shows a logo: a square the
             row's full height (24px padding twice, plus two lines), from its left border. */}
-        <span className="-my-6 me-2 flex size-[6.25rem] shrink-0 items-center justify-center overflow-hidden bg-muted max-sm:row-span-2 max-sm:me-0 max-sm:h-auto max-sm:w-auto max-sm:self-stretch">
+        <span className={INTEGRATION_LOGO}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={provider.logo}
@@ -51,16 +56,15 @@ export function AtsConnectionRow({
             {provider.name}
             <AtsStatus connection={connection} />
           </span>
-          {connection && (
-            <span className="block text-base text-muted-foreground">
-              {connection.account}
-            </span>
-          )}
+          <AtsAccount
+            connection={connection}
+            className="block text-base text-muted-foreground"
+          />
         </span>
       </Link>
       {/* On phones the logo spans the row, with the name and then these buttons beside it,
           sharing their line equally (each on its own line where both don't fit). */}
-      <span className="relative z-10 max-sm:col-start-2 max-sm:*:flex max-sm:*:w-full max-sm:*:flex-wrap max-sm:[&>*>*]:flex-1 max-sm:[&>*>*]:px-3">
+      <span className="relative z-10 max-sm:col-span-2 max-sm:*:flex max-sm:*:w-full max-sm:*:flex-wrap max-sm:[&>*>*]:flex-1 max-sm:[&>*>*]:px-3 max-sm:[&>*>*:nth-child(3)]:basis-full">
         <AtsActions
           companyId={companyId}
           provider={provider}
@@ -70,6 +74,28 @@ export function AtsConnectionRow({
       </span>
     </li>
   )
+}
+
+/** What the company is connected as (its account in the ATS), or who connected it where the ATS
+ * names no account (Greenhouse); nothing when there's neither. */
+export function AtsAccount({
+  connection,
+  className,
+}: {
+  connection: AtsConnection | null
+  className: string
+}) {
+  const t = useTranslations("ats")
+  const text =
+    connection?.account ||
+    (connection?.connected_by &&
+      t("connectedBy", { name: connection.connected_by }))
+
+  if (!text) {
+    return null
+  }
+
+  return <span className={className}>{text}</span>
 }
 
 /** "connected" beside the ATS's name once it is, like an interview's status tag; nothing

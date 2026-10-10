@@ -860,9 +860,9 @@
       "title": "Werkt met je tools",
       "text": "Kandidaten die je in je ATS verplaatst, krijgen het interview en de resultaten komen terug. Slack en de API koppelen de rest.",
       "points": {
-        "move": "Kandidaat verplaatst: uitnodiging gaat eruit",
-        "back": "Score en signalen komen in je ATS",
-        "api": "Je eigen platform: sleutels en webhooks"
+        "ats": "Je ATS: kandidaten krijgen de uitnodiging, score en signalen komen terug",
+        "api": "Je eigen platform: uitnodigen via de API, resultaten komen binnen via webhooks",
+        "mcp": "Je AI-chat: prepza in Claude of ChatGPT via MCP"
       },
       "docs": "API-documentatie",
       "apiName": "prepza API"
@@ -1124,6 +1124,7 @@
   },
   "ats": {
     "statusConnected": "gekoppeld",
+    "connectedBy": "Gekoppeld door {name}",
     "flowTitle": "Hoe kandidaten uit {ats} binnenkomen",
     "flowStage": "Voeg in {ats} aan de pipeline van de vacature een fase toe alleen voor prepza, bijvoorbeeld “prepza-vaardighedentest”, zodat die nooit door je andere tools heen loopt.",
     "flowLink": "Koppel hier de vacature en kies die fase.",
@@ -1721,7 +1722,8 @@
       "actions": [
         "Slack: ontvang de meldingen van je bedrijf in een kanaal.",
         "ATS (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): kandidaten die je naar een fase verplaatst krijgen het interview, en hun resultaten gaan terug.",
-        "API: sleutels en webhooks om je eigen platform te koppelen."
+        "API: sleutels en webhooks om je eigen platform te koppelen.",
+        "AI-apps: gebruik prepza vanuit Claude, ChatGPT en andere AI-apps."
       ],
       "tips": [
         "Iedereen in het bedrijf ziet de integraties; eigenaren en beheerders wijzigen ze."
@@ -1792,6 +1794,19 @@
         "De credits van een kandidaat worden gereserveerd bij de uitnodiging, afgeschreven zodra die antwoordt en teruggegeven als dat niet gebeurt.",
         "Alleen eigenaren en beheerders zien deze pagina."
       ]
+    },
+    "aiApps": {
+      "title": "AI-apps",
+      "text": "Gebruik prepza vanuit je AI-chat: vraag Claude of ChatGPT naar je interviews en kandidaten, of laat ze wijzigingen voor je doen.",
+      "actions": [
+        "Kopieer het serveradres en voeg het volgens de stappen toe aan Claude, Claude Code of ChatGPT.",
+        "Sta de app toe op de prepza-pagina die opent.",
+        "Ontkoppel een app die je niet meer gebruikt."
+      ],
+      "tips": [
+        "Een app handelt namens jou, in elk bedrijf waar je lid van bent, en vraagt het je voordat hij iets wijzigt.",
+        "Hij kan je wachtwoord en API-sleutels niet zien, en kan je account of een bedrijf niet verwijderen."
+      ]
     }
   },
   "companyBilling": {
@@ -1814,5 +1829,56 @@
     "invoice": "Factuur",
     "invoiceFailed": "De factuur kon niet worden geopend. Probeer het opnieuw.",
     "deletedCandidate": "Een verwijderde kandidaat"
+  },
+  "aiApps": {
+    "group": "AI-apps",
+    "name": "MCP-server",
+    "rowText": "Koppel Claude, ChatGPT en andere AI-apps aan prepza.",
+    "title": "AI-apps",
+    "subtitle": "Ze handelen namens jou, in elk bedrijf waar je lid van bent, met jouw rechten.",
+    "instructionsTitle": "Een AI-app aan prepza koppelen",
+    "serverTitle": "Serveradres",
+    "serverText": "Plak het in je AI-app als aangepaste connector (een MCP-server).",
+    "addTo": "Toevoegen aan <app>{name}</app>",
+    "claudeOpen": "Open in Claude:",
+    "claudePaste": "Noem hem {name}, plak het serveradres en kies “Add”.",
+    "allowOnPrepza": "Kies “Connect” en daarna “Toestaan” op de prepza-pagina die opent.",
+    "claudeCode": "Voer in Claude Code uit:",
+    "copyCommand": "Opdracht kopiëren",
+    "commandCopied": "Opdracht gekopieerd",
+    "chatgptDeveloper": "Zet in ChatGPT de ontwikkelaarsmodus aan:",
+    "chatgptCreate": "Kies daarna weer in Apps & Connectors:",
+    "chatgptPaste": "Noem hem {name}, plak het serveradres en kies deze authenticatie:",
+    "noConnected": "Nog geen apps gekoppeld.",
+    "connectedOn": "gekoppeld op {date}",
+    "lastUsed": "laatst gebruikt op {date}",
+    "neverUsed": "nog niet gebruikt",
+    "disconnectTitle": "{client} ontkoppelen?",
+    "disconnectText": "{client} werkt niet meer met prepza totdat je het opnieuw koppelt.",
+    "disconnectFailed": "De app kon niet worden ontkoppeld. Probeer het opnieuw."
+  },
+  "connect": {
+    "pageTitle": "Een AI-app koppelen",
+    "title": "<name>{client}</name> aan prepza koppelen",
+    "titleAny": "Een AI-app aan prepza koppelen",
+    "signInText": "Log in om te kiezen of de app je prepza-account mag gebruiken.",
+    "signIn": "Log in om verder te gaan",
+    "who": "{client} ({host}) wil je prepza-account gebruiken, {email}.",
+    "canTitle": "De app kan",
+    "can": [
+      "Je bedrijven, interviews en de resultaten van kandidaten lezen.",
+      "De wijzigingen doen die je vraagt, nadat hij het je eerst heeft gevraagd."
+    ],
+    "cantTitle": "De app kan niet",
+    "cant": [
+      "Je wachtwoord of API-sleutels zien.",
+      "Je account of een bedrijf verwijderen."
+    ],
+    "unknown": "prepza kent deze app niet. Sta hem alleen toe als je zelf bent begonnen met koppelen.",
+    "deny": "Weigeren",
+    "allow": "Toestaan",
+    "footnote": "Ontkoppel hem wanneer je wilt in Integraties → AI-apps van een bedrijf.",
+    "expired": "Deze link is verlopen of al gebruikt. Begin opnieuw met koppelen vanuit je AI-app.",
+    "loadFailed": "Dit verzoek kon niet worden geladen. Probeer het opnieuw."
   }
 }

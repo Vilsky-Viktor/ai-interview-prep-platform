@@ -66,7 +66,7 @@ test("an owner connects Teamtailor and saves its web hook's signature key", asyn
 
   // Saved for good: the dialog shows it again after a reload.
   await visit(owner, `${tab}/teamtailor`)
-  await expect(owner.getByText("connected", { exact: true })).toBeVisible()
+  await expect(owner.getByText("connected", { exact: true }).filter({ visible: true })).toBeVisible()
   await expect(owner.getByText("E2E Backend developer")).toBeVisible()
   await openDialog(
     owner,

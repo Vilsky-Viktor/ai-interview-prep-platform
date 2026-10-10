@@ -65,7 +65,8 @@ export default async function SlackPage({
           </BackLink>
         }
         title={
-          <div className="flex items-start justify-between gap-4">
+          // On phones the buttons go on their own line, full width, sharing it equally.
+          <div className="flex items-start justify-between gap-4 max-sm:flex-col max-sm:items-stretch">
             <div className="flex min-w-0 items-center gap-4">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -78,20 +79,28 @@ export default async function SlackPage({
                   <h1 className="font-heading text-3xl font-medium tracking-tight normal-case">
                     {SLACK.name}
                   </h1>
-                  <SlackStatus slack={slack} />
+                  <span className="max-sm:hidden">
+                    <SlackStatus slack={slack} />
+                  </span>
                 </div>
                 {slack.connected && (
                   <p className="text-base text-muted-foreground">
                     {slack.team} · {slack.channel}
                   </p>
                 )}
+                {/* On phones "connected" goes under the name and channel. */}
+                <span className="mt-2 flex empty:hidden sm:hidden">
+                  <SlackStatus slack={slack} />
+                </span>
               </div>
             </div>
-            <SlackActions
-              companyId={companyId}
-              slack={slack}
-              canEdit={company.can_edit}
-            />
+            <div className="max-sm:mt-4 max-sm:*:w-full max-sm:*:flex-wrap max-sm:[&>*>*]:flex-1 max-sm:[&>*>*:nth-child(3)]:basis-full">
+              <SlackActions
+                companyId={companyId}
+                slack={slack}
+                canEdit={company.can_edit}
+              />
+            </div>
           </div>
         }
       />
