@@ -60,8 +60,8 @@ A company can send its notifications to one Slack channel too, from its integrat
      socket_mode_enabled: false
      token_rotation_enabled: false
    ```
-   Add `http://localhost:8090/api/notifications/slack/callback` to `redirect_urls` for local use. Slack asks for the bot user: bot scopes, `incoming-webhook` among them, need one.
-2. Under **Manage Distribution**, activate public distribution, so other companies' workspaces can add it.
+   Slack asks for the bot user: bot scopes, `incoming-webhook` among them, need one. A publicly distributed app takes only `https` redirect URLs, so local development uses a second app, "prepza (dev)", made from the same manifest with only `http://localhost:8090/api/notifications/slack/callback`, not distributed: it works in your own workspace, and its keys go in the local `.env`.
+2. Under **Manage Distribution**, tick that the app has no hard-coded tokens or web hooks (prepza gets each company's through OAuth) and activate public distribution, so other companies' workspaces can add it.
 3. Put its **Client ID** and **Client Secret** (Basic Information) in `.env` as `SLACK_CLIENT_ID` and `SLACK_CLIENT_SECRET`.
 4. Set `SLACK_ENCRYPTION_KEY`, the Fernet key that encrypts the web hooks:
    ```bash
