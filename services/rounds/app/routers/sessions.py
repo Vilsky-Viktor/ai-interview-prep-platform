@@ -3,7 +3,9 @@ from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
+from prepza_common.rate_limit import hit
 
+from app.constants.integrity import SIGNALS_PER_MINUTE, SIGNALS_WINDOW_SECONDS
 from app.constants.rounds import SECTION_IN_PROGRESS, TIME_GRACE_SECONDS, RoundStatus
 from app.helpers.review import build_review
 from app.helpers.sessions import (
@@ -11,6 +13,7 @@ from app.helpers.sessions import (
     seconds_left,
     topic_out,
 )
+from app.integrations.redis import get_redis
 from app.schemas.review import ReviewItem
 from app.schemas.rounds import AnswerCreate, NextQuestion
 from app.schemas.sessions import SessionAnswerResult, SessionOut, SessionTopicOut, SignalIn
@@ -67,6 +70,7 @@ async def add_signal(session_id: UUID, body: SignalIn, user: CurrentUser) -> Non
     if row.status != RoundStatus.IN_PROGRESS:
         return
 
+    await hit(get_redis(), f"rate:signals:{row.id}", SIGNALS_PER_MINUTE, SIGNALS_WINDOW_SECONDS)
     question = next_session_question(row) if row.question_shown_at else None
     await sessions.add_signal(row.id, question.question_id if question else None, body.kind)
 

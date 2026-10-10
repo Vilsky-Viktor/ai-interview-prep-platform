@@ -7,7 +7,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import selectinload
 
 from app.constants.events import INTERVIEW_FINISHED, SESSION_SCORED
-from app.constants.integrity import FAST_ANSWER_SECONDS, IntegritySignal
+from app.constants.integrity import FAST_ANSWER_SECONDS, MAX_SIGNALS_PER_QUESTION, IntegritySignal
 from app.constants.rounds import CORRECT_SCORE, RoundStatus
 from app.helpers.rounds import correct_option_index, shuffled
 from app.helpers.scores import final_score, invite_grade, scored
@@ -159,7 +159,15 @@ async def mark_shown(session_id: uuid.UUID) -> datetime:
 async def add_signal(
     session_id: uuid.UUID, question_id: uuid.UUID | None, kind: IntegritySignal
 ) -> None:
+    """Saves the signal, unless its question already holds MAX_SIGNALS_PER_QUESTION."""
+    kept = select(func.count()).where(
+        Signal.session_id == session_id, Signal.question_id.is_not_distinct_from(question_id)
+    )
+
     async with Db() as session:
+        if await session.scalar(kept) >= MAX_SIGNALS_PER_QUESTION:
+            return
+
         session.add(Signal(session_id=session_id, question_id=question_id, kind=kind))
         await session.commit()
 

@@ -116,6 +116,8 @@ A scorecard shows every answer, whether it was right and how long it took. It fl
 - times the candidate left the page,
 - copy attempts.
 
+One session's browser may report a page leave or a copy 60 times a minute (a 429 past that), and a question keeps at most 50 (`MAX_SIGNALS_PER_QUESTION`): one already flags the candidate, so a script can't flood the scorecard.
+
 ## The candidate list
 
 - Sorted by grade by default: best first, candidates without a grade yet last.

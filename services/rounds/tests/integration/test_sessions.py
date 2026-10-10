@@ -1,6 +1,7 @@
 import asyncio
 import uuid
 
+from app.constants.integrity import MAX_SIGNALS_PER_QUESTION
 from app.models.answers import Answer
 from app.storage import sessions
 from tests.integration.factories import option_index, topic
@@ -244,3 +245,26 @@ def test_sections_keep_their_topics_order(run):
     listed, topics = run(scenario())
 
     assert listed == topics
+
+
+def test_a_question_keeps_a_limited_number_of_signals(run):
+    invite_id = uuid.uuid4()
+
+    async def scenario():
+        [row] = await sessions.create_many("cand", invite_id, [topic()], 30)
+        question_id = uuid.UUID(row.questions[0]["id"])
+
+        for _ in range(MAX_SIGNALS_PER_QUESTION + 5):
+            await sessions.add_signal(row.id, question_id, "tab_leave")
+
+        await sessions.add_signal(row.id, None, "copy")
+        [found] = await sessions.list_for_invite(invite_id, signals=True)
+
+        return found
+
+    found = run(scenario())
+
+    on_question = [signal for signal in found.signals if signal.question_id is not None]
+    assert len(on_question) == MAX_SIGNALS_PER_QUESTION
+    # Another question (here, none on screen) still keeps its own.
+    assert len(found.signals) == MAX_SIGNALS_PER_QUESTION + 1

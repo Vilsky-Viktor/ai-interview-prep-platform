@@ -2,15 +2,18 @@ import asyncio
 from datetime import UTC, datetime
 from uuid import uuid4
 
+from fastapi import HTTPException
 from fastapi.testclient import TestClient
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
+from app.constants.integrity import SIGNALS_PER_MINUTE
 from app.helpers.review import add_signals, build_review
 from app.main import app
 from app.models.answers import Answer
 from app.models.sessions import Session
 from app.models.signals import Signal
+from app.routers import sessions as sessions_router
 from app.schemas.library import TopicQuestions
 from app.storage import sessions
 
@@ -103,8 +106,17 @@ def test_the_browser_reports_signals(monkeypatch):
     async def fake_add_signal(session_id, question_id, kind):
         counted.append((question_id, kind))
 
+    hits = []
+
+    async def hit(redis, key, limit, window):
+        hits.append(key)
+
+        if len(hits) > SIGNALS_PER_MINUTE:
+            raise HTTPException(429, "Too many requests. Try again later.")
+
     monkeypatch.setattr(sessions, "get", fake_get)
     monkeypatch.setattr(sessions, "add_signal", fake_add_signal)
+    monkeypatch.setattr(sessions_router, "hit", hit)
     app.dependency_overrides[current_user] = lambda: User(
         uid="cand", email="cand@example.com", email_verified=True
     )
@@ -113,12 +125,20 @@ def test_the_browser_reports_signals(monkeypatch):
         client = TestClient(app)
         ok = client.post(f"/sessions/{row.id}/signals", json={"kind": "tab_leave"})
         bad = client.post(f"/sessions/{row.id}/signals", json={"kind": "other"})
+
+        # A browser (or a script) reporting too often in a minute is refused, and saves nothing.
+        for _ in range(SIGNALS_PER_MINUTE - 1):
+            client.post(f"/sessions/{row.id}/signals", json={"kind": "copy"})
+
+        flooded = client.post(f"/sessions/{row.id}/signals", json={"kind": "copy"})
     finally:
         app.dependency_overrides.clear()
 
     assert ok.status_code == 204
     assert bad.status_code == 422
-    assert counted == [(QUESTION_ID, "tab_leave")]
+    assert counted[0] == (QUESTION_ID, "tab_leave")
+    assert flooded.status_code == 429
+    assert len(counted) == SIGNALS_PER_MINUTE
 
 
 def test_signals_are_counted_on_their_question():
