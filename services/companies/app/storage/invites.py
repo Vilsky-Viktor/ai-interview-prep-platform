@@ -9,6 +9,7 @@ from sqlalchemy.dialects.postgresql import insert
 
 from app.constants.events import CANDIDATE_FINISHED, CANDIDATE_INVITED, CANDIDATE_REMOVED
 from app.constants.invites import NOT_STARTED, InviteStatus
+from app.helpers.candidates import new_hold_key
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
 from app.models.outbox import OutboxEvent
@@ -26,7 +27,7 @@ async def upsert(
     hold_key: str | None = None,
     name: str | None = None,
 ) -> tuple[CandidateInvite, bool]:
-    """Creates the invite (with `hold_key`, its credits' key), or returns the existing one so it
+    """Creates the invite (with `hold_key`, its credits' key, or a new one), or returns the existing one so it
     can be sent again, and saves the email's event with it. True when it revived an expired
     invite, whose credits were given back. `name`, the inviter's or the ATS's, fills a name not
     known yet: a name an owner or admin set stays, also when the same invite comes again."""
@@ -41,7 +42,7 @@ async def upsert(
             status=InviteStatus.INVITED,
             created_at=datetime.now(UTC),
             sent_at=datetime.now(UTC),
-            hold_key=hold_key,
+            hold_key=hold_key or new_hold_key(interview_id),
         )
         .on_conflict_do_nothing(index_elements=["interview_id", "email"])
     )
@@ -103,7 +104,7 @@ async def for_link(interview_id, email: str, hold_key: str | None = None) -> Can
             status=InviteStatus.INVITED,
             created_at=datetime.now(UTC),
             sent_at=datetime.now(UTC),
-            hold_key=hold_key,
+            hold_key=hold_key or new_hold_key(interview_id),
         )
         .on_conflict_do_nothing(index_elements=["interview_id", "email"])
     )

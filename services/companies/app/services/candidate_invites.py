@@ -6,7 +6,7 @@ from prepza_common.user import User
 
 from app.config.settings import settings
 from app.constants.invites import NOT_STARTED, InviteStatus
-from app.helpers.candidates import hold_key, new_hold_key
+from app.helpers.candidates import new_hold_key
 from app.helpers.interviews import interview_title
 from app.helpers.logos import logo_path
 from app.integrations import billing
@@ -27,7 +27,7 @@ async def invite(
     email = email.lower()
 
     current, stored = await invites.held(interview.id, email)
-    key = hold_key(interview.id, email, stored) if current else new_hold_key(interview.id, email)
+    key = stored if current else new_hold_key(interview.id)
 
     # A candidate who hasn't started has credits set aside: new, or sent again after expiring.
     # Credits first, so an invite refused for them never uses up the email limits.

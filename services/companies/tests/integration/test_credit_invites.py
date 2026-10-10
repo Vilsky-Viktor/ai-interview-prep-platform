@@ -61,27 +61,24 @@ def test_only_open_invites_hold_credits_newest_first(run):
     ]
 
 
-def test_history_keys_find_the_companys_invites_also_by_the_older_key(run):
+def test_history_keys_find_only_the_companys_own_invites(run):
     async def scenario():
         company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
         other = await companies.create(f"Other {uuid.uuid4()}", "owner", "owner@example.com")
         backend = await interview_of(company, "Backend")
         elsewhere = await interview_of(other, "Elsewhere")
         await invite(backend, "ann@example.com", InviteStatus.FINISHED, "h-ann")
-        # Made before invites had their own key: found by "{interview_id}:{email}".
-        await invite(backend, "Ben@Example.com", InviteStatus.FINISHED)
         await invite(backend, "cid@example.com", InviteStatus.DELETED, "h-cid")
         await invite(elsewhere, "dan@example.com", InviteStatus.FINISHED, "h-dan")
-        legacy = f"{backend.id}:ben@example.com"
-        keys = ["h-ann", legacy, "h-cid", "h-dan", "h-unknown"]
+        keys = ["h-ann", "h-cid", "h-dan", "h-unknown"]
 
-        return legacy, await credit_invites.by_hold_keys(company.id, keys)
+        return await credit_invites.by_hold_keys(company.id, keys)
 
-    legacy, found = run(scenario())
+    found = run(scenario())
 
+    # A deleted candidate, another company's and an unknown key aren't found.
     assert {key: (row.email, interview.title) for key, (row, interview) in found.items()} == {
         "h-ann": ("ann@example.com", "Backend"),
-        legacy: ("ben@example.com", "Backend"),
     }
 
 

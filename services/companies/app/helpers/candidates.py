@@ -5,21 +5,11 @@ from app.constants.invites import OPEN, SIGNAL_KEYS
 from app.schemas.invites import CandidateOut, CompanyCandidateOut
 
 
-def candidate_key(interview_id, email: str) -> str:
-    """Names the credits billing set aside for one candidate of one interview, on invites made
-    before each had its own key."""
-    return f"{interview_id}:{email.lower()}"
-
-
-def new_hold_key(interview_id, email: str) -> str:
-    """A new invite's own key for its credits: a candidate invited again after their invite was
-    removed gets a new one, so they're charged again (billing keeps a charged key charged)."""
-    return f"{candidate_key(interview_id, email)}:{uuid.uuid4().hex}"
-
-
-def hold_key(interview_id, email: str, stored: str | None) -> str:
-    """The key of an invite's credits: its own, or candidate_key on older invites."""
-    return stored or candidate_key(interview_id, email)
+def new_hold_key(interview_id) -> str:
+    """A new invite's own key for its credits, without the candidate's email (billing keeps its
+    keys as long as the company): a candidate invited again after their invite was removed gets
+    a new one, so they're charged again (billing keeps a charged key charged)."""
+    return f"{interview_id}:{uuid.uuid4().hex}"
 
 
 def candidate_label(invite) -> str:

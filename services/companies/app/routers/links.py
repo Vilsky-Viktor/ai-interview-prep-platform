@@ -17,7 +17,7 @@ from app.constants.invites import (
     NOT_STARTED,
     InviteStatus,
 )
-from app.helpers.candidates import hold_key, new_hold_key
+from app.helpers.candidates import new_hold_key
 from app.helpers.interviews import attach_set, interview_title
 from app.helpers.logos import logo_path
 from app.integrations import billing
@@ -83,11 +83,7 @@ async def start_link(token: str, user: CurrentUser, request: Request) -> InviteS
         raise HTTPException(status.HTTP_403_FORBIDDEN, "Sign in with a verified email")
 
     current, stored = await invites.held(interview.id, user.email)
-    key = (
-        hold_key(interview.id, user.email, stored)
-        if current
-        else new_hold_key(interview.id, user.email)
-    )
+    key = stored if current else new_hold_key(interview.id)
 
     if current == InviteStatus.FINISHED:
         raise HTTPException(status.HTTP_409_CONFLICT, "This interview is already finished")

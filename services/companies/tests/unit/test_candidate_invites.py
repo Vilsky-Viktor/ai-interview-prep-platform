@@ -1,3 +1,4 @@
+import re
 import uuid
 from datetime import UTC, datetime
 
@@ -105,7 +106,8 @@ def test_inviting_the_same_email_again_resends_the_invite(client, monkeypatch):
     # Credits are set aside once for the candidate; the resend costs nothing more.
     # Set aside once, under the invite's own key.
     assert len(used) == 1
-    assert used[0].startswith(f"{INTERVIEW_ID}:carol@example.com:")
+    # A new key of its own, without the candidate's email.
+    assert re.fullmatch(rf"{INTERVIEW_ID}:[0-9a-f]{{32}}", used[0])
     assert first.json()["id"] == second.json()["id"]
     assert sent == ["carol@example.com", "carol@example.com"]
 

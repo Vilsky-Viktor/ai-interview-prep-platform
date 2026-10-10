@@ -74,7 +74,15 @@ def test_retention_deletes_results_and_holds_before_the_invites_in_batches(monke
     done = []
     expired = uuid.uuid4()
     batches = [
-        [(expired, INTERVIEW_ID, "ann@example.com", InviteStatus.IN_PROCESS, None)],
+        [
+            (
+                expired,
+                INTERVIEW_ID,
+                "ann@example.com",
+                InviteStatus.IN_PROCESS,
+                f"{INTERVIEW_ID}:ann-key",
+            )
+        ],
         [],
     ]
 
@@ -99,7 +107,7 @@ def test_retention_deletes_results_and_holds_before_the_invites_in_batches(monke
     # A candidate stuck in process gives their credits back as they go.
     assert done == [
         ("rounds", [expired]),
-        ("billing", f"{INTERVIEW_ID}:ann@example.com"),
+        ("billing", f"{INTERVIEW_ID}:ann-key"),
         ("invites", [expired]),
     ]
 

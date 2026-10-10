@@ -3,7 +3,7 @@ from prepza_common.names import clean_name
 from prepza_common.user import User
 
 from app.constants.invites import InviteStatus
-from app.helpers.candidates import candidate_seconds, hold_key
+from app.helpers.candidates import candidate_seconds
 from app.helpers.interviews import attach_set, session_topics
 from app.integrations import library, rounds
 from app.models.interviews import Interview
@@ -50,7 +50,7 @@ async def start_sessions(
 
     # Expired after it was read: expiry gave its credits back.
     if before == InviteStatus.EXPIRED:
-        await hold_again(invite, hold_key(invite.interview_id, invite.email, invite.hold_key))
+        await hold_again(invite, invite.hold_key)
 
     return InviteStartOut(
         sessions=[

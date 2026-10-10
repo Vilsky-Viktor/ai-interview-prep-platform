@@ -1,3 +1,4 @@
+import re
 import uuid
 from types import SimpleNamespace
 
@@ -80,7 +81,8 @@ def test_anyone_signed_in_starts_through_the_link_and_is_charged_like_an_invite(
     assert client.post("/links/abc/start").status_code == 200
     # Set aside under the new invite's own key.
     (key,) = linked["held"]
-    assert key.startswith(f"{INTERVIEW.id}:cand@example.com:")
+    # A new key of its own, without the candidate's email.
+    assert re.fullmatch(rf"{INTERVIEW.id}:[0-9a-f]{{32}}", key)
     assert [invite.email for invite in linked["started"]] == ["Cand@Example.com"]
 
 

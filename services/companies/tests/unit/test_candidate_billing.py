@@ -44,7 +44,7 @@ def finished(monkeypatch, status=InviteStatus.IN_PROCESS, pass_mark=70):
         email="carol@example.com",
         name="Carol Diaz",
         status=status,
-        hold_key=None,
+        hold_key=f"{INTERVIEW_ID}:carol-key",
     )
     notices = []
 
@@ -107,7 +107,7 @@ def test_a_finished_interview_with_an_answer_charges_and_tells_the_company(ledge
     ]
     # Stored on the invite, so the candidates list sorts and filters by them.
     assert invite.results == (85, True)
-    assert ledger == [("charge", f"{INTERVIEW_ID}:carol@example.com")]
+    assert ledger == [("charge", f"{INTERVIEW_ID}:carol-key")]
     # ats writes the result back to the ATS that sent the candidate.
     assert invite.result == {
         "candidate_invite_id": str(invite.id),
@@ -152,7 +152,7 @@ def test_rounds_being_down_charges_but_retries_for_the_grade(ledger, monkeypatch
         asyncio.run(candidate_billing.handle("interview.finished", data, "event-1"))
 
     assert notices == []
-    assert ledger == [("charge", f"{INTERVIEW_ID}:carol@example.com")]
+    assert ledger == [("charge", f"{INTERVIEW_ID}:carol-key")]
 
     # Retried once rounds answers: the company and its ATS get the grade.
     monkeypatch.setattr(rounds, "invite_scores", scores)
@@ -160,7 +160,7 @@ def test_rounds_being_down_charges_but_retries_for_the_grade(ledger, monkeypatch
 
     assert notices[0]["data"]["grade"] == 85
     assert invite.result["grade"] == 85
-    assert ledger == [("charge", f"{INTERVIEW_ID}:carol@example.com")] * 2
+    assert ledger == [("charge", f"{INTERVIEW_ID}:carol-key")] * 2
 
 
 def test_a_finished_interview_without_an_answer_gives_the_credits_back(ledger, monkeypatch):
@@ -174,7 +174,7 @@ def test_a_finished_interview_without_an_answer_gives_the_credits_back(ledger, m
 
     # Finished, but nobody is told.
     assert notices == [None]
-    assert ledger == [("release", f"{INTERVIEW_ID}:carol@example.com")]
+    assert ledger == [("release", f"{INTERVIEW_ID}:carol-key")]
 
 
 def test_a_deleted_candidate_is_left_alone(ledger, monkeypatch):
@@ -191,7 +191,10 @@ def test_a_deleted_candidate_is_left_alone(ledger, monkeypatch):
 
 def test_invites_never_started_expire_and_give_their_credits_back(ledger, monkeypatch):
     stale = SimpleNamespace(
-        id=uuid.uuid4(), interview_id=INTERVIEW_ID, email="dave@example.com", hold_key=None
+        id=uuid.uuid4(),
+        interview_id=INTERVIEW_ID,
+        email="dave@example.com",
+        hold_key=f"{INTERVIEW_ID}:dave-key",
     )
     waiting = [stale]
     asked = []
@@ -203,7 +206,7 @@ def test_invites_never_started_expire_and_give_their_credits_back(ledger, monkey
 
     async def fake_mark(invite_id, before):
         # Released first, then marked: a release that fails leaves it for the next run.
-        assert ledger == [("release", f"{INTERVIEW_ID}:dave@example.com")]
+        assert ledger == [("release", f"{INTERVIEW_ID}:dave-key")]
         waiting.clear()
 
         return True
@@ -214,12 +217,15 @@ def test_invites_never_started_expire_and_give_their_credits_back(ledger, monkey
     assert asyncio.run(candidate_billing.expire_unstarted()) == 1
     expected = datetime.now(UTC) - timedelta(days=INVITE_EXPIRY_DAYS)
     assert abs((asked[0] - expected).total_seconds()) < 5
-    assert ledger == [("release", f"{INTERVIEW_ID}:dave@example.com")]
+    assert ledger == [("release", f"{INTERVIEW_ID}:dave-key")]
 
 
 def test_an_invite_started_or_sent_again_while_expiring_keeps_its_credits(ledger, monkeypatch):
     revived = SimpleNamespace(
-        id=uuid.uuid4(), interview_id=INTERVIEW_ID, email="eve@example.com", hold_key=None
+        id=uuid.uuid4(),
+        interview_id=INTERVIEW_ID,
+        email="eve@example.com",
+        hold_key=f"{INTERVIEW_ID}:eve-key",
     )
     waiting = [revived]
 
@@ -249,14 +255,17 @@ def test_an_invite_started_or_sent_again_while_expiring_keeps_its_credits(ledger
     asyncio.run(candidate_billing.expire_unstarted())
 
     assert ledger == [
-        ("release", f"{INTERVIEW_ID}:eve@example.com"),
-        ("hold", f"{INTERVIEW_ID}:eve@example.com"),
+        ("release", f"{INTERVIEW_ID}:eve-key"),
+        ("hold", f"{INTERVIEW_ID}:eve-key"),
     ]
 
 
 def test_an_invite_another_run_expired_meanwhile_keeps_nothing_set_aside(ledger, monkeypatch):
     stale = SimpleNamespace(
-        id=uuid.uuid4(), interview_id=INTERVIEW_ID, email="fay@example.com", hold_key=None
+        id=uuid.uuid4(),
+        interview_id=INTERVIEW_ID,
+        email="fay@example.com",
+        hold_key=f"{INTERVIEW_ID}:fay-key",
     )
     waiting = [stale]
 
@@ -282,21 +291,21 @@ def test_an_invite_another_run_expired_meanwhile_keeps_nothing_set_aside(ledger,
     asyncio.run(candidate_billing.expire_unstarted())
 
     # A retried schedule overlapping the first run: its release is the only movement.
-    assert ledger == [("release", f"{INTERVIEW_ID}:fay@example.com")]
+    assert ledger == [("release", f"{INTERVIEW_ID}:fay-key")]
 
 
 def test_a_leaving_candidate_frees_only_unfinished_invites(ledger):
     asyncio.run(
         candidate_billing.release_unfinished(
             [
-                (INTERVIEW_ID, "a@example.com", InviteStatus.INVITED, None),
-                (INTERVIEW_ID, "b@example.com", InviteStatus.IN_PROCESS, None),
-                (INTERVIEW_ID, "c@example.com", InviteStatus.FINISHED, None),
+                (INTERVIEW_ID, "a@example.com", InviteStatus.INVITED, f"{INTERVIEW_ID}:a-key"),
+                (INTERVIEW_ID, "b@example.com", InviteStatus.IN_PROCESS, f"{INTERVIEW_ID}:b-key"),
+                (INTERVIEW_ID, "c@example.com", InviteStatus.FINISHED, f"{INTERVIEW_ID}:c-key"),
             ]
         )
     )
 
     assert ledger == [
-        ("release", f"{INTERVIEW_ID}:a@example.com"),
-        ("release", f"{INTERVIEW_ID}:b@example.com"),
+        ("release", f"{INTERVIEW_ID}:a-key"),
+        ("release", f"{INTERVIEW_ID}:b-key"),
     ]

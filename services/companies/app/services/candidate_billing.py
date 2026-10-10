@@ -6,7 +6,7 @@ from prepza_common.analytics import track
 
 from app.constants.events import INTERVIEW_FINISHED
 from app.constants.invites import EXPIRIES_PER_BATCH, INVITE_EXPIRY_DAYS, NOT_STARTED, InviteStatus
-from app.helpers.candidates import finished_result, hold_key, stored_results
+from app.helpers.candidates import finished_result, stored_results
 from app.helpers.notifications import candidate_finished
 from app.integrations import billing, rounds
 from app.services import outbox as outbox_service
@@ -31,7 +31,7 @@ async def handle(event_type: str, data: dict, event_id: str) -> None:
 
     interview = await interviews.get(invite.interview_id)
     charged = data["answered"] > 0
-    key = hold_key(invite.interview_id, invite.email, invite.hold_key)
+    key = invite.hold_key
 
     # The charge first, so rounds being down never holds it up.
     if charged:
@@ -70,7 +70,7 @@ async def expire_unstarted() -> int:
     # rest stay unexpired and the next run tries them again, so no hold is left open.
     while rows := await invite_expiry.expiring(before, EXPIRIES_PER_BATCH):
         for invite in rows:
-            key = hold_key(invite.interview_id, invite.email, invite.hold_key)
+            key = invite.hold_key
             await billing.release_candidate(key)
 
             # Started or sent again since it was read: it keeps its credits after all.
@@ -103,7 +103,7 @@ async def release_unfinished(rows: list) -> None:
     back."""
     for interview_id, email, status, stored in rows:
         if status in (*NOT_STARTED, InviteStatus.IN_PROCESS):
-            await billing.release_candidate(hold_key(interview_id, email, stored))
+            await billing.release_candidate(stored)
 
 
 async def settle_removed(rows: list) -> None:
@@ -115,7 +115,7 @@ async def settle_removed(rows: list) -> None:
     scores = await rounds.invite_scores(started)
 
     for row in rows:
-        key = hold_key(row.interview_id, row.email, row.hold_key)
+        key = row.hold_key
 
         if (scores.get(str(row.id)) or {}).get("picked"):
             await billing.charge_candidate(key)

@@ -1,6 +1,9 @@
 import uuid
 from datetime import UTC, datetime
 
+import pytest
+from fastapi import HTTPException
+
 from app.constants.credits import WELCOME_COMPANY, Reason
 from app.constants.products import AUTO_TOP_UP_COOLDOWN, AUTO_TOP_UP_RETRY_AFTER, OwnerType
 from app.schemas.billing import AutoTopUpIn
@@ -27,14 +30,22 @@ def test_a_second_member_turning_it_on_before_the_first_checkout_starts_it_with_
         await auto_top_ups.turn_on(COMPANY, acme, CHOICE, ann)
         waiting = await auto_top_ups.turn_on(COMPANY, acme, CHOICE, bob)
         await auto_top_ups.start(checkout_data(acme, bob), sub)
-        # Once running, Ann changing the choice keeps Bob's card.
-        await auto_top_ups.turn_on(COMPANY, acme, CHOICE, ann)
 
-        return waiting, await auto_top_ups.out(COMPANY, acme), await rows.get(COMPANY, acme)
+        # Once running on Bob's card, only Bob changes it: Ann is refused, and it runs as before.
+        with pytest.raises(HTTPException) as refused:
+            await auto_top_ups.turn_on(COMPANY, acme, CHOICE, ann)
 
-    waiting, after, row = run(scenario())
+        return (
+            waiting,
+            refused.value.status_code,
+            await auto_top_ups.out(COMPANY, acme),
+            await rows.get(COMPANY, acme),
+        )
+
+    waiting, refused, after, row = run(scenario())
 
     assert waiting.checkout.custom_data["buyer_id"] == bob
+    assert refused == 403
     assert after.on
     assert row.buyer_id == bob
     assert paddle_calls == []

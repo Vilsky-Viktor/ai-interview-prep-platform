@@ -114,7 +114,13 @@ def test_a_failed_cleanup_keeps_the_interview(client, monkeypatch):
 
 
 def candidate(email, status):
-    return CandidateInvite(id=uuid.uuid4(), interview_id=INTERVIEW_ID, email=email, status=status)
+    return CandidateInvite(
+        id=uuid.uuid4(),
+        interview_id=INTERVIEW_ID,
+        email=email,
+        status=status,
+        hold_key=f"{INTERVIEW_ID}:{email.split('@')[0]}-key",
+    )
 
 
 def test_deleting_an_interview_settles_unfinished_candidates_credits(client, monkeypatch):
@@ -151,9 +157,9 @@ def test_deleting_an_interview_settles_unfinished_candidates_credits(client, mon
     assert client.delete(URL).status_code == 204
     assert calls == [
         ("scores", sorted([dan.id, erin.id])),
-        ("release", f"{INTERVIEW_ID}:carol@example.com"),
-        ("charge", f"{INTERVIEW_ID}:dan@example.com"),
-        ("release", f"{INTERVIEW_ID}:erin@example.com"),
+        ("release", f"{INTERVIEW_ID}:carol-key"),
+        ("charge", f"{INTERVIEW_ID}:dan-key"),
+        ("release", f"{INTERVIEW_ID}:erin-key"),
         ("rounds", SET_ID),
         ("library", SET_ID),
         ("interview", INTERVIEW_ID),

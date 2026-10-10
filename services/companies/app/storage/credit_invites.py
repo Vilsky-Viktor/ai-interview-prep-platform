@@ -1,19 +1,15 @@
 """The invites behind a company's credits: the ones holding credits now, and the ones billing's
 history names by the key of their credits."""
 
-from sqlalchemy import String, cast, func, select
+from sqlalchemy import func, select
 
 from app.constants.invites import OPEN, InviteStatus
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
 from app.storage.db import Session
 
-# The key of an invite's credits, as helpers/candidates.hold_key makes it: its own, or
-# "{interview_id}:{email}" on older invites.
-HOLD_KEY = func.coalesce(
-    CandidateInvite.hold_key,
-    cast(CandidateInvite.interview_id, String) + ":" + func.lower(CandidateInvite.email),
-)
+# The key of an invite's credits (helpers/candidates.new_hold_key), which billing names it by.
+HOLD_KEY = CandidateInvite.hold_key
 
 
 async def count_holding(company_id) -> int:
