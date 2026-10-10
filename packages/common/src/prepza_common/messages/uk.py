@@ -1,6 +1,7 @@
 # Messages the services show users, in Ukrainian, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "The request is too large.": "Запит завеликий.",
     "Too many requests. Try again later.": "Забагато запитів. Спробуйте пізніше.",
     "Sign-in is temporarily unavailable. Please try again shortly.": "Вхід тимчасово недоступний. Спробуйте трохи згодом.",
     "Not enough credits. Top up to continue.": "Недостатньо кредитів. Поповніть баланс, щоб продовжити.",

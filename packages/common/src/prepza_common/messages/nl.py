@@ -1,6 +1,7 @@
 # Messages the services show users, in Dutch, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "The request is too large.": "Het verzoek is te groot.",
     "Too many requests. Try again later.": "Te veel verzoeken. Probeer het later opnieuw.",
     "Sign-in is temporarily unavailable. Please try again shortly.": "Inloggen is tijdelijk niet beschikbaar. Probeer het zo meteen opnieuw.",
     "Not enough credits. Top up to continue.": "Niet genoeg credits. Waardeer op om door te gaan.",

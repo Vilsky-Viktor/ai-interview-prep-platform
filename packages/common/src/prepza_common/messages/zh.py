@@ -1,6 +1,7 @@
 # Messages the services show users, in Chinese (Simplified), keyed by the English text they're raised with.
 
 MESSAGES = {
+    "The request is too large.": "请求过大。",
     "Too many requests. Try again later.": "请求过多，请稍后再试。",
     "Sign-in is temporarily unavailable. Please try again shortly.": "登录暂时不可用，请稍后再试。",
     "Not enough credits. Top up to continue.": "点数不足，请充值后继续。",

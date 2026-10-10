@@ -1,6 +1,7 @@
 # Messages the services show users, in Arabic, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "The request is too large.": "الطلب كبير جدًا.",
     "Too many requests. Try again later.": "طلبات كثيرة جدًا. حاول مرة أخرى لاحقًا.",
     "Sign-in is temporarily unavailable. Please try again shortly.": "تسجيل الدخول غير متاح مؤقتًا. حاول مرة أخرى بعد قليل.",
     "Not enough credits. Top up to continue.": "رصيدك غير كافٍ. اشحن رصيدك للمتابعة.",

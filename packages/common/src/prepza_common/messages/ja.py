@@ -1,6 +1,7 @@
 # Messages the services show users, in Japanese, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "The request is too large.": "リクエストが大きすぎます。",
     "Too many requests. Try again later.": "リクエストが多すぎます。しばらくしてからもう一度お試しください。",
     "Sign-in is temporarily unavailable. Please try again shortly.": "サインインは一時的に利用できません。少し時間をおいてもう一度お試しください。",
     "Not enough credits. Top up to continue.": "クレジットが足りません。続けるにはチャージしてください。",

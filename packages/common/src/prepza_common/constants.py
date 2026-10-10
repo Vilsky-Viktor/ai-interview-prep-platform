@@ -8,6 +8,10 @@ HTTP_TIMEOUT_SECONDS = 30
 HTTP_RETRIES = 3
 
 RATE_LIMITED = "Too many requests. Try again later."
+# A request's body is refused past this many bytes (body_limit.py); a service that takes bigger
+# uploads (report PDFs, voice messages) passes its own limit.
+MAX_BODY_BYTES = 1_000_000
+BODY_TOO_LARGE = "The request is too large."
 # Cloud Logging's fields: a JSON log line's `severity` and `message` are read as such, and this
 # one ties the line to its request's trace, which the load balancer sends in TRACE_HEADER
 # ("TRACE_ID/SPAN_ID;o=1"), so one request can be followed across services.

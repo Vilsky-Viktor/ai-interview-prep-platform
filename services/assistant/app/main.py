@@ -4,12 +4,14 @@ from contextlib import asynccontextmanager
 import firebase_admin
 from fastapi import FastAPI, HTTPException, status
 from prepza_common import http
+from prepza_common.body_limit import BodyLimitMiddleware
 from prepza_common.i18n import add_localized_errors
 from prepza_common.logging import RequestLogMiddleware, configure_logging
 from prepza_common.maintenance import MaintenanceMiddleware
 from prepza_common.sentry import init_sentry
 
 from app.config.settings import settings
+from app.constants.transcribe import MAX_BODY_BYTES
 from app.integrations.redis import get_redis
 from app.routers import (
     actions,
@@ -54,6 +56,7 @@ app = FastAPI(
 add_localized_errors(app)
 app.add_middleware(MaintenanceMiddleware, get_redis=get_redis)
 app.add_middleware(RequestLogMiddleware)
+app.add_middleware(BodyLimitMiddleware, max_bytes=MAX_BODY_BYTES)
 app.include_router(chat.router)
 app.include_router(transcribe.router)
 app.include_router(conversations.router)

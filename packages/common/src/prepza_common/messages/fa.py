@@ -1,6 +1,7 @@
 # Messages the services show users, in Persian, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "The request is too large.": "درخواست بیش از حد بزرگ است.",
     "Too many requests. Try again later.": "درخواست\u200cها بیش از حد زیاد است. بعداً دوباره امتحان کنید.",
     "Sign-in is temporarily unavailable. Please try again shortly.": "ورود موقتاً در دسترس نیست. کمی بعد دوباره امتحان کنید.",
     "Not enough credits. Top up to continue.": "اعتبار کافی ندارید. برای ادامه، شارژ کنید.",

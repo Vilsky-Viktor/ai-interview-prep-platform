@@ -1,6 +1,7 @@
 # Messages the services show users, in Hindi, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "The request is too large.": "अनुरोध बहुत बड़ा है।",
     "Too many requests. Try again later.": "बहुत अधिक अनुरोध। कृपया बाद में फिर से कोशिश करें।",
     "Sign-in is temporarily unavailable. Please try again shortly.": "साइन-इन अस्थायी रूप से उपलब्ध नहीं है। कृपया थोड़ी देर बाद फिर से कोशिश करें।",
     "Not enough credits. Top up to continue.": "पर्याप्त क्रेडिट नहीं हैं। जारी रखने के लिए टॉप अप करें।",

@@ -12,13 +12,18 @@ from starlette.exceptions import HTTPException
 VALUE_ERROR = "Value error, "
 
 
-def request_language(request: Request) -> str:
-    """The interface language, which the frontend sends as Accept-Language."""
-    # The first tag, without its region: "fil-PH" is Filipino, "pt-BR" Portuguese.
-    value = request.headers.get("accept-language", "").split(",")[0].split(";")[0]
+def language_of(accept_language: str) -> str:
+    """The interface language in an Accept-Language header: its first tag, without its region
+    ("fil-PH" is Filipino, "pt-BR" Portuguese)."""
+    value = accept_language.split(",")[0].split(";")[0]
     value = value.split("-")[0].strip().lower()
 
     return value if value in LANGUAGES else DEFAULT_LANGUAGE
+
+
+def request_language(request: Request) -> str:
+    """The interface language, which the frontend sends as Accept-Language."""
+    return language_of(request.headers.get("accept-language", ""))
 
 
 def translate(text: str, language: str) -> str:

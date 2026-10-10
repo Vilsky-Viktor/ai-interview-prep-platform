@@ -1,6 +1,7 @@
 # Messages the services show users, in Vietnamese, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "The request is too large.": "Yêu cầu quá lớn.",
     "Too many requests. Try again later.": "Quá nhiều yêu cầu. Vui lòng thử lại sau.",
     "Sign-in is temporarily unavailable. Please try again shortly.": "Đăng nhập tạm thời không khả dụng. Vui lòng thử lại sau ít phút.",
     "Not enough credits. Top up to continue.": "Không đủ credit. Hãy nạp thêm để tiếp tục.",

@@ -1,6 +1,7 @@
 # Messages the services show users, in Estonian, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "The request is too large.": "Päring on liiga suur.",
     "Too many requests. Try again later.": "Liiga palju päringuid. Proovi hiljem uuesti.",
     "Sign-in is temporarily unavailable. Please try again shortly.": (
         "Sisselogimine pole ajutiselt saadaval. Proovi varsti uuesti."

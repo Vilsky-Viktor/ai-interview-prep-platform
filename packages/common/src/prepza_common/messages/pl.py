@@ -1,6 +1,7 @@
 # Messages the services show users, in Polish, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "The request is too large.": "Żądanie jest zbyt duże.",
     "Too many requests. Try again later.": "Zbyt wiele żądań. Spróbuj później.",
     "Sign-in is temporarily unavailable. Please try again shortly.": "Logowanie jest chwilowo niedostępne. Spróbuj ponownie za chwilę.",
     "Not enough credits. Top up to continue.": "Za mało kredytów. Doładuj, aby kontynuować.",

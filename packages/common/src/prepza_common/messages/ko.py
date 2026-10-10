@@ -1,6 +1,7 @@
 # Messages the services show users, in Korean, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "The request is too large.": "요청이 너무 큽니다.",
     "Too many requests. Try again later.": "요청이 너무 많습니다. 잠시 후 다시 시도해 주세요.",
     "Sign-in is temporarily unavailable. Please try again shortly.": "로그인을 일시적으로 사용할 수 없습니다. 잠시 후 다시 시도해 주세요.",
     "Not enough credits. Top up to continue.": "크레딧이 부족합니다. 계속하려면 충전해 주세요.",

@@ -1,6 +1,7 @@
 # Messages the services show users, in Thai, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "The request is too large.": "คำขอมีขนาดใหญ่เกินไป",
     "Too many requests. Try again later.": "มีคำขอมากเกินไป โปรดลองอีกครั้งในภายหลัง",
     "Sign-in is temporarily unavailable. Please try again shortly.": "การลงชื่อเข้าใช้ไม่พร้อมใช้งานชั่วคราว โปรดลองอีกครั้งในอีกสักครู่",
     "Not enough credits. Top up to continue.": "เครดิตไม่เพียงพอ โปรดเติมเครดิตเพื่อดำเนินการต่อ",

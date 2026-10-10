@@ -5,6 +5,7 @@ from contextlib import asynccontextmanager
 import firebase_admin
 from fastapi import FastAPI, HTTPException, status
 from prepza_common import http
+from prepza_common.body_limit import BodyLimitMiddleware
 from prepza_common.i18n import add_localized_errors
 from prepza_common.logging import RequestLogMiddleware, configure_logging
 from prepza_common.maintenance import MaintenanceMiddleware
@@ -52,6 +53,7 @@ app = FastAPI(
 add_localized_errors(app)
 app.add_middleware(MaintenanceMiddleware, get_redis=get_redis)
 app.add_middleware(RequestLogMiddleware)
+app.add_middleware(BodyLimitMiddleware)
 app.include_router(sessions.router)
 app.include_router(interview_flow.router)
 app.include_router(practice.router)

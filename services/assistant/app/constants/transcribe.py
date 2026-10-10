@@ -3,6 +3,8 @@
 
 # The largest recording (a minute of compressed speech is well under it).
 MAX_AUDIO_BYTES = 2 * 1024 * 1024
+# A request's body may be this large here: a voice message, with room for its headers.
+MAX_BODY_BYTES = 3_000_000
 # The formats browsers record in, and the file name OpenAI reads the format from.
 AUDIO_FILES = {
     "audio/webm": "audio.webm",

@@ -1,6 +1,7 @@
 # Messages the services show users, in French, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "The request is too large.": "La requête est trop volumineuse.",
     "Too many requests. Try again later.": "Trop de requêtes. Réessayez plus tard.",
     "Sign-in is temporarily unavailable. Please try again shortly.": "La connexion est temporairement indisponible. Réessayez dans un instant.",
     "Not enough credits. Top up to continue.": "Crédits insuffisants. Rechargez pour continuer.",

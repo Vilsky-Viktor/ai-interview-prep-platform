@@ -1,6 +1,7 @@
 # Messages the services show users, in Russian, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "The request is too large.": "Слишком большой запрос.",
     "Too many requests. Try again later.": "Слишком много запросов. Попробуйте позже.",
     "Sign-in is temporarily unavailable. Please try again shortly.": "Вход временно недоступен. Попробуйте чуть позже.",
     "Not enough credits. Top up to continue.": "Недостаточно кредитов. Пополните баланс, чтобы продолжить.",

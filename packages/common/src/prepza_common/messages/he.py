@@ -1,6 +1,7 @@
 # Messages the services show users, in Hebrew, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "The request is too large.": "הבקשה גדולה מדי.",
     "Too many requests. Try again later.": "יותר מדי בקשות. נסו שוב מאוחר יותר.",
     "Sign-in is temporarily unavailable. Please try again shortly.": "ההתחברות אינה זמינה כרגע. נסו שוב בעוד רגע.",
     "Not enough credits. Top up to continue.": "אין מספיק קרדיטים. יש לטעון כדי להמשיך.",

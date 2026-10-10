@@ -1,6 +1,7 @@
 # Messages the services show users, in Filipino, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "The request is too large.": "Masyadong malaki ang request.",
     "Too many requests. Try again later.": "Masyadong maraming request. Subukang muli mamaya.",
     "Sign-in is temporarily unavailable. Please try again shortly.": "Pansamantalang hindi available ang pag-sign in. Subukang muli maya-maya.",
     "Not enough credits. Top up to continue.": "Kulang ang credits. Mag-top up para magpatuloy.",

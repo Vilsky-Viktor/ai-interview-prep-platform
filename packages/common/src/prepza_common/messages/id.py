@@ -1,6 +1,7 @@
 # Messages the services show users, in Indonesian, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "The request is too large.": "Permintaan terlalu besar.",
     "Too many requests. Try again later.": "Terlalu banyak permintaan. Coba lagi nanti.",
     "Sign-in is temporarily unavailable. Please try again shortly.": "Masuk sedang tidak tersedia untuk sementara. Coba lagi sebentar lagi.",
     "Not enough credits. Top up to continue.": "Kredit tidak cukup. Isi ulang untuk melanjutkan.",
