@@ -1807,7 +1807,7 @@
         "Putuskan aplikasi yang tidak kamu pakai lagi."
       ],
       "tips": [
-        "Aplikasi bertindak sebagai kamu, di setiap perusahaan tempatmu bergabung, dan bertanya dulu sebelum mengubah apa pun.",
+        "Aplikasi bertindak sebagai kamu, di setiap perusahaan tempatmu bergabung. Sebagian besar aplikasi bertanya dulu sebelum mengubah apa pun.",
         "Aplikasi tidak bisa melihat kata sandi atau kunci API-mu, dan tidak bisa menghapus akunmu atau perusahaan."
       ]
     }
@@ -1870,7 +1870,8 @@
     "canTitle": "Aplikasi ini bisa",
     "can": [
       "Membaca perusahaan, wawancara, dan hasil kandidatmu.",
-      "Membuat perubahan yang kamu minta, setelah bertanya dulu."
+      "Membuat perubahan yang kamu minta. Sebagian besar aplikasi AI meminta konfirmasimu dulu.",
+      "Meneruskan apa yang dibacanya ke penyedia aplikasi, sesuai ketentuan aplikasi tersebut."
     ],
     "cantTitle": "Aplikasi ini tidak bisa",
     "cant": [

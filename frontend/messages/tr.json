@@ -1806,7 +1806,7 @@
         "Artık kullanmadığınız bir uygulamanın bağlantısını kesin."
       ],
       "tips": [
-        "Uygulama, üyesi olduğunuz her şirkette sizin adınıza hareket eder ve bir şeyi değiştirmeden önce size sorar.",
+        "Uygulama, üyesi olduğunuz her şirkette sizin adınıza hareket eder. Çoğu uygulama bir şeyi değiştirmeden önce size sorar.",
         "Şifrenizi veya API anahtarlarınızı göremez; hesabınızı veya bir şirketi silemez."
       ]
     }
@@ -1869,7 +1869,8 @@
     "canTitle": "Yapabilecekleri",
     "can": [
       "Şirketlerinizi, mülakatlarınızı ve adayların sonuçlarını okumak.",
-      "İstediğiniz değişiklikleri, önce size sorarak yapmak."
+      "İstediğiniz değişiklikleri yapmak. Çoğu yapay zekâ uygulaması önce onayınızı ister.",
+      "Okuduklarını, o uygulamanın koşullarına göre uygulamanın sağlayıcısına iletmek."
     ],
     "cantTitle": "Yapamayacakları",
     "cant": [

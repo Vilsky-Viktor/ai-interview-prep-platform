@@ -1807,7 +1807,7 @@
         "Trenne eine App, die du nicht mehr nutzt."
       ],
       "tips": [
-        "Eine App handelt in deinem Namen, in jedem Unternehmen, in dem du Mitglied bist, und fragt dich, bevor sie etwas ändert.",
+        "Eine App handelt in deinem Namen, in jedem Unternehmen, in dem du Mitglied bist. Die meisten Apps fragen dich, bevor sie etwas ändern.",
         "Sie sieht weder dein Passwort noch deine API-Schlüssel und kann weder dein Konto noch ein Unternehmen löschen."
       ]
     }
@@ -1870,7 +1870,8 @@
     "canTitle": "Sie kann",
     "can": [
       "Deine Unternehmen, Interviews und die Ergebnisse der Kandidaten lesen.",
-      "Die Änderungen vornehmen, um die du bittest, nachdem sie dich gefragt hat."
+      "Die Änderungen vornehmen, um die du bittest. Die meisten KI-Apps bitten dich vorher um Bestätigung.",
+      "Was sie liest, nach den Bedingungen der App an deren Anbieter weitergeben."
     ],
     "cantTitle": "Sie kann nicht",
     "cant": [

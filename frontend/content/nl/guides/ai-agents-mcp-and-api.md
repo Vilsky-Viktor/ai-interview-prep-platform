@@ -98,7 +98,7 @@ Werkt je team al in Claude of ChatGPT, dan kun je prepza daarheen halen. De MCP-
 2. **In Claude:** open Instellingen, dan Connectors, en voeg een aangepaste connector toe met dat adres. **In Claude Code:** voer `claude mcp add --transport http prepza https://prepza.ai/mcp` uit. **In ChatGPT:** voeg het toe als aangepaste connector in de instellingen voor apps en connectors.
 3. Je AI-app opent de aanmelding van prepza. Meld je aan, controleer welke app erom vraagt, en kies **Toestaan**.
 
-Vanaf dan vraag je in je chat wat je ook een collega zou vragen: "Wie zijn in prepza de drie beste kandidaten voor Product designer?" Je AI-app vraagt je om toestemming voor elke wijziging en waarschuwt je voor alles wat niet ongedaan kan worden gemaakt.
+Vanaf dan vraag je in je chat wat je ook een collega zou vragen: "Wie zijn in prepza de drie beste kandidaten voor Product designer?" De meeste AI-apps vragen je om toestemming voor een wijziging en waarschuwen je voor alles wat niet ongedaan kan worden gemaakt: prepza vertelt ze welke acties iets wijzigen of verwijderen.
 
 **Wat hetzelfde blijft als in de app:**
 

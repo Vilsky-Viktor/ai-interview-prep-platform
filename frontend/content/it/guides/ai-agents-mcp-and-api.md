@@ -98,7 +98,7 @@ Se il tuo team lavora già in Claude o ChatGPT, puoi portare lì prepza. Il serv
 2. **In Claude:** apri Impostazioni, poi Connettori, e aggiungi un connettore personalizzato con quell'indirizzo. **In Claude Code:** esegui `claude mcp add --transport http prepza https://prepza.ai/mcp`. **In ChatGPT:** aggiungilo come connettore personalizzato nelle impostazioni di app e connettori.
 3. La tua app di IA apre la pagina di accesso di prepza. Accedi, controlla quale app sta facendo la richiesta e seleziona **Consenti**.
 
-Da quel momento, chiedi nella chat come faresti con un collega: «In prepza, chi sono i tre migliori candidati per Product designer?» La tua app di IA ti chiede conferma prima di ogni modifica e ti avvisa prima di qualsiasi operazione che non si può annullare.
+Da quel momento, chiedi nella chat come faresti con un collega: «In prepza, chi sono i tre migliori candidati per Product designer?» La maggior parte delle app di IA ti chiede conferma prima di una modifica e ti avvisa prima di qualsiasi operazione che non si può annullare: prepza indica loro quali azioni modificano o eliminano qualcosa.
 
 **Cosa resta uguale rispetto all'app:**
 

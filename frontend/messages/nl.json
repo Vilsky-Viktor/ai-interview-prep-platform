@@ -1803,7 +1803,7 @@
         "Ontkoppel een app die je niet meer gebruikt."
       ],
       "tips": [
-        "Een app handelt namens jou, in elk bedrijf waar je lid van bent, en vraagt het je voordat hij iets wijzigt.",
+        "Een app handelt namens jou, in elk bedrijf waar je lid van bent. De meeste apps vragen het je voordat ze iets wijzigen.",
         "Hij kan je wachtwoord en API-sleutels niet zien, en kan je account of een bedrijf niet verwijderen."
       ]
     }
@@ -1866,7 +1866,8 @@
     "canTitle": "De app kan",
     "can": [
       "Je bedrijven, interviews en de resultaten van kandidaten lezen.",
-      "De wijzigingen doen die je vraagt, nadat hij het je eerst heeft gevraagd."
+      "De wijzigingen doen die je vraagt. De meeste AI-apps vragen je eerst om te bevestigen.",
+      "Wat hij leest doorgeven aan de aanbieder van de app, onder de voorwaarden van die app."
     ],
     "cantTitle": "De app kan niet",
     "cant": [

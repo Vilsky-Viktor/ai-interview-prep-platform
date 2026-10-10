@@ -1811,7 +1811,7 @@
         "I-disconnect ang app na hindi mo na ginagamit."
       ],
       "tips": [
-        "Kumikilos ang app bilang ikaw, sa bawat kumpanyang kasali ka, at nagtatanong muna ito bago magbago ng anuman.",
+        "Kumikilos ang app bilang ikaw, sa bawat kumpanyang kasali ka. Karamihan sa mga app ay nagtatanong muna bago magbago ng anuman.",
         "Hindi nito makikita ang password o mga API key mo, at hindi nito mabubura ang account mo o ang isang kumpanya."
       ]
     }
@@ -1874,7 +1874,8 @@
     "canTitle": "Kaya nitong",
     "can": [
       "Basahin ang mga kumpanya, interview at resulta ng mga aplikante mo.",
-      "Gawin ang mga pagbabagong hinihiling mo, pagkatapos magtanong muna sa iyo."
+      "Gawin ang mga pagbabagong hinihiling mo. Karamihan sa mga AI app ay humihingi muna ng kumpirmasyon mo.",
+      "Ipasa ang nababasa nito sa provider ng app, ayon sa mga tuntunin ng app na iyon."
     ],
     "cantTitle": "Hindi nito kayang",
     "cant": [

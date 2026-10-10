@@ -98,7 +98,7 @@ Kung nagtatrabaho ka na sa Claude o ChatGPT, puwede mong dalhin doon ang prepza.
 2. **Sa Claude:** buksan ang Settings, pagkatapos ang Connectors, at magdagdag ng custom connector gamit ang address na iyon. **Sa Claude Code:** patakbuhin ang `claude mcp add --transport http prepza https://prepza.ai/mcp`. **Sa ChatGPT:** idagdag ito bilang custom connector sa settings nito para sa apps at connectors.
 3. Bubuksan ng AI app mo ang sign-in ng prepza. Mag-sign in, i-check kung aling app ang humihingi ng access, at piliin ang **Payagan**.
 
-Mula noon, magtanong sa chat mo gaya ng pagtatanong mo sa isang katrabaho: "Sa prepza, sino ang top three na aplikante para sa Product designer?" Tatanungin ka muna ng AI app mo bago ang bawat pagbabago, at babalaan ka bago ang anumang hindi na maibabalik.
+Mula noon, magtanong sa chat mo gaya ng pagtatanong mo sa isang katrabaho: "Sa prepza, sino ang top three na aplikante para sa Product designer?" Karamihan sa mga AI app ay nagtatanong muna sa iyo bago ang isang pagbabago, at nagbababala bago ang anumang hindi na maibabalik: sinasabi sa kanila ng prepza kung aling mga aksyon ang nagbabago o nagbubura ng isang bagay.
 
 **Ano ang nananatiling pareho gaya ng sa app:**
 

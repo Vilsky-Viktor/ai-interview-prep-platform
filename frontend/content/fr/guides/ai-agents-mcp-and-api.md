@@ -98,7 +98,7 @@ Si votre équipe travaille déjà dans Claude ou ChatGPT, vous pouvez y faire ve
 2. **Dans Claude :** ouvrez les paramètres, puis Connecteurs, et ajoutez un connecteur personnalisé avec cette adresse. **Dans Claude Code :** exécutez `claude mcp add --transport http prepza https://prepza.ai/mcp`. **Dans ChatGPT :** ajoutez-le comme connecteur personnalisé dans ses paramètres d'applications et de connecteurs.
 3. Votre application d'IA ouvre la page de connexion de prepza. Connectez-vous, vérifiez quelle application fait la demande et sélectionnez **Autoriser**.
 
-Ensuite, posez vos questions dans la conversation comme vous le feriez à un collègue : « Dans prepza, quels sont les trois meilleurs candidats pour Product designer ? » Votre application d'IA vous demande votre accord avant chaque modification et vous avertit avant toute action irréversible.
+Ensuite, posez vos questions dans la conversation comme vous le feriez à un collègue : « Dans prepza, quels sont les trois meilleurs candidats pour Product designer ? » La plupart des applications d'IA vous demandent votre accord avant une modification et vous avertissent avant toute action irréversible : prepza leur indique quelles actions modifient ou suppriment quelque chose.
 
 **Ce qui reste identique à l'application :**
 

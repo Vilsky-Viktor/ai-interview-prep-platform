@@ -75,7 +75,7 @@ FAQ = [
     {
         "key": "ai_apps",
         "question": "Puwede ko bang gamitin ang prepza mula sa Claude o ChatGPT?",
-        "answer": "Oo. Idagdag ang prepza sa Claude o ChatGPT bilang connector (nasa tab na Mga integration ng iyong kumpanya ang mga hakbang) at payagan ito sa prepza. Pagkatapos, gagamitin ng app ang iyong mga kumpanya, interview at resulta ng mga aplikante bilang ikaw, gamit ang mga pahintulot mo, at magtatanong muna ito bago may baguhin. Sa prepza lang mabubura ang account mo o ang isang kumpanya. Ang nababasa ng app ay napupunta sa provider nito, ayon sa mga tuntunin ng app na iyon. Puwede mo itong i-disconnect anumang oras sa parehong tab.",
+        "answer": "Oo. Idagdag ang prepza sa Claude o ChatGPT bilang connector (nasa tab na Mga integration ng iyong kumpanya ang mga hakbang) at payagan ito sa prepza. Pagkatapos, gagamitin ng app ang iyong mga kumpanya, interview at resulta ng mga aplikante bilang ikaw, gamit ang mga pahintulot mo; karamihan sa mga app ay nagtatanong muna bago may baguhin. Sa prepza lang mabubura ang account mo o ang isang kumpanya. Ang nababasa ng app ay napupunta sa provider nito, ayon sa mga tuntunin ng app na iyon. Puwede mo itong i-disconnect anumang oras sa parehong tab.",
     },
     {
         "key": "candidates",

@@ -1807,7 +1807,7 @@
         "Desconecta una app que ya no uses."
       ],
       "tips": [
-        "Una app actúa en tu nombre, en todas las empresas de las que formas parte, y te pregunta antes de cambiar nada.",
+        "Una app actúa en tu nombre, en todas las empresas de las que formas parte. La mayoría de las apps te preguntan antes de cambiar nada.",
         "No puede ver tu contraseña ni tus claves de API, ni eliminar tu cuenta o una empresa."
       ]
     }
@@ -1870,7 +1870,8 @@
     "canTitle": "Puede",
     "can": [
       "Leer tus empresas, entrevistas y los resultados de los candidatos.",
-      "Hacer los cambios que le pidas, preguntándote antes."
+      "Hacer los cambios que le pidas. La mayoría de las apps de IA te piden que lo confirmes antes.",
+      "Pasar lo que lee al proveedor de la app, según las condiciones de esa app."
     ],
     "cantTitle": "No puede",
     "cant": [

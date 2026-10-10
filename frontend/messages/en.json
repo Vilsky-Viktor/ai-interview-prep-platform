@@ -1807,7 +1807,7 @@
         "Disconnect an app you no longer use."
       ],
       "tips": [
-        "An app acts as you, in every company you're in, and asks you before it changes anything.",
+        "An app acts as you, in every company you're in. Most apps ask you before they change anything.",
         "It can't see your password or API keys, and can't delete your account or a company."
       ]
     }
@@ -1870,7 +1870,8 @@
     "canTitle": "It can",
     "can": [
       "Read your companies, interviews and candidates' results.",
-      "Make the changes you ask for, asking you first."
+      "Make the changes you ask for. Most AI apps ask you to confirm first.",
+      "Pass what it reads to the app's provider, under that app's terms."
     ],
     "cantTitle": "It can't",
     "cant": [

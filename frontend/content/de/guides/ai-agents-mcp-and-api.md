@@ -98,7 +98,7 @@ Wenn dein Team schon in Claude oder ChatGPT arbeitet, kannst du prepza dorthin h
 2. **In Claude:** Öffne die Einstellungen, dann Konnektoren, und füge einen eigenen Konnektor mit dieser Adresse hinzu. **In Claude Code:** Führe `claude mcp add --transport http prepza https://prepza.ai/mcp` aus. **In ChatGPT:** Füge ihn als eigenen Konnektor in den Einstellungen für Apps und Konnektoren hinzu.
 3. Deine KI-App öffnet die Anmeldung von prepza. Melde dich an, prüfe, welche App anfragt, und wähle **Zulassen**.
 
-Ab dann fragst du in deinem Chat so, wie du einen Kollegen fragen würdest: „Wer sind in prepza die drei besten Kandidaten für Product designer?“ Deine KI-App fragt dich vor jeder Änderung und warnt dich vor allem, was sich nicht rückgängig machen lässt.
+Ab dann fragst du in deinem Chat so, wie du einen Kollegen fragen würdest: „Wer sind in prepza die drei besten Kandidaten für Product designer?“ Die meisten KI-Apps fragen dich vor einer Änderung und warnen dich vor allem, was sich nicht rückgängig machen lässt: prepza teilt ihnen mit, welche Aktionen etwas ändern oder löschen.
 
 **Was gleich bleibt wie in der App:**
 

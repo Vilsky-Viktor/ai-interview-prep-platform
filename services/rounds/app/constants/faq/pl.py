@@ -75,7 +75,7 @@ FAQ = [
     {
         "key": "ai_apps",
         "question": "Czy mogę korzystać z prepza w Claude lub ChatGPT?",
-        "answer": "Tak. Dodaj prepza do Claude lub ChatGPT jako konektor (kroki znajdziesz w zakładce Integracje swojej firmy) i zezwól na dostęp w prepza. Aplikacja działa wtedy w Twoim imieniu i z Twoimi uprawnieniami na Twoich firmach, rozmowach i wynikach kandydatów, a przed każdą zmianą pyta Cię o zgodę. Konto lub firmę usuniesz tylko w prepza. To, co aplikacja odczyta, trafia do jej dostawcy na warunkach tej aplikacji. Możesz ją odłączyć w każdej chwili w tej samej zakładce.",
+        "answer": "Tak. Dodaj prepza do Claude lub ChatGPT jako konektor (kroki znajdziesz w zakładce Integracje swojej firmy) i zezwól na dostęp w prepza. Aplikacja działa wtedy w Twoim imieniu i z Twoimi uprawnieniami na Twoich firmach, rozmowach i wynikach kandydatów; większość aplikacji pyta Cię o zgodę, zanim cokolwiek zmieni. Konto lub firmę usuniesz tylko w prepza. To, co aplikacja odczyta, trafia do jej dostawcy na warunkach tej aplikacji. Możesz ją odłączyć w każdej chwili w tej samej zakładce.",
     },
     {
         "key": "candidates",

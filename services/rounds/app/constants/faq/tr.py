@@ -75,7 +75,7 @@ FAQ = [
     {
         "key": "ai_apps",
         "question": "prepza'yı Claude veya ChatGPT'den kullanabilir miyim?",
-        "answer": "Evet. prepza'yı Claude veya ChatGPT'ye bağlayıcı olarak ekleyin (adımlar şirketinizin Entegrasyonlar sekmesinde) ve prepza'da izin verin. Uygulama bundan sonra sizin adınıza ve sizin yetkilerinizle şirketleriniz, mülakatlarınız ve adayların sonuçlarıyla çalışır ve bir şeyi değiştirmeden önce size sorar. Hesabınızı veya bir şirketi yalnızca prepza'da silebilirsiniz. Uygulamanın okuduğu veriler, o uygulamanın koşullarına göre sağlayıcısına ulaşır. Bağlantıyı istediğiniz zaman aynı sekmeden kesebilirsiniz.",
+        "answer": "Evet. prepza'yı Claude veya ChatGPT'ye bağlayıcı olarak ekleyin (adımlar şirketinizin Entegrasyonlar sekmesinde) ve prepza'da izin verin. Uygulama bundan sonra sizin adınıza ve sizin yetkilerinizle şirketleriniz, mülakatlarınız ve adayların sonuçlarıyla çalışır; çoğu uygulama bir şeyi değiştirmeden önce size sorar. Hesabınızı veya bir şirketi yalnızca prepza'da silebilirsiniz. Uygulamanın okuduğu veriler, o uygulamanın koşullarına göre sağlayıcısına ulaşır. Bağlantıyı istediğiniz zaman aynı sekmeden kesebilirsiniz.",
     },
     {
         "key": "candidates",

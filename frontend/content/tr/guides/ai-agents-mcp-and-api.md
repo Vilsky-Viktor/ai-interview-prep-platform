@@ -98,7 +98,7 @@ Ekibiniz zaten Claude veya ChatGPT'de çalışıyorsa prepza'yı oraya taşıyab
 2. **Claude'da:** Ayarlar'ı, ardından Bağlayıcılar'ı açın ve bu adresle özel bir bağlayıcı ekleyin. **Claude Code'da:** `claude mcp add --transport http prepza https://prepza.ai/mcp` komutunu çalıştırın. **ChatGPT'de:** uygulama ve bağlayıcı ayarlarında özel bir bağlayıcı olarak ekleyin.
 3. Yapay zekâ uygulamanız prepza'nın giriş sayfasını açar. Giriş yapın, hangi uygulamanın izin istediğini kontrol edin ve **İzin ver**'i seçin.
 
-Bundan sonra sohbetinizde bir iş arkadaşınıza sorar gibi sorun: "prepza'da Ürün tasarımcısı için en iyi üç aday kim?" Yapay zekâ uygulamanız her değişiklikten önce size sorar ve geri alınamayacak her şeyden önce uyarır.
+Bundan sonra sohbetinizde bir iş arkadaşınıza sorar gibi sorun: "prepza'da Ürün tasarımcısı için en iyi üç aday kim?" Çoğu yapay zekâ uygulaması bir değişiklikten önce size sorar ve geri alınamayacak her şeyden önce uyarır: prepza onlara hangi işlemlerin bir şeyi değiştirdiğini veya sildiğini bildirir.
 
 **Uygulamadakiyle aynı kalanlar:**
 

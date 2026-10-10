@@ -98,7 +98,7 @@ Kui sinu meeskond juba töötab Claude'is või ChatGPT-s, saad prepza sinna tuua
 2. **Claude'is:** ava Seaded, siis Konnektorid, ja lisa selle aadressiga kohandatud konnektor. **Claude Code'is:** käivita `claude mcp add --transport http prepza https://prepza.ai/mcp`. **ChatGPT-s:** lisa see kohandatud konnektorina rakenduste ja konnektorite seadetes.
 3. Sinu AI-rakendus avab prepza sisselogimise. Logi sisse, kontrolli, milline rakendus luba küsib, ja vali **Luba**.
 
-Edaspidi küsi oma vestluses nii, nagu küsiksid kolleegilt: „Kes on prepzas kolm parimat kandidaati Product designeri ametikohale?“ Sinu AI-rakendus küsib sinult enne iga muudatust ja hoiatab enne kõike, mida ei saa tagasi võtta.
+Edaspidi küsi oma vestluses nii, nagu küsiksid kolleegilt: „Kes on prepzas kolm parimat kandidaati Product designeri ametikohale?“ Enamik AI-rakendusi küsib sinult enne muudatust ja hoiatab enne kõike, mida ei saa tagasi võtta: prepza ütleb neile, millised toimingud midagi muudavad või kustutavad.
 
 **Mis jääb samaks nagu rakenduses:**
 

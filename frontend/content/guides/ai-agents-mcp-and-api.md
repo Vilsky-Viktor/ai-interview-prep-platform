@@ -98,7 +98,7 @@ If your team already works in Claude or ChatGPT, you can bring prepza there. pre
 2. **In Claude:** open Settings, then Connectors, and add a custom connector with that address. **In Claude Code:** run `claude mcp add --transport http prepza https://prepza.ai/mcp`. **In ChatGPT:** add it as a custom connector in its settings for apps and connectors.
 3. Your AI app opens prepza's sign-in. Sign in, check which app is asking, and select **Allow**.
 
-From then on, ask in your chat as you would ask a colleague: "In prepza, who are the top three candidates for Product designer?" Your AI app asks you before every change, and warns you before anything that can't be undone.
+From then on, ask in your chat as you would ask a colleague: "In prepza, who are the top three candidates for Product designer?" Most AI apps ask you before a change and warn you before anything that can't be undone: prepza tells them which actions change or delete something.
 
 **What stays the same as in the app:**
 

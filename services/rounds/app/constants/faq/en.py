@@ -74,7 +74,7 @@ FAQ = [
     {
         "key": "ai_apps",
         "question": "Can I use prepza from Claude or ChatGPT?",
-        "answer": "Yes. Add prepza to Claude or ChatGPT as a connector (the steps are on your company's Integrations tab) and allow it on prepza. The app then works with your companies, interviews and candidates' results as you, with your permissions, and asks you before it changes anything. Deleting your account or a company is done only in prepza. What the app reads reaches its provider under that app's terms. You can disconnect it at any time on the same tab.",
+        "answer": "Yes. Add prepza to Claude or ChatGPT as a connector (the steps are on your company's Integrations tab) and allow it on prepza. The app then works with your companies, interviews and candidates' results as you, with your permissions; most apps ask you before they change anything. Deleting your account or a company is done only in prepza. What the app reads reaches its provider under that app's terms. You can disconnect it at any time on the same tab.",
     },
     {
         "key": "candidates",

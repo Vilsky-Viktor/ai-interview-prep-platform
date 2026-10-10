@@ -98,7 +98,7 @@ Kalau kamu sudah bekerja di Claude atau ChatGPT, kamu bisa membawa prepza ke san
 2. **Di Claude:** buka Settings, lalu Connectors, dan tambahkan custom connector dengan alamat itu. **Di Claude Code:** jalankan `claude mcp add --transport http prepza https://prepza.ai/mcp`. **Di ChatGPT:** tambahkan sebagai custom connector di pengaturan aplikasi dan konektornya.
 3. Aplikasi AI-mu membuka halaman masuk prepza. Masuk, cek aplikasi mana yang meminta akses, lalu pilih **Izinkan**.
 
-Setelah itu, bertanyalah di chat seperti kamu bertanya kepada rekan kerja: "Di prepza, siapa tiga kandidat teratas untuk Product designer?" Aplikasi AI-mu akan bertanya kepadamu sebelum setiap perubahan, dan memperingatkanmu sebelum melakukan apa pun yang tidak bisa dibatalkan.
+Setelah itu, bertanyalah di chat seperti kamu bertanya kepada rekan kerja: "Di prepza, siapa tiga kandidat teratas untuk Product designer?" Sebagian besar aplikasi AI bertanya kepadamu sebelum melakukan perubahan, dan memperingatkanmu sebelum melakukan apa pun yang tidak bisa dibatalkan: prepza memberi tahu aplikasi tersebut tindakan mana yang mengubah atau menghapus sesuatu.
 
 **Yang tetap sama seperti di aplikasi:**
 

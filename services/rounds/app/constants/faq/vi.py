@@ -75,7 +75,7 @@ FAQ = [
     {
         "key": "ai_apps",
         "question": "Tôi có thể dùng prepza từ Claude hoặc ChatGPT không?",
-        "answer": "Có. Thêm prepza vào Claude hoặc ChatGPT dưới dạng trình kết nối (các bước có trong tab Tích hợp của công ty bạn) rồi cho phép trên prepza. Sau đó, ứng dụng sẽ thay mặt bạn, với quyền của bạn, làm việc với các công ty, buổi phỏng vấn và kết quả của ứng viên, và hỏi bạn trước khi thay đổi bất cứ điều gì. Tài khoản hoặc công ty chỉ có thể xóa trong prepza. Dữ liệu ứng dụng đọc được sẽ đến nhà cung cấp của ứng dụng đó theo điều khoản của ứng dụng. Bạn có thể ngắt kết nối bất cứ lúc nào trong cùng tab.",
+        "answer": "Có. Thêm prepza vào Claude hoặc ChatGPT dưới dạng trình kết nối (các bước có trong tab Tích hợp của công ty bạn) rồi cho phép trên prepza. Sau đó, ứng dụng sẽ thay mặt bạn, với quyền của bạn, làm việc với các công ty, buổi phỏng vấn và kết quả của ứng viên; hầu hết ứng dụng sẽ hỏi bạn trước khi thay đổi bất cứ điều gì. Tài khoản hoặc công ty chỉ có thể xóa trong prepza. Dữ liệu ứng dụng đọc được sẽ đến nhà cung cấp của ứng dụng đó theo điều khoản của ứng dụng. Bạn có thể ngắt kết nối bất cứ lúc nào trong cùng tab.",
     },
     {
         "key": "candidates",

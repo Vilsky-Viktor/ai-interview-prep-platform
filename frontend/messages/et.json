@@ -1811,7 +1811,7 @@
         "Katkesta ühendus rakendusega, mida sa enam ei kasuta."
       ],
       "tips": [
-        "Rakendus tegutseb sinu nimel kõigis ettevõtetes, kuhu sa kuulud, ja küsib sinult enne, kui midagi muudab.",
+        "Rakendus tegutseb sinu nimel kõigis ettevõtetes, kuhu sa kuulud. Enamik rakendusi küsib sinult enne, kui midagi muudab.",
         "See ei näe sinu parooli ega API-võtmeid ega saa kustutada sinu kontot ega ettevõtet."
       ]
     }
@@ -1874,7 +1874,8 @@
     "canTitle": "See saab",
     "can": [
       "Lugeda sinu ettevõtteid, intervjuusid ja kandidaatide tulemusi.",
-      "Teha muudatusi, mida palud, küsides enne sinult."
+      "Teha muudatusi, mida palud. Enamik AI-rakendusi palub sul enne kinnitada.",
+      "Edastada loetu rakenduse pakkujale selle rakenduse tingimuste alusel."
     ],
     "cantTitle": "See ei saa",
     "cant": [

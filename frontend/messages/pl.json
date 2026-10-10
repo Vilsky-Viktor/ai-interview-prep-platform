@@ -1807,7 +1807,7 @@
         "Odłącz aplikację, której już nie używasz."
       ],
       "tips": [
-        "Aplikacja działa w Twoim imieniu, w każdej firmie, do której należysz, i pyta Cię, zanim cokolwiek zmieni.",
+        "Aplikacja działa w Twoim imieniu, w każdej firmie, do której należysz. Większość aplikacji pyta Cię, zanim cokolwiek zmieni.",
         "Nie widzi Twojego hasła ani kluczy API i nie może usunąć Twojego konta ani firmy."
       ]
     }
@@ -1870,7 +1870,8 @@
     "canTitle": "Może",
     "can": [
       "Odczytywać Twoje firmy, rozmowy i wyniki kandydatów.",
-      "Wprowadzać zmiany, o które poprosisz, najpierw pytając Cię o zgodę."
+      "Wprowadzać zmiany, o które poprosisz. Większość aplikacji AI najpierw prosi Cię o potwierdzenie.",
+      "Przekazywać to, co odczyta, dostawcy aplikacji na warunkach tej aplikacji."
     ],
     "cantTitle": "Nie może",
     "cant": [

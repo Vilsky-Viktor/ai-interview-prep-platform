@@ -1803,7 +1803,7 @@
         "Desconecte um app que você não usa mais."
       ],
       "tips": [
-        "Um app age em seu nome, em todas as empresas de que você participa, e pergunta antes de alterar qualquer coisa.",
+        "Um app age em seu nome, em todas as empresas de que você participa. A maioria dos apps pergunta antes de alterar qualquer coisa.",
         "Ele não pode ver sua senha nem suas chaves de API, nem excluir sua conta ou uma empresa."
       ]
     }
@@ -1866,7 +1866,8 @@
     "canTitle": "Ele pode",
     "can": [
       "Ler suas empresas, entrevistas e os resultados dos candidatos.",
-      "Fazer as alterações que você pedir, perguntando antes."
+      "Fazer as alterações que você pedir. A maioria dos apps de IA pede sua confirmação antes.",
+      "Repassar o que lê ao fornecedor do app, de acordo com os termos desse app."
     ],
     "cantTitle": "Ele não pode",
     "cant": [

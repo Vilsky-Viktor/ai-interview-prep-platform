@@ -1807,7 +1807,7 @@
         "Scollega un'app che non usi più."
       ],
       "tips": [
-        "Un'app agisce a tuo nome, in ogni azienda di cui fai parte, e ti chiede conferma prima di cambiare qualsiasi cosa.",
+        "Un'app agisce a tuo nome, in ogni azienda di cui fai parte. La maggior parte delle app ti chiede conferma prima di cambiare qualsiasi cosa.",
         "Non può vedere la tua password né le tue chiavi API, né eliminare il tuo account o un'azienda."
       ]
     }
@@ -1870,7 +1870,8 @@
     "canTitle": "Può",
     "can": [
       "Leggere le tue aziende, i colloqui e i risultati dei candidati.",
-      "Fare le modifiche che chiedi, chiedendoti prima conferma."
+      "Fare le modifiche che chiedi. La maggior parte delle app di IA ti chiede prima conferma.",
+      "Passare ciò che legge al fornitore dell'app, secondo i termini di quell'app."
     ],
     "cantTitle": "Non può",
     "cant": [

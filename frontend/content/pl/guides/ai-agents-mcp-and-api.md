@@ -98,7 +98,7 @@ Jeśli Twój zespół już pracuje w Claude lub ChatGPT, możesz przenieść tam
 2. **W Claude:** otwórz Ustawienia, potem Konektory, i dodaj własny konektor z tym adresem. **W Claude Code:** uruchom `claude mcp add --transport http prepza https://prepza.ai/mcp`. **W ChatGPT:** dodaj go jako własny konektor w ustawieniach aplikacji i konektorów.
 3. Twoja aplikacja AI otworzy logowanie do prepza. Zaloguj się, sprawdź, która aplikacja prosi o dostęp, i wybierz **Zezwól**.
 
-Od tej chwili pytaj w czacie tak, jak pytasz współpracownika: „Kto w prepza jest w pierwszej trójce kandydatów na Product designer?” Twoja aplikacja AI zapyta Cię przed każdą zmianą i ostrzeże przed wszystkim, czego nie da się cofnąć.
+Od tej chwili pytaj w czacie tak, jak pytasz współpracownika: „Kto w prepza jest w pierwszej trójce kandydatów na Product designer?” Większość aplikacji AI pyta Cię przed zmianą i ostrzega przed wszystkim, czego nie da się cofnąć: prepza informuje je, które działania coś zmieniają lub usuwają.
 
 **Co pozostaje takie samo jak w aplikacji:**
 

@@ -75,7 +75,7 @@ FAQ = [
     {
         "key": "ai_apps",
         "question": "Kas saan prepzat kasutada Claude'i või ChatGPT kaudu?",
-        "answer": "Jah. Lisa prepza Claude'i või ChatGPT-sse konnektorina (sammud on sinu ettevõtte vahekaardil Integratsioonid) ja luba see prepzas. Seejärel töötab rakendus sinu nimel ja sinu õigustega sinu ettevõtete, intervjuude ja kandidaatide tulemustega ning küsib sinult enne, kui midagi muudab. Oma kontot või ettevõtet saad kustutada ainult prepzas. See, mida rakendus loeb, jõuab selle rakenduse tingimuste alusel tema pakkujani. Ühenduse saad igal ajal samal vahekaardil katkestada.",
+        "answer": "Jah. Lisa prepza Claude'i või ChatGPT-sse konnektorina (sammud on sinu ettevõtte vahekaardil Integratsioonid) ja luba see prepzas. Seejärel töötab rakendus sinu nimel ja sinu õigustega sinu ettevõtete, intervjuude ja kandidaatide tulemustega; enamik rakendusi küsib sinult enne, kui midagi muudab. Oma kontot või ettevõtet saad kustutada ainult prepzas. See, mida rakendus loeb, jõuab selle rakenduse tingimuste alusel tema pakkujani. Ühenduse saad igal ajal samal vahekaardil katkestada.",
     },
     {
         "key": "candidates",

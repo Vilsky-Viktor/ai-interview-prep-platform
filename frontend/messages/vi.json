@@ -1803,7 +1803,7 @@
         "Ngắt kết nối ứng dụng bạn không còn dùng."
       ],
       "tips": [
-        "Ứng dụng hành động thay mặt bạn, trong mọi công ty bạn tham gia, và hỏi bạn trước khi thay đổi bất cứ điều gì.",
+        "Ứng dụng hành động thay mặt bạn, trong mọi công ty bạn tham gia. Hầu hết ứng dụng hỏi bạn trước khi thay đổi bất cứ điều gì.",
         "Ứng dụng không thể xem mật khẩu hay khóa API của bạn, và không thể xóa tài khoản của bạn hay một công ty."
       ]
     }
@@ -1866,7 +1866,8 @@
     "canTitle": "Ứng dụng có thể",
     "can": [
       "Đọc các công ty, buổi phỏng vấn và kết quả ứng viên của bạn.",
-      "Thực hiện các thay đổi bạn yêu cầu, sau khi hỏi bạn trước."
+      "Thực hiện các thay đổi bạn yêu cầu. Hầu hết ứng dụng AI sẽ đề nghị bạn xác nhận trước.",
+      "Chuyển những gì nó đọc được đến nhà cung cấp của ứng dụng, theo điều khoản của ứng dụng đó."
     ],
     "cantTitle": "Ứng dụng không thể",
     "cant": [

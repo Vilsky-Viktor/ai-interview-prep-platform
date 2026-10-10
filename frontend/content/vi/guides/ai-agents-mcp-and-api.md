@@ -98,7 +98,7 @@ Nếu bạn đã làm việc trong Claude hoặc ChatGPT, bạn có thể đưa 
 2. **Trong Claude:** mở Settings, rồi Connectors, và thêm một custom connector với địa chỉ đó. **Trong Claude Code:** chạy `claude mcp add --transport http prepza https://prepza.ai/mcp`. **Trong ChatGPT:** thêm nó dưới dạng custom connector trong phần cài đặt ứng dụng và connector.
 3. Ứng dụng AI của bạn mở trang đăng nhập của prepza. Đăng nhập, kiểm tra ứng dụng nào đang yêu cầu, rồi chọn **Cho phép**.
 
-Từ đó trở đi, hãy hỏi trong chat như khi hỏi một đồng nghiệp: "Trong prepza, ba ứng viên hàng đầu cho Product designer là ai?" Ứng dụng AI sẽ hỏi bạn trước mỗi thay đổi, và cảnh báo trước bất kỳ thao tác nào không thể hoàn tác.
+Từ đó trở đi, hãy hỏi trong chat như khi hỏi một đồng nghiệp: "Trong prepza, ba ứng viên hàng đầu cho Product designer là ai?" Hầu hết ứng dụng AI sẽ hỏi bạn trước khi thay đổi, và cảnh báo trước bất kỳ thao tác nào không thể hoàn tác: prepza cho chúng biết thao tác nào thay đổi hoặc xóa dữ liệu.
 
 **Những gì vẫn giống như trong ứng dụng:**
 
