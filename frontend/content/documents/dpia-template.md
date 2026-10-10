@@ -1,6 +1,6 @@
 # Data protection impact assessment (DPIA): template for companies using prepza
 
-Version: 2026-10-08\
+Version: 2026-10-10\
 Operator: Arcolabs OÜ (registry code 17587452), Sepapaja tn 6, 15551 Tallinn, Harju maakond, Estonia; hello@prepza.ai
 
 For companies that invite candidates through prepza. Your company is the **controller** of
@@ -40,6 +40,11 @@ multiple-choice test, as one input to a hiring decision made by **[COMPANY: who]
    percentage grade, green or red against the passing grade you set, ranked best first, with
    integrity signals.
 5. You review results and decide. prepza sends candidates no decision.
+6. Your team can ask prepza's assistant about interviews, candidates and results, in the app or
+   through an AI app a member connects to their own prepza account (such as Claude or ChatGPT).
+   It reads with that member's access and role, can summarise and compare candidates, and can
+   act for them (inviting, changing a pass mark, revoking): in the app each action waits for their
+   confirmation; through an AI app, whether to ask first is up to that app.
 
 **Data categories.**
 
@@ -61,8 +66,11 @@ multiple-choice test, as one input to a hiring decision made by **[COMPANY: who]
 - Google Cloud (hosting, database, events, in the EU region europe-west1) and Google Firebase
   (sign-in).
 - OpenAI (writing and checking questions; receives job descriptions, questions, how many people
-  picked each option, and the reasons questions were reported, never reporters' comments,
-  candidates' emails or individual answers).
+  picked each option, and the reasons questions were reported, never reporters' comments. The
+  assistant's answers: the member's questions and the data its tools read with their access,
+  which can include candidates' emails, names, grades and integrity signals; voice messages
+  turned into text. prepza tells OpenAI not to store it; under OpenAI's API terms it keeps the
+  data for at most 30 days, only to check for abuse, and uses none of it for training).
 - Resend (emails).
 - Sentry (error reports, without email addresses).
 - Upstash (short-lived counters for limits and live updates).
@@ -75,13 +83,22 @@ receive candidates' emails, grades, whether the grade reached the passing grade,
 and a link to the results; your applicant tracking system also sends prepza the email and id of
 each candidate you move to a linked stage, kept 12 months.
 
+**AI apps your members connect** (the member's own recipients, not prepza's sub-processors):
+an app such as Claude (Anthropic) or ChatGPT (OpenAI) that a member connects to their prepza
+account receives what that member asks it to read, within their role, including candidates'
+data, under the app provider's own terms. **[COMPANY]** decide whether members may connect them,
+and under which terms (for example, only your organisation's business plans of those apps).
+
 **International transfers.** Some sub-processors are in the US. Transfers outside the EU are
 covered by the EU-US Data Privacy Framework or the European Commission's standard contractual
 clauses (see the DPA).
 
 **Retention.** Candidate results, timings and signals: deleted automatically 12 months after the
 invite was last sent. Unstarted invites expire after 30 days. Job description text in generation
-records: 90 days. Candidates' requests to stop your emails: until your company is deleted.
+records: 90 days. Assistant conversations: 90 days after the last message, and at once when your
+company is deleted. AI app connections: until the member disconnects one or deletes their
+account, and 90 days after its last use. Candidates' requests to stop your emails: until your
+company is deleted.
 Database backups: 14 days, then overwritten. **[COMPANY]**: your own retention of
 downloaded PDFs and notes.
 
@@ -112,6 +129,8 @@ Likelihood and severity: **[COMPANY]** to rate. Starting points from prepza:
 | Discrimination (age, disability, language, origin) | Time pressure, language, content | Knowledge questions only; questions flagged when too slow or not discriminating; extra time | |
 | Over-reliance on the grade or signals | Ranked list, green/red | All answers visible; signals as counts; no automatic decisions | |
 | Wrongful cheating suspicion | Page-leave and fast-answer signals | Shown as hints with the question on screen | |
+| Over-reliance on the assistant's summaries or comparisons | AI-written answers about candidates | It answers only from the data its tools read, says the AI can be wrong, makes no decision, and asks before every action in the app; audit log marks results read through it | |
+| Candidates' data in an AI app outside your control | A member connecting Claude, ChatGPT or another app | Only the member's own access; deleting an account or a company is impossible through an app; connections end when disconnected or unused for 90 days | |
 | Lack of transparency | Candidates don't see their grade | Privacy policy; invite page notice | |
 | Data breach | Hosting, sub-processors | Access controls, encryption by Google Cloud, error reports without emails, retention limits | |
 | Excessive retention | | Automatic deletion after 12 months | |
@@ -127,6 +146,7 @@ Likelihood and severity: **[COMPANY]** to rate. Starting points from prepza:
 - [ ] Human review offered on request, with a response time
 - [ ] Adverse impact checked on your own hiring outcomes where lawful
 - [ ] Downloaded PDFs kept no longer than your retention period
+- [ ] Decided whether members may use the assistant and connect AI apps, and under which terms
 - [ ] New York City roles: see prepza's instructions for companies
 
 ## 6. Sign-off **[COMPANY]**
