@@ -43,7 +43,7 @@ def test_urls_keep_only_their_scheme_and_host_and_queries_are_dropped():
 
 
 def test_nothing_is_sent_without_a_dsn(monkeypatch):
-    monkeypatch.delenv("SENTRY_DSN", raising=False)
+    monkeypatch.delenv("BACKEND_SENTRY_DSN", raising=False)
 
     with mock.patch.object(sentry_sdk, "init") as init:
         init_sentry("rounds")
@@ -52,7 +52,7 @@ def test_nothing_is_sent_without_a_dsn(monkeypatch):
 
 
 def test_with_a_dsn_no_personal_data_is_sent(monkeypatch):
-    monkeypatch.setenv("SENTRY_DSN", "https://key@example.ingest.sentry.io/1")
+    monkeypatch.setenv("BACKEND_SENTRY_DSN", "https://key@example.ingest.sentry.io/1")
 
     with mock.patch.object(sentry_sdk, "init") as init:
         init_sentry("rounds")
@@ -66,7 +66,7 @@ def test_with_a_dsn_no_personal_data_is_sent(monkeypatch):
 
 
 def test_a_service_can_keep_variables_values_out_of_stack_traces(monkeypatch):
-    monkeypatch.setenv("SENTRY_DSN", "https://key@example.ingest.sentry.io/1")
+    monkeypatch.setenv("BACKEND_SENTRY_DSN", "https://key@example.ingest.sentry.io/1")
 
     with mock.patch.object(sentry_sdk, "init") as init:
         init_sentry("assistant", local_variables=False)

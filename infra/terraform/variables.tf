@@ -57,7 +57,7 @@ variable "mail_from_updates" {
   default     = "prepza. <updates@mail.prepza.ai>"
 }
 
-variable "sentry_dsn" {
+variable "backend_sentry_dsn" {
   description = "Backend Sentry DSN; empty sends nothing. Not secret: it only allows sending events."
   type        = string
   default     = ""

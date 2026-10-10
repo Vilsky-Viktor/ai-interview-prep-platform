@@ -37,8 +37,8 @@ Errors go to Sentry when its DSN is set; empty, nothing is sent. Emails are scru
 
 | Setting | What it sets |
 |---|---|
-| `SENTRY_DSN` | The DSN for the backend services |
-| `NEXT_PUBLIC_SENTRY_DSN` | The DSN for the frontend, a build argument |
+| `BACKEND_SENTRY_DSN` | The DSN for the backend services |
+| `FRONTEND_SENTRY_DSN` | The DSN for the frontend, a build argument |
 | `SENTRY_ENVIRONMENT` | The environment's name (`development` locally) |
 | `SENTRY_TRACES_SAMPLE_RATE` | The share of requests traced (default 0.1) |
 | `SENTRY_RELEASE` | The release events are tagged with: the commit, built into every image by CI (services read it at runtime; the frontend's Sentry plugin names it at build time) |

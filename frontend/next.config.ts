@@ -4,6 +4,11 @@ import createNextIntlPlugin from "next-intl/plugin"
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  // Into the browser's code too, under its own name (only NEXT_PUBLIC_ names go there by
+  // themselves); read when the site is built. Not secret: it only allows sending error reports.
+  env: {
+    FRONTEND_SENTRY_DSN: process.env.FRONTEND_SENTRY_DSN ?? "",
+  },
   // The dev server serves its scripts to a phone on the local network too (development only).
   allowedDevOrigins: ["192.168.*.*", "10.*.*.*", "172.*.*.*"],
   // The preview pictures' font files, read at request time, go into the standalone server.

@@ -26,11 +26,11 @@ function scrub<T>(value: T): T {
 }
 
 /**
- * Options shared by the browser and the server. Without NEXT_PUBLIC_SENTRY_DSN nothing is sent,
+ * Options shared by the browser and the server. Without FRONTEND_SENTRY_DSN nothing is sent,
  * so local development and builds report nothing. No personal data: users are known by id only.
  */
 export function sentryOptions() {
-  const dsn = process.env.NEXT_PUBLIC_SENTRY_DSN
+  const dsn = process.env.FRONTEND_SENTRY_DSN
 
   return {
     dsn,

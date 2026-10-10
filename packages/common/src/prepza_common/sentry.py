@@ -34,7 +34,7 @@ def before_send(event, hint):
 def init_sentry(
     service: str, integrations: list | None = None, local_variables: bool = True
 ) -> None:
-    """Reports errors to Sentry when SENTRY_DSN is set; local development and tests send nothing.
+    """Reports errors to Sentry when BACKEND_SENTRY_DSN is set; local development and tests send nothing.
 
     No personal data or secrets: no IPs, cookies, headers or request bodies; emails are scrubbed
     and URLs cut to their host everywhere in an error or a trace, its breadcrumbs and spans
@@ -42,7 +42,7 @@ def init_sentry(
     `local_variables`, a stack trace carries no variables' values (the assistant's hold
     conversations).
     """
-    dsn = os.getenv("SENTRY_DSN")
+    dsn = os.getenv("BACKEND_SENTRY_DSN")
 
     if not dsn:
         return

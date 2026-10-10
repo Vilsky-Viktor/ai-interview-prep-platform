@@ -6,7 +6,7 @@ image_tag  = "first"
 
 mail_from         = "prepza. <no-reply@prepza.ai>"
 mail_from_updates = "prepza. <updates@mail.prepza.ai>"
-sentry_dsn        = ""
+backend_sentry_dsn = ""
 
 # Outage and budget alerts (monitoring.tf).
 alert_email     = "you@example.com"

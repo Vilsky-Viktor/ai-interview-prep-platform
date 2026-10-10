@@ -24,8 +24,8 @@ x-firebase-env: &firebase-env
   # Events go through the Pub/Sub emulator locally; Google Cloud uses the real service.
   GOOGLE_CLOUD_PROJECT: ${FIREBASE_PROJECT_ID}
   PUBSUB_EMULATOR_HOST: pubsub:8085
-  # Error reports; nothing is sent while SENTRY_DSN is empty.
-  SENTRY_DSN: ${SENTRY_DSN:-}
+  # Error reports; nothing is sent while BACKEND_SENTRY_DSN is empty.
+  BACKEND_SENTRY_DSN: ${BACKEND_SENTRY_DSN:-}
   SENTRY_ENVIRONMENT: ${SENTRY_ENVIRONMENT:-development}
   SENTRY_TRACES_SAMPLE_RATE: ${SENTRY_TRACES_SAMPLE_RATE:-0.1}
 
