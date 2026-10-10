@@ -177,6 +177,41 @@ resource "google_monitoring_alert_policy" "scheduler_failed" {
   notification_channels = [google_monitoring_notification_channel.email.id]
 }
 
+# Web hooks refused: Paddle's or Resend's signature check failed (WEBHOOK_SIGNATURE_REFUSED in
+# prepza_common/constants.py). Usually a wrong or unset secret: then every payment and email event
+# is refused, as 401s the server-error alert doesn't count.
+resource "google_monitoring_alert_policy" "webhook_signature_refused" {
+  display_name = "prepza web hook signature refused"
+  combiner     = "OR"
+
+  conditions {
+    display_name = "A provider's web hook failed its signature check"
+
+    condition_matched_log {
+      filter = "resource.type=\"cloud_run_revision\" AND jsonPayload.msg:\"web hook signature refused\""
+
+      label_extractors = {
+        service = "EXTRACT(resource.labels.service_name)"
+      }
+    }
+  }
+
+  alert_strategy {
+    notification_rate_limit {
+      period = "3600s"
+    }
+
+    auto_close = "86400s"
+  }
+
+  documentation {
+    content   = "Paddle's or Resend's web hook was refused for its signature. If it keeps happening, the secret is wrong: compare `paddle-webhook-secret` or `resend-webhook-secret` (Secret Manager) with the provider's dashboard, then resend the failed events from there. Paid top-ups get their credits only once it's fixed."
+    mime_type = "text/markdown"
+  }
+
+  notification_channels = [google_monitoring_notification_channel.email.id]
+}
+
 # Server errors: a Cloud Run service answering more than 5% of its requests with a 5xx for ten
 # minutes.
 resource "google_monitoring_alert_policy" "server_errors" {

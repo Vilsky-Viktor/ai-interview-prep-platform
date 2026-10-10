@@ -1,12 +1,15 @@
+import logging
 import time
 
 from fastapi import APIRouter, HTTPException, Request, status
+from prepza_common.constants import WEBHOOK_SIGNATURE_REFUSED
 
 from app.config.settings import settings
 from app.constants.webhooks import WEBHOOK_TOLERANCE_SECONDS
 from app.helpers.webhooks import signature_valid
 from app.services.webhooks import handle
 
+logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/webhooks", tags=["webhooks"])
 
 
@@ -25,6 +28,7 @@ async def resend_webhook(request: Request) -> None:
         time.time(),
         WEBHOOK_TOLERANCE_SECONDS,
     ):
+        logger.error("%s: resend", WEBHOOK_SIGNATURE_REFUSED)
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Invalid signature")
 
     await handle(await request.json())

@@ -8,6 +8,9 @@ HTTP_TIMEOUT_SECONDS = 30
 HTTP_RETRIES = 3
 
 RATE_LIMITED = "Too many requests. Try again later."
+# Logged when a provider's web hook (Paddle, Resend) fails its signature check: usually a wrong
+# secret, so every event is refused. The alert in infra/terraform/monitoring.tf matches it.
+WEBHOOK_SIGNATURE_REFUSED = "web hook signature refused"
 SIGN_IN_UNAVAILABLE = "Sign-in is temporarily unavailable. Please try again shortly."
 HOUR_SECONDS = 60 * 60
 DAY_SECONDS = 24 * HOUR_SECONDS

@@ -5,6 +5,7 @@ import json
 import time
 
 import pytest
+from prepza_common.constants import WEBHOOK_SIGNATURE_REFUSED
 
 from app.config.settings import settings
 from app.helpers.emails import candidate_invite_email
@@ -97,11 +98,15 @@ def test_other_events_and_untagged_emails_are_ignored(client, reported):
     assert reported == []
 
 
-def test_an_unsigned_webhook_is_refused(client, reported):
+def test_an_unsigned_webhook_is_refused(client, reported, caplog):
     response = client.post("/webhooks/resend", json=event("email.bounced", "candidate_invite"))
 
     assert response.status_code == 401
     assert reported == []
+    # Logged as an error, which the alert for a wrong web hook secret matches.
+    assert [r.levelname for r in caplog.records if WEBHOOK_SIGNATURE_REFUSED in r.message] == [
+        "ERROR"
+    ]
 
 
 def test_invite_emails_are_tagged_with_what_they_are():

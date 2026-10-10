@@ -2,6 +2,7 @@ import asyncio
 import time
 
 import pytest
+from prepza_common.constants import WEBHOOK_SIGNATURE_REFUSED
 
 from app.constants.products import WEBHOOK_TOLERANCE_SECONDS
 from app.helpers.paddle import signature_valid
@@ -126,7 +127,7 @@ def test_anything_else_grants_nothing(granted, event):
     assert granted == []
 
 
-def test_the_webhook_route_checks_the_signature(client, granted):
+def test_the_webhook_route_checks_the_signature(client, granted, caplog):
     body, header = signed(completed())
 
     ok = client.post("/webhooks/paddle", content=body, headers={"Paddle-Signature": header})
@@ -137,6 +138,10 @@ def test_the_webhook_route_checks_the_signature(client, granted):
     assert ok.status_code == 200
     assert forged.status_code == 401
     assert len(granted) == 1
+    # Logged as an error, which the alert for a wrong web hook secret matches.
+    assert [r.levelname for r in caplog.records if WEBHOOK_SIGNATURE_REFUSED in r.message] == [
+        "ERROR"
+    ]
 
 
 def test_the_catalog_lists_every_product_and_which_are_on_sale(client):

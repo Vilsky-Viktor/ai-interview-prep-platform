@@ -1,6 +1,8 @@
+import logging
 import time
 
 from fastapi import APIRouter, HTTPException, Request, status
+from prepza_common.constants import WEBHOOK_SIGNATURE_REFUSED
 
 from app.config.settings import settings
 from app.constants.credits import (
@@ -23,6 +25,7 @@ from app.schemas.billing import (
 from app.services.catalog import price_ids
 from app.services.webhooks import handle
 
+logger = logging.getLogger(__name__)
 router = APIRouter(tags=["billing"])
 
 
@@ -71,6 +74,7 @@ async def paddle_webhook(request: Request) -> dict:
     if not signature_valid(
         signature, body, settings.paddle_webhook_secret, time.time(), WEBHOOK_TOLERANCE_SECONDS
     ):
+        logger.error("%s: paddle", WEBHOOK_SIGNATURE_REFUSED)
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Invalid signature")
 
     await handle(await request.json())
