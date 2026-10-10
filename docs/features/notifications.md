@@ -25,6 +25,8 @@ Only what matters, for every member of a company:
 
 Companies' verification decisions reach only the owner and admins, one notification each, as viewers can't act on them (see [Companies](companies.md#verification)).
 
+A member who accepts their team invite is announced to the owner, who invited them: "{email} joined “{company}” as a viewer" (or an admin), opening the company's Team tab. It's saved with the join itself, once per member, and isn't posted to Slack or in the digest.
+
 ## Slack
 
 A company can send its notifications to one Slack channel too, from its integrations tab (Messaging, above the ATSs).
