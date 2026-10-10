@@ -31,6 +31,20 @@ TEXTS = {
         ],
         "button": "פתיחת ההזמנה",
     },
+    "member": {
+        "subject": "קיבלת הזמנה מ-{inviter} להצטרף לצוות של {company} ב-prepza",
+        "preheader": (
+            "הצטרפות לצוות של {company} בתפקיד {role}. יש להתחבר עם {email} כדי לקבל את ההזמנה."
+        ),
+        "heading": "הזמנה להצטרף לצוות",
+        "lines": [
+            "קיבלת הזמנה מ-{inviter} להצטרף לצוות של {company} ב-prepza בתפקיד {role}.",
+            "יש להתחבר עם {email} כדי לקבל את ההזמנה. רק כתובת זו יכולה לקבל את ההזמנה.",
+        ],
+        "button": "פתיחת ההזמנה",
+        # The role's name as the lines use it.
+        "roles": {"admin": "מנהל", "viewer": "צופה"},
+    },
     "report": {
         "subject": "דוח מועמד: {candidate}",
         "preheader": '{candidate} ניגש/ה ל-"{title}" ב-{company}. הדוח מצורף.',

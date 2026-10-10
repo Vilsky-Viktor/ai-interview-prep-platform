@@ -26,6 +26,18 @@ TEXTS = {
         ],
         "button": "초대 열기",
     },
+    "member": {
+        "subject": "{inviter}에게서 prepza의 {company} 팀 초대가 도착했습니다",
+        "preheader": "{role}로 {company} 팀에 참여하세요. {email}(으)로 로그인하면 초대를 수락할 수 있습니다.",
+        "heading": "팀 초대",
+        "lines": [
+            "{inviter}에게서 prepza의 {company} 팀에 {role}로 참여하라는 초대가 도착했습니다.",
+            "{email}(으)로 로그인하면 초대를 수락할 수 있습니다. 이 주소로만 초대를 수락할 수 있습니다.",
+        ],
+        "button": "초대 열기",
+        # The role's name as the lines use it.
+        "roles": {"admin": "관리자", "viewer": "뷰어"},
+    },
     "report": {
         "subject": "지원자 보고서: {candidate}",
         "preheader": "{candidate} 님이 {company}의 “{title}” 면접을 봤습니다. 보고서가 첨부되어 있습니다.",

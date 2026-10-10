@@ -39,6 +39,24 @@ TEXTS = {
         ],
         "button": "Buksan ang imbitasyon",
     },
+    "member": {
+        "subject": "Iniimbitahan ka ni {inviter} na sumali sa team ng {company} sa prepza",
+        "preheader": (
+            "Sumali sa team ng {company} bilang {role}. Mag-sign in gamit ang {email} para "
+            "tanggapin."
+        ),
+        "heading": "Imbitasyon sa team",
+        "lines": [
+            "Iniimbitahan ka ni {inviter} na sumali sa team ng {company} sa prepza bilang {role}.",
+            (
+                "Mag-sign in gamit ang {email} para tanggapin ito. Ang address na ito lang ang "
+                "puwedeng tumanggap sa imbitasyon."
+            ),
+        ],
+        "button": "Buksan ang imbitasyon",
+        # The role's name as the lines use it.
+        "roles": {"admin": "admin", "viewer": "viewer"},
+    },
     "report": {
         "subject": "Report ng aplikante: {candidate}",
         "preheader": "Sinagutan ni {candidate} ang “{title}” sa {company}. Naka-attach ang report.",

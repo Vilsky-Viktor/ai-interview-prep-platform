@@ -29,6 +29,11 @@ from app.templates.layout import (
 Section = tuple[str, list[tuple[str, dict, str]]]
 
 
+def email_language(kind: str, language: str | None) -> str:
+    """The language the `kind` email is written in: English until that language has it."""
+    return language if kind in EMAILS.get(language, {}) else DEFAULT_LANGUAGE
+
+
 def render(
     kind: str,
     data: dict,
@@ -40,9 +45,7 @@ def render(
     interview's language (English for older events), right to left where that language is;
     names and titles are escaped in the HTML. `sections` are lists after the text. `links` go
     under the footer: each one's text (a key of the language's texts) and address."""
-    language = data.get("language")
-    # English until the language has this email (new emails are translated later).
-    language = language if kind in EMAILS.get(language, {}) else DEFAULT_LANGUAGE
+    language = email_language(kind, data.get("language"))
     texts = EMAILS[language]
     template = texts[kind]
     # An email with its own reason for being sent says so; the others share the general one.
@@ -185,6 +188,16 @@ def candidate_reminder_email(data: dict, site_url: str, secret: str) -> Email:
     email.headers.update(headers)
 
     return email
+
+
+def member_invite_email(data: dict, site_url: str) -> Email:
+    """The owner's invite to join the company's team, as an admin or a viewer (the role's name in
+    the email's language), with the join link."""
+    data = with_logo(data, site_url)
+    roles = EMAILS[email_language("member", data.get("language"))]["member"]["roles"]
+    link = f"{site_url.rstrip('/')}/join/{data['token']}"
+
+    return render("member", {**data, "role": roles[data["role"]]}, link)
 
 
 def optional_email(

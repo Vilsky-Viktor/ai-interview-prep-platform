@@ -24,6 +24,18 @@ TEXTS = {
         ],
         "button": "เปิดคำเชิญ",
     },
+    "member": {
+        "subject": "{inviter} เชิญคุณเข้าร่วมทีม {company} บน prepza",
+        "preheader": "เข้าร่วมทีม {company} ในฐานะ{role} ลงชื่อเข้าใช้ด้วย {email} เพื่อตอบรับคำเชิญ",
+        "heading": "คำเชิญเข้าร่วมทีม",
+        "lines": [
+            "{inviter} เชิญคุณเข้าร่วมทีม {company} บน prepza ในฐานะ{role}",
+            "ลงชื่อเข้าใช้ด้วย {email} เพื่อตอบรับคำเชิญ มีเพียงที่อยู่นี้เท่านั้นที่ตอบรับคำเชิญได้",
+        ],
+        "button": "เปิดคำเชิญ",
+        # The role's name as the lines use it.
+        "roles": {"admin": "ผู้ดูแล", "viewer": "ผู้ดู"},
+    },
     "report": {
         "subject": "รายงานผู้สมัคร: {candidate}",
         "preheader": "{candidate} ทำการสัมภาษณ์ “{title}” ของ {company} แนบรายงานมาแล้ว",

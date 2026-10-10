@@ -36,6 +36,20 @@ TEXTS = {
         ],
         "button": "Abrir o convite",
     },
+    "member": {
+        "subject": "{inviter} convida você para a equipe de {company} na prepza",
+        "preheader": (
+            "Faça parte da equipe de {company} como {role}. Entre com {email} para aceitar."
+        ),
+        "heading": "Convite para a equipe",
+        "lines": [
+            "{inviter} convida você para fazer parte da equipe de {company} na prepza como {role}.",
+            "Entre com {email} para aceitar. Só este endereço pode aceitar o convite.",
+        ],
+        "button": "Abrir o convite",
+        # The role's name as the lines use it.
+        "roles": {"admin": "administrador", "viewer": "visualizador"},
+    },
     "report": {
         "subject": "Relatório do candidato: {candidate}",
         "preheader": "{candidate} fez “{title}” na {company}. O relatório está anexado.",

@@ -36,6 +36,27 @@ TEXTS = {
         ],
         "button": "Uitnodiging openen",
     },
+    "member": {
+        "subject": "{inviter} nodigt je uit voor het team van {company} op prepza",
+        "preheader": (
+            "Word als {role} lid van het team van {company}. Log in met {email} om de uitnodiging "
+            "te accepteren."
+        ),
+        "heading": "Uitnodiging voor het team",
+        "lines": [
+            (
+                "{inviter} nodigt je uit om als {role} lid te worden van het team van {company} op "
+                "prepza."
+            ),
+            (
+                "Log in met {email} om de uitnodiging te accepteren. Alleen dit adres kan de "
+                "uitnodiging accepteren."
+            ),
+        ],
+        "button": "Uitnodiging openen",
+        # The role's name as the lines use it.
+        "roles": {"admin": "beheerder", "viewer": "kijker"},
+    },
     "report": {
         "subject": "Kandidaatrapport: {candidate}",
         "preheader": "{candidate} deed “{title}” bij {company}. Het rapport zit in de bijlage.",

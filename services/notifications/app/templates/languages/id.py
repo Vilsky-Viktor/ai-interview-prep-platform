@@ -35,6 +35,24 @@ TEXTS = {
         ],
         "button": "Buka undangan",
     },
+    "member": {
+        "subject": "{inviter} mengundangmu bergabung dengan tim {company} di prepza",
+        "preheader": (
+            "Bergabunglah dengan tim {company} sebagai {role}. Masuk dengan {email} untuk menerima "
+            "undangan."
+        ),
+        "heading": "Undangan bergabung dengan tim",
+        "lines": [
+            "{inviter} mengundangmu bergabung dengan tim {company} di prepza sebagai {role}.",
+            (
+                "Masuk dengan {email} untuk menerima undangan. Hanya alamat ini yang bisa menerima "
+                "undangan."
+            ),
+        ],
+        "button": "Buka undangan",
+        # The role's name as the lines use it.
+        "roles": {"admin": "admin", "viewer": "pelihat"},
+    },
     "report": {
         "subject": "Laporan kandidat: {candidate}",
         "preheader": "{candidate} mengikuti “{title}” di {company}. Laporannya terlampir.",

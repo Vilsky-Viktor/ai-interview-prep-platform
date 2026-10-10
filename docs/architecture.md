@@ -57,7 +57,7 @@ flowchart LR
 
     rounds -- answer.recorded / session.scored / interview.finished / results.rescored --> pubsub[(Pub/Sub topic: events)]
     worker -- generation.completed / failed / cancelled --> pubsub
-    companies -- candidate.invited / reminded / removed, report.shared, company.deleted --> pubsub
+    companies -- candidate.invited / reminded / removed, member.invited, report.shared, company.deleted --> pubsub
     companies -- candidate.finished / rescored, interview.ready / deleted --> pubsub
     rounds -- contact.sent --> pubsub
     billing -- credits.added --> pubsub
@@ -133,7 +133,7 @@ Delivery:
 |---|---|
 | library | `answer.recorded`, `session.scored` |
 | companies | `generation.completed`, `generation.failed`, `generation.cancelled`, `interview.finished`, `results.rescored` |
-| notifications | `notification.requested`, every `candidate.*` (it handles `candidate.invited`, `candidate.reminded` and `candidate.removed`), `report.shared`, `contact.sent`, `company.deleted` |
+| notifications | `notification.requested`, every `candidate.*` (it handles `candidate.invited`, `candidate.reminded` and `candidate.removed`), `member.invited`, `report.shared`, `contact.sent`, `company.deleted` |
 | ats | `candidate.finished`, `candidate.rescored`, `candidate.removed`, every `interview.*` (it handles `interview.ready` and `interview.deleted`), `company.deleted`, `credits.added` |
 | api | `candidate.finished`, `candidate.rescored`, `company.deleted` |
 | assistant | `company.deleted` (deletes the company's conversations; deleting again deletes nothing more) |

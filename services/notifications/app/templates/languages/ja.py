@@ -26,6 +26,18 @@ TEXTS = {
         ],
         "button": "招待を開く",
     },
+    "member": {
+        "subject": "{inviter}から prepza の{company}のチームへの招待が届いています",
+        "preheader": "{role}として{company}のチームに参加できます。承諾するには {email} でサインインしてください。",
+        "heading": "チームへの招待",
+        "lines": [
+            "{inviter}が、prepza の{company}のチームに{role}としてあなたを招待しています。",
+            "招待を承諾するには {email} でサインインしてください。このアドレスでのみ招待を承諾できます。",
+        ],
+        "button": "招待を開く",
+        # The role's name as the lines use it.
+        "roles": {"admin": "管理者", "viewer": "閲覧者"},
+    },
     "report": {
         "subject": "候補者レポート: {candidate}",
         "preheader": "{candidate}さんが{company}の面接「{title}」を受けました。レポートを添付しています。",

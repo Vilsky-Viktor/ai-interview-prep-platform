@@ -2,6 +2,8 @@
 from prepza_common.notifications import NOTIFICATION_REQUESTED  # noqa: F401 (re-exported)
 
 CANDIDATE_INVITED = "candidate.invited"
+# Companies: the owner invited a member; they're emailed the join link.
+MEMBER_INVITED = "member.invited"
 # A candidate who hasn't started, reminded once; the same data as the invite.
 CANDIDATE_REMINDED = "candidate.reminded"
 # A company member emails a candidate's PDF report; it carries the PDF, base64-encoded.

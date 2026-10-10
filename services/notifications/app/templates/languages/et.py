@@ -35,6 +35,24 @@ TEXTS = {
         ],
         "button": "Ava kutse",
     },
+    "member": {
+        "subject": "{inviter} kutsub sind prepzas ettevõtte {company} meeskonda",
+        "preheader": (
+            "Liitu ettevõtte {company} meeskonnaga {role}. Kutse vastuvõtmiseks logi sisse "
+            "aadressiga {email}."
+        ),
+        "heading": "Kutse meeskonda",
+        "lines": [
+            "{inviter} kutsub sind prepzas ettevõtte {company} meeskonda {role}.",
+            (
+                "Kutse vastuvõtmiseks logi sisse aadressiga {email}. Kutset saab vastu võtta "
+                "ainult see aadress."
+            ),
+        ],
+        "button": "Ava kutse",
+        # The role's name as the lines use it.
+        "roles": {"admin": "administraatorina", "viewer": "vaatajana"},
+    },
     "report": {
         "subject": "Kandidaadi aruanne: {candidate}",
         "preheader": "{candidate} tegi ettevõttes {company} intervjuu „{title}“. Aruanne on manuses.",

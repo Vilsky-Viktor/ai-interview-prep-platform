@@ -24,6 +24,18 @@ TEXTS = {
         ],
         "button": "打开邀请",
     },
+    "member": {
+        "subject": "{inviter} 邀请你加入 prepza 上的 {company} 团队",
+        "preheader": "以{role}身份加入 {company} 团队。使用 {email} 登录即可接受邀请。",
+        "heading": "团队邀请",
+        "lines": [
+            "{inviter} 邀请你以{role}身份加入 prepza 上的 {company} 团队。",
+            "使用 {email} 登录即可接受邀请。只有这个邮箱地址可以接受邀请。",
+        ],
+        "button": "打开邀请",
+        # The role's name as the lines use it.
+        "roles": {"admin": "管理员", "viewer": "查看者"},
+    },
     "report": {
         "subject": "候选人报告：{candidate}",
         "preheader": "{candidate} 参加了 {company} 的“{title}”。报告已附上。",

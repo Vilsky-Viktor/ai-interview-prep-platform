@@ -36,6 +36,24 @@ TEXTS = {
         ],
         "button": "Открыть приглашение",
     },
+    "member": {
+        "subject": "{inviter} приглашает вас в команду {company} на prepza",
+        "preheader": (
+            "Присоединяйтесь к команде {company} в роли {role}. Войдите с адресом {email}, чтобы "
+            "принять приглашение."
+        ),
+        "heading": "Приглашение в команду",
+        "lines": [
+            "{inviter} приглашает вас в команду {company} на prepza в роли {role}.",
+            (
+                "Войдите с адресом {email}, чтобы принять приглашение. Принять его можно только с "
+                "этого адреса."
+            ),
+        ],
+        "button": "Открыть приглашение",
+        # The role's name as the lines use it.
+        "roles": {"admin": "администратора", "viewer": "наблюдателя"},
+    },
     "report": {
         "subject": "Отчёт о кандидате: {candidate}",
         "preheader": "{candidate} прошёл собеседование «{title}» в {company}. Отчёт во вложении.",

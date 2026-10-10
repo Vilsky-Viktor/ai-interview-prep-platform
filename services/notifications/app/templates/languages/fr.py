@@ -37,6 +37,27 @@ TEXTS = {
         ],
         "button": "Ouvrir l'invitation",
     },
+    "member": {
+        "subject": "{inviter} vous invite à rejoindre l'équipe de {company} sur prepza",
+        "preheader": (
+            "Rejoignez l'équipe de {company} en tant que {role}. Connectez-vous avec {email} pour "
+            "accepter."
+        ),
+        "heading": "Invitation à rejoindre l'équipe",
+        "lines": [
+            (
+                "{inviter} vous invite à rejoindre l'équipe de {company} sur prepza en tant que "
+                "{role}."
+            ),
+            (
+                "Connectez-vous avec {email} pour accepter. Seule cette adresse peut accepter "
+                "l'invitation."
+            ),
+        ],
+        "button": "Ouvrir l'invitation",
+        # The role's name as the lines use it.
+        "roles": {"admin": "admin", "viewer": "lecteur"},
+    },
     "report": {
         "subject": "Rapport de candidat : {candidate}",
         "preheader": "{candidate} a passé « {title} » chez {company}. Le rapport est en pièce jointe.",

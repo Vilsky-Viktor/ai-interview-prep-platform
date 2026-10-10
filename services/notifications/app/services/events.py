@@ -7,6 +7,7 @@ from app.constants.events import (
     CANDIDATE_REMOVED,
     COMPANY_DELETED,
     CONTACT_SENT,
+    MEMBER_INVITED,
     NOTIFICATION_REQUESTED,
     REPORT_SHARED,
 )
@@ -14,6 +15,7 @@ from app.helpers.emails import (
     candidate_invite_email,
     candidate_reminder_email,
     contact_email,
+    member_invite_email,
     report_email,
 )
 from app.helpers.unsubscribe import address_hash
@@ -92,6 +94,9 @@ async def handle(event_type: str, data: dict, event_id: str) -> None:
 
     if event_type == CANDIDATE_REMINDED:
         await remind(data, event_id)
+
+    if event_type == MEMBER_INVITED:
+        await deliver(member_invite_email(data, settings.site_url), event_id)
 
     if event_type == REPORT_SHARED:
         await deliver(report_email(data, settings.site_url), event_id)

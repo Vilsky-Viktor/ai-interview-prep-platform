@@ -36,6 +36,24 @@ TEXTS = {
         ],
         "button": "Mở lời mời",
     },
+    "member": {
+        "subject": "{inviter} mời bạn tham gia nhóm {company} trên prepza",
+        "preheader": (
+            "Tham gia nhóm {company} với vai trò {role}. Đăng nhập bằng {email} để chấp nhận lời "
+            "mời."
+        ),
+        "heading": "Lời mời tham gia nhóm",
+        "lines": [
+            "{inviter} mời bạn tham gia nhóm {company} trên prepza với vai trò {role}.",
+            (
+                "Đăng nhập bằng {email} để chấp nhận lời mời. Chỉ địa chỉ này mới có thể chấp nhận "
+                "lời mời."
+            ),
+        ],
+        "button": "Mở lời mời",
+        # The role's name as the lines use it.
+        "roles": {"admin": "quản trị viên", "viewer": "người xem"},
+    },
     "report": {
         "subject": "Báo cáo ứng viên: {candidate}",
         "preheader": "{candidate} đã tham gia phỏng vấn “{title}” tại {company}. Báo cáo được đính kèm.",

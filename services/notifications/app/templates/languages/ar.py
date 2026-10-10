@@ -30,6 +30,20 @@ TEXTS = {
         ],
         "button": "افتح الدعوة",
     },
+    "member": {
+        "subject": "تلقيت دعوة من {inviter} للانضمام إلى فريق {company} على prepza",
+        "preheader": (
+            "انضم إلى فريق {company} بصفة {role}. سجّل الدخول باستخدام {email} لقبول الدعوة."
+        ),
+        "heading": "دعوة للانضمام إلى الفريق",
+        "lines": [
+            "تلقيت دعوة من {inviter} للانضمام إلى فريق {company} على prepza بصفة {role}.",
+            "سجّل الدخول باستخدام {email} لقبول الدعوة. لا يمكن قبول الدعوة إلا من هذا العنوان.",
+        ],
+        "button": "افتح الدعوة",
+        # The role's name as the lines use it.
+        "roles": {"admin": "مسؤول", "viewer": "مشاهد"},
+    },
     "report": {
         "subject": "تقرير مرشح: {candidate}",
         "preheader": "أجرى {candidate} «{title}» لدى {company}. التقرير مرفق.",

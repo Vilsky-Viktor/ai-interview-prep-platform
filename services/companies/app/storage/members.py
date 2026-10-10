@@ -1,13 +1,17 @@
 import secrets
 
+from prepza_common import outbox
 from sqlalchemy import delete, select, update
 
+from app.constants.events import MEMBER_INVITED
 from app.models.companies import Company, Member
+from app.models.outbox import OutboxEvent
 from app.storage.db import Session
 
 
-async def add(company_id, email: str, role: str) -> Member:
-    """A pending invite; the role applies once it's accepted."""
+async def add(company_id, email: str, role: str, sender: dict) -> Member:
+    """A pending invite; the role applies once it's accepted. Its email's event is saved with it:
+    `sender` (the company, its logo, the inviter and their language) and the join link's token."""
     member = Member(
         company_id=company_id,
         invited_email=email.lower(),
@@ -17,6 +21,12 @@ async def add(company_id, email: str, role: str) -> Member:
 
     async with Session() as session:
         session.add(member)
+        outbox.add(
+            session,
+            OutboxEvent,
+            MEMBER_INVITED,
+            {**sender, "email": member.invited_email, "token": member.token, "role": role},
+        )
         await session.commit()
 
     return member

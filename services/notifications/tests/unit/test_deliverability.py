@@ -153,6 +153,8 @@ def placeholders(language: str) -> dict:
         **INVITE,
         "language": language,
         "sender": "Bob",
+        "inviter": "Bob",
+        "role": "admin",
         "candidate": "ann@example.com",
         "count": 2,
         "available": 5,

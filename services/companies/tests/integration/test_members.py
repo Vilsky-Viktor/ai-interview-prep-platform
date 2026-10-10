@@ -1,14 +1,18 @@
 import uuid
 
+from sqlalchemy import select
+
 from app.constants.roles import EDITORS
+from app.models.outbox import OutboxEvent
 from app.storage import companies, members
+from app.storage.db import Session
 
 
 def test_an_accepted_invite_link_stops_working_and_a_removed_admin_is_gone(run):
     async def scenario():
         company = await companies.create(f"Members {uuid.uuid4()}", "ann", "ann@example.com")
-        bob = await members.add(company.id, "bob@example.com", "admin")
-        cid = await members.add(company.id, "cid@example.com", "admin")
+        bob = await members.add(company.id, "bob@example.com", "admin", {})
+        cid = await members.add(company.id, "cid@example.com", "admin", {})
         await members.accept(bob, "bob")
         reused = await members.get_by_token(bob.token)
         await members.remove(cid.id)
@@ -31,7 +35,7 @@ def test_a_viewer_keeps_their_role_on_joining_and_the_owner_changes_it(run):
 
     async def scenario():
         company = await companies.create(f"Viewers {uuid.uuid4()}", "ann", "ann@example.com")
-        bob = await members.add(company.id, "bob@example.com", "viewer")
+        bob = await members.add(company.id, "bob@example.com", "viewer", {})
         # An id of its own: other tests' companies have a "bob" too.
         await members.accept(bob, uid)
         joined = await members.list_for_company(company.id, 0, 10)
@@ -50,3 +54,29 @@ def test_a_viewer_keeps_their_role_on_joining_and_the_owner_changes_it(run):
     # Only an owner or admin tops the company up.
     assert top_up_before == []
     assert top_up_after == [company_id]
+
+
+def test_an_invite_saves_its_email_with_the_join_link(run):
+    async def scenario():
+        company = await companies.create(f"Emails {uuid.uuid4()}", "ann", "ann@example.com")
+        dan = await members.add(company.id, "Dan@example.com", "viewer", {"company": "Acme"})
+
+        async with Session() as session:
+            sent = list(
+                await session.scalars(
+                    select(OutboxEvent.data).where(
+                        OutboxEvent.event_type == "member.invited",
+                        OutboxEvent.data["token"].astext == dan.token,
+                    )
+                )
+            )
+
+        await companies.delete(company.id)
+
+        return dan, sent
+
+    dan, sent = run(scenario())
+
+    assert sent == [
+        {"company": "Acme", "email": "dan@example.com", "token": dan.token, "role": "viewer"}
+    ]

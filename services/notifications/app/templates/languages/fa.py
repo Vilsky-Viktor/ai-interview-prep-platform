@@ -33,6 +33,23 @@ TEXTS = {
         ],
         "button": "باز کردن دعوت",
     },
+    "member": {
+        "subject": "{inviter} شما را به تیم {company} در prepza دعوت می\u200cکند",
+        "preheader": (
+            "به\u200cعنوان {role} به تیم {company} بپیوندید. برای پذیرفتن دعوت با {email} وارد شوید."
+        ),
+        "heading": "دعوت به تیم",
+        "lines": [
+            (
+                "{inviter} شما را دعوت می\u200cکند که به\u200cعنوان {role} به تیم {company} در prepza "
+                "بپیوندید."
+            ),
+            "برای پذیرفتن دعوت با {email} وارد شوید. فقط این نشانی می\u200cتواند دعوت را بپذیرد.",
+        ],
+        "button": "باز کردن دعوت",
+        # The role's name as the lines use it.
+        "roles": {"admin": "مدیر", "viewer": "بیننده"},
+    },
     "report": {
         "subject": "گزارش متقاضی: {candidate}",
         "preheader": "{candidate} در مصاحبهٔ «{title}» از {company} شرکت کرد. گزارش پیوست است.",

@@ -33,6 +33,27 @@ TEXTS = {
         ],
         "button": "इनवाइट खोलें",
     },
+    "member": {
+        "subject": "{inviter} ने आपको prepza पर {company} की टीम में शामिल होने के लिए इनवाइट किया है",
+        "preheader": (
+            "{company} की टीम में {role} के तौर पर शामिल हों। इनवाइट स्वीकार करने के लिए {email} "
+            "से साइन इन करें।"
+        ),
+        "heading": "टीम इनवाइट",
+        "lines": [
+            (
+                "{inviter} ने आपको prepza पर {company} की टीम में {role} के तौर पर शामिल होने के "
+                "लिए इनवाइट किया है।"
+            ),
+            (
+                "इनवाइट स्वीकार करने के लिए {email} से साइन इन करें। केवल यही पता इस इनवाइट को "
+                "स्वीकार कर सकता है।"
+            ),
+        ],
+        "button": "इनवाइट खोलें",
+        # The role's name as the lines use it.
+        "roles": {"admin": "एडमिन", "viewer": "व्यूअर"},
+    },
     "report": {
         "subject": "उम्मीदवार की रिपोर्ट: {candidate}",
         "preheader": "{candidate} ने {company} में “{title}” दिया। रिपोर्ट संलग्न है।",

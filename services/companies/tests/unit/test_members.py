@@ -2,12 +2,14 @@ import uuid
 from datetime import UTC, datetime
 
 import pytest
+from fastapi import HTTPException, status
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
 from app.integrations import billing
 from app.main import app
 from app.models.companies import Company, Member
+from app.routers import members as members_router
 from app.storage import companies, members
 
 MEMBER_ID = uuid.uuid4()
@@ -86,6 +88,15 @@ def test_invite_view(client, stored_invite):
     }
 
 
+# What each invite's email was sent with, and the email limits' keys, in the `team` fixture.
+senders = []
+limited = []
+
+
+async def fake_hit_emails(redis, uid, key, *limits):
+    limited.append((uid, key))
+
+
 @pytest.fixture
 def team(monkeypatch):
     """Ann owns the company, Bob joined as an admin, Cid's invite is pending. Returns what was
@@ -107,6 +118,7 @@ def team(monkeypatch):
     ]
     removed = []
     turned_off = []
+    senders.clear()
 
     async def fake_company(_company_id):
         return company
@@ -123,8 +135,9 @@ def team(monkeypatch):
     async def fake_set_role(member_id, role):
         removed.append((member_id, role))
 
-    async def fake_add(company_id, email, role):
+    async def fake_add(company_id, email, role, sender):
         removed.append((email, role))
+        senders.append(sender)
 
         return Member(id=uuid.uuid4(), invited_email=email, role=role, created_at=datetime.now(UTC))
 
@@ -134,6 +147,7 @@ def team(monkeypatch):
     monkeypatch.setattr(members, "remove", fake_remove)
     monkeypatch.setattr(members, "list_for_company", fake_list)
     monkeypatch.setattr(billing, "turn_off_auto_top_up", fake_turn_off)
+    monkeypatch.setattr(members_router, "hit_emails", fake_hit_emails)
 
     return company.members, removed, turned_off
 
@@ -192,6 +206,40 @@ def test_the_owner_invites_a_viewer_and_an_admin_by_default(client, team):
     assert changed == [("dan@example.com", "viewer"), ("eve@example.com", "admin")]
     # Nobody is invited as a second owner.
     assert client.post(url, json={"email": "fay@example.com", "role": "owner"}).status_code == 422
+
+
+def test_an_invite_emails_the_member_from_the_owner_within_their_email_limits(client, team):
+    _ = team
+    limited.clear()
+    sign_in("ann@example.com", uid="ann")
+
+    client.post(f"/members?company_id={COMPANY_ID}", json={"email": "Dan@example.com"})
+
+    assert senders == [
+        {
+            "company": "Arcolabs",
+            "company_id": str(COMPANY_ID),
+            "logo_path": None,
+            "inviter": "Bob",
+            "language": "en",
+        }
+    ]
+    assert limited == [("ann", f"member:{COMPANY_ID}:dan@example.com")]
+
+
+def test_an_owner_over_their_email_limits_invites_nobody(client, team, monkeypatch):
+    _, changed, _ = team
+
+    async def over(*args):
+        raise HTTPException(status.HTTP_429_TOO_MANY_REQUESTS, "Too many emails")
+
+    monkeypatch.setattr(members_router, "hit_emails", over)
+    sign_in("ann@example.com", uid="ann")
+
+    response = client.post(f"/members?company_id={COMPANY_ID}", json={"email": "dan@example.com"})
+
+    assert response.status_code == 429
+    assert changed == []
 
 
 def test_the_owner_makes_an_admin_a_viewer_and_their_card_stops_paying(client, team):

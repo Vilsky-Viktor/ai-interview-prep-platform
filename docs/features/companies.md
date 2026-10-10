@@ -10,7 +10,7 @@ A company is where a hiring team works: its interviews, candidates, credits and 
 
 ## Team
 
-A company has one owner. On the company's **Team** tab, the owner adds a member's email with a role, **admin** or **viewer**, and copies the join link that appears; no email is sent, so the owner passes the link on. Only someone signed in with that email can accept it, so a forwarded link is useless to anyone else. The owner can change a member's role later, and remove a member or withdraw a pending invite.
+A company has one owner. On the company's **Team** tab, the owner adds a member's email with a role, **admin** or **viewer**, and the member is emailed the join link, in the owner's language and with the company's logo; the link also appears on the tab, to copy and pass on if the email doesn't arrive. The invite counts toward the owner's email limits. Only someone signed in with that email can accept it, so a forwarded link is useless to anyone else. The owner can change a member's role later, and remove a member or withdraw a pending invite.
 
 | Role | What they can do |
 |---|---|

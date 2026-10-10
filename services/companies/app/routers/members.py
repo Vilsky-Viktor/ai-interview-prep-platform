@@ -3,9 +3,13 @@ from uuid import UUID
 from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
 from prepza_common.paging import PageParams
+from prepza_common.rate_limit import hit_emails
 
+from app.config.settings import settings
 from app.constants.roles import Role
+from app.helpers.logos import logo_path
 from app.integrations import billing
+from app.integrations.redis import get_redis
 from app.models.companies import Member
 from app.schemas.companies import AdminInviteOut, MemberIn, MemberOut, MemberRoleIn
 from app.services.access import is_owner, require_company
@@ -38,7 +42,8 @@ async def list_members(company_id: UUID, user: CurrentUser, page: PageParams) ->
 
 @router.post("", status_code=status.HTTP_201_CREATED)
 async def invite_member(company_id: UUID, body: MemberIn, user: CurrentUser) -> MemberOut:
-    """The owner invites an admin or a viewer; the role applies once the invite is accepted."""
+    """The owner invites an admin or a viewer, who is emailed the join link; the role applies
+    once the invite is accepted."""
     company, caller = await require_company(user, company_id)
 
     if not is_owner(caller):
@@ -52,7 +57,24 @@ async def invite_member(company_id: UUID, body: MemberIn, user: CurrentUser) -> 
     if any(member.invited_email == email for member in company.members):
         raise HTTPException(status.HTTP_409_CONFLICT, "That email is already invited")
 
-    return member_out(await members.add(company.id, email, body.role), caller)
+    # The invite emails the member, so it counts toward the owner's email limits.
+    await hit_emails(
+        get_redis(),
+        user.uid,
+        f"member:{company.id}:{email}",
+        settings.email_hourly_limit,
+        settings.email_daily_limit,
+        settings.email_recipient_daily_limit,
+    )
+    sender = {
+        "company": company.name,
+        "company_id": str(company.id),
+        "logo_path": logo_path(company),
+        "inviter": user.name or user.email,
+        "language": user.language,
+    }
+
+    return member_out(await members.add(company.id, email, body.role, sender), caller)
 
 
 async def owned_member(user: CurrentUser, company_id: UUID, member_id: UUID) -> Member:

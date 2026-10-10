@@ -1,4 +1,6 @@
 CANDIDATE_INVITED = "candidate.invited"
+# The owner invited a member; notifications emails them the join link.
+MEMBER_INVITED = "member.invited"
 # A member emails a candidate's PDF report to someone; notifications sends it, attached.
 REPORT_SHARED = "report.shared"
 # A candidate who hasn't started is reminded once; the event carries what the invite did.

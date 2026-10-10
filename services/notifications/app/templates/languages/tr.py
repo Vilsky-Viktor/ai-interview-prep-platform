@@ -37,6 +37,24 @@ TEXTS = {
         ],
         "button": "Daveti aç",
     },
+    "member": {
+        "subject": "{inviter} sizi prepza'da {company} ekibine davet ediyor",
+        "preheader": (
+            "{company} ekibine {role} olarak katılın. Daveti kabul etmek için {email} ile giriş "
+            "yapın."
+        ),
+        "heading": "Ekip daveti",
+        "lines": [
+            "{inviter} sizi prepza'daki {company} ekibine {role} olarak davet ediyor.",
+            (
+                "Daveti kabul etmek için {email} ile giriş yapın. Daveti yalnızca bu adres kabul "
+                "edebilir."
+            ),
+        ],
+        "button": "Daveti aç",
+        # The role's name as the lines use it.
+        "roles": {"admin": "yönetici", "viewer": "görüntüleyici"},
+    },
     "report": {
         "subject": "Aday raporu: {candidate}",
         "preheader": "{candidate}, {company} şirketinde “{title}” mülakatına girdi. Rapor ektedir.",
