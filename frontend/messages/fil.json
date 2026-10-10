@@ -1132,7 +1132,6 @@
   },
   "ats": {
     "statusConnected": "naka-connect",
-    "connectedBy": "Ikinonekta ni {name}",
     "flowTitle": "Paano dumarating ang mga aplikante mula sa {ats}",
     "flowStage": "Sa {ats}, magdagdag ng stage para lang sa prepza sa pipeline ng job, halimbawa “prepza skills test”, para hindi ito kailanman mahalo sa iba mong tool.",
     "flowLink": "Dito, i-link ang job at piliin ang stage na iyon.",

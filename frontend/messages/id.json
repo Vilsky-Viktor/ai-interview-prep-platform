@@ -1128,7 +1128,6 @@
   },
   "ats": {
     "statusConnected": "terhubung",
-    "connectedBy": "Dihubungkan oleh {name}",
     "flowTitle": "Cara kandidat masuk dari {ats}",
     "flowStage": "Di {ats}, tambahkan tahap khusus untuk prepza ke pipeline lowongan, misalnya “Tes keterampilan prepza”, supaya tidak pernah tercampur dengan alat lain yang kamu pakai.",
     "flowLink": "Di sini, tautkan lowongan dan pilih tahap itu.",

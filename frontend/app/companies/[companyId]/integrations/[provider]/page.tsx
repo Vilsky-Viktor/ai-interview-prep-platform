@@ -110,6 +110,7 @@ export default async function AtsPage({ params }: { params: Params }) {
                 </div>
                 <AtsAccount
                   connection={connection}
+                  companyName={company.name}
                   className="block text-base text-muted-foreground"
                 />
                 {/* On phones its status goes under the name and account. */}

@@ -1128,7 +1128,6 @@
   },
   "ats": {
     "statusConnected": "connected",
-    "connectedBy": "Connected by {name}",
     "flowTitle": "How candidates come from {ats}",
     "flowStage": "In {ats}, add a stage to the job's pipeline just for prepza, for example “prepza skills test”, so it never mixes with your other tools.",
     "flowLink": "Here, link the job and choose that stage.",

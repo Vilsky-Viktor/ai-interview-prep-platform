@@ -31,7 +31,6 @@ def test_an_admin_connects_and_the_key_is_kept_encrypted(client, stored, key):
         {
             "provider": "workable",
             "account": "acme",
-            "connected_by": None,
             "status": "connected",
             "created_at": saved.created_at.isoformat().replace("+00:00", "Z"),
         }

@@ -1128,7 +1128,6 @@
   },
   "ats": {
     "statusConnected": "connecté",
-    "connectedBy": "Connecté par {name}",
     "flowTitle": "Comment les candidats arrivent depuis {ats}",
     "flowStage": "Dans {ats}, ajoutez au pipeline du poste une étape réservée à prepza, par exemple « Test de compétences prepza », pour qu'elle ne se mélange jamais avec vos autres outils.",
     "flowLink": "Ici, liez le poste et choisissez cette étape.",

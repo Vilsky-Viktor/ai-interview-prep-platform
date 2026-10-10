@@ -1127,7 +1127,6 @@
   },
   "ats": {
     "statusConnected": "bağlı",
-    "connectedBy": "Bağlayan: {name}",
     "flowTitle": "Adaylar {ats} üzerinden nasıl gelir",
     "flowStage": "{ats} hesabınızda ilanın sürecine yalnızca prepza için bir aşama ekleyin, örneğin “prepza beceri testi”; böylece diğer araçlarınızla hiç karışmaz.",
     "flowLink": "Burada ilanı bağlayın ve o aşamayı seçin.",

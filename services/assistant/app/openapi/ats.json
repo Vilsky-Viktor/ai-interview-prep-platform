@@ -1364,17 +1364,6 @@
       "type": "string",
       "title": "Account"
      },
-     "connected_by": {
-      "anyOf": [
-       {
-        "type": "string"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Connected By"
-     },
      "status": {
       "$ref": "#/components/schemas/ConnectionStatus"
      },
@@ -1388,7 +1377,6 @@
     "required": [
      "provider",
      "account",
-     "connected_by",
      "status",
      "created_at"
     ],

@@ -1128,7 +1128,6 @@
   },
   "ats": {
     "statusConnected": "verbunden",
-    "connectedBy": "Verbunden von {name}",
     "flowTitle": "Wie Kandidaten aus {ats} kommen",
     "flowStage": "Füge in {ats} der Pipeline der Stelle eine eigene Phase nur für prepza hinzu, etwa „prepza Skills-Test“, damit sie sich nie mit deinen anderen Tools vermischt.",
     "flowLink": "Verknüpfe hier die Stelle und wähle diese Phase.",

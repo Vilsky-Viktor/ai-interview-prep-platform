@@ -582,8 +582,6 @@ export interface components {
       provider: components["schemas"]["AtsProvider"]
       /** Account */
       account: string
-      /** Connected By */
-      connected_by: string | null
       status: components["schemas"]["ConnectionStatus"]
       /**
        * Created At

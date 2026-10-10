@@ -36,9 +36,7 @@ def stored(monkeypatch, companies_api):
     companies_api["roles"] = {(COMPANY_ID, "ann"): "admin"}
     rows = {"key": key, "connection": None}
 
-    async def connect(
-        company_id, provider, account, credentials, user_id, member_id=None, user_name=None
-    ):
+    async def connect(company_id, provider, account, credentials, user_id, member_id=None):
         earlier = rows["connection"]
         rows["connection"] = AtsConnection(
             id=earlier.id if earlier else uuid.uuid4(),
@@ -49,7 +47,6 @@ def stored(monkeypatch, companies_api):
             member_id=member_id,
             status="connected",
             created_by=user_id,
-            created_by_name=user_name,
         )
 
     async def connection(company_id, provider):
@@ -92,9 +89,8 @@ def test_greenhouse_connects_with_a_secret_key_for_its_web_hook(client, stored):
     assert connect(client, client_id=" client-1234 ").status_code == 204
 
     found = saved(stored)
-    # Greenhouse names no account: who connected it is shown instead.
+    # Greenhouse names no account: the page shows the company's name instead.
     assert stored["connection"].account == ""
-    assert stored["connection"].created_by_name == "ann@example.com"
     assert stored["connection"].member_id is None
     assert (found["client_id"], found["client_secret"]) == ("client-1234", "good")
     assert len(found["webhook_secret"]) >= 32

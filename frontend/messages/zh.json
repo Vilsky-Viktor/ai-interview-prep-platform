@@ -1119,7 +1119,6 @@
   },
   "ats": {
     "statusConnected": "已连接",
-    "connectedBy": "由 {name} 连接",
     "flowTitle": "候选人如何从 {ats} 进入",
     "flowStage": "在 {ats} 中，为该职位的招聘流程添加一个 prepza 专用阶段，例如“prepza 技能测试”，这样就不会和你的其他工具混在一起。",
     "flowLink": "在这里关联该职位并选择这个阶段。",

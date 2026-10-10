@@ -1128,7 +1128,6 @@
   },
   "ats": {
     "statusConnected": "conectado",
-    "connectedBy": "Conectado por {name}",
     "flowTitle": "Cómo llegan los candidatos desde {ats}",
     "flowStage": "En {ats}, añade al pipeline de la vacante una etapa solo para prepza, por ejemplo «Prueba de habilidades prepza», para que nunca se mezcle con tus otras herramientas.",
     "flowLink": "Aquí, vincula la vacante y elige esa etapa.",

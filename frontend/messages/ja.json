@@ -1132,7 +1132,6 @@
   },
   "ats": {
     "statusConnected": "接続済み",
-    "connectedBy": "{name} が接続",
     "flowTitle": "{ats} から候補者が届く流れ",
     "flowStage": "{ats} で、求人の選考フローに prepza 専用の選考ステップ（例：「prepza スキルテスト」）を追加してください。ほかのツールと混ざることはありません。",
     "flowLink": "ここで求人を紐付け、その選考ステップを選びます。",

@@ -1124,7 +1124,6 @@
   },
   "ats": {
     "statusConnected": "đã kết nối",
-    "connectedBy": "Kết nối bởi {name}",
     "flowTitle": "Ứng viên đến từ {ats} như thế nào",
     "flowStage": "Trong {ats}, hãy thêm vào quy trình tuyển dụng của tin một giai đoạn riêng cho prepza, chẳng hạn “Kiểm tra kỹ năng prepza”, để không bao giờ lẫn với các công cụ khác của bạn.",
     "flowLink": "Tại đây, hãy liên kết tin tuyển dụng và chọn giai đoạn đó.",

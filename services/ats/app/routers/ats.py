@@ -36,7 +36,6 @@ async def list_connections(company_id: UUID, user: CurrentUser) -> IntegrationsO
             ConnectionOut(
                 provider=row.provider,
                 account=row.account,
-                connected_by=row.created_by_name,
                 status=row.status,
                 created_at=row.created_at,
             )

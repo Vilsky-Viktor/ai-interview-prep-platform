@@ -1132,7 +1132,6 @@
   },
   "ats": {
     "statusConnected": "ühendatud",
-    "connectedBy": "Ühendas {name}",
     "flowTitle": "Kuidas kandidaadid {ats} keskkonnast tulevad",
     "flowStage": "Lisa {ats} keskkonnas töökuulutuse protsessi etapp ainult prepza jaoks, näiteks „prepza oskuste test“, et see ei läheks kunagi segamini sinu teiste tööriistadega.",
     "flowLink": "Seo siin töökuulutus ja vali see etapp.",

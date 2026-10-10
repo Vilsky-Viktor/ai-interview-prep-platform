@@ -144,12 +144,10 @@ def test_a_failed_reconnect_puts_the_earlier_connection_back_marked_broken(run):
     async def scenario():
         company = uuid.uuid4()
         interview = uuid.uuid4()
-        await ats.connect(
-            company, AtsProvider.BREEZY, "Acme", "sealed-1", "ann", "m-1", user_name="Ann"
-        )
+        await ats.connect(company, AtsProvider.BREEZY, "Acme", "sealed-1", "ann", "m-1")
         earlier = await ats.connection(company, AtsProvider.BREEZY)
         await ats.add_link(earlier.id, interview, JOB, STAGE)
-        await ats.connect(company, AtsProvider.BREEZY, "Other", "sealed-2", "bob", user_name="Bob")
+        await ats.connect(company, AtsProvider.BREEZY, "Other", "sealed-2", "bob")
         await ats.restore_broken(earlier)
         found = await ats.connection(company, AtsProvider.BREEZY)
         links = await ats.links(company)
@@ -166,8 +164,6 @@ def test_a_failed_reconnect_puts_the_earlier_connection_back_marked_broken(run):
         "ann",
         "m-1",
     )
-    # Who connected it, by name, comes back with it.
-    assert found.created_by_name == "Ann"
     assert found.status == "broken"
     assert len(links) == 1
 

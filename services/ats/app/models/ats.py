@@ -28,8 +28,6 @@ class AtsConnection(Base):
     member_id: Mapped[str | None] = mapped_column(String(100))
     # Who connected it: their invites and limits apply to candidates the ATS sends.
     created_by: Mapped[str] = mapped_column(String(128))
-    # Their name (or email) when they connected, shown where the ATS names no account.
-    created_by_name: Mapped[str | None] = mapped_column(String(320))
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )

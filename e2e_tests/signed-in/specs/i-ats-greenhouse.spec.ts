@@ -1,7 +1,7 @@
 import { expect, test } from "../fixtures"
 import { GREENHOUSE_E2E_SECRET } from "../constants"
 import { createCompany, createInterview } from "../helpers/api"
-import { addAtsConnection, nameAtsConnectionMaker } from "../helpers/db"
+import { addAtsConnection } from "../helpers/db"
 import { openDialog, visit } from "../helpers/navigation"
 import { shot } from "../helpers/screenshots"
 import { throwawayEmail } from "../helpers/users"
@@ -76,16 +76,13 @@ test("an owner connects Greenhouse and finds its web hook in the info dialog", a
   await expect(owner.getByLabel("2 invited")).toBeVisible()
   await shot(owner, "page")
 
-  // Greenhouse names no account: under the title is who connected it, or nothing when that's
-  // unknown.
+  // Greenhouse names no account: under the title is the company's own name, on the page and the
+  // tab's row.
   const header = owner.getByRole("heading", { level: 1 }).locator("xpath=../..")
-  await expect(header).toHaveText(/^Greenhouse\s*connected$/, { useInnerText: true })
-  await nameAtsConnectionMaker(company.id, "E2E Maker")
-  await owner.reload()
-  await expect(header.getByText("Connected by E2E Maker")).toBeVisible()
+  await expect(header.getByText(company.name, { exact: true })).toBeVisible()
   await visit(owner, tab)
   await expect(
-    owner.getByRole("link", { name: /^Greenhouse/ }).getByText("Connected by E2E Maker")
+    owner.getByRole("link", { name: /^Greenhouse/ }).getByText(company.name, { exact: true })
   ).toBeVisible()
-  await shot(owner, "connected-by")
+  await shot(owner, "company-name")
 })

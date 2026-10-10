@@ -97,6 +97,7 @@ export default async function IntegrationsPage({
               <AtsConnectionRow
                 key={provider.id}
                 companyId={companyId}
+                companyName={company.name}
                 provider={provider}
                 connection={
                   integrations.connections.find(

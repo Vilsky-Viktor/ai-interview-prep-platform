@@ -230,16 +230,6 @@ export async function markAtsBroken(companyId: string) {
   )
 }
 
-/** Names who made a throwaway company's ATS connection, as the ats service saves it on connecting. */
-export async function nameAtsConnectionMaker(companyId: string, name: string) {
-  await withDatabase("ats", (client) =>
-    client.query("UPDATE ats_connections SET created_by_name = $2 WHERE company_id = $1", [
-      companyId,
-      name,
-    ])
-  )
-}
-
 /** AI apps connected to a throwaway user's account, saved straight into the assistant database
  * (a real one needs an AI app going through OAuth): an app and one connection each, the first
  * named the latest. Their tokens are random hashes nothing holds. deleteAiConnections deletes

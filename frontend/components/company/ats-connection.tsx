@@ -26,11 +26,13 @@ import {
  * top. */
 export function AtsConnectionRow({
   companyId,
+  companyName,
   provider,
   connection,
   canEdit,
 }: {
   companyId: string
+  companyName: string
   provider: AtsProvider
   connection: AtsConnection | null
   canEdit: boolean
@@ -58,6 +60,7 @@ export function AtsConnectionRow({
           </span>
           <AtsAccount
             connection={connection}
+            companyName={companyName}
             className="block text-base text-muted-foreground"
           />
         </span>
@@ -76,26 +79,22 @@ export function AtsConnectionRow({
   )
 }
 
-/** What the company is connected as (its account in the ATS), or who connected it where the ATS
- * names no account (Greenhouse); nothing when there's neither. */
+/** What the company is connected as: its account in the ATS or, where the ATS names none
+ * (Greenhouse), the company's own name; nothing before it's connected. */
 export function AtsAccount({
   connection,
+  companyName,
   className,
 }: {
   connection: AtsConnection | null
+  companyName: string
   className: string
 }) {
-  const t = useTranslations("ats")
-  const text =
-    connection?.account ||
-    (connection?.connected_by &&
-      t("connectedBy", { name: connection.connected_by }))
-
-  if (!text) {
+  if (!connection) {
     return null
   }
 
-  return <span className={className}>{text}</span>
+  return <span className={className}>{connection.account || companyName}</span>
 }
 
 /** "connected" beside the ATS's name once it is, like an interview's status tag; nothing

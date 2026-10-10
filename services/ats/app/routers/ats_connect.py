@@ -97,15 +97,8 @@ async def connect_greenhouse(company_id: UUID, body: GreenhouseIn, user: Current
             "webhook_secret": kept or secrets.token_urlsafe(32),
         }
     )
-    # Greenhouse names no account: the page shows who connected it instead.
-    await ats.connect(
-        company_id,
-        AtsProvider.GREENHOUSE,
-        "",
-        sealed,
-        user.uid,
-        user_name=user.name or user.email,
-    )
+    # Greenhouse names no account: the page shows the company it's connected for instead.
+    await ats.connect(company_id, AtsProvider.GREENHOUSE, "", sealed, user.uid)
 
 
 @router.put("/teamtailor", status_code=status.HTTP_204_NO_CONTENT)

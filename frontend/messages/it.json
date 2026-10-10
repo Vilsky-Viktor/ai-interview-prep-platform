@@ -1128,7 +1128,6 @@
   },
   "ats": {
     "statusConnected": "collegato",
-    "connectedBy": "Collegato da {name}",
     "flowTitle": "Come arrivano i candidati da {ats}",
     "flowStage": "In {ats}, aggiungi alla pipeline della posizione una fase solo per prepza, ad esempio «Test delle competenze prepza», così non si mescola mai con gli altri tuoi strumenti.",
     "flowLink": "Qui, collega la posizione e scegli quella fase.",

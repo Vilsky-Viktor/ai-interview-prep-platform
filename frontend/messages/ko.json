@@ -1119,7 +1119,6 @@
   },
   "ats": {
     "statusConnected": "연동됨",
-    "connectedBy": "{name} 님이 연동함",
     "flowTitle": "{ats}에서 지원자가 들어오는 방식",
     "flowStage": "{ats}에서 채용 공고의 채용 프로세스에 prepza 전용 전형 단계를 추가하세요. 예를 들어 “prepza 역량 테스트”처럼 두면 다른 도구와 섞이지 않습니다.",
     "flowLink": "여기에서 채용 공고를 연결하고 그 단계를 선택하세요.",

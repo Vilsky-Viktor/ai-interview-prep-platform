@@ -1124,7 +1124,6 @@
   },
   "ats": {
     "statusConnected": "gekoppeld",
-    "connectedBy": "Gekoppeld door {name}",
     "flowTitle": "Hoe kandidaten uit {ats} binnenkomen",
     "flowStage": "Voeg in {ats} aan de pipeline van de vacature een fase toe alleen voor prepza, bijvoorbeeld “prepza-vaardighedentest”, zodat die nooit door je andere tools heen loopt.",
     "flowLink": "Koppel hier de vacature en kies die fase.",
