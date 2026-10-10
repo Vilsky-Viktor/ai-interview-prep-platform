@@ -120,7 +120,7 @@
     "firstCompany": "Qual é o nome da sua empresa?",
     "newCompany": "Uma nova empresa",
     "companyName": "Nome da empresa",
-    "freeCandidates": "Sua primeira empresa entrevista {count, plural, one {o primeiro candidato} other {os primeiros # candidatos}} de graça.",
+    "freeCandidates": "Sua primeira empresa entrevista {count, plural, =1 {o primeiro candidato} other {os primeiros # candidatos}} de graça.",
     "back": "Editar a descrição",
     "continue": "Continuar",
     "starting": "Iniciando…",
@@ -646,7 +646,7 @@
     "candidate": "Cada candidato que responde pelo menos uma questão",
     "candidateVolume": "Com créditos de uma recarga de {from} ou mais",
     "perCandidate": "{price} por candidato",
-    "welcome": "{count, plural, one {Seu primeiro candidato} other {Seus primeiros # candidatos}}",
+    "welcome": "{count, plural, =1 {Seu primeiro candidato} other {Seus primeiros # candidatos}}",
     "credits": "$1 = 100 créditos, e os créditos não expiram.",
     "referrals": "Indicações",
     "referralsNote": "Compartilhe o link da sua empresa na aba de indicações dela.",
@@ -925,7 +925,7 @@
     },
     "pricing": {
       "title": "Pague por candidato",
-      "text": "As entrevistas e {free, plural, one {seu primeiro candidato} other {seus primeiros # candidatos}} são grátis. Depois, pague só pelos candidatos que respondem, sem assinatura.",
+      "text": "As entrevistas e {free, plural, =1 {seu primeiro candidato} other {seus primeiros # candidatos}} são grátis. Depois, pague só pelos candidatos que respondem, sem assinatura.",
       "see": "Ver preços",
       "perCandidate": "por candidato",
       "base": "Pague conforme o uso",
@@ -1006,19 +1006,19 @@
     "unread": "{count, plural, one {# notificação não lida} other {# notificações não lidas}}",
     "empty": "Nada novo por enquanto.",
     "kinds": {
-      "question_flagged": "{count, plural, one {Uma questão sobre “{topic}” de “{title}” foi sinalizada para revisão.} other {# questões de “{title}” foram sinalizadas para revisão.}}",
-      "question_fixed": "{count, plural, one {A IA corrigiu uma questão sinalizada sobre “{topic}” de “{title}”.} other {A IA corrigiu # questões sinalizadas de “{title}”.}}",
+      "question_flagged": "{count, plural, =1 {Uma questão sobre “{topic}” de “{title}” foi sinalizada para revisão.} other {# questões de “{title}” foram sinalizadas para revisão.}}",
+      "question_fixed": "{count, plural, =1 {A IA corrigiu uma questão sinalizada sobre “{topic}” de “{title}”.} other {A IA corrigiu # questões sinalizadas de “{title}”.}}",
       "referral_rewarded": "Alguém que você convidou fez uma recarga. Você ganhou {credits} créditos.",
       "auto_top_up_charged": "A recarga automática adicionou {credits} créditos.",
       "auto_top_up_failed": "A recarga automática não conseguiu cobrar o cartão. Recarregue para não ficar sem saldo.",
-      "candidate_finished": "{count, plural, one {{email} concluiu “{title}”{grade, select, none {.} other {: {grade}%.}}} other {# candidatos concluíram “{title}”.}}",
-      "invite_undelivered": "{count, plural, one {O convite de “{title}” para {email} não foi entregue.} other {# convites de “{title}” não foram entregues.}}",
+      "candidate_finished": "{count, plural, =1 {{email} concluiu “{title}”{grade, select, none {.} other {: {grade}%.}}} other {# candidatos concluíram “{title}”.}}",
+      "invite_undelivered": "{count, plural, =1 {O convite de “{title}” para {email} não foi entregue.} other {# convites de “{title}” não foram entregues.}}",
       "interview_ready": "A entrevista “{title}” está pronta.",
       "interview_cancelled": "{title, select, none {Uma entrevista} other {A entrevista “{title}”}} foi cancelada: a revisão dos tópicos esperou demais.",
       "verification_approved": "“{name}” está verificada para {domain}.",
       "verification_declined": "{reason, select, none {A verificação de “{name}” foi recusada.} other {A verificação de “{name}” foi recusada: {reason}}}",
       "member_joined": "{email} entrou em “{name}” como {role, select, admin {administrador} other {visualizador}}.",
-      "ats_not_invited": "{count, plural, one {{email} do {ats} não foi convidado para “{title}”: {reason, select, credits {créditos esgotados} limit {um limite de e-mails foi atingido} paused {os convites estão pausados} other {algo deu errado}}.} other {# candidatos do {ats} não foram convidados para “{title}”.}}"
+      "ats_not_invited": "{count, plural, =1 {{email} do {ats} não foi convidado para “{title}”: {reason, select, credits {créditos esgotados} limit {um limite de e-mails foi atingido} paused {os convites estão pausados} other {algo deu errado}}.} other {# candidatos do {ats} não foram convidados para “{title}”.}}"
     }
   },
   "report": {

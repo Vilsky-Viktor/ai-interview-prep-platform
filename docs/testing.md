@@ -137,7 +137,7 @@ Screenshots land in `e2e_tests/signed-in/test-results/screenshots`.
 
 ## Translations
 
-Every language has exactly the keys of `en.json`, with the same arguments and rich-text tags, valid ICU syntax and an `other` form in every plural. CI runs it in the frontend job.
+Every language has exactly the keys of `en.json`, with the same arguments and rich-text tags, valid ICU syntax and an `other` form in every plural. In a language whose `one` form also covers other numbers (Filipino's 3, French's 0, Russian's 21), a plural that shows the number uses `=1` for exactly one, so 3 never reads as "your first one". CI runs it in the frontend job.
 
 ```bash
 cd frontend && pnpm check:messages     # or name languages: pnpm check:messages de fr

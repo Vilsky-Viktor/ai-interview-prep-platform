@@ -120,7 +120,7 @@
     "firstCompany": "نام شرکت شما چیست؟",
     "newCompany": "یک شرکت جدید",
     "companyName": "نام شرکت",
-    "freeCandidates": "نخستین شرکت شما با {count, plural, one {نخستین متقاضی‌اش} other {# متقاضی نخستش}} رایگان مصاحبه می‌کند.",
+    "freeCandidates": "نخستین شرکت شما با {count, plural, =1 {نخستین متقاضی‌اش} other {# متقاضی نخستش}} رایگان مصاحبه می‌کند.",
     "back": "ویرایش شرح",
     "continue": "ادامه",
     "starting": "در حال شروع…",
@@ -646,7 +646,7 @@
     "candidate": "هر متقاضی‌ای که دست‌کم به یک پرسش پاسخ دهد",
     "candidateVolume": "با اعتبار از شارژ {from} یا بیشتر",
     "perCandidate": "{price} برای هر متقاضی",
-    "welcome": "{count, plural, one {نخستین متقاضی شما} other {# متقاضی نخست شما}}",
+    "welcome": "{count, plural, =1 {نخستین متقاضی شما} other {# متقاضی نخست شما}}",
     "credits": "۱ دلار = ۱۰۰ اعتبار، و اعتبارها هرگز منقضی نمی‌شوند.",
     "referrals": "معرفی‌ها",
     "referralsNote": "پیوند شرکت خود را از زبانهٔ معرفی‌های آن به اشتراک بگذارید.",
@@ -925,7 +925,7 @@
     },
     "pricing": {
       "title": "پرداخت برای هر متقاضی",
-      "text": "مصاحبه‌ها رایگان‌اند، و {free, plural, one {نخستین متقاضی شما} other {# متقاضی نخست شما}} هم همین‌طور. پس از آن فقط برای متقاضیانی که پاسخ می‌دهند پرداخت می‌کنید، بدون اشتراک.",
+      "text": "مصاحبه‌ها رایگان‌اند، و {free, plural, =1 {نخستین متقاضی شما} other {# متقاضی نخست شما}} هم همین‌طور. پس از آن فقط برای متقاضیانی که پاسخ می‌دهند پرداخت می‌کنید، بدون اشتراک.",
       "see": "دیدن قیمت‌ها",
       "perCandidate": "برای هر متقاضی",
       "base": "پرداخت به اندازه مصرف",
@@ -1006,19 +1006,19 @@
     "unread": "{count, plural, one {# اعلان خوانده‌نشده} other {# اعلان خوانده‌نشده}}",
     "empty": "هنوز خبر تازه‌ای نیست.",
     "kinds": {
-      "question_flagged": "{count, plural, one {یک پرسش دربارهٔ «{topic}» در «{title}» برای بررسی علامت خورد.} other {# پرسش در «{title}» برای بررسی علامت خوردند.}}",
-      "question_fixed": "{count, plural, one {هوش مصنوعی یک پرسش علامت‌خورده دربارهٔ «{topic}» را در «{title}» اصلاح کرد.} other {هوش مصنوعی # پرسش علامت‌خورده را در «{title}» اصلاح کرد.}}",
+      "question_flagged": "{count, plural, =1 {یک پرسش دربارهٔ «{topic}» در «{title}» برای بررسی علامت خورد.} other {# پرسش در «{title}» برای بررسی علامت خوردند.}}",
+      "question_fixed": "{count, plural, =1 {هوش مصنوعی یک پرسش علامت‌خورده دربارهٔ «{topic}» را در «{title}» اصلاح کرد.} other {هوش مصنوعی # پرسش علامت‌خورده را در «{title}» اصلاح کرد.}}",
       "referral_rewarded": "کسی که دعوت کرده بودید شارژ کرد. {credits} اعتبار گرفتید.",
       "auto_top_up_charged": "شارژ خودکار {credits} اعتبار اضافه کرد.",
       "auto_top_up_failed": "شارژ خودکار نتوانست از کارت برداشت کند. شارژ کنید تا موجودی‌تان تمام نشود.",
-      "candidate_finished": "{count, plural, one {{email} «{title}» را به پایان رساند{grade, select, none {.} other {: {grade}٪.}}} other {# متقاضی «{title}» را به پایان رساندند.}}",
-      "invite_undelivered": "{count, plural, one {دعوت «{title}» به {email} تحویل نشد.} other {# دعوت برای «{title}» تحویل نشد.}}",
+      "candidate_finished": "{count, plural, =1 {{email} «{title}» را به پایان رساند{grade, select, none {.} other {: {grade}٪.}}} other {# متقاضی «{title}» را به پایان رساندند.}}",
+      "invite_undelivered": "{count, plural, =1 {دعوت «{title}» به {email} تحویل نشد.} other {# دعوت برای «{title}» تحویل نشد.}}",
       "interview_ready": "مصاحبه «{title}» آماده است.",
       "interview_cancelled": "{title, select, none {یک مصاحبه} other {مصاحبه «{title}»}} لغو شد: بررسی موضوع‌هایش بیش از حد منتظر ماند.",
       "verification_approved": "«{name}» برای {domain} تأیید شد.",
       "verification_declined": "{reason, select, none {تأیید «{name}» رد شد.} other {تأیید «{name}» رد شد: {reason}}}",
       "member_joined": "{email} با نقش {role, select, admin {مدیر} other {بیننده}} به «{name}» پیوست.",
-      "ats_not_invited": "{count, plural, one {{email} از {ats} به «{title}» دعوت نشد: {reason, select, credits {اعتبار تمام شده است} limit {سقف ایمیل پر شده است} paused {دعوت‌ها متوقف شده‌اند} other {مشکلی پیش آمد}}.} other {# متقاضی از {ats} به «{title}» دعوت نشدند.}}"
+      "ats_not_invited": "{count, plural, =1 {{email} از {ats} به «{title}» دعوت نشد: {reason, select, credits {اعتبار تمام شده است} limit {سقف ایمیل پر شده است} paused {دعوت‌ها متوقف شده‌اند} other {مشکلی پیش آمد}}.} other {# متقاضی از {ats} به «{title}» دعوت نشدند.}}"
     }
   },
   "report": {

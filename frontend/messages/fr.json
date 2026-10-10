@@ -120,7 +120,7 @@
     "firstCompany": "Comment s'appelle votre entreprise ?",
     "newCompany": "Une nouvelle entreprise",
     "companyName": "Nom de l'entreprise",
-    "freeCandidates": "Votre première entreprise fait passer l'entretien gratuitement à {count, plural, one {son premier candidat} other {ses # premiers candidats}}.",
+    "freeCandidates": "Votre première entreprise fait passer l'entretien gratuitement à {count, plural, =1 {son premier candidat} other {ses # premiers candidats}}.",
     "back": "Modifier la description",
     "continue": "Continuer",
     "starting": "Démarrage…",
@@ -646,7 +646,7 @@
     "candidate": "Chaque candidat qui répond à au moins une question",
     "candidateVolume": "Avec des crédits d'une recharge de {from} ou plus",
     "perCandidate": "{price} par candidat",
-    "welcome": "{count, plural, one {Votre premier candidat} other {Vos # premiers candidats}}",
+    "welcome": "{count, plural, =1 {Votre premier candidat} other {Vos # premiers candidats}}",
     "credits": "1 $ = 100 crédits, les crédits n'expirent jamais.",
     "referrals": "Parrainage",
     "referralsNote": "Partagez le lien de votre entreprise depuis son onglet Parrainage.",
@@ -929,7 +929,7 @@
     },
     "pricing": {
       "title": "Payez par candidat",
-      "text": "Les entretiens et {free, plural, one {votre premier candidat} other {vos # premiers candidats}} sont gratuits. Ensuite, vous ne payez que pour les candidats qui répondent, sans abonnement.",
+      "text": "Les entretiens et {free, plural, =1 {votre premier candidat} other {vos # premiers candidats}} sont gratuits. Ensuite, vous ne payez que pour les candidats qui répondent, sans abonnement.",
       "see": "Voir les tarifs",
       "perCandidate": "par candidat",
       "base": "Paiement à l'usage",
@@ -1010,19 +1010,19 @@
     "unread": "{count, plural, one {# notification non lue} other {# notifications non lues}}",
     "empty": "Rien de nouveau pour l'instant.",
     "kinds": {
-      "question_flagged": "{count, plural, one {Une question sur « {topic} » de « {title} » a été signalée pour vérification.} other {# questions de « {title} » ont été signalées pour vérification.}}",
-      "question_fixed": "{count, plural, one {L'IA a corrigé une question signalée sur « {topic} » de « {title} ».} other {L'IA a corrigé # questions signalées de « {title} ».}}",
+      "question_flagged": "{count, plural, =1 {Une question sur « {topic} » de « {title} » a été signalée pour vérification.} other {# questions de « {title} » ont été signalées pour vérification.}}",
+      "question_fixed": "{count, plural, =1 {L'IA a corrigé une question signalée sur « {topic} » de « {title} ».} other {L'IA a corrigé # questions signalées de « {title} ».}}",
       "referral_rewarded": "Une personne que vous avez invitée a rechargé. Vous avez reçu {credits} crédits.",
       "auto_top_up_charged": "La recharge automatique a ajouté {credits} crédits.",
       "auto_top_up_failed": "La recharge automatique n'a pas pu débiter la carte. Rechargez pour ne pas manquer de solde.",
-      "candidate_finished": "{count, plural, one {{email} a terminé « {title} »{grade, select, none {.} other { : {grade} %.}}} other {# candidats ont terminé « {title} ».}}",
-      "invite_undelivered": "{count, plural, one {L'invitation envoyée à {email} pour « {title} » n'a pas été remise.} other {# invitations pour « {title} » n'ont pas été remises.}}",
+      "candidate_finished": "{count, plural, =1 {{email} a terminé « {title} »{grade, select, none {.} other { : {grade} %.}}} other {# candidats ont terminé « {title} ».}}",
+      "invite_undelivered": "{count, plural, =1 {L'invitation envoyée à {email} pour « {title} » n'a pas été remise.} other {# invitations pour « {title} » n'ont pas été remises.}}",
       "interview_ready": "L'entretien « {title} » est prêt.",
       "interview_cancelled": "{title, select, none {Un entretien} other {L'entretien « {title} »}} a été annulé : la validation de ses thèmes a trop attendu.",
       "verification_approved": "« {name} » est vérifiée pour {domain}.",
       "verification_declined": "{reason, select, none {La vérification de « {name} » a été refusée.} other {La vérification de « {name} » a été refusée : {reason}}}",
       "member_joined": "{email} a rejoint « {name} » en tant que {role, select, admin {admin} other {lecteur}}.",
-      "ats_not_invited": "{count, plural, one {{email} venant de {ats} n'a pas été invité à « {title} » : {reason, select, credits {crédits épuisés} limit {une limite d'e-mails a été atteinte} paused {les invitations sont en pause} other {une erreur s'est produite}}.} other {# candidats venant de {ats} n'ont pas été invités à « {title} ».}}"
+      "ats_not_invited": "{count, plural, =1 {{email} venant de {ats} n'a pas été invité à « {title} » : {reason, select, credits {crédits épuisés} limit {une limite d'e-mails a été atteinte} paused {les invitations sont en pause} other {une erreur s'est produite}}.} other {# candidats venant de {ats} n'ont pas été invités à « {title} ».}}"
     }
   },
   "report": {

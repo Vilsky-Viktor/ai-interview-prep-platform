@@ -1,5 +1,8 @@
 // Checks every translation (or the ones named) against en.json, with the ICU parser next-intl uses: same
-// keys, same arguments, same rich-text tags, valid syntax, and an `other` form in every plural.
+// keys, same arguments, same rich-text tags, valid syntax, and an `other` form in every plural. In a
+// language whose `one` form also covers other numbers (Filipino's 3, Russian's 21, French's 0), a
+// plural that shows the number must show it in `one` too, or 3 reads as "your first one"; `=1`
+// is for exactly one. A plural of just the word ("credit"), with the number outside it, is fine.
 // Usage: pnpm check:messages [code...]
 import { readdirSync, readFileSync } from "node:fs"
 import { parse, TYPE } from "@formatjs/icu-messageformat-parser"
@@ -17,38 +20,42 @@ const flat = (value, prefix = "", out = {}) => {
   }
   return out
 }
-const shape = (text, args = new Set(), tags = new Set(), problems = []) => {
-  for (const element of parse(text, { ignoreTag: false })) {
-    if (element.type === TYPE.argument || element.type === TYPE.number)
-      args.add(element.value)
-    if (element.type === TYPE.plural || element.type === TYPE.select) {
-      args.add(element.value)
-      if (!element.options.other) problems.push("no other")
-      for (const option of Object.values(element.options))
-        shapeElements(option.value, args, tags, problems)
-    }
-    if (element.type === TYPE.tag) {
-      tags.add(element.value)
-      shapeElements(element.children, args, tags, problems)
-    }
-  }
-  return { args, tags, problems }
+const shape = (text, wideOne) => {
+  const found = { args: new Set(), tags: new Set(), problems: [] }
+  shapeElements(parse(text, { ignoreTag: false }), found, wideOne)
+  return found
 }
-const shapeElements = (elements, args, tags, problems) => {
+const shapeElements = (elements, found, wideOne) => {
   for (const element of elements) {
     if (element.type === TYPE.argument || element.type === TYPE.number)
-      args.add(element.value)
+      found.args.add(element.value)
     if (element.type === TYPE.plural || element.type === TYPE.select) {
-      args.add(element.value)
-      if (!element.options.other) problems.push("no other")
+      found.args.add(element.value)
+      if (!element.options.other) found.problems.push("no other")
+      const { one, other } = element.options
+      const pound = (option) =>
+        option?.value.some((part) => part.type === TYPE.pound)
+      if (
+        wideOne &&
+        element.type === TYPE.plural &&
+        one &&
+        pound(other) &&
+        !pound(one)
+      )
+        found.problems.push("one without #")
       for (const option of Object.values(element.options))
-        shapeElements(option.value, args, tags, problems)
+        shapeElements(option.value, found, wideOne)
     }
     if (element.type === TYPE.tag) {
-      tags.add(element.value)
-      shapeElements(element.children, args, tags, problems)
+      found.tags.add(element.value)
+      shapeElements(element.children, found, wideOne)
     }
   }
+}
+// Whether the language's `one` form also covers a whole number other than 1.
+const coversMoreThanOne = (code) => {
+  const rules = new Intl.PluralRules(code)
+  return [0, 2, 3, 5, 7, 21].some((number) => rules.select(number) === "one")
 }
 const same = (a, b) => a.size === b.size && [...a].every((item) => b.has(item))
 const english = flat(load("en"))
@@ -60,6 +67,7 @@ const codes = process.argv.slice(2).length
       .filter((code) => code !== "en")
 for (const code of codes) {
   const other = flat(load(code))
+  const wideOne = coversMoreThanOne(code)
   for (const key of Object.keys(english)) {
     if (!(key in other)) {
       console.log(`${code}: missing ${key}`)
@@ -75,8 +83,8 @@ for (const code of codes) {
       continue
     }
     try {
-      const want = shape(a),
-        got = shape(b)
+      const want = shape(a, false),
+        got = shape(b, wideOne)
       if (!same(want.args, got.args)) {
         console.log(
           `${code}: ${key} args ${[...want.args]} vs ${[...got.args]}`

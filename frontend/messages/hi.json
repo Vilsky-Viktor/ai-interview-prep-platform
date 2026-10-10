@@ -120,7 +120,7 @@
     "firstCompany": "आपकी कंपनी का नाम क्या है?",
     "newCompany": "एक नई कंपनी",
     "companyName": "कंपनी का नाम",
-    "freeCandidates": "आपकी पहली कंपनी {count, plural, one {अपने पहले उम्मीदवार} other {अपने पहले # उम्मीदवारों}} का इंटरव्यू मुफ़्त में लेती है।",
+    "freeCandidates": "आपकी पहली कंपनी {count, plural, =1 {अपने पहले उम्मीदवार} other {अपने पहले # उम्मीदवारों}} का इंटरव्यू मुफ़्त में लेती है।",
     "back": "विवरण बदलें",
     "continue": "जारी रखें",
     "starting": "शुरू हो रहा है…",
@@ -646,7 +646,7 @@
     "candidate": "हर उम्मीदवार जो कम से कम एक सवाल का जवाब देता है",
     "candidateVolume": "{from} या उससे ज़्यादा के टॉप-अप के क्रेडिट से",
     "perCandidate": "{price} प्रति उम्मीदवार",
-    "welcome": "{count, plural, one {आपका पहला उम्मीदवार} other {आपके पहले # उम्मीदवार}}",
+    "welcome": "{count, plural, =1 {आपका पहला उम्मीदवार} other {आपके पहले # उम्मीदवार}}",
     "credits": "$1 = 100 क्रेडिट, क्रेडिट कभी खत्म नहीं होते।",
     "referrals": "रेफ़रल",
     "referralsNote": "अपनी कंपनी का लिंक उसके रेफ़रल टैब से शेयर करें।",
@@ -924,7 +924,7 @@
     },
     "pricing": {
       "title": "प्रति उम्मीदवार भुगतान करें",
-      "text": "इंटरव्यू मुफ़्त हैं, और {free, plural, one {आपका पहला उम्मीदवार भी} other {आपके पहले # उम्मीदवार भी}}। उसके बाद आप सिर्फ़ जवाब देने वाले उम्मीदवारों के लिए भुगतान करते हैं, बिना किसी सब्सक्रिप्शन के।",
+      "text": "इंटरव्यू मुफ़्त हैं, और {free, plural, =1 {आपका पहला उम्मीदवार भी} other {आपके पहले # उम्मीदवार भी}}। उसके बाद आप सिर्फ़ जवाब देने वाले उम्मीदवारों के लिए भुगतान करते हैं, बिना किसी सब्सक्रिप्शन के।",
       "see": "कीमतें देखें",
       "perCandidate": "प्रति उम्मीदवार",
       "base": "जितना इस्तेमाल, उतना भुगतान",
@@ -1005,19 +1005,19 @@
     "unread": "{count, plural, one {# अपठित सूचना} other {# अपठित सूचनाएँ}}",
     "empty": "अभी कुछ नया नहीं है।",
     "kinds": {
-      "question_flagged": "{count, plural, one {“{title}” में “{topic}” विषय का एक सवाल जाँच के लिए फ़्लैग किया गया।} other {“{title}” में # सवाल जाँच के लिए फ़्लैग किए गए।}}",
-      "question_fixed": "{count, plural, one {AI ने “{title}” में “{topic}” विषय का फ़्लैग किया गया सवाल ठीक कर दिया।} other {AI ने “{title}” में फ़्लैग किए गए # सवाल ठीक कर दिए।}}",
+      "question_flagged": "{count, plural, =1 {“{title}” में “{topic}” विषय का एक सवाल जाँच के लिए फ़्लैग किया गया।} other {“{title}” में # सवाल जाँच के लिए फ़्लैग किए गए।}}",
+      "question_fixed": "{count, plural, =1 {AI ने “{title}” में “{topic}” विषय का फ़्लैग किया गया सवाल ठीक कर दिया।} other {AI ने “{title}” में फ़्लैग किए गए # सवाल ठीक कर दिए।}}",
       "referral_rewarded": "जिसे आपने इनवाइट किया था, उसने टॉप अप किया। आपको {credits} क्रेडिट मिले।",
       "auto_top_up_charged": "ऑटो टॉप अप से {credits} क्रेडिट जुड़े।",
       "auto_top_up_failed": "ऑटो टॉप अप कार्ड से भुगतान नहीं ले सका। बैलेंस बनाए रखने के लिए टॉप अप करें।",
-      "candidate_finished": "{count, plural, one {{email} ने “{title}” पूरा किया{grade, select, none {।} other {: {grade}%।}}} other {# उम्मीदवारों ने “{title}” पूरा किया।}}",
-      "invite_undelivered": "{count, plural, one {“{title}” के लिए {email} को भेजा गया इनवाइट डिलीवर नहीं हुआ।} other {“{title}” के लिए भेजे गए # इनवाइट डिलीवर नहीं हुए।}}",
+      "candidate_finished": "{count, plural, =1 {{email} ने “{title}” पूरा किया{grade, select, none {।} other {: {grade}%।}}} other {# उम्मीदवारों ने “{title}” पूरा किया।}}",
+      "invite_undelivered": "{count, plural, =1 {“{title}” के लिए {email} को भेजा गया इनवाइट डिलीवर नहीं हुआ।} other {“{title}” के लिए भेजे गए # इनवाइट डिलीवर नहीं हुए।}}",
       "interview_ready": "इंटरव्यू “{title}” तैयार है।",
       "interview_cancelled": "{title, select, none {एक इंटरव्यू} other {इंटरव्यू “{title}”}} रद्द हो गया: उसके विषयों की समीक्षा बहुत देर तक रुकी रही।",
       "verification_approved": "“{name}” {domain} के लिए सत्यापित है।",
       "verification_declined": "{reason, select, none {“{name}” का सत्यापन अस्वीकार किया गया।} other {“{name}” का सत्यापन अस्वीकार किया गया: {reason}}}",
       "member_joined": "{email} “{name}” से {role, select, admin {एडमिन} other {व्यूअर}} के रूप में जुड़े।",
-      "ats_not_invited": "{count, plural, one {{ats} से आए {email} को “{title}” के लिए इनवाइट नहीं किया गया: {reason, select, credits {क्रेडिट खत्म हो गए} limit {ईमेल सीमा पूरी हो गई} paused {इनवाइट रोके गए हैं} other {कुछ गड़बड़ हो गई}}।} other {{ats} से आए # उम्मीदवारों को “{title}” के लिए इनवाइट नहीं किया गया।}}"
+      "ats_not_invited": "{count, plural, =1 {{ats} से आए {email} को “{title}” के लिए इनवाइट नहीं किया गया: {reason, select, credits {क्रेडिट खत्म हो गए} limit {ईमेल सीमा पूरी हो गई} paused {इनवाइट रोके गए हैं} other {कुछ गड़बड़ हो गई}}।} other {{ats} से आए # उम्मीदवारों को “{title}” के लिए इनवाइट नहीं किया गया।}}"
     }
   },
   "report": {
