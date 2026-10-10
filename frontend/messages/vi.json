@@ -977,7 +977,8 @@
     "send": "Gửi",
     "thanks": "Cảm ơn bạn!",
     "sent": "Tin nhắn của bạn đang trên đường đến chúng tôi. Chúng tôi sẽ trả lời qua {email}.",
-    "failed": "Không gửi được tin nhắn. Vui lòng thử lại."
+    "failed": "Không gửi được tin nhắn. Vui lòng thử lại.",
+    "operator": "prepza do {name} vận hành, mã số đăng ký {code}, {address}. Email: {email}"
   },
   "about": {
     "title": "Về chúng tôi",

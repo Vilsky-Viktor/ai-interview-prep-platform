@@ -185,4 +185,6 @@ TEXTS = {
     "email_settings": "Thay đổi cài đặt email",
     "stop_reminders": "Đừng gửi lời nhắc về buổi phỏng vấn này cho tôi",
     "stop_company": "Đừng gửi email từ {company} cho tôi",
+    # Who runs prepza, at the end of every email.
+    "operator": "prepza do {name}, {address} vận hành.",
 }

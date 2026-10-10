@@ -981,7 +981,8 @@
     "send": "Wyślij",
     "thanks": "Dziękujemy!",
     "sent": "Twoja wiadomość jest w drodze. Odpowiemy na {email}.",
-    "failed": "Nie udało się wysłać wiadomości. Spróbuj ponownie."
+    "failed": "Nie udało się wysłać wiadomości. Spróbuj ponownie.",
+    "operator": "prepza jest prowadzona przez {name}, numer rejestrowy {code}, {address}. E-mail: {email}"
   },
   "about": {
     "title": "O nas",

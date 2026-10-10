@@ -977,7 +977,8 @@
     "send": "Enviar",
     "thanks": "Obrigado!",
     "sent": "Sua mensagem está a caminho. Responderemos para {email}.",
-    "failed": "Não foi possível enviar sua mensagem. Tente novamente."
+    "failed": "Não foi possível enviar sua mensagem. Tente novamente.",
+    "operator": "A prepza é operada pela {name}, número de registro {code}, {address}. E-mail: {email}"
   },
   "about": {
     "title": "Sobre nós",

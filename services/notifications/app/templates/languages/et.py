@@ -181,4 +181,6 @@ TEXTS = {
     "email_settings": "Muuda oma e-kirjade seadeid",
     "stop_reminders": "Ära saada mulle selle intervjuu meeldetuletusi",
     "stop_company": "Ära saada mulle e-kirju ettevõttelt {company}",
+    # Who runs prepza, at the end of every email.
+    "operator": "prepzat haldab {name}, {address}.",
 }

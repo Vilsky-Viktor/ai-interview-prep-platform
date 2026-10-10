@@ -1,4 +1,5 @@
 import { FOUNDER } from "@/constants/about"
+import { OPERATOR } from "@/constants/operator"
 import { SITE_NAME } from "@/constants/seo"
 import type { Catalog } from "@/types/billing"
 
@@ -15,6 +16,9 @@ export function organizationData(site: string, description: string) {
       "@context": CONTEXT,
       "@type": "Organization",
       name: BRAND,
+      legalName: OPERATOR.name,
+      email: OPERATOR.email,
+      address: { "@type": "PostalAddress", name: OPERATOR.address },
       url: site,
       logo: `${site}/icon.svg`,
       founder: { "@type": "Person", name: FOUNDER.name },

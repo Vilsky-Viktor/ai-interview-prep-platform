@@ -980,7 +980,8 @@
     "send": "Gönder",
     "thanks": "Teşekkürler!",
     "sent": "Mesajınız yola çıktı. {email} adresine yanıt vereceğiz.",
-    "failed": "Mesajınız gönderilemedi. Lütfen tekrar deneyin."
+    "failed": "Mesajınız gönderilemedi. Lütfen tekrar deneyin.",
+    "operator": "prepza, {name} tarafından işletilir, sicil numarası {code}, {address}. E-posta: {email}"
   },
   "about": {
     "title": "Hakkımızda",

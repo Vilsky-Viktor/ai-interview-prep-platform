@@ -177,4 +177,6 @@ TEXTS = {
     "email_settings": "अपनी ईमेल सेटिंग बदलें",
     "stop_reminders": "इस इंटरव्यू के लिए मुझे रिमाइंडर न भेजें",
     "stop_company": "{company} की ओर से मुझे ईमेल न भेजें",
+    # Who runs prepza, at the end of every email.
+    "operator": "prepza का संचालन {name}, {address} द्वारा किया जाता है।",
 }

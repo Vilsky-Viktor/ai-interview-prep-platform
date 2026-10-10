@@ -1,6 +1,6 @@
 from html import escape
 
-from prepza_common.constants import DEFAULT_LANGUAGE, RTL_LANGUAGES
+from prepza_common.constants import DEFAULT_LANGUAGE, OPERATOR, RTL_LANGUAGES
 
 from app.constants.unsubscribe import SETTINGS_PATH, UnsubscribeType
 from app.constants.webhooks import CANDIDATE_INVITE_KIND, ID_TAG, KIND_TAG
@@ -68,6 +68,7 @@ def render(
         for heading, rows in sections
     ]
 
+    operator = texts["operator"].format(name=OPERATOR["name"], address=OPERATOR["address"])
     text = TEXT_LAYOUT.format(
         heading=template["heading"],
         lines="\n\n".join(line.format(**data) for line in template["lines"]),
@@ -80,6 +81,7 @@ def render(
         button=template["button"],
         link=link,
         footer=footer.format(**data),
+        operator=operator,
         links="\n"
         + "".join(
             TEXT_FOOTER_LINK.format(text=label.format(**data), url=url)
@@ -108,6 +110,7 @@ def render(
         button=template["button"],
         link=escape(link),
         footer=footer.format(**safe),
+        operator=escape(operator),
         links="<br>"
         + "".join(
             HTML_FOOTER_LINK.format(text=label.format(**safe), url=escape(url))

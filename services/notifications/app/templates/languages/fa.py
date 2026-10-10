@@ -173,4 +173,6 @@ TEXTS = {
     "email_settings": "تغییر تنظیمات ایمیل",
     "stop_reminders": "برای این مصاحبه یادآوری نفرستید",
     "stop_company": "از طرف {company} برایم ایمیل نفرستید",
+    # Who runs prepza, at the end of every email.
+    "operator": "prepza توسط {name}، {address} اداره می‌شود.",
 }

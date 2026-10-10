@@ -164,3 +164,13 @@ MAINTENANCE_OPEN_PATHS = {"/health", "/ready", "/maintenance", "/superadmin/main
 MAINTENANCE_OPEN_PREFIXES = ("/internal/", "/webhooks/")
 # Each instance reads the switch at most this often; turning it takes that long to reach them all.
 MAINTENANCE_CACHE_SECONDS = 5
+
+# The company that runs prepza, as the legal texts, the emails' footer and (mirrored in
+# frontend/constants/operator.ts) the site's footer and contact page name it.
+OPERATOR = {
+    "name": "Arcolabs OÜ",
+    "registry_code": "17587452",
+    "address": "Sepapaja tn 6, 15551 Tallinn, Harju maakond, Estonia",
+    # Questions, requests and the contact page's messages all go here.
+    "email": "hello@prepza.ai",
+}

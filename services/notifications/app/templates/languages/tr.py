@@ -180,4 +180,6 @@ TEXTS = {
     "email_settings": "E-posta ayarlarını değiştir",
     "stop_reminders": "Bu mülakat için bana hatırlatma gönderme",
     "stop_company": "{company} adına bana e-posta gönderme",
+    # Who runs prepza, at the end of every email.
+    "operator": "prepza, {name} tarafından işletilir, {address}.",
 }

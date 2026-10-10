@@ -191,4 +191,6 @@ TEXTS = {
     "email_settings": "Baguhin ang iyong mga setting sa email",
     "stop_reminders": "Huwag na akong padalhan ng paalala para sa interview na ito",
     "stop_company": "Huwag na akong padalhan ng email para sa {company}",
+    # Who runs prepza, at the end of every email.
+    "operator": "Ang prepza ay pinapatakbo ng {name}, {address}.",
 }

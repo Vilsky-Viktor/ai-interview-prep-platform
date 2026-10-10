@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server"
 
 import { ContactForm } from "@/components/contact-form"
+import { OPERATOR } from "@/constants/operator"
 import { pageMetadata } from "@/lib/site"
 
 export async function generateMetadata() {
@@ -19,6 +20,14 @@ export default async function ContactPage() {
           {t("title")}
         </h1>
         <p className="text-base text-muted-foreground">{t("intro")}</p>
+        <p className="text-sm text-muted-foreground">
+          {t("operator", {
+            name: OPERATOR.name,
+            code: OPERATOR.registryCode,
+            address: OPERATOR.address,
+            email: OPERATOR.email,
+          })}
+        </p>
       </header>
       <ContactForm />
     </main>

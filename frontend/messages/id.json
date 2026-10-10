@@ -981,7 +981,8 @@
     "send": "Kirim",
     "thanks": "Terima kasih!",
     "sent": "Pesanmu sudah terkirim. Kami akan membalas ke {email}.",
-    "failed": "Pesanmu tidak bisa dikirim. Coba lagi."
+    "failed": "Pesanmu tidak bisa dikirim. Coba lagi.",
+    "operator": "prepza dijalankan oleh {name}, nomor registrasi {code}, {address}. Email: {email}"
   },
   "about": {
     "title": "Tentang kami",

@@ -985,7 +985,8 @@
     "send": "Ipadala",
     "thanks": "Salamat!",
     "sent": "Papunta na sa amin ang mensahe mo. Sasagot kami sa {email}.",
-    "failed": "Hindi naipadala ang mensahe mo. Pakisubukan ulit."
+    "failed": "Hindi naipadala ang mensahe mo. Pakisubukan ulit.",
+    "operator": "Ang prepza ay pinapatakbo ng {name}, registry code {code}, {address}. Email: {email}"
   },
   "about": {
     "title": "Tungkol sa amin",

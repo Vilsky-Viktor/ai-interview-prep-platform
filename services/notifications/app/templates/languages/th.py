@@ -131,4 +131,6 @@ TEXTS = {
     "email_settings": "เปลี่ยนการตั้งค่าอีเมล",
     "stop_reminders": "ไม่ต้องส่งการแจ้งเตือนสำหรับการสัมภาษณ์นี้ถึงฉัน",
     "stop_company": "ไม่ต้องส่งอีเมลจาก {company} ถึงฉัน",
+    # Who runs prepza, at the end of every email.
+    "operator": "prepza ดำเนินการโดย {name} {address}",
 }

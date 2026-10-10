@@ -981,7 +981,8 @@
     "send": "Senden",
     "thanks": "Danke!",
     "sent": "Deine Nachricht ist unterwegs. Wir antworten an {email}.",
-    "failed": "Deine Nachricht konnte nicht gesendet werden. Bitte versuch es noch einmal."
+    "failed": "Deine Nachricht konnte nicht gesendet werden. Bitte versuch es noch einmal.",
+    "operator": "prepza wird von {name} betrieben, Registernummer {code}, {address}. E-Mail: {email}"
   },
   "about": {
     "title": "Über uns",

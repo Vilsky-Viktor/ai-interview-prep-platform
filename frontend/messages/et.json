@@ -985,7 +985,8 @@
     "send": "Saada",
     "thanks": "Aitäh!",
     "sent": "Sinu sõnum on teel. Vastame aadressile {email}.",
-    "failed": "Sõnumit ei õnnestunud saata. Proovi uuesti."
+    "failed": "Sõnumit ei õnnestunud saata. Proovi uuesti.",
+    "operator": "prepzat haldab {name}, registrikood {code}, {address}. E-post: {email}"
   },
   "about": {
     "title": "Meist",

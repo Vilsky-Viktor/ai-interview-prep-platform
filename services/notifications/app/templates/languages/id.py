@@ -180,4 +180,6 @@ TEXTS = {
     "email_settings": "Ubah pengaturan email",
     "stop_reminders": "Jangan kirimi saya pengingat untuk wawancara ini",
     "stop_company": "Jangan kirimi saya email dari {company}",
+    # Who runs prepza, at the end of every email.
+    "operator": "prepza dijalankan oleh {name}, {address}.",
 }

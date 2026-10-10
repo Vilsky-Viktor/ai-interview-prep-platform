@@ -181,4 +181,6 @@ TEXTS = {
     "email_settings": "Modifica le impostazioni email",
     "stop_reminders": "Non inviarmi promemoria per questo colloquio",
     "stop_company": "Non inviarmi email da parte di {company}",
+    # Who runs prepza, at the end of every email.
+    "operator": "prepza è gestita da {name}, {address}.",
 }

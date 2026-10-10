@@ -981,7 +981,8 @@
     "send": "Invia",
     "thanks": "Grazie!",
     "sent": "Il tuo messaggio è stato inviato. Ti risponderemo a {email}.",
-    "failed": "Impossibile inviare il messaggio. Riprova."
+    "failed": "Impossibile inviare il messaggio. Riprova.",
+    "operator": "prepza è gestita da {name}, numero di registro {code}, {address}. Email: {email}"
   },
   "about": {
     "title": "Chi siamo",

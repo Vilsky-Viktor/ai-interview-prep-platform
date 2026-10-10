@@ -133,4 +133,6 @@ TEXTS = {
     "email_settings": "メール設定を変更",
     "stop_reminders": "この面接のリマインダーを受け取らない",
     "stop_company": "{company}からのメールを受け取らない",
+    # Who runs prepza, at the end of every email.
+    "operator": "prepza は {name}（{address}）が運営しています。",
 }

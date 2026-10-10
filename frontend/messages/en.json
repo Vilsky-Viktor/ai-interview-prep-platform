@@ -981,7 +981,8 @@
     "send": "Send",
     "thanks": "Thanks!",
     "sent": "Your message is on its way. We'll reply to {email}.",
-    "failed": "Couldn't send your message. Please try again."
+    "failed": "Couldn't send your message. Please try again.",
+    "operator": "prepza is run by {name}, registry code {code}, {address}. Email: {email}"
   },
   "about": {
     "title": "About us",

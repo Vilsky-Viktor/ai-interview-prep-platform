@@ -9,6 +9,7 @@ import {
 import { AskAgentButton } from "@/components/landing/ask-agent-button"
 import { LocalizedLink } from "@/components/localized-link"
 import { FOOTER_COLUMNS } from "@/constants/navigation"
+import { OPERATOR } from "@/constants/operator"
 
 export async function SiteFooter() {
   const t = await getTranslations("nav")
@@ -18,9 +19,9 @@ export async function SiteFooter() {
       {/* On phones: everything centered in one column, with bigger icons, button and links. */}
       <div className="mx-auto flex max-w-5xl flex-wrap justify-between gap-8 px-6 py-8 text-sm text-muted-foreground max-sm:flex-col max-sm:items-center max-sm:gap-10 max-sm:py-12 max-sm:text-center">
         <div className="space-y-6 max-sm:flex max-sm:flex-col max-sm:items-center">
+          {/* The legal operator, as EU rules want it within reach of every page. */}
           <span className="block">
-            © {new Date().getFullYear()} prepza
-            <span className="text-primary">.</span>
+            © {new Date().getFullYear()} {OPERATOR.name}
           </span>
           {/* prepza's social accounts; links come once the accounts exist. */}
           <div className="flex items-center gap-5 max-sm:gap-8">

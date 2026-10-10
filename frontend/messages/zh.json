@@ -972,7 +972,8 @@
     "send": "发送",
     "thanks": "谢谢！",
     "sent": "你的留言已发出。我们会回复到 {email}。",
-    "failed": "留言发送失败，请重试。"
+    "failed": "留言发送失败，请重试。",
+    "operator": "prepza 由 {name} 运营，注册号 {code}，{address}。邮箱：{email}"
   },
   "about": {
     "title": "关于我们",

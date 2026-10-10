@@ -131,4 +131,6 @@ TEXTS = {
     "email_settings": "更改邮件设置",
     "stop_reminders": "不再给我发送此面试的提醒",
     "stop_company": "不再给我发送来自 {company} 的邮件",
+    # Who runs prepza, at the end of every email.
+    "operator": "prepza 由 {name}（{address}）运营。",
 }

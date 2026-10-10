@@ -8,6 +8,7 @@ import {
   softwareData,
   techArticleData,
 } from "@/lib/structured-data"
+import { OPERATOR } from "@/constants/operator"
 import type { Catalog } from "@/types/billing"
 
 const SITE = "https://prepza.example"
@@ -55,6 +56,14 @@ describe("organizationData", () => {
 
     expect(organization.name).toBe("prepza")
     expect(website.url).toBe(SITE)
+  })
+
+  it("names the legal operator, its address and email", () => {
+    const [organization] = organizationData(SITE, "Tests.")
+
+    expect(organization.legalName).toBe(OPERATOR.name)
+    expect(organization.address?.name).toBe(OPERATOR.address)
+    expect(organization.email).toBe(OPERATOR.email)
   })
 })
 

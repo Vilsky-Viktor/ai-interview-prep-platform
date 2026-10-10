@@ -136,4 +136,6 @@ TEXTS = {
     "email_settings": "이메일 설정 변경",
     "stop_reminders": "이 면접의 알림 받지 않기",
     "stop_company": "{company}의 이메일 받지 않기",
+    # Who runs prepza, at the end of every email.
+    "operator": "prepza는 {name}({address})이(가) 운영합니다.",
 }
