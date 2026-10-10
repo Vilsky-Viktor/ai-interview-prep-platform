@@ -172,7 +172,7 @@ What the emails do themselves: each has a plain-text part next to the HTML, `Aut
 
 ## Deploys
 
-- **Pull requests:** CI runs on every push, and a new push cancels the previous run. It tests and builds only what changed: ruff always; a changed service's unit tests and image; a changed frontend's lint, types, translations check, unit tests and image; and the smoke, integration and page tests on the whole stack when any part, the stack or its tests changed (see [Testing](../docs/testing.md#ci)).
+- **Pull requests:** CI runs on every push, and a new push cancels the previous run. It tests and builds only what changed: ruff always; Terraform's format and validation when `infra/terraform` changed; a changed service's unit tests and image; a changed frontend's lint, types, translations check, unit tests and image; and the smoke, integration and page tests on the whole stack when any part, the stack or its tests changed (see [Testing](../docs/testing.md#ci)).
 - **Merging to `main`:** the same CI runs again on the merged code, compared with the last commit it passed on, and pushes the 10 production images for `linux/amd64`, tagged with the commit: the changed ones are built, the others are that commit's images with the new tag added. Nothing is deployed.
 - **Releasing:** tag a commit on `main` that CI passed on, the last commit of a push, and push the tag:
   ```bash
