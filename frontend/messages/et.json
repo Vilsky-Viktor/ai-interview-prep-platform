@@ -445,6 +445,7 @@
     "createFailed": "Ettevõtet ei õnnestunud luua. Proovi uuesti.",
     "open": "Ava ettevõte",
     "join": "Liitu ettevõttega",
+    "signInToJoin": "Logi sisse, et liituda",
     "creditsLeft": "{count, plural, one {krediit} other {krediiti}}",
     "creditsLow": "Hakkavad otsa saama: kandidaatide kutsumise jätkamiseks laadi juurde.",
     "timeLeft": "Aega jäänud: {time}",
@@ -475,6 +476,8 @@
     "noNameHintPage": "Tuleb kandidaadi sisselogimisest või lisa see siin.",
     "deletedText": "Kandidaat kustutas oma konto ja koos sellega oma tulemused.",
     "notStarted": "Kandidaat pole veel alustanud.",
+    "inviteLinkTitle": "Kutse link",
+    "inviteLinkHint": "Saada see kandidaadile, kui e-kiri ei jõudnud kohale või läks kaotsi.",
     "pageLeaves": "{count, plural, one {# lehelt lahkumine} other {# lehelt lahkumist}}",
     "copies": "{count, plural, one {# kopeerimiskatse} other {# kopeerimiskatset}}",
     "fastAnswers": "{count, plural, one {# kiire vastus} other {# kiiret vastust}}",
@@ -1020,6 +1023,7 @@
       "interview_cancelled": "{title, select, none {Intervjuu} other {Intervjuu „{title}“}} tühistati: teemade ülevaatus ootas liiga kaua.",
       "verification_approved": "„{name}“ on kinnitatud domeeniga {domain}.",
       "verification_declined": "{reason, select, none {Ettevõtte „{name}“ kinnitamine lükati tagasi.} other {Ettevõtte „{name}“ kinnitamine lükati tagasi: {reason}}}",
+      "member_joined": "{email} liitus ettevõttega „{name}“ {role, select, admin {administraatorina} other {vaatajana}}.",
       "ats_not_invited": "{count, plural, one {{ats} keskkonnast tulnud {email} ei saanud kutset intervjuule „{title}“: {reason, select, credits {krediidid said otsa} limit {e-kirjade piirang sai täis} paused {kutsed on peatatud} other {midagi läks valesti}}.} other {# {ats} keskkonnast tulnud kandidaati ei saanud kutset intervjuule „{title}“.}}"
     }
   },

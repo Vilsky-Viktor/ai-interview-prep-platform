@@ -1,8 +1,13 @@
 from prepza_common.notifications import NotificationKind, Recipient, notification
 
-from app.constants.notifications import CANDIDATE_LINK, INTERVIEW_LINK, INTERVIEWS_LINK
+from app.constants.notifications import (
+    CANDIDATE_LINK,
+    INTERVIEW_LINK,
+    INTERVIEWS_LINK,
+    MEMBERS_LINK,
+)
 from app.constants.roles import EDITORS
-from app.models.companies import Company
+from app.models.companies import Company, Member
 from app.models.interviews import Interview
 
 
@@ -107,3 +112,17 @@ def verification_decided(company: Company, approved: bool, reason: str | None) -
         for member in company.members
         if member.user_id and member.role in EDITORS
     ]
+
+
+def member_joined(company: Company, member: Member, owner_id: str) -> dict:
+    """For the owner, who invited them: one per member, though accepting may be retried."""
+    return notification(
+        Recipient.USER,
+        owner_id,
+        NotificationKind.MEMBER_JOINED,
+        MEMBERS_LINK.format(company_id=company.id),
+        key=str(member.id),
+        email=member.invited_email,
+        name=company.name,
+        role=member.role,
+    )

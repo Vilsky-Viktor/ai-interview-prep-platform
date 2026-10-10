@@ -6,7 +6,7 @@ import { useEffect, useState } from "react"
 import { toast } from "sonner"
 
 import { useAuth } from "@/components/auth-provider"
-import { SignInPrompt } from "@/components/sign-in-prompt"
+import { useSignIn } from "@/components/sign-in-dialog"
 import { Button } from "@/components/ui/button"
 import { WarningCard } from "@/components/warning-card"
 import { ApiError, apiFetch } from "@/lib/api"
@@ -17,17 +17,20 @@ export function AdminInvite({ token }: { token: string }) {
   const share = useTranslations("share")
   const router = useRouter()
   const { user, loading } = useAuth()
+  const signIn = useSignIn()
   const [invite, setInvite] = useState<Invite | null>(null)
   const [missing, setMissing] = useState(false)
   const [accepting, setAccepting] = useState(false)
 
+  // Read signed in or not, so a visitor sees what the invitation is for before signing in;
+  // again after signing in, for whose it is.
   useEffect(() => {
-    if (user) {
+    if (!loading) {
       apiFetch<Invite>(`/companies/members/invites/${token}`)
         .then(setInvite)
         .catch(() => setMissing(true))
     }
-  }, [user, token])
+  }, [loading, user, token])
 
   async function accept() {
     if (!invite) {
@@ -46,10 +49,6 @@ export function AdminInvite({ token }: { token: string }) {
       toast.error(forbidden ? share("wrongEmail") : share("acceptFailed"))
       setAccepting(false)
     }
-  }
-
-  if (!loading && !user) {
-    return <SignInPrompt />
   }
 
   if (missing) {
@@ -76,7 +75,11 @@ export function AdminInvite({ token }: { token: string }) {
           {invite.company_name}
         </h1>
       </div>
-      {invite.joined && matches ? (
+      {!user ? (
+        <Button className="h-12 px-6 text-base" onClick={() => signIn()}>
+          {t("signInToJoin")}
+        </Button>
+      ) : invite.joined && matches ? (
         <Button
           className="h-12 px-6 text-base"
           onClick={() => router.push("/companies")}
@@ -93,7 +96,9 @@ export function AdminInvite({ token }: { token: string }) {
         </Button>
       ) : (
         // Signed in with another email: a warning, in the warning card.
-        <WarningCard className="text-start">{share("mismatch")}</WarningCard>
+        <WarningCard className="mx-auto w-fit text-start">
+          {share("mismatch")}
+        </WarningCard>
       )}
     </div>
   )

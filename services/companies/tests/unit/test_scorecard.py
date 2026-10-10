@@ -67,7 +67,7 @@ def tracked(monkeypatch):
     return events
 
 
-def open_scorecard(client, monkeypatch, headers=None):
+def open_scorecard(client, monkeypatch, headers=None, status=InviteStatus.FINISHED, role="owner"):
     sign_in()
     fake_candidates.add(
         CandidateInvite(
@@ -76,7 +76,7 @@ def open_scorecard(client, monkeypatch, headers=None):
             email="ann@example.com",
             name="Ann Lee",
             token="token-ann",
-            status=InviteStatus.FINISHED,
+            status=status,
             extra_time=0,
             created_at=datetime.now(UTC),
         )
@@ -91,7 +91,7 @@ def open_scorecard(client, monkeypatch, headers=None):
     )
     company = Company(id=COMPANY_ID, name="Arcolabs", created_at=datetime.now(UTC))
     company.members = [
-        Member(company_id=COMPANY_ID, user_id="bob", invited_email="bob@example.com", role="owner")
+        Member(company_id=COMPANY_ID, user_id="bob", invited_email="bob@example.com", role=role)
     ]
 
     async def fake_interview(_interview_id):
@@ -100,11 +100,13 @@ def open_scorecard(client, monkeypatch, headers=None):
     async def fake_company(_company_id):
         return company
 
+    started = status == InviteStatus.FINISHED
+
     async def fake_scorecard(_invite_id):
-        return [SECTION]
+        return [SECTION] if started else []
 
     async def fake_scores(_invite_ids):
-        return {str(INVITE_ID): {"progress": 100, "grade": 80, "finished": True}}
+        return {str(INVITE_ID): {"progress": 100, "grade": 80, "finished": True}} if started else {}
 
     monkeypatch.setattr(interviews, "get", fake_interview)
     monkeypatch.setattr(companies, "get", fake_company)
@@ -127,6 +129,27 @@ def test_the_scorecard_carries_the_overall_result_for_the_pdf(client, monkeypatc
     )
     assert card["sessions"] == [{**SECTION, "passed": True}]
     assert card["name"] == "Ann Lee"
+
+
+@pytest.mark.parametrize(
+    ("status", "role", "token"),
+    [
+        (InviteStatus.INVITED, "owner", "token-ann"),
+        (InviteStatus.UNDELIVERED, "admin", "token-ann"),
+        (InviteStatus.IN_PROCESS, "owner", "token-ann"),
+        # The link no longer works, or the interview is over.
+        (InviteStatus.EXPIRED, "owner", None),
+        (InviteStatus.FINISHED, "owner", None),
+        # A viewer doesn't send invites.
+        (InviteStatus.INVITED, "viewer", None),
+    ],
+)
+def test_the_invite_link_is_there_to_copy_until_the_candidate_finishes(
+    client, monkeypatch, tracked, status, role, token
+):
+    card = open_scorecard(client, monkeypatch, status=status, role=role).json()
+
+    assert card["invite_token"] == token
 
 
 def test_viewing_a_finished_candidates_results_is_recorded(client, monkeypatch, audited, tracked):

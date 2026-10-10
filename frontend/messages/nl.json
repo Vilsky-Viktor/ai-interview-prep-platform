@@ -445,6 +445,7 @@
     "createFailed": "Het bedrijf kon niet worden aangemaakt. Probeer het opnieuw.",
     "open": "Bedrijf openen",
     "join": "Lid worden van het bedrijf",
+    "signInToJoin": "Log in om lid te worden",
     "creditsLeft": "{count, plural, one {credit} other {credits}}",
     "creditsLow": "Bijna op: waardeer op om kandidaten te blijven uitnodigen.",
     "timeLeft": "Resterende tijd: {time}",
@@ -475,6 +476,8 @@
     "noNameHintPage": "Komt uit de aanmelding van de kandidaat, of vul de naam hier in.",
     "deletedText": "De kandidaat heeft het account verwijderd, en daarmee de resultaten.",
     "notStarted": "De kandidaat is nog niet begonnen.",
+    "inviteLinkTitle": "Uitnodigingslink",
+    "inviteLinkHint": "Stuur hem naar de kandidaat als de e-mail niet is aangekomen of kwijt is.",
     "pageLeaves": "{count, plural, one {# keer pagina verlaten} other {# keer pagina verlaten}}",
     "copies": "{count, plural, one {# kopieerpoging} other {# kopieerpogingen}}",
     "fastAnswers": "{count, plural, one {# snel antwoord} other {# snelle antwoorden}}",
@@ -1012,6 +1015,7 @@
       "interview_cancelled": "{title, select, none {Een interview} other {Het interview “{title}”}} is geannuleerd: de controle van de onderwerpen bleef te lang liggen.",
       "verification_approved": "“{name}” is geverifieerd voor {domain}.",
       "verification_declined": "{reason, select, none {De verificatie van “{name}” is afgewezen.} other {De verificatie van “{name}” is afgewezen: {reason}}}",
+      "member_joined": "{email} is lid geworden van “{name}” als {role, select, admin {beheerder} other {kijker}}.",
       "ats_not_invited": "{count, plural, one {{email} uit {ats} is niet uitgenodigd voor “{title}”: {reason, select, credits {credits op} limit {een e-maillimiet is bereikt} paused {uitnodigingen zijn gepauzeerd} other {er ging iets mis}}.} other {# kandidaten uit {ats} zijn niet uitgenodigd voor “{title}”.}}"
     }
   },

@@ -445,6 +445,7 @@
     "createFailed": "无法创建公司，请重试。",
     "open": "打开公司",
     "join": "加入公司",
+    "signInToJoin": "登录后加入",
     "creditsLeft": "{count, plural, other {点数}}",
     "creditsLow": "即将用完：充值后才能继续邀请候选人。",
     "timeLeft": "剩余时间：{time}",
@@ -475,6 +476,8 @@
     "noNameHintPage": "来自候选人的登录信息，也可在此添加。",
     "deletedText": "候选人已删除账户，其结果也随之删除。",
     "notStarted": "候选人尚未开始。",
+    "inviteLinkTitle": "邀请链接",
+    "inviteLinkHint": "如果候选人没有收到邮件或邮件丢失，请把这个链接发给对方。",
     "pageLeaves": "{count, plural, other {离开页面 # 次}}",
     "copies": "{count, plural, other {尝试复制 # 次}}",
     "fastAnswers": "{count, plural, other {过快作答 # 次}}",
@@ -1007,6 +1010,7 @@
       "interview_cancelled": "{title, select, none {一场面试} other {面试“{title}”}}已取消：主题审核等待时间过长。",
       "verification_approved": "“{name}”已通过 {domain} 验证。",
       "verification_declined": "{reason, select, none {“{name}”的验证已被拒绝。} other {“{name}”的验证已被拒绝：{reason}}}",
+      "member_joined": "{email} 已作为{role, select, admin {管理员} other {查看者}}加入“{name}”。",
       "ats_not_invited": "{count, plural, =1 {来自 {ats} 的 {email} 未被邀请参加“{title}”：{reason, select, credits {点数不足} limit {已达到邮件发送上限} paused {邀请已暂停} other {出了点问题}}。} other {来自 {ats} 的 # 位候选人未被邀请参加“{title}”。}}"
     }
   },

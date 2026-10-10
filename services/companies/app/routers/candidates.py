@@ -190,6 +190,13 @@ async def candidate_scorecard(
         extra_time_options=(
             list(EXTRA_TIME_OPTIONS) if invite.status in NOT_STARTED and can_edit(member) else []
         ),
+        invite_token=(
+            invite.token
+            if invite.status
+            in (InviteStatus.INVITED, InviteStatus.UNDELIVERED, InviteStatus.IN_PROCESS)
+            and can_edit(member)
+            else None
+        ),
         title=await interview_title(interview),
         company=company.name,
         logo_url=logo_path(company),

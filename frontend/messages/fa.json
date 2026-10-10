@@ -445,6 +445,7 @@
     "createFailed": "ساختن شرکت ممکن نشد. دوباره امتحان کنید.",
     "open": "باز کردن شرکت",
     "join": "پیوستن به شرکت",
+    "signInToJoin": "برای پیوستن وارد شوید",
     "creditsLeft": "{count, plural, one {اعتبار} other {اعتبار}}",
     "creditsLow": "رو به اتمام: برای ادامه دعوت از متقاضیان شارژ کنید.",
     "timeLeft": "زمان باقی‌مانده: {time}",
@@ -475,6 +476,8 @@
     "noNameHintPage": "از ورود متقاضی گرفته می‌شود، یا همین‌جا اضافه کنید.",
     "deletedText": "متقاضی حساب خود را و همراه آن نتایجش را حذف کرد.",
     "notStarted": "متقاضی هنوز شروع نکرده است.",
+    "inviteLinkTitle": "پیوند دعوت",
+    "inviteLinkHint": "اگر ایمیل به متقاضی نرسید یا گم شد، این پیوند را برایش بفرستید.",
     "pageLeaves": "{count, plural, one {# بار ترک صفحه} other {# بار ترک صفحه}}",
     "copies": "{count, plural, one {# تلاش برای کپی} other {# تلاش برای کپی}}",
     "fastAnswers": "{count, plural, one {# پاسخ سریع} other {# پاسخ سریع}}",
@@ -1012,6 +1015,7 @@
       "interview_cancelled": "{title, select, none {یک مصاحبه} other {مصاحبه «{title}»}} لغو شد: بررسی موضوع‌هایش بیش از حد منتظر ماند.",
       "verification_approved": "«{name}» برای {domain} تأیید شد.",
       "verification_declined": "{reason, select, none {تأیید «{name}» رد شد.} other {تأیید «{name}» رد شد: {reason}}}",
+      "member_joined": "{email} با نقش {role, select, admin {مدیر} other {بیننده}} به «{name}» پیوست.",
       "ats_not_invited": "{count, plural, one {{email} از {ats} به «{title}» دعوت نشد: {reason, select, credits {اعتبار تمام شده است} limit {سقف ایمیل پر شده است} paused {دعوت‌ها متوقف شده‌اند} other {مشکلی پیش آمد}}.} other {# متقاضی از {ats} به «{title}» دعوت نشدند.}}"
     }
   },

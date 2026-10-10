@@ -1,9 +1,12 @@
 import secrets
 
 from prepza_common import outbox
+from prepza_common.notifications import NOTIFICATION_REQUESTED
 from sqlalchemy import delete, select, update
 
 from app.constants.events import MEMBER_INVITED
+from app.constants.roles import Role
+from app.helpers.notifications import member_joined
 from app.models.companies import Company, Member
 from app.models.outbox import OutboxEvent
 from app.storage.db import Session
@@ -45,15 +48,26 @@ async def get_by_token(token: str) -> tuple[Member, Company] | None:
         return tuple(row) if row else None
 
 
-async def accept(member: Member, user_id: str) -> None:
+async def accept(member: Member, company: Company, user_id: str) -> None:
+    """Joins the member, and tells the owner in the bell, in the same transaction."""
     async with Session() as session:
         row = await session.get(Member, member.id)
+        joining = row.user_id is None
 
-        if row.user_id is None:
+        if joining:
             row.user_id = user_id
 
         # The link works once: a joined member no longer needs it.
         row.token = None
+
+        owner_id = await session.scalar(
+            select(Member.user_id).where(Member.company_id == company.id, Member.role == Role.OWNER)
+        )
+
+        if joining and owner_id:
+            outbox.add(
+                session, OutboxEvent, NOTIFICATION_REQUESTED, member_joined(company, row, owner_id)
+            )
 
         await session.commit()
 

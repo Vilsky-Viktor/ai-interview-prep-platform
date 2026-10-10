@@ -445,6 +445,7 @@
     "createFailed": "تعذّر إنشاء الشركة. حاول مرة أخرى.",
     "open": "فتح الشركة",
     "join": "الانضمام إلى الشركة",
+    "signInToJoin": "سجّل الدخول للانضمام",
     "creditsLeft": "{count, plural, zero {رصيد} one {رصيد} two {رصيد} few {أرصدة} many {رصيدًا} other {رصيد}}",
     "creditsLow": "الرصيد يوشك على النفاد: اشحن رصيدك لمواصلة دعوة المرشحين.",
     "timeLeft": "الوقت المتبقي: {time}",
@@ -475,6 +476,8 @@
     "noNameHintPage": "يأتي من تسجيل دخول المرشح، أو أضفه هنا.",
     "deletedText": "حذف المرشح حسابه، ومعه نتائجه.",
     "notStarted": "لم يبدأ المرشح بعد.",
+    "inviteLinkTitle": "رابط الدعوة",
+    "inviteLinkHint": "أرسله إلى المرشح إذا لم يصله البريد الإلكتروني أو ضاع.",
     "pageLeaves": "{count, plural, zero {لا مغادرات للصفحة} one {مغادرة واحدة للصفحة} two {مغادرتان للصفحة} few {# مغادرات للصفحة} many {# مغادرةً للصفحة} other {# مغادرة للصفحة}}",
     "copies": "{count, plural, zero {لا محاولات نسخ} one {محاولة نسخ واحدة} two {محاولتا نسخ} few {# محاولات نسخ} many {# محاولةَ نسخ} other {# محاولة نسخ}}",
     "fastAnswers": "{count, plural, zero {لا إجابات سريعة} one {إجابة سريعة واحدة} two {إجابتان سريعتان} few {# إجابات سريعة} many {# إجابةً سريعة} other {# إجابة سريعة}}",
@@ -1012,6 +1015,7 @@
       "interview_cancelled": "{title, select, none {أُلغيت مقابلة} other {أُلغيت المقابلة «{title}»}}: انتظرت مراجعة مواضيعها طويلًا.",
       "verification_approved": "تم توثيق «{name}» للنطاق {domain}.",
       "verification_declined": "{reason, select, none {تم رفض توثيق «{name}».} other {تم رفض توثيق «{name}»: {reason}}}",
+      "member_joined": "عضو جديد في فريق «{name}»: {email} ({role, select, admin {مسؤول} other {مشاهد}}).",
       "ats_not_invited": "{count, plural, one {لم تتم دعوة {email} من {ats} إلى «{title}»: {reason, select, credits {نفد الرصيد} limit {تم بلوغ حد الرسائل} paused {الدعوات متوقفة مؤقتًا} other {حدث خطأ ما}}.} zero {لم تتم دعوة # مرشح من {ats} إلى «{title}».} two {لم تتم دعوة مرشحَين من {ats} إلى «{title}».} few {لم تتم دعوة # مرشحين من {ats} إلى «{title}».} many {لم تتم دعوة # مرشحًا من {ats} إلى «{title}».} other {لم تتم دعوة # مرشح من {ats} إلى «{title}».}}"
     }
   },

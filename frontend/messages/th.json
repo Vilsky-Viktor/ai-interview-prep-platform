@@ -445,6 +445,7 @@
     "createFailed": "สร้างบริษัทไม่สำเร็จ โปรดลองอีกครั้ง",
     "open": "เปิดบริษัท",
     "join": "เข้าร่วมบริษัท",
+    "signInToJoin": "ลงชื่อเข้าใช้เพื่อเข้าร่วม",
     "creditsLeft": "{count, plural, other {เครดิต}}",
     "creditsLow": "ใกล้หมดแล้ว: เติมเครดิตเพื่อเชิญผู้สมัครต่อ",
     "timeLeft": "เวลาที่เหลือ: {time}",
@@ -475,6 +476,8 @@
     "noNameHintPage": "ได้จากการลงชื่อเข้าใช้ของผู้สมัคร หรือเพิ่มเองที่นี่",
     "deletedText": "ผู้สมัครลบบัญชีแล้ว ผลลัพธ์จึงถูกลบไปด้วย",
     "notStarted": "ผู้สมัครยังไม่ได้เริ่ม",
+    "inviteLinkTitle": "ลิงก์คำเชิญ",
+    "inviteLinkHint": "ส่งลิงก์นี้ให้ผู้สมัครหากอีเมลไปไม่ถึงหรือหายไป",
     "pageLeaves": "{count, plural, other {ออกจากหน้า # ครั้ง}}",
     "copies": "{count, plural, other {พยายามคัดลอก # ครั้ง}}",
     "fastAnswers": "{count, plural, other {ตอบเร็วเกินไป # ครั้ง}}",
@@ -1011,6 +1014,7 @@
       "interview_cancelled": "{title, select, none {การสัมภาษณ์} other {การสัมภาษณ์ “{title}”}} ถูกยกเลิก เพราะรอการตรวจหัวข้อนานเกินไป",
       "verification_approved": "“{name}” ได้รับการยืนยันสำหรับ {domain} แล้ว",
       "verification_declined": "{reason, select, none {การยืนยัน “{name}” ถูกปฏิเสธ} other {การยืนยัน “{name}” ถูกปฏิเสธ: {reason}}}",
+      "member_joined": "{email} เข้าร่วม “{name}” ในฐานะ{role, select, admin {ผู้ดูแล} other {ผู้ดู}}แล้ว",
       "ats_not_invited": "{count, plural, =1 {ไม่ได้เชิญ {email} จาก {ats} เข้า “{title}”: {reason, select, credits {เครดิตหมด} limit {ถึงขีดจำกัดการส่งอีเมลแล้ว} paused {การเชิญหยุดชั่วคราวอยู่} other {เกิดข้อผิดพลาด}}} other {ไม่ได้เชิญผู้สมัคร # คนจาก {ats} เข้า “{title}”}}"
     }
   },

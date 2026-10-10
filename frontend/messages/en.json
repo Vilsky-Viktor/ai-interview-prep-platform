@@ -445,6 +445,7 @@
     "createFailed": "Couldn't create the company. Please try again.",
     "open": "Open company",
     "join": "Join company",
+    "signInToJoin": "Sign in to join",
     "creditsLeft": "{count, plural, one {credit} other {credits}}",
     "creditsLow": "Running low: top up to keep inviting candidates.",
     "timeLeft": "Time left: {time}",
@@ -475,6 +476,8 @@
     "noNameHintPage": "Comes from the candidate's sign-in, or add it here.",
     "deletedText": "The candidate deleted their account, and their results with it.",
     "notStarted": "The candidate has not started yet.",
+    "inviteLinkTitle": "Invite link",
+    "inviteLinkHint": "Send it to the candidate if the email didn't arrive or got lost.",
     "pageLeaves": "{count, plural, one {# page leave} other {# page leaves}}",
     "copies": "{count, plural, one {# copy attempt} other {# copy attempts}}",
     "fastAnswers": "{count, plural, one {# fast answer} other {# fast answers}}",
@@ -1016,6 +1019,7 @@
       "interview_cancelled": "{title, select, none {An interview} other {The interview “{title}”}} was cancelled: its topic review waited too long.",
       "verification_approved": "“{name}” is verified for {domain}.",
       "verification_declined": "{reason, select, none {Verification of “{name}” was declined.} other {Verification of “{name}” was declined: {reason}}}",
+      "member_joined": "{email} joined “{name}” as {role, select, admin {an admin} other {a viewer}}.",
       "ats_not_invited": "{count, plural, one {{email} from {ats} wasn't invited to “{title}”: {reason, select, credits {out of credits} limit {an email limit was reached} paused {invites are paused} other {something went wrong}}.} other {# candidates from {ats} weren't invited to “{title}”.}}"
     }
   },

@@ -445,6 +445,7 @@
     "createFailed": "Das Unternehmen konnte nicht erstellt werden. Bitte versuche es erneut.",
     "open": "Unternehmen öffnen",
     "join": "Unternehmen beitreten",
+    "signInToJoin": "Anmelden und beitreten",
     "creditsLeft": "{count, plural, one {Credit} other {Credits}}",
     "creditsLow": "Bald aufgebraucht: Lade auf, um weiter Kandidaten einzuladen.",
     "timeLeft": "Verbleibende Zeit: {time}",
@@ -475,6 +476,8 @@
     "noNameHintPage": "Kommt aus der Anmeldung des Kandidaten – oder hier eintragen.",
     "deletedText": "Der Kandidat hat sein Konto und damit seine Ergebnisse gelöscht.",
     "notStarted": "Der Kandidat hat noch nicht begonnen.",
+    "inviteLinkTitle": "Einladungslink",
+    "inviteLinkHint": "Schick ihn der Kandidatin oder dem Kandidaten, falls die E-Mail nicht angekommen oder verloren gegangen ist.",
     "pageLeaves": "{count, plural, one {# Seitenwechsel} other {# Seitenwechsel}}",
     "copies": "{count, plural, one {# Kopierversuch} other {# Kopierversuche}}",
     "fastAnswers": "{count, plural, one {# schnelle Antwort} other {# schnelle Antworten}}",
@@ -1016,6 +1019,7 @@
       "interview_cancelled": "{title, select, none {Ein Interview} other {Das Interview „{title}“}} wurde abgebrochen: Die Themen wurden zu lange nicht freigegeben.",
       "verification_approved": "„{name}“ ist für {domain} verifiziert.",
       "verification_declined": "{reason, select, none {Die Verifizierung von „{name}“ wurde abgelehnt.} other {Die Verifizierung von „{name}“ wurde abgelehnt: {reason}}}",
+      "member_joined": "{email} ist „{name}“ als {role, select, admin {Admin} other {Betrachter}} beigetreten.",
       "ats_not_invited": "{count, plural, one {{email} aus {ats} wurde nicht zu „{title}“ eingeladen: {reason, select, credits {keine Credits mehr} limit {ein E-Mail-Limit wurde erreicht} paused {Einladungen sind pausiert} other {etwas ist schiefgelaufen}}.} other {# Kandidaten aus {ats} wurden nicht zu „{title}“ eingeladen.}}"
     }
   },

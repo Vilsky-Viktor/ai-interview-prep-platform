@@ -445,6 +445,7 @@
     "createFailed": "Impossible de créer l'entreprise. Veuillez réessayer.",
     "open": "Ouvrir l'entreprise",
     "join": "Rejoindre l'entreprise",
+    "signInToJoin": "Se connecter pour rejoindre",
     "creditsLeft": "{count, plural, one {crédit} other {crédits}}",
     "creditsLow": "Bientôt épuisés : rechargez pour continuer à inviter des candidats.",
     "timeLeft": "Temps restant : {time}",
@@ -475,6 +476,8 @@
     "noNameHintPage": "Provient de la connexion du candidat, ou ajoutez-le ici.",
     "deletedText": "Le candidat a supprimé son compte, et ses résultats avec.",
     "notStarted": "Le candidat n'a pas encore commencé.",
+    "inviteLinkTitle": "Lien d'invitation",
+    "inviteLinkHint": "Envoyez-le au candidat si l'e-mail n'est pas arrivé ou s'est perdu.",
     "pageLeaves": "{count, plural, one {# sortie de la page} other {# sorties de la page}}",
     "copies": "{count, plural, one {# tentative de copie} other {# tentatives de copie}}",
     "fastAnswers": "{count, plural, one {# réponse rapide} other {# réponses rapides}}",
@@ -1016,6 +1019,7 @@
       "interview_cancelled": "{title, select, none {Un entretien} other {L'entretien « {title} »}} a été annulé : la validation de ses thèmes a trop attendu.",
       "verification_approved": "« {name} » est vérifiée pour {domain}.",
       "verification_declined": "{reason, select, none {La vérification de « {name} » a été refusée.} other {La vérification de « {name} » a été refusée : {reason}}}",
+      "member_joined": "{email} a rejoint « {name} » en tant que {role, select, admin {admin} other {lecteur}}.",
       "ats_not_invited": "{count, plural, one {{email} venant de {ats} n'a pas été invité à « {title} » : {reason, select, credits {crédits épuisés} limit {une limite d'e-mails a été atteinte} paused {les invitations sont en pause} other {une erreur s'est produite}}.} other {# candidats venant de {ats} n'ont pas été invités à « {title} ».}}"
     }
   },

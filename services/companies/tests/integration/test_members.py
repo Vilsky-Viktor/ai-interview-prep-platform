@@ -13,7 +13,7 @@ def test_an_accepted_invite_link_stops_working_and_a_removed_admin_is_gone(run):
         company = await companies.create(f"Members {uuid.uuid4()}", "ann", "ann@example.com")
         bob = await members.add(company.id, "bob@example.com", "admin", {})
         cid = await members.add(company.id, "cid@example.com", "admin", {})
-        await members.accept(bob, "bob")
+        await members.accept(bob, company, "bob")
         reused = await members.get_by_token(bob.token)
         await members.remove(cid.id)
         left = await members.list_for_company(company.id, 0, 10)
@@ -37,7 +37,7 @@ def test_a_viewer_keeps_their_role_on_joining_and_the_owner_changes_it(run):
         company = await companies.create(f"Viewers {uuid.uuid4()}", "ann", "ann@example.com")
         bob = await members.add(company.id, "bob@example.com", "viewer", {})
         # An id of its own: other tests' companies have a "bob" too.
-        await members.accept(bob, uid)
+        await members.accept(bob, company, uid)
         joined = await members.list_for_company(company.id, 0, 10)
         top_up_before = await companies.list_for_user(uid, 0, 10, EDITORS)
         await members.set_role(bob.id, "admin")
@@ -79,4 +79,41 @@ def test_an_invite_saves_its_email_with_the_join_link(run):
 
     assert sent == [
         {"company": "Acme", "email": "dan@example.com", "token": dan.token, "role": "viewer"}
+    ]
+
+
+def test_the_owner_hears_once_that_a_member_joined(run):
+    async def scenario():
+        company = await companies.create(f"Joined {uuid.uuid4()}", "ann", "ann@example.com")
+        dan = await members.add(company.id, "dan@example.com", "viewer", {})
+        await members.accept(dan, company, "dan")
+        # Accepting again (a retried request) changes nothing.
+        await members.accept(dan, company, "dan")
+
+        async with Session() as session:
+            sent = list(
+                await session.scalars(
+                    select(OutboxEvent.data).where(
+                        OutboxEvent.event_type == "notification.requested",
+                        OutboxEvent.data["kind"].astext == "member_joined",
+                        OutboxEvent.data["link"].astext == f"/companies/{company.id}/members",
+                    )
+                )
+            )
+
+        await companies.delete(company.id)
+
+        return company, dan, sent
+
+    company, dan, sent = run(scenario())
+
+    assert sent == [
+        {
+            "recipient": "user",
+            "recipient_id": "ann",
+            "kind": "member_joined",
+            "link": f"/companies/{company.id}/members",
+            "data": {"email": "dan@example.com", "name": company.name, "role": "viewer"},
+            "key": f"member_joined:{dan.id}",
+        }
     ]

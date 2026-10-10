@@ -445,6 +445,7 @@
     "createFailed": "Hindi magawa ang kumpanya. Pakisubukang muli.",
     "open": "Buksan ang kumpanya",
     "join": "Sumali sa kumpanya",
+    "signInToJoin": "Mag-sign in para sumali",
     "creditsLeft": "{count, plural, one {credit} other {credits}}",
     "creditsLow": "Paubos na: mag-top up para patuloy na makapag-imbita ng aplikante.",
     "timeLeft": "Natitirang oras: {time}",
@@ -475,6 +476,8 @@
     "noNameHintPage": "Galing sa sign-in ng aplikante, o idagdag dito.",
     "deletedText": "Binura ng aplikante ang kanyang account, pati ang mga resulta.",
     "notStarted": "Hindi pa nagsisimula ang aplikante.",
+    "inviteLinkTitle": "Link ng imbitasyon",
+    "inviteLinkHint": "Ipadala ito sa kandidato kung hindi dumating o nawala ang email.",
     "pageLeaves": "{count, plural, one {# beses umalis sa page} other {# beses umalis sa page}}",
     "copies": "{count, plural, one {# pagtatangkang kumopya} other {# pagtatangkang kumopya}}",
     "fastAnswers": "{count, plural, one {# mabilis na sagot} other {# mabilis na sagot}}",
@@ -1020,6 +1023,7 @@
       "interview_cancelled": "{title, select, none {Kinansela ang isang interview} other {Kinansela ang interview na “{title}”}}: masyadong natagal ang paghihintay sa review ng mga topic.",
       "verification_approved": "Verified na ang “{name}” para sa {domain}.",
       "verification_declined": "{reason, select, none {Tinanggihan ang verification ng “{name}”.} other {Tinanggihan ang verification ng “{name}”: {reason}}}",
+      "member_joined": "Sumali si {email} sa “{name}” bilang {role, select, admin {admin} other {viewer}}.",
       "ats_not_invited": "{count, plural, =1 {Hindi naimbitahan sa “{title}” si {email} mula sa {ats}: {reason, select, credits {ubos na ang credits} limit {naabot ang email limit} paused {naka-pause ang mga imbitasyon} other {nagkaproblema}}.} other {Hindi naimbitahan sa “{title}” ang # aplikante mula sa {ats}.}}"
     }
   },

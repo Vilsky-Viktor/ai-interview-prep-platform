@@ -159,3 +159,26 @@ test("an invitation asks a visitor to sign in, and warns another email", async (
   ).toHaveCount(0);
   await shot(other, "invite-other-email");
 });
+
+// Until the candidate starts, their page has the invite link to copy, in case the email didn't
+// reach them.
+test("a candidate's page has their invite link to copy", async ({
+  signInAs,
+}) => {
+  const owner = await signInAs(ownerEmail());
+  const company = await createCompany(owner);
+  const interviewId = await createInterview(owner, company.id);
+  const email = throwawayEmail("candidate");
+  await inviteCandidate(owner, interviewId, email);
+
+  await visit(
+    owner,
+    `/companies/${company.id}/interviews/${interviewId}?tab=candidates`,
+  );
+  await owner.getByText(email, { exact: true }).first().click();
+  await expect(owner.getByText("Invite link", { exact: true })).toBeVisible();
+  await expect(owner.getByRole("textbox", { name: "Copy link" })).toHaveValue(
+    new RegExp(`/invite/${await inviteToken(email)}$`),
+  );
+  await shot(owner, "candidate-invite-link");
+});

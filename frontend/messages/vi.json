@@ -445,6 +445,7 @@
     "createFailed": "Không thể tạo công ty. Vui lòng thử lại.",
     "open": "Mở công ty",
     "join": "Tham gia công ty",
+    "signInToJoin": "Đăng nhập để tham gia",
     "creditsLeft": "{count, plural, other {credit}}",
     "creditsLow": "Sắp hết: hãy nạp thêm để tiếp tục mời ứng viên.",
     "timeLeft": "Thời gian còn lại: {time}",
@@ -475,6 +476,8 @@
     "noNameHintPage": "Lấy từ lần đăng nhập của ứng viên, hoặc thêm tại đây.",
     "deletedText": "Ứng viên đã xóa tài khoản, kéo theo cả kết quả.",
     "notStarted": "Ứng viên chưa bắt đầu.",
+    "inviteLinkTitle": "Liên kết lời mời",
+    "inviteLinkHint": "Gửi liên kết này cho ứng viên nếu email không đến hoặc bị thất lạc.",
     "pageLeaves": "{count, plural, other {# lần rời trang}}",
     "copies": "{count, plural, other {# lần thử sao chép}}",
     "fastAnswers": "{count, plural, other {# câu trả lời quá nhanh}}",
@@ -1012,6 +1015,7 @@
       "interview_cancelled": "{title, select, none {Một buổi phỏng vấn} other {Buổi phỏng vấn “{title}”}} đã bị hủy: phần xem xét chủ đề phải chờ quá lâu.",
       "verification_approved": "“{name}” đã được xác minh cho {domain}.",
       "verification_declined": "{reason, select, none {Yêu cầu xác minh “{name}” đã bị từ chối.} other {Yêu cầu xác minh “{name}” đã bị từ chối: {reason}}}",
+      "member_joined": "{email} đã tham gia “{name}” với vai trò {role, select, admin {quản trị viên} other {người xem}}.",
       "ats_not_invited": "{count, plural, =1 {{email} từ {ats} chưa được mời vào “{title}”: {reason, select, credits {hết credit} limit {đã chạm giới hạn email} paused {việc gửi lời mời đang tạm dừng} other {đã xảy ra lỗi}}.} other {# ứng viên từ {ats} chưa được mời vào “{title}”.}}"
     }
   },

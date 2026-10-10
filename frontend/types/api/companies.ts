@@ -175,7 +175,8 @@ export interface paths {
     put?: never
     /**
      * Invite Member
-     * @description The owner invites an admin or a viewer; the role applies once the invite is accepted.
+     * @description The owner invites an admin or a viewer, who is emailed the join link; the role applies
+     *     once the invite is accepted.
      */
     post: operations["invite_member_members_post"]
     delete?: never
@@ -233,7 +234,11 @@ export interface paths {
       path?: never
       cookie?: never
     }
-    /** Get Admin Invite */
+    /**
+     * Get Admin Invite
+     * @description Open to visitors, so they see what they're invited to before signing in; the invited
+     *     email only once signed in, so a visitor with the link doesn't learn it.
+     */
     get: operations["get_admin_invite_members_invites__token__get"]
     put?: never
     post?: never
@@ -1541,7 +1546,7 @@ export interface components {
       /** Company Name */
       company_name: string
       /** Email */
-      email: string
+      email?: string | null
       /** Joined */
       joined: boolean
     }
@@ -2528,6 +2533,8 @@ export interface components {
       can_edit: boolean
       /** Extra Time Options */
       extra_time_options: number[]
+      /** Invite Token */
+      invite_token?: string | null
       /** Title */
       title: string | null
       /** Company */

@@ -72,6 +72,8 @@ export type Scorecard = {
   extra_time_options: number[]
   // Whether the user may resend, revoke or delete the candidate: owners and admins.
   can_edit: boolean
+  // The invite link's token while the candidate hasn't started and it works; null otherwise.
+  invite_token: string | null
   // For the PDF report: the test, the company and the overall result.
   title: string | null
   company: string

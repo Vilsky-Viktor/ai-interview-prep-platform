@@ -445,6 +445,7 @@
     "createFailed": "לא ניתן ליצור את החברה. נסו שוב.",
     "open": "פתיחת החברה",
     "join": "הצטרפות לחברה",
+    "signInToJoin": "התחברות כדי להצטרף",
     "creditsLeft": "{count, plural, one {קרדיט} two {קרדיטים} other {קרדיטים}}",
     "creditsLow": "הקרדיטים עומדים להיגמר: טענו כדי להמשיך להזמין מועמדים.",
     "timeLeft": "זמן שנותר: {time}",
@@ -475,6 +476,8 @@
     "noNameHintPage": "מגיע מההתחברות של המועמד, או להוסיף כאן.",
     "deletedText": "המועמד מחק את החשבון, ואיתו את התוצאות.",
     "notStarted": "המועמד עדיין לא התחיל.",
+    "inviteLinkTitle": "קישור ההזמנה",
+    "inviteLinkHint": "אפשר לשלוח אותו למועמד אם האימייל לא הגיע או אבד.",
     "pageLeaves": "{count, plural, one {יציאה אחת מהדף} two {# יציאות מהדף} other {# יציאות מהדף}}",
     "copies": "{count, plural, one {ניסיון העתקה אחד} two {# ניסיונות העתקה} other {# ניסיונות העתקה}}",
     "fastAnswers": "{count, plural, one {תשובה מהירה אחת} two {# תשובות מהירות} other {# תשובות מהירות}}",
@@ -1007,6 +1010,7 @@
       "interview_cancelled": "{title, select, none {ראיון בוטל} other {הראיון \"{title}\" בוטל}}: בדיקת הנושאים שלו חיכתה יותר מדי זמן.",
       "verification_approved": "\"{name}\" מאומתת עבור {domain}.",
       "verification_declined": "{reason, select, none {האימות של \"{name}\" נדחה.} other {האימות של \"{name}\" נדחה: {reason}}}",
+      "member_joined": "הצטרפות לצוות של \"{name}\": {email} ({role, select, admin {מנהל} other {צופה}}).",
       "ats_not_invited": "{count, plural, one {{email} מ-{ats} לא הוזמן/ה ל\"{title}\": {reason, select, credits {נגמרו הקרדיטים} limit {הושגה מגבלת אימיילים} paused {ההזמנות מושהות} other {משהו השתבש}}.} two {שני מועמדים מ-{ats} לא הוזמנו ל\"{title}\".} other {# מועמדים מ-{ats} לא הוזמנו ל\"{title}\".}}"
     }
   },

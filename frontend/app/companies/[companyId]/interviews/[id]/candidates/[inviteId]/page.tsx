@@ -1,9 +1,10 @@
-import { InfoIcon } from "lucide-react"
+import { InfoIcon, LinkIcon } from "lucide-react"
 import { notFound } from "next/navigation"
 import { getTranslations } from "next-intl/server"
 import { cn } from "cn"
 
 import { BackLink } from "@/components/back-link"
+import { CopyField } from "@/components/copy-field"
 import { CandidateActions } from "@/components/company/candidate-actions"
 import { CandidateReport } from "@/components/company/candidate-report"
 import { ExtraTime } from "@/components/company/extra-time"
@@ -144,6 +145,23 @@ export default async function ScorecardPage({
           </div>
         )}
       </div>
+
+      {/* The invite link until the interview is finished, in case the email didn't reach the
+          candidate or they lost it. */}
+      {card.invite_token && (
+        <div className="mx-auto max-w-xl space-y-4 rounded-2xl border p-5 max-sm:-mx-6 max-sm:rounded-none max-sm:border-x-0">
+          <div className="flex items-center gap-4 text-base">
+            <LinkIcon aria-hidden className="size-7 shrink-0 text-primary" />
+            <div className="min-w-0 flex-1 space-y-1">
+              <p className="font-medium lowercase">{t("inviteLinkTitle")}</p>
+              <p className="text-sm text-muted-foreground">
+                {t("inviteLinkHint")}
+              </p>
+            </div>
+          </div>
+          <CopyField path={`/invite/${card.invite_token}`} />
+        </div>
+      )}
 
       {/* The overall grade, like the practice result's, with whether it passed. */}
       {card.sessions.length > 0 && (

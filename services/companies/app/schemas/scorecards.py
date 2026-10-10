@@ -55,6 +55,9 @@ class ScorecardOut(BaseModel):
     can_edit: bool
     # What extra time can still be given: only before the candidate starts, and not by a viewer.
     extra_time_options: list[int]
+    # The invite link's token, to copy and send in case the email didn't arrive or got lost: until
+    # the candidate finishes, while the link works (not expired), and not for a viewer.
+    invite_token: str | None = None
     # For the PDF report: the test, the company, and the overall result.
     title: str | None
     company: str

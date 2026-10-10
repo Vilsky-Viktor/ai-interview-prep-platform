@@ -1,7 +1,7 @@
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
-from prepza_common.auth import CurrentUser
+from prepza_common.auth import CurrentUser, OptionalUser
 from prepza_common.paging import PageParams
 from prepza_common.rate_limit import hit_emails
 
@@ -12,6 +12,7 @@ from app.integrations import billing
 from app.integrations.redis import get_redis
 from app.models.companies import Member
 from app.schemas.companies import AdminInviteOut, MemberIn, MemberOut, MemberRoleIn
+from app.services import outbox as outbox_service
 from app.services.access import is_owner, require_company
 from app.storage import members
 
@@ -74,7 +75,11 @@ async def invite_member(company_id: UUID, body: MemberIn, user: CurrentUser) -> 
         "language": user.language,
     }
 
-    return member_out(await members.add(company.id, email, body.role, sender), caller)
+    member = await members.add(company.id, email, body.role, sender)
+    # The email goes out now; the outbox's regular run sends it if this fails.
+    await outbox_service.flush_quietly()
+
+    return member_out(member, caller)
 
 
 async def owned_member(user: CurrentUser, company_id: UUID, member_id: UUID) -> Member:
@@ -121,7 +126,9 @@ async def remove_member(company_id: UUID, member_id: UUID, user: CurrentUser) ->
 
 
 @router.get("/invites/{token}")
-async def get_admin_invite(token: str, user: CurrentUser) -> AdminInviteOut:
+async def get_admin_invite(token: str, user: OptionalUser) -> AdminInviteOut:
+    """Open to visitors, so they see what they're invited to before signing in; the invited
+    email only once signed in, so a visitor with the link doesn't learn it."""
     found = await members.get_by_token(token)
 
     if found is None:
@@ -131,7 +138,7 @@ async def get_admin_invite(token: str, user: CurrentUser) -> AdminInviteOut:
 
     return AdminInviteOut(
         company_name=company.name,
-        email=member.invited_email,
+        email=member.invited_email if user else None,
         joined=member.user_id is not None,
     )
 
@@ -144,11 +151,13 @@ async def accept_admin_invite(token: str, user: CurrentUser) -> None:
     if found is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Invite not found")
 
-    member, _ = found
+    member, company = found
 
     if not user.email_verified or user.email.lower() != member.invited_email:
         raise HTTPException(
             status.HTTP_403_FORBIDDEN, "This invite was sent to a different email address"
         )
 
-    await members.accept(member, user.uid)
+    await members.accept(member, company, user.uid)
+    # The owner's notification goes out now; the outbox's regular run sends it if this fails.
+    await outbox_service.flush_quietly()

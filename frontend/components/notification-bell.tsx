@@ -38,6 +38,8 @@ function useNotificationText() {
       name: data.name ?? "",
       domain: data.domain ?? "",
       reason: data.reason ?? "none",
+      // A member's role: "admin" or "viewer".
+      role: data.role ?? "",
       // The ATS a candidate came from; older notifications don't name it.
       ats: data.ats ?? "ATS",
       // How many came together, for the kinds the service groups.

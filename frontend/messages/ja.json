@@ -445,6 +445,7 @@
     "createFailed": "会社を作成できませんでした。もう一度お試しください。",
     "open": "会社を開く",
     "join": "会社に参加",
+    "signInToJoin": "サインインして参加",
     "creditsLeft": "{count, plural, other {クレジット}}",
     "creditsLow": "残りわずか：候補者の招待を続けるにはチャージしてください。",
     "timeLeft": "残り時間：{time}",
@@ -475,6 +476,8 @@
     "noNameHintPage": "候補者のサインイン情報から入力されます。ここで追加することもできます。",
     "deletedText": "候補者がアカウントを削除したため、結果も削除されました。",
     "notStarted": "候補者はまだ開始していません。",
+    "inviteLinkTitle": "招待リンク",
+    "inviteLinkHint": "メールが届かなかったり、なくしてしまったりした場合は、このリンクを候補者に送ってください。",
     "pageLeaves": "{count, plural, other {ページ離脱 # 回}}",
     "copies": "{count, plural, other {コピー試行 # 回}}",
     "fastAnswers": "{count, plural, other {速すぎる回答 # 件}}",
@@ -1020,6 +1023,7 @@
       "interview_cancelled": "{title, select, none {面接} other {面接「{title}」}}はキャンセルされました：トピックの確認待ちが長すぎました。",
       "verification_approved": "「{name}」は {domain} で認証されました。",
       "verification_declined": "{reason, select, none {「{name}」の認証は却下されました。} other {「{name}」の認証は却下されました：{reason}}}",
+      "member_joined": "{email} が{role, select, admin {管理者} other {閲覧者}}として「{name}」に参加しました。",
       "ats_not_invited": "{count, plural, =1 {{ats} の {email} さんを「{title}」に招待できませんでした：{reason, select, credits {クレジットが不足しています} limit {メールの送信上限に達しました} paused {招待は一時停止中です} other {問題が発生しました}}。} other {{ats} の候補者 # 人を「{title}」に招待できませんでした。}}"
     }
   },

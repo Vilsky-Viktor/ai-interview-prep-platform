@@ -3,13 +3,14 @@ from datetime import UTC, datetime
 
 import pytest
 from fastapi import HTTPException, status
-from prepza_common.auth import current_user
+from prepza_common.auth import current_user, optional_user
 from prepza_common.user import User
 
 from app.integrations import billing
 from app.main import app
 from app.models.companies import Company, Member
 from app.routers import members as members_router
+from app.services import outbox as outbox_service
 from app.storage import companies, members
 
 MEMBER_ID = uuid.uuid4()
@@ -17,9 +18,10 @@ COMPANY_ID = uuid.uuid4()
 
 
 def sign_in(email, verified=True, uid="admin"):
-    app.dependency_overrides[current_user] = lambda: User(
-        uid=uid, email=email, email_verified=verified, name="Bob"
-    )
+    user = User(uid=uid, email=email, email_verified=verified, name="Bob")
+    # The invite's page is open to visitors too.
+    app.dependency_overrides[current_user] = lambda: user
+    app.dependency_overrides[optional_user] = lambda: user
 
 
 @pytest.fixture(autouse=True)
@@ -44,20 +46,24 @@ def stored_invite(monkeypatch):
     async def fake_get(token):
         return (member, company) if token == "token-1" else None
 
-    async def fake_accept(item, user_id):
+    async def fake_accept(item, company, user_id):
         accepted.append(user_id)
 
     monkeypatch.setattr(members, "get_by_token", fake_get)
     monkeypatch.setattr(members, "accept", fake_accept)
+    monkeypatch.setattr(outbox_service, "flush_quietly", fake_flush)
 
     return accepted
 
 
 def test_invited_email_accepts(client, stored_invite):
+    flushed.clear()
     sign_in("Bob@Example.com", uid="bob")
 
     assert client.post("/members/invites/token-1/accept").status_code == 204
     assert stored_invite == ["bob"]
+    # The owner's notification is sent right away, not on the outbox's next run.
+    assert flushed
 
 
 @pytest.mark.parametrize(
@@ -74,6 +80,13 @@ def test_unknown_token(client, stored_invite):
     sign_in("bob@example.com")
 
     assert client.post("/members/invites/missing/accept").status_code == 404
+
+
+def test_a_visitor_sees_the_invite_without_its_email(client, stored_invite):
+    response = client.get("/members/invites/token-1")
+
+    assert response.status_code == 200
+    assert response.json() == {"company_name": "Arcolabs", "email": None, "joined": False}
 
 
 def test_invite_view(client, stored_invite):
@@ -95,6 +108,14 @@ limited = []
 
 async def fake_hit_emails(redis, uid, key, *limits):
     limited.append((uid, key))
+
+
+# How many times the outbox was asked to send its events right away.
+flushed = []
+
+
+async def fake_flush():
+    flushed.append(True)
 
 
 @pytest.fixture
@@ -148,6 +169,7 @@ def team(monkeypatch):
     monkeypatch.setattr(members, "list_for_company", fake_list)
     monkeypatch.setattr(billing, "turn_off_auto_top_up", fake_turn_off)
     monkeypatch.setattr(members_router, "hit_emails", fake_hit_emails)
+    monkeypatch.setattr(outbox_service, "flush_quietly", fake_flush)
 
     return company.members, removed, turned_off
 
@@ -211,6 +233,7 @@ def test_the_owner_invites_a_viewer_and_an_admin_by_default(client, team):
 def test_an_invite_emails_the_member_from_the_owner_within_their_email_limits(client, team):
     _ = team
     limited.clear()
+    flushed.clear()
     sign_in("ann@example.com", uid="ann")
 
     client.post(f"/members?company_id={COMPANY_ID}", json={"email": "Dan@example.com"})
@@ -225,6 +248,8 @@ def test_an_invite_emails_the_member_from_the_owner_within_their_email_limits(cl
         }
     ]
     assert limited == [("ann", f"member:{COMPANY_ID}:dan@example.com")]
+    # Sent right away, not on the outbox's next run.
+    assert flushed
 
 
 def test_an_owner_over_their_email_limits_invites_nobody(client, team, monkeypatch):

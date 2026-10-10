@@ -445,6 +445,7 @@
     "createFailed": "Nie udało się utworzyć firmy. Spróbuj ponownie.",
     "open": "Otwórz firmę",
     "join": "Dołącz do firmy",
+    "signInToJoin": "Zaloguj się, aby dołączyć",
     "creditsLeft": "{count, plural, one {kredyt} few {kredyty} many {kredytów} other {kredytu}}",
     "creditsLow": "Kredyty się kończą: doładuj, aby dalej zapraszać kandydatów.",
     "timeLeft": "Pozostały czas: {time}",
@@ -475,6 +476,8 @@
     "noNameHintPage": "Pochodzi z logowania kandydata albo dodaj je tutaj.",
     "deletedText": "Kandydat usunął konto, a wraz z nim swoje wyniki.",
     "notStarted": "Kandydat jeszcze nie zaczął.",
+    "inviteLinkTitle": "Link zaproszenia",
+    "inviteLinkHint": "Wyślij go kandydatowi, jeśli e-mail nie dotarł lub zaginął.",
     "pageLeaves": "{count, plural, one {# opuszczenie strony} few {# opuszczenia strony} many {# opuszczeń strony} other {# opuszczenia strony}}",
     "copies": "{count, plural, one {# próba kopiowania} few {# próby kopiowania} many {# prób kopiowania} other {# próby kopiowania}}",
     "fastAnswers": "{count, plural, one {# szybka odpowiedź} few {# szybkie odpowiedzi} many {# szybkich odpowiedzi} other {# szybkiej odpowiedzi}}",
@@ -1016,6 +1019,7 @@
       "interview_cancelled": "{title, select, none {Rozmowa została anulowana} other {Rozmowa „{title}” została anulowana}}: tematy zbyt długo czekały na zatwierdzenie.",
       "verification_approved": "„{name}” jest zweryfikowana dla {domain}.",
       "verification_declined": "{reason, select, none {Weryfikacja „{name}” została odrzucona.} other {Weryfikacja „{name}” została odrzucona: {reason}}}",
+      "member_joined": "{email} jest teraz w zespole „{name}” jako {role, select, admin {administrator} other {obserwator}}.",
       "ats_not_invited": "{count, plural, one {Kandydat {email} z {ats} nie został zaproszony do „{title}”: {reason, select, credits {brak kredytów} limit {osiągnięto limit e-maili} paused {zaproszenia są wstrzymane} other {coś poszło nie tak}}.} few {# kandydaci z {ats} nie zostali zaproszeni do „{title}”.} many {# kandydatów z {ats} nie zostało zaproszonych do „{title}”.} other {# kandydata z {ats} nie zostało zaproszone do „{title}”.}}"
     }
   },

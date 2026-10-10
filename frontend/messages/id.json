@@ -445,6 +445,7 @@
     "createFailed": "Perusahaan tidak bisa dibuat. Coba lagi.",
     "open": "Buka perusahaan",
     "join": "Gabung ke perusahaan",
+    "signInToJoin": "Masuk untuk bergabung",
     "creditsLeft": "{count, plural, other {kredit}}",
     "creditsLow": "Hampir habis: isi ulang untuk terus mengundang kandidat.",
     "timeLeft": "Sisa waktu: {time}",
@@ -475,6 +476,8 @@
     "noNameHintPage": "Diambil dari login kandidat, atau tambahkan di sini.",
     "deletedText": "Kandidat menghapus akunnya, beserta hasilnya.",
     "notStarted": "Kandidat belum mulai.",
+    "inviteLinkTitle": "Tautan undangan",
+    "inviteLinkHint": "Kirimkan ke kandidat jika email tidak sampai atau hilang.",
     "pageLeaves": "{count, plural, other {# kali meninggalkan halaman}}",
     "copies": "{count, plural, other {# percobaan menyalin}}",
     "fastAnswers": "{count, plural, other {# jawaban terlalu cepat}}",
@@ -1016,6 +1019,7 @@
       "interview_cancelled": "{title, select, none {Sebuah wawancara} other {Wawancara “{title}”}} dibatalkan: tinjauan topiknya menunggu terlalu lama.",
       "verification_approved": "“{name}” terverifikasi untuk {domain}.",
       "verification_declined": "{reason, select, none {Verifikasi “{name}” ditolak.} other {Verifikasi “{name}” ditolak: {reason}}}",
+      "member_joined": "{email} bergabung dengan “{name}” sebagai {role, select, admin {admin} other {pelihat}}.",
       "ats_not_invited": "{count, plural, =1 {{email} dari {ats} tidak diundang ke “{title}”: {reason, select, credits {kredit habis} limit {batas email tercapai} paused {undangan sedang dijeda} other {terjadi kesalahan}}.} other {# kandidat dari {ats} tidak diundang ke “{title}”.}}"
     }
   },

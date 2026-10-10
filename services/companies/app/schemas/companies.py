@@ -35,7 +35,8 @@ class AdminInviteOut(BaseModel):
     """What the invited member sees before accepting."""
 
     company_name: str
-    email: str
+    # None for a visitor who isn't signed in.
+    email: str | None = None
     joined: bool
 
 
