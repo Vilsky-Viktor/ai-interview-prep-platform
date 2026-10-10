@@ -1,6 +1,10 @@
+import json
 import logging
 
-from prepza_common.logging import configure_logging
+from fastapi import FastAPI
+from fastapi.testclient import TestClient
+from prepza_common.constants import TRACE_FIELD, TRACE_HEADER
+from prepza_common.logging import JsonFormatter, RequestLogMiddleware, configure_logging, trace_of
 
 
 def test_outgoing_request_addresses_are_not_logged(caplog):
@@ -13,3 +17,58 @@ def test_outgoing_request_addresses_are_not_logged(caplog):
 
     assert "hooks.slack.com" not in caplog.text
     assert logging.getLogger("httpx").getEffectiveLevel() == logging.WARNING
+
+
+def record(level=logging.ERROR):
+    return logging.LogRecord("billing", level, __file__, 1, "refused: %s", ("paddle",), None)
+
+
+def test_a_line_carries_the_fields_cloud_logging_reads():
+    line = json.loads(JsonFormatter().format(record()))
+
+    assert (line["severity"], line["message"], line["logger"]) == (
+        "ERROR",
+        "refused: paddle",
+        "billing",
+    )
+    assert TRACE_FIELD not in line
+
+
+def test_the_trace_comes_from_the_load_balancers_header(monkeypatch):
+    monkeypatch.setenv("GOOGLE_CLOUD_PROJECT", "prepza-prod")
+
+    assert trace_of("abc123/456;o=1") == "projects/prepza-prod/traces/abc123"
+    assert trace_of(None) is None
+    monkeypatch.delenv("GOOGLE_CLOUD_PROJECT")
+    assert trace_of("abc123/456;o=1") is None
+
+
+def test_lines_logged_during_a_request_carry_its_trace(monkeypatch):
+    monkeypatch.setenv("GOOGLE_CLOUD_PROJECT", "prepza-prod")
+    lines = []
+
+    class Capture(logging.Handler):
+        def emit(self, item):
+            lines.append(json.loads(JsonFormatter().format(item)))
+
+    app = FastAPI()
+    app.add_middleware(RequestLogMiddleware)
+
+    @app.get("/work")
+    def work():
+        logging.getLogger("work").warning("working")
+
+        return {}
+
+    handler = Capture()
+    logging.getLogger().addHandler(handler)
+
+    try:
+        TestClient(app).get("/work", headers={TRACE_HEADER: "abc123/1;o=1"})
+    finally:
+        logging.getLogger().removeHandler(handler)
+
+    traced = [line for line in lines if line["message"] == "working"]
+    assert traced[0][TRACE_FIELD] == "projects/prepza-prod/traces/abc123"
+    # Outside the request, nothing carries it.
+    assert TRACE_FIELD not in json.loads(JsonFormatter().format(record()))

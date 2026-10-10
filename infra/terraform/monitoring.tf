@@ -188,7 +188,7 @@ resource "google_monitoring_alert_policy" "webhook_signature_refused" {
     display_name = "A provider's web hook failed its signature check"
 
     condition_matched_log {
-      filter = "resource.type=\"cloud_run_revision\" AND jsonPayload.msg:\"web hook signature refused\""
+      filter = "resource.type=\"cloud_run_revision\" AND jsonPayload.message:\"web hook signature refused\""
 
       label_extractors = {
         service = "EXTRACT(resource.labels.service_name)"

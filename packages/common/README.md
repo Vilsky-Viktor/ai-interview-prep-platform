@@ -10,6 +10,9 @@ keys, AI apps' access) and a visitor's address behind the load balancer (`client
 OpenAI chat models: `llm.chat_model` builds them one way for every service (a temperature only at
 reasoning effort `none`). It needs the package's `llm` extra (langchain-openai), so a service that
 calls OpenAI depends on `prepza-common[llm]`; the others don't install it.
+Logs: `logging.configure_logging` writes one JSON line per entry in the fields Cloud Logging reads
+(`severity`, `message`), and `RequestLogMiddleware` ties every line logged while serving a request
+to its trace (`logging.googleapis.com/trace`, from the load balancer's `X-Cloud-Trace-Context`).
 Settings: `ServiceSettings` (`settings.py`) is the base of every service's `Settings`, with the
 sign-in settings they all read (`FIREBASE_PROJECT_ID`, and `FIREBASE_AUTH_EMULATOR_HOST`, refused
 unless the project is a `demo-` one). Each service's own settings live in its
