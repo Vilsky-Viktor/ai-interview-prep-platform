@@ -65,10 +65,11 @@ def test_with_a_dsn_no_personal_data_is_sent(monkeypatch):
     assert options["before_send_transaction"] is sentry.before_send
 
 
-def test_a_service_can_keep_variables_values_out_of_stack_traces(monkeypatch):
-    monkeypatch.setenv("BACKEND_SENTRY_DSN", "https://key@example.ingest.sentry.io/1")
+def test_stack_traces_carry_no_variables_values(monkeypatch):
+    """They would hold secrets (ATS keys, Slack tokens) and people's texts."""
+    monkeypatch.setenv("BACKEND_SENTRY_DSN", "https://key@sentry.example/1")
 
     with mock.patch.object(sentry_sdk, "init") as init:
-        init_sentry("assistant", local_variables=False)
+        init_sentry("ats")
 
     assert init.call_args.kwargs["include_local_variables"] is False

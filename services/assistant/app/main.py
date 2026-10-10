@@ -30,7 +30,7 @@ configure_logging()
 # httpx logs every request's full URL at INFO; a tool's query can hold what the user searched for.
 logging.getLogger("httpx").setLevel(logging.WARNING)
 # Errors never carry what was said: no variables' values in their stack traces.
-init_sentry("assistant", local_variables=False)
+init_sentry("assistant")
 
 
 @asynccontextmanager
