@@ -6,8 +6,6 @@ from prepza_common.user import Language
 from pydantic import BaseModel, Field, field_validator
 
 from app.constants.interviews import (
-    DEFAULT_PASS_MARK,
-    DEFAULT_QUESTION_SECONDS,
     MAX_PASS_MARK,
     MAX_QUESTION_SECONDS,
     MIN_PASS_MARK,
@@ -103,11 +101,13 @@ class TopicLimitIn(BaseModel):
 
 
 class InterviewSettings(BaseModel):
-    question_seconds: int = Field(
-        default=DEFAULT_QUESTION_SECONDS, ge=MIN_QUESTION_SECONDS, le=MAX_QUESTION_SECONDS
+    """A change to a test's settings: only the ones sent change; the others stay as they are."""
+
+    question_seconds: int | None = Field(
+        default=None, ge=MIN_QUESTION_SECONDS, le=MAX_QUESTION_SECONDS
     )
-    hired: bool = False
-    pass_mark: int = Field(default=DEFAULT_PASS_MARK, ge=MIN_PASS_MARK, le=MAX_PASS_MARK)
+    hired: bool | None = None
+    pass_mark: int | None = Field(default=None, ge=MIN_PASS_MARK, le=MAX_PASS_MARK)
 
 
 class TitleIn(BaseModel):

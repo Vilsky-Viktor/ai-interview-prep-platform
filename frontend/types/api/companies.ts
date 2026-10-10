@@ -496,8 +496,8 @@ export interface paths {
     }
     /**
      * Candidate Scorecard
-     * @description A view through the in-app assistant (a valid X-Assistant token) is audited as via the
-     *     assistant and isn't the funnel's "results viewed".
+     * @description A view through the in-app assistant or an AI app (a valid X-Assistant token) is audited
+     *     as via it and isn't the funnel's "results viewed".
      */
     get: operations["candidate_scorecard_interviews__interview_id__candidates__invite_id__get"]
     put?: never
@@ -2258,23 +2258,17 @@ export interface components {
       /** Candidates */
       candidates: components["schemas"]["CandidateOut"][]
     }
-    /** InterviewSettings */
+    /**
+     * InterviewSettings
+     * @description A change to a test's settings: only the ones sent change; the others stay as they are.
+     */
     InterviewSettings: {
-      /**
-       * Question Seconds
-       * @default 60
-       */
-      question_seconds: number
-      /**
-       * Hired
-       * @default false
-       */
-      hired: boolean
-      /**
-       * Pass Mark
-       * @default 70
-       */
-      pass_mark: number
+      /** Question Seconds */
+      question_seconds?: number | null
+      /** Hired */
+      hired?: boolean | null
+      /** Pass Mark */
+      pass_mark?: number | null
     }
     /** InviteStartOut */
     InviteStartOut: {

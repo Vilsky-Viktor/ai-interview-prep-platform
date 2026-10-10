@@ -114,9 +114,12 @@ async def list_for_company(
 
 
 async def update_settings(interview_id, settings: InterviewSettings) -> None:
-    """Saves the test's settings; marking it hired also turns its shareable link off, so a job
-    ad left online stops bringing in candidates."""
-    values = settings.model_dump()
+    """Saves the settings that were sent; marking the test hired also turns its shareable link
+    off, so a job ad left online stops bringing in candidates."""
+    values = settings.model_dump(exclude_none=True)
+
+    if not values:
+        return
 
     if settings.hired:
         values["link_token"] = None

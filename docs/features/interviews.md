@@ -41,7 +41,7 @@ An interview's page has three tabs:
 |---|---|---|
 | **topics** | Every member | The interview's topics and questions |
 | **candidates** | Every member | The candidate list (see [Candidates](candidates.md#the-candidate-list)) |
-| **settings** | Owners and admins | Time per question, pass mark and "Mark as hired", each saved as it changes |
+| **settings** | Owners and admins | Time per question, pass mark and "Mark as hired", each saved as it changes; the API (`PATCH /interviews/{id}/settings`) changes only the settings sent, so the assistant and AI apps can change one alone |
 
 ### Settings
 

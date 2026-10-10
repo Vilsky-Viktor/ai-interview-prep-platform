@@ -153,7 +153,7 @@ async def update_settings(interview_id: UUID, body: InterviewSettings, user: Cur
     await require_editor(user, interview.company_id)
     await interviews.update_settings(interview.id, body)
 
-    if body.pass_mark != interview.pass_mark:
+    if body.pass_mark is not None and body.pass_mark != interview.pass_mark:
         await audit.record(
             interview.company_id, user.uid, AuditAction.PASS_MARK_CHANGED, interview.id
         )

@@ -6501,27 +6501,46 @@
    "InterviewSettings": {
     "properties": {
      "question_seconds": {
-      "type": "integer",
-      "maximum": 600.0,
-      "minimum": 10.0,
-      "title": "Question Seconds",
-      "default": 60
+      "anyOf": [
+       {
+        "type": "integer",
+        "maximum": 600.0,
+        "minimum": 10.0
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Question Seconds"
      },
      "hired": {
-      "type": "boolean",
-      "title": "Hired",
-      "default": false
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Hired"
      },
      "pass_mark": {
-      "type": "integer",
-      "maximum": 100.0,
-      "minimum": 1.0,
-      "title": "Pass Mark",
-      "default": 70
+      "anyOf": [
+       {
+        "type": "integer",
+        "maximum": 100.0,
+        "minimum": 1.0
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Pass Mark"
      }
     },
     "type": "object",
-    "title": "InterviewSettings"
+    "title": "InterviewSettings",
+    "description": "A change to a test's settings: only the ones sent change; the others stay as they are."
    },
    "InviteStartOut": {
     "properties": {

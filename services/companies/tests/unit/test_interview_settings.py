@@ -27,15 +27,16 @@ def clear_overrides():
     app.dependency_overrides.clear()
 
 
-def test_updates_the_time_per_question(client, monkeypatch, audited):
+def test_only_the_settings_sent_change(client, monkeypatch, audited):
     sign_in()
-    saved = {}
+    saved = []
+    # Not the defaults, so a reset to them would show.
     interview = Interview(
         id=INTERVIEW_ID,
         company_id=COMPANY_ID,
         generation_id=uuid.uuid4(),
         set_id=None,
-        pass_mark=70,
+        pass_mark=85,
     )
     company = Company(id=COMPANY_ID, name="My company", created_at=datetime.now(UTC))
     company.members = [
@@ -55,25 +56,25 @@ def test_updates_the_time_per_question(client, monkeypatch, audited):
         return company
 
     async def fake_update(_interview_id, settings):
-        saved.update(settings.model_dump())
+        saved.append(settings.model_dump(exclude_none=True))
 
     monkeypatch.setattr(interviews, "get", fake_interview)
     monkeypatch.setattr(companies, "get", fake_company)
     monkeypatch.setattr(interviews, "update_settings", fake_update)
     url = f"/interviews/{INTERVIEW_ID}/settings"
 
-    response = client.patch(url, json={"question_seconds": 45})
-
-    assert response.status_code == 204
-    assert saved == {"question_seconds": 45, "hired": False, "pass_mark": 70}
-
-    client.patch(url, json={"question_seconds": 45, "hired": True, "pass_mark": 70})
-
-    assert saved == {"question_seconds": 45, "hired": True, "pass_mark": 70}
-    # Only a changed pass mark is recorded.
+    assert client.patch(url, json={"hired": True}).status_code == 204
+    assert client.patch(url, json={"question_seconds": 45}).status_code == 204
+    assert saved == [{"hired": True}, {"question_seconds": 45}]
+    # Without a pass mark sent, nothing about it is recorded.
     assert audited == []
 
-    client.patch(url, json={"question_seconds": 45, "pass_mark": 80})
+    client.patch(url, json={"question_seconds": 45, "hired": True, "pass_mark": 85})
+
+    # The same pass mark isn't a change.
+    assert audited == []
+
+    client.patch(url, json={"pass_mark": 80})
 
     assert audited == [(COMPANY_ID, "bob", AuditAction.PASS_MARK_CHANGED, INTERVIEW_ID)]
     too_short = client.patch(url, json={"question_seconds": 5})

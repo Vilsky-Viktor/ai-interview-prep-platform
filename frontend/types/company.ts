@@ -19,7 +19,12 @@ export type CandidateFilters = Schemas["CandidateFiltersOut"]
 export type InviteView = Schemas["InviteView"]
 // A test's shareable job-ad link, as someone opening it sees it.
 export type JobLink = Schemas["LinkView"]
-export type InterviewSettingsData = Schemas["InterviewSettings"]
+// A test's settings as they are: the API takes any of them, the page always holds all three.
+export type InterviewSettingsData = {
+  [K in keyof Schemas["InterviewSettings"]]-?: NonNullable<
+    Schemas["InterviewSettings"][K]
+  >
+}
 export type SessionSummary = Schemas["SessionSummary"]
 export type SessionTopic = RoundSchemas["SessionTopicOut"]
 export type InterviewSession = RoundSchemas["SessionOut"]
