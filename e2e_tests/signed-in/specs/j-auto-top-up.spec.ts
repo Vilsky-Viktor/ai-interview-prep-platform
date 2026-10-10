@@ -24,7 +24,8 @@ test("an owner picks the automatic top-up's amount and level", async ({ signInAs
   )
 
   await visit(owner, "/top-up")
-  await openDialog(owner, owner.getByRole("button", { name: "Automatic top-up: off" }))
+  // Off, it's a button that says what it does.
+  await openDialog(owner, owner.getByRole("button", { name: "Set up automatic top-up" }))
   const dialog = owner.getByRole("dialog")
   await expect(dialog.getByText("Top up", { exact: true })).toBeVisible()
   await expect(dialog.getByText("When the balance falls")).toBeVisible()
@@ -42,4 +43,31 @@ test("an owner picks the automatic top-up's amount and level", async ({ signInAs
     await expect(owner.getByRole("menu")).toHaveCount(0)
     await expect(pill).toHaveText(picked)
   }
+})
+
+// On, it's the setting as text, with the edit icon that changes it.
+test("an automatic top-up that's on shows its setting and changes from the edit icon", async ({
+  signInAs,
+}) => {
+  const owner = await signInAs(throwawayEmail("auto-top-up-on"))
+  await createCompany(owner)
+  await owner.route("**/api/companies/companies/*/auto-top-up", (route) =>
+    route.fulfill({
+      json: {
+        offered: true,
+        on: true,
+        waiting: false,
+        product: "topup_30",
+        threshold: 500,
+        products: ["topup_30", "topup_150"],
+        thresholds: [500, 2000],
+      },
+    })
+  )
+
+  await visit(owner, "/top-up")
+  await expect(owner.getByText("Automatic top-up: $30 under 500 credits")).toBeVisible()
+  await expect(owner.getByRole("button", { name: "Set up automatic top-up" })).toHaveCount(0)
+  await openDialog(owner, owner.getByRole("button", { name: "Change automatic top-up" }))
+  await expect(owner.getByRole("dialog").getByText("When the balance falls")).toBeVisible()
 })

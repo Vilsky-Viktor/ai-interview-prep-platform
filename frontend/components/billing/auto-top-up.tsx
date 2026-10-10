@@ -1,5 +1,6 @@
 "use client"
 
+import { RepeatIcon, SquarePenIcon } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useLocale, useTranslations } from "next-intl"
 import { useEffect, useRef, useState } from "react"
@@ -135,20 +136,44 @@ export function AutoTopUpSetting({
         })
       : setting.waiting
         ? t("waiting")
-        : t("off")
+        : null
 
   return (
     <Dialog open={open} onOpenChange={handleOpen}>
-      <DialogTrigger
-        render={
-          <button
-            type="button"
-            className="text-start text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-          />
-        }
-      >
-        {summary}
-      </DialogTrigger>
+      {/* Off: a button that says what it does. On (or waiting for the card): the setting, with
+          the app's edit icon to change it. */}
+      {summary ? (
+        <p className="text-sm text-muted-foreground">
+          {summary}
+          <DialogTrigger
+            render={
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon-xs"
+                className="-my-1 ms-1 align-middle text-muted-foreground hover:text-foreground"
+                aria-label={t("change")}
+              />
+            }
+          >
+            <SquarePenIcon className="size-3.5" />
+          </DialogTrigger>
+        </p>
+      ) : (
+        <DialogTrigger
+          render={
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="h-8 px-3 text-sm"
+            />
+          }
+        >
+          <RepeatIcon data-icon="inline-start" />
+          {t("setUp")}
+        </DialogTrigger>
+      )}
       <DialogContent showCloseButton={false} className="sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>{t("title")}</DialogTitle>

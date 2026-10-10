@@ -47,7 +47,7 @@ Balances follow a payment as it lands:
 
 ## Automatic top-up
 
-On the top-up page, under each balance ("Automatic top-up: off"), choose a top-up and a balance to refill under.
+On the top-up page, under each balance, "Set up automatic top-up" opens the choice of a top-up and a balance to refill under; once it's on, the line shows the setting ("Automatic top-up: $30 under 300 credits") with an edit icon to change or turn it off.
 
 - The card is saved through Paddle once.
 - It is shown only when Paddle's API key and the $0 price are set (see [Setting up Paddle](#setting-up-paddle)).
