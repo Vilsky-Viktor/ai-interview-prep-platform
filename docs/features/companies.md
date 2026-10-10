@@ -24,8 +24,8 @@ The companies service enforces the roles: `require_editor` answers 403 to a view
 
 A company can upload its logo: PNG, JPEG or WebP, up to 500 KB. It is shown on:
 
-- invite emails,
-- the interview candidates take,
+- invite and reminder emails, beside the title,
+- the invite page and the interview candidates take, above the title on the finished screen,
 - PDF reports.
 
 ## Verification

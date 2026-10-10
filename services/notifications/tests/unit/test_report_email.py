@@ -108,7 +108,7 @@ def test_a_reminder_opens_the_same_invite_and_is_tagged_like_it():
     assert reminder.tags == candidate_invite_email(data, "https://prepza.com", "secret").tags
 
 
-def test_an_invite_from_a_company_with_a_logo_shows_it_at_the_top():
+def test_an_invite_from_a_company_with_a_logo_shows_it_beside_the_title():
     data = {
         "invite_id": "i-1",
         "email": "ann@example.com",
@@ -127,3 +127,11 @@ def test_an_invite_from_a_company_with_a_logo_shows_it_at_the_top():
         in with_logo.html
     )
     assert "<img" not in without.html
+    # Beside the title, at its end: in the title's row, after it, with the gap on the title's side.
+    title_row = with_logo.html.split("</h1></td>", 1)[1].split("</tr>", 1)[0]
+    assert 'height="80"' in title_row
+    assert "padding:0 0 0 16px;" in title_row
+
+    rtl = candidate_invite_email({**data, "language": "ar"}, "https://prepza.com/", "secret")
+
+    assert "padding:0 16px 0 0;" in rtl.html

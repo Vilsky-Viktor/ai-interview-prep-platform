@@ -116,7 +116,11 @@ def render(
         direction="rtl" if rtl else "ltr",
         align="right" if rtl else "left",
         paste_link=texts["paste_link"],
-        logo=HTML_LOGO.format(url=escape(data["logo_url"]), alt=safe.get("company", ""))
+        logo=HTML_LOGO.format(
+            url=escape(data["logo_url"]),
+            alt=safe.get("company", ""),
+            pad="0 16px 0 0" if rtl else "0 0 0 16px",
+        )
         if data.get("logo_url")
         else "",
     )

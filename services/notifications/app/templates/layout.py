@@ -40,10 +40,12 @@ HTML_ROW = (
 )
 
 # Who sent the invite, in the body: bold, so it stands out.
-# The inviting company's logo, at the top of the card, when it has one.
+# The inviting company's logo, when it has one: beside the title, at its end (`pad` is the gap on
+# the title's side, by the language's direction).
 HTML_LOGO = (
-    '<img src="{url}" alt="{alt}" height="40" style="display:block;height:40px;width:auto;'
-    'max-width:200px;margin:0 0 24px;border:0;">'
+    '<td style="vertical-align:middle;width:1%;padding:{pad};">'
+    '<img src="{url}" alt="{alt}" height="80" style="display:block;height:80px;width:auto;'
+    'max-width:200px;border:0;border-radius:12px;"></td>'
 )
 HTML_NAME = '<strong style="font-weight:600;color:#0a0a0a;">{name}</strong>'
 
@@ -78,8 +80,10 @@ letter-spacing:-0.5px;color:#0a0a0a;">prepza<span style="color:#0071e0;">.</span
 <tr><td style="padding:40px 32px;background-color:#ffffff;border:1px solid #e5e5e5;\
 border-radius:16px;text-align:{align};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,\
 sans-serif;">
-{logo}<h1 style="margin:0 0 24px;font-size:24px;line-height:32px;font-weight:600;color:#0a0a0a;">\
-{heading}<span style="color:#0071e0;">.</span></h1>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" \
+style="margin:0 0 24px;"><tr><td style="vertical-align:middle;">\
+<h1 style="margin:0;font-size:24px;line-height:32px;font-weight:600;color:#0a0a0a;">\
+{heading}<span style="color:#0071e0;">.</span></h1></td>{logo}</tr></table>
 {lines}
 {sections}<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:8px 0 32px;">
 <tr><td style="border-radius:10px;background-color:#0071e0;">\
