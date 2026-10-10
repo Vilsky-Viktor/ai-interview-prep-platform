@@ -11,10 +11,13 @@ def chat_model(
 
     Reasoning models accept a temperature only at effort "none", so at any other effort
     `temperature` is left out. `options` go to ChatOpenAI as they are (timeout, max_retries, ...).
+    Nothing is stored at OpenAI: its Responses API, which a model with tools may use, would keep
+    each call (and the people's data in it) by default.
     """
     return ChatOpenAI(
         model=model,
         reasoning_effort=reasoning_effort,
         temperature=temperature if reasoning_effort == "none" else None,
+        store=False,
         **options,
     )

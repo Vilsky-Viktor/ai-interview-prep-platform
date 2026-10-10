@@ -5,7 +5,12 @@ from openai import AsyncOpenAI
 from prepza_common.llm import chat_model
 
 from app.config.settings import settings
-from app.constants.chat import MAX_ANSWER_TOKENS, MODEL_RETRIES, MODEL_TIMEOUT_SECONDS
+from app.constants.chat import (
+    MAX_ANSWER_TOKENS,
+    MODEL_INCLUDE,
+    MODEL_RETRIES,
+    MODEL_TIMEOUT_SECONDS,
+)
 from app.constants.titles import TITLE_MAX_TOKENS, TITLE_REASONING_EFFORT
 from app.constants.transcribe import TRANSCRIBE_RETRIES, TRANSCRIBE_TIMEOUT_SECONDS
 
@@ -18,6 +23,7 @@ def get_chat_model() -> ChatOpenAI:
         settings.assistant_reasoning_effort,
         stream_usage=True,
         max_tokens=MAX_ANSWER_TOKENS,
+        include=MODEL_INCLUDE,
         timeout=MODEL_TIMEOUT_SECONDS,
         max_retries=MODEL_RETRIES,
     )

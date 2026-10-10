@@ -120,7 +120,7 @@ Constants in `app/constants/limits.py`, counted in Redis:
 - A company that isn't among the user's (companies' list for their token) is refused before anything is called with it: the picked company, any `company_id` a tool is given, and a pending action's company on confirm.
 - Never `/internal/` or `/superadmin/` routes, and a write only with `confirm: True` (the tool loader refuses them).
 - Reads of a candidate's results go to companies with a signed `X-Assistant` header: the audit log records them as the assistant's (`via: "assistant"`, or `"mcp"` through an AI app), and they're kept out of the "results viewed" funnel.
-- Questions and the data the tools read are sent to OpenAI (no training). Each tool's data is trimmed to the fields it needs.
+- Questions and the data the tools read are sent to OpenAI (no training). Each tool's data is trimmed to the fields it needs. Every model call is made with `store=false` (`prepza_common.llm.chat_model`), so OpenAI keeps nothing beyond its 30-day abuse monitoring; the assistant's tool loops send the model's encrypted reasoning back with each call instead (`MODEL_INCLUDE`).
 - Logs and error reports never hold what was said, tool arguments or results: failures are logged by their type only, and Sentry gets no variables' values (`init_sentry(local_variables=False)`).
 
 ## What's stored

@@ -24,3 +24,7 @@ def test_a_reasoning_model_gets_no_temperature(effort):
 
 def test_without_a_temperature_none_is_sent():
     assert chat_model("model-a", "none").temperature is None
+
+
+def test_nothing_is_stored_at_openai():
+    assert chat_model("model-a", "low").store is False

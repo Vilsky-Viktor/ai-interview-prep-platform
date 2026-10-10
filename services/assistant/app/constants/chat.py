@@ -37,6 +37,8 @@ TITLE_LENGTH = 80
 MAX_ANSWER_TOKENS = 1_500
 MODEL_TIMEOUT_SECONDS = 60
 MODEL_RETRIES = 2
+# With nothing stored at OpenAI, a tool loop sends the model's reasoning back with each call.
+MODEL_INCLUDE = ["reasoning.encrypted_content"]
 # Steps that call tools in one turn; after the last, the model must answer with what it has.
 MAX_TOOL_STEPS = 6
 # A whole turn, tools included.

@@ -54,7 +54,7 @@ PRIVACY_SECTIONS = [
         ],
         "items": [
             "Google (Firebase Authentication): sign-in. LinkedIn and GitHub only confirm who you are when you sign in with them; we don't receive anything else from them.",
-            "OpenAI: writing questions from the text you provide; the assistant's answers, from your questions and the data it reads with your access to answer them; turning voice messages into text; and checking reported questions (only the reasons given, never the comments). Under OpenAI's API terms, this data is not used to train their models.",
+            "OpenAI: writing questions from the text you provide; the assistant's answers, from your questions and the data it reads with your access to answer them; turning voice messages into text; and checking reported questions (only the reasons given, never the comments). We tell OpenAI not to store it: under its API terms it keeps this data for at most 30 days, only to check for abuse, and doesn't use it to train its models.",
             "Resend: sending emails: invites and reminders to candidates, reports, emails to company members such as the activity digest, and contact messages.",
             "Sentry: error reports, with emails removed.",
             "Google Cloud, our hosting provider, which stores the data.",
