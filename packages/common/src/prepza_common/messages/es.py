@@ -1,6 +1,7 @@
 # Messages the services show users, in Spanish, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Only the person whose card pays for it can change it. Turn it off, then turn it on with your own card.": "Solo la persona cuya tarjeta lo paga puede cambiarlo. Desactívalo y vuelve a activarlo con tu propia tarjeta.",
     "The request is too large.": "La solicitud es demasiado grande.",
     "Too many requests. Try again later.": "Demasiadas solicitudes. Inténtalo más tarde.",
     "Sign-in is temporarily unavailable. Please try again shortly.": "El inicio de sesión no está disponible temporalmente. Inténtalo de nuevo en un momento.",

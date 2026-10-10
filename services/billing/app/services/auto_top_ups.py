@@ -11,6 +11,7 @@ from app.constants.notifications import TOP_UP_LINK
 from app.constants.products import (
     AUTO_TOP_UP_FLAG,
     AUTO_TOP_UP_THRESHOLDS,
+    NOT_YOUR_AUTO_TOP_UP,
     SUBSCRIPTION_ENDED_STATUS,
 )
 from app.integrations import paddle
@@ -53,6 +54,12 @@ async def turn_on(owner_type: str, owner_id: str, body: AutoTopUpIn, buyer_id: s
 
     if body.threshold not in AUTO_TOP_UP_THRESHOLDS:
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Choose one of the balances")
+
+    current = await auto_top_ups.get(owner_type, owner_id)
+
+    # Running, it charges its buyer's card: another member may turn it off, not change it.
+    if current and current.subscription_id and current.buyer_id != buyer_id:
+        raise HTTPException(status.HTTP_403_FORBIDDEN, NOT_YOUR_AUTO_TOP_UP)
 
     row = await auto_top_ups.save(owner_type, owner_id, body.product, body.threshold, buyer_id)
     result = await out(owner_type, owner_id)

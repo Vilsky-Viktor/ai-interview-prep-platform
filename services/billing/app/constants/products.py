@@ -58,4 +58,9 @@ SUBSCRIPTION_CANCELED = "subscription.canceled"
 SUBSCRIPTION_ENDED_STATUS = "canceled"
 # Marks the checkout that turns automatic top-up on.
 AUTO_TOP_UP_FLAG = "auto_top_up"
+# A running automatic top-up charges its buyer's card: only they change what it buys or when.
+NOT_YOUR_AUTO_TOP_UP = (
+    "Only the person whose card pays for it can change it. Turn it off, then turn it on with "
+    "your own card."
+)
 PADDLE_API = {"sandbox": "https://sandbox-api.paddle.com", "production": "https://api.paddle.com"}

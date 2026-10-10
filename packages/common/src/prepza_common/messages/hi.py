@@ -1,6 +1,7 @@
 # Messages the services show users, in Hindi, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Only the person whose card pays for it can change it. Turn it off, then turn it on with your own card.": "इसे केवल वही व्यक्ति बदल सकता है जिसके कार्ड से भुगतान होता है। इसे बंद करें, फिर अपने कार्ड से चालू करें।",
     "The request is too large.": "अनुरोध बहुत बड़ा है।",
     "Too many requests. Try again later.": "बहुत अधिक अनुरोध। कृपया बाद में फिर से कोशिश करें।",
     "Sign-in is temporarily unavailable. Please try again shortly.": "साइन-इन अस्थायी रूप से उपलब्ध नहीं है। कृपया थोड़ी देर बाद फिर से कोशिश करें।",

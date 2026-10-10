@@ -1,6 +1,7 @@
 # Messages the services show users, in Arabic, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Only the person whose card pays for it can change it. Turn it off, then turn it on with your own card.": "لا يمكن تغييره إلا لمن تُدفع ببطاقته. أوقفه، ثم شغّله ببطاقتك.",
     "The request is too large.": "الطلب كبير جدًا.",
     "Too many requests. Try again later.": "طلبات كثيرة جدًا. حاول مرة أخرى لاحقًا.",
     "Sign-in is temporarily unavailable. Please try again shortly.": "تسجيل الدخول غير متاح مؤقتًا. حاول مرة أخرى بعد قليل.",

@@ -1,6 +1,7 @@
 # Messages the services show users, in Thai, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Only the person whose card pays for it can change it. Turn it off, then turn it on with your own card.": "เฉพาะผู้ที่ใช้บัตรของตนชำระเท่านั้นที่เปลี่ยนได้ ปิดก่อน แล้วเปิดใหม่ด้วยบัตรของคุณเอง",
     "The request is too large.": "คำขอมีขนาดใหญ่เกินไป",
     "Too many requests. Try again later.": "มีคำขอมากเกินไป โปรดลองอีกครั้งในภายหลัง",
     "Sign-in is temporarily unavailable. Please try again shortly.": "การลงชื่อเข้าใช้ไม่พร้อมใช้งานชั่วคราว โปรดลองอีกครั้งในอีกสักครู่",

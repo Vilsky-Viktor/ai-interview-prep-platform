@@ -137,7 +137,8 @@ async def auto_top_up(company_id: UUID) -> dict:
 
 async def turn_on_auto_top_up(company_id: UUID, body: dict, buyer_id: str) -> dict:
     """Saves the choice; billing's answer carries the checkout when the card isn't saved yet.
-    Its refusal of a choice (422) reaches the user unchanged."""
+    Its refusals reach the user unchanged: a choice it doesn't offer (422), or a running one
+    paid by someone else's card (403)."""
     response = await http.get_client().put(
         _auto_top_up_url(company_id),
         json=body,
@@ -145,8 +146,8 @@ async def turn_on_auto_top_up(company_id: UUID, body: dict, buyer_id: str) -> di
         headers=_headers(),
     )
 
-    if response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY:
-        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, response.json()["detail"])
+    if response.status_code in (status.HTTP_403_FORBIDDEN, status.HTTP_422_UNPROCESSABLE_CONTENT):
+        raise HTTPException(response.status_code, response.json()["detail"])
 
     response.raise_for_status()
 

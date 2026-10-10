@@ -1,6 +1,7 @@
 # Messages the services show users, in Filipino, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Only the person whose card pays for it can change it. Turn it off, then turn it on with your own card.": "Ang taong ang card ang nagbabayad lang ang puwedeng magbago nito. I-off ito, saka i-on gamit ang sarili mong card.",
     "The request is too large.": "Masyadong malaki ang request.",
     "Too many requests. Try again later.": "Masyadong maraming request. Subukang muli mamaya.",
     "Sign-in is temporarily unavailable. Please try again shortly.": "Pansamantalang hindi available ang pag-sign in. Subukang muli maya-maya.",

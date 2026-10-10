@@ -1,6 +1,7 @@
 # Messages the services show users, in Indonesian, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Only the person whose card pays for it can change it. Turn it off, then turn it on with your own card.": "Hanya orang yang kartunya membayar yang dapat mengubahnya. Matikan, lalu aktifkan lagi dengan kartu Anda sendiri.",
     "The request is too large.": "Permintaan terlalu besar.",
     "Too many requests. Try again later.": "Terlalu banyak permintaan. Coba lagi nanti.",
     "Sign-in is temporarily unavailable. Please try again shortly.": "Masuk sedang tidak tersedia untuk sementara. Coba lagi sebentar lagi.",

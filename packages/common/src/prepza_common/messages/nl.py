@@ -1,6 +1,7 @@
 # Messages the services show users, in Dutch, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Only the person whose card pays for it can change it. Turn it off, then turn it on with your own card.": "Alleen degene met wiens kaart het betaald wordt, kan het wijzigen. Zet het uit en daarna weer aan met je eigen kaart.",
     "The request is too large.": "Het verzoek is te groot.",
     "Too many requests. Try again later.": "Te veel verzoeken. Probeer het later opnieuw.",
     "Sign-in is temporarily unavailable. Please try again shortly.": "Inloggen is tijdelijk niet beschikbaar. Probeer het zo meteen opnieuw.",

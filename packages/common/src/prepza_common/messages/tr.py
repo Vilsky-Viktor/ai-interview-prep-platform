@@ -1,6 +1,7 @@
 # Messages the services show users, in Turkish, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Only the person whose card pays for it can change it. Turn it off, then turn it on with your own card.": "Bunu yalnızca kartıyla ödeme yapılan kişi değiştirebilir. Kapatın, ardından kendi kartınızla açın.",
     "The request is too large.": "İstek çok büyük.",
     "Too many requests. Try again later.": "Çok fazla istek. Daha sonra tekrar deneyin.",
     "Sign-in is temporarily unavailable. Please try again shortly.": "Giriş geçici olarak kullanılamıyor. Lütfen birazdan tekrar deneyin.",
