@@ -3,7 +3,7 @@
 Terraform for prepza on Google Cloud, in one region (`europe-west1`, Belgium) behind Google's global load balancer:
 
 - **Cloud Run:** the frontend, nine APIs (library, generation, rounds, companies, billing, notifications, ats, api, assistant) and the generation worker; notifications' bell stream runs as its own service (`notifications-stream`, same image) so open tabs never take the capacity event pushes need. That's 12 services from 10 images. Billed per request, and idle services cost nothing.
-- **Cloud SQL Postgres 18** (as locally): one database per service, with daily backups and point-in-time recovery.
+- **Cloud SQL Postgres 18** (as locally): one database per service, with daily backups (14 kept) and point-in-time recovery (7 days back). Google Cloud refuses to delete the instance (deletion protection on the instance itself, not only in Terraform), its backups outlive it, and Google's maintenance restarts it only on Sundays at 03:00 UTC.
 - **Pub/Sub:** domain events. One `events` topic is pushed to library, companies, notifications, ats, api and assistant, each getting only the event types it handles (`locals.consumes` in `pubsub.tf`; add a type there when a consumer starts handling it; a filter is capped at 256 bytes, and changing one replaces that subscription, dropping the messages it still holds, so apply when its backlog is empty; a new consumer's subscription gets only the events published after it's created), with a dead-letter topic after 50 attempts (retries back off from 10 seconds to 10 minutes, so several hours of trouble).
 - **Cloud Tasks:** generation jobs on the worker, each tried up to 3 times. **Cloud Scheduler** (`jobs.tf`): outbox flushes and expired interviews every minute, generation sweeps and web hook retries every 5 minutes, key-check batches and ATS recovery every 10 minutes, daily retention (generations, candidates, the assistant's idle conversations), invite expiry and reminders and the question bank's stages, and every 10 minutes for an hour each morning the activity digest (7:00 UTC) and member reminders (8:00); a failed daily job is retried 3 times (the morning email runs aren't: the next run goes on).
 - **The global load balancer:**
@@ -195,7 +195,7 @@ A backup is only proven by restoring it. Run `scripts/ops/restore-drill.sh prepz
 
 It costs a few cents: the temporary instance runs for about 15 minutes.
 
-For an actual recovery, Cloud SQL can also restore to any second within the backup window (point-in-time recovery), for example to just before a bad deploy:
+For an actual recovery, Cloud SQL can also restore to any second of the last 7 days (point-in-time recovery), for example to just before a bad deploy:
 
 ```bash
 gcloud sql instances clone prepza prepza-recovered --point-in-time="2026-10-02T12:00:00Z"

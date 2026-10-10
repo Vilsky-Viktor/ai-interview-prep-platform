@@ -10,15 +10,28 @@ resource "google_sql_database_instance" "main" {
     tier              = var.db_tier
     edition           = "ENTERPRISE"
     availability_type = var.db_high_availability ? "REGIONAL" : "ZONAL"
+    # Google Cloud itself refuses to delete the instance (the console and gcloud too, not only
+    # Terraform), and its backups outlive it if it's deleted anyway.
+    deletion_protection_enabled = true
+    retain_backups_on_delete    = true
 
     backup_configuration {
       enabled                        = true
       point_in_time_recovery_enabled = true
       start_time                     = "02:00"
+      # Point-in-time recovery reaches back this far; the daily backups, 14 days.
+      transaction_log_retention_days = 7
 
       backup_retention_settings {
         retained_backups = 14
       }
+    }
+
+    # Google's updates restart the instance: Sundays at 03:00 UTC, the quietest time.
+    maintenance_window {
+      day          = 7
+      hour         = 3
+      update_track = "stable"
     }
 
     database_flags {
