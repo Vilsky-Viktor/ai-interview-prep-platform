@@ -17,6 +17,9 @@ class AuditAction(StrEnum):
 
 
 # What an audit event was recorded through when not a person in the app (audit_events.via): the
-# in-app assistant reading for a member. It is also the assistant service's name, the issuer of
-# the X-Assistant token.
+# in-app assistant reading for a member, or an AI app (Claude, ChatGPT, ...) the member connected
+# over MCP, which the assistant service serves too. Each is the issuer of the X-Assistant token
+# the assistant sends.
 VIA_ASSISTANT = "assistant"
+VIA_MCP = "mcp"
+VIAS = (VIA_ASSISTANT, VIA_MCP)

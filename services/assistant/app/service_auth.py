@@ -5,10 +5,11 @@ from app.config.settings import settings
 SERVICE_NAME = "assistant"
 
 
-def service_token(callee: str) -> str:
+def service_token(callee: str, issuer: str = SERVICE_NAME) -> str:
     """A token for calling `callee`, signed with that service's key. Companies reads it in the
-    X-Assistant header, to audit the reads made through the assistant as such."""
-    return issue_token(SERVICE_NAME, callee, callee_secret(callee))
+    X-Assistant header, to audit the reads made through the assistant (or, issued as "mcp",
+    through an AI app) as such."""
+    return issue_token(issuer, callee, callee_secret(callee))
 
 
 # Calls to this service (library deleting or exporting a user's data), signed with its own key.

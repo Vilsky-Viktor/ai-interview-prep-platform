@@ -13,6 +13,10 @@ FORBIDDEN_PATH_PREFIXES = ("/internal", "/superadmin")
 # The header that tells companies a read came through the assistant (audited as such), holding a
 # service token signed for companies, so it can't be forged.
 ASSISTANT_HEADER = "X-Assistant"
+# What a call came through, as that header's token names it (its issuer): the in-app assistant,
+# or an AI app connected over MCP.
+VIA_ASSISTANT = "assistant"
+VIA_MCP = "mcp"
 # Where each tool's service is: the settings attribute holding its base URL.
 SERVICE_URLS = {
     "companies": "companies_url",

@@ -158,13 +158,14 @@ def test_viewing_a_finished_candidates_results_is_recorded(client, monkeypatch, 
     assert tracked == ["results_viewed"]
 
 
-def test_a_read_through_the_assistant_is_recorded_as_such_and_not_in_the_funnel(
-    client, monkeypatch, audited, tracked
+@pytest.mark.parametrize("via", ["assistant", "mcp"])
+def test_a_read_through_the_assistant_or_an_ai_app_is_recorded_as_such_and_not_in_the_funnel(
+    client, monkeypatch, audited, tracked, via
 ):
-    token = issue_token("assistant", "companies", SECRET)
+    token = issue_token(via, "companies", SECRET)
 
     assert open_scorecard(client, monkeypatch, {"X-Assistant": token}).status_code == 200
-    assert audited == [(COMPANY_ID, "bob", AuditAction.RESULTS_VIEWED, INVITE_ID, "assistant")]
+    assert audited == [(COMPANY_ID, "bob", AuditAction.RESULTS_VIEWED, INVITE_ID, via)]
     assert tracked == []
 
 

@@ -23,6 +23,7 @@ PRIVACY_SECTIONS = [
             "Contact messages: the name, email address and message you send through the contact page.",
             "Interviews, if a company invites you: the email you were invited with, your answers, how long each answer took, when you left the interview page, copied text or answered too fast to have read the question, any extra time the company gave you (no reason is recorded), and your ratings and reports of questions. You are told about this before you start.",
             "Technical: error reports without your IP address or email, and short-lived server logs needed to run and secure the service.",
+            "AI apps you connect: the app's name and the site it returns to, and when you connected it and last used it. Its access is kept only as a one-way hash.",
             "Tools a company connects: the keys or tokens its owner or admin creates in its applicant tracking system (Workable, Greenhouse, Teamtailor, Recruitee or Breezy HR) or Slack, stored encrypted; a one-way hash of each prepza API key and the addresses of its web hooks; and, from its applicant tracking system, the email, name and id of each candidate it sends to prepza.",
             "Email settings: which optional emails you get, and a log of every change to them: which email, on or off, when, where (signing in, Settings, or an unsubscribe link or spam report) and which version of the checkboxes' wording you saw.",
             "Emails to company members: a record of the activity digests and reminders we sent you, and what each reminder was about, so none is sent twice.",
@@ -68,6 +69,12 @@ PRIVACY_SECTIONS = [
         ],
     },
     {
+        "heading": "AI apps you connect",
+        "paragraphs": [
+            "You can connect an AI app of your own, such as Claude (by Anthropic) or ChatGPT (by OpenAI), to your prepza account. Only when you do, and only for what you ask it, it reads and changes your companies' data with your access, including candidates' results, and that data reaches the app's provider under the app's own terms and privacy policy, not ours. You choose these apps and can disconnect one at any time on a company's Integrations tab; deleting your account disconnects them all.",
+        ],
+    },
+    {
         "heading": "Emails and unsubscribing",
         "paragraphs": [
             "Service emails, such as invites, reports, billing problems and changes to our terms, are always sent. You choose the others in Settings, under Emails: the activity digest, reminders, product updates and news, and offers and promotions. Every optional email has an unsubscribe link that works without signing in, and marking the activity digest or reminders as spam turns them off too.",
@@ -87,6 +94,7 @@ PRIVACY_SECTIONS = [
             "Interview results, timings and integrity signals: 12 months after the invitation was last sent, then deleted automatically.",
             "Candidates an applicant tracking system sends: their email, name and id there, 12 months after they arrive.",
             "Notifications in the app, such as that a candidate finished: 90 days.",
+            "AI apps you connect: until you disconnect them or delete your account; a connection unused for 90 days ends by itself.",
             "Your chats with the assistant: 90 days after their last message. You can delete a chat at any time, and they're deleted with your account or the company they're about.",
             "The record of a company's decisions, such as removing a candidate: 24 months.",
             "Practice rounds: until you delete your account.",

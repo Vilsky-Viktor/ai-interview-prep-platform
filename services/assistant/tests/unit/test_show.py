@@ -21,7 +21,7 @@ def companies(monkeypatch):
     """Companies answering as the user; the paths read."""
     asked = []
 
-    async def get(service, path, query, token, language):
+    async def get(service, path, query, token, language, via=None):
         asked.append(path)
         request = httpx.Request("GET", "http://x")
 

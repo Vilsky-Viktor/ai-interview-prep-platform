@@ -14,6 +14,7 @@ dependencies = [
     "sqlalchemy[asyncio]>=2.1.1",
     "uvicorn>=0.54.0",
     "openai>=3.26.1",
+    "mcp>=2.2,<3",
 ]
 
 # The shared package, from this repo. To use a published version, drop this source and require

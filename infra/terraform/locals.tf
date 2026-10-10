@@ -29,10 +29,24 @@ locals {
     ats                  = { image = "ats", public = true, path = "ats", port = 8000, min = 0, max = 1, connections = 4, cpu = "1", memory = "512Mi", timeout = 60, concurrency = 80, database = "ats", command = null }
     # The public API at /api/v1/ (path "v1").
     api = { image = "api", public = true, path = "v1", port = 8000, min = 0, max = 1, connections = 4, cpu = "1", memory = "512Mi", timeout = 60, concurrency = 80, database = "api", command = null }
-    # The in-app assistant: a turn streams up to 90 s while its tools call the other services.
+    # The in-app assistant: a turn streams up to 90 s while its tools call the other services. It
+    # also serves AI apps over MCP at the site's root (mcp_paths below).
     assistant         = { image = "assistant", public = true, path = "assistant", port = 8000, min = 0, max = 2, connections = 4, cpu = "1", memory = "512Mi", timeout = 300, concurrency = 80, database = "assistant", command = null }
     generation-worker = { image = "generation", public = false, path = null, port = 8000, min = 0, max = 2, connections = 14, cpu = "1", memory = "2Gi", timeout = 1800, concurrency = 10, database = "generation", command = ["uv", "run", "--no-sync", "uvicorn", "app.worker_main:app", "--host", "0.0.0.0", "--port", "8000"] }
   }
+
+  # AI apps' MCP endpoint and its OAuth authorization server, at the site's root; the load
+  # balancer sends exactly these paths to the assistant (gateway/nginx.conf has the same list).
+  mcp_paths = [
+    "/mcp",
+    "/authorize",
+    "/token",
+    "/register",
+    "/revoke",
+    "/.well-known/oauth-authorization-server",
+    "/.well-known/oauth-protected-resource",
+    "/.well-known/oauth-protected-resource/mcp",
+  ]
 
   databases = ["library", "generation", "rounds", "companies", "billing", "notifications", "ats", "api", "assistant"]
 

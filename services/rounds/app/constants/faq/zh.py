@@ -73,6 +73,11 @@ FAQ = [
         "answer": "可以，且不额外收费。在公司的“集成”标签页中连接 Workable、Greenhouse、Teamtailor、Recruitee 或 Breezy HR：你移到某个阶段的候选人会收到面试，结果会回传到 ATS。Slack 可以将公司的通知发布到频道，API 则让你自己的平台邀请候选人并接收他们的结果；详见“API 文档”。",
     },
     {
+        "key": "ai_apps",
+        "question": "我可以在 Claude 或 ChatGPT 中使用 prepza 吗？",
+        "answer": "可以。在 Claude 或 ChatGPT 中将 prepza 添加为连接器（步骤见公司的“集成”标签页），然后在 prepza 上授权。之后，该应用会以你的身份、按你的权限处理你的公司、面试和候选人结果，并在做出任何更改前先征求你的确认。删除账户或公司只能在 prepza 中进行。应用读取的内容会按该应用的条款发送给其提供方。你可以随时在同一标签页断开连接。",
+    },
+    {
         "key": "candidates",
         "question": "候选人能看到什么？",
         "answer": "你公司的名称和标志、开始前的流程说明，之后每次只显示一道限时题目。他们永远看不到自己的分数，也看不到答案是否正确。",

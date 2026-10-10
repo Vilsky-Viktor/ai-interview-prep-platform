@@ -7,6 +7,7 @@ from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from prepza_common import memory_cache
 from prepza_common.rate_limit import hit
+from prepza_common.tokens import hashed
 from redis.exceptions import RedisError
 
 from app.constants.api import (
@@ -15,7 +16,7 @@ from app.constants.api import (
     MINUTE_SECONDS,
     REQUESTS_PER_MINUTE,
 )
-from app.helpers.keys import expired, hashed
+from app.helpers.keys import expired
 from app.integrations import companies
 from app.integrations.redis import get_redis
 from app.models.api import ApiKey

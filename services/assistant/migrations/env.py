@@ -3,7 +3,8 @@ from logging.config import fileConfig
 from alembic import context
 from sqlalchemy import create_engine
 
-import app.models.conversations  # noqa: F401
+import app.models.conversations
+import app.models.oauth  # noqa: F401
 from app.config.settings import settings
 from app.models.base import Base
 

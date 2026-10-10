@@ -73,6 +73,11 @@ FAQ = [
         "answer": "Jah, ilma lisatasuta. Ühenda Workable, Greenhouse, Teamtailor, Recruitee või Breezy HR oma ettevõtte vahekaardil Integratsioonid: kandidaadid, kelle viid etappi, saavad intervjuu ja nende tulemused lähevad tagasi ATS-i. Slack saab postitada sinu ettevõtte teavitusi kanalisse ja API kaudu saab sinu enda platvorm kandidaate kutsuda ning nende tulemusi vastu võtta; vaata: API dokumentatsioon.",
     },
     {
+        "key": "ai_apps",
+        "question": "Kas saan prepzat kasutada Claude'i või ChatGPT kaudu?",
+        "answer": "Jah. Lisa prepza Claude'i või ChatGPT-sse konnektorina (sammud on sinu ettevõtte vahekaardil Integratsioonid) ja luba see prepzas. Seejärel töötab rakendus sinu nimel ja sinu õigustega sinu ettevõtete, intervjuude ja kandidaatide tulemustega ning küsib sinult enne, kui midagi muudab. Oma kontot või ettevõtet saad kustutada ainult prepzas. See, mida rakendus loeb, jõuab selle rakenduse tingimuste alusel tema pakkujani. Ühenduse saad igal ajal samal vahekaardil katkestada.",
+    },
+    {
         "key": "candidates",
         "question": "Mida kandidaadid näevad?",
         "answer": "Sinu ettevõtte nime ja logo, enne alustamist seda, mida oodata, ja seejärel ühe ajapiiranguga küsimuse korraga. Nad ei näe kunagi oma tulemust ega seda, kas vastus oli õige.",

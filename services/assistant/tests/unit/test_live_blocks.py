@@ -15,7 +15,7 @@ def companies(monkeypatch, answers: dict):
     """Companies answering each path (404 for any other); the tokens it was called with."""
     tokens = []
 
-    async def get(service, path, query, token, language):
+    async def get(service, path, query, token, language, via=None):
         tokens.append(token)
         status, body = answers.get(path, (404, {"detail": "Not found"}))
 

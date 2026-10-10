@@ -20,7 +20,8 @@ class AuditEvent(Base):
     action: Mapped[str] = mapped_column(String(64))
     target_id: Mapped[uuid.UUID | None]
     # What it was recorded through when not a person in the app: "assistant" (VIA_ASSISTANT)
-    # when the in-app assistant read for the user. None otherwise.
+    # when the in-app assistant read for the user, "mcp" (VIA_MCP) when an AI app they connected
+    # did. None otherwise.
     via: Mapped[str | None] = mapped_column(String(32))
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC)

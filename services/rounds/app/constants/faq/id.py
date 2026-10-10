@@ -73,6 +73,11 @@ FAQ = [
         "answer": "Bisa, tanpa biaya tambahan. Hubungkan Workable, Greenhouse, Teamtailor, Recruitee, atau Breezy HR di tab Integrasi perusahaanmu: kandidat yang kamu pindahkan ke suatu tahap mendapat wawancara, dan hasilnya dikirim kembali ke ATS. Slack bisa memposting notifikasi perusahaanmu ke sebuah channel, dan API memungkinkan platformmu sendiri mengundang kandidat serta menerima hasil mereka; lihat Dokumentasi API.",
     },
     {
+        "key": "ai_apps",
+        "question": "Bisakah saya memakai prepza dari Claude atau ChatGPT?",
+        "answer": "Bisa. Tambahkan prepza ke Claude atau ChatGPT sebagai konektor (langkah-langkahnya ada di tab Integrasi perusahaanmu), lalu izinkan di prepza. Setelah itu, aplikasi bekerja dengan perusahaan, wawancara, dan hasil kandidatmu atas namamu, dengan hak aksesmu, dan bertanya dulu sebelum mengubah apa pun. Akun atau perusahaan hanya bisa dihapus di prepza. Apa yang dibaca aplikasi sampai ke penyedianya sesuai ketentuan aplikasi tersebut. Kamu bisa memutuskan sambungannya kapan saja di tab yang sama.",
+    },
+    {
         "key": "candidates",
         "question": "Apa yang dilihat kandidat?",
         "answer": "Nama dan logo perusahaanmu, apa yang bisa diharapkan sebelum mulai, lalu satu soal berbatas waktu setiap kalinya. Mereka tidak pernah melihat skornya atau apakah jawabannya benar.",

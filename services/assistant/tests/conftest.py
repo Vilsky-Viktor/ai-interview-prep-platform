@@ -16,6 +16,8 @@ for name in ("companies", "billing", "library", "notifications", "ats", "api", "
     os.environ.setdefault(f"{name.upper()}_URL", f"http://{name}")
 
 os.environ.setdefault("GOOGLE_CLOUD_PROJECT", "demo-test")
+os.environ.setdefault("SITE_URL", "http://localhost:8090")
+os.environ.setdefault("FIREBASE_WEB_API_KEY", "demo-api-key")
 
 import pytest
 from fastapi.testclient import TestClient

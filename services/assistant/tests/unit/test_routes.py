@@ -43,7 +43,7 @@ def created(monkeypatch):
 
 
 def companies_answers(monkeypatch, status):
-    async def get(service, path, query, token, language):
+    async def get(service, path, query, token, language, via=None):
         return httpx.Response(status, json={}, request=httpx.Request("GET", "http://companies"))
 
     monkeypatch.setattr(services, "get", get)

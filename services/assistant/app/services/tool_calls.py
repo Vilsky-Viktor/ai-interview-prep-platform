@@ -9,6 +9,7 @@ from app.constants.tool_calls import (
     MAX_PARALLEL_TOOL_CALLS,
     SERVICE_UNAVAILABLE,
     UNKNOWN_TOOL,
+    VIA_ASSISTANT,
 )
 from app.helpers.arguments import fill_path, problems
 from app.helpers.blocks import render_block
@@ -38,9 +39,10 @@ async def call_tool(
     language: str,
     company_id: str | None,
     idempotency_key: str | None = None,
+    via: str = VIA_ASSISTANT,
 ) -> ToolResult:
     """Calls one tool as the user (a write only once they confirmed it, with its id as the
-    idempotency key). Errors are results too, which the model explains: an unknown
+    idempotency key), through the assistant or an AI app (`via`). Errors are results too, which the model explains: an unknown
     tool, refused arguments, the service's own error (its detail is in the user's language) or
     no answer."""
     started = time.monotonic()
@@ -75,10 +77,18 @@ async def call_tool(
 
     try:
         if tool.method == "GET":
-            response = await services.get(tool.service, path, query, token, language)
+            response = await services.get(tool.service, path, query, token, language, via=via)
         else:
             response = await services.send(
-                tool.service, tool.method, path, query, body, token, language, idempotency_key
+                tool.service,
+                tool.method,
+                path,
+                query,
+                body,
+                token,
+                language,
+                idempotency_key,
+                via=via,
             )
     except httpx.TimeoutException:
         return result(None, {"error": 504, "detail": translate(SERVICE_UNAVAILABLE, language)})

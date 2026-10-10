@@ -20,6 +20,7 @@ Timed knowledge interviews for hiring, made from a job description or a ready-ma
 - **ATS integrations:** candidates from Workable, Greenhouse, Teamtailor, Recruitee and Breezy HR are invited automatically, and results go back.
 - **Slack:** a company picks a channel and which of its notifications go there.
 - **Public API:** API keys to list interviews, invite candidates and read results, and a signed web hook when a candidate finishes; its reference is on the site.
+- **AI apps over MCP:** Claude, ChatGPT and other AI apps connect at `/mcp` once the user allows them, and read and change what the user can, with the user's permissions.
 - **Pay per candidate:** credits that never expire, $1–3 per candidate, with no paid subscription (an optional automatic top-up saves the card with Paddle as a $0 subscription).
 - **Free practice:** people preparing for a role practise on the templates' revealed questions.
 - **23 languages:** the interface, generated interviews, emails and news posts.
@@ -53,6 +54,7 @@ Then open the app at http://localhost:8090. Sign-in uses the Firebase Auth emula
 | [Public API](docs/features/api.md) | API keys and their expiry, the routes, signed web hooks, the API page and docs |
 | [Notifications and emails](docs/features/notifications.md) | The bell, emails, Slack, setting up Resend and Slack |
 | [In-app assistant](docs/features/assistant.md) | The "ask agent" panel: answers about a user's companies and about prepza (FAQ answers when signed out), voice input, its limits, retention and tools |
+| [AI apps over MCP](docs/features/mcp.md) | Connecting Claude, ChatGPT and other AI apps: the consent page, OAuth, the tools, connections, limits |
 | [Admin zone](docs/features/admin-zone.md) | Superadmins' templates, news, quality, pass rates, stats, pause and maintenance mode |
 | [Public site](docs/features/site.md) | Home page, skills tests, articles, FAQ, legal pages, contact, SEO |
 | [Languages](docs/features/languages.md) | The 23 languages, language addresses, fonts, right-to-left |

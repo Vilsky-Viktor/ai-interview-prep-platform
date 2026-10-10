@@ -30,7 +30,7 @@ def answering(monkeypatch, answers: dict):
     """companies answering each path with its JSON; the paths asked, in order."""
     asked = []
 
-    async def get(service, path, query, token, language):
+    async def get(service, path, query, token, language, via=None):
         asked.append(path)
         request = httpx.Request("GET", f"http://companies{path}")
 

@@ -32,7 +32,7 @@ class Gets(list):
 def gets(monkeypatch):
     made = Gets()
 
-    async def fake_get(service, path, query, token, language):
+    async def fake_get(service, path, query, token, language, via=None):
         made.append((service, path, token, language))
 
         return made.answer
@@ -71,7 +71,7 @@ def test_an_answer_streams_as_deltas_and_its_tokens_count(model):
 def test_parallel_calls_run_in_one_step_and_the_model_reads_every_result(model, monkeypatch):
     made = []
 
-    async def fake_get(service, path, query, token, language):
+    async def fake_get(service, path, query, token, language, via=None):
         made.append((service, path, token, language))
 
         return response(json={"paused": False} if path == "/pause" else {"email": "a@b.c"})

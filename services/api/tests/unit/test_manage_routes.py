@@ -2,8 +2,8 @@ import socket
 
 import pytest
 from prepza_common.encryption import decrypt
+from prepza_common.tokens import hashed
 
-from app.helpers.keys import hashed
 from app.services import manage
 from tests.unit.conftest import COMPANY, KEY, sign_in
 

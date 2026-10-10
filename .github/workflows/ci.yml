@@ -269,6 +269,10 @@ jobs:
       # Each service's tests/integration, against the stack's real Postgres and Redis.
       - name: Integration tests
         run: ./scripts/integration.sh
+      # An AI app connecting over MCP through the gateway: OAuth with PKCE, the consent page's
+      # API, tools as the user, refresh, revoke and disconnect (an emulator user, no OpenAI).
+      - name: MCP end-to-end test
+        run: python3 e2e_tests/mcp.py
       # The signed-out pages in a real browser (Playwright's image), on desktop and phone sizes.
       - name: Page tests
         run: ./e2e_tests/pages.sh

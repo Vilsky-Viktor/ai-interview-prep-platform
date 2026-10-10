@@ -20,3 +20,16 @@ MAX_AUDIO_SECONDS = 60
 TRANSCRIPTIONS_PER_USER_HOUR = 60
 # Actions a user may confirm in an hour.
 ACTIONS_PER_USER_HOUR = 30
+
+# AI apps connected over MCP (constants/mcp.py): calls a user's apps may make together, a minute
+# and a day; their actions count against ACTIONS_PER_USER_HOUR too.
+MCP_CALLS_PER_USER_MINUTE = 60
+MCP_CALLS_PER_USER_DAY = 3_000
+# Apps registering themselves, from one address in an hour, and from everywhere in a day. Claude
+# and ChatGPT register from their own servers, so one address stands for many people.
+REGISTRATIONS_PER_IP_HOUR = 300
+REGISTRATIONS_PER_DAY = 5_000
+# Token requests (a code or a refresh exchanged) of one app in a minute.
+TOKEN_REQUESTS_PER_CLIENT_MINUTE = 30
+# Connections a user may allow in an hour.
+APPROVALS_PER_USER_HOUR = 20

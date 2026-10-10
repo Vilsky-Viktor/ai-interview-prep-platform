@@ -118,7 +118,8 @@ resource "google_compute_backend_service" "service" {
 }
 
 # /api/<path>/... goes to that service without the prefix, as the nginx gateway does locally;
-# the bell's live stream to notifications-stream (locals.tf); everything else to the frontend.
+# the bell's live stream to notifications-stream (locals.tf); AI apps' MCP endpoint and its
+# OAuth paths at the root to the assistant; everything else to the frontend.
 resource "google_compute_url_map" "site" {
   name            = "prepza"
   default_service = google_compute_backend_service.service["frontend"].id
@@ -144,6 +145,22 @@ resource "google_compute_url_map" "site" {
       route_action {
         url_rewrite {
           path_prefix_rewrite = "/me/stream"
+        }
+      }
+    }
+
+    # AI apps (Claude, ChatGPT, ...): the assistant's MCP endpoint and its OAuth authorization
+    # server, at the root, as they are. Exact paths only, so no frontend page is taken
+    # (gateway/nginx.conf has the same list).
+    route_rules {
+      priority = 100
+      service  = google_compute_backend_service.service["assistant"].id
+
+      dynamic "match_rules" {
+        for_each = local.mcp_paths
+
+        content {
+          full_path_match = match_rules.value
         }
       }
     }

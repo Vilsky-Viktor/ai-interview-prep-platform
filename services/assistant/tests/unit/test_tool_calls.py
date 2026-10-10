@@ -32,7 +32,7 @@ def calls(monkeypatch):
     made = Calls()
     made.answer = answer(json=[])
 
-    async def fake_get(service, path, query, token, language):
+    async def fake_get(service, path, query, token, language, via=None):
         made.append((service, path, query, token, language))
         found = made.answer
 
@@ -139,7 +139,7 @@ def test_refused_arguments_and_unknown_tools_call_nothing(calls):
 def test_a_steps_calls_run_at_most_four_at_a_time_in_order(monkeypatch):
     running, most = 0, 0
 
-    async def fake_get(service, path, query, token, language):
+    async def fake_get(service, path, query, token, language, via=None):
         nonlocal running, most
         running += 1
         most = max(most, running)

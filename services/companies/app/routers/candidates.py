@@ -8,7 +8,7 @@ from prepza_common.auth import CurrentUser
 from prepza_common.paging import PageParams
 from prepza_common.pause import refuse_if_paused
 
-from app.constants.audit import VIA_ASSISTANT, AuditAction
+from app.constants.audit import AuditAction
 from app.constants.invites import (
     EXTRA_TIME_OPTIONS,
     MAX_SEARCH_LENGTH,
@@ -27,7 +27,7 @@ from app.integrations import rounds
 from app.integrations.redis import get_redis
 from app.schemas.invites import CandidateFiltersOut, CandidateIn, CandidateNameIn, CandidateOut
 from app.schemas.scorecards import ScorecardOut
-from app.service_auth import from_assistant
+from app.service_auth import via_of
 from app.services import candidate_invites, candidate_results
 from app.services import outbox as outbox_service
 from app.services.access import can_edit, require_company, require_editor
@@ -150,8 +150,8 @@ async def candidate_scorecard(
     user: CurrentUser,
     x_assistant: Annotated[str | None, Header(include_in_schema=False)] = None,
 ) -> ScorecardOut:
-    """A view through the in-app assistant (a valid X-Assistant token) is audited as via the
-    assistant and isn't the funnel's "results viewed"."""
+    """A view through the in-app assistant or an AI app (a valid X-Assistant token) is audited
+    as via it and isn't the funnel's "results viewed"."""
     interview = await interviews.get(interview_id)
     invite = await candidates.get(interview_id, invite_id) if interview else None
 
@@ -168,12 +168,12 @@ async def candidate_scorecard(
     await candidate_results.sync([invite], {str(invite.id): totals})
 
     # The funnel's "first results viewed": a finished candidate's results, opened by a member
-    # (not the assistant). The audit row is written whatever happens to the funnel event, which
-    # never raises.
-    if invite.status == InviteStatus.FINISHED and from_assistant(x_assistant):
-        await audit.record(
-            company.id, user.uid, AuditAction.RESULTS_VIEWED, invite.id, via=VIA_ASSISTANT
-        )
+    # (not through the assistant or an AI app). The audit row is written whatever happens to the
+    # funnel event, which never raises.
+    via = via_of(x_assistant)
+
+    if invite.status == InviteStatus.FINISHED and via is not None:
+        await audit.record(company.id, user.uid, AuditAction.RESULTS_VIEWED, invite.id, via=via)
     elif invite.status == InviteStatus.FINISHED:
         await asyncio.gather(
             track("results_viewed", user_id=user.uid, company_id=company.id),

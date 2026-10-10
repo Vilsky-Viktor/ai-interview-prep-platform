@@ -73,6 +73,11 @@ FAQ = [
         "answer": "Evet, ek ücret olmadan. Workable, Greenhouse, Teamtailor, Recruitee veya Breezy HR'ı şirketinizin Entegrasyonlar sekmesinden bağlayın: bir aşamaya taşıdığınız adaylar mülakatı alır ve sonuçları ATS'ye geri gönderilir. Slack, şirketinizin bildirimlerini bir kanala gönderebilir; API ise kendi platformunuzun adayları davet etmesini ve sonuçlarını almasını sağlar. Ayrıntılar için API belgeleri sayfasına bakın.",
     },
     {
+        "key": "ai_apps",
+        "question": "prepza'yı Claude veya ChatGPT'den kullanabilir miyim?",
+        "answer": "Evet. prepza'yı Claude veya ChatGPT'ye bağlayıcı olarak ekleyin (adımlar şirketinizin Entegrasyonlar sekmesinde) ve prepza'da izin verin. Uygulama bundan sonra sizin adınıza ve sizin yetkilerinizle şirketleriniz, mülakatlarınız ve adayların sonuçlarıyla çalışır ve bir şeyi değiştirmeden önce size sorar. Hesabınızı veya bir şirketi yalnızca prepza'da silebilirsiniz. Uygulamanın okuduğu veriler, o uygulamanın koşullarına göre sağlayıcısına ulaşır. Bağlantıyı istediğiniz zaman aynı sekmeden kesebilirsiniz.",
+    },
+    {
         "key": "candidates",
         "question": "Adaylar ne görür?",
         "answer": "Şirketinizin adını ve logosunu, başlamadan önce neyle karşılaşacaklarını, ardından her seferinde bir süreli soru. Puanlarını ya da bir cevabın doğru olup olmadığını asla görmezler.",

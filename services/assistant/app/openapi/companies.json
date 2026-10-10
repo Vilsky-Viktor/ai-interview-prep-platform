@@ -1885,7 +1885,7 @@
      "interviews"
     ],
     "summary": "Candidate Scorecard",
-    "description": "A view through the in-app assistant (a valid X-Assistant token) is audited as via the\nassistant and isn't the funnel's \"results viewed\".",
+    "description": "A view through the in-app assistant or an AI app (a valid X-Assistant token) is audited\nas via it and isn't the funnel's \"results viewed\".",
     "operationId": "candidate_scorecard_interviews__interview_id__candidates__invite_id__get",
     "security": [
      {

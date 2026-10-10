@@ -1,6 +1,6 @@
 # In-app assistant
 
-Anyone asks the assistant from the "ask agent" button in the header (or at the end of the home page). A signed-in user asks about their companies and about prepza, and gets a streamed answer built from the same pages' data they can already see; a signed-out visitor gets answers about prepza from the FAQ's knowledge. Asked to do something it has an action for (create a company, …), it prepares it at once and the user confirms it on a card; it never runs anything by itself. This page describes the panel and the service behind it (`services/assistant`).
+Anyone asks the assistant from the "ask agent" button in the header (or at the end of the home page). A signed-in user asks about their companies and about prepza, and gets a streamed answer built from the same pages' data they can already see; a signed-out visitor gets answers about prepza from the FAQ's knowledge. Asked to do something it has an action for (create a company, …), it prepares it at once and the user confirms it on a card; it never runs anything by itself. This page describes the panel and the service behind it (`services/assistant`). The same service offers its tools to the user's own AI apps (Claude, ChatGPT) over MCP: see [AI apps over MCP](mcp.md).
 
 - [The panel](#the-panel)
 - [What it answers](#what-it-answers)
@@ -119,7 +119,7 @@ Constants in `app/constants/limits.py`, counted in Redis:
 - Signed-in users only. Every tool and action calls the services' user-facing routes with the user's own token, never a service-to-service bypass, so roles, credits, the pause and every other rule apply unchanged there: a viewer reads what a viewer sees. The token is never stored, logged or shown to the model.
 - A company that isn't among the user's (companies' list for their token) is refused before anything is called with it: the picked company, any `company_id` a tool is given, and a pending action's company on confirm.
 - Never `/internal/` or `/superadmin/` routes, and a write only with `confirm: True` (the tool loader refuses them).
-- Reads of a candidate's results go to companies with a signed `X-Assistant` header: the audit log records them as the assistant's, and they're kept out of the "results viewed" funnel.
+- Reads of a candidate's results go to companies with a signed `X-Assistant` header: the audit log records them as the assistant's (`via: "assistant"`, or `"mcp"` through an AI app), and they're kept out of the "results viewed" funnel.
 - Questions and the data the tools read are sent to OpenAI (no training). Each tool's data is trimmed to the fields it needs.
 - Logs and error reports never hold what was said, tool arguments or results: failures are logged by their type only, and Sentry gets no variables' values (`init_sentry(local_variables=False)`).
 
@@ -134,7 +134,8 @@ Constants in `app/constants/limits.py`, counted in Redis:
 - Conversations nobody added to for `ASSISTANT_RETENTION_DAYS` (90) are deleted daily (`/internal/schedules/retention`, in batches of 500), with their messages and tool calls.
 - Deleting a company (`company.deleted`) deletes its conversations; a redelivered event deletes nothing more.
 - Opening a conversation about a company the user can no longer see (removed from its team, or the company is gone) deletes it, and it's not found.
-- Deleting an account deletes the user's conversations and their pending actions in Redis; "Download my data" includes their conversations, messages and the blocks' references (library calls `/internal/users/{id}`).
+- Deleting an account deletes the user's conversations, their pending actions in Redis and their connected AI apps; "Download my data" includes their conversations, messages, the blocks' references and their connected AI apps (library calls `/internal/users/{id}`).
+- Expired AI app connections and apps with none go daily too (see [AI apps over MCP](mcp.md#connections-and-tokens)).
 
 ## Tools
 
@@ -157,3 +158,5 @@ An action is the same in `app/constants/company_actions.py`, `interview_actions.
 | `TRANSCRIBE_MODEL` | `gpt-4o-mini-transcribe` | Voice input |
 | `ASSISTANT_RETENTION_DAYS` | 90 | Days a conversation is kept after its last message |
 | `OPENAI_API_KEY` | | OpenAI's key |
+| `SITE_URL` | `http://localhost:8090` | Where AI apps connect (`<SITE_URL>/mcp`), see [AI apps over MCP](mcp.md#settings) |
+| `FIREBASE_WEB_API_KEY` | `demo-api-key` | Firebase's public web key, for AI apps' calls as the user |

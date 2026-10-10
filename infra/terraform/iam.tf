@@ -70,3 +70,19 @@ resource "google_service_account_iam_member" "pubsub_signs_as_invoker" {
 
   depends_on = [google_project_service.apis]
 }
+
+# AI apps connected over MCP call the other services as the user: the assistant reads the
+# Firebase account (refusing deleted or disabled ones) and signs a custom token for it, which
+# Firebase exchanges for the user's ID token. Signing a custom token without a key file is IAM's
+# signBlob on its own account (the iamcredentials API, apis.tf).
+resource "google_project_iam_member" "assistant_reads_accounts" {
+  project = var.project_id
+  role    = "roles/firebaseauth.viewer"
+  member  = "serviceAccount:${google_service_account.service["assistant"].email}"
+}
+
+resource "google_service_account_iam_member" "assistant_signs_custom_tokens" {
+  service_account_id = google_service_account.service["assistant"].name
+  role               = "roles/iam.serviceAccountTokenCreator"
+  member             = "serviceAccount:${google_service_account.service["assistant"].email}"
+}

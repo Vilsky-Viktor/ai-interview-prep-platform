@@ -72,6 +72,11 @@ FAQ = [
         "answer": "Yes, at no extra cost. Connect Workable, Greenhouse, Teamtailor, Recruitee or Breezy HR on your company's Integrations tab: candidates you move to a stage get the interview, and their results go back to the ATS. Slack can post your company's notifications to a channel, and the API lets your own platform invite candidates and receive their results; see the API docs.",
     },
     {
+        "key": "ai_apps",
+        "question": "Can I use prepza from Claude or ChatGPT?",
+        "answer": "Yes. Add prepza to Claude or ChatGPT as a connector (the steps are on your company's Integrations tab) and allow it on prepza. The app then works with your companies, interviews and candidates' results as you, with your permissions, and asks you before it changes anything. Deleting your account or a company is done only in prepza. What the app reads reaches its provider under that app's terms. You can disconnect it at any time on the same tab.",
+    },
+    {
         "key": "candidates",
         "question": "What do candidates see?",
         "answer": "Your company's name and logo, what to expect before they start, then one timed question at a time. They never see their score or whether an answer was right.",

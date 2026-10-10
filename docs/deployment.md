@@ -23,7 +23,7 @@ docker build --target prod -t prepza-frontend \
 
 Never set `FIREBASE_AUTH_EMULATOR_HOST` in production.
 
-Terraform passes only one generation setting to Google Cloud, `DAILY_GENERATION_LIMIT` (its `daily_generation_limit` variable, default 200); production runs on the defaults of the others (see [Generation settings](generation.md#generation-settings) and [infra/README.md](../infra/README.md#notes)). The assistant runs on its defaults too (`ASSISTANT_MODEL`, `ASSISTANT_REASONING_EFFORT`, `ASSISTANT_RETENTION_DAYS`); its usage limits are constants in its code (see [The in-app assistant](features/assistant.md#limits)).
+Terraform passes only one generation setting to Google Cloud, `DAILY_GENERATION_LIMIT` (its `daily_generation_limit` variable, default 200); production runs on the defaults of the others (see [Generation settings](generation.md#generation-settings) and [infra/README.md](../infra/README.md#notes)). The assistant runs on its defaults too (`ASSISTANT_MODEL`, `ASSISTANT_REASONING_EFFORT`, `ASSISTANT_RETENTION_DAYS`); its usage limits are constants in its code (see [The in-app assistant](features/assistant.md#limits)). It gets `SITE_URL` and `FIREBASE_WEB_API_KEY` (the `firebase_web_api_key` variable) for AI apps over MCP, whose endpoint and OAuth paths the load balancer sends to it at the site's root; its account needs to read Firebase accounts and sign as itself (`infra/terraform/iam.tf`, see [AI apps over MCP](features/mcp.md)).
 
 ## Migrations
 

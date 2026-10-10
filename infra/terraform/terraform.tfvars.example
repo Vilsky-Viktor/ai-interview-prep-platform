@@ -7,6 +7,9 @@ image_tag  = "first"
 mail_from         = "prepza. <no-reply@prepza.ai>"
 mail_from_updates = "prepza. <updates@mail.prepza.ai>"
 backend_sentry_dsn = ""
+# The Firebase web app's apiKey (public), as the frontend's build has it: AI apps' calls over MCP
+# sign the user in with it.
+firebase_web_api_key = ""
 
 # Outage and budget alerts (monitoring.tf).
 alert_email     = "you@example.com"

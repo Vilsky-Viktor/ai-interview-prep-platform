@@ -63,6 +63,11 @@ variable "backend_sentry_dsn" {
   default     = ""
 }
 
+variable "firebase_web_api_key" {
+  description = "The Firebase web app's apiKey (the frontend's NEXT_PUBLIC_FIREBASE_API_KEY); public by design. The assistant signs AI apps' users in with it."
+  type        = string
+}
+
 variable "paddle_environment" {
   description = "sandbox or production."
   type        = string

@@ -1,7 +1,7 @@
 from prepza_common.service_auth import callee_secret, issue_token, service_caller, token_caller
 
 from app.config.settings import settings
-from app.constants.audit import VIA_ASSISTANT
+from app.constants.audit import VIAS
 
 SERVICE_NAME = "companies"
 
@@ -15,10 +15,13 @@ def service_token(callee: str) -> str:
 ServiceCaller = service_caller(settings.service_secret, SERVICE_NAME)
 
 
-def from_assistant(token: str | None) -> bool:
-    """Whether a user's request came through the in-app assistant: its X-Assistant header holds
-    a service token the assistant signed for this service. A missing or forged one isn't."""
+def via_of(token: str | None) -> str | None:
+    """What a user's request came through, when not the app itself: the in-app assistant
+    ("assistant") or an AI app connected over MCP ("mcp"), as its X-Assistant header names it in
+    a service token the assistant signed for this service. None for a missing or forged one."""
     if not token:
-        return False
+        return None
 
-    return token_caller(token, settings.service_secret, SERVICE_NAME) == VIA_ASSISTANT
+    caller = token_caller(token, settings.service_secret, SERVICE_NAME)
+
+    return caller if caller in VIAS else None

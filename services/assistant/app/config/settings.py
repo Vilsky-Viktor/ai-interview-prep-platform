@@ -28,6 +28,11 @@ class Settings(ServiceSettings):
     ats_url: str
     api_url: str
     rounds_url: str
+    # The site's address: AI apps connect to <SITE_URL>/mcp, and it's the issuer of their access.
+    site_url: str
+    # Firebase's public web key (the frontend's NEXT_PUBLIC_FIREBASE_API_KEY): an AI app's calls
+    # sign the user in with a custom token, to call the other services as them.
+    firebase_web_api_key: str
 
     @property
     def sqlalchemy_url(self) -> str:

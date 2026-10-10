@@ -4,6 +4,7 @@ from fastapi import APIRouter, Request, status
 from fastapi.responses import PlainTextResponse, StreamingResponse
 from prepza_common.analytics import track
 from prepza_common.auth import OptionalUser
+from prepza_common.client_ip import client_ip
 from prepza_common.constants import DAY_SECONDS, HOUR_SECONDS
 from prepza_common.i18n import request_language, translate
 from prepza_common.pause import refuse_if_paused
@@ -20,7 +21,6 @@ from app.constants.legal import LEGAL_UPDATED
 from app.constants.privacy import PRIVACY_INTRO, PRIVACY_SECTIONS
 from app.constants.rounds import CHAT_FAILED
 from app.constants.terms import TERMS_INTRO, TERMS_SECTIONS
-from app.helpers.client_ip import client_ip
 from app.helpers.help import faq_items
 from app.helpers.sign_in import secret_reply, with_sign_in
 from app.integrations import billing

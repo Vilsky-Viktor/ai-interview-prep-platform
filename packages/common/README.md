@@ -5,7 +5,8 @@ the outbox and Pub/Sub, notifications, who may do what in a company (asked of co
 company that's gone is no access), translated messages, a small in-memory cache, the admin zone's
 stats counting and the limits several services read (`rate_limit.hit` counts uses, `rate_limit.spend`
 adds up a cost such as tokens against a budget) and server-sent events (`sse`: the help chat's
-and the assistant's answers, the bell's stream).
+and the assistant's answers, the bell's stream), secret tokens kept as their hashes (`tokens`: API
+keys, AI apps' access) and a visitor's address behind the load balancer (`client_ip`).
 OpenAI chat models: `llm.chat_model` builds them one way for every service (a temperature only at
 reasoning effort `none`). It needs the package's `llm` extra (langchain-openai), so a service that
 calls OpenAI depends on `prepza-common[llm]`; the others don't install it.

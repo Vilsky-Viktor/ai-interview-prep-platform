@@ -5,9 +5,10 @@ import socket
 from datetime import UTC, datetime
 
 import pytest
+from prepza_common.tokens import hashed
 
 from app.helpers import webhooks
-from app.helpers.keys import add_months, expired, hashed, new_key
+from app.helpers.keys import add_months, expired, new_key
 from app.helpers.webhooks import body_of, public_address, signature
 
 

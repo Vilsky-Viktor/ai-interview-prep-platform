@@ -51,4 +51,4 @@ def test_the_assistant_exports_and_deletes_a_users_conversations_for_library(run
 
         return exported
 
-    assert run(scenario()) == {"assistant_conversations": []}
+    assert run(scenario()) == {"assistant_conversations": [], "connected_ai_apps": []}

@@ -2,11 +2,11 @@ import uuid
 from datetime import UTC, datetime, timedelta
 
 import pytest
+from prepza_common.tokens import hashed
 from redis.exceptions import ConnectionError as RedisConnectionError
 
 from app import auth
 from app.constants.api import LAST_USED_EVERY
-from app.helpers.keys import hashed
 from app.helpers.public import candidate_of
 from app.integrations import companies
 from tests.unit.conftest import CANDIDATE, COMPANY, INTERVIEW, candidate

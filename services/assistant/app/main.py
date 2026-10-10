@@ -14,9 +14,12 @@ from app.integrations.redis import get_redis
 from app.routers import (
     actions,
     chat,
+    connect,
     conversations,
     events,
     internal_accounts,
+    mcp,
+    oauth,
     schedules,
     transcribe,
 )
@@ -36,7 +39,8 @@ async def lifespan(app: FastAPI):
     tools()
     firebase_admin.initialize_app(options={"projectId": settings.firebase_project_id})
 
-    yield
+    async with mcp.running():
+        yield
 
     await http.get_client().aclose()
     await get_redis().aclose()
@@ -57,6 +61,10 @@ app.include_router(actions.router)
 app.include_router(events.router)
 app.include_router(schedules.router)
 app.include_router(internal_accounts.router)
+app.include_router(connect.router)
+# AI apps (Claude, ChatGPT, ...): the MCP endpoint and its authorization server, at the site's
+# root (the gateway sends those exact paths here).
+app.router.routes.extend([*oauth.routes(), *mcp.routes()])
 
 
 @app.get("/health")

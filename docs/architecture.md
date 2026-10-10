@@ -28,6 +28,7 @@ flowchart LR
     paddle[Paddle] -- payment webhooks --> gateway
     resend[Resend] -- delivery webhooks --> gateway
     atss[Workable / Greenhouse / Teamtailor / Recruitee / Breezy HR] -- candidate webhooks --> gateway
+    aiapps[AI apps: Claude / ChatGPT] -- MCP and OAuth at the root --> gateway
 
     generation -- jobs via Cloud Tasks --> worker[generation worker]
     scheduler[Cloud Scheduler] -- sweeps, key checks, retention, outbox --> worker
@@ -39,6 +40,7 @@ flowchart LR
     scheduler -- activity digest, reminders --> notifications
     scheduler -- retention --> assistant
     assistant -- user's own GET routes, as the user --> companies
+    assistant -- AI apps' users signed in with a custom token --> firebase[Firebase Auth]
     library -- delete, export a user --> assistant
     notifications -- members, waiting interviews --> companies
     notifications -- low credits --> billing
@@ -84,7 +86,7 @@ flowchart LR
 | `notifications` | Receives domain events pushed by Pub/Sub and sends emails through Resend (mailpit without a key): candidate invites and reminders, emailed PDF reports, contact messages to prepza's inbox, and to company members the daily activity digest, reminders (low credits, interviews nobody was invited to, topics waiting for review) and failed automatic top-ups. Also the bell: stores the notifications other services ask for (`notification.requested`), removes a deleted company's (`company.deleted`), and streams them live to open tabs over server-sent events, through Redis pub/sub so every instance hears them (one subscription per instance, shared by its open tabs). Posts a company's chosen notifications to its Slack channel too, through the channel's incoming web hook. Signs emails' unsubscribe links and applies them (`/unsubscribe/{token}`, no sign-in): a user's email settings in library, a candidate's opt-out from a company's emails in its own database, checked before each invite and reminder |
 | `ats` | ATS integrations (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): companies' encrypted ATS keys, linked jobs and the candidates the ATSs send (their webhooks); invites them through companies and writes their results back to the ATS |
 | `api` | The public API at `/api/v1/`: companies' API keys (as hashes, with their expiry), their web hooks (secrets encrypted) and deliveries; reads interviews and candidates and invites through companies, and sends a signed web hook when a candidate finishes |
-| `assistant` | The in-app AI assistant ([feature page](features/assistant.md)): signed-in users' conversations, streamed over server-sent events (`POST /chat`), and tools made from the other services' user-facing GET routes, called with the user's own token. The tools are an allow-list (`app/constants/tools.py`) over committed OpenAPI snapshots of those services (`app/openapi/`, written by `scripts/assistant-openapi.sh`); a tool's data is trimmed for the model, and the panel's links are built only from the tool's link template and ids. Calls to companies carry a signed `X-Assistant` header, so companies audits those reads as the assistant's |
+| `assistant` | The in-app AI assistant ([feature page](features/assistant.md)): signed-in users' conversations, streamed over server-sent events (`POST /chat`), and tools made from the other services' user-facing GET routes, called with the user's own token. The tools are an allow-list (`app/constants/tools.py`) over committed OpenAPI snapshots of those services (`app/openapi/`, written by `scripts/assistant-openapi.sh`); a tool's data is trimmed for the model, and the panel's links are built only from the tool's link template and ids. Calls to companies carry a signed `X-Assistant` header, so companies audits those reads as the assistant's. It also serves those tools to the user's own AI apps over MCP at the site's root (`/mcp`, with its OAuth authorization server; [feature page](features/mcp.md)) |
 | `frontend` | Next.js app; server-rendered pages call the API through the gateway |
 
 What each service does for users is described in the feature pages, linked from the [README](../README.md#documentation). Generation is described in [Generation and question quality](generation.md).
@@ -96,6 +98,7 @@ What each service does for users is described in the feature pages, linked from 
 - **Shared code:** code the API services share (sign-in, service tokens, logging, database and HTTP setup) lives in [`packages/common`](../packages/common/README.md), installed into each service from the repo. The API images are therefore built from the repo root.
 - **Paging:** every list endpoint takes `offset` and `limit`, at most 100 per page.
 - **Sign-in:** users sign in with Firebase Authentication. The local setup uses the Firebase emulator, so no Firebase project is needed.
+- **AI apps' calls:** an AI app connected over MCP holds an opaque token prepza issued (OAuth 2.1 with PKCE). For each of its calls the assistant signs the user in with a Firebase custom token, exchanged for the user's ID token (kept until shortly before it expires), and calls the services with it as the panel does; the services check it like any user's ([AI apps over MCP](features/mcp.md#calling-the-services-as-the-user)).
 
 ## Background work
 

@@ -73,6 +73,11 @@ FAQ = [
         "answer": "Có, không mất thêm phí. Kết nối Workable, Greenhouse, Teamtailor, Recruitee hoặc Breezy HR trong tab Tích hợp của công ty bạn: ứng viên bạn chuyển sang một giai đoạn sẽ nhận buổi phỏng vấn, và kết quả được gửi lại ATS. Slack có thể đăng thông báo của công ty vào một kênh, còn API cho phép nền tảng của riêng bạn mời ứng viên và nhận kết quả của họ; xem Tài liệu API.",
     },
     {
+        "key": "ai_apps",
+        "question": "Tôi có thể dùng prepza từ Claude hoặc ChatGPT không?",
+        "answer": "Có. Thêm prepza vào Claude hoặc ChatGPT dưới dạng trình kết nối (các bước có trong tab Tích hợp của công ty bạn) rồi cho phép trên prepza. Sau đó, ứng dụng sẽ thay mặt bạn, với quyền của bạn, làm việc với các công ty, buổi phỏng vấn và kết quả của ứng viên, và hỏi bạn trước khi thay đổi bất cứ điều gì. Tài khoản hoặc công ty chỉ có thể xóa trong prepza. Dữ liệu ứng dụng đọc được sẽ đến nhà cung cấp của ứng dụng đó theo điều khoản của ứng dụng. Bạn có thể ngắt kết nối bất cứ lúc nào trong cùng tab.",
+    },
+    {
         "key": "candidates",
         "question": "Ứng viên thấy gì?",
         "answer": "Tên và logo công ty của bạn, những gì cần biết trước khi bắt đầu, rồi lần lượt từng câu hỏi có giới hạn thời gian. Họ không bao giờ thấy điểm của mình hay câu trả lời có đúng không.",

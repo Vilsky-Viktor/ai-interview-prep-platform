@@ -78,6 +78,10 @@ locals {
       INVOKER_AUDIENCE = local.run_url["assistant"]
       # Its tools read the api service's settings page too.
       API_URL = local.run_url["api"]
+      # AI apps connect to <SITE_URL>/mcp; their calls sign the user in with Firebase's public
+      # web key.
+      SITE_URL             = "https://${var.domain}"
+      FIREBASE_WEB_API_KEY = var.firebase_web_api_key
     }
   }
 }

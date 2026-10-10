@@ -54,6 +54,7 @@ Settings are described with the feature they shape:
 | Help chat and contact form limits | [Public site](features/site.md#faq-and-help-chat) |
 | `ATS_ENCRYPTION_KEY` | [ATS integrations](features/ats.md#connecting-an-ats) |
 | `API_ENCRYPTION_KEY` | [Public API](features/api.md#settings) |
+| `FIREBASE_WEB_API_KEY` (AI apps over MCP) | [AI apps over MCP](features/mcp.md#settings) |
 | `SLACK_CLIENT_ID`, `SLACK_CLIENT_SECRET`, `SLACK_ENCRYPTION_KEY` | [Notifications and emails](features/notifications.md#setting-up-slack) |
 | `SUPERADMIN_EMAILS` | [Admin zone](features/admin-zone.md) |
 | `ANALYTICS_SALT` | [Architecture](architecture.md#funnel-events) |
@@ -105,6 +106,20 @@ docker compose exec generation uv run --no-sync python -m app.jobs.embed_templat
 ```
 
 Tests, lint and the translations check are in [Testing](testing.md).
+
+## Connecting an AI app locally
+
+The MCP server is at http://localhost:8090/mcp ([AI apps over MCP](features/mcp.md)). Allowing an app opens the consent page in the browser, where you sign in with an emulator account.
+
+```bash
+# Claude Code
+claude mcp add --transport http prepza http://localhost:8090/mcp
+
+# MCP Inspector (in the browser): Streamable HTTP, URL http://localhost:8090/mcp, then Connect
+npx @modelcontextprotocol/inspector
+```
+
+Claude (claude.ai, the desktop app) and ChatGPT connect from their own servers, so they need the stack at a public HTTPS address (a tunnel to port 8090) with `SITE_URL` set to it.
 
 ## Project conventions
 

@@ -36,7 +36,7 @@ def saved(monkeypatch):
     async def record(redis, user_id, company_id, tokens):
         found.tokens.append((user_id, tokens))
 
-    async def get(service, path, query, token, language):
+    async def get(service, path, query, token, language, via=None):
         return httpx.Response(
             200, json={"email": "ann@example.com"}, request=httpx.Request("GET", "http://x")
         )
@@ -113,7 +113,7 @@ def test_a_failing_model_is_an_error_to_try_again(monkeypatch, saved):
 
 
 def test_an_expired_session_says_so_with_its_code(monkeypatch, saved):
-    async def refused(service, path, query, token, language):
+    async def refused(service, path, query, token, language, via=None):
         return httpx.Response(401, json={}, request=httpx.Request("GET", "http://x"))
 
     monkeypatch.setattr(services, "get", refused)

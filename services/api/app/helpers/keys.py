@@ -1,21 +1,16 @@
 import calendar
-import hashlib
-import secrets
 from datetime import datetime
+
+from prepza_common.tokens import new_token
 
 from app.constants.api import KEY_BYTES, KEY_PREFIX, KEY_SHOWN
 
 
-def hashed(key: str) -> str:
-    """What's stored of a key: its SHA-256, so a leaked database gives no working keys."""
-    return hashlib.sha256(key.encode()).hexdigest()
-
-
 def new_key() -> tuple[str, str, str]:
     """A new key, its first characters (to tell keys apart) and its hash."""
-    key = KEY_PREFIX + secrets.token_urlsafe(KEY_BYTES)
+    key, key_hash = new_token(KEY_PREFIX, KEY_BYTES)
 
-    return key, key[:KEY_SHOWN], hashed(key)
+    return key, key[:KEY_SHOWN], key_hash
 
 
 def expired(expires_at: datetime | None, now: datetime) -> bool:
