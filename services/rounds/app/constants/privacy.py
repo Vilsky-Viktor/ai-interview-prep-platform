@@ -53,13 +53,13 @@ PRIVACY_SECTIONS = [
             "We share data with the service providers that run prepza for us, under agreements that protect it:",
         ],
         "items": [
-            "Google (Firebase Authentication): sign-in. LinkedIn and GitHub only confirm who you are when you sign in with them; we don't receive anything else from them.",
-            "OpenAI: writing questions from the text you provide; the assistant's answers, from your questions and the data it reads with your access to answer them; turning voice messages into text; and checking reported questions (only the reasons given, never the comments). We tell OpenAI not to store it: under its API terms it keeps this data for at most 30 days, only to check for abuse, and doesn't use it to train its models.",
-            "Resend: sending emails: invites and reminders to candidates, reports, emails to company members such as the activity digest, and contact messages.",
-            "Sentry: error reports, with emails removed.",
-            "Google Cloud, our hosting provider, which stores the data.",
-            "Upstash: short-lived counters for rate limits and live updates.",
-            "Paddle: payments and taxes, as the reseller.",
+            "Google (Firebase Authentication; Google LLC, United States, under the EU-US Data Privacy Framework): sign-in. LinkedIn and GitHub only confirm who you are when you sign in with them; we don't receive anything else from them.",
+            "OpenAI: writing questions from the text you provide; the assistant's answers, from your questions and the data it reads with your access to answer them; turning voice messages into text; and checking reported questions (only the reasons given, never the comments). We tell OpenAI not to store it: under its API terms it keeps this data for at most 30 days, only to check for abuse, and doesn't use it to train its models. (OpenAI, United States, under its data processing addendum with the European Commission's standard contractual clauses.)",
+            "Resend: sending emails: invites and reminders to candidates, reports, emails to company members such as the activity digest, and contact messages (in the EU, Ireland).",
+            "Sentry: error reports, with emails removed (in the EU).",
+            "Google Cloud, our hosting provider, which stores the data (in the EU, Belgium).",
+            "Upstash: short-lived counters for rate limits and live updates (in the EU, Belgium).",
+            "Paddle sells the top-ups as the merchant of record: it handles payments and taxes as an independent controller, under its own privacy policy.",
         ],
     },
     {
@@ -84,7 +84,7 @@ PRIVACY_SECTIONS = [
     {
         "heading": "Transfers outside the EU",
         "paragraphs": [
-            "Some of these providers are in the United States. Transfers are covered by the EU-US Data Privacy Framework or the European Commission's standard contractual clauses.",
+            "Two of these providers handle data in the United States: Google, for sign-in, and OpenAI. These transfers are covered by the EU-US Data Privacy Framework or the European Commission's standard contractual clauses, as noted above. Write to us for a copy of the safeguards that apply.",
         ],
     },
     {

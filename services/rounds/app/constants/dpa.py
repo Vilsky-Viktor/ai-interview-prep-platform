@@ -36,18 +36,18 @@ DPA_SECTIONS = [
             "The company authorises these sub-processors, each bound by data protection terms at least as protective as these:",
         ],
         "items": [
-            "Google Cloud (hosting, database, events) and Google Firebase (sign-in).",
-            "OpenAI (writing and improving questions, including checking reported questions by the reasons given, never their comments; the assistant's answers, from a member's questions and the data it reads with their access, and turning voice messages into text; told not to store it; under its API terms it keeps the data for at most 30 days, only to check for abuse, and uses nothing for training).",
-            "Resend (emails).",
-            "Sentry (error reports, without email addresses).",
-            "Upstash (short-lived counters for limits and live updates).",
+            "Google Cloud (hosting, database, events; EU, Belgium) and Google Firebase (sign-in; Google LLC, United States, under the EU-US Data Privacy Framework).",
+            "OpenAI (writing and improving questions, including checking reported questions by the reasons given, never their comments; the assistant's answers, from a member's questions and the data it reads with their access, and turning voice messages into text; told not to store it; under its API terms it keeps the data for at most 30 days, only to check for abuse, and uses nothing for training; United States, under its data processing addendum with the European Commission's standard contractual clauses).",
+            "Resend (emails; EU, Ireland).",
+            "Sentry (error reports, without email addresses; EU).",
+            "Upstash (short-lived counters for limits and live updates; EU, Belgium).",
         ],
     },
     {
         "heading": "Changes and transfers",
         "paragraphs": [
             "We announce a new sub-processor at least 14 days before it starts, by email or in the app; a company that objects for reasonable data protection reasons can stop using prepza and delete its company.",
-            "Transfers outside the EU are covered by the EU-US Data Privacy Framework or the European Commission's standard contractual clauses.",
+            "Transfers outside the EU (to Google Firebase and OpenAI, in the United States) are covered by the EU-US Data Privacy Framework or the European Commission's standard contractual clauses, as listed above; the company can ask for a copy of the safeguards.",
         ],
     },
     {

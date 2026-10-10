@@ -114,7 +114,7 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
 11. **Update the services that call back to the site:**
     - **Paddle:** the webhook destination is `https://prepza.ai/api/billing/webhooks/paddle`, for `transaction.completed`, `adjustment.created`, `adjustment.updated`, `subscription.created` and `subscription.canceled`. The adjustments are refunds and chargebacks, which take the credits back; the subscriptions start and end automatic top-ups. Once deployed, send Paddle's test notification to it: it must be accepted (a refused signature means `paddle-webhook-secret` is wrong, and the alert below fires).
     - **Resend:** the `prepza.ai` sending domain is already verified; verify `mail.prepza.ai` too, the optional emails' sender (see [Email deliverability](#email-deliverability)). Add a webhook at `https://prepza.ai/api/notifications/webhooks/resend` for `email.bounced`, `email.complained` and `email.suppressed`; its signing secret is `resend-webhook-secret` in step 8. Once deployed, send a test event from Resend and check it's accepted.
-    - **Sentry:** set `backend_sentry_dsn` in `terraform.tfvars`.
+    - **Sentry:** create the organization in Sentry's EU data region (the privacy policy and DPA say error reports stay in the EU), then set `backend_sentry_dsn` in `terraform.tfvars`.
 
 12. **Connect GitHub for deploys.** In the repository's **Settings → Secrets and variables → Actions → Variables**, add:
     - **From Terraform:** everything in `terraform output github_variables`, which gives `GCP_PROJECT_ID`, `GCP_REGION`, `GCP_WORKLOAD_IDENTITY_PROVIDER`, `GCP_DEPLOY_SERVICE_ACCOUNT` and `SITE_URL`.
