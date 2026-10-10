@@ -20,10 +20,11 @@ async def count_today(key: str) -> int:
     return count
 
 
-async def use_daily_budget() -> None:
-    """Counts one new generation against today's limit for everyone (UTC days); past it, new
-    generations wait until tomorrow. Checked before billing, so nobody pays for a refusal."""
-    if settings.daily_generation_limit <= 0:
+async def use_daily_budget(paid: bool = False) -> None:
+    """Counts one new generation (or regenerated question) against today's limit for everyone
+    (UTC days); past it, they wait until tomorrow. A company that ever topped up isn't held to
+    it, so free sign-ups can't use it up for paying ones."""
+    if paid or settings.daily_generation_limit <= 0:
         return
 
     if await count_today(BUDGET_KEY) > settings.daily_generation_limit:

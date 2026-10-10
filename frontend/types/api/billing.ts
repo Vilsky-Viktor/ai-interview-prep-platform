@@ -116,6 +116,23 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/internal/companies/{company_id}/paid": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Company Paid */
+    get: operations["company_paid_internal_companies__company_id__paid_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/internal/companies/{company_id}/referral": {
     parameters: {
       query?: never
@@ -533,6 +550,11 @@ export interface components {
       /** Owner Ids */
       owner_ids: string[]
     }
+    /** PaidOut */
+    PaidOut: {
+      /** Paid */
+      paid: boolean
+    }
     /**
      * ReferralOut
      * @description The owner's referral link code, what it earns, and how many it has earned for.
@@ -771,6 +793,37 @@ export interface operations {
           [name: string]: unknown
         }
         content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  company_paid_internal_companies__company_id__paid_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["PaidOut"]
+        }
       }
       /** @description Validation Error */
       422: {

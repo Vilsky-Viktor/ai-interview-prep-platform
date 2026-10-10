@@ -106,7 +106,7 @@ Every generation runs on `gpt-6.1-sol` at low. In testing ([evals/README.md](../
 | Generations per account in the window (0 turns it off) | `GENERATION_LIMIT` setting | 20 |
 | The window for the per-account limits | `GENERATION_WINDOW_SECONDS` setting | A day |
 | Re-generated questions per account in the same window (0 turns it off) | `REGENERATION_LIMIT` setting | 100 |
-| New generations a day for everyone together, a ceiling on LLM spending (0 turns it off) | `DAILY_GENERATION_LIMIT` setting | 200 |
+| New generations and regenerated questions a day for companies that never topped up, together, a ceiling on LLM spending (0 turns it off); a company that paid isn't held to it, so free sign-ups can't use it up for paying ones | `DAILY_GENERATION_LIMIT` setting | 200 |
 | Revisions in words per topic review; after that, topics are only chosen by checkbox | `MAX_TOPIC_REVISIONS` constant (`services/generation/app/constants/generation.py`) | 10 |
 | Verifier jobs a day for everyone together; a superadmin's "Fix now" isn't counted | `DAILY_VERIFY_LIMIT` constant (`services/generation/app/constants/quality.py`) | 300 |
 | Question reports per user a day (library) | `REPORTS_PER_DAY` constant (`services/library/app/constants/feedback.py`) | 30 |

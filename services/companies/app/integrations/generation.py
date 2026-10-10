@@ -8,7 +8,12 @@ from app.service_auth import service_token
 
 
 async def create(
-    text: str, company_id: UUID, owner_uid: str, language: str, generate_in: str | None
+    text: str,
+    company_id: UUID,
+    owner_uid: str,
+    language: str,
+    generate_in: str | None,
+    paid: bool,
 ) -> dict:
     """Only companies may start an interview generation, after checking the user's membership."""
     response = await http.get_client().post(
@@ -19,6 +24,7 @@ async def create(
             "owner_uid": owner_uid,
             "language": language,
             "generate_in": generate_in,
+            "paid": paid,
         },
         headers={"Authorization": f"Bearer {service_token('generation')}"},
     )
@@ -28,11 +34,13 @@ async def create(
     return response.json()
 
 
-async def regenerate_question(question_id: UUID, set_id: UUID, user_id: str) -> httpx.Response:
+async def regenerate_question(
+    question_id: UUID, set_id: UUID, user_id: str, paid: bool
+) -> httpx.Response:
     """The raw response, so the caller can pass rate limits and failures through."""
     return await http.get_client().post(
         f"{settings.generation_url}/internal/questions/{question_id}/regenerate",
-        json={"user_id": user_id, "set_id": str(set_id)},
+        json={"user_id": user_id, "set_id": str(set_id), "paid": paid},
         headers={"Authorization": f"Bearer {service_token('generation')}"},
         timeout=120,
     )

@@ -33,6 +33,8 @@ class InterviewGenerationCreate(BaseModel):
     language: Language = DEFAULT_LANGUAGE
     # The language the recruiter chose to generate in; none means the text's own.
     generate_in: Language | None = None
+    # Whether the company ever topped up: then it isn't held to the daily limit for everyone.
+    paid: bool = False
 
 
 class TemplateGenerationCreate(BaseModel):

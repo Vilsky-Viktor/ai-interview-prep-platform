@@ -103,3 +103,15 @@ def test_only_the_company_that_bought_a_top_up_owns_it(run):
         )
 
     assert run(scenario()) == (True, False, False, False)
+
+
+def test_a_company_has_paid_once_it_topped_up(run):
+    acme, other = company(), company()
+
+    async def scenario():
+        txn = f"txn_{uuid.uuid4().hex}"
+        await purchases.grant(COMPANY, acme, 1_000, 1, txn, TOPUP.key, "ann", "1000", "USD", NOW)
+
+        return await purchases.paid(COMPANY, acme), await purchases.paid(COMPANY, other)
+
+    assert run(scenario()) == (True, False)

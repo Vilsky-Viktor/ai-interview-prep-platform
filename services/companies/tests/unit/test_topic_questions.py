@@ -5,7 +5,7 @@ import httpx
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
-from app.integrations import generation, library
+from app.integrations import billing, generation, library
 from app.main import app
 from app.models.companies import Company, Member
 from app.models.interviews import Interview
@@ -48,12 +48,17 @@ def test_only_owner_or_admin_can_regenerate(client, monkeypatch):
     sign_in()
     calls = []
 
-    async def fake_regenerate(question_id, set_id, user_id):
-        calls.append(user_id)
+    async def fake_regenerate(question_id, set_id, user_id, paid):
+        calls.append((user_id, paid))
 
         return httpx.Response(200, json={"id": str(QUESTION_ID), "text": "New question?"})
 
+    async def has_paid(_company_id):
+        return True
+
     monkeypatch.setattr(generation, "regenerate_question", fake_regenerate)
+    # Whether the company ever paid goes along: a paying one isn't held to the daily limit.
+    monkeypatch.setattr(billing, "company_paid", has_paid)
     url = f"/interviews/{INTERVIEW_ID}/questions/{QUESTION_ID}/regenerate"
 
     for role, expected in (("viewer", 403), ("admin", 200), ("owner", 200)):
@@ -70,7 +75,7 @@ def test_only_owner_or_admin_can_regenerate(client, monkeypatch):
 
         assert client.post(url).status_code == expected
 
-    assert calls == ["bob", "bob"]
+    assert calls == [("bob", True), ("bob", True)]
 
     app.dependency_overrides.clear()
 

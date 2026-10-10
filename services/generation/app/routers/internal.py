@@ -45,7 +45,7 @@ async def create_interview_generation(
         settings.generation_limit,
         settings.generation_window_seconds,
     )
-    await use_daily_budget()
+    await use_daily_budget(body.paid)
     generation = await generations.create(
         body.owner_uid,
         body.text,
@@ -128,6 +128,7 @@ async def regenerate_interview_question(
         settings.regeneration_limit,
         settings.generation_window_seconds,
     )
+    await use_daily_budget(body.paid)
     question = await regenerate(question_id, context)
 
     if question is None:

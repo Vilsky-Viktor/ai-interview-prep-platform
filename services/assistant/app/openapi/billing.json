@@ -226,6 +226,53 @@
     }
    }
   },
+  "/internal/companies/{company_id}/paid": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Company Paid",
+    "operationId": "company_paid_internal_companies__company_id__paid_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PaidOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
   "/internal/companies/{company_id}/referral": {
    "get": {
     "tags": [
@@ -1329,6 +1376,19 @@
      "owner_ids"
     ],
     "title": "OwnersIn"
+   },
+   "PaidOut": {
+    "properties": {
+     "paid": {
+      "type": "boolean",
+      "title": "Paid"
+     }
+    },
+    "type": "object",
+    "required": [
+     "paid"
+    ],
+    "title": "PaidOut"
    },
    "ReferralOut": {
     "properties": {

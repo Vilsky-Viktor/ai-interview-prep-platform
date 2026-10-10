@@ -23,8 +23,8 @@ from app.helpers.interviews import (
     session_topics,
     topics_out,
 )
+from app.integrations import billing, library, rounds
 from app.integrations import generation as generation_api
-from app.integrations import library, rounds
 from app.integrations.redis import get_redis
 from app.schemas.interviews import (
     InterviewCreate,
@@ -75,7 +75,12 @@ async def create_interview(
 
     try:
         created = await generation_api.create(
-            body.text, company.id, user.uid, user.language, body.generate_in
+            body.text,
+            company.id,
+            user.uid,
+            user.language,
+            body.generate_in,
+            await billing.company_paid(company.id),
         )
     except httpx.HTTPStatusError as error:
         if error.response.status_code == status.HTTP_429_TOO_MANY_REQUESTS:

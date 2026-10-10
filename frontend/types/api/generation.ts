@@ -146,6 +146,27 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/internal/generations/statuses": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Generation Statuses
+     * @description Notifications, for its reminders: the status of each of those generations that still
+     *     exists, who started it and since when.
+     */
+    post: operations["generation_statuses_internal_generations_statuses_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/internal/generations/{generation_id}": {
     parameters: {
       query?: never
@@ -268,6 +289,27 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/internal/news/{news_id}/translate": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Translate News
+     * @description The library saved a news post; the worker translates it into the languages it lacks.
+     *     While paused the call is refused, and the library sends the post again later.
+     */
+    post: operations["translate_news_internal_news__news_id__translate_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/internal/users/{user_id}": {
     parameters: {
       query?: never
@@ -295,10 +337,10 @@ export interface paths {
       path?: never
       cookie?: never
     }
-    /** Export User */
-    get: operations["export_user_internal_users__user_id__export_get"]
+    get?: never
     put?: never
-    post?: never
+    /** Export User */
+    post: operations["export_user_internal_users__user_id__export_post"]
     delete?: never
     options?: never
     head?: never
@@ -361,6 +403,11 @@ export interface components {
       /** Subtopics */
       subtopics: string[]
     }
+    /** GenerationIdsIn */
+    GenerationIdsIn: {
+      /** Ids */
+      ids: string[]
+    }
     /**
      * GenerationKind
      * @enum {string}
@@ -410,6 +457,27 @@ export interface components {
       topics?: number | null
       /** Topics Ready */
       topics_ready?: number | null
+    }
+    /** GenerationStatusOut */
+    GenerationStatusOut: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string
+      status: components["schemas"]["Status"]
+      /** Owner Uid */
+      owner_uid: string
+      /**
+       * Updated At
+       * Format: date-time
+       */
+      updated_at: string
+    }
+    /** GenerationStatusesOut */
+    GenerationStatusesOut: {
+      /** Generations */
+      generations: components["schemas"]["GenerationStatusOut"][]
     }
     /** HTTPValidationError */
     HTTPValidationError: {
@@ -487,6 +555,11 @@ export interface components {
             | "et"
           )
         | null
+      /**
+       * Paid
+       * @default false
+       */
+      paid: boolean
     }
     /**
      * QualityFlag
@@ -503,6 +576,11 @@ export interface components {
        * Format: uuid
        */
       set_id: string
+      /**
+       * Paid
+       * @default false
+       */
+      paid: boolean
     }
     /** RegeneratedOut */
     RegeneratedOut: {
@@ -845,6 +923,39 @@ export interface operations {
       }
     }
   }
+  generation_statuses_internal_generations_statuses_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["GenerationIdsIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["GenerationStatusesOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
   get_interview_generation_internal_generations__generation_id__get: {
     parameters: {
       query: {
@@ -1051,6 +1162,37 @@ export interface operations {
       }
     }
   }
+  translate_news_internal_news__news_id__translate_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        news_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      202: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": unknown
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
   delete_user_internal_users__user_id__delete: {
     parameters: {
       query?: never
@@ -1080,7 +1222,7 @@ export interface operations {
       }
     }
   }
-  export_user_internal_users__user_id__export_get: {
+  export_user_internal_users__user_id__export_post: {
     parameters: {
       query?: never
       header?: never

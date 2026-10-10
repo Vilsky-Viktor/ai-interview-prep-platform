@@ -52,6 +52,11 @@ class BalanceOut(BaseModel):
     candidates: int = 0
 
 
+class PaidOut(BaseModel):
+    # Whether the company ever topped up: a paying customer isn't held to free accounts' limits.
+    paid: bool
+
+
 class LowCompanyOut(BaseModel):
     company_id: str
     available: int

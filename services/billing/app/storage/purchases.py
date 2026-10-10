@@ -138,6 +138,16 @@ async def take_back(
     return taken
 
 
+async def paid(owner_type: str, owner_id: str) -> bool:
+    """Whether this wallet was ever topped up."""
+    query = select(Purchase.id).where(
+        Purchase.owner_type == owner_type, Purchase.owner_id == owner_id
+    )
+
+    async with Session() as session:
+        return await session.scalar(query.limit(1)) is not None
+
+
 async def owns(owner_type: str, owner_id: str, transaction_id: str) -> bool:
     """Whether the transaction topped up this wallet."""
     query = select(Purchase.id).where(

@@ -19,6 +19,8 @@ class QuestionContext(BaseModel):
 class RegenerateIn(BaseModel):
     user_id: str
     set_id: UUID
+    # Whether the company ever topped up: then it isn't held to the daily limit for everyone.
+    paid: bool = False
 
 
 class RegeneratedOption(BaseModel):

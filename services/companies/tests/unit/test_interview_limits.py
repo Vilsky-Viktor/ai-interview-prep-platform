@@ -44,9 +44,12 @@ def generate(client, monkeypatch, waiting):
         reached.append("day limit")
 
     async def fake_generation(*args):
-        reached.append("generation")
+        reached.append(("generation", args[-1]))
 
         return {"id": str(uuid.uuid4()), "language": "en"}
+
+    async def fake_paid(company_id):
+        return False
 
     async def fake_create(company_id, generation_id, language):
         return SimpleNamespace(id=uuid.uuid4())
@@ -70,6 +73,7 @@ def generate(client, monkeypatch, waiting):
     monkeypatch.setattr(interviews, "without_candidates", fake_waiting)
     monkeypatch.setattr(route, "hit", fake_hit)
     monkeypatch.setattr(route.generation_api, "create", fake_generation)
+    monkeypatch.setattr(route.billing, "company_paid", fake_paid)
     monkeypatch.setattr(interviews, "create", fake_create)
     monkeypatch.setattr(route, "interview_out", fake_out)
     response = client.post(
@@ -91,7 +95,8 @@ def test_three_interviews_waiting_without_candidates_stop_a_new_one(client, monk
 def test_fewer_waiting_interviews_let_a_new_one_be_generated(client, monkeypatch):
     _, reached = generate(client, monkeypatch, waiting=2)
 
-    assert reached == ["day limit", "generation"]
+    # An unpaid company's generation is sent as such, so the daily limit for everyone applies.
+    assert reached == ["day limit", ("generation", False)]
 
 
 def test_the_waiting_limit_message_has_translations():

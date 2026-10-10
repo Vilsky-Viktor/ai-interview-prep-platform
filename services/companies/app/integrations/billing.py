@@ -1,5 +1,6 @@
 from uuid import UUID
 
+import httpx
 from fastapi import HTTPException, status
 from prepza_common import http
 
@@ -69,6 +70,21 @@ async def company_referral(company_id: UUID) -> dict:
     response.raise_for_status()
 
     return response.json()
+
+
+async def company_paid(company_id: UUID) -> bool:
+    """Whether the company ever topped up. When billing can't say, it counts as not: the
+    company is then held to the daily limit for everyone, rather than refused."""
+    try:
+        response = await http.get_client().get(
+            f"{settings.billing_url}/internal/companies/{company_id}/paid",
+            headers=_headers(),
+        )
+        response.raise_for_status()
+    except httpx.HTTPError:
+        return False
+
+    return response.json()["paid"]
 
 
 async def company_credits(company_id: UUID) -> dict:

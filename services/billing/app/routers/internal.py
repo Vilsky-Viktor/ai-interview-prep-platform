@@ -15,6 +15,7 @@ from app.schemas.billing import (
     LowCompaniesOut,
     LowCompanyOut,
     OwnersIn,
+    PaidOut,
     ReferralOut,
     WelcomeIn,
 )
@@ -65,6 +66,11 @@ async def welcome_company(company_id: str, body: WelcomeIn, caller: ServiceCalle
     in that sense can be referred by another, unrelated one."""
     if await ledger.welcome_company(company_id, body.owner_email) and body.referral:
         await referrals.record(body.referral, OwnerType.COMPANY, company_id, body.related)
+
+
+@router.get("/companies/{company_id}/paid")
+async def company_paid(company_id: str, caller: ServiceCaller) -> PaidOut:
+    return PaidOut(paid=await purchases.paid(OwnerType.COMPANY, company_id))
 
 
 @router.get("/companies/{company_id}/referral")
