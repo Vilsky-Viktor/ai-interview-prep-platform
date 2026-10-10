@@ -35,7 +35,7 @@ def test_publishing_to_the_emulator_sends_the_event_without_a_token(client, monk
     [(url, body, headers)] = client.calls
     [message] = body["messages"]
     assert url == "http://pubsub:8085/v1/projects/demo-prepza/topics/events:publish"
-    assert message["attributes"] == {"type": "candidate.invited"}
+    assert message["attributes"]["type"] == "candidate.invited"
     assert json.loads(base64.b64decode(message["data"])) == {"email": "bob@example.com"}
     assert headers == {}
 
@@ -76,10 +76,19 @@ def test_a_batch_goes_in_one_call_with_each_events_own_id(client, monkeypatch):
     )
 
     [(_, body, _)] = client.calls
-    assert [message["attributes"] for message in body["messages"]] == [
-        {"type": "a.done", "event_id": "id-1"},
-        {"type": "b.done"},
-    ]
+    [given, new] = [message["attributes"] for message in body["messages"]]
+    assert given == {"type": "a.done", "event_id": "id-1"}
+    assert new["type"] == "b.done"
+    assert new["event_id"]
+
+
+def test_each_event_without_an_id_gets_its_own():
+    """Never Pub/Sub's message id, which the local emulator numbers from 1 again after a restart:
+    a new event must not look like one a consumer already handled."""
+    first = pubsub.message("notification.requested", {})["attributes"]["event_id"]
+    second = pubsub.message("notification.requested", {})["attributes"]["event_id"]
+
+    assert first and second and first != second
 
 
 def test_a_push_with_an_event_id_is_known_by_it_across_re_sends():

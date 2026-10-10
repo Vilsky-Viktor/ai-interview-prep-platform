@@ -2,6 +2,7 @@ import asyncio
 import base64
 import json
 import os
+import uuid
 
 from prepza_common import http
 from prepza_common.constants import (
@@ -15,11 +16,11 @@ from pydantic import BaseModel
 
 
 def message(event_type: str, data: dict, event_id: str | None = None) -> dict:
-    """One event as Pub/Sub takes it; `event_id`, when given, stays the same on a re-send."""
-    attributes = {"type": event_type}
-
-    if event_id is not None:
-        attributes[EVENT_ID_ATTRIBUTE] = event_id
+    """One event as Pub/Sub takes it, with its own id: `event_id` when given (it stays the same on
+    a re-send), otherwise a new one. Consumers never fall back on Pub/Sub's message id, which the
+    local emulator numbers from 1 again after a restart, so a new event could look like one already
+    handled and be dropped."""
+    attributes = {"type": event_type, EVENT_ID_ATTRIBUTE: event_id or uuid.uuid4().hex}
 
     return {"data": base64.b64encode(json.dumps(data).encode()).decode(), "attributes": attributes}
 
