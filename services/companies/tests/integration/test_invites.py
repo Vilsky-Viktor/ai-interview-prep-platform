@@ -36,7 +36,9 @@ def test_an_undelivered_invite_is_marked_until_it_is_sent_again(run):
     async def scenario():
         found = await interview()
         invite, _ = await invites.upsert(found.id, "erin@example.com", "Backend", "Acme", "en")
-        await invites.mark_undelivered(invite.id, invite_undelivered(found, invite.email))
+        await invites.mark_undelivered(
+            invite.id, invite_undelivered(found, str(invite.id), invite.email)
+        )
         bounced, _ = await invites.get_by_token(invite.token)
         await invites.upsert(found.id, "erin@example.com", "Backend", "Acme", "en")
         resent, _ = await invites.get_by_token(invite.token)
@@ -54,7 +56,9 @@ def test_a_started_invite_is_never_marked_undelivered(run):
         found = await interview()
         invite, _ = await invites.upsert(found.id, "fay@example.com", "Backend", "Acme", "en")
         await invites.start(invite.id, "fay-uid")
-        await invites.mark_undelivered(invite.id, invite_undelivered(found, invite.email))
+        await invites.mark_undelivered(
+            invite.id, invite_undelivered(found, str(invite.id), invite.email)
+        )
         stored, _ = await invites.get_by_token(invite.token)
 
         return stored

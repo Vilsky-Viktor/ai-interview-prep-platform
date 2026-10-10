@@ -43,6 +43,8 @@ def test_notifications_marks_an_invite_undelivered_and_the_company_is_told(clien
         f"/companies/{company}/interviews/{INTERVIEW.id}",
         email="erin@example.com",
         title="Backend",
+        # Slack opens the candidate, where the invite is resent.
+        candidate_link=f"/companies/{company}/interviews/{INTERVIEW.id}/candidates/{INVITE_ID}",
     )
     assert client.post(URL, headers={"Authorization": f"Bearer {token}"}).status_code == 204
     assert marked == [(INVITE_ID, undelivered)]

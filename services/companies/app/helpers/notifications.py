@@ -39,8 +39,11 @@ def candidate_finished(
     )
 
 
-def invite_undelivered(interview: Interview, email: str, name: str | None = None) -> dict:
-    """With the candidate's name when it's known (the inviter's or the ATS's)."""
+def invite_undelivered(
+    interview: Interview, invite_id: str, email: str, name: str | None = None
+) -> dict:
+    """With the candidate's name when it's known (the inviter's or the ATS's). Slack opens the
+    candidate, where the invite is resent; the bell, the interview."""
     return notification(
         Recipient.COMPANY,
         interview.company_id,
@@ -48,6 +51,9 @@ def invite_undelivered(interview: Interview, email: str, name: str | None = None
         interview_link(interview),
         email=email,
         title=interview.title,
+        candidate_link=CANDIDATE_LINK.format(
+            company_id=interview.company_id, interview_id=interview.id, invite_id=invite_id
+        ),
         **({"candidate_name": name} if name else {}),
     )
 

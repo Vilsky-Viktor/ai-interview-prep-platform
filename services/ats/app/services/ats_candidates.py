@@ -120,7 +120,13 @@ async def refused(
     """Kept as not invited, to retry; owners and admins hear why, and from which ATS."""
     name = ATS_NAMES[connection.provider]
     notice = ats_not_invited(
-        interview["company_id"], name, interview["title"], row.email, reason, row.name
+        interview["company_id"],
+        connection.provider,
+        name,
+        interview["title"],
+        row.email,
+        reason,
+        row.name,
     )
     await ats_candidates.settle(row.id, CandidateStatus.FAILED, reason, notice=notice)
     await outbox_service.flush_quietly()

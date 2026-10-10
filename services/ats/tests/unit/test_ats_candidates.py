@@ -187,7 +187,7 @@ def test_a_refused_invite_is_kept_with_its_reason_to_retry(world, refusal, reaso
     receive(event())
 
     assert (state["rows"]["c-1"].status, state["rows"]["c-1"].reason) == ("failed", reason)
-    # Owners and admins hear why, with a link to the ATS tab to retry.
+    # Owners and admins hear why, with a link to the ATS's own page, which retries.
     [notice] = state["notices"]
     assert notice["kind"] == "ats_not_invited"
     # It names the ATS the candidate came from.
@@ -197,7 +197,7 @@ def test_a_refused_invite_is_kept_with_its_reason_to_retry(world, refusal, reaso
         "title": "Accountant",
         "reason": reason,
     }
-    assert notice["link"].endswith("/integrations")
+    assert notice["link"].endswith("/integrations/workable")
     assert state["flushed"] == 1
 
 
