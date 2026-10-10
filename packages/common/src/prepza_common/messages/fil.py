@@ -1,6 +1,7 @@
 # Messages the services show users, in Filipino, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Too many invites waiting. Remove some, or wait for them to join.": "Masyadong maraming imbitasyong naghihintay. Alisin ang ilan, o hintaying sumali sila.",
     "Only the person whose card pays for it can change it. Turn it off, then turn it on with your own card.": "Ang taong ang card ang nagbabayad lang ang puwedeng magbago nito. I-off ito, saka i-on gamit ang sarili mong card.",
     "The request is too large.": "Masyadong malaki ang request.",
     "Too many requests. Try again later.": "Masyadong maraming request. Subukang muli mamaya.",

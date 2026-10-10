@@ -1,6 +1,7 @@
 # Messages the services show users, in Persian, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Too many invites waiting. Remove some, or wait for them to join.": "دعوت‌های در انتظار زیاد است. برخی را حذف کنید یا صبر کنید تا بپیوندند.",
     "Only the person whose card pays for it can change it. Turn it off, then turn it on with your own card.": "فقط کسی که با کارتش پرداخت می‌شود می‌تواند آن را تغییر دهد. آن را خاموش کنید، سپس با کارت خودتان روشن کنید.",
     "The request is too large.": "درخواست بیش از حد بزرگ است.",
     "Too many requests. Try again later.": "درخواست\u200cها بیش از حد زیاد است. بعداً دوباره امتحان کنید.",

@@ -2,11 +2,17 @@ from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser, OptionalUser
+from prepza_common.constants import DAY_SECONDS
 from prepza_common.paging import PageParams
-from prepza_common.rate_limit import hit_emails
+from prepza_common.rate_limit import hit, hit_emails
 
 from app.config.settings import settings
-from app.constants.roles import Role
+from app.constants.roles import (
+    MAX_PENDING_INVITES,
+    MEMBER_INVITES_PER_UNPAID_DAY,
+    TOO_MANY_PENDING,
+    Role,
+)
 from app.helpers.logos import logo_path
 from app.integrations import billing
 from app.integrations.redis import get_redis
@@ -57,6 +63,13 @@ async def invite_member(company_id: UUID, body: MemberIn, user: CurrentUser) -> 
 
     if any(member.invited_email == email for member in company.members):
         raise HTTPException(status.HTTP_409_CONFLICT, "That email is already invited")
+
+    if sum(member.user_id is None for member in company.members) >= MAX_PENDING_INVITES:
+        raise HTTPException(status.HTTP_409_CONFLICT, TOO_MANY_PENDING)
+
+    if not await billing.company_paid(company.id):
+        key = f"rate:member-invites:{company.id}"
+        await hit(get_redis(), key, MEMBER_INVITES_PER_UNPAID_DAY, DAY_SECONDS)
 
     # The invite emails the member, so it counts toward the owner's email limits.
     await hit_emails(

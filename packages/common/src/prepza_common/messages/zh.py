@@ -1,6 +1,7 @@
 # Messages the services show users, in Chinese (Simplified), keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Too many invites waiting. Remove some, or wait for them to join.": "待接受的邀请太多。请删除一些，或等待对方加入。",
     "Only the person whose card pays for it can change it. Turn it off, then turn it on with your own card.": "只有付款卡的持有人才能更改。请先关闭，再用你自己的卡开启。",
     "The request is too large.": "请求过大。",
     "Too many requests. Try again later.": "请求过多，请稍后再试。",

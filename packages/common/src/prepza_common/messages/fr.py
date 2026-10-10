@@ -1,6 +1,7 @@
 # Messages the services show users, in French, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Too many invites waiting. Remove some, or wait for them to join.": "Trop d’invitations en attente. Supprimez-en quelques-unes ou attendez qu’elles soient acceptées.",
     "Only the person whose card pays for it can change it. Turn it off, then turn it on with your own card.": "Seule la personne dont la carte le paie peut le modifier. Désactivez-le, puis réactivez-le avec votre propre carte.",
     "The request is too large.": "La requête est trop volumineuse.",
     "Too many requests. Try again later.": "Trop de requêtes. Réessayez plus tard.",

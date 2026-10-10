@@ -144,6 +144,9 @@ def team(monkeypatch):
     async def fake_company(_company_id):
         return company
 
+    async def fake_paid(_company_id):
+        return True
+
     async def fake_remove(member_id):
         removed.append(member_id)
 
@@ -170,6 +173,8 @@ def team(monkeypatch):
     monkeypatch.setattr(billing, "turn_off_auto_top_up", fake_turn_off)
     monkeypatch.setattr(members_router, "hit_emails", fake_hit_emails)
     monkeypatch.setattr(outbox_service, "flush_quietly", fake_flush)
+    # A paying company: the daily cap for unpaid ones doesn't count (test_member_invite_limits).
+    monkeypatch.setattr(billing, "company_paid", fake_paid)
 
     return company.members, removed, turned_off
 

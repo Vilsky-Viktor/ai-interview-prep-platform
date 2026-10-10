@@ -1,6 +1,7 @@
 # Messages the services show users, in Ukrainian, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Too many invites waiting. Remove some, or wait for them to join.": "Забагато запрошень, що очікують. Видаліть частину або зачекайте, поки до вас приєднаються.",
     "Only the person whose card pays for it can change it. Turn it off, then turn it on with your own card.": "Змінити це може лише той, чия картка за це платить. Вимкніть його, а потім увімкніть зі своєю карткою.",
     "The request is too large.": "Запит завеликий.",
     "Too many requests. Try again later.": "Забагато запитів. Спробуйте пізніше.",

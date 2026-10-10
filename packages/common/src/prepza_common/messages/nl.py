@@ -1,6 +1,7 @@
 # Messages the services show users, in Dutch, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Too many invites waiting. Remove some, or wait for them to join.": "Te veel openstaande uitnodigingen. Verwijder er een paar of wacht tot ze lid worden.",
     "Only the person whose card pays for it can change it. Turn it off, then turn it on with your own card.": "Alleen degene met wiens kaart het betaald wordt, kan het wijzigen. Zet het uit en daarna weer aan met je eigen kaart.",
     "The request is too large.": "Het verzoek is te groot.",
     "Too many requests. Try again later.": "Te veel verzoeken. Probeer het later opnieuw.",

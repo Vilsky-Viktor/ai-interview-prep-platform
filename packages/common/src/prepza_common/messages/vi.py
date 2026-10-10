@@ -1,6 +1,7 @@
 # Messages the services show users, in Vietnamese, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Too many invites waiting. Remove some, or wait for them to join.": "Có quá nhiều lời mời đang chờ. Hãy xóa bớt hoặc đợi họ tham gia.",
     "Only the person whose card pays for it can change it. Turn it off, then turn it on with your own card.": "Chỉ người có thẻ đang trả tiền mới thay đổi được. Hãy tắt đi, rồi bật lại bằng thẻ của bạn.",
     "The request is too large.": "Yêu cầu quá lớn.",
     "Too many requests. Try again later.": "Quá nhiều yêu cầu. Vui lòng thử lại sau.",

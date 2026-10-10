@@ -1,6 +1,7 @@
 # Messages the services show users, in Hebrew, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Too many invites waiting. Remove some, or wait for them to join.": "יותר מדי הזמנות ממתינות. הסירו חלק, או חכו שיצטרפו.",
     "Only the person whose card pays for it can change it. Turn it off, then turn it on with your own card.": "רק מי שהכרטיס שלו משלם יכול לשנות זאת. כבו את זה, ואז הפעילו עם הכרטיס שלכם.",
     "The request is too large.": "הבקשה גדולה מדי.",
     "Too many requests. Try again later.": "יותר מדי בקשות. נסו שוב מאוחר יותר.",
