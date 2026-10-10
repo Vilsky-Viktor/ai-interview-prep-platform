@@ -45,6 +45,10 @@ A company can send its notifications to one Slack channel too, from its integrat
    display_information:
      name: prepza
      description: Hiring notifications from prepza
+   features:
+     bot_user:
+       display_name: prepza
+       always_online: false
    oauth_config:
      redirect_urls:
        - https://<your domain>/api/notifications/slack/callback
@@ -56,7 +60,7 @@ A company can send its notifications to one Slack channel too, from its integrat
      socket_mode_enabled: false
      token_rotation_enabled: false
    ```
-   Add `http://localhost:8090/api/notifications/slack/callback` to `redirect_urls` for local use.
+   Add `http://localhost:8090/api/notifications/slack/callback` to `redirect_urls` for local use. Slack asks for the bot user: bot scopes, `incoming-webhook` among them, need one.
 2. Under **Manage Distribution**, activate public distribution, so other companies' workspaces can add it.
 3. Put its **Client ID** and **Client Secret** (Basic Information) in `.env` as `SLACK_CLIENT_ID` and `SLACK_CLIENT_SECRET`.
 4. Set `SLACK_ENCRYPTION_KEY`, the Fernet key that encrypts the web hooks:
