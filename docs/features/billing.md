@@ -18,6 +18,8 @@ Companies pay per candidate from a wallet of credits. There's no paid subscripti
 - Generating an interview is free.
 - Only what works is charged: a candidate's credits are set aside on invite and given back if they never answer.
 - A candidate removed before finishing (revoked, or with their interview deleted) is charged by the same rule, if they picked an answer to at least one question (rounds' `picked` count); otherwise their credits come back.
+- Credits set aside for an invite that then fails (the email limits, saving it, starting it, or billing's answer lost on the way) come back at once: a new invite's, or an expired one's sent again or started again (expiry won't release an expired invite a second time). An invite's earlier hold stays.
+- An automatic top-up that a hold calls for is charged after billing answers the hold, so an invite never waits on Paddle.
 - Each invite has its own hold, so a candidate removed and invited again is charged again when they finish. Its key is the invite's own, `{interview_id}:{random}` (companies' `hold_key`), never the candidate's email, so billing keeps no candidate's email (the keys made before were rewritten that way, by billing's migration 0011 and companies' 0036 with `prepza_common.credit_keys`).
 - Whenever a company gets credits (a top-up, a referral reward, a chargeback reversed), billing publishes `credits.added`: candidates its ATSs sent that weren't invited for lack of credits are invited then (see [ATS integrations](ats.md)).
 - A person's first company gets 900 credits, enough for 3 candidates.

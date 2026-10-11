@@ -1,4 +1,3 @@
-from fastapi import HTTPException
 from prepza_common.analytics import track
 from prepza_common.names import clean_name
 from prepza_common.rate_limit import hit_emails
@@ -31,10 +30,12 @@ async def invite(
 
     # A candidate who hasn't started has credits set aside: new, or sent again after expiring.
     # Credits first, so an invite refused for them never uses up the email limits.
-    if current is None or current in NOT_STARTED:
-        await billing.hold_candidate(company.id, key)
-
+    # Anything failing from setting the credits aside until the invite is saved (the email
+    # limits, the title, the save, or billing's answer lost on the way) gives them back.
     try:
+        if current is None or current in NOT_STARTED:
+            await billing.hold_candidate(company.id, key)
+
         await hit_emails(
             get_redis(),
             user.uid,
@@ -43,14 +44,7 @@ async def invite(
             settings.email_daily_limit,
             settings.email_recipient_daily_limit,
         )
-    except HTTPException:
-        await give_back(interview, company, email, current, key)
-
-        raise
-
-    title = await interview_title(interview) or "an interview"
-
-    try:
+        title = await interview_title(interview) or "an interview"
         invite, revived = await invites.upsert(
             interview.id,
             email,
@@ -62,9 +56,7 @@ async def invite(
             name=clean_name(name),
         )
     except Exception:
-        # A brand-new invite that couldn't be saved gives its credits back.
-        if current is None:
-            await billing.release_candidate(key)
+        await give_back(interview, company, email, current, key)
 
         raise
 
@@ -83,9 +75,10 @@ async def invite(
 
 
 async def give_back(interview: Interview, company: Company, email: str, current, key: str) -> None:
-    """An invite refused over the email limits gives back the credits set aside for it just now:
-    a new one's, or an expired one's (expiry had given them back). One already invited keeps
-    its own. An expired invite sent again by another request meanwhile keeps them after all."""
+    """An invite that failed gives back the credits set aside for it just now: a new one's, or an
+    expired one's (expiry had given them back). One already invited keeps its own. An expired
+    invite sent again by another request meanwhile keeps them after all. Safe when nothing was
+    set aside: billing releases only an open hold."""
     if current is not None and current != InviteStatus.EXPIRED:
         return
 

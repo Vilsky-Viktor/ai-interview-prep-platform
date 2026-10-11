@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, BackgroundTasks, HTTPException, status
 from fastapi.encoders import jsonable_encoder
 from prepza_common.analytics import track
 from prepza_common.paging import PageParams
@@ -35,19 +35,21 @@ async def refuse(owner_type: str, owner_id: str, reason: str) -> None:
     raise HTTPException(status.HTTP_402_PAYMENT_REQUIRED, NOT_ENOUGH)
 
 
-async def take(owner_type: str, owner_id: str, amount: int, key: str, reason: str) -> None:
-    if not await ledger.reserve(owner_type, owner_id, amount, key, reason):
-        await refuse(owner_type, owner_id, reason)
-
-    await auto_top_ups.check(owner_type, owner_id)
-
-
 @router.post("/candidates/hold", status_code=status.HTTP_204_NO_CONTENT)
-async def hold_candidate(company_id: str, key: str, caller: ServiceCaller) -> None:
-    """Set aside on invite. Charged once the interview finishes with at least one answer."""
-    await take(
+async def hold_candidate(
+    company_id: str, key: str, caller: ServiceCaller, background: BackgroundTasks
+) -> None:
+    """Set aside on invite. Charged once the interview finishes with at least one answer. An
+    automatic top-up the balance now calls for is charged after answering: Paddle can take its
+    time, and the invite waiting on this answer mustn't."""
+    held = await ledger.reserve(
         OwnerType.COMPANY, company_id, CANDIDATE_CREDITS, CANDIDATE_PREFIX + key, Reason.CANDIDATE
     )
+
+    if not held:
+        await refuse(OwnerType.COMPANY, company_id, Reason.CANDIDATE)
+
+    background.add_task(auto_top_ups.check, OwnerType.COMPANY, company_id)
 
 
 @router.post("/candidates/charge", status_code=status.HTTP_204_NO_CONTENT)

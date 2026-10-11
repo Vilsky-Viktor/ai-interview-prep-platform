@@ -21,20 +21,28 @@ def test_a_candidate_without_enough_credits_is_refused_with_a_message(client, mo
     assert response.json() == {"detail": "Not enough credits. Top up to continue."}
 
 
-def test_a_candidate_holds_its_credits(client, monkeypatch):
-    held = []
+def test_a_candidate_holds_its_credits_and_a_top_up_is_checked_after_answering(client, monkeypatch):
+    """Paddle can take its time: the invite waiting on the hold doesn't wait for a top-up."""
+    done = []
 
     async def reserve(owner_type, owner_id, amount, key, reason):
-        held.append((owner_id, amount, key))
+        done.append(("held", owner_id, amount, key))
 
         return True
 
+    async def check(owner_type, owner_id):
+        done.append(("top-up checked", owner_id))
+
     monkeypatch.setattr(ledger, "reserve", reserve)
+    monkeypatch.setattr(auto_top_ups, "check", check)
 
     response = client.post("/internal/candidates/hold", params=HOLD, headers=AUTH)
 
     assert response.status_code == 204
-    assert held == [("acme", CANDIDATE_CREDITS, "candidate:session-1")]
+    assert done == [
+        ("held", "acme", CANDIDATE_CREDITS, "candidate:session-1"),
+        ("top-up checked", "acme"),
+    ]
 
 
 def test_internal_routes_need_a_service_token(client):

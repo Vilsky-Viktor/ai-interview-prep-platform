@@ -100,6 +100,10 @@ async def start_link(token: str, user: CurrentUser, request: Request) -> InviteS
         address = client_ip(request)
         await hit(redis, f"rate:link-starts:ip:{address}", LINK_STARTS_PER_IP_HOUR, HOUR_SECONDS)
 
+    # Credits set aside just now: a new candidate's, or an expired invite's (expiry gave them
+    # back, and won't again). Anything failing before the candidate has started gives them back.
+    fresh = current is None or current == InviteStatus.EXPIRED
+
     if current is None or current in NOT_STARTED:
         try:
             await billing.hold_candidate(interview.company_id, key)
@@ -108,13 +112,20 @@ async def start_link(token: str, user: CurrentUser, request: Request) -> InviteS
                 raise HTTPException(status.HTTP_409_CONFLICT, LINK_CLOSED) from error
 
             raise
+        except Exception:
+            # Billing's answer lost on the way: a hold made just now may exist. An invite's
+            # earlier hold stays.
+            if fresh:
+                await billing.release_candidate(key)
+
+            raise
 
     try:
         invite = await invites.for_link(interview.id, user.email, hold_key=key)
     except Exception:
-        # A new invite that couldn't be saved (its interview deleted meanwhile) gives its
-        # credits back.
-        if current is None:
+        # An invite that couldn't be saved (its interview deleted meanwhile) gives its credits
+        # back.
+        if fresh:
             await billing.release_candidate(key)
 
         raise
@@ -126,4 +137,12 @@ async def start_link(token: str, user: CurrentUser, request: Request) -> InviteS
     if current is None:
         await track("candidate_joined_by_link", company_id=interview.company_id)
 
-    return await start_sessions(invite, interview, user)
+    try:
+        return await start_sessions(invite, interview, user)
+    except Exception:
+        # An expired invite that didn't start stays expired, and expiry won't give its credits
+        # back: they go back now. A new one waits, unstarted, until it expires.
+        if current == InviteStatus.EXPIRED:
+            await billing.release_candidate(key)
+
+        raise
