@@ -1027,6 +1027,7 @@
       "verification_approved": "「{name}」は {domain} で認証されました。",
       "verification_declined": "{reason, select, none {「{name}」の認証は却下されました。} other {「{name}」の認証は却下されました：{reason}}}",
       "member_joined": "{email} が{role, select, admin {管理者} other {閲覧者}}として「{name}」に参加しました。",
+      "grades_changed": "{count, plural, other {正解の修正により、「{title}」の候補者 # 人のスコアが変わりました}}{failing, plural, =0 {。} other {。うち # 人は合格ラインに届かなくなりました。}}",
       "ats_not_invited": "{count, plural, =1 {{ats} の {email} さんを「{title}」に招待できませんでした：{reason, select, credits {クレジットが不足しています} limit {メールの送信上限に達しました} paused {招待は一時停止中です} other {問題が発生しました}}。} other {{ats} の候補者 # 人を「{title}」に招待できませんでした。}}"
     }
   },

@@ -1018,6 +1018,7 @@
       "verification_approved": "“{name}” {domain} के लिए सत्यापित है।",
       "verification_declined": "{reason, select, none {“{name}” का सत्यापन अस्वीकार किया गया।} other {“{name}” का सत्यापन अस्वीकार किया गया: {reason}}}",
       "member_joined": "{email} “{name}” से {role, select, admin {एडमिन} other {व्यूअर}} के रूप में जुड़े।",
+      "grades_changed": "{count, plural, =1 {आंसर की सुधरने के बाद “{title}” में एक उम्मीदवार का ग्रेड बदल गया} other {आंसर की सुधरने के बाद “{title}” में # उम्मीदवारों के ग्रेड बदल गए}}{failing, plural, =0 {।} =1 {; एक उम्मीदवार अब पास नहीं है।} other {; # उम्मीदवार अब पास नहीं हैं।}}",
       "ats_not_invited": "{count, plural, =1 {{ats} से आए {email} को “{title}” के लिए इनवाइट नहीं किया गया: {reason, select, credits {क्रेडिट खत्म हो गए} limit {ईमेल सीमा पूरी हो गई} paused {इनवाइट रोके गए हैं} other {कुछ गड़बड़ हो गई}}।} other {{ats} से आए # उम्मीदवारों को “{title}” के लिए इनवाइट नहीं किया गया।}}"
     }
   },

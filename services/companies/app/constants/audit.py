@@ -14,6 +14,8 @@ class AuditAction(StrEnum):
     INVITE_REVOKED = "invite_revoked"
     EXTRA_TIME_SET = "extra_time_set"
     PASS_MARK_CHANGED = "pass_mark_changed"
+    # Not a person's: a finished candidate's grade changed after an answer key was fixed.
+    GRADE_CHANGED = "grade_changed"
 
 
 # What an audit event was recorded through when not a person in the app (audit_events.via): the
@@ -23,3 +25,7 @@ class AuditAction(StrEnum):
 VIA_ASSISTANT = "assistant"
 VIA_MCP = "mcp"
 VIAS = (VIA_ASSISTANT, VIA_MCP)
+# Who and what an event made by prepza itself names: the AI that checks answer keys, whose fix
+# rescored past answers.
+PREPZA = "prepza"
+VIA_VERIFIER = "verifier"

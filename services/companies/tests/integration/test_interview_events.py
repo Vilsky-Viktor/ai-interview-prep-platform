@@ -5,6 +5,7 @@ import uuid
 
 from sqlalchemy import select
 
+from app.models.audit import AuditEvent
 from app.models.outbox import OutboxEvent
 from app.storage import candidates, companies, interviews, invites
 from app.storage.db import Session
@@ -197,3 +198,42 @@ def test_a_changed_grade_of_a_finished_candidate_is_announced_once(run):
     }
     assert list(saved.values()) == [[], []]
     assert stored.grade == 85
+
+
+def test_grades_an_answer_key_fix_changed_are_audited_and_told_once(run):
+    """Each changed grade is recorded as prepza's (via the verifier) with its old and new value,
+    and the company gets one notice per interview: how many changed, how many no longer pass."""
+
+    async def scenario():
+        found = await interview()
+        upserted = [
+            await invites.upsert(found.id, f"{name}@example.com", "Backend", "Acme", "en")
+            for name in ("uma", "vic")
+        ]
+        uma, vic = (invite for invite, _ in upserted)
+        await invites.finish(uma.id, 80, False, None)
+        await invites.finish(vic.id, 50, False, None)
+        # Uma drops below the pass mark (70); Vic rises but still doesn't reach it.
+        await candidates.save_results({uma.id: (60, False), vic.id: (55, False)})
+
+        async with Session() as session:
+            audited = list(
+                await session.scalars(
+                    select(AuditEvent).where(AuditEvent.company_id == found.company_id)
+                )
+            )
+
+        notices = await events("notification.requested", "recipient_id", str(found.company_id))
+
+        return uma, vic, audited, notices
+
+    uma, vic, audited, notices = run(scenario())
+
+    assert sorted(
+        (event.target_id, event.details["from"], event.details["to"]) for event in audited
+    ) == sorted([(uma.id, 80, 60), (vic.id, 50, 55)])
+    assert {(event.user_id, event.action, event.via) for event in audited} == {
+        ("prepza", "grade_changed", "verifier")
+    }
+    [notice] = [notice for notice in notices if notice["kind"] == "grades_changed"]
+    assert (notice["data"]["count"], notice["data"]["failing"]) == (2, 1)

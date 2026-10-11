@@ -2,6 +2,7 @@ import uuid
 from datetime import UTC, datetime
 
 from sqlalchemy import DateTime, ForeignKey, Index, String
+from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.models.base import Base
@@ -23,6 +24,8 @@ class AuditEvent(Base):
     # when the in-app assistant read for the user, "mcp" (VIA_MCP) when an AI app they connected
     # did. None otherwise.
     via: Mapped[str | None] = mapped_column(String(32))
+    # What changed, where a decision isn't enough: a grade's {"from", "to"}. None otherwise.
+    details: Mapped[dict | None] = mapped_column(JSONB)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )

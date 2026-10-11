@@ -1014,6 +1014,7 @@
       "verification_approved": "“{name}”已通过 {domain} 验证。",
       "verification_declined": "{reason, select, none {“{name}”的验证已被拒绝。} other {“{name}”的验证已被拒绝：{reason}}}",
       "member_joined": "{email} 已作为{role, select, admin {管理员} other {查看者}}加入“{name}”。",
+      "grades_changed": "{count, plural, other {因标准答案修正，“{title}”中 # 位候选人的成绩发生了变化}}{failing, plural, =0 {。} other {，其中 # 位不再达到及格线。}}",
       "ats_not_invited": "{count, plural, =1 {来自 {ats} 的 {email} 未被邀请参加“{title}”：{reason, select, credits {点数不足} limit {已达到邮件发送上限} paused {邀请已暂停} other {出了点问题}}。} other {来自 {ats} 的 # 位候选人未被邀请参加“{title}”。}}"
     }
   },

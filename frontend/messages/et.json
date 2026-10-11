@@ -1027,6 +1027,7 @@
       "verification_approved": "„{name}“ on kinnitatud domeeniga {domain}.",
       "verification_declined": "{reason, select, none {Ettevõtte „{name}“ kinnitamine lükati tagasi.} other {Ettevõtte „{name}“ kinnitamine lükati tagasi: {reason}}}",
       "member_joined": "{email} liitus ettevõttega „{name}“ {role, select, admin {administraatorina} other {vaatajana}}.",
+      "grades_changed": "{count, plural, one {„{title}“: ühe kandidaadi hinne muutus} other {„{title}“: # kandidaadi hinded muutusid}} pärast vastusevõtme parandamist{failing, plural, =0 {.} one {; # kandidaat ei küüni enam läbimise läveni.} other {; # kandidaati ei küüni enam läbimise läveni.}}",
       "ats_not_invited": "{count, plural, one {{ats} keskkonnast tulnud {email} ei saanud kutset intervjuule „{title}“: {reason, select, credits {krediidid said otsa} limit {e-kirjade piirang sai täis} paused {kutsed on peatatud} other {midagi läks valesti}}.} other {# {ats} keskkonnast tulnud kandidaati ei saanud kutset intervjuule „{title}“.}}"
     }
   },

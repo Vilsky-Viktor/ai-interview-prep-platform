@@ -1019,6 +1019,7 @@
       "verification_approved": "«{name}» برای {domain} تأیید شد.",
       "verification_declined": "{reason, select, none {تأیید «{name}» رد شد.} other {تأیید «{name}» رد شد: {reason}}}",
       "member_joined": "{email} با نقش {role, select, admin {مدیر} other {بیننده}} به «{name}» پیوست.",
+      "grades_changed": "{count, plural, =1 {نمرهٔ یک متقاضی} other {نمرهٔ # متقاضی}} در «{title}» پس از اصلاح یک کلید پاسخ تغییر کرد{failing, plural, =0 {.} =1 {؛ یک متقاضی دیگر قبول نیست.} other {؛ # متقاضی دیگر قبول نیستند.}}",
       "ats_not_invited": "{count, plural, =1 {{email} از {ats} به «{title}» دعوت نشد: {reason, select, credits {اعتبار تمام شده است} limit {سقف ایمیل پر شده است} paused {دعوت‌ها متوقف شده‌اند} other {مشکلی پیش آمد}}.} other {# متقاضی از {ats} به «{title}» دعوت نشدند.}}"
     }
   },

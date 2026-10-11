@@ -1019,6 +1019,7 @@
       "verification_approved": "تم توثيق «{name}» للنطاق {domain}.",
       "verification_declined": "{reason, select, none {تم رفض توثيق «{name}».} other {تم رفض توثيق «{name}»: {reason}}}",
       "member_joined": "عضو جديد في فريق «{name}»: {email} ({role, select, admin {مسؤول} other {مشاهد}}).",
+      "grades_changed": "{count, plural, one {تغيّرت درجة مرشح} two {تغيّرت درجتا مرشحَين} few {تغيّرت درجات # مرشحين} many {تغيّرت درجات # مرشحًا} other {تغيّرت درجات # مرشح}} في «{title}» بعد تصحيح مفتاح إجابة{failing, plural, =0 {.} one {؛ ولم يعد مرشح واحد يبلغ درجة النجاح.} two {؛ ولم يعد مرشحان يبلغان درجة النجاح.} few {؛ ولم يعد # مرشحين يبلغون درجة النجاح.} many {؛ ولم يعد # مرشحًا يبلغون درجة النجاح.} other {؛ ولم يعد # مرشح يبلغون درجة النجاح.}}",
       "ats_not_invited": "{count, plural, one {لم تتم دعوة {email} من {ats} إلى «{title}»: {reason, select, credits {نفد الرصيد} limit {تم بلوغ حد الرسائل} paused {الدعوات متوقفة مؤقتًا} other {حدث خطأ ما}}.} zero {لم تتم دعوة # مرشح من {ats} إلى «{title}».} two {لم تتم دعوة مرشحَين من {ats} إلى «{title}».} few {لم تتم دعوة # مرشحين من {ats} إلى «{title}».} many {لم تتم دعوة # مرشحًا من {ats} إلى «{title}».} other {لم تتم دعوة # مرشح من {ats} إلى «{title}».}}"
     }
   },

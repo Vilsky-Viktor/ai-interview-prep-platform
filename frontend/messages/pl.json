@@ -1023,6 +1023,7 @@
       "verification_approved": "„{name}” jest zweryfikowana dla {domain}.",
       "verification_declined": "{reason, select, none {Weryfikacja „{name}” została odrzucona.} other {Weryfikacja „{name}” została odrzucona: {reason}}}",
       "member_joined": "{email} jest teraz w zespole „{name}” jako {role, select, admin {administrator} other {obserwator}}.",
+      "grades_changed": "{count, plural, one {Zmienił się wynik kandydata} few {Zmieniły się wyniki # kandydatów} many {Zmieniły się wyniki # kandydatów} other {Zmieniły się wyniki # kandydata}} w „{title}” po poprawieniu klucza odpowiedzi{failing, plural, =0 {.} one {; # kandydat nie osiąga już progu zaliczenia.} few {; # kandydaci nie osiągają już progu zaliczenia.} many {; # kandydatów nie osiąga już progu zaliczenia.} other {; # kandydata nie osiąga już progu zaliczenia.}}",
       "ats_not_invited": "{count, plural, one {Kandydat {email} z {ats} nie został zaproszony do „{title}”: {reason, select, credits {brak kredytów} limit {osiągnięto limit e-maili} paused {zaproszenia są wstrzymane} other {coś poszło nie tak}}.} few {# kandydaci z {ats} nie zostali zaproszeni do „{title}”.} many {# kandydatów z {ats} nie zostało zaproszonych do „{title}”.} other {# kandydata z {ats} nie zostało zaproszone do „{title}”.}}"
     }
   },

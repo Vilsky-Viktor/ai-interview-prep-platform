@@ -1023,6 +1023,7 @@
       "verification_approved": "«{name}» está verificada para {domain}.",
       "verification_declined": "{reason, select, none {Se ha rechazado la verificación de «{name}».} other {Se ha rechazado la verificación de «{name}»: {reason}}}",
       "member_joined": "{email} se unió a «{name}» como {role, select, admin {administrador} other {lector}}.",
+      "grades_changed": "{count, plural, one {Cambió la nota de un candidato} other {Cambiaron las notas de # candidatos}} en «{title}» tras corregirse una clave de respuesta{failing, plural, =0 {.} one {; # ya no aprueba.} other {; # ya no aprueban.}}",
       "ats_not_invited": "{count, plural, one {{email} de {ats} no fue invitado a «{title}»: {reason, select, credits {sin créditos} limit {se alcanzó un límite de correos} paused {las invitaciones están en pausa} other {algo salió mal}}.} other {# candidatos de {ats} no fueron invitados a «{title}».}}"
     }
   },

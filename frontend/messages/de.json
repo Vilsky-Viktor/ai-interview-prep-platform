@@ -1023,6 +1023,7 @@
       "verification_approved": "„{name}“ ist für {domain} verifiziert.",
       "verification_declined": "{reason, select, none {Die Verifizierung von „{name}“ wurde abgelehnt.} other {Die Verifizierung von „{name}“ wurde abgelehnt: {reason}}}",
       "member_joined": "{email} ist „{name}“ als {role, select, admin {Admin} other {Betrachter}} beigetreten.",
+      "grades_changed": "{count, plural, one {Das Ergebnis eines Kandidaten in „{title}“ hat sich geändert} other {Die Ergebnisse von # Kandidaten in „{title}“ haben sich geändert}}, nachdem ein Lösungsschlüssel korrigiert wurde{failing, plural, =0 {.} one {; # Kandidat besteht nicht mehr.} other {; # Kandidaten bestehen nicht mehr.}}",
       "ats_not_invited": "{count, plural, one {{email} aus {ats} wurde nicht zu „{title}“ eingeladen: {reason, select, credits {keine Credits mehr} limit {ein E-Mail-Limit wurde erreicht} paused {Einladungen sind pausiert} other {etwas ist schiefgelaufen}}.} other {# Kandidaten aus {ats} wurden nicht zu „{title}“ eingeladen.}}"
     }
   },

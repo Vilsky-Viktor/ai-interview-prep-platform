@@ -1019,6 +1019,7 @@
       "verification_approved": "“{name}” đã được xác minh cho {domain}.",
       "verification_declined": "{reason, select, none {Yêu cầu xác minh “{name}” đã bị từ chối.} other {Yêu cầu xác minh “{name}” đã bị từ chối: {reason}}}",
       "member_joined": "{email} đã tham gia “{name}” với vai trò {role, select, admin {quản trị viên} other {người xem}}.",
+      "grades_changed": "{count, plural, other {Điểm của # ứng viên trong “{title}” đã thay đổi sau khi một đáp án được sửa}}{failing, plural, =0 {.} other {; # ứng viên không còn đạt.}}",
       "ats_not_invited": "{count, plural, =1 {{email} từ {ats} chưa được mời vào “{title}”: {reason, select, credits {hết credit} limit {đã chạm giới hạn email} paused {việc gửi lời mời đang tạm dừng} other {đã xảy ra lỗi}}.} other {# ứng viên từ {ats} chưa được mời vào “{title}”.}}"
     }
   },

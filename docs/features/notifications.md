@@ -19,6 +19,7 @@ Only what matters, for every member of a company:
 - an invite not delivered,
 - an interview ready or cancelled,
 - a flagged and fixed interview question,
+- finished candidates' grades changed after an answer key was fixed (how many, and how many no longer pass; `grades_changed`, once per interview's rescore),
 - a referral reward,
 - an automatic top-up charged or failed,
 - an ATS candidate who couldn't be invited (`ats_not_invited`, see [ATS integrations](ats.md#candidates-from-workable)).

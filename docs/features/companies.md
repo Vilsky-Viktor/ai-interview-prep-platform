@@ -59,6 +59,7 @@ The companies service records the human decisions taken in a company, as evidenc
 | Candidate deleted / invite revoked | A member revokes a candidate (see [Candidates](candidates.md#revoking-a-candidate)) |
 | Extra time set | A member gives a candidate extra time |
 | Pass mark changed | A member changes an interview's pass mark |
+| Grade changed | Not a member: prepza's answer key check fixed a key and rescored a finished candidate. Recorded as `prepza` via `verifier`, with the grade's `details` (`{"from", "to"}`) |
 
 An event also says what it came through (`via`): empty when a member acted in the app, `assistant` when the in-app assistant opened a candidate's results for them. Companies trusts that only from a service token the assistant signs (the `X-Assistant` header, checked like other service calls); a missing or invalid one counts as the app. A view through the assistant isn't counted as the "results viewed" step of the sign-up funnel.
 

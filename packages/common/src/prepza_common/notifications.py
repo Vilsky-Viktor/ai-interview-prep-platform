@@ -30,6 +30,8 @@ class NotificationKind(StrEnum):
     ATS_NOT_INVITED = "ats_not_invited"
     # Someone the owner invited joined the company's team.
     MEMBER_JOINED = "member_joined"
+    # Finished candidates' grades changed after an answer key in the company's test was fixed.
+    GRADES_CHANGED = "grades_changed"
     # A superadmin approved or declined the company's verification.
     VERIFICATION_APPROVED = "verification_approved"
     VERIFICATION_DECLINED = "verification_declined"

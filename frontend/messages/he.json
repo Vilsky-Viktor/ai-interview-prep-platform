@@ -1014,6 +1014,7 @@
       "verification_approved": "\"{name}\" מאומתת עבור {domain}.",
       "verification_declined": "{reason, select, none {האימות של \"{name}\" נדחה.} other {האימות של \"{name}\" נדחה: {reason}}}",
       "member_joined": "הצטרפות לצוות של \"{name}\": {email} ({role, select, admin {מנהל} other {צופה}}).",
+      "grades_changed": "{count, plural, one {הציון של מועמד אחד ב\"{title}\" השתנה} two {הציונים של שני מועמדים ב\"{title}\" השתנו} other {הציונים של # מועמדים ב\"{title}\" השתנו}} לאחר תיקון מפתח תשובות{failing, plural, =0 {.} one {; מועמד אחד כבר לא עובר.} two {; שני מועמדים כבר לא עוברים.} other {; # מועמדים כבר לא עוברים.}}",
       "ats_not_invited": "{count, plural, one {{email} מ-{ats} לא הוזמן/ה ל\"{title}\": {reason, select, credits {נגמרו הקרדיטים} limit {הושגה מגבלת אימיילים} paused {ההזמנות מושהות} other {משהו השתבש}}.} two {שני מועמדים מ-{ats} לא הוזמנו ל\"{title}\".} other {# מועמדים מ-{ats} לא הוזמנו ל\"{title}\".}}"
     }
   },
