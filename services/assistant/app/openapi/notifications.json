@@ -53,7 +53,7 @@
      "notifications"
     ],
     "summary": "Stream",
-    "description": "Server-sent events while a tab is open: {\"new\": true} as soon as a notification comes,\nso the bell reloads; heartbeat comments in between.",
+    "description": "Server-sent events while a tab is open: {\"new\": true} as soon as a notification comes,\nso the bell reloads; heartbeat comments in between. At most MAX_STREAMS_PER_USER at once;\nthe bell refreshes on its own without one.",
     "operationId": "stream_me_stream_get",
     "responses": {
      "200": {

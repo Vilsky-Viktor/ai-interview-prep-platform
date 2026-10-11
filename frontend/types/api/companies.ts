@@ -1650,6 +1650,10 @@ export interface components {
       target_id: string | null
       /** Via */
       via?: string | null
+      /** Details */
+      details?: {
+        [key: string]: unknown
+      } | null
       /**
        * Created At
        * Format: date-time

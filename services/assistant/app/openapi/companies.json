@@ -5014,6 +5014,18 @@
       ],
       "title": "Via"
      },
+     "details": {
+      "anyOf": [
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Details"
+     },
      "created_at": {
       "type": "string",
       "format": "date-time",
