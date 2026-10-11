@@ -105,7 +105,7 @@ For a candidate who needs more time, for example because of a disability, owners
 The server enforces the clock:
 
 - Closing the tab doesn't stop it.
-- It accepts an answer up to 5 seconds after the deadline (`TIME_GRACE_SECONDS`), for a pick sent as the clock reaches zero.
+- It accepts an answer up to 5 seconds after the deadline (`TIME_GRACE_SECONDS`), for a pick sent as the clock reaches zero. Only the interview's own steps (the next question, an answer, finishing) record a question as timed out; requests on the side (rating or reporting a question, a page leave) never do, so they can't beat a last-second answer to it.
 - An interview the candidate leaves finishes by itself once its total time, plus 10%, has passed. Unanswered questions count as wrong.
 
 ## Scorecards

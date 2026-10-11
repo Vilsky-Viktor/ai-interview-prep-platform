@@ -13,11 +13,22 @@ from app.services.session_expiry import finish_if_expired
 from app.storage import sessions
 
 
-async def get_owned_session(session_id: UUID, user: User, grace_seconds: int = 0) -> Session:
+async def get_own_session(session_id: UUID, user: User) -> Session:
+    """The candidate's own session, as it is: for requests on the side of the interview (rating
+    or reporting a question, a page leave), which must never time out the question on screen, or
+    an answer picked in its last moment would arrive after that and count as wrong."""
     row = await sessions.get(session_id)
 
     if row is None or row.user_id != user.uid:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Session not found")
+
+    return row
+
+
+async def get_owned_session(session_id: UUID, user: User, grace_seconds: int = 0) -> Session:
+    """The candidate's own session, brought up to date for the interview's own steps: a question
+    whose time ran out counts as wrong, and an interview whose time ran out is finished."""
+    row = await get_own_session(session_id, user)
 
     # The question on screen ran out of time, even with the tab closed: it counts as wrong.
     if row.status == RoundStatus.IN_PROGRESS and time_is_up(row, datetime.now(UTC), grace_seconds):

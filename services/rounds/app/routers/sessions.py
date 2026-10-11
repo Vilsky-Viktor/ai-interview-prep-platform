@@ -18,7 +18,7 @@ from app.schemas.review import ReviewItem
 from app.schemas.rounds import AnswerCreate, NextQuestion
 from app.schemas.sessions import SessionAnswerResult, SessionOut, SessionTopicOut, SignalIn
 from app.services import outbox as outbox_service
-from app.services.session_access import get_owned_session
+from app.services.session_access import get_own_session, get_owned_session
 from app.services.session_answers import submit_session_answer
 from app.services.session_titles import session_out_titled
 from app.storage import sessions
@@ -65,7 +65,7 @@ async def get_next_question(session_id: UUID, user: CurrentUser) -> NextQuestion
 async def add_signal(session_id: UUID, body: SignalIn, user: CurrentUser) -> None:
     """The candidate's browser reports leaving the page or copying, saved with the question on
     screen so the scorecard can show where it happened."""
-    row = await get_owned_session(session_id, user)
+    row = await get_own_session(session_id, user)
 
     if row.status != RoundStatus.IN_PROGRESS:
         return

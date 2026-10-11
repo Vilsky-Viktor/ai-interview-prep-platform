@@ -7,14 +7,14 @@ from prepza_common.auth import CurrentUser
 from app.helpers.rounds import find_question
 from app.integrations import feedback
 from app.schemas.feedback import RatingIn, ReportIn
-from app.services.session_access import get_owned_session
+from app.services.session_access import get_own_session
 
 router = APIRouter(prefix="/sessions", tags=["sessions"])
 
 
 async def require_session_question(session_id: UUID, question_id: UUID, user: CurrentUser) -> None:
     """Candidates rate and report only questions of their own interview session."""
-    row = await get_owned_session(session_id, user)
+    row = await get_own_session(session_id, user)
 
     if find_question(row, str(question_id)) is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Question not found")
