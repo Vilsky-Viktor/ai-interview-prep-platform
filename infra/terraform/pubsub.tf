@@ -28,17 +28,16 @@ resource "google_pubsub_subscription" "dead_letter" {
 # is empty. Funnel events go only to BigQuery (analytics.tf).
 # Pub/Sub caps a filter at 256 bytes: each type adds 24 bytes plus its name. A type ending in ".*"
 # matches every type with that prefix (hasPrefix): notifications takes all "candidate." events
-# that way, and ats all "interview." ones (241 bytes; listing them, 277), as listing them one by
-# one outgrew the cap; each ignores the ones it doesn't handle. notifications' filter is 236
-# bytes, api's 119, the assistant's 35. A new consumer's subscription is created on apply and
-# gets only the events published after that.
+# that way, as listing them one by one outgrew the cap, and ignores the ones it doesn't handle.
+# notifications' filter is 236 bytes, ats' 235, companies' 167, api's 77, the assistant's 35. A
+# new consumer's subscription is created on apply and gets only the events published after that.
 locals {
   consumes = {
     library       = ["answer.recorded", "session.scored"]
-    companies     = ["generation.completed", "generation.failed", "generation.cancelled", "interview.finished", "results.rescored"]
+    companies     = ["generation.completed", "generation.failed", "generation.cancelled", "interview.finished"]
     notifications = ["notification.requested", "candidate.*", "member.invited", "report.shared", "contact.sent", "company.deleted"]
-    ats           = ["candidate.finished", "candidate.rescored", "candidate.removed", "interview.*", "company.deleted", "credits.added"]
-    api           = ["candidate.finished", "candidate.rescored", "company.deleted"]
+    ats           = ["candidate.finished", "candidate.removed", "interview.ready", "interview.deleted", "company.deleted", "credits.added"]
+    api           = ["candidate.finished", "company.deleted"]
     assistant     = ["company.deleted"]
   }
 }

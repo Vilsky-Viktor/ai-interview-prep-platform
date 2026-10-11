@@ -2,7 +2,6 @@
 # str.format.
 
 TEXTS = {
-    "corrected": "Gecorrigeerd resultaat: een antwoordsleutel is verbeterd. Dit vervangt de eerdere score.",
     "finished": "Afgerond; de score staat op de scorekaart.",
     "grade": "Score: {grade}% ({result})",
     "passed": "geslaagd",

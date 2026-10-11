@@ -955,7 +955,7 @@
       "see": "Mga dokumento",
       "points": {
         "decision": "Puwedeng suriin ng tao ang anumang resulta kapag hiniling",
-        "key": "Bawat sagot ay minamarkahan ayon sa answer key nito; ang naitamang key ay muling nagmamarka ng mga nakaraang resulta",
+        "key": "Bawat sagot ay minamarkahan ayon sa answer key nito; hindi binabago ng key na itinama kalaunan ang mga nakaraang resulta",
         "training": "Hindi ginagamit ang iyong data para sanayin ang mga AI model",
         "time": "Dagdag na oras para sa sinumang humiling",
         "notice": "Alam ng mga aplikante ang aasahan bago magsimula",
@@ -1027,7 +1027,6 @@
       "verification_approved": "Verified na ang “{name}” para sa {domain}.",
       "verification_declined": "{reason, select, none {Tinanggihan ang verification ng “{name}”.} other {Tinanggihan ang verification ng “{name}”: {reason}}}",
       "member_joined": "Sumali si {email} sa “{name}” bilang {role, select, admin {admin} other {viewer}}.",
-      "grades_changed": "{count, plural, =1 {Nagbago ang grade ng isang aplikante} other {Nagbago ang grade ng # aplikante}} sa “{title}” matapos itama ang isang answer key{failing, plural, =0 {.} =1 {; hindi na pumapasa ang isa.} other {; # ang hindi na pumapasa.}}",
       "ats_not_invited": "{count, plural, =1 {Hindi naimbitahan sa “{title}” si {email} mula sa {ats}: {reason, select, credits {ubos na ang credits} limit {naabot ang email limit} paused {naka-pause ang mga imbitasyon} other {nagkaproblema}}.} other {Hindi naimbitahan sa “{title}” ang # aplikante mula sa {ats}.}}"
     }
   },

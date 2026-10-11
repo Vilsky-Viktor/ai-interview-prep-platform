@@ -44,20 +44,6 @@ def candidate_finished(
     )
 
 
-def grades_changed(interview: Interview, changed: int, no_longer_passing: int) -> dict:
-    """Finished candidates whose grades an answer key fix changed, and how many of them no
-    longer reach the pass mark; one notice for the interview's whole rescore."""
-    return notification(
-        Recipient.COMPANY,
-        interview.company_id,
-        NotificationKind.GRADES_CHANGED,
-        interview_link(interview),
-        title=interview.title,
-        count=changed,
-        failing=no_longer_passing,
-    )
-
-
 def invite_undelivered(
     interview: Interview, invite_id: str, email: str, name: str | None = None
 ) -> dict:

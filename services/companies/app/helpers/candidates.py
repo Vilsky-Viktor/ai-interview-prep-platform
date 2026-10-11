@@ -1,5 +1,4 @@
 import uuid
-from datetime import datetime
 
 from app.constants.invites import OPEN, SIGNAL_KEYS
 from app.schemas.invites import CandidateOut, CompanyCandidateOut
@@ -38,15 +37,6 @@ def finished_result(interview, invite_id, grade: int | None, flagged: bool) -> d
         "grade": grade,
         "passed": grade is not None and grade >= interview.pass_mark,
         "flagged": flagged,
-    }
-
-
-def rescored_result(interview, invite_id, grade: int | None, flagged: bool, at: datetime) -> dict:
-    """The candidate.rescored event: the candidate.finished result with the corrected grade, and
-    when it was stored, so ats writes only the latest of two that arrive out of order."""
-    return {
-        **finished_result(interview, invite_id, grade, flagged),
-        "rescored_at": at.isoformat(timespec="microseconds"),
     }
 
 

@@ -1,6 +1,6 @@
 # Data protection impact assessment (DPIA): template for companies using prepza
 
-Version: 2026-10-10\
+Version: 2026-10-11\
 Operator: Arcolabs OÜ (registry code 17587452), Sepapaja tn 6, 15551 Tallinn, Harju maakond, Estonia; hello@prepza.ai
 
 For companies that invite candidates through prepza. Your company is the **controller** of
@@ -125,7 +125,7 @@ Likelihood and severity: **[COMPANY]** to rate. Starting points from prepza:
 
 | Risk | Typical source | prepza controls | Your controls **[COMPANY]** |
 |---|---|---|---|
-| Unfair rejection from a wrong or ambiguous question | AI-written content | Your topic review and trial run; a sample of answer keys per topic checked before release; statistics and reports flag questions for a fix, and corrected keys re-mark past answers | |
+| Unfair rejection from a wrong or ambiguous question | AI-written content | Your topic review and trial run; a sample of answer keys per topic checked before release; statistics and reports flag questions for a fix, and a fix applies to candidates who start after it (past results don't change) | |
 | Discrimination (age, disability, language, origin) | Time pressure, language, content | Knowledge questions only; questions flagged when too slow or not discriminating; extra time | |
 | Over-reliance on the grade or signals | Ranked list, green/red | All answers visible; signals as counts; no automatic decisions | |
 | Wrongful cheating suspicion | Page-leave and fast-answer signals | Shown as hints with the question on screen | |

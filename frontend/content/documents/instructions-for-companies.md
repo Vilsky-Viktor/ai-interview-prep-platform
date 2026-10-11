@@ -1,6 +1,6 @@
 # Using prepza responsibly: instructions for companies
 
-Version: 2026-10-08\
+Version: 2026-10-11\
 Operator: Arcolabs OÜ (registry code 17587452), Sepapaja tn 6, 15551 Tallinn, Harju maakond, Estonia; hello@prepza.ai
 
 For owners and admins of a company on prepza. These are prepza's instructions for use. They don't
@@ -13,8 +13,8 @@ replace advice on the employment and data protection law that applies to you.
   their pick until they move on; only the final one is kept.
 - Each answer is marked right or wrong against the question's **answer key**. No AI marks answers,
   and nothing else (speed, page leaves, copy attempts) changes the grade. If a question's key is
-  found to be wrong and corrected, the answers already given to it are marked again and the grades
-  recalculated.
+  found to be wrong and corrected, the fix applies to candidates who start after it; answers
+  already given, and their grades, don't change.
 - **Green or red** only compares the grade with the passing grade you set. **The ranking** sorts by
   grade, best first.
 

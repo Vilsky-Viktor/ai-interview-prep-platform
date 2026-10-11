@@ -951,7 +951,7 @@
       "see": "Documents",
       "points": {
         "decision": "A person can review any result on request",
-        "key": "Every answer scored against its answer key; a corrected key re-scores past results",
+        "key": "Every answer scored against its answer key; a key fixed later never changes past results",
         "training": "Your data isn't used to train AI models",
         "time": "Extra time for anyone who asks",
         "notice": "Candidates know what to expect before they start",
@@ -1023,7 +1023,6 @@
       "verification_approved": "“{name}” is verified for {domain}.",
       "verification_declined": "{reason, select, none {Verification of “{name}” was declined.} other {Verification of “{name}” was declined: {reason}}}",
       "member_joined": "{email} joined “{name}” as {role, select, admin {an admin} other {a viewer}}.",
-      "grades_changed": "{count, plural, one {A candidate's grade} other {# candidates' grades}} changed in “{title}” after an answer key was fixed{failing, plural, =0 {.} one {; # no longer passes.} other {; # no longer pass.}}",
       "ats_not_invited": "{count, plural, one {{email} from {ats} wasn't invited to “{title}”: {reason, select, credits {out of credits} limit {an email limit was reached} paused {invites are paused} other {something went wrong}}.} other {# candidates from {ats} weren't invited to “{title}”.}}"
     }
   },

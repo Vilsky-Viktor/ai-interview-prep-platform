@@ -8,15 +8,13 @@ from app.helpers.review import add_signals, build_review
 from app.helpers.sessions import session_out
 from app.schemas.sessions import (
     InviteScoresIn,
-    RescoreIn,
     ScorecardSession,
     SessionOut,
     SessionsCreate,
     SetIdsIn,
 )
 from app.service_auth import ServiceCaller
-from app.services import outbox as outbox_service
-from app.storage import answer_counts, rescore, sessions
+from app.storage import answer_counts, sessions
 
 router = APIRouter(prefix="/internal", tags=["internal"])
 
@@ -94,12 +92,3 @@ async def invite_scorecard(invite_id: UUID, caller: ServiceCaller) -> list[Score
         )
 
     return cards
-
-
-@router.post("/questions/{question_id}/rescore")
-async def rescore_question(question_id: UUID, body: RescoreIn, caller: ServiceCaller) -> dict:
-    """The question's answer key was corrected: candidates who answered it are marked again."""
-    changed = await rescore.rescore_question(question_id, body.text, body.options, body.set_id)
-    await outbox_service.flush_quietly()
-
-    return {"sessions": changed}

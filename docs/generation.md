@@ -53,14 +53,15 @@ Rounds publish every answer. Library keeps per-question stats (answers, correct,
 
 | Flag | When | What the verifier does |
 |---|---|---|
-| `wrong_key` | 2 "wrong answer" reports, or a wrong option picked more than the marked one (after 30 answers) | Checks the key through OpenAI's Batch API (half price, every 10 minutes): keeps the question, moves the key, or replaces it. The check sees the question, its options and the reports' reasons, never how often each option was picked (the popular answer can be wrong). A key moves only when a second, blind check (no option marked, a new order) names the same option; otherwise the question is replaced, so no candidate is rescored on an uncertain answer |
+| `wrong_key` | 2 "wrong answer" reports, or a wrong option picked more than the marked one (after 30 answers) | Checks the key through OpenAI's Batch API (half price, every 10 minutes): keeps the question, moves the key, or replaces it. The check sees the question, its options and the reports' reasons, never how often each option was picked (the popular answer can be wrong). A key moves only when a second, blind check (no option marked, a new order) names the same option; otherwise the question is replaced, so no future candidate is marked on an uncertain key |
 | `rewrite` | 2 "unclear" or "off topic" reports, 3+ dislikes at twice the likes, or ≤ 15% correct | Writes a new question in its place |
 | `weak_options` | A wrong option almost nobody picks, or ≥ 95% correct | Writes new options for the same question |
 
 ### Fixes
 
 - Fixes happen in place, so a topic's size never changes.
-- The replaced version is archived with its stats and feedback.
+- The replaced version is archived with its stats and feedback; the new one starts its own, and an answer still arriving for the old text isn't counted for it.
+- A fix (the verifier's, a member's "wrong answer" mark sent to it, or a superadmin's "Fix now") applies to candidates who start after it. Each session keeps its own copy of the questions, so candidates who already answered keep their answers, scorecard and grade as they were; nothing marks past answers again.
 - A replacement question must differ in meaning from every question already in the topic, checked by embeddings like the pipeline's duplicate step.
 
 Superadmins see flagged and replaced questions on the admin zone's Flagged and Replaced tabs (see [Admin zone](features/admin-zone.md#flagged-and-replaced)).

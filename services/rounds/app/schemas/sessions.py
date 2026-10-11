@@ -80,12 +80,3 @@ class ScorecardSession(BaseModel):
 
 class SignalIn(BaseModel):
     kind: IntegritySignal
-
-
-class RescoreIn(BaseModel):
-    """A question's corrected content: its text and options with the right one marked, and the
-    interview it belongs to (left out by older callers: every session is looked at)."""
-
-    text: str
-    options: list[dict]
-    set_id: UUID | None = None

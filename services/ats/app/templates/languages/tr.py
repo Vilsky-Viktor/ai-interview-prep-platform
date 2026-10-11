@@ -2,7 +2,6 @@
 # str.format.
 
 TEXTS = {
-    "corrected": "Düzeltilmiş sonuç: bir cevap anahtarı düzeltildi. Bu, önceki notun yerini alır.",
     "finished": "Tamamlandı; not değerlendirme kartında.",
     "grade": "Not: %{grade} ({result})",
     "passed": "geçti",

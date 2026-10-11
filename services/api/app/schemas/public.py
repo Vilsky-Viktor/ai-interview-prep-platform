@@ -75,7 +75,7 @@ class CandidateIn(BaseModel):
 
 
 class FinishedEvent(BaseModel):
-    """The `data` object of a `candidate.finished` or `candidate.rescored` event."""
+    """The `data` object of a `candidate.finished` event."""
 
     interview: Interview
     candidate: Candidate

@@ -812,7 +812,7 @@
      "candidate"
     ],
     "title": "FinishedEvent",
-    "description": "The `data` object of a `candidate.finished` or `candidate.rescored` event."
+    "description": "The `data` object of a `candidate.finished` event."
    },
    "HTTPValidationError": {
     "properties": {

@@ -63,7 +63,8 @@ Results:
 fast to have read the question, leaving the page, and copy attempts.
 - Questions improve on their own: answers, votes and reports flag weak questions, and a \
 verifier fixes or replaces them in the background. A company can also re-generate single \
-questions.
+questions. A fixed question applies to candidates who start after the fix; results already \
+given never change.
 
 Credits and billing:
 - prepza is pay as you go with credits: 1 US dollar buys 100 credits. Credits never expire. \

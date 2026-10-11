@@ -201,7 +201,7 @@ def test_the_public_reference_lists_only_the_public_api(client):
         "/interviews/{interview_id}/candidates",
         "/interviews/{interview_id}/candidates/{candidate_id}",
     }
-    assert list(spec["webhooks"]) == ["candidate.finished", "candidate.rescored"]
+    assert list(spec["webhooks"]) == ["candidate.finished"]
 
 
 def test_the_reference_says_results_must_not_reject_candidates_automatically(client):

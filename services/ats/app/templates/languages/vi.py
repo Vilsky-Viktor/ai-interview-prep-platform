@@ -2,7 +2,6 @@
 # str.format.
 
 TEXTS = {
-    "corrected": "Kết quả đã sửa: một đáp án đã được sửa. Kết quả này thay cho điểm trước đó.",
     "finished": "Đã hoàn thành; điểm có trong bảng điểm.",
     "grade": "Điểm: {grade}% ({result})",
     "passed": "đạt",

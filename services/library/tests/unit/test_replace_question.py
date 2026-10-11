@@ -1,37 +1,48 @@
 import uuid
 from types import SimpleNamespace
 
-from app.integrations import rounds
+from prepza_common import http
+
 from app.services import outbox
 from app.storage import preparations
 from tests.unit.test_internal import token
 
 QUESTION_ID = uuid.uuid4()
-SET_ID = uuid.uuid4()
 OPTIONS = [{"answer": "Debit cash", "correct": False}, {"answer": "Credit cash", "correct": True}]
 
 
-def test_replacing_a_question_has_its_answers_marked_again(client, monkeypatch):
-    calls = []
+class NoCalls:
+    """Records any request to another service."""
+
+    def __init__(self):
+        self.calls = []
+
+    async def request(self, method, url, **kwargs):
+        self.calls.append((method, url))
+
+    async def post(self, url, **kwargs):
+        self.calls.append(("POST", url))
+
+
+def test_a_replaced_question_leaves_past_answers_alone(client, monkeypatch):
+    """The fix applies to candidates who start after it: no service is asked to mark past
+    answers again."""
+    replaced = []
+    outgoing = NoCalls()
 
     async def fake_replace(question_id, text, options):
-        calls.append(("replace", text))
+        replaced.append((question_id, text, options))
 
     async def fake_flush():
         return None
 
     async def fake_set(question_id):
-        return SimpleNamespace(id=SET_ID)
-
-    async def fake_rescore(question_id, text, options, set_id):
-        calls.append(("rescore", text, options, set_id))
-        # Rounds being down doesn't undo the fix.
-        raise RuntimeError("rounds is down")
+        return SimpleNamespace(id=uuid.uuid4())
 
     monkeypatch.setattr(preparations, "replace_question", fake_replace)
     monkeypatch.setattr(preparations, "get_for_question", fake_set)
     monkeypatch.setattr(outbox, "flush_quietly", fake_flush)
-    monkeypatch.setattr(rounds, "rescore_question", fake_rescore)
+    monkeypatch.setattr(http, "get_client", lambda: outgoing)
 
     response = client.put(
         f"/internal/questions/{QUESTION_ID}",
@@ -40,4 +51,5 @@ def test_replacing_a_question_has_its_answers_marked_again(client, monkeypatch):
     )
 
     assert response.status_code == 204
-    assert calls == [("replace", "What is debit?"), ("rescore", "What is debit?", OPTIONS, SET_ID)]
+    assert replaced == [(QUESTION_ID, "What is debit?", OPTIONS)]
+    assert outgoing.calls == []

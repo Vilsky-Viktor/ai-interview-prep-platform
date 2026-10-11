@@ -196,3 +196,27 @@ def test_flags_left_unfixed_are_taken_for_sending_again_once_a_while(run):
     assert (question_id, "rewrite") in taken
     assert question_id not in [row[0] for row in again]
     assert question_id not in [row[0] for row in cleared]
+
+
+def test_a_replaced_question_starts_its_own_statistics(run):
+    """The old content's answers go into its revision; a late answer to the old text isn't
+    counted for the new one."""
+
+    async def scenario():
+        set_id = await interview("Rewritten", questions=1)
+        question = (await preparations.get_content(set_id)).topics[0].questions[0]
+        await answer_stats.record_answer(str(uuid.uuid4()), question.id, question.text, "a", True)
+        await preparations.replace_question(
+            question.id, "A clearer question?", [{"answer": "Yes", "correct": True}]
+        )
+        _, replaced, *_ = await quality.load(question.id)
+        late = await answer_stats.record_answer(
+            str(uuid.uuid4()), question.id, question.text, "a", True
+        )
+
+        return replaced, late
+
+    replaced, late = run(scenario())
+
+    assert replaced is None
+    assert late == {}

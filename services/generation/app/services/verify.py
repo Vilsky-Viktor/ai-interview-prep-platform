@@ -83,8 +83,8 @@ async def apply_key_check(
     question_id: UUID, question: QuestionQuality, context: QuestionContext, result: KeyCheck
 ) -> None:
     """Keeps the question, moves the key to the right option, or replaces a broken question. A
-    key moves only when a second, blind check agrees: moving it rescores every finished
-    candidate, so a check that doesn't hold up again replaces the question instead."""
+    key moves only when a second, blind check agrees: a moved key marks every future candidate's
+    answer, so a check that doesn't hold up again replaces the question instead."""
     order = option_order(question)
 
     if result.correct_index is None or not 0 <= result.correct_index < len(order):

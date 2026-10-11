@@ -342,6 +342,27 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/help/guide": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Guide
+     * @description Everything prepza's help chat answers from, as text: how prepza works and how to use it,
+     *     the FAQ in the page's language, today's prices, the terms and the privacy policy; public.
+     */
+    get: operations["get_guide_help_guide_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/help/legal/{document}": {
     parameters: {
       query?: never
@@ -374,7 +395,10 @@ export interface paths {
     /**
      * Help Chat
      * @description Answers questions about prepza, for visitors too. Streams server-sent events:
-     *     {"delta"}..., then {"done"} or {"error"}. Refused during the emergency pause, as it's AI.
+     *     {"delta"}... (and a {"block"} sign-in card when a visitor asks to sign in or sign up), then
+     *     {"done"} or {"error"}. Refused during the emergency pause, as it's AI. A conversation with a
+     *     secret in it (a key, a token, a password) is answered at once, before anything else, with a
+     *     fixed reply ({"removed"} first: the panel drops that message), and nothing of it is used.
      */
     post: operations["help_chat_help_chat_post"]
     delete?: never
@@ -497,26 +521,6 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  "/internal/questions/{question_id}/rescore": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    /**
-     * Rescore Question
-     * @description The question's answer key was corrected: candidates who answered it are marked again.
-     */
-    post: operations["rescore_question_internal_questions__question_id__rescore_post"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
   "/internal/schedules/outbox": {
     parameters: {
       query?: never
@@ -607,10 +611,10 @@ export interface paths {
       path?: never
       cookie?: never
     }
-    /** Export User */
-    get: operations["export_user_internal_users__user_id__export_get"]
+    get?: never
     put?: never
-    post?: never
+    /** Export User */
+    post: operations["export_user_internal_users__user_id__export_post"]
     delete?: never
     options?: never
     head?: never
@@ -993,21 +997,6 @@ export interface components {
        * @default
        */
       comment: string
-    }
-    /**
-     * RescoreIn
-     * @description A question's corrected content: its text and options with the right one marked, and the
-     *     interview it belongs to (left out by older callers: every session is looked at).
-     */
-    RescoreIn: {
-      /** Text */
-      text: string
-      /** Options */
-      options: {
-        [key: string]: unknown
-      }[]
-      /** Set Id */
-      set_id?: string | null
     }
     /**
      * ReviewItem
@@ -1812,6 +1801,26 @@ export interface operations {
       }
     }
   }
+  get_guide_help_guide_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "text/plain": string
+        }
+      }
+    }
+  }
   get_legal_help_legal__document__get: {
     parameters: {
       query?: never
@@ -2072,43 +2081,6 @@ export interface operations {
       }
     }
   }
-  rescore_question_internal_questions__question_id__rescore_post: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        question_id: string
-      }
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["RescoreIn"]
-      }
-    }
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": {
-            [key: string]: unknown
-          }
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
   flush_outbox_internal_schedules_outbox_post: {
     parameters: {
       query?: never
@@ -2205,7 +2177,7 @@ export interface operations {
       }
     }
   }
-  export_user_internal_users__user_id__export_get: {
+  export_user_internal_users__user_id__export_post: {
     parameters: {
       query?: never
       header?: never

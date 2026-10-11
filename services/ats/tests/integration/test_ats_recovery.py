@@ -100,7 +100,7 @@ def test_results_kept_while_broken_are_found_once_reconnected_and_sent_once(run)
         results = [await ats_results.unreported()]
         await ats.connect(company, AtsProvider.WORKABLE, "acme", "sealed-2", "ann", "m-1")
         results.append(await ats_results.unreported())
-        await ats_results.mark_reported(row.id, {"candidate_invite_id": str(invite)})
+        await ats_results.mark_reported(row.id)
         results.append(await ats_results.unreported())
         await ats.delete_company(company)
         mine = [[item.result for item in found if item.id == row.id] for found in results]
@@ -166,55 +166,3 @@ def test_a_failed_reconnect_puts_the_earlier_connection_back_marked_broken(run):
     )
     assert found.status == "broken"
     assert len(links) == 1
-
-
-def test_a_corrected_grade_waits_once_and_the_latest_one_is_written(run):
-    """After the first comment: a correction waits to go back; a newer one stored while it's
-    being written waits in turn; the same one again or an older one changes nothing; and
-    results kept after a failure never overwrite a newer grade."""
-    invite = uuid.uuid4()
-
-    def rescored(grade, at):
-        return {"candidate_invite_id": str(invite), "grade": grade, "rescored_at": at}
-
-    second = rescored(80, "2026-10-08T10:00:00.000001+00:00")
-    third = rescored(90, "2026-10-08T10:00:00.000002+00:00")
-
-    async def waiting():
-        found = await ats_results.for_invite(invite)
-
-        return found and found[0].result
-
-    async def scenario():
-        company = uuid.uuid4()
-        await ats.connect(company, AtsProvider.WORKABLE, "acme", "sealed", "ann", "m-1")
-        connection = await ats.connection(company, AtsProvider.WORKABLE)
-        row = await ats_candidates.add(connection.id, None, uuid.uuid4(), "c-1", "a@x.com")
-        await ats_candidates.settle(row.id, CandidateStatus.INVITED, invite_id=invite)
-        await ats_results.claim(row.id)
-        await ats_results.mark_reported(row.id, None)
-        seen = [await waiting()]
-        await ats_results.offer(invite, second)
-        claimed = await ats_results.claim(row.id)
-        # The third arrives while the second is being written.
-        await ats_results.offer(invite, third)
-        await ats_results.mark_reported(row.id, claimed.result)
-        seen.append(await waiting())
-        await ats_results.claim(row.id)
-        await ats_results.keep(row.id, second)
-        seen.append(await waiting())
-        await ats_results.claim(row.id)
-        await ats_results.mark_reported(row.id, third)
-
-        for data in (third, second):
-            await ats_results.offer(invite, data)
-
-        seen.append(await waiting())
-        await ats.delete_company(company)
-
-        return claimed.result, seen
-
-    claimed, seen = run(scenario())
-
-    assert claimed == second
-    assert seen == [None, third, third, None]

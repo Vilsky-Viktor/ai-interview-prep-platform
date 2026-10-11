@@ -1383,67 +1383,6 @@
     }
    }
   },
-  "/internal/questions/{question_id}/rescore": {
-   "post": {
-    "tags": [
-     "internal"
-    ],
-    "summary": "Rescore Question",
-    "description": "The question's answer key was corrected: candidates who answered it are marked again.",
-    "operationId": "rescore_question_internal_questions__question_id__rescore_post",
-    "security": [
-     {
-      "HTTPBearer": []
-     }
-    ],
-    "parameters": [
-     {
-      "name": "question_id",
-      "in": "path",
-      "required": true,
-      "schema": {
-       "type": "string",
-       "format": "uuid",
-       "title": "Question Id"
-      }
-     }
-    ],
-    "requestBody": {
-     "required": true,
-     "content": {
-      "application/json": {
-       "schema": {
-        "$ref": "#/components/schemas/RescoreIn"
-       }
-      }
-     }
-    },
-    "responses": {
-     "200": {
-      "description": "Successful Response",
-      "content": {
-       "application/json": {
-        "schema": {
-         "type": "object",
-         "additionalProperties": true,
-         "title": "Response Rescore Question Internal Questions  Question Id  Rescore Post"
-        }
-       }
-      }
-     },
-     "422": {
-      "description": "Validation Error",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/HTTPValidationError"
-        }
-       }
-      }
-     }
-    }
-   }
-  },
   "/internal/schedules/outbox": {
    "post": {
     "tags": [
@@ -2411,41 +2350,6 @@
      "reason"
     ],
     "title": "ReportIn"
-   },
-   "RescoreIn": {
-    "properties": {
-     "text": {
-      "type": "string",
-      "title": "Text"
-     },
-     "options": {
-      "items": {
-       "additionalProperties": true,
-       "type": "object"
-      },
-      "type": "array",
-      "title": "Options"
-     },
-     "set_id": {
-      "anyOf": [
-       {
-        "type": "string",
-        "format": "uuid"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Set Id"
-     }
-    },
-    "type": "object",
-    "required": [
-     "text",
-     "options"
-    ],
-    "title": "RescoreIn",
-    "description": "A question's corrected content: its text and options with the right one marked, and the\ninterview it belongs to (left out by older callers: every session is looked at)."
    },
    "ReviewItem": {
     "properties": {

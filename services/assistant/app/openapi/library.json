@@ -2359,6 +2359,7 @@
      "internal"
     ],
     "summary": "Replace Question",
+    "description": "New content in the question's slot, for candidates who start after it; those who already\nanswered keep their own copy of the question, and their marks.",
     "operationId": "replace_question_internal_questions__question_id__put",
     "security": [
      {

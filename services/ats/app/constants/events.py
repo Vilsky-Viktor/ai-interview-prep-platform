@@ -1,8 +1,6 @@
 # The events ats acts on, from companies and billing.
 # A candidate finished an interview: their results go back to the ATS that sent them.
 CANDIDATE_FINISHED = "candidate.finished"
-# A finished candidate's grade was corrected (an answer key was fixed): a new comment with it.
-CANDIDATE_RESCORED = "candidate.rescored"
 # An interview's questions are ready: candidates waiting for it are invited.
 INTERVIEW_READY = "interview.ready"
 # An interview was deleted: its linked jobs and candidates go.

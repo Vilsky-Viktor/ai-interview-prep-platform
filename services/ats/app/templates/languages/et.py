@@ -2,7 +2,6 @@
 # str.format.
 
 TEXTS = {
-    "corrected": "Parandatud tulemus: vastusevõtit parandati. See asendab varasema hinde.",
     "finished": "Lõpetatud; hinne on hindamislehel.",
     "grade": "Hinne: {grade}% ({result})",
     "passed": "läbitud",

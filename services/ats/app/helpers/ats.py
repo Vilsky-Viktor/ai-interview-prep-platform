@@ -141,17 +141,12 @@ def result_comment(
     passed: bool,
     flagged: bool,
     link: str,
-    corrected: bool,
     language: str | None,
 ) -> str:
     """The comment a finished candidate's results go back to the ATS as, in the interview's
-    `language` (English when it's unknown); a `corrected` one replaces an earlier grade after an
-    answer key was fixed."""
+    `language` (English when it's unknown)."""
     texts = COMMENTS.get(language or DEFAULT_LANGUAGE, COMMENTS[DEFAULT_LANGUAGE])
     lines = [f"prepza: {title}"]
-
-    if corrected:
-        lines.append(texts["corrected"])
 
     if grade is None:
         lines.append(texts["finished"])

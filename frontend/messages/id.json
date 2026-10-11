@@ -951,7 +951,7 @@
       "see": "Dokumen",
       "points": {
         "decision": "Seseorang bisa meninjau hasil mana pun jika diminta",
-        "key": "Setiap jawaban dinilai berdasarkan kunci jawabannya; kunci yang dikoreksi menilai ulang hasil sebelumnya",
+        "key": "Setiap jawaban dinilai berdasarkan kunci jawabannya; kunci yang dikoreksi kemudian tidak mengubah hasil sebelumnya",
         "training": "Datamu tidak digunakan untuk melatih model AI",
         "time": "Waktu tambahan bagi siapa pun yang meminta",
         "notice": "Kandidat tahu apa yang akan dihadapi sebelum mulai",
@@ -1023,7 +1023,6 @@
       "verification_approved": "“{name}” terverifikasi untuk {domain}.",
       "verification_declined": "{reason, select, none {Verifikasi “{name}” ditolak.} other {Verifikasi “{name}” ditolak: {reason}}}",
       "member_joined": "{email} bergabung dengan “{name}” sebagai {role, select, admin {admin} other {pelihat}}.",
-      "grades_changed": "{count, plural, =1 {Nilai seorang kandidat} other {Nilai # kandidat}} di “{title}” berubah setelah kunci jawaban dikoreksi{failing, plural, =0 {.} other {; # kandidat tidak lagi lulus.}}",
       "ats_not_invited": "{count, plural, =1 {{email} dari {ats} tidak diundang ke “{title}”: {reason, select, credits {kredit habis} limit {batas email tercapai} paused {undangan sedang dijeda} other {terjadi kesalahan}}.} other {# kandidat dari {ats} tidak diundang ke “{title}”.}}"
     }
   },

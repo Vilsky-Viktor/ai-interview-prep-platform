@@ -2,7 +2,6 @@
 # str.format.
 
 TEXTS = {
-    "corrected": "Itinamang resulta: may naitamang answer key. Pinapalitan nito ang naunang grade.",
     "finished": "Tapos na; nasa scorecard ang grade.",
     "grade": "Grade: {grade}% ({result})",
     "passed": "pumasa",

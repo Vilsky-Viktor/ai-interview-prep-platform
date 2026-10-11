@@ -117,7 +117,7 @@ prepza svolge colloqui di competenze a scelta multipla e a tempo, scritti dall'I
 
 Ecco cosa significa oggi nel prodotto:
 
-- **L'IA scrive le domande e le relative chiavi di correzione; la correzione segue regole fisse.** Nessuna IA legge o giudica la risposta di un candidato, e non si usa alcuna analisi di video, voce o volto. Se in seguito l'IA corregge una chiave, le risposte passate vengono ricalcolate.
+- **L'IA scrive le domande e le relative chiavi di correzione; la correzione segue regole fisse.** Nessuna IA legge o giudica la risposta di un candidato, e non si usa alcuna analisi di video, voce o volto. Se in seguito l'IA corregge una chiave, la correzione vale per i candidati che iniziano dopo; i risultati passati non cambiano.
 - **Approvi tu gli argomenti** prima che venga scritta qualsiasi domanda, e puoi vedere ogni domanda.
 - **Decidono le persone.** La pagina dei risultati e i report PDF ricordano al tuo team di esaminare i risultati; prepza non scarta candidati né invia messaggi di rifiuto.
 - **I candidati vengono informati** prima di iniziare che le domande sono scritte dall'IA, che le persone della tua azienda esaminano i risultati e decidono, e che possono chiedere una revisione.

@@ -119,7 +119,7 @@ prepza tổ chức các buổi phỏng vấn kỹ năng trắc nghiệm có tín
 
 Hiện nay điều đó thể hiện trong sản phẩm như sau:
 
-- **AI viết câu hỏi và đáp án; việc chấm điểm theo quy tắc cố định.** Không có AI nào đọc hay đánh giá câu trả lời của ứng viên, và không dùng phân tích video, giọng nói hay khuôn mặt. Nếu sau này AI sửa một đáp án, các câu trả lời trước đó sẽ được chấm lại.
+- **AI viết câu hỏi và đáp án; việc chấm điểm theo quy tắc cố định.** Không có AI nào đọc hay đánh giá câu trả lời của ứng viên, và không dùng phân tích video, giọng nói hay khuôn mặt. Nếu sau này AI sửa một đáp án, bản sửa áp dụng cho các ứng viên bắt đầu sau đó; kết quả trước đó không thay đổi.
 - **Bạn duyệt các chủ đề** trước khi bất kỳ câu hỏi nào được viết, và bạn xem được mọi câu hỏi.
 - **Con người quyết định.** Trang kết quả và báo cáo PDF nhắc nhóm của bạn xem xét kết quả; prepza không loại ứng viên và không gửi thư từ chối.
 - **Ứng viên được thông báo** trước khi bắt đầu rằng câu hỏi do AI viết, rằng người của công ty bạn xem xét kết quả và quyết định, và rằng họ có thể yêu cầu xem xét lại.

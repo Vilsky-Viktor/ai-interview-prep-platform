@@ -129,7 +129,7 @@ Any member, viewers too, can also search a company's candidates across all its i
 
 "Not delivered" means the invite email bounced or was marked as spam (see [Notifications and emails](notifications.md#undelivered-emails)).
 
-Each candidate's grade and integrity flag are stored on their invite when they finish, so the list is sorted, filtered and paged in the database.
+Each candidate's grade and integrity flag are stored on their invite when they finish, so the list is sorted, filtered and paged in the database. A finished candidate's results never change: a question fixed later applies only to candidates who start after the fix (see [Question quality](../generation.md#fixes)).
 
 ## Reports
 

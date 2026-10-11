@@ -951,7 +951,7 @@
       "see": "Documents",
       "points": {
         "decision": "Une personne peut revoir tout résultat sur demande",
-        "key": "Chaque réponse est notée d'après son corrigé ; un corrigé rectifié recalcule les résultats passés",
+        "key": "Chaque réponse est notée d'après son corrigé ; un corrigé rectifié plus tard ne modifie pas les résultats passés",
         "training": "Vos données ne servent pas à entraîner des modèles d'IA",
         "time": "Du temps en plus pour qui le demande",
         "notice": "Les candidats savent à quoi s'attendre avant de commencer",
@@ -1023,7 +1023,6 @@
       "verification_approved": "« {name} » est vérifiée pour {domain}.",
       "verification_declined": "{reason, select, none {La vérification de « {name} » a été refusée.} other {La vérification de « {name} » a été refusée : {reason}}}",
       "member_joined": "{email} a rejoint « {name} » en tant que {role, select, admin {admin} other {lecteur}}.",
-      "grades_changed": "{count, plural, =1 {La note d'un candidat a changé} other {Les notes de # candidats ont changé}} dans « {title} » après la rectification d'un corrigé{failing, plural, =0 {.} =1 { ; 1 candidat n'atteint plus le seuil de réussite.} other { ; # candidats n'atteignent plus le seuil de réussite.}}",
       "ats_not_invited": "{count, plural, =1 {{email} venant de {ats} n'a pas été invité à « {title} » : {reason, select, credits {crédits épuisés} limit {une limite d'e-mails a été atteinte} paused {les invitations sont en pause} other {une erreur s'est produite}}.} other {# candidats venant de {ats} n'ont pas été invités à « {title} ».}}"
     }
   },

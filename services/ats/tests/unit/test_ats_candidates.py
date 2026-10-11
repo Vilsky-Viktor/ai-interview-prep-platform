@@ -43,7 +43,7 @@ def test_only_bodies_signed_with_the_token_count_in_hex_or_base64():
 
 
 def test_the_results_comment_says_the_grade_the_outcome_where_the_scorecard_is_and_who_decides():
-    text = result_comment("Accountant", 82, True, True, "https://prepza.ai/s/1", False, "en")
+    text = result_comment("Accountant", 82, True, True, "https://prepza.ai/s/1", "en")
 
     assert text.splitlines() == [
         "prepza: Accountant",
@@ -52,11 +52,7 @@ def test_the_results_comment_says_the_grade_the_outcome_where_the_scorecard_is_a
         "A person decides: don't reject automatically on this result.",
         "Scorecard: https://prepza.ai/s/1",
     ]
-    assert "below the passing grade" in result_comment("A", 40, False, False, "x", False, "en")
-    corrected = result_comment("A", 90, True, False, "x", True, "en").splitlines()
-    assert corrected[1] == (
-        "Corrected result: an answer key was fixed. This replaces the earlier grade."
-    )
+    assert "below the passing grade" in result_comment("A", 40, False, False, "x", "en")
 
 
 @pytest.fixture

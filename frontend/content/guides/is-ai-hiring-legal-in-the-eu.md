@@ -117,7 +117,7 @@ prepza runs timed multiple-choice skills interviews written by AI from a job des
 
 What that looks like in the product today:
 
-- **AI writes the questions and their answer keys; marking follows fixed rules.** No AI reads or judges a candidate's answer, and no video, voice or face analysis is used. If AI corrects a key later, past answers are re-scored.
+- **AI writes the questions and their answer keys; marking follows fixed rules.** No AI reads or judges a candidate's answer, and no video, voice or face analysis is used. If AI corrects a key later, the fix applies to candidates who start after it; past results don't change.
 - **You approve the topics** before any question is written, and you can see every question.
 - **People decide.** The results page and PDF reports remind your team to review results; prepza doesn't reject candidates or send rejection messages.
 - **Candidates are told** before they start that questions are written by AI, that people at your company review results and decide, and that they can ask for a review.

@@ -115,7 +115,7 @@ After changing one, rebuild the files in `frontend/public/documents` and commit 
 
 ## API docs
 
-The `/api-docs` page ("api docs" in the footer) is the public API's reference, in English only, like the legal pages. It reads the API's OpenAPI description on each request (`lib/openapi.ts`, `components/api-docs/`): its description's sections (getting a key, authentication, limits, errors, web hooks), the base URL, each route with its parameters, body, result and errors, the `candidate.finished` and `candidate.rescored` web hooks and the objects. See [Public API](api.md).
+The `/api-docs` page ("api docs" in the footer) is the public API's reference, in English only, like the legal pages. It reads the API's OpenAPI description on each request (`lib/openapi.ts`, `components/api-docs/`): its description's sections (getting a key, authentication, limits, errors, web hooks), the base URL, each route with its parameters, body, result and errors, the `candidate.finished` web hook and the objects. See [Public API](api.md).
 
 ## Contact us
 

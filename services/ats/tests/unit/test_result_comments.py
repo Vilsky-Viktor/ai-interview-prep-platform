@@ -5,7 +5,7 @@ from app.templates.comments import COMMENTS
 
 
 def test_a_german_interview_gets_the_note_in_german():
-    text = result_comment("Buchhalter", 82, True, True, "https://prepza.ai/s/1", False, "de")
+    text = result_comment("Buchhalter", 82, True, True, "https://prepza.ai/s/1", "de")
 
     assert text.splitlines() == [
         "prepza: Buchhalter",
@@ -16,18 +16,11 @@ def test_a_german_interview_gets_the_note_in_german():
     ]
 
 
-def test_a_corrected_note_is_in_the_interviews_language():
-    lines = result_comment("A", 40, False, False, "x", True, "fr").splitlines()
-
-    assert lines[1] == COMMENTS["fr"]["corrected"]
-    assert lines[2] == "Note : 40 % (sous le seuil de réussite)"
-
-
 def test_an_unknown_or_missing_language_gets_the_note_in_english():
-    english = result_comment("A", None, False, False, "x", False, "en")
+    english = result_comment("A", None, False, False, "x", "en")
 
-    assert result_comment("A", None, False, False, "x", False, "xx") == english
-    assert result_comment("A", None, False, False, "x", False, None) == english
+    assert result_comment("A", None, False, False, "x", "xx") == english
+    assert result_comment("A", None, False, False, "x", None) == english
     assert "Finished; the grade is on the scorecard." in english
 
 

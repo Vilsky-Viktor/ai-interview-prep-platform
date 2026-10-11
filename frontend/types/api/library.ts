@@ -692,7 +692,11 @@ export interface paths {
       cookie?: never
     }
     get?: never
-    /** Replace Question */
+    /**
+     * Replace Question
+     * @description New content in the question's slot, for candidates who start after it; those who already
+     *     answered keep their own copy of the question, and their marks.
+     */
     put: operations["replace_question_internal_questions__question_id__put"]
     post?: never
     delete?: never

@@ -2,7 +2,6 @@
 # str.format.
 
 TEXTS = {
-    "corrected": "Resultado corregido: se corrigió una clave de respuesta. Sustituye a la nota anterior.",
     "finished": "Terminado; la nota está en la ficha de evaluación.",
     "grade": "Nota: {grade} % ({result})",
     "passed": "aprobado",

@@ -117,7 +117,7 @@ prepza führt zeitlich begrenzte Multiple-Choice-Interviews zu Fachkenntnissen d
 
 So sieht das heute im Produkt aus:
 
-- **KI schreibt die Fragen und ihre Lösungsschlüssel; die Bewertung folgt festen Regeln.** Keine KI liest oder beurteilt die Antwort eines Kandidaten, und es wird keine Video-, Stimm- oder Gesichtsanalyse eingesetzt. Korrigiert die KI später einen Schlüssel, werden frühere Antworten neu bewertet.
+- **KI schreibt die Fragen und ihre Lösungsschlüssel; die Bewertung folgt festen Regeln.** Keine KI liest oder beurteilt die Antwort eines Kandidaten, und es wird keine Video-, Stimm- oder Gesichtsanalyse eingesetzt. Korrigiert die KI später einen Schlüssel, gilt die Korrektur für Kandidaten, die danach beginnen; frühere Ergebnisse ändern sich nicht.
 - **Du gibst die Themen frei,** bevor eine Frage geschrieben wird, und du kannst jede Frage sehen.
 - **Menschen entscheiden.** Die Ergebnisseite und die PDF-Berichte erinnern dein Team daran, die Ergebnisse zu prüfen; prepza lehnt keine Kandidaten ab und verschickt keine Absagen.
 - **Kandidaten werden informiert,** bevor sie beginnen: dass die Fragen von KI geschrieben sind, dass Menschen in deinem Unternehmen die Ergebnisse prüfen und entscheiden und dass sie eine Überprüfung verlangen können.

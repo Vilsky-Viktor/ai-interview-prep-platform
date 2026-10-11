@@ -119,7 +119,7 @@ prepza menjalankan wawancara keterampilan pilihan ganda berbatas waktu yang ditu
 
 Seperti apa wujudnya di produk saat ini:
 
-- **AI menulis soal dan kunci jawabannya; penilaian mengikuti aturan tetap.** Tidak ada AI yang membaca atau menilai jawaban kandidat, dan tidak ada analisis video, suara, atau wajah. Kalau AI mengoreksi sebuah kunci jawaban belakangan, jawaban sebelumnya dinilai ulang.
+- **AI menulis soal dan kunci jawabannya; penilaian mengikuti aturan tetap.** Tidak ada AI yang membaca atau menilai jawaban kandidat, dan tidak ada analisis video, suara, atau wajah. Kalau AI mengoreksi sebuah kunci jawaban belakangan, koreksinya berlaku untuk kandidat yang mulai setelahnya; hasil sebelumnya tidak berubah.
 - **Kamu menyetujui topiknya** sebelum ada soal yang ditulis, dan kamu bisa melihat setiap soal.
 - **Manusia yang memutuskan.** Halaman hasil dan laporan PDF mengingatkan timmu untuk meninjau hasil; prepza tidak menolak kandidat atau mengirim pesan penolakan.
 - **Kandidat diberi tahu** sebelum mulai bahwa soal ditulis oleh AI, bahwa orang di perusahaanmu yang meninjau hasil dan memutuskan, dan bahwa mereka bisa meminta peninjauan.

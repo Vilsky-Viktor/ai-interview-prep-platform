@@ -119,7 +119,7 @@ prepza, bir iş tanımından yapay zekâ tarafından yazılmış süreli, çokta
 
 Bunun bugün üründeki karşılığı:
 
-- **Soruları ve cevap anahtarlarını yapay zekâ yazar; değerlendirme sabit kurallara göre yapılır.** Hiçbir yapay zekâ adayın yanıtını okumaz veya yargılamaz; video, ses veya yüz analizi kullanılmaz. Yapay zekâ bir anahtarı sonradan düzeltirse geçmiş yanıtlar yeniden puanlanır.
+- **Soruları ve cevap anahtarlarını yapay zekâ yazar; değerlendirme sabit kurallara göre yapılır.** Hiçbir yapay zekâ adayın yanıtını okumaz veya yargılamaz; video, ses veya yüz analizi kullanılmaz. Yapay zekâ bir anahtarı sonradan düzeltirse düzeltme, sonrasında başlayan adaylar için geçerli olur; geçmiş sonuçlar değişmez.
 - **Konuları siz onaylarsınız;** bu, herhangi bir soru yazılmadan önce olur ve her soruyu görebilirsiniz.
 - **Kararı insanlar verir.** Sonuçlar sayfası ve PDF raporlar ekibinize sonuçları incelemesini hatırlatır; prepza adayları reddetmez veya ret mesajı göndermez.
 - **Adaylar başlamadan önce bilgilendirilir:** soruların yapay zekâ tarafından yazıldığı, sonuçları şirketinizdeki kişilerin inceleyip karar verdiği ve yeniden inceleme talep edebilecekleri.

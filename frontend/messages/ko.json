@@ -942,7 +942,7 @@
       "see": "문서",
       "points": {
         "decision": "요청하면 사람이 어떤 결과든 검토합니다",
-        "key": "모든 답변은 정답과 대조해 채점되며, 정답이 수정되면 지난 결과도 다시 채점됩니다",
+        "key": "모든 답변은 정답과 대조해 채점되며, 나중에 정답이 수정되어도 지난 결과는 바뀌지 않습니다",
         "training": "데이터는 AI 모델 학습에 사용되지 않습니다",
         "time": "요청하는 누구에게나 추가 시간",
         "notice": "지원자는 시작 전에 무엇을 할지 알 수 있습니다",
@@ -1014,7 +1014,6 @@
       "verification_approved": "“{name}”이(가) {domain}(으)로 인증되었습니다.",
       "verification_declined": "{reason, select, none {“{name}”의 인증이 거절되었습니다.} other {“{name}”의 인증이 거절되었습니다: {reason}}}",
       "member_joined": "{email} 님이 {role, select, admin {관리자} other {뷰어}}(으)로 “{name}”에 참여했습니다.",
-      "grades_changed": "{count, plural, other {정답이 수정되어 “{title}”에서 지원자 #명의 점수가 바뀌었습니다}}{failing, plural, =0 {.} other {. 그중 #명은 더 이상 합격 기준에 미치지 못합니다.}}",
       "ats_not_invited": "{count, plural, =1 {{ats}의 {email} 님을 “{title}”에 초대하지 못했습니다: {reason, select, credits {크레딧이 부족합니다} limit {이메일 한도에 도달했습니다} paused {초대가 일시 중지되었습니다} other {문제가 발생했습니다}}.} other {{ats}의 지원자 #명을 “{title}”에 초대하지 못했습니다.}}"
     }
   },

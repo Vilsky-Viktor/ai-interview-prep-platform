@@ -117,7 +117,7 @@ prepza ofrece entrevistas de habilidades de opción múltiple con tiempo límite
 
 Cómo se refleja hoy en el producto:
 
-- **La IA redacta las preguntas y sus claves de respuestas; la corrección sigue reglas fijas.** Ninguna IA lee ni juzga la respuesta de un candidato, y no se analiza video, voz ni rostros. Si la IA corrige una clave más adelante, las respuestas anteriores se vuelven a puntuar.
+- **La IA redacta las preguntas y sus claves de respuestas; la corrección sigue reglas fijas.** Ninguna IA lee ni juzga la respuesta de un candidato, y no se analiza video, voz ni rostros. Si la IA corrige una clave más adelante, la corrección se aplica a los candidatos que empiecen después; los resultados anteriores no cambian.
 - **Tú apruebas los temas** antes de que se redacte ninguna pregunta, y puedes ver todas las preguntas.
 - **Deciden las personas.** La página de resultados y los informes en PDF recuerdan a tu equipo que revise los resultados; prepza no rechaza candidatos ni envía mensajes de rechazo.
 - **Se informa a los candidatos** antes de empezar de que las preguntas las redacta la IA, de que personas de tu empresa revisan los resultados y deciden, y de que pueden pedir una revisión.

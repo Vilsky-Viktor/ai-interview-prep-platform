@@ -117,7 +117,7 @@ A prepza aplica entrevistas de habilidades de múltipla escolha cronometradas, e
 
 Como isso aparece no produto hoje:
 
-- **A IA escreve as perguntas e os gabaritos; a correção segue regras fixas.** Nenhuma IA lê ou julga a resposta de um candidato, e não há análise de vídeo, voz ou rosto. Se a IA corrigir um gabarito depois, as respostas anteriores são pontuadas novamente.
+- **A IA escreve as perguntas e os gabaritos; a correção segue regras fixas.** Nenhuma IA lê ou julga a resposta de um candidato, e não há análise de vídeo, voz ou rosto. Se a IA corrigir um gabarito depois, a correção vale para os candidatos que começarem depois dela; os resultados anteriores não mudam.
 - **Você aprova os tópicos** antes de qualquer pergunta ser escrita, e pode ver todas as perguntas.
 - **Pessoas decidem.** A página de resultados e os relatórios em PDF lembram a sua equipe de revisar os resultados; a prepza não reprova candidatos nem envia mensagens de reprovação.
 - **Os candidatos são informados** antes de começar de que as perguntas são escritas por IA, de que pessoas da sua empresa revisam os resultados e decidem, e de que eles podem pedir uma revisão.

@@ -5,7 +5,6 @@ import {
   FlagIcon,
   MailWarningIcon,
   PackageCheckIcon,
-  RefreshCwIcon,
   SparklesIcon,
   UserCheckIcon,
   UserPlusIcon,
@@ -39,5 +38,4 @@ export const NOTIFICATION_LOOKS: Record<
   verification_declined: { icon: BadgeXIcon, alert: true },
   ats_not_invited: { icon: UserXIcon, alert: true },
   member_joined: { icon: UserPlusIcon, alert: false },
-  grades_changed: { icon: RefreshCwIcon, alert: false },
 }

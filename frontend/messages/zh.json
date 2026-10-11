@@ -942,7 +942,7 @@
       "see": "文档",
       "points": {
         "decision": "可应要求由人工复核任何结果",
-        "key": "每个答案都按标准答案评分；标准答案修正后，过去的结果会重新评分",
+        "key": "每个答案都按标准答案评分；标准答案日后修正，不会改变过去的结果",
         "training": "你的数据不会用于训练 AI 模型",
         "time": "任何人申请都可获得额外时间",
         "notice": "候选人开始前就知道会面对什么",
@@ -1014,7 +1014,6 @@
       "verification_approved": "“{name}”已通过 {domain} 验证。",
       "verification_declined": "{reason, select, none {“{name}”的验证已被拒绝。} other {“{name}”的验证已被拒绝：{reason}}}",
       "member_joined": "{email} 已作为{role, select, admin {管理员} other {查看者}}加入“{name}”。",
-      "grades_changed": "{count, plural, other {因标准答案修正，“{title}”中 # 位候选人的成绩发生了变化}}{failing, plural, =0 {。} other {，其中 # 位不再达到及格线。}}",
       "ats_not_invited": "{count, plural, =1 {来自 {ats} 的 {email} 未被邀请参加“{title}”：{reason, select, credits {点数不足} limit {已达到邮件发送上限} paused {邀请已暂停} other {出了点问题}}。} other {来自 {ats} 的 # 位候选人未被邀请参加“{title}”。}}"
     }
   },

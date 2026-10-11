@@ -112,7 +112,7 @@ def test_a_wrong_key_is_moved_once_a_blind_second_check_agrees(monkeypatch):
 
 def test_a_key_the_second_check_doesnt_agree_on_replaces_the_question(monkeypatch):
     # The first check says "Debit cash", the blind one "Debit revenue": nothing moves the key,
-    # so no candidate is rescored on an uncertain answer.
+    # so no future candidate is marked on an uncertain key.
     calls, _ = record(
         monkeypatch, KeyCheck(correct_index=1), confirmation=KeyCheck(correct_index=2)
     )

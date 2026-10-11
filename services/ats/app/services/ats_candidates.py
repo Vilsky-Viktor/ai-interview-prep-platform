@@ -190,19 +190,12 @@ async def recover() -> int:
 
 async def report(data: dict) -> None:
     """A candidate the ATS sent finished (companies' candidate.finished event, or results kept
-    earlier), or a finished one's grade was corrected (candidate.rescored): their results go
-    back to the ATS as a comment, once each; the ATSs' notes can't be edited, so a corrected
-    grade is a new one. They're claimed first, so of two events at once only one writes, and
-    the latest results stored are the ones written. While the connection is broken, or when the
-    ATS fails, they're kept (and the claim freed) for the recovery job, and the event is done: a
-    company's failing ATS doesn't hold up Pub/Sub for everyone. No member to write as gives up,
-    and so does a candidate gone from the ATS. Candidates no ATS sent are ignored."""
-    invite_id = UUID(data["candidate_invite_id"])
-
-    if ats_results.stamp(data):
-        await ats_results.offer(invite_id, data)
-
-    found = await ats_results.for_invite(invite_id)
+    earlier): their results go back to the ATS as a comment, once. They're claimed first, so of
+    two events at once only one writes. While the connection is broken, or when the ATS fails,
+    they're kept (and the claim freed) for the recovery job, and the event is done: a company's
+    failing ATS doesn't hold up Pub/Sub for everyone. No member to write as gives up, and so does
+    a candidate gone from the ATS. Candidates no ATS sent are ignored."""
+    found = await ats_results.for_invite(UUID(data["candidate_invite_id"]))
 
     if found is None:
         return
@@ -211,16 +204,12 @@ async def report(data: dict) -> None:
 
     # Workable's comments need an author; Greenhouse's notes don't. Without one, nowhere to write.
     if connection.provider in NEEDS_AUTHOR and connection.member_id is None:
-        await ats_results.mark_reported(row.id, row.result)
+        await ats_results.mark_reported(row.id)
 
         return
 
-    claimed = await ats_results.claim(row.id)
-
-    if claimed is None:
+    if not await ats_results.claim(row.id):
         return
-
-    data = claimed.result or data
 
     if connection.status != ConnectionStatus.CONNECTED or await key_of(connection) is None:
         await ats_results.keep(row.id, data)
@@ -239,7 +228,6 @@ async def report(data: dict) -> None:
         data["passed"],
         data["flagged"],
         link,
-        corrected=bool(ats_results.stamp(data)),
         language=data.get("language"),
     )
 
@@ -254,7 +242,7 @@ async def report(data: dict) -> None:
     except (HTTPException, httpx.HTTPError) as error:
         # The candidate is gone from the ATS: nowhere to write.
         if isinstance(error, HTTPException) and error.status_code == status.HTTP_404_NOT_FOUND:
-            await ats_results.mark_reported(row.id, data)
+            await ats_results.mark_reported(row.id)
 
             return
 
@@ -271,4 +259,4 @@ async def report(data: dict) -> None:
 
         return
 
-    await ats_results.mark_reported(row.id, data)
+    await ats_results.mark_reported(row.id)

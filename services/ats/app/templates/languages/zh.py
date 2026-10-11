@@ -2,7 +2,6 @@
 # str.format.
 
 TEXTS = {
-    "corrected": "更正后的结果：标准答案已修正。此结果取代之前的成绩。",
     "finished": "已完成；成绩见评分卡。",
     "grade": "成绩：{grade}%（{result}）",
     "passed": "已通过",

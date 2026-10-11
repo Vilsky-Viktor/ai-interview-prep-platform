@@ -57,10 +57,10 @@ flowchart LR
     api -- members, interviews, candidates, invites --> companies
     api -- signed web hooks --> platforms
 
-    rounds -- answer.recorded / session.scored / interview.finished / results.rescored --> pubsub[(Pub/Sub topic: events)]
+    rounds -- answer.recorded / session.scored / interview.finished --> pubsub[(Pub/Sub topic: events)]
     worker -- generation.completed / failed / cancelled --> pubsub
     companies -- candidate.invited / reminded / removed, member.invited, report.shared, company.deleted --> pubsub
-    companies -- candidate.finished / rescored, interview.ready / deleted --> pubsub
+    companies -- candidate.finished, interview.ready / deleted --> pubsub
     rounds -- contact.sent --> pubsub
     billing -- credits.added --> pubsub
     library & companies & billing & ats -- notification.requested --> pubsub
@@ -124,7 +124,7 @@ Billing has no outbox: it publishes `credits.added` and its notifications (refer
 Refusals and duplicates:
 
 - An event Pub/Sub refuses is counted in its row's `attempts`, and parked after 5 refusals, so it can't hold up the rest. A parked event is logged as an error, which Sentry reports.
-- Each event carries a stable `event_id` attribute (its outbox row id), so a consumer that gets it twice acts once. Library's statistics and companies keep the ids they handled in `processed_events`; notifications passes the id to Resend as the email's idempotency key and stores one bell notification per key; api records each web hook's delivery per event; ats invites a candidate once (a unique key and a claim), sends a result back once (`reported_at`), a corrected grade once (its `rescored_at`), and deletes idempotently.
+- Each event carries a stable `event_id` attribute (its outbox row id), so a consumer that gets it twice acts once. Library's statistics and companies keep the ids they handled in `processed_events`; notifications passes the id to Resend as the email's idempotency key and stores one bell notification per key; api records each web hook's delivery per event; ats invites a candidate once (a unique key and a claim), sends a result back once (`reported_at`) and deletes idempotently.
 
 Delivery:
 
@@ -135,10 +135,10 @@ Delivery:
 | Consumer | Event types |
 |---|---|
 | library | `answer.recorded`, `session.scored` |
-| companies | `generation.completed`, `generation.failed`, `generation.cancelled`, `interview.finished`, `results.rescored` |
+| companies | `generation.completed`, `generation.failed`, `generation.cancelled`, `interview.finished` |
 | notifications | `notification.requested`, every `candidate.*` (it handles `candidate.invited`, `candidate.reminded` and `candidate.removed`), `member.invited`, `report.shared`, `contact.sent`, `company.deleted` |
-| ats | `candidate.finished`, `candidate.rescored`, `candidate.removed`, every `interview.*` (it handles `interview.ready` and `interview.deleted`), `company.deleted`, `credits.added` |
-| api | `candidate.finished`, `candidate.rescored`, `company.deleted` |
+| ats | `candidate.finished`, `candidate.removed`, `interview.ready`, `interview.deleted`, `company.deleted`, `credits.added` |
+| api | `candidate.finished`, `company.deleted` |
 | assistant | `company.deleted` (deletes the company's conversations; deleting again deletes nothing more) |
 
 - Locally, each consumer ignores events that aren't its own.

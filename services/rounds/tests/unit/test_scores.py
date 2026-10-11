@@ -58,25 +58,3 @@ def test_a_finished_section_reports_each_shown_questions_result():
             },
         ],
     }
-
-
-def test_only_the_same_question_with_the_same_options_is_rekeyed():
-    from app.helpers.rescore import rekeyed
-
-    def copy():
-        return {
-            "text": "Q?",
-            "options": [{"answer": "b", "correct": True}, {"answer": "a", "correct": False}],
-        }
-
-    fixed = [{"answer": "a", "correct": True}, {"answer": "b", "correct": False}]
-    question = copy()
-
-    assert rekeyed(question, "Q?", fixed)
-    # The candidate's option order stays; only the key moves.
-    assert question["options"] == [
-        {"answer": "b", "correct": False},
-        {"answer": "a", "correct": True},
-    ]
-    assert not rekeyed(copy(), "Other?", fixed)
-    assert not rekeyed(copy(), "Q?", [{"answer": "c", "correct": True}])

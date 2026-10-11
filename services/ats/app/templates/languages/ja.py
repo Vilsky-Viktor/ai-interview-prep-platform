@@ -2,7 +2,6 @@
 # str.format.
 
 TEXTS = {
-    "corrected": "修正後の結果：正解が修正されました。以前のスコアに代わる結果です。",
     "finished": "回答完了。スコアはスコアカードをご覧ください。",
     "grade": "スコア：{grade}%（{result}）",
     "passed": "合格",

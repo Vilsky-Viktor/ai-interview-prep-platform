@@ -947,7 +947,7 @@
       "see": "Documenten",
       "points": {
         "decision": "Een mens kan elk resultaat op verzoek bekijken",
-        "key": "Elk antwoord wordt beoordeeld met de antwoordsleutel; een gecorrigeerde sleutel herberekent eerdere resultaten",
+        "key": "Elk antwoord wordt beoordeeld met de antwoordsleutel; een later gecorrigeerde sleutel verandert eerdere resultaten niet",
         "training": "Je gegevens worden niet gebruikt om AI-modellen te trainen",
         "time": "Extra tijd voor iedereen die erom vraagt",
         "notice": "Kandidaten weten vooraf wat ze kunnen verwachten",
@@ -1019,7 +1019,6 @@
       "verification_approved": "“{name}” is geverifieerd voor {domain}.",
       "verification_declined": "{reason, select, none {De verificatie van “{name}” is afgewezen.} other {De verificatie van “{name}” is afgewezen: {reason}}}",
       "member_joined": "{email} is lid geworden van “{name}” als {role, select, admin {beheerder} other {kijker}}.",
-      "grades_changed": "{count, plural, one {De score van een kandidaat in “{title}” is veranderd} other {De scores van # kandidaten in “{title}” zijn veranderd}} na correctie van een antwoordsleutel{failing, plural, =0 {.} one {; # kandidaat haalt de slaaggrens niet meer.} other {; # kandidaten halen de slaaggrens niet meer.}}",
       "ats_not_invited": "{count, plural, one {{email} uit {ats} is niet uitgenodigd voor “{title}”: {reason, select, credits {credits op} limit {een e-maillimiet is bereikt} paused {uitnodigingen zijn gepauzeerd} other {er ging iets mis}}.} other {# kandidaten uit {ats} zijn niet uitgenodigd voor “{title}”.}}"
     }
   },

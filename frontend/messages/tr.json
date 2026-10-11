@@ -950,7 +950,7 @@
       "see": "Belgeler",
       "points": {
         "decision": "İstenirse her sonucu bir insan inceleyebilir",
-        "key": "Her yanıt kendi cevap anahtarına göre puanlanır; düzeltilen bir anahtar geçmiş sonuçları yeniden puanlar",
+        "key": "Her yanıt kendi cevap anahtarına göre puanlanır; sonradan düzeltilen bir anahtar geçmiş sonuçları değiştirmez",
         "training": "Verileriniz yapay zekâ modellerini eğitmek için kullanılmaz",
         "time": "İsteyen herkese ek süre",
         "notice": "Adaylar başlamadan önce ne bekleyeceklerini bilir",
@@ -1022,7 +1022,6 @@
       "verification_approved": "“{name}”, {domain} için doğrulandı.",
       "verification_declined": "{reason, select, none {“{name}” doğrulaması reddedildi.} other {“{name}” doğrulaması reddedildi: {reason}}}",
       "member_joined": "{email}, “{name}” ekibine {role, select, admin {yönetici} other {görüntüleyici}} olarak katıldı.",
-      "grades_changed": "{count, plural, one {Bir cevap anahtarı düzeltildiği için “{title}” mülakatında bir adayın notu değişti} other {Bir cevap anahtarı düzeltildiği için “{title}” mülakatında # adayın notu değişti}}{failing, plural, =0 {.} other {; # aday artık geçme notuna ulaşmıyor.}}",
       "ats_not_invited": "{count, plural, one {{ats} üzerinden gelen {email}, “{title}” mülakatına davet edilmedi: {reason, select, credits {krediniz bitti} limit {bir e-posta sınırına ulaşıldı} paused {davetler duraklatıldı} other {bir şeyler ters gitti}}.} other {{ats} üzerinden gelen # aday “{title}” mülakatına davet edilmedi.}}"
     }
   },

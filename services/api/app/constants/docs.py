@@ -51,9 +51,9 @@ the problem. Each endpoint below lists the errors it can return.
 
 Owners and admins can add up to 5 web hook endpoints on the same API page. When a candidate
 finishes an interview, prepza sends a `candidate.finished` event as a `POST` request to each
-endpoint. When a finished candidate's grade changes because an answer key was corrected, it sends
-a `candidate.rescored` event with the same body and the new grade. Endpoints must use HTTPS
-and be reachable from the public internet.
+endpoint. A candidate's results never change after they finish: a fixed question applies only to
+candidates who start after the fix. Endpoints must use HTTPS and be reachable from the public
+internet.
 
 Every request carries a `Prepza-Signature` header in the form `t=<timestamp>,v1=<signature>`. The
 signature is the hex-encoded HMAC-SHA256 of `<timestamp>.<raw request body>`, computed with the

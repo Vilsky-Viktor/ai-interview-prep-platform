@@ -2,7 +2,6 @@
 # str.format.
 
 TEXTS = {
-    "corrected": "Corrected result: an answer key was fixed. This replaces the earlier grade.",
     "finished": "Finished; the grade is on the scorecard.",
     "grade": "Grade: {grade}% ({result})",
     "passed": "passed",

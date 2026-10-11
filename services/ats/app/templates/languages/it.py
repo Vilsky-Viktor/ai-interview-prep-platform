@@ -2,7 +2,6 @@
 # str.format.
 
 TEXTS = {
-    "corrected": "Risultato corretto: è stata rettificata una chiave di correzione. Sostituisce il punteggio precedente.",
     "finished": "Completato; il punteggio è nella scheda di valutazione.",
     "grade": "Punteggio: {grade}% ({result})",
     "passed": "superato",

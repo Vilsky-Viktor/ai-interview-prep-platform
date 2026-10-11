@@ -2,7 +2,6 @@
 # str.format.
 
 TEXTS = {
-    "corrected": "Hasil yang dikoreksi: sebuah kunci jawaban telah dikoreksi. Ini menggantikan nilai sebelumnya.",
     "finished": "Selesai; nilainya ada di scorecard.",
     "grade": "Nilai: {grade}% ({result})",
     "passed": "lulus",

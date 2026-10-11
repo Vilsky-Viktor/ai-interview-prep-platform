@@ -8,8 +8,8 @@ from sqlalchemy.orm import selectinload
 
 from app.constants.events import INTERVIEW_FINISHED, SESSION_SCORED
 from app.constants.integrity import FAST_ANSWER_SECONDS, MAX_SIGNALS_PER_QUESTION, IntegritySignal
-from app.constants.rounds import CORRECT_SCORE, RoundStatus
-from app.helpers.rounds import correct_option_index, shuffled
+from app.constants.rounds import RoundStatus
+from app.helpers.rounds import shuffled
 from app.helpers.scores import final_score, invite_grade, scored
 from app.models.answers import Answer
 from app.models.outbox import OutboxEvent
@@ -180,33 +180,24 @@ async def add_answer(answer: Answer, event: tuple[str, dict] | None = None) -> b
     two requests timing out the same question at once.
     """
     async with Db() as session:
-        # Stopping the clock locks the section, so it can't finish (see finish) or be rescored
-        # (see rescore_question) while the answer is saved; one that already finished is left
-        # alone.
-        questions = await session.scalar(
+        # Stopping the clock locks the section, so it can't finish (see finish) while the answer
+        # is saved; one that already finished is left alone.
+        running = await session.scalar(
             update(Session)
             .where(Session.id == answer.session_id, Session.status == RoundStatus.IN_PROGRESS)
             .values(question_shown_at=None)
-            .returning(Session.questions)
+            .returning(Session.id)
         )
 
-        if questions is None:
+        if running is None:
             await session.rollback()
 
             return False
 
-        # A rescore may have corrected the key since the answer was checked: it's marked against
-        # the questions read under the lock, so it's never left on the old key.
-        if answer.option_index is not None:
-            question = next(q for q in questions if q["id"] == str(answer.question_id))
-            answer.correct = answer.option_index == correct_option_index(question)
-            answer.score = CORRECT_SCORE if answer.correct else 0
-
         session.add(answer)
 
         if event:
-            name, data = event
-            outbox.add(session, OutboxEvent, name, {**data, "correct": answer.correct})
+            outbox.add(session, OutboxEvent, *event)
 
         try:
             await session.commit()

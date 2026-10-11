@@ -2,22 +2,13 @@
 and filtered in SQL by the grade and flag stored on each invite when the candidate finishes."""
 
 import uuid
-from datetime import UTC, datetime
 
-from prepza_common import outbox
-from prepza_common.notifications import NOTIFICATION_REQUESTED
 from sqlalchemy import func, or_, select, update
 
-from app.constants.audit import PREPZA, VIA_VERIFIER, AuditAction
-from app.constants.events import CANDIDATE_RESCORED
 from app.constants.invites import CandidateFilter, InviteStatus
-from app.helpers.candidates import rescored_result
-from app.helpers.notifications import grades_changed
 from app.helpers.search import escape_like
-from app.models.audit import AuditEvent
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
-from app.models.outbox import OutboxEvent
 from app.storage.db import Session
 
 
@@ -188,54 +179,19 @@ async def unscored(interview_id) -> list[uuid.UUID]:
 async def save_results(results: dict[uuid.UUID, tuple[int | None, bool]]) -> None:
     """Stores these candidates' (grade, flagged). Their status is left alone: only
     interview.finished marks an invite finished, as it settles the candidate's credits, so an
-    invite removed before that event still gets its hold released. A finished candidate whose
-    grade changes (an answer key was corrected since candidate.finished told it) is announced
-    with candidate.rescored in the same transaction; the rows are locked, so of two saves at
-    once (the event and the candidates list) only the first sees the change, and a repeat finds
-    the grade already stored. One without a grade before (finished before grades were stored)
-    is only filled in."""
+    invite removed before that event still gets its hold released."""
     if not results:
         return
 
-    query = (
-        select(CandidateInvite, Interview)
-        .join(Interview, Interview.id == CandidateInvite.interview_id)
-        .where(CandidateInvite.id.in_(results), CandidateInvite.status != InviteStatus.DELETED)
-        .order_by(CandidateInvite.id)
-        .with_for_update(of=CandidateInvite)
-    )
-
-    # Per interview: how many grades changed, and how many of those no longer pass.
-    changed: dict[uuid.UUID, tuple[Interview, int, int]] = {}
-
     async with Session() as session:
-        for invite, interview in (await session.execute(query)).all():
-            grade, flagged = results[invite.id]
-
-            if invite.status == InviteStatus.FINISHED and invite.grade not in (None, grade):
-                result = rescored_result(interview, invite.id, grade, flagged, datetime.now(UTC))
-                outbox.add(session, OutboxEvent, CANDIDATE_RESCORED, result)
-                # Recorded as prepza's own change, for the company's oversight.
-                session.add(
-                    AuditEvent(
-                        company_id=interview.company_id,
-                        user_id=PREPZA,
-                        action=AuditAction.GRADE_CHANGED,
-                        target_id=invite.id,
-                        via=VIA_VERIFIER,
-                        details={"from": invite.grade, "to": grade},
-                    )
+        for invite_id, (grade, flagged) in results.items():
+            await session.execute(
+                update(CandidateInvite)
+                .where(
+                    CandidateInvite.id == invite_id,
+                    CandidateInvite.status != InviteStatus.DELETED,
                 )
-                pass_mark = interview.pass_mark
-                failing = invite.grade >= pass_mark and (grade is None or grade < pass_mark)
-                _, count, no_longer = changed.get(interview.id, (interview, 0, 0))
-                changed[interview.id] = (interview, count + 1, no_longer + failing)
-
-            invite.grade, invite.flagged = grade, flagged
-
-        # The company hears about each interview's changed grades once.
-        for interview, count, no_longer in changed.values():
-            notice = grades_changed(interview, count, no_longer)
-            outbox.add(session, OutboxEvent, NOTIFICATION_REQUESTED, notice)
+                .values(grade=grade, flagged=flagged)
+            )
 
         await session.commit()

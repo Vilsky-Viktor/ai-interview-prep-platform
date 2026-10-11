@@ -117,7 +117,7 @@ prepza prowadzi rozmowy rekrutacyjne sprawdzające umiejętności w formie test�
 
 Jak to dziś wygląda w produkcie:
 
-- **AI pisze pytania i klucze odpowiedzi; ocenianie odbywa się według stałych reguł.** Żadna AI nie czyta ani nie ocenia odpowiedzi kandydata i nie jest używana analiza wideo, głosu ani twarzy. Jeśli AI później poprawi klucz, wcześniejsze odpowiedzi są oceniane ponownie.
+- **AI pisze pytania i klucze odpowiedzi; ocenianie odbywa się według stałych reguł.** Żadna AI nie czyta ani nie ocenia odpowiedzi kandydata i nie jest używana analiza wideo, głosu ani twarzy. Jeśli AI później poprawi klucz, poprawka dotyczy kandydatów, którzy zaczną po niej; wcześniejsze wyniki się nie zmieniają.
 - **Zatwierdzasz tematy,** zanim powstanie jakiekolwiek pytanie, i widzisz każde pytanie.
 - **Decydują ludzie.** Strona wyników i raporty PDF przypominają Twojemu zespołowi o przejrzeniu wyników; prepza nie odrzuca kandydatów ani nie wysyła wiadomości z odmową.
 - **Kandydaci są informowani,** zanim zaczną, że pytania pisze AI, że wyniki przeglądają i decyzje podejmują ludzie w Twojej firmie oraz że mogą poprosić o weryfikację.
