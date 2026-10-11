@@ -53,7 +53,7 @@ Rounds publish every answer. Library keeps per-question stats (answers, correct,
 
 | Flag | When | What the verifier does |
 |---|---|---|
-| `wrong_key` | 2 "wrong answer" reports, or a wrong option picked more than the marked one (after 30 answers) | Checks the key through OpenAI's Batch API (half price, every 10 minutes): keeps the question, moves the key, or replaces it |
+| `wrong_key` | 2 "wrong answer" reports, or a wrong option picked more than the marked one (after 30 answers) | Checks the key through OpenAI's Batch API (half price, every 10 minutes): keeps the question, moves the key, or replaces it. The check sees the question, its options and the reports' reasons, never how often each option was picked (the popular answer can be wrong). A key moves only when a second, blind check (no option marked, a new order) names the same option; otherwise the question is replaced, so no candidate is rescored on an uncertain answer |
 | `rewrite` | 2 "unclear" or "off topic" reports, 3+ dislikes at twice the likes, or ≤ 15% correct | Writes a new question in its place |
 | `weak_options` | A wrong option almost nobody picks, or ≥ 95% correct | Writes new options for the same question |
 

@@ -1,4 +1,5 @@
 import logging
+import random
 from collections import Counter
 from uuid import UUID
 
@@ -7,7 +8,7 @@ from langchain_core.messages import HumanMessage
 from app.constants.quality import QualityFlag
 from app.helpers.prompts import bullet_list
 from app.integrations import library, llm
-from app.prompts.verify import VERIFY_PROMPT
+from app.prompts.verify import CONFIRM_PROMPT, VERIFY_PROMPT
 from app.schemas.regenerate import QuestionContext, RegeneratedOption, RegeneratedQuestion
 from app.schemas.verify import KeyCheck, QuestionQuality
 from app.services.nodes.answers import generate_answers
@@ -39,9 +40,10 @@ def key_check_prompt(question: QuestionQuality, context: QuestionContext) -> str
         level=context.level,
         topic=context.topic,
         question=question.text,
+        # Not how often each was picked: the popular answer can be the wrong one, and a few
+        # people picking one together mustn't steer the check.
         options="\n".join(
-            f"{number}. {question.options[i].answer} "
-            f"(picked {question.option_picks.get(question.options[i].answer, 0)} times)"
+            f"{number}. {question.options[i].answer}"
             for number, i in enumerate(option_order(question))
         ),
         # Reasons only, counted: a reporter's free-text comment never reaches the model, so it
@@ -56,10 +58,33 @@ def key_check_prompt(question: QuestionQuality, context: QuestionContext) -> str
     )
 
 
+async def confirmed(question: QuestionQuality, context: QuestionContext, correct: int) -> bool:
+    """A second, blind check (no option marked, a new order) names the same option `correct`."""
+    order = random.sample(range(len(question.options)), len(question.options))
+    prompt = CONFIRM_PROMPT.format(
+        level=context.level,
+        topic=context.topic,
+        question=question.text,
+        options="\n".join(
+            f"{number}. {question.options[i].answer}" for number, i in enumerate(order)
+        ),
+    )
+    result: KeyCheck = (
+        await llm.get_verifier_llm()
+        .with_structured_output(KeyCheck)
+        .ainvoke([HumanMessage(content=prompt)])
+    )
+    index = result.correct_index
+
+    return index is not None and 0 <= index < len(order) and order[index] == correct
+
+
 async def apply_key_check(
     question_id: UUID, question: QuestionQuality, context: QuestionContext, result: KeyCheck
 ) -> None:
-    """Keeps the question, moves the key to the right option, or replaces a broken question."""
+    """Keeps the question, moves the key to the right option, or replaces a broken question. A
+    key moves only when a second, blind check agrees: moving it rescores every finished
+    candidate, so a check that doesn't hold up again replaces the question instead."""
     order = option_order(question)
 
     if result.correct_index is None or not 0 <= result.correct_index < len(order):
@@ -71,6 +96,11 @@ async def apply_key_check(
 
     if correct == order[0]:
         await library.keep_question(question_id)
+
+        return
+
+    if not await confirmed(question, context, correct):
+        await replace(question_id, context)
 
         return
 

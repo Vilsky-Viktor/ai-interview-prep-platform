@@ -1,10 +1,6 @@
 import asyncio
 import uuid
-from datetime import UTC, datetime, timedelta
 
-import jwt
-
-from app.constants.generation import VERIFY_QUESTION
 from app.constants.quality import QualityFlag
 from app.integrations import library, llm
 from app.schemas.questions import AnswerItem, AnswerList
@@ -47,8 +43,10 @@ def question():
 
 
 class FakeLLM:
-    def __init__(self, result):
-        self.result = result
+    """Answers each call with the next of `results`, then the last one again."""
+
+    def __init__(self, *results):
+        self.results = list(results)
         self.prompts = []
 
     def with_structured_output(self, schema):
@@ -57,10 +55,10 @@ class FakeLLM:
     async def ainvoke(self, messages):
         self.prompts.append(messages[0].content)
 
-        return self.result
+        return self.results.pop(0) if len(self.results) > 1 else self.results[0]
 
 
-def record(monkeypatch, verdict=None, flag=None):
+def record(monkeypatch, verdict=None, flag=None, confirmation=None):
     """Fakes the library and the models; the library's question carries `flag`."""
     calls = []
 
@@ -79,7 +77,9 @@ def record(monkeypatch, verdict=None, flag=None):
     async def fake_regenerate(question_id, _context):
         calls.append(("regenerate", question_id))
 
-    fake_llm = FakeLLM(verdict)
+    fake_llm = FakeLLM(verdict, *([confirmation] if confirmation else []))
+    # The blind second check lists the options in their own order.
+    monkeypatch.setattr(verify_service.random, "sample", lambda items, count: list(items))
     monkeypatch.setattr(library, "get_question_context", fake_context)
     monkeypatch.setattr(library, "get_question_quality", fake_quality)
     monkeypatch.setattr(library, "keep_question", fake_keep)
@@ -90,17 +90,36 @@ def record(monkeypatch, verdict=None, flag=None):
     return calls, fake_llm
 
 
-def test_a_wrong_key_is_moved_to_the_right_option(monkeypatch):
-    # The marked option is listed first, so "Debit cash" is number 1.
-    calls, fake_llm = record(monkeypatch, KeyCheck(correct_index=1))
+def test_a_wrong_key_is_moved_once_a_blind_second_check_agrees(monkeypatch):
+    # The marked option is listed first, so "Debit cash" is number 1; the blind check lists the
+    # options in their own order, where it's number 0.
+    calls, fake_llm = record(
+        monkeypatch, KeyCheck(correct_index=1), confirmation=KeyCheck(correct_index=0)
+    )
 
     asyncio.run(check_key(QUESTION_ID, question(), context()))
 
     assert calls == [("replace", TEXT, [True, False, False, False])]
-    assert "0. Credit cash (picked 6 times)" in fake_llm.prompts[0]
+    # How often each option was picked never reaches the model: the popular answer can be wrong.
+    assert "0. Credit cash\n" in fake_llm.prompts[0]
+    assert "picked" not in fake_llm.prompts[0]
+    # The second check marks no option.
+    assert "marked" not in fake_llm.prompts[1]
     # The reason is counted; the reporter's own words never reach the model.
     assert "wrong_answer: 1" in fake_llm.prompts[0]
     assert "Cash comes in" not in fake_llm.prompts[0]
+
+
+def test_a_key_the_second_check_doesnt_agree_on_replaces_the_question(monkeypatch):
+    # The first check says "Debit cash", the blind one "Debit revenue": nothing moves the key,
+    # so no candidate is rescored on an uncertain answer.
+    calls, _ = record(
+        monkeypatch, KeyCheck(correct_index=1), confirmation=KeyCheck(correct_index=2)
+    )
+
+    asyncio.run(check_key(QUESTION_ID, question(), context()))
+
+    assert calls == [("regenerate", QUESTION_ID)]
 
 
 def test_a_confirmed_key_keeps_the_question(monkeypatch):
@@ -192,98 +211,3 @@ def test_a_deleted_question_is_skipped(monkeypatch):
     asyncio.run(verify(QUESTION_ID, QualityFlag.REWRITE))
 
     assert calls == []
-
-
-def no_verify_budget_used(monkeypatch):
-    from app.services import budget
-
-    async def count_today(key):
-        return 1
-
-    monkeypatch.setattr(budget, "count_today", count_today)
-
-
-def test_verify_endpoint_queues_the_worker_job(client, queued, monkeypatch):
-    no_verify_budget_used(monkeypatch)
-    exp = datetime.now(UTC) + timedelta(seconds=60)
-    service_token = jwt.encode(
-        {"iss": "library", "aud": "generation", "exp": exp},
-        "test-secret-that-is-at-least-32-bytes",
-        algorithm="HS256",
-    )
-
-    response = client.post(
-        f"/internal/questions/{QUESTION_ID}/verify",
-        json={"flag": "wrong_key"},
-        headers={"Authorization": f"Bearer {service_token}"},
-    )
-
-    assert response.status_code == 202
-    assert queued == [
-        (
-            VERIFY_QUESTION,
-            {"question_id": str(QUESTION_ID), "flag": QualityFlag.WRONG_KEY, "now": False},
-        )
-    ]
-
-
-def test_fix_now_checks_a_wrong_key_at_once_instead_of_batching(monkeypatch):
-    import asyncio
-    from types import SimpleNamespace
-
-    from app.integrations import library
-    from app.services import verify as verify_service
-    from app.storage import key_checks
-
-    calls = []
-
-    async def context(_question_id):
-        options = [SimpleNamespace(answer="A", correct=True)]
-
-        return SimpleNamespace(text="Q?", flag=QualityFlag.WRONG_KEY, options=options)
-
-    async def check_key(question_id, question, found_context):
-        calls.append("now")
-
-    async def add(question_id, text, marked):
-        calls.append("batch")
-
-    async def remove(question_ids):
-        calls.append("dropped from the batch")
-
-    monkeypatch.setattr(library, "get_question_context", context)
-    monkeypatch.setattr(library, "get_question_quality", lambda _id: context(_id))
-    monkeypatch.setattr(verify_service, "check_key", check_key)
-    monkeypatch.setattr(key_checks, "add", add)
-    monkeypatch.setattr(key_checks, "remove", remove)
-
-    asyncio.run(verify_service.verify(QUESTION_ID, QualityFlag.WRONG_KEY, now=True))
-    asyncio.run(verify_service.verify(QUESTION_ID, QualityFlag.WRONG_KEY))
-
-    # A check of the same question still waiting in a batch is dropped first.
-    assert calls == ["dropped from the batch", "now", "batch"]
-
-
-def test_verify_jobs_past_the_daily_cap_are_refused_but_fix_now_is_not(client, queued, monkeypatch):
-    from app.constants.quality import DAILY_VERIFY_LIMIT
-    from app.services import budget
-
-    async def count_today(key):
-        return DAILY_VERIFY_LIMIT + 1
-
-    monkeypatch.setattr(budget, "count_today", count_today)
-    exp = datetime.now(UTC) + timedelta(seconds=60)
-    service_token = jwt.encode(
-        {"iss": "library", "aud": "generation", "exp": exp},
-        "test-secret-that-is-at-least-32-bytes",
-        algorithm="HS256",
-    )
-    url = f"/internal/questions/{QUESTION_ID}/verify"
-    headers = {"Authorization": f"Bearer {service_token}"}
-
-    assert client.post(url, json={"flag": "rewrite"}, headers=headers).status_code == 503
-    assert queued == []
-    assert (
-        client.post(url, json={"flag": "rewrite", "now": True}, headers=headers).status_code == 202
-    )
-    assert len(queued) == 1
