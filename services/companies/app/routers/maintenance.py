@@ -1,9 +1,10 @@
 import logging
+from datetime import UTC, datetime
 
 import httpx
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import OptionalUser
-from prepza_common.maintenance import is_on, set_on
+from prepza_common.maintenance import is_on, put_back_start, set_on, take_start
 from prepza_common.superadmin import SuperadminUser, is_superadmin
 
 from app.integrations import rounds
@@ -38,9 +39,31 @@ async def get_switch(superadmin: SuperadminUser) -> MaintenanceSwitchOut:
     return MaintenanceSwitchOut(on=await is_on(get_redis()), running=await running())
 
 
+async def give_time_back(redis) -> None:
+    """Before it turns off, running interviews get back the time it was on. If rounds fails, it
+    stays on (a 502) and turning it off again gives the time back."""
+    started = await take_start(redis)
+
+    if started is None:
+        return
+
+    try:
+        await rounds.give_time_back(datetime.now(UTC) - started)
+    except httpx.HTTPError:
+        logger.exception("Couldn't give running interviews their time back")
+        await put_back_start(redis, started)
+
+        raise HTTPException(status.HTTP_502_BAD_GATEWAY) from None
+
+
 @router.put("/superadmin/maintenance")
 async def switch(body: MaintenanceIn, superadmin: SuperadminUser) -> MaintenanceSwitchOut:
     """Who switched it and when goes to the logs."""
-    await set_on(get_redis(), body.on, superadmin.uid)
+    redis = get_redis()
+
+    if not body.on:
+        await give_time_back(redis)
+
+    await set_on(redis, body.on, superadmin.uid)
 
     return MaintenanceSwitchOut(on=body.on, running=await running())

@@ -159,6 +159,9 @@ PAUSED = "New interviews and AI features are paused for now. Please try again la
 # between services, Pub/Sub and Scheduler pushes (under /internal/) and Paddle's and Resend's
 # webhooks, so no event, job or payment is lost.
 MAINTENANCE_KEY = "maintenance:on"
+# When it was turned on: candidates' interview time stops meanwhile and is given back when it's
+# turned off.
+MAINTENANCE_STARTED_KEY = "maintenance:started"
 MAINTENANCE = "prepza is under maintenance. We'll be back soon."
 MAINTENANCE_OPEN_PATHS = {"/health", "/ready", "/maintenance", "/superadmin/maintenance"}
 MAINTENANCE_OPEN_PREFIXES = ("/internal/", "/webhooks/")

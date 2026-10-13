@@ -1,8 +1,9 @@
 # Maintenance mode (internal_docs/compliance/post-market-monitoring-plan.md, section 4): a superadmin turns
 # it on, and every service's API refuses every request with a 503, except superadmins and the
 # paths in MAINTENANCE_OPEN_PATHS and MAINTENANCE_OPEN_PREFIXES. Like the emergency pause, it's
-# one Redis key without expiry.
+# one Redis key without expiry, with a second holding when it was turned on.
 import logging
+from datetime import UTC, datetime
 
 from fastapi import HTTPException, status
 from prepza_common import memory_cache
@@ -13,6 +14,7 @@ from prepza_common.constants import (
     MAINTENANCE_KEY,
     MAINTENANCE_OPEN_PATHS,
     MAINTENANCE_OPEN_PREFIXES,
+    MAINTENANCE_STARTED_KEY,
 )
 from prepza_common.i18n import request_language, translate
 from prepza_common.superadmin import is_superadmin
@@ -48,12 +50,27 @@ async def set_on(redis, on: bool, user_id: str) -> None:
     """Who switched it and when is kept in the logs."""
     if on:
         await redis.set(MAINTENANCE_KEY, user_id)
+        # Turned on again while on, it keeps its first start.
+        await redis.set(MAINTENANCE_STARTED_KEY, datetime.now(UTC).isoformat(), nx=True)
     else:
         await redis.delete(MAINTENANCE_KEY)
 
     # This instance knows at once; the others within MAINTENANCE_CACHE_SECONDS.
     memory_cache.put(MAINTENANCE_KEY, on, MAINTENANCE_CACHE_SECONDS)
     logger.warning("Maintenance mode turned %s by superadmin %s", "on" if on else "off", user_id)
+
+
+async def take_start(redis) -> datetime | None:
+    """When it was turned on, read and removed at once: only one request turning it off gets it,
+    so candidates get their time back once. None when it wasn't recorded."""
+    started = await redis.getdel(MAINTENANCE_STARTED_KEY)
+
+    return datetime.fromisoformat(started.decode()) if started else None
+
+
+async def put_back_start(redis, started: datetime) -> None:
+    """For a turn-off that failed to give the time back: the next one gives it."""
+    await redis.set(MAINTENANCE_STARTED_KEY, started.isoformat(), nx=True)
 
 
 def is_open(path: str) -> bool:

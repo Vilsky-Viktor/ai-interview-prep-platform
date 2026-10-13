@@ -1,3 +1,4 @@
+from datetime import timedelta
 from uuid import UUID
 
 import httpx
@@ -104,3 +105,13 @@ async def running_interviews() -> int:
     response.raise_for_status()
 
     return response.json()["running"]
+
+
+async def give_time_back(stopped: timedelta) -> None:
+    response = await http.get_client().post(
+        f"{settings.rounds_url}/internal/maintenance/resume",
+        json={"seconds": stopped.total_seconds()},
+        headers={"Authorization": f"Bearer {service_token('rounds')}"},
+    )
+
+    response.raise_for_status()

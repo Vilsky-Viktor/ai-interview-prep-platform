@@ -130,9 +130,11 @@ These stay open, so no event, job or payment is lost:
 
 Billing has no Redis and isn't switched; its only public route is the price catalog.
 
-Turning it on first asks to confirm, showing the number of candidates in an interview right now (a question shown in the last 15 minutes), who may lose time.
+Turning it on first asks to confirm, showing the number of candidates in an interview right now (a question shown in the last 15 minutes), whose time stops meanwhile.
 
-It's one Redis key (`maintenance:on`). With Redis down, it counts as off. Each service reads it at most every 5 seconds, so a change reaches every instance within 5 seconds. Who turned it goes to the logs.
+Candidates lose no interview time to it. While it's on, rounds' expiry job finishes no interview. Turning it off first has rounds move every running interview's clocks on by the time it was on: each section's start (the interview's deadline counts from the first) and the shown time of the question on screen. Only then does it turn off. If rounds can't do it, the switch stays on and says so, and turning it off again gives the time back. A double turn-off gives it back once. The answer times recorded leave out the time it was on.
+
+It's one Redis key (`maintenance:on`), with a second (`maintenance:started`) holding when it was turned on, which turning it off takes and removes at once. With Redis down, it counts as off. Each service reads it at most every 5 seconds, so a change reaches every instance within 5 seconds. Who turned it goes to the logs.
 
 ## Emails
 

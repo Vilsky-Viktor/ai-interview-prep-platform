@@ -1,12 +1,24 @@
 import asyncio
 import time
+from datetime import UTC, datetime
 
 import pytest
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 from prepza_common import maintenance, memory_cache
-from prepza_common.constants import MAINTENANCE, MAINTENANCE_CACHE_SECONDS, MAINTENANCE_KEY
-from prepza_common.maintenance import MaintenanceMiddleware, is_on, set_on
+from prepza_common.constants import (
+    MAINTENANCE,
+    MAINTENANCE_CACHE_SECONDS,
+    MAINTENANCE_KEY,
+    MAINTENANCE_STARTED_KEY,
+)
+from prepza_common.maintenance import (
+    MaintenanceMiddleware,
+    is_on,
+    put_back_start,
+    set_on,
+    take_start,
+)
 from prepza_common.translations import TRANSLATIONS
 from prepza_common.user import User
 
@@ -18,8 +30,14 @@ class FakeRedis:
     async def exists(self, key):
         return int(key in self.values)
 
-    async def set(self, key, value):
-        self.values[key] = value
+    async def set(self, key, value, nx=False):
+        if not (nx and key in self.values):
+            self.values[key] = value
+
+    async def getdel(self, key):
+        value = self.values.pop(key, None)
+
+        return value.encode() if value else None
 
     async def delete(self, key):
         self.values.pop(key, None)
@@ -117,7 +135,7 @@ def test_the_switch_turns_on_and_off_and_remembers_who():
 
     asyncio.run(set_on(redis, True, "ann"))
 
-    assert redis.values == {MAINTENANCE_KEY: "ann"}
+    assert redis.values[MAINTENANCE_KEY] == "ann"
     assert asyncio.run(is_on(redis))
 
     asyncio.run(set_on(redis, False, "ann"))
@@ -143,3 +161,24 @@ def test_each_instance_reads_the_switch_at_most_every_few_seconds(monkeypatch):
 def test_the_message_has_translations():
     for language in TRANSLATIONS.values():
         assert MAINTENANCE in language
+
+
+def test_it_remembers_when_it_was_turned_on_and_gives_that_out_once():
+    redis = FakeRedis()
+    before = datetime.now(UTC)
+
+    asyncio.run(set_on(redis, True, "ann"))
+    first = redis.values[MAINTENANCE_STARTED_KEY]
+    # Turned on again while on: still the first start.
+    asyncio.run(set_on(redis, True, "bob"))
+
+    assert redis.values[MAINTENANCE_STARTED_KEY] == first
+
+    started = asyncio.run(take_start(redis))
+
+    assert started >= before
+    assert asyncio.run(take_start(redis)) is None
+
+    asyncio.run(put_back_start(redis, started))
+
+    assert asyncio.run(take_start(redis)) == started
