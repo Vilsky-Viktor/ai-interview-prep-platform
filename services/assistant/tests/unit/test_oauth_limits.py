@@ -73,3 +73,21 @@ def test_a_state_too_long_to_keep_is_refused():
 
     with pytest.raises(AuthorizeError):
         asyncio.run(Provider().authorize(CLIENT, request))
+
+
+@pytest.mark.parametrize("scheme", ["javascript", "data", "vbscript", "file"])
+def test_a_return_address_that_runs_in_the_browser_is_refused(client, counted, scheme):
+    body = {"redirect_uris": [f"{scheme}://claude.ai/cb"], "token_endpoint_auth_method": "none"}
+
+    response = client.post("/register", json=body)
+
+    assert response.status_code == 400
+    assert response.json()["error"] == "invalid_redirect_uri"
+
+
+def test_a_request_to_connect_missing_its_fields_gets_a_page(client, counted):
+    """Not a server error, and no redirect anywhere."""
+    response = client.get("/authorize", params={"client_id": "c1"}, follow_redirects=False)
+
+    assert response.status_code == 400
+    assert "location" not in response.headers

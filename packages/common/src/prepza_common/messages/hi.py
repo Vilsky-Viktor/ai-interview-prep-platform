@@ -1,6 +1,7 @@
 # Messages the services show users, in Hindi, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This request to connect isn't valid. Start connecting again from your AI app.": "कनेक्ट करने का यह अनुरोध मान्य नहीं है। अपने AI ऐप से फिर से कनेक्ट करना शुरू करें।",
     "This request was started in another browser. Start connecting again from your AI app.": "यह अनुरोध किसी दूसरे ब्राउज़र में शुरू हुआ था। अपने AI ऐप से फिर से कनेक्ट करना शुरू करें।",
     "Too many invites waiting. Remove some, or wait for them to join.": "बहुत सारे आमंत्रण प्रतीक्षा में हैं। कुछ हटाएँ, या उनके जुड़ने तक प्रतीक्षा करें।",
     "Only the person whose card pays for it can change it. Turn it off, then turn it on with your own card.": "इसे केवल वही व्यक्ति बदल सकता है जिसके कार्ड से भुगतान होता है। इसे बंद करें, फिर अपने कार्ड से चालू करें।",

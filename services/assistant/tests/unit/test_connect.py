@@ -174,6 +174,24 @@ def test_the_consent_routes_need_a_signed_in_user(client):
         # Any other site: unknown, named as it says (or by its site).
         ("Claude", "https://evil.example/cb", ("Claude", "evil.example", False)),
         (" ", "https://other.example/cb", ("other.example", "other.example", False)),
+        # Only https is a known site: this one would be labelled Claude otherwise.
+        (None, "javascript://claude.ai/%0Aalert(1)", ("claude.ai", "claude.ai", False)),
+        # A desktop app's own scheme: unknown, named as it says.
+        (
+            "Cursor",
+            "cursor://anysphere.cursor-mcp/oauth",
+            ("Cursor", "anysphere.cursor-mcp", False),
+        ),
+        # Named after a host too long for a connection: cut to fit.
+        (
+            None,
+            "https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.example/cb",
+            (
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.example",
+                False,
+            ),
+        ),
     ],
 )
 def test_an_app_is_described_by_the_site_it_returns_to(name, redirect_uri, expected):

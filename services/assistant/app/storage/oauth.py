@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from uuid import UUID
 
-from sqlalchemy import delete, exists, or_, select, update
+from sqlalchemy import delete, exists, func, or_, select, update
 from sqlalchemy.dialects.postgresql import insert
 
 from app.constants.mcp import LAST_USED_EVERY_SECONDS
@@ -42,13 +42,21 @@ async def by_refresh(refresh_hash: str) -> McpGrant | None:
         return await session.scalar(select(McpGrant).where(McpGrant.refresh_hash == refresh_hash))
 
 
+async def by_previous_refresh(refresh_hash: str) -> McpGrant | None:
+    """The connection whose last refresh replaced this refresh token."""
+    async with Session() as session:
+        return await session.scalar(
+            select(McpGrant).where(McpGrant.previous_refresh_hash == refresh_hash)
+        )
+
+
 async def rotate(grant_id: UUID, refresh_hash: str, values: dict) -> bool:
     """New tokens for the connection, only while `refresh_hash` is still its refresh token: of
     two refreshes with the same token, one gets them, the other nothing (False)."""
     query = (
         update(McpGrant)
         .where(McpGrant.id == grant_id, McpGrant.refresh_hash == refresh_hash)
-        .values(**values)
+        .values(**values, previous_refresh_hash=refresh_hash, refreshed_at=func.now())
     )
 
     async with Session() as session:

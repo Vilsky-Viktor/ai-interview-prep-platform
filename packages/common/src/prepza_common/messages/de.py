@@ -1,6 +1,7 @@
 # Messages the services show users, in German, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This request to connect isn't valid. Start connecting again from your AI app.": "Diese Verbindungsanfrage ist ungültig. Starte die Verbindung erneut aus deiner KI-App.",
     "This request was started in another browser. Start connecting again from your AI app.": "Diese Anfrage wurde in einem anderen Browser gestartet. Starte die Verbindung erneut aus deiner KI-App.",
     "Too many invites waiting. Remove some, or wait for them to join.": "Zu viele offene Einladungen. Entferne einige oder warte, bis sie beitreten.",
     "Only the person whose card pays for it can change it. Turn it off, then turn it on with your own card.": "Nur die Person, deren Karte dafür bezahlt, kann es ändern. Schalte es aus und dann mit deiner eigenen Karte wieder ein.",

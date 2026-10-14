@@ -46,3 +46,7 @@ class McpGrant(Base):
     refresh_hash: Mapped[str] = mapped_column(String(64), unique=True)
     # Refreshing moves it on: a connection in use doesn't expire.
     refresh_expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True)
+    # The refresh token the last refresh replaced, and when: used again well after that, it was
+    # likely stolen, and the connection goes (services/oauth_provider.py load_refresh_token).
+    previous_refresh_hash: Mapped[str | None] = mapped_column(String(64), index=True)
+    refreshed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))

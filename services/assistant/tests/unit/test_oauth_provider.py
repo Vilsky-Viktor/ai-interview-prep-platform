@@ -60,6 +60,9 @@ def kept(monkeypatch):
         for name, value in values.items():
             setattr(grant, name, value)
 
+        grant.previous_refresh_hash = refresh_hash
+        grant.refreshed_at = datetime.now(UTC)
+
         return True
 
     async def remove(grant_id, user_id=None):
@@ -82,6 +85,7 @@ def kept(monkeypatch):
     monkeypatch.setattr(oauth, "add_grant", add_grant)
     monkeypatch.setattr(oauth, "by_access", finder("access_hash"))
     monkeypatch.setattr(oauth, "by_refresh", finder("refresh_hash"))
+    monkeypatch.setattr(oauth, "by_previous_refresh", finder("previous_refresh_hash"))
     monkeypatch.setattr(oauth, "rotate", rotate)
     monkeypatch.setattr(oauth, "remove", remove)
     monkeypatch.setattr(oauth_provider, "track", track)
@@ -169,6 +173,27 @@ def test_a_refresh_replaces_both_tokens_and_the_old_ones_stop_working(kept):
     # The same refresh token again (a race lost): refused.
     with pytest.raises(TokenError):
         asyncio.run(provider.exchange_refresh_token(CLIENT, refresh, ["prepza"]))
+
+
+def test_a_replaced_refresh_token_used_again_later_revokes_the_connection(kept):
+    """Right after its refresh it's an app refreshing twice at once, only refused; later, likely
+    a stolen copy: the connection goes, and the app asks the user again."""
+    provider = Provider()
+    asyncio.run(provider.authorize(CLIENT, params()))
+    code = asyncio.run(provider.load_authorization_code(CLIENT, allowed(kept)))
+    first = asyncio.run(provider.exchange_authorization_code(CLIENT, code))
+    refresh = asyncio.run(provider.load_refresh_token(CLIENT, first.refresh_token))
+    second = asyncio.run(provider.exchange_refresh_token(CLIENT, refresh, ["prepza"]))
+    [grant] = kept.grants.values()
+
+    assert asyncio.run(provider.load_refresh_token(CLIENT, first.refresh_token)) is None
+    assert grant.id in kept.grants
+
+    grant.refreshed_at = datetime.now(UTC) - timedelta(minutes=2)
+
+    assert asyncio.run(provider.load_refresh_token(CLIENT, first.refresh_token)) is None
+    assert kept.grants == {}
+    assert asyncio.run(provider.load_access_token(second.access_token)) is None
 
 
 def test_an_expired_access_token_is_refused(kept):

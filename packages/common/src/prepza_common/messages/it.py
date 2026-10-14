@@ -1,6 +1,7 @@
 # Messages the services show users, in Italian, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This request to connect isn't valid. Start connecting again from your AI app.": "Questa richiesta di collegamento non è valida. Ricomincia il collegamento dalla tua app di IA.",
     "This request was started in another browser. Start connecting again from your AI app.": "Questa richiesta è stata avviata in un altro browser. Ricomincia il collegamento dalla tua app di IA.",
     "Too many invites waiting. Remove some, or wait for them to join.": "Troppi inviti in attesa. Rimuovine qualcuno o aspetta che si uniscano.",
     "Only the person whose card pays for it can change it. Turn it off, then turn it on with your own card.": "Solo la persona la cui carta lo paga può modificarlo. Disattivalo, poi riattivalo con la tua carta.",

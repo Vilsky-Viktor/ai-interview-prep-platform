@@ -1,6 +1,7 @@
 # Messages the services show users, in Arabic, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This request to connect isn't valid. Start connecting again from your AI app.": "طلب الربط هذا غير صالح. ابدأ الربط من جديد من تطبيق الذكاء الاصطناعي لديك.",
     "This request was started in another browser. Start connecting again from your AI app.": "بدأ هذا الطلب في متصفح آخر. ابدأ الربط من جديد من تطبيق الذكاء الاصطناعي لديك.",
     "Too many invites waiting. Remove some, or wait for them to join.": "دعوات كثيرة بانتظار القبول. احذف بعضها، أو انتظر حتى ينضموا.",
     "Only the person whose card pays for it can change it. Turn it off, then turn it on with your own card.": "لا يمكن تغييره إلا لمن تُدفع ببطاقته. أوقفه، ثم شغّله ببطاقتك.",

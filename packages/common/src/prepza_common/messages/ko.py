@@ -1,6 +1,7 @@
 # Messages the services show users, in Korean, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This request to connect isn't valid. Start connecting again from your AI app.": "이 연결 요청은 유효하지 않습니다. AI 앱에서 다시 연결을 시작하세요.",
     "This request was started in another browser. Start connecting again from your AI app.": "이 요청은 다른 브라우저에서 시작되었습니다. AI 앱에서 다시 연결을 시작하세요.",
     "Too many invites waiting. Remove some, or wait for them to join.": "대기 중인 초대가 너무 많습니다. 일부를 삭제하거나 참여할 때까지 기다리세요.",
     "Only the person whose card pays for it can change it. Turn it off, then turn it on with your own card.": "결제 카드의 소유자만 변경할 수 있습니다. 끈 다음 본인 카드로 다시 켜세요.",

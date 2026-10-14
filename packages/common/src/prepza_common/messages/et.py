@@ -1,6 +1,7 @@
 # Messages the services show users, in Estonian, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This request to connect isn't valid. Start connecting again from your AI app.": "See ühendamise päring ei ole kehtiv. Alusta ühendamist uuesti oma tehisintellekti rakendusest.",
     "This request was started in another browser. Start connecting again from your AI app.": "See päring alustati teises brauseris. Alusta ühendamist uuesti oma tehisintellekti rakendusest.",
     "Too many invites waiting. Remove some, or wait for them to join.": "Liiga palju ootel kutseid. Eemalda mõned või oota, kuni nad liituvad.",
     "Only the person whose card pays for it can change it. Turn it off, then turn it on with your own card.": "Seda saab muuta ainult see, kelle kaardiga selle eest makstakse. Lülita see välja ja seejärel oma kaardiga uuesti sisse.",

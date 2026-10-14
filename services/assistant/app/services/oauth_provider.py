@@ -33,11 +33,12 @@ from app.constants.mcp import (
     MCP_PATH,
     MCP_SCOPE,
     MINUTE_SECONDS,
+    REFRESH_REUSE_GRACE_SECONDS,
     REFRESH_SECONDS,
     TOKEN_BYTES,
     TOKEN_PREFIX,
 )
-from app.helpers.mcp_clients import describe_client
+from app.helpers.mcp_clients import describe_client, refused_redirect
 from app.integrations.redis import get_redis
 from app.models.oauth import McpGrant
 from app.storage import oauth, oauth_requests
@@ -111,6 +112,22 @@ async def limit_tokens(client_id: str) -> None:
         logger.warning("Token request limit skipped, Redis failed", exc_info=True)
 
 
+async def revoke_if_replayed(refresh_hash: str) -> None:
+    """A refresh token a refresh replaced, used again: within REFRESH_REUSE_GRACE_SECONDS, an app
+    that refreshed twice at once (just refused); later, likely a stolen copy, so the connection
+    goes and the app asks the user again (OAuth 2.1)."""
+    grant = await oauth.by_previous_refresh(refresh_hash)
+
+    if grant is None or grant.refreshed_at is None:
+        return
+
+    grace = timedelta(seconds=REFRESH_REUSE_GRACE_SECONDS)
+
+    if datetime.now(UTC) - grant.refreshed_at > grace:
+        logger.warning("A replaced refresh token was used again: connection %s revoked", grant.id)
+        await oauth.remove(grant.id)
+
+
 class Provider:
     """prepza as the authorization server of AI apps (the MCP SDK's
     OAuthAuthorizationServerProvider): apps register themselves, the user allows them on the
@@ -127,6 +144,9 @@ class Provider:
 
         if len(json.dumps(info)) > MAX_REGISTRATION_BYTES:
             raise RegistrationError("invalid_client_metadata", "The registration is too large.")
+
+        if any(refused_redirect(str(uri)) for uri in client_info.redirect_uris or []):
+            raise RegistrationError("invalid_redirect_uri", "Return addresses must open an app.")
 
         await oauth.save_client(client_info.client_id, info)
 
@@ -208,7 +228,12 @@ class Provider:
     ) -> Refresh | None:
         grant = await oauth.by_refresh(hashed(refresh_token))
 
-        if grant is None or grant.client_id != client.client_id:
+        if grant is None:
+            await revoke_if_replayed(hashed(refresh_token))
+
+            return None
+
+        if grant.client_id != client.client_id:
             return None
 
         return Refresh(

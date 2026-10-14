@@ -20,6 +20,9 @@ ACCESS_SECONDS = 60 * 60
 REFRESH_SECONDS = 90 * 24 * 60 * 60
 CODE_SECONDS = 5 * 60
 REQUEST_SECONDS = 10 * 60
+# A replaced refresh token used again within this long is an app refreshing twice at once: just
+# refused. Later, it was likely stolen, and the connection is revoked.
+REFRESH_REUSE_GRACE_SECONDS = 60
 # A connection's "last used" is written at most this often.
 LAST_USED_EVERY_SECONDS = 60 * 60
 # An app that registered but has had no connection for this many days is deleted.
@@ -50,11 +53,17 @@ FUNNEL_CLIENTS = {"Claude": "claude", "ChatGPT": "chatgpt"}
 # A request to connect once it's answered or expired, and a connection that isn't the user's:
 # the consent page and the connections list say what it means.
 NOT_FOUND = "Not found"
+# Where an app may never send the browser back to: these run or read something in the browser
+# instead of opening an app. Other non-web schemes (cursor://) are desktop apps, named as unknown.
+REFUSED_REDIRECT_SCHEMES = {"javascript", "data", "vbscript", "file"}
 # The browser that asked to connect (its /authorize answer sets this cookie, with the request's
 # id, for the consent page's calls only): only it can allow the request, so a consent link
 # someone else started and sent can't connect their app to this account.
 CONNECT_COOKIE = "prepza_connect"
 CONNECT_COOKIE_PATH = "/api/assistant/connect"
+# /authorize's answer to a request it can't take: a page, never a redirect (an app registers
+# its own return address, so redirecting errors there would make /authorize an open redirect).
+BAD_REQUEST = "This request to connect isn't valid. Start connecting again from your AI app."
 OTHER_BROWSER = (
     "This request was started in another browser. Start connecting again from your AI app."
 )

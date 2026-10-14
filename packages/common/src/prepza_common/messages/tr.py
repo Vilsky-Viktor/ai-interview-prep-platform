@@ -1,6 +1,7 @@
 # Messages the services show users, in Turkish, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This request to connect isn't valid. Start connecting again from your AI app.": "Bu bağlanma isteği geçerli değil. Bağlanmayı yapay zekâ uygulamanızdan yeniden başlatın.",
     "This request was started in another browser. Start connecting again from your AI app.": "Bu istek başka bir tarayıcıda başlatıldı. Bağlanmayı yapay zekâ uygulamanızdan yeniden başlatın.",
     "Too many invites waiting. Remove some, or wait for them to join.": "Bekleyen çok fazla davet var. Bazılarını kaldırın veya katılmalarını bekleyin.",
     "Only the person whose card pays for it can change it. Turn it off, then turn it on with your own card.": "Bunu yalnızca kartıyla ödeme yapılan kişi değiştirebilir. Kapatın, ardından kendi kartınızla açın.",

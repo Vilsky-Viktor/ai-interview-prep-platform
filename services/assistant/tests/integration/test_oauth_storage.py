@@ -66,9 +66,15 @@ def test_of_two_refreshes_with_one_token_only_the_first_gets_new_tokens(run):
         first = await oauth.rotate(grant.id, old, new_tokens()[1])
         second = await oauth.rotate(grant.id, old, new_tokens()[1])
 
-        return first, second, await oauth.by_refresh(old)
+        replaced = await oauth.by_previous_refresh(old)
 
-    assert run(scenario()) == (True, False, None)
+        return first, second, await oauth.by_refresh(old), replaced, grant.id
+
+    first, second, current, replaced, grant_id = run(scenario())
+
+    assert (first, second, current) == (True, False, None)
+    # The replaced token is remembered, with when, to tell a late reuse from a race.
+    assert replaced.id == grant_id and replaced.refreshed_at is not None
 
 
 def test_last_used_is_written_at_most_once_an_hour(run):

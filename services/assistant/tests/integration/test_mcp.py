@@ -52,9 +52,12 @@ async def connected(id_token: str, storage: Memory):
 
     async def redirect_handler(url: str) -> None:
         async with site_client() as site:
-            consent = (await site.get(url)).headers["location"]
-            request_id = consent.split("request=", 1)[1]
-            headers = {"Authorization": f"Bearer {id_token}"}
+            authorized = await site.get(url)
+            request_id = authorized.headers["location"].split("request=", 1)[1]
+            # The cookie that marks this browser as the one that asked (its path is the
+            # gateway's /api/assistant/connect, so it's passed by hand here).
+            marked = authorized.headers["set-cookie"].split(";", 1)[0]
+            headers = {"Authorization": f"Bearer {id_token}", "Cookie": marked}
             shown = (await site.get(f"/connect/{request_id}", headers=headers)).json()
             approved = await site.post(f"/connect/{request_id}/approve", headers=headers)
 

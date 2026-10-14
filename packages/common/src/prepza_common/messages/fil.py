@@ -1,6 +1,7 @@
 # Messages the services show users, in Filipino, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This request to connect isn't valid. Start connecting again from your AI app.": "Hindi valid ang request na ito na kumonekta. Simulan ulit ang pagkonekta mula sa AI app mo.",
     "This request was started in another browser. Start connecting again from your AI app.": "Sinimulan ang request na ito sa ibang browser. Simulan ulit ang pagkonekta mula sa AI app mo.",
     "Too many invites waiting. Remove some, or wait for them to join.": "Masyadong maraming imbitasyong naghihintay. Alisin ang ilan, o hintaying sumali sila.",
     "Only the person whose card pays for it can change it. Turn it off, then turn it on with your own card.": "Ang taong ang card ang nagbabayad lang ang puwedeng magbago nito. I-off ito, saka i-on gamit ang sarili mong card.",
