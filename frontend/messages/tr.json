@@ -755,7 +755,11 @@
     "companyNote": "İlk yüklemelerini yaptıklarında, tutar ne olursa olsun, ikiniz de {reward, number} kredi kazanırsınız.",
     "deletedCompany": "Silinmiş bir şirket",
     "credits": "+{count, number} kredi",
-    "rewarded": "{count, plural, =0 {Henüz ödül yok.} one {Şimdiye kadar # kez ödüllendirildi.} other {Şimdiye kadar # kez ödüllendirildi.}}"
+    "rewarded": "{count, plural, =0 {Henüz ödül yok.} one {Şimdiye kadar # kez ödüllendirildi.} other {Şimdiye kadar # kez ödüllendirildi.}}",
+    "keepTitle": "Bir tavsiye bağlantısıyla geldiniz",
+    "keepText": "Saklansın mı? İlk yüklemenizden sonra şirketiniz ve sizi davet eden şirket kredi kazanır. Bağlantı 30 gün boyunca bir çerezde saklanır.",
+    "keep": "Sakla",
+    "dontKeep": "Hayır, teşekkürler"
   },
   "topUp": {
     "title": "Kredi yükle",

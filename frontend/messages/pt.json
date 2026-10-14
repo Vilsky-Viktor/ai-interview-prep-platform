@@ -755,7 +755,11 @@
     "companyNote": "Vocês dois recebem {reward, number} créditos quando ela fizer a primeira recarga, de qualquer valor.",
     "deletedCompany": "Uma empresa excluída",
     "credits": "+{count, number} créditos",
-    "rewarded": "{count, plural, =0 {Nenhuma recompensa ainda.} one {Recompensado # vez até agora.} other {Recompensado # vezes até agora.}}"
+    "rewarded": "{count, plural, =0 {Nenhuma recompensa ainda.} one {Recompensado # vez até agora.} other {Recompensado # vezes até agora.}}",
+    "keepTitle": "Você chegou por um link de indicação",
+    "keepText": "Guardar? Sua empresa e a que convidou você recebem créditos após sua primeira recarga. Ele fica guardado em um cookie por 30 dias.",
+    "keep": "Guardar",
+    "dontKeep": "Não, obrigado"
   },
   "topUp": {
     "title": "Recarregar",

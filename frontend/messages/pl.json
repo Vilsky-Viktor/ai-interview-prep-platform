@@ -755,7 +755,11 @@
     "companyNote": "Oboje dostajecie {reward, number} kredytów, gdy zrobią pierwsze doładowanie, na dowolną kwotę.",
     "deletedCompany": "Usunięta firma",
     "credits": "+{count, number} kredytów",
-    "rewarded": "{count, plural, =0 {Brak nagród.} one {Nagroda przyznana # raz.} few {Nagroda przyznana # razy.} many {Nagroda przyznana # razy.} other {Nagroda przyznana # razy.}}"
+    "rewarded": "{count, plural, =0 {Brak nagród.} one {Nagroda przyznana # raz.} few {Nagroda przyznana # razy.} many {Nagroda przyznana # razy.} other {Nagroda przyznana # razy.}}",
+    "keepTitle": "Trafiłeś tu przez link polecający",
+    "keepText": "Zachować go? Twoja firma i firma, która cię zaprosiła, dostaną kredyty po twoim pierwszym doładowaniu. Jest przechowywany w pliku cookie przez 30 dni.",
+    "keep": "Zachowaj",
+    "dontKeep": "Nie, dziękuję"
   },
   "topUp": {
     "title": "Doładowanie",

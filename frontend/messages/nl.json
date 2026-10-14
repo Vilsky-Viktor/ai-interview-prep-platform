@@ -755,7 +755,11 @@
     "companyNote": "Jullie krijgen allebei {reward, number} credits wanneer zij voor het eerst opwaarderen, met welk bedrag ook.",
     "deletedCompany": "Een verwijderd bedrijf",
     "credits": "+{count, number} credits",
-    "rewarded": "{count, plural, =0 {Nog geen beloningen.} one {Tot nu toe # keer beloond.} other {Tot nu toe # keer beloond.}}"
+    "rewarded": "{count, plural, =0 {Nog geen beloningen.} one {Tot nu toe # keer beloond.} other {Tot nu toe # keer beloond.}}",
+    "keepTitle": "Je kwam via een verwijzingslink",
+    "keepText": "Bewaren? Je bedrijf en het bedrijf dat je uitnodigde krijgen elk credits na je eerste opwaardering. Hij wordt 30 dagen in een cookie bewaard.",
+    "keep": "Bewaren",
+    "dontKeep": "Nee, bedankt"
   },
   "topUp": {
     "title": "Opwaarderen",

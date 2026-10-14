@@ -755,7 +755,11 @@
     "companyNote": "상대 회사가 금액에 관계없이 첫 충전을 하면 양쪽 모두 {reward, number} 크레딧을 받습니다.",
     "deletedCompany": "삭제된 회사",
     "credits": "+{count, number} 크레딧",
-    "rewarded": "{count, plural, =0 {아직 보상이 없습니다.} other {지금까지 #회 보상을 받았습니다.}}"
+    "rewarded": "{count, plural, =0 {아직 보상이 없습니다.} other {지금까지 #회 보상을 받았습니다.}}",
+    "keepTitle": "추천 링크로 방문하셨습니다",
+    "keepText": "저장할까요? 첫 충전 후 회사와 초대한 회사 모두 크레딧을 받습니다. 쿠키에 30일 동안 저장됩니다.",
+    "keep": "저장",
+    "dontKeep": "괜찮습니다"
   },
   "topUp": {
     "title": "충전",

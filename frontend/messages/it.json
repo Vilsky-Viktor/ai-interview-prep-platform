@@ -755,7 +755,11 @@
     "companyNote": "Ricevete entrambi {reward, number} crediti quando fa la sua prima ricarica, di qualsiasi importo.",
     "deletedCompany": "Un'azienda eliminata",
     "credits": "+{count, number} crediti",
-    "rewarded": "{count, plural, =0 {Ancora nessun premio.} one {Premiato # volta finora.} other {Premiato # volte finora.}}"
+    "rewarded": "{count, plural, =0 {Ancora nessun premio.} one {Premiato # volta finora.} other {Premiato # volte finora.}}",
+    "keepTitle": "Sei arrivato tramite un link di invito",
+    "keepText": "Lo teniamo? La tua azienda e quella che ti ha invitato ricevono crediti dopo la tua prima ricarica. Viene conservato in un cookie per 30 giorni.",
+    "keep": "Tienilo",
+    "dontKeep": "No, grazie"
   },
   "topUp": {
     "title": "Ricarica",

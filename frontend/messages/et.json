@@ -755,7 +755,11 @@
     "companyNote": "Te mõlemad saate {reward, number} krediiti, kui nad teevad esimese juurdelaadimise mis tahes summas.",
     "deletedCompany": "Kustutatud ettevõte",
     "credits": "+{count, number} krediiti",
-    "rewarded": "{count, plural, =0 {Tasusid veel pole.} one {Tasu saadud # kord.} other {Tasu saadud # korda.}}"
+    "rewarded": "{count, plural, =0 {Tasusid veel pole.} one {Tasu saadud # kord.} other {Tasu saadud # korda.}}",
+    "keepTitle": "Tulid soovituslingi kaudu",
+    "keepText": "Kas jätame selle meelde? Sinu ettevõte ja sind kutsunud ettevõte saavad pärast sinu esimest laadimist krediiti. See hoitakse küpsises 30 päeva.",
+    "keep": "Jäta meelde",
+    "dontKeep": "Ei, aitäh"
   },
   "topUp": {
     "title": "Laadi juurde",

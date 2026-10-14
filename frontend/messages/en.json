@@ -755,7 +755,11 @@
     "companyNote": "You both get {reward, number} credits when they make their first top-up, of any amount.",
     "deletedCompany": "A deleted company",
     "credits": "+{count, number} credits",
-    "rewarded": "{count, plural, =0 {No rewards yet.} one {Rewarded # time so far.} other {Rewarded # times so far.}}"
+    "rewarded": "{count, plural, =0 {No rewards yet.} one {Rewarded # time so far.} other {Rewarded # times so far.}}",
+    "keepTitle": "You came through a referral link",
+    "keepText": "Keep it? Your company and the one that invited you each get credits after your first top-up. It's kept in a cookie for 30 days.",
+    "keep": "Keep",
+    "dontKeep": "No thanks"
   },
   "topUp": {
     "title": "Top up",

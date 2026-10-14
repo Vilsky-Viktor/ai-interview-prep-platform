@@ -755,7 +755,11 @@
     "companyNote": "Vous recevez chacun {reward, number} crédits lors de sa première recharge, quel que soit le montant.",
     "deletedCompany": "Une entreprise supprimée",
     "credits": "+{count, number} crédits",
-    "rewarded": "{count, plural, =0 {Aucune récompense pour l'instant.} one {Récompensé # fois jusqu'ici.} other {Récompensé # fois jusqu'ici.}}"
+    "rewarded": "{count, plural, =0 {Aucune récompense pour l'instant.} one {Récompensé # fois jusqu'ici.} other {Récompensé # fois jusqu'ici.}}",
+    "keepTitle": "Vous êtes arrivé par un lien de parrainage",
+    "keepText": "Le conserver ? Votre entreprise et celle qui vous a invité reçoivent des crédits après votre première recharge. Il est conservé dans un cookie pendant 30 jours.",
+    "keep": "Conserver",
+    "dontKeep": "Non merci"
   },
   "topUp": {
     "title": "Recharger",

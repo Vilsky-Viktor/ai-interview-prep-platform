@@ -755,7 +755,11 @@
     "companyNote": "Kalian berdua mendapat {reward, number} kredit saat mereka melakukan isi ulang pertama, berapa pun jumlahnya.",
     "deletedCompany": "Perusahaan yang dihapus",
     "credits": "+{count, number} kredit",
-    "rewarded": "{count, plural, =0 {Belum ada hadiah.} other {Sudah # kali mendapat hadiah.}}"
+    "rewarded": "{count, plural, =0 {Belum ada hadiah.} other {Sudah # kali mendapat hadiah.}}",
+    "keepTitle": "Kamu datang lewat tautan referal",
+    "keepText": "Simpan? Perusahaanmu dan perusahaan yang mengundangmu masing-masing mendapat kredit setelah isi ulang pertamamu. Tautan ini disimpan di cookie selama 30 hari.",
+    "keep": "Simpan",
+    "dontKeep": "Tidak, terima kasih"
   },
   "topUp": {
     "title": "Isi ulang",

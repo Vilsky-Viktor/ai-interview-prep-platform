@@ -755,7 +755,11 @@
     "companyNote": "Ihr bekommt beide {reward, number} Credits, wenn es zum ersten Mal auflädt, egal mit welchem Betrag.",
     "deletedCompany": "Ein gelöschtes Unternehmen",
     "credits": "+{count, number} Credits",
-    "rewarded": "{count, plural, =0 {Noch keine Prämien.} one {Bisher # Mal belohnt.} other {Bisher # Mal belohnt.}}"
+    "rewarded": "{count, plural, =0 {Noch keine Prämien.} one {Bisher # Mal belohnt.} other {Bisher # Mal belohnt.}}",
+    "keepTitle": "Du bist über einen Empfehlungslink gekommen",
+    "keepText": "Behalten? Dein Unternehmen und das, das dich eingeladen hat, bekommen nach deiner ersten Aufladung Credits. Er wird 30 Tage in einem Cookie gespeichert.",
+    "keep": "Behalten",
+    "dontKeep": "Nein, danke"
   },
   "topUp": {
     "title": "Aufladen",

@@ -121,7 +121,10 @@ PRIVACY_SECTIONS = [
     {
         "heading": "Cookies and storage",
         "paragraphs": [
-            "prepza uses only what it needs to work: one cookie and the browser storage that keep you signed in, and a setting that remembers your light or dark theme. There are no advertising or analytics cookies, so there is nothing to consent to.",
+            "prepza uses only the cookies and browser storage it needs to work or that remember your own choices. There are no advertising or analytics cookies.",
+            "To keep you signed in: a cookie (prepza_token, until you sign out) and the browser storage of our sign-in provider, Google Firebase. While you connect an AI app, a cookie (prepza_connect) lasts the few minutes it takes.",
+            "To remember your choices: your language (a cookie, prepza_locale, for a year), your light or dark theme, the width of the assistant's panel, how you last invited candidates, that you signed in on this browser before, and your conversation with the assistant (until you sign in, only in this tab). They stay in your browser until you clear them.",
+            "A referral link: only if you choose to keep it, a cookie (prepza_ref) remembers the link you came through for 30 days, so the credits reach both companies.",
         ],
     },
     {

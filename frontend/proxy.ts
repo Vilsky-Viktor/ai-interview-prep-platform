@@ -1,11 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server"
 
-import {
-  REFERRAL_CODE,
-  REFERRAL_COOKIE,
-  REFERRAL_DAYS,
-  REFERRAL_PARAM,
-} from "@/constants/referral"
 import { TOKEN_COOKIE } from "@/constants/auth"
 import { LOCALE_COOKIE, LOCALE_COOKIE_MAX_AGE } from "@/constants/i18n"
 import { MAINTENANCE_HEADER } from "@/constants/maintenance"
@@ -71,19 +65,6 @@ export async function proxy(request: NextRequest) {
     response.cookies.set(LOCALE_COOKIE, localized.locale, {
       maxAge: LOCALE_COOKIE_MAX_AGE,
       sameSite: "lax",
-      secure: request.nextUrl.protocol === "https:",
-      path: "/",
-    })
-  }
-
-  // A referral link: kept until the visitor signs up or makes a company, where it counts.
-  const referral = request.nextUrl.searchParams.get(REFERRAL_PARAM)
-
-  if (referral && REFERRAL_CODE.test(referral)) {
-    response.cookies.set(REFERRAL_COOKIE, referral, {
-      maxAge: REFERRAL_DAYS * 24 * 60 * 60,
-      sameSite: "lax",
-      httpOnly: true,
       secure: request.nextUrl.protocol === "https:",
       path: "/",
     })

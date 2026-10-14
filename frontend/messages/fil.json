@@ -755,7 +755,11 @@
     "companyNote": "Pareho kayong makakakuha ng {reward, number} credits kapag ginawa nila ang kanilang unang top-up, anumang halaga.",
     "deletedCompany": "Binurang kumpanya",
     "credits": "+{count, number} credits",
-    "rewarded": "{count, plural, =0 {Wala pang gantimpala.} one {Nagantimpalaan nang # beses.} other {Nagantimpalaan nang # beses.}}"
+    "rewarded": "{count, plural, =0 {Wala pang gantimpala.} one {Nagantimpalaan nang # beses.} other {Nagantimpalaan nang # beses.}}",
+    "keepTitle": "Dumating ka sa pamamagitan ng referral link",
+    "keepText": "Itatabi ba? Makakakuha ng credits ang kumpanya mo at ang kumpanyang nag-imbita sa iyo pagkatapos ng una mong top-up. Itatabi ito sa isang cookie nang 30 araw.",
+    "keep": "Itabi",
+    "dontKeep": "Huwag na"
   },
   "topUp": {
     "title": "Mag-top up",

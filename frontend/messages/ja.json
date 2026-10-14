@@ -755,7 +755,11 @@
     "companyNote": "相手が金額を問わず初めてチャージすると、双方に {reward, number} クレジットが付与されます。",
     "deletedCompany": "削除された会社",
     "credits": "+{count, number} クレジット",
-    "rewarded": "{count, plural, =0 {特典はまだありません。} other {これまでに # 回特典を受け取りました。}}"
+    "rewarded": "{count, plural, =0 {特典はまだありません。} other {これまでに # 回特典を受け取りました。}}",
+    "keepTitle": "紹介リンクからアクセスしました",
+    "keepText": "保存しますか？初回チャージ後、あなたの会社と紹介元の会社の両方にクレジットが付与されます。Cookie に 30 日間保存されます。",
+    "keep": "保存する",
+    "dontKeep": "保存しない"
   },
   "topUp": {
     "title": "チャージ",

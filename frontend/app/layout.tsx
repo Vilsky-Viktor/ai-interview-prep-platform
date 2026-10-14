@@ -16,6 +16,7 @@ import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { ThemeProvider } from "@/components/theme-provider"
 import { TooltipProvider } from "@/components/ui/tooltip"
+import { ReferralNotice } from "@/components/referral-notice"
 import { Toaster } from "@/components/ui/sonner"
 import { FONT_VARIABLES } from "@/constants/fonts"
 import { CJK_LOCALES, type Locale } from "@/constants/i18n"
@@ -91,6 +92,7 @@ export default async function RootLayout({
                       </NotOnTimedPage>
                       <ScrollTopButton />
                       <Toaster />
+                      <ReferralNotice />
                     </AssistantProvider>
                   </SignInProvider>
                 </TooltipProvider>

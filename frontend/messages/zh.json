@@ -755,7 +755,11 @@
     "companyNote": "对方首次充值（任意金额）后，你们双方各得 {reward, number} 点数。",
     "deletedCompany": "已删除的公司",
     "credits": "+{count, number} 点数",
-    "rewarded": "{count, plural, =0 {还没有奖励。} other {目前已获得 # 次奖励。}}"
+    "rewarded": "{count, plural, =0 {还没有奖励。} other {目前已获得 # 次奖励。}}",
+    "keepTitle": "你是通过推荐链接来的",
+    "keepText": "要保留吗？你首次充值后，你的公司和邀请你的公司都会获得点数。该链接会在 Cookie 中保存 30 天。",
+    "keep": "保留",
+    "dontKeep": "不用了"
   },
   "topUp": {
     "title": "充值",

@@ -755,7 +755,11 @@
     "companyNote": "Cả hai bên đều nhận {reward, number} credit khi họ nạp credit lần đầu, với bất kỳ số tiền nào.",
     "deletedCompany": "Một công ty đã xóa",
     "credits": "+{count, number} credit",
-    "rewarded": "{count, plural, =0 {Chưa có phần thưởng.} other {Đã nhận thưởng # lần.}}"
+    "rewarded": "{count, plural, =0 {Chưa có phần thưởng.} other {Đã nhận thưởng # lần.}}",
+    "keepTitle": "Bạn đến từ một liên kết giới thiệu",
+    "keepText": "Giữ lại? Công ty của bạn và công ty đã mời bạn đều nhận tín dụng sau lần nạp đầu tiên của bạn. Liên kết được lưu trong cookie 30 ngày.",
+    "keep": "Giữ lại",
+    "dontKeep": "Không, cảm ơn"
   },
   "topUp": {
     "title": "Nạp credit",
