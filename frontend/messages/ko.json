@@ -175,6 +175,7 @@
     "statsPeriod": "기간",
     "statsAllTime": "전체 기간",
     "statsCards": {
+      "users": "사용자",
       "companies": "회사",
       "verified": "인증됨",
       "interviews": "면접",

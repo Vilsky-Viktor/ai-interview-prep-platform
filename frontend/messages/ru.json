@@ -175,6 +175,7 @@
     "statsPeriod": "Период",
     "statsAllTime": "За всё время",
     "statsCards": {
+      "users": "Пользователи",
       "companies": "Компании",
       "verified": "Подтверждены",
       "interviews": "Собеседования",

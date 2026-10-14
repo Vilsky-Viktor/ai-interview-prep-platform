@@ -1,6 +1,7 @@
 // The admin zone's stats tab: each card in order, the service whose stats it comes from (its
 // API path) and the metric there. Paid is in cents, in the currency billing gives.
 export const STATS_CARDS = [
+  { source: "library", metric: "users" },
   { source: "companies", metric: "companies" },
   { source: "companies", metric: "verified" },
   { source: "companies", metric: "interviews" },
@@ -12,7 +13,12 @@ export const STATS_CARDS = [
   { source: "billing", metric: "credits_spent" },
 ] as const
 
-export const STATS_SOURCES = ["companies", "rounds", "billing"] as const
+export const STATS_SOURCES = [
+  "library",
+  "companies",
+  "rounds",
+  "billing",
+] as const
 
 // The year prepza launched: the first year the menu offers.
 export const STATS_FIRST_YEAR = 2026

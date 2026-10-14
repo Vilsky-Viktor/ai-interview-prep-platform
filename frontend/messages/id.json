@@ -175,6 +175,7 @@
     "statsPeriod": "Periode",
     "statsAllTime": "Sepanjang waktu",
     "statsCards": {
+      "users": "Pengguna",
       "companies": "Perusahaan",
       "verified": "Terverifikasi",
       "interviews": "Wawancara",

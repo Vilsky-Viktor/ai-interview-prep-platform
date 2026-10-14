@@ -175,6 +175,7 @@
     "statsPeriod": "Okres",
     "statsAllTime": "Łącznie",
     "statsCards": {
+      "users": "Użytkownicy",
       "companies": "Firmy",
       "verified": "Zweryfikowane",
       "interviews": "Rozmowy",

@@ -52,7 +52,7 @@ test("superadmin sees a month's stats, a year's and all time, kept after a reloa
   const allTime = superadmin.getByRole("checkbox")
   await expect(period).toHaveText(thisMonth)
   const cards = superadmin.locator("dl")
-  await expect(cards.getByRole("term")).toHaveCount(9)
+  await expect(cards.getByRole("term")).toHaveCount(10)
   // Every service answered: no card is left as a dash.
   await expect(cards.getByRole("definition").filter({ hasText: /^—$/ })).toHaveCount(0)
   await shot(superadmin, "stats")

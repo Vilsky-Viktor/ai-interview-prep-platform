@@ -175,6 +175,7 @@
     "statsPeriod": "Panahon",
     "statsAllTime": "Lahat ng panahon",
     "statsCards": {
+      "users": "Mga user",
       "companies": "Mga kumpanya",
       "verified": "Na-verify",
       "interviews": "Mga interview",

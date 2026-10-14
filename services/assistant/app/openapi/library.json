@@ -1355,6 +1355,62 @@
     }
    }
   },
+  "/superadmin/stats": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Get Stats",
+    "description": "Users who signed up, all time or in one year or month, for the stats tab.",
+    "operationId": "get_stats_superadmin_stats_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "period",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "pattern": "^\\d{4}(-(0[1-9]|1[0-2]))?$"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Period"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/StatsOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
   "/templates/filters": {
    "get": {
     "tags": [
@@ -4705,6 +4761,33 @@
      "language"
     ],
     "title": "SettingsIn"
+   },
+   "StatsOut": {
+    "properties": {
+     "counts": {
+      "additionalProperties": {
+       "type": "integer"
+      },
+      "type": "object",
+      "title": "Counts"
+     },
+     "currency": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Currency"
+     }
+    },
+    "type": "object",
+    "required": [
+     "counts"
+    ],
+    "title": "StatsOut"
    },
    "TemplateCopyIn": {
     "properties": {

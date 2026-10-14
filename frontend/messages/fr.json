@@ -175,6 +175,7 @@
     "statsPeriod": "Période",
     "statsAllTime": "Depuis le début",
     "statsCards": {
+      "users": "Utilisateurs",
       "companies": "Entreprises",
       "verified": "Vérifiées",
       "interviews": "Entretiens",

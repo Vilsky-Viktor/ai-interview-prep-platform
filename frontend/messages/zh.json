@@ -175,6 +175,7 @@
     "statsPeriod": "时段",
     "statsAllTime": "累计",
     "statsCards": {
+      "users": "用户",
       "companies": "公司",
       "verified": "已认证",
       "interviews": "面试",

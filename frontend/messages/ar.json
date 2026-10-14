@@ -175,6 +175,7 @@
     "statsPeriod": "الفترة",
     "statsAllTime": "كل الوقت",
     "statsCards": {
+      "users": "المستخدمون",
       "companies": "الشركات",
       "verified": "موثّقة",
       "interviews": "المقابلات",

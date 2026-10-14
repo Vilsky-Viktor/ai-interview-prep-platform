@@ -28,6 +28,7 @@ from app.routers import (
     superadmin_emails,
     superadmin_news,
     superadmin_quality,
+    superadmin_stats,
     templates,
 )
 from app.storage.db import ping as ping_database
@@ -59,6 +60,7 @@ app.include_router(superadmin.router)
 app.include_router(superadmin_emails.router)
 app.include_router(superadmin_news.router)
 app.include_router(superadmin_quality.router)
+app.include_router(superadmin_stats.router)
 app.include_router(templates.router)
 app.include_router(news.router)
 app.include_router(internal.router)

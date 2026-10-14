@@ -175,6 +175,7 @@
     "statsPeriod": "دوره",
     "statsAllTime": "کل دوره",
     "statsCards": {
+      "users": "کاربران",
       "companies": "شرکت‌ها",
       "verified": "تأییدشده",
       "interviews": "مصاحبه‌ها",

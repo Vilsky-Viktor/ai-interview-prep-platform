@@ -175,6 +175,7 @@
     "statsPeriod": "Khoảng thời gian",
     "statsAllTime": "Tất cả",
     "statsCards": {
+      "users": "Người dùng",
       "companies": "Công ty",
       "verified": "Đã xác minh",
       "interviews": "Phỏng vấn",

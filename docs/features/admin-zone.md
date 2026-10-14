@@ -68,17 +68,18 @@ It sorts by lowest pass rate or most finished first. It marks the interviews out
 
 ## Stats
 
-Nine numbers as cards:
+Ten numbers as cards:
 
-1. companies created,
-2. companies verified (in the month they were approved),
-3. interviews created,
-4. candidates invited (in the month they were invited),
-5. candidates finished (also in the month they were invited),
-6. talents' practice rounds,
-7. top-ups,
-8. what they paid (tax included, refunds not taken off; a transaction counts once),
-9. the credits spent on candidates.
+1. users who signed up,
+2. companies created,
+3. companies verified (in the month they were approved),
+4. interviews created,
+5. candidates invited (in the month they were invited),
+6. candidates finished (also in the month they were invited),
+7. talents' practice rounds,
+8. top-ups,
+9. what they paid (tax included, refunds not taken off; a transaction counts once),
+10. the credits spent on candidates.
 
 ### Period
 
@@ -89,7 +90,7 @@ Nine numbers as cards:
 
 ### How it counts
 
-Companies, rounds and billing each count their own records, through the shared `prepza_common.stats`:
+Companies, rounds and billing each count their own records, through the shared `prepza_common.stats`; library counts the sign-in accounts, which live in Firebase only, by when each was made (it reads them all, page by page):
 
 ```
 GET /superadmin/stats?period=2026-10   # a month

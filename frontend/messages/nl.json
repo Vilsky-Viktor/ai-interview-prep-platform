@@ -175,6 +175,7 @@
     "statsPeriod": "Periode",
     "statsAllTime": "Totaal",
     "statsCards": {
+      "users": "Gebruikers",
       "companies": "Bedrijven",
       "verified": "Geverifieerd",
       "interviews": "Interviews",

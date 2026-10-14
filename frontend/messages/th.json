@@ -175,6 +175,7 @@
     "statsPeriod": "ช่วงเวลา",
     "statsAllTime": "ทั้งหมด",
     "statsCards": {
+      "users": "ผู้ใช้",
       "companies": "บริษัท",
       "verified": "ยืนยันแล้ว",
       "interviews": "การสัมภาษณ์",

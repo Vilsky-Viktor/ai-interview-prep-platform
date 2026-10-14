@@ -46,9 +46,9 @@ export function StatsView() {
       STATS_SOURCES.map((source) =>
         apiFetch<Stats>(`/${source}/superadmin/stats${query}`).catch(() => null)
       )
-    ).then(([companies, rounds, billing]) => {
+    ).then(([library, companies, rounds, billing]) => {
       if (current) {
-        setStats({ companies, rounds, billing })
+        setStats({ library, companies, rounds, billing })
       }
     })
 
@@ -66,7 +66,14 @@ export function StatsView() {
     <div className="space-y-4">
       {choice && <StatsPicker choice={choice} onChange={change} />}
       <StatsCards
-        stats={stats ?? { companies: null, rounds: null, billing: null }}
+        stats={
+          stats ?? {
+            library: null,
+            companies: null,
+            rounds: null,
+            billing: null,
+          }
+        }
       />
     </div>
   )

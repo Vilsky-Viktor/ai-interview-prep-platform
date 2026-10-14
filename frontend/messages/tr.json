@@ -175,6 +175,7 @@
     "statsPeriod": "Dönem",
     "statsAllTime": "Tüm zamanlar",
     "statsCards": {
+      "users": "Kullanıcılar",
       "companies": "Şirketler",
       "verified": "Doğrulanmış",
       "interviews": "Mülakatlar",

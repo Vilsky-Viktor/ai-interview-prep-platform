@@ -175,6 +175,7 @@
     "statsPeriod": "期間",
     "statsAllTime": "累計",
     "statsCards": {
+      "users": "ユーザー",
       "companies": "会社",
       "verified": "認証済み",
       "interviews": "面接",

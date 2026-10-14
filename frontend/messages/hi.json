@@ -175,6 +175,7 @@
     "statsPeriod": "अवधि",
     "statsAllTime": "अब तक कुल",
     "statsCards": {
+      "users": "उपयोगकर्ता",
       "companies": "कंपनियाँ",
       "verified": "सत्यापित",
       "interviews": "इंटरव्यू",

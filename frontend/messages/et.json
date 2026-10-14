@@ -175,6 +175,7 @@
     "statsPeriod": "Periood",
     "statsAllTime": "Kogu aeg",
     "statsCards": {
+      "users": "Kasutajad",
       "companies": "Ettevõtted",
       "verified": "Kinnitatud",
       "interviews": "Intervjuud",
