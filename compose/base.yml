@@ -48,7 +48,7 @@ services:
   # Runs a service's migrations once, before its API starts, so replicas never race on them.
   migrate:
     restart: "no"
-    command: ["uv", "run", "--no-sync", "alembic", "upgrade", "head"]
+    command: ["alembic", "upgrade", "head"]
     environment:
       <<: *firebase-env
     depends_on:

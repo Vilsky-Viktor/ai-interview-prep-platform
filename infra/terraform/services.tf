@@ -192,7 +192,7 @@ resource "google_cloud_run_v2_job" "migrate" {
 
       containers {
         image   = "${local.registry}/${each.value}:${var.image_tag}"
-        command = ["uv", "run", "--no-sync", "alembic", "upgrade", "head"]
+        command = ["alembic", "upgrade", "head"]
 
         # The same settings as the service: migrations load its configuration.
         dynamic "env" {

@@ -1,5 +1,6 @@
-# Weekly pull requests that update the pinned base images (tag and digest) and GitHub Actions
-# (pinned by commit). Merge after CI passes; close to skip a version.
+# Weekly pull requests that update the pinned base images (tag and digest), GitHub Actions
+# (pinned by commit) and the frontend's and services' packages (their lock files). Merge after CI
+# passes; close to skip a version.
 version: 2
 updates:
   - package-ecosystem: docker
@@ -9,6 +10,7 @@ updates:
       - /frontend
       - /services/ats
       - /services/api
+      - /services/assistant
       - /services/billing
       - /services/companies
       - /services/generation
@@ -32,3 +34,35 @@ updates:
     groups:
       actions:
         patterns: ["*"]
+
+  - package-ecosystem: npm
+    directory: /frontend
+    schedule:
+      interval: weekly
+    groups:
+      frontend:
+        patterns: ["*"]
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+
+  - package-ecosystem: uv
+    directories:
+      - /packages/common
+      - /services/api
+      - /services/assistant
+      - /services/ats
+      - /services/billing
+      - /services/companies
+      - /services/generation
+      - /services/library
+      - /services/notifications
+      - /services/rounds
+    schedule:
+      interval: weekly
+    groups:
+      python:
+        patterns: ["*"]
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]

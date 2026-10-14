@@ -75,6 +75,9 @@ Run Actions → Deploy → Run workflow with an earlier tag. It redeploys that v
 
 ## Dependencies
 
-- Workflow actions are pinned by commit.
-- Dockerfile base images are pinned by digest.
-- Dependabot ([`.github/dependabot.yml`](../.github/dependabot.yml)) opens weekly pull requests to update them.
+- Workflow actions are pinned by commit, and CI's `uv` by version.
+- Dockerfile base images, and the `uv` image the services copy, are pinned by digest.
+- The frontend's and the services' packages are locked (`pnpm-lock.yaml`, each `uv.lock`).
+- Dependabot ([`.github/dependabot.yml`](../.github/dependabot.yml)) opens weekly pull requests to update all of them, grouped, with minor and patch versions only; a major version is planned by hand.
+- The dependency audit ([`.github/workflows/audit.yml`](../.github/workflows/audit.yml)) fails when a package the frontend or a service ships has a known high-severity vulnerability (`pnpm audit`, `pip-audit`), on every push and every Monday.
+- The containers run their commands (`uvicorn`, `alembic`, `python`) directly from the service's environment, not through `uv`, so the server gets the container's signals.

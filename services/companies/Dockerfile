@@ -1,13 +1,17 @@
 # Built from the repo root (see docker-compose.yml), so the shared package can be copied in.
 FROM python:3.14-alpine@sha256:f6a589d43c42b9e7f7dc67a12d37132491f362859a5d750607710cc56da3bc72 AS base
 
-COPY --from=ghcr.io/astral-sh/uv:0.12 /uv /uvx /bin/
+# Pinned by digest; Dependabot proposes updates.
+COPY --from=ghcr.io/astral-sh/uv:0.12@sha256:3af4716e991d6956a41e573eab705d0ee08500cd829ed30293eb8472f372c65a /uv /uvx /bin/
 
 ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy UV_PYTHON_DOWNLOADS=never
 
 # The image mirrors the repo layout, so pyproject.toml's path source (../../packages/common)
 # finds the shared package.
 WORKDIR /services/companies
+# The environment's commands (uvicorn, alembic, python) run directly, not through uv, so they get
+# the container's signals.
+ENV PATH="/services/companies/.venv/bin:$PATH"
 
 COPY packages/common /packages/common
 COPY services/companies/pyproject.toml services/companies/uv.lock services/companies/.python-version ./
@@ -22,7 +26,7 @@ FROM base AS dev
 # .pyc that a reloading container then fails to import. Polling sees changes from the host.
 ENV PYTHONPYCACHEPREFIX=/tmp/pycache WATCHFILES_FORCE_POLLING=true
 
-CMD ["uv", "run", "--no-sync", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", \
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", \
     "--reload", "--reload-dir", "app", "--reload-dir", "/packages/common/src"]
 
 # Production: the source is part of the image. Migrations run in a one-off container
@@ -42,4 +46,4 @@ ARG SENTRY_RELEASE
 ENV SENTRY_RELEASE=$SENTRY_RELEASE
 USER app
 
-CMD ["uv", "run", "--no-sync", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
