@@ -2,14 +2,16 @@
 
 import { useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { toast } from "sonner"
 
 import { useAuth } from "@/components/auth-provider"
 import { useSignIn } from "@/components/sign-in-dialog"
+import { LinkStatus } from "@/components/link-status"
 import { Button } from "@/components/ui/button"
 import { WarningCard } from "@/components/warning-card"
 import { ApiError, apiFetch } from "@/lib/api"
+import { useLinkData } from "@/hooks/use-link-data"
 import type { AdminInvite as Invite } from "@/types/company"
 
 export function AdminInvite({ token }: { token: string }) {
@@ -18,19 +20,17 @@ export function AdminInvite({ token }: { token: string }) {
   const router = useRouter()
   const { user, loading } = useAuth()
   const signIn = useSignIn()
-  const [invite, setInvite] = useState<Invite | null>(null)
-  const [missing, setMissing] = useState(false)
   const [accepting, setAccepting] = useState(false)
-
   // Read signed in or not, so a visitor sees what the invitation is for before signing in;
   // again after signing in, for whose it is.
-  useEffect(() => {
-    if (!loading) {
-      apiFetch<Invite>(`/companies/members/invites/${token}`)
-        .then(setInvite)
-        .catch(() => setMissing(true))
-    }
-  }, [loading, user, token])
+  const {
+    data: invite,
+    status,
+    retry,
+  } = useLinkData<Invite>(
+    loading ? null : `/companies/members/invites/${token}`,
+    user?.uid
+  )
 
   async function accept() {
     if (!invite) {
@@ -51,16 +51,14 @@ export function AdminInvite({ token }: { token: string }) {
     }
   }
 
-  if (missing) {
+  if (status !== "ready" || !invite) {
     return (
-      <p className="py-24 text-center text-base text-muted-foreground">
-        {share("invalid")}
-      </p>
+      <LinkStatus
+        status={status === "ready" ? "loading" : status}
+        invalid={share("invalid")}
+        onRetry={retry}
+      />
     )
-  }
-
-  if (!invite) {
-    return null
   }
 
   const matches = user?.email?.toLowerCase() === invite.email

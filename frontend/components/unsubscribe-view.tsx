@@ -2,12 +2,14 @@
 
 import Link from "next/link"
 import { useTranslations } from "next-intl"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { toast } from "sonner"
 
 import { useAuth } from "@/components/auth-provider"
 import { Button } from "@/components/ui/button"
+import { LinkStatus } from "@/components/link-status"
 import { apiFetch } from "@/lib/api"
+import { useLinkData } from "@/hooks/use-link-data"
 import type { UnsubscribeLink } from "@/types/notifications"
 
 /** Says what the link stops and asks to confirm: opening it changes nothing, as mail scanners
@@ -15,17 +17,10 @@ import type { UnsubscribeLink } from "@/types/notifications"
 export function UnsubscribeView({ token }: { token: string }) {
   const t = useTranslations("unsubscribe")
   const { user } = useAuth()
-  const [link, setLink] = useState<UnsubscribeLink | null>(null)
-  const [missing, setMissing] = useState(false)
   const [saving, setSaving] = useState(false)
   const [done, setDone] = useState(false)
   const path = `/notifications/unsubscribe/${encodeURIComponent(token)}`
-
-  useEffect(() => {
-    apiFetch<UnsubscribeLink>(path)
-      .then(setLink)
-      .catch(() => setMissing(true))
-  }, [path])
+  const { data: link, status, retry } = useLinkData<UnsubscribeLink>(path)
 
   async function confirm() {
     setSaving(true)
@@ -39,16 +34,14 @@ export function UnsubscribeView({ token }: { token: string }) {
     }
   }
 
-  if (missing) {
+  if (status !== "ready" || !link) {
     return (
-      <p className="py-24 text-center text-base text-muted-foreground">
-        {t("invalid")}
-      </p>
+      <LinkStatus
+        status={status === "ready" ? "loading" : status}
+        invalid={t("invalid")}
+        onRetry={retry}
+      />
     )
-  }
-
-  if (!link) {
-    return null
   }
 
   return (

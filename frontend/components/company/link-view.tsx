@@ -2,14 +2,16 @@
 
 import { useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { toast } from "sonner"
 
 import { useSignIn } from "@/components/sign-in-dialog"
 import { useAuth } from "@/components/auth-provider"
 import { InviteIntro } from "@/components/company/invite-intro"
+import { LinkStatus } from "@/components/link-status"
 import { Button } from "@/components/ui/button"
 import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
+import { useLinkData } from "@/hooks/use-link-data"
 import type { JobLink, SessionSummary } from "@/types/company"
 
 /** What someone sees from a test's shareable link: the same intro as an invite; starting signs
@@ -21,18 +23,17 @@ export function LinkView({ token }: { token: string }) {
   const signIn = useSignIn()
   const router = useRouter()
   const { user, loading } = useAuth()
-  const [link, setLink] = useState<JobLink | null>(null)
-  const [missing, setMissing] = useState(false)
   const [starting, setStarting] = useState(false)
 
   // Once sign-in is known, and again after signing in, so a finished test is never offered.
-  useEffect(() => {
-    if (!loading) {
-      apiFetch<JobLink>(`/companies/links/${token}`)
-        .then(setLink)
-        .catch(() => setMissing(true))
-    }
-  }, [token, loading, user])
+  const {
+    data: link,
+    status,
+    retry,
+  } = useLinkData<JobLink>(
+    loading ? null : `/companies/links/${token}`,
+    user?.uid
+  )
 
   async function start() {
     setStarting(true)
@@ -68,16 +69,14 @@ export function LinkView({ token }: { token: string }) {
     setStarting(false)
   }
 
-  if (missing) {
+  if (status !== "ready" || !link) {
     return (
-      <p className="py-24 text-center text-base text-muted-foreground">
-        {share("invalid")}
-      </p>
+      <LinkStatus
+        status={status === "ready" ? "loading" : status}
+        invalid={share("invalid")}
+        onRetry={retry}
+      />
     )
-  }
-
-  if (!link) {
-    return null
   }
 
   return (
