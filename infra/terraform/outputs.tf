@@ -23,6 +23,7 @@ output "github_variables" {
     GCP_REGION                     = var.region
     GCP_WORKLOAD_IDENTITY_PROVIDER = google_iam_workload_identity_pool_provider.github.name
     GCP_DEPLOY_SERVICE_ACCOUNT     = google_service_account.deploy.email
+    GCP_CI_SERVICE_ACCOUNT         = google_service_account.ci.email
     SITE_URL                       = "https://${var.domain}"
   }
 }

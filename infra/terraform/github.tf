@@ -1,5 +1,7 @@
-# GitHub Actions deploys without a stored key: GitHub's signed token for main or a version tag of
-# this repository is exchanged for the deploy account's (Workload Identity Federation).
+# GitHub Actions reach Google Cloud without a stored key: GitHub's signed token for main or a
+# version tag of this repository is exchanged for an account's (Workload Identity Federation):
+# the deploy account only for the deploy workflow in the production environment (which needs the
+# founder's approval), and an account that can only push images for every other job (CI).
 resource "google_iam_workload_identity_pool" "github" {
   workload_identity_pool_id = "github"
   display_name              = "GitHub Actions"
@@ -16,6 +18,8 @@ resource "google_iam_workload_identity_pool_provider" "github" {
     "google.subject"       = "assertion.sub"
     "attribute.repository" = "assertion.repository"
     "attribute.ref"        = "assertion.ref"
+    # "production" only for deploy.yml running in the production environment; "ci" otherwise.
+    "attribute.deployer" = "('environment' in assertion && assertion.environment == 'production' && assertion.workflow_ref.startsWith('${var.github_repository}/.github/workflows/deploy.yml@')) ? 'production' : 'ci'"
   }
 
   # Only this repository's main branch (CI pushes images, a manual run rolls back) and its version
@@ -37,7 +41,26 @@ resource "google_service_account" "deploy" {
 resource "google_service_account_iam_member" "github_is_deploy" {
   service_account_id = google_service_account.deploy.name
   role               = "roles/iam.workloadIdentityUser"
-  member             = "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.github.name}/attribute.repository/${var.github_repository}"
+  member             = "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.github.name}/attribute.deployer/production"
+}
+
+# What CI acts as: it pushes the images it built, and can't deploy them.
+resource "google_service_account" "ci" {
+  account_id   = "prepza-ci"
+  display_name = "GitHub Actions CI (pushes images)"
+}
+
+resource "google_service_account_iam_member" "github_is_ci" {
+  service_account_id = google_service_account.ci.name
+  role               = "roles/iam.workloadIdentityUser"
+  member             = "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.github.name}/attribute.deployer/ci"
+}
+
+resource "google_artifact_registry_repository_iam_member" "ci_pushes" {
+  repository = google_artifact_registry_repository.images.name
+  location   = var.region
+  role       = "roles/artifactregistry.writer"
+  member     = "serviceAccount:${google_service_account.ci.email}"
 }
 
 resource "google_project_iam_member" "deploy" {
