@@ -1017,7 +1017,8 @@
       "verification_declined": "{reason, select, none {האימות של \"{name}\" נדחה.} other {האימות של \"{name}\" נדחה: {reason}}}",
       "member_joined": "הצטרפות לצוות של \"{name}\": {email} ({role, select, admin {מנהל} other {צופה}}).",
       "ats_not_invited": "{count, plural, one {{email} מ-{ats} לא הוזמן/ה ל\"{title}\": {reason, select, credits {נגמרו הקרדיטים} limit {הושגה מגבלת אימיילים} paused {ההזמנות מושהות} other {משהו השתבש}}.} two {שני מועמדים מ-{ats} לא הוזמנו ל\"{title}\".} other {# מועמדים מ-{ats} לא הוזמנו ל\"{title}\".}}",
-      "ats_cannot_write": "{ats} לא מקבלת את תוצאות המועמדים: למפתח אין הרשאת כתיבה. יש לחבר מחדש עם מפתח שיכול לכתוב; התוצאות נשמרות ויישלחו אז."
+      "ats_cannot_write": "{ats} לא מקבלת את תוצאות המועמדים: למפתח אין הרשאת כתיבה. יש לחבר מחדש עם מפתח שיכול לכתוב; התוצאות נשמרות ויישלחו אז.",
+      "connection_broken": "{name} הפסיק לעבוד וצריך לחבר אותו מחדש. עד אז {integration, select, slack {ההתראות לא מגיעות לערוץ שלך} other {המועמדים שהוא שולח ממתינים, והתוצאות שלהם נשמרות}}."
     }
   },
   "report": {

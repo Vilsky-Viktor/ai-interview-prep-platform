@@ -22,6 +22,8 @@ def test_deleting_an_account_reads_the_email_from_the_body_and_forgets_their_cha
     async def forget_maker(user_id):
         done.append(("slack", user_id))
 
+        return []
+
     monkeypatch.setattr(notifications, "remove_user", remove_user)
     monkeypatch.setattr(notifications, "remove_candidate", remove_candidate)
 

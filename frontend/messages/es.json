@@ -1026,7 +1026,8 @@
       "verification_declined": "{reason, select, none {Se ha rechazado la verificación de «{name}».} other {Se ha rechazado la verificación de «{name}»: {reason}}}",
       "member_joined": "{email} se unió a «{name}» como {role, select, admin {administrador} other {lector}}.",
       "ats_not_invited": "{count, plural, one {{email} de {ats} no fue invitado a «{title}»: {reason, select, credits {sin créditos} limit {se alcanzó un límite de correos} paused {las invitaciones están en pausa} other {algo salió mal}}.} other {# candidatos de {ats} no fueron invitados a «{title}».}}",
-      "ats_cannot_write": "{ats} no acepta los resultados de los candidatos: la clave no tiene permiso de escritura. Vuelve a conectarlo con una clave que pueda escribir; los resultados se guardan y se envían entonces."
+      "ats_cannot_write": "{ats} no acepta los resultados de los candidatos: la clave no tiene permiso de escritura. Vuelve a conectarlo con una clave que pueda escribir; los resultados se guardan y se envían entonces.",
+      "connection_broken": "{name} dejó de funcionar y hay que volver a conectarlo. Hasta entonces, {integration, select, slack {las notificaciones no llegan a tu canal} other {los candidatos que envía esperan y sus resultados se guardan}}."
     }
   },
   "report": {

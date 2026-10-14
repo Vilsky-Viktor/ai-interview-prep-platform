@@ -30,6 +30,8 @@ class NotificationKind(StrEnum):
     ATS_NOT_INVITED = "ats_not_invited"
     # An ATS takes the company's key but refuses the results written back (no write access).
     ATS_CANNOT_WRITE = "ats_cannot_write"
+    # An ATS or Slack connection stopped working and needs reconnecting.
+    CONNECTION_BROKEN = "connection_broken"
     # Someone the owner invited joined the company's team.
     MEMBER_JOINED = "member_joined"
     # A superadmin approved or declined the company's verification.

@@ -1026,7 +1026,8 @@
       "verification_declined": "{reason, select, none {La verifica di «{name}» è stata rifiutata.} other {La verifica di «{name}» è stata rifiutata: {reason}}}",
       "member_joined": "{email} fa ora parte di «{name}» come {role, select, admin {amministratore} other {visualizzatore}}.",
       "ats_not_invited": "{count, plural, one {{email} da {ats} non è stato invitato a «{title}»: {reason, select, credits {crediti esauriti} limit {è stato raggiunto un limite di email} paused {gli inviti sono in pausa} other {qualcosa è andato storto}}.} other {# candidati da {ats} non sono stati invitati a «{title}».}}",
-      "ats_cannot_write": "{ats} non accetta i risultati dei candidati: la chiave non ha accesso in scrittura. Ricollegalo con una chiave che può scrivere; i risultati vengono conservati e inviati allora."
+      "ats_cannot_write": "{ats} non accetta i risultati dei candidati: la chiave non ha accesso in scrittura. Ricollegalo con una chiave che può scrivere; i risultati vengono conservati e inviati allora.",
+      "connection_broken": "{name} ha smesso di funzionare e va ricollegato. Fino ad allora, {integration, select, slack {le notifiche non arrivano al tuo canale} other {i candidati che invia restano in attesa e i loro risultati vengono conservati}}."
     }
   },
   "report": {

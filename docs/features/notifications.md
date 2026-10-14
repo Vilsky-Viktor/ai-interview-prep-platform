@@ -22,7 +22,8 @@ Only what matters, for every member of a company:
 - a referral reward,
 - an automatic top-up charged or failed,
 - an ATS candidate who couldn't be invited (`ats_not_invited`, see [ATS integrations](ats.md#candidates-from-workable)),
-- an ATS that takes the company's key but refuses the results written back (`ats_cannot_write`, once until the company reconnects or a write goes through; in the bell only).
+- an ATS that takes the company's key but refuses the results written back (`ats_cannot_write`, once until the company reconnects or a write goes through; in the bell only),
+- an ATS or Slack connection that stopped working and needs reconnecting (`connection_broken`, once each time it stops; in the bell only, opening its page).
 
 Companies' verification decisions reach only the owner and admins, one notification each, as viewers can't act on them (see [Companies](companies.md#verification)).
 
@@ -39,7 +40,7 @@ A company can send its notifications to one Slack channel too, from its integrat
 - If Slack says the web hook is gone (the app was removed or the channel deleted), the page shows "Reconnect". A message Slack refuses for good is logged and skipped.
 - Disconnecting, or deleting the company, removes the channel from prepza, and prepza's app from the workspace unless another company still posts there. Reconnecting to the same workspace keeps the app; reconnecting to another workspace removes it from the earlier one (again, unless another company uses it).
 - Members who can't edit see the channel and its notifications without changing them.
-- The channel works while whoever connected it is still an owner or admin; once they're removed or made a viewer, it's marked for reconnecting by a current editor. If they delete their prepza account, the channel stays without their id (`deleted-user`), marked for reconnecting; their data export lists the channels they connected.
+- The channel works while whoever connected it is still an owner or admin; once they're removed or made a viewer, it's marked for reconnecting by a current editor. If they delete their prepza account, the channel stays without their id (`deleted-user`), marked for reconnecting; their data export lists the channels they connected. Each time a channel stops working, the company gets a `connection_broken` notification in the bell (not in Slack, which is what broke).
 
 ### Setting up Slack
 

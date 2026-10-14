@@ -1,5 +1,6 @@
 from prepza_common.notifications import NotificationKind, Recipient, notification
 
+from app.constants.ats import ATS_NAMES
 from app.constants.notifications import ATS_LINK
 
 
@@ -36,4 +37,17 @@ def ats_cannot_write(company_id, provider: str, ats: str) -> dict:
         NotificationKind.ATS_CANNOT_WRITE,
         ATS_LINK.format(company_id=company_id, provider=provider),
         ats=ats,
+    )
+
+
+def connection_broken(company_id, provider: str) -> dict:
+    """The company's ATS connection stopped working: its page, which the notification opens,
+    reconnects it."""
+    return notification(
+        Recipient.COMPANY,
+        company_id,
+        NotificationKind.CONNECTION_BROKEN,
+        ATS_LINK.format(company_id=company_id, provider=provider),
+        name=ATS_NAMES[provider],
+        integration="ats",
     )

@@ -7,6 +7,7 @@ from sqlalchemy import delete, func, select, update
 from sqlalchemy.dialects.postgresql import insert
 
 from app.constants.ats import CandidateStatus, ConnectionStatus
+from app.helpers.notifications import connection_broken
 from app.models.ats import AtsCandidate, AtsConnection, AtsJobLink
 from app.models.outbox import OutboxEvent
 from app.storage.db import Session
@@ -126,14 +127,27 @@ async def restore_broken(earlier: AtsConnection) -> None:
 
 
 async def mark_broken(connection_id: UUID) -> None:
+    """Marks the connection for reconnecting; the company is told when it stops working, once,
+    also when several calls find it broken at the same moment."""
     query = (
         update(AtsConnection)
-        .where(AtsConnection.id == connection_id)
+        .where(
+            AtsConnection.id == connection_id,
+            AtsConnection.status != ConnectionStatus.BROKEN,
+        )
         .values(status=ConnectionStatus.BROKEN)
+        .returning(AtsConnection.company_id, AtsConnection.provider)
     )
 
     async with Session() as session:
-        await session.execute(query)
+        for company_id, provider in await session.execute(query):
+            outbox.add(
+                session,
+                OutboxEvent,
+                NOTIFICATION_REQUESTED,
+                connection_broken(company_id, provider),
+            )
+
         await session.commit()
 
 
@@ -147,14 +161,32 @@ async def made_by(user_id: str) -> list[AtsConnection]:
 async def forget_maker(user_id: str) -> None:
     """The connections the user made stay with their companies, without the user's id, and
     stop inviting, as when their maker stops being an editor: an editor reconnects them."""
-    query = (
+    working = (
+        update(AtsConnection)
+        .where(
+            AtsConnection.created_by == user_id,
+            AtsConnection.status != ConnectionStatus.BROKEN,
+        )
+        .values(created_by=DELETED_USER, status=ConnectionStatus.BROKEN)
+        .returning(AtsConnection.company_id, AtsConnection.provider)
+    )
+    rest = (
         update(AtsConnection)
         .where(AtsConnection.created_by == user_id)
-        .values(created_by=DELETED_USER, status=ConnectionStatus.BROKEN)
+        .values(created_by=DELETED_USER)
     )
 
     async with Session() as session:
-        await session.execute(query)
+        # Each company whose connection stops working now is told.
+        for company_id, provider in await session.execute(working):
+            outbox.add(
+                session,
+                OutboxEvent,
+                NOTIFICATION_REQUESTED,
+                connection_broken(company_id, provider),
+            )
+
+        await session.execute(rest)
         await session.commit()
 
 

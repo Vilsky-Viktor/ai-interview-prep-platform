@@ -75,16 +75,20 @@ def test_a_deleted_makers_channel_stays_without_their_id_and_stops_posting(run, 
     async def scenario():
         await connect(company_id, user_id=maker)
         exported = await storage.made_by(maker)
-        await storage.forget_maker(maker)
-        # Safe to repeat.
-        await storage.forget_maker(maker)
+        stopped = await storage.forget_maker(maker)
+        # Safe to repeat: it stopped once.
+        again = await storage.forget_maker(maker)
 
         async with api() as client:
             await client.post("/internal/events", json=event)
 
-        return exported, await storage.get(company_id), await storage.made_by(maker)
+        found = await storage.get(company_id)
 
-    exported, found, left = run(scenario())
+        return exported, found, await storage.made_by(maker), stopped, again
+
+    exported, found, left, stopped, again = run(scenario())
+
+    assert (stopped, again) == ([company_id], [])
 
     assert [row.company_id for row in exported] == [company_id]
     assert (found.created_by, found.status) == (DELETED_USER, SlackStatus.BROKEN)
@@ -98,7 +102,9 @@ def test_reconnecting_replaces_the_channel_and_keeps_the_kinds(run):
     async def scenario():
         await connect(company_id)
         await storage.set_kinds(company_id, ["interview_ready"])
-        await storage.mark_broken(company_id)
+        assert await storage.mark_broken(company_id)
+        # Already broken: it didn't stop working now.
+        assert not await storage.mark_broken(company_id)
         broken = await storage.connected(company_id)
         await connect(company_id, channel="#new", kinds=["candidate_finished"])
 
@@ -153,7 +159,7 @@ def test_a_retry_after_slack_was_down_posts_it_without_a_second_bell_notificatio
     assert len(configured["posted"]) == 1
 
 
-def test_a_burst_grouped_in_the_bell_posts_only_its_first(run, configured):
+def test_a_burst_grouped_in_the_bell_posts_each_once(run, configured):
     company_id = company()
     bodies = [
         push("notification.requested", finished(company_id, email=f"{n}@x.com"), f"o-g{n}", "m")
@@ -164,7 +170,8 @@ def test_a_burst_grouped_in_the_bell_posts_only_its_first(run, configured):
         await connect(company_id)
 
         async with api() as client:
-            # Slack fails the first; the rest add to it in the bell; the first's retry posts it.
+            # Slack fails the first; the rest add to it in the bell; the first's retry posts it,
+            # and a retry of one already posted posts nothing.
             configured["down"] = True
             await client.post("/internal/events", json=bodies[0])
             configured["down"] = False
@@ -177,8 +184,8 @@ def test_a_burst_grouped_in_the_bell_posts_only_its_first(run, configured):
     [bell] = run(scenario())
 
     assert bell.data["count"] == 3
-    assert len(configured["posted"]) == 1
-    assert "0@x.com finished" in configured["posted"][0][1]
+    posted = sorted(text.split(" finished")[0] for _, text in configured["posted"])
+    assert posted == ["0@x.com", "1@x.com", "2@x.com"]
 
 
 def test_a_deleted_companys_channel_and_app_go(run, configured):

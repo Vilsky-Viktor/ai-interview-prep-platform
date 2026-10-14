@@ -28,3 +28,25 @@ test("the bell says when an ATS doesn't take candidates' results", async ({
   await notice.click();
   await expect(owner).toHaveURL(new RegExp(`${page}$`));
 });
+
+// A connection that stopped working (Slack's web hook gone, an ATS key revoked): the bell says
+// what waits meanwhile and opens its page to reconnect.
+test("the bell says when Slack stopped working", async ({ signInAs }) => {
+  const owner = await signInAs(ownerEmail());
+  const company = await createCompany(owner);
+  const page = `/companies/${company.id}/integrations/slack`;
+  await addCompanyNotification(company.id, "connection_broken", page, {
+    name: "Slack",
+    integration: "slack",
+  });
+
+  await visit(owner, `/companies/${company.id}/interviews`);
+  await owner.getByRole("button", { name: /notification/i }).click();
+  const notice = owner.getByText(
+    "Slack stopped working and needs reconnecting. Until then, notifications don't reach your channel.",
+  );
+  await expect(notice).toBeVisible();
+  await shot(owner, "bell-slack");
+  await notice.click();
+  await expect(owner).toHaveURL(new RegExp(`${page}$`));
+});

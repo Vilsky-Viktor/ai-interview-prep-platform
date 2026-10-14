@@ -7,7 +7,7 @@ import httpx
 from fastapi import HTTPException, status
 from prepza_common import company_access
 from prepza_common.encryption import decrypt, encrypt
-from prepza_common.notifications import Recipient
+from prepza_common.notifications import NotificationKind, Recipient, notification
 
 from app.config.settings import settings
 from app.constants.slack import (
@@ -15,6 +15,7 @@ from app.constants.slack import (
     SLACK_CALLBACK,
     SLACK_DEFAULT_KINDS,
     SLACK_KINDS,
+    SLACK_LINK,
     SLACK_PAGE,
     SLACK_SCOPE,
     SLACK_STATE_KEY,
@@ -24,6 +25,8 @@ from app.helpers.slack import message, read_state, signed_state
 from app.integrations import companies, slack
 from app.integrations.redis import get_redis
 from app.schemas.slack import SlackOut
+from app.services.feed import announce
+from app.storage import notifications
 from app.storage import slack as storage
 
 logger = logging.getLogger(__name__)
@@ -170,14 +173,14 @@ async def deliver(event: dict, key: str) -> None:
     # The channel works while whoever connected it is still an owner or admin, like an API key;
     # otherwise an editor reconnects it.
     if not (await companies.access(company_id, found.created_by))["editor"]:
-        await storage.mark_broken(company_id)
+        await stop(company_id)
 
         return
 
     webhook = decrypt(settings.slack_encryption_key, found.webhook)
 
     if webhook is None:
-        await storage.mark_broken(company_id)
+        await stop(company_id)
 
         return
 
@@ -188,7 +191,7 @@ async def deliver(event: dict, key: str) -> None:
     try:
         await slack.post(webhook, text)
     except slack.WebhookGone:
-        await storage.mark_broken(company_id)
+        await stop(company_id)
     except slack.SlackRefused as refused:
         logger.warning(
             "Slack refused a %s notification for %s: %s", event["kind"], company_id, refused.error
@@ -197,3 +200,28 @@ async def deliver(event: dict, key: str) -> None:
         await storage.release(key)
 
         raise
+
+
+async def stop(company_id: str) -> None:
+    """Marks the company's channel for reconnecting; told once when it stops working."""
+    if await storage.mark_broken(company_id):
+        await stopped(company_id)
+
+
+async def stopped(company_id: str) -> None:
+    """Tells the company its channel stopped working: in the bell, not in Slack, which is what
+    broke. A lost notification is better than a failed delivery."""
+    data = notification(
+        Recipient.COMPANY,
+        company_id,
+        NotificationKind.CONNECTION_BROKEN,
+        SLACK_LINK.format(company_id=company_id),
+        name="Slack",
+        integration="slack",
+    )
+
+    try:
+        await notifications.add(f"connection_broken:{secrets.token_hex(16)}", data)
+        await announce(Recipient.COMPANY, company_id)
+    except Exception:
+        logger.exception("Couldn't tell company %s its Slack channel stopped working", company_id)

@@ -11,6 +11,7 @@ from app.integrations import breezy, workable
 from app.integrations.ats_clients import client
 from app.integrations.errors import KeyRejected, WriteRefused
 from app.models.ats import AtsConnection
+from app.services import outbox as outbox_service
 from app.storage import ats
 
 
@@ -56,6 +57,7 @@ async def workable_key(connection: AtsConnection) -> tuple[str, str]:
 async def broken(connection: AtsConnection) -> None:
     """Marks the connection for reconnecting, and tells the company."""
     await ats.mark_broken(connection.id)
+    await outbox_service.flush_quietly()
     name = ATS_NAMES[connection.provider]
 
     raise HTTPException(

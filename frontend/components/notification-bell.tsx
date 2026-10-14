@@ -42,6 +42,8 @@ function useNotificationText() {
       role: data.role ?? "",
       // The ATS a candidate came from; older notifications don't name it.
       ats: data.ats ?? "ATS",
+      // What stopped working: "slack", or an ATS.
+      integration: data.integration ?? "ats",
       // How many came together, for the kinds the service groups.
       count: typeof data.count === "number" ? data.count : 1,
       credits:

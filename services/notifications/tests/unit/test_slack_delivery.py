@@ -28,6 +28,7 @@ def channel(monkeypatch):
         "claimed": set(),
         "answer": None,
         "left": set(),
+        "told": [],
     }
     hook = SimpleNamespace(
         kinds=["candidate_finished"], webhook=encrypt(KEY, "https://hooks/x"), created_by="u1"
@@ -43,7 +44,18 @@ def channel(monkeypatch):
         found["posted"].append((webhook, text))
 
     async def mark_broken(company_id):
+        stopped = company_id not in found["broken"]
         found["broken"].append(company_id)
+
+        return stopped
+
+    async def add(key, data):
+        found["told"].append(data)
+
+        return True
+
+    async def announce(recipient, recipient_id):
+        pass
 
     async def claim(key):
         new = key not in found["claimed"]
@@ -62,6 +74,8 @@ def channel(monkeypatch):
     monkeypatch.setattr(settings, "slack_encryption_key", KEY)
     monkeypatch.setattr(storage, "connected", connected)
     monkeypatch.setattr(storage, "mark_broken", mark_broken)
+    monkeypatch.setattr(slack.notifications, "add", add)
+    monkeypatch.setattr(slack, "announce", announce)
     monkeypatch.setattr(storage, "claim", claim)
     monkeypatch.setattr(storage, "release", release)
     monkeypatch.setattr(slack_api, "post", post)
@@ -157,3 +171,15 @@ def test_a_company_thats_gone_asks_for_reconnecting_instead_of_retrying(channel,
 
     assert channel["posted"] == []
     assert channel["broken"] == ["c1"]
+
+
+def test_the_company_hears_in_the_bell_once_that_its_channel_stopped_working(channel):
+    channel["answer"] = slack_api.WebhookGone()
+
+    for _ in range(2):
+        asyncio.run(slack.deliver(finished(), f"e-{_}"))
+
+    [told] = channel["told"]
+    assert told["kind"] == "connection_broken"
+    assert told["data"] == {"name": "Slack", "integration": "slack"}
+    assert told["link"] == "/companies/c1/integrations/slack"

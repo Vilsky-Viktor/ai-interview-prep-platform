@@ -1022,7 +1022,8 @@
       "verification_declined": "{reason, select, none {تم رفض توثيق «{name}».} other {تم رفض توثيق «{name}»: {reason}}}",
       "member_joined": "عضو جديد في فريق «{name}»: {email} ({role, select, admin {مسؤول} other {مشاهد}}).",
       "ats_not_invited": "{count, plural, one {لم تتم دعوة {email} من {ats} إلى «{title}»: {reason, select, credits {نفد الرصيد} limit {تم بلوغ حد الرسائل} paused {الدعوات متوقفة مؤقتًا} other {حدث خطأ ما}}.} zero {لم تتم دعوة # مرشح من {ats} إلى «{title}».} two {لم تتم دعوة مرشحَين من {ats} إلى «{title}».} few {لم تتم دعوة # مرشحين من {ats} إلى «{title}».} many {لم تتم دعوة # مرشحًا من {ats} إلى «{title}».} other {لم تتم دعوة # مرشح من {ats} إلى «{title}».}}",
-      "ats_cannot_write": "لا يقبل {ats} نتائج المرشحين: المفتاح لا يملك صلاحية الكتابة. أعد الربط بمفتاح يمكنه الكتابة؛ تُحفظ النتائج وتُرسل حينها."
+      "ats_cannot_write": "لا يقبل {ats} نتائج المرشحين: المفتاح لا يملك صلاحية الكتابة. أعد الربط بمفتاح يمكنه الكتابة؛ تُحفظ النتائج وتُرسل حينها.",
+      "connection_broken": "توقف {name} عن العمل ويحتاج إلى إعادة الربط. حتى ذلك الحين، {integration, select, slack {لا تصل الإشعارات إلى قناتك} other {ينتظر المرشحون الذين يرسلهم، وتُحفظ نتائجهم}}."
     }
   },
   "report": {

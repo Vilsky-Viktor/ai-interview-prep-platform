@@ -10,6 +10,8 @@ SLACK_SCOPE = "incoming-webhook"
 # Where Slack sends the company back, and the page that then opens.
 SLACK_CALLBACK = "{site}/api/notifications/slack/callback"
 SLACK_PAGE = "{site}/companies/{company_id}/integrations/slack"
+# The same page, as a notification opens it.
+SLACK_LINK = "/companies/{company_id}/integrations/slack"
 # How long an "Add to Slack" trip may take, from the button to the callback.
 SLACK_STATE_SECONDS = 15 * 60
 # A trip's nonce in Redis, until the callback takes it (once) or SLACK_STATE_SECONDS pass.

@@ -52,12 +52,23 @@ async def set_kinds(company_id: str, kinds: list) -> None:
         await session.commit()
 
 
-async def mark_broken(company_id: str) -> None:
-    query = update(SlackConnection).where(SlackConnection.company_id == company_id)
+async def mark_broken(company_id: str) -> bool:
+    """True when it stopped working just now: of several calls at once, only one."""
+    query = (
+        update(SlackConnection)
+        .where(
+            SlackConnection.company_id == company_id,
+            SlackConnection.status != SlackStatus.BROKEN,
+        )
+        .values(status=SlackStatus.BROKEN)
+        .returning(SlackConnection.company_id)
+    )
 
     async with Session() as session:
-        await session.execute(query.values(status=SlackStatus.BROKEN))
+        stopped = await session.scalar(query)
         await session.commit()
+
+    return stopped is not None
 
 
 async def made_by(user_id: str) -> list[SlackConnection]:
@@ -67,18 +78,28 @@ async def made_by(user_id: str) -> list[SlackConnection]:
         return list(await session.scalars(query))
 
 
-async def forget_maker(user_id: str) -> None:
+async def forget_maker(user_id: str) -> list[str]:
     """The channels the user connected stay with their companies, without the user's id, and
-    stop working, as when their maker stops being an editor: an editor reconnects them."""
-    query = (
+    stop working, as when their maker stops being an editor: an editor reconnects them. The
+    companies whose channel stopped working just now."""
+    working = (
+        update(SlackConnection)
+        .where(SlackConnection.created_by == user_id, SlackConnection.status != SlackStatus.BROKEN)
+        .values(created_by=DELETED_USER, status=SlackStatus.BROKEN)
+        .returning(SlackConnection.company_id)
+    )
+    rest = (
         update(SlackConnection)
         .where(SlackConnection.created_by == user_id)
-        .values(created_by=DELETED_USER, status=SlackStatus.BROKEN)
+        .values(created_by=DELETED_USER)
     )
 
     async with Session() as session:
-        await session.execute(query)
+        stopped = list(await session.scalars(working))
+        await session.execute(rest)
         await session.commit()
+
+    return stopped
 
 
 async def remove(company_id: str) -> None:
