@@ -23,16 +23,23 @@ or the invite has expired.
 When your platform already knows who the candidate is, invite them with `sign_in` false: prepza
 sends no emails, and the `invite_url` opens the interview without signing in to prepza. Anyone
 with that link can take the interview, so give it only to the candidate. Add a `return_url` on
-your company's website domain to bring them back once they've finished, or embed the interview
-in your own page instead.
+your company's verified website domain to bring them back once they've finished, or embed the
+interview in your own page instead.
+
+## Verified companies
+
+Bringing candidates back to your site and embedding the interview work only on your company's
+verified website domain and its subdomains. To verify your company, select **Verify** next to its
+name in prepza and enter its website. Once an owner or admin signs in with a work email on that
+domain, prepza reviews the company and adds the verified badge; until then, a `return_url`
+returns `422` and an embedded interview isn't shown.
 
 ## Embedding the interview
 
 Your page can show the interview itself, for a candidate invited with `sign_in` false. Your
 server invites them and passes the `invite_url` to your page, which embeds it with prepza's
-script; never put your API key in a page. The page must be on your company's website domain (or
-a subdomain of it) as set in prepza, and served over HTTPS: anywhere else the interview isn't
-shown.
+script; never put your API key in a page. The page must be on your company's verified website
+domain (or a subdomain of it) and served over HTTPS: anywhere else the interview isn't shown.
 
 ```html
 <div id="interview"></div>

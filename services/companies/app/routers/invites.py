@@ -44,7 +44,7 @@ async def get_invite(token: str, user: OptionalUser) -> InviteView:
         status=invite.status,
         question_seconds=candidate_seconds(interview.question_seconds, invite.extra_time),
         guest=invite.guest,
-        embed_domain=company.website_domain if company and invite.guest else None,
+        embed_domain=company.verified_domain if company and invite.guest else None,
     )
 
 

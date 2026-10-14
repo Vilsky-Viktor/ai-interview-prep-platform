@@ -66,7 +66,7 @@ async def invite(interview_id: UUID, body: AtsInviteIn, caller: ServiceCaller) -
     if sender is None or not can_edit(sender):
         raise HTTPException(status.HTTP_403_FORBIDDEN, "Only an owner or admin can invite")
 
-    if body.return_url and not on_domain(body.return_url, company.website_domain):
+    if body.return_url and not on_domain(body.return_url, company.verified_domain):
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, RETURN_URL_OFF_DOMAIN)
 
     user = User(uid=body.sender_id, email="", email_verified=True)

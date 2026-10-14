@@ -75,7 +75,7 @@ async def get_candidate(interview_id: UUID, candidate_id: UUID, key: ApiKeyDep) 
         422: {
             "description": (
                 "The body is invalid, or `return_url` isn't an https address on the company's "
-                "website domain"
+                "verified website domain"
             )
         },
         429: {

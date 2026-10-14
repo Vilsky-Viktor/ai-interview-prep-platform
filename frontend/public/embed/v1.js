@@ -11,8 +11,8 @@
  *     })
  *   </script>
  *
- * Only a candidate invited with sign_in false, and only on your company's website domain (and
- * its subdomains) as set in prepza: anywhere else the frame stays empty.
+ * Only a candidate invited with sign_in false, and only on your company's verified website
+ * domain (and its subdomains): anywhere else the frame stays empty.
  */
 ;(function () {
   "use strict"

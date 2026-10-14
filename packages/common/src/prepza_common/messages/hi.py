@@ -200,5 +200,5 @@ MESSAGES = {
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "सूचना नए संस्करण के लागू होने से कम से कम 14 दिन पहले भेजी जाती है: इसे बाद की तारीख दें।",
     "This version's notice was already sent.": "इस संस्करण की सूचना पहले ही भेजी जा चुकी है।",
     "Prices aren't available right now. Please try again in a minute.": "कीमतें अभी उपलब्ध नहीं हैं। कृपया एक मिनट बाद फिर से कोशिश करें।",
-    "return_url must be an https address on the company's website domain; set the website in prepza first.": "return_url कंपनी की वेबसाइट के डोमेन पर एक https पता होना चाहिए; पहले prepza में वेबसाइट सेट करें।",
+    "return_url must be an https address on the company's verified website domain; get the company verified in prepza first (Verify, next to its name).": "return_url कंपनी की सत्यापित वेबसाइट डोमेन पर एक https पता होना चाहिए; पहले prepza में कंपनी को सत्यापित कराएँ (उसके नाम के पास Verify)।",
 }

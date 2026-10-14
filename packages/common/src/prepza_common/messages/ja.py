@@ -200,5 +200,5 @@ MESSAGES = {
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "通知は新しいバージョンの適用日の少なくとも 14 日前に送られます。より後の日付にしてください。",
     "This version's notice was already sent.": "このバージョンの通知はすでに送信されています。",
     "Prices aren't available right now. Please try again in a minute.": "現在、料金を表示できません。1分後にもう一度お試しください。",
-    "return_url must be an https address on the company's website domain; set the website in prepza first.": "return_url は会社のウェブサイトのドメイン上の https アドレスである必要があります。先に prepza でウェブサイトを設定してください。",
+    "return_url must be an https address on the company's verified website domain; get the company verified in prepza first (Verify, next to its name).": "return_url は企業の認証済みウェブサイトドメイン上の https アドレスにしてください。先に prepza で企業の認証を受けてください（企業名の横の「認証」）。",
 }

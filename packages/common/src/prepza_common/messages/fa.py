@@ -200,5 +200,5 @@ MESSAGES = {
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "اطلاعیه دست‌کم ۱۴ روز پیش از اعمال نسخهٔ جدید فرستاده می‌شود: تاریخ دیرتری برای آن بگذارید.",
     "This version's notice was already sent.": "اطلاعیهٔ این نسخه قبلاً فرستاده شده است.",
     "Prices aren't available right now. Please try again in a minute.": "قیمت‌ها اکنون در دسترس نیستند. لطفاً یک دقیقهٔ دیگر دوباره تلاش کنید.",
-    "return_url must be an https address on the company's website domain; set the website in prepza first.": "return_url باید یک نشانی https روی دامنهٔ وب‌سایت شرکت باشد؛ ابتدا وب‌سایت را در prepza تنظیم کنید.",
+    "return_url must be an https address on the company's verified website domain; get the company verified in prepza first (Verify, next to its name).": "return_url باید یک نشانی https روی دامنهٔ تأییدشدهٔ وب‌سایت شرکت باشد؛ ابتدا شرکت را در prepza تأیید کنید (دکمهٔ «تأیید» کنار نام آن).",
 }

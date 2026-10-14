@@ -308,3 +308,15 @@ export async function deleteAiConnections(userId: string) {
     )
   })
 }
+
+/** A throwaway company verified on `domain`, as a superadmin's approval leaves it (the
+ * verification flow itself has its own tests). */
+export async function verifyCompany(companyId: string, domain: string) {
+  await withDatabase("companies", (client) =>
+    client.query(
+      `UPDATE companies SET website_domain = $2, verified_domain = $2,
+         verification_status = 'approved' WHERE id = $1`,
+      [companyId, domain]
+    )
+  )
+}

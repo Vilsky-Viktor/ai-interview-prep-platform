@@ -57,8 +57,8 @@ class InviteView(BaseModel):
     question_seconds: int
     # Sent by the company's own platform: the link signs the candidate in, no account needed.
     guest: bool = False
-    # The website that may embed this interview in a frame (with its subdomains): the company's,
-    # for a guest invite only. None: no site may.
+    # The website that may embed this interview in a frame (with its subdomains): the company's
+    # verified one (a superadmin approved it), for a guest invite only. None: no site may.
     embed_domain: str | None = None
 
 

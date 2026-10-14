@@ -200,5 +200,5 @@ MESSAGES = {
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "Powiadomienie wysyłamy co najmniej 14 dni przed wejściem nowej wersji w życie: nadaj jej późniejszą datę.",
     "This version's notice was already sent.": "Powiadomienie o tej wersji zostało już wysłane.",
     "Prices aren't available right now. Please try again in a minute.": "Ceny są teraz niedostępne. Spróbuj ponownie za minutę.",
-    "return_url must be an https address on the company's website domain; set the website in prepza first.": "return_url musi być adresem https w domenie strony firmy; najpierw ustaw stronę w prepza.",
+    "return_url must be an https address on the company's verified website domain; get the company verified in prepza first (Verify, next to its name).": "return_url musi być adresem https w zweryfikowanej domenie witryny firmy; najpierw zweryfikuj firmę w prepza (Zweryfikuj, obok jej nazwy).",
 }

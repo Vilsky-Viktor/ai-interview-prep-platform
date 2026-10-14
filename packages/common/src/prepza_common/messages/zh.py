@@ -200,5 +200,5 @@ MESSAGES = {
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "通知须在新版本适用前至少 14 天发出：请为其设定更晚的日期。",
     "This version's notice was already sent.": "此版本的通知已发送。",
     "Prices aren't available right now. Please try again in a minute.": "目前无法获取价格，请一分钟后重试。",
-    "return_url must be an https address on the company's website domain; set the website in prepza first.": "return_url 必须是公司网站域名下的 https 地址；请先在 prepza 中设置网站。",
+    "return_url must be an https address on the company's verified website domain; get the company verified in prepza first (Verify, next to its name).": "return_url 必须是公司已验证网站域名上的 https 地址；请先在 prepza 中完成公司验证（公司名称旁的“验证”）。",
 }

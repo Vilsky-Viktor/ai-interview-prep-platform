@@ -80,16 +80,21 @@ def test_only_the_guest_starts_a_guest_invitation_not_even_the_invited_email(cli
     assert guest_invite == []
 
 
-def test_only_a_guest_invitation_may_be_embedded_and_only_on_the_companys_site(
+def test_only_a_guest_invitation_may_be_embedded_and_only_on_the_companys_verified_site(
     client,
     monkeypatch,
     invite_page,  # noqa: F811
 ):
     import app.routers.invites as routes
 
+    verified = {"domain": None}
+
     async def company(company_id):
         return SimpleNamespace(
-            name="Acme", website_domain="acme.com", verified_domain=None, suspended_at=None
+            name="Acme",
+            website_domain="acme.com",
+            verified_domain=verified["domain"],
+            suspended_at=None,
         )
 
     monkeypatch.setattr(routes.companies, "get", company)
@@ -98,5 +103,10 @@ def test_only_a_guest_invitation_may_be_embedded_and_only_on_the_companys_site(
     assert client.get("/invites/token-1").json()["embed_domain"] is None
 
     invite_page.guest = True
+
+    # Its website entered, not verified yet: no site may.
+    assert client.get("/invites/token-1").json()["embed_domain"] is None
+
+    verified["domain"] = "acme.com"
 
     assert client.get("/invites/token-1").json()["embed_domain"] == "acme.com"

@@ -1,10 +1,11 @@
 import { expect, test } from "../fixtures"
 import { API_URL, FRONTEND_URL } from "../constants"
 import { api, createCompany, createInterview } from "../helpers/api"
+import { verifyCompany } from "../helpers/db"
 import { shot } from "../helpers/screenshots"
 import { ownerEmail, throwawayEmail } from "../helpers/users"
 
-// The company's own site, at an address of its website's domain: it embeds the interview with
+// The company's own site, at an address of its verified website's domain: it embeds the interview with
 // the hosted script and hears when the candidate has finished.
 const DOMAIN = "acme-embed.com"
 const SITE = `http://jobs.${DOMAIN}`
@@ -33,9 +34,6 @@ test("a company's own site embeds a candidate's interview and hears it finish", 
   const owner = await signInAs(ownerEmail())
   const company = await createCompany(owner)
   const interviewId = await createInterview(owner, company.id)
-  await api(owner, "PUT", `/companies/companies/${company.id}/website`, {
-    website: DOMAIN,
-  })
   const { key } = await api<{ key: string }>(
     owner,
     "POST",
@@ -59,7 +57,10 @@ test("a company's own site embeds a candidate's interview and hears it finish", 
   }
 
   const candidate = await invite(throwawayEmail("embedded"), false)
-  // Only the company's own site may frame it; an invite by email, no site.
+  // Not before the company is verified; then only its own site; an invite by email, no site.
+  await api(owner, "PUT", `/companies/companies/${company.id}/website`, { website: DOMAIN })
+  expect(await framers(candidate.invite_url)).toBe("'none'")
+  await verifyCompany(company.id, DOMAIN)
   expect(await framers(candidate.invite_url)).toBe(`${DOMAIN} *.${DOMAIN}`)
   const byEmail = await invite(throwawayEmail("by-email"), true)
   expect(await framers(byEmail.invite_url)).toBe("'none'")

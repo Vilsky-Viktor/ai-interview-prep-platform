@@ -200,5 +200,5 @@ MESSAGES = {
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "Bildirim, yeni sürüm geçerli olmadan en az 14 gün önce gönderilir: ona daha ileri bir tarih verin.",
     "This version's notice was already sent.": "Bu sürümün bildirimi zaten gönderildi.",
     "Prices aren't available right now. Please try again in a minute.": "Fiyatlar şu anda kullanılamıyor. Lütfen bir dakika sonra tekrar deneyin.",
-    "return_url must be an https address on the company's website domain; set the website in prepza first.": "return_url, şirketin web sitesi alan adında bir https adresi olmalıdır; önce web sitesini prepza'da ayarlayın.",
+    "return_url must be an https address on the company's verified website domain; get the company verified in prepza first (Verify, next to its name).": "return_url, şirketin doğrulanmış web sitesi alan adında bir https adresi olmalıdır; önce şirketi prepza'da doğrulatın (adının yanındaki Doğrula).",
 }

@@ -200,5 +200,5 @@ MESSAGES = {
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "ประกาศจะส่งออกอย่างน้อย 14 วันก่อนเวอร์ชันใหม่มีผล โปรดกำหนดวันที่ให้ช้ากว่านี้",
     "This version's notice was already sent.": "ส่งประกาศของเวอร์ชันนี้ไปแล้ว",
     "Prices aren't available right now. Please try again in a minute.": "ยังแสดงราคาไม่ได้ในขณะนี้ โปรดลองอีกครั้งในอีกหนึ่งนาที",
-    "return_url must be an https address on the company's website domain; set the website in prepza first.": "return_url ต้องเป็นที่อยู่ https บนโดเมนเว็บไซต์ของบริษัท ตั้งค่าเว็บไซต์ใน prepza ก่อน",
+    "return_url must be an https address on the company's verified website domain; get the company verified in prepza first (Verify, next to its name).": "return_url ต้องเป็นที่อยู่ https บนโดเมนเว็บไซต์ที่ยืนยันแล้วของบริษัท ให้ยืนยันบริษัทใน prepza ก่อน (ยืนยัน ข้างชื่อบริษัท)",
 }

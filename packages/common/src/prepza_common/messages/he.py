@@ -200,5 +200,5 @@ MESSAGES = {
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "הודעה נשלחת לפחות 14 יום לפני שהגרסה החדשה חלה: יש לתת לה תאריך מאוחר יותר.",
     "This version's notice was already sent.": "ההודעה על הגרסה הזו כבר נשלחה.",
     "Prices aren't available right now. Please try again in a minute.": "המחירים לא זמינים כרגע. נסו שוב בעוד דקה.",
-    "return_url must be an https address on the company's website domain; set the website in prepza first.": "return_url חייב להיות כתובת https בדומיין של אתר החברה; יש להגדיר קודם את האתר ב-prepza.",
+    "return_url must be an https address on the company's verified website domain; get the company verified in prepza first (Verify, next to its name).": "return_url חייבת להיות כתובת https בדומיין המאומת של אתר החברה; אמתו קודם את החברה ב-prepza (אימות, ליד שמה).",
 }

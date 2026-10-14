@@ -200,5 +200,5 @@ MESSAGES = {
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "Повідомлення надсилається щонайменше за 14 днів до того, як нова версія почне застосовуватися: призначте їй пізнішу дату.",
     "This version's notice was already sent.": "Повідомлення про цю версію вже надіслано.",
     "Prices aren't available right now. Please try again in a minute.": "Ціни зараз недоступні. Спробуйте ще раз за хвилину.",
-    "return_url must be an https address on the company's website domain; set the website in prepza first.": "return_url має бути https-адресою на домені сайту компанії; спершу вкажіть сайт у prepza.",
+    "return_url must be an https address on the company's verified website domain; get the company verified in prepza first (Verify, next to its name).": "return_url має бути https-адресою на підтвердженому домені сайту компанії; спершу підтвердьте компанію в prepza (Підтвердити, поруч із її назвою).",
 }

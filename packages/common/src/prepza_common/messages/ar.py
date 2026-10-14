@@ -200,5 +200,5 @@ MESSAGES = {
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "يُرسل الإشعار قبل 14 يومًا على الأقل من سريان النسخة الجديدة: اختر لها تاريخًا لاحقًا.",
     "This version's notice was already sent.": "سبق إرسال إشعار هذه النسخة.",
     "Prices aren't available right now. Please try again in a minute.": "الأسعار غير متاحة الآن. يُرجى المحاولة مرة أخرى بعد دقيقة.",
-    "return_url must be an https address on the company's website domain; set the website in prepza first.": "يجب أن يكون return_url عنوان https على نطاق موقع الشركة؛ عيّن الموقع في prepza أولًا.",
+    "return_url must be an https address on the company's verified website domain; get the company verified in prepza first (Verify, next to its name).": "يجب أن يكون return_url عنوان https على نطاق الموقع الموثَّق للشركة؛ وثِّق الشركة في prepza أولًا (زر «توثيق» بجانب اسمها).",
 }

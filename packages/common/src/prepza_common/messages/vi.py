@@ -200,5 +200,5 @@ MESSAGES = {
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "Thông báo được gửi ít nhất 14 ngày trước khi phiên bản mới áp dụng: hãy đặt ngày muộn hơn.",
     "This version's notice was already sent.": "Thông báo của phiên bản này đã được gửi.",
     "Prices aren't available right now. Please try again in a minute.": "Hiện chưa xem được giá. Vui lòng thử lại sau một phút.",
-    "return_url must be an https address on the company's website domain; set the website in prepza first.": "return_url phải là địa chỉ https trên tên miền website của công ty; hãy đặt website trong prepza trước.",
+    "return_url must be an https address on the company's verified website domain; get the company verified in prepza first (Verify, next to its name).": "return_url phải là địa chỉ https trên tên miền trang web đã xác minh của công ty; hãy xác minh công ty trên prepza trước (Xác minh, bên cạnh tên công ty).",
 }

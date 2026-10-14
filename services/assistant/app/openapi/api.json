@@ -285,7 +285,7 @@
       "description": "The interview's questions are still being generated"
      },
      "422": {
-      "description": "The body is invalid, or `return_url` isn't an https address on the company's website domain"
+      "description": "The body is invalid, or `return_url` isn't an https address on the company's verified website domain"
      },
      "503": {
       "description": "Invitations are temporarily paused"
@@ -794,7 +794,7 @@
        }
       ],
       "title": "Return Url",
-      "description": "Where to take the candidate once they've finished, optional: an https address on the company's website domain (or a subdomain of it), set in prepza. The finished page shows a button to it, with `prepza_invite=<candidate id>` added to its query"
+      "description": "Where to take the candidate once they've finished, optional: an https address on the company's verified website domain (or a subdomain of it); see Verified companies. The finished page shows a button to it, with `prepza_invite=<candidate id>` added to its query"
      },
      "sign_in": {
       "type": "boolean",
