@@ -1,12 +1,26 @@
 # Using prepza responsibly: instructions for companies
 
-Version: 2026-10-11\
-Operator: Arcolabs OÜ (registry code 17587452), Sepapaja tn 6, 15551 Tallinn, Harju maakond, Estonia; hello@prepza.ai
+Version of 2026-10-14. Arcolabs OÜ (registry code 17587452), Sepapaja tn 6, 15551 Tallinn, Estonia; hello@prepza.ai.
 
-For owners and admins of a company on prepza. These are prepza's instructions for use. They don't
-replace advice on the employment and data protection law that applies to you.
+For owners and admins of a company on prepza. These are prepza's instructions for use under the
+EU AI Act (Art. 13). Your own duties as an employer, under the employment and data protection law
+that applies to you, stay yours.
 
-## 1. What a prepza grade is
+## 1. What prepza is and is for
+
+- **Provider:** Arcolabs OÜ, above. **You** (the company that tests candidates) are the deployer.
+- **Intended purpose:** testing job candidates' knowledge for one role with a timed
+  multiple-choice interview, to help the people at your company decide whom to take further. AI
+  writes the questions from your job description; you review the topics; each candidate's answers
+  are marked against a fixed answer key.
+- **High-risk AI system.** Under the EU AI Act, a system used to evaluate candidates is high-risk
+  (Annex III point 4(a)), and prepza is treated as one. Its obligations apply from 2027-12-02;
+  before then prepza signs its EU declaration of conformity and is registered in the EU database,
+  and from 2027-11-02 the CE marking is shown in the site footer on every page, linked to the
+  declaration.
+- **Not for:** see section 11.
+
+## 2. What a prepza grade is
 
 - The **percentage of questions answered correctly**, over every question the candidate was shown.
   A question with nothing picked when its timer ran out counts as wrong. Candidates can change
@@ -17,43 +31,77 @@ replace advice on the employment and data protection law that applies to you.
   already given, and their grades, don't change.
 - **Green or red** only compares the grade with the passing grade you set. **The ranking** sorts by
   grade, best first.
+- **Explaining a grade:** the candidate's scorecard shows every question, the option picked, right
+  or wrong, the time taken, and the integrity signals. That is everything the grade comes from.
 
-## 2. What a grade is not
+## 3. Accuracy and its limits
 
-- Not a measure of overall ability, experience, potential, personality or fit.
-- Not a qualification or certificate.
-- Not exactly comparable between candidates: each one gets a different random set of questions from
-  the same bank, so small differences (a few points) can come from the draw.
-- Not free of error: questions are written by AI. A sample of answer keys in each topic is checked
-  before release, and questions are improved as answers and reports come in, but a question can
-  still be wrong or unclear, especially in a new interview before about 30 people have answered it.
-- Also a test of **reading speed and language** when the interview is timed and not in the
-  candidate's first language.
+- **Declared accuracy:** a correct answer key for **at least 98% of questions**. Measured at 99%
+  in prepza's offline evaluation of 2026-10-04 (240 questions in 8 fields, checked by an AI
+  judge), with 98% of questions having exactly one defensible answer; the key checker caught 60 of
+  60 wrong keys planted on purpose. A change of model or prompt that misses the target isn't
+  released without a reason.
+- **What that means for a grade:** the grade counts right answers against the key. A key found
+  wrong is fixed for candidates who start afterwards; grades already given are never marked again,
+  so a candidate may have answered a question whose key was later corrected (section 5).
+- **In use:** before an interview is ready, one answer key per topic is checked again. After 30
+  answers, a question is flagged and fixed or replaced when it is answered right by 15% or fewer, by
+  95% or more, when a wrong option is picked more often than the key, when strong and weak
+  candidates get it right about equally often, or when time runs out on a quarter of its showings;
+  also after 2 reports of the same problem.
+- **What a grade is not:** a measure of overall ability, experience, potential, personality or
+  fit; a qualification or certificate.
+- **Not exactly comparable between candidates:** each one gets a different random set of questions
+  from the same bank, so small differences (a few points) can come from the draw.
+- **Not free of error:** a question can still be wrong or unclear, especially in a new interview
+  before about 30 people have answered it.
+- **Language and reading speed:** when the interview is timed and not in the candidate's first
+  language, it also tests those. Choose the interview's language with your candidates in mind.
+- **Groups of candidates:** prepza collects no data about candidates' sex, age, origin or
+  disability, so it can't measure results by group for you. An independent bias audit of prepza
+  is done before 2027-12-02 and every year after, and its summary published at prepza.ai/documents.
+- **Job performance:** prepza doesn't learn how hired candidates do in the job, so it doesn't
+  show that a grade predicts job performance.
 
-## 3. Human review: your duty
+## 4. What prepza needs from you (input)
+
+- A job description, or a description of the role, that names what the job actually needs. Only
+  what is in it becomes topics.
+- Your review of the topics before questions are written: uncheck what the job doesn't need,
+  rename or edit, then approve. The approval is recorded.
+- A passing grade and time per question that fit the role (section 6).
+
+## 5. Human review: your duty
 
 People at your company make the hiring decision. prepza never tells a candidate they were rejected.
 
+- **Give the review to people who understand prepza:** these instructions, especially sections 2,
+  3 and 7, are what they need to know.
 - **Before rejecting anyone on a prepza result, a person must open their scorecard** and look at the
   answers, not just the grade, colour or rank.
 - Use the grade **alongside** other information (CV, work samples, interviews), not as the only
-  gate, unless you have checked with your own legal adviser that this is lawful and fair for the
-  role.
+  gate.
 - If a question looks wrong, report it with **Wrong answer**: prepza checks its answer key again,
-  usually within a day. Take that into account for candidates who already answered it.
+  usually within a day, and tells you when it's fixed. Take that into account for candidates who
+  already answered it.
 - **Candidates can ask you for a human review** of their result (prepza tells them so on the invite
   page, and reminds you on the results page and in PDF reports). Name who handles these requests,
   reply within a reasonable time, and be ready to explain what was tested and how the result was
   used.
 - In the EU, a decision based solely on automated processing that significantly affects a candidate
-  is restricted (GDPR Art. 22). Rejecting automatically everyone below the passing grade may count
-  as one.
+  is restricted (GDPR Art. 22). Rejecting automatically everyone below the passing grade can be
+  one.
 - The same applies to results prepza sends to the tools you connect: your applicant tracking
   system, Slack, or your own systems through the API and web hooks receive the grade and whether
   it reached the passing grade. **Don't set them up to reject candidates automatically** on those
   results; the human review above applies there too.
+- **The assistant and AI apps.** prepza's in-app assistant acts only after the member confirms
+  each change. AI apps (Claude, ChatGPT and others) a member connects act with that member's
+  access, and the data they read goes to that app's provider. Owners and admins can turn AI apps
+  off for the company (Integrations → AI apps → **Allow AI apps**). The same human review applies
+  to results read through them.
 
-## 4. Choosing a passing grade
+## 6. Choosing a passing grade
 
 - The default 70% is a starting point, not a recommendation for your role.
 - Try the interview yourself first (**Try as a candidate**, free). Ask one or two people who do the
@@ -63,79 +111,131 @@ People at your company make the hiring decision. prepza never tells a candidate 
   closer look, not a hard cut.
 - Keep the same passing grade for every candidate of the same interview.
 
-## 5. Integrity signals
+## 7. Integrity signals
 
 Page leaves, copy attempts and answers under 3 seconds are **hints, not proof**. A notification, an
 accessibility tool, a slow connection or a fast expert can all trigger them. Never reject on signals
 alone; follow up in a conversation, and let the candidate explain.
 
-## 6. Accommodations and extra time
+## 8. Accommodations and extra time
 
 - Tell candidates, before they start, how to ask for an accommodation (the candidate notice
   templates include this).
 - prepza's invite page tells candidates to ask you for more time before they start.
-- For a candidate who asks, open the candidate's menu in the candidate list and set **extra time:
-  +25%, +50% or +100%** on every question's timer. It can be set or changed only **before the
-  candidate starts**, so agree it first. prepza stores only the amount, never the reason. Their
-  scorecard is compared with the same passing grade.
+- For a candidate who asks, set **extra time: +25%, +50% or +100%** on every question's timer, on
+  the candidate's page. It can be set or changed only **before the candidate starts**, so agree it
+  first. prepza stores only the amount, never the reason. Their grade is compared with the same
+  passing grade.
+- Candidates who come through your shareable link can't get extra time there: the page tells them
+  to ask you for a personal invite first. Invite them by email instead.
 - If timed multiple choice doesn't suit the candidate's needs at all (for example some screen-reader
   or motor impairments), offer an **alternative assessment** outside prepza. Don't ask for medical
   details beyond what you need.
 - You can also raise the time per question for everyone in the interview's settings.
+- prepza's candidate pages are built to WCAG 2.2 AA.
 
-## 7. Telling candidates
+## 9. Telling candidates
 
 Before you invite, tell candidates that they will take a timed AI-generated knowledge test, what it
 covers, how the result is used, that page leaves and copies are recorded, how long data is kept, and
 how to ask for an accommodation, an alternative or a human review. prepza's candidate notice
-templates (at prepza.ai/documents) are a starting point. prepza's invite page also tells candidates what
-to expect and links prepza's privacy policy, but the notice about **your** use of the results is
-yours to give.
+templates (at prepza.ai/documents) are a starting point. prepza's invite page also tells candidates
+what to expect and links prepza's privacy policy, but the notice about **your** use of the results
+is yours to give.
 
-prepza's invite and reminder emails let candidates stop your company's emails, or that interview's
-reminders, with a link at the bottom. Once a candidate stops your company's emails, prepza doesn't
-email them for your company again: an invite to them shows as undelivered in the candidate list,
-so reach them another way if you still need to.
+- Until prepza has verified your company, your invite pages and emails say so in a small line.
+  Use **Verify company**: your website, and a sign-in with an email on its domain.
+- prepza's invite and reminder emails let candidates stop your company's emails, or that
+  interview's reminders, with a link at the bottom. Once a candidate stops your company's emails,
+  prepza doesn't email them for your company again: an invite to them shows as undelivered in the
+  candidate list, so reach them another way if you still need to.
 
-## 8. Retention
+## 10. Records, retention and data requests
+
+**Records (logs).** For each candidate prepza records every question shown and when, the pick,
+right or wrong, the time taken, timeouts, page leaves and copy attempts, start and finish: the
+scorecard and its PDF report show them, and the API returns the results. An audit log records
+your members' decisions (topics approved, results viewed, reports emailed, candidates revoked or
+deleted, extra time, passing grades, ownership handed on, AI apps allowed or stopped), with whether
+they acted in the app, through the assistant or through an AI app; the owner reads it through the
+API (`GET /companies/{id}/audit`). Keep what your law requires: the EU AI Act asks you to keep
+these records at least six months, and prepza keeps them for you as below. Download PDF reports to
+keep them longer.
+
+**Retention.**
 
 - Candidate results, timings and signals are **deleted automatically 12 months after the invite**
   was last sent.
 - Invites never started expire after 30 days.
-- A candidate's request to stop your company's emails is kept, as a one-way hash of their email
-  address, until you delete the company, also after you delete the candidate.
-- PDFs you download are yours to keep and delete under your own retention policy.
+- Candidates your applicant tracking system sends (their email and ATS ids) are kept 12 months.
+- The audit log is kept 24 months.
 - Job description text is kept 90 days in generation records; the interview stays until you delete
   it.
+- A candidate's request to stop your company's emails is kept, as a one-way hash of their email
+  address, until you delete the company, also after you delete the candidate.
+- Backups hold deleted data for at most 14 more days.
+- PDFs you download, and results sent to your applicant tracking system, Slack or your own systems,
+  are yours to keep and delete under your own retention policy.
 
-## 9. Answering candidates' data requests
-
-You are the controller of candidates' interview data; prepza is your processor under the data
-processing agreement at prepza.ai/dpa, which is part of the terms.
+**Data requests.** You are the controller of candidates' interview data; prepza is your processor
+under the data processing agreement at prepza.ai/dpa, which is part of the terms.
 
 - **Access:** open the candidate's **scorecard page** and download their **PDF report**. Together
   they hold everything prepza keeps about the interview: each question, their answer, right or wrong,
   time taken, page leaves and copy attempts, and the grade. Send the PDF, with your own explanation of
   how it was used.
 - **Erasure or objection:** on the candidate's page, revoke an unused invite, or use **Delete
-  candidate** for one who started or finished: their answers and results are deleted for good, and
-  credits still held come back (a finished candidate stays charged).
+  candidate** for one who started or finished: their answers and results are deleted for good, also
+  from the bell and from prepza's record of them for your applicant tracking system, and credits
+  still held come back (a finished candidate stays charged). Copies already sent to your applicant
+  tracking system, Slack or your own systems are yours to delete there.
 - If a candidate writes to prepza instead, prepza passes the request on to you.
 - Candidates can also download what is linked to their own prepza account with **Download my data**
   in Settings.
 
-## 10. Where not to use prepza
+## 11. Where not to use prepza
 
 - As the **only** basis for a rejection without human review.
 - For skills a multiple-choice knowledge test can't measure (manual, interpersonal, creative work)
   or knowledge the job doesn't actually need.
 - For promotion, termination, performance monitoring or task allocation of employees.
 - For candidates under 16.
-- For **New York City** roles, until a summary of an independent bias audit of prepza is published.
-  Local Law 144 may require such an audit within the year before use, and notice to candidates
-  before they are assessed.
+- For **New York City** roles, before you have done what Local Law 144 asks of you as the employer:
+  a bias audit by an independent auditor within the year before use, its summary published, and a
+  notice to candidates at least 10 business days before they are assessed. prepza gives you the
+  candidates' results (API, PDF reports) for the audit, the summary of its own bias audit, and a
+  notice template.
 - Where your local law requires a works council agreement, a regulator approval or a bias audit you
   haven't done.
+
+## 12. Your duties as a deployer under the EU AI Act
+
+From 2027-12-02, when you use prepza in the EU:
+
+- use it as these instructions say, and give human review to people with the competence and
+  authority for it (section 5);
+- make sure the job description and topics are relevant to the role (section 4);
+- watch how it works for you, and tell prepza at once of a serious problem (below);
+- keep the records for at least six months (section 10);
+- tell your employees' representatives before you use it for hiring, where your law requires;
+- tell candidates that a high-risk AI system is used to assess them (section 9), and explain, on
+  request, the role it played in a decision about them;
+- use these instructions for your data protection impact assessment (prepza's DPIA template at
+  prepza.ai/documents).
+
+## 13. Availability, changes and support
+
+- **What it needs:** a current web browser; candidates are best on a computer. Nothing to install.
+- **Maintenance:** prepza runs and updates it. During a maintenance break the site is closed and
+  candidates' timers stop, so no one loses time. In an emergency prepza can pause new interviews;
+  candidates already in one can finish.
+- **Changes:** questions are improved continuously (section 3); a fix applies only to candidates
+  who start after it. A change to how grades are worked out or to these instructions is published
+  here with a new version date. A significant change to the terms or the data processing agreement
+  is emailed to you at least 14 days before it applies.
+- **Security:** sign-in with Google, LinkedIn or GitHub and a verified email; only the invited
+  email can start an invite; roles limit what admins and viewers can do; API keys are kept only as
+  hashes.
 
 ## Reporting serious problems
 

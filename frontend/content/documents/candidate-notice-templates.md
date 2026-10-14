@@ -1,10 +1,12 @@
 # Candidate notice templates
 
-Version: 2026-10-08\
-Operator: Arcolabs OÜ (registry code 17587452), Sepapaja tn 6, 15551 Tallinn, Harju maakond, Estonia; hello@prepza.ai
+Version of 2026-10-14. Arcolabs OÜ (registry code 17587452), Sepapaja tn 6, 15551 Tallinn, Estonia; hello@prepza.ai.
 
 For companies to adapt and send **before** inviting candidates to a prepza interview. Replace
-everything in [brackets], and check the result with your own legal adviser for your jurisdiction.
+everything in [brackets]. The notice is yours to give as the employer: these templates cover what
+prepza does, and you add how you use the results. In the EU, telling candidates that a high-risk
+AI system is used to assess them is one of your duties under the AI Act from 2027-12-02; the
+general notice (section 2) does it.
 
 ## 1. New York City (Local Law 144, automated employment decision tool)
 
@@ -15,8 +17,11 @@ one year before use with a public summary; a notice at least **10 business days*
 the job posting, on the careers site, or by mail or email); and information on how to request an
 alternative selection process or accommodation.
 
-prepza has not yet published a bias audit summary. Until it does, don't use prepza for candidates
-in New York City (see prepza's instructions for companies).
+Under Local Law 144 the employer or employment agency commissions the bias audit and gives the
+notice: prepza doesn't do it for you. prepza gives you the candidates' results for your auditor
+(API, PDF reports), the summary of its own independent bias audit once published at
+prepza.ai/documents, and this template. Don't use prepza for candidates in New York City before
+your audit summary is published (see prepza's instructions for companies).
 
 > **Notice of use of an automated employment decision tool**
 >
@@ -34,14 +39,15 @@ in New York City (see prepza's instructions for companies).
 > with [your application / interviews]. The tool does not make the hiring decision.
 >
 > **Data.** The tool uses only your email address, your name (from your application or your
-> sign-in), the account id from your sign-in, and your answers in the test. The questions were written with AI from the job description and
-> reviewed by [Company]. Your test data is kept by prepza for 12 months after your invitation, then
+> sign-in), the account id from your sign-in, and your answers in the test, with how long each
+> took, page leaves and copy attempts. The questions were written with AI from the job description,
+> on topics [Company] chose. Your test data is kept by prepza for 12 months after your invitation, then
 > deleted. [Company's own retention policy: ...]. More information about the data collected, its
 > source and retention policy is available on request at [contact], within 30 days of a written
 > request.
 >
 > **Bias audit.** A summary of the most recent bias audit of this tool is available at [link to
-> the bias audit summary].
+> your bias audit summary].
 >
 > **Alternative process or accommodation.** You may request an alternative selection process or an
 > accommodation (for example extra time) by writing to [contact] by [date]. [Describe the
@@ -56,9 +62,10 @@ in New York City (see prepza's instructions for companies).
 > As part of your application to [Company], you're invited to take a short timed knowledge test on
 > **prepza**. Please read this before you start.
 >
-> **What it is.** [N] multiple-choice questions about [topics], with [N] seconds for each. Questions
-> were written with the help of AI from the job description and reviewed by our team. Each
-> candidate gets their own selection of questions. You can change your pick until you move to the
+> **What it is.** An AI system that helps us assess candidates; under the EU AI Act it counts as a
+> high-risk AI system. [N] multiple-choice questions about [topics], with [N] seconds for each.
+> Questions were written with the help of AI from the job description, on topics our team chose.
+> Each candidate gets their own selection of questions. You can change your pick until you move to the
 > next question or finish. When a question's time runs out, your pick counts; with no pick, it
 > counts as wrong.
 >
@@ -72,7 +79,8 @@ in New York City (see prepza's instructions for companies).
 > **Accommodations.** If you need extra time or another adjustment because of a disability or
 > another reason, or would prefer a different way to show your knowledge, write to [contact]
 > before you start. We can give you more time on every question or arrange an alternative.
-> You don't need to tell us a diagnosis.
+> If you apply through our job ad's link, ask us for a personal invite first: extra time can't be
+> added there. You don't need to tell us a diagnosis.
 >
 > **Your data.** [Company] is responsible for your test data; prepza (Arcolabs OÜ, Estonia)
 > processes it for us. It is kept for 12 months after your invitation and then deleted
@@ -90,6 +98,6 @@ in New York City (see prepza's instructions for companies).
 ## 3. Short version for the invite email or job ad
 
 > This role includes a timed multiple-choice knowledge test on prepza ([N] minutes). Questions are
-> AI-assisted and reviewed by our team; a person reviews every result and you can ask for a human
+> AI-written on topics our team chose; a person reviews every result and you can ask for a human
 > review. Need extra time or an alternative? Write to [contact] before you start. Details:
 > [link to full notice].

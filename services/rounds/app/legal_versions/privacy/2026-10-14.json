@@ -53,6 +53,7 @@
         "Google (Firebase Authentication; Google LLC, United States, under the EU-US Data Privacy Framework): sign-in. LinkedIn and GitHub only confirm who you are when you sign in with them; we don't receive anything else from them.",
         "OpenAI: writing questions from the text you provide; the assistant's answers, from your questions and the data it reads with your access to answer them; turning voice messages into text; and checking reported questions (only the reasons given, never the comments). We tell OpenAI not to store it: under its API terms it keeps this data for at most 30 days, only to check for abuse, and doesn't use it to train its models. (OpenAI Ireland Ltd, under our data processing agreement with it; it transfers the data to OpenAI in the United States under the European Commission's standard contractual clauses.)",
         "Resend: sending emails: invites and reminders to candidates, reports, emails to company members such as the activity digest, and contact messages (in the EU, Ireland).",
+        "Google Workspace: our email inbox, which receives contact messages and the emails you send us (Google Ireland Ltd; mail may be stored outside the EU, under the EU-US Data Privacy Framework and standard contractual clauses).",
         "Sentry: error reports, with emails removed (in the EU).",
         "Google Cloud, our hosting provider, which stores the data (in the EU, Belgium).",
         "Upstash: short-lived counters for rate limits and live updates (in the EU, Belgium).",
