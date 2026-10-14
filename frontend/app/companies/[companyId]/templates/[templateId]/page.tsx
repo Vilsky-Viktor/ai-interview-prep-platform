@@ -5,8 +5,9 @@ import { BackLink } from "@/components/back-link"
 import { PageHeader } from "@/components/page-header"
 import { SubtopicList } from "@/components/questions/subtopic-list"
 import { TopicQuestionLimit } from "@/components/questions/topic-question-limit"
+import { SignInPage } from "@/components/sign-in-page"
 import { UseTemplate } from "@/components/templates/use-template"
-import { serverFetch } from "@/lib/server-api"
+import { serverFetch, signedIn } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
 import type { Company } from "@/types/company"
 import type { Template } from "@/types/superadmin"
@@ -21,6 +22,10 @@ export default async function CompanyTemplatePage({
 }: {
   params: Promise<{ companyId: string; templateId: string }>
 }) {
+  if (!(await signedIn())) {
+    return <SignInPage />
+  }
+
   const { companyId, templateId } = await params
   const t = await getTranslations("templates")
   const [template, company] = await Promise.all([

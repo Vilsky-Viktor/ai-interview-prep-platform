@@ -16,10 +16,11 @@ import { GradeBlock, GradeCard } from "@/components/grade-card"
 import { NoName } from "@/components/company/no-name"
 import { PassStatus } from "@/components/company/pass-status"
 import { PageHeader } from "@/components/page-header"
+import { SignInPage } from "@/components/sign-in-page"
 import { Badge } from "@/components/ui/badge"
 import { MAX_CANDIDATE_NAME_LENGTH } from "@/constants/limits"
 import { gradeTone } from "@/lib/grade-tone"
-import { serverFetch } from "@/lib/server-api"
+import { serverFetch, signedIn } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
 import type { Scorecard } from "@/types/company"
 
@@ -30,6 +31,10 @@ export default async function ScorecardPage({
 }: {
   params: Promise<{ companyId: string; id: string; inviteId: string }>
 }) {
+  if (!(await signedIn())) {
+    return <SignInPage />
+  }
+
   const { companyId, id, inviteId } = await params
   const reportT = await getTranslations("report")
   const t = await getTranslations("candidates")

@@ -4,7 +4,8 @@ import { getTranslations } from "next-intl/server"
 import { BackLink } from "@/components/back-link"
 import { InviteIntro } from "@/components/company/invite-intro"
 import { StartPreview } from "@/components/company/start-preview"
-import { serverFetch } from "@/lib/server-api"
+import { SignInPage } from "@/components/sign-in-page"
+import { serverFetch, signedIn } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
 import type { Company, InterviewDetail } from "@/types/company"
 
@@ -16,6 +17,10 @@ export default async function TryInterviewPage({
 }: {
   params: Promise<{ companyId: string; id: string }>
 }) {
+  if (!(await signedIn())) {
+    return <SignInPage />
+  }
+
   const { companyId, id } = await params
   const interviews = await getTranslations("interviews")
   const [company, interview] = await Promise.all([

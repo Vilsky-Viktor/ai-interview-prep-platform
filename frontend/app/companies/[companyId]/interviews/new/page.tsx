@@ -4,8 +4,9 @@ import { getTranslations } from "next-intl/server"
 import { BackLink } from "@/components/back-link"
 import { NewInterview } from "@/components/company/new-interview"
 import { PausedNotice } from "@/components/paused-notice"
+import { SignInPage } from "@/components/sign-in-page"
 import { isPaused } from "@/lib/pause"
-import { serverFetch } from "@/lib/server-api"
+import { serverFetch, signedIn } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
 import type { Company } from "@/types/company"
 
@@ -16,6 +17,10 @@ export default async function NewInterviewPage({
 }: {
   params: Promise<{ companyId: string }>
 }) {
+  if (!(await signedIn())) {
+    return <SignInPage />
+  }
+
   const { companyId } = await params
   const t = await getTranslations("interviews")
   const company = await serverFetch<Company>(

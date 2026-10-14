@@ -3,6 +3,8 @@ import { notFound } from "next/navigation"
 import { getTranslations } from "next-intl/server"
 
 import { GenerationView } from "@/components/generation/generation-view"
+import { SignInPage } from "@/components/sign-in-page"
+import { signedIn } from "@/lib/server-api"
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("generation")
@@ -19,6 +21,10 @@ export default async function GeneratePage({
   params: Promise<{ id: string }>
   searchParams: Promise<{ next?: string }>
 }) {
+  if (!(await signedIn())) {
+    return <SignInPage />
+  }
+
   const t = await getTranslations("generation")
   const superadmin = await getTranslations("superadmin")
   const { id } = await params

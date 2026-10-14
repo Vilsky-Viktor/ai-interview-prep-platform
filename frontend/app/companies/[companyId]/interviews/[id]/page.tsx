@@ -18,11 +18,12 @@ import { PageHeader } from "@/components/page-header"
 import { SubtopicList } from "@/components/questions/subtopic-list"
 import { TopicQuestionLimit } from "@/components/questions/topic-question-limit"
 import { TopicQuestions } from "@/components/questions/topic-questions"
+import { SignInPage } from "@/components/sign-in-page"
 import { Button } from "@/components/ui/button"
 import { CANDIDATE_SORTS } from "@/constants/interviews"
 import { PAGE_SIZE, LIST_BOX } from "@/constants/lists"
 import { INTERVIEW_TAB_HELP } from "@/constants/page-help"
-import { serverFetch } from "@/lib/server-api"
+import { serverFetch, signedIn } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
 import type {
   Candidate,
@@ -44,6 +45,10 @@ export default async function InterviewPage({
     status?: string
   }>
 }) {
+  if (!(await signedIn())) {
+    return <SignInPage />
+  }
+
   const { companyId, id } = await params
   const { tab, sort: asked, q, status: askedStatus } = await searchParams
   const sort =

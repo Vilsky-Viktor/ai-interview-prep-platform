@@ -9,6 +9,12 @@ import { REFERRAL_COOKIE } from "@/constants/referral"
 // "not found" or a sign-in prompt.
 const EXPECTED_MISSES = [401, 403, 404, 422]
 
+/** Whether the visitor has a sign-in token: a signed-in page shows them the sign-in prompt
+ * otherwise, then itself (not "not found", as its API calls would make it). */
+export async function signedIn(): Promise<boolean> {
+  return (await cookies()).has(TOKEN_COOKIE)
+}
+
 /**
  * Server-side API call, with the user's token when signed in. Null when the resource is
  * missing or not visible to the user; other failures throw so the error page shows.
