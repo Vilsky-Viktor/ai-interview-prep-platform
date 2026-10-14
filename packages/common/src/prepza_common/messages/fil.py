@@ -117,7 +117,7 @@ MESSAGES = {
     "Round not found": "Hindi nakita ang practice round",
     "Session not found": "Hindi nakita ang session",
     "Set not found": "Hindi nakita ang set ng mga tanong",
-    "Sign in with a verified email": "Mag-sign in gamit ang verified na email",
+    "Confirm your email first: open the link we sent you, then try again.": "Kumpirmahin muna ang email mo: buksan ang link na ipinadala namin, saka subukan ulit.",
     "Template not found": "Hindi nakita ang template",
     "Test not found": "Hindi nakita ang test",
     "That email is already invited": "Naimbitahan na ang email na iyan",

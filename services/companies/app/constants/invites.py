@@ -116,6 +116,9 @@ TOO_MANY_WITHOUT_CANDIDATES_UNPAID = (
     "Invite a candidate to your interview, or delete it, before generating another: until your "
     "first top-up, 1 generated interview can wait without candidates (5 after)."
 )
+# Starting an interview with an email the sign-in hasn't verified (GitHub doesn't): a link to
+# confirm it was sent when they signed in.
+EMAIL_NOT_VERIFIED = "Confirm your email first: open the link we sent you, then try again."
 # A shareable link whose company has no credits left for another candidate.
 LINK_CLOSED = "This interview isn't taking new candidates right now."
 # Random bytes in a shareable link's code.

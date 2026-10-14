@@ -117,7 +117,7 @@ MESSAGES = {
     "Round not found": "Không tìm thấy lượt luyện tập",
     "Session not found": "Không tìm thấy phiên",
     "Set not found": "Không tìm thấy bộ câu hỏi",
-    "Sign in with a verified email": "Hãy đăng nhập bằng email đã xác minh",
+    "Confirm your email first: open the link we sent you, then try again.": "Hãy xác nhận email của bạn trước: mở liên kết chúng tôi đã gửi, rồi thử lại.",
     "Template not found": "Không tìm thấy mẫu",
     "Test not found": "Không tìm thấy bài kiểm tra",
     "That email is already invited": "Email đó đã được mời",

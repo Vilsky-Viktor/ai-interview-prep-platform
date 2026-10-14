@@ -117,7 +117,7 @@ MESSAGES = {
     "Round not found": "Спробу не знайдено",
     "Session not found": "Сесію не знайдено",
     "Set not found": "Набір питань не знайдено",
-    "Sign in with a verified email": "Увійдіть із підтвердженою поштою",
+    "Confirm your email first: open the link we sent you, then try again.": "Спершу підтвердьте адресу пошти: відкрийте посилання з нашого листа й спробуйте ще раз.",
     "Template not found": "Шаблон не знайдено",
     "Test not found": "Тест не знайдено",
     "That email is already invited": "Цю пошту вже запрошено",

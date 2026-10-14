@@ -117,7 +117,7 @@ MESSAGES = {
     "Round not found": "Rodada não encontrada",
     "Session not found": "Sessão não encontrada",
     "Set not found": "Conjunto de questões não encontrado",
-    "Sign in with a verified email": "Entre com um e-mail verificado",
+    "Confirm your email first: open the link we sent you, then try again.": "Confirme seu e-mail primeiro: abra o link que enviamos e tente novamente.",
     "Template not found": "Modelo não encontrado",
     "Test not found": "Teste não encontrado",
     "That email is already invited": "Esse e-mail já foi convidado",

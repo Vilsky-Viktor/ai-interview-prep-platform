@@ -117,7 +117,7 @@ MESSAGES = {
     "Round not found": "प्रैक्टिस राउंड नहीं मिला",
     "Session not found": "सेशन नहीं मिला",
     "Set not found": "सवालों का सेट नहीं मिला",
-    "Sign in with a verified email": "वेरिफ़ाइड ईमेल से साइन इन करें",
+    "Confirm your email first: open the link we sent you, then try again.": "पहले अपना ईमेल पुष्टि करें: हमारे भेजे गए लिंक को खोलें, फिर से कोशिश करें।",
     "Template not found": "टेम्पलेट नहीं मिला",
     "Test not found": "टेस्ट नहीं मिला",
     "That email is already invited": "यह ईमेल पहले से इनवाइट किया जा चुका है",

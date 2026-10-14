@@ -7,7 +7,12 @@ from fastapi import HTTPException
 from prepza_common.auth import current_user, optional_user
 from prepza_common.user import User
 
-from app.constants.invites import LINK_STARTS_PER_HOUR, LINK_STARTS_PER_IP_HOUR, InviteStatus
+from app.constants.invites import (
+    EMAIL_NOT_VERIFIED,
+    LINK_STARTS_PER_HOUR,
+    LINK_STARTS_PER_IP_HOUR,
+    InviteStatus,
+)
 from app.integrations import billing
 from app.main import app
 from app.models.interviews import Interview
@@ -140,7 +145,10 @@ def test_an_unverified_email_cant_start(client, linked):
         uid="x", email="x@example.com", email_verified=False
     )
 
-    assert client.post("/links/abc/start").status_code == 403
+    response = client.post("/links/abc/start")
+
+    assert response.status_code == 403
+    assert response.json()["detail"] == EMAIL_NOT_VERIFIED
     assert linked["held"] == []
 
 

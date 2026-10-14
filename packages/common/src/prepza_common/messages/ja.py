@@ -117,7 +117,7 @@ MESSAGES = {
     "Round not found": "練習が見つかりません",
     "Session not found": "セッションが見つかりません",
     "Set not found": "問題セットが見つかりません",
-    "Sign in with a verified email": "確認済みのメールアドレスでサインインしてください",
+    "Confirm your email first: open the link we sent you, then try again.": "まずメールアドレスを確認してください。お送りしたリンクを開いてから、もう一度お試しください。",
     "Template not found": "テンプレートが見つかりません",
     "Test not found": "テストが見つかりません",
     "That email is already invited": "そのメールアドレスはすでに招待されています",

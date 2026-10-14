@@ -129,7 +129,7 @@ MESSAGES = {
     "Round not found": "Harjutusvooru ei leitud",
     "Session not found": "Seanssi ei leitud",
     "Set not found": "Küsimuste komplekti ei leitud",
-    "Sign in with a verified email": "Logi sisse kinnitatud e-postiga",
+    "Confirm your email first: open the link we sent you, then try again.": "Kinnita esmalt oma e-posti aadress: ava link, mille sulle saatsime, ja proovi siis uuesti.",
     "Template not found": "Malli ei leitud",
     "Test not found": "Testi ei leitud",
     "That email is already invited": "See e-post on juba kutsutud",

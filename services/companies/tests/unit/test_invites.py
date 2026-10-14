@@ -5,7 +5,7 @@ import pytest
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
-from app.constants.invites import InviteStatus
+from app.constants.invites import EMAIL_NOT_VERIFIED, InviteStatus
 from app.main import app
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
@@ -53,12 +53,19 @@ def stored_invite(monkeypatch):
 
 
 @pytest.mark.parametrize(
-    ("email", "verified"), [("eve@example.com", True), ("bob@example.com", False)]
+    ("email", "verified", "detail"),
+    [
+        ("eve@example.com", True, "This invite was sent to a different email address"),
+        # Their own email, not verified yet (GitHub): told to confirm it, not that it's another.
+        ("bob@example.com", False, EMAIL_NOT_VERIFIED),
+    ],
 )
-def test_other_or_unverified_email_is_rejected(client, stored_invite, email, verified):
+def test_other_or_unverified_email_is_rejected(client, stored_invite, email, verified, detail):
     sign_in(email, verified)
+    response = client.post("/invites/token-1/start")
 
-    assert client.post("/invites/token-1/start").status_code == 403
+    assert response.status_code == 403
+    assert response.json()["detail"] == detail
 
 
 def test_unknown_token(client, stored_invite):

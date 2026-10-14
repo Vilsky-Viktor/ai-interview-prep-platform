@@ -117,7 +117,7 @@ MESSAGES = {
     "Round not found": "لم يتم العثور على جولة التدريب",
     "Session not found": "لم يتم العثور على الجلسة",
     "Set not found": "لم يتم العثور على مجموعة الأسئلة",
-    "Sign in with a verified email": "سجّل الدخول ببريد إلكتروني موثّق",
+    "Confirm your email first: open the link we sent you, then try again.": "أكّد بريدك الإلكتروني أولًا: افتح الرابط الذي أرسلناه إليك، ثم حاول مرة أخرى.",
     "Template not found": "لم يتم العثور على القالب",
     "Test not found": "لم يتم العثور على الاختبار",
     "That email is already invited": "هذا البريد الإلكتروني مدعو بالفعل",

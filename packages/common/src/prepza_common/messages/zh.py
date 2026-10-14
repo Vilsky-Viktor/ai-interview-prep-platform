@@ -117,7 +117,7 @@ MESSAGES = {
     "Round not found": "未找到练习",
     "Session not found": "未找到会话",
     "Set not found": "未找到题目集",
-    "Sign in with a verified email": "请使用已验证的邮箱登录",
+    "Confirm your email first: open the link we sent you, then try again.": "请先确认你的邮箱：打开我们发送的链接，然后重试。",
     "Template not found": "未找到模板",
     "Test not found": "未找到测试",
     "That email is already invited": "该邮箱已被邀请",

@@ -117,7 +117,7 @@ MESSAGES = {
     "Round not found": "סבב התרגול לא נמצא",
     "Session not found": "הסשן לא נמצא",
     "Set not found": "מאגר השאלות לא נמצא",
-    "Sign in with a verified email": "התחברו עם אימייל מאומת",
+    "Confirm your email first: open the link we sent you, then try again.": "יש לאשר קודם את כתובת האימייל: לפתוח את הקישור ששלחנו ואז לנסות שוב.",
     "Template not found": "התבנית לא נמצאה",
     "Test not found": "המבחן לא נמצא",
     "That email is already invited": "האימייל הזה כבר הוזמן",

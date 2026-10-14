@@ -117,7 +117,7 @@ MESSAGES = {
     "Round not found": "Session d'entraînement introuvable",
     "Session not found": "Session introuvable",
     "Set not found": "Série de questions introuvable",
-    "Sign in with a verified email": "Connectez-vous avec une adresse e-mail vérifiée",
+    "Confirm your email first: open the link we sent you, then try again.": "Confirmez d'abord votre adresse e-mail : ouvrez le lien que nous vous avons envoyé, puis réessayez.",
     "Template not found": "Modèle introuvable",
     "Test not found": "Test introuvable",
     "That email is already invited": "Cette adresse e-mail est déjà invitée",

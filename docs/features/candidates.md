@@ -80,6 +80,7 @@ The shareable link (`/apply/{token}`) is one link per interview, for a job ad. O
 
 ## Taking an interview
 
+- Only the invited email, verified, can start; for a shareable link, any verified email. A sign-in that doesn't verify the email (GitHub) is told to confirm it first, with the link sent when they signed in, not that the invite was for another address. Starting reads the account again, so an email confirmed meanwhile (in another tab) counts without signing in again.
 - Each candidate gets a random subset of each topic, with their own question order and option order.
 - The interview is a single pass.
 - A candidate can change their pick until they press Next question, finish the interview, or the question's time runs out. The pick is sent then, and it's final.

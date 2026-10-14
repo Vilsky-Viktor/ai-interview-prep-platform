@@ -117,7 +117,7 @@ MESSAGES = {
     "Round not found": "ไม่พบรอบฝึกซ้อม",
     "Session not found": "ไม่พบเซสชัน",
     "Set not found": "ไม่พบชุดคำถาม",
-    "Sign in with a verified email": "ลงชื่อเข้าใช้ด้วยอีเมลที่ยืนยันแล้ว",
+    "Confirm your email first: open the link we sent you, then try again.": "โปรดยืนยันอีเมลของคุณก่อน: เปิดลิงก์ที่เราส่งให้ แล้วลองอีกครั้ง",
     "Template not found": "ไม่พบเทมเพลต",
     "Test not found": "ไม่พบแบบทดสอบ",
     "That email is already invited": "อีเมลนี้ได้รับคำเชิญแล้ว",

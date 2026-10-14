@@ -117,7 +117,7 @@ MESSAGES = {
     "Round not found": "دور تمرینی پیدا نشد",
     "Session not found": "جلسه پیدا نشد",
     "Set not found": "مجموعهٔ پرسش‌ها پیدا نشد",
-    "Sign in with a verified email": "با ایمیل تأییدشده وارد شوید",
+    "Confirm your email first: open the link we sent you, then try again.": "اول ایمیلتان را تأیید کنید: پیوندی را که برایتان فرستادیم باز کنید و دوباره امتحان کنید.",
     "Template not found": "قالب پیدا نشد",
     "Test not found": "آزمون پیدا نشد",
     "That email is already invited": "این ایمیل قبلاً دعوت شده است",

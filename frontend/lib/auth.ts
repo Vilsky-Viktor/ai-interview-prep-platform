@@ -109,6 +109,22 @@ export async function signIn(name: SignInProvider): Promise<SignInResult> {
   }
 }
 
+/** An email verified since signing in (the link sent then, opened in another tab) counts at once:
+ * the account is read again and, once verified, a new token says so. */
+export async function refreshVerification() {
+  const user = (await firebaseAuth()).currentUser
+
+  if (!user || user.emailVerified) {
+    return
+  }
+
+  await user.reload().catch(() => {})
+
+  if (user.emailVerified) {
+    await user.getIdToken(true).catch(() => {})
+  }
+}
+
 export async function signOut() {
   const [auth, { signOut }] = await Promise.all([
     firebaseAuth(),

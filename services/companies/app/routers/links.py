@@ -10,6 +10,7 @@ from prepza_common.pause import refuse_if_paused
 from prepza_common.rate_limit import hit
 
 from app.constants.invites import (
+    EMAIL_NOT_VERIFIED,
     LINK_CLOSED,
     LINK_STARTS_PER_HOUR,
     LINK_STARTS_PER_IP_HOUR,
@@ -93,7 +94,7 @@ async def start_link(token: str, user: CurrentUser, request: Request) -> InviteS
     interview = await linked_interview(token)
 
     if not user.email_verified:
-        raise HTTPException(status.HTTP_403_FORBIDDEN, "Sign in with a verified email")
+        raise HTTPException(status.HTTP_403_FORBIDDEN, EMAIL_NOT_VERIFIED)
 
     current, stored = await invites.held(interview.id, user.email)
     key = stored if current else new_hold_key(interview.id)

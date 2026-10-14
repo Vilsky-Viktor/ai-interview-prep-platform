@@ -117,7 +117,7 @@ MESSAGES = {
     "Round not found": "Simulazione non trovata",
     "Session not found": "Sessione non trovata",
     "Set not found": "Set di domande non trovato",
-    "Sign in with a verified email": "Accedi con un'email verificata",
+    "Confirm your email first: open the link we sent you, then try again.": "Conferma prima la tua email: apri il link che ti abbiamo inviato, poi riprova.",
     "Template not found": "Modello non trovato",
     "Test not found": "Test non trovato",
     "That email is already invited": "Questa email è già stata invitata",

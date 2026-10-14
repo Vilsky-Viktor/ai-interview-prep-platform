@@ -117,7 +117,7 @@ MESSAGES = {
     "Round not found": "Ronde niet gevonden",
     "Session not found": "Sessie niet gevonden",
     "Set not found": "Vragenset niet gevonden",
-    "Sign in with a verified email": "Log in met een geverifieerd e-mailadres",
+    "Confirm your email first: open the link we sent you, then try again.": "Bevestig eerst je e-mailadres: open de link die we je hebben gestuurd en probeer het opnieuw.",
     "Template not found": "Sjabloon niet gevonden",
     "Test not found": "Test niet gevonden",
     "That email is already invited": "Dat e-mailadres is al uitgenodigd",

@@ -12,6 +12,7 @@ import { useSignIn } from "@/components/sign-in-dialog"
 import { Button } from "@/components/ui/button"
 import { WarningCard } from "@/components/warning-card"
 import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
+import { refreshVerification } from "@/lib/auth"
 import { useLinkData } from "@/hooks/use-link-data"
 import type { InviteView as Invite, SessionSummary } from "@/types/company"
 
@@ -36,6 +37,7 @@ export function InviteView({ token }: { token: string }) {
 
   async function start() {
     setStarting(true)
+    await refreshVerification()
 
     try {
       const result = await apiFetch<{ sessions: SessionSummary[] }>(
@@ -55,12 +57,11 @@ export function InviteView({ token }: { token: string }) {
 
       setStarting(false)
     } catch (error) {
-      const forbidden = error instanceof ApiError && error.status === 403
-      // The API's own message, such as the pause's, before the generic one.
+      // Another email, or theirs not confirmed yet, or the pause: the API says which.
+      const refused =
+        error instanceof ApiError && [403, 409].includes(error.status)
       toast.error(
-        forbidden
-          ? share("wrongEmail")
-          : apiErrorMessage(error, session("startFailed"))
+        refused ? error.message : apiErrorMessage(error, session("startFailed"))
       )
       setStarting(false)
     }

@@ -117,7 +117,7 @@ MESSAGES = {
     "Round not found": "연습을 찾을 수 없습니다",
     "Session not found": "세션을 찾을 수 없습니다",
     "Set not found": "문제 세트를 찾을 수 없습니다",
-    "Sign in with a verified email": "인증된 이메일로 로그인해 주세요",
+    "Confirm your email first: open the link we sent you, then try again.": "먼저 이메일을 인증하세요. 보내 드린 링크를 연 다음 다시 시도하세요.",
     "Template not found": "템플릿을 찾을 수 없습니다",
     "Test not found": "테스트를 찾을 수 없습니다",
     "That email is already invited": "이미 초대된 이메일입니다",

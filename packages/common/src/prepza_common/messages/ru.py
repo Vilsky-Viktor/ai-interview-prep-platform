@@ -117,7 +117,7 @@ MESSAGES = {
     "Round not found": "Тренировка не найдена",
     "Session not found": "Сессия не найдена",
     "Set not found": "Набор вопросов не найден",
-    "Sign in with a verified email": "Войдите с подтверждённой почтой",
+    "Confirm your email first: open the link we sent you, then try again.": "Сначала подтвердите адрес почты: откройте ссылку из нашего письма и попробуйте снова.",
     "Template not found": "Шаблон не найден",
     "Test not found": "Тест не найден",
     "That email is already invited": "Эта почта уже приглашена",

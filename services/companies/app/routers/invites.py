@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser, OptionalUser
 from prepza_common.pause import refuse_if_paused
 
-from app.constants.invites import InviteStatus
+from app.constants.invites import EMAIL_NOT_VERIFIED, InviteStatus
 from app.helpers.candidates import candidate_seconds
 from app.helpers.interviews import attach_set, interview_title
 from app.helpers.logos import logo_path
@@ -53,7 +53,10 @@ async def start_invite(token: str, user: CurrentUser) -> InviteStartOut:
 
     invite, interview = found
 
-    if not user.email_verified or user.email.lower() != invite.email:
+    if not user.email_verified:
+        raise HTTPException(status.HTTP_403_FORBIDDEN, EMAIL_NOT_VERIFIED)
+
+    if user.email.lower() != invite.email:
         raise HTTPException(
             status.HTTP_403_FORBIDDEN, "This invite was sent to a different email address"
         )

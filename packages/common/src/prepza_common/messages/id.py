@@ -117,7 +117,7 @@ MESSAGES = {
     "Round not found": "Sesi latihan tidak ditemukan",
     "Session not found": "Sesi tidak ditemukan",
     "Set not found": "Kumpulan soal tidak ditemukan",
-    "Sign in with a verified email": "Masuk dengan email yang terverifikasi",
+    "Confirm your email first: open the link we sent you, then try again.": "Konfirmasi emailmu dulu: buka tautan yang kami kirim, lalu coba lagi.",
     "Template not found": "Templat tidak ditemukan",
     "Test not found": "Tes tidak ditemukan",
     "That email is already invited": "Email itu sudah diundang",

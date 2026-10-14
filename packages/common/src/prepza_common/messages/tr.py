@@ -117,7 +117,7 @@ MESSAGES = {
     "Round not found": "Deneme bulunamadı",
     "Session not found": "Oturum bulunamadı",
     "Set not found": "Soru seti bulunamadı",
-    "Sign in with a verified email": "Doğrulanmış bir e-postayla giriş yapın",
+    "Confirm your email first: open the link we sent you, then try again.": "Önce e-postanızı doğrulayın: size gönderdiğimiz bağlantıyı açın, sonra tekrar deneyin.",
     "Template not found": "Şablon bulunamadı",
     "Test not found": "Test bulunamadı",
     "That email is already invited": "Bu e-posta zaten davet edildi",
