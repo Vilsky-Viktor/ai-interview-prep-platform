@@ -7,7 +7,7 @@ WELCOME_COMPANY = 3 * CANDIDATE_CREDITS
 LOW_BALANCE = CANDIDATE_CREDITS
 # Both sides get it once the new company first tops up, any amount; a referrer is rewarded for at
 # most REFERRALS_PER_YEAR.
-REFERRAL_REWARD = 500
+REFERRAL_REWARD = 1000
 REFERRALS_PER_YEAR = 25
 REFERRAL_CODE_BYTES = 6
 
