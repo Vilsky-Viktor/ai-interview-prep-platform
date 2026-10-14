@@ -34,8 +34,10 @@ don't need, rename a topic, edit its subtopics, or describe bigger changes in pl
 confirm, and the questions are written.
 - Every topic gets its own bank of multiple-choice questions, each with one correct option and \
 three plausible wrong ones. Set how many questions each topic asks a candidate (10 by default).
-- Generating tests is free: up to {interviews_per_day} a day per company, as long as at most \
-{waiting_interviews} of its tests have no candidate invited yet.
+- Generating tests is free: up to {interviews_per_day_unpaid} a day per company until its first \
+top-up ({interviews_per_day} after), as long as at most {waiting_interviews_unpaid} generated \
+test has no candidate invited yet ({waiting_interviews} after the first top-up). Tests copied \
+from templates don't count.
 
 Candidates:
 - Invite candidates by email, resend an invite, or revoke one not used yet. Or turn on the test's \

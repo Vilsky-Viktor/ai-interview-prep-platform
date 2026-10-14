@@ -3,8 +3,10 @@ from http import HTTPStatus
 
 from prepza_common.constants import (  # noqa: F401 (re-exported)
     INTERVIEWS_PER_DAY,
+    INTERVIEWS_PER_DAY_UNPAID,
     MAX_CANDIDATE_NAME_LENGTH,
     MAX_INTERVIEWS_WITHOUT_CANDIDATES,
+    MAX_INTERVIEWS_WITHOUT_CANDIDATES_UNPAID,
     MAX_OWNED_COMPANIES,
 )
 
@@ -102,9 +104,17 @@ TOO_MANY_COMPANIES = "You can own at most 3 companies."
 MAX_COMPANY_NAME_LENGTH = 45
 COMPANY_NAME_TAKEN = "A company with this name already exists."
 TOO_MANY_INTERVIEWS = "Your company can generate up to 10 interviews a day. Try again tomorrow."
+TOO_MANY_INTERVIEWS_UNPAID = (
+    "Until your first top-up, your company can generate up to 3 interviews a day (10 after). Try "
+    "again tomorrow."
+)
 TOO_MANY_WITHOUT_CANDIDATES = (
-    "Invite a candidate to one of your interviews before generating another: up to 3 interviews "
-    "can wait without candidates."
+    "Invite a candidate to one of your interviews, or delete one, before generating another: up "
+    "to 5 generated interviews can wait without candidates."
+)
+TOO_MANY_WITHOUT_CANDIDATES_UNPAID = (
+    "Invite a candidate to your interview, or delete it, before generating another: until your "
+    "first top-up, 1 generated interview can wait without candidates (5 after)."
 )
 # A shareable link whose company has no credits left for another candidate.
 LINK_CLOSED = "This interview isn't taking new candidates right now."

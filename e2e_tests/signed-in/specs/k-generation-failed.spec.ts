@@ -23,3 +23,26 @@ test("an interview whose generation failed says so", async ({ signInAs }) => {
   await expect(owner.getByRole("heading", { level: 1 })).toHaveText("Generation failed")
   await shot(owner, "page")
 })
+
+// Until its first top-up, a company has one generated interview waiting without candidates
+// before it generates another: the attempt says how to go on, and nothing is generated.
+test("an unpaid company with a generated interview waiting is asked to invite or delete it", async ({
+  signInAs,
+}) => {
+  const owner = await signInAs(throwawayEmail("waiting-limit"))
+  const company = await createCompany(owner)
+  const interviewId = await createInterview(owner, company.id)
+  await failGeneration(interviewId, company.id)
+
+  await visit(owner, `/companies/${company.id}/interviews/new`)
+  await owner
+    .getByRole("textbox", { name: "Job description" })
+    .fill("Senior accountant: month-end close, IFRS reporting and audits.")
+  await owner.getByRole("button", { name: "Generate interview" }).click()
+  await expect(
+    owner.getByText(
+      "Invite a candidate to your interview, or delete it, before generating another: until your first top-up, 1 generated interview can wait without candidates (5 after)."
+    )
+  ).toBeVisible()
+  await shot(owner, "waiting-limit")
+})

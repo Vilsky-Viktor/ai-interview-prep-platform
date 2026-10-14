@@ -25,7 +25,7 @@ Companies pay per candidate from a wallet of credits. There's no paid subscripti
 - A person's first company gets 900 credits, enough for 3 candidates.
 - The welcome gift is given once per inbox: case, a `+tag` and Gmail's dots don't make a new one (`app/helpers/gifts.py` in billing).
 
-A company can have at most 3 interviews waiting without a candidate before it generates another, and generates at most 10 a day.
+Until its first top-up, a company can have 1 generated interview waiting without a candidate before it generates another, and generates at most 3 a day; after it, 5 waiting and 10 a day. Interviews copied from templates don't count, and retrying a failed generation isn't a new one.
 
 ## Top-ups
 

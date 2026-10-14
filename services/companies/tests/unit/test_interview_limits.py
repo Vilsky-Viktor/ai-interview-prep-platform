@@ -6,7 +6,14 @@ from prepza_common.auth import current_user
 from prepza_common.translations import TRANSLATIONS
 from prepza_common.user import User
 
-from app.constants.invites import TOO_MANY_WITHOUT_CANDIDATES
+from app.constants.invites import (
+    INTERVIEWS_PER_DAY,
+    INTERVIEWS_PER_DAY_UNPAID,
+    TOO_MANY_INTERVIEWS,
+    TOO_MANY_INTERVIEWS_UNPAID,
+    TOO_MANY_WITHOUT_CANDIDATES,
+    TOO_MANY_WITHOUT_CANDIDATES_UNPAID,
+)
 from app.main import app
 from app.routers import interviews as route
 from app.storage import interviews
@@ -32,16 +39,17 @@ def signed_in_manager(monkeypatch):
     app.dependency_overrides.clear()
 
 
-def generate(client, monkeypatch, waiting):
-    """Asks for a new interview while `waiting` interviews have no candidate; returns the response
-    and whether the day's counter and generation were reached."""
+def generate(client, monkeypatch, waiting, paid=False):
+    """Asks for a new interview while `waiting` generated interviews have no candidate, for a
+    company that topped up (`paid`) or not; returns the response and the day's limit and
+    generation it reached."""
     reached = []
 
     async def fake_waiting(company_id):
         return waiting
 
-    async def fake_hit(*args):
-        reached.append("day limit")
+    async def fake_hit(redis, key, limit, window, message):
+        reached.append(("day limit", limit, message))
 
     async def fake_generation(*args):
         reached.append(("generation", args[-1]))
@@ -49,7 +57,7 @@ def generate(client, monkeypatch, waiting):
         return {"id": str(uuid.uuid4()), "language": "en"}
 
     async def fake_paid(company_id):
-        return False
+        return paid
 
     async def fake_create(company_id, generation_id, language):
         return SimpleNamespace(id=uuid.uuid4())
@@ -83,22 +91,43 @@ def generate(client, monkeypatch, waiting):
     return response, reached
 
 
-def test_three_interviews_waiting_without_candidates_stop_a_new_one(client, monkeypatch):
-    response, reached = generate(client, monkeypatch, waiting=3)
+def test_an_unpaid_company_generates_another_only_once_its_one_waiting_has_a_candidate(
+    client, monkeypatch
+):
+    response, reached = generate(client, monkeypatch, waiting=1)
 
     assert response.status_code == 429
-    assert response.json()["detail"] == TOO_MANY_WITHOUT_CANDIDATES
-    # Refused before the day's limit, so the attempt doesn't use one of the 10.
+    assert response.json()["detail"] == TOO_MANY_WITHOUT_CANDIDATES_UNPAID
+    # Refused before the day's limit, so the attempt doesn't use one of the day's.
     assert reached == []
 
 
-def test_fewer_waiting_interviews_let_a_new_one_be_generated(client, monkeypatch):
-    _, reached = generate(client, monkeypatch, waiting=2)
+def test_a_paid_company_can_have_five_waiting(client, monkeypatch):
+    allowed, _ = generate(client, monkeypatch, waiting=4, paid=True)
+    refused, _ = generate(client, monkeypatch, waiting=5, paid=True)
+
+    assert allowed.status_code == 201
+    assert refused.status_code == 429
+    assert refused.json()["detail"] == TOO_MANY_WITHOUT_CANDIDATES
+
+
+def test_the_days_limit_is_three_until_the_first_top_up_and_ten_after(client, monkeypatch):
+    _, unpaid = generate(client, monkeypatch, waiting=0)
+    _, paid = generate(client, monkeypatch, waiting=0, paid=True)
 
     # An unpaid company's generation is sent as such, so the daily limit for everyone applies.
-    assert reached == ["day limit", ("generation", False)]
+    assert unpaid == [
+        ("day limit", INTERVIEWS_PER_DAY_UNPAID, TOO_MANY_INTERVIEWS_UNPAID),
+        ("generation", False),
+    ]
+    assert paid == [("day limit", INTERVIEWS_PER_DAY, TOO_MANY_INTERVIEWS), ("generation", True)]
 
 
-def test_the_waiting_limit_message_has_translations():
+def test_the_limit_messages_have_translations():
     for language in TRANSLATIONS.values():
-        assert TOO_MANY_WITHOUT_CANDIDATES in language
+        for message in (
+            TOO_MANY_WITHOUT_CANDIDATES,
+            TOO_MANY_WITHOUT_CANDIDATES_UNPAID,
+            TOO_MANY_INTERVIEWS_UNPAID,
+        ):
+            assert message in language

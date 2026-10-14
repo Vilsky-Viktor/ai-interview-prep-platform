@@ -4,8 +4,10 @@ from prepza_common.constants import (
     CREDITS_PER_DOLLAR,
     DEFAULT_QUESTION_SECONDS,
     INTERVIEWS_PER_DAY,
+    INTERVIEWS_PER_DAY_UNPAID,
     LANGUAGES,
     MAX_INTERVIEWS_WITHOUT_CANDIDATES,
+    MAX_INTERVIEWS_WITHOUT_CANDIDATES_UNPAID,
     MAX_OWNED_COMPANIES,
 )
 
@@ -23,7 +25,9 @@ def guide() -> str:
     return PLATFORM_GUIDE.format(
         max_companies=MAX_OWNED_COMPANIES,
         interviews_per_day=INTERVIEWS_PER_DAY,
+        interviews_per_day_unpaid=INTERVIEWS_PER_DAY_UNPAID,
         waiting_interviews=MAX_INTERVIEWS_WITHOUT_CANDIDATES,
+        waiting_interviews_unpaid=MAX_INTERVIEWS_WITHOUT_CANDIDATES_UNPAID,
         question_seconds=DEFAULT_QUESTION_SECONDS,
         language_count=len(LANGUAGES),
         languages=", ".join(LANGUAGES.values()),

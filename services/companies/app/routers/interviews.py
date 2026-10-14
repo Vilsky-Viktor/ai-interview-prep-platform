@@ -12,9 +12,13 @@ from prepza_common.rate_limit import hit
 from app.constants.audit import AuditAction
 from app.constants.invites import (
     INTERVIEWS_PER_DAY,
+    INTERVIEWS_PER_DAY_UNPAID,
     MAX_INTERVIEWS_WITHOUT_CANDIDATES,
+    MAX_INTERVIEWS_WITHOUT_CANDIDATES_UNPAID,
     TOO_MANY_INTERVIEWS,
+    TOO_MANY_INTERVIEWS_UNPAID,
     TOO_MANY_WITHOUT_CANDIDATES,
+    TOO_MANY_WITHOUT_CANDIDATES_UNPAID,
 )
 from app.helpers.interviews import (
     attach_set,
@@ -50,8 +54,14 @@ async def create_interview(
     await refuse_if_paused(get_redis())
     company, _ = await require_editor(user, company_id)
 
+    # A company that ever topped up gets more (the costs are covered by its candidates).
+    paid = await billing.company_paid(company.id)
+    waiting = (
+        MAX_INTERVIEWS_WITHOUT_CANDIDATES if paid else MAX_INTERVIEWS_WITHOUT_CANDIDATES_UNPAID
+    )
+
     # Checked first, so a refused attempt doesn't count towards the day's limit.
-    if await interviews.without_candidates(company.id) >= MAX_INTERVIEWS_WITHOUT_CANDIDATES:
+    if await interviews.without_candidates(company.id) >= waiting:
         await track(
             "limit_hit",
             user_id=user.uid,
@@ -59,15 +69,18 @@ async def create_interview(
             which="interviews_without_candidates",
         )
 
-        raise HTTPException(status.HTTP_429_TOO_MANY_REQUESTS, TOO_MANY_WITHOUT_CANDIDATES)
+        raise HTTPException(
+            status.HTTP_429_TOO_MANY_REQUESTS,
+            TOO_MANY_WITHOUT_CANDIDATES if paid else TOO_MANY_WITHOUT_CANDIDATES_UNPAID,
+        )
 
     try:
         await hit(
             get_redis(),
             f"rate:interviews:{company.id}",
-            INTERVIEWS_PER_DAY,
+            INTERVIEWS_PER_DAY if paid else INTERVIEWS_PER_DAY_UNPAID,
             DAY_SECONDS,
-            TOO_MANY_INTERVIEWS,
+            TOO_MANY_INTERVIEWS if paid else TOO_MANY_INTERVIEWS_UNPAID,
         )
     except HTTPException:
         await track("limit_hit", user_id=user.uid, company_id=company.id, which="interviews_a_day")
@@ -80,7 +93,7 @@ async def create_interview(
             user.uid,
             user.language,
             body.generate_in,
-            await billing.company_paid(company.id),
+            paid,
         )
     except httpx.HTTPStatusError as error:
         if error.response.status_code == status.HTTP_429_TOO_MANY_REQUESTS:

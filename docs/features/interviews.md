@@ -11,7 +11,7 @@ There are two ways to start:
 
 For each topic, set how many questions it asks each candidate: 10 by default, drawn from the topic's 70.
 
-Generating an interview is free. A company can have at most 3 interviews waiting without a candidate before it generates another, and generates at most 10 a day (see [Credits and payments](billing.md)).
+Generating an interview is free. Until its first top-up, a company can have 1 generated interview waiting without a candidate before it generates another, and generates at most 3 a day; after it, 5 waiting and 10 a day. Interviews copied from templates don't count, and retrying a failed generation isn't a new one (see [Credits and payments](billing.md)).
 
 ### Reviewing the topics
 

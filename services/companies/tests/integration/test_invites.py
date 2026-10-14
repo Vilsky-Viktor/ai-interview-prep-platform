@@ -90,6 +90,7 @@ def test_only_interviews_without_a_candidate_count_as_waiting(run):
         company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
         first = await interviews.create(company.id, uuid.uuid4(), "en")
         await interviews.create(company.id, uuid.uuid4(), "en")
+        await interviews.create_from_template(company.id, uuid.uuid4(), "Copied", "en")
         before = await interviews.without_candidates(company.id)
         invite, _ = await invites.upsert(first.id, "dan@example.com", "Backend", "Acme", "en")
         invited = await interviews.without_candidates(company.id)
@@ -98,7 +99,8 @@ def test_only_interviews_without_a_candidate_count_as_waiting(run):
 
         return before, invited, revoked
 
-    # Two waiting; an invite takes one out; revoking the invite puts it back.
+    # Two generated waiting (a template's copy costs nothing and doesn't count); an invite takes
+    # one out; revoking the invite puts it back.
     assert run(scenario()) == (2, 1, 2)
 
 

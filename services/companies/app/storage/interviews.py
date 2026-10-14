@@ -85,12 +85,17 @@ async def counts(company_ids: list) -> dict:
 
 
 async def without_candidates(company_id) -> int:
-    """The company's interviews no candidate is invited to (yet, or any more)."""
+    """The company's generated interviews no candidate is invited to (yet, or any more); copies
+    of templates cost nothing and aren't counted."""
     invited = select(CandidateInvite.id).where(CandidateInvite.interview_id == Interview.id)
     query = (
         select(func.count())
         .select_from(Interview)
-        .where(Interview.company_id == company_id, ~invited.exists())
+        .where(
+            Interview.company_id == company_id,
+            Interview.generation_id.is_not(None),
+            ~invited.exists(),
+        )
     )
 
     async with Session() as session:

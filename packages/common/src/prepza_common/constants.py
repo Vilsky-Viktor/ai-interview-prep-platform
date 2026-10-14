@@ -119,13 +119,17 @@ LANGUAGE_CLAIM = "language"
 # Limits a service enforces and the help chat explains, so both read the same numbers.
 # Companies one person may own; the welcome credits come with the first one only (companies).
 MAX_OWNED_COMPANIES = 3
-# Interviews are free to generate, so each company may start this many a day (companies).
+# Interviews are free to generate, so each company may start this many a day (companies); fewer
+# until its first top-up (billing's "paid").
 INTERVIEWS_PER_DAY = 10
+INTERVIEWS_PER_DAY_UNPAID = 3
 # $1 buys this many credits (billing sells them; the FAQ shows prices in dollars too).
 CREDITS_PER_DOLLAR = 100
 # Generating an interview is free and paid for by its candidates: a company can have only this many
-# interviews waiting without one before it generates another.
-MAX_INTERVIEWS_WITHOUT_CANDIDATES = 3
+# generated interviews waiting without one before it generates another; fewer until its first
+# top-up. Interviews copied from templates cost nothing and don't count.
+MAX_INTERVIEWS_WITHOUT_CANDIDATES = 5
+MAX_INTERVIEWS_WITHOUT_CANDIDATES_UNPAID = 1
 # Seconds each timed interview question starts with; an admin can change it (companies).
 DEFAULT_QUESTION_SECONDS = 60
 
