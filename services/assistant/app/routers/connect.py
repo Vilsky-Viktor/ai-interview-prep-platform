@@ -1,8 +1,9 @@
 from uuid import UUID
 
-from fastapi import APIRouter, status
+from fastapi import APIRouter, Request, status
 from prepza_common.auth import CurrentUser
 
+from app.constants.mcp import CONNECT_COOKIE
 from app.schemas.connect import ConnectionOut, ConnectRequestOut, RedirectOut
 from app.services import connections
 
@@ -17,9 +18,12 @@ async def connect_request(request_id: str, user: CurrentUser) -> ConnectRequestO
 
 
 @router.post("/connect/{request_id}/approve")
-async def approve(request_id: str, user: CurrentUser) -> RedirectOut:
-    """The user allows the app to use prepza as them: back to the app with a single-use code."""
-    return RedirectOut(redirect_url=await connections.approve(request_id, user))
+async def approve(request_id: str, user: CurrentUser, request: Request) -> RedirectOut:
+    """The user allows the app to use prepza as them: back to the app with a single-use code.
+    Only from the browser that asked to connect (its cookie); a 403 from any other."""
+    marked = request.cookies.get(CONNECT_COOKIE)
+
+    return RedirectOut(redirect_url=await connections.approve(request_id, user, marked))
 
 
 @router.post("/connect/{request_id}/deny")

@@ -50,6 +50,14 @@ FUNNEL_CLIENTS = {"Claude": "claude", "ChatGPT": "chatgpt"}
 # A request to connect once it's answered or expired, and a connection that isn't the user's:
 # the consent page and the connections list say what it means.
 NOT_FOUND = "Not found"
+# The browser that asked to connect (its /authorize answer sets this cookie, with the request's
+# id, for the consent page's calls only): only it can allow the request, so a consent link
+# someone else started and sent can't connect their app to this account.
+CONNECT_COOKIE = "prepza_connect"
+CONNECT_COOKIE_PATH = "/api/assistant/connect"
+OTHER_BROWSER = (
+    "This request was started in another browser. Start connecting again from your AI app."
+)
 
 # Tools an app never gets: deleting the account or a company (with its paid credits) is done in
 # the app only. The panel's own tools (show, sign_out) aren't tools of the registry at all.

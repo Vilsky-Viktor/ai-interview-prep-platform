@@ -9,6 +9,7 @@ from prepza_common.auth import current_user
 from prepza_common.tokens import hashed
 from prepza_common.user import User
 
+from app.constants.mcp import CONNECT_COOKIE, OTHER_BROWSER
 from app.helpers.mcp_clients import describe_client
 from app.main import app
 from app.services import connections
@@ -93,6 +94,8 @@ def test_the_consent_page_reads_what_the_app_asks(client, kept):
 
 
 def test_allowing_gives_the_app_a_code_bound_to_the_user_once(client, kept):
+    # The browser that asked to connect (its /authorize answer marked it).
+    client.cookies.set(CONNECT_COOKIE, "r1")
     response = client.post("/connect/r1/approve")
 
     url = urlparse(response.json()["redirect_url"])
@@ -105,6 +108,23 @@ def test_allowing_gives_the_app_a_code_bound_to_the_user_once(client, kept):
     # The request is answered: a second answer finds nothing.
     assert client.post("/connect/r1/approve").status_code == 404
     assert client.post("/connect/r1/deny").status_code == 404
+
+
+@pytest.mark.parametrize("marked", [None, "another-request"])
+def test_a_consent_link_opened_in_another_browser_connects_nothing(client, kept, marked):
+    """Someone started connecting their own app and sent the link: allowing it is refused, and
+    the request stays for the browser that started it."""
+    client.cookies.clear()
+
+    if marked:
+        client.cookies.set(CONNECT_COOKIE, marked)
+
+    response = client.post("/connect/r1/approve")
+
+    assert response.status_code == 403
+    assert response.json()["detail"] == OTHER_BROWSER
+    assert kept.codes == {}
+    assert client.get("/connect/r1").status_code == 200
 
 
 def test_denying_tells_the_app_and_gives_no_code(client, kept):

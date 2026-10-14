@@ -1,6 +1,7 @@
 # Messages the services show users, in Portuguese, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This request was started in another browser. Start connecting again from your AI app.": "Esta solicitação foi iniciada em outro navegador. Comece a conexão de novo pelo seu app de IA.",
     "Too many invites waiting. Remove some, or wait for them to join.": "Muitos convites aguardando. Remova alguns ou espere que as pessoas entrem.",
     "Only the person whose card pays for it can change it. Turn it off, then turn it on with your own card.": "Só quem paga com o próprio cartão pode alterá-la. Desative e depois ative de novo com o seu cartão.",
     "The request is too large.": "A solicitação é grande demais.",

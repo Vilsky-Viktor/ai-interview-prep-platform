@@ -10,7 +10,7 @@ from prepza_common.tokens import new_token
 from prepza_common.user import User
 
 from app.constants.limits import APPROVALS_PER_USER_HOUR
-from app.constants.mcp import CODE_BYTES, CODE_SECONDS, NOT_FOUND
+from app.constants.mcp import CODE_BYTES, CODE_SECONDS, NOT_FOUND, OTHER_BROWSER
 from app.integrations.redis import get_redis
 from app.models.oauth import McpGrant
 from app.storage import oauth, oauth_requests
@@ -27,9 +27,14 @@ async def describe(request_id: str) -> dict:
     return {key: found[key] for key in ("client_name", "redirect_host", "known_client")}
 
 
-async def approve(request_id: str, user: User) -> str:
+async def approve(request_id: str, user: User, marked: str | None) -> str:
     """The user allows the app: a single-use code bound to them, which the app exchanges for
-    its tokens. Where the browser goes next: back to the app, with the code."""
+    its tokens. Where the browser goes next: back to the app, with the code. Only from the
+    browser that asked (`marked`, its connect cookie): a link someone else started is refused,
+    and the request stays for its own browser."""
+    if marked != request_id:
+        raise HTTPException(status.HTTP_403_FORBIDDEN, OTHER_BROWSER)
+
     await hit(
         get_redis(), f"rate:assistant:mcp:approve:{user.uid}", APPROVALS_PER_USER_HOUR, HOUR_SECONDS
     )

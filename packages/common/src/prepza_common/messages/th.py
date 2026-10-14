@@ -1,6 +1,7 @@
 # Messages the services show users, in Thai, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This request was started in another browser. Start connecting again from your AI app.": "คำขอนี้เริ่มในเบราว์เซอร์อื่น โปรดเริ่มเชื่อมต่อใหม่จากแอป AI ของคุณ",
     "Too many invites waiting. Remove some, or wait for them to join.": "มีคำเชิญที่รออยู่มากเกินไป ลบบางรายการ หรือรอให้เข้าร่วมก่อน",
     "Only the person whose card pays for it can change it. Turn it off, then turn it on with your own card.": "เฉพาะผู้ที่ใช้บัตรของตนชำระเท่านั้นที่เปลี่ยนได้ ปิดก่อน แล้วเปิดใหม่ด้วยบัตรของคุณเอง",
     "The request is too large.": "คำขอมีขนาดใหญ่เกินไป",

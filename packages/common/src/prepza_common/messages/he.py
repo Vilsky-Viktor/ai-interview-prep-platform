@@ -1,6 +1,7 @@
 # Messages the services show users, in Hebrew, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This request was started in another browser. Start connecting again from your AI app.": "הבקשה הזו התחילה בדפדפן אחר. יש להתחיל את החיבור מחדש מאפליקציית ה-AI.",
     "Too many invites waiting. Remove some, or wait for them to join.": "יותר מדי הזמנות ממתינות. הסירו חלק, או חכו שיצטרפו.",
     "Only the person whose card pays for it can change it. Turn it off, then turn it on with your own card.": "רק מי שהכרטיס שלו משלם יכול לשנות זאת. כבו את זה, ואז הפעילו עם הכרטיס שלכם.",
     "The request is too large.": "הבקשה גדולה מדי.",

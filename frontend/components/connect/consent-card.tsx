@@ -6,7 +6,7 @@ import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
 import { WarningCard } from "@/components/warning-card"
-import { apiErrorMessage, apiFetch } from "@/lib/api"
+import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
 import type { ConnectAnswer, ConnectRequest } from "@/types/connections"
 
 /** Asks the signed-in user whether an AI app may use their account: who asks, what it can and
@@ -36,7 +36,11 @@ export function ConsentCard({
       )
       window.location.assign(redirect_url)
     } catch (error) {
-      toast.error(apiErrorMessage(error, common("failed")))
+      // Started in another browser: the API says to start again from the app.
+      const refused = error instanceof ApiError && error.status === 403
+      toast.error(
+        refused ? error.message : apiErrorMessage(error, common("failed"))
+      )
       setBusy(false)
     }
   }

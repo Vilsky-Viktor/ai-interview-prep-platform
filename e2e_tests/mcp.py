@@ -126,7 +126,13 @@ def connect(id_token: str, client_name: str) -> tuple[str, dict]:
         status == 302 and location.startswith(f"{SITE}/connect?request="), f"authorize -> {status}"
     )
     request_id = location.split("request=", 1)[1]
+    # The browser that asked is marked; only it may allow the request.
+    marked = headers.get("Set-Cookie", "").split(";", 1)[0]
+    check(marked == f"prepza_connect={request_id}", f"authorize marks the browser: {marked}")
     auth = {"Authorization": f"Bearer {id_token}"}
+    status, _, _ = send("POST", f"{SITE}/api/assistant/connect/{request_id}/approve", headers=auth)
+    check(status == 403, f"allowing from another browser -> {status}")
+    auth = {**auth, "Cookie": marked}
     status, _, shown = send("GET", f"{SITE}/api/assistant/connect/{request_id}", headers=auth)
     check(status == 200 and shown["redirect_host"] == "127.0.0.1", f"consent -> {status} {shown}")
     check(shown["client_name"] == client_name and shown["known_client"], f"consent shows {shown}")

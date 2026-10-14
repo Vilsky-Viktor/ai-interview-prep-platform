@@ -4,6 +4,7 @@ from fastapi import HTTPException
 from mcp.server.auth.handlers.metadata import MetadataHandler
 from mcp.server.auth.middleware.client_auth import AuthenticationError, ClientAuthenticator
 from mcp.server.auth.routes import (
+    AUTHORIZATION_PATH,
     REGISTRATION_PATH,
     REVOCATION_PATH,
     build_metadata,
@@ -22,6 +23,7 @@ from starlette.types import ASGIApp, Receive, Scope, Send
 
 from app.constants.limits import REGISTRATIONS_PER_DAY, REGISTRATIONS_PER_IP_HOUR
 from app.constants.mcp import MCP_SCOPE
+from app.helpers.connect_cookie import MarkBrowser
 from app.integrations.redis import get_redis
 from app.services.oauth_provider import Provider, auth_settings
 
@@ -110,6 +112,8 @@ def routes() -> list[Route]:
         elif route.path == REGISTRATION_PATH:
             limited = LimitedRegistrations(route.app)
             route = Route(route.path, endpoint=limited, methods=["POST", "OPTIONS"])
+        elif route.path == AUTHORIZATION_PATH:
+            route = Route(route.path, endpoint=MarkBrowser(route.app), methods=["GET", "POST"])
         elif route.path == REVOCATION_PATH:
             handler = cors_middleware(revoke, ["POST", "OPTIONS"])
             route = Route(route.path, endpoint=handler, methods=["POST", "OPTIONS"])
