@@ -141,3 +141,7 @@ WEBHOOKS = {
 PASTED_KEYS = {AtsProvider.TEAMTAILOR, AtsProvider.RECRUITEE}
 # A candidate's scorecard, linked in the results that go back to the ATS.
 SCORECARD_LINK = "{site}/companies/{company_id}/interviews/{interview_id}/candidates/{invite_id}"
+
+# The ATS clients' actions that write into the ATS (a candidate's results): one refused while
+# the key still reads means the key lacks write access, not that it was revoked.
+WRITES = {"comment"}

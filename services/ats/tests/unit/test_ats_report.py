@@ -159,14 +159,39 @@ def test_a_failing_ats_keeps_the_results_for_the_recovery_job_and_the_event_is_d
     assert [row_id for row_id, _ in state["kept"]] == [state["row"].id]
 
 
-def test_a_refused_key_marks_the_connection_broken_and_keeps_the_results(finished):
+def reads(monkeypatch, works: bool):
+    """Whether Workable still takes the key for reading, as asked after a refused write."""
+
+    async def check(**credentials):
+        if not works:
+            raise KeyRejected
+
+    monkeypatch.setattr(workable, "check", check)
+
+
+def test_a_refused_key_marks_the_connection_broken_and_keeps_the_results(finished, monkeypatch):
     state, _ = finished
     state["fail"] = KeyRejected()
+    reads(monkeypatch, works=False)
     report(state["row"].invite_id)
 
     assert len(state["broken"]) == 1
     assert state["reported"] == []
     # Sent once it's reconnected, by the recovery job.
+    assert state["kept"] == [(state["row"].id, result(state["row"].invite_id))]
+
+
+def test_a_key_that_reads_but_cannot_write_keeps_the_results_and_the_connection(
+    finished, monkeypatch
+):
+    """Without write access, not revoked: the connection keeps inviting candidates."""
+    state, _ = finished
+    state["fail"] = KeyRejected()
+    reads(monkeypatch, works=True)
+    report(state["row"].invite_id)
+
+    assert state["broken"] == []
+    assert state["reported"] == []
     assert state["kept"] == [(state["row"].id, result(state["row"].invite_id))]
 
 

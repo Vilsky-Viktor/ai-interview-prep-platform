@@ -6,10 +6,10 @@ from fastapi import HTTPException, status
 from prepza_common.encryption import decrypt, encrypt
 
 from app.config.settings import settings
-from app.constants.ats import ATS_NAMES, WORKABLE_WEBHOOK, AtsProvider
+from app.constants.ats import ATS_NAMES, WORKABLE_WEBHOOK, WRITES, AtsProvider
 from app.integrations import breezy, workable
 from app.integrations.ats_clients import client
-from app.integrations.errors import KeyRejected
+from app.integrations.errors import KeyRejected, WriteRefused
 from app.models.ats import AtsConnection
 from app.storage import ats
 
@@ -75,7 +75,9 @@ async def connected(company_id, provider: str) -> AtsConnection:
 
 async def call(connection: AtsConnection, action: str, **arguments):
     """One action of the connection's ATS client (integrations/ats_clients.py), with its
-    credentials; a refused key marks the connection broken."""
+    credentials; a refused key marks the connection broken. A refused write (WRITES) while the
+    key still reads is a key without write access: WriteRefused, and the connection keeps
+    inviting. An ATS doesn't always say which it is (Workable answers 401 to both)."""
     found = await credentials(connection)
     used = client(connection.provider)
     keys = {key: found[key] for key in used.KEYS}
@@ -83,7 +85,19 @@ async def call(connection: AtsConnection, action: str, **arguments):
     try:
         return await getattr(used, action)(**keys, **arguments)
     except KeyRejected:
+        if action in WRITES and await still_reads(used, keys):
+            raise WriteRefused from None
+
         await broken(connection)
+
+
+async def still_reads(used, keys: dict) -> bool:
+    try:
+        await used.check(**keys)
+    except KeyRejected:
+        return False
+
+    return True
 
 
 async def jobs(connection: AtsConnection) -> list[dict]:

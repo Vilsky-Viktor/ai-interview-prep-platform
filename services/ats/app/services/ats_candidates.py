@@ -22,6 +22,7 @@ from app.helpers.ats import (
 )
 from app.helpers.notifications import ats_not_invited
 from app.integrations import companies
+from app.integrations.errors import WriteRefused
 from app.models.ats import AtsCandidate, AtsConnection
 from app.services import ats as integrations
 from app.services import outbox as outbox_service
@@ -249,6 +250,13 @@ async def report(data: dict) -> None:
         # A refused key (the connection was marked broken) or a failing ATS: kept for the
         # recovery job.
         logger.warning("Kept the results of ATS candidate %s: %r", row.id, error)
+        await ats_results.keep(row.id, data)
+
+        return
+    except WriteRefused:
+        # The key reads but can't write: kept, and sent once the company reconnects with a key
+        # that can; the connection keeps inviting meanwhile.
+        logger.warning("Kept the results of ATS candidate %s: the key can't write", row.id)
         await ats_results.keep(row.id, data)
 
         return
