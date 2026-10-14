@@ -27,7 +27,14 @@ function Blocks({ blocks }: { blocks: Section["blocks"] }) {
   return (
     <div className="space-y-4">
       {blocks.map((block, index) =>
-        block.steps ? (
+        block.code !== undefined ? (
+          <pre
+            key={index}
+            className="overflow-x-auto rounded-2xl border bg-muted p-5 font-mono text-sm leading-relaxed"
+          >
+            <code>{block.code}</code>
+          </pre>
+        ) : block.steps ? (
           <ol key={index} className={`list-decimal space-y-2 ps-5 ${TEXT}`}>
             {block.steps.map((step, at) => (
               <li key={at}>

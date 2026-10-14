@@ -15,7 +15,43 @@ candidate's full results (`results_url`) and review them.
 
 Until a candidate finishes, they come with their invite link (`invite_url`), the same link the
 invite email carries. Send it to them yourself if the email didn't reach them; only the invited
-email can use it. It's null once they've finished or the invite has expired.
+email can use it, unless they were invited with `sign_in` false. It's null once they've finished
+or the invite has expired.
+
+## Sending candidates from your own platform
+
+When your platform already knows who the candidate is, invite them with `sign_in` false: prepza
+sends no emails, and the `invite_url` opens the interview without signing in to prepza. Anyone
+with that link can take the interview, so give it only to the candidate. Add a `return_url` on
+your company's website domain to bring them back once they've finished, or embed the interview
+in your own page instead.
+
+## Embedding the interview
+
+Your page can show the interview itself, for a candidate invited with `sign_in` false. Your
+server invites them and passes the `invite_url` to your page, which embeds it with prepza's
+script; never put your API key in a page. The page must be on your company's website domain (or
+a subdomain of it) as set in prepza, and served over HTTPS: anywhere else the interview isn't
+shown.
+
+```html
+<div id="interview"></div>
+<script src="https://prepza.ai/embed/v1.js"></script>
+<script>
+  const interview = Prepza.embed({
+    element: "#interview",
+    url: inviteUrl,
+    onReady: () => {},
+    onStart: () => {},
+    onFinish: ({ candidateId }) => {},
+  })
+</script>
+```
+
+The frame fits its height to the interview. `onFinish` gets the candidate's `id`, so your page
+can take them on; their results come with the `candidate.finished` web hook as usual.
+`interview.destroy()` removes the frame. While the interview runs, the candidate should stay on
+it: leaving it, including for the rest of your page, is recorded as a page leave.
 
 ## Getting an API key
 

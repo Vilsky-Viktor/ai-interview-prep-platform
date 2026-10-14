@@ -7292,6 +7292,17 @@
       "type": "boolean",
       "title": "Guest",
       "default": false
+     },
+     "embed_domain": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Embed Domain"
      }
     },
     "type": "object",

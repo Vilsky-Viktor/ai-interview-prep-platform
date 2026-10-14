@@ -1,3 +1,5 @@
+from types import SimpleNamespace
+
 import pytest
 from firebase_admin import auth as firebase_auth
 from prepza_common.auth import current_user
@@ -76,3 +78,25 @@ def test_only_the_guest_starts_a_guest_invitation_not_even_the_invited_email(cli
     assert response.status_code == 403
     assert response.json()["detail"] == NOT_THE_GUEST
     assert guest_invite == []
+
+
+def test_only_a_guest_invitation_may_be_embedded_and_only_on_the_companys_site(
+    client,
+    monkeypatch,
+    invite_page,  # noqa: F811
+):
+    import app.routers.invites as routes
+
+    async def company(company_id):
+        return SimpleNamespace(
+            name="Acme", website_domain="acme.com", verified_domain=None, suspended_at=None
+        )
+
+    monkeypatch.setattr(routes.companies, "get", company)
+    monkeypatch.setattr(routes, "logo_path", lambda company: None)
+
+    assert client.get("/invites/token-1").json()["embed_domain"] is None
+
+    invite_page.guest = True
+
+    assert client.get("/invites/token-1").json()["embed_domain"] == "acme.com"

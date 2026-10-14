@@ -107,4 +107,10 @@ describe("the API docs read the OpenAPI description", () => {
     ).toEqual(["Sign in.", "Open Hiring, then a tab."])
     expect(after.steps).toBeNull()
   })
+
+  it("keeps a code block as written", () => {
+    const [section] = richText('```html\n<div id="a"></div>\n  <b>x</b>\n```')
+
+    expect(section.blocks[0].code).toBe('<div id="a"></div>\n  <b>x</b>')
+  })
 })

@@ -130,7 +130,14 @@ export function InviteIntro({
           t("people", { company: company || t("theCompany") }),
           t.rich("stay", {
             link: (chunks) => (
-              <Link href="/privacy" className="underline underline-offset-4">
+              // In a new tab: the interview stays open, also inside a company's site, whose
+              // frame shows nothing else of prepza.
+              <Link
+                href="/privacy"
+                target="_blank"
+                rel="noopener"
+                className="underline underline-offset-4"
+              >
                 {chunks}
               </Link>
             ),

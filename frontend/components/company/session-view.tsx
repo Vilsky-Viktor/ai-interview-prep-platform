@@ -21,9 +21,12 @@ import type { Brand, Company } from "@/types/company"
 export function SessionView({
   id,
   testHref,
+  onFinished,
 }: {
   id: string
   testHref?: string
+  // Embedded in a company's site: told once it's finished, which takes the candidate on.
+  onFinished?: (candidateId: string) => void
 }) {
   const t = useTranslations("session")
   const interviews = useTranslations("interviews")
@@ -54,6 +57,12 @@ export function SessionView({
   const inviteId = session?.candidate_invite_id
   const practice = Boolean(session?.practice)
   const router = useRouter()
+  useEffect(() => {
+    if (done && inviteId && onFinished) {
+      onFinished(inviteId)
+    }
+  }, [done, inviteId, onFinished])
+
   // A practice round, once finished, opens its results with every answer.
   const practiceDone = practice && done
 
@@ -153,7 +162,7 @@ export function SessionView({
           <p className="text-muted-foreground">{t("done")}</p>
         </div>
         {/* Sent from the company's own platform: back there instead. */}
-        {brand?.return_url ? (
+        {onFinished ? null : brand?.return_url ? (
           <Button
             className="h-12 px-6 text-base"
             render={<a href={brand.return_url} />}

@@ -103,14 +103,17 @@ resource "google_compute_backend_service" "service" {
   }
 
   # The security headers the nginx gateway adds locally (gateway/nginx.conf); the frontend adds
-  # its own Content-Security-Policy.
-  custom_response_headers = [
-    "Strict-Transport-Security: max-age=31536000",
-    "X-Content-Type-Options: nosniff",
-    "X-Frame-Options: DENY",
-    "Referrer-Policy: strict-origin-when-cross-origin",
-    "Permissions-Policy: camera=(), microphone=(self), geolocation=()",
-  ]
+  # its own Content-Security-Policy, whose frame-ancestors says who may frame a page (no one, but
+  # a company's own site its embedded interview), so it gets no X-Frame-Options.
+  custom_response_headers = concat(
+    [
+      "Strict-Transport-Security: max-age=31536000",
+      "X-Content-Type-Options: nosniff",
+      "Referrer-Policy: strict-origin-when-cross-origin",
+      "Permissions-Policy: camera=(), microphone=(self), geolocation=()",
+    ],
+    each.key == "frontend" ? [] : ["X-Frame-Options: DENY"],
+  )
 
   backend {
     group = google_compute_region_network_endpoint_group.service[each.key].id

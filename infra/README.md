@@ -10,7 +10,7 @@ Terraform for prepza on Google Cloud, in one region (`europe-west1`, Belgium) be
   - HTTPS with a Google-managed certificate;
   - `/api/<service>/` routes to each API, the MCP endpoint and its OAuth paths at the root (`/mcp`, `/authorize`, `/token`, `/register`, `/revoke` and the `/.well-known/oauth-*` metadata; exact paths, `locals.mcp_paths`) to the assistant, and everything else to the frontend;
   - Cloud CDN for static files;
-  - the security headers the local nginx gateway adds (HSTS, nosniff, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`); the frontend sets its own Content-Security-Policy;
+  - the security headers the local nginx gateway adds (HSTS, nosniff, `X-Frame-Options` on the APIs, `Referrer-Policy`, `Permissions-Policy`); the frontend sets its own Content-Security-Policy, whose `frame-ancestors` lets no site frame a page but a company's own its embedded interview;
   - a Cloud Armor rule that blocks `/api/*/internal/`.
 - **Secret Manager** for secrets, and **Artifact Registry** for images.
 

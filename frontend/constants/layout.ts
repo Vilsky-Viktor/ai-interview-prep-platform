@@ -5,6 +5,7 @@ export const SCROLL_TOP_AFTER_PX = 800
 // preview), in any language: no header or footer there, only the questions.
 export const TIMED_PAGE = /^(\/[a-z]{2,3})?\/sessions\//
 
-// A company's invitation and shared test link: like its interview, they show the company only,
-// without prepza's header and footer.
-export const COMPANY_INTERVIEW_PAGE = /^(\/[a-z]{2,3})?\/(invite|apply)\//
+// A company's invitation, shared test link and embedded interview: like its interview, they show
+// the company only, without prepza's header and footer.
+export const COMPANY_INTERVIEW_PAGE =
+  /^(\/[a-z]{2,3})?\/(invite|apply|embedded)\//

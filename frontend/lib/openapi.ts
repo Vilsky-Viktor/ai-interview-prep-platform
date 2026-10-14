@@ -87,19 +87,25 @@ const STEP = /^\d+\.\s+/
 type Pieces = ReturnType<typeof pieces>
 
 /** A description's sections: its text up to the first "## " title (title null), then each
- * title with the blocks under it. A block is a paragraph, or numbered steps when every line
- * starts a step ("1. ", "2. ") or goes on with one (indented); text comes as text, bold and
- * code pieces ("**", "`"). */
+ * title with the blocks under it. A block is a paragraph, numbered steps when every line
+ * starts a step ("1. ", "2. ") or goes on with one (indented), or code between "```" lines, kept
+ * as written; text comes as text, bold and code pieces ("**", "`"). */
 export function richText(text: string) {
   const sections: {
     title: string | null
-    blocks: { steps: Pieces[] | null; pieces: Pieces }[]
+    blocks: { steps: Pieces[] | null; pieces: Pieces; code?: string }[]
   }[] = [{ title: null, blocks: [] }]
 
   for (const block of text.split(/\n\s*\n/)) {
     const lines = block.split("\n")
 
-    if (block.startsWith("## ")) {
+    if (block.startsWith("```")) {
+      sections[sections.length - 1].blocks.push({
+        steps: null,
+        pieces: [],
+        code: lines.slice(1, -1).join("\n"),
+      })
+    } else if (block.startsWith("## ")) {
       sections.push({ title: block.slice(3).trim(), blocks: [] })
     } else if (lines.every((line) => STEP.test(line) || /^\s/.test(line))) {
       sections[sections.length - 1].blocks.push({

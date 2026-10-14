@@ -24,9 +24,14 @@ export default defineConfig({
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
     launchOptions: {
-      args: process.env.HOST_RULES
-        ? [`--host-resolver-rules=${process.env.HOST_RULES}`]
-        : [],
+      args: [
+        ...(process.env.HOST_RULES
+          ? [`--host-resolver-rules=${process.env.HOST_RULES}`]
+          : []),
+        // A company's site the tests make up (i-api-embed) embeds the local stack; Chrome would
+        // block a public page loading a local one, which never happens with the real site.
+        "--disable-features=BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights,LocalNetworkAccessChecks",
+      ],
     },
   },
 })

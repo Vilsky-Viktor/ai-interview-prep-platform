@@ -16,7 +16,15 @@ import { refreshVerification, signInAsGuest } from "@/lib/auth"
 import { useLinkData } from "@/hooks/use-link-data"
 import type { InviteView as Invite, SessionSummary } from "@/types/company"
 
-export function InviteView({ token }: { token: string }) {
+/** The invitation. Embedded in a company's site, `onStarted` opens the interview in place
+ * instead of going to its page. */
+export function InviteView({
+  token,
+  onStarted,
+}: {
+  token: string
+  onStarted?: (sessionId: string) => void
+}) {
   const t = useTranslations("invite")
   const share = useTranslations("share")
   const session = useTranslations("session")
@@ -58,6 +66,12 @@ export function InviteView({ token }: { token: string }) {
       const next =
         result.sessions.find((item) => item.status !== "finished") ??
         result.sessions[0]
+
+      if (next && onStarted) {
+        onStarted(next.id)
+
+        return
+      }
 
       if (next) {
         router.push(`/sessions/${next.id}`)

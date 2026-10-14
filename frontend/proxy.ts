@@ -4,19 +4,24 @@ import { TOKEN_COOKIE } from "@/constants/auth"
 import { LOCALE_COOKIE, LOCALE_COOKIE_MAX_AGE } from "@/constants/i18n"
 import { MAINTENANCE_HEADER } from "@/constants/maintenance"
 import { LOCALE_HEADER } from "@/constants/seo"
+import { EMBED_PAGE } from "@/constants/embed"
 import { contentSecurityPolicy } from "@/lib/csp"
+import { embedAncestors } from "@/lib/embed"
 import { isPrivatePath, splitLocale } from "@/lib/locale-path"
 import { maintenanceState } from "@/lib/maintenance"
 
 /** A fresh nonce for every page; Next.js adds it to its own scripts from the request header.
  * While maintenance mode is on, every page is the maintenance screen, except for superadmins.
  * A page under a language prefix (/de/pricing) is served from its page in that language; private
- * pages are kept out of search results. */
+ * pages are kept out of search results. No site may frame a page, but a company's own its
+ * embedded interview. */
 export async function proxy(request: NextRequest) {
   const nonce = Buffer.from(crypto.randomUUID()).toString("base64")
+  const embedded = EMBED_PAGE.exec(request.nextUrl.pathname)
   const policy = contentSecurityPolicy(
     nonce,
-    process.env.NODE_ENV === "development"
+    process.env.NODE_ENV === "development",
+    embedded ? await embedAncestors(embedded[1]) : undefined
   )
   const requestHeaders = new Headers(request.headers)
   requestHeaders.set("x-nonce", nonce)

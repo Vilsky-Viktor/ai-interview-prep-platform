@@ -22,3 +22,12 @@ it("has no emulator without one", () => {
 
   expect(policy).not.toContain("9199")
 })
+
+it("lets no one frame a page, but a company's own site its embedded interview", () => {
+  expect(contentSecurityPolicy("nonce", false)).toContain(
+    "frame-ancestors 'none'"
+  )
+  expect(
+    contentSecurityPolicy("nonce", false, "acme.com *.acme.com")
+  ).toContain("frame-ancestors acme.com *.acme.com")
+})

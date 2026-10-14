@@ -7,6 +7,7 @@ export const PRIVATE_PATHS = [
   "/apply",
   "/companies",
   "/connect",
+  "/embedded",
   "/generate",
   "/invite",
   "/join",

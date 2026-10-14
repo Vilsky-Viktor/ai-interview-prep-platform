@@ -9,7 +9,12 @@ import {
  * script with it loads them ('strict-dynamic'), which covers Firebase loading Google's sign-in
  * script. Styles allow inline ones: components set style attributes and inject style tags.
  */
-export function contentSecurityPolicy(nonce: string, isDev: boolean) {
+export function contentSecurityPolicy(
+  nonce: string,
+  isDev: boolean,
+  // Who may show the page in a frame: no one, but a company's own site its embedded interview.
+  frameAncestors = "'none'"
+) {
   const authDomain = process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
   const emulatorUrl = process.env.NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_URL
   // Locally, on whichever host the site was opened from (lib/firebase.ts).
@@ -31,7 +36,7 @@ export function contentSecurityPolicy(nonce: string, isDev: boolean) {
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'self'",
-    "frame-ancestors 'none'",
+    `frame-ancestors ${frameAncestors}`,
     ...(isDev ? [] : ["upgrade-insecure-requests"]),
   ]
     .map((directive) => directive.trim())
