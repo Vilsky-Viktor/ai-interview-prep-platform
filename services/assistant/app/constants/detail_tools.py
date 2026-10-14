@@ -1,6 +1,11 @@
 # More reads (see tools.py for the entries' keys): an interview's questions and their reports,
-# the company's audit log, the user's email settings, templates to copy, an ATS job's stages,
-# prepza's news and the user's own practice.
+# the company's audit log, its credit history and reserved credits, the user's email settings,
+# templates to copy, an ATS job's stages and text, prepza's news and the user's own practice.
+
+from prepza_common.constants import MAX_GOAL_LENGTH
+
+# A credited candidate, in the history and the reserved list.
+CREDIT_CANDIDATE_FIELDS = ["invite_id", "interview_id", "email", "name", "interview_title"]
 
 DETAIL_TOOLS = {
     "list_topic_questions": {
@@ -25,6 +30,31 @@ DETAIL_TOOLS = {
         "params": ["company_id", "offset", "limit"],
         "fields": ["user_id", "action", "target_id", "via", "created_at"],
     },
+    # Never an invoice: its temporary link is the payment provider's (the billing page has it).
+    "list_credit_history": {
+        "service": "companies",
+        "method": "GET",
+        "path": "/companies/{company_id}/billing/history",
+        "params": ["company_id", "offset", "limit"],
+        "fields": [
+            "amount",
+            "reason",
+            "created_at",
+            "total",
+            "currency",
+            "automatic",
+            "candidate",
+            "candidate_deleted",
+            *CREDIT_CANDIDATE_FIELDS,
+        ],
+    },
+    "list_reserved_credits": {
+        "service": "companies",
+        "method": "GET",
+        "path": "/companies/{company_id}/billing/reserved",
+        "params": ["company_id", "offset", "limit"],
+        "fields": CREDIT_CANDIDATE_FIELDS,
+    },
     "get_email_preferences": {
         "service": "library",
         "method": "GET",
@@ -44,6 +74,15 @@ DETAIL_TOOLS = {
         "path": "/{provider}/jobs/{job_id}/stages",
         "params": ["provider", "job_id", "company_id"],
         "fields": ["id", "name"],
+    },
+    # To make an interview from the job (its description, the same limit as a pasted one).
+    "get_ats_job_text": {
+        "service": "ats",
+        "method": "GET",
+        "path": "/{provider}/jobs/{job_id}/text",
+        "params": ["provider", "job_id", "company_id"],
+        "fields": ["text"],
+        "max_length": MAX_GOAL_LENGTH,
     },
     "list_news": {
         "service": "library",

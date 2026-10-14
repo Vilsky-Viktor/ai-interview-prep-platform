@@ -99,6 +99,26 @@ def test_the_model_gets_full_links_never_their_bare_codes(calls):
     assert without.content["data"] == {"id": INTERVIEW, "title": "Backend"}
 
 
+def test_the_credit_history_names_its_candidates_but_no_invoice(calls):
+    entry = {
+        "id": "e1",
+        "amount": -100,
+        "reason": "candidate",
+        "invoice_id": "txn_1",
+        "candidate": {"invite_id": "i1", "email": "c@example.com", "name": "Ann"},
+    }
+    calls.answer = answer(json=[entry])
+    result = run("list_credit_history", {"company_id": COMPANY})
+
+    assert result.content["data"] == [
+        {
+            "amount": -100,
+            "reason": "candidate",
+            "candidate": {"invite_id": "i1", "email": "c@example.com", "name": "Ann"},
+        }
+    ]
+
+
 def test_a_limit_is_capped_at_the_tools_maximum_and_set_when_left_out(calls):
     run("list_interviews", {"company_id": COMPANY})
 

@@ -175,6 +175,15 @@ INTERVIEW_ACTIONS = {
         destructive=True,
         link=CANDIDATES_PAGE,
     ),
+    "rename_candidate": interview_action(
+        "PATCH",
+        "/interviews/{interview_id}/candidates/{invite_id}/name",
+        "Correct a candidate's name (a blank one makes it not known).",
+        params=["invite_id"],
+        body=["name"],
+        subject=CANDIDATE_SUBJECT,
+        link=CANDIDATES_PAGE,
+    ),
     "set_extra_time": interview_action(
         "PUT",
         "/interviews/{interview_id}/candidates/{invite_id}/extra-time",
