@@ -80,9 +80,10 @@ async function legalUpdated(): Promise<Record<string, string | undefined>> {
         return [path, undefined]
       }
 
-      const document: { updated: string } = await response.json()
+      // The latest version's day: the page has said it since.
+      const document: { current: string } = await response.json()
 
-      return [path, document.updated]
+      return [path, document.current]
     })
   )
 

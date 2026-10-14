@@ -64,12 +64,12 @@ test("the documents page's title says what its documents are for", async ({
 
 // English only, like the legal pages: one address, no language versions, its own description,
 // its capitals in the preview picture, a technical article with breadcrumbs, in the sitemap.
-test("the API docs have their description, data and place in the sitemap", async ({
+test("the developer docs have their description, data and place in the sitemap", async ({
   page,
 }) => {
   await page.goto("/api-docs");
 
-  await expect(page).toHaveTitle("API docs · prepza.");
+  await expect(page).toHaveTitle("Developer docs · prepza.");
   const text = (await description(page)) ?? "";
   expect(text.length).toBeGreaterThan(100);
   expect(text.length).toBeLessThanOrEqual(170);
@@ -81,7 +81,7 @@ test("the API docs have their description, data and place in the sitemap", async
     .locator('head meta[property="og:image"]')
     .first()
     .getAttribute("content");
-  expect(new URL(picture ?? "").searchParams.get("title")).toBe("API docs");
+  expect(new URL(picture ?? "").searchParams.get("title")).toBe("Developer docs");
 
   const data = await structuredData(page);
   const article = data.find((item) => item["@type"] === "TechArticle");
@@ -105,7 +105,7 @@ test("the legal pages are dated in the sitemap by their last update", async ({
       await page.request.get(`${REQUEST_URL}/api/rounds/help/legal${path}`)
     ).json();
     expect(sitemap.replace(/\s+/g, ""), path).toContain(
-      `${path}</loc><lastmod>${legal.updated}</lastmod>`,
+      `${path}</loc><lastmod>${legal.current}</lastmod>`,
     );
   }
 });
