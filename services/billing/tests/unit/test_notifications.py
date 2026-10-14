@@ -35,7 +35,9 @@ def test_a_rewarded_referrer_is_told_with_the_reward(monkeypatch, notified):
     asyncio.run(referrals.reward_after_top_up("company", "ann", "txn_01"))
 
     assert notified == [
-        notification("company", "bob", "referral_rewarded", "/companies/bob/referrals", credits=1_000)
+        notification(
+            "company", "bob", "referral_rewarded", "/companies/bob/referrals", credits=1_000
+        )
     ]
 
 
