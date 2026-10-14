@@ -1,8 +1,10 @@
 import asyncio
+import json
 import uuid
 from datetime import UTC, datetime, timedelta
 
 from app.constants.api import MAX_WEBHOOKS, RETRY_LEASE
+from app.services.events import handle
 from app.storage import webhook_retries as retries
 from app.storage import webhooks
 
@@ -69,3 +71,37 @@ def test_a_web_hook_shows_as_failing_until_cleared(run):
         return fresh, failing, (await webhooks.of_company(company))[0].failing
 
     assert run(scenario()) == (False, True, False)
+
+
+def test_an_erased_candidates_results_waiting_to_be_sent_again_go(run):
+    """Only theirs: another candidate's, the same email in another interview and another
+    company's stay."""
+    company, other_company = uuid.uuid4(), uuid.uuid4()
+    interview, other_interview = str(uuid.uuid4()), str(uuid.uuid4())
+    past = datetime.now(UTC) - timedelta(seconds=1)
+
+    def body(event_id, interview_id, email):
+        data = {"interview": {"id": interview_id}, "candidate": {"email": email}}
+
+        return json.dumps({"id": event_id, "type": "candidate.finished", "data": data})
+
+    async def scenario():
+        hook = await webhooks.add(company, "https://example.com/x", "sealed", "u1", MAX_WEBHOOKS)
+        theirs = await webhooks.add(
+            other_company, "https://example.com/x", "sealed", "u2", MAX_WEBHOOKS
+        )
+        await retries.add(hook.id, "erased", body("erased", interview, "Ann@x.com"), past)
+        await retries.add(hook.id, "other", body("other", interview, "bob@x.com"), past)
+        await retries.add(
+            hook.id, "elsewhere", body("elsewhere", other_interview, "ann@x.com"), past
+        )
+        await retries.add(theirs.id, "theirs", body("theirs", interview, "ann@x.com"), past)
+        await handle(
+            "candidate.removed",
+            {"company_id": str(company), "interview_id": interview, "email": "ann@x.com"},
+            "removed-1",
+        )
+
+        return sorted(row.event_id for row, _ in await retries.claim(25))
+
+    assert run(scenario()) == ["elsewhere", "other", "theirs"]

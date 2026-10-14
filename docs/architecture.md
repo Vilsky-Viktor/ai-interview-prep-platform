@@ -138,7 +138,7 @@ Delivery:
 | companies | `generation.completed`, `generation.failed`, `generation.cancelled`, `interview.finished` |
 | notifications | `notification.requested`, every `candidate.*` (it handles `candidate.invited`, `candidate.joined`, `candidate.reminded` and `candidate.removed`), `member.invited`, `report.shared`, `contact.sent`, `company.deleted` |
 | ats | `candidate.finished`, `candidate.removed`, `interview.ready`, `interview.deleted`, `company.deleted`, `credits.added` |
-| api | `candidate.finished`, `company.deleted` |
+| api | `candidate.finished`, `candidate.removed`, `company.deleted` |
 | assistant | `company.deleted` (deletes the company's conversations; deleting again deletes nothing more) |
 
 - Locally, each consumer ignores events that aren't its own.

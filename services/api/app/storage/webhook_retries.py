@@ -1,8 +1,8 @@
 import uuid
 from datetime import UTC, datetime
 
-from sqlalchemy import delete, select, update
-from sqlalchemy.dialects.postgresql import insert
+from sqlalchemy import cast, delete, func, select, update
+from sqlalchemy.dialects.postgresql import JSONB, insert
 
 from app.constants.api import RETRY_LEASE
 from app.models.api import Webhook, WebhookRetry
@@ -62,6 +62,21 @@ async def postpone(webhook_id: uuid.UUID, event_id: str, attempts: int, next_at:
 async def remove(webhook_id: uuid.UUID, event_id: str) -> None:
     query = delete(WebhookRetry).where(
         WebhookRetry.webhook_id == webhook_id, WebhookRetry.event_id == event_id
+    )
+
+    async with Session() as session:
+        await session.execute(query)
+        await session.commit()
+
+
+async def remove_candidate(company_id: uuid.UUID, interview_id: str, email: str) -> None:
+    """A candidate the company erased: their results waiting to be sent again to its web hooks
+    go, read from each kept body (a candidate.finished event)."""
+    body = cast(WebhookRetry.body, JSONB)["data"]
+    query = delete(WebhookRetry).where(
+        WebhookRetry.webhook_id.in_(select(Webhook.id).where(Webhook.company_id == company_id)),
+        body["interview"]["id"].astext == interview_id,
+        func.lower(body["candidate"]["email"].astext) == email.lower(),
     )
 
     async with Session() as session:
