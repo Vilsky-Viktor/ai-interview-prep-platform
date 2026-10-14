@@ -22,9 +22,12 @@ import type { CompanyCredits } from "@/types/billing"
 export function RemoveCompany({
   companyId,
   name,
+  onRemoved,
 }: {
   companyId: string
   name: string
+  // Takes it out of the list at once (pages loaded past the first aren't refreshed).
+  onRemoved?: () => void
 }) {
   const t = useTranslations("company")
   const common = useTranslations("common")
@@ -48,6 +51,7 @@ export function RemoveCompany({
     try {
       await apiFetch(`/companies/companies/${companyId}`, { method: "DELETE" })
       setOpen(false)
+      onRemoved?.()
       router.refresh()
     } catch {
       toast.error(t("removeFailed"))

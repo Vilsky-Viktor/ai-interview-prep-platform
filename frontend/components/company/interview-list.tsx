@@ -24,7 +24,7 @@ export function InterviewList({
   canEdit: boolean
 }) {
   const t = useTranslations("interviews")
-  const { items, loadMore } = usePagedList(
+  const { items, setItems, loadMore } = usePagedList(
     `/companies/interviews?company_id=${companyId}`,
     byId,
     initial
@@ -77,6 +77,11 @@ export function InterviewList({
                 <DeleteInterview
                   interviewId={interview.id}
                   title={interview.title ?? t("fallbackTitle")}
+                  onRemoved={() =>
+                    setItems((current) =>
+                      current.filter((item) => item.id !== interview.id)
+                    )
+                  }
                 />
               )}
             </div>

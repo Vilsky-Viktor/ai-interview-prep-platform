@@ -34,7 +34,7 @@ export function CompanyList({
 }) {
   const t = useTranslations("company")
   const roles = useTranslations("roles")
-  const { items, loadMore } = usePagedList(PATH, byId, initial)
+  const { items, setItems, loadMore } = usePagedList(PATH, byId, initial)
 
   if (items.length === 0) {
     return (
@@ -138,7 +138,15 @@ export function CompanyList({
           </Link>
           {company.can_delete && !templateId && (
             <div className="relative z-10 shrink-0">
-              <RemoveCompany companyId={company.id} name={company.name} />
+              <RemoveCompany
+                companyId={company.id}
+                name={company.name}
+                onRemoved={() =>
+                  setItems((current) =>
+                    current.filter((item) => item.id !== company.id)
+                  )
+                }
+              />
             </div>
           )}
         </div>

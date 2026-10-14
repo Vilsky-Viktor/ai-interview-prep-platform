@@ -22,11 +22,14 @@ export function DeleteInterview({
   interviewId,
   title,
   leaveTo,
+  onRemoved,
 }: {
   interviewId: string
   title: string
   // Where to go once deleted, from the interview's own page; a list just refreshes.
   leaveTo?: string
+  // Takes it out of the list at once (pages loaded past the first aren't refreshed).
+  onRemoved?: () => void
 }) {
   const t = useTranslations("interviews")
   const common = useTranslations("common")
@@ -42,6 +45,7 @@ export function DeleteInterview({
         method: "DELETE",
       })
       setOpen(false)
+      onRemoved?.()
 
       if (leaveTo) {
         router.push(leaveTo)
