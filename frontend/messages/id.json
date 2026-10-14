@@ -51,7 +51,7 @@
     "pricing": "Harga",
     "privacy": "Privasi",
     "terms": "Ketentuan",
-    "docs": "Dokumen",
+    "docs": "Dokumen hukum",
     "back": "Kembali",
     "hiring": "rekrutmen",
     "pricingLink": "harga",
@@ -64,7 +64,7 @@
     "aiInterviews": "Wawancara AI",
     "compare": "Bandingkan",
     "guides": "Panduan",
-    "apiDocs": "Dokumentasi API",
+    "apiDocs": "Dokumentasi pengembang",
     "news": "Berita"
   },
   "signIn": {
@@ -740,7 +740,7 @@
     }
   },
   "docs": {
-    "title": "Dokumen",
+    "title": "Dokumen hukum",
     "metaTitle": "Dokumen kepatuhan untuk rekrutmen",
     "intro": "Dokumen untuk perusahaan yang menilai kandidat dengan prepza: petunjuk, templat, dan perjanjian pemrosesan data.",
     "englishOnly": "Dokumen ini hanya tersedia dalam bahasa Inggris.",
@@ -949,7 +949,7 @@
         "api": "Platformmu: undang lewat API, hasil datang lewat webhook",
         "mcp": "Chat AI-mu: pakai prepza di Claude atau ChatGPT lewat MCP"
       },
-      "docs": "Dokumentasi API",
+      "docs": "Dokumentasi pengembang",
       "apiName": "API prepza"
     },
     "companies": {
@@ -1330,7 +1330,7 @@
     "name": "API",
     "rowText": "Kunci dan webhook untuk menghubungkan platformmu sendiri.",
     "counts": "{keys, plural, other {# kunci}} · {webhooks, plural, other {# webhook}}",
-    "docs": "Dokumentasi API",
+    "docs": "Dokumentasi pengembang",
     "keysTitle": "Kunci API",
     "keysText": "Kunci membaca wawancara dan kandidatmu, serta mengundang kandidat atas nama orang yang membuatnya.",
     "noKeys": "Belum ada kunci.",
@@ -1368,7 +1368,7 @@
     "addWebhookTitle": "Webhook baru",
     "webhookUrl": "Alamat HTTPS, mis. https://example.com/prepza",
     "webhookCreatedTitle": "Secret webhook-mu",
-    "webhookCreatedText": "Gunakan untuk memeriksa tanda tangan setiap permintaan (lihat dokumentasi API). Salin sekarang: secret ini tidak akan ditampilkan lagi.",
+    "webhookCreatedText": "Gunakan untuk memeriksa tanda tangan setiap permintaan (lihat dokumentasi pengembang). Salin sekarang: secret ini tidak akan ditampilkan lagi.",
     "copySecret": "Salin secret",
     "secretCopied": "Secret disalin",
     "added": "ditambahkan {date}",
@@ -1379,9 +1379,14 @@
     "removeFailed": "Gagal menghapus."
   },
   "apiDocs": {
-    "title": "Dokumentasi API",
-    "intro": "Hubungkan prepza ke platformmu sendiri: lihat daftar wawancaramu, undang kandidat, dan dapatkan hasilnya.",
-    "description": "Referensi API prepza: dapatkan kunci API, lihat daftar wawancaramu, undang kandidat, baca hasilnya, dan terima lewat webhook.",
+    "title": "Dokumentasi pengembang",
+    "intro": "Hubungkan prepza ke platformmu sendiri: lihat daftar wawancaramu, undang kandidat, dapatkan hasilnya, dan sematkan wawancara di situsmu sendiri.",
+    "description": "Dokumentasi pengembang prepza: dapatkan kunci API, lihat daftar wawancaramu, undang kandidat, baca hasilnya, terima lewat webhook, dan sematkan wawancara dengan SDK.",
+    "tabs": {
+      "api": "API",
+      "webhooks": "Webhook",
+      "sdk": "SDK"
+    },
     "englishOnly": "Halaman ini hanya tersedia dalam bahasa Inggris.",
     "baseUrl": "URL dasar",
     "copyBaseUrl": "Salin URL",

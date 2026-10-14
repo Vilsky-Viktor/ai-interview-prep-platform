@@ -39,7 +39,7 @@ export function TypeName({ type }: { type: string }) {
         /^[A-Z]/.test(piece) ? (
           <a
             key={index}
-            href={`#${refName(piece)}`}
+            href={`/api-docs?tab=objects#${refName(piece)}`}
             className="underline underline-offset-4 hover:text-foreground"
           >
             {piece}

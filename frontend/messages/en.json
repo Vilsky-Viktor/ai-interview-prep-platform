@@ -51,7 +51,7 @@
     "pricing": "Pricing",
     "privacy": "Privacy",
     "terms": "Terms",
-    "docs": "Docs",
+    "docs": "Legal docs",
     "back": "Back",
     "hiring": "hiring",
     "pricingLink": "pricing",
@@ -64,7 +64,7 @@
     "aiInterviews": "AI interviews",
     "compare": "Compare",
     "guides": "Guides",
-    "apiDocs": "API docs",
+    "apiDocs": "Developer docs",
     "news": "News"
   },
   "signIn": {
@@ -740,7 +740,7 @@
     }
   },
   "docs": {
-    "title": "Docs",
+    "title": "Legal docs",
     "metaTitle": "Hiring compliance documents",
     "intro": "Documents for companies that assess candidates with prepza: instructions, templates and the data processing agreement.",
     "englishOnly": "",
@@ -949,7 +949,7 @@
         "api": "Your platform: invite through the API, results arrive by webhook",
         "mcp": "Your AI chat: use prepza in Claude or ChatGPT via MCP"
       },
-      "docs": "API docs",
+      "docs": "Developer docs",
       "apiName": "prepza API"
     },
     "companies": {
@@ -1330,7 +1330,7 @@
     "name": "API",
     "rowText": "Keys and web hooks to connect your own platform.",
     "counts": "{keys, plural, one {# key} other {# keys}} · {webhooks, plural, one {# web hook} other {# web hooks}}",
-    "docs": "API docs",
+    "docs": "Developer docs",
     "keysTitle": "API keys",
     "keysText": "A key reads your interviews and candidates and invites candidates as the person who made it.",
     "noKeys": "No keys yet.",
@@ -1368,7 +1368,7 @@
     "addWebhookTitle": "New web hook",
     "webhookUrl": "HTTPS address, e.g. https://example.com/prepza",
     "webhookCreatedTitle": "Your web hook's secret",
-    "webhookCreatedText": "Use it to check each request's signature (see the API docs). Copy it now: it won't be shown again.",
+    "webhookCreatedText": "Use it to check each request's signature (see the developer docs). Copy it now: it won't be shown again.",
     "copySecret": "Copy secret",
     "secretCopied": "Secret copied",
     "added": "added {date}",
@@ -1379,9 +1379,14 @@
     "removeFailed": "Couldn't delete it."
   },
   "apiDocs": {
-    "title": "API docs",
-    "intro": "Connect prepza to your own platform: list your interviews, invite candidates and get their results.",
-    "description": "The prepza API reference: get an API key, list your interviews, invite candidates, read their results and receive them by web hook.",
+    "title": "Developer docs",
+    "intro": "Connect prepza to your own platform: list your interviews, invite candidates, get their results and embed the interview in your own site.",
+    "description": "prepza's developer docs: get an API key, list your interviews, invite candidates, read their results, receive them by web hook and embed the interview with the SDK.",
+    "tabs": {
+      "api": "API",
+      "webhooks": "Web hooks",
+      "sdk": "SDK"
+    },
     "englishOnly": "This page is in English only.",
     "baseUrl": "Base URL",
     "copyBaseUrl": "Copy URL",

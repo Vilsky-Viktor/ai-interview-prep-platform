@@ -51,7 +51,7 @@
     "pricing": "Presyo",
     "privacy": "Privacy",
     "terms": "Mga tuntunin",
-    "docs": "Docs",
+    "docs": "Mga legal na dokumento",
     "back": "Bumalik",
     "hiring": "hiring",
     "pricingLink": "presyo",
@@ -64,7 +64,7 @@
     "aiInterviews": "AI interviews",
     "compare": "Ikumpara",
     "guides": "Mga gabay",
-    "apiDocs": "Dokumentasyon ng API",
+    "apiDocs": "Dokumentasyon para sa mga developer",
     "news": "Balita"
   },
   "signIn": {
@@ -740,7 +740,7 @@
     }
   },
   "docs": {
-    "title": "Docs",
+    "title": "Mga legal na dokumento",
     "metaTitle": "Mga dokumento sa compliance para sa hiring",
     "intro": "Mga dokumento para sa mga kumpanyang nag-a-assess ng mga aplikante gamit ang prepza: mga tagubilin, mga template at ang data processing agreement.",
     "englishOnly": "Available lang ang mga dokumentong ito sa English.",
@@ -953,7 +953,7 @@
         "api": "Platform mo: mag-invite gamit ang API, dumarating ang resulta sa webhook",
         "mcp": "AI chat mo: gamitin ang prepza sa Claude o ChatGPT gamit ang MCP"
       },
-      "docs": "Dokumentasyon ng API",
+      "docs": "Dokumentasyon para sa mga developer",
       "apiName": "prepza API"
     },
     "companies": {
@@ -1334,7 +1334,7 @@
     "name": "API",
     "rowText": "Mga key at webhook para ikonekta ang sarili mong platform.",
     "counts": "{keys, plural, one {# key} other {# key}} · {webhooks, plural, one {# webhook} other {# webhook}}",
-    "docs": "Dokumentasyon ng API",
+    "docs": "Dokumentasyon para sa mga developer",
     "keysTitle": "Mga API key",
     "keysText": "Binabasa ng key ang mga interview at aplikante mo, at nag-iimbita ito ng mga aplikante bilang taong gumawa nito.",
     "noKeys": "Wala pang key.",
@@ -1372,7 +1372,7 @@
     "addWebhookTitle": "Bagong webhook",
     "webhookUrl": "HTTPS address, hal. https://example.com/prepza",
     "webhookCreatedTitle": "Ang secret ng webhook mo",
-    "webhookCreatedText": "Gamitin ito para i-check ang signature ng bawat request (tingnan ang dokumentasyon ng API). Kopyahin ito ngayon: hindi na ito ipapakita ulit.",
+    "webhookCreatedText": "Gamitin ito para i-check ang signature ng bawat request (tingnan ang dokumentasyon para sa mga developer). Kopyahin ito ngayon: hindi na ito ipapakita ulit.",
     "copySecret": "Kopyahin ang secret",
     "secretCopied": "Nakopya ang secret",
     "added": "idinagdag noong {date}",
@@ -1383,9 +1383,14 @@
     "removeFailed": "Hindi ito mabura."
   },
   "apiDocs": {
-    "title": "Dokumentasyon ng API",
-    "intro": "Ikonekta ang prepza sa sarili mong platform: ilista ang mga interview mo, mag-imbita ng mga aplikante at kunin ang mga resulta nila.",
-    "description": "Ang reference ng prepza API: kumuha ng API key, ilista ang mga interview mo, mag-imbita ng mga aplikante, basahin ang mga resulta nila at tanggapin ang mga ito sa webhook.",
+    "title": "Dokumentasyon para sa mga developer",
+    "intro": "Ikonekta ang prepza sa sarili mong platform: ilista ang mga interview mo, mag-imbita ng mga aplikante, kunin ang mga resulta nila at i-embed ang interview sa sarili mong site.",
+    "description": "Ang dokumentasyon ng prepza para sa mga developer: kumuha ng API key, ilista ang mga interview mo, mag-imbita ng mga aplikante, basahin ang mga resulta nila, tanggapin ang mga ito sa webhook at i-embed ang interview gamit ang SDK.",
+    "tabs": {
+      "api": "API",
+      "webhooks": "Mga webhook",
+      "sdk": "SDK"
+    },
     "englishOnly": "English lang ang page na ito.",
     "baseUrl": "Base URL",
     "copyBaseUrl": "Kopyahin ang URL",

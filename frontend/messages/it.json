@@ -51,7 +51,7 @@
     "pricing": "Prezzi",
     "privacy": "Privacy",
     "terms": "Termini",
-    "docs": "Documenti",
+    "docs": "Documenti legali",
     "back": "Indietro",
     "hiring": "assunzioni",
     "pricingLink": "prezzi",
@@ -64,7 +64,7 @@
     "aiInterviews": "Colloqui con IA",
     "compare": "Confronta",
     "guides": "Guide",
-    "apiDocs": "Documentazione API",
+    "apiDocs": "Documentazione per sviluppatori",
     "news": "Novità"
   },
   "signIn": {
@@ -740,7 +740,7 @@
     }
   },
   "docs": {
-    "title": "Documenti",
+    "title": "Documenti legali",
     "metaTitle": "Documenti di conformità per le assunzioni",
     "intro": "Documenti per le aziende che valutano i candidati con prepza: istruzioni, modelli e l'accordo sul trattamento dei dati.",
     "englishOnly": "Questi documenti sono disponibili solo in inglese.",
@@ -949,7 +949,7 @@
         "api": "La tua piattaforma: inviti tramite API, i risultati arrivano via webhook",
         "mcp": "La tua chat IA: prepza in Claude o ChatGPT via MCP"
       },
-      "docs": "Documentazione API",
+      "docs": "Documentazione per sviluppatori",
       "apiName": "API di prepza"
     },
     "companies": {
@@ -1330,7 +1330,7 @@
     "name": "API",
     "rowText": "Chiavi e webhook per collegare la tua piattaforma.",
     "counts": "{keys, plural, one {# chiave} other {# chiavi}} · {webhooks, plural, one {# webhook} other {# webhook}}",
-    "docs": "Documentazione API",
+    "docs": "Documentazione per sviluppatori",
     "keysTitle": "Chiavi API",
     "keysText": "Una chiave legge i tuoi colloqui e candidati e invita candidati a nome della persona che l'ha creata.",
     "noKeys": "Ancora nessuna chiave.",
@@ -1368,7 +1368,7 @@
     "addWebhookTitle": "Nuovo webhook",
     "webhookUrl": "Indirizzo HTTPS, ad es. https://example.com/prepza",
     "webhookCreatedTitle": "Il secret del tuo webhook",
-    "webhookCreatedText": "Usalo per verificare la firma di ogni richiesta (vedi la documentazione API). Copialo ora: non verrà più mostrato.",
+    "webhookCreatedText": "Usalo per verificare la firma di ogni richiesta (vedi la documentazione per sviluppatori). Copialo ora: non verrà più mostrato.",
     "copySecret": "Copia secret",
     "secretCopied": "Secret copiato",
     "added": "aggiunto il {date}",
@@ -1379,9 +1379,14 @@
     "removeFailed": "Impossibile eliminarlo."
   },
   "apiDocs": {
-    "title": "Documentazione API",
-    "intro": "Collega prepza alla tua piattaforma: elenca i tuoi colloqui, invita candidati e ricevi i loro risultati.",
-    "description": "Il riferimento dell'API di prepza: ottieni una chiave API, elenca i tuoi colloqui, invita candidati, leggi i loro risultati e ricevili via webhook.",
+    "title": "Documentazione per sviluppatori",
+    "intro": "Collega prepza alla tua piattaforma: elenca i tuoi colloqui, invita candidati, ricevi i loro risultati e integra il colloquio nel tuo sito.",
+    "description": "La documentazione per sviluppatori di prepza: ottieni una chiave API, elenca i tuoi colloqui, invita candidati, leggi i loro risultati, ricevili via webhook e integra il colloquio con l'SDK.",
+    "tabs": {
+      "api": "API",
+      "webhooks": "Webhook",
+      "sdk": "SDK"
+    },
     "englishOnly": "Questa pagina è disponibile solo in inglese.",
     "baseUrl": "URL di base",
     "copyBaseUrl": "Copia URL",

@@ -51,7 +51,7 @@
     "pricing": "Prijzen",
     "privacy": "Privacy",
     "terms": "Voorwaarden",
-    "docs": "Documenten",
+    "docs": "Juridische documenten",
     "back": "Terug",
     "hiring": "werving",
     "pricingLink": "prijzen",
@@ -64,7 +64,7 @@
     "aiInterviews": "AI-interviews",
     "compare": "Vergelijken",
     "guides": "Gidsen",
-    "apiDocs": "API-documentatie",
+    "apiDocs": "Ontwikkelaarsdocumentatie",
     "news": "Nieuws"
   },
   "signIn": {
@@ -740,7 +740,7 @@
     }
   },
   "docs": {
-    "title": "Documenten",
+    "title": "Juridische documenten",
     "metaTitle": "Compliancedocumenten voor werving en selectie",
     "intro": "Documenten voor bedrijven die kandidaten beoordelen met prepza: instructies, sjablonen en de verwerkersovereenkomst.",
     "englishOnly": "Deze documenten zijn alleen in het Engels beschikbaar.",
@@ -945,7 +945,7 @@
         "api": "Je eigen platform: uitnodigen via de API, resultaten komen binnen via webhooks",
         "mcp": "Je AI-chat: prepza in Claude of ChatGPT via MCP"
       },
-      "docs": "API-documentatie",
+      "docs": "Ontwikkelaarsdocumentatie",
       "apiName": "prepza API"
     },
     "companies": {
@@ -1326,7 +1326,7 @@
     "name": "API",
     "rowText": "Sleutels en webhooks om je eigen platform te koppelen.",
     "counts": "{keys, plural, one {# sleutel} other {# sleutels}} · {webhooks, plural, one {# webhook} other {# webhooks}}",
-    "docs": "API-documentatie",
+    "docs": "Ontwikkelaarsdocumentatie",
     "keysTitle": "API-sleutels",
     "keysText": "Een sleutel leest je interviews en kandidaten en nodigt kandidaten uit namens de persoon die hem heeft gemaakt.",
     "noKeys": "Nog geen sleutels.",
@@ -1364,7 +1364,7 @@
     "addWebhookTitle": "Nieuwe webhook",
     "webhookUrl": "HTTPS-adres, bijv. https://example.com/prepza",
     "webhookCreatedTitle": "Het secret van je webhook",
-    "webhookCreatedText": "Gebruik het om de handtekening van elk verzoek te controleren (zie de API-documentatie). Kopieer het nu: het wordt niet opnieuw getoond.",
+    "webhookCreatedText": "Gebruik het om de handtekening van elk verzoek te controleren (zie de ontwikkelaarsdocumentatie). Kopieer het nu: het wordt niet opnieuw getoond.",
     "copySecret": "Secret kopiëren",
     "secretCopied": "Secret gekopieerd",
     "added": "toegevoegd op {date}",
@@ -1375,9 +1375,14 @@
     "removeFailed": "Kan niet worden verwijderd."
   },
   "apiDocs": {
-    "title": "API-documentatie",
-    "intro": "Koppel prepza aan je eigen platform: bekijk je interviews, nodig kandidaten uit en ontvang hun resultaten.",
-    "description": "De referentie van de prepza-API: vraag een API-sleutel aan, bekijk je interviews, nodig kandidaten uit, lees hun resultaten en ontvang ze via een webhook.",
+    "title": "Ontwikkelaarsdocumentatie",
+    "intro": "Koppel prepza aan je eigen platform: bekijk je interviews, nodig kandidaten uit, ontvang hun resultaten en sluit het interview in op je eigen website.",
+    "description": "De ontwikkelaarsdocumentatie van prepza: vraag een API-sleutel aan, bekijk je interviews, nodig kandidaten uit, lees hun resultaten, ontvang ze via een webhook en sluit het interview in met de SDK.",
+    "tabs": {
+      "api": "API",
+      "webhooks": "Webhooks",
+      "sdk": "SDK"
+    },
     "englishOnly": "Deze pagina is alleen in het Engels.",
     "baseUrl": "Basis-URL",
     "copyBaseUrl": "URL kopiëren",

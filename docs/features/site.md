@@ -103,7 +103,7 @@ The chat's model is set in [Generation settings](../generation.md#models).
 
 ## Documents for companies
 
-The `/documents` page ("docs" in the footer) offers companies:
+The `/documents` page ("legal docs" in the footer) offers companies:
 
 - instructions for use, as a PDF,
 - the data processing agreement, as a PDF,
@@ -117,9 +117,16 @@ After changing one, rebuild the files in `frontend/public/documents` and commit 
 ./scripts/documents/build.sh   # needs uv (for pandoc) and Docker (Chromium prints the PDFs)
 ```
 
-## API docs
+## Developer docs
 
-The `/api-docs` page ("api docs" in the footer) is the public API's reference, in English only, like the legal pages. It reads the API's OpenAPI description on each request (`lib/openapi.ts`, `components/api-docs/`): its description's sections (getting a key, authentication, limits, errors, web hooks), the base URL, each route with its parameters, body, result and errors, the `candidate.finished` web hook and the objects. See [Public API](api.md).
+The `/api-docs` page ("developer docs" in the footer) is the public API's reference, in English only, like the legal pages. It reads the API's OpenAPI description on each request (`lib/openapi.ts`, `components/api-docs/`) and shows it in four tabs (`?tab=`, `constants/api-docs.ts`), the description split at its `# ` titles:
+
+- **API** (the page's own address): getting a key, authentication, limits, errors, sending candidates from your own platform and verified companies, then the base URL and each route with its parameters, body, result and errors;
+- **web hooks**: signatures and delivery, then the `candidate.finished` event;
+- **SDK**: embedding the interview with the hosted script, with a code example;
+- **objects**: what the routes and the web hook return; a type anywhere links to its object here.
+
+The description's text may hold bold, inline code, links (`[text](/api-docs?tab=sdk)`: the API tab links its mentions of the web hook and of embedding to their tabs) and code blocks. See [Public API](api.md).
 
 ## Contact us
 
@@ -157,7 +164,7 @@ Every public page has its title, description, canonical address and link-preview
 - The logo over the page's own title in its language, drawn by `app/preview/route.tsx` in the site's dark theme and Poppins (`frontend/assets/fonts`). Other scripts' letters come from Google Fonts. The picture is sent with `X-Robots-Tag: noindex`, so search engines don't list it while link-preview bots still fetch it. Each page's picture address carries a signature of its title and language (`PREVIEW_SECRET`), and any other title gets a 404, so nobody can put their own text under the logo.
 - The home page uses the home page's promise instead (`app/opengraph-image.tsx`). So do Arabic, Persian, Hebrew and Hindi, which the renderer can't draw.
 
-**Structured data:** organization, product and price range, founder, articles (with their picture and language), the API docs as a technical article in English, breadcrumbs (role and practice pages, the API docs), FAQ (left out when there are no questions).
+**Structured data:** organization, product and price range, founder, articles (with their picture and language), the developer docs as a technical article in English, breadcrumbs (role and practice pages, the API docs), FAQ (left out when there are no questions).
 
 **Sitemap:** every language version, article, and the pages of each indexable template, dated by the template's last change. The news page is dated by its newest post, and the privacy policy, terms and DPA by their last update.
 

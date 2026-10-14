@@ -86,10 +86,25 @@ const STEP = /^\d+\.\s+/
 
 type Pieces = ReturnType<typeof pieces>
 
+/** The description split at its "# " titles, by tab ("# Web hooks" is "webhooks"): what each of
+ * the developer docs' tabs says before its own reference. */
+export function descriptionTabs(text: string): Record<string, string> {
+  const tabs: Record<string, string> = {}
+
+  for (const part of text.split(/^# /m).slice(1)) {
+    const [title, ...rest] = part.split("\n")
+    tabs[title.trim().toLowerCase().replace(/\s+/g, "")] = rest
+      .join("\n")
+      .trim()
+  }
+
+  return tabs
+}
+
 /** A description's sections: its text up to the first "## " title (title null), then each
  * title with the blocks under it. A block is a paragraph, numbered steps when every line
  * starts a step ("1. ", "2. ") or goes on with one (indented), or code between "```" lines, kept
- * as written; text comes as text, bold and code pieces ("**", "`"). */
+ * as written; text comes as text, bold, code and link pieces ("**", "`", "[text](href)"). */
 export function richText(text: string) {
   const sections: {
     title: string | null
@@ -128,9 +143,15 @@ export function richText(text: string) {
 function pieces(paragraph: string) {
   return paragraph
     .replace(/\s*\n\s*/g, " ")
-    .split(/(\*\*[^*]+\*\*|`[^`]+`)/)
+    .split(/(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/)
     .filter(Boolean)
     .map((piece) => {
+      const link = /^\[([^\]]+)\]\(([^)]+)\)$/.exec(piece)
+
+      if (link) {
+        return { text: link[1], kind: "link" as const, href: link[2] }
+      }
+
       if (piece.startsWith("**")) {
         return { text: piece.slice(2, -2), kind: "bold" as const }
       }

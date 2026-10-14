@@ -51,7 +51,7 @@
     "pricing": "Fiyatlar",
     "privacy": "Gizlilik",
     "terms": "Koşullar",
-    "docs": "Belgeler",
+    "docs": "Yasal belgeler",
     "back": "Geri",
     "hiring": "işe alım",
     "pricingLink": "fiyatlar",
@@ -64,7 +64,7 @@
     "aiInterviews": "Yapay zekâ mülakatları",
     "compare": "Karşılaştır",
     "guides": "Rehberler",
-    "apiDocs": "API belgeleri",
+    "apiDocs": "Geliştirici belgeleri",
     "news": "Haberler"
   },
   "signIn": {
@@ -740,7 +740,7 @@
     }
   },
   "docs": {
-    "title": "Belgeler",
+    "title": "Yasal belgeler",
     "metaTitle": "İşe alım için mevzuata uyum belgeleri",
     "intro": "Adayları prepza ile değerlendiren şirketler için belgeler: talimatlar, şablonlar ve veri işleme sözleşmesi.",
     "englishOnly": "Bu belgeler yalnızca İngilizce olarak mevcuttur.",
@@ -948,7 +948,7 @@
         "api": "Platformunuz: API ile davet edin, sonuçlar webhook ile gelsin",
         "mcp": "Yapay zekâ sohbetiniz: MCP ile Claude veya ChatGPT'de prepza"
       },
-      "docs": "API belgeleri",
+      "docs": "Geliştirici belgeleri",
       "apiName": "prepza API"
     },
     "companies": {
@@ -1329,7 +1329,7 @@
     "name": "API",
     "rowText": "Kendi platformunuzu bağlamak için anahtarlar ve webhook'lar.",
     "counts": "{keys, plural, one {# anahtar} other {# anahtar}} · {webhooks, plural, one {# webhook} other {# webhook}}",
-    "docs": "API belgeleri",
+    "docs": "Geliştirici belgeleri",
     "keysTitle": "API anahtarları",
     "keysText": "Bir anahtar, mülakatlarınızı ve adaylarınızı okur ve onu oluşturan kişi adına aday davet eder.",
     "noKeys": "Henüz anahtar yok.",
@@ -1367,7 +1367,7 @@
     "addWebhookTitle": "Yeni webhook",
     "webhookUrl": "HTTPS adresi, ör. https://example.com/prepza",
     "webhookCreatedTitle": "Webhook'unuzun gizli anahtarı",
-    "webhookCreatedText": "Her isteğin imzasını doğrulamak için kullanın (API belgelerine bakın). Şimdi kopyalayın: bir daha gösterilmeyecek.",
+    "webhookCreatedText": "Her isteğin imzasını doğrulamak için kullanın (geliştirici belgelerine bakın). Şimdi kopyalayın: bir daha gösterilmeyecek.",
     "copySecret": "Gizli anahtarı kopyala",
     "secretCopied": "Gizli anahtar kopyalandı",
     "added": "eklenme: {date}",
@@ -1378,9 +1378,14 @@
     "removeFailed": "Silinemedi."
   },
   "apiDocs": {
-    "title": "API belgeleri",
-    "intro": "prepza'yı kendi platformunuza bağlayın: mülakatlarınızı listeleyin, aday davet edin ve sonuçlarını alın.",
-    "description": "prepza API başvuru belgesi: API anahtarı alın, mülakatlarınızı listeleyin, aday davet edin, sonuçlarını okuyun ve webhook ile alın.",
+    "title": "Geliştirici belgeleri",
+    "intro": "prepza'yı kendi platformunuza bağlayın: mülakatlarınızı listeleyin, aday davet edin, sonuçlarını alın ve mülakatı kendi sitenize yerleştirin.",
+    "description": "prepza geliştirici belgeleri: API anahtarı alın, mülakatlarınızı listeleyin, aday davet edin, sonuçlarını okuyun, webhook ile alın ve mülakatı SDK ile sitenize yerleştirin.",
+    "tabs": {
+      "api": "API",
+      "webhooks": "Webhook'lar",
+      "sdk": "SDK"
+    },
     "englishOnly": "Bu sayfa yalnızca İngilizce.",
     "baseUrl": "Temel URL",
     "copyBaseUrl": "URL'yi kopyala",

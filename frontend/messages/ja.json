@@ -51,7 +51,7 @@
     "pricing": "料金",
     "privacy": "プライバシー",
     "terms": "利用規約",
-    "docs": "資料",
+    "docs": "法的文書",
     "back": "戻る",
     "hiring": "採用",
     "pricingLink": "料金",
@@ -64,7 +64,7 @@
     "aiInterviews": "AI 面接",
     "compare": "比較",
     "guides": "ガイド",
-    "apiDocs": "API ドキュメント",
+    "apiDocs": "開発者向けドキュメント",
     "news": "お知らせ"
   },
   "signIn": {
@@ -740,7 +740,7 @@
     }
   },
   "docs": {
-    "title": "資料",
+    "title": "法的文書",
     "metaTitle": "採用のコンプライアンス資料",
     "intro": "prepza で候補者を評価する会社向けの資料です。利用ガイド、テンプレート、データ処理契約があります。",
     "englishOnly": "これらの資料は英語版のみです。",
@@ -953,7 +953,7 @@
         "api": "自社プラットフォーム：API で招待し、結果は Webhook で届く",
         "mcp": "AI チャット：MCP で Claude や ChatGPT から prepza を利用"
       },
-      "docs": "API ドキュメント",
+      "docs": "開発者向けドキュメント",
       "apiName": "prepza API"
     },
     "companies": {
@@ -1334,7 +1334,7 @@
     "name": "API",
     "rowText": "自社のプラットフォームと連携するためのキーと Webhook。",
     "counts": "{keys, plural, other {キー # 件}} · {webhooks, plural, other {Webhook # 件}}",
-    "docs": "API ドキュメント",
+    "docs": "開発者向けドキュメント",
     "keysTitle": "API キー",
     "keysText": "キーは、作成した人として面接と候補者を読み取り、候補者を招待します。",
     "noKeys": "キーはまだありません。",
@@ -1372,7 +1372,7 @@
     "addWebhookTitle": "新しい Webhook",
     "webhookUrl": "HTTPS アドレス（例：https://example.com/prepza）",
     "webhookCreatedTitle": "Webhook のシークレット",
-    "webhookCreatedText": "各リクエストの署名の検証に使います（API ドキュメントを参照）。今すぐコピーしてください。今後は表示されません。",
+    "webhookCreatedText": "各リクエストの署名の検証に使います（開発者向けドキュメントを参照）。今すぐコピーしてください。今後は表示されません。",
     "copySecret": "シークレットをコピー",
     "secretCopied": "シークレットをコピーしました",
     "added": "{date} に追加",
@@ -1383,9 +1383,14 @@
     "removeFailed": "削除できませんでした。"
   },
   "apiDocs": {
-    "title": "API ドキュメント",
-    "intro": "prepza を自社のプラットフォームと連携できます。面接の一覧取得、候補者の招待、結果の取得が可能です。",
-    "description": "prepza API リファレンス。API キーの取得、面接の一覧取得、候補者の招待、結果の取得と Webhook での受け取りについて説明します。",
+    "title": "開発者向けドキュメント",
+    "intro": "prepza を自社のプラットフォームと連携できます。面接の一覧取得、候補者の招待、結果の取得、自社サイトへの面接の埋め込みが可能です。",
+    "description": "prepza の開発者向けドキュメント。API キーの取得、面接の一覧取得、候補者の招待、結果の取得と Webhook での受け取り、SDK による面接の埋め込みについて説明します。",
+    "tabs": {
+      "api": "API",
+      "webhooks": "Webhook",
+      "sdk": "SDK"
+    },
     "englishOnly": "このページは英語のみです。",
     "baseUrl": "ベース URL",
     "copyBaseUrl": "URL をコピー",

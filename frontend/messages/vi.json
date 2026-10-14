@@ -51,7 +51,7 @@
     "pricing": "Bảng giá",
     "privacy": "Quyền riêng tư",
     "terms": "Điều khoản",
-    "docs": "Tài liệu",
+    "docs": "Tài liệu pháp lý",
     "back": "Quay lại",
     "hiring": "tuyển dụng",
     "pricingLink": "bảng giá",
@@ -64,7 +64,7 @@
     "aiInterviews": "Phỏng vấn AI",
     "compare": "So sánh",
     "guides": "Hướng dẫn",
-    "apiDocs": "Tài liệu API",
+    "apiDocs": "Tài liệu cho nhà phát triển",
     "news": "Tin tức"
   },
   "signIn": {
@@ -740,7 +740,7 @@
     }
   },
   "docs": {
-    "title": "Tài liệu",
+    "title": "Tài liệu pháp lý",
     "metaTitle": "Tài liệu tuân thủ trong tuyển dụng",
     "intro": "Tài liệu cho các công ty đánh giá ứng viên bằng prepza: hướng dẫn, mẫu và thỏa thuận xử lý dữ liệu.",
     "englishOnly": "Các tài liệu này chỉ có bằng tiếng Anh.",
@@ -945,7 +945,7 @@
         "api": "Nền tảng của bạn: mời qua API, kết quả gửi về qua webhook",
         "mcp": "Chat AI của bạn: dùng prepza trong Claude hoặc ChatGPT qua MCP"
       },
-      "docs": "Tài liệu API",
+      "docs": "Tài liệu cho nhà phát triển",
       "apiName": "API prepza"
     },
     "companies": {
@@ -1326,7 +1326,7 @@
     "name": "API",
     "rowText": "Khóa và webhook để kết nối nền tảng của riêng bạn.",
     "counts": "{keys, plural, other {# khóa}} · {webhooks, plural, other {# webhook}}",
-    "docs": "Tài liệu API",
+    "docs": "Tài liệu cho nhà phát triển",
     "keysTitle": "Khóa API",
     "keysText": "Khóa có thể đọc các buổi phỏng vấn và ứng viên của bạn, đồng thời mời ứng viên với tư cách người đã tạo khóa.",
     "noKeys": "Chưa có khóa nào.",
@@ -1364,7 +1364,7 @@
     "addWebhookTitle": "Webhook mới",
     "webhookUrl": "Địa chỉ HTTPS, ví dụ https://example.com/prepza",
     "webhookCreatedTitle": "Khóa bí mật của webhook",
-    "webhookCreatedText": "Dùng nó để kiểm tra chữ ký của mỗi yêu cầu (xem tài liệu API). Hãy sao chép ngay: khóa bí mật sẽ không được hiển thị lại.",
+    "webhookCreatedText": "Dùng nó để kiểm tra chữ ký của mỗi yêu cầu (xem tài liệu cho nhà phát triển). Hãy sao chép ngay: khóa bí mật sẽ không được hiển thị lại.",
     "copySecret": "Sao chép khóa bí mật",
     "secretCopied": "Đã sao chép khóa bí mật",
     "added": "thêm ngày {date}",
@@ -1375,9 +1375,14 @@
     "removeFailed": "Không xóa được."
   },
   "apiDocs": {
-    "title": "Tài liệu API",
-    "intro": "Kết nối prepza với nền tảng của riêng bạn: xem danh sách phỏng vấn, mời ứng viên và nhận kết quả của họ.",
-    "description": "Tài liệu tham khảo API của prepza: lấy khóa API, xem danh sách phỏng vấn, mời ứng viên, đọc kết quả và nhận kết quả qua webhook.",
+    "title": "Tài liệu cho nhà phát triển",
+    "intro": "Kết nối prepza với nền tảng của riêng bạn: xem danh sách phỏng vấn, mời ứng viên, nhận kết quả của họ và nhúng buổi phỏng vấn vào trang web của bạn.",
+    "description": "Tài liệu cho nhà phát triển của prepza: lấy khóa API, xem danh sách phỏng vấn, mời ứng viên, đọc kết quả, nhận kết quả qua webhook và nhúng buổi phỏng vấn bằng SDK.",
+    "tabs": {
+      "api": "API",
+      "webhooks": "Webhook",
+      "sdk": "SDK"
+    },
     "englishOnly": "Trang này chỉ có bằng tiếng Anh.",
     "baseUrl": "URL gốc",
     "copyBaseUrl": "Sao chép URL",

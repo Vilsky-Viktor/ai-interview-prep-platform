@@ -51,7 +51,7 @@
     "pricing": "Hinnad",
     "privacy": "Privaatsus",
     "terms": "Tingimused",
-    "docs": "Dokumendid",
+    "docs": "Juriidilised dokumendid",
     "back": "Tagasi",
     "hiring": "värbamine",
     "pricingLink": "hinnad",
@@ -64,7 +64,7 @@
     "aiInterviews": "AI-intervjuud",
     "compare": "Võrdlus",
     "guides": "Juhendid",
-    "apiDocs": "API dokumentatsioon",
+    "apiDocs": "Arendajate dokumentatsioon",
     "news": "Uudised"
   },
   "signIn": {
@@ -740,7 +740,7 @@
     }
   },
   "docs": {
-    "title": "Dokumendid",
+    "title": "Juriidilised dokumendid",
     "metaTitle": "Värbamise nõuetele vastavuse dokumendid",
     "intro": "Dokumendid ettevõtetele, kes hindavad kandidaate prepzaga: juhend, mallid ja andmetöötlusleping.",
     "englishOnly": "Need dokumendid on saadaval ainult inglise keeles.",
@@ -953,7 +953,7 @@
         "api": "Sinu platvorm: kutsu API kaudu, tulemused saabuvad webhookiga",
         "mcp": "Sinu AI-vestlus: kasuta prepzat Claude'is või ChatGPT-s MCP kaudu"
       },
-      "docs": "API dokumentatsioon",
+      "docs": "Arendajate dokumentatsioon",
       "apiName": "prepza API"
     },
     "companies": {
@@ -1334,7 +1334,7 @@
     "name": "API",
     "rowText": "Võtmed ja webhookid oma platvormi ühendamiseks.",
     "counts": "{keys, plural, one {# võti} other {# võtit}} · {webhooks, plural, one {# webhook} other {# webhooki}}",
-    "docs": "API dokumentatsioon",
+    "docs": "Arendajate dokumentatsioon",
     "keysTitle": "API-võtmed",
     "keysText": "Võti loeb sinu intervjuusid ja kandidaate ning kutsub kandidaate selle inimese nimel, kes võtme lõi.",
     "noKeys": "Võtmeid veel pole.",
@@ -1372,7 +1372,7 @@
     "addWebhookTitle": "Uus webhook",
     "webhookUrl": "HTTPS-aadress, nt https://example.com/prepza",
     "webhookCreatedTitle": "Sinu webhooki saladus",
-    "webhookCreatedText": "Kasuta seda iga päringu allkirja kontrollimiseks (vt API dokumentatsiooni). Kopeeri see kohe: seda ei näidata uuesti.",
+    "webhookCreatedText": "Kasuta seda iga päringu allkirja kontrollimiseks (vt arendajate dokumentatsiooni). Kopeeri see kohe: seda ei näidata uuesti.",
     "copySecret": "Kopeeri saladus",
     "secretCopied": "Saladus kopeeritud",
     "added": "lisatud {date}",
@@ -1383,9 +1383,14 @@
     "removeFailed": "Kustutamine ebaõnnestus."
   },
   "apiDocs": {
-    "title": "API dokumentatsioon",
-    "intro": "Ühenda prepza oma platvormiga: vaata oma intervjuusid, kutsu kandidaate ja saa nende tulemused.",
-    "description": "prepza API dokumentatsioon: hangi API-võti, vaata oma intervjuusid, kutsu kandidaate, loe nende tulemusi ja saa need webhooki kaudu.",
+    "title": "Arendajate dokumentatsioon",
+    "intro": "Ühenda prepza oma platvormiga: vaata oma intervjuusid, kutsu kandidaate, saa nende tulemused ja manusta intervjuu oma veebilehele.",
+    "description": "prepza arendajate dokumentatsioon: hangi API-võti, vaata oma intervjuusid, kutsu kandidaate, loe nende tulemusi, saa need webhooki kaudu ja manusta intervjuu SDK abil.",
+    "tabs": {
+      "api": "API",
+      "webhooks": "Webhookid",
+      "sdk": "SDK"
+    },
     "englishOnly": "See leht on ainult inglise keeles.",
     "baseUrl": "Baas-URL",
     "copyBaseUrl": "Kopeeri URL",

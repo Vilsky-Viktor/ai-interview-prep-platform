@@ -6,7 +6,8 @@
  *   <script>
  *     Prepza.embed({
  *       element: "#interview",
- *       url: inviteUrl, // the invite_url your server got from POST /v1/interviews/{id}/candidates
+ *       // The invite_url your server got from POST /v1/interviews/{id}/candidates.
+ *       url: "https://prepza.ai/invite/3fTq9xLk2VbN7wZr8YcP1mHd5sJ4gAe6uQo0RiKtEy",
  *       onFinish: ({ candidateId }) => {},
  *     })
  *   </script>

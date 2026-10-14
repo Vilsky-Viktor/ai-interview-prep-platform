@@ -1,64 +1,12 @@
-# The public API's description, at the top of its reference.
+# The public API's description: its reference's API, web hooks and SDK tabs, each under its
+# "# " title (the developer docs page splits it there; objects are the fourth tab).
 API_TITLE = "prepza API"
 API_VERSION = "1"
-API_DESCRIPTION = """The prepza API connects prepza to your own platform. Use it to retrieve your
-company's interviews, invite candidates and read their results, and receive a web hook as soon as
-a candidate finishes.
+API_DESCRIPTION = """# API
 
-## Results support a person's decision
-
-A candidate's `grade`, `passed` and `signals` help a person decide; they are not a decision.
-Don't reject candidates automatically on them: before rejecting anyone, a person should open the
-candidate's full results (`results_url`) and review them.
-
-## Invite links
-
-Until a candidate finishes, they come with their invite link (`invite_url`), the same link the
-invite email carries. Send it to them yourself if the email didn't reach them; only the invited
-email can use it, unless they were invited with `sign_in` false. It's null once they've finished
-or the invite has expired.
-
-## Sending candidates from your own platform
-
-When your platform already knows who the candidate is, invite them with `sign_in` false: prepza
-sends no emails, and the `invite_url` opens the interview without signing in to prepza. Anyone
-with that link can take the interview, so give it only to the candidate. Add a `return_url` on
-your company's verified website domain to bring them back once they've finished, or embed the
-interview in your own page instead.
-
-## Verified companies
-
-Bringing candidates back to your site and embedding the interview work only on your company's
-verified website domain and its subdomains. To verify your company, select **Verify** next to its
-name in prepza and enter its website. Once an owner or admin signs in with a work email on that
-domain, prepza reviews the company and adds the verified badge; until then, a `return_url`
-returns `422` and an embedded interview isn't shown.
-
-## Embedding the interview
-
-Your page can show the interview itself, for a candidate invited with `sign_in` false. Your
-server invites them and passes the `invite_url` to your page, which embeds it with prepza's
-script; never put your API key in a page. The page must be on your company's verified website
-domain (or a subdomain of it) and served over HTTPS: anywhere else the interview isn't shown.
-
-```html
-<div id="interview"></div>
-<script src="https://prepza.ai/embed/v1.js"></script>
-<script>
-  const interview = Prepza.embed({
-    element: "#interview",
-    url: inviteUrl,
-    onReady: () => {},
-    onStart: () => {},
-    onFinish: ({ candidateId }) => {},
-  })
-</script>
-```
-
-The frame fits its height to the interview. `onFinish` gets the candidate's `id`, so your page
-can take them on; their results come with the `candidate.finished` web hook as usual.
-`interview.destroy()` removes the frame. While the interview runs, the candidate should stay on
-it: leaving it, including for the rest of your page, is recorded as a page leave.
+The prepza API connects prepza to your own platform. Use it to retrieve your
+company's interviews, invite candidates and read their results, and receive a
+[web hook](/api-docs?tab=webhooks) as soon as a candidate finishes.
 
 ## Getting an API key
 
@@ -90,7 +38,36 @@ items per request).
 Failed requests return a standard HTTP status code and a JSON body whose `detail` field describes
 the problem. Each endpoint below lists the errors it can return.
 
-## Web hooks
+## Results support a person's decision
+
+A candidate's `grade`, `passed` and `signals` help a person decide; they are not a decision.
+Don't reject candidates automatically on them: before rejecting anyone, a person should open the
+candidate's full results (`results_url`) and review them.
+
+## Invite links
+
+Until a candidate finishes, they come with their invite link (`invite_url`), the same link the
+invite email carries. Send it to them yourself if the email didn't reach them; only the invited
+email can use it, unless they were invited with `sign_in` false. It's null once they've finished
+or the invite has expired.
+
+## Sending candidates from your own platform
+
+When your platform already knows who the candidate is, invite them with `sign_in` false: prepza
+sends no emails, and the `invite_url` opens the interview without signing in to prepza. Anyone
+with that link can take the interview, so give it only to the candidate. Add a `return_url` on
+your company's verified website domain to bring them back once they've finished, or [embed the
+interview](/api-docs?tab=sdk) in your own page instead.
+
+## Verified companies
+
+Bringing candidates back to your site and [embedding the interview](/api-docs?tab=sdk) work only
+on your company's verified website domain and its subdomains. To verify your company, select
+**Verify** next to its name in prepza and enter its website. Once an owner or admin signs in with
+a work email on that domain, prepza reviews the company and adds the verified badge; until then, a
+`return_url` returns `422` and an [embedded interview](/api-docs?tab=sdk) isn't shown.
+
+# Web hooks
 
 Owners and admins can add up to 5 web hook endpoints on the same API page. When a candidate
 finishes an interview, prepza sends a `candidate.finished` event as a `POST` request to each
@@ -106,4 +83,30 @@ and reject requests whose timestamp is more than a few minutes old, before proce
 Respond with any `2xx` status within 10 seconds to confirm delivery. Other responses and timeouts
 are retried with growing pauses, from 5 minutes up to 6 hours apart, for 3 days; after that the
 web hook is marked as failing on the API page until it takes an event again. An event can
-occasionally arrive more than once; use its `id` to ignore duplicates."""
+occasionally arrive more than once; use its `id` to ignore duplicates.
+
+# SDK
+
+Your page can show the interview itself, for a candidate invited with `sign_in` false. Your
+server invites them and passes the `invite_url` to your page, which embeds it with prepza's
+script; never put your API key in a page. The page must be on your company's verified website
+domain (or a subdomain of it) and served over HTTPS: anywhere else the interview isn't shown.
+
+```html
+<div id="interview"></div>
+<script src="https://prepza.ai/embed/v1.js"></script>
+<script>
+  const interview = Prepza.embed({
+    element: "#interview",
+    url: "https://prepza.ai/invite/3fTq9xLk2VbN7wZr8YcP1mHd5sJ4gAe6uQo0RiKtEy",
+    onReady: () => {},
+    onStart: () => {},
+    onFinish: ({ candidateId }) => {},
+  })
+</script>
+```
+
+The frame fits its height to the interview. `onFinish` gets the candidate's `id`, so your page
+can take them on; their results come with the `candidate.finished` web hook as usual.
+`interview.destroy()` removes the frame. While the interview runs, the candidate should stay on
+it: leaving it, including for the rest of your page, is recorded as a page leave."""

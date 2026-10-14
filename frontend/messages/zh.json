@@ -51,7 +51,7 @@
     "pricing": "价格",
     "privacy": "隐私",
     "terms": "条款",
-    "docs": "文档",
+    "docs": "法律文件",
     "back": "返回",
     "hiring": "招聘",
     "pricingLink": "价格",
@@ -64,7 +64,7 @@
     "aiInterviews": "AI 面试",
     "compare": "对比",
     "guides": "指南",
-    "apiDocs": "API 文档",
+    "apiDocs": "开发者文档",
     "news": "新闻"
   },
   "signIn": {
@@ -740,7 +740,7 @@
     }
   },
   "docs": {
-    "title": "文档",
+    "title": "法律文件",
     "metaTitle": "招聘合规文档",
     "intro": "供使用 prepza 评估候选人的公司使用的文档：使用说明、模板和数据处理协议。",
     "englishOnly": "这些文档仅提供英文版本。",
@@ -940,7 +940,7 @@
         "api": "你的平台：通过 API 邀请，结果经 Webhook 送达",
         "mcp": "你的 AI 聊天：通过 MCP 在 Claude 或 ChatGPT 中使用 prepza"
       },
-      "docs": "API 文档",
+      "docs": "开发者文档",
       "apiName": "prepza API"
     },
     "companies": {
@@ -1321,7 +1321,7 @@
     "name": "API",
     "rowText": "用于连接你自己平台的密钥和 Webhook。",
     "counts": "{keys, plural, other {# 个密钥}} · {webhooks, plural, other {# 个 Webhook}}",
-    "docs": "API 文档",
+    "docs": "开发者文档",
     "keysTitle": "API 密钥",
     "keysText": "密钥会以创建者的身份读取你的面试和候选人，并邀请候选人。",
     "noKeys": "还没有密钥。",
@@ -1359,7 +1359,7 @@
     "addWebhookTitle": "新建 Webhook",
     "webhookUrl": "HTTPS 地址，例如 https://example.com/prepza",
     "webhookCreatedTitle": "你的 Webhook 签名密钥",
-    "webhookCreatedText": "用它校验每个请求的签名（参见 API 文档）。请立即复制：它不会再次显示。",
+    "webhookCreatedText": "用它校验每个请求的签名（参见开发者文档）。请立即复制：它不会再次显示。",
     "copySecret": "复制签名密钥",
     "secretCopied": "签名密钥已复制",
     "added": "添加于 {date}",
@@ -1370,9 +1370,14 @@
     "removeFailed": "无法删除。"
   },
   "apiDocs": {
-    "title": "API 文档",
-    "intro": "将 prepza 连接到你自己的平台：列出你的面试、邀请候选人并获取他们的结果。",
-    "description": "prepza API 参考：获取 API 密钥、列出你的面试、邀请候选人、读取他们的结果，并通过 Webhook 接收。",
+    "title": "开发者文档",
+    "intro": "将 prepza 连接到你自己的平台：列出你的面试、邀请候选人、获取他们的结果，并将面试嵌入你自己的网站。",
+    "description": "prepza 开发者文档：获取 API 密钥、列出你的面试、邀请候选人、读取他们的结果、通过 Webhook 接收，并使用 SDK 嵌入面试。",
+    "tabs": {
+      "api": "API",
+      "webhooks": "Webhook",
+      "sdk": "SDK"
+    },
     "englishOnly": "此页面仅提供英文版。",
     "baseUrl": "基础 URL",
     "copyBaseUrl": "复制 URL",

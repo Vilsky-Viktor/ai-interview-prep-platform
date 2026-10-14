@@ -48,7 +48,7 @@ Everything is under `https://<domain>/api/v1`, with `Authorization: Bearer pz_..
 
 `/companies/<id>/integrations/api`, from the **API** row on the integrations tab (which shows how many keys and web hooks the company has):
 
-- Two tabs, **API keys** and **web hooks**, each a list with its own button in the title row (**new key**, **add web hook**) for owners and admins, next to **api docs**.
+- Two tabs, **API keys** and **web hooks**, each a list with its own button in the title row (**new key**, **add web hook**) for owners and admins, next to **developer docs**.
 - A key shows its first characters, when it was made, when it expires (or that it expired), and when it was last used (noted at most once a minute). Viewers see the lists without the buttons.
 
 ## How it's built

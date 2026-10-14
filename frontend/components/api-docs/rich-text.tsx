@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 import { KeepAcronyms } from "@/components/keep-acronyms"
 import { richText } from "@/lib/openapi"
 
@@ -30,7 +32,7 @@ function Blocks({ blocks }: { blocks: Section["blocks"] }) {
         block.code !== undefined ? (
           <pre
             key={index}
-            className="overflow-x-auto rounded-2xl border bg-muted p-5 font-mono text-sm leading-relaxed"
+            className="my-8 overflow-x-auto rounded-2xl border bg-muted p-5 font-mono text-sm leading-relaxed"
           >
             <code>{block.code}</code>
           </pre>
@@ -58,6 +60,14 @@ function Inline({ pieces }: { pieces: Pieces }) {
       <strong key={at} className="font-medium text-foreground">
         {piece.text}
       </strong>
+    ) : piece.kind === "link" ? (
+      <Link
+        key={at}
+        href={piece.href}
+        className="text-foreground underline underline-offset-4"
+      >
+        {piece.text}
+      </Link>
     ) : piece.kind === "code" ? (
       <code
         key={at}

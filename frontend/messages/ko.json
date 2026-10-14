@@ -51,7 +51,7 @@
     "pricing": "요금",
     "privacy": "개인정보",
     "terms": "이용약관",
-    "docs": "문서",
+    "docs": "법률 문서",
     "back": "뒤로",
     "hiring": "채용",
     "pricingLink": "요금",
@@ -64,7 +64,7 @@
     "aiInterviews": "AI 면접",
     "compare": "비교",
     "guides": "가이드",
-    "apiDocs": "API 문서",
+    "apiDocs": "개발자 문서",
     "news": "소식"
   },
   "signIn": {
@@ -740,7 +740,7 @@
     }
   },
   "docs": {
-    "title": "문서",
+    "title": "법률 문서",
     "metaTitle": "채용 컴플라이언스 문서",
     "intro": "prepza로 지원자를 평가하는 회사를 위한 문서입니다. 이용 안내, 템플릿, 데이터 처리 계약이 있습니다.",
     "englishOnly": "이 문서들은 영어로만 제공됩니다.",
@@ -940,7 +940,7 @@
         "api": "자체 플랫폼: API로 초대하고, 결과는 웹훅으로 수신",
         "mcp": "AI 채팅: MCP로 Claude나 ChatGPT에서 prepza 사용"
       },
-      "docs": "API 문서",
+      "docs": "개발자 문서",
       "apiName": "prepza API"
     },
     "companies": {
@@ -1321,7 +1321,7 @@
     "name": "API",
     "rowText": "자체 플랫폼을 연결하기 위한 키와 웹훅입니다.",
     "counts": "{keys, plural, other {키 #개}} · {webhooks, plural, other {웹훅 #개}}",
-    "docs": "API 문서",
+    "docs": "개발자 문서",
     "keysTitle": "API 키",
     "keysText": "키는 만든 사람의 권한으로 면접과 지원자를 조회하고 지원자를 초대합니다.",
     "noKeys": "아직 키가 없습니다.",
@@ -1359,7 +1359,7 @@
     "addWebhookTitle": "새 웹훅",
     "webhookUrl": "HTTPS 주소 (예: https://example.com/prepza)",
     "webhookCreatedTitle": "웹훅 시크릿",
-    "webhookCreatedText": "각 요청의 서명을 확인하는 데 사용하세요(API 문서 참고). 지금 복사하세요. 다시 표시되지 않습니다.",
+    "webhookCreatedText": "각 요청의 서명을 확인하는 데 사용하세요(개발자 문서 참고). 지금 복사하세요. 다시 표시되지 않습니다.",
     "copySecret": "시크릿 복사",
     "secretCopied": "시크릿을 복사했습니다",
     "added": "{date}에 추가",
@@ -1370,9 +1370,14 @@
     "removeFailed": "삭제하지 못했습니다."
   },
   "apiDocs": {
-    "title": "API 문서",
-    "intro": "prepza를 자체 플랫폼에 연결하세요. 면접 목록을 조회하고, 지원자를 초대하고, 결과를 받을 수 있습니다.",
-    "description": "prepza API 레퍼런스입니다. API 키를 발급받고, 면접 목록을 조회하고, 지원자를 초대하고, 결과를 조회하거나 웹훅으로 받는 방법을 설명합니다.",
+    "title": "개발자 문서",
+    "intro": "prepza를 자체 플랫폼에 연결하세요. 면접 목록을 조회하고, 지원자를 초대하고, 결과를 받고, 면접을 자체 사이트에 삽입할 수 있습니다.",
+    "description": "prepza 개발자 문서입니다. API 키를 발급받고, 면접 목록을 조회하고, 지원자를 초대하고, 결과를 조회하거나 웹훅으로 받고, SDK로 면접을 삽입하는 방법을 설명합니다.",
+    "tabs": {
+      "api": "API",
+      "webhooks": "웹훅",
+      "sdk": "SDK"
+    },
     "englishOnly": "이 페이지는 영어로만 제공됩니다.",
     "baseUrl": "기본 URL",
     "copyBaseUrl": "URL 복사",

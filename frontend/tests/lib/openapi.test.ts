@@ -5,6 +5,7 @@ import {
   fieldsOf,
   operationsOf,
   richText,
+  descriptionTabs,
   schemasOf,
   successSchema,
   typeOf,
@@ -106,6 +107,24 @@ describe("the API docs read the OpenAPI description", () => {
       steps.steps?.map((step) => step.map((piece) => piece.text).join(""))
     ).toEqual(["Sign in.", "Open Hiring, then a tab."])
     expect(after.steps).toBeNull()
+  })
+
+  it("splits a description into its tabs at its top titles", () => {
+    expect(
+      descriptionTabs(
+        "# API\n\nKeys.\n\n## Errors\n\nNone.\n\n# Web hooks\n\nSigned."
+      )
+    ).toEqual({ api: "Keys.\n\n## Errors\n\nNone.", webhooks: "Signed." })
+  })
+
+  it("reads a link in a paragraph, also across lines", () => {
+    const [section] = richText("Get a [web\nhook](/api-docs?tab=webhooks) now.")
+
+    expect(section.blocks[0].pieces).toEqual([
+      { text: "Get a ", kind: "text" },
+      { text: "web hook", kind: "link", href: "/api-docs?tab=webhooks" },
+      { text: " now.", kind: "text" },
+    ])
   })
 
   it("keeps a code block as written", () => {

@@ -25,7 +25,7 @@ test("the home page shows the ATSs, Slack, the API and MCP", async ({ page }) =>
   // The API: an example request under its name, and its docs.
   await expect(section.getByText("prepza API")).toBeVisible();
   await expect(section.getByText("POST /api/v1/interviews/{id}/candidates", { exact: false })).toBeVisible();
-  await expect(section.getByRole("button", { name: /api docs/i })).toHaveAttribute("href", "/api-docs");
+  await expect(section.getByRole("button", { name: /developer docs/i })).toHaveAttribute("href", "/api-docs");
   const points = section.getByRole("listitem").filter({ hasText: /^Your / });
   await expect(points).toHaveText([/^Your ATS:/, /^Your platform:.*API/, /^Your AI chat:.*MCP/]);
   await section.screenshot({ path: test.info().outputPath("ats-section.png") });

@@ -15,8 +15,8 @@ test("the footer groups its links by product, resources and company", async ({ p
   await expect(columns.nth(1).getByRole("link")).toHaveText([
     /guides/i,
     /faq/i,
-    /^docs/i,
-    /api docs/i,
+    /legal docs/i,
+    /developer docs/i,
     /news/i,
   ]);
   await expect(columns.nth(2).getByRole("link")).toHaveText([
