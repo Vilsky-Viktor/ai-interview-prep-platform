@@ -1656,11 +1656,11 @@
         "Erstelle mit „Neues Interview“ ein Interview aus einer Stellenbeschreibung.",
         "Öffne ein Interview, um seine Themen, Kandidaten und Einstellungen zu sehen.",
         "Probiere ein Interview als Kandidat aus oder lösche es.",
-        "Lade Credits auf oder schalte automatisches Aufladen ein, direkt beim Guthaben."
+        "Lade Credits direkt beim Guthaben auf, oder schalte automatisches Aufladen im Tab „Abrechnung“ ein."
       ],
       "tips": [
         "Das Guthaben wird gelb, wenn die Credits knapp werden. Ohne Credits werden keine neuen Einladungen gesendet.",
-        "Die Tabs oben führen zu Vorlagen, deinem Team, Integrationen und Empfehlungen."
+        "Die Tabs oben führen zu Vorlagen, deinem Team, Integrationen, der Abrechnung (für Inhaber und Admins) und Empfehlungen."
       ]
     },
     "newInterview": {

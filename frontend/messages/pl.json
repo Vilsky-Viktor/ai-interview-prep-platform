@@ -1656,11 +1656,11 @@
         "Utwórz rozmowę z opisu stanowiska przyciskiem „Nowa rozmowa”.",
         "Otwórz rozmowę, by zobaczyć jej tematy, kandydatów i ustawienia.",
         "Wypróbuj rozmowę jako kandydat albo ją usuń.",
-        "Doładuj kredyty lub włącz automatyczne doładowanie przy saldzie."
+        "Doładuj kredyty przy saldzie albo włącz automatyczne doładowanie na karcie Rozliczenia."
       ],
       "tips": [
         "Saldo zmienia kolor na bursztynowy, gdy kredytów jest mało. Bez kredytów nowe zaproszenia nie są wysyłane.",
-        "Karty powyżej prowadzą do szablonów, zespołu, integracji i poleceń."
+        "Karty powyżej prowadzą do szablonów, zespołu, integracji, rozliczeń (dla właścicieli i administratorów) i poleceń."
       ]
     },
     "newInterview": {

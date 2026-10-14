@@ -1656,11 +1656,11 @@
         "Crea una entrevista a partir de una descripción del puesto con «Nueva entrevista».",
         "Abre una entrevista para ver sus temas, candidatos y ajustes.",
         "Prueba una entrevista como candidato o elimínala.",
-        "Recarga créditos o activa la recarga automática desde el saldo."
+        "Recarga créditos desde el saldo, o activa la recarga automática en la pestaña Facturación."
       ],
       "tips": [
         "El saldo se vuelve ámbar cuando quedan pocos créditos. Sin créditos, no se envían nuevas invitaciones.",
-        "Las pestañas de arriba llevan a plantillas, tu equipo, integraciones y recomendaciones."
+        "Las pestañas de arriba llevan a plantillas, tu equipo, integraciones, facturación (propietarios y administradores) y recomendaciones."
       ]
     },
     "newInterview": {

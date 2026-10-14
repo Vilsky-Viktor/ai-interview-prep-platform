@@ -1656,11 +1656,11 @@
         "Buat wawancara dari deskripsi pekerjaan dengan “Wawancara baru”.",
         "Buka wawancara untuk melihat topik, kandidat, dan pengaturannya.",
         "Coba wawancara sebagai kandidat, atau hapus.",
-        "Isi ulang kredit, atau aktifkan isi ulang otomatis, dari saldo."
+        "Isi ulang kredit dari saldo, atau aktifkan isi ulang otomatis di tab Tagihan."
       ],
       "tips": [
         "Saldo berubah kuning saat kredit hampir habis. Tanpa kredit, undangan baru tidak dikirim.",
-        "Tab di atas mengarah ke templat, tim, integrasi, dan referal."
+        "Tab di atas mengarah ke templat, tim, integrasi, tagihan (pemilik dan admin), dan referal."
       ]
     },
     "newInterview": {

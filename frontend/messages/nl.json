@@ -1652,11 +1652,11 @@
         "Maak een interview van een functieomschrijving met “Nieuw interview”.",
         "Open een interview om de onderwerpen, kandidaten en instellingen te zien.",
         "Probeer een interview als kandidaat, of verwijder het.",
-        "Waardeer credits op, of zet automatisch opwaarderen aan, via het saldo."
+        "Waardeer credits op via het saldo, of zet automatisch opwaarderen aan op het tabblad Facturering."
       ],
       "tips": [
         "Het saldo wordt oranje als de credits bijna op zijn. Zonder credits worden nieuwe uitnodigingen niet verstuurd.",
-        "De tabbladen hierboven leiden naar sjablonen, je team, integraties en doorverwijzingen."
+        "De tabbladen hierboven leiden naar sjablonen, je team, integraties, facturering (eigenaren en beheerders) en doorverwijzingen."
       ]
     },
     "newInterview": {

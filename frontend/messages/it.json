@@ -1656,11 +1656,11 @@
         "Crea un colloquio da una descrizione del ruolo con «Nuovo colloquio».",
         "Apri un colloquio per vederne argomenti, candidati e impostazioni.",
         "Prova un colloquio come candidato, oppure eliminalo.",
-        "Ricarica i crediti, o attiva la ricarica automatica, dal saldo."
+        "Ricarica i crediti dal saldo, o attiva la ricarica automatica nella scheda Fatturazione."
       ],
       "tips": [
         "Il saldo diventa ambra quando i crediti stanno per finire. Senza crediti, i nuovi inviti non vengono inviati.",
-        "Le schede in alto portano a modelli, team, integrazioni e referral."
+        "Le schede in alto portano a modelli, team, integrazioni, fatturazione (proprietari e amministratori) e referral."
       ]
     },
     "newInterview": {

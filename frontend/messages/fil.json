@@ -1660,11 +1660,11 @@
         "Gumawa ng interview mula sa job description gamit ang “bagong interview”.",
         "Buksan ang isang interview para makita ang mga topic, aplikante at setting nito.",
         "Subukan ang interview bilang aplikante, o burahin ito.",
-        "Mag-top up ng credits, o i-on ang awtomatikong top-up, mula sa balanse."
+        "Mag-top up ng credits mula sa balanse, o i-on ang awtomatikong top-up sa tab na Billing."
       ],
       "tips": [
         "Nagiging amber ang balanse kapag paubos na ang credits. Kapag walang credits, hindi naipapadala ang mga bagong imbitasyon.",
-        "Sa mga tab sa itaas makikita ang mga template, ang iyong team, mga integration at referrals."
+        "Sa mga tab sa itaas makikita ang mga template, ang iyong team, mga integration, billing (para sa mga may-ari at admin) at referrals."
       ]
     },
     "newInterview": {

@@ -1656,11 +1656,11 @@
         "Créez un entretien à partir d'une description de poste avec « Nouvel entretien ».",
         "Ouvrez un entretien pour voir ses thèmes, ses candidats et ses paramètres.",
         "Essayez un entretien en tant que candidat, ou supprimez-le.",
-        "Rechargez des crédits, ou activez la recharge automatique, depuis le solde."
+        "Rechargez des crédits depuis le solde, ou activez la recharge automatique dans l'onglet Facturation."
       ],
       "tips": [
         "Le solde passe à l'orange quand les crédits s'épuisent. Sans crédits, les nouvelles invitations ne sont pas envoyées.",
-        "Les onglets ci-dessus mènent aux modèles, à votre équipe, aux intégrations et au parrainage."
+        "Les onglets ci-dessus mènent aux modèles, à votre équipe, aux intégrations, à la facturation (propriétaires et administrateurs) et au parrainage."
       ]
     },
     "newInterview": {

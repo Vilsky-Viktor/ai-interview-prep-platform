@@ -1652,11 +1652,11 @@
         "Crie uma entrevista a partir de uma descrição de vaga com “Nova entrevista”.",
         "Abra uma entrevista para ver os tópicos, candidatos e configurações.",
         "Experimente uma entrevista como candidato ou exclua-a.",
-        "Recarregue créditos ou ative a recarga automática pelo saldo."
+        "Recarregue créditos pelo saldo, ou ative a recarga automática na aba Faturamento."
       ],
       "tips": [
         "O saldo fica âmbar quando os créditos estão acabando. Sem créditos, novos convites não são enviados.",
-        "As abas acima levam a modelos, sua equipe, integrações e indicações."
+        "As abas acima levam a modelos, sua equipe, integrações, faturamento (proprietários e administradores) e indicações."
       ]
     },
     "newInterview": {

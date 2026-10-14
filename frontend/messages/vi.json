@@ -1652,11 +1652,11 @@
         "Tạo buổi phỏng vấn từ mô tả công việc bằng “Buổi phỏng vấn mới”.",
         "Mở một buổi phỏng vấn để xem chủ đề, ứng viên và cài đặt.",
         "Thử buổi phỏng vấn với vai trò ứng viên, hoặc xóa nó.",
-        "Nạp credit, hoặc bật tự động nạp, từ số dư."
+        "Nạp credit từ số dư, hoặc bật tự động nạp ở thẻ Thanh toán."
       ],
       "tips": [
         "Số dư chuyển màu cam khi sắp hết credit. Khi hết credit, lời mời mới sẽ không được gửi.",
-        "Các thẻ phía trên dẫn tới mẫu, nhóm, tích hợp và giới thiệu."
+        "Các thẻ phía trên dẫn tới mẫu, nhóm, tích hợp, thanh toán (chủ sở hữu và quản trị viên) và giới thiệu."
       ]
     },
     "newInterview": {
