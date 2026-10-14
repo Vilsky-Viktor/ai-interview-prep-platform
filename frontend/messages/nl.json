@@ -1021,7 +1021,8 @@
       "verification_approved": "“{name}” is geverifieerd voor {domain}.",
       "verification_declined": "{reason, select, none {De verificatie van “{name}” is afgewezen.} other {De verificatie van “{name}” is afgewezen: {reason}}}",
       "member_joined": "{email} is lid geworden van “{name}” als {role, select, admin {beheerder} other {kijker}}.",
-      "ats_not_invited": "{count, plural, one {{email} uit {ats} is niet uitgenodigd voor “{title}”: {reason, select, credits {credits op} limit {een e-maillimiet is bereikt} paused {uitnodigingen zijn gepauzeerd} other {er ging iets mis}}.} other {# kandidaten uit {ats} zijn niet uitgenodigd voor “{title}”.}}"
+      "ats_not_invited": "{count, plural, one {{email} uit {ats} is niet uitgenodigd voor “{title}”: {reason, select, credits {credits op} limit {een e-maillimiet is bereikt} paused {uitnodigingen zijn gepauzeerd} other {er ging iets mis}}.} other {# kandidaten uit {ats} zijn niet uitgenodigd voor “{title}”.}}",
+      "ats_cannot_write": "{ats} neemt de resultaten van kandidaten niet aan: de sleutel heeft geen schrijfrechten. Verbind opnieuw met een sleutel die kan schrijven; de resultaten worden bewaard en dan verstuurd."
     }
   },
   "report": {

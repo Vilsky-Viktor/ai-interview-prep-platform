@@ -1025,7 +1025,8 @@
       "verification_approved": "“{name}” terverifikasi untuk {domain}.",
       "verification_declined": "{reason, select, none {Verifikasi “{name}” ditolak.} other {Verifikasi “{name}” ditolak: {reason}}}",
       "member_joined": "{email} bergabung dengan “{name}” sebagai {role, select, admin {admin} other {pelihat}}.",
-      "ats_not_invited": "{count, plural, =1 {{email} dari {ats} tidak diundang ke “{title}”: {reason, select, credits {kredit habis} limit {batas email tercapai} paused {undangan sedang dijeda} other {terjadi kesalahan}}.} other {# kandidat dari {ats} tidak diundang ke “{title}”.}}"
+      "ats_not_invited": "{count, plural, =1 {{email} dari {ats} tidak diundang ke “{title}”: {reason, select, credits {kredit habis} limit {batas email tercapai} paused {undangan sedang dijeda} other {terjadi kesalahan}}.} other {# kandidat dari {ats} tidak diundang ke “{title}”.}}",
+      "ats_cannot_write": "{ats} tidak menerima hasil kandidat: kunci tidak punya akses tulis. Hubungkan ulang dengan kunci yang bisa menulis; hasil disimpan dan dikirim saat itu."
     }
   },
   "report": {

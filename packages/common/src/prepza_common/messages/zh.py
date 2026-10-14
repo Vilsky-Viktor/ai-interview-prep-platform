@@ -50,6 +50,7 @@ MESSAGES = {
     "Breezy HR didn't let us add its web hook: web hooks come with Breezy's Pro plan": "Breezy HR 不允许添加 Webhook：Webhook 仅在 Breezy 的 Pro 套餐中提供",
     "Couldn't generate a new question": "无法生成新题目",
     "Greenhouse didn't accept this client ID and secret": "Greenhouse 未接受此客户端 ID 和客户端密钥",
+    "This credential can't add notes, so results can't go back to Greenhouse: allow it the Notes endpoints too": "此凭据无法添加备注，因此结果无法写回 Greenhouse：请同时为它开放 Notes 端点",
     "Greenhouse didn't answer": "Greenhouse 没有响应",
     "Integrations aren't set up": "集成尚未配置",
     "Question isn't flagged": "该题目未被标记",

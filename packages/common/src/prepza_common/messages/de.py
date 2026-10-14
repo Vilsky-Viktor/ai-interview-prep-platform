@@ -50,6 +50,7 @@ MESSAGES = {
     "Breezy HR didn't let us add its web hook: web hooks come with Breezy's Pro plan": "Breezy HR hat unseren Webhook nicht zugelassen: Webhooks gibt es erst im Pro-Tarif von Breezy",
     "Couldn't generate a new question": "Es konnte keine neue Frage erstellt werden",
     "Greenhouse didn't accept this client ID and secret": "Greenhouse hat diese Client-ID und dieses Secret nicht akzeptiert",
+    "This credential can't add notes, so results can't go back to Greenhouse: allow it the Notes endpoints too": "Diese Zugangsdaten können keine Notizen anlegen, daher können keine Ergebnisse an Greenhouse zurückgehen: Erlaube ihnen auch die Notes-Endpunkte",
     "Greenhouse didn't answer": "Greenhouse antwortet nicht",
     "Integrations aren't set up": "Integrationen sind nicht eingerichtet",
     "Question isn't flagged": "Die Frage ist nicht markiert",

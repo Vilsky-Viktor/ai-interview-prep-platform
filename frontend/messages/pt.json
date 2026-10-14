@@ -1021,7 +1021,8 @@
       "verification_approved": "“{name}” está verificada para {domain}.",
       "verification_declined": "{reason, select, none {A verificação de “{name}” foi recusada.} other {A verificação de “{name}” foi recusada: {reason}}}",
       "member_joined": "{email} entrou em “{name}” como {role, select, admin {administrador} other {visualizador}}.",
-      "ats_not_invited": "{count, plural, =1 {{email} do {ats} não foi convidado para “{title}”: {reason, select, credits {créditos esgotados} limit {um limite de e-mails foi atingido} paused {os convites estão pausados} other {algo deu errado}}.} other {# candidatos do {ats} não foram convidados para “{title}”.}}"
+      "ats_not_invited": "{count, plural, =1 {{email} do {ats} não foi convidado para “{title}”: {reason, select, credits {créditos esgotados} limit {um limite de e-mails foi atingido} paused {os convites estão pausados} other {algo deu errado}}.} other {# candidatos do {ats} não foram convidados para “{title}”.}}",
+      "ats_cannot_write": "O {ats} não aceita os resultados dos candidatos: a chave não tem acesso de escrita. Reconecte com uma chave que possa escrever; os resultados ficam guardados e são enviados então."
     }
   },
   "report": {

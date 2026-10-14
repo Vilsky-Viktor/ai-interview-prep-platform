@@ -50,6 +50,7 @@ MESSAGES = {
     "Breezy HR didn't let us add its web hook: web hooks come with Breezy's Pro plan": "Breezy HR liet ons geen webhook toevoegen: webhooks zitten in het Pro-abonnement van Breezy",
     "Couldn't generate a new question": "Er kon geen nieuwe vraag worden gemaakt",
     "Greenhouse didn't accept this client ID and secret": "Greenhouse heeft deze client-ID en dit secret niet geaccepteerd",
+    "This credential can't add notes, so results can't go back to Greenhouse: allow it the Notes endpoints too": "Met deze inloggegevens kunnen geen notities worden toegevoegd, dus resultaten kunnen niet terug naar Greenhouse: sta ook de Notes-endpoints toe",
     "Greenhouse didn't answer": "Greenhouse reageerde niet",
     "Integrations aren't set up": "Integraties zijn niet ingesteld",
     "Question isn't flagged": "De vraag is niet gemarkeerd",

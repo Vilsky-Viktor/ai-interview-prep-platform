@@ -50,6 +50,7 @@ MESSAGES = {
     "Breezy HR didn't let us add its web hook: web hooks come with Breezy's Pro plan": "Breezy HR اجازه نداد وب‌هوک را اضافه کنیم: وب‌هوک‌ها در طرح Pro شرکت Breezy هستند",
     "Couldn't generate a new question": "ساختن پرسش جدید ممکن نشد",
     "Greenhouse didn't accept this client ID and secret": "Greenhouse این شناسهٔ کلاینت و کلید مخفی را نپذیرفت",
+    "This credential can't add notes, so results can't go back to Greenhouse: allow it the Notes endpoints too": "این اعتبارنامه نمی‌تواند یادداشت اضافه کند، پس نتایج به Greenhouse برنمی‌گردد: دسترسی به endpointهای Notes را هم به آن بدهید",
     "Greenhouse didn't answer": "Greenhouse پاسخ نداد",
     "Integrations aren't set up": "یکپارچه‌سازی‌ها راه‌اندازی نشده‌اند",
     "Question isn't flagged": "این پرسش علامت‌گذاری نشده است",

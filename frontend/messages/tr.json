@@ -1024,7 +1024,8 @@
       "verification_approved": "“{name}”, {domain} için doğrulandı.",
       "verification_declined": "{reason, select, none {“{name}” doğrulaması reddedildi.} other {“{name}” doğrulaması reddedildi: {reason}}}",
       "member_joined": "{email}, “{name}” ekibine {role, select, admin {yönetici} other {görüntüleyici}} olarak katıldı.",
-      "ats_not_invited": "{count, plural, one {{ats} üzerinden gelen {email}, “{title}” mülakatına davet edilmedi: {reason, select, credits {krediniz bitti} limit {bir e-posta sınırına ulaşıldı} paused {davetler duraklatıldı} other {bir şeyler ters gitti}}.} other {{ats} üzerinden gelen # aday “{title}” mülakatına davet edilmedi.}}"
+      "ats_not_invited": "{count, plural, one {{ats} üzerinden gelen {email}, “{title}” mülakatına davet edilmedi: {reason, select, credits {krediniz bitti} limit {bir e-posta sınırına ulaşıldı} paused {davetler duraklatıldı} other {bir şeyler ters gitti}}.} other {{ats} üzerinden gelen # aday “{title}” mülakatına davet edilmedi.}}",
+      "ats_cannot_write": "{ats} aday sonuçlarını kabul etmiyor: anahtarın yazma izni yok. Yazabilen bir anahtarla yeniden bağlayın; sonuçlar saklanır ve o zaman gönderilir."
     }
   },
   "report": {

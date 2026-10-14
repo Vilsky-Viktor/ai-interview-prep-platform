@@ -4,6 +4,7 @@ import {
   DollarSignIcon,
   FlagIcon,
   MailWarningIcon,
+  PencilOffIcon,
   PackageCheckIcon,
   SparklesIcon,
   UserCheckIcon,
@@ -37,5 +38,6 @@ export const NOTIFICATION_LOOKS: Record<
   verification_approved: { icon: BadgeCheckIcon, alert: false },
   verification_declined: { icon: BadgeXIcon, alert: true },
   ats_not_invited: { icon: UserXIcon, alert: true },
+  ats_cannot_write: { icon: PencilOffIcon, alert: true },
   member_joined: { icon: UserPlusIcon, alert: false },
 }

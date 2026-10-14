@@ -1,5 +1,6 @@
 import asyncio
 import uuid
+from datetime import UTC, datetime
 
 import httpx
 import pytest
@@ -26,7 +27,11 @@ def finished(monkeypatch):
     (Greenhouse) recorded instead of sent. The connection is Workable's, with a member. A claim
     holds until the results are kept, as in the database."""
     connection = AtsConnection(
-        id=uuid.uuid4(), provider="workable", status="connected", member_id="m-1"
+        id=uuid.uuid4(),
+        company_id=COMPANY_ID,
+        provider="workable",
+        status="connected",
+        member_id="m-1",
     )
     row = AtsCandidate(id=uuid.uuid4(), candidate_id="c-1", invite_id=uuid.uuid4())
     state = {
@@ -34,6 +39,8 @@ def finished(monkeypatch):
         "reported": [],
         "broken": [],
         "kept": [],
+        "refused": [],
+        "writes_again": [],
         "claimed": set(),
         "fail": None,
         "row": row,
@@ -76,7 +83,20 @@ def finished(monkeypatch):
     monkeypatch.setattr(ats_results, "claim", claim_report)
     monkeypatch.setattr(ats_results, "mark_reported", mark_reported)
     monkeypatch.setattr(ats_results, "keep", keep_result)
+
+    async def refuse_writes(connection_id, notice):
+        state["refused"].append(notice)
+
+    async def writes_again(connection_id):
+        state["writes_again"].append(connection_id)
+
+    async def no_flush():
+        pass
+
     monkeypatch.setattr(ats, "mark_broken", mark_broken)
+    monkeypatch.setattr(ats, "refuse_writes", refuse_writes)
+    monkeypatch.setattr(ats, "writes_again", writes_again)
+    monkeypatch.setattr(flow.outbox_service, "flush_quietly", no_flush)
     monkeypatch.setattr(integrations, "credentials", key)
     monkeypatch.setattr(workable, "comment", comment)
     monkeypatch.setattr(greenhouse, "comment", comment)
@@ -193,6 +213,19 @@ def test_a_key_that_reads_but_cannot_write_keeps_the_results_and_the_connection(
     assert state["broken"] == []
     assert state["reported"] == []
     assert state["kept"] == [(state["row"].id, result(state["row"].invite_id))]
+    # The company hears of it (storage sends it once per connection), on Workable's page.
+    [notice] = state["refused"]
+    assert (notice["kind"], notice["data"]["ats"]) == ("ats_cannot_write", "Workable")
+    assert notice["link"].endswith("/workable")
+
+
+def test_a_write_that_goes_through_again_lets_a_later_refusal_be_told(finished):
+    state, connection = finished
+    connection.write_refused_at = datetime.now(UTC)
+    report(state["row"].invite_id)
+
+    assert state["writes_again"] == [connection.id]
+    assert state["reported"] == [state["row"].id]
 
 
 def test_a_broken_connection_keeps_the_results_without_calling_the_ats(finished):

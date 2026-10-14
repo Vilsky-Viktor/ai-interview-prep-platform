@@ -1,11 +1,14 @@
 from uuid import UUID
 
+from prepza_common import outbox
 from prepza_common.constants import DELETED_USER
-from sqlalchemy import delete, select, update
+from prepza_common.notifications import NOTIFICATION_REQUESTED
+from sqlalchemy import delete, func, select, update
 from sqlalchemy.dialects.postgresql import insert
 
 from app.constants.ats import CandidateStatus, ConnectionStatus
 from app.models.ats import AtsCandidate, AtsConnection, AtsJobLink
+from app.models.outbox import OutboxEvent
 from app.storage.db import Session
 
 
@@ -46,6 +49,8 @@ async def connect(
         "status": ConnectionStatus.CONNECTED,
         "created_by": user_id,
         "member_id": member_id,
+        # A new key may write: a refusal tells the company again.
+        "write_refused_at": None,
     }
     query = (
         insert(AtsConnection)
@@ -55,6 +60,35 @@ async def connect(
 
     async with Session() as session:
         await session.execute(query)
+        await session.commit()
+
+
+async def refuse_writes(connection_id: UUID, notice: dict) -> None:
+    """The ATS refused the results written back while the key still reads: `notice` tells the
+    company, once, however many results are refused, and also when two at once are."""
+    query = (
+        update(AtsConnection)
+        .where(AtsConnection.id == connection_id, AtsConnection.write_refused_at.is_(None))
+        .values(write_refused_at=func.now())
+        .returning(AtsConnection.id)
+    )
+
+    async with Session() as session:
+        if await session.scalar(query) is not None:
+            outbox.add(session, OutboxEvent, NOTIFICATION_REQUESTED, notice)
+
+        await session.commit()
+
+
+async def writes_again(connection_id: UUID) -> None:
+    """A write went through (the key got write access in the ATS): a later refusal tells the
+    company again."""
+    async with Session() as session:
+        await session.execute(
+            update(AtsConnection)
+            .where(AtsConnection.id == connection_id)
+            .values(write_refused_at=None)
+        )
         await session.commit()
 
 

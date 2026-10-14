@@ -1020,7 +1020,8 @@
       "verification_approved": "“{name}” ได้รับการยืนยันสำหรับ {domain} แล้ว",
       "verification_declined": "{reason, select, none {การยืนยัน “{name}” ถูกปฏิเสธ} other {การยืนยัน “{name}” ถูกปฏิเสธ: {reason}}}",
       "member_joined": "{email} เข้าร่วม “{name}” ในฐานะ{role, select, admin {ผู้ดูแล} other {ผู้ดู}}แล้ว",
-      "ats_not_invited": "{count, plural, =1 {ไม่ได้เชิญ {email} จาก {ats} เข้า “{title}”: {reason, select, credits {เครดิตหมด} limit {ถึงขีดจำกัดการส่งอีเมลแล้ว} paused {การเชิญหยุดชั่วคราวอยู่} other {เกิดข้อผิดพลาด}}} other {ไม่ได้เชิญผู้สมัคร # คนจาก {ats} เข้า “{title}”}}"
+      "ats_not_invited": "{count, plural, =1 {ไม่ได้เชิญ {email} จาก {ats} เข้า “{title}”: {reason, select, credits {เครดิตหมด} limit {ถึงขีดจำกัดการส่งอีเมลแล้ว} paused {การเชิญหยุดชั่วคราวอยู่} other {เกิดข้อผิดพลาด}}} other {ไม่ได้เชิญผู้สมัคร # คนจาก {ats} เข้า “{title}”}}",
+      "ats_cannot_write": "{ats} ไม่รับผลลัพธ์ของผู้สมัคร: คีย์ไม่มีสิทธิ์เขียน โปรดเชื่อมต่อใหม่ด้วยคีย์ที่เขียนได้ ระบบจะเก็บผลลัพธ์ไว้และส่งเมื่อถึงตอนนั้น"
     }
   },
   "report": {

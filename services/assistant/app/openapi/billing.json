@@ -51,7 +51,7 @@
      "internal"
     ],
     "summary": "Hold Candidate",
-    "description": "Set aside on invite. Charged once the interview finishes with at least one answer.",
+    "description": "Set aside on invite. Charged once the interview finishes with at least one answer. An\nautomatic top-up the balance now calls for is charged after answering: Paddle can take its\ntime, and the invite waiting on this answer mustn't.",
     "operationId": "hold_candidate_internal_candidates_hold_post",
     "security": [
      {

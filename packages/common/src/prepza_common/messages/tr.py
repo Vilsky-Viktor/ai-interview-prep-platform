@@ -50,6 +50,7 @@ MESSAGES = {
     "Breezy HR didn't let us add its web hook: web hooks come with Breezy's Pro plan": "Breezy HR webhook eklememize izin vermedi: webhook'lar Breezy'nin Pro planında var",
     "Couldn't generate a new question": "Yeni soru oluşturulamadı",
     "Greenhouse didn't accept this client ID and secret": "Greenhouse bu istemci kimliğini ve gizli anahtarı kabul etmedi",
+    "This credential can't add notes, so results can't go back to Greenhouse: allow it the Notes endpoints too": "Bu kimlik bilgisi not ekleyemiyor, bu yüzden sonuçlar Greenhouse'a geri gönderilemez: ona Notes uç noktalarına da izin verin",
     "Greenhouse didn't answer": "Greenhouse yanıt vermedi",
     "Integrations aren't set up": "Entegrasyonlar kurulmamış",
     "Question isn't flagged": "Soru işaretli değil",

@@ -50,6 +50,7 @@ MESSAGES = {
     "Breezy HR didn't let us add its web hook: web hooks come with Breezy's Pro plan": "Breezy HR ไม่อนุญาตให้เพิ่มเว็บฮุก: เว็บฮุกมีในแพ็กเกจ Pro ของ Breezy",
     "Couldn't generate a new question": "สร้างคำถามใหม่ไม่สำเร็จ",
     "Greenhouse didn't accept this client ID and secret": "Greenhouse ไม่ยอมรับ Client ID และ Secret นี้",
+    "This credential can't add notes, so results can't go back to Greenhouse: allow it the Notes endpoints too": "ข้อมูลรับรองนี้เพิ่มโน้ตไม่ได้ จึงส่งผลลัพธ์กลับไปยัง Greenhouse ไม่ได้: โปรดอนุญาต endpoint ของ Notes ด้วย",
     "Greenhouse didn't answer": "Greenhouse ไม่ตอบสนอง",
     "Integrations aren't set up": "ยังไม่ได้ตั้งค่าการเชื่อมต่อระบบ",
     "Question isn't flagged": "คำถามนี้ไม่ได้ถูกติดธง",

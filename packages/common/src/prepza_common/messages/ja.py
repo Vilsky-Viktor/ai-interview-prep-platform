@@ -50,6 +50,7 @@ MESSAGES = {
     "Breezy HR didn't let us add its web hook: web hooks come with Breezy's Pro plan": "Breezy HR に Webhook を追加できませんでした。Webhook は Breezy の Pro プランで利用できます",
     "Couldn't generate a new question": "新しい問題を生成できませんでした",
     "Greenhouse didn't accept this client ID and secret": "Greenhouse がこのクライアント ID とシークレットを受け付けませんでした",
+    "This credential can't add notes, so results can't go back to Greenhouse: allow it the Notes endpoints too": "この認証情報ではメモを追加できないため、結果を Greenhouse に戻せません。Notes のエンドポイントも許可してください",
     "Greenhouse didn't answer": "Greenhouse から応答がありません",
     "Integrations aren't set up": "連携が設定されていません",
     "Question isn't flagged": "この問題はフラグが付いていません",

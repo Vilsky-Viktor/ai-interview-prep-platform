@@ -62,6 +62,7 @@ MESSAGES = {
     "Breezy HR didn't let us add its web hook: web hooks come with Breezy's Pro plan": "Breezy HR ei lubanud webhooki lisada: webhookid kuuluvad Breezy Pro paketti",
     "Couldn't generate a new question": "Uut küsimust ei õnnestunud luua",
     "Greenhouse didn't accept this client ID and secret": "Greenhouse ei aktsepteerinud seda kliendi ID-d ja saladust",
+    "This credential can't add notes, so results can't go back to Greenhouse: allow it the Notes endpoints too": "Need volitused ei saa märkmeid lisada, nii et tulemused ei jõua Greenhouse'i tagasi: luba neile ka Notes-i otspunktid",
     "Greenhouse didn't answer": "Greenhouse ei vastanud",
     "Integrations aren't set up": "Integratsioonid pole seadistatud",
     "Question isn't flagged": "Küsimus pole märgistatud",

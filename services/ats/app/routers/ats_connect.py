@@ -9,6 +9,7 @@ from prepza_common.encryption import decrypt
 from app.config.settings import settings
 from app.constants.ats import (
     BREEZY_WEBHOOK,
+    GREENHOUSE_CANT_WRITE,
     PASTED_KEYS,
     RECRUITEE_DOMAIN,
     WEBHOOKS,
@@ -88,6 +89,9 @@ async def connect_greenhouse(company_id: UUID, body: GreenhouseIn, user: Current
         raise HTTPException(
             status.HTTP_400_BAD_REQUEST, "Greenhouse didn't accept this client ID and secret"
         ) from None
+
+    if not await greenhouse.can_write(client_id, client_secret):
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, GREENHOUSE_CANT_WRITE)
 
     kept = await kept_secret(company_id, AtsProvider.GREENHOUSE)
     sealed = integrations.seal(

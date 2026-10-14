@@ -230,3 +230,27 @@ def test_each_ats_has_its_client():
 
     with pytest.raises(ValueError):
         ats_clients.client("lever")
+
+
+@pytest.mark.parametrize(
+    ("answer", "can"),
+    [
+        ((200, {"active": True, "scope": "harvest:jobs:list harvest:notes:create"}, {}), True),
+        ((200, {"active": True, "scope": "harvest:jobs:list"}, {}), False),
+        # Anything less certain lets it connect: a refused note tells later.
+        ((200, {"active": False}, {}), True),
+        ((200, {"active": True}, {}), True),
+        (500, True),
+        ((200, ["unexpected"], {}), True),
+    ],
+)
+def test_a_credential_is_refused_only_when_greenhouse_says_it_cant_write_notes(
+    harvest, answer, can
+):
+    harvest["answers"]["/introspect"] = answer
+
+    assert asyncio.run(greenhouse.can_write("id", "secret")) is can
+
+    [introspect] = [r for r in harvest["requests"] if r.url.path == "/introspect"]
+    assert introspect.headers["authorization"].startswith("Basic ")
+    assert b"token=t1" in introspect.content

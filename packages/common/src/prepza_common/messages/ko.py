@@ -50,6 +50,7 @@ MESSAGES = {
     "Breezy HR didn't let us add its web hook: web hooks come with Breezy's Pro plan": "Breezy HR에서 웹훅 추가를 허용하지 않았습니다. 웹훅은 Breezy Pro 요금제에서 사용할 수 있습니다",
     "Couldn't generate a new question": "새 문제를 생성하지 못했습니다",
     "Greenhouse didn't accept this client ID and secret": "Greenhouse에서 이 클라이언트 ID와 시크릿을 받아들이지 않았습니다",
+    "This credential can't add notes, so results can't go back to Greenhouse: allow it the Notes endpoints too": "이 자격 증명으로는 노트를 추가할 수 없어 결과를 Greenhouse로 보낼 수 없습니다. Notes 엔드포인트도 허용하세요",
     "Greenhouse didn't answer": "Greenhouse에서 응답이 없습니다",
     "Integrations aren't set up": "연동이 설정되지 않았습니다",
     "Question isn't flagged": "이 문제는 신고 표시가 없습니다",

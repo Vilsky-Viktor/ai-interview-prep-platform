@@ -8,7 +8,9 @@ from prepza_common import http
 from app.constants.ats import (
     ATS_TIMEOUT_SECONDS,
     GREENHOUSE_API,
+    GREENHOUSE_INTROSPECT_URL,
     GREENHOUSE_MAX_PAGES,
+    GREENHOUSE_NOTES_SCOPE,
     GREENHOUSE_PAGE,
     GREENHOUSE_TOKEN_MARGIN_SECONDS,
     GREENHOUSE_TOKEN_URL,
@@ -135,6 +137,34 @@ async def check(client_id: str, client_secret: str) -> None:
     url = GREENHOUSE_API + "/jobs"
     rejected = TOKEN_REJECTED | {status.HTTP_404_NOT_FOUND}
     await _call("GET", client_id, client_secret, url, {"per_page": 1}, rejected=rejected)
+
+
+async def can_write(client_id: str, client_secret: str) -> bool:
+    """False only when Greenhouse says the credential's token lacks the scope a note needs: its
+    introspection lists the token's scopes. Any other answer (an error, no list) lets it
+    connect; a refused note tells then (services/ats.py WriteRefused)."""
+    token = await _token(client_id, client_secret)
+
+    try:
+        response = await http.get_client().post(
+            GREENHOUSE_INTROSPECT_URL,
+            auth=(client_id, client_secret),
+            data={"token": token, "token_type_hint": "access_token"},
+            timeout=ATS_TIMEOUT_SECONDS,
+        )
+        body = response.json()
+    except (httpx.HTTPError, ValueError):
+        return True
+
+    if not isinstance(body, dict) or body.get("active") is not True:
+        return True
+
+    scope = body.get("scope")
+
+    if not isinstance(scope, str):
+        return True
+
+    return GREENHOUSE_NOTES_SCOPE in scope.split()
 
 
 async def jobs(client_id: str, client_secret: str) -> list[dict]:

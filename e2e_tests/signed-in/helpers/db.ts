@@ -184,6 +184,24 @@ export async function addSlackConnection(companyId: string) {
   )
 }
 
+/** A notification for a throwaway company, saved straight into the notifications database, as
+ * the notifications service saves one it's asked for. Deleting the company deletes it. */
+export async function addCompanyNotification(
+  companyId: string,
+  kind: string,
+  link: string,
+  data: Record<string, unknown>
+) {
+  await withDatabase("notifications", (client) =>
+    client.query(
+      `INSERT INTO notifications (id, event_id, recipient, recipient_id, kind, link, data,
+         created_at)
+       VALUES (gen_random_uuid(), gen_random_uuid()::text, 'company', $1, $2, $3, $4, now())`,
+      [companyId, kind, link, JSON.stringify(data)]
+    )
+  )
+}
+
 /** Marks a throwaway company's web hook as failing, as the api service does after days of
  * retries, without waiting for them. */
 export async function markWebhookFailing(url: string, companyId: string) {

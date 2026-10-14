@@ -28,6 +28,8 @@ class NotificationKind(StrEnum):
     INTERVIEW_CANCELLED = "interview_cancelled"
     # A candidate an ATS sent couldn't be invited (credits, limits, the pause).
     ATS_NOT_INVITED = "ats_not_invited"
+    # An ATS takes the company's key but refuses the results written back (no write access).
+    ATS_CANNOT_WRITE = "ats_cannot_write"
     # Someone the owner invited joined the company's team.
     MEMBER_JOINED = "member_joined"
     # A superadmin approved or declined the company's verification.

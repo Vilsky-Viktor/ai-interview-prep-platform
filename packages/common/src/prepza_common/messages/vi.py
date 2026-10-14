@@ -50,6 +50,7 @@ MESSAGES = {
     "Breezy HR didn't let us add its web hook: web hooks come with Breezy's Pro plan": "Breezy HR không cho thêm webhook: webhook chỉ có trong gói Pro của Breezy",
     "Couldn't generate a new question": "Không tạo được câu hỏi mới",
     "Greenhouse didn't accept this client ID and secret": "Greenhouse không chấp nhận client ID và secret này",
+    "This credential can't add notes, so results can't go back to Greenhouse: allow it the Notes endpoints too": "Thông tin xác thực này không thể thêm ghi chú, nên kết quả không thể gửi về Greenhouse: hãy cho phép thêm các endpoint Notes",
     "Greenhouse didn't answer": "Greenhouse không phản hồi",
     "Integrations aren't set up": "Chưa thiết lập tích hợp",
     "Question isn't flagged": "Câu hỏi chưa được gắn cờ",

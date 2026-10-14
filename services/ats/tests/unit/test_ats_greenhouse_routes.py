@@ -34,7 +34,7 @@ def stored(monkeypatch, companies_api):
     fresh key), and Greenhouse accepting only the secret "good"."""
     key = Fernet.generate_key().decode()
     companies_api["roles"] = {(COMPANY_ID, "ann"): "admin"}
-    rows = {"key": key, "connection": None}
+    rows = {"key": key, "connection": None, "can_write": True}
 
     async def connect(company_id, provider, account, credentials, user_id, member_id=None):
         earlier = rows["connection"]
@@ -69,7 +69,12 @@ def stored(monkeypatch, companies_api):
     monkeypatch.setattr(ats, "connection", connection)
     monkeypatch.setattr(ats, "connection_by_id", connection_by_id)
     monkeypatch.setattr(ats, "link_for_job", link_for_job)
+
+    async def can_write(client_id, client_secret):
+        return rows["can_write"]
+
     monkeypatch.setattr(greenhouse, "check", check)
+    monkeypatch.setattr(greenhouse, "can_write", can_write)
 
     return rows
 
@@ -115,6 +120,16 @@ def test_a_refused_credential_isnt_saved(client, stored):
     assert response.status_code == 400
     assert stored["connection"] is None
     assert client.get(f"/greenhouse/webhook?company_id={COMPANY_ID}").status_code == 404
+
+
+def test_a_credential_that_cant_add_notes_isnt_saved(client, stored):
+    """Results couldn't go back: Greenhouse lists its scopes without the one notes need."""
+    stored["can_write"] = False
+    response = connect(client)
+
+    assert response.status_code == 400
+    assert "can't add notes" in response.json()["detail"]
+    assert stored["connection"] is None
 
 
 def test_the_web_hook_answers_only_what_its_secret_key_signed(client, stored):

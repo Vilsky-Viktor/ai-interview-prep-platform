@@ -20,7 +20,7 @@ from app.constants.ats import (
 from app.helpers.ats import (
     result_comment,
 )
-from app.helpers.notifications import ats_not_invited
+from app.helpers.notifications import ats_cannot_write, ats_not_invited
 from app.integrations import companies
 from app.integrations.errors import WriteRefused
 from app.models.ats import AtsCandidate, AtsConnection
@@ -258,6 +258,11 @@ async def report(data: dict) -> None:
         # that can; the connection keeps inviting meanwhile.
         logger.warning("Kept the results of ATS candidate %s: the key can't write", row.id)
         await ats_results.keep(row.id, data)
+        notice = ats_cannot_write(
+            connection.company_id, connection.provider, ATS_NAMES[connection.provider]
+        )
+        await ats.refuse_writes(connection.id, notice)
+        await outbox_service.flush_quietly()
 
         return
     except Exception:
@@ -266,5 +271,8 @@ async def report(data: dict) -> None:
         await ats_results.keep(row.id, data)
 
         return
+
+    if connection.write_refused_at is not None:
+        await ats.writes_again(connection.id)
 
     await ats_results.mark_reported(row.id)

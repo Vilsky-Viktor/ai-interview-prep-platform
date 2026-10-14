@@ -25,3 +25,15 @@ def ats_not_invited(
         reason=reason,
         **({"candidate_name": name} if name else {}),
     )
+
+
+def ats_cannot_write(company_id, provider: str, ats: str) -> dict:
+    """The ATS named `ats` refuses the results written back: the key can't write. Its page,
+    which the notification opens, reconnects."""
+    return notification(
+        Recipient.COMPANY,
+        company_id,
+        NotificationKind.ATS_CANNOT_WRITE,
+        ATS_LINK.format(company_id=company_id, provider=provider),
+        ats=ats,
+    )

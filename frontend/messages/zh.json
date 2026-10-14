@@ -1016,7 +1016,8 @@
       "verification_approved": "“{name}”已通过 {domain} 验证。",
       "verification_declined": "{reason, select, none {“{name}”的验证已被拒绝。} other {“{name}”的验证已被拒绝：{reason}}}",
       "member_joined": "{email} 已作为{role, select, admin {管理员} other {查看者}}加入“{name}”。",
-      "ats_not_invited": "{count, plural, =1 {来自 {ats} 的 {email} 未被邀请参加“{title}”：{reason, select, credits {点数不足} limit {已达到邮件发送上限} paused {邀请已暂停} other {出了点问题}}。} other {来自 {ats} 的 # 位候选人未被邀请参加“{title}”。}}"
+      "ats_not_invited": "{count, plural, =1 {来自 {ats} 的 {email} 未被邀请参加“{title}”：{reason, select, credits {点数不足} limit {已达到邮件发送上限} paused {邀请已暂停} other {出了点问题}}。} other {来自 {ats} 的 # 位候选人未被邀请参加“{title}”。}}",
+      "ats_cannot_write": "{ats} 不接收候选人的结果：该密钥没有写入权限。请用有写入权限的密钥重新连接；结果会先保留，届时再发送。"
     }
   },
   "report": {

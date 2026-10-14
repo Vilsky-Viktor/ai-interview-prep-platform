@@ -1404,7 +1404,7 @@
      "schedules"
     ],
     "summary": "Expire Interviews",
-    "description": "Every minute, from Cloud Scheduler: finishes interviews whose time ran out after the\ncandidate left, so companies see them as finished.",
+    "description": "Every minute, from Cloud Scheduler: finishes interviews whose time ran out after the\ncandidate left, so companies see them as finished. Not while maintenance mode is on:\ncandidates can't answer then, and their time is given back when it's turned off.",
     "operationId": "expire_interviews_internal_schedules_expire_interviews_post",
     "responses": {
      "204": {
@@ -1614,6 +1614,46 @@
        "application/json": {
         "schema": {
          "$ref": "#/components/schemas/RunningOut"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/internal/maintenance/resume": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Resume",
+    "description": "For companies' maintenance switch, before it turns off: running interviews get back the\ntime it was on.",
+    "operationId": "resume_internal_maintenance_resume_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ResumeIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
         }
        }
       }
@@ -2350,6 +2390,20 @@
      "reason"
     ],
     "title": "ReportIn"
+   },
+   "ResumeIn": {
+    "properties": {
+     "seconds": {
+      "type": "number",
+      "minimum": 0.0,
+      "title": "Seconds"
+     }
+    },
+    "type": "object",
+    "required": [
+     "seconds"
+    ],
+    "title": "ResumeIn"
    },
    "ReviewItem": {
     "properties": {

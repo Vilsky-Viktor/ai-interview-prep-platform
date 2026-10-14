@@ -1021,7 +1021,8 @@
       "verification_approved": "«{name}» برای {domain} تأیید شد.",
       "verification_declined": "{reason, select, none {تأیید «{name}» رد شد.} other {تأیید «{name}» رد شد: {reason}}}",
       "member_joined": "{email} با نقش {role, select, admin {مدیر} other {بیننده}} به «{name}» پیوست.",
-      "ats_not_invited": "{count, plural, =1 {{email} از {ats} به «{title}» دعوت نشد: {reason, select, credits {اعتبار تمام شده است} limit {سقف ایمیل پر شده است} paused {دعوت‌ها متوقف شده‌اند} other {مشکلی پیش آمد}}.} other {# متقاضی از {ats} به «{title}» دعوت نشدند.}}"
+      "ats_not_invited": "{count, plural, =1 {{email} از {ats} به «{title}» دعوت نشد: {reason, select, credits {اعتبار تمام شده است} limit {سقف ایمیل پر شده است} paused {دعوت‌ها متوقف شده‌اند} other {مشکلی پیش آمد}}.} other {# متقاضی از {ats} به «{title}» دعوت نشدند.}}",
+      "ats_cannot_write": "{ats} نتایج متقاضیان را نمی‌پذیرد: کلید دسترسی نوشتن ندارد. با کلیدی که بتواند بنویسد دوباره وصل کنید؛ نتایج نگه داشته می‌شوند و آن وقت فرستاده می‌شوند."
     }
   },
   "report": {

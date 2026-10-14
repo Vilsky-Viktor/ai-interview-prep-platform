@@ -31,6 +31,9 @@ class AtsConnection(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )
+    # When the ATS first refused the results written back while the key still read: the company
+    # was told once. Cleared by a reconnect or a write that goes through.
+    write_refused_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
 
 class AtsJobLink(Base):
