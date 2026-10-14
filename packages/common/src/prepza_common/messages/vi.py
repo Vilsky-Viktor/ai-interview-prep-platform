@@ -198,4 +198,5 @@ MESSAGES = {
     "This document has no such version.": "Tài liệu này không có phiên bản đó.",
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "Thông báo được gửi ít nhất 14 ngày trước khi phiên bản mới áp dụng: hãy đặt ngày muộn hơn.",
     "This version's notice was already sent.": "Thông báo của phiên bản này đã được gửi.",
+    "Prices aren't available right now. Please try again in a minute.": "Hiện chưa xem được giá. Vui lòng thử lại sau một phút.",
 }

@@ -198,4 +198,5 @@ MESSAGES = {
     "This document has no such version.": "Walang ganitong bersyon ang dokumentong ito.",
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "Ipinapadala ang abiso nang hindi bababa sa 14 na araw bago magkabisa ang bagong bersyon: bigyan ito ng mas huling petsa.",
     "This version's notice was already sent.": "Naipadala na ang abiso para sa bersyong ito.",
+    "Prices aren't available right now. Please try again in a minute.": "Hindi available ang mga presyo ngayon. Pakisubukang muli pagkalipas ng isang minuto.",
 }

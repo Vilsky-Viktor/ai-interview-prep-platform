@@ -198,4 +198,5 @@ MESSAGES = {
     "This document has no such version.": "Bu belgenin böyle bir sürümü yok.",
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "Bildirim, yeni sürüm geçerli olmadan en az 14 gün önce gönderilir: ona daha ileri bir tarih verin.",
     "This version's notice was already sent.": "Bu sürümün bildirimi zaten gönderildi.",
+    "Prices aren't available right now. Please try again in a minute.": "Fiyatlar şu anda kullanılamıyor. Lütfen bir dakika sonra tekrar deneyin.",
 }

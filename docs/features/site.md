@@ -72,7 +72,7 @@ The articles are `/pre-employment-testing`, `/ai-interviews`, `/compare` and its
 
 ## FAQ and help chat
 
-`/faq` has the common questions, in the interface language, with today's prices; its intro points to the assistant ("ask agent" in the header) for anything else.
+`/faq` has the common questions, in the interface language, with today's prices; its intro points to the assistant ("ask agent" in the header) for anything else. Without prices (billing not answering), rounds refuses the FAQ (503) instead of building it with blanks: the site keeps showing the last good page, a role page leaves its FAQ section out, and the help chat answers without prices.
 
 The help chat (rounds' `POST /help/chat`) answers signed-out visitors in the [assistant's panel](assistant.md#the-panel):
 

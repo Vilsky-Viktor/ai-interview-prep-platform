@@ -198,4 +198,5 @@ MESSAGES = {
     "This document has no such version.": "אין גרסה כזו למסמך הזה.",
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "הודעה נשלחת לפחות 14 יום לפני שהגרסה החדשה חלה: יש לתת לה תאריך מאוחר יותר.",
     "This version's notice was already sent.": "ההודעה על הגרסה הזו כבר נשלחה.",
+    "Prices aren't available right now. Please try again in a minute.": "המחירים לא זמינים כרגע. נסו שוב בעוד דקה.",
 }

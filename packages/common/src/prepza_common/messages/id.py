@@ -198,4 +198,5 @@ MESSAGES = {
     "This document has no such version.": "Dokumen ini tidak memiliki versi tersebut.",
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "Pemberitahuan dikirim paling lambat 14 hari sebelum versi baru berlaku: beri tanggal yang lebih lambat.",
     "This version's notice was already sent.": "Pemberitahuan versi ini sudah dikirim.",
+    "Prices aren't available right now. Please try again in a minute.": "Harga belum tersedia saat ini. Silakan coba lagi dalam satu menit.",
 }

@@ -198,4 +198,5 @@ MESSAGES = {
     "This document has no such version.": "Цей документ не має такої версії.",
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "Повідомлення надсилається щонайменше за 14 днів до того, як нова версія почне застосовуватися: призначте їй пізнішу дату.",
     "This version's notice was already sent.": "Повідомлення про цю версію вже надіслано.",
+    "Prices aren't available right now. Please try again in a minute.": "Ціни зараз недоступні. Спробуйте ще раз за хвилину.",
 }

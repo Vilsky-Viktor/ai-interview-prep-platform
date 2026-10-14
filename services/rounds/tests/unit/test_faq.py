@@ -4,6 +4,7 @@ from prepza_common.constants import LANGUAGES
 
 from app.constants.faq import FAQS, with_english
 from app.constants.faq.de import FAQ as GERMAN
+from app.constants.help import PRICES_UNAVAILABLE
 from tests.unit.test_help import CATALOG, fake_catalog
 
 
@@ -80,10 +81,12 @@ def test_faq_says_in_every_language_how_to_stop_emails():
         assert language == "en" or answer != english["answer"], language
 
 
-def test_faq_still_shows_when_billing_is_down(client, monkeypatch):
+def test_faq_isnt_served_without_prices(client, monkeypatch):
+    """Billing not answering: refused, so the site keeps its last good page rather than
+    caching answers with blank prices."""
     monkeypatch.setattr("app.routers.help.billing.catalog", fake_catalog(None))
 
     response = client.get("/help/faq")
 
-    assert response.status_code == 200
-    assert len(response.json()) == len(FAQS["en"])
+    assert response.status_code == 503
+    assert response.json()["detail"] == PRICES_UNAVAILABLE

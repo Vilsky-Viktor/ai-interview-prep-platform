@@ -40,3 +40,6 @@ GUIDE_CACHE_SECONDS = CATALOG_CACHE_SECONDS
 # so), naming the way they asked for if any; the chat sends a sign-in card in its place.
 SIGN_IN_MARKER = re.compile(r"^\s*\[\[sign_in(?::(google|linkedin|github))?\]\]\s*")
 SIGN_IN_PREFIX = "[[sign_in"
+
+# The FAQ names today's prices; without them (billing not answering) it isn't served.
+PRICES_UNAVAILABLE = "Prices aren't available right now. Please try again in a minute."

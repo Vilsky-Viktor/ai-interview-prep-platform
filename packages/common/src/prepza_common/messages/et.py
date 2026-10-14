@@ -210,4 +210,5 @@ MESSAGES = {
     "This document has no such version.": "Sellel dokumendil pole sellist versiooni.",
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "Teade läheb välja vähemalt 14 päeva enne uue versiooni kehtima hakkamist: anna sellele hilisem kuupäev.",
     "This version's notice was already sent.": "Selle versiooni teade on juba saadetud.",
+    "Prices aren't available right now. Please try again in a minute.": "Hinnad ei ole praegu saadaval. Proovi minuti pärast uuesti.",
 }

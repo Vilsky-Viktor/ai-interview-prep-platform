@@ -76,10 +76,11 @@ export default async function RoleTestPage({ params }: Params) {
       `/library/templates/${slug}/sample`
     )) ?? []
   // The site FAQ's answers to what companies ask before testing candidates, in the page's
-  // language and with today's prices.
-  const faq = ((await publicFetch<FaqItem[]>("/rounds/help/faq")) ?? []).filter(
-    (item) => ROLE_PAGE_FAQ.includes(item.key)
+  // language and with today's prices; left out while prices can't be read (rounds refuses).
+  const answers = await publicFetch<FaqItem[]>("/rounds/help/faq").catch(
+    () => null
   )
+  const faq = (answers ?? []).filter((item) => ROLE_PAGE_FAQ.includes(item.key))
 
   return (
     <main className="mx-auto max-w-5xl space-y-10 px-6 py-12">

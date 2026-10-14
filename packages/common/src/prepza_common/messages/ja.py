@@ -198,4 +198,5 @@ MESSAGES = {
     "This document has no such version.": "この文書にそのバージョンはありません。",
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "通知は新しいバージョンの適用日の少なくとも 14 日前に送られます。より後の日付にしてください。",
     "This version's notice was already sent.": "このバージョンの通知はすでに送信されています。",
+    "Prices aren't available right now. Please try again in a minute.": "現在、料金を表示できません。1分後にもう一度お試しください。",
 }

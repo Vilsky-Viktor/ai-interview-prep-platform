@@ -198,4 +198,5 @@ MESSAGES = {
     "This document has no such version.": "این سند چنین نسخه‌ای ندارد.",
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "اطلاعیه دست‌کم ۱۴ روز پیش از اعمال نسخهٔ جدید فرستاده می‌شود: تاریخ دیرتری برای آن بگذارید.",
     "This version's notice was already sent.": "اطلاعیهٔ این نسخه قبلاً فرستاده شده است.",
+    "Prices aren't available right now. Please try again in a minute.": "قیمت‌ها اکنون در دسترس نیستند. لطفاً یک دقیقهٔ دیگر دوباره تلاش کنید.",
 }

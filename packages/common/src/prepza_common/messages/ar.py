@@ -198,4 +198,5 @@ MESSAGES = {
     "This document has no such version.": "لا توجد نسخة كهذه من هذا المستند.",
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "يُرسل الإشعار قبل 14 يومًا على الأقل من سريان النسخة الجديدة: اختر لها تاريخًا لاحقًا.",
     "This version's notice was already sent.": "سبق إرسال إشعار هذه النسخة.",
+    "Prices aren't available right now. Please try again in a minute.": "الأسعار غير متاحة الآن. يُرجى المحاولة مرة أخرى بعد دقيقة.",
 }

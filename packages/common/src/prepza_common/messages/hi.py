@@ -198,4 +198,5 @@ MESSAGES = {
     "This document has no such version.": "इस दस्तावेज़ का ऐसा कोई संस्करण नहीं है।",
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "सूचना नए संस्करण के लागू होने से कम से कम 14 दिन पहले भेजी जाती है: इसे बाद की तारीख दें।",
     "This version's notice was already sent.": "इस संस्करण की सूचना पहले ही भेजी जा चुकी है।",
+    "Prices aren't available right now. Please try again in a minute.": "कीमतें अभी उपलब्ध नहीं हैं। कृपया एक मिनट बाद फिर से कोशिश करें।",
 }

@@ -198,4 +198,5 @@ MESSAGES = {
     "This document has no such version.": "Dit document heeft zo'n versie niet.",
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "Een kennisgeving gaat minstens 14 dagen voordat de nieuwe versie geldt de deur uit: geef haar een latere datum.",
     "This version's notice was already sent.": "De kennisgeving van deze versie is al verstuurd.",
+    "Prices aren't available right now. Please try again in a minute.": "De prijzen zijn nu niet beschikbaar. Probeer het over een minuut opnieuw.",
 }

@@ -16,7 +16,7 @@ from prepza_common.user import Language
 from app.config.settings import settings
 from app.constants.contact import CONTACT_IP_LIMIT
 from app.constants.faq import FAQS
-from app.constants.help import HELP_IP_LIMIT, LegalDocument
+from app.constants.help import HELP_IP_LIMIT, PRICES_UNAVAILABLE, LegalDocument
 from app.constants.legal import NO_SUCH_VERSION
 from app.constants.rounds import CHAT_FAILED
 from app.helpers import legal
@@ -37,8 +37,14 @@ router = APIRouter(prefix="/help", tags=["help"])
 
 @router.get("/faq")
 async def get_faq(request: Request) -> list[FaqItemOut]:
-    """The FAQ in the page's language, with today's prices; public."""
-    items = faq_items(FAQS[request_language(request)], await billing.catalog())
+    """The FAQ in the page's language, with today's prices; public. Without prices (billing not
+    answering) it's refused rather than built with blanks: the site keeps its last good page."""
+    catalog = await billing.catalog()
+
+    if catalog is None:
+        raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, PRICES_UNAVAILABLE)
+
+    items = faq_items(FAQS[request_language(request)], catalog)
 
     return [FaqItemOut(**item) for item in items]
 

@@ -198,4 +198,5 @@ MESSAGES = {
     "This document has no such version.": "Questo documento non ha questa versione.",
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "L'avviso parte almeno 14 giorni prima che la nuova versione si applichi: dalle una data successiva.",
     "This version's notice was already sent.": "L'avviso di questa versione è già stato inviato.",
+    "Prices aren't available right now. Please try again in a minute.": "I prezzi non sono disponibili in questo momento. Riprova tra un minuto.",
 }
