@@ -166,3 +166,36 @@ def test_a_failed_reconnect_puts_the_earlier_connection_back_marked_broken(run):
     )
     assert found.status == "broken"
     assert len(links) == 1
+
+
+def test_an_unlinked_jobs_waiting_candidates_are_never_invited(run):
+    """They'd be invited, with credits set aside, for a job the page no longer shows."""
+
+    async def scenario():
+        company = uuid.uuid4()
+        interview = uuid.uuid4()
+        await ats.connect(company, AtsProvider.WORKABLE, "acme", "sealed", "ann")
+        connection = await ats.connection(company, AtsProvider.WORKABLE)
+        link_id = await ats.add_link(connection.id, interview, JOB, STAGE)
+        await ats_candidates.add(connection.id, link_id, interview, "unlinked-wait", "w@x.com")
+        invited = await ats_candidates.add(
+            connection.id, link_id, interview, "unlinked-done", "d@x.com"
+        )
+        invite_id = uuid.uuid4()
+        await ats_candidates.settle(invited.id, CandidateStatus.INVITED, invite_id=invite_id)
+        await ats.remove_link(company, link_id)
+        found = (
+            [row.candidate_id for row in await ats_candidates.recoverable()],
+            [row.candidate_id for row in await ats_candidates.waiting(interview)],
+            await ats_results.for_invite(invite_id),
+        )
+        await ats.delete_company(company)
+
+        return found
+
+    recoverable, waiting, kept = run(scenario())
+
+    assert "unlinked-wait" not in recoverable
+    assert waiting == []
+    # Invited ones stay, for writing their results back.
+    assert kept is not None and kept[0].status == CandidateStatus.INVITED

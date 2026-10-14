@@ -47,7 +47,7 @@ On a company's **Integrations** tab, an owner or admin connects an ATS with its 
 - The page lists its linked jobs. For each job:
   - how many of its candidates were invited (an icon and the number),
   - how many are waiting or weren't invited, above **Invite again**, which tries that job's again,
-  - **Unlink**, after a confirmation.
+  - **Unlink**, after a confirmation. The job's candidates still waiting for the interview go with it, so none is invited or has credits set aside later; those already invited stay, for writing their results back.
 - Each ATS has one **Instructions** button, on its row and its page. Its dialog holds everything to know: the candidate flow, starting with a stage just for prepza, and, for a connected Greenhouse, Teamtailor or Recruitee, the web hook to set up (owners and admins only). The dialog opens by itself right after connecting any of those three.
 - Every member sees these pages; viewers change nothing.
 

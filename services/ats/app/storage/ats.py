@@ -4,7 +4,7 @@ from prepza_common.constants import DELETED_USER
 from sqlalchemy import delete, select, update
 from sqlalchemy.dialects.postgresql import insert
 
-from app.constants.ats import ConnectionStatus
+from app.constants.ats import CandidateStatus, ConnectionStatus
 from app.models.ats import AtsCandidate, AtsConnection, AtsJobLink
 from app.storage.db import Session
 
@@ -240,7 +240,9 @@ async def subscriptions(company_id: UUID, link_id: UUID | None = None) -> list[s
 
 
 async def remove_link(company_id: UUID, link_id: UUID) -> bool:
-    """Unlinks a job of the company; False when there's no such link."""
+    """Unlinks a job of the company; False when there's no such link. Its candidates still
+    waiting go with it, so nothing invites them (or sets credits aside for them) any more; the
+    invited ones stay, for writing their results back."""
     owned = select(AtsConnection.id).where(AtsConnection.company_id == company_id)
     query = (
         delete(AtsJobLink)
@@ -250,6 +252,16 @@ async def remove_link(company_id: UUID, link_id: UUID) -> bool:
 
     async with Session() as session:
         removed = await session.scalar(query)
+
+        if removed is not None:
+            await session.execute(
+                delete(AtsCandidate).where(
+                    AtsCandidate.link_id.is_(None),
+                    AtsCandidate.status == CandidateStatus.WAITING,
+                    AtsCandidate.connection_id.in_(owned),
+                )
+            )
+
         await session.commit()
 
     return removed is not None
