@@ -19,7 +19,8 @@ resource "google_cloud_run_v2_service" "service" {
     }
 
     # All outgoing traffic goes through the private network: calls to the other services arrive
-    # as internal, and the internet (OpenAI, Resend, Paddle, Upstash) through its NAT.
+    # as internal, Redis (Memorystore) is reached on it, and the internet (OpenAI, Resend,
+    # Paddle) through its NAT.
     vpc_access {
       network_interfaces {
         network    = google_compute_network.main.id
@@ -149,6 +150,7 @@ resource "google_cloud_run_v2_service" "service" {
     google_secret_manager_secret_version.analytics_salt,
     google_secret_manager_secret_version.preview_secret,
     google_secret_manager_secret_version.email_link_secret,
+    google_secret_manager_secret_version.redis_url,
   ]
 }
 

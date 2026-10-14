@@ -13,8 +13,9 @@ Terraform for prepza on Google Cloud, in one region (`europe-west1`, Belgium) be
   - the security headers the local nginx gateway adds (HSTS, nosniff, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`); the frontend sets its own Content-Security-Policy;
   - a Cloud Armor rule that blocks `/api/*/internal/`.
 - **Secret Manager** for secrets, and **Artifact Registry** for images.
+- **Memorystore for Redis** (`redis.tf`): rate limits, the LLM limiter, the draft cache, live notifications and the pause and maintenance switches. Basic tier, 1 GB, on the private network with no public address and AUTH required; Terraform writes its address and AUTH string into the `redis-url` secret. Everything in it is short-lived; an hourly snapshot brings it back after a restart (Google's weekly maintenance window, Sunday 03:00 UTC), so the switches keep their state, and an empty Redis means limits reset and the switches off, as the services expect.
 
-Outside Google Cloud: Redis on **Upstash** (rate limits, the LLM limiter, the draft cache, live notifications), **Firebase Authentication** (same project), **Resend**, **Sentry** and **Paddle**.
+Outside Google Cloud: **Firebase Authentication** (same project), **Resend**, **Sentry** and **Paddle**.
 
 ## Bootstrap (once)
 
@@ -43,7 +44,7 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
    gcloud storage buckets create gs://prepza-prod-terraform --location=europe-west1 --uniform-bucket-level-access
    gcloud storage buckets update gs://prepza-prod-terraform --versioning
    ```
-4. **Create Redis on Upstash.** Pick the Google Cloud region `europe-west1`, and copy its `rediss://` URL.
+4. **Redis needs nothing from you:** Terraform creates Memorystore and its `redis-url` secret (step 7).
 5. **Set your variables.**
    ```bash
    cd infra/terraform
@@ -78,7 +79,6 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
 8. **Set the secrets.** They start as `set-me`, and Terraform never overwrites them.
    ```bash
    printf '%s' "$OPENAI_API_KEY" | gcloud secrets versions add openai-api-key --data-file=-
-   printf '%s' "rediss://...upstash.io:6379" | gcloud secrets versions add redis-url --data-file=-
    printf '%s' "$RESEND_API_KEY" | gcloud secrets versions add resend-api-key --data-file=-
    printf '%s' "$RESEND_WEBHOOK_SECRET" | gcloud secrets versions add resend-webhook-secret --data-file=-
    printf '%s' "$PADDLE_WEBHOOK_SECRET" | gcloud secrets versions add paddle-webhook-secret --data-file=-
@@ -223,7 +223,7 @@ To restore everything, restore the instance from a backup instead (`gcloud sql b
 - **Service addresses:** services reach each other at their Cloud Run addresses, which are known in advance (`https://<service>-<project number>.europe-west1.run.app`).
 - **Who can call what:**
   - Public services take outside traffic only through the load balancer (ingress "internal and Cloud Load Balancing"), so Cloud Armor's rules always apply; their `run.app` addresses refuse the internet. The generation worker takes only Google's calls.
-  - Calls between services go out through the private network in `network.tf` (Direct VPC egress, all traffic), so they arrive as internal; the internet (OpenAI, Resend, Paddle, Upstash) is reached through its Cloud NAT, about $1–5 a month at this size. The NAT gives each instance ports as it needs them (64 to 4096), so an instance isn't capped at about 64 connections to one address.
+  - Calls between services go out through the private network in `network.tf` (Direct VPC egress, all traffic), so they arrive as internal; Redis (Memorystore) is reached on it, and the internet (OpenAI, Resend, Paddle) through its Cloud NAT, about $1–5 a month at this size. The NAT gives each instance ports as it needs them (64 to 4096), so an instance isn't capped at about 64 connections to one address.
   - Calls between services also carry signed service tokens.
   - Pub/Sub, Cloud Tasks and Scheduler sign as the `prepza-invoker` account, which the services check.
 - **Database users:** each service connects as its own Postgres user (named after its database) that owns only that database; other users can't even connect to it. The `prepza` user is the instance's admin and is used only by the `db-roles` job (`db_roles.tf`, `services/library/app/jobs/db_roles.py`), which creates those users and moves ownership to them. The deploy pipeline runs it before migrations; it's safe to repeat. **When first applying this over an existing database,** run it right after `terraform apply`, before any service restarts: `gcloud run jobs execute db-roles --region=europe-west1 --wait`. Until it has run, new instances can't connect, since their URLs already name the new users. Locally, Docker Compose keeps the one `prepza` user.

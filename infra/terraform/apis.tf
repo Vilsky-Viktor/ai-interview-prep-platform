@@ -12,6 +12,7 @@ resource "google_project_service" "apis" {
     "identitytoolkit.googleapis.com",
     "monitoring.googleapis.com",
     "pubsub.googleapis.com",
+    "redis.googleapis.com",
     "run.googleapis.com",
     "secretmanager.googleapis.com",
     "sqladmin.googleapis.com",
