@@ -57,3 +57,6 @@ RETRY_LEASE = timedelta(minutes=10)
 CANDIDATE_LINK = "{site}/companies/{company_id}/interviews/{interview_id}/candidates/{invite_id}"
 # The candidate's own invite link, to send them yourself.
 INVITE_LINK = "{site}/invite/{token}"
+
+# The API page, as a notification opens it.
+API_PAGE = "/companies/{company_id}/integrations/api"

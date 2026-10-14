@@ -1023,7 +1023,8 @@
       "member_joined": "{email} is lid geworden van “{name}” als {role, select, admin {beheerder} other {kijker}}.",
       "ats_not_invited": "{count, plural, one {{email} uit {ats} is niet uitgenodigd voor “{title}”: {reason, select, credits {credits op} limit {een e-maillimiet is bereikt} paused {uitnodigingen zijn gepauzeerd} other {er ging iets mis}}.} other {# kandidaten uit {ats} zijn niet uitgenodigd voor “{title}”.}}",
       "ats_cannot_write": "{ats} neemt de resultaten van kandidaten niet aan: de sleutel heeft geen schrijfrechten. Verbind opnieuw met een sleutel die kan schrijven; de resultaten worden bewaard en dan verstuurd.",
-      "connection_broken": "{name} werkt niet meer en moet opnieuw worden verbonden. Tot die tijd {integration, select, slack {komen meldingen niet aan in je kanaal} other {wachten de kandidaten die het stuurt, en worden hun resultaten bewaard}}."
+      "connection_broken": "{name} werkt niet meer en moet opnieuw worden verbonden. Tot die tijd {integration, select, slack {komen meldingen niet aan in je kanaal} other {wachten de kandidaten die het stuurt, en worden hun resultaten bewaard}}.",
+      "webhook_stopped": "De webhook naar {url} is gestopt: het lid dat hem heeft toegevoegd is geen eigenaar of beheerder meer. Voeg hem opnieuw toe om resultaten te blijven ontvangen."
     }
   },
   "report": {
@@ -1276,6 +1277,7 @@
     "webhooksText": "Als een kandidaat klaar is, stuurt prepza de resultaten naar deze adressen, ondertekend met het secret van elk adres.",
     "noWebhooks": "Nog geen webhooks.",
     "failing": "Reageert niet: recente resultaten zijn niet aangekomen",
+    "stopped": "Gestopt: het lid dat hem heeft toegevoegd is geen eigenaar of beheerder meer. Voeg hem opnieuw toe om resultaten te blijven ontvangen.",
     "addWebhook": "Webhook toevoegen",
     "addWebhookTitle": "Nieuwe webhook",
     "webhookUrl": "HTTPS-adres, bijv. https://example.com/prepza",

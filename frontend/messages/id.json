@@ -1027,7 +1027,8 @@
       "member_joined": "{email} bergabung dengan “{name}” sebagai {role, select, admin {admin} other {pelihat}}.",
       "ats_not_invited": "{count, plural, =1 {{email} dari {ats} tidak diundang ke “{title}”: {reason, select, credits {kredit habis} limit {batas email tercapai} paused {undangan sedang dijeda} other {terjadi kesalahan}}.} other {# kandidat dari {ats} tidak diundang ke “{title}”.}}",
       "ats_cannot_write": "{ats} tidak menerima hasil kandidat: kunci tidak punya akses tulis. Hubungkan ulang dengan kunci yang bisa menulis; hasil disimpan dan dikirim saat itu.",
-      "connection_broken": "{name} berhenti berfungsi dan perlu dihubungkan ulang. Sampai saat itu, {integration, select, slack {notifikasi tidak sampai ke kanalmu} other {kandidat yang dikirimnya menunggu, dan hasil mereka disimpan}}."
+      "connection_broken": "{name} berhenti berfungsi dan perlu dihubungkan ulang. Sampai saat itu, {integration, select, slack {notifikasi tidak sampai ke kanalmu} other {kandidat yang dikirimnya menunggu, dan hasil mereka disimpan}}.",
+      "webhook_stopped": "Web hook ke {url} dihentikan: anggota yang menambahkannya bukan lagi pemilik atau admin. Tambahkan lagi agar tetap menerima hasil."
     }
   },
   "report": {
@@ -1280,6 +1281,7 @@
     "webhooksText": "Saat kandidat selesai, prepza mengirim hasilnya ke alamat-alamat ini, ditandatangani dengan secret masing-masing.",
     "noWebhooks": "Belum ada webhook.",
     "failing": "Tidak merespons: hasil terbaru tidak sampai ke alamat ini",
+    "stopped": "Dihentikan: anggota yang menambahkannya bukan lagi pemilik atau admin. Tambahkan lagi agar tetap menerima hasil.",
     "addWebhook": "Tambah webhook",
     "addWebhookTitle": "Webhook baru",
     "webhookUrl": "Alamat HTTPS, mis. https://example.com/prepza",

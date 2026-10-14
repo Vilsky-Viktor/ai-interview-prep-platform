@@ -213,6 +213,18 @@ export async function markWebhookFailing(url: string, companyId: string) {
   )
 }
 
+/** Hands a throwaway company's web hook to someone who isn't one of its owners or admins, as if
+ * the member who added it had been removed: it stops getting events. */
+export async function setWebhookMaker(url: string, companyId: string, userId: string) {
+  await withDatabase("api", (client) =>
+    client.query("UPDATE webhooks SET created_by = $3 WHERE url = $1 AND company_id = $2", [
+      url,
+      companyId,
+      userId,
+    ])
+  )
+}
+
 /** Turns a throwaway company's interview into one whose generation failed: a failed generation
  * in the generation database, and the interview waiting on it, marked as companies marks it on
  * generation's failed event. */

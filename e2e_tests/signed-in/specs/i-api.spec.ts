@@ -1,7 +1,7 @@
 import { expect, test } from "../fixtures"
 import { API_URL } from "../constants"
 import { createCompany, createInterview } from "../helpers/api"
-import { markWebhookFailing } from "../helpers/db"
+import { markWebhookFailing, setWebhookMaker } from "../helpers/db"
 import { openDialog, visit } from "../helpers/navigation"
 import { shot } from "../helpers/screenshots"
 import { ownerEmail } from "../helpers/users"
@@ -100,4 +100,14 @@ test("an owner makes an API key and adds a web hook", async ({ signInAs }) => {
   await visit(owner, `${tab}/api?tab=webhooks`)
   await expect(owner.getByText("Not answering: recent results didn't reach it")).toBeVisible()
   await shot(owner, "webhook-failing")
+
+  // One whose member is no longer an owner or admin gets no events, and says so instead.
+  await setWebhookMaker("https://example.com/prepza", company.id, "removed-member")
+  await visit(owner, `${tab}/api?tab=webhooks`)
+  await expect(
+    owner.getByText(
+      "Stopped: the member who added it is no longer an owner or admin. Add it again to keep getting results."
+    )
+  ).toBeVisible()
+  await shot(owner, "webhook-stopped")
 })

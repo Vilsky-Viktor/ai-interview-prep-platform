@@ -44,6 +44,8 @@ function useNotificationText() {
       ats: data.ats ?? "ATS",
       // What stopped working: "slack", or an ATS.
       integration: data.integration ?? "ats",
+      // A web hook's address.
+      url: data.url ?? "",
       // How many came together, for the kinds the service groups.
       count: typeof data.count === "number" ? data.count : 1,
       credits:

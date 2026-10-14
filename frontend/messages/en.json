@@ -1027,7 +1027,8 @@
       "member_joined": "{email} joined “{name}” as {role, select, admin {an admin} other {a viewer}}.",
       "ats_not_invited": "{count, plural, one {{email} from {ats} wasn't invited to “{title}”: {reason, select, credits {out of credits} limit {an email limit was reached} paused {invites are paused} other {something went wrong}}.} other {# candidates from {ats} weren't invited to “{title}”.}}",
       "ats_cannot_write": "{ats} doesn't take candidates' results: the key has no write access. Reconnect with a key that can write; results are kept and sent then.",
-      "connection_broken": "{name} stopped working and needs reconnecting. Until then, {integration, select, slack {notifications don't reach your channel} other {candidates it sends wait, and their results are kept}}."
+      "connection_broken": "{name} stopped working and needs reconnecting. Until then, {integration, select, slack {notifications don't reach your channel} other {candidates it sends wait, and their results are kept}}.",
+      "webhook_stopped": "The web hook to {url} stopped: the member who added it is no longer an owner or admin. Add it again to keep getting results."
     }
   },
   "report": {
@@ -1280,6 +1281,7 @@
     "webhooksText": "When a candidate finishes, prepza sends their results to these addresses, signed with each one's secret.",
     "noWebhooks": "No web hooks yet.",
     "failing": "Not answering: recent results didn't reach it",
+    "stopped": "Stopped: the member who added it is no longer an owner or admin. Add it again to keep getting results.",
     "addWebhook": "Add web hook",
     "addWebhookTitle": "New web hook",
     "webhookUrl": "HTTPS address, e.g. https://example.com/prepza",

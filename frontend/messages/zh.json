@@ -1018,7 +1018,8 @@
       "member_joined": "{email} 已作为{role, select, admin {管理员} other {查看者}}加入“{name}”。",
       "ats_not_invited": "{count, plural, =1 {来自 {ats} 的 {email} 未被邀请参加“{title}”：{reason, select, credits {点数不足} limit {已达到邮件发送上限} paused {邀请已暂停} other {出了点问题}}。} other {来自 {ats} 的 # 位候选人未被邀请参加“{title}”。}}",
       "ats_cannot_write": "{ats} 不接收候选人的结果：该密钥没有写入权限。请用有写入权限的密钥重新连接；结果会先保留，届时再发送。",
-      "connection_broken": "{name} 已停止工作，需要重新连接。在此之前，{integration, select, slack {通知不会发到你的频道} other {它发来的候选人会等待，他们的结果会先保留}}。"
+      "connection_broken": "{name} 已停止工作，需要重新连接。在此之前，{integration, select, slack {通知不会发到你的频道} other {它发来的候选人会等待，他们的结果会先保留}}。",
+      "webhook_stopped": "发往 {url} 的 Webhook 已停止：添加它的成员已不再是所有者或管理员。请重新添加，以继续接收结果。"
     }
   },
   "report": {
@@ -1271,6 +1272,7 @@
     "webhooksText": "候选人完成后，prepza 会将其结果发送到这些地址，并用各自的签名密钥签名。",
     "noWebhooks": "还没有 Webhook。",
     "failing": "无响应：最近的结果未能送达",
+    "stopped": "已停止：添加它的成员已不再是所有者或管理员。请重新添加，以继续接收结果。",
     "addWebhook": "添加 Webhook",
     "addWebhookTitle": "新建 Webhook",
     "webhookUrl": "HTTPS 地址，例如 https://example.com/prepza",

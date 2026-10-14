@@ -50,3 +50,25 @@ test("the bell says when Slack stopped working", async ({ signInAs }) => {
   await notice.click();
   await expect(owner).toHaveURL(new RegExp(`${page}$`));
 });
+
+// A web hook whose member is no longer an owner or admin: the bell names it and opens the API
+// page.
+test("the bell says when a web hook stopped", async ({ signInAs }) => {
+  const owner = await signInAs(ownerEmail());
+  const company = await createCompany(owner);
+  const page = `/companies/${company.id}/integrations/api`;
+  await addCompanyNotification(company.id, "webhook_stopped", page, {
+    url: "https://example.com/prepza",
+  });
+
+  await visit(owner, `/companies/${company.id}/interviews`);
+  await owner.getByRole("button", { name: /notification/i }).click();
+  const notice = owner.getByText(
+    "The web hook to https://example.com/prepza stopped: the member who added it is no longer an owner or admin.",
+    { exact: false },
+  );
+  await expect(notice).toBeVisible();
+  await shot(owner, "bell-webhook");
+  await notice.click();
+  await expect(owner).toHaveURL(new RegExp(`${page}$`));
+});

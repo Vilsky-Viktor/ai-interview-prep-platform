@@ -102,3 +102,19 @@ async def set_failing(webhook_id: uuid.UUID, failing: bool) -> None:
     async with Session() as session:
         await session.execute(query)
         await session.commit()
+
+
+async def set_stopped(webhook_id: uuid.UUID, stopped: bool) -> bool:
+    """True when it changed just now: of several events at once, only one tells the company."""
+    query = (
+        update(Webhook)
+        .where(Webhook.id == webhook_id, Webhook.stopped.is_not(stopped))
+        .values(stopped=stopped)
+        .returning(Webhook.id)
+    )
+
+    async with Session() as session:
+        changed = await session.scalar(query)
+        await session.commit()
+
+    return changed is not None

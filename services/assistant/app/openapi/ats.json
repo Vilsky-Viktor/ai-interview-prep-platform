@@ -1160,7 +1160,7 @@
      "internal"
     ],
     "summary": "Delete User",
-    "description": "Library, deleting an account: an ATS's records of them as a candidate go; the ATS\nconnections they made stay with their companies, without their id.",
+    "description": "Library, deleting an account: an ATS's records of them as a candidate go; the ATS\nconnections they made stay with their companies, without their id, and each company is\ntold they need reconnecting.",
     "operationId": "delete_user_internal_users__user_id__delete",
     "security": [
      {

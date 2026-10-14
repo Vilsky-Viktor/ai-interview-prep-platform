@@ -171,6 +171,7 @@ def stored(monkeypatch):
             created_by=user_id,
             created_at=datetime.now(UTC),
             failing=False,
+            stopped=False,
         )
         state["webhooks"].append(hook)
 
@@ -208,6 +209,7 @@ def endpoints(monkeypatch, companies_api):
         "public": True,
         "unresolved": set(),
         "retries": {},
+        "told": [],
     }
 
     def hook(url, secret="whsec_a", maker="u1"):
@@ -218,6 +220,7 @@ def endpoints(monkeypatch, companies_api):
             secret=encrypt(KEY, secret),
             created_by=maker,
             failing=False,
+            stopped=False,
         )
         state["hooks"].append(found)
 
@@ -234,6 +237,16 @@ def endpoints(monkeypatch, companies_api):
 
     async def set_failing(webhook_id, failing):
         next(item for item in state["hooks"] if item.id == webhook_id).failing = failing
+
+    async def set_stopped(webhook_id, stopped):
+        found = next(item for item in state["hooks"] if item.id == webhook_id)
+        changed = found.stopped != stopped
+        found.stopped = stopped
+
+        return changed
+
+    async def tell(event):
+        state["told"].append(event)
 
     async def post(url, address, body, signature):
         if url in state["failing"]:
@@ -275,6 +288,8 @@ def endpoints(monkeypatch, companies_api):
     monkeypatch.setattr(delivery.webhooks, "delivered", delivered)
     monkeypatch.setattr(delivery.webhooks, "mark_delivered", mark_delivered)
     monkeypatch.setattr(delivery.webhooks, "set_failing", set_failing)
+    monkeypatch.setattr(delivery.webhooks, "set_stopped", set_stopped)
+    monkeypatch.setattr(delivery, "publish_quietly", tell)
     monkeypatch.setattr(delivery.endpoints, "post", post)
     monkeypatch.setattr(delivery.retries, "add", add_retry)
     monkeypatch.setattr(delivery.retries, "claim", claim)

@@ -1060,6 +1060,11 @@
       "type": "boolean",
       "title": "Failing"
      },
+     "stopped": {
+      "type": "boolean",
+      "title": "Stopped",
+      "default": false
+     },
      "secret": {
       "type": "string",
       "title": "Secret"
@@ -1176,6 +1181,11 @@
      "failing": {
       "type": "boolean",
       "title": "Failing"
+     },
+     "stopped": {
+      "type": "boolean",
+      "title": "Stopped",
+      "default": false
      }
     },
     "type": "object",

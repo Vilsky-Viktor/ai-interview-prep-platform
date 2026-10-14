@@ -9,9 +9,10 @@ import httpx
 from fastapi import HTTPException, status
 from fastapi.encoders import jsonable_encoder
 from prepza_common.encryption import decrypt
+from prepza_common.notifications import NotificationKind, Recipient, notification, publish_quietly
 
 from app.config.settings import settings
-from app.constants.api import RETRY_BATCH, RETRY_GIVE_UP
+from app.constants.api import API_PAGE, RETRY_BATCH, RETRY_GIVE_UP
 from app.constants.events import CANDIDATE_FINISHED
 from app.helpers.public import candidate_of, interview_of
 from app.helpers.webhooks import body_of, public_address, retry_delay, signature
@@ -42,6 +43,10 @@ async def finished(data: dict, event_id: str) -> None:
         maker: (await companies.access(company_id, maker))["editor"]
         for maker in {hook.created_by for hook in hooks}
     }
+
+    for hook in hooks:
+        await mark_stopped(hook, not editors[hook.created_by])
+
     hooks = [hook for hook in hooks if editors[hook.created_by]]
 
     if not hooks:
@@ -97,7 +102,28 @@ async def retry() -> int:
     return len(claimed)
 
 
+async def mark_stopped(hook: Webhook, stopped: bool) -> None:
+    """A web hook whose member is no longer an owner or admin stops, and the company is told,
+    once; it works again once its member is an editor again. A lost notification is better than
+    a failed delivery."""
+    if hook.stopped == stopped or not await webhooks.set_stopped(hook.id, stopped):
+        return
+
+    if stopped:
+        await publish_quietly(
+            notification(
+                Recipient.COMPANY,
+                hook.company_id,
+                NotificationKind.WEBHOOK_STOPPED,
+                API_PAGE.format(company_id=hook.company_id),
+                url=hook.url,
+            )
+        )
+
+
 async def resend(row: WebhookRetry, hook: Webhook, editor: bool) -> None:
+    await mark_stopped(hook, not editor)
+
     if not editor or await webhooks.delivered(hook.id, row.event_id):
         await retries.remove(hook.id, row.event_id)
 

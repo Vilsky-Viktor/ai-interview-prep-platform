@@ -43,6 +43,9 @@ class Webhook(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
     # An event it didn't take for RETRY_GIVE_UP was dropped; it took none since.
     failing: Mapped[bool] = mapped_column(default=False, server_default=false())
+    # An event found the member who added it no longer an owner or admin: the company was told,
+    # once. Cleared when its member is an editor again.
+    stopped: Mapped[bool] = mapped_column(default=False, server_default=false())
 
 
 class WebhookDelivery(Base):

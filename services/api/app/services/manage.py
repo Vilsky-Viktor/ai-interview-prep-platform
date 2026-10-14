@@ -10,17 +10,28 @@ from app.config.settings import settings
 from app.constants.api import KEY_EXPIRY_MONTHS, MAX_KEYS, MAX_WEBHOOKS, KeyExpiry
 from app.helpers.keys import add_months, expired, new_key
 from app.helpers.webhooks import new_secret, public_address
+from app.integrations import companies
 from app.models.api import ApiKey
 from app.schemas.manage import ApiSettingsOut, KeyOut, NewKeyOut, NewWebhookOut, WebhookOut
 from app.storage import keys, webhooks
 
 
 async def overview(company_id: UUID) -> ApiSettingsOut:
+    """A web hook shows as stopped while the member who added it is no longer an owner or admin,
+    as it gets no events then (services/webhooks.py)."""
+    hooks = await webhooks.of_company(company_id)
+    editors = {
+        maker: (await companies.access(company_id, maker))["editor"]
+        for maker in {hook.created_by for hook in hooks}
+    }
+
     return ApiSettingsOut(
         keys=[key_out(key) for key in await keys.of_company(company_id)],
         webhooks=[
-            WebhookOut.model_validate(hook, from_attributes=True)
-            for hook in await webhooks.of_company(company_id)
+            WebhookOut.model_validate(hook, from_attributes=True).model_copy(
+                update={"stopped": not editors[hook.created_by]}
+            )
+            for hook in hooks
         ],
         expiries=list(KeyExpiry),
     )

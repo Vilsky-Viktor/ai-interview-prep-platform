@@ -168,10 +168,12 @@ export function ApiWebhooks({
               <time suppressHydrationWarning>
                 {t("added", { date: formatDate(hook.created_at, locale) })}
               </time>
-              {hook.failing && (
+              {(hook.stopped || hook.failing) && (
                 <>
                   {" · "}
-                  <span className="text-destructive">{t("failing")}</span>
+                  <span className="text-destructive">
+                    {t(hook.stopped ? "stopped" : "failing")}
+                  </span>
                 </>
               )}
             </>

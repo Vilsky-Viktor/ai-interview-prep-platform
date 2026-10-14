@@ -110,6 +110,18 @@ def test_the_api_page_shows_which_web_hooks_are_failing(client, companies_api, s
     ]
 
 
+def test_the_api_page_shows_a_web_hook_stopped_when_its_member_is_no_longer_an_editor(
+    client, companies_api, stored, public
+):
+    sign_in()
+    client.post(HOOKS, json={"url": "https://left.example/x"})
+    stored["webhooks"][0].created_by = "u2"
+    companies_api["roles"]["u2"] = "viewer"
+    [shown] = client.get(f"/manage?company_id={COMPANY}").json()["webhooks"]
+
+    assert shown["stopped"] is True
+
+
 def test_a_web_hook_must_reach_the_public_internet(client, companies_api, stored, public):
     sign_in()
     response = client.post(HOOKS, json={"url": "https://internal/x"})

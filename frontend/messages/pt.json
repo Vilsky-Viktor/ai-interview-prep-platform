@@ -1023,7 +1023,8 @@
       "member_joined": "{email} entrou em “{name}” como {role, select, admin {administrador} other {visualizador}}.",
       "ats_not_invited": "{count, plural, =1 {{email} do {ats} não foi convidado para “{title}”: {reason, select, credits {créditos esgotados} limit {um limite de e-mails foi atingido} paused {os convites estão pausados} other {algo deu errado}}.} other {# candidatos do {ats} não foram convidados para “{title}”.}}",
       "ats_cannot_write": "O {ats} não aceita os resultados dos candidatos: a chave não tem acesso de escrita. Reconecte com uma chave que possa escrever; os resultados ficam guardados e são enviados então.",
-      "connection_broken": "O {name} parou de funcionar e precisa ser reconectado. Até lá, {integration, select, slack {as notificações não chegam ao seu canal} other {os candidatos que ele envia ficam aguardando, e os resultados deles são guardados}}."
+      "connection_broken": "O {name} parou de funcionar e precisa ser reconectado. Até lá, {integration, select, slack {as notificações não chegam ao seu canal} other {os candidatos que ele envia ficam aguardando, e os resultados deles são guardados}}.",
+      "webhook_stopped": "O webhook para {url} parou: o membro que o adicionou não é mais proprietário nem administrador. Adicione-o de novo para continuar recebendo resultados."
     }
   },
   "report": {
@@ -1276,6 +1277,7 @@
     "webhooksText": "Quando um candidato termina, a prepza envia os resultados dele para estes endereços, assinados com o segredo de cada um.",
     "noWebhooks": "Nenhum webhook ainda.",
     "failing": "Não responde: os resultados recentes não chegaram",
+    "stopped": "Parado: o membro que o adicionou não é mais proprietário nem administrador. Adicione-o de novo para continuar recebendo resultados.",
     "addWebhook": "Adicionar webhook",
     "addWebhookTitle": "Novo webhook",
     "webhookUrl": "Endereço HTTPS, por ex. https://example.com/prepza",
