@@ -13,7 +13,7 @@ Each template question has a stage that only moves forward:
 | **revealed** | Free practice, shown with its answer | Final stage |
 
 - A new template reveals a third of each topic at once.
-- An interview's copy of a question remembers its original, so its answers count there too.
+- An interview's copy of a question remembers its original, so its answers count there too, and a fix to the original reaches the copy (see [Fixes](../generation.md#fixes)).
 - A question revealed for practice is no longer given to candidates, even in an interview that copied it earlier.
 - A daily job (`/internal/schedules/bank`) moves the stages.
 

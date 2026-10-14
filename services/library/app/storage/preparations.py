@@ -182,29 +182,56 @@ async def get_question_context(
         return tuple(row) if row else None
 
 
-async def replace_question(question_id: uuid.UUID, text: str, options: list[dict]) -> None:
-    """New content in the same slot. The old content and its feedback are kept as a revision.
+async def unchanged_copies(session, question_id: uuid.UUID) -> list[uuid.UUID]:
+    """The copies of a bank question in companies' tests that still hold its content: not one a
+    company changed, nor one fixed on its own."""
+    original = aliased(Question)
+    query = (
+        select(Question.id)
+        .join(original, original.id == Question.source_question_id)
+        .where(
+            original.id == question_id,
+            Question.text == original.text,
+            Question.options == original.options,
+        )
+    )
 
-    Replacing a flagged question fixes it, and its set's owner hears of that.
+    return list(await session.scalars(query))
+
+
+async def replace_question(question_id: uuid.UUID, text: str, options: list[dict]) -> None:
+    """New content in the same slot, for candidates who start after it. The old content and its
+    feedback are kept as a revision.
+
+    Replacing a flagged question fixes it, and its set's owner hears of that. A fixed bank
+    question fixes its unchanged copies in companies' tests too, and each company hears of it.
     """
     async with Session() as session:
         flagged = await session.scalar(
             select(QuestionStats.flag).where(QuestionStats.question_id == question_id)
         )
-        await quality.archive(session, question_id)
+        fixed = [question_id]
+
+        if flagged is not None:
+            fixed += await unchanged_copies(session, question_id)
+
+        for each in fixed:
+            await quality.archive(session, each)
+
         await session.execute(
-            update(Question).where(Question.id == question_id).values(text=text, options=options)
+            update(Question).where(Question.id.in_(fixed)).values(text=text, options=options)
         )
 
         if flagged is not None:
-            question_set = await session.scalar(_set_of_question(question_id))
-            topic = await session.scalar(_topic_of_question(question_id))
-            outbox.add(
-                session,
-                OutboxEvent,
-                NOTIFICATION_REQUESTED,
-                question_notification(question_set, topic, NotificationKind.QUESTION_FIXED),
-            )
+            for each in fixed:
+                question_set = await session.scalar(_set_of_question(each))
+                topic = await session.scalar(_topic_of_question(each))
+                outbox.add(
+                    session,
+                    OutboxEvent,
+                    NOTIFICATION_REQUESTED,
+                    question_notification(question_set, topic, NotificationKind.QUESTION_FIXED),
+                )
 
         await session.commit()
 

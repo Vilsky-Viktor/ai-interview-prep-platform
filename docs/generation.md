@@ -80,6 +80,7 @@ Rounds publish every answer. Library keeps per-question stats (answers, correct,
 - Fixes happen in place, so a topic's size never changes.
 - The replaced version is archived with its stats and feedback; the new one starts its own, and an answer still arriving for the old text isn't counted for it.
 - A fix (the verifier's, a member's "wrong answer" mark sent to it, or a superadmin's "Fix now") applies to candidates who start after it. Each session keeps its own copy of the questions, so candidates who already answered keep their answers, scorecard and grade as they were; nothing marks past answers again.
+- A fixed template question fixes its copies in companies' interviews too, the same way: every copy that still holds the original's content, so not one a company changed or one fixed on its own. Each company gets the "question fixed" notification. A template question rewritten without a flag leaves its copies as they are.
 - A replacement question must differ in meaning from every question already in the topic, checked by embeddings like the pipeline's duplicate step.
 
 Superadmins see flagged and replaced questions on the admin zone's Flagged and Replaced tabs (see [Admin zone](features/admin-zone.md#flagged-and-replaced)).

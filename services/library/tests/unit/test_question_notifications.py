@@ -100,6 +100,10 @@ def fake_session(monkeypatch, flag):
         async def scalar(self, statement):
             return replies.pop(0)
 
+        async def scalars(self, statement):
+            # The question has no copies in companies' tests.
+            return []
+
         async def execute(self, statement):
             pass
 
