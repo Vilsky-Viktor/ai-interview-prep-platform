@@ -195,4 +195,7 @@ MESSAGES = {
     "integrations": "integrasi",
     "This company doesn't allow AI apps. Its owner or an admin can allow them on its AI apps page.": "Perusahaan ini tidak mengizinkan aplikasi AI. Pemilik atau admin perusahaan bisa mengizinkannya di halaman aplikasi AI perusahaan.",
     "Only the company's owner or an admin can change this, in prepza itself.": "Hanya pemilik perusahaan atau admin yang bisa mengubah ini, langsung di prepza.",
+    "This document has no such version.": "Dokumen ini tidak memiliki versi tersebut.",
+    "A notice goes out at least 14 days before the new version applies: give it a later date.": "Pemberitahuan dikirim paling lambat 14 hari sebelum versi baru berlaku: beri tanggal yang lebih lambat.",
+    "This version's notice was already sent.": "Pemberitahuan versi ini sudah dikirim.",
 }

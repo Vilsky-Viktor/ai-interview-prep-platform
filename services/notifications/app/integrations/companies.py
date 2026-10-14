@@ -74,3 +74,15 @@ async def waiting_interviews(ready: tuple[datetime, datetime], started: tuple[da
     response.raise_for_status()
 
     return response.json()
+
+
+async def editor_ids() -> list[str]:
+    """Every owner and admin of a company, for a notice about the data processing agreement."""
+    response = await http.get_client().get(
+        f"{settings.companies_url}/internal/companies/editors",
+        headers={"Authorization": f"Bearer {service_token('companies')}"},
+    )
+
+    response.raise_for_status()
+
+    return response.json()["user_ids"]

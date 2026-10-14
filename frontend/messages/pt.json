@@ -71,7 +71,7 @@
     "title": "Entrar",
     "continueWith": "Continuar com <name>{provider}</name>",
     "link": "Este e-mail já tem uma conta na prepza. Continue da forma como você entrou antes, e o {provider} será vinculado a ela.",
-    "consent": "Ao entrar, você confirma que tem 16 anos ou mais e concorda com os <terms>Termos</terms> e a <privacy>Política de privacidade</privacy>.",
+    "consent": "Ao entrar, você confirma que tem 16 anos ou mais, concorda com os <terms>Termos</terms> e leu a <privacy>Política de privacidade</privacy>.",
     "failed": "Não foi possível entrar. Tente novamente.",
     "verify": "Enviamos um link para verificar seu e-mail. Abra-o e depois entre de novo para fazer entrevistas.",
     "noUpdates": "Não quero receber novidades do produto e notícias",
@@ -272,7 +272,29 @@
     "companyDeleted": "A empresa foi excluída.",
     "renameCompanyTitle": "Renomear a empresa",
     "companyName": "Nome da empresa",
-    "companyRenamed": "A empresa foi renomeada."
+    "companyRenamed": "A empresa foi renomeada.",
+    "legalTitle": "Avisos legais",
+    "legalText": "Envie por e-mail uma mudança importante em um documento legal, pelo menos 14 dias antes de a nova versão se aplicar.",
+    "legalDocuments": {
+      "terms": "Termos",
+      "privacy": "Política de privacidade",
+      "dpa": "Acordo de tratamento de dados"
+    },
+    "legalStates": {
+      "in_force": "Em vigor desde {date}. Para avisar de uma mudança, dê à nova versão uma data pelo menos 14 dias à frente.",
+      "sendable": "Aplica-se a partir de {date}.",
+      "too_late": "Aplica-se a partir de {date}. Uma mudança é avisada pelo menos 14 dias antes de se aplicar.",
+      "sending": "Aplica-se a partir de {date}. Sendo enviado.",
+      "sent": "Aplica-se a partir de {date}. Enviado."
+    },
+    "legalSend": "Avisar da mudança",
+    "legalConfirmTitle": "Avisar por e-mail da mudança em {document}?",
+    "legalAudience": {
+      "everyone": "Todos com conta no prepza recebem a partir da manhã seguinte, informando que a nova versão se aplica a partir de {date}. É enviado uma vez e não pode ser desfeito.",
+      "company_editors": "Os proprietários e administradores de cada empresa recebem a partir da manhã seguinte, informando que a nova versão se aplica a partir de {date}. É enviado uma vez e não pode ser desfeito."
+    },
+    "legalAsked": "A mudança será avisada por e-mail a partir da manhã seguinte.",
+    "legalFailed": "Não foi possível pedir o envio. Tente novamente."
   },
   "templates": {
     "title": "Modelos",
@@ -700,8 +722,12 @@
     "homeTitle": "Testes de recrutamento e seleção criados da sua vaga"
   },
   "legal": {
-    "updated": "Última atualização",
-    "englishOnly": "Este documento está disponível apenas em inglês."
+    "englishOnly": "Este documento está disponível apenas em inglês.",
+    "inForce": "Em vigor desde {date}",
+    "upcoming": "Aplica-se a partir de {date}.",
+    "replaced": "Esta versão se aplicava a partir de {date} e foi substituída.",
+    "readInForce": "Ler a versão em vigor",
+    "versions": "Todas as versões"
   },
   "docs": {
     "title": "Documentos",

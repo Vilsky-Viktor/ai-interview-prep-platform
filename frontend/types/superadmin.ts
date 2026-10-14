@@ -50,3 +50,4 @@ export type EmailLookup = Schemas["EmailLookupOut"]
 export type CandidateOptOuts = notifications["schemas"]["CandidateOptOutsOut"]
 // A company as the admin zone's companies tab lists it.
 export type SuperadminCompany = companies["schemas"]["SuperadminCompanyOut"]
+export type LegalNotice = notifications["schemas"]["LegalNoticeOut"]

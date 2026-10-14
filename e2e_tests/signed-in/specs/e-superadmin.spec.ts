@@ -185,3 +185,14 @@ test("superadmin sees what a replaced question was replaced with", async ({ sign
     await deleteTemplate(templateId)
   }
 })
+
+test("superadmin sees each legal document's notice on the controls page", async ({
+  signInSuperadmin,
+}) => {
+  const superadmin = await signInSuperadmin()
+  await visit(superadmin, "/superadmin/controls")
+  const notices = superadmin.locator("div.rounded-2xl", { hasText: "Legal notices" })
+  await expect(notices.getByRole("listitem")).toHaveCount(3)
+  await expect(notices.getByText("Data processing agreement")).toBeVisible()
+  await shot(superadmin, "legal-notices")
+})

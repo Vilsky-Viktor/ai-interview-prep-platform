@@ -171,6 +171,70 @@ TEXTS = {
         "button": "Przejrzyj tematy",
         "footer": MEMBER_FOOTER,
     },
+    # Notices of a significant change to a legal document, sent at least 14 days before it
+    # applies; service emails, whatever the email settings.
+    "legal_terms": {
+        "subject": "Zmieniamy regulamin prepza od {date}",
+        "preheader": "Nowy regulamin obowiązuje od {date}.",
+        "heading": "Zmieniamy nasz regulamin",
+        "lines": [
+            (
+                "Opublikowaliśmy nową wersję regulaminu prepza. Obowiązuje od {date}; do tego "
+                "czasu obowiązuje obecny regulamin."
+            ),
+            (
+                "Korzystając z prepza po {date}, akceptujesz nowy regulamin. Jeśli go nie "
+                "akceptujesz, możesz wcześniej usunąć konto w Ustawieniach."
+            ),
+        ],
+        "button": "Przeczytaj nowy regulamin",
+        "footer": (
+            "Ta wiadomość została wysłana na {email}, ponieważ masz konto w prepza. To "
+            "powiadomienie o naszym regulaminie, więc jest wysyłane niezależnie od Twoich "
+            "ustawień e-maili."
+        ),
+    },
+    "legal_privacy": {
+        "subject": "Zmieniamy politykę prywatności prepza od {date}",
+        "preheader": "Nowa polityka prywatności obowiązuje od {date}.",
+        "heading": "Zmieniamy naszą politykę prywatności",
+        "lines": [
+            (
+                "Opublikowaliśmy nową wersję polityki prywatności prepza, która opisuje, jak "
+                "wykorzystujemy Twoje dane. Obowiązuje od {date}; do tego czasu obowiązuje obecna "
+                "wersja."
+            ),
+            "W każdej chwili możesz pobrać lub usunąć swoje dane w Ustawieniach.",
+        ],
+        "button": "Przeczytaj nową politykę prywatności",
+        "footer": (
+            "Ta wiadomość została wysłana na {email}, ponieważ masz konto w prepza. To "
+            "powiadomienie o tym, jak wykorzystujemy Twoje dane, więc jest wysyłane "
+            "niezależnie od Twoich ustawień e-maili."
+        ),
+    },
+    "legal_dpa": {
+        "subject": "Zmieniamy umowę powierzenia przetwarzania danych prepza od {date}",
+        "preheader": "Nowa umowa obowiązuje Twoją firmę od {date}.",
+        "heading": "Zmieniamy naszą umowę powierzenia przetwarzania danych",
+        "lines": [
+            (
+                "Opublikowaliśmy nową wersję umowy powierzenia przetwarzania danych, na podstawie "
+                "której prepza przetwarza dane Twoich kandydatów. Obowiązuje od {date}; do tego "
+                "czasu obowiązuje obecna wersja."
+            ),
+            (
+                "Firma, która zgłasza sprzeciw z uzasadnionych powodów dotyczących ochrony "
+                "danych, może przed tą datą zrezygnować z prepza i usunąć swoją firmę."
+            ),
+        ],
+        "button": "Przeczytaj nową umowę",
+        "footer": (
+            "Ta wiadomość została wysłana na {email}, ponieważ masz rolę właściciela lub "
+            "administratora firmy w prepza. To powiadomienie o naszej umowie z Twoją firmą, "
+            "więc jest wysyłane niezależnie od Twoich ustawień e-maili."
+        ),
+    },
     "top_up_failed": {
         "subject": "Automatyczne doładowanie dla {company} nie powiodło się",
         "preheader": "Nie udało się obciążyć karty. Doładuj, aby dalej zapraszać kandydatów.",

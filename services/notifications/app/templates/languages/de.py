@@ -179,6 +179,71 @@ TEXTS = {
         "button": "Themen prüfen",
         "footer": MEMBER_FOOTER,
     },
+    # Notices of a significant change to a legal document, sent at least 14 days before it
+    # applies; service emails, whatever the email settings.
+    "legal_terms": {
+        "subject": "Neue Nutzungsbedingungen von prepza ab {date}",
+        "preheader": "Die neuen Nutzungsbedingungen gelten ab {date}.",
+        "heading": "Wir aktualisieren unsere Nutzungsbedingungen",
+        "lines": [
+            (
+                "Wir haben eine neue Fassung der Nutzungsbedingungen von prepza veröffentlicht. "
+                "Sie gilt ab {date}; bis dahin gelten die aktuellen Nutzungsbedingungen."
+            ),
+            (
+                "Wenn du prepza ab {date} weiter nutzt, akzeptierst du die neuen "
+                "Nutzungsbedingungen. Wenn nicht, kannst du dein Konto vorher in den "
+                "Einstellungen löschen."
+            ),
+        ],
+        "button": "Neue Nutzungsbedingungen lesen",
+        "footer": (
+            "Diese E-Mail wurde an {email} gesendet, weil du ein prepza-Konto hast. Sie ist "
+            "ein Hinweis zu unseren Nutzungsbedingungen und wird daher unabhängig von deinen "
+            "E-Mail-Einstellungen gesendet."
+        ),
+    },
+    "legal_privacy": {
+        "subject": "Neue Datenschutzerklärung von prepza ab {date}",
+        "preheader": "Die neue Datenschutzerklärung gilt ab {date}.",
+        "heading": "Wir aktualisieren unsere Datenschutzerklärung",
+        "lines": [
+            (
+                "Wir haben eine neue Fassung der Datenschutzerklärung von prepza veröffentlicht, "
+                "die beschreibt, wie wir deine Daten verwenden. Sie gilt ab {date}; bis dahin "
+                "gilt die aktuelle Fassung."
+            ),
+            "Du kannst deine Daten jederzeit in den Einstellungen herunterladen oder löschen.",
+        ],
+        "button": "Neue Datenschutzerklärung lesen",
+        "footer": (
+            "Diese E-Mail wurde an {email} gesendet, weil du ein prepza-Konto hast. Sie ist "
+            "ein Hinweis dazu, wie wir deine Daten verwenden, und wird daher unabhängig von "
+            "deinen E-Mail-Einstellungen gesendet."
+        ),
+    },
+    "legal_dpa": {
+        "subject": "Neuer Auftragsverarbeitungsvertrag von prepza ab {date}",
+        "preheader": "Der neue Vertrag gilt für dein Unternehmen ab {date}.",
+        "heading": "Wir aktualisieren unseren Auftragsverarbeitungsvertrag",
+        "lines": [
+            (
+                "Wir haben eine neue Fassung des Auftragsverarbeitungsvertrags veröffentlicht, "
+                "nach dem prepza die Daten deiner Kandidaten verarbeitet. Sie gilt ab {date}; bis "
+                "dahin gilt die aktuelle Fassung."
+            ),
+            (
+                "Widerspricht ein Unternehmen aus berechtigten Gründen des Datenschutzes, kann es "
+                "die Nutzung von prepza vorher beenden und sein Unternehmen in prepza löschen."
+            ),
+        ],
+        "button": "Neuen Vertrag lesen",
+        "footer": (
+            "Diese E-Mail wurde an {email} gesendet, weil du Inhaber oder Admin eines "
+            "Unternehmens auf prepza bist. Sie ist ein Hinweis zu unserem Vertrag mit deinem "
+            "Unternehmen und wird daher unabhängig von deinen E-Mail-Einstellungen gesendet."
+        ),
+    },
     "top_up_failed": {
         "subject": "Automatisches Aufladen für {company} fehlgeschlagen",
         "preheader": (

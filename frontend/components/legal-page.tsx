@@ -1,22 +1,42 @@
+import Link from "next/link"
+import { notFound } from "next/navigation"
 import { getLocale, getTranslations } from "next-intl/server"
 
 import { EmailText } from "@/components/email-text"
 import { DEFAULT_LOCALE } from "@/constants/i18n"
+import { publicFetch } from "@/lib/server-api"
 import type { LegalDocument } from "@/types/help"
+
+// A version's name: the day it applies from.
+const VERSION = /^\d{4}-\d{2}-\d{2}$/
 
 /** The privacy policy and terms, as the rounds service serves them (the FAQ chat answers from
 the same texts). English only: they're legal texts, and a translation would need its own legal
 review. */
 export async function LegalPage({
   title,
-  document,
+  name,
+  version,
 }: {
   title: string
-  document: LegalDocument
+  name: "terms" | "privacy" | "dpa"
+  version?: string
 }) {
-  const { intro, sections, updated } = document
+  const asked = version && VERSION.test(version) ? `?version=${version}` : ""
+  const document = await publicFetch<LegalDocument>(
+    `/rounds/help/legal/${name}${asked}`
+  )
+
+  if (!document) {
+    notFound()
+  }
+
+  const { intro, sections, versions, in_force: inForce } = document
+  const shown = document.version
   const t = await getTranslations("legal")
   const locale = await getLocale()
+  const link = (to: string) =>
+    to === document.current ? `/${name}` : `/${name}?version=${to}`
 
   return (
     <main className="mx-auto max-w-5xl space-y-10 px-6 py-12">
@@ -28,7 +48,16 @@ export async function LegalPage({
           {locale !== DEFAULT_LOCALE && (
             <span className="block pb-2">{t("englishOnly")}</span>
           )}
-          {t("updated")} <time dateTime={updated}>{updated}</time>
+          {document.state === "in_force" ? (
+            t("inForce", { date: shown })
+          ) : (
+            <>
+              {t(document.state, { date: shown })}{" "}
+              <Link href={link(inForce)} className="underline">
+                {t("readInForce")}
+              </Link>
+            </>
+          )}
         </p>
       </header>
       {/* The documents are English only, so they read left to right in every interface. */}
@@ -62,6 +91,24 @@ export async function LegalPage({
           </section>
         ))}
       </div>
+      {versions.length > 1 && (
+        <nav className="space-y-2 text-sm text-muted-foreground">
+          <h2 className="font-medium">{t("versions")}</h2>
+          <ul className="flex flex-wrap gap-x-4 gap-y-1">
+            {versions.map((item) => (
+              <li key={item}>
+                {item === shown ? (
+                  item
+                ) : (
+                  <Link href={link(item)} className="underline">
+                    {item}
+                  </Link>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
     </main>
   )
 }

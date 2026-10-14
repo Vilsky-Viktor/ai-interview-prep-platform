@@ -2,15 +2,23 @@ from sqlalchemy import delete, select
 
 from app.models.emails import EmailConsent, EmailPreferences
 from app.models.feedback import QuestionRating, QuestionReport, QuestionReporter
+from app.models.legal import TermsAcceptance
 from app.models.sets import Question
-from app.storage import emails
+from app.storage import emails, legal
 from app.storage.db import Session
 
 
 async def delete_user(user_id: str) -> None:
-    """The user's ratings and reports of questions, given as a candidate, and their email
-    preferences with the consent log."""
-    models = (QuestionRating, QuestionReport, QuestionReporter, EmailPreferences, EmailConsent)
+    """The user's ratings and reports of questions, given as a candidate, their email
+    preferences with the consent log, and the terms they accepted."""
+    models = (
+        QuestionRating,
+        QuestionReport,
+        QuestionReporter,
+        EmailPreferences,
+        EmailConsent,
+        TermsAcceptance,
+    )
 
     async with Session() as session:
         for model in models:
@@ -45,4 +53,5 @@ async def export(user_id: str) -> dict:
             ],
             "email_preferences": await emails.preferences(user_id),
             "email_consents": await emails.consents(user_id),
+            "terms_accepted": await legal.accepted_terms(user_id),
         }

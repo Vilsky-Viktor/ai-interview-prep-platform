@@ -30,3 +30,8 @@ async def recipients(user_ids: list[str]) -> list[dict]:
         }
         for account in accounts
     ]
+
+
+def all_user_ids() -> list[str]:
+    """Every account's id, read from Firebase page by page (blocking: run it in a thread)."""
+    return [account.uid for account in firebase_auth.list_users().iterate_all()]

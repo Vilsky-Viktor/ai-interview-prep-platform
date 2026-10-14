@@ -171,6 +171,72 @@ TEXTS = {
         "button": "Konuları incele",
         "footer": MEMBER_FOOTER,
     },
+    # Notices of a significant change to a legal document, sent at least 14 days before it
+    # applies; service emails, whatever the email settings.
+    "legal_terms": {
+        "subject": "prepza kullanım koşullarını {date} tarihinde güncelliyor",
+        "preheader": "Yeni kullanım koşulları {date} tarihinden itibaren geçerli.",
+        "heading": "Kullanım koşullarımızı güncelliyoruz",
+        "lines": [
+            (
+                "prepza kullanım koşullarının yeni bir sürümünü yayımladık. Yeni sürüm {date} "
+                "tarihinden itibaren geçerli; o zamana kadar mevcut koşullar geçerli olmaya devam "
+                "ediyor."
+            ),
+            (
+                "prepza'yı {date} tarihinden sonra kullanmanız, yeni koşulları kabul ettiğiniz "
+                "anlamına gelir. Kabul etmiyorsanız, bu tarihten önce Ayarlar'dan hesabınızı "
+                "silebilirsiniz."
+            ),
+        ],
+        "button": "Yeni koşulları oku",
+        "footer": (
+            "Bu e-posta {email} adresine, bir prepza hesabınız olduğu için gönderildi. "
+            "Kullanım koşullarımızla ilgili bir bildirim olduğundan e-posta ayarlarınızdan "
+            "bağımsız olarak gönderilir."
+        ),
+    },
+    "legal_privacy": {
+        "subject": "prepza gizlilik politikasını {date} tarihinde güncelliyor",
+        "preheader": "Yeni gizlilik politikası {date} tarihinden itibaren geçerli.",
+        "heading": "Gizlilik politikamızı güncelliyoruz",
+        "lines": [
+            (
+                "prepza gizlilik politikasının, verilerinizi nasıl kullandığımızı açıklayan yeni "
+                "bir sürümünü yayımladık. Yeni sürüm {date} tarihinden itibaren geçerli; o zamana "
+                "kadar mevcut sürüm geçerli olmaya devam ediyor."
+            ),
+            "Verilerinizi istediğiniz zaman Ayarlar'dan indirebilir veya silebilirsiniz.",
+        ],
+        "button": "Yeni gizlilik politikasını oku",
+        "footer": (
+            "Bu e-posta {email} adresine, bir prepza hesabınız olduğu için gönderildi. "
+            "Verilerinizi nasıl kullandığımızla ilgili bir bildirim olduğundan e-posta "
+            "ayarlarınızdan bağımsız olarak gönderilir."
+        ),
+    },
+    "legal_dpa": {
+        "subject": "prepza veri işleme sözleşmesini {date} tarihinde güncelliyor",
+        "preheader": "Yeni sözleşme şirketiniz için {date} tarihinden itibaren geçerli.",
+        "heading": "Veri işleme sözleşmemizi güncelliyoruz",
+        "lines": [
+            (
+                "prepza'nın adaylarınızın verilerini işlerken dayandığı veri işleme sözleşmesinin "
+                "yeni bir sürümünü yayımladık. Yeni sürüm {date} tarihinden itibaren geçerli; o "
+                "zamana kadar mevcut sürüm geçerli olmaya devam ediyor."
+            ),
+            (
+                "Makul veri koruma gerekçeleriyle itiraz eden bir şirket, bu tarihten önce "
+                "prepza'yı kullanmayı bırakıp şirketini silebilir."
+            ),
+        ],
+        "button": "Yeni sözleşmeyi oku",
+        "footer": (
+            "Bu e-posta {email} adresine, prepza'da bir şirketin sahibi veya yöneticisi "
+            "olduğunuz için gönderildi. Şirketinizle yaptığımız sözleşmeyle ilgili bir "
+            "bildirim olduğundan e-posta ayarlarınızdan bağımsız olarak gönderilir."
+        ),
+    },
     "top_up_failed": {
         "subject": "{company} için otomatik yükleme başarısız oldu",
         "preheader": "Karttan ödeme alınamadı. Aday davet etmeye devam etmek için kredi yükleyin.",

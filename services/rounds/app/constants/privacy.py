@@ -24,6 +24,7 @@ PRIVACY_SECTIONS = [
             "Interviews, if a company invites you: the email you were invited with, your answers, how long each answer took, when you left the interview page, copied text or answered too fast to have read the question, any extra time the company gave you (no reason is recorded), and your ratings and reports of questions. You are told about this before you start.",
             "Technical: error reports without your IP address or email, and short-lived server logs needed to run and secure the service.",
             "AI apps you connect: the app's name and the site it returns to, and when you connected it and last used it. Its access is kept only as a one-way hash.",
+            "The terms you accepted: the version of the terms in force when you signed up, and when, as proof of what you agreed to. It's deleted with your account.",
             "Tools a company connects: the keys or tokens its owner or admin creates in its applicant tracking system (Workable, Greenhouse, Teamtailor, Recruitee or Breezy HR) or Slack, stored encrypted; a one-way hash of each prepza API key and the addresses of its web hooks; and, from its applicant tracking system, the email, name and id of each candidate it sends to prepza.",
             "Email settings: which optional emails you get, and a log of every change to them: which email, on or off, when, where (signing in, Settings, or an unsubscribe link or spam report) and which version of the checkboxes' wording you saw.",
             "Emails to company members: a record of the activity digests and reminders we sent you, and what each reminder was about, so none is sent twice.",
@@ -136,7 +137,7 @@ PRIVACY_SECTIONS = [
     {
         "heading": "Changes",
         "paragraphs": [
-            "We will update this page when our practices change and tell you about significant changes by email or in the app.",
+            "We update this page when our practices change, and email you about a significant change at least 14 days before it applies. Every earlier version stays readable on this page.",
         ],
     },
     {

@@ -71,7 +71,7 @@
     "title": "サインイン",
     "continueWith": "<name>{provider}</name> で続行",
     "link": "このメールアドレスにはすでに prepza のアカウントがあります。以前と同じ方法で続行すると、{provider} がそのアカウントに連携されます。",
-    "consent": "サインインすると、16 歳以上であることを確認し、<terms>利用規約</terms>と<privacy>プライバシーポリシー</privacy>に同意したものとみなされます。",
+    "consent": "サインインすると、16 歳以上であること、<terms>利用規約</terms>に同意したこと、<privacy>プライバシーポリシー</privacy>を読んだことを確認したものとみなされます。",
     "failed": "サインインできませんでした。もう一度お試しください。",
     "verify": "メールアドレスを確認するためのリンクを送信しました。リンクを開いてから、もう一度サインインすると面接を受けられます。",
     "noUpdates": "製品の最新情報とニュースを受け取らない",
@@ -272,7 +272,29 @@
     "companyDeleted": "会社を削除しました。",
     "renameCompanyTitle": "会社名を変更",
     "companyName": "会社名",
-    "companyRenamed": "会社名を変更しました。"
+    "companyRenamed": "会社名を変更しました。",
+    "legalTitle": "法的通知",
+    "legalText": "法的文書の重要な変更を、新しいバージョンの適用日の少なくとも 14 日前にメールで通知します。",
+    "legalDocuments": {
+      "terms": "利用規約",
+      "privacy": "プライバシーポリシー",
+      "dpa": "データ処理契約"
+    },
+    "legalStates": {
+      "in_force": "{date} から有効。変更をメールで通知するには、新しいバージョンの日付を少なくとも 14 日先にしてください。",
+      "sendable": "{date} から適用。",
+      "too_late": "{date} から適用。変更は適用日の少なくとも 14 日前に通知されます。",
+      "sending": "{date} から適用。送信中。",
+      "sent": "{date} から適用。送信済み。"
+    },
+    "legalSend": "変更をメールで通知",
+    "legalConfirmTitle": "{document}の変更をメールで通知しますか？",
+    "legalAudience": {
+      "everyone": "prepza のアカウントを持つ全員に、翌朝から新しいバージョンが {date} から適用される旨が届きます。送信は一度だけで、取り消せません。",
+      "company_editors": "各社のオーナーと管理者に、翌朝から新しいバージョンが {date} から適用される旨が届きます。送信は一度だけで、取り消せません。"
+    },
+    "legalAsked": "翌朝から変更がメールで通知されます。",
+    "legalFailed": "メールを依頼できませんでした。もう一度お試しください。"
   },
   "templates": {
     "title": "テンプレート",
@@ -700,8 +722,12 @@
     "homeTitle": "求人票から作る採用テスト・スキルチェック"
   },
   "legal": {
-    "updated": "最終更新日",
-    "englishOnly": "この文書は英語版のみです。"
+    "englishOnly": "この文書は英語版のみです。",
+    "inForce": "{date} から有効",
+    "upcoming": "{date} から適用されます。",
+    "replaced": "このバージョンは {date} から適用され、その後置き換えられました。",
+    "readInForce": "現在有効なバージョンを読む",
+    "versions": "すべてのバージョン"
   },
   "docs": {
     "title": "資料",

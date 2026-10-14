@@ -55,7 +55,8 @@ export interface paths {
     /**
      * Stream
      * @description Server-sent events while a tab is open: {"new": true} as soon as a notification comes,
-     *     so the bell reloads; heartbeat comments in between.
+     *     so the bell reloads; heartbeat comments in between. At most MAX_STREAMS_PER_USER at once;
+     *     the bell refreshes on its own without one.
      */
     get: operations["stream_me_stream_get"]
     put?: never
@@ -125,7 +126,8 @@ export interface paths {
      * Delete User
      * @description Library, deleting an account: the user's own notifications go, and companies'
      *     notifications about them as a candidate (their email and grade); the Slack channels they
-     *     connected stay with their companies, without their id. The log of digests and reminders
+     *     connected stay with their companies, without their id, and each company is told they need
+     *     reconnecting. The log of digests and reminders
      *     sent to them goes too.
      */
     delete: operations["delete_user_internal_users__user_id__delete"]
@@ -302,6 +304,46 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/superadmin/legal-notices": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * List Notices
+     * @description Each document's current version, and whether its notice can be, is being or was sent.
+     */
+    get: operations["list_notices_superadmin_legal_notices_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/legal-notices/{document}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Send Notice
+     * @description Emails the change to the document's current version, from the next morning's run.
+     */
+    post: operations["send_notice_superadmin_legal_notices__document__post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/internal/schedules/digest": {
     parameters: {
       query?: never
@@ -313,7 +355,7 @@ export interface paths {
     put?: never
     /**
      * Digest
-     * @description Every 10 minutes for an hour each morning, from Cloud Scheduler: the activity digest. Each
+     * @description Every minute for an hour each morning, from Cloud Scheduler: the activity digest. Each
      *     run goes on where the last one stopped; nobody gets it twice in a day.
      */
     post: operations["digest_internal_schedules_digest_post"]
@@ -334,10 +376,31 @@ export interface paths {
     put?: never
     /**
      * Reminders
-     * @description Every 10 minutes for an hour each morning, from Cloud Scheduler: reminders, each kind
+     * @description Every minute for an hour each morning, from Cloud Scheduler: reminders, each kind
      *     at most once a week to a user. The sent log's old rows go too.
      */
     post: operations["reminders_internal_schedules_reminders_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/schedules/legal-notices": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Legal
+     * @description Every minute for an hour each morning, from Cloud Scheduler: the legal notices asked for,
+     *     each going on where the last run stopped; nobody gets one twice.
+     */
+    post: operations["legal_internal_schedules_legal_notices_post"]
     delete?: never
     options?: never
     head?: never
@@ -430,6 +493,27 @@ export interface components {
       /** Detail */
       detail?: components["schemas"]["ValidationError"][]
     }
+    /** LegalNoticeOut */
+    LegalNoticeOut: {
+      /** Document */
+      document: string
+      /** Version */
+      version: string
+      state: components["schemas"]["LegalNoticeState"]
+      /**
+       * Audience
+       * @enum {string}
+       */
+      audience: "everyone" | "company_editors"
+    }
+    /**
+     * LegalNoticeState
+     * @description Where a document's current version stands: its email can be asked for, it already
+     *     applies, it's too close to the day it applies, or it was asked for (and is going out, or
+     *     went out).
+     * @enum {string}
+     */
+    LegalNoticeState: "sendable" | "in_force" | "too_late" | "sending" | "sent"
     /**
      * NotificationOut
      * @description What the bell shows: `kind` picks the text, `data` fills it, `link` opens the page.
@@ -1023,6 +1107,55 @@ export interface operations {
       }
     }
   }
+  list_notices_superadmin_legal_notices_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["LegalNoticeOut"][]
+        }
+      }
+    }
+  }
+  send_notice_superadmin_legal_notices__document__post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        document: "terms" | "privacy" | "dpa"
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
   digest_internal_schedules_digest_post: {
     parameters: {
       query?: never
@@ -1042,6 +1175,24 @@ export interface operations {
     }
   }
   reminders_internal_schedules_reminders_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+    }
+  }
+  legal_internal_schedules_legal_notices_post: {
     parameters: {
       query?: never
       header?: never

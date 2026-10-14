@@ -71,7 +71,7 @@
     "title": "登录",
     "continueWith": "继续使用 <name>{provider}</name>",
     "link": "此邮箱已有 prepza 账户。请用你之前的登录方式继续，{provider} 将关联到该账户。",
-    "consent": "登录即表示你确认已年满 16 周岁，并同意<terms>条款</terms>和<privacy>隐私政策</privacy>。",
+    "consent": "登录即表示你确认已年满 16 周岁、同意<terms>条款</terms>，并已阅读<privacy>隐私政策</privacy>。",
     "failed": "登录失败，请重试。",
     "verify": "我们已向你发送一个验证邮箱的链接。打开链接后重新登录，即可参加面试。",
     "noUpdates": "不要给我发送产品更新与新闻",
@@ -272,7 +272,29 @@
     "companyDeleted": "公司已删除。",
     "renameCompanyTitle": "重命名公司",
     "companyName": "公司名称",
-    "companyRenamed": "公司已重命名。"
+    "companyRenamed": "公司已重命名。",
+    "legalTitle": "法律通知",
+    "legalText": "在法律文件新版本适用前至少 14 天，通过邮件告知其重大变更。",
+    "legalDocuments": {
+      "terms": "条款",
+      "privacy": "隐私政策",
+      "dpa": "数据处理协议"
+    },
+    "legalStates": {
+      "in_force": "自 {date} 起生效。如需通过邮件告知变更，请将新版本的日期设在至少 14 天之后。",
+      "sendable": "自 {date} 起适用。",
+      "too_late": "自 {date} 起适用。变更须在适用前至少 14 天通过邮件告知。",
+      "sending": "自 {date} 起适用。正在发送。",
+      "sent": "自 {date} 起适用。已发送。"
+    },
+    "legalSend": "邮件告知变更",
+    "legalConfirmTitle": "通过邮件告知{document}的变更？",
+    "legalAudience": {
+      "everyone": "所有拥有 prepza 账户的人将从次日早上起收到邮件，告知新版本自 {date} 起适用。邮件只发送一次，无法撤回。",
+      "company_editors": "每家公司的所有者和管理员将从次日早上起收到邮件，告知新版本自 {date} 起适用。邮件只发送一次，无法撤回。"
+    },
+    "legalAsked": "将从次日早上起通过邮件告知变更。",
+    "legalFailed": "无法发起邮件请求，请重试。"
   },
   "templates": {
     "title": "模板",
@@ -700,8 +722,12 @@
     "homeTitle": "根据职位描述生成招聘测评与在线笔试"
   },
   "legal": {
-    "updated": "最后更新",
-    "englishOnly": "本文件仅提供英文版本。"
+    "englishOnly": "本文件仅提供英文版本。",
+    "inForce": "自 {date} 起生效",
+    "upcoming": "自 {date} 起适用。",
+    "replaced": "此版本自 {date} 起适用，现已被替换。",
+    "readInForce": "阅读当前生效的版本",
+    "versions": "所有版本"
   },
   "docs": {
     "title": "文档",

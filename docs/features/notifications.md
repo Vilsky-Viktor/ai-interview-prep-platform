@@ -160,6 +160,10 @@ Without `RESEND_API_KEY`, emails go to `SMTP_HOST` and `SMTP_PORT`: Mailpit loca
 
 With `RESEND_API_KEY` set, a message sent from the local contact page reaches the real `CONTACT_EMAIL` inbox.
 
+### Legal notices
+
+A notice of a significant change to the terms, the privacy policy or the DPA, asked for in the admin zone (see [Legal notices](admin-zone.md#legal-notices)). It's a service email, sent whatever the email settings, in each recipient's language: the terms and privacy notices to every account (library's `GET /internal/users/ids`, read from Firebase), the DPA's to every company's joined owners and admins (companies' `GET /internal/companies/editors`). It says the day the new version applies and links to it. `POST /internal/schedules/legal-notices` sends them every minute from 9:00 UTC for an hour, like the digest, claiming each user once per version (`legal_terms`, `legal_privacy`, `legal_dpa` in the sent log); a run that finishes before its time marks the notice sent (`legal_notices.sent_at`).
+
 ### Failed sends
 
 - A failed send answers Pub/Sub's push with an error, so Pub/Sub retries it.

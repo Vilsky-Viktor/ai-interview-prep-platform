@@ -22,3 +22,15 @@ async def recipients(user_ids: list[str]) -> list[dict]:
     url = f"{settings.library_url}/internal/users/email-recipients"
 
     return await post_ids(url, service_token("library"), "user_ids", user_ids, "recipients")
+
+
+async def user_ids() -> list[str]:
+    """Every account, for a notice about the terms or the privacy policy."""
+    response = await http.get_client().get(
+        f"{settings.library_url}/internal/users/ids",
+        headers={"Authorization": f"Bearer {service_token('library')}"},
+    )
+
+    response.raise_for_status()
+
+    return response.json()["user_ids"]

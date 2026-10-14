@@ -1,11 +1,11 @@
 import logging
 
-from fastapi import APIRouter, Request, status
+from fastapi import APIRouter, HTTPException, Query, Request, status
 from fastapi.responses import PlainTextResponse, StreamingResponse
 from prepza_common.analytics import track
 from prepza_common.auth import OptionalUser
 from prepza_common.client_ip import client_ip
-from prepza_common.constants import DAY_SECONDS, HOUR_SECONDS
+from prepza_common.constants import DAY_SECONDS, HOUR_SECONDS, LEGAL_VERSIONS
 from prepza_common.i18n import request_language, translate
 from prepza_common.pause import refuse_if_paused
 from prepza_common.rate_limit import hit
@@ -14,13 +14,11 @@ from prepza_common.sse import event_stream, sse_event
 
 from app.config.settings import settings
 from app.constants.contact import CONTACT_IP_LIMIT
-from app.constants.dpa import DPA_INTRO, DPA_SECTIONS
 from app.constants.faq import FAQS
 from app.constants.help import HELP_IP_LIMIT, LegalDocument
-from app.constants.legal import LEGAL_UPDATED
-from app.constants.privacy import PRIVACY_INTRO, PRIVACY_SECTIONS
+from app.constants.legal import NO_SUCH_VERSION
 from app.constants.rounds import CHAT_FAILED
-from app.constants.terms import TERMS_INTRO, TERMS_SECTIONS
+from app.helpers import legal
 from app.helpers.help import faq_items
 from app.helpers.sign_in import secret_reply, with_sign_in
 from app.integrations import billing
@@ -34,12 +32,6 @@ from app.storage import contact as contact_store
 logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/help", tags=["help"])
-
-DOCUMENTS = {
-    LegalDocument.TERMS: (TERMS_INTRO, TERMS_SECTIONS),
-    LegalDocument.PRIVACY: (PRIVACY_INTRO, PRIVACY_SECTIONS),
-    LegalDocument.DPA: (DPA_INTRO, DPA_SECTIONS),
-}
 
 
 @router.get("/faq")
@@ -58,11 +50,27 @@ async def get_guide(request: Request) -> str:
 
 
 @router.get("/legal/{document}")
-async def get_legal(document: LegalDocument) -> LegalOut:
-    """The terms or the privacy policy, in English only; public."""
-    intro, sections = DOCUMENTS[document]
+async def get_legal(
+    document: LegalDocument, version: str | None = Query(default=None, max_length=10)
+) -> LegalOut:
+    """The terms, the privacy policy or the DPA: the current version, or an earlier one, with
+    every published version (the day each applies from); public."""
+    text = legal.version(document, version)
 
-    return LegalOut(intro=intro, updated=LEGAL_UPDATED, sections=sections)
+    if text is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, NO_SUCH_VERSION)
+
+    shown = version or LEGAL_VERSIONS[document]
+    applies = legal.in_force(document)
+
+    return LegalOut(
+        **text,
+        version=shown,
+        state=legal.state(shown, applies),
+        current=LEGAL_VERSIONS[document],
+        in_force=applies,
+        versions=legal.versions(document),
+    )
 
 
 @router.post("/chat")

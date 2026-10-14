@@ -195,4 +195,7 @@ MESSAGES = {
     "integrations": "entegrasyonlar",
     "This company doesn't allow AI apps. Its owner or an admin can allow them on its AI apps page.": "Bu şirket yapay zekâ uygulamalarına izin vermiyor. Sahibi veya bir yönetici, şirketin yapay zekâ uygulamaları sayfasından izin verebilir.",
     "Only the company's owner or an admin can change this, in prepza itself.": "Bunu yalnızca şirketin sahibi veya bir yönetici, doğrudan prepza'da değiştirebilir.",
+    "This document has no such version.": "Bu belgenin böyle bir sürümü yok.",
+    "A notice goes out at least 14 days before the new version applies: give it a later date.": "Bildirim, yeni sürüm geçerli olmadan en az 14 gün önce gönderilir: ona daha ileri bir tarih verin.",
+    "This version's notice was already sent.": "Bu sürümün bildirimi zaten gönderildi.",
 }

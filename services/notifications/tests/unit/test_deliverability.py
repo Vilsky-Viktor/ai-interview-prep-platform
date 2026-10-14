@@ -30,6 +30,8 @@ INVITE = {
     "company_id": "c1",
     "invite_id": "i1",
     "language": "en",
+    # The day a legal notice's new version applies.
+    "date": "2026-11-01",
 }
 RECIPIENT = {"user_id": "ann", "email": "ann@example.com", "language": "en"}
 REPORT = {

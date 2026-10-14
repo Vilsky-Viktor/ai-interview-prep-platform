@@ -1,24 +1,27 @@
 import { notFound } from "next/navigation"
 
+import { LegalNotices } from "@/components/superadmin/legal-notices"
 import { MaintenanceSwitch } from "@/components/superadmin/maintenance-switch"
 import { PauseSwitch } from "@/components/superadmin/pause-switch"
 import { SuperadminHeader } from "@/components/superadmin/superadmin-header"
 import { serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
+import type { LegalNotice } from "@/types/superadmin"
 
 export const generateMetadata = () => translatedTitle("superadmin", "zone")
 
-/** The admin zone's controls: the emergency pause and maintenance mode. The pause's state is
+/** The admin zone's controls: the emergency pause, maintenance mode and the legal notices. The pause's state is
  * public (pages show a notice), so the page asks who's signed in; maintenance's is for
  * superadmins only. The API turns both for superadmins only. */
 export default async function ControlsPage() {
-  const [me, pause, maintenance] = await Promise.all([
+  const [me, pause, maintenance, notices] = await Promise.all([
     serverFetch<{ is_superadmin: boolean }>("/library/me"),
     serverFetch<{ paused: boolean }>("/companies/pause"),
     serverFetch<{ on: boolean }>("/companies/superadmin/maintenance"),
+    serverFetch<LegalNotice[]>("/notifications/superadmin/legal-notices"),
   ])
 
-  if (!me?.is_superadmin || !pause || !maintenance) {
+  if (!me?.is_superadmin || !pause || !maintenance || !notices) {
     notFound()
   }
 
@@ -28,6 +31,7 @@ export default async function ControlsPage() {
       <div className="space-y-4">
         <PauseSwitch paused={pause.paused} />
         <MaintenanceSwitch on={maintenance.on} />
+        <LegalNotices initial={notices} />
       </div>
     </main>
   )

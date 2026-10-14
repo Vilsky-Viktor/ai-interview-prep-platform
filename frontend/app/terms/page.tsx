@@ -1,9 +1,5 @@
-import { notFound } from "next/navigation"
-
 import { LegalPage } from "@/components/legal-page"
-import { publicFetch } from "@/lib/server-api"
 import { pageMetadata } from "@/lib/site"
-import type { LegalDocument } from "@/types/help"
 
 export const generateMetadata = () =>
   pageMetadata(
@@ -12,12 +8,12 @@ export const generateMetadata = () =>
     "/terms"
   )
 
-export default async function TermsPage() {
-  const document = await publicFetch<LegalDocument>("/rounds/help/legal/terms")
+export default async function TermsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ version?: string }>
+}) {
+  const { version } = await searchParams
 
-  if (!document) {
-    notFound()
-  }
-
-  return <LegalPage title="Terms" document={document} />
+  return <LegalPage title="Terms" name="terms" version={version} />
 }

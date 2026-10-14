@@ -94,7 +94,10 @@ The chat's model is set in [Generation settings](../generation.md#models).
 
 ## Legal pages
 
-- The privacy policy and terms are served by the rounds service, in English only. The help chat answers from them too.
+- The privacy policy, terms and data processing agreement are served by the rounds service, in English only. The help chat answers from them too.
+- **Versions:** each document's version is the day it applies from (`LEGAL_VERSIONS` in `prepza_common.constants`), and may come after the day it's published. Each page says "In force since …", or "Applies from …" with a link to the version in force now. Every published version stays readable (`/terms?version=2026-10-10`, which says it was replaced), listed under **All versions**. Rounds keeps a copy of each in `app/legal_versions/<document>/<version>.json`, the current one too, and a test fails when a text changes without a new version: give it one, then run `python -m app.legal_archive` in rounds. Rounds decides which version applies today and whether the one shown is in force, upcoming or replaced.
+- **Acceptance:** signing up accepts the terms in force (the sign-in says so, and that the privacy policy was read), and library keeps that version and when (`terms_acceptances`; in the data export, deleted with the account). A company keeps the DPA version in force when it was made (`companies.dpa_version`), which its owner accepted with the terms. A later version applies after its notice; the terms say that using prepza after that day accepts it.
+- **Notices:** a significant change is emailed at least 14 days before it applies, from the admin zone (see [Legal notices](admin-zone.md#legal-notices)).
 - The contact address in them, hello@prepza.ai, is put together in the browser, so the page's HTML doesn't hold it for bots to collect.
 
 ## Documents for companies

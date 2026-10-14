@@ -7,6 +7,7 @@ from prepza_common.google import Invoker
 from app.constants.member_emails import SENT_KEEP_DAYS
 from app.integrations.resend import ResendBusy
 from app.services.digest import send_digests
+from app.services.legal_notices import send_legal_notices
 from app.services.reminders import send_reminders
 from app.storage import sent_emails
 
@@ -28,6 +29,13 @@ async def reminders() -> None:
     at most once a week to a user. The sent log's old rows go too."""
     await run("reminders", send_reminders)
     await sent_emails.forget(datetime.now(UTC).date() - timedelta(days=SENT_KEEP_DAYS))
+
+
+@router.post("/legal-notices", status_code=status.HTTP_204_NO_CONTENT)
+async def legal() -> None:
+    """Every minute for an hour each morning, from Cloud Scheduler: the legal notices asked for,
+    each going on where the last run stopped; nobody gets one twice."""
+    await run("legal notices", send_legal_notices)
 
 
 async def run(name: str, send) -> None:

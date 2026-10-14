@@ -3,6 +3,7 @@ from logging.config import fileConfig
 from alembic import context
 from sqlalchemy import create_engine
 
+import app.models.legal_notices
 import app.models.notifications
 import app.models.opt_outs
 import app.models.sent_emails

@@ -129,6 +129,41 @@ TEXTS = {
         "button": "トピックを確認する",
         "footer": MEMBER_FOOTER,
     },
+    # Notices of a significant change to a legal document, sent at least 14 days before it
+    # applies; service emails, whatever the email settings.
+    "legal_terms": {
+        "subject": "prepza の利用規約を {date} に改定します",
+        "preheader": "新しい利用規約は {date} から適用されます。",
+        "heading": "利用規約を改定します",
+        "lines": [
+            "prepza の利用規約の新しい版を公開しました。{date} から適用され、それまでは現在の利用規約が適用されます。",
+            "{date} 以降に prepza を利用すると、新しい利用規約に同意したものとみなされます。同意しない場合は、それまでに設定からアカウントを削除できます。",
+        ],
+        "button": "新しい利用規約を読む",
+        "footer": "このメールは、prepza のアカウントをお持ちのため {email} に送信されました。利用規約に関するお知らせのため、メール設定にかかわらず送信されます。",
+    },
+    "legal_privacy": {
+        "subject": "prepza のプライバシーポリシーを {date} に改定します",
+        "preheader": "新しいプライバシーポリシーは {date} から適用されます。",
+        "heading": "プライバシーポリシーを改定します",
+        "lines": [
+            "データの利用方法を定めた prepza のプライバシーポリシーの新しい版を公開しました。{date} から適用され、それまでは現在の版が適用されます。",
+            "設定から、いつでもデータをダウンロードまたは削除できます。",
+        ],
+        "button": "新しいプライバシーポリシーを読む",
+        "footer": "このメールは、prepza のアカウントをお持ちのため {email} に送信されました。データの利用方法に関するお知らせのため、メール設定にかかわらず送信されます。",
+    },
+    "legal_dpa": {
+        "subject": "prepza のデータ処理契約を {date} に改定します",
+        "preheader": "新しい契約は {date} から会社に適用されます。",
+        "heading": "データ処理契約を改定します",
+        "lines": [
+            "prepza が候補者のデータを処理する際の根拠となるデータ処理契約の新しい版を公開しました。{date} から適用され、それまでは現在の版が適用されます。",
+            "データ保護上の合理的な理由で異議がある会社は、それまでに prepza の利用をやめ、会社を削除できます。",
+        ],
+        "button": "新しい契約を読む",
+        "footer": "このメールは、prepza で会社の所有者または管理者であるため {email} に送信されました。会社との契約に関するお知らせのため、メール設定にかかわらず送信されます。",
+    },
     "top_up_failed": {
         "subject": "{company} の自動チャージに失敗しました",
         "preheader": "カードに請求できませんでした。候補者の招待を続けるにはチャージしてください。",

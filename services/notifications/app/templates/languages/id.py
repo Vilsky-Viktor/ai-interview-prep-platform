@@ -169,6 +169,69 @@ TEXTS = {
         "button": "Tinjau topik",
         "footer": MEMBER_FOOTER,
     },
+    # Notices of a significant change to a legal document, sent at least 14 days before it
+    # applies; service emails, whatever the email settings.
+    "legal_terms": {
+        "subject": "prepza memperbarui ketentuan layanannya pada {date}",
+        "preheader": "Ketentuan layanan yang baru berlaku mulai {date}.",
+        "heading": "Kami memperbarui ketentuan layanan kami",
+        "lines": [
+            (
+                "Kami telah menerbitkan versi baru ketentuan layanan prepza. Versi ini berlaku "
+                "mulai {date}; sampai saat itu, ketentuan yang sekarang tetap berlaku."
+            ),
+            (
+                "Dengan menggunakan prepza setelah {date}, kamu menerima ketentuan yang baru. "
+                "Jika tidak, kamu bisa menghapus akunmu di Pengaturan sebelum tanggal itu."
+            ),
+        ],
+        "button": "Baca ketentuan yang baru",
+        "footer": (
+            "Email ini dikirim ke {email} karena kamu punya akun prepza. Ini pemberitahuan "
+            "tentang ketentuan layanan kami, jadi selalu dikirim apa pun pengaturan emailmu."
+        ),
+    },
+    "legal_privacy": {
+        "subject": "prepza memperbarui kebijakan privasinya pada {date}",
+        "preheader": "Kebijakan privasi yang baru berlaku mulai {date}.",
+        "heading": "Kami memperbarui kebijakan privasi kami",
+        "lines": [
+            (
+                "Kami telah menerbitkan versi baru kebijakan privasi prepza, yang menjelaskan "
+                "cara kami menggunakan datamu. Versi ini berlaku mulai {date}; sampai saat itu, "
+                "versi yang sekarang tetap berlaku."
+            ),
+            "Kamu bisa mengunduh atau menghapus datamu di Pengaturan kapan saja.",
+        ],
+        "button": "Baca kebijakan privasi yang baru",
+        "footer": (
+            "Email ini dikirim ke {email} karena kamu punya akun prepza. Ini pemberitahuan "
+            "tentang cara kami menggunakan datamu, jadi selalu dikirim apa pun pengaturan "
+            "emailmu."
+        ),
+    },
+    "legal_dpa": {
+        "subject": "prepza memperbarui perjanjian pemrosesan datanya pada {date}",
+        "preheader": "Perjanjian yang baru berlaku untuk perusahaanmu mulai {date}.",
+        "heading": "Kami memperbarui perjanjian pemrosesan data kami",
+        "lines": [
+            (
+                "Kami telah menerbitkan versi baru perjanjian pemrosesan data yang menjadi dasar "
+                "prepza memproses data kandidatmu. Versi ini berlaku mulai {date}; sampai saat "
+                "itu, versi yang sekarang tetap berlaku."
+            ),
+            (
+                "Perusahaan yang keberatan dengan alasan perlindungan data yang wajar dapat "
+                "berhenti menggunakan prepza dan menghapus perusahaannya sebelum tanggal itu."
+            ),
+        ],
+        "button": "Baca perjanjian yang baru",
+        "footer": (
+            "Email ini dikirim ke {email} karena kamu pemilik atau admin sebuah perusahaan di "
+            "prepza. Ini pemberitahuan tentang perjanjian kami dengan perusahaanmu, jadi "
+            "selalu dikirim apa pun pengaturan emailmu."
+        ),
+    },
     "top_up_failed": {
         "subject": "Isi ulang otomatis untuk {company} gagal",
         "preheader": "Kartu tidak dapat ditagih. Isi ulang untuk terus mengundang kandidat.",

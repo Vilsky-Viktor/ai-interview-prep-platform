@@ -71,7 +71,7 @@
     "title": "Iniciar sesión",
     "continueWith": "Continuar con <name>{provider}</name>",
     "link": "Este correo ya tiene una cuenta de prepza. Continúa como iniciaste sesión la otra vez y {provider} se vinculará a ella.",
-    "consent": "Al iniciar sesión, confirmas que tienes 16 años o más y aceptas los <terms>Términos</terms> y la <privacy>Política de privacidad</privacy>.",
+    "consent": "Al iniciar sesión, confirmas que tienes 16 años o más, aceptas los <terms>Términos</terms> y has leído la <privacy>Política de privacidad</privacy>.",
     "failed": "No se pudo iniciar sesión. Inténtalo de nuevo.",
     "verify": "Te enviamos un enlace para verificar tu correo. Ábrelo y vuelve a iniciar sesión para hacer entrevistas.",
     "noUpdates": "No quiero recibir novedades del producto",
@@ -272,7 +272,29 @@
     "companyDeleted": "La empresa fue eliminada.",
     "renameCompanyTitle": "Cambiar el nombre de la empresa",
     "companyName": "Nombre de la empresa",
-    "companyRenamed": "Se cambió el nombre de la empresa."
+    "companyRenamed": "Se cambió el nombre de la empresa.",
+    "legalTitle": "Avisos legales",
+    "legalText": "Envía por email un cambio importante en un documento legal, al menos 14 días antes de que se aplique la nueva versión.",
+    "legalDocuments": {
+      "terms": "Términos",
+      "privacy": "Política de privacidad",
+      "dpa": "Acuerdo de tratamiento de datos"
+    },
+    "legalStates": {
+      "in_force": "Vigente desde el {date}. Para avisar de un cambio, pon a su nueva versión una fecha al menos 14 días después.",
+      "sendable": "Se aplica desde el {date}.",
+      "too_late": "Se aplica desde el {date}. Un cambio se avisa al menos 14 días antes de aplicarse.",
+      "sending": "Se aplica desde el {date}. Enviándose.",
+      "sent": "Se aplica desde el {date}. Enviado."
+    },
+    "legalSend": "Avisar del cambio",
+    "legalConfirmTitle": "¿Avisar por email del cambio en {document}?",
+    "legalAudience": {
+      "everyone": "Todas las personas con cuenta en prepza lo reciben desde la mañana siguiente, indicando que la nueva versión se aplica desde el {date}. Se envía una vez y no se puede deshacer.",
+      "company_editors": "Los propietarios y administradores de cada empresa lo reciben desde la mañana siguiente, indicando que la nueva versión se aplica desde el {date}. Se envía una vez y no se puede deshacer."
+    },
+    "legalAsked": "El cambio se avisará por email desde la mañana siguiente.",
+    "legalFailed": "No se pudo solicitar el envío. Inténtalo de nuevo."
   },
   "templates": {
     "title": "Plantillas",
@@ -700,8 +722,12 @@
     "homeTitle": "Pruebas de selección de personal desde tu oferta de empleo"
   },
   "legal": {
-    "updated": "Última actualización",
-    "englishOnly": "Este documento solo está disponible en inglés."
+    "englishOnly": "Este documento solo está disponible en inglés.",
+    "inForce": "Vigente desde el {date}",
+    "upcoming": "Se aplica a partir del {date}.",
+    "replaced": "Esta versión se aplicó a partir del {date} y ha sido sustituida.",
+    "readInForce": "Leer la versión vigente",
+    "versions": "Todas las versiones"
   },
   "docs": {
     "title": "Documentos",

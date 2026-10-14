@@ -1,12 +1,26 @@
+import asyncio
+
 from fastapi import APIRouter
 
 from app.constants.emails import ConsentSource
-from app.schemas.emails import EmailPreferencesOut, RecipientsIn, RecipientsOut, UnsubscribeIn
+from app.schemas.emails import (
+    EmailPreferencesOut,
+    RecipientsIn,
+    RecipientsOut,
+    UnsubscribeIn,
+    UserIdsOut,
+)
 from app.service_auth import ServiceCaller
-from app.services.email_recipients import recipients
+from app.services.email_recipients import all_user_ids, recipients
 from app.storage import emails
 
 router = APIRouter(prefix="/internal/users", tags=["internal"])
+
+
+@router.get("/ids")
+async def user_ids(caller: ServiceCaller) -> UserIdsOut:
+    """Notifications, for a notice about the terms or the privacy policy: every account."""
+    return UserIdsOut(user_ids=await asyncio.to_thread(all_user_ids))
 
 
 @router.get("/{user_id}/email-preferences")

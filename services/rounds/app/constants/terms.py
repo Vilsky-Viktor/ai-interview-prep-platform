@@ -76,7 +76,7 @@ TERMS_SECTIONS = [
     {
         "heading": "Availability and changes",
         "paragraphs": [
-            "We work to keep prepza available and safe but can't promise it will always be. We may change or stop features, and may suspend accounts that break these terms. We will tell you about significant changes to these terms before they apply.",
+            "We work to keep prepza available and safe but can't promise it will always be. We may change or stop features, and may suspend accounts that break these terms. We email you about a significant change to these terms at least 14 days before it applies; using prepza after that day means you accept the new terms. Every earlier version stays readable on this page.",
         ],
     },
     {

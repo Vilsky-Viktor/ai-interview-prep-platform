@@ -4356,6 +4356,43 @@
     }
    }
   },
+  "/internal/companies/editors": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Company Editors",
+    "description": "Notifications, for a notice about the data processing agreement: every owner and admin\nof a company.",
+    "operationId": "company_editors_internal_companies_editors_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/UserIdsOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
   "/internal/events": {
    "post": {
     "tags": [
@@ -8491,6 +8528,22 @@
     ],
     "title": "UserEmailIn",
     "description": "An email address sent in the body, so request logs don't record it: the account's, in\nlibrary's calls to delete or export a user's data, or the one a superadmin looks up."
+   },
+   "UserIdsOut": {
+    "properties": {
+     "user_ids": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "User Ids"
+     }
+    },
+    "type": "object",
+    "required": [
+     "user_ids"
+    ],
+    "title": "UserIdsOut"
    },
    "ValidationError": {
     "properties": {

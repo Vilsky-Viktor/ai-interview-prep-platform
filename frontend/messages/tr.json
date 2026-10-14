@@ -71,7 +71,7 @@
     "title": "Giriş yap",
     "continueWith": "<name>{provider}</name> ile devam et",
     "link": "Bu e-postanın zaten bir prepza hesabı var. Daha önce giriş yaptığınız yolla devam edin; {provider} bu hesaba bağlanacak.",
-    "consent": "Giriş yaparak 16 yaşında veya daha büyük olduğunuzu onaylar, <terms>Koşulları</terms> ve <privacy>Gizlilik politikasını</privacy> kabul etmiş olursunuz.",
+    "consent": "Giriş yaparak 16 yaşında veya daha büyük olduğunuzu onaylar, <terms>Koşulları</terms> kabul eder ve <privacy>Gizlilik politikasını</privacy> okuduğunuzu belirtirsiniz.",
     "failed": "Giriş yapılamadı. Lütfen tekrar deneyin.",
     "verify": "E-postanızı doğrulamanız için bir bağlantı gönderdik. Bağlantıyı açın, ardından mülakatlara girmek için yeniden giriş yapın.",
     "noUpdates": "Bana ürün güncellemeleri ve haberler göndermeyin",
@@ -272,7 +272,29 @@
     "companyDeleted": "Şirket silindi.",
     "renameCompanyTitle": "Şirketin adını değiştir",
     "companyName": "Şirket adı",
-    "companyRenamed": "Şirketin adı değiştirildi."
+    "companyRenamed": "Şirketin adı değiştirildi.",
+    "legalTitle": "Yasal bildirimler",
+    "legalText": "Yasal bir belgedeki önemli bir değişikliği, yeni sürüm geçerli olmadan en az 14 gün önce e-postayla bildirin.",
+    "legalDocuments": {
+      "terms": "Koşullar",
+      "privacy": "Gizlilik politikası",
+      "dpa": "Veri işleme sözleşmesi"
+    },
+    "legalStates": {
+      "in_force": "{date} tarihinden beri yürürlükte. Bir değişikliği e-postayla bildirmek için yeni sürüme en az 14 gün sonrasının tarihini verin.",
+      "sendable": "{date} tarihinden itibaren geçerli.",
+      "too_late": "{date} tarihinden itibaren geçerli. Değişiklik, geçerli olmadan en az 14 gün önce bildirilir.",
+      "sending": "{date} tarihinden itibaren geçerli. Gönderiliyor.",
+      "sent": "{date} tarihinden itibaren geçerli. Gönderildi."
+    },
+    "legalSend": "Değişikliği e-postayla bildir",
+    "legalConfirmTitle": "{document} değişikliği e-postayla bildirilsin mi?",
+    "legalAudience": {
+      "everyone": "prepza hesabı olan herkes, ertesi sabahtan itibaren yeni sürümün {date} tarihinden itibaren geçerli olduğunu bildiren e-postayı alır. Bir kez gönderilir ve geri alınamaz.",
+      "company_editors": "Her şirketin sahipleri ve yöneticileri, ertesi sabahtan itibaren yeni sürümün {date} tarihinden itibaren geçerli olduğunu bildiren e-postayı alır. Bir kez gönderilir ve geri alınamaz."
+    },
+    "legalAsked": "Değişiklik ertesi sabahtan itibaren e-postayla bildirilecek.",
+    "legalFailed": "E-posta istenemedi. Lütfen tekrar deneyin."
   },
   "templates": {
     "title": "Şablonlar",
@@ -700,8 +722,12 @@
     "homeTitle": "İş tanımınızdan işe alım testleri oluşturun"
   },
   "legal": {
-    "updated": "Son güncelleme",
-    "englishOnly": "Bu belge yalnızca İngilizce olarak mevcuttur."
+    "englishOnly": "Bu belge yalnızca İngilizce olarak mevcuttur.",
+    "inForce": "{date} tarihinden beri yürürlükte",
+    "upcoming": "{date} tarihinden itibaren geçerlidir.",
+    "replaced": "Bu sürüm {date} tarihinden itibaren geçerliydi ve yerini başka bir sürüm aldı.",
+    "readInForce": "Şu an geçerli sürümü okuyun",
+    "versions": "Tüm sürümler"
   },
   "docs": {
     "title": "Belgeler",

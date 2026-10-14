@@ -4,12 +4,12 @@ import httpx
 from fastapi import HTTPException, status
 from firebase_admin import auth as firebase_auth
 from prepza_common.analytics import track
-from prepza_common.constants import ACCOUNT_OWNS_SHARED, LANGUAGE_CLAIM
+from prepza_common.constants import ACCOUNT_OWNS_SHARED, LANGUAGE_CLAIM, LEGAL_VERSIONS
 from prepza_common.user import Language, User
 
 from app.helpers.accounts import candidate_email
 from app.integrations import accounts as services
-from app.storage import accounts
+from app.storage import accounts, legal
 
 
 def delete_sign_in(user_id: str) -> None:
@@ -45,6 +45,8 @@ async def set_language(user: User, language: Language) -> None:
     )
 
     if LANGUAGE_CLAIM not in (record.custom_claims or {}):
+        # Signing in the first time accepts the terms (the sign-in shows them).
+        await legal.accept_terms(user.uid, LEGAL_VERSIONS["terms"])
         await track("signed_up", user_id=user.uid, language=language)
 
 

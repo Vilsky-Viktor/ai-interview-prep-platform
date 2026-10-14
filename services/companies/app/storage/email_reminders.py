@@ -3,7 +3,8 @@ from datetime import datetime
 from sqlalchemy import exists, select
 from sqlalchemy.orm import selectinload
 
-from app.models.companies import Company
+from app.constants.roles import EDITORS
+from app.models.companies import Company, Member
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
 from app.storage.db import Session
@@ -50,3 +51,15 @@ async def being_generated(started_after: datetime, started_before: datetime) -> 
 
     async with Session() as session:
         return list(await session.scalars(query))
+
+
+async def editor_ids() -> list[str]:
+    """Everyone who owns or runs a company (a joined owner or admin), once each."""
+    async with Session() as session:
+        rows = await session.scalars(
+            select(Member.user_id)
+            .where(Member.role.in_(EDITORS), Member.user_id.is_not(None))
+            .distinct()
+        )
+
+        return list(rows)

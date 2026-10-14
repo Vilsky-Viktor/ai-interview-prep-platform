@@ -102,7 +102,7 @@ So the numbers are what is stored now: deleted companies and candidates past ret
 
 ## Controls
 
-Two switches: the emergency pause and maintenance mode.
+Two switches, the emergency pause and maintenance mode, and the legal notices.
 
 ### Emergency pause
 
@@ -146,6 +146,19 @@ Turning it on first asks to confirm, showing the number of candidates in an inte
 Candidates lose no interview time to it. While it's on, rounds' expiry job finishes no interview. Turning it off first has rounds move every running interview's clocks on by the time it was on: each section's start (the interview's deadline counts from the first) and the shown time of the question on screen. Only then does it turn off. If rounds can't do it, the switch stays on and says so, and turning it off again gives the time back. A double turn-off gives it back once. The answer times recorded leave out the time it was on.
 
 It's one Redis key (`maintenance:on`), with a second (`maintenance:started`) holding when it was turned on, which turning it off takes and removes at once. With Redis down, it counts as off. Each service reads it at most every 5 seconds, so a change reaches every instance within 5 seconds. Who turned it goes to the logs.
+
+### Legal notices
+
+One row per legal document (terms, privacy policy, data processing agreement): its current version, the day it applies from, and where its notice stands. A superadmin decides whether a change is significant; **Email the change** (after a confirmation) has it emailed:
+
+- the terms and the privacy policy to every account, the DPA to every company's owners and admins (the API says which: `audience`),
+- only for a version that applies at least 14 days from now (`LEGAL_NOTICE_DAYS`), and once per version: notifications refuses otherwise, and the row says why,
+- from the next morning's runs (every minute from 9:00 UTC for an hour, as the digest), each going on where the last stopped and nobody getting it twice (the sent log), until everyone has it.
+
+```
+GET  /notifications/superadmin/legal-notices
+POST /notifications/superadmin/legal-notices/{terms|privacy|dpa}
+```
 
 ## Emails
 

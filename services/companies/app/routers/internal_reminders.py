@@ -7,6 +7,7 @@ from app.schemas.internal_reminders import (
     CompanyIdsIn,
     CompanyMembersOut,
     MemberBriefOut,
+    UserIdsOut,
     WaitingInterviewOut,
     WaitingInterviewsOut,
 )
@@ -61,3 +62,10 @@ async def waiting_interviews(
             WaitingInterviewOut.model_validate(row, from_attributes=True) for row in generating
         ],
     )
+
+
+@router.get("/companies/editors")
+async def company_editors(caller: ServiceCaller) -> UserIdsOut:
+    """Notifications, for a notice about the data processing agreement: every owner and admin
+    of a company."""
+    return UserIdsOut(user_ids=await email_reminders.editor_ids())

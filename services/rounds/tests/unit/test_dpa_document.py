@@ -1,7 +1,8 @@
 from pathlib import Path
 
+from prepza_common.constants import LEGAL_VERSIONS
+
 from app.constants.dpa import DPA_INTRO, DPA_SECTIONS
-from app.constants.legal import LEGAL_UPDATED
 
 # The downloadable copy (the /documents page builds its PDF from it), kept in step with /dpa.
 DOCUMENT = Path(__file__).parents[4] / "frontend/content/documents/data-processing-agreement.md"
@@ -15,4 +16,4 @@ def test_the_downloadable_dpa_says_everything_the_website_does():
         sentences += [section["heading"], *section.get("paragraphs", []), *section.get("items", [])]
 
     assert [sentence for sentence in sentences if sentence not in text] == []
-    assert f"Version: {LEGAL_UPDATED}" in text
+    assert f"Version: {LEGAL_VERSIONS['dpa']}" in text

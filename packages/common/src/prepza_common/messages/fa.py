@@ -195,4 +195,7 @@ MESSAGES = {
     "integrations": "یکپارچه‌سازی‌ها",
     "This company doesn't allow AI apps. Its owner or an admin can allow them on its AI apps page.": "این شرکت اجازهٔ استفاده از برنامه‌های هوش مصنوعی را نمی‌دهد. مالک یا یکی از مدیران آن می‌تواند در صفحهٔ برنامه‌های هوش مصنوعی شرکت اجازه دهد.",
     "Only the company's owner or an admin can change this, in prepza itself.": "فقط مالک شرکت یا یکی از مدیران آن می‌تواند این را تغییر دهد، آن هم در خود prepza.",
+    "This document has no such version.": "این سند چنین نسخه‌ای ندارد.",
+    "A notice goes out at least 14 days before the new version applies: give it a later date.": "اطلاعیه دست‌کم ۱۴ روز پیش از اعمال نسخهٔ جدید فرستاده می‌شود: تاریخ دیرتری برای آن بگذارید.",
+    "This version's notice was already sent.": "اطلاعیهٔ این نسخه قبلاً فرستاده شده است.",
 }

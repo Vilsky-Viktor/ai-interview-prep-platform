@@ -1,3 +1,5 @@
+from typing import Literal
+
 from pydantic import BaseModel, Field, model_validator
 
 from app.constants.help import (
@@ -47,5 +49,11 @@ class LegalSectionOut(BaseModel):
 
 class LegalOut(BaseModel):
     intro: str
-    updated: str
+    # The day this text applies from, the newest version's, the one that applies today, and every
+    # published one, newest first.
+    version: str
+    state: Literal["in_force", "upcoming", "replaced"]
+    current: str
+    in_force: str
+    versions: list[str]
     sections: list[LegalSectionOut]

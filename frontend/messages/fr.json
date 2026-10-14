@@ -71,7 +71,7 @@
     "title": "Se connecter",
     "continueWith": "Continuer avec <name>{provider}</name>",
     "link": "Cet e-mail a déjà un compte prepza. Continuez comme lors de votre dernière connexion, et {provider} y sera associé.",
-    "consent": "En vous connectant, vous confirmez avoir 16 ans ou plus et acceptez les <terms>Conditions</terms> et la <privacy>Politique de confidentialité</privacy>.",
+    "consent": "En vous connectant, vous confirmez avoir 16 ans ou plus, acceptez les <terms>Conditions</terms> et avoir lu la <privacy>Politique de confidentialité</privacy>.",
     "failed": "La connexion a échoué. Veuillez réessayer.",
     "verify": "Nous vous avons envoyé un lien pour vérifier votre e-mail. Ouvrez-le, puis reconnectez-vous pour passer des entretiens.",
     "noUpdates": "Ne pas recevoir les nouveautés du produit ni les actualités",
@@ -272,7 +272,29 @@
     "companyDeleted": "L'entreprise a été supprimée.",
     "renameCompanyTitle": "Renommer l'entreprise",
     "companyName": "Nom de l'entreprise",
-    "companyRenamed": "L'entreprise a été renommée."
+    "companyRenamed": "L'entreprise a été renommée.",
+    "legalTitle": "Avis juridiques",
+    "legalText": "Annoncer par email une modification importante d'un document juridique, au moins 14 jours avant que sa nouvelle version s'applique.",
+    "legalDocuments": {
+      "terms": "Conditions d'utilisation",
+      "privacy": "Politique de confidentialité",
+      "dpa": "Accord de traitement des données"
+    },
+    "legalStates": {
+      "in_force": "En vigueur depuis le {date}. Pour annoncer une modification, donnez à sa nouvelle version une date au moins 14 jours plus tard.",
+      "sendable": "S'applique à partir du {date}.",
+      "too_late": "S'applique à partir du {date}. Une modification est annoncée au moins 14 jours avant de s'appliquer.",
+      "sending": "S'applique à partir du {date}. Envoi en cours.",
+      "sent": "S'applique à partir du {date}. Envoyé."
+    },
+    "legalSend": "Annoncer la modification",
+    "legalConfirmTitle": "Annoncer par email la modification de : {document} ?",
+    "legalAudience": {
+      "everyone": "Toutes les personnes ayant un compte prepza la reçoivent dès le lendemain matin, avec la date d'application de la nouvelle version, le {date}. Elle part une fois et ne peut pas être annulée.",
+      "company_editors": "Les propriétaires et administrateurs de chaque entreprise la reçoivent dès le lendemain matin, avec la date d'application de la nouvelle version, le {date}. Elle part une fois et ne peut pas être annulée."
+    },
+    "legalAsked": "La modification sera annoncée par email dès le lendemain matin.",
+    "legalFailed": "Impossible de demander l'envoi. Veuillez réessayer."
   },
   "templates": {
     "title": "Modèles",
@@ -700,8 +722,12 @@
     "homeTitle": "Test de recrutement créé à partir de votre offre d'emploi"
   },
   "legal": {
-    "updated": "Dernière mise à jour",
-    "englishOnly": "Ce document est disponible uniquement en anglais."
+    "englishOnly": "Ce document est disponible uniquement en anglais.",
+    "inForce": "En vigueur depuis le {date}",
+    "upcoming": "S'applique à partir du {date}.",
+    "replaced": "Cette version s'appliquait à partir du {date} et a été remplacée.",
+    "readInForce": "Lire la version en vigueur",
+    "versions": "Toutes les versions"
   },
   "docs": {
     "title": "Documents",

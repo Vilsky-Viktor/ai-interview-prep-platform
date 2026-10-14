@@ -71,7 +71,7 @@
     "title": "Masuk",
     "continueWith": "Lanjutkan dengan <name>{provider}</name>",
     "link": "Email ini sudah punya akun prepza. Lanjutkan dengan cara kamu masuk sebelumnya, dan {provider} akan ditautkan ke akun tersebut.",
-    "consent": "Dengan masuk, kamu menyatakan berusia 16 tahun ke atas dan menyetujui <terms>Ketentuan</terms> dan <privacy>Kebijakan privasi</privacy>.",
+    "consent": "Dengan masuk, kamu menyatakan berusia 16 tahun ke atas, menyetujui <terms>Ketentuan</terms>, dan telah membaca <privacy>Kebijakan privasi</privacy>.",
     "failed": "Gagal masuk. Coba lagi.",
     "verify": "Kami mengirimkan tautan untuk memverifikasi email-mu. Buka tautannya, lalu masuk lagi untuk mengikuti wawancara.",
     "noUpdates": "Jangan kirimi saya pembaruan produk dan berita",
@@ -272,7 +272,29 @@
     "companyDeleted": "Perusahaan dihapus.",
     "renameCompanyTitle": "Ganti nama perusahaan",
     "companyName": "Nama perusahaan",
-    "companyRenamed": "Nama perusahaan diganti."
+    "companyRenamed": "Nama perusahaan diganti.",
+    "legalTitle": "Pemberitahuan hukum",
+    "legalText": "Kirim email tentang perubahan penting pada dokumen hukum, paling lambat 14 hari sebelum versi barunya berlaku.",
+    "legalDocuments": {
+      "terms": "Ketentuan",
+      "privacy": "Kebijakan privasi",
+      "dpa": "Perjanjian pemrosesan data"
+    },
+    "legalStates": {
+      "in_force": "Berlaku sejak {date}. Untuk mengemail perubahan, beri versi barunya tanggal paling cepat 14 hari ke depan.",
+      "sendable": "Berlaku mulai {date}.",
+      "too_late": "Berlaku mulai {date}. Perubahan diberitahukan paling lambat 14 hari sebelum berlaku.",
+      "sending": "Berlaku mulai {date}. Sedang dikirim.",
+      "sent": "Berlaku mulai {date}. Terkirim."
+    },
+    "legalSend": "Email perubahannya",
+    "legalConfirmTitle": "Email perubahan pada {document}?",
+    "legalAudience": {
+      "everyone": "Semua pemilik akun prepza menerimanya mulai pagi berikutnya, berisi bahwa versi baru berlaku mulai {date}. Dikirim sekali dan tidak bisa ditarik kembali.",
+      "company_editors": "Pemilik dan admin setiap perusahaan menerimanya mulai pagi berikutnya, berisi bahwa versi baru berlaku mulai {date}. Dikirim sekali dan tidak bisa ditarik kembali."
+    },
+    "legalAsked": "Perubahan akan diemail mulai pagi berikutnya.",
+    "legalFailed": "Tidak bisa meminta email. Silakan coba lagi."
   },
   "templates": {
     "title": "Templat",
@@ -700,8 +722,12 @@
     "homeTitle": "Tes seleksi karyawan, dibuat dari deskripsi pekerjaan"
   },
   "legal": {
-    "updated": "Terakhir diperbarui",
-    "englishOnly": "Dokumen ini hanya tersedia dalam bahasa Inggris."
+    "englishOnly": "Dokumen ini hanya tersedia dalam bahasa Inggris.",
+    "inForce": "Berlaku sejak {date}",
+    "upcoming": "Berlaku mulai {date}.",
+    "replaced": "Versi ini berlaku sejak {date} dan telah diganti.",
+    "readInForce": "Baca versi yang berlaku sekarang",
+    "versions": "Semua versi"
   },
   "docs": {
     "title": "Dokumen",

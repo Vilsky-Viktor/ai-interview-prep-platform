@@ -1,8 +1,10 @@
 from types import SimpleNamespace
 
 from firebase_admin import auth as firebase_auth
+from prepza_common.constants import LEGAL_VERSIONS
 
 from app.services import accounts
+from app.storage import legal
 
 AUTH = {"Authorization": "Bearer good-token"}
 
@@ -46,11 +48,15 @@ def test_me_reads_the_language_from_the_token(client, monkeypatch):
 
 
 def settings_with(monkeypatch, claims):
-    """Stores the language as a sign-in with these claims; returns what was stored and tracked."""
+    """Stores the language as a sign-in with these claims; returns what was stored and tracked
+    (the terms accepted among it)."""
     stored, tracked = {}, []
 
     async def track(event, **values):
         tracked.append((event, values))
+
+    async def accept_terms(user_id, version):
+        tracked.append(("terms", {"user_id": user_id, "version": version}))
 
     monkeypatch.setattr(firebase_auth, "verify_id_token", fake_verify)
     monkeypatch.setattr(
@@ -60,6 +66,7 @@ def settings_with(monkeypatch, claims):
         firebase_auth, "set_custom_user_claims", lambda uid, claims: stored.update({uid: claims})
     )
     monkeypatch.setattr(accounts, "track", track)
+    monkeypatch.setattr(legal, "accept_terms", accept_terms)
 
     return stored, tracked
 
@@ -79,7 +86,11 @@ def test_a_new_accounts_first_language_counts_as_signing_up(client, monkeypatch)
 
     client.put("/me/settings", json={"language": "de"}, headers=AUTH)
 
-    assert tracked == [("signed_up", {"user_id": "user-1", "language": "de"})]
+    # Signing up accepts the terms in force: their version is kept.
+    assert tracked == [
+        ("terms", {"user_id": "user-1", "version": LEGAL_VERSIONS["terms"]}),
+        ("signed_up", {"user_id": "user-1", "language": "de"}),
+    ]
 
 
 def test_settings_refuse_an_unknown_language(client, monkeypatch):

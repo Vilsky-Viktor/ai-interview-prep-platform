@@ -169,6 +169,69 @@ TEXTS = {
         "button": "Vaata teemad üle",
         "footer": MEMBER_FOOTER,
     },
+    # Notices of a significant change to a legal document, sent at least 14 days before it
+    # applies; service emails, whatever the email settings.
+    "legal_terms": {
+        "subject": "prepza uuendab kasutustingimusi alates {date}",
+        "preheader": "Uued kasutustingimused kehtivad alates {date}.",
+        "heading": "Uuendame oma kasutustingimusi",
+        "lines": [
+            (
+                "Avaldasime prepza kasutustingimuste uue versiooni. See kehtib alates {date}; "
+                "seni kehtivad praegused tingimused."
+            ),
+            (
+                "Kui kasutad prepzat ka alates {date}, nõustud uute tingimustega. Kui sa ei "
+                "nõustu, saad enne seda kuupäeva oma konto seadetes kustutada."
+            ),
+        ],
+        "button": "Loe uusi tingimusi",
+        "footer": (
+            "See e-kiri saadeti aadressile {email}, sest sul on prepza konto. See on teade "
+            "meie kasutustingimuste kohta, seega saadetakse see sõltumata sinu e-kirjade "
+            "seadetest."
+        ),
+    },
+    "legal_privacy": {
+        "subject": "prepza uuendab privaatsuspoliitikat alates {date}",
+        "preheader": "Uus privaatsuspoliitika kehtib alates {date}.",
+        "heading": "Uuendame oma privaatsuspoliitikat",
+        "lines": [
+            (
+                "Avaldasime prepza privaatsuspoliitika uue versiooni, mis kirjeldab, kuidas me "
+                "sinu andmeid kasutame. See kehtib alates {date}; seni kehtib praegune versioon."
+            ),
+            "Saad oma andmed seadetes igal ajal alla laadida või kustutada.",
+        ],
+        "button": "Loe uut privaatsuspoliitikat",
+        "footer": (
+            "See e-kiri saadeti aadressile {email}, sest sul on prepza konto. See on teade "
+            "selle kohta, kuidas me sinu andmeid kasutame, seega saadetakse see sõltumata "
+            "sinu e-kirjade seadetest."
+        ),
+    },
+    "legal_dpa": {
+        "subject": "prepza uuendab andmetöötluslepingut alates {date}",
+        "preheader": "Uus leping kehtib sinu ettevõttele alates {date}.",
+        "heading": "Uuendame oma andmetöötluslepingut",
+        "lines": [
+            (
+                "Avaldasime andmetöötluslepingu uue versiooni, mille alusel prepza sinu "
+                "kandidaatide andmeid töötleb. See kehtib alates {date}; seni kehtib praegune "
+                "versioon."
+            ),
+            (
+                "Ettevõte, mis on sellele mõistlikel andmekaitselistel põhjustel vastu, saab enne "
+                "seda kuupäeva lõpetada prepza kasutamise ja oma ettevõtte kustutada."
+            ),
+        ],
+        "button": "Loe uut lepingut",
+        "footer": (
+            "See e-kiri saadeti aadressile {email}, sest oled prepzas mõne ettevõtte omanik "
+            "või administraator. See on teade meie lepingu kohta sinu ettevõttega, seega "
+            "saadetakse see sõltumata sinu e-kirjade seadetest."
+        ),
+    },
     "top_up_failed": {
         "subject": "Automaatne juurdelaadimine ebaõnnestus: {company}",
         "preheader": "Kaardilt ei saanud makset võtta. Laadi juurde, et kandidaate edasi kutsuda.",

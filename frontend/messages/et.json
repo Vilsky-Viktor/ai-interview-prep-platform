@@ -71,7 +71,7 @@
     "title": "Logi sisse",
     "continueWith": "Jätka kontoga <name>{provider}</name>",
     "link": "Selle e-posti aadressiga on juba prepza konto. Jätka samal viisil nagu varem ja {provider} seotakse selle kontoga.",
-    "consent": "Sisse logides kinnitad, et oled vähemalt 16-aastane, ja nõustud <terms>tingimustega</terms> ja <privacy>privaatsuspoliitikaga</privacy>.",
+    "consent": "Sisse logides kinnitad, et oled vähemalt 16-aastane, nõustud <terms>tingimustega</terms> ja oled lugenud <privacy>privaatsuspoliitikat</privacy>.",
     "failed": "Sisselogimine ebaõnnestus. Proovi uuesti.",
     "verify": "Saatsime sulle lingi e-posti aadressi kinnitamiseks. Ava see ja logi siis uuesti sisse, et intervjuusid teha.",
     "noUpdates": "Ma ei soovi tooteuudiseid",
@@ -272,7 +272,29 @@
     "companyDeleted": "Ettevõte kustutati.",
     "renameCompanyTitle": "Nimeta ettevõte ümber",
     "companyName": "Ettevõtte nimi",
-    "companyRenamed": "Ettevõte nimetati ümber."
+    "companyRenamed": "Ettevõte nimetati ümber.",
+    "legalTitle": "Juriidilised teated",
+    "legalText": "Saada e-postiga teade juriidilise dokumendi olulisest muudatusest vähemalt 14 päeva enne uue versiooni kehtima hakkamist.",
+    "legalDocuments": {
+      "terms": "Tingimused",
+      "privacy": "Privaatsuspoliitika",
+      "dpa": "Andmetöötlusleping"
+    },
+    "legalStates": {
+      "in_force": "Kehtib alates {date}. Muudatusest teatamiseks anna uuele versioonile kuupäev vähemalt 14 päeva ette.",
+      "sendable": "Kehtib alates {date}.",
+      "too_late": "Kehtib alates {date}. Muudatusest teatatakse vähemalt 14 päeva enne selle kehtima hakkamist.",
+      "sending": "Kehtib alates {date}. Saatmisel.",
+      "sent": "Kehtib alates {date}. Saadetud."
+    },
+    "legalSend": "Saada teade muudatusest",
+    "legalConfirmTitle": "Kas saata teade muudatusest: {document}?",
+    "legalAudience": {
+      "everyone": "Kõik prepza kontoga inimesed saavad selle alates järgmisest hommikust koos teatega, et uus versioon kehtib alates {date}. See saadetakse üks kord ja seda ei saa tagasi võtta.",
+      "company_editors": "Kõigi ettevõtete omanikud ja administraatorid saavad selle alates järgmisest hommikust koos teatega, et uus versioon kehtib alates {date}. See saadetakse üks kord ja seda ei saa tagasi võtta."
+    },
+    "legalAsked": "Teade muudatusest saadetakse alates järgmisest hommikust.",
+    "legalFailed": "Saatmist ei õnnestunud tellida. Proovi uuesti."
   },
   "templates": {
     "title": "Mallid",
@@ -700,8 +722,12 @@
     "homeTitle": "Värbamistestid kandidaatidele sinu töökuulutusest"
   },
   "legal": {
-    "updated": "Viimati uuendatud",
-    "englishOnly": "See dokument on saadaval ainult inglise keeles."
+    "englishOnly": "See dokument on saadaval ainult inglise keeles.",
+    "inForce": "Kehtib alates {date}",
+    "upcoming": "Kehtib alates {date}.",
+    "replaced": "See versioon kehtis alates {date} ja on asendatud.",
+    "readInForce": "Loe praegu kehtivat versiooni",
+    "versions": "Kõik versioonid"
   },
   "docs": {
     "title": "Dokumendid",

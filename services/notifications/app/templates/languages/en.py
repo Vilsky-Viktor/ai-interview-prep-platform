@@ -163,6 +163,51 @@ TEXTS = {
         "button": "Review your topics",
         "footer": MEMBER_FOOTER,
     },
+    # Notices of a significant change to a legal document, sent at least 14 days before it
+    # applies; service emails, whatever the email settings.
+    "legal_terms": {
+        "subject": "We're updating prepza's terms on {date}",
+        "preheader": "The new terms apply from {date}.",
+        "heading": "We're updating our terms",
+        "lines": [
+            "We've published a new version of prepza's terms. It applies from {date}; until then, the current terms apply.",
+            "Using prepza after {date} means you accept the new terms. If you don't, you can delete your account in Settings before then.",
+        ],
+        "button": "Read the new terms",
+        "footer": (
+            "This email was sent to {email} because you have a prepza account. It's a notice"
+            " about our terms, so it's sent whatever your email settings."
+        ),
+    },
+    "legal_privacy": {
+        "subject": "We're updating prepza's privacy policy on {date}",
+        "preheader": "The new privacy policy applies from {date}.",
+        "heading": "We're updating our privacy policy",
+        "lines": [
+            "We've published a new version of prepza's privacy policy, which says how we use your data. It applies from {date}; until then, the current one applies.",
+            "You can download or delete your data in Settings at any time.",
+        ],
+        "button": "Read the new privacy policy",
+        "footer": (
+            "This email was sent to {email} because you have a prepza account. It's a notice"
+            " about how we use your data, so it's sent whatever your email settings."
+        ),
+    },
+    "legal_dpa": {
+        "subject": "We're updating prepza's data processing agreement on {date}",
+        "preheader": "The new agreement applies to your company from {date}.",
+        "heading": "We're updating our data processing agreement",
+        "lines": [
+            "We've published a new version of the data processing agreement under which prepza processes your candidates' data. It applies from {date}; until then, the current one applies.",
+            "A company that objects for reasonable data protection reasons can stop using prepza and delete its company before then.",
+        ],
+        "button": "Read the new agreement",
+        "footer": (
+            "This email was sent to {email} because you're an owner or admin of a company on"
+            " prepza. It's a notice about our agreement with your company, so it's sent"
+            " whatever your email settings."
+        ),
+    },
     "top_up_failed": {
         "subject": "Automatic top-up failed for {company}",
         "preheader": "The card couldn't be charged. Top up to keep inviting candidates.",

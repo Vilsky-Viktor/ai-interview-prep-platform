@@ -195,4 +195,7 @@ MESSAGES = {
     "integrations": "集成",
     "This company doesn't allow AI apps. Its owner or an admin can allow them on its AI apps page.": "该公司不允许使用 AI 应用。公司所有者或管理员可以在公司的 AI 应用页面中允许。",
     "Only the company's owner or an admin can change this, in prepza itself.": "只有公司所有者或管理员可以更改此设置，且须在 prepza 中操作。",
+    "This document has no such version.": "该文件没有此版本。",
+    "A notice goes out at least 14 days before the new version applies: give it a later date.": "通知须在新版本适用前至少 14 天发出：请为其设定更晚的日期。",
+    "This version's notice was already sent.": "此版本的通知已发送。",
 }

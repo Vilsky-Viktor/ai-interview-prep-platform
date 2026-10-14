@@ -71,7 +71,7 @@
     "title": "Zaloguj się",
     "continueWith": "Kontynuuj z <name>{provider}</name>",
     "link": "Ten adres e-mail ma już konto w prepza. Kontynuuj tak, jak logowałeś się wcześniej, a {provider} zostanie z nim połączony.",
-    "consent": "Logując się, potwierdzasz, że masz co najmniej 16 lat, i akceptujesz <terms>Regulamin</terms> i <privacy>Politykę prywatności</privacy>.",
+    "consent": "Logując się, potwierdzasz, że masz co najmniej 16 lat, akceptujesz <terms>Regulamin</terms> i zapoznałeś się z <privacy>Polityką prywatności</privacy>.",
     "failed": "Nie udało się zalogować. Spróbuj ponownie.",
     "verify": "Wysłaliśmy Ci link do potwierdzenia adresu e-mail. Otwórz go, a potem zaloguj się ponownie, aby brać udział w rozmowach.",
     "noUpdates": "Nie chcę otrzymywać nowości o produkcie i aktualności",
@@ -272,7 +272,29 @@
     "companyDeleted": "Firmę usunięto.",
     "renameCompanyTitle": "Zmień nazwę firmy",
     "companyName": "Nazwa firmy",
-    "companyRenamed": "Nazwę firmy zmieniono."
+    "companyRenamed": "Nazwę firmy zmieniono.",
+    "legalTitle": "Powiadomienia prawne",
+    "legalText": "Wyślij e-mailem informację o istotnej zmianie dokumentu prawnego, co najmniej 14 dni przed wejściem nowej wersji w życie.",
+    "legalDocuments": {
+      "terms": "Regulamin",
+      "privacy": "Polityka prywatności",
+      "dpa": "Umowa powierzenia przetwarzania danych"
+    },
+    "legalStates": {
+      "in_force": "Obowiązuje od {date}. Aby wysłać informację o zmianie, nadaj nowej wersji datę co najmniej 14 dni do przodu.",
+      "sendable": "Obowiązuje od {date}.",
+      "too_late": "Obowiązuje od {date}. O zmianie informujemy co najmniej 14 dni przed jej wejściem w życie.",
+      "sending": "Obowiązuje od {date}. W trakcie wysyłki.",
+      "sent": "Obowiązuje od {date}. Wysłano."
+    },
+    "legalSend": "Wyślij informację o zmianie",
+    "legalConfirmTitle": "Wysłać e-mailem informację o zmianie: {document}?",
+    "legalAudience": {
+      "everyone": "Każdy, kto ma konto w prepza, otrzyma ją od następnego ranka, z informacją, że nowa wersja obowiązuje od {date}. Wysyłamy ją raz i nie można jej cofnąć.",
+      "company_editors": "Właściciele i administratorzy każdej firmy otrzymają ją od następnego ranka, z informacją, że nowa wersja obowiązuje od {date}. Wysyłamy ją raz i nie można jej cofnąć."
+    },
+    "legalAsked": "Informacja o zmianie zostanie wysłana od następnego ranka.",
+    "legalFailed": "Nie udało się zlecić wysyłki. Spróbuj ponownie."
   },
   "templates": {
     "title": "Szablony",
@@ -700,8 +722,12 @@
     "homeTitle": "Testy rekrutacyjne online z Twojego opisu stanowiska"
   },
   "legal": {
-    "updated": "Ostatnia aktualizacja",
-    "englishOnly": "Ten dokument jest dostępny tylko po angielsku."
+    "englishOnly": "Ten dokument jest dostępny tylko po angielsku.",
+    "inForce": "Obowiązuje od {date}",
+    "upcoming": "Obowiązuje od {date}.",
+    "replaced": "Ta wersja obowiązywała od {date} i została zastąpiona.",
+    "readInForce": "Przeczytaj obecnie obowiązującą wersję",
+    "versions": "Wszystkie wersje"
   },
   "docs": {
     "title": "Dokumenty",

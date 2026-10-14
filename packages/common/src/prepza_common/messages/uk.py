@@ -195,4 +195,7 @@ MESSAGES = {
     "integrations": "інтеграції",
     "This company doesn't allow AI apps. Its owner or an admin can allow them on its AI apps page.": "Ця компанія не дозволяє ШІ-застосунки. Власник або адміністратор може дозволити їх на сторінці ШІ-застосунків компанії.",
     "Only the company's owner or an admin can change this, in prepza itself.": "Змінити це може лише власник компанії або адміністратор, у самому prepza.",
+    "This document has no such version.": "Цей документ не має такої версії.",
+    "A notice goes out at least 14 days before the new version applies: give it a later date.": "Повідомлення надсилається щонайменше за 14 днів до того, як нова версія почне застосовуватися: призначте їй пізнішу дату.",
+    "This version's notice was already sent.": "Повідомлення про цю версію вже надіслано.",
 }

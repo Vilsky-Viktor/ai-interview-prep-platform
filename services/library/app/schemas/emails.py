@@ -73,3 +73,7 @@ class EmailLookupOut(BaseModel):
     """The account with the address a superadmin looked up, or none."""
 
     account: EmailAccountOut | None
+
+
+class UserIdsOut(BaseModel):
+    user_ids: list[str]

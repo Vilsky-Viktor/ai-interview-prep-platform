@@ -2,6 +2,7 @@ from datetime import UTC, datetime
 
 # Aliased: this module's own delete() would otherwise shadow it.
 from prepza_common import outbox
+from prepza_common.constants import LEGAL_VERSIONS
 from sqlalchemy import and_, func, or_, select, update
 from sqlalchemy import delete as sql_delete
 from sqlalchemy.exc import IntegrityError
@@ -23,6 +24,7 @@ async def create(name: str, user_id: str, email: str) -> Company | None:
     two people creating the same name at once can't both get it."""
     company = Company(
         name=name,
+        dpa_version=LEGAL_VERSIONS["dpa"],
         members=[Member(user_id=user_id, invited_email=email.lower(), role=Role.OWNER)],
     )
 

@@ -195,4 +195,7 @@ MESSAGES = {
     "integrations": "intégrations",
     "This company doesn't allow AI apps. Its owner or an admin can allow them on its AI apps page.": "Cette entreprise n'autorise pas les apps d'IA. Son propriétaire ou un administrateur peut les autoriser sur sa page des apps d'IA.",
     "Only the company's owner or an admin can change this, in prepza itself.": "Seul le propriétaire de l'entreprise ou un administrateur peut modifier ce réglage, dans prepza même.",
+    "This document has no such version.": "Ce document n'a pas de telle version.",
+    "A notice goes out at least 14 days before the new version applies: give it a later date.": "Un avis part au moins 14 jours avant que la nouvelle version s'applique : donnez-lui une date plus tardive.",
+    "This version's notice was already sent.": "L'avis de cette version a déjà été envoyé.",
 }

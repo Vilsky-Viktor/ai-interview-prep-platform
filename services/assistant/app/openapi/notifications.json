@@ -651,6 +651,83 @@
     ]
    }
   },
+  "/superadmin/legal-notices": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "List Notices",
+    "description": "Each document's current version, and whether its notice can be, is being or was sent.",
+    "operationId": "list_notices_superadmin_legal_notices_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "items": {
+          "$ref": "#/components/schemas/LegalNoticeOut"
+         },
+         "type": "array",
+         "title": "Response List Notices Superadmin Legal Notices Get"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/superadmin/legal-notices/{document}": {
+   "post": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Send Notice",
+    "description": "Emails the change to the document's current version, from the next morning's run.",
+    "operationId": "send_notice_superadmin_legal_notices__document__post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "document",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "enum": [
+        "terms",
+        "privacy",
+        "dpa"
+       ],
+       "type": "string",
+       "title": "Document"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
   "/internal/schedules/digest": {
    "post": {
     "tags": [
@@ -674,6 +751,21 @@
     "summary": "Reminders",
     "description": "Every minute for an hour each morning, from Cloud Scheduler: reminders, each kind\nat most once a week to a user. The sent log's old rows go too.",
     "operationId": "reminders_internal_schedules_reminders_post",
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     }
+    }
+   }
+  },
+  "/internal/schedules/legal-notices": {
+   "post": {
+    "tags": [
+     "schedules"
+    ],
+    "summary": "Legal",
+    "description": "Every minute for an hour each morning, from Cloud Scheduler: the legal notices asked for,\neach going on where the last run stopped; nobody gets one twice.",
+    "operationId": "legal_internal_schedules_legal_notices_post",
     "responses": {
      "204": {
       "description": "Successful Response"
@@ -827,6 +919,48 @@
     },
     "type": "object",
     "title": "HTTPValidationError"
+   },
+   "LegalNoticeOut": {
+    "properties": {
+     "document": {
+      "type": "string",
+      "title": "Document"
+     },
+     "version": {
+      "type": "string",
+      "title": "Version"
+     },
+     "state": {
+      "$ref": "#/components/schemas/LegalNoticeState"
+     },
+     "audience": {
+      "type": "string",
+      "enum": [
+       "everyone",
+       "company_editors"
+      ],
+      "title": "Audience"
+     }
+    },
+    "type": "object",
+    "required": [
+     "document",
+     "version",
+     "state",
+     "audience"
+    ],
+    "title": "LegalNoticeOut"
+   },
+   "LegalNoticeState": {
+    "type": "string",
+    "enum": [
+     "sendable",
+     "too_late",
+     "sending",
+     "sent"
+    ],
+    "title": "LegalNoticeState",
+    "description": "Where a document's current version stands: its email can be asked for, it's too close to\nthe day it applies (or past it), or it was asked for (and is going out, or went out)."
    },
    "NotificationOut": {
     "properties": {

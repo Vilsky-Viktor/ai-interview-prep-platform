@@ -195,4 +195,7 @@ MESSAGES = {
     "integrations": "連携",
     "This company doesn't allow AI apps. Its owner or an admin can allow them on its AI apps page.": "この会社は AI アプリの利用を許可していません。オーナーまたは管理者が、会社の AI アプリのページで許可できます。",
     "Only the company's owner or an admin can change this, in prepza itself.": "これを変更できるのは、会社のオーナーまたは管理者だけです（prepza 上で操作してください）。",
+    "This document has no such version.": "この文書にそのバージョンはありません。",
+    "A notice goes out at least 14 days before the new version applies: give it a later date.": "通知は新しいバージョンの適用日の少なくとも 14 日前に送られます。より後の日付にしてください。",
+    "This version's notice was already sent.": "このバージョンの通知はすでに送信されています。",
 }

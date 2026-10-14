@@ -195,4 +195,7 @@ MESSAGES = {
     "integrations": "tích hợp",
     "This company doesn't allow AI apps. Its owner or an admin can allow them on its AI apps page.": "Công ty này không cho phép ứng dụng AI. Chủ sở hữu hoặc quản trị viên có thể cho phép trong trang ứng dụng AI của công ty.",
     "Only the company's owner or an admin can change this, in prepza itself.": "Chỉ chủ sở hữu công ty hoặc quản trị viên mới có thể thay đổi điều này, ngay trong prepza.",
+    "This document has no such version.": "Tài liệu này không có phiên bản đó.",
+    "A notice goes out at least 14 days before the new version applies: give it a later date.": "Thông báo được gửi ít nhất 14 ngày trước khi phiên bản mới áp dụng: hãy đặt ngày muộn hơn.",
+    "This version's notice was already sent.": "Thông báo của phiên bản này đã được gửi.",
 }

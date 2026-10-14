@@ -53,6 +53,9 @@ class Company(Base):
     # Since when members may not use its data from AI apps they connected (None: they may); its
     # owners and admins decide.
     ai_apps_off_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    # The data processing agreement's version in force when it was made (None before they were
+    # recorded): its owner accepted it with the terms. Later versions apply after their notice.
+    dpa_version: Mapped[str | None] = mapped_column(String(10))
 
     members: Mapped[list["Member"]] = relationship(cascade="all, delete-orphan")
 

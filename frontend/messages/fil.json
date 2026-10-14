@@ -71,7 +71,7 @@
     "title": "Mag-sign in",
     "continueWith": "Magpatuloy gamit ang <name>{provider}</name>",
     "link": "May prepza account na ang email na ito. Magpatuloy sa paraang ginamit mo dati, at maili-link dito ang {provider}.",
-    "consent": "Sa pag-sign in, kinukumpirma mong 16 taong gulang ka o higit pa at sumasang-ayon ka sa <terms>Mga tuntunin</terms> at sa <privacy>Patakaran sa privacy</privacy>.",
+    "consent": "Sa pag-sign in, kinukumpirma mong 16 taong gulang ka o higit pa, sumasang-ayon ka sa <terms>Mga tuntunin</terms>, at nabasa mo ang <privacy>Patakaran sa privacy</privacy>.",
     "failed": "Hindi nakapag-sign in. Pakisubukang muli.",
     "verify": "Nagpadala kami sa iyo ng link para i-verify ang iyong email. Buksan ito, saka mag-sign in ulit para makasagot ng mga interview.",
     "noUpdates": "Huwag akong padalhan ng mga update at balita tungkol sa produkto",
@@ -272,7 +272,29 @@
     "companyDeleted": "Na-delete ang kumpanya.",
     "renameCompanyTitle": "Palitan ang pangalan ng kumpanya",
     "companyName": "Pangalan ng kumpanya",
-    "companyRenamed": "Napalitan ang pangalan ng kumpanya."
+    "companyRenamed": "Napalitan ang pangalan ng kumpanya.",
+    "legalTitle": "Mga legal na abiso",
+    "legalText": "I-email ang mahalagang pagbabago sa isang legal na dokumento, hindi bababa sa 14 na araw bago magkabisa ang bagong bersyon nito.",
+    "legalDocuments": {
+      "terms": "Mga tuntunin",
+      "privacy": "Patakaran sa privacy",
+      "dpa": "Kasunduan sa pagproseso ng data"
+    },
+    "legalStates": {
+      "in_force": "May bisa mula {date}. Para i-email ang pagbabago, bigyan ang bagong bersyon ng petsang hindi bababa sa 14 na araw mula ngayon.",
+      "sendable": "Magkakabisa mula {date}.",
+      "too_late": "Magkakabisa mula {date}. Ini-email ang pagbabago nang hindi bababa sa 14 na araw bago ito magkabisa.",
+      "sending": "Magkakabisa mula {date}. Ipinapadala.",
+      "sent": "Magkakabisa mula {date}. Naipadala na."
+    },
+    "legalSend": "I-email ang pagbabago",
+    "legalConfirmTitle": "I-email ang pagbabago sa {document}?",
+    "legalAudience": {
+      "everyone": "Matatanggap ito ng lahat ng may prepza account simula sa susunod na umaga, at sinasabing magkakabisa ang bagong bersyon mula {date}. Isang beses itong ipapadala at hindi na mababawi.",
+      "company_editors": "Matatanggap ito ng mga may-ari at admin ng bawat kumpanya simula sa susunod na umaga, at sinasabing magkakabisa ang bagong bersyon mula {date}. Isang beses itong ipapadala at hindi na mababawi."
+    },
+    "legalAsked": "Ie-email ang pagbabago simula sa susunod na umaga.",
+    "legalFailed": "Hindi nahiling ang email. Pakisubukang muli."
   },
   "templates": {
     "title": "Mga template",
@@ -700,8 +722,12 @@
     "homeTitle": "Pre-employment assessment mula sa job description mo"
   },
   "legal": {
-    "updated": "Huling na-update",
-    "englishOnly": "Available lang ang dokumentong ito sa English."
+    "englishOnly": "Available lang ang dokumentong ito sa English.",
+    "inForce": "May bisa mula {date}",
+    "upcoming": "Magkakabisa sa {date}.",
+    "replaced": "Nagkabisa ang bersyong ito mula {date} at napalitan na.",
+    "readInForce": "Basahin ang bersyong may bisa ngayon",
+    "versions": "Lahat ng bersyon"
   },
   "docs": {
     "title": "Docs",

@@ -40,3 +40,7 @@ class WaitingInterviewsOut(BaseModel):
     without_candidates: list[WaitingInterviewOut]
     # Still waiting for their questions (generation knows whether for a topics' review).
     being_generated: list[WaitingInterviewOut]
+
+
+class UserIdsOut(BaseModel):
+    user_ids: list[str]

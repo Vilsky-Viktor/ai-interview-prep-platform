@@ -71,7 +71,7 @@
     "title": "Inloggen",
     "continueWith": "Doorgaan met <name>{provider}</name>",
     "link": "Dit e-mailadres heeft al een prepza-account. Ga verder zoals je eerder hebt ingelogd, dan wordt {provider} eraan gekoppeld.",
-    "consent": "Door in te loggen bevestig je dat je 16 jaar of ouder bent en ga je akkoord met de <terms>Voorwaarden</terms> en het <privacy>Privacybeleid</privacy>.",
+    "consent": "Door in te loggen bevestig je dat je 16 jaar of ouder bent, ga je akkoord met de <terms>Voorwaarden</terms> en heb je het <privacy>Privacybeleid</privacy> gelezen.",
     "failed": "Inloggen is mislukt. Probeer het opnieuw.",
     "verify": "We hebben je een link gestuurd om je e-mailadres te verifiëren. Open hem en log daarna opnieuw in om interviews te doen.",
     "noUpdates": "Stuur me geen productupdates en nieuws",
@@ -272,7 +272,29 @@
     "companyDeleted": "Het bedrijf is verwijderd.",
     "renameCompanyTitle": "Bedrijf hernoemen",
     "companyName": "Bedrijfsnaam",
-    "companyRenamed": "Het bedrijf is hernoemd."
+    "companyRenamed": "Het bedrijf is hernoemd.",
+    "legalTitle": "Juridische kennisgevingen",
+    "legalText": "Mail een belangrijke wijziging in een juridisch document, minstens 14 dagen voordat de nieuwe versie geldt.",
+    "legalDocuments": {
+      "terms": "Voorwaarden",
+      "privacy": "Privacybeleid",
+      "dpa": "Verwerkersovereenkomst"
+    },
+    "legalStates": {
+      "in_force": "Geldig sinds {date}. Om een wijziging te mailen, geef je de nieuwe versie een datum minstens 14 dagen vooruit.",
+      "sendable": "Geldt vanaf {date}.",
+      "too_late": "Geldt vanaf {date}. Een wijziging wordt minstens 14 dagen voordat ze geldt gemaild.",
+      "sending": "Geldt vanaf {date}. Wordt gemaild.",
+      "sent": "Geldt vanaf {date}. Gemaild."
+    },
+    "legalSend": "Wijziging mailen",
+    "legalConfirmTitle": "De wijziging in {document} mailen?",
+    "legalAudience": {
+      "everyone": "Iedereen met een prepza-account krijgt hem vanaf de volgende ochtend, met de melding dat de nieuwe versie geldt vanaf {date}. Hij gaat één keer uit en kan niet worden teruggedraaid.",
+      "company_editors": "De eigenaren en beheerders van elk bedrijf krijgen hem vanaf de volgende ochtend, met de melding dat de nieuwe versie geldt vanaf {date}. Hij gaat één keer uit en kan niet worden teruggedraaid."
+    },
+    "legalAsked": "De wijziging wordt vanaf de volgende ochtend gemaild.",
+    "legalFailed": "Kon de e-mail niet aanvragen. Probeer het opnieuw."
   },
   "templates": {
     "title": "Sjablonen",
@@ -700,8 +722,12 @@
     "homeTitle": "Online assessment voor werving, uit je vacaturetekst"
   },
   "legal": {
-    "updated": "Laatst bijgewerkt",
-    "englishOnly": "Dit document is alleen in het Engels beschikbaar."
+    "englishOnly": "Dit document is alleen in het Engels beschikbaar.",
+    "inForce": "Geldig sinds {date}",
+    "upcoming": "Geldt vanaf {date}.",
+    "replaced": "Deze versie gold vanaf {date} en is vervangen.",
+    "readInForce": "Lees de versie die nu geldt",
+    "versions": "Alle versies"
   },
   "docs": {
     "title": "Documenten",

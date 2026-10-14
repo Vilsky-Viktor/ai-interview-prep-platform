@@ -124,6 +124,41 @@ TEXTS = {
         "button": "审阅主题",
         "footer": MEMBER_FOOTER,
     },
+    # Notices of a significant change to a legal document, sent at least 14 days before it
+    # applies; service emails, whatever the email settings.
+    "legal_terms": {
+        "subject": "prepza 将于 {date} 更新服务条款",
+        "preheader": "新的服务条款自 {date} 起生效。",
+        "heading": "我们正在更新服务条款",
+        "lines": [
+            "我们发布了新版 prepza 服务条款，自 {date} 起生效；在此之前，现行条款继续适用。",
+            "在 {date} 之后继续使用 prepza，即表示你接受新的条款。如果你不接受，可以在此之前在设置中删除你的账户。",
+        ],
+        "button": "阅读新条款",
+        "footer": "这封邮件发送到 {email}，因为你有 prepza 账户。这是关于我们服务条款的通知，因此无论你的邮件设置如何都会发送。",
+    },
+    "legal_privacy": {
+        "subject": "prepza 将于 {date} 更新隐私政策",
+        "preheader": "新的隐私政策自 {date} 起生效。",
+        "heading": "我们正在更新隐私政策",
+        "lines": [
+            "我们发布了新版 prepza 隐私政策，其中说明了我们如何使用你的数据。新版自 {date} 起生效；在此之前，现行版本继续适用。",
+            "你可以随时在设置中下载或删除你的数据。",
+        ],
+        "button": "阅读新的隐私政策",
+        "footer": "这封邮件发送到 {email}，因为你有 prepza 账户。这是关于我们如何使用你的数据的通知，因此无论你的邮件设置如何都会发送。",
+    },
+    "legal_dpa": {
+        "subject": "prepza 将于 {date} 更新数据处理协议",
+        "preheader": "新协议自 {date} 起适用于你的公司。",
+        "heading": "我们正在更新数据处理协议",
+        "lines": [
+            "我们发布了新版数据处理协议，prepza 依据该协议处理你的候选人的数据。新版自 {date} 起生效；在此之前，现行版本继续适用。",
+            "如果公司出于合理的数据保护理由提出异议，可以在此之前停止使用 prepza 并删除该公司。",
+        ],
+        "button": "阅读新协议",
+        "footer": "这封邮件发送到 {email}，因为你是 prepza 上某个公司的所有者或管理员。这是关于我们与你公司之间协议的通知，因此无论你的邮件设置如何都会发送。",
+    },
     "top_up_failed": {
         "subject": "{company} 的自动充值失败",
         "preheader": "无法从银行卡扣款。充值后才能继续邀请候选人。",

@@ -372,7 +372,8 @@ export interface paths {
     }
     /**
      * Get Legal
-     * @description The terms or the privacy policy, in English only; public.
+     * @description The terms, the privacy policy or the DPA: the current version, or an earlier one, with
+     *     every published version (the day each applies from); public.
      */
     get: operations["get_legal_help_legal__document__get"]
     put?: never
@@ -554,7 +555,8 @@ export interface paths {
     /**
      * Expire Interviews
      * @description Every minute, from Cloud Scheduler: finishes interviews whose time ran out after the
-     *     candidate left, so companies see them as finished.
+     *     candidate left, so companies see them as finished. Not while maintenance mode is on:
+     *     candidates can't answer then, and their time is given back when it's turned off.
      */
     post: operations["expire_interviews_internal_schedules_expire_interviews_post"]
     delete?: never
@@ -655,6 +657,27 @@ export interface paths {
     get: operations["running_interviews_internal_maintenance_running_get"]
     put?: never
     post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/maintenance/resume": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Resume
+     * @description For companies' maintenance switch, before it turns off: running interviews get back the
+     *     time it was on.
+     */
+    post: operations["resume_internal_maintenance_resume_post"]
     delete?: never
     options?: never
     head?: never
@@ -815,8 +838,19 @@ export interface components {
     LegalOut: {
       /** Intro */
       intro: string
-      /** Updated */
-      updated: string
+      /** Version */
+      version: string
+      /**
+       * State
+       * @enum {string}
+       */
+      state: "in_force" | "upcoming" | "replaced"
+      /** Current */
+      current: string
+      /** In Force */
+      in_force: string
+      /** Versions */
+      versions: string[]
       /** Sections */
       sections: components["schemas"]["LegalSectionOut"][]
     }
@@ -997,6 +1031,11 @@ export interface components {
        * @default
        */
       comment: string
+    }
+    /** ResumeIn */
+    ResumeIn: {
+      /** Seconds */
+      seconds: number
     }
     /**
      * ReviewItem
@@ -1823,7 +1862,9 @@ export interface operations {
   }
   get_legal_help_legal__document__get: {
     parameters: {
-      query?: never
+      query?: {
+        version?: string | null
+      }
       header?: never
       path: {
         document: components["schemas"]["LegalDocument"]
@@ -2257,6 +2298,37 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["RunningOut"]
+        }
+      }
+    }
+  }
+  resume_internal_maintenance_resume_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ResumeIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
         }
       }
     }

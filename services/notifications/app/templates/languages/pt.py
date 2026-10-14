@@ -167,6 +167,69 @@ TEXTS = {
         "button": "Revisar os tópicos",
         "footer": MEMBER_FOOTER,
     },
+    # Notices of a significant change to a legal document, sent at least 14 days before it
+    # applies; service emails, whatever the email settings.
+    "legal_terms": {
+        "subject": "A prepza vai atualizar os termos de uso em {date}",
+        "preheader": "Os novos termos de uso valem a partir de {date}.",
+        "heading": "Estamos atualizando nossos termos de uso",
+        "lines": [
+            (
+                "Publicamos uma nova versão dos termos de uso da prepza. Ela vale a partir de "
+                "{date}; até lá, valem os termos atuais."
+            ),
+            (
+                "Ao usar a prepza depois de {date}, você aceita os novos termos. Se não aceitar, "
+                "pode excluir sua conta em Configurações antes dessa data."
+            ),
+        ],
+        "button": "Ler os novos termos",
+        "footer": (
+            "Este e-mail foi enviado para {email} porque você tem uma conta na prepza. É um "
+            "aviso sobre nossos termos de uso, por isso é enviado independentemente das suas "
+            "configurações de e-mail."
+        ),
+    },
+    "legal_privacy": {
+        "subject": "A prepza vai atualizar a política de privacidade em {date}",
+        "preheader": "A nova política de privacidade vale a partir de {date}.",
+        "heading": "Estamos atualizando nossa política de privacidade",
+        "lines": [
+            (
+                "Publicamos uma nova versão da política de privacidade da prepza, que explica "
+                "como usamos seus dados. Ela vale a partir de {date}; até lá, vale a atual."
+            ),
+            "Você pode baixar ou excluir seus dados em Configurações a qualquer momento.",
+        ],
+        "button": "Ler a nova política de privacidade",
+        "footer": (
+            "Este e-mail foi enviado para {email} porque você tem uma conta na prepza. É um "
+            "aviso sobre como usamos seus dados, por isso é enviado independentemente das "
+            "suas configurações de e-mail."
+        ),
+    },
+    "legal_dpa": {
+        "subject": "A prepza vai atualizar o acordo de tratamento de dados em {date}",
+        "preheader": "O novo acordo vale para sua empresa a partir de {date}.",
+        "heading": "Estamos atualizando nosso acordo de tratamento de dados",
+        "lines": [
+            (
+                "Publicamos uma nova versão do acordo de tratamento de dados segundo o qual a "
+                "prepza trata os dados dos seus candidatos. Ela vale a partir de {date}; até lá, "
+                "vale o atual."
+            ),
+            (
+                "Uma empresa que se oponha por motivos razoáveis de proteção de dados pode deixar "
+                "de usar a prepza e excluir a empresa antes dessa data."
+            ),
+        ],
+        "button": "Ler o novo acordo",
+        "footer": (
+            "Este e-mail foi enviado para {email} porque você é proprietário ou administrador "
+            "de uma empresa na prepza. É um aviso sobre nosso acordo com sua empresa, por "
+            "isso é enviado independentemente das suas configurações de e-mail."
+        ),
+    },
     "top_up_failed": {
         "subject": "A recarga automática de {company} falhou",
         "preheader": (

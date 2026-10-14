@@ -71,7 +71,7 @@
     "title": "Đăng nhập",
     "continueWith": "Tiếp tục với <name>{provider}</name>",
     "link": "Email này đã có tài khoản prepza. Hãy tiếp tục theo cách bạn đã đăng nhập trước đây, và {provider} sẽ được liên kết với tài khoản đó.",
-    "consent": "Khi đăng nhập, bạn xác nhận mình từ 16 tuổi trở lên và đồng ý với <terms>Điều khoản</terms> và <privacy>Chính sách quyền riêng tư</privacy>.",
+    "consent": "Khi đăng nhập, bạn xác nhận mình từ 16 tuổi trở lên, đồng ý với <terms>Điều khoản</terms> và đã đọc <privacy>Chính sách quyền riêng tư</privacy>.",
     "failed": "Đăng nhập không thành công. Vui lòng thử lại.",
     "verify": "Chúng tôi đã gửi cho bạn một liên kết để xác minh email. Hãy mở liên kết, rồi đăng nhập lại để tham gia phỏng vấn.",
     "noUpdates": "Không gửi cho tôi cập nhật sản phẩm và tin tức",
@@ -272,7 +272,29 @@
     "companyDeleted": "Đã xóa công ty.",
     "renameCompanyTitle": "Đổi tên công ty",
     "companyName": "Tên công ty",
-    "companyRenamed": "Đã đổi tên công ty."
+    "companyRenamed": "Đã đổi tên công ty.",
+    "legalTitle": "Thông báo pháp lý",
+    "legalText": "Gửi email về thay đổi quan trọng của một tài liệu pháp lý, ít nhất 14 ngày trước khi phiên bản mới áp dụng.",
+    "legalDocuments": {
+      "terms": "Điều khoản",
+      "privacy": "Chính sách quyền riêng tư",
+      "dpa": "Thỏa thuận xử lý dữ liệu"
+    },
+    "legalStates": {
+      "in_force": "Có hiệu lực từ {date}. Để gửi email về thay đổi, hãy đặt ngày cho phiên bản mới ít nhất 14 ngày sau.",
+      "sendable": "Áp dụng từ {date}.",
+      "too_late": "Áp dụng từ {date}. Thay đổi được thông báo ít nhất 14 ngày trước khi áp dụng.",
+      "sending": "Áp dụng từ {date}. Đang gửi.",
+      "sent": "Áp dụng từ {date}. Đã gửi."
+    },
+    "legalSend": "Gửi email về thay đổi",
+    "legalConfirmTitle": "Gửi email về thay đổi của {document}?",
+    "legalAudience": {
+      "everyone": "Mọi người có tài khoản prepza sẽ nhận được từ sáng hôm sau, cho biết phiên bản mới áp dụng từ {date}. Chỉ gửi một lần và không thể thu hồi.",
+      "company_editors": "Chủ sở hữu và quản trị viên của mọi công ty sẽ nhận được từ sáng hôm sau, cho biết phiên bản mới áp dụng từ {date}. Chỉ gửi một lần và không thể thu hồi."
+    },
+    "legalAsked": "Thay đổi sẽ được gửi email từ sáng hôm sau.",
+    "legalFailed": "Không thể yêu cầu gửi email. Vui lòng thử lại."
   },
   "templates": {
     "title": "Mẫu",
@@ -700,8 +722,12 @@
     "homeTitle": "Bài test tuyển dụng tạo từ mô tả công việc của bạn"
   },
   "legal": {
-    "updated": "Cập nhật lần cuối",
-    "englishOnly": "Tài liệu này chỉ có bằng tiếng Anh."
+    "englishOnly": "Tài liệu này chỉ có bằng tiếng Anh.",
+    "inForce": "Có hiệu lực từ {date}",
+    "upcoming": "Áp dụng từ {date}.",
+    "replaced": "Phiên bản này áp dụng từ {date} và đã được thay thế.",
+    "readInForce": "Đọc phiên bản đang có hiệu lực",
+    "versions": "Tất cả phiên bản"
   },
   "docs": {
     "title": "Tài liệu",

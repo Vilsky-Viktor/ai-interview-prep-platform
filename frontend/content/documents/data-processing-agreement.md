@@ -1,6 +1,6 @@
 # Data processing agreement
 
-Version: 2026-10-10\
+Version: 2026-10-14\
 Operator: Arcolabs OÜ (registry code 17587452), Sepapaja tn 6, 15551 Tallinn, Harju maakond, Estonia; hello@prepza.ai\
 Also online at https://prepza.ai/dpa
 
@@ -38,7 +38,7 @@ The company authorises these sub-processors, each bound by data protection terms
 
 ## Changes and transfers
 
-We announce a new sub-processor at least 14 days before it starts, by email or in the app; a company that objects for reasonable data protection reasons can stop using prepza and delete its company.
+We email the company's owners and admins about a new sub-processor, or any other significant change to this agreement, at least 14 days before it applies; every earlier version stays readable on this page; a company that objects for reasonable data protection reasons can stop using prepza and delete its company.
 
 Transfers outside the EU (to Google Firebase, and by OpenAI Ireland Ltd to OpenAI, in the United States) are covered by the EU-US Data Privacy Framework or the European Commission's standard contractual clauses, as listed above; the company can ask for a copy of the safeguards.
 

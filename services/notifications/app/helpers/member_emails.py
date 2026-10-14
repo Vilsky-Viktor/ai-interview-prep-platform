@@ -54,3 +54,11 @@ def top_up_failed_email(recipient: dict, company: str, site_url: str) -> Email:
     data = {**recipient_data(recipient), "company": company}
 
     return render("top_up_failed", data, site_url.rstrip("/") + TOP_UP_LINK)
+
+
+def legal_email(recipient: dict, document: str, version: str, site_url: str) -> Email:
+    """A notice of a change to a legal document: a service email, whatever the settings. Its
+    button opens the new version."""
+    data = {**recipient_data(recipient), "date": version}
+
+    return render(f"legal_{document}", data, f"{site_url.rstrip('/')}/{document}")

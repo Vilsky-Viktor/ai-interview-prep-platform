@@ -177,6 +177,70 @@ TEXTS = {
         "button": "Onderwerpen controleren",
         "footer": MEMBER_FOOTER,
     },
+    # Notices of a significant change to a legal document, sent at least 14 days before it
+    # applies; service emails, whatever the email settings.
+    "legal_terms": {
+        "subject": "prepza werkt de gebruiksvoorwaarden bij op {date}",
+        "preheader": "De nieuwe gebruiksvoorwaarden gelden vanaf {date}.",
+        "heading": "We werken onze gebruiksvoorwaarden bij",
+        "lines": [
+            (
+                "We hebben een nieuwe versie van de gebruiksvoorwaarden van prepza gepubliceerd. "
+                "Deze geldt vanaf {date}; tot die tijd gelden de huidige voorwaarden."
+            ),
+            (
+                "Als je prepza na {date} gebruikt, ga je akkoord met de nieuwe voorwaarden. Wil "
+                "je dat niet, dan kun je je account vóór die datum verwijderen in Instellingen."
+            ),
+        ],
+        "button": "Lees de nieuwe voorwaarden",
+        "footer": (
+            "Deze e-mail is naar {email} gestuurd omdat je een prepza-account hebt. Het is "
+            "een bericht over onze gebruiksvoorwaarden en wordt daarom altijd verstuurd, wat "
+            "je e-mailinstellingen ook zijn."
+        ),
+    },
+    "legal_privacy": {
+        "subject": "prepza werkt het privacybeleid bij op {date}",
+        "preheader": "Het nieuwe privacybeleid geldt vanaf {date}.",
+        "heading": "We werken ons privacybeleid bij",
+        "lines": [
+            (
+                "We hebben een nieuwe versie van het privacybeleid van prepza gepubliceerd, "
+                "waarin staat hoe we je gegevens gebruiken. Deze geldt vanaf {date}; tot die tijd "
+                "geldt de huidige versie."
+            ),
+            "Je kunt je gegevens altijd downloaden of verwijderen in Instellingen.",
+        ],
+        "button": "Lees het nieuwe privacybeleid",
+        "footer": (
+            "Deze e-mail is naar {email} gestuurd omdat je een prepza-account hebt. Het is "
+            "een bericht over hoe we je gegevens gebruiken en wordt daarom altijd verstuurd, "
+            "wat je e-mailinstellingen ook zijn."
+        ),
+    },
+    "legal_dpa": {
+        "subject": "prepza werkt de verwerkersovereenkomst bij op {date}",
+        "preheader": "De nieuwe overeenkomst geldt voor je bedrijf vanaf {date}.",
+        "heading": "We werken onze verwerkersovereenkomst bij",
+        "lines": [
+            (
+                "We hebben een nieuwe versie gepubliceerd van de verwerkersovereenkomst waaronder "
+                "prepza de gegevens van je kandidaten verwerkt. Deze geldt vanaf {date}; tot die "
+                "tijd geldt de huidige versie."
+            ),
+            (
+                "Een bedrijf dat om redelijke redenen van gegevensbescherming bezwaar maakt, kan "
+                "vóór die datum stoppen met prepza en zijn bedrijf verwijderen."
+            ),
+        ],
+        "button": "Lees de nieuwe overeenkomst",
+        "footer": (
+            "Deze e-mail is naar {email} gestuurd omdat je eigenaar of beheerder bent van een "
+            "bedrijf op prepza. Het is een bericht over onze overeenkomst met je bedrijf en "
+            "wordt daarom altijd verstuurd, wat je e-mailinstellingen ook zijn."
+        ),
+    },
     "top_up_failed": {
         "subject": "Automatisch opwaarderen mislukt voor {company}",
         "preheader": (

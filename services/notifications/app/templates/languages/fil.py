@@ -181,6 +181,72 @@ TEXTS = {
         "button": "I-review ang mga topic",
         "footer": MEMBER_FOOTER,
     },
+    # Notices of a significant change to a legal document, sent at least 14 days before it
+    # applies; service emails, whatever the email settings.
+    "legal_terms": {
+        "subject": "Ia-update ng prepza ang mga tuntunin nito sa {date}",
+        "preheader": "Ipapatupad ang bagong mga tuntunin simula {date}.",
+        "heading": "Ina-update namin ang aming mga tuntunin",
+        "lines": [
+            (
+                "Naglathala kami ng bagong bersyon ng mga tuntunin ng prepza. Ipapatupad ito "
+                "simula {date}; hanggang doon, ang kasalukuyang mga tuntunin ang umiiral."
+            ),
+            (
+                "Kapag ginamit mo ang prepza pagkatapos ng {date}, tinatanggap mo ang bagong mga "
+                "tuntunin. Kung hindi, puwede mong burahin ang iyong account sa Mga setting bago "
+                "ang petsang iyon."
+            ),
+        ],
+        "button": "Basahin ang bagong mga tuntunin",
+        "footer": (
+            "Ipinadala ang email na ito sa {email} dahil may prepza account ka. Abiso ito "
+            "tungkol sa aming mga tuntunin, kaya ipinapadala ito anuman ang iyong email "
+            "settings."
+        ),
+    },
+    "legal_privacy": {
+        "subject": "Ia-update ng prepza ang patakaran nito sa privacy sa {date}",
+        "preheader": "Ipapatupad ang bagong patakaran sa privacy simula {date}.",
+        "heading": "Ina-update namin ang aming patakaran sa privacy",
+        "lines": [
+            (
+                "Naglathala kami ng bagong bersyon ng patakaran sa privacy ng prepza, na "
+                "nagsasabi kung paano namin ginagamit ang data mo. Ipapatupad ito simula {date}; "
+                "hanggang doon, ang kasalukuyang bersyon ang umiiral."
+            ),
+            "Puwede mong i-download o burahin ang data mo sa Mga setting anumang oras.",
+        ],
+        "button": "Basahin ang bagong patakaran sa privacy",
+        "footer": (
+            "Ipinadala ang email na ito sa {email} dahil may prepza account ka. Abiso ito "
+            "tungkol sa kung paano namin ginagamit ang data mo, kaya ipinapadala ito anuman "
+            "ang iyong email settings."
+        ),
+    },
+    "legal_dpa": {
+        "subject": "Ia-update ng prepza ang data processing agreement nito sa {date}",
+        "preheader": "Ipapatupad sa kumpanya mo ang bagong kasunduan simula {date}.",
+        "heading": "Ina-update namin ang aming data processing agreement",
+        "lines": [
+            (
+                "Naglathala kami ng bagong bersyon ng data processing agreement na batayan ng "
+                "prepza sa pagproseso ng data ng mga aplikante mo. Ipapatupad ito simula {date}; "
+                "hanggang doon, ang kasalukuyang bersyon ang umiiral."
+            ),
+            (
+                "Ang kumpanyang tumututol dahil sa makatwirang dahilan tungkol sa proteksyon ng "
+                "data ay puwedeng tumigil sa paggamit ng prepza at burahin ang kumpanya nito bago "
+                "ang petsang iyon."
+            ),
+        ],
+        "button": "Basahin ang bagong kasunduan",
+        "footer": (
+            "Ipinadala ang email na ito sa {email} dahil ikaw ay may-ari o admin ng isang "
+            "kumpanya sa prepza. Abiso ito tungkol sa kasunduan namin sa kumpanya mo, kaya "
+            "ipinapadala ito anuman ang iyong email settings."
+        ),
+    },
     "top_up_failed": {
         "subject": "Pumalya ang awtomatikong top-up para sa {company}",
         "preheader": (

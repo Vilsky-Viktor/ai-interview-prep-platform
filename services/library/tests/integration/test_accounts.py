@@ -3,7 +3,7 @@ import uuid
 from prepza_common import http
 
 from app.integrations import accounts as account_services
-from app.storage import accounts, feedback
+from app.storage import accounts, feedback, legal
 from tests.integration.factories import interview, question_ids
 
 
@@ -52,3 +52,21 @@ def test_the_assistant_exports_and_deletes_a_users_conversations_for_library(run
         return exported
 
     assert run(scenario()) == {"assistant_conversations": [], "connected_ai_apps": []}
+
+
+def test_the_terms_accepted_are_kept_once_exported_and_deleted_with_the_account(run):
+    user_id = f"terms-{uuid.uuid4()}"
+
+    async def scenario():
+        await legal.accept_terms(user_id, "2026-10-10")
+        # A retried sign-up keeps the first acceptance.
+        await legal.accept_terms(user_id, "2026-10-10")
+        exported = await accounts.export(user_id)
+        await accounts.delete_user(user_id)
+
+        return exported, await legal.accepted_terms(user_id)
+
+    exported, left = run(scenario())
+
+    assert [item["version"] for item in exported["terms_accepted"]] == ["2026-10-10"]
+    assert left == []

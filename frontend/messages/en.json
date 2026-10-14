@@ -71,7 +71,7 @@
     "title": "Sign in",
     "continueWith": "Continue with <name>{provider}</name>",
     "link": "This email already has a prepza account. Continue the way you signed in before, and {provider} will be linked to it.",
-    "consent": "By signing in, you confirm you're 16 or older and agree to the <terms>Terms</terms> and the <privacy>Privacy policy</privacy>.",
+    "consent": "By signing in, you confirm you're 16 or older, agree to the <terms>Terms</terms> and have read the <privacy>Privacy policy</privacy>.",
     "failed": "Sign-in failed. Please try again.",
     "verify": "We sent you a link to verify your email. Open it, then sign in again to take interviews.",
     "noUpdates": "Don't send me product updates and news",
@@ -272,7 +272,29 @@
     "companyDeleted": "The company was deleted.",
     "renameCompanyTitle": "Rename the company",
     "companyName": "Company name",
-    "companyRenamed": "The company was renamed."
+    "companyRenamed": "The company was renamed.",
+    "legalTitle": "Legal notices",
+    "legalText": "Email a significant change to a legal document, at least 14 days before its new version applies.",
+    "legalDocuments": {
+      "terms": "Terms",
+      "privacy": "Privacy policy",
+      "dpa": "Data processing agreement"
+    },
+    "legalStates": {
+      "in_force": "In force since {date}. To email a change, give its new version a day at least 14 days ahead.",
+      "sendable": "Applies from {date}.",
+      "too_late": "Applies from {date}. A change is emailed at least 14 days before it applies.",
+      "sending": "Applies from {date}. Being emailed.",
+      "sent": "Applies from {date}. Emailed."
+    },
+    "legalSend": "Email the change",
+    "legalConfirmTitle": "Email the change to the {document}?",
+    "legalAudience": {
+      "everyone": "Everyone with a prepza account gets it from the next morning, saying the new version applies from {date}. It goes out once and can't be taken back.",
+      "company_editors": "Every company's owners and admins get it from the next morning, saying the new version applies from {date}. It goes out once and can't be taken back."
+    },
+    "legalAsked": "The change will be emailed from the next morning.",
+    "legalFailed": "Couldn't ask for the email. Please try again."
   },
   "templates": {
     "title": "Templates",
@@ -700,8 +722,12 @@
     "homeTitle": "Skills tests for hiring, made from your job description"
   },
   "legal": {
-    "updated": "Last updated",
-    "englishOnly": ""
+    "englishOnly": "",
+    "inForce": "In force since {date}",
+    "upcoming": "Applies from {date}.",
+    "replaced": "This version applied from {date} and has been replaced.",
+    "readInForce": "Read the version in force now",
+    "versions": "All versions"
   },
   "docs": {
     "title": "Docs",

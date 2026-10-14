@@ -195,4 +195,7 @@ MESSAGES = {
     "integrations": "การเชื่อมต่อระบบ",
     "This company doesn't allow AI apps. Its owner or an admin can allow them on its AI apps page.": "บริษัทนี้ไม่อนุญาตให้ใช้แอป AI เจ้าของหรือผู้ดูแลสามารถอนุญาตได้ในหน้าแอป AI ของบริษัท",
     "Only the company's owner or an admin can change this, in prepza itself.": "มีเพียงเจ้าของบริษัทหรือผู้ดูแลเท่านั้นที่เปลี่ยนค่านี้ได้ โดยทำใน prepza เอง",
+    "This document has no such version.": "เอกสารนี้ไม่มีเวอร์ชันดังกล่าว",
+    "A notice goes out at least 14 days before the new version applies: give it a later date.": "ประกาศจะส่งออกอย่างน้อย 14 วันก่อนเวอร์ชันใหม่มีผล โปรดกำหนดวันที่ให้ช้ากว่านี้",
+    "This version's notice was already sent.": "ส่งประกาศของเวอร์ชันนี้ไปแล้ว",
 }

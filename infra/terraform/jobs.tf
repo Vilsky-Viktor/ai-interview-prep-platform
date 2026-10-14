@@ -38,6 +38,9 @@ locals {
     # reminders from 8:00.
     member-digest    = { service = "notifications", path = "/internal/schedules/digest", cron = "* 7 * * *" }
     member-reminders = { service = "notifications", path = "/internal/schedules/reminders", cron = "* 8 * * *" }
+    # Notices of a legal document's change a superadmin asked for, in the morning after (UTC),
+    # the same way; at least 14 days before the change applies.
+    legal-notices = { service = "notifications", path = "/internal/schedules/legal-notices", cron = "* 9 * * *" }
     # ATS candidates still waiting or whose invite stalled, results kept while a connection was
     # broken or the ATS failed, and candidates past their retention.
     ats-recover = { service = "ats", path = "/internal/schedules/recover", cron = "*/10 * * * *" }

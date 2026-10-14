@@ -71,7 +71,7 @@
     "title": "Anmelden",
     "continueWith": "Weiter mit <name>{provider}</name>",
     "link": "Für diese E-Mail-Adresse gibt es bereits ein prepza-Konto. Melde dich so an wie beim letzten Mal, dann wird {provider} damit verknüpft.",
-    "consent": "Mit der Anmeldung bestätigst du, dass du mindestens 16 Jahre alt bist, und akzeptierst die <terms>Nutzungsbedingungen</terms> und die <privacy>Datenschutzerklärung</privacy>.",
+    "consent": "Mit der Anmeldung bestätigst du, dass du mindestens 16 Jahre alt bist, akzeptierst die <terms>Nutzungsbedingungen</terms> und hast die <privacy>Datenschutzerklärung</privacy> gelesen.",
     "failed": "Die Anmeldung ist fehlgeschlagen. Bitte versuche es erneut.",
     "verify": "Wir haben dir einen Link zur Bestätigung deiner E-Mail-Adresse geschickt. Öffne ihn und melde dich dann erneut an, um Interviews zu machen.",
     "noUpdates": "Ich möchte keine Produkt-Updates und Neuigkeiten erhalten",
@@ -272,7 +272,29 @@
     "companyDeleted": "Das Unternehmen wurde gelöscht.",
     "renameCompanyTitle": "Unternehmen umbenennen",
     "companyName": "Name des Unternehmens",
-    "companyRenamed": "Das Unternehmen wurde umbenannt."
+    "companyRenamed": "Das Unternehmen wurde umbenannt.",
+    "legalTitle": "Rechtliche Hinweise",
+    "legalText": "Eine wesentliche Änderung an einem Rechtsdokument per E-Mail ankündigen, mindestens 14 Tage bevor die neue Version gilt.",
+    "legalDocuments": {
+      "terms": "Nutzungsbedingungen",
+      "privacy": "Datenschutzerklärung",
+      "dpa": "Auftragsverarbeitungsvertrag"
+    },
+    "legalStates": {
+      "in_force": "Gültig seit {date}. Um eine Änderung per E-Mail anzukündigen, gib der neuen Version ein Datum mindestens 14 Tage im Voraus.",
+      "sendable": "Gilt ab {date}.",
+      "too_late": "Gilt ab {date}. Eine Änderung wird mindestens 14 Tage vor ihrem Inkrafttreten angekündigt.",
+      "sending": "Gilt ab {date}. Wird verschickt.",
+      "sent": "Gilt ab {date}. Verschickt."
+    },
+    "legalSend": "Änderung per E-Mail ankündigen",
+    "legalConfirmTitle": "Die Änderung an {document} per E-Mail ankündigen?",
+    "legalAudience": {
+      "everyone": "Alle mit einem prepza-Konto erhalten sie ab dem nächsten Morgen, mit dem Hinweis, dass die neue Version ab {date} gilt. Sie wird einmal verschickt und lässt sich nicht zurücknehmen.",
+      "company_editors": "Die Inhaber und Admins aller Unternehmen erhalten sie ab dem nächsten Morgen, mit dem Hinweis, dass die neue Version ab {date} gilt. Sie wird einmal verschickt und lässt sich nicht zurücknehmen."
+    },
+    "legalAsked": "Die Änderung wird ab dem nächsten Morgen per E-Mail angekündigt.",
+    "legalFailed": "Die E-Mail konnte nicht angefordert werden. Bitte versuche es erneut."
   },
   "templates": {
     "title": "Vorlagen",
@@ -700,8 +722,12 @@
     "homeTitle": "Einstellungstest aus deiner Stellenbeschreibung erstellen"
   },
   "legal": {
-    "updated": "Zuletzt aktualisiert",
-    "englishOnly": "Dieses Dokument ist nur auf Englisch verfügbar."
+    "englishOnly": "Dieses Dokument ist nur auf Englisch verfügbar.",
+    "inForce": "Gültig seit {date}",
+    "upcoming": "Gilt ab {date}.",
+    "replaced": "Diese Version galt ab {date} und wurde ersetzt.",
+    "readInForce": "Die jetzt gültige Version lesen",
+    "versions": "Alle Versionen"
   },
   "docs": {
     "title": "Dokumente",

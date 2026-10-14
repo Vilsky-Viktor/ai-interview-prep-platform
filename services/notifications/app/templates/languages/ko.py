@@ -129,6 +129,41 @@ TEXTS = {
         "button": "주제 검토하기",
         "footer": MEMBER_FOOTER,
     },
+    # Notices of a significant change to a legal document, sent at least 14 days before it
+    # applies; service emails, whatever the email settings.
+    "legal_terms": {
+        "subject": "prepza 이용약관이 {date}에 변경됩니다",
+        "preheader": "새 이용약관은 {date}부터 적용됩니다.",
+        "heading": "이용약관이 변경됩니다",
+        "lines": [
+            "prepza 이용약관의 새 버전을 게시했습니다. {date}부터 적용되며, 그 전까지는 현재 이용약관이 적용됩니다.",
+            "{date} 이후에 prepza를 이용하면 새 이용약관에 동의한 것으로 간주됩니다. 동의하지 않으면 그 전에 설정에서 계정을 삭제할 수 있습니다.",
+        ],
+        "button": "새 이용약관 보기",
+        "footer": "prepza 계정이 있으므로 {email}(으)로 이 이메일이 발송되었습니다. 이용약관에 관한 안내이므로 이메일 설정과 관계없이 발송됩니다.",
+    },
+    "legal_privacy": {
+        "subject": "prepza 개인정보처리방침이 {date}에 변경됩니다",
+        "preheader": "새 개인정보처리방침은 {date}부터 적용됩니다.",
+        "heading": "개인정보처리방침이 변경됩니다",
+        "lines": [
+            "데이터 이용 방식을 설명하는 prepza 개인정보처리방침의 새 버전을 게시했습니다. {date}부터 적용되며, 그 전까지는 현재 버전이 적용됩니다.",
+            "언제든지 설정에서 데이터를 다운로드하거나 삭제할 수 있습니다.",
+        ],
+        "button": "새 개인정보처리방침 보기",
+        "footer": "prepza 계정이 있으므로 {email}(으)로 이 이메일이 발송되었습니다. 데이터 이용 방식에 관한 안내이므로 이메일 설정과 관계없이 발송됩니다.",
+    },
+    "legal_dpa": {
+        "subject": "prepza 데이터 처리 계약이 {date}에 변경됩니다",
+        "preheader": "새 계약은 {date}부터 회사에 적용됩니다.",
+        "heading": "데이터 처리 계약이 변경됩니다",
+        "lines": [
+            "prepza가 지원자 데이터를 처리하는 근거인 데이터 처리 계약의 새 버전을 게시했습니다. {date}부터 적용되며, 그 전까지는 현재 버전이 적용됩니다.",
+            "데이터 보호와 관련된 합리적인 이유로 이의가 있는 회사는 그 전에 prepza 이용을 중단하고 회사를 삭제할 수 있습니다.",
+        ],
+        "button": "새 계약 보기",
+        "footer": "prepza에서 회사의 소유자 또는 관리자이므로 {email}(으)로 이 이메일이 발송되었습니다. 회사와의 계약에 관한 안내이므로 이메일 설정과 관계없이 발송됩니다.",
+    },
     "top_up_failed": {
         "subject": "{company}의 자동 충전에 실패했습니다",
         "preheader": "카드 결제에 실패했습니다. 지원자를 계속 초대하려면 충전하세요.",

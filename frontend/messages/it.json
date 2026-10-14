@@ -71,7 +71,7 @@
     "title": "Accedi",
     "continueWith": "Continua con <name>{provider}</name>",
     "link": "Questa email ha già un account prepza. Continua come hai fatto l'ultima volta e {provider} verrà collegato.",
-    "consent": "Accedendo, confermi di avere almeno 16 anni e accetti i <terms>Termini</terms> e l’<privacy>Informativa sulla privacy</privacy>.",
+    "consent": "Accedendo, confermi di avere almeno 16 anni, accetti i <terms>Termini</terms> e di aver letto l’<privacy>Informativa sulla privacy</privacy>.",
     "failed": "Accesso non riuscito. Riprova.",
     "verify": "Ti abbiamo inviato un link per verificare la tua email. Aprilo, poi accedi di nuovo per svolgere i colloqui.",
     "noUpdates": "Non inviarmi novità sul prodotto e notizie",
@@ -272,7 +272,29 @@
     "companyDeleted": "L'azienda è stata eliminata.",
     "renameCompanyTitle": "Rinomina l'azienda",
     "companyName": "Nome dell'azienda",
-    "companyRenamed": "L'azienda è stata rinominata."
+    "companyRenamed": "L'azienda è stata rinominata.",
+    "legalTitle": "Avvisi legali",
+    "legalText": "Comunica via email una modifica importante a un documento legale, almeno 14 giorni prima che la nuova versione si applichi.",
+    "legalDocuments": {
+      "terms": "Termini",
+      "privacy": "Informativa sulla privacy",
+      "dpa": "Accordo sul trattamento dei dati"
+    },
+    "legalStates": {
+      "in_force": "In vigore dal {date}. Per comunicare una modifica, dai alla nuova versione una data almeno 14 giorni dopo.",
+      "sendable": "Si applica dal {date}.",
+      "too_late": "Si applica dal {date}. Una modifica si comunica almeno 14 giorni prima che si applichi.",
+      "sending": "Si applica dal {date}. In invio.",
+      "sent": "Si applica dal {date}. Inviato."
+    },
+    "legalSend": "Comunica la modifica",
+    "legalConfirmTitle": "Comunicare via email la modifica a: {document}?",
+    "legalAudience": {
+      "everyone": "Chiunque abbia un account prepza la riceve dalla mattina successiva, con l'indicazione che la nuova versione si applica dal {date}. Parte una volta sola e non si può annullare.",
+      "company_editors": "I proprietari e gli amministratori di ogni azienda la ricevono dalla mattina successiva, con l'indicazione che la nuova versione si applica dal {date}. Parte una volta sola e non si può annullare."
+    },
+    "legalAsked": "La modifica sarà comunicata via email dalla mattina successiva.",
+    "legalFailed": "Impossibile richiedere l'invio. Riprova."
   },
   "templates": {
     "title": "Modelli",
@@ -700,8 +722,12 @@
     "homeTitle": "Test di selezione del personale creati dal tuo annuncio"
   },
   "legal": {
-    "updated": "Ultimo aggiornamento",
-    "englishOnly": "Questo documento è disponibile solo in inglese."
+    "englishOnly": "Questo documento è disponibile solo in inglese.",
+    "inForce": "In vigore dal {date}",
+    "upcoming": "Si applica dal {date}.",
+    "replaced": "Questa versione si applicava dal {date} ed è stata sostituita.",
+    "readInForce": "Leggi la versione in vigore",
+    "versions": "Tutte le versioni"
   },
   "docs": {
     "title": "Documenti",

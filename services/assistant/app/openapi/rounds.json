@@ -1008,7 +1008,7 @@
      "help"
     ],
     "summary": "Get Legal",
-    "description": "The terms or the privacy policy, in English only; public.",
+    "description": "The terms, the privacy policy or the DPA: the current version, or an earlier one, with\nevery published version (the day each applies from); public.",
     "operationId": "get_legal_help_legal__document__get",
     "parameters": [
      {
@@ -1017,6 +1017,23 @@
       "required": true,
       "schema": {
        "$ref": "#/components/schemas/LegalDocument"
+      }
+     },
+     {
+      "name": "version",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "maxLength": 10
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Version"
       }
      }
     ],
@@ -1990,9 +2007,33 @@
       "type": "string",
       "title": "Intro"
      },
-     "updated": {
+     "version": {
       "type": "string",
-      "title": "Updated"
+      "title": "Version"
+     },
+     "state": {
+      "type": "string",
+      "enum": [
+       "in_force",
+       "upcoming",
+       "replaced"
+      ],
+      "title": "State"
+     },
+     "current": {
+      "type": "string",
+      "title": "Current"
+     },
+     "in_force": {
+      "type": "string",
+      "title": "In Force"
+     },
+     "versions": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Versions"
      },
      "sections": {
       "items": {
@@ -2005,7 +2046,11 @@
     "type": "object",
     "required": [
      "intro",
-     "updated",
+     "version",
+     "state",
+     "current",
+     "in_force",
+     "versions",
      "sections"
     ],
     "title": "LegalOut"

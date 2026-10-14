@@ -177,6 +177,70 @@ TEXTS = {
         "button": "Duyệt các chủ đề",
         "footer": MEMBER_FOOTER,
     },
+    # Notices of a significant change to a legal document, sent at least 14 days before it
+    # applies; service emails, whatever the email settings.
+    "legal_terms": {
+        "subject": "prepza cập nhật điều khoản sử dụng vào {date}",
+        "preheader": "Điều khoản sử dụng mới có hiệu lực từ {date}.",
+        "heading": "Chúng tôi cập nhật điều khoản sử dụng",
+        "lines": [
+            (
+                "Chúng tôi đã công bố phiên bản mới của điều khoản sử dụng prepza. Phiên bản này "
+                "có hiệu lực từ {date}; trước đó, điều khoản hiện hành vẫn được áp dụng."
+            ),
+            (
+                "Nếu bạn tiếp tục dùng prepza sau {date}, nghĩa là bạn chấp nhận điều khoản mới. "
+                "Nếu không đồng ý, bạn có thể xóa tài khoản trong Cài đặt trước ngày đó."
+            ),
+        ],
+        "button": "Đọc điều khoản mới",
+        "footer": (
+            "Email này được gửi đến {email} vì bạn có tài khoản prepza. Đây là thông báo về "
+            "điều khoản sử dụng của chúng tôi nên luôn được gửi, bất kể cài đặt email của "
+            "bạn."
+        ),
+    },
+    "legal_privacy": {
+        "subject": "prepza cập nhật chính sách quyền riêng tư vào {date}",
+        "preheader": "Chính sách quyền riêng tư mới có hiệu lực từ {date}.",
+        "heading": "Chúng tôi cập nhật chính sách quyền riêng tư",
+        "lines": [
+            (
+                "Chúng tôi đã công bố phiên bản mới của chính sách quyền riêng tư prepza, cho "
+                "biết cách chúng tôi sử dụng dữ liệu của bạn. Phiên bản này có hiệu lực từ "
+                "{date}; trước đó, phiên bản hiện hành vẫn được áp dụng."
+            ),
+            "Bạn có thể tải xuống hoặc xóa dữ liệu của mình trong Cài đặt bất cứ lúc nào.",
+        ],
+        "button": "Đọc chính sách quyền riêng tư mới",
+        "footer": (
+            "Email này được gửi đến {email} vì bạn có tài khoản prepza. Đây là thông báo về "
+            "cách chúng tôi sử dụng dữ liệu của bạn nên luôn được gửi, bất kể cài đặt email "
+            "của bạn."
+        ),
+    },
+    "legal_dpa": {
+        "subject": "prepza cập nhật thỏa thuận xử lý dữ liệu vào {date}",
+        "preheader": "Thỏa thuận mới áp dụng cho công ty bạn từ {date}.",
+        "heading": "Chúng tôi cập nhật thỏa thuận xử lý dữ liệu",
+        "lines": [
+            (
+                "Chúng tôi đã công bố phiên bản mới của thỏa thuận xử lý dữ liệu mà prepza dựa "
+                "vào để xử lý dữ liệu ứng viên của bạn. Phiên bản này có hiệu lực từ {date}; "
+                "trước đó, phiên bản hiện hành vẫn được áp dụng."
+            ),
+            (
+                "Công ty nào phản đối vì lý do bảo vệ dữ liệu hợp lý có thể ngừng sử dụng prepza "
+                "và xóa công ty của mình trước ngày đó."
+            ),
+        ],
+        "button": "Đọc thỏa thuận mới",
+        "footer": (
+            "Email này được gửi đến {email} vì bạn là chủ sở hữu hoặc quản trị viên của một "
+            "công ty trên prepza. Đây là thông báo về thỏa thuận giữa chúng tôi và công ty "
+            "bạn nên luôn được gửi, bất kể cài đặt email của bạn."
+        ),
+    },
     "top_up_failed": {
         "subject": "Tự động nạp cho {company} không thành công",
         "preheader": "Không trừ tiền được từ thẻ. Hãy nạp thêm để tiếp tục mời ứng viên.",

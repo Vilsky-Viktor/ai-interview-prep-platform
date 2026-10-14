@@ -71,7 +71,7 @@
     "title": "로그인",
     "continueWith": "<name>{provider}</name> 계정으로 계속",
     "link": "이 이메일에는 이미 prepza 계정이 있습니다. 이전에 로그인한 방법으로 계속하면 {provider}이(가) 해당 계정에 연결됩니다.",
-    "consent": "로그인하면 만 16세 이상임을 확인하고 <terms>이용약관</terms> 및 <privacy>개인정보처리방침</privacy>에 동의하는 것으로 간주됩니다.",
+    "consent": "로그인하면 만 16세 이상임을 확인하고, <terms>이용약관</terms>에 동의하며, <privacy>개인정보처리방침</privacy>을 읽은 것으로 간주됩니다.",
     "failed": "로그인하지 못했습니다. 다시 시도해 주세요.",
     "verify": "이메일 인증 링크를 보냈습니다. 링크를 연 다음 다시 로그인하면 면접을 볼 수 있습니다.",
     "noUpdates": "제품 업데이트 및 소식 받지 않기",
@@ -272,7 +272,29 @@
     "companyDeleted": "회사를 삭제했습니다.",
     "renameCompanyTitle": "회사 이름 변경",
     "companyName": "회사 이름",
-    "companyRenamed": "회사 이름을 변경했습니다."
+    "companyRenamed": "회사 이름을 변경했습니다.",
+    "legalTitle": "법적 고지",
+    "legalText": "법적 문서의 중요한 변경 사항을 새 버전 적용 최소 14일 전에 이메일로 알립니다.",
+    "legalDocuments": {
+      "terms": "이용약관",
+      "privacy": "개인정보 처리방침",
+      "dpa": "데이터 처리 계약"
+    },
+    "legalStates": {
+      "in_force": "{date}부터 시행 중. 변경 사항을 이메일로 알리려면 새 버전의 날짜를 최소 14일 뒤로 지정하세요.",
+      "sendable": "{date}부터 적용.",
+      "too_late": "{date}부터 적용. 변경 사항은 적용 최소 14일 전에 이메일로 알립니다.",
+      "sending": "{date}부터 적용. 발송 중.",
+      "sent": "{date}부터 적용. 발송 완료."
+    },
+    "legalSend": "변경 사항 이메일로 알리기",
+    "legalConfirmTitle": "{document} 변경 사항을 이메일로 알릴까요?",
+    "legalAudience": {
+      "everyone": "prepza 계정이 있는 모든 사람이 다음 날 아침부터 새 버전이 {date}부터 적용된다는 안내를 받습니다. 한 번만 발송되며 취소할 수 없습니다.",
+      "company_editors": "모든 회사의 소유자와 관리자가 다음 날 아침부터 새 버전이 {date}부터 적용된다는 안내를 받습니다. 한 번만 발송되며 취소할 수 없습니다."
+    },
+    "legalAsked": "다음 날 아침부터 변경 사항이 이메일로 발송됩니다.",
+    "legalFailed": "이메일을 요청하지 못했습니다. 다시 시도해 주세요."
   },
   "templates": {
     "title": "템플릿",
@@ -700,8 +722,12 @@
     "homeTitle": "채용 공고로 만드는 직무 역량 테스트"
   },
   "legal": {
-    "updated": "최종 업데이트",
-    "englishOnly": "이 문서는 영어로만 제공됩니다."
+    "englishOnly": "이 문서는 영어로만 제공됩니다.",
+    "inForce": "{date}부터 시행",
+    "upcoming": "{date}부터 적용됩니다.",
+    "replaced": "이 버전은 {date}부터 적용되었으며 이후 대체되었습니다.",
+    "readInForce": "현재 시행 중인 버전 읽기",
+    "versions": "모든 버전"
   },
   "docs": {
     "title": "문서",

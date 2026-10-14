@@ -73,3 +73,15 @@ def test_firebase_is_asked_at_most_a_hundred_at_a_time(client, monkeypatch):
     )
 
     assert sizes == [100, 100, 50]
+
+
+def test_every_account_is_listed_for_a_notice_to_everyone(client, monkeypatch):
+    accounts = SimpleNamespace(
+        iterate_all=lambda: iter([account("ann", "a@x.io"), account("bob", None)])
+    )
+    monkeypatch.setattr(firebase_auth, "list_users", lambda: accounts)
+
+    response = client.get("/internal/users/ids", headers=HEADERS)
+
+    assert response.json() == {"user_ids": ["ann", "bob"]}
+    assert client.get("/internal/users/ids").status_code in (401, 403)

@@ -2461,6 +2461,33 @@
     }
    }
   },
+  "/internal/users/ids": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "User Ids",
+    "description": "Notifications, for a notice about the terms or the privacy policy: every account.",
+    "operationId": "user_ids_internal_users_ids_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/UserIdsOut"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
   "/internal/users/{user_id}/email-preferences": {
    "get": {
     "tags": [
@@ -5157,6 +5184,22 @@
     ],
     "title": "UserEmailIn",
     "description": "An email address sent in the body, so request logs don't record it: the account's, in\nlibrary's calls to delete or export a user's data, or the one a superadmin looks up."
+   },
+   "UserIdsOut": {
+    "properties": {
+     "user_ids": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "User Ids"
+     }
+    },
+    "type": "object",
+    "required": [
+     "user_ids"
+    ],
+    "title": "UserIdsOut"
    },
    "ValidationError": {
     "properties": {

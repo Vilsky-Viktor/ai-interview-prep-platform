@@ -207,4 +207,7 @@ MESSAGES = {
     "integrations": "integratsioonid",
     "This company doesn't allow AI apps. Its owner or an admin can allow them on its AI apps page.": "See ettevõte ei luba tehisintellekti rakendusi. Selle omanik või administraator saab need lubada ettevõtte tehisintellekti rakenduste lehel.",
     "Only the company's owner or an admin can change this, in prepza itself.": "Seda saab muuta ainult ettevõtte omanik või administraator ja ainult prepzas endas.",
+    "This document has no such version.": "Sellel dokumendil pole sellist versiooni.",
+    "A notice goes out at least 14 days before the new version applies: give it a later date.": "Teade läheb välja vähemalt 14 päeva enne uue versiooni kehtima hakkamist: anna sellele hilisem kuupäev.",
+    "This version's notice was already sent.": "Selle versiooni teade on juba saadetud.",
 }
