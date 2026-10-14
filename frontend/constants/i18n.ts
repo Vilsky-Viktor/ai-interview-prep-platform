@@ -65,3 +65,26 @@ export const LANGUAGE_NAMES: Record<Locale, string> = {
 }
 
 export type Locale = (typeof LOCALES)[number]
+
+// Message groups only server components read: the browser never gets them (lib/messages.ts),
+// and tests/messages/client-namespaces.test.ts fails if a client component starts using one.
+export const SERVER_ONLY_MESSAGES = [
+  "about",
+  "apiDocs",
+  "compare",
+  "content",
+  "docs",
+  "faq",
+  "guides",
+  "home",
+  "legal",
+  "maintenance",
+  "pause",
+  "pricing",
+  "site",
+  "tests",
+  "topUp",
+] as const
+
+// Groups the browser gets only in the admin zone (app/superadmin/layout.tsx).
+export const ADMIN_MESSAGES = ["superadmin"] as const

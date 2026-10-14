@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { headers } from "next/headers"
 import { NextIntlClientProvider } from "next-intl"
-import { getLocale, getTranslations } from "next-intl/server"
+import { getLocale, getMessages, getTranslations } from "next-intl/server"
 
 import "./globals.css"
 import { AssistantProvider } from "@/components/assistant/assistant-provider"
@@ -22,6 +22,7 @@ import { FONT_VARIABLES } from "@/constants/fonts"
 import { CJK_LOCALES, type Locale } from "@/constants/i18n"
 import { SITE_NAME } from "@/constants/seo"
 import { textDirection } from "@/lib/locale"
+import { clientMessages } from "@/lib/messages"
 import { previewImage, siteUrl, urlLocale } from "@/lib/site"
 import { cn } from "cn"
 
@@ -73,7 +74,8 @@ export default async function RootLayout({
           flex column would otherwise shrink them to their content. */}
       <body className="flex min-h-svh flex-col">
         {CJK_LOCALES.includes(locale as Locale) && <CjkFonts />}
-        <NextIntlClientProvider>
+        {/* Only what client components use: the admin zone adds its own (its layout). */}
+        <NextIntlClientProvider messages={clientMessages(await getMessages())}>
           <UrlLocaleProvider locale={await urlLocale()}>
             <ThemeProvider nonce={nonce}>
               <AuthProvider>
