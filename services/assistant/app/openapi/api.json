@@ -796,6 +796,17 @@
       "title": "Return Url",
       "description": "Where to take the candidate once they've finished, optional: an https address on the company's verified website domain (or a subdomain of it); see Verified companies. The finished page shows a button to it, with `prepza_invite=<candidate id>` added to its query"
      },
+     "theme": {
+      "type": "string",
+      "enum": [
+       "light",
+       "dark",
+       "default"
+      ],
+      "title": "Theme",
+      "description": "The theme the candidate's pages show, in your company's colors for it: `light` or `dark` always shows that theme, `default` the candidate's own. A `theme` added to the `invite_url` (`?theme=dark`) or given to the SDK wins over it",
+      "default": "default"
+     },
      "sign_in": {
       "type": "boolean",
       "title": "Sign In",

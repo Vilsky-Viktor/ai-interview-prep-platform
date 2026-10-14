@@ -497,6 +497,7 @@
     "team": "Equipo",
     "integrations": "Integraciones",
     "referrals": "Recomendaciones",
+    "brand": "Marca",
     "billing": "Facturación",
     "new": "Nueva empresa",
     "name": "Nombre de la empresa",
@@ -1378,6 +1379,67 @@
     "createFailed": "No se pudo crear.",
     "removeFailed": "No se pudo eliminar."
   },
+  "brand": {
+    "logoTitle": "Logo",
+    "logoText": "Los candidatos lo ven en su invitación, durante la entrevista y en los correos.",
+    "colorsTitle": "Colores",
+    "colorsText": "Los candidatos ven el proceso de la entrevista con estos colores, en claro u oscuro según su propia configuración o según lo pida tu enlace, la API o el SDK. Todo texto debe seguir siendo fácil de leer, así que no se pueden guardar colores con poco contraste.",
+    "groups": {
+      "page": {
+        "name": "Página",
+        "text": "El fondo, y los títulos y las preguntas sobre él."
+      },
+      "primary": {
+        "name": "Principal",
+        "text": "Los botones, el contorno de la respuesta elegida, el temporizador y los enlaces, y el texto de los botones."
+      },
+      "secondary": {
+        "name": "Secundario",
+        "text": "Rellenos como el recuadro de reglas y la respuesta elegida, y el texto gris: pistas y letras de las respuestas."
+      },
+      "dialogs": {
+        "name": "Diálogos",
+        "text": "Ventanas como “¿Terminar toda la entrevista?”: su fondo y su texto."
+      },
+      "borders": {
+        "name": "Bordes",
+        "text": "Las líneas alrededor de las respuestas y entre las partes de la página."
+      }
+    },
+    "colors": {
+      "background": "Fondo",
+      "foreground": "Texto",
+      "primary": "Color",
+      "primary_foreground": "Texto",
+      "muted": "Relleno",
+      "muted_foreground": "Texto",
+      "card": "Fondo",
+      "card_foreground": "Texto",
+      "border": "Líneas"
+    },
+    "save": "Guardar",
+    "saved": "Guardado",
+    "styleTitle": "Fuente y esquinas",
+    "styleText": "Todo el texto en una sola fuente y lo redondeadas que son las esquinas de las tarjetas y los botones, igual en ambos temas.",
+    "font": "Fuente",
+    "radius": "Redondeo de tarjetas",
+    "buttonRadius": "Redondeo de botones",
+    "reset": "Restablecer",
+    "resetPrepza": "Volver a los valores de prepza",
+    "themes": {
+      "light": "Tema claro",
+      "dark": "Tema oscuro"
+    },
+    "resetDone": "De vuelta a los valores predeterminados de prepza",
+    "failed": "No se pudo guardar la marca.",
+    "preview": "Vista previa",
+    "sampleTitle": "Responsable de RR. HH.",
+    "sampleQuestion": "¿Cómo saben los candidatos de un vistazo que una página de entrevista es de tu empresa?",
+    "sampleOptions": [
+      "Muestra tu logo y los colores de tu marca",
+      "Se ve exactamente igual que la entrevista de cualquier otra empresa"
+    ]
+  },
   "apiDocs": {
     "title": "Documentación para desarrolladores",
     "intro": "Conecta prepza con tu propia plataforma: consulta tus entrevistas, invita a candidatos, obtén sus resultados e integra la entrevista en tu propio sitio web.",
@@ -1865,6 +1927,20 @@
       "tips": [
         "Una clave nueva y el secreto de un webhook se muestran solo una vez: cópialos de inmediato.",
         "Elige una caducidad para cada clave: una clave filtrada que nunca caduca sigue siendo utilizable."
+      ]
+    },
+    "brand": {
+      "title": "Marca",
+      "text": "Tu logo y tus colores en la invitación, la entrevista y la página final de tus candidatos.",
+      "actions": [
+        "Pon o cambia el logo.",
+        "Elige la fuente y lo redondeadas que son las tarjetas y los botones.",
+        "Elige los colores de cada grupo y míralos en la vista previa.",
+        "Guárdalos o vuelve a los colores de prepza."
+      ],
+      "tips": [
+        "Los colores con los que el texto costaría leer no se pueden guardar, para que todos los candidatos puedan leer las preguntas.",
+        "Los miembros del equipo que prueban una entrevista también la ven con tus colores."
       ]
     },
     "referrals": {

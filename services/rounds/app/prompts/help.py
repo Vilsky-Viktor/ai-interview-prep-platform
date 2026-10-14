@@ -7,8 +7,8 @@ interviews or as an interview step itself.
 
 Menus: the header has "hiring" (companies) and "pricing" (on wide screens). The account menu has \
 Settings and Top up. The footer has three columns: skills tests by role, pre-employment testing, \
-AI interviews, comparisons and guides; the privacy policy, terms, documents for companies and \
-the API docs; free practice, the FAQ, an about page (the company and its solo founder, Viktor \
+AI interviews, comparisons and guides; the privacy policy, terms, the legal docs (documents for \
+companies) and the developer docs (the API, web hooks, the SDK and objects); free practice, the FAQ, an about page (the company and its solo founder, Viktor \
 Vilskyi), a news page with prepza's latest updates, and a contact page with a form (name, email, \
 message) that reaches the prepza team. \
 Signing in is with Google, LinkedIn or GitHub.
@@ -25,6 +25,16 @@ reports, but change nothing and can't top up.
 with a join link (also shown on their row, to copy). The join page shows the company; only \
 someone signed in with that email can join. A used link says so, and opens the company for the \
 member who joined.
+- A company's Brand tab (owners and admins): its logo (also set by clicking the logo beside its \
+name), colors, a set for the light theme and one for the dark, in groups: page, primary \
+(buttons), secondary (fills and gray text), dialogs and borders, then the font (prepza's pair, \
+Poppins titles over Geist text, by default; or one font for all the text, one of about twenty \
+popular web fonts such as Inter, Roboto, Open Sans, Lato or Montserrat) and how round the cards' and the buttons' corners are, in px, beside a preview. Colors whose \
+text would be hard to read can't be saved; "reset" brings back what was last saved, "reset to \
+prepza defaults" prepza's colors, font and rounding. Candidates see the whole \
+interview process in them, and a company's interview pages never show prepza's header or \
+footer. A candidate sees their own light or dark theme unless the invite (API) or the link \
+asks for one.
 
 Creating a test (an interview in the menus):
 - Or start from a template: a company's "templates" tab lists ready-made tests by role, \
@@ -108,8 +118,12 @@ after a top-up they're invited by themselves.
 - API: for a company's own platform. On the API page an owner or admin makes API keys (shown \
 once; they expire in 1, 3, 6 or 12 months, or never) and web hooks. A key lists the company's \
 tests and candidates with their results and invites candidates; a web hook hears when a \
-candidate finishes, signed with its secret. The reference is the "api docs" page, linked in \
-the footer.
+candidate finishes, signed with its secret. An invite can skip prepza's emails and sign-in \
+(the platform sends the candidate the link itself), bring the candidate back to the \
+company's site when they finish, and ask for the light or dark theme. With prepza's SDK (a \
+script), the company's own page shows the interview itself. Bringing candidates back and \
+embedding work only on a verified company's website domain. The reference is the "developer \
+docs" page, linked in the footer.
 - AI apps: Claude, ChatGPT and other apps that support MCP connect to prepza; any member can \
 connect one (Integrations → AI apps → Instructions has the address and the steps). Connected, an app acts as the person who \
 connected it, in every company they're in, with their role there: it reads tests, candidates \

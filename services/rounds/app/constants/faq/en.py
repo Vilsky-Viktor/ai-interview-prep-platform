@@ -79,7 +79,7 @@ FAQ = [
     {
         "key": "candidates",
         "question": "What do candidates see?",
-        "answer": "Your company's name and logo, what to expect before they start, then one timed question at a time. They never see their score or whether an answer was right.",
+        "answer": "Your company's name and logo, in your company's colors and font (set on its brand tab), what to expect before they start, then one timed question at a time. They never see their score or whether an answer was right.",
     },
     {
         "key": "verified",

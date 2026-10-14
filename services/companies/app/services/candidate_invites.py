@@ -26,6 +26,7 @@ async def invite(
     name: str | None = None,
     return_url: str | None = None,
     sign_in: bool = True,
+    theme: str | None = None,
 ) -> CandidateInvite:
     """Invites one candidate, or sends their invite again, with the invite email queued; `name`
     (untrusted: cleaned here) fills their name if it isn't known yet. Raises 429 over the
@@ -68,6 +69,7 @@ async def invite(
             verified=company.verified_domain is not None,
             return_url=return_url,
             sign_in=sign_in,
+            theme=theme,
         )
     except Exception:
         await give_back(interview, company, email, current, key)

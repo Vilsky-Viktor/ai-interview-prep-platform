@@ -99,13 +99,15 @@ def companies_api(monkeypatch):
 
         return candidate(id=str(invite_id))
 
-    async def invite(interview_id, email, sender_id, name=None, return_url=None, sign_in=True):
+    async def invite(
+        interview_id, email, sender_id, name=None, return_url=None, sign_in=True, theme=None
+    ):
         if state["refuse"]:
             raise HTTPException(state["refuse"], "Refused")
 
         state["sent"].append((interview_id, email, sender_id))
         state.setdefault("names", {})[email] = name
-        state.setdefault("options", {})[email] = (return_url, sign_in)
+        state.setdefault("options", {})[email] = (return_url, sign_in, theme)
 
         return CANDIDATE
 

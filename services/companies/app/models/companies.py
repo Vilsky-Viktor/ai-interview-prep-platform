@@ -6,10 +6,12 @@ from sqlalchemy import (
     ForeignKey,
     Index,
     LargeBinary,
+    SmallInteger,
     String,
     UniqueConstraint,
     text,
 )
+from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.constants.roles import Role
@@ -30,6 +32,13 @@ class Company(Base):
     logo: Mapped[bytes | None] = mapped_column(LargeBinary, deferred=True)
     logo_type: Mapped[str | None] = mapped_column(String(32))
     logo_version: Mapped[int] = mapped_column(default=0, server_default="0")
+    # Its own colors on candidates' pages, by theme ({"light": {...}, "dark": {...}}, each with
+    # constants/brand.py's keys as "#rrggbb"); a theme missing: prepza's.
+    brand_colors: Mapped[dict | None] = mapped_column(JSONB)
+    # Its font, and its cards' and buttons' corner rounding (px), on those pages; None: prepza's.
+    brand_font: Mapped[str | None] = mapped_column(String(32))
+    brand_radius: Mapped[int | None] = mapped_column(SmallInteger)
+    brand_button_radius: Mapped[int | None] = mapped_column(SmallInteger)
     # Verification: the website's domain an owner or admin gave, and the same domain once a
     # superadmin approved it (the badge). Before that, one of them proves the domain with a
     # verified email on it (`verification_email`), which sends the company's name

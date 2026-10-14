@@ -94,6 +94,10 @@ def test_only_a_guest_invitation_may_be_embedded_and_only_on_the_companys_verifi
             name="Acme",
             website_domain="acme.com",
             verified_domain=verified["domain"],
+            brand_colors=None,
+            brand_font=None,
+            brand_radius=None,
+            brand_button_radius=None,
             suspended_at=None,
         )
 

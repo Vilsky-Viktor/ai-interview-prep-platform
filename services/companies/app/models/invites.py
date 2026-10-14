@@ -50,3 +50,6 @@ class CandidateInvite(Base):
     # Sent by the company's own platform, which knows who the candidate is: the link signs them
     # in as this invite's guest, and prepza sends no emails.
     guest: Mapped[bool] = mapped_column(default=False, server_default="false")
+    # The theme its pages show (constants/brand.py's Theme), as the API asked; None: the
+    # candidate's own.
+    theme: Mapped[str | None] = mapped_column(String(8))

@@ -3,8 +3,9 @@ from datetime import UTC, datetime
 # Aliased: this module's own delete() would otherwise shadow it.
 from prepza_common import outbox
 from prepza_common.constants import LEGAL_VERSIONS
-from sqlalchemy import and_, func, or_, select, update
+from sqlalchemy import String, and_, cast, func, literal, or_, select, update
 from sqlalchemy import delete as sql_delete
+from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import selectinload
 
@@ -110,6 +111,33 @@ async def set_logo(company_id, content: bytes | None, media_type: str | None) ->
             update(Company)
             .where(Company.id == company_id)
             .values(logo=content, logo_type=media_type, logo_version=Company.logo_version + 1)
+        )
+        await session.commit()
+
+
+async def set_brand_colors(company_id, theme: str, colors: dict | None) -> None:
+    """Saves the company's colors for one theme, or goes back to prepza's with None. In SQL, so
+    two people saving the two themes at once both keep theirs."""
+    saved = func.coalesce(Company.brand_colors, cast({}, JSONB))
+    value = (
+        saved.op("||")(cast({theme: colors}, JSONB))
+        if colors
+        else saved.op("-")(literal(theme, String))
+    )
+
+    async with Session() as session:
+        await session.execute(
+            update(Company).where(Company.id == company_id).values(brand_colors=value)
+        )
+        await session.commit()
+
+
+async def set_brand_style(company_id, font: str, radius: int, button_radius: int) -> None:
+    async with Session() as session:
+        await session.execute(
+            update(Company)
+            .where(Company.id == company_id)
+            .values(brand_font=font, brand_radius=radius, brand_button_radius=button_radius)
         )
         await session.commit()
 

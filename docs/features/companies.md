@@ -28,13 +28,27 @@ The owner can make an admin who has joined the owner: the role picker on that ad
 
 The delete-account dialog asks companies what deleting the account does to the companies the user owns (`GET /companies/account/deletion`): one others have joined blocks it, listed with a link to its team, until another member is made its owner or the company is deleted; one only the user is in is deleted with the account, listed with its credits. Companies also refuses the deletion itself (409) while the user owns a company others joined; library asks companies first, so nothing is deleted then.
 
-## Logo
+## Brand
 
-A company can upload its logo: PNG, JPEG or WebP, up to 500 KB. It is shown on:
+A company's **brand** tab (owners and admins, like billing) sets how its candidates see the whole interview process: the invitation, the shared test link, the questions, the finished page, the embedded interview and a member's preview. Those pages never show prepza's header or footer, only the company.
+
+### Logo
+
+A company can upload its logo: PNG, JPEG or WebP, up to 500 KB, on the brand tab or by clicking the logo beside its name (hovering an editable logo shows an edit icon in its middle). It is shown on:
 
 - invite and reminder emails, beside the title,
 - the invite page and the interview candidates take, above the title on the finished screen,
 - PDF reports.
+
+### Font and corners
+
+After the colors: the font (by default prepza's pair, Poppins titles over Geist text; or one font for all the text, one of the most used web fonts: Inter, Roboto, Open Sans, Lato, Montserrat, Nunito, Raleway, Work Sans, Source Sans 3, Noto Sans, PT Sans, Ubuntu, Rubik, Manrope, DM Sans, IBM Plex Sans, Mulish, Fira Sans, Plus Jakarta Sans, Outfit, Merriweather, Lora and Playfair Display), and how round the corners are, 0–24 px: the cards' (10 by default) and the buttons' (24 by default: prepza's pills, half a 48 px button's height). Both are the same in the light and dark themes (`PUT /companies/{id}/brand-style`, `brand_font`, `brand_radius`, `brand_button_radius`). The site bundles each font (`constants/brand-fonts.ts`, not preloaded): a page downloads only the one it uses, each falling back to Geist for letters it lacks.
+
+### Colors
+
+Two sets, one for the light theme and one for the dark, each in groups like a theme's: **page** (background, text), **primary** (buttons, the picked answer's outline, the timer, links; and the text on buttons), **secondary** (fills such as the rules box and the picked answer; the gray text), **dialogs** (background, text) and **borders**. Each starts from prepza's own (`PREPZA_COLORS`) and is saved on its own (`PUT /companies/{id}/brand-colors/{light|dark}`, merged in SQL into `brand_colors`, so two people saving the two themes keep both). Every text must read on its background at WCAG AA's 4.5:1 and the buttons on the page at 3:1, or saving is refused with the group to fix (`helpers/brand.py`), so no candidate is tested on a page they can't read. **Save** keeps what's on screen: the theme's colors, the font and the rounding. **Reset** brings back what was last saved; **reset to prepza defaults**, shown while anything saved isn't prepza's, goes back to prepza's colors in both themes, font and rounding (`GET /brand/prepza` gives them). A live preview (a sample HR question about branding, the start button and the finish dialog) shows the set being edited.
+
+Which theme a candidate sees: the one the address asks for (`?theme=light`, `dark` or `default`, which the SDK passes), else the one the invite asked for through the API (`theme`), else the candidate's own light or dark setting. The candidate's pages set the theme variables of that set on the page (`hooks/use-brand-colors.ts`); without a set of its own, a theme is prepza's.
 
 ## Verification
 
@@ -86,7 +100,7 @@ Only the owner can read the log, newest first, with `via`, through `GET /compani
 
 ## Page guides
 
-Every page from the companies list inward has an info button (a question mark in a badge, labelled "About this page"): under the back arrow in the page margin, or right after the arrow on narrower screens. It opens a short guide to that page: what it's for, what you can do there and a tip or two. The companies list, each company tab (interviews, templates, team, integrations, billing, referrals), each interview tab (topics, candidates, settings), a new interview and its topic review and generation, the preview, a candidate's report, a template, choosing a company for a template, and the ATS, Slack and API pages each have their own, in every language. The companies list's back arrow goes to the home page.
+Every page from the companies list inward has an info button (a question mark in a badge, labelled "About this page"): under the back arrow in the page margin, or right after the arrow on narrower screens. It opens a short guide to that page: what it's for, what you can do there and a tip or two. The companies list, each company tab (interviews, templates, team, integrations, brand, billing, referrals), each interview tab (topics, candidates, settings), a new interview and its topic review and generation, the preview, a candidate's report, a template, choosing a company for a template, and the ATS, Slack and API pages each have their own, in every language. The companies list's back arrow goes to the home page.
 
 ## Related pages
 

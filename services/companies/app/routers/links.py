@@ -18,12 +18,14 @@ from app.constants.invites import (
     NOT_STARTED,
     InviteStatus,
 )
+from app.helpers.brand import color_sets, style_of
 from app.helpers.candidates import new_hold_key
 from app.helpers.interviews import attach_set, interview_title
 from app.helpers.logos import logo_path
 from app.integrations import billing
 from app.integrations.redis import get_redis
 from app.schemas.invites import InviteStartOut, LinkIn, LinkOut, LinkView
+from app.schemas.logos import BrandColorSets, BrandStyle
 from app.services import outbox as outbox_service
 from app.services.access import refuse_if_suspended, require_editor
 from app.services.candidate_start import start_sessions
@@ -84,6 +86,8 @@ async def get_link(token: str, user: OptionalUser) -> LinkView:
         company=company.name if company else "",
         logo_url=logo_path(company),
         verified_domain=company.verified_domain if company else None,
+        brand_colors=BrandColorSets(**color_sets(company.brand_colors if company else None)),
+        brand_style=BrandStyle(**style_of(company)),
         question_seconds=interview.question_seconds,
         status=status_now,
     )

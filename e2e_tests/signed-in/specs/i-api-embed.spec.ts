@@ -19,6 +19,7 @@ function sitePage(siteUrl: string, inviteUrl: string) {
       Prepza.embed({
         element: "#interview",
         url: ${JSON.stringify(inviteUrl)},
+        theme: "dark",
         onReady: () => window.events.push("ready"),
         onStart: () => window.events.push("started"),
         onFinish: ({ candidateId }) => window.events.push("finished:" + candidateId),
@@ -76,6 +77,8 @@ test("a company's own site embeds a candidate's interview and hears it finish", 
   // No sign-in, no prepza header or footer: the invitation, then the questions in place.
   await expect(frame.getByRole("button", { name: "Accept & Start" })).toBeVisible()
   await expect(frame.locator("header, footer")).toHaveCount(0)
+  // The SDK asked for the dark theme: prepza's dark colors, as the company has none of its own.
+  await expect(frame.locator("html")).toHaveCSS("--background", "#0a0a0a")
   await shot(site, "invitation")
   await frame.getByRole("button", { name: "Accept & Start" }).click()
   await expect(frame.getByRole("button", { name: "Finish interview" })).toBeVisible({

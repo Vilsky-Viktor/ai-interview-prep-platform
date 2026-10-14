@@ -7,6 +7,7 @@ from pydantic import BaseModel, EmailStr, Field
 from app.constants.invites import MAX_COMPANY_NAME_LENGTH
 from app.constants.roles import Role
 from app.constants.verification import VerificationStatus
+from app.schemas.logos import BrandColorSets, BrandStyle, SavedBrandColors
 
 
 class CompanyCreate(BaseModel):
@@ -56,6 +57,12 @@ class CompanyOut(BaseModel):
     interview_count: int
     # The logo's address on the site; None until one is set.
     logo_url: str | None = None
+    # Its own colors on candidates' pages, by theme (a theme missing: prepza's), and the colors
+    # those pages use, by theme: its own, or prepza's.
+    brand_colors: SavedBrandColors | None = None
+    candidate_colors: BrandColorSets | None = None
+    # Its font and corner rounding on those pages, prepza's where it set none.
+    brand_style: BrandStyle | None = None
     # The website's domain, and the same once a superadmin approved it (the badge); where its
     # verification stands, and why it was declined, when the superadmin said.
     website_domain: str | None = None

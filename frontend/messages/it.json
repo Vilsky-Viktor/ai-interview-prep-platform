@@ -497,6 +497,7 @@
     "team": "Team",
     "integrations": "Integrazioni",
     "referrals": "Referral",
+    "brand": "Brand",
     "billing": "Fatturazione",
     "new": "Nuova azienda",
     "name": "Nome dell'azienda",
@@ -1378,6 +1379,67 @@
     "createFailed": "Impossibile crearlo.",
     "removeFailed": "Impossibile eliminarlo."
   },
+  "brand": {
+    "logoTitle": "Logo",
+    "logoText": "I candidati lo vedono nell'invito, durante il colloquio e nelle email.",
+    "colorsTitle": "Colori",
+    "colorsText": "I candidati vedono lo svolgimento del colloquio con questi colori, in chiaro o in scuro secondo la loro impostazione, o come richiede il tuo link, l'API o l'SDK. Ogni testo deve restare facile da leggere, quindi i colori con poco contrasto non si possono salvare.",
+    "groups": {
+      "page": {
+        "name": "Pagina",
+        "text": "Lo sfondo, e i titoli e le domande che ci stanno sopra."
+      },
+      "primary": {
+        "name": "Primario",
+        "text": "I pulsanti, il bordo della risposta scelta, il timer e i link, e il testo sui pulsanti."
+      },
+      "secondary": {
+        "name": "Secondario",
+        "text": "Riempimenti come il riquadro delle regole e la risposta scelta, e il testo grigio: suggerimenti e lettere delle risposte."
+      },
+      "dialogs": {
+        "name": "Finestre di dialogo",
+        "text": "Finestre come “Terminare l'intero colloquio?”: il loro sfondo e il loro testo."
+      },
+      "borders": {
+        "name": "Bordi",
+        "text": "Le linee intorno alle risposte e tra le parti della pagina."
+      }
+    },
+    "colors": {
+      "background": "Sfondo",
+      "foreground": "Testo",
+      "primary": "Colore",
+      "primary_foreground": "Testo",
+      "muted": "Riempimento",
+      "muted_foreground": "Testo",
+      "card": "Sfondo",
+      "card_foreground": "Testo",
+      "border": "Linee"
+    },
+    "save": "Salva",
+    "saved": "Salvato",
+    "styleTitle": "Carattere e angoli",
+    "styleText": "Tutto il testo in un solo carattere e quanto sono arrotondati gli angoli di schede e pulsanti, uguali in entrambi i temi.",
+    "font": "Carattere",
+    "radius": "Arrotondamento delle schede",
+    "buttonRadius": "Arrotondamento dei pulsanti",
+    "reset": "Ripristina",
+    "resetPrepza": "Ripristina le impostazioni di prepza",
+    "themes": {
+      "light": "Tema chiaro",
+      "dark": "Tema scuro"
+    },
+    "resetDone": "Ripristinate le impostazioni predefinite di prepza",
+    "failed": "Impossibile salvare il brand.",
+    "preview": "Anteprima",
+    "sampleTitle": "HR manager",
+    "sampleQuestion": "Come capiscono i candidati, a colpo d'occhio, che una pagina di colloquio è della tua azienda?",
+    "sampleOptions": [
+      "Mostra il tuo logo e i colori del tuo brand",
+      "È identico al colloquio di qualsiasi altra azienda"
+    ]
+  },
   "apiDocs": {
     "title": "Documentazione per sviluppatori",
     "intro": "Collega prepza alla tua piattaforma: elenca i tuoi colloqui, invita candidati, ricevi i loro risultati e integra il colloquio nel tuo sito.",
@@ -1865,6 +1927,20 @@
       "tips": [
         "Una nuova chiave e il secret di un webhook vengono mostrati una sola volta: copiali subito.",
         "Scegli una scadenza per ogni chiave: una chiave trapelata che non scade mai resta utilizzabile."
+      ]
+    },
+    "brand": {
+      "title": "Brand",
+      "text": "Il tuo logo e i tuoi colori nell'invito, nel colloquio e nella pagina finale dei tuoi candidati.",
+      "actions": [
+        "Imposta o cambia il logo.",
+        "Scegli il carattere e quanto sono arrotondati schede e pulsanti.",
+        "Scegli i colori di ogni gruppo e guardali nell'anteprima.",
+        "Salvali, o torna ai colori di prepza."
+      ],
+      "tips": [
+        "I colori che renderebbero il testo difficile da leggere non si possono salvare, così ogni candidato può leggere le domande.",
+        "Anche i membri del team che provano un colloquio lo vedono con i tuoi colori."
       ]
     },
     "referrals": {

@@ -497,6 +497,7 @@
     "team": "Equipe",
     "integrations": "Integrações",
     "referrals": "Indicações",
+    "brand": "Marca",
     "billing": "Faturamento",
     "new": "Nova empresa",
     "name": "Nome da empresa",
@@ -1374,6 +1375,67 @@
     "createFailed": "Não foi possível criar.",
     "removeFailed": "Não foi possível excluir."
   },
+  "brand": {
+    "logoTitle": "Logotipo",
+    "logoText": "Os candidatos o veem no convite, durante a entrevista e nos e-mails.",
+    "colorsTitle": "Cores",
+    "colorsText": "Os candidatos veem o processo da entrevista nestas cores, no modo claro ou escuro conforme a própria configuração, ou como pedirem o seu link, a API ou o SDK. Todo texto precisa continuar fácil de ler, por isso cores com pouco contraste não podem ser salvas.",
+    "groups": {
+      "page": {
+        "name": "Página",
+        "text": "O fundo, e os títulos e as perguntas sobre ele."
+      },
+      "primary": {
+        "name": "Primária",
+        "text": "Os botões, o contorno da resposta escolhida, o cronômetro e os links, e o texto nos botões."
+      },
+      "secondary": {
+        "name": "Secundária",
+        "text": "Preenchimentos como o quadro de regras e a resposta escolhida, e o texto cinza: dicas e letras das respostas."
+      },
+      "dialogs": {
+        "name": "Diálogos",
+        "text": "Janelas como “Concluir a entrevista inteira?”: o fundo e o texto delas."
+      },
+      "borders": {
+        "name": "Bordas",
+        "text": "As linhas em volta das respostas e entre as partes da página."
+      }
+    },
+    "colors": {
+      "background": "Fundo",
+      "foreground": "Texto",
+      "primary": "Cor",
+      "primary_foreground": "Texto",
+      "muted": "Preenchimento",
+      "muted_foreground": "Texto",
+      "card": "Fundo",
+      "card_foreground": "Texto",
+      "border": "Linhas"
+    },
+    "save": "Salvar",
+    "saved": "Salvo",
+    "styleTitle": "Fonte e cantos",
+    "styleText": "Todo o texto em uma só fonte e o arredondamento dos cantos dos cartões e botões, iguais nos dois temas.",
+    "font": "Fonte",
+    "radius": "Arredondamento dos cartões",
+    "buttonRadius": "Arredondamento dos botões",
+    "reset": "Redefinir",
+    "resetPrepza": "Voltar ao padrão da prepza",
+    "themes": {
+      "light": "Tema claro",
+      "dark": "Tema escuro"
+    },
+    "resetDone": "De volta aos padrões do prepza",
+    "failed": "Não foi possível salvar a marca.",
+    "preview": "Prévia",
+    "sampleTitle": "Gerente de RH",
+    "sampleQuestion": "Como os candidatos percebem, num relance, que uma página de entrevista é da sua empresa?",
+    "sampleOptions": [
+      "Ela mostra o seu logotipo e as cores da sua marca",
+      "Parece exatamente igual à entrevista de qualquer outra empresa"
+    ]
+  },
   "apiDocs": {
     "title": "Documentação para desenvolvedores",
     "intro": "Conecte a prepza à sua própria plataforma: liste suas entrevistas, convide candidatos, receba os resultados deles e incorpore a entrevista no seu próprio site.",
@@ -1861,6 +1923,20 @@
       "tips": [
         "Uma chave nova e o segredo de um webhook aparecem só uma vez: copie-os na hora.",
         "Escolha uma validade para cada chave: uma chave vazada que nunca expira continua utilizável."
+      ]
+    },
+    "brand": {
+      "title": "Marca",
+      "text": "Seu logotipo e suas cores no convite, na entrevista e na página final dos seus candidatos.",
+      "actions": [
+        "Defina ou troque o logotipo.",
+        "Escolha a fonte e o arredondamento dos cartões e botões.",
+        "Escolha as cores de cada grupo e veja-as na prévia.",
+        "Salve-as ou volte às cores da prepza."
+      ],
+      "tips": [
+        "Cores que deixariam o texto difícil de ler não podem ser salvas, para que todo candidato consiga ler as perguntas.",
+        "Os membros da equipe que testam uma entrevista também a veem nas suas cores."
       ]
     },
     "referrals": {

@@ -74,6 +74,7 @@ def test_an_invite_without_a_sign_in_is_a_guests_keeps_its_return_address_and_se
             "en",
             return_url="https://acme.com/done",
             sign_in=False,
+            theme="dark",
         )
 
         async with Session() as session:
@@ -90,5 +91,6 @@ def test_an_invite_without_a_sign_in_is_a_guests_keeps_its_return_address_and_se
     assert str(invite.id) not in sent
     assert invite.return_url == "https://acme.com/done"
     assert invite.guest is True
+    assert invite.theme == "dark"
     # No reminder either: the platform that sent the candidate told them already.
     assert invite.reminded_at is not None

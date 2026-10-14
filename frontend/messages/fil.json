@@ -497,6 +497,7 @@
     "team": "Team",
     "integrations": "Mga integration",
     "referrals": "Referrals",
+    "brand": "Brand",
     "billing": "Billing",
     "new": "Bagong kumpanya",
     "name": "Pangalan ng kumpanya",
@@ -1382,6 +1383,67 @@
     "createFailed": "Hindi ito magawa.",
     "removeFailed": "Hindi ito mabura."
   },
+  "brand": {
+    "logoTitle": "Logo",
+    "logoText": "Nakikita ito ng mga aplikante sa kanilang imbitasyon, habang nasa interview, at sa mga email.",
+    "colorsTitle": "Mga kulay",
+    "colorsText": "Nakikita ng mga aplikante ang buong proseso ng interview sa mga kulay na ito, light o dark ayon sa sarili nilang setting, o ayon sa hinihingi ng iyong link, ng API o ng SDK. Dapat madaling basahin ang lahat ng text, kaya hindi mase-save ang mga kulay na kulang sa contrast.",
+    "groups": {
+      "page": {
+        "name": "Pahina",
+        "text": "Ang background, at ang mga title at tanong dito."
+      },
+      "primary": {
+        "name": "Primary",
+        "text": "Mga button, ang outline ng napiling sagot, ang timer at mga link, at ang text sa mga button."
+      },
+      "secondary": {
+        "name": "Secondary",
+        "text": "Mga fill gaya ng kahon ng mga panuntunan at ng napiling sagot, at ang gray na text: mga hint at mga letra ng sagot."
+      },
+      "dialogs": {
+        "name": "Mga dialog",
+        "text": "Mga window gaya ng “Tapusin ang buong interview?”: ang background at text nila."
+      },
+      "borders": {
+        "name": "Mga border",
+        "text": "Mga linya sa paligid ng mga sagot at sa pagitan ng mga bahagi ng pahina."
+      }
+    },
+    "colors": {
+      "background": "Background",
+      "foreground": "Text",
+      "primary": "Kulay",
+      "primary_foreground": "Text",
+      "muted": "Fill",
+      "muted_foreground": "Text",
+      "card": "Background",
+      "card_foreground": "Text",
+      "border": "Mga linya"
+    },
+    "save": "I-save",
+    "saved": "Na-save",
+    "styleTitle": "Font at mga sulok",
+    "styleText": "Lahat ng text sa iisang font, at kung gaano kabilog ang mga sulok ng mga card at button, pareho sa dalawang theme.",
+    "font": "Font",
+    "radius": "Pag-ikot ng mga card",
+    "buttonRadius": "Pag-ikot ng mga button",
+    "reset": "I-reset",
+    "resetPrepza": "I-reset sa mga default ng prepza",
+    "themes": {
+      "light": "Light na tema",
+      "dark": "Dark na tema"
+    },
+    "resetDone": "Bumalik sa mga default ng prepza",
+    "failed": "Hindi ma-save ang brand.",
+    "preview": "Preview",
+    "sampleTitle": "HR Manager",
+    "sampleQuestion": "Paano agad malalaman ng mga aplikante na sa kumpanya mo ang isang interview page?",
+    "sampleOptions": [
+      "Makikita rito ang iyong logo at mga kulay ng brand",
+      "Kamukhang-kamukha ito ng interview ng ibang kumpanya"
+    ]
+  },
   "apiDocs": {
     "title": "Dokumentasyon para sa mga developer",
     "intro": "Ikonekta ang prepza sa sarili mong platform: ilista ang mga interview mo, mag-imbita ng mga aplikante, kunin ang mga resulta nila at i-embed ang interview sa sarili mong site.",
@@ -1869,6 +1931,20 @@
       "tips": [
         "Isang beses lang ipinapakita ang bagong key at ang secret ng webhook: kopyahin agad.",
         "Pumili ng expiry para sa bawat key: magagamit pa rin ang na-leak na key na hindi nag-e-expire."
+      ]
+    },
+    "brand": {
+      "title": "Brand",
+      "text": "Ang iyong logo at mga kulay sa imbitasyon, interview at pahina ng pagtatapos ng iyong mga aplikante.",
+      "actions": [
+        "Maglagay o magpalit ng logo.",
+        "Piliin ang font at kung gaano kabilog ang mga card at button.",
+        "Piliin ang mga kulay ng bawat grupo, at tingnan ang mga ito sa preview.",
+        "I-save ang mga ito, o bumalik sa mga kulay ng prepza."
+      ],
+      "tips": [
+        "Hindi mase-save ang mga kulay na magpapahirap basahin ang text, para mabasa ng bawat aplikante ang mga tanong.",
+        "Nakikita rin ng mga miyembrong sumusubok ng interview ang iyong mga kulay."
       ]
     },
     "referrals": {

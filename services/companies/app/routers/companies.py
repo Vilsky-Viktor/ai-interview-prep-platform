@@ -9,6 +9,7 @@ from prepza_common.paging import PageParams
 
 from app.constants.invites import COMPANY_NAME_TAKEN, MAX_OWNED_COMPANIES, TOO_MANY_COMPANIES
 from app.constants.roles import EDITORS, Role
+from app.helpers.brand import color_sets, style_of
 from app.helpers.logos import logo_path
 from app.integrations import billing
 from app.models.companies import Company
@@ -21,6 +22,7 @@ from app.schemas.companies import (
     ReferralOut,
     ReferralRewardOut,
 )
+from app.schemas.logos import BrandColorSets, BrandStyle
 from app.services import company_deletion
 from app.services.access import can_edit, is_owner, require_company, require_editor
 from app.services.verification import verify_by_email
@@ -41,6 +43,9 @@ def company_out(company: Company, user_id: str, interview_count: int = 0) -> Com
         can_manage_members=is_owner(member),
         interview_count=interview_count,
         logo_url=logo_path(company),
+        brand_colors=company.brand_colors,
+        candidate_colors=BrandColorSets(**color_sets(company.brand_colors)),
+        brand_style=BrandStyle(**style_of(company)),
         website_domain=company.website_domain,
         verified_domain=company.verified_domain,
         verification_status=company.verification_status,

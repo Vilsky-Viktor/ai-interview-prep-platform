@@ -497,6 +497,7 @@
     "team": "Team",
     "integrations": "Integrations",
     "referrals": "Referrals",
+    "brand": "Brand",
     "billing": "Billing",
     "new": "New company",
     "name": "Company name",
@@ -1378,6 +1379,67 @@
     "createFailed": "Couldn't create it.",
     "removeFailed": "Couldn't delete it."
   },
+  "brand": {
+    "logoTitle": "Logo",
+    "logoText": "Candidates see it on their invitation, during the interview and in emails.",
+    "colorsTitle": "Colors",
+    "colorsText": "Candidates see the interview process in these colors, light or dark as their own setting is, or as your link, the API or the SDK asks. Any text must stay easy to read, so colors with too little contrast can't be saved.",
+    "groups": {
+      "page": {
+        "name": "Page",
+        "text": "The background, and the titles and questions on it."
+      },
+      "primary": {
+        "name": "Primary",
+        "text": "Buttons, the picked answer's outline, the timer and links, and the text on buttons."
+      },
+      "secondary": {
+        "name": "Secondary",
+        "text": "Fills such as the rules box and the picked answer, and the gray text: hints and answer letters."
+      },
+      "dialogs": {
+        "name": "Dialogs",
+        "text": "Windows such as “Finish the whole interview?”: their background and text."
+      },
+      "borders": {
+        "name": "Borders",
+        "text": "Lines around answers and between parts of the page."
+      }
+    },
+    "colors": {
+      "background": "Background",
+      "foreground": "Text",
+      "primary": "Color",
+      "primary_foreground": "Text",
+      "muted": "Fill",
+      "muted_foreground": "Text",
+      "card": "Background",
+      "card_foreground": "Text",
+      "border": "Lines"
+    },
+    "save": "Save",
+    "saved": "Saved",
+    "styleTitle": "Font and corners",
+    "styleText": "All the text in one font, and how round the cards' and buttons' corners are, the same in both themes.",
+    "font": "Font",
+    "radius": "Card rounding",
+    "buttonRadius": "Button rounding",
+    "reset": "Reset",
+    "resetPrepza": "Reset to prepza defaults",
+    "themes": {
+      "light": "Light theme",
+      "dark": "Dark theme"
+    },
+    "resetDone": "Back to prepza's defaults",
+    "failed": "Couldn't save the brand.",
+    "preview": "Preview",
+    "sampleTitle": "HR manager",
+    "sampleQuestion": "How can candidates tell at a glance that an interview page is yours?",
+    "sampleOptions": [
+      "It shows your logo and brand colors",
+      "It looks exactly like every other company's interview"
+    ]
+  },
   "apiDocs": {
     "title": "Developer docs",
     "intro": "Connect prepza to your own platform: list your interviews, invite candidates, get their results and embed the interview in your own site.",
@@ -1865,6 +1927,20 @@
       "tips": [
         "A new key and a web hook's secret show only once: copy them right away.",
         "Choose an expiry for each key: a leaked key that never expires stays usable."
+      ]
+    },
+    "brand": {
+      "title": "Brand",
+      "text": "Your logo and colors on your candidates' invitation, interview and finished page.",
+      "actions": [
+        "Set or change the logo.",
+        "Pick the font and how round the cards and buttons are.",
+        "Pick the colors of each group, and see them in the preview.",
+        "Save them, or go back to prepza's colors."
+      ],
+      "tips": [
+        "Colors whose text would be hard to read can't be saved, so every candidate can read the questions.",
+        "Members trying an interview see it in your colors too."
       ]
     },
     "referrals": {

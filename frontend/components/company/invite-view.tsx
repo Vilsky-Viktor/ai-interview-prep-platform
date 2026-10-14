@@ -1,6 +1,6 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button"
 import { WarningCard } from "@/components/warning-card"
 import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
 import { refreshVerification, signInAsGuest } from "@/lib/auth"
+import { useBrandColors } from "@/hooks/use-brand-colors"
 import { useLinkData } from "@/hooks/use-link-data"
 import type { InviteView as Invite, SessionSummary } from "@/types/company"
 
@@ -42,6 +43,10 @@ export function InviteView({
     loading ? null : `/companies/invites/${token}`,
     user?.uid
   )
+
+  useBrandColors(invite?.brand_colors, invite?.theme, invite?.brand_style)
+  // A theme the address asks for goes on with the candidate to the questions.
+  const asked = useSearchParams().get("theme")
 
   async function start() {
     setStarting(true)
@@ -74,7 +79,9 @@ export function InviteView({
       }
 
       if (next) {
-        router.push(`/sessions/${next.id}`)
+        router.push(
+          `/sessions/${next.id}${asked ? `?theme=${encodeURIComponent(asked)}` : ""}`
+        )
 
         return
       }

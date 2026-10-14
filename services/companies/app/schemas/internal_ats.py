@@ -2,6 +2,8 @@ from uuid import UUID
 
 from pydantic import BaseModel, EmailStr, Field
 
+from app.constants.brand import Theme
+
 
 class AccessOut(BaseModel):
     # Any member (owner, admin or viewer); an editor is an owner or admin.
@@ -26,6 +28,8 @@ class AtsInviteIn(BaseModel):
     # The API caller's: where to take the candidate back once they've finished, and whether
     # prepza emails them (no invite or reminders when the caller sends them itself).
     return_url: str | None = Field(default=None, max_length=2048)
+    # The theme the candidate's pages show; None: the candidate's own.
+    theme: Theme | None = None
     sign_in: bool = True
 
 

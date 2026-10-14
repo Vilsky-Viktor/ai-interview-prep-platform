@@ -71,7 +71,7 @@ async def invite(interview_id: UUID, body: AtsInviteIn, caller: ServiceCaller) -
 
     user = User(uid=body.sender_id, email="", email_verified=True)
     sent = await candidate_invites.invite(
-        interview, company, user, body.email, body.name, body.return_url, body.sign_in
+        interview, company, user, body.email, body.name, body.return_url, body.sign_in, body.theme
     )
     await outbox_service.flush_quietly()
 

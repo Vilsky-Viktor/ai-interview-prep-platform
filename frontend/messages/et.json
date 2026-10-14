@@ -497,6 +497,7 @@
     "team": "Meeskond",
     "integrations": "Integratsioonid",
     "referrals": "Soovitused",
+    "brand": "Bränd",
     "billing": "Arveldus",
     "new": "Uus ettevõte",
     "name": "Ettevõtte nimi",
@@ -1382,6 +1383,67 @@
     "createFailed": "Loomine ebaõnnestus.",
     "removeFailed": "Kustutamine ebaõnnestus."
   },
+  "brand": {
+    "logoTitle": "Logo",
+    "logoText": "Kandidaadid näevad seda oma kutses, intervjuu ajal ja e-kirjades.",
+    "colorsTitle": "Värvid",
+    "colorsText": "Kandidaadid näevad kogu intervjuu käiku nendes värvides, heledana või tumedana vastavalt oma seadistusele või sellele, mida sinu link, API või SDK määrab. Iga tekst peab jääma kergesti loetavaks, seega liiga väikese kontrastiga värve salvestada ei saa.",
+    "groups": {
+      "page": {
+        "name": "Leht",
+        "text": "Taust ning sellel olevad pealkirjad ja küsimused."
+      },
+      "primary": {
+        "name": "Põhivärv",
+        "text": "Nupud, valitud vastuse ääris, taimer ja lingid ning nuppude tekst."
+      },
+      "secondary": {
+        "name": "Lisavärv",
+        "text": "Täited, näiteks reeglite kast ja valitud vastus, ning hall tekst: vihjed ja vastuste tähed."
+      },
+      "dialogs": {
+        "name": "Dialoogid",
+        "text": "Aknad nagu „Lõpetada kogu intervjuu?“: nende taust ja tekst."
+      },
+      "borders": {
+        "name": "Äärised",
+        "text": "Jooned vastuste ümber ja lehe osade vahel."
+      }
+    },
+    "colors": {
+      "background": "Taust",
+      "foreground": "Tekst",
+      "primary": "Värv",
+      "primary_foreground": "Tekst",
+      "muted": "Täide",
+      "muted_foreground": "Tekst",
+      "card": "Taust",
+      "card_foreground": "Tekst",
+      "border": "Jooned"
+    },
+    "save": "Salvesta",
+    "saved": "Salvestatud",
+    "styleTitle": "Font ja nurgad",
+    "styleText": "Kogu tekst ühes fondis ning kui ümarad on kaartide ja nuppude nurgad, mõlemas teemas ühesugused.",
+    "font": "Font",
+    "radius": "Kaartide ümarus",
+    "buttonRadius": "Nuppude ümarus",
+    "reset": "Lähtesta",
+    "resetPrepza": "Taasta prepza vaikeseaded",
+    "themes": {
+      "light": "Hele teema",
+      "dark": "Tume teema"
+    },
+    "resetDone": "Tagasi prepza vaikeseadetele",
+    "failed": "Brändi salvestamine ei õnnestunud.",
+    "preview": "Eelvaade",
+    "sampleTitle": "Personalijuht",
+    "sampleQuestion": "Kuidas saavad kandidaadid ühe pilguga aru, et intervjuuleht on sinu ettevõttelt?",
+    "sampleOptions": [
+      "Sellel on sinu logo ja brändivärvid",
+      "See näeb välja täpselt nagu iga teise ettevõtte intervjuu"
+    ]
+  },
   "apiDocs": {
     "title": "Arendajate dokumentatsioon",
     "intro": "Ühenda prepza oma platvormiga: vaata oma intervjuusid, kutsu kandidaate, saa nende tulemused ja manusta intervjuu oma veebilehele.",
@@ -1869,6 +1931,20 @@
       "tips": [
         "Uut võtit ja webhooki saladust näidatakse ainult üks kord: kopeeri need kohe.",
         "Vali igale võtmele aegumiskuupäev: lekkinud võti, mis kunagi ei aegu, jääb kasutatavaks."
+      ]
+    },
+    "brand": {
+      "title": "Bränd",
+      "text": "Sinu logo ja värvid kandidaatide kutses, intervjuus ja lõpulehel.",
+      "actions": [
+        "Lisa või muuda logo.",
+        "Vali font ning kui ümarad on kaardid ja nupud.",
+        "Vali iga rühma värvid ja vaata neid eelvaates.",
+        "Salvesta need või taasta prepza värvid."
+      ],
+      "tips": [
+        "Värve, millega tekst oleks raskesti loetav, salvestada ei saa, et iga kandidaat saaks küsimusi lugeda.",
+        "Meeskonnaliikmed, kes intervjuud proovivad, näevad seda samuti sinu värvides."
       ]
     },
     "referrals": {

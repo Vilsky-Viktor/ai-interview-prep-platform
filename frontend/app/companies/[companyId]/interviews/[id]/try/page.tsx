@@ -2,6 +2,7 @@ import { notFound } from "next/navigation"
 import { getTranslations } from "next-intl/server"
 
 import { BackLink } from "@/components/back-link"
+import { BrandColorsOn } from "@/components/company/brand-colors-on"
 import { InviteIntro } from "@/components/company/invite-intro"
 import { StartPreview } from "@/components/company/start-preview"
 import { SignInPage } from "@/components/sign-in-page"
@@ -35,6 +36,10 @@ export default async function TryInterviewPage({
   // Laid out like the candidate's invite page.
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-6 py-12">
+      <BrandColorsOn
+        colors={company.candidate_colors ?? null}
+        look={company.brand_style ?? null}
+      />
       {/* Only a member's preview has a way back, beside the intro as on other pages. */}
       <div className="relative w-full">
         <BackLink

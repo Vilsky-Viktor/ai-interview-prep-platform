@@ -21,6 +21,7 @@ export const PAGE_HELP_KEYS = [
   "api",
   "aiApps",
   "referrals",
+  "brand",
   "billing",
 ] as const
 
@@ -30,6 +31,7 @@ export const COMPANY_TAB_HELP = {
   templates: "templates",
   members: "team",
   integrations: "integrations",
+  brand: "brand",
   referrals: "referrals",
   billing: "billing",
 } as const

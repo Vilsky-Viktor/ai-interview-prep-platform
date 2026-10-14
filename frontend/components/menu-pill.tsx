@@ -14,7 +14,7 @@ import {
 /** The site's select pill (as components/pill-select.tsx looks) opening the site's menu, not the
  * browser's: one choice among `options`, each with an optional line under it. Shows
  * `placeholder` until something is chosen. Labels are lowercase like the site's; `keepCase` keeps
- * a name's capitals (an ATS job, an interview's title). */
+ * a name's capitals (an ATS job, an interview's title); `fontFamily` draws one in a font. */
 export function MenuPill({
   ariaLabel,
   value,
@@ -26,7 +26,14 @@ export function MenuPill({
 }: {
   ariaLabel: string
   value: string | null
-  options: { value: string; label: string; note?: string; keepCase?: boolean }[]
+  options: {
+    value: string
+    label: string
+    note?: string
+    keepCase?: boolean
+    // Draws the label in this font: a font's name in itself.
+    fontFamily?: string
+  }[]
   onChange: (value: string) => void
   placeholder?: string
   disabled?: boolean
@@ -48,7 +55,10 @@ export function MenuPill({
             className
           )}
         >
-          <span className={cn("truncate", chosen?.keepCase && "normal-case")}>
+          <span
+            className={cn("truncate", chosen?.keepCase && "normal-case")}
+            style={{ fontFamily: chosen?.fontFamily }}
+          >
             {chosen?.label ?? placeholder}
           </span>
           <ChevronDownIcon
@@ -70,6 +80,7 @@ export function MenuPill({
                       "block",
                       option.keepCase ? "normal-case" : "lowercase"
                     )}
+                    style={{ fontFamily: option.fontFamily }}
                   >
                     {option.label}
                   </span>

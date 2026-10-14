@@ -497,6 +497,7 @@
     "team": "Tim",
     "integrations": "Integrasi",
     "referrals": "Referal",
+    "brand": "Merek",
     "billing": "Tagihan",
     "new": "Perusahaan baru",
     "name": "Nama perusahaan",
@@ -1378,6 +1379,67 @@
     "createFailed": "Gagal membuat.",
     "removeFailed": "Gagal menghapus."
   },
+  "brand": {
+    "logoTitle": "Logo",
+    "logoText": "Kandidat melihatnya di undangan, selama wawancara, dan di email.",
+    "colorsTitle": "Warna",
+    "colorsText": "Kandidat melihat proses wawancara dengan warna-warna ini, terang atau gelap sesuai pengaturan mereka sendiri, atau sesuai permintaan tautanmu, API, atau SDK. Setiap teks harus tetap mudah dibaca, jadi warna dengan kontras terlalu rendah tidak bisa disimpan.",
+    "groups": {
+      "page": {
+        "name": "Halaman",
+        "text": "Latar belakang, serta judul dan pertanyaan di atasnya."
+      },
+      "primary": {
+        "name": "Utama",
+        "text": "Tombol, garis tepi jawaban yang dipilih, timer dan tautan, serta teks pada tombol."
+      },
+      "secondary": {
+        "name": "Sekunder",
+        "text": "Isian seperti kotak aturan dan jawaban yang dipilih, serta teks abu-abu: petunjuk dan huruf jawaban."
+      },
+      "dialogs": {
+        "name": "Dialog",
+        "text": "Jendela seperti “Selesaikan seluruh wawancara?”: latar belakang dan teksnya."
+      },
+      "borders": {
+        "name": "Garis tepi",
+        "text": "Garis di sekitar jawaban dan di antara bagian halaman."
+      }
+    },
+    "colors": {
+      "background": "Latar belakang",
+      "foreground": "Teks",
+      "primary": "Warna",
+      "primary_foreground": "Teks",
+      "muted": "Isian",
+      "muted_foreground": "Teks",
+      "card": "Latar belakang",
+      "card_foreground": "Teks",
+      "border": "Garis"
+    },
+    "save": "Simpan",
+    "saved": "Disimpan",
+    "styleTitle": "Font dan sudut",
+    "styleText": "Semua teks dalam satu font, dan seberapa lengkung sudut kartu dan tombol, sama di kedua tema.",
+    "font": "Font",
+    "radius": "Kelengkungan kartu",
+    "buttonRadius": "Kelengkungan tombol",
+    "reset": "Atur ulang",
+    "resetPrepza": "Kembalikan ke bawaan prepza",
+    "themes": {
+      "light": "Tema terang",
+      "dark": "Tema gelap"
+    },
+    "resetDone": "Kembali ke bawaan prepza",
+    "failed": "Brand tidak dapat disimpan.",
+    "preview": "Pratinjau",
+    "sampleTitle": "Manajer HR",
+    "sampleQuestion": "Bagaimana kandidat tahu sekilas bahwa halaman wawancara berasal dari perusahaanmu?",
+    "sampleOptions": [
+      "Halaman menampilkan logo dan warna merekmu",
+      "Tampilannya persis seperti wawancara perusahaan lain"
+    ]
+  },
   "apiDocs": {
     "title": "Dokumentasi pengembang",
     "intro": "Hubungkan prepza ke platformmu sendiri: lihat daftar wawancaramu, undang kandidat, dapatkan hasilnya, dan sematkan wawancara di situsmu sendiri.",
@@ -1865,6 +1927,20 @@
       "tips": [
         "Kunci baru dan secret webhook hanya ditampilkan sekali: segera salin.",
         "Pilih masa berlaku untuk setiap kunci: kunci bocor yang tidak pernah kedaluwarsa tetap bisa dipakai."
+      ]
+    },
+    "brand": {
+      "title": "Merek",
+      "text": "Logo dan warnamu di undangan, wawancara, dan halaman selesai kandidatmu.",
+      "actions": [
+        "Pasang atau ganti logo.",
+        "Pilih font dan seberapa lengkung kartu dan tombol.",
+        "Pilih warna tiap grup, dan lihat di pratinjau.",
+        "Simpan, atau kembali ke warna prepza."
+      ],
+      "tips": [
+        "Warna yang membuat teks sulit dibaca tidak bisa disimpan, agar setiap kandidat bisa membaca pertanyaannya.",
+        "Anggota yang mencoba wawancara juga melihatnya dengan warnamu."
       ]
     },
     "referrals": {

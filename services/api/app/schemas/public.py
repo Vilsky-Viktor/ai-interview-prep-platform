@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Literal
 from uuid import UUID
 
 from pydantic import BaseModel, EmailStr, Field
@@ -80,6 +81,14 @@ class CandidateIn(BaseModel):
             "the company's verified website domain (or a subdomain of it); see Verified "
             "companies. The finished page shows a button to it, with "
             "`prepza_invite=<candidate id>` added to its query"
+        ),
+    )
+    theme: Literal["light", "dark", "default"] = Field(
+        default="default",
+        description=(
+            "The theme the candidate's pages show, in your company's colors for it: `light` or "
+            "`dark` always shows that theme, `default` the candidate's own. A `theme` added to "
+            "the `invite_url` (`?theme=dark`) or given to the SDK wins over it"
         ),
     )
     sign_in: bool = Field(

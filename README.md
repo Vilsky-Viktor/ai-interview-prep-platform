@@ -16,6 +16,7 @@ Timed knowledge interviews for hiring, made from a job description or a ready-ma
 - **Scorecards and reports:** grades against a pass mark, integrity flags, and PDF reports to download, email or share.
 - **Invites three ways:** by email, from a list or file, or through one shareable link for a job ad.
 - **Teams and verified companies:** owners, admins and viewers; a check next to a verified company's name.
+- **The company's brand:** candidates see the whole interview process with the company's logo, font, corner rounding and colors (a light and a dark set, kept readable), without prepza's header or footer.
 - **Questions that fix themselves:** answers, votes and reports flag weak questions, and a verifier fixes them.
 - **ATS integrations:** candidates from Workable, Greenhouse, Teamtailor, Recruitee and Breezy HR are invited automatically, and results go back.
 - **Slack:** a company picks a channel and which of its notifications go there.
@@ -45,7 +46,7 @@ Then open the app at http://localhost:8090. Sign-in uses the Firebase Auth emula
 
 | Page | What it covers |
 |---|---|
-| [Companies](docs/features/companies.md) | Company names, the team and its roles, logos, verification, page guides |
+| [Companies](docs/features/companies.md) | Company names, the team and its roles, the brand (logo, font, corner rounding, light and dark colors on candidates' pages), verification, page guides |
 | [Interviews](docs/features/interviews.md) | Making an interview, topic review, the interview page and its settings, preview |
 | [Candidates](docs/features/candidates.md) | Invites, the shareable link, taking an interview, timing, scorecards, reports |
 | [Templates and practice](docs/features/templates-and-practice.md) | The question bank, copying templates, slugs, free practice |

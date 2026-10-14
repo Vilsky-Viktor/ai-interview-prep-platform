@@ -72,6 +72,7 @@ async def invite(
     name: str | None = None,
     return_url: str | None = None,
     sign_in: bool = True,
+    theme: str | None = None,
 ) -> UUID:
     """Invites the candidate as `sender_id` would, and returns the invite's id. Companies'
     refusals (PASSED_ON) raise an HTTPException with its status and reason."""
@@ -83,6 +84,7 @@ async def invite(
             "name": name,
             "return_url": return_url,
             "sign_in": sign_in,
+            "theme": theme,
         },
         headers=_headers(),
     )

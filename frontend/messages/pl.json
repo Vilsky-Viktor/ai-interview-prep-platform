@@ -497,6 +497,7 @@
     "team": "Zespół",
     "integrations": "Integracje",
     "referrals": "Polecenia",
+    "brand": "Marka",
     "billing": "Rozliczenia",
     "new": "Nowa firma",
     "name": "Nazwa firmy",
@@ -1378,6 +1379,67 @@
     "createFailed": "Nie udało się utworzyć.",
     "removeFailed": "Nie udało się usunąć."
   },
+  "brand": {
+    "logoTitle": "Logo",
+    "logoText": "Kandydaci widzą je w zaproszeniu, podczas rozmowy i w e-mailach.",
+    "colorsTitle": "Kolory",
+    "colorsText": "Kandydaci widzą cały przebieg rozmowy w tych kolorach, jasnych lub ciemnych zgodnie z własnym ustawieniem albo tak, jak wskazuje Twój link, API lub SDK. Każdy tekst musi pozostać czytelny, dlatego nie da się zapisać kolorów o zbyt małym kontraście.",
+    "groups": {
+      "page": {
+        "name": "Strona",
+        "text": "Tło oraz tytuły i pytania na nim."
+      },
+      "primary": {
+        "name": "Główny",
+        "text": "Przyciski, obramowanie wybranej odpowiedzi, licznik czasu i linki oraz tekst na przyciskach."
+      },
+      "secondary": {
+        "name": "Dodatkowy",
+        "text": "Wypełnienia, takie jak ramka z zasadami i wybrana odpowiedź, oraz szary tekst: podpowiedzi i litery odpowiedzi."
+      },
+      "dialogs": {
+        "name": "Okna dialogowe",
+        "text": "Okna takie jak „Zakończyć całą rozmowę?”: ich tło i tekst."
+      },
+      "borders": {
+        "name": "Obramowania",
+        "text": "Linie wokół odpowiedzi i między częściami strony."
+      }
+    },
+    "colors": {
+      "background": "Tło",
+      "foreground": "Tekst",
+      "primary": "Kolor",
+      "primary_foreground": "Tekst",
+      "muted": "Wypełnienie",
+      "muted_foreground": "Tekst",
+      "card": "Tło",
+      "card_foreground": "Tekst",
+      "border": "Linie"
+    },
+    "save": "Zapisz",
+    "saved": "Zapisano",
+    "styleTitle": "Czcionka i rogi",
+    "styleText": "Cały tekst jedną czcionką oraz zaokrąglenie rogów kart i przycisków, takie same w obu motywach.",
+    "font": "Czcionka",
+    "radius": "Zaokrąglenie kart",
+    "buttonRadius": "Zaokrąglenie przycisków",
+    "reset": "Resetuj",
+    "resetPrepza": "Przywróć ustawienia domyślne prepza",
+    "themes": {
+      "light": "Jasny motyw",
+      "dark": "Ciemny motyw"
+    },
+    "resetDone": "Przywrócono ustawienia domyślne prepza",
+    "failed": "Nie udało się zapisać identyfikacji wizualnej.",
+    "preview": "Podgląd",
+    "sampleTitle": "HR Manager",
+    "sampleQuestion": "Po czym kandydaci od razu poznają, że strona rozmowy należy do Twojej firmy?",
+    "sampleOptions": [
+      "Widać na niej Twoje logo i kolory marki",
+      "Wygląda dokładnie tak samo jak rozmowa każdej innej firmy"
+    ]
+  },
   "apiDocs": {
     "title": "Dokumentacja dla deweloperów",
     "intro": "Połącz prepza z własną platformą: pobieraj listę rozmów, zapraszaj kandydatów, otrzymuj ich wyniki i osadzaj rozmowę na własnej stronie.",
@@ -1865,6 +1927,20 @@
       "tips": [
         "Nowy klucz i sekret webhooka są pokazywane tylko raz: skopiuj je od razu.",
         "Ustaw termin ważności każdego klucza: wyciekły klucz bez terminu ważności można używać bez końca."
+      ]
+    },
+    "brand": {
+      "title": "Marka",
+      "text": "Twoje logo i kolory w zaproszeniu, rozmowie i na stronie końcowej Twoich kandydatów.",
+      "actions": [
+        "Ustaw lub zmień logo.",
+        "Wybierz czcionkę i zaokrąglenie kart oraz przycisków.",
+        "Wybierz kolory każdej grupy i zobacz je w podglądzie.",
+        "Zapisz je albo wróć do kolorów prepza."
+      ],
+      "tips": [
+        "Kolorów, przy których tekst byłby trudny do odczytania, nie da się zapisać, żeby każdy kandydat mógł przeczytać pytania.",
+        "Członkowie zespołu, którzy wypróbowują rozmowę, też widzą ją w Twoich kolorach."
       ]
     },
     "referrals": {

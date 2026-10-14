@@ -80,7 +80,7 @@ FAQ = [
     {
         "key": "candidates",
         "question": "Co widzą kandydaci?",
-        "answer": "Nazwę i logo Twojej firmy, przed startem informację, czego się spodziewać, a potem po jednym pytaniu z limitem czasu. Nigdy nie widzą swojego wyniku ani tego, czy odpowiedź była poprawna.",
+        "answer": "Nazwę i logo Twojej firmy, w kolorach i czcionce Twojej firmy (ustawionych na jej karcie Marka), przed startem informację, czego się spodziewać, a potem po jednym pytaniu z limitem czasu. Nigdy nie widzą swojego wyniku ani tego, czy odpowiedź była poprawna.",
     },
     {
         "key": "verified",

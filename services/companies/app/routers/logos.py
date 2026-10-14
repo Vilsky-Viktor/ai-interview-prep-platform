@@ -5,14 +5,26 @@ from uuid import UUID
 from fastapi import APIRouter, HTTPException, Response, status
 from prepza_common.auth import CurrentUser
 
+from app.constants.brand import PREPZA_COLORS, Theme
 from app.constants.logos import LOGO_CACHE
+from app.helpers.brand import color_sets, style_of, unreadable
 from app.helpers.logos import logo_path, logo_type
 from app.helpers.return_urls import with_invite
-from app.schemas.logos import BrandOut, LogoIn, LogoOut
+from app.schemas.logos import (
+    BrandColorSets,
+    BrandColorsIn,
+    BrandColorsOut,
+    BrandOut,
+    BrandStyle,
+    LogoIn,
+    LogoOut,
+    PrepzaBrand,
+)
 from app.services.access import require_editor
 from app.storage import companies, interviews, invites
 
-# Company branding: the logo candidates see on their pages, emails and reports.
+# Company branding: the logo candidates see on their pages, emails and reports, and the colors
+# of their pages.
 router = APIRouter(tags=["logos"])
 
 
@@ -42,6 +54,42 @@ async def set_logo(company_id: UUID, body: LogoIn, user: CurrentUser) -> LogoOut
 async def remove_logo(company_id: UUID, user: CurrentUser) -> None:
     company, _ = await require_editor(user, company_id)
     await companies.set_logo(company.id, None, None)
+
+
+@router.get("/brand/prepza")
+async def prepza_brand() -> PrepzaBrand:
+    """prepza's own colors (by theme), font and rounding: where a company's start, and what they
+    go back to."""
+    return PrepzaBrand(colors=BrandColorSets(**PREPZA_COLORS), style=BrandStyle())
+
+
+@router.put("/companies/{company_id}/brand-colors/{theme}")
+async def set_brand_colors(
+    company_id: UUID, theme: Theme, body: BrandColorsIn, user: CurrentUser
+) -> BrandColorsOut:
+    """Any of the company's owners and admins sets its colors for one theme, or goes back to
+    prepza's with none. Colors that would make any text hard to read are refused, so no
+    candidate is tested on a page they can't read."""
+    company, _ = await require_editor(user, company_id)
+    colors = body.colors.model_dump() if body.colors else None
+    problem = unreadable(colors) if colors else None
+
+    if problem:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, problem)
+
+    await companies.set_brand_colors(company.id, theme, colors)
+
+    return BrandColorsOut(colors=body.colors)
+
+
+@router.put("/companies/{company_id}/brand-style")
+async def set_brand_style(company_id: UUID, body: BrandStyle, user: CurrentUser) -> BrandStyle:
+    """Any of the company's owners and admins sets the font and corner rounding of its
+    candidates' pages, the same in both themes."""
+    company, _ = await require_editor(user, company_id)
+    await companies.set_brand_style(company.id, body.font, body.radius, body.button_radius)
+
+    return body
 
 
 @router.get("/companies/{company_id}/logo")
@@ -78,4 +126,7 @@ async def candidate_brand(invite_id: UUID, user: CurrentUser) -> BrandOut:
         company=company.name,
         logo_url=logo_path(company),
         return_url=with_invite(back, invite.id) if back else None,
+        brand_colors=BrandColorSets(**color_sets(company.brand_colors)),
+        theme=invite.theme,
+        brand_style=BrandStyle(**style_of(company)),
     )

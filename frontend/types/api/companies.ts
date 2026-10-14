@@ -957,6 +957,70 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/brand/prepza": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Prepza Brand
+     * @description prepza's own colors (by theme), font and rounding: where a company's start, and what they
+     *     go back to.
+     */
+    get: operations["prepza_brand_brand_prepza_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/companies/{company_id}/brand-colors/{theme}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /**
+     * Set Brand Colors
+     * @description Any of the company's owners and admins sets its colors for one theme, or goes back to
+     *     prepza's with none. Colors that would make any text hard to read are refused, so no
+     *     candidate is tested on a page they can't read.
+     */
+    put: operations["set_brand_colors_companies__company_id__brand_colors__theme__put"]
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/companies/{company_id}/brand-style": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /**
+     * Set Brand Style
+     * @description Any of the company's owners and admins sets the font and corner rounding of its
+     *     candidates' pages, the same in both themes.
+     */
+    put: operations["set_brand_style_companies__company_id__brand_style_put"]
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/candidates/{invite_id}/brand": {
     parameters: {
       query?: never
@@ -1852,6 +1916,7 @@ export interface components {
       name?: string | null
       /** Return Url */
       return_url?: string | null
+      theme?: components["schemas"]["Theme"] | null
       /**
        * Sign In
        * @default true
@@ -1914,6 +1979,61 @@ export interface components {
       checkout?: components["schemas"]["CheckoutOut"] | null
     }
     /**
+     * BrandColorSets
+     * @description The colors a candidate's pages use, by theme: the company's, or prepza's where it has
+     *     none.
+     */
+    BrandColorSets: {
+      light: components["schemas"]["BrandColors"]
+      dark: components["schemas"]["BrandColors"]
+    }
+    /**
+     * BrandColors
+     * @description A company's colors on its candidates' pages, by group: each background and its text.
+     */
+    BrandColors: {
+      /** Background */
+      background: string
+      /** Foreground */
+      foreground: string
+      /** Card */
+      card: string
+      /** Card Foreground */
+      card_foreground: string
+      /** Primary */
+      primary: string
+      /** Primary Foreground */
+      primary_foreground: string
+      /** Muted */
+      muted: string
+      /** Muted Foreground */
+      muted_foreground: string
+      /** Border */
+      border: string
+    }
+    /** BrandColorsIn */
+    BrandColorsIn: {
+      colors: components["schemas"]["BrandColors"] | null
+    }
+    /** BrandColorsOut */
+    BrandColorsOut: {
+      colors: components["schemas"]["BrandColors"] | null
+    }
+    /**
+     * BrandFont
+     * @enum {string}
+     */
+    BrandFont:
+      | "poppins"
+      | "geist"
+      | "inter"
+      | "roboto"
+      | "open_sans"
+      | "lato"
+      | "montserrat"
+      | "nunito"
+      | "merriweather"
+    /**
      * BrandOut
      * @description Who a candidate's interview is for, shown while they take it.
      */
@@ -1924,6 +2044,28 @@ export interface components {
       logo_url: string | null
       /** Return Url */
       return_url?: string | null
+      brand_colors?: components["schemas"]["BrandColorSets"] | null
+      theme?: components["schemas"]["Theme"] | null
+      brand_style?: components["schemas"]["BrandStyle"] | null
+    }
+    /**
+     * BrandStyle
+     * @description A company's font, and its cards' and buttons' corner rounding (px), on its candidates'
+     *     pages.
+     */
+    BrandStyle: {
+      /** @default poppins */
+      font: components["schemas"]["BrandFont"]
+      /**
+       * Radius
+       * @default 10
+       */
+      radius: number
+      /**
+       * Button Radius
+       * @default 24
+       */
+      button_radius: number
     }
     /**
      * BulkInviteIn
@@ -2196,6 +2338,9 @@ export interface components {
       interview_count: number
       /** Logo Url */
       logo_url?: string | null
+      brand_colors?: components["schemas"]["SavedBrandColors"] | null
+      candidate_colors?: components["schemas"]["BrandColorSets"] | null
+      brand_style?: components["schemas"]["BrandStyle"] | null
       /** Website Domain */
       website_domain?: string | null
       /** Verified Domain */
@@ -2549,6 +2694,11 @@ export interface components {
        * @default false
        */
       guest: boolean
+      brand_colors?: components["schemas"]["BrandColorSets"] | null
+      theme?: components["schemas"]["Theme"] | null
+      brand_style?: components["schemas"]["BrandStyle"] | null
+      /** Embed Domain */
+      embed_domain?: string | null
     }
     /**
      * InvitedCompaniesOut
@@ -2602,6 +2752,8 @@ export interface components {
       logo_url?: string | null
       /** Verified Domain */
       verified_domain?: string | null
+      brand_colors?: components["schemas"]["BrandColorSets"] | null
+      brand_style?: components["schemas"]["BrandStyle"] | null
       /** Question Seconds */
       question_seconds: number
       /** Status */
@@ -2766,6 +2918,11 @@ export interface components {
       /** Paused */
       paused: boolean
     }
+    /** PrepzaBrand */
+    PrepzaBrand: {
+      colors: components["schemas"]["BrandColorSets"]
+      style: components["schemas"]["BrandStyle"]
+    }
     /**
      * PreviewOut
      * @description The first session of a member's preview, to open in the player.
@@ -2907,6 +3064,14 @@ export interface components {
             [key: string]: unknown
           }[]
         | null
+    }
+    /**
+     * SavedBrandColors
+     * @description The sets a company saved, by theme; a theme without one uses prepza's.
+     */
+    SavedBrandColors: {
+      light?: components["schemas"]["BrandColors"] | null
+      dark?: components["schemas"]["BrandColors"] | null
     }
     /** ScorecardAnswer */
     ScorecardAnswer: {
@@ -3069,6 +3234,11 @@ export interface components {
        */
       created_at: string
     }
+    /**
+     * Theme
+     * @enum {string}
+     */
+    Theme: "light" | "dark"
     /** TitleIn */
     TitleIn: {
       /** Title */
@@ -5114,6 +5284,106 @@ export interface operations {
           [name: string]: unknown
         }
         content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  prepza_brand_brand_prepza_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["PrepzaBrand"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  set_brand_colors_companies__company_id__brand_colors__theme__put: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+        theme: components["schemas"]["Theme"]
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["BrandColorsIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["BrandColorsOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  set_brand_style_companies__company_id__brand_style_put: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["BrandStyle"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["BrandStyle"]
+        }
       }
       /** @description Validation Error */
       422: {

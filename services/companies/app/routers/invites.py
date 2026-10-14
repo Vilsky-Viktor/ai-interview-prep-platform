@@ -3,12 +3,14 @@ from prepza_common.auth import CurrentUser, OptionalUser
 from prepza_common.pause import refuse_if_paused
 
 from app.constants.invites import EMAIL_NOT_VERIFIED, NOT_THE_GUEST, InviteStatus
+from app.helpers.brand import color_sets, style_of
 from app.helpers.candidates import candidate_seconds
 from app.helpers.interviews import attach_set, interview_title
 from app.helpers.logos import logo_path
 from app.integrations.firebase_tokens import guest_token, guest_uid
 from app.integrations.redis import get_redis
 from app.schemas.invites import GuestTokenOut, InviteStartOut, InviteView
+from app.schemas.logos import BrandColorSets, BrandStyle
 from app.services.access import refuse_if_suspended
 from app.services.candidate_start import start_sessions
 from app.storage import companies
@@ -44,6 +46,9 @@ async def get_invite(token: str, user: OptionalUser) -> InviteView:
         status=invite.status,
         question_seconds=candidate_seconds(interview.question_seconds, invite.extra_time),
         guest=invite.guest,
+        brand_colors=BrandColorSets(**color_sets(company.brand_colors if company else None)),
+        theme=invite.theme,
+        brand_style=BrandStyle(**style_of(company)),
         embed_domain=company.verified_domain if company and invite.guest else None,
     )
 

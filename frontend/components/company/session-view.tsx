@@ -13,6 +13,7 @@ import { SignInPrompt } from "@/components/sign-in-prompt"
 import { Button } from "@/components/ui/button"
 import { useSessionPlayer } from "@/hooks/use-session-player"
 import { apiFetch } from "@/lib/api"
+import { useBrandColors } from "@/hooks/use-brand-colors"
 import { setTimedPageOver } from "@/lib/timed-page"
 import type { Brand, Company } from "@/types/company"
 
@@ -54,6 +55,7 @@ export function SessionView({
     finishInterview,
   } = useSessionPlayer(id)
   const [brand, setBrand] = useState<Brand | null>(null)
+  useBrandColors(brand?.brand_colors, brand?.theme, brand?.brand_style)
   const inviteId = session?.candidate_invite_id
   const practice = Boolean(session?.practice)
   const router = useRouter()
@@ -83,6 +85,8 @@ export function SessionView({
           (company) => ({
             company: company.name,
             logo_url: company.logo_url ?? null,
+            brand_colors: company.candidate_colors ?? null,
+            brand_style: company.brand_style ?? null,
           })
         )
       : inviteId && !practice

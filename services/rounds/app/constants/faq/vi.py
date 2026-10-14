@@ -80,7 +80,7 @@ FAQ = [
     {
         "key": "candidates",
         "question": "Ứng viên thấy gì?",
-        "answer": "Tên và logo công ty của bạn, những gì cần biết trước khi bắt đầu, rồi lần lượt từng câu hỏi có giới hạn thời gian. Họ không bao giờ thấy điểm của mình hay câu trả lời có đúng không.",
+        "answer": "Tên và logo công ty của bạn, với màu sắc và phông chữ của công ty bạn (đặt trong thẻ Thương hiệu), những gì cần biết trước khi bắt đầu, rồi lần lượt từng câu hỏi có giới hạn thời gian. Họ không bao giờ thấy điểm của mình hay câu trả lời có đúng không.",
     },
     {
         "key": "verified",

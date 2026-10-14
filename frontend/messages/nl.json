@@ -497,6 +497,7 @@
     "team": "Team",
     "integrations": "Integraties",
     "referrals": "Doorverwijzingen",
+    "brand": "Merk",
     "billing": "Facturering",
     "new": "Nieuw bedrijf",
     "name": "Bedrijfsnaam",
@@ -1374,6 +1375,67 @@
     "createFailed": "Kan niet worden gemaakt.",
     "removeFailed": "Kan niet worden verwijderd."
   },
+  "brand": {
+    "logoTitle": "Logo",
+    "logoText": "Kandidaten zien het in hun uitnodiging, tijdens het interview en in e-mails.",
+    "colorsTitle": "Kleuren",
+    "colorsText": "Kandidaten zien het hele verloop van het interview in deze kleuren, licht of donker volgens hun eigen instelling, of zoals je link, de API of de SDK aangeeft. Elke tekst moet goed leesbaar blijven, dus kleuren met te weinig contrast kunnen niet worden opgeslagen.",
+    "groups": {
+      "page": {
+        "name": "Pagina",
+        "text": "De achtergrond, en de titels en vragen erop."
+      },
+      "primary": {
+        "name": "Primair",
+        "text": "Knoppen, de rand van het gekozen antwoord, de timer en links, en de tekst op knoppen."
+      },
+      "secondary": {
+        "name": "Secundair",
+        "text": "Vlakken zoals het regelvak en het gekozen antwoord, en de grijze tekst: hints en antwoordletters."
+      },
+      "dialogs": {
+        "name": "Dialoogvensters",
+        "text": "Vensters zoals ‘Het hele interview afronden?’: hun achtergrond en tekst."
+      },
+      "borders": {
+        "name": "Randen",
+        "text": "Lijnen rond antwoorden en tussen delen van de pagina."
+      }
+    },
+    "colors": {
+      "background": "Achtergrond",
+      "foreground": "Tekst",
+      "primary": "Kleur",
+      "primary_foreground": "Tekst",
+      "muted": "Vlak",
+      "muted_foreground": "Tekst",
+      "card": "Achtergrond",
+      "card_foreground": "Tekst",
+      "border": "Lijnen"
+    },
+    "save": "Opslaan",
+    "saved": "Opgeslagen",
+    "styleTitle": "Lettertype en hoeken",
+    "styleText": "Alle tekst in één lettertype, en hoe rond de hoeken van kaarten en knoppen zijn, in beide thema's hetzelfde.",
+    "font": "Lettertype",
+    "radius": "Afronding van kaarten",
+    "buttonRadius": "Afronding van knoppen",
+    "reset": "Herstellen",
+    "resetPrepza": "Terug naar de prepza-standaard",
+    "themes": {
+      "light": "Licht thema",
+      "dark": "Donker thema"
+    },
+    "resetDone": "Terug naar de standaardinstellingen van prepza",
+    "failed": "De huisstijl kon niet worden opgeslagen.",
+    "preview": "Voorbeeld",
+    "sampleTitle": "HR-manager",
+    "sampleQuestion": "Hoe zien kandidaten in één oogopslag dat een interviewpagina van jouw bedrijf is?",
+    "sampleOptions": [
+      "Ze toont je logo en huisstijlkleuren",
+      "Het ziet er precies zo uit als het sollicitatiegesprek van elk ander bedrijf"
+    ]
+  },
   "apiDocs": {
     "title": "Ontwikkelaarsdocumentatie",
     "intro": "Koppel prepza aan je eigen platform: bekijk je interviews, nodig kandidaten uit, ontvang hun resultaten en sluit het interview in op je eigen website.",
@@ -1861,6 +1923,20 @@
       "tips": [
         "Een nieuwe sleutel en het secret van een webhook worden maar één keer getoond: kopieer ze meteen.",
         "Kies voor elke sleutel een vervaldatum: een gelekte sleutel die nooit verloopt, blijft bruikbaar."
+      ]
+    },
+    "brand": {
+      "title": "Merk",
+      "text": "Je logo en kleuren in de uitnodiging, het interview en de afsluitende pagina van je kandidaten.",
+      "actions": [
+        "Stel het logo in of wijzig het.",
+        "Kies het lettertype en hoe rond kaarten en knoppen zijn.",
+        "Kies de kleuren van elke groep en bekijk ze in het voorbeeld.",
+        "Sla ze op, of ga terug naar de prepza-kleuren."
+      ],
+      "tips": [
+        "Kleuren waarbij tekst moeilijk leesbaar zou zijn, kunnen niet worden opgeslagen, zodat elke kandidaat de vragen kan lezen.",
+        "Teamleden die een interview uitproberen, zien het ook in jouw kleuren."
       ]
     },
     "referrals": {

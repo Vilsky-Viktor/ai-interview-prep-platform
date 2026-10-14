@@ -70,3 +70,6 @@ export const FONT_VARIABLES = [
   devanagari,
   thai,
 ].map((font) => font.variable)
+
+// The site's text font by name: what a company's own font falls back to (brand-fonts.ts).
+export const SITE_FONTS = { geist: geist.style.fontFamily }

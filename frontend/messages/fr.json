@@ -497,6 +497,7 @@
     "team": "Équipe",
     "integrations": "Intégrations",
     "referrals": "Parrainage",
+    "brand": "Marque",
     "billing": "Facturation",
     "new": "Nouvelle entreprise",
     "name": "Nom de l'entreprise",
@@ -1378,6 +1379,67 @@
     "createFailed": "Impossible de le créer.",
     "removeFailed": "Impossible de le supprimer."
   },
+  "brand": {
+    "logoTitle": "Logo",
+    "logoText": "Les candidats le voient sur leur invitation, pendant l'entretien et dans les e-mails.",
+    "colorsTitle": "Couleurs",
+    "colorsText": "Les candidats voient le déroulement de l'entretien dans ces couleurs, en clair ou en sombre selon leur propre réglage, ou selon ce que demande votre lien, l'API ou le SDK. Tout texte doit rester facile à lire : les couleurs trop peu contrastées ne peuvent donc pas être enregistrées.",
+    "groups": {
+      "page": {
+        "name": "Page",
+        "text": "Le fond, et les titres et les questions qui s'y trouvent."
+      },
+      "primary": {
+        "name": "Principale",
+        "text": "Les boutons, le contour de la réponse choisie, le minuteur et les liens, ainsi que le texte des boutons."
+      },
+      "secondary": {
+        "name": "Secondaire",
+        "text": "Les aplats comme l'encadré des règles et la réponse choisie, et le texte gris : indications et lettres des réponses."
+      },
+      "dialogs": {
+        "name": "Boîtes de dialogue",
+        "text": "Les fenêtres comme « Terminer tout l'entretien ? » : leur fond et leur texte."
+      },
+      "borders": {
+        "name": "Bordures",
+        "text": "Les lignes autour des réponses et entre les parties de la page."
+      }
+    },
+    "colors": {
+      "background": "Fond",
+      "foreground": "Texte",
+      "primary": "Couleur",
+      "primary_foreground": "Texte",
+      "muted": "Aplat",
+      "muted_foreground": "Texte",
+      "card": "Fond",
+      "card_foreground": "Texte",
+      "border": "Lignes"
+    },
+    "save": "Enregistrer",
+    "saved": "Enregistré",
+    "styleTitle": "Police et coins",
+    "styleText": "Tout le texte dans une seule police, et l'arrondi des coins des cartes et des boutons, identiques dans les deux thèmes.",
+    "font": "Police",
+    "radius": "Arrondi des cartes",
+    "buttonRadius": "Arrondi des boutons",
+    "reset": "Réinitialiser",
+    "resetPrepza": "Revenir aux réglages de prepza",
+    "themes": {
+      "light": "Thème clair",
+      "dark": "Thème sombre"
+    },
+    "resetDone": "Paramètres par défaut de prepza rétablis",
+    "failed": "Impossible d'enregistrer l'identité visuelle.",
+    "preview": "Aperçu",
+    "sampleTitle": "Responsable RH",
+    "sampleQuestion": "Comment les candidats voient-ils d'un coup d'œil qu'une page d'entretien vient de votre entreprise ?",
+    "sampleOptions": [
+      "Elle affiche votre logo et les couleurs de votre marque",
+      "Elle ressemble trait pour trait à l'entretien de n'importe quelle autre entreprise"
+    ]
+  },
   "apiDocs": {
     "title": "Documentation développeurs",
     "intro": "Connectez prepza à votre propre plateforme : listez vos entretiens, invitez des candidats, récupérez leurs résultats et intégrez l'entretien à votre propre site.",
@@ -1865,6 +1927,20 @@
       "tips": [
         "Une nouvelle clé et le secret d'un webhook ne s'affichent qu'une fois : copiez-les tout de suite.",
         "Choisissez une date d'expiration pour chaque clé : une clé divulguée qui n'expire jamais reste utilisable."
+      ]
+    },
+    "brand": {
+      "title": "Marque",
+      "text": "Votre logo et vos couleurs sur l'invitation, l'entretien et la page de fin de vos candidats.",
+      "actions": [
+        "Ajoutez ou changez le logo.",
+        "Choisissez la police et l'arrondi des cartes et des boutons.",
+        "Choisissez les couleurs de chaque groupe et voyez-les dans l'aperçu.",
+        "Enregistrez-les, ou revenez aux couleurs de prepza."
+      ],
+      "tips": [
+        "Les couleurs qui rendraient le texte difficile à lire ne peuvent pas être enregistrées, pour que chaque candidat puisse lire les questions.",
+        "Les membres de l'équipe qui essaient un entretien le voient aussi dans vos couleurs."
       ]
     },
     "referrals": {

@@ -15,10 +15,10 @@ import { throwawayEmail } from "../helpers/users";
 // their own lines, dialogs across the screen with their buttons side by side, and timed questions
 // with nothing around them.
 
-// The page's visible width: the header's, which spans it (without the scrollbar desktop Chrome
-// draws; phones draw none).
+// The page's visible width, without the scrollbar desktop Chrome draws (phones draw none): also
+// on a company's interview pages, which have no header to measure.
 async function pageWidth(page: Page) {
-  return (await box(page.getByRole("banner"))).width;
+  return page.evaluate(() => document.body.getBoundingClientRect().width);
 }
 
 // Out to both edges of the screen.

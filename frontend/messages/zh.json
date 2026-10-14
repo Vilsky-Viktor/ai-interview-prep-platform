@@ -497,6 +497,7 @@
     "team": "团队",
     "integrations": "集成",
     "referrals": "推荐",
+    "brand": "品牌",
     "billing": "账单",
     "new": "新公司",
     "name": "公司名称",
@@ -1369,6 +1370,64 @@
     "createFailed": "无法创建。",
     "removeFailed": "无法删除。"
   },
+  "brand": {
+    "logoTitle": "标志",
+    "logoText": "候选人会在邀请、面试过程和邮件中看到它。",
+    "colorsTitle": "颜色",
+    "colorsText": "候选人看到的整个面试流程都使用这些颜色，浅色或深色取决于他们自己的设置，或你的链接、API 或 SDK 的指定。所有文字都必须清晰易读，因此对比度过低的颜色无法保存。",
+    "groups": {
+      "page": {
+        "name": "页面",
+        "text": "背景，以及其上的标题和题目。"
+      },
+      "primary": {
+        "name": "主色",
+        "text": "按钮、所选答案的边框、计时器和链接，以及按钮上的文字。"
+      },
+      "secondary": {
+        "name": "辅色",
+        "text": "填充，如规则框和所选答案，以及灰色文字：提示和答案字母。"
+      },
+      "dialogs": {
+        "name": "对话框",
+        "text": "如“结束整场面试？”这样的窗口：其背景和文字。"
+      },
+      "borders": {
+        "name": "边框",
+        "text": "答案周围和页面各部分之间的线条。"
+      }
+    },
+    "colors": {
+      "background": "背景",
+      "foreground": "文字",
+      "primary": "颜色",
+      "primary_foreground": "文字",
+      "muted": "填充",
+      "muted_foreground": "文字",
+      "card": "背景",
+      "card_foreground": "文字",
+      "border": "线条"
+    },
+    "save": "保存",
+    "saved": "已保存",
+    "styleTitle": "字体和圆角",
+    "styleText": "所有文字使用同一种字体，并设置卡片和按钮的圆角大小，两种主题相同。",
+    "font": "字体",
+    "radius": "卡片圆角",
+    "buttonRadius": "按钮圆角",
+    "reset": "重置",
+    "resetPrepza": "重置为 prepza 默认设置",
+    "themes": {
+      "light": "浅色主题",
+      "dark": "深色主题"
+    },
+    "resetDone": "已恢复 prepza 默认设置",
+    "failed": "无法保存品牌设置。",
+    "preview": "预览",
+    "sampleTitle": "人力资源经理",
+    "sampleQuestion": "候选人如何一眼看出面试页面来自你的公司？",
+    "sampleOptions": ["页面上有你的标志和品牌颜色", "看起来和其他任何公司的面试一模一样"]
+  },
   "apiDocs": {
     "title": "开发者文档",
     "intro": "将 prepza 连接到你自己的平台：列出你的面试、邀请候选人、获取他们的结果，并将面试嵌入你自己的网站。",
@@ -1849,6 +1908,20 @@
       "tips": [
         "新密钥和 Webhook 的签名密钥只显示一次：请立即复制。",
         "为每个密钥设置有效期：永不过期的密钥一旦泄露会一直可用。"
+      ]
+    },
+    "brand": {
+      "title": "品牌",
+      "text": "你的标志和颜色，显示在候选人的邀请、面试和完成页面上。",
+      "actions": [
+        "设置或更换标志。",
+        "选择字体以及卡片和按钮的圆角大小。",
+        "选择每组的颜色，并在预览中查看。",
+        "保存，或恢复 prepza 颜色。"
+      ],
+      "tips": [
+        "会让文字难以阅读的颜色无法保存，以确保每位候选人都能读清题目。",
+        "试做面试的成员也会看到你的颜色。"
       ]
     },
     "referrals": {

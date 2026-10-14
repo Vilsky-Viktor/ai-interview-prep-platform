@@ -8,6 +8,9 @@
  *       element: "#interview",
  *       // The invite_url your server got from POST /v1/interviews/{id}/candidates.
  *       url: "https://prepza.ai/invite/3fTq9xLk2VbN7wZr8YcP1mHd5sJ4gAe6uQo0RiKtEy",
+ *       // Optional: "light" or "dark" always shows that theme, in your company's colors for it;
+ *       // "default" (or none) the candidate's own.
+ *       theme: "dark",
  *       onFinish: ({ candidateId }) => {},
  *     })
  *   </script>
@@ -39,7 +42,8 @@
       "/embedded/" +
       encodeURIComponent(token) +
       "?origin=" +
-      encodeURIComponent(window.location.origin)
+      encodeURIComponent(window.location.origin) +
+      (options.theme ? "&theme=" + encodeURIComponent(options.theme) : "")
     frame.title = options.title || "Interview"
     frame.style.cssText =
       "display:block;width:100%;border:0;height:" + MIN_HEIGHT + "px"

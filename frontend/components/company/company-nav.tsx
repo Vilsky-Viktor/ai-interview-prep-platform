@@ -9,10 +9,12 @@ export type CompanyTab =
   | "templates"
   | "members"
   | "integrations"
+  | "brand"
   | "referrals"
   | "billing"
 
-/** A company's tabs; billing only for owners and admins (`canEdit`), who top up. */
+/** A company's tabs; brand and billing only for owners and admins (`canEdit`), who set its
+ * colors and top up. */
 export function CompanyNav({
   companyId,
   current,
@@ -46,6 +48,11 @@ export function CompanyNav({
     },
     ...(canEdit
       ? [
+          {
+            id: "brand",
+            href: `/companies/${companyId}/brand`,
+            label: t("brand"),
+          },
           {
             id: "billing",
             href: `/companies/${companyId}/billing`,

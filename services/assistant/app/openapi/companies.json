@@ -3278,6 +3278,164 @@
     }
    }
   },
+  "/brand/prepza": {
+   "get": {
+    "tags": [
+     "logos"
+    ],
+    "summary": "Prepza Brand",
+    "description": "prepza's own colors (by theme), font and rounding: where a company's start, and what they\ngo back to.",
+    "operationId": "prepza_brand_brand_prepza_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PrepzaBrand"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/companies/{company_id}/brand-colors/{theme}": {
+   "put": {
+    "tags": [
+     "logos"
+    ],
+    "summary": "Set Brand Colors",
+    "description": "Any of the company's owners and admins sets its colors for one theme, or goes back to\nprepza's with none. Colors that would make any text hard to read are refused, so no\ncandidate is tested on a page they can't read.",
+    "operationId": "set_brand_colors_companies__company_id__brand_colors__theme__put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     },
+     {
+      "name": "theme",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "$ref": "#/components/schemas/Theme"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/BrandColorsIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/BrandColorsOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/companies/{company_id}/brand-style": {
+   "put": {
+    "tags": [
+     "logos"
+    ],
+    "summary": "Set Brand Style",
+    "description": "Any of the company's owners and admins sets the font and corner rounding of its\ncandidates' pages, the same in both themes.",
+    "operationId": "set_brand_style_companies__company_id__brand_style_put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/BrandStyle"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/BrandStyle"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
   "/candidates/{invite_id}/brand": {
    "get": {
     "tags": [
@@ -5572,6 +5730,16 @@
       ],
       "title": "Return Url"
      },
+     "theme": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/Theme"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
      "sign_in": {
       "type": "boolean",
       "title": "Sign In",
@@ -5740,6 +5908,154 @@
     "title": "AutoTopUpOut",
     "description": "The company's automatic top-up, as billing has it."
    },
+   "BrandColorSets": {
+    "properties": {
+     "light": {
+      "$ref": "#/components/schemas/BrandColors"
+     },
+     "dark": {
+      "$ref": "#/components/schemas/BrandColors"
+     }
+    },
+    "type": "object",
+    "required": [
+     "light",
+     "dark"
+    ],
+    "title": "BrandColorSets",
+    "description": "The colors a candidate's pages use, by theme: the company's, or prepza's where it has\nnone."
+   },
+   "BrandColors": {
+    "properties": {
+     "background": {
+      "type": "string",
+      "pattern": "^#[0-9a-fA-F]{6}$",
+      "title": "Background"
+     },
+     "foreground": {
+      "type": "string",
+      "pattern": "^#[0-9a-fA-F]{6}$",
+      "title": "Foreground"
+     },
+     "card": {
+      "type": "string",
+      "pattern": "^#[0-9a-fA-F]{6}$",
+      "title": "Card"
+     },
+     "card_foreground": {
+      "type": "string",
+      "pattern": "^#[0-9a-fA-F]{6}$",
+      "title": "Card Foreground"
+     },
+     "primary": {
+      "type": "string",
+      "pattern": "^#[0-9a-fA-F]{6}$",
+      "title": "Primary"
+     },
+     "primary_foreground": {
+      "type": "string",
+      "pattern": "^#[0-9a-fA-F]{6}$",
+      "title": "Primary Foreground"
+     },
+     "muted": {
+      "type": "string",
+      "pattern": "^#[0-9a-fA-F]{6}$",
+      "title": "Muted"
+     },
+     "muted_foreground": {
+      "type": "string",
+      "pattern": "^#[0-9a-fA-F]{6}$",
+      "title": "Muted Foreground"
+     },
+     "border": {
+      "type": "string",
+      "pattern": "^#[0-9a-fA-F]{6}$",
+      "title": "Border"
+     }
+    },
+    "type": "object",
+    "required": [
+     "background",
+     "foreground",
+     "card",
+     "card_foreground",
+     "primary",
+     "primary_foreground",
+     "muted",
+     "muted_foreground",
+     "border"
+    ],
+    "title": "BrandColors",
+    "description": "A company's colors on its candidates' pages, by group: each background and its text."
+   },
+   "BrandColorsIn": {
+    "properties": {
+     "colors": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/BrandColors"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "type": "object",
+    "required": [
+     "colors"
+    ],
+    "title": "BrandColorsIn"
+   },
+   "BrandColorsOut": {
+    "properties": {
+     "colors": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/BrandColors"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "type": "object",
+    "required": [
+     "colors"
+    ],
+    "title": "BrandColorsOut"
+   },
+   "BrandFont": {
+    "type": "string",
+    "enum": [
+     "poppins_geist",
+     "inter",
+     "roboto",
+     "open_sans",
+     "lato",
+     "montserrat",
+     "nunito",
+     "raleway",
+     "work_sans",
+     "source_sans_3",
+     "noto_sans",
+     "pt_sans",
+     "ubuntu",
+     "rubik",
+     "manrope",
+     "dm_sans",
+     "ibm_plex_sans",
+     "mulish",
+     "fira_sans",
+     "plus_jakarta_sans",
+     "outfit",
+     "merriweather",
+     "lora",
+     "playfair_display"
+    ],
+    "title": "BrandFont"
+   },
    "BrandOut": {
     "properties": {
      "company": {
@@ -5767,6 +6083,36 @@
        }
       ],
       "title": "Return Url"
+     },
+     "brand_colors": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/BrandColorSets"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "theme": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/Theme"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "brand_style": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/BrandStyle"
+       },
+       {
+        "type": "null"
+       }
+      ]
      }
     },
     "type": "object",
@@ -5776,6 +6122,31 @@
     ],
     "title": "BrandOut",
     "description": "Who a candidate's interview is for, shown while they take it."
+   },
+   "BrandStyle": {
+    "properties": {
+     "font": {
+      "$ref": "#/components/schemas/BrandFont",
+      "default": "poppins_geist"
+     },
+     "radius": {
+      "type": "integer",
+      "maximum": 24.0,
+      "minimum": 0.0,
+      "title": "Radius",
+      "default": 10
+     },
+     "button_radius": {
+      "type": "integer",
+      "maximum": 24.0,
+      "minimum": 0.0,
+      "title": "Button Radius",
+      "default": 24
+     }
+    },
+    "type": "object",
+    "title": "BrandStyle",
+    "description": "A company's font, and its cards' and buttons' corner rounding (px), on its candidates'\npages."
    },
    "BulkInviteIn": {
     "properties": {
@@ -6350,6 +6721,36 @@
        }
       ],
       "title": "Logo Url"
+     },
+     "brand_colors": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/SavedBrandColors"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "candidate_colors": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/BrandColorSets"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "brand_style": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/BrandStyle"
+       },
+       {
+        "type": "null"
+       }
+      ]
      },
      "website_domain": {
       "anyOf": [
@@ -7293,6 +7694,36 @@
       "title": "Guest",
       "default": false
      },
+     "brand_colors": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/BrandColorSets"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "theme": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/Theme"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "brand_style": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/BrandStyle"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
      "embed_domain": {
       "anyOf": [
        {
@@ -7437,6 +7868,26 @@
        }
       ],
       "title": "Verified Domain"
+     },
+     "brand_colors": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/BrandColorSets"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "brand_style": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/BrandStyle"
+       },
+       {
+        "type": "null"
+       }
+      ]
      },
      "question_seconds": {
       "type": "integer",
@@ -7822,6 +8273,22 @@
     ],
     "title": "PauseOut"
    },
+   "PrepzaBrand": {
+    "properties": {
+     "colors": {
+      "$ref": "#/components/schemas/BrandColorSets"
+     },
+     "style": {
+      "$ref": "#/components/schemas/BrandStyle"
+     }
+    },
+    "type": "object",
+    "required": [
+     "colors",
+     "style"
+    ],
+    "title": "PrepzaBrand"
+   },
    "PreviewOut": {
     "properties": {
      "session_id": {
@@ -8090,6 +8557,33 @@
     ],
     "title": "ReviewIn",
     "description": "Topic indices to keep, and optional free-text changes, as the generation service takes them."
+   },
+   "SavedBrandColors": {
+    "properties": {
+     "light": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/BrandColors"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "dark": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/BrandColors"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "type": "object",
+    "title": "SavedBrandColors",
+    "description": "The sets a company saved, by theme; a theme without one uses prepza's."
    },
    "ScorecardAnswer": {
     "properties": {
@@ -8543,6 +9037,14 @@
      "created_at"
     ],
     "title": "SuperadminCompanyOut"
+   },
+   "Theme": {
+    "type": "string",
+    "enum": [
+     "light",
+     "dark"
+    ],
+    "title": "Theme"
    },
    "TitleIn": {
     "properties": {

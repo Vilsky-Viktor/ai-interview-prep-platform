@@ -12,15 +12,18 @@ export function PillSelect({
   onChange,
   disabled,
   className,
+  pillClassName,
 }: {
   // Shown above the select; without it, `ariaLabel` names it.
   label?: string
   ariaLabel?: string
   value: string
-  options: { value: string; label: string }[]
+  options: { value: string; label: string; fontFamily?: string }[]
   onChange: (value: string) => void
   disabled?: boolean
   className?: string
+  // The pill's own classes: a width that stays as the choice changes, say.
+  pillClassName?: string
 }) {
   return (
     <div className={cn("space-y-2", className)}>
@@ -33,6 +36,7 @@ export function PillSelect({
         options={options.map((option) => ({ ...option, keepCase: true }))}
         onChange={onChange}
         disabled={disabled}
+        className={pillClassName}
       />
     </div>
   )

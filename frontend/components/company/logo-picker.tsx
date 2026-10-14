@@ -1,6 +1,7 @@
 "use client"
 
-import { ImageUpIcon, Trash2Icon } from "lucide-react"
+import { cn } from "cn"
+import { ImageUpIcon, SquarePenIcon, Trash2Icon } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { useRef, useState } from "react"
@@ -23,7 +24,8 @@ import { fileBase64 } from "@/lib/files"
 
 const BOX =
   "flex size-12 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-muted"
-const SPOT = `${BOX} cursor-pointer transition-colors hover:bg-muted/70 disabled:cursor-default`
+const LARGE = "size-24 rounded-2xl"
+const SPOT = `${BOX} group relative cursor-pointer transition-colors hover:bg-muted/70 disabled:cursor-default`
 
 /** The company's logo beside its name: without one, its first letter, and a click picks an
  * image; with one, a click offers to change or remove it. Not `editable` (a viewer), it only
@@ -33,11 +35,14 @@ export function LogoPicker({
   name,
   logoUrl,
   editable,
+  large = false,
 }: {
   companyId: string
   name: string
   logoUrl: string | null
   editable: boolean
+  // Twice the size: the brand tab's, where it's set.
+  large?: boolean
 }) {
   const t = useTranslations("company")
   const router = useRouter()
@@ -85,14 +90,44 @@ export function LogoPicker({
   )
 
   const letter = (
-    <span className="font-heading text-2xl font-medium text-muted-foreground uppercase">
+    <span
+      className={cn(
+        "font-heading text-2xl font-medium text-muted-foreground uppercase",
+        large && "text-4xl"
+      )}
+    >
       {name.slice(0, 1)}
     </span>
   )
 
+  // An edit icon in the corner says it can be changed; on hover, a bigger one in the middle.
+  const editHint = (
+    <>
+      <span
+        aria-hidden
+        className="absolute end-1 top-1 flex rounded-md bg-background/90 p-0.5 text-muted-foreground transition-opacity group-hover:opacity-0 group-focus-visible:opacity-0"
+      >
+        <SquarePenIcon
+          className={cn("size-3 rtl:-scale-x-100", large && "size-4")}
+        />
+      </span>
+      <span
+        aria-hidden
+        className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
+      >
+        <SquarePenIcon
+          className={cn(
+            "size-5 text-white rtl:-scale-x-100",
+            large && "size-7"
+          )}
+        />
+      </span>
+    </>
+  )
+
   if (!editable) {
     return (
-      <span className={BOX}>
+      <span className={cn(BOX, large && LARGE)}>
         {logoUrl ? (
           <CompanyLogo
             url={logoUrl}
@@ -114,7 +149,7 @@ export function LogoPicker({
             render={
               <button
                 type="button"
-                className={SPOT}
+                className={cn(SPOT, large && LARGE)}
                 disabled={saving}
                 aria-label={t("uploadLogo")}
                 onClick={() => fileInput.current?.click()}
@@ -122,6 +157,7 @@ export function LogoPicker({
             }
           >
             {letter}
+            {editHint}
           </TooltipTrigger>
           <TooltipContent>{t("uploadLogo")}</TooltipContent>
         </Tooltip>
@@ -137,7 +173,7 @@ export function LogoPicker({
           render={
             <button
               type="button"
-              className={SPOT}
+              className={cn(SPOT, large && LARGE)}
               disabled={saving}
               aria-label={t("logo")}
             />
@@ -148,6 +184,7 @@ export function LogoPicker({
             name={name}
             className="size-full object-contain"
           />
+          {editHint}
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start" className="w-48 p-2">
           <DropdownMenuItem

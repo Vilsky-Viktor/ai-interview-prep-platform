@@ -80,7 +80,7 @@ FAQ = [
     {
         "key": "candidates",
         "question": "Apa yang dilihat kandidat?",
-        "answer": "Nama dan logo perusahaanmu, apa yang bisa diharapkan sebelum mulai, lalu satu soal berbatas waktu setiap kalinya. Mereka tidak pernah melihat skornya atau apakah jawabannya benar.",
+        "answer": "Nama dan logo perusahaanmu, dengan warna dan font perusahaanmu (diatur di tab Merek-nya), apa yang bisa diharapkan sebelum mulai, lalu satu soal berbatas waktu setiap kalinya. Mereka tidak pernah melihat skornya atau apakah jawabannya benar.",
     },
     {
         "key": "verified",

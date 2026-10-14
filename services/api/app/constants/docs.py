@@ -99,6 +99,7 @@ domain (or a subdomain of it) and served over HTTPS: anywhere else the interview
   const interview = Prepza.embed({
     element: "#interview",
     url: "https://prepza.ai/invite/3fTq9xLk2VbN7wZr8YcP1mHd5sJ4gAe6uQo0RiKtEy",
+    theme: "dark",
     onReady: () => {},
     onStart: () => {},
     onFinish: ({ candidateId }) => {},
@@ -106,7 +107,10 @@ domain (or a subdomain of it) and served over HTTPS: anywhere else the interview
 </script>
 ```
 
-The frame fits its height to the interview. `onFinish` gets the candidate's `id`, so your page
-can take them on; their results come with the `candidate.finished` web hook as usual.
-`interview.destroy()` removes the frame. While the interview runs, the candidate should stay on
-it: leaving it, including for the rest of your page, is recorded as a page leave."""
+`theme` is optional: `"light"` or `"dark"` always shows the interview in that theme, in your
+company's colors for it (set on the company's **brand** tab); `"default"`, or none, the
+candidate's own theme, or the one the invite asked for. The frame fits its height to the
+interview. `onFinish` gets the candidate's `id`, so your page can take them on; their results come
+with the `candidate.finished` web hook as usual. `interview.destroy()` removes the frame. While
+the interview runs, the candidate should stay on it: leaving it, including for the rest of your
+page, is recorded as a page leave."""

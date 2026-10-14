@@ -497,6 +497,7 @@
     "team": "Nhóm",
     "integrations": "Tích hợp",
     "referrals": "Giới thiệu",
+    "brand": "Thương hiệu",
     "billing": "Thanh toán",
     "new": "Công ty mới",
     "name": "Tên công ty",
@@ -1374,6 +1375,67 @@
     "createFailed": "Không tạo được.",
     "removeFailed": "Không xóa được."
   },
+  "brand": {
+    "logoTitle": "Logo",
+    "logoText": "Ứng viên thấy logo trong lời mời, trong buổi phỏng vấn và trong email.",
+    "colorsTitle": "Màu sắc",
+    "colorsText": "Ứng viên thấy quá trình phỏng vấn bằng những màu này, sáng hoặc tối theo cài đặt của chính họ, hoặc theo yêu cầu của liên kết của bạn, API hay SDK. Mọi văn bản phải luôn dễ đọc, nên không thể lưu các màu có độ tương phản quá thấp.",
+    "groups": {
+      "page": {
+        "name": "Trang",
+        "text": "Nền, cùng tiêu đề và câu hỏi trên nền."
+      },
+      "primary": {
+        "name": "Chính",
+        "text": "Nút, viền của câu trả lời đã chọn, đồng hồ đếm giờ và liên kết, cùng chữ trên nút."
+      },
+      "secondary": {
+        "name": "Phụ",
+        "text": "Phần tô như ô quy tắc và câu trả lời đã chọn, cùng chữ màu xám: gợi ý và chữ cái của đáp án."
+      },
+      "dialogs": {
+        "name": "Hộp thoại",
+        "text": "Cửa sổ như “Kết thúc toàn bộ buổi phỏng vấn?”: nền và chữ của chúng."
+      },
+      "borders": {
+        "name": "Đường viền",
+        "text": "Đường quanh các câu trả lời và giữa các phần của trang."
+      }
+    },
+    "colors": {
+      "background": "Nền",
+      "foreground": "Chữ",
+      "primary": "Màu",
+      "primary_foreground": "Chữ",
+      "muted": "Tô",
+      "muted_foreground": "Chữ",
+      "card": "Nền",
+      "card_foreground": "Chữ",
+      "border": "Đường kẻ"
+    },
+    "save": "Lưu",
+    "saved": "Đã lưu",
+    "styleTitle": "Phông chữ và góc",
+    "styleText": "Toàn bộ chữ dùng một phông, và độ bo góc của thẻ và nút, giống nhau ở cả hai giao diện.",
+    "font": "Phông chữ",
+    "radius": "Độ bo góc thẻ",
+    "buttonRadius": "Độ bo góc nút",
+    "reset": "Đặt lại",
+    "resetPrepza": "Đặt lại về mặc định của prepza",
+    "themes": {
+      "light": "Giao diện sáng",
+      "dark": "Giao diện tối"
+    },
+    "resetDone": "Đã quay về mặc định của prepza",
+    "failed": "Không thể lưu thương hiệu.",
+    "preview": "Xem trước",
+    "sampleTitle": "Quản lý nhân sự",
+    "sampleQuestion": "Làm sao ứng viên nhận ra ngay một trang phỏng vấn là của công ty bạn?",
+    "sampleOptions": [
+      "Trang hiển thị logo và màu thương hiệu của bạn",
+      "Trông y hệt buổi phỏng vấn của bất kỳ công ty nào khác"
+    ]
+  },
   "apiDocs": {
     "title": "Tài liệu cho nhà phát triển",
     "intro": "Kết nối prepza với nền tảng của riêng bạn: xem danh sách phỏng vấn, mời ứng viên, nhận kết quả của họ và nhúng buổi phỏng vấn vào trang web của bạn.",
@@ -1861,6 +1923,20 @@
       "tips": [
         "Khóa mới và khóa bí mật của webhook chỉ hiện một lần: hãy sao chép ngay.",
         "Đặt thời hạn cho mỗi khóa: khóa bị lộ mà không bao giờ hết hạn thì vẫn dùng được mãi."
+      ]
+    },
+    "brand": {
+      "title": "Thương hiệu",
+      "text": "Logo và màu của bạn trên lời mời, buổi phỏng vấn và trang hoàn tất của ứng viên.",
+      "actions": [
+        "Đặt hoặc đổi logo.",
+        "Chọn phông chữ và độ bo góc của thẻ và nút.",
+        "Chọn màu cho từng nhóm và xem trong bản xem trước.",
+        "Lưu lại, hoặc quay về màu của prepza."
+      ],
+      "tips": [
+        "Không thể lưu những màu khiến chữ khó đọc, để mọi ứng viên đều đọc được câu hỏi.",
+        "Thành viên dùng thử buổi phỏng vấn cũng thấy màu của bạn."
       ]
     },
     "referrals": {

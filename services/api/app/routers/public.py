@@ -93,7 +93,14 @@ async def invite_candidate(interview_id: UUID, body: CandidateIn, key: ApiKeyDep
     already invited sends the invitation again, if emails are on."""
     await companies.interview(key.company_id, interview_id)
     invite_id = await companies.invite(
-        interview_id, str(body.email), key.created_by, body.name, body.return_url, body.sign_in
+        interview_id,
+        str(body.email),
+        key.created_by,
+        body.name,
+        body.return_url,
+        body.sign_in,
+        # Companies keeps only a theme that's enforced.
+        None if body.theme == "default" else body.theme,
     )
     found = await companies.candidate(key.company_id, interview_id, invite_id)
 

@@ -497,6 +497,7 @@
     "team": "Ekip",
     "integrations": "Entegrasyonlar",
     "referrals": "Davetler",
+    "brand": "Marka",
     "billing": "Faturalandırma",
     "new": "Yeni şirket",
     "name": "Şirket adı",
@@ -1377,6 +1378,67 @@
     "createFailed": "Oluşturulamadı.",
     "removeFailed": "Silinemedi."
   },
+  "brand": {
+    "logoTitle": "Logo",
+    "logoText": "Adaylar onu davetlerinde, mülakat sırasında ve e-postalarda görür.",
+    "colorsTitle": "Renkler",
+    "colorsText": "Adaylar mülakat sürecini bu renklerle görür; kendi ayarlarına göre ya da bağlantınızın, API'nin veya SDK'nın istediği gibi açık veya koyu olarak. Her metin kolayca okunabilir kalmalıdır, bu yüzden kontrastı yetersiz renkler kaydedilemez.",
+    "groups": {
+      "page": {
+        "name": "Sayfa",
+        "text": "Arka plan ve üzerindeki başlıklar ile sorular."
+      },
+      "primary": {
+        "name": "Birincil",
+        "text": "Düğmeler, seçilen cevabın çerçevesi, zamanlayıcı ve bağlantılar ile düğmelerdeki metin."
+      },
+      "secondary": {
+        "name": "İkincil",
+        "text": "Kurallar kutusu ve seçilen cevap gibi dolgular ile gri metin: ipuçları ve cevap harfleri."
+      },
+      "dialogs": {
+        "name": "İletişim kutuları",
+        "text": "“Mülakatın tamamı bitirilsin mi?” gibi pencereler: arka planları ve metinleri."
+      },
+      "borders": {
+        "name": "Kenarlıklar",
+        "text": "Cevapların çevresindeki ve sayfanın bölümleri arasındaki çizgiler."
+      }
+    },
+    "colors": {
+      "background": "Arka plan",
+      "foreground": "Metin",
+      "primary": "Renk",
+      "primary_foreground": "Metin",
+      "muted": "Dolgu",
+      "muted_foreground": "Metin",
+      "card": "Arka plan",
+      "card_foreground": "Metin",
+      "border": "Çizgiler"
+    },
+    "save": "Kaydet",
+    "saved": "Kaydedildi",
+    "styleTitle": "Yazı tipi ve köşeler",
+    "styleText": "Tüm metin tek bir yazı tipinde; kartların ve düğmelerin köşelerinin ne kadar yuvarlak olacağı, iki temada da aynı.",
+    "font": "Yazı tipi",
+    "radius": "Kart yuvarlaklığı",
+    "buttonRadius": "Düğme yuvarlaklığı",
+    "reset": "Sıfırla",
+    "resetPrepza": "prepza varsayılanlarına sıfırla",
+    "themes": {
+      "light": "Açık tema",
+      "dark": "Koyu tema"
+    },
+    "resetDone": "prepza varsayılanlarına dönüldü",
+    "failed": "Marka kaydedilemedi.",
+    "preview": "Önizleme",
+    "sampleTitle": "İK Müdürü",
+    "sampleQuestion": "Adaylar bir mülakat sayfasının şirketinize ait olduğunu bir bakışta nasıl anlar?",
+    "sampleOptions": [
+      "Sayfada logonuz ve marka renkleriniz yer alır",
+      "Başka herhangi bir şirketin mülakatıyla tıpatıp aynı görünür"
+    ]
+  },
   "apiDocs": {
     "title": "Geliştirici belgeleri",
     "intro": "prepza'yı kendi platformunuza bağlayın: mülakatlarınızı listeleyin, aday davet edin, sonuçlarını alın ve mülakatı kendi sitenize yerleştirin.",
@@ -1864,6 +1926,20 @@
       "tips": [
         "Yeni bir anahtar ve webhook'un gizli anahtarı yalnızca bir kez gösterilir: hemen kopyalayın.",
         "Her anahtar için bir son geçerlilik tarihi seçin: sızdırılmış süresiz bir anahtar kullanılabilir kalır."
+      ]
+    },
+    "brand": {
+      "title": "Marka",
+      "text": "Adaylarınızın davetinde, mülakatında ve bitiş sayfasında logonuz ve renkleriniz.",
+      "actions": [
+        "Logoyu ekleyin veya değiştirin.",
+        "Yazı tipini ve kartların ve düğmelerin ne kadar yuvarlak olacağını seçin.",
+        "Her grubun renklerini seçin ve önizlemede görün.",
+        "Kaydedin ya da prepza renklerine dönün."
+      ],
+      "tips": [
+        "Metni okumayı zorlaştıracak renkler kaydedilemez, böylece her aday soruları okuyabilir.",
+        "Bir mülakatı deneyen ekip üyeleri de onu sizin renklerinizle görür."
       ]
     },
     "referrals": {

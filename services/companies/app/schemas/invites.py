@@ -3,11 +3,13 @@ from uuid import UUID
 
 from pydantic import BaseModel, EmailStr, Field, field_validator
 
+from app.constants.brand import Theme
 from app.constants.invites import (
     EXTRA_TIME_OPTIONS,
     MAX_BULK_TEXT_LENGTH,
     MAX_CANDIDATE_NAME_LENGTH,
 )
+from app.schemas.logos import BrandColorSets, BrandStyle
 
 
 class CandidateIn(BaseModel):
@@ -57,6 +59,11 @@ class InviteView(BaseModel):
     question_seconds: int
     # Sent by the company's own platform: the link signs the candidate in, no account needed.
     guest: bool = False
+    # The interview's colors by theme, and the theme the invite asked for (None: the
+    # candidate's own).
+    brand_colors: BrandColorSets | None = None
+    theme: Theme | None = None
+    brand_style: BrandStyle | None = None
     # The website that may embed this interview in a frame (with its subdomains): the company's
     # verified one (a superadmin approved it), for a guest invite only. None: no site may.
     embed_domain: str | None = None
@@ -79,6 +86,9 @@ class LinkView(BaseModel):
     company: str
     logo_url: str | None = None
     verified_domain: str | None = None
+    # The test's colors by theme (the candidate's own theme picks which), font and rounding.
+    brand_colors: BrandColorSets | None = None
+    brand_style: BrandStyle | None = None
     question_seconds: int
     # The signed-in person's invite status for this test; None before they start it.
     status: str | None = None

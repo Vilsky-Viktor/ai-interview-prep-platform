@@ -12,6 +12,7 @@ import { LinkStatus } from "@/components/link-status"
 import { Button } from "@/components/ui/button"
 import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
 import { refreshVerification } from "@/lib/auth"
+import { useBrandColors } from "@/hooks/use-brand-colors"
 import { useLinkData } from "@/hooks/use-link-data"
 import type { JobLink, SessionSummary } from "@/types/company"
 
@@ -35,6 +36,7 @@ export function LinkView({ token }: { token: string }) {
     loading ? null : `/companies/links/${token}`,
     user?.uid
   )
+  useBrandColors(link?.brand_colors, null, link?.brand_style)
 
   async function start() {
     setStarting(true)

@@ -33,6 +33,7 @@ async def upsert(
     verified: bool = False,
     return_url: str | None = None,
     sign_in: bool = True,
+    theme: str | None = None,
 ) -> tuple[CandidateInvite, bool]:
     """Creates the invite (with `hold_key`, its credits' key, or a new one), or returns the existing one so it
     can be sent again, and saves the email's event with it. True when it revived an expired
@@ -77,6 +78,9 @@ async def upsert(
 
         if return_url:
             invite.return_url = return_url
+
+        if theme:
+            invite.theme = theme
 
         company_id = await session.scalar(
             select(Interview.company_id).where(Interview.id == interview_id)

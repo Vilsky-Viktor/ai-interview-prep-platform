@@ -80,7 +80,7 @@ FAQ = [
     {
         "key": "candidates",
         "question": "Mida kandidaadid näevad?",
-        "answer": "Sinu ettevõtte nime ja logo, enne alustamist seda, mida oodata, ja seejärel ühe ajapiiranguga küsimuse korraga. Nad ei näe kunagi oma tulemust ega seda, kas vastus oli õige.",
+        "answer": "Sinu ettevõtte nime ja logo sinu ettevõtte värvides ja fondis (määratud selle vahekaardil Bränd), enne alustamist seda, mida oodata, ja seejärel ühe ajapiiranguga küsimuse korraga. Nad ei näe kunagi oma tulemust ega seda, kas vastus oli õige.",
     },
     {
         "key": "verified",

@@ -87,18 +87,38 @@ def test_an_invite_passes_its_name_and_a_candidate_reads_with_theirs(client, com
     assert response.json()["name"] == "Anna Nowak"
 
 
-def test_an_invite_passes_where_to_return_and_whether_to_sign_in(client, companies_api, key):
-    body = {"email": "bob@example.com", "return_url": "https://acme.com/done", "sign_in": False}
+def test_an_invite_passes_where_to_return_whether_to_sign_in_and_its_theme(
+    client, companies_api, key
+):
+    body = {
+        "email": "bob@example.com",
+        "return_url": "https://acme.com/done",
+        "sign_in": False,
+        "theme": "dark",
+    }
     response = call(client, "POST", f"/interviews/{INTERVIEW}/candidates", json=body)
 
     assert response.status_code == 201
-    assert companies_api["options"] == {"bob@example.com": ("https://acme.com/done", False)}
+    assert companies_api["options"] == {"bob@example.com": ("https://acme.com/done", False, "dark")}
 
 
 def test_an_invite_signs_in_and_returns_nowhere_unless_told(client, companies_api, key):
     call(client, "POST", f"/interviews/{INTERVIEW}/candidates", json={"email": "bob@example.com"})
 
-    assert companies_api["options"] == {"bob@example.com": (None, True)}
+    assert companies_api["options"] == {"bob@example.com": (None, True, None)}
+
+
+def test_an_invites_default_theme_leaves_it_to_the_candidate(client, companies_api, key):
+    body = {"email": "bob@example.com", "theme": "default"}
+    call(client, "POST", f"/interviews/{INTERVIEW}/candidates", json=body)
+
+    assert companies_api["options"] == {"bob@example.com": (None, True, None)}
+
+
+def test_an_invite_with_an_unknown_theme_is_refused(client, companies_api, key):
+    body = {"email": "bob@example.com", "theme": "sepia"}
+
+    assert call(client, "POST", f"/interviews/{INTERVIEW}/candidates", json=body).status_code == 422
 
 
 def test_an_invite_with_a_too_long_name_is_refused(client, companies_api, key):

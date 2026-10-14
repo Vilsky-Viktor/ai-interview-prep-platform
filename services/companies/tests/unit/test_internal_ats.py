@@ -42,7 +42,9 @@ def stored(monkeypatch):
     async def by_ids(ids):
         return [item for item in (READY, MAKING) if item.id in ids]
 
-    async def invite(interview, company, user, email, name=None, return_url=None, sign_in=True):
+    async def invite(
+        interview, company, user, email, name=None, return_url=None, sign_in=True, theme=None
+    ):
         calls["invites"].append((interview.id, company.id, user.uid, email))
         calls.setdefault("names", []).append(name)
 

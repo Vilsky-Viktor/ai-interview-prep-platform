@@ -497,6 +497,7 @@
     "team": "Team",
     "integrations": "Integrationen",
     "referrals": "Empfehlungen",
+    "brand": "Marke",
     "billing": "Abrechnung",
     "new": "Neues Unternehmen",
     "name": "Name des Unternehmens",
@@ -1378,6 +1379,67 @@
     "createFailed": "Konnte nicht erstellt werden.",
     "removeFailed": "Konnte nicht gelöscht werden."
   },
+  "brand": {
+    "logoTitle": "Logo",
+    "logoText": "Kandidaten sehen es in ihrer Einladung, während des Interviews und in E-Mails.",
+    "colorsTitle": "Farben",
+    "colorsText": "Kandidaten sehen den Ablauf des Interviews in diesen Farben, hell oder dunkel, je nach ihrer eigenen Einstellung oder wie es dein Link, die API oder das SDK vorgibt. Jeder Text muss gut lesbar bleiben, deshalb lassen sich Farben mit zu wenig Kontrast nicht speichern.",
+    "groups": {
+      "page": {
+        "name": "Seite",
+        "text": "Der Hintergrund und die Titel und Fragen darauf."
+      },
+      "primary": {
+        "name": "Primär",
+        "text": "Buttons, der Rahmen der gewählten Antwort, der Timer und Links sowie der Text auf Buttons."
+      },
+      "secondary": {
+        "name": "Sekundär",
+        "text": "Flächen wie der Regelkasten und die gewählte Antwort sowie der graue Text: Hinweise und Antwortbuchstaben."
+      },
+      "dialogs": {
+        "name": "Dialoge",
+        "text": "Fenster wie „Das ganze Interview beenden?“: ihr Hintergrund und ihr Text."
+      },
+      "borders": {
+        "name": "Rahmen",
+        "text": "Linien um Antworten und zwischen Teilen der Seite."
+      }
+    },
+    "colors": {
+      "background": "Hintergrund",
+      "foreground": "Text",
+      "primary": "Farbe",
+      "primary_foreground": "Text",
+      "muted": "Fläche",
+      "muted_foreground": "Text",
+      "card": "Hintergrund",
+      "card_foreground": "Text",
+      "border": "Linien"
+    },
+    "save": "Speichern",
+    "saved": "Gespeichert",
+    "styleTitle": "Schriftart und Ecken",
+    "styleText": "Der gesamte Text in einer Schriftart und wie rund die Ecken von Karten und Buttons sind, in beiden Designs gleich.",
+    "font": "Schriftart",
+    "radius": "Kartenrundung",
+    "buttonRadius": "Buttonrundung",
+    "reset": "Zurücksetzen",
+    "resetPrepza": "Auf prepza-Standard zurücksetzen",
+    "themes": {
+      "light": "Helles Design",
+      "dark": "Dunkles Design"
+    },
+    "resetDone": "Zurück zu den Standardeinstellungen von prepza",
+    "failed": "Das Branding konnte nicht gespeichert werden.",
+    "preview": "Vorschau",
+    "sampleTitle": "HR-Manager (m/w/d)",
+    "sampleQuestion": "Woran erkennen Kandidaten auf einen Blick, dass eine Interviewseite von deinem Unternehmen stammt?",
+    "sampleOptions": [
+      "Sie zeigt dein Logo und deine Markenfarben",
+      "Sie sieht genauso aus wie das Interview jedes anderen Unternehmens"
+    ]
+  },
   "apiDocs": {
     "title": "Entwicklerdokumentation",
     "intro": "Verbinde prepza mit deiner eigenen Plattform: Liste deine Interviews auf, lade Kandidaten ein, erhalte ihre Ergebnisse und bette das Interview in deine eigene Website ein.",
@@ -1865,6 +1927,20 @@
       "tips": [
         "Ein neuer Schlüssel und das Secret eines Webhooks werden nur einmal angezeigt: Kopiere sie sofort.",
         "Wähle für jeden Schlüssel ein Ablaufdatum: Ein geleakter Schlüssel ohne Ablauf bleibt nutzbar."
+      ]
+    },
+    "brand": {
+      "title": "Marke",
+      "text": "Dein Logo und deine Farben in der Einladung, im Interview und auf der Abschlussseite deiner Kandidaten.",
+      "actions": [
+        "Lege das Logo fest oder ändere es.",
+        "Wähle die Schriftart und wie rund Karten und Buttons sind.",
+        "Wähle die Farben jeder Gruppe und sieh sie dir in der Vorschau an.",
+        "Speichere sie oder kehre zu den prepza-Farben zurück."
+      ],
+      "tips": [
+        "Farben, bei denen Text schwer lesbar wäre, lassen sich nicht speichern, damit alle Kandidaten die Fragen lesen können.",
+        "Teammitglieder, die ein Interview ausprobieren, sehen es ebenfalls in deinen Farben."
       ]
     },
     "referrals": {
