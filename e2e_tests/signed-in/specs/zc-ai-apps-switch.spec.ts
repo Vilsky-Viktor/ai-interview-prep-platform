@@ -6,8 +6,10 @@ import { ownerEmail } from "../helpers/users"
 
 test("an owner stops AI apps from using the company's data, and allows them again", async ({
   signInAs,
+  signInWith,
 }) => {
-  const owner = await signInAs(ownerEmail())
+  const email = ownerEmail()
+  const owner = await signInAs(email)
   const company = await createCompany(owner)
 
   await visit(owner, `/companies/${company.id}/integrations/ai`)
@@ -27,4 +29,26 @@ test("an owner stops AI apps from using the company's data, and allows them agai
   await expect(allow).not.toBeChecked()
   await allow.click()
   await expect(allow).toBeChecked()
+
+  // Right to left (Arabic): the knob stays inside its track, on and off.
+  // A new sign-in's token carries the account's new language.
+  await api(owner, "PUT", "/library/me/settings", { language: "ar" })
+  const arabic = await signInWith(email, false)
+  await visit(arabic, `/companies/${company.id}/integrations/ai`)
+  await expect(arabic.locator("html")).toHaveAttribute("dir", "rtl")
+  const switchAr = arabic.getByRole("switch")
+
+  for (const checked of [true, false]) {
+    await expect(switchAr).toBeChecked({ checked })
+    await arabic.waitForTimeout(300)
+    const track = (await switchAr.boundingBox())!
+    const knob = (await switchAr.locator("[data-slot=switch-thumb]").boundingBox())!
+    expect(knob.x).toBeGreaterThanOrEqual(track.x - 1)
+    expect(knob.x + knob.width).toBeLessThanOrEqual(track.x + track.width + 1)
+    await shot(arabic, checked ? "rtl-on" : "rtl-off")
+
+    if (checked) {
+      await switchAr.click()
+    }
+  }
 })

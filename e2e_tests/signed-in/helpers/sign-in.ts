@@ -60,7 +60,8 @@ export async function signIn(
   await expect
     .poll(async () => (await context.cookies()).some((c) => c.name === TOKEN_COOKIE))
     .toBe(true)
-  await expect(page.getByRole("button", { name: /new company/i })).toBeVisible()
+  // The companies page, in whatever language the account uses.
+  await expect(page.locator("main h1")).toBeVisible()
 
   return page
 }
