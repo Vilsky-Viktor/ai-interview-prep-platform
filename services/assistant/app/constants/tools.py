@@ -69,7 +69,7 @@ TOOLS = {
         "method": "GET",
         "path": "/slack",
         "params": ["company_id"],
-        "fields": ["connected", "status", "team", "channel", "kinds"],
+        "fields": ["connected", "status", "team", "channel", "kinds", "all_kinds"],
     },
     "get_api_settings": {
         "service": "api",

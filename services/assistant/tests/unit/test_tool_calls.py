@@ -3,9 +3,10 @@ import asyncio
 import httpx
 import pytest
 
+from app.config.settings import settings
 from app.integrations import services
 from app.services.registry import tools
-from app.services.tool_calls import call_tool, call_tools
+from app.services.tool_calls import call_tool, call_tools, read
 
 COMPANY = "8c1d2b8e-1a2b-4c3d-8e9f-0a1b2c3d4e5f"
 INTERVIEW = "3f2b6a1e-8a7c-4c1e-9a55-0b6f3c2d1e00"
@@ -76,6 +77,26 @@ def test_a_list_is_trimmed_and_cut_for_the_model_and_shows_nothing(calls):
         "more": True,
     }
     assert result.block is None
+
+
+def test_the_model_gets_full_links_never_their_bare_codes(calls):
+    site = settings.site_url.rstrip("/")
+    calls.answer = answer(json={"id": "i1", "invite_token": "secret", "extra_time": 30})
+    scorecard = run("get_scorecard", {"interview_id": INTERVIEW, "invite_id": COMPANY})
+
+    assert scorecard.content["data"] == {
+        "id": "i1",
+        "extra_time": 30,
+        "invite_url": f"{site}/invite/secret",
+    }
+
+    # A shareable link turned on, and an interview whose link is off.
+    turned_on, _ = read(tools()["set_interview_link"], answer(json={"link_token": "job"}), 20)
+    calls.answer = answer(json={"id": INTERVIEW, "title": "Backend", "link_token": None})
+    without = run("get_interview", {"interview_id": INTERVIEW})
+
+    assert turned_on["data"] == {"link_url": f"{site}/apply/job"}
+    assert without.content["data"] == {"id": INTERVIEW, "title": "Backend"}
 
 
 def test_a_limit_is_capped_at_the_tools_maximum_and_set_when_left_out(calls):
@@ -157,8 +178,6 @@ def test_a_steps_calls_run_at_most_four_at_a_time_in_order(monkeypatch):
 
 
 def test_a_write_answered_without_a_body_reads_as_nothing():
-    from app.services.tool_calls import read
-
     tool = tools()["delete_interview"]
     response = httpx.Response(
         204,

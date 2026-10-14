@@ -108,6 +108,7 @@ INTERVIEW_ACTIONS = {
         "Turn the interview's shareable link (for a job ad) on or off.",
         body=["on"],
         link=CANDIDATES_PAGE,
+        fields=["link_url"],
     ),
     "set_topic_limit": interview_action(
         "PUT",

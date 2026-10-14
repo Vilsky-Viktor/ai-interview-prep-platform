@@ -36,3 +36,9 @@ SERVICE_URLS = {
 SERVICE_UNAVAILABLE = "The service didn't answer. Try again later."
 INVALID_ARGUMENTS = "Invalid arguments"
 UNKNOWN_TOOL = "There is no such tool."
+# A link's secret code in a tool's data, and the full link the model gets in its place, as the
+# app's pages copy it: the candidate's invite and the interview's shareable link.
+TOKEN_LINKS = {
+    "invite_token": ("invite_url", "/invite/{}"),
+    "link_token": ("link_url", "/apply/{}"),
+}

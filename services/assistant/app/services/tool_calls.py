@@ -4,6 +4,7 @@ import time
 import httpx
 from prepza_common.i18n import translate
 
+from app.config.settings import settings
 from app.constants.tool_calls import (
     INVALID_ARGUMENTS,
     MAX_PARALLEL_TOOL_CALLS,
@@ -13,6 +14,7 @@ from app.constants.tool_calls import (
 )
 from app.helpers.arguments import fill_path, problems
 from app.helpers.blocks import render_block
+from app.helpers.links import with_links
 from app.helpers.trimming import trim
 from app.integrations import services
 from app.models.tools import Tool, ToolResult
@@ -118,7 +120,7 @@ def read(tool: Tool, response: httpx.Response, wanted: int) -> tuple[dict, objec
     if more:
         data = data[:wanted]
 
-    data = trim(data, tool.fields, tool.max_items, tool.max_length)
+    data = trim(with_links(data, settings.site_url), tool.fields, tool.max_items, tool.max_length)
     content = {"data": data, "source": tool.name}
 
     if more:

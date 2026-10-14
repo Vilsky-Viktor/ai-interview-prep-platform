@@ -114,6 +114,8 @@ COMPANY_TOOLS = {
             "subtopics",
             "question_count",
             "question_limit",
+            # The shareable link, while it's on.
+            "link_url",
         ],
     },
     "get_generation": {
@@ -176,6 +178,10 @@ COMPANY_TOOLS = {
             "tab_leaves",
             "copies",
             "fast_answers",
+            # Extra seconds per question, for a candidate who asked for more time.
+            "extra_time",
+            # Until the candidate finishes, for owners and admins: to send it themselves.
+            "invite_url",
         ],
     },
     "get_pause": {
