@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import type { Locale } from "@/constants/i18n"
 import { MAX_GOAL_LENGTH } from "@/constants/limits"
+import { useOneAtATime } from "@/hooks/use-one-at-a-time"
 import { isSubmitShortcut } from "@/lib/keys"
 
 /** The box a test starts from, as on the home page: the pasted description, the language to
@@ -35,12 +36,15 @@ export function DescriptionBox({
   // Starts on the interface's language; any supported one can be chosen.
   const [generateIn, setGenerateIn] = useState(useLocale() as Locale)
   const [busy, setBusy] = useState(false)
+  const once = useOneAtATime()
 
   async function submit(event: React.FormEvent) {
     event.preventDefault()
-    setBusy(true)
-    await onSubmit(text.trim(), generateIn)
-    setBusy(false)
+    await once(async () => {
+      setBusy(true)
+      await onSubmit(text.trim(), generateIn)
+      setBusy(false)
+    })
   }
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLTextAreaElement>) {

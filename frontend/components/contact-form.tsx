@@ -13,6 +13,7 @@ import {
   MAX_CONTACT_NAME_LENGTH,
   MAX_EMAIL_LENGTH,
 } from "@/constants/limits"
+import { useOneAtATime } from "@/hooks/use-one-at-a-time"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 import { isSubmitShortcut } from "@/lib/keys"
 
@@ -32,21 +33,25 @@ export function ContactForm() {
   // The address the reply goes to, once the message is sent.
   const [sentTo, setSentTo] = useState<string | null>(null)
 
+  const once = useOneAtATime()
+
   async function send(event: React.FormEvent) {
     event.preventDefault()
-    setSending(true)
+    await once(async () => {
+      setSending(true)
 
-    try {
-      await apiFetch("/rounds/help/contact", {
-        method: "POST",
-        body: JSON.stringify({ name, email, message }),
-      })
-      setSentTo(email.trim())
-    } catch (error) {
-      toast.error(apiErrorMessage(error, t("failed")))
-    }
+      try {
+        await apiFetch("/rounds/help/contact", {
+          method: "POST",
+          body: JSON.stringify({ name, email, message }),
+        })
+        setSentTo(email.trim())
+      } catch (error) {
+        toast.error(apiErrorMessage(error, t("failed")))
+      }
 
-    setSending(false)
+      setSending(false)
+    })
   }
 
   if (sentTo) {

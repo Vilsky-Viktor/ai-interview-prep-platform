@@ -46,3 +46,33 @@ test("an unpaid company with a generated interview waiting is asked to invite or
   ).toBeVisible()
   await shot(owner, "waiting-limit")
 })
+
+// ⌘/Ctrl+Enter pressed twice before the first request finished asks for one interview.
+test("a description sent twice quickly asks for one interview", async ({ signInAs }) => {
+  const owner = await signInAs(throwawayEmail("double-submit"))
+  const company = await createCompany(owner)
+  let asked = 0
+  await owner.route(`**/api/companies/interviews?company_id=${company.id}`, async (route) => {
+    if (route.request().method() !== "POST") {
+      return route.continue()
+    }
+
+    asked += 1
+    await new Promise((resolve) => setTimeout(resolve, 1500))
+    // Refused, so nothing is generated.
+    await route.fulfill({
+      status: 429,
+      contentType: "application/json",
+      body: JSON.stringify({ detail: "Too many requests. Try again later." }),
+    })
+  })
+
+  await visit(owner, `/companies/${company.id}/interviews/new`)
+  const box = owner.getByRole("textbox", { name: "Job description" })
+  await box.fill("Senior accountant: month-end close, IFRS reporting and audits.")
+  await box.press("ControlOrMeta+Enter")
+  await box.press("ControlOrMeta+Enter")
+
+  await expect(owner.getByText("Too many requests. Try again later.")).toBeVisible()
+  expect(asked).toBe(1)
+})
