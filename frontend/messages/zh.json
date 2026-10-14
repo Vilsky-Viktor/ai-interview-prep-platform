@@ -722,12 +722,19 @@
     "homeTitle": "根据职位描述生成招聘测评与在线笔试"
   },
   "legal": {
-    "englishOnly": "本文件仅提供英文版本。",
+    "englishOnly": "此版本仅提供英文。",
     "inForce": "自 {date} 起生效",
     "upcoming": "自 {date} 起适用。",
     "replaced": "此版本自 {date} 起适用，现已被替换。",
     "readInForce": "阅读当前生效的版本",
-    "versions": "所有版本"
+    "versions": "所有版本",
+    "translated": "这是译文；仅英文版本具有约束力。",
+    "readEnglish": "阅读英文版",
+    "titles": {
+      "terms": "条款",
+      "privacy": "隐私",
+      "dpa": "数据处理协议"
+    }
   },
   "docs": {
     "title": "文档",

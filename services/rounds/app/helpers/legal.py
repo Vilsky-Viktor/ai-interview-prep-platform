@@ -10,6 +10,7 @@ from app.constants.terms import TERMS_INTRO, TERMS_SECTIONS
 
 # Every version ever published, each a JSON copy at <document>/<version>.json: the current one
 # too, so a changed text without a new version is caught (tests/unit/test_legal_versions.py).
+# Its translations sit at <document>/<version>/<language>.json; the English is the binding text.
 ARCHIVE = Path(__file__).resolve().parents[1] / "legal_versions"
 
 CURRENT = {
@@ -55,6 +56,17 @@ def version(document: str, name: str | None) -> dict | None:
         return None
 
     return json.loads((ARCHIVE / document / f"{name}.json").read_text())
+
+
+def translation(document: str, name: str, language: str) -> dict | None:
+    """A version's text in another language; None when it has no translation (English, or a
+    version older than the translations)."""
+    path = ARCHIVE / document / name / f"{language}.json"
+
+    if not path.exists():
+        return None
+
+    return json.loads(path.read_text())
 
 
 def archive() -> None:

@@ -11,9 +11,11 @@ export const generateMetadata = () =>
 export default async function PrivacyPage({
   searchParams,
 }: {
-  searchParams: Promise<{ version?: string }>
+  searchParams: Promise<{ version?: string; language?: string }>
 }) {
-  const { version } = await searchParams
+  const { version, language } = await searchParams
 
-  return <LegalPage title="Privacy" name="privacy" version={version} />
+  return (
+    <LegalPage name="privacy" version={version} english={language === "en"} />
+  )
 }

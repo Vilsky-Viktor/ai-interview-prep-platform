@@ -2,7 +2,7 @@ from app.constants.legal import COMPANY
 
 # The privacy policy, in English only: it's a legal text, and a translation would need its own
 # legal review. The help chat (the signed-out assistant) answers from it too.
-PRIVACY_INTRO = f"This policy explains what personal data prepza collects, why, how long we keep it, and the rights you have. prepza is run by {COMPANY['name']} (registry code {COMPANY['registry_code']}), {COMPANY['address']}."
+PRIVACY_INTRO = f"This policy explains what personal data prepza collects, why, how long we keep it, and the rights you have. prepza is run by {COMPANY['name']} (registry code {COMPANY['registry_code']}), {COMPANY['address']}. prepza.ai also shows this document in other languages; only this English version is binding, and where a translation differs, the English version applies."
 
 PRIVACY_SECTIONS = [
     {
@@ -60,7 +60,6 @@ PRIVACY_SECTIONS = [
             "Google Workspace: our email inbox, which receives contact messages and the emails you send us (Google Ireland Ltd; mail may be stored outside the EU, under the EU-US Data Privacy Framework and standard contractual clauses).",
             "Sentry: error reports, with emails removed (in the EU).",
             "Google Cloud, our hosting provider, which stores the data (in the EU, Belgium).",
-            "Upstash: short-lived counters for rate limits and live updates (in the EU, Belgium).",
             "Paddle sells the top-ups as the merchant of record: it handles payments and taxes as an independent controller, under its own privacy policy.",
         ],
     },

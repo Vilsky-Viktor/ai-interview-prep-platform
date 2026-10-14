@@ -722,12 +722,19 @@
     "homeTitle": "Test di selezione del personale creati dal tuo annuncio"
   },
   "legal": {
-    "englishOnly": "Questo documento è disponibile solo in inglese.",
+    "englishOnly": "Questa versione è disponibile solo in inglese.",
     "inForce": "In vigore dal {date}",
     "upcoming": "Si applica dal {date}.",
     "replaced": "Questa versione si applicava dal {date} ed è stata sostituita.",
     "readInForce": "Leggi la versione in vigore",
-    "versions": "Tutte le versioni"
+    "versions": "Tutte le versioni",
+    "translated": "Questa è una traduzione; fa fede solo la versione inglese.",
+    "readEnglish": "Leggi in inglese",
+    "titles": {
+      "terms": "Termini",
+      "privacy": "Privacy",
+      "dpa": "Accordo sul trattamento dei dati"
+    }
   },
   "docs": {
     "title": "Documenti",

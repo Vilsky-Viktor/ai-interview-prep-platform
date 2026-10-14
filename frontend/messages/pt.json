@@ -722,12 +722,19 @@
     "homeTitle": "Testes de recrutamento e seleção criados da sua vaga"
   },
   "legal": {
-    "englishOnly": "Este documento está disponível apenas em inglês.",
+    "englishOnly": "Esta versão só está disponível em inglês.",
     "inForce": "Em vigor desde {date}",
     "upcoming": "Aplica-se a partir de {date}.",
     "replaced": "Esta versão se aplicava a partir de {date} e foi substituída.",
     "readInForce": "Ler a versão em vigor",
-    "versions": "Todas as versões"
+    "versions": "Todas as versões",
+    "translated": "Esta é uma tradução; só a versão em inglês é vinculante.",
+    "readEnglish": "Ler em inglês",
+    "titles": {
+      "terms": "Termos",
+      "privacy": "Privacidade",
+      "dpa": "Acordo de tratamento de dados"
+    }
   },
   "docs": {
     "title": "Documentos",

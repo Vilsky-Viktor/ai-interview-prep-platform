@@ -722,12 +722,19 @@
     "homeTitle": "Bài test tuyển dụng tạo từ mô tả công việc của bạn"
   },
   "legal": {
-    "englishOnly": "Tài liệu này chỉ có bằng tiếng Anh.",
+    "englishOnly": "Phiên bản này chỉ có bằng tiếng Anh.",
     "inForce": "Có hiệu lực từ {date}",
     "upcoming": "Áp dụng từ {date}.",
     "replaced": "Phiên bản này áp dụng từ {date} và đã được thay thế.",
     "readInForce": "Đọc phiên bản đang có hiệu lực",
-    "versions": "Tất cả phiên bản"
+    "versions": "Tất cả phiên bản",
+    "translated": "Đây là bản dịch; chỉ bản tiếng Anh có giá trị ràng buộc.",
+    "readEnglish": "Đọc bằng tiếng Anh",
+    "titles": {
+      "terms": "Điều khoản",
+      "privacy": "Quyền riêng tư",
+      "dpa": "Thỏa thuận xử lý dữ liệu"
+    }
   },
   "docs": {
     "title": "Tài liệu",

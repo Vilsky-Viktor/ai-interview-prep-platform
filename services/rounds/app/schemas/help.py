@@ -48,6 +48,8 @@ class LegalSectionOut(BaseModel):
 
 
 class LegalOut(BaseModel):
+    # The language of the text: the one asked for when it's translated, otherwise English.
+    language: str
     intro: str
     # The day this text applies from, the newest version's, the one that applies today, and every
     # published one, newest first.

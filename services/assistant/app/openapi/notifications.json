@@ -955,12 +955,13 @@
     "type": "string",
     "enum": [
      "sendable",
+     "in_force",
      "too_late",
      "sending",
      "sent"
     ],
     "title": "LegalNoticeState",
-    "description": "Where a document's current version stands: its email can be asked for, it's too close to\nthe day it applies (or past it), or it was asked for (and is going out, or went out)."
+    "description": "Where a document's current version stands: its email can be asked for, it already\napplies, it's too close to the day it applies, or it was asked for (and is going out, or\nwent out)."
    },
    "NotificationOut": {
     "properties": {

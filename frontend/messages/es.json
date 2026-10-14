@@ -722,12 +722,19 @@
     "homeTitle": "Pruebas de selección de personal desde tu oferta de empleo"
   },
   "legal": {
-    "englishOnly": "Este documento solo está disponible en inglés.",
+    "englishOnly": "Esta versión solo está disponible en inglés.",
     "inForce": "Vigente desde el {date}",
     "upcoming": "Se aplica a partir del {date}.",
     "replaced": "Esta versión se aplicó a partir del {date} y ha sido sustituida.",
     "readInForce": "Leer la versión vigente",
-    "versions": "Todas las versiones"
+    "versions": "Todas las versiones",
+    "translated": "Esta es una traducción; solo la versión en inglés es vinculante.",
+    "readEnglish": "Leer en inglés",
+    "titles": {
+      "terms": "Términos",
+      "privacy": "Privacidad",
+      "dpa": "Acuerdo de tratamiento de datos"
+    }
   },
   "docs": {
     "title": "Documentos",

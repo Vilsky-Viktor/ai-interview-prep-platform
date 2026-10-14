@@ -722,12 +722,19 @@
     "homeTitle": "求人票から作る採用テスト・スキルチェック"
   },
   "legal": {
-    "englishOnly": "この文書は英語版のみです。",
+    "englishOnly": "このバージョンは英語でのみ提供されています。",
     "inForce": "{date} から有効",
     "upcoming": "{date} から適用されます。",
     "replaced": "このバージョンは {date} から適用され、その後置き換えられました。",
     "readInForce": "現在有効なバージョンを読む",
-    "versions": "すべてのバージョン"
+    "versions": "すべてのバージョン",
+    "translated": "これは翻訳です。拘束力を持つのは英語版のみです。",
+    "readEnglish": "英語で読む",
+    "titles": {
+      "terms": "利用規約",
+      "privacy": "プライバシー",
+      "dpa": "データ処理契約"
+    }
   },
   "docs": {
     "title": "資料",

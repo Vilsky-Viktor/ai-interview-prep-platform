@@ -722,12 +722,19 @@
     "homeTitle": "Einstellungstest aus deiner Stellenbeschreibung erstellen"
   },
   "legal": {
-    "englishOnly": "Dieses Dokument ist nur auf Englisch verfügbar.",
+    "englishOnly": "Diese Version gibt es nur auf Englisch.",
     "inForce": "Gültig seit {date}",
     "upcoming": "Gilt ab {date}.",
     "replaced": "Diese Version galt ab {date} und wurde ersetzt.",
     "readInForce": "Die jetzt gültige Version lesen",
-    "versions": "Alle Versionen"
+    "versions": "Alle Versionen",
+    "translated": "Dies ist eine Übersetzung; verbindlich ist nur die englische Fassung.",
+    "readEnglish": "Auf Englisch lesen",
+    "titles": {
+      "terms": "Nutzungsbedingungen",
+      "privacy": "Datenschutz",
+      "dpa": "Auftragsverarbeitungsvertrag"
+    }
   },
   "docs": {
     "title": "Dokumente",

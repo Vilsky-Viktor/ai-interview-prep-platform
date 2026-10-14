@@ -722,12 +722,19 @@
     "homeTitle": "İş tanımınızdan işe alım testleri oluşturun"
   },
   "legal": {
-    "englishOnly": "Bu belge yalnızca İngilizce olarak mevcuttur.",
+    "englishOnly": "Bu sürüm yalnızca İngilizce olarak mevcuttur.",
     "inForce": "{date} tarihinden beri yürürlükte",
     "upcoming": "{date} tarihinden itibaren geçerlidir.",
     "replaced": "Bu sürüm {date} tarihinden itibaren geçerliydi ve yerini başka bir sürüm aldı.",
     "readInForce": "Şu an geçerli sürümü okuyun",
-    "versions": "Tüm sürümler"
+    "versions": "Tüm sürümler",
+    "translated": "Bu bir çeviridir; yalnızca İngilizce sürüm bağlayıcıdır.",
+    "readEnglish": "İngilizce oku",
+    "titles": {
+      "terms": "Koşullar",
+      "privacy": "Gizlilik",
+      "dpa": "Veri işleme sözleşmesi"
+    }
   },
   "docs": {
     "title": "Belgeler",

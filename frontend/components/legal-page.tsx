@@ -4,27 +4,36 @@ import { getLocale, getTranslations } from "next-intl/server"
 
 import { EmailText } from "@/components/email-text"
 import { DEFAULT_LOCALE } from "@/constants/i18n"
+import { textDirection } from "@/lib/locale"
 import { publicFetch } from "@/lib/server-api"
 import type { LegalDocument } from "@/types/help"
 
 // A version's name: the day it applies from.
 const VERSION = /^\d{4}-\d{2}-\d{2}$/
 
-/** The privacy policy and terms, as the rounds service serves them (the FAQ chat answers from
-the same texts). English only: they're legal texts, and a translation would need its own legal
-review. */
+/** The terms, the privacy policy or the DPA, as the rounds service serves them (the FAQ chat
+answers from the same texts): in the page's language when it's translated, with a link to the
+English, the binding text; `english` shows the English. */
 export async function LegalPage({
-  title,
   name,
   version,
+  english,
 }: {
-  title: string
   name: "terms" | "privacy" | "dpa"
   version?: string
+  english?: boolean
 }) {
-  const asked = version && VERSION.test(version) ? `?version=${version}` : ""
+  const locale = await getLocale()
+  const query = new URLSearchParams({
+    language: english ? DEFAULT_LOCALE : locale,
+  })
+
+  if (version && VERSION.test(version)) {
+    query.set("version", version)
+  }
+
   const document = await publicFetch<LegalDocument>(
-    `/rounds/help/legal/${name}${asked}`
+    `/rounds/help/legal/${name}?${query}`
   )
 
   if (!document) {
@@ -34,19 +43,38 @@ export async function LegalPage({
   const { intro, sections, versions, in_force: inForce } = document
   const shown = document.version
   const t = await getTranslations("legal")
-  const locale = await getLocale()
-  const link = (to: string) =>
-    to === document.current ? `/${name}` : `/${name}?version=${to}`
+  const link = (to: string, inEnglish = english) => {
+    const params = new URLSearchParams()
+
+    if (to !== document.current) {
+      params.set("version", to)
+    }
+
+    if (inEnglish) {
+      params.set("language", DEFAULT_LOCALE)
+    }
+
+    return params.size ? `/${name}?${params}` : `/${name}`
+  }
 
   return (
     <main className="mx-auto max-w-5xl space-y-10 px-6 py-12">
       <header className="space-y-4">
         <h1 className="font-heading text-4xl font-medium tracking-tight">
-          {title}
+          {t(`titles.${name}`)}
         </h1>
         <p className="text-sm text-muted-foreground">
-          {locale !== DEFAULT_LOCALE && (
-            <span className="block pb-2">{t("englishOnly")}</span>
+          {document.language !== DEFAULT_LOCALE ? (
+            <span className="block pb-2">
+              {t("translated")}{" "}
+              <Link href={link(shown, true)} className="underline">
+                {t("readEnglish")}
+              </Link>
+            </span>
+          ) : (
+            locale !== DEFAULT_LOCALE && (
+              <span className="block pb-2">{t("englishOnly")}</span>
+            )
           )}
           {document.state === "in_force" ? (
             t("inForce", { date: shown })
@@ -60,8 +88,12 @@ export async function LegalPage({
           )}
         </p>
       </header>
-      {/* The documents are English only, so they read left to right in every interface. */}
-      <div lang="en" dir="ltr" className="space-y-10">
+      {/* In the text's own language: English reads left to right in every interface. */}
+      <div
+        lang={document.language}
+        dir={textDirection(document.language)}
+        className="space-y-10"
+      >
         <p className="text-base leading-relaxed text-muted-foreground">
           <EmailText text={intro} />
         </p>

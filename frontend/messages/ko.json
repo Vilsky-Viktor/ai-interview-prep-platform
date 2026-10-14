@@ -722,12 +722,19 @@
     "homeTitle": "채용 공고로 만드는 직무 역량 테스트"
   },
   "legal": {
-    "englishOnly": "이 문서는 영어로만 제공됩니다.",
+    "englishOnly": "이 버전은 영어로만 제공됩니다.",
     "inForce": "{date}부터 시행",
     "upcoming": "{date}부터 적용됩니다.",
     "replaced": "이 버전은 {date}부터 적용되었으며 이후 대체되었습니다.",
     "readInForce": "현재 시행 중인 버전 읽기",
-    "versions": "모든 버전"
+    "versions": "모든 버전",
+    "translated": "번역본입니다. 영어 원문만 구속력이 있습니다.",
+    "readEnglish": "영어로 읽기",
+    "titles": {
+      "terms": "이용약관",
+      "privacy": "개인정보",
+      "dpa": "데이터 처리 계약"
+    }
   },
   "docs": {
     "title": "문서",

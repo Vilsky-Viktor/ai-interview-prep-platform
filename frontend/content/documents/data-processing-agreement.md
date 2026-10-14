@@ -4,7 +4,7 @@ Version: 2026-10-14\
 Operator: Arcolabs OÜ (registry code 17587452), Sepapaja tn 6, 15551 Tallinn, Harju maakond, Estonia; hello@prepza.ai\
 Also online at https://prepza.ai/dpa
 
-This agreement applies when a company uses prepza to assess candidates. The company is the controller of its candidates' data and Arcolabs OÜ (registry code 17587452), Sepapaja tn 6, 15551 Tallinn, Harju maakond, Estonia, processes it on the company's behalf. It forms part of the terms and is accepted with them; nothing needs to be signed.
+This agreement applies when a company uses prepza to assess candidates. The company is the controller of its candidates' data and Arcolabs OÜ (registry code 17587452), Sepapaja tn 6, 15551 Tallinn, Harju maakond, Estonia, processes it on the company's behalf. It forms part of the terms and is accepted with them; nothing needs to be signed. prepza.ai also shows this document in other languages; only this English version is binding, and where a translation differs, the English version applies.
 
 ## What is processed
 
@@ -35,7 +35,6 @@ The company authorises these sub-processors, each bound by data protection terms
 - Resend (emails; EU, Ireland).
 - Google Workspace (our email inbox: messages from companies and candidates, and requests passed on to a company; Google Ireland Ltd, mail may be stored outside the EU under the EU-US Data Privacy Framework and standard contractual clauses).
 - Sentry (error reports, without email addresses; EU).
-- Upstash (short-lived counters for limits and live updates; EU, Belgium).
 
 ## Changes and transfers
 

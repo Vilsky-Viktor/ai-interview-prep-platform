@@ -50,3 +50,23 @@ def test_a_version_published_ahead_applies_from_its_day(tmp_path, monkeypatch):
         "in_force",
         "upcoming",
     ]
+
+
+def test_a_translated_version_is_served_in_the_language_asked_and_english_otherwise(
+    client, tmp_path, monkeypatch
+):
+    version = LEGAL_VERSIONS["terms"]
+    (tmp_path / "terms" / version).mkdir(parents=True)
+    (tmp_path / "terms" / f"{version}.json").write_text("{}")
+    (tmp_path / "terms" / version / "de.json").write_text(
+        json.dumps({"intro": "Diese Bedingungen.", "sections": []})
+    )
+    monkeypatch.setattr(legal, "ARCHIVE", tmp_path)
+
+    german = client.get("/help/legal/terms", params={"language": "de"}).json()
+    french = client.get("/help/legal/terms", params={"language": "fr"}).json()
+
+    assert (german["language"], german["intro"]) == ("de", "Diese Bedingungen.")
+    # No French yet: the English text, said to be English.
+    assert french["language"] == "en" and french["intro"] == legal.current("terms")["intro"]
+    assert german["versions"] == [version]

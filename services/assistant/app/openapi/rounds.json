@@ -1008,7 +1008,7 @@
      "help"
     ],
     "summary": "Get Legal",
-    "description": "The terms, the privacy policy or the DPA: the current version, or an earlier one, with\nevery published version (the day each applies from); public.",
+    "description": "The terms, the privacy policy or the DPA: the current version, or an earlier one, with\nevery published version (the day each applies from), in `language` when it's translated\n(the English text is the binding one); public.",
     "operationId": "get_legal_help_legal__document__get",
     "parameters": [
      {
@@ -1034,6 +1034,41 @@
         }
        ],
        "title": "Version"
+      }
+     },
+     {
+      "name": "language",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "enum": [
+        "en",
+        "ru",
+        "uk",
+        "es",
+        "pt",
+        "de",
+        "fr",
+        "it",
+        "pl",
+        "nl",
+        "tr",
+        "ar",
+        "he",
+        "fa",
+        "ja",
+        "zh",
+        "ko",
+        "hi",
+        "id",
+        "th",
+        "vi",
+        "fil",
+        "et"
+       ],
+       "type": "string",
+       "default": "en",
+       "title": "Language"
       }
      }
     ],
@@ -2003,6 +2038,10 @@
    },
    "LegalOut": {
     "properties": {
+     "language": {
+      "type": "string",
+      "title": "Language"
+     },
      "intro": {
       "type": "string",
       "title": "Intro"
@@ -2045,6 +2084,7 @@
     },
     "type": "object",
     "required": [
+     "language",
      "intro",
      "version",
      "state",

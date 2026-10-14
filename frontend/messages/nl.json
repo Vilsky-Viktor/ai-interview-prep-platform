@@ -722,12 +722,19 @@
     "homeTitle": "Online assessment voor werving, uit je vacaturetekst"
   },
   "legal": {
-    "englishOnly": "Dit document is alleen in het Engels beschikbaar.",
+    "englishOnly": "Deze versie is alleen in het Engels beschikbaar.",
     "inForce": "Geldig sinds {date}",
     "upcoming": "Geldt vanaf {date}.",
     "replaced": "Deze versie gold vanaf {date} en is vervangen.",
     "readInForce": "Lees de versie die nu geldt",
-    "versions": "Alle versies"
+    "versions": "Alle versies",
+    "translated": "Dit is een vertaling; alleen de Engelse versie is bindend.",
+    "readEnglish": "Lees in het Engels",
+    "titles": {
+      "terms": "Voorwaarden",
+      "privacy": "Privacy",
+      "dpa": "Verwerkersovereenkomst"
+    }
   },
   "docs": {
     "title": "Documenten",

@@ -722,12 +722,19 @@
     "homeTitle": "Pre-employment assessment mula sa job description mo"
   },
   "legal": {
-    "englishOnly": "Available lang ang dokumentong ito sa English.",
+    "englishOnly": "Available lang sa Ingles ang bersyong ito.",
     "inForce": "May bisa mula {date}",
     "upcoming": "Magkakabisa sa {date}.",
     "replaced": "Nagkabisa ang bersyong ito mula {date} at napalitan na.",
     "readInForce": "Basahin ang bersyong may bisa ngayon",
-    "versions": "Lahat ng bersyon"
+    "versions": "Lahat ng bersyon",
+    "translated": "Isa itong salin; ang bersyong Ingles lang ang may bisa.",
+    "readEnglish": "Basahin sa Ingles",
+    "titles": {
+      "terms": "Mga tuntunin",
+      "privacy": "Privacy",
+      "dpa": "Kasunduan sa pagproseso ng data"
+    }
   },
   "docs": {
     "title": "Docs",

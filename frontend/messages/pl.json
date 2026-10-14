@@ -722,12 +722,19 @@
     "homeTitle": "Testy rekrutacyjne online z Twojego opisu stanowiska"
   },
   "legal": {
-    "englishOnly": "Ten dokument jest dostępny tylko po angielsku.",
+    "englishOnly": "Ta wersja jest dostępna tylko po angielsku.",
     "inForce": "Obowiązuje od {date}",
     "upcoming": "Obowiązuje od {date}.",
     "replaced": "Ta wersja obowiązywała od {date} i została zastąpiona.",
     "readInForce": "Przeczytaj obecnie obowiązującą wersję",
-    "versions": "Wszystkie wersje"
+    "versions": "Wszystkie wersje",
+    "translated": "To jest tłumaczenie; wiążąca jest tylko wersja angielska.",
+    "readEnglish": "Czytaj po angielsku",
+    "titles": {
+      "terms": "Regulamin",
+      "privacy": "Prywatność",
+      "dpa": "Umowa powierzenia przetwarzania danych"
+    }
   },
   "docs": {
     "title": "Dokumenty",

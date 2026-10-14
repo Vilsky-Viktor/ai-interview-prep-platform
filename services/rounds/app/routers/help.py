@@ -5,12 +5,13 @@ from fastapi.responses import PlainTextResponse, StreamingResponse
 from prepza_common.analytics import track
 from prepza_common.auth import OptionalUser
 from prepza_common.client_ip import client_ip
-from prepza_common.constants import DAY_SECONDS, HOUR_SECONDS, LEGAL_VERSIONS
+from prepza_common.constants import DAY_SECONDS, DEFAULT_LANGUAGE, HOUR_SECONDS, LEGAL_VERSIONS
 from prepza_common.i18n import request_language, translate
 from prepza_common.pause import refuse_if_paused
 from prepza_common.rate_limit import hit
 from prepza_common.secrets_check import secret_in
 from prepza_common.sse import event_stream, sse_event
+from prepza_common.user import Language
 
 from app.config.settings import settings
 from app.constants.contact import CONTACT_IP_LIMIT
@@ -51,10 +52,13 @@ async def get_guide(request: Request) -> str:
 
 @router.get("/legal/{document}")
 async def get_legal(
-    document: LegalDocument, version: str | None = Query(default=None, max_length=10)
+    document: LegalDocument,
+    version: str | None = Query(default=None, max_length=10),
+    language: Language = DEFAULT_LANGUAGE,
 ) -> LegalOut:
     """The terms, the privacy policy or the DPA: the current version, or an earlier one, with
-    every published version (the day each applies from); public."""
+    every published version (the day each applies from), in `language` when it's translated
+    (the English text is the binding one); public."""
     text = legal.version(document, version)
 
     if text is None:
@@ -62,9 +66,11 @@ async def get_legal(
 
     shown = version or LEGAL_VERSIONS[document]
     applies = legal.in_force(document)
+    translated = legal.translation(document, shown, language)
 
     return LegalOut(
-        **text,
+        **(translated or text),
+        language=language if translated else DEFAULT_LANGUAGE,
         version=shown,
         state=legal.state(shown, applies),
         current=LEGAL_VERSIONS[document],

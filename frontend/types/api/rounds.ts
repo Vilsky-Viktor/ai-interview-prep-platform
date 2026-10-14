@@ -373,7 +373,8 @@ export interface paths {
     /**
      * Get Legal
      * @description The terms, the privacy policy or the DPA: the current version, or an earlier one, with
-     *     every published version (the day each applies from); public.
+     *     every published version (the day each applies from), in `language` when it's translated
+     *     (the English text is the binding one); public.
      */
     get: operations["get_legal_help_legal__document__get"]
     put?: never
@@ -836,6 +837,8 @@ export interface components {
     LegalDocument: "terms" | "privacy" | "dpa"
     /** LegalOut */
     LegalOut: {
+      /** Language */
+      language: string
       /** Intro */
       intro: string
       /** Version */
@@ -1864,6 +1867,30 @@ export interface operations {
     parameters: {
       query?: {
         version?: string | null
+        language?:
+          | "en"
+          | "ru"
+          | "uk"
+          | "es"
+          | "pt"
+          | "de"
+          | "fr"
+          | "it"
+          | "pl"
+          | "nl"
+          | "tr"
+          | "ar"
+          | "he"
+          | "fa"
+          | "ja"
+          | "zh"
+          | "ko"
+          | "hi"
+          | "id"
+          | "th"
+          | "vi"
+          | "fil"
+          | "et"
       }
       header?: never
       path: {

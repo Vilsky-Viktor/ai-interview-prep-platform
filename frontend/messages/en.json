@@ -727,7 +727,14 @@
     "upcoming": "Applies from {date}.",
     "replaced": "This version applied from {date} and has been replaced.",
     "readInForce": "Read the version in force now",
-    "versions": "All versions"
+    "versions": "All versions",
+    "translated": "This is a translation; only the English version is binding.",
+    "readEnglish": "Read it in English",
+    "titles": {
+      "terms": "Terms",
+      "privacy": "Privacy",
+      "dpa": "Data processing agreement"
+    }
   },
   "docs": {
     "title": "Docs",

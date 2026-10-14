@@ -722,12 +722,19 @@
     "homeTitle": "Tes seleksi karyawan, dibuat dari deskripsi pekerjaan"
   },
   "legal": {
-    "englishOnly": "Dokumen ini hanya tersedia dalam bahasa Inggris.",
+    "englishOnly": "Versi ini hanya tersedia dalam bahasa Inggris.",
     "inForce": "Berlaku sejak {date}",
     "upcoming": "Berlaku mulai {date}.",
     "replaced": "Versi ini berlaku sejak {date} dan telah diganti.",
     "readInForce": "Baca versi yang berlaku sekarang",
-    "versions": "Semua versi"
+    "versions": "Semua versi",
+    "translated": "Ini adalah terjemahan; hanya versi bahasa Inggris yang mengikat.",
+    "readEnglish": "Baca dalam bahasa Inggris",
+    "titles": {
+      "terms": "Ketentuan",
+      "privacy": "Privasi",
+      "dpa": "Perjanjian pemrosesan data"
+    }
   },
   "docs": {
     "title": "Dokumen",

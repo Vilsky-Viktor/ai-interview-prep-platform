@@ -11,11 +11,9 @@ export const generateMetadata = () =>
 export default async function DpaPage({
   searchParams,
 }: {
-  searchParams: Promise<{ version?: string }>
+  searchParams: Promise<{ version?: string; language?: string }>
 }) {
-  const { version } = await searchParams
+  const { version, language } = await searchParams
 
-  return (
-    <LegalPage title="Data processing agreement" name="dpa" version={version} />
-  )
+  return <LegalPage name="dpa" version={version} english={language === "en"} />
 }

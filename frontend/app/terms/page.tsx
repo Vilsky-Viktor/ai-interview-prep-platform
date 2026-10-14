@@ -11,9 +11,11 @@ export const generateMetadata = () =>
 export default async function TermsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ version?: string }>
+  searchParams: Promise<{ version?: string; language?: string }>
 }) {
-  const { version } = await searchParams
+  const { version, language } = await searchParams
 
-  return <LegalPage title="Terms" name="terms" version={version} />
+  return (
+    <LegalPage name="terms" version={version} english={language === "en"} />
+  )
 }

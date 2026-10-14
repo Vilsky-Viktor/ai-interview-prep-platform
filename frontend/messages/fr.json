@@ -722,12 +722,19 @@
     "homeTitle": "Test de recrutement créé à partir de votre offre d'emploi"
   },
   "legal": {
-    "englishOnly": "Ce document est disponible uniquement en anglais.",
+    "englishOnly": "Cette version n'existe qu'en anglais.",
     "inForce": "En vigueur depuis le {date}",
     "upcoming": "S'applique à partir du {date}.",
     "replaced": "Cette version s'appliquait à partir du {date} et a été remplacée.",
     "readInForce": "Lire la version en vigueur",
-    "versions": "Toutes les versions"
+    "versions": "Toutes les versions",
+    "translated": "Ceci est une traduction ; seule la version anglaise fait foi.",
+    "readEnglish": "Lire en anglais",
+    "titles": {
+      "terms": "Conditions",
+      "privacy": "Confidentialité",
+      "dpa": "Accord de traitement des données"
+    }
   },
   "docs": {
     "title": "Documents",
