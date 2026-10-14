@@ -2,6 +2,7 @@ from uuid import UUID
 
 from fastapi import APIRouter, Request
 from fastapi.responses import StreamingResponse
+from prepza_common.constants import REFERRAL_COOKIE
 from prepza_common.i18n import request_language
 from prepza_common.sse import event_stream
 
@@ -22,9 +23,11 @@ async def confirm(
     and the action can be confirmed again with a fresh one."""
     user, token = auth
     language = request_language(request)
+    # The referral link the user came through, for a company the action creates.
+    referral = request.cookies.get(REFERRAL_COOKIE)
 
     return event_stream(
-        await confirmations.confirm(conversation_id, action_id, user, token, language)
+        await confirmations.confirm(conversation_id, action_id, user, token, language, referral)
     )
 
 

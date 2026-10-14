@@ -40,6 +40,7 @@ async def call_tool(
     company_id: str | None,
     idempotency_key: str | None = None,
     via: str = VIA_ASSISTANT,
+    referral: str | None = None,
 ) -> ToolResult:
     """Calls one tool as the user (a write only once they confirmed it, with its id as the
     idempotency key), through the assistant or an AI app (`via`). Errors are results too, which the model explains: an unknown
@@ -89,6 +90,7 @@ async def call_tool(
                 language,
                 idempotency_key,
                 via=via,
+                referral=referral,
             )
     except httpx.TimeoutException:
         return result(None, {"error": 504, "detail": translate(SERVICE_UNAVAILABLE, language)})

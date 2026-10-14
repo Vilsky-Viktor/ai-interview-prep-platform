@@ -40,7 +40,16 @@ def calls(monkeypatch):
     made = Calls()
 
     async def send(
-        service, method, path, query, body, token, language, idempotency_key=None, via=None
+        service,
+        method,
+        path,
+        query,
+        body,
+        token,
+        language,
+        idempotency_key=None,
+        via=None,
+        referral=None,
     ):
         made.append((method, path, body, token, language, idempotency_key, via))
         request = httpx.Request(method, f"http://{service}{path}")

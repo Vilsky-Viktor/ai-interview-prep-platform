@@ -1,9 +1,11 @@
 import httpx
 from prepza_common import http
+from prepza_common.constants import REFERRAL_COOKIE
 
 from app.config.settings import settings
 from app.constants.tool_calls import (
     ASSISTANT_HEADER,
+    REFERRAL_CODE,
     SERVICE_URLS,
     TOOL_TIMEOUT_SECONDS,
     VIA_ASSISTANT,
@@ -28,6 +30,7 @@ async def send(
     language: str,
     idempotency_key: str | None = None,
     via: str = VIA_ASSISTANT,
+    referral: str | None = None,
 ) -> httpx.Response:
     """A call to another service's user-facing route as the user, in their language: a read, or
     a write the user confirmed. Companies also gets the assistant's signed header naming what it
@@ -36,6 +39,11 @@ async def send(
 
     if service == "companies":
         headers[ASSISTANT_HEADER] = service_token("companies", via)
+
+        # The referral link the user came through (their browser's cookie): a company the
+        # assistant creates for them counts for the referrer, as one made on the site does.
+        if referral and REFERRAL_CODE.fullmatch(referral):
+            headers["Cookie"] = f"{REFERRAL_COOKIE}={referral}"
 
     # A confirmed action's id: a service that takes the header runs it at most once.
     if idempotency_key:

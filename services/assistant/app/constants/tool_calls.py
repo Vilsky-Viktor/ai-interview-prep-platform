@@ -1,3 +1,5 @@
+import re
+
 # Each tool call waits this long for its service (an ATS's job list is a live call to the ATS).
 TOOL_TIMEOUT_SECONDS = 20
 # Tool calls one step of a turn runs at the same time.
@@ -13,6 +15,9 @@ FORBIDDEN_PATH_PREFIXES = ("/internal", "/superadmin")
 # The header that tells companies a read came through the assistant (audited as such), holding a
 # service token signed for companies, so it can't be forged.
 ASSISTANT_HEADER = "X-Assistant"
+# A referral code as billing makes them (URL-safe): only one that reads right is passed on, in
+# the cookie companies reads.
+REFERRAL_CODE = re.compile(r"[A-Za-z0-9_-]{1,64}")
 # What a call came through, as that header's token names it (its issuer): the in-app assistant,
 # or an AI app connected over MCP.
 VIA_ASSISTANT = "assistant"

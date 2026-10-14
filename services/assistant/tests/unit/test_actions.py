@@ -180,3 +180,11 @@ def test_a_done_card_names_what_the_action_made(redis, writes):
     *_, block = asyncio.run(actions.run(CONVERSATION, action_id, ANN, "t", "en"))
 
     assert block["result_label"] == "Acme"
+
+
+def test_a_company_made_by_the_assistant_counts_for_the_referral_link(redis, writes):
+    """The referral cookie of the user's browser goes with it, as on the site."""
+    action_id = prepared(redis)
+    asyncio.run(actions.run(CONVERSATION, action_id, ANN, "fresh", "en", "abc123"))
+
+    assert writes.referrals == ["abc123"]

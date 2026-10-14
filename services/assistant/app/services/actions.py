@@ -206,10 +206,16 @@ async def cancel(conversation_id: UUID, action_id: UUID, user: User, token, lang
 
 
 async def run(
-    conversation_id: UUID, action_id: UUID, user: User, token: str, language: str
+    conversation_id: UUID,
+    action_id: UUID,
+    user: User,
+    token: str,
+    language: str,
+    referral: str | None = None,
 ) -> tuple[Tool, dict, ToolResult, dict]:
     """Runs the action once, as the user, with exactly the arguments the card showed: the tool,
-    the user's companies, its result and the card's new state."""
+    the user's companies, its result and the card's new state. `referral`, the referral cookie of
+    the user's browser, goes with it to companies."""
     redis = get_redis()
     await refuse_if_paused(redis)
     pending = await owned_action(conversation_id, action_id, user, token, language)
@@ -220,7 +226,13 @@ async def run(
     tool = tools()[pending["tool"]]
     arguments = pending["arguments"]
     result = await call_tool(
-        tool.name, arguments, token, language, pending["context_company_id"], str(action_id)
+        tool.name,
+        arguments,
+        token,
+        language,
+        pending["context_company_id"],
+        str(action_id),
+        referral=referral,
     )
 
     # The service refused the token: nothing ran, so it can be confirmed again once refreshed.

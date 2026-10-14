@@ -15,13 +15,18 @@ from app.storage import messages
 
 
 async def confirm(
-    conversation_id: UUID, action_id: UUID, user: User, token: str, language: str
+    conversation_id: UUID,
+    action_id: UUID,
+    user: User,
+    token: str,
+    language: str,
+    referral: str | None = None,
 ) -> AsyncIterator[str]:
     """Runs a confirmed action (actions.run), then streams like a message: the card's new state
     ({"action"}), and the assistant telling the user what happened. The result reaches the model
     only in this turn's prompt; it's never stored."""
     tool, pending, result, block = await actions.run(
-        conversation_id, action_id, user, token, language
+        conversation_id, action_id, user, token, language, referral
     )
     company_id = UUID(pending["company_id"]) if pending["company_id"] else None
     # A company the action made is the user's now, for the tools that follow.

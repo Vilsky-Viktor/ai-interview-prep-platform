@@ -8,9 +8,13 @@ from tests.unit.actions_setup import COMPANY
 
 
 class Writes(list):
-    """The services' writes; each answers `status`."""
+    """The services' writes; each answers `status`. `referrals`: the referral code each carried."""
 
     status = 201
+
+    def __init__(self):
+        super().__init__()
+        self.referrals = []
 
 
 class Pipeline:
@@ -98,9 +102,19 @@ def writes(monkeypatch):
     made = Writes()
 
     async def send(
-        service, method, path, query, body, token, language, idempotency_key=None, via=None
+        service,
+        method,
+        path,
+        query,
+        body,
+        token,
+        language,
+        idempotency_key=None,
+        via=None,
+        referral=None,
     ):
         made.append((service, method, path, body, token, idempotency_key))
+        made.referrals.append(referral)
         request = httpx.Request(method, f"http://{service}{path}")
 
         return httpx.Response(
