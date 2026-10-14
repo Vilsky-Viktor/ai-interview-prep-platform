@@ -94,9 +94,7 @@ def test_a_visitor_sees_the_invite_without_its_email(client, stored_invite):
     }
 
 
-def test_a_used_link_opens_the_company_for_its_member_and_says_used_to_others(
-    client, monkeypatch
-):
+def test_a_used_link_opens_the_company_for_its_member_and_says_used_to_others(client, monkeypatch):
     member = Member(
         id=MEMBER_ID,
         company_id=COMPANY_ID,

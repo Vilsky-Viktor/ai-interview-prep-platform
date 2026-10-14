@@ -25,7 +25,9 @@ def test_a_used_invite_link_still_finds_its_member_and_a_removed_admin_is_gone(r
         async with Session() as session:
             joined = (
                 await session.scalars(
-                    select(OutboxEvent).where(OutboxEvent.data["key"].astext == f"member_joined:{bob.id}")
+                    select(OutboxEvent).where(
+                        OutboxEvent.data["key"].astext == f"member_joined:{bob.id}"
+                    )
                 )
             ).all()
 
