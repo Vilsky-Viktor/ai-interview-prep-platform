@@ -1,7 +1,11 @@
 import { cookies } from "next/headers"
 import { getLocale } from "next-intl/server"
 
-import { PUBLIC_REVALIDATE_SECONDS, PUBLIC_TIMEOUT_MS } from "@/constants/api"
+import {
+  PUBLIC_REVALIDATE_SECONDS,
+  PUBLIC_TIMEOUT_MS,
+  SERVER_TIMEOUT_MS,
+} from "@/constants/api"
 import { TOKEN_COOKIE } from "@/constants/auth"
 import { REFERRAL_COOKIE } from "@/constants/referral"
 
@@ -37,7 +41,26 @@ export async function serverFetch<T>(path: string): Promise<T | null> {
     headers.Cookie = `${REFERRAL_COOKIE}=${referral}`
   }
 
-  return request<T>(path, { headers, cache: "no-store" })
+  return request<T>(path, {
+    headers,
+    cache: "no-store",
+    signal: AbortSignal.timeout(SERVER_TIMEOUT_MS),
+  })
+}
+
+/**
+ * serverFetch for what a page adds to its main data (a company's credits, one integration's
+ * state, the pause): null also when its service fails or doesn't answer, so the page shows
+ * without it instead of failing.
+ */
+export async function optionalFetch<T>(path: string): Promise<T | null> {
+  try {
+    return await serverFetch<T>(path)
+  } catch (error) {
+    console.error(`Left out ${path}:`, error)
+
+    return null
+  }
 }
 
 /**

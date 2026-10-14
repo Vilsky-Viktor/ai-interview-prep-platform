@@ -20,3 +20,6 @@ export const API_EXAMPLE = {
 // long the site keeps a copy, in seconds, and how long it waits for a service, in milliseconds.
 export const PUBLIC_REVALIDATE_SECONDS = 300
 export const PUBLIC_TIMEOUT_MS = 5000
+// A signed-in page's calls give up after this long, so a service that hangs fails the page (or
+// leaves out what it adds) in seconds rather than holding it for a minute.
+export const SERVER_TIMEOUT_MS = 10000

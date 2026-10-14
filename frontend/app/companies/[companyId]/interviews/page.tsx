@@ -10,7 +10,7 @@ import { SignInPrompt } from "@/components/sign-in-prompt"
 import { Button } from "@/components/ui/button"
 import { TOKEN_COOKIE } from "@/constants/auth"
 import { PAGE_SIZE } from "@/constants/lists"
-import { serverFetch } from "@/lib/server-api"
+import { optionalFetch, serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
 import type { Catalog, CompanyCredits } from "@/types/billing"
 import type { Company, Interview } from "@/types/company"
@@ -33,10 +33,10 @@ export default async function InterviewsPage({
         serverFetch<Interview[]>(
           `/companies/interviews?company_id=${companyId}&limit=${PAGE_SIZE}`
         ),
-        serverFetch<CompanyCredits>(
+        optionalFetch<CompanyCredits>(
           `/companies/companies/${companyId}/credits`
         ),
-        serverFetch<Catalog>("/billing/catalog"),
+        optionalFetch<Catalog>("/billing/catalog"),
       ])
     : [null, null, null]
 

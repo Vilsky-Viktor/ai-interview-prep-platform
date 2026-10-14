@@ -10,7 +10,7 @@ import { CompanyHeader } from "@/components/company/company-header"
 import { SignInPrompt } from "@/components/sign-in-prompt"
 import { ATS_PROVIDERS } from "@/constants/ats"
 import { TOKEN_COOKIE } from "@/constants/auth"
-import { serverFetch } from "@/lib/server-api"
+import { optionalFetch, serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
 import type { ApiSettings } from "@/types/api-access"
 import type { AtsIntegrations, Company } from "@/types/company"
@@ -36,14 +36,14 @@ export default async function IntegrationsPage({
   const ai = await getTranslations("aiApps")
   const [integrations, slack, api, connections] = company
     ? await Promise.all([
-        serverFetch<AtsIntegrations>(
+        optionalFetch<AtsIntegrations>(
           `/ats/connections?company_id=${companyId}`
         ),
-        serverFetch<SlackOverview>(
+        optionalFetch<SlackOverview>(
           `/notifications/slack?company_id=${companyId}`
         ),
-        serverFetch<ApiSettings>(`/v1/manage?company_id=${companyId}`),
-        serverFetch<AiConnection[]>("/assistant/connections"),
+        optionalFetch<ApiSettings>(`/v1/manage?company_id=${companyId}`),
+        optionalFetch<AiConnection[]>("/assistant/connections"),
       ])
     : [null, null, null, null]
 
