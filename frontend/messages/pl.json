@@ -106,7 +106,13 @@
     "title": "Coś poszło nie tak",
     "text": "Spróbuj ponownie. Jeśli to się powtarza, wróć później.",
     "notFound": "Nie znaleziono strony",
-    "notFoundText": "Ta strona nie istnieje albo została usunięta."
+    "notFoundText": "Ta strona nie istnieje albo została usunięta.",
+    "report": "Zgłoś",
+    "reportTitle": "Zgłoś problem",
+    "reportText": "Napisz, co robiłeś, gdy to się stało, żebyśmy mogli to powtórzyć i naprawić.",
+    "reportPlaceholder": "Co zrobiłeś, zanim pojawiła się ta strona?",
+    "reportSend": "Wyślij",
+    "reportSent": "Dziękujemy, otrzymaliśmy zgłoszenie."
   },
   "home": {
     "title": "Sprawdź każdego\nZatrudniaj najlepszych",

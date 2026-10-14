@@ -106,7 +106,13 @@
     "title": "Qualcosa è andato storto",
     "text": "Riprova. Se continua a succedere, torna più tardi.",
     "notFound": "Pagina non trovata",
-    "notFoundText": "Questa pagina non esiste o è stata rimossa."
+    "notFoundText": "Questa pagina non esiste o è stata rimossa.",
+    "report": "Segnala",
+    "reportTitle": "Segnala il problema",
+    "reportText": "Dicci cosa stavi facendo quando è successo, così possiamo riprodurlo e correggerlo.",
+    "reportPlaceholder": "Cosa hai fatto prima che comparisse questa pagina?",
+    "reportSend": "Invia",
+    "reportSent": "Grazie, l'abbiamo ricevuto."
   },
   "home": {
     "title": "Metti alla prova tutti\nAssumi i migliori",

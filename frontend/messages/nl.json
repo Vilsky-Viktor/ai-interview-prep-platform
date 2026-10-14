@@ -106,7 +106,13 @@
     "title": "Er ging iets mis",
     "text": "Probeer het opnieuw. Als het blijft gebeuren, kom dan later terug.",
     "notFound": "Pagina niet gevonden",
-    "notFoundText": "Deze pagina bestaat niet of is verwijderd."
+    "notFoundText": "Deze pagina bestaat niet of is verwijderd.",
+    "report": "Melden",
+    "reportTitle": "Probleem melden",
+    "reportText": "Vertel ons wat je aan het doen was toen het gebeurde, zodat we het kunnen nadoen en oplossen.",
+    "reportPlaceholder": "Wat deed je voordat deze pagina verscheen?",
+    "reportSend": "Versturen",
+    "reportSent": "Bedankt, we hebben het ontvangen."
   },
   "home": {
     "title": "Test iedereen\nNeem de besten aan",

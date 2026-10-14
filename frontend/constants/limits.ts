@@ -18,6 +18,8 @@ export const MAX_COMPANY_NAME_LENGTH = 45
 export const MAX_DECLINE_REASON_LENGTH = 500
 // library MAX_REPORT_COMMENT_LENGTH: details of a question report.
 export const MAX_REPORT_COMMENT_LENGTH = 1000
+// The error page's problem report, sent to Sentry.
+export const MAX_PROBLEM_REPORT_LENGTH = 2000
 // rounds MAX_HELP_QUESTION_LENGTH: a question to the FAQ's help chat.
 export const MAX_HELP_QUESTION_LENGTH = 1000
 // rounds MAX_CONTACT_NAME_LENGTH and MAX_CONTACT_MESSAGE_LENGTH: the contact form.

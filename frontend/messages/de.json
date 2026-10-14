@@ -106,7 +106,13 @@
     "title": "Etwas ist schiefgelaufen",
     "text": "Bitte versuche es erneut. Wenn es weiterhin passiert, komm später wieder.",
     "notFound": "Seite nicht gefunden",
-    "notFoundText": "Diese Seite existiert nicht oder wurde entfernt."
+    "notFoundText": "Diese Seite existiert nicht oder wurde entfernt.",
+    "report": "Melden",
+    "reportTitle": "Problem melden",
+    "reportText": "Sag uns, was du gerade getan hast, damit wir es nachstellen und beheben können.",
+    "reportPlaceholder": "Was hast du getan, bevor diese Seite erschien?",
+    "reportSend": "Senden",
+    "reportSent": "Danke, ist angekommen."
   },
   "home": {
     "title": "Teste jeden\nStelle die Besten ein",

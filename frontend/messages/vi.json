@@ -106,7 +106,13 @@
     "title": "Đã xảy ra lỗi",
     "text": "Vui lòng thử lại. Nếu vẫn tiếp diễn, hãy quay lại sau.",
     "notFound": "Không tìm thấy trang",
-    "notFoundText": "Trang này không tồn tại hoặc đã bị xóa."
+    "notFoundText": "Trang này không tồn tại hoặc đã bị xóa.",
+    "report": "Báo lỗi",
+    "reportTitle": "Báo lỗi này",
+    "reportText": "Cho chúng tôi biết bạn đang làm gì khi lỗi xảy ra, để chúng tôi tái hiện và sửa.",
+    "reportPlaceholder": "Bạn đã làm gì trước khi trang này hiện ra?",
+    "reportSend": "Gửi",
+    "reportSent": "Cảm ơn, chúng tôi đã nhận được."
   },
   "home": {
     "title": "Kiểm tra mọi ứng viên\nTuyển người giỏi nhất",

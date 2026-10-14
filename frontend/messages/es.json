@@ -106,7 +106,13 @@
     "title": "Algo salió mal",
     "text": "Inténtalo de nuevo. Si sigue pasando, vuelve más tarde.",
     "notFound": "Página no encontrada",
-    "notFoundText": "Esa página no existe o se eliminó."
+    "notFoundText": "Esa página no existe o se eliminó.",
+    "report": "Informar",
+    "reportTitle": "Informar del problema",
+    "reportText": "Cuéntanos qué hacías cuando ocurrió, para reproducirlo y arreglarlo.",
+    "reportPlaceholder": "¿Qué hiciste antes de que apareciera esta página?",
+    "reportSend": "Enviar",
+    "reportSent": "Gracias, lo recibimos."
   },
   "home": {
     "title": "Evalúa a todos\nContrata a los mejores",

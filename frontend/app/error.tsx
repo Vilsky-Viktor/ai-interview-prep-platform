@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useTranslations } from "next-intl"
 import { useEffect } from "react"
 
+import { ReportProblem } from "@/components/report-problem"
 import { Button } from "@/components/ui/button"
 
 export default function ErrorPage({
@@ -43,6 +44,7 @@ export default function ErrorPage({
             {common("home")}
           </Button>
         </div>
+        <ReportProblem />
       </div>
     </main>
   )

@@ -106,7 +106,13 @@
     "title": "Midagi läks valesti",
     "text": "Proovi uuesti. Kui see kordub, tule hiljem tagasi.",
     "notFound": "Lehte ei leitud",
-    "notFoundText": "Seda lehte pole olemas või see on eemaldatud."
+    "notFoundText": "Seda lehte pole olemas või see on eemaldatud.",
+    "report": "Teata",
+    "reportTitle": "Teata probleemist",
+    "reportText": "Kirjuta, mida sa tegid, kui see juhtus, et saaksime selle korrata ja parandada.",
+    "reportPlaceholder": "Mida sa tegid enne, kui see leht ilmus?",
+    "reportSend": "Saada",
+    "reportSent": "Aitäh, saime kätte."
   },
   "home": {
     "title": "Testi kõiki\nPalka parimad",

@@ -106,7 +106,13 @@
     "title": "Bir şeyler ters gitti",
     "text": "Lütfen tekrar deneyin. Sorun sürerse daha sonra tekrar gelin.",
     "notFound": "Sayfa bulunamadı",
-    "notFoundText": "Bu sayfa yok ya da kaldırıldı."
+    "notFoundText": "Bu sayfa yok ya da kaldırıldı.",
+    "report": "Bildir",
+    "reportTitle": "Sorunu bildir",
+    "reportText": "Bu olduğunda ne yaptığınızı anlatın; tekrarlayıp düzeltebilelim.",
+    "reportPlaceholder": "Bu sayfa çıkmadan önce ne yaptınız?",
+    "reportSend": "Gönder",
+    "reportSent": "Teşekkürler, aldık."
   },
   "home": {
     "title": "Herkesi test edin\nEn iyisini işe alın",

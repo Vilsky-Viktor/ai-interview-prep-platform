@@ -106,7 +106,13 @@
     "title": "出了点问题",
     "text": "请重试。如果问题持续，请稍后再来。",
     "notFound": "找不到页面",
-    "notFoundText": "该页面不存在或已被删除。"
+    "notFoundText": "该页面不存在或已被删除。",
+    "report": "报告",
+    "reportTitle": "报告问题",
+    "reportText": "告诉我们问题发生时你在做什么，方便我们重现并修复。",
+    "reportPlaceholder": "这个页面出现之前你做了什么？",
+    "reportSend": "发送",
+    "reportSent": "谢谢，我们已收到。"
   },
   "home": {
     "title": "测试每一位候选人\n招到最优秀的人才",

@@ -106,7 +106,13 @@
     "title": "Algo deu errado",
     "text": "Tente novamente. Se continuar acontecendo, volte mais tarde.",
     "notFound": "Página não encontrada",
-    "notFoundText": "Essa página não existe ou foi removida."
+    "notFoundText": "Essa página não existe ou foi removida.",
+    "report": "Relatar",
+    "reportTitle": "Relatar o problema",
+    "reportText": "Conte o que você estava fazendo quando aconteceu, para conseguirmos repetir e corrigir.",
+    "reportPlaceholder": "O que você fez antes de esta página aparecer?",
+    "reportSend": "Enviar",
+    "reportSent": "Obrigado, recebemos."
   },
   "home": {
     "title": "Teste todos\nContrate os melhores",

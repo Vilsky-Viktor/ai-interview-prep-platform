@@ -106,7 +106,13 @@
     "title": "Nagkaproblema",
     "text": "Pakisubukang muli. Kung patuloy itong mangyari, bumalik mamaya.",
     "notFound": "Hindi nahanap ang page",
-    "notFoundText": "Wala ang page na iyon o inalis na."
+    "notFoundText": "Wala ang page na iyon o inalis na.",
+    "report": "I-report",
+    "reportTitle": "I-report ang problema",
+    "reportText": "Sabihin sa amin kung ano ang ginagawa mo nang mangyari ito, para maulit at maayos namin.",
+    "reportPlaceholder": "Ano ang ginawa mo bago lumabas ang page na ito?",
+    "reportSend": "Ipadala",
+    "reportSent": "Salamat, natanggap namin."
   },
   "home": {
     "title": "I-test ang lahat\nI-hire ang pinakamahusay",

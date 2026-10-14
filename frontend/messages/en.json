@@ -106,7 +106,13 @@
     "title": "Something went wrong",
     "text": "Please try again. If it keeps happening, come back later.",
     "notFound": "Page not found",
-    "notFoundText": "That page doesn't exist or was removed."
+    "notFoundText": "That page doesn't exist or was removed.",
+    "report": "Report",
+    "reportTitle": "Report the problem",
+    "reportText": "Tell us what you were doing when it happened, so we can repeat it and fix it.",
+    "reportPlaceholder": "What did you do before this page showed up?",
+    "reportSend": "Send",
+    "reportSent": "Thanks, we got it."
   },
   "home": {
     "title": "Test everyone\nHire the best",

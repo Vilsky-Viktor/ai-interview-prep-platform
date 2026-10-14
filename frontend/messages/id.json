@@ -106,7 +106,13 @@
     "title": "Terjadi kesalahan",
     "text": "Coba lagi. Jika terus terjadi, kembali lagi nanti.",
     "notFound": "Halaman tidak ditemukan",
-    "notFoundText": "Halaman itu tidak ada atau sudah dihapus."
+    "notFoundText": "Halaman itu tidak ada atau sudah dihapus.",
+    "report": "Laporkan",
+    "reportTitle": "Laporkan masalah",
+    "reportText": "Ceritakan apa yang sedang kamu lakukan saat ini terjadi, agar kami bisa mengulanginya dan memperbaikinya.",
+    "reportPlaceholder": "Apa yang kamu lakukan sebelum halaman ini muncul?",
+    "reportSend": "Kirim",
+    "reportSent": "Terima kasih, sudah kami terima."
   },
   "home": {
     "title": "Uji semua orang\nRekrut yang terbaik",

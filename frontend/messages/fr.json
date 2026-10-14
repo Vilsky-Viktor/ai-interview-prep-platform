@@ -106,7 +106,13 @@
     "title": "Une erreur s'est produite",
     "text": "Veuillez réessayer. Si cela se reproduit, revenez plus tard.",
     "notFound": "Page introuvable",
-    "notFoundText": "Cette page n'existe pas ou a été supprimée."
+    "notFoundText": "Cette page n'existe pas ou a été supprimée.",
+    "report": "Signaler",
+    "reportTitle": "Signaler le problème",
+    "reportText": "Dites-nous ce que vous faisiez quand c'est arrivé, pour que nous puissions le reproduire et le corriger.",
+    "reportPlaceholder": "Qu'avez-vous fait avant que cette page s'affiche ?",
+    "reportSend": "Envoyer",
+    "reportSent": "Merci, c'est bien reçu."
   },
   "home": {
     "title": "Testez tout le monde\nRecrutez les meilleurs",
