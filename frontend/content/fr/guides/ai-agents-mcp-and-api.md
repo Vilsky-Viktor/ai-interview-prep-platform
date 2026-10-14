@@ -2,7 +2,7 @@
 title: "Agents IA, MCP et API : ce que c'est et comment s'en servir dans le recrutement"
 seoTitle: "Agents IA, MCP et API dans le recrutement : définition et usages"
 description: "Ce qu'est un agent IA, à quoi servent MCP et une API, comment les utiliser en toute sécurité dans le recrutement, et comment piloter prepza depuis son agent, depuis Claude et ChatGPT ou depuis votre propre plateforme."
-updated: "2026-10-10"
+updated: "2026-10-14"
 ---
 
 # Agents IA, MCP et API : ce que c'est et comment s'en servir dans le recrutement
@@ -104,7 +104,8 @@ Ensuite, posez vos questions dans la conversation comme vous le feriez à un col
 
 - **Vos permissions.** Il agit en votre nom, dans chaque entreprise dont vous êtes membre, avec votre rôle dans chacune.
 - **Crédits et limites.** Inviter un candidat coûte la même chose que dans l'application, et les mêmes limites d'e-mails s'appliquent.
-- **La traçabilité.** Les modifications faites de cette façon sont signalées dans le journal d'audit de l'entreprise, pour que l'équipe sache d'où elles viennent.
+- **La traçabilité.** Les décisions que garde le journal d'audit (valider des thèmes, consulter des résultats, changer le seuil de réussite, accorder du temps supplémentaire, révoquer un candidat, envoyer un rapport par e-mail) sont marquées comme prises via une app d'IA. Le propriétaire de l'entreprise peut lire le journal via l'API.
+- **L'entreprise décide.** Les propriétaires et administrateurs peuvent empêcher les apps d'IA d'utiliser les données d'une entreprise avec **Autoriser les apps d'IA dans cette entreprise** sur sa page des apps d'IA.
 - **Ce qu'il ne peut pas faire.** Il ne peut pas voir votre mot de passe ni vos clés API, et il ne peut pas supprimer votre compte ni une entreprise. Ces actions restent dans l'application.
 
 **Pour vous déconnecter,** supprimez le connecteur dans votre application d'IA, ou sélectionnez **Déconnecter** à côté de celui-ci sous **Apps IA**, dans l'onglet Intégrations. Il cesse de fonctionner immédiatement.

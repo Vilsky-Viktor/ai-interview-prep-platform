@@ -2,7 +2,7 @@
 title: "AI agents, MCP at APIs: ano ang mga ito at paano gamitin sa hiring"
 seoTitle: "AI Agents, MCP at APIs sa Hiring: Ano ang Mga Ito at Paano Gamitin"
 description: "Ano ang AI agent, ano ang ginagawa ng MCP at ng API, paano gamitin nang ligtas ang mga ito sa hiring, at paano patakbuhin ang prepza mula sa agent nito, mula sa Claude at ChatGPT, o mula sa sarili mong platform."
-updated: "2026-10-10"
+updated: "2026-10-14"
 ---
 
 # AI agents, MCP at APIs: ano ang mga ito at paano gamitin sa hiring
@@ -104,7 +104,8 @@ Mula noon, magtanong sa chat mo gaya ng pagtatanong mo sa isang katrabaho: "Sa p
 
 - **Ang mga permission mo.** Kumikilos ito bilang ikaw, sa bawat kumpanyang kinabibilangan mo, gamit ang role mo sa bawat isa.
 - **Credits at mga limitasyon.** Pareho ang gastos ng pag-imbita ng aplikante gaya ng sa app, at pareho ang mga email limit na nalalapat.
-- **Ang record.** Minamarkahan sa audit log ng kumpanya ang mga pagbabagong ginawa sa ganitong paraan, para makita ng team kung saan galing ang mga ito.
+- **Ang tala.** Ang mga desisyong itinatala ng audit log (pag-apruba ng mga topic, pagtingin ng resulta, pagbago ng passing grade, pagbibigay ng dagdag na oras, pagbawi sa isang aplikante, pag-email ng report) ay minamarkahang ginawa sa pamamagitan ng AI app. Mababasa ng may-ari ng kumpanya ang log sa pamamagitan ng API.
+- **Ang kumpanya ang magpapasya.** Mapipigilan ng mga may-ari at admin ang mga AI app sa paggamit ng data ng kumpanya gamit ang **Payagan ang mga AI app sa kumpanyang ito** sa page ng mga AI app nito.
 - **Ang hindi nito kayang gawin.** Hindi nito nakikita ang password o mga API key mo, at hindi nito kayang burahin ang account mo o ang isang kumpanya. Nananatili ang mga iyon sa app.
 
 **Para mag-disconnect,** alisin ang connector sa AI app mo, o piliin ang **I-disconnect** sa tabi nito sa ilalim ng **Mga AI app** sa tab na Mga integration. Agad itong titigil sa paggana.

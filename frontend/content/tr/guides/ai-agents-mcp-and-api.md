@@ -2,7 +2,7 @@
 title: "Yapay zekâ asistanları, MCP ve API'ler: nedir ve işe alımda nasıl kullanılır"
 seoTitle: "İşe Alımda Yapay Zekâ Asistanları, MCP ve API'ler: Nedir, Nasıl Kullanılır"
 description: "Yapay zekâ asistanı nedir, MCP ve API ne işe yarar, işe alımda güvenle nasıl kullanılır ve prepza'yı kendi asistanından, Claude ve ChatGPT'den ya da kendi platformunuzdan nasıl kullanırsınız."
-updated: "2026-10-10"
+updated: "2026-10-14"
 ---
 
 # Yapay zekâ asistanları, MCP ve API'ler: nedir ve işe alımda nasıl kullanılır
@@ -104,7 +104,8 @@ Bundan sonra sohbetinizde bir iş arkadaşınıza sorar gibi sorun: "prepza'da �
 
 - **Yetkileriniz.** Bağlantı, üyesi olduğunuz her şirkette, her birindeki rolünüzle sizin adınıza çalışır.
 - **Krediler ve sınırlar.** Bir adayı davet etmek uygulamadakiyle aynı tutardadır ve aynı e-posta sınırları geçerlidir.
-- **Kayıt.** Bu yolla yapılan değişiklikler şirketin denetim kaydında işaretlenir, böylece ekip nereden geldiklerini görebilir.
+- **Kayıt.** Denetim günlüğünün tuttuğu kararlar (konuları onaylama, sonuçları görüntüleme, geçme notunu değiştirme, ek süre verme, bir adayı iptal etme, rapor e-postalama) bir yapay zekâ uygulaması üzerinden yapılmış olarak işaretlenir. Şirketin sahibi günlüğü API üzerinden okuyabilir.
+- **Karar şirketin.** Sahipler ve yöneticiler, şirketin yapay zekâ uygulamaları sayfasındaki **Bu şirkette yapay zekâ uygulamalarına izin ver** ile bu uygulamaların şirket verilerini kullanmasını durdurabilir.
 - **Yapamadıkları.** Şifrenizi veya API anahtarlarınızı göremez, hesabınızı veya bir şirketi silemez. Bunlar uygulamada kalır.
 
 **Bağlantıyı kaldırmak için** yapay zekâ uygulamanızda bağlayıcıyı silin ya da Entegrasyonlar sekmesindeki **Yapay zekâ uygulamaları** altında yanındaki **Bağlantıyı kes**'i seçin. Hemen çalışmayı bırakır.

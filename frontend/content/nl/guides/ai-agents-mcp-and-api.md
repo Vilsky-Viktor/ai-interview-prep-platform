@@ -2,7 +2,7 @@
 title: "AI-agents, MCP en API's: wat het zijn en hoe je ze inzet bij werving en selectie"
 seoTitle: "AI-agents, MCP en API's bij werving: wat het zijn en hoe je ze inzet"
 description: "Wat een AI-agent is, wat MCP en een API doen, hoe je ze veilig inzet bij werving en selectie, en hoe je prepza bedient via de eigen agent, vanuit Claude en ChatGPT of vanuit je eigen platform."
-updated: "2026-10-10"
+updated: "2026-10-14"
 ---
 
 # AI-agents, MCP en API's: wat het zijn en hoe je ze inzet bij werving en selectie
@@ -104,7 +104,8 @@ Vanaf dan vraag je in je chat wat je ook een collega zou vragen: "Wie zijn in pr
 
 - **Je rechten.** Hij handelt namens jou, in elk bedrijf waar je lid van bent, met je rol in elk ervan.
 - **Credits en limieten.** Een kandidaat uitnodigen kost hetzelfde als in de app, en dezelfde e-maillimieten gelden.
-- **De registratie.** Wijzigingen die op deze manier zijn gemaakt, worden gemarkeerd in het auditlogboek van het bedrijf, zodat het team kan zien waar ze vandaan kwamen.
+- **De registratie.** De beslissingen die het auditlog bewaart (onderwerpen goedkeuren, resultaten bekijken, de slaaggrens wijzigen, extra tijd geven, een kandidaat intrekken, een rapport mailen) worden gemarkeerd als genomen via een AI-app. De eigenaar van het bedrijf kan het log via de API lezen.
+- **Het bedrijf beslist.** Eigenaren en beheerders kunnen AI-apps het gebruik van de gegevens van een bedrijf ontzeggen met **AI-apps toestaan in dit bedrijf** op de pagina AI-apps van het bedrijf.
 - **Wat hij niet kan.** Hij kan je wachtwoord en API-sleutels niet zien, en kan je account of een bedrijf niet verwijderen. Dat blijft in de app.
 
 **Om te ontkoppelen** verwijder je de connector in je AI-app, of kies je **Ontkoppelen** ernaast onder **AI-apps** op het tabblad Integraties. Hij werkt dan meteen niet meer.

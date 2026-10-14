@@ -2,7 +2,7 @@
 title: "Agenci AI, MCP i API: czym są i jak wykorzystać je w rekrutacji"
 seoTitle: "Agenci AI, MCP i API w rekrutacji: czym są i jak z nich korzystać"
 description: "Czym jest agent AI, do czego służą MCP i API, jak bezpiecznie korzystać z nich w rekrutacji i jak obsługiwać prepza przez jej agenta, z Claude i ChatGPT albo z własnej platformy."
-updated: "2026-10-10"
+updated: "2026-10-14"
 ---
 
 # Agenci AI, MCP i API: czym są i jak wykorzystać je w rekrutacji
@@ -104,7 +104,8 @@ Od tej chwili pytaj w czacie tak, jak pytasz współpracownika: „Kto w prepza 
 
 - **Twoje uprawnienia.** Działa jako Ty, w każdej firmie, do której należysz, z Twoją rolą w każdej z nich.
 - **Kredyty i limity.** Zaproszenie kandydata kosztuje tyle samo co w aplikacji i obowiązują te same limity e-maili.
-- **Ślad zmian.** Zmiany wprowadzone w ten sposób są oznaczane w dzienniku zdarzeń firmy, więc zespół widzi, skąd pochodzą.
+- **Ślad.** Decyzje zapisywane w dzienniku audytu (zatwierdzanie tematów, przeglądanie wyników, zmiana progu zaliczenia, przyznanie dodatkowego czasu, wycofanie kandydata, wysłanie raportu e-mailem) są oznaczane jako podjęte przez aplikację AI. Właściciel firmy może czytać dziennik przez API.
+- **Decyduje firma.** Właściciele i administratorzy mogą zabronić aplikacjom AI korzystania z danych firmy opcją **Zezwól na aplikacje AI w tej firmie** na stronie aplikacji AI firmy.
 - **Czego nie może.** Nie widzi Twojego hasła ani kluczy API i nie może usunąć Twojego konta ani firmy. To pozostaje w aplikacji.
 
 **Aby odłączyć,** usuń konektor w swojej aplikacji AI albo wybierz **Odłącz** obok niego w sekcji **Aplikacje AI** w zakładce Integracje. Przestaje działać od razu.

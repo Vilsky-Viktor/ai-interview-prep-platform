@@ -2,7 +2,7 @@
 title: "AI-agendid, MCP ja API-d: mis need on ja kuidas neid värbamisel kasutada"
 seoTitle: "AI-agendid, MCP ja API-d värbamisel: mis need on ja kuidas neid kasutada"
 description: "Mis on AI-agent, mida teevad MCP ja API, kuidas neid värbamisel turvaliselt kasutada ja kuidas juhtida prepzat selle agendi kaudu, Claude'ist ja ChatGPT-st või oma platvormilt."
-updated: "2026-10-10"
+updated: "2026-10-14"
 ---
 
 # AI-agendid, MCP ja API-d: mis need on ja kuidas neid värbamisel kasutada
@@ -104,7 +104,8 @@ Edaspidi küsi oma vestluses nii, nagu küsiksid kolleegilt: „Kes on prepzas k
 
 - **Sinu õigused.** Ta tegutseb sinu nimel igas ettevõttes, kuhu kuulud, sinu rolliga igas neist.
 - **Krediidid ja piirangud.** Kandidaadi kutsumine maksab sama palju kui rakenduses ja kehtivad samad e-kirjade piirangud.
-- **Jälg.** Sel viisil tehtud muudatused märgitakse ettevõtte auditilogis, nii et meeskond näeb, kust need tulid.
+- **Logi.** Otsused, mida auditilogi talletab (teemade kinnitamine, tulemuste vaatamine, lävendi muutmine, lisaaja andmine, kandidaadi tühistamine, aruande saatmine e-postiga), märgitakse tehisintellekti rakenduse kaudu tehtuks. Ettevõtte omanik saab logi lugeda API kaudu.
+- **Ettevõte otsustab.** Omanikud ja administraatorid saavad keelata tehisintellekti rakendustel ettevõtte andmete kasutamise valikuga **Luba selles ettevõttes tehisintellekti rakendused** ettevõtte tehisintellekti rakenduste lehel.
 - **Mida ta teha ei saa.** Ta ei näe sinu parooli ega API-võtmeid ning ei saa kustutada sinu kontot ega ettevõtet. Need jäävad rakendusse.
 
 **Ühenduse katkestamiseks** eemalda konnektor oma AI-rakenduses või vali selle kõrval **Katkesta ühendus** vahekaardi Integratsioonid jaotises **AI-rakendused**. See lakkab kohe töötamast.

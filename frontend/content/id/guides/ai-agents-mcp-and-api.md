@@ -2,7 +2,7 @@
 title: "Agen AI, MCP, dan API: apa itu dan cara memakainya dalam rekrutmen"
 seoTitle: "Agen AI, MCP, dan API dalam Rekrutmen: Apa Itu dan Cara Memakainya"
 description: "Apa itu agen AI, apa fungsi MCP dan API, cara memakainya dengan aman dalam rekrutmen, dan cara menjalankan prepza dari agennya, dari Claude dan ChatGPT, atau dari platformmu sendiri."
-updated: "2026-10-10"
+updated: "2026-10-14"
 ---
 
 # Agen AI, MCP, dan API: apa itu dan cara memakainya dalam rekrutmen
@@ -104,7 +104,8 @@ Setelah itu, bertanyalah di chat seperti kamu bertanya kepada rekan kerja: "Di p
 
 - **Izinmu.** Ia bertindak atas namamu, di setiap perusahaan tempatmu bergabung, dengan peranmu di masing-masing.
 - **Kredit dan batas.** Mengundang kandidat biayanya sama seperti di aplikasi, dan batas email yang sama berlaku.
-- **Catatannya.** Perubahan yang dibuat dengan cara ini ditandai di log audit perusahaan, sehingga tim bisa melihat asalnya.
+- **Catatan.** Keputusan yang disimpan log audit (menyetujui topik, melihat hasil, mengubah nilai lulus, memberi waktu tambahan, mencabut kandidat, mengemail laporan) ditandai sebagai dibuat melalui aplikasi AI. Pemilik perusahaan bisa membaca log itu melalui API.
+- **Perusahaan yang menentukan.** Pemilik dan admin bisa menghentikan aplikasi AI memakai data perusahaan dengan **Izinkan aplikasi AI di perusahaan ini** di halaman aplikasi AI perusahaan.
 - **Yang tidak bisa dilakukannya.** Ia tidak bisa melihat kata sandi atau kunci API-mu, dan tidak bisa menghapus akunmu atau perusahaan. Hal-hal itu tetap di aplikasi.
 
 **Untuk memutuskan,** hapus konektornya di aplikasi AI-mu, atau pilih **Putuskan** di sebelahnya di bagian **Aplikasi AI** pada tab Integrasi. Koneksinya langsung berhenti.

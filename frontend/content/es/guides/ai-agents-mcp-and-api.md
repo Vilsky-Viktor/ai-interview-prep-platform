@@ -2,7 +2,7 @@
 title: "Agentes de IA, MCP y API: qué son y cómo usarlos en la selección de personal"
 seoTitle: "Agentes de IA, MCP y API en selección de personal: qué son y cómo usarlos"
 description: "Qué es un agente de IA, para qué sirven MCP y una API, cómo usarlos de forma segura en la selección de personal y cómo manejar prepza desde su agente, desde Claude y ChatGPT o desde tu propia plataforma."
-updated: "2026-10-10"
+updated: "2026-10-14"
 ---
 
 # Agentes de IA, MCP y API: qué son y cómo usarlos en la selección de personal
@@ -104,7 +104,8 @@ A partir de ahí, pregunta en tu chat como le preguntarías a un compañero: «E
 
 - **Tus permisos.** Actúa en tu nombre, en cada empresa de la que formas parte, con tu rol en cada una.
 - **Créditos y límites.** Invitar a un candidato cuesta lo mismo que en la app, y se aplican los mismos límites de correos.
-- **El registro.** Los cambios hechos así quedan marcados en el registro de auditoría de la empresa, para que el equipo vea de dónde vienen.
+- **El registro.** Las decisiones que guarda el registro de auditoría (aprobar temas, ver resultados, cambiar la nota de aprobación, dar tiempo extra, revocar a un candidato, enviar un informe por email) se marcan como hechas a través de una app de IA. El propietario de la empresa puede leer el registro a través de la API.
+- **La empresa decide.** Los propietarios y administradores pueden impedir que las apps de IA usen los datos de una empresa con **Permitir apps de IA en esta empresa** en su página de apps de IA.
 - **Lo que no puede hacer.** No puede ver tu contraseña ni tus claves API, y no puede eliminar tu cuenta ni una empresa. Eso se queda en la app.
 
 **Para desconectarlo,** elimina el conector en tu app de IA, o selecciona **Desconectar** junto a él en **Apps de IA**, en la pestaña Integraciones. Deja de funcionar al instante.

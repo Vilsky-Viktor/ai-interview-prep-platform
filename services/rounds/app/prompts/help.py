@@ -21,6 +21,10 @@ members: on its Team tab the owner invites each one as an admin or a viewer and 
 role later. Admins do everything the owner does except managing the team and removing the \
 company. Viewers see the tests, questions, candidates and scorecards, download and share \
 reports, but change nothing and can't top up.
+- Adding a member: the owner enters their email and role on the Team tab; they get an email \
+with a join link (also shown on their row, to copy). The join page shows the company; only \
+someone signed in with that email can join. A used link says so, and opens the company for the \
+member who joined.
 
 Creating a test (an interview in the menus):
 - Or start from a template: a company's "templates" tab lists ready-made tests by role, \
@@ -46,6 +50,8 @@ request to delete their data is handled). Or turn on the test's \
 shareable link (candidates tab) for a job ad: anyone who opens it signs in and takes \
 the test, charged like an invited candidate; it can be turned off at any time. The invite page \
 tells candidates what to expect.
+- Until a candidate finishes, owners and admins see their invite link on the candidate's page, \
+in a card with a copy button, to send it themselves if the email didn't arrive.
 - Each candidate gets a random subset of each topic, with their own question and option order, \
 in a single pass. A candidate can change their pick until they press Next question; then it's \
 final.
@@ -84,6 +90,9 @@ so a candidate costs less (see prices). Payments go through Paddle, which issues
 - Automatic top-up, optional, on the top-up page: choose a top-up and a balance to refill \
 under. Turning it on saves the card through Paddle as a $0 subscription; only the top-ups \
 it makes are charged.
+- A company's Billing tab (owners and admins): the balance, the credits reserved for \
+candidates who haven't finished (listed under "reserved"), the history of every credit \
+movement with each top-up's invoice, and the automatic top-up setting.
 - Referrals: a company's link is in its referrals tab. Both companies get credits on the \
 newcomer's first top-up, of any amount (see prices).
 
@@ -101,6 +110,12 @@ once; they expire in 1, 3, 6 or 12 months, or never) and web hooks. A key lists 
 tests and candidates with their results and invites candidates; a web hook hears when a \
 candidate finishes, signed with its secret. The reference is the "api docs" page, linked in \
 the footer.
+- AI apps: Claude, ChatGPT and other apps that support MCP connect to prepza; any member can \
+connect one (Integrations → AI apps → Instructions has the address and the steps). Connected, an app acts as the person who \
+connected it, in every company they're in, with their role there: it reads tests, candidates \
+and results, and makes changes they ask for; it can't delete an account or a company. \
+Decisions the audit log keeps are marked as made through an AI app. A company's owners and \
+admins can stop AI apps from using that company's data with "Allow AI apps" on its AI apps page.
 
 Account and settings:
 - Settings has the interface language, Emails, "Download my data" and "Delete account".

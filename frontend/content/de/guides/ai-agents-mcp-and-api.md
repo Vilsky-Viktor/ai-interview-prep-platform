@@ -2,7 +2,7 @@
 title: "KI-Agenten, MCP und APIs: was sie sind und wie du sie im Recruiting nutzt"
 seoTitle: "KI-Agenten, MCP und APIs im Recruiting: was sie sind und wie du sie nutzt"
 description: "Was ein KI-Agent ist, was MCP und eine API leisten, wie du sie im Recruiting sicher einsetzt und wie du prepza über seinen Agenten, aus Claude und ChatGPT oder von deiner eigenen Plattform aus steuerst."
-updated: "2026-10-10"
+updated: "2026-10-14"
 ---
 
 # KI-Agenten, MCP und APIs: was sie sind und wie du sie im Recruiting nutzt
@@ -104,7 +104,8 @@ Ab dann fragst du in deinem Chat so, wie du einen Kollegen fragen würdest: „W
 
 - **Deine Berechtigungen.** Er handelt als du, in jedem Unternehmen, in dem du bist, mit deiner Rolle in jedem davon.
 - **Credits und Limits.** Einen Kandidaten einzuladen kostet dasselbe wie in der App, und es gelten dieselben E-Mail-Limits.
-- **Die Nachvollziehbarkeit.** Auf diesem Weg vorgenommene Änderungen werden im Audit-Log des Unternehmens gekennzeichnet, sodass das Team sieht, woher sie kamen.
+- **Die Nachvollziehbarkeit.** Die Entscheidungen, die das Audit-Log festhält (Themen freigeben, Ergebnisse ansehen, die Bestehensgrenze ändern, Zusatzzeit geben, einen Kandidaten widerrufen, einen Bericht per E-Mail senden), werden als über eine KI-App getroffen markiert. Der Inhaber des Unternehmens kann das Log über die API lesen.
+- **Das Unternehmen entscheidet.** Inhaber und Admins können KI-Apps mit **KI-Apps in diesem Unternehmen erlauben** auf der Seite „KI-Apps“ des Unternehmens von dessen Daten ausschließen.
 - **Was er nicht kann.** Er sieht weder dein Passwort noch deine API-Schlüssel und kann weder dein Konto noch ein Unternehmen löschen. Das bleibt in der App.
 
 **Zum Trennen** entferne den Konnektor in deiner KI-App oder wähle **Trennen** daneben unter **KI-Apps** im Tab Integrationen. Er funktioniert sofort nicht mehr.

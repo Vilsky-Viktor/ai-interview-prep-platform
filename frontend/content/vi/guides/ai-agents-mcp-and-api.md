@@ -2,7 +2,7 @@
 title: "Trợ lý AI, MCP và API: là gì và cách dùng trong tuyển dụng"
 seoTitle: "Trợ lý AI (AI agent), MCP và API trong tuyển dụng: là gì và cách dùng"
 description: "Trợ lý AI là gì, MCP và API làm gì, cách dùng chúng an toàn trong tuyển dụng, và cách vận hành prepza từ trợ lý AI của nó, từ Claude và ChatGPT, hoặc từ nền tảng riêng của bạn."
-updated: "2026-10-10"
+updated: "2026-10-14"
 ---
 
 # Trợ lý AI, MCP và API: là gì và cách dùng trong tuyển dụng
@@ -104,7 +104,8 @@ Từ đó trở đi, hãy hỏi trong chat như khi hỏi một đồng nghiệp
 
 - **Quyền của bạn.** Nó hành động dưới danh nghĩa của bạn, ở mọi công ty bạn tham gia, với vai trò của bạn ở từng nơi.
 - **Credit và giới hạn.** Mời một ứng viên tốn đúng như trong ứng dụng, và áp dụng cùng các giới hạn email.
-- **Nhật ký.** Các thay đổi thực hiện theo cách này được đánh dấu trong nhật ký hoạt động của công ty, để cả nhóm thấy chúng đến từ đâu.
+- **Ghi nhận.** Các quyết định mà nhật ký kiểm tra lưu lại (duyệt chủ đề, xem kết quả, đổi điểm đạt, cho thêm thời gian, thu hồi ứng viên, gửi báo cáo qua email) được đánh dấu là thực hiện qua ứng dụng AI. Chủ sở hữu công ty có thể đọc nhật ký qua API.
+- **Công ty quyết định.** Chủ sở hữu và quản trị viên có thể ngăn ứng dụng AI dùng dữ liệu của công ty bằng **Cho phép ứng dụng AI trong công ty này** trên trang ứng dụng AI của công ty.
 - **Những gì nó không làm được.** Nó không thấy mật khẩu hay khóa API của bạn, và không thể xóa tài khoản của bạn hoặc một công ty. Những việc đó vẫn nằm trong ứng dụng.
 
 **Để ngắt kết nối,** hãy gỡ connector trong ứng dụng AI của bạn, hoặc chọn **Ngắt kết nối** bên cạnh nó trong mục **Ứng dụng AI** ở tab Tích hợp. Kết nối dừng ngay lập tức.

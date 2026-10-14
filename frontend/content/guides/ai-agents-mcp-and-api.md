@@ -2,7 +2,7 @@
 title: "AI agents, MCP and APIs: what they are and how to use them in hiring"
 seoTitle: "AI Agents, MCP and APIs in Hiring: What They Are and How to Use Them"
 description: "What an AI agent is, what MCP and an API do, how to use them safely in hiring, and how to run prepza from its agent, from Claude and ChatGPT, or from your own platform."
-updated: "2026-10-10"
+updated: "2026-10-14"
 ---
 
 # AI agents, MCP and APIs: what they are and how to use them in hiring
@@ -104,7 +104,8 @@ From then on, ask in your chat as you would ask a colleague: "In prepza, who are
 
 - **Your permissions.** It acts as you, in every company you're in, with your role in each.
 - **Credits and limits.** Inviting a candidate costs the same as in the app, and the same email limits apply.
-- **The record.** Changes made this way are marked in the company's audit log, so the team can see where they came from.
+- **The record.** The decisions the audit log keeps (approving topics, viewing results, changing the pass mark, giving extra time, revoking a candidate, emailing a report) are marked as made through an AI app. The company's owner can read the log through the API.
+- **The company decides.** Owners and admins can stop AI apps from using a company's data with **Allow AI apps in this company** on its AI apps page.
 - **What it can't do.** It can't see your password or API keys, and it can't delete your account or a company. Those stay in the app.
 
 **To disconnect,** remove the connector in your AI app, or select **Disconnect** next to it under **AI apps** on the Integrations tab. It stops working at once.
