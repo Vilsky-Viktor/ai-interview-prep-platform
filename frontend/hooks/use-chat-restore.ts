@@ -44,10 +44,13 @@ export function useChatRestore({
   // Who the panel was restored for: undefined until the page knows, null for a visitor.
   const uid = loading ? undefined : (user?.uid ?? null)
   const restoredFor = useRef<string | null | undefined>(undefined)
+  // Whether the first restore has read what a reload kept.
+  const lookedAt = useRef(false)
 
-  // Once what a reload kept was looked at, so it isn't overwritten first.
+  // Once what a reload kept was looked at, so it isn't overwritten first (also when the panel
+  // mounts with the page already known, and React runs its effects twice in development).
   useEffect(() => {
-    if (restoredFor.current !== undefined && !signedIn && !streaming) {
+    if (lookedAt.current && !signedIn && !streaming) {
       saveChat(false, { messages, lastAt: new Date().toISOString() })
     }
   }, [signedIn, streaming, messages])
@@ -76,7 +79,9 @@ export function useChatRestore({
       return
     }
 
-    onRestored(now ? await restoreConversation() : await restoreVisitor())
+    const recent = now ? await restoreConversation() : await restoreVisitor()
+    lookedAt.current = true
+    onRestored(recent)
   }
 
   // Signed in: the chat they had as a visitor (until their first message saves it), unless
@@ -108,7 +113,14 @@ export function useChatRestore({
     const kept = await recentVisitor()
 
     if (kept === null) {
+      // An old chat is forgotten, not whether the panel is open: it loads when first opened
+      // (assistant-provider.tsx), after that was saved.
+      const { open } = readChat(false)
       clearChat(false)
+
+      if (open !== undefined) {
+        saveChat(false, { open })
+      }
 
       return false
     }
