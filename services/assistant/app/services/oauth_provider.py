@@ -1,3 +1,4 @@
+import json
 import logging
 import secrets
 from datetime import UTC, datetime, timedelta
@@ -10,6 +11,7 @@ from mcp.server.auth.provider import (
     AuthorizationParams,
     AuthorizeError,
     RefreshToken,
+    RegistrationError,
     TokenError,
 )
 from mcp.server.auth.settings import AuthSettings
@@ -19,7 +21,11 @@ from prepza_common.rate_limit import hit
 from prepza_common.tokens import hashed, new_token
 
 from app.config.settings import settings
-from app.constants.limits import TOKEN_REQUESTS_PER_CLIENT_MINUTE
+from app.constants.limits import (
+    MAX_REGISTRATION_BYTES,
+    MAX_STATE_LENGTH,
+    TOKEN_REQUESTS_PER_CLIENT_MINUTE,
+)
 from app.constants.mcp import (
     ACCESS_SECONDS,
     CONNECT_PATH,
@@ -116,7 +122,12 @@ class Provider:
         return OAuthClientInformationFull.model_validate(found) if found else None
 
     async def register_client(self, client_info: OAuthClientInformationFull) -> None:
+        """Kept 30 days; one bigger than MAX_REGISTRATION_BYTES is refused."""
         info = client_info.model_dump(mode="json", exclude_none=True)
+
+        if len(json.dumps(info)) > MAX_REGISTRATION_BYTES:
+            raise RegistrationError("invalid_client_metadata", "The registration is too large.")
+
         await oauth.save_client(client_info.client_id, info)
 
     async def authorize(
@@ -125,6 +136,10 @@ class Provider:
         """Keeps the request for the user to answer, and sends them to the consent page."""
         if params.resource is not None and params.resource.rstrip("/") != resource_url():
             raise AuthorizeError("invalid_target", "prepza only grants access to its MCP server.")
+
+        # Kept with the request until the user answers.
+        if params.state is not None and len(params.state) > MAX_STATE_LENGTH:
+            raise AuthorizeError("invalid_request", "The state is too long.")
 
         name, host, known = describe_client(client.client_name, str(params.redirect_uri))
         request_id = secrets.token_urlsafe(24)

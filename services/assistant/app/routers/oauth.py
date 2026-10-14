@@ -21,7 +21,11 @@ from starlette.responses import JSONResponse, Response
 from starlette.routing import Route
 from starlette.types import ASGIApp, Receive, Scope, Send
 
-from app.constants.limits import REGISTRATIONS_PER_DAY, REGISTRATIONS_PER_IP_HOUR
+from app.constants.limits import (
+    AUTHORIZATIONS_PER_IP_HOUR,
+    REGISTRATIONS_PER_DAY,
+    REGISTRATIONS_PER_IP_HOUR,
+)
 from app.constants.mcp import MCP_SCOPE
 from app.helpers.connect_cookie import MarkBrowser
 from app.integrations.redis import get_redis
@@ -36,28 +40,38 @@ ROOT_RESOURCE_METADATA_PATH = "/.well-known/oauth-protected-resource"
 AUTH_METHODS = ["none", "client_secret_post", "client_secret_basic"]
 
 
-class LimitedRegistrations:
-    """Registration, counted per address and for everyone; over a limit, refused (429). With
-    Redis down, not counted rather than refused."""
+class Limited:
+    """An endpoint of the OAuth server counted per address in an hour, and with `daily`, for
+    everyone in a day; over a limit, refused (429) with an OAuth `error`. With Redis down, not
+    counted rather than refused."""
 
-    def __init__(self, app: ASGIApp):
+    def __init__(
+        self, app: ASGIApp, name: str, error: str, per_ip_hour: int, daily: int | None = None
+    ):
         self.app = app
+        self.name = name
+        self.error = error
+        self.per_ip_hour = per_ip_hour
+        self.daily = daily
 
     async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
-        if scope["method"] == "POST":
+        if scope["method"] in ("GET", "POST"):
             redis = get_redis()
-            key = f"rate:assistant:mcp:register:{client_ip(Request(scope))}"
+            key = f"rate:assistant:mcp:{self.name}"
 
             try:
-                await hit(redis, key, REGISTRATIONS_PER_IP_HOUR, HOUR_SECONDS)
-                await hit(redis, "rate:assistant:mcp:register", REGISTRATIONS_PER_DAY, DAY_SECONDS)
+                address = client_ip(Request(scope))
+                await hit(redis, f"{key}:{address}", self.per_ip_hour, HOUR_SECONDS)
+
+                if self.daily is not None:
+                    await hit(redis, key, self.daily, DAY_SECONDS)
             except HTTPException as error:
-                body = {"error": "invalid_client_metadata", "error_description": error.detail}
+                body = {"error": self.error, "error_description": error.detail}
                 await JSONResponse(body, status_code=error.status_code)(scope, receive, send)
 
                 return
             except Exception:
-                logger.warning("Registration limit skipped, Redis failed", exc_info=True)
+                logger.warning("The %s limit skipped, Redis failed", self.name, exc_info=True)
 
         await self.app(scope, receive, send)
 
@@ -110,10 +124,17 @@ def routes() -> list[Route]:
             handler = cors_middleware(MetadataHandler(metadata).handle, ["GET", "OPTIONS"])
             route = Route(route.path, endpoint=handler, methods=["GET", "OPTIONS"])
         elif route.path == REGISTRATION_PATH:
-            limited = LimitedRegistrations(route.app)
+            limited = Limited(
+                route.app,
+                "register",
+                "invalid_client_metadata",
+                REGISTRATIONS_PER_IP_HOUR,
+                REGISTRATIONS_PER_DAY,
+            )
             route = Route(route.path, endpoint=limited, methods=["POST", "OPTIONS"])
         elif route.path == AUTHORIZATION_PATH:
-            route = Route(route.path, endpoint=MarkBrowser(route.app), methods=["GET", "POST"])
+            limited = Limited(route.app, "authorize", "invalid_request", AUTHORIZATIONS_PER_IP_HOUR)
+            route = Route(route.path, endpoint=MarkBrowser(limited), methods=["GET", "POST"])
         elif route.path == REVOCATION_PATH:
             handler = cors_middleware(revoke, ["POST", "OPTIONS"])
             route = Route(route.path, endpoint=handler, methods=["POST", "OPTIONS"])

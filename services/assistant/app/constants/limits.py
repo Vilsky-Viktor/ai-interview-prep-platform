@@ -31,8 +31,16 @@ MCP_CALLS_PER_USER_MINUTE = 60
 MCP_CALLS_PER_USER_DAY = 3_000
 # Apps registering themselves, from one address in an hour, and from everywhere in a day. Claude
 # and ChatGPT register from their own servers, so one address stands for many people.
+# The daily cap is above what one address can reach (300 x 24), so one can't block everyone.
 REGISTRATIONS_PER_IP_HOUR = 300
-REGISTRATIONS_PER_DAY = 5_000
+REGISTRATIONS_PER_DAY = 20_000
+# Requests to connect (/authorize) from one address in an hour.
+AUTHORIZATIONS_PER_IP_HOUR = 120
+# The most an app's registration may take (its JSON), and the longest `state` it sends with a
+# request: both are kept (in Postgres for 30 days, in Redis for 10 minutes). Real ones are far
+# smaller.
+MAX_REGISTRATION_BYTES = 4_000
+MAX_STATE_LENGTH = 512
 # Token requests (a code or a refresh exchanged) of one app in a minute.
 TOKEN_REQUESTS_PER_CLIENT_MINUTE = 30
 # Connections a user may allow in an hour.

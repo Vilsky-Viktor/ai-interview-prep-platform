@@ -60,7 +60,8 @@ Constants in `app/constants/limits.py`, counted in Redis; with Redis down they'r
 |---|---|
 | Calls of a user's apps | 60 a minute, 3,000 a day |
 | Writes (with the panel's actions) | 30 a user an hour |
-| Registrations | 300 an address an hour, 5,000 a day for everyone (Claude and ChatGPT register from their own servers) |
+| Registrations | 300 an address an hour, 20,000 a day for everyone, above what one address can reach (Claude and ChatGPT register from their own servers); one over 4,000 bytes is refused (`invalid_client_metadata`) |
+| Requests to connect (`/authorize`) | 120 an address an hour (429, `invalid_request`); a `state` over 512 characters is refused |
 | Token requests | 30 an app a minute |
 | Connections a user allows | 20 an hour |
 
