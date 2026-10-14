@@ -37,6 +37,8 @@ def test_a_candidate_invite_and_its_email_event_are_saved_together(run):
         "language": "ru",
         # No logo set: the email shows none.
         "logo_path": None,
+        # Not verified: the email says so, quietly.
+        "verified": False,
     } in events
 
 
