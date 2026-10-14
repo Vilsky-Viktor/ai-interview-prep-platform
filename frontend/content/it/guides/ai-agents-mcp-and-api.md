@@ -2,7 +2,7 @@
 title: "Agenti IA, MCP e API: cosa sono e come usarli nella selezione del personale"
 seoTitle: "Agenti IA, MCP e API nella selezione del personale: cosa sono e come usarli"
 description: "Cos'è un agente IA, a cosa servono MCP e un'API, come usarli in sicurezza nella selezione del personale e come gestire prepza dal suo agente, da Claude e ChatGPT o dalla tua piattaforma."
-updated: "2026-10-14"
+updated: "2026-10-15"
 ---
 
 # Agenti IA, MCP e API: cosa sono e come usarli nella selezione del personale
@@ -112,13 +112,15 @@ Da quel momento, chiedi nella chat come faresti con un collega: «In prepza, chi
 
 ### 3. La tua piattaforma, tramite l'API
 
-Per automazioni senza IA, prepza ha un'[API](/api-docs).
+Per automazioni senza IA, prepza ha un'API, descritta nella sua [documentazione per sviluppatori](/api-docs).
 
 1. Un proprietario o un amministratore apre la scheda **Integrazioni** di un'azienda, poi **API**, e seleziona **Nuova chiave**. Dalle il nome della piattaforma che la userà e scegli quando scade. La chiave viene mostrata una sola volta: conservala in un posto sicuro.
-2. La tua piattaforma invia richieste con quella chiave: elencare i colloqui dell'azienda, elencare o leggere i candidati con il loro punteggio, se hanno superato il test e le segnalazioni di integrità, e invitare un candidato via email.
+2. La tua piattaforma invia richieste con quella chiave: elencare i colloqui dell'azienda, elencare o leggere i candidati con il loro punteggio, se hanno superato il test e le segnalazioni di integrità, e invitare un candidato.
 3. Aggiungi un **webhook**: un indirizzo sulla tua piattaforma che prepza chiama, con una firma, appena un candidato termina, così non devi continuare a chiedere.
 
-Ogni candidato arriva con un link ai suoi risultati completi in prepza e, finché non termina, con il suo link di invito, così la tua piattaforma può inviarlo con un proprio messaggio, se preferisci. Vale la stessa regola di sempre: il punteggio supporta la decisione di una persona, quindi non scartare candidati in automatico sulla base del punteggio.
+Ogni candidato arriva con un link ai suoi risultati completi in prepza e, finché non termina, con il suo link di invito, così la tua piattaforma può inviarlo con un proprio messaggio, se preferisci. Quando la tua piattaforma sa già chi è il candidato, invitalo senza accesso: prepza non invia email, e il candidato svolge il colloquio dal link senza accedere a prepza, quindi invia il link solo a lui. Un invito può anche riportare il candidato sul tuo sito con un pulsante nella pagina finale, e impostare un tema chiaro o scuro con i colori della tua azienda. Con l'SDK di prepza, la tua pagina può mostrare il colloquio stesso. Riportare i candidati sul tuo sito e mostrarvi il colloquio richiedono un'azienda verificata, e funzionano solo sul dominio del suo sito web.
+
+Vale la stessa regola di sempre: il punteggio supporta la decisione di una persona, quindi non scartare candidati in automatico sulla base del punteggio.
 
 ## Quale usare e quando
 

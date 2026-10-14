@@ -2,7 +2,7 @@
 title: "Agen AI, MCP, dan API: apa itu dan cara memakainya dalam rekrutmen"
 seoTitle: "Agen AI, MCP, dan API dalam Rekrutmen: Apa Itu dan Cara Memakainya"
 description: "Apa itu agen AI, apa fungsi MCP dan API, cara memakainya dengan aman dalam rekrutmen, dan cara menjalankan prepza dari agennya, dari Claude dan ChatGPT, atau dari platformmu sendiri."
-updated: "2026-10-14"
+updated: "2026-10-15"
 ---
 
 # Agen AI, MCP, dan API: apa itu dan cara memakainya dalam rekrutmen
@@ -112,13 +112,15 @@ Setelah itu, bertanyalah di chat seperti kamu bertanya kepada rekan kerja: "Di p
 
 ### 3. Platformmu sendiri, lewat API
 
-Untuk otomatisasi tanpa AI, prepza punya [API](/api-docs).
+Untuk otomatisasi tanpa AI, prepza punya API, yang dijelaskan di [dokumentasi pengembang](/api-docs)-nya.
 
 1. Pemilik atau admin membuka tab **Integrasi** sebuah perusahaan, lalu **API**, dan memilih **Kunci baru**. Beri nama sesuai platform yang akan memakainya dan pilih kapan kunci itu kedaluwarsa. Kunci hanya ditampilkan sekali; simpan di tempat yang aman.
-2. Platformmu mengirim permintaan dengan kunci itu: menampilkan daftar wawancara perusahaan, menampilkan daftar atau membaca kandidat beserta nilainya, lulus atau tidak, dan tanda integritasnya, serta mengundang kandidat lewat email.
+2. Platformmu mengirim permintaan dengan kunci itu: menampilkan daftar wawancara perusahaan, menampilkan daftar atau membaca kandidat beserta nilainya, lulus atau tidak, dan tanda integritasnya, serta mengundang kandidat.
 3. Tambahkan **webhook**: alamat di platformmu yang dipanggil prepza, dengan tanda tangan, begitu seorang kandidat selesai, sehingga kamu tidak perlu terus-menerus bertanya.
 
-Setiap kandidat dilengkapi tautan ke hasil lengkapnya di prepza dan, sampai ia selesai, tautan undangannya sendiri, sehingga platformmu bisa mengirimkannya lewat pesannya sendiri jika kamu mau. Aturannya sama seperti di tempat lain: nilai mendukung keputusan seseorang, jadi jangan menolak kandidat secara otomatis berdasarkan nilai itu.
+Setiap kandidat dilengkapi tautan ke hasil lengkapnya di prepza dan, sampai ia selesai, tautan undangannya sendiri, sehingga platformmu bisa mengirimkannya lewat pesannya sendiri jika kamu mau. Jika platformmu sudah tahu siapa kandidatnya, undang ia tanpa login: prepza tidak mengirim email apa pun, dan kandidat mengikuti wawancara dari tautan itu tanpa login ke prepza, jadi kirim tautannya hanya kepadanya. Undangan juga bisa membawa kandidat kembali ke situsmu lewat tombol di halaman selesai, dan mengatur tema terang atau gelap dengan warna perusahaanmu. Dengan SDK prepza, halamanmu sendiri bisa menampilkan wawancaranya langsung. Membawa kandidat kembali dan menampilkan wawancara di situsmu memerlukan perusahaan yang terverifikasi, dan hanya berfungsi di domain situs webnya.
+
+Aturannya sama seperti di tempat lain: nilai mendukung keputusan seseorang, jadi jangan menolak kandidat secara otomatis berdasarkan nilai itu.
 
 ## Kapan memakai yang mana
 

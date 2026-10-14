@@ -2,7 +2,7 @@
 title: "AI agents, MCP and APIs: what they are and how to use them in hiring"
 seoTitle: "AI Agents, MCP and APIs in Hiring: What They Are and How to Use Them"
 description: "What an AI agent is, what MCP and an API do, how to use them safely in hiring, and how to run prepza from its agent, from Claude and ChatGPT, or from your own platform."
-updated: "2026-10-14"
+updated: "2026-10-15"
 ---
 
 # AI agents, MCP and APIs: what they are and how to use them in hiring
@@ -112,13 +112,15 @@ From then on, ask in your chat as you would ask a colleague: "In prepza, who are
 
 ### 3. Your own platform, through the API
 
-For automation without AI, prepza has an [API](/api-docs).
+For automation without AI, prepza has an API, described in its [developer docs](/api-docs).
 
 1. An owner or admin opens a company's **Integrations** tab, then **API**, and selects **New key**. Name it after the platform that will use it and choose when it expires. The key is shown once; store it somewhere safe.
-2. Your platform sends requests with that key: list the company's interviews, list or read candidates with their grade, whether they passed and their integrity signals, and invite a candidate by email.
+2. Your platform sends requests with that key: list the company's interviews, list or read candidates with their grade, whether they passed and their integrity signals, and invite a candidate.
 3. Add a **web hook**: an address on your platform that prepza calls, signed, as soon as a candidate finishes, so you don't have to keep asking.
 
-Each candidate comes with a link to their full results in prepza and, until they finish, their own invite link, so your platform can send it in its own message if you prefer. The same rule holds as everywhere else: the grade supports a person's decision, so don't reject candidates automatically on it.
+Each candidate comes with a link to their full results in prepza and, until they finish, their own invite link, so your platform can send it in its own message if you prefer. When your platform already knows who the candidate is, invite them without sign-in: prepza sends no emails, and the candidate takes the interview from the link without signing in to prepza, so send the link only to them. An invite can also bring the candidate back to your site with a button on the finished page, and set a light or dark theme in your company's colors. With prepza's SDK, your own page can show the interview itself. Bringing candidates back and showing the interview on your site need a verified company, and work only on its website domain.
+
+The same rule holds as everywhere else: the grade supports a person's decision, so don't reject candidates automatically on it.
 
 ## Which one to use when
 

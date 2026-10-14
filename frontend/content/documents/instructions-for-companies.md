@@ -1,6 +1,6 @@
 # Using prepza responsibly: instructions for companies
 
-Version of 2026-10-14. Arcolabs OÜ (registry code 17587452), Sepapaja tn 6, 15551 Tallinn, Estonia; hello@prepza.ai.
+Version of 2026-10-15. Arcolabs OÜ (registry code 17587452), Sepapaja tn 6, 15551 Tallinn, Estonia; hello@prepza.ai.
 
 For owners and admins of a company on prepza. These are prepza's instructions for use under the
 EU AI Act (Art. 13). Your own duties as an employer, under the employment and data protection law
@@ -16,8 +16,7 @@ that applies to you, stay yours.
 - **High-risk AI system.** Under the EU AI Act, a system used to evaluate candidates is high-risk
   (Annex III point 4(a)), and prepza is treated as one. Its obligations apply from 2027-12-02;
   before then prepza signs its EU declaration of conformity and is registered in the EU database,
-  and from 2027-11-02 the CE marking is shown in the site footer on every page, linked to the
-  declaration.
+  and from 2027-11-02 the CE marking is shown in the site footer, linked to the declaration.
 - **Not for:** see section 11.
 
 ## 2. What a prepza grade is
@@ -151,6 +150,16 @@ is yours to give.
   interview's reminders, with a link at the bottom. Once a candidate stops your company's emails,
   prepza doesn't email them for your company again: an invite to them shows as undelivered in the
   candidate list, so reach them another way if you still need to.
+- **Candidates from your own platform.** Through the API your platform can invite a candidate with
+  `sign_in` false: prepza then sends them no emails, and they take the interview from their invite
+  link without signing in to prepza, so the notice and the link are yours to send, to that
+  candidate only (anyone with the link can use it). The invite can also set a `return_url`, a
+  **Back to** your company button on the finished page, and a `theme` (light, dark, or the
+  candidate's own). prepza's SDK (prepza.ai/embed/v1.js) shows the interview inside your own page.
+  The return button and the embedded interview work only on your company's verified website domain
+  and its subdomains. The candidate still sees prepza's invite page, in your company's logo and
+  colors if you set them, before they start. Leaving the embedded interview, also for the rest of your page, counts
+  as a page leave. The developer docs (prepza.ai/api-docs) give the details.
 
 ## 10. Records, retention and data requests
 
@@ -236,7 +245,8 @@ From 2027-12-02, when you use prepza in the EU:
   here with a new version date. A significant change to the terms or the data processing agreement
   is emailed to you at least 14 days before it applies.
 - **Security:** sign-in with Google, LinkedIn or GitHub and a verified email; only the invited
-  email can start an invite; roles limit what admins and viewers can do; API keys are kept only as
+  email can start an invite, except an invite your platform sent through the API without sign-in,
+  which anyone with its link can use; roles limit what admins and viewers can do; API keys are kept only as
   hashes.
 
 ## Reporting serious problems

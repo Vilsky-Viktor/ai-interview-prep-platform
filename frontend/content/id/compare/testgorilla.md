@@ -2,7 +2,7 @@
 title: "prepza dan TestGorilla: kapan memakai masing-masing, dan memakai keduanya"
 seoTitle: "prepza vs TestGorilla: Perbandingan Tes Seleksi Karyawan"
 description: "Perbedaan prepza dan TestGorilla dalam cara tes dibuat, apa yang diuji dan harganya, kapan masing-masing lebih cocok, dan cara memakai keduanya."
-updated: "2026-10-07"
+updated: "2026-10-15"
 ---
 
 # prepza dan TestGorilla: kapan memakai masing-masing, dan memakai keduanya
@@ -28,7 +28,7 @@ Halaman ini menjelaskan perbedaannya, kapan masing-masing lebih cocok, dan cara 
 | Kode dalam tes | Soal membaca kode (apa yang dilakukan atau dihasilkan kode); tidak menulis atau menjalankan kode | Tes pemrograman di pustaka; untuk tantangan coding kustom, lihat paketnya ([halaman harga](https://www.testgorilla.com/pricing/)) |
 | Soal per kandidat | Setiap kandidat mendapat set acaknya sendiri, dengan urutannya sendiri | Tidak dibandingkan di sini |
 | Fitur anti-kecurangan | Timer di setiap soal (ditegakkan oleh server), tanda untuk jawaban yang terlalu cepat, meninggalkan halaman, dan percobaan menyalin | Snapshot webcam, salin/tempel dinonaktifkan, dan mode layar penuh di paket yang lebih tinggi |
-| Integrasi | Workable, Greenhouse, Teamtailor, Recruitee, dan Breezy HR; Slack; API publik dengan webhook bertanda tangan ([Dokumentasi API](/api-docs)). Semuanya tanpa biaya tambahan | Integrasi ATS/API di paket yang lebih tinggi |
+| Integrasi | Workable, Greenhouse, Teamtailor, Recruitee, dan Breezy HR; Slack; API publik dengan webhook bertanda tangan ([Dokumentasi pengembang](/api-docs)). Semuanya tanpa biaya tambahan | Integrasi ATS/API di paket yang lebih tinggi |
 | Laporan | Scorecard dengan jawaban dan waktunya; PDF untuk satu atau semua kandidat | Tidak dibandingkan di sini |
 | Bahasa | 23 bahasa untuk antarmuka, wawancara, dan email | Tidak dibandingkan di sini; pustakanya mencakup tes kemahiran bahasa |
 | Model harga | Per kandidat yang menjawab, dari kredit prabayar; tanpa langganan ([harga](/pricing)) | Paket gratis dan paket berbayar yang ditagih tahunan ([halaman harga](https://www.testgorilla.com/pricing/)) |
@@ -58,7 +58,7 @@ Model mana yang lebih murah tergantung berapa banyak kandidat yang kamu tes dala
 
 ## Pengalaman kandidat
 
-**prepza:** sebelum mulai, kandidat melihat apa yang akan terjadi: bahwa soalnya ditulis oleh AI, bahwa orang di perusahaanmu yang meninjau hasil dan memutuskan, dan bahwa mereka bisa meminta tambahan waktu atau peninjauan ulang hasilnya. Setiap soal punya hitung mundurnya sendiri. Kandidat tidak melihat skor mereka atau jawaban mana yang benar. Kamera tidak digunakan.
+**prepza:** sebelum mulai, kandidat melihat apa yang akan terjadi: bahwa soalnya ditulis oleh AI, bahwa orang di perusahaanmu yang meninjau hasil dan memutuskan, dan bahwa mereka bisa meminta tambahan waktu atau peninjauan ulang hasilnya. Setiap soal punya hitung mundurnya sendiri. Kandidat tidak melihat skor mereka atau jawaban mana yang benar. Kamera tidak digunakan. Halaman wawancara hanya menampilkan perusahaanmu, dengan logo dan warnamu jika kamu menambahkannya, tanpa header dan footer prepza.
 
 **TestGorilla:** di paket yang lebih tinggi, proctoring mencakup snapshot webcam, salin/tempel dinonaktifkan, dan mode layar penuh ([halaman harga](https://www.testgorilla.com/pricing/)). Itu memberimu pengawasan lebih. Memakai kamera atau tidak adalah pertimbangan antara pengawasan dan privasi kandidat, dan gambar dari kamera berarti lebih banyak data pribadi yang harus dilindungi.
 

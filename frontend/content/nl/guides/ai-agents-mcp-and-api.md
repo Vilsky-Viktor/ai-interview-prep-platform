@@ -2,7 +2,7 @@
 title: "AI-agents, MCP en API's: wat het zijn en hoe je ze inzet bij werving en selectie"
 seoTitle: "AI-agents, MCP en API's bij werving: wat het zijn en hoe je ze inzet"
 description: "Wat een AI-agent is, wat MCP en een API doen, hoe je ze veilig inzet bij werving en selectie, en hoe je prepza bedient via de eigen agent, vanuit Claude en ChatGPT of vanuit je eigen platform."
-updated: "2026-10-14"
+updated: "2026-10-15"
 ---
 
 # AI-agents, MCP en API's: wat het zijn en hoe je ze inzet bij werving en selectie
@@ -112,13 +112,15 @@ Vanaf dan vraag je in je chat wat je ook een collega zou vragen: "Wie zijn in pr
 
 ### 3. Je eigen platform, via de API
 
-Voor automatisering zonder AI heeft prepza een [API](/api-docs).
+Voor automatisering zonder AI heeft prepza een API, beschreven in de [ontwikkelaarsdocumentatie](/api-docs).
 
 1. Een eigenaar of beheerder opent het tabblad **Integraties** van een bedrijf, dan **API**, en kiest **Nieuwe sleutel**. Geef hem de naam van het platform dat hem gaat gebruiken en kies wanneer hij verloopt. De sleutel wordt één keer getoond; bewaar hem op een veilige plek.
-2. Je platform stuurt verzoeken met die sleutel: de interviews van het bedrijf ophalen, kandidaten ophalen of opvragen met hun score, of ze geslaagd zijn en hun integriteitssignalen, en een kandidaat per e-mail uitnodigen.
+2. Je platform stuurt verzoeken met die sleutel: de interviews van het bedrijf ophalen, kandidaten ophalen of opvragen met hun score, of ze geslaagd zijn en hun integriteitssignalen, en een kandidaat uitnodigen.
 3. Voeg een **webhook** toe: een adres op je platform dat prepza ondertekend aanroept zodra een kandidaat klaar is, zodat je niet steeds hoeft te vragen.
 
-Bij elke kandidaat zit een link naar de volledige resultaten in prepza en, tot de kandidaat klaar is, een eigen uitnodigingslink, zodat je platform die in een eigen bericht kan versturen als je dat liever hebt. Dezelfde regel geldt als overal: de score ondersteunt de beslissing van een mens, dus wijs kandidaten er niet automatisch op af.
+Bij elke kandidaat zit een link naar de volledige resultaten in prepza en, tot de kandidaat klaar is, een eigen uitnodigingslink, zodat je platform die in een eigen bericht kan versturen als je dat liever hebt. Weet je platform al wie de kandidaat is, nodig de kandidaat dan uit zonder inloggen: prepza verstuurt geen e-mails en de kandidaat doet het interview via de link zonder bij prepza in te loggen, dus stuur de link alleen naar die kandidaat. Een uitnodiging kan de kandidaat ook terugsturen naar je website met een knop op de pagina na afloop, en een licht of donker thema in de kleuren van je bedrijf instellen. Met de SDK van prepza kan je eigen pagina het interview zelf tonen. Voor het terugsturen van kandidaten en het tonen van het interview op je website is een geverifieerd bedrijf nodig, en beide werken alleen op het websitedomein van dat bedrijf.
+
+Dezelfde regel geldt als overal: de score ondersteunt de beslissing van een mens, dus wijs kandidaten er niet automatisch op af.
 
 ## Wat je wanneer gebruikt
 

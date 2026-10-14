@@ -2,7 +2,7 @@
 title: "KI-Agenten, MCP und APIs: was sie sind und wie du sie im Recruiting nutzt"
 seoTitle: "KI-Agenten, MCP und APIs im Recruiting: was sie sind und wie du sie nutzt"
 description: "Was ein KI-Agent ist, was MCP und eine API leisten, wie du sie im Recruiting sicher einsetzt und wie du prepza über seinen Agenten, aus Claude und ChatGPT oder von deiner eigenen Plattform aus steuerst."
-updated: "2026-10-14"
+updated: "2026-10-15"
 ---
 
 # KI-Agenten, MCP und APIs: was sie sind und wie du sie im Recruiting nutzt
@@ -112,13 +112,15 @@ Ab dann fragst du in deinem Chat so, wie du einen Kollegen fragen würdest: „W
 
 ### 3. Deine eigene Plattform, über die API
 
-Für Automatisierung ohne KI hat prepza eine [API](/api-docs).
+Für Automatisierung ohne KI hat prepza eine API, beschrieben in der [Entwicklerdokumentation](/api-docs).
 
 1. Ein Inhaber oder Admin öffnet den Tab **Integrationen** eines Unternehmens, dann **API**, und wählt **Neuer Schlüssel**. Benenne ihn nach der Plattform, die ihn nutzen wird, und wähle, wann er abläuft. Der Schlüssel wird nur einmal angezeigt; bewahre ihn sicher auf.
-2. Deine Plattform sendet Anfragen mit diesem Schlüssel: die Interviews des Unternehmens auflisten, Kandidaten mit ihrem Ergebnis, ob sie bestanden haben, und ihren Hinweisen zur Integrität auflisten oder abrufen und einen Kandidaten per E-Mail einladen.
+2. Deine Plattform sendet Anfragen mit diesem Schlüssel: die Interviews des Unternehmens auflisten, Kandidaten mit ihrem Ergebnis, ob sie bestanden haben, und ihren Hinweisen zur Integrität auflisten oder abrufen und einen Kandidaten einladen.
 3. Füge einen **Webhook** hinzu: eine Adresse auf deiner Plattform, die prepza signiert aufruft, sobald ein Kandidat fertig ist, damit du nicht ständig nachfragen musst.
 
-Zu jedem Kandidaten gibt es einen Link zu seinen vollständigen Ergebnissen in prepza und, bis er fertig ist, seinen eigenen Einladungslink, sodass deine Plattform ihn in einer eigenen Nachricht verschicken kann, wenn dir das lieber ist. Es gilt dieselbe Regel wie überall: Das Ergebnis unterstützt die Entscheidung eines Menschen, lehne Kandidaten also nicht automatisch danach ab.
+Zu jedem Kandidaten gibt es einen Link zu seinen vollständigen Ergebnissen in prepza und, bis er fertig ist, seinen eigenen Einladungslink, sodass deine Plattform ihn in einer eigenen Nachricht verschicken kann, wenn dir das lieber ist. Wenn deine Plattform schon weiß, wer der Kandidat ist, lade ihn ohne Anmeldung ein: prepza verschickt keine E-Mails, und der Kandidat macht das Interview über den Link, ohne sich bei prepza anzumelden, schicke den Link also nur ihm. Eine Einladung kann den Kandidaten außerdem mit einer Schaltfläche auf der Abschlussseite zurück auf deine Website bringen und ein helles oder dunkles Design in den Farben deines Unternehmens festlegen. Mit dem SDK von prepza kann deine eigene Seite das Interview selbst anzeigen. Kandidaten zurückzubringen und das Interview auf deiner Website anzuzeigen setzt ein verifiziertes Unternehmen voraus und funktioniert nur auf dessen Website-Domain.
+
+Es gilt dieselbe Regel wie überall: Das Ergebnis unterstützt die Entscheidung eines Menschen, lehne Kandidaten also nicht automatisch danach ab.
 
 ## Was du wann nutzt
 

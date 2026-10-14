@@ -2,7 +2,7 @@
 title: "prepza i TestGorilla: do czego pasuje każde z nich i jak używać obu"
 seoTitle: "prepza vs TestGorilla: porównanie i wspólne użycie"
 description: "Czym różnią się prepza i TestGorilla: jak powstają testy, co sprawdzają i ile kosztują, gdzie każde narzędzie sprawdza się lepiej i jak używać ich razem."
-updated: "2026-10-07"
+updated: "2026-10-15"
 ---
 
 # prepza i TestGorilla: do czego pasuje każde z nich i jak używać obu
@@ -28,7 +28,7 @@ Ta strona wyjaśnia, czym się różnią, gdzie każde z nich sprawdza się lepi
 | Kod w teście | Pytania o czytanie kodu (co kod robi lub wypisuje); bez pisania ani uruchamiania kodu | Testy programistyczne w bibliotece; własne zadania programistyczne: zobacz plany ([strona z cenami](https://www.testgorilla.com/pricing/)) |
 | Pytania na kandydata | Własny losowy zestaw każdego kandydata, we własnej kolejności | Nie porównujemy tutaj |
 | Funkcje rzetelności | Limit czasu przy każdym pytaniu (kontrolowany po stronie serwera), oznaczenia zbyt szybkich odpowiedzi, opuszczenia strony i prób kopiowania | Zdjęcia z kamery internetowej, wyłączone kopiowanie/wklejanie i tryb pełnoekranowy w wyższym planie |
-| Integracje | Workable, Greenhouse, Teamtailor, Recruitee i Breezy HR; Slack; publiczne API z podpisanymi webhookami ([dokumentacja API](/api-docs)). Wszystko bez dodatkowych opłat | Integracje z ATS/API w wyższym planie |
+| Integracje | Workable, Greenhouse, Teamtailor, Recruitee i Breezy HR; Slack; publiczne API z podpisanymi webhookami ([dokumentacja dla deweloperów](/api-docs)). Wszystko bez dodatkowych opłat | Integracje z ATS/API w wyższym planie |
 | Raporty | Karty wyników z odpowiedziami i czasami; PDF dla jednego lub wszystkich kandydatów | Nie porównujemy tutaj |
 | Języki | 23 języki interfejsu, rozmów i e-maili | Nie porównujemy tutaj; biblioteka zawiera testy biegłości językowej |
 | Model cenowy | Za kandydata, który odpowiada, z przedpłaconych kredytów; bez subskrypcji ([cennik](/pricing)) | Plan bezpłatny i płatne plany rozliczane rocznie ([strona z cenami](https://www.testgorilla.com/pricing/)) |
@@ -58,7 +58,7 @@ To, który model kosztuje mniej, zależy od tego, ilu kandydatów testujesz w ci
 
 ## Doświadczenie kandydata
 
-**prepza:** kandydaci przed rozpoczęciem widzą, czego się spodziewać: że pytania pisze AI, że wyniki przeglądają i decyzje podejmują ludzie z Twojej firmy oraz że mogą poprosić o więcej czasu lub o ponowne sprawdzenie swojego wyniku. Każde pytanie ma własne odliczanie czasu. Kandydaci nie widzą swojego wyniku ani tego, które odpowiedzi były poprawne. Kamera nie jest używana.
+**prepza:** kandydaci przed rozpoczęciem widzą, czego się spodziewać: że pytania pisze AI, że wyniki przeglądają i decyzje podejmują ludzie z Twojej firmy oraz że mogą poprosić o więcej czasu lub o ponowne sprawdzenie swojego wyniku. Każde pytanie ma własne odliczanie czasu. Kandydaci nie widzą swojego wyniku ani tego, które odpowiedzi były poprawne. Kamera nie jest używana. Strony rozmowy pokazują tylko Twoją firmę, z Twoim logo i kolorami, jeśli je dodasz, bez nagłówka i stopki prepza.
 
 **TestGorilla:** w wyższym planie nadzór (proctoring) obejmuje zdjęcia z kamery internetowej, wyłączone kopiowanie/wklejanie i tryb pełnoekranowy ([strona z cenami](https://www.testgorilla.com/pricing/)). Daje Ci to więcej monitorowania. Decyzja o użyciu kamery to kompromis między nadzorem a prywatnością kandydatów, a zdjęcia z kamery to kolejne dane osobowe, które trzeba chronić.
 

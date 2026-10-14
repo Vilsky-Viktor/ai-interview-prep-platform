@@ -2,7 +2,7 @@
 title: "AI agents, MCP at APIs: ano ang mga ito at paano gamitin sa hiring"
 seoTitle: "AI Agents, MCP at APIs sa Hiring: Ano ang Mga Ito at Paano Gamitin"
 description: "Ano ang AI agent, ano ang ginagawa ng MCP at ng API, paano gamitin nang ligtas ang mga ito sa hiring, at paano patakbuhin ang prepza mula sa agent nito, mula sa Claude at ChatGPT, o mula sa sarili mong platform."
-updated: "2026-10-14"
+updated: "2026-10-15"
 ---
 
 # AI agents, MCP at APIs: ano ang mga ito at paano gamitin sa hiring
@@ -112,13 +112,15 @@ Mula noon, magtanong sa chat mo gaya ng pagtatanong mo sa isang katrabaho: "Sa p
 
 ### 3. Ang sarili mong platform, gamit ang API
 
-Para sa automation na walang AI, may [API](/api-docs) ang prepza.
+Para sa automation na walang AI, may API ang prepza, na inilalarawan sa [dokumentasyon nito para sa mga developer](/api-docs).
 
 1. Bubuksan ng isang may-ari o admin ang tab na **Mga integration** ng isang kumpanya, pagkatapos ang **API**, at pipiliin ang **Bagong key**. Pangalanan ito ayon sa platform na gagamit nito at piliin kung kailan ito mag-e-expire. Isang beses lang ipinapakita ang key; itago ito sa ligtas na lugar.
-2. Nagpapadala ang platform mo ng mga request gamit ang key na iyon: ilista ang mga interview ng kumpanya, ilista o basahin ang mga aplikante kasama ang grade nila, kung pumasa sila at ang mga integrity flag nila, at mag-imbita ng aplikante sa pamamagitan ng email.
+2. Nagpapadala ang platform mo ng mga request gamit ang key na iyon: ilista ang mga interview ng kumpanya, ilista o basahin ang mga aplikante kasama ang grade nila, kung pumasa sila at ang mga integrity flag nila, at mag-imbita ng aplikante.
 3. Magdagdag ng **webhook**: isang address sa platform mo na tinatawagan ng prepza, na may signature, sa sandaling matapos ang isang aplikante, para hindi mo na kailangang paulit-ulit na magtanong.
 
-May kasamang link ang bawat aplikante sa buong resulta niya sa prepza at, hanggang sa matapos siya, sa sarili niyang invite link, para maipadala ito ng platform mo sa sarili nitong mensahe kung gusto mo. Pareho ang patakaran gaya ng saanman: sinusuportahan ng grade ang desisyon ng isang tao, kaya huwag awtomatikong i-reject ang mga aplikante batay rito.
+May kasamang link ang bawat aplikante sa buong resulta niya sa prepza at, hanggang sa matapos siya, sa sarili niyang invite link, para maipadala ito ng platform mo sa sarili nitong mensahe kung gusto mo. Kapag alam na ng platform mo kung sino ang aplikante, imbitahin siya nang walang sign-in: walang email na ipinapadala ang prepza, at sasagutan ng aplikante ang interview mula sa link nang hindi nagsa-sign in sa prepza, kaya sa kanya lang ipadala ang link. Puwede ring ibalik ng imbitasyon ang aplikante sa site mo gamit ang isang button sa pahina ng pagtatapos, at magtakda ng light o dark na theme sa mga kulay ng kumpanya mo. Gamit ang SDK ng prepza, maipapakita mismo ng sarili mong pahina ang interview. Kailangan ng na-verify na kumpanya para maibalik ang mga aplikante at maipakita ang interview sa site mo, at gumagana lang ito sa domain ng website nito.
+
+Pareho ang patakaran gaya ng saanman: sinusuportahan ng grade ang desisyon ng isang tao, kaya huwag awtomatikong i-reject ang mga aplikante batay rito.
 
 ## Alin ang gagamitin at kailan
 

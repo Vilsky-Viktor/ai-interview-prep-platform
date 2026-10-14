@@ -2,7 +2,7 @@
 title: "prepza at TestGorilla: kung saan bagay ang bawat isa, at paggamit sa dalawa"
 seoTitle: "prepza vs TestGorilla: Paghahambing at Paggamit sa Dalawa"
 description: "Paano nagkakaiba ang prepza at TestGorilla sa paggawa ng test, sa tine-test at sa presyo, kung saan mas bagay ang bawat isa, at paano gamitin ang dalawa."
-updated: "2026-10-07"
+updated: "2026-10-15"
 ---
 
 # prepza at TestGorilla: kung saan bagay ang bawat isa, at paggamit sa dalawa
@@ -28,7 +28,7 @@ Ipinapaliwanag ng pahinang ito kung paano sila nagkakaiba, kung saan mas bagay a
 | Code sa test | Code-reading questions (ano ang ginagawa o inilalabas ng code); walang pagsulat o pagpapatakbo ng code | Programming tests sa library; para sa custom coding challenges, tingnan ang mga plan nito ([pricing page](https://www.testgorilla.com/pricing/)) |
 | Mga tanong bawat aplikante | Sariling random na set ang bawat aplikante, sa sarili nitong pagkakasunod-sunod | Hindi ikinumpara rito |
 | Integrity features | Timer sa bawat tanong (ipinapatupad ng server), flag para sa sobrang bilis na sagot, pag-alis sa pahina at pagtatangkang mag-copy | Webcam snapshots, naka-disable na copy/paste at full-screen mode sa mas mataas nitong plan |
-| Mga integration | Workable, Greenhouse, Teamtailor, Recruitee at Breezy HR; Slack; isang public API na may signed webhooks ([Dokumentasyon ng API](/api-docs)). Lahat nang walang dagdag na bayad | ATS/API integrations sa mas mataas nitong plan |
+| Mga integration | Workable, Greenhouse, Teamtailor, Recruitee at Breezy HR; Slack; isang public API na may signed webhooks ([dokumentasyon para sa mga developer](/api-docs)). Lahat nang walang dagdag na bayad | ATS/API integrations sa mas mataas nitong plan |
 | Reports | Scorecards na may mga sagot at oras; PDF para sa isa o lahat ng aplikante | Hindi ikinumpara rito |
 | Mga wika | 23 wika para sa interface, interviews at emails | Hindi ikinumpara rito; may language-proficiency tests ang library |
 | Pricing model | Bawat aplikanteng sumasagot, mula sa prepaid credits; walang subscription ([presyo](/pricing)) | Libreng plan at mga paid plan na sinisingil taun-taon ([pricing page](https://www.testgorilla.com/pricing/)) |
@@ -58,7 +58,7 @@ Kung aling modelo ang mas mura ay depende sa dami ng aplikanteng tine-test mo sa
 
 ## Karanasan ng aplikante
 
-**prepza:** nakikita ng mga aplikante kung ano ang aasahan bago sila magsimula: na AI ang sumulat ng mga tanong, na mga tao sa iyong kumpanya ang nagre-review ng resulta at nagdedesisyon, at na puwede silang humingi ng dagdag na oras o ng review ng kanilang resulta. May sariling countdown ang bawat tanong. Hindi nakikita ng mga aplikante ang kanilang score o kung aling sagot ang tama. Walang camera na ginagamit.
+**prepza:** nakikita ng mga aplikante kung ano ang aasahan bago sila magsimula: na AI ang sumulat ng mga tanong, na mga tao sa iyong kumpanya ang nagre-review ng resulta at nagdedesisyon, at na puwede silang humingi ng dagdag na oras o ng review ng kanilang resulta. May sariling countdown ang bawat tanong. Hindi nakikita ng mga aplikante ang kanilang score o kung aling sagot ang tama. Walang camera na ginagamit. Ang kumpanya mo lang ang ipinapakita ng mga pahina ng interview, kasama ang logo at mga kulay mo kung idadagdag mo ang mga ito, nang walang header at footer ng prepza.
 
 **TestGorilla:** sa mas mataas nitong plan, kasama sa proctoring ang webcam snapshots, naka-disable na copy/paste at full-screen mode ([pricing page](https://www.testgorilla.com/pricing/)). Mas marami kang nababantayan dito. Ang paggamit ng camera ay pagtitimbang sa pagitan ng pagbabantay at privacy ng mga aplikante, at ang mga larawan mula sa camera ay dagdag na personal data na kailangang protektahan.
 

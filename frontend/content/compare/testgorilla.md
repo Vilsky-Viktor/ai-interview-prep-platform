@@ -2,7 +2,7 @@
 title: "prepza and TestGorilla: where each fits, and using both"
 seoTitle: "prepza vs TestGorilla: Where Each Fits and Using Both"
 description: "How prepza and TestGorilla differ in how tests are built, what they test and how they're priced, where each one fits better, and how to use them together."
-updated: "2026-10-07"
+updated: "2026-10-15"
 ---
 
 # prepza and TestGorilla: where each fits, and using both
@@ -28,7 +28,7 @@ This page explains how they differ, where each one fits better, and how to combi
 | Code in the test | Code-reading questions (what code does or outputs); no writing or running code | Programming tests in the library; for custom coding challenges, see its plans ([pricing page](https://www.testgorilla.com/pricing/)) |
 | Questions per candidate | Each candidate's own random set, in its own order | Not compared here |
 | Integrity features | Timer on every question (server-enforced), flags for too-fast answers, leaving the page and copy attempts | Webcam snapshots, disabled copy/paste and full-screen mode on its higher plan |
-| Integrations | Workable, Greenhouse, Teamtailor, Recruitee and Breezy HR; Slack; a public API with signed web hooks ([API docs](/api-docs)). All at no extra cost | ATS/API integrations on its higher plan |
+| Integrations | Workable, Greenhouse, Teamtailor, Recruitee and Breezy HR; Slack; a public API with signed web hooks ([developer docs](/api-docs)). All at no extra cost | ATS/API integrations on its higher plan |
 | Reports | Scorecards with answers and timings; PDF for one or all candidates | Not compared here |
 | Languages | 23 languages for the interface, interviews and emails | Not compared here; the library includes language-proficiency tests |
 | Pricing model | Per candidate who answers, from prepaid credits; no subscription ([pricing](/pricing)) | A free plan and paid plans billed annually ([pricing page](https://www.testgorilla.com/pricing/)) |
@@ -58,7 +58,7 @@ Which model costs less depends on how many candidates you test in a year and whi
 
 ## Candidate experience
 
-**prepza:** candidates see what to expect before they start: that the questions are written by AI, that people at your company review results and decide, and that they can ask for more time or for a review of their result. Each question has its own countdown. Candidates don't see their score or which answers were right. No camera is used.
+**prepza:** candidates see what to expect before they start: that the questions are written by AI, that people at your company review results and decide, and that they can ask for more time or for a review of their result. Each question has its own countdown. Candidates don't see their score or which answers were right. No camera is used. The interview pages show only your company, with your logo and colors if you add them, without prepza's header and footer.
 
 **TestGorilla:** on its higher plan, proctoring includes webcam snapshots, disabled copy/paste and full-screen mode ([pricing page](https://www.testgorilla.com/pricing/)). That gives you more monitoring. Whether to use a camera is a trade-off between oversight and candidates' privacy, and camera images are more personal data to protect.
 

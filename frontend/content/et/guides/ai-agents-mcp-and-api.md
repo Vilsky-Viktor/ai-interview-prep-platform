@@ -2,7 +2,7 @@
 title: "AI-agendid, MCP ja API-d: mis need on ja kuidas neid värbamisel kasutada"
 seoTitle: "AI-agendid, MCP ja API-d värbamisel: mis need on ja kuidas neid kasutada"
 description: "Mis on AI-agent, mida teevad MCP ja API, kuidas neid värbamisel turvaliselt kasutada ja kuidas juhtida prepzat selle agendi kaudu, Claude'ist ja ChatGPT-st või oma platvormilt."
-updated: "2026-10-14"
+updated: "2026-10-15"
 ---
 
 # AI-agendid, MCP ja API-d: mis need on ja kuidas neid värbamisel kasutada
@@ -112,13 +112,15 @@ Edaspidi küsi oma vestluses nii, nagu küsiksid kolleegilt: „Kes on prepzas k
 
 ### 3. Sinu oma platvorm, API kaudu
 
-Automaatikaks ilma AI-ta on prepzal [API](/api-docs).
+Automaatikaks ilma AI-ta on prepzal API, mida kirjeldab selle [arendajate dokumentatsioon](/api-docs).
 
 1. Omanik või administraator avab ettevõtte vahekaardi **Integratsioonid**, siis **API**, ja valib **Uus võti**. Pane sellele nimeks platvorm, mis seda kasutama hakkab, ja vali, millal see aegub. Võtit näidatakse ainult üks kord; hoia seda turvalises kohas.
-2. Sinu platvorm saadab selle võtmega päringuid: näitab ettevõtte intervjuusid, näitab või loeb kandidaate koos nende hinde, läbimise ja aususe märgetega ning kutsub kandidaadi e-posti teel.
+2. Sinu platvorm saadab selle võtmega päringuid: näitab ettevõtte intervjuusid, näitab või loeb kandidaate koos nende hinde, läbimise ja aususe märgetega ning kutsub kandidaadi.
 3. Lisa **webhook**: aadress sinu platvormil, mida prepza kutsub allkirjastatult kohe, kui kandidaat lõpetab, et sa ei peaks pidevalt järele küsima.
 
-Iga kandidaadiga tuleb kaasa link tema täielikele tulemustele prepzas ja, kuni ta pole lõpetanud, tema enda kutselink, nii et sinu platvorm saab selle soovi korral saata oma sõnumis. Kehtib sama reegel kui mujal: hinne toetab inimese otsust, nii et ära lükka kandidaate selle põhjal automaatselt tagasi.
+Iga kandidaadiga tuleb kaasa link tema täielikele tulemustele prepzas ja, kuni ta pole lõpetanud, tema enda kutselink, nii et sinu platvorm saab selle soovi korral saata oma sõnumis. Kui sinu platvorm juba teab, kes kandidaat on, kutsu ta ilma sisselogimiseta: prepza ei saada e-kirju ja kandidaat teeb intervjuu lingi kaudu ilma prepzasse sisse logimata, nii et saada link ainult talle. Kutse võib ka viia kandidaadi lõpetamislehel oleva nupuga tagasi sinu saidile ning määrata heleda või tumeda teema sinu ettevõtte värvides. Sinu enda leht saab prepza SDK abil intervjuu ise kuvada. Kandidaatide tagasi suunamiseks ja intervjuu kuvamiseks sinu saidil peab ettevõte olema kinnitatud ning see toimib ainult tema veebisaidi domeenil.
+
+Kehtib sama reegel kui mujal: hinne toetab inimese otsust, nii et ära lükka kandidaate selle põhjal automaatselt tagasi.
 
 ## Mida millal kasutada
 

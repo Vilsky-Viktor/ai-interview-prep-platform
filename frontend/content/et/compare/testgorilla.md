@@ -2,7 +2,7 @@
 title: "prepza ja TestGorilla: kuhu kumbki sobib ja kuidas kasutada mõlemat"
 seoTitle: "prepza vs TestGorilla: võrdlus ja koos kasutamine"
 description: "Kuidas prepza ja TestGorilla erinevad testide koostamise, testitava sisu ja hinna poolest, kuhu kumbki paremini sobib ja kuidas neid koos kasutada."
-updated: "2026-10-07"
+updated: "2026-10-15"
 ---
 
 # prepza ja TestGorilla: kuhu kumbki sobib ja kuidas kasutada mõlemat
@@ -28,7 +28,7 @@ See leht selgitab, mille poolest need erinevad, kuhu kumbki paremini sobib ja ku
 | Kood testis | Koodi lugemise küsimused (mida kood teeb või väljastab); koodi ei kirjutata ega käivitata | Programmeerimistestid testikogus; kohandatud programmeerimisülesannete kohta vaata pakette ([hinnaleht](https://www.testgorilla.com/pricing/)) |
 | Küsimused kandidaadi kohta | Igal kandidaadil oma juhuslik komplekt, oma järjekorras | Siin ei võrrelda |
 | Aususe tagamise funktsioonid | Taimer igal küsimusel (serveri jõustatud), märked liiga kiirete vastuste, lehelt lahkumise ja kopeerimiskatsete kohta | Veebikaamera hetktõmmised, keelatud kopeerimine/kleepimine ja täisekraanirežiim kõrgemas paketis |
-| Integratsioonid | Workable, Greenhouse, Teamtailor, Recruitee ja Breezy HR; Slack; avalik API allkirjastatud webhookidega ([API dokumentatsioon](/api-docs)). Kõik ilma lisatasuta | ATS/API-integratsioonid kõrgemas paketis |
+| Integratsioonid | Workable, Greenhouse, Teamtailor, Recruitee ja Breezy HR; Slack; avalik API allkirjastatud webhookidega ([arendajate dokumentatsioon](/api-docs)). Kõik ilma lisatasuta | ATS/API-integratsioonid kõrgemas paketis |
 | Aruanded | Hindamislehed vastuste ja ajakuluga; PDF ühe või kõigi kandidaatide kohta | Siin ei võrrelda |
 | Keeled | 23 keelt liidese, intervjuude ja e-kirjade jaoks | Siin ei võrrelda; testikogus on keeleoskuse testid |
 | Hinnamudel | Iga vastanud kandidaadi eest, ettemakstud krediitidest; ilma tellimuseta ([hinnad](/pricing)) | Tasuta pakett ja aastase arveldusega tasulised paketid ([hinnaleht](https://www.testgorilla.com/pricing/)) |
@@ -58,7 +58,7 @@ Kumb mudel on odavam, sõltub sellest, mitu kandidaati aastas testid ja millisei
 
 ## Kandidaadikogemus
 
-**prepza:** kandidaadid näevad enne alustamist, mida oodata: et küsimused on kirjutanud AI, et tulemused vaatavad üle ja otsuse teevad inimesed sinu ettevõttest ning et nad võivad paluda rohkem aega või oma tulemuse ülevaatamist. Igal küsimusel on oma taimer. Kandidaadid ei näe oma tulemust ega seda, millised vastused olid õiged. Kaamerat ei kasutata.
+**prepza:** kandidaadid näevad enne alustamist, mida oodata: et küsimused on kirjutanud AI, et tulemused vaatavad üle ja otsuse teevad inimesed sinu ettevõttest ning et nad võivad paluda rohkem aega või oma tulemuse ülevaatamist. Igal küsimusel on oma taimer. Kandidaadid ei näe oma tulemust ega seda, millised vastused olid õiged. Kaamerat ei kasutata. Intervjuulehtedel on näha ainult sinu ettevõte, sinu logo ja värvidega, kui need lisad, ilma prepza päise ja jaluseta.
 
 **TestGorilla:** kõrgemas paketis hõlmab järelevalve veebikaamera hetktõmmiseid, keelatud kopeerimist/kleepimist ja täisekraanirežiimi ([hinnaleht](https://www.testgorilla.com/pricing/)). See annab sulle rohkem jälgimisvõimalusi. Kas kaamerat kasutada, on kompromiss järelevalve ja kandidaatide privaatsuse vahel ning kaamerapildid on täiendavad isikuandmed, mida tuleb kaitsta.
 

@@ -2,7 +2,7 @@
 title: "Agents IA, MCP et API : ce que c'est et comment s'en servir dans le recrutement"
 seoTitle: "Agents IA, MCP et API dans le recrutement : définition et usages"
 description: "Ce qu'est un agent IA, à quoi servent MCP et une API, comment les utiliser en toute sécurité dans le recrutement, et comment piloter prepza depuis son agent, depuis Claude et ChatGPT ou depuis votre propre plateforme."
-updated: "2026-10-14"
+updated: "2026-10-15"
 ---
 
 # Agents IA, MCP et API : ce que c'est et comment s'en servir dans le recrutement
@@ -112,13 +112,15 @@ Ensuite, posez vos questions dans la conversation comme vous le feriez à un col
 
 ### 3. Votre propre plateforme, via l'API
 
-Pour une automatisation sans IA, prepza propose une [API](/api-docs).
+Pour une automatisation sans IA, prepza propose une API, décrite dans sa [documentation développeurs](/api-docs).
 
 1. Un propriétaire ou un admin ouvre l'onglet **Intégrations** d'une entreprise, puis **API**, et sélectionne **Nouvelle clé**. Donnez-lui le nom de la plateforme qui l'utilisera et choisissez sa date d'expiration. La clé ne s'affiche qu'une fois ; conservez-la en lieu sûr.
-2. Votre plateforme envoie des requêtes avec cette clé : lister les entretiens de l'entreprise, lister ou consulter les candidats avec leur note, s'ils ont réussi et leurs alertes d'intégrité, et inviter un candidat par e-mail.
+2. Votre plateforme envoie des requêtes avec cette clé : lister les entretiens de l'entreprise, lister ou consulter les candidats avec leur note, s'ils ont réussi et leurs alertes d'intégrité, et inviter un candidat.
 3. Ajoutez un **webhook** : une adresse sur votre plateforme que prepza appelle, avec une signature, dès qu'un candidat a terminé, pour ne pas avoir à demander sans cesse.
 
-Chaque candidat est accompagné d'un lien vers ses résultats complets dans prepza et, tant qu'il n'a pas terminé, de son propre lien d'invitation, pour que votre plateforme puisse l'envoyer dans son propre message si vous préférez. La règle reste la même que partout ailleurs : la note éclaire la décision d'une personne, alors ne refusez pas de candidats automatiquement sur cette base.
+Chaque candidat est accompagné d'un lien vers ses résultats complets dans prepza et, tant qu'il n'a pas terminé, de son propre lien d'invitation, pour que votre plateforme puisse l'envoyer dans son propre message si vous préférez. Quand votre plateforme sait déjà qui est le candidat, invitez-le sans connexion : prepza n'envoie aucun e-mail, et le candidat passe l'entretien depuis le lien sans se connecter à prepza, alors n'envoyez ce lien qu'à lui. Une invitation peut aussi ramener le candidat sur votre site grâce à un bouton sur la page de fin, et définir un thème clair ou sombre aux couleurs de votre entreprise. Avec le SDK de prepza, votre propre page peut afficher l'entretien lui-même. Ramener les candidats sur votre site et y afficher l'entretien nécessitent une entreprise vérifiée, et ne fonctionnent que sur le domaine de son site web.
+
+La règle reste la même que partout ailleurs : la note éclaire la décision d'une personne, alors ne refusez pas de candidats automatiquement sur cette base.
 
 ## Lequel utiliser, et quand
 

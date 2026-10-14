@@ -2,7 +2,7 @@
 title: "prepza và TestGorilla: mỗi công cụ phù hợp ở đâu và cách dùng cả hai"
 seoTitle: "prepza vs TestGorilla: so sánh và cách dùng kết hợp"
 description: "prepza và TestGorilla khác nhau ra sao về cách xây dựng bài kiểm tra, nội dung và giá, mỗi bên hợp với trường hợp nào, và cách dùng cùng nhau."
-updated: "2026-10-07"
+updated: "2026-10-15"
 ---
 
 # prepza và TestGorilla: mỗi công cụ phù hợp ở đâu và cách dùng cả hai
@@ -28,7 +28,7 @@ Trang này giải thích hai công cụ khác nhau thế nào, mỗi công cụ 
 | Code trong bài kiểm tra | Câu hỏi đọc code (code làm gì hoặc in ra gì); không viết hay chạy code | Bài kiểm tra lập trình trong thư viện; về thử thách lập trình tùy chỉnh, xem các gói ([trang bảng giá](https://www.testgorilla.com/pricing/)) |
 | Câu hỏi cho mỗi ứng viên | Bộ câu hỏi ngẫu nhiên riêng cho mỗi ứng viên, theo thứ tự riêng | Không so sánh ở đây |
 | Tính năng chống gian lận | Đồng hồ cho mọi câu hỏi (do máy chủ áp dụng), cảnh báo về trả lời quá nhanh, rời khỏi trang và cố sao chép | Chụp ảnh qua webcam, chặn sao chép/dán và chế độ toàn màn hình ở gói cao hơn |
-| Tích hợp | Workable, Greenhouse, Teamtailor, Recruitee và Breezy HR; Slack; API công khai với webhook có chữ ký ([Tài liệu API](/api-docs)). Tất cả đều không tốn thêm phí | Tích hợp ATS/API ở gói cao hơn |
+| Tích hợp | Workable, Greenhouse, Teamtailor, Recruitee và Breezy HR; Slack; API công khai với webhook có chữ ký ([Tài liệu cho nhà phát triển](/api-docs)). Tất cả đều không tốn thêm phí | Tích hợp ATS/API ở gói cao hơn |
 | Báo cáo | Bảng điểm với câu trả lời và thời gian; PDF cho một hoặc tất cả ứng viên | Không so sánh ở đây |
 | Ngôn ngữ | 23 ngôn ngữ cho giao diện, buổi phỏng vấn và email | Không so sánh ở đây; thư viện có bài kiểm tra trình độ ngoại ngữ |
 | Mô hình giá | Theo mỗi ứng viên có trả lời, từ credit trả trước; không có gói đăng ký ([bảng giá](/pricing)) | Một gói miễn phí và các gói trả phí thanh toán theo năm ([trang bảng giá](https://www.testgorilla.com/pricing/)) |
@@ -58,7 +58,7 @@ Mô hình nào rẻ hơn phụ thuộc vào số ứng viên bạn kiểm tra m�
 
 ## Trải nghiệm ứng viên
 
-**prepza:** trước khi bắt đầu, ứng viên thấy những gì cần biết: câu hỏi do AI viết, người của công ty bạn xem kết quả và quyết định, và họ có thể yêu cầu thêm thời gian hoặc xem xét lại kết quả. Mỗi câu hỏi có đồng hồ đếm ngược riêng. Ứng viên không thấy điểm của mình hay câu nào đúng. Không dùng camera.
+**prepza:** trước khi bắt đầu, ứng viên thấy những gì cần biết: câu hỏi do AI viết, người của công ty bạn xem kết quả và quyết định, và họ có thể yêu cầu thêm thời gian hoặc xem xét lại kết quả. Mỗi câu hỏi có đồng hồ đếm ngược riêng. Ứng viên không thấy điểm của mình hay câu nào đúng. Không dùng camera. Các trang phỏng vấn chỉ hiển thị công ty của bạn, kèm logo và màu sắc nếu bạn thêm, không có phần đầu trang và chân trang của prepza.
 
 **TestGorilla:** ở gói cao hơn, tính năng giám sát thi bao gồm chụp ảnh qua webcam, chặn sao chép/dán và chế độ toàn màn hình ([trang bảng giá](https://www.testgorilla.com/pricing/)). Điều đó cho bạn khả năng giám sát nhiều hơn. Có dùng camera hay không là sự đánh đổi giữa giám sát và quyền riêng tư của ứng viên, và hình ảnh từ camera là thêm dữ liệu cá nhân cần bảo vệ.
 

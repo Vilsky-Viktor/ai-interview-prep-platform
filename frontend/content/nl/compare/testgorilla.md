@@ -2,7 +2,7 @@
 title: "prepza en TestGorilla: waar elk past, en ze allebei gebruiken"
 seoTitle: "prepza vs TestGorilla: assessments vergeleken"
 description: "Hoe prepza en TestGorilla verschillen in hoe tests worden gemaakt, wat ze toetsen en hoe ze geprijsd zijn, waar elk beter past en hoe je ze samen gebruikt."
-updated: "2026-10-07"
+updated: "2026-10-15"
 ---
 
 # prepza en TestGorilla: waar elk past, en ze allebei gebruiken
@@ -28,7 +28,7 @@ Deze pagina legt uit hoe ze verschillen, waar elk beter past en hoe je ze combin
 | Code in de test | Vragen over code lezen (wat code doet of uitvoert); geen code schrijven of draaien | Programmeertests in de bibliotheek; voor eigen programmeeropdrachten, zie de abonnementen ([prijspagina](https://www.testgorilla.com/pricing/)) |
 | Vragen per kandidaat | Een eigen willekeurige set per kandidaat, in een eigen volgorde | Hier niet vergeleken |
 | Integriteitsfuncties | Timer bij elke vraag (door de server afgedwongen), signalen bij te snelle antwoorden, het verlaten van de pagina en kopieerpogingen | Webcamfoto's, uitgeschakeld kopiëren/plakken en volledig scherm in het duurdere plan |
-| Integraties | Workable, Greenhouse, Teamtailor, Recruitee en Breezy HR; Slack; een openbare API met ondertekende webhooks ([API-documentatie](/api-docs)). Alles zonder meerkosten | ATS-/API-koppelingen in het duurdere plan |
+| Integraties | Workable, Greenhouse, Teamtailor, Recruitee en Breezy HR; Slack; een openbare API met ondertekende webhooks ([ontwikkelaarsdocumentatie](/api-docs)). Alles zonder meerkosten | ATS-/API-koppelingen in het duurdere plan |
 | Rapporten | Scorekaarten met antwoorden en tijden; pdf voor één of alle kandidaten | Hier niet vergeleken |
 | Talen | 23 talen voor de interface, interviews en e-mails | Hier niet vergeleken; de bibliotheek bevat taalvaardigheidstests |
 | Prijsmodel | Per kandidaat die antwoordt, uit vooraf gekochte credits; geen abonnement ([prijzen](/pricing)) | Een gratis plan en betaalde plannen die jaarlijks worden gefactureerd ([prijspagina](https://www.testgorilla.com/pricing/)) |
@@ -58,7 +58,7 @@ Welk model minder kost, hangt af van hoeveel kandidaten je per jaar test en welk
 
 ## De ervaring van kandidaten
 
-**prepza:** kandidaten zien voordat ze beginnen wat ze kunnen verwachten: dat de vragen door AI zijn geschreven, dat mensen in je bedrijf de resultaten bekijken en beslissen, en dat ze om meer tijd of om een herbeoordeling van hun resultaat kunnen vragen. Elke vraag heeft een eigen aftelklok. Kandidaten zien hun score niet en ook niet welke antwoorden goed waren. Er wordt geen camera gebruikt.
+**prepza:** kandidaten zien voordat ze beginnen wat ze kunnen verwachten: dat de vragen door AI zijn geschreven, dat mensen in je bedrijf de resultaten bekijken en beslissen, en dat ze om meer tijd of om een herbeoordeling van hun resultaat kunnen vragen. Elke vraag heeft een eigen aftelklok. Kandidaten zien hun score niet en ook niet welke antwoorden goed waren. Er wordt geen camera gebruikt. De interviewpagina's tonen alleen je bedrijf, met je logo en kleuren als je die toevoegt, zonder de header en footer van prepza.
 
 **TestGorilla:** in het duurdere plan omvat proctoring webcamfoto's, uitgeschakeld kopiëren/plakken en volledig scherm ([prijspagina](https://www.testgorilla.com/pricing/)). Dat geeft je meer toezicht. Of je een camera gebruikt, is een afweging tussen toezicht en de privacy van kandidaten, en camerabeelden zijn extra persoonsgegevens om te beschermen.
 

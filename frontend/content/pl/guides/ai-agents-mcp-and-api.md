@@ -2,7 +2,7 @@
 title: "Agenci AI, MCP i API: czym są i jak wykorzystać je w rekrutacji"
 seoTitle: "Agenci AI, MCP i API w rekrutacji: czym są i jak z nich korzystać"
 description: "Czym jest agent AI, do czego służą MCP i API, jak bezpiecznie korzystać z nich w rekrutacji i jak obsługiwać prepza przez jej agenta, z Claude i ChatGPT albo z własnej platformy."
-updated: "2026-10-14"
+updated: "2026-10-15"
 ---
 
 # Agenci AI, MCP i API: czym są i jak wykorzystać je w rekrutacji
@@ -112,13 +112,15 @@ Od tej chwili pytaj w czacie tak, jak pytasz współpracownika: „Kto w prepza 
 
 ### 3. Twoja własna platforma, przez API
 
-Do automatyzacji bez AI prepza ma [API](/api-docs).
+Do automatyzacji bez AI prepza ma API, opisane w [dokumentacji dla deweloperów](/api-docs).
 
 1. Właściciel lub administrator otwiera zakładkę **Integracje** firmy, potem **API**, i wybiera **Nowy klucz**. Nazwij go tak jak platformę, która będzie z niego korzystać, i wybierz, kiedy wygaśnie. Klucz jest wyświetlany tylko raz; przechowuj go w bezpiecznym miejscu.
-2. Twoja platforma wysyła żądania z tym kluczem: pobiera listę rozmów firmy, pobiera listę kandydatów lub dane pojedynczego kandydata z wynikiem, informacją, czy zaliczył, i sygnałami nieuczciwości, oraz zaprasza kandydata e-mailem.
+2. Twoja platforma wysyła żądania z tym kluczem: pobiera listę rozmów firmy, pobiera listę kandydatów lub dane pojedynczego kandydata z wynikiem, informacją, czy zaliczył, i sygnałami nieuczciwości, oraz zaprasza kandydata.
 3. Dodaj **webhook**: adres na Twojej platformie, który prepza wywołuje z podpisem, gdy tylko kandydat skończy, więc nie musisz ciągle dopytywać.
 
-Każdy kandydat ma link do swoich pełnych wyników w prepza, a dopóki nie skończy, także własny link z zaproszeniem, więc Twoja platforma może wysłać go we własnej wiadomości, jeśli wolisz. Obowiązuje ta sama zasada co wszędzie: wynik wspiera decyzję człowieka, więc nie odrzucaj kandydatów automatycznie na jego podstawie.
+Każdy kandydat ma link do swoich pełnych wyników w prepza, a dopóki nie skończy, także własny link z zaproszeniem, więc Twoja platforma może wysłać go we własnej wiadomości, jeśli wolisz. Jeśli Twoja platforma już wie, kim jest kandydat, zaproś go bez logowania: prepza nie wysyła żadnych e-maili, a kandydat odbywa rozmowę z linku bez logowania się do prepza, więc wyślij link tylko jemu. Zaproszenie może też odesłać kandydata z powrotem na Twoją stronę przyciskiem na stronie końcowej oraz ustawić jasny lub ciemny motyw w kolorach Twojej firmy. Dzięki SDK prepza Twoja własna strona może wyświetlać samą rozmowę. Odsyłanie kandydatów z powrotem i wyświetlanie rozmowy na Twojej stronie wymagają zweryfikowanej firmy i działają tylko w domenie jej strony internetowej.
+
+Obowiązuje ta sama zasada co wszędzie: wynik wspiera decyzję człowieka, więc nie odrzucaj kandydatów automatycznie na jego podstawie.
 
 ## Co wybrać i kiedy
 

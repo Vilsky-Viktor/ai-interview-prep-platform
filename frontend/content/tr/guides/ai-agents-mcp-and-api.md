@@ -2,7 +2,7 @@
 title: "Yapay zekâ asistanları, MCP ve API'ler: nedir ve işe alımda nasıl kullanılır"
 seoTitle: "İşe Alımda Yapay Zekâ Asistanları, MCP ve API'ler: Nedir, Nasıl Kullanılır"
 description: "Yapay zekâ asistanı nedir, MCP ve API ne işe yarar, işe alımda güvenle nasıl kullanılır ve prepza'yı kendi asistanından, Claude ve ChatGPT'den ya da kendi platformunuzdan nasıl kullanırsınız."
-updated: "2026-10-14"
+updated: "2026-10-15"
 ---
 
 # Yapay zekâ asistanları, MCP ve API'ler: nedir ve işe alımda nasıl kullanılır
@@ -112,13 +112,15 @@ Bundan sonra sohbetinizde bir iş arkadaşınıza sorar gibi sorun: "prepza'da �
 
 ### 3. API ile kendi platformunuz
 
-Yapay zekâ olmadan otomasyon için prepza'nın bir [API](/api-docs)'si vardır.
+Yapay zekâ olmadan otomasyon için prepza'nın [geliştirici belgelerinde](/api-docs) açıklanan bir API'si vardır.
 
 1. Bir sahip veya yönetici, bir şirketin **Entegrasyonlar** sekmesini, ardından **API**'yi açar ve **Yeni anahtar**'ı seçer. Anahtara onu kullanacak platformun adını verin ve ne zaman sona ereceğini seçin. Anahtar yalnızca bir kez gösterilir; güvenli bir yerde saklayın.
-2. Platformunuz bu anahtarla istek gönderir: şirketin mülakatlarını listeler, adayları notları, geçip geçmedikleri ve dürüstlük uyarılarıyla birlikte listeler veya okur ve bir adayı e-postayla davet eder.
+2. Platformunuz bu anahtarla istek gönderir: şirketin mülakatlarını listeler, adayları notları, geçip geçmedikleri ve dürüstlük uyarılarıyla birlikte listeler veya okur ve bir adayı davet eder.
 3. Bir **webhook** ekleyin: bir aday bitirir bitirmez prepza'nın imzalı olarak çağırdığı, platformunuzdaki bir adres; böylece sürekli sormanız gerekmez.
 
-Her aday, prepza'daki tüm sonuçlarının bağlantısıyla ve bitirene kadar kendi davet bağlantısıyla gelir; böylece isterseniz platformunuz bu bağlantıyı kendi mesajında gönderebilir. Her yerde geçerli olan kural burada da geçerlidir: not bir insanın kararını destekler, bu yüzden adayları ona göre otomatik olarak reddetmeyin.
+Her aday, prepza'daki tüm sonuçlarının bağlantısıyla ve bitirene kadar kendi davet bağlantısıyla gelir; böylece isterseniz platformunuz bu bağlantıyı kendi mesajında gönderebilir. Platformunuz adayın kim olduğunu zaten biliyorsa onu giriş yapmadan davet edin: prepza hiç e-posta göndermez ve aday mülakata prepza'ya giriş yapmadan bağlantıdan katılır; bu yüzden bağlantıyı yalnızca adaya gönderin. Bir davet, bitiş sayfasındaki bir düğmeyle adayı sitenize geri de getirebilir ve şirketinizin renklerinde açık veya koyu bir tema ayarlayabilir. prepza'nın SDK'sı ile mülakatın kendisini kendi sayfanızda gösterebilirsiniz. Adayları geri getirmek ve mülakatı sitenizde göstermek için doğrulanmış bir şirket gerekir ve bunlar yalnızca şirketin web sitesi alan adında çalışır.
+
+Her yerde geçerli olan kural burada da geçerlidir: not bir insanın kararını destekler, bu yüzden adayları ona göre otomatik olarak reddetmeyin.
 
 ## Hangisi ne zaman kullanılmalı
 

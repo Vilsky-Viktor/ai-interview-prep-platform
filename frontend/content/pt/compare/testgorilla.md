@@ -2,7 +2,7 @@
 title: "prepza e TestGorilla: onde cada uma se encaixa e como usar as duas"
 seoTitle: "prepza vs TestGorilla: diferenças e como usar as duas"
 description: "Como prepza e TestGorilla diferem na criação dos testes, no que avaliam e no preço, onde cada uma se encaixa melhor e como usá-las juntas."
-updated: "2026-10-07"
+updated: "2026-10-15"
 ---
 
 # prepza e TestGorilla: onde cada uma se encaixa e como usar as duas
@@ -28,7 +28,7 @@ Esta página explica como elas diferem, onde cada uma se encaixa melhor e como c
 | Código no teste | Perguntas de leitura de código (o que o código faz ou imprime); sem escrever ou executar código | Testes de programação no catálogo; para desafios de programação personalizados, veja os planos ([página de preços](https://www.testgorilla.com/pricing/)) |
 | Perguntas por candidato | Conjunto aleatório próprio para cada candidato, em ordem própria | Não comparado aqui |
 | Recursos de integridade | Cronômetro em cada pergunta (controlado pelo servidor), alertas para respostas rápidas demais, saídas da página e tentativas de cópia | Fotos pela webcam, copiar/colar desativado e modo de tela cheia no plano mais alto |
-| Integrações | Workable, Greenhouse, Teamtailor, Recruitee e Breezy HR; Slack; uma API pública com webhooks assinados ([documentação da API](/api-docs)). Tudo sem custo adicional | Integrações com ATS/API no plano mais alto |
+| Integrações | Workable, Greenhouse, Teamtailor, Recruitee e Breezy HR; Slack; uma API pública com webhooks assinados ([documentação para desenvolvedores](/api-docs)). Tudo sem custo adicional | Integrações com ATS/API no plano mais alto |
 | Relatórios | Fichas de avaliação com respostas e tempos; PDF de um candidato ou de todos | Não comparado aqui |
 | Idiomas | 23 idiomas para a interface, as entrevistas e os e-mails | Não comparado aqui; o catálogo inclui testes de proficiência em idiomas |
 | Modelo de preços | Por candidato que responde, com créditos pré-pagos; sem assinatura ([preços](/pricing)) | Um plano gratuito e planos pagos com cobrança anual ([página de preços](https://www.testgorilla.com/pricing/)) |
@@ -58,7 +58,7 @@ Qual modelo custa menos depende de quantos candidatos você avalia por ano e de 
 
 ## Experiência do candidato
 
-**prepza:** os candidatos veem o que esperar antes de começar: que as perguntas são escritas por IA, que pessoas da sua empresa revisam os resultados e decidem, e que eles podem pedir mais tempo ou uma revisão do resultado. Cada pergunta tem sua própria contagem regressiva. Os candidatos não veem a pontuação nem quais respostas estavam certas. Nenhuma câmera é usada.
+**prepza:** os candidatos veem o que esperar antes de começar: que as perguntas são escritas por IA, que pessoas da sua empresa revisam os resultados e decidem, e que eles podem pedir mais tempo ou uma revisão do resultado. Cada pergunta tem sua própria contagem regressiva. Os candidatos não veem a pontuação nem quais respostas estavam certas. Nenhuma câmera é usada. As páginas da entrevista mostram apenas a sua empresa, com o seu logo e as suas cores, se você adicioná-los, sem o cabeçalho e o rodapé da prepza.
 
 **TestGorilla:** no plano mais alto, o monitoramento (proctoring) inclui fotos pela webcam, copiar/colar desativado e modo de tela cheia ([página de preços](https://www.testgorilla.com/pricing/)). Isso dá a você mais monitoramento. Usar ou não a câmera é um equilíbrio entre supervisão e privacidade dos candidatos, e as imagens da câmera são mais dados pessoais a proteger.
 

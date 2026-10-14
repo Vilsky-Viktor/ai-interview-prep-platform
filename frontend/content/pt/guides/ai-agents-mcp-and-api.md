@@ -2,7 +2,7 @@
 title: "Agentes de IA, MCP e APIs: o que são e como usá-los no recrutamento"
 seoTitle: "Agentes de IA, MCP e APIs no recrutamento: o que são e como usar"
 description: "O que é um agente de IA, para que servem o MCP e uma API, como usá-los com segurança no recrutamento e como operar a prepza pelo agente dela, pelo Claude e pelo ChatGPT ou pela sua própria plataforma."
-updated: "2026-10-14"
+updated: "2026-10-15"
 ---
 
 # Agentes de IA, MCP e APIs: o que são e como usá-los no recrutamento
@@ -112,13 +112,15 @@ A partir daí, pergunte no seu chat como perguntaria a um colega: "Na prepza, qu
 
 ### 3. A sua própria plataforma, via API
 
-Para automações sem IA, a prepza tem uma [API](/api-docs).
+Para automações sem IA, a prepza tem uma API, descrita na [documentação para desenvolvedores](/api-docs).
 
 1. Um proprietário ou administrador abre a aba **Integrações** de uma empresa, depois **API**, e seleciona **Nova chave**. Dê a ela o nome da plataforma que vai usá-la e escolha quando ela expira. A chave aparece só uma vez; guarde-a em um lugar seguro.
-2. A sua plataforma envia requisições com essa chave: listar as entrevistas da empresa, listar ou consultar candidatos com a nota, se foram aprovados e os alertas de integridade, e convidar um candidato por e-mail.
+2. A sua plataforma envia requisições com essa chave: listar as entrevistas da empresa, listar ou consultar candidatos com a nota, se foram aprovados e os alertas de integridade, e convidar um candidato.
 3. Adicione um **webhook**: um endereço na sua plataforma que a prepza chama, com assinatura, assim que um candidato termina, para que você não precise ficar perguntando.
 
-Cada candidato vem com um link para os resultados completos na prepza e, até terminar, com o próprio link de convite, para que a sua plataforma possa enviá-lo em uma mensagem própria, se você preferir. Vale a mesma regra de sempre: a nota apoia a decisão de uma pessoa, então não reprove candidatos automaticamente com base nela.
+Cada candidato vem com um link para os resultados completos na prepza e, até terminar, com o próprio link de convite, para que a sua plataforma possa enviá-lo em uma mensagem própria, se você preferir. Quando a sua plataforma já sabe quem é o candidato, convide-o sem login: a prepza não envia e-mails, e o candidato faz a entrevista pelo link sem entrar na prepza, então envie o link só para ele. Um convite também pode levar o candidato de volta ao seu site com um botão na página final e definir um tema claro ou escuro nas cores da sua empresa. Com o SDK da prepza, a sua própria página pode exibir a entrevista em si. Levar candidatos de volta e exibir a entrevista no seu site exigem uma empresa verificada e funcionam apenas no domínio do site dela.
+
+Vale a mesma regra de sempre: a nota apoia a decisão de uma pessoa, então não reprove candidatos automaticamente com base nela.
 
 ## Qual usar e quando
 

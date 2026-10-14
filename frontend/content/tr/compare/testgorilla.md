@@ -2,7 +2,7 @@
 title: "prepza ve TestGorilla: hangisi nerede uygun, ikisini birlikte kullanmak"
 seoTitle: "prepza ve TestGorilla Karşılaştırması: Farklar ve Kullanım"
 description: "prepza ve TestGorilla'nın test oluşturma, ölçtüğü beceriler ve fiyatlandırma açısından farkları, hangisinin nerede daha uygun olduğu ve birlikte kullanımı."
-updated: "2026-10-07"
+updated: "2026-10-15"
 ---
 
 # prepza ve TestGorilla: hangisi nerede uygun, ikisini birlikte kullanmak
@@ -28,7 +28,7 @@ Bu sayfa ikisinin nasıl farklılaştığını, hangisinin nerede daha uygun old
 | Testte kod | Kod okuma soruları (kodun ne yaptığı veya ne çıktı verdiği); kod yazma veya çalıştırma yok | Kütüphanede programlama testleri; özel kodlama görevleri için planlarına bakın ([fiyat sayfası](https://www.testgorilla.com/pricing/)) |
 | Aday başına sorular | Her adaya kendi sırasıyla, kendine ait rastgele bir soru seti | Burada karşılaştırılmadı |
 | Güvenilirlik özellikleri | Her soruda süre sınırı (sunucu tarafından uygulanır), çok hızlı yanıtlar, sayfadan ayrılma ve kopyalama girişimleri için işaretler | Üst planında web kamerası fotoğrafları, kopyala/yapıştır engeli ve tam ekran modu |
-| Entegrasyonlar | Workable, Greenhouse, Teamtailor, Recruitee ve Breezy HR; Slack; imzalı webhook'larla herkese açık bir API ([API belgeleri](/api-docs)). Hepsi ek ücret olmadan | Üst planında ATS/API entegrasyonları |
+| Entegrasyonlar | Workable, Greenhouse, Teamtailor, Recruitee ve Breezy HR; Slack; imzalı webhook'larla herkese açık bir API ([geliştirici belgeleri](/api-docs)). Hepsi ek ücret olmadan | Üst planında ATS/API entegrasyonları |
 | Raporlar | Yanıtlar ve sürelerle değerlendirme kartları; tek aday veya tüm adaylar için PDF | Burada karşılaştırılmadı |
 | Diller | Arayüz, mülakatlar ve e-postalar için 23 dil | Burada karşılaştırılmadı; kütüphanede dil yeterlilik testleri bulunur |
 | Fiyatlandırma modeli | Yanıt veren aday başına, ön ödemeli kredilerden; abonelik yok ([fiyatlar](/pricing)) | Ücretsiz bir plan ve yıllık faturalandırılan ücretli planlar ([fiyat sayfası](https://www.testgorilla.com/pricing/)) |
@@ -58,7 +58,7 @@ Hangi modelin daha ucuz olduğu, bir yılda kaç aday test ettiğinize ve hangi 
 
 ## Aday deneyimi
 
-**prepza:** adaylar başlamadan önce ne bekleyeceklerini görür: soruların yapay zekâ tarafından yazıldığını, sonuçları şirketinizdeki kişilerin inceleyip karar verdiğini ve ek süre ya da sonuçlarının yeniden incelenmesini talep edebileceklerini. Her sorunun kendi geri sayımı vardır. Adaylar puanlarını veya hangi yanıtların doğru olduğunu görmez. Kamera kullanılmaz.
+**prepza:** adaylar başlamadan önce ne bekleyeceklerini görür: soruların yapay zekâ tarafından yazıldığını, sonuçları şirketinizdeki kişilerin inceleyip karar verdiğini ve ek süre ya da sonuçlarının yeniden incelenmesini talep edebileceklerini. Her sorunun kendi geri sayımı vardır. Adaylar puanlarını veya hangi yanıtların doğru olduğunu görmez. Kamera kullanılmaz. Mülakat sayfalarında prepza'nın üst ve alt bilgi alanları olmadan yalnızca şirketiniz, eklediyseniz logonuz ve renklerinizle birlikte görünür.
 
 **TestGorilla:** üst planında gözetim; web kamerası fotoğraflarını, kopyala/yapıştır engelini ve tam ekran modunu içerir ([fiyat sayfası](https://www.testgorilla.com/pricing/)). Bu size daha fazla izleme imkânı verir. Kamera kullanıp kullanmamak, denetim ile adayların mahremiyeti arasında bir tercihtir; ayrıca kamera görüntüleri korunması gereken ek kişisel verilerdir.
 

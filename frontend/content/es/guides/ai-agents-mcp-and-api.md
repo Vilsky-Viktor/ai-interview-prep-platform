@@ -2,7 +2,7 @@
 title: "Agentes de IA, MCP y API: qué son y cómo usarlos en la selección de personal"
 seoTitle: "Agentes de IA, MCP y API en selección de personal: qué son y cómo usarlos"
 description: "Qué es un agente de IA, para qué sirven MCP y una API, cómo usarlos de forma segura en la selección de personal y cómo manejar prepza desde su agente, desde Claude y ChatGPT o desde tu propia plataforma."
-updated: "2026-10-14"
+updated: "2026-10-15"
 ---
 
 # Agentes de IA, MCP y API: qué son y cómo usarlos en la selección de personal
@@ -112,13 +112,15 @@ A partir de ahí, pregunta en tu chat como le preguntarías a un compañero: «E
 
 ### 3. Tu propia plataforma, a través de la API
 
-Para automatizaciones sin IA, prepza tiene una [API](/api-docs).
+Para automatizaciones sin IA, prepza tiene una API, descrita en su [documentación para desarrolladores](/api-docs).
 
 1. Un propietario o administrador abre la pestaña **Integraciones** de una empresa, luego **API**, y selecciona **Nueva clave**. Ponle el nombre de la plataforma que la va a usar y elige cuándo caduca. La clave se muestra una sola vez; guárdala en un lugar seguro.
-2. Tu plataforma envía peticiones con esa clave: listar las entrevistas de la empresa, listar o consultar candidatos con su calificación, si aprobaron y sus alertas de integridad, e invitar a un candidato por correo.
+2. Tu plataforma envía peticiones con esa clave: listar las entrevistas de la empresa, listar o consultar candidatos con su calificación, si aprobaron y sus alertas de integridad, e invitar a un candidato.
 3. Añade un **webhook**: una dirección de tu plataforma a la que prepza llama, con firma, en cuanto un candidato termina, para que no tengas que estar preguntando.
 
-Cada candidato incluye un enlace a sus resultados completos en prepza y, hasta que termina, su propio enlace de invitación, para que tu plataforma pueda enviarlo en su propio mensaje si lo prefieres. Se aplica la misma regla que en todo lo demás: la calificación apoya la decisión de una persona, así que no descartes candidatos automáticamente por ella.
+Cada candidato incluye un enlace a sus resultados completos en prepza y, hasta que termina, su propio enlace de invitación, para que tu plataforma pueda enviarlo en su propio mensaje si lo prefieres. Cuando tu plataforma ya sabe quién es el candidato, invítalo sin inicio de sesión: prepza no envía correos y el candidato hace la entrevista desde el enlace sin iniciar sesión en prepza, así que envía el enlace solo a él. Una invitación también puede devolver al candidato a tu sitio con un botón en la página final y fijar un tema claro u oscuro con los colores de tu empresa. Con el SDK de prepza, tu propia página puede mostrar la entrevista. Devolver a los candidatos a tu sitio y mostrar la entrevista en él requiere una empresa verificada, y solo funciona en el dominio de su sitio web.
+
+Se aplica la misma regla que en todo lo demás: la calificación apoya la decisión de una persona, así que no descartes candidatos automáticamente por ella.
 
 ## Cuál usar en cada caso
 
