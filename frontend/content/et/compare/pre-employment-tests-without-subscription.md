@@ -2,7 +2,7 @@
 title: "Värbamistestid ilma tellimuseta"
 seoTitle: "Värbamistestid ilma tellimuseta: maksa kandidaadi eest"
 description: "Testi kandidaate ilma kuupaketi ja aastalepinguta. Kuidas kandidaadipõhine tasu erineb tellimusest ja mida enne ostmist kontrollida."
-updated: "2026-10-07"
+updated: "2026-10-14"
 ---
 
 # Värbamistestid ilma tellimuseta
@@ -46,7 +46,7 @@ Need tööriistad testivad ka eri asju. Psühhomeetrilise või programmeerimispl
 prepzal pole tellimust ega lepingut. Ostad krediite siis, kui neid vajad, ja kasutad neid kandidaatide jaoks.
 
 - **1 $ eest saad 100 krediiti.** Krediidid ei aegu.
-- **Kandidaat maksab 300 krediiti,** mis võetakse alles siis, kui ta vastab vähemalt ühele küsimusele. Kui kutsutud kandidaat ei alusta, tulevad krediidid tagasi. Kutse, mida 30 päeva jooksul ei alustata, aegub ja selle krediidid tulevad tagasi.
+- **Kandidaat maksab 500 krediiti,** mis võetakse alles siis, kui ta vastab vähemalt ühele küsimusele. Kui kutsutud kandidaat ei alusta, tulevad krediidid tagasi. Kutse, mida 30 päeva jooksul ei alustata, aegub ja selle krediidid tulevad tagasi.
 - **Suuremad juurdelaadimised annavad dollari kohta rohkem krediite,** nii et kandidaadi hind langeb juurdelaadimise kasvades. Juurdelaadimised leiad [hinnalehelt](/pricing).
 - **Intervjuude loomine on tasuta,** samuti oma intervjuu eelvaade kandidaadina.
 - **Kasutajakohtade tasu pole.** Lisa ettevõttesse administraatoreid ja vaatajaid tasuta.

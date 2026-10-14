@@ -35,7 +35,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "Magkano ito?",
-        "answer": "Libre ang paggawa ng interview. Bawat aplikanteng sumagot ng kahit isang tanong ay {candidate} credits (${candidate_dollars}), at mas mura gamit ang credits mula sa mas malalaking top-up, hanggang $1. Makakatanggap ang iyong unang kumpanya ng {company} libreng credits, sapat para sa unang {company_candidates} aplikante nito. Nakalista sa pricing page ang bawat presyo.",
+        "answer": "Libre ang paggawa ng interview. Bawat aplikanteng sumagot ng kahit isang tanong ay {candidate} credits (${candidate_dollars}), at mas mura gamit ang credits mula sa mas malalaking top-up, hanggang $2. Makakatanggap ang iyong unang kumpanya ng {company} libreng credits, sapat para sa unang {company_candidates} aplikante nito. Nakalista sa pricing page ang bawat presyo.",
     },
     {
         "key": "charged",

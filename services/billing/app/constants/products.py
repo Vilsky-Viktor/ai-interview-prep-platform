@@ -19,18 +19,18 @@ class TopUp:
 
 
 # Fixed amounts; what each buys comes from helpers/credits.py.
-# Each buys whole candidates at its volume price: 10 and 50 at $3, 125 at $2, 1,000 at $1.
+# Each buys whole candidates at its own price: 10 at $5, 50 at $4, 200 at $3, 500 at $2.
 TOP_UPS = [
-    TopUp("topup_30", "$30", 3_000),
-    TopUp("topup_150", "$150", 15_000),
-    TopUp("topup_250", "$250", 25_000),
+    TopUp("topup_50", "$50", 5_000),
+    TopUp("topup_200", "$200", 20_000),
+    TopUp("topup_600", "$600", 60_000),
     TopUp("topup_1000", "$1,000", 100_000),
 ]
 
-# $1 buys CREDITS_PER_DOLLAR credits, plus a bonus percent from these amounts up (in cents),
-# largest first: volume prices, so a candidate (CANDIDATE_CREDITS) costs $3, $2 when bought in a
-# top-up from $250, and $1 from $1,000.
-BONUS_TIERS = [(100_000, 200), (25_000, 50)]
+# What a candidate costs (in cents) when bought in a top-up from these amounts up (in cents),
+# largest first: volume prices. Below them, a candidate costs CANDIDATE_CREDITS at
+# CREDITS_PER_DOLLAR, $5; so larger top-ups buy more credits per dollar.
+CANDIDATE_PRICE_TIERS = [(100_000, 200), (60_000, 300), (20_000, 400)]
 
 CURRENCY = "USD"
 # Paddle signs each webhook with a timestamp; older ones are refused, so a captured one can't be

@@ -2,7 +2,7 @@
 title: "Testy rekrutacyjne bez subskrypcji"
 seoTitle: "Testy rekrutacyjne bez subskrypcji i abonamentu"
 description: "Testuj kandydatów bez planu miesięcznego i umowy rocznej. Jak płatność za kandydata wypada na tle subskrypcji i co sprawdzić przed zakupem."
-updated: "2026-10-07"
+updated: "2026-10-14"
 ---
 
 # Testy rekrutacyjne bez subskrypcji
@@ -46,7 +46,7 @@ Te narzędzia sprawdzają też różne rzeczy. Subskrypcja platformy psychometry
 prepza nie ma subskrypcji ani umowy. Kupujesz kredyty, kiedy ich potrzebujesz, i wydajesz je na kandydatów.
 
 - **Za $1 kupujesz 100 kredytów.** Kredyty nie wygasają.
-- **Kandydat kosztuje 300 kredytów,** pobieranych dopiero, gdy odpowie na co najmniej jedno pytanie. Jeśli zaproszony kandydat nie zacznie, kredyty wracają. Zaproszenie nierozpoczęte w ciągu 30 dni wygasa, a jego kredyty wracają.
+- **Kandydat kosztuje 500 kredytów,** pobieranych dopiero, gdy odpowie na co najmniej jedno pytanie. Jeśli zaproszony kandydat nie zacznie, kredyty wracają. Zaproszenie nierozpoczęte w ciągu 30 dni wygasa, a jego kredyty wracają.
 - **Większe doładowania dają więcej kredytów za dolara,** więc cena za kandydata spada wraz z wielkością doładowania. Doładowania znajdziesz w [cenniku](/pricing).
 - **Generowanie rozmów jest darmowe,** podobnie jak podgląd rozmowy z perspektywy kandydata.
 - **Bez opłat za użytkowników.** Dodawaj administratorów i obserwatorów do firmy bez kosztów.

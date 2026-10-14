@@ -15,7 +15,6 @@ from prepza_common.user import Language
 
 from app.config.settings import settings
 from app.constants.contact import CONTACT_IP_LIMIT
-from app.constants.faq import FAQS
 from app.constants.help import HELP_IP_LIMIT, PRICES_UNAVAILABLE, LegalDocument
 from app.constants.legal import NO_SUCH_VERSION
 from app.constants.rounds import CHAT_FAILED
@@ -44,7 +43,7 @@ async def get_faq(request: Request) -> list[FaqItemOut]:
     if catalog is None:
         raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, PRICES_UNAVAILABLE)
 
-    items = faq_items(FAQS[request_language(request)], catalog)
+    items = faq_items(request_language(request), catalog)
 
     return [FaqItemOut(**item) for item in items]
 

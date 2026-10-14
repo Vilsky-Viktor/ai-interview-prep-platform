@@ -35,7 +35,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "Berapa biayanya?",
-        "answer": "Membuat wawancara gratis. Setiap kandidat yang menjawab setidaknya satu soal seharga {candidate} kredit (${candidate_dollars}), dan lebih murah dengan kredit dari isi ulang yang lebih besar, hingga $1. Perusahaan pertamamu mendapat {company} kredit gratis, cukup untuk {company_candidates} kandidat pertamanya. Halaman harga mencantumkan semua harga.",
+        "answer": "Membuat wawancara gratis. Setiap kandidat yang menjawab setidaknya satu soal seharga {candidate} kredit (${candidate_dollars}), dan lebih murah dengan kredit dari isi ulang yang lebih besar, hingga $2. Perusahaan pertamamu mendapat {company} kredit gratis, cukup untuk {company_candidates} kandidat pertamanya. Halaman harga mencantumkan semua harga.",
     },
     {
         "key": "charged",

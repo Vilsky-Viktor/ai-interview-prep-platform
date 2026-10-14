@@ -2,7 +2,7 @@
 title: "Kuidas võrrelda värbamistestide hindu"
 seoTitle: "Odavaim värbamistest? Kuidas testide hindu võrrelda"
 description: "Tasuta paketid, tellimused, tasu kandidaadi kohta ja hinnapakkumised: kuidas iga hinnamudel toimib ja kuidas hinnata oma kandidaatide testimise kulu."
-updated: "2026-10-07"
+updated: "2026-10-14"
 ---
 
 # Kuidas võrrelda värbamistestide hindu
@@ -31,11 +31,11 @@ Vajad kolme arvu: mitu kandidaati aastas testid, hind kandidaadi kohta kandidaad
 3. **Tellimus:** kuuhind × 12 või aastahind. Kontrolli, mitu kandidaati selle krediidid katavad; kui läheksid üle, arvuta järgmise paketi hind.
 4. **Leia tasuvuspunkt:** paketi aastahind ÷ hind kandidaadi kohta. Kui kandidaate on aastas sellest vähem, on kandidaadipõhine tasu odavam. Kui rohkem, on odavam pakett.
 
-**Näide väljamõeldud arvudega.** Oletame, et pakett maksab 1500 $ aastas ja kandidaadipõhine variant 3 $ kandidaadi kohta. Tasuvuspunkt on 1500 ÷ 3 = 500 kandidaati aastas. Meeskond, kes testib aastas 60 kandidaati, maksaks kandidaatide eest 180 $, mitte paketi eest 1500 $. Meeskond, kes testib 600, maksaks kandidaatide eest 1800 $ ja pakett tuleks odavam. Kasuta võrreldavate hinnalehtede tegelikke arve.
+**Näide väljamõeldud arvudega.** Oletame, et pakett maksab 1500 $ aastas ja kandidaadipõhine variant 5 $ kandidaadi kohta. Tasuvuspunkt on 1500 ÷ 5 = 300 kandidaati aastas. Meeskond, kes testib aastas 60 kandidaati, maksaks kandidaatide eest 300 $, mitte paketi eest 1500 $. Meeskond, kes testib 600, maksaks kandidaatide eest 3000 $ ja pakett tuleks odavam. Kasuta võrreldavate hinnalehtede tegelikke arve.
 
 ### prepza hinnad sinu arvutuse jaoks
 
-prepza võtab tasu iga kandidaadi eest, kes vastab vähemalt ühele küsimusele. Hind kandidaadi kohta sõltub juurdelaadimise suurusest: väiksemate juurdelaadimiste puhul 3 $, alates 250 $ juurdelaadimisest 2 $ ja alates 1000 $ juurdelaadimisest 1 $. Sinu esimese ettevõtte esimesed 3 kandidaati on tasuta. Hinnad on USA dollarites; makseid töötlev Paddle arvestab käibemaksu ja müügimaksu maksmise ajal. Kehtivad juurdelaadimised leiad [hinnalehelt](/pricing).
+prepza võtab tasu iga kandidaadi eest, kes vastab vähemalt ühele küsimusele. Hind kandidaadi kohta sõltub juurdelaadimise suurusest: väikseima juurdelaadimise puhul 5 $, alates 200 $ juurdelaadimisest 4 $, alates 600 $ juurdelaadimisest 3 $ ja alates 1000 $ juurdelaadimisest 2 $. Sinu esimese ettevõtte esimesed 3 kandidaati on tasuta. Hinnad on USA dollarites; makseid töötlev Paddle arvestab käibemaksu ja müügimaksu maksmise ajal. Kehtivad juurdelaadimised leiad [hinnalehelt](/pricing).
 
 ## Kulud lisaks hinnasildile
 

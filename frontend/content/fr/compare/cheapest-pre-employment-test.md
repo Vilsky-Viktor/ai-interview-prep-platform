@@ -2,7 +2,7 @@
 title: "Comment comparer le coût des tests de recrutement"
 seoTitle: "Test de recrutement pas cher ? Comparer les coûts"
 description: "Offres gratuites, abonnements, paiement par candidat, devis : le fonctionnement de chaque modèle de prix et comment estimer le coût de vos tests."
-updated: "2026-10-07"
+updated: "2026-10-14"
 ---
 
 # Comment comparer le coût des tests de recrutement
@@ -31,11 +31,11 @@ Il vous faut trois chiffres : le nombre de candidats que vous évaluez par an, l
 3. **Abonnement :** le prix mensuel × 12, ou le prix annuel. Vérifiez combien de candidats ses crédits couvrent ; si vous dépassez, prenez le prix de l'offre supérieure.
 4. **Trouvez votre seuil de rentabilité :** coût annuel de l'abonnement ÷ prix par candidat. En dessous de ce nombre de candidats par an, payer par candidat coûte moins cher. Au-dessus, c'est l'abonnement.
 
-**Un exemple chiffré, avec des chiffres fictifs.** Supposons qu'un abonnement coûte 1 500 $ par an et qu'une formule au candidat coûte 3 $ par candidat. Le seuil de rentabilité est de 1 500 ÷ 3 = 500 candidats par an. Une équipe qui évalue 60 candidats par an paierait 180 $ de frais par candidat au lieu de 1 500 $ pour l'abonnement. Une équipe qui en évalue 600 paierait 1 800 $ de frais par candidat, et l'abonnement coûterait moins cher. Utilisez les vrais chiffres des pages tarifs que vous comparez.
+**Un exemple chiffré, avec des chiffres fictifs.** Supposons qu'un abonnement coûte 1 500 $ par an et qu'une formule au candidat coûte 5 $ par candidat. Le seuil de rentabilité est de 1 500 ÷ 5 = 300 candidats par an. Une équipe qui évalue 60 candidats par an paierait 300 $ de frais par candidat au lieu de 1 500 $ pour l'abonnement. Une équipe qui en évalue 600 paierait 3 000 $ de frais par candidat, et l'abonnement coûterait moins cher. Utilisez les vrais chiffres des pages tarifs que vous comparez.
 
 ### Les prix de prepza pour votre estimation
 
-prepza facture chaque candidat qui répond à au moins une question. Le prix par candidat dépend du montant de votre recharge : 3 $ pour les petites recharges, 2 $ à partir d'une recharge de 250 $ et 1 $ à partir d'une recharge de 1 000 $. Les 3 premiers candidats de votre première entreprise sont gratuits. Les prix sont en dollars américains ; Paddle, qui traite les paiements, gère la TVA et la sales tax au moment du paiement. Voir les [tarifs](/pricing) pour les recharges actuelles.
+prepza facture chaque candidat qui répond à au moins une question. Le prix par candidat dépend du montant de votre recharge : 5 $ pour la plus petite recharge, 4 $ à partir d'une recharge de 200 $, 3 $ à partir d'une recharge de 600 $ et 2 $ à partir d'une recharge de 1 000 $. Les 3 premiers candidats de votre première entreprise sont gratuits. Les prix sont en dollars américains ; Paddle, qui traite les paiements, gère la TVA et la sales tax au moment du paiement. Voir les [tarifs](/pricing) pour les recharges actuelles.
 
 ## Les coûts au-delà du prix affiché
 

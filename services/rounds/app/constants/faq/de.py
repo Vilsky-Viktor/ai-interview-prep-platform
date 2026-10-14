@@ -35,7 +35,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "Was kostet es?",
-        "answer": "Interviews zu generieren ist kostenlos. Jeder Kandidat, der mindestens eine Frage beantwortet, kostet {candidate} Credits ({candidate_dollars} $), mit Credits aus größeren Aufladungen weniger, bis hinunter auf 1 $. Dein erstes Unternehmen bekommt {company} kostenlose Credits, genug für seine ersten {company_candidates} Kandidaten. Auf der Preisseite stehen alle Preise.",
+        "answer": "Interviews zu generieren ist kostenlos. Jeder Kandidat, der mindestens eine Frage beantwortet, kostet {candidate} Credits ({candidate_dollars} $), mit Credits aus größeren Aufladungen weniger, bis hinunter auf 2 $. Dein erstes Unternehmen bekommt {company} kostenlose Credits, genug für seine ersten {company_candidates} Kandidaten. Auf der Preisseite stehen alle Preise.",
     },
     {
         "key": "charged",

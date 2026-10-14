@@ -19,7 +19,7 @@ def running(monkeypatch):
     row = SimpleNamespace(
         subscription_id="sub_1",
         buyer_id="ann",
-        product="topup_30",
+        product="topup_50",
         threshold=AUTO_TOP_UP_THRESHOLDS[0],
         failed_at=None,
     )
@@ -33,7 +33,7 @@ def running(monkeypatch):
         return row
 
     monkeypatch.setattr(service, "offered", lambda: True)
-    monkeypatch.setattr(service, "products", lambda: ["topup_30", "topup_1000"])
+    monkeypatch.setattr(service, "products", lambda: ["topup_50", "topup_1000"])
     monkeypatch.setattr(auto_top_ups, "get", get)
     monkeypatch.setattr(auto_top_ups, "save", save)
 

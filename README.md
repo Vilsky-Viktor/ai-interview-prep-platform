@@ -2,7 +2,7 @@
 
 ⭐ Like it? Star it. ⭐ Helps a looooooot
 
-Timed knowledge interviews for hiring, made from a job description or a ready-made template. A company pastes the role, reviews the topics, and invites candidates; each candidate gets their own random questions with a countdown on every one, and the company sees their scores and integrity signals. People preparing for a role practise free on the templates. Any role, 23 languages, from $1 per candidate.
+Timed knowledge interviews for hiring, made from a job description or a ready-made template. A company pastes the role, reviews the topics, and invites candidates; each candidate gets their own random questions with a countdown on every one, and the company sees their scores and integrity signals. People preparing for a role practise free on the templates. Any role, 23 languages, from $2 per candidate.
 
 **For private and research use only.** This repository may not be used for commercial purposes. See [LICENSE.md](LICENSE.md) (PolyForm Noncommercial 1.0.0).
 
@@ -21,7 +21,7 @@ Timed knowledge interviews for hiring, made from a job description or a ready-ma
 - **Slack:** a company picks a channel and which of its notifications go there.
 - **Public API:** API keys to list interviews, invite candidates (also straight from a company's own platform: no sign-in, no emails, and back to that platform at the end) and read results, and a signed web hook when a candidate finishes; its reference is on the site.
 - **AI apps over MCP:** Claude, ChatGPT and other AI apps connect at `/mcp` once the user allows them, and read and change what the user can, with the user's permissions.
-- **Pay per candidate:** credits that never expire, $1–3 per candidate, with no paid subscription (an optional automatic top-up saves the card with Paddle as a $0 subscription).
+- **Pay per candidate:** credits that never expire, $2–5 per candidate, with no paid subscription (an optional automatic top-up saves the card with Paddle as a $0 subscription).
 - **Free practice:** people preparing for a role practise on the templates' revealed questions.
 - **23 languages:** the interface, generated interviews, emails and news posts.
 - **News:** a public news page; posts are written in English in the admin zone and translated automatically.

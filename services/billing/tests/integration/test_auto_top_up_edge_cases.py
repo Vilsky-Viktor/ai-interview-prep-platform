@@ -12,7 +12,7 @@ from app.storage import auto_top_ups as rows
 from app.storage import ledger
 
 COMPANY = OwnerType.COMPANY
-CHOICE = AutoTopUpIn(product="topup_30", threshold=300)
+CHOICE = AutoTopUpIn(product="topup_50", threshold=500)
 
 
 def checkout_data(owner_id, buyer_id):

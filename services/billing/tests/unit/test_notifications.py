@@ -62,7 +62,7 @@ def test_an_automatic_top_up_tells_the_owner_the_credits_it_added(granted, notif
     asyncio.run(webhooks.handle(event))
 
     assert notified == [
-        notification("company", "acme", "auto_top_up_charged", "/top-up", credits=3_000)
+        notification("company", "acme", "auto_top_up_charged", "/top-up", credits=5_000)
     ]
 
 
@@ -84,7 +84,7 @@ def charge_failing_with(monkeypatch, error):
     """Paddle's charge fails with `error`; the owners marked failed."""
 
     async def claimed(owner_type, owner_id, now):
-        return SimpleNamespace(subscription_id="sub_01", product="topup_30")
+        return SimpleNamespace(subscription_id="sub_01", product="topup_50")
 
     async def charge(subscription_id, price_id):
         raise error

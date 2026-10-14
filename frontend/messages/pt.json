@@ -116,7 +116,7 @@
   },
   "home": {
     "title": "Teste todos\nContrate os melhores",
-    "text": "A IA transforma sua descrição de vaga em uma entrevista cronometrada profissional, com questões únicas para cada candidato. Apenas $1–3 por candidato."
+    "text": "A IA transforma sua descrição de vaga em uma entrevista cronometrada profissional, com questões únicas para cada candidato. Apenas $2–5 por candidato."
   },
   "start": {
     "placeholder": "Cole uma descrição de vaga ou descreva o cargo e o que um candidato deve saber",
@@ -721,7 +721,7 @@
     "topUp": "Recarregar"
   },
   "site": {
-    "description": "Testes de recrutamento e seleção com tempo, criados da descrição da vaga. Perguntas aleatórias por candidato, ranking e relatórios. $1–3 por candidato.",
+    "description": "Testes de recrutamento e seleção com tempo, criados da descrição da vaga. Perguntas aleatórias por candidato, ranking e relatórios. $2–5 por candidato.",
     "homeTitle": "Testes de recrutamento e seleção criados da sua vaga"
   },
   "legal": {
@@ -1183,7 +1183,7 @@
     "updated": "Última atualização",
     "englishOnly": "Esta página está disponível só em inglês.",
     "startTitle": "Avalie seus candidatos",
-    "startText": "Crie um teste de habilidades cronometrado a partir da sua descrição da vaga. $1–3 por candidato, sem assinatura.",
+    "startText": "Crie um teste de habilidades cronometrado a partir da sua descrição da vaga. $2–5 por candidato, sem assinatura.",
     "startButton": "Criar um teste"
   },
   "compare": {
@@ -1200,8 +1200,8 @@
     "intro": "Testes de habilidades cronometrados e prontos para cargos comuns. Use um como está ou crie um teste a partir da sua própria descrição da vaga.",
     "heading": "Teste de habilidades de {role} para contratação",
     "pageTitle": "Teste para contratação de {role}",
-    "pageDescription": "Teste de recrutamento e seleção para {role}, cronometrado, com {count, plural, one {# tópico} other {# tópicos}}. Cada candidato recebe as próprias perguntas aleatórias. $1–3 por candidato.",
-    "lead": "Um teste cronometrado de múltipla escolha sobre as habilidades deste cargo. Cada candidato recebe o próprio conjunto aleatório de perguntas, com um cronômetro em cada uma, e você recebe uma ficha de avaliação com cada resposta e seu tempo. $1–3 por candidato, sem assinatura.",
+    "pageDescription": "Teste de recrutamento e seleção para {role}, cronometrado, com {count, plural, one {# tópico} other {# tópicos}}. Cada candidato recebe as próprias perguntas aleatórias. $2–5 por candidato.",
+    "lead": "Um teste cronometrado de múltipla escolha sobre as habilidades deste cargo. Cada candidato recebe o próprio conjunto aleatório de perguntas, com um cronômetro em cada uma, e você recebe uma ficha de avaliação com cada resposta e seu tempo. $2–5 por candidato, sem assinatura.",
     "create": "Criar um teste para seus candidatos",
     "practise": "Pratique de graça",
     "topics": "O que ele avalia",
@@ -1618,7 +1618,7 @@
         "Leia os relatórios: candidatos classificados por nota, com cada resposta e alertas de integridade."
       ],
       "tips": [
-        "Criar entrevistas é grátis. Você paga $1–3 por candidato que responde, e seus primeiros candidatos são grátis.",
+        "Criar entrevistas é grátis. Você paga $2–5 por candidato que responde, e seus primeiros candidatos são grátis.",
         "Experimente sua entrevista como candidato antes de convidar alguém."
       ]
     },

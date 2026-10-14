@@ -35,7 +35,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "Chi phí bao nhiêu?",
-        "answer": "Tạo buổi phỏng vấn là miễn phí. Mỗi ứng viên trả lời ít nhất một câu hỏi tốn {candidate} credit ({candidate_dollars} $), và rẻ hơn với credit từ các lần nạp lớn hơn, xuống tới 1 $. Công ty đầu tiên của bạn nhận {company} credit miễn phí, đủ cho {company_candidates} ứng viên đầu tiên. Trang bảng giá liệt kê mọi mức giá.",
+        "answer": "Tạo buổi phỏng vấn là miễn phí. Mỗi ứng viên trả lời ít nhất một câu hỏi tốn {candidate} credit ({candidate_dollars} $), và rẻ hơn với credit từ các lần nạp lớn hơn, xuống tới 2 $. Công ty đầu tiên của bạn nhận {company} credit miễn phí, đủ cho {company_candidates} ứng viên đầu tiên. Trang bảng giá liệt kê mọi mức giá.",
     },
     {
         "key": "charged",

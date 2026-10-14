@@ -2,7 +2,7 @@
 title: "Test pre-assunzione senza abbonamento"
 seoTitle: "Test pre-assunzione senza abbonamento: paghi per candidato"
 description: "Valuta i candidati senza piano mensile né contratto annuale. Pagamento per candidato o abbonamento a confronto, e cosa controllare prima di comprare."
-updated: "2026-10-07"
+updated: "2026-10-14"
 ---
 
 # Test pre-assunzione senza abbonamento
@@ -46,7 +46,7 @@ Questi strumenti valutano anche cose diverse. Un abbonamento a una piattaforma p
 prepza non ha abbonamenti né contratti. Compri crediti quando ti servono e li spendi sui candidati.
 
 - **Con $1 compri 100 crediti.** I crediti non scadono.
-- **Un candidato costa 300 crediti,** addebitati solo quando risponde ad almeno una domanda. Se un candidato invitato non inizia mai, i crediti tornano indietro. Un invito non iniziato entro 30 giorni scade e restituisce i suoi crediti.
+- **Un candidato costa 500 crediti,** addebitati solo quando risponde ad almeno una domanda. Se un candidato invitato non inizia mai, i crediti tornano indietro. Un invito non iniziato entro 30 giorni scade e restituisce i suoi crediti.
 - **Le ricariche più grandi danno più crediti per dollaro,** quindi il prezzo per candidato scende al crescere della ricarica. Vedi i [prezzi](/pricing) per le ricariche.
 - **Generare colloqui è gratis,** e lo è anche provare il tuo colloquio come candidato.
 - **Nessun costo per postazione.** Aggiungi amministratori e visualizzatori alla tua azienda senza costi.

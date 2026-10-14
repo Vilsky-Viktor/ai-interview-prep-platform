@@ -2,7 +2,7 @@
 title: "Jak porównać koszty testów rekrutacyjnych"
 seoTitle: "Najtańsze testy rekrutacyjne? Jak porównać koszty"
 description: "Darmowe plany, subskrypcje, płatność za kandydata i wyceny indywidualne: jak działa każdy model i jak oszacować koszt testów rekrutacyjnych."
-updated: "2026-10-07"
+updated: "2026-10-14"
 ---
 
 # Jak porównać koszty testów rekrutacyjnych
@@ -31,11 +31,11 @@ Potrzebujesz trzech liczb: ilu kandydatów testujesz w roku, ceny za kandydata w
 3. **Subskrypcja:** cena miesięczna × 12 albo cena roczna. Sprawdź, ilu kandydatów pokrywają kredyty w planie; jeśli przekroczysz limit, policz koszt wyższego planu.
 4. **Znajdź próg opłacalności:** roczny koszt planu ÷ cena za kandydata. Poniżej tej liczby kandydatów rocznie taniej wychodzi płatność za kandydata. Powyżej – plan.
 
-**Przykład z wymyślonymi liczbami.** Załóżmy, że plan kosztuje $1500 rocznie, a opcja płatności za kandydata $3 za kandydata. Próg opłacalności to 1500 ÷ 3 = 500 kandydatów rocznie. Zespół testujący 60 kandydatów rocznie zapłaciłby $180 w opłatach za kandydatów zamiast $1500 za plan. Zespół testujący 600 zapłaciłby $1800 w opłatach za kandydatów, więc taniej wyszedłby plan. Podstaw prawdziwe liczby z cenników, które porównujesz.
+**Przykład z wymyślonymi liczbami.** Załóżmy, że plan kosztuje $1500 rocznie, a opcja płatności za kandydata $5 za kandydata. Próg opłacalności to 1500 ÷ 5 = 300 kandydatów rocznie. Zespół testujący 60 kandydatów rocznie zapłaciłby $300 w opłatach za kandydatów zamiast $1500 za plan. Zespół testujący 600 zapłaciłby $3000 w opłatach za kandydatów, więc taniej wyszedłby plan. Podstaw prawdziwe liczby z cenników, które porównujesz.
 
 ### Ceny prepza do Twoich wyliczeń
 
-prepza pobiera opłatę za każdego kandydata, który odpowie na co najmniej jedno pytanie. Cena za kandydata zależy od wielkości doładowania: $3 przy mniejszych doładowaniach, $2 od doładowania za $250 i $1 od doładowania za $1000. Pierwszych 3 kandydatów Twojej pierwszej firmy jest za darmo. Ceny są w dolarach amerykańskich; Paddle, który obsługuje płatności, nalicza VAT i podatek od sprzedaży przy kasie. Aktualne doładowania znajdziesz w [cenniku](/pricing).
+prepza pobiera opłatę za każdego kandydata, który odpowie na co najmniej jedno pytanie. Cena za kandydata zależy od wielkości doładowania: $5 przy najmniejszym doładowaniu, $4 od doładowania za $200, $3 od doładowania za $600 i $2 od doładowania za $1000. Pierwszych 3 kandydatów Twojej pierwszej firmy jest za darmo. Ceny są w dolarach amerykańskich; Paddle, który obsługuje płatności, nalicza VAT i podatek od sprzedaży przy kasie. Aktualne doładowania znajdziesz w [cenniku](/pricing).
 
 ## Koszty poza ceną z cennika
 

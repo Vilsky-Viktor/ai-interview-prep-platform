@@ -32,7 +32,7 @@ class CatalogOut(BaseModel):
     candidate_credits: int
     # A candidate's price at each volume tier, cheapest last.
     candidate_prices: list[CandidatePriceOut]
-    # The cheapest and the standard price of a candidate, for "$1–3 per candidate".
+    # The cheapest and the standard price of a candidate, for "$2–5 per candidate".
     candidate_cents_min: int
     candidate_cents_max: int
     welcome_company: int

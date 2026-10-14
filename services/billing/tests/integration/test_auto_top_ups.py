@@ -27,14 +27,14 @@ def test_turning_on_waits_for_the_checkout_then_refills_under_the_threshold_once
     async def scenario():
         await ledger.welcome_company(acme, f"{acme}@example.com")
         waiting = await auto_top_ups.turn_on(
-            COMPANY, acme, AutoTopUpIn(product="topup_30", threshold=300), ann
+            COMPANY, acme, AutoTopUpIn(product="topup_50", threshold=500), ann
         )
         # Someone else's checkout can't start it; the owner's does, once.
         await auto_top_ups.start(checkout_data(acme, "mallory"), "sub_other")
         await auto_top_ups.start(checkout_data(acme, ann), sub)
         await auto_top_ups.start(checkout_data(acme, ann), sub)
         started = await auto_top_ups.out(COMPANY, acme)
-        # The welcome credits aren't under 300, so nothing is charged. Inviting candidates takes
+        # The welcome credits aren't under 500, so nothing is charged. Inviting candidates takes
         # them under: one charge, however often it's checked within the cooldown.
         await auto_top_ups.check(COMPANY, acme)
         await ledger.reserve(COMPANY, acme, WELCOME_COMPANY - 1, "candidate:x", Reason.CANDIDATE)
@@ -48,8 +48,8 @@ def test_turning_on_waits_for_the_checkout_then_refills_under_the_threshold_once
 
     assert waiting.checkout.price_id == "pri_plan" and not waiting.on and waiting.waiting
     assert waiting.checkout.custom_data == checkout_data(acme, ann)
-    assert started.on and started.product == "topup_30" and started.threshold == 300
-    assert paddle_calls == [("cancel", "sub_other"), ("charge", sub, "pri_30")]
+    assert started.on and started.product == "topup_50" and started.threshold == 500
+    assert paddle_calls == [("cancel", "sub_other"), ("charge", sub, "pri_50")]
     assert later is not None
 
 
@@ -60,15 +60,15 @@ def test_turning_off_cancels_the_subscription_and_choices_are_checked(run, paddl
 
     async def scenario():
         await auto_top_ups.turn_on(
-            COMPANY, acme, AutoTopUpIn(product="topup_30", threshold=300), ann
+            COMPANY, acme, AutoTopUpIn(product="topup_50", threshold=500), ann
         )
         await auto_top_ups.start(checkout_data(acme, ann), sub)
         await auto_top_ups.turn_off(COMPANY, acme)
         refused = []
 
         for body in (
-            AutoTopUpIn(product="topup_30", threshold=123),
-            AutoTopUpIn(product="topup_150", threshold=300),
+            AutoTopUpIn(product="topup_50", threshold=123),
+            AutoTopUpIn(product="topup_200", threshold=500),
         ):
             try:
                 await auto_top_ups.turn_on(COMPANY, acme, body, ann)
@@ -96,24 +96,24 @@ def test_an_automatic_charge_credits_the_wallet_its_subscription_belongs_to(run,
             "currency_code": "USD",
             "custom_data": custom_data,
             "items": [{"price": {"id": price_id}, "quantity": 1}],
-            "details": {"totals": {"grand_total": "3000"}},
+            "details": {"totals": {"grand_total": "5000"}},
         }
 
     async def scenario():
         await auto_top_ups.turn_on(
-            COMPANY, acme, AutoTopUpIn(product="topup_30", threshold=300), ann
+            COMPANY, acme, AutoTopUpIn(product="topup_50", threshold=500), ann
         )
         # The $0 checkout starts it and buys nothing; the charge carries no custom data.
         await handle_completed(transaction("pri_plan", checkout_data(acme, ann)))
         opened = await ledger.wallet(COMPANY, acme)
-        await handle_completed(transaction("pri_30", None))
+        await handle_completed(transaction("pri_50", None))
 
         return opened.balance, (await ledger.wallet(COMPANY, acme)).balance
 
     opened, after = run(scenario())
 
     assert opened == 0
-    assert after == credits_for(3_000)
+    assert after == credits_for(5_000)
 
 
 def test_the_same_subscription_twice_stays_attached_and_a_deleted_buyer_turns_it_off(
@@ -125,7 +125,7 @@ def test_the_same_subscription_twice_stays_attached_and_a_deleted_buyer_turns_it
 
     async def scenario():
         await auto_top_ups.turn_on(
-            COMPANY, acme, AutoTopUpIn(product="topup_30", threshold=300), ann
+            COMPANY, acme, AutoTopUpIn(product="topup_50", threshold=500), ann
         )
         # Paddle's two events for one checkout, handled at the same moment.
         first = await rows.start(COMPANY, acme, ann, sub)
@@ -150,7 +150,7 @@ def test_a_removed_member_turns_it_off_only_when_their_card_pays(run, paddle_cal
 
     async def scenario():
         await auto_top_ups.turn_on(
-            COMPANY, acme, AutoTopUpIn(product="topup_30", threshold=300), ann
+            COMPANY, acme, AutoTopUpIn(product="topup_50", threshold=500), ann
         )
         await auto_top_ups.start(checkout_data(acme, ann), sub)
         # Bob didn't turn it on: removing him leaves it running.

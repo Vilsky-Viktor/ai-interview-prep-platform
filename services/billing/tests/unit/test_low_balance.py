@@ -14,9 +14,9 @@ def test_a_company_runs_low_when_the_next_candidate_isnt_covered():
 
 
 def test_a_balance_says_how_many_candidates_it_pays_for():
-    wallet = Wallet(owner_type="company", owner_id="acme", balance=1000, reserved=100)
+    wallet = Wallet(owner_type="company", owner_id="acme", balance=1600, reserved=100)
 
-    # 900 available, 300 a candidate.
+    # 1,500 available, 500 a candidate.
     assert balance_out(wallet).candidates == 3
     assert (
         balance_out(Wallet(owner_type="company", owner_id="x", balance=0, reserved=0)).candidates

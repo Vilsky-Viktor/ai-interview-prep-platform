@@ -116,7 +116,7 @@
   },
   "home": {
     "title": "Test everyone\nHire the best",
-    "text": "AI turns your job description into a professional timed interview, with unique questions for every candidate. Just $1–3 per candidate."
+    "text": "AI turns your job description into a professional timed interview, with unique questions for every candidate. Just $2–5 per candidate."
   },
   "start": {
     "placeholder": "Paste a job description, or describe the role and what a candidate should know",
@@ -721,7 +721,7 @@
     "topUp": "Top up"
   },
   "site": {
-    "description": "Timed skills tests for hiring, made from your job description. Each candidate gets their own random questions, plus scorecards and reports. $1–3 per candidate.",
+    "description": "Timed skills tests for hiring, made from your job description. Each candidate gets their own random questions, plus scorecards and reports. $2–5 per candidate.",
     "homeTitle": "Skills tests for hiring, made from your job description"
   },
   "legal": {
@@ -1187,7 +1187,7 @@
     "updated": "Last updated",
     "englishOnly": "This page is in English only.",
     "startTitle": "Test your candidates",
-    "startText": "Create a timed skills test from your job description. $1–3 per candidate, no subscription.",
+    "startText": "Create a timed skills test from your job description. $2–5 per candidate, no subscription.",
     "startButton": "Create a test"
   },
   "compare": {
@@ -1204,8 +1204,8 @@
     "intro": "Ready-made timed skills tests for common roles. Use one as it is, or create a test from your own job description.",
     "heading": "{role} skills test for hiring",
     "pageTitle": "{role} skills test for hiring",
-    "pageDescription": "A timed {role} skills test for your candidates, covering {count, plural, one {# topic} other {# topics}}. Each candidate gets their own random questions. $1–3 per candidate.",
-    "lead": "A timed multiple-choice test of this role's skills. Every candidate gets their own random set of questions and a timer on each, and you get a scorecard with every answer and its timing. $1–3 per candidate, no subscription.",
+    "pageDescription": "A timed {role} skills test for your candidates, covering {count, plural, one {# topic} other {# topics}}. Each candidate gets their own random questions. $2–5 per candidate.",
+    "lead": "A timed multiple-choice test of this role's skills. Every candidate gets their own random set of questions and a timer on each, and you get a scorecard with every answer and its timing. $2–5 per candidate, no subscription.",
     "create": "Create a test for your candidates",
     "practise": "Practise it free",
     "topics": "What it tests",
@@ -1622,7 +1622,7 @@
         "Read the reports: candidates ranked by grade, with every answer and integrity flags."
       ],
       "tips": [
-        "Creating interviews is free. You pay $1–3 per candidate who answers, and your first candidates are free.",
+        "Creating interviews is free. You pay $2–5 per candidate who answers, and your first candidates are free.",
         "Try your interview as a candidate before you invite anyone."
       ]
     },

@@ -35,7 +35,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "Ile to kosztuje?",
-        "answer": "Generowanie rozmów jest darmowe. Każdy kandydat, który odpowie na co najmniej jedno pytanie, kosztuje {candidate} kredytów ({candidate_dollars} $), a mniej z kredytami z większych doładowań, nawet 1 $. Twoja pierwsza firma dostaje {company} darmowych kredytów, co wystarczy na pierwszych {company_candidates} kandydatów. Wszystkie ceny są na stronie cennika.",
+        "answer": "Generowanie rozmów jest darmowe. Każdy kandydat, który odpowie na co najmniej jedno pytanie, kosztuje {candidate} kredytów ({candidate_dollars} $), a mniej z kredytami z większych doładowań, nawet 2 $. Twoja pierwsza firma dostaje {company} darmowych kredytów, co wystarczy na pierwszych {company_candidates} kandydatów. Wszystkie ceny są na stronie cennika.",
     },
     {
         "key": "charged",

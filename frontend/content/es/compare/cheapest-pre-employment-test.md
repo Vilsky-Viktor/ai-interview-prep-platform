@@ -2,7 +2,7 @@
 title: "Cómo comparar el coste de las pruebas de selección"
 seoTitle: "¿La prueba de selección más barata? Cómo comparar costes"
 description: "Planes gratuitos, suscripciones, pago por candidato y presupuestos a medida: cómo funciona cada modelo de precios y cómo estimar el coste de tus pruebas."
-updated: "2026-10-07"
+updated: "2026-10-14"
 ---
 
 # Cómo comparar el coste de las pruebas de selección
@@ -31,11 +31,11 @@ Necesitas tres números: cuántos candidatos evalúas al año, el precio por can
 3. **Suscripción:** el precio mensual × 12, o el precio anual. Comprueba cuántos candidatos cubren sus créditos; si te pasarías, calcula el precio del plan siguiente.
 4. **Encuentra tu punto de equilibrio:** el coste anual del plan ÷ el precio por candidato. Por debajo de esa cantidad de candidatos al año, pagar por candidato cuesta menos. Por encima, cuesta menos el plan.
 
-**Un ejemplo práctico, con cifras inventadas.** Supongamos que un plan cuesta $1500 al año y una opción de pago por candidato cuesta $3 por candidato. El punto de equilibrio es 1500 ÷ 3 = 500 candidatos al año. Un equipo que evalúa a 60 candidatos al año pagaría $180 en tarifas por candidato en lugar de $1500 por el plan. Un equipo que evalúa a 600 pagaría $1800 en tarifas por candidato, y el plan costaría menos. Usa las cifras reales de las páginas de precios que estés comparando.
+**Un ejemplo práctico, con cifras inventadas.** Supongamos que un plan cuesta $1500 al año y una opción de pago por candidato cuesta $5 por candidato. El punto de equilibrio es 1500 ÷ 5 = 300 candidatos al año. Un equipo que evalúa a 60 candidatos al año pagaría $300 en tarifas por candidato en lugar de $1500 por el plan. Un equipo que evalúa a 600 pagaría $3000 en tarifas por candidato, y el plan costaría menos. Usa las cifras reales de las páginas de precios que estés comparando.
 
 ### Los precios de prepza para tu estimación
 
-prepza cobra por candidato que responde al menos una pregunta. El precio por candidato depende del tamaño de tu recarga: $3 en las recargas más pequeñas, $2 a partir de una recarga de $250 y $1 a partir de una recarga de $1000. Los 3 primeros candidatos de tu primera empresa son gratis. Los precios están en dólares estadounidenses; Paddle, que procesa los pagos, gestiona el IVA y los impuestos sobre las ventas al pagar. Consulta los [precios](/pricing) para ver las recargas actuales.
+prepza cobra por candidato que responde al menos una pregunta. El precio por candidato depende del tamaño de tu recarga: $5 en la recarga más pequeña, $4 a partir de una recarga de $200, $3 a partir de una recarga de $600 y $2 a partir de una recarga de $1000. Los 3 primeros candidatos de tu primera empresa son gratis. Los precios están en dólares estadounidenses; Paddle, que procesa los pagos, gestiona el IVA y los impuestos sobre las ventas al pagar. Consulta los [precios](/pricing) para ver las recargas actuales.
 
 ## Costes más allá del precio de etiqueta
 

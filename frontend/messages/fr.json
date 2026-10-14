@@ -116,7 +116,7 @@
   },
   "home": {
     "title": "Testez tout le monde\nRecrutez les meilleurs",
-    "text": "L'IA transforme votre fiche de poste en un entretien chronométré professionnel, avec des questions uniques pour chaque candidat. Seulement 1–3 $ par candidat."
+    "text": "L'IA transforme votre fiche de poste en un entretien chronométré professionnel, avec des questions uniques pour chaque candidat. Seulement 2–5 $ par candidat."
   },
   "start": {
     "placeholder": "Collez une fiche de poste, ou décrivez le poste et ce qu'un candidat doit savoir",
@@ -721,7 +721,7 @@
     "topUp": "Recharger"
   },
   "site": {
-    "description": "Tests de recrutement chronométrés, créés à partir de votre offre d'emploi. Questions aléatoires par candidat, classement, rapports PDF. 1–3 $ par candidat.",
+    "description": "Tests de recrutement chronométrés, créés à partir de votre offre d'emploi. Questions aléatoires par candidat, classement, rapports PDF. 2–5 $ par candidat.",
     "homeTitle": "Test de recrutement créé à partir de votre offre d'emploi"
   },
   "legal": {
@@ -1187,7 +1187,7 @@
     "updated": "Dernière mise à jour",
     "englishOnly": "Cette page est uniquement en anglais.",
     "startTitle": "Testez vos candidats",
-    "startText": "Créez un test de compétences chronométré à partir de votre fiche de poste. 1–3 $ par candidat, sans abonnement.",
+    "startText": "Créez un test de compétences chronométré à partir de votre fiche de poste. 2–5 $ par candidat, sans abonnement.",
     "startButton": "Créer un test"
   },
   "compare": {
@@ -1204,8 +1204,8 @@
     "intro": "Des tests de compétences chronométrés prêts à l'emploi pour les postes courants. Utilisez-en un tel quel ou créez un test à partir de votre propre fiche de poste.",
     "heading": "Test de compétences {role} pour recruter",
     "pageTitle": "Test de recrutement {role}",
-    "pageDescription": "Test de recrutement {role} chronométré, couvrant {count, plural, one {# thème} other {# thèmes}}. Chaque candidat reçoit ses propres questions aléatoires. 1–3 $ par candidat.",
-    "lead": "Un test chronométré à choix multiples sur les compétences de ce poste. Chaque candidat reçoit sa propre série aléatoire de questions avec un minuteur sur chacune, et vous recevez une fiche d'évaluation avec chaque réponse et son temps. 1–3 $ par candidat, sans abonnement.",
+    "pageDescription": "Test de recrutement {role} chronométré, couvrant {count, plural, one {# thème} other {# thèmes}}. Chaque candidat reçoit ses propres questions aléatoires. 2–5 $ par candidat.",
+    "lead": "Un test chronométré à choix multiples sur les compétences de ce poste. Chaque candidat reçoit sa propre série aléatoire de questions avec un minuteur sur chacune, et vous recevez une fiche d'évaluation avec chaque réponse et son temps. 2–5 $ par candidat, sans abonnement.",
     "create": "Créer un test pour vos candidats",
     "practise": "S'entraîner gratuitement",
     "topics": "Ce qu'il évalue",
@@ -1622,7 +1622,7 @@
         "Lisez les rapports : les candidats classés par note, avec chaque réponse et les alertes d'intégrité."
       ],
       "tips": [
-        "Créer des entretiens est gratuit. Vous payez $1–3 par candidat qui répond, et vos premiers candidats sont gratuits.",
+        "Créer des entretiens est gratuit. Vous payez $2–5 par candidat qui répond, et vos premiers candidats sont gratuits.",
         "Essayez votre entretien en tant que candidat avant d'inviter qui que ce soit."
       ]
     },

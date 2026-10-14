@@ -2,7 +2,7 @@
 title: "Cách sàng lọc 100 ứng viên trong một ngày"
 seoTitle: "Cách sàng lọc 100 hồ sơ ứng viên trong một ngày"
 description: "Kế hoạch sàng lọc công bằng 100 ứng viên trong một ngày làm việc: yêu cầu bắt buộc, bài kiểm tra kỹ năng ngắn, danh sách xếp hạng và người duyệt."
-updated: "2026-10-07"
+updated: "2026-10-14"
 ---
 
 # Cách sàng lọc 100 ứng viên trong một ngày
@@ -103,7 +103,7 @@ Ghi lại lý do mỗi người được chọn. Mỗi ứng viên chỉ mất m
 
 ## Chi phí
 
-Với prepza, bạn chỉ trả tiền cho những ứng viên trả lời ít nhất một câu hỏi: $3 mỗi người với gói nạp $30 và $150, $2 từ gói nạp $250 và $1 từ gói nạp $1.000. Với 100 ứng viên, chi phí là $300 ở mức $3 mỗi người, hoặc $200 trong gói nạp $250 ở mức $2 mỗi người, không có gói đăng ký. Giá tính bằng đô la Mỹ; VAT hoặc thuế bán hàng được xử lý khi thanh toán. Tạo bài kiểm tra là miễn phí, và 3 ứng viên đầu tiên của công ty đầu tiên của bạn được miễn phí.
+Với prepza, bạn chỉ trả tiền cho những ứng viên trả lời ít nhất một câu hỏi: $5 mỗi người với gói nạp $50, $4 từ gói nạp $200, $3 từ gói nạp $600 và $2 từ gói nạp $1.000. Với 100 ứng viên, chi phí là $500 ở mức $5 mỗi người, hoặc $400 với hai gói nạp $200 ở mức $4 mỗi người, không có gói đăng ký. Giá tính bằng đô la Mỹ; VAT hoặc thuế bán hàng được xử lý khi thanh toán. Tạo bài kiểm tra là miễn phí, và 3 ứng viên đầu tiên của công ty đầu tiên của bạn được miễn phí.
 
 ## Đọc thêm
 

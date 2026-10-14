@@ -51,7 +51,7 @@ def test_internal_routes_need_a_service_token(client):
 
 def test_several_companies_balances_at_once(client, monkeypatch):
     async def found(owner_type, owner_ids):
-        return {"a": SimpleNamespace(owner_type="company", balance=900, reserved=300)}
+        return {"a": SimpleNamespace(owner_type="company", balance=1500, reserved=500)}
 
     monkeypatch.setattr(ledger, "wallets", found)
 
@@ -60,7 +60,7 @@ def test_several_companies_balances_at_once(client, monkeypatch):
     )
 
     assert response.json() == {
-        "a": {"balance": 900, "reserved": 300, "available": 600, "low": False, "candidates": 2},
+        "a": {"balance": 1500, "reserved": 500, "available": 1000, "low": False, "candidates": 2},
         "b": {"balance": 0, "reserved": 0, "available": 0, "low": True, "candidates": 0},
     }
 

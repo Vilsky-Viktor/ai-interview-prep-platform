@@ -2,7 +2,7 @@
 title: "Kosten von Einstellungstests vergleichen"
 seoTitle: "Günstiger Einstellungstest? So vergleichst du Kosten"
 description: "Gratis-Tarife, Abos, Abrechnung pro Kandidat, individuelle Angebote: So funktionieren die Preismodelle, so schätzt du deine Kosten für Einstellungstests."
-updated: "2026-10-07"
+updated: "2026-10-14"
 ---
 
 # Kosten von Einstellungstests vergleichen
@@ -31,11 +31,11 @@ Du brauchst drei Zahlen: wie viele Kandidaten du pro Jahr testest, den Preis pro
 3. **Abo:** der Monatspreis × 12 oder der Jahrespreis. Prüf, wie viele Kandidaten die enthaltenen Credits abdecken; würdest du darüber liegen, rechne mit dem nächsthöheren Tarif.
 4. **Ermittle deinen Break-even-Punkt:** Jahreskosten des Abos ÷ Preis pro Kandidat. Unterhalb dieser Kandidatenzahl pro Jahr ist die Abrechnung pro Kandidat günstiger. Darüber ist es das Abo.
 
-**Ein Rechenbeispiel mit erfundenen Zahlen.** Angenommen, ein Abo kostet 1.500 $ pro Jahr und eine Option mit Abrechnung pro Kandidat 3 $ pro Kandidat. Der Break-even-Punkt liegt bei 1.500 ÷ 3 = 500 Kandidaten pro Jahr. Ein Team, das 60 Kandidaten pro Jahr testet, würde 180 $ an Gebühren pro Kandidat zahlen statt 1.500 $ für das Abo. Ein Team, das 600 testet, würde 1.800 $ an Gebühren pro Kandidat zahlen, und das Abo wäre günstiger. Verwende die echten Zahlen von den Preisseiten, die du vergleichst.
+**Ein Rechenbeispiel mit erfundenen Zahlen.** Angenommen, ein Abo kostet 1.500 $ pro Jahr und eine Option mit Abrechnung pro Kandidat 5 $ pro Kandidat. Der Break-even-Punkt liegt bei 1.500 ÷ 5 = 300 Kandidaten pro Jahr. Ein Team, das 60 Kandidaten pro Jahr testet, würde 300 $ an Gebühren pro Kandidat zahlen statt 1.500 $ für das Abo. Ein Team, das 600 testet, würde 3.000 $ an Gebühren pro Kandidat zahlen, und das Abo wäre günstiger. Verwende die echten Zahlen von den Preisseiten, die du vergleichst.
 
 ### Die Preise von prepza für deine Schätzung
 
-prepza berechnet pro Kandidat, der mindestens eine Frage beantwortet. Der Preis pro Kandidat hängt von der Höhe deiner Aufladung ab: 3 $ bei kleineren Aufladungen, 2 $ ab einer Aufladung von 250 $ und 1 $ ab einer Aufladung von 1.000 $. Die ersten 3 Kandidaten deines ersten Unternehmens sind kostenlos. Die Preise sind in US-Dollar angegeben; Paddle, das die Zahlungen abwickelt, kümmert sich beim Bezahlen um Mehrwertsteuer und Sales Tax. Die aktuellen Aufladungen findest du unter [Preise](/pricing).
+prepza berechnet pro Kandidat, der mindestens eine Frage beantwortet. Der Preis pro Kandidat hängt von der Höhe deiner Aufladung ab: 5 $ bei der kleinsten Aufladung, 4 $ ab einer Aufladung von 200 $, 3 $ ab einer Aufladung von 600 $ und 2 $ ab einer Aufladung von 1.000 $. Die ersten 3 Kandidaten deines ersten Unternehmens sind kostenlos. Die Preise sind in US-Dollar angegeben; Paddle, das die Zahlungen abwickelt, kümmert sich beim Bezahlen um Mehrwertsteuer und Sales Tax. Die aktuellen Aufladungen findest du unter [Preise](/pricing).
 
 ## Kosten jenseits des Listenpreises
 

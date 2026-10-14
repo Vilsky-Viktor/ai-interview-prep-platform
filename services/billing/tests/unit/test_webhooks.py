@@ -76,7 +76,7 @@ def granted(monkeypatch):
 def test_a_completed_transaction_grants_what_its_prices_bought(granted):
     asyncio.run(webhooks.handle(completed(quantity=2)))
 
-    assert granted == [("txn_01", "topup_30", 2, 6_000, "acme", "ann")]
+    assert granted == [("txn_01", "topup_50", 2, 10_000, "acme", "ann")]
 
 
 @pytest.fixture
@@ -148,6 +148,6 @@ def test_the_catalog_lists_every_product_and_which_are_on_sale(client):
     products = client.get("/catalog").json()["products"]
 
     assert {product["key"]: product["price_id"] for product in products}[
-        "topup_30"
-    ] == "pri_topup_30"
+        "topup_50"
+    ] == "pri_topup_50"
     assert products[1]["price_id"] is None

@@ -2,7 +2,7 @@
 title: "Pre-employment tests na walang subscription"
 seoTitle: "Pre-Employment Test na Walang Subscription"
 description: "Mag-test ng aplikante nang walang buwanang plan o taunang kontrata. Paano ikinukumpara ang pay-per-candidate sa subscription, at ano ang dapat suriin."
-updated: "2026-10-07"
+updated: "2026-10-14"
 ---
 
 # Pre-employment tests na walang subscription
@@ -46,7 +46,7 @@ Magkakaiba rin ang tine-test ng mga tool na ito. Puwedeng magsama sa iisang hiri
 Walang subscription at walang kontrata ang prepza. Bumibili ka ng credits kapag kailangan mo at ginagastos mo ang mga ito sa mga aplikante.
 
 - **Ang $1 ay katumbas ng 100 credits.** Hindi nag-e-expire ang credits.
-- **300 credits ang bawat aplikante,** na sinisingil lang kapag sumagot sila ng kahit isang tanong. Kung hindi nagsimula ang inimbitahang aplikante, bumabalik ang credits. Nag-e-expire ang imbitasyong hindi nasimulan sa loob ng 30 araw at ibinabalik ang credits nito.
+- **500 credits ang bawat aplikante,** na sinisingil lang kapag sumagot sila ng kahit isang tanong. Kung hindi nagsimula ang inimbitahang aplikante, bumabalik ang credits. Nag-e-expire ang imbitasyong hindi nasimulan sa loob ng 30 araw at ibinabalik ang credits nito.
 - **Mas maraming credits bawat dolyar sa mas malalaking top-up,** kaya bumababa ang presyo bawat aplikante habang lumalaki ang top-up. Tingnan ang [presyo](/pricing) para sa mga top-up.
 - **Libre ang paggawa ng interview,** pati ang pag-preview ng iyong interview bilang aplikante.
 - **Walang seat fees.** Magdagdag ng mga admin at viewer sa iyong kumpanya nang walang bayad.

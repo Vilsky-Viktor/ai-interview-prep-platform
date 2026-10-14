@@ -17,7 +17,7 @@ test("an owner picks the automatic top-up's amount and level", async ({ signInAs
         waiting: false,
         product: null,
         threshold: null,
-        products: ["topup_30", "topup_150"],
+        products: ["topup_50", "topup_200"],
         thresholds: [500, 2000],
       },
     })
@@ -57,16 +57,16 @@ test("an automatic top-up that's on shows its setting and changes from the edit 
         offered: true,
         on: true,
         waiting: false,
-        product: "topup_30",
+        product: "topup_50",
         threshold: 500,
-        products: ["topup_30", "topup_150"],
+        products: ["topup_50", "topup_200"],
         thresholds: [500, 2000],
       },
     })
   )
 
   await visit(owner, "/top-up")
-  await expect(owner.getByText("Automatic top-up: $30 under 500 credits")).toBeVisible()
+  await expect(owner.getByText("Automatic top-up: $50 under 500 credits")).toBeVisible()
   await expect(owner.getByRole("button", { name: "Set up automatic top-up" })).toHaveCount(0)
   await openDialog(owner, owner.getByRole("button", { name: "Change automatic top-up" }))
   await expect(owner.getByRole("dialog").getByText("When the balance falls")).toBeVisible()

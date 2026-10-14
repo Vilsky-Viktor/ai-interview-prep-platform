@@ -116,7 +116,7 @@
   },
   "home": {
     "title": "Herkesi test edin\nEn iyisini işe alın",
-    "text": "Yapay zekâ, iş tanımınızı her adaya özel sorularla profesyonel bir süreli mülakata dönüştürür. Aday başına yalnızca $1–3."
+    "text": "Yapay zekâ, iş tanımınızı her adaya özel sorularla profesyonel bir süreli mülakata dönüştürür. Aday başına yalnızca $2–5."
   },
   "start": {
     "placeholder": "Bir iş tanımı yapıştırın ya da pozisyonu ve adayın bilmesi gerekenleri anlatın",
@@ -721,7 +721,7 @@
     "topUp": "Kredi yükle"
   },
   "site": {
-    "description": "İş tanımınızdan süreli işe alım testleri. Her aday kendi rastgele sorularını alır; aday sıralaması, değerlendirme kartları ve raporlar. Aday başına $1–3.",
+    "description": "İş tanımınızdan süreli işe alım testleri. Her aday kendi rastgele sorularını alır; aday sıralaması, değerlendirme kartları ve raporlar. Aday başına $2–5.",
     "homeTitle": "İş tanımınızdan işe alım testleri oluşturun"
   },
   "legal": {
@@ -1186,7 +1186,7 @@
     "updated": "Son güncelleme",
     "englishOnly": "Bu sayfa yalnızca İngilizcedir.",
     "startTitle": "Adaylarınızı test edin",
-    "startText": "İş tanımınızdan süreli bir beceri testi oluşturun. Aday başına $1–3, abonelik yok.",
+    "startText": "İş tanımınızdan süreli bir beceri testi oluşturun. Aday başına $2–5, abonelik yok.",
     "startButton": "Test oluştur"
   },
   "compare": {
@@ -1203,8 +1203,8 @@
     "intro": "Yaygın pozisyonlar için hazır süreli beceri testleri. Birini olduğu gibi kullanın ya da kendi iş tanımınızdan bir test oluşturun.",
     "heading": "İşe alım için {role} beceri testi",
     "pageTitle": "{role} işe alım testi",
-    "pageDescription": "Adaylarınız için süreli {role} işe alım testi; {count, plural, one {# konu} other {# konu}} içerir. Her aday kendi rastgele sorularını alır. Aday başına $1–3.",
-    "lead": "Bu pozisyonun becerilerini ölçen süreli, çoktan seçmeli bir test. Her aday kendi rastgele soru setini alır ve her soruda bir süre vardır; siz de her cevabı ve süresini gösteren bir değerlendirme kartı alırsınız. Aday başına $1–3, abonelik yok.",
+    "pageDescription": "Adaylarınız için süreli {role} işe alım testi; {count, plural, one {# konu} other {# konu}} içerir. Her aday kendi rastgele sorularını alır. Aday başına $2–5.",
+    "lead": "Bu pozisyonun becerilerini ölçen süreli, çoktan seçmeli bir test. Her aday kendi rastgele soru setini alır ve her soruda bir süre vardır; siz de her cevabı ve süresini gösteren bir değerlendirme kartı alırsınız. Aday başına $2–5, abonelik yok.",
     "create": "Adaylarınız için test oluşturun",
     "practise": "Ücretsiz pratik yapın",
     "topics": "Neyi ölçer",
@@ -1621,7 +1621,7 @@
         "Raporları okuyun: adaylar nota göre sıralanır, her cevap ve dürüstlük uyarılarıyla birlikte."
       ],
       "tips": [
-        "Mülakat oluşturmak ücretsizdir. Cevap veren her aday için $1–3 ödersiniz ve ilk adaylarınız ücretsizdir.",
+        "Mülakat oluşturmak ücretsizdir. Cevap veren her aday için $2–5 ödersiniz ve ilk adaylarınız ücretsizdir.",
         "Kimseyi davet etmeden önce mülakatınızı aday olarak deneyin."
       ]
     },

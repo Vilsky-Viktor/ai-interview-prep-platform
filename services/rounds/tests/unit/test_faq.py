@@ -37,7 +37,7 @@ def test_a_question_not_translated_yet_shows_in_english(client, monkeypatch):
 
     assert items["expire"]["question"] == translated["expire"]["question"]
     assert items["cost"]["question"] == english["cost"]["question"]
-    assert "300" in items["cost"]["answer"] and "{" not in items["cost"]["answer"]
+    assert "500" in items["cost"]["answer"] and "{" not in items["cost"]["answer"]
 
 
 def test_faq_names_prices_in_dollars_from_billing(client, monkeypatch):
@@ -45,11 +45,11 @@ def test_faq_names_prices_in_dollars_from_billing(client, monkeypatch):
 
     items = {item["key"]: item["answer"] for item in client.get("/help/faq").json()}
 
-    # 300 credits a candidate is $3, and 5 candidates a month are $180 a year.
-    assert "300 credits ($3)" in items["compare_hiring"]
-    assert "$180 a year" in items["compare_hiring"]
-    # 900 welcome credits cover 3 candidates.
-    assert "900 free credits, enough for its first 3 candidates" in items["cost"]
+    # 500 credits a candidate is $5, and 5 candidates a month are $300 a year.
+    assert "500 credits ($5)" in items["compare_hiring"]
+    assert "$300 a year" in items["compare_hiring"]
+    # 1,500 welcome credits cover 3 candidates.
+    assert "1,500 free credits, enough for its first 3 candidates" in items["cost"]
 
 
 def test_faq_names_no_competitor_prices():
@@ -90,3 +90,10 @@ def test_faq_isnt_served_without_prices(client, monkeypatch):
 
     assert response.status_code == 503
     assert response.json()["detail"] == PRICES_UNAVAILABLE
+
+
+def test_faq_groups_large_numbers_as_its_language_does(client, monkeypatch):
+    monkeypatch.setattr("app.routers.help.billing.catalog", fake_catalog(CATALOG))
+    german = client.get("/help/faq", headers={"Accept-Language": "de"}).json()
+
+    assert "1.500" in next(item["answer"] for item in german if item["key"] == "cost")

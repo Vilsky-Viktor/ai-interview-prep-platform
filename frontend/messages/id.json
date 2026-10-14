@@ -116,7 +116,7 @@
   },
   "home": {
     "title": "Uji semua orang\nRekrut yang terbaik",
-    "text": "AI mengubah deskripsi pekerjaanmu menjadi wawancara berbatas waktu yang profesional, dengan soal unik untuk setiap kandidat. Hanya $1–3 per kandidat."
+    "text": "AI mengubah deskripsi pekerjaanmu menjadi wawancara berbatas waktu yang profesional, dengan soal unik untuk setiap kandidat. Hanya $2–5 per kandidat."
   },
   "start": {
     "placeholder": "Tempel deskripsi pekerjaan, atau jelaskan posisinya dan apa yang perlu diketahui kandidat",
@@ -721,7 +721,7 @@
     "topUp": "Isi ulang"
   },
   "site": {
-    "description": "Tes seleksi karyawan berbatas waktu dari deskripsi pekerjaanmu. Tiap kandidat dapat soal acak sendiri, plus scorecard dan laporan. $1–3 per kandidat.",
+    "description": "Tes seleksi karyawan berbatas waktu dari deskripsi pekerjaanmu. Tiap kandidat dapat soal acak sendiri, plus scorecard dan laporan. $2–5 per kandidat.",
     "homeTitle": "Tes seleksi karyawan, dibuat dari deskripsi pekerjaan"
   },
   "legal": {
@@ -1187,7 +1187,7 @@
     "updated": "Terakhir diperbarui",
     "englishOnly": "Halaman ini hanya tersedia dalam bahasa Inggris.",
     "startTitle": "Uji kandidatmu",
-    "startText": "Buat tes keterampilan berbatas waktu dari deskripsi pekerjaanmu. $1–3 per kandidat, tanpa langganan.",
+    "startText": "Buat tes keterampilan berbatas waktu dari deskripsi pekerjaanmu. $2–5 per kandidat, tanpa langganan.",
     "startButton": "Buat tes"
   },
   "compare": {
@@ -1204,8 +1204,8 @@
     "intro": "Tes keterampilan berbatas waktu yang siap pakai untuk posisi umum. Pakai apa adanya, atau buat tes dari deskripsi pekerjaanmu sendiri.",
     "heading": "Tes keterampilan {role} untuk rekrutmen",
     "pageTitle": "Tes {role} untuk calon karyawan",
-    "pageDescription": "Tes {role} berbatas waktu untuk calon karyawanmu, mencakup {count, plural, other {# topik}}. Setiap kandidat mendapat soal acak sendiri. $1–3 per kandidat.",
-    "lead": "Tes pilihan ganda berbatas waktu untuk keterampilan posisi ini. Setiap kandidat mendapat set soal acak sendiri dengan batas waktu di tiap soal, dan kamu mendapat scorecard berisi setiap jawaban dan waktunya. $1–3 per kandidat, tanpa langganan.",
+    "pageDescription": "Tes {role} berbatas waktu untuk calon karyawanmu, mencakup {count, plural, other {# topik}}. Setiap kandidat mendapat soal acak sendiri. $2–5 per kandidat.",
+    "lead": "Tes pilihan ganda berbatas waktu untuk keterampilan posisi ini. Setiap kandidat mendapat set soal acak sendiri dengan batas waktu di tiap soal, dan kamu mendapat scorecard berisi setiap jawaban dan waktunya. $2–5 per kandidat, tanpa langganan.",
     "create": "Buat tes untuk kandidatmu",
     "practise": "Latihan gratis",
     "topics": "Yang diuji",
@@ -1622,7 +1622,7 @@
         "Baca laporannya: kandidat diurutkan berdasarkan nilai, dengan setiap jawaban dan tanda integritas."
       ],
       "tips": [
-        "Membuat wawancara gratis. Kamu membayar $1–3 per kandidat yang menjawab, dan kandidat pertamamu gratis.",
+        "Membuat wawancara gratis. Kamu membayar $2–5 per kandidat yang menjawab, dan kandidat pertamamu gratis.",
         "Coba wawancaramu sebagai kandidat sebelum mengundang siapa pun."
       ]
     },

@@ -16,8 +16,8 @@ from app.services.help import build_messages
 CATALOG = {
     "environment": "sandbox",
     "client_token": "secret-token",
-    "candidate_credits": 300,
-    "welcome_company": 900,
+    "candidate_credits": 500,
+    "welcome_company": 1500,
 }
 
 
@@ -45,7 +45,7 @@ def test_the_chat_knows_the_platform_prices_and_documents():
     assert f"can own up to {MAX_OWNED_COMPANIES}" in system
     assert "Refunds: you can ask for a refund" in system
     assert "Who is responsible" in system
-    assert '"candidate_credits": 300' in system
+    assert '"candidate_credits": 500' in system
     assert "secret-token" not in system
     assert system.endswith(
         "Reply in German, the language of the page, unless the user writes in another language."

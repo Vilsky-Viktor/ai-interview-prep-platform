@@ -166,7 +166,7 @@ def test_a_full_refund_of_the_rewarding_top_up_takes_both_rewards_back(run):
             3_000,
             1,
             transaction_id,
-            "topup_30",
+            "topup_50",
             None,
             "3000",
             "USD",

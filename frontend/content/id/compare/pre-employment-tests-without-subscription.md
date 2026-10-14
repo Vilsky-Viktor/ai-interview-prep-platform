@@ -2,7 +2,7 @@
 title: "Tes seleksi karyawan tanpa langganan"
 seoTitle: "Tes Seleksi Karyawan Tanpa Langganan: Bayar per Kandidat"
 description: "Tes kandidat tanpa paket bulanan atau kontrak tahunan. Perbandingan tes bayar per kandidat dengan langganan, dan apa yang perlu dicek sebelum membeli."
-updated: "2026-10-07"
+updated: "2026-10-14"
 ---
 
 # Tes seleksi karyawan tanpa langganan
@@ -46,7 +46,7 @@ Alat-alat ini juga menguji hal yang berbeda. Langganan platform psikometri atau 
 prepza tidak memakai langganan dan tidak memakai kontrak. Kamu membeli kredit saat membutuhkannya dan memakainya untuk kandidat.
 
 - **$1 membeli 100 kredit.** Kredit tidak kedaluwarsa.
-- **Satu kandidat memakai 300 kredit,** yang hanya ditagih saat kandidat menjawab setidaknya satu soal. Kalau kandidat yang diundang tidak pernah mulai, kreditnya kembali. Undangan yang tidak dimulai dalam 30 hari kedaluwarsa dan kreditnya dikembalikan.
+- **Satu kandidat memakai 500 kredit,** yang hanya ditagih saat kandidat menjawab setidaknya satu soal. Kalau kandidat yang diundang tidak pernah mulai, kreditnya kembali. Undangan yang tidak dimulai dalam 30 hari kedaluwarsa dan kreditnya dikembalikan.
 - **Isi ulang yang lebih besar memberi lebih banyak kredit per dolar,** jadi harga per kandidat turun seiring naiknya isi ulang. Lihat [harga](/pricing) untuk pilihan isi ulang.
 - **Membuat wawancara gratis,** begitu juga melihat pratinjau wawancaramu sebagai kandidat.
 - **Tanpa biaya per kursi.** Tambahkan admin dan viewer ke perusahaanmu tanpa biaya.

@@ -2,7 +2,7 @@
 title: "Selectietests zonder abonnement"
 seoTitle: "Pre-employment tests zonder abonnement"
 description: "Kandidaten screenen zonder maandplan of jaarcontract. Hoe betalen per kandidaat zich verhoudt tot abonnementen, en wat je checkt voordat je koopt."
-updated: "2026-10-07"
+updated: "2026-10-14"
 ---
 
 # Selectietests zonder abonnement
@@ -46,7 +46,7 @@ Deze tools toetsen ook verschillende dingen. Een abonnement op een psychometrisc
 prepza heeft geen abonnement en geen contract. Je koopt credits wanneer je ze nodig hebt en besteedt ze aan kandidaten.
 
 - **Voor $1 krijg je 100 credits.** Credits verlopen niet.
-- **Een kandidaat kost 300 credits,** alleen gerekend als hij of zij minstens één vraag beantwoordt. Begint een uitgenodigde kandidaat nooit, dan komen de credits terug. Een uitnodiging die niet binnen 30 dagen is gestart, verloopt en geeft haar credits terug.
+- **Een kandidaat kost 500 credits,** alleen gerekend als hij of zij minstens één vraag beantwoordt. Begint een uitgenodigde kandidaat nooit, dan komen de credits terug. Een uitnodiging die niet binnen 30 dagen is gestart, verloopt en geeft haar credits terug.
 - **Grotere opwaarderingen geven meer credits per dollar,** dus de prijs per kandidaat daalt naarmate de opwaardering groter wordt. Zie [prijzen](/pricing) voor de opwaarderingen.
 - **Interviews genereren is gratis,** en je interview als kandidaat proberen ook.
 - **Geen kosten per gebruiker.** Voeg zonder kosten beheerders en kijkers toe aan je bedrijf.

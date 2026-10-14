@@ -32,7 +32,7 @@ def entry(key, reason, amount=100, **money):
 @pytest.mark.parametrize(
     ("key", "reason", "expected"),
     [
-        ("txn_01:topup_30", Reason.TOPUP, "txn_01"),
+        ("txn_01:topup_50", Reason.TOPUP, "txn_01"),
         ("adjustment:txn_01:adj_01", Reason.REFUND, "txn_01"),
         ("adjustment:txn_01:adj_02", Reason.CHARGEBACK_REVERSED, "txn_01"),
         # Older adjustments carry only the adjustment.
@@ -48,7 +48,7 @@ def test_a_top_up_or_adjustment_names_its_paddle_transaction(key, reason, expect
 def test_a_candidates_movement_carries_the_key_companies_knows_the_invite_by():
     legacy = history_entry_out(entry("candidate:interview-1:ann@example.com", Reason.CANDIDATE))
     current = history_entry_out(entry("candidate:hold-1", Reason.CANDIDATE))
-    other = history_entry_out(entry("txn_01:topup_30", Reason.TOPUP))
+    other = history_entry_out(entry("txn_01:topup_50", Reason.TOPUP))
 
     assert (legacy.hold_key, current.hold_key, other.hold_key) == (
         "interview-1:ann@example.com",
@@ -65,7 +65,7 @@ def test_the_history_route_lists_a_page_with_the_money_and_transaction(client, m
 
         return [
             entry(
-                "txn_01:topup_30",
+                "txn_01:topup_50",
                 Reason.TOPUP,
                 3_000,
                 total="3000",

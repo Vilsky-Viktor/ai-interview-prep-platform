@@ -2,7 +2,7 @@
 title: "Paano ikumpara ang gastos ng mga pre-employment test"
 seoTitle: "Pinakamurang Pre-Employment Test? Paano Ikumpara ang Gastos"
 description: "Libreng plan, subscription, bayad bawat aplikante at custom quote: paano gumagana ang bawat pricing model at paano tantiyahin ang gastos ng iyong testing."
-updated: "2026-10-07"
+updated: "2026-10-14"
 ---
 
 # Paano ikumpara ang gastos ng mga pre-employment test
@@ -31,11 +31,11 @@ Tatlong numero ang kailangan mo: kung ilang aplikante ang tine-test mo sa isang 
 3. **Subscription:** ang buwanang presyo × 12, o ang taunang presyo. Tingnan kung ilang aplikante ang saklaw ng credits nito; kung lalampas ka, kuwentahin ang presyo ng susunod na mas mataas na plan.
 4. **Hanapin ang iyong break-even point:** taunang gastos ng plan ÷ presyo bawat aplikante. Kapag mas kaunti ang aplikante mo kada taon kaysa roon, mas mura ang bayad bawat aplikante. Kapag mas marami, mas mura ang plan.
 
-**Isang halimbawa, gamit ang gawa-gawang numero.** Sabihin nating $1,500 kada taon ang isang plan at $3 bawat aplikante ang isang pay-per-candidate na opsyon. Ang break-even point ay 1,500 ÷ 3 = 500 aplikante kada taon. Ang team na nagte-test ng 60 aplikante kada taon ay magbabayad ng $180 sa per-candidate fees sa halip na $1,500 para sa plan. Ang team na nagte-test ng 600 ay magbabayad ng $1,800 sa per-candidate fees, at mas mura ang plan. Gamitin ang totoong mga numero mula sa mga pricing page na ikinukumpara mo.
+**Isang halimbawa, gamit ang gawa-gawang numero.** Sabihin nating $1,500 kada taon ang isang plan at $5 bawat aplikante ang isang pay-per-candidate na opsyon. Ang break-even point ay 1,500 ÷ 5 = 300 aplikante kada taon. Ang team na nagte-test ng 60 aplikante kada taon ay magbabayad ng $300 sa per-candidate fees sa halip na $1,500 para sa plan. Ang team na nagte-test ng 600 ay magbabayad ng $3,000 sa per-candidate fees, at mas mura ang plan. Gamitin ang totoong mga numero mula sa mga pricing page na ikinukumpara mo.
 
 ### Mga presyo ng prepza para sa iyong tantiya
 
-Naniningil ang prepza bawat aplikanteng sumagot ng kahit isang tanong. Nakadepende ang presyo bawat aplikante sa laki ng iyong top-up: $3 sa mas maliliit na top-up, $2 simula sa $250 na top-up at $1 simula sa $1,000 na top-up. Libre ang unang 3 aplikante ng iyong unang kumpanya. Nasa US dollars ang mga presyo; ang Paddle, na nagpoproseso ng mga bayad, ang humahawak sa VAT at sales tax sa checkout. Tingnan ang [presyo](/pricing) para sa kasalukuyang mga top-up.
+Naniningil ang prepza bawat aplikanteng sumagot ng kahit isang tanong. Nakadepende ang presyo bawat aplikante sa laki ng iyong top-up: $5 sa pinakamaliit na top-up, $4 simula sa $200 na top-up, $3 simula sa $600 na top-up at $2 simula sa $1,000 na top-up. Libre ang unang 3 aplikante ng iyong unang kumpanya. Nasa US dollars ang mga presyo; ang Paddle, na nagpoproseso ng mga bayad, ang humahawak sa VAT at sales tax sa checkout. Tingnan ang [presyo](/pricing) para sa kasalukuyang mga top-up.
 
 ## Mga gastos bukod sa nakalistang presyo
 

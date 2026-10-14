@@ -35,7 +35,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "Quanto costa?",
-        "answer": "Generare colloqui è gratis. Ogni candidato che risponde ad almeno una domanda costa {candidate} crediti ({candidate_dollars} $), e meno con i crediti di ricariche più grandi, fino a 1 $. La tua prima azienda riceve {company} crediti gratuiti, sufficienti per i suoi primi {company_candidates} candidati. La pagina dei prezzi elenca ogni prezzo.",
+        "answer": "Generare colloqui è gratis. Ogni candidato che risponde ad almeno una domanda costa {candidate} crediti ({candidate_dollars} $), e meno con i crediti di ricariche più grandi, fino a 2 $. La tua prima azienda riceve {company} crediti gratuiti, sufficienti per i suoi primi {company_candidates} candidati. La pagina dei prezzi elenca ogni prezzo.",
     },
     {
         "key": "charged",

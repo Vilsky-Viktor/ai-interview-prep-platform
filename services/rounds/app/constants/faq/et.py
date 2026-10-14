@@ -35,7 +35,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "Kui palju see maksab?",
-        "answer": "Intervjuude loomine on tasuta. Iga kandidaat, kes vastab vähemalt ühele küsimusele, maksab {candidate} krediiti ({candidate_dollars} $), ja suuremate juurdelaadimiste krediitidega vähem, kuni 1 $. Sinu esimene ettevõte saab {company} tasuta krediiti, millest piisab tema esimese {company_candidates} kandidaadi jaoks. Hinnalehel on kõik hinnad.",
+        "answer": "Intervjuude loomine on tasuta. Iga kandidaat, kes vastab vähemalt ühele küsimusele, maksab {candidate} krediiti ({candidate_dollars} $), ja suuremate juurdelaadimiste krediitidega vähem, kuni 2 $. Sinu esimene ettevõte saab {company} tasuta krediiti, millest piisab tema esimese {company_candidates} kandidaadi jaoks. Hinnalehel on kõik hinnad.",
     },
     {
         "key": "charged",

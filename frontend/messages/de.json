@@ -116,7 +116,7 @@
   },
   "home": {
     "title": "Teste jeden\nStelle die Besten ein",
-    "text": "KI macht aus deiner Stellenbeschreibung ein professionelles Interview mit Zeitlimit, mit eigenen Fragen für jeden Kandidaten. Nur $1–3 pro Kandidat."
+    "text": "KI macht aus deiner Stellenbeschreibung ein professionelles Interview mit Zeitlimit, mit eigenen Fragen für jeden Kandidaten. Nur $2–5 pro Kandidat."
   },
   "start": {
     "placeholder": "Füge eine Stellenbeschreibung ein oder beschreibe die Rolle und was ein Kandidat wissen sollte",
@@ -721,7 +721,7 @@
     "topUp": "Aufladen"
   },
   "site": {
-    "description": "Einstellungstest mit Zeitlimit aus deiner Stellenbeschreibung: eigene, zufällige Fragen je Bewerber, dazu Ranking und Berichte. $1–3 pro Kandidat.",
+    "description": "Einstellungstest mit Zeitlimit aus deiner Stellenbeschreibung: eigene, zufällige Fragen je Bewerber, dazu Ranking und Berichte. $2–5 pro Kandidat.",
     "homeTitle": "Einstellungstest aus deiner Stellenbeschreibung erstellen"
   },
   "legal": {
@@ -1187,7 +1187,7 @@
     "updated": "Zuletzt aktualisiert",
     "englishOnly": "Diese Seite gibt es nur auf Englisch.",
     "startTitle": "Teste deine Kandidaten",
-    "startText": "Erstelle einen Einstellungstest mit Zeitlimit aus deiner Stellenbeschreibung. $1–3 pro Kandidat, ohne Abo.",
+    "startText": "Erstelle einen Einstellungstest mit Zeitlimit aus deiner Stellenbeschreibung. $2–5 pro Kandidat, ohne Abo.",
     "startButton": "Test erstellen"
   },
   "compare": {
@@ -1204,8 +1204,8 @@
     "intro": "Fertige Einstellungstests mit Zeitlimit für gängige Rollen. Nutze einen direkt oder erstelle einen Test aus deiner eigenen Stellenbeschreibung.",
     "heading": "{role} Test für Bewerber",
     "pageTitle": "{role} Test für Bewerber",
-    "pageDescription": "Einstellungstest für {role} mit Zeitlimit, mit {count, plural, one {# Thema} other {# Themen}}. Jeder Bewerber bekommt eigene, zufällige Fragen. $1–3 pro Kandidat.",
-    "lead": "Ein Multiple-Choice-Test mit Zeitlimit zu den Kompetenzen dieser Rolle. Jeder Kandidat bekommt eigene, zufällige Fragen mit einem Zeitlimit für jede, und du bekommst eine Auswertung mit jeder Antwort und ihrer Dauer. $1–3 pro Kandidat, ohne Abo.",
+    "pageDescription": "Einstellungstest für {role} mit Zeitlimit, mit {count, plural, one {# Thema} other {# Themen}}. Jeder Bewerber bekommt eigene, zufällige Fragen. $2–5 pro Kandidat.",
+    "lead": "Ein Multiple-Choice-Test mit Zeitlimit zu den Kompetenzen dieser Rolle. Jeder Kandidat bekommt eigene, zufällige Fragen mit einem Zeitlimit für jede, und du bekommst eine Auswertung mit jeder Antwort und ihrer Dauer. $2–5 pro Kandidat, ohne Abo.",
     "create": "Test für deine Kandidaten erstellen",
     "practise": "Kostenlos üben",
     "topics": "Was getestet wird",
@@ -1622,7 +1622,7 @@
         "Lies die Berichte: Kandidaten nach Ergebnis sortiert, mit jeder Antwort und Integritätshinweisen."
       ],
       "tips": [
-        "Interviews zu erstellen ist kostenlos. Du zahlst $1–3 pro Kandidat, der antwortet, und deine ersten Kandidaten sind kostenlos.",
+        "Interviews zu erstellen ist kostenlos. Du zahlst $2–5 pro Kandidat, der antwortet, und deine ersten Kandidaten sind kostenlos.",
         "Probiere dein Interview als Kandidat aus, bevor du jemanden einlädst."
       ]
     },

@@ -35,7 +35,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "Quanto custa?",
-        "answer": "Gerar entrevistas é grátis. Cada candidato que responde pelo menos uma questão custa {candidate} créditos (US$ {candidate_dollars}), e menos com créditos de recargas maiores, até US$ 1. Sua primeira empresa recebe {company} créditos grátis, o suficiente para os primeiros {company_candidates} candidatos. A página de preços lista todos os valores.",
+        "answer": "Gerar entrevistas é grátis. Cada candidato que responde pelo menos uma questão custa {candidate} créditos (US$ {candidate_dollars}), e menos com créditos de recargas maiores, até US$ 2. Sua primeira empresa recebe {company} créditos grátis, o suficiente para os primeiros {company_candidates} candidatos. A página de preços lista todos os valores.",
     },
     {
         "key": "charged",

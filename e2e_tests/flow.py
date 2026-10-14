@@ -61,7 +61,7 @@ def call(method: str, url: str, token: str | None = None, body=None, headers=Non
 
 
 # Billing's prices (services/billing/app/constants/credits.py).
-CANDIDATE_CREDITS = 300
+CANDIDATE_CREDITS = 500
 WELCOME_COMPANY = 3 * CANDIDATE_CREDITS
 
 

@@ -35,7 +35,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "Wat kost het?",
-        "answer": "Interviews genereren is gratis. Elke kandidaat die minstens één vraag beantwoordt, kost {candidate} credits ({candidate_dollars} $), en minder met credits uit grotere opwaarderingen, tot 1 $. Je eerste bedrijf krijgt {company} gratis credits, genoeg voor de eerste {company_candidates} kandidaten. De prijzenpagina toont elke prijs.",
+        "answer": "Interviews genereren is gratis. Elke kandidaat die minstens één vraag beantwoordt, kost {candidate} credits ({candidate_dollars} $), en minder met credits uit grotere opwaarderingen, tot 2 $. Je eerste bedrijf krijgt {company} gratis credits, genoeg voor de eerste {company_candidates} kandidaten. De prijzenpagina toont elke prijs.",
     },
     {
         "key": "charged",

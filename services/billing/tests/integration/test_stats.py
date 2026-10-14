@@ -31,7 +31,7 @@ def test_a_transaction_counts_once_and_spent_credits_are_charges_only(run):
             100,
             1,
             f"txn_{uuid.uuid4().hex}",
-            "topup_30",
+            "topup_50",
             None,
             "3000",
             "USD",

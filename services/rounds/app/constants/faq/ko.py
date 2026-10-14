@@ -35,7 +35,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "비용은 얼마인가요?",
-        "answer": "면접 생성은 무료입니다. 문제에 하나 이상 답한 지원자 한 명당 {candidate} 크레딧({candidate_dollars}달러)이 들며, 더 큰 금액을 충전한 크레딧이면 최저 1달러까지 저렴해집니다. 첫 회사에는 무료 크레딧 {company}이 제공되며, 처음 지원자 {company_candidates}명에 충분합니다. 모든 가격은 요금 페이지에서 확인할 수 있습니다.",
+        "answer": "면접 생성은 무료입니다. 문제에 하나 이상 답한 지원자 한 명당 {candidate} 크레딧({candidate_dollars}달러)이 들며, 더 큰 금액을 충전한 크레딧이면 최저 2달러까지 저렴해집니다. 첫 회사에는 무료 크레딧 {company}이 제공되며, 처음 지원자 {company_candidates}명에 충분합니다. 모든 가격은 요금 페이지에서 확인할 수 있습니다.",
     },
     {
         "key": "charged",

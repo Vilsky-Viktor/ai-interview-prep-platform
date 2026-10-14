@@ -2,7 +2,7 @@
 title: "How to compare pre-employment test costs"
 seoTitle: "Cheapest Pre-Employment Test? How to Compare Costs"
 description: "Free plans, subscriptions, pay per candidate and custom quotes: how each pricing model works and how to estimate your pre-employment testing cost."
-updated: "2026-10-07"
+updated: "2026-10-14"
 ---
 
 # How to compare pre-employment test costs
@@ -31,11 +31,11 @@ You need three numbers: how many candidates you test in a year, the price per ca
 3. **Subscription:** the monthly price × 12, or the annual price. Check how many candidates its credits cover; if you'd go over, price the next plan up.
 4. **Find your break-even point:** the plan's yearly cost ÷ the price per candidate. Below that many candidates a year, paying per candidate costs less. Above it, the plan does.
 
-**A worked example, with made-up numbers.** Say a plan costs $1,500 a year and a pay-per-candidate option costs $3 a candidate. The break-even point is 1,500 ÷ 3 = 500 candidates a year. A team testing 60 candidates a year would pay $180 in per-candidate fees instead of $1,500 for the plan. A team testing 600 would pay $1,800 in per-candidate fees, and the plan would cost less. Use the real numbers from the pricing pages you're comparing.
+**A worked example, with made-up numbers.** Say a plan costs $1,500 a year and a pay-per-candidate option costs $5 a candidate. The break-even point is 1,500 ÷ 5 = 300 candidates a year. A team testing 60 candidates a year would pay $300 in per-candidate fees instead of $1,500 for the plan. A team testing 600 would pay $3,000 in per-candidate fees, and the plan would cost less. Use the real numbers from the pricing pages you're comparing.
 
 ### prepza's prices for your estimate
 
-prepza charges per candidate who answers at least one question. The price per candidate depends on your top-up size: $3 on the smaller top-ups, $2 from a $250 top-up and $1 from a $1,000 top-up. Your first company's first 3 candidates are free. Prices are in US dollars; Paddle, which processes payments, handles VAT and sales tax at checkout. See [pricing](/pricing) for the current top-ups.
+prepza charges per candidate who answers at least one question. The price per candidate depends on your top-up size: $5 on the smallest top-up, $4 from a $200 top-up, $3 from a $600 top-up and $2 from a $1,000 top-up. Your first company's first 3 candidates are free. Prices are in US dollars; Paddle, which processes payments, handles VAT and sales tax at checkout. See [pricing](/pricing) for the current top-ups.
 
 ## Costs beyond the sticker price
 

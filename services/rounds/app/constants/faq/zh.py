@@ -35,7 +35,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "费用是多少？",
-        "answer": "生成面试免费。每位至少回答一道题的候选人花费 {candidate} 点数（{candidate_dollars} 美元），使用更大额充值所得的点数会更便宜，最低 1 美元。你的第一家公司可获得 {company} 免费点数，足够支付前 {company_candidates} 位候选人。价格页面列出了所有价格。",
+        "answer": "生成面试免费。每位至少回答一道题的候选人花费 {candidate} 点数（{candidate_dollars} 美元），使用更大额充值所得的点数会更便宜，最低 2 美元。你的第一家公司可获得 {company} 免费点数，足够支付前 {company_candidates} 位候选人。价格页面列出了所有价格。",
     },
     {
         "key": "charged",

@@ -35,7 +35,7 @@ FAQ = [
     {
         "key": "cost",
         "question": "Combien ça coûte ?",
-        "answer": "La génération d'entretiens est gratuite. Chaque candidat qui répond à au moins une question coûte {candidate} crédits ({candidate_dollars} $), et moins avec les crédits de recharges plus importantes, jusqu'à 1 $. Votre première entreprise reçoit {company} crédits gratuits, de quoi couvrir ses {company_candidates} premiers candidats. La page des tarifs indique tous les prix.",
+        "answer": "La génération d'entretiens est gratuite. Chaque candidat qui répond à au moins une question coûte {candidate} crédits ({candidate_dollars} $), et moins avec les crédits de recharges plus importantes, jusqu'à 2 $. Votre première entreprise reçoit {company} crédits gratuits, de quoi couvrir ses {company_candidates} premiers candidats. La page des tarifs indique tous les prix.",
     },
     {
         "key": "charged",

@@ -116,7 +116,7 @@
   },
   "home": {
     "title": "Testi kõiki\nPalka parimad",
-    "text": "Tehisaru teeb sinu töökuulutusest professionaalse ajapiiranguga intervjuu, igale kandidaadile oma küsimustega. Vaid $1–3 kandidaadi kohta."
+    "text": "Tehisaru teeb sinu töökuulutusest professionaalse ajapiiranguga intervjuu, igale kandidaadile oma küsimustega. Vaid $2–5 kandidaadi kohta."
   },
   "start": {
     "placeholder": "Kleebi töökuulutus või kirjelda rolli ja seda, mida kandidaat peaks teadma",
@@ -721,7 +721,7 @@
     "topUp": "Laadi juurde"
   },
   "site": {
-    "description": "Ajapiiranguga värbamistestid sinu töökuulutusest: igal kandidaadil oma juhuslikud küsimused, sulle pingerida ja aruanded. $1–3 kandidaadi kohta.",
+    "description": "Ajapiiranguga värbamistestid sinu töökuulutusest: igal kandidaadil oma juhuslikud küsimused, sulle pingerida ja aruanded. $2–5 kandidaadi kohta.",
     "homeTitle": "Värbamistestid kandidaatidele sinu töökuulutusest"
   },
   "legal": {
@@ -1191,7 +1191,7 @@
     "updated": "Viimati uuendatud",
     "englishOnly": "See leht on ainult inglise keeles.",
     "startTitle": "Testi oma kandidaate",
-    "startText": "Loo oma töökuulutuse põhjal ajapiiranguga oskustest. $1–3 kandidaadi kohta, ilma tellimuseta.",
+    "startText": "Loo oma töökuulutuse põhjal ajapiiranguga oskustest. $2–5 kandidaadi kohta, ilma tellimuseta.",
     "startButton": "Loo test"
   },
   "compare": {
@@ -1208,8 +1208,8 @@
     "intro": "Valmis ajapiiranguga oskustestid levinud rollidele. Kasuta testi nii, nagu see on, või loo test oma töökuulutuse põhjal.",
     "heading": "Rolli {role} oskustest värbamiseks",
     "pageTitle": "{role}: värbamistest kandidaatidele",
-    "pageDescription": "Ajapiiranguga värbamistest ametikohale {role}: {count, plural, one {# teema} other {# teemat}}. Iga kandidaat saab oma juhuslikud küsimused. $1–3 kandidaadi kohta.",
-    "lead": "Ajapiiranguga valikvastustega test selle rolli oskustest. Iga kandidaat saab oma juhusliku küsimustekomplekti ja igal küsimusel on taimer ning sina saad hindamislehe iga vastuse ja selle ajaga. $1–3 kandidaadi kohta, ilma tellimuseta.",
+    "pageDescription": "Ajapiiranguga värbamistest ametikohale {role}: {count, plural, one {# teema} other {# teemat}}. Iga kandidaat saab oma juhuslikud küsimused. $2–5 kandidaadi kohta.",
+    "lead": "Ajapiiranguga valikvastustega test selle rolli oskustest. Iga kandidaat saab oma juhusliku küsimustekomplekti ja igal küsimusel on taimer ning sina saad hindamislehe iga vastuse ja selle ajaga. $2–5 kandidaadi kohta, ilma tellimuseta.",
     "create": "Loo test oma kandidaatidele",
     "practise": "Harjuta tasuta",
     "topics": "Mida see testib",
@@ -1626,7 +1626,7 @@
         "Loe aruandeid: kandidaadid hinde järgi järjestatud, iga vastuse ja märgetega kahtlase käitumise kohta."
       ],
       "tips": [
-        "Intervjuude loomine on tasuta. Maksad $1–3 iga vastava kandidaadi eest ja esimesed kandidaadid on tasuta.",
+        "Intervjuude loomine on tasuta. Maksad $2–5 iga vastava kandidaadi eest ja esimesed kandidaadid on tasuta.",
         "Proovi intervjuud kandidaadina, enne kui kedagi kutsud."
       ]
     },

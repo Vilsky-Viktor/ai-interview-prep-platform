@@ -1,5 +1,6 @@
 import json
 
+from babel.numbers import format_decimal
 from prepza_common.constants import (
     CREDITS_PER_DOLLAR,
     DEFAULT_QUESTION_SECONDS,
@@ -42,20 +43,29 @@ def dollars(credits: int | str) -> str:
     return f"{credits / CREDITS_PER_DOLLAR:g}"
 
 
-def faq_values(catalog: dict | None) -> dict:
+def grouped(number: int | str, language: str) -> str:
+    """A number as `language` groups its digits ("1,500", "1.500"), in the digits the FAQ is
+    written in, as the site writes it; empty stays empty."""
+    if number == "":
+        return ""
+
+    return format_decimal(number, locale=language, numbering_system="latn")
+
+
+def faq_values(catalog: dict | None, language: str) -> dict:
     """What the FAQ's answers name: prices from billing, and the number of languages."""
     prices = catalog or {}
     candidate = prices.get("candidate_credits", "")
 
     return {
         "count": len(LANGUAGES),
-        "candidate": candidate,
+        "candidate": grouped(candidate, language),
         "candidate_dollars": dollars(candidate),
         "example_candidates": FAQ_EXAMPLE_CANDIDATES,
         "example_year_dollars": dollars(
             candidate * FAQ_EXAMPLE_CANDIDATES * 12 if candidate else ""
         ),
-        "company": prices.get("welcome_company", ""),
+        "company": grouped(prices.get("welcome_company", ""), language),
         # The candidates a new company's welcome credits cover.
         "company_candidates": (
             prices["welcome_company"] // candidate
@@ -65,8 +75,10 @@ def faq_values(catalog: dict | None) -> dict:
     }
 
 
-def faq_items(faq: list[dict], catalog: dict | None) -> list[dict]:
-    values = faq_values(catalog)
+def faq_items(language: str, catalog: dict | None) -> list[dict]:
+    """The FAQ in `language`, its prices filled in."""
+    faq = FAQS[language]
+    values = faq_values(catalog, language)
 
     return [
         {
@@ -78,9 +90,9 @@ def faq_items(faq: list[dict], catalog: dict | None) -> list[dict]:
     ]
 
 
-def faq_text(faq: list[dict], catalog: dict | None) -> str:
+def faq_text(language: str, catalog: dict | None) -> str:
     return "\n\n".join(
-        f"Q: {item['question']}\nA: {item['answer']}" for item in faq_items(faq, catalog)
+        f"Q: {item['question']}\nA: {item['answer']}" for item in faq_items(language, catalog)
     )
 
 
@@ -111,7 +123,7 @@ def knowledge(language: str, catalog: dict | None) -> str:
     reads it from GET /help/guide."""
     return HELP_KNOWLEDGE.format(
         guide=guide(),
-        faq=faq_text(FAQS[language], catalog),
+        faq=faq_text(language, catalog),
         prices=prices_text(catalog),
         terms=legal_text(TERMS_INTRO, TERMS_SECTIONS),
         privacy=legal_text(PRIVACY_INTRO, PRIVACY_SECTIONS),

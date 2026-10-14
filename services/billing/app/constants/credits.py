@@ -1,5 +1,5 @@
 # $1 = 100 credits. Amounts are whole credits.
-CANDIDATE_CREDITS = 300
+CANDIDATE_CREDITS = 500
 # A new company gets its first 3 candidates.
 WELCOME_COMPANY = 3 * CANDIDATE_CREDITS
 # Below this, a balance is shown as running low, so a company sees it before it can't invite the

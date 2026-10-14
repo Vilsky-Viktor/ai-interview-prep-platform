@@ -38,7 +38,7 @@ test("owner sees the company's billing, a viewer doesn't", async ({
   const candidate = throwawayEmail("billing-candidate");
   await inviteCandidate(owner, interviewId, candidate);
   await visit(owner, `/companies/${company.id}/billing`);
-  await expect(owner.getByText("300 credits reserved")).toBeVisible();
+  await expect(owner.getByText("500 credits reserved")).toBeVisible();
   await owner.getByRole("link", { name: "Reserved (1)" }).click();
   await expect(owner).toHaveURL(/\?tab=reserved$/);
   await expect(owner.getByText(candidate)).toBeVisible();

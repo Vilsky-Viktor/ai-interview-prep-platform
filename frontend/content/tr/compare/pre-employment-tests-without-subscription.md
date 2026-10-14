@@ -2,7 +2,7 @@
 title: "Abonelik gerektirmeyen işe alım öncesi testler"
 seoTitle: "Aboneliksiz İşe Alım Öncesi Test: Aday Başına Ödeme"
 description: "Aylık plan veya yıllık sözleşme olmadan aday değerlendirme. Aday başına ödeme aboneliklerle nasıl karşılaştırılır, satın almadan önce neye bakılır."
-updated: "2026-10-07"
+updated: "2026-10-14"
 ---
 
 # Abonelik gerektirmeyen işe alım öncesi testler
@@ -46,7 +46,7 @@ Bu araçlar ayrıca farklı şeyleri ölçer. Bir psikometri veya kodlama platfo
 prepza'da abonelik ve sözleşme yoktur. İhtiyaç duyduğunuzda kredi satın alır ve adaylar için harcarsınız.
 
 - **$1 ile 100 kredi alırsınız.** Krediler süresiz geçerlidir.
-- **Bir aday 300 kredidir;** yalnızca en az bir soruyu yanıtladığında düşülür. Davet edilen bir aday hiç başlamazsa krediler geri gelir. 30 gün içinde başlanmayan bir davetin süresi dolar ve kredileri iade edilir.
+- **Bir aday 500 kredidir;** yalnızca en az bir soruyu yanıtladığında düşülür. Davet edilen bir aday hiç başlamazsa krediler geri gelir. 30 gün içinde başlanmayan bir davetin süresi dolar ve kredileri iade edilir.
 - **Daha büyük yüklemeler dolar başına daha fazla kredi sağlar;** yani yükleme tutarı arttıkça aday başı fiyat düşer. Yükleme seçenekleri için [fiyatlar](/pricing) sayfasına bakın.
 - **Mülakat oluşturmak ücretsizdir;** mülakatınızı aday gözüyle önizlemek de öyle.
 - **Kullanıcı başı ücret yok.** Şirketinize ücretsiz olarak yönetici ve görüntüleyici ekleyin.
