@@ -191,7 +191,14 @@ export default async function ScorecardPage({
       {card.sessions.length > 0 && (
         <div className="flex items-center gap-3 rounded-2xl border bg-muted px-5 py-4 text-sm text-muted-foreground">
           <InfoIcon aria-hidden className="size-6 shrink-0 text-primary" />
-          <p>{reportT("humanReview")}</p>
+          <p>
+            {reportT("humanReview")}
+            {/* Signals are the browser's report: said so wherever they show. */}
+            {card.sessions.some(
+              (session) =>
+                session.tab_leaves || session.copies || session.fast_answers
+            ) && ` ${reportT("signalsNote")}`}
+          </p>
         </div>
       )}
 

@@ -5,7 +5,7 @@ from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
 from prepza_common.rate_limit import hit
 
-from app.constants.integrity import SIGNALS_PER_MINUTE, SIGNALS_WINDOW_SECONDS
+from app.constants.integrity import SIGNALS_PER_MINUTE, SIGNALS_WINDOW_SECONDS, IntegritySignal
 from app.constants.rounds import SECTION_IN_PROGRESS, TIME_GRACE_SECONDS, RoundStatus
 from app.helpers.review import build_review
 from app.helpers.sessions import (
@@ -64,13 +64,21 @@ async def get_next_question(session_id: UUID, user: CurrentUser) -> NextQuestion
 @router.post("/{session_id}/signals", status_code=204)
 async def add_signal(session_id: UUID, body: SignalIn, user: CurrentUser) -> None:
     """The candidate's browser reports leaving the page or copying, saved with the question on
-    screen so the scorecard can show where it happened."""
+    screen so the scorecard can show where it happened; and coming back, with how long the leave
+    lasted, which decides whether it counts (helpers/integrity.py)."""
     row = await get_own_session(session_id, user)
 
     if row.status != RoundStatus.IN_PROGRESS:
         return
 
     await hit(get_redis(), f"rate:signals:{row.id}", SIGNALS_PER_MINUTE, SIGNALS_WINDOW_SECONDS)
+
+    if body.kind == IntegritySignal.TAB_RETURN:
+        if body.seconds is not None:
+            await sessions.set_away(row.id, body.seconds)
+
+        return
+
     question = next_session_question(row) if row.question_shown_at else None
     await sessions.add_signal(row.id, question.question_id if question else None, body.kind)
 

@@ -1120,7 +1120,8 @@
     "candidateCount": "{count, plural, other {# 位候选人}}",
     "passMark": "及格线 {mark}%",
     "progressOf": "已完成 {progress}%",
-    "humanReview": "分数用于辅助你的决定，而不是替你做决定。请阅读答案，如果候选人提出要求，请安排人工审核其结果。"
+    "humanReview": "分数用于辅助你的决定，而不是替你做决定。请阅读答案，如果候选人提出要求，请安排人工审核其结果。",
+    "signalsNote": "离开页面、复制和过快作答由候选人的浏览器报告：这是仔细查看的理由，而不是证据。"
   },
   "practice": {
     "title": "按职位分类的免费模拟面试",

@@ -4,6 +4,7 @@ from fastapi import APIRouter, HTTPException, status
 from sqlalchemy.exc import IntegrityError
 
 from app.constants.integrity import IntegritySignal
+from app.helpers.integrity import counted_leave
 from app.helpers.review import add_signals, build_review
 from app.helpers.sessions import session_out
 from app.schemas.sessions import (
@@ -84,7 +85,7 @@ async def invite_scorecard(invite_id: UUID, caller: ServiceCaller) -> list[Score
                 topic_title=row.topic_title,
                 status=row.status,
                 final_score=row.final_score,
-                tab_leaves=kinds.count(IntegritySignal.TAB_LEAVE),
+                tab_leaves=sum(counted_leave(signal) for signal in row.signals),
                 copies=kinds.count(IntegritySignal.COPY),
                 fast_answers=sum(item.answer is not None and item.answer.fast for item in review),
                 review=review,

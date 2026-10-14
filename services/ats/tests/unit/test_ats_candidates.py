@@ -48,7 +48,7 @@ def test_the_results_comment_says_the_grade_the_outcome_where_the_scorecard_is_a
     assert text.splitlines() == [
         "prepza: Accountant",
         "Grade: 82% (passed)",
-        "Integrity flags: yes, see the scorecard.",
+        "Integrity signals: yes, reported by the candidate's browser; a reason to look closer on the scorecard, not proof.",
         "A person decides: don't reject automatically on this result.",
         "Scorecard: https://prepza.ai/s/1",
     ]

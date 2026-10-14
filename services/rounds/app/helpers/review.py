@@ -1,10 +1,12 @@
 from app.constants.integrity import FAST_ANSWER_SECONDS, IntegritySignal
+from app.helpers.integrity import counted_leave
 from app.helpers.rounds import correct_option_index
 from app.schemas.review import AnswerView, ReviewItem
 
 
 def add_signals(items: list[ReviewItem], signals: list) -> None:
-    """Counts each question's page leaves and copy attempts into its review item."""
+    """Counts each question's page leaves (those that count) and copy attempts into its review
+    item."""
     by_question = {str(item.question_id): item for item in items}
 
     for signal in signals:
@@ -13,9 +15,9 @@ def add_signals(items: list[ReviewItem], signals: list) -> None:
         if item is None:
             continue
 
-        if signal.kind == IntegritySignal.TAB_LEAVE:
+        if counted_leave(signal):
             item.tab_leaves += 1
-        else:
+        elif signal.kind == IntegritySignal.COPY:
             item.copies += 1
 
 

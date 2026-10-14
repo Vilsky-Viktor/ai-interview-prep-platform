@@ -10,7 +10,7 @@ def test_a_german_interview_gets_the_note_in_german():
     assert text.splitlines() == [
         "prepza: Buchhalter",
         "Ergebnis: 82 % (bestanden)",
-        "Auffälligkeiten: ja, siehe Auswertung.",
+        "Hinweise auf Auffälligkeiten: ja, vom Browser des Kandidaten gemeldet; ein Grund, auf der Auswertung genauer hinzusehen, kein Beweis.",
         "Die Entscheidung trifft ein Mensch: nicht automatisch anhand dieses Ergebnisses ablehnen.",
         "Auswertung: https://prepza.ai/s/1",
     ]

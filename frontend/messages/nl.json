@@ -1125,7 +1125,8 @@
     "candidateCount": "{count, plural, one {# kandidaat} other {# kandidaten}}",
     "passMark": "slaaggrens {mark}%",
     "progressOf": "{progress}% afgerond",
-    "humanReview": "De score ondersteunt je beslissing, maar neemt die niet. Lees de antwoorden, en laat een mens het resultaat beoordelen als de kandidaat daarom vraagt."
+    "humanReview": "De score ondersteunt je beslissing, maar neemt die niet. Lees de antwoorden, en laat een mens het resultaat beoordelen als de kandidaat daarom vraagt.",
+    "signalsNote": "Pagina verlaten, kopiëren en snelle antwoorden meldt de browser van de kandidaat: een reden om beter te kijken, geen bewijs."
   },
   "practice": {
     "title": "Sollicitatiegesprek gratis oefenen",

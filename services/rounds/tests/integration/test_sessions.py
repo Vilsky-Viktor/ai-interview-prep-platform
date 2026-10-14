@@ -268,3 +268,27 @@ def test_a_question_keeps_a_limited_number_of_signals(run):
     assert len(on_question) == MAX_SIGNALS_PER_QUESTION
     # Another question (here, none on screen) still keeps its own.
     assert len(found.signals) == MAX_SIGNALS_PER_QUESTION + 1
+
+
+def test_a_returns_length_times_the_latest_leave_and_a_short_one_isnt_counted(run):
+    invite_id = uuid.uuid4()
+
+    async def scenario():
+        [row] = await sessions.create_many("cand", invite_id, [topic(2)], 60)
+        await sessions.add_signal(row.id, None, "tab_leave")
+        await sessions.set_away(row.id, 5)
+        await sessions.add_signal(row.id, None, "tab_leave")
+        # A moment's leave: kept, not counted.
+        await sessions.set_away(row.id, 0.5)
+        # A return without a leave left open changes nothing.
+        await sessions.set_away(row.id, 9)
+        # A leave never returned from counts.
+        await sessions.add_signal(row.id, None, "tab_leave")
+        [found] = await sessions.list_for_invite(invite_id, signals=True)
+
+        return found, await sessions.scores_for_invites([invite_id])
+
+    found, scores = run(scenario())
+
+    assert sorted(signal.away_seconds or -1 for signal in found.signals) == [-1, 0.5, 5]
+    assert scores[invite_id]["tab_leaves"] == 2

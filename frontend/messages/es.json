@@ -1129,7 +1129,8 @@
     "candidateCount": "{count, plural, one {# candidato} other {# candidatos}}",
     "passMark": "nota de aprobado {mark} %",
     "progressOf": "{progress} % completado",
-    "humanReview": "La puntuación apoya tu decisión, no la toma por ti. Lee las respuestas y, si el candidato lo pide, haz que una persona revise su resultado."
+    "humanReview": "La puntuación apoya tu decisión, no la toma por ti. Lee las respuestas y, si el candidato lo pide, haz que una persona revise su resultado.",
+    "signalsNote": "Las salidas de la página, las copias y las respuestas rápidas las informa el navegador del candidato: un motivo para mirar con más atención, no una prueba."
   },
   "practice": {
     "title": "Simulador de entrevista de trabajo gratis",

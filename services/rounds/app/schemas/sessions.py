@@ -80,3 +80,5 @@ class ScorecardSession(BaseModel):
 
 class SignalIn(BaseModel):
     kind: IntegritySignal
+    # With a return: how long the leave lasted.
+    seconds: float | None = Field(default=None, ge=0, le=86_400)

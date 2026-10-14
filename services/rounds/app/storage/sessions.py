@@ -2,12 +2,17 @@ import uuid
 from datetime import UTC, datetime, timedelta
 
 from prepza_common import outbox
-from sqlalchemy import delete, func, select, update
+from sqlalchemy import delete, func, or_, select, update
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import selectinload
 
 from app.constants.events import INTERVIEW_FINISHED, SESSION_SCORED
-from app.constants.integrity import FAST_ANSWER_SECONDS, MAX_SIGNALS_PER_QUESTION, IntegritySignal
+from app.constants.integrity import (
+    FAST_ANSWER_SECONDS,
+    MAX_SIGNALS_PER_QUESTION,
+    MIN_TAB_LEAVE_SECONDS,
+    IntegritySignal,
+)
 from app.constants.rounds import RoundStatus
 from app.helpers.rounds import shuffled
 from app.helpers.scores import final_score, invite_grade, scored
@@ -112,7 +117,13 @@ async def scores_for_invites(invite_ids: list[uuid.UUID]) -> dict[uuid.UUID, dic
     signals_query = (
         select(
             invite,
-            func.count(Signal.id).filter(Signal.kind == IntegritySignal.TAB_LEAVE),
+            func.count(Signal.id).filter(
+                Signal.kind == IntegritySignal.TAB_LEAVE,
+                or_(
+                    Signal.away_seconds.is_(None),
+                    Signal.away_seconds >= MIN_TAB_LEAVE_SECONDS,
+                ),
+            ),
             func.count(Signal.id).filter(Signal.kind == IntegritySignal.COPY),
         )
         .join(Signal, Signal.session_id == Session.id)
@@ -154,6 +165,28 @@ async def mark_shown(session_id: uuid.UUID) -> datetime:
         await session.commit()
 
     return shown_at
+
+
+async def set_away(session_id: uuid.UUID, seconds: float) -> None:
+    """How long the session's latest page leave lasted, once the candidate is back; a return
+    without a leave changes nothing."""
+    latest = (
+        select(Signal.id)
+        .where(
+            Signal.session_id == session_id,
+            Signal.kind == IntegritySignal.TAB_LEAVE,
+            Signal.away_seconds.is_(None),
+        )
+        .order_by(Signal.created_at.desc())
+        .limit(1)
+        .scalar_subquery()
+    )
+
+    async with Db() as session:
+        await session.execute(
+            update(Signal).where(Signal.id == latest).values(away_seconds=seconds)
+        )
+        await session.commit()
 
 
 async def add_signal(

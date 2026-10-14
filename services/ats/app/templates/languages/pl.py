@@ -6,7 +6,7 @@ TEXTS = {
     "grade": "Wynik: {grade}% ({result})",
     "passed": "zaliczono",
     "below": "poniżej progu zaliczenia",
-    "flagged": "Ostrzeżenia: tak, zobacz wyniki.",
+    "flagged": "Ostrzeżenia o podejrzanych zachowaniach: tak, zgłoszone przez przeglądarkę kandydata; powód, by przyjrzeć się karcie wyników, a nie dowód.",
     "decide": "Decyduje człowiek: nie odrzucaj automatycznie na podstawie tego wyniku.",
     "scorecard": "Wyniki: {link}",
 }

@@ -6,7 +6,7 @@ TEXTS = {
     "grade": "Hinne: {grade}% ({result})",
     "passed": "läbitud",
     "below": "alla läbimise läve",
-    "flagged": "Märked: jah, vaata hindamislehte.",
+    "flagged": "Kahtlase käitumise märked: jah, kandidaadi brauseri teatatud; põhjus hindamislehte lähemalt vaadata, mitte tõend.",
     "decide": "Otsustab inimene: ära lükka selle tulemuse põhjal automaatselt tagasi.",
     "scorecard": "Hindamisleht: {link}",
 }

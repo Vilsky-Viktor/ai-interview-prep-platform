@@ -1129,7 +1129,8 @@
     "candidateCount": "{count, plural, one {# Kandidat} other {# Kandidaten}}",
     "passMark": "Bestehensgrenze {mark} %",
     "progressOf": "{progress} % erledigt",
-    "humanReview": "Das Ergebnis unterstützt deine Entscheidung, es trifft sie nicht. Lies die Antworten, und wenn der Kandidat darum bittet, lass sein Ergebnis von einem Menschen prüfen."
+    "humanReview": "Das Ergebnis unterstützt deine Entscheidung, es trifft sie nicht. Lies die Antworten, und wenn der Kandidat darum bittet, lass sein Ergebnis von einem Menschen prüfen.",
+    "signalsNote": "Seitenwechsel, Kopiervorgänge und schnelle Antworten meldet der Browser des Kandidaten: ein Grund, genauer hinzusehen, kein Beweis."
   },
   "practice": {
     "title": "Vorstellungsgespräch kostenlos üben",

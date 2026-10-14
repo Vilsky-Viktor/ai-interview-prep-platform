@@ -1133,7 +1133,8 @@
     "candidateCount": "{count, plural, one {# kandidaat} other {# kandidaati}}",
     "passMark": "läbimise lävi {mark}%",
     "progressOf": "{progress}% tehtud",
-    "humanReview": "Tulemus toetab sinu otsust, aga ei tee seda sinu eest. Loe vastused läbi ja kui kandidaat palub, lase tema tulemus inimesel üle vaadata."
+    "humanReview": "Tulemus toetab sinu otsust, aga ei tee seda sinu eest. Loe vastused läbi ja kui kandidaat palub, lase tema tulemus inimesel üle vaadata.",
+    "signalsNote": "Lehelt lahkumisi, kopeerimisi ja kiireid vastuseid teatab kandidaadi brauser: põhjus lähemalt vaadata, mitte tõend."
   },
   "practice": {
     "title": "Tasuta harjutustestid tööintervjuuks",

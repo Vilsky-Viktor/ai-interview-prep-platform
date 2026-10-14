@@ -1125,7 +1125,8 @@
     "candidateCount": "{count, plural, one {# candidato} other {# candidatos}}",
     "passMark": "nota de aprovação {mark}%",
     "progressOf": "{progress}% concluído",
-    "humanReview": "A pontuação apoia sua decisão; ela não decide por você. Leia as respostas e, se o candidato pedir, peça a uma pessoa que revise o resultado dele."
+    "humanReview": "A pontuação apoia sua decisão; ela não decide por você. Leia as respostas e, se o candidato pedir, peça a uma pessoa que revise o resultado dele.",
+    "signalsNote": "Saídas da página, cópias e respostas rápidas são relatadas pelo navegador do candidato: um motivo para olhar com mais atenção, não uma prova."
   },
   "practice": {
     "title": "Simulador de entrevista de emprego por cargo",

@@ -6,7 +6,7 @@ TEXTS = {
     "grade": "Score: {grade}% ({result})",
     "passed": "geslaagd",
     "below": "onder de slaaggrens",
-    "flagged": "Signalen: ja, zie de scorekaart.",
+    "flagged": "Integriteitssignalen: ja, gemeld door de browser van de kandidaat; een reden om de scorekaart beter te bekijken, geen bewijs.",
     "decide": "Een mens beslist: wijs niet automatisch af op basis van dit resultaat.",
     "scorecard": "Scorekaart: {link}",
 }

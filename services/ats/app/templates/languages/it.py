@@ -6,7 +6,7 @@ TEXTS = {
     "grade": "Punteggio: {grade}% ({result})",
     "passed": "superato",
     "below": "sotto la soglia",
-    "flagged": "Segnalazioni: sì, vedi la scheda di valutazione.",
+    "flagged": "Segnali di integrità: sì, segnalati dal browser del candidato; un motivo per guardare meglio la scheda di valutazione, non una prova.",
     "decide": "Decide una persona: non scartare automaticamente in base a questo risultato.",
     "scorecard": "Scheda di valutazione: {link}",
 }

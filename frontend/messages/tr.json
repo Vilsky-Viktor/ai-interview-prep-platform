@@ -1128,7 +1128,8 @@
     "candidateCount": "{count, plural, one {# aday} other {# aday}}",
     "passMark": "geçme notu %{mark}",
     "progressOf": "%{progress} tamamlandı",
-    "humanReview": "Puan kararınızı destekler, kararı sizin yerinize vermez. Cevapları okuyun ve aday isterse sonucunu bir kişiye inceletin."
+    "humanReview": "Puan kararınızı destekler, kararı sizin yerinize vermez. Cevapları okuyun ve aday isterse sonucunu bir kişiye inceletin.",
+    "signalsNote": "Sayfadan ayrılmalar, kopyalamalar ve hızlı yanıtlar adayın tarayıcısı tarafından bildirilir: daha yakından bakmak için bir neden, kanıt değil."
   },
   "practice": {
     "title": "Pozisyona göre ücretsiz mülakat simülasyonu",

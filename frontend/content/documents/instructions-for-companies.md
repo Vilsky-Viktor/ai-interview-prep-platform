@@ -114,8 +114,10 @@ People at your company make the hiring decision. prepza never tells a candidate 
 ## 7. Integrity signals
 
 Page leaves, copy attempts and answers under 3 seconds are **hints, not proof**. A notification, an
-accessibility tool, a slow connection or a fast expert can all trigger them. Never reject on signals
-alone; follow up in a conversation, and let the candidate explain.
+accessibility tool, a slow connection or a fast expert can all trigger them. They're reported by the
+candidate's browser, and a page leave counts only when it lasts 2 seconds or more (a shorter one,
+such as a notification or a permission prompt taking focus, is kept but not counted). Never reject
+on signals alone; follow up in a conversation, and let the candidate explain.
 
 ## 8. Accommodations and extra time
 

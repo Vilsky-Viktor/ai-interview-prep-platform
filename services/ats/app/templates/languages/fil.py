@@ -6,7 +6,7 @@ TEXTS = {
     "grade": "Grade: {grade}% ({result})",
     "passed": "pumasa",
     "below": "mas mababa sa passing grade",
-    "flagged": "Mga flag: oo, tingnan ang scorecard.",
+    "flagged": "Mga flag: oo, iniulat ng browser ng aplikante; dahilan para tingnan nang mas mabuti ang scorecard, hindi patunay.",
     "decide": "Tao ang magdedesisyon: huwag awtomatikong i-reject batay sa resultang ito.",
     "scorecard": "Scorecard: {link}",
 }

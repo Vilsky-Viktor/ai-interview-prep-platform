@@ -153,3 +153,61 @@ def test_signals_are_counted_on_their_question():
     add_signals(items, signals)
 
     assert (items[0].tab_leaves, items[0].copies) == (2, 1)
+
+
+def test_a_page_leave_counts_only_when_it_lasted_two_seconds_or_never_ended():
+    items = build_review(session(seconds=10))
+    signals = [
+        # A notification or a permission prompt taking focus for a moment.
+        Signal(question_id=QUESTION_ID, kind="tab_leave", away_seconds=0.4),
+        Signal(question_id=QUESTION_ID, kind="tab_leave", away_seconds=2),
+        # Never came back (or a browser that doesn't say).
+        Signal(question_id=QUESTION_ID, kind="tab_leave", away_seconds=None),
+    ]
+
+    add_signals(items, signals)
+
+    assert items[0].tab_leaves == 2
+
+
+def test_coming_back_records_how_long_the_leave_lasted(monkeypatch):
+    row = session(seconds=10)
+    row.answers = []
+    row.question_shown_at = datetime.now(UTC)
+    calls = []
+
+    async def fake_get(session_id):
+        return row
+
+    async def fake_add_signal(session_id, question_id, kind):
+        calls.append(("signal", kind))
+
+    async def fake_set_away(session_id, seconds):
+        calls.append(("away", seconds))
+
+    async def hit(redis, key, limit, window):
+        return None
+
+    monkeypatch.setattr(sessions, "get", fake_get)
+    monkeypatch.setattr(sessions, "add_signal", fake_add_signal)
+    monkeypatch.setattr(sessions, "set_away", fake_set_away)
+    monkeypatch.setattr(sessions_router, "hit", hit)
+    app.dependency_overrides[current_user] = lambda: User(
+        uid="cand", email="cand@example.com", email_verified=True
+    )
+
+    try:
+        client = TestClient(app)
+        back = client.post(
+            f"/sessions/{row.id}/signals", json={"kind": "tab_return", "seconds": 1.5}
+        )
+        negative = client.post(
+            f"/sessions/{row.id}/signals", json={"kind": "tab_return", "seconds": -1}
+        )
+    finally:
+        app.dependency_overrides.clear()
+
+    assert back.status_code == 204
+    assert negative.status_code == 422
+    # A return is no signal of its own: it only times the leave.
+    assert calls == [("away", 1.5)]

@@ -1129,7 +1129,8 @@
     "candidateCount": "{count, plural, one {# candidato} other {# candidati}}",
     "passMark": "soglia {mark}%",
     "progressOf": "{progress}% completato",
-    "humanReview": "Il punteggio supporta la tua decisione, non la prende al posto tuo. Leggi le risposte e, se il candidato lo chiede, fai esaminare il suo risultato da una persona."
+    "humanReview": "Il punteggio supporta la tua decisione, non la prende al posto tuo. Leggi le risposte e, se il candidato lo chiede, fai esaminare il suo risultato da una persona.",
+    "signalsNote": "Le uscite dalla pagina, le copie e le risposte rapide sono segnalate dal browser del candidato: un motivo per guardare meglio, non una prova."
   },
   "practice": {
     "title": "Simulazione colloquio di lavoro per ruolo",

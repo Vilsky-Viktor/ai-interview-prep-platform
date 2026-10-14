@@ -19,4 +19,6 @@ class Signal(Base):
     # None when no question was open, e.g. on an answer's result.
     question_id: Mapped[uuid.UUID | None]
     kind: Mapped[str] = mapped_column(String(32))
+    # For a page leave: how long the candidate was away, once they came back.
+    away_seconds: Mapped[float | None]
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())

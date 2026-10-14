@@ -6,7 +6,7 @@ TEXTS = {
     "grade": "Nota: {grade} % ({result})",
     "passed": "aprobado",
     "below": "por debajo de la nota de aprobado",
-    "flagged": "Alertas: sí, consulta la ficha de evaluación.",
+    "flagged": "Señales de integridad: sí, informadas por el navegador del candidato; un motivo para mirar con más atención la ficha de evaluación, no una prueba.",
     "decide": "Decide una persona: no rechaces automáticamente por este resultado.",
     "scorecard": "Ficha de evaluación: {link}",
 }

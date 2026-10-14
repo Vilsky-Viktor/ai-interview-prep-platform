@@ -97,7 +97,13 @@ export async function CandidateReport({
           </li>
         ))}
       </ul>
-      <p className="text-xs text-muted-foreground">{t("humanReview")}</p>
+      <p className="text-xs text-muted-foreground">
+        {t("humanReview")}
+        {sections.some(
+          (section) =>
+            section.tab_leaves || section.copies || section.fast_answers
+        ) && ` ${t("signalsNote")}`}
+      </p>
     </div>
   )
 }

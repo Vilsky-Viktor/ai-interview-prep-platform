@@ -6,7 +6,7 @@ TEXTS = {
     "grade": "Grade: {grade}% ({result})",
     "passed": "passed",
     "below": "below the passing grade",
-    "flagged": "Integrity flags: yes, see the scorecard.",
+    "flagged": "Integrity signals: yes, reported by the candidate's browser; a reason to look closer on the scorecard, not proof.",
     "decide": "A person decides: don't reject automatically on this result.",
     "scorecard": "Scorecard: {link}",
 }

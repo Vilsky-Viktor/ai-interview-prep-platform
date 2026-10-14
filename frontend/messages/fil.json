@@ -1133,7 +1133,8 @@
     "candidateCount": "{count, plural, one {# aplikante} other {# aplikante}}",
     "passMark": "passing grade {mark}%",
     "progressOf": "{progress}% tapos",
-    "humanReview": "Tumutulong ang score sa iyong desisyon; hindi ito ang nagpapasya. Basahin ang mga sagot, at kung hihilingin ng aplikante, ipa-review sa isang tao ang kanyang resulta."
+    "humanReview": "Tumutulong ang score sa iyong desisyon; hindi ito ang nagpapasya. Basahin ang mga sagot, at kung hihilingin ng aplikante, ipa-review sa isang tao ang kanyang resulta.",
+    "signalsNote": "Ang pag-alis sa page, pagkopya at mabibilis na sagot ay iniuulat ng browser ng aplikante: dahilan para tingnan nang mas mabuti, hindi patunay."
   },
   "practice": {
     "title": "Libreng mock interview practice ayon sa role",

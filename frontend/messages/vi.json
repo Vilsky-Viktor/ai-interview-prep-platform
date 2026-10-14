@@ -1125,7 +1125,8 @@
     "candidateCount": "{count, plural, other {# ứng viên}}",
     "passMark": "điểm đạt {mark}%",
     "progressOf": "Đã làm {progress}%",
-    "humanReview": "Điểm số hỗ trợ quyết định của bạn, chứ không thay bạn quyết định. Hãy đọc các câu trả lời, và nếu ứng viên yêu cầu, hãy để một người xem xét kết quả của họ."
+    "humanReview": "Điểm số hỗ trợ quyết định của bạn, chứ không thay bạn quyết định. Hãy đọc các câu trả lời, và nếu ứng viên yêu cầu, hãy để một người xem xét kết quả của họ.",
+    "signalsNote": "Việc rời trang, sao chép và trả lời quá nhanh do trình duyệt của ứng viên báo cáo: là lý do để xem xét kỹ hơn, không phải bằng chứng."
   },
   "practice": {
     "title": "Luyện phỏng vấn miễn phí theo vị trí",

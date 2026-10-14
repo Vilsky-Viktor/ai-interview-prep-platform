@@ -6,7 +6,7 @@ TEXTS = {
     "grade": "Not: %{grade} ({result})",
     "passed": "geçti",
     "below": "geçme notunun altında",
-    "flagged": "İşaretler: var, değerlendirme kartına bakın.",
+    "flagged": "Dürüstlük sinyalleri: var, adayın tarayıcısı tarafından bildirildi; değerlendirme kartına daha yakından bakmak için bir neden, kanıt değil.",
     "decide": "Kararı bir insan verir: bu sonuca göre otomatik olarak reddetmeyin.",
     "scorecard": "Değerlendirme kartı: {link}",
 }

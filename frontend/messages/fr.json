@@ -1129,7 +1129,8 @@
     "candidateCount": "{count, plural, one {# candidat} other {# candidats}}",
     "passMark": "seuil de réussite {mark} %",
     "progressOf": "{progress} % effectué",
-    "humanReview": "Le score appuie votre décision, il ne la prend pas. Lisez les réponses et, si le candidat le demande, faites examiner son résultat par une personne."
+    "humanReview": "Le score appuie votre décision, il ne la prend pas. Lisez les réponses et, si le candidat le demande, faites examiner son résultat par une personne.",
+    "signalsNote": "Les sorties de page, les copies et les réponses rapides sont signalées par le navigateur du candidat : une raison de regarder de plus près, pas une preuve."
   },
   "practice": {
     "title": "Simulation d'entretien d'embauche gratuite",
