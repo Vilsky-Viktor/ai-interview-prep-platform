@@ -1,7 +1,6 @@
 # A private network for the services' outgoing traffic. Calls between services go through it, so
 # they arrive as internal although the services only take outside traffic from the load
-# balancer; Redis (Memorystore, redis.tf) is on it too; everything else reaches the internet
-# through Cloud NAT.
+# balancer; everything else reaches the internet through Cloud NAT.
 resource "google_compute_network" "main" {
   name                    = "prepza"
   auto_create_subnetworks = false
@@ -24,7 +23,7 @@ resource "google_compute_router" "main" {
 }
 
 # Each instance gets NAT ports as it needs them: 64 at first, up to 4096. A fixed 64 would cap an
-# instance at about 64 connections to one address (OpenAI, Resend).
+# instance at about 64 connections to one address (Upstash, OpenAI, Resend).
 resource "google_compute_router_nat" "main" {
   name                                = "prepza"
   router                              = google_compute_router.main.name
