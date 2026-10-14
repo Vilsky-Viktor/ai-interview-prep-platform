@@ -1,8 +1,10 @@
+import asyncio
+import logging
 from uuid import UUID
 
 from langchain_core.messages import HumanMessage
 
-from app.constants.generation import REGENERATE_ATTEMPTS
+from app.constants.generation import REGENERATE_ATTEMPTS, REGENERATE_TIMEOUT_SECONDS
 from app.helpers.prompts import bullet_list, language_name
 from app.helpers.questions import normalize, readable, with_example
 from app.integrations import library, llm
@@ -11,6 +13,8 @@ from app.schemas.questions import NewQuestion
 from app.schemas.regenerate import QuestionContext, RegeneratedOut, RegeneratedQuestion
 from app.services.dedupe import distinct_by_meaning
 from app.services.nodes.answers import generate_answers
+
+logger = logging.getLogger(__name__)
 
 
 async def new_question(context: QuestionContext) -> str | None:
@@ -42,8 +46,8 @@ async def new_question(context: QuestionContext) -> str | None:
     return None
 
 
-async def regenerate(question_id: UUID, context: QuestionContext) -> RegeneratedOut | None:
-    """Writes a new question with its options and saves it in place of the old one."""
+async def write(context: QuestionContext) -> tuple[str, list] | None:
+    """A new question with its options, or None when no unambiguous one came out."""
     for _ in range(REGENERATE_ATTEMPTS):
         text = await new_question(context)
 
@@ -63,13 +67,29 @@ async def regenerate(question_id: UUID, context: QuestionContext) -> Regenerated
         options = result["answer_pool"][0]["options"][0]
 
         if options:
-            await library.replace_question(
-                question_id, RegeneratedQuestion(text=text, options=options)
-            )
-
-            return RegeneratedOut(id=question_id, text=text)
+            return text, options
 
         # No options means the question was ambiguous; never offer it again.
         context = context.model_copy(update={"existing": [*context.existing, text]})
 
     return None
+
+
+async def regenerate(question_id: UUID, context: QuestionContext) -> RegeneratedOut | None:
+    """Writes a new question with its options and saves it in place of the old one. Writing has
+    REGENERATE_TIMEOUT_SECONDS; past it the old question stays, as the caller has given up."""
+    try:
+        async with asyncio.timeout(REGENERATE_TIMEOUT_SECONDS):
+            written = await write(context)
+    except TimeoutError:
+        logger.warning("Regenerating question %s ran out of time; it stays as it was", question_id)
+
+        return None
+
+    if written is None:
+        return None
+
+    text, options = written
+    await library.replace_question(question_id, RegeneratedQuestion(text=text, options=options))
+
+    return RegeneratedOut(id=question_id, text=text)

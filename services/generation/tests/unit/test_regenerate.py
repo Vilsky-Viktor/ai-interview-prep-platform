@@ -3,9 +3,11 @@ import uuid
 
 import pytest
 
+from app.constants.generation import LLM_MAX_RETRIES
 from app.integrations import library, llm
 from app.schemas.questions import AnswerItem, AnswerList, NewQuestion
 from app.schemas.regenerate import QuestionContext
+from app.services import regenerate as regenerate_module
 from app.services.regenerate import regenerate
 
 QUESTION_ID = uuid.uuid4()
@@ -132,3 +134,31 @@ def test_gives_up_when_every_attempt_duplicates(monkeypatch):
     monkeypatch.setattr(library, "replace_question", fake_replace)
 
     assert asyncio.run(regenerate(QUESTION_ID, context())) is None
+
+
+def test_a_regeneration_past_its_deadline_replaces_nothing(monkeypatch):
+    """The caller gives up at 120 s: writing that runs longer leaves the question as it was, so
+    trying again never makes two replacements."""
+    replaced = []
+
+    async def slow_write(_context):
+        await asyncio.sleep(1)
+
+        return "A late question?", ["a", "b", "c", "d"]
+
+    async def fake_replace(question_id, question):
+        replaced.append(question_id)
+
+    monkeypatch.setattr(regenerate_module, "write", slow_write)
+    monkeypatch.setattr(regenerate_module, "REGENERATE_TIMEOUT_SECONDS", 0.01)
+    monkeypatch.setattr(library, "replace_question", fake_replace)
+
+    assert asyncio.run(regenerate(QUESTION_ID, context())) is None
+    assert replaced == []
+
+
+def test_a_failed_ai_call_is_retried_a_few_times_only(monkeypatch):
+    monkeypatch.setenv("OPENAI_API_KEY", "test-key")
+    llm.build_llm.cache_clear()
+
+    assert llm.build_llm("gpt-test", "low").max_retries == LLM_MAX_RETRIES == 2

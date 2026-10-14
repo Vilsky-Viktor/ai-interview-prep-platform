@@ -32,6 +32,9 @@ QUESTION_ATTEMPTS = 3
 MAX_OUTPUT_TOKENS = 16_000
 # Writing MAX_OUTPUT_TOKENS can take a few minutes; a call silent for longer has hung.
 LLM_TIMEOUT_SECONDS = 300
+# Retries of a failed AI call: quick failures (a rate limit, a dropped connection) recover, and a
+# stuck call gives up after at most (1 + this) * LLM_TIMEOUT_SECONDS, within a run's time.
+LLM_MAX_RETRIES = 2
 # What OpenAI accepts for a reasoning model's effort; the settings pick one (see config).
 ReasoningEffort = Literal["none", "minimal", "low", "medium", "high"]
 DISTRACTORS = 3
@@ -45,6 +48,9 @@ MAX_QUESTION_CHARS = 400
 # Its example's lines:
 MAX_EXAMPLE_LINES = 10
 REGENERATE_ATTEMPTS = 3
+# Writing a regenerated question must finish within this, under the 120 s companies waits for
+# it; past it nothing is replaced, so a company that tries again never gets two replacements.
+REGENERATE_TIMEOUT_SECONDS = 110
 # Rounds of extra questions for a topic that ended short, before the generation fails.
 FILL_ATTEMPTS = 3
 # Extra questions a fill-up asks for beyond what's missing: it runs one round after another, so a
