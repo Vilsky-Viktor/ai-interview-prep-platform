@@ -71,7 +71,7 @@ PRIVACY_SECTIONS = [
     {
         "heading": "AI apps you connect",
         "paragraphs": [
-            "You can connect an AI app of your own, such as Claude (by Anthropic) or ChatGPT (by OpenAI), to your prepza account. Only when you do, and only for what you ask it, it reads and changes your companies' data with your access, including candidates' results, and that data reaches the app's provider under the app's own terms and privacy policy, not ours. You choose these apps and can disconnect one at any time on a company's Integrations tab; deleting your account disconnects them all.",
+            "You can connect an AI app of your own, such as Claude (by Anthropic) or ChatGPT (by OpenAI), to your prepza account. Only when you do, and only for what you ask it, it reads and changes your companies' data with your access, including candidates' results, and that data reaches the app's provider under the app's own terms and privacy policy, not ours. You choose these apps and can disconnect one at any time on a company's Integrations tab; deleting your account disconnects them all. A company's owners and admins can stop AI apps from using that company's data.",
         ],
     },
     {

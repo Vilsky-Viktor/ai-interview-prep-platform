@@ -439,6 +439,16 @@
         }
        }
       }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
      }
     },
     "security": [
@@ -1901,6 +1911,16 @@
        "application/json": {
         "schema": {
          "$ref": "#/components/schemas/CandidateFiltersOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
         }
        }
       }
@@ -4382,6 +4402,16 @@
     "responses": {
      "204": {
       "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
      }
     }
    }
@@ -4397,6 +4427,16 @@
     "responses": {
      "204": {
       "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
      }
     }
    }
@@ -4412,6 +4452,16 @@
     "responses": {
      "204": {
       "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
      }
     }
    }
@@ -4427,6 +4477,16 @@
     "responses": {
      "204": {
       "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
      }
     }
    }
@@ -4446,6 +4506,16 @@
        "application/json": {
         "schema": {
          "$ref": "#/components/schemas/PauseOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
         }
        }
       }
@@ -4518,6 +4588,16 @@
         }
        }
       }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
      }
     },
     "security": [
@@ -4541,6 +4621,16 @@
        "application/json": {
         "schema": {
          "$ref": "#/components/schemas/MaintenanceSwitchOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
         }
        }
       }
@@ -4963,6 +5053,58 @@
     }
    }
   },
+  "/companies/{company_id}/ai-apps": {
+   "put": {
+    "tags": [
+     "companies"
+    ],
+    "summary": "Set Ai Apps",
+    "description": "Owners and admins allow, or stop, members using the company's data from the AI apps they\nconnected. Never through an AI app or the assistant: a person decides, in prepza itself.",
+    "operationId": "set_ai_apps_companies__company_id__ai_apps_put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/AiAppsIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
   "/superadmin/verifications": {
    "get": {
     "tags": [
@@ -5152,6 +5294,16 @@
         }
        }
       }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
      }
     }
    }
@@ -5170,6 +5322,16 @@
          "additionalProperties": true,
          "type": "object",
          "title": "Response Ready Ready Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
         }
        }
       }
@@ -5251,6 +5413,19 @@
     ],
     "title": "AdminInviteOut",
     "description": "What the invited member sees before accepting."
+   },
+   "AiAppsIn": {
+    "properties": {
+     "allowed": {
+      "type": "boolean",
+      "title": "Allowed"
+     }
+    },
+    "type": "object",
+    "required": [
+     "allowed"
+    ],
+    "title": "AiAppsIn"
    },
    "ApproveIn": {
     "properties": {
@@ -6097,6 +6272,11 @@
       "type": "boolean",
       "title": "Suspended",
       "default": false
+     },
+     "ai_apps_allowed": {
+      "type": "boolean",
+      "title": "Ai Apps Allowed",
+      "default": true
      },
      "created_at": {
       "type": "string",

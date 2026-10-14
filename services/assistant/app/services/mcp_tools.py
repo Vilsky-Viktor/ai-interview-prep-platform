@@ -25,6 +25,7 @@ from app.constants.mcp import (
     ACTIVE_KEY,
     EXCLUDED_TOOL,
     MCP_EXCLUDED,
+    MCP_UNLISTED,
     MINUTE_SECONDS,
     UPDATE_LANGUAGE,
 )
@@ -44,7 +45,9 @@ logger = logging.getLogger(__name__)
 
 def listed() -> list[types.Tool]:
     """Every tool an AI app may call."""
-    return [mcp_tool(tool) for name, tool in tools().items() if name not in MCP_EXCLUDED]
+    return [
+        mcp_tool(tool) for name, tool in tools().items() if name not in MCP_EXCLUDED | MCP_UNLISTED
+    ]
 
 
 def text_result(content: dict, error: bool) -> types.CallToolResult:
@@ -111,7 +114,7 @@ async def call(name: str, arguments: dict, access: Access) -> types.CallToolResu
     """One tool, called by an AI app as the user it acts for. A write runs at once: the app asked
     the user before calling it. Its result is the data as JSON, with links to prepza's pages;
     an error is a result too, which the app explains."""
-    tool = tools().get(name)
+    tool = tools().get(name) if name not in MCP_UNLISTED else None
 
     if name in MCP_EXCLUDED:
         return error_result(EXCLUDED_TOOL)

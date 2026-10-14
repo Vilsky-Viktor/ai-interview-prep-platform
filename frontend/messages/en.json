@@ -1910,7 +1910,10 @@
     "neverUsed": "not used yet",
     "disconnectTitle": "Disconnect {client}?",
     "disconnectText": "{client} stops working with prepza until you connect it again.",
-    "disconnectFailed": "Couldn't disconnect the app. Please try again."
+    "disconnectFailed": "Couldn't disconnect the app. Please try again.",
+    "allowTitle": "Allow AI apps in this company",
+    "allowText": "Members can use this company's interviews and candidates from the AI apps they connected. Off, AI apps can't read or change anything here.",
+    "allowFailed": "Couldn't change it. Please try again."
   },
   "connect": {
     "pageTitle": "Connect an AI app",

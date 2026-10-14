@@ -1910,7 +1910,10 @@
     "neverUsed": "sin usar todavía",
     "disconnectTitle": "¿Desconectar {client}?",
     "disconnectText": "{client} deja de funcionar con prepza hasta que lo vuelvas a conectar.",
-    "disconnectFailed": "No se pudo desconectar la app. Inténtalo de nuevo."
+    "disconnectFailed": "No se pudo desconectar la app. Inténtalo de nuevo.",
+    "allowTitle": "Permitir apps de IA en esta empresa",
+    "allowText": "Los miembros pueden usar las entrevistas y los candidatos de esta empresa desde las apps de IA que conectaron. Si está desactivado, las apps de IA no pueden leer ni cambiar nada aquí.",
+    "allowFailed": "No se pudo cambiar. Inténtalo de nuevo."
   },
   "connect": {
     "pageTitle": "Conectar una app de IA",

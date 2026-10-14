@@ -1891,7 +1891,10 @@
     "neverUsed": "尚未使用",
     "disconnectTitle": "断开 {client}？",
     "disconnectText": "在你重新连接之前，{client} 将无法使用 prepza。",
-    "disconnectFailed": "无法断开该应用，请重试。"
+    "disconnectFailed": "无法断开该应用，请重试。",
+    "allowTitle": "允许在此公司使用 AI 应用",
+    "allowText": "成员可以在已连接的 AI 应用中使用此公司的面试和候选人。关闭后，AI 应用无法在这里读取或更改任何内容。",
+    "allowFailed": "无法更改，请重试。"
   },
   "connect": {
     "pageTitle": "连接 AI 应用",

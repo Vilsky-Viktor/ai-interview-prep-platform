@@ -1914,7 +1914,10 @@
     "neverUsed": "pole veel kasutatud",
     "disconnectTitle": "Katkestada ühendus rakendusega {client}?",
     "disconnectText": "{client} ei tööta prepzaga enne, kui selle uuesti ühendad.",
-    "disconnectFailed": "Rakenduse ühendust ei õnnestunud katkestada. Proovi uuesti."
+    "disconnectFailed": "Rakenduse ühendust ei õnnestunud katkestada. Proovi uuesti.",
+    "allowTitle": "Luba selles ettevõttes tehisintellekti rakendused",
+    "allowText": "Liikmed saavad kasutada selle ettevõtte intervjuusid ja kandidaate neist tehisintellekti rakendustest, mille nad ühendasid. Väljas olles ei saa rakendused siin midagi lugeda ega muuta.",
+    "allowFailed": "Muuta ei õnnestunud. Proovi uuesti."
   },
   "connect": {
     "pageTitle": "Ühenda AI-rakendus",

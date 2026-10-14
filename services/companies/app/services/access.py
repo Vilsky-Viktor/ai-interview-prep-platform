@@ -3,9 +3,12 @@ from uuid import UUID
 from fastapi import HTTPException, Request, status
 from prepza_common.auth import CurrentUser
 
+from app.constants.ai_apps import AI_APPS_OFF
+from app.constants.audit import VIA_MCP
 from app.constants.invites import COMPANY_SUSPENDED, INTERVIEW_UNAVAILABLE, InviteStatus
 from app.constants.roles import EDITORS, Role
 from app.models.companies import Company, Member
+from app.service_auth import REQUEST_VIA
 from app.storage import companies
 
 
@@ -20,6 +23,10 @@ async def require_company(user: CurrentUser, company_id: UUID) -> tuple[Company,
 
     if member is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Company not found")
+
+    # An AI app a member connected, while its owners and admins don't allow them.
+    if REQUEST_VIA.get() == VIA_MCP and company.ai_apps_off_at is not None:
+        raise HTTPException(status.HTTP_403_FORBIDDEN, AI_APPS_OFF)
 
     return company, member
 

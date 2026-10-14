@@ -1910,7 +1910,10 @@
     "neverUsed": "noch nicht genutzt",
     "disconnectTitle": "{client} trennen?",
     "disconnectText": "{client} funktioniert nicht mehr mit prepza, bis du es wieder verbindest.",
-    "disconnectFailed": "Die App konnte nicht getrennt werden. Bitte versuche es erneut."
+    "disconnectFailed": "Die App konnte nicht getrennt werden. Bitte versuche es erneut.",
+    "allowTitle": "KI-Apps in diesem Unternehmen erlauben",
+    "allowText": "Mitglieder können die Interviews und Kandidaten dieses Unternehmens in den KI-Apps nutzen, die sie verbunden haben. Aus: KI-Apps können hier nichts lesen oder ändern.",
+    "allowFailed": "Konnte nicht geändert werden. Bitte versuche es erneut."
   },
   "connect": {
     "pageTitle": "KI-App verbinden",

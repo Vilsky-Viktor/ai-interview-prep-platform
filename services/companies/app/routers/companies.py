@@ -46,6 +46,7 @@ def company_out(company: Company, user_id: str, interview_count: int = 0) -> Com
         verification_status=company.verification_status,
         decline_reason=company.decline_reason,
         suspended=company.suspended_at is not None,
+        ai_apps_allowed=company.ai_apps_off_at is None,
         created_at=company.created_at,
     )
 

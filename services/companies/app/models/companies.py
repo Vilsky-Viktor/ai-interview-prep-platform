@@ -1,7 +1,15 @@
 import uuid
 from datetime import UTC, datetime
 
-from sqlalchemy import DateTime, ForeignKey, Index, LargeBinary, String, UniqueConstraint, text
+from sqlalchemy import (
+    DateTime,
+    ForeignKey,
+    Index,
+    LargeBinary,
+    String,
+    UniqueConstraint,
+    text,
+)
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.constants.roles import Role
@@ -42,6 +50,9 @@ class Company(Base):
     )
     # A superadmin suspended it (impersonation, abuse): nothing new happens until it's lifted.
     suspended_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    # Since when members may not use its data from AI apps they connected (None: they may); its
+    # owners and admins decide.
+    ai_apps_off_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
     members: Mapped[list["Member"]] = relationship(cascade="all, delete-orphan")
 

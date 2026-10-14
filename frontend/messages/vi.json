@@ -1906,7 +1906,10 @@
     "neverUsed": "chưa dùng",
     "disconnectTitle": "Ngắt kết nối {client}?",
     "disconnectText": "{client} sẽ không hoạt động với prepza cho đến khi bạn kết nối lại.",
-    "disconnectFailed": "Không thể ngắt kết nối ứng dụng. Vui lòng thử lại."
+    "disconnectFailed": "Không thể ngắt kết nối ứng dụng. Vui lòng thử lại.",
+    "allowTitle": "Cho phép ứng dụng AI trong công ty này",
+    "allowText": "Thành viên có thể dùng các buổi phỏng vấn và ứng viên của công ty này từ ứng dụng AI họ đã kết nối. Khi tắt, ứng dụng AI không thể đọc hay thay đổi gì ở đây.",
+    "allowFailed": "Không thể thay đổi. Vui lòng thử lại."
   },
   "connect": {
     "pageTitle": "Kết nối ứng dụng AI",

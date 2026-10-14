@@ -193,4 +193,6 @@ MESSAGES = {
     "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "Mesajını kaldırdım: anahtar, token ya da parola gibi bir gizli bilgi içeriyordu. Güvenliğin için gizli bilgiler hiçbir zaman sohbetten geçmez. Onu entegrasyonlar sayfasına kendin gir.",
     "API keys": "API anahtarları",
     "integrations": "entegrasyonlar",
+    "This company doesn't allow AI apps. Its owner or an admin can allow them on its AI apps page.": "Bu şirket yapay zekâ uygulamalarına izin vermiyor. Sahibi veya bir yönetici, şirketin yapay zekâ uygulamaları sayfasından izin verebilir.",
+    "Only the company's owner or an admin can change this, in prepza itself.": "Bunu yalnızca şirketin sahibi veya bir yönetici, doğrudan prepza'da değiştirebilir.",
 }

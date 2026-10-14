@@ -193,4 +193,6 @@ MESSAGES = {
     "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "Inalis ko ang mensahe mo: may lihim ito, gaya ng key, token o password. Para sa seguridad mo, hindi kailanman dumadaan sa chat ang mga lihim. Ikaw mismo ang maglagay nito sa page ng mga integration.",
     "API keys": "mga API key",
     "integrations": "mga integration",
+    "This company doesn't allow AI apps. Its owner or an admin can allow them on its AI apps page.": "Hindi pinapayagan ng kumpanyang ito ang mga AI app. Puwede itong payagan ng may-ari o ng isang admin sa page ng mga AI app ng kumpanya.",
+    "Only the company's owner or an admin can change this, in prepza itself.": "Ang may-ari lang ng kumpanya o isang admin ang puwedeng magbago nito, sa prepza mismo.",
 }

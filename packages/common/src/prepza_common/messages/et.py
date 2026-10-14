@@ -205,4 +205,6 @@ MESSAGES = {
     "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "Eemaldasin sinu sõnumi: selles oli saladus, näiteks võti, token või parool. Sinu turvalisuse huvides ei liigu saladused kunagi vestluse kaudu. Sisesta see ise integratsioonide lehel.",
     "API keys": "API-võtmed",
     "integrations": "integratsioonid",
+    "This company doesn't allow AI apps. Its owner or an admin can allow them on its AI apps page.": "See ettevõte ei luba tehisintellekti rakendusi. Selle omanik või administraator saab need lubada ettevõtte tehisintellekti rakenduste lehel.",
+    "Only the company's owner or an admin can change this, in prepza itself.": "Seda saab muuta ainult ettevõtte omanik või administraator ja ainult prepzas endas.",
 }

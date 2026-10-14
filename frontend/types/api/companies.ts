@@ -1633,6 +1633,27 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/companies/{company_id}/ai-apps": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /**
+     * Set Ai Apps
+     * @description Owners and admins allow, or stop, members using the company's data from the AI apps they
+     *     connected. Never through an AI app or the assistant: a person decides, in prepza itself.
+     */
+    put: operations["set_ai_apps_companies__company_id__ai_apps_put"]
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/superadmin/verifications": {
     parameters: {
       query?: never
@@ -1757,6 +1778,11 @@ export interface components {
       email?: string | null
       /** Joined */
       joined: boolean
+    }
+    /** AiAppsIn */
+    AiAppsIn: {
+      /** Allowed */
+      allowed: boolean
     }
     /**
      * ApproveIn
@@ -2129,6 +2155,11 @@ export interface components {
        * @default false
        */
       suspended: boolean
+      /**
+       * Ai Apps Allowed
+       * @default true
+       */
+      ai_apps_allowed: boolean
       /**
        * Created At
        * Format: date-time
@@ -3399,6 +3430,15 @@ export interface operations {
           "application/json": components["schemas"]["AccountDeletionOut"]
         }
       }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
     }
   }
   list_audit_events_companies__company_id__audit_get: {
@@ -4216,6 +4256,15 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["CandidateFiltersOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
         }
       }
     }
@@ -5659,6 +5708,15 @@ export interface operations {
         }
         content?: never
       }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
     }
   }
   invite_expiry_internal_schedules_invite_expiry_post: {
@@ -5676,6 +5734,15 @@ export interface operations {
           [name: string]: unknown
         }
         content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
       }
     }
   }
@@ -5695,6 +5762,15 @@ export interface operations {
         }
         content?: never
       }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
     }
   }
   flush_outbox_internal_schedules_outbox_post: {
@@ -5712,6 +5788,15 @@ export interface operations {
           [name: string]: unknown
         }
         content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
       }
     }
   }
@@ -5731,6 +5816,15 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["PauseOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
         }
       }
     }
@@ -5786,6 +5880,15 @@ export interface operations {
           "application/json": components["schemas"]["MaintenanceOut"]
         }
       }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
     }
   }
   get_switch_superadmin_maintenance_get: {
@@ -5804,6 +5907,15 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["MaintenanceSwitchOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
         }
       }
     }
@@ -6058,6 +6170,39 @@ export interface operations {
       }
     }
   }
+  set_ai_apps_companies__company_id__ai_apps_put: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["AiAppsIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
   list_requests_superadmin_verifications_get: {
     parameters: {
       query?: {
@@ -6178,6 +6323,15 @@ export interface operations {
           }
         }
       }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
     }
   }
   ready_ready_get: {
@@ -6198,6 +6352,15 @@ export interface operations {
           "application/json": {
             [key: string]: unknown
           }
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
         }
       }
     }

@@ -81,10 +81,10 @@ def called(name: str, arguments: dict) -> tuple[bool, dict]:
     return result.is_error, json.loads(result.content[0].text)
 
 
-def test_every_tool_but_the_accounts_and_companies_deletion_is_listed():
+def test_every_tool_but_the_deletions_and_the_bell_is_listed():
     names = {tool.name for tool in mcp_tools.listed()}
 
-    assert names == set(tools()) - {"delete_account", "delete_company"}
+    assert names == set(tools()) - {"delete_account", "delete_company", "list_notifications"}
 
 
 def test_a_tool_is_listed_with_its_parameters_and_hints():
@@ -125,6 +125,8 @@ def test_a_write_runs_at_once_with_an_idempotency_key_and_absolute_links(calls):
 def test_the_account_and_company_deletion_are_refused(calls):
     assert called("delete_company", {"company_id": COMPANY}) == (True, {"error": EXCLUDED_TOOL})
     assert called("delete_account", {}) == (True, {"error": EXCLUDED_TOOL})
+    # The bell names candidates past the companies that don't allow AI apps.
+    assert called("list_notifications", {})[0] is True
     assert calls == []
 
 

@@ -193,4 +193,6 @@ MESSAGES = {
     "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "我删除了你的消息：其中包含密钥、令牌或密码等机密信息。为了你的安全，机密信息绝不经过聊天。请你自己在集成页面填写。",
     "API keys": "API 密钥",
     "integrations": "集成",
+    "This company doesn't allow AI apps. Its owner or an admin can allow them on its AI apps page.": "该公司不允许使用 AI 应用。公司所有者或管理员可以在公司的 AI 应用页面中允许。",
+    "Only the company's owner or an admin can change this, in prepza itself.": "只有公司所有者或管理员可以更改此设置，且须在 prepza 中操作。",
 }

@@ -1914,7 +1914,10 @@
     "neverUsed": "hindi pa nagagamit",
     "disconnectTitle": "I-disconnect ang {client}?",
     "disconnectText": "Hihinto ang {client} sa paggana sa prepza hanggang i-connect mo ulit ito.",
-    "disconnectFailed": "Hindi ma-disconnect ang app. Pakisubukang muli."
+    "disconnectFailed": "Hindi ma-disconnect ang app. Pakisubukang muli.",
+    "allowTitle": "Payagan ang mga AI app sa kumpanyang ito",
+    "allowText": "Magagamit ng mga miyembro ang mga interview at aplikante ng kumpanyang ito sa mga AI app na ikinonekta nila. Kapag naka-off, walang mababasa o mababago ang mga AI app dito.",
+    "allowFailed": "Hindi ito nabago. Pakisubukang muli."
   },
   "connect": {
     "pageTitle": "Ikonekta ang isang AI app",

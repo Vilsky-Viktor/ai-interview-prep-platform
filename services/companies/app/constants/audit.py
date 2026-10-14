@@ -16,6 +16,8 @@ class AuditAction(StrEnum):
     PASS_MARK_CHANGED = "pass_mark_changed"
     # Who answers for the company changed hands.
     OWNERSHIP_TRANSFERRED = "ownership_transferred"
+    # Whether AI apps members connected may use the company's data.
+    AI_APPS_CHANGED = "ai_apps_changed"
 
 
 # What an audit event was recorded through when not a person in the app (audit_events.via): the

@@ -1912,7 +1912,10 @@
     "neverUsed": "未使用",
     "disconnectTitle": "{client} の接続を解除しますか？",
     "disconnectText": "もう一度接続するまで、{client} から prepza は使えなくなります。",
-    "disconnectFailed": "アプリの接続を解除できませんでした。もう一度お試しください。"
+    "disconnectFailed": "アプリの接続を解除できませんでした。もう一度お試しください。",
+    "allowTitle": "この会社で AI アプリを許可する",
+    "allowText": "メンバーは、接続した AI アプリからこの会社の面接と候補者を利用できます。オフにすると、AI アプリはここで何も読み取ったり変更したりできません。",
+    "allowFailed": "変更できませんでした。もう一度お試しください。"
   },
   "connect": {
     "pageTitle": "AI アプリを接続",

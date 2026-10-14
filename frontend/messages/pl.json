@@ -1910,7 +1910,10 @@
     "neverUsed": "jeszcze nieużyta",
     "disconnectTitle": "Odłączyć {client}?",
     "disconnectText": "{client} przestanie działać z prepza, dopóki nie połączysz go ponownie.",
-    "disconnectFailed": "Nie udało się odłączyć aplikacji. Spróbuj ponownie."
+    "disconnectFailed": "Nie udało się odłączyć aplikacji. Spróbuj ponownie.",
+    "allowTitle": "Zezwól na aplikacje AI w tej firmie",
+    "allowText": "Członkowie mogą korzystać z rozmów i kandydatów tej firmy w połączonych przez siebie aplikacjach AI. Gdy wyłączone, aplikacje AI nie mogą tu niczego odczytać ani zmienić.",
+    "allowFailed": "Nie udało się zmienić. Spróbuj ponownie."
   },
   "connect": {
     "pageTitle": "Połącz aplikację AI",

@@ -2,7 +2,7 @@ import logging
 from contextlib import asynccontextmanager
 
 import firebase_admin
-from fastapi import FastAPI, HTTPException, status
+from fastapi import Depends, FastAPI, HTTPException, status
 from prepza_common import http
 from prepza_common.body_limit import BodyLimitMiddleware
 from prepza_common.i18n import add_localized_errors
@@ -16,6 +16,7 @@ from app.integrations.redis import get_redis
 from app.routers import (
     accommodations,
     account,
+    ai_apps,
     audit,
     auto_top_ups,
     billing,
@@ -45,6 +46,7 @@ from app.routers import (
     superadmin_verification,
     verification,
 )
+from app.service_auth import remember_via
 from app.storage.db import ping as ping_database
 
 configure_logging()
@@ -62,6 +64,8 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="companies",
+    # What each request came through (an AI app?), for the access checks.
+    dependencies=[Depends(remember_via)],
     lifespan=lifespan,
     openapi_url="/openapi.json" if settings.api_docs else None,
 )
@@ -98,6 +102,7 @@ app.include_router(pause.router)
 app.include_router(maintenance.router)
 app.include_router(superadmin.router)
 app.include_router(superadmin_companies.router)
+app.include_router(ai_apps.router)
 app.include_router(superadmin_verification.router)
 
 

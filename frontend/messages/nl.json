@@ -1906,7 +1906,10 @@
     "neverUsed": "nog niet gebruikt",
     "disconnectTitle": "{client} ontkoppelen?",
     "disconnectText": "{client} werkt niet meer met prepza totdat je het opnieuw koppelt.",
-    "disconnectFailed": "De app kon niet worden ontkoppeld. Probeer het opnieuw."
+    "disconnectFailed": "De app kon niet worden ontkoppeld. Probeer het opnieuw.",
+    "allowTitle": "AI-apps toestaan in dit bedrijf",
+    "allowText": "Leden kunnen de interviews en kandidaten van dit bedrijf gebruiken vanuit de AI-apps die ze hebben gekoppeld. Uit: AI-apps kunnen hier niets lezen of wijzigen.",
+    "allowFailed": "Wijzigen is niet gelukt. Probeer het opnieuw."
   },
   "connect": {
     "pageTitle": "Een AI-app koppelen",

@@ -1910,7 +1910,10 @@
     "neverUsed": "belum dipakai",
     "disconnectTitle": "Putuskan {client}?",
     "disconnectText": "{client} berhenti bekerja dengan prepza sampai kamu menghubungkannya lagi.",
-    "disconnectFailed": "Aplikasi tidak bisa diputuskan. Coba lagi."
+    "disconnectFailed": "Aplikasi tidak bisa diputuskan. Coba lagi.",
+    "allowTitle": "Izinkan aplikasi AI di perusahaan ini",
+    "allowText": "Anggota bisa memakai wawancara dan kandidat perusahaan ini dari aplikasi AI yang mereka hubungkan. Jika nonaktif, aplikasi AI tidak bisa membaca atau mengubah apa pun di sini.",
+    "allowFailed": "Tidak bisa diubah. Silakan coba lagi."
   },
   "connect": {
     "pageTitle": "Hubungkan aplikasi AI",

@@ -193,4 +193,6 @@ MESSAGES = {
     "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "메시지를 삭제했습니다. 키, 토큰, 비밀번호 같은 비밀 정보가 들어 있었습니다. 보안을 위해 비밀 정보는 채팅을 거치지 않습니다. 연동 페이지에서 직접 입력하세요.",
     "API keys": "API 키",
     "integrations": "연동",
+    "This company doesn't allow AI apps. Its owner or an admin can allow them on its AI apps page.": "이 회사는 AI 앱을 허용하지 않습니다. 소유자나 관리자가 회사의 AI 앱 페이지에서 허용할 수 있습니다.",
+    "Only the company's owner or an admin can change this, in prepza itself.": "이 설정은 회사 소유자나 관리자만 prepza에서 직접 변경할 수 있습니다.",
 }

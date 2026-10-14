@@ -163,3 +163,13 @@ async def rename(company_id, name: str) -> bool:
             raise
 
     return True
+
+
+async def set_ai_apps(company_id, allowed: bool) -> None:
+    async with Session() as session:
+        await session.execute(
+            update(Company)
+            .where(Company.id == company_id)
+            .values(ai_apps_off_at=None if allowed else datetime.now(UTC))
+        )
+        await session.commit()

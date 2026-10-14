@@ -74,6 +74,9 @@ MCP_EXCLUDED = frozenset({"delete_account", "delete_company"})
 EXCLUDED_TOOL = (
     "This can only be done in prepza itself: deleting an account or a company can't be undone."
 )
+# Tools an app doesn't see at all: the bell names candidates of every company the user is in,
+# past the companies that don't allow AI apps (companies refuses those on its own routes).
+MCP_UNLISTED = frozenset({"list_notifications"})
 # What an app reads when the connection's account is gone or disabled.
 ACCOUNT_GONE = "This prepza account no longer exists or is disabled."
 # The tool that changes the user's language: their kept sign-in is dropped after it, so the next

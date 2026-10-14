@@ -1901,7 +1901,10 @@
     "neverUsed": "아직 사용 안 함",
     "disconnectTitle": "{client} 연동을 해제할까요?",
     "disconnectText": "다시 연동할 때까지 {client}에서 prepza를 사용할 수 없습니다.",
-    "disconnectFailed": "앱 연동을 해제하지 못했습니다. 다시 시도해 주세요."
+    "disconnectFailed": "앱 연동을 해제하지 못했습니다. 다시 시도해 주세요.",
+    "allowTitle": "이 회사에서 AI 앱 허용",
+    "allowText": "멤버는 연결한 AI 앱에서 이 회사의 면접과 지원자를 사용할 수 있습니다. 끄면 AI 앱은 여기서 아무것도 읽거나 바꿀 수 없습니다.",
+    "allowFailed": "변경하지 못했습니다. 다시 시도해 주세요."
   },
   "connect": {
     "pageTitle": "AI 앱 연동",

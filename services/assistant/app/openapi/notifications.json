@@ -657,7 +657,7 @@
      "schedules"
     ],
     "summary": "Digest",
-    "description": "Every 10 minutes for an hour each morning, from Cloud Scheduler: the activity digest. Each\nrun goes on where the last one stopped; nobody gets it twice in a day.",
+    "description": "Every minute for an hour each morning, from Cloud Scheduler: the activity digest. Each\nrun goes on where the last one stopped; nobody gets it twice in a day.",
     "operationId": "digest_internal_schedules_digest_post",
     "responses": {
      "204": {
@@ -672,7 +672,7 @@
      "schedules"
     ],
     "summary": "Reminders",
-    "description": "Every 10 minutes for an hour each morning, from Cloud Scheduler: reminders, each kind\nat most once a week to a user. The sent log's old rows go too.",
+    "description": "Every minute for an hour each morning, from Cloud Scheduler: reminders, each kind\nat most once a week to a user. The sent log's old rows go too.",
     "operationId": "reminders_internal_schedules_reminders_post",
     "responses": {
      "204": {

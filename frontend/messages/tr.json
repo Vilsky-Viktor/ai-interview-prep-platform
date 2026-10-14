@@ -1909,7 +1909,10 @@
     "neverUsed": "henüz kullanılmadı",
     "disconnectTitle": "{client} bağlantısı kesilsin mi?",
     "disconnectText": "{client}, siz yeniden bağlayana kadar prepza ile çalışmaz.",
-    "disconnectFailed": "Uygulamanın bağlantısı kesilemedi. Lütfen tekrar deneyin."
+    "disconnectFailed": "Uygulamanın bağlantısı kesilemedi. Lütfen tekrar deneyin.",
+    "allowTitle": "Bu şirkette yapay zekâ uygulamalarına izin ver",
+    "allowText": "Üyeler bu şirketin mülakatlarını ve adaylarını bağladıkları yapay zekâ uygulamalarından kullanabilir. Kapalıyken yapay zekâ uygulamaları burada hiçbir şeyi okuyamaz veya değiştiremez.",
+    "allowFailed": "Değiştirilemedi. Lütfen tekrar deneyin."
   },
   "connect": {
     "pageTitle": "Yapay zekâ uygulaması bağla",

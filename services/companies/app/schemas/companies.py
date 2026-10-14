@@ -62,6 +62,8 @@ class CompanyOut(BaseModel):
     decline_reason: str | None = None
     # A superadmin suspended it: its members can read, not change it.
     suspended: bool = False
+    # Members may use its data from AI apps they connected.
+    ai_apps_allowed: bool = True
     created_at: datetime
 
 

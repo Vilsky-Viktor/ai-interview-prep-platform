@@ -77,6 +77,8 @@ The companies service records the human decisions taken in a company, as evidenc
 | Candidate deleted / invite revoked | A member revokes a candidate (see [Candidates](candidates.md#revoking-a-candidate)) |
 | Extra time set | A member gives a candidate extra time |
 | Pass mark changed | A member changes an interview's pass mark |
+| Ownership transferred | The owner makes an admin the owner |
+| AI apps allowed or stopped | An owner or admin changes **Allow AI apps** (see [AI apps](mcp.md#tools)) |
 
 An event also says what it came through (`via`): empty when a member acted in the app, `assistant` when the in-app assistant did it for them, and `mcp` when an AI app connected over MCP did, for every event: results viewed, topics approved, the pass mark changed, a candidate revoked or removed, extra time set and a report emailed. Companies trusts that only from a service token the assistant signs (the `X-Assistant` header, checked like other service calls); a missing or invalid one counts as the app. A view through the assistant isn't counted as the "results viewed" step of the sign-up funnel.
 

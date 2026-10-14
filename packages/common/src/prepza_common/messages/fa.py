@@ -193,4 +193,6 @@ MESSAGES = {
     "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "پیامتان را حذف کردم: یک اطلاعات محرمانه مثل کلید، توکن یا رمز عبور در آن بود. برای امنیت شما، اطلاعات محرمانه هرگز از گفت‌وگو عبور نمی‌کند. آن را خودتان در صفحه یکپارچه‌سازی‌ها وارد کنید.",
     "API keys": "کلیدهای API",
     "integrations": "یکپارچه‌سازی‌ها",
+    "This company doesn't allow AI apps. Its owner or an admin can allow them on its AI apps page.": "این شرکت اجازهٔ استفاده از برنامه‌های هوش مصنوعی را نمی‌دهد. مالک یا یکی از مدیران آن می‌تواند در صفحهٔ برنامه‌های هوش مصنوعی شرکت اجازه دهد.",
+    "Only the company's owner or an admin can change this, in prepza itself.": "فقط مالک شرکت یا یکی از مدیران آن می‌تواند این را تغییر دهد، آن هم در خود prepza.",
 }

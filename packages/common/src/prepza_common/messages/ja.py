@@ -193,4 +193,6 @@ MESSAGES = {
     "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "メッセージを削除しました。キー、トークン、パスワードなどの機密情報が含まれていたためです。安全のため、機密情報はチャットでは扱いません。連携のページでご自身で入力してください。",
     "API keys": "API キー",
     "integrations": "連携",
+    "This company doesn't allow AI apps. Its owner or an admin can allow them on its AI apps page.": "この会社は AI アプリの利用を許可していません。オーナーまたは管理者が、会社の AI アプリのページで許可できます。",
+    "Only the company's owner or an admin can change this, in prepza itself.": "これを変更できるのは、会社のオーナーまたは管理者だけです（prepza 上で操作してください）。",
 }

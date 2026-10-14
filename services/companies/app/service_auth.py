@@ -1,3 +1,4 @@
+from contextvars import ContextVar
 from typing import Annotated
 
 from fastapi import Depends, Header
@@ -30,10 +31,21 @@ def via_of(token: str | None) -> str | None:
     return caller if caller in VIAS else None
 
 
+# What the request being handled came through, for the access checks (services/access.py).
+REQUEST_VIA: ContextVar[str | None] = ContextVar("request_via", default=None)
+
+
 async def request_via(
     x_assistant: Annotated[str | None, Header(include_in_schema=False)] = None,
 ) -> str | None:
     return via_of(x_assistant)
+
+
+async def remember_via(
+    x_assistant: Annotated[str | None, Header(include_in_schema=False)] = None,
+) -> None:
+    """Every request's: run for the whole app, so each access check knows it."""
+    REQUEST_VIA.set(via_of(x_assistant))
 
 
 # What a user's request came through (the assistant or an AI app), for the audit log; None in

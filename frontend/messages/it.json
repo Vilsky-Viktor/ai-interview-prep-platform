@@ -1910,7 +1910,10 @@
     "neverUsed": "non ancora usata",
     "disconnectTitle": "Scollegare {client}?",
     "disconnectText": "{client} smette di funzionare con prepza finché non lo ricolleghi.",
-    "disconnectFailed": "Impossibile scollegare l'app. Riprova."
+    "disconnectFailed": "Impossibile scollegare l'app. Riprova.",
+    "allowTitle": "Consenti le app di IA in questa azienda",
+    "allowText": "I membri possono usare i colloqui e i candidati di questa azienda dalle app di IA che hanno collegato. Se disattivato, le app di IA non possono leggere né modificare nulla qui.",
+    "allowFailed": "Impossibile modificarlo. Riprova."
   },
   "connect": {
     "pageTitle": "Collega un'app di IA",

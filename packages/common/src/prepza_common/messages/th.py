@@ -193,4 +193,6 @@ MESSAGES = {
     "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "ฉันลบข้อความของคุณแล้ว เพราะมีข้อมูลลับ เช่น คีย์ โทเคน หรือรหัสผ่าน เพื่อความปลอดภัยของคุณ ข้อมูลลับจะไม่ส่งผ่านแชตเลย โปรดกรอกเองในหน้าการเชื่อมต่อระบบ",
     "API keys": "คีย์ API",
     "integrations": "การเชื่อมต่อระบบ",
+    "This company doesn't allow AI apps. Its owner or an admin can allow them on its AI apps page.": "บริษัทนี้ไม่อนุญาตให้ใช้แอป AI เจ้าของหรือผู้ดูแลสามารถอนุญาตได้ในหน้าแอป AI ของบริษัท",
+    "Only the company's owner or an admin can change this, in prepza itself.": "มีเพียงเจ้าของบริษัทหรือผู้ดูแลเท่านั้นที่เปลี่ยนค่านี้ได้ โดยทำใน prepza เอง",
 }

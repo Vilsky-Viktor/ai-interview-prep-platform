@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server"
 
 import { BackLink } from "@/components/back-link"
 import { AiAppsInstructions } from "@/components/company/ai-apps-setup"
+import { AiAppsSwitch } from "@/components/company/ai-apps-switch"
 import { ConnectedApps } from "@/components/company/connected-apps"
 import { PageHeader } from "@/components/page-header"
 import { SignInPrompt } from "@/components/sign-in-prompt"
@@ -97,6 +98,11 @@ export default async function AiAppsPage({
             </div>
           </div>
         }
+      />
+      <AiAppsSwitch
+        companyId={companyId}
+        allowed={company.ai_apps_allowed ?? true}
+        canEdit={company.can_edit}
       />
       <ConnectedApps connections={connections} />
     </main>

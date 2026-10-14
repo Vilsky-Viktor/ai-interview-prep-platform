@@ -193,4 +193,6 @@ MESSAGES = {
     "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "Ik heb je bericht verwijderd: er stond een geheim in, zoals een sleutel, een token of een wachtwoord. Voor je veiligheid gaan geheimen nooit via de chat. Vul het zelf in op de pagina met integraties.",
     "API keys": "API-sleutels",
     "integrations": "integraties",
+    "This company doesn't allow AI apps. Its owner or an admin can allow them on its AI apps page.": "Dit bedrijf staat geen AI-apps toe. De eigenaar of een beheerder kan ze toestaan op de pagina AI-apps van het bedrijf.",
+    "Only the company's owner or an admin can change this, in prepza itself.": "Alleen de eigenaar van het bedrijf of een beheerder kan dit wijzigen, in prepza zelf.",
 }

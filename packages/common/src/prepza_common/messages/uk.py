@@ -193,4 +193,6 @@ MESSAGES = {
     "I removed your message: it contained a secret, such as a key, a token or a password. For your security, secrets never go through the chat. Enter it yourself on the integrations page.": "Я видалив ваше повідомлення: у ньому був секрет — ключ, токен або пароль. Задля вашої безпеки секрети ніколи не передаються через чат. Введіть його самі на сторінці інтеграцій.",
     "API keys": "API-ключі",
     "integrations": "інтеграції",
+    "This company doesn't allow AI apps. Its owner or an admin can allow them on its AI apps page.": "Ця компанія не дозволяє ШІ-застосунки. Власник або адміністратор може дозволити їх на сторінці ШІ-застосунків компанії.",
+    "Only the company's owner or an admin can change this, in prepza itself.": "Змінити це може лише власник компанії або адміністратор, у самому prepza.",
 }
