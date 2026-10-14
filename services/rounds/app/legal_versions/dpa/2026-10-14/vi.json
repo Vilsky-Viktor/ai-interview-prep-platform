@@ -35,7 +35,8 @@
         "OpenAI (viết và cải thiện câu hỏi, bao gồm kiểm tra các câu hỏi bị báo cáo dựa trên lý do được đưa ra, không bao giờ dựa trên bình luận; các câu trả lời của trợ lý, từ câu hỏi của một thành viên và dữ liệu trợ lý đọc bằng quyền truy cập của thành viên đó, và chuyển tin nhắn thoại thành văn bản; được yêu cầu không lưu trữ dữ liệu; theo điều khoản API của mình, OpenAI lưu dữ liệu tối đa 30 ngày, chỉ để kiểm tra lạm dụng, và không dùng bất cứ dữ liệu nào để huấn luyện; OpenAI Ireland Ltd, công ty chuyển dữ liệu đến OpenAI tại Hoa Kỳ theo các điều khoản hợp đồng tiêu chuẩn của Ủy ban châu Âu).",
         "Resend (email; EU, Ireland).",
         "Google Workspace (hộp thư email của chúng tôi: tin nhắn từ các công ty và ứng viên, và các yêu cầu được chuyển đến một công ty; Google Ireland Ltd, thư có thể được lưu bên ngoài EU theo EU-US Data Privacy Framework và các điều khoản hợp đồng tiêu chuẩn).",
-        "Sentry (báo cáo lỗi, không có địa chỉ email; EU)."
+        "Sentry (báo cáo lỗi, không có địa chỉ email; EU).",
+        "Upstash (bộ đếm ngắn hạn cho giới hạn và cập nhật trực tiếp; EU, Bỉ)."
       ]
     },
     {

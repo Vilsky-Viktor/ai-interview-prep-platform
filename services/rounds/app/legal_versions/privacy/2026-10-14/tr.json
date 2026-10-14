@@ -56,6 +56,7 @@
         "Google Workspace: iletişim mesajlarını ve bize gönderdiğiniz e-postaları alan e-posta gelen kutumuz (Google Ireland Ltd; e-postalar AB-ABD Veri Gizliliği Çerçevesi ve standart sözleşme hükümleri kapsamında AB dışında saklanabilir).",
         "Sentry: e-posta adresleri çıkarılmış hata raporları (AB'de).",
         "Verileri saklayan barındırma sağlayıcımız Google Cloud (AB'de, Belçika).",
+        "Upstash: kullanım sınırları ve canlı güncellemeler için kısa ömürlü sayaçlar (AB'de, Belçika).",
         "Paddle, kredi yüklemelerini yeniden satıcı (merchant of record) olarak satar: ödemeleri ve vergileri kendi gizlilik politikası kapsamında bağımsız bir veri sorumlusu olarak yürütür."
       ]
     },

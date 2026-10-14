@@ -35,7 +35,8 @@
         "OpenAI (Schreiben und Verbessern von Fragen, einschließlich der Prüfung gemeldeter Fragen anhand der angegebenen Gründe, nie ihrer Kommentare; die Antworten des Assistenten, aus den Fragen eines Mitglieds und den Daten, die er mit dessen Zugriffsrechten liest, und Umwandlung von Sprachnachrichten in Text; angewiesen, die Daten nicht zu speichern; nach seinen API-Bedingungen speichert es die Daten höchstens 30 Tage, nur zur Missbrauchsprüfung, und verwendet nichts zum Training; OpenAI Ireland Ltd, die sie auf Grundlage der Standardvertragsklauseln der Europäischen Kommission an OpenAI in den Vereinigten Staaten übermittelt).",
         "Resend (E-Mails; EU, Irland).",
         "Google Workspace (unser E-Mail-Postfach: Nachrichten von Unternehmen und Kandidaten sowie an ein Unternehmen weitergeleitete Anträge; Google Ireland Ltd, E-Mails können außerhalb der EU gespeichert werden, im Rahmen des Datenschutzrahmens EU-USA und der Standardvertragsklauseln).",
-        "Sentry (Fehlerberichte, ohne E-Mail-Adressen; EU)."
+        "Sentry (Fehlerberichte, ohne E-Mail-Adressen; EU).",
+        "Upstash (kurzlebige Zähler für Limits und Live-Aktualisierungen; EU, Belgien)."
       ]
     },
     {

@@ -35,7 +35,8 @@
         "OpenAI (soru yazma ve iyileştirme, bildirilen soruların hiçbir zaman yorumlarına göre değil, belirtilen gerekçelere göre kontrol edilmesi dahil; bir üyenin sorularından ve asistanın o üyenin erişimiyle okuduğu verilerden asistanın cevapları ve sesli mesajların metne dönüştürülmesi; verileri saklamaması istenmiştir; API koşullarına göre verileri yalnızca kötüye kullanımı kontrol etmek için en fazla 30 gün saklar ve hiçbir şeyi eğitim için kullanmaz; OpenAI Ireland Ltd, verileri Avrupa Komisyonu'nun standart sözleşme hükümleri kapsamında Amerika Birleşik Devletleri'ndeki OpenAI'a aktarır).",
         "Resend (e-postalar; AB, İrlanda).",
         "Google Workspace (e-posta gelen kutumuz: şirketlerden ve adaylardan gelen mesajlar ve bir şirkete iletilen talepler; Google Ireland Ltd, e-postalar AB-ABD Veri Gizliliği Çerçevesi ve standart sözleşme hükümleri kapsamında AB dışında saklanabilir).",
-        "Sentry (e-posta adresleri olmadan hata raporları; AB)."
+        "Sentry (e-posta adresleri olmadan hata raporları; AB).",
+        "Upstash (sınırlar ve canlı güncellemeler için kısa ömürlü sayaçlar; AB, Belçika)."
       ]
     },
     {

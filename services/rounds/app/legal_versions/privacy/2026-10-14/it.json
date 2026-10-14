@@ -56,6 +56,7 @@
         "Google Workspace: la nostra casella email, che riceve i messaggi di contatto e le email che ci invii (Google Ireland Ltd; la posta può essere conservata al di fuori dell'UE, nell'ambito del quadro UE-USA per la protezione dei dati personali e delle clausole contrattuali tipo).",
         "Sentry: report degli errori, senza email (nell'UE).",
         "Google Cloud, il nostro fornitore di hosting, che conserva i dati (nell'UE, Belgio).",
+        "Upstash: contatori di breve durata per i limiti di utilizzo e gli aggiornamenti in tempo reale (nell'UE, Belgio).",
         "Paddle vende le ricariche come merchant of record: gestisce pagamenti e imposte come titolare autonomo del trattamento, secondo la propria informativa sulla privacy."
       ]
     },

@@ -35,7 +35,8 @@
         "OpenAI (menulis dan memperbaiki soal, termasuk memeriksa soal yang dilaporkan berdasarkan alasan yang diberikan, tidak pernah komentarnya; jawaban asisten, dari pertanyaan anggota dan data yang dibacanya dengan hak akses anggota tersebut, serta mengubah pesan suara menjadi teks; diminta untuk tidak menyimpannya; berdasarkan ketentuan API-nya, OpenAI menyimpan data paling lama 30 hari, hanya untuk memeriksa penyalahgunaan, dan tidak menggunakan apa pun untuk pelatihan; OpenAI Ireland Ltd, yang mentransfernya ke OpenAI di Amerika Serikat berdasarkan klausul kontrak standar Komisi Eropa).",
         "Resend (email; UE, Irlandia).",
         "Google Workspace (kotak masuk email kami: pesan dari perusahaan dan kandidat, serta permintaan yang diteruskan kepada perusahaan; Google Ireland Ltd, email dapat disimpan di luar UE berdasarkan EU-US Data Privacy Framework dan klausul kontrak standar).",
-        "Sentry (laporan kesalahan, tanpa alamat email; UE)."
+        "Sentry (laporan kesalahan, tanpa alamat email; UE).",
+        "Upstash (penghitung berumur pendek untuk batas dan pembaruan langsung; UE, Belgia)."
       ]
     },
     {

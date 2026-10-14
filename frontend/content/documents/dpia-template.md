@@ -80,6 +80,7 @@ multiple-choice test, as one input to a hiring decision made by **[COMPANY: who]
 - Resend (emails; EU, Ireland).
 - Google Workspace (prepza's email inbox: messages from companies and candidates, and requests passed on to the company; Google Ireland Ltd, mail may be stored outside the EU under the EU-US Data Privacy Framework and standard contractual clauses).
 - Sentry (error reports, without email addresses; EU).
+- Upstash (short-lived counters for limits and live updates; EU, Belgium).
 - Paddle (payments; receives no candidate data).
 
 **Tools you connect** (your own recipients, not prepza's sub-processors; delete the ones you don't

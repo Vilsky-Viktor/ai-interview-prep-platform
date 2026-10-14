@@ -35,7 +35,8 @@
         "OpenAI (pagsulat at pagpapahusay ng mga tanong, kabilang ang pagsusuri ng mga ini-report na tanong batay sa mga ibinigay na dahilan, hindi kailanman ang mga komento; ang mga sagot ng assistant, mula sa mga tanong ng isang miyembro at sa data na binabasa nito gamit ang kanyang access, at paggawa ng mga voice message bilang text; sinabihang huwag itong i-store; sa ilalim ng mga tuntunin ng API nito, iniingatan nito ang data nang hindi hihigit sa 30 araw, para lamang suriin kung may pang-aabuso, at walang ginagamit para sa training; OpenAI Ireland Ltd, na naglilipat nito sa OpenAI sa United States sa ilalim ng standard contractual clauses ng European Commission).",
         "Resend (mga email; EU, Ireland).",
         "Google Workspace (ang aming email inbox: mga mensahe mula sa mga kumpanya at aplikante, at mga kahilingang ipinapasa sa isang kumpanya; Google Ireland Ltd, maaaring i-store ang mail sa labas ng EU sa ilalim ng EU-US Data Privacy Framework at ng standard contractual clauses).",
-        "Sentry (mga error report, nang walang email address; EU)."
+        "Sentry (mga error report, nang walang email address; EU).",
+        "Upstash (mga panandaliang counter para sa mga limitasyon at live na update; EU, Belgium)."
       ]
     },
     {

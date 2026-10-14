@@ -56,6 +56,7 @@
         "Google Workspace: meie e-postkast, kuhu jõuavad kontaktsõnumid ja e-kirjad, mida meile saadad (Google Ireland Ltd; kirju võidakse säilitada väljaspool ELi ELi–USA andmekaitseraamistiku ja lepingu tüüptingimuste alusel).",
         "Sentry: vearaportid, millest on e-posti aadressid eemaldatud (ELis).",
         "Google Cloud, meie majutusteenuse pakkuja, kes andmeid säilitab (ELis, Belgias).",
+        "Upstash: lühiajalised loendurid kasutuspiirangute ja reaalajas uuenduste jaoks (EL-is, Belgias).",
         "Paddle müüb juurdelaadimisi edasimüüjana (merchant of record): ta tegeleb maksete ja maksudega iseseisva vastutava töötlejana oma privaatsuspoliitika alusel."
       ]
     },

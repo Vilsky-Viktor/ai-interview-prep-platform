@@ -35,7 +35,8 @@
         "OpenAI (küsimuste kirjutamine ja parandamine, sealhulgas teatatud küsimuste kontrollimine esitatud põhjuste, mitte kunagi kommentaaride järgi; assistendi vastused liikme küsimuste ja nende andmete põhjal, mida assistent liikme juurdepääsuga loeb, ning häälsõnumite muutmine tekstiks; palutud andmeid mitte salvestada; oma API tingimuste kohaselt säilitab ta andmeid kõige rohkem 30 päeva, ainult kuritarvitamise kontrollimiseks, ega kasuta midagi treenimiseks; OpenAI Ireland Ltd, kes edastab andmed OpenAI-le Ameerika Ühendriikides Euroopa Komisjoni lepingu tüüptingimuste alusel).",
         "Resend (e-kirjad; EL, Iirimaa).",
         "Google Workspace (meie e-postkast: ettevõtete ja kandidaatide sõnumid ning ettevõttele edastatud taotlused; Google Ireland Ltd, kirju võidakse säilitada väljaspool ELi ELi–USA andmekaitseraamistiku ja lepingu tüüptingimuste alusel).",
-        "Sentry (vearaportid ilma e-posti aadressideta; EL)."
+        "Sentry (vearaportid ilma e-posti aadressideta; EL).",
+        "Upstash (lühiajalised loendurid piirangute ja reaalajas uuenduste jaoks; EL, Belgia)."
       ]
     },
     {

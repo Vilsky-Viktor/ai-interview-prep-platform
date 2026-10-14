@@ -56,6 +56,7 @@
         "Google Workspace: onze e-mailinbox, die contactberichten en de e-mails die je ons stuurt ontvangt (Google Ireland Ltd; e-mail kan buiten de EU worden opgeslagen, onder het EU-VS-kader voor gegevensbescherming en standaardcontractbepalingen).",
         "Sentry: foutrapporten, met e-mailadressen verwijderd (in de EU).",
         "Google Cloud, onze hostingprovider, die de gegevens opslaat (in de EU, België).",
+        "Upstash: kortlevende tellers voor gebruikslimieten en live-updates (in de EU, België).",
         "Paddle verkoopt de opwaarderingen als wederverkoper (merchant of record): het verwerkt betalingen en belastingen als zelfstandige verwerkingsverantwoordelijke, onder zijn eigen privacybeleid."
       ]
     },

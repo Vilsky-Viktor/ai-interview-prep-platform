@@ -56,6 +56,7 @@
         "Google Workspace : notre boîte de réception, qui reçoit les messages de contact et les e-mails que vous nous envoyez (Google Ireland Ltd ; les e-mails peuvent être stockés hors de l'UE, au titre du cadre de protection des données UE-États-Unis et des clauses contractuelles types).",
         "Sentry : rapports d'erreur, sans les adresses e-mail (dans l'UE).",
         "Google Cloud, notre hébergeur, qui stocke les données (dans l'UE, en Belgique).",
+        "Upstash : compteurs de courte durée pour les limites d'utilisation et les mises à jour en direct (dans l'UE, en Belgique).",
         "Paddle vend les recharges en tant que revendeur (merchant of record) : il gère les paiements et les taxes en tant que responsable du traitement indépendant, selon sa propre politique de confidentialité."
       ]
     },

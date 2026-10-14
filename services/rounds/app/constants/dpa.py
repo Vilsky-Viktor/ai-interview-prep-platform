@@ -41,6 +41,7 @@ DPA_SECTIONS = [
             "Resend (emails; EU, Ireland).",
             "Google Workspace (our email inbox: messages from companies and candidates, and requests passed on to a company; Google Ireland Ltd, mail may be stored outside the EU under the EU-US Data Privacy Framework and standard contractual clauses).",
             "Sentry (error reports, without email addresses; EU).",
+            "Upstash (short-lived counters for limits and live updates; EU, Belgium).",
         ],
     },
     {

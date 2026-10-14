@@ -56,6 +56,7 @@
         "Google Workspace: hộp thư email của chúng tôi, nơi nhận tin nhắn liên hệ và các email bạn gửi cho chúng tôi (Google Ireland Ltd; thư có thể được lưu bên ngoài EU, theo EU-US Data Privacy Framework và các điều khoản hợp đồng tiêu chuẩn).",
         "Sentry: báo cáo lỗi, đã loại bỏ email (tại EU).",
         "Google Cloud, nhà cung cấp dịch vụ lưu trữ máy chủ của chúng tôi, nơi lưu trữ dữ liệu (tại EU, Bỉ).",
+        "Upstash: bộ đếm ngắn hạn cho giới hạn sử dụng và cập nhật trực tiếp (tại EU, Bỉ).",
         "Paddle bán các gói nạp credit với tư cách merchant of record: Paddle xử lý thanh toán và thuế với tư cách bên kiểm soát độc lập, theo chính sách quyền riêng tư của chính Paddle."
       ]
     },

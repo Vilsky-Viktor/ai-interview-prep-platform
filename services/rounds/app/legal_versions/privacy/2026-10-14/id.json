@@ -56,6 +56,7 @@
         "Google Workspace: kotak masuk email kami, yang menerima pesan kontak dan email yang kamu kirim kepada kami (Google Ireland Ltd; email dapat disimpan di luar UE, berdasarkan EU-US Data Privacy Framework dan klausul kontrak standar).",
         "Sentry: laporan kesalahan, dengan email dihapus (di UE).",
         "Google Cloud, penyedia hosting kami, yang menyimpan data (di UE, Belgia).",
+        "Upstash: penghitung berumur pendek untuk batas penggunaan dan pembaruan langsung (di UE, Belgia).",
         "Paddle menjual isi ulang sebagai merchant of record: Paddle menangani pembayaran dan pajak sebagai pengendali independen, berdasarkan kebijakan privasinya sendiri."
       ]
     },

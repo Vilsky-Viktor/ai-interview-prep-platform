@@ -56,6 +56,7 @@
         "Google Workspace: nasza skrzynka e-mail, która odbiera wiadomości kontaktowe i e-maile, które do nas wysyłasz (Google Ireland Ltd; poczta może być przechowywana poza UE, w ramach Ram ochrony danych UE-USA i standardowych klauzul umownych).",
         "Sentry: raporty o błędach, z usuniętymi adresami e-mail (w UE).",
         "Google Cloud, nasz dostawca hostingu, który przechowuje dane (w UE, Belgia).",
+        "Upstash: krótkotrwałe liczniki limitów użycia i aktualizacji na żywo (w UE, Belgia).",
         "Paddle sprzedaje doładowania jako odsprzedawca (merchant of record): obsługuje płatności i podatki jako niezależny administrator danych, zgodnie z własną polityką prywatności."
       ]
     },

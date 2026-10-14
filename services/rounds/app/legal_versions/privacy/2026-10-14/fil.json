@@ -56,6 +56,7 @@
         "Google Workspace: ang aming email inbox, na tumatanggap ng mga mensahe sa contact at ng mga email na ipinapadala mo sa amin (Google Ireland Ltd; maaaring i-store ang mail sa labas ng EU, sa ilalim ng EU-US Data Privacy Framework at ng standard contractual clauses).",
         "Sentry: mga error report, na inalis ang mga email (sa EU).",
         "Google Cloud, ang aming hosting provider, na nag-iimbak ng data (sa EU, Belgium).",
+        "Upstash: mga panandaliang counter para sa mga limitasyon sa paggamit at mga live na update (sa EU, Belgium).",
         "Ibinebenta ng Paddle ang mga top-up bilang merchant of record: hinahawakan nito ang mga bayad at buwis bilang isang independiyenteng controller, sa ilalim ng sarili nitong patakaran sa privacy."
       ]
     },
