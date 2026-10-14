@@ -39,6 +39,7 @@ from app.schemas.interviews import (
     PreviewOut,
     TitleIn,
 )
+from app.service_auth import Via
 from app.services import set_cache
 from app.services.access import can_edit, require_company, require_editor
 from app.services.candidate_billing import release_unfinished, settle_removed
@@ -162,7 +163,9 @@ async def get_interview(interview_id: UUID, user: CurrentUser) -> InterviewDetai
 
 
 @router.patch("/{interview_id}/settings", status_code=status.HTTP_204_NO_CONTENT)
-async def update_settings(interview_id: UUID, body: InterviewSettings, user: CurrentUser) -> None:
+async def update_settings(
+    interview_id: UUID, body: InterviewSettings, user: CurrentUser, via: Via
+) -> None:
     interview = await interviews.get(interview_id)
 
     if interview is None:
@@ -173,7 +176,7 @@ async def update_settings(interview_id: UUID, body: InterviewSettings, user: Cur
 
     if body.pass_mark is not None and body.pass_mark != interview.pass_mark:
         await audit.record(
-            interview.company_id, user.uid, AuditAction.PASS_MARK_CHANGED, interview.id
+            interview.company_id, user.uid, AuditAction.PASS_MARK_CHANGED, interview.id, via=via
         )
 
 

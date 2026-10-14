@@ -6,6 +6,7 @@ from prepza_common.auth import CurrentUser
 from app.constants.audit import AuditAction
 from app.constants.invites import EXTRA_TIME_STARTED, NOT_STARTED
 from app.schemas.invites import ExtraTimeIn
+from app.service_auth import Via
 from app.services.access import require_editor
 from app.storage import audit, interviews, invites
 
@@ -15,7 +16,7 @@ router = APIRouter(prefix="/interviews", tags=["candidates"])
 
 @router.put("/{interview_id}/candidates/{invite_id}/extra-time", status_code=204)
 async def set_extra_time(
-    interview_id: UUID, invite_id: UUID, body: ExtraTimeIn, user: CurrentUser
+    interview_id: UUID, invite_id: UUID, body: ExtraTimeIn, user: CurrentUser, via: Via
 ) -> None:
     interview = await interviews.get(interview_id)
     invite = await invites.get(invite_id)
@@ -29,4 +30,6 @@ async def set_extra_time(
         raise HTTPException(status.HTTP_409_CONFLICT, EXTRA_TIME_STARTED)
 
     await invites.set_extra_time(invite.id, body.extra_time)
-    await audit.record(interview.company_id, user.uid, AuditAction.EXTRA_TIME_SET, invite.id)
+    await audit.record(
+        interview.company_id, user.uid, AuditAction.EXTRA_TIME_SET, invite.id, via=via
+    )

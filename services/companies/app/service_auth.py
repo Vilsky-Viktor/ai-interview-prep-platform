@@ -1,3 +1,6 @@
+from typing import Annotated
+
+from fastapi import Depends, Header
 from prepza_common.service_auth import callee_secret, issue_token, service_caller, token_caller
 
 from app.config.settings import settings
@@ -25,3 +28,14 @@ def via_of(token: str | None) -> str | None:
     caller = token_caller(token, settings.service_secret, SERVICE_NAME)
 
     return caller if caller in VIAS else None
+
+
+async def request_via(
+    x_assistant: Annotated[str | None, Header(include_in_schema=False)] = None,
+) -> str | None:
+    return via_of(x_assistant)
+
+
+# What a user's request came through (the assistant or an AI app), for the audit log; None in
+# the app itself.
+Via = Annotated[str | None, Depends(request_via)]

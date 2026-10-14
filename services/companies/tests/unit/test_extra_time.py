@@ -3,6 +3,7 @@ from datetime import UTC, datetime
 
 import pytest
 from prepza_common.auth import current_user
+from prepza_common.service_auth import issue_token
 from prepza_common.user import User
 
 from app.constants.audit import AuditAction
@@ -14,6 +15,7 @@ from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
 from app.storage import companies, interviews, invites
 
+SECRET = "test-secret-that-is-at-least-32-bytes"
 COMPANY_ID = uuid.uuid4()
 INTERVIEW_ID = uuid.uuid4()
 
@@ -79,3 +81,14 @@ def test_a_company_sets_extra_time_before_the_candidate_starts(client, candidate
     invite.status = InviteStatus.IN_PROCESS
 
     assert client.put(url(invite), json={"extra_time": 100}).status_code == 409
+
+
+@pytest.mark.parametrize("via", ["assistant", "mcp"])
+def test_extra_time_given_through_the_assistant_or_an_ai_app_is_audited_as_such(
+    client, candidate, audited, via
+):
+    invite, _ = candidate
+    header = {"X-Assistant": issue_token(via, "companies", SECRET)}
+
+    assert client.put(url(invite), json={"extra_time": 50}, headers=header).status_code == 204
+    assert audited == [(COMPANY_ID, "bob", AuditAction.EXTRA_TIME_SET, invite.id, via)]

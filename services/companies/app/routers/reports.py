@@ -10,6 +10,7 @@ from app.helpers.interviews import interview_title
 from app.helpers.logos import logo_path
 from app.integrations import rounds
 from app.schemas.reports import InterviewReportOut, ReportEmailIn
+from app.service_auth import Via
 from app.services import candidate_results
 from app.services import outbox as outbox_service
 from app.services.access import require_company
@@ -23,7 +24,7 @@ router = APIRouter(prefix="/interviews", tags=["reports"])
     "/{interview_id}/candidates/{invite_id}/report/email", status_code=status.HTTP_202_ACCEPTED
 )
 async def email_report(
-    interview_id: UUID, invite_id: UUID, body: ReportEmailIn, user: CurrentUser
+    interview_id: UUID, invite_id: UUID, body: ReportEmailIn, user: CurrentUser, via: Via
 ) -> None:
     """Emails the candidate's PDF report, made on their page, to someone such as a hiring
     manager. A reply goes to the member who sent it. Counts towards the member's email limits
@@ -51,7 +52,7 @@ async def email_report(
             "pdf": body.pdf,
         }
     )
-    await audit.record(company.id, user.uid, AuditAction.REPORT_EMAILED, invite.id)
+    await audit.record(company.id, user.uid, AuditAction.REPORT_EMAILED, invite.id, via=via)
     await outbox_service.flush_quietly()
 
 
@@ -81,7 +82,7 @@ async def interview_report(interview_id: UUID, user: CurrentUser) -> InterviewRe
 
 @router.post("/{interview_id}/report/email", status_code=status.HTTP_202_ACCEPTED)
 async def email_interview_report(
-    interview_id: UUID, body: ReportEmailIn, user: CurrentUser
+    interview_id: UUID, body: ReportEmailIn, user: CurrentUser, via: Via
 ) -> None:
     """Emails the test's candidates report, made on its candidates tab, like a candidate's."""
     interview = await interviews.get(interview_id)
@@ -107,5 +108,5 @@ async def email_interview_report(
             "pdf": body.pdf,
         }
     )
-    await audit.record(company.id, user.uid, AuditAction.REPORT_EMAILED, interview.id)
+    await audit.record(company.id, user.uid, AuditAction.REPORT_EMAILED, interview.id, via=via)
     await outbox_service.flush_quietly()

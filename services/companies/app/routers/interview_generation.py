@@ -11,6 +11,7 @@ from app.integrations.redis import get_redis
 from app.models.interviews import Interview
 from app.schemas.generations import GenerationOut
 from app.schemas.interviews import ReviewIn
+from app.service_auth import Via
 from app.services.access import require_company, require_editor
 from app.storage import audit, interviews
 
@@ -55,7 +56,9 @@ async def get_generation(interview_id: UUID, user: CurrentUser) -> GenerationOut
 
 
 @router.post("/{interview_id}/generation/review")
-async def review_generation(interview_id: UUID, body: ReviewIn, user: CurrentUser) -> dict:
+async def review_generation(
+    interview_id: UUID, body: ReviewIn, user: CurrentUser, via: Via
+) -> dict:
     """Approved topics resume the generation, so a pause refuses it."""
     await refuse_if_paused(get_redis())
     interview = await get_interview(interview_id)
@@ -64,7 +67,9 @@ async def review_generation(interview_id: UUID, body: ReviewIn, user: CurrentUse
         interview.generation_id, interview.company_id, body.model_dump()
     )
     reviewed = passed_through(response)
-    await audit.record(interview.company_id, user.uid, AuditAction.TOPICS_APPROVED, interview.id)
+    await audit.record(
+        interview.company_id, user.uid, AuditAction.TOPICS_APPROVED, interview.id, via=via
+    )
 
     return reviewed
 

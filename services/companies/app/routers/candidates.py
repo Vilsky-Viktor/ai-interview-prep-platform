@@ -2,7 +2,7 @@ import asyncio
 from typing import Annotated
 from uuid import UUID
 
-from fastapi import APIRouter, Header, HTTPException, Query, status
+from fastapi import APIRouter, HTTPException, Query, status
 from prepza_common.analytics import track
 from prepza_common.auth import CurrentUser
 from prepza_common.paging import PageParams
@@ -27,7 +27,7 @@ from app.integrations import rounds
 from app.integrations.redis import get_redis
 from app.schemas.invites import CandidateFiltersOut, CandidateIn, CandidateNameIn, CandidateOut
 from app.schemas.scorecards import ScorecardOut
-from app.service_auth import via_of
+from app.service_auth import Via
 from app.services import candidate_invites, candidate_results
 from app.services import outbox as outbox_service
 from app.services.access import can_edit, require_company, require_editor
@@ -96,7 +96,9 @@ async def list_candidates(
 
 
 @router.delete("/{interview_id}/candidates/{invite_id}", status_code=status.HTTP_204_NO_CONTENT)
-async def revoke_candidate(interview_id: UUID, invite_id: UUID, user: CurrentUser) -> None:
+async def revoke_candidate(
+    interview_id: UUID, invite_id: UUID, user: CurrentUser, via: Via
+) -> None:
     """Withdraws an invite the candidate hasn't used yet. Once they've started, it erases them for
     good, answers and results included, for example when they ask to have their data deleted.
     A candidate who answered at least one question is charged; other credits still held come
@@ -124,7 +126,7 @@ async def revoke_candidate(interview_id: UUID, invite_id: UUID, user: CurrentUse
     await outbox_service.flush_quietly()
     revoked = invite.status in NOT_STARTED
     action = AuditAction.INVITE_REVOKED if revoked else AuditAction.CANDIDATE_DELETED
-    await audit.record(interview.company_id, user.uid, action, invite.id)
+    await audit.record(interview.company_id, user.uid, action, invite.id, via=via)
 
 
 @router.patch("/{interview_id}/candidates/{invite_id}/name", status_code=status.HTTP_204_NO_CONTENT)
@@ -148,7 +150,7 @@ async def candidate_scorecard(
     interview_id: UUID,
     invite_id: UUID,
     user: CurrentUser,
-    x_assistant: Annotated[str | None, Header(include_in_schema=False)] = None,
+    via: Via,
 ) -> ScorecardOut:
     """A view through the in-app assistant or an AI app (a valid X-Assistant token) is audited
     as via it and isn't the funnel's "results viewed"."""
@@ -170,8 +172,6 @@ async def candidate_scorecard(
     # The funnel's "first results viewed": a finished candidate's results, opened by a member
     # (not through the assistant or an AI app). The audit row is written whatever happens to the
     # funnel event, which never raises.
-    via = via_of(x_assistant)
-
     if invite.status == InviteStatus.FINISHED and via is not None:
         await audit.record(company.id, user.uid, AuditAction.RESULTS_VIEWED, invite.id, via=via)
     elif invite.status == InviteStatus.FINISHED:
