@@ -3,9 +3,12 @@
 // language whose `one` form also covers other numbers (Filipino's 3, Russian's 21, French's 0), a
 // plural that shows the number must show it in `one` too, or 3 reads as "your first one"; `=1`
 // is for exactly one. A plural of just the word ("credit"), with the number outside it, is fine.
+// Every file, en.json too, is also checked for a key written twice in one object (duplicate-keys.mjs).
 // Usage: pnpm check:messages [code...]
 import { readdirSync, readFileSync } from "node:fs"
 import { parse, TYPE } from "@formatjs/icu-messageformat-parser"
+
+import { duplicateKeys } from "./duplicate-keys.mjs"
 
 const load = (code) =>
   JSON.parse(
@@ -60,6 +63,16 @@ const coversMoreThanOne = (code) => {
 const same = (a, b) => a.size === b.size && [...a].every((item) => b.has(item))
 const english = flat(load("en"))
 let problems = 0
+for (const name of readdirSync(new URL("../messages/", import.meta.url))) {
+  const text = readFileSync(
+    new URL(`../messages/${name}`, import.meta.url),
+    "utf8"
+  )
+  for (const key of duplicateKeys(text)) {
+    console.log(`${name.replace(".json", "")}: ${key} is written twice`)
+    problems++
+  }
+}
 const codes = process.argv.slice(2).length
   ? process.argv.slice(2)
   : readdirSync(new URL("../messages/", import.meta.url))
