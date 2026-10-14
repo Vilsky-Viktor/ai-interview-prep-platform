@@ -109,8 +109,8 @@ test("a company's pages on a phone", async ({ signInAs }) => {
 });
 
 // While questions run against the clock there's only the question: no header, footer or
-// "ask agent". The preview before it keeps them; a company's interview, finished, shows the
-// company only, with its button back to the interviews.
+// "ask agent"; nor on a member's preview of its invitation before. A company's interview,
+// finished, shows the company only, with its button back to the interviews.
 test("timed questions on their own, with nothing around them", async ({
   signInAs,
 }) => {
@@ -120,9 +120,11 @@ test("timed questions on their own, with nothing around them", async ({
   const interview = await createInterview(user, company.id);
 
   try {
+    // The preview shows what candidates see: no header or footer from its invitation on.
     await visit(user, `/companies/${company.id}/interviews/${interview}/try`);
-    await expect(user.getByRole("banner")).toBeVisible();
-    await expect(user.getByRole("contentinfo")).toBeVisible();
+    await expect(user.getByRole("button", { name: /accept & start/i })).toBeVisible();
+    await expect(user.getByRole("banner")).toHaveCount(0);
+    await expect(user.getByRole("contentinfo")).toHaveCount(0);
     await user.getByRole("button", { name: /accept & start/i }).click();
     await expect(user).toHaveURL(/\/sessions\//, { timeout: 90_000 });
     await expect(
