@@ -1,4 +1,5 @@
 import asyncio
+import logging
 from datetime import UTC, datetime
 
 import pytest
@@ -7,7 +8,7 @@ from prepza_common.notifications import NotificationKind, Recipient, notificatio
 from app.constants.email import AUTOMATED_HEADERS
 from app.integrations import billing, companies, generation, library
 from app.integrations.resend import ResendBusy
-from app.services import delivery, digest, events, reminders
+from app.services import delivery, digest, events, member_sends, reminders
 from app.storage import notifications, sent_emails
 
 NOW = datetime(2026, 10, 8, 7, 20, tzinfo=UTC)
@@ -160,6 +161,25 @@ def test_a_send_over_resends_limit_is_taken_back_for_the_next_run(world):
         asyncio.run(reminders.send_reminders(NOW))
 
     assert world["released"] == [("ann", "low_credits")]
+
+
+@pytest.mark.parametrize("minute, level", [(30, logging.INFO), (59, logging.ERROR)])
+def test_a_run_out_of_time_leaves_the_rest_to_the_next_unless_it_is_the_hours_last(
+    world, monkeypatch, caplog, minute, level
+):
+    class Clock(datetime):
+        @classmethod
+        def now(cls, tz=None):
+            return NOW.replace(minute=minute)
+
+    monkeypatch.setattr(member_sends, "datetime", Clock)
+    jobs = [("ann", [], lambda new: pytest.fail("sent after the deadline"))]
+
+    with caplog.at_level(logging.INFO):
+        sent = asyncio.run(member_sends.send_once("digest", NOW.date(), 1, jobs, until=0))
+
+    assert sent == 0
+    assert [record.levelno for record in caplog.records] == [level]
 
 
 def test_the_schedules_stop_quietly_when_resend_is_busy(client, world):

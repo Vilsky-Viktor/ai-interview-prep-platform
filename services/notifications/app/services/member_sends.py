@@ -3,9 +3,14 @@ import hashlib
 import logging
 import time
 from collections.abc import Callable
-from datetime import date
+from datetime import UTC, date, datetime
 
-from app.constants.member_emails import RUN_SECONDS, SEND_INTERVAL_SECONDS, MemberEmail
+from app.constants.member_emails import (
+    LAST_RUN_MINUTE,
+    RUN_SECONDS,
+    SEND_INTERVAL_SECONDS,
+    MemberEmail,
+)
 from app.models.email import Email
 from app.services import delivery
 from app.storage import sent_emails
@@ -22,6 +27,18 @@ def deadline() -> float:
     return time.monotonic() + RUN_SECONDS
 
 
+def stopped(kind: MemberEmail) -> None:
+    """The next run goes on, unless this was the hour's last: then some users miss this one."""
+    if datetime.now(UTC).minute >= LAST_RUN_MINUTE:
+        logger.error(
+            "The %s emails didn't all go out within their hour: sending needs speeding up", kind
+        )
+
+        return
+
+    logger.info("Stopped sending %s emails for now; the next run goes on", kind)
+
+
 async def send_once(
     kind: MemberEmail, today: date, every_days: int, jobs: list[Job], until: float
 ) -> int:
@@ -33,7 +50,7 @@ async def send_once(
 
     for user_id, items, build in jobs:
         if time.monotonic() > until:
-            logger.info("Stopped sending %s emails for now; the next run goes on", kind)
+            stopped(kind)
 
             break
 

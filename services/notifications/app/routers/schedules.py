@@ -17,14 +17,14 @@ router = APIRouter(prefix="/internal/schedules", tags=["schedules"], dependencie
 
 @router.post("/digest", status_code=status.HTTP_204_NO_CONTENT)
 async def digest() -> None:
-    """Every 10 minutes for an hour each morning, from Cloud Scheduler: the activity digest. Each
+    """Every minute for an hour each morning, from Cloud Scheduler: the activity digest. Each
     run goes on where the last one stopped; nobody gets it twice in a day."""
     await run("digests", send_digests)
 
 
 @router.post("/reminders", status_code=status.HTTP_204_NO_CONTENT)
 async def reminders() -> None:
-    """Every 10 minutes for an hour each morning, from Cloud Scheduler: reminders, each kind
+    """Every minute for an hour each morning, from Cloud Scheduler: reminders, each kind
     at most once a week to a user. The sent log's old rows go too."""
     await run("reminders", send_reminders)
     await sent_emails.forget(datetime.now(UTC).date() - timedelta(days=SENT_KEEP_DAYS))

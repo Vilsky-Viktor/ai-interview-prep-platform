@@ -33,11 +33,11 @@ locals {
     bank-stages      = { service = "library", path = "/internal/schedules/bank", cron = "45 3 * * *" }
     # Assistant conversations nobody added to for its retention period (90 days).
     assistant-retention = { service = "assistant", path = "/internal/schedules/retention", cron = "0 4 * * *" }
-    # Emails to company members, in the morning (UTC): every 10 minutes for an hour, each run
+    # Emails to company members, in the morning (UTC): every minute for an hour, each run
     # going on where the last stopped (none is sent twice): the activity digest from 7:00,
     # reminders from 8:00.
-    member-digest    = { service = "notifications", path = "/internal/schedules/digest", cron = "*/10 7 * * *" }
-    member-reminders = { service = "notifications", path = "/internal/schedules/reminders", cron = "*/10 8 * * *" }
+    member-digest    = { service = "notifications", path = "/internal/schedules/digest", cron = "* 7 * * *" }
+    member-reminders = { service = "notifications", path = "/internal/schedules/reminders", cron = "* 8 * * *" }
     # ATS candidates still waiting or whose invite stalled, results kept while a connection was
     # broken or the ATS failed, and candidates past their retention.
     ats-recover = { service = "ats", path = "/internal/schedules/recover", cron = "*/10 * * * *" }

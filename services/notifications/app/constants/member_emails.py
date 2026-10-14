@@ -1,6 +1,6 @@
 # The emails to prepza's users (company members) that a schedule sends: the activity digest and
 # reminders. Each is sent once (storage/sent_emails.py); a run sends for at most RUN_SECONDS, and
-# the next run, minutes later, goes on where it stopped.
+# the next run, a minute later, goes on where it stopped.
 from enum import StrEnum
 
 
@@ -20,6 +20,9 @@ MAX_IDS_PER_CALL = 1000
 # long between two emails, so it stays under Resend's per-second limit with room for invites.
 RUN_SECONDS = 40
 SEND_INTERVAL_SECONDS = 0.6
+# The minute of the hour's last run (jobs.tf runs them every minute for an hour): one that still
+# leaves emails unsent leaves them for good, so it logs an error.
+LAST_RUN_MINUTE = 59
 
 # The digest covers the 24 hours before the start of the hour its runs are in, the same window
 # for every run of a day.
