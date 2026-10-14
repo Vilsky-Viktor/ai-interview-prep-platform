@@ -61,7 +61,7 @@ def finished(monkeypatch):
 
         state["comments"].append((candidate_id, member, text))
 
-    async def claim_report(row_id):
+    async def claim_report(row_id, data):
         if row_id in state["claimed"]:
             return False
 

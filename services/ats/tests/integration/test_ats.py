@@ -250,10 +250,13 @@ def test_results_are_claimed_once_until_kept(run):
         await ats.connect(company, AtsProvider.WORKABLE, "acme", "sealed", "ann", "m-1")
         connection = await ats.connection(company, AtsProvider.WORKABLE)
         row = await ats_candidates.add(connection.id, None, uuid.uuid4(), "c-1", "a@x.com")
-        claims = [await ats_results.claim(row.id), await ats_results.claim(row.id)]
+        claims = [
+            await ats_results.claim(row.id, {"name": "sent"}),
+            await ats_results.claim(row.id, {"name": "sent"}),
+        ]
         await ats_results.keep(row.id, {"name": "kept"})
         kept = [item.result for item in await ats_results.unreported() if item.id == row.id]
-        claims.append(await ats_results.claim(row.id))
+        claims.append(await ats_results.claim(row.id, {"name": "sent"}))
         await ats.delete_company(company)
 
         return claims, kept

@@ -1,13 +1,21 @@
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from uuid import UUID
 
-from sqlalchemy import select, update
+from sqlalchemy import func, or_, select, update
 
-from app.constants.ats import REPORT_BATCH, ConnectionStatus
+from app.constants.ats import REPORT_BATCH, STALE_CLAIM_MINUTES, ConnectionStatus
 from app.models.ats import AtsCandidate, AtsConnection
 from app.storage.db import Session
 
-# A finished candidate's results going back to the ATS, once (reported_at).
+# A finished candidate's results going back to the ATS, once (reported_at, set once the ATS took
+# them).
+
+
+def _free():
+    """Not being written now: never claimed, or claimed so long ago the write was cut off."""
+    stale = datetime.now(UTC) - timedelta(minutes=STALE_CLAIM_MINUTES)
+
+    return or_(AtsCandidate.report_claimed_at.is_(None), AtsCandidate.report_claimed_at < stale)
 
 
 async def for_invite(invite_id: UUID) -> tuple[AtsCandidate, AtsConnection] | None:
@@ -24,13 +32,19 @@ async def for_invite(invite_id: UUID) -> tuple[AtsCandidate, AtsConnection] | No
         return tuple(row) if row else None
 
 
-async def claim(row_id: UUID) -> bool:
-    """Marks the results as going back before they're sent: of two events at once, only one
-    gets True and writes to the ATS. keep() frees it again when they can't go now."""
+async def claim(row_id: UUID, data: dict) -> bool:
+    """Marks the results as being written, with them (`data`), before they're sent: of two
+    events at once, only one gets True and writes to the ATS. If the write is cut off, the
+    recovery job finds them once the claim is stale. keep() frees it when they can't go now,
+    mark_reported() once they went."""
     query = (
         update(AtsCandidate)
-        .where(AtsCandidate.id == row_id, AtsCandidate.reported_at.is_(None))
-        .values(reported_at=datetime.now(UTC))
+        .where(AtsCandidate.id == row_id, AtsCandidate.reported_at.is_(None), _free())
+        .values(
+            report_claimed_at=datetime.now(UTC),
+            result=data,
+            kept_at=func.coalesce(AtsCandidate.kept_at, func.now()),
+        )
         .returning(AtsCandidate.id)
     )
 
@@ -44,7 +58,7 @@ async def claim(row_id: UUID) -> bool:
 async def keep(row_id: UUID, data: dict) -> None:
     """Results that can't go back now (a broken connection, a failing ATS): kept, to send, and
     the claim on them freed."""
-    values = {"result": data, "kept_at": datetime.now(UTC), "reported_at": None}
+    values = {"result": data, "kept_at": datetime.now(UTC), "report_claimed_at": None}
     query = update(AtsCandidate).where(AtsCandidate.id == row_id).values(**values)
 
     async with Session() as session:
@@ -53,7 +67,8 @@ async def keep(row_id: UUID, data: dict) -> None:
 
 
 async def unreported() -> list[AtsCandidate]:
-    """Kept results of working connections, longest kept first, as many as one run sends."""
+    """Kept results of working connections (also ones whose write was cut off), longest kept
+    first, as many as one run sends."""
     working = select(AtsConnection.id).where(AtsConnection.status == ConnectionStatus.CONNECTED)
     query = (
         select(AtsCandidate)
@@ -61,6 +76,7 @@ async def unreported() -> list[AtsCandidate]:
             AtsCandidate.connection_id.in_(working),
             AtsCandidate.result.is_not(None),
             AtsCandidate.reported_at.is_(None),
+            _free(),
         )
         .order_by(AtsCandidate.kept_at)
         .limit(REPORT_BATCH)
@@ -75,7 +91,7 @@ async def mark_reported(row_id: UUID) -> None:
     query = (
         update(AtsCandidate)
         .where(AtsCandidate.id == row_id)
-        .values(reported_at=datetime.now(UTC), result=None)
+        .values(reported_at=datetime.now(UTC), result=None, report_claimed_at=None)
     )
 
     async with Session() as session:

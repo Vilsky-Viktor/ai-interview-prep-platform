@@ -210,7 +210,7 @@ async def report(data: dict) -> None:
 
         return
 
-    if not await ats_results.claim(row.id):
+    if not await ats_results.claim(row.id, data):
         return
 
     if connection.status != ConnectionStatus.CONNECTED or await key_of(connection) is None:

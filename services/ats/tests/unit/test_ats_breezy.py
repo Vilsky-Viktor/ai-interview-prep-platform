@@ -235,7 +235,7 @@ def finished(monkeypatch):
     async def comment(company, token, candidate_id, member, text):
         state["notes"].append((company, token, candidate_id, member, text))
 
-    async def claim_report(row_id):
+    async def claim_report(row_id, data):
         return True
 
     async def mark_reported(row_id):

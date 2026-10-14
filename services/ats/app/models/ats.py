@@ -101,6 +101,9 @@ class AtsCandidate(Base):
     # When the results were last kept: the recovery job tries the longest kept first, so results
     # an ATS keeps refusing don't hold up the others.
     kept_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    # When writing the results back started: one left this long (STALE_CLAIM_MINUTES) was cut off
+    # (the server stopped mid-write), and the recovery job writes them again.
+    report_claimed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC), index=True
     )
