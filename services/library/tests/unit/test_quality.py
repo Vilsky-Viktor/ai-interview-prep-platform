@@ -96,6 +96,11 @@ def record(monkeypatch, found, generation_down=False):
     async def fake_save(question_id, flag, kept=False, notice=None):
         calls.append(("save", flag))
 
+    async def fake_change(question_id, previous, flag, notice=None):
+        calls.append(("save", flag))
+
+        return True
+
     async def fake_set(_question_id):
         return SimpleNamespace(id=uuid.uuid4(), owner_type="user", owner_id="u1", title="Kit")
 
@@ -108,6 +113,7 @@ def record(monkeypatch, found, generation_down=False):
     monkeypatch.setattr(quality, "load", fake_load)
     monkeypatch.setattr(generation, "verify_question", fake_verify)
     monkeypatch.setattr(quality, "save_flag", fake_save)
+    monkeypatch.setattr(quality, "change_flag", fake_change)
     monkeypatch.setattr(preparations, "get_for_question", fake_set)
     monkeypatch.setattr(preparations, "topic_of_question", fake_topic)
     monkeypatch.setattr(outbox, "flush_quietly", fake_flush)
@@ -158,12 +164,14 @@ def test_marking_wrong_again_while_the_check_waits_changes_nothing(monkeypatch):
     async def current_flag(_question_id):
         return current["flag"]
 
-    async def save(question_id, flag, kept=False, notice=None):
+    async def change(question_id, previous, flag, notice=None):
         current["flag"] = flag
         calls.append(("save", flag))
 
+        return True
+
     monkeypatch.setattr(quality, "current_flag", current_flag)
-    monkeypatch.setattr(quality, "save_flag", save)
+    monkeypatch.setattr(quality, "change_flag", change)
 
     asyncio.run(mark_wrong(QUESTION_ID))
     asyncio.run(mark_wrong(QUESTION_ID))

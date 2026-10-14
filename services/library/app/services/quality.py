@@ -26,11 +26,14 @@ async def mark_wrong(question_id: uuid.UUID) -> None:
     """The test's owner says the marked answer is wrong: flagged at once, and the verifier
     checks it and fixes or replaces the question, as for a flag from answers. Marking it again
     while that check waits changes nothing."""
-    if await quality.current_flag(question_id) == QualityFlag.WRONG_KEY:
+    current = await quality.current_flag(question_id)
+
+    if current == QualityFlag.WRONG_KEY:
         return
 
-    await quality.save_flag(question_id, QualityFlag.WRONG_KEY)
-    await send_to_verifier(question_id, QualityFlag.WRONG_KEY)
+    # Marked twice at once, only one is sent.
+    if await quality.change_flag(question_id, current, QualityFlag.WRONG_KEY):
+        await send_to_verifier(question_id, QualityFlag.WRONG_KEY)
 
 
 async def review(question_id: uuid.UUID) -> None:
@@ -74,14 +77,21 @@ async def review(question_id: uuid.UUID) -> None:
             topic = await preparations.topic_of_question(question_id)
             notice = question_notification(question_set, topic, NotificationKind.QUESTION_FLAGGED)
 
+        # A flag cleared needs no check. A review of the same question at the same moment (an
+        # answer and its finished topic) reads the same flag: only one of them changes it.
+        if flag is None:
+            await quality.save_flag(question_id, None)
+
+            return
+
         # Saved before the verifier hears of it, so the verifier finds the flag it acts on.
-        await quality.save_flag(question_id, flag, notice=notice)
+        if not await quality.change_flag(question_id, previous, flag, notice):
+            return
 
         if notice is not None:
             await outbox.flush_quietly()
 
-        if flag is not None:
-            await send_to_verifier(question_id, flag)
+        await send_to_verifier(question_id, flag)
     except Exception:
         logger.exception("Couldn't review question %s", question_id)
 

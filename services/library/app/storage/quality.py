@@ -84,6 +84,42 @@ async def save_flag(
         await session.commit()
 
 
+async def change_flag(
+    question_id: uuid.UUID, previous: str | None, flag: str, notice: dict | None = None
+) -> bool:
+    """Flags the question only if its flag is still `previous`, as read before; `notice`, the
+    owner's notification, is saved with it. False when another event changed it meanwhile, so
+    two events at once flag a question, notify and send it to the verifier once."""
+    statement = (
+        insert(QuestionStats)
+        .values(
+            question_id=question_id,
+            answers=0,
+            correct=0,
+            option_picks={},
+            flag=flag,
+            kept=False,
+            flagged_at=func.now(),
+        )
+        .on_conflict_do_update(
+            index_elements=[QuestionStats.question_id],
+            set_={"flag": flag, "kept": False, "flagged_at": func.now()},
+            where=QuestionStats.flag.is_not_distinct_from(previous),
+        )
+        .returning(QuestionStats.question_id)
+    )
+
+    async with Session() as session:
+        changed = (await session.execute(statement)).first() is not None
+
+        if changed and notice is not None:
+            outbox.add(session, OutboxEvent, NOTIFICATION_REQUESTED, notice)
+
+        await session.commit()
+
+        return changed
+
+
 async def current_flag(question_id: uuid.UUID) -> str | None:
     async with Session() as session:
         return await session.scalar(

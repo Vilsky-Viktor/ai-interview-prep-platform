@@ -46,8 +46,10 @@ def run_review(monkeypatch, previous_flag, question_set):
     async def fake_verify(question_id, flag):
         pass
 
-    async def fake_save(question_id, flag, kept=False, notice=None):
+    async def fake_change(question_id, previous, flag, notice=None):
         saved.append(notice)
+
+        return True
 
     async def fake_set(_question_id):
         return question_set
@@ -60,7 +62,7 @@ def run_review(monkeypatch, previous_flag, question_set):
 
     monkeypatch.setattr(quality, "load", fake_load)
     monkeypatch.setattr(generation, "verify_question", fake_verify)
-    monkeypatch.setattr(quality, "save_flag", fake_save)
+    monkeypatch.setattr(quality, "change_flag", fake_change)
     monkeypatch.setattr(preparations, "get_for_question", fake_set)
     monkeypatch.setattr(preparations, "topic_of_question", fake_topic)
     monkeypatch.setattr(outbox, "flush_quietly", fake_flush)

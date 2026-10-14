@@ -68,6 +68,7 @@ Rounds publish every answer. Library keeps per-question stats (answers, correct,
 - An answer re-checks a question only once the question has been shown 30 times, as answer-based flags need that many.
 - Votes, reports and finished topics re-check it every time.
 - An answer event missing a field is logged and dropped rather than retried forever.
+- A question is flagged once, however many reviews run at the same moment (an answer and its finished topic): the flag is saved only if it's still what the review read, so one notification goes out and the verifier gets one request. A member marking the answer wrong twice at once is sent once too.
 
 | Flag | When | What the verifier does |
 |---|---|---|
