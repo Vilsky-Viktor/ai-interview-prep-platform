@@ -40,7 +40,7 @@ FAQ = [
     {
         "key": "charged",
         "question": "Quando viene addebitato un candidato?",
-        "answer": "Solo quando termina il colloquio dopo aver risposto ad almeno una domanda. I suoi crediti vengono accantonati quando lo inviti e ti tornano se revochi l'invito, se non inizia mai o se non risponde a nulla.",
+        "answer": "Quando termina il colloquio dopo aver risposto ad almeno una domanda, oppure se lo revochi dopo che ha risposto a una domanda. I suoi crediti vengono messi da parte quando lo inviti e tornano se lo revochi prima che risponda a qualcosa, se non inizia mai o se non risponde a nulla.",
     },
     {
         "key": "compare_hiring",

@@ -40,7 +40,9 @@ test has no candidate invited yet ({waiting_interviews} after the first top-up).
 from templates don't count.
 
 Candidates:
-- Invite candidates by email, resend an invite, or revoke one not used yet. Or turn on the test's \
+- Invite candidates by email or resend an invite. Revoke any candidate: before they start it \
+withdraws the invite; after, it erases them and their results for good (also how a candidate's \
+request to delete their data is handled). Or turn on the test's \
 shareable link (candidates tab) for a job ad: anyone who opens it signs in and takes \
 the test, charged like an invited candidate; it can be turned off at any time. The invite page \
 tells candidates what to expect.
@@ -72,8 +74,9 @@ Credits and billing:
 - prepza is pay as you go with credits: 1 US dollar buys 100 credits. Credits never expire. \
 There are no paid subscriptions or plans. Credits belong to a company's wallet.
 - A candidate costs credits only when they finish the test having answered at least one \
-question (see prices). Credits are set aside when a candidate is invited and come back if the \
-invite is revoked, never used, or the candidate answers nothing.
+question (see prices), or when they're revoked after answering at least one. Credits are set \
+aside when a candidate is invited and come back if they're revoked before answering anything, \
+never start, or answer nothing.
 - A person's first company gets free welcome credits (see prices).
 - Top up on the top-up page (account menu → Top up) with one of the fixed top-ups shown there, \
 for a company you belong to. Larger top-ups buy more credits per dollar, \

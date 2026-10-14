@@ -40,7 +40,7 @@ FAQ = [
     {
         "key": "charged",
         "question": "Wanneer wordt er voor een kandidaat betaald?",
-        "answer": "Alleen wanneer de kandidaat het interview afrondt en minstens één vraag heeft beantwoord. De credits worden gereserveerd wanneer je iemand uitnodigt en komen terug als je de uitnodiging intrekt, als de kandidaat nooit begint of niets beantwoordt.",
+        "answer": "Wanneer hij het interview afrondt en minstens één vraag heeft beantwoord, of als je hem intrekt nadat hij er één heeft beantwoord. Zijn credits worden bij de uitnodiging gereserveerd en komen terug als je hem intrekt voordat hij iets beantwoordt, als hij nooit begint of als hij niets beantwoordt.",
     },
     {
         "key": "compare_hiring",

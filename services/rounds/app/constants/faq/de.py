@@ -40,7 +40,7 @@ FAQ = [
     {
         "key": "charged",
         "question": "Wann wird ein Kandidat berechnet?",
-        "answer": "Nur wenn er das Interview beendet und dabei mindestens eine Frage beantwortet hat. Seine Credits werden bei der Einladung zurückgelegt und kommen zurück, wenn du die Einladung widerrufst, wenn er nie anfängt oder wenn er nichts beantwortet.",
+        "answer": "Wenn er das Interview beendet und dabei mindestens eine Frage beantwortet hat, oder wenn du ihn widerrufst, nachdem er eine beantwortet hat. Seine Credits werden bei der Einladung zurückgelegt und kommen zurück, wenn du ihn widerrufst, bevor er etwas beantwortet, wenn er nie anfängt oder wenn er nichts beantwortet.",
     },
     {
         "key": "compare_hiring",

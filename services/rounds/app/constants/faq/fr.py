@@ -40,7 +40,7 @@ FAQ = [
     {
         "key": "charged",
         "question": "Quand un candidat est-il facturé ?",
-        "answer": "Seulement quand il termine l'entretien après avoir répondu à au moins une question. Ses crédits sont réservés quand vous l'invitez et vous reviennent si vous révoquez l'invitation, s'il ne commence jamais ou s'il ne répond à rien.",
+        "answer": "Lorsqu'il termine l'entretien en ayant répondu à au moins une question, ou si vous le révoquez après qu'il a répondu à une question. Ses crédits sont mis de côté lorsque vous l'invitez et reviennent si vous le révoquez avant qu'il ait répondu à quoi que ce soit, s'il ne commence jamais ou s'il ne répond à rien.",
     },
     {
         "key": "compare_hiring",

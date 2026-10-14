@@ -40,7 +40,7 @@ FAQ = [
     {
         "key": "charged",
         "question": "Kiedy płacę za kandydata?",
-        "answer": "Tylko wtedy, gdy kandydat ukończy rozmowę, odpowiadając na co najmniej jedno pytanie. Kredyty są rezerwowane, gdy go zapraszasz, i wracają, jeśli cofniesz zaproszenie, jeśli kandydat nigdy nie zacznie albo na nic nie odpowie.",
+        "answer": "Gdy zakończy rozmowę, odpowiadając na co najmniej jedno pytanie, albo jeśli wycofasz go po tym, jak odpowiedział na jedno. Jego kredyty są rezerwowane przy zaproszeniu i wracają, jeśli wycofasz go, zanim na cokolwiek odpowie, jeśli nigdy nie zacznie albo jeśli na nic nie odpowie.",
     },
     {
         "key": "compare_hiring",

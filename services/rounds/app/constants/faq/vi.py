@@ -40,7 +40,7 @@ FAQ = [
     {
         "key": "charged",
         "question": "Khi nào tôi bị tính phí cho một ứng viên?",
-        "answer": "Chỉ khi họ hoàn thành buổi phỏng vấn và đã trả lời ít nhất một câu hỏi. Credit dành cho họ được tạm giữ khi bạn mời và được hoàn lại nếu bạn thu hồi lời mời, nếu họ không bao giờ bắt đầu, hoặc nếu họ không trả lời câu nào.",
+        "answer": "Khi ứng viên hoàn thành buổi phỏng vấn và đã trả lời ít nhất một câu hỏi, hoặc nếu bạn thu hồi ứng viên sau khi họ đã trả lời một câu. Tín dụng của họ được giữ lại khi bạn mời họ, và được hoàn lại nếu bạn thu hồi họ trước khi họ trả lời bất cứ câu nào, nếu họ không bao giờ bắt đầu, hoặc nếu họ không trả lời câu nào.",
     },
     {
         "key": "compare_hiring",

@@ -39,7 +39,7 @@ FAQ = [
     {
         "key": "charged",
         "question": "When is a candidate charged?",
-        "answer": "Only when they finish the interview having answered at least one question. Their credits are set aside when you invite them and come back if you revoke the invite, if they never start, or if they don't answer anything.",
+        "answer": "When they finish the interview having answered at least one question, or if you revoke them after they've answered one. Their credits are set aside when you invite them, and come back if you revoke them before they answer anything, if they never start, or if they don't answer anything.",
     },
     {
         "key": "compare_hiring",

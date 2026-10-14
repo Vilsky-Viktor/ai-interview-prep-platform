@@ -40,7 +40,7 @@ FAQ = [
     {
         "key": "charged",
         "question": "Kailan sinisingil ang isang aplikante?",
-        "answer": "Kapag natapos lang nila ang interview nang nakasagot ng kahit isang tanong. Itinatabi ang kanilang credits kapag inimbitahan mo sila, at ibinabalik kung babawiin mo ang imbitasyon, kung hindi sila kailanman nagsimula, o kung wala silang sinagot.",
+        "answer": "Kapag natapos niya ang interview nang may nasagot na kahit isang tanong, o kung bawiin mo siya pagkatapos niyang makasagot ng isa. Itinatabi ang credits niya kapag inimbitahan mo siya, at ibinabalik kung bawiin mo siya bago siya makasagot ng anuman, kung hindi siya kailanman magsimula, o kung wala siyang masagot.",
     },
     {
         "key": "compare_hiring",
