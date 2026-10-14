@@ -245,7 +245,27 @@
     "deletePostTitle": "Xóa bài đăng này?",
     "deletePostText": "Bài đăng sẽ bị gỡ khỏi trang tin tức ở mọi ngôn ngữ.",
     "postSaveFailed": "Không lưu được bài đăng. Vui lòng thử lại.",
-    "postDeleteFailed": "Không xóa được bài đăng. Vui lòng thử lại."
+    "postDeleteFailed": "Không xóa được bài đăng. Vui lòng thử lại.",
+    "companies": "Công ty",
+    "companySearch": "Tên công ty",
+    "companiesNotFound": "Không tìm thấy công ty nào.",
+    "suspended": "Đã tạm ngưng",
+    "companyDetails": "{members, plural, other {# thành viên}} · từ {date}",
+    "suspend": "Tạm ngưng",
+    "unsuspend": "Bỏ tạm ngưng",
+    "unsuspended": "Đã bỏ tạm ngưng.",
+    "suspendTitle": "Tạm ngưng “{name}”?",
+    "suspendText": "Thành viên vẫn xem được nhưng không thay đổi được gì, công ty không mời ai, và ứng viên chưa bắt đầu sẽ thấy các buổi phỏng vấn không khả dụng. Bạn có thể bỏ tạm ngưng bất cứ lúc nào.",
+    "suspendedDone": "Đã tạm ngưng công ty.",
+    "renameCompany": "Đổi tên {name}",
+    "deleteCompany": "Xóa {name}",
+    "deleteCompanyTitle": "Xóa “{name}”?",
+    "deleteCompanyText": "Các buổi phỏng vấn, ứng viên, kết quả và tín dụng sẽ mất vĩnh viễn. Không thể hoàn tác.",
+    "deleteCompanyConfirm": "Xóa công ty",
+    "companyDeleted": "Đã xóa công ty.",
+    "renameCompanyTitle": "Đổi tên công ty",
+    "companyName": "Tên công ty",
+    "companyRenamed": "Đã đổi tên công ty."
   },
   "templates": {
     "title": "Mẫu",
@@ -468,7 +488,8 @@
     "logoFailed": "Không thể lưu logo.",
     "pickTitle": "Chọn công ty",
     "pickText": "Bài kiểm tra được sao chép miễn phí vào công ty bạn chọn, sẵn sàng gửi cho ứng viên.",
-    "removeCredits": "{credits, plural, other {# credit}} của công ty{candidates, plural, =0 {} other { (khoảng # ứng viên)}} sẽ mất và không được hoàn tiền."
+    "removeCredits": "{credits, plural, other {# credit}} của công ty{candidates, plural, =0 {} other { (khoảng # ứng viên)}} sẽ mất và không được hoàn tiền.",
+    "suspended": "Công ty này đã bị tạm ngưng nên hiện không thể thay đổi. Liên hệ hello@prepza.ai để biết thêm."
   },
   "candidates": {
     "scorecard": "Bảng điểm",
@@ -617,7 +638,8 @@
     "start": "Chấp nhận và bắt đầu",
     "mismatch": "Email không khớp. Đăng nhập bằng email được mời để bắt đầu.",
     "title": "Lời mời phỏng vấn",
-    "theCompany": "công ty"
+    "theCompany": "công ty",
+    "unverified": "prepza chưa xác minh công ty này."
   },
   "members": {
     "joined": "Đã tham gia",

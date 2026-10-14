@@ -245,7 +245,27 @@
     "deletePostTitle": "Delete this post?",
     "deletePostText": "It's removed from the news page in every language.",
     "postSaveFailed": "Couldn't save the post. Please try again.",
-    "postDeleteFailed": "Couldn't delete the post. Please try again."
+    "postDeleteFailed": "Couldn't delete the post. Please try again.",
+    "companies": "Companies",
+    "companySearch": "Company name",
+    "companiesNotFound": "No companies found.",
+    "suspended": "Suspended",
+    "companyDetails": "{members, plural, one {# member} other {# members}} · since {date}",
+    "suspend": "Suspend",
+    "unsuspend": "Lift suspension",
+    "unsuspended": "The suspension was lifted.",
+    "suspendTitle": "Suspend “{name}”?",
+    "suspendText": "Its members can still see it but can't change anything, it invites nobody, and candidates who haven't started find its interviews unavailable. You can lift it anytime.",
+    "suspendedDone": "The company was suspended.",
+    "renameCompany": "Rename {name}",
+    "deleteCompany": "Delete {name}",
+    "deleteCompanyTitle": "Delete “{name}”?",
+    "deleteCompanyText": "Its interviews, candidates, results and credits go, for good. This can't be undone.",
+    "deleteCompanyConfirm": "Delete company",
+    "companyDeleted": "The company was deleted.",
+    "renameCompanyTitle": "Rename the company",
+    "companyName": "Company name",
+    "companyRenamed": "The company was renamed."
   },
   "templates": {
     "title": "Templates",
@@ -468,7 +488,8 @@
     "logoFailed": "Couldn't save the logo.",
     "pickTitle": "Choose a company",
     "pickText": "The test is copied into the company you choose, free and ready to send to candidates.",
-    "removeCredits": "Its {credits, plural, one {# credit} other {# credits}}{candidates, plural, =0 {} one { (about # candidate)} other { (about # candidates)}} will be lost and aren't refunded."
+    "removeCredits": "Its {credits, plural, one {# credit} other {# credits}}{candidates, plural, =0 {} one { (about # candidate)} other { (about # candidates)}} will be lost and aren't refunded.",
+    "suspended": "This company is suspended: it can't be changed for now. Contact hello@prepza.ai to find out more."
   },
   "candidates": {
     "scorecard": "Scorecard",
@@ -617,7 +638,8 @@
     "start": "Accept & Start",
     "mismatch": "The email does not match. Sign in with the invitation email to start.",
     "title": "Interview invite",
-    "theCompany": "the company"
+    "theCompany": "the company",
+    "unverified": "prepza hasn't verified this company."
   },
   "members": {
     "joined": "Joined",

@@ -1,6 +1,8 @@
 # Messages the services show users, in Thai, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This company is suspended. Contact hello@prepza.ai to find out more.": "บริษัทนี้ถูกระงับ ติดต่อ hello@prepza.ai เพื่อดูรายละเอียดเพิ่มเติม",
+    "This interview isn't available.": "การสัมภาษณ์นี้ไม่พร้อมใช้งาน",
     "Only an admin who has joined can become the owner.": "เฉพาะผู้ดูแลที่เข้าร่วมแล้วเท่านั้นที่เป็นเจ้าของได้",
     "They already own 3 companies, as many as one person may.": "บุคคลนี้เป็นเจ้าของบริษัท 3 แห่งแล้ว ซึ่งเป็นจำนวนสูงสุดต่อคน",
     "Make another member the owner of each company you share, or delete it, before deleting your account.": "ก่อนลบบัญชี ให้ตั้งสมาชิกคนอื่นเป็นเจ้าของบริษัทที่คุณใช้ร่วมกับผู้อื่นทุกแห่ง หรือลบบริษัทนั้น",

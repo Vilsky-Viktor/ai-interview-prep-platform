@@ -245,7 +245,27 @@
     "deletePostTitle": "¿Eliminar esta publicación?",
     "deletePostText": "Desaparece de la página de novedades en todos los idiomas.",
     "postSaveFailed": "No se pudo guardar la publicación. Inténtalo de nuevo.",
-    "postDeleteFailed": "No se pudo eliminar la publicación. Inténtalo de nuevo."
+    "postDeleteFailed": "No se pudo eliminar la publicación. Inténtalo de nuevo.",
+    "companies": "Empresas",
+    "companySearch": "Nombre de la empresa",
+    "companiesNotFound": "No se encontraron empresas.",
+    "suspended": "Suspendida",
+    "companyDetails": "{members, plural, one {# miembro} other {# miembros}} · desde {date}",
+    "suspend": "Suspender",
+    "unsuspend": "Levantar la suspensión",
+    "unsuspended": "Se levantó la suspensión.",
+    "suspendTitle": "¿Suspender «{name}»?",
+    "suspendText": "Sus miembros pueden verla pero no cambiar nada, no invita a nadie, y los candidatos que no han empezado encuentran sus entrevistas no disponibles. Puedes levantarla cuando quieras.",
+    "suspendedDone": "La empresa fue suspendida.",
+    "renameCompany": "Cambiar el nombre de {name}",
+    "deleteCompany": "Eliminar {name}",
+    "deleteCompanyTitle": "¿Eliminar «{name}»?",
+    "deleteCompanyText": "Sus entrevistas, candidatos, resultados y créditos se eliminan para siempre. No se puede deshacer.",
+    "deleteCompanyConfirm": "Eliminar empresa",
+    "companyDeleted": "La empresa fue eliminada.",
+    "renameCompanyTitle": "Cambiar el nombre de la empresa",
+    "companyName": "Nombre de la empresa",
+    "companyRenamed": "Se cambió el nombre de la empresa."
   },
   "templates": {
     "title": "Plantillas",
@@ -468,7 +488,8 @@
     "logoFailed": "No se pudo guardar el logo.",
     "pickTitle": "Elige una empresa",
     "pickText": "La prueba se copia en la empresa que elijas, gratis y lista para enviar a candidatos.",
-    "removeCredits": "Sus {credits, plural, one {# crédito} other {# créditos}}{candidates, plural, =0 {} one { (unos # candidato)} other { (unos # candidatos)}} se perderán y no se reembolsan."
+    "removeCredits": "Sus {credits, plural, one {# crédito} other {# créditos}}{candidates, plural, =0 {} one { (unos # candidato)} other { (unos # candidatos)}} se perderán y no se reembolsan.",
+    "suspended": "Esta empresa está suspendida: por ahora no se puede cambiar. Escribe a hello@prepza.ai para saber más."
   },
   "candidates": {
     "scorecard": "Ficha de evaluación",
@@ -617,7 +638,8 @@
     "start": "Aceptar y empezar",
     "mismatch": "El correo no coincide. Inicia sesión con el correo de la invitación para empezar.",
     "title": "Invitación a entrevista",
-    "theCompany": "la empresa"
+    "theCompany": "la empresa",
+    "unverified": "prepza no ha verificado esta empresa."
   },
   "members": {
     "joined": "Se unió",

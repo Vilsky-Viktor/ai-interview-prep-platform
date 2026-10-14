@@ -141,6 +141,8 @@ TEXTS = {
         "footer": "このメールは、prepza で {company} の所有者または管理者であるため {email} に送信されました。会社の請求に関する内容のため、メール設定にかかわらず送信されます。",
     },
     "footer": "このメールは、prepza で誰かがこのアドレスを招待したため {email} に送信されました。心当たりがない場合は無視してください。",
+    # An invite from a company prepza hasn't verified, at the end of the footer.
+    "unverified": "prepza は {company} を確認していません。",
     "paste_link": "または、このリンクをブラウザに貼り付けてください",
     # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
     "unsubscribe": "配信停止",

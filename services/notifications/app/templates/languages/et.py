@@ -192,6 +192,8 @@ TEXTS = {
     },
     "footer": "See e-kiri saadeti aadressile {email}, sest keegi kutsus selle aadressi "
     "prepzasse. Kui sa seda ei oodanud, võid selle tähelepanuta jätta.",
+    # An invite from a company prepza hasn't verified, at the end of the footer.
+    "unverified": "prepza ei ole ettevõtet {company} kinnitanud.",
     "paste_link": "Või kleebi see link oma brauserisse",
     # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
     "unsubscribe": "Loobu tellimusest",

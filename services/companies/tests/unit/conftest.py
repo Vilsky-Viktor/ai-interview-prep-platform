@@ -2,7 +2,7 @@ import pytest
 from prepza_common import memory_cache
 
 from app.integrations import billing
-from app.storage import accounts, audit, candidates, invites
+from app.storage import accounts, audit, candidates, companies, invites
 from tests.unit import fake_candidates
 
 
@@ -24,6 +24,16 @@ def no_billing_calls(monkeypatch):
 
     monkeypatch.setattr(accounts, "candidate_invites", no_invites)
     monkeypatch.setattr(invites, "unfinished", none_unfinished)
+
+
+@pytest.fixture(autouse=True)
+def no_company_by_default(monkeypatch):
+    """Looking a company up finds none unless a test stores one (unit tests have no database)."""
+
+    async def none(company_id):
+        return None
+
+    monkeypatch.setattr(companies, "get", none)
 
 
 @pytest.fixture(autouse=True)

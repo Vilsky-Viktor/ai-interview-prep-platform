@@ -4732,6 +4732,237 @@
     }
    }
   },
+  "/superadmin/companies": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "List Companies",
+    "description": "Companies by name, newest first, at most COMPANIES_SHOWN.",
+    "operationId": "list_companies_superadmin_companies_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "q",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "maxLength": 200,
+       "default": "",
+       "title": "Q"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/SuperadminCompanyOut"
+         },
+         "title": "Response List Companies Superadmin Companies Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/companies/{company_id}/suspend": {
+   "post": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Suspend Company",
+    "description": "Nothing new happens for the company: its members can read but not change it, it invites\nnobody, and candidates who haven't started find its interviews unavailable.",
+    "operationId": "suspend_company_superadmin_companies__company_id__suspend_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/companies/{company_id}/unsuspend": {
+   "post": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Unsuspend Company",
+    "operationId": "unsuspend_company_superadmin_companies__company_id__unsuspend_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/companies/{company_id}/name": {
+   "put": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Rename Company",
+    "description": "Frees a name an impersonator took; a name taken by another company is a 409.",
+    "operationId": "rename_company_superadmin_companies__company_id__name_put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CompanyNameIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/companies/{company_id}": {
+   "delete": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Delete Company",
+    "description": "As its owner deleting it: everything goes, its interviews, candidates and credits.",
+    "operationId": "delete_company_superadmin_companies__company_id__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
   "/superadmin/verifications": {
    "get": {
     "tags": [
@@ -5768,6 +5999,21 @@
     ],
     "title": "CompanyMembersOut"
    },
+   "CompanyNameIn": {
+    "properties": {
+     "name": {
+      "type": "string",
+      "maxLength": 45,
+      "minLength": 1,
+      "title": "Name"
+     }
+    },
+    "type": "object",
+    "required": [
+     "name"
+    ],
+    "title": "CompanyNameIn"
+   },
    "CompanyOut": {
     "properties": {
      "id": {
@@ -5846,6 +6092,11 @@
        }
       ],
       "title": "Decline Reason"
+     },
+     "suspended": {
+      "type": "boolean",
+      "title": "Suspended",
+      "default": false
      },
      "created_at": {
       "type": "string",
@@ -7912,6 +8163,57 @@
      "counts"
     ],
     "title": "StatsOut"
+   },
+   "SuperadminCompanyOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "name": {
+      "type": "string",
+      "title": "Name"
+     },
+     "verification_status": {
+      "$ref": "#/components/schemas/VerificationStatus"
+     },
+     "verified_domain": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Verified Domain"
+     },
+     "members": {
+      "type": "integer",
+      "title": "Members"
+     },
+     "suspended": {
+      "type": "boolean",
+      "title": "Suspended"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "name",
+     "verification_status",
+     "verified_domain",
+     "members",
+     "suspended",
+     "created_at"
+    ],
+    "title": "SuperadminCompanyOut"
    },
    "TitleIn": {
     "properties": {

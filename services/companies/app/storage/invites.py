@@ -30,6 +30,7 @@ async def upsert(
     logo_path: str | None = None,
     hold_key: str | None = None,
     name: str | None = None,
+    verified: bool = False,
 ) -> tuple[CandidateInvite, bool]:
     """Creates the invite (with `hold_key`, its credits' key, or a new one), or returns the existing one so it
     can be sent again, and saves the email's event with it. True when it revived an expired
@@ -87,6 +88,8 @@ async def upsert(
                 "language": language,
                 # The company's logo for the top of the email, when it has one.
                 "logo_path": logo_path,
+                # Whether a superadmin verified the company: the email notes it when not.
+                "verified": verified,
             },
         )
         await session.commit()

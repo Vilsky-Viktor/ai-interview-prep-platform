@@ -245,7 +245,27 @@
     "deletePostTitle": "حذف هذا المنشور؟",
     "deletePostText": "سيُزال من صفحة الأخبار بكل اللغات.",
     "postSaveFailed": "تعذّر حفظ المنشور. حاول مرة أخرى.",
-    "postDeleteFailed": "تعذّر حذف المنشور. حاول مرة أخرى."
+    "postDeleteFailed": "تعذّر حذف المنشور. حاول مرة أخرى.",
+    "companies": "الشركات",
+    "companySearch": "اسم الشركة",
+    "companiesNotFound": "لم يُعثر على شركات.",
+    "suspended": "معلّقة",
+    "companyDetails": "{members, plural, zero {لا أعضاء} one {عضو واحد} two {عضوان} few {# أعضاء} many {# عضوًا} other {# عضو}} · منذ {date}",
+    "suspend": "تعليق",
+    "unsuspend": "رفع التعليق",
+    "unsuspended": "رُفع التعليق.",
+    "suspendTitle": "تعليق «{name}»؟",
+    "suspendText": "يمكن لأعضائها رؤيتها لكن لا يمكنهم تغيير أي شيء، ولا تدعو أحدًا، والمرشحون الذين لم يبدؤوا يجدون مقابلاتها غير متاحة. يمكنك رفع التعليق في أي وقت.",
+    "suspendedDone": "عُلّقت الشركة.",
+    "renameCompany": "إعادة تسمية {name}",
+    "deleteCompany": "حذف {name}",
+    "deleteCompanyTitle": "حذف «{name}»؟",
+    "deleteCompanyText": "تُحذف مقابلاتها ومرشحوها ونتائجها وأرصدتها نهائيًا. لا يمكن التراجع عن ذلك.",
+    "deleteCompanyConfirm": "حذف الشركة",
+    "companyDeleted": "حُذفت الشركة.",
+    "renameCompanyTitle": "إعادة تسمية الشركة",
+    "companyName": "اسم الشركة",
+    "companyRenamed": "أُعيدت تسمية الشركة."
   },
   "templates": {
     "title": "القوالب",
@@ -468,7 +488,8 @@
     "logoFailed": "تعذّر حفظ الشعار.",
     "pickTitle": "اختر شركة",
     "pickText": "يُنسخ الاختبار إلى الشركة التي تختارها مجانًا، وهو جاهز للإرسال إلى المرشحين.",
-    "removeCredits": "ستضيع {credits, plural, zero {# رصيد} one {وحدة رصيد واحدة} two {وحدتا رصيد} few {# وحدات رصيد} many {# وحدة رصيد} other {# وحدة رصيد}}{candidates, plural, =0 {} one { (نحو مرشح واحد)} two { (نحو مرشحَين)} few { (نحو # مرشحين)} many { (نحو # مرشحًا)} other { (نحو # مرشح)}} الخاصة بها ولا تُسترد."
+    "removeCredits": "ستضيع {credits, plural, zero {# رصيد} one {وحدة رصيد واحدة} two {وحدتا رصيد} few {# وحدات رصيد} many {# وحدة رصيد} other {# وحدة رصيد}}{candidates, plural, =0 {} one { (نحو مرشح واحد)} two { (نحو مرشحَين)} few { (نحو # مرشحين)} many { (نحو # مرشحًا)} other { (نحو # مرشح)}} الخاصة بها ولا تُسترد.",
+    "suspended": "هذه الشركة معلّقة: لا يمكن تغييرها حاليًا. تواصل مع hello@prepza.ai لمعرفة المزيد."
   },
   "candidates": {
     "scorecard": "بطاقة التقييم",
@@ -617,7 +638,8 @@
     "start": "قبول وبدء",
     "mismatch": "البريد الإلكتروني غير مطابق. سجّل الدخول ببريد الدعوة للبدء.",
     "title": "دعوة إلى مقابلة",
-    "theCompany": "الشركة"
+    "theCompany": "الشركة",
+    "unverified": "لم يتحقق prepza من هذه الشركة."
   },
   "members": {
     "joined": "انضم",

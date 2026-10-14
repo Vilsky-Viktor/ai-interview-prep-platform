@@ -1,10 +1,11 @@
+from fastapi import HTTPException, status
 from prepza_common.analytics import track
 from prepza_common.names import clean_name
 from prepza_common.rate_limit import hit_emails
 from prepza_common.user import User
 
 from app.config.settings import settings
-from app.constants.invites import NOT_STARTED, InviteStatus
+from app.constants.invites import COMPANY_SUSPENDED, NOT_STARTED, InviteStatus
 from app.helpers.candidates import new_hold_key
 from app.helpers.interviews import interview_title
 from app.helpers.logos import logo_path
@@ -22,7 +23,11 @@ async def invite(
 ) -> CandidateInvite:
     """Invites one candidate, or sends their invite again, with the invite email queued; `name`
     (untrusted: cleaned here) fills their name if it isn't known yet. Raises 429 over the
-    member's email limits and billing's 402 when the company is out of credits."""
+    member's email limits and billing's 402 when the company is out of credits, and 409 while a
+    superadmin has the company suspended (an ATS keeps its candidates waiting then)."""
+    if company.suspended_at is not None:
+        raise HTTPException(status.HTTP_409_CONFLICT, COMPANY_SUSPENDED)
+
     email = email.lower()
 
     current, stored = await invites.held(interview.id, email)
@@ -54,6 +59,7 @@ async def invite(
             logo_path(company),
             hold_key=key,
             name=clean_name(name),
+            verified=company.verified_domain is not None,
         )
     except Exception:
         await give_back(interview, company, email, current, key)

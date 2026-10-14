@@ -199,6 +199,8 @@ TEXTS = {
     },
     "footer": "Это письмо отправлено на {email}, потому что этот адрес пригласили на prepza. "
     "Если вы его не ждали, просто проигнорируйте его.",
+    # An invite from a company prepza hasn't verified, at the end of the footer.
+    "unverified": "prepza не проверяла компанию {company}.",
     "paste_link": "Или вставьте эту ссылку в браузер",
     # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
     "unsubscribe": "Отписаться",

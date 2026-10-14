@@ -60,6 +60,7 @@ export default async function CompanyTemplatesPage({
   return (
     <main className="mx-auto max-w-5xl space-y-8 px-6 py-12">
       <CompanyHeader
+        suspended={company.suspended}
         companyId={companyId}
         name={company.name}
         logoUrl={company.logo_url ?? null}

@@ -245,7 +245,27 @@
     "deletePostTitle": "ลบโพสต์นี้ไหม",
     "deletePostText": "โพสต์จะถูกนำออกจากหน้าข่าวสารในทุกภาษา",
     "postSaveFailed": "บันทึกโพสต์ไม่สำเร็จ โปรดลองอีกครั้ง",
-    "postDeleteFailed": "ลบโพสต์ไม่สำเร็จ โปรดลองอีกครั้ง"
+    "postDeleteFailed": "ลบโพสต์ไม่สำเร็จ โปรดลองอีกครั้ง",
+    "companies": "บริษัท",
+    "companySearch": "ชื่อบริษัท",
+    "companiesNotFound": "ไม่พบบริษัท",
+    "suspended": "ถูกระงับ",
+    "companyDetails": "{members, plural, other {สมาชิก # คน}} · ตั้งแต่ {date}",
+    "suspend": "ระงับ",
+    "unsuspend": "ยกเลิกการระงับ",
+    "unsuspended": "ยกเลิกการระงับแล้ว",
+    "suspendTitle": "ระงับ “{name}” ไหม?",
+    "suspendText": "สมาชิกยังดูได้แต่เปลี่ยนแปลงอะไรไม่ได้ บริษัทจะไม่เชิญใคร และผู้สมัครที่ยังไม่เริ่มจะพบว่าการสัมภาษณ์ไม่พร้อมใช้งาน คุณยกเลิกการระงับได้ทุกเมื่อ",
+    "suspendedDone": "ระงับบริษัทแล้ว",
+    "renameCompany": "เปลี่ยนชื่อ {name}",
+    "deleteCompany": "ลบ {name}",
+    "deleteCompanyTitle": "ลบ “{name}” ไหม?",
+    "deleteCompanyText": "การสัมภาษณ์ ผู้สมัคร ผลลัพธ์ และเครดิตจะหายไปถาวร ไม่สามารถย้อนกลับได้",
+    "deleteCompanyConfirm": "ลบบริษัท",
+    "companyDeleted": "ลบบริษัทแล้ว",
+    "renameCompanyTitle": "เปลี่ยนชื่อบริษัท",
+    "companyName": "ชื่อบริษัท",
+    "companyRenamed": "เปลี่ยนชื่อบริษัทแล้ว"
   },
   "templates": {
     "title": "เทมเพลต",
@@ -468,7 +488,8 @@
     "logoFailed": "บันทึกโลโก้ไม่สำเร็จ",
     "pickTitle": "เลือกบริษัท",
     "pickText": "แบบทดสอบจะถูกคัดลอกไปยังบริษัทที่คุณเลือกฟรี และพร้อมส่งให้ผู้สมัครทันที",
-    "removeCredits": "เครดิต {credits, plural, other {#}} เครดิตของบริษัท{candidates, plural, =0 {} other { (ประมาณ # ผู้สมัคร)}}จะหายไปและไม่คืนเงิน"
+    "removeCredits": "เครดิต {credits, plural, other {#}} เครดิตของบริษัท{candidates, plural, =0 {} other { (ประมาณ # ผู้สมัคร)}}จะหายไปและไม่คืนเงิน",
+    "suspended": "บริษัทนี้ถูกระงับ จึงยังเปลี่ยนแปลงไม่ได้ในตอนนี้ ติดต่อ hello@prepza.ai เพื่อดูรายละเอียดเพิ่มเติม"
   },
   "candidates": {
     "scorecard": "ใบประเมิน",
@@ -617,7 +638,8 @@
     "start": "ยอมรับและเริ่ม",
     "mismatch": "อีเมลไม่ตรงกัน ลงชื่อเข้าใช้ด้วยอีเมลที่ได้รับคำเชิญเพื่อเริ่ม",
     "title": "คำเชิญสัมภาษณ์",
-    "theCompany": "บริษัท"
+    "theCompany": "บริษัท",
+    "unverified": "prepza ยังไม่ได้ยืนยันบริษัทนี้"
   },
   "members": {
     "joined": "เข้าร่วมแล้ว",

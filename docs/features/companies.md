@@ -55,6 +55,16 @@ Later changes:
 - Renaming a verified, pending or declined company sends the new name for review, taking any check away.
 - Changing the website starts over.
 
+Until a company is verified, its invite pages and its invite and reminder emails say, in a small gray line, that prepza hasn't verified it.
+
+## Suspension
+
+A superadmin can suspend a company from the admin zone (see [Admin zone](admin-zone.md#companies)), and lift the suspension later. While it's suspended:
+
+- its members still see it, with a notice saying so, but nothing in it can be changed,
+- it invites nobody: new candidates are refused (an ATS keeps them waiting until the suspension is lifted),
+- candidates who haven't started find its invites and shareable link invalid; those already in an interview can finish it.
+
 ## Audit log
 
 The companies service records the human decisions taken in a company, as evidence of human oversight: who took each one, what it was, on which interview or candidate, and when.

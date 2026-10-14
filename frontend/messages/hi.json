@@ -245,7 +245,27 @@
     "deletePostTitle": "यह पोस्ट हटाएँ?",
     "deletePostText": "यह सभी भाषाओं में समाचार पेज से हट जाएगी।",
     "postSaveFailed": "पोस्ट सहेजी नहीं जा सकी। फिर से कोशिश करें।",
-    "postDeleteFailed": "पोस्ट हटाई नहीं जा सकी। फिर से कोशिश करें।"
+    "postDeleteFailed": "पोस्ट हटाई नहीं जा सकी। फिर से कोशिश करें।",
+    "companies": "कंपनियाँ",
+    "companySearch": "कंपनी का नाम",
+    "companiesNotFound": "कोई कंपनी नहीं मिली।",
+    "suspended": "निलंबित",
+    "companyDetails": "{members, plural, one {# सदस्य} other {# सदस्य}} · {date} से",
+    "suspend": "निलंबित करें",
+    "unsuspend": "निलंबन हटाएँ",
+    "unsuspended": "निलंबन हटा दिया गया।",
+    "suspendTitle": "“{name}” को निलंबित करें?",
+    "suspendText": "इसके सदस्य इसे देख सकते हैं पर कुछ बदल नहीं सकते, यह किसी को इनवाइट नहीं करती, और जिन उम्मीदवारों ने शुरू नहीं किया उन्हें इसके इंटरव्यू उपलब्ध नहीं मिलेंगे। आप निलंबन कभी भी हटा सकते हैं।",
+    "suspendedDone": "कंपनी निलंबित कर दी गई।",
+    "renameCompany": "{name} का नाम बदलें",
+    "deleteCompany": "{name} हटाएँ",
+    "deleteCompanyTitle": "“{name}” हटाएँ?",
+    "deleteCompanyText": "इसके इंटरव्यू, उम्मीदवार, नतीजे और क्रेडिट हमेशा के लिए हट जाएँगे। इसे पलटा नहीं जा सकता।",
+    "deleteCompanyConfirm": "कंपनी हटाएँ",
+    "companyDeleted": "कंपनी हटा दी गई।",
+    "renameCompanyTitle": "कंपनी का नाम बदलें",
+    "companyName": "कंपनी का नाम",
+    "companyRenamed": "कंपनी का नाम बदल दिया गया।"
   },
   "templates": {
     "title": "टेम्पलेट",
@@ -468,7 +488,8 @@
     "logoFailed": "लोगो सेव नहीं हो सका।",
     "pickTitle": "कंपनी चुनें",
     "pickText": "टेस्ट आपकी चुनी हुई कंपनी में मुफ़्त कॉपी हो जाता है और उम्मीदवारों को भेजने के लिए तैयार रहता है।",
-    "removeCredits": "इसके {credits, plural, one {# क्रेडिट} other {# क्रेडिट}}{candidates, plural, =0 {} one { (लगभग # उम्मीदवार)} other { (लगभग # उम्मीदवार)}} खत्म हो जाएँगे और वापस नहीं किए जाते।"
+    "removeCredits": "इसके {credits, plural, one {# क्रेडिट} other {# क्रेडिट}}{candidates, plural, =0 {} one { (लगभग # उम्मीदवार)} other { (लगभग # उम्मीदवार)}} खत्म हो जाएँगे और वापस नहीं किए जाते।",
+    "suspended": "यह कंपनी निलंबित है: अभी इसे बदला नहीं जा सकता। ज़्यादा जानने के लिए hello@prepza.ai पर संपर्क करें।"
   },
   "candidates": {
     "scorecard": "स्कोरकार्ड",
@@ -617,7 +638,8 @@
     "start": "स्वीकार करें और शुरू करें",
     "mismatch": "ईमेल मेल नहीं खाता। शुरू करने के लिए इनवाइट वाले ईमेल से साइन इन करें।",
     "title": "इंटरव्यू इनवाइट",
-    "theCompany": "कंपनी"
+    "theCompany": "कंपनी",
+    "unverified": "prepza ने इस कंपनी का सत्यापन नहीं किया है।"
   },
   "members": {
     "joined": "जुड़ गए",

@@ -245,7 +245,27 @@
     "deletePostTitle": "Hapus postingan ini?",
     "deletePostText": "Postingan dihapus dari halaman berita di semua bahasa.",
     "postSaveFailed": "Postingan tidak dapat disimpan. Silakan coba lagi.",
-    "postDeleteFailed": "Postingan tidak dapat dihapus. Silakan coba lagi."
+    "postDeleteFailed": "Postingan tidak dapat dihapus. Silakan coba lagi.",
+    "companies": "Perusahaan",
+    "companySearch": "Nama perusahaan",
+    "companiesNotFound": "Tidak ada perusahaan yang ditemukan.",
+    "suspended": "Ditangguhkan",
+    "companyDetails": "{members, plural, other {# anggota}} · sejak {date}",
+    "suspend": "Tangguhkan",
+    "unsuspend": "Cabut penangguhan",
+    "unsuspended": "Penangguhan dicabut.",
+    "suspendTitle": "Tangguhkan “{name}”?",
+    "suspendText": "Anggotanya tetap bisa melihatnya tapi tidak bisa mengubah apa pun, perusahaan ini tidak mengundang siapa pun, dan kandidat yang belum mulai mendapati wawancaranya tidak tersedia. Kamu bisa mencabutnya kapan saja.",
+    "suspendedDone": "Perusahaan ditangguhkan.",
+    "renameCompany": "Ganti nama {name}",
+    "deleteCompany": "Hapus {name}",
+    "deleteCompanyTitle": "Hapus “{name}”?",
+    "deleteCompanyText": "Wawancara, kandidat, hasil, dan kreditnya hilang selamanya. Ini tidak bisa dibatalkan.",
+    "deleteCompanyConfirm": "Hapus perusahaan",
+    "companyDeleted": "Perusahaan dihapus.",
+    "renameCompanyTitle": "Ganti nama perusahaan",
+    "companyName": "Nama perusahaan",
+    "companyRenamed": "Nama perusahaan diganti."
   },
   "templates": {
     "title": "Templat",
@@ -468,7 +488,8 @@
     "logoFailed": "Logo tidak bisa disimpan.",
     "pickTitle": "Pilih perusahaan",
     "pickText": "Tes disalin ke perusahaan yang kamu pilih, gratis dan siap dikirim ke kandidat.",
-    "removeCredits": "{credits, plural, other {# kreditnya}}{candidates, plural, =0 {} other { (sekitar # kandidat)}} akan hilang dan tidak dikembalikan."
+    "removeCredits": "{credits, plural, other {# kreditnya}}{candidates, plural, =0 {} other { (sekitar # kandidat)}} akan hilang dan tidak dikembalikan.",
+    "suspended": "Perusahaan ini ditangguhkan: untuk saat ini tidak bisa diubah. Hubungi hello@prepza.ai untuk tahu lebih lanjut."
   },
   "candidates": {
     "scorecard": "Scorecard",
@@ -617,7 +638,8 @@
     "start": "Terima dan mulai",
     "mismatch": "Email tidak cocok. Masuk dengan email undangan untuk memulai.",
     "title": "Undangan wawancara",
-    "theCompany": "perusahaan"
+    "theCompany": "perusahaan",
+    "unverified": "prepza belum memverifikasi perusahaan ini."
   },
   "members": {
     "joined": "Bergabung",

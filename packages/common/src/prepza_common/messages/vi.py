@@ -1,6 +1,8 @@
 # Messages the services show users, in Vietnamese, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This company is suspended. Contact hello@prepza.ai to find out more.": "Công ty này đã bị tạm ngưng. Liên hệ hello@prepza.ai để biết thêm.",
+    "This interview isn't available.": "Buổi phỏng vấn này không khả dụng.",
     "Only an admin who has joined can become the owner.": "Chỉ quản trị viên đã tham gia mới có thể trở thành chủ sở hữu.",
     "They already own 3 companies, as many as one person may.": "Người này đã sở hữu 3 công ty, mức tối đa cho một người.",
     "Make another member the owner of each company you share, or delete it, before deleting your account.": "Trước khi xóa tài khoản, hãy chuyển quyền sở hữu mỗi công ty bạn dùng chung cho một thành viên khác, hoặc xóa công ty đó.",

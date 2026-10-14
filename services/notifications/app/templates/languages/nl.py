@@ -202,6 +202,8 @@ TEXTS = {
     },
     "footer": "Deze e-mail is naar {email} gestuurd omdat iemand dit adres op prepza heeft "
     "uitgenodigd. Verwachtte je hem niet, dan kun je hem negeren.",
+    # An invite from a company prepza hasn't verified, at the end of the footer.
+    "unverified": "prepza heeft {company} niet geverifieerd.",
     "paste_link": "Of plak deze link in je browser",
     # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
     "unsubscribe": "Afmelden",

@@ -204,6 +204,8 @@ TEXTS = {
     },
     "footer": "Cet e-mail a été envoyé à {email} parce que quelqu'un a invité cette adresse sur "
     "prepza. Si vous ne l'attendiez pas, vous pouvez l'ignorer.",
+    # An invite from a company prepza hasn't verified, at the end of the footer.
+    "unverified": "prepza n'a pas vérifié {company}.",
     "paste_link": "Ou collez ce lien dans votre navigateur",
     # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
     "unsubscribe": "Se désabonner",

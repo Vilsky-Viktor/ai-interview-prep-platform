@@ -3,6 +3,7 @@ from uuid import UUID
 from fastapi import HTTPException, Request, status
 from prepza_common.auth import CurrentUser
 
+from app.constants.invites import COMPANY_SUSPENDED, INTERVIEW_UNAVAILABLE, InviteStatus
 from app.constants.roles import EDITORS, Role
 from app.models.companies import Company, Member
 from app.storage import companies
@@ -43,7 +44,20 @@ async def require_editor(user: CurrentUser, company_id: UUID) -> tuple[Company, 
     if not can_edit(member):
         raise HTTPException(status.HTTP_403_FORBIDDEN, "Viewers can't change anything here")
 
+    # Suspended by a superadmin: it can still be read (and deleted by its owner), not changed.
+    if company.suspended_at is not None:
+        raise HTTPException(status.HTTP_403_FORBIDDEN, COMPANY_SUSPENDED)
+
     return company, member
+
+
+def refuse_if_suspended(company: Company | None, invite_status: str | None) -> None:
+    """For a candidate: a suspended company's interview isn't available (410), unless they're
+    already in it, which they may finish."""
+    suspended = company is not None and company.suspended_at is not None
+
+    if suspended and invite_status != InviteStatus.IN_PROCESS:
+        raise HTTPException(status.HTTP_410_GONE, INTERVIEW_UNAVAILABLE)
 
 
 def bearer_token(request: Request) -> str:

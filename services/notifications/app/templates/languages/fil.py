@@ -206,6 +206,8 @@ TEXTS = {
     },
     "footer": "Ipinadala ang email na ito sa {email} dahil may nag-imbita sa address na ito sa "
     "prepza. Kung hindi mo ito inaasahan, puwede mo itong balewalain.",
+    # An invite from a company prepza hasn't verified, at the end of the footer.
+    "unverified": "Hindi pa na-verify ng prepza ang {company}.",
     "paste_link": "O i-paste ang link na ito sa iyong browser",
     # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
     "unsubscribe": "Mag-unsubscribe",

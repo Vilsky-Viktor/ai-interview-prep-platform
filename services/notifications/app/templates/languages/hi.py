@@ -186,6 +186,8 @@ TEXTS = {
     },
     "footer": "यह ईमेल {email} पर भेजा गया क्योंकि किसी ने prepza पर इस पते को इनवाइट किया। "
     "अगर आपको इसकी उम्मीद नहीं थी, तो आप इसे अनदेखा कर सकते हैं।",
+    # An invite from a company prepza hasn't verified, at the end of the footer.
+    "unverified": "prepza ने {company} का सत्यापन नहीं किया है।",
     "paste_link": "या यह लिंक अपने ब्राउज़र में पेस्ट करें",
     # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
     "unsubscribe": "अनसब्सक्राइब करें",

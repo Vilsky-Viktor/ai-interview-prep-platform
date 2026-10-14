@@ -245,7 +245,27 @@
     "deletePostTitle": "Bu yazı silinsin mi?",
     "deletePostText": "Haberler sayfasından tüm dillerde kaldırılır.",
     "postSaveFailed": "Yazı kaydedilemedi. Lütfen tekrar deneyin.",
-    "postDeleteFailed": "Yazı silinemedi. Lütfen tekrar deneyin."
+    "postDeleteFailed": "Yazı silinemedi. Lütfen tekrar deneyin.",
+    "companies": "Şirketler",
+    "companySearch": "Şirket adı",
+    "companiesNotFound": "Şirket bulunamadı.",
+    "suspended": "Askıya alındı",
+    "companyDetails": "{members, plural, one {# üye} other {# üye}} · {date} tarihinden beri",
+    "suspend": "Askıya al",
+    "unsuspend": "Askıyı kaldır",
+    "unsuspended": "Askı kaldırıldı.",
+    "suspendTitle": "“{name}” askıya alınsın mı?",
+    "suspendText": "Üyeleri şirketi görmeye devam eder ama hiçbir şeyi değiştiremez, şirket kimseyi davet etmez ve henüz başlamamış adaylar mülakatlarını kullanılamaz bulur. Askıyı istediğiniz zaman kaldırabilirsiniz.",
+    "suspendedDone": "Şirket askıya alındı.",
+    "renameCompany": "{name} adını değiştir",
+    "deleteCompany": "{name} sil",
+    "deleteCompanyTitle": "“{name}” silinsin mi?",
+    "deleteCompanyText": "Mülakatları, adayları, sonuçları ve kredileri kalıcı olarak silinir. Bu geri alınamaz.",
+    "deleteCompanyConfirm": "Şirketi sil",
+    "companyDeleted": "Şirket silindi.",
+    "renameCompanyTitle": "Şirketin adını değiştir",
+    "companyName": "Şirket adı",
+    "companyRenamed": "Şirketin adı değiştirildi."
   },
   "templates": {
     "title": "Şablonlar",
@@ -468,7 +488,8 @@
     "logoFailed": "Logo kaydedilemedi.",
     "pickTitle": "Bir şirket seçin",
     "pickText": "Test, seçtiğiniz şirkete ücretsiz kopyalanır ve adaylara gönderilmeye hazır olur.",
-    "removeCredits": "Şirketin {credits, plural, other {# kredisi}}{candidates, plural, =0 {} other { (yaklaşık # aday)}} kaybolur ve iade edilmez."
+    "removeCredits": "Şirketin {credits, plural, other {# kredisi}}{candidates, plural, =0 {} other { (yaklaşık # aday)}} kaybolur ve iade edilmez.",
+    "suspended": "Bu şirket askıya alındı: şimdilik değiştirilemez. Daha fazla bilgi için hello@prepza.ai adresine yazın."
   },
   "candidates": {
     "scorecard": "Değerlendirme kartı",
@@ -617,7 +638,8 @@
     "start": "Kabul et ve başla",
     "mismatch": "E-posta eşleşmiyor. Başlamak için davetteki e-postayla giriş yapın.",
     "title": "Mülakat daveti",
-    "theCompany": "şirketin"
+    "theCompany": "şirketin",
+    "unverified": "prepza bu şirketi doğrulamadı."
   },
   "members": {
     "joined": "Katıldı",

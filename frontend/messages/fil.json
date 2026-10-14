@@ -245,7 +245,27 @@
     "deletePostTitle": "Burahin ang post na ito?",
     "deletePostText": "Aalisin ito sa pahina ng balita sa lahat ng wika.",
     "postSaveFailed": "Hindi ma-save ang post. Pakisubukang muli.",
-    "postDeleteFailed": "Hindi mabura ang post. Pakisubukang muli."
+    "postDeleteFailed": "Hindi mabura ang post. Pakisubukang muli.",
+    "companies": "Mga kumpanya",
+    "companySearch": "Pangalan ng kumpanya",
+    "companiesNotFound": "Walang nakitang kumpanya.",
+    "suspended": "Naka-suspend",
+    "companyDetails": "{members, plural, =1 {# miyembro} other {# miyembro}} · mula {date}",
+    "suspend": "I-suspend",
+    "unsuspend": "Alisin ang suspension",
+    "unsuspended": "Naalis ang suspension.",
+    "suspendTitle": "I-suspend ang “{name}”?",
+    "suspendText": "Makikita pa rin ito ng mga miyembro pero wala silang mababago, wala itong maiimbitahan, at hindi available ang mga interview nito sa mga aplikanteng hindi pa nagsisimula. Puwede mo itong alisin kahit kailan.",
+    "suspendedDone": "Na-suspend ang kumpanya.",
+    "renameCompany": "Palitan ang pangalan ng {name}",
+    "deleteCompany": "I-delete ang {name}",
+    "deleteCompanyTitle": "I-delete ang “{name}”?",
+    "deleteCompanyText": "Mawawala nang tuluyan ang mga interview, aplikante, resulta at credit nito. Hindi na ito maibabalik.",
+    "deleteCompanyConfirm": "I-delete ang kumpanya",
+    "companyDeleted": "Na-delete ang kumpanya.",
+    "renameCompanyTitle": "Palitan ang pangalan ng kumpanya",
+    "companyName": "Pangalan ng kumpanya",
+    "companyRenamed": "Napalitan ang pangalan ng kumpanya."
   },
   "templates": {
     "title": "Mga template",
@@ -468,7 +488,8 @@
     "logoFailed": "Hindi ma-save ang logo.",
     "pickTitle": "Pumili ng kumpanya",
     "pickText": "Kokopyahin nang libre ang test sa kumpanyang pipiliin mo, handa nang ipadala sa mga aplikante.",
-    "removeCredits": "Mawawala ang {credits, plural, one {# credit} other {# credits}} nito{candidates, plural, =0 {} one { (mga # aplikante)} other { (mga # aplikante)}} at hindi ito ire-refund."
+    "removeCredits": "Mawawala ang {credits, plural, one {# credit} other {# credits}} nito{candidates, plural, =0 {} one { (mga # aplikante)} other { (mga # aplikante)}} at hindi ito ire-refund.",
+    "suspended": "Naka-suspend ang kumpanyang ito kaya hindi ito mababago sa ngayon. Makipag-ugnayan sa hello@prepza.ai para sa higit pang detalye."
   },
   "candidates": {
     "scorecard": "Scorecard",
@@ -617,7 +638,8 @@
     "start": "Tanggapin at simulan",
     "mismatch": "Hindi tugma ang email. Mag-sign in gamit ang email ng imbitasyon para magsimula.",
     "title": "Imbitasyon sa interview",
-    "theCompany": "kumpanya"
+    "theCompany": "kumpanya",
+    "unverified": "Hindi pa na-verify ng prepza ang kumpanyang ito."
   },
   "members": {
     "joined": "Sumali na",

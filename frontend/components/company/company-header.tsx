@@ -8,6 +8,7 @@ import { CompanyNav, type CompanyTab } from "@/components/company/company-nav"
 import { LogoPicker } from "@/components/company/logo-picker"
 import { PendingBadge } from "@/components/company/pending-badge"
 import { VerifiedBadge } from "@/components/company/verified-badge"
+import { WarningCard } from "@/components/warning-card"
 import { VerifyCompany } from "@/components/company/verify-company"
 import { EditableTitle } from "@/components/editable-title"
 import { MAX_COMPANY_NAME_LENGTH } from "@/constants/limits"
@@ -15,6 +16,7 @@ import { COMPANY_TAB_HELP } from "@/constants/page-help"
 import type { VerificationStatus } from "@/types/company"
 
 export function CompanyHeader({
+  suspended = false,
   companyId,
   name,
   logoUrl,
@@ -39,6 +41,8 @@ export function CompanyHeader({
   action?: ReactNode
   // Owners and admins change the logo, name and website; viewers only see them.
   canEdit: boolean
+  // A superadmin suspended the company: it can be read, not changed.
+  suspended?: boolean
 }) {
   const t = useTranslations("company")
   const verify = useTranslations("verify")
@@ -102,6 +106,12 @@ export function CompanyHeader({
         )}
       </div>
       <CompanyNav companyId={companyId} current={current} canEdit={canEdit} />
+      {suspended && (
+        // Edge to edge on a phone.
+        <WarningCard className="-mx-6 rounded-none sm:mx-0 sm:rounded-2xl">
+          {t("suspended")}
+        </WarningCard>
+      )}
     </div>
   )
 }

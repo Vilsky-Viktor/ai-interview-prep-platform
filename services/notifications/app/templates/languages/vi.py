@@ -197,6 +197,8 @@ TEXTS = {
     },
     "footer": "Email này được gửi đến {email} vì có người đã mời địa chỉ này trên prepza. Nếu "
     "bạn không mong đợi email này, bạn có thể bỏ qua.",
+    # An invite from a company prepza hasn't verified, at the end of the footer.
+    "unverified": "prepza chưa xác minh {company}.",
     "paste_link": "Hoặc dán liên kết này vào trình duyệt của bạn",
     # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
     "unsubscribe": "Hủy đăng ký",

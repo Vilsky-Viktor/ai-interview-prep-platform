@@ -139,6 +139,8 @@ TEXTS = {
         "footer": "อีเมลนี้ส่งถึง {email} เนื่องจากคุณเป็นเจ้าของหรือผู้ดูแลของ {company} บน prepza อีเมลนี้เกี่ยวกับการเรียกเก็บเงินของบริษัทคุณ จึงส่งเสมอไม่ว่าการตั้งค่าอีเมลของคุณจะเป็นอย่างไร",
     },
     "footer": "อีเมลนี้ส่งถึง {email} เนื่องจากมีผู้เชิญที่อยู่นี้บน prepza หากคุณไม่ได้คาดว่าจะได้รับ ก็ไม่ต้องสนใจอีเมลนี้",
+    # An invite from a company prepza hasn't verified, at the end of the footer.
+    "unverified": "prepza ยังไม่ได้ยืนยัน {company}",
     "paste_link": "หรือวางลิงก์นี้ในเบราว์เซอร์ของคุณ",
     # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
     "unsubscribe": "ยกเลิกการรับอีเมล",

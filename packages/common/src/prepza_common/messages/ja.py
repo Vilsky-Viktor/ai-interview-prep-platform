@@ -1,6 +1,8 @@
 # Messages the services show users, in Japanese, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This company is suspended. Contact hello@prepza.ai to find out more.": "この会社は停止されています。詳しくは hello@prepza.ai までお問い合わせください。",
+    "This interview isn't available.": "この面接は利用できません。",
     "Only an admin who has joined can become the owner.": "オーナーになれるのは、参加済みの管理者だけです。",
     "They already own 3 companies, as many as one person may.": "このメンバーはすでに 3 社を所有しており、1 人あたりの上限に達しています。",
     "Make another member the owner of each company you share, or delete it, before deleting your account.": "アカウントを削除する前に、他のメンバーがいる会社ごとに別のメンバーをオーナーにするか、その会社を削除してください。",

@@ -1,6 +1,8 @@
 # Messages the services show users, in Turkish, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This company is suspended. Contact hello@prepza.ai to find out more.": "Bu şirket askıya alındı. Daha fazla bilgi için hello@prepza.ai adresine yazın.",
+    "This interview isn't available.": "Bu mülakat kullanılamıyor.",
     "Only an admin who has joined can become the owner.": "Yalnızca katılmış bir yönetici sahip olabilir.",
     "They already own 3 companies, as many as one person may.": "Bu kişi zaten 3 şirketin sahibi; bir kişinin sahip olabileceği en fazla sayı bu.",
     "Make another member the owner of each company you share, or delete it, before deleting your account.": "Hesabınızı silmeden önce başkalarıyla paylaştığınız her şirkette başka bir üyeyi sahip yapın ya da şirketi silin.",

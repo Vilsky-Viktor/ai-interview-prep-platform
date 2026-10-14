@@ -182,6 +182,8 @@ TEXTS = {
     },
     "footer": "این ایمیل به {email} فرستاده شد چون کسی این نشانی را در prepza دعوت کرده است. اگر "
     "انتظارش را نداشتید، می\u200cتوانید آن را نادیده بگیرید.",
+    # An invite from a company prepza hasn't verified, at the end of the footer.
+    "unverified": "prepza هویت {company} را تأیید نکرده است.",
     "paste_link": "یا این پیوند را در مرورگر خود بچسبانید",
     # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
     "unsubscribe": "لغو اشتراک",

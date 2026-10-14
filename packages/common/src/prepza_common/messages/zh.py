@@ -1,6 +1,8 @@
 # Messages the services show users, in Chinese (Simplified), keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This company is suspended. Contact hello@prepza.ai to find out more.": "此公司已被暂停。如需了解详情，请联系 hello@prepza.ai。",
+    "This interview isn't available.": "此面试不可用。",
     "Only an admin who has joined can become the owner.": "只有已加入的管理员才能成为所有者。",
     "They already own 3 companies, as many as one person may.": "此人已拥有 3 家公司，这是每人的上限。",
     "Make another member the owner of each company you share, or delete it, before deleting your account.": "删除账户前，请将每个与他人共享的公司转给另一位成员，或删除该公司。",

@@ -245,7 +245,27 @@
     "deletePostTitle": "למחוק את הפוסט?",
     "deletePostText": "הוא יוסר מדף החדשות בכל השפות.",
     "postSaveFailed": "לא הצלחנו לשמור את הפוסט. אפשר לנסות שוב.",
-    "postDeleteFailed": "לא הצלחנו למחוק את הפוסט. אפשר לנסות שוב."
+    "postDeleteFailed": "לא הצלחנו למחוק את הפוסט. אפשר לנסות שוב.",
+    "companies": "חברות",
+    "companySearch": "שם החברה",
+    "companiesNotFound": "לא נמצאו חברות.",
+    "suspended": "מושעית",
+    "companyDetails": "{members, plural, one {חבר אחד} other {# חברים}} · מאז {date}",
+    "suspend": "השעיה",
+    "unsuspend": "ביטול ההשעיה",
+    "unsuspended": "ההשעיה בוטלה.",
+    "suspendTitle": "להשעות את \"{name}\"?",
+    "suspendText": "החברים עדיין רואים אותה אבל לא יכולים לשנות דבר, היא לא מזמינה אף אחד, ומועמדים שלא התחילו ימצאו את הראיונות שלה לא זמינים. אפשר לבטל את ההשעיה בכל עת.",
+    "suspendedDone": "החברה הושעתה.",
+    "renameCompany": "שינוי השם של {name}",
+    "deleteCompany": "מחיקת {name}",
+    "deleteCompanyTitle": "למחוק את \"{name}\"?",
+    "deleteCompanyText": "הראיונות, המועמדים, התוצאות והקרדיטים שלה יימחקו לצמיתות. אי אפשר לבטל את זה.",
+    "deleteCompanyConfirm": "מחיקת החברה",
+    "companyDeleted": "החברה נמחקה.",
+    "renameCompanyTitle": "שינוי שם החברה",
+    "companyName": "שם החברה",
+    "companyRenamed": "שם החברה שונה."
   },
   "templates": {
     "title": "תבניות",
@@ -468,7 +488,8 @@
     "logoFailed": "לא ניתן לשמור את הלוגו.",
     "pickTitle": "בחרו חברה",
     "pickText": "המבחן מועתק לחברה שתבחרו, בחינם ומוכן לשליחה למועמדים.",
-    "removeCredits": "{credits, plural, one {הקרדיט שלה (#)} other {# הקרדיטים שלה}}{candidates, plural, =0 {} one { (בערך מועמד אחד)} other { (בערך # מועמדים)}} יאבדו ולא יוחזרו."
+    "removeCredits": "{credits, plural, one {הקרדיט שלה (#)} other {# הקרדיטים שלה}}{candidates, plural, =0 {} one { (בערך מועמד אחד)} other { (בערך # מועמדים)}} יאבדו ולא יוחזרו.",
+    "suspended": "החברה הזו מושעית ולא ניתן לשנות אותה כרגע. לפרטים נוספים יש לפנות אל hello@prepza.ai."
   },
   "candidates": {
     "scorecard": "כרטיס הערכה",
@@ -617,7 +638,8 @@
     "start": "אישור והתחלה",
     "mismatch": "האימייל לא תואם. יש להתחבר עם כתובת ההזמנה כדי להתחיל.",
     "title": "הזמנה לראיון",
-    "theCompany": "החברה"
+    "theCompany": "החברה",
+    "unverified": "prepza לא אימתה את החברה הזו."
   },
   "members": {
     "joined": "הצטרפו",

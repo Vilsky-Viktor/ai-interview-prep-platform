@@ -191,6 +191,8 @@ TEXTS = {
     },
     "footer": "Bu e-posta {email} adresine, biri bu adresi prepza'ya davet ettiği için "
     "gönderildi. Beklemiyorsanız görmezden gelebilirsiniz.",
+    # An invite from a company prepza hasn't verified, at the end of the footer.
+    "unverified": "prepza, {company} şirketini doğrulamadı.",
     "paste_link": "Ya da bu bağlantıyı tarayıcınıza yapıştırın",
     # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
     "unsubscribe": "Abonelikten çık",

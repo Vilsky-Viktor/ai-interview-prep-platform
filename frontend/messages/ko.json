@@ -245,7 +245,27 @@
     "deletePostTitle": "이 게시물을 삭제할까요?",
     "deletePostText": "모든 언어의 소식 페이지에서 삭제됩니다.",
     "postSaveFailed": "게시물을 저장하지 못했습니다. 다시 시도해 주세요.",
-    "postDeleteFailed": "게시물을 삭제하지 못했습니다. 다시 시도해 주세요."
+    "postDeleteFailed": "게시물을 삭제하지 못했습니다. 다시 시도해 주세요.",
+    "companies": "회사",
+    "companySearch": "회사 이름",
+    "companiesNotFound": "회사를 찾지 못했습니다.",
+    "suspended": "정지됨",
+    "companyDetails": "{members, plural, other {멤버 #명}} · {date}부터",
+    "suspend": "정지",
+    "unsuspend": "정지 해제",
+    "unsuspended": "정지를 해제했습니다.",
+    "suspendTitle": "“{name}”을(를) 정지할까요?",
+    "suspendText": "멤버는 계속 볼 수 있지만 아무것도 바꿀 수 없고, 아무도 초대하지 않으며, 아직 시작하지 않은 지원자에게는 면접이 제공되지 않습니다. 정지는 언제든 해제할 수 있습니다.",
+    "suspendedDone": "회사를 정지했습니다.",
+    "renameCompany": "{name} 이름 변경",
+    "deleteCompany": "{name} 삭제",
+    "deleteCompanyTitle": "“{name}”을(를) 삭제할까요?",
+    "deleteCompanyText": "면접, 지원자, 결과, 크레딧이 영구히 삭제됩니다. 되돌릴 수 없습니다.",
+    "deleteCompanyConfirm": "회사 삭제",
+    "companyDeleted": "회사를 삭제했습니다.",
+    "renameCompanyTitle": "회사 이름 변경",
+    "companyName": "회사 이름",
+    "companyRenamed": "회사 이름을 변경했습니다."
   },
   "templates": {
     "title": "템플릿",
@@ -468,7 +488,8 @@
     "logoFailed": "로고를 저장하지 못했습니다.",
     "pickTitle": "회사 선택",
     "pickText": "테스트가 선택한 회사에 무료로 복사되며, 바로 지원자에게 보낼 수 있습니다.",
-    "removeCredits": "이 회사의 {credits, plural, other {# 크레딧}}{candidates, plural, =0 {} other {(지원자 약 #명분)}}은 사라지며 환불되지 않습니다."
+    "removeCredits": "이 회사의 {credits, plural, other {# 크레딧}}{candidates, plural, =0 {} other {(지원자 약 #명분)}}은 사라지며 환불되지 않습니다.",
+    "suspended": "이 회사는 정지되어 지금은 변경할 수 없습니다. 자세한 내용은 hello@prepza.ai로 문의하세요."
   },
   "candidates": {
     "scorecard": "평가표",
@@ -617,7 +638,8 @@
     "start": "수락하고 시작",
     "mismatch": "이메일이 일치하지 않습니다. 초대받은 이메일로 로그인해서 시작하세요.",
     "title": "면접 초대",
-    "theCompany": "회사"
+    "theCompany": "회사",
+    "unverified": "prepza는 이 회사를 인증하지 않았습니다."
   },
   "members": {
     "joined": "참여함",

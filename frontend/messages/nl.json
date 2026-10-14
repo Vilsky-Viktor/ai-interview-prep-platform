@@ -245,7 +245,27 @@
     "deletePostTitle": "Dit bericht verwijderen?",
     "deletePostText": "Het verdwijnt in alle talen van de nieuwspagina.",
     "postSaveFailed": "Het bericht kon niet worden opgeslagen. Probeer het opnieuw.",
-    "postDeleteFailed": "Het bericht kon niet worden verwijderd. Probeer het opnieuw."
+    "postDeleteFailed": "Het bericht kon niet worden verwijderd. Probeer het opnieuw.",
+    "companies": "Bedrijven",
+    "companySearch": "Bedrijfsnaam",
+    "companiesNotFound": "Geen bedrijven gevonden.",
+    "suspended": "Geschorst",
+    "companyDetails": "{members, plural, one {# lid} other {# leden}} · sinds {date}",
+    "suspend": "Schorsen",
+    "unsuspend": "Schorsing opheffen",
+    "unsuspended": "De schorsing is opgeheven.",
+    "suspendTitle": "“{name}” schorsen?",
+    "suspendText": "De leden zien het nog, maar kunnen niets wijzigen, het nodigt niemand uit, en kandidaten die nog niet begonnen zijn, vinden de interviews niet beschikbaar. Je kunt de schorsing altijd opheffen.",
+    "suspendedDone": "Het bedrijf is geschorst.",
+    "renameCompany": "{name} hernoemen",
+    "deleteCompany": "{name} verwijderen",
+    "deleteCompanyTitle": "“{name}” verwijderen?",
+    "deleteCompanyText": "De interviews, kandidaten, resultaten en credits verdwijnen voorgoed. Dit kan niet ongedaan worden gemaakt.",
+    "deleteCompanyConfirm": "Bedrijf verwijderen",
+    "companyDeleted": "Het bedrijf is verwijderd.",
+    "renameCompanyTitle": "Bedrijf hernoemen",
+    "companyName": "Bedrijfsnaam",
+    "companyRenamed": "Het bedrijf is hernoemd."
   },
   "templates": {
     "title": "Sjablonen",
@@ -468,7 +488,8 @@
     "logoFailed": "Het logo kon niet worden opgeslagen.",
     "pickTitle": "Kies een bedrijf",
     "pickText": "De test wordt gratis gekopieerd naar het bedrijf dat je kiest, klaar om naar kandidaten te sturen.",
-    "removeCredits": "De {credits, plural, one {# credit} other {# credits}}{candidates, plural, =0 {} one { (ongeveer # kandidaat)} other { (ongeveer # kandidaten)}} gaan verloren en worden niet terugbetaald."
+    "removeCredits": "De {credits, plural, one {# credit} other {# credits}}{candidates, plural, =0 {} one { (ongeveer # kandidaat)} other { (ongeveer # kandidaten)}} gaan verloren en worden niet terugbetaald.",
+    "suspended": "Dit bedrijf is geschorst en kan voorlopig niet worden gewijzigd. Neem contact op met hello@prepza.ai voor meer informatie."
   },
   "candidates": {
     "scorecard": "Scorekaart",
@@ -617,7 +638,8 @@
     "start": "Accepteren en starten",
     "mismatch": "Het e-mailadres komt niet overeen. Log in met het adres van de uitnodiging om te starten.",
     "title": "Uitnodiging voor een interview",
-    "theCompany": "het bedrijf"
+    "theCompany": "het bedrijf",
+    "unverified": "prepza heeft dit bedrijf niet geverifieerd."
   },
   "members": {
     "joined": "Lid",

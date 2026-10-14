@@ -245,7 +245,27 @@
     "deletePostTitle": "Usunąć ten wpis?",
     "deletePostText": "Zniknie ze strony aktualności we wszystkich językach.",
     "postSaveFailed": "Nie udało się zapisać wpisu. Spróbuj ponownie.",
-    "postDeleteFailed": "Nie udało się usunąć wpisu. Spróbuj ponownie."
+    "postDeleteFailed": "Nie udało się usunąć wpisu. Spróbuj ponownie.",
+    "companies": "Firmy",
+    "companySearch": "Nazwa firmy",
+    "companiesNotFound": "Nie znaleziono firm.",
+    "suspended": "Zawieszona",
+    "companyDetails": "{members, plural, one {# członek} few {# członków} many {# członków} other {# członka}} · od {date}",
+    "suspend": "Zawieś",
+    "unsuspend": "Cofnij zawieszenie",
+    "unsuspended": "Zawieszenie cofnięto.",
+    "suspendTitle": "Zawiesić „{name}”?",
+    "suspendText": "Jej członkowie nadal ją widzą, ale nie mogą niczego zmienić, nikogo nie zaprasza, a kandydaci, którzy nie zaczęli, zobaczą jej rozmowy jako niedostępne. Zawieszenie możesz cofnąć w każdej chwili.",
+    "suspendedDone": "Firmę zawieszono.",
+    "renameCompany": "Zmień nazwę {name}",
+    "deleteCompany": "Usuń {name}",
+    "deleteCompanyTitle": "Usunąć „{name}”?",
+    "deleteCompanyText": "Jej rozmowy, kandydaci, wyniki i kredyty znikną na zawsze. Tego nie da się cofnąć.",
+    "deleteCompanyConfirm": "Usuń firmę",
+    "companyDeleted": "Firmę usunięto.",
+    "renameCompanyTitle": "Zmień nazwę firmy",
+    "companyName": "Nazwa firmy",
+    "companyRenamed": "Nazwę firmy zmieniono."
   },
   "templates": {
     "title": "Szablony",
@@ -468,7 +488,8 @@
     "logoFailed": "Nie udało się zapisać logo.",
     "pickTitle": "Wybierz firmę",
     "pickText": "Test zostanie skopiowany do wybranej firmy za darmo i od razu będzie gotowy do wysłania kandydatom.",
-    "removeCredits": "Jej {credits, plural, one {# kredyt} few {# kredyty} many {# kredytów} other {# kredytu}}{candidates, plural, =0 {} one { (około # kandydat)} few { (około # kandydatów)} many { (około # kandydatów)} other { (około # kandydata)}} przepadną i nie są zwracane."
+    "removeCredits": "Jej {credits, plural, one {# kredyt} few {# kredyty} many {# kredytów} other {# kredytu}}{candidates, plural, =0 {} one { (około # kandydat)} few { (około # kandydatów)} many { (około # kandydatów)} other { (około # kandydata)}} przepadną i nie są zwracane.",
+    "suspended": "Ta firma jest zawieszona: na razie nie można jej zmieniać. Aby dowiedzieć się więcej, napisz na hello@prepza.ai."
   },
   "candidates": {
     "scorecard": "Wyniki",
@@ -617,7 +638,8 @@
     "start": "Akceptuj i rozpocznij",
     "mismatch": "Adres e-mail się nie zgadza. Zaloguj się adresem z zaproszenia, aby rozpocząć.",
     "title": "Zaproszenie na rozmowę",
-    "theCompany": "firma"
+    "theCompany": "firma",
+    "unverified": "prepza nie zweryfikowała tej firmy."
   },
   "members": {
     "joined": "Dołączył(a)",

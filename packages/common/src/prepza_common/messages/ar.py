@@ -1,6 +1,8 @@
 # Messages the services show users, in Arabic, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This company is suspended. Contact hello@prepza.ai to find out more.": "هذه الشركة معلّقة. تواصل مع hello@prepza.ai لمعرفة المزيد.",
+    "This interview isn't available.": "هذه المقابلة غير متاحة.",
     "Only an admin who has joined can become the owner.": "يمكن فقط لمسؤول انضم بالفعل أن يصبح المالك.",
     "They already own 3 companies, as many as one person may.": "يمتلك هذا العضو 3 شركات بالفعل، وهو الحد الأقصى للشخص الواحد.",
     "Make another member the owner of each company you share, or delete it, before deleting your account.": "اجعل عضوًا آخر مالكًا لكل شركة تشاركها مع آخرين، أو احذفها، قبل حذف حسابك.",

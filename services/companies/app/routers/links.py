@@ -25,7 +25,7 @@ from app.integrations import billing
 from app.integrations.redis import get_redis
 from app.schemas.invites import InviteStartOut, LinkIn, LinkOut, LinkView
 from app.services import outbox as outbox_service
-from app.services.access import require_editor
+from app.services.access import refuse_if_suspended, require_editor
 from app.services.candidate_start import start_sessions
 from app.storage import companies, interviews, invites, link_invites
 
@@ -76,6 +76,8 @@ async def get_link(token: str, user: OptionalUser) -> LinkView:
     says how far they got, so a finished test is never offered again."""
     interview = await attach_set(await linked_interview(token))
     company = await companies.get(interview.company_id)
+    status_now = await invites.status_of(interview.id, user.email) if user else None
+    refuse_if_suspended(company, status_now)
 
     return LinkView(
         title=await interview_title(interview),
@@ -83,7 +85,7 @@ async def get_link(token: str, user: OptionalUser) -> LinkView:
         logo_url=logo_path(company),
         verified_domain=company.verified_domain if company else None,
         question_seconds=interview.question_seconds,
-        status=await invites.status_of(interview.id, user.email) if user else None,
+        status=status_now,
     )
 
 
@@ -101,6 +103,8 @@ async def start_link(token: str, user: CurrentUser, request: Request) -> InviteS
 
     if current == InviteStatus.FINISHED:
         raise HTTPException(status.HTTP_409_CONFLICT, "This interview is already finished")
+
+    refuse_if_suspended(await companies.get(interview.company_id), current)
 
     # Paused, nobody starts; a candidate already in the interview may finish it.
     if current != InviteStatus.IN_PROCESS:

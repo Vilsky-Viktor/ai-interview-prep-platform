@@ -245,7 +245,27 @@
     "deletePostTitle": "Supprimer cette publication ?",
     "deletePostText": "Elle disparaît de la page des actualités dans toutes les langues.",
     "postSaveFailed": "Impossible d'enregistrer la publication. Veuillez réessayer.",
-    "postDeleteFailed": "Impossible de supprimer la publication. Veuillez réessayer."
+    "postDeleteFailed": "Impossible de supprimer la publication. Veuillez réessayer.",
+    "companies": "Entreprises",
+    "companySearch": "Nom de l'entreprise",
+    "companiesNotFound": "Aucune entreprise trouvée.",
+    "suspended": "Suspendue",
+    "companyDetails": "{members, plural, =1 {# membre} other {# membres}} · depuis le {date}",
+    "suspend": "Suspendre",
+    "unsuspend": "Lever la suspension",
+    "unsuspended": "La suspension a été levée.",
+    "suspendTitle": "Suspendre « {name} » ?",
+    "suspendText": "Ses membres la voient encore mais ne peuvent rien changer, elle n'invite personne, et les candidats qui n'ont pas commencé trouvent ses entretiens indisponibles. Vous pouvez lever la suspension à tout moment.",
+    "suspendedDone": "L'entreprise a été suspendue.",
+    "renameCompany": "Renommer {name}",
+    "deleteCompany": "Supprimer {name}",
+    "deleteCompanyTitle": "Supprimer « {name} » ?",
+    "deleteCompanyText": "Ses entretiens, candidats, résultats et crédits disparaissent définitivement. C'est irréversible.",
+    "deleteCompanyConfirm": "Supprimer l'entreprise",
+    "companyDeleted": "L'entreprise a été supprimée.",
+    "renameCompanyTitle": "Renommer l'entreprise",
+    "companyName": "Nom de l'entreprise",
+    "companyRenamed": "L'entreprise a été renommée."
   },
   "templates": {
     "title": "Modèles",
@@ -468,7 +488,8 @@
     "logoFailed": "Impossible d'enregistrer le logo.",
     "pickTitle": "Choisissez une entreprise",
     "pickText": "Le test est copié dans l'entreprise choisie, gratuitement et prêt à être envoyé aux candidats.",
-    "removeCredits": "Ses {credits, plural, one {# crédit} other {# crédits}}{candidates, plural, =0 {} one { (environ # candidat)} other { (environ # candidats)}} seront perdus et ne sont pas remboursés."
+    "removeCredits": "Ses {credits, plural, one {# crédit} other {# crédits}}{candidates, plural, =0 {} one { (environ # candidat)} other { (environ # candidats)}} seront perdus et ne sont pas remboursés.",
+    "suspended": "Cette entreprise est suspendue : elle ne peut pas être modifiée pour le moment. Écrivez à hello@prepza.ai pour en savoir plus."
   },
   "candidates": {
     "scorecard": "Fiche d'évaluation",
@@ -617,7 +638,8 @@
     "start": "Accepter et commencer",
     "mismatch": "L'adresse ne correspond pas. Connectez-vous avec l'adresse de l'invitation pour commencer.",
     "title": "Invitation à un entretien",
-    "theCompany": "l'entreprise"
+    "theCompany": "l'entreprise",
+    "unverified": "prepza n'a pas vérifié cette entreprise."
   },
   "members": {
     "joined": "A rejoint",

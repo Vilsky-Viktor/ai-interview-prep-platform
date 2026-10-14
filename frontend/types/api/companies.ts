@@ -1535,6 +1535,104 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/superadmin/companies": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * List Companies
+     * @description Companies by name, newest first, at most COMPANIES_SHOWN.
+     */
+    get: operations["list_companies_superadmin_companies_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/companies/{company_id}/suspend": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Suspend Company
+     * @description Nothing new happens for the company: its members can read but not change it, it invites
+     *     nobody, and candidates who haven't started find its interviews unavailable.
+     */
+    post: operations["suspend_company_superadmin_companies__company_id__suspend_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/companies/{company_id}/unsuspend": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Unsuspend Company */
+    post: operations["unsuspend_company_superadmin_companies__company_id__unsuspend_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/companies/{company_id}/name": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /**
+     * Rename Company
+     * @description Frees a name an impersonator took; a name taken by another company is a 409.
+     */
+    put: operations["rename_company_superadmin_companies__company_id__name_put"]
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/companies/{company_id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    post?: never
+    /**
+     * Delete Company
+     * @description As its owner deleting it: everything goes, its interviews, candidates and credits.
+     */
+    delete: operations["delete_company_superadmin_companies__company_id__delete"]
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/superadmin/verifications": {
     parameters: {
       query?: never
@@ -1992,6 +2090,11 @@ export interface components {
       /** Members */
       members: components["schemas"]["MemberBriefOut"][]
     }
+    /** CompanyNameIn */
+    CompanyNameIn: {
+      /** Name */
+      name: string
+    }
     /** CompanyOut */
     CompanyOut: {
       /**
@@ -2021,6 +2124,11 @@ export interface components {
       verification_status: components["schemas"]["VerificationStatus"]
       /** Decline Reason */
       decline_reason?: string | null
+      /**
+       * Suspended
+       * @default false
+       */
+      suspended: boolean
       /**
        * Created At
        * Format: date-time
@@ -2843,6 +2951,28 @@ export interface components {
       }
       /** Currency */
       currency?: string | null
+    }
+    /** SuperadminCompanyOut */
+    SuperadminCompanyOut: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string
+      /** Name */
+      name: string
+      verification_status: components["schemas"]["VerificationStatus"]
+      /** Verified Domain */
+      verified_domain: string | null
+      /** Members */
+      members: number
+      /** Suspended */
+      suspended: boolean
+      /**
+       * Created At
+       * Format: date-time
+       */
+      created_at: string
     }
     /** TitleIn */
     TitleIn: {
@@ -5765,6 +5895,157 @@ export interface operations {
         content: {
           "application/json": components["schemas"]["StatsOut"]
         }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  list_companies_superadmin_companies_get: {
+    parameters: {
+      query?: {
+        q?: string
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["SuperadminCompanyOut"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  suspend_company_superadmin_companies__company_id__suspend_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  unsuspend_company_superadmin_companies__company_id__unsuspend_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  rename_company_superadmin_companies__company_id__name_put: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["CompanyNameIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  delete_company_superadmin_companies__company_id__delete: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
       }
       /** @description Validation Error */
       422: {

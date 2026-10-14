@@ -96,6 +96,8 @@ The service sends, as HTML with a plain-text version:
 - contact page messages, to `CONTACT_EMAIL` (hello@prepza.ai by default),
 - to company members: the activity digest, reminders, and failed automatic top-ups (see [Emails to company members](#emails-to-company-members)).
 
+Invites and reminders from a company prepza hasn't verified say so in a small line at the bottom.
+
 `SITE_URL` is the site address that links in emails point to; emails link only there (no shorteners or tracking redirects).
 
 - **Two senders:** service emails come from `MAIL_FROM`, and the emails a user may turn off (the digest and reminders) from `MAIL_FROM_UPDATES`, on a subdomain of its own, so spam complaints about them can't hurt the service emails' reputation. The DNS records both need are in [infra/README.md](../../infra/README.md#email-deliverability).

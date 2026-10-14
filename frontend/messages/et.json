@@ -245,7 +245,27 @@
     "deletePostTitle": "Kas kustutada see postitus?",
     "deletePostText": "See eemaldatakse uudiste lehelt kõigis keeltes.",
     "postSaveFailed": "Postitust ei õnnestunud salvestada. Proovi uuesti.",
-    "postDeleteFailed": "Postitust ei õnnestunud kustutada. Proovi uuesti."
+    "postDeleteFailed": "Postitust ei õnnestunud kustutada. Proovi uuesti.",
+    "companies": "Ettevõtted",
+    "companySearch": "Ettevõtte nimi",
+    "companiesNotFound": "Ettevõtteid ei leitud.",
+    "suspended": "Peatatud",
+    "companyDetails": "{members, plural, one {# liige} other {# liiget}} · alates {date}",
+    "suspend": "Peata",
+    "unsuspend": "Lõpeta peatamine",
+    "unsuspended": "Peatamine lõpetati.",
+    "suspendTitle": "Kas peatada „{name}“?",
+    "suspendText": "Selle liikmed näevad seda, kuid ei saa midagi muuta, see ei kutsu kedagi ja kandidaadid, kes pole alustanud, näevad selle intervjuusid kättesaamatutena. Saad peatamise igal ajal lõpetada.",
+    "suspendedDone": "Ettevõte peatati.",
+    "renameCompany": "Nimeta {name} ümber",
+    "deleteCompany": "Kustuta {name}",
+    "deleteCompanyTitle": "Kas kustutada „{name}“?",
+    "deleteCompanyText": "Selle intervjuud, kandidaadid, tulemused ja krediidid kaovad jäädavalt. Seda ei saa tagasi võtta.",
+    "deleteCompanyConfirm": "Kustuta ettevõte",
+    "companyDeleted": "Ettevõte kustutati.",
+    "renameCompanyTitle": "Nimeta ettevõte ümber",
+    "companyName": "Ettevõtte nimi",
+    "companyRenamed": "Ettevõte nimetati ümber."
   },
   "templates": {
     "title": "Mallid",
@@ -468,7 +488,8 @@
     "logoFailed": "Logo ei õnnestunud salvestada.",
     "pickTitle": "Vali ettevõte",
     "pickText": "Test kopeeritakse tasuta sinu valitud ettevõttesse ja on kohe valmis kandidaatidele saatmiseks.",
-    "removeCredits": "Selle {credits, plural, one {# krediit} other {# krediiti}}{candidates, plural, =0 {} one { (umbes # kandidaat)} other { (umbes # kandidaati)}} läheb kaotsi ja seda ei hüvitata."
+    "removeCredits": "Selle {credits, plural, one {# krediit} other {# krediiti}}{candidates, plural, =0 {} one { (umbes # kandidaat)} other { (umbes # kandidaati)}} läheb kaotsi ja seda ei hüvitata.",
+    "suspended": "See ettevõte on peatatud ja seda ei saa praegu muuta. Lisateabe saamiseks kirjuta hello@prepza.ai."
   },
   "candidates": {
     "scorecard": "Hindamisleht",
@@ -617,7 +638,8 @@
     "start": "Nõustu ja alusta",
     "mismatch": "E-posti aadress ei ühti. Alustamiseks logi sisse kutses olnud aadressiga.",
     "title": "Intervjuu kutse",
-    "theCompany": "ettevõte"
+    "theCompany": "ettevõte",
+    "unverified": "prepza ei ole seda ettevõtet kinnitanud."
   },
   "members": {
     "joined": "Liitunud",

@@ -198,6 +198,8 @@ TEXTS = {
     },
     "footer": "Цей лист надіслано на {email}, тому що цю адресу запросили на prepza. Якщо ви "
     "його не чекали, просто проігноруйте його.",
+    # An invite from a company prepza hasn't verified, at the end of the footer.
+    "unverified": "prepza не перевіряла компанію {company}.",
     "paste_link": "Або вставте це посилання в браузер",
     # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
     "unsubscribe": "Відписатися",

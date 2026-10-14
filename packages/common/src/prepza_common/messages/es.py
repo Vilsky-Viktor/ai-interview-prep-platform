@@ -1,6 +1,8 @@
 # Messages the services show users, in Spanish, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This company is suspended. Contact hello@prepza.ai to find out more.": "Esta empresa está suspendida. Escribe a hello@prepza.ai para saber más.",
+    "This interview isn't available.": "Esta entrevista no está disponible.",
     "Only an admin who has joined can become the owner.": "Solo un administrador que ya se unió puede ser el propietario.",
     "They already own 3 companies, as many as one person may.": "Ya es propietario de 3 empresas, el máximo por persona.",
     "Make another member the owner of each company you share, or delete it, before deleting your account.": "Haz propietario a otro miembro de cada empresa que compartes, o elimínala, antes de eliminar tu cuenta.",

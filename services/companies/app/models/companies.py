@@ -40,6 +40,8 @@ class Company(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )
+    # A superadmin suspended it (impersonation, abuse): nothing new happens until it's lifted.
+    suspended_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
     members: Mapped[list["Member"]] = relationship(cascade="all, delete-orphan")
 

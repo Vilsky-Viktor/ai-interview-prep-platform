@@ -245,7 +245,27 @@
     "deletePostTitle": "删除这篇文章？",
     "deletePostText": "它会从所有语言的新闻页面中移除。",
     "postSaveFailed": "无法保存文章，请重试。",
-    "postDeleteFailed": "无法删除文章，请重试。"
+    "postDeleteFailed": "无法删除文章，请重试。",
+    "companies": "公司",
+    "companySearch": "公司名称",
+    "companiesNotFound": "未找到公司。",
+    "suspended": "已暂停",
+    "companyDetails": "{members, plural, other {# 名成员}} · 自 {date} 起",
+    "suspend": "暂停",
+    "unsuspend": "解除暂停",
+    "unsuspended": "已解除暂停。",
+    "suspendTitle": "暂停“{name}”？",
+    "suspendText": "成员仍可查看，但无法更改任何内容；该公司不会邀请任何人，尚未开始的候选人会看到其面试不可用。你可以随时解除暂停。",
+    "suspendedDone": "公司已暂停。",
+    "renameCompany": "重命名 {name}",
+    "deleteCompany": "删除 {name}",
+    "deleteCompanyTitle": "删除“{name}”？",
+    "deleteCompanyText": "其面试、候选人、结果和点数将被永久删除。此操作无法撤销。",
+    "deleteCompanyConfirm": "删除公司",
+    "companyDeleted": "公司已删除。",
+    "renameCompanyTitle": "重命名公司",
+    "companyName": "公司名称",
+    "companyRenamed": "公司已重命名。"
   },
   "templates": {
     "title": "模板",
@@ -468,7 +488,8 @@
     "logoFailed": "无法保存标志。",
     "pickTitle": "选择公司",
     "pickText": "测试会免费复制到你选择的公司，可立即发送给候选人。",
-    "removeCredits": "其 {credits, plural, other {# 点数}}{candidates, plural, =0 {} other {（约 # 位候选人）}}将会作废，且不予退款。"
+    "removeCredits": "其 {credits, plural, other {# 点数}}{candidates, plural, =0 {} other {（约 # 位候选人）}}将会作废，且不予退款。",
+    "suspended": "此公司已被暂停，目前无法更改。如需了解详情，请联系 hello@prepza.ai。"
   },
   "candidates": {
     "scorecard": "评分卡",
@@ -617,7 +638,8 @@
     "start": "接受并开始",
     "mismatch": "邮箱不匹配。请使用受邀邮箱登录后开始。",
     "title": "面试邀请",
-    "theCompany": "该公司"
+    "theCompany": "该公司",
+    "unverified": "prepza 尚未验证此公司。"
   },
   "members": {
     "joined": "已加入",

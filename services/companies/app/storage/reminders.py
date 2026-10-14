@@ -47,6 +47,7 @@ async def remind_unstarted(before: datetime) -> int:
                     "company": company.name,
                     "language": interview.language,
                     "logo_path": logo_path(company),
+                    "verified": company.verified_domain is not None,
                 },
             )
 

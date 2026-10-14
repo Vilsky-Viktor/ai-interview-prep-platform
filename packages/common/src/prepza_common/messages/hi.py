@@ -1,6 +1,8 @@
 # Messages the services show users, in Hindi, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This company is suspended. Contact hello@prepza.ai to find out more.": "यह कंपनी निलंबित है। ज़्यादा जानने के लिए hello@prepza.ai पर संपर्क करें।",
+    "This interview isn't available.": "यह इंटरव्यू उपलब्ध नहीं है।",
     "Only an admin who has joined can become the owner.": "केवल वही एडमिन मालिक बन सकता है जो जुड़ चुका है।",
     "They already own 3 companies, as many as one person may.": "इनके पास पहले से 3 कंपनियाँ हैं, जितनी एक व्यक्ति रख सकता है।",
     "Make another member the owner of each company you share, or delete it, before deleting your account.": "अपना अकाउंट हटाने से पहले, जो कंपनी आप दूसरों के साथ साझा करते हैं उनमें से हर एक का मालिक किसी और सदस्य को बनाएँ, या उसे हटाएँ।",

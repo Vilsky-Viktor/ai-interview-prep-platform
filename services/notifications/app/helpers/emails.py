@@ -50,6 +50,10 @@ def render(
     template = texts[kind]
     # An email with its own reason for being sent says so; the others share the general one.
     footer = template.get("footer", texts["footer"])
+
+    # An invite from a company prepza hasn't verified says so, quietly, in the footer.
+    if data.get("verified") is False:
+        footer = f"{footer} {texts['unverified']}"
     rtl = language in RTL_LANGUAGES
     safe = {key: escape(str(value)) for key, value in data.items()}
     emphasized = {

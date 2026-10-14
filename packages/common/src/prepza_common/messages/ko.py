@@ -1,6 +1,8 @@
 # Messages the services show users, in Korean, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This company is suspended. Contact hello@prepza.ai to find out more.": "이 회사는 정지되었습니다. 자세한 내용은 hello@prepza.ai로 문의하세요.",
+    "This interview isn't available.": "이 면접은 이용할 수 없습니다.",
     "Only an admin who has joined can become the owner.": "이미 참여한 관리자만 소유자가 될 수 있습니다.",
     "They already own 3 companies, as many as one person may.": "이미 회사 3곳을 소유하고 있어 한 사람이 가질 수 있는 최대치입니다.",
     "Make another member the owner of each company you share, or delete it, before deleting your account.": "계정을 삭제하기 전에 다른 사람과 함께 쓰는 각 회사의 소유자를 다른 멤버로 바꾸거나 회사를 삭제하세요.",

@@ -82,6 +82,7 @@ export default async function BillingPage({
     <main className="mx-auto max-w-5xl space-y-12 px-6 py-12">
       <RefreshOnFocus />
       <CompanyHeader
+        suspended={company.suspended}
         companyId={companyId}
         name={company.name}
         logoUrl={company.logo_url ?? null}

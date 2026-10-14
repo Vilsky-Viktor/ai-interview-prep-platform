@@ -245,7 +245,27 @@
     "deletePostTitle": "این پست حذف شود؟",
     "deletePostText": "از صفحهٔ اخبار در همهٔ زبان‌ها برداشته می‌شود.",
     "postSaveFailed": "ذخیرهٔ پست ممکن نشد. دوباره امتحان کنید.",
-    "postDeleteFailed": "حذف پست ممکن نشد. دوباره امتحان کنید."
+    "postDeleteFailed": "حذف پست ممکن نشد. دوباره امتحان کنید.",
+    "companies": "شرکت‌ها",
+    "companySearch": "نام شرکت",
+    "companiesNotFound": "شرکتی پیدا نشد.",
+    "suspended": "معلق",
+    "companyDetails": "{members, plural, one {# عضو} other {# عضو}} · از {date}",
+    "suspend": "تعلیق",
+    "unsuspend": "رفع تعلیق",
+    "unsuspended": "تعلیق برداشته شد.",
+    "suspendTitle": "«{name}» معلق شود؟",
+    "suspendText": "اعضای آن هنوز آن را می‌بینند اما نمی‌توانند چیزی را تغییر دهند، کسی را دعوت نمی‌کند، و متقاضیانی که شروع نکرده‌اند مصاحبه‌هایش را در دسترس نمی‌یابند. هر وقت بخواهید می‌توانید تعلیق را بردارید.",
+    "suspendedDone": "شرکت معلق شد.",
+    "renameCompany": "تغییر نام {name}",
+    "deleteCompany": "حذف {name}",
+    "deleteCompanyTitle": "«{name}» حذف شود؟",
+    "deleteCompanyText": "مصاحبه‌ها، متقاضیان، نتایج و اعتبارهای آن برای همیشه حذف می‌شوند. این کار برگشت‌پذیر نیست.",
+    "deleteCompanyConfirm": "حذف شرکت",
+    "companyDeleted": "شرکت حذف شد.",
+    "renameCompanyTitle": "تغییر نام شرکت",
+    "companyName": "نام شرکت",
+    "companyRenamed": "نام شرکت تغییر کرد."
   },
   "templates": {
     "title": "قالب‌ها",
@@ -468,7 +488,8 @@
     "logoFailed": "ذخیره لوگو ممکن نشد.",
     "pickTitle": "یک شرکت انتخاب کنید",
     "pickText": "آزمون به‌رایگان در شرکتی که انتخاب می‌کنید کپی می‌شود و آماده ارسال برای متقاضیان است.",
-    "removeCredits": "{credits, plural, other {# واحد اعتبار}} آن{candidates, plural, =0 {} other { (حدود # متقاضی)}} از بین می‌رود و بازپرداخت نمی‌شود."
+    "removeCredits": "{credits, plural, other {# واحد اعتبار}} آن{candidates, plural, =0 {} other { (حدود # متقاضی)}} از بین می‌رود و بازپرداخت نمی‌شود.",
+    "suspended": "این شرکت معلق است و فعلاً نمی‌توان آن را تغییر داد. برای اطلاعات بیشتر به hello@prepza.ai پیام دهید."
   },
   "candidates": {
     "scorecard": "کارنامه",
@@ -617,7 +638,8 @@
     "start": "پذیرش و شروع",
     "mismatch": "ایمیل مطابقت ندارد. برای شروع با ایمیل دعوت وارد شوید.",
     "title": "دعوت به مصاحبه",
-    "theCompany": "شرکت"
+    "theCompany": "شرکت",
+    "unverified": "prepza هویت این شرکت را تأیید نکرده است."
   },
   "members": {
     "joined": "پیوسته",

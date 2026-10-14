@@ -1,6 +1,8 @@
 # Messages the services show users, in Dutch, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This company is suspended. Contact hello@prepza.ai to find out more.": "Dit bedrijf is geschorst. Neem contact op met hello@prepza.ai voor meer informatie.",
+    "This interview isn't available.": "Dit interview is niet beschikbaar.",
     "Only an admin who has joined can become the owner.": "Alleen een beheerder die lid is geworden, kan eigenaar worden.",
     "They already own 3 companies, as many as one person may.": "Diegene is al eigenaar van 3 bedrijven, zoveel als één persoon mag.",
     "Make another member the owner of each company you share, or delete it, before deleting your account.": "Maak van elk bedrijf dat je met anderen deelt een ander lid de eigenaar, of verwijder het, voordat je je account verwijdert.",

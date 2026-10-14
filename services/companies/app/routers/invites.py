@@ -8,6 +8,7 @@ from app.helpers.interviews import attach_set, interview_title
 from app.helpers.logos import logo_path
 from app.integrations.redis import get_redis
 from app.schemas.invites import InviteStartOut, InviteView
+from app.services.access import refuse_if_suspended
 from app.services.candidate_start import start_sessions
 from app.storage import companies
 from app.storage import invites as invite_store
@@ -30,6 +31,7 @@ async def get_invite(token: str, user: OptionalUser) -> InviteView:
     title = await interview_title(interview)
 
     company = await companies.get(interview.company_id)
+    refuse_if_suspended(company, invite.status)
 
     return InviteView(
         interview_id=interview.id,
@@ -63,6 +65,8 @@ async def start_invite(token: str, user: CurrentUser) -> InviteStartOut:
 
     if invite.status == InviteStatus.FINISHED:
         raise HTTPException(status.HTTP_409_CONFLICT, "This interview is already finished")
+
+    refuse_if_suspended(await companies.get(interview.company_id), invite.status)
 
     # Paused, nobody starts; a candidate already in the interview may finish it.
     if invite.status != InviteStatus.IN_PROCESS:

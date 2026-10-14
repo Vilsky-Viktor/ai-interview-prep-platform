@@ -119,6 +119,10 @@ TOO_MANY_WITHOUT_CANDIDATES_UNPAID = (
 # Starting an interview with an email the sign-in hasn't verified (GitHub doesn't): a link to
 # confirm it was sent when they signed in.
 EMAIL_NOT_VERIFIED = "Confirm your email first: open the link we sent you, then try again."
+# A company a superadmin suspended: its members see why, and candidates that the interview isn't
+# available (one already in it may finish).
+COMPANY_SUSPENDED = "This company is suspended. Contact hello@prepza.ai to find out more."
+INTERVIEW_UNAVAILABLE = "This interview isn't available."
 # A shareable link whose company has no credits left for another candidate.
 LINK_CLOSED = "This interview isn't taking new candidates right now."
 # Random bytes in a shareable link's code.

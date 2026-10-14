@@ -6,7 +6,7 @@ The admin zone is for superadmins: prepza's own team, not a company's admins.
 - Only they see the Admin zone in the account menu.
 - Everyone else gets "not found" from its pages and routes.
 
-It has nine tabs, in this order: [Templates](#templates), [News](#news), [Flagged](#flagged-and-replaced), [Replaced](#flagged-and-replaced), [Pass rates](#pass-rates), [Verification](#verification), [Stats](#stats), [Emails](#emails) and [Controls](#controls). On a phone the row scrolls sideways.
+It has ten tabs, in this order: [Templates](#templates), [News](#news), [Flagged](#flagged-and-replaced), [Replaced](#flagged-and-replaced), [Pass rates](#pass-rates), [Verification](#verification), [Companies](#companies), [Stats](#stats), [Emails](#emails) and [Controls](#controls). On a phone the row scrolls sideways.
 
 ## Templates
 
@@ -44,6 +44,16 @@ See [Question quality](../generation.md#question-quality) for how questions get 
 ## Verification
 
 Companies waiting for review of their name and website (see [Companies](companies.md#verification)).
+
+## Companies
+
+For a company that impersonates another or abuses prepza. It lists the 50 newest companies, or those whose name contains the search, each with its members and when it was made. Each one can be:
+
+- **suspended,** after a confirmation (see [Companies](companies.md#suspension)), and the suspension lifted,
+- **renamed,**
+- **deleted,** after a confirmation, with everything it has, as its owner would delete it.
+
+Each action is logged with the superadmin who did it.
 
 ## Pass rates
 

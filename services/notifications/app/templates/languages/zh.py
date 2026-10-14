@@ -136,6 +136,8 @@ TEXTS = {
         "footer": "这封邮件发送到 {email}，因为你是 prepza 上 {company} 的所有者或管理员。它与你公司的账单有关，因此无论你的邮件设置如何都会发送。",
     },
     "footer": "这封邮件发送到 {email}，因为有人在 prepza 上邀请了这个地址。如果这封邮件与你无关，可以忽略。",
+    # An invite from a company prepza hasn't verified, at the end of the footer.
+    "unverified": "prepza 尚未验证 {company}。",
     "paste_link": "或者将此链接粘贴到浏览器中",
     # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
     "unsubscribe": "退订",

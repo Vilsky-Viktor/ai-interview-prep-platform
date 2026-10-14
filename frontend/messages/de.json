@@ -245,7 +245,27 @@
     "deletePostTitle": "Diesen Beitrag löschen?",
     "deletePostText": "Er verschwindet in allen Sprachen von der Neuigkeiten-Seite.",
     "postSaveFailed": "Der Beitrag konnte nicht gespeichert werden. Bitte versuche es erneut.",
-    "postDeleteFailed": "Der Beitrag konnte nicht gelöscht werden. Bitte versuche es erneut."
+    "postDeleteFailed": "Der Beitrag konnte nicht gelöscht werden. Bitte versuche es erneut.",
+    "companies": "Unternehmen",
+    "companySearch": "Name des Unternehmens",
+    "companiesNotFound": "Keine Unternehmen gefunden.",
+    "suspended": "Gesperrt",
+    "companyDetails": "{members, plural, one {# Mitglied} other {# Mitglieder}} · seit {date}",
+    "suspend": "Sperren",
+    "unsuspend": "Sperre aufheben",
+    "unsuspended": "Die Sperre wurde aufgehoben.",
+    "suspendTitle": "„{name}“ sperren?",
+    "suspendText": "Die Mitglieder sehen es weiter, können aber nichts ändern, es lädt niemanden ein, und Kandidaten, die noch nicht begonnen haben, finden seine Interviews nicht verfügbar. Du kannst die Sperre jederzeit aufheben.",
+    "suspendedDone": "Das Unternehmen wurde gesperrt.",
+    "renameCompany": "{name} umbenennen",
+    "deleteCompany": "{name} löschen",
+    "deleteCompanyTitle": "„{name}“ löschen?",
+    "deleteCompanyText": "Seine Interviews, Kandidaten, Ergebnisse und Credits sind dann für immer weg. Das lässt sich nicht rückgängig machen.",
+    "deleteCompanyConfirm": "Unternehmen löschen",
+    "companyDeleted": "Das Unternehmen wurde gelöscht.",
+    "renameCompanyTitle": "Unternehmen umbenennen",
+    "companyName": "Name des Unternehmens",
+    "companyRenamed": "Das Unternehmen wurde umbenannt."
   },
   "templates": {
     "title": "Vorlagen",
@@ -468,7 +488,8 @@
     "logoFailed": "Das Logo konnte nicht gespeichert werden.",
     "pickTitle": "Wähle ein Unternehmen",
     "pickText": "Der Test wird kostenlos in das gewählte Unternehmen kopiert und ist sofort bereit für Kandidaten.",
-    "removeCredits": "Seine {credits, plural, one {# Credit} other {# Credits}}{candidates, plural, =0 {} one { (etwa # Kandidat)} other { (etwa # Kandidaten)}} gehen verloren und werden nicht erstattet."
+    "removeCredits": "Seine {credits, plural, one {# Credit} other {# Credits}}{candidates, plural, =0 {} one { (etwa # Kandidat)} other { (etwa # Kandidaten)}} gehen verloren und werden nicht erstattet.",
+    "suspended": "Dieses Unternehmen ist gesperrt und kann gerade nicht geändert werden. Mehr erfährst du unter hello@prepza.ai."
   },
   "candidates": {
     "scorecard": "Auswertung",
@@ -617,7 +638,8 @@
     "start": "Annehmen und starten",
     "mismatch": "Die E-Mail-Adresse stimmt nicht überein. Melde dich mit der Adresse aus der Einladung an, um zu starten.",
     "title": "Einladung zum Interview",
-    "theCompany": "das Unternehmen"
+    "theCompany": "das Unternehmen",
+    "unverified": "prepza hat dieses Unternehmen nicht verifiziert."
   },
   "members": {
     "joined": "Beigetreten",

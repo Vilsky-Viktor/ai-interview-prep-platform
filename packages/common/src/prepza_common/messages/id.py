@@ -1,6 +1,8 @@
 # Messages the services show users, in Indonesian, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This company is suspended. Contact hello@prepza.ai to find out more.": "Perusahaan ini ditangguhkan. Hubungi hello@prepza.ai untuk tahu lebih lanjut.",
+    "This interview isn't available.": "Wawancara ini tidak tersedia.",
     "Only an admin who has joined can become the owner.": "Hanya admin yang sudah bergabung yang bisa menjadi pemilik.",
     "They already own 3 companies, as many as one person may.": "Dia sudah memiliki 3 perusahaan, batas untuk satu orang.",
     "Make another member the owner of each company you share, or delete it, before deleting your account.": "Jadikan anggota lain pemilik setiap perusahaan yang kamu bagi dengan orang lain, atau hapus perusahaan itu, sebelum menghapus akunmu.",

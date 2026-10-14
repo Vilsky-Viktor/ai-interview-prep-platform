@@ -168,6 +168,8 @@ TEXTS = {
     },
     "footer": "أُرسلت هذه الرسالة إلى {email} لأن أحدهم دعا هذا العنوان على prepza. إذا لم تكن "
     "تتوقعها، فيمكنك تجاهلها.",
+    # An invite from a company prepza hasn't verified, at the end of the footer.
+    "unverified": "لم يتحقق prepza من {company}.",
     "paste_link": "أو الصق هذا الرابط في متصفحك",
     # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
     "unsubscribe": "إلغاء الاشتراك",

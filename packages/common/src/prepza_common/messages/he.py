@@ -1,6 +1,8 @@
 # Messages the services show users, in Hebrew, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This company is suspended. Contact hello@prepza.ai to find out more.": "החברה הזו מושעית. לפרטים נוספים יש לפנות אל hello@prepza.ai.",
+    "This interview isn't available.": "הראיון הזה אינו זמין.",
     "Only an admin who has joined can become the owner.": "רק מנהל שכבר הצטרף יכול להפוך לבעלים.",
     "They already own 3 companies, as many as one person may.": "חבר זה כבר בעלים של 3 חברות, המספר המרבי לאדם אחד.",
     "Make another member the owner of each company you share, or delete it, before deleting your account.": "יש להפוך חבר אחר לבעלים של כל חברה שמשותפת עם אחרים, או למחוק אותה, לפני מחיקת החשבון.",

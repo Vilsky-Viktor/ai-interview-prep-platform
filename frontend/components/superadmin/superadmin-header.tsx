@@ -16,6 +16,7 @@ export function SuperadminHeader({
     | "replaced"
     | "pass-rates"
     | "verification"
+    | "companies"
     | "stats"
     | "controls"
     | "emails"
@@ -60,6 +61,11 @@ export function SuperadminHeader({
             id: "verification",
             href: "/superadmin/verification",
             label: t("verification"),
+          },
+          {
+            id: "companies",
+            href: "/superadmin/companies",
+            label: t("companies"),
           },
           { id: "stats", href: "/superadmin/stats", label: t("stats") },
           { id: "emails", href: "/superadmin/emails", label: t("emails") },

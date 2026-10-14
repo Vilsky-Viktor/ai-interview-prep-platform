@@ -41,6 +41,7 @@ from app.routers import (
     reports,
     schedules,
     superadmin,
+    superadmin_companies,
     superadmin_verification,
     verification,
 )
@@ -96,6 +97,7 @@ app.include_router(schedules.router)
 app.include_router(pause.router)
 app.include_router(maintenance.router)
 app.include_router(superadmin.router)
+app.include_router(superadmin_companies.router)
 app.include_router(superadmin_verification.router)
 
 

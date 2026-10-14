@@ -1,6 +1,8 @@
 # Messages the services show users, in Russian, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This company is suspended. Contact hello@prepza.ai to find out more.": "Эта компания приостановлена. Подробнее — по адресу hello@prepza.ai.",
+    "This interview isn't available.": "Это собеседование недоступно.",
     "Only an admin who has joined can become the owner.": "Владельцем может стать только администратор, который уже присоединился.",
     "They already own 3 companies, as many as one person may.": "Этот участник уже владеет 3 компаниями — максимумом для одного человека.",
     "Make another member the owner of each company you share, or delete it, before deleting your account.": "Прежде чем удалить аккаунт, сделайте владельцем другого участника в каждой компании, где есть кто-то ещё, или удалите её.",

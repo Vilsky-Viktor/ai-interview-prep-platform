@@ -1,6 +1,8 @@
 # Messages the services show users, in Ukrainian, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This company is suspended. Contact hello@prepza.ai to find out more.": "Цю компанію призупинено. Докладніше — за адресою hello@prepza.ai.",
+    "This interview isn't available.": "Ця співбесіда недоступна.",
     "Only an admin who has joined can become the owner.": "Власником може стати лише адміністратор, який уже приєднався.",
     "They already own 3 companies, as many as one person may.": "Цей учасник уже володіє 3 компаніями — максимумом для однієї людини.",
     "Make another member the owner of each company you share, or delete it, before deleting your account.": "Перш ніж видалити акаунт, зробіть власником іншого учасника в кожній компанії, де є хтось ще, або видаліть її.",

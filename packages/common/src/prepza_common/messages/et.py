@@ -1,6 +1,8 @@
 # Messages the services show users, in Estonian, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This company is suspended. Contact hello@prepza.ai to find out more.": "See ettevõte on peatatud. Lisateabe saamiseks kirjuta hello@prepza.ai.",
+    "This interview isn't available.": "See intervjuu ei ole saadaval.",
     "Only an admin who has joined can become the owner.": "Omanikuks saab ainult liitunud administraator.",
     "They already own 3 companies, as many as one person may.": "Tal on juba 3 ettevõtet, nii palju kui ühel inimesel võib olla.",
     "Make another member the owner of each company you share, or delete it, before deleting your account.": "Enne konto kustutamist tee iga ettevõtte, mida jagad teistega, omanikuks keegi teine või kustuta ettevõte.",

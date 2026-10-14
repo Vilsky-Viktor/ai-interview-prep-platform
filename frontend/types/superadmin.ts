@@ -48,3 +48,5 @@ export type EmailLookup = Schemas["EmailLookupOut"]
 
 /** The companies that invited an address, and what it stopped, for the emails tab. */
 export type CandidateOptOuts = notifications["schemas"]["CandidateOptOutsOut"]
+// A company as the admin zone's companies tab lists it.
+export type SuperadminCompany = companies["schemas"]["SuperadminCompanyOut"]

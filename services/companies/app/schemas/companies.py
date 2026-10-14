@@ -60,6 +60,8 @@ class CompanyOut(BaseModel):
     verified_domain: str | None = None
     verification_status: VerificationStatus = VerificationStatus.NONE
     decline_reason: str | None = None
+    # A superadmin suspended it: its members can read, not change it.
+    suspended: bool = False
     created_at: datetime
 
 

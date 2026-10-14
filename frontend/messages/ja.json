@@ -245,7 +245,27 @@
     "deletePostTitle": "この投稿を削除しますか？",
     "deletePostText": "すべての言語のお知らせページから削除されます。",
     "postSaveFailed": "投稿を保存できませんでした。もう一度お試しください。",
-    "postDeleteFailed": "投稿を削除できませんでした。もう一度お試しください。"
+    "postDeleteFailed": "投稿を削除できませんでした。もう一度お試しください。",
+    "companies": "会社",
+    "companySearch": "会社名",
+    "companiesNotFound": "会社が見つかりません。",
+    "suspended": "停止中",
+    "companyDetails": "{members, plural, other {# 人のメンバー}} · {date} から",
+    "suspend": "停止",
+    "unsuspend": "停止を解除",
+    "unsuspended": "停止を解除しました。",
+    "suspendTitle": "「{name}」を停止しますか？",
+    "suspendText": "メンバーは引き続き閲覧できますが、何も変更できません。招待も送られず、まだ開始していない候補者には面接が利用できなくなります。停止はいつでも解除できます。",
+    "suspendedDone": "会社を停止しました。",
+    "renameCompany": "{name} の名前を変更",
+    "deleteCompany": "{name} を削除",
+    "deleteCompanyTitle": "「{name}」を削除しますか？",
+    "deleteCompanyText": "面接、候補者、結果、クレジットが完全に削除されます。元に戻せません。",
+    "deleteCompanyConfirm": "会社を削除",
+    "companyDeleted": "会社を削除しました。",
+    "renameCompanyTitle": "会社名を変更",
+    "companyName": "会社名",
+    "companyRenamed": "会社名を変更しました。"
   },
   "templates": {
     "title": "テンプレート",
@@ -468,7 +488,8 @@
     "logoFailed": "ロゴを保存できませんでした。",
     "pickTitle": "会社を選択",
     "pickText": "テストは選んだ会社に無料でコピーされ、すぐに候補者へ送れます。",
-    "removeCredits": "この会社の {credits, plural, other {# クレジット}}{candidates, plural, =0 {} other {（候補者 約 # 人分）}}は失われ、返金されません。"
+    "removeCredits": "この会社の {credits, plural, other {# クレジット}}{candidates, plural, =0 {} other {（候補者 約 # 人分）}}は失われ、返金されません。",
+    "suspended": "この会社は停止されているため、現在は変更できません。詳しくは hello@prepza.ai までお問い合わせください。"
   },
   "candidates": {
     "scorecard": "スコアカード",
@@ -617,7 +638,8 @@
     "start": "承諾して開始",
     "mismatch": "メールアドレスが一致しません。開始するには招待されたメールアドレスでサインインしてください。",
     "title": "面接の招待",
-    "theCompany": "企業"
+    "theCompany": "企業",
+    "unverified": "prepza はこの会社を確認していません。"
   },
   "members": {
     "joined": "参加済み",

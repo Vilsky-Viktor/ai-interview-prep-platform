@@ -192,6 +192,8 @@ TEXTS = {
     },
     "footer": "Email ini dikirim ke {email} karena seseorang mengundang alamat ini di prepza. "
     "Jika kamu tidak mengharapkannya, abaikan saja.",
+    # An invite from a company prepza hasn't verified, at the end of the footer.
+    "unverified": "prepza belum memverifikasi {company}.",
     "paste_link": "Atau tempel tautan ini di browsermu",
     # The footer's links: optional emails' unsubscribe and settings, and a candidate's own.
     "unsubscribe": "Berhenti berlangganan",

@@ -1,6 +1,8 @@
 # Messages the services show users, in Filipino, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This company is suspended. Contact hello@prepza.ai to find out more.": "Naka-suspend ang kumpanyang ito. Makipag-ugnayan sa hello@prepza.ai para sa higit pang detalye.",
+    "This interview isn't available.": "Hindi available ang interview na ito.",
     "Only an admin who has joined can become the owner.": "Ang admin lang na nakasali na ang puwedeng maging may-ari.",
     "They already own 3 companies, as many as one person may.": "May 3 kumpanya na siyang pagmamay-ari, ang pinakamarami para sa isang tao.",
     "Make another member the owner of each company you share, or delete it, before deleting your account.": "Gawing may-ari ang ibang miyembro ng bawat kumpanyang kasama mo ang iba, o i-delete ito, bago i-delete ang account mo.",
