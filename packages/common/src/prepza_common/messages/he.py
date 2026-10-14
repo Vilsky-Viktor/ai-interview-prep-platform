@@ -1,6 +1,9 @@
 # Messages the services show users, in Hebrew, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Only an admin who has joined can become the owner.": "רק מנהל שכבר הצטרף יכול להפוך לבעלים.",
+    "They already own 3 companies, as many as one person may.": "חבר זה כבר בעלים של 3 חברות, המספר המרבי לאדם אחד.",
+    "Make another member the owner of each company you share, or delete it, before deleting your account.": "יש להפוך חבר אחר לבעלים של כל חברה שמשותפת עם אחרים, או למחוק אותה, לפני מחיקת החשבון.",
     "This request to connect isn't valid. Start connecting again from your AI app.": "בקשת החיבור הזו אינה תקינה. יש להתחיל את החיבור מחדש מאפליקציית ה-AI.",
     "This request was started in another browser. Start connecting again from your AI app.": "הבקשה הזו התחילה בדפדפן אחר. יש להתחיל את החיבור מחדש מאפליקציית ה-AI.",
     "Too many invites waiting. Remove some, or wait for them to join.": "יותר מדי הזמנות ממתינות. הסירו חלק, או חכו שיצטרפו.",

@@ -7,9 +7,13 @@ from prepza_common.paging import PageParams
 from prepza_common.rate_limit import hit, hit_emails
 
 from app.config.settings import settings
+from app.constants.audit import AuditAction
+from app.constants.invites import MAX_OWNED_COMPANIES
 from app.constants.roles import (
     MAX_PENDING_INVITES,
     MEMBER_INVITES_PER_UNPAID_DAY,
+    ONLY_ADMINS_OWN,
+    OWNS_TOO_MANY,
     TOO_MANY_PENDING,
     Role,
 )
@@ -18,9 +22,10 @@ from app.integrations import billing
 from app.integrations.redis import get_redis
 from app.models.companies import Member
 from app.schemas.companies import AdminInviteOut, MemberIn, MemberOut, MemberRoleIn
+from app.service_auth import Via
 from app.services import outbox as outbox_service
 from app.services.access import is_owner, require_company
-from app.storage import members
+from app.storage import audit, companies, members
 
 router = APIRouter(prefix="/members", tags=["members"])
 
@@ -35,6 +40,7 @@ def member_out(member: Member, caller: Member) -> MemberOut:
         joined=joined,
         token=None if joined else member.token,
         removable=is_owner(caller) and not is_owner(member),
+        can_own=is_owner(caller) and joined and member.role == Role.ADMIN,
         created_at=member.created_at,
     )
 
@@ -124,6 +130,27 @@ async def change_role(
         await billing.turn_off_auto_top_up(company_id, member.user_id)
 
     await members.set_role(member.id, body.role)
+
+
+@router.post("/{member_id}/owner", status_code=status.HTTP_204_NO_CONTENT)
+async def make_owner(company_id: UUID, member_id: UUID, user: CurrentUser, via: Via) -> None:
+    """The owner hands the company to a joined admin, who becomes its owner; the owner becomes an
+    admin. Refused (409) for anyone else, and for someone who already owns as many companies as
+    one person may."""
+    member = await owned_member(user, company_id, member_id)
+    company, caller = await require_company(user, company_id)
+
+    if member.user_id is None or member.role != Role.ADMIN:
+        raise HTTPException(status.HTTP_409_CONFLICT, ONLY_ADMINS_OWN)
+
+    if await companies.owned_count(member.user_id) >= MAX_OWNED_COMPANIES:
+        raise HTTPException(status.HTTP_409_CONFLICT, OWNS_TOO_MANY)
+
+    if not await members.transfer_ownership(company, caller, member):
+        raise HTTPException(status.HTTP_409_CONFLICT, ONLY_ADMINS_OWN)
+
+    await audit.record(company.id, user.uid, AuditAction.OWNERSHIP_TRANSFERRED, member.id, via=via)
+    await outbox_service.flush_quietly()
 
 
 @router.delete("/{member_id}", status_code=status.HTTP_204_NO_CONTENT)

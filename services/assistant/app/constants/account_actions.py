@@ -60,7 +60,8 @@ ACCOUNT_ACTIONS = {
         "destructive": True,
         "description": (
             "Delete the user's account and all their data, with the companies they alone own. "
-            "Can't be undone."
+            "Refused while they own a company others joined: another member is made its owner "
+            "first (on its Team page), or the company deleted. Can't be undone."
         ),
     },
     "mark_notifications_seen": {

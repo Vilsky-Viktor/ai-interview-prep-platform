@@ -289,7 +289,10 @@
     "company": "혼자 소유한 회사는 면접과 함께 삭제됩니다. 이 작업은 되돌릴 수 없습니다.",
     "confirm": "계정 삭제",
     "deleted": "계정이 삭제되었습니다.",
-    "failed": "계정을 삭제하지 못했습니다. 다시 시도해 주세요."
+    "failed": "계정을 삭제하지 못했습니다. 다시 시도해 주세요.",
+    "blocked": "먼저 이 회사들의 소유자를 다른 멤버로 바꾸거나 회사를 삭제하세요:",
+    "deletedWith": "다음 회사는 계정과 함께 삭제됩니다:",
+    "credits": "{count, plural, other {# 크레딧 남음}}"
   },
   "share": {
     "sent": "{email}(으)로 초대를 보냈습니다",
@@ -428,7 +431,8 @@
     "admin": "관리자",
     "viewer": "뷰어",
     "adminNote": "면접을 만들고 변경하며, 지원자를 초대하고, 충전합니다.",
-    "viewerNote": "면접과 결과를 보고 보고서를 공유합니다. 변경 권한은 없습니다."
+    "viewerNote": "면접과 결과를 보고 보고서를 공유합니다. 변경 권한은 없습니다.",
+    "ownerNote": "팀을 관리하고 회사를 삭제하거나 넘길 수 있습니다."
   },
   "company": {
     "title": "회사",
@@ -628,7 +632,12 @@
     "removeTitle": "회사에서 제거할까요?",
     "removeText": "{email}은(는) 더 이상 회사에 접근할 수 없습니다. 이 사람의 카드로 자동 충전을 결제하고 있다면 자동 충전이 중지됩니다. 나중에 다시 초대할 수 있습니다.",
     "removeInviteText": "{email}(으)로 보낸 초대 링크가 더 이상 작동하지 않습니다. 나중에 다시 초대할 수 있습니다.",
-    "removeConfirm": "제거"
+    "removeConfirm": "제거",
+    "makeOwner": "소유자로 지정",
+    "makeOwnerTitle": "{email}을(를) 소유자로 지정할까요?",
+    "makeOwnerText": "회원님은 관리자가 됩니다. 팀 관리, 회사 삭제, 다른 사람에게 넘기기는 소유자만 할 수 있습니다.",
+    "makeOwnerFailed": "소유자로 지정하지 못했습니다. 다시 시도하세요.",
+    "madeOwner": "{email}이(가) 이제 소유자입니다."
   },
   "scorecard": {
     "timeOut": "시간 초과",
@@ -1019,7 +1028,8 @@
       "ats_not_invited": "{count, plural, =1 {{ats}의 {email} 님을 “{title}”에 초대하지 못했습니다: {reason, select, credits {크레딧이 부족합니다} limit {이메일 한도에 도달했습니다} paused {초대가 일시 중지되었습니다} other {문제가 발생했습니다}}.} other {{ats}의 지원자 #명을 “{title}”에 초대하지 못했습니다.}}",
       "ats_cannot_write": "{ats}에서 지원자 결과를 받지 않습니다. 키에 쓰기 권한이 없습니다. 쓰기 권한이 있는 키로 다시 연결하세요. 결과는 보관되었다가 그때 전송됩니다.",
       "connection_broken": "{name} 연결이 끊겨 다시 연결해야 합니다. 그때까지 {integration, select, slack {알림이 채널로 전달되지 않습니다} other {보내오는 지원자는 대기하고, 결과는 보관됩니다}}.",
-      "webhook_stopped": "{url}(으)로 가는 웹훅이 중지되었습니다. 추가한 멤버가 더 이상 소유자나 관리자가 아닙니다. 결과를 계속 받으려면 다시 추가하세요."
+      "webhook_stopped": "{url}(으)로 가는 웹훅이 중지되었습니다. 추가한 멤버가 더 이상 소유자나 관리자가 아닙니다. 결과를 계속 받으려면 다시 추가하세요.",
+      "ownership_received": "이제 “{name}”의 소유자입니다."
     }
   },
   "report": {

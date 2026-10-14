@@ -14,6 +14,8 @@ class AuditAction(StrEnum):
     INVITE_REVOKED = "invite_revoked"
     EXTRA_TIME_SET = "extra_time_set"
     PASS_MARK_CHANGED = "pass_mark_changed"
+    # Who answers for the company changed hands.
+    OWNERSHIP_TRANSFERRED = "ownership_transferred"
 
 
 # What an audit event was recorded through when not a person in the app (audit_events.via): the

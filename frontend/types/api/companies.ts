@@ -124,6 +124,27 @@ export interface paths {
     patch: operations["rename_company_companies__company_id__name_patch"]
     trace?: never
   }
+  "/account/deletion": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Account Deletion
+     * @description For the delete-account dialog: the companies that block deleting the account until
+     *     another member owns them, and the ones deleted with it, with their credits.
+     */
+    get: operations["account_deletion_account_deletion_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/companies/{company_id}/audit": {
     parameters: {
       query?: never
@@ -260,6 +281,28 @@ export interface paths {
      */
     put: operations["change_role_members__member_id__role_put"]
     post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/members/{member_id}/owner": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Make Owner
+     * @description The owner hands the company to a joined admin, who becomes its owner; the owner becomes an
+     *     admin. Refused (409) for anyone else, and for someone who already owns as many companies as
+     *     one person may.
+     */
+    post: operations["make_owner_members__member_id__owner_post"]
     delete?: never
     options?: never
     head?: never
@@ -1598,6 +1641,13 @@ export interface components {
       /** Editor */
       editor: boolean
     }
+    /** AccountDeletionOut */
+    AccountDeletionOut: {
+      /** Blocked */
+      blocked: components["schemas"]["OwnedCompany"][]
+      /** Deleted */
+      deleted: components["schemas"]["LostCompany"][]
+    }
     /**
      * AdminInviteOut
      * @description What the invited member sees before accepting.
@@ -2367,6 +2417,18 @@ export interface components {
       /** Logo Url */
       logo_url: string | null
     }
+    /** LostCompany */
+    LostCompany: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string
+      /** Name */
+      name: string
+      /** Credits */
+      credits: number | null
+    }
     /** MaintenanceIn */
     MaintenanceIn: {
       /** On */
@@ -2431,6 +2493,11 @@ export interface components {
        */
       removable: boolean
       /**
+       * Can Own
+       * @default false
+       */
+      can_own: boolean
+      /**
        * Created At
        * Format: date-time
        */
@@ -2443,6 +2510,16 @@ export interface components {
        * @enum {string}
        */
       role: "admin" | "viewer"
+    }
+    /** OwnedCompany */
+    OwnedCompany: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string
+      /** Name */
+      name: string
     }
     /**
      * PassRateOut
@@ -3174,6 +3251,26 @@ export interface operations {
       }
     }
   }
+  account_deletion_account_deletion_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["AccountDeletionOut"]
+        }
+      }
+    }
+  }
   list_audit_events_companies__company_id__audit_get: {
     parameters: {
       query?: {
@@ -3496,6 +3593,37 @@ export interface operations {
         "application/json": components["schemas"]["MemberRoleIn"]
       }
     }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  make_owner_members__member_id__owner_post: {
+    parameters: {
+      query: {
+        company_id: string
+      }
+      header?: never
+      path: {
+        member_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
     responses: {
       /** @description Successful Response */
       204: {

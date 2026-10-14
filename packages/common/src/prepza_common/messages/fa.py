@@ -1,6 +1,9 @@
 # Messages the services show users, in Persian, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Only an admin who has joined can become the owner.": "فقط مدیری که پیوسته است می‌تواند مالک شود.",
+    "They already own 3 companies, as many as one person may.": "این عضو هم‌اکنون مالک ۳ شرکت است، یعنی حداکثری که یک نفر می‌تواند داشته باشد.",
+    "Make another member the owner of each company you share, or delete it, before deleting your account.": "پیش از حذف حسابتان، عضو دیگری را مالک هر شرکتی کنید که با دیگران مشترک دارید، یا آن را حذف کنید.",
     "This request to connect isn't valid. Start connecting again from your AI app.": "این درخواست اتصال معتبر نیست. اتصال را دوباره از برنامهٔ هوش مصنوعی‌تان شروع کنید.",
     "This request was started in another browser. Start connecting again from your AI app.": "این درخواست در مرورگر دیگری شروع شده است. اتصال را دوباره از برنامهٔ هوش مصنوعی‌تان شروع کنید.",
     "Too many invites waiting. Remove some, or wait for them to join.": "دعوت‌های در انتظار زیاد است. برخی را حذف کنید یا صبر کنید تا بپیوندند.",

@@ -28,6 +28,8 @@ class MemberOut(BaseModel):
     # Whether the user can remove this member or pending invite, or change its role: the owner,
     # any row but their own.
     removable: bool = False
+    # Whether the user can make this member the owner: the owner, for a joined admin.
+    can_own: bool = False
     created_at: datetime
 
 

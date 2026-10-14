@@ -1,6 +1,9 @@
 # Messages the services show users, in Arabic, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Only an admin who has joined can become the owner.": "يمكن فقط لمسؤول انضم بالفعل أن يصبح المالك.",
+    "They already own 3 companies, as many as one person may.": "يمتلك هذا العضو 3 شركات بالفعل، وهو الحد الأقصى للشخص الواحد.",
+    "Make another member the owner of each company you share, or delete it, before deleting your account.": "اجعل عضوًا آخر مالكًا لكل شركة تشاركها مع آخرين، أو احذفها، قبل حذف حسابك.",
     "This request to connect isn't valid. Start connecting again from your AI app.": "طلب الربط هذا غير صالح. ابدأ الربط من جديد من تطبيق الذكاء الاصطناعي لديك.",
     "This request was started in another browser. Start connecting again from your AI app.": "بدأ هذا الطلب في متصفح آخر. ابدأ الربط من جديد من تطبيق الذكاء الاصطناعي لديك.",
     "Too many invites waiting. Remove some, or wait for them to join.": "دعوات كثيرة بانتظار القبول. احذف بعضها، أو انتظر حتى ينضموا.",

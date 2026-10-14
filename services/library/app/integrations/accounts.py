@@ -5,7 +5,8 @@ from app.service_auth import service_token
 
 
 def services() -> dict[str, str]:
-    """The services that hold their own part of a user's data, by name."""
+    """The services that hold their own part of a user's data, by name; companies first, as it
+    may refuse a deletion (services/accounts.py)."""
     return {
         "companies": settings.companies_url,
         "rounds": settings.rounds_url,

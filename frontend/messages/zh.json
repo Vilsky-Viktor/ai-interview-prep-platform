@@ -289,7 +289,10 @@
     "company": "仅由你拥有的公司及其面试将一并删除。此操作无法撤销。",
     "confirm": "删除账户",
     "deleted": "你的账户已删除。",
-    "failed": "无法删除你的账户，请重试。"
+    "failed": "无法删除你的账户，请重试。",
+    "blocked": "请先将这些公司的所有者转给另一位成员，或删除这些公司：",
+    "deletedWith": "这些公司将随你的账户一起删除：",
+    "credits": "{count, plural, other {剩余 # 点}}"
   },
   "share": {
     "sent": "邀请已发送至 {email}",
@@ -428,7 +431,8 @@
     "admin": "管理员",
     "viewer": "查看者",
     "adminNote": "创建和修改面试、邀请候选人、充值。",
-    "viewerNote": "查看面试和结果、分享报告，不能更改任何内容。"
+    "viewerNote": "查看面试和结果、分享报告，不能更改任何内容。",
+    "ownerNote": "管理团队，可删除公司并转交给他人。"
   },
   "company": {
     "title": "公司",
@@ -628,7 +632,12 @@
     "removeTitle": "从公司移除？",
     "removeText": "{email} 将无法再访问公司。如果自动充值使用的是其银行卡，自动充值将停止。你之后可以再次邀请。",
     "removeInviteText": "发送给 {email} 的邀请链接将失效。你之后可以再次邀请。",
-    "removeConfirm": "移除"
+    "removeConfirm": "移除",
+    "makeOwner": "设为所有者",
+    "makeOwnerTitle": "将 {email} 设为所有者？",
+    "makeOwnerText": "你将成为管理员。只有所有者能管理团队、删除公司并转交给他人。",
+    "makeOwnerFailed": "无法设为所有者。请重试。",
+    "madeOwner": "{email} 现在是所有者。"
   },
   "scorecard": {
     "timeOut": "超时",
@@ -1019,7 +1028,8 @@
       "ats_not_invited": "{count, plural, =1 {来自 {ats} 的 {email} 未被邀请参加“{title}”：{reason, select, credits {点数不足} limit {已达到邮件发送上限} paused {邀请已暂停} other {出了点问题}}。} other {来自 {ats} 的 # 位候选人未被邀请参加“{title}”。}}",
       "ats_cannot_write": "{ats} 不接收候选人的结果：该密钥没有写入权限。请用有写入权限的密钥重新连接；结果会先保留，届时再发送。",
       "connection_broken": "{name} 已停止工作，需要重新连接。在此之前，{integration, select, slack {通知不会发到你的频道} other {它发来的候选人会等待，他们的结果会先保留}}。",
-      "webhook_stopped": "发往 {url} 的 Webhook 已停止：添加它的成员已不再是所有者或管理员。请重新添加，以继续接收结果。"
+      "webhook_stopped": "发往 {url} 的 Webhook 已停止：添加它的成员已不再是所有者或管理员。请重新添加，以继续接收结果。",
+      "ownership_received": "你现在是“{name}”的所有者。"
     }
   },
   "report": {

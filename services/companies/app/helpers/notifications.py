@@ -126,3 +126,15 @@ def member_joined(company: Company, member: Member, owner_id: str) -> dict:
         name=company.name,
         role=member.role,
     )
+
+
+def ownership_received(company: Company, member: Member, transfer_id: str) -> dict:
+    """For the new owner, made so by the owner before them; once per transfer."""
+    return notification(
+        Recipient.USER,
+        member.user_id,
+        NotificationKind.OWNERSHIP_RECEIVED,
+        MEMBERS_LINK.format(company_id=company.id),
+        key=transfer_id,
+        name=company.name,
+    )

@@ -15,6 +15,7 @@ from app.constants.reports import MAX_BODY_BYTES
 from app.integrations.redis import get_redis
 from app.routers import (
     accommodations,
+    account,
     audit,
     auto_top_ups,
     billing,
@@ -68,6 +69,7 @@ app.add_middleware(MaintenanceMiddleware, get_redis=get_redis)
 app.add_middleware(RequestLogMiddleware)
 app.add_middleware(BodyLimitMiddleware, max_bytes=MAX_BODY_BYTES)
 app.include_router(companies.router)
+app.include_router(account.router)
 app.include_router(audit.router)
 app.include_router(auto_top_ups.router)
 app.include_router(billing.router)

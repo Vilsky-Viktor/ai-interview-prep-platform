@@ -189,3 +189,10 @@ MODEL_PRICES = {
     "gpt-6.1-sol": (2.00, 10.00),
     "gpt-6-astra": (10.00, 50.00),
 }
+
+# Deleting an account that owns a company others have joined (companies refuses, library says
+# so): the company would go with their access and its paid credits.
+ACCOUNT_OWNS_SHARED = (
+    "Make another member the owner of each company you share, or delete it, before deleting "
+    "your account."
+)

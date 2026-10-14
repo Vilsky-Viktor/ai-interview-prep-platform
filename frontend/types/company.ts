@@ -10,6 +10,8 @@ type AtsSchemas = ats["schemas"]
 export type Company = Schemas["CompanyOut"]
 export type CompanyBalance = Schemas["CompanyBalanceOut"]
 export type CompanyMember = Schemas["MemberOut"]
+// What deleting the account does to the companies the user owns.
+export type AccountDeletion = Schemas["AccountDeletionOut"]
 export type AdminInvite = Schemas["AdminInviteOut"]
 export type Interview = Schemas["InterviewOut"]
 export type InterviewDetail = Schemas["InterviewDetail"]

@@ -421,6 +421,33 @@
     }
    }
   },
+  "/account/deletion": {
+   "get": {
+    "tags": [
+     "account"
+    ],
+    "summary": "Account Deletion",
+    "description": "For the delete-account dialog: the companies that block deleting the account until\nanother member owns them, and the ones deleted with it, with their credits.",
+    "operationId": "account_deletion_account_deletion_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/AccountDeletionOut"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
   "/companies/{company_id}/audit": {
    "get": {
     "tags": [
@@ -1043,6 +1070,58 @@
       }
      }
     },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/members/{member_id}/owner": {
+   "post": {
+    "tags": [
+     "members"
+    ],
+    "summary": "Make Owner",
+    "description": "The owner hands the company to a joined admin, who becomes its owner; the owner becomes an\nadmin. Refused (409) for anyone else, and for someone who already owns as many companies as\none person may.",
+    "operationId": "make_owner_members__member_id__owner_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "member_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Member Id"
+      }
+     },
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
     "responses": {
      "204": {
       "description": "Successful Response"
@@ -4888,6 +4967,30 @@
     ],
     "title": "AccessOut"
    },
+   "AccountDeletionOut": {
+    "properties": {
+     "blocked": {
+      "items": {
+       "$ref": "#/components/schemas/OwnedCompany"
+      },
+      "type": "array",
+      "title": "Blocked"
+     },
+     "deleted": {
+      "items": {
+       "$ref": "#/components/schemas/LostCompany"
+      },
+      "type": "array",
+      "title": "Deleted"
+     }
+    },
+    "type": "object",
+    "required": [
+     "blocked",
+     "deleted"
+    ],
+    "title": "AccountDeletionOut"
+   },
    "AdminInviteOut": {
     "properties": {
      "company_name": {
@@ -6816,6 +6919,37 @@
     ],
     "title": "LogoOut"
    },
+   "LostCompany": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "name": {
+      "type": "string",
+      "title": "Name"
+     },
+     "credits": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Credits"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "name",
+     "credits"
+    ],
+    "title": "LostCompany"
+   },
    "MaintenanceIn": {
     "properties": {
      "on": {
@@ -6948,6 +7082,11 @@
       "title": "Removable",
       "default": false
      },
+     "can_own": {
+      "type": "boolean",
+      "title": "Can Own",
+      "default": false
+     },
      "created_at": {
       "type": "string",
       "format": "date-time",
@@ -6980,6 +7119,25 @@
      "role"
     ],
     "title": "MemberRoleIn"
+   },
+   "OwnedCompany": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "name": {
+      "type": "string",
+      "title": "Name"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "name"
+    ],
+    "title": "OwnedCompany"
    },
    "PassRateOut": {
     "properties": {

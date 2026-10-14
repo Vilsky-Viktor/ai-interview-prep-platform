@@ -1,6 +1,9 @@
 # Messages the services show users, in Dutch, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Only an admin who has joined can become the owner.": "Alleen een beheerder die lid is geworden, kan eigenaar worden.",
+    "They already own 3 companies, as many as one person may.": "Diegene is al eigenaar van 3 bedrijven, zoveel als één persoon mag.",
+    "Make another member the owner of each company you share, or delete it, before deleting your account.": "Maak van elk bedrijf dat je met anderen deelt een ander lid de eigenaar, of verwijder het, voordat je je account verwijdert.",
     "This request to connect isn't valid. Start connecting again from your AI app.": "Dit verzoek om te verbinden is niet geldig. Begin opnieuw met verbinden vanuit je AI-app.",
     "This request was started in another browser. Start connecting again from your AI app.": "Dit verzoek is in een andere browser gestart. Begin opnieuw met verbinden vanuit je AI-app.",
     "Too many invites waiting. Remove some, or wait for them to join.": "Te veel openstaande uitnodigingen. Verwijder er een paar of wacht tot ze lid worden.",

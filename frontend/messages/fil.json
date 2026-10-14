@@ -289,7 +289,10 @@
     "company": "Ang kumpanyang ikaw lang ang may-ari ay mabubura kasama ang mga interview nito. Hindi na ito maibabalik.",
     "confirm": "Burahin ang account",
     "deleted": "Nabura na ang iyong account.",
-    "failed": "Hindi mabura ang iyong account. Pakisubukang muli."
+    "failed": "Hindi mabura ang iyong account. Pakisubukang muli.",
+    "blocked": "Gawin munang may-ari ng mga kumpanyang ito ang ibang miyembro, o i-delete ang mga ito:",
+    "deletedWith": "Made-delete ang mga kumpanyang ito kasama ng account mo:",
+    "credits": "{count, plural, =1 {# credit na natitira} other {# credit na natitira}}"
   },
   "share": {
     "sent": "Naipadala ang imbitasyon sa {email}",
@@ -428,7 +431,8 @@
     "admin": "admin",
     "viewer": "viewer",
     "adminNote": "Gumagawa at nagbabago ng mga interview, nag-iimbita ng mga aplikante, nagto-top up.",
-    "viewerNote": "Nakikita ang mga interview at resulta, nagse-share ng mga report. Walang binabago."
+    "viewerNote": "Nakikita ang mga interview at resulta, nagse-share ng mga report. Walang binabago.",
+    "ownerNote": "Namamahala sa team, puwedeng mag-delete ng kumpanya at ibigay ito sa iba."
   },
   "company": {
     "title": "Mga kumpanya",
@@ -628,7 +632,12 @@
     "removeTitle": "Alisin sa kumpanya?",
     "removeText": "Mawawalan ng access sa kumpanya si {email}. Kung card niya ang nagbabayad ng automatic top-up, titigil ang mga ito. Puwede mo silang imbitahan ulit mamaya.",
     "removeInviteText": "Hindi na gagana ang invite link na ipinadala sa {email}. Puwede mo silang imbitahan ulit mamaya.",
-    "removeConfirm": "Alisin"
+    "removeConfirm": "Alisin",
+    "makeOwner": "Gawing may-ari",
+    "makeOwnerTitle": "Gawing may-ari si {email}?",
+    "makeOwnerText": "Magiging admin ka. Ang may-ari lang ang namamahala sa team, puwedeng mag-delete ng kumpanya at ibigay ito sa iba.",
+    "makeOwnerFailed": "Hindi siya magawang may-ari. Subukan ulit.",
+    "madeOwner": "Si {email} na ang may-ari."
   },
   "scorecard": {
     "timeOut": "Ubos na ang oras",
@@ -1032,7 +1041,8 @@
       "ats_not_invited": "{count, plural, =1 {Hindi naimbitahan sa “{title}” si {email} mula sa {ats}: {reason, select, credits {ubos na ang credits} limit {naabot ang email limit} paused {naka-pause ang mga imbitasyon} other {nagkaproblema}}.} other {Hindi naimbitahan sa “{title}” ang # aplikante mula sa {ats}.}}",
       "ats_cannot_write": "Hindi tinatanggap ng {ats} ang mga resulta ng mga aplikante: walang write access ang key. Ikonekta ulit gamit ang key na may write access; itatabi ang mga resulta at ipapadala pagkatapos.",
       "connection_broken": "Huminto sa paggana ang {name} at kailangang ikonekta ulit. Hanggang doon, {integration, select, slack {hindi makakarating ang mga notification sa channel mo} other {maghihintay ang mga aplikanteng ipinapadala nito, at itatabi ang mga resulta nila}}.",
-      "webhook_stopped": "Huminto ang web hook papunta sa {url}: hindi na owner o admin ang member na nagdagdag nito. Idagdag ulit para patuloy na makatanggap ng mga resulta."
+      "webhook_stopped": "Huminto ang web hook papunta sa {url}: hindi na owner o admin ang member na nagdagdag nito. Idagdag ulit para patuloy na makatanggap ng mga resulta.",
+      "ownership_received": "Ikaw na ang may-ari ng “{name}”."
     }
   },
   "report": {

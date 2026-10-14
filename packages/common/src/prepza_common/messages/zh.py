@@ -1,6 +1,9 @@
 # Messages the services show users, in Chinese (Simplified), keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Only an admin who has joined can become the owner.": "只有已加入的管理员才能成为所有者。",
+    "They already own 3 companies, as many as one person may.": "此人已拥有 3 家公司，这是每人的上限。",
+    "Make another member the owner of each company you share, or delete it, before deleting your account.": "删除账户前，请将每个与他人共享的公司转给另一位成员，或删除该公司。",
     "This request to connect isn't valid. Start connecting again from your AI app.": "此连接请求无效。请从你的 AI 应用重新开始连接。",
     "This request was started in another browser. Start connecting again from your AI app.": "此请求是在另一个浏览器中发起的。请从你的 AI 应用重新开始连接。",
     "Too many invites waiting. Remove some, or wait for them to join.": "待接受的邀请太多。请删除一些，或等待对方加入。",

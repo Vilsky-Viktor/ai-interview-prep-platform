@@ -1,6 +1,9 @@
 # Messages the services show users, in Filipino, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Only an admin who has joined can become the owner.": "Ang admin lang na nakasali na ang puwedeng maging may-ari.",
+    "They already own 3 companies, as many as one person may.": "May 3 kumpanya na siyang pagmamay-ari, ang pinakamarami para sa isang tao.",
+    "Make another member the owner of each company you share, or delete it, before deleting your account.": "Gawing may-ari ang ibang miyembro ng bawat kumpanyang kasama mo ang iba, o i-delete ito, bago i-delete ang account mo.",
     "This request to connect isn't valid. Start connecting again from your AI app.": "Hindi valid ang request na ito na kumonekta. Simulan ulit ang pagkonekta mula sa AI app mo.",
     "This request was started in another browser. Start connecting again from your AI app.": "Sinimulan ang request na ito sa ibang browser. Simulan ulit ang pagkonekta mula sa AI app mo.",
     "Too many invites waiting. Remove some, or wait for them to join.": "Masyadong maraming imbitasyong naghihintay. Alisin ang ilan, o hintaying sumali sila.",

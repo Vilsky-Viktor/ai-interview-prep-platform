@@ -1,6 +1,9 @@
 # Messages the services show users, in Korean, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Only an admin who has joined can become the owner.": "이미 참여한 관리자만 소유자가 될 수 있습니다.",
+    "They already own 3 companies, as many as one person may.": "이미 회사 3곳을 소유하고 있어 한 사람이 가질 수 있는 최대치입니다.",
+    "Make another member the owner of each company you share, or delete it, before deleting your account.": "계정을 삭제하기 전에 다른 사람과 함께 쓰는 각 회사의 소유자를 다른 멤버로 바꾸거나 회사를 삭제하세요.",
     "This request to connect isn't valid. Start connecting again from your AI app.": "이 연결 요청은 유효하지 않습니다. AI 앱에서 다시 연결을 시작하세요.",
     "This request was started in another browser. Start connecting again from your AI app.": "이 요청은 다른 브라우저에서 시작되었습니다. AI 앱에서 다시 연결을 시작하세요.",
     "Too many invites waiting. Remove some, or wait for them to join.": "대기 중인 초대가 너무 많습니다. 일부를 삭제하거나 참여할 때까지 기다리세요.",

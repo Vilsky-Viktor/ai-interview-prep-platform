@@ -1,6 +1,9 @@
 # Messages the services show users, in Thai, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Only an admin who has joined can become the owner.": "เฉพาะผู้ดูแลที่เข้าร่วมแล้วเท่านั้นที่เป็นเจ้าของได้",
+    "They already own 3 companies, as many as one person may.": "บุคคลนี้เป็นเจ้าของบริษัท 3 แห่งแล้ว ซึ่งเป็นจำนวนสูงสุดต่อคน",
+    "Make another member the owner of each company you share, or delete it, before deleting your account.": "ก่อนลบบัญชี ให้ตั้งสมาชิกคนอื่นเป็นเจ้าของบริษัทที่คุณใช้ร่วมกับผู้อื่นทุกแห่ง หรือลบบริษัทนั้น",
     "This request to connect isn't valid. Start connecting again from your AI app.": "คำขอเชื่อมต่อนี้ไม่ถูกต้อง โปรดเริ่มเชื่อมต่อใหม่จากแอป AI ของคุณ",
     "This request was started in another browser. Start connecting again from your AI app.": "คำขอนี้เริ่มในเบราว์เซอร์อื่น โปรดเริ่มเชื่อมต่อใหม่จากแอป AI ของคุณ",
     "Too many invites waiting. Remove some, or wait for them to join.": "มีคำเชิญที่รออยู่มากเกินไป ลบบางรายการ หรือรอให้เข้าร่วมก่อน",

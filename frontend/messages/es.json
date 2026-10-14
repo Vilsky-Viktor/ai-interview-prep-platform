@@ -289,7 +289,10 @@
     "company": "Las empresas de las que eres el único propietario se eliminan con sus entrevistas. Esto no se puede deshacer.",
     "confirm": "Eliminar cuenta",
     "deleted": "Tu cuenta se eliminó.",
-    "failed": "No se pudo eliminar tu cuenta. Inténtalo de nuevo."
+    "failed": "No se pudo eliminar tu cuenta. Inténtalo de nuevo.",
+    "blocked": "Primero haz propietario a otro miembro de estas empresas, o elimínalas:",
+    "deletedWith": "Estas empresas se eliminan con tu cuenta:",
+    "credits": "{count, plural, one {# crédito restante} other {# créditos restantes}}"
   },
   "share": {
     "sent": "Invitación enviada a {email}",
@@ -428,7 +431,8 @@
     "admin": "administrador",
     "viewer": "lector",
     "adminNote": "Crea y cambia entrevistas, invita a candidatos, recarga créditos.",
-    "viewerNote": "Ve las entrevistas y los resultados, comparte informes. No cambia nada."
+    "viewerNote": "Ve las entrevistas y los resultados, comparte informes. No cambia nada.",
+    "ownerNote": "Gestiona el equipo, puede eliminar la empresa y cederla."
   },
   "company": {
     "title": "Empresas",
@@ -628,7 +632,12 @@
     "removeTitle": "¿Quitar de la empresa?",
     "removeText": "{email} pierde el acceso a la empresa. Si su tarjeta paga las recargas automáticas, estas se detienen. Puedes volver a invitar a esta persona más adelante.",
     "removeInviteText": "El enlace de invitación enviado a {email} deja de funcionar. Puedes volver a invitar a esta persona más adelante.",
-    "removeConfirm": "Quitar"
+    "removeConfirm": "Quitar",
+    "makeOwner": "Hacer propietario",
+    "makeOwnerTitle": "¿Hacer a {email} propietario?",
+    "makeOwnerText": "Pasarás a ser administrador. Solo el propietario gestiona el equipo, puede eliminar la empresa y cederla a otra persona.",
+    "makeOwnerFailed": "No se pudo hacer propietario. Inténtalo de nuevo.",
+    "madeOwner": "{email} es ahora el propietario."
   },
   "scorecard": {
     "timeOut": "Tiempo agotado",
@@ -1028,7 +1037,8 @@
       "ats_not_invited": "{count, plural, one {{email} de {ats} no fue invitado a «{title}»: {reason, select, credits {sin créditos} limit {se alcanzó un límite de correos} paused {las invitaciones están en pausa} other {algo salió mal}}.} other {# candidatos de {ats} no fueron invitados a «{title}».}}",
       "ats_cannot_write": "{ats} no acepta los resultados de los candidatos: la clave no tiene permiso de escritura. Vuelve a conectarlo con una clave que pueda escribir; los resultados se guardan y se envían entonces.",
       "connection_broken": "{name} dejó de funcionar y hay que volver a conectarlo. Hasta entonces, {integration, select, slack {las notificaciones no llegan a tu canal} other {los candidatos que envía esperan y sus resultados se guardan}}.",
-      "webhook_stopped": "El webhook a {url} se detuvo: el miembro que lo añadió ya no es propietario ni administrador. Vuelve a añadirlo para seguir recibiendo resultados."
+      "webhook_stopped": "El webhook a {url} se detuvo: el miembro que lo añadió ya no es propietario ni administrador. Vuelve a añadirlo para seguir recibiendo resultados.",
+      "ownership_received": "Ahora eres el propietario de «{name}»."
     }
   },
   "report": {

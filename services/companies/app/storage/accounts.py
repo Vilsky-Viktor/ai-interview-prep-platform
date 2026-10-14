@@ -31,6 +31,25 @@ async def memberships(user_id: str) -> list[tuple[Member, Company, int]]:
         return [tuple(row) for row in await session.execute(query)]
 
 
+async def owned(user_id: str) -> list[tuple[Company, bool]]:
+    """The companies the user owns, each with whether anyone else has joined it."""
+    other = aliased(Member)
+    shared = (
+        select(other.id)
+        .where(other.company_id == Company.id, other.user_id.is_not(None), other.user_id != user_id)
+        .exists()
+    )
+    query = (
+        select(Company, shared)
+        .join(Member, Member.company_id == Company.id)
+        .where(Member.user_id == user_id, Member.role == Role.OWNER)
+        .order_by(Company.name)
+    )
+
+    async with Session() as session:
+        return [tuple(row) for row in await session.execute(query)]
+
+
 async def remove_member(member_id) -> None:
     async with Session() as session:
         await session.execute(delete(Member).where(Member.id == member_id))

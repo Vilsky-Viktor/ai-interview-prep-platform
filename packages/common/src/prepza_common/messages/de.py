@@ -1,6 +1,9 @@
 # Messages the services show users, in German, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Only an admin who has joined can become the owner.": "Nur ein Admin, der beigetreten ist, kann Inhaber werden.",
+    "They already own 3 companies, as many as one person may.": "Diese Person besitzt bereits 3 Unternehmen, so viele wie eine Person darf.",
+    "Make another member the owner of each company you share, or delete it, before deleting your account.": "Mach für jedes Unternehmen, das du mit anderen teilst, ein anderes Mitglied zum Inhaber oder lösche es, bevor du dein Konto löschst.",
     "This request to connect isn't valid. Start connecting again from your AI app.": "Diese Verbindungsanfrage ist ungültig. Starte die Verbindung erneut aus deiner KI-App.",
     "This request was started in another browser. Start connecting again from your AI app.": "Diese Anfrage wurde in einem anderen Browser gestartet. Starte die Verbindung erneut aus deiner KI-App.",
     "Too many invites waiting. Remove some, or wait for them to join.": "Zu viele offene Einladungen. Entferne einige oder warte, bis sie beitreten.",

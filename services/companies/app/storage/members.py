@@ -6,7 +6,7 @@ from sqlalchemy import delete, select, update
 
 from app.constants.events import MEMBER_INVITED
 from app.constants.roles import Role
-from app.helpers.notifications import member_joined
+from app.helpers.notifications import member_joined, ownership_received
 from app.models.companies import Company, Member
 from app.models.outbox import OutboxEvent
 from app.storage.db import Session
@@ -70,6 +70,34 @@ async def accept(member: Member, company: Company, user_id: str) -> None:
             )
 
         await session.commit()
+
+
+async def transfer_ownership(company: Company, owner: Member, member: Member) -> bool:
+    """Makes `member`, a joined admin, the owner, and the owner an admin, in one transaction with
+    the new owner's notification. False when either changed meanwhile (another transfer, a role
+    change): nothing changes then, so a company never has two owners or none."""
+    async with Session() as session:
+        stepped_down = await session.execute(
+            update(Member)
+            .where(Member.id == owner.id, Member.role == Role.OWNER)
+            .values(role=Role.ADMIN)
+        )
+        stepped_up = await session.execute(
+            update(Member)
+            .where(Member.id == member.id, Member.role == Role.ADMIN, Member.user_id.is_not(None))
+            .values(role=Role.OWNER)
+        )
+
+        if stepped_down.rowcount != 1 or stepped_up.rowcount != 1:
+            await session.rollback()
+
+            return False
+
+        notice = ownership_received(company, member, secrets.token_hex(8))
+        outbox.add(session, OutboxEvent, NOTIFICATION_REQUESTED, notice)
+        await session.commit()
+
+        return True
 
 
 async def list_for_company(company_id, offset: int, limit: int) -> list[Member]:

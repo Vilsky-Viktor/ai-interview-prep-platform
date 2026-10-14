@@ -1,6 +1,9 @@
 # Messages the services show users, in Hindi, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Only an admin who has joined can become the owner.": "केवल वही एडमिन मालिक बन सकता है जो जुड़ चुका है।",
+    "They already own 3 companies, as many as one person may.": "इनके पास पहले से 3 कंपनियाँ हैं, जितनी एक व्यक्ति रख सकता है।",
+    "Make another member the owner of each company you share, or delete it, before deleting your account.": "अपना अकाउंट हटाने से पहले, जो कंपनी आप दूसरों के साथ साझा करते हैं उनमें से हर एक का मालिक किसी और सदस्य को बनाएँ, या उसे हटाएँ।",
     "This request to connect isn't valid. Start connecting again from your AI app.": "कनेक्ट करने का यह अनुरोध मान्य नहीं है। अपने AI ऐप से फिर से कनेक्ट करना शुरू करें।",
     "This request was started in another browser. Start connecting again from your AI app.": "यह अनुरोध किसी दूसरे ब्राउज़र में शुरू हुआ था। अपने AI ऐप से फिर से कनेक्ट करना शुरू करें।",
     "Too many invites waiting. Remove some, or wait for them to join.": "बहुत सारे आमंत्रण प्रतीक्षा में हैं। कुछ हटाएँ, या उनके जुड़ने तक प्रतीक्षा करें।",

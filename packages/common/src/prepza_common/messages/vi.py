@@ -1,6 +1,9 @@
 # Messages the services show users, in Vietnamese, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Only an admin who has joined can become the owner.": "Chỉ quản trị viên đã tham gia mới có thể trở thành chủ sở hữu.",
+    "They already own 3 companies, as many as one person may.": "Người này đã sở hữu 3 công ty, mức tối đa cho một người.",
+    "Make another member the owner of each company you share, or delete it, before deleting your account.": "Trước khi xóa tài khoản, hãy chuyển quyền sở hữu mỗi công ty bạn dùng chung cho một thành viên khác, hoặc xóa công ty đó.",
     "This request to connect isn't valid. Start connecting again from your AI app.": "Yêu cầu kết nối này không hợp lệ. Hãy bắt đầu kết nối lại từ ứng dụng AI của bạn.",
     "This request was started in another browser. Start connecting again from your AI app.": "Yêu cầu này được bắt đầu trong một trình duyệt khác. Hãy bắt đầu kết nối lại từ ứng dụng AI của bạn.",
     "Too many invites waiting. Remove some, or wait for them to join.": "Có quá nhiều lời mời đang chờ. Hãy xóa bớt hoặc đợi họ tham gia.",

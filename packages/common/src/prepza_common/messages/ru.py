@@ -1,6 +1,9 @@
 # Messages the services show users, in Russian, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Only an admin who has joined can become the owner.": "Владельцем может стать только администратор, который уже присоединился.",
+    "They already own 3 companies, as many as one person may.": "Этот участник уже владеет 3 компаниями — максимумом для одного человека.",
+    "Make another member the owner of each company you share, or delete it, before deleting your account.": "Прежде чем удалить аккаунт, сделайте владельцем другого участника в каждой компании, где есть кто-то ещё, или удалите её.",
     "This request to connect isn't valid. Start connecting again from your AI app.": "Этот запрос на подключение недействителен. Начните подключение заново из вашего ИИ-приложения.",
     "This request was started in another browser. Start connecting again from your AI app.": "Этот запрос начат в другом браузере. Начните подключение заново из вашего ИИ-приложения.",
     "Too many invites waiting. Remove some, or wait for them to join.": "Слишком много ожидающих приглашений. Удалите часть или дождитесь, пока к вам присоединятся.",

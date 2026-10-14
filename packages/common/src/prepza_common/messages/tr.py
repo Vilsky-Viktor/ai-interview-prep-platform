@@ -1,6 +1,9 @@
 # Messages the services show users, in Turkish, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Only an admin who has joined can become the owner.": "Yalnızca katılmış bir yönetici sahip olabilir.",
+    "They already own 3 companies, as many as one person may.": "Bu kişi zaten 3 şirketin sahibi; bir kişinin sahip olabileceği en fazla sayı bu.",
+    "Make another member the owner of each company you share, or delete it, before deleting your account.": "Hesabınızı silmeden önce başkalarıyla paylaştığınız her şirkette başka bir üyeyi sahip yapın ya da şirketi silin.",
     "This request to connect isn't valid. Start connecting again from your AI app.": "Bu bağlanma isteği geçerli değil. Bağlanmayı yapay zekâ uygulamanızdan yeniden başlatın.",
     "This request was started in another browser. Start connecting again from your AI app.": "Bu istek başka bir tarayıcıda başlatıldı. Bağlanmayı yapay zekâ uygulamanızdan yeniden başlatın.",
     "Too many invites waiting. Remove some, or wait for them to join.": "Bekleyen çok fazla davet var. Bazılarını kaldırın veya katılmalarını bekleyin.",

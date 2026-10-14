@@ -289,7 +289,10 @@
     "company": "Tek sahibi olduğunuz şirket, mülakatlarıyla birlikte silinir. Bu işlem geri alınamaz.",
     "confirm": "Hesabı sil",
     "deleted": "Hesabınız silindi.",
-    "failed": "Hesabınız silinemedi. Lütfen tekrar deneyin."
+    "failed": "Hesabınız silinemedi. Lütfen tekrar deneyin.",
+    "blocked": "Önce bu şirketlerde başka bir üyeyi sahip yapın ya da şirketleri silin:",
+    "deletedWith": "Bu şirketler hesabınızla birlikte silinir:",
+    "credits": "{count, plural, one {# kredi kaldı} other {# kredi kaldı}}"
   },
   "share": {
     "sent": "Davet {email} adresine gönderildi",
@@ -428,7 +431,8 @@
     "admin": "yönetici",
     "viewer": "görüntüleyici",
     "adminNote": "Mülakatları oluşturur ve değiştirir, aday davet eder, kredi yükler.",
-    "viewerNote": "Mülakatları ve sonuçları görür, raporları paylaşır. Hiçbir şeyi değiştirmez."
+    "viewerNote": "Mülakatları ve sonuçları görür, raporları paylaşır. Hiçbir şeyi değiştirmez.",
+    "ownerNote": "Ekibi yönetir, şirketi silebilir ve devredebilir."
   },
   "company": {
     "title": "Şirketler",
@@ -628,7 +632,12 @@
     "removeTitle": "Şirketten çıkarılsın mı?",
     "removeText": "{email} şirkete erişimini kaybeder. Otomatik yüklemeler bu kişinin kartından ödeniyorsa durur. Daha sonra yeniden davet edebilirsiniz.",
     "removeInviteText": "{email} adresine gönderilen davet bağlantısı artık çalışmaz. Daha sonra yeniden davet edebilirsiniz.",
-    "removeConfirm": "Çıkar"
+    "removeConfirm": "Çıkar",
+    "makeOwner": "Sahip yap",
+    "makeOwnerTitle": "{email} sahip yapılsın mı?",
+    "makeOwnerText": "Yönetici olacaksınız. Ekibi yalnızca sahip yönetir, şirketi silebilir ve başkasına devredebilir.",
+    "makeOwnerFailed": "Sahip yapılamadı. Tekrar deneyin.",
+    "madeOwner": "{email} artık şirketin sahibi."
   },
   "scorecard": {
     "timeOut": "Süre doldu",
@@ -1027,7 +1036,8 @@
       "ats_not_invited": "{count, plural, one {{ats} üzerinden gelen {email}, “{title}” mülakatına davet edilmedi: {reason, select, credits {krediniz bitti} limit {bir e-posta sınırına ulaşıldı} paused {davetler duraklatıldı} other {bir şeyler ters gitti}}.} other {{ats} üzerinden gelen # aday “{title}” mülakatına davet edilmedi.}}",
       "ats_cannot_write": "{ats} aday sonuçlarını kabul etmiyor: anahtarın yazma izni yok. Yazabilen bir anahtarla yeniden bağlayın; sonuçlar saklanır ve o zaman gönderilir.",
       "connection_broken": "{name} çalışmayı durdurdu ve yeniden bağlanması gerekiyor. O zamana kadar {integration, select, slack {bildirimler kanalınıza ulaşmaz} other {gönderdiği adaylar bekler ve sonuçları saklanır}}.",
-      "webhook_stopped": "{url} adresine giden web kancası durdu: onu ekleyen üye artık sahip veya yönetici değil. Sonuç almaya devam etmek için yeniden ekleyin."
+      "webhook_stopped": "{url} adresine giden web kancası durdu: onu ekleyen üye artık sahip veya yönetici değil. Sonuç almaya devam etmek için yeniden ekleyin.",
+      "ownership_received": "Artık “{name}” şirketinin sahibisiniz."
     }
   },
   "report": {

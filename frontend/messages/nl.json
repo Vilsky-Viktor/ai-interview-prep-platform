@@ -289,7 +289,10 @@
     "company": "Een bedrijf waarvan alleen jij eigenaar bent, wordt met zijn interviews verwijderd. Dit kan niet ongedaan worden gemaakt.",
     "confirm": "Account verwijderen",
     "deleted": "Je account is verwijderd.",
-    "failed": "Je account kon niet worden verwijderd. Probeer het opnieuw."
+    "failed": "Je account kon niet worden verwijderd. Probeer het opnieuw.",
+    "blocked": "Maak eerst een ander lid eigenaar van deze bedrijven, of verwijder ze:",
+    "deletedWith": "Deze bedrijven worden met je account verwijderd:",
+    "credits": "{count, plural, one {# credit over} other {# credits over}}"
   },
   "share": {
     "sent": "Uitnodiging verzonden naar {email}",
@@ -428,7 +431,8 @@
     "admin": "beheerder",
     "viewer": "kijker",
     "adminNote": "Maakt en wijzigt interviews, nodigt kandidaten uit, waardeert op.",
-    "viewerNote": "Ziet interviews en resultaten, deelt rapporten. Wijzigt niets."
+    "viewerNote": "Ziet interviews en resultaten, deelt rapporten. Wijzigt niets.",
+    "ownerNote": "Beheert het team, kan het bedrijf verwijderen en overdragen."
   },
   "company": {
     "title": "Bedrijven",
@@ -628,7 +632,12 @@
     "removeTitle": "Uit het bedrijf verwijderen?",
     "removeText": "{email} verliest de toegang tot het bedrijf. Als automatisch opwaarderen met diens kaart wordt betaald, stopt dat. Je kunt deze persoon later opnieuw uitnodigen.",
     "removeInviteText": "De uitnodigingslink die naar {email} is gestuurd, werkt niet meer. Je kunt later opnieuw uitnodigen.",
-    "removeConfirm": "Verwijderen"
+    "removeConfirm": "Verwijderen",
+    "makeOwner": "Eigenaar maken",
+    "makeOwnerTitle": "{email} eigenaar maken?",
+    "makeOwnerText": "Jij wordt beheerder. Alleen de eigenaar beheert het team, kan het bedrijf verwijderen en het aan iemand anders overdragen.",
+    "makeOwnerFailed": "Kon diegene geen eigenaar maken. Probeer het opnieuw.",
+    "madeOwner": "{email} is nu de eigenaar."
   },
   "scorecard": {
     "timeOut": "Tijd om",
@@ -1024,7 +1033,8 @@
       "ats_not_invited": "{count, plural, one {{email} uit {ats} is niet uitgenodigd voor “{title}”: {reason, select, credits {credits op} limit {een e-maillimiet is bereikt} paused {uitnodigingen zijn gepauzeerd} other {er ging iets mis}}.} other {# kandidaten uit {ats} zijn niet uitgenodigd voor “{title}”.}}",
       "ats_cannot_write": "{ats} neemt de resultaten van kandidaten niet aan: de sleutel heeft geen schrijfrechten. Verbind opnieuw met een sleutel die kan schrijven; de resultaten worden bewaard en dan verstuurd.",
       "connection_broken": "{name} werkt niet meer en moet opnieuw worden verbonden. Tot die tijd {integration, select, slack {komen meldingen niet aan in je kanaal} other {wachten de kandidaten die het stuurt, en worden hun resultaten bewaard}}.",
-      "webhook_stopped": "De webhook naar {url} is gestopt: het lid dat hem heeft toegevoegd is geen eigenaar of beheerder meer. Voeg hem opnieuw toe om resultaten te blijven ontvangen."
+      "webhook_stopped": "De webhook naar {url} is gestopt: het lid dat hem heeft toegevoegd is geen eigenaar of beheerder meer. Voeg hem opnieuw toe om resultaten te blijven ontvangen.",
+      "ownership_received": "Je bent nu eigenaar van “{name}”."
     }
   },
   "report": {

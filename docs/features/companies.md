@@ -20,6 +20,14 @@ A company has one owner. On the company's **Team** tab, the owner adds a member'
 
 The companies service enforces the roles: `require_editor` answers 403 to a viewer.
 
+### Handing the company on
+
+The owner can make an admin who has joined the owner: the role picker on that admin's row has an **owner** choice (`can_own` in the team list says who), which asks to confirm first (`POST /companies/members/{id}/owner`). In one transaction the admin becomes the owner and the owner an admin, only while both are still what was read, so a company never has two owners or none. Someone who already owns 3 companies can't become an owner of another (409). The new owner gets a bell notification (`ownership_received`), and the audit log records it (`ownership_transferred`). An automatic top-up keeps charging the card of whoever set it up. It isn't one of the assistant's or AI apps' tools.
+
+### Deleting an account that owns companies
+
+The delete-account dialog asks companies what deleting the account does to the companies the user owns (`GET /companies/account/deletion`): one others have joined blocks it, listed with a link to its team, until another member is made its owner or the company is deleted; one only the user is in is deleted with the account, listed with its credits. Companies also refuses the deletion itself (409) while the user owns a company others joined; library asks companies first, so nothing is deleted then.
+
 ## Logo
 
 A company can upload its logo: PNG, JPEG or WebP, up to 500 KB. It is shown on:

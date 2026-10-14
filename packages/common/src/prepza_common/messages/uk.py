@@ -1,6 +1,9 @@
 # Messages the services show users, in Ukrainian, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Only an admin who has joined can become the owner.": "Власником може стати лише адміністратор, який уже приєднався.",
+    "They already own 3 companies, as many as one person may.": "Цей учасник уже володіє 3 компаніями — максимумом для однієї людини.",
+    "Make another member the owner of each company you share, or delete it, before deleting your account.": "Перш ніж видалити акаунт, зробіть власником іншого учасника в кожній компанії, де є хтось ще, або видаліть її.",
     "This request to connect isn't valid. Start connecting again from your AI app.": "Цей запит на підключення недійсний. Почніть підключення знову з вашого ШІ-застосунку.",
     "This request was started in another browser. Start connecting again from your AI app.": "Цей запит почато в іншому браузері. Почніть підключення знову з вашого ШІ-застосунку.",
     "Too many invites waiting. Remove some, or wait for them to join.": "Забагато запрошень, що очікують. Видаліть частину або зачекайте, поки до вас приєднаються.",

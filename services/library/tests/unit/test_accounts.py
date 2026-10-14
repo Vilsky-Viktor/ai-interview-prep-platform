@@ -2,8 +2,10 @@ import asyncio
 
 import httpx
 import pytest
+from fastapi import HTTPException
 from prepza_common import http
 from prepza_common.auth import current_user
+from prepza_common.constants import ACCOUNT_OWNS_SHARED
 from prepza_common.user import User
 
 from app.integrations import accounts as account_services
@@ -64,6 +66,26 @@ def test_a_failing_service_keeps_the_sign_in_so_the_user_can_retry(steps, monkey
         asyncio.run(account_service.delete_account(USER))
 
     assert ("sign-in", "ann") not in steps
+
+
+def test_an_owner_of_a_shared_company_is_told_to_hand_it_on_and_nothing_is_deleted(
+    steps, monkeypatch
+):
+    """Companies goes first and refuses: no other service deletes anything, the sign-in stays."""
+
+    async def refused(service, user_id, email):
+        request = httpx.Request("DELETE", f"http://{service}/internal/users/{user_id}")
+        response = httpx.Response(409, request=request)
+
+        raise httpx.HTTPStatusError("refused", request=request, response=response)
+
+    monkeypatch.setattr(account_services, "delete_user", refused)
+
+    with pytest.raises(HTTPException) as error:
+        asyncio.run(account_service.delete_account(USER))
+
+    assert (error.value.status_code, error.value.detail) == (409, ACCOUNT_OWNS_SHARED)
+    assert steps == []
 
 
 @pytest.mark.parametrize("verified, sent", [(True, "Ann@Example.com"), (False, "")])

@@ -1,6 +1,7 @@
 import {
   BadgeCheckIcon,
   BadgeXIcon,
+  CrownIcon,
   DollarSignIcon,
   FlagIcon,
   MailWarningIcon,
@@ -43,4 +44,5 @@ export const NOTIFICATION_LOOKS: Record<
   connection_broken: { icon: UnplugIcon, alert: true },
   webhook_stopped: { icon: UnplugIcon, alert: true },
   member_joined: { icon: UserPlusIcon, alert: false },
+  ownership_received: { icon: CrownIcon, alert: false },
 }

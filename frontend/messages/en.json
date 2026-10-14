@@ -289,7 +289,10 @@
     "company": "A company you alone own is deleted with its interviews. This can't be undone.",
     "confirm": "Delete account",
     "deleted": "Your account was deleted.",
-    "failed": "Couldn't delete your account. Please try again."
+    "failed": "Couldn't delete your account. Please try again.",
+    "blocked": "First make another member the owner of these companies, or delete them:",
+    "deletedWith": "These companies are deleted with your account:",
+    "credits": "{count, plural, one {# credit left} other {# credits left}}"
   },
   "share": {
     "sent": "Invite sent to {email}",
@@ -428,7 +431,8 @@
     "admin": "admin",
     "viewer": "viewer",
     "adminNote": "Creates and changes interviews, invites candidates, tops up.",
-    "viewerNote": "Sees interviews and results, shares reports. Changes nothing."
+    "viewerNote": "Sees interviews and results, shares reports. Changes nothing.",
+    "ownerNote": "Manages the team, can delete the company and hand it on."
   },
   "company": {
     "title": "Companies",
@@ -628,7 +632,12 @@
     "removeTitle": "Remove from the company?",
     "removeText": "{email} loses access to the company. If their card pays for automatic top-ups, those stop. You can invite them again later.",
     "removeInviteText": "The invite link sent to {email} stops working. You can invite them again later.",
-    "removeConfirm": "Remove"
+    "removeConfirm": "Remove",
+    "makeOwner": "Make owner",
+    "makeOwnerTitle": "Make {email} the owner?",
+    "makeOwnerText": "You'll become an admin. Only the owner manages the team, can delete the company and can hand it to someone else.",
+    "makeOwnerFailed": "Couldn't make them the owner. Please try again.",
+    "madeOwner": "{email} is now the owner."
   },
   "scorecard": {
     "timeOut": "Time out",
@@ -1028,7 +1037,8 @@
       "ats_not_invited": "{count, plural, one {{email} from {ats} wasn't invited to “{title}”: {reason, select, credits {out of credits} limit {an email limit was reached} paused {invites are paused} other {something went wrong}}.} other {# candidates from {ats} weren't invited to “{title}”.}}",
       "ats_cannot_write": "{ats} doesn't take candidates' results: the key has no write access. Reconnect with a key that can write; results are kept and sent then.",
       "connection_broken": "{name} stopped working and needs reconnecting. Until then, {integration, select, slack {notifications don't reach your channel} other {candidates it sends wait, and their results are kept}}.",
-      "webhook_stopped": "The web hook to {url} stopped: the member who added it is no longer an owner or admin. Add it again to keep getting results."
+      "webhook_stopped": "The web hook to {url} stopped: the member who added it is no longer an owner or admin. Add it again to keep getting results.",
+      "ownership_received": "You're now the owner of “{name}”."
     }
   },
   "report": {

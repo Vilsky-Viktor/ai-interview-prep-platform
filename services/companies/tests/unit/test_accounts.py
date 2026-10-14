@@ -4,6 +4,7 @@ from datetime import UTC, datetime, timedelta
 
 import httpx
 import pytest
+from fastapi import HTTPException
 
 from app.constants.audit import AUDIT_RETENTION_DAYS
 from app.constants.invites import InviteStatus
@@ -46,6 +47,12 @@ def calls(monkeypatch):
 
     monkeypatch.setattr(audit, "forget_user", forget_decisions)
 
+    # Nothing the user owns is shared with others, unless a test says so.
+    async def owned(user_id):
+        return []
+
+    monkeypatch.setattr(accounts, "owned", owned)
+
     return done
 
 
@@ -68,6 +75,27 @@ def test_a_company_goes_with_its_only_owner_other_memberships_just_end(calls, mo
         ("candidate", "ann", "ann@example.com"),
         ("audit", "ann"),
     ]
+
+
+def test_an_owner_of_a_company_others_joined_cant_delete_their_account_yet(calls, monkeypatch):
+    """The company would go with its members' access and its credits: nothing is deleted, and
+    another member is made owner first (or the company deleted)."""
+    shared = Company(id=uuid.uuid4(), name="Acme")
+
+    async def owned(user_id):
+        return [(shared, True)]
+
+    async def memberships(user_id):
+        return [membership(Role.OWNER, owners=1)]
+
+    monkeypatch.setattr(accounts, "owned", owned)
+    monkeypatch.setattr(accounts, "memberships", memberships)
+
+    with pytest.raises(HTTPException) as refused:
+        asyncio.run(account_service.delete_user("ann", "ann@example.com"))
+
+    assert refused.value.status_code == 409
+    assert calls == []
 
 
 def test_retention_deletes_results_and_holds_before_the_invites_in_batches(monkeypatch):

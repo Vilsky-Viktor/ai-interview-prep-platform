@@ -6,17 +6,20 @@ import { MenuPill } from "@/components/menu-pill"
 import { MEMBER_ROLES, type MemberRole } from "@/constants/roles"
 
 /** A member's role, admin or viewer: the site's select pill opening a menu with a line on what
- * each role allows. */
+ * each role allows. With `onMakeOwner` (a member the API says can own the company), "owner"
+ * too, which calls it instead of `onChange`. */
 export function RolePicker({
   role,
   onChange,
   disabled,
   className,
+  onMakeOwner,
 }: {
   role: MemberRole
   onChange: (role: MemberRole) => void
   disabled?: boolean
   className?: string
+  onMakeOwner?: () => void
 }) {
   const t = useTranslations("roles")
   const members = useTranslations("members")
@@ -25,12 +28,17 @@ export function RolePicker({
     <MenuPill
       ariaLabel={members("role")}
       value={role}
-      options={MEMBER_ROLES.map((option) => ({
+      options={[
+        ...MEMBER_ROLES,
+        ...(onMakeOwner ? ["owner" as const] : []),
+      ].map((option) => ({
         value: option,
         label: t(option),
         note: t(`${option}Note`),
       }))}
-      onChange={(value) => onChange(value as MemberRole)}
+      onChange={(value) =>
+        value === "owner" ? onMakeOwner?.() : onChange(value as MemberRole)
+      }
       disabled={disabled}
       className={className}
     />

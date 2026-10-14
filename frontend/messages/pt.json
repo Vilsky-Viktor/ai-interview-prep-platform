@@ -289,7 +289,10 @@
     "company": "Uma empresa da qual você é o único proprietário é excluída com suas entrevistas. Isso não pode ser desfeito.",
     "confirm": "Excluir conta",
     "deleted": "Sua conta foi excluída.",
-    "failed": "Não foi possível excluir sua conta. Tente novamente."
+    "failed": "Não foi possível excluir sua conta. Tente novamente.",
+    "blocked": "Primeiro torne outro membro proprietário destas empresas, ou exclua-as:",
+    "deletedWith": "Estas empresas serão excluídas com sua conta:",
+    "credits": "{count, plural, =1 {# crédito restante} other {# créditos restantes}}"
   },
   "share": {
     "sent": "Convite enviado para {email}",
@@ -428,7 +431,8 @@
     "admin": "administrador",
     "viewer": "visualizador",
     "adminNote": "Cria e altera entrevistas, convida candidatos, recarrega créditos.",
-    "viewerNote": "Vê entrevistas e resultados, compartilha relatórios. Não altera nada."
+    "viewerNote": "Vê entrevistas e resultados, compartilha relatórios. Não altera nada.",
+    "ownerNote": "Gerencia a equipe, pode excluir a empresa e passá-la adiante."
   },
   "company": {
     "title": "Empresas",
@@ -628,7 +632,12 @@
     "removeTitle": "Remover da empresa?",
     "removeText": "{email} perde o acesso à empresa. Se o cartão dessa pessoa paga as recargas automáticas, elas param. Você pode convidá-la de novo depois.",
     "removeInviteText": "O link de convite enviado para {email} deixa de funcionar. Você pode convidar de novo depois.",
-    "removeConfirm": "Remover"
+    "removeConfirm": "Remover",
+    "makeOwner": "Tornar proprietário",
+    "makeOwnerTitle": "Tornar {email} o proprietário?",
+    "makeOwnerText": "Você passará a ser administrador. Só o proprietário gerencia a equipe, pode excluir a empresa e passá-la a outra pessoa.",
+    "makeOwnerFailed": "Não foi possível torná-lo proprietário. Tente novamente.",
+    "madeOwner": "{email} agora é o proprietário."
   },
   "scorecard": {
     "timeOut": "Tempo esgotado",
@@ -1024,7 +1033,8 @@
       "ats_not_invited": "{count, plural, =1 {{email} do {ats} não foi convidado para “{title}”: {reason, select, credits {créditos esgotados} limit {um limite de e-mails foi atingido} paused {os convites estão pausados} other {algo deu errado}}.} other {# candidatos do {ats} não foram convidados para “{title}”.}}",
       "ats_cannot_write": "O {ats} não aceita os resultados dos candidatos: a chave não tem acesso de escrita. Reconecte com uma chave que possa escrever; os resultados ficam guardados e são enviados então.",
       "connection_broken": "O {name} parou de funcionar e precisa ser reconectado. Até lá, {integration, select, slack {as notificações não chegam ao seu canal} other {os candidatos que ele envia ficam aguardando, e os resultados deles são guardados}}.",
-      "webhook_stopped": "O webhook para {url} parou: o membro que o adicionou não é mais proprietário nem administrador. Adicione-o de novo para continuar recebendo resultados."
+      "webhook_stopped": "O webhook para {url} parou: o membro que o adicionou não é mais proprietário nem administrador. Adicione-o de novo para continuar recebendo resultados.",
+      "ownership_received": "Agora você é o proprietário de “{name}”."
     }
   },
   "report": {

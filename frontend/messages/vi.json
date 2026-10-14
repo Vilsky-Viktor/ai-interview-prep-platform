@@ -289,7 +289,10 @@
     "company": "Công ty do riêng bạn sở hữu sẽ bị xóa cùng các buổi phỏng vấn. Không thể hoàn tác.",
     "confirm": "Xóa tài khoản",
     "deleted": "Tài khoản của bạn đã bị xóa.",
-    "failed": "Không thể xóa tài khoản. Vui lòng thử lại."
+    "failed": "Không thể xóa tài khoản. Vui lòng thử lại.",
+    "blocked": "Trước hết hãy đặt một thành viên khác làm chủ sở hữu các công ty này, hoặc xóa chúng:",
+    "deletedWith": "Các công ty này sẽ bị xóa cùng tài khoản của bạn:",
+    "credits": "{count, plural, other {còn # tín dụng}}"
   },
   "share": {
     "sent": "Đã gửi lời mời tới {email}",
@@ -428,7 +431,8 @@
     "admin": "quản trị viên",
     "viewer": "người xem",
     "adminNote": "Tạo và thay đổi buổi phỏng vấn, mời ứng viên, nạp credit.",
-    "viewerNote": "Xem buổi phỏng vấn và kết quả, chia sẻ báo cáo. Không thay đổi gì."
+    "viewerNote": "Xem buổi phỏng vấn và kết quả, chia sẻ báo cáo. Không thay đổi gì.",
+    "ownerNote": "Quản lý nhóm, có thể xóa công ty và chuyển giao."
   },
   "company": {
     "title": "Công ty",
@@ -628,7 +632,12 @@
     "removeTitle": "Xóa khỏi công ty?",
     "removeText": "{email} sẽ mất quyền truy cập vào công ty. Nếu thẻ của họ đang dùng để tự động nạp credit, việc nạp tự động sẽ dừng. Bạn có thể mời lại họ sau.",
     "removeInviteText": "Liên kết mời đã gửi tới {email} sẽ không còn dùng được. Bạn có thể mời lại họ sau.",
-    "removeConfirm": "Xóa"
+    "removeConfirm": "Xóa",
+    "makeOwner": "Đặt làm chủ sở hữu",
+    "makeOwnerTitle": "Đặt {email} làm chủ sở hữu?",
+    "makeOwnerText": "Bạn sẽ trở thành quản trị viên. Chỉ chủ sở hữu mới quản lý nhóm, có thể xóa công ty và chuyển giao cho người khác.",
+    "makeOwnerFailed": "Không thể đặt làm chủ sở hữu. Hãy thử lại.",
+    "madeOwner": "{email} giờ là chủ sở hữu."
   },
   "scorecard": {
     "timeOut": "Hết giờ",
@@ -1024,7 +1033,8 @@
       "ats_not_invited": "{count, plural, =1 {{email} từ {ats} chưa được mời vào “{title}”: {reason, select, credits {hết credit} limit {đã chạm giới hạn email} paused {việc gửi lời mời đang tạm dừng} other {đã xảy ra lỗi}}.} other {# ứng viên từ {ats} chưa được mời vào “{title}”.}}",
       "ats_cannot_write": "{ats} không nhận kết quả của ứng viên: khóa không có quyền ghi. Hãy kết nối lại bằng khóa có quyền ghi; kết quả được giữ lại và sẽ gửi khi đó.",
       "connection_broken": "{name} đã ngừng hoạt động và cần kết nối lại. Cho đến lúc đó, {integration, select, slack {thông báo sẽ không đến kênh của bạn} other {các ứng viên mà nó gửi sẽ chờ, và kết quả của họ được giữ lại}}.",
-      "webhook_stopped": "Web hook tới {url} đã dừng: thành viên thêm nó không còn là chủ sở hữu hay quản trị viên. Hãy thêm lại để tiếp tục nhận kết quả."
+      "webhook_stopped": "Web hook tới {url} đã dừng: thành viên thêm nó không còn là chủ sở hữu hay quản trị viên. Hãy thêm lại để tiếp tục nhận kết quả.",
+      "ownership_received": "Bạn giờ là chủ sở hữu của “{name}”."
     }
   },
   "report": {

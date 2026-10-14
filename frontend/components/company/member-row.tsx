@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
+import { MakeOwner } from "@/components/company/make-owner"
 import { RemoveMember } from "@/components/company/remove-member"
 import { RolePicker } from "@/components/company/role-picker"
 import { CopyField } from "@/components/copy-field"
@@ -25,6 +26,7 @@ export function MemberRow({
   const roles = useTranslations("roles")
   const [role, setRole] = useState(member.role)
   const [saving, setSaving] = useState(false)
+  const [makingOwner, setMakingOwner] = useState(false)
 
   // The owner changes an admin to a viewer or back; the row shows the new role once saved.
   async function changeRole(next: MemberRole) {
@@ -68,6 +70,10 @@ export function MemberRow({
               onChange={changeRole}
               disabled={saving}
               className="w-44"
+              // Choosing "owner" asks to confirm handing the company over first.
+              onMakeOwner={
+                member.can_own ? () => setMakingOwner(true) : undefined
+              }
             />
           ) : (
             <Badge variant="secondary" className="h-7 px-3 text-sm font-light">
@@ -83,6 +89,14 @@ export function MemberRow({
           )}
         </span>
       </div>
+      {member.can_own && (
+        <MakeOwner
+          companyId={companyId}
+          member={member}
+          open={makingOwner}
+          onOpenChange={setMakingOwner}
+        />
+      )}
       {/* The join link in the site's copy field, like the test's shareable link. */}
       {!member.joined && member.token && (
         <CopyField path={`/join/${member.token}`} />

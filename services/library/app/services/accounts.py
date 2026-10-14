@@ -1,8 +1,10 @@
 import asyncio
 
+import httpx
+from fastapi import HTTPException, status
 from firebase_admin import auth as firebase_auth
 from prepza_common.analytics import track
-from prepza_common.constants import LANGUAGE_CLAIM
+from prepza_common.constants import ACCOUNT_OWNS_SHARED, LANGUAGE_CLAIM
 from prepza_common.user import Language, User
 
 from app.helpers.accounts import candidate_email
@@ -50,10 +52,17 @@ async def delete_account(user: User) -> None:
     """Deletes everything about the user, in every service, then their sign-in.
 
     Each step is safe to repeat and raises on failure, so a failed deletion is retried whole and
-    the sign-in, which lets the user retry, goes last.
+    the sign-in, which lets the user retry, goes last. Companies goes first: it refuses (409)
+    while the user owns a company others have joined, before any service deleted anything.
     """
     for service in services.services():
-        await services.delete_user(service, user.uid, candidate_email(user))
+        try:
+            await services.delete_user(service, user.uid, candidate_email(user))
+        except httpx.HTTPStatusError as error:
+            if error.response.status_code == status.HTTP_409_CONFLICT:
+                raise HTTPException(status.HTTP_409_CONFLICT, ACCOUNT_OWNS_SHARED) from error
+
+            raise
 
     await accounts.delete_user(user.uid)
     await asyncio.to_thread(delete_sign_in, user.uid)

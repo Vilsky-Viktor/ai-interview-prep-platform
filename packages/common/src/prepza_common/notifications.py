@@ -36,6 +36,8 @@ class NotificationKind(StrEnum):
     WEBHOOK_STOPPED = "webhook_stopped"
     # Someone the owner invited joined the company's team.
     MEMBER_JOINED = "member_joined"
+    # The owner made this member the company's owner.
+    OWNERSHIP_RECEIVED = "ownership_received"
     # A superadmin approved or declined the company's verification.
     VERIFICATION_APPROVED = "verification_approved"
     VERIFICATION_DECLINED = "verification_declined"

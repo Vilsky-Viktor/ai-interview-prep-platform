@@ -289,7 +289,10 @@
     "company": "Ettevõte, mille ainus omanik oled, kustutatakse koos selle intervjuudega. Seda ei saa tagasi võtta.",
     "confirm": "Kustuta konto",
     "deleted": "Sinu konto kustutati.",
-    "failed": "Kontot ei õnnestunud kustutada. Proovi uuesti."
+    "failed": "Kontot ei õnnestunud kustutada. Proovi uuesti.",
+    "blocked": "Tee esmalt nende ettevõtete omanikuks keegi teine või kustuta need:",
+    "deletedWith": "Need ettevõtted kustutatakse koos sinu kontoga:",
+    "credits": "{count, plural, one {# krediit alles} other {# krediiti alles}}"
   },
   "share": {
     "sent": "Kutse saadeti aadressile {email}",
@@ -428,7 +431,8 @@
     "admin": "administraator",
     "viewer": "vaataja",
     "adminNote": "Loob ja muudab intervjuusid, kutsub kandidaate, laeb krediiti.",
-    "viewerNote": "Näeb intervjuusid ja tulemusi, jagab aruandeid. Ei muuda midagi."
+    "viewerNote": "Näeb intervjuusid ja tulemusi, jagab aruandeid. Ei muuda midagi.",
+    "ownerNote": "Haldab meeskonda, saab ettevõtte kustutada ja üle anda."
   },
   "company": {
     "title": "Ettevõtted",
@@ -628,7 +632,12 @@
     "removeTitle": "Eemaldada ettevõttest?",
     "removeText": "{email} kaotab juurdepääsu ettevõttele. Kui automaatsed juurdelaadimised makstakse tema kaardiga, need peatuvad. Saad hiljem uuesti kutsuda.",
     "removeInviteText": "Aadressile {email} saadetud kutselink lakkab töötamast. Saad hiljem uuesti kutsuda.",
-    "removeConfirm": "Eemalda"
+    "removeConfirm": "Eemalda",
+    "makeOwner": "Tee omanikuks",
+    "makeOwnerTitle": "Kas teha {email} omanikuks?",
+    "makeOwnerText": "Sinust saab administraator. Ainult omanik haldab meeskonda, saab ettevõtte kustutada ja selle teisele üle anda.",
+    "makeOwnerFailed": "Omanikuks tegemine ei õnnestunud. Proovi uuesti.",
+    "madeOwner": "{email} on nüüd omanik."
   },
   "scorecard": {
     "timeOut": "Aeg läbi",
@@ -1032,7 +1041,8 @@
       "ats_not_invited": "{count, plural, one {{ats} keskkonnast tulnud {email} ei saanud kutset intervjuule „{title}“: {reason, select, credits {krediidid said otsa} limit {e-kirjade piirang sai täis} paused {kutsed on peatatud} other {midagi läks valesti}}.} other {# {ats} keskkonnast tulnud kandidaati ei saanud kutset intervjuule „{title}“.}}",
       "ats_cannot_write": "{ats} ei võta kandidaatide tulemusi vastu: võtmel pole kirjutusõigust. Ühenda uuesti võtmega, millel on kirjutusõigus; tulemused hoitakse alles ja saadetakse siis.",
       "connection_broken": "{name} lakkas töötamast ja tuleb uuesti ühendada. Seni {integration, select, slack {teavitused sinu kanalisse ei jõua} other {ootavad selle saadetud kandidaadid ja nende tulemused hoitakse alles}}.",
-      "webhook_stopped": "Veebihaak aadressile {url} peatati: selle lisanud liige pole enam omanik ega administraator. Lisa see uuesti, et tulemusi edasi saada."
+      "webhook_stopped": "Veebihaak aadressile {url} peatati: selle lisanud liige pole enam omanik ega administraator. Lisa see uuesti, et tulemusi edasi saada.",
+      "ownership_received": "Oled nüüd ettevõtte „{name}“ omanik."
     }
   },
   "report": {

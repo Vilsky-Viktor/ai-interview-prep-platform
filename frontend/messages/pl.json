@@ -289,7 +289,10 @@
     "company": "Firma, której jesteś jedynym właścicielem, zostanie usunięta razem z rozmowami. Tej operacji nie można cofnąć.",
     "confirm": "Usuń konto",
     "deleted": "Twoje konto zostało usunięte.",
-    "failed": "Nie udało się usunąć konta. Spróbuj ponownie."
+    "failed": "Nie udało się usunąć konta. Spróbuj ponownie.",
+    "blocked": "Najpierw przekaż własność tych firm innemu członkowi albo je usuń:",
+    "deletedWith": "Te firmy zostaną usunięte razem z Twoim kontem:",
+    "credits": "{count, plural, one {# kredyt pozostał} few {# kredyty pozostały} many {# kredytów pozostało} other {# kredytu pozostało}}"
   },
   "share": {
     "sent": "Zaproszenie wysłane na {email}",
@@ -428,7 +431,8 @@
     "admin": "administrator",
     "viewer": "obserwator",
     "adminNote": "Tworzy i zmienia rozmowy, zaprasza kandydatów, doładowuje kredyty.",
-    "viewerNote": "Widzi rozmowy i wyniki, udostępnia raporty. Niczego nie zmienia."
+    "viewerNote": "Widzi rozmowy i wyniki, udostępnia raporty. Niczego nie zmienia.",
+    "ownerNote": "Zarządza zespołem, może usunąć firmę i ją przekazać."
   },
   "company": {
     "title": "Firmy",
@@ -628,7 +632,12 @@
     "removeTitle": "Usunąć z firmy?",
     "removeText": "{email} straci dostęp do firmy. Jeśli z karty tej osoby opłacane są automatyczne doładowania, zostaną wstrzymane. Możesz zaprosić tę osobę ponownie później.",
     "removeInviteText": "Link z zaproszeniem wysłany na {email} przestanie działać. Możesz zaprosić tę osobę ponownie później.",
-    "removeConfirm": "Usuń"
+    "removeConfirm": "Usuń",
+    "makeOwner": "Uczyń właścicielem",
+    "makeOwnerTitle": "Uczynić {email} właścicielem?",
+    "makeOwnerText": "Zostaniesz administratorem. Tylko właściciel zarządza zespołem, może usunąć firmę i przekazać ją komuś innemu.",
+    "makeOwnerFailed": "Nie udało się przekazać własności. Spróbuj ponownie.",
+    "madeOwner": "{email} jest teraz właścicielem."
   },
   "scorecard": {
     "timeOut": "Koniec czasu",
@@ -1028,7 +1037,8 @@
       "ats_not_invited": "{count, plural, one {Kandydat {email} z {ats} nie został zaproszony do „{title}”: {reason, select, credits {brak kredytów} limit {osiągnięto limit e-maili} paused {zaproszenia są wstrzymane} other {coś poszło nie tak}}.} few {# kandydaci z {ats} nie zostali zaproszeni do „{title}”.} many {# kandydatów z {ats} nie zostało zaproszonych do „{title}”.} other {# kandydata z {ats} nie zostało zaproszone do „{title}”.}}",
       "ats_cannot_write": "{ats} nie przyjmuje wyników kandydatów: klucz nie ma uprawnień do zapisu. Połącz ponownie kluczem, który może zapisywać; wyniki są przechowywane i zostaną wtedy wysłane.",
       "connection_broken": "{name} przestał działać i trzeba go połączyć ponownie. Do tego czasu {integration, select, slack {powiadomienia nie trafiają na Twój kanał} other {przesłani przez niego kandydaci czekają, a ich wyniki są przechowywane}}.",
-      "webhook_stopped": "Webhook do {url} został zatrzymany: członek, który go dodał, nie jest już właścicielem ani administratorem. Dodaj go ponownie, aby dalej otrzymywać wyniki."
+      "webhook_stopped": "Webhook do {url} został zatrzymany: członek, który go dodał, nie jest już właścicielem ani administratorem. Dodaj go ponownie, aby dalej otrzymywać wyniki.",
+      "ownership_received": "Jesteś teraz właścicielem firmy „{name}”."
     }
   },
   "report": {

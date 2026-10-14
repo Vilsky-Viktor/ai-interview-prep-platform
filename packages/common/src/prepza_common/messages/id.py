@@ -1,6 +1,9 @@
 # Messages the services show users, in Indonesian, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Only an admin who has joined can become the owner.": "Hanya admin yang sudah bergabung yang bisa menjadi pemilik.",
+    "They already own 3 companies, as many as one person may.": "Dia sudah memiliki 3 perusahaan, batas untuk satu orang.",
+    "Make another member the owner of each company you share, or delete it, before deleting your account.": "Jadikan anggota lain pemilik setiap perusahaan yang kamu bagi dengan orang lain, atau hapus perusahaan itu, sebelum menghapus akunmu.",
     "This request to connect isn't valid. Start connecting again from your AI app.": "Permintaan untuk menghubungkan ini tidak valid. Mulai hubungkan lagi dari aplikasi AI-mu.",
     "This request was started in another browser. Start connecting again from your AI app.": "Permintaan ini dimulai di browser lain. Mulai hubungkan lagi dari aplikasi AI-mu.",
     "Too many invites waiting. Remove some, or wait for them to join.": "Terlalu banyak undangan yang menunggu. Hapus beberapa, atau tunggu mereka bergabung.",

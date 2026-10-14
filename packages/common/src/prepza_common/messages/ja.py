@@ -1,6 +1,9 @@
 # Messages the services show users, in Japanese, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Only an admin who has joined can become the owner.": "オーナーになれるのは、参加済みの管理者だけです。",
+    "They already own 3 companies, as many as one person may.": "このメンバーはすでに 3 社を所有しており、1 人あたりの上限に達しています。",
+    "Make another member the owner of each company you share, or delete it, before deleting your account.": "アカウントを削除する前に、他のメンバーがいる会社ごとに別のメンバーをオーナーにするか、その会社を削除してください。",
     "This request to connect isn't valid. Start connecting again from your AI app.": "この接続リクエストは無効です。AI アプリからもう一度接続を始めてください。",
     "This request was started in another browser. Start connecting again from your AI app.": "このリクエストは別のブラウザーで開始されました。AI アプリからもう一度接続を始めてください。",
     "Too many invites waiting. Remove some, or wait for them to join.": "承諾待ちの招待が多すぎます。いくつか削除するか、参加を待ってください。",

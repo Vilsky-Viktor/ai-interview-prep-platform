@@ -1,6 +1,9 @@
 # Messages the services show users, in Estonian, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Only an admin who has joined can become the owner.": "Omanikuks saab ainult liitunud administraator.",
+    "They already own 3 companies, as many as one person may.": "Tal on juba 3 ettevõtet, nii palju kui ühel inimesel võib olla.",
+    "Make another member the owner of each company you share, or delete it, before deleting your account.": "Enne konto kustutamist tee iga ettevõtte, mida jagad teistega, omanikuks keegi teine või kustuta ettevõte.",
     "This request to connect isn't valid. Start connecting again from your AI app.": "See ühendamise päring ei ole kehtiv. Alusta ühendamist uuesti oma tehisintellekti rakendusest.",
     "This request was started in another browser. Start connecting again from your AI app.": "See päring alustati teises brauseris. Alusta ühendamist uuesti oma tehisintellekti rakendusest.",
     "Too many invites waiting. Remove some, or wait for them to join.": "Liiga palju ootel kutseid. Eemalda mõned või oota, kuni nad liituvad.",
