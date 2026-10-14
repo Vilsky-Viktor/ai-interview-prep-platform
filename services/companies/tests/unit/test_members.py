@@ -86,7 +86,39 @@ def test_a_visitor_sees_the_invite_without_its_email(client, stored_invite):
     response = client.get("/members/invites/token-1")
 
     assert response.status_code == 200
-    assert response.json() == {"company_name": "Arcolabs", "email": None, "joined": False}
+    assert response.json() == {
+        "company_name": "Arcolabs",
+        "email": None,
+        "joined": False,
+        "company_id": None,
+    }
+
+
+def test_a_used_link_opens_the_company_for_its_member_and_says_used_to_others(
+    client, monkeypatch
+):
+    member = Member(
+        id=MEMBER_ID,
+        company_id=COMPANY_ID,
+        invited_email="bob@example.com",
+        token="token-1",
+        role="admin",
+        user_id="bob",
+        created_at=datetime.now(UTC),
+    )
+    company = Company(id=COMPANY_ID, name="Arcolabs", created_at=datetime.now(UTC))
+
+    async def fake_get(token):
+        return member, company
+
+    monkeypatch.setattr(members, "get_by_token", fake_get)
+    sign_in("bob@example.com", uid="bob")
+    mine = client.get("/members/invites/token-1").json()
+    sign_in("eve@example.com", uid="eve")
+    theirs = client.get("/members/invites/token-1").json()
+
+    assert (mine["joined"], mine["company_id"]) == (True, str(COMPANY_ID))
+    assert (theirs["joined"], theirs["company_id"]) == (True, None)
 
 
 def test_invite_view(client, stored_invite):
@@ -98,6 +130,7 @@ def test_invite_view(client, stored_invite):
         "company_name": "Arcolabs",
         "email": "bob@example.com",
         "joined": False,
+        "company_id": None,
     }
 
 

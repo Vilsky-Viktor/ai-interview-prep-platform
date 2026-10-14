@@ -352,7 +352,9 @@
     "acceptFailed": "De uitnodiging kon niet worden geaccepteerd. Probeer het opnieuw.",
     "invalid": "Deze uitnodiging is niet meer geldig.",
     "invitedToJoin": "Je bent uitgenodigd om lid te worden.",
-    "mismatch": "Het e-mailadres komt niet overeen. Log in met het adres van de uitnodiging om lid te worden."
+    "mismatch": "Het e-mailadres komt niet overeen. Log in met het adres van de uitnodiging om lid te worden.",
+    "joined": "Je bent lid geworden.",
+    "used": "Deze uitnodiging is al gebruikt."
   },
   "reportReasons": {
     "wrong_answer": "Het aangegeven antwoord is fout",

@@ -9,7 +9,7 @@ import { useAuth } from "@/components/auth-provider"
 import { useSignIn } from "@/components/sign-in-dialog"
 import { LinkStatus } from "@/components/link-status"
 import { Button } from "@/components/ui/button"
-import { WarningCard } from "@/components/warning-card"
+import { InfoCard, WarningCard } from "@/components/warning-card"
 import { ApiError, apiFetch } from "@/lib/api"
 import { useLinkData } from "@/hooks/use-link-data"
 import type { AdminInvite as Invite } from "@/types/company"
@@ -67,7 +67,7 @@ export function AdminInvite({ token }: { token: string }) {
     <div className="w-full space-y-8 text-center">
       <div className="space-y-4">
         <p className="text-base text-muted-foreground">
-          {share("invitedToJoin")}
+          {invite.company_id ? share("joined") : share("invitedToJoin")}
         </p>
         <h1 className="font-heading text-4xl font-medium tracking-tight text-balance normal-case sm:text-5xl">
           {invite.company_name}
@@ -77,13 +77,20 @@ export function AdminInvite({ token }: { token: string }) {
         <Button className="h-12 px-6 text-base" onClick={() => signIn()}>
           {t("signInToJoin")}
         </Button>
-      ) : invite.joined && matches ? (
+      ) : invite.company_id ? (
         <Button
           className="h-12 px-6 text-base"
-          onClick={() => router.push("/companies")}
+          onClick={() =>
+            router.push(`/companies/${invite.company_id}/interviews`)
+          }
         >
           {t("open")}
         </Button>
+      ) : invite.joined ? (
+        // Used by someone else, or by this email from another account.
+        <InfoCard className="mx-auto w-fit text-start">
+          {share("used")}
+        </InfoCard>
       ) : matches ? (
         <Button
           className="h-12 px-6 text-base"

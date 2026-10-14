@@ -8,26 +8,39 @@ from app.storage import companies, members
 from app.storage.db import Session
 
 
-def test_an_accepted_invite_link_stops_working_and_a_removed_admin_is_gone(run):
+def test_a_used_invite_link_still_finds_its_member_and_a_removed_admin_is_gone(run):
+    """Reopening a used link says it was used (instead of "invalid"); joining again tells the
+    owner nothing more."""
+
     async def scenario():
         company = await companies.create(f"Members {uuid.uuid4()}", "ann", "ann@example.com")
         bob = await members.add(company.id, "bob@example.com", "admin", {})
         cid = await members.add(company.id, "cid@example.com", "admin", {})
         await members.accept(bob, company, "bob")
+        await members.accept(bob, company, "bob")
         reused = await members.get_by_token(bob.token)
         await members.remove(cid.id)
         left = await members.list_for_company(company.id, 0, 10)
+
+        async with Session() as session:
+            joined = (
+                await session.scalars(
+                    select(OutboxEvent).where(OutboxEvent.data["key"].astext == f"member_joined:{bob.id}")
+                )
+            ).all()
+
         await companies.delete(company.id)
 
-        return reused, left
+        return reused, left, joined, bob.token
 
-    reused, left = run(scenario())
+    reused, left, joined, token = run(scenario())
 
-    assert reused is None
+    assert reused is not None and reused[0].user_id == "bob"
     assert [(row.invited_email, row.user_id, row.token) for row in left] == [
         ("ann@example.com", "ann", None),
-        ("bob@example.com", "bob", None),
+        ("bob@example.com", "bob", token),
     ]
+    assert len(joined) == 1
 
 
 def test_a_viewer_keeps_their_role_on_joining_and_the_owner_changes_it(run):

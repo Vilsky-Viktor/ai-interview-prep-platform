@@ -40,6 +40,8 @@ class AdminInviteOut(BaseModel):
     # None for a visitor who isn't signed in.
     email: str | None = None
     joined: bool
+    # Only for the member who joined through this link, so they can open the company.
+    company_id: UUID | None = None
 
 
 class CompanyOut(BaseModel):

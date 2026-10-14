@@ -352,7 +352,9 @@
     "acceptFailed": "Die Einladung konnte nicht angenommen werden. Bitte versuche es erneut.",
     "invalid": "Diese Einladung ist nicht mehr gültig.",
     "invitedToJoin": "Du wurdest zum Beitreten eingeladen.",
-    "mismatch": "Die E-Mail-Adresse stimmt nicht überein. Melde dich mit der Adresse aus der Einladung an, um beizutreten."
+    "mismatch": "Die E-Mail-Adresse stimmt nicht überein. Melde dich mit der Adresse aus der Einladung an, um beizutreten.",
+    "joined": "Du bist beigetreten.",
+    "used": "Diese Einladung wurde bereits verwendet."
   },
   "reportReasons": {
     "wrong_answer": "Die markierte Antwort ist falsch",

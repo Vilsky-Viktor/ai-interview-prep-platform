@@ -116,6 +116,18 @@ test("owner adds a viewer, who sees the company read-only", async ({
   await expect(page).toHaveURL(/\/companies$/);
   await expect(page.getByText(company.name).first()).toBeVisible();
 
+  // Reopening the used link says so, and opens the company, rather than "invalid".
+  await visit(page, new URL(joinLink).pathname);
+  await expect(page.getByText("You've joined.")).toBeVisible();
+  await shot(page, "join-used-member");
+  await page.getByRole("button", { name: "Open company" }).click();
+  await expect(page).toHaveURL(new RegExp(`/companies/${company.id}/interviews$`));
+  // Anyone else signed in is told it was used.
+  const stranger = await signInAs(throwawayEmail("stranger"));
+  await visit(stranger, new URL(joinLink).pathname);
+  await expect(stranger.getByText("This invite has already been used.")).toBeVisible();
+  await shot(stranger, "join-used-other");
+
   // The owner hears in the bell that they joined, and it opens the team.
   await expect(async () => {
     await owner.reload();

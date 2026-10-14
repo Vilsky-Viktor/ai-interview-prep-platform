@@ -352,7 +352,9 @@
     "acceptFailed": "Nie udało się przyjąć zaproszenia. Spróbuj ponownie.",
     "invalid": "To zaproszenie nie jest już ważne.",
     "invitedToJoin": "Zaproszono Cię do dołączenia.",
-    "mismatch": "Adres e-mail się nie zgadza. Zaloguj się adresem z zaproszenia, aby dołączyć."
+    "mismatch": "Adres e-mail się nie zgadza. Zaloguj się adresem z zaproszenia, aby dołączyć.",
+    "joined": "Dołączyłeś.",
+    "used": "To zaproszenie zostało już wykorzystane."
   },
   "reportReasons": {
     "wrong_answer": "Zaznaczona odpowiedź jest błędna",

@@ -352,7 +352,9 @@
     "acceptFailed": "Hindi matanggap ang imbitasyon. Pakisubukang muli.",
     "invalid": "Hindi na valid ang imbitasyong ito.",
     "invitedToJoin": "Inimbitahan kang sumali.",
-    "mismatch": "Hindi tugma ang email. Mag-sign in gamit ang email ng imbitasyon para sumali."
+    "mismatch": "Hindi tugma ang email. Mag-sign in gamit ang email ng imbitasyon para sumali.",
+    "joined": "Nakasali ka na.",
+    "used": "Nagamit na ang imbitasyong ito."
   },
   "reportReasons": {
     "wrong_answer": "Mali ang minarkahang sagot",

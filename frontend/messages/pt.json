@@ -352,7 +352,9 @@
     "acceptFailed": "Não foi possível aceitar o convite. Tente novamente.",
     "invalid": "Este convite não é mais válido.",
     "invitedToJoin": "Você foi convidado a participar.",
-    "mismatch": "O e-mail não confere. Entre com o e-mail do convite para participar."
+    "mismatch": "O e-mail não confere. Entre com o e-mail do convite para participar.",
+    "joined": "Você entrou.",
+    "used": "Este convite já foi usado."
   },
   "reportReasons": {
     "wrong_answer": "A resposta marcada está errada",

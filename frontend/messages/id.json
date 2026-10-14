@@ -352,7 +352,9 @@
     "acceptFailed": "Undangan tidak bisa diterima. Coba lagi.",
     "invalid": "Undangan ini sudah tidak berlaku.",
     "invitedToJoin": "Kamu diundang untuk bergabung.",
-    "mismatch": "Email tidak cocok. Masuk dengan email undangan untuk bergabung."
+    "mismatch": "Email tidak cocok. Masuk dengan email undangan untuk bergabung.",
+    "joined": "Kamu sudah bergabung.",
+    "used": "Undangan ini sudah digunakan."
   },
   "reportReasons": {
     "wrong_answer": "Jawaban yang ditandai salah",

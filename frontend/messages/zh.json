@@ -352,7 +352,9 @@
     "acceptFailed": "无法接受邀请，请重试。",
     "invalid": "此邀请已失效。",
     "invitedToJoin": "你受邀加入。",
-    "mismatch": "邮箱不匹配。请使用受邀邮箱登录后加入。"
+    "mismatch": "邮箱不匹配。请使用受邀邮箱登录后加入。",
+    "joined": "你已加入。",
+    "used": "此邀请已被使用。"
   },
   "reportReasons": {
     "wrong_answer": "标记的答案是错误的",

@@ -57,8 +57,8 @@ async def accept(member: Member, company: Company, user_id: str) -> None:
         if joining:
             row.user_id = user_id
 
-        # The link works once: a joined member no longer needs it.
-        row.token = None
+        # The link stays, so reopening it says it was used (and opens the company for its
+        # member) instead of "invalid"; joining twice changes nothing.
 
         owner_id = await session.scalar(
             select(Member.user_id).where(Member.company_id == company.id, Member.role == Role.OWNER)

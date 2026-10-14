@@ -168,7 +168,8 @@ async def remove_member(company_id: UUID, member_id: UUID, user: CurrentUser) ->
 @router.get("/invites/{token}")
 async def get_admin_invite(token: str, user: OptionalUser) -> AdminInviteOut:
     """Open to visitors, so they see what they're invited to before signing in; the invited
-    email only once signed in, so a visitor with the link doesn't learn it."""
+    email only once signed in, so a visitor with the link doesn't learn it. A used link says so,
+    and gives the company's id to the member who joined through it."""
     found = await members.get_by_token(token)
 
     if found is None:
@@ -180,6 +181,7 @@ async def get_admin_invite(token: str, user: OptionalUser) -> AdminInviteOut:
         company_name=company.name,
         email=member.invited_email if user else None,
         joined=member.user_id is not None,
+        company_id=company.id if user and member.user_id == user.uid else None,
     )
 
 

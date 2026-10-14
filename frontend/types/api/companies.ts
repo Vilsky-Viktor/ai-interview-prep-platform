@@ -340,7 +340,8 @@ export interface paths {
     /**
      * Get Admin Invite
      * @description Open to visitors, so they see what they're invited to before signing in; the invited
-     *     email only once signed in, so a visitor with the link doesn't learn it.
+     *     email only once signed in, so a visitor with the link doesn't learn it. A used link says so,
+     *     and gives the company's id to the member who joined through it.
      */
     get: operations["get_admin_invite_members_invites__token__get"]
     put?: never
@@ -1312,6 +1313,27 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/internal/companies/editors": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Company Editors
+     * @description Notifications, for a notice about the data processing agreement: every owner and admin
+     *     of a company.
+     */
+    get: operations["company_editors_internal_companies_editors_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/internal/events": {
     parameters: {
       query?: never
@@ -1778,6 +1800,8 @@ export interface components {
       email?: string | null
       /** Joined */
       joined: boolean
+      /** Company Id */
+      company_id?: string | null
     }
     /** AiAppsIn */
     AiAppsIn: {
@@ -3050,6 +3074,11 @@ export interface components {
     UserEmailIn: {
       /** Email */
       email: string
+    }
+    /** UserIdsOut */
+    UserIdsOut: {
+      /** User Ids */
+      user_ids: string[]
     }
     /** ValidationError */
     ValidationError: {
@@ -5648,6 +5677,35 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["WaitingInterviewsOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  company_editors_internal_companies_editors_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["UserIdsOut"]
         }
       }
       /** @description Validation Error */

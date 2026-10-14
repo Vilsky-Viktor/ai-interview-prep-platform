@@ -352,7 +352,9 @@
     "acceptFailed": "Kutset ei õnnestunud vastu võtta. Proovi uuesti.",
     "invalid": "See kutse ei kehti enam.",
     "invitedToJoin": "Sind kutsuti liituma.",
-    "mismatch": "E-posti aadress ei ühti. Liitumiseks logi sisse kutses olnud aadressiga."
+    "mismatch": "E-posti aadress ei ühti. Liitumiseks logi sisse kutses olnud aadressiga.",
+    "joined": "Oled liitunud.",
+    "used": "Seda kutset on juba kasutatud."
   },
   "reportReasons": {
     "wrong_answer": "Märgitud vastus on vale",

@@ -352,7 +352,9 @@
     "acceptFailed": "Impossible d'accepter l'invitation. Veuillez réessayer.",
     "invalid": "Cette invitation n'est plus valide.",
     "invitedToJoin": "Vous avez été invité à rejoindre.",
-    "mismatch": "L'adresse ne correspond pas. Connectez-vous avec l'adresse de l'invitation pour rejoindre."
+    "mismatch": "L'adresse ne correspond pas. Connectez-vous avec l'adresse de l'invitation pour rejoindre.",
+    "joined": "Vous avez rejoint l'entreprise.",
+    "used": "Cette invitation a déjà été utilisée."
   },
   "reportReasons": {
     "wrong_answer": "La réponse indiquée est fausse",

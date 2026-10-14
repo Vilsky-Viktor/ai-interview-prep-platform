@@ -352,7 +352,9 @@
     "acceptFailed": "No se pudo aceptar la invitación. Inténtalo de nuevo.",
     "invalid": "Esta invitación ya no es válida.",
     "invitedToJoin": "Te invitaron a unirte.",
-    "mismatch": "El correo no coincide. Inicia sesión con el correo de la invitación para unirte."
+    "mismatch": "El correo no coincide. Inicia sesión con el correo de la invitación para unirte.",
+    "joined": "Te has unido.",
+    "used": "Esta invitación ya se ha usado."
   },
   "reportReasons": {
     "wrong_answer": "La respuesta marcada es incorrecta",

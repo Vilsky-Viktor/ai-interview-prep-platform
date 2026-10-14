@@ -352,7 +352,9 @@
     "acceptFailed": "Davet kabul edilemedi. Lütfen tekrar deneyin.",
     "invalid": "Bu davet artık geçerli değil.",
     "invitedToJoin": "Katılmaya davet edildiniz.",
-    "mismatch": "E-posta eşleşmiyor. Katılmak için davetteki e-postayla giriş yapın."
+    "mismatch": "E-posta eşleşmiyor. Katılmak için davetteki e-postayla giriş yapın.",
+    "joined": "Katıldınız.",
+    "used": "Bu davet zaten kullanıldı."
   },
   "reportReasons": {
     "wrong_answer": "İşaretli cevap yanlış",

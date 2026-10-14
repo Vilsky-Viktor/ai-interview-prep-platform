@@ -352,7 +352,9 @@
     "acceptFailed": "Không thể chấp nhận lời mời. Vui lòng thử lại.",
     "invalid": "Lời mời này không còn hiệu lực.",
     "invitedToJoin": "Bạn được mời tham gia.",
-    "mismatch": "Email không khớp. Đăng nhập bằng email được mời để tham gia."
+    "mismatch": "Email không khớp. Đăng nhập bằng email được mời để tham gia.",
+    "joined": "Bạn đã tham gia.",
+    "used": "Lời mời này đã được sử dụng."
   },
   "reportReasons": {
     "wrong_answer": "Đáp án được đánh dấu là sai",

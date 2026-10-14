@@ -352,7 +352,9 @@
     "acceptFailed": "Couldn't accept the invite. Please try again.",
     "invalid": "This invite isn't valid anymore.",
     "invitedToJoin": "You were invited to join.",
-    "mismatch": "The email does not match. Sign in with the invitation email to join."
+    "mismatch": "The email does not match. Sign in with the invitation email to join.",
+    "joined": "You've joined.",
+    "used": "This invite has already been used."
   },
   "reportReasons": {
     "wrong_answer": "The marked answer is wrong",
