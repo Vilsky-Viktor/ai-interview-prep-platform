@@ -1146,6 +1146,7 @@
     "disconnectText": "其密钥会立即删除，所有职位关联也随之删除。已邀请的候选人仍保留各自的面试。",
     "disconnectFailed": "无法断开 {ats}。",
     "unavailable": "集成功能暂未开放。",
+    "connectionsFailed": "无法加载你的 ATS 连接。请重试。",
     "links": "已关联的职位",
     "linksText": "在 {ats} 中进入该阶段的候选人会收到面试，结果会回传到 {ats}。",
     "noLinks": "还没有关联的职位。",

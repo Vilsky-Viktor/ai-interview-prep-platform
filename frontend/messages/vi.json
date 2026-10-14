@@ -1151,6 +1151,7 @@
     "disconnectText": "Khóa sẽ bị xóa ngay, cùng với các tin tuyển dụng đã liên kết. Ứng viên đã được mời vẫn giữ buổi phỏng vấn của họ.",
     "disconnectFailed": "Không thể ngắt kết nối {ats}.",
     "unavailable": "Tích hợp hiện chưa khả dụng.",
+    "connectionsFailed": "Không thể tải các kết nối ATS của bạn. Hãy thử lại.",
     "links": "Tin tuyển dụng đã liên kết",
     "linksText": "Ứng viên đến giai đoạn này trong {ats} sẽ nhận buổi phỏng vấn, và kết quả được gửi lại {ats}.",
     "noLinks": "Chưa có tin tuyển dụng nào được liên kết.",

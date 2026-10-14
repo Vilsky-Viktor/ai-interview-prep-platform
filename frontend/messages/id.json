@@ -1155,6 +1155,7 @@
     "disconnectText": "Kuncinya langsung dihapus, beserta lowongan yang tertaut. Kandidat yang sudah diundang tetap memiliki wawancaranya.",
     "disconnectFailed": "{ats} tidak bisa diputuskan.",
     "unavailable": "Integrasi belum tersedia.",
+    "connectionsFailed": "Koneksi ATS-mu tidak bisa dimuat. Coba lagi.",
     "links": "Lowongan tertaut",
     "linksText": "Kandidat yang mencapai tahap ini di {ats} mendapat wawancara, dan hasilnya dikirim kembali ke {ats}.",
     "noLinks": "Belum ada lowongan tertaut.",

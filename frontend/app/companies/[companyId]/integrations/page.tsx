@@ -110,7 +110,8 @@ export default async function IntegrationsPage({
           </ul>
         ) : (
           <p className="rounded-2xl border p-6 text-muted-foreground">
-            {t("unavailable")}
+            {/* Not loaded (its service failed), or not offered yet. */}
+            {integrations === null ? t("connectionsFailed") : t("unavailable")}
           </p>
         )}
       </section>

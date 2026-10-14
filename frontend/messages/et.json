@@ -1159,6 +1159,7 @@
     "disconnectText": "Selle võti kustutatakse kohe ja koos sellega seotud töökuulutused. Juba kutsutud kandidaatide intervjuud jäävad alles.",
     "disconnectFailed": "Ühendust {ats} keskkonnaga ei õnnestunud katkestada.",
     "unavailable": "Integratsioonid pole veel saadaval.",
+    "connectionsFailed": "Sinu ATS-i ühendusi ei õnnestunud laadida. Proovi uuesti.",
     "links": "Seotud töökuulutused",
     "linksText": "Kandidaadid, kes jõuavad {ats} keskkonnas etappi, saavad intervjuu ja nende tulemused lähevad tagasi {ats} keskkonda.",
     "noLinks": "Seotud töökuulutusi veel pole.",

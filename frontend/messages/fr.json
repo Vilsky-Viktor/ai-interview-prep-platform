@@ -1155,6 +1155,7 @@
     "disconnectText": "Sa clé est supprimée immédiatement, avec ses postes liés. Les candidats déjà invités gardent leurs entretiens.",
     "disconnectFailed": "Impossible de déconnecter {ats}.",
     "unavailable": "Les intégrations ne sont pas encore disponibles.",
+    "connectionsFailed": "Impossible de charger vos connexions ATS. Réessayez.",
     "links": "Postes liés",
     "linksText": "Les candidats qui atteignent l'étape dans {ats} reçoivent l'entretien, et leurs résultats reviennent dans {ats}.",
     "noLinks": "Aucun poste lié pour l'instant.",

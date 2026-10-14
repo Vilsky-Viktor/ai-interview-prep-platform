@@ -1155,6 +1155,7 @@
     "disconnectText": "Klucz zostanie od razu usunięty, a wraz z nim powiązane oferty. Już zaproszeni kandydaci zachowają swoje rozmowy.",
     "disconnectFailed": "Nie udało się odłączyć {ats}.",
     "unavailable": "Integracje nie są jeszcze dostępne.",
+    "connectionsFailed": "Nie udało się wczytać połączeń z ATS. Spróbuj ponownie.",
     "links": "Powiązane oferty",
     "linksText": "Kandydaci, którzy w {ats} dotrą do etapu, dostają rozmowę, a ich wyniki wracają do {ats}.",
     "noLinks": "Brak powiązanych ofert.",

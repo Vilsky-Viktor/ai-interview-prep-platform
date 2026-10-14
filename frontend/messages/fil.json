@@ -1159,6 +1159,7 @@
     "disconnectText": "Agad na buburahin ang key nito, kasama ang mga naka-link na job. Mananatili ang mga interview ng mga aplikanteng naimbitahan na.",
     "disconnectFailed": "Hindi ma-disconnect ang {ats}.",
     "unavailable": "Hindi pa available ang mga integration.",
+    "connectionsFailed": "Hindi ma-load ang mga koneksyon mo sa ATS. Subukan ulit.",
     "links": "Mga naka-link na job",
     "linksText": "Makukuha ng mga aplikanteng aabot sa stage sa {ats} ang interview, at babalik sa {ats} ang mga resulta nila.",
     "noLinks": "Wala pang naka-link na job.",

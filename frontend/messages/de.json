@@ -1155,6 +1155,7 @@
     "disconnectText": "Der Schlüssel wird sofort gelöscht, und mit ihm die verknüpften Stellen. Bereits eingeladene Kandidaten behalten ihre Interviews.",
     "disconnectFailed": "{ats} konnte nicht getrennt werden.",
     "unavailable": "Integrationen sind noch nicht verfügbar.",
+    "connectionsFailed": "Deine ATS-Verbindungen konnten nicht geladen werden. Versuche es erneut.",
     "links": "Verknüpfte Stellen",
     "linksText": "Kandidaten, die in {ats} die Phase erreichen, bekommen das Interview, und ihre Ergebnisse gehen zurück an {ats}.",
     "noLinks": "Noch keine verknüpften Stellen.",

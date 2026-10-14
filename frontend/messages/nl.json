@@ -1151,6 +1151,7 @@
     "disconnectText": "De sleutel wordt meteen verwijderd, en de gekoppelde vacatures ook. Kandidaten die al zijn uitgenodigd, houden hun interviews.",
     "disconnectFailed": "{ats} kon niet worden ontkoppeld.",
     "unavailable": "Integraties zijn nog niet beschikbaar.",
+    "connectionsFailed": "Je ATS-koppelingen konden niet worden geladen. Probeer het opnieuw.",
     "links": "Gekoppelde vacatures",
     "linksText": "Kandidaten die de fase in {ats} bereiken, krijgen het interview, en hun resultaten gaan terug naar {ats}.",
     "noLinks": "Nog geen gekoppelde vacatures.",

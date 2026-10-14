@@ -1155,6 +1155,7 @@
     "disconnectText": "La chiave viene eliminata subito, insieme alle posizioni collegate. I candidati già invitati mantengono i loro colloqui.",
     "disconnectFailed": "Impossibile scollegare {ats}.",
     "unavailable": "Le integrazioni non sono ancora disponibili.",
+    "connectionsFailed": "Impossibile caricare i tuoi collegamenti ATS. Riprova.",
     "links": "Posizioni collegate",
     "linksText": "I candidati che raggiungono la fase in {ats} ricevono il colloquio, e i loro risultati tornano in {ats}.",
     "noLinks": "Ancora nessuna posizione collegata.",

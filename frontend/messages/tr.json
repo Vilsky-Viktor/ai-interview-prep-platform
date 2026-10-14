@@ -1154,6 +1154,7 @@
     "disconnectText": "Anahtarı ve bağlı ilanları hemen silinir. Daha önce davet edilen adaylar mülakatlarını korur.",
     "disconnectFailed": "{ats} bağlantısı kesilemedi.",
     "unavailable": "Entegrasyonlar henüz kullanılamıyor.",
+    "connectionsFailed": "ATS bağlantılarınız yüklenemedi. Tekrar deneyin.",
     "links": "Bağlı ilanlar",
     "linksText": "{ats} hesabınızda aşamaya ulaşan adaylar mülakatı alır ve sonuçları {ats} hesabınıza geri gönderilir.",
     "noLinks": "Henüz bağlı ilan yok.",

@@ -1155,6 +1155,7 @@
     "disconnectText": "Its key is deleted at once, and its linked jobs with it. Candidates already invited keep their interviews.",
     "disconnectFailed": "Couldn't disconnect {ats}.",
     "unavailable": "Integrations aren't available yet.",
+    "connectionsFailed": "Couldn't load your ATS connections. Please try again.",
     "links": "Linked jobs",
     "linksText": "Candidates who reach the stage in {ats} get the interview, and their results go back to {ats}.",
     "noLinks": "No linked jobs yet.",

@@ -1151,6 +1151,7 @@
     "disconnectText": "A chave é excluída na hora, junto com as vagas vinculadas. Os candidatos já convidados mantêm suas entrevistas.",
     "disconnectFailed": "Não foi possível desconectar o {ats}.",
     "unavailable": "As integrações ainda não estão disponíveis.",
+    "connectionsFailed": "Não foi possível carregar suas conexões com o ATS. Tente novamente.",
     "links": "Vagas vinculadas",
     "linksText": "Os candidatos que chegam à etapa no {ats} recebem a entrevista, e os resultados voltam para o {ats}.",
     "noLinks": "Nenhuma vaga vinculada ainda.",
