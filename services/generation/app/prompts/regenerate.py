@@ -1,4 +1,4 @@
-from app.prompts.question_rules import LEVEL_GUIDE, PRACTICE_GUIDE
+from app.prompts.question_rules import LEVEL_GUIDE, PRACTICE_GUIDE, READING_RULES
 
 REGENERATE_PROMPT = (
     """Write ONE new multiple-choice interview question for the topic below.
@@ -13,8 +13,9 @@ Rules:
   words.
 - Do not repeat, rephrase or narrow down any existing question; cover a different angle.
 - Keep it at the given level, self-contained and answerable without extra context: it states
-  everything the answer depends on, such as the starting situation, the goal being optimized,
-  and the version or standard in use when the answer differs between them.
+  what the answer depends on, such as the starting situation, the goal being optimized, and
+  the version or standard in use when the answer differs between them, in as few words as
+  that takes.
 - Return only the question and, if it shows one, its example. The options are written in a
   separate step, so never list choices (A., B., C., D.) in the question text, and do not add
   numbering.
@@ -27,6 +28,8 @@ Rules:
   (for example a² + b² = c², ≤, √, π), not in a block.
 
 """
+    + READING_RULES
+    + "\n\n"
     + LEVEL_GUIDE
     + "\n\n"
     + PRACTICE_GUIDE

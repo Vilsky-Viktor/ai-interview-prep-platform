@@ -1,7 +1,10 @@
+import logging
 import uuid
 from contextlib import aclosing
 
+from langchain_core.callbacks import get_usage_metadata_callback
 from langgraph.types import Command
+from prepza_common.llm import call_cost
 
 from app.constants.events import GENERATION_COMPLETED
 from app.constants.generation import MAX_CONCURRENCY, RECURSION_LIMIT
@@ -15,6 +18,8 @@ from app.models.generation import Generation
 from app.services import outbox as outbox_service
 from app.services.sample_checks import check_sample
 from app.storage import generations
+
+logger = logging.getLogger(__name__)
 
 
 async def run_pipeline(graph, generation: Generation, resume: dict | None) -> None:
@@ -37,7 +42,29 @@ async def run_pipeline(graph, generation: Generation, resume: dict | None) -> No
             "template": generation.kind == GenerationKind.TEMPLATE,
         }
 
-    await stream_graph(graph, generation, graph_input, config)
+    # What this run spent, also when it fails: a retry or a resume logs its own.
+    with get_usage_metadata_callback() as usage:
+        try:
+            await stream_graph(graph, generation, graph_input, config)
+        finally:
+            log_cost(generation, usage.usage_metadata)
+
+
+def log_cost(generation: Generation, usage_by_model: dict) -> None:
+    """The tokens and the estimated USD of one run (the topics, or the questions after review),
+    key checks included; models without a known price are left out of the USD."""
+    cost = sum(call_cost(name, usage) or 0 for name, usage in usage_by_model.items())
+    tokens = {
+        name: (usage.get("input_tokens", 0), usage.get("output_tokens", 0))
+        for name, usage in usage_by_model.items()
+    }
+    logger.info(
+        "Generation %s (%s) spent $%.2f; input and output tokens by model: %s",
+        generation.id,
+        generation.kind,
+        cost,
+        tokens,
+    )
 
 
 async def stream_graph(graph, generation: Generation, graph_input, config: dict) -> None:

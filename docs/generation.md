@@ -27,6 +27,24 @@ job text -> extract requirements and level -> draft topics          (both cached
 - Every LLM call of the pipeline shares one rate limit across the API and all workers (`LLM_REQUESTS_PER_SECOND`).
 - The worker also translates news posts into every language, with the generation model (`INTERVIEW_MODEL`), as a `translate-news` job (see [Admin zone](features/admin-zone.md#news)).
 
+### Topics
+
+The topic draft has up to `MAX_TOPICS` main topics, that number included: one for each distinct subject the job's requirements cover. Distinct subjects are merged only when there are more of them than the limit.
+
+### Question length
+
+A question, its example and its four options are read and answered within one minute, also by someone reading in a language that isn't their own. Every prompt that writes or rewrites a question says so (`READING_RULES` in `app/prompts/question_rules.py`):
+
+- the question at most 40 words (50 at the hard level), in one or two short, plain sentences, with only what the answer depends on;
+- an example at most 8 short lines;
+- each option at most 10 words.
+
+A question that still comes back far over is dropped, and the topic's top-up writes another (`readable` in `app/helpers/questions.py`): its sentences over 400 characters (`MAX_QUESTION_CHARS`), its example over 10 lines (`MAX_EXAMPLE_LINES`), or an option over 100 characters (`MAX_OPTION_CHARS`). A rewritten question (a member's or the quality checks') is held to the same limits.
+
+### Cost
+
+Each run of the pipeline logs what it spent: the input and output tokens by model, and the estimated USD at the prices in `prepza_common.constants.MODEL_PRICES` (cached input counted at the full price). A generation logs two runs, the topic draft and the questions after review, and a retry or a resume logs its own.
+
 ## Reusing proven questions
 
 The question bank is the superadmins' templates; their stages (private, retiring, revealed) are in [Templates and practice](features/templates-and-practice.md#the-question-bank).

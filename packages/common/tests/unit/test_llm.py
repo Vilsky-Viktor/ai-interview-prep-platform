@@ -1,5 +1,5 @@
 import pytest
-from prepza_common.llm import chat_model
+from prepza_common.llm import call_cost, chat_model
 
 
 @pytest.fixture(autouse=True)
@@ -28,3 +28,10 @@ def test_without_a_temperature_none_is_sent():
 
 def test_nothing_is_stored_at_openai():
     assert chat_model("model-a", "low").store is False
+
+
+def test_a_call_costs_its_tokens_at_the_models_price():
+    usage = {"input_tokens": 1_000_000, "output_tokens": 100_000}
+
+    assert call_cost("gpt-6.1-sol", usage) == 2.0 + 1.0
+    assert call_cost("unknown-model", usage) is None

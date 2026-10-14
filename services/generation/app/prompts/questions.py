@@ -1,4 +1,9 @@
-from app.prompts.question_rules import DISTRACTOR_RULES, LEVEL_GUIDE, PRACTICE_GUIDE
+from app.prompts.question_rules import (
+    DISTRACTOR_RULES,
+    LEVEL_GUIDE,
+    PRACTICE_GUIDE,
+    READING_RULES,
+)
 
 QUESTIONS_PROMPT = (
     """Write multiple-choice interview questions on the subtopic below, each with
@@ -22,9 +27,9 @@ Question rules:
   steps in their own words. Ask what is true, which choice is best, what happens next, what
   something means, or what to do first in a situation.
 - Every question covers a different angle; no rephrasings of the same question.
-- Each question is self-contained and answerable without extra context: it states everything
-  the answer depends on, such as the starting situation, the goal being optimized, and the
-  version or standard in use when the answer differs between them.
+- Each question is self-contained and answerable without extra context: it states what the
+  answer depends on, such as the starting situation, the goal being optimized, and the version
+  or standard in use when the answer differs between them, in as few words as that takes.
 - Never list choices (A., B., C., D.) in the question text, and do not add numbering.
 - Write questions as plain sentences. Text whose layout matters, such as a program, a query,
   a command, a formula or a file, never goes into the sentences: it goes into example, exactly
@@ -37,6 +42,8 @@ Question rules:
 - The topic already has the questions listed at the end. Do not repeat or rephrase them.
 
 """
+    + READING_RULES
+    + "\n\n"
     + LEVEL_GUIDE
     + "\n\n"
     + PRACTICE_GUIDE

@@ -177,3 +177,11 @@ OPERATOR = {
     # Questions, requests and the contact page's messages all go here.
     "email": "hello@prepza.ai",
 }
+
+# USD per million input and output tokens (OpenAI's pricing page, October 2026): the cost
+# generation logs for each run (llm.call_cost) and the offline tests report.
+MODEL_PRICES = {
+    "gpt-6-luna": (0.10, 0.50),
+    "gpt-6.1-sol": (2.00, 10.00),
+    "gpt-6-astra": (10.00, 50.00),
+}

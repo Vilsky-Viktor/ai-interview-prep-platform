@@ -12,12 +12,14 @@ Rules:
 - Leave out years of experience, seniority, commitment, motivation and similar phrasing; they
   can't be tested. Use only the skill they refer to.
 - Every requirement's skill must be covered by at least one subtopic. Never drop one.
-- Group related requirements under one topic. Keep each specific tool, method, or concept
-  that a requirement names as its own subtopic.
+- Each main topic covers one coherent subject; requirements on the same subject share it. Keep
+  each specific tool, method, or concept that a requirement names as its own subtopic.
 - At most {max_subtopics} subtopics per main topic. When more would be needed, merge closely
   related ones into a broader subtopic rather than dropping a requirement.
-- At most {max_topics} main topics. If the requirements need more, group related ones under a
-  shared topic.
+- Up to {max_topics} main topics, {max_topics} included: one for each distinct subject the
+  requirements cover, so a job with {max_topics} distinct subjects gets all {max_topics}. Never
+  merge distinct subjects to stay below the limit; only if the requirements need more than
+  {max_topics}, group the most closely related ones under a shared topic.
 - Keep every main topic and subtopic name to {max_name} characters at most (about 6 words). If a
   subtopic would list several things, split it into separate subtopics instead.
 - Do not add numbering.
@@ -32,8 +34,8 @@ Requirements:
 REVISION_PROMPT = """You are re-planning a job test's topics after a reviewer's feedback.
 
 Produce the complete, best set of topics that covers the current topics plus everything the
-instructions ask for, in at most {max_topics} main topics. Re-plan the whole list rather than
-patching it: names, grouping and order may change.
+instructions ask for, in up to {max_topics} main topics ({max_topics} included). Re-plan the
+whole list rather than patching it: names, grouping and order may change.
 
 Rules:
 - Apply the instructions fully. Content the reviewer asks to add gets its own main topic (or

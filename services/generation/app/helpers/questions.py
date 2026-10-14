@@ -5,7 +5,9 @@ import re
 from app.config.settings import settings
 from app.constants.generation import (
     DISTRACTORS,
+    MAX_EXAMPLE_LINES,
     MAX_OPTION_CHARS,
+    MAX_QUESTION_CHARS,
     QUESTION_BATCH_SIZE,
     QUESTION_OVERSAMPLE,
 )
@@ -34,6 +36,13 @@ def with_example(question: str, example: str | None) -> str:
         return question
 
     return f"{question}\n```\n{example}\n```"
+
+
+def readable(question: str, example: str | None) -> bool:
+    """Short enough to read and answer within a minute (MAX_QUESTION_CHARS, MAX_EXAMPLE_LINES)."""
+    lines = EXAMPLE_FENCE.sub("", (example or "").strip()).strip("\n").splitlines()
+
+    return len(strip_choices(question)) <= MAX_QUESTION_CHARS and len(lines) <= MAX_EXAMPLE_LINES
 
 
 def merge_buckets(buckets: list[list[dict]]) -> list[dict]:

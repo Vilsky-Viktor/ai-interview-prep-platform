@@ -2,13 +2,26 @@
 # regenerate.py), so a question reads the same however it was made. Plain text without braces:
 # the prompts that include them are filled with str.format.
 
+# The whole question, its example and its four options read and answered within a minute, also by
+# someone reading in a language that isn't their own (constants/generation.py checks the limits).
+READING_RULES = """Length: the candidate reads the question, its example and all four options
+and answers within one minute, often in a language that isn't their own.
+- The question is at most 40 words (a hard one at most 50): one or two short sentences that
+  give only what the answer depends on. No story, no names of people or companies, no
+  background that doesn't change the answer.
+- Plain, common words and simple sentence structure; one idea per sentence. The topic's own
+  terms are fine; rare words, idioms and wordplay are not.
+- An example is at most 8 short lines.
+- Each option is at most 10 words."""
+
 LEVEL_GUIDE = """How hard the questions are, by level:
 - basic: core ideas and terms, and applying them in simple, typical cases.
 - medium: using the knowledge in realistic situations: choosing between options, predicting
   what happens, spotting a mistake, working out a result.
 - hard: what a senior person is tested on: trade-offs, edge cases, diagnosing a problem from
   its symptoms, multi-step reasoning and decisions under constraints. Few questions are plain
-  recall of a definition or a fact; most give a situation or an example and ask about it.
+  recall of a definition or a fact; most give a short situation or example and ask about it.
+  Hard comes from the thinking the question needs, never from its length.
   A scenario alone doesn't make a question hard: if one known rule, fact or single calculation
   answers it, it is medium. A hard question needs two or more steps, or weighing factors that
   pull in different directions, and its wrong options are what a capable mid-level person
@@ -16,7 +29,8 @@ LEVEL_GUIDE = """How hard the questions are, by level:
 Most questions are at the given level; a few are one level easier or harder."""
 
 PRACTICE_GUIDE = """Make them practice, not trivia. Mix these kinds, as the subtopic allows:
-- A short scenario with concrete details, asking what to do, choose or expect.
+- A short scenario with the few concrete details that matter, asking what to do, choose or
+  expect.
 - A worked example with real numbers, asking for the result or the best estimate.
 - When the topic or subtopic involves anything written in a formal language (a programming
   language or its libraries, SQL or another query language, shell commands, spreadsheet
@@ -41,7 +55,8 @@ DISTRACTOR_RULES = """- Each distractor is a specific, believable mistake: a com
 - The correct option must not stand out. Write it in as few words as it needs, then write each
   distractor with about the same number of words, never noticeably fewer: across a set of
   questions the correct option is the longest of the four no more often than any other.
-- An option is a single line; several printed values go on that line, separated by spaces.
+- An option is a single line of at most 10 words; several printed values go on that line,
+  separated by spaces.
 - No "all of the above", "none of the above", or options that overlap with the correct one.
 - A distractor must be wrong for the question exactly as written, not merely less precise. If
   an expert could defend it as a correct answer, it is not a distractor."""

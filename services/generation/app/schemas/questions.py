@@ -6,14 +6,14 @@ EXAMPLE = (
     "The program, query, command, formula or file the question is about, exactly as it would be "
     "typed, with real line breaks and indentation and without a Markdown fence; for a query, the "
     "table's few rows first. Null when the question shows none. Never null when the question "
-    'refers to one, such as "this query" or "the file below".'
+    'refers to one, such as "this query" or "the file below". At most 8 short lines.'
 )
 
 
 class QuestionItem(BaseModel):
     question: str = Field(
-        description="The question itself in plain sentences, without numbering, listed choices "
-        "or the example."
+        description="The question itself in one or two short, plain sentences of at most 40 words "
+        "(50 for a hard one), without numbering, listed choices or the example."
     )
     example: str | None = Field(description=EXAMPLE)
     correct_option: str = Field(
@@ -37,8 +37,8 @@ class QuestionItemList(BaseModel):
 
 class NewQuestion(BaseModel):
     question: str = Field(
-        description="One new interview question in plain sentences, without numbering or the "
-        "example."
+        description="One new interview question in one or two short, plain sentences of at most "
+        "40 words (50 for a hard one), without numbering or the example."
     )
     example: str | None = Field(description=EXAMPLE)
 

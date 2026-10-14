@@ -6,18 +6,13 @@ import os
 from pathlib import Path
 
 from langchain_openai import ChatOpenAI
+from prepza_common.llm import call_cost
 
 EVALS = Path(__file__).resolve().parents[1]
 DATASETS = EVALS / "datasets"
 RESULTS = EVALS / "results"
 JUDGES = EVALS / "judges"
 
-# USD per million input and output tokens (OpenAI's pricing page, October 2026).
-PRICES = {
-    "gpt-6-luna": (0.10, 0.50),
-    "gpt-6.1-sol": (2.00, 10.00),
-    "gpt-6-astra": (10.00, 50.00),
-}
 # The judge: stronger than what it judges, and thinking hard, so its verdicts are the reference.
 JUDGE_MODEL = os.environ.get("JUDGE_MODEL", "gpt-6.1-sol")
 JUDGE_EFFORT = os.environ.get("JUDGE_EFFORT", "high")
@@ -70,12 +65,13 @@ def judge() -> ChatOpenAI:
 
 
 def cost(model_name: str, usage: dict) -> float:
-    """USD for one call's usage metadata."""
-    price_in, price_out = PRICES[model_name]
+    """USD for one call's usage metadata; a model without a price fails the run."""
+    spent = call_cost(model_name, usage)
 
-    return (
-        usage.get("input_tokens", 0) * price_in + usage.get("output_tokens", 0) * price_out
-    ) / 1e6
+    if spent is None:
+        raise KeyError(model_name)
+
+    return spent
 
 
 def correct_option(item: dict) -> str:

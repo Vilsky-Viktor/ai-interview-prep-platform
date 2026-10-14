@@ -2,6 +2,7 @@ import asyncio
 
 from app.config.settings import settings
 from app.integrations import llm
+from app.prompts.topics import TOPICS_PROMPT
 from app.schemas.topics import TopicList, TopicStructure
 from app.services.nodes.topics import revise_topics
 
@@ -59,3 +60,17 @@ def test_a_drafted_topic_keeps_at_most_max_subtopics(monkeypatch):
     drafted = [{"main_topic": "SQL", "subtopics": [f"Subtopic {i}" for i in range(12)]}]
 
     assert fit_topics(drafted)[0]["subtopics"] == [f"Subtopic {i}" for i in range(10)]
+
+
+def test_the_plan_uses_every_topic_up_to_the_limit_it_includes():
+    prompt = TOPICS_PROMPT.format(
+        max_topics=10,
+        max_subtopics=10,
+        max_name=60,
+        language="English",
+        level="hard",
+        requirements="",
+    )
+
+    assert "Up to 10 main topics, 10 included" in prompt
+    assert "Never\n  merge distinct subjects to stay below the limit" in prompt

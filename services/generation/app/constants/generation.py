@@ -35,8 +35,15 @@ LLM_TIMEOUT_SECONDS = 300
 # What OpenAI accepts for a reasoning model's effort; the settings pick one (see config).
 ReasoningEffort = Literal["none", "minimal", "low", "medium", "high"]
 DISTRACTORS = 3
-# Upper bound for any answer option; most are much shorter. Longer options are rejected.
-MAX_OPTION_CHARS = 250
+# A question, its example and its four options are read and answered within a minute, also by
+# someone reading in a language that isn't their own (prompts/question_rules.py READING_RULES).
+# The prompts ask for less; these catch what went far over, and the question is dropped.
+# Any answer option:
+MAX_OPTION_CHARS = 100
+# The question's sentences, without its example:
+MAX_QUESTION_CHARS = 400
+# Its example's lines:
+MAX_EXAMPLE_LINES = 10
 REGENERATE_ATTEMPTS = 3
 # Rounds of extra questions for a topic that ended short, before the generation fails.
 FILL_ATTEMPTS = 3

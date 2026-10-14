@@ -18,6 +18,7 @@ from app.helpers.questions import (
     merge_buckets,
     normalize,
     question_calls,
+    readable,
     split_count,
     topic_size,
     with_example,
@@ -76,7 +77,8 @@ def fan_out_questions(state: State):
 
 
 async def generate_questions(task: QuestionTask) -> dict:
-    """Questions with their options in one call; ambiguous or incomplete ones are dropped."""
+    """Questions with their options in one call; ambiguous, too long or incomplete ones are
+    dropped."""
     structured_llm = llm.get_generation_llm().with_structured_output(QuestionItemList)
     prompt = QUESTIONS_PROMPT.format(
         level=task["level"],
@@ -108,7 +110,8 @@ async def generate_questions(task: QuestionTask) -> dict:
 
     for item in items:
         text = with_example(item.question, item.example)
-        options = None if item.ambiguous else build_options(item.correct_option, item.distractors)
+        usable = not item.ambiguous and readable(item.question, item.example)
+        options = build_options(item.correct_option, item.distractors) if usable else None
 
         if text and options:
             questions.append({"text": text, "options": options})

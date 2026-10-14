@@ -2,6 +2,7 @@
 extra (langchain-openai); the key comes from OPENAI_API_KEY."""
 
 from langchain_openai import ChatOpenAI
+from prepza_common.constants import MODEL_PRICES
 
 
 def chat_model(
@@ -21,3 +22,16 @@ def chat_model(
         store=False,
         **options,
     )
+
+
+def call_cost(model_name: str, usage: dict) -> float | None:
+    """USD for a model's usage metadata, as LangChain reports it (cached input counted at the
+    full price); None for a model without a price in MODEL_PRICES."""
+    price = MODEL_PRICES.get(model_name)
+
+    if price is None:
+        return None
+
+    return (
+        usage.get("input_tokens", 0) * price[0] + usage.get("output_tokens", 0) * price[1]
+    ) / 1e6
