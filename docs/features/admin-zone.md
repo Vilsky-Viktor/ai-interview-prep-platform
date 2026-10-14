@@ -81,6 +81,8 @@ Ten numbers as cards:
 9. what they paid (tax included, refunds not taken off; a transaction counts once),
 10. the credits spent on candidates.
 
+Numbers show short from a thousand up, in the language's own way ("1.5K", "$12.3K"); money under $1,000 is exact.
+
 ### Period
 
 - A UTC month or year, or all time with the "all time" checkbox.

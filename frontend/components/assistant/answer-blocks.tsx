@@ -2,7 +2,7 @@
 
 import { cn } from "cn"
 import { ArrowRightIcon } from "lucide-react"
-import { useLocale, useTranslations } from "next-intl"
+import { useTranslations } from "next-intl"
 
 import {
   CandidateRow,
@@ -41,7 +41,6 @@ function InterviewItem({ item }: { item: Item }) {
  * the company's header shows them. */
 function CreditsItem({ item }: { item: Item }) {
   const t = useTranslations("company")
-  const locale = useLocale()
   const available = item.available as number
 
   return (
@@ -55,9 +54,9 @@ function CreditsItem({ item }: { item: Item }) {
             "font-medium text-foreground tabular-nums",
             Boolean(item.low) && "text-amber-600 dark:text-amber-400"
           )}
-        >
-          {available.toLocaleString(locale)}
-        </BalanceTooltip>{" "}
+          shown={available}
+          balance={available}
+        />{" "}
         {t("creditsLeft", { count: available })}
       </span>
     </>

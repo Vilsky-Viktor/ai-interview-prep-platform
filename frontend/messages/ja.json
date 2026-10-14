@@ -331,7 +331,7 @@
     "candidates": "{count, plural, other {候補者 # 人}}",
     "each": "1 人あたり {price}",
     "reserved": "{count, plural, other {# クレジットを確保中}}",
-    "currentBalance": "現在の残高"
+    "currentBalance": "現在の残高：{amount}"
   },
   "deleteAccount": {
     "title": "アカウントを削除しますか？",

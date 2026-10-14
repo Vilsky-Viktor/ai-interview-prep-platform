@@ -11,12 +11,12 @@ test("a balance says it's the current balance on hover", async ({ signInAs }) =>
   // In the company's header.
   await visit(owner, `/companies/${company.id}/interviews`)
   await owner.locator("span.tabular-nums").first().hover()
-  await expect(owner.getByText("Current balance", { exact: true })).toBeVisible()
+  await expect(owner.getByText("Current balance: 900", { exact: true })).toBeVisible()
   await shot(owner, "header")
 
   // On the billing page.
   await visit(owner, `/companies/${company.id}/billing`)
   await owner.locator("span.font-heading.tabular-nums").first().hover()
-  await expect(owner.getByText("Current balance", { exact: true })).toBeVisible()
+  await expect(owner.getByText("Current balance: 900", { exact: true })).toBeVisible()
   await shot(owner, "billing")
 })

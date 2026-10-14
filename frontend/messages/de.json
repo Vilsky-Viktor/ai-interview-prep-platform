@@ -331,7 +331,7 @@
     "candidates": "{count, plural, one {# Kandidat} other {# Kandidaten}}",
     "each": "je {price}",
     "reserved": "{count, plural, one {# Credit reserviert} other {# Credits reserviert}}",
-    "currentBalance": "Aktuelles Guthaben"
+    "currentBalance": "Aktuelles Guthaben: {amount}"
   },
   "deleteAccount": {
     "title": "Dein Konto löschen?",

@@ -331,7 +331,7 @@
     "candidates": "{count, plural, other {지원자 #명}}",
     "each": "1명당 {price}",
     "reserved": "{count, plural, other {# 크레딧 예약됨}}",
-    "currentBalance": "현재 잔액"
+    "currentBalance": "현재 잔액: {amount}"
   },
   "deleteAccount": {
     "title": "계정을 삭제할까요?",

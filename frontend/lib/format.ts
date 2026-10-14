@@ -45,3 +45,25 @@ export function formatPriceRange(
     maximumFractionDigits: minCents % 100 === 0 && maxCents % 100 === 0 ? 0 : 2,
   }).formatRange(minCents / 100, maxCents / 100)
 }
+
+/** A count as the locale writes it short: 950, "1.5K", "250K", "1.2M". */
+export function compactNumber(value: number, locale: string) {
+  return new Intl.NumberFormat(locale, {
+    notation: "compact",
+    maximumFractionDigits: 1,
+  }).format(value)
+}
+
+/** Money short from $1,000 up ("$12.3K"); exact below it ("$66.60"). */
+export function compactPrice(cents: number, currency: string, locale: string) {
+  if (cents < 100_000) {
+    return formatPrice(cents, currency, locale)
+  }
+
+  return new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency,
+    notation: "compact",
+    maximumFractionDigits: 1,
+  }).format(cents / 100)
+}

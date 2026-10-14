@@ -1,7 +1,7 @@
 "use client"
 
 import { cn } from "cn"
-import { useLocale, useTranslations } from "next-intl"
+import { useTranslations } from "next-intl"
 
 import { BalanceTooltip } from "@/components/billing/balance-tooltip"
 import { AutoTopUpSetting } from "@/components/billing/auto-top-up"
@@ -28,7 +28,6 @@ export function BalanceRow({
   reserved?: number
 }) {
   const t = useTranslations("billing")
-  const locale = useLocale()
   // A top-up arriving counts up, as in the header.
   const { shown, rising } = useCountUp(available)
 
@@ -58,9 +57,9 @@ export function BalanceRow({
               "font-heading text-3xl font-medium tabular-nums transition-colors duration-500",
               rising && "text-primary"
             )}
-          >
-            {shown.toLocaleString(locale)}
-          </BalanceTooltip>{" "}
+            shown={shown}
+            balance={available}
+          />{" "}
           <span className="text-sm text-muted-foreground">
             {t("creditsWord", { count: available })}
           </span>

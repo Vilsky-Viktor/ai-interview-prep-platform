@@ -331,7 +331,7 @@
     "candidates": "{count, plural, other {# 位候选人}}",
     "each": "每位 {price}",
     "reserved": "{count, plural, other {已预留 # 点数}}",
-    "currentBalance": "当前余额"
+    "currentBalance": "当前余额：{amount}"
   },
   "deleteAccount": {
     "title": "删除你的账户？",

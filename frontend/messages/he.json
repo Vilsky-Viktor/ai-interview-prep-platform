@@ -331,7 +331,7 @@
     "candidates": "{count, plural, one {מועמד אחד} two {# מועמדים} other {# מועמדים}}",
     "each": "{price} לאחד",
     "reserved": "{count, plural, one {קרדיט אחד שמור} two {# קרדיטים שמורים} other {# קרדיטים שמורים}}",
-    "currentBalance": "היתרה הנוכחית"
+    "currentBalance": "היתרה הנוכחית: {amount}"
   },
   "deleteAccount": {
     "title": "למחוק את החשבון?",

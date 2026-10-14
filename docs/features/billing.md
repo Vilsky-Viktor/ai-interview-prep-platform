@@ -66,6 +66,8 @@ On the top-up page, under each balance, "Set up automatic top-up" opens the choi
 - A referrer earns the reward for at most 25 referrals in any 365 days; past that, only the new company gets its 500 credits.
 - If that top-up is refunded in full or charged back, both rewards are taken back.
 
+A balance shows short from a thousand credits up ("3.5K", in the language's own way), and says the whole amount on hover ("Current balance: 3,549"), wherever it appears: the company's header, the billing and top-up pages and the assistant's answers.
+
 ## A company's billing tab
 
 Owners and admins see a company's **billing** tab, before referrals; viewers don't, and its API answers them with 403.

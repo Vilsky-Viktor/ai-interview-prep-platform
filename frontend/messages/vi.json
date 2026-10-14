@@ -331,7 +331,7 @@
     "candidates": "{count, plural, other {# ứng viên}}",
     "each": "{price} mỗi ứng viên",
     "reserved": "{count, plural, other {Đã giữ # credit}}",
-    "currentBalance": "Số dư hiện tại"
+    "currentBalance": "Số dư hiện tại: {amount}"
   },
   "deleteAccount": {
     "title": "Xóa tài khoản của bạn?",

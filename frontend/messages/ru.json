@@ -331,7 +331,7 @@
     "candidates": "{count, plural, one {# кандидат} few {# кандидата} many {# кандидатов} other {# кандидата}}",
     "each": "{price} за каждого",
     "reserved": "{count, plural, one {# кредит зарезервирован} few {# кредита зарезервировано} many {# кредитов зарезервировано} other {# кредита зарезервировано}}",
-    "currentBalance": "Текущий баланс"
+    "currentBalance": "Текущий баланс: {amount}"
   },
   "deleteAccount": {
     "title": "Удалить аккаунт?",

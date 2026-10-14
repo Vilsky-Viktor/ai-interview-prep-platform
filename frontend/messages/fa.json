@@ -331,7 +331,7 @@
     "candidates": "{count, plural, one {# متقاضی} other {# متقاضی}}",
     "each": "هر کدام {price}",
     "reserved": "{count, plural, one {# اعتبار رزرو شده} other {# اعتبار رزرو شده}}",
-    "currentBalance": "موجودی فعلی"
+    "currentBalance": "موجودی فعلی: {amount}"
   },
   "deleteAccount": {
     "title": "حساب شما حذف شود؟",

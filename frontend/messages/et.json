@@ -331,7 +331,7 @@
     "candidates": "{count, plural, one {# kandidaat} other {# kandidaati}}",
     "each": "{price} kandidaadi kohta",
     "reserved": "{count, plural, one {# krediit broneeritud} other {# krediiti broneeritud}}",
-    "currentBalance": "Praegune saldo"
+    "currentBalance": "Praegune saldo: {amount}"
   },
   "deleteAccount": {
     "title": "Kustutada sinu konto?",

@@ -331,7 +331,7 @@
     "candidates": "{count, plural, one {# उम्मीदवार} other {# उम्मीदवार}}",
     "each": "{price} प्रति उम्मीदवार",
     "reserved": "{count, plural, one {# क्रेडिट रिज़र्व} other {# क्रेडिट रिज़र्व}}",
-    "currentBalance": "मौजूदा बैलेंस"
+    "currentBalance": "मौजूदा बैलेंस: {amount}"
   },
   "deleteAccount": {
     "title": "अपना खाता हटाएँ?",

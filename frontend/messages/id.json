@@ -331,7 +331,7 @@
     "candidates": "{count, plural, other {# kandidat}}",
     "each": "{price} per kandidat",
     "reserved": "{count, plural, other {# kredit dicadangkan}}",
-    "currentBalance": "Saldo saat ini"
+    "currentBalance": "Saldo saat ini: {amount}"
   },
   "deleteAccount": {
     "title": "Hapus akunmu?",

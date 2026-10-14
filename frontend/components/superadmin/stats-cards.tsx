@@ -1,16 +1,15 @@
-import { useFormatter, useLocale, useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 
 import { STATS_CARDS, STATS_SOURCES } from "@/constants/stats"
-import { formatPrice } from "@/lib/format"
+import { compactNumber, compactPrice } from "@/lib/format"
 import type { Stats } from "@/types/superadmin"
 
 type Source = (typeof STATS_SOURCES)[number]
 
-/** The numbers as cards, three to a row and centred, like the pricing cards; a dash where the
- * service didn't answer. */
+/** The numbers as cards, three to a row and centred, like the pricing cards, short from a
+ * thousand up ("1.5K", "$12.3K"); a dash where the service didn't answer. */
 export function StatsCards({ stats }: { stats: Record<Source, Stats | null> }) {
   const t = useTranslations("superadmin")
-  const format = useFormatter()
   const locale = useLocale()
 
   function value(card: (typeof STATS_CARDS)[number]) {
@@ -22,10 +21,10 @@ export function StatsCards({ stats }: { stats: Record<Source, Stats | null> }) {
     }
 
     if (card.metric === "paid" && source?.currency) {
-      return formatPrice(amount, source.currency, locale)
+      return compactPrice(amount, source.currency, locale)
     }
 
-    return format.number(amount)
+    return compactNumber(amount, locale)
   }
 
   return (

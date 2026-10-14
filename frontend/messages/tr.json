@@ -331,7 +331,7 @@
     "candidates": "{count, plural, one {# aday} other {# aday}}",
     "each": "tanesi {price}",
     "reserved": "{count, plural, one {# kredi ayrıldı} other {# kredi ayrıldı}}",
-    "currentBalance": "Güncel bakiye"
+    "currentBalance": "Güncel bakiye: {amount}"
   },
   "deleteAccount": {
     "title": "Hesabınız silinsin mi?",

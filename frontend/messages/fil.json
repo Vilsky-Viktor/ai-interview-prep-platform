@@ -331,7 +331,7 @@
     "candidates": "{count, plural, one {# aplikante} other {# aplikante}}",
     "each": "{price} bawat isa",
     "reserved": "{count, plural, one {# credit ang naka-reserve} other {# credits ang naka-reserve}}",
-    "currentBalance": "Kasalukuyang balanse"
+    "currentBalance": "Kasalukuyang balanse: {amount}"
   },
   "deleteAccount": {
     "title": "Burahin ang iyong account?",

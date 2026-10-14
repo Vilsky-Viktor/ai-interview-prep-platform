@@ -331,7 +331,7 @@
     "candidates": "{count, plural, one {# kandidaat} other {# kandidaten}}",
     "each": "{price} per stuk",
     "reserved": "{count, plural, one {# credit gereserveerd} other {# credits gereserveerd}}",
-    "currentBalance": "Huidig saldo"
+    "currentBalance": "Huidig saldo: {amount}"
   },
   "deleteAccount": {
     "title": "Je account verwijderen?",
