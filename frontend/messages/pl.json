@@ -307,7 +307,8 @@
     "topUpNote": "Każde doładowanie starcza na pełną liczbę kandydatów; przy większych koszt jednego kandydata jest niższy. Kredyty nie wygasają.",
     "candidates": "{count, plural, one {# kandydat} few {# kandydaci} many {# kandydatów} other {# kandydata}}",
     "each": "{price} za każdego",
-    "reserved": "{count, plural, one {# kredyt zarezerwowany} few {# kredyty zarezerwowane} many {# kredytów zarezerwowanych} other {# kredytu zarezerwowanego}}"
+    "reserved": "{count, plural, one {# kredyt zarezerwowany} few {# kredyty zarezerwowane} many {# kredytów zarezerwowanych} other {# kredytu zarezerwowanego}}",
+    "currentBalance": "Obecne saldo"
   },
   "deleteAccount": {
     "title": "Usunąć konto?",

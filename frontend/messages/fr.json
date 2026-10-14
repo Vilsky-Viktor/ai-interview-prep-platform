@@ -307,7 +307,8 @@
     "topUpNote": "Chaque recharge couvre un nombre entier de candidats ; les plus grosses coûtent moins cher par candidat. Les crédits n'expirent jamais.",
     "candidates": "{count, plural, one {# candidat} other {# candidats}}",
     "each": "{price} chacun",
-    "reserved": "{count, plural, one {# crédit réservé} other {# crédits réservés}}"
+    "reserved": "{count, plural, one {# crédit réservé} other {# crédits réservés}}",
+    "currentBalance": "Solde actuel"
   },
   "deleteAccount": {
     "title": "Supprimer votre compte ?",

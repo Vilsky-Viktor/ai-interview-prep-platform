@@ -307,7 +307,8 @@
     "topUpNote": "Iga juurdelaadimine ostab terve arvu kandidaate; suuremate puhul on kandidaat odavam. Krediidid ei aegu.",
     "candidates": "{count, plural, one {# kandidaat} other {# kandidaati}}",
     "each": "{price} kandidaadi kohta",
-    "reserved": "{count, plural, one {# krediit broneeritud} other {# krediiti broneeritud}}"
+    "reserved": "{count, plural, one {# krediit broneeritud} other {# krediiti broneeritud}}",
+    "currentBalance": "Praegune saldo"
   },
   "deleteAccount": {
     "title": "Kustutada sinu konto?",

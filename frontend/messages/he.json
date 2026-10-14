@@ -307,7 +307,8 @@
     "topUpNote": "כל טעינה מכסה מספר שלם של מועמדים; טעינות גדולות יותר זולות יותר למועמד. הקרדיטים לא פגים לעולם.",
     "candidates": "{count, plural, one {מועמד אחד} two {# מועמדים} other {# מועמדים}}",
     "each": "{price} לאחד",
-    "reserved": "{count, plural, one {קרדיט אחד שמור} two {# קרדיטים שמורים} other {# קרדיטים שמורים}}"
+    "reserved": "{count, plural, one {קרדיט אחד שמור} two {# קרדיטים שמורים} other {# קרדיטים שמורים}}",
+    "currentBalance": "היתרה הנוכחית"
   },
   "deleteAccount": {
     "title": "למחוק את החשבון?",

@@ -307,7 +307,8 @@
     "topUpNote": "Each top-up buys whole candidates; larger ones cost less per candidate. Credits never expire.",
     "candidates": "{count, plural, one {# candidate} other {# candidates}}",
     "each": "{price} each",
-    "reserved": "{count, plural, one {# credit reserved} other {# credits reserved}}"
+    "reserved": "{count, plural, one {# credit reserved} other {# credits reserved}}",
+    "currentBalance": "Current balance"
   },
   "deleteAccount": {
     "title": "Delete your account?",

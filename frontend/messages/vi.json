@@ -307,7 +307,8 @@
     "topUpNote": "Mỗi lần nạp mua trọn số ứng viên; nạp càng nhiều, giá mỗi ứng viên càng rẻ. Credit không bao giờ hết hạn.",
     "candidates": "{count, plural, other {# ứng viên}}",
     "each": "{price} mỗi ứng viên",
-    "reserved": "{count, plural, other {Đã giữ # credit}}"
+    "reserved": "{count, plural, other {Đã giữ # credit}}",
+    "currentBalance": "Số dư hiện tại"
   },
   "deleteAccount": {
     "title": "Xóa tài khoản của bạn?",

@@ -12,6 +12,7 @@ import {
   ActionCard,
   type CardActions,
 } from "@/components/assistant/action-card"
+import { BalanceTooltip } from "@/components/billing/balance-tooltip"
 import { InterviewSummary } from "@/components/company/interview-summary"
 import { LocalizedLink } from "@/components/localized-link"
 import { SignInOptions } from "@/components/sign-in-options"
@@ -49,14 +50,14 @@ function CreditsItem({ item }: { item: Item }) {
         {item.name as string | undefined}
       </span>
       <span className="shrink-0 text-base text-muted-foreground">
-        <span
+        <BalanceTooltip
           className={cn(
             "font-medium text-foreground tabular-nums",
             Boolean(item.low) && "text-amber-600 dark:text-amber-400"
           )}
         >
           {available.toLocaleString(locale)}
-        </span>{" "}
+        </BalanceTooltip>{" "}
         {t("creditsLeft", { count: available })}
       </span>
     </>

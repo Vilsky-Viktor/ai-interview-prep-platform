@@ -3,13 +3,9 @@
 import { cn } from "cn"
 import { useLocale, useTranslations } from "next-intl"
 
+import { BalanceTooltip } from "@/components/billing/balance-tooltip"
 import { RefreshOnFocus } from "@/components/billing/refresh-on-focus"
 import { TopUpDialog } from "@/components/billing/top-up-dialog"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
 import { useCountUp } from "@/hooks/use-count-up"
 import type { Catalog } from "@/types/billing"
 
@@ -37,22 +33,16 @@ export function CompanyCredits({
 
   const card = (
     <span className="text-base text-muted-foreground max-sm:text-lg">
-      <Tooltip disabled={!low}>
-        <TooltipTrigger
-          render={
-            <span
-              className={cn(
-                "font-medium text-foreground tabular-nums transition-colors duration-500",
-                rising && "text-primary",
-                low && "text-amber-600 dark:text-amber-400"
-              )}
-            />
-          }
-        >
-          {shown.toLocaleString(locale)}
-        </TooltipTrigger>
-        <TooltipContent>{t("creditsLow")}</TooltipContent>
-      </Tooltip>{" "}
+      <BalanceTooltip
+        className={cn(
+          "font-medium text-foreground tabular-nums transition-colors duration-500",
+          rising && "text-primary",
+          low && "text-amber-600 dark:text-amber-400"
+        )}
+        note={low ? t("creditsLow") : undefined}
+      >
+        {shown.toLocaleString(locale)}
+      </BalanceTooltip>{" "}
       {t("creditsLeft", { count: credits })}
     </span>
   )

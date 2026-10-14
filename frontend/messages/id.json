@@ -307,7 +307,8 @@
     "topUpNote": "Setiap isi ulang dihitung untuk jumlah kandidat yang utuh; makin besar isi ulangnya, makin murah per kandidat. Kredit tidak pernah kedaluwarsa.",
     "candidates": "{count, plural, other {# kandidat}}",
     "each": "{price} per kandidat",
-    "reserved": "{count, plural, other {# kredit dicadangkan}}"
+    "reserved": "{count, plural, other {# kredit dicadangkan}}",
+    "currentBalance": "Saldo saat ini"
   },
   "deleteAccount": {
     "title": "Hapus akunmu?",

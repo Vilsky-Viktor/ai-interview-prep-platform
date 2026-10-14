@@ -307,7 +307,8 @@
     "topUpNote": "Ogni ricarica copre un numero intero di candidati; quelle più grandi costano meno per candidato. I crediti non scadono.",
     "candidates": "{count, plural, one {# candidato} other {# candidati}}",
     "each": "{price} ciascuno",
-    "reserved": "{count, plural, one {# credito riservato} other {# crediti riservati}}"
+    "reserved": "{count, plural, one {# credito riservato} other {# crediti riservati}}",
+    "currentBalance": "Saldo attuale"
   },
   "deleteAccount": {
     "title": "Eliminare il tuo account?",

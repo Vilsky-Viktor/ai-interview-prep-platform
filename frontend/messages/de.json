@@ -307,7 +307,8 @@
     "topUpNote": "Jede Aufladung reicht für eine feste Zahl von Kandidaten; größere Aufladungen kosten weniger pro Kandidat. Credits verfallen nie.",
     "candidates": "{count, plural, one {# Kandidat} other {# Kandidaten}}",
     "each": "je {price}",
-    "reserved": "{count, plural, one {# Credit reserviert} other {# Credits reserviert}}"
+    "reserved": "{count, plural, one {# Credit reserviert} other {# Credits reserviert}}",
+    "currentBalance": "Aktuelles Guthaben"
   },
   "deleteAccount": {
     "title": "Dein Konto löschen?",

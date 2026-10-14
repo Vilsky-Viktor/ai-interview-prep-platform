@@ -307,7 +307,8 @@
     "topUpNote": "Je koopt altijd voor hele kandidaten; hoe groter de opwaardering, hoe lager de prijs per kandidaat. Credits verlopen nooit.",
     "candidates": "{count, plural, one {# kandidaat} other {# kandidaten}}",
     "each": "{price} per stuk",
-    "reserved": "{count, plural, one {# credit gereserveerd} other {# credits gereserveerd}}"
+    "reserved": "{count, plural, one {# credit gereserveerd} other {# credits gereserveerd}}",
+    "currentBalance": "Huidig saldo"
   },
   "deleteAccount": {
     "title": "Je account verwijderen?",

@@ -307,7 +307,8 @@
     "topUpNote": "チャージは候補者単位で購入します。金額が大きいほど候補者 1 人あたりの料金が安くなります。クレジットに有効期限はありません。",
     "candidates": "{count, plural, other {候補者 # 人}}",
     "each": "1 人あたり {price}",
-    "reserved": "{count, plural, other {# クレジットを確保中}}"
+    "reserved": "{count, plural, other {# クレジットを確保中}}",
+    "currentBalance": "現在の残高"
   },
   "deleteAccount": {
     "title": "アカウントを削除しますか？",

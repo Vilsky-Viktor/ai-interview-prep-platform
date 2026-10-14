@@ -307,7 +307,8 @@
     "topUpNote": "Cada recarga compra candidatos completos; las más grandes cuestan menos por candidato. Los créditos no caducan.",
     "candidates": "{count, plural, one {# candidato} other {# candidatos}}",
     "each": "{price} cada uno",
-    "reserved": "{count, plural, one {# crédito reservado} other {# créditos reservados}}"
+    "reserved": "{count, plural, one {# crédito reservado} other {# créditos reservados}}",
+    "currentBalance": "Saldo actual"
   },
   "deleteAccount": {
     "title": "¿Eliminar tu cuenta?",

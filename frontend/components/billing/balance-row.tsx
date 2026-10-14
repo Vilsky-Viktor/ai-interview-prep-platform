@@ -3,6 +3,7 @@
 import { cn } from "cn"
 import { useLocale, useTranslations } from "next-intl"
 
+import { BalanceTooltip } from "@/components/billing/balance-tooltip"
 import { AutoTopUpSetting } from "@/components/billing/auto-top-up"
 import { TopUpDialog } from "@/components/billing/top-up-dialog"
 import { useCountUp } from "@/hooks/use-count-up"
@@ -52,14 +53,14 @@ export function BalanceRow({
       {/* On phones the name and, on their own line, the balance and Top up are centered. */}
       <div className="flex items-center gap-6 max-sm:basis-full max-sm:justify-center">
         <p className="text-end">
-          <span
+          <BalanceTooltip
             className={cn(
               "font-heading text-3xl font-medium tabular-nums transition-colors duration-500",
               rising && "text-primary"
             )}
           >
             {shown.toLocaleString(locale)}
-          </span>{" "}
+          </BalanceTooltip>{" "}
           <span className="text-sm text-muted-foreground">
             {t("creditsWord", { count: available })}
           </span>

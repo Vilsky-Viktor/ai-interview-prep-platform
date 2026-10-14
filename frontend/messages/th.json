@@ -307,7 +307,8 @@
     "topUpNote": "การเติมเครดิตแต่ละครั้งซื้อเป็นจำนวนผู้สมัครเต็มคน ยิ่งเติมมาก ยิ่งถูกลงต่อผู้สมัคร เครดิตไม่มีวันหมดอายุ",
     "candidates": "{count, plural, other {ผู้สมัคร # คน}}",
     "each": "คนละ {price}",
-    "reserved": "{count, plural, other {สำรองไว้ # เครดิต}}"
+    "reserved": "{count, plural, other {สำรองไว้ # เครดิต}}",
+    "currentBalance": "ยอดคงเหลือปัจจุบัน"
   },
   "deleteAccount": {
     "title": "ลบบัญชีของคุณ?",
