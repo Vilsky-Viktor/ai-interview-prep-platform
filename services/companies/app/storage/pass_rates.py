@@ -1,5 +1,5 @@
 """Pass rates per company interview for the superadmin's monitoring (internal_docs/compliance/
-keep-10-years/post-market-monitoring-plan.md): counted, averaged, sorted and paged in SQL from the grade stored
+post-market-monitoring-plan.md): counted, averaged, sorted and paged in SQL from the grade stored
 on each finished invite."""
 
 from sqlalchemy import Row, func, select
