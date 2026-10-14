@@ -7,7 +7,7 @@ from app.constants.invites import InviteStatus
 from app.helpers.notifications import invite_undelivered
 from app.models.outbox import OutboxEvent
 from app.schemas.interviews import InterviewSettings
-from app.storage import companies, interviews, invites, reminders
+from app.storage import companies, interviews, invites, link_invites, reminders
 from app.storage.db import Session
 
 
@@ -107,8 +107,8 @@ def test_a_link_finds_its_test_and_makes_one_invite_per_email_without_an_email(r
         found = await interview()
         await interviews.set_link(found.id, "link-code")
         linked = await interviews.get_by_link("link-code")
-        first = await invites.for_link(found.id, "Ann@Example.com")
-        again = await invites.for_link(found.id, "ann@example.com")
+        first = await link_invites.for_link(found.id, "Ann@Example.com")
+        again = await link_invites.for_link(found.id, "ann@example.com")
         await interviews.set_link(found.id, None)
 
         return (

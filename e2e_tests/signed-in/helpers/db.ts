@@ -40,6 +40,19 @@ export async function inviteToken(email: string): Promise<string> {
   })
 }
 
+/** How many emails with their own link a candidate who started through a test's link got:
+ * the candidate.joined events saved for them. */
+export async function joinedEmails(email: string): Promise<number> {
+  return withDatabase("companies", async (client) => {
+    const result = await client.query(
+      "SELECT count(*) FROM outbox WHERE event_type = 'candidate.joined' AND data->>'email' = $1",
+      [email.toLowerCase()]
+    )
+
+    return Number(result.rows[0].count)
+  })
+}
+
 /** A throwaway template with one topic of `questions` private questions, saved straight into the
  * library database (a real one needs an OpenAI generation). A company can copy it only with at
  * least 10 (MIN_COPY_QUESTIONS in services/library); practice lists it either way. German, so

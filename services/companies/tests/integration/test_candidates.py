@@ -2,7 +2,15 @@ import uuid
 from datetime import UTC, datetime, timedelta
 
 from app.constants.invites import CandidateFilter, InviteStatus
-from app.storage import accounts, candidates, companies, interviews, invite_expiry, invites
+from app.storage import (
+    accounts,
+    candidates,
+    companies,
+    interviews,
+    invite_expiry,
+    invites,
+    link_invites,
+)
 
 
 async def interview():
@@ -28,7 +36,7 @@ def test_candidates_are_found_by_part_of_their_email_and_by_status(run):
         for email in ("ann_lee@example.com", "annlee@example.com", "bob@example.com"):
             await invite(found, email)
 
-        bob = await invites.for_link(found.id, "bob@example.com")
+        bob = await link_invites.for_link(found.id, "bob@example.com")
         await invites.finish(bob.id, 50, False, None)
 
         return (

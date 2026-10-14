@@ -23,9 +23,10 @@ from app.helpers.logos import logo_path
 from app.integrations import billing
 from app.integrations.redis import get_redis
 from app.schemas.invites import InviteStartOut, LinkIn, LinkOut, LinkView
+from app.services import outbox as outbox_service
 from app.services.access import require_editor
 from app.services.candidate_start import start_sessions
-from app.storage import companies, interviews, invites
+from app.storage import companies, interviews, invites, link_invites
 
 # One link for many candidates: a company puts it in a job ad, and each person who opens it
 # takes the test as an invited candidate would.
@@ -39,6 +40,18 @@ async def linked_interview(token: str):
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Link not found")
 
     return interview
+
+
+async def joined_details(interview) -> dict:
+    """What a new candidate's email with their own link says: the test and who it's for."""
+    company = await companies.get(interview.company_id)
+
+    return {
+        "title": await interview_title(interview) or "an interview",
+        "company": company.name if company else "",
+        "language": interview.language,
+        "logo_path": logo_path(company),
+    }
 
 
 @router.put("/interviews/{interview_id}/link")
@@ -121,7 +134,10 @@ async def start_link(token: str, user: CurrentUser, request: Request) -> InviteS
             raise
 
     try:
-        invite = await invites.for_link(interview.id, user.email, hold_key=key)
+        details = await joined_details(interview) if current is None else None
+        invite = await link_invites.for_link(
+            interview.id, user.email, hold_key=key, details=details
+        )
     except Exception:
         # An invite that couldn't be saved (its interview deleted meanwhile) gives its credits
         # back.
@@ -135,6 +151,7 @@ async def start_link(token: str, user: CurrentUser, request: Request) -> InviteS
         await billing.release_candidate(key)
 
     if current is None:
+        await outbox_service.flush_quietly()
         await track("candidate_joined_by_link", company_id=interview.company_id)
 
     try:

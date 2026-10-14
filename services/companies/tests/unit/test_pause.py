@@ -15,7 +15,7 @@ from app.routers import invites as invite_routes
 from app.routers import links as link_routes
 from app.routers import pause as pause_routes
 from app.schemas.invites import InviteStartOut
-from app.storage import interviews, invites
+from app.storage import interviews, invites, link_invites
 
 INTERVIEW = Interview(
     id=uuid.uuid4(), company_id=uuid.uuid4(), set_id=uuid.uuid4(), question_seconds=60
@@ -77,12 +77,12 @@ def linked(monkeypatch, status):
     async def held(interview_id, email):
         return status, None
 
-    async def for_link(interview_id, email, hold_key=None):
+    async def for_link(interview_id, email, hold_key=None, details=None):
         return SimpleNamespace(email=email, hold_key=hold_key)
 
     monkeypatch.setattr(interviews, "get_by_link", get_by_link)
     monkeypatch.setattr(invites, "held", held)
-    monkeypatch.setattr(invites, "for_link", for_link)
+    monkeypatch.setattr(link_invites, "for_link", for_link)
 
 
 def test_paused_no_candidate_starts_by_invite_but_one_in_the_interview_continues(

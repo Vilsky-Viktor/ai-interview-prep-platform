@@ -13,7 +13,7 @@ from app.main import app
 from app.models.interviews import Interview
 from app.routers import links
 from app.schemas.invites import InviteStartOut
-from app.storage import companies, interviews, invites
+from app.storage import companies, interviews, invites, link_invites
 
 INTERVIEW = Interview(
     id=uuid.uuid4(),
@@ -46,7 +46,7 @@ def linked(monkeypatch):
 
         state["held"].append(key)
 
-    async def for_link(interview_id, email, hold_key=None):
+    async def for_link(interview_id, email, hold_key=None, details=None):
         return SimpleNamespace(email=email, hold_key=hold_key)
 
     async def start(invite, interview, user_id):
@@ -57,7 +57,7 @@ def linked(monkeypatch):
     monkeypatch.setattr(interviews, "get_by_link", get_by_link)
     monkeypatch.setattr(invites, "held", held)
     monkeypatch.setattr(invites, "status_of", status_of)
-    monkeypatch.setattr(invites, "for_link", for_link)
+    monkeypatch.setattr(link_invites, "for_link", for_link)
     monkeypatch.setattr(billing, "hold_candidate", hold)
 
     async def hit(redis, key, limit, window):
@@ -66,8 +66,16 @@ def linked(monkeypatch):
         if state["counts"][key] > limit:
             raise HTTPException(429, "Too many requests. Try again later.")
 
+    async def details(interview):
+        return {"title": "Backend", "company": "Acme", "language": "en", "logo_path": None}
+
+    async def no_flush():
+        pass
+
     monkeypatch.setattr(links, "start_sessions", start)
     monkeypatch.setattr(links, "hit", hit)
+    monkeypatch.setattr(links, "joined_details", details)
+    monkeypatch.setattr(links.outbox_service, "flush_quietly", no_flush)
     app.dependency_overrides[current_user] = lambda: User(
         uid="cand", email="Cand@Example.com", email_verified=True
     )
@@ -90,13 +98,13 @@ def test_a_new_invite_that_cant_be_saved_gives_its_credits_back(client, linked, 
     """Its interview was deleted meanwhile."""
     released = []
 
-    async def gone(interview_id, email, hold_key=None):
+    async def gone(interview_id, email, hold_key=None, details=None):
         raise RuntimeError("interview deleted")
 
     async def release(key):
         released.append(key)
 
-    monkeypatch.setattr(invites, "for_link", gone)
+    monkeypatch.setattr(link_invites, "for_link", gone)
     monkeypatch.setattr(billing, "release_candidate", release)
 
     with pytest.raises(RuntimeError):

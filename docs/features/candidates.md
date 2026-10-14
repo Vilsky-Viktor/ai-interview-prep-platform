@@ -73,7 +73,9 @@ The shareable link (`/apply/{token}`) is one link per interview, for a job ad. O
 - Anyone who opens it signs in and takes the interview.
 - Each verified email can take it once.
 - It is charged like an invited candidate.
-- Turning it off, or marking the interview as hired, stops it at once.
+- On their first start, they're emailed their own invite link (`/invite/{token}`), to continue if they leave: companies saves `candidate.joined` with the new invite, once, and notifications sends it (not to an address that stopped the company's emails). The page says so.
+- Turning it off, or marking the interview as hired, stops it at once for new candidates; those who started continue from their own link.
+- Extra time can't be given to them, as their invite is made when they start: the page tells them to ask the company for a personal invite before they start.
 - It takes at most 30 new candidates an hour, and one address starts at most 10 an hour across all links (`LINK_STARTS_PER_HOUR`, `LINK_STARTS_PER_IP_HOUR`), so a script with many accounts can't use up a company's credits; over either, a 429. A candidate already invited is never held back by them.
 
 ## Taking an interview
@@ -100,7 +102,7 @@ While the questions run, the page shows only them: no header, footer or "ask age
 
 ### Extra time
 
-For a candidate who needs more time, for example because of a disability, owners and admins can give extra time on each question: +25%, +50% or +100% (`PUT /interviews/{id}/candidates/{invite_id}/extra-time` in companies). It is set per candidate, on their page, and only before they start: their questions' time is fixed then. No reason is recorded, and the company's [audit log](companies.md#audit-log) records the change. The invite page tells candidates to ask the company before they start.
+For a candidate who needs more time, for example because of a disability, owners and admins can give extra time on each question: +25%, +50% or +100% (`PUT /interviews/{id}/candidates/{invite_id}/extra-time` in companies). It is set per candidate, on their page, and only before they start: their questions' time is fixed then. No reason is recorded, and the company's [audit log](companies.md#audit-log) records the change. The invite page tells candidates to ask the company before they start; the shareable link's page, to ask for a personal invite.
 
 The server enforces the clock:
 

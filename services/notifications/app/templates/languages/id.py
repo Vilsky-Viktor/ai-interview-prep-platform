@@ -19,6 +19,24 @@ TEXTS = {
         ],
         "button": "Buka undangan",
     },
+    "joined": {
+        "subject": "Tautanmu untuk melanjutkan “{title}”",
+        "preheader": "Jika kamu meninggalkan wawancara, lanjutkan dengan tautan ini. Masuk dengan {email}.",
+        "heading": "Tautan wawancaramu",
+        "lines": [
+            "Kamu memulai wawancara “{title}” dari {company} di prepza.",
+            (
+                "Jika kamu pergi, lanjutkan dengan tautan ini: masuk dengan {email}. Tautan ini "
+                "tetap berfungsi meskipun {company} menonaktifkan tautan yang kamu gunakan untuk "
+                "memulai. Waktu terus berjalan selama kamu pergi."
+            ),
+        ],
+        "button": "Lanjutkan wawancara",
+        "footer": (
+            "Email ini dikirim ke {email} karena sebuah wawancara di prepza dimulai dengan alamat "
+            "ini."
+        ),
+    },
     "reminder": {
         "subject": "Pengingat: {company} menunggu wawancaramu",
         "preheader": "“{title}” masih terbuka. Masuk dengan {email} untuk mulai.",

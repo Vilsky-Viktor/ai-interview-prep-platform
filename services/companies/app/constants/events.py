@@ -1,4 +1,7 @@
 CANDIDATE_INVITED = "candidate.invited"
+# Someone started through a test's shareable link; notifications emails them their own invite
+# link, to continue if they leave.
+CANDIDATE_JOINED = "candidate.joined"
 # The owner invited a member; notifications emails them the join link.
 MEMBER_INVITED = "member.invited"
 # A member emails a candidate's PDF report to someone; notifications sends it, attached.

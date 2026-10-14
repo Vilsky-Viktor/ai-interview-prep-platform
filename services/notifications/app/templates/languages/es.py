@@ -20,6 +20,24 @@ TEXTS = {
         ],
         "button": "Abrir la invitación",
     },
+    "joined": {
+        "subject": "Tu enlace para continuar «{title}»",
+        "preheader": "Si sales de la entrevista, continúa con este enlace. Inicia sesión con {email}.",
+        "heading": "Tu enlace a la entrevista",
+        "lines": [
+            "Empezaste la entrevista «{title}» de {company} en prepza.",
+            (
+                "Si sales, continúa con este enlace: inicia sesión con {email}. Sigue funcionando "
+                "aunque {company} retire el enlace con el que empezaste. El tiempo sigue corriendo "
+                "mientras no estás."
+            ),
+        ],
+        "button": "Continuar la entrevista",
+        "footer": (
+            "Este correo se envió a {email} porque se empezó una entrevista en prepza con esta "
+            "dirección."
+        ),
+    },
     "reminder": {
         "subject": "Recordatorio: {company} espera tu entrevista",
         "preheader": "«{title}» sigue abierta. Inicia sesión con {email} para empezar.",

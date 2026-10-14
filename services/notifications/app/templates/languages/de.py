@@ -20,6 +20,27 @@ TEXTS = {
         ],
         "button": "Einladung öffnen",
     },
+    "joined": {
+        "subject": "Dein Link, um „{title}“ fortzusetzen",
+        "preheader": (
+            "Wenn du das Interview verlässt, mach mit diesem Link weiter. Melde dich mit {email} "
+            "an."
+        ),
+        "heading": "Dein Link zum Interview",
+        "lines": [
+            "Du hast das Interview „{title}“ von {company} auf prepza begonnen.",
+            (
+                "Wenn du es verlässt, mach mit diesem Link weiter: Melde dich mit {email} an. "
+                "Er funktioniert auch dann, wenn {company} den Link deaktiviert, über den du "
+                "begonnen hast. Die Zeit läuft weiter, während du weg bist."
+            ),
+        ],
+        "button": "Interview fortsetzen",
+        "footer": (
+            "Diese E-Mail wurde an {email} gesendet, weil mit dieser Adresse ein Interview auf "
+            "prepza begonnen wurde."
+        ),
+    },
     "reminder": {
         "subject": "Erinnerung: {company} wartet auf dein Interview",
         "preheader": "„{title}“ ist noch offen. Melde dich mit {email} an, um zu beginnen.",

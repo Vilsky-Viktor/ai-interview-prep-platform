@@ -169,6 +169,21 @@ def candidate_invite_email(data: dict, site_url: str, secret: str) -> Email:
     return email
 
 
+def candidate_joined_email(data: dict, site_url: str, secret: str) -> Email:
+    """For someone who started through a test's shareable link: their own invite link, to
+    continue if they leave. Untagged: a bounce leaves the invite as it is, as they're already
+    taking the test."""
+    data = with_logo(data, site_url)
+    company = candidate_token(data, UnsubscribeType.COMPANY, secret)
+
+    return render(
+        "joined",
+        data,
+        f"{site_url.rstrip('/')}/invite/{data['token']}",
+        [("stop_company", page_url(site_url, company))],
+    )
+
+
 def candidate_reminder_email(data: dict, site_url: str, secret: str) -> Email:
     """The one reminder to a candidate who hasn't started: the same invite link. Tagged like the
     invite, so a bounce marks the invite undelivered. Its links stop this invite's reminders or

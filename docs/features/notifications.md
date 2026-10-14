@@ -88,6 +88,7 @@ The service sends, as HTML with a plain-text version:
 
 - candidate invites,
 - candidates' reminders,
+- to a candidate who started through a shareable link, their own invite link to continue,
 - emailed reports, with the PDF attached,
 - contact page messages, to `CONTACT_EMAIL` (hello@prepza.ai by default),
 - to company members: the activity digest, reminders, and failed automatic top-ups (see [Emails to company members](#emails-to-company-members)).

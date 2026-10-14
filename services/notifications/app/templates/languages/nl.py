@@ -20,6 +20,24 @@ TEXTS = {
         ],
         "button": "Uitnodiging openen",
     },
+    "joined": {
+        "subject": "Je link om “{title}” voort te zetten",
+        "preheader": "Als je het interview verlaat, ga dan verder met deze link. Log in met {email}.",
+        "heading": "Je link naar het interview",
+        "lines": [
+            "Je bent begonnen aan het interview “{title}” van {company} op prepza.",
+            (
+                "Als je het verlaat, ga dan verder met deze link: log in met {email}. Hij blijft "
+                "werken, ook als {company} de link uitzet waarmee je begon. De tijd loopt door "
+                "terwijl je weg bent."
+            ),
+        ],
+        "button": "Interview voortzetten",
+        "footer": (
+            "Deze e-mail is naar {email} gestuurd omdat met dit adres een interview op prepza "
+            "is begonnen."
+        ),
+    },
     "reminder": {
         "subject": "Herinnering: {company} wacht op je interview",
         "preheader": "“{title}” staat nog open. Log in met {email} om te beginnen.",

@@ -18,6 +18,7 @@ export function InviteIntro({
   title,
   questionSeconds,
   finished,
+  viaLink = false,
   action,
 }: {
   company: string
@@ -28,6 +29,9 @@ export function InviteIntro({
   title: string | null
   questionSeconds: number
   finished: boolean
+  // Opened from the test's shareable link: their own link comes by email, and extra time needs
+  // a personal invite.
+  viaLink?: boolean
   action: ReactNode
 }) {
   const t = useTranslations("invite")
@@ -114,9 +118,11 @@ export function InviteIntro({
           t("changePick"),
           t("timeRunsOut"),
           t("unanswered"),
-          t("saved"),
+          viaLink ? t("savedLink") : t("saved"),
           // Accommodations, and the human decision behind the score.
-          t("extraTime", { company: company || t("theCompany") }),
+          t(viaLink ? "extraTimeLink" : "extraTime", {
+            company: company || t("theCompany"),
+          }),
           t("people", { company: company || t("theCompany") }),
           t.rich("stay", {
             link: (chunks) => (

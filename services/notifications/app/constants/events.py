@@ -2,6 +2,9 @@
 from prepza_common.notifications import NOTIFICATION_REQUESTED  # noqa: F401 (re-exported)
 
 CANDIDATE_INVITED = "candidate.invited"
+# Companies: someone started through a test's shareable link; they're emailed their own invite
+# link, to continue if they leave. The same data as an invite.
+CANDIDATE_JOINED = "candidate.joined"
 # Companies: the owner invited a member; they're emailed the join link.
 MEMBER_INVITED = "member.invited"
 # A candidate who hasn't started, reminded once; the same data as the invite.

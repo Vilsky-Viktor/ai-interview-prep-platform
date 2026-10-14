@@ -20,6 +20,24 @@ TEXTS = {
         ],
         "button": "Otwórz zaproszenie",
     },
+    "joined": {
+        "subject": "Twój link, aby kontynuować „{title}”",
+        "preheader": "Jeśli opuścisz rozmowę, wróć do niej tym linkiem. Zaloguj się adresem {email}.",
+        "heading": "Twój link do rozmowy",
+        "lines": [
+            "Twoja rozmowa „{title}” z {company} w prepza została rozpoczęta.",
+            (
+                "Jeśli ją opuścisz, wróć tym linkiem: zaloguj się adresem {email}. Działa nawet "
+                "wtedy, gdy {company} wyłączy link, przez który ją rozpoczęto. Czas biegnie dalej, "
+                "gdy Cię nie ma."
+            ),
+        ],
+        "button": "Kontynuuj rozmowę",
+        "footer": (
+            "Ta wiadomość została wysłana na {email}, ponieważ tym adresem rozpoczęto rozmowę "
+            "w prepza."
+        ),
+    },
     "reminder": {
         "subject": "Przypomnienie: {company} czeka na Twoją rozmowę",
         "preheader": "Rozmowa „{title}” jest nadal otwarta. Zaloguj się adresem {email}, aby zacząć.",

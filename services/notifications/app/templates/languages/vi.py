@@ -20,6 +20,24 @@ TEXTS = {
         ],
         "button": "Mở lời mời",
     },
+    "joined": {
+        "subject": "Liên kết để tiếp tục “{title}”",
+        "preheader": "Nếu rời buổi phỏng vấn, hãy tiếp tục bằng liên kết này. Đăng nhập bằng {email}.",
+        "heading": "Liên kết phỏng vấn của bạn",
+        "lines": [
+            "Bạn đã bắt đầu buổi phỏng vấn “{title}” của {company} trên prepza.",
+            (
+                "Nếu rời đi, hãy tiếp tục bằng liên kết này: đăng nhập bằng {email}. Liên kết "
+                "vẫn hoạt động ngay cả khi {company} tắt liên kết bạn đã dùng để bắt đầu. Thời "
+                "gian vẫn tiếp tục chạy khi bạn rời đi."
+            ),
+        ],
+        "button": "Tiếp tục phỏng vấn",
+        "footer": (
+            "Email này được gửi đến {email} vì một buổi phỏng vấn trên prepza đã được bắt đầu "
+            "bằng địa chỉ này."
+        ),
+    },
     "reminder": {
         "subject": "Nhắc nhở: {company} đang chờ bạn làm bài phỏng vấn",
         "preheader": "“{title}” vẫn đang mở. Đăng nhập bằng {email} để bắt đầu.",

@@ -20,6 +20,24 @@ TEXTS = {
         ],
         "button": "Apri l'invito",
     },
+    "joined": {
+        "subject": "Il tuo link per continuare «{title}»",
+        "preheader": "Se lasci il colloquio, continua con questo link. Accedi con {email}.",
+        "heading": "Il tuo link al colloquio",
+        "lines": [
+            "Hai iniziato il colloquio «{title}» di {company} su prepza.",
+            (
+                "Se lo lasci, continua con questo link: accedi con {email}. Funziona anche se "
+                "{company} disattiva il link da cui hai iniziato. Il tempo continua a scorrere "
+                "mentre sei via."
+            ),
+        ],
+        "button": "Continua il colloquio",
+        "footer": (
+            "Questa email è stata inviata a {email} perché con questo indirizzo è stato iniziato "
+            "un colloquio su prepza."
+        ),
+    },
     "reminder": {
         "subject": "Promemoria: {company} aspetta il tuo colloquio",
         "preheader": "«{title}» è ancora aperto. Accedi con {email} per iniziare.",

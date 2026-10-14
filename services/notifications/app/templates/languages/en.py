@@ -19,6 +19,24 @@ TEXTS = {
         ],
         "button": "Open the invite",
     },
+    "joined": {
+        "subject": "Your link to continue “{title}”",
+        "preheader": "If you leave the interview, continue with this link. Sign in with {email}.",
+        "heading": "Your interview link",
+        "lines": [
+            "You started the “{title}” interview for {company} on prepza.",
+            (
+                "If you leave, continue with this link: sign in with {email}. It keeps working "
+                "even if {company} takes down the link you started from. The clock keeps running "
+                "while you're away."
+            ),
+        ],
+        "button": "Continue the interview",
+        "footer": (
+            "This email was sent to {email} because you started an interview on prepza with this "
+            "address."
+        ),
+    },
     "reminder": {
         "subject": "Reminder: {company} is waiting for your interview",
         "preheader": "“{title}” is still open. Sign in with {email} to start.",

@@ -88,6 +88,7 @@ export function LinkView({ token }: { token: string }) {
       title={link.title}
       questionSeconds={link.question_seconds}
       finished={link.status === "finished"}
+      viaLink
       action={
         <Button
           className="h-12 px-6 text-base"

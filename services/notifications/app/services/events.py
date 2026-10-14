@@ -3,6 +3,7 @@ import logging
 from app.config.settings import settings
 from app.constants.events import (
     CANDIDATE_INVITED,
+    CANDIDATE_JOINED,
     CANDIDATE_REMINDED,
     CANDIDATE_REMOVED,
     COMPANY_DELETED,
@@ -13,6 +14,7 @@ from app.constants.events import (
 )
 from app.helpers.emails import (
     candidate_invite_email,
+    candidate_joined_email,
     candidate_reminder_email,
     contact_email,
     member_invite_email,
@@ -69,6 +71,18 @@ async def invite(data: dict, event_id: str) -> None:
     await deliver(email, event_id)
 
 
+async def joined(data: dict, event_id: str) -> None:
+    """Not to a candidate who stopped the company's emails."""
+    if await opt_outs.opted_out(address_hash(data["email"]), data["company_id"]):
+        logger.info("Link for %s not sent: the candidate opted out", data["invite_id"])
+
+        return
+
+    await deliver(
+        candidate_joined_email(data, settings.site_url, settings.email_link_secret), event_id
+    )
+
+
 async def remind(data: dict, event_id: str) -> None:
     """No reminder to a candidate who stopped the company's emails or this invite's reminders;
     the invite itself reached them, so the company isn't told."""
@@ -91,6 +105,9 @@ async def handle(event_type: str, data: dict, event_id: str) -> None:
 
     if event_type == CANDIDATE_INVITED:
         await invite(data, event_id)
+
+    if event_type == CANDIDATE_JOINED:
+        await joined(data, event_id)
 
     if event_type == CANDIDATE_REMINDED:
         await remind(data, event_id)

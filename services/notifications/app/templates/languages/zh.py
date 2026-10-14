@@ -14,6 +14,17 @@ TEXTS = {
         ],
         "button": "打开邀请",
     },
+    "joined": {
+        "subject": "继续“{title}”的链接",
+        "preheader": "如果离开面试，请用这个链接继续。使用 {email} 登录。",
+        "heading": "你的面试链接",
+        "lines": [
+            "你已在 prepza 上开始 {company} 的“{title}”面试。",
+            "如果离开，请用这个链接继续：使用 {email} 登录。即使 {company} 关闭了你开始时使用的链接，它也依然有效。你离开期间，时间会继续计算。",
+        ],
+        "button": "继续面试",
+        "footer": "这封邮件发送到 {email}，因为有人用这个地址在 prepza 上开始了面试。",
+    },
     "reminder": {
         "subject": "提醒：{company} 正在等你参加面试",
         "preheader": "“{title}”仍然开放。使用 {email} 登录即可开始。",

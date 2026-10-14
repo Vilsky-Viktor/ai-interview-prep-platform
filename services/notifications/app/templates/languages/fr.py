@@ -20,6 +20,24 @@ TEXTS = {
         ],
         "button": "Ouvrir l'invitation",
     },
+    "joined": {
+        "subject": "Votre lien pour continuer « {title} »",
+        "preheader": "Si vous quittez l'entretien, continuez avec ce lien. Connectez-vous avec {email}.",
+        "heading": "Votre lien vers l'entretien",
+        "lines": [
+            "Vous avez commencé l'entretien « {title} » de {company} sur prepza.",
+            (
+                "Si vous le quittez, continuez avec ce lien : connectez-vous avec {email}. Il "
+                "fonctionne même si {company} désactive le lien par lequel vous avez commencé. "
+                "Le temps continue de s'écouler pendant votre absence."
+            ),
+        ],
+        "button": "Continuer l'entretien",
+        "footer": (
+            "Cet e-mail a été envoyé à {email} parce qu'un entretien a été commencé sur prepza "
+            "avec cette adresse."
+        ),
+    },
     "reminder": {
         "subject": "Rappel : {company} attend votre entretien",
         "preheader": "« {title} » est toujours ouvert. Connectez-vous avec {email} pour commencer.",

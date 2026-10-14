@@ -19,6 +19,23 @@ TEXTS = {
         ],
         "button": "Ava kutse",
     },
+    "joined": {
+        "subject": "Sinu link, et jätkata intervjuud „{title}“",
+        "preheader": "Kui lahkud intervjuult, jätka selle lingiga. Logi sisse aadressiga {email}.",
+        "heading": "Sinu intervjuu link",
+        "lines": [
+            "Alustasid prepzas ettevõtte {company} intervjuud „{title}“.",
+            (
+                "Kui lahkud, jätka selle lingiga: logi sisse aadressiga {email}. See töötab ka "
+                "siis, kui {company} lülitab välja lingi, millega alustasid. Aeg jookseb edasi "
+                "ka siis, kui oled eemal."
+            ),
+        ],
+        "button": "Jätka intervjuud",
+        "footer": (
+            "See e-kiri saadeti aadressile {email}, sest selle aadressiga alustati prepzas intervjuud."
+        ),
+    },
     "reminder": {
         "subject": "Meeldetuletus: {company} ootab sinu intervjuud",
         "preheader": "„{title}“ on endiselt avatud. Alustamiseks logi sisse aadressiga {email}.",

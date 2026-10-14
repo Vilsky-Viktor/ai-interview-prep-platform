@@ -7,7 +7,11 @@ from prepza_common.notifications import NOTIFICATION_REQUESTED
 from sqlalchemy import delete, select, update
 from sqlalchemy.dialects.postgresql import insert
 
-from app.constants.events import CANDIDATE_FINISHED, CANDIDATE_INVITED, CANDIDATE_REMOVED
+from app.constants.events import (
+    CANDIDATE_FINISHED,
+    CANDIDATE_INVITED,
+    CANDIDATE_REMOVED,
+)
 from app.constants.invites import NOT_STARTED, InviteStatus
 from app.helpers.candidates import new_hold_key
 from app.models.interviews import Interview
@@ -88,37 +92,6 @@ async def upsert(
         await session.commit()
 
         return invite, revived
-
-
-async def for_link(interview_id, email: str, hold_key: str | None = None) -> CandidateInvite:
-    """The candidate who came through the test's link: their invite, made now if it's new (with
-    `hold_key`, its credits' key). No email goes out: they're already here."""
-    email = email.lower()
-    statement = (
-        insert(CandidateInvite)
-        .values(
-            id=uuid.uuid4(),
-            interview_id=interview_id,
-            email=email,
-            token=secrets.token_urlsafe(32),
-            status=InviteStatus.INVITED,
-            created_at=datetime.now(UTC),
-            sent_at=datetime.now(UTC),
-            hold_key=hold_key or new_hold_key(interview_id),
-        )
-        .on_conflict_do_nothing(index_elements=["interview_id", "email"])
-    )
-
-    async with Session() as session:
-        await session.execute(statement)
-        invite = await session.scalar(
-            select(CandidateInvite).where(
-                CandidateInvite.interview_id == interview_id, CandidateInvite.email == email
-            )
-        )
-        await session.commit()
-
-        return invite
 
 
 async def held(interview_id, email: str) -> tuple[str | None, str | None]:

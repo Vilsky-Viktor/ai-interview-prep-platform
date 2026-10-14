@@ -22,6 +22,27 @@ TEXTS = {
         ],
         "button": "Buksan ang imbitasyon",
     },
+    "joined": {
+        "subject": "Ang link mo para ituloy ang “{title}”",
+        "preheader": (
+            "Kung aalis ka sa interview, ituloy ito gamit ang link na ito. Mag-sign in gamit "
+            "ang {email}."
+        ),
+        "heading": "Ang link ng interview mo",
+        "lines": [
+            "Sinimulan mo ang interview na “{title}” ng {company} sa prepza.",
+            (
+                "Kung aalis ka, ituloy ito gamit ang link na ito: mag-sign in gamit ang {email}. "
+                "Gagana pa rin ito kahit i-off ng {company} ang link kung saan ka nagsimula. "
+                "Patuloy na tumatakbo ang oras habang wala ka."
+            ),
+        ],
+        "button": "Ituloy ang interview",
+        "footer": (
+            "Ipinadala ang email na ito sa {email} dahil may sinimulang interview sa prepza gamit "
+            "ang address na ito."
+        ),
+    },
     "reminder": {
         "subject": "Paalala: hinihintay ng {company} ang iyong interview",
         "preheader": "Bukas pa ang “{title}”. Mag-sign in gamit ang {email} para magsimula.",

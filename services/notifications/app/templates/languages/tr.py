@@ -21,6 +21,23 @@ TEXTS = {
         ],
         "button": "Daveti aç",
     },
+    "joined": {
+        "subject": "“{title}” mülakatına devam etme bağlantınız",
+        "preheader": "Mülakattan ayrılırsanız bu bağlantıyla devam edin. {email} ile giriş yapın.",
+        "heading": "Mülakat bağlantınız",
+        "lines": [
+            "prepza'da {company} şirketinin “{title}” mülakatına başladınız.",
+            (
+                "Ayrılırsanız bu bağlantıyla devam edin: {email} ile giriş yapın. {company} başladığını"
+                "z bağlantıyı kapatsa bile çalışmaya devam eder. Siz yokken süre işlemeye devam "
+                "eder."
+            ),
+        ],
+        "button": "Mülakata devam et",
+        "footer": (
+            "Bu e-posta {email} adresine, bu adresle prepza'da bir mülakata başlandığı için gönderildi."
+        ),
+    },
     "reminder": {
         "subject": "Hatırlatma: {company} mülakatınızı bekliyor",
         "preheader": "“{title}” hâlâ açık. Başlamak için {email} ile giriş yapın.",
