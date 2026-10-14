@@ -124,6 +124,7 @@ MESSAGES = {
     "Round not found": "Ronde niet gevonden",
     "Session not found": "Sessie niet gevonden",
     "Set not found": "Vragenset niet gevonden",
+    "Open the interview from the link the company gave you.": "Open het sollicitatiegesprek via de link die je van het bedrijf hebt gekregen.",
     "Confirm your email first: open the link we sent you, then try again.": "Bevestig eerst je e-mailadres: open de link die we je hebben gestuurd en probeer het opnieuw.",
     "Template not found": "Sjabloon niet gevonden",
     "Test not found": "Test niet gevonden",
@@ -199,4 +200,5 @@ MESSAGES = {
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "Een kennisgeving gaat minstens 14 dagen voordat de nieuwe versie geldt de deur uit: geef haar een latere datum.",
     "This version's notice was already sent.": "De kennisgeving van deze versie is al verstuurd.",
     "Prices aren't available right now. Please try again in a minute.": "De prijzen zijn nu niet beschikbaar. Probeer het over een minuut opnieuw.",
+    "return_url must be an https address on the company's website domain; set the website in prepza first.": "return_url moet een https-adres op het websitedomein van het bedrijf zijn; stel eerst de website in prepza in.",
 }

@@ -124,6 +124,7 @@ MESSAGES = {
     "Round not found": "Rodada não encontrada",
     "Session not found": "Sessão não encontrada",
     "Set not found": "Conjunto de questões não encontrado",
+    "Open the interview from the link the company gave you.": "Abra a entrevista pelo link que a empresa lhe deu.",
     "Confirm your email first: open the link we sent you, then try again.": "Confirme seu e-mail primeiro: abra o link que enviamos e tente novamente.",
     "Template not found": "Modelo não encontrado",
     "Test not found": "Teste não encontrado",
@@ -199,4 +200,5 @@ MESSAGES = {
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "O aviso sai pelo menos 14 dias antes de a nova versão se aplicar: dê a ela uma data posterior.",
     "This version's notice was already sent.": "O aviso desta versão já foi enviado.",
     "Prices aren't available right now. Please try again in a minute.": "Os preços não estão disponíveis agora. Tente novamente em um minuto.",
+    "return_url must be an https address on the company's website domain; set the website in prepza first.": "return_url deve ser um endereço https no domínio do site da empresa; defina o site no prepza primeiro.",
 }

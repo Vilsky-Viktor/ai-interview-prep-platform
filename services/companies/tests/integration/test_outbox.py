@@ -60,3 +60,35 @@ def test_a_deleted_company_and_its_company_deleted_event_are_saved_together(run)
 
     # Notifications removes the company's notifications when it gets it (retried until then).
     assert {"company_id": str(company.id)} in events
+
+
+def test_an_invite_without_a_sign_in_is_a_guests_keeps_its_return_address_and_sends_no_email(run):
+    async def scenario():
+        company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
+        interview = await interviews.create(company.id, uuid.uuid4(), "en")
+        invite, _ = await invites.upsert(
+            interview.id,
+            "quiet@example.com",
+            "Backend",
+            "Acme",
+            "en",
+            return_url="https://acme.com/done",
+            sign_in=False,
+        )
+
+        async with Session() as session:
+            events = list(
+                await session.scalars(
+                    select(OutboxEvent).where(OutboxEvent.event_type == "candidate.invited")
+                )
+            )
+
+        return invite, [event.data["invite_id"] for event in events]
+
+    invite, sent = run(scenario())
+
+    assert str(invite.id) not in sent
+    assert invite.return_url == "https://acme.com/done"
+    assert invite.guest is True
+    # No reminder either: the platform that sent the candidate told them already.
+    assert invite.reminded_at is not None

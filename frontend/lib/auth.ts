@@ -109,6 +109,16 @@ export async function signIn(name: SignInProvider): Promise<SignInResult> {
   }
 }
 
+/** Signs in as the guest a company's own platform sent with the invite link: no account, no
+ * email, only that interview (the token comes from companies). */
+export async function signInAsGuest(token: string) {
+  const [auth, firebase] = await Promise.all([
+    firebaseAuth(),
+    import("firebase/auth"),
+  ])
+  await firebase.signInWithCustomToken(auth, token)
+}
+
 /** An email verified since signing in (the link sent then, opened in another tab) counts at once:
  * the account is read again and, once verified, a new token says so. */
 export async function refreshVerification() {

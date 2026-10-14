@@ -86,3 +86,12 @@ resource "google_service_account_iam_member" "assistant_signs_custom_tokens" {
   role               = "roles/iam.serviceAccountTokenCreator"
   member             = "serviceAccount:${google_service_account.service["assistant"].email}"
 }
+
+# A candidate a company's own platform sends through the API without a sign-in opens the
+# interview from its link alone: companies signs a custom token for the invite's guest (signBlob
+# on its own account), and Firebase makes the guest's account on its first sign-in.
+resource "google_service_account_iam_member" "companies_signs_guest_tokens" {
+  service_account_id = google_service_account.service["companies"].name
+  role               = "roles/iam.serviceAccountTokenCreator"
+  member             = "serviceAccount:${google_service_account.service["companies"].email}"
+}

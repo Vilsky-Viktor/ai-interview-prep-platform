@@ -44,3 +44,9 @@ class CandidateInvite(Base):
     # The key of the credits billing set aside for this invite, without the candidate's email:
     # its own, so an email invited again after its invite was removed is held and charged anew.
     hold_key: Mapped[str] = mapped_column(String(200), index=True)
+    # Where the company's own platform takes the candidate back once they've finished (the
+    # public API's return_url, on the company's website domain); None for everyone else.
+    return_url: Mapped[str | None] = mapped_column(String(2048))
+    # Sent by the company's own platform, which knows who the candidate is: the link signs them
+    # in as this invite's guest, and prepza sends no emails.
+    guest: Mapped[bool] = mapped_column(default=False, server_default="false")

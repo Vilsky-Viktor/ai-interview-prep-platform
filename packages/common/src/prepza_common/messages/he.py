@@ -124,6 +124,7 @@ MESSAGES = {
     "Round not found": "סבב התרגול לא נמצא",
     "Session not found": "הסשן לא נמצא",
     "Set not found": "מאגר השאלות לא נמצא",
+    "Open the interview from the link the company gave you.": "פתחו את הראיון מהקישור שהחברה נתנה לכם.",
     "Confirm your email first: open the link we sent you, then try again.": "יש לאשר קודם את כתובת האימייל: לפתוח את הקישור ששלחנו ואז לנסות שוב.",
     "Template not found": "התבנית לא נמצאה",
     "Test not found": "המבחן לא נמצא",
@@ -199,4 +200,5 @@ MESSAGES = {
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "הודעה נשלחת לפחות 14 יום לפני שהגרסה החדשה חלה: יש לתת לה תאריך מאוחר יותר.",
     "This version's notice was already sent.": "ההודעה על הגרסה הזו כבר נשלחה.",
     "Prices aren't available right now. Please try again in a minute.": "המחירים לא זמינים כרגע. נסו שוב בעוד דקה.",
+    "return_url must be an https address on the company's website domain; set the website in prepza first.": "return_url חייב להיות כתובת https בדומיין של אתר החברה; יש להגדיר קודם את האתר ב-prepza.",
 }

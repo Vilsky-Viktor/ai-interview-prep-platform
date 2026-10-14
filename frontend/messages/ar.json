@@ -429,6 +429,7 @@
     "section": "القسم {number} من {count}",
     "missing": "هذه الجلسة غير موجودة.",
     "done": "أنهيت المقابلة. بالتوفيق!",
+    "backTo": "العودة إلى {company}",
     "title": "مقابلة"
   },
   "generation": {

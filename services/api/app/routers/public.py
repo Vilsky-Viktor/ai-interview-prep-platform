@@ -72,6 +72,12 @@ async def get_candidate(interview_id: UUID, candidate_id: UUID, key: ApiKeyDep) 
         **NOT_FOUND,
         402: {"description": "The company doesn't have enough credits"},
         409: {"description": "The interview's questions are still being generated"},
+        422: {
+            "description": (
+                "The body is invalid, or `return_url` isn't an https address on the company's "
+                "website domain"
+            )
+        },
         429: {
             "description": "The key's creator reached their email limits, or the key its rate limit"
         },
@@ -79,11 +85,16 @@ async def get_candidate(interview_id: UUID, candidate_id: UUID, key: ApiKeyDep) 
     },
 )
 async def invite_candidate(interview_id: UUID, body: CandidateIn, key: ApiKeyDep) -> Candidate:
-    """Emails the candidate an invitation to the interview on behalf of the key's creator and
-    reserves credits for them, with their name if given. Inviting an address that was already
-    invited sends the invitation again."""
+    """Invites the candidate to the interview on behalf of the key's creator and reserves credits
+    for them, with their name if given. By default prepza emails the invitation and the
+    candidate signs in with that email; with `sign_in` false, your platform sends them to the
+    response's `invite_url`, which opens the interview without signing in. With a `return_url`,
+    the finished page takes the candidate back to your platform. Inviting an address that was
+    already invited sends the invitation again, if emails are on."""
     await companies.interview(key.company_id, interview_id)
-    invite_id = await companies.invite(interview_id, str(body.email), key.created_by, body.name)
+    invite_id = await companies.invite(
+        interview_id, str(body.email), key.created_by, body.name, body.return_url, body.sign_in
+    )
     found = await companies.candidate(key.company_id, interview_id, invite_id)
 
     return candidate_of(found, key.company_id, interview_id, settings.site_url)

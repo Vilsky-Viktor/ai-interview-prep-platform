@@ -124,6 +124,7 @@ MESSAGES = {
     "Round not found": "دور تمرینی پیدا نشد",
     "Session not found": "جلسه پیدا نشد",
     "Set not found": "مجموعهٔ پرسش‌ها پیدا نشد",
+    "Open the interview from the link the company gave you.": "مصاحبه را از پیوندی که شرکت به شما داده است باز کنید.",
     "Confirm your email first: open the link we sent you, then try again.": "اول ایمیلتان را تأیید کنید: پیوندی را که برایتان فرستادیم باز کنید و دوباره امتحان کنید.",
     "Template not found": "قالب پیدا نشد",
     "Test not found": "آزمون پیدا نشد",
@@ -199,4 +200,5 @@ MESSAGES = {
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "اطلاعیه دست‌کم ۱۴ روز پیش از اعمال نسخهٔ جدید فرستاده می‌شود: تاریخ دیرتری برای آن بگذارید.",
     "This version's notice was already sent.": "اطلاعیهٔ این نسخه قبلاً فرستاده شده است.",
     "Prices aren't available right now. Please try again in a minute.": "قیمت‌ها اکنون در دسترس نیستند. لطفاً یک دقیقهٔ دیگر دوباره تلاش کنید.",
+    "return_url must be an https address on the company's website domain; set the website in prepza first.": "return_url باید یک نشانی https روی دامنهٔ وب‌سایت شرکت باشد؛ ابتدا وب‌سایت را در prepza تنظیم کنید.",
 }

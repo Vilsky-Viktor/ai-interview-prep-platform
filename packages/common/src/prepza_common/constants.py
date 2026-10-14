@@ -206,3 +206,7 @@ LEGAL_VERSIONS = {
     "privacy": "2026-10-14",
     "dpa": "2026-10-14",
 }
+
+# The sign-in a company's own platform gives its candidate with the invite link (no email, no
+# account of their own): companies signs it in, library counts it as no sign-up.
+GUEST_UID_PREFIX = "guest-"

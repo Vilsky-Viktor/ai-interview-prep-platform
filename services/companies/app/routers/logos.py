@@ -7,6 +7,7 @@ from prepza_common.auth import CurrentUser
 
 from app.constants.logos import LOGO_CACHE
 from app.helpers.logos import logo_path, logo_type
+from app.helpers.return_urls import with_invite
 from app.schemas.logos import BrandOut, LogoIn, LogoOut
 from app.services.access import require_editor
 from app.storage import companies, interviews, invites
@@ -71,4 +72,10 @@ async def candidate_brand(invite_id: UUID, user: CurrentUser) -> BrandOut:
     if company is None or (invite.user_id != user.uid and not member):
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Not found")
 
-    return BrandOut(company=company.name, logo_url=logo_path(company))
+    back = invite.return_url if invite.user_id == user.uid else None
+
+    return BrandOut(
+        company=company.name,
+        logo_url=logo_path(company),
+        return_url=with_invite(back, invite.id) if back else None,
+    )

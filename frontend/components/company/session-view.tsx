@@ -83,8 +83,10 @@ export function SessionView({
     brandOf?.then(setBrand).catch(() => setBrand(null))
   }, [inviteId, previewCompany, practice])
 
-  // The header and footer come back once no question is on the clock: finished, or never started.
-  const over = (!loading && !user) || missing || failed || (done && !practice)
+  // The header and footer come back if no question was ever on the clock: signed out, not found,
+  // failed. A company's interview stays without them once finished, showing the company only;
+  // a practice round goes on to its results, which have them.
+  const over = (!loading && !user) || missing || failed
 
   useEffect(() => {
     setTimedPageOver(over)
@@ -150,16 +152,27 @@ export function SessionView({
           </h1>
           <p className="text-muted-foreground">{t("done")}</p>
         </div>
-        {testHref && (
+        {/* Sent from the company's own platform: back there instead. */}
+        {brand?.return_url ? (
           <Button
             className="h-12 px-6 text-base"
-            render={
-              <Link href={testHref.slice(0, testHref.lastIndexOf("/"))} />
-            }
+            render={<a href={brand.return_url} />}
             nativeButton={false}
           >
-            {t("toTest")}
+            {t("backTo", { company: brand.company })}
           </Button>
+        ) : (
+          testHref && (
+            <Button
+              className="h-12 px-6 text-base"
+              render={
+                <Link href={testHref.slice(0, testHref.lastIndexOf("/"))} />
+              }
+              nativeButton={false}
+            >
+              {t("toTest")}
+            </Button>
+          )
         )}
       </div>
     )

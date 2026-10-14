@@ -12,7 +12,7 @@ import { useSignIn } from "@/components/sign-in-dialog"
 import { Button } from "@/components/ui/button"
 import { WarningCard } from "@/components/warning-card"
 import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
-import { refreshVerification } from "@/lib/auth"
+import { refreshVerification, signInAsGuest } from "@/lib/auth"
 import { useLinkData } from "@/hooks/use-link-data"
 import type { InviteView as Invite, SessionSummary } from "@/types/company"
 
@@ -37,9 +37,19 @@ export function InviteView({ token }: { token: string }) {
 
   async function start() {
     setStarting(true)
-    await refreshVerification()
 
     try {
+      // Sent by the company's own platform: the link signs the candidate in.
+      if (invite?.guest) {
+        const guest = await apiFetch<{ token: string }>(
+          `/companies/invites/${token}/guest`,
+          { method: "POST" }
+        )
+        await signInAsGuest(guest.token)
+      } else {
+        await refreshVerification()
+      }
+
       const result = await apiFetch<{ sessions: SessionSummary[] }>(
         `/companies/invites/${token}/start`,
         { method: "POST" }
@@ -88,11 +98,12 @@ export function InviteView({ token }: { token: string }) {
       questionSeconds={invite.question_seconds}
       finished={invite.status === "finished"}
       action={
-        !user ? (
+        // A guest's link is all they need; anyone else signs in with the invited email.
+        !invite.guest && !user ? (
           <Button className="h-12 px-6 text-base" onClick={() => signIn()}>
             {t("signInToStart")}
           </Button>
-        ) : matches ? (
+        ) : invite.guest || matches ? (
           <Button
             className="h-12 px-6 text-base"
             disabled={starting}

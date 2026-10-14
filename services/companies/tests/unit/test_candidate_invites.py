@@ -64,6 +64,8 @@ def invite_setup(monkeypatch):
         hold_key=None,
         name=None,
         verified=False,
+        return_url=None,
+        sign_in=True,
     ):
         # A new invite keeps the key its credits were set aside under.
         invite.hold_key = invite.hold_key or hold_key

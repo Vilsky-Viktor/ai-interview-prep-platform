@@ -229,7 +229,7 @@
      "Candidates"
     ],
     "summary": "Invite a candidate",
-    "description": "Emails the candidate an invitation to the interview on behalf of the key's creator and\nreserves credits for them, with their name if given. Inviting an address that was already\ninvited sends the invitation again.",
+    "description": "Invites the candidate to the interview on behalf of the key's creator and reserves credits\nfor them, with their name if given. By default prepza emails the invitation and the\ncandidate signs in with that email; with `sign_in` false, your platform sends them to the\nresponse's `invite_url`, which opens the interview without signing in. With a `return_url`,\nthe finished page takes the candidate back to your platform. Inviting an address that was\nalready invited sends the invitation again, if emails are on.",
     "operationId": "invite_candidate_interviews__interview_id__candidates_post",
     "security": [
      {
@@ -284,18 +284,11 @@
      "409": {
       "description": "The interview's questions are still being generated"
      },
+     "422": {
+      "description": "The body is invalid, or `return_url` isn't an https address on the company's website domain"
+     },
      "503": {
       "description": "Invitations are temporarily paused"
-     },
-     "422": {
-      "description": "Validation Error",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/HTTPValidationError"
-        }
-       }
-      }
      }
     }
    }
@@ -789,6 +782,25 @@
       ],
       "title": "Name",
       "description": "The candidate's name, optional (at most 200 characters). It fills a name not known yet; inviting the same address again doesn't change a known one"
+     },
+     "return_url": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 2048
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Return Url",
+      "description": "Where to take the candidate once they've finished, optional: an https address on the company's website domain (or a subdomain of it), set in prepza. The finished page shows a button to it, with `prepza_invite=<candidate id>` added to its query"
+     },
+     "sign_in": {
+      "type": "boolean",
+      "title": "Sign In",
+      "description": "Whether the candidate signs in to prepza with this email, which prepza sends the invitation and its reminder to. Set it to false when your platform already knows who the candidate is and sends them to the response's `invite_url` itself: the link then opens the interview without signing in, and prepza sends no emails. Anyone with that link can take the interview, so give it only to the candidate",
+      "default": true
      }
     },
     "type": "object",

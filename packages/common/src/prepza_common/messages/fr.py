@@ -124,6 +124,7 @@ MESSAGES = {
     "Round not found": "Session d'entraînement introuvable",
     "Session not found": "Session introuvable",
     "Set not found": "Série de questions introuvable",
+    "Open the interview from the link the company gave you.": "Ouvrez l'entretien depuis le lien que l'entreprise vous a donné.",
     "Confirm your email first: open the link we sent you, then try again.": "Confirmez d'abord votre adresse e-mail : ouvrez le lien que nous vous avons envoyé, puis réessayez.",
     "Template not found": "Modèle introuvable",
     "Test not found": "Test introuvable",
@@ -199,4 +200,5 @@ MESSAGES = {
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "Un avis part au moins 14 jours avant que la nouvelle version s'applique : donnez-lui une date plus tardive.",
     "This version's notice was already sent.": "L'avis de cette version a déjà été envoyé.",
     "Prices aren't available right now. Please try again in a minute.": "Les prix ne sont pas disponibles pour le moment. Veuillez réessayer dans une minute.",
+    "return_url must be an https address on the company's website domain; set the website in prepza first.": "return_url doit être une adresse https sur le domaine du site web de l'entreprise ; renseignez d'abord le site dans prepza.",
 }

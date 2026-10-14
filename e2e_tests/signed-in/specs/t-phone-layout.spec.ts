@@ -109,7 +109,8 @@ test("a company's pages on a phone", async ({ signInAs }) => {
 });
 
 // While questions run against the clock there's only the question: no header, footer or
-// "ask agent". The preview before it keeps them, and they're back once it's finished.
+// "ask agent". The preview before it keeps them; a company's interview, finished, shows the
+// company only, with its button back to the interviews.
 test("timed questions on their own, with nothing around them", async ({
   signInAs,
 }) => {
@@ -133,7 +134,7 @@ test("timed questions on their own, with nothing around them", async ({
       0,
     );
 
-    // Once it's finished, they're back, and the footer is in view without scrolling.
+    // Once it's finished, still none: a company's interview shows the company only.
     await user.getByRole("button", { name: /finish interview/i }).click();
     await user
       .getByRole("dialog")
@@ -142,8 +143,11 @@ test("timed questions on their own, with nothing around them", async ({
     await expect(user.getByText("You have finished the interview")).toBeVisible(
       { timeout: 60_000 },
     );
-    await expect(user.getByRole("banner")).toBeVisible();
-    await expect(user.getByRole("contentinfo")).toBeInViewport();
+    await expect(
+      user.getByRole("button", { name: "Go to interviews" }),
+    ).toBeVisible();
+    await expect(user.getByRole("banner")).toHaveCount(0);
+    await expect(user.getByRole("contentinfo")).toHaveCount(0);
   } finally {
     await deleteOwnCompanies(user);
   }

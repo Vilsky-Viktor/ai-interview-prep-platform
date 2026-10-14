@@ -124,6 +124,7 @@ MESSAGES = {
     "Round not found": "ไม่พบรอบฝึกซ้อม",
     "Session not found": "ไม่พบเซสชัน",
     "Set not found": "ไม่พบชุดคำถาม",
+    "Open the interview from the link the company gave you.": "เปิดการสัมภาษณ์จากลิงก์ที่บริษัทให้คุณ",
     "Confirm your email first: open the link we sent you, then try again.": "โปรดยืนยันอีเมลของคุณก่อน: เปิดลิงก์ที่เราส่งให้ แล้วลองอีกครั้ง",
     "Template not found": "ไม่พบเทมเพลต",
     "Test not found": "ไม่พบแบบทดสอบ",
@@ -199,4 +200,5 @@ MESSAGES = {
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "ประกาศจะส่งออกอย่างน้อย 14 วันก่อนเวอร์ชันใหม่มีผล โปรดกำหนดวันที่ให้ช้ากว่านี้",
     "This version's notice was already sent.": "ส่งประกาศของเวอร์ชันนี้ไปแล้ว",
     "Prices aren't available right now. Please try again in a minute.": "ยังแสดงราคาไม่ได้ในขณะนี้ โปรดลองอีกครั้งในอีกหนึ่งนาที",
+    "return_url must be an https address on the company's website domain; set the website in prepza first.": "return_url ต้องเป็นที่อยู่ https บนโดเมนเว็บไซต์ของบริษัท ตั้งค่าเว็บไซต์ใน prepza ก่อน",
 }

@@ -93,6 +93,16 @@ def test_a_new_accounts_first_language_counts_as_signing_up(client, monkeypatch)
     ]
 
 
+def test_a_companys_guest_candidate_accepts_the_terms_but_isnt_a_sign_up(client, monkeypatch):
+    _, tracked = settings_with(monkeypatch, None)
+    monkeypatch.setitem(CLAIMS, "uid", "guest-1")
+    monkeypatch.setitem(CLAIMS, "email", "")
+
+    client.put("/me/settings", json={"language": "de"}, headers=AUTH)
+
+    assert tracked == [("terms", {"user_id": "guest-1", "version": LEGAL_VERSIONS["terms"]})]
+
+
 def test_settings_refuse_an_unknown_language(client, monkeypatch):
     monkeypatch.setattr(firebase_auth, "verify_id_token", fake_verify)
 

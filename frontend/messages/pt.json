@@ -429,6 +429,7 @@
     "section": "Seção {number} de {count}",
     "missing": "Esta sessão não existe.",
     "done": "Você concluiu a entrevista. Boa sorte!",
+    "backTo": "Voltar para {company}",
     "title": "Entrevista"
   },
   "generation": {

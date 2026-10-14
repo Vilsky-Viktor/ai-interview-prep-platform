@@ -124,6 +124,7 @@ MESSAGES = {
     "Round not found": "Спробу не знайдено",
     "Session not found": "Сесію не знайдено",
     "Set not found": "Набір питань не знайдено",
+    "Open the interview from the link the company gave you.": "Відкрийте співбесіду за посиланням, яке вам дала компанія.",
     "Confirm your email first: open the link we sent you, then try again.": "Спершу підтвердьте адресу пошти: відкрийте посилання з нашого листа й спробуйте ще раз.",
     "Template not found": "Шаблон не знайдено",
     "Test not found": "Тест не знайдено",
@@ -199,4 +200,5 @@ MESSAGES = {
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "Повідомлення надсилається щонайменше за 14 днів до того, як нова версія почне застосовуватися: призначте їй пізнішу дату.",
     "This version's notice was already sent.": "Повідомлення про цю версію вже надіслано.",
     "Prices aren't available right now. Please try again in a minute.": "Ціни зараз недоступні. Спробуйте ще раз за хвилину.",
+    "return_url must be an https address on the company's website domain; set the website in prepza first.": "return_url має бути https-адресою на домені сайту компанії; спершу вкажіть сайт у prepza.",
 }

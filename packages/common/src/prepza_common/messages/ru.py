@@ -124,6 +124,7 @@ MESSAGES = {
     "Round not found": "Тренировка не найдена",
     "Session not found": "Сессия не найдена",
     "Set not found": "Набор вопросов не найден",
+    "Open the interview from the link the company gave you.": "Откройте собеседование по ссылке, которую вам дала компания.",
     "Confirm your email first: open the link we sent you, then try again.": "Сначала подтвердите адрес почты: откройте ссылку из нашего письма и попробуйте снова.",
     "Template not found": "Шаблон не найден",
     "Test not found": "Тест не найден",
@@ -199,4 +200,5 @@ MESSAGES = {
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "Уведомление отправляется не позднее чем за 14 дней до вступления новой версии в силу: назначьте ей более позднюю дату.",
     "This version's notice was already sent.": "Уведомление об этой версии уже отправлено.",
     "Prices aren't available right now. Please try again in a minute.": "Цены сейчас недоступны. Попробуйте ещё раз через минуту.",
+    "return_url must be an https address on the company's website domain; set the website in prepza first.": "return_url должен быть https-адресом на домене сайта компании; сначала укажите сайт в prepza.",
 }

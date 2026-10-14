@@ -72,6 +72,25 @@ class CandidateIn(BaseModel):
             "yet; inviting the same address again doesn't change a known one"
         ),
     )
+    return_url: str | None = Field(
+        default=None,
+        max_length=2048,
+        description=(
+            "Where to take the candidate once they've finished, optional: an https address on "
+            "the company's website domain (or a subdomain of it), set in prepza. The finished "
+            "page shows a button to it, with `prepza_invite=<candidate id>` added to its query"
+        ),
+    )
+    sign_in: bool = Field(
+        default=True,
+        description=(
+            "Whether the candidate signs in to prepza with this email, which prepza sends the "
+            "invitation and its reminder to. Set it to false when your platform already knows "
+            "who the candidate is and sends them to the response's `invite_url` itself: the "
+            "link then opens the interview without signing in, and prepza sends no emails. "
+            "Anyone with that link can take the interview, so give it only to the candidate"
+        ),
+    )
 
 
 class FinishedEvent(BaseModel):

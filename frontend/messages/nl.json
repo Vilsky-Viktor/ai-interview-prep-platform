@@ -429,6 +429,7 @@
     "section": "Onderdeel {number} van {count}",
     "missing": "Deze sessie bestaat niet.",
     "done": "Je hebt het interview afgerond. Succes!",
+    "backTo": "Terug naar {company}",
     "title": "Interview"
   },
   "generation": {

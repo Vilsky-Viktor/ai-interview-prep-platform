@@ -118,6 +118,7 @@ TOO_MANY_WITHOUT_CANDIDATES_UNPAID = (
 )
 # Starting an interview with an email the sign-in hasn't verified (GitHub doesn't): a link to
 # confirm it was sent when they signed in.
+NOT_THE_GUEST = "Open the interview from the link the company gave you."
 EMAIL_NOT_VERIFIED = "Confirm your email first: open the link we sent you, then try again."
 # A company a superadmin suspended: its members see why, and candidates that the interview isn't
 # available (one already in it may finish).
@@ -154,3 +155,9 @@ SIGNAL_KEYS = ("tab_leaves", "copies", "fast_answers")
 EXTRA_TIME_OPTIONS = (0, 25, 50, 100)
 # Extra time is set before the candidate starts: their questions' time is fixed then.
 EXTRA_TIME_STARTED = "Extra time can only be changed before the candidate starts."
+
+# The API's return_url must stay on the company's own site, so it can't send candidates elsewhere.
+RETURN_URL_OFF_DOMAIN = (
+    "return_url must be an https address on the company's website domain; set the website in "
+    "prepza first."
+)

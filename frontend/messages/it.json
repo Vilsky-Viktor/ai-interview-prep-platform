@@ -429,6 +429,7 @@
     "section": "Sezione {number} di {count}",
     "missing": "Questa sessione non esiste.",
     "done": "Hai terminato il colloquio. In bocca al lupo!",
+    "backTo": "Torna a {company}",
     "title": "Colloquio"
   },
   "generation": {

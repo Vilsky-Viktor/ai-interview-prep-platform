@@ -124,6 +124,7 @@ MESSAGES = {
     "Round not found": "연습을 찾을 수 없습니다",
     "Session not found": "세션을 찾을 수 없습니다",
     "Set not found": "문제 세트를 찾을 수 없습니다",
+    "Open the interview from the link the company gave you.": "회사에서 받은 링크로 면접을 열어 주세요.",
     "Confirm your email first: open the link we sent you, then try again.": "먼저 이메일을 인증하세요. 보내 드린 링크를 연 다음 다시 시도하세요.",
     "Template not found": "템플릿을 찾을 수 없습니다",
     "Test not found": "테스트를 찾을 수 없습니다",
@@ -199,4 +200,5 @@ MESSAGES = {
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "알림은 새 버전이 적용되기 최소 14일 전에 발송됩니다. 더 늦은 날짜를 지정하세요.",
     "This version's notice was already sent.": "이 버전의 알림은 이미 발송되었습니다.",
     "Prices aren't available right now. Please try again in a minute.": "지금은 가격을 확인할 수 없습니다. 1분 후에 다시 시도해 주세요.",
+    "return_url must be an https address on the company's website domain; set the website in prepza first.": "return_url은 회사 웹사이트 도메인의 https 주소여야 합니다. 먼저 prepza에서 웹사이트를 설정하세요.",
 }

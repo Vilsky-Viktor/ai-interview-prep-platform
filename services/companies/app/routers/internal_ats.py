@@ -5,6 +5,8 @@ from fastapi import APIRouter, HTTPException, Query, status
 from prepza_common.pause import refuse_if_paused
 from prepza_common.user import User
 
+from app.constants.invites import RETURN_URL_OFF_DOMAIN
+from app.helpers.return_urls import on_domain
 from app.integrations.redis import get_redis
 from app.schemas.internal_ats import AccessOut, AtsInviteIn, AtsInviteOut, InterviewBriefOut
 from app.service_auth import ServiceCaller
@@ -64,8 +66,13 @@ async def invite(interview_id: UUID, body: AtsInviteIn, caller: ServiceCaller) -
     if sender is None or not can_edit(sender):
         raise HTTPException(status.HTTP_403_FORBIDDEN, "Only an owner or admin can invite")
 
+    if body.return_url and not on_domain(body.return_url, company.website_domain):
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, RETURN_URL_OFF_DOMAIN)
+
     user = User(uid=body.sender_id, email="", email_verified=True)
-    sent = await candidate_invites.invite(interview, company, user, body.email, body.name)
+    sent = await candidate_invites.invite(
+        interview, company, user, body.email, body.name, body.return_url, body.sign_in
+    )
     await outbox_service.flush_quietly()
 
     return AtsInviteOut(invite_id=sent.id)

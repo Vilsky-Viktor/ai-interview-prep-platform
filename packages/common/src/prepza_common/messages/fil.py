@@ -124,6 +124,7 @@ MESSAGES = {
     "Round not found": "Hindi nakita ang practice round",
     "Session not found": "Hindi nakita ang session",
     "Set not found": "Hindi nakita ang set ng mga tanong",
+    "Open the interview from the link the company gave you.": "Buksan ang interview mula sa link na ibinigay sa iyo ng kumpanya.",
     "Confirm your email first: open the link we sent you, then try again.": "Kumpirmahin muna ang email mo: buksan ang link na ipinadala namin, saka subukan ulit.",
     "Template not found": "Hindi nakita ang template",
     "Test not found": "Hindi nakita ang test",
@@ -199,4 +200,5 @@ MESSAGES = {
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "Ipinapadala ang abiso nang hindi bababa sa 14 na araw bago magkabisa ang bagong bersyon: bigyan ito ng mas huling petsa.",
     "This version's notice was already sent.": "Naipadala na ang abiso para sa bersyong ito.",
     "Prices aren't available right now. Please try again in a minute.": "Hindi available ang mga presyo ngayon. Pakisubukang muli pagkalipas ng isang minuto.",
+    "return_url must be an https address on the company's website domain; set the website in prepza first.": "Dapat na https address ang return_url sa domain ng website ng kumpanya; itakda muna ang website sa prepza.",
 }

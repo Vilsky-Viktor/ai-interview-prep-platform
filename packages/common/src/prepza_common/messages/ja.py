@@ -124,6 +124,7 @@ MESSAGES = {
     "Round not found": "練習が見つかりません",
     "Session not found": "セッションが見つかりません",
     "Set not found": "問題セットが見つかりません",
+    "Open the interview from the link the company gave you.": "企業から受け取ったリンクから面接を開いてください。",
     "Confirm your email first: open the link we sent you, then try again.": "まずメールアドレスを確認してください。お送りしたリンクを開いてから、もう一度お試しください。",
     "Template not found": "テンプレートが見つかりません",
     "Test not found": "テストが見つかりません",
@@ -199,4 +200,5 @@ MESSAGES = {
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "通知は新しいバージョンの適用日の少なくとも 14 日前に送られます。より後の日付にしてください。",
     "This version's notice was already sent.": "このバージョンの通知はすでに送信されています。",
     "Prices aren't available right now. Please try again in a minute.": "現在、料金を表示できません。1分後にもう一度お試しください。",
+    "return_url must be an https address on the company's website domain; set the website in prepza first.": "return_url は会社のウェブサイトのドメイン上の https アドレスである必要があります。先に prepza でウェブサイトを設定してください。",
 }

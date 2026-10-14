@@ -429,6 +429,7 @@
     "section": "Sekcja {number} z {count}",
     "missing": "Ta sesja nie istnieje.",
     "done": "Rozmowa zakończona. Powodzenia!",
+    "backTo": "Wróć do {company}",
     "title": "Rozmowa"
   },
   "generation": {

@@ -2,12 +2,13 @@ from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser, OptionalUser
 from prepza_common.pause import refuse_if_paused
 
-from app.constants.invites import EMAIL_NOT_VERIFIED, InviteStatus
+from app.constants.invites import EMAIL_NOT_VERIFIED, NOT_THE_GUEST, InviteStatus
 from app.helpers.candidates import candidate_seconds
 from app.helpers.interviews import attach_set, interview_title
 from app.helpers.logos import logo_path
+from app.integrations.firebase_tokens import guest_token, guest_uid
 from app.integrations.redis import get_redis
-from app.schemas.invites import InviteStartOut, InviteView
+from app.schemas.invites import GuestTokenOut, InviteStartOut, InviteView
 from app.services.access import refuse_if_suspended
 from app.services.candidate_start import start_sessions
 from app.storage import companies
@@ -42,12 +43,25 @@ async def get_invite(token: str, user: OptionalUser) -> InviteView:
         email=invite.email if user else None,
         status=invite.status,
         question_seconds=candidate_seconds(interview.question_seconds, invite.extra_time),
+        guest=invite.guest,
     )
+
+
+@router.post("/{token}/guest")
+async def sign_in_guest(token: str) -> GuestTokenOut:
+    """A sign-in for the candidate a company's own platform sent: the link is all they need."""
+    found = await invite_store.get_by_token(token)
+
+    if found is None or found[0].status == InviteStatus.EXPIRED or not found[0].guest:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Invite not found")
+
+    return GuestTokenOut(token=await guest_token(found[0].id))
 
 
 @router.post("/{token}/start")
 async def start_invite(token: str, user: CurrentUser) -> InviteStartOut:
-    """Only the invited, verified email can start; a forwarded link is useless to anyone else."""
+    """Only the invited, verified email can start, so a forwarded link is useless to anyone else;
+    a guest invite, only its guest (its link signs them in)."""
     found = await invite_store.get_by_token(token)
 
     if found is None or found[0].status == InviteStatus.EXPIRED:
@@ -55,10 +69,12 @@ async def start_invite(token: str, user: CurrentUser) -> InviteStartOut:
 
     invite, interview = found
 
-    if not user.email_verified:
+    if invite.guest:
+        if user.uid != guest_uid(invite.id):
+            raise HTTPException(status.HTTP_403_FORBIDDEN, NOT_THE_GUEST)
+    elif not user.email_verified:
         raise HTTPException(status.HTTP_403_FORBIDDEN, EMAIL_NOT_VERIFIED)
-
-    if user.email.lower() != invite.email:
+    elif user.email.lower() != invite.email:
         raise HTTPException(
             status.HTTP_403_FORBIDDEN, "This invite was sent to a different email address"
         )

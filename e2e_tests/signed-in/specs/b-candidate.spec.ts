@@ -94,6 +94,8 @@ test("candidate takes the interview from the invite link", async ({
     candidate.getByText("You have finished the interview. Good luck!"),
   ).toBeVisible();
   await shot(candidate, "done");
+  // A company's interview shows the company only: no prepza header or footer, finished too.
+  await expect(candidate.locator("header, footer")).toHaveCount(0);
 
   // The invite link now says the interview is finished, in an info card.
   await visit(candidate, invitePath);

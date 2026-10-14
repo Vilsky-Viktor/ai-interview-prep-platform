@@ -1,5 +1,5 @@
-// Whether a timed question's page is past its questions (finished, or never started: signed out,
-// not found, failed), so the site's header and footer come back (components/not-on-timed-page.tsx).
+// Whether a timed question's page never got to its questions (signed out, not found, failed), so
+// the site's header and footer come back (components/not-on-timed-page.tsx).
 let over = false
 const listeners = new Set<() => void>()
 

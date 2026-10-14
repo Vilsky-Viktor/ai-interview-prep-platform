@@ -429,6 +429,7 @@
     "section": "חלק {number} מתוך {count}",
     "missing": "המפגש הזה לא קיים.",
     "done": "הראיון הסתיים. בהצלחה!",
+    "backTo": "חזרה אל {company}",
     "title": "ראיון"
   },
   "generation": {

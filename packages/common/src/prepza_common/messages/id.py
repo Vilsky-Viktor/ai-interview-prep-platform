@@ -124,6 +124,7 @@ MESSAGES = {
     "Round not found": "Sesi latihan tidak ditemukan",
     "Session not found": "Sesi tidak ditemukan",
     "Set not found": "Kumpulan soal tidak ditemukan",
+    "Open the interview from the link the company gave you.": "Buka wawancara dari tautan yang diberikan perusahaan kepada Anda.",
     "Confirm your email first: open the link we sent you, then try again.": "Konfirmasi emailmu dulu: buka tautan yang kami kirim, lalu coba lagi.",
     "Template not found": "Templat tidak ditemukan",
     "Test not found": "Tes tidak ditemukan",
@@ -199,4 +200,5 @@ MESSAGES = {
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "Pemberitahuan dikirim paling lambat 14 hari sebelum versi baru berlaku: beri tanggal yang lebih lambat.",
     "This version's notice was already sent.": "Pemberitahuan versi ini sudah dikirim.",
     "Prices aren't available right now. Please try again in a minute.": "Harga belum tersedia saat ini. Silakan coba lagi dalam satu menit.",
+    "return_url must be an https address on the company's website domain; set the website in prepza first.": "return_url harus berupa alamat https di domain situs web perusahaan; atur situs webnya di prepza terlebih dahulu.",
 }

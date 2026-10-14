@@ -19,7 +19,7 @@ Timed knowledge interviews for hiring, made from a job description or a ready-ma
 - **Questions that fix themselves:** answers, votes and reports flag weak questions, and a verifier fixes them.
 - **ATS integrations:** candidates from Workable, Greenhouse, Teamtailor, Recruitee and Breezy HR are invited automatically, and results go back.
 - **Slack:** a company picks a channel and which of its notifications go there.
-- **Public API:** API keys to list interviews, invite candidates and read results, and a signed web hook when a candidate finishes; its reference is on the site.
+- **Public API:** API keys to list interviews, invite candidates (also straight from a company's own platform: no sign-in, no emails, and back to that platform at the end) and read results, and a signed web hook when a candidate finishes; its reference is on the site.
 - **AI apps over MCP:** Claude, ChatGPT and other AI apps connect at `/mcp` once the user allows them, and read and change what the user can, with the user's permissions.
 - **Pay per candidate:** credits that never expire, $1–3 per candidate, with no paid subscription (an optional automatic top-up saves the card with Paddle as a $0 subscription).
 - **Free practice:** people preparing for a role practise on the templates' revealed questions.

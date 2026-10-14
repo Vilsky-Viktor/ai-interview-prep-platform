@@ -829,6 +829,26 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/invites/{token}/guest": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Sign In Guest
+     * @description A sign-in for the candidate a company's own platform sent: the link is all they need.
+     */
+    post: operations["sign_in_guest_invites__token__guest_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/invites/{token}/start": {
     parameters: {
       query?: never
@@ -840,7 +860,8 @@ export interface paths {
     put?: never
     /**
      * Start Invite
-     * @description Only the invited, verified email can start; a forwarded link is useless to anyone else.
+     * @description Only the invited, verified email can start, so a forwarded link is useless to anyone else;
+     *     a guest invite, only its guest (its link signs them in).
      */
     post: operations["start_invite_invites__token__start_post"]
     delete?: never
@@ -1829,6 +1850,13 @@ export interface components {
       sender_id: string
       /** Name */
       name?: string | null
+      /** Return Url */
+      return_url?: string | null
+      /**
+       * Sign In
+       * @default true
+       */
+      sign_in: boolean
     }
     /** AtsInviteOut */
     AtsInviteOut: {
@@ -1894,6 +1922,8 @@ export interface components {
       company: string
       /** Logo Url */
       logo_url: string | null
+      /** Return Url */
+      return_url?: string | null
     }
     /**
      * BulkInviteIn
@@ -2281,6 +2311,11 @@ export interface components {
       /** Topics Ready */
       topics_ready?: number | null
     }
+    /** GuestTokenOut */
+    GuestTokenOut: {
+      /** Token */
+      token: string
+    }
     /** HTTPValidationError */
     HTTPValidationError: {
       /** Detail */
@@ -2509,6 +2544,11 @@ export interface components {
       status: string
       /** Question Seconds */
       question_seconds: number
+      /**
+       * Guest
+       * @default false
+       */
+      guest: boolean
     }
     /**
      * InvitedCompaniesOut
@@ -4819,6 +4859,37 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["InviteView"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  sign_in_guest_invites__token__guest_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        token: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["GuestTokenOut"]
         }
       }
       /** @description Validation Error */

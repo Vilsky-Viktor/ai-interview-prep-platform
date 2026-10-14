@@ -55,6 +55,8 @@ class InviteView(BaseModel):
     status: str
     # Shown before the candidate starts: the timer begins at start.
     question_seconds: int
+    # Sent by the company's own platform: the link signs the candidate in, no account needed.
+    guest: bool = False
 
 
 class SessionSummary(BaseModel):
@@ -155,3 +157,8 @@ class InvitedCompaniesOut(BaseModel):
     """The companies that invited an address, for the notifications service."""
 
     company_ids: list[str]
+
+
+class GuestTokenOut(BaseModel):
+    # A Firebase custom token for the invite's guest.
+    token: str

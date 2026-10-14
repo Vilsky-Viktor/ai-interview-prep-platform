@@ -27,10 +27,11 @@ Everything is under `https://<domain>/api/v1`, with `Authorization: Bearer pz_..
 | `GET /interviews/{id}` | One interview |
 | `GET /interviews/{id}/candidates` | Its candidates with progress, grade, pass, integrity signals, a link to their results and, until they finish, their invite link (`invite_url`, null once finished or expired), newest first |
 | `GET /interviews/{id}/candidates/{candidate_id}` | One candidate |
-| `POST /interviews/{id}/candidates` | Invites a candidate by email, with an optional name (or sends the invite again), as the key's maker; credits are set aside as in the app |
+| `POST /interviews/{id}/candidates` | Invites a candidate by email, with an optional name (or sends the invite again), as the key's maker; credits are set aside as in the app. Optional `return_url` and `sign_in` (below) |
 
 - Lists take `offset` and `limit` (up to 100).
-- Companies' refusals pass through as they are: `402` without credits, `409` while the interview's questions are being made, `429` over the email limits, `503` while invites are paused, `404` for another company's interview.
+- **Sending candidates from your own platform.** With `sign_in: false`, prepza sends no invitation or reminder emails. Your platform sends the candidate to the response's `invite_url`, and they take the interview without signing in to prepza: the link signs them in as a guest that belongs to that one invite (companies signs a Firebase custom token for the uid `guest-<invite id>`; library counts guests neither as sign-ups nor as users). Anyone with that link can take the interview, so it goes only to the candidate. With `return_url` (an https address on the company's website domain or a subdomain, as set in prepza; `422` otherwise), the finished page shows a "Back to {company}" button to that address, with `prepza_invite=<candidate id>` added. A company's interview pages (invitation, shared test link, questions, finished page) never show prepza's header or footer, whatever the invite.
+- Companies' refusals pass through as they are: `402` without credits, `409` while the interview's questions are being made, `422` for a `return_url` off the company's website, `429` over the email limits, `503` while invites are paused, `404` for another company's interview.
 
 ## Web hooks
 

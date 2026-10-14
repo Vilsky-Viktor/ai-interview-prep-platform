@@ -429,6 +429,7 @@
     "section": "Bagian {number} dari {count}",
     "missing": "Sesi ini tidak ada.",
     "done": "Kamu sudah menyelesaikan wawancara. Semoga sukses!",
+    "backTo": "Kembali ke {company}",
     "title": "Wawancara"
   },
   "generation": {

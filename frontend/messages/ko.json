@@ -429,6 +429,7 @@
     "section": "섹션 {number}/{count}",
     "missing": "이 세션은 존재하지 않습니다.",
     "done": "면접을 마쳤습니다. 좋은 결과 있기를 바랍니다!",
+    "backTo": "{company}(으)로 돌아가기",
     "title": "면접"
   },
   "generation": {

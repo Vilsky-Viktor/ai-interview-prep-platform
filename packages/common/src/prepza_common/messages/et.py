@@ -136,6 +136,7 @@ MESSAGES = {
     "Round not found": "Harjutusvooru ei leitud",
     "Session not found": "Seanssi ei leitud",
     "Set not found": "Küsimuste komplekti ei leitud",
+    "Open the interview from the link the company gave you.": "Ava intervjuu lingilt, mille ettevõte sulle andis.",
     "Confirm your email first: open the link we sent you, then try again.": "Kinnita esmalt oma e-posti aadress: ava link, mille sulle saatsime, ja proovi siis uuesti.",
     "Template not found": "Malli ei leitud",
     "Test not found": "Testi ei leitud",
@@ -211,4 +212,5 @@ MESSAGES = {
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "Teade läheb välja vähemalt 14 päeva enne uue versiooni kehtima hakkamist: anna sellele hilisem kuupäev.",
     "This version's notice was already sent.": "Selle versiooni teade on juba saadetud.",
     "Prices aren't available right now. Please try again in a minute.": "Hinnad ei ole praegu saadaval. Proovi minuti pärast uuesti.",
+    "return_url must be an https address on the company's website domain; set the website in prepza first.": "return_url peab olema https-aadress ettevõtte veebisaidi domeenil; määra veebisait esmalt prepzas.",
 }

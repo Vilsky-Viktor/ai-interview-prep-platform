@@ -31,6 +31,8 @@ async def upsert(
     hold_key: str | None = None,
     name: str | None = None,
     verified: bool = False,
+    return_url: str | None = None,
+    sign_in: bool = True,
 ) -> tuple[CandidateInvite, bool]:
     """Creates the invite (with `hold_key`, its credits' key, or a new one), or returns the existing one so it
     can be sent again, and saves the email's event with it. True when it revived an expired
@@ -68,10 +70,22 @@ async def upsert(
             invite.status = InviteStatus.INVITED
 
         invite.sent_at = datetime.now(UTC)
-        invite.reminded_at = None
+        # A caller that sends the candidate itself (no sign-in, the link is enough) gets no
+        # emails: no reminder either, marked as reminded.
+        invite.guest = not sign_in
+        invite.reminded_at = None if sign_in else datetime.now(UTC)
+
+        if return_url:
+            invite.return_url = return_url
+
         company_id = await session.scalar(
             select(Interview.company_id).where(Interview.id == interview_id)
         )
+
+        if not sign_in:
+            await session.commit()
+
+            return invite, revived
 
         outbox.add(
             session,

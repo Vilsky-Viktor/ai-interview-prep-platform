@@ -135,6 +135,6 @@ def test_the_candidate_and_members_see_the_brand_others_dont(client, company, mo
     sign_in("mallory")
     stranger = client.get(url)
 
-    assert candidate == {"company": "Acme", "logo_url": logo_path(found)}
+    assert candidate == {"company": "Acme", "logo_url": logo_path(found), "return_url": None}
     assert member.status_code == 200
     assert stranger.status_code == 404

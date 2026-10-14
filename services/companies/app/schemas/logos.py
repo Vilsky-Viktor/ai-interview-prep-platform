@@ -18,3 +18,6 @@ class BrandOut(BaseModel):
 
     company: str
     logo_url: str | None
+    # For the candidate invited through the API with a return_url: where "Continue" takes them
+    # once they've finished, with their invite's id.
+    return_url: str | None = None

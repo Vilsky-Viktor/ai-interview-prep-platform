@@ -124,6 +124,7 @@ MESSAGES = {
     "Round not found": "未找到练习",
     "Session not found": "未找到会话",
     "Set not found": "未找到题目集",
+    "Open the interview from the link the company gave you.": "请通过公司提供给你的链接打开面试。",
     "Confirm your email first: open the link we sent you, then try again.": "请先确认你的邮箱：打开我们发送的链接，然后重试。",
     "Template not found": "未找到模板",
     "Test not found": "未找到测试",
@@ -199,4 +200,5 @@ MESSAGES = {
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "通知须在新版本适用前至少 14 天发出：请为其设定更晚的日期。",
     "This version's notice was already sent.": "此版本的通知已发送。",
     "Prices aren't available right now. Please try again in a minute.": "目前无法获取价格，请一分钟后重试。",
+    "return_url must be an https address on the company's website domain; set the website in prepza first.": "return_url 必须是公司网站域名下的 https 地址；请先在 prepza 中设置网站。",
 }

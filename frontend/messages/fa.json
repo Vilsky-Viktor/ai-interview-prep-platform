@@ -429,6 +429,7 @@
     "section": "بخش {number} از {count}",
     "missing": "این جلسه وجود ندارد.",
     "done": "مصاحبه را به پایان رساندید. موفق باشید!",
+    "backTo": "بازگشت به {company}",
     "title": "مصاحبه"
   },
   "generation": {

@@ -429,6 +429,7 @@
     "section": "Seksyon {number} ng {count}",
     "missing": "Wala ang session na ito.",
     "done": "Natapos mo na ang interview. Good luck!",
+    "backTo": "Bumalik sa {company}",
     "title": "Interview"
   },
   "generation": {

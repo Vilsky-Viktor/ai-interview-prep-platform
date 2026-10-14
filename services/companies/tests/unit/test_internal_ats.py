@@ -5,6 +5,7 @@ import pytest
 from fastapi import HTTPException
 from prepza_common.service_auth import issue_token
 
+from app.constants.invites import RETURN_URL_OFF_DOMAIN
 from app.services import candidate_invites
 from app.services import outbox as outbox_service
 from app.storage import companies, interviews
@@ -41,7 +42,7 @@ def stored(monkeypatch):
     async def by_ids(ids):
         return [item for item in (READY, MAKING) if item.id in ids]
 
-    async def invite(interview, company, user, email, name=None):
+    async def invite(interview, company, user, email, name=None, return_url=None, sign_in=True):
         calls["invites"].append((interview.id, company.id, user.uid, email))
         calls.setdefault("names", []).append(name)
 
@@ -161,3 +162,21 @@ def test_the_ats_name_goes_with_the_invite(client, stored):
 
     assert response.status_code == 201
     assert stored["names"] == ["Cara Diaz"]
+
+
+def test_a_return_address_off_the_companys_website_invites_no_one(client, stored, monkeypatch):
+    monkeypatch.setattr(COMPANY, "website_domain", "acme.com", raising=False)
+    url = f"/internal/interviews/{READY.id}/invites"
+    body = {"email": "cara@example.com", "sender_id": "ann"}
+
+    refused = client.post(
+        url, json={**body, "return_url": "https://elsewhere.com/next"}, headers=HEADERS
+    )
+    allowed = client.post(
+        url, json={**body, "return_url": "https://jobs.acme.com/next"}, headers=HEADERS
+    )
+
+    assert refused.status_code == 422
+    assert refused.json()["detail"] == RETURN_URL_OFF_DOMAIN
+    assert allowed.status_code == 201
+    assert len(stored["invites"]) == 1

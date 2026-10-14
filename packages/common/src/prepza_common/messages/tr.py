@@ -124,6 +124,7 @@ MESSAGES = {
     "Round not found": "Deneme bulunamadı",
     "Session not found": "Oturum bulunamadı",
     "Set not found": "Soru seti bulunamadı",
+    "Open the interview from the link the company gave you.": "Mülakatı şirketin size verdiği bağlantıdan açın.",
     "Confirm your email first: open the link we sent you, then try again.": "Önce e-postanızı doğrulayın: size gönderdiğimiz bağlantıyı açın, sonra tekrar deneyin.",
     "Template not found": "Şablon bulunamadı",
     "Test not found": "Test bulunamadı",
@@ -199,4 +200,5 @@ MESSAGES = {
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "Bildirim, yeni sürüm geçerli olmadan en az 14 gün önce gönderilir: ona daha ileri bir tarih verin.",
     "This version's notice was already sent.": "Bu sürümün bildirimi zaten gönderildi.",
     "Prices aren't available right now. Please try again in a minute.": "Fiyatlar şu anda kullanılamıyor. Lütfen bir dakika sonra tekrar deneyin.",
+    "return_url must be an https address on the company's website domain; set the website in prepza first.": "return_url, şirketin web sitesi alan adında bir https adresi olmalıdır; önce web sitesini prepza'da ayarlayın.",
 }

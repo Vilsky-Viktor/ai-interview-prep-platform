@@ -163,7 +163,7 @@
      "sessions"
     ],
     "summary": "Add Signal",
-    "description": "The candidate's browser reports leaving the page or copying, saved with the question on\nscreen so the scorecard can show where it happened.",
+    "description": "The candidate's browser reports leaving the page or copying, saved with the question on\nscreen so the scorecard can show where it happened; and coming back, with how long the leave\nlasted, which decides whether it counts (helpers/integrity.py).",
     "operationId": "add_signal_sessions__session_id__signals_post",
     "security": [
      {
@@ -960,7 +960,7 @@
      "help"
     ],
     "summary": "Get Faq",
-    "description": "The FAQ in the page's language, with today's prices; public.",
+    "description": "The FAQ in the page's language, with today's prices; public. Without prices (billing not\nanswering) it's refused rather than built with blanks: the site keeps its last good page.",
     "operationId": "get_faq_help_faq_get",
     "responses": {
      "200": {
@@ -1951,7 +1951,8 @@
     "type": "string",
     "enum": [
      "tab_leave",
-     "copy"
+     "copy",
+     "tab_return"
     ],
     "title": "IntegritySignal",
     "description": "What the candidate's browser reports during an interview."
@@ -2854,6 +2855,19 @@
     "properties": {
      "kind": {
       "$ref": "#/components/schemas/IntegritySignal"
+     },
+     "seconds": {
+      "anyOf": [
+       {
+        "type": "number",
+        "maximum": 86400.0,
+        "minimum": 0.0
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Seconds"
      }
     },
     "type": "object",

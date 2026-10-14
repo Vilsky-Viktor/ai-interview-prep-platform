@@ -1207,7 +1207,7 @@
      "members"
     ],
     "summary": "Get Admin Invite",
-    "description": "Open to visitors, so they see what they're invited to before signing in; the invited\nemail only once signed in, so a visitor with the link doesn't learn it.",
+    "description": "Open to visitors, so they see what they're invited to before signing in; the invited\nemail only once signed in, so a visitor with the link doesn't learn it. A used link says so,\nand gives the company's id to the member who joined through it.",
     "operationId": "get_admin_invite_members_invites__token__get",
     "security": [
      {
@@ -2894,13 +2894,56 @@
     }
    }
   },
+  "/invites/{token}/guest": {
+   "post": {
+    "tags": [
+     "invites"
+    ],
+    "summary": "Sign In Guest",
+    "description": "A sign-in for the candidate a company's own platform sent: the link is all they need.",
+    "operationId": "sign_in_guest_invites__token__guest_post",
+    "parameters": [
+     {
+      "name": "token",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Token"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GuestTokenOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
   "/invites/{token}/start": {
    "post": {
     "tags": [
      "invites"
     ],
     "summary": "Start Invite",
-    "description": "Only the invited, verified email can start; a forwarded link is useless to anyone else.",
+    "description": "Only the invited, verified email can start, so a forwarded link is useless to anyone else;\na guest invite, only its guest (its link signs them in).",
     "operationId": "start_invite_invites__token__start_post",
     "security": [
      {
@@ -5441,6 +5484,18 @@
      "joined": {
       "type": "boolean",
       "title": "Joined"
+     },
+     "company_id": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "uuid"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Company Id"
      }
     },
     "type": "object",
@@ -5504,6 +5559,23 @@
        }
       ],
       "title": "Name"
+     },
+     "return_url": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 2048
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Return Url"
+     },
+     "sign_in": {
+      "type": "boolean",
+      "title": "Sign In",
+      "default": true
      }
     },
     "type": "object",
@@ -5684,6 +5756,17 @@
        }
       ],
       "title": "Logo Url"
+     },
+     "return_url": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Return Url"
      }
     },
     "type": "object",
@@ -6590,6 +6673,19 @@
     ],
     "title": "GenerationProgress"
    },
+   "GuestTokenOut": {
+    "properties": {
+     "token": {
+      "type": "string",
+      "title": "Token"
+     }
+    },
+    "type": "object",
+    "required": [
+     "token"
+    ],
+    "title": "GuestTokenOut"
+   },
    "HTTPValidationError": {
     "properties": {
      "detail": {
@@ -7191,6 +7287,11 @@
      "question_seconds": {
       "type": "integer",
       "title": "Question Seconds"
+     },
+     "guest": {
+      "type": "boolean",
+      "title": "Guest",
+      "default": false
      }
     },
     "type": "object",

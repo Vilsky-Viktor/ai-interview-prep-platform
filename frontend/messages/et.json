@@ -429,6 +429,7 @@
     "section": "Osa {number}/{count}",
     "missing": "Seda seanssi pole olemas.",
     "done": "Lõpetasid intervjuu. Edu!",
+    "backTo": "Tagasi: {company}",
     "title": "Intervjuu"
   },
   "generation": {

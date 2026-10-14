@@ -429,6 +429,7 @@
     "section": "セクション {number}/{count}",
     "missing": "このセッションは存在しません。",
     "done": "面接が終了しました。お疲れさまでした。",
+    "backTo": "{company} に戻る",
     "title": "面接"
   },
   "generation": {

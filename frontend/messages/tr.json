@@ -429,6 +429,7 @@
     "section": "Bölüm {number} / {count}",
     "missing": "Bu oturum yok.",
     "done": "Mülakatı bitirdiniz. Bol şans!",
+    "backTo": "{company} sayfasına dön",
     "title": "Mülakat"
   },
   "generation": {

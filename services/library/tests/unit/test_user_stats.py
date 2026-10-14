@@ -9,21 +9,23 @@ from prepza_common.user import User
 from app.main import app
 
 
-def account(year, month, day):
+def account(year, month, day, uid="user"):
     made = datetime(year, month, day, tzinfo=UTC).timestamp() * 1000
 
-    return SimpleNamespace(user_metadata=SimpleNamespace(creation_timestamp=made))
+    return SimpleNamespace(uid=uid, user_metadata=SimpleNamespace(creation_timestamp=made))
 
 
 @pytest.fixture
 def accounts(monkeypatch):
-    """Four accounts in Firebase; signed in as Sam, the only superadmin."""
+    """Four accounts in Firebase, and a company's guest candidate who has none of their own;
+    signed in as Sam, the only superadmin."""
     monkeypatch.setenv("SUPERADMIN_EMAILS", "sam@prepza.dev")
     made = [
         account(2025, 12, 31),
         account(2026, 10, 1),
         account(2026, 10, 31),
         account(2026, 11, 1),
+        account(2026, 10, 2, uid="guest-1"),
     ]
     listed = SimpleNamespace(iterate_all=lambda: iter(made))
     monkeypatch.setattr(firebase_auth, "list_users", lambda: listed)

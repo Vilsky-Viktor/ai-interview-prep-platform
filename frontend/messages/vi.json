@@ -429,6 +429,7 @@
     "section": "Phần {number}/{count}",
     "missing": "Phiên này không tồn tại.",
     "done": "Bạn đã hoàn thành buổi phỏng vấn. Chúc may mắn!",
+    "backTo": "Quay lại {company}",
     "title": "Phỏng vấn"
   },
   "generation": {

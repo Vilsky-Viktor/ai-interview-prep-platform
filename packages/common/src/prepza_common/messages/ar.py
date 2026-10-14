@@ -124,6 +124,7 @@ MESSAGES = {
     "Round not found": "لم يتم العثور على جولة التدريب",
     "Session not found": "لم يتم العثور على الجلسة",
     "Set not found": "لم يتم العثور على مجموعة الأسئلة",
+    "Open the interview from the link the company gave you.": "افتح المقابلة من الرابط الذي أعطتك إياه الشركة.",
     "Confirm your email first: open the link we sent you, then try again.": "أكّد بريدك الإلكتروني أولًا: افتح الرابط الذي أرسلناه إليك، ثم حاول مرة أخرى.",
     "Template not found": "لم يتم العثور على القالب",
     "Test not found": "لم يتم العثور على الاختبار",
@@ -199,4 +200,5 @@ MESSAGES = {
     "A notice goes out at least 14 days before the new version applies: give it a later date.": "يُرسل الإشعار قبل 14 يومًا على الأقل من سريان النسخة الجديدة: اختر لها تاريخًا لاحقًا.",
     "This version's notice was already sent.": "سبق إرسال إشعار هذه النسخة.",
     "Prices aren't available right now. Please try again in a minute.": "الأسعار غير متاحة الآن. يُرجى المحاولة مرة أخرى بعد دقيقة.",
+    "return_url must be an https address on the company's website domain; set the website in prepza first.": "يجب أن يكون return_url عنوان https على نطاق موقع الشركة؛ عيّن الموقع في prepza أولًا.",
 }

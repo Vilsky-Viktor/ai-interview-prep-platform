@@ -36,6 +36,7 @@ def stored_invite(monkeypatch):
         token="token-1",
         status=InviteStatus.INVITED,
         created_at=datetime.now(UTC),
+        guest=False,
     )
     interview = Interview(
         id=INTERVIEW_ID,

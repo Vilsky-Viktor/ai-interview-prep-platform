@@ -12,6 +12,7 @@ PASSED_ON = {
     status.HTTP_402_PAYMENT_REQUIRED,
     status.HTTP_404_NOT_FOUND,
     status.HTTP_409_CONFLICT,
+    status.HTTP_422_UNPROCESSABLE_CONTENT,
     status.HTTP_429_TOO_MANY_REQUESTS,
     status.HTTP_503_SERVICE_UNAVAILABLE,
 }
@@ -64,12 +65,25 @@ async def candidate(company_id: UUID, interview_id: UUID, invite_id: UUID) -> di
     return await _get(path)
 
 
-async def invite(interview_id: UUID, email: str, sender_id: str, name: str | None = None) -> UUID:
+async def invite(
+    interview_id: UUID,
+    email: str,
+    sender_id: str,
+    name: str | None = None,
+    return_url: str | None = None,
+    sign_in: bool = True,
+) -> UUID:
     """Invites the candidate as `sender_id` would, and returns the invite's id. Companies'
     refusals (PASSED_ON) raise an HTTPException with its status and reason."""
     response = await http.get_client().post(
         f"{settings.companies_url}/internal/interviews/{interview_id}/invites",
-        json={"email": email, "sender_id": sender_id, "name": name},
+        json={
+            "email": email,
+            "sender_id": sender_id,
+            "name": name,
+            "return_url": return_url,
+            "sign_in": sign_in,
+        },
         headers=_headers(),
     )
 

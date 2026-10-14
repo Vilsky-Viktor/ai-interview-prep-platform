@@ -429,6 +429,7 @@
     "section": "第 {number}/{count} 部分",
     "missing": "此会话不存在。",
     "done": "你已完成面试，祝你好运！",
+    "backTo": "返回 {company}",
     "title": "面试"
   },
   "generation": {
