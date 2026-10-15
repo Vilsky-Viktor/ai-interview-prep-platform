@@ -420,7 +420,7 @@
     "finishTitle": "Mülakatın tamamı bitirilsin mi?",
     "endsAll": "Bu, yalnızca bunu değil {count} bölümün tamamını bitirir.",
     "endsOne": "Bu, mülakatı bitirir.",
-    "unscored": "{count, plural, one {Cevaplanmayan # soru puanlanmayacak} other {Cevaplanmayan # soru puanlanmayacak}}.",
+    "unscored": "{count, plural, one {Cevaplanmayan # soru yanlış sayılacak} other {Cevaplanmayan # soru yanlış sayılacak}}.",
     "section": "Bölüm {number} / {count}",
     "missing": "Bu oturum yok.",
     "done": "Mülakatı bitirdiniz. Bol şans!",

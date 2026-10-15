@@ -420,7 +420,7 @@
     "finishTitle": "Lõpetada kogu intervjuu?",
     "endsAll": "See lõpetab kõik {count} osa, mitte ainult selle.",
     "endsOne": "See lõpetab intervjuu.",
-    "unscored": "{count, plural, one {# vastamata küsimust ei hinnata} other {# vastamata küsimust ei hinnata}}.",
+    "unscored": "{count, plural, one {# vastamata küsimus loetakse valeks} other {# vastamata küsimust loetakse valeks}}.",
     "section": "Osa {number}/{count}",
     "missing": "Seda seanssi pole olemas.",
     "done": "Lõpetasid intervjuu. Edu!",

@@ -420,7 +420,7 @@
     "finishTitle": "Concluir a entrevista inteira?",
     "endsAll": "Isso encerra todas as {count} seções, não só esta.",
     "endsOne": "Isso encerra a entrevista.",
-    "unscored": "{count, plural, one {# questão não respondida não será pontuada} other {# questões não respondidas não serão pontuadas}}.",
+    "unscored": "{count, plural, one {# questão não respondida será considerada errada} other {# questões não respondidas serão consideradas erradas}}.",
     "section": "Seção {number} de {count}",
     "missing": "Esta sessão não existe.",
     "done": "Você concluiu a entrevista. Boa sorte!",

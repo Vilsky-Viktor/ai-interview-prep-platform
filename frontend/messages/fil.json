@@ -420,7 +420,7 @@
     "finishTitle": "Tapusin ang buong interview?",
     "endsAll": "Matatapos nito ang lahat ng {count} seksyon, hindi lang ito.",
     "endsOne": "Matatapos nito ang interview.",
-    "unscored": "{count, plural, one {Hindi mabibigyan ng score ang # hindi nasagot na tanong} other {Hindi mabibigyan ng score ang # hindi nasagot na tanong}}.",
+    "unscored": "{count, plural, one {Ituturing na mali ang # hindi nasagot na tanong} other {Ituturing na mali ang # hindi nasagot na tanong}}.",
     "section": "Seksyon {number} ng {count}",
     "missing": "Wala ang session na ito.",
     "done": "Natapos mo na ang interview. Good luck!",

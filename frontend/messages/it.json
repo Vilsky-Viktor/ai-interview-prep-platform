@@ -420,7 +420,7 @@
     "finishTitle": "Terminare l'intero colloquio?",
     "endsAll": "In questo modo terminano tutte le {count} sezioni, non solo questa.",
     "endsOne": "In questo modo il colloquio termina.",
-    "unscored": "{count, plural, one {# domanda senza risposta non verrà valutata} other {# domande senza risposta non verranno valutate}}.",
+    "unscored": "{count, plural, one {# domanda senza risposta verrà considerata errata} other {# domande senza risposta verranno considerate errate}}.",
     "section": "Sezione {number} di {count}",
     "missing": "Questa sessione non esiste.",
     "done": "Hai terminato il colloquio. In bocca al lupo!",

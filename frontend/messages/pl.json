@@ -420,7 +420,7 @@
     "finishTitle": "Zakończyć całą rozmowę?",
     "endsAll": "To zakończy wszystkie sekcje ({count}), nie tylko tę.",
     "endsOne": "To zakończy rozmowę.",
-    "unscored": "{count, plural, one {# pytanie bez odpowiedzi nie zostanie ocenione} few {# pytania bez odpowiedzi nie zostaną ocenione} many {# pytań bez odpowiedzi nie zostanie ocenionych} other {# pytania bez odpowiedzi nie zostanie ocenione}}.",
+    "unscored": "{count, plural, one {# pytanie bez odpowiedzi zostanie uznane za błędne} few {# pytania bez odpowiedzi zostaną uznane za błędne} many {# pytań bez odpowiedzi zostanie uznanych za błędne} other {# pytania bez odpowiedzi zostanie uznane za błędne}}.",
     "section": "Sekcja {number} z {count}",
     "missing": "Ta sesja nie istnieje.",
     "done": "Rozmowa zakończona. Powodzenia!",

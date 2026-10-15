@@ -420,7 +420,7 @@
     "finishTitle": "면접 전체를 종료할까요?",
     "endsAll": "이 섹션뿐 아니라 {count}개 섹션이 모두 종료됩니다.",
     "endsOne": "면접이 종료됩니다.",
-    "unscored": "답하지 않은 {count, plural, other {#문제}}는 채점되지 않습니다.",
+    "unscored": "답하지 않은 {count, plural, other {#문제}}는 오답으로 처리됩니다.",
     "section": "섹션 {number}/{count}",
     "missing": "이 세션은 존재하지 않습니다.",
     "done": "면접을 마쳤습니다. 좋은 결과 있기를 바랍니다!",

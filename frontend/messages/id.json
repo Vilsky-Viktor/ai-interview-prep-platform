@@ -420,7 +420,7 @@
     "finishTitle": "Selesaikan seluruh wawancara?",
     "endsAll": "Ini menyelesaikan semua {count} bagian, bukan hanya yang ini.",
     "endsOne": "Ini menyelesaikan wawancara.",
-    "unscored": "{count, plural, other {# soal yang belum dijawab tidak akan dinilai}}.",
+    "unscored": "{count, plural, other {# soal yang belum dijawab akan dihitung salah}}.",
     "section": "Bagian {number} dari {count}",
     "missing": "Sesi ini tidak ada.",
     "done": "Kamu sudah menyelesaikan wawancara. Semoga sukses!",

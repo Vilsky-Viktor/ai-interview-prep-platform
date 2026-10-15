@@ -420,7 +420,7 @@
     "finishTitle": "Het hele interview afronden?",
     "endsAll": "Dit beëindigt alle {count} onderdelen, niet alleen dit onderdeel.",
     "endsOne": "Dit beëindigt het interview.",
-    "unscored": "{count, plural, one {# onbeantwoorde vraag wordt niet beoordeeld} other {# onbeantwoorde vragen worden niet beoordeeld}}.",
+    "unscored": "{count, plural, one {# onbeantwoorde vraag wordt als fout gerekend} other {# onbeantwoorde vragen worden als fout gerekend}}.",
     "section": "Onderdeel {number} van {count}",
     "missing": "Deze sessie bestaat niet.",
     "done": "Je hebt het interview afgerond. Succes!",

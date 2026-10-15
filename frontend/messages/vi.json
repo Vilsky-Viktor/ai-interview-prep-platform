@@ -420,7 +420,7 @@
     "finishTitle": "Kết thúc toàn bộ buổi phỏng vấn?",
     "endsAll": "Thao tác này kết thúc cả {count} phần, không chỉ phần này.",
     "endsOne": "Thao tác này kết thúc buổi phỏng vấn.",
-    "unscored": "{count, plural, other {# câu chưa trả lời sẽ không được chấm điểm}}.",
+    "unscored": "{count, plural, other {# câu chưa trả lời sẽ bị tính là sai}}.",
     "section": "Phần {number}/{count}",
     "missing": "Phiên này không tồn tại.",
     "done": "Bạn đã hoàn thành buổi phỏng vấn. Chúc may mắn!",

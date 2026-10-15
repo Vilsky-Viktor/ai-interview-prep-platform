@@ -420,7 +420,7 @@
     "finishTitle": "Terminer tout l'entretien ?",
     "endsAll": "Cela termine les {count} sections, pas seulement celle-ci.",
     "endsOne": "Cela termine l'entretien.",
-    "unscored": "{count, plural, one {# question sans réponse ne sera pas notée} other {# questions sans réponse ne seront pas notées}}.",
+    "unscored": "{count, plural, one {# question sans réponse sera comptée comme fausse} other {# questions sans réponse seront comptées comme fausses}}.",
     "section": "Section {number} sur {count}",
     "missing": "Cette session n'existe pas.",
     "done": "Vous avez terminé l'entretien. Bonne chance !",

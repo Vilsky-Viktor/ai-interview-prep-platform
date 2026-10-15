@@ -420,7 +420,7 @@
     "finishTitle": "结束整场面试？",
     "endsAll": "这将结束全部 {count} 个部分，而不仅是当前部分。",
     "endsOne": "这将结束面试。",
-    "unscored": "{count, plural, other {# 道未回答的题目}}将不计分。",
+    "unscored": "{count, plural, other {# 道未回答的题目}}将视为答错。",
     "section": "第 {number}/{count} 部分",
     "missing": "此会话不存在。",
     "done": "你已完成面试，祝你好运！",

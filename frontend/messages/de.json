@@ -420,7 +420,7 @@
     "finishTitle": "Das ganze Interview beenden?",
     "endsAll": "Damit enden alle {count} Abschnitte, nicht nur dieser.",
     "endsOne": "Damit endet das Interview.",
-    "unscored": "{count, plural, one {# unbeantwortete Frage wird nicht gewertet} other {# unbeantwortete Fragen werden nicht gewertet}}.",
+    "unscored": "{count, plural, one {# unbeantwortete Frage wird als falsch gewertet} other {# unbeantwortete Fragen werden als falsch gewertet}}.",
     "section": "Abschnitt {number} von {count}",
     "missing": "Diese Sitzung existiert nicht.",
     "done": "Du hast das Interview beendet. Viel Erfolg!",

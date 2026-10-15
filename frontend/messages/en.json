@@ -420,7 +420,7 @@
     "finishTitle": "Finish the whole interview?",
     "endsAll": "This ends all {count} sections, not only this one.",
     "endsOne": "This ends the interview.",
-    "unscored": "{count, plural, one {# unanswered question} other {# unanswered questions}} won't be scored.",
+    "unscored": "{count, plural, one {# unanswered question} other {# unanswered questions}} will count as wrong.",
     "section": "Section {number} of {count}",
     "missing": "This session doesn't exist.",
     "done": "You have finished the interview. Good luck!",

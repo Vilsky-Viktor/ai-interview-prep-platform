@@ -420,7 +420,7 @@
     "finishTitle": "¿Terminar toda la entrevista?",
     "endsAll": "Esto termina las {count} secciones, no solo esta.",
     "endsOne": "Esto termina la entrevista.",
-    "unscored": "{count, plural, one {# pregunta sin responder no se puntuará} other {# preguntas sin responder no se puntuarán}}.",
+    "unscored": "{count, plural, one {# pregunta sin responder contará como incorrecta} other {# preguntas sin responder contarán como incorrectas}}.",
     "section": "Sección {number} de {count}",
     "missing": "Esta sesión no existe.",
     "done": "Terminaste la entrevista. ¡Mucha suerte!",

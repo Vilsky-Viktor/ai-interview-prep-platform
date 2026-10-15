@@ -420,7 +420,7 @@
     "finishTitle": "面接全体を終了しますか？",
     "endsAll": "このセクションだけでなく、{count} セクションすべてが終了します。",
     "endsOne": "面接が終了します。",
-    "unscored": "未回答の {count, plural, other {# 問}}は採点されません。",
+    "unscored": "未回答の {count, plural, other {# 問}}は不正解として扱われます。",
     "section": "セクション {number}/{count}",
     "missing": "このセッションは存在しません。",
     "done": "面接が終了しました。お疲れさまでした。",
