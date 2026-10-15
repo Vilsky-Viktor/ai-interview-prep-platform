@@ -33,11 +33,12 @@ def configured(monkeypatch):
     """Slack set up on the server; what's posted and which apps are removed, without Slack."""
     found = {"posted": [], "revoked": [], "down": False}
 
-    async def post(webhook, text):
+    async def post(webhook, message):
         if found["down"]:
             raise httpx.ConnectTimeout("Slack is slow")
 
-        found["posted"].append((webhook, text))
+        # Its text as read: the zero-width space only keeps Slack from linking an email.
+        found["posted"].append((webhook, message["text"].replace("\u200b", "")))
 
     async def revoke(token):
         found["revoked"].append(token)

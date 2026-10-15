@@ -78,7 +78,9 @@ def test_a_shared_report_goes_through_resend_keyed_by_its_event(run, outside):
     assert request.headers["Idempotency-Key"] == "events/outbox-7"
     assert sent["to"] == ["boss@example.com"]
     assert sent["reply_to"] == "bob@example.com"
-    assert sent["attachments"] == [{"filename": "Report.pdf", "content": PDF}]
+    # Named in the email's language: its heading, then the candidate.
+    attachment = {"filename": "Candidate report – ann@example.com.pdf", "content": PDF}
+    assert sent["attachments"] == [attachment]
 
 
 def test_a_contact_message_goes_to_the_inbox_and_replies_to_the_visitor(run, outside):
