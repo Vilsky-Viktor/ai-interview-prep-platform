@@ -142,7 +142,8 @@ def test_a_subject_that_isnt_the_users_is_refused_before_the_write(calls):
 
     error, content = called("rename_company", {"company_id": COMPANY, "title": "New"})
 
-    assert error and content == {"error": SUBJECT_NOT_FOUND}
+    # In the user's language (German here).
+    assert error and content == {"error": translate(SUBJECT_NOT_FOUND, "de")}
     assert [call[0] for call in calls] == ["GET"]
 
 
