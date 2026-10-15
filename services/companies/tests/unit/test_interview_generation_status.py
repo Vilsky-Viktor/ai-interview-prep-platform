@@ -14,7 +14,7 @@ from app.helpers import interviews as helpers
 from app.main import app
 from app.models.companies import Company, Member
 from app.models.interviews import Interview
-from app.storage import candidates, companies, interviews
+from app.storage import candidates, companies, interview_generations, interviews
 
 COMPANY_ID = uuid.uuid4()
 
@@ -43,7 +43,7 @@ def stored(monkeypatch):
     async def set_generation_failed(interview_id, failed):
         saved.append((interview_id, failed))
 
-    monkeypatch.setattr(interviews, "set_generation_failed", set_generation_failed)
+    monkeypatch.setattr(interview_generations, "set_generation_failed", set_generation_failed)
 
     return saved
 

@@ -4,7 +4,14 @@ from datetime import UTC, datetime, timedelta
 from sqlalchemy import select
 
 from app.models.outbox import OutboxEvent
-from app.storage import companies, interviews, invite_expiry, invites
+from app.storage import (
+    companies,
+    interview_generations,
+    interviews,
+    invite_expiry,
+    invite_progress,
+    invites,
+)
 from app.storage.db import Session
 
 
@@ -23,10 +30,10 @@ def test_a_candidates_start_bounce_expiry_and_removal_are_told_once_each(run):
         bounced, _ = await invites.upsert(interview.id, "b@example.com", "B", "A", "en")
         expiring, _ = await invites.upsert(interview.id, "e@example.com", "B", "A", "en")
         # Twice each: a second start, bounce or expiry changes nothing and tells nobody again.
-        await invites.start(started.id, "u1")
-        await invites.start(started.id, "u1")
-        await invites.mark_undelivered(bounced.id, {"kind": "test"})
-        await invites.mark_undelivered(bounced.id, {"kind": "test"})
+        await invite_progress.start(started.id, "u1")
+        await invite_progress.start(started.id, "u1")
+        await invite_progress.mark_undelivered(bounced.id, {"kind": "test"})
+        await invite_progress.mark_undelivered(bounced.id, {"kind": "test"})
         later = datetime.now(UTC) + timedelta(seconds=1)
         await invite_expiry.mark_expired(expiring.id, later)
         await invite_expiry.mark_expired(expiring.id, later)
@@ -64,7 +71,9 @@ def test_an_interview_ready_says_whose_it_is(run):
         company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
         generation = uuid.uuid4()
         interview = await interviews.create(company.id, generation, "en")
-        await interviews.set_generated(generation, uuid.uuid4(), "Backend", {"kind": "x"}, "ev1")
+        await interview_generations.set_generated(
+            generation, uuid.uuid4(), "Backend", {"kind": "x"}, "ev1"
+        )
 
         return company, interview, await events_about("interview_id", str(interview.id))
 
@@ -81,12 +90,12 @@ def test_a_candidates_start_and_finish_times_are_kept_from_the_first_time(run):
         company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
         interview = await interviews.create(company.id, uuid.uuid4(), "en")
         invite, _ = await invites.upsert(interview.id, "t@example.com", "B", "A", "en")
-        await invites.start(invite.id, "u1")
+        await invite_progress.start(invite.id, "u1")
         first = await invites.get(invite.id)
         # Back through the link later: the first start stays.
-        await invites.start(invite.id, "u1")
-        await invites.finish(invite.id, 80, False, None)
-        await invites.finish(invite.id, 80, False, None)
+        await invite_progress.start(invite.id, "u1")
+        await invite_progress.finish(invite.id, 80, False, None)
+        await invite_progress.finish(invite.id, 80, False, None)
 
         return first.started_at, await invites.get(invite.id)
 

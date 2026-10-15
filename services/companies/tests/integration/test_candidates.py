@@ -8,6 +8,7 @@ from app.storage import (
     companies,
     interviews,
     invite_expiry,
+    invite_progress,
     invites,
     link_invites,
 )
@@ -37,7 +38,7 @@ def test_candidates_are_found_by_part_of_their_email_and_by_status(run):
             await invite(found, email)
 
         bob = await link_invites.for_link(found.id, "bob@example.com")
-        await invites.finish(bob.id, 50, False, None)
+        await invite_progress.finish(bob.id, 50, False, None)
 
         return (
             sorted(emails(await candidates.page(found.id, 0, 10, False, "ANN"))),
@@ -61,9 +62,9 @@ def test_candidates_sort_by_stored_grade_filter_by_result_and_page_in_sql(run):
         ada = await invite(found, "ada@example.com")
         ben = await invite(found, "ben@example.com")
         await invite(found, "cleo@example.com")
-        await invites.finish(ada.id, 90, True, None)
-        await invites.finish(ben.id, 60, False, None)
-        await invites.finish(dan.id, 75, False, None)
+        await invite_progress.finish(ada.id, 90, True, None)
+        await invite_progress.finish(ben.id, 60, False, None)
+        await invite_progress.finish(dan.id, 75, False, None)
 
         def listed(offset, limit, filter_by=None):
             return candidates.page(found.id, offset, limit, True, "", filter_by, 70)
@@ -93,10 +94,10 @@ def test_lookups_count_find_one_candidate_and_leave_out_deleted_ones(run):
         other = await interview()
         ann = await invite(found, "ann@example.com")
         gone = await invite(found, "gone@example.com")
-        await invites.start(gone.id, "gone-uid")
+        await invite_progress.start(gone.id, "gone-uid")
         await accounts.forget_candidate("gone-uid", "gone@example.com")
         before_finish = await candidates.any_finished(found.id)
-        await invites.finish(ann.id, None, False, None)
+        await invite_progress.finish(ann.id, None, False, None)
 
         return (
             await candidates.counts([found.id, other.id]),
@@ -125,7 +126,7 @@ def test_results_saved_from_the_list_keep_the_status_for_the_finish_event(run):
     async def scenario():
         found = await interview()
         ann = await invite(found, "ann@example.com")
-        await invites.start(ann.id, "ann-uid")
+        await invite_progress.start(ann.id, "ann-uid")
         await candidates.save_results({ann.id: (85, True)})
 
         return await invites.get(ann.id)
@@ -142,9 +143,13 @@ def test_an_expired_invite_started_through_the_link_is_in_process(run):
         ann = await invite(found, "ann@example.com")
         later = datetime.now(UTC) + timedelta(seconds=1)
         await invite_expiry.mark_expired(ann.id, later)
-        before = await invites.start(ann.id, "ann-uid")
+        before = await invite_progress.start(ann.id, "ann-uid")
 
-        return before, await invites.get(ann.id), await invites.start(uuid.uuid4(), "nobody")
+        return (
+            before,
+            await invites.get(ann.id),
+            await invite_progress.start(uuid.uuid4(), "nobody"),
+        )
 
     before, started, missing = run(scenario())
 

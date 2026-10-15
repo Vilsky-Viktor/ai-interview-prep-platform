@@ -10,7 +10,7 @@ from app.integrations import generation
 from app.main import app
 from app.models.companies import Company, Member
 from app.models.interviews import Interview
-from app.storage import companies, interviews
+from app.storage import companies, interview_generations, interviews
 
 COMPANY_ID = uuid.uuid4()
 INTERVIEW_ID = uuid.uuid4()
@@ -160,7 +160,7 @@ def test_only_managers_retry_and_a_retry_clears_the_failure(client, monkeypatch)
 
     for role, expected in (("viewer", 403), ("admin", 200)):
         setup(monkeypatch, role)
-        monkeypatch.setattr(interviews, "set_generation_failed", set_generation_failed)
+        monkeypatch.setattr(interview_generations, "set_generation_failed", set_generation_failed)
 
         assert client.post(url).status_code == expected
 

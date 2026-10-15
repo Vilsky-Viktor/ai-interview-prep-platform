@@ -17,7 +17,7 @@ from app.schemas.generations import GenerationOut
 from app.schemas.interviews import ReviewIn
 from app.service_auth import Via
 from app.services.interview_access import interview_for
-from app.storage import audit, interviews
+from app.storage import audit, interview_generations, interviews
 
 router = APIRouter(prefix="/interviews", tags=["interviews"])
 
@@ -82,7 +82,7 @@ async def retry_generation(interview_id: UUID, user: CurrentUser) -> dict:
         GENERATION_REFUSALS,
     ).json()
     # Generating again: its lists stop showing the failure.
-    await interviews.set_generation_failed(interview.id, False)
+    await interview_generations.set_generation_failed(interview.id, False)
 
     return retried
 

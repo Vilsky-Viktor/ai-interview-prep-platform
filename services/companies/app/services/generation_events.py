@@ -5,7 +5,7 @@ from prepza_common.analytics import track
 from app.constants.events import GENERATION_CANCELLED, GENERATION_COMPLETED, GENERATION_FAILED
 from app.helpers.notifications import interview_cancelled, interview_ready
 from app.services import outbox as outbox_service
-from app.storage import interviews
+from app.storage import interview_generations
 
 
 async def handle(event_type: str, data: dict, event_id: str) -> None:
@@ -16,14 +16,14 @@ async def handle(event_type: str, data: dict, event_id: str) -> None:
         return
 
     generation_id = uuid.UUID(data["generation_id"])
-    interview = await interviews.get_for_generation(generation_id)
+    interview = await interview_generations.get_for_generation(generation_id)
 
     # Already removed: nothing to store, nobody to tell.
     if interview is None:
         return
 
     if event_type == GENERATION_COMPLETED:
-        await interviews.set_generated(
+        await interview_generations.set_generated(
             generation_id,
             uuid.UUID(data["set_id"]),
             data["title"],
@@ -32,8 +32,10 @@ async def handle(event_type: str, data: dict, event_id: str) -> None:
         )
         await track("test_ready", company_id=interview.company_id, how="generated")
     elif event_type == GENERATION_FAILED:
-        await interviews.mark_failed(generation_id, event_id)
+        await interview_generations.mark_failed(generation_id, event_id)
     else:
-        await interviews.remove_for_generation(generation_id, interview_cancelled(interview))
+        await interview_generations.remove_for_generation(
+            generation_id, interview_cancelled(interview)
+        )
 
     await outbox_service.flush_quietly()

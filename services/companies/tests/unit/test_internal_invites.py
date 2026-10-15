@@ -6,7 +6,7 @@ from prepza_common.notifications import notification
 from prepza_common.service_auth import issue_token
 
 from app.services import outbox as outbox_service
-from app.storage import interviews, invites
+from app.storage import interviews, invite_progress, invites
 
 INVITE_ID = uuid.uuid4()
 URL = f"/internal/invites/{INVITE_ID}/undelivered"
@@ -32,7 +32,7 @@ def test_notifications_marks_an_invite_undelivered_and_the_company_is_told(clien
 
     monkeypatch.setattr(invites, "get", fake_get)
     monkeypatch.setattr(interviews, "get", fake_interview)
-    monkeypatch.setattr(invites, "mark_undelivered", fake_mark)
+    monkeypatch.setattr(invite_progress, "mark_undelivered", fake_mark)
     monkeypatch.setattr(outbox_service, "flush_quietly", no_flush)
     token = issue_token("notifications", "companies", "test-secret-that-is-at-least-32-bytes")
 

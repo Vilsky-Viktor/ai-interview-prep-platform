@@ -2,7 +2,7 @@ import uuid
 from datetime import UTC, datetime, timedelta
 
 from app.constants.invites import InviteStatus
-from app.storage import accounts, candidates, companies, interviews, invites
+from app.storage import accounts, candidates, companies, interviews, invite_progress, invites
 
 
 def test_a_deleted_candidate_keeps_a_row_without_their_email(run):
@@ -10,7 +10,7 @@ def test_a_deleted_candidate_keeps_a_row_without_their_email(run):
         company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
         interview = await interviews.create(company.id, uuid.uuid4(), "en")
         first, _ = await invites.upsert(interview.id, "gone@example.com", "Backend", "Acme", "en")
-        await invites.start(first.id, "gone")
+        await invite_progress.start(first.id, "gone")
         # A second address of the same person, never started: matched by email.
         await invites.upsert(interview.id, "Gone2@Example.com", "Backend", "Acme", "en")
         await accounts.forget_candidate("gone", "gone2@example.com")

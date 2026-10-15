@@ -10,7 +10,7 @@ from app.integrations import billing, generation, library, rounds
 from app.main import app
 from app.models.companies import Company, Member
 from app.models.interviews import Interview
-from app.storage import companies, interviews
+from app.storage import companies, interview_generations, interviews
 
 COMPANY_ID = uuid.uuid4()
 READY_SET_ID = uuid.uuid4()
@@ -76,7 +76,7 @@ def calls(monkeypatch):
     monkeypatch.setattr(interviews, "list_for_company", fake_list)
     monkeypatch.setattr(generation, "cancel", fake_cancel)
     monkeypatch.setattr(generation, "get", fake_get)
-    monkeypatch.setattr(interviews, "set_set_id", fake_set_id)
+    monkeypatch.setattr(interview_generations, "set_set_id", fake_set_id)
     monkeypatch.setattr(rounds, "delete_interview_data", fake_rounds)
     monkeypatch.setattr(library, "delete_interview", fake_library)
     monkeypatch.setattr(companies, "delete", fake_delete)

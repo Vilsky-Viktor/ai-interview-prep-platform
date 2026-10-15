@@ -6,7 +6,7 @@ from datetime import UTC, datetime, timedelta
 from sqlalchemy import update
 
 from app.models.interviews import Interview
-from app.storage import companies, email_reminders, interviews, invites
+from app.storage import companies, email_reminders, interview_generations, interviews, invites
 from app.storage.db import Session
 
 
@@ -27,12 +27,12 @@ def test_an_interview_is_ready_when_it_gets_its_questions_once(run):
         found = await company()
         generated = await interviews.create(found.id, uuid.uuid4(), "en")
         before = (await interviews.get(generated.id)).ready_at
-        await interviews.set_generated(
+        await interview_generations.set_generated(
             generated.generation_id, uuid.uuid4(), "Backend", {}, str(uuid.uuid4())
         )
         first = (await interviews.get(generated.id)).ready_at
         # Regenerated questions don't move it.
-        await interviews.set_generated(
+        await interview_generations.set_generated(
             generated.generation_id, uuid.uuid4(), "Backend", {}, str(uuid.uuid4())
         )
         second = (await interviews.get(generated.id)).ready_at

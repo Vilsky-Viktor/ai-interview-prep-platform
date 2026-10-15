@@ -9,7 +9,7 @@ from prepza_common.user import User
 
 from app.integrations import library, rounds
 from app.services import candidate_start
-from app.storage import invites
+from app.storage import invite_progress
 
 USER = User(uid="cand", email="cand@example.com", email_verified=True)
 
@@ -47,7 +47,7 @@ def steps(monkeypatch):
     monkeypatch.setattr(library, "get_content", content)
     monkeypatch.setattr(rounds, "create_sessions", create)
     monkeypatch.setattr(rounds, "delete_invite_sessions", erase)
-    monkeypatch.setattr(invites, "start", start)
+    monkeypatch.setattr(invite_progress, "start", start)
 
     return done
 
@@ -75,7 +75,7 @@ def test_an_invite_revoked_while_starting_loses_its_sessions(steps, monkeypatch)
     async def gone(invite_id, user_id, name=None):
         return None
 
-    monkeypatch.setattr(invites, "start", gone)
+    monkeypatch.setattr(invite_progress, "start", gone)
 
     with pytest.raises(HTTPException) as refused:
         asyncio.run(candidate_start.start_sessions(INVITE, INTERVIEW, USER))
@@ -96,7 +96,7 @@ def test_an_invite_that_expired_while_starting_has_its_credits_set_aside_again(s
     async def hold_again(invite, key):
         held.append(key)
 
-    monkeypatch.setattr(invites, "start", expired)
+    monkeypatch.setattr(invite_progress, "start", expired)
     monkeypatch.setattr(candidate_start, "hold_again", hold_again)
     asyncio.run(candidate_start.start_sessions(INVITE, INTERVIEW, USER))
 

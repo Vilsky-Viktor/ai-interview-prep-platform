@@ -11,6 +11,7 @@ from app.main import app
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
 from app.routers import invites as invites_router
+from app.storage import invite_progress
 from app.storage import invites as invite_store
 
 
@@ -65,7 +66,7 @@ def start(client, monkeypatch):
     monkeypatch.setattr(invite_store, "get_by_token", fake_get)
     monkeypatch.setattr(invites_router, "attach_set", same)
     monkeypatch.setattr(library, "get_content", fake_content)
-    monkeypatch.setattr(invite_store, "start", fake_start)
+    monkeypatch.setattr(invite_progress, "start", fake_start)
     monkeypatch.setattr(rounds, "create_sessions", fake_create)
 
     assert client.post("/invites/token-1/start").status_code == 200

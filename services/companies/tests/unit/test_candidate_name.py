@@ -18,7 +18,7 @@ from app.models.invites import CandidateInvite
 from app.routers import candidates as candidates_router
 from app.routers import invites as invites_router
 from app.services import candidate_start, interview_access
-from app.storage import candidates, companies, interviews
+from app.storage import candidates, companies, interviews, invite_progress
 from app.storage import invites as invite_store
 from tests.unit import fake_candidates
 from tests.unit.test_candidate_start import INTERVIEW, INVITE, steps  # noqa: F401 (fixture)
@@ -54,7 +54,7 @@ def test_starting_passes_the_name_from_the_verified_sign_in(steps, monkeypatch):
 
         return "invited"
 
-    monkeypatch.setattr(invite_store, "start", start)
+    monkeypatch.setattr(invite_progress, "start", start)
     user = User(uid="cand", email="cand@example.com", email_verified=True, name=" Maria ")
     asyncio.run(candidate_start.start_sessions(INVITE, INTERVIEW, user))
 

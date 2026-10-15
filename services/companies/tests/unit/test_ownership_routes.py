@@ -4,11 +4,11 @@ from app.constants.audit import AuditAction
 from app.constants.roles import ONLY_ADMINS_OWN, OWNS_TOO_MANY
 from app.routers import members as members_router
 from app.storage import companies, members
-from tests.unit import test_members
+from tests.unit import test_team_members
 from tests.unit.test_members import COMPANY_ID, sign_in
 
-# The team of test_members: Ann the owner, Bob a joined admin, Cid an invited one.
-team = test_members.team
+# The team of test_team_members: Ann the owner, Bob a joined admin, Cid an invited one.
+team = test_team_members.team
 
 
 @pytest.fixture

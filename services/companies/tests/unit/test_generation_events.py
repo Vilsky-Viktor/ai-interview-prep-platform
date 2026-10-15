@@ -7,7 +7,7 @@ import pytest
 from prepza_common.notifications import notification
 
 from app.services import outbox as outbox_service
-from app.storage import interviews
+from app.storage import interview_generations
 
 GENERATION_ID = uuid.uuid4()
 SET_ID = uuid.uuid4()
@@ -48,7 +48,7 @@ def interview(monkeypatch):
     async def no_flush():
         pass
 
-    monkeypatch.setattr(interviews, "get_for_generation", found)
+    monkeypatch.setattr(interview_generations, "get_for_generation", found)
     monkeypatch.setattr(outbox_service, "flush_quietly", no_flush)
 
 
@@ -58,7 +58,7 @@ def test_finished_generation_is_stored_on_its_interview_and_the_company_told(cli
     async def set_generated(generation_id, set_id, title, notice, event_id):
         stored.append((generation_id, set_id, title, notice))
 
-    monkeypatch.setattr(interviews, "set_generated", set_generated)
+    monkeypatch.setattr(interview_generations, "set_generated", set_generated)
 
     response = client.post("/internal/events", json=push("generation.completed", COMPLETED))
 
@@ -81,7 +81,7 @@ def test_a_cancelled_generation_removes_its_interview_and_tells_the_company(clie
     async def remove_for_generation(generation_id, notice):
         removed.append((generation_id, notice))
 
-    monkeypatch.setattr(interviews, "remove_for_generation", remove_for_generation)
+    monkeypatch.setattr(interview_generations, "remove_for_generation", remove_for_generation)
     event = push("generation.cancelled", {"generation_id": str(GENERATION_ID)})
 
     company = INTERVIEW.company_id
@@ -98,7 +98,7 @@ def test_a_failed_generation_marks_its_interview_once_per_event(client, monkeypa
     async def mark_failed(generation_id, event_id):
         marked.append((generation_id, event_id))
 
-    monkeypatch.setattr(interviews, "mark_failed", mark_failed)
+    monkeypatch.setattr(interview_generations, "mark_failed", mark_failed)
     event = push("generation.failed", {"generation_id": str(GENERATION_ID)})
 
     assert client.post("/internal/events", json=event).status_code == 204
@@ -109,7 +109,7 @@ def test_an_interview_already_removed_is_left_alone(client, monkeypatch):
     async def gone(generation_id):
         return None
 
-    monkeypatch.setattr(interviews, "get_for_generation", gone)
+    monkeypatch.setattr(interview_generations, "get_for_generation", gone)
 
     response = client.post("/internal/events", json=push("generation.completed", COMPLETED))
 
@@ -124,7 +124,7 @@ def test_a_failure_answers_with_an_error_so_pubsub_retries(client, monkeypatch):
     async def database_down(*args):
         raise ConnectionError("database is down")
 
-    monkeypatch.setattr(interviews, "set_generated", database_down)
+    monkeypatch.setattr(interview_generations, "set_generated", database_down)
 
     with pytest.raises(ConnectionError):
         client.post("/internal/events", json=push("generation.completed", COMPLETED))

@@ -5,7 +5,7 @@ from sqlalchemy import update
 
 from app.constants.verification import VerificationStatus
 from app.models.companies import Company
-from app.storage import companies, interviews, invites, link_invites, stats
+from app.storage import companies, interviews, invite_progress, link_invites, stats
 from app.storage.db import Session
 
 
@@ -25,7 +25,7 @@ def test_counts_only_what_the_month_added(run):
         company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
         found = await interviews.create(company.id, uuid.uuid4(), "en")
         finished = await link_invites.for_link(found.id, "done@example.com")
-        await invites.finish(finished.id, 80, False, None)
+        await invite_progress.finish(finished.id, 80, False, None)
         await link_invites.for_link(found.id, "waiting@example.com")
         await set_company(
             company.id,

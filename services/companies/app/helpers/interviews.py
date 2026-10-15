@@ -12,7 +12,7 @@ from app.integrations import generation as generation_api
 from app.integrations import library
 from app.models.interviews import Interview
 from app.schemas.interviews import InterviewOut, TopicOut
-from app.storage import interviews
+from app.storage import interview_generations, interviews
 
 logger = logging.getLogger(__name__)
 
@@ -28,7 +28,7 @@ async def attach_set(interview: Interview) -> Interview:
     set_id = row.get("preparation_id") if row else None
 
     if set_id:
-        await interviews.set_set_id(interview.id, set_id)
+        await interview_generations.set_set_id(interview.id, set_id)
         interview.set_id = set_id
         interview.generation_failed = False
 
@@ -37,7 +37,7 @@ async def attach_set(interview: Interview) -> Interview:
     failed = bool(row) and row.get("status") == GENERATION_FAILED_STATUS
 
     if failed != interview.generation_failed:
-        await interviews.set_generation_failed(interview.id, failed)
+        await interview_generations.set_generation_failed(interview.id, failed)
         interview.generation_failed = failed
 
     return interview

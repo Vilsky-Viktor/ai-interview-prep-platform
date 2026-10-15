@@ -7,7 +7,8 @@ from app.constants.roles import MAX_PENDING_INVITES, MEMBER_INVITES_PER_UNPAID_D
 from app.integrations import billing
 from app.models.companies import Member
 from app.routers import members as members_router
-from tests.unit.test_members import COMPANY_ID, sign_in, team  # noqa: F401
+from tests.unit.test_members import COMPANY_ID, sign_in
+from tests.unit.test_team_members import team  # noqa: F401
 
 URL = f"/members?company_id={COMPANY_ID}"
 

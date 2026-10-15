@@ -7,7 +7,7 @@ from app.helpers import notifications
 from app.schemas.invites import InvitedCompaniesOut
 from app.service_auth import ServiceCaller
 from app.services import outbox as outbox_service
-from app.storage import interviews, invites
+from app.storage import interviews, invite_progress, invites
 
 router = APIRouter(prefix="/internal", tags=["internal"])
 
@@ -22,7 +22,7 @@ async def invite_undelivered(invite_id: UUID, caller: ServiceCaller) -> None:
         return
 
     interview = await interviews.get(invite.interview_id)
-    await invites.mark_undelivered(
+    await invite_progress.mark_undelivered(
         invite_id,
         notifications.invite_undelivered(interview, str(invite_id), invite.email, invite.name),
     )

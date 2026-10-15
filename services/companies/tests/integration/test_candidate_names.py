@@ -1,7 +1,7 @@
 import uuid
 
 from app.helpers.candidate_lists import read_list
-from app.storage import accounts, candidates, companies, interviews, invites
+from app.storage import accounts, candidates, companies, interviews, invite_progress, invites
 
 
 async def invited(email: str):
@@ -16,10 +16,10 @@ def test_the_sign_in_fills_a_candidates_name_once_and_never_overwrites_it(run):
     async def scenario():
         interview, invite = await invited("maria@example.com")
         before = await candidates.get(interview.id, invite.id)
-        await invites.start(invite.id, "maria-uid", "Maria Kowalska")
+        await invite_progress.start(invite.id, "maria-uid", "Maria Kowalska")
         filled = await candidates.get(interview.id, invite.id)
         # Starting again, with another name in the sign-in, keeps the first.
-        await invites.start(invite.id, "maria-uid", "mk")
+        await invite_progress.start(invite.id, "maria-uid", "mk")
         kept = await candidates.get(interview.id, invite.id)
 
         return before.name, filled.name, kept.name
@@ -30,7 +30,7 @@ def test_the_sign_in_fills_a_candidates_name_once_and_never_overwrites_it(run):
 def test_a_sign_in_without_a_name_leaves_it_unknown(run):
     async def scenario():
         interview, invite = await invited("noname@example.com")
-        await invites.start(invite.id, "noname-uid", None)
+        await invite_progress.start(invite.id, "noname-uid", None)
 
         return (await candidates.get(interview.id, invite.id)).name
 
@@ -40,9 +40,9 @@ def test_a_sign_in_without_a_name_leaves_it_unknown(run):
 def test_a_name_an_owner_set_survives_the_sign_in_and_blank_makes_it_unknown(run):
     async def scenario():
         interview, invite = await invited("nick@example.com")
-        await invites.start(invite.id, "nick-uid", "nick99")
+        await invite_progress.start(invite.id, "nick-uid", "nick99")
         await candidates.set_name(invite.id, "Nicholas Brown")
-        await invites.start(invite.id, "nick-uid", "nick99")
+        await invite_progress.start(invite.id, "nick-uid", "nick99")
         corrected = (await candidates.get(interview.id, invite.id)).name
         await candidates.set_name(invite.id, None)
         cleared = (await candidates.get(interview.id, invite.id)).name
@@ -55,7 +55,7 @@ def test_a_name_an_owner_set_survives_the_sign_in_and_blank_makes_it_unknown(run
 def test_a_deleted_account_takes_its_name_with_it_and_an_export_holds_it(run):
     async def scenario():
         interview, invite = await invited("gone-name@example.com")
-        await invites.start(invite.id, "gone-name-uid", "Gone Person")
+        await invite_progress.start(invite.id, "gone-name-uid", "Gone Person")
         exported = await accounts.export("gone-name-uid", "gone-name@example.com")
         await accounts.forget_candidate("gone-name-uid", "gone-name@example.com")
 
@@ -75,7 +75,7 @@ def test_an_inviters_name_fills_an_unknown_name_and_a_known_one_stays(run):
         # Sent again (a redelivered ATS candidate, a list pasted again): an edit stays.
         await candidates.set_name(invite.id, "Xi Jun")
         await invites.upsert(interview.id, "x@example.com", "B", "A", "en", name="Xi")
-        await invites.start(invite.id, "x-uid", "Signed In Name")
+        await invite_progress.start(invite.id, "x-uid", "Signed In Name")
 
         return (await candidates.get(interview.id, invite.id)).name
 

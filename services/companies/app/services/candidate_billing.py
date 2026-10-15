@@ -10,7 +10,7 @@ from app.helpers.candidates import finished_result, stored_results
 from app.helpers.notifications import candidate_finished
 from app.integrations import billing, rounds
 from app.services import outbox as outbox_service
-from app.storage import interviews, invite_expiry, invites
+from app.storage import interviews, invite_expiry, invite_progress, invites
 
 logger = logging.getLogger(__name__)
 
@@ -50,7 +50,7 @@ async def handle(event_type: str, data: dict, event_id: str) -> None:
         notice = candidate_finished(interview, invite.id, invite.email, grade, invite.name)
 
     result = finished_result(interview, invite.id, grade, flagged)
-    await invites.finish(invite.id, grade, flagged, notice, event_id, result)
+    await invite_progress.finish(invite.id, grade, flagged, notice, event_id, result)
     await outbox_service.flush_quietly()
     await track(
         "interview_finished",

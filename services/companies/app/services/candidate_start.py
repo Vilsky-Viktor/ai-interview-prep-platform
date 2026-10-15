@@ -10,7 +10,7 @@ from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
 from app.schemas.invites import InviteStartOut, SessionSummary
 from app.services.candidate_billing import hold_again
-from app.storage import invites
+from app.storage import invite_progress
 
 
 async def start_sessions(
@@ -40,7 +40,7 @@ async def start_sessions(
         }
     )
 
-    before = await invites.start(invite.id, user.uid, clean_name(user.name))
+    before = await invite_progress.start(invite.id, user.uid, clean_name(user.name))
 
     # Revoked meanwhile: its sessions go too.
     if before is None:

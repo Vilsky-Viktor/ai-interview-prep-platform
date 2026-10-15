@@ -1,7 +1,7 @@
 import uuid
 
 from app.schemas.interviews import InterviewSettings
-from app.storage import companies, interviews, invites, link_invites, pass_rates
+from app.storage import companies, interviews, invite_progress, link_invites, pass_rates
 
 
 async def interview(grades, pass_mark=60, unfinished=0):
@@ -12,7 +12,7 @@ async def interview(grades, pass_mark=60, unfinished=0):
 
     for index, grade in enumerate(grades):
         invite = await link_invites.for_link(found.id, f"c{index}@example.com")
-        await invites.finish(invite.id, grade, False, None)
+        await invite_progress.finish(invite.id, grade, False, None)
 
     for index in range(unfinished):
         await link_invites.for_link(found.id, f"u{index}@example.com")

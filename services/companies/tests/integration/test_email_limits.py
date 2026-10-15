@@ -46,7 +46,7 @@ def test_invites_refused_for_credits_use_up_no_email_limits(run, monkeypatch):
 
     from app.integrations import billing
     from app.services import candidate_invites
-    from app.storage import companies, interviews
+    from app.storage import companies, interview_generations, interviews
 
     credits = {"left": False}
 
@@ -63,7 +63,7 @@ def test_invites_refused_for_credits_use_up_no_email_limits(run, monkeypatch):
         monkeypatch.setattr(candidate_invites, "get_redis", lambda: redis)
         company = await companies.create(f"Acme {uuid.uuid4()}", sender.uid, "o@example.com")
         created = await interviews.create(company.id, uuid.uuid4(), "en")
-        await interviews.set_set_id(created.id, uuid.uuid4())
+        await interview_generations.set_set_id(created.id, uuid.uuid4())
         # Titled, so nothing asks library for it.
         await interviews.set_title(created.id, "Backend interview")
         interview = await interviews.get(created.id)

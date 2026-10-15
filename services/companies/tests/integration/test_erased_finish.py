@@ -5,7 +5,7 @@ from sqlalchemy import func, select, update
 from app.constants.invites import InviteStatus
 from app.models.invites import CandidateInvite
 from app.models.outbox import OutboxEvent
-from app.storage import invites
+from app.storage import invite_progress, invites
 from app.storage.db import Session
 from tests.integration.test_invites import interview
 
@@ -24,7 +24,7 @@ def test_a_candidate_erased_while_finishing_stays_erased_without_events(run):
             await session.commit()
 
         notice = {"kind": "candidate_finished", "invite": str(invite.id)}
-        await invites.finish(
+        await invite_progress.finish(
             invite.id, 70, False, notice, str(uuid.uuid4()), {"invite": str(invite.id)}
         )
 
