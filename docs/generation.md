@@ -23,6 +23,7 @@ job text -> extract requirements and level -> draft topics          (both cached
 - The pipeline is a LangGraph graph, run by the generation worker (`app/worker_main.py`) as Cloud Tasks jobs.
 - The graph is checkpointed in Postgres, so a failed run can be retried from where it stopped.
 - Companies hears how an interview's generation ends through events: `generation.completed` stores its questions and title, `generation.failed` (a failed run, or one the sweeper finds stuck) marks it as failed until a retry, and `generation.cancelled` removes it. Interview lists read only what these stored and never ask generation; an interview's own page asks once, in case an event hasn't come yet, and shows what companies knows when generation can't answer.
+- The title the model gives is cut to 70 characters (`MAX_TITLE_LENGTH`), what editing a title allows, so saving the questions never fails on it.
 - A generation can be cancelled at any step.
 - Every LLM call of the pipeline shares one rate limit across the API and all workers (`LLM_REQUESTS_PER_SECOND`).
 - An LLM call silent for 5 minutes has hung (`LLM_TIMEOUT_SECONDS`) and is tried again at most twice (`LLM_MAX_RETRIES`): quick failures recover, and a stuck call gives up well within a run's 25 minutes.

@@ -1,6 +1,8 @@
 import asyncio
 from types import SimpleNamespace
 
+from prepza_common.constants import MAX_TITLE_LENGTH
+
 from app.integrations import llm
 from app.services.nodes import extraction
 from app.storage import draft_cache
@@ -39,3 +41,32 @@ def test_a_template_never_names_the_company_a_test_may(monkeypatch):
     assert "Never the company's name" in template
     assert "at Acme" not in template
     assert "Senior Accountant at Acme" in test
+
+
+def test_a_title_too_long_is_cut_to_what_editing_it_allows(monkeypatch):
+    """Fresh from the model or from the cache: saving the paid-for questions never fails on it."""
+    long = "Senior Accountant " * 10
+
+    class FakeLLM:
+        def with_structured_output(self, schema):
+            return self
+
+        async def ainvoke(self, messages):
+            return SimpleNamespace(title=long, requirements=["IFRS"], level="medium")
+
+    async def no_cache(*args):
+        return None
+
+    async def cached(*args):
+        return {"title": long, "requirements": ["IFRS"], "level": "medium"}
+
+    monkeypatch.setattr(llm, "get_generation_llm", lambda *_: FakeLLM())
+    monkeypatch.setattr(draft_cache, "put", no_cache)
+    state = {"input_text": "Acme hires an accountant.", "language": "en"}
+
+    for found in (no_cache, cached):
+        monkeypatch.setattr(draft_cache, "get", found)
+        title = asyncio.run(extraction.extract_info(state))["title"]
+
+        assert len(title) <= MAX_TITLE_LENGTH
+        assert title.startswith("Senior Accountant")

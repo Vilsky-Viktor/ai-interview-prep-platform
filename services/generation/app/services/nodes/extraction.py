@@ -1,4 +1,5 @@
 from langchain_core.messages import HumanMessage, SystemMessage
+from prepza_common.constants import MAX_TITLE_LENGTH
 
 from app.helpers.prompts import language_name
 from app.integrations import llm
@@ -21,23 +22,22 @@ async def extract_info(state: State) -> dict:
     )
     source = system + state["input_text"]
     model = llm.get_generation_llm()
-    cached = await draft_cache.get("extraction", source, model)
+    extracted = await draft_cache.get("extraction", source, model)
 
-    if cached is not None:
-        return cached
+    if extracted is None:
+        result: JobExtraction = await model.with_structured_output(JobExtraction).ainvoke(
+            [
+                SystemMessage(content=system),
+                HumanMessage(content=state["input_text"]),
+            ]
+        )
+        extracted = {
+            "title": result.title,
+            "requirements": result.requirements,
+            "level": result.level,
+        }
+        await draft_cache.put("extraction", source, extracted, model)
 
-    result: JobExtraction = await model.with_structured_output(JobExtraction).ainvoke(
-        [
-            SystemMessage(content=system),
-            HumanMessage(content=state["input_text"]),
-        ]
-    )
-
-    extracted = {
-        "title": result.title,
-        "requirements": result.requirements,
-        "level": result.level,
-    }
-    await draft_cache.put("extraction", source, extracted, model)
-
-    return extracted
+    # A title the model made too long (now or in the cache) is cut to what editing it allows,
+    # so saving the paid-for questions never fails on it.
+    return {**extracted, "title": extracted["title"][:MAX_TITLE_LENGTH].strip()}
