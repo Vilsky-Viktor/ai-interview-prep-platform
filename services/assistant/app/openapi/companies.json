@@ -3063,7 +3063,7 @@
      "links"
     ],
     "summary": "Set Link",
-    "description": "Owners and admins turn the link on (a new code) or off (it stops working at once).",
+    "description": "Owners and admins turn the link on (a new code) or off (it stops working at once). On\nonly once it has its questions, as for an invite: visitors could otherwise hold credits for\nan interview they can't start.",
     "operationId": "set_link_interviews__interview_id__link_put",
     "security": [
      {
@@ -9196,12 +9196,17 @@
       "type": "string",
       "format": "date-time",
       "title": "Rewarded At"
+     },
+     "credits": {
+      "type": "integer",
+      "title": "Credits"
      }
     },
     "type": "object",
     "required": [
      "name",
-     "rewarded_at"
+     "rewarded_at",
+     "credits"
     ],
     "title": "ReferralRewardOut",
     "description": "A company that came through the link and topped up; no name once it's deleted."

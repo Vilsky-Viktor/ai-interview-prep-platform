@@ -91,7 +91,7 @@ export default async function ReferralsPage({
                     </span>
                   </span>
                   <span className="shrink-0 text-primary tabular-nums">
-                    {referralText("credits", { count: referral.reward })}
+                    {referralText("credits", { count: reward.credits })}
                   </span>
                 </li>
               ))}

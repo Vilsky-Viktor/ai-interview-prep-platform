@@ -93,6 +93,8 @@ class ReferralRewardOut(BaseModel):
 
     company_id: str
     rewarded_at: datetime
+    # The credits it gave the referrer then (0 over the yearly limit).
+    credits: int
 
 
 class ReferralOut(BaseModel):

@@ -15,8 +15,8 @@ async def referral_out(owner_type: str, owner_id: str) -> ReferralOut:
         reward=REFERRAL_REWARD,
         rewarded=await referrals.rewarded_count(owner_type, owner_id),
         rewards=[
-            ReferralRewardOut(company_id=row.owner_id, rewarded_at=row.rewarded_at)
-            for row in await referrals.rewards(owner_type, owner_id, MAX_PAGE_SIZE)
+            ReferralRewardOut(company_id=row.owner_id, rewarded_at=row.rewarded_at, credits=paid)
+            for row, paid in await referrals.rewards(owner_type, owner_id, MAX_PAGE_SIZE)
         ],
     )
 

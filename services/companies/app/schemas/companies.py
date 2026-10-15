@@ -106,6 +106,8 @@ class ReferralRewardOut(BaseModel):
 
     name: str | None
     rewarded_at: datetime
+    # The credits it gave this company then.
+    credits: int
 
 
 class ReferralOut(BaseModel):

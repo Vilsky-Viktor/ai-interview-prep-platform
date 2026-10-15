@@ -16,8 +16,9 @@ export interface paths {
     put?: never
     /**
      * Create Company
-     * @description A person's first company, which gets the welcome credits, needs them to show they're a
-     *     person, on the site; through the assistant or an AI app (no browser) it can't be asked.
+     * @description A company needs its owner's verified email, as the welcome credits come once per email. A
+     *     person's first company, which gets them, needs them to show they're a person, on the site;
+     *     through the assistant or an AI app (no browser) it can't be asked.
      */
     post: operations["create_company_companies_post"]
     delete?: never
@@ -907,7 +908,9 @@ export interface paths {
     get?: never
     /**
      * Set Link
-     * @description Owners and admins turn the link on (a new code) or off (it stops working at once).
+     * @description Owners and admins turn the link on (a new code) or off (it stops working at once). On
+     *     only once it has its questions, as for an invite: visitors could otherwise hold credits for
+     *     an interview they can't start.
      */
     put: operations["set_link_interviews__interview_id__link_put"]
     post?: never
@@ -3196,6 +3199,8 @@ export interface components {
        * Format: date-time
        */
       rewarded_at: string
+      /** Credits */
+      credits: number
     }
     /**
      * ReportEmailIn

@@ -65,7 +65,7 @@ On the top-up page, under each balance, "Set up automatic top-up" opens the choi
 
 ## Referrals
 
-- A company's referral link is in its referrals tab.
+- A company's referral link is in its referrals tab, above the companies that came through it and topped up, each with the credits it gave the company then (none past the yearly limit below), not today's reward.
 - Both companies get 1,000 credits (2 candidates) once the new one first tops up, any amount.
 - The link asks the visitor first (a toast with **Keep** and **No thanks**), as the cookie serves the referral and not the page they asked for; kept, its code goes in a cookie (`prepza_ref`, 30 days), which companies reads when the visitor creates a company, on the site or through the in-app assistant: confirming the assistant's action passes the cookie on (only a code that reads right). AI apps connected over MCP have no browser cookie, so a company they create records no referral.
 - A referrer earns the reward for at most 25 referrals in any 365 days; past that, only the new company gets its 1,000 credits.

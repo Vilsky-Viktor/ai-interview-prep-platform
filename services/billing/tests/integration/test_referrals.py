@@ -42,7 +42,7 @@ def test_a_referral_pays_both_companies_once_on_a_big_enough_top_up(run):
             await available(COMPANY, acme),
             await available(COMPANY, newco),
             await referrals.rewarded_count(COMPANY, acme),
-            [row.owner_id for row in await referrals.rewards(COMPANY, acme, 10)],
+            [(row.owner_id, paid) for row, paid in await referrals.rewards(COMPANY, acme, 10)],
         )
 
     same, recorded, acme_credits, newco_credits, count, rewarded = run(scenario())
@@ -50,7 +50,7 @@ def test_a_referral_pays_both_companies_once_on_a_big_enough_top_up(run):
     assert same and recorded
     assert acme_credits == newco_credits == WELCOME_COMPANY + REFERRAL_REWARD
     assert count == 1
-    assert rewarded == [newco]
+    assert rewarded == [(newco, REFERRAL_REWARD)]
 
 
 def test_own_codes_related_companies_and_unknown_codes_refer_nobody(run):
@@ -104,9 +104,16 @@ def test_a_referrer_over_the_yearly_limit_is_neither_paid_nor_told(run, monkeypa
             await referrals.record(code, COMPANY, newco, [])
             paid.append(await referrals.reward(COMPANY, newco, f"txn_{newco}"))
 
-        return paid, await available(COMPANY, acme), await available(COMPANY, second)
+        listed = [
+            (row.owner_id, credits) for row, credits in await referrals.rewards(COMPANY, acme, 10)
+        ]
 
-    paid, acme_credits, second_credits = run(scenario())
+        return paid, await available(COMPANY, acme), await available(COMPANY, second), listed
+
+    paid, acme_credits, second_credits, listed = run(scenario())
+
+    # The second is listed as it paid the referrer: nothing.
+    assert sorted(listed) == sorted([(first, REFERRAL_REWARD), (second, 0)])
 
     assert paid == [acme, None]
     assert acme_credits == WELCOME_COMPANY + REFERRAL_REWARD

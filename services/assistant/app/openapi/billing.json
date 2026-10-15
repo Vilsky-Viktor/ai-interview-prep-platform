@@ -735,7 +735,7 @@
      "internal"
     ],
     "summary": "Export User",
-    "description": "What the user bought for their companies.",
+    "description": "What the user bought for their companies, and the automatic top-ups they turned on\n(charged to their card once started).",
     "operationId": "export_user_internal_users__user_id__export_post",
     "security": [
      {
@@ -1458,12 +1458,17 @@
       "type": "string",
       "format": "date-time",
       "title": "Rewarded At"
+     },
+     "credits": {
+      "type": "integer",
+      "title": "Credits"
      }
     },
     "type": "object",
     "required": [
      "company_id",
-     "rewarded_at"
+     "rewarded_at",
+     "credits"
     ],
     "title": "ReferralRewardOut",
     "description": "A company that came through the link and topped up, so both got the reward."

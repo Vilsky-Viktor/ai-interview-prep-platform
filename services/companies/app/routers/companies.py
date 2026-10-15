@@ -167,7 +167,11 @@ async def get_referral(company_id: UUID, user: CurrentUser) -> ReferralOut:
         reward=found["reward"],
         rewarded=found["rewarded"],
         rewards=[
-            ReferralRewardOut(name=names.get(row["company_id"]), rewarded_at=row["rewarded_at"])
+            ReferralRewardOut(
+                name=names.get(row["company_id"]),
+                rewarded_at=row["rewarded_at"],
+                credits=row["credits"],
+            )
             for row in found["rewards"]
         ],
     )

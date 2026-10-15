@@ -156,8 +156,10 @@ async def rewarded_count(owner_type: str, owner_id: str) -> int:
         )
 
 
-async def rewards(owner_type: str, owner_id: str, limit: int) -> list[Referral]:
-    """The companies the owner brought in that have been rewarded, newest first."""
+async def rewards(owner_type: str, owner_id: str, limit: int) -> list[tuple[Referral, int]]:
+    """The companies the owner brought in that have been rewarded, newest first, each with the
+    credits it paid the owner: what was given then, and 0 when the owner was over the yearly
+    limit."""
     query = (
         select(Referral)
         .where(
@@ -170,7 +172,24 @@ async def rewards(owner_type: str, owner_id: str, limit: int) -> list[Referral]:
     )
 
     async with Session() as session:
-        return list(await session.scalars(query))
+        rows = list(await session.scalars(query))
+        keys = {
+            row.owner_id: f"{reward_key(row.owner_type, row.owner_id, row.rewarded_by)}:referrer"
+            for row in rows
+        }
+        paid = dict(
+            (
+                await session.execute(
+                    select(Entry.key, Entry.amount).where(
+                        Entry.owner_type == owner_type,
+                        Entry.owner_id == owner_id,
+                        Entry.key.in_(keys.values()),
+                    )
+                )
+            ).all()
+        )
+
+    return [(row, paid.get(keys[row.owner_id], 0)) for row in rows]
 
 
 async def forget(session: AsyncSession, owner_type: str, owner_id: str) -> None:
