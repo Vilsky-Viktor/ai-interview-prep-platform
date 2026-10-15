@@ -156,6 +156,9 @@ test("superadmin turns the pause and maintenance mode on and off", async ({
     // Everyone else gets the maintenance screen; superadmins the site, with a warning card.
     await visitUntil(owner, "/companies", owner.getByRole("heading", { name: "Under maintenance" }))
     await shot(owner, "maintenance-screen")
+    // The legal texts stay readable, and unsubscribing works.
+    await visitUntil(owner, "/privacy", owner.getByRole("heading", { level: 1, name: /privacy/i }))
+    await shot(owner, "maintenance-privacy")
     await visitUntil(superadmin, "/companies", superadmin.getByText(MAINTENANCE_NOTICE))
     await shot(superadmin, "maintenance-superadmin")
 

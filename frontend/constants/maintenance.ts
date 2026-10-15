@@ -5,3 +5,13 @@ export const MAINTENANCE_HEADER = "x-maintenance"
 export const MAINTENANCE_CACHE_MS = 10_000
 // The check must never hold up or take down the site: no answer in time means off.
 export const MAINTENANCE_TIMEOUT_MS = 2_000
+// Pages shown as usual even then: unsubscribing must always work, and the legal texts stay
+// readable (their services leave the same open).
+export const MAINTENANCE_OPEN_PAGES = [
+  "/unsubscribe",
+  "/privacy",
+  "/terms",
+  "/dpa",
+  "/documents",
+  "/accessibility",
+]

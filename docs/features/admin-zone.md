@@ -130,7 +130,7 @@ The switch is one Redis key (`pause:on`, no expiry) that every service reads. Wi
 
 Maintenance mode closes the whole site:
 
-- Every page shows a maintenance screen. `proxy.ts` asks companies' public `GET /maintenance`, cached 10 seconds.
+- Every page but the unsubscribe and legal pages (below) shows a maintenance screen. `proxy.ts` asks companies' public `GET /maintenance`, cached 10 seconds.
 - Every service's API answers every request with a 503 (`prepza_common.maintenance`, a middleware in each `main.py`).
 - Superadmins still use the site, with a warning above each page.
 
@@ -140,6 +140,8 @@ These stay open, so no event, job or payment is lost:
 - the switch itself,
 - `/internal/` (calls between services, Pub/Sub and Scheduler pushes),
 - `/webhooks/` (Paddle, Resend, the ATSs).
+- unsubscribing (`/unsubscribe/` in notifications, and its page): an email's one-click link must always work,
+- the legal texts (`/help/legal/` in rounds, and the privacy, terms, DPA, documents and accessibility pages; `MAINTENANCE_OPEN_PAGES` in the frontend).
 
 Billing has no Redis and isn't switched; its only public route is the price catalog.
 

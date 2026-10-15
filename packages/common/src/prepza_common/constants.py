@@ -181,7 +181,8 @@ MAINTENANCE_KEY = "maintenance:on"
 MAINTENANCE_STARTED_KEY = "maintenance:started"
 MAINTENANCE = "prepza is under maintenance. We'll be back soon."
 MAINTENANCE_OPEN_PATHS = {"/health", "/ready", "/maintenance", "/superadmin/maintenance"}
-MAINTENANCE_OPEN_PREFIXES = ("/internal/", "/webhooks/")
+# Unsubscribing (a one-click link must always work) and the legal texts stay open too.
+MAINTENANCE_OPEN_PREFIXES = ("/internal/", "/webhooks/", "/unsubscribe/", "/help/legal/")
 # Each instance reads the switch at most this often; turning it takes that long to reach them all.
 MAINTENANCE_CACHE_SECONDS = 5
 

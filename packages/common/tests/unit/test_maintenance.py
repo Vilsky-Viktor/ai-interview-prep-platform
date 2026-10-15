@@ -63,6 +63,9 @@ PATHS = [
     "/internal/schedules/outbox",
     "/webhooks/paddle",
     "/webhooks/resend",
+    # Unsubscribing must always work, and the legal texts stay readable.
+    "/unsubscribe/token-1",
+    "/help/legal/privacy",
 ]
 OPEN = PATHS[2:]
 
