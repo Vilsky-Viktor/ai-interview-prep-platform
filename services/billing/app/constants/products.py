@@ -47,6 +47,10 @@ ADJUSTMENT_APPROVED = "approved"
 # They cover 1, 3 and 5 candidates.
 AUTO_TOP_UP_THRESHOLDS = [CANDIDATE_CREDITS, 3 * CANDIDATE_CREDITS, 5 * CANDIDATE_CREDITS]
 AUTO_TOP_UP_COOLDOWN = timedelta(minutes=10)
+# A charge whose credits haven't come (its transaction.completed web hook late or failing, or a
+# charge whose answer was lost) holds off the next one this long, so the card isn't charged again
+# and again meanwhile.
+AUTO_TOP_UP_UNCREDITED_WAIT = timedelta(days=1)
 # After the card declines a charge, the next try (and its notice to the owner) waits this long,
 # unless the automatic top-up is saved again first (say, after updating the card).
 AUTO_TOP_UP_RETRY_AFTER = timedelta(days=1)

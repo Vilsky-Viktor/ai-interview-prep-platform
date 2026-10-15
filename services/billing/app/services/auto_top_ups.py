@@ -140,8 +140,8 @@ async def check(owner_type: str, owner_id: str) -> None:
     top-up with the saved card. Never fails the request that used the credits; a charge Paddle
     refuses (a declined card) is told to the owner and tried again only after
     AUTO_TOP_UP_RETRY_AFTER. After a timeout or Paddle's own error the charge may have gone
-    through: its transaction.completed web hook adds the credits, and if it didn't, the next
-    check tries again after AUTO_TOP_UP_COOLDOWN."""
+    through: its transaction.completed web hook adds the credits. Until a charge's credits come,
+    none follows it, for at most AUTO_TOP_UP_UNCREDITED_WAIT (claim_charge)."""
     row = None
     now = datetime.now(UTC)
 

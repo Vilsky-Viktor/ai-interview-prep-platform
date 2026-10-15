@@ -1,10 +1,14 @@
 from datetime import datetime
 
-from sqlalchemy import case, delete, or_, select, update
+from sqlalchemy import and_, case, delete, exists, or_, select, update
 from sqlalchemy.dialects.postgresql import insert
 
-from app.constants.products import AUTO_TOP_UP_COOLDOWN, AUTO_TOP_UP_RETRY_AFTER
-from app.models.billing import AutoTopUp, Wallet
+from app.constants.products import (
+    AUTO_TOP_UP_COOLDOWN,
+    AUTO_TOP_UP_RETRY_AFTER,
+    AUTO_TOP_UP_UNCREDITED_WAIT,
+)
+from app.models.billing import AutoTopUp, Entry, Wallet
 from app.storage.db import Session
 
 
@@ -80,7 +84,14 @@ async def owner_of(subscription_id: str) -> tuple[str, str] | None:
 async def claim_charge(owner_type: str, owner_id: str, now: datetime) -> AutoTopUp | None:
     """The running automatic top-up, if the available balance is under its threshold, it
     hasn't charged within the cooldown and the card hasn't declined within the retry wait;
-    marks it charged now. Atomic, so two requests at once charge once."""
+    marks it charged now. Atomic, so two requests at once charge once. The last charge's credits
+    must have come first, else it waits AUTO_TOP_UP_UNCREDITED_WAIT."""
+    credited = exists().where(
+        Entry.owner_type == AutoTopUp.owner_type,
+        Entry.owner_id == AutoTopUp.owner_id,
+        Entry.automatic.is_(True),
+        Entry.created_at >= AutoTopUp.charged_at,
+    )
     query = (
         update(AutoTopUp)
         .where(
@@ -89,7 +100,10 @@ async def claim_charge(owner_type: str, owner_id: str, now: datetime) -> AutoTop
             AutoTopUp.subscription_id.is_not(None),
             or_(
                 AutoTopUp.charged_at.is_(None),
-                AutoTopUp.charged_at < now - AUTO_TOP_UP_COOLDOWN,
+                # Declined: the retry wait below applies.
+                AutoTopUp.failed_at >= AutoTopUp.charged_at,
+                and_(AutoTopUp.charged_at < now - AUTO_TOP_UP_COOLDOWN, credited),
+                AutoTopUp.charged_at < now - AUTO_TOP_UP_UNCREDITED_WAIT,
             ),
             or_(
                 AutoTopUp.failed_at.is_(None),

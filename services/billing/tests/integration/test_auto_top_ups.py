@@ -35,7 +35,7 @@ def test_turning_on_waits_for_the_checkout_then_refills_under_the_threshold_once
         await auto_top_ups.start(checkout_data(acme, ann), sub)
         started = await auto_top_ups.out(COMPANY, acme)
         # The welcome credits aren't under 500, so nothing is charged. Inviting candidates takes
-        # them under: one charge, however often it's checked within the cooldown.
+        # them under: one charge, however often it's checked, while its credits haven't come.
         await auto_top_ups.check(COMPANY, acme)
         await ledger.reserve(COMPANY, acme, WELCOME_COMPANY - 1, "candidate:x", Reason.CANDIDATE)
         await auto_top_ups.check(COMPANY, acme)
@@ -50,7 +50,7 @@ def test_turning_on_waits_for_the_checkout_then_refills_under_the_threshold_once
     assert waiting.checkout.custom_data == checkout_data(acme, ann)
     assert started.on and started.product == "topup_50" and started.threshold == 500
     assert paddle_calls == [("cancel", "sub_other"), ("charge", sub, "pri_50")]
-    assert later is not None
+    assert later is None
 
 
 def test_turning_off_cancels_the_subscription_and_choices_are_checked(run, paddle_calls):

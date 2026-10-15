@@ -5,7 +5,12 @@ import pytest
 from fastapi import HTTPException
 
 from app.constants.credits import WELCOME_COMPANY, Reason
-from app.constants.products import AUTO_TOP_UP_COOLDOWN, AUTO_TOP_UP_RETRY_AFTER, OwnerType
+from app.constants.products import (
+    AUTO_TOP_UP_COOLDOWN,
+    AUTO_TOP_UP_RETRY_AFTER,
+    AUTO_TOP_UP_UNCREDITED_WAIT,
+    OwnerType,
+)
 from app.schemas.billing import AutoTopUpIn
 from app.services import auto_top_ups
 from app.storage import auto_top_ups as rows
@@ -101,9 +106,7 @@ def test_a_declined_card_is_tried_again_only_after_a_day_or_a_new_save(run, padd
     assert saved.failed_at is None
 
 
-def test_a_charge_that_timed_out_isnt_failed_and_is_tried_again_after_the_cooldown(
-    run, paddle_calls
-):
+def test_a_charge_that_timed_out_isnt_failed_and_is_tried_again_only_after_a_day(run, paddle_calls):
     ann = f"user-{uuid.uuid4()}"
     acme = str(uuid.uuid4())
     sub = f"sub_timeout_{uuid.uuid4().hex[:12]}"
@@ -118,12 +121,17 @@ def test_a_charge_that_timed_out_isnt_failed_and_is_tried_again_after_the_cooldo
         # Paddle may have taken it: its web hook would add the credits.
         await auto_top_ups.check(COMPANY, acme)
         row = await rows.get(COMPANY, acme)
-        later = await rows.claim_charge(COMPANY, acme, datetime.now(UTC) + AUTO_TOP_UP_COOLDOWN * 2)
+        # Its credits never came: no charge after the cooldown, only after a day.
+        soon = await rows.claim_charge(COMPANY, acme, datetime.now(UTC) + AUTO_TOP_UP_COOLDOWN * 2)
+        next_day = await rows.claim_charge(
+            COMPANY, acme, datetime.now(UTC) + AUTO_TOP_UP_UNCREDITED_WAIT * 2
+        )
 
-        return row, later
+        return row, soon, next_day
 
-    row, later = run(scenario())
+    row, soon, next_day = run(scenario())
 
     assert [call[0] for call in paddle_calls] == ["charge"]
     assert row.failed_at is None
-    assert later is not None
+    assert soon is None
+    assert next_day is not None
