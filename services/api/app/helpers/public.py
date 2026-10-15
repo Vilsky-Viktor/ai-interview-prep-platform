@@ -12,6 +12,7 @@ def interview_of(found: dict) -> Interview:
         pass_mark=found["pass_mark"],
         candidate_count=found["candidate_count"],
         created_at=found["created_at"],
+        updated_at=found.get("updated_at"),
     )
 
 
@@ -41,6 +42,7 @@ def candidate_of(found: dict, company_id, interview_id, site: str) -> Candidate:
         ),
         invite_url=INVITE_LINK.format(site=site, token=token) if token else None,
         created_at=found["created_at"],
+        updated_at=found.get("updated_at"),
         started_at=found.get("started_at"),
         finished_at=found.get("finished_at"),
     )

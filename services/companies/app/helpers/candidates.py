@@ -79,6 +79,7 @@ def candidate_out(invite, totals: dict, interview, with_link: bool = False) -> C
         flagged=bool(invite.flagged),
         extra_time=invite.extra_time or 0,
         created_at=invite.created_at,
+        updated_at=invite.updated_at,
         started_at=invite.started_at,
         finished_at=invite.finished_at,
         invite_token=open_link_token(invite) if with_link else None,

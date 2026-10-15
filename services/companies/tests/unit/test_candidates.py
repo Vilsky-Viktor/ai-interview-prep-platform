@@ -86,7 +86,7 @@ def test_finished_interview_status(client, monkeypatch):
     monkeypatch.setattr(rounds, "invite_scores", fake_scores)
     asked = []
 
-    async def fake_page(interview_id, offset, limit, by_grade, q, filter_by, pass_mark):
+    async def fake_page(interview_id, offset, limit, by_grade, q, filter_by, pass_mark, *synced):
         asked.append((interview_id, offset, limit, by_grade))
 
         return [invite]

@@ -120,7 +120,8 @@ after a top-up they're invited by themselves.
 once; they expire in 1, 3, 6 or 12 months, or never) and web hooks. A key creates tests from \
 job descriptions, lists the company's tests and candidates with their results, invites \
 candidates (an Idempotency-Key makes a retry safe), reminds, renames, gives extra time to or \
-removes them, finds a candidate by email and reads the credits; a web hook hears, signed with \
+removes them, finds a candidate by email and reads the credits, and syncs its lists by what \
+changed (updated_since); a web hook hears, signed with \
 its secret, when a candidate starts, finishes (with their results), isn't reached, expires or is \
 removed, and when an interview is ready; each web hook can be sent a test event and has a \
 delivery log of its latest sends. A web hook that doesn't answer for 3 days is paused (no \

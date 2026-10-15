@@ -34,6 +34,16 @@ Your company's keys together can make up to 60 requests per minute; further requ
 `429` until the minute ends. List endpoints return the newest items first and accept `offset` and `limit` (up to 100
 items per request).
 
+## Keeping your copy in sync
+
+Interviews and candidates carry `updated_at`, when they last changed. To fetch only what changed,
+pass `updated_since` to a list: it returns the items changed at that time or later, oldest
+change first. For the next page, pass the last item's `updated_at` as `updated_since` and its
+`id` as `after`, so items changed at the same moment are neither repeated nor missed. Keep the
+last pair and start from it next time. A candidate's progress while they answer doesn't change
+`updated_at`; a removed candidate leaves the list, and the `candidate.removed` web hook event
+says so.
+
 ## Retrying safely
 
 Creating an interview and inviting a candidate accept an `Idempotency-Key` header: any unique

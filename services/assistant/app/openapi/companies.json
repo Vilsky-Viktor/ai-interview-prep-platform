@@ -4112,7 +4112,7 @@
      "internal"
     ],
     "summary": "List Interviews",
-    "description": "The company's interviews, newest first, for the api service (an API key's company).",
+    "description": "The company's interviews, newest first, for the api service (an API key's company); with\n`updated_since`, those changed since, oldest change first.",
     "operationId": "list_interviews_internal_companies__company_id__interviews_get",
     "security": [
      {
@@ -4128,6 +4128,40 @@
        "type": "string",
        "format": "uuid",
        "title": "Company Id"
+      }
+     },
+     {
+      "name": "updated_since",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "format": "date-time"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Updated Since"
+      }
+     },
+     {
+      "name": "after",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "format": "uuid"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "After"
       }
      },
      {
@@ -4315,7 +4349,7 @@
      "internal"
     ],
     "summary": "List Candidates",
-    "description": "The interview's candidates, newest first, with their results and invite links.",
+    "description": "The interview's candidates, newest first, with their results and invite links; with\n`updated_since`, those changed since, oldest change first.",
     "operationId": "list_candidates_internal_companies__company_id__interviews__interview_id__candidates_get",
     "security": [
      {
@@ -4341,6 +4375,40 @@
        "type": "string",
        "format": "uuid",
        "title": "Interview Id"
+      }
+     },
+     {
+      "name": "updated_since",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "format": "date-time"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Updated Since"
+      }
+     },
+     {
+      "name": "after",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "format": "uuid"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "After"
       }
      },
      {
@@ -6898,6 +6966,18 @@
       "format": "date-time",
       "title": "Created At"
      },
+     "updated_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Updated At"
+     },
      "started_at": {
       "anyOf": [
        {
@@ -7125,6 +7205,18 @@
       "type": "string",
       "format": "date-time",
       "title": "Created At"
+     },
+     "updated_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Updated At"
      },
      "started_at": {
       "anyOf": [
@@ -8021,6 +8113,18 @@
       "format": "date-time",
       "title": "Created At"
      },
+     "updated_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Updated At"
+     },
      "topics": {
       "items": {
        "$ref": "#/components/schemas/TopicOut"
@@ -8147,6 +8251,18 @@
       "type": "string",
       "format": "date-time",
       "title": "Created At"
+     },
+     "updated_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Updated At"
      }
     },
     "type": "object",

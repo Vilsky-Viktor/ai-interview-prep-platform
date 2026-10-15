@@ -7,6 +7,7 @@ from sqlalchemy import delete, func, select, update
 
 from app.constants.events import INTERVIEW_DELETED, INTERVIEW_READY
 from app.constants.invites import InviteStatus
+from app.helpers.sync import changed_since
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
 from app.models.outbox import OutboxEvent
@@ -103,16 +104,22 @@ async def without_candidates(company_id) -> int:
 
 
 async def list_for_company(
-    company_id, offset: int = 0, limit: int | None = None
+    company_id,
+    offset: int = 0,
+    limit: int | None = None,
+    since: datetime | None = None,
+    after: uuid.UUID | None = None,
 ) -> list[Interview]:
-    """Newest first; without a limit, all of them (deleting a company goes through each)."""
-    query = (
-        select(Interview)
-        .where(Interview.company_id == company_id)
-        .order_by(Interview.created_at.desc(), Interview.id)
-        .offset(offset)
-        .limit(limit)
-    )
+    """Newest first; without a limit, all of them (deleting a company goes through each). With
+    `since`, those changed since, oldest change first (changed_since)."""
+    filters = [Interview.company_id == company_id]
+    order = [Interview.created_at.desc(), Interview.id]
+
+    if since is not None:
+        synced, order = changed_since(Interview, since, after)
+        filters += synced
+
+    query = select(Interview).where(*filters).order_by(*order).offset(offset).limit(limit)
 
     async with Session() as session:
         return list(await session.scalars(query))

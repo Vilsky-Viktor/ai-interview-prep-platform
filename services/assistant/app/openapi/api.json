@@ -6,7 +6,7 @@
      "Interviews"
     ],
     "summary": "List interviews",
-    "description": "Returns your company's interviews, newest first.",
+    "description": "Returns your company's interviews, newest first; with `updated_since`, the ones that\nchanged since, oldest change first.",
     "operationId": "list_interviews_interviews_get",
     "security": [
      {
@@ -14,6 +14,44 @@
      }
     ],
     "parameters": [
+     {
+      "name": "updated_since",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "format": "date-time"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "description": "Only items that changed at this time or later (ISO 8601), oldest change first: pass the last `updated_at` you got to sync",
+       "title": "Updated Since"
+      },
+      "description": "Only items that changed at this time or later (ISO 8601), oldest change first: pass the last `updated_at` you got to sync"
+     },
+     {
+      "name": "after",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "format": "uuid"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "description": "With `updated_since`: the `id` of the last item you got, so the next page starts after it and items changed at the same moment are neither repeated nor missed",
+       "title": "After"
+      },
+      "description": "With `updated_since`: the `id` of the last item you got, so the next page starts after it and items changed at the same moment are neither repeated nor missed"
+     },
      {
       "name": "offset",
       "in": "query",
@@ -212,7 +250,7 @@
      "Candidates"
     ],
     "summary": "List candidates",
-    "description": "Returns the interview's candidates with their progress and results, newest first.",
+    "description": "Returns the interview's candidates with their progress and results, newest first; with\n`updated_since`, the ones that changed since, oldest change first.",
     "operationId": "list_candidates_interviews__interview_id__candidates_get",
     "security": [
      {
@@ -229,6 +267,44 @@
        "format": "uuid",
        "title": "Interview Id"
       }
+     },
+     {
+      "name": "updated_since",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "format": "date-time"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "description": "Only items that changed at this time or later (ISO 8601), oldest change first: pass the last `updated_at` you got to sync",
+       "title": "Updated Since"
+      },
+      "description": "Only items that changed at this time or later (ISO 8601), oldest change first: pass the last `updated_at` you got to sync"
+     },
+     {
+      "name": "after",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "format": "uuid"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "description": "With `updated_since`: the `id` of the last item you got, so the next page starts after it and items changed at the same moment are neither repeated nor missed",
+       "title": "After"
+      },
+      "description": "With `updated_since`: the `id` of the last item you got, so the next page starts after it and items changed at the same moment are neither repeated nor missed"
      },
      {
       "name": "offset",
@@ -1275,6 +1351,19 @@
       "title": "Created At",
       "description": "When the invitation was first sent"
      },
+     "updated_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Updated At",
+      "description": "When the candidate last changed (status, name, extra time or result; not the progress while they answer); to sync, pass the last one you got as `updated_since`, with its `id` as `after`"
+     },
      "started_at": {
       "anyOf": [
        {
@@ -1547,6 +1636,19 @@
       "type": "string",
       "format": "date-time",
       "title": "Created At"
+     },
+     "updated_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Updated At",
+      "description": "When it last changed; to sync, pass the last one you got as `updated_since`, with its `id` as `after`"
      }
     },
     "type": "object",

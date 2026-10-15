@@ -1,3 +1,4 @@
+from datetime import datetime
 from uuid import UUID
 
 from fastapi import HTTPException, status
@@ -48,10 +49,28 @@ async def access(company_id: UUID, user_id: str) -> dict:
     )
 
 
-async def interviews(company_id: UUID, offset: int, limit: int) -> list[dict]:
+def _list_params(offset: int, limit: int, since: datetime | None, after: UUID | None) -> dict:
+    params = {"offset": offset, "limit": limit}
+
+    if since is not None:
+        params["updated_since"] = since.isoformat()
+
+    if after is not None:
+        params["after"] = str(after)
+
+    return params
+
+
+async def interviews(
+    company_id: UUID,
+    offset: int,
+    limit: int,
+    since: datetime | None = None,
+    after: UUID | None = None,
+) -> list[dict]:
     path = f"/internal/companies/{company_id}/interviews"
 
-    return await _get(path, {"offset": offset, "limit": limit})
+    return await _get(path, _list_params(offset, limit, since, after))
 
 
 async def interview(company_id: UUID, interview_id: UUID) -> dict:
@@ -59,10 +78,17 @@ async def interview(company_id: UUID, interview_id: UUID) -> dict:
     return await _get(f"/internal/companies/{company_id}/interviews/{interview_id}")
 
 
-async def candidates(company_id: UUID, interview_id: UUID, offset: int, limit: int) -> list[dict]:
+async def candidates(
+    company_id: UUID,
+    interview_id: UUID,
+    offset: int,
+    limit: int,
+    since: datetime | None = None,
+    after: UUID | None = None,
+) -> list[dict]:
     path = f"/internal/companies/{company_id}/interviews/{interview_id}/candidates"
 
-    return await _get(path, {"offset": offset, "limit": limit})
+    return await _get(path, _list_params(offset, limit, since, after))
 
 
 async def candidate(company_id: UUID, interview_id: UUID, invite_id: UUID) -> dict:

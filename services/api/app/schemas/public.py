@@ -15,6 +15,13 @@ class Interview(BaseModel):
     pass_mark: int = Field(description="The minimum grade, in percent, a candidate needs to pass")
     candidate_count: int
     created_at: datetime
+    updated_at: datetime | None = Field(
+        default=None,
+        description=(
+            "When it last changed; to sync, pass the last one you got as `updated_since`, with "
+            "its `id` as `after`"
+        ),
+    )
 
 
 class Signals(BaseModel):
@@ -90,6 +97,14 @@ class Candidate(BaseModel):
         ),
     )
     created_at: datetime = Field(description="When the invitation was first sent")
+    updated_at: datetime | None = Field(
+        default=None,
+        description=(
+            "When the candidate last changed (status, name, extra time or result; not the "
+            "progress while they answer); to sync, pass the last one you got as `updated_since`, "
+            "with its `id` as `after`"
+        ),
+    )
     started_at: datetime | None = Field(
         default=None, description="When the candidate started; null before"
     )

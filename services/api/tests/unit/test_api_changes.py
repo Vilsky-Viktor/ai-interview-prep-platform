@@ -152,3 +152,23 @@ def test_a_candidate_is_found_by_email_across_interviews_and_credits_are_read(
     assert bad.status_code == 422
     assert balance.json() == {"available": 1500, "reserved": 500, "candidates": 3, "low": False}
     assert interview()["id"]
+
+
+def test_lists_pass_on_what_changed_since_and_after_which_item(
+    client, key, companies_api, monkeypatch
+):
+    asked = []
+
+    async def interviews(company_id, offset, limit, since=None, after=None):
+        asked.append((since.isoformat() if since else None, after))
+
+        return []
+
+    monkeypatch.setattr(companies, "interviews", interviews)
+    params = {"updated_since": "2026-10-15T10:00:00Z", "after": str(INTERVIEW)}
+
+    assert call(client, "GET", "/interviews", params=params).status_code == 200
+    assert (
+        call(client, "GET", "/interviews", params={"updated_since": "yesterday"}).status_code == 422
+    )
+    assert asked == [("2026-10-15T10:00:00+00:00", INTERVIEW)]

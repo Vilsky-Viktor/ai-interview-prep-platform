@@ -81,7 +81,7 @@ def companies_api(monkeypatch):
         if company_id != COMPANY or interview_id != INTERVIEW or state["missing"]:
             raise HTTPException(404, "Interview not found")
 
-    async def interviews(company_id, offset, limit):
+    async def interviews(company_id, offset, limit, since=None, after=None):
         return [interview()] if company_id == COMPANY else []
 
     async def get_interview(company_id, interview_id):
@@ -89,7 +89,7 @@ def companies_api(monkeypatch):
 
         return interview()
 
-    async def candidates(company_id, interview_id, offset, limit):
+    async def candidates(company_id, interview_id, offset, limit, since=None, after=None):
         ours(company_id, interview_id)
 
         return [candidate()]

@@ -57,6 +57,16 @@ test("the API invites, updates, reminds, finds and removes a candidate", async (
     extra_time: 50,
   });
 
+  // Syncing from the change: the updated candidate is listed as changed since then.
+  const changedAt = (await updated.json()).updated_at;
+  const changed = await call(
+    "GET",
+    `${candidates}?updated_since=${encodeURIComponent(changedAt)}`,
+  );
+  expect((await changed.json()).map((row: { id: string }) => row.id)).toEqual([
+    candidate.id,
+  ]);
+
   expect((await call("POST", `${path}/resend`)).status()).toBe(204);
   const found = await call(
     "GET",
@@ -84,7 +94,7 @@ test("the API invites, updates, reminds, finds and removes a candidate", async (
 
   // A new interview follows the app's limits: an unpaid company with one waiting gets none.
   // (A second interview, without candidates, so nothing is generated for real.)
-  const waiting = await createInterview(owner, company.id)
+  const waiting = await createInterview(owner, company.id);
   await failGeneration(waiting, company.id);
   const made = await call("POST", "/interviews", {
     job_description:

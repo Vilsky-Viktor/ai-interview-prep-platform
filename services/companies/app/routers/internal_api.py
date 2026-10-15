@@ -1,4 +1,5 @@
 import asyncio
+from datetime import datetime
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
@@ -28,10 +29,17 @@ async def company_interview(company_id: UUID, interview_id: UUID):
 
 @router.get("")
 async def list_interviews(
-    company_id: UUID, page: PageParams, caller: ServiceCaller
+    company_id: UUID,
+    page: PageParams,
+    caller: ServiceCaller,
+    updated_since: datetime | None = None,
+    after: UUID | None = None,
 ) -> list[InterviewOut]:
-    """The company's interviews, newest first, for the api service (an API key's company)."""
-    rows = await interviews.list_for_company(company_id, page.offset, page.limit)
+    """The company's interviews, newest first, for the api service (an API key's company); with
+    `updated_since`, those changed since, oldest change first."""
+    rows = await interviews.list_for_company(
+        company_id, page.offset, page.limit, updated_since, after
+    )
     totals = await candidates.counts([item.id for item in rows])
 
     return [await interview_out(item, totals.get(item.id, 0)) for item in rows]
@@ -49,13 +57,25 @@ async def get_interview(
 
 @router.get("/{interview_id}/candidates")
 async def list_candidates(
-    company_id: UUID, interview_id: UUID, page: PageParams, caller: ServiceCaller
+    company_id: UUID,
+    interview_id: UUID,
+    page: PageParams,
+    caller: ServiceCaller,
+    updated_since: datetime | None = None,
+    after: UUID | None = None,
 ) -> list[CandidateOut]:
-    """The interview's candidates, newest first, with their results and invite links."""
+    """The interview's candidates, newest first, with their results and invite links; with
+    `updated_since`, those changed since, oldest change first."""
     interview = await company_interview(company_id, interview_id)
 
     return await candidate_results.page(
-        interview, page.offset, page.limit, by_grade=False, with_link=True
+        interview,
+        page.offset,
+        page.limit,
+        by_grade=False,
+        with_link=True,
+        since=updated_since,
+        after=after,
     )
 
 

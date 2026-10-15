@@ -2,7 +2,7 @@ import uuid
 from datetime import UTC, datetime
 
 from prepza_common.constants import DEFAULT_LANGUAGE
-from sqlalchemy import DateTime, ForeignKey, String, Text
+from sqlalchemy import DateTime, ForeignKey, String, Text, func
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -47,3 +47,6 @@ class Interview(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )
+    # When the row last changed: a trigger sets it on every update (migration 0045), so the
+    # public API's lists can be synced with updated_since.
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())

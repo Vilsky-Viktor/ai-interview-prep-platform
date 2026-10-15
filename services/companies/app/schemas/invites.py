@@ -43,6 +43,8 @@ class CandidateOut(BaseModel):
     # Extra time per question, as a percentage of its time.
     extra_time: int = 0
     created_at: datetime
+    # When it last changed; the API syncs lists by it (updated_since).
+    updated_at: datetime | None = None
     started_at: datetime | None = None
     finished_at: datetime | None = None
     # The invite link's token, only for the public API (`with_link`): until the candidate

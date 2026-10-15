@@ -91,6 +91,7 @@ async def interview_out(interview: Interview, candidate_count: int = 0) -> Inter
         link_token=interview.link_token,
         status=interview_status(interview.hired, candidate_count),
         created_at=interview.created_at,
+        updated_at=interview.updated_at,
     )
 
 

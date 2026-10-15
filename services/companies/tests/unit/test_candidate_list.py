@@ -53,7 +53,7 @@ def listed_with(client, monkeypatch, url, scores=None, flagged=False):
     async def fake_company(_company_id):
         return company
 
-    async def fake_page(interview_id, offset, limit, by_grade, q, filter_by, pass_mark):
+    async def fake_page(interview_id, offset, limit, by_grade, q, filter_by, pass_mark, *synced):
         asked.append((by_grade, q, filter_by, pass_mark))
 
         return [invite]

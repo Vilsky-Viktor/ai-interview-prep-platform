@@ -573,10 +573,7 @@ export interface paths {
     post?: never
     /**
      * Revoke Candidate
-     * @description Withdraws an invite the candidate hasn't used yet. Once they've started, it erases them for
-     *     good, answers and results included, for example when they ask to have their data deleted.
-     *     A candidate who answered at least one question is charged; other credits still held come
-     *     back.
+     * @description Withdraws an invite not used yet, or erases a candidate who started (candidate_changes).
      */
     delete: operations["revoke_candidate_interviews__interview_id__candidates__invite_id__delete"]
     options?: never
@@ -1275,11 +1272,13 @@ export interface paths {
     }
     /**
      * List Interviews
-     * @description The company's interviews, newest first, for the api service (an API key's company).
+     * @description The company's interviews, newest first, for the api service (an API key's company); with
+     *     `updated_since`, those changed since, oldest change first.
      */
     get: operations["list_interviews_internal_companies__company_id__interviews_get"]
     put?: never
-    post?: never
+    /** Create Interview */
+    post: operations["create_interview_internal_companies__company_id__interviews_post"]
     delete?: never
     options?: never
     head?: never
@@ -1312,7 +1311,8 @@ export interface paths {
     }
     /**
      * List Candidates
-     * @description The interview's candidates, newest first, with their results and invite links.
+     * @description The interview's candidates, newest first, with their results and invite links; with
+     *     `updated_since`, those changed since, oldest change first.
      */
     get: operations["list_candidates_internal_companies__company_id__interviews__interview_id__candidates_get"]
     put?: never
@@ -1332,6 +1332,101 @@ export interface paths {
     }
     /** Get Candidate */
     get: operations["get_candidate_internal_companies__company_id__interviews__interview_id__candidates__invite_id__get"]
+    put?: never
+    post?: never
+    /** Remove Candidate */
+    delete: operations["remove_candidate_internal_companies__company_id__interviews__interview_id__candidates__invite_id__delete"]
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/companies/{company_id}/interviews/{interview_id}/candidates/{invite_id}/name": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    /** Rename Candidate */
+    patch: operations["rename_candidate_internal_companies__company_id__interviews__interview_id__candidates__invite_id__name_patch"]
+    trace?: never
+  }
+  "/internal/companies/{company_id}/interviews/{interview_id}/candidates/{invite_id}/extra-time": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /** Set Extra Time */
+    put: operations["set_extra_time_internal_companies__company_id__interviews__interview_id__candidates__invite_id__extra_time_put"]
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/companies/{company_id}/interviews/{interview_id}/candidates/{invite_id}/resend": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Resend Invite
+     * @description Sends the invite again, as an owner or admin does on the candidate's page: refused for a
+     *     candidate who finished (409) or one prepza doesn't email (invited without a sign-in, 409);
+     *     the invite keeps its return address and theme.
+     */
+    post: operations["resend_invite_internal_companies__company_id__interviews__interview_id__candidates__invite_id__resend_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/companies/{company_id}/candidates": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Find Candidates
+     * @description The company's candidates invited with this email, in any of its interviews, newest
+     *     first.
+     */
+    get: operations["find_candidates_internal_companies__company_id__candidates_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/companies/{company_id}/credits": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Get Credits */
+    get: operations["get_credits_internal_companies__company_id__credits_get"]
     put?: never
     post?: never
     delete?: never
@@ -2224,6 +2319,8 @@ export interface components {
        * Format: date-time
        */
       created_at: string
+      /** Updated At */
+      updated_at?: string | null
       /** Started At */
       started_at?: string | null
       /** Finished At */
@@ -2337,6 +2434,8 @@ export interface components {
        * Format: date-time
        */
       created_at: string
+      /** Updated At */
+      updated_at?: string | null
       /** Started At */
       started_at?: string | null
       /** Finished At */
@@ -2513,6 +2612,22 @@ export interface components {
       /** Extra Time */
       extra_time: number
     }
+    /**
+     * FoundCandidateOut
+     * @description A candidate found by email, for the api service, which reads them in full.
+     */
+    FoundCandidateOut: {
+      /**
+       * Interview Id
+       * Format: uuid
+       */
+      interview_id: string
+      /**
+       * Candidate Id
+       * Format: uuid
+       */
+      candidate_id: string
+    }
     /** GenerationOut */
     GenerationOut: {
       /**
@@ -2678,6 +2793,8 @@ export interface components {
        * Format: date-time
        */
       created_at: string
+      /** Updated At */
+      updated_at?: string | null
       /** Topics */
       topics: components["schemas"]["TopicOut"][]
       /**
@@ -2726,6 +2843,8 @@ export interface components {
        * Format: date-time
        */
       created_at: string
+      /** Updated At */
+      updated_at?: string | null
     }
     /**
      * InterviewReportOut
@@ -5929,6 +6048,8 @@ export interface operations {
   list_interviews_internal_companies__company_id__interviews_get: {
     parameters: {
       query?: {
+        updated_since?: string | null
+        after?: string | null
         /** @description Number of items to skip */
         offset?: number
         /** @description Number of items to return, up to 100 */
@@ -5949,6 +6070,43 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["InterviewOut"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  create_interview_internal_companies__company_id__interviews_post: {
+    parameters: {
+      query: {
+        user_id: string
+      }
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["InterviewCreate"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      201: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["InterviewOut"]
         }
       }
       /** @description Validation Error */
@@ -5997,6 +6155,8 @@ export interface operations {
   list_candidates_internal_companies__company_id__interviews__interview_id__candidates_get: {
     parameters: {
       query?: {
+        updated_since?: string | null
+        after?: string | null
         /** @description Number of items to skip */
         offset?: number
         /** @description Number of items to return, up to 100 */
@@ -6051,6 +6211,208 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["CandidateOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  remove_candidate_internal_companies__company_id__interviews__interview_id__candidates__invite_id__delete: {
+    parameters: {
+      query: {
+        user_id: string
+      }
+      header?: never
+      path: {
+        company_id: string
+        interview_id: string
+        invite_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  rename_candidate_internal_companies__company_id__interviews__interview_id__candidates__invite_id__name_patch: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+        interview_id: string
+        invite_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["CandidateNameIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  set_extra_time_internal_companies__company_id__interviews__interview_id__candidates__invite_id__extra_time_put: {
+    parameters: {
+      query: {
+        user_id: string
+      }
+      header?: never
+      path: {
+        company_id: string
+        interview_id: string
+        invite_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ExtraTimeIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  resend_invite_internal_companies__company_id__interviews__interview_id__candidates__invite_id__resend_post: {
+    parameters: {
+      query: {
+        user_id: string
+      }
+      header?: never
+      path: {
+        company_id: string
+        interview_id: string
+        invite_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  find_candidates_internal_companies__company_id__candidates_get: {
+    parameters: {
+      query: {
+        email: string
+      }
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["FoundCandidateOut"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_credits_internal_companies__company_id__credits_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["CompanyCreditsOut"]
         }
       }
       /** @description Validation Error */

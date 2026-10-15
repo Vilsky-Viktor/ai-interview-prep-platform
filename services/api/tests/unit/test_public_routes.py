@@ -44,6 +44,7 @@ def test_a_key_lists_its_companys_interviews_and_notes_its_use(client, companies
             "pass_mark": 70,
             "candidate_count": 1,
             "created_at": "2026-10-01T09:00:00Z",
+            "updated_at": None,
         }
     ]
     assert stored["used"] == [key.id]

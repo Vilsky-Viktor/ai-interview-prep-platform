@@ -1,7 +1,7 @@
 import uuid
 from datetime import UTC, datetime
 
-from sqlalchemy import DateTime, ForeignKey, String, UniqueConstraint
+from sqlalchemy import DateTime, ForeignKey, String, UniqueConstraint, func
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.constants.invites import MAX_CANDIDATE_NAME_LENGTH, InviteStatus
@@ -26,6 +26,9 @@ class CandidateInvite(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )
+    # When the row last changed: a trigger sets it on every update (migration 0045), so the
+    # public API's lists can be synced with updated_since.
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     # When the invite email was last sent; an invite never started expires INVITE_EXPIRY_DAYS
     # after it.
     sent_at: Mapped[datetime] = mapped_column(

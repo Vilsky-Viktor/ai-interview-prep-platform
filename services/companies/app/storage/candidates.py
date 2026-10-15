@@ -2,11 +2,13 @@
 and filtered in SQL by the grade and flag stored on each invite when the candidate finishes."""
 
 import uuid
+from datetime import datetime
 
 from sqlalchemy import func, or_, select, update
 
 from app.constants.invites import CandidateFilter, InviteStatus
 from app.helpers.search import escape_like
+from app.helpers.sync import changed_since
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
 from app.storage.db import Session
@@ -64,14 +66,19 @@ async def page(
     q: str = "",
     filter_by: str | None = None,
     pass_mark: int | None = None,
+    since: datetime | None = None,
+    after: uuid.UUID | None = None,
 ) -> list[CandidateInvite]:
-    query = (
-        select(CandidateInvite)
-        .where(*candidate_filters(interview_id, q, filter_by, pass_mark))
-        .order_by(*candidate_order(by_grade))
-        .offset(offset)
-        .limit(limit)
-    )
+    """A page of the interview's candidates; with `since`, those changed since, oldest change
+    first (changed_since)."""
+    filters = candidate_filters(interview_id, q, filter_by, pass_mark)
+    order = candidate_order(by_grade)
+
+    if since is not None:
+        synced, order = changed_since(CandidateInvite, since, after)
+        filters = [*filters, *synced]
+
+    query = select(CandidateInvite).where(*filters).order_by(*order).offset(offset).limit(limit)
 
     async with Session() as session:
         return list(await session.scalars(query))

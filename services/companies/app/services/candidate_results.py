@@ -1,6 +1,9 @@
 """Candidates' results from rounds, stored on their invites once they finish, so the candidates
 list sorts and filters by them in SQL."""
 
+from datetime import datetime
+from uuid import UUID
+
 from app.constants.invites import RESULT_FILTERS, InviteStatus
 from app.helpers.candidates import candidate_out, company_candidate_out, stored_results
 from app.integrations import rounds
@@ -54,6 +57,8 @@ async def page(
     q: str = "",
     filter_by: str | None = None,
     with_link: bool = False,
+    since: datetime | None = None,
+    after: UUID | None = None,
 ) -> list:
     """A page of the interview's candidates with their results: best grade first or newest
     first, narrowed to an email containing `q` and a status or result, all in SQL on the results
@@ -62,7 +67,7 @@ async def page(
         await backfill(interview.id)
 
     listed = await candidates.page(
-        interview.id, offset, limit, by_grade, q, filter_by, interview.pass_mark
+        interview.id, offset, limit, by_grade, q, filter_by, interview.pass_mark, since, after
     )
     totals = await rounds.invite_scores([invite.id for invite in listed])
     await sync(listed, totals)

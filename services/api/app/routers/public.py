@@ -1,7 +1,8 @@
+from datetime import datetime
 from typing import Annotated
 from uuid import UUID
 
-from fastapi import APIRouter, Header, status
+from fastapi import APIRouter, Header, Query, status
 from prepza_common.paging import PageParams
 
 from app.auth import ApiKeyDep
@@ -24,6 +25,24 @@ router = APIRouter(
     },
 )
 NOT_FOUND = {404: {"description": "The interview or candidate doesn't exist in your company"}}
+UpdatedSince = Annotated[
+    datetime | None,
+    Query(
+        description=(
+            "Only items that changed at this time or later (ISO 8601), oldest change first: "
+            "pass the last `updated_at` you got to sync"
+        )
+    ),
+]
+After = Annotated[
+    UUID | None,
+    Query(
+        description=(
+            "With `updated_since`: the `id` of the last item you got, so the next page starts "
+            "after it and items changed at the same moment are neither repeated nor missed"
+        )
+    ),
+]
 IdempotencyKey = Annotated[
     str | None,
     Header(
@@ -37,9 +56,14 @@ IdempotencyKey = Annotated[
 
 
 @router.get("", summary="List interviews")
-async def list_interviews(key: ApiKeyDep, page: PageParams) -> list[Interview]:
-    """Returns your company's interviews, newest first."""
-    found = await companies.interviews(key.company_id, page.offset, page.limit)
+async def list_interviews(
+    key: ApiKeyDep, page: PageParams, updated_since: UpdatedSince = None, after: After = None
+) -> list[Interview]:
+    """Returns your company's interviews, newest first; with `updated_since`, the ones that
+    changed since, oldest change first."""
+    found = await companies.interviews(
+        key.company_id, page.offset, page.limit, updated_since, after
+    )
 
     return [interview_of(item) for item in found]
 
@@ -56,9 +80,18 @@ async def get_interview(interview_id: UUID, key: ApiKeyDep) -> Interview:
     tags=["Candidates"],
     responses=NOT_FOUND,
 )
-async def list_candidates(interview_id: UUID, key: ApiKeyDep, page: PageParams) -> list[Candidate]:
-    """Returns the interview's candidates with their progress and results, newest first."""
-    found = await companies.candidates(key.company_id, interview_id, page.offset, page.limit)
+async def list_candidates(
+    interview_id: UUID,
+    key: ApiKeyDep,
+    page: PageParams,
+    updated_since: UpdatedSince = None,
+    after: After = None,
+) -> list[Candidate]:
+    """Returns the interview's candidates with their progress and results, newest first; with
+    `updated_since`, the ones that changed since, oldest change first."""
+    found = await companies.candidates(
+        key.company_id, interview_id, page.offset, page.limit, updated_since, after
+    )
 
     return [candidate_of(item, key.company_id, interview_id, settings.site_url) for item in found]
 

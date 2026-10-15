@@ -46,6 +46,8 @@ class InterviewOut(BaseModel):
     # New, in process or hired (constants/interviews.py).
     status: str
     created_at: datetime
+    # When it last changed; the API syncs lists by it (updated_since).
+    updated_at: datetime | None = None
 
 
 class QuestionOption(BaseModel):

@@ -24,6 +24,7 @@ INVITE = SimpleNamespace(
     extra_time=50,
     started_at=datetime(2026, 10, 3, 9, tzinfo=UTC),
     finished_at=datetime(2026, 10, 3, 9, 20, tzinfo=UTC),
+    updated_at=datetime(2026, 10, 3, 9, 20, tzinfo=UTC),
 )
 TOKEN = issue_token("api", "companies", "test-secret-that-is-at-least-32-bytes")
 HEADERS = {"Authorization": f"Bearer {TOKEN}"}
@@ -38,7 +39,7 @@ def stored(monkeypatch):
     async def get_interview(interview_id):
         return INTERVIEW if interview_id == INTERVIEW.id else None
 
-    async def list_for_company(company_id, offset, limit):
+    async def list_for_company(company_id, offset, limit, since=None, after=None):
         asked.append((company_id, offset, limit))
 
         return [INTERVIEW] if company_id == COMPANY_ID else []
@@ -75,7 +76,9 @@ def stored(monkeypatch):
             {"topic_title": "APIs", "final_score": None},
         ]
 
-    async def page(interview, offset, limit, by_grade, q="", filter_by=None, with_link=False):
+    async def page(
+        interview, offset, limit, by_grade, q="", filter_by=None, with_link=False, **synced
+    ):
         asked.append(("candidates", offset, limit, by_grade, with_link))
 
         return []
