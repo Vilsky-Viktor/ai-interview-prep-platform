@@ -232,3 +232,29 @@ def test_a_welcome_asked_again_counts_once_and_still_records_the_referral(run):
         return first, again, recorded, await available(COMPANY, newco)
 
     assert run(scenario()) == (True, True, True, WELCOME_COMPANY)
+
+
+def test_deleting_the_referred_company_doesnt_keep_the_referrers_reward_from_a_refund(run):
+    """Otherwise: top up, delete the company, have the top-up refunded, and the referrer keeps
+    a reward nobody paid for, up to the yearly limit."""
+    acme, newco = company(), company()
+    paid = f"txn_{uuid.uuid4().hex[:12]}"
+
+    async def scenario():
+        await ledger.welcome_company(acme, f"{acme}@example.com")
+        await ledger.welcome_company(newco, f"{newco}@example.com")
+        await referrals.record(await referrals.code_of(COMPANY, acme), COMPANY, newco, [])
+        await purchases.grant(
+            COMPANY, newco, 3_000, 1, paid, "topup_50", None, "3000", "USD", datetime.now(UTC)
+        )
+        await reward_after_top_up(COMPANY, newco, paid)
+        rewarded = await available(COMPANY, acme)
+        await purchases.delete_company(newco)
+        await handle_adjustment(refund(paid, "3000"))
+
+        return rewarded, await available(COMPANY, acme)
+
+    rewarded, after = run(scenario())
+
+    assert rewarded == WELCOME_COMPANY + REFERRAL_REWARD
+    assert after == WELCOME_COMPANY

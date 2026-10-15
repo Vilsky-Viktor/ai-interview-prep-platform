@@ -68,7 +68,7 @@ On the top-up page, under each balance, "Set up automatic top-up" opens the choi
 - Both companies get 1,000 credits (2 candidates) once the new one first tops up, any amount.
 - The link asks the visitor first (a toast with **Keep** and **No thanks**), as the cookie serves the referral and not the page they asked for; kept, its code goes in a cookie (`prepza_ref`, 30 days), which companies reads when the visitor creates a company, on the site or through the in-app assistant: confirming the assistant's action passes the cookie on (only a code that reads right). AI apps connected over MCP have no browser cookie, so a company they create records no referral.
 - A referrer earns the reward for at most 25 referrals in any 365 days; past that, only the new company gets its 1,000 credits.
-- If that top-up is refunded in full or charged back, both rewards are taken back.
+- If that top-up is refunded in full or charged back, both rewards are taken back, even after the referred company was deleted: its rewarded referral is kept (only ids and the top-up that paid it), so deleting it can't keep the referrer's reward.
 
 A balance shows short from a thousand credits up ("3.5K", in the language's own way), and says the whole amount on hover ("Current balance: 3,549"), wherever it appears: the company's header, the billing and top-up pages and the assistant's answers.
 
@@ -93,7 +93,7 @@ Refunds and chargebacks in Paddle take back the credits they bought.
 
 ## Deleting a company
 
-Deleting a company deletes its credits: billing's internal `DELETE /internal/companies/{id}` removes the wallet, its holds and its history, and turns off automatic top-up. Purchases stay on record, and nothing is refunded. Before it's deleted, the owner sees how many credits are lost: the remove dialog, and the assistant's delete card, read the company's balance (`GET /companies/{id}/credits`, whose `candidates` is how many candidates the available credits pay for, worked out by billing) and add "Its 900 credits (about 3 candidates) will be lost and aren't refunded." when there are any.
+Deleting a company deletes its credits: billing's internal `DELETE /internal/companies/{id}` removes the wallet, its holds and its history, and turns off automatic top-up. Purchases stay on record, and nothing is refunded; a refund Paddle makes later takes back only the referral reward the top-up paid. Before it's deleted, the owner sees how many credits are lost: the remove dialog, and the assistant's delete card, read the company's balance (`GET /companies/{id}/credits`, whose `candidates` is how many candidates the available credits pay for, worked out by billing) and add "Its 900 credits (about 3 candidates) will be lost and aren't refunded." when there are any.
 
 ## Setting up Paddle
 

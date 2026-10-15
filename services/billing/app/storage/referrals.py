@@ -174,10 +174,16 @@ async def rewards(owner_type: str, owner_id: str, limit: int) -> list[Referral]:
 
 
 async def forget(session: AsyncSession, owner_type: str, owner_id: str) -> None:
-    """On deletion: the owner's own referral goes. The ones they made lose their name, so the
+    """On deletion: the owner's own referral goes, unless it was rewarded: kept (only ids and
+    the top-up that paid it), a refund of that top-up still takes the referrer's reward back,
+    so deleting a referred company can't keep it. The ones they made lose their name, so the
     people they brought in still get their own reward."""
     is_owner = {"owner_type": owner_type}
-    await session.execute(delete(Referral).filter_by(**is_owner, owner_id=owner_id))
+    await session.execute(
+        delete(Referral)
+        .filter_by(**is_owner, owner_id=owner_id)
+        .where(Referral.rewarded_by.is_(None))
+    )
     await session.execute(
         update(Referral)
         .filter_by(**is_owner, referrer_id=owner_id)

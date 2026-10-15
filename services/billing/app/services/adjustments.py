@@ -6,7 +6,7 @@ from app.constants.credits import Reason
 from app.constants.products import ADJUSTMENT_APPROVED
 from app.services import credit_events
 from app.services.referrals import take_back_reward
-from app.storage import purchases
+from app.storage import ledger, purchases
 
 logger = logging.getLogger(__name__)
 
@@ -49,6 +49,15 @@ async def handle_adjustment(data: dict) -> None:
         return
 
     owner_type, owner_id, granted, paid_total = bought
+
+    # Its company was deleted, credits and all: nothing to take back but the referral reward
+    # the top-up paid, when it's all refunded, so deleting a referred company can't keep it.
+    if owner_id not in await ledger.wallets(owner_type, [owner_id]):
+        if sign < 0 and int(data["totals"]["total"]) >= int(paid_total):
+            await take_back_reward(owner_id, data["transaction_id"])
+
+        return
+
     credits = share(granted, data["totals"]["total"], paid_total)
 
     if not credits:
