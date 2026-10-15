@@ -31,7 +31,8 @@ locals {
     # In the morning (UTC), not the night: a reminder candidates see.
     invite-reminders = { service = "companies", path = "/internal/schedules/invite-reminders", cron = "0 9 * * *" }
     bank-stages      = { service = "library", path = "/internal/schedules/bank", cron = "45 3 * * *" }
-    # Assistant conversations nobody added to for its retention period (90 days).
+    # Assistant conversations nobody added to for its retention period (90 days), AI apps'
+    # connections whose refresh token expired, and apps with no connection for 30 days.
     assistant-retention = { service = "assistant", path = "/internal/schedules/retention", cron = "0 4 * * *" }
     # Emails to company members, in the morning (UTC): every minute for an hour, each run
     # going on where the last stopped (none is sent twice): the activity digest from 7:00,
