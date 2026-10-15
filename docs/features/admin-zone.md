@@ -120,7 +120,7 @@ While it's on, every service answers these with a 503:
 
 Also while it's on:
 
-- The invite and new-interview pages say so; the new-interview box is turned off.
+- The invite, job-ad link and new-interview pages say so; the new-interview box is turned off.
 - The scheduled answer-key checks and invite reminders wait until it's off.
 - Candidates already in an interview can finish.
 

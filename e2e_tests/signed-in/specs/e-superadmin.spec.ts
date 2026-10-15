@@ -132,6 +132,10 @@ test("superadmin turns the pause and maintenance mode on and off", async ({
     // The start box is there but off, so it's clearly unavailable.
     await expect(owner.getByLabel("Job description")).toBeDisabled()
     await shot(owner, "new-interview-paused")
+    // A job ad's link says so too, as an invite does: no new candidate can start.
+    await visit(owner, "/apply/e2e-paused-link")
+    await expect(owner.getByText(PAUSE_NOTICE)).toBeVisible()
+    await shot(owner, "job-link-paused")
     await flip(superadmin, "Emergency pause", false)
     await expect.poll(() => paused(superadmin)).toBe(false)
     await visit(owner, newInterview)
