@@ -6,13 +6,14 @@ multiple-choice test made from a job description, for any role, used as a screen
 interviews or as an interview step itself.
 
 Menus: the header has "hiring" (companies) and "pricing" (on wide screens). The account menu has \
-Settings and Top up. The footer has three columns: skills tests by role, pre-employment testing, \
-AI interviews, comparisons and guides; the privacy policy, terms, the legal docs (documents for \
-companies) and the developer docs (the API, web hooks, the SDK and objects); free practice, the FAQ, an about page (the company and its solo founder, Viktor \
-Vilskyi), a news page with prepza's latest updates, and a contact page with a form (name, email, \
-message) that reaches the prepza team, and an accessibility statement (what works for people with \
-disabilities, what falls short, and where to report a problem: hello@prepza.ai). \
-Signing in is with Google, LinkedIn or GitHub.
+Settings and Top up. The footer has three columns. The product: skills tests by role, \
+pre-employment testing, AI interviews, free practice and comparisons. Resources: guides, the FAQ, \
+the legal docs (documents for companies), the developer docs (the API, web hooks, the SDK and \
+objects) and a news page with prepza's latest updates. The company: an about page (the company \
+and its solo founder, Viktor Vilskyi), a contact page with a form (name, email, message) that \
+reaches the prepza team, the privacy policy, terms, and an accessibility statement (what works \
+for people with disabilities, what falls short, and where to report a problem: \
+hello@prepza.ai). Signing in is with Google, LinkedIn or GitHub.
 
 Companies:
 - The home page starts with the box for a job description; submitting it signs you in if \
