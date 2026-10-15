@@ -1,20 +1,18 @@
 import httpx
-from fastapi import HTTPException, status
-from prepza_common import http
+from fastapi import status
 
 from app.constants.ats import (
-    ATS_TIMEOUT_SECONDS,
     WORKABLE_API,
     WORKABLE_MAX_PAGES,
     WORKABLE_MOVED,
     WORKABLE_PAGE,
 )
-from app.integrations.errors import KeyRejected
+from app.integrations.ats_http import REJECTED, checked, json_of, send
 
 # The credentials this client takes.
 KEYS = ("subdomain", "token")
 # Workable's answers that mean the key is wrong, revoked, expired or lacks a scope.
-REJECTED = {status.HTTP_401_UNAUTHORIZED, status.HTTP_403_FORBIDDEN}
+UNAVAILABLE = "Workable didn't answer"
 
 
 async def _call(
@@ -26,31 +24,13 @@ async def _call(
     body: dict | None = None,
     rejected: set[int] = REJECTED,
 ) -> dict:
-    """One call to Workable's API. A refused key raises KeyRejected; something gone, a 404;
-    anything else that fails (down, rate limited) is a 502 the caller can retry."""
-    try:
-        response = await http.get_client().request(
-            method,
-            WORKABLE_API.format(subdomain=subdomain) + path,
-            params=params,
-            json=body,
-            headers={"Authorization": f"Bearer {token}"},
-            timeout=ATS_TIMEOUT_SECONDS,
-        )
-    except httpx.HTTPError as error:
-        raise HTTPException(status.HTTP_502_BAD_GATEWAY, "Workable didn't answer") from error
+    """One call to Workable's API (ats_http: a refused key raises KeyRejected; something gone,
+    a 404; anything else that fails, a 502 the caller can retry)."""
+    url = WORKABLE_API.format(subdomain=subdomain) + path
+    headers = {"Authorization": f"Bearer {token}"}
+    response = await send(method, url, headers, UNAVAILABLE, params, body)
 
-    if response.status_code in rejected:
-        raise KeyRejected
-
-    # Something deleted in Workable (a job, a candidate): only that is gone, not the key.
-    if response.status_code == status.HTTP_404_NOT_FOUND:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Not found")
-
-    if not response.is_success:
-        raise HTTPException(status.HTTP_502_BAD_GATEWAY, "Workable didn't answer")
-
-    return response.json() if response.content else {}
+    return json_of(checked(response, UNAVAILABLE, rejected))
 
 
 async def _get(subdomain: str, token: str, path: str, params: dict | None = None) -> dict:

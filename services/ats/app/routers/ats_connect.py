@@ -63,7 +63,7 @@ async def connect_workable(company_id: UUID, body: WorkableIn, user: CurrentUser
 
     try:
         await workable.check(account, token)
-    except workable.KeyRejected:
+    except KeyRejected:
         raise HTTPException(
             status.HTTP_400_BAD_REQUEST, "Workable didn't accept this token for that account"
         ) from None

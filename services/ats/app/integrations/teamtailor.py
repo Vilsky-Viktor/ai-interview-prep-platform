@@ -1,10 +1,6 @@
-import httpx
-from fastapi import HTTPException, status
-from prepza_common import http
 from prepza_common.names import clean_name
 
 from app.constants.ats import (
-    ATS_TIMEOUT_SECONDS,
     TEAMTAILOR_API_VERSION,
     TEAMTAILOR_CLOSED_JOBS,
     TEAMTAILOR_HOSTS,
@@ -12,16 +8,13 @@ from app.constants.ats import (
     TEAMTAILOR_MEDIA_TYPE,
     TEAMTAILOR_PAGE,
 )
+from app.integrations.ats_http import checked, json_of, send
 from app.integrations.errors import KeyRejected
 
 # The credentials this client takes: the API (its company's region) and the API key.
 KEYS = ("host", "key")
 # Teamtailor's answers that mean the key is wrong, deleted, or lacks Admin or Write.
-REJECTED = {status.HTTP_401_UNAUTHORIZED, status.HTTP_403_FORBIDDEN}
-
-
-def _failed() -> HTTPException:
-    return HTTPException(status.HTTP_502_BAD_GATEWAY, "Teamtailor didn't answer")
+UNAVAILABLE = "Teamtailor didn't answer"
 
 
 async def _call(method: str, host: str, key: str, path_or_url: str, params=None, body=None) -> dict:
@@ -32,30 +25,11 @@ async def _call(method: str, host: str, key: str, path_or_url: str, params=None,
         "Accept": TEAMTAILOR_MEDIA_TYPE,
         "Content-Type": TEAMTAILOR_MEDIA_TYPE,
     }
+    response = await send(method, url, headers, UNAVAILABLE, params, body)
 
-    try:
-        response = await http.get_client().request(
-            method, url, params=params, json=body, headers=headers, timeout=ATS_TIMEOUT_SECONDS
-        )
-    except httpx.HTTPError as error:
-        raise _failed() from error
-
-    if response.status_code in REJECTED:
-        raise KeyRejected
-
-    # Something deleted in Teamtailor (a job, a candidate): only that is gone, not the key.
-    if response.status_code == status.HTTP_404_NOT_FOUND:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Not found")
-
-    # Too many calls for now: passed on as 429, so a web hook is answered that way (Teamtailor
-    # may send it again later) rather than as a failure of ours.
-    if response.status_code == status.HTTP_429_TOO_MANY_REQUESTS:
-        raise HTTPException(status.HTTP_429_TOO_MANY_REQUESTS, "Teamtailor didn't answer")
-
-    if not response.is_success:
-        raise _failed()
-
-    return response.json() if response.content else {}
+    # A rate limit stays a 429, so a web hook is answered that way (Teamtailor may send it again
+    # later) rather than as a failure of ours.
+    return json_of(checked(response, UNAVAILABLE, passes_429=True))
 
 
 async def _list(host: str, key: str, path: str, params: dict | None = None) -> list[dict]:

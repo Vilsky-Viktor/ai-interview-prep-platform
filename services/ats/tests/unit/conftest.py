@@ -7,6 +7,7 @@ from fastapi import HTTPException
 
 from app.config.settings import settings
 from app.integrations import companies, workable
+from app.integrations.errors import KeyRejected
 from app.main import app
 from app.models.ats import AtsConnection
 from app.storage import ats, ats_candidates
@@ -138,7 +139,7 @@ def stored(monkeypatch, companies_api):
 
     async def check(subdomain, token):
         if token != "good":
-            raise workable.KeyRejected
+            raise KeyRejected
 
     async def jobs(subdomain, token):
         rows["read"].append("every job")

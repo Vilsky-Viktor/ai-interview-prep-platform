@@ -1,41 +1,19 @@
-import httpx
-from fastapi import HTTPException, status
-from prepza_common import http
-
-from app.constants.ats import ATS_TIMEOUT_SECONDS, BREEZY_API, BREEZY_STATUS_UPDATED
-from app.integrations.errors import KeyRejected
+from app.constants.ats import BREEZY_API, BREEZY_STATUS_UPDATED
+from app.integrations.ats_http import checked, json_of, send
 
 # The credentials this client takes: the company and a personal API key, which acts as the
 # person who made it (a connection also keeps its web hook's id and secret).
 KEYS = ("company", "token")
 # Breezy's answers that mean the key is wrong, or its person left the company.
-REJECTED = {status.HTTP_401_UNAUTHORIZED, status.HTTP_403_FORBIDDEN}
+UNAVAILABLE = "Breezy HR didn't answer"
 
 
 async def _call(method: str, token: str, path: str, params=None, body=None):
-    try:
-        response = await http.get_client().request(
-            method,
-            BREEZY_API + path,
-            params=params,
-            json=body,
-            headers={"Authorization": token},
-            timeout=ATS_TIMEOUT_SECONDS,
-        )
-    except httpx.HTTPError as error:
-        raise HTTPException(status.HTTP_502_BAD_GATEWAY, "Breezy HR didn't answer") from error
+    response = await send(
+        method, BREEZY_API + path, {"Authorization": token}, UNAVAILABLE, params, body
+    )
 
-    if response.status_code in REJECTED:
-        raise KeyRejected
-
-    # Something deleted in Breezy HR (a job, a candidate): only that is gone, not the key.
-    if response.status_code == status.HTTP_404_NOT_FOUND:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Not found")
-
-    if not response.is_success:
-        raise HTTPException(status.HTTP_502_BAD_GATEWAY, "Breezy HR didn't answer")
-
-    return response.json() if response.content else {}
+    return json_of(checked(response, UNAVAILABLE))
 
 
 async def company(token: str) -> dict | None:

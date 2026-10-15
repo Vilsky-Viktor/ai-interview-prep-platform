@@ -7,6 +7,7 @@ from prepza_common import http
 
 from app.helpers.ats import html_to_text, job_text, subdomain
 from app.integrations import workable
+from app.integrations.errors import KeyRejected
 
 
 @pytest.mark.parametrize(
@@ -59,7 +60,7 @@ def answering(monkeypatch, handler):
 def test_a_refused_token_and_a_failing_workable_are_told_apart(monkeypatch):
     answering(monkeypatch, lambda request: httpx.Response(401))
 
-    with pytest.raises(workable.KeyRejected):
+    with pytest.raises(KeyRejected):
         asyncio.run(workable.check("acme", "bad"))
 
     answering(monkeypatch, lambda request: httpx.Response(500))
@@ -127,5 +128,5 @@ def test_a_job_deleted_in_workable_is_a_404_and_an_unknown_account_a_refused_key
 
     assert gone.value.status_code == 404
 
-    with pytest.raises(workable.KeyRejected):
+    with pytest.raises(KeyRejected):
         asyncio.run(workable.check("nobody", "token"))

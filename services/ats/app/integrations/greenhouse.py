@@ -15,22 +15,18 @@ from app.constants.ats import (
     GREENHOUSE_TOKEN_MARGIN_SECONDS,
     GREENHOUSE_TOKEN_URL,
 )
-from app.integrations.errors import KeyRejected
+from app.integrations.ats_http import REJECTED, checked, send
 
 # The credentials this client takes (a connection also keeps its web hook's secret key).
 KEYS = ("client_id", "client_secret")
 # Greenhouse's answers that mean the credential is wrong, revoked or lacks a permission.
-REJECTED = {status.HTTP_401_UNAUTHORIZED, status.HTTP_403_FORBIDDEN}
+UNAVAILABLE = "Greenhouse didn't answer"
 # Its token endpoint (OAuth) answers a wrong or revoked credential with 400 too. On any other
 # call a 400 is a request it didn't take (one note, one candidate), not a refused key.
 TOKEN_REJECTED = REJECTED | {status.HTTP_400_BAD_REQUEST}
 # Access tokens by credential (client id and a hash of its secret, so another company's cached
 # token is never used for a wrong secret), with when each stops being used: about an hour.
 _tokens: dict[tuple[str, str], tuple[str, float]] = {}
-
-
-def _failed() -> HTTPException:
-    return HTTPException(status.HTTP_502_BAD_GATEWAY, "Greenhouse didn't answer")
 
 
 async def _token(client_id: str, client_secret: str, fresh: bool = False) -> str:
@@ -50,14 +46,9 @@ async def _token(client_id: str, client_secret: str, fresh: bool = False) -> str
             timeout=ATS_TIMEOUT_SECONDS,
         )
     except httpx.HTTPError as error:
-        raise _failed() from error
+        raise HTTPException(status.HTTP_502_BAD_GATEWAY, UNAVAILABLE) from error
 
-    if response.status_code in TOKEN_REJECTED:
-        raise KeyRejected
-
-    if not response.is_success:
-        raise _failed()
-
+    checked(response, UNAVAILABLE, TOKEN_REJECTED)
     body = response.json()
     expires = time.monotonic() + body.get("expires_in", 3600) - GREENHOUSE_TOKEN_MARGIN_SECONDS
     _tokens[credential] = (body["access_token"], expires)
@@ -78,32 +69,13 @@ async def _call(
     404 is what was asked for being gone (a candidate deleted), not a refused key."""
     for fresh in (False, True):
         token = await _token(client_id, client_secret, fresh)
-
-        try:
-            response = await http.get_client().request(
-                method,
-                url,
-                params=params,
-                json=body,
-                headers={"Authorization": f"Bearer {token}"},
-                timeout=ATS_TIMEOUT_SECONDS,
-            )
-        except httpx.HTTPError as error:
-            raise _failed() from error
+        headers = {"Authorization": f"Bearer {token}"}
+        response = await send(method, url, headers, UNAVAILABLE, params, body)
 
         if response.status_code != status.HTTP_401_UNAUTHORIZED:
             break
 
-    if response.status_code in rejected:
-        raise KeyRejected
-
-    if response.status_code == status.HTTP_404_NOT_FOUND:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Not found")
-
-    if not response.is_success:
-        raise _failed()
-
-    return response
+    return checked(response, UNAVAILABLE, rejected)
 
 
 def _items(response: httpx.Response) -> list[dict]:

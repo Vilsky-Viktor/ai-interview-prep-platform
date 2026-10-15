@@ -4,6 +4,7 @@ from prepza_common.encryption import decrypt
 
 from app.config.settings import settings
 from app.integrations import workable
+from app.integrations.errors import KeyRejected
 from app.storage import ats
 from tests.unit.workable_setup import COMPANY_ID, connect, sign_in
 
@@ -62,7 +63,7 @@ def test_a_key_workable_stops_accepting_marks_the_connection_broken(
     broken = []
 
     async def refuse(subdomain, token):
-        raise workable.KeyRejected
+        raise KeyRejected
 
     async def mark_broken(connection_id):
         broken.append(connection_id)

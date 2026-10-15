@@ -1,43 +1,23 @@
-import httpx
-from fastapi import HTTPException, status
-from prepza_common import http
+from fastapi import status
 
-from app.constants.ats import ATS_TIMEOUT_SECONDS, RECRUITEE_API, RECRUITEE_OPEN_JOBS
-from app.integrations.errors import KeyRejected
+from app.constants.ats import RECRUITEE_API, RECRUITEE_OPEN_JOBS
+from app.integrations.ats_http import REJECTED, checked, json_of, send
 
 # The credentials this client takes: the company (its subdomain) and a personal API token, which
 # acts as the person who made it.
 KEYS = ("company", "token")
 # Recruitee's answers that mean the token is wrong, revoked, or its person can't see that.
-REJECTED = {status.HTTP_401_UNAUTHORIZED, status.HTTP_403_FORBIDDEN}
+UNAVAILABLE = "Recruitee didn't answer"
 
 
 async def _call(
     method: str, company: str, token: str, path: str, params=None, body=None, rejected=REJECTED
 ) -> dict:
-    try:
-        response = await http.get_client().request(
-            method,
-            RECRUITEE_API.format(company=company) + path,
-            params=params,
-            json=body,
-            headers={"Authorization": f"Bearer {token}"},
-            timeout=ATS_TIMEOUT_SECONDS,
-        )
-    except httpx.HTTPError as error:
-        raise HTTPException(status.HTTP_502_BAD_GATEWAY, "Recruitee didn't answer") from error
+    url = RECRUITEE_API.format(company=company) + path
+    headers = {"Authorization": f"Bearer {token}"}
+    response = await send(method, url, headers, UNAVAILABLE, params, body)
 
-    if response.status_code in rejected:
-        raise KeyRejected
-
-    # Something deleted in Recruitee (a job, a candidate): only that is gone, not the key.
-    if response.status_code == status.HTTP_404_NOT_FOUND:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Not found")
-
-    if not response.is_success:
-        raise HTTPException(status.HTTP_502_BAD_GATEWAY, "Recruitee didn't answer")
-
-    return response.json() if response.content else {}
+    return json_of(checked(response, UNAVAILABLE, rejected))
 
 
 async def check(company: str, token: str) -> None:
