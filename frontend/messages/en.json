@@ -139,7 +139,6 @@
     "dismiss": "Dismiss",
     "fixSent": "Sent to the verifier. It's fixed or replaced in a moment.",
     "actionFailed": "That didn't work. Please try again.",
-    "quality": "Quality",
     "flagged": "Flagged",
     "replaced": "Replaced",
     "noFlagged": "Nothing is flagged right now.",
@@ -165,7 +164,6 @@
     "description": "Role description",
     "create": "Generate",
     "createFailed": "Couldn't start the template. Please try again.",
-    "text": "Ready-made interviews by role, for companies and talents.",
     "deleteLabel": "Delete {title}",
     "deleteTitle": "Delete this template?",
     "deleteText": "Its topics and questions are deleted. Interviews companies already made from it stay.",
@@ -317,13 +315,11 @@
     "using": "Starting…",
     "useFailed": "Couldn't start an interview from this template. Please try again.",
     "warningTitle": "Templates are ready-made for common roles.",
-    "warning": "For a closer fit, create an interview from your job description.",
-    "text": "Ready-made interviews by role. Pick one to start your interview from; you can change it afterwards."
+    "warning": "For a closer fit, create an interview from your job description."
   },
   "billing": {
     "paid": "Payment received. It shows up here in a moment.",
     "checkoutFailed": "Couldn't open the checkout. Please try again.",
-    "credits": "{count, plural, one {# credit} other {# credits}}",
     "topUp": "Top up",
     "low": "Running low",
     "creditsWord": "{count, plural, one {credit} other {credits}}",
@@ -347,7 +343,6 @@
   },
   "share": {
     "sent": "Invite sent to {email}",
-    "checkEmail": "Check the email address and try again.",
     "failed": "Couldn't send the invite.",
     "wrongEmail": "This invite was sent to a different email address.",
     "acceptFailed": "Couldn't accept the invite. Please try again.",
@@ -397,7 +392,6 @@
     "details": "Details",
     "showLess": "Show less",
     "more": "+{count, number} more",
-    "showAll": "Show all",
     "limitRange": "Enter a number from 1 to {count}.",
     "limitFailed": "Couldn't save the limit.",
     "limit": "Question limit",
@@ -602,7 +596,6 @@
     "generationFailed": "Generation failed",
     "fallbackTitle": "interview",
     "continueGeneration": "Continue generation",
-    "perSession": "per session",
     "empty": "No interviews yet. Create your first one.",
     "candidateCount": "{count, plural, one {# candidate} other {# candidates}}",
     "deleteLabel": "Delete {title}",
@@ -619,7 +612,6 @@
     "memberFailed": "Couldn't invite them. Please try again.",
     "invite": "Invite",
     "jobDescription": "Job description",
-    "pasteJob": "Paste the job description: the role, its requirements and nice-to-haves…",
     "generate": "Generate interview",
     "startFailed": "Couldn't start the interview. Please try again.",
     "candidateEmails": "Candidate emails",
@@ -681,7 +673,6 @@
     "invited": "Invited",
     "role": "Role",
     "roleFailed": "Couldn't change the role.",
-    "copy": "Copy",
     "inviteTitle": "Company invite",
     "remove": "Remove",
     "removed": "{email} removed",
@@ -789,7 +780,6 @@
     "label": "Generate in"
   },
   "referral": {
-    "companyTitle": "Invite another company",
     "companyNote": "You both get {reward, number} credits when they make their first top-up, of any amount.",
     "deletedCompany": "A deleted company",
     "credits": "+{count, number} credits",
@@ -963,10 +953,6 @@
         "flags": "Flags for rushing, leaving or copying",
         "answers": "Scorecards with answers and timings"
       },
-      "candidate": "Candidate",
-      "score": "Score",
-      "rushed": "Rushed answers",
-      "left": "Left the page",
       "role": "Backend developer · passing grade {mark}%"
     },
     "invite": {
@@ -1459,7 +1445,6 @@
   },
   "apiDocs": {
     "title": "Developer docs",
-    "intro": "Connect prepza to your own platform: list your interviews, invite candidates, get their results and embed the interview in your own site.",
     "description": "prepza's developer docs: get an API key, create interviews, invite and manage candidates, read their results, receive them by web hook and embed the interview with the SDK.",
     "tabs": {
       "api": "API",

@@ -139,7 +139,6 @@
     "dismiss": "Negeren",
     "fixSent": "Naar de controleur gestuurd. Zo meteen hersteld of vervangen.",
     "actionFailed": "Dat lukte niet. Probeer het opnieuw.",
-    "quality": "Kwaliteit",
     "flagged": "Gemarkeerd",
     "replaced": "Vervangen",
     "noFlagged": "Er is nu niets gemarkeerd.",
@@ -165,7 +164,6 @@
     "description": "Functieomschrijving",
     "create": "Genereren",
     "createFailed": "Het sjabloon kon niet worden gestart. Probeer het opnieuw.",
-    "text": "Kant-en-klare interviews per functie, voor bedrijven en om zelf te oefenen.",
     "deleteLabel": "{title} verwijderen",
     "deleteTitle": "Dit sjabloon verwijderen?",
     "deleteText": "De onderwerpen en vragen worden verwijderd. Interviews die bedrijven er al van hebben gemaakt, blijven bestaan.",
@@ -317,13 +315,11 @@
     "using": "Wordt gestart…",
     "useFailed": "Er kon geen interview vanuit dit sjabloon worden gestart. Probeer het opnieuw.",
     "warningTitle": "Sjablonen zijn kant-en-klaar voor veelvoorkomende functies.",
-    "warning": "Voor een betere match maak je een interview op basis van je functieomschrijving.",
-    "text": "Kant-en-klare interviews per functie. Kies er een als basis voor je interview; je kunt het daarna aanpassen."
+    "warning": "Voor een betere match maak je een interview op basis van je functieomschrijving."
   },
   "billing": {
     "paid": "Betaling ontvangen. Die verschijnt hier zo.",
     "checkoutFailed": "De betaalpagina kon niet worden geopend. Probeer het opnieuw.",
-    "credits": "{count, plural, one {# credit} other {# credits}}",
     "topUp": "Opwaarderen",
     "low": "Bijna op",
     "creditsWord": "{count, plural, one {credit} other {credits}}",
@@ -347,7 +343,6 @@
   },
   "share": {
     "sent": "Uitnodiging verzonden naar {email}",
-    "checkEmail": "Controleer het e-mailadres en probeer het opnieuw.",
     "failed": "De uitnodiging kon niet worden verzonden.",
     "wrongEmail": "Deze uitnodiging is naar een ander e-mailadres gestuurd.",
     "acceptFailed": "De uitnodiging kon niet worden geaccepteerd. Probeer het opnieuw.",
@@ -397,7 +392,6 @@
     "details": "Details",
     "showLess": "Minder tonen",
     "more": "+{count, number} meer",
-    "showAll": "Alles tonen",
     "limitRange": "Voer een getal van 1 tot {count} in.",
     "limitFailed": "De limiet kon niet worden opgeslagen.",
     "limit": "Vragenlimiet",
@@ -602,7 +596,6 @@
     "generationFailed": "Genereren mislukt",
     "fallbackTitle": "interview",
     "continueGeneration": "Genereren voortzetten",
-    "perSession": "per sessie",
     "empty": "Nog geen interviews. Maak je eerste interview.",
     "candidateCount": "{count, plural, one {# kandidaat} other {# kandidaten}}",
     "deleteLabel": "{title} verwijderen",
@@ -619,7 +612,6 @@
     "memberFailed": "Uitnodigen is mislukt. Probeer het opnieuw.",
     "invite": "Uitnodigen",
     "jobDescription": "Functieomschrijving",
-    "pasteJob": "Plak de functieomschrijving: de functie, de eisen en wat een pré is…",
     "generate": "Interview genereren",
     "startFailed": "Het interview kon niet worden gestart. Probeer het opnieuw.",
     "candidateEmails": "E-mailadressen van kandidaten",
@@ -681,7 +673,6 @@
     "invited": "Uitgenodigd",
     "role": "Rol",
     "roleFailed": "De rol kon niet worden gewijzigd.",
-    "copy": "Kopiëren",
     "inviteTitle": "Uitnodiging voor het bedrijf",
     "remove": "Verwijderen",
     "removed": "{email} verwijderd",
@@ -789,7 +780,6 @@
     "label": "Genereren in"
   },
   "referral": {
-    "companyTitle": "Nodig een ander bedrijf uit",
     "companyNote": "Jullie krijgen allebei {reward, number} credits wanneer zij voor het eerst opwaarderen, met welk bedrag ook.",
     "deletedCompany": "Een verwijderd bedrijf",
     "credits": "+{count, number} credits",
@@ -959,10 +949,6 @@
         "flags": "Signalen bij haasten, weggaan of kopiëren",
         "answers": "Scorekaarten met antwoorden en tijden"
       },
-      "candidate": "Kandidaat",
-      "score": "Score",
-      "rushed": "Overhaaste antwoorden",
-      "left": "Pagina verlaten",
       "role": "Backend-ontwikkelaar · slaaggrens {mark}%"
     },
     "invite": {
@@ -1455,7 +1441,6 @@
   },
   "apiDocs": {
     "title": "Ontwikkelaarsdocumentatie",
-    "intro": "Koppel prepza aan je eigen platform: bekijk je interviews, nodig kandidaten uit, ontvang hun resultaten en sluit het interview in op je eigen website.",
     "description": "De ontwikkelaarsdocumentatie van prepza: vraag een API-sleutel aan, maak interviews aan, nodig kandidaten uit en beheer ze, lees hun resultaten, ontvang ze via een webhook en sluit het interview in met de SDK.",
     "tabs": {
       "api": "API",

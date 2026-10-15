@@ -139,7 +139,6 @@
     "dismiss": "Ignora",
     "fixSent": "Inviata al verificatore. Verrà corretta o sostituita tra poco.",
     "actionFailed": "Non ha funzionato. Riprova.",
-    "quality": "Qualità",
     "flagged": "Segnalate",
     "replaced": "Sostituite",
     "noFlagged": "Al momento non c'è nulla di segnalato.",
@@ -165,7 +164,6 @@
     "description": "Descrizione del ruolo",
     "create": "Genera",
     "createFailed": "Impossibile avviare il modello. Riprova.",
-    "text": "Colloqui pronti per ruolo, per le aziende e per chi si esercita.",
     "deleteLabel": "Elimina {title}",
     "deleteTitle": "Eliminare questo modello?",
     "deleteText": "I suoi argomenti e le sue domande vengono eliminati. I colloqui che le aziende ne hanno già ricavato restano.",
@@ -317,13 +315,11 @@
     "using": "Avvio…",
     "useFailed": "Impossibile avviare un colloquio da questo modello. Riprova.",
     "warningTitle": "I modelli sono pronti per i ruoli più comuni.",
-    "warning": "Per un risultato più mirato, crea un colloquio dalla tua descrizione del ruolo.",
-    "text": "Colloqui pronti per ruolo. Scegline uno come base per il tuo colloquio; potrai modificarlo dopo."
+    "warning": "Per un risultato più mirato, crea un colloquio dalla tua descrizione del ruolo."
   },
   "billing": {
     "paid": "Pagamento ricevuto. Comparirà qui tra un attimo.",
     "checkoutFailed": "Impossibile aprire il pagamento. Riprova.",
-    "credits": "{count, plural, one {# credito} other {# crediti}}",
     "topUp": "Ricarica",
     "low": "Stanno finendo",
     "creditsWord": "{count, plural, one {credito} other {crediti}}",
@@ -347,7 +343,6 @@
   },
   "share": {
     "sent": "Invito inviato a {email}",
-    "checkEmail": "Controlla l'indirizzo email e riprova.",
     "failed": "Impossibile inviare l'invito.",
     "wrongEmail": "Questo invito è stato inviato a un altro indirizzo email.",
     "acceptFailed": "Impossibile accettare l'invito. Riprova.",
@@ -397,7 +392,6 @@
     "details": "Dettagli",
     "showLess": "Mostra meno",
     "more": "+{count, number} altre",
-    "showAll": "Mostra tutto",
     "limitRange": "Inserisci un numero da 1 a {count}.",
     "limitFailed": "Impossibile salvare il limite.",
     "limit": "Limite di domande",
@@ -602,7 +596,6 @@
     "generationFailed": "Generazione non riuscita",
     "fallbackTitle": "colloquio",
     "continueGeneration": "Continua la generazione",
-    "perSession": "per sessione",
     "empty": "Ancora nessun colloquio. Crea il primo.",
     "candidateCount": "{count, plural, one {# candidato} other {# candidati}}",
     "deleteLabel": "Elimina {title}",
@@ -619,7 +612,6 @@
     "memberFailed": "Impossibile invitare questa persona. Riprova.",
     "invite": "Invita",
     "jobDescription": "Descrizione del ruolo",
-    "pasteJob": "Incolla la descrizione del ruolo: la posizione, i requisiti e i plus…",
     "generate": "Genera colloquio",
     "startFailed": "Impossibile iniziare il colloquio. Riprova.",
     "candidateEmails": "Email dei candidati",
@@ -681,7 +673,6 @@
     "invited": "Invitato",
     "role": "Ruolo",
     "roleFailed": "Impossibile cambiare il ruolo.",
-    "copy": "Copia",
     "inviteTitle": "Invito nell'azienda",
     "remove": "Rimuovi",
     "removed": "Accesso rimosso per {email}",
@@ -789,7 +780,6 @@
     "label": "Genera in"
   },
   "referral": {
-    "companyTitle": "Invita un'altra azienda",
     "companyNote": "Ricevete entrambi {reward, number} crediti quando fa la sua prima ricarica, di qualsiasi importo.",
     "deletedCompany": "Un'azienda eliminata",
     "credits": "+{count, number} crediti",
@@ -963,10 +953,6 @@
         "flags": "Segnali di fretta, uscite o copie",
         "answers": "Schede con risposte e tempi"
       },
-      "candidate": "Candidato",
-      "score": "Punteggio",
-      "rushed": "Risposte affrettate",
-      "left": "Ha lasciato la pagina",
       "role": "Sviluppatore backend · soglia {mark}%"
     },
     "invite": {
@@ -1459,7 +1445,6 @@
   },
   "apiDocs": {
     "title": "Documentazione per sviluppatori",
-    "intro": "Collega prepza alla tua piattaforma: elenca i tuoi colloqui, invita candidati, ricevi i loro risultati e integra il colloquio nel tuo sito.",
     "description": "La documentazione per sviluppatori di prepza: ottieni una chiave API, crea colloqui, invita e gestisci candidati, leggi i loro risultati, ricevili via webhook e integra il colloquio con l'SDK.",
     "tabs": {
       "api": "API",

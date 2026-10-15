@@ -139,7 +139,6 @@
     "dismiss": "却下",
     "fixSent": "検証システムに送りました。まもなく修正または差し替えられます。",
     "actionFailed": "うまくいきませんでした。もう一度お試しください。",
-    "quality": "品質",
     "flagged": "報告あり",
     "replaced": "差し替え済み",
     "noFlagged": "現在、報告された問題はありません。",
@@ -165,7 +164,6 @@
     "description": "職種の説明",
     "create": "生成",
     "createFailed": "テンプレートを開始できませんでした。もう一度お試しください。",
-    "text": "職種別の既製の面接。企業と求職者向けです。",
     "deleteLabel": "{title} を削除",
     "deleteTitle": "このテンプレートを削除しますか？",
     "deleteText": "トピックと問題は削除されます。これをもとに企業がすでに作成した面接は残ります。",
@@ -317,13 +315,11 @@
     "using": "開始中…",
     "useFailed": "このテンプレートから面接を開始できませんでした。もう一度お試しください。",
     "warningTitle": "テンプレートは一般的な職種向けの既製の面接です。",
-    "warning": "より合った面接にするには、求人票から面接を作成しましょう。",
-    "text": "職種別の既製の面接。ひとつ選んで面接を始められます。あとから変更できます。"
+    "warning": "より合った面接にするには、求人票から面接を作成しましょう。"
   },
   "billing": {
     "paid": "お支払いを受け付けました。まもなくここに反映されます。",
     "checkoutFailed": "支払い画面を開けませんでした。もう一度お試しください。",
-    "credits": "{count, plural, other {# クレジット}}",
     "topUp": "チャージ",
     "low": "残りわずか",
     "creditsWord": "{count, plural, other {クレジット}}",
@@ -347,7 +343,6 @@
   },
   "share": {
     "sent": "{email} に招待を送りました",
-    "checkEmail": "メールアドレスを確認して、もう一度お試しください。",
     "failed": "招待を送れませんでした。",
     "wrongEmail": "この招待は別のメールアドレス宛てに送られています。",
     "acceptFailed": "招待を承認できませんでした。もう一度お試しください。",
@@ -397,7 +392,6 @@
     "details": "詳細",
     "showLess": "閉じる",
     "more": "ほか {count, number} 件",
-    "showAll": "すべて表示",
     "limitRange": "1 から {count} までの数字を入力してください。",
     "limitFailed": "上限を保存できませんでした。",
     "limit": "問題数の上限",
@@ -602,7 +596,6 @@
     "generationFailed": "作成に失敗しました",
     "fallbackTitle": "面接",
     "continueGeneration": "作成を続ける",
-    "perSession": "セッションごと",
     "empty": "面接はまだありません。最初の面接を作成しましょう。",
     "candidateCount": "{count, plural, other {候補者 # 人}}",
     "deleteLabel": "{title} を削除",
@@ -619,7 +612,6 @@
     "memberFailed": "招待できませんでした。もう一度お試しください。",
     "invite": "招待",
     "jobDescription": "求人票",
-    "pasteJob": "求人票を貼り付けてください：職務内容、必須要件、歓迎要件…",
     "generate": "面接を作成",
     "startFailed": "面接を開始できませんでした。もう一度お試しください。",
     "candidateEmails": "候補者のメールアドレス",
@@ -681,7 +673,6 @@
     "invited": "招待済み",
     "role": "役割",
     "roleFailed": "役割を変更できませんでした。",
-    "copy": "コピー",
     "inviteTitle": "会社への招待",
     "remove": "削除",
     "removed": "{email} を削除しました",
@@ -789,7 +780,6 @@
     "label": "生成する言語"
   },
   "referral": {
-    "companyTitle": "他の会社を紹介",
     "companyNote": "相手が金額を問わず初めてチャージすると、双方に {reward, number} クレジットが付与されます。",
     "deletedCompany": "削除された会社",
     "credits": "+{count, number} クレジット",
@@ -967,10 +957,6 @@
         "flags": "急ぎすぎ・離脱・コピーを検知",
         "answers": "回答と所要時間付きのスコアカード"
       },
-      "candidate": "候補者",
-      "score": "スコア",
-      "rushed": "急ぎすぎた回答",
-      "left": "ページを離脱",
       "role": "バックエンド開発者 · 合格ライン {mark}%"
     },
     "invite": {
@@ -1463,7 +1449,6 @@
   },
   "apiDocs": {
     "title": "開発者向けドキュメント",
-    "intro": "prepza を自社のプラットフォームと連携できます。面接の一覧取得、候補者の招待、結果の取得、自社サイトへの面接の埋め込みが可能です。",
     "description": "prepza の開発者向けドキュメント。API キーの取得、面接の作成、候補者の招待と管理、結果の取得と Webhook での受け取り、SDK による面接の埋め込みについて説明します。",
     "tabs": {
       "api": "API",

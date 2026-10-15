@@ -17,8 +17,7 @@ import {
 } from "@/components/ui/dialog"
 import { Switch } from "@/components/ui/switch"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
-
-type MaintenanceState = { on: boolean; running: number | null }
+import type { MaintenanceSwitchState } from "@/types/company"
 
 const PATH = "/companies/superadmin/maintenance"
 
@@ -36,7 +35,7 @@ export function MaintenanceSwitch({ on: initial }: { on: boolean }) {
     setSaving(true)
 
     try {
-      const saved = await apiFetch<MaintenanceState>(PATH, {
+      const saved = await apiFetch<MaintenanceSwitchState>(PATH, {
         method: "PUT",
         body: JSON.stringify({ on: next }),
       })
@@ -59,7 +58,7 @@ export function MaintenanceSwitch({ on: initial }: { on: boolean }) {
     setSaving(true)
 
     try {
-      const state = await apiFetch<MaintenanceState>(PATH)
+      const state = await apiFetch<MaintenanceSwitchState>(PATH)
       setConfirming({ running: state.running })
     } catch (error) {
       toast.error(apiErrorMessage(error, t("maintenanceFailed")))

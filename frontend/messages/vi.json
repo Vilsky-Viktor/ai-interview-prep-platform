@@ -139,7 +139,6 @@
     "dismiss": "Bỏ qua",
     "fixSent": "Đã gửi cho bộ kiểm duyệt. Câu hỏi sẽ được sửa hoặc thay thế trong giây lát.",
     "actionFailed": "Không thành công. Vui lòng thử lại.",
-    "quality": "Chất lượng",
     "flagged": "Bị đánh dấu",
     "replaced": "Đã thay thế",
     "noFlagged": "Hiện không có gì bị đánh dấu.",
@@ -165,7 +164,6 @@
     "description": "Mô tả vị trí",
     "create": "Tạo",
     "createFailed": "Không thể bắt đầu tạo mẫu. Vui lòng thử lại.",
-    "text": "Buổi phỏng vấn có sẵn theo vị trí, cho công ty và người chuẩn bị phỏng vấn.",
     "deleteLabel": "Xóa {title}",
     "deleteTitle": "Xóa mẫu này?",
     "deleteText": "Các chủ đề và câu hỏi của mẫu sẽ bị xóa. Những buổi phỏng vấn mà công ty đã tạo từ mẫu vẫn được giữ lại.",
@@ -317,13 +315,11 @@
     "using": "Đang bắt đầu…",
     "useFailed": "Không thể tạo buổi phỏng vấn từ mẫu này. Vui lòng thử lại.",
     "warningTitle": "Mẫu được soạn sẵn cho các vị trí phổ biến.",
-    "warning": "Để phù hợp hơn, hãy tạo buổi phỏng vấn từ mô tả công việc của bạn.",
-    "text": "Buổi phỏng vấn có sẵn theo vị trí. Chọn một mẫu để bắt đầu buổi phỏng vấn của bạn; bạn có thể thay đổi sau."
+    "warning": "Để phù hợp hơn, hãy tạo buổi phỏng vấn từ mô tả công việc của bạn."
   },
   "billing": {
     "paid": "Đã nhận thanh toán. Sẽ hiển thị ở đây trong giây lát.",
     "checkoutFailed": "Không thể mở trang thanh toán. Vui lòng thử lại.",
-    "credits": "{count, plural, other {# credit}}",
     "topUp": "Nạp credit",
     "low": "Sắp hết",
     "creditsWord": "{count, plural, other {credit}}",
@@ -347,7 +343,6 @@
   },
   "share": {
     "sent": "Đã gửi lời mời tới {email}",
-    "checkEmail": "Kiểm tra lại địa chỉ email và thử lại.",
     "failed": "Không thể gửi lời mời.",
     "wrongEmail": "Lời mời này được gửi tới một địa chỉ email khác.",
     "acceptFailed": "Không thể chấp nhận lời mời. Vui lòng thử lại.",
@@ -397,7 +392,6 @@
     "details": "Chi tiết",
     "showLess": "Thu gọn",
     "more": "+{count, number} nữa",
-    "showAll": "Xem tất cả",
     "limitRange": "Nhập một số từ 1 đến {count}.",
     "limitFailed": "Không thể lưu giới hạn.",
     "limit": "Giới hạn câu hỏi",
@@ -602,7 +596,6 @@
     "generationFailed": "Tạo không thành công",
     "fallbackTitle": "phỏng vấn",
     "continueGeneration": "Tiếp tục tạo",
-    "perSession": "mỗi phiên",
     "empty": "Chưa có buổi phỏng vấn nào. Hãy tạo buổi đầu tiên.",
     "candidateCount": "{count, plural, other {# ứng viên}}",
     "deleteLabel": "Xóa {title}",
@@ -619,7 +612,6 @@
     "memberFailed": "Không thể mời người này. Vui lòng thử lại.",
     "invite": "Mời",
     "jobDescription": "Mô tả công việc",
-    "pasteJob": "Dán mô tả công việc: vị trí, yêu cầu và điểm cộng…",
     "generate": "Tạo buổi phỏng vấn",
     "startFailed": "Không thể bắt đầu buổi phỏng vấn. Vui lòng thử lại.",
     "candidateEmails": "Email ứng viên",
@@ -681,7 +673,6 @@
     "invited": "Đã mời",
     "role": "Vai trò",
     "roleFailed": "Không thể thay đổi vai trò.",
-    "copy": "Sao chép",
     "inviteTitle": "Lời mời vào công ty",
     "remove": "Xóa",
     "removed": "Đã xóa {email}",
@@ -789,7 +780,6 @@
     "label": "Tạo bằng"
   },
   "referral": {
-    "companyTitle": "Mời công ty khác",
     "companyNote": "Cả hai bên đều nhận {reward, number} credit khi họ nạp credit lần đầu, với bất kỳ số tiền nào.",
     "deletedCompany": "Một công ty đã xóa",
     "credits": "+{count, number} credit",
@@ -959,10 +949,6 @@
         "flags": "Cảnh báo trả lời vội, rời trang, sao chép",
         "answers": "Bảng điểm kèm câu trả lời và thời gian"
       },
-      "candidate": "Ứng viên",
-      "score": "Điểm",
-      "rushed": "Trả lời vội",
-      "left": "Rời trang",
       "role": "Lập trình viên backend · điểm đạt {mark}%"
     },
     "invite": {
@@ -1455,7 +1441,6 @@
   },
   "apiDocs": {
     "title": "Tài liệu cho nhà phát triển",
-    "intro": "Kết nối prepza với nền tảng của riêng bạn: xem danh sách phỏng vấn, mời ứng viên, nhận kết quả của họ và nhúng buổi phỏng vấn vào trang web của bạn.",
     "description": "Tài liệu cho nhà phát triển của prepza: lấy khóa API, tạo buổi phỏng vấn, mời và quản lý ứng viên, đọc kết quả, nhận kết quả qua webhook và nhúng buổi phỏng vấn bằng SDK.",
     "tabs": {
       "api": "API",

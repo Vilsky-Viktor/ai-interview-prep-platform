@@ -139,7 +139,6 @@
     "dismiss": "Jäta kõrvale",
     "fixSent": "Saadetud kontrollijale. See parandatakse või asendatakse hetke pärast.",
     "actionFailed": "See ei õnnestunud. Proovi uuesti.",
-    "quality": "Kvaliteet",
     "flagged": "Märgitud",
     "replaced": "Asendatud",
     "noFlagged": "Praegu pole midagi märgitud.",
@@ -165,7 +164,6 @@
     "description": "Rolli kirjeldus",
     "create": "Loo",
     "createFailed": "Malli ei õnnestunud alustada. Proovi uuesti.",
-    "text": "Valmis intervjuud rollide kaupa ettevõtetele ja tööotsijatele.",
     "deleteLabel": "Kustuta {title}",
     "deleteTitle": "Kustutada see mall?",
     "deleteText": "Selle teemad ja küsimused kustutatakse. Intervjuud, mille ettevõtted on selle põhjal juba teinud, jäävad alles.",
@@ -317,13 +315,11 @@
     "using": "Alustamine…",
     "useFailed": "Sellest mallist ei õnnestunud intervjuud alustada. Proovi uuesti.",
     "warningTitle": "Mallid on valmis tavaliste ametite jaoks.",
-    "warning": "Täpsema sobivuse jaoks loo intervjuu oma töökuulutuse põhjal.",
-    "text": "Valmis intervjuud rollide kaupa. Vali üks, et sellest oma intervjuud alustada; hiljem saad seda muuta."
+    "warning": "Täpsema sobivuse jaoks loo intervjuu oma töökuulutuse põhjal."
   },
   "billing": {
     "paid": "Makse laekus. See ilmub siia hetke pärast.",
     "checkoutFailed": "Makselehte ei õnnestunud avada. Proovi uuesti.",
-    "credits": "{count, plural, one {# krediit} other {# krediiti}}",
     "topUp": "Laadi juurde",
     "low": "Hakkavad otsa saama",
     "creditsWord": "{count, plural, one {krediit} other {krediiti}}",
@@ -347,7 +343,6 @@
   },
   "share": {
     "sent": "Kutse saadeti aadressile {email}",
-    "checkEmail": "Kontrolli e-posti aadressi ja proovi uuesti.",
     "failed": "Kutset ei õnnestunud saata.",
     "wrongEmail": "See kutse saadeti teisele e-posti aadressile.",
     "acceptFailed": "Kutset ei õnnestunud vastu võtta. Proovi uuesti.",
@@ -397,7 +392,6 @@
     "details": "Üksikasjad",
     "showLess": "Näita vähem",
     "more": "+{count, number} veel",
-    "showAll": "Näita kõiki",
     "limitRange": "Sisesta arv vahemikus 1 kuni {count}.",
     "limitFailed": "Piirangut ei õnnestunud salvestada.",
     "limit": "Küsimuste piirang",
@@ -602,7 +596,6 @@
     "generationFailed": "Loomine ebaõnnestus",
     "fallbackTitle": "intervjuu",
     "continueGeneration": "Jätka loomist",
-    "perSession": "seansi kohta",
     "empty": "Intervjuusid veel pole. Loo esimene.",
     "candidateCount": "{count, plural, one {# kandidaat} other {# kandidaati}}",
     "deleteLabel": "Kustuta {title}",
@@ -619,7 +612,6 @@
     "memberFailed": "Kutset ei õnnestunud saata. Proovi uuesti.",
     "invite": "Kutsu",
     "jobDescription": "Töökuulutus",
-    "pasteJob": "Kleebi töökuulutus: roll, nõuded ja mis tuleb kasuks…",
     "generate": "Loo intervjuu",
     "startFailed": "Intervjuud ei õnnestunud alustada. Proovi uuesti.",
     "candidateEmails": "Kandidaatide e-posti aadressid",
@@ -681,7 +673,6 @@
     "invited": "Kutsutud",
     "role": "Roll",
     "roleFailed": "Rolli ei õnnestunud muuta.",
-    "copy": "Kopeeri",
     "inviteTitle": "Ettevõtte kutse",
     "remove": "Eemalda",
     "removed": "{email} eemaldati",
@@ -789,7 +780,6 @@
     "label": "Loo keeles"
   },
   "referral": {
-    "companyTitle": "Kutsu teine ettevõte",
     "companyNote": "Te mõlemad saate {reward, number} krediiti, kui nad teevad esimese juurdelaadimise mis tahes summas.",
     "deletedCompany": "Kustutatud ettevõte",
     "credits": "+{count, number} krediiti",
@@ -967,10 +957,6 @@
         "flags": "Märked kiirustamise, lahkumise ja kopeerimise kohta",
         "answers": "Hindamislehed vastuste ja aegadega"
       },
-      "candidate": "Kandidaat",
-      "score": "Tulemus",
-      "rushed": "Kiirustatud vastused",
-      "left": "Lahkus lehelt",
       "role": "Backend-arendaja · läbimise lävi {mark}%"
     },
     "invite": {
@@ -1463,7 +1449,6 @@
   },
   "apiDocs": {
     "title": "Arendajate dokumentatsioon",
-    "intro": "Ühenda prepza oma platvormiga: vaata oma intervjuusid, kutsu kandidaate, saa nende tulemused ja manusta intervjuu oma veebilehele.",
     "description": "prepza arendajate dokumentatsioon: hangi API-võti, loo intervjuusid, kutsu ja halda kandidaate, loe nende tulemusi, saa need webhooki kaudu ja manusta intervjuu SDK abil.",
     "tabs": {
       "api": "API",

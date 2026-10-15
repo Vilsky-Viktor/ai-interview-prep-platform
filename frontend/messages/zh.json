@@ -139,7 +139,6 @@
     "dismiss": "忽略",
     "fixSent": "已发送给校验程序，稍后将被修正或替换。",
     "actionFailed": "操作失败，请重试。",
-    "quality": "质量",
     "flagged": "已标记",
     "replaced": "已替换",
     "noFlagged": "目前没有被标记的题目。",
@@ -165,7 +164,6 @@
     "description": "职位说明",
     "create": "生成",
     "createFailed": "无法开始创建模板，请重试。",
-    "text": "按职位划分的现成面试，适用于公司和求职者。",
     "deleteLabel": "删除 {title}",
     "deleteTitle": "删除此模板？",
     "deleteText": "其主题和题目将被删除。公司已基于它创建的面试会保留。",
@@ -317,13 +315,11 @@
     "using": "正在开始…",
     "useFailed": "无法从此模板开始面试，请重试。",
     "warningTitle": "模板是为常见职位准备好的面试。",
-    "warning": "想要更贴合，请根据你的职位描述创建面试。",
-    "text": "按职位划分的现成面试。选一个作为面试的起点，之后可以修改。"
+    "warning": "想要更贴合，请根据你的职位描述创建面试。"
   },
   "billing": {
     "paid": "已收到付款，稍后会显示在这里。",
     "checkoutFailed": "无法打开付款页面，请重试。",
-    "credits": "{count, plural, other {# 点数}}",
     "topUp": "充值",
     "low": "即将用完",
     "creditsWord": "{count, plural, other {点数}}",
@@ -347,7 +343,6 @@
   },
   "share": {
     "sent": "邀请已发送至 {email}",
-    "checkEmail": "请检查邮箱地址后重试。",
     "failed": "无法发送邀请。",
     "wrongEmail": "此邀请发送给了另一个邮箱地址。",
     "acceptFailed": "无法接受邀请，请重试。",
@@ -397,7 +392,6 @@
     "details": "详细说明",
     "showLess": "收起",
     "more": "还有 {count, number} 个",
-    "showAll": "显示全部",
     "limitRange": "请输入 1 到 {count} 之间的数字。",
     "limitFailed": "无法保存上限。",
     "limit": "题目上限",
@@ -602,7 +596,6 @@
     "generationFailed": "生成失败",
     "fallbackTitle": "面试",
     "continueGeneration": "继续生成",
-    "perSession": "每场",
     "empty": "还没有面试。创建第一场吧。",
     "candidateCount": "{count, plural, other {# 位候选人}}",
     "deleteLabel": "删除 {title}",
@@ -619,7 +612,6 @@
     "memberFailed": "无法邀请，请重试。",
     "invite": "邀请",
     "jobDescription": "职位描述",
-    "pasteJob": "粘贴职位描述：岗位、任职要求和加分项…",
     "generate": "生成面试",
     "startFailed": "无法开始面试，请重试。",
     "candidateEmails": "候选人邮箱",
@@ -681,7 +673,6 @@
     "invited": "已邀请",
     "role": "角色",
     "roleFailed": "无法更改角色。",
-    "copy": "复制",
     "inviteTitle": "公司邀请",
     "remove": "移除",
     "removed": "已移除 {email}",
@@ -789,7 +780,6 @@
     "label": "生成语言"
   },
   "referral": {
-    "companyTitle": "邀请其他公司",
     "companyNote": "对方首次充值（任意金额）后，你们双方各得 {reward, number} 点数。",
     "deletedCompany": "已删除的公司",
     "credits": "+{count, number} 点数",
@@ -954,10 +944,6 @@
         "flags": "标记作答过快、离开页面或复制",
         "answers": "含回答与用时的评分卡"
       },
-      "candidate": "候选人",
-      "score": "分数",
-      "rushed": "作答过快",
-      "left": "离开过页面",
       "role": "后端开发者 · 及格线 {mark}%"
     },
     "invite": {
@@ -1443,11 +1429,13 @@
     "preview": "预览",
     "sampleTitle": "人力资源经理",
     "sampleQuestion": "候选人如何一眼看出面试页面来自你的公司？",
-    "sampleOptions": ["页面上有你的标志和品牌颜色", "看起来和其他任何公司的面试一模一样"]
+    "sampleOptions": [
+      "页面上有你的标志和品牌颜色",
+      "看起来和其他任何公司的面试一模一样"
+    ]
   },
   "apiDocs": {
     "title": "开发者文档",
-    "intro": "将 prepza 连接到你自己的平台：列出你的面试、邀请候选人、获取他们的结果，并将面试嵌入你自己的网站。",
     "description": "prepza 开发者文档：获取 API 密钥、创建面试、邀请和管理候选人、读取他们的结果、通过 Webhook 接收，并使用 SDK 嵌入面试。",
     "tabs": {
       "api": "API",

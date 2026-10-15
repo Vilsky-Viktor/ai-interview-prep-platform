@@ -139,7 +139,6 @@
     "dismiss": "Odrzuć",
     "fixSent": "Wysłano do weryfikatora. Za chwilę zostanie naprawione lub zastąpione.",
     "actionFailed": "Nie udało się. Spróbuj ponownie.",
-    "quality": "Jakość",
     "flagged": "Oznaczone",
     "replaced": "Zastąpione",
     "noFlagged": "Obecnie nic nie jest oznaczone.",
@@ -165,7 +164,6 @@
     "description": "Opis roli",
     "create": "Wygeneruj",
     "createFailed": "Nie udało się rozpocząć szablonu. Spróbuj ponownie.",
-    "text": "Gotowe rozmowy według ról, dla firm i dla osób, które ćwiczą przed rozmową kwalifikacyjną.",
     "deleteLabel": "Usuń {title}",
     "deleteTitle": "Usunąć ten szablon?",
     "deleteText": "Jego tematy i pytania zostaną usunięte. Rozmowy, które firmy już z niego utworzyły, pozostaną.",
@@ -317,13 +315,11 @@
     "using": "Uruchamianie…",
     "useFailed": "Nie udało się rozpocząć rozmowy z tego szablonu. Spróbuj ponownie.",
     "warningTitle": "Szablony to gotowe rozmowy dla popularnych stanowisk.",
-    "warning": "Aby lepiej dopasować pytania, utwórz rozmowę na podstawie swojego opisu stanowiska.",
-    "text": "Gotowe rozmowy według ról. Wybierz jedną jako punkt wyjścia dla swojej rozmowy; możesz ją potem zmienić."
+    "warning": "Aby lepiej dopasować pytania, utwórz rozmowę na podstawie swojego opisu stanowiska."
   },
   "billing": {
     "paid": "Płatność otrzymana. Za chwilę pojawi się tutaj.",
     "checkoutFailed": "Nie udało się otworzyć płatności. Spróbuj ponownie.",
-    "credits": "{count, plural, one {# kredyt} few {# kredyty} many {# kredytów} other {# kredytu}}",
     "topUp": "Doładuj",
     "low": "Kończą się",
     "creditsWord": "{count, plural, one {kredyt} few {kredyty} many {kredytów} other {kredytu}}",
@@ -347,7 +343,6 @@
   },
   "share": {
     "sent": "Zaproszenie wysłane na {email}",
-    "checkEmail": "Sprawdź adres e-mail i spróbuj ponownie.",
     "failed": "Nie udało się wysłać zaproszenia.",
     "wrongEmail": "To zaproszenie zostało wysłane na inny adres e-mail.",
     "acceptFailed": "Nie udało się przyjąć zaproszenia. Spróbuj ponownie.",
@@ -397,7 +392,6 @@
     "details": "Szczegóły",
     "showLess": "Pokaż mniej",
     "more": "+{count, number} więcej",
-    "showAll": "Pokaż wszystko",
     "limitRange": "Wpisz liczbę od 1 do {count}.",
     "limitFailed": "Nie udało się zapisać limitu.",
     "limit": "Limit pytań",
@@ -602,7 +596,6 @@
     "generationFailed": "Generowanie nie powiodło się",
     "fallbackTitle": "rozmowa",
     "continueGeneration": "Kontynuuj generowanie",
-    "perSession": "na sesję",
     "empty": "Nie ma jeszcze rozmów. Utwórz pierwszą.",
     "candidateCount": "{count, plural, one {# kandydat} few {# kandydaci} many {# kandydatów} other {# kandydata}}",
     "deleteLabel": "Usuń {title}",
@@ -619,7 +612,6 @@
     "memberFailed": "Nie udało się zaprosić tej osoby. Spróbuj ponownie.",
     "invite": "Zaproś",
     "jobDescription": "Opis stanowiska",
-    "pasteJob": "Wklej opis stanowiska: rolę, wymagania i mile widziane umiejętności…",
     "generate": "Wygeneruj rozmowę",
     "startFailed": "Nie udało się rozpocząć rozmowy. Spróbuj ponownie.",
     "candidateEmails": "E-maile kandydatów",
@@ -681,7 +673,6 @@
     "invited": "Zaproszono",
     "role": "Rola",
     "roleFailed": "Nie udało się zmienić roli.",
-    "copy": "Kopiuj",
     "inviteTitle": "Zaproszenie do firmy",
     "remove": "Usuń",
     "removed": "Usunięto {email}",
@@ -789,7 +780,6 @@
     "label": "Generuj w języku"
   },
   "referral": {
-    "companyTitle": "Zaproś inną firmę",
     "companyNote": "Oboje dostajecie {reward, number} kredytów, gdy zrobią pierwsze doładowanie, na dowolną kwotę.",
     "deletedCompany": "Usunięta firma",
     "credits": "+{count, number} kredytów",
@@ -963,10 +953,6 @@
         "flags": "Ostrzeżenia o pośpiechu, wyjściu ze strony i kopiowaniu",
         "answers": "Karty wyników z odpowiedziami i czasami"
       },
-      "candidate": "Kandydat",
-      "score": "Wynik",
-      "rushed": "Pośpieszne odpowiedzi",
-      "left": "Opuścił stronę",
       "role": "Backend developer · próg zaliczenia {mark}%"
     },
     "invite": {
@@ -1459,7 +1445,6 @@
   },
   "apiDocs": {
     "title": "Dokumentacja dla deweloperów",
-    "intro": "Połącz prepza z własną platformą: pobieraj listę rozmów, zapraszaj kandydatów, otrzymuj ich wyniki i osadzaj rozmowę na własnej stronie.",
     "description": "Dokumentacja prepza dla deweloperów: uzyskaj klucz API, twórz rozmowy, zapraszaj kandydatów i zarządzaj nimi, odczytuj ich wyniki, otrzymuj je przez webhook i osadzaj rozmowę za pomocą SDK.",
     "tabs": {
       "api": "API",

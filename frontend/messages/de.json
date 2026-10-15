@@ -139,7 +139,6 @@
     "dismiss": "Verwerfen",
     "fixSent": "An den Prüfer gesendet. Die Frage wird gleich korrigiert oder ersetzt.",
     "actionFailed": "Das hat nicht funktioniert. Bitte versuche es erneut.",
-    "quality": "Qualität",
     "flagged": "Gemeldet",
     "replaced": "Ersetzt",
     "noFlagged": "Gerade ist nichts gemeldet.",
@@ -165,7 +164,6 @@
     "description": "Rollenbeschreibung",
     "create": "Generieren",
     "createFailed": "Die Vorlage konnte nicht gestartet werden. Bitte versuche es erneut.",
-    "text": "Fertige Interviews nach Rolle, für Unternehmen und zum Üben.",
     "deleteLabel": "{title} löschen",
     "deleteTitle": "Diese Vorlage löschen?",
     "deleteText": "Ihre Themen und Fragen werden gelöscht. Interviews, die Unternehmen daraus erstellt haben, bleiben erhalten.",
@@ -317,13 +315,11 @@
     "using": "Wird gestartet…",
     "useFailed": "Mit dieser Vorlage konnte kein Interview gestartet werden. Bitte versuche es erneut.",
     "warningTitle": "Vorlagen sind fertige Interviews für gängige Rollen.",
-    "warning": "Für eine genauere Passung erstelle ein Interview aus deiner Stellenbeschreibung.",
-    "text": "Fertige Interviews nach Rolle. Wähle eines als Grundlage für dein Interview; du kannst es danach ändern."
+    "warning": "Für eine genauere Passung erstelle ein Interview aus deiner Stellenbeschreibung."
   },
   "billing": {
     "paid": "Zahlung erhalten. Sie erscheint gleich hier.",
     "checkoutFailed": "Die Bezahlung konnte nicht geöffnet werden. Bitte versuche es erneut.",
-    "credits": "{count, plural, one {# Credit} other {# Credits}}",
     "topUp": "Aufladen",
     "low": "Bald aufgebraucht",
     "creditsWord": "{count, plural, one {Credit} other {Credits}}",
@@ -347,7 +343,6 @@
   },
   "share": {
     "sent": "Einladung an {email} gesendet",
-    "checkEmail": "Prüfe die E-Mail-Adresse und versuche es erneut.",
     "failed": "Die Einladung konnte nicht gesendet werden.",
     "wrongEmail": "Diese Einladung wurde an eine andere E-Mail-Adresse gesendet.",
     "acceptFailed": "Die Einladung konnte nicht angenommen werden. Bitte versuche es erneut.",
@@ -397,7 +392,6 @@
     "details": "Details",
     "showLess": "Weniger anzeigen",
     "more": "+{count, number} weitere",
-    "showAll": "Alle anzeigen",
     "limitRange": "Gib eine Zahl von 1 bis {count} ein.",
     "limitFailed": "Das Limit konnte nicht gespeichert werden.",
     "limit": "Fragenlimit",
@@ -602,7 +596,6 @@
     "generationFailed": "Die Generierung ist fehlgeschlagen",
     "fallbackTitle": "interview",
     "continueGeneration": "Generierung fortsetzen",
-    "perSession": "pro Sitzung",
     "empty": "Noch keine Interviews. Erstelle dein erstes.",
     "candidateCount": "{count, plural, one {# Kandidat} other {# Kandidaten}}",
     "deleteLabel": "{title} löschen",
@@ -619,7 +612,6 @@
     "memberFailed": "Die Person konnte nicht eingeladen werden. Bitte versuche es erneut.",
     "invite": "Einladen",
     "jobDescription": "Stellenbeschreibung",
-    "pasteJob": "Füge die Stellenbeschreibung ein: die Rolle, ihre Anforderungen und was wünschenswert ist…",
     "generate": "Interview generieren",
     "startFailed": "Das Interview konnte nicht gestartet werden. Bitte versuche es erneut.",
     "candidateEmails": "E-Mails der Kandidaten",
@@ -681,7 +673,6 @@
     "invited": "Eingeladen",
     "role": "Rolle",
     "roleFailed": "Die Rolle konnte nicht geändert werden.",
-    "copy": "Kopieren",
     "inviteTitle": "Einladung ins Unternehmen",
     "remove": "Entfernen",
     "removed": "{email} entfernt",
@@ -789,7 +780,6 @@
     "label": "Erstellen auf"
   },
   "referral": {
-    "companyTitle": "Lade ein anderes Unternehmen ein",
     "companyNote": "Ihr bekommt beide {reward, number} Credits, wenn es zum ersten Mal auflädt, egal mit welchem Betrag.",
     "deletedCompany": "Ein gelöschtes Unternehmen",
     "credits": "+{count, number} Credits",
@@ -963,10 +953,6 @@
         "flags": "Hinweise auf Eile, Seitenwechsel oder Kopieren",
         "answers": "Auswertungen mit Antworten und Zeiten"
       },
-      "candidate": "Kandidat",
-      "score": "Ergebnis",
-      "rushed": "Überhastete Antworten",
-      "left": "Seite verlassen",
       "role": "Backend-Entwickler · Bestehensgrenze {mark} %"
     },
     "invite": {
@@ -1459,7 +1445,6 @@
   },
   "apiDocs": {
     "title": "Entwicklerdokumentation",
-    "intro": "Verbinde prepza mit deiner eigenen Plattform: Liste deine Interviews auf, lade Kandidaten ein, erhalte ihre Ergebnisse und bette das Interview in deine eigene Website ein.",
     "description": "Die Entwicklerdokumentation von prepza: API-Schlüssel erhalten, Interviews erstellen, Kandidaten einladen und verwalten, Ergebnisse abrufen, per Webhook empfangen und das Interview mit dem SDK einbetten.",
     "tabs": {
       "api": "API",

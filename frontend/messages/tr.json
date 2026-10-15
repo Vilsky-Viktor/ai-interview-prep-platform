@@ -139,7 +139,6 @@
     "dismiss": "Yok say",
     "fixSent": "Doğrulayıcıya gönderildi. Birazdan düzeltilir veya değiştirilir.",
     "actionFailed": "Bu işe yaramadı. Lütfen tekrar deneyin.",
-    "quality": "Kalite",
     "flagged": "İşaretlenenler",
     "replaced": "Değiştirilenler",
     "noFlagged": "Şu anda işaretli bir şey yok.",
@@ -165,7 +164,6 @@
     "description": "Pozisyon tanımı",
     "create": "Oluştur",
     "createFailed": "Şablon başlatılamadı. Lütfen tekrar deneyin.",
-    "text": "Şirketler ve iş arayanlar için pozisyona göre hazır mülakatlar.",
     "deleteLabel": "{title} öğesini sil",
     "deleteTitle": "Bu şablon silinsin mi?",
     "deleteText": "Konuları ve soruları silinir. Şirketlerin bundan oluşturduğu mülakatlar kalır.",
@@ -317,13 +315,11 @@
     "using": "Başlatılıyor…",
     "useFailed": "Bu şablondan mülakat başlatılamadı. Lütfen tekrar deneyin.",
     "warningTitle": "Şablonlar yaygın pozisyonlar için hazırdır.",
-    "warning": "Daha iyi bir uyum için iş tanımınızdan bir mülakat oluşturun.",
-    "text": "Pozisyona göre hazır mülakatlar. Mülakatınıza başlamak için birini seçin; sonradan değiştirebilirsiniz."
+    "warning": "Daha iyi bir uyum için iş tanımınızdan bir mülakat oluşturun."
   },
   "billing": {
     "paid": "Ödeme alındı. Birazdan burada görünecek.",
     "checkoutFailed": "Ödeme açılamadı. Lütfen tekrar deneyin.",
-    "credits": "{count, plural, one {# kredi} other {# kredi}}",
     "topUp": "Kredi yükle",
     "low": "Azalıyor",
     "creditsWord": "{count, plural, one {kredi} other {kredi}}",
@@ -347,7 +343,6 @@
   },
   "share": {
     "sent": "Davet {email} adresine gönderildi",
-    "checkEmail": "E-posta adresini kontrol edip tekrar deneyin.",
     "failed": "Davet gönderilemedi.",
     "wrongEmail": "Bu davet başka bir e-posta adresine gönderildi.",
     "acceptFailed": "Davet kabul edilemedi. Lütfen tekrar deneyin.",
@@ -397,7 +392,6 @@
     "details": "Ayrıntılar",
     "showLess": "Daha az göster",
     "more": "+{count, number} daha",
-    "showAll": "Tümünü göster",
     "limitRange": "1 ile {count} arasında bir sayı girin.",
     "limitFailed": "Sınır kaydedilemedi.",
     "limit": "Soru sınırı",
@@ -602,7 +596,6 @@
     "generationFailed": "Oluşturma başarısız oldu",
     "fallbackTitle": "mülakat",
     "continueGeneration": "Oluşturmaya devam et",
-    "perSession": "oturum başına",
     "empty": "Henüz mülakat yok. İlkini oluşturun.",
     "candidateCount": "{count, plural, one {# aday} other {# aday}}",
     "deleteLabel": "{title} öğesini sil",
@@ -619,7 +612,6 @@
     "memberFailed": "Davet edilemedi. Lütfen tekrar deneyin.",
     "invite": "Davet et",
     "jobDescription": "İş tanımı",
-    "pasteJob": "İş tanımını yapıştırın: pozisyon, gereksinimler ve tercih sebepleri…",
     "generate": "Mülakat oluştur",
     "startFailed": "Mülakat başlatılamadı. Lütfen tekrar deneyin.",
     "candidateEmails": "Aday e-postaları",
@@ -681,7 +673,6 @@
     "invited": "Davet edildi",
     "role": "Rol",
     "roleFailed": "Rol değiştirilemedi.",
-    "copy": "Kopyala",
     "inviteTitle": "Şirket daveti",
     "remove": "Çıkar",
     "removed": "{email} çıkarıldı",
@@ -789,7 +780,6 @@
     "label": "Oluşturma dili"
   },
   "referral": {
-    "companyTitle": "Başka bir şirketi davet edin",
     "companyNote": "İlk yüklemelerini yaptıklarında, tutar ne olursa olsun, ikiniz de {reward, number} kredi kazanırsınız.",
     "deletedCompany": "Silinmiş bir şirket",
     "credits": "+{count, number} kredi",
@@ -962,10 +952,6 @@
         "flags": "Acele, sayfadan ayrılma ve kopyalama işaretleri",
         "answers": "Cevapları ve süreleriyle değerlendirme kartları"
       },
-      "candidate": "Aday",
-      "score": "Puan",
-      "rushed": "Aceleci yanıtlar",
-      "left": "Sayfadan ayrıldı",
       "role": "Backend geliştirici · geçme notu %{mark}"
     },
     "invite": {
@@ -1458,7 +1444,6 @@
   },
   "apiDocs": {
     "title": "Geliştirici belgeleri",
-    "intro": "prepza'yı kendi platformunuza bağlayın: mülakatlarınızı listeleyin, aday davet edin, sonuçlarını alın ve mülakatı kendi sitenize yerleştirin.",
     "description": "prepza geliştirici belgeleri: API anahtarı alın, mülakat oluşturun, adayları davet edip yönetin, sonuçlarını okuyun, webhook ile alın ve mülakatı SDK ile sitenize yerleştirin.",
     "tabs": {
       "api": "API",

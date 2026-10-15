@@ -139,7 +139,6 @@
     "dismiss": "Descartar",
     "fixSent": "Enviada al verificador. Se corregirá o reemplazará en un momento.",
     "actionFailed": "No funcionó. Inténtalo de nuevo.",
-    "quality": "Calidad",
     "flagged": "Marcadas",
     "replaced": "Reemplazadas",
     "noFlagged": "No hay nada marcado ahora mismo.",
@@ -165,7 +164,6 @@
     "description": "Descripción del puesto",
     "create": "Generar",
     "createFailed": "No se pudo iniciar la plantilla. Inténtalo de nuevo.",
-    "text": "Entrevistas listas por puesto, para empresas y para quien quiera practicar.",
     "deleteLabel": "Eliminar {title}",
     "deleteTitle": "¿Eliminar esta plantilla?",
     "deleteText": "Se eliminan sus temas y preguntas. Las entrevistas que las empresas ya crearon a partir de ella se mantienen.",
@@ -317,13 +315,11 @@
     "using": "Iniciando…",
     "useFailed": "No se pudo iniciar una entrevista con esta plantilla. Inténtalo de nuevo.",
     "warningTitle": "Las plantillas están listas para puestos comunes.",
-    "warning": "Para un mejor ajuste, crea una entrevista a partir de tu descripción del puesto.",
-    "text": "Entrevistas listas por puesto. Elige una como punto de partida para tu entrevista; puedes cambiarla después."
+    "warning": "Para un mejor ajuste, crea una entrevista a partir de tu descripción del puesto."
   },
   "billing": {
     "paid": "Pago recibido. Aparecerá aquí en un momento.",
     "checkoutFailed": "No se pudo abrir el pago. Inténtalo de nuevo.",
-    "credits": "{count, plural, one {# crédito} other {# créditos}}",
     "topUp": "Recargar",
     "low": "Se están acabando",
     "creditsWord": "{count, plural, one {crédito} other {créditos}}",
@@ -347,7 +343,6 @@
   },
   "share": {
     "sent": "Invitación enviada a {email}",
-    "checkEmail": "Revisa la dirección de correo e inténtalo de nuevo.",
     "failed": "No se pudo enviar la invitación.",
     "wrongEmail": "Esta invitación se envió a otra dirección de correo.",
     "acceptFailed": "No se pudo aceptar la invitación. Inténtalo de nuevo.",
@@ -397,7 +392,6 @@
     "details": "Detalles",
     "showLess": "Mostrar menos",
     "more": "+{count, number} más",
-    "showAll": "Mostrar todo",
     "limitRange": "Escribe un número del 1 al {count}.",
     "limitFailed": "No se pudo guardar el límite.",
     "limit": "Límite de preguntas",
@@ -602,7 +596,6 @@
     "generationFailed": "La generación falló",
     "fallbackTitle": "entrevista",
     "continueGeneration": "Continuar generación",
-    "perSession": "por sesión",
     "empty": "Aún no hay entrevistas. Crea la primera.",
     "candidateCount": "{count, plural, one {# candidato} other {# candidatos}}",
     "deleteLabel": "Eliminar {title}",
@@ -619,7 +612,6 @@
     "memberFailed": "No se pudo invitar a esta persona. Inténtalo de nuevo.",
     "invite": "Invitar",
     "jobDescription": "Descripción del puesto",
-    "pasteJob": "Pega la descripción del puesto: el rol, sus requisitos y lo que se valora…",
     "generate": "Generar entrevista",
     "startFailed": "No se pudo empezar la entrevista. Inténtalo de nuevo.",
     "candidateEmails": "Correos de los candidatos",
@@ -681,7 +673,6 @@
     "invited": "Invitado",
     "role": "Rol",
     "roleFailed": "No se pudo cambiar el rol.",
-    "copy": "Copiar",
     "inviteTitle": "Invitación a la empresa",
     "remove": "Quitar",
     "removed": "Acceso retirado a {email}",
@@ -789,7 +780,6 @@
     "label": "Generar en"
   },
   "referral": {
-    "companyTitle": "Invita a otra empresa",
     "companyNote": "Las dos empresas reciben {reward, number} créditos cuando la invitada hace su primera recarga, de cualquier importe.",
     "deletedCompany": "Una empresa eliminada",
     "credits": "+{count, number} créditos",
@@ -963,10 +953,6 @@
         "flags": "Alertas por prisas, salidas o copias",
         "answers": "Fichas de evaluación con respuestas y tiempos"
       },
-      "candidate": "Candidato",
-      "score": "Puntuación",
-      "rushed": "Respuestas precipitadas",
-      "left": "Salió de la página",
       "role": "Desarrollador backend · nota de aprobado {mark} %"
     },
     "invite": {
@@ -1459,7 +1445,6 @@
   },
   "apiDocs": {
     "title": "Documentación para desarrolladores",
-    "intro": "Conecta prepza con tu propia plataforma: consulta tus entrevistas, invita a candidatos, obtén sus resultados e integra la entrevista en tu propio sitio web.",
     "description": "La documentación para desarrolladores de prepza: obtén una clave de API, crea entrevistas, invita y gestiona candidatos, lee sus resultados, recíbelos por webhook e integra la entrevista con el SDK.",
     "tabs": {
       "api": "API",

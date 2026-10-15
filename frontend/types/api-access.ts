@@ -12,8 +12,6 @@ export type ApiKey = {
   last_used_at: string | null
 }
 
-export type NewApiKey = ApiKey & { key: string }
-
 export type ApiWebhook = {
   id: string
   url: string
@@ -23,8 +21,6 @@ export type ApiWebhook = {
   // The member who added it is no longer an owner or admin: it gets no events.
   stopped: boolean
 }
-
-export type NewApiWebhook = ApiWebhook & { secret: string }
 
 // A send in a web hook's delivery log; `result` is "delivered", "skipped", the status the
 // endpoint answered, or the error on the way.

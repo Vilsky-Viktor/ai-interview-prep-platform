@@ -28,7 +28,6 @@ export type InterviewSettingsData = {
   >
 }
 export type SessionSummary = Schemas["SessionSummary"]
-export type SessionTopic = RoundSchemas["SessionTopicOut"]
 export type InterviewSession = RoundSchemas["SessionOut"]
 export type InterviewStep = RoundSchemas["InterviewStep"]
 // The option picked is kept on the client to mark it after the answer.
@@ -114,3 +113,5 @@ export type Scorecard = {
     review: ReviewItem[]
   }[]
 }
+// The maintenance switch, as superadmins see it: on, and how many interviews are running.
+export type MaintenanceSwitchState = Schemas["MaintenanceSwitchOut"]

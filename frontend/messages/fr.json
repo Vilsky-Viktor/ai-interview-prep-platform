@@ -139,7 +139,6 @@
     "dismiss": "Ignorer",
     "fixSent": "Envoyée au vérificateur. Elle sera corrigée ou remplacée dans un instant.",
     "actionFailed": "Cela n'a pas fonctionné. Veuillez réessayer.",
-    "quality": "Qualité",
     "flagged": "Signalées",
     "replaced": "Remplacées",
     "noFlagged": "Rien n'est signalé pour l'instant.",
@@ -165,7 +164,6 @@
     "description": "Description du poste",
     "create": "Générer",
     "createFailed": "Impossible de démarrer le modèle. Veuillez réessayer.",
-    "text": "Des entretiens prêts à l'emploi par poste, pour les entreprises et pour les candidats qui s'entraînent.",
     "deleteLabel": "Supprimer {title}",
     "deleteTitle": "Supprimer ce modèle ?",
     "deleteText": "Ses thèmes et ses questions sont supprimés. Les entretiens que des entreprises en ont déjà tirés sont conservés.",
@@ -317,13 +315,11 @@
     "using": "Démarrage…",
     "useFailed": "Impossible de démarrer un entretien à partir de ce modèle. Veuillez réessayer.",
     "warningTitle": "Les modèles sont prêts à l’emploi pour les postes courants.",
-    "warning": "Pour un meilleur ajustement, créez un entretien à partir de votre fiche de poste.",
-    "text": "Des entretiens prêts à l'emploi par poste. Choisissez-en un comme point de départ de votre entretien ; vous pourrez le modifier ensuite."
+    "warning": "Pour un meilleur ajustement, créez un entretien à partir de votre fiche de poste."
   },
   "billing": {
     "paid": "Paiement reçu. Il apparaîtra ici dans un instant.",
     "checkoutFailed": "Impossible d'ouvrir le paiement. Veuillez réessayer.",
-    "credits": "{count, plural, one {# crédit} other {# crédits}}",
     "topUp": "Recharger",
     "low": "Bientôt épuisés",
     "creditsWord": "{count, plural, one {crédit} other {crédits}}",
@@ -347,7 +343,6 @@
   },
   "share": {
     "sent": "Invitation envoyée à {email}",
-    "checkEmail": "Vérifiez l'adresse e-mail et réessayez.",
     "failed": "Impossible d'envoyer l'invitation.",
     "wrongEmail": "Cette invitation a été envoyée à une autre adresse e-mail.",
     "acceptFailed": "Impossible d'accepter l'invitation. Veuillez réessayer.",
@@ -397,7 +392,6 @@
     "details": "Détails",
     "showLess": "Afficher moins",
     "more": "+{count, number} de plus",
-    "showAll": "Tout afficher",
     "limitRange": "Saisissez un nombre entre 1 et {count}.",
     "limitFailed": "Impossible d'enregistrer la limite.",
     "limit": "Limite de questions",
@@ -602,7 +596,6 @@
     "generationFailed": "La génération a échoué",
     "fallbackTitle": "entretien",
     "continueGeneration": "Poursuivre la génération",
-    "perSession": "par session",
     "empty": "Aucun entretien pour l'instant. Créez le premier.",
     "candidateCount": "{count, plural, one {# candidat} other {# candidats}}",
     "deleteLabel": "Supprimer {title}",
@@ -619,7 +612,6 @@
     "memberFailed": "Impossible d'inviter cette personne. Veuillez réessayer.",
     "invite": "Inviter",
     "jobDescription": "Description du poste",
-    "pasteJob": "Collez la description du poste : le rôle, ses exigences et les atouts appréciés…",
     "generate": "Générer l'entretien",
     "startFailed": "Impossible de commencer l'entretien. Veuillez réessayer.",
     "candidateEmails": "E-mails des candidats",
@@ -681,7 +673,6 @@
     "invited": "Invité",
     "role": "Rôle",
     "roleFailed": "Impossible de changer le rôle.",
-    "copy": "Copier",
     "inviteTitle": "Invitation dans l'entreprise",
     "remove": "Retirer",
     "removed": "Accès retiré pour {email}",
@@ -789,7 +780,6 @@
     "label": "Générer en"
   },
   "referral": {
-    "companyTitle": "Invitez une autre entreprise",
     "companyNote": "Vous recevez chacun {reward, number} crédits lors de sa première recharge, quel que soit le montant.",
     "deletedCompany": "Une entreprise supprimée",
     "credits": "+{count, number} crédits",
@@ -963,10 +953,6 @@
         "flags": "Alertes : précipitation, sortie, copie",
         "answers": "Fiches d'évaluation avec réponses et temps"
       },
-      "candidate": "Candidat",
-      "score": "Score",
-      "rushed": "Réponses trop rapides",
-      "left": "A quitté la page",
       "role": "Développeur backend · seuil de réussite {mark} %"
     },
     "invite": {
@@ -1459,7 +1445,6 @@
   },
   "apiDocs": {
     "title": "Documentation développeurs",
-    "intro": "Connectez prepza à votre propre plateforme : listez vos entretiens, invitez des candidats, récupérez leurs résultats et intégrez l'entretien à votre propre site.",
     "description": "La documentation développeurs de prepza : obtenez une clé API, créez des entretiens, invitez et gérez des candidats, lisez leurs résultats, recevez-les par webhook et intégrez l'entretien avec le SDK.",
     "tabs": {
       "api": "API",

@@ -139,7 +139,6 @@
     "dismiss": "Balewalain",
     "fixSent": "Naipadala sa verifier. Maaayos o mapapalitan ito sa ilang sandali.",
     "actionFailed": "Hindi iyon gumana. Pakisubukang muli.",
-    "quality": "Kalidad",
     "flagged": "Naka-flag",
     "replaced": "Napalitan",
     "noFlagged": "Walang naka-flag ngayon.",
@@ -165,7 +164,6 @@
     "description": "Role description",
     "create": "Gawin",
     "createFailed": "Hindi masimulan ang template. Pakisubukang muli.",
-    "text": "Mga handang interview ayon sa role, para sa mga kumpanya at job seeker.",
     "deleteLabel": "Burahin ang {title}",
     "deleteTitle": "Burahin ang template na ito?",
     "deleteText": "Mabubura ang mga topic at tanong nito. Mananatili ang mga interview na nagawa na ng mga kumpanya mula rito.",
@@ -317,13 +315,11 @@
     "using": "Sinisimulan…",
     "useFailed": "Hindi makapagsimula ng interview mula sa template na ito. Pakisubukang muli.",
     "warningTitle": "Handa na ang mga template para sa mga karaniwang role.",
-    "warning": "Para mas tumugma, gumawa ng interview mula sa iyong job description.",
-    "text": "Mga handang interview ayon sa role. Pumili ng isa para simulan ang iyong interview; puwede mo itong baguhin pagkatapos."
+    "warning": "Para mas tumugma, gumawa ng interview mula sa iyong job description."
   },
   "billing": {
     "paid": "Natanggap ang bayad. Lalabas ito rito sa ilang sandali.",
     "checkoutFailed": "Hindi mabuksan ang checkout. Pakisubukang muli.",
-    "credits": "{count, plural, one {# credit} other {# credits}}",
     "topUp": "Mag-top up",
     "low": "Paubos na",
     "creditsWord": "{count, plural, one {credit} other {credits}}",
@@ -347,7 +343,6 @@
   },
   "share": {
     "sent": "Naipadala ang imbitasyon sa {email}",
-    "checkEmail": "Suriin ang email address at subukang muli.",
     "failed": "Hindi maipadala ang imbitasyon.",
     "wrongEmail": "Ipinadala ang imbitasyong ito sa ibang email address.",
     "acceptFailed": "Hindi matanggap ang imbitasyon. Pakisubukang muli.",
@@ -397,7 +392,6 @@
     "details": "Mga detalye",
     "showLess": "Ipakita ang mas kaunti",
     "more": "+{count, number} pa",
-    "showAll": "Ipakita lahat",
     "limitRange": "Maglagay ng numero mula 1 hanggang {count}.",
     "limitFailed": "Hindi ma-save ang limit.",
     "limit": "Limit ng tanong",
@@ -602,7 +596,6 @@
     "generationFailed": "Nabigo ang paggawa",
     "fallbackTitle": "interview",
     "continueGeneration": "Ituloy ang paggawa",
-    "perSession": "bawat session",
     "empty": "Wala pang interview. Gumawa ng una.",
     "candidateCount": "{count, plural, one {# aplikante} other {# aplikante}}",
     "deleteLabel": "Burahin ang {title}",
@@ -619,7 +612,6 @@
     "memberFailed": "Hindi sila maimbitahan. Pakisubukang muli.",
     "invite": "Imbitahan",
     "jobDescription": "Job description",
-    "pasteJob": "I-paste ang job description: ang role, ang mga requirement at ang mga bentahe…",
     "generate": "Gumawa ng interview",
     "startFailed": "Hindi masimulan ang interview. Pakisubukang muli.",
     "candidateEmails": "Mga email ng aplikante",
@@ -681,7 +673,6 @@
     "invited": "Inimbitahan",
     "role": "Tungkulin",
     "roleFailed": "Hindi mapalitan ang tungkulin.",
-    "copy": "Kopyahin",
     "inviteTitle": "Imbitasyon sa kumpanya",
     "remove": "Alisin",
     "removed": "Inalis si {email}",
@@ -789,7 +780,6 @@
     "label": "Gawin sa wikang"
   },
   "referral": {
-    "companyTitle": "Mag-imbita ng ibang kumpanya",
     "companyNote": "Pareho kayong makakakuha ng {reward, number} credits kapag ginawa nila ang kanilang unang top-up, anumang halaga.",
     "deletedCompany": "Binurang kumpanya",
     "credits": "+{count, number} credits",
@@ -967,10 +957,6 @@
         "flags": "Flag sa pagmamadali, pag-alis o pangongopya",
         "answers": "Mga scorecard na may sagot at oras"
       },
-      "candidate": "Aplikante",
-      "score": "Score",
-      "rushed": "Minadaling sagot",
-      "left": "Umalis sa page",
       "role": "Backend developer · passing grade {mark}%"
     },
     "invite": {
@@ -1463,7 +1449,6 @@
   },
   "apiDocs": {
     "title": "Dokumentasyon para sa mga developer",
-    "intro": "Ikonekta ang prepza sa sarili mong platform: ilista ang mga interview mo, mag-imbita ng mga aplikante, kunin ang mga resulta nila at i-embed ang interview sa sarili mong site.",
     "description": "Ang dokumentasyon ng prepza para sa mga developer: kumuha ng API key, gumawa ng mga interview, mag-imbita at mamahala ng mga aplikante, basahin ang mga resulta nila, tanggapin ang mga ito sa webhook at i-embed ang interview gamit ang SDK.",
     "tabs": {
       "api": "API",

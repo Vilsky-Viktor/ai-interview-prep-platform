@@ -139,7 +139,6 @@
     "dismiss": "무시",
     "fixSent": "검증기로 보냈습니다. 곧 수정되거나 교체됩니다.",
     "actionFailed": "실패했습니다. 다시 시도해 주세요.",
-    "quality": "품질",
     "flagged": "신고됨",
     "replaced": "교체됨",
     "noFlagged": "현재 신고된 문제가 없습니다.",
@@ -165,7 +164,6 @@
     "description": "직무 설명",
     "create": "생성",
     "createFailed": "템플릿을 시작하지 못했습니다. 다시 시도해 주세요.",
-    "text": "직무별 기성 면접. 회사와 구직자를 위한 것입니다.",
     "deleteLabel": "{title} 삭제",
     "deleteTitle": "이 템플릿을 삭제할까요?",
     "deleteText": "주제와 문제가 삭제됩니다. 회사가 이미 이 템플릿으로 만든 면접은 유지됩니다.",
@@ -317,13 +315,11 @@
     "using": "시작하는 중…",
     "useFailed": "이 템플릿으로 면접을 시작하지 못했습니다. 다시 시도해 주세요.",
     "warningTitle": "템플릿은 일반적인 직무용으로 미리 만들어져 있습니다.",
-    "warning": "더 잘 맞추려면 채용 공고로 면접을 만드세요.",
-    "text": "직무별 기성 면접. 하나를 골라 면접을 시작하고, 나중에 변경할 수 있습니다."
+    "warning": "더 잘 맞추려면 채용 공고로 면접을 만드세요."
   },
   "billing": {
     "paid": "결제가 완료되었습니다. 잠시 후 여기에 표시됩니다.",
     "checkoutFailed": "결제 화면을 열지 못했습니다. 다시 시도해 주세요.",
-    "credits": "{count, plural, other {# 크레딧}}",
     "topUp": "충전",
     "low": "곧 소진",
     "creditsWord": "{count, plural, other {크레딧}}",
@@ -347,7 +343,6 @@
   },
   "share": {
     "sent": "{email}(으)로 초대를 보냈습니다",
-    "checkEmail": "이메일 주소를 확인하고 다시 시도해 주세요.",
     "failed": "초대를 보내지 못했습니다.",
     "wrongEmail": "이 초대는 다른 이메일 주소로 보내졌습니다.",
     "acceptFailed": "초대를 수락하지 못했습니다. 다시 시도해 주세요.",
@@ -397,7 +392,6 @@
     "details": "세부 내용",
     "showLess": "접기",
     "more": "+{count, number}개 더",
-    "showAll": "모두 보기",
     "limitRange": "1에서 {count} 사이의 숫자를 입력하세요.",
     "limitFailed": "한도를 저장하지 못했습니다.",
     "limit": "문제 수 한도",
@@ -602,7 +596,6 @@
     "generationFailed": "생성에 실패했습니다",
     "fallbackTitle": "면접",
     "continueGeneration": "생성 계속하기",
-    "perSession": "세션당",
     "empty": "아직 면접이 없습니다. 첫 면접을 만들어 보세요.",
     "candidateCount": "{count, plural, other {지원자 #명}}",
     "deleteLabel": "{title} 삭제",
@@ -619,7 +612,6 @@
     "memberFailed": "초대하지 못했습니다. 다시 시도해 주세요.",
     "invite": "초대",
     "jobDescription": "채용 공고",
-    "pasteJob": "채용 공고를 붙여 넣으세요: 담당 업무, 자격 요건, 우대 사항…",
     "generate": "면접 만들기",
     "startFailed": "면접을 시작하지 못했습니다. 다시 시도해 주세요.",
     "candidateEmails": "지원자 이메일",
@@ -681,7 +673,6 @@
     "invited": "초대됨",
     "role": "역할",
     "roleFailed": "역할을 변경하지 못했습니다.",
-    "copy": "복사",
     "inviteTitle": "회사 초대",
     "remove": "제거",
     "removed": "{email}을(를) 제거했습니다",
@@ -789,7 +780,6 @@
     "label": "생성 언어"
   },
   "referral": {
-    "companyTitle": "다른 회사 초대",
     "companyNote": "상대 회사가 금액에 관계없이 첫 충전을 하면 양쪽 모두 {reward, number} 크레딧을 받습니다.",
     "deletedCompany": "삭제된 회사",
     "credits": "+{count, number} 크레딧",
@@ -954,10 +944,6 @@
         "flags": "서두름, 이탈, 복사 표시",
         "answers": "답변과 소요 시간이 담긴 평가표"
       },
-      "candidate": "지원자",
-      "score": "점수",
-      "rushed": "서두른 답변",
-      "left": "페이지 이탈",
       "role": "백엔드 개발자 · 합격 기준 {mark}%"
     },
     "invite": {
@@ -1450,7 +1436,6 @@
   },
   "apiDocs": {
     "title": "개발자 문서",
-    "intro": "prepza를 자체 플랫폼에 연결하세요. 면접 목록을 조회하고, 지원자를 초대하고, 결과를 받고, 면접을 자체 사이트에 삽입할 수 있습니다.",
     "description": "prepza 개발자 문서입니다. API 키를 발급받고, 면접을 만들고, 지원자를 초대하고 관리하고, 결과를 조회하거나 웹훅으로 받고, SDK로 면접을 삽입하는 방법을 설명합니다.",
     "tabs": {
       "api": "API",
