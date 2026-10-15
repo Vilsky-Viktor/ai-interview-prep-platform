@@ -1,8 +1,9 @@
 from collections.abc import AsyncIterator
 
-from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage
+from langchain_core.messages import BaseMessage, HumanMessage, SystemMessage
 from prepza_common import memory_cache
 from prepza_common.constants import DAY_SECONDS, DEFAULT_LANGUAGE, LANGUAGES
+from prepza_common.llm import latest_messages
 from prepza_common.rate_limit import add_spent
 from prepza_common.scope import SCOPE_RULE
 
@@ -32,26 +33,13 @@ def build_messages(
         language=LANGUAGES[language],
         scope=SCOPE_RULE,
     )
-    question = conversation[-1]
-    earlier = []
-    room = HELP_HISTORY_CHARACTERS
+    # The latest messages before the question (the last one, the user's), while they fit.
+    before = conversation[-(HELP_HISTORY_MESSAGES + 1) : -1]
+    earlier = latest_messages(
+        [(item.role == HelpRole.USER, item.content) for item in before], HELP_HISTORY_CHARACTERS
+    )
 
-    # The latest messages before the question, while they fit.
-    for item in reversed(conversation[-(HELP_HISTORY_MESSAGES + 1) : -1]):
-        room -= len(item.content)
-
-        if room < 0:
-            break
-
-        earlier.insert(0, item)
-
-    messages: list[BaseMessage] = [SystemMessage(content=system)]
-
-    for item in [*earlier, question]:
-        message_class = HumanMessage if item.role == HelpRole.USER else AIMessage
-        messages.append(message_class(content=item.content))
-
-    return messages
+    return [SystemMessage(content=system), *earlier, HumanMessage(content=conversation[-1].content)]
 
 
 async def stream_reply(messages: list[BaseMessage], used: dict) -> AsyncIterator[str]:

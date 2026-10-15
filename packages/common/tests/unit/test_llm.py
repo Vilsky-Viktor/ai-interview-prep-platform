@@ -1,5 +1,6 @@
 import pytest
-from prepza_common.llm import call_cost, chat_model
+from langchain_core.messages import AIMessage, HumanMessage
+from prepza_common.llm import call_cost, chat_model, latest_messages
 
 
 @pytest.fixture(autouse=True)
@@ -35,3 +36,16 @@ def test_a_call_costs_its_tokens_at_the_models_price():
 
     assert call_cost("gpt-6.1-sol", usage) == 2.0 + 1.0
     assert call_cost("unknown-model", usage) is None
+
+
+def test_only_the_latest_messages_that_fit_are_kept():
+    messages = [(True, "x" * 50), (False, "y" * 30), (True, "z" * 30)]
+
+    assert latest_messages(messages, 70) == [
+        AIMessage(content="y" * 30),
+        HumanMessage(content="z" * 30),
+    ]
+
+
+def test_a_message_without_text_adds_nothing():
+    assert latest_messages([(True, "Hi"), (False, "")], 1_000) == [HumanMessage(content="Hi")]

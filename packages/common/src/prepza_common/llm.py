@@ -1,6 +1,7 @@
 """OpenAI chat models, built one way by every service that talks to one. Needs the package's `llm`
 extra (langchain-openai); the key comes from OPENAI_API_KEY."""
 
+from langchain_core.messages import AIMessage, BaseMessage, HumanMessage
 from langchain_openai import ChatOpenAI
 from prepza_common.constants import MODEL_PRICES
 
@@ -35,3 +36,24 @@ def call_cost(model_name: str, usage: dict) -> float | None:
     return (
         usage.get("input_tokens", 0) * price[0] + usage.get("output_tokens", 0) * price[1]
     ) / 1e6
+
+
+def latest_messages(messages: list[tuple[bool, str]], room: int) -> list[BaseMessage]:
+    """What a model reads of a conversation: its latest messages (oldest first) within `room`
+    characters. `messages` are (from the user, text), oldest first; one without text is left
+    out."""
+    kept: list[BaseMessage] = []
+
+    for from_user, text in reversed(messages):
+        if not text:
+            continue
+
+        room -= len(text)
+
+        if room < 0:
+            break
+
+        kind = HumanMessage if from_user else AIMessage
+        kept.insert(0, kind(content=text))
+
+    return kept
