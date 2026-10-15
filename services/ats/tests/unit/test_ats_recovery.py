@@ -194,3 +194,21 @@ def test_the_recovery_job_starts_no_new_result_late_in_the_run(world, monkeypatc
 
     # Started at 0, so 20 seconds in it sends one; at 40, past REPORT_SECONDS, it stops.
     assert reported == ["a"]
+
+
+def test_the_recovery_job_stops_inviting_when_its_time_is_up(world, monkeypatch):
+    clock = SimpleNamespace(now=100.0)
+
+    async def invite(row, connection, interview):
+        world["settled"][row.id] = ("invited", None)
+        # Each invite takes 8 seconds.
+        clock.now += 8
+
+    monkeypatch.setattr(flow.time, "monotonic", lambda: clock.now)
+    monkeypatch.setattr(flow, "invite", invite)
+    rows = [candidate(world, f"c{index}@example.com") for index in range(5)]
+
+    asyncio.run(flow.invite_all(rows, stop_at=120.0))
+
+    # Started at 100, 108 and 116; not at 124.
+    assert len(world["settled"]) == 3

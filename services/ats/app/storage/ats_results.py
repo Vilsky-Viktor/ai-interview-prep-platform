@@ -3,9 +3,10 @@ from uuid import UUID
 
 from sqlalchemy import func, or_, select, update
 
-from app.constants.ats import REPORT_BATCH, STALE_CLAIM_MINUTES, ConnectionStatus
+from app.constants.ats import STALE_CLAIM_MINUTES, ConnectionStatus
 from app.models.ats import AtsCandidate, AtsConnection
 from app.storage.db import Session
+from app.storage.turns import in_turns
 
 # A finished candidate's results going back to the ATS, once (reported_at, set once the ATS took
 # them).
@@ -68,18 +69,16 @@ async def keep(row_id: UUID, data: dict) -> None:
 
 async def unreported() -> list[AtsCandidate]:
     """Kept results of working connections (also ones whose write was cut off), longest kept
-    first, as many as one run sends."""
+    first, each connection's in turn."""
     working = select(AtsConnection.id).where(AtsConnection.status == ConnectionStatus.CONNECTED)
-    query = (
-        select(AtsCandidate)
-        .where(
+    query = in_turns(
+        (
             AtsCandidate.connection_id.in_(working),
             AtsCandidate.result.is_not(None),
             AtsCandidate.reported_at.is_(None),
             _free(),
-        )
-        .order_by(AtsCandidate.kept_at)
-        .limit(REPORT_BATCH)
+        ),
+        AtsCandidate.kept_at,
     )
 
     async with Session() as session:

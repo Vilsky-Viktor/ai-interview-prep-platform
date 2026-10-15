@@ -16,6 +16,7 @@ from app.constants.ats import (
 from app.models.ats import AtsCandidate, AtsConnection
 from app.models.outbox import OutboxEvent
 from app.storage.db import Session
+from app.storage.turns import in_turns
 
 
 async def add(
@@ -80,16 +81,16 @@ async def claim(row_id: UUID, statuses: tuple[str, ...]) -> bool:
 
 
 async def recoverable() -> list[AtsCandidate]:
-    """For the recovery job, oldest first: the candidates of working connections still waiting
-    (left for later, or arrived while the connection was broken), and invites cut off midway."""
+    """For the recovery job, oldest first, each connection's in turn: the candidates of working
+    connections still waiting (left for later, or arrived while the connection was broken), and
+    invites cut off midway."""
     working = select(AtsConnection.id).where(AtsConnection.status == ConnectionStatus.CONNECTED)
-    query = (
-        select(AtsCandidate)
-        .where(
+    query = in_turns(
+        (
             AtsCandidate.connection_id.in_(working),
             or_(AtsCandidate.status == CandidateStatus.WAITING, _stale()),
-        )
-        .order_by(AtsCandidate.created_at)
+        ),
+        AtsCandidate.created_at,
     )
 
     async with Session() as session:

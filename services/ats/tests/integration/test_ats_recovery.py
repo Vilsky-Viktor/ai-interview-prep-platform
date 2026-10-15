@@ -199,3 +199,30 @@ def test_an_unlinked_jobs_waiting_candidates_are_never_invited(run):
     assert waiting == []
     # Invited ones stay, for writing their results back.
     assert kept is not None and kept[0].status == CandidateStatus.INVITED
+
+
+def test_the_recovery_job_takes_each_connections_candidates_in_turn(run):
+    """One company's backlog doesn't hold up another's: every connection's oldest comes first."""
+
+    async def scenario():
+        busy, quiet = uuid.uuid4(), uuid.uuid4()
+        interview = uuid.uuid4()
+        await ats.connect(busy, AtsProvider.WORKABLE, "busy", "sealed", "ann")
+        await ats.connect(quiet, AtsProvider.WORKABLE, "quiet", "sealed", "bob")
+        backlog = await ats.connection(busy, AtsProvider.WORKABLE)
+        other = await ats.connection(quiet, AtsProvider.WORKABLE)
+        ours = []
+
+        for name in ("busy-1", "busy-2", "busy-3"):
+            ours.append(name)
+            await ats_candidates.add(backlog.id, None, interview, name, f"{name}@x.com")
+
+        ours.append("quiet-1")
+        await ats_candidates.add(other.id, None, interview, "quiet-1", "quiet-1@x.com")
+        found = [row.candidate_id for row in await ats_candidates.recoverable()]
+        await ats.delete_company(busy)
+        await ats.delete_company(quiet)
+
+        return [item for item in found if item in ours]
+
+    assert run(scenario()) == ["busy-1", "quiet-1", "busy-2", "busy-3"]

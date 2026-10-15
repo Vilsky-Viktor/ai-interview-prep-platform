@@ -11,6 +11,7 @@ from app.constants.ats import (
     INVITE_BATCH,
     MAX_INVITE_ATTEMPTS,
     NEEDS_AUTHOR,
+    RECOVER_INVITE_SECONDS,
     REPORT_SECONDS,
     SCORECARD_LINK,
     CandidateStatus,
@@ -134,15 +135,18 @@ async def refused(
     await outbox_service.flush_quietly()
 
 
-async def invite_all(rows: list[AtsCandidate]) -> None:
+async def invite_all(rows: list[AtsCandidate], stop_at: float | None = None) -> None:
     """Invites the candidates whose interviews are ready (read from companies in one call), in
-    their order, at most INVITE_BATCH, so one run ends in time: the rest stay waiting, for the
-    recovery job. Each is claimed first, so a run again (a redelivered event) invites nobody
-    twice."""
+    their order, at most INVITE_BATCH, or until `stop_at` (time.monotonic) for the recovery job,
+    so one run ends in time: the rest stay waiting, for the recovery job. Each is claimed
+    first, so a run again (a redelivered event) invites nobody twice."""
     found = await companies.interviews({row.interview_id for row in rows})
     ready = [row for row in rows if (found.get(row.interview_id) or {}).get("ready")]
 
-    for row in ready[:INVITE_BATCH]:
+    for row in ready if stop_at else ready[:INVITE_BATCH]:
+        if stop_at and time.monotonic() >= stop_at:
+            break
+
         connection = await ats.connection_by_id(row.connection_id)
 
         if connection is not None:
@@ -171,15 +175,15 @@ async def topped_up(company_id: UUID) -> None:
 async def recover() -> int:
     """Every 10 minutes: candidates still waiting (left for later by a run, by companies not
     answering, or sent while the connection was broken) and invites cut off midway (the server
-    stopped) are invited, as far as one batch goes; results kept while a connection was broken
-    or the ATS failed go back, as far as REPORT_SECONDS into the run. How many candidates were
-    found."""
-    stop_at = time.monotonic() + REPORT_SECONDS
+    stopped) are invited, until RECOVER_INVITE_SECONDS into the run; results kept while a
+    connection was broken or the ATS failed go back, until REPORT_SECONDS into it. Both go
+    through every connection's in turn. How many candidates were found."""
+    started = time.monotonic()
     rows = await ats_candidates.recoverable()
-    await invite_all(rows)
+    await invite_all(rows, started + RECOVER_INVITE_SECONDS)
 
     for row in await ats_results.unreported():
-        if time.monotonic() >= stop_at:
+        if time.monotonic() >= started + REPORT_SECONDS:
             break
 
         try:
