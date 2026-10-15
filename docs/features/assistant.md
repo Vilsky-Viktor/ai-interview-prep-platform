@@ -129,7 +129,6 @@ The limits for everyone hold only people in a company that never topped up, so f
 
 - Kept (Postgres `assistant`): the user's messages and the assistant's answers (text), each answer's blocks as references only (their kind, the ids of what they showed and their links, which are app paths of ids), and which tools an answer called with how long they took and how they ended (argument names, no values; no results). Opening a conversation fetches its blocks again with the user's token: what they may see now, without anything deleted or erased since.
 - Not kept: tools' results (other people's data, such as candidates' results), pending actions' arguments (Redis, 10 minutes) and voice recordings (in memory only).
-- Migration `0002` emptied what was kept before: tool calls' results and arguments' values, and the data in stored blocks.
 
 ## Retention and deletion
 
