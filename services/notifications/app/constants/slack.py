@@ -49,3 +49,9 @@ class SlackStatus:
     CONNECTED = "connected"
     # Slack no longer takes its messages: reconnect.
     BROKEN = "broken"
+
+
+# A dot between two letters or digits, as in a domain or an email: Slack would make it a link.
+LINKABLE_DOT = r"(?<=\w)\.(?=\w)"
+# Put after such a dot, so the text reads the same but Slack doesn't link it.
+ZERO_WIDTH_SPACE = "\u200b"

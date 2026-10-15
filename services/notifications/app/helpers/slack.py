@@ -1,8 +1,11 @@
 import base64
 import hashlib
 import hmac
+import re
 
 from prepza_common.notifications import NotificationKind
+
+from app.constants.slack import LINKABLE_DOT, ZERO_WIDTH_SPACE
 
 # Why an ATS candidate wasn't invited, as the message says it.
 NOT_INVITED = {
@@ -13,8 +16,11 @@ NOT_INVITED = {
 
 
 def escaped(text: str) -> str:
-    """`text` as Slack shows it, never as markup: a title "<!channel>" doesn't ping anyone."""
-    return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+    """`text` as Slack shows it, never as markup: a title "<!channel>" doesn't ping anyone, and
+    a name like "www.evil-login.com" or an email isn't made a link."""
+    text = text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+    return re.sub(LINKABLE_DOT, "." + ZERO_WIDTH_SPACE, text)
 
 
 def signed_state(secret: str, company_id: str, user_id: str, expires: int, nonce: str) -> str:
@@ -44,7 +50,7 @@ def read_state(secret: str, state: str, now: int) -> tuple[str, str, str] | None
     return company_id, user_id, nonce
 
 
-def message(event: dict, site: str) -> str | None:
+def message(event: dict, site: str) -> dict | None:
     """A notification as a Slack message (in English, like the bell's English text), linking to
     where it points; None for a kind Slack doesn't get."""
     data = event.get("data") or {}
@@ -81,4 +87,23 @@ def message(event: dict, site: str) -> str | None:
     # people wrote are escaped: the links are ours.
     link = data.get("candidate_link") or event.get("link", "")
 
-    return f"{escaped(text)} <{site}{link}|Open in prepza>"
+    shown = escaped(text)
+
+    # Plain text, which Slack formats in no way (no *bold*, _italics_ or links in what people
+    # wrote), and our own link as a button.
+    return {
+        "text": shown,
+        "blocks": [
+            {"type": "section", "text": {"type": "plain_text", "text": shown, "emoji": False}},
+            {
+                "type": "actions",
+                "elements": [
+                    {
+                        "type": "button",
+                        "text": {"type": "plain_text", "text": "Open in prepza"},
+                        "url": f"{site}{link}",
+                    }
+                ],
+            },
+        ],
+    }

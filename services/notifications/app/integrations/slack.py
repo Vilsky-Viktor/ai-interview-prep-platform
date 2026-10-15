@@ -51,13 +51,11 @@ async def exchange(code: str) -> dict:
     }
 
 
-async def post(webhook: str, text: str) -> None:
-    """Posts `text` to the channel; WebhookGone when Slack says the web hook is gone, SlackRefused
+async def post(webhook: str, payload: dict) -> None:
+    """Posts the message (`payload`: its text and blocks) to the channel; WebhookGone when Slack says the web hook is gone, SlackRefused
     when it turns the message down for good, an httpx.HTTPError when it's busy or down (429, 5xx,
     a timeout), which is worth retrying."""
-    response = await http.get_client().post(
-        webhook, json={"text": text}, timeout=SLACK_TIMEOUT_SECONDS
-    )
+    response = await http.get_client().post(webhook, json=payload, timeout=SLACK_TIMEOUT_SECONDS)
 
     if response.status_code in (403, 404, 410) or response.text.strip() in SLACK_GONE:
         raise WebhookGone
