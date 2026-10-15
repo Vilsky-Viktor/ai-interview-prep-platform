@@ -19,7 +19,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { MAX_EMAIL_LENGTH } from "@/constants/limits"
 import { MEMBER_ROLES, type MemberRole } from "@/constants/roles"
-import { apiFetch } from "@/lib/api"
+import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
 import type { CompanyMember } from "@/types/company"
 
 /** "Add member" beside the page title, opening a dialog for the email and the role (admin by
@@ -49,8 +49,14 @@ export function InviteAdmin({ companyId }: { companyId: string }) {
       setRole(MEMBER_ROLES[0])
       setOpen(false)
       router.refresh()
-    } catch {
-      toast.error(t("memberFailed"))
+    } catch (error) {
+      // The service says why: already invited or a member already (409, 400), too many
+      // invites waiting (409), the email limits (429).
+      const said =
+        error instanceof ApiError && [400, 403, 409].includes(error.status)
+      toast.error(
+        said ? error.message : apiErrorMessage(error, t("memberFailed"))
+      )
     } finally {
       setSending(false)
     }

@@ -75,6 +75,13 @@ test("owner adds a viewer, who sees the company read-only", async ({
   await expect(row.getByRole("button", { name: "Remove" })).toBeVisible();
   await shot(owner, "member-row");
 
+  // Inviting the same email again says why it isn't sent.
+  await owner.getByRole("button", { name: "Add member" }).click();
+  await owner.getByRole("dialog").getByLabel("Member email").fill(viewer);
+  await owner.getByRole("dialog").getByRole("button", { name: "Add member" }).click();
+  await expect(owner.getByText("That email is already invited")).toBeVisible();
+  await owner.keyboard.press("Escape");
+
   // The role changes in place, and back.
   await row.getByRole("button", { name: "Role" }).click();
   await pickRole(owner, "admin");
