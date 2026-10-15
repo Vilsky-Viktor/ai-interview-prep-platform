@@ -15,7 +15,7 @@ from app.models.sessions import Session
 from app.models.signals import Signal
 from app.routers import sessions as sessions_router
 from app.schemas.library import TopicQuestions
-from app.storage import sessions
+from app.storage import sessions, signals
 
 QUESTION_ID = uuid4()
 
@@ -115,7 +115,7 @@ def test_the_browser_reports_signals(monkeypatch):
             raise HTTPException(429, "Too many requests. Try again later.")
 
     monkeypatch.setattr(sessions, "get", fake_get)
-    monkeypatch.setattr(sessions, "add_signal", fake_add_signal)
+    monkeypatch.setattr(signals, "add_signal", fake_add_signal)
     monkeypatch.setattr(sessions_router, "hit", hit)
     app.dependency_overrides[current_user] = lambda: User(
         uid="cand", email="cand@example.com", email_verified=True
@@ -189,8 +189,8 @@ def test_coming_back_records_how_long_the_leave_lasted(monkeypatch):
         return None
 
     monkeypatch.setattr(sessions, "get", fake_get)
-    monkeypatch.setattr(sessions, "add_signal", fake_add_signal)
-    monkeypatch.setattr(sessions, "set_away", fake_set_away)
+    monkeypatch.setattr(signals, "add_signal", fake_add_signal)
+    monkeypatch.setattr(signals, "set_away", fake_set_away)
     monkeypatch.setattr(sessions_router, "hit", hit)
     app.dependency_overrides[current_user] = lambda: User(
         uid="cand", email="cand@example.com", email_verified=True

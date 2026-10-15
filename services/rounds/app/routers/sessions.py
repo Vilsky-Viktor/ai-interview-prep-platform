@@ -12,7 +12,7 @@ from app.schemas.rounds import AnswerCreate
 from app.schemas.sessions import SessionAnswerResult, SignalIn
 from app.services.session_access import get_own_session, get_owned_session
 from app.services.session_answers import submit_session_answer
-from app.storage import sessions
+from app.storage import signals
 
 router = APIRouter(prefix="/sessions", tags=["sessions"])
 
@@ -31,12 +31,12 @@ async def add_signal(session_id: UUID, body: SignalIn, user: CurrentUser) -> Non
 
     if body.kind == IntegritySignal.TAB_RETURN:
         if body.seconds is not None:
-            await sessions.set_away(row.id, body.seconds)
+            await signals.set_away(row.id, body.seconds)
 
         return
 
     question = next_session_question(row) if row.question_shown_at else None
-    await sessions.add_signal(row.id, question.question_id if question else None, body.kind)
+    await signals.add_signal(row.id, question.question_id if question else None, body.kind)
 
 
 @router.post("/{session_id}/answers", status_code=201)

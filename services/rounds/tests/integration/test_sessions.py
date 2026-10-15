@@ -1,9 +1,8 @@
 import asyncio
 import uuid
 
-from app.constants.integrity import MAX_SIGNALS_PER_QUESTION
 from app.models.answers import Answer
-from app.storage import practice_sessions, sessions
+from app.storage import practice_sessions, sessions, signals
 from tests.integration.factories import option_index, topic
 
 
@@ -36,25 +35,6 @@ def test_two_requests_timing_out_the_same_question_save_one_answer(run):
     assert len(row.answers) == 1
     # The answer stopped the clock, so the next question starts its own.
     assert row.question_shown_at is None
-
-
-def test_signals_are_saved_with_their_question_and_loaded_for_the_scorecard(run):
-    invite_id = uuid.uuid4()
-
-    async def scenario():
-        [row] = await sessions.create_many("cand", invite_id, [topic()], 60)
-        question_id = uuid.UUID(row.questions[0]["id"])
-        await sessions.add_signal(row.id, question_id, "tab_leave")
-        await sessions.add_signal(row.id, None, "copy")
-
-        return await sessions.list_for_invite(invite_id, signals=True), question_id
-
-    [row], question_id = run(scenario())
-
-    assert sorted((signal.kind, signal.question_id) for signal in row.signals) == [
-        ("copy", None),
-        ("tab_leave", question_id),
-    ]
 
 
 def test_scores_show_progress_and_the_grade_of_answers_so_far(run):
@@ -213,9 +193,9 @@ def test_scores_add_up_every_section_its_signals_and_fast_answers(run):
                 )
             )
 
-        await sessions.add_signal(rows[0].id, None, "tab_leave")
-        await sessions.add_signal(rows[1].id, None, "tab_leave")
-        await sessions.add_signal(rows[1].id, None, "copy")
+        await signals.add_signal(rows[0].id, None, "tab_leave")
+        await signals.add_signal(rows[1].id, None, "tab_leave")
+        await signals.add_signal(rows[1].id, None, "copy")
 
         return await sessions.scores_for_invites([invite_id, other_id])
 
@@ -254,50 +234,3 @@ def test_sections_keep_their_topics_order(run):
     listed, topics = run(scenario())
 
     assert listed == topics
-
-
-def test_a_question_keeps_a_limited_number_of_signals(run):
-    invite_id = uuid.uuid4()
-
-    async def scenario():
-        [row] = await sessions.create_many("cand", invite_id, [topic()], 30)
-        question_id = uuid.UUID(row.questions[0]["id"])
-
-        for _ in range(MAX_SIGNALS_PER_QUESTION + 5):
-            await sessions.add_signal(row.id, question_id, "tab_leave")
-
-        await sessions.add_signal(row.id, None, "copy")
-        [found] = await sessions.list_for_invite(invite_id, signals=True)
-
-        return found
-
-    found = run(scenario())
-
-    on_question = [signal for signal in found.signals if signal.question_id is not None]
-    assert len(on_question) == MAX_SIGNALS_PER_QUESTION
-    # Another question (here, none on screen) still keeps its own.
-    assert len(found.signals) == MAX_SIGNALS_PER_QUESTION + 1
-
-
-def test_a_returns_length_times_the_latest_leave_and_a_short_one_isnt_counted(run):
-    invite_id = uuid.uuid4()
-
-    async def scenario():
-        [row] = await sessions.create_many("cand", invite_id, [topic(2)], 60)
-        await sessions.add_signal(row.id, None, "tab_leave")
-        await sessions.set_away(row.id, 5)
-        await sessions.add_signal(row.id, None, "tab_leave")
-        # A moment's leave: kept, not counted.
-        await sessions.set_away(row.id, 0.5)
-        # A return without a leave left open changes nothing.
-        await sessions.set_away(row.id, 9)
-        # A leave never returned from counts.
-        await sessions.add_signal(row.id, None, "tab_leave")
-        [found] = await sessions.list_for_invite(invite_id, signals=True)
-
-        return found, await sessions.scores_for_invites([invite_id])
-
-    found, scores = run(scenario())
-
-    assert sorted(signal.away_seconds or -1 for signal in found.signals) == [-1, 0.5, 5]
-    assert scores[invite_id]["tab_leaves"] == 2
