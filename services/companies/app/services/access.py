@@ -1,6 +1,6 @@
 from uuid import UUID
 
-from fastapi import HTTPException, Request, status
+from fastapi import HTTPException, status
 from prepza_common.auth import CurrentUser
 from prepza_common.constants import VIA_MCP
 
@@ -65,9 +65,3 @@ def refuse_if_suspended(company: Company | None, invite_status: str | None) -> N
 
     if suspended and invite_status != InviteStatus.IN_PROCESS:
         raise HTTPException(status.HTTP_410_GONE, INTERVIEW_UNAVAILABLE)
-
-
-def bearer_token(request: Request) -> str:
-    header = request.headers.get("authorization", "")
-
-    return header.removeprefix("Bearer ").removeprefix("bearer ")

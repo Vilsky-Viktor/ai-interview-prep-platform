@@ -5,7 +5,8 @@ x-firebase-env: &firebase-env
   FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID}
   # While set, the services accept unsigned tokens from the Auth emulator. Never in production.
   FIREBASE_AUTH_EMULATOR_HOST: ${FIREBASE_AUTH_EMULATOR_HOST}
-  # Development only: serves /docs and /openapi.json, which `pnpm api-types` reads.
+  # Development only: serves /docs and /openapi.json, which `pnpm api-types` reads. The public
+  # api ignores it: its description is always published.
   API_DOCS: "true"
   # Superadmins, prepza's own team (templates, the question bank): verified Google emails, comma-separated.
   SUPERADMIN_EMAILS: ${SUPERADMIN_EMAILS:-}

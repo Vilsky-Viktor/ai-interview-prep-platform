@@ -101,6 +101,5 @@ class VerificationStatus(StrEnum):
 REVIEWED = (VerificationStatus.PENDING, VerificationStatus.APPROVED, VerificationStatus.DECLINED)
 # A rename sends these back for review.
 RENAME_REVIEWED = (VerificationStatus.PENDING, VerificationStatus.APPROVED)
-DECIDED = (VerificationStatus.APPROVED, VerificationStatus.DECLINED)
 MAX_DECLINE_REASON_LENGTH = 500
 REQUEST_CHANGED = "This request changed; check it again."

@@ -52,6 +52,5 @@ SENT_KEEP_DAYS = 30
 
 # The pages emails link to.
 COMPANIES_LINK = "/companies"
-INTERVIEWS_LINK = "/companies/{company_id}/interviews"
 INTERVIEW_LINK = "/companies/{company_id}/interviews/{interview_id}"
 TOP_UP_LINK = "/top-up"
