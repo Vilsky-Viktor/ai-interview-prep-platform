@@ -9,7 +9,7 @@ from prepza_common.tokens import hashed
 
 from app.helpers import webhooks
 from app.helpers.keys import add_months, expired, new_key
-from app.helpers.webhooks import body_of, public_address, signature
+from app.helpers.webhooks import body_of, masked, public_address, signature
 
 
 def test_a_new_key_is_kept_only_as_its_hash():
@@ -86,3 +86,8 @@ def test_a_failed_lookup_raises_so_the_send_is_retried(monkeypatch):
 
     with pytest.raises(socket.gaierror):
         public_address("https://unknown/hook")
+
+
+def test_a_masked_web_hook_address_keeps_only_its_site():
+    assert masked("https://hooks.zapier.com/hooks/catch/1/x?k=v") == "https://hooks.zapier.com/…"
+    assert masked("https://user:pass@example.com:8443/x") == "https://example.com:8443/…"

@@ -15,6 +15,15 @@ def new_secret() -> str:
     return "whsec_" + secrets.token_urlsafe(30)
 
 
+def masked(url: str) -> str:
+    """A web hook's address as members who can't change it see it: its site only, as the rest
+    (a Zapier or Make path, say) works like a password."""
+    parts = urlsplit(url)
+    port = f":{parts.port}" if parts.port else ""
+
+    return f"{parts.scheme}://{parts.hostname}{port}/…"
+
+
 def body_of(event_id: str, event_type: str, data: dict, occurred_at: datetime) -> bytes:
     """What a web hook gets: the event's id (the same on a repeat), its type, when the change
     happened (to put events in order: a retried event can arrive after a later one) and data."""

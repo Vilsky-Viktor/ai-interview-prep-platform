@@ -22,10 +22,11 @@ router = APIRouter(prefix="/manage", tags=["manage"], include_in_schema=False)
 
 @router.get("")
 async def get_settings(company_id: UUID, user: CurrentUser) -> ApiSettingsOut:
-    """Every member sees the keys (never the keys themselves) and web hooks."""
-    await companies.require(company_id, user.uid)
+    """Every member sees the keys (never the keys themselves) and web hooks; only owners and
+    admins their whole addresses."""
+    found = await companies.require(company_id, user.uid)
 
-    return await manage.overview(company_id)
+    return await manage.overview(company_id, found["editor"])
 
 
 @router.post("/keys", status_code=status.HTTP_201_CREATED)

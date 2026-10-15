@@ -122,6 +122,21 @@ def test_the_api_page_shows_a_web_hook_stopped_when_its_member_is_no_longer_an_e
     assert shown["stopped"] is True
 
 
+def test_only_owners_and_admins_see_a_web_hooks_whole_address(
+    client, companies_api, stored, public
+):
+    """A Zapier or Make address works like a password: a viewer sees its site only."""
+    sign_in()
+    client.post(HOOKS, json={"url": "https://hooks.zapier.com/hooks/catch/123/abc"})
+    [owner] = client.get(f"/manage?company_id={COMPANY}").json()["webhooks"]
+    companies_api["roles"]["u2"] = "viewer"
+    sign_in("u2")
+    [viewer] = client.get(f"/manage?company_id={COMPANY}").json()["webhooks"]
+
+    assert owner["url"] == "https://hooks.zapier.com/hooks/catch/123/abc"
+    assert viewer["url"] == "https://hooks.zapier.com/…"
+
+
 def test_a_web_hook_must_reach_the_public_internet(client, companies_api, stored, public):
     sign_in()
     response = client.post(HOOKS, json={"url": "https://internal/x"})
