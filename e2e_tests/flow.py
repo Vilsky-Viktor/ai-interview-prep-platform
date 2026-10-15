@@ -25,6 +25,8 @@ POSTGRES = os.getenv("E2E_POSTGRES", "prepza-postgres-1")
 KIT_TEXT = "Junior Python developer: Python basics, functions and lists."
 INTERVIEW_TEXT = "Backend developer: SQL basics, joins and indexes."
 GENERATION_TIMEOUT = 15 * 60
+# Cloudflare Turnstile's dummy token: the local test secret passes it (prepza_common human_check).
+HUMAN_CHECK_TOKEN = "XXXX.DUMMY.TOKEN.XXXX"
 
 
 def env(name: str) -> str:
@@ -66,7 +68,7 @@ WELCOME_COMPANY = 3 * CANDIDATE_CREDITS
 
 
 def api(method: str, path: str, token: str, body=None):
-    return call(method, API + path, token, body)
+    return call(method, API + path, token, body, {"X-Human-Check": HUMAN_CHECK_TOKEN})
 
 
 def step(message: str) -> None:
@@ -97,10 +99,15 @@ def wait(what: str, probe, timeout: float = GENERATION_TIMEOUT, every: float = 5
 CREATED: list[tuple[str, str]] = []
 
 
-def sign_up(name: str, verified: bool = False) -> tuple[str, str]:
-    """A new emulator user; verified ones get a fresh token carrying email_verified."""
-    # Resend's test address takes any +label and is delivered to nobody.
-    email = f"delivered+e2e-{name}-{uuid.uuid4().hex[:8]}@resend.dev"
+def sign_up(name: str, verified: bool = False, owner: bool = False) -> tuple[str, str]:
+    """A new emulator user; verified ones get a fresh token carrying email_verified. Resend's test
+    address takes any +label and is delivered to nobody, but all its labels are one inbox, and a
+    first company's welcome credits come once per inbox: an owner gets their own, on a reserved
+    domain that never receives mail."""
+    suffix = uuid.uuid4().hex[:8]
+    email = (
+        f"e2e-{name}-{suffix}@example.com" if owner else f"delivered+e2e-{name}-{suffix}@resend.dev"
+    )
     password = "secret123"
     auth = f"{AUTH}/identitytoolkit.googleapis.com/v1"
     user = call(
@@ -145,7 +152,9 @@ def clean_up() -> None:
                 headers={"Authorization": "Bearer owner"},
             )
         except SystemExit as error:
-            print(f"clean-up: couldn't delete a user: {error}")
+            # Deleting the account removed its sign-in already.
+            if "USER_NOT_FOUND" not in str(error):
+                print(f"clean-up: couldn't delete a user: {error}")
 
     print(f"clean-up: {len(CREATED)} throwaway accounts deleted")
 
@@ -165,24 +174,24 @@ def invite_token(invite_id: str) -> str:
     return token
 
 
-def answer_all(kind: str, item_id: str, token: str) -> int:
-    """Answers every question with its first option; how many were answered."""
+def take_interview(session_id: str, token: str) -> int:
+    """Takes the interview as the app does (step, answer, step, ... until it's done), answering
+    every question with its first option; how many were answered."""
     answered = 0
+    step = api("POST", f"/rounds/sessions/{session_id}/step", token)
 
-    while question := api("GET", f"/rounds/{kind}/{item_id}/next", token):
-        api(
-            "POST",
-            f"/rounds/{kind}/{item_id}/answers",
-            token,
-            {"question_id": question["question_id"], "option_index": 0},
-        )
+    while not step["done"]:
+        question = step["question"]
+        answer = {"question_id": question["question_id"], "option_index": 0}
+        api("POST", f"/rounds/sessions/{step['session']['id']}/answers", token, answer)
         answered += 1
+        step = api("POST", f"/rounds/sessions/{session_id}/step", token)
 
     return answered
 
 
 def company() -> None:
-    _, owner = sign_up("owner")
+    _, owner = sign_up("owner", owner=True)
     # Company names are unique across prepza, so each run gets its own.
     name = f"E2E Inc {uuid.uuid4().hex[:8]}"
     company_id = api("POST", "/companies/companies", owner, {"name": name})["id"]
@@ -213,11 +222,7 @@ def company() -> None:
 
     token = invite_token(invite["id"])
     sessions = api("POST", f"/companies/invites/{token}/start", candidate)["sessions"]
-    answered = 0
-
-    for session in sessions:
-        answered += answer_all("sessions", session["id"], candidate)
-        api("POST", f"/rounds/sessions/{session['id']}/finish", candidate)
+    answered = take_interview(sessions[0]["id"], candidate)
 
     step(f"candidate took the interview from the invite link: {answered} answers")
 

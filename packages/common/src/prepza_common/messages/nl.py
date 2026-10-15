@@ -142,7 +142,6 @@ MESSAGES = {
     "This invite was sent to a different email address": "Deze uitnodiging is naar een ander e-mailadres gestuurd",
     "This request changed; check it again.": "Dit verzoek is gewijzigd; controleer het opnieuw.",
     "This section is finished": "Dit onderdeel is afgerond",
-    "This section is still in progress.": "Dit onderdeel is nog bezig.",
     "Topic not found": "Onderwerp niet gevonden",
     # The in-app assistant's errors and its tools' progress labels.
     "Your session expired. Sign in again.": "Je sessie is verlopen. Log opnieuw in.",

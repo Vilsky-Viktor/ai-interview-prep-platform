@@ -23,12 +23,6 @@ async def user_ids(caller: ServiceCaller) -> UserIdsOut:
     return UserIdsOut(user_ids=await asyncio.to_thread(all_user_ids))
 
 
-@router.get("/{user_id}/email-preferences")
-async def get_email_preferences(user_id: str, caller: ServiceCaller) -> EmailPreferencesOut:
-    """For the services that send emails: what the user wants beyond service emails."""
-    return EmailPreferencesOut(**await emails.preferences(user_id))
-
-
 @router.post("/{user_id}/unsubscribe")
 async def unsubscribe(
     user_id: str, body: UnsubscribeIn, caller: ServiceCaller

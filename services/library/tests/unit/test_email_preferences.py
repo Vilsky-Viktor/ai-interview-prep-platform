@@ -93,25 +93,6 @@ def test_preferences_need_a_sign_in(client):
     assert client.get("/me/email-preferences").status_code == 401
 
 
-def test_services_read_a_users_preferences(client, signed_in):
-    response = client.get(
-        "/internal/users/ann/email-preferences",
-        headers={"Authorization": f"Bearer {token()}"},
-    )
-
-    assert response.status_code == 200
-    assert response.json()["updates"] is False
-
-
-def test_the_internal_route_needs_a_service_token(client, signed_in):
-    response = client.get(
-        "/internal/users/ann/email-preferences",
-        headers={"Authorization": "Bearer good-token"},
-    )
-
-    assert response.status_code == 401
-
-
 def test_notifications_unsubscribes_a_user_from_an_email_link(client, signed_in):
     response = client.post(
         "/internal/users/ann/unsubscribe",

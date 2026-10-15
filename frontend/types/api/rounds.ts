@@ -4,60 +4,6 @@
  */
 
 export interface paths {
-  "/sessions/{session_id}": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /** Get Session */
-    get: operations["get_session_sessions__session_id__get"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/sessions/{session_id}/topics": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /**
-     * List Topics
-     * @description Every topic of this candidate's interview, so they can open the ones besides the first.
-     */
-    get: operations["list_topics_sessions__session_id__topics_get"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/sessions/{session_id}/next": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /** Get Next Question */
-    get: operations["get_next_question_sessions__session_id__next_get"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
   "/sessions/{session_id}/signals": {
     parameters: {
       query?: never
@@ -91,45 +37,6 @@ export interface paths {
     put?: never
     /** Answer Question */
     post: operations["answer_question_sessions__session_id__answers_post"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/sessions/{session_id}/review": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /**
-     * Review Session
-     * @description Once a section is finished, candidates see the questions they answered and their picks,
-     *     never whether they were right or the key. Never while it runs: that would show questions
-     *     before their clock starts.
-     */
-    get: operations["review_session_sessions__session_id__review_get"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/sessions/{session_id}/finish": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    /** Finish */
-    post: operations["finish_sessions__session_id__finish_post"]
     delete?: never
     options?: never
     head?: never
@@ -1215,99 +1122,6 @@ export interface components {
 }
 export type $defs = Record<string, never>
 export interface operations {
-  get_session_sessions__session_id__get: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        session_id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["SessionOut"]
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  list_topics_sessions__session_id__topics_get: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        session_id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["SessionTopicOut"][]
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  get_next_question_sessions__session_id__next_get: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        session_id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["NextQuestion"] | null
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
   add_signal_sessions__session_id__signals_post: {
     parameters: {
       query?: never
@@ -1363,68 +1177,6 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["SessionAnswerResult"]
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  review_session_sessions__session_id__review_get: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        session_id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["ReviewItem"][]
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  finish_sessions__session_id__finish_post: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        session_id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["SessionOut"]
         }
       }
       /** @description Validation Error */

@@ -142,7 +142,6 @@ MESSAGES = {
     "This invite was sent to a different email address": "此邀请发送到了另一个邮箱地址",
     "This request changed; check it again.": "此请求已更改，请重新检查。",
     "This section is finished": "此部分已结束",
-    "This section is still in progress.": "此部分仍在进行中。",
     "Topic not found": "未找到主题",
     # The in-app assistant's errors and its tools' progress labels.
     "Your session expired. Sign in again.": "你的登录已过期，请重新登录。",

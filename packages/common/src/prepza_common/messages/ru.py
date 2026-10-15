@@ -142,7 +142,6 @@ MESSAGES = {
     "This invite was sent to a different email address": "Это приглашение отправлено на другую почту",
     "This request changed; check it again.": "Запрос изменился; проверьте его ещё раз.",
     "This section is finished": "Этот раздел завершён",
-    "This section is still in progress.": "Этот раздел ещё не завершён.",
     "Topic not found": "Тема не найдена",
     # The in-app assistant's errors and its tools' progress labels.
     "Your session expired. Sign in again.": "Сеанс истёк. Войдите снова.",

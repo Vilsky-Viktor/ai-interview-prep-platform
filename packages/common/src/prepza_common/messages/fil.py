@@ -142,7 +142,6 @@ MESSAGES = {
     "This invite was sent to a different email address": "Ipinadala ang imbitasyong ito sa ibang email address",
     "This request changed; check it again.": "Nagbago ang request na ito; i-check ulit.",
     "This section is finished": "Tapos na ang seksyong ito",
-    "This section is still in progress.": "Hindi pa tapos ang seksyong ito.",
     "Topic not found": "Hindi nakita ang topic",
     # The in-app assistant's errors and its tools' progress labels.
     "Your session expired. Sign in again.": "Nag-expire na ang session mo. Mag-sign in ulit.",

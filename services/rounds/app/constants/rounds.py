@@ -17,7 +17,6 @@ CHAT_TIMEOUT_SECONDS = 60
 # A timed interview's question ran out of time; it counts as wrong.
 TIME_UP = "Time is up for this question."
 # A section's review opens once it is finished, so no question is seen before its clock starts.
-SECTION_IN_PROGRESS = "This section is still in progress."
 # Extra seconds an answer may arrive after the deadline, for the trip to the server: a pick still
 # on screen is sent when the candidate's clock reaches zero.
 TIME_GRACE_SECONDS = 5

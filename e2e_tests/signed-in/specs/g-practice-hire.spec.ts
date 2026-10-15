@@ -55,9 +55,8 @@ test("a finished practice lists its questions without numbers", async ({ signInA
     `/rounds/practice/rounds/${round.round_id}`
   )
 
-  for (const topic of result.topics) {
-    await api(user, "POST", `/rounds/sessions/${topic.session_id}/finish`)
-  }
+  // Ended as the app's player ends it: every section at once.
+  await api(user, "POST", `/rounds/sessions/${result.topics[0].session_id}/finish-interview`)
 
   await visit(user, `/practice/rounds/${round.round_id}`)
   await expect(user.getByText("Good question?").first()).toBeVisible()

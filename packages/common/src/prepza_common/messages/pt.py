@@ -142,7 +142,6 @@ MESSAGES = {
     "This invite was sent to a different email address": "Este convite foi enviado para outro endereço de e-mail",
     "This request changed; check it again.": "Esta solicitação mudou; verifique-a novamente.",
     "This section is finished": "Esta seção foi concluída",
-    "This section is still in progress.": "Esta seção ainda está em andamento.",
     "Topic not found": "Tópico não encontrado",
     # The in-app assistant's errors and its tools' progress labels.
     "Your session expired. Sign in again.": "Sua sessão expirou. Entre novamente.",

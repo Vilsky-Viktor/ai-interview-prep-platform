@@ -142,7 +142,6 @@ MESSAGES = {
     "This invite was sent to a different email address": "Lời mời này được gửi đến một địa chỉ email khác",
     "This request changed; check it again.": "Yêu cầu này đã thay đổi; hãy kiểm tra lại.",
     "This section is finished": "Phần này đã kết thúc",
-    "This section is still in progress.": "Phần này vẫn đang diễn ra.",
     "Topic not found": "Không tìm thấy chủ đề",
     # The in-app assistant's errors and its tools' progress labels.
     "Your session expired. Sign in again.": "Phiên đăng nhập đã hết hạn. Hãy đăng nhập lại.",

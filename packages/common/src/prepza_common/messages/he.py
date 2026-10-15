@@ -142,7 +142,6 @@ MESSAGES = {
     "This invite was sent to a different email address": "ההזמנה הזו נשלחה לכתובת אימייל אחרת",
     "This request changed; check it again.": "הבקשה הזו השתנתה; בדקו אותה שוב.",
     "This section is finished": "החלק הזה הסתיים",
-    "This section is still in progress.": "החלק הזה עדיין בתהליך.",
     "Topic not found": "הנושא לא נמצא",
     # The in-app assistant's errors and its tools' progress labels.
     "Your session expired. Sign in again.": "תוקף ההתחברות פג. יש להתחבר שוב.",

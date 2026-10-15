@@ -142,7 +142,6 @@ MESSAGES = {
     "This invite was sent to a different email address": "この招待は別のメールアドレスに送信されました",
     "This request changed; check it again.": "このリクエストは変更されました。もう一度確認してください。",
     "This section is finished": "このセクションは終了しました",
-    "This section is still in progress.": "このセクションはまだ進行中です。",
     "Topic not found": "トピックが見つかりません",
     # The in-app assistant's errors and its tools' progress labels.
     "Your session expired. Sign in again.": "セッションの有効期限が切れました。もう一度ログインしてください。",

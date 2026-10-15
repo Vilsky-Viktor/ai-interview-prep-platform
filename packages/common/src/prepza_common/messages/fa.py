@@ -142,7 +142,6 @@ MESSAGES = {
     "This invite was sent to a different email address": "این دعوت به نشانی ایمیل دیگری فرستاده شده است",
     "This request changed; check it again.": "این درخواست تغییر کرده است؛ دوباره بررسی‌اش کنید.",
     "This section is finished": "این بخش تمام شده است",
-    "This section is still in progress.": "این بخش هنوز در جریان است.",
     "Topic not found": "موضوع پیدا نشد",
     # The in-app assistant's errors and its tools' progress labels.
     "Your session expired. Sign in again.": "نشست شما منقضی شد. دوباره وارد شوید.",

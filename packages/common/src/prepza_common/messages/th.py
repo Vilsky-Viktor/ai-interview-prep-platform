@@ -142,7 +142,6 @@ MESSAGES = {
     "This invite was sent to a different email address": "คำเชิญนี้ส่งไปยังอีเมลอื่น",
     "This request changed; check it again.": "คำขอนี้มีการเปลี่ยนแปลง โปรดตรวจสอบอีกครั้ง",
     "This section is finished": "ส่วนนี้จบแล้ว",
-    "This section is still in progress.": "ส่วนนี้ยังดำเนินอยู่",
     "Topic not found": "ไม่พบหัวข้อ",
     # The in-app assistant's errors and its tools' progress labels.
     "Your session expired. Sign in again.": "เซสชันหมดอายุแล้ว โปรดเข้าสู่ระบบอีกครั้ง",

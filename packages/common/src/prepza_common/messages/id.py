@@ -142,7 +142,6 @@ MESSAGES = {
     "This invite was sent to a different email address": "Undangan ini dikirim ke alamat email lain",
     "This request changed; check it again.": "Permintaan ini berubah; periksa lagi.",
     "This section is finished": "Bagian ini sudah selesai",
-    "This section is still in progress.": "Bagian ini masih berlangsung.",
     "Topic not found": "Topik tidak ditemukan",
     # The in-app assistant's errors and its tools' progress labels.
     "Your session expired. Sign in again.": "Sesimu telah berakhir. Masuk lagi.",

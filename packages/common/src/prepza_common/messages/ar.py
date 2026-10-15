@@ -142,7 +142,6 @@ MESSAGES = {
     "This invite was sent to a different email address": "أُرسلت هذه الدعوة إلى عنوان بريد إلكتروني آخر",
     "This request changed; check it again.": "تغيّر هذا الطلب؛ تحقّق منه مرة أخرى.",
     "This section is finished": "انتهى هذا القسم",
-    "This section is still in progress.": "هذا القسم لا يزال جاريًا.",
     "Topic not found": "لم يتم العثور على الموضوع",
     # The in-app assistant's errors and its tools' progress labels.
     "Your session expired. Sign in again.": "انتهت جلستك. سجّل الدخول مرة أخرى.",

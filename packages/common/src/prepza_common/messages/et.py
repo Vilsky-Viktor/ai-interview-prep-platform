@@ -154,7 +154,6 @@ MESSAGES = {
     "This invite was sent to a different email address": "See kutse saadeti teisele e-posti aadressile",
     "This request changed; check it again.": "See taotlus muutus; kontrolli seda uuesti.",
     "This section is finished": "See osa on lõppenud",
-    "This section is still in progress.": "See osa on veel pooleli.",
     "Topic not found": "Teemat ei leitud",
     # The in-app assistant's errors and its tools' progress labels.
     "Your session expired. Sign in again.": "Sinu seanss aegus. Logi uuesti sisse.",

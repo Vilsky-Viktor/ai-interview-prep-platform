@@ -2488,54 +2488,6 @@
     ]
    }
   },
-  "/internal/users/{user_id}/email-preferences": {
-   "get": {
-    "tags": [
-     "internal"
-    ],
-    "summary": "Get Email Preferences",
-    "description": "For the services that send emails: what the user wants beyond service emails.",
-    "operationId": "get_email_preferences_internal_users__user_id__email_preferences_get",
-    "security": [
-     {
-      "HTTPBearer": []
-     }
-    ],
-    "parameters": [
-     {
-      "name": "user_id",
-      "in": "path",
-      "required": true,
-      "schema": {
-       "type": "string",
-       "title": "User Id"
-      }
-     }
-    ],
-    "responses": {
-     "200": {
-      "description": "Successful Response",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/EmailPreferencesOut"
-        }
-       }
-      }
-     },
-     "422": {
-      "description": "Validation Error",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/HTTPValidationError"
-        }
-       }
-      }
-     }
-    }
-   }
-  },
   "/internal/users/{user_id}/unsubscribe": {
    "post": {
     "tags": [

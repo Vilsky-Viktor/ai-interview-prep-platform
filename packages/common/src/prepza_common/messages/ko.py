@@ -142,7 +142,6 @@ MESSAGES = {
     "This invite was sent to a different email address": "이 초대는 다른 이메일 주소로 보내졌습니다",
     "This request changed; check it again.": "이 요청이 변경되었습니다. 다시 확인해 주세요.",
     "This section is finished": "이 섹션은 종료되었습니다",
-    "This section is still in progress.": "이 섹션은 아직 진행 중입니다.",
     "Topic not found": "주제를 찾을 수 없습니다",
     # The in-app assistant's errors and its tools' progress labels.
     "Your session expired. Sign in again.": "세션이 만료되었습니다. 다시 로그인하세요.",

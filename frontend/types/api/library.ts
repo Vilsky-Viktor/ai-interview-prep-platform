@@ -745,26 +745,6 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  "/internal/users/{user_id}/email-preferences": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /**
-     * Get Email Preferences
-     * @description For the services that send emails: what the user wants beyond service emails.
-     */
-    get: operations["get_email_preferences_internal_users__user_id__email_preferences_get"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
   "/internal/users/{user_id}/unsubscribe": {
     parameters: {
       query?: never
@@ -3427,37 +3407,6 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["UserIdsOut"]
-        }
-      }
-    }
-  }
-  get_email_preferences_internal_users__user_id__email_preferences_get: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        user_id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["EmailPreferencesOut"]
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
         }
       }
     }

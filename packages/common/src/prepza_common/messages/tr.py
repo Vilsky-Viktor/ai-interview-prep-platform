@@ -142,7 +142,6 @@ MESSAGES = {
     "This invite was sent to a different email address": "Bu davet başka bir e-posta adresine gönderildi",
     "This request changed; check it again.": "Bu talep değişti; tekrar kontrol edin.",
     "This section is finished": "Bu bölüm bitti",
-    "This section is still in progress.": "Bu bölüm hâlâ devam ediyor.",
     "Topic not found": "Konu bulunamadı",
     # The in-app assistant's errors and its tools' progress labels.
     "Your session expired. Sign in again.": "Oturumunun süresi doldu. Yeniden giriş yap.",

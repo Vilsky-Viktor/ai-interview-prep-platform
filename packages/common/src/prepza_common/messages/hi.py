@@ -142,7 +142,6 @@ MESSAGES = {
     "This invite was sent to a different email address": "यह इनवाइट किसी दूसरे ईमेल पते पर भेजा गया था",
     "This request changed; check it again.": "यह अनुरोध बदल गया है; इसे फिर से जाँचें।",
     "This section is finished": "यह सेक्शन पूरा हो गया है",
-    "This section is still in progress.": "यह सेक्शन अभी जारी है।",
     "Topic not found": "विषय नहीं मिला",
     # The in-app assistant's errors and its tools' progress labels.
     "Your session expired. Sign in again.": "आपका सत्र समाप्त हो गया। फिर से साइन इन करें।",
