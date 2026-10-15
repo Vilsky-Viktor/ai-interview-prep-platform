@@ -8,6 +8,7 @@ from prepza_common import http, memory_cache
 from prepza_common.user import User
 
 from app.config.settings import settings
+from app.constants.mcp import MAX_KEEP_SECONDS
 from app.integrations import firebase_tokens
 
 ANN = User(uid="ann", email="ann@example.com", email_verified=True, language="de")
@@ -53,6 +54,20 @@ def test_the_user_is_signed_in_with_a_custom_token_and_kept(firebase):
     assert url.endswith("/accounts:signInWithCustomToken")
     assert params == {"key": settings.firebase_web_api_key}
     assert body == {"token": "custom", "returnSecureToken": True}
+
+
+def test_an_account_disabled_after_signing_in_loses_access_within_minutes(firebase, monkeypatch):
+    clock = SimpleNamespace(now=1000.0)
+    monkeypatch.setattr(memory_cache.time, "monotonic", lambda: clock.now)
+    asyncio.run(firebase_tokens.sign_in("ann"))
+    firebase.accounts["ann"] = True
+
+    soon = asyncio.run(firebase_tokens.sign_in("ann"))
+    clock.now += MAX_KEEP_SECONDS + 1
+    later = asyncio.run(firebase_tokens.sign_in("ann"))
+
+    assert soon == (ANN, "id-token")
+    assert later is None
 
 
 def test_forgetting_signs_in_again(firebase):

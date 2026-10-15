@@ -82,3 +82,9 @@ ACCOUNT_GONE = "This prepza account no longer exists or is disabled."
 # The tool that changes the user's language: their kept sign-in is dropped after it, so the next
 # calls answer in the new one.
 UPDATE_LANGUAGE = "update_language"
+
+# An AI app's Firebase ID token is kept until this long before Firebase says it expires, and
+# at most MAX_KEEP_SECONDS, so an account disabled or deleted meanwhile loses its access within
+# that on every instance: signing in again checks the account.
+EXPIRY_MARGIN_SECONDS = 300
+MAX_KEEP_SECONDS = 300

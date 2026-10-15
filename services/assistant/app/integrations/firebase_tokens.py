@@ -6,9 +6,8 @@ from prepza_common.auth import verify
 from prepza_common.user import User
 
 from app.config.settings import settings
+from app.constants.mcp import EXPIRY_MARGIN_SECONDS, MAX_KEEP_SECONDS
 
-# Kept until this long before Firebase says it expires.
-EXPIRY_MARGIN_SECONDS = 300
 CACHE_KEY = "mcp:id-token:{uid}"
 IDENTITY_TOOLKIT = "https://identitytoolkit.googleapis.com/v1"
 
@@ -23,8 +22,8 @@ def identity_url() -> str:
 
 async def sign_in(uid: str) -> tuple[User, str] | None:
     """The user and a Firebase ID token of theirs, as if they had signed in: an AI app's calls
-    go to the other services with it, which check it as any user's. Kept in memory until shortly
-    before it expires. None when the account is gone or disabled; never for an unknown uid (a
+    go to the other services with it, which check it as any user's. Kept in memory for at most
+    MAX_KEEP_SECONDS. None when the account is gone or disabled; never for an unknown uid (a
     custom token would create that user)."""
     cached = memory_cache.get(CACHE_KEY.format(uid=uid))
 
@@ -52,7 +51,7 @@ async def sign_in(uid: str) -> tuple[User, str] | None:
     if user is None:
         return None
 
-    seconds = int(found["expiresIn"]) - EXPIRY_MARGIN_SECONDS
+    seconds = min(int(found["expiresIn"]) - EXPIRY_MARGIN_SECONDS, MAX_KEEP_SECONDS)
     memory_cache.put(CACHE_KEY.format(uid=uid), (user, found["idToken"]), seconds)
 
     return user, found["idToken"]
