@@ -6,7 +6,7 @@ from datetime import UTC, datetime
 import mcp_types as types
 from fastapi import HTTPException
 from prepza_common.analytics import track
-from prepza_common.constants import DAY_SECONDS, MINUTE_SECONDS
+from prepza_common.constants import DAY_SECONDS, MINUTE_SECONDS, VIA_MCP
 from prepza_common.i18n import translate
 from prepza_common.pause import refuse_if_paused
 from prepza_common.rate_limit import hit_or_skip
@@ -27,7 +27,7 @@ from app.constants.mcp import (
     MCP_UNLISTED,
     UPDATE_LANGUAGE,
 )
-from app.constants.tool_calls import UNKNOWN_TOOL, VIA_MCP
+from app.constants.tool_calls import UNKNOWN_TOOL
 from app.helpers.mcp_schema import mcp_tool
 from app.helpers.oauth import funnel_client
 from app.integrations import firebase_tokens

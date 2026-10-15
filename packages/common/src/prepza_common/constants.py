@@ -22,6 +22,11 @@ TRACE_FIELD = "logging.googleapis.com/trace"
 # secret, so every event is refused. The alert in infra/terraform/monitoring.tf matches it.
 WEBHOOK_SIGNATURE_REFUSED = "web hook signature refused"
 NOT_READY = "Not ready"
+# What a call to companies came through when not a person in the app, as the issuer of the
+# X-Assistant token the assistant sends: the in-app assistant, or an AI app (Claude, ChatGPT,
+# ...) the member connected over MCP, which the assistant serves too. Audit events keep it.
+VIA_ASSISTANT = "assistant"
+VIA_MCP = "mcp"
 SIGN_IN_UNAVAILABLE = "Sign-in is temporarily unavailable. Please try again shortly."
 MINUTE_SECONDS = 60
 HOUR_SECONDS = 60 * MINUTE_SECONDS

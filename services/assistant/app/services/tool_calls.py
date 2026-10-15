@@ -2,6 +2,7 @@ import asyncio
 import time
 
 import httpx
+from prepza_common.constants import VIA_ASSISTANT
 from prepza_common.i18n import translate
 
 from app.config.settings import settings
@@ -10,7 +11,6 @@ from app.constants.tool_calls import (
     MAX_PARALLEL_TOOL_CALLS,
     SERVICE_UNAVAILABLE,
     UNKNOWN_TOOL,
-    VIA_ASSISTANT,
 )
 from app.helpers.arguments import fill_path, problems
 from app.helpers.blocks import render_block

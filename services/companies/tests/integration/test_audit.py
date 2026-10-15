@@ -1,10 +1,10 @@
 import uuid
 from datetime import UTC, datetime, timedelta
 
-from prepza_common.constants import DELETED_USER
+from prepza_common.constants import DELETED_USER, VIA_ASSISTANT
 from sqlalchemy import func, select, update
 
-from app.constants.audit import VIA_ASSISTANT, AuditAction
+from app.constants.audit import AuditAction
 from app.models.audit import AuditEvent
 from app.storage import accounts, audit, companies
 from app.storage.db import Session

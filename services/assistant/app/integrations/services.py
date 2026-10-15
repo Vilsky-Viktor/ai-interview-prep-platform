@@ -1,6 +1,6 @@
 import httpx
 from prepza_common import http
-from prepza_common.constants import REFERRAL_COOKIE
+from prepza_common.constants import REFERRAL_COOKIE, VIA_ASSISTANT
 
 from app.config.settings import settings
 from app.constants.tool_calls import (
@@ -8,7 +8,6 @@ from app.constants.tool_calls import (
     REFERRAL_CODE,
     SERVICE_URLS,
     TOOL_TIMEOUT_SECONDS,
-    VIA_ASSISTANT,
 )
 from app.service_auth import service_token
 

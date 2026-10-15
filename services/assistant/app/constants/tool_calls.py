@@ -18,10 +18,6 @@ ASSISTANT_HEADER = "X-Assistant"
 # A referral code as billing makes them (URL-safe): only one that reads right is passed on, in
 # the cookie companies reads.
 REFERRAL_CODE = re.compile(r"[A-Za-z0-9_-]{1,64}")
-# What a call came through, as that header's token names it (its issuer): the in-app assistant,
-# or an AI app connected over MCP.
-VIA_ASSISTANT = "assistant"
-VIA_MCP = "mcp"
 # Where each tool's service is: the settings attribute holding its base URL.
 SERVICE_URLS = {
     "companies": "companies_url",

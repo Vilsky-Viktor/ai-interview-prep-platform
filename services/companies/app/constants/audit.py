@@ -1,5 +1,7 @@
 from enum import StrEnum
 
+from prepza_common.constants import VIA_ASSISTANT, VIA_MCP
+
 # Audit events are kept this long (24 months), then the daily retention deletes them.
 AUDIT_RETENTION_DAYS = 730
 
@@ -20,12 +22,7 @@ class AuditAction(StrEnum):
     AI_APPS_CHANGED = "ai_apps_changed"
 
 
-# What an audit event was recorded through when not a person in the app (audit_events.via): the
-# in-app assistant reading for a member, or an AI app (Claude, ChatGPT, ...) the member connected
-# over MCP, which the assistant service serves too. Each is the issuer of the X-Assistant token
-# the assistant sends.
-VIA_ASSISTANT = "assistant"
-VIA_MCP = "mcp"
+# What an audit event can be recorded through when not a person in the app (audit_events.via).
 VIAS = (VIA_ASSISTANT, VIA_MCP)
 # A change made with an API key, recorded as the owner or admin who made it.
 VIA_API = "api"

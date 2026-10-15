@@ -2,9 +2,9 @@ from uuid import UUID
 
 from fastapi import HTTPException, Request, status
 from prepza_common.auth import CurrentUser
+from prepza_common.constants import VIA_MCP
 
 from app.constants.ai_apps import AI_APPS_OFF
-from app.constants.audit import VIA_MCP
 from app.constants.invites import COMPANY_SUSPENDED, INTERVIEW_UNAVAILABLE, InviteStatus
 from app.constants.roles import EDITORS, Role
 from app.models.companies import Company, Member
