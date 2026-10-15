@@ -15,13 +15,10 @@ from app.schemas.billing import AutoTopUpIn
 from app.services import auto_top_ups
 from app.storage import auto_top_ups as rows
 from app.storage import ledger
+from tests.integration.test_auto_top_ups import checkout_data
 
 COMPANY = OwnerType.COMPANY
 CHOICE = AutoTopUpIn(product="topup_50", threshold=500)
-
-
-def checkout_data(owner_id, buyer_id):
-    return {"owner_type": COMPANY, "owner_id": owner_id, "buyer_id": buyer_id, "auto_top_up": "1"}
 
 
 def test_a_second_member_turning_it_on_before_the_first_checkout_starts_it_with_their_card(

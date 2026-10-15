@@ -80,18 +80,45 @@ async def turn_on(owner_type: str, owner_id: str, body: AutoTopUpIn, buyer_id: s
 
 
 async def turn_off(owner_type: str, owner_id: str, buyer_id: str | None = None) -> None:
-    """Off at once; the subscription that kept the card is cancelled. With `buyer_id`, only if
-    that person's card pays for it (a member removed from the company)."""
-    subscription_id = await auto_top_ups.remove(owner_type, owner_id, buyer_id)
+    """Off, once the subscription that keeps the card is cancelled: if Paddle can't cancel it,
+    nothing changes and this raises, so turning it off (or deleting the company) can be tried
+    again. With `buyer_id`, only if that person's card pays for it (a member removed)."""
+    row = await auto_top_ups.get(owner_type, owner_id)
 
-    if subscription_id:
-        await cancel_quietly(subscription_id)
+    if row is None or (buyer_id is not None and row.buyer_id != buyer_id):
+        return
+
+    if row.subscription_id:
+        await cancel(row.subscription_id)
+
+    left = await auto_top_ups.remove(owner_type, owner_id, buyer_id)
+
+    # One started meanwhile goes too.
+    if left and left != row.subscription_id:
+        await cancel(left)
 
 
 async def forget_buyer(buyer_id: str) -> None:
-    """A deleted account's card is never charged again: its automatic top-ups go off."""
-    for subscription_id in await auto_top_ups.remove_for_buyer(buyer_id):
-        await cancel_quietly(subscription_id)
+    """A deleted account's card is never charged again: its automatic top-ups' subscriptions
+    are cancelled, then they go off. If Paddle can't cancel one, this raises and the account's
+    deletion is tried again."""
+    cancelled = set(await auto_top_ups.subscriptions_of_buyer(buyer_id))
+
+    for subscription_id in cancelled:
+        await cancel(subscription_id)
+
+    for subscription_id in set(await auto_top_ups.remove_for_buyer(buyer_id)) - cancelled:
+        await cancel(subscription_id)
+
+
+async def cancel(subscription_id: str) -> None:
+    """Cancels the subscription; one Paddle has already ended counts as cancelled. Raises
+    otherwise."""
+    try:
+        await paddle.cancel(subscription_id)
+    except httpx.HTTPStatusError:
+        if await paddle.subscription_status(subscription_id) != SUBSCRIPTION_ENDED_STATUS:
+            raise
 
 
 async def cancel_quietly(subscription_id: str) -> None:

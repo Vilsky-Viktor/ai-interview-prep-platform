@@ -152,6 +152,18 @@ async def remove(owner_type: str, owner_id: str, buyer_id: str | None = None) ->
         return subscription_id
 
 
+async def subscriptions_of_buyer(buyer_id: str) -> list[str]:
+    """The subscriptions of the automatic top-ups paid with this person's card."""
+    async with Session() as session:
+        rows = await session.scalars(
+            select(AutoTopUp.subscription_id).where(
+                AutoTopUp.buyer_id == buyer_id, AutoTopUp.subscription_id.is_not(None)
+            )
+        )
+
+        return list(rows)
+
+
 async def remove_for_buyer(buyer_id: str) -> list[str]:
     """Turns off every automatic top-up paid with this person's card; the subscriptions to
     cancel."""
