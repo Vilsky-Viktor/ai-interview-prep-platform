@@ -67,19 +67,25 @@ def run():
 
 @pytest.fixture
 def user():
-    """A new Auth emulator user: (uid, ID token); the user is deleted after the test. The
-    assistant checks the token as it does in the running stack."""
+    """A new Auth emulator user with a verified email: (uid, ID token); the user is deleted
+    after the test. The assistant checks the token as it does in the running stack."""
     if not firebase_admin._apps:
         firebase_admin.initialize_app(options={"projectId": os.environ["FIREBASE_PROJECT_ID"]})
 
     auth = f"http://{os.environ['FIREBASE_AUTH_EMULATOR_HOST']}/identitytoolkit.googleapis.com/v1"
     email = f"assistant-{uuid.uuid4().hex[:8]}@example.com"
-    found = httpx.post(
-        f"{auth}/accounts:signUp?key=demo",
-        json={"email": email, "password": "secret123", "returnSecureToken": True},
-    ).json()
+    credentials = {"email": email, "password": "secret123", "returnSecureToken": True}
+    found = httpx.post(f"{auth}/accounts:signUp?key=demo", json=credentials).json()
+    # Verified, as a Google sign-in is: a company needs a verified email. Signed in again, so
+    # the token says so.
+    httpx.post(
+        f"{auth}/projects/{os.environ['FIREBASE_PROJECT_ID']}/accounts:update",
+        json={"localId": found["localId"], "emailVerified": True},
+        headers={"Authorization": "Bearer owner"},
+    )
+    signed_in = httpx.post(f"{auth}/accounts:signInWithPassword?key=demo", json=credentials).json()
 
-    yield found["localId"], found["idToken"]
+    yield found["localId"], signed_in["idToken"]
 
     httpx.post(
         f"{auth}/projects/{os.environ['FIREBASE_PROJECT_ID']}/accounts:delete",
