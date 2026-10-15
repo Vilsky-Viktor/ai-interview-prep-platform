@@ -70,7 +70,7 @@ FAQ = [
     {
         "key": "integrations",
         "question": "prepza, ATS'imle veya diğer araçlarla çalışır mı?",
-        "answer": "Evet, ek ücret olmadan. Workable, Greenhouse, Teamtailor, Recruitee veya Breezy HR'ı şirketinizin Entegrasyonlar sekmesinden bağlayın: bir aşamaya taşıdığınız adaylar mülakatı alır ve sonuçları ATS'ye geri gönderilir. Slack, şirketinizin bildirimlerini bir kanala gönderebilir; API ise kendi platformunuzun adayları davet etmesini ve sonuçlarını almasını sağlar. Ayrıntılar için API belgeleri sayfasına bakın.",
+        "answer": "Evet, ek ücret olmadan. Workable, Greenhouse, Teamtailor, Recruitee veya Breezy HR'ı şirketinizin Entegrasyonlar sekmesinden bağlayın: bir aşamaya taşıdığınız adaylar mülakatı alır ve sonuçları ATS'ye geri gönderilir. Slack, şirketinizin bildirimlerini bir kanala gönderebilir; API ise kendi platformunuzun mülakat oluşturmasını, adayları davet edip yönetmesini ve sonuçlarını almasını sağlar. Ayrıntılar için API belgeleri sayfasına bakın.",
     },
     {
         "key": "ai_apps",

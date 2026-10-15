@@ -59,3 +59,16 @@ def test_a_companys_candidates_are_found_across_its_interviews_newest_first(run)
     assert by_email == [("ann@example.com", "Backend")]
     # An underscore is matched as typed, not as any character.
     assert underscore == []
+
+
+def test_a_companys_candidates_are_found_by_exactly_their_email(run):
+    async def scenario():
+        company, backend = await company_with_interview("Backend")
+        frontend = await interview_of(company, "Frontend")
+        await invite(backend, "ann@example.com")
+        await invite(frontend, "ann@example.com")
+        await invite(frontend, "joann@example.com")
+
+        return rows(await candidates.company_page(company.id, 0, 10, email="Ann@Example.com"))
+
+    assert run(scenario()) == [("ann@example.com", "Frontend"), ("ann@example.com", "Backend")]

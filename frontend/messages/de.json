@@ -1458,7 +1458,7 @@
   "apiDocs": {
     "title": "Entwicklerdokumentation",
     "intro": "Verbinde prepza mit deiner eigenen Plattform: Liste deine Interviews auf, lade Kandidaten ein, erhalte ihre Ergebnisse und bette das Interview in deine eigene Website ein.",
-    "description": "Die Entwicklerdokumentation von prepza: API-Schlüssel erhalten, Interviews auflisten, Kandidaten einladen, Ergebnisse abrufen, per Webhook empfangen und das Interview mit dem SDK einbetten.",
+    "description": "Die Entwicklerdokumentation von prepza: API-Schlüssel erhalten, Interviews erstellen, Kandidaten einladen und verwalten, Ergebnisse abrufen, per Webhook empfangen und das Interview mit dem SDK einbetten.",
     "tabs": {
       "api": "API",
       "webhooks": "Webhooks",
@@ -1934,7 +1934,7 @@
       "title": "API",
       "text": "Verbinde deine eigene Plattform, etwa deine Karriereseite, mit prepza.",
       "actions": [
-        "Erstelle einen API-Schlüssel: Er liest deine Interviews und Kandidaten und lädt in deinem Namen Kandidaten ein.",
+        "Erstelle einen API-Schlüssel: Er erstellt in deinem Namen Interviews, liest Kandidaten und ihre Ergebnisse, lädt sie ein, erinnert sie, aktualisiert oder entfernt sie und liest deine Credits.",
         "Füge einen Webhook hinzu: prepza benachrichtigt deine HTTPS-Adresse signiert, wenn ein Kandidat beginnt, fertig ist (mit seinen Ergebnissen), seine Einladung nicht zugestellt werden kann oder abläuft oder er entfernt wird, und wenn ein Interview bereit ist.",
         "Sende einem Webhook ein Testereignis und sieh im Zustellprotokoll, was aus jeder Sendung wurde.",
         "Lösche Schlüssel und Webhooks, die du nicht mehr nutzt.",

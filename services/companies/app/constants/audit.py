@@ -27,3 +27,5 @@ class AuditAction(StrEnum):
 VIA_ASSISTANT = "assistant"
 VIA_MCP = "mcp"
 VIAS = (VIA_ASSISTANT, VIA_MCP)
+# A change made with an API key, recorded as the owner or admin who made it.
+VIA_API = "api"

@@ -1462,7 +1462,7 @@
   "apiDocs": {
     "title": "Dokumentasyon para sa mga developer",
     "intro": "Ikonekta ang prepza sa sarili mong platform: ilista ang mga interview mo, mag-imbita ng mga aplikante, kunin ang mga resulta nila at i-embed ang interview sa sarili mong site.",
-    "description": "Ang dokumentasyon ng prepza para sa mga developer: kumuha ng API key, ilista ang mga interview mo, mag-imbita ng mga aplikante, basahin ang mga resulta nila, tanggapin ang mga ito sa webhook at i-embed ang interview gamit ang SDK.",
+    "description": "Ang dokumentasyon ng prepza para sa mga developer: kumuha ng API key, gumawa ng mga interview, mag-imbita at mamahala ng mga aplikante, basahin ang mga resulta nila, tanggapin ang mga ito sa webhook at i-embed ang interview gamit ang SDK.",
     "tabs": {
       "api": "API",
       "webhooks": "Mga webhook",
@@ -1938,7 +1938,7 @@
       "title": "API",
       "text": "Ikonekta ang sarili mong platform, gaya ng iyong careers site, sa prepza.",
       "actions": [
-        "Gumawa ng API key: binabasa nito ang iyong mga interview at aplikante at nag-iimbita ng mga aplikante bilang ikaw.",
+        "Gumawa ng API key: bilang ikaw, gumagawa ito ng mga interview, binabasa ang mga aplikante at ang mga resulta nila, iniimbita, pinapaalalahanan, ina-update o inaalis sila, at binabasa ang iyong credits.",
         "Magdagdag ng webhook: sinasabihan ng prepza ang iyong HTTPS address, may pirma, kapag nagsimula, natapos (kasama ang resulta), hindi naabot ng imbitasyon, nag-expire ang imbitasyon, o tinanggal ang isang aplikante, at kapag handa na ang isang interview.",
         "Padalhan ng test event ang isang webhook, at tingnan sa delivery log nito kung ano ang nangyari sa bawat padala.",
         "Burahin ang mga key at webhook na hindi mo na ginagamit.",

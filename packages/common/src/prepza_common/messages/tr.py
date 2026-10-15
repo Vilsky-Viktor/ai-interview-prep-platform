@@ -208,4 +208,6 @@ MESSAGES = {
     "This version's notice was already sent.": "Bu sürümün bildirimi zaten gönderildi.",
     "Prices aren't available right now. Please try again in a minute.": "Fiyatlar şu anda kullanılamıyor. Lütfen bir dakika sonra tekrar deneyin.",
     "return_url must be an https address on the company's verified website domain; get the company verified in prepza first (Verify, next to its name).": "return_url, şirketin doğrulanmış web sitesi alan adında bir https adresi olmalıdır; önce şirketi prepza'da doğrulatın (adının yanındaki Doğrula).",
+    "A request with this Idempotency-Key is still running. Try again shortly.": "Bu Idempotency-Key ile gönderilen bir istek hâlâ işleniyor. Lütfen birazdan tekrar deneyin.",
+    "prepza doesn't email this candidate: send them their invite link yourself.": "prepza bu adaya e-posta göndermiyor: davet bağlantısını ona kendiniz gönderin.",
 }

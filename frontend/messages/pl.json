@@ -1458,7 +1458,7 @@
   "apiDocs": {
     "title": "Dokumentacja dla deweloperów",
     "intro": "Połącz prepza z własną platformą: pobieraj listę rozmów, zapraszaj kandydatów, otrzymuj ich wyniki i osadzaj rozmowę na własnej stronie.",
-    "description": "Dokumentacja prepza dla deweloperów: uzyskaj klucz API, pobieraj listę rozmów, zapraszaj kandydatów, odczytuj ich wyniki, otrzymuj je przez webhook i osadzaj rozmowę za pomocą SDK.",
+    "description": "Dokumentacja prepza dla deweloperów: uzyskaj klucz API, twórz rozmowy, zapraszaj kandydatów i zarządzaj nimi, odczytuj ich wyniki, otrzymuj je przez webhook i osadzaj rozmowę za pomocą SDK.",
     "tabs": {
       "api": "API",
       "webhooks": "Webhooki",
@@ -1934,7 +1934,7 @@
       "title": "API",
       "text": "Połącz z prepza własną platformę, np. stronę kariery.",
       "actions": [
-        "Utwórz klucz API: odczytuje Twoje rozmowy i kandydatów i zaprasza kandydatów w Twoim imieniu.",
+        "Utwórz klucz API: w Twoim imieniu tworzy rozmowy, odczytuje kandydatów i ich wyniki, zaprasza ich, wysyła im przypomnienia, aktualizuje lub usuwa ich oraz odczytuje Twoje kredyty.",
         "Dodaj webhook: prepza powiadamia Twój adres HTTPS, z podpisem, gdy kandydat zaczyna lub kończy (wraz z wynikami), gdy zaproszenie do niego nie dotrze lub wygaśnie, gdy kandydat zostanie usunięty i gdy rozmowa jest gotowa.",
         "Wyślij do webhooka zdarzenie testowe i sprawdź w dzienniku dostarczeń, jak poszła każda wysyłka.",
         "Usuń klucze i webhooki, których już nie używasz.",

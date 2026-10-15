@@ -1454,7 +1454,7 @@
   "apiDocs": {
     "title": "Ontwikkelaarsdocumentatie",
     "intro": "Koppel prepza aan je eigen platform: bekijk je interviews, nodig kandidaten uit, ontvang hun resultaten en sluit het interview in op je eigen website.",
-    "description": "De ontwikkelaarsdocumentatie van prepza: vraag een API-sleutel aan, bekijk je interviews, nodig kandidaten uit, lees hun resultaten, ontvang ze via een webhook en sluit het interview in met de SDK.",
+    "description": "De ontwikkelaarsdocumentatie van prepza: vraag een API-sleutel aan, maak interviews aan, nodig kandidaten uit en beheer ze, lees hun resultaten, ontvang ze via een webhook en sluit het interview in met de SDK.",
     "tabs": {
       "api": "API",
       "webhooks": "Webhooks",
@@ -1930,7 +1930,7 @@
       "title": "API",
       "text": "Koppel je eigen platform, zoals je vacaturesite, aan prepza.",
       "actions": [
-        "Maak een API-sleutel aan: die leest je interviews en kandidaten en nodigt namens jou kandidaten uit.",
+        "Maak een API-sleutel aan: die maakt namens jou interviews aan, leest kandidaten en hun resultaten, nodigt ze uit, stuurt ze herinneringen, werkt ze bij of verwijdert ze, en leest je credits.",
         "Voeg een webhook toe: prepza laat je HTTPS-adres ondertekend weten wanneer een kandidaat begint of klaar is (met de resultaten), wanneer de uitnodiging een kandidaat niet bereikt of verloopt, wanneer een kandidaat wordt verwijderd en wanneer een interview klaarstaat.",
         "Stuur een webhook een testgebeurtenis en zie in het afleverlogboek hoe elke verzending is verlopen.",
         "Verwijder de sleutels en webhooks die je niet meer gebruikt.",

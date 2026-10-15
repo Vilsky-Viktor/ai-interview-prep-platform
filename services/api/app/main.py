@@ -14,7 +14,15 @@ from app.config.settings import settings
 from app.constants.docs import API_DESCRIPTION, API_TITLE, API_VERSION
 from app.integrations import webhooks as endpoints
 from app.integrations.redis import get_redis
-from app.routers import events, internal_accounts, manage, public, schedules, webhook_docs
+from app.routers import (
+    company,
+    events,
+    internal_accounts,
+    manage,
+    public,
+    schedules,
+    webhook_docs,
+)
 from app.storage.db import ping as ping_database
 
 configure_logging()
@@ -50,6 +58,7 @@ app.add_middleware(MaintenanceMiddleware, get_redis=get_redis)
 app.add_middleware(RequestLogMiddleware)
 app.add_middleware(BodyLimitMiddleware)
 app.include_router(public.router)
+app.include_router(company.router)
 app.include_router(manage.router)
 app.include_router(events.router)
 app.include_router(internal_accounts.router)

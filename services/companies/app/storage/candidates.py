@@ -78,14 +78,18 @@ async def page(
 
 
 async def company_page(
-    company_id, offset: int, limit: int, q: str = ""
+    company_id, offset: int, limit: int, q: str = "", email: str = ""
 ) -> list[tuple[CandidateInvite, Interview]]:
     """The company's candidates across its interviews, each with its interview, newest first,
-    narrowed to an email or name containing `q`. A deleted interview's candidates went with it."""
+    narrowed to an email or name containing `q`, or to exactly `email`. A deleted interview's
+    candidates went with it."""
     filters = [Interview.company_id == company_id]
 
     if q:
         filters.append(matches(q))
+
+    if email:
+        filters.append(CandidateInvite.email == email.lower())
 
     query = (
         select(CandidateInvite, Interview)

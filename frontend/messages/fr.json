@@ -1458,7 +1458,7 @@
   "apiDocs": {
     "title": "Documentation développeurs",
     "intro": "Connectez prepza à votre propre plateforme : listez vos entretiens, invitez des candidats, récupérez leurs résultats et intégrez l'entretien à votre propre site.",
-    "description": "La documentation développeurs de prepza : obtenez une clé API, listez vos entretiens, invitez des candidats, lisez leurs résultats, recevez-les par webhook et intégrez l'entretien avec le SDK.",
+    "description": "La documentation développeurs de prepza : obtenez une clé API, créez des entretiens, invitez et gérez des candidats, lisez leurs résultats, recevez-les par webhook et intégrez l'entretien avec le SDK.",
     "tabs": {
       "api": "API",
       "webhooks": "Webhooks",
@@ -1934,7 +1934,7 @@
       "title": "API",
       "text": "Connectez votre propre plateforme, comme votre site carrière, à prepza.",
       "actions": [
-        "Créez une clé API : elle lit vos entretiens et vos candidats et invite des candidats en votre nom.",
+        "Créez une clé API : en votre nom, elle crée des entretiens, lit les candidats et leurs résultats, les invite, leur envoie des rappels, les met à jour ou les supprime, et lit vos crédits.",
         "Ajoutez un webhook : prepza prévient votre adresse HTTPS, avec une signature, quand un candidat commence, termine (avec ses résultats) ou est retiré, quand son invitation n'a pas pu lui parvenir ou a expiré, et quand un entretien est prêt.",
         "Envoyez un événement de test à un webhook, et voyez dans son journal des envois le résultat de chaque envoi.",
         "Supprimez les clés et les webhooks que vous n'utilisez plus.",

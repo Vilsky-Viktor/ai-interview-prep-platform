@@ -1457,7 +1457,7 @@
   "apiDocs": {
     "title": "Geliştirici belgeleri",
     "intro": "prepza'yı kendi platformunuza bağlayın: mülakatlarınızı listeleyin, aday davet edin, sonuçlarını alın ve mülakatı kendi sitenize yerleştirin.",
-    "description": "prepza geliştirici belgeleri: API anahtarı alın, mülakatlarınızı listeleyin, aday davet edin, sonuçlarını okuyun, webhook ile alın ve mülakatı SDK ile sitenize yerleştirin.",
+    "description": "prepza geliştirici belgeleri: API anahtarı alın, mülakat oluşturun, adayları davet edip yönetin, sonuçlarını okuyun, webhook ile alın ve mülakatı SDK ile sitenize yerleştirin.",
     "tabs": {
       "api": "API",
       "webhooks": "Webhook'lar",
@@ -1933,7 +1933,7 @@
       "title": "API",
       "text": "Kariyer siteniz gibi kendi platformunuzu prepza'ya bağlayın.",
       "actions": [
-        "Bir API anahtarı oluşturun: mülakatlarınızı ve adaylarınızı okur, sizin adınıza aday davet eder.",
+        "Bir API anahtarı oluşturun: sizin adınıza mülakat oluşturur, adayları ve sonuçlarını okur, onları davet eder, onlara hatırlatma gönderir, günceller veya kaldırır ve kredilerinizi okur.",
         "Bir webhook ekleyin: prepza, bir aday başladığında, bitirdiğinde (sonuçlarıyla birlikte), daveti kendisine ulaşamadığında, davetinin süresi dolduğunda veya kaldırıldığında ve bir mülakat hazır olduğunda HTTPS adresinize imzalı olarak haber verir.",
         "Bir webhook'a test olayı gönderin ve her gönderimin sonucunu teslim günlüğünde görün.",
         "Artık kullanmadığınız anahtarları ve webhook'ları silin.",

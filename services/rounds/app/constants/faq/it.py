@@ -70,7 +70,7 @@ FAQ = [
     {
         "key": "integrations",
         "question": "prepza funziona con il mio ATS o con altri strumenti?",
-        "answer": "Sì, senza costi aggiuntivi. Collega Workable, Greenhouse, Teamtailor, Recruitee o Breezy HR nella scheda Integrazioni della tua azienda: i candidati che sposti in una fase ricevono il colloquio, e i loro risultati tornano nell'ATS. Slack può pubblicare le notifiche della tua azienda in un canale, e l'API permette alla tua piattaforma di invitare candidati e ricevere i loro risultati; consulta la Documentazione API.",
+        "answer": "Sì, senza costi aggiuntivi. Collega Workable, Greenhouse, Teamtailor, Recruitee o Breezy HR nella scheda Integrazioni della tua azienda: i candidati che sposti in una fase ricevono il colloquio, e i loro risultati tornano nell'ATS. Slack può pubblicare le notifiche della tua azienda in un canale, e l'API permette alla tua piattaforma di creare colloqui, invitare e gestire candidati e ricevere i loro risultati; consulta la Documentazione API.",
     },
     {
         "key": "ai_apps",

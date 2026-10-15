@@ -193,3 +193,10 @@ class InvitedCompaniesOut(BaseModel):
 class GuestTokenOut(BaseModel):
     # A Firebase custom token for the invite's guest.
     token: str
+
+
+class FoundCandidateOut(BaseModel):
+    """A candidate found by email, for the api service, which reads them in full."""
+
+    interview_id: UUID
+    candidate_id: UUID

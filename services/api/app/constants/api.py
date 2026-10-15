@@ -66,3 +66,8 @@ API_PAGE = "/companies/{company_id}/integrations/api"
 
 # Each web hook's delivery log keeps its latest sends.
 WEBHOOK_LOG_KEPT = 20
+
+# A POST with an Idempotency-Key gives the same result for that key this long (a client's retry
+# doesn't invite or create twice); a retry while the first request still runs is refused.
+IDEMPOTENCY_SECONDS = 24 * 60 * 60
+IDEMPOTENCY_IN_PROGRESS = "A request with this Idempotency-Key is still running. Try again shortly."

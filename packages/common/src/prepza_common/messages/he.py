@@ -208,4 +208,6 @@ MESSAGES = {
     "This version's notice was already sent.": "ההודעה על הגרסה הזו כבר נשלחה.",
     "Prices aren't available right now. Please try again in a minute.": "המחירים לא זמינים כרגע. נסו שוב בעוד דקה.",
     "return_url must be an https address on the company's verified website domain; get the company verified in prepza first (Verify, next to its name).": "return_url חייבת להיות כתובת https בדומיין המאומת של אתר החברה; אמתו קודם את החברה ב-prepza (אימות, ליד שמה).",
+    "A request with this Idempotency-Key is still running. Try again shortly.": "בקשה עם ה-Idempotency-Key הזה עדיין בטיפול. נסו שוב בעוד רגע.",
+    "prepza doesn't email this candidate: send them their invite link yourself.": "prepza לא שולחת אימיילים למועמד הזה: שלחו לו בעצמכם את קישור ההזמנה.",
 }

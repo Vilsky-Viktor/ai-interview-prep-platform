@@ -4,9 +4,10 @@ API_TITLE = "prepza API"
 API_VERSION = "1"
 API_DESCRIPTION = """# API
 
-The prepza API connects prepza to your own platform. Use it to retrieve your
-company's interviews, invite candidates and read their results, and receive a
-[web hook](/api-docs?tab=webhooks) as soon as a candidate finishes.
+The prepza API connects prepza to your own platform. Use it to create interviews from job
+descriptions, invite candidates, remind, update or remove them, read their results, find a
+candidate by email and read your credits, and receive a [web hook](/api-docs?tab=webhooks) as
+soon as a candidate finishes.
 
 ## Getting an API key
 
@@ -32,6 +33,13 @@ or admin, the key stops working and requests return `401`.
 Your company's keys together can make up to 60 requests per minute; further requests return
 `429` until the minute ends. List endpoints return the newest items first and accept `offset` and `limit` (up to 100
 items per request).
+
+## Retrying safely
+
+Creating an interview and inviting a candidate accept an `Idempotency-Key` header: any unique
+string, such as a UUID. If a request times out, send it again with the same key: within 24 hours
+you get the first request's result, and the candidate isn't emailed twice. A retry while the
+first request is still running returns `409`.
 
 ## Errors
 

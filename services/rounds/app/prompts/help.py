@@ -117,8 +117,10 @@ after a top-up they're invited by themselves.
 - Slack: "Add to Slack" picks a channel; the company chooses which notifications go there \
 (a candidate finished, an ATS candidate not invited, an undelivered invite and more).
 - API: for a company's own platform. On the API page an owner or admin makes API keys (shown \
-once; they expire in 1, 3, 6 or 12 months, or never) and web hooks. A key lists the company's \
-tests and candidates with their results and invites candidates; a web hook hears, signed with \
+once; they expire in 1, 3, 6 or 12 months, or never) and web hooks. A key creates tests from \
+job descriptions, lists the company's tests and candidates with their results, invites \
+candidates (an Idempotency-Key makes a retry safe), reminds, renames, gives extra time to or \
+removes them, finds a candidate by email and reads the credits; a web hook hears, signed with \
 its secret, when a candidate starts, finishes (with their results), isn't reached, expires or is \
 removed, and when an interview is ready; each web hook can be sent a test event and has a \
 delivery log of its latest sends. A web hook that doesn't answer for 3 days is paused (no \

@@ -1454,7 +1454,7 @@
   "apiDocs": {
     "title": "Tài liệu cho nhà phát triển",
     "intro": "Kết nối prepza với nền tảng của riêng bạn: xem danh sách phỏng vấn, mời ứng viên, nhận kết quả của họ và nhúng buổi phỏng vấn vào trang web của bạn.",
-    "description": "Tài liệu cho nhà phát triển của prepza: lấy khóa API, xem danh sách phỏng vấn, mời ứng viên, đọc kết quả, nhận kết quả qua webhook và nhúng buổi phỏng vấn bằng SDK.",
+    "description": "Tài liệu cho nhà phát triển của prepza: lấy khóa API, tạo buổi phỏng vấn, mời và quản lý ứng viên, đọc kết quả, nhận kết quả qua webhook và nhúng buổi phỏng vấn bằng SDK.",
     "tabs": {
       "api": "API",
       "webhooks": "Webhook",
@@ -1930,7 +1930,7 @@
       "title": "API",
       "text": "Kết nối nền tảng của riêng bạn, chẳng hạn trang tuyển dụng, với prepza.",
       "actions": [
-        "Tạo khóa API: khóa này đọc buổi phỏng vấn, ứng viên và mời ứng viên thay mặt bạn.",
+        "Tạo khóa API: thay mặt bạn, khóa này tạo buổi phỏng vấn, đọc ứng viên và kết quả của họ, mời, nhắc, cập nhật hoặc xóa ứng viên, và đọc số credit của bạn.",
         "Thêm webhook: prepza báo tới địa chỉ HTTPS của bạn, có chữ ký, khi ứng viên bắt đầu, làm xong (kèm kết quả), không nhận được lời mời, hết hạn lời mời hoặc bị xóa khỏi buổi phỏng vấn, và khi một buổi phỏng vấn sẵn sàng.",
         "Gửi sự kiện thử nghiệm tới một webhook và xem kết quả của từng lần gửi trong nhật ký gửi.",
         "Xóa các khóa và webhook bạn không dùng nữa.",

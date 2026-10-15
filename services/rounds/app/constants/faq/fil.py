@@ -70,7 +70,7 @@ FAQ = [
     {
         "key": "integrations",
         "question": "Gumagana ba ang prepza sa ATS ko o sa iba pang tool?",
-        "answer": "Oo, nang walang dagdag na bayad. I-connect ang Workable, Greenhouse, Teamtailor, Recruitee o Breezy HR sa tab na Mga integration ng iyong kumpanya: makukuha ng mga aplikanteng ililipat mo sa isang stage ang interview, at babalik sa ATS ang mga resulta nila. Kayang i-post ng Slack ang mga notification ng iyong kumpanya sa isang channel, at sa pamamagitan ng API, makakapag-imbita ang sarili mong platform ng mga aplikante at makakatanggap ng mga resulta nila; tingnan ang Dokumentasyon ng API.",
+        "answer": "Oo, nang walang dagdag na bayad. I-connect ang Workable, Greenhouse, Teamtailor, Recruitee o Breezy HR sa tab na Mga integration ng iyong kumpanya: makukuha ng mga aplikanteng ililipat mo sa isang stage ang interview, at babalik sa ATS ang mga resulta nila. Kayang i-post ng Slack ang mga notification ng iyong kumpanya sa isang channel, at sa pamamagitan ng API, makakagawa ang sarili mong platform ng mga interview, makakapag-imbita at makakapamahala ng mga aplikante, at makakatanggap ng mga resulta nila; tingnan ang Dokumentasyon ng API.",
     },
     {
         "key": "ai_apps",

@@ -16,6 +16,7 @@ from app.constants.invites import (
 )
 from app.main import app
 from app.routers import interviews as route
+from app.services import interview_creation as creation
 from app.storage import interviews
 
 COMPANY_ID = uuid.uuid4()
@@ -34,7 +35,7 @@ def signed_in_manager(monkeypatch):
         return None
 
     monkeypatch.setattr(route, "require_editor", fake_company)
-    monkeypatch.setattr(route, "track", no_track)
+    monkeypatch.setattr(creation, "track", no_track)
     yield
     app.dependency_overrides.clear()
 
@@ -79,11 +80,11 @@ def generate(client, monkeypatch, waiting, paid=False):
         }
 
     monkeypatch.setattr(interviews, "without_candidates", fake_waiting)
-    monkeypatch.setattr(route, "hit", fake_hit)
-    monkeypatch.setattr(route.generation_api, "create", fake_generation)
-    monkeypatch.setattr(route.billing, "company_paid", fake_paid)
+    monkeypatch.setattr(creation, "hit", fake_hit)
+    monkeypatch.setattr(creation.generation_api, "create", fake_generation)
+    monkeypatch.setattr(creation.billing, "company_paid", fake_paid)
     monkeypatch.setattr(interviews, "create", fake_create)
-    monkeypatch.setattr(route, "interview_out", fake_out)
+    monkeypatch.setattr(creation, "interview_out", fake_out)
     response = client.post(
         f"/interviews?company_id={COMPANY_ID}", json={"text": "Senior accountant job description"}
     )

@@ -74,6 +74,77 @@
       }
      }
     }
+   },
+   "post": {
+    "tags": [
+     "Interviews"
+    ],
+    "summary": "Create an interview",
+    "description": "Makes an interview from a job description, as the key's creator would. Its questions take\na few minutes: until `ready` is true, it can't take candidates; the `interview.ready` web\nhook event says when it is.",
+    "operationId": "create_interview_interviews_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "idempotency-key",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "maxLength": 255
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "description": "Any unique string, such as a UUID: a retry with the same key within 24 hours gets the first request's result instead of doing it again",
+       "title": "Idempotency-Key"
+      },
+      "description": "Any unique string, such as a UUID: a retry with the same key within 24 hours gets the first request's result instead of doing it again"
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/InterviewIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Interview"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "The API key is missing, invalid or expired, or its creator can no longer use it"
+     },
+     "429": {
+      "description": "Your company has as many interviews without candidates as it may, or made as many today as it may"
+     },
+     "409": {
+      "description": "A request with this Idempotency-Key is still running"
+     },
+     "422": {
+      "description": "The body is invalid"
+     },
+     "503": {
+      "description": "Making interviews is temporarily paused"
+     }
+    }
    }
   },
   "/interviews/{interview_id}": {
@@ -246,6 +317,25 @@
        "format": "uuid",
        "title": "Interview Id"
       }
+     },
+     {
+      "name": "idempotency-key",
+      "in": "header",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "maxLength": 255
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "description": "Any unique string, such as a UUID: a retry with the same key within 24 hours gets the first request's result instead of doing it again",
+       "title": "Idempotency-Key"
+      },
+      "description": "Any unique string, such as a UUID: a retry with the same key within 24 hours gets the first request's result instead of doing it again"
      }
     ],
     "requestBody": {
@@ -360,6 +450,295 @@
       }
      }
     }
+   },
+   "patch": {
+    "tags": [
+     "Interviews"
+    ],
+    "summary": "Update a candidate",
+    "description": "Corrects the candidate's name, or gives them extra time on each question before they\nstart, as an accommodation.",
+    "operationId": "update_candidate_interviews__interview_id__candidates__candidate_id__patch",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     },
+     {
+      "name": "candidate_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Candidate Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CandidateUpdate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Candidate"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "The API key is missing, invalid or expired, or its creator can no longer use it"
+     },
+     "429": {
+      "description": "Your company's keys exceeded 60 requests per minute"
+     },
+     "404": {
+      "description": "The interview or candidate doesn't exist in your company"
+     },
+     "409": {
+      "description": "Extra time was asked for a candidate who already started"
+     },
+     "422": {
+      "description": "The body is invalid"
+     }
+    }
+   },
+   "delete": {
+    "tags": [
+     "Interviews"
+    ],
+    "summary": "Remove a candidate",
+    "description": "Withdraws an invite the candidate hasn't used yet: its link stops working and its credits\ncome back. A candidate who started is erased for good, with their answers and results, for\nexample when they ask to have their data deleted; one who answered at least one question is\ncharged. Your web hooks get `candidate.removed`.",
+    "operationId": "remove_candidate_interviews__interview_id__candidates__candidate_id__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     },
+     {
+      "name": "candidate_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Candidate Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "401": {
+      "description": "The API key is missing, invalid or expired, or its creator can no longer use it"
+     },
+     "429": {
+      "description": "Your company's keys exceeded 60 requests per minute"
+     },
+     "404": {
+      "description": "The interview or candidate doesn't exist in your company"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/interviews/{interview_id}/candidates/{candidate_id}/resend": {
+   "post": {
+    "tags": [
+     "Interviews"
+    ],
+    "summary": "Send the invitation again",
+    "description": "Emails the candidate their invitation again, as a reminder; an expired invitation comes\nback to life for another 30 days.",
+    "operationId": "resend_invite_interviews__interview_id__candidates__candidate_id__resend_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     },
+     {
+      "name": "candidate_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Candidate Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "401": {
+      "description": "The API key is missing, invalid or expired, or its creator can no longer use it"
+     },
+     "429": {
+      "description": "The key's creator reached their email limits"
+     },
+     "404": {
+      "description": "The interview or candidate doesn't exist in your company"
+     },
+     "409": {
+      "description": "The candidate already finished, or was invited with `sign_in` false (prepza doesn't email them)"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/candidates": {
+   "get": {
+    "tags": [
+     "Company"
+    ],
+    "summary": "Find a candidate by email",
+    "description": "The candidates invited with this email in any of your company's interviews, newest\nfirst, each with its interview's `interview_id`.",
+    "operationId": "find_candidates_candidates_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "email",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "description": "The email the candidate was invited with",
+       "format": "email",
+       "title": "Email"
+      },
+      "description": "The email the candidate was invited with"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/Candidate"
+         },
+         "title": "Response Find Candidates Candidates Get"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "The API key is missing, invalid or expired, or its creator can no longer use it"
+     },
+     "429": {
+      "description": "Your company's keys exceeded 60 requests per minute"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/credits": {
+   "get": {
+    "tags": [
+     "Company"
+    ],
+    "summary": "Read your credits",
+    "description": "Your company's credits: a candidate costs 500, set aside when they're invited.",
+    "operationId": "get_credits_credits_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Credits"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "The API key is missing, invalid or expired, or its creator can no longer use it"
+     },
+     "429": {
+      "description": "Your company's keys exceeded 60 requests per minute"
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
    }
   },
   "/manage": {
@@ -1012,6 +1391,44 @@
     ],
     "title": "CandidateIn"
    },
+   "CandidateUpdate": {
+    "properties": {
+     "name": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 200
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Name",
+      "description": "The candidate's name; an empty string makes it unknown"
+     },
+     "extra_time": {
+      "anyOf": [
+       {
+        "type": "integer",
+        "enum": [
+         0,
+         25,
+         50,
+         100
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Extra Time",
+      "description": "Extra time on each question, in percent, for a candidate who needs it; only before they start (409 after)"
+     }
+    },
+    "type": "object",
+    "title": "CandidateUpdate",
+    "description": "Only the fields given change."
+   },
    "CandidateWebhook": {
     "properties": {
      "id": {
@@ -1042,6 +1459,38 @@
      "data"
     ],
     "title": "CandidateWebhook"
+   },
+   "Credits": {
+    "properties": {
+     "available": {
+      "type": "integer",
+      "title": "Available",
+      "description": "Credits your company can spend now"
+     },
+     "reserved": {
+      "type": "integer",
+      "title": "Reserved",
+      "description": "Credits set aside for candidates who haven't finished"
+     },
+     "candidates": {
+      "type": "integer",
+      "title": "Candidates",
+      "description": "How many more candidates the available credits pay for"
+     },
+     "low": {
+      "type": "boolean",
+      "title": "Low",
+      "description": "Whether the credits are running low"
+     }
+    },
+    "type": "object",
+    "required": [
+     "available",
+     "reserved",
+     "candidates",
+     "low"
+    ],
+    "title": "Credits"
    },
    "HTTPValidationError": {
     "properties": {
@@ -1124,6 +1573,59 @@
     ],
     "title": "InterviewEvent",
     "description": "The `data` object of an `interview.ready` event."
+   },
+   "InterviewIn": {
+    "properties": {
+     "job_description": {
+      "type": "string",
+      "maxLength": 10000,
+      "minLength": 1,
+      "title": "Job Description",
+      "description": "The job description to make the interview from, at most 10000 characters"
+     },
+     "language": {
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "en",
+         "ru",
+         "uk",
+         "es",
+         "pt",
+         "de",
+         "fr",
+         "it",
+         "pl",
+         "nl",
+         "tr",
+         "ar",
+         "he",
+         "fa",
+         "ja",
+         "zh",
+         "ko",
+         "hi",
+         "id",
+         "th",
+         "vi",
+         "fil",
+         "et"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Language",
+      "description": "The language to write the interview in, as a code such as `en` or `de`; by default the job description's own"
+     }
+    },
+    "type": "object",
+    "required": [
+     "job_description"
+    ],
+    "title": "InterviewIn"
    },
    "InterviewWebhook": {
     "properties": {

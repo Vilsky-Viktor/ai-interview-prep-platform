@@ -208,4 +208,6 @@ MESSAGES = {
     "This version's notice was already sent.": "O aviso desta versão já foi enviado.",
     "Prices aren't available right now. Please try again in a minute.": "Os preços não estão disponíveis agora. Tente novamente em um minuto.",
     "return_url must be an https address on the company's verified website domain; get the company verified in prepza first (Verify, next to its name).": "return_url deve ser um endereço https no domínio verificado do site da empresa; verifique primeiro a empresa no prepza (Verificar, ao lado do nome).",
+    "A request with this Idempotency-Key is still running. Try again shortly.": "Uma solicitação com esta Idempotency-Key ainda está em andamento. Tente novamente em instantes.",
+    "prepza doesn't email this candidate: send them their invite link yourself.": "A prepza não envia e-mails para esta pessoa candidata: envie o link de convite diretamente a ela.",
 }

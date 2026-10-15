@@ -70,7 +70,7 @@ FAQ = [
     {
         "key": "integrations",
         "question": "prepzaは使っているATSや他のツールと連携できますか？",
-        "answer": "はい、追加費用なしで連携できます。会社の「連携」タブでWorkable、Greenhouse、Teamtailor、Recruitee、Breezy HRを接続すると、選考ステップに移した候補者に面接が届き、結果はATSに戻ります。Slackでは会社のお知らせをチャンネルに投稿でき、APIを使えば自社のプラットフォームから候補者を招待して結果を受け取れます。詳しくは「API ドキュメント」をご覧ください。",
+        "answer": "はい、追加費用なしで連携できます。会社の「連携」タブでWorkable、Greenhouse、Teamtailor、Recruitee、Breezy HRを接続すると、選考ステップに移した候補者に面接が届き、結果はATSに戻ります。Slackでは会社のお知らせをチャンネルに投稿でき、APIを使えば自社のプラットフォームから面接を作成し、候補者を招待・管理して結果を受け取れます。詳しくは「API ドキュメント」をご覧ください。",
     },
     {
         "key": "ai_apps",

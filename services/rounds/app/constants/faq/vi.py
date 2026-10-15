@@ -70,7 +70,7 @@ FAQ = [
     {
         "key": "integrations",
         "question": "prepza có hoạt động với ATS hoặc các công cụ khác của tôi không?",
-        "answer": "Có, không mất thêm phí. Kết nối Workable, Greenhouse, Teamtailor, Recruitee hoặc Breezy HR trong tab Tích hợp của công ty bạn: ứng viên bạn chuyển sang một giai đoạn sẽ nhận buổi phỏng vấn, và kết quả được gửi lại ATS. Slack có thể đăng thông báo của công ty vào một kênh, còn API cho phép nền tảng của riêng bạn mời ứng viên và nhận kết quả của họ; xem Tài liệu API.",
+        "answer": "Có, không mất thêm phí. Kết nối Workable, Greenhouse, Teamtailor, Recruitee hoặc Breezy HR trong tab Tích hợp của công ty bạn: ứng viên bạn chuyển sang một giai đoạn sẽ nhận buổi phỏng vấn, và kết quả được gửi lại ATS. Slack có thể đăng thông báo của công ty vào một kênh, còn API cho phép nền tảng của riêng bạn tạo buổi phỏng vấn, mời và quản lý ứng viên, và nhận kết quả của họ; xem Tài liệu API.",
     },
     {
         "key": "ai_apps",

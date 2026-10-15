@@ -1462,7 +1462,7 @@
   "apiDocs": {
     "title": "Arendajate dokumentatsioon",
     "intro": "Ühenda prepza oma platvormiga: vaata oma intervjuusid, kutsu kandidaate, saa nende tulemused ja manusta intervjuu oma veebilehele.",
-    "description": "prepza arendajate dokumentatsioon: hangi API-võti, vaata oma intervjuusid, kutsu kandidaate, loe nende tulemusi, saa need webhooki kaudu ja manusta intervjuu SDK abil.",
+    "description": "prepza arendajate dokumentatsioon: hangi API-võti, loo intervjuusid, kutsu ja halda kandidaate, loe nende tulemusi, saa need webhooki kaudu ja manusta intervjuu SDK abil.",
     "tabs": {
       "api": "API",
       "webhooks": "Webhookid",
@@ -1938,7 +1938,7 @@
       "title": "API",
       "text": "Ühenda prepzaga oma platvorm, näiteks karjäärileht.",
       "actions": [
-        "Loo API-võti: see loeb sinu intervjuusid ja kandidaate ning kutsub kandidaate sinu nimel.",
+        "Loo API-võti: see loob sinu nimel intervjuusid, loeb kandidaate ja nende tulemusi, kutsub neid, saadab neile meeldetuletusi, uuendab või eemaldab neid ning loeb sinu krediite.",
         "Lisa webhook: prepza teavitab allkirjastatult sinu HTTPS-aadressi, kui kandidaat alustab, lõpetab (koos tulemustega), kutse ei jõua temani, tema kutse aegub või ta eemaldatakse, ning kui intervjuu on valmis.",
         "Saada webhookile testsündmus ja vaata saatmislogist, kuidas iga saatmine läks.",
         "Kustuta võtmed ja webhookid, mida enam ei kasuta.",

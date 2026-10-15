@@ -208,4 +208,6 @@ MESSAGES = {
     "This version's notice was already sent.": "このバージョンの通知はすでに送信されています。",
     "Prices aren't available right now. Please try again in a minute.": "現在、料金を表示できません。1分後にもう一度お試しください。",
     "return_url must be an https address on the company's verified website domain; get the company verified in prepza first (Verify, next to its name).": "return_url は企業の認証済みウェブサイトドメイン上の https アドレスにしてください。先に prepza で企業の認証を受けてください（企業名の横の「認証」）。",
+    "A request with this Idempotency-Key is still running. Try again shortly.": "この Idempotency-Key のリクエストはまだ処理中です。少し時間をおいてもう一度お試しください。",
+    "prepza doesn't email this candidate: send them their invite link yourself.": "prepza はこの候補者にメールを送りません。招待リンクはご自身で送ってください。",
 }

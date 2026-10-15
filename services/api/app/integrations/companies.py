@@ -22,9 +22,11 @@ def _headers() -> dict:
     return {"Authorization": f"Bearer {service_token('companies')}"}
 
 
-async def _get(path: str, params: dict | None = None):
-    response = await http.get_client().get(
-        f"{settings.companies_url}{path}", params=params, headers=_headers()
+async def _call(method: str, path: str, params: dict | None = None, body: dict | None = None):
+    """Companies' answer, its refusals (PASSED_ON) raised with their status and reason; None
+    when it has no body."""
+    response = await http.get_client().request(
+        method, f"{settings.companies_url}{path}", params=params, json=body, headers=_headers()
     )
 
     if response.status_code in PASSED_ON:
@@ -32,7 +34,11 @@ async def _get(path: str, params: dict | None = None):
 
     response.raise_for_status()
 
-    return response.json()
+    return response.json() if response.content else None
+
+
+async def _get(path: str, params: dict | None = None):
+    return await _call("GET", path, params)
 
 
 async def access(company_id: UUID, user_id: str) -> dict:
@@ -95,3 +101,54 @@ async def invite(
     response.raise_for_status()
 
     return UUID(response.json()["invite_id"])
+
+
+def _candidate_path(company_id: UUID, interview_id: UUID, invite_id: UUID) -> str:
+    return f"/internal/companies/{company_id}/interviews/{interview_id}/candidates/{invite_id}"
+
+
+async def create_interview(
+    company_id: UUID, text: str, generate_in: str | None, user_id: str
+) -> dict:
+    """Starts making an interview from a job description, as `user_id`, the key's creator."""
+    return await _call(
+        "POST",
+        f"/internal/companies/{company_id}/interviews",
+        {"user_id": user_id},
+        {"text": text, "generate_in": generate_in},
+    )
+
+
+async def remove_candidate(
+    company_id: UUID, interview_id: UUID, invite_id: UUID, user_id: str
+) -> None:
+    path = _candidate_path(company_id, interview_id, invite_id)
+    await _call("DELETE", path, {"user_id": user_id})
+
+
+async def rename_candidate(
+    company_id: UUID, interview_id: UUID, invite_id: UUID, name: str
+) -> None:
+    path = _candidate_path(company_id, interview_id, invite_id)
+    await _call("PATCH", f"{path}/name", body={"name": name})
+
+
+async def set_extra_time(
+    company_id: UUID, interview_id: UUID, invite_id: UUID, extra_time: int, user_id: str
+) -> None:
+    path = _candidate_path(company_id, interview_id, invite_id)
+    await _call("PUT", f"{path}/extra-time", {"user_id": user_id}, {"extra_time": extra_time})
+
+
+async def resend(company_id: UUID, interview_id: UUID, invite_id: UUID, user_id: str) -> None:
+    path = _candidate_path(company_id, interview_id, invite_id)
+    await _call("POST", f"{path}/resend", {"user_id": user_id})
+
+
+async def find_candidates(company_id: UUID, email: str) -> list[dict]:
+    """The company's candidates invited with this email: their interview and candidate ids."""
+    return await _get(f"/internal/companies/{company_id}/candidates", {"email": email})
+
+
+async def credits(company_id: UUID) -> dict:
+    return await _get(f"/internal/companies/{company_id}/credits")

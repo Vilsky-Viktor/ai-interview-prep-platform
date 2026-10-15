@@ -1458,7 +1458,7 @@
   "apiDocs": {
     "title": "Developer docs",
     "intro": "Connect prepza to your own platform: list your interviews, invite candidates, get their results and embed the interview in your own site.",
-    "description": "prepza's developer docs: get an API key, list your interviews, invite candidates, read their results, receive them by web hook and embed the interview with the SDK.",
+    "description": "prepza's developer docs: get an API key, create interviews, invite and manage candidates, read their results, receive them by web hook and embed the interview with the SDK.",
     "tabs": {
       "api": "API",
       "webhooks": "Web hooks",
@@ -1934,7 +1934,7 @@
       "title": "API",
       "text": "Connect your own platform, such as your careers site, to prepza.",
       "actions": [
-        "Create an API key: it reads your interviews and candidates and invites candidates as you.",
+        "Create an API key: as you, it creates interviews, reads candidates and their results, invites, reminds, updates or removes them, and reads your credits.",
         "Add a web hook: prepza tells your HTTPS address, signed, when a candidate starts, finishes (with their results), isn't reached, expires or is removed, and when an interview is ready.",
         "Send a web hook a test event, and see what each send got in its delivery log.",
         "Delete the keys and web hooks you no longer use.",

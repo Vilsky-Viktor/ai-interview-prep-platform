@@ -3,12 +3,11 @@ from uuid import UUID
 from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
 
-from app.constants.audit import AuditAction
-from app.constants.invites import EXTRA_TIME_STARTED, NOT_STARTED
 from app.schemas.invites import ExtraTimeIn
 from app.service_auth import Via
+from app.services import candidate_changes
 from app.services.access import require_editor
-from app.storage import audit, interviews, invites
+from app.storage import interviews, invites
 
 # Accommodations for candidates who need them: extra time on each question.
 router = APIRouter(prefix="/interviews", tags=["candidates"])
@@ -25,11 +24,4 @@ async def set_extra_time(
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Candidate not found")
 
     await require_editor(user, interview.company_id)
-
-    if invite.status not in NOT_STARTED:
-        raise HTTPException(status.HTTP_409_CONFLICT, EXTRA_TIME_STARTED)
-
-    await invites.set_extra_time(invite.id, body.extra_time)
-    await audit.record(
-        interview.company_id, user.uid, AuditAction.EXTRA_TIME_SET, invite.id, via=via
-    )
+    await candidate_changes.set_extra_time(interview, invite, body.extra_time, user.uid, via)

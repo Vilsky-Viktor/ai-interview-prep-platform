@@ -220,4 +220,6 @@ MESSAGES = {
     "This version's notice was already sent.": "Selle versiooni teade on juba saadetud.",
     "Prices aren't available right now. Please try again in a minute.": "Hinnad ei ole praegu saadaval. Proovi minuti pärast uuesti.",
     "return_url must be an https address on the company's verified website domain; get the company verified in prepza first (Verify, next to its name).": "return_url peab olema https-aadress ettevõtte kinnitatud veebisaidi domeenil; lase ettevõte esmalt prepzas kinnitada (Kinnita, selle nime kõrval).",
+    "A request with this Idempotency-Key is still running. Try again shortly.": "Selle Idempotency-Key'ga päring on veel pooleli. Proovi varsti uuesti.",
+    "prepza doesn't email this candidate: send them their invite link yourself.": "prepza ei saada sellele kandidaadile e-kirju: saada talle kutselink ise.",
 }

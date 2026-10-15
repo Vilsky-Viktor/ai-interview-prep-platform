@@ -1454,7 +1454,7 @@
   "apiDocs": {
     "title": "Documentação para desenvolvedores",
     "intro": "Conecte a prepza à sua própria plataforma: liste suas entrevistas, convide candidatos, receba os resultados deles e incorpore a entrevista no seu próprio site.",
-    "description": "A documentação para desenvolvedores da prepza: obtenha uma chave de API, liste suas entrevistas, convide candidatos, leia os resultados deles, receba-os por webhook e incorpore a entrevista com o SDK.",
+    "description": "A documentação para desenvolvedores da prepza: obtenha uma chave de API, crie entrevistas, convide e gerencie candidatos, leia os resultados deles, receba-os por webhook e incorpore a entrevista com o SDK.",
     "tabs": {
       "api": "API",
       "webhooks": "Webhooks",
@@ -1930,7 +1930,7 @@
       "title": "API",
       "text": "Conecte sua própria plataforma, como seu site de carreiras, à prepza.",
       "actions": [
-        "Crie uma chave de API: ela lê suas entrevistas e candidatos e convida candidatos em seu nome.",
+        "Crie uma chave de API: em seu nome, ela cria entrevistas, lê os candidatos e os resultados deles, convida-os, envia lembretes, atualiza-os ou remove-os e lê seus créditos.",
         "Adicione um webhook: a prepza avisa o seu endereço HTTPS, com assinatura, quando um candidato começa ou termina (com os resultados), quando o convite não chega até ele ou expira, quando ele é removido e quando uma entrevista fica pronta.",
         "Envie um evento de teste a um webhook e veja no registro de entregas o resultado de cada envio.",
         "Exclua as chaves e os webhooks que você não usa mais.",

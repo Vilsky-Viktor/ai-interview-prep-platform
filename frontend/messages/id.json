@@ -1458,7 +1458,7 @@
   "apiDocs": {
     "title": "Dokumentasi pengembang",
     "intro": "Hubungkan prepza ke platformmu sendiri: lihat daftar wawancaramu, undang kandidat, dapatkan hasilnya, dan sematkan wawancara di situsmu sendiri.",
-    "description": "Dokumentasi pengembang prepza: dapatkan kunci API, lihat daftar wawancaramu, undang kandidat, baca hasilnya, terima lewat webhook, dan sematkan wawancara dengan SDK.",
+    "description": "Dokumentasi pengembang prepza: dapatkan kunci API, buat wawancara, undang dan kelola kandidat, baca hasilnya, terima lewat webhook, dan sematkan wawancara dengan SDK.",
     "tabs": {
       "api": "API",
       "webhooks": "Webhook",
@@ -1934,7 +1934,7 @@
       "title": "API",
       "text": "Hubungkan platformmu sendiri, seperti situs karier, ke prepza.",
       "actions": [
-        "Buat kunci API: kunci ini membaca wawancara dan kandidatmu serta mengundang kandidat atas namamu.",
+        "Buat kunci API: atas namamu, kunci ini membuat wawancara, membaca kandidat dan hasilnya, mengundang, mengingatkan, memperbarui, atau menghapus mereka, serta membaca kreditmu.",
         "Tambahkan webhook: prepza memberi tahu alamat HTTPS-mu, dengan tanda tangan, saat kandidat mulai, selesai (beserta hasilnya), atau dihapus, saat undangannya tidak sampai atau kedaluwarsa, dan saat wawancara siap.",
         "Kirim event uji ke webhook, dan lihat hasil setiap pengiriman di log pengirimannya.",
         "Hapus kunci dan webhook yang tidak lagi kamu pakai.",

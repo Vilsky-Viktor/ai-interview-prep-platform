@@ -70,7 +70,7 @@ FAQ = [
     {
         "key": "integrations",
         "question": "Kas prepza töötab minu ATS-i või muude tööriistadega?",
-        "answer": "Jah, ilma lisatasuta. Ühenda Workable, Greenhouse, Teamtailor, Recruitee või Breezy HR oma ettevõtte vahekaardil Integratsioonid: kandidaadid, kelle viid etappi, saavad intervjuu ja nende tulemused lähevad tagasi ATS-i. Slack saab postitada sinu ettevõtte teavitusi kanalisse ja API kaudu saab sinu enda platvorm kandidaate kutsuda ning nende tulemusi vastu võtta; vaata: API dokumentatsioon.",
+        "answer": "Jah, ilma lisatasuta. Ühenda Workable, Greenhouse, Teamtailor, Recruitee või Breezy HR oma ettevõtte vahekaardil Integratsioonid: kandidaadid, kelle viid etappi, saavad intervjuu ja nende tulemused lähevad tagasi ATS-i. Slack saab postitada sinu ettevõtte teavitusi kanalisse ja API kaudu saab sinu enda platvorm luua intervjuusid, kandidaate kutsuda ja hallata ning nende tulemusi vastu võtta; vaata: API dokumentatsioon.",
     },
     {
         "key": "ai_apps",

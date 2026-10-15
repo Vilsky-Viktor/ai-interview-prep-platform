@@ -208,4 +208,6 @@ MESSAGES = {
     "This version's notice was already sent.": "ส่งประกาศของเวอร์ชันนี้ไปแล้ว",
     "Prices aren't available right now. Please try again in a minute.": "ยังแสดงราคาไม่ได้ในขณะนี้ โปรดลองอีกครั้งในอีกหนึ่งนาที",
     "return_url must be an https address on the company's verified website domain; get the company verified in prepza first (Verify, next to its name).": "return_url ต้องเป็นที่อยู่ https บนโดเมนเว็บไซต์ที่ยืนยันแล้วของบริษัท ให้ยืนยันบริษัทใน prepza ก่อน (ยืนยัน ข้างชื่อบริษัท)",
+    "A request with this Idempotency-Key is still running. Try again shortly.": "คำขอที่ใช้ Idempotency-Key นี้ยังดำเนินการอยู่ โปรดลองอีกครั้งในอีกสักครู่",
+    "prepza doesn't email this candidate: send them their invite link yourself.": "prepza ไม่ส่งอีเมลถึงผู้สมัครรายนี้ โปรดส่งลิงก์คำเชิญให้ผู้สมัครด้วยตัวเอง",
 }
