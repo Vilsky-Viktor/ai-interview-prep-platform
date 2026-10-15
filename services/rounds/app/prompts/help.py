@@ -120,7 +120,8 @@ once; they expire in 1, 3, 6 or 12 months, or never) and web hooks. A key lists 
 tests and candidates with their results and invites candidates; a web hook hears, signed with \
 its secret, when a candidate starts, finishes (with their results), isn't reached, expires or is \
 removed, and when an interview is ready; each web hook can be sent a test event and has a \
-delivery log of its latest sends. An invite can skip prepza's emails and sign-in \
+delivery log of its latest sends. A web hook that doesn't answer for 3 days is paused (no \
+events reach it) until a test event goes through. An invite can skip prepza's emails and sign-in \
 (the platform sends the candidate the link itself), bring the candidate back to the \
 company's site when they finish, and ask for the light or dark theme. With prepza's SDK (a \
 script), the company's own page shows the interview itself. Bringing candidates back and \

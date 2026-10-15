@@ -1359,7 +1359,7 @@
     "webhooksTitle": "Webhook",
     "webhooksText": "prepza báo cho các địa chỉ này khi ứng viên bắt đầu, hoàn thành (kèm kết quả), không nhận được lời mời, hết hạn lời mời hoặc bị xóa khỏi buổi phỏng vấn, và khi một buổi phỏng vấn sẵn sàng; mỗi yêu cầu được ký bằng khóa bí mật của địa chỉ đó.",
     "noWebhooks": "Chưa có webhook nào.",
-    "failing": "Không phản hồi: các kết quả gần đây không đến được",
+    "failing": "Đã tạm dừng: không phản hồi trong 3 ngày nên không có sự kiện nào được gửi tới. Một sự kiện thử nghiệm được nhận sẽ kích hoạt lại.",
     "stopped": "Đã dừng: thành viên thêm nó không còn là chủ sở hữu hay quản trị viên. Hãy thêm lại để tiếp tục nhận kết quả.",
     "addWebhook": "Thêm webhook",
     "addWebhookTitle": "Webhook mới",

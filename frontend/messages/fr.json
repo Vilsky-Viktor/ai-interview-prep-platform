@@ -1363,7 +1363,7 @@
     "webhooksTitle": "Webhooks",
     "webhooksText": "prepza prévient ces adresses quand un candidat commence, termine (avec ses résultats) ou est retiré, quand son invitation n'a pas pu lui parvenir ou a expiré, et quand un entretien est prêt. Chaque requête est signée avec le secret de l'adresse.",
     "noWebhooks": "Aucun webhook pour l'instant.",
-    "failing": "Ne répond pas : les derniers résultats ne lui sont pas parvenus",
+    "failing": "En pause : il n'a pas répondu pendant 3 jours, donc aucun événement ne lui est envoyé. Un événement de test accepté le relance.",
     "stopped": "Arrêté : le membre qui l'a ajouté n'est plus propriétaire ni administrateur. Ajoutez-le à nouveau pour continuer à recevoir les résultats.",
     "addWebhook": "Ajouter un webhook",
     "addWebhookTitle": "Nouveau webhook",

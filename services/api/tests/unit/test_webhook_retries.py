@@ -1,7 +1,12 @@
 import asyncio
 from datetime import UTC, datetime, timedelta
 
-from app.constants.api import RETRY_FIRST_DELAY, RETRY_GIVE_UP, RETRY_MAX_DELAY
+from app.constants.api import (
+    RETRY_BATCH,
+    RETRY_FIRST_DELAY,
+    RETRY_GIVE_UP,
+    RETRY_MAX_DELAY,
+)
 from app.helpers.webhooks import retry_delay
 from app.services import webhooks as delivery
 from tests.unit.test_webhook_delivery import finish
@@ -75,7 +80,7 @@ def test_an_event_that_fails_again_waits_twice_as_long(endpoints):
     assert hook.failing is False
 
 
-def test_after_days_of_failing_the_event_is_dropped_and_the_web_hook_shows_as_failing(endpoints):
+def test_after_days_of_failing_the_web_hook_is_paused_until_a_test_event_goes_through(endpoints):
     hook = failed_once(endpoints)
     due(endpoints, hook, age=RETRY_GIVE_UP)
     run()
@@ -83,11 +88,21 @@ def test_after_days_of_failing_the_event_is_dropped_and_the_web_hook_shows_as_fa
     assert endpoints["retries"] == {}
     assert hook.failing is True
 
-    # The next event it takes clears it.
+    # Paused: the next event isn't sent, even once the endpoint answers again.
     endpoints["failing"].clear()
+    sent = len(endpoints["posted"])
     finish("e2")
 
+    assert len(endpoints["posted"]) == sent
+    assert endpoints["retries"] == {}
+
+    # A test event that goes through starts it again.
+    assert asyncio.run(delivery.test(hook)) is True
     assert hook.failing is False
+
+    finish("e3")
+
+    assert endpoints["posted"][-1][1]["id"] == "e3"
 
 
 def test_an_event_with_nowhere_to_go_any_more_is_dropped_unsent(endpoints, companies_api):
@@ -117,3 +132,31 @@ def test_the_schedule_sends_kept_events_again(client, monkeypatch):
 
     assert client.post("/internal/schedules/webhook-retries").status_code == 204
     assert runs == [True]
+
+
+def test_the_retry_job_sends_batch_after_batch_until_none_are_due(endpoints, monkeypatch):
+    batches = [RETRY_BATCH, RETRY_BATCH, 3]
+
+    async def retry_batch():
+        return batches.pop(0)
+
+    monkeypatch.setattr(delivery, "retry_batch", retry_batch)
+
+    assert run() == 2 * RETRY_BATCH + 3
+    assert batches == []
+
+
+def test_the_retry_job_starts_no_batch_once_its_time_is_up(endpoints, monkeypatch):
+    clock = {"now": 0.0}
+
+    async def retry_batch():
+        # Each full batch takes 15 seconds.
+        clock["now"] += 15
+
+        return RETRY_BATCH
+
+    monkeypatch.setattr(delivery.time, "monotonic", lambda: clock["now"])
+    monkeypatch.setattr(delivery, "retry_batch", retry_batch)
+
+    # Started at 0, 15 and 30; not at 45, past RETRY_RUN_SECONDS.
+    assert run() == 3 * RETRY_BATCH

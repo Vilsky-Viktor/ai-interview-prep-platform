@@ -1367,7 +1367,7 @@
     "webhooksTitle": "Webhookid",
     "webhooksText": "prepza teavitab neid aadresse, kui kandidaat alustab, lõpetab (koos tulemustega), kutse ei jõua temani, tema kutse aegub või ta eemaldatakse, ning kui intervjuu on valmis; iga päring on allkirjastatud aadressi saladusega.",
     "noWebhooks": "Webhooke veel pole.",
-    "failing": "Ei vasta: viimased tulemused ei jõudnud kohale",
+    "failing": "Peatatud: see ei vastanud 3 päeva, seega sellele ei saadeta sündmusi. Vastu võetud testsündmus käivitab selle uuesti.",
     "stopped": "Peatatud: selle lisanud liige pole enam omanik ega administraator. Lisa see uuesti, et tulemusi edasi saada.",
     "addWebhook": "Lisa webhook",
     "addWebhookTitle": "Uus webhook",

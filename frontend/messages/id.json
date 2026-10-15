@@ -1363,7 +1363,7 @@
     "webhooksTitle": "Webhook",
     "webhooksText": "prepza memberi tahu alamat-alamat ini saat kandidat mulai, selesai (beserta hasilnya), atau dihapus, saat undangannya tidak sampai atau kedaluwarsa, dan saat wawancara siap. Setiap permintaan ditandatangani dengan secret alamat tersebut.",
     "noWebhooks": "Belum ada webhook.",
-    "failing": "Tidak merespons: hasil terbaru tidak sampai ke alamat ini",
+    "failing": "Dijeda: alamat ini tidak merespons selama 3 hari, jadi tidak ada event yang dikirim ke sini. Event uji yang diterima akan mengaktifkannya lagi.",
     "stopped": "Dihentikan: anggota yang menambahkannya bukan lagi pemilik atau admin. Tambahkan lagi agar tetap menerima hasil.",
     "addWebhook": "Tambah webhook",
     "addWebhookTitle": "Webhook baru",

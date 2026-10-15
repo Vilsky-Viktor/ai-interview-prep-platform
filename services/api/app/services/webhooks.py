@@ -15,7 +15,7 @@ from prepza_common.notifications import NotificationKind, Recipient, notificatio
 from pydantic import BaseModel
 
 from app.config.settings import settings
-from app.constants.api import API_PAGE, RETRY_BATCH, RETRY_GIVE_UP
+from app.constants.api import API_PAGE, RETRY_BATCH, RETRY_GIVE_UP, RETRY_RUN_SECONDS
 from app.constants.events import CANDIDATE_REMOVED, INTERVIEW_READY, TEST_EVENT
 from app.helpers.public import candidate_of, interview_of
 from app.helpers.webhooks import body_of, public_address, retry_delay, signature
@@ -40,11 +40,12 @@ async def send(
     an owner or admin; `build` makes its data, or None when there's nothing to tell any more.
     Web hooks that already got it are skipped, so a redelivered event reaches only the ones
     that failed. A web hook that doesn't take it is left to the retry job, and the event is
-    done: a company's failing endpoint doesn't hold up Pub/Sub for everyone."""
+    done: a company's failing endpoint doesn't hold up Pub/Sub for everyone. A paused one
+    (`failing`) gets nothing until a test event goes through."""
     hooks = [
         hook
         for hook in await webhooks.of_company(company_id)
-        if not await webhooks.delivered(hook.id, event_id)
+        if not hook.failing and not await webhooks.delivered(hook.id, event_id)
     ]
     # A web hook works while whoever added it is still an owner or admin, like an API key.
     editors = {
@@ -142,9 +143,25 @@ async def test(hook: Webhook) -> bool:
 
 async def retry() -> int:
     """Every 5 minutes: events web hooks didn't take, whose time came, are sent again, a batch
-    at once. One with nowhere to go any more (it got there since, or whoever added the web hook
-    is no longer an owner or admin) is dropped. One that fails again waits twice as long; after
-    RETRY_GIVE_UP it's dropped and its web hook shows as failing. How many were due."""
+    at once, batch after batch until RETRY_RUN_SECONDS into the run. One with nowhere to go any
+    more (it got there since, or whoever added the web hook is no longer an owner or admin) is
+    dropped. One that fails again waits twice as long; after RETRY_GIVE_UP it's dropped and its
+    web hook is paused. How many were due."""
+    stop_at = time.monotonic() + RETRY_RUN_SECONDS
+    due = 0
+
+    while time.monotonic() < stop_at:
+        sent = await retry_batch()
+        due += sent
+
+        if sent < RETRY_BATCH:
+            break
+
+    return due
+
+
+async def retry_batch() -> int:
+    """One batch of retries, sent at once; how many there were."""
     claimed = await retries.claim(RETRY_BATCH)
     # A web hook works while whoever added it is still an owner or admin. Companies not
     # answering fails the run: what it claimed comes back after RETRY_LEASE.
@@ -198,7 +215,7 @@ async def resend(row: WebhookRetry, hook: Webhook, editor: bool) -> None:
     now = datetime.now(UTC)
 
     if now - row.created_at >= RETRY_GIVE_UP:
-        logger.warning("Web hook %s didn't take %s for days: dropped", hook.id, row.event_id)
+        logger.warning("Web hook %s didn't take %s for days: paused", hook.id, row.event_id)
         await retries.remove(hook.id, row.event_id)
         await webhooks.set_failing(hook.id, True)
 

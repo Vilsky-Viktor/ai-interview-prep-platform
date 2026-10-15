@@ -1354,7 +1354,7 @@
     "webhooksTitle": "Webhook",
     "webhooksText": "当候选人开始、完成（附带结果）、邀请未能送达、邀请过期或被移除时，以及面试准备就绪时，prepza 会通知这些地址，每个请求都用该地址的签名密钥签名。",
     "noWebhooks": "还没有 Webhook。",
-    "failing": "无响应：最近的结果未能送达",
+    "failing": "已暂停：3 天未响应，因此不再向其发送事件。测试事件被接受后即恢复。",
     "stopped": "已停止：添加它的成员已不再是所有者或管理员。请重新添加，以继续接收结果。",
     "addWebhook": "添加 Webhook",
     "addWebhookTitle": "新建 Webhook",

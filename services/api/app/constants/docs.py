@@ -87,8 +87,9 @@ and reject requests whose timestamp is more than a few minutes old, before proce
 
 Respond with any `2xx` status within 10 seconds to confirm delivery. Other responses and timeouts
 are retried with growing pauses, from 5 minutes up to 6 hours apart, for 3 days; after that the
-web hook is marked as failing on the API page until it takes an event again. An event can
-occasionally arrive more than once; use its `id` to ignore duplicates.
+web hook is paused: it gets no events, and the API page shows it as paused, until a test event
+sent from there goes through. An event can occasionally arrive more than once; use its `id` to
+ignore duplicates.
 
 Each request body is a JSON object with the event's `id`, its `type`, `occurred_at` (when the
 change happened, in ISO 8601) and its `data`. A retried event can arrive after a later one, so

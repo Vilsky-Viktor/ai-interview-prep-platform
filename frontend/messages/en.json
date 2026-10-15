@@ -1363,7 +1363,7 @@
     "webhooksTitle": "Web hooks",
     "webhooksText": "prepza tells these addresses when a candidate starts, finishes (with their results), isn't reached, expires or is removed, and when an interview is ready, each request signed with the address's secret.",
     "noWebhooks": "No web hooks yet.",
-    "failing": "Not answering: recent results didn't reach it",
+    "failing": "Paused: it didn't answer for 3 days, so no events are sent to it. A test event that goes through starts it again.",
     "stopped": "Stopped: the member who added it is no longer an owner or admin. Add it again to keep getting results.",
     "addWebhook": "Add web hook",
     "addWebhookTitle": "New web hook",

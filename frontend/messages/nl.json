@@ -1359,7 +1359,7 @@
     "webhooksTitle": "Webhooks",
     "webhooksText": "prepza laat deze adressen weten wanneer een kandidaat begint of klaar is (met de resultaten), wanneer de uitnodiging een kandidaat niet bereikt of verloopt, wanneer een kandidaat wordt verwijderd en wanneer een interview klaarstaat. Elk verzoek is ondertekend met het secret van het adres.",
     "noWebhooks": "Nog geen webhooks.",
-    "failing": "Reageert niet: recente resultaten zijn niet aangekomen",
+    "failing": "Gepauzeerd: hij reageerde 3 dagen niet, dus er worden geen gebeurtenissen naar verstuurd. Een aangenomen testgebeurtenis zet hem weer aan.",
     "stopped": "Gestopt: het lid dat hem heeft toegevoegd is geen eigenaar of beheerder meer. Voeg hem opnieuw toe om resultaten te blijven ontvangen.",
     "addWebhook": "Webhook toevoegen",
     "addWebhookTitle": "Nieuwe webhook",

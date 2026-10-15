@@ -5,7 +5,7 @@ from sqlalchemy import delete, func, select, update
 from sqlalchemy.dialects.postgresql import insert
 
 from app.constants.api import DELIVERIES_KEPT
-from app.models.api import Webhook, WebhookDelivery
+from app.models.api import Webhook, WebhookDelivery, WebhookRetry
 from app.storage.db import Session
 
 
@@ -105,10 +105,16 @@ async def mark_delivered(webhook_id: uuid.UUID, event_id: str) -> None:
 
 
 async def set_failing(webhook_id: uuid.UUID, failing: bool) -> None:
+    """Pauses the web hook (it dropped an event after RETRY_GIVE_UP), with its other events
+    waiting for a retry, or starts it again (it took an event: a test event)."""
     query = update(Webhook).where(Webhook.id == webhook_id).values(failing=failing)
 
     async with Session() as session:
         await session.execute(query)
+
+        if failing:
+            await session.execute(delete(WebhookRetry).where(WebhookRetry.webhook_id == webhook_id))
+
         await session.commit()
 
 

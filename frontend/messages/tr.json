@@ -1362,7 +1362,7 @@
     "webhooksTitle": "Webhook'lar",
     "webhooksText": "prepza bu adreslere bir aday başladığında, bitirdiğinde (sonuçlarıyla birlikte), daveti kendisine ulaşamadığında, davetinin süresi dolduğunda veya kaldırıldığında ve bir mülakat hazır olduğunda haber verir; her istek adresin gizli anahtarıyla imzalanır.",
     "noWebhooks": "Henüz webhook yok.",
-    "failing": "Yanıt vermiyor: son sonuçlar ulaşmadı",
+    "failing": "Duraklatıldı: 3 gün boyunca yanıt vermediği için ona olay gönderilmiyor. Kabul edilen bir test olayı onu yeniden başlatır.",
     "stopped": "Durduruldu: onu ekleyen üye artık sahip veya yönetici değil. Sonuç almaya devam etmek için yeniden ekleyin.",
     "addWebhook": "Webhook ekle",
     "addWebhookTitle": "Yeni webhook",

@@ -58,19 +58,25 @@ def test_a_kept_event_waits_longer_goes_once_sent_and_with_its_web_hook(run):
     assert after == []
 
 
-def test_a_web_hook_shows_as_failing_until_cleared(run):
+def test_a_paused_web_hook_drops_its_waiting_retries_until_started_again(run):
     company = uuid.uuid4()
+    past = datetime.now(UTC) - timedelta(seconds=1)
 
     async def scenario():
         hook = await webhooks.add(company, "https://example.com/x", "sealed", "u1", MAX_WEBHOOKS)
+        other = await webhooks.add(company, "https://example.com/y", "sealed", "u1", MAX_WEBHOOKS)
+        await retries.add(hook.id, "e1", '{"id":"e1"}', past)
+        await retries.add(other.id, "e1", '{"id":"e1"}', past)
         fresh = (await webhooks.of_company(company))[0].failing
         await webhooks.set_failing(hook.id, True)
-        failing = (await webhooks.of_company(company))[0].failing
+        paused = {row.id: row.failing for row in await webhooks.of_company(company)}
+        waiting = [row.webhook_id for row, _ in await retries.claim(1000)]
         await webhooks.set_failing(hook.id, False)
+        again = {row.id: row.failing for row in await webhooks.of_company(company)}
 
-        return fresh, failing, (await webhooks.of_company(company))[0].failing
+        return fresh, paused[hook.id], hook.id in waiting, other.id in waiting, again[hook.id]
 
-    assert run(scenario()) == (False, True, False)
+    assert run(scenario()) == (False, True, False, True, False)
 
 
 def test_an_erased_candidates_results_waiting_to_be_sent_again_go(run):

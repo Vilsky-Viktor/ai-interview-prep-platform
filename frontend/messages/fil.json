@@ -1367,7 +1367,7 @@
     "webhooksTitle": "Mga webhook",
     "webhooksText": "Sinasabihan ng prepza ang mga address na ito kapag nagsimula, natapos (kasama ang mga resulta niya), hindi naabot ng imbitasyon, nag-expire ang imbitasyon, o tinanggal ang isang aplikante, at kapag handa na ang isang interview; naka-sign ang bawat request gamit ang secret ng address.",
     "noWebhooks": "Wala pang webhook.",
-    "failing": "Hindi sumasagot: hindi ito naabot ng mga huling resulta",
+    "failing": "Naka-pause: hindi ito sumagot nang 3 araw, kaya walang event na ipinapadala rito. Kapag tinanggap nito ang isang test event, aandar itong muli.",
     "stopped": "Huminto: hindi na owner o admin ang member na nagdagdag nito. Idagdag ulit para patuloy na makatanggap ng mga resulta.",
     "addWebhook": "Magdagdag ng webhook",
     "addWebhookTitle": "Bagong webhook",

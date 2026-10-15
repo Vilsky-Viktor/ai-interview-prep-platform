@@ -1363,7 +1363,7 @@
     "webhooksTitle": "Webhooki",
     "webhooksText": "prepza powiadamia te adresy, gdy kandydat zaczyna lub kończy (wraz z wynikami), gdy zaproszenie do niego nie dotrze lub wygaśnie, gdy kandydat zostanie usunięty i gdy rozmowa jest gotowa. Każde żądanie jest podpisane sekretem danego adresu.",
     "noWebhooks": "Nie ma jeszcze webhooków.",
-    "failing": "Nie odpowiada: ostatnie wyniki do niego nie dotarły",
+    "failing": "Wstrzymany: nie odpowiadał przez 3 dni, więc nie są do niego wysyłane żadne zdarzenia. Przyjęte zdarzenie testowe włącza go ponownie.",
     "stopped": "Zatrzymany: członek, który go dodał, nie jest już właścicielem ani administratorem. Dodaj go ponownie, aby dalej otrzymywać wyniki.",
     "addWebhook": "Dodaj webhook",
     "addWebhookTitle": "Nowy webhook",

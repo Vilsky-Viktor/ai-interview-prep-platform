@@ -95,10 +95,10 @@ test("an owner makes an API key and adds a web hook", async ({ signInAs }) => {
   await visit(owner, tab)
   await shot(owner, "list-filled")
 
-  // A web hook that stopped taking events, after days of retries, says so in its row.
+  // A web hook that stopped taking events, after days of retries, is paused, and says so.
   await markWebhookFailing("https://example.com/prepza", company.id)
   await visit(owner, `${tab}/api?tab=webhooks`)
-  await expect(owner.getByText("Not answering: recent results didn't reach it")).toBeVisible()
+  await expect(owner.getByText(/^Paused: it didn't answer for 3 days/)).toBeVisible()
   await shot(owner, "webhook-failing")
 
   // One whose member is no longer an owner or admin gets no events, and says so instead.
