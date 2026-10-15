@@ -167,7 +167,7 @@ def test_a_limit_or_the_pause_is_an_error_result(calls, monkeypatch):
     async def refused(*args, **kwargs):
         raise HTTPException(429, "Too many requests. Try again later.")
 
-    monkeypatch.setattr(mcp_tools, "hit", refused)
+    monkeypatch.setattr(mcp_tools, "hit_or_skip", refused)
 
     error, content = called("get_company", {"company_id": COMPANY})
 

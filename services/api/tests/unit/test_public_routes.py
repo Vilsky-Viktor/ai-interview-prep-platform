@@ -2,10 +2,10 @@ import uuid
 from datetime import UTC, datetime, timedelta
 
 import pytest
+from prepza_common import rate_limit
 from prepza_common.tokens import hashed
 from redis.exceptions import ConnectionError as RedisConnectionError
 
-from app import auth
 from app.constants.api import LAST_USED_EVERY
 from app.helpers.public import candidate_of
 from app.integrations import companies
@@ -195,7 +195,7 @@ def test_with_redis_down_requests_go_through_unlimited(client, companies_api, ke
     async def down(*args, **kwargs):
         raise RedisConnectionError("down")
 
-    monkeypatch.setattr(auth, "hit", down)
+    monkeypatch.setattr(rate_limit, "hit", down)
 
     assert call(client, "GET", "/interviews").status_code == 200
 

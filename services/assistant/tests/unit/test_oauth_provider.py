@@ -89,7 +89,7 @@ def kept(monkeypatch):
     monkeypatch.setattr(oauth, "rotate", rotate)
     monkeypatch.setattr(oauth, "remove", remove)
     monkeypatch.setattr(oauth_provider, "track", track)
-    monkeypatch.setattr(oauth_limits, "hit", nothing)
+    monkeypatch.setattr(oauth_limits, "hit_or_skip", nothing)
 
     return store
 
@@ -225,7 +225,7 @@ def test_too_many_token_requests_are_refused(kept, monkeypatch):
     async def over(*args, **kwargs):
         raise HTTPException(429, "Too many")
 
-    monkeypatch.setattr(oauth_limits, "hit", over)
+    monkeypatch.setattr(oauth_limits, "hit_or_skip", over)
 
     with pytest.raises(TokenError) as refused:
         asyncio.run(oauth_limits.limit_tokens("c1"))

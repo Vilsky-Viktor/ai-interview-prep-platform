@@ -50,7 +50,7 @@ def test_an_app_registers_without_a_secret_within_the_limits(client, monkeypatch
         counted.append(key)
 
     monkeypatch.setattr(oauth, "save_client", save_client)
-    monkeypatch.setattr(oauth_limits, "hit", hit)
+    monkeypatch.setattr(oauth_limits, "hit_or_skip", hit)
     body = {
         "client_name": "Claude Code",
         "redirect_uris": ["http://localhost:3118/callback"],
@@ -69,7 +69,7 @@ def test_registering_too_often_is_refused(client, monkeypatch):
     async def over(redis, key, limit, window):
         raise HTTPException(429, "Too many requests. Try again later.")
 
-    monkeypatch.setattr(oauth_limits, "hit", over)
+    monkeypatch.setattr(oauth_limits, "hit_or_skip", over)
 
     response = client.post("/register", json={"redirect_uris": ["http://localhost/cb"]})
 

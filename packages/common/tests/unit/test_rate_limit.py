@@ -2,6 +2,7 @@ import asyncio
 
 import pytest
 from fastapi import HTTPException
+from prepza_common import rate_limit
 from prepza_common.rate_limit import hit, hit_emails, spend
 
 from tests.unit.fake_redis import FakeRedis
@@ -88,3 +89,39 @@ def test_spend_with_no_limit_counts_nothing(limit):
 
     assert statuses([lambda: spend(redis, "key", 1_000, limit, 60)] * 2) == [200, 200]
     assert redis.counts == {}
+
+
+def test_with_redis_down_a_use_goes_uncounted(monkeypatch):
+    async def down(*args, **kwargs):
+        raise ConnectionError("Redis is down")
+
+    monkeypatch.setattr(rate_limit, "hit", down)
+
+    # No exception: the request goes through.
+    asyncio.run(rate_limit.hit_or_skip(None, "rate:x:u1", 1, 60))
+
+
+def test_over_a_limit_that_skips_on_failure_is_still_refused(monkeypatch):
+    async def over(*args, **kwargs):
+        raise HTTPException(429, "Too many requests. Try again later.")
+
+    monkeypatch.setattr(rate_limit, "hit", over)
+
+    with pytest.raises(HTTPException) as refused:
+        asyncio.run(rate_limit.hit_or_skip(None, "rate:x:u1", 1, 60))
+
+    assert refused.value.status_code == 429
+
+
+@pytest.mark.parametrize("error", [HTTPException(429, "over"), ConnectionError("Redis is down")])
+def test_adding_what_a_request_spent_never_fails_it(monkeypatch, error):
+    added = []
+
+    async def spend(redis, key, amount, limit, window):
+        added.append((key, amount))
+        raise error
+
+    monkeypatch.setattr(rate_limit, "spend", spend)
+    asyncio.run(rate_limit.add_spent(None, "spend:x:all", 500, 1_000, 60))
+
+    assert added == [("spend:x:all", 500)]

@@ -188,6 +188,6 @@ def stored(monkeypatch):
     monkeypatch.setattr(keys, "of_company", keys_of)
     monkeypatch.setattr(webhooks, "add", add_webhook)
     monkeypatch.setattr(webhooks, "of_company", webhooks_of)
-    monkeypatch.setattr(auth, "hit", hit)
+    monkeypatch.setattr(auth, "hit_or_skip", hit)
 
     return state

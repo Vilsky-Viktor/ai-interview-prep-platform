@@ -35,6 +35,6 @@ def help_spending(monkeypatch):
         spent.append((key, amount))
 
     monkeypatch.setattr("app.routers.help.spend", spend)
-    monkeypatch.setattr("app.services.help.spend", spend)
+    monkeypatch.setattr("app.services.help.add_spent", spend)
 
     return spent

@@ -1,4 +1,3 @@
-import logging
 from datetime import UTC, datetime
 from typing import Annotated
 from uuid import UUID
@@ -7,9 +6,8 @@ from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from prepza_common import memory_cache
 from prepza_common.constants import MINUTE_SECONDS
-from prepza_common.rate_limit import hit
+from prepza_common.rate_limit import hit_or_skip
 from prepza_common.tokens import hashed
-from redis.exceptions import RedisError
 
 from app.constants.api import (
     ACCESS_CACHE_SECONDS,
@@ -21,8 +19,6 @@ from app.integrations import companies
 from app.integrations.redis import get_redis
 from app.models.api import ApiKey
 from app.storage import keys
-
-logger = logging.getLogger(__name__)
 
 bearer = HTTPBearer(auto_error=False, description="A company's API key: `Bearer pz_...`")
 
@@ -60,10 +56,8 @@ async def api_key(
 async def limit(company_id: UUID) -> None:
     """Counts the request against its company. With Redis down, requests go through
     unlimited rather than all failing."""
-    try:
-        await hit(get_redis(), f"rate:api:{company_id}", REQUESTS_PER_MINUTE, MINUTE_SECONDS)
-    except RedisError as error:
-        logger.warning("API rate limit skipped, Redis failed: %s", error)
+    key = f"rate:api:{company_id}"
+    await hit_or_skip(get_redis(), key, REQUESTS_PER_MINUTE, MINUTE_SECONDS)
 
 
 async def editor(company_id: UUID, user_id: str) -> bool:

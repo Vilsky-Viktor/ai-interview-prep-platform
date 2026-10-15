@@ -9,7 +9,7 @@ from prepza_common.analytics import track
 from prepza_common.constants import DAY_SECONDS, HOUR_SECONDS, MINUTE_SECONDS
 from prepza_common.i18n import translate
 from prepza_common.pause import refuse_if_paused
-from prepza_common.rate_limit import hit
+from prepza_common.rate_limit import hit, hit_or_skip
 from prepza_common.secrets_check import SECRET_REMOVED, secret_in
 from prepza_common.user import User
 
@@ -65,15 +65,10 @@ def error_result(detail: str) -> types.CallToolResult:
 async def count_call(user_id: str) -> None:
     """Counts one call of the user's apps; over a limit, a 429. With Redis down, not counted."""
     redis = get_redis()
-
-    try:
-        minute = f"rate:assistant:mcp:minute:{user_id}"
-        await hit(redis, minute, MCP_CALLS_PER_USER_MINUTE, MINUTE_SECONDS)
-        await hit(redis, f"rate:assistant:mcp:day:{user_id}", MCP_CALLS_PER_USER_DAY, DAY_SECONDS)
-    except HTTPException:
-        raise
-    except Exception:
-        logger.warning("MCP call limit skipped, Redis failed", exc_info=True)
+    minute = f"rate:assistant:mcp:minute:{user_id}"
+    await hit_or_skip(redis, minute, MCP_CALLS_PER_USER_MINUTE, MINUTE_SECONDS)
+    day = f"rate:assistant:mcp:day:{user_id}"
+    await hit_or_skip(redis, day, MCP_CALLS_PER_USER_DAY, DAY_SECONDS)
 
 
 async def mark_active(access: Access) -> None:

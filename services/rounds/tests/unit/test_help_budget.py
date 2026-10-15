@@ -1,6 +1,7 @@
 import asyncio
 
 from fastapi import HTTPException
+from prepza_common import rate_limit
 
 from app.constants.help import HELP_MAX_OUTPUT_TOKENS, HELP_SPEND_KEY
 from app.integrations import llm
@@ -43,7 +44,7 @@ def test_going_over_with_an_answer_still_keeps_it(monkeypatch):
     async def over(redis, key, amount, limit, window, message=None):
         raise HTTPException(429, "Too many requests. Try again later.")
 
-    monkeypatch.setattr(help_service, "spend", over)
+    monkeypatch.setattr(rate_limit, "spend", over)
 
     # No exception: the next question is the one refused.
     asyncio.run(help_service.record_spend(None, 5_000))

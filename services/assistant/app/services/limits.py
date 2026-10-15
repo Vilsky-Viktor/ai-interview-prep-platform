@@ -1,9 +1,7 @@
-import logging
 from uuid import UUID
 
-from fastapi import HTTPException
 from prepza_common.constants import DAY_SECONDS, HOUR_SECONDS
-from prepza_common.rate_limit import hit, spend
+from prepza_common.rate_limit import add_spent, hit, spend
 from redis.exceptions import RedisError
 
 from app.constants.limits import (
@@ -18,8 +16,6 @@ from app.constants.limits import (
     TRANSCRIPTIONS_PER_USER_HOUR,
 )
 from app.integrations import billing
-
-logger = logging.getLogger(__name__)
 
 
 async def company_paid(redis, company_id: UUID | None) -> bool:
@@ -91,9 +87,4 @@ async def record(redis, user_id: str, company_id: UUID | None, tokens: int) -> N
         paid = False
 
     for key, budget in budgets(user_id, company_id, paid):
-        try:
-            await spend(redis, key, tokens, budget, DAY_SECONDS)
-        except HTTPException:
-            pass
-        except Exception:
-            logger.warning("Couldn't add a turn's tokens to %s", key, exc_info=True)
+        await add_spent(redis, key, tokens, budget, DAY_SECONDS)

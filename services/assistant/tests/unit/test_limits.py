@@ -2,6 +2,7 @@ import asyncio
 
 import pytest
 from fastapi import HTTPException
+from prepza_common import rate_limit
 
 from app.constants.limits import (
     MESSAGES_PER_COMPANY_DAY,
@@ -113,7 +114,7 @@ def test_a_turns_tokens_are_added_and_going_over_never_fails_the_turn(monkeypatc
     async def unpaid(redis, company_id):
         return False
 
-    monkeypatch.setattr(limits, "spend", spend)
+    monkeypatch.setattr(rate_limit, "spend", spend)
     monkeypatch.setattr(limits, "company_paid", unpaid)
     asyncio.run(limits.record(None, "ann", COMPANY, 1_234))
 

@@ -19,7 +19,7 @@ def counted(monkeypatch):
     async def hit(redis, key, limit, window):
         keys.append(key)
 
-    monkeypatch.setattr(oauth_limits, "hit", hit)
+    monkeypatch.setattr(oauth_limits, "hit_or_skip", hit)
 
     return keys
 
@@ -60,7 +60,7 @@ def test_too_many_requests_to_connect_from_one_address_are_refused(client, monke
     async def over(redis, key, limit, window):
         raise HTTPException(429, "Too many requests. Try again later.")
 
-    monkeypatch.setattr(oauth_limits, "hit", over)
+    monkeypatch.setattr(oauth_limits, "hit_or_skip", over)
 
     response = client.get("/authorize", params={"client_id": "c1"}, follow_redirects=False)
 
