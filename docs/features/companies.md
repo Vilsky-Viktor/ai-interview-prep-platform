@@ -100,7 +100,7 @@ Only the owner can read the log, newest first, with `via`, through `GET /compani
 
 ## Page guides
 
-Every page from the companies list inward has an info button (a question mark in a badge, labelled "About this page"): under the back arrow in the page margin, or right after the arrow on narrower screens. It opens a short guide to that page: what it's for, what you can do there and a tip or two. The companies list, each company tab (interviews, templates, team, integrations, brand, billing, referrals), each interview tab (topics, candidates, settings), a new interview and its topic review and generation, the preview, a candidate's report, a template, choosing a company for a template, the ATS, Slack and API pages, and the top-up page and Settings each have their own, in every language. The companies list's back arrow goes to the home page.
+Every page from the companies list inward has an info button (a question mark in a badge, labelled "About this page"): under the back arrow in the page margin, or right after the arrow on narrower screens. It opens a short guide to that page: what it's for, what you can do there and a tip or two. The companies list, each company tab (interviews, templates, team, integrations, brand, billing, referrals), each interview tab (topics, candidates, settings), a new interview and its topic review and generation, the preview, a candidate's report, a template, choosing a company for a template, the ATS, Slack, API and AI apps pages, and the top-up page and Settings each have their own, in every language. The companies list's back arrow goes to the home page.
 
 ## Related pages
 

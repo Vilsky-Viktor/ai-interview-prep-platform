@@ -32,7 +32,7 @@ Below, a landing page walks through prepza, one section per screen:
 - asking the agent: the assistant's panel inviting a candidate, with its input typing more requests one after another (a placeholder only, with reduced motion), and "ask agent" to open it,
 - topic review,
 - questions that fix themselves,
-- the tools prepza works with: the ATSs (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR) and Slack as their logos, and the API as an example request with a link to its docs,
+- the tools prepza works with: the ATSs (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR) and Slack as their logos, the API and MCP as their mark and name, the API as an example request with a link to its docs, and what each connects (your ATS, your own platform through the API, your AI chat such as Claude or ChatGPT through MCP),
 - a verified brand,
 - fair to candidates and safe for your data: what's true about human review, answer keys, AI training, extra time, candidate notices and data, data retention and hosting, payments and the documents, with links to the documents, terms and privacy policy (no compliance badges),
 - pricing ("Pay per candidate": interviews and the first candidates free, then a price per candidate, with no subscription),
