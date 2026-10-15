@@ -2,12 +2,16 @@
 
 import * as Sentry from "@sentry/nextjs"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
-import { useEffect } from "react"
+import { startTransition, useEffect } from "react"
 
 import { ReportProblem } from "@/components/report-problem"
 import { Button } from "@/components/ui/button"
 
+/** A page that failed: what happened, Retry (the page's data read again, then shown) and the way
+ * home, and a way to report it; the error goes to Sentry. global-error.tsx shows it too, when the
+ * root layout itself failed. */
 export default function ErrorPage({
   error,
   reset,
@@ -17,6 +21,15 @@ export default function ErrorPage({
 }) {
   const t = useTranslations("errors")
   const common = useTranslations("common")
+  const router = useRouter()
+
+  // A server page's error comes from its data: read again, or reset() shows the same failure.
+  function retry() {
+    startTransition(() => {
+      router.refresh()
+      reset()
+    })
+  }
 
   useEffect(() => {
     Sentry.captureException(error)
@@ -32,7 +45,7 @@ export default function ErrorPage({
           <p className="text-base text-muted-foreground">{t("text")}</p>
         </div>
         <div className="flex justify-center gap-3">
-          <Button className="h-12 px-6 text-base" onClick={reset}>
+          <Button className="h-12 px-6 text-base" onClick={retry}>
             {common("retry")}
           </Button>
           <Button
