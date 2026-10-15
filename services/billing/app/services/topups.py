@@ -6,20 +6,20 @@ from prepza_common.notifications import NotificationKind, notification, publish_
 
 from app.config.settings import settings
 from app.constants.notifications import TOP_UP_LINK
-from app.constants.products import OwnerType
+from app.constants.products import PADDLE_API_ORIGIN, OwnerType
 from app.helpers.credits import credits_for
 from app.services import auto_top_ups, credit_events
 from app.services.catalog import price_cents_for
 from app.services.referrals import reward_after_top_up
-from app.storage import purchases
+from app.storage import ledger, purchases
 
 logger = logging.getLogger(__name__)
 
 
 async def handle_completed(data: dict) -> None:
     """Adds the credits a completed top-up bought. Whose wallet they go to comes from the
-    checkout, or for an automatic top-up from its subscription; the amount comes from Paddle's
-    price id."""
+    checkout billing created, or for an automatic top-up from its subscription; the amount comes
+    from Paddle's price id."""
     custom = data.get("custom_data") or {}
     owner_id = custom.get("owner_id")
     owner_type = custom.get("owner_type")
@@ -35,6 +35,19 @@ async def handle_completed(data: dict) -> None:
 
     if not owner_id or owner_type not in tuple(OwnerType):
         logger.warning("Transaction %s has no valid owner", data["id"])
+
+        return
+
+    # A top-up's checkout is made by the backend, which checked the buyer may pay into the
+    # wallet; one opened in the browser could name anyone.
+    if not subscription_id and data.get("origin") != PADDLE_API_ORIGIN:
+        logger.error("Transaction %s wasn't created by billing: refund it", data["id"])
+
+        return
+
+    # The company was deleted between the checkout and the payment.
+    if owner_id not in await ledger.wallets(owner_type, [owner_id]):
+        logger.error("Transaction %s pays into a wallet that's gone: refund it", data["id"])
 
         return
 

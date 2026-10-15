@@ -11,6 +11,8 @@ def completed(price_id="pri_topup_50", owner_type="company", owner_id="acme", qu
         "event_type": "transaction.completed",
         "data": {
             "id": "txn_01",
+            # Billing created its checkout.
+            "origin": "api",
             "currency_code": "USD",
             "custom_data": {"owner_type": owner_type, "owner_id": owner_id, "buyer_id": "ann"},
             "items": [{"price": {"id": price_id}, "quantity": quantity}],

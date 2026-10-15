@@ -82,6 +82,7 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
    printf '%s' "$RESEND_API_KEY" | gcloud secrets versions add resend-api-key --data-file=-
    printf '%s' "$RESEND_WEBHOOK_SECRET" | gcloud secrets versions add resend-webhook-secret --data-file=-
    printf '%s' "$PADDLE_WEBHOOK_SECRET" | gcloud secrets versions add paddle-webhook-secret --data-file=-
+   # Its permissions: transactions read and write, subscriptions read and update (docs/features/billing.md).
    printf '%s' "$PADDLE_API_KEY" | gcloud secrets versions add paddle-api-key --data-file=-
    # The ats service's key that encrypts companies' ATS keys (a Fernet key); keep it: a new one makes them reconnect.
    python3 -c "import base64,os; print(base64.urlsafe_b64encode(os.urandom(32)).decode(), end='')" | gcloud secrets versions add ats-encryption-key --data-file=-

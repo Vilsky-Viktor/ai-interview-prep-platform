@@ -26,13 +26,15 @@ function load(catalog: Catalog) {
 }
 
 /**
- * Opens Paddle's checkout for one product. `customData` says whose wallet gets it; what it
+ * Opens Paddle's checkout: a top-up's transaction, which the backend made with whose wallet it
+ * pays into, or the automatic top-up's price with the custom data the backend gave. What it
  * grants is decided by the backend from Paddle's price, once the payment has gone through.
  */
 export async function openCheckout(
   catalog: Catalog,
-  priceId: string,
-  customData: Record<string, string>,
+  checkout:
+    | { transactionId: string }
+    | { priceId: string; customData: Record<string, string> },
   email: string | null,
   completed: () => void
 ) {
@@ -40,8 +42,12 @@ export async function openCheckout(
   const instance = await load(catalog)
 
   instance?.Checkout.open({
-    items: [{ priceId, quantity: 1 }],
-    customData,
+    ...("transactionId" in checkout
+      ? { transactionId: checkout.transactionId }
+      : {
+          items: [{ priceId: checkout.priceId, quantity: 1 }],
+          customData: checkout.customData,
+        }),
     ...(email ? { customer: { email } } : {}),
     // No discount codes are issued for now, so checkout doesn't offer to enter one.
     settings: { showAddDiscounts: false },

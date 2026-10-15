@@ -28,6 +28,20 @@ async def charge(subscription_id: str, price_id: str) -> None:
     response.raise_for_status()
 
 
+async def create_transaction(price_id: str, custom_data: dict) -> str:
+    """A checkout's transaction for one top-up, with whose wallet it's for set here, not in the
+    browser; Paddle.js opens it by its id."""
+    response = await http.get_client().post(
+        _url("/transactions"),
+        json={"items": [{"price_id": price_id, "quantity": 1}], "custom_data": custom_data},
+        headers=_headers(),
+    )
+
+    response.raise_for_status()
+
+    return response.json()["data"]["id"]
+
+
 async def cancel(subscription_id: str) -> None:
     """Ends the subscription at once, so the card isn't kept for us."""
     response = await http.get_client().post(

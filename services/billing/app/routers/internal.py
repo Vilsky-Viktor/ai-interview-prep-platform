@@ -4,7 +4,7 @@ from prepza_common.analytics import track
 from prepza_common.paging import PageParams
 
 from app.constants.credits import CANDIDATE_CREDITS, CANDIDATE_PREFIX, NOT_ENOUGH, Reason
-from app.constants.products import OwnerType
+from app.constants.products import TOP_UP_UNAVAILABLE, OwnerType
 from app.helpers.history import history_entry_out
 from app.helpers.wallets import balance_out
 from app.integrations import paddle
@@ -17,10 +17,13 @@ from app.schemas.billing import (
     OwnersIn,
     PaidOut,
     ReferralOut,
+    TopUpCheckoutIn,
+    TopUpCheckoutOut,
     WelcomeIn,
 )
 from app.service_auth import ServiceCaller
 from app.services import auto_top_ups
+from app.services.catalog import price_cents_for
 from app.services.referrals import referral_out
 from app.storage import history, ledger, purchases, referrals
 
@@ -68,6 +71,20 @@ async def welcome_company(company_id: str, body: WelcomeIn, caller: ServiceCalle
     in that sense can be referred by another, unrelated one."""
     if await ledger.welcome_company(company_id, body.owner_email) and body.referral:
         await referrals.record(body.referral, OwnerType.COMPANY, company_id, body.related)
+
+
+@router.post("/companies/{company_id}/checkout")
+async def company_checkout(
+    company_id: str, body: TopUpCheckoutIn, buyer_id: str, caller: ServiceCaller
+) -> TopUpCheckoutOut:
+    """A checkout for one of our top-ups, paid into the company by `buyer_id`: companies has
+    checked they're its owner or an admin. Any other price is refused (422)."""
+    if price_cents_for(body.price_id, 1) is None:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, TOP_UP_UNAVAILABLE)
+
+    custom = {"owner_type": OwnerType.COMPANY, "owner_id": company_id, "buyer_id": buyer_id}
+
+    return TopUpCheckoutOut(transaction_id=await paddle.create_transaction(body.price_id, custom))
 
 
 @router.get("/companies/{company_id}/paid")

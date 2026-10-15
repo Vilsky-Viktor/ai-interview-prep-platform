@@ -13,6 +13,7 @@ from app.constants.products import (
     AUTO_TOP_UP_THRESHOLDS,
     NOT_YOUR_AUTO_TOP_UP,
     SUBSCRIPTION_ENDED_STATUS,
+    TOP_UP_UNAVAILABLE,
 )
 from app.integrations import paddle
 from app.schemas.billing import AutoTopUpIn, AutoTopUpOut, CheckoutOut
@@ -50,7 +51,7 @@ async def turn_on(owner_type: str, owner_id: str, body: AutoTopUpIn, buyer_id: s
     """Saves the choice. If it isn't running yet, the answer carries the checkout that saves
     the card; it starts when Paddle confirms the subscription."""
     if not offered() or body.product not in products():
-        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "This top-up isn't available")
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, TOP_UP_UNAVAILABLE)
 
     if body.threshold not in AUTO_TOP_UP_THRESHOLDS:
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Choose one of the balances")

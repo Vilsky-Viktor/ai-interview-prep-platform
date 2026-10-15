@@ -41,6 +41,7 @@ Large top-ups buy more credits per dollar: each top-up has its own price per can
 Saved automatic top-ups were moved to these by billing's migration 0012 ($30 to $50, $150 to $200, $250 to $600), each threshold keeping its number of candidates.
 
 - Top up on the top-up page, for any company you belong to.
+- Billing makes each top-up's checkout (a Paddle transaction naming the company and the buyer), after companies checks the buyer is its owner or an admin (`POST /companies/{id}/billing/checkout`); the browser only opens it, so it can't send the money to another wallet or record someone else as the buyer. A paid transaction billing didn't make (its origin isn't `api`), or one into a company deleted meanwhile, adds no credits and is logged as an error, to refund.
 - Paddle's checkout doesn't offer a discount code field.
 - The home and pricing pages show the prices, their range and the free candidates as billing's catalog (`/billing/catalog`) gives them, in its currency.
 
@@ -106,7 +107,7 @@ Deleting a company deletes its credits: billing's internal `DELETE /internal/com
    | `adjustment.created`, `adjustment.updated` | Refunds and chargebacks, which take credits back |
    | `subscription.created`, `subscription.canceled` | Start and end automatic top-ups |
 
-3. For automatic top-up, create a $0 monthly price (its checkout saves the card) and a server-side API key with permission to read and update subscriptions, and to read transactions (for invoices on the billing tab). Without both, automatic top-up isn't offered.
+3. Create a server-side API key with permission to read and write transactions (billing makes every top-up's checkout, and reads invoices for the billing tab) and to read and update subscriptions (automatic top-up). For automatic top-up, also create a $0 monthly price (its checkout saves the card); without it and the key, automatic top-up isn't offered.
 4. Set these in `.env`, then restart billing:
 
    | Setting | Value |

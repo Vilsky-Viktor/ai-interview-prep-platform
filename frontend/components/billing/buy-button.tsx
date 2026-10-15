@@ -9,8 +9,9 @@ import { toast } from "sonner"
 import { useSignIn } from "@/components/sign-in-dialog"
 import { useAuth } from "@/components/auth-provider"
 import { Button } from "@/components/ui/button"
+import { apiFetch } from "@/lib/api"
 import { openCheckout } from "@/lib/paddle"
-import type { Catalog } from "@/types/billing"
+import type { Catalog, CheckoutData } from "@/types/billing"
 
 // When to look for the new balance after a payment, in seconds.
 const RECHECK_SECONDS = [2, 5, 10, 20, 40]
@@ -64,20 +65,19 @@ export function BuyButton({
     setOpening(true)
 
     try {
-      await openCheckout(
-        catalog,
-        priceId!,
-        { owner_type: "company", owner_id: companyId, buyer_id: user.uid },
-        user.email,
-        () => {
-          toast.success(t("paid"))
-          // Paddle's webhook usually lands within seconds, sometimes later: look again a few
-          // times, and the balances count up when it has.
-          rechecks.current = RECHECK_SECONDS.map((seconds) =>
-            window.setTimeout(() => router.refresh(), seconds * 1000)
-          )
-        }
+      // The backend makes the checkout, with whose wallet it pays into.
+      const { transaction_id: transactionId } = await apiFetch<CheckoutData>(
+        `/companies/companies/${companyId}/billing/checkout`,
+        { method: "POST", body: JSON.stringify({ price_id: priceId }) }
       )
+      await openCheckout(catalog, { transactionId }, user.email, () => {
+        toast.success(t("paid"))
+        // Paddle's webhook usually lands within seconds, sometimes later: look again a few
+        // times, and the balances count up when it has.
+        rechecks.current = RECHECK_SECONDS.map((seconds) =>
+          window.setTimeout(() => router.refresh(), seconds * 1000)
+        )
+      })
     } catch {
       toast.error(t("checkoutFailed"))
     } finally {

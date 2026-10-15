@@ -92,8 +92,10 @@ export function AutoTopUpSetting({
 
       await openCheckout(
         catalog,
-        saved.checkout.price_id,
-        saved.checkout.custom_data,
+        {
+          priceId: saved.checkout.price_id,
+          customData: saved.checkout.custom_data,
+        },
         user!.email,
         () => {
           toast.success(t("turnedOn"))

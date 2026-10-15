@@ -900,6 +900,65 @@
     }
    }
   },
+  "/companies/{company_id}/billing/checkout": {
+   "post": {
+    "tags": [
+     "companies"
+    ],
+    "summary": "Create Checkout",
+    "description": "A Paddle checkout for one top-up, paid by the user into the company: billing makes it, so\nwhose wallet it pays into can't be changed in the browser.",
+    "operationId": "create_checkout_companies__company_id__billing_checkout_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/TopUpCheckoutIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/TopUpCheckoutOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
   "/members": {
    "get": {
     "tags": [
@@ -9222,6 +9281,34 @@
      "title"
     ],
     "title": "TitleIn"
+   },
+   "TopUpCheckoutIn": {
+    "properties": {
+     "price_id": {
+      "type": "string",
+      "maxLength": 64,
+      "title": "Price Id"
+     }
+    },
+    "type": "object",
+    "required": [
+     "price_id"
+    ],
+    "title": "TopUpCheckoutIn"
+   },
+   "TopUpCheckoutOut": {
+    "properties": {
+     "transaction_id": {
+      "type": "string",
+      "title": "Transaction Id"
+     }
+    },
+    "type": "object",
+    "required": [
+     "transaction_id"
+    ],
+    "title": "TopUpCheckoutOut",
+    "description": "The Paddle transaction the checkout opens."
    },
    "TopicLimitIn": {
     "properties": {

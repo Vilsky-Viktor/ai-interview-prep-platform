@@ -38,6 +38,10 @@ CURRENCY = "USD"
 WEBHOOK_TOLERANCE_SECONDS = 5 * 60
 # The only Paddle event that grants anything: a fully paid transaction.
 TRANSACTION_COMPLETED = "transaction.completed"
+# A transaction's origin when billing created it through Paddle's API (a checkout opened with
+# items in the browser is "web").
+PADDLE_API_ORIGIN = "api"
+TOP_UP_UNAVAILABLE = "This top-up isn't available"
 # Refunds and chargebacks; a refund is approved after it's created, so both events matter.
 ADJUSTMENT_EVENTS = ("adjustment.created", "adjustment.updated")
 ADJUSTMENT_APPROVED = "approved"

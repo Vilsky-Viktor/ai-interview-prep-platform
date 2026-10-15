@@ -5,7 +5,13 @@ from prepza_common.auth import CurrentUser
 from prepza_common.paging import PageParams
 
 from app.integrations import billing
-from app.schemas.billing import CreditCandidateOut, HistoryEntryOut, InvoiceOut
+from app.schemas.billing import (
+    CreditCandidateOut,
+    HistoryEntryOut,
+    InvoiceOut,
+    TopUpCheckoutIn,
+    TopUpCheckoutOut,
+)
 from app.services import credit_history
 from app.services.access import require_editor
 from app.storage import credit_invites
@@ -41,3 +47,16 @@ async def get_invoice(company_id: UUID, transaction_id: str, user: CurrentUser) 
     await require_editor(user, company_id)
 
     return InvoiceOut(url=await billing.company_invoice(company_id, transaction_id))
+
+
+@router.post("/checkout")
+async def create_checkout(
+    company_id: UUID, body: TopUpCheckoutIn, user: CurrentUser
+) -> TopUpCheckoutOut:
+    """A Paddle checkout for one top-up, paid by the user into the company: billing makes it, so
+    whose wallet it pays into can't be changed in the browser."""
+    await require_editor(user, company_id)
+
+    return TopUpCheckoutOut(
+        transaction_id=await billing.company_checkout(company_id, body.price_id, user.uid)
+    )

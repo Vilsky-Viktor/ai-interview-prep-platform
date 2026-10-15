@@ -70,6 +70,16 @@ class OwnersIn(BaseModel):
     owner_ids: list[str] = Field(max_length=MAX_PAGE_SIZE)
 
 
+class TopUpCheckoutIn(BaseModel):
+    price_id: str = Field(max_length=64)
+
+
+class TopUpCheckoutOut(BaseModel):
+    """The Paddle transaction the checkout opens."""
+
+    transaction_id: str
+
+
 class WelcomeIn(BaseModel):
     owner_email: str
     # The code of the link the owner came through, and their other companies, which can't

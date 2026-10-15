@@ -248,6 +248,27 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/companies/{company_id}/billing/checkout": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Create Checkout
+     * @description A Paddle checkout for one top-up, paid by the user into the company: billing makes it, so
+     *     whose wallet it pays into can't be changed in the browser.
+     */
+    post: operations["create_checkout_companies__company_id__billing_checkout_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/members": {
     parameters: {
       query?: never
@@ -3337,6 +3358,19 @@ export interface components {
       /** Title */
       title: string
     }
+    /** TopUpCheckoutIn */
+    TopUpCheckoutIn: {
+      /** Price Id */
+      price_id: string
+    }
+    /**
+     * TopUpCheckoutOut
+     * @description The Paddle transaction the checkout opens.
+     */
+    TopUpCheckoutOut: {
+      /** Transaction Id */
+      transaction_id: string
+    }
     /** TopicLimitIn */
     TopicLimitIn: {
       /** Limit */
@@ -3996,6 +4030,41 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["InvoiceOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  create_checkout_companies__company_id__billing_checkout_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["TopUpCheckoutIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["TopUpCheckoutOut"]
         }
       }
       /** @description Validation Error */

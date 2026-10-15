@@ -52,7 +52,9 @@ export interface paths {
     put?: never
     /**
      * Hold Candidate
-     * @description Set aside on invite. Charged once the interview finishes with at least one answer.
+     * @description Set aside on invite. Charged once the interview finishes with at least one answer. An
+     *     automatic top-up the balance now calls for is charged after answering: Paddle can take its
+     *     time, and the invite waiting on this answer mustn't.
      */
     post: operations["hold_candidate_internal_candidates_hold_post"]
     delete?: never
@@ -110,6 +112,27 @@ export interface paths {
      *     in that sense can be referred by another, unrelated one.
      */
     post: operations["welcome_company_internal_companies__company_id__welcome_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/companies/{company_id}/checkout": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Company Checkout
+     * @description A checkout for one of our top-ups, paid into the company by `buyer_id`: companies has
+     *     checked they're its owner or an admin. Any other price is refused (422).
+     */
+    post: operations["company_checkout_internal_companies__company_id__checkout_post"]
     delete?: never
     options?: never
     head?: never
@@ -591,6 +614,19 @@ export interface components {
       /** Currency */
       currency?: string | null
     }
+    /** TopUpCheckoutIn */
+    TopUpCheckoutIn: {
+      /** Price Id */
+      price_id: string
+    }
+    /**
+     * TopUpCheckoutOut
+     * @description The Paddle transaction the checkout opens.
+     */
+    TopUpCheckoutOut: {
+      /** Transaction Id */
+      transaction_id: string
+    }
     /** TopUpOut */
     TopUpOut: {
       /** Key */
@@ -793,6 +829,43 @@ export interface operations {
           [name: string]: unknown
         }
         content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  company_checkout_internal_companies__company_id__checkout_post: {
+    parameters: {
+      query: {
+        buyer_id: string
+      }
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["TopUpCheckoutIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["TopUpCheckoutOut"]
+        }
       }
       /** @description Validation Error */
       422: {

@@ -201,3 +201,21 @@ async def company_invoice(company_id: UUID, transaction_id: str) -> str:
     response.raise_for_status()
 
     return response.json()["url"]
+
+
+async def company_checkout(company_id: UUID, price_id: str, buyer_id: str) -> str:
+    """The Paddle transaction of a checkout for one top-up into the company, made by billing;
+    its refusal of a price it doesn't sell (422) reaches the user unchanged."""
+    response = await http.get_client().post(
+        f"{settings.billing_url}/internal/companies/{company_id}/checkout",
+        params={"buyer_id": buyer_id},
+        json={"price_id": price_id},
+        headers=_headers(),
+    )
+
+    if response.status_code == status.HTTP_422_UNPROCESSABLE_CONTENT:
+        raise HTTPException(response.status_code, response.json()["detail"])
+
+    response.raise_for_status()
+
+    return response.json()["transaction_id"]
