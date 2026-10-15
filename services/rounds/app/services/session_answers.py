@@ -53,7 +53,17 @@ def checked_answer(row, body: AnswerCreate) -> tuple[Answer, dict]:
 
 
 async def submit_session_answer(row: Session, body: AnswerCreate) -> SessionAnswerResult:
-    """Candidates see whether they were right only when the interview shares results."""
+    """Candidates see whether they were right only when the interview shares results. The same
+    pick sent again (it was saved, but its reply was lost on the way) is answered as before
+    rather than refused, even once it finished the section, so the candidate doesn't think it
+    was lost; a different pick for an answered question is still refused."""
+    saved = next((item for item in row.answers if item.question_id == body.question_id), None)
+
+    if saved is not None and saved.option_index == body.option_index:
+        return SessionAnswerResult(
+            answer_id=saved.id, answered=len(row.answers), total=len(row.questions)
+        )
+
     if row.status != RoundStatus.IN_PROGRESS:
         raise HTTPException(status.HTTP_409_CONFLICT, "This section is finished")
 

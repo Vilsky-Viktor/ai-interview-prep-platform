@@ -142,6 +142,26 @@ def test_no_answer_once_the_question_timed_out():
     assert error.value.detail == TIME_UP
 
 
+def test_the_same_pick_sent_again_is_answered_as_before_and_another_is_refused():
+    """Its reply lost on the way, the candidate sends the answer again: even once it finished the
+    section, it's the answer already saved, not a refusal that looks like a lost answer."""
+    saved = Answer(id=uuid4(), question_id=QUESTION_ID, option_index=2, correct=True, score=1)
+    row = timed(shown_seconds_ago=5, answers=[saved])
+    row.status = "finished"
+    again = AnswerCreate(question_id=QUESTION_ID, option_index=2)
+
+    result = asyncio.run(submit_session_answer(row, again))
+
+    assert (result.answer_id, result.answered) == (saved.id, 1)
+
+    with pytest.raises(HTTPException) as error:
+        asyncio.run(
+            submit_session_answer(row, AnswerCreate(question_id=QUESTION_ID, option_index=1))
+        )
+
+    assert error.value.status_code == 409
+
+
 def test_only_the_question_on_screen_can_be_answered():
     row = timed(shown_seconds_ago=5)
     row.question_shown_at = None
