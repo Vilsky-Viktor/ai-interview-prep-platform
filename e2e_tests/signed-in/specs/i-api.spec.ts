@@ -1,7 +1,7 @@
 import { expect, test } from "../fixtures"
 import { API_URL } from "../constants"
 import { createCompany, createInterview } from "../helpers/api"
-import { markWebhookFailing, setWebhookMaker } from "../helpers/db"
+import { markWebhookFailing, setWebhookMaker } from "../helpers/db-integrations"
 import { openDialog, visit } from "../helpers/navigation"
 import { shot } from "../helpers/screenshots"
 import { ownerEmail } from "../helpers/users"

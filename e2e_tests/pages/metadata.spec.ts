@@ -1,13 +1,12 @@
 import type { Page } from "@playwright/test";
 
+import { REQUEST_URL } from "./helpers/env";
 import { expect, test } from "./helpers/templates";
 
 // What search engines and link previews read beyond seo.spec.ts: each page's own description,
 // template pages' breadcrumbs and text direction (on the test's own throwaway templates),
 // articles' data, and the preview picture.
 
-// Requests made outside the browser go to the gateway itself (pages.sh sets REQUEST_URL).
-const REQUEST_URL = process.env.REQUEST_URL ?? "http://localhost:8090";
 
 // Written right to left: their lists of topics and questions mirror.
 const RTL = ["ar", "he", "fa"];

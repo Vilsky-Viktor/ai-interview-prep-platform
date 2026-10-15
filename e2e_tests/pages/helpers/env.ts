@@ -17,3 +17,7 @@ export function env(name: string): string {
 
   throw new Error(`${name} isn't set`)
 }
+
+// Requests made outside the browser go to the gateway itself: the container's "localhost" isn't
+// the site (pages.sh sets REQUEST_URL; locally the site's address works).
+export const REQUEST_URL = process.env.REQUEST_URL ?? "http://localhost:8090"

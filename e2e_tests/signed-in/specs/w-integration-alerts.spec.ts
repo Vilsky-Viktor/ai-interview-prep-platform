@@ -1,6 +1,6 @@
 import { expect, test } from "../fixtures";
 import { createCompany } from "../helpers/api";
-import { addCompanyNotification } from "../helpers/db";
+import { addCompanyNotification } from "../helpers/db-integrations";
 import { visit } from "../helpers/navigation";
 import { shot } from "../helpers/screenshots";
 import { ownerEmail } from "../helpers/users";

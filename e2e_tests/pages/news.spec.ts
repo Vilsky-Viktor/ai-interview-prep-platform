@@ -1,10 +1,10 @@
 import { expect, test, type Page } from "@playwright/test";
 
+import { REQUEST_URL } from "./helpers/env";
+
 // The news page and its RSS feed, whatever posts exist: what search engines and feed readers
 // read, and the footer's link. Posts themselves are checked by the signed-in news spec.
 
-// Requests made outside the browser go to the gateway itself (pages.sh sets REQUEST_URL).
-const REQUEST_URL = process.env.REQUEST_URL ?? "http://localhost:8090";
 const LANGUAGES = 23;
 
 async function structuredData(page: Page) {

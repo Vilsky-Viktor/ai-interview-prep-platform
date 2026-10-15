@@ -2,7 +2,7 @@ import type { Locator, Page } from "@playwright/test"
 
 import { expect, test } from "../fixtures"
 import { createCompany, createInterview } from "../helpers/api"
-import { addAtsConnection, addSlackConnection, markAtsBroken } from "../helpers/db"
+import { addAtsConnection, addSlackConnection, markAtsBroken } from "../helpers/db-integrations"
 import { box, PHONE } from "../helpers/layout"
 import { openDialog, visit } from "../helpers/navigation"
 import { shot } from "../helpers/screenshots"

@@ -1,8 +1,8 @@
 import { expect, test } from "@playwright/test";
 
+import { REQUEST_URL } from "./helpers/env";
+
 // Prices and the free candidates are shown exactly as billing's catalog gives them.
-// Requests go straight to the site (pages.sh sets REQUEST_URL; locally the site's address works).
-const REQUEST_URL = process.env.REQUEST_URL ?? "http://localhost:8090";
 
 type Catalog = {
   currency: string;

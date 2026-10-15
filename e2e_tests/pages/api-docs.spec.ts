@@ -21,13 +21,13 @@ test("the developer docs explain the API, web hooks, the SDK and the objects", a
   await expect(page.locator("ol").first().locator("li")).toHaveCount(5);
   // The base URL to copy and the routes.
   await expect(page.getByRole("textbox", { name: "Copy URL" })).toHaveValue(/\/api\/v1$/);
-  const routes = page.locator("article").filter({ has: page.getByText(/^(GET|POST)$/) });
-  await expect(routes).toHaveCount(5);
+  const routes = page.locator("article").filter({ has: page.getByText(/^(GET|POST|PATCH|DELETE)$/) });
+  await expect(routes).toHaveCount(11);
   await expect(routes.filter({ hasText: "/interviews/{interview_id}/candidates" }).first()).toBeVisible();
   await page.screenshot({ path: test.info().outputPath("api.png"), fullPage: true });
 
   // Links are checked, then opened directly, so a click before the page is ready can't miss.
-  // A mention of the web hook opens its tab: how to check a request, and its one event.
+  // A mention of the web hook opens its tab: how to check a request, and its events.
   await expect(page.getByRole("link", { name: "web hook", exact: true })).toHaveAttribute(
     "href",
     "/api-docs?tab=webhooks",

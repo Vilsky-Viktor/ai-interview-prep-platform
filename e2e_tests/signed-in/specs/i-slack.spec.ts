@@ -1,6 +1,6 @@
 import { expect, test } from "../fixtures"
 import { createCompany } from "../helpers/api"
-import { addSlackConnection } from "../helpers/db"
+import { addSlackConnection } from "../helpers/db-integrations"
 import { openDialog, visit } from "../helpers/navigation"
 import { shot } from "../helpers/screenshots"
 import { throwawayEmail } from "../helpers/users"

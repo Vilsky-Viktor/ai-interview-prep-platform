@@ -1,5 +1,5 @@
 import { expect, test } from "../fixtures"
-import { addTemplate, deleteTemplate } from "../helpers/db"
+import { addTemplate, deleteTemplate } from "../helpers/db-library"
 import { openTab, visit } from "../helpers/navigation"
 import { shot } from "../helpers/screenshots"
 import { ownerEmail, randomId, throwawayEmail } from "../helpers/users"

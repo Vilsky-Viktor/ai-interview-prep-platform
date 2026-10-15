@@ -1,17 +1,15 @@
 import { expect, test } from "../fixtures";
 import { createCompany } from "../helpers/api";
+import { assistantAnswers, CANDIDATE_LINK, CONVERSATION, events, openPanel } from "../helpers/assistant";
 import { visit } from "../helpers/navigation";
 import { shot } from "../helpers/screenshots";
 import { ownerEmail } from "../helpers/users";
-import type { Locator, Page, Route } from "@playwright/test";
 
 // The assistant's panel signed in: the welcome for the user's stage (the real service), an
 // answer with a candidate row, voice with Chrome's fake microphone, the history, and a reload
 // in the middle of a chat; and a visitor who signs in from the sign-in card keeps their chat.
-// Answers and transcripts are stubbed in the browser: no OpenAI in tests.
-
-const CONVERSATION = "11111111-2222-4333-8444-555555555555";
-const CANDIDATE_LINK = "/companies/c/interviews/i/candidates/1";
+// Answers and transcripts are stubbed in the browser: no OpenAI in tests. Actions and pasted
+// secrets are in p-assistant-actions.
 
 // Chrome's fake microphone, beside the host rules the config sets.
 test.use({
@@ -23,79 +21,6 @@ test.use({
     ],
   },
 });
-
-/** Server-sent events, as the chat routes stream them. */
-function events(...items: object[]) {
-  return items.map((item) => `data: ${JSON.stringify(item)}\n\n`).join("");
-}
-
-/** The assistant answering every message; the bodies it was sent. */
-async function assistantAnswers(page: Page) {
-  const sent: Record<string, unknown>[] = [];
-  await page.route("**/api/assistant/chat", (route: Route) => {
-    sent.push(route.request().postDataJSON());
-
-    return route.fulfill({
-      contentType: "text/event-stream",
-      body: events(
-        { conversation: { id: CONVERSATION } },
-        { tool: { name: "list_candidates", state: "running", label: "Reading candidates…" } },
-        {
-          block: {
-            kind: "candidate_rows",
-            items: [{ email: "ann@example.com", status: "finished", grade: 82, passed: true, progress: 100, tab_leaves: 0, copies: 0, fast_answers: 0 }],
-            links: [CANDIDATE_LINK],
-          },
-        },
-        { block: { kind: "link", items: [], links: ["/companies/c/interviews/i"], page: "interview", label: "Senior Backend" } },
-        { delta: "**Ann** passed with 82%." },
-        { done: { message_id: "m1" } }
-      ),
-    });
-  });
-  // The conversation as the service would keep it.
-  const saved = {
-    id: CONVERSATION,
-    company_id: null,
-    title: "Who passed?",
-    created_at: "2026-10-09T10:00:00Z",
-    updated_at: "2026-10-09T10:00:00Z",
-  };
-  // The service brings back a recent conversation after a reload, until it's deleted.
-  let active = true;
-  await page.route(`**/api/assistant/conversations/${CONVERSATION}`, (route) => {
-    if (route.request().method() === "DELETE") {
-      active = false;
-
-      return route.fulfill({ status: 204 });
-    }
-
-    return route.fulfill({
-          json: {
-            ...saved,
-            messages: [
-              { id: "q", role: "user", source: "text", content: "Who passed?", blocks: [], status: "complete", created_at: saved.created_at },
-              { id: "a", role: "assistant", source: "text", content: "**Ann** passed with 82%.", blocks: [], status: "complete", created_at: saved.created_at },
-            ],
-          },
-        });
-  });
-  await page.route("**/api/assistant/conversations?*", (route) => route.fulfill({ json: [saved] }));
-  await page.route("**/api/assistant/conversations", (route) => route.fulfill({ json: [saved] }));
-  await page.route("**/api/assistant/conversations/active", (route) =>
-    active ? route.fulfill({ json: saved }) : route.fulfill({ status: 204 })
-  );
-
-  return sent;
-}
-
-async function openPanel(page: Page): Promise<Locator> {
-  await page.getByRole("banner").getByRole("button", { name: "ask agent" }).click();
-  const panel = page.getByRole("dialog", { name: "Assistant" });
-  await expect(panel).toBeVisible();
-
-  return panel;
-}
 
 test("the assistant welcomes by stage, answers, takes voice, keeps history and survives a reload", async ({
   signInAs,
@@ -294,104 +219,4 @@ test("a visitor who signs in from the sign-in card keeps their chat", async ({ b
     ],
   });
   await context.close();
-});
-
-test("an action runs once its card is confirmed, and asking to sign out signs out", async ({
-  signInAs,
-}) => {
-  const owner = await signInAs(ownerEmail());
-  const actionId = "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeeeee";
-  const card = {
-    kind: "confirm",
-    items: [],
-    links: [],
-    action_id: actionId,
-    tool: "create_company",
-    preview: { name: "Acme" },
-    company_id: null,
-    destructive: false,
-    state: "pending",
-  };
-  let confirms = 0;
-  await owner.route("**/api/assistant/chat", (route) => {
-    const asked = route.request().postDataJSON().message;
-
-    return route.fulfill({
-      contentType: "text/event-stream",
-      body:
-        asked === "Sign me out"
-          ? events({ conversation: { id: CONVERSATION } }, { sign_out: true }, { delta: "Bye." })
-          : events(
-              { conversation: { id: CONVERSATION } },
-              { block: card },
-              { delta: "Confirm it below." },
-              { done: { message_id: "m1" } }
-            ),
-    });
-  });
-  await owner.route(`**/api/assistant/conversations/${CONVERSATION}/actions/${actionId}/confirm`, (route) => {
-    confirms += 1;
-
-    return route.fulfill({
-      contentType: "text/event-stream",
-      body: events(
-        { conversation: { id: CONVERSATION } },
-        { action: { ...card, state: "done", links: ["/companies/c1/interviews"] } },
-        { delta: "Acme is ready." },
-        { done: { message_id: "m2" } }
-      ),
-    });
-  });
-  const panel = await openPanel(owner);
-  await panel.getByRole("textbox").fill("Create a company called Acme");
-  await panel.getByRole("button", { name: "Send" }).click();
-
-  // The card shows exactly what runs; Confirm runs it once.
-  await expect(panel.getByText("Create a company", { exact: true })).toBeVisible();
-  await expect(panel.getByText("Acme", { exact: true })).toBeVisible();
-  await shot(owner, "action-card");
-  await panel.getByRole("button", { name: "Confirm" }).click();
-  await expect(panel.getByText("Done", { exact: true })).toBeVisible();
-  await expect(panel.getByRole("link", { name: /interviews/i })).toHaveAttribute("href", "/companies/c1/interviews");
-  await expect(panel.getByRole("list").getByText("Acme is ready.")).toBeVisible();
-  await expect(panel.getByRole("button", { name: "Confirm" })).toHaveCount(0);
-  expect(confirms).toBe(1);
-  await shot(owner, "action-done");
-
-  // Asked to sign out, the panel signs out at once and shows the visitor's welcome.
-  await panel.getByRole("textbox").fill("Sign me out");
-  await panel.getByRole("button", { name: "Send" }).click();
-  await expect(owner.getByRole("banner").getByRole("button", { name: /sign in/i })).toBeVisible();
-  await expect(panel.getByRole("button", { name: "History" })).toHaveCount(0);
-  await expect(panel.getByRole("button", { name: "What is prepza?" })).toBeVisible();
-});
-
-test("a pasted secret is removed from the chat and explained, with the page it belongs on", async ({
-  signInAs,
-}) => {
-  const owner = await signInAs(ownerEmail());
-  const company = await createCompany(owner);
-  await visit(owner, `/companies/${company.id}/integrations`);
-  const panel = await openPanel(owner);
-  // The case seen on localhost: no known format, named by the message.
-  const secret = "94uf9jf394ur0fj394g3ffh3";
-  await panel.getByRole("textbox").fill(`Add my secret to Greenhouse ATS integration: ${secret}`);
-  await panel.getByRole("button", { name: "Send" }).click();
-
-  await expect(panel.getByText("Message removed: it contained a secret")).toBeVisible();
-  await expect(panel.getByRole("list").getByText(/Enter it yourself on the integrations page\./)).toBeVisible();
-  await expect(panel.getByRole("link", { name: "open integrations" })).toHaveAttribute(
-    "href",
-    `/companies/${company.id}/integrations`
-  );
-  await shot(owner, "secret-removed");
-  // Nowhere on the page, nor in what the browser keeps.
-  await expect(panel.getByText(secret)).toHaveCount(0);
-  const kept = await owner.evaluate(() => JSON.stringify({ ...localStorage, ...sessionStorage }));
-  expect(kept).not.toContain(secret);
-
-  // Nothing of it was saved: a reload brings no conversation back.
-  await owner.reload();
-  await expect(owner.getByRole("banner").getByRole("button", { name: "ask agent" })).toBeVisible();
-  await expect(owner.getByRole("dialog", { name: "Assistant" })).toHaveCount(0);
 });

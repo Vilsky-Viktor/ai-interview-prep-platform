@@ -2,7 +2,7 @@ import type { Locator, Page } from "@playwright/test"
 
 import { expect, test } from "../fixtures"
 import { createCompany } from "../helpers/api"
-import { addAiConnections, deleteAiConnections } from "../helpers/db"
+import { addAiConnections, deleteAiConnections } from "../helpers/db-integrations"
 import { box, PHONE } from "../helpers/layout"
 import { openDialog, visit } from "../helpers/navigation"
 import { shot } from "../helpers/screenshots"

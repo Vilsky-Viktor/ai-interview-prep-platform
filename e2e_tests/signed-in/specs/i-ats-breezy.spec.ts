@@ -1,6 +1,6 @@
 import { expect, test } from "../fixtures"
 import { createCompany, createInterview } from "../helpers/api"
-import { addAtsConnection } from "../helpers/db"
+import { addAtsConnection } from "../helpers/db-integrations"
 import { openDialog, visit } from "../helpers/navigation"
 import { shot } from "../helpers/screenshots"
 import { throwawayEmail } from "../helpers/users"

@@ -1,5 +1,5 @@
 import { expect, test } from "../fixtures";
-import { addPracticeRounds, addTemplate, deleteTemplate } from "../helpers/db";
+import { addPracticeRounds, addTemplate, deleteTemplate } from "../helpers/db-library";
 import { visit } from "../helpers/navigation";
 import { uidOf } from "../helpers/sign-in";
 import { throwawayEmail } from "../helpers/users";
