@@ -10,8 +10,8 @@ import {
 import { TemplateList } from "@/components/templates/template-list"
 import { DEFAULT_LOCALE } from "@/constants/i18n"
 import { MAX_TITLE_LENGTH } from "@/constants/limits"
-import { PAGE_SIZE } from "@/constants/lists"
-import { serverFetch } from "@/lib/server-api"
+import { PAGE_SIZE, PUBLIC_TEMPLATES_PATH } from "@/constants/lists"
+import { publicFetch, serverFetch } from "@/lib/server-api"
 import type { TemplateFilters, TemplateSummary } from "@/types/superadmin"
 
 export type TemplateSearchParams = {
@@ -44,7 +44,8 @@ export async function TemplateBrowser({
   allLanguages?: boolean
 }) {
   const t = await getTranslations("templates")
-  const filters = await serverFetch<TemplateFilters>(
+  // The filters are the same for everyone: kept a while.
+  const filters = await publicFetch<TemplateFilters>(
     "/library/templates/filters"
   )
 
@@ -81,9 +82,13 @@ export async function TemplateBrowser({
   const path = `${listPath}?${query}`
   const narrowed = Boolean(choice.q || choice.level || choice.languages.length)
   // The first page renders on the server; the rest load as the user scrolls.
-  const first = await serverFetch<TemplateSummary[]>(
-    `${path}&limit=${PAGE_SIZE}`
-  )
+  // The public catalog is the same for everyone, so it's read without the visitor's token, and
+  // fresh: a template published or removed shows at once. The others are the visitor's own.
+  const firstPath = `${path}&limit=${PAGE_SIZE}`
+  const first =
+    listPath === PUBLIC_TEMPLATES_PATH
+      ? await publicFetch<TemplateSummary[]>(firstPath, { fresh: true })
+      : await serverFetch<TemplateSummary[]>(firstPath)
 
   if (!first) {
     return null

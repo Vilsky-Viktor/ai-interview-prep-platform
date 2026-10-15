@@ -7,6 +7,7 @@ import {
 import { DEFAULT_LOCALE } from "@/constants/i18n"
 import { localizedPath } from "@/lib/locale-path"
 import { pageMetadata, urlLocale } from "@/lib/site"
+import { PUBLIC_TEMPLATES_PATH } from "@/constants/lists"
 
 export async function generateMetadata() {
   const t = await getTranslations("practice")
@@ -25,7 +26,7 @@ export default async function PracticePage({
   const browser = await TemplateBrowser({
     // A search stays in the language of the address it started on.
     base: localizedPath((await urlLocale()) ?? DEFAULT_LOCALE, "/practice"),
-    listPath: "/library/templates",
+    listPath: PUBLIC_TEMPLATES_PATH,
     params: await searchParams,
     openBase: "/practice",
     bySlug: true,

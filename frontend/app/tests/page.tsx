@@ -5,6 +5,7 @@ import type { TemplateSearchParams } from "@/components/templates/template-brows
 import { DEFAULT_LOCALE } from "@/constants/i18n"
 import { localizedPath } from "@/lib/locale-path"
 import { pageMetadata, urlLocale } from "@/lib/site"
+import { PUBLIC_TEMPLATES_PATH } from "@/constants/lists"
 
 export async function generateMetadata() {
   const t = await getTranslations("tests")
@@ -23,7 +24,7 @@ export default async function TestsPage({
   const browser = await TemplateBrowser({
     // A search stays in the language of the address it started on.
     base: localizedPath((await urlLocale()) ?? DEFAULT_LOCALE, "/tests"),
-    listPath: "/library/templates",
+    listPath: PUBLIC_TEMPLATES_PATH,
     params: await searchParams,
     openBase: "/tests",
     bySlug: true,

@@ -33,3 +33,5 @@ export const INTEGRATION_LOGO =
 export const INTEGRATION_ACTIONS = "flex shrink-0 items-center gap-3"
 // A search as you type asks the service once typing pauses this long.
 export const SEARCH_DELAY_MS = 300
+// The public template catalog, the same for every visitor: its pages read it cached.
+export const PUBLIC_TEMPLATES_PATH = "/library/templates"

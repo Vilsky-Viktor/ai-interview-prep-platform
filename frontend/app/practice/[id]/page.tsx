@@ -16,7 +16,7 @@ import { DEFAULT_LOCALE } from "@/constants/i18n"
 import { textDirection } from "@/lib/locale"
 import { localizedPath, templateLocales } from "@/lib/locale-path"
 import { pageMetadata, siteUrl, urlLocale } from "@/lib/site"
-import { serverFetch } from "@/lib/server-api"
+import { publicFetch, serverFetch } from "@/lib/server-api"
 import { breadcrumbData } from "@/lib/structured-data"
 import type { PracticeSize, PracticeTopicProgress } from "@/types/round"
 import type { Template } from "@/types/superadmin"
@@ -30,7 +30,7 @@ export async function generateMetadata({
   const { id } = await params
   const t = await getTranslations("practice")
   const tLevel = await getTranslations("templates.levels")
-  const template = await serverFetch<Template>(`/library/templates/${id}`)
+  const template = await publicFetch<Template>(`/library/templates/${id}`)
 
   if (!template) {
     return {}
@@ -64,7 +64,7 @@ export default async function PracticeTestPage({
   const t = await getTranslations("practice")
   const tLevel = await getTranslations("templates.levels")
   const signedIn = (await cookies()).has(TOKEN_COOKIE)
-  const template = await serverFetch<Template>(`/library/templates/${key}`)
+  const template = await publicFetch<Template>(`/library/templates/${key}`)
 
   const locale = await urlLocale()
 
@@ -82,7 +82,7 @@ export default async function PracticeTestPage({
 
   const id = template.id
   const [size, progress] = await Promise.all([
-    serverFetch<PracticeSize>(`/rounds/practice/${id}/size`),
+    publicFetch<PracticeSize>(`/rounds/practice/${id}/size`),
     // The talent's latest score on each topic; nothing before their first round.
     signedIn
       ? serverFetch<PracticeTopicProgress[]>(`/rounds/practice/${id}/progress`)

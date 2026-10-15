@@ -15,7 +15,7 @@ import {
   operationsOf,
   schemasOf,
 } from "@/lib/openapi"
-import { serverFetch } from "@/lib/server-api"
+import { publicFetch } from "@/lib/server-api"
 import { pageMetadata, previewImage, siteUrl } from "@/lib/site"
 import { breadcrumbData, techArticleData } from "@/lib/structured-data"
 import type { OpenApi } from "@/types/openapi"
@@ -36,7 +36,7 @@ export default async function ApiDocsPage({
 }) {
   const t = await getTranslations("apiDocs")
   const locale = await getLocale()
-  const spec = await serverFetch<OpenApi>("/v1/openapi.json")
+  const spec = await publicFetch<OpenApi>("/v1/openapi.json", { locale: "en" })
 
   if (!spec) {
     notFound()
