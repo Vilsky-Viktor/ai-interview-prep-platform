@@ -203,3 +203,14 @@ test("superadmin sees each legal document's notice on the controls page", async 
   await expect(notices.getByText("Data processing agreement")).toBeVisible()
   await shot(superadmin, "legal-notices")
 })
+
+// The admin zone is for superadmins only: anyone else finds no such page, the ones that read
+// nothing first (a new template) included.
+test("someone who isn't a superadmin finds no admin page", async ({ signInAs }) => {
+  const owner = await signInAs(ownerEmail())
+
+  for (const path of ["/superadmin/templates/new", "/superadmin/stats", "/superadmin/news"]) {
+    await visit(owner, path)
+    await expect(owner.getByRole("heading", { name: "Page not found" }), path).toBeVisible()
+  }
+})

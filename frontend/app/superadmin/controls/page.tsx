@@ -14,14 +14,13 @@ export const generateMetadata = () => translatedTitle("superadmin", "zone")
  * public (pages show a notice), so the page asks who's signed in; maintenance's is for
  * superadmins only. The API turns both for superadmins only. */
 export default async function ControlsPage() {
-  const [me, pause, maintenance, notices] = await Promise.all([
-    serverFetch<{ is_superadmin: boolean }>("/library/me"),
+  const [pause, maintenance, notices] = await Promise.all([
     serverFetch<{ paused: boolean }>("/companies/pause"),
     serverFetch<{ on: boolean }>("/companies/superadmin/maintenance"),
     serverFetch<LegalNotice[]>("/notifications/superadmin/legal-notices"),
   ])
 
-  if (!me?.is_superadmin || !pause || !maintenance || !notices) {
+  if (!pause || !maintenance || !notices) {
     notFound()
   }
 
