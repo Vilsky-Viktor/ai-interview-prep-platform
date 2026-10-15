@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1
 FROM node:24-alpine@sha256:ebfe2f90462722a7a4de65e91990e97fe0d401c70e0e762c5b53302f905ec1c1 AS build
 
 RUN corepack enable
@@ -16,13 +17,13 @@ ARG NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_URL
 ARG NEXT_PUBLIC_TURNSTILE_SITE_KEY
 ARG FRONTEND_SENTRY_DSN
 ARG NEXT_PUBLIC_SENTRY_ENVIRONMENT
-# Optional: uploads source maps to Sentry, so stack traces show the original code.
-ARG SENTRY_AUTH_TOKEN
+# Optional: uploads source maps to Sentry, so stack traces show the original code. The token is a
+# build secret, mounted for this step only, so it stays out of the image and the build cache.
 ARG SENTRY_ORG
 ARG SENTRY_PROJECT
 # The commit, as the release Sentry's build plugin names (and tags errors with).
 ARG SENTRY_RELEASE
-RUN pnpm build
+RUN --mount=type=secret,id=sentry_auth_token,env=SENTRY_AUTH_TOKEN pnpm build
 
 # Development: docker-compose.yml mounts the source, and Next reloads on change.
 FROM node:24-alpine@sha256:ebfe2f90462722a7a4de65e91990e97fe0d401c70e0e762c5b53302f905ec1c1 AS dev

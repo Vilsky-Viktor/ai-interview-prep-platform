@@ -44,7 +44,7 @@ When a page fails, the error page offers **Report**: what the user writes there 
 | `SENTRY_ENVIRONMENT` | The environment's name (`development` locally) |
 | `SENTRY_TRACES_SAMPLE_RATE` | The share of requests traced (default 0.1) |
 | `SENTRY_RELEASE` | The release events are tagged with: the commit, built into every image by CI (services read it at runtime; the frontend's Sentry plugin names it at build time) |
-| `SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, `SENTRY_PROJECT` | Passed to the frontend build, to see the original code in frontend stack traces |
+| `SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, `SENTRY_PROJECT` | Optional, for the frontend build to upload its source maps, so frontend stack traces show the original code: CI passes the organization and project from the GitHub variables of the same names, and the token from the `SENTRY_AUTH_TOKEN` secret as a build secret, which stays out of the image. Without the token, nothing uploads |
 
 Events carry user ids only, with emails scrubbed.
 

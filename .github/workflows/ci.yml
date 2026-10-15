@@ -266,6 +266,11 @@ jobs:
             NEXT_PUBLIC_TURNSTILE_SITE_KEY=${{ env.PUBLISH == 'true' && vars.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA' }}
             FRONTEND_SENTRY_DSN=${{ env.PUBLISH == 'true' && vars.FRONTEND_SENTRY_DSN || '' }}
             NEXT_PUBLIC_SENTRY_ENVIRONMENT=${{ env.PUBLISH == 'true' && 'production' || '' }}
+            SENTRY_ORG=${{ env.PUBLISH == 'true' && vars.SENTRY_ORG || '' }}
+            SENTRY_PROJECT=${{ env.PUBLISH == 'true' && vars.SENTRY_PROJECT || '' }}
+          # Uploads the frontend's source maps to Sentry; a secret, so it stays out of the image.
+          secrets: |
+            sentry_auth_token=${{ env.PUBLISH == 'true' && secrets.SENTRY_AUTH_TOKEN || '' }}
 
   smoke:
     name: smoke test (whole stack)

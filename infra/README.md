@@ -125,9 +125,9 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
 12. **Connect GitHub for deploys.** In the repository's **Settings → Secrets and variables → Actions → Variables**, add:
     - **From Terraform:** everything in `terraform output github_variables`, which gives `GCP_PROJECT_ID`, `GCP_REGION`, `GCP_WORKLOAD_IDENTITY_PROVIDER`, `GCP_DEPLOY_SERVICE_ACCOUNT`, `GCP_CI_SERVICE_ACCOUNT` and `SITE_URL`. Two accounts: CI's image job uses one that can only push images; only the deploy workflow running in the `production` environment (which needs your approval) can use the deploy account, which moves services to new images and runs migrations.
     - **From Firebase:** `NEXT_PUBLIC_FIREBASE_API_KEY` and `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN`, from the web app in step 2.
-    - **Optionally:** `FRONTEND_SENTRY_DSN` for the frontend.
+    - **Optionally:** `FRONTEND_SENTRY_DSN` for the frontend, and `SENTRY_ORG` and `SENTRY_PROJECT` with, under **Secrets**, `SENTRY_AUTH_TOKEN` (a Sentry auth token that can upload source maps), so frontend stack traces show the original code.
 
-    These are variables, not secrets: none of them grants access. GitHub's signed token is what lets the pipeline in, and only for `main` and the `v*` tags of this repository.
+    Apart from `SENTRY_AUTH_TOKEN`, these are variables, not secrets: none of them grants access. GitHub's signed token is what lets the pipeline in, and only for `main` and the `v*` tags of this repository.
 13. **Protect the version tags.** A tag deploys, so only you should be able to make one. In **Settings → Rules → Rulesets**, add a **tag ruleset**:
     - **Target tags:** include by pattern `v*`.
     - **Rules:** restrict creations, restrict updates and restrict deletions.
