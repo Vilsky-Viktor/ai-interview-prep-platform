@@ -7,7 +7,10 @@ on:
     branches: [main]
   pull_request:
 
-# A new push to a pull request cancels the run for the previous one; runs on main all finish.
+# A new push to a pull request cancels the run for the previous one. On main, runs go one at a
+# time and one waits: a push made while another waits replaces it, and its run, compared with the
+# last commit CI passed on, builds both. The replaced commit gets no images, so it can't be
+# released (deploy.yml refuses it): tag the later one.
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}

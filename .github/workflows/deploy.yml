@@ -70,7 +70,7 @@ jobs:
           passed="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/ci.yml/runs?head_sha=$sha&event=push&status=success" --jq .total_count)"
 
           if [[ "$passed" == "0" ]]; then
-            echo "CI hasn't passed on $sha after a push to main: tag a commit it passed on" >&2
+            echo "CI didn't pass on $sha (it failed, or a later push replaced its run): tag the latest commit it passed on" >&2
 
             exit 1
           fi
