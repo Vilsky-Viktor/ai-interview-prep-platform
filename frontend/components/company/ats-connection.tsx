@@ -1,6 +1,5 @@
 "use client"
 
-import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { useState } from "react"
@@ -9,17 +8,14 @@ import { toast } from "sonner"
 import { CandidateFlow } from "@/components/company/ats-candidate-flow"
 import { ConnectAts } from "@/components/company/ats-connect"
 import { AtsWebhook } from "@/components/company/ats-webhook"
+import { IntegrationRow } from "@/components/company/integration-row"
 import { ConfirmDialog } from "@/components/confirm-dialog"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { WEBHOOKS, type AtsProvider } from "@/constants/ats"
+import { INTEGRATION_ACTIONS } from "@/constants/lists"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 import type { AtsConnection } from "@/types/company"
-import {
-  INTEGRATION_LINK,
-  INTEGRATION_LOGO,
-  INTEGRATION_ROW,
-} from "@/constants/lists"
 
 /** An ATS's row on the integrations tab: its logo, name and whether it's connected, laid out
  * like the companies list; the row opens the ATS's page (its linked jobs), its buttons sit on
@@ -38,44 +34,29 @@ export function AtsConnectionRow({
   canEdit: boolean
 }) {
   return (
-    <li className={INTEGRATION_ROW}>
-      <Link
-        href={`/companies/${companyId}/integrations/${provider.id}`}
-        className={INTEGRATION_LINK}
-      >
-        {/* The ATS's own icon (public/ats), as the companies list shows a logo: a square the
-            row's full height (24px padding twice, plus two lines), from its left border. */}
-        <span className={INTEGRATION_LOGO}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={provider.logo}
-            alt=""
-            className="size-full object-contain"
-          />
-        </span>
-        <span className="min-w-0 space-y-1">
-          <span className="flex items-center gap-3 text-lg font-medium">
-            {provider.name}
-            <AtsStatus connection={connection} />
-          </span>
-          <AtsAccount
-            connection={connection}
-            companyName={companyName}
-            className="block text-base text-muted-foreground"
-          />
-        </span>
-      </Link>
-      {/* On phones the logo spans the row, with the name and then these buttons beside it,
-          sharing their line equally (each on its own line where both don't fit). */}
-      <span className="relative z-10 max-sm:col-span-2 max-sm:*:flex max-sm:*:w-full max-sm:*:flex-wrap max-sm:[&>*>*]:flex-1 max-sm:[&>*>*]:px-3 max-sm:[&>*>*:nth-child(3)]:basis-full">
+    <IntegrationRow
+      href={`/companies/${companyId}/integrations/${provider.id}`}
+      logo={
+        // The ATS's own icon (public/ats), as the companies list shows a logo.
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={provider.logo} alt="" className="size-full object-contain" />
+      }
+      name={provider.name}
+      status={<AtsStatus connection={connection} />}
+      text={
+        connection && (
+          <AtsAccount connection={connection} companyName={companyName} />
+        )
+      }
+      actions={
         <AtsActions
           companyId={companyId}
           provider={provider}
           connection={connection}
           canEdit={canEdit}
         />
-      </span>
-    </li>
+      }
+    />
   )
 }
 
@@ -88,7 +69,7 @@ export function AtsAccount({
 }: {
   connection: AtsConnection | null
   companyName: string
-  className: string
+  className?: string
 }) {
   if (!connection) {
     return null
@@ -159,7 +140,7 @@ export function AtsActions({
   }
 
   return (
-    <span className="flex shrink-0 items-center gap-3">
+    <span className={INTEGRATION_ACTIONS}>
       <CandidateFlow provider={provider} open={info} onOpenChange={setInfo}>
         {canEdit && hooked && connection?.status === "connected" && (
           <AtsWebhook

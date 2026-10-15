@@ -59,6 +59,9 @@ test("the integrations pages on a phone", async ({ signInAs }) => {
   const tab = `/companies/${company.id}/integrations`
   await addSlackConnection(company.id)
   await addAtsConnection(company.id, interviewId, { invited: 3, notInvited: 2 })
+  // On a computer: each row's logo the row's full height, its buttons at the end of the line.
+  await visit(owner, tab)
+  await shot(owner, "tab-desktop")
   await owner.setViewportSize(PHONE)
 
   await visit(owner, tab)
@@ -130,7 +133,7 @@ test("the integrations pages on a phone", async ({ signInAs }) => {
   // The API: the docs and New key under the title.
   await visit(owner, `${tab}/api`)
   await expectButtonsUnderTitle(owner, [
-    owner.getByRole("main").getByRole("button", { name: "API docs" }),
+    owner.getByRole("main").getByRole("button", { name: "Developer docs" }),
     owner.getByRole("main").getByRole("button", { name: "New key" }),
   ])
   await shot(owner, "api")

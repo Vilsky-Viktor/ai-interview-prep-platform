@@ -1,23 +1,19 @@
 "use client"
 
-import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
+import { IntegrationRow } from "@/components/company/integration-row"
 import { ConfirmDialog } from "@/components/confirm-dialog"
 import { InstructionsDialog } from "@/components/instructions-dialog"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { INTEGRATION_ACTIONS } from "@/constants/lists"
 import { SLACK } from "@/constants/slack"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 import type { SlackOverview } from "@/types/notifications"
-import {
-  INTEGRATION_LINK,
-  INTEGRATION_LOGO,
-  INTEGRATION_ROW,
-} from "@/constants/lists"
 
 const STEPS = ["stepAdd", "stepChannel", "stepKinds", "stepPrivacy"] as const
 
@@ -33,33 +29,20 @@ export function SlackRow({
   canEdit: boolean
 }) {
   return (
-    <li className={INTEGRATION_ROW}>
-      <Link
-        href={`/companies/${companyId}/integrations/slack`}
-        className={INTEGRATION_LINK}
-      >
-        <span className={INTEGRATION_LOGO + " p-6 max-sm:p-2"}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={SLACK.logo} alt="" className="size-full object-contain" />
-        </span>
-        <span className="min-w-0 space-y-1">
-          <span className="flex items-center gap-3 text-lg font-medium">
-            {SLACK.name}
-            <SlackStatus slack={slack} />
-          </span>
-          {slack.connected && (
-            <span className="block text-base text-muted-foreground">
-              {slack.team} · {slack.channel}
-            </span>
-          )}
-        </span>
-      </Link>
-      {/* On phones the logo spans the row, with the name and then these buttons beside it,
-          sharing their line equally (each on its own line where both don't fit). */}
-      <span className="relative z-10 max-sm:col-span-2 max-sm:*:flex max-sm:*:w-full max-sm:*:flex-wrap max-sm:[&>*>*]:flex-1 max-sm:[&>*>*]:px-3 max-sm:[&>*>*:nth-child(3)]:basis-full">
+    <IntegrationRow
+      href={`/companies/${companyId}/integrations/slack`}
+      logoClassName="p-6 max-sm:p-2"
+      logo={
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={SLACK.logo} alt="" className="size-full object-contain" />
+      }
+      name={SLACK.name}
+      status={<SlackStatus slack={slack} />}
+      text={slack.connected && `${slack.team} · ${slack.channel}`}
+      actions={
         <SlackActions companyId={companyId} slack={slack} canEdit={canEdit} />
-      </span>
-    </li>
+      }
+    />
   )
 }
 
@@ -127,7 +110,7 @@ export function SlackActions({
   }
 
   return (
-    <span className="flex shrink-0 items-center gap-3">
+    <span className={INTEGRATION_ACTIONS}>
       <InstructionsDialog
         title={t("instructionsTitle")}
         steps={STEPS.map((step) => t(step))}
