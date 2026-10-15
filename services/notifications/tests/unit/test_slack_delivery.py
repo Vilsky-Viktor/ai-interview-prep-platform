@@ -116,19 +116,10 @@ def test_unchosen_kinds_other_companies_and_users_notifications_dont(channel):
     assert channel["claimed"] == set()
 
 
-@pytest.mark.parametrize(
-    "answer",
-    [
-        httpx.ConnectTimeout("slow"),
-        httpx.HTTPStatusError(
-            "429", request=httpx.Request("POST", "https://x"), response=httpx.Response(429)
-        ),
-    ],
-)
-def test_slack_busy_or_down_raises_so_the_retry_posts_it(channel, answer):
-    channel["answer"] = answer
+def test_slack_busy_or_down_raises_so_the_retry_posts_it(channel):
+    channel["answer"] = slack_api.SlackBusy("429")
 
-    with pytest.raises(httpx.HTTPError):
+    with pytest.raises(slack_api.SlackBusy):
         deliver()
 
     assert channel["claimed"] == set()

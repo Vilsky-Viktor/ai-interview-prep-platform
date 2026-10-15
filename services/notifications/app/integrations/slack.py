@@ -24,6 +24,12 @@ class WebhookGone(Exception):
     """The channel's web hook no longer works: the app was removed, or the channel is gone."""
 
 
+class SlackBusy(Exception):
+    """Slack didn't take the message for now (busy, down or slow), worth retrying. It holds
+    only the status or the error's name: httpx's own errors carry the web hook's URL, which is
+    a secret, into the logs."""
+
+
 async def exchange(code: str) -> dict:
     """The approved code as the company's web hook: {team, channel, url, token}."""
     response = await http.get_client().post(
@@ -53,10 +59,15 @@ async def exchange(code: str) -> dict:
 
 
 async def post(webhook: str, payload: dict) -> None:
-    """Posts the message (`payload`: its text and blocks) to the channel; WebhookGone when Slack says the web hook is gone, SlackRefused
-    when it turns the message down for good, an httpx.HTTPError when it's busy or down (429, 5xx,
-    a timeout), which is worth retrying."""
-    response = await http.get_client().post(webhook, json=payload, timeout=SLACK_TIMEOUT_SECONDS)
+    """Posts the message (`payload`: its text and blocks) to the channel; WebhookGone when Slack
+    says the web hook is gone, SlackRefused when it turns the message down for good, SlackBusy
+    when it's busy or down (429, 5xx, a timeout), which is worth retrying."""
+    try:
+        response = await http.get_client().post(
+            webhook, json=payload, timeout=SLACK_TIMEOUT_SECONDS
+        )
+    except httpx.HTTPError as error:
+        raise SlackBusy(type(error).__name__) from None
 
     if response.status_code in (403, 404, 410) or response.text.strip() in SLACK_GONE:
         raise WebhookGone
@@ -64,7 +75,8 @@ async def post(webhook: str, payload: dict) -> None:
     if response.is_client_error and response.status_code != 429:
         raise SlackRefused(response.text.strip())
 
-    response.raise_for_status()
+    if response.is_error:
+        raise SlackBusy(str(response.status_code))
 
 
 async def revoke(token: str) -> None:

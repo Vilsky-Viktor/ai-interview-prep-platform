@@ -135,11 +135,29 @@ def test_a_web_hook_slack_says_is_gone(monkeypatch, answer):
 
 
 @pytest.mark.parametrize("status", [429, 500, 503])
-def test_slack_busy_or_down_is_an_http_error_not_a_gone_web_hook(monkeypatch, status):
+def test_slack_busy_or_down_is_retried_without_the_web_hooks_address(monkeypatch, status):
+    """The address is a secret: the error, which reaches the logs, holds only the status."""
     monkeypatch.setattr(slack.http, "get_client", lambda: client(httpx.Response(status)))
 
-    with pytest.raises(httpx.HTTPStatusError):
-        asyncio.run(slack.post("https://hooks.slack.com/x", "hi"))
+    with pytest.raises(slack.SlackBusy) as busy:
+        asyncio.run(slack.post("https://hooks.slack.com/services/T1/B1/secret", "hi"))
+
+    assert str(busy.value) == str(status)
+    assert busy.value.__context__ is None
+
+
+def test_slack_too_slow_is_retried_without_the_web_hooks_address(monkeypatch):
+    def slow(request):
+        raise httpx.ConnectTimeout("timed out", request=request)
+
+    slow_client = httpx.AsyncClient(transport=httpx.MockTransport(slow))
+    monkeypatch.setattr(slack.http, "get_client", lambda: slow_client)
+
+    with pytest.raises(slack.SlackBusy) as busy:
+        asyncio.run(slack.post("https://hooks.slack.com/services/T1/B1/secret", "hi"))
+
+    assert str(busy.value) == "ConnectTimeout"
+    assert busy.value.__suppress_context__
 
 
 def test_a_message_slack_turns_down_says_why(monkeypatch):
