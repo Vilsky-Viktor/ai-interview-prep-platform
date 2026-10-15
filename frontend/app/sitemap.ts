@@ -9,6 +9,7 @@ import {
   localizedPath,
   templateLocales,
 } from "@/lib/locale-path"
+import { publicFetch } from "@/lib/server-api"
 import { siteUrl } from "@/lib/site"
 
 // The API's largest page, and how many pages of templates the sitemap reads at most.
@@ -23,21 +24,23 @@ type Template = {
   indexable: boolean
 }
 
-/** Every template, read from the public list a page at a time. */
+/** Every template, read from the public list a page at a time. A page that can't be read (an
+ * error, no answer in time) fails the whole sitemap rather than leaving the role tests out:
+ * search engines keep the last one and ask again, where a partial one would drop those pages. */
 async function templates(): Promise<Template[]> {
   const rows: Template[] = []
 
   for (let page = 0; page < MAX_PAGES; page++) {
-    const response = await fetch(
-      `${process.env.API_URL}/api/library/templates?offset=${page * PAGE}&limit=${PAGE}`,
-      { cache: "no-store" }
-    )
+    const path = `/library/templates?offset=${page * PAGE}&limit=${PAGE}`
+    const batch = await publicFetch<Template[]>(path, {
+      locale: DEFAULT_LOCALE,
+      fresh: true,
+    })
 
-    if (!response.ok) {
-      break
+    if (batch === null) {
+      throw new Error(`The sitemap couldn't read ${path}`)
     }
 
-    const batch: Template[] = await response.json()
     rows.push(...batch)
 
     if (batch.length < PAGE) {
