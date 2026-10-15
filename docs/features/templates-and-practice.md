@@ -44,7 +44,7 @@ Free practice (`/practice`) gives people preparing for a role timed practice int
 
 - 10 questions a topic.
 - At the end: the grade and every right answer.
-- Each template keeps the person's rounds and progress.
+- Each template keeps the person's rounds and progress. Their rounds (`/practice/history/<template id>`) are listed newest first, 20 at a time, and more load as the list scrolls (`GET /rounds/practice/{template_id}/rounds?offset=&limit=`).
 - At most 20 rounds an hour per person (`PRACTICE_ROUNDS_PER_HOUR`).
 
 A practice page is in English and in its template's language only (see [Public site](site.md#skills-tests-by-role)).

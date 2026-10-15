@@ -116,24 +116,28 @@ def test_a_talents_practice_rounds_on_a_template_are_found_and_kept_apart(run):
 
     async def scenario():
         practice_topic = topic(2)
-        first = uuid.uuid4()
-        second = uuid.uuid4()
-        await sessions.create_many(user, first, [practice_topic], 60, practice=True)
-        await sessions.create_many(user, second, [practice_topic], 60, practice=True)
+        first, second, third = uuid.uuid4(), uuid.uuid4(), uuid.uuid4()
+
+        for round_id in (first, second, third):
+            await sessions.create_many(user, round_id, [practice_topic], 60, practice=True)
+
         # A company's interview on the same set isn't practice.
         await sessions.create_many(user, uuid.uuid4(), [practice_topic], 60)
+        template_id = practice_topic.preparation_id
+        newest = await practice_sessions.practice_rounds(user, template_id, 0, 2)
+        oldest = await practice_sessions.practice_rounds(user, template_id, 2, 2)
+        before = await practice_sessions.practiced(user, template_id)
+        never = await practice_sessions.practiced(f"other-{user}", template_id)
 
-        rows = await practice_sessions.practice_for_user(user, practice_topic.preparation_id)
-        before = await practice_sessions.practiced(user, practice_topic.preparation_id)
-        never = await practice_sessions.practiced(f"other-{user}", practice_topic.preparation_id)
+        return (first, second, third), newest, oldest, before, never
 
-        return first, second, rows, before, never
-
-    first, second, rows, before, never = run(scenario())
+    (first, second, third), newest, oldest, before, never = run(scenario())
 
     assert (before, never) == (True, False)
-    assert {row.candidate_invite_id for row in rows} == {first, second}
-    assert all(row.practice for row in rows)
+    # A page of rounds, newest first, with every section of each.
+    assert {row.candidate_invite_id for row in newest} == {second, third}
+    assert {row.candidate_invite_id for row in oldest} == {first}
+    assert all(row.practice for row in newest + oldest)
 
 
 def test_a_finished_section_takes_no_more_answers_and_is_scored_from_its_saved_ones(run):

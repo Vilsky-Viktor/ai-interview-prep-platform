@@ -158,17 +158,23 @@ def test_someone_else_cant_see_a_round(client, monkeypatch):
     assert client.get(f"/practice/rounds/{ROUND_ID}").status_code == 404
 
 
-def test_the_history_lists_rounds_newest_first_with_their_grades(client, monkeypatch):
+def test_the_history_lists_a_page_of_rounds_newest_first_with_their_grades(client, monkeypatch):
     first = section("finished", answers=[1])
     second = section("in_progress")
     second.candidate_invite_id = uuid.uuid4()
 
-    async def fake_practice(user_id, template_id):
+    pages = []
+
+    async def fake_rounds(user_id, template_id, offset, limit):
+        pages.append((offset, limit))
+
         return [first, second]
 
-    monkeypatch.setattr(practice_sessions, "practice_for_user", fake_practice)
+    monkeypatch.setattr(practice_sessions, "practice_rounds", fake_rounds)
 
-    rounds = client.get(f"/practice/{TEMPLATE_ID}/rounds").json()
+    rounds = client.get(f"/practice/{TEMPLATE_ID}/rounds?offset=20&limit=20").json()
+
+    assert pages == [(20, 20)]
 
     # The open round has none of its two answered; the finished one, one of two.
     assert [(row["finished"], row["progress"], row["grade"]) for row in rounds] == [
@@ -186,10 +192,13 @@ def test_each_topic_shows_how_far_the_latest_round_got(client, monkeypatch):
     older.topic_id = latest.topic_id
     latest.started_at = datetime(2026, 10, 5, 10, tzinfo=UTC)
 
-    async def fake_practice(user_id, template_id):
+    async def fake_rounds(user_id, template_id, offset, limit):
+        # Only the latest round is asked for; the older one shows it's picked again here.
+        assert (offset, limit) == (0, 1)
+
         return [older, latest]
 
-    monkeypatch.setattr(practice_sessions, "practice_for_user", fake_practice)
+    monkeypatch.setattr(practice_sessions, "practice_rounds", fake_rounds)
 
     progress = client.get(f"/practice/{TEMPLATE_ID}/progress").json()
 

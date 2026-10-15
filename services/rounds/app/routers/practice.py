@@ -5,6 +5,7 @@ from fastapi import APIRouter, HTTPException, status
 from prepza_common import memory_cache
 from prepza_common.auth import CurrentUser
 from prepza_common.constants import HOUR_SECONDS
+from prepza_common.paging import PageParams
 from prepza_common.pause import refuse_if_paused
 from prepza_common.rate_limit import hit
 
@@ -101,12 +102,17 @@ async def get_round(round_id: UUID, user: CurrentUser) -> PracticeRoundOut:
 
 
 @router.get("/{template_id}/rounds")
-async def list_rounds(template_id: UUID, user: CurrentUser) -> list[PracticeRoundSummary]:
-    """The talent's rounds on the template, newest first, to see their progress."""
-    return round_summaries(await practice_sessions.practice_for_user(user.uid, template_id))
+async def list_rounds(
+    template_id: UUID, user: CurrentUser, page: PageParams
+) -> list[PracticeRoundSummary]:
+    """The talent's rounds on the template, newest first, a page at a time, to see their
+    progress."""
+    rows = await practice_sessions.practice_rounds(user.uid, template_id, page.offset, page.limit)
+
+    return round_summaries(rows)
 
 
 @router.get("/{template_id}/progress")
 async def topic_progress_route(template_id: UUID, user: CurrentUser) -> list[PracticeTopicProgress]:
     """How far the talent got on each of the template's topics in their latest round."""
-    return topic_progress(await practice_sessions.practice_for_user(user.uid, template_id))
+    return topic_progress(await practice_sessions.practice_rounds(user.uid, template_id, 0, 1))

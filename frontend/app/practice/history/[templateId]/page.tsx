@@ -1,23 +1,22 @@
 import { cookies } from "next/headers"
-import Link from "next/link"
-import { getLocale, getTranslations } from "next-intl/server"
+import { getTranslations } from "next-intl/server"
 
 import { BackLink } from "@/components/back-link"
 import { PageHeader } from "@/components/page-header"
+import { PracticeRoundList } from "@/components/practice/practice-round-list"
 import { StartPractice } from "@/components/practice/start-practice"
 import { SignInPrompt } from "@/components/sign-in-prompt"
 import { TOKEN_COOKIE } from "@/constants/auth"
-import { formatDate } from "@/lib/format"
 import { serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
 import type { PracticeRoundSummary } from "@/types/round"
 import type { Template } from "@/types/superadmin"
-import { LIST_BOX } from "@/constants/lists"
+import { PAGE_SIZE } from "@/constants/lists"
 
 export const generateMetadata = () => translatedTitle("practice", "history")
 
-/** A talent's rounds on one practice test, newest first, with their grades, to see progress.
- * Each opens its results. */
+/** A talent's rounds on one practice test, newest first, a page at a time, with their grades,
+ * to see progress. Each opens its results. */
 export default async function PracticeHistoryPage({
   params,
 }: {
@@ -25,7 +24,6 @@ export default async function PracticeHistoryPage({
 }) {
   const { templateId } = await params
   const t = await getTranslations("practice")
-  const locale = await getLocale()
 
   if (!(await cookies()).has(TOKEN_COOKIE)) {
     return (
@@ -38,7 +36,7 @@ export default async function PracticeHistoryPage({
   const [template, rounds] = await Promise.all([
     serverFetch<Template>(`/library/templates/${templateId}`),
     serverFetch<PracticeRoundSummary[]>(
-      `/rounds/practice/${templateId}/rounds`
+      `/rounds/practice/${templateId}/rounds?limit=${PAGE_SIZE}`
     ),
   ])
 
@@ -68,55 +66,7 @@ export default async function PracticeHistoryPage({
         }
       />
 
-      {!rounds?.length ? (
-        <p className="py-16 text-center text-muted-foreground">
-          {t("noRounds")}
-        </p>
-      ) : (
-        <ul className={LIST_BOX}>
-          {rounds.map((round) => (
-            <li key={round.round_id}>
-              <Link
-                href={`/practice/rounds/${round.round_id}`}
-                className="flex items-center justify-between gap-4 p-6 transition-colors hover:bg-muted/50 active:bg-muted/50"
-              >
-                <time
-                  dateTime={round.started_at}
-                  className="text-lg"
-                  suppressHydrationWarning
-                >
-                  {formatDate(round.started_at, locale)}
-                </time>
-                {/* Progress and grade, labelled like the candidate list's numbers. */}
-                <span className="flex shrink-0 items-center gap-6 sm:gap-10">
-                  <span className="w-20 text-center sm:w-24">
-                    <span className="block text-2xl font-light tabular-nums">
-                      {round.progress}%
-                    </span>
-                    <span className="block text-sm text-muted-foreground">
-                      {t("progressLabel")}
-                    </span>
-                  </span>
-                  <span className="w-20 text-center sm:w-24">
-                    <span
-                      className={
-                        round.grade == null
-                          ? "block text-2xl font-light text-muted-foreground"
-                          : "block text-2xl font-light tabular-nums"
-                      }
-                    >
-                      {round.grade == null ? "—" : `${round.grade}%`}
-                    </span>
-                    <span className="block text-sm text-muted-foreground">
-                      {t("gradeLabel")}
-                    </span>
-                  </span>
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
+      <PracticeRoundList templateId={templateId} initial={rounds ?? []} />
     </main>
   )
 }

@@ -1,6 +1,6 @@
 import uuid
 
-from sqlalchemy import exists, select
+from sqlalchemy import exists, func, select
 from sqlalchemy.orm import selectinload
 
 from app.models.sessions import Session
@@ -21,11 +21,22 @@ async def practiced(user_id: str, template_id: uuid.UUID) -> bool:
         return bool(await session.scalar(select(exists().where(*_practice(user_id, template_id)))))
 
 
-async def practice_for_user(user_id: str, template_id: uuid.UUID) -> list[Session]:
-    """Every practice section the talent took on the template, with answers."""
+async def practice_rounds(
+    user_id: str, template_id: uuid.UUID, offset: int, limit: int
+) -> list[Session]:
+    """The sections, with answers, of the talent's practice rounds on the template, a page of
+    rounds at a time, newest first."""
+    rounds = (
+        select(Session.candidate_invite_id)
+        .where(*_practice(user_id, template_id))
+        .group_by(Session.candidate_invite_id)
+        .order_by(func.min(Session.started_at).desc(), Session.candidate_invite_id)
+        .offset(offset)
+        .limit(limit)
+    )
     query = (
         select(Session)
-        .where(*_practice(user_id, template_id))
+        .where(Session.candidate_invite_id.in_(rounds))
         .options(selectinload(Session.answers))
     )
 
