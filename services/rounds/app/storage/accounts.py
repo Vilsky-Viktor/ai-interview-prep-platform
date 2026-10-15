@@ -28,8 +28,9 @@ async def export(user_id: str) -> dict:
                 {
                     "topic": row.topic_title,
                     "status": row.status,
-                    # A company's interview score isn't the candidate's to see; practice is.
-                    "final_score": row.final_score if row.practice else None,
+                    # Their own grade, in practice and in a company's interview alike; which
+                    # answers were right only for practice (answer_export).
+                    "final_score": row.final_score,
                     "started_at": row.started_at,
                     "answers": [
                         {**answer_export(row.questions, a, row.practice), "seconds": a.seconds}

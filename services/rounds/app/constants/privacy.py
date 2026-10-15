@@ -118,7 +118,7 @@ PRIVACY_SECTIONS = [
     {
         "heading": "Your rights",
         "paragraphs": [
-            'You can see, download and delete your data yourself: "Download my data" and "Delete account" are in Settings, in your account menu. You can also ask us to correct your data, to restrict or object to its use, or to move it to another service, at the address above.',
+            'You can see, download and delete your data yourself: "Download my data" and "Delete account" are in Settings, in your account menu. Your data includes your answers and grades in companies\' interviews, but not which answers were right, as that would reveal the company\'s questions. You can also ask us to correct your data, to restrict or object to its use, or to move it to another service, at the address above.',
             "You can complain to the Estonian Data Protection Inspectorate (Andmekaitse Inspektsioon, www.aki.ee) or to the authority where you live.",
         ],
     },
