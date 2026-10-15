@@ -210,4 +210,5 @@ MESSAGES = {
     "return_url must be an https address on the company's verified website domain; get the company verified in prepza first (Verify, next to its name).": "return_url은 회사의 인증된 웹사이트 도메인에 있는 https 주소여야 합니다. 먼저 prepza에서 회사 인증을 받으세요(회사 이름 옆의 인증).",
     "A request with this Idempotency-Key is still running. Try again shortly.": "이 Idempotency-Key로 보낸 요청이 아직 처리 중입니다. 잠시 후 다시 시도해 주세요.",
     "prepza doesn't email this candidate: send them their invite link yourself.": "prepza는 이 지원자에게 이메일을 보내지 않습니다. 초대 링크를 직접 보내 주세요.",
+    "Use at least 3 characters.": "3자 이상 입력하세요.",
 }

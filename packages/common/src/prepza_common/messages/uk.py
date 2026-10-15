@@ -210,4 +210,5 @@ MESSAGES = {
     "return_url must be an https address on the company's verified website domain; get the company verified in prepza first (Verify, next to its name).": "return_url має бути https-адресою на підтвердженому домені сайту компанії; спершу підтвердьте компанію в prepza (Підтвердити, поруч із її назвою).",
     "A request with this Idempotency-Key is still running. Try again shortly.": "Запит із цим Idempotency-Key ще виконується. Спробуйте трохи згодом.",
     "prepza doesn't email this candidate: send them their invite link yourself.": "prepza не надсилає листів цьому кандидату: надішліть йому посилання-запрошення самі.",
+    "Use at least 3 characters.": "Використайте щонайменше 3 символи.",
 }

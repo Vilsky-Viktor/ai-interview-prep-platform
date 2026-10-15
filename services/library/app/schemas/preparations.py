@@ -1,8 +1,8 @@
 from uuid import UUID
 
-from prepza_common.constants import MAX_TITLE_LENGTH
 from prepza_common.sets import OptionIn
-from pydantic import BaseModel, Field, field_validator
+from prepza_common.titles import Title
+from pydantic import BaseModel
 
 
 class CreatedOut(BaseModel):
@@ -34,14 +34,4 @@ class TopicOut(BaseModel):
 
 
 class TitleIn(BaseModel):
-    title: str = Field(min_length=1, max_length=MAX_TITLE_LENGTH)
-
-    @field_validator("title")
-    @classmethod
-    def stripped(cls, value: str) -> str:
-        value = value.strip()
-
-        if not value:
-            raise ValueError("Title is required")
-
-        return value
+    title: Title

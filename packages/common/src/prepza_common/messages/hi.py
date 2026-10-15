@@ -210,4 +210,5 @@ MESSAGES = {
     "return_url must be an https address on the company's verified website domain; get the company verified in prepza first (Verify, next to its name).": "return_url कंपनी की सत्यापित वेबसाइट डोमेन पर एक https पता होना चाहिए; पहले prepza में कंपनी को सत्यापित कराएँ (उसके नाम के पास Verify)।",
     "A request with this Idempotency-Key is still running. Try again shortly.": "इस Idempotency-Key वाला अनुरोध अभी चल रहा है। कृपया थोड़ी देर बाद फिर से कोशिश करें।",
     "prepza doesn't email this candidate: send them their invite link yourself.": "prepza इस उम्मीदवार को ईमेल नहीं भेजता: उन्हें उनका इनवाइट लिंक खुद भेजें।",
+    "Use at least 3 characters.": "कम से कम 3 अक्षर इस्तेमाल करें।",
 }

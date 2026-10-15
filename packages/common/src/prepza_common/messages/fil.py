@@ -210,4 +210,5 @@ MESSAGES = {
     "return_url must be an https address on the company's verified website domain; get the company verified in prepza first (Verify, next to its name).": "Ang return_url ay dapat https na address sa na-verify na website domain ng kumpanya; ipa-verify muna ang kumpanya sa prepza (Verify, katabi ng pangalan nito).",
     "A request with this Idempotency-Key is still running. Try again shortly.": "May request pang tumatakbo gamit ang Idempotency-Key na ito. Subukang muli maya-maya.",
     "prepza doesn't email this candidate: send them their invite link yourself.": "Hindi nag-e-email ang prepza sa kandidatong ito: ikaw na ang magpadala sa kanila ng invite link nila.",
+    "Use at least 3 characters.": "Gumamit ng hindi bababa sa 3 character.",
 }

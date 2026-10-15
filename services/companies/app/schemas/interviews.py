@@ -1,9 +1,10 @@
 from datetime import datetime
 from uuid import UUID
 
-from prepza_common.constants import MAX_GOAL_LENGTH, MAX_TITLE_LENGTH
+from prepza_common.constants import MAX_GOAL_LENGTH
+from prepza_common.titles import Title
 from prepza_common.user import Language
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field
 
 from app.constants.interviews import (
     MAX_PASS_MARK,
@@ -113,14 +114,4 @@ class InterviewSettings(BaseModel):
 
 
 class TitleIn(BaseModel):
-    title: str = Field(min_length=1, max_length=MAX_TITLE_LENGTH)
-
-    @field_validator("title")
-    @classmethod
-    def stripped(cls, value: str) -> str:
-        value = value.strip()
-
-        if not value:
-            raise ValueError("Title is required")
-
-        return value
+    title: Title

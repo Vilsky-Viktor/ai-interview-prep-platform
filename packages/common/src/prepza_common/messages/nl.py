@@ -210,4 +210,5 @@ MESSAGES = {
     "return_url must be an https address on the company's verified website domain; get the company verified in prepza first (Verify, next to its name).": "return_url moet een https-adres op het geverifieerde websitedomein van het bedrijf zijn; laat het bedrijf eerst in prepza verifiëren (Verifiëren, naast de naam).",
     "A request with this Idempotency-Key is still running. Try again shortly.": "Een verzoek met deze Idempotency-Key wordt nog verwerkt. Probeer het zo meteen opnieuw.",
     "prepza doesn't email this candidate: send them their invite link yourself.": "prepza mailt deze kandidaat niet: stuur de kandidaat zelf de uitnodigingslink.",
+    "Use at least 3 characters.": "Gebruik minstens 3 tekens.",
 }

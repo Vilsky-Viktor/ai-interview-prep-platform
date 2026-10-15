@@ -145,6 +145,9 @@ REFERRAL_COOKIE = "prepza_ref"
 
 # A test's title, as its company can rename it; generated titles aim for 60.
 MAX_TITLE_LENGTH = 70
+# The least an editable title (a test's, a template's) may have, spaces at either end aside.
+MIN_TITLE_LENGTH = 3
+TITLE_TOO_SHORT = "Use at least 3 characters."
 # The longest candidate name kept (from a sign-in, an inviter or an ATS); a longer one is cut.
 MAX_CANDIDATE_NAME_LENGTH = 200
 

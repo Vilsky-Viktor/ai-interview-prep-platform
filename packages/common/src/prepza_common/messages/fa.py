@@ -210,4 +210,5 @@ MESSAGES = {
     "return_url must be an https address on the company's verified website domain; get the company verified in prepza first (Verify, next to its name).": "return_url باید یک نشانی https روی دامنهٔ تأییدشدهٔ وب‌سایت شرکت باشد؛ ابتدا شرکت را در prepza تأیید کنید (دکمهٔ «تأیید» کنار نام آن).",
     "A request with this Idempotency-Key is still running. Try again shortly.": "درخواستی با این Idempotency-Key هنوز در حال اجراست. کمی بعد دوباره امتحان کنید.",
     "prepza doesn't email this candidate: send them their invite link yourself.": "prepza به این متقاضی ایمیل نمی‌فرستد: پیوند دعوتش را خودتان برایش بفرستید.",
+    "Use at least 3 characters.": "حداقل ۳ نویسه وارد کنید.",
 }

@@ -75,7 +75,7 @@ Any company member can preview an interview as a candidate, with the play button
 
 | Field | Limit (characters) |
 |---|---|
-| Title | 70 |
+| Title | 70, and at least 3 (`MIN_TITLE_LENGTH`; a test's and a template's title, spaces at either end aside, `prepza_common.titles`) |
 | Company name | 45 |
 | Topic name | 50 |
 | Job description | 10,000 |
