@@ -26,6 +26,12 @@ HELP_HISTORY_CHARACTERS = 8_000
 # Help chat questions an hour from one visitor's address. Cloud Armor limits each address too;
 # this holds wherever the service runs.
 HELP_IP_LIMIT = 60
+# An answer's longest, in tokens (its reasoning included), and the tokens all help chats may use
+# in a day together (input and output, counted after each answer): a ceiling on what the public
+# chat costs. A spent budget refuses new questions (429); a started answer always finishes.
+HELP_MAX_OUTPUT_TOKENS = 1_500
+HELP_TOKENS_PER_DAY = 50_000_000
+HELP_SPEND_KEY = "spend:help:all"
 # How long billing's prices are kept for the FAQ and the chat before they're asked again.
 CATALOG_KEY = "billing-catalog"
 CATALOG_CACHE_SECONDS = 5 * 60

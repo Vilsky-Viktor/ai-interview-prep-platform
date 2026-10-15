@@ -20,7 +20,7 @@ def checks(monkeypatch):
         if state["refuse"]:
             raise HTTPException(403, "Confirm you're not a robot, then try again.")
 
-    async def fake_stream(messages):
+    async def fake_stream(messages, used=None):
         yield "Paste a job description."
 
     async def nothing(*args):

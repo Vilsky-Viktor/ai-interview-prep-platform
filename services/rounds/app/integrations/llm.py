@@ -4,6 +4,7 @@ from langchain_openai import ChatOpenAI
 from prepza_common.llm import chat_model
 
 from app.config.settings import settings
+from app.constants.help import HELP_MAX_OUTPUT_TOKENS
 from app.constants.rounds import CHAT_TIMEOUT_SECONDS
 
 
@@ -16,4 +17,7 @@ def get_help_llm() -> ChatOpenAI:
         temperature=0.3,
         max_retries=3,
         timeout=CHAT_TIMEOUT_SECONDS,
+        max_tokens=HELP_MAX_OUTPUT_TOKENS,
+        # The last chunk carries the answer's tokens, for the daily budget.
+        stream_usage=True,
     )

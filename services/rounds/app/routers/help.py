@@ -9,14 +9,20 @@ from prepza_common.constants import DAY_SECONDS, DEFAULT_LANGUAGE, HOUR_SECONDS,
 from prepza_common.human_check import require_human
 from prepza_common.i18n import request_language, translate
 from prepza_common.pause import refuse_if_paused
-from prepza_common.rate_limit import hit
+from prepza_common.rate_limit import hit, spend
 from prepza_common.secrets_check import secret_in
 from prepza_common.sse import event_stream, sse_event
 from prepza_common.user import Language
 
 from app.config.settings import settings
 from app.constants.contact import CONTACT_IP_LIMIT
-from app.constants.help import HELP_IP_LIMIT, PRICES_UNAVAILABLE, LegalDocument
+from app.constants.help import (
+    HELP_IP_LIMIT,
+    HELP_SPEND_KEY,
+    HELP_TOKENS_PER_DAY,
+    PRICES_UNAVAILABLE,
+    LegalDocument,
+)
 from app.constants.legal import NO_SUCH_VERSION
 from app.constants.rounds import CHAT_FAILED
 from app.helpers import legal
@@ -27,7 +33,7 @@ from app.integrations.redis import get_redis
 from app.schemas.contact import ContactRequest
 from app.schemas.help import FaqItemOut, HelpChatRequest, LegalOut
 from app.services import outbox as outbox_service
-from app.services.help import build_messages, platform_guide, stream_reply
+from app.services.help import build_messages, platform_guide, record_spend, stream_reply
 from app.storage import contact as contact_store
 
 logger = logging.getLogger(__name__)
@@ -112,12 +118,15 @@ async def help_chat(
 
     await hit(redis, f"rate:help:ip:{client_ip(request)}", HELP_IP_LIMIT, HOUR_SECONDS)
     await hit(redis, "rate:help:all", settings.help_daily_limit, DAY_SECONDS)
+    # The day's token budget, checked before the answer and counted after it.
+    await spend(redis, HELP_SPEND_KEY, 0, HELP_TOKENS_PER_DAY, DAY_SECONDS)
 
     messages = build_messages(body.messages, language, await billing.catalog())
+    used: dict = {}
 
     async def events():
         try:
-            async for event in with_sign_in(stream_reply(messages)):
+            async for event in with_sign_in(stream_reply(messages, used)):
                 yield sse_event(event)
         except Exception:
             logger.exception("Help chat failed")
@@ -125,6 +134,7 @@ async def help_chat(
 
             return
 
+        await record_spend(redis, used.get("tokens", 0))
         await track("help_chat_turn", user_id=user.uid if user else None, turn=len(body.messages))
 
         yield sse_event({"done": True})

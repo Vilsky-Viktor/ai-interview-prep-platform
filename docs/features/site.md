@@ -89,6 +89,8 @@ The help chat (rounds' `POST /help/chat`) answers signed-out visitors in the [as
 | Messages an hour per account | `HELP_USER_LIMIT` setting | 30 |
 | Questions an hour per address | `HELP_IP_LIMIT` constant (`services/rounds/app/constants/help.py`) | 60 |
 | Questions a day in all | `HELP_DAILY_LIMIT` setting | 5,000 |
+| An answer's length, in tokens | `HELP_MAX_OUTPUT_TOKENS` constant | 1,500 |
+| Tokens a day in all (input and output, counted after each answer; a started answer finishes) | `HELP_TOKENS_PER_DAY` constant | 50,000,000 |
 | Questions per 10 minutes per IP, at the edge (Google Cloud only) | Cloud Armor (Terraform) | 20 |
 
 The chat's model is set in [Generation settings](../generation.md#models).

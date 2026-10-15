@@ -81,7 +81,7 @@ def test_long_earlier_messages_are_left_out_but_the_question_stays():
 
 
 def test_visitors_can_chat_and_get_a_stream(client, monkeypatch):
-    async def fake_stream(messages):
+    async def fake_stream(messages, used=None):
         yield "Paste "
         yield "a job description."
 
@@ -115,7 +115,7 @@ def test_accounts_addresses_and_the_daily_total_are_limited(client, monkeypatch)
     async def record(redis, key, limit, window):
         keys.append(key)
 
-    async def fake_stream(messages):
+    async def fake_stream(messages, used=None):
         yield "ok"
 
     monkeypatch.setattr("app.routers.help.hit", record)

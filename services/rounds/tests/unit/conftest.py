@@ -24,3 +24,17 @@ def no_rate_limits(monkeypatch):
 
     monkeypatch.setattr("app.routers.help.hit", allowed)
     monkeypatch.setattr("app.routers.practice.hit", allowed)
+
+
+@pytest.fixture(autouse=True)
+def help_spending(monkeypatch):
+    """The help chat's token budget, without Redis: every amount spent, in order."""
+    spent = []
+
+    async def spend(redis, key, amount, limit, window, message=None):
+        spent.append((key, amount))
+
+    monkeypatch.setattr("app.routers.help.spend", spend)
+    monkeypatch.setattr("app.services.help.spend", spend)
+
+    return spent
