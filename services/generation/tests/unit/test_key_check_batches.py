@@ -1,7 +1,7 @@
 import asyncio
 import uuid
 
-from app.constants.quality import QualityFlag
+from app.constants.quality import MAX_DIRECT_KEY_CHECKS, QualityFlag
 from app.integrations import library, openai_batch
 from app.models.key_checks import KeyCheck as KeyCheckRow
 from app.services import key_check_batches
@@ -129,6 +129,59 @@ def test_an_expired_batch_is_sent_again(monkeypatch):
     asyncio.run(key_check_batches.collect_finished())
 
     assert store.rows == {KEPT: None}
+
+
+def test_an_expired_batchs_results_apply_and_only_the_rest_go_out_again(monkeypatch):
+    other = uuid.uuid4()
+    store = FakeStore({KEPT: "batch-1", other: "batch-1"})
+    store.install(monkeypatch)
+    library_with(monkeypatch, {KEPT, other})
+    applied = []
+
+    async def fake_status(batch_id):
+        return "expired", "file-1"
+
+    async def fake_results(file_id):
+        return {str(KEPT): '{"correct_index": 0}'}
+
+    async def fake_apply(question_id, question, context, result):
+        applied.append(question_id)
+
+    async def never(question_id, question, context):
+        raise AssertionError("checked at full price")
+
+    monkeypatch.setattr(openai_batch, "status", fake_status)
+    monkeypatch.setattr(openai_batch, "results", fake_results)
+    monkeypatch.setattr(key_check_batches, "apply_key_check", fake_apply)
+    monkeypatch.setattr(key_check_batches, "check_key", never)
+
+    asyncio.run(key_check_batches.collect_finished())
+
+    assert applied == [KEPT]
+    assert store.rows == {other: None}
+
+
+def test_an_empty_finished_batch_checks_only_a_few_right_away(monkeypatch):
+    ids = [uuid.uuid4() for _ in range(MAX_DIRECT_KEY_CHECKS + 5)]
+    store = FakeStore(dict.fromkeys(ids, "batch-1"))
+    store.install(monkeypatch)
+    library_with(monkeypatch, set(ids))
+    checked = []
+
+    async def fake_status(batch_id):
+        return "completed", None
+
+    async def fake_check_now(question_id, question, context):
+        checked.append(question_id)
+
+    monkeypatch.setattr(openai_batch, "status", fake_status)
+    monkeypatch.setattr(key_check_batches, "check_key", fake_check_now)
+
+    asyncio.run(key_check_batches.collect_finished())
+
+    assert len(checked) == MAX_DIRECT_KEY_CHECKS
+    # The rest go out in the next batch.
+    assert store.rows == dict.fromkeys(set(ids) - set(checked), None)
 
 
 def test_a_running_batch_is_left_alone(monkeypatch):

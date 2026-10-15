@@ -4,7 +4,12 @@ from pydantic import ValidationError
 
 from app.config.settings import settings
 from app.constants.generation import MAX_OUTPUT_TOKENS
-from app.constants.quality import BATCH_RETRY_STATUSES, MAX_BATCH_KEY_CHECKS, QualityFlag
+from app.constants.quality import (
+    BATCH_RETRY_STATUSES,
+    MAX_BATCH_KEY_CHECKS,
+    MAX_DIRECT_KEY_CHECKS,
+    QualityFlag,
+)
 from app.integrations import library, openai_batch
 from app.models.key_checks import KeyCheck as KeyCheckRow
 from app.schemas.verify import KeyCheck
@@ -71,6 +76,14 @@ async def submit_pending() -> None:
         logger.info("Sent %d key checks in batch %s", len(requests), batch_id)
 
 
+def parsed(reply: str | None) -> KeyCheck | None:
+    """A batch's reply as a key check; None when it has none or it isn't one."""
+    try:
+        return KeyCheck.model_validate_json(reply) if reply else None
+    except ValidationError:
+        return None
+
+
 async def apply_reply(check: KeyCheckRow, reply: str | None) -> None:
     found = await current(check)
 
@@ -79,10 +92,7 @@ async def apply_reply(check: KeyCheckRow, reply: str | None) -> None:
 
     question, context = found
 
-    try:
-        result = KeyCheck.model_validate_json(reply) if reply else None
-    except ValidationError:
-        result = None
+    result = parsed(reply)
 
     # A request that failed in the batch is checked right away instead.
     if result is None:
@@ -92,24 +102,34 @@ async def apply_reply(check: KeyCheckRow, reply: str | None) -> None:
 
 
 async def collect_finished() -> None:
-    """Applies the results of finished batches; failed or expired ones are sent again."""
+    """Applies the results of finished batches. A failed or expired batch's results are applied
+    too, and its checks without one go out in the next batch. A finished batch's checks without
+    a usable result are checked right away, at most MAX_DIRECT_KEY_CHECKS a run (each at full
+    price), so a run ends well within its lock; the rest go out in the next batch."""
+    direct = 0
+
     for batch_id in await key_checks.sent_batches():
         status, output_file_id = await openai_batch.status(batch_id)
+
+        if status != "completed" and status not in BATCH_RETRY_STATUSES:
+            continue
+
         checks = await key_checks.in_batch(batch_id)
-
-        if status in BATCH_RETRY_STATUSES:
-            await key_checks.set_batch([check.question_id for check in checks], None)
-
-            continue
-
-        if status != "completed":
-            continue
-
         replies = await openai_batch.results(output_file_id) if output_file_id else {}
 
         for check in checks:
+            reply = replies.get(str(check.question_id))
+
+            if parsed(reply) is None:
+                if status != "completed" or direct >= MAX_DIRECT_KEY_CHECKS:
+                    await key_checks.set_batch([check.question_id], None)
+
+                    continue
+
+                direct += 1
+
             try:
-                await apply_reply(check, replies.get(str(check.question_id)))
+                await apply_reply(check, reply)
             except Exception:
                 logger.exception("Key check of question %s failed", check.question_id)
                 await key_checks.set_batch([check.question_id], None)

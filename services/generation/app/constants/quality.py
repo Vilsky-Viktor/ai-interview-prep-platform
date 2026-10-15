@@ -9,8 +9,11 @@ class QualityFlag(StrEnum):
     WEAK_OPTIONS = "weak_options"
 
 
-# A batch that ended this way is sent again.
+# A batch that ended this way has its results applied, and its checks without one sent again.
 BATCH_RETRY_STATUSES = ("failed", "expired", "cancelled")
+# Key checks a finished batch left without a result that one run checks right away, at full
+# price; the rest go out in the next batch.
+MAX_DIRECT_KEY_CHECKS = 20
 # Key checks sent in one batch (each is looked up in the library first).
 MAX_BATCH_KEY_CHECKS = 500
 # One key-check run at a time: a slow run isn't joined by the next scheduled one. The lock
