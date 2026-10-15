@@ -159,5 +159,5 @@ An action is the same in `app/constants/company_actions.py`, `interview_actions.
 | `TRANSCRIBE_MODEL` | `gpt-4o-mini-transcribe` | Voice input |
 | `ASSISTANT_RETENTION_DAYS` | 90 | Days a conversation is kept after its last message |
 | `OPENAI_API_KEY` | | OpenAI's key |
-| `SITE_URL` | `http://localhost:8090` | Where AI apps connect (`<SITE_URL>/mcp`), see [AI apps over MCP](mcp.md#settings) |
-| `FIREBASE_WEB_API_KEY` | `demo-api-key` | Firebase's public web key, for AI apps' calls as the user |
+| `SITE_URL` | required (`http://localhost:8090` locally) | Where AI apps connect (`<SITE_URL>/mcp`), see [AI apps over MCP](mcp.md#settings) |
+| `FIREBASE_WEB_API_KEY` | required (`demo-api-key` locally) | Firebase's public web key, for AI apps' calls as the user |
