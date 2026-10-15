@@ -46,7 +46,8 @@ export default async function CompanyTemplatePage({
           </BackLink>
         }
         title={
-          <div className="flex items-start justify-between gap-4">
+          // On phones the button goes under the title, across the page, as on other pages.
+          <div className="flex items-start justify-between gap-4 max-sm:flex-col max-sm:items-stretch">
             <h1 className="min-w-0 flex-1 font-heading text-3xl font-medium tracking-tight text-balance normal-case">
               {template.title}
             </h1>

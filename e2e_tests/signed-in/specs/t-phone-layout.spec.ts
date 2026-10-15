@@ -6,6 +6,7 @@ import {
   createCompany,
   createInterview,
   deleteOwnCompanies,
+  templatesBySize,
 } from "../helpers/api";
 import { box, PHONE } from "../helpers/layout";
 import { visit } from "../helpers/navigation";
@@ -83,6 +84,14 @@ test("a company's pages on a phone", async ({ signInAs }) => {
     const row = user.locator("main .divide-y > *").first();
     await expect(row.getByRole("link", { name: /^Try/ })).toBeHidden();
     await expect(row.locator("[data-slot=interview-stats]")).toBeHidden();
+
+    // A template: "use template" under its title, across the page, however long the title.
+    const [template] = await templatesBySize(user);
+    await visit(user, `/companies/${company.id}/templates/${template.id}`);
+    const templateTitle = await box(user.getByRole("heading", { level: 1 }));
+    const use = await box(user.getByRole("button", { name: "Use template" }));
+    expect(use.top).toBeGreaterThan(templateTitle.bottom);
+    expect(use.width).toBeGreaterThan(width - 60);
 
     // The team: each member's role on the line under their email.
     await visit(user, `/companies/${company.id}/members`);
