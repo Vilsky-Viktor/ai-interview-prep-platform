@@ -9,7 +9,9 @@ import { apiFetch } from "@/lib/api"
 import { mergePages, pagePath } from "@/lib/paged-list"
 
 /** A list the API serves a page at a time, its rows told apart by `getKey`. `initial` is the
-first page the server already rendered; without it, the first page loads on mount. */
+first page the server already rendered; without it, the first page loads on mount, and if that
+fails, `failed` says so (not an empty list) until `retry()`. A later page that fails says so in
+a toast with Retry, and the list can still load more. */
 export function usePagedList<T>(
   path: string,
   getKey: (item: T) => string,
@@ -21,8 +23,12 @@ export function usePagedList<T>(
     initial === undefined || initial.length === PAGE_SIZE
   )
   const [loaded, setLoaded] = useState(initial !== undefined)
+  const [failed, setFailed] = useState(false)
+  const [attempt, setAttempt] = useState(0)
   const [source, setSource] = useState({ path, initial })
   const loading = useRef(false)
+  // The latest loadMore, for a failed page's Retry in its toast.
+  const loadMoreLatest = useRef<() => Promise<void>>(async () => {})
   // The path shown now, so a page that arrives for an earlier search is dropped.
   const currentPath = useRef(path)
 
@@ -60,13 +66,18 @@ export function usePagedList<T>(
           setHasMore(page.length === PAGE_SIZE)
         }
       })
-      .catch(() => current && setHasMore(false))
-      .finally(() => current && setLoaded(true))
+      .then(() => current && setLoaded(true))
+      .catch(() => current && setFailed(true))
 
     return () => {
       current = false
     }
-  }, [path, loaded])
+  }, [path, loaded, attempt])
+
+  function retry() {
+    setFailed(false)
+    setAttempt((count) => count + 1)
+  }
 
   const loadMore = useCallback(async () => {
     if (loading.current || !hasMore || !loaded) {
@@ -86,13 +97,21 @@ export function usePagedList<T>(
       setHasMore(page.length === PAGE_SIZE)
     } catch {
       if (currentPath.current === path) {
-        toast.error(t("loadMoreFailed"))
-        setHasMore(false)
+        toast.error(t("loadMoreFailed"), {
+          action: {
+            label: t("retry"),
+            onClick: () => void loadMoreLatest.current(),
+          },
+        })
       }
     } finally {
       loading.current = false
     }
   }, [path, items.length, hasMore, loaded, getKey, t])
 
-  return { items, setItems, hasMore, loaded, loadMore }
+  useEffect(() => {
+    loadMoreLatest.current = loadMore
+  }, [loadMore])
+
+  return { items, setItems, hasMore, loaded, failed, retry, loadMore }
 }

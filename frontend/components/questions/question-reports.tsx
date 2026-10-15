@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl"
 
 import { useLocalTime } from "@/hooks/use-local-time"
+import { Button } from "@/components/ui/button"
 import { VirtualList } from "@/components/virtual-list"
 import { usePagedList } from "@/hooks/use-paged-list"
 import { byId } from "@/lib/paged-list"
@@ -14,7 +15,19 @@ export function QuestionReports({ path }: { path: string }) {
   const common = useTranslations("common")
   const reasons = useTranslations("reportReasons")
   const localTime = useLocalTime()
-  const { items, loaded, loadMore } = usePagedList<QuestionReport>(path, byId)
+  const { items, loaded, failed, retry, loadMore } =
+    usePagedList<QuestionReport>(path, byId)
+
+  if (failed) {
+    return (
+      <div className="flex items-center gap-3 text-sm text-muted-foreground">
+        <p>{common("failed")}</p>
+        <Button variant="outline" className="h-8 px-3 text-sm" onClick={retry}>
+          {common("retry")}
+        </Button>
+      </div>
+    )
+  }
 
   if (!loaded) {
     return <p className="text-sm text-muted-foreground">{common("loading")}</p>
