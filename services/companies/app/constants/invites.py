@@ -102,6 +102,9 @@ EXPIRIES_PER_BATCH = 200
 TOO_MANY_COMPANIES = "You can own at most 3 companies."
 # Company names are unique across prepza, ignoring case, and short enough for a heading.
 MAX_COMPANY_NAME_LENGTH = 45
+# A company name may be as short as two letters (EY, HP, 3M), spaces at either end aside.
+MIN_COMPANY_NAME_LENGTH = 2
+COMPANY_NAME_TOO_SHORT = "Use at least 2 characters."
 COMPANY_NAME_TAKEN = "A company with this name already exists."
 TOO_MANY_INTERVIEWS = "Your company can generate up to 10 interviews a day. Try again tomorrow."
 TOO_MANY_INTERVIEWS_UNPAID = (

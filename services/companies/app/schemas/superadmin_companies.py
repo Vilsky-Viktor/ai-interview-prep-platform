@@ -1,10 +1,10 @@
 from datetime import datetime
 from uuid import UUID
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
-from app.constants.invites import MAX_COMPANY_NAME_LENGTH
 from app.constants.verification import VerificationStatus
+from app.schemas.companies import CompanyName
 
 
 class SuperadminCompanyOut(BaseModel):
@@ -18,4 +18,4 @@ class SuperadminCompanyOut(BaseModel):
 
 
 class CompanyNameIn(BaseModel):
-    name: str = Field(min_length=1, max_length=MAX_COMPANY_NAME_LENGTH)
+    name: CompanyName

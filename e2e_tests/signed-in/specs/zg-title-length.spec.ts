@@ -23,3 +23,18 @@ test("a test's title under three characters isn't saved", async ({
   await input.press("Escape");
   await expect(owner.getByRole("heading", { level: 1 })).toHaveText(before);
 });
+
+// A company name needs at least 2 characters (EY and 3M are companies): one letter is refused
+// under the field.
+test("a one-letter company name isn't accepted", async ({ signInAs }) => {
+  const owner = await signInAs(throwawayEmail("company-name-length"));
+
+  await visit(owner, "/companies");
+  await owner.getByRole("button", { name: "New company" }).click();
+  const dialog = owner.getByRole("dialog");
+  await dialog.getByLabel("Company name").fill("A");
+  await dialog.getByRole("button", { name: "Create" }).click();
+
+  await expect(dialog.getByText("Use at least 2 characters.")).toBeVisible();
+  await expect(owner).toHaveURL(/\/companies$/);
+});

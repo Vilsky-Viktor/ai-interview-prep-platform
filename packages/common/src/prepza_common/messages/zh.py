@@ -211,4 +211,5 @@ MESSAGES = {
     "A request with this Idempotency-Key is still running. Try again shortly.": "使用此 Idempotency-Key 的请求仍在处理中，请稍后再试。",
     "prepza doesn't email this candidate: send them their invite link yourself.": "prepza 不会给这位候选人发送邮件：请你自己把邀请链接发给对方。",
     "Use at least 3 characters.": "请至少输入 3 个字符。",
+    "Use at least 2 characters.": "请至少输入 2 个字符。",
 }

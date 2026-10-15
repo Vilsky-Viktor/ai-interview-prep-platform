@@ -211,4 +211,5 @@ MESSAGES = {
     "A request with this Idempotency-Key is still running. Try again shortly.": "この Idempotency-Key のリクエストはまだ処理中です。少し時間をおいてもう一度お試しください。",
     "prepza doesn't email this candidate: send them their invite link yourself.": "prepza はこの候補者にメールを送りません。招待リンクはご自身で送ってください。",
     "Use at least 3 characters.": "3 文字以上で入力してください。",
+    "Use at least 2 characters.": "2 文字以上で入力してください。",
 }

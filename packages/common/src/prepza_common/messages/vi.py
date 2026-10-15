@@ -211,4 +211,5 @@ MESSAGES = {
     "A request with this Idempotency-Key is still running. Try again shortly.": "Một yêu cầu với Idempotency-Key này vẫn đang được xử lý. Vui lòng thử lại sau ít phút.",
     "prepza doesn't email this candidate: send them their invite link yourself.": "prepza không gửi email cho ứng viên này: bạn hãy tự gửi liên kết lời mời cho họ.",
     "Use at least 3 characters.": "Hãy dùng ít nhất 3 ký tự.",
+    "Use at least 2 characters.": "Hãy dùng ít nhất 2 ký tự.",
 }

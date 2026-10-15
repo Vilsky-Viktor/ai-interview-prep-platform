@@ -67,7 +67,8 @@ export function CreateCompany({ templateId }: { templateId?: string }) {
           : `/companies/${company.id}/interviews`
       )
     } catch (error) {
-      if (error instanceof ApiError && error.status === 409) {
+      // A name taken (409) or too short (422) is said under the field.
+      if (error instanceof ApiError && [409, 422].includes(error.status)) {
         setNameError(error.message)
       } else {
         toast.error(apiErrorMessage(error, t("createFailed")))

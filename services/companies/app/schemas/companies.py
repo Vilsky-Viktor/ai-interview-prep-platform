@@ -1,23 +1,35 @@
 from datetime import datetime
-from typing import Literal
+from typing import Annotated, Literal
 from uuid import UUID
 
-from pydantic import BaseModel, EmailStr, Field
+from prepza_common.titles import at_least
+from pydantic import AfterValidator, BaseModel, EmailStr, Field
 
-from app.constants.invites import MAX_COMPANY_NAME_LENGTH
+from app.constants.invites import (
+    COMPANY_NAME_TOO_SHORT,
+    MAX_COMPANY_NAME_LENGTH,
+    MIN_COMPANY_NAME_LENGTH,
+)
 from app.constants.roles import Role
 from app.constants.verification import VerificationStatus
 from app.schemas.logos import BrandColorSets, BrandStyle, SavedBrandColors
 
+# A company's name, as an owner or admin gives it or a superadmin corrects it.
+CompanyName = Annotated[
+    str,
+    Field(max_length=MAX_COMPANY_NAME_LENGTH),
+    AfterValidator(at_least(MIN_COMPANY_NAME_LENGTH, COMPANY_NAME_TOO_SHORT)),
+]
+
 
 class CompanyCreate(BaseModel):
-    name: str = Field(min_length=1, max_length=MAX_COMPANY_NAME_LENGTH)
+    name: CompanyName
 
 
 class CompanyRename(BaseModel):
     """A new name, edited in place like a test's title (hence `title`)."""
 
-    title: str = Field(min_length=1, max_length=MAX_COMPANY_NAME_LENGTH)
+    title: CompanyName
 
 
 class MemberOut(BaseModel):

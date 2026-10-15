@@ -1,8 +1,7 @@
 import pytest
-from pydantic import BaseModel, ValidationError
-
 from prepza_common.constants import TITLE_TOO_SHORT
 from prepza_common.titles import Title
+from pydantic import BaseModel, ValidationError
 
 
 class Named(BaseModel):

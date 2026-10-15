@@ -211,4 +211,5 @@ MESSAGES = {
     "A request with this Idempotency-Key is still running. Try again shortly.": "Eine Anfrage mit diesem Idempotency-Key läuft noch. Versuche es gleich noch einmal.",
     "prepza doesn't email this candidate: send them their invite link yourself.": "prepza schickt dieser Person keine E-Mails: Sende ihr den Einladungslink selbst.",
     "Use at least 3 characters.": "Verwende mindestens 3 Zeichen.",
+    "Use at least 2 characters.": "Verwende mindestens 2 Zeichen.",
 }

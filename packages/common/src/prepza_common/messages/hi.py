@@ -211,4 +211,5 @@ MESSAGES = {
     "A request with this Idempotency-Key is still running. Try again shortly.": "इस Idempotency-Key वाला अनुरोध अभी चल रहा है। कृपया थोड़ी देर बाद फिर से कोशिश करें।",
     "prepza doesn't email this candidate: send them their invite link yourself.": "prepza इस उम्मीदवार को ईमेल नहीं भेजता: उन्हें उनका इनवाइट लिंक खुद भेजें।",
     "Use at least 3 characters.": "कम से कम 3 अक्षर इस्तेमाल करें।",
+    "Use at least 2 characters.": "कम से कम 2 अक्षर इस्तेमाल करें।",
 }

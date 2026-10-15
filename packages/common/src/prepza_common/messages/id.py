@@ -211,4 +211,5 @@ MESSAGES = {
     "A request with this Idempotency-Key is still running. Try again shortly.": "Permintaan dengan Idempotency-Key ini masih diproses. Coba lagi sebentar lagi.",
     "prepza doesn't email this candidate: send them their invite link yourself.": "prepza tidak mengirim email ke kandidat ini: kirim sendiri tautan undangannya kepada mereka.",
     "Use at least 3 characters.": "Gunakan minimal 3 karakter.",
+    "Use at least 2 characters.": "Gunakan minimal 2 karakter.",
 }

@@ -211,4 +211,5 @@ MESSAGES = {
     "A request with this Idempotency-Key is still running. Try again shortly.": "이 Idempotency-Key로 보낸 요청이 아직 처리 중입니다. 잠시 후 다시 시도해 주세요.",
     "prepza doesn't email this candidate: send them their invite link yourself.": "prepza는 이 지원자에게 이메일을 보내지 않습니다. 초대 링크를 직접 보내 주세요.",
     "Use at least 3 characters.": "3자 이상 입력하세요.",
+    "Use at least 2 characters.": "2자 이상 입력하세요.",
 }

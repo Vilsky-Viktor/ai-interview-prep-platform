@@ -223,4 +223,5 @@ MESSAGES = {
     "A request with this Idempotency-Key is still running. Try again shortly.": "Selle Idempotency-Key'ga päring on veel pooleli. Proovi varsti uuesti.",
     "prepza doesn't email this candidate: send them their invite link yourself.": "prepza ei saada sellele kandidaadile e-kirju: saada talle kutselink ise.",
     "Use at least 3 characters.": "Kasuta vähemalt 3 tähemärki.",
+    "Use at least 2 characters.": "Kasuta vähemalt 2 tähemärki.",
 }

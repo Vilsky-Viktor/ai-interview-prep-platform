@@ -211,4 +211,5 @@ MESSAGES = {
     "A request with this Idempotency-Key is still running. Try again shortly.": "May request pang tumatakbo gamit ang Idempotency-Key na ito. Subukang muli maya-maya.",
     "prepza doesn't email this candidate: send them their invite link yourself.": "Hindi nag-e-email ang prepza sa kandidatong ito: ikaw na ang magpadala sa kanila ng invite link nila.",
     "Use at least 3 characters.": "Gumamit ng hindi bababa sa 3 character.",
+    "Use at least 2 characters.": "Gumamit ng hindi bababa sa 2 character.",
 }
