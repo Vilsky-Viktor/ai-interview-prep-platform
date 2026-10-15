@@ -697,6 +697,7 @@
     "minutesSeconds": "{m} min {s} s"
   },
   "pricing": {
+    "unavailable": "De prijzen zijn nu niet beschikbaar. Probeer het over een minuut opnieuw.",
     "title": "Prijzen",
     "intro": "Betaal per kandidaat. Interviews genereren is gratis, en er zijn geen abonnementen.",
     "description": "Prijzen van prepza: interviews genereren is gratis, en je betaalt alleen voor elke kandidaat die antwoordt. Geen abonnementen of kosten per gebruiker, en credits verlopen nooit.",

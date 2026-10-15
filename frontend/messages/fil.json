@@ -697,6 +697,7 @@
     "minutesSeconds": "{m} min {s} s"
   },
   "pricing": {
+    "unavailable": "Hindi available ang mga presyo ngayon. Pakisubukang muli pagkalipas ng isang minuto.",
     "title": "Presyo",
     "intro": "Magbayad bawat aplikante. Libre ang paggawa ng interview, at walang subscription.",
     "description": "Presyo ng prepza: libre ang paggawa ng interview, at nagbabayad ka lang para sa bawat aplikanteng sumasagot. Walang subscription o bayad kada user, at hindi nag-e-expire ang credits.",

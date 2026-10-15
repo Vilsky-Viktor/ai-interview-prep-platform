@@ -697,6 +697,7 @@
     "minutesSeconds": "{m} mnt {s} dtk"
   },
   "pricing": {
+    "unavailable": "Harga belum tersedia saat ini. Silakan coba lagi dalam satu menit.",
     "title": "Harga",
     "intro": "Bayar per kandidat. Membuat wawancara gratis, dan tidak ada langganan.",
     "description": "Harga prepza: membuat wawancara gratis, dan Anda hanya membayar untuk setiap kandidat yang menjawab. Tanpa langganan atau biaya per pengguna, dan kredit tidak pernah kedaluwarsa.",

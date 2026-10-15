@@ -697,6 +697,7 @@
     "minutesSeconds": "{m} phút {s} giây"
   },
   "pricing": {
+    "unavailable": "Hiện chưa xem được giá. Vui lòng thử lại sau một phút.",
     "title": "Bảng giá",
     "intro": "Trả tiền theo ứng viên. Tạo buổi phỏng vấn là miễn phí, và không có gói đăng ký.",
     "description": "Bảng giá prepza: tạo buổi phỏng vấn là miễn phí, và bạn chỉ trả tiền cho mỗi ứng viên có trả lời. Không có gói đăng ký hay phí theo người dùng, và credit không bao giờ hết hạn.",

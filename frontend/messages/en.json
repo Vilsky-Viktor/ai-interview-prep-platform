@@ -697,6 +697,7 @@
     "minutesSeconds": "{m} min {s} s"
   },
   "pricing": {
+    "unavailable": "Prices aren't available right now. Please try again in a minute.",
     "title": "Pricing",
     "intro": "Pay per candidate. Generating interviews is free, and there are no subscriptions.",
     "description": "prepza pricing: generating interviews is free, and you pay only for each candidate who answers. No subscriptions or seat fees, and credits never expire.",

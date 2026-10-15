@@ -697,6 +697,7 @@
     "minutesSeconds": "{m} min {s} s"
   },
   "pricing": {
+    "unavailable": "Les prix ne sont pas disponibles pour le moment. Veuillez réessayer dans une minute.",
     "title": "Tarifs",
     "intro": "Payez par candidat. La génération d'entretiens est gratuite, et il n'y a pas d'abonnement.",
     "description": "Tarifs de prepza : la génération d'entretiens est gratuite, et vous ne payez que pour chaque candidat qui répond. Ni abonnement ni frais par utilisateur, et les crédits n'expirent jamais.",

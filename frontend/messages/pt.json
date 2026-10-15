@@ -697,6 +697,7 @@
     "minutesSeconds": "{m} min {s} s"
   },
   "pricing": {
+    "unavailable": "Os preços não estão disponíveis agora. Tente novamente em um minuto.",
     "title": "Preços",
     "intro": "Pague por candidato. Gerar entrevistas é grátis, e não há assinaturas.",
     "description": "Preços da prepza: gerar entrevistas é grátis, e você paga apenas por cada candidato que responde. Sem assinaturas nem cobrança por usuário, e os créditos não expiram.",

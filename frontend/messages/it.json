@@ -697,6 +697,7 @@
     "minutesSeconds": "{m} min {s} s"
   },
   "pricing": {
+    "unavailable": "I prezzi non sono disponibili in questo momento. Riprova tra un minuto.",
     "title": "Prezzi",
     "intro": "Paghi per candidato. Generare colloqui è gratis e non ci sono abbonamenti.",
     "description": "Prezzi di prepza: generare colloqui è gratis e paghi solo per ogni candidato che risponde. Niente abbonamenti né costi per utente, e i crediti non scadono.",

@@ -43,7 +43,7 @@ Saved automatic top-ups were moved to these by billing's migration 0012 ($30 to 
 - Top up on the top-up page, for any company you belong to.
 - Billing makes each top-up's checkout (a Paddle transaction naming the company and the buyer), after companies checks the buyer is its owner or an admin (`POST /companies/{id}/billing/checkout`); the browser only opens it, so it can't send the money to another wallet or record someone else as the buyer. A paid transaction billing didn't make (its origin isn't `api`), or one into a company deleted meanwhile, adds no credits and is logged as an error, to refund.
 - Paddle's checkout doesn't offer a discount code field.
-- The home and pricing pages show the prices, their range and the free candidates as billing's catalog (`/billing/catalog`) gives them, in its currency.
+- The home and pricing pages show the prices, their range and the free candidates as billing's catalog (`/billing/catalog`) gives them, in its currency. Kept 5 minutes; when billing can't answer and nothing is kept, the pricing page shows its title, intro and Top up with "Prices aren't available right now" instead of the list, rather than an empty or error page.
 
 Balances follow a payment as it lands:
 

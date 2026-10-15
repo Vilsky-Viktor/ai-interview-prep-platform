@@ -697,6 +697,7 @@
     "minutesSeconds": "{m} dk {s} sn"
   },
   "pricing": {
+    "unavailable": "Fiyatlar şu anda kullanılamıyor. Lütfen bir dakika sonra tekrar deneyin.",
     "title": "Fiyatlar",
     "intro": "Aday başına ödeyin. Mülakat oluşturmak ücretsizdir ve abonelik yoktur.",
     "description": "prepza fiyatları: mülakat oluşturmak ücretsizdir ve yalnızca yanıt veren her aday için ödersiniz. Abonelik ya da kullanıcı başı ücret yoktur, krediler hiç sona ermez.",

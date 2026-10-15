@@ -4,6 +4,7 @@ import { getLocale, getTranslations } from "next-intl/server"
 
 import { JsonLd } from "@/components/json-ld"
 import { Button } from "@/components/ui/button"
+import { InfoCard } from "@/components/warning-card"
 import { formatPrice } from "@/lib/format"
 import { publicFetch } from "@/lib/server-api"
 import { pageMetadata, siteUrl } from "@/lib/site"
@@ -33,10 +34,36 @@ function PriceRow({ what, price }: { what: string; price: string }) {
 export default async function PricingPage() {
   const t = await getTranslations("pricing")
   const locale = await getLocale()
-  const catalog = await publicFetch<Catalog>("/billing/catalog")
+  // Billing not answering (starting up, or failing): the page says so instead of its prices,
+  // rather than showing nothing or the error page.
+  const catalog = await publicFetch<Catalog>("/billing/catalog").catch(
+    () => null
+  )
+  const header = (
+    <div className="space-y-2">
+      <div className="flex items-center justify-between gap-4">
+        <h1 className="font-heading text-4xl font-medium tracking-tight">
+          {t("title")}
+        </h1>
+        <Button
+          className="h-12 px-6 text-base"
+          render={<Link href="/top-up" />}
+          nativeButton={false}
+        >
+          {t("topUp")}
+        </Button>
+      </div>
+      <p className="text-base text-muted-foreground">{t("intro")}</p>
+    </div>
+  )
 
   if (!catalog) {
-    return null
+    return (
+      <main className="mx-auto max-w-5xl space-y-16 px-6 py-12">
+        {header}
+        <InfoCard>{t("unavailable")}</InfoCard>
+      </main>
+    )
   }
 
   const [standard, ...volume] = catalog.candidate_prices
@@ -44,21 +71,7 @@ export default async function PricingPage() {
   return (
     <main className="mx-auto max-w-5xl space-y-16 px-6 py-12">
       <JsonLd data={softwareData(siteUrl(), t("intro"), catalog)} />
-      <div className="space-y-2">
-        <div className="flex items-center justify-between gap-4">
-          <h1 className="font-heading text-4xl font-medium tracking-tight">
-            {t("title")}
-          </h1>
-          <Button
-            className="h-12 px-6 text-base"
-            render={<Link href="/top-up" />}
-            nativeButton={false}
-          >
-            {t("topUp")}
-          </Button>
-        </div>
-        <p className="text-base text-muted-foreground">{t("intro")}</p>
-      </div>
+      {header}
 
       <section className="space-y-10">
         <ul className={PRICE_LIST}>

@@ -697,6 +697,7 @@
     "minutesSeconds": "{m} min {s} s"
   },
   "pricing": {
+    "unavailable": "Die Preise sind gerade nicht verfügbar. Bitte versuche es in einer Minute erneut.",
     "title": "Preise",
     "intro": "Du zahlst pro Kandidat. Interviews zu generieren ist kostenlos, und es gibt keine Abos.",
     "description": "prepza-Preise: Interviews zu generieren ist kostenlos, und du zahlst nur für jeden Kandidaten, der antwortet. Keine Abos, keine Gebühren pro Nutzer, und Credits verfallen nie.",

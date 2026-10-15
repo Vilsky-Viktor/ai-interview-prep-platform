@@ -697,6 +697,7 @@
     "minutesSeconds": "{m} 分 {s} 秒"
   },
   "pricing": {
+    "unavailable": "目前无法获取价格，请一分钟后重试。",
     "title": "价格",
     "intro": "按候选人付费。生成面试免费，没有订阅。",
     "description": "prepza 价格：生成面试免费，只为每位作答的候选人付费。没有订阅，也不按用户数收费，点数永不过期。",

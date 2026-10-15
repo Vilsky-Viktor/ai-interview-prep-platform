@@ -697,6 +697,7 @@
     "minutesSeconds": "{m} min {s} s"
   },
   "pricing": {
+    "unavailable": "Hinnad ei ole praegu saadaval. Proovi minuti pärast uuesti.",
     "title": "Hinnad",
     "intro": "Maksa kandidaadi kohta. Intervjuude loomine on tasuta ja tellimusi pole.",
     "description": "prepza hinnad: intervjuude loomine on tasuta ja maksad ainult iga vastava kandidaadi eest. Tellimusi ega kasutajapõhiseid tasusid pole ning krediidid ei aegu.",

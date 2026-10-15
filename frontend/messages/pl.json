@@ -697,6 +697,7 @@
     "minutesSeconds": "{m} min {s} s"
   },
   "pricing": {
+    "unavailable": "Ceny są teraz niedostępne. Spróbuj ponownie za minutę.",
     "title": "Cennik",
     "intro": "Płać za kandydata. Generowanie rozmów jest darmowe i nie ma abonamentu.",
     "description": "Cennik prepza: generowanie rozmów jest darmowe, a płacisz tylko za każdego kandydata, który odpowiada. Bez abonamentu i opłat za użytkownika, a kredyty nie wygasają.",
