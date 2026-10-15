@@ -81,9 +81,19 @@ resource "google_project_iam_member" "assistant_reads_accounts" {
   member  = "serviceAccount:${google_service_account.service["assistant"].email}"
 }
 
+# Only signBlob, which signing a custom token needs: roles/iam.serviceAccountTokenCreator would
+# also let the account mint access and ID tokens as itself.
+resource "google_project_iam_custom_role" "token_signer" {
+  project     = var.project_id
+  role_id     = "prepzaTokenSigner"
+  title       = "prepza token signer"
+  description = "Signs Firebase custom tokens with the service account's own key (signBlob only)."
+  permissions = ["iam.serviceAccounts.signBlob"]
+}
+
 resource "google_service_account_iam_member" "assistant_signs_custom_tokens" {
   service_account_id = google_service_account.service["assistant"].name
-  role               = "roles/iam.serviceAccountTokenCreator"
+  role               = google_project_iam_custom_role.token_signer.id
   member             = "serviceAccount:${google_service_account.service["assistant"].email}"
 }
 
@@ -92,6 +102,6 @@ resource "google_service_account_iam_member" "assistant_signs_custom_tokens" {
 # on its own account), and Firebase makes the guest's account on its first sign-in.
 resource "google_service_account_iam_member" "companies_signs_guest_tokens" {
   service_account_id = google_service_account.service["companies"].name
-  role               = "roles/iam.serviceAccountTokenCreator"
+  role               = google_project_iam_custom_role.token_signer.id
   member             = "serviceAccount:${google_service_account.service["companies"].email}"
 }
