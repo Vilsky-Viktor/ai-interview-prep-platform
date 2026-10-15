@@ -2,7 +2,7 @@
 title: "Jak połączyć testy umiejętności z ATS"
 seoTitle: "Jak połączyć testy umiejętności z ATS: praktyczny poradnik"
 description: "Wysyłaj testy umiejętności i odbieraj wyniki automatycznie przez ATS, zostaw decyzje rekrutacyjne ludziom i sprawdź, na co zwrócić uwagę najpierw."
-updated: "2026-10-14"
+updated: "2026-10-15"
 ---
 
 # Jak połączyć testy umiejętności z ATS
@@ -93,7 +93,7 @@ prepza łączy się z **Workable, Greenhouse, Teamtailor, Recruitee i Breezy HR*
 - **Wyniki wracają do ATS.** Gdy kandydat skończy, prepza dodaje przy nim w ATS notatkę lub komentarz z oceną, informacją, czy zdał, ewentualnymi sygnałami nieuczciwości (opuszczenie strony, próby kopiowania, odpowiedzi wybrane zbyt szybko, by zdążyć przeczytać pytanie) i linkiem do jego karty wyników ze wszystkimi odpowiedziami.
 - **Błędy nie przechodzą niezauważone.** Jeśli kandydata nie da się zaprosić, na przykład dlatego, że firmie skończyły się kredyty, osiągnęła limit e-maili albo prepza tymczasowo wstrzymała zaproszenia, wszyscy członkowie firmy dostają powiadomienie z nazwą ATS. Kandydaci niezaproszeni z powodu braku kredytów są zapraszani automatycznie po doładowaniu, a oczekujących kandydatów z dowolnej oferty pracy można zaprosić ponownie jednym kliknięciem.
 - **Slack, jeśli go używasz.** prepza może publikować powiadomienia, na przykład o kandydacie, który skończył, albo o kandydacie z ATS, którego nie udało się zaprosić, na wybranym przez Ciebie kanale Slack.
-- **Twoja własna platforma.** Jeśli Twojego ATS nie ma na liście, [API](/api-docs) prepza pozwala zapraszać kandydatów za pomocą klucza API i odbierać podpisany webhook, gdy kandydat skończy.
+- **Twoja własna platforma.** Jeśli Twojego ATS nie ma na liście, [API](/api-docs) prepza pozwala zapraszać kandydatów za pomocą klucza API i odbierać podpisany webhook, gdy kandydat zaczyna lub kończy, gdy zaproszenie do niego nie dotrze lub wygaśnie, gdy kandydat zostanie usunięty i gdy rozmowa jest gotowa.
 - **Dane przechowywane przez określony czas.** Kandydaci zapisani z ATS są usuwani po 365 dniach albo wcześniej, razem z ich rozmową lub firmą.
 
 Niektóre ATS wymagają kroku po swojej stronie. Greenhouse, Teamtailor i Recruitee wymagają ręcznego dodania webhooka; okno Instrukcja w prepza pokazuje adres i miejsce, w które należy wkleić jego sekret. Webhooki Workable i Breezy HR prepza konfiguruje samodzielnie.

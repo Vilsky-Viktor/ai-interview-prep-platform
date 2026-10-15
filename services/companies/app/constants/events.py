@@ -22,8 +22,14 @@ COMPANY_DELETED = "company.deleted"
 # A candidate's interview.finished was stored: their grade, whether they passed, and the
 # interview's title; ats writes the result back to the ATS that sent them.
 CANDIDATE_FINISHED = "candidate.finished"
-# A generated interview got its questions; ats invites the candidates waiting for it.
+# A generated interview got its questions; ats invites the candidates waiting for it, and the
+# API's web hooks hear it.
 INTERVIEW_READY = "interview.ready"
+# A candidate started, their invite email bounced, or their invite expired: the API's web hooks
+# hear it (storage/candidate_events.py).
+CANDIDATE_STARTED = "candidate.started"
+CANDIDATE_UNDELIVERED = "candidate.undelivered"
+CANDIDATE_EXPIRED = "candidate.expired"
 # An interview was deleted; ats removes its job links and the candidates sent for it.
 INTERVIEW_DELETED = "interview.deleted"
 # Processed events are remembered this long: past Pub/Sub's 7 days of redeliveries.

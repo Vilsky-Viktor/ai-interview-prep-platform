@@ -57,7 +57,7 @@ def test_an_interview_made_ready_twice_by_one_event_is_announced_once(run):
 
     found, saved = run(scenario())
 
-    assert saved == [{"interview_id": str(found.id)}]
+    assert saved == [{"interview_id": str(found.id), "company_id": str(found.company_id)}]
 
 
 def test_a_removed_interview_is_announced_once(run):

@@ -2,7 +2,7 @@
 title: "Come collegare i test di competenze al tuo ATS"
 seoTitle: "Collegare i test di competenze all'ATS: guida pratica"
 description: "Invia i test di competenze e ricevi i risultati nel tuo ATS in automatico, lascia le decisioni alle persone e scopri cosa controllare per primo."
-updated: "2026-10-14"
+updated: "2026-10-15"
 ---
 
 # Come collegare i test di competenze al tuo ATS
@@ -93,7 +93,7 @@ prepza si collega a **Workable, Greenhouse, Teamtailor, Recruitee e Breezy HR** 
 - **Risultati di nuovo nell'ATS.** Quando un candidato termina, prepza gli aggiunge nell'ATS una nota o un commento con il suo punteggio, se ha superato il test, eventuali segnalazioni di integrità (uscita dalla pagina, tentativi di copia, risposte scelte troppo in fretta per aver letto la domanda) e un link alla sua scheda di valutazione con tutte le risposte.
 - **Gli errori non passano inosservati.** Se un candidato non può essere invitato, ad esempio perché l'azienda ha esaurito i crediti, ha raggiunto un limite di email, o perché prepza ha messo temporaneamente in pausa gli inviti, tutti i membri dell'azienda ricevono una notifica che indica l'ATS. I candidati non invitati per mancanza di crediti vengono invitati automaticamente dopo una ricarica, e i candidati in attesa di qualsiasi posizione possono essere invitati di nuovo con un clic.
 - **Slack, se lo usi.** prepza può pubblicare notifiche, come un candidato che ha finito o un candidato dell'ATS che non è stato possibile invitare, in un canale Slack a tua scelta.
-- **La tua piattaforma.** Se il tuo ATS non è nell'elenco, l'[API](/api-docs) di prepza ti permette di invitare candidati con una chiave API e di ricevere un webhook firmato quando un candidato termina.
+- **La tua piattaforma.** Se il tuo ATS non è nell'elenco, l'[API](/api-docs) di prepza ti permette di invitare candidati con una chiave API e di ricevere un webhook firmato quando un candidato inizia, termina o viene rimosso, quando il suo invito non gli arriva o scade, e quando un colloquio è pronto.
 - **Dati conservati per un periodo stabilito.** I candidati arrivati da un ATS vengono eliminati dopo 365 giorni, o prima insieme al loro colloquio o alla loro azienda.
 
 Alcuni ATS richiedono un passaggio dal loro lato. Greenhouse, Teamtailor e Recruitee ti chiedono di aggiungere un webhook a mano; la finestra Istruzioni di prepza mostra l'indirizzo e dove incollare il suo secret. I webhook di Workable e Breezy HR li configura prepza da solo.

@@ -3,6 +3,7 @@
 import { useLocale, useTranslations } from "next-intl"
 
 import { CreateDialog, RemoveButton } from "@/components/company/api-dialogs"
+import { WebhookActions } from "@/components/company/webhook-actions"
 import { MAX_KEY_NAME, MAX_WEBHOOK_URL } from "@/constants/api"
 import { formatDate } from "@/lib/format"
 import type { ApiKey, ApiWebhook } from "@/types/api-access"
@@ -141,7 +142,8 @@ export function ApiKeys({
   )
 }
 
-/** The addresses that hear when a candidate finishes; owners and admins delete them. */
+/** The addresses that hear the company's events; owners and admins send them a test event and
+ * delete them, and anyone sees each one's delivery log. */
 export function ApiWebhooks({
   companyId,
   webhooks,
@@ -179,15 +181,22 @@ export function ApiWebhooks({
             </>
           }
           remove={
-            canEdit && (
-              <RemoveButton
-                path={`${manage}/${hook.id}?company_id=${companyId}`}
-                label={t("removeWebhook")}
-                title={t("removeWebhookTitle")}
-                text={t("removeWebhookText", { url: hook.url })}
-                failed={t("removeFailed")}
+            <span className="flex shrink-0 items-center">
+              <WebhookActions
+                companyId={companyId}
+                hook={hook}
+                canEdit={canEdit}
               />
-            )
+              {canEdit && (
+                <RemoveButton
+                  path={`${manage}/${hook.id}?company_id=${companyId}`}
+                  label={t("removeWebhook")}
+                  title={t("removeWebhookTitle")}
+                  text={t("removeWebhookText", { url: hook.url })}
+                  failed={t("removeFailed")}
+                />
+              )}
+            </span>
           }
         />
       ))}

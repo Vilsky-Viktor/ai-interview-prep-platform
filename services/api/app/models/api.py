@@ -75,3 +75,22 @@ class WebhookRetry(Base):
     attempts: Mapped[int]
     next_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
+
+
+class WebhookAttempt(Base):
+    """A send to a web hook and how it went, for its delivery log on the API page: the latest
+    WEBHOOK_LOG_KEPT per web hook. No candidate's data, only the event's id and type."""
+
+    __tablename__ = "webhook_attempts"
+
+    id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
+    webhook_id: Mapped[uuid.UUID] = mapped_column(
+        Uuid, ForeignKey("webhooks.id", ondelete="CASCADE"), index=True
+    )
+    event_id: Mapped[str] = mapped_column(String(128))
+    event_type: Mapped[str] = mapped_column(String(64))
+    # Whether it took it, and what happened: "delivered", the status it answered, the error, or
+    # why it was skipped.
+    ok: Mapped[bool]
+    result: Mapped[str] = mapped_column(String(64))
+    at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)

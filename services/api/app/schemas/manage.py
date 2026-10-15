@@ -52,3 +52,18 @@ class ApiSettingsOut(BaseModel):
     # When a new key can expire, in order.
     expiries: list[str]
     webhooks: list[WebhookOut]
+
+
+class WebhookTestOut(BaseModel):
+    # Whether the web hook took the test event.
+    ok: bool
+
+
+class WebhookAttemptOut(BaseModel):
+    """A send in a web hook's delivery log."""
+
+    event_type: str
+    ok: bool
+    # "delivered", the status the endpoint answered, the error, or why it was skipped.
+    result: str
+    at: datetime

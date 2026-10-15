@@ -1361,7 +1361,7 @@
     "removeKeyTitle": "Usunąć ten klucz?",
     "removeKeyText": "Wszystko, co używa „{name}”, natychmiast przestanie działać.",
     "webhooksTitle": "Webhooki",
-    "webhooksText": "Gdy kandydat skończy, prepza wysyła jego wyniki na te adresy, podpisane sekretem każdego z nich.",
+    "webhooksText": "prepza powiadamia te adresy, gdy kandydat zaczyna lub kończy (wraz z wynikami), gdy zaproszenie do niego nie dotrze lub wygaśnie, gdy kandydat zostanie usunięty i gdy rozmowa jest gotowa. Każde żądanie jest podpisane sekretem danego adresu.",
     "noWebhooks": "Nie ma jeszcze webhooków.",
     "failing": "Nie odpowiada: ostatnie wyniki do niego nie dotarły",
     "stopped": "Zatrzymany: członek, który go dodał, nie jest już właścicielem ani administratorem. Dodaj go ponownie, aby dalej otrzymywać wyniki.",
@@ -1373,6 +1373,20 @@
     "copySecret": "Kopiuj sekret",
     "secretCopied": "Skopiowano sekret",
     "added": "dodany {date}",
+    "sendTest": "Wyślij zdarzenie testowe",
+    "testSent": "Zdarzenie testowe zostało dostarczone.",
+    "testNotTaken": "Endpoint nie przyjął zdarzenia testowego. Powód znajdziesz w dzienniku dostarczeń.",
+    "testFailed": "Nie udało się wysłać zdarzenia testowego.",
+    "log": "Dziennik dostarczeń",
+    "logText": "Ostatnie 20 zdarzeń wysłanych na {url}, od najnowszych.",
+    "logEmpty": "Nic jeszcze nie wysłano.",
+    "logFailed": "Nie udało się wczytać dziennika dostarczeń.",
+    "results": {
+      "delivered": "Dostarczono",
+      "skipped": "Pominięto",
+      "answered": "Odpowiedź {status}",
+      "error": "Błąd: {error}"
+    },
     "removeWebhook": "Usuń webhook",
     "removeWebhookTitle": "Usunąć ten webhook?",
     "removeWebhookText": "{url} przestanie otrzymywać zdarzenia.",
@@ -1920,9 +1934,10 @@
       "text": "Połącz z prepza własną platformę, np. stronę kariery.",
       "actions": [
         "Utwórz klucz API: odczytuje Twoje rozmowy i kandydatów i zaprasza kandydatów w Twoim imieniu.",
-        "Dodaj webhook: gdy kandydat skończy, jego wyniki trafiają na Twój adres HTTPS, podpisane.",
+        "Dodaj webhook: prepza powiadamia Twój adres HTTPS, z podpisem, gdy kandydat zaczyna lub kończy (wraz z wynikami), gdy zaproszenie do niego nie dotrze lub wygaśnie, gdy kandydat zostanie usunięty i gdy rozmowa jest gotowa.",
+        "Wyślij do webhooka zdarzenie testowe i sprawdź w dzienniku dostarczeń, jak poszła każda wysyłka.",
         "Usuń klucze i webhooki, których już nie używasz.",
-        "Otwórz dokumentację API ze wszystkimi endpointami i zdarzeniami."
+        "Otwórz dokumentację dla deweloperów ze wszystkimi endpointami i zdarzeniami oraz SDK."
       ],
       "tips": [
         "Nowy klucz i sekret webhooka są pokazywane tylko raz: skopiuj je od razu.",

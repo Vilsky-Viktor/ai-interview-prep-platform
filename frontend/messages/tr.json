@@ -1360,7 +1360,7 @@
     "removeKeyTitle": "Bu anahtar silinsin mi?",
     "removeKeyText": "“{name}” kullanan her şey hemen çalışmayı bırakır.",
     "webhooksTitle": "Webhook'lar",
-    "webhooksText": "Bir aday bitirdiğinde prepza sonuçlarını bu adreslere, her birinin gizli anahtarıyla imzalayarak gönderir.",
+    "webhooksText": "prepza bu adreslere bir aday başladığında, bitirdiğinde (sonuçlarıyla birlikte), daveti kendisine ulaşamadığında, davetinin süresi dolduğunda veya kaldırıldığında ve bir mülakat hazır olduğunda haber verir; her istek adresin gizli anahtarıyla imzalanır.",
     "noWebhooks": "Henüz webhook yok.",
     "failing": "Yanıt vermiyor: son sonuçlar ulaşmadı",
     "stopped": "Durduruldu: onu ekleyen üye artık sahip veya yönetici değil. Sonuç almaya devam etmek için yeniden ekleyin.",
@@ -1372,6 +1372,20 @@
     "copySecret": "Gizli anahtarı kopyala",
     "secretCopied": "Gizli anahtar kopyalandı",
     "added": "eklenme: {date}",
+    "sendTest": "Test olayı gönder",
+    "testSent": "Test olayı teslim edildi.",
+    "testNotTaken": "Uç nokta test olayını kabul etmedi. Nedenini teslim günlüğünde görebilirsiniz.",
+    "testFailed": "Test olayı gönderilemedi.",
+    "log": "Teslim günlüğü",
+    "logText": "{url} adresine gönderilen son 20 olay, en yenisi önce.",
+    "logEmpty": "Henüz bir şey gönderilmedi.",
+    "logFailed": "Teslim günlüğü yüklenemedi.",
+    "results": {
+      "delivered": "Teslim edildi",
+      "skipped": "Atlandı",
+      "answered": "Yanıt: {status}",
+      "error": "Başarısız: {error}"
+    },
     "removeWebhook": "Webhook'u sil",
     "removeWebhookTitle": "Bu webhook silinsin mi?",
     "removeWebhookText": "{url} artık olay almayacak.",
@@ -1919,9 +1933,10 @@
       "text": "Kariyer siteniz gibi kendi platformunuzu prepza'ya bağlayın.",
       "actions": [
         "Bir API anahtarı oluşturun: mülakatlarınızı ve adaylarınızı okur, sizin adınıza aday davet eder.",
-        "Bir webhook ekleyin: bir aday bitirdiğinde sonuçları imzalı olarak HTTPS adresinize gönderilir.",
+        "Bir webhook ekleyin: prepza, bir aday başladığında, bitirdiğinde (sonuçlarıyla birlikte), daveti kendisine ulaşamadığında, davetinin süresi dolduğunda veya kaldırıldığında ve bir mülakat hazır olduğunda HTTPS adresinize imzalı olarak haber verir.",
+        "Bir webhook'a test olayı gönderin ve her gönderimin sonucunu teslim günlüğünde görün.",
         "Artık kullanmadığınız anahtarları ve webhook'ları silin.",
-        "Tüm uç noktalar ve olaylar için API belgelerini açın."
+        "Tüm uç noktalar ve olaylar için geliştirici belgelerini ve SDK'yı açın."
       ],
       "tips": [
         "Yeni bir anahtar ve webhook'un gizli anahtarı yalnızca bir kez gösterilir: hemen kopyalayın.",

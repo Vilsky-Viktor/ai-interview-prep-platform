@@ -2,7 +2,7 @@
 title: "Cara menghubungkan tes keterampilan ke ATS-mu"
 seoTitle: "Cara Menghubungkan Tes Keterampilan ke ATS: Panduan Praktis"
 description: "Kirim tes keterampilan dan terima hasilnya lewat ATS-mu secara otomatis, biarkan manusia yang memutuskan, dan ketahui apa yang perlu dicek dulu."
-updated: "2026-10-14"
+updated: "2026-10-15"
 ---
 
 # Cara menghubungkan tes keterampilan ke ATS-mu
@@ -93,7 +93,7 @@ prepza terhubung dengan **Workable, Greenhouse, Teamtailor, Recruitee, dan Breez
 - **Hasil kembali ke ATS.** Saat kandidat selesai, prepza menambahkan catatan atau komentar padanya di ATS berisi nilainya, lulus atau tidak, tanda integritas jika ada (meninggalkan halaman, upaya menyalin, jawaban yang dipilih terlalu cepat untuk sempat membaca soal), dan tautan ke scorecard-nya beserta semua jawaban.
 - **Kegagalan tidak luput dari perhatian.** Jika kandidat tidak bisa diundang, misalnya karena kredit perusahaan habis, batas email tercapai, atau undangan dijeda sementara oleh prepza, semua anggota perusahaan mendapat notifikasi yang menyebut nama ATS-nya. Kandidat yang tidak terundang karena kredit habis akan diundang otomatis setelah isi ulang, dan kandidat yang menunggu di lowongan mana pun bisa diundang lagi dengan satu klik.
 - **Slack, jika kamu memakainya.** prepza bisa mengirim notifikasi, misalnya kandidat yang sudah selesai atau kandidat dari ATS yang tidak bisa diundang, ke channel Slack pilihanmu.
-- **Platformmu sendiri.** Jika ATS-mu tidak ada di daftar, [API](/api-docs) prepza memungkinkanmu mengundang kandidat dengan kunci API dan menerima webhook bertanda tangan saat kandidat selesai.
+- **Platformmu sendiri.** Jika ATS-mu tidak ada di daftar, [API](/api-docs) prepza memungkinkanmu mengundang kandidat dengan kunci API dan menerima webhook bertanda tangan saat kandidat mulai, selesai, atau dihapus, saat undangannya tidak sampai atau kedaluwarsa, dan saat wawancara siap.
 - **Data disimpan untuk jangka waktu tertentu.** Kandidat yang disimpan dari ATS dihapus setelah 365 hari, atau lebih awal bersama wawancara atau perusahaannya.
 
 Beberapa ATS memerlukan satu langkah di sisi mereka. Greenhouse, Teamtailor, dan Recruitee memintamu menambahkan webhook secara manual; dialog Petunjuk di prepza menampilkan alamatnya dan tempat menempel secret-nya. prepza mengatur sendiri webhook Workable dan Breezy HR.

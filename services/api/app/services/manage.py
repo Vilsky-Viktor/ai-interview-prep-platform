@@ -11,9 +11,17 @@ from app.constants.api import KEY_EXPIRY_MONTHS, MAX_KEYS, MAX_WEBHOOKS, KeyExpi
 from app.helpers.keys import add_months, expired, new_key
 from app.helpers.webhooks import new_secret, public_address
 from app.integrations import companies
-from app.models.api import ApiKey
-from app.schemas.manage import ApiSettingsOut, KeyOut, NewKeyOut, NewWebhookOut, WebhookOut
+from app.models.api import ApiKey, Webhook
+from app.schemas.manage import (
+    ApiSettingsOut,
+    KeyOut,
+    NewKeyOut,
+    NewWebhookOut,
+    WebhookAttemptOut,
+    WebhookOut,
+)
 from app.storage import keys, webhooks
+from app.storage import webhook_log as webhook_log_store
 
 
 async def overview(company_id: UUID) -> ApiSettingsOut:
@@ -99,3 +107,21 @@ async def create_webhook(company_id: UUID, url: str, user_id: str) -> NewWebhook
 async def remove_webhook(company_id: UUID, webhook_id: UUID) -> None:
     if not await webhooks.remove(company_id, webhook_id):
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Web hook not found")
+
+
+async def webhook(company_id: UUID, webhook_id: UUID) -> Webhook:
+    found = await webhooks.get(company_id, webhook_id)
+
+    if found is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Web hook not found")
+
+    return found
+
+
+async def webhook_log(company_id: UUID, webhook_id: UUID) -> list[WebhookAttemptOut]:
+    hook = await webhook(company_id, webhook_id)
+
+    return [
+        WebhookAttemptOut.model_validate(row, from_attributes=True)
+        for row in await webhook_log_store.latest(hook.id)
+    ]

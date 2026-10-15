@@ -2,7 +2,7 @@
 title: "How to connect skills tests to your ATS"
 seoTitle: "How to Connect Skills Tests to Your ATS: A Practical Guide"
 description: "Send skills tests and get results through your ATS automatically, keep people in charge of hiring decisions, and know what to check first."
-updated: "2026-10-14"
+updated: "2026-10-15"
 ---
 
 # How to connect skills tests to your ATS
@@ -93,7 +93,7 @@ prepza connects to **Workable, Greenhouse, Teamtailor, Recruitee and Breezy HR**
 - **Results back in the ATS.** When a candidate finishes, prepza adds a note or comment to them in the ATS with their grade, whether they passed, any integrity flags (leaving the page, copy attempts, answers picked too fast to have read the question) and a link to their scorecard with every answer.
 - **Failures don't go unnoticed.** If a candidate can't be invited, for example because the company is out of credits, has hit an email limit, or because prepza has paused invites for a while, every member of the company gets a notification naming the ATS. Candidates not invited for lack of credits are invited automatically after a top-up, and any job's waiting candidates can be invited again with one click.
 - **Slack, if you use it.** prepza can post notifications, such as a finished candidate or an ATS candidate who couldn't be invited, to a Slack channel you choose.
-- **Your own platform.** If your ATS isn't on the list, prepza's [API](/api-docs) lets you invite candidates with an API key and receive a signed web hook when a candidate finishes.
+- **Your own platform.** If your ATS isn't on the list, prepza's [API](/api-docs) lets you invite candidates with an API key and receive a signed web hook when a candidate starts, finishes, isn't reached, expires or is removed, and when an interview is ready.
 - **Data kept for a set time.** Candidates saved from an ATS are deleted after 365 days, or earlier with their interview or company.
 
 Some ATSs need a step on their side. Greenhouse, Teamtailor and Recruitee ask you to add a web hook by hand; prepza's Instructions dialog shows the address and where to paste its secret. prepza sets up Workable's and Breezy HR's web hooks itself.

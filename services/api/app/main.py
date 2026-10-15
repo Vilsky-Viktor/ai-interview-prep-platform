@@ -12,11 +12,9 @@ from prepza_common.sentry import init_sentry
 
 from app.config.settings import settings
 from app.constants.docs import API_DESCRIPTION, API_TITLE, API_VERSION
-from app.constants.events import CANDIDATE_FINISHED
 from app.integrations import webhooks as endpoints
 from app.integrations.redis import get_redis
-from app.routers import events, internal_accounts, manage, public, schedules
-from app.schemas.public import FinishedEvent
+from app.routers import events, internal_accounts, manage, public, schedules, webhook_docs
 from app.storage.db import ping as ping_database
 
 configure_logging()
@@ -43,6 +41,7 @@ app = FastAPI(
     description=API_DESCRIPTION,
     servers=[{"url": f"{settings.site_url}/api/v1"}],
     lifespan=lifespan,
+    webhooks=webhook_docs.webhooks,
     docs_url=None,
     redoc_url=None,
 )
@@ -55,12 +54,6 @@ app.include_router(manage.router)
 app.include_router(events.router)
 app.include_router(internal_accounts.router)
 app.include_router(schedules.router)
-
-
-@app.webhooks.post(CANDIDATE_FINISHED, summary="A candidate finished")
-def candidate_finished(event: FinishedEvent) -> None:
-    """Sent when a candidate finishes one of your interviews. The request body is a JSON object
-    with the event's `id`, its `type` (`candidate.finished`) and `data`, described below."""
 
 
 @app.get("/health", include_in_schema=False)

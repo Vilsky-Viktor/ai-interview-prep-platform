@@ -2,7 +2,7 @@
 title: "Cách kết nối bài kiểm tra kỹ năng với ATS"
 seoTitle: "Kết nối bài kiểm tra kỹ năng với ATS: hướng dẫn thực tế"
 description: "Tự động gửi bài kiểm tra kỹ năng và nhận kết quả qua ATS, để con người giữ quyền quyết định tuyển dụng và biết cần kiểm tra điều gì trước."
-updated: "2026-10-14"
+updated: "2026-10-15"
 ---
 
 # Cách kết nối bài kiểm tra kỹ năng với ATS
@@ -93,7 +93,7 @@ prepza kết nối với **Workable, Greenhouse, Teamtailor, Recruitee và Breez
 - **Kết quả trở lại ATS.** Khi ứng viên làm xong, prepza thêm một ghi chú hoặc bình luận vào hồ sơ của họ trong ATS, gồm điểm, có đạt hay không, các cảnh báo về tính trung thực (rời khỏi trang, cố sao chép, chọn câu trả lời quá nhanh để kịp đọc câu hỏi) và đường dẫn đến bảng điểm với mọi câu trả lời.
 - **Lỗi không bị bỏ qua.** Nếu không mời được một ứng viên, chẳng hạn vì công ty hết credit, chạm giới hạn email hoặc prepza đã tạm dừng lời mời, mọi thành viên của công ty đều nhận được thông báo ghi rõ tên ATS. Những ứng viên chưa được mời vì thiếu credit sẽ được mời tự động sau khi nạp credit, và các ứng viên đang chờ của bất kỳ tin tuyển dụng nào cũng có thể được mời lại chỉ với một cú nhấp.
 - **Slack, nếu bạn dùng.** prepza có thể đăng thông báo, chẳng hạn một ứng viên đã làm xong hoặc một ứng viên từ ATS không mời được, lên kênh Slack do bạn chọn.
-- **Nền tảng riêng của bạn.** Nếu ATS của bạn không có trong danh sách, [API](/api-docs) của prepza cho phép bạn mời ứng viên bằng khóa API và nhận một webhook có chữ ký khi ứng viên làm xong.
+- **Nền tảng riêng của bạn.** Nếu ATS của bạn không có trong danh sách, [API](/api-docs) của prepza cho phép bạn mời ứng viên bằng khóa API và nhận một webhook có chữ ký khi ứng viên bắt đầu, làm xong, không nhận được lời mời, hết hạn lời mời hoặc bị xóa khỏi buổi phỏng vấn, và khi một buổi phỏng vấn sẵn sàng.
 - **Dữ liệu được lưu trong thời hạn xác định.** Ứng viên được lưu từ ATS sẽ bị xóa sau 365 ngày, hoặc sớm hơn cùng với buổi phỏng vấn hoặc công ty của họ.
 
 Một số ATS cần một bước ở phía họ. Greenhouse, Teamtailor và Recruitee yêu cầu bạn thêm webhook thủ công; hộp thoại Hướng dẫn của prepza hiển thị địa chỉ và chỗ dán khóa bí mật. prepza tự thiết lập webhook cho Workable và Breezy HR.

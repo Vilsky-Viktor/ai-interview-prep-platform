@@ -11,13 +11,15 @@ from app.constants.events import (
     CANDIDATE_FINISHED,
     CANDIDATE_INVITED,
     CANDIDATE_REMOVED,
+    CANDIDATE_STARTED,
+    CANDIDATE_UNDELIVERED,
 )
 from app.constants.invites import NOT_STARTED, InviteStatus
 from app.helpers.candidates import new_hold_key
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
 from app.models.outbox import OutboxEvent
-from app.storage import processed_events
+from app.storage import candidate_events, processed_events
 from app.storage.db import Session
 
 
@@ -184,6 +186,7 @@ async def start(invite_id: uuid.UUID, user_id: str, name: str | None = None) -> 
 
         if stored.status in NOT_STARTED:
             stored.status = InviteStatus.IN_PROCESS
+            await candidate_events.add(session, CANDIDATE_STARTED, stored.id, stored.interview_id)
 
         await session.commit()
 
@@ -201,11 +204,12 @@ async def mark_undelivered(invite_id: uuid.UUID, notice: dict) -> None:
                 CandidateInvite.status == InviteStatus.INVITED,
             )
             .values(status=InviteStatus.UNDELIVERED)
-            .returning(CandidateInvite.id)
+            .returning(CandidateInvite.interview_id)
         )
 
         if marked is not None:
             outbox.add(session, OutboxEvent, NOTIFICATION_REQUESTED, notice)
+            await candidate_events.add(session, CANDIDATE_UNDELIVERED, invite_id, marked)
 
         await session.commit()
 
@@ -255,6 +259,7 @@ async def remove(invite: CandidateInvite, company_id) -> str | None:
             {
                 "company_id": str(company_id),
                 "interview_id": str(invite.interview_id),
+                "candidate_invite_id": str(invite.id),
                 "email": invite.email,
             },
         )

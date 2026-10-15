@@ -1365,7 +1365,7 @@
     "removeKeyTitle": "Burahin ang key na ito?",
     "removeKeyText": "Agad na hihinto ang anumang gumagamit ng “{name}”.",
     "webhooksTitle": "Mga webhook",
-    "webhooksText": "Kapag natapos ang isang aplikante, ipinapadala ng prepza ang mga resulta niya sa mga address na ito, naka-sign gamit ang secret ng bawat isa.",
+    "webhooksText": "Sinasabihan ng prepza ang mga address na ito kapag nagsimula, natapos (kasama ang mga resulta niya), hindi naabot ng imbitasyon, nag-expire ang imbitasyon, o tinanggal ang isang aplikante, at kapag handa na ang isang interview; naka-sign ang bawat request gamit ang secret ng address.",
     "noWebhooks": "Wala pang webhook.",
     "failing": "Hindi sumasagot: hindi ito naabot ng mga huling resulta",
     "stopped": "Huminto: hindi na owner o admin ang member na nagdagdag nito. Idagdag ulit para patuloy na makatanggap ng mga resulta.",
@@ -1377,6 +1377,20 @@
     "copySecret": "Kopyahin ang secret",
     "secretCopied": "Nakopya ang secret",
     "added": "idinagdag noong {date}",
+    "sendTest": "Magpadala ng test event",
+    "testSent": "Naipadala ang test event.",
+    "testNotTaken": "Hindi tinanggap ng endpoint ang test event. Nasa delivery log nito kung bakit.",
+    "testFailed": "Hindi maipadala ang test event.",
+    "log": "Delivery log",
+    "logText": "Ang huling 20 event na ipinadala sa {url}, pinakabago muna.",
+    "logEmpty": "Wala pang naipadala.",
+    "logFailed": "Hindi ma-load ang delivery log.",
+    "results": {
+      "delivered": "Naihatid",
+      "skipped": "Nilaktawan",
+      "answered": "Sumagot ng {status}",
+      "error": "Nabigo: {error}"
+    },
     "removeWebhook": "Burahin ang webhook",
     "removeWebhookTitle": "Burahin ang webhook na ito?",
     "removeWebhookText": "Hindi na makakatanggap ng mga event ang {url}.",
@@ -1924,9 +1938,10 @@
       "text": "Ikonekta ang sarili mong platform, gaya ng iyong careers site, sa prepza.",
       "actions": [
         "Gumawa ng API key: binabasa nito ang iyong mga interview at aplikante at nag-iimbita ng mga aplikante bilang ikaw.",
-        "Magdagdag ng webhook: kapag may aplikanteng natapos, ipinapadala ang kanyang resulta sa iyong HTTPS address, may pirma.",
+        "Magdagdag ng webhook: sinasabihan ng prepza ang iyong HTTPS address, may pirma, kapag nagsimula, natapos (kasama ang resulta), hindi naabot ng imbitasyon, nag-expire ang imbitasyon, o tinanggal ang isang aplikante, at kapag handa na ang isang interview.",
+        "Padalhan ng test event ang isang webhook, at tingnan sa delivery log nito kung ano ang nangyari sa bawat padala.",
         "Burahin ang mga key at webhook na hindi mo na ginagamit.",
-        "Buksan ang API docs para sa bawat endpoint at event."
+        "Buksan ang dokumentasyon para sa mga developer para sa bawat endpoint at event, at ang SDK."
       ],
       "tips": [
         "Isang beses lang ipinapakita ang bagong key at ang secret ng webhook: kopyahin agad.",

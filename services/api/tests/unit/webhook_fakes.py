@@ -25,6 +25,7 @@ def endpoints(monkeypatch, companies_api):
         "unresolved": set(),
         "retries": {},
         "told": [],
+        "log": [],
     }
 
     def hook(url, secret="whsec_a", maker="u1"):
@@ -99,6 +100,10 @@ def endpoints(monkeypatch, companies_api):
     async def remove_retry(webhook_id, event_id):
         state["retries"].pop((webhook_id, event_id))
 
+    async def log(webhook_id, event_id, event_type, ok, result):
+        state["log"].append((webhook_id, event_type, ok, result))
+
+    monkeypatch.setattr(delivery.webhook_log, "add", log)
     monkeypatch.setattr(delivery.webhooks, "of_company", of_company)
     monkeypatch.setattr(delivery.webhooks, "delivered", delivered)
     monkeypatch.setattr(delivery.webhooks, "mark_delivered", mark_delivered)

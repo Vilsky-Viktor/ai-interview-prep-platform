@@ -6,6 +6,15 @@ export function formatDate(iso: string, locale: string) {
   )
 }
 
+/** A moment as a medium date and a short time in the language asked, in the runtime's time zone
+ * (render it in <time suppressHydrationWarning>, like formatDate). */
+export function formatDateTime(iso: string, locale: string) {
+  return new Intl.DateTimeFormat(locale, {
+    dateStyle: "medium",
+    timeStyle: "short",
+  }).format(new Date(iso))
+}
+
 /** A calendar day ("2026-10-08") as a medium date in the language asked: the same day in every
  * time zone. */
 export function formatDay(day: string, locale: string) {

@@ -2,7 +2,7 @@
 title: "Beceri testleri ATS'nize nasıl bağlanır"
 seoTitle: "Beceri testlerini ATS'ye bağlamak: pratik bir rehber"
 description: "Beceri testlerini ATS'niz üzerinden otomatik gönderin ve sonuçları alın, işe alım kararlarını insanlarda bırakın ve önce neyi kontrol edeceğinizi öğrenin."
-updated: "2026-10-14"
+updated: "2026-10-15"
 ---
 
 # Beceri testleri ATS'nize nasıl bağlanır
@@ -93,7 +93,7 @@ prepza **Workable, Greenhouse, Teamtailor, Recruitee ve Breezy HR**'a bağlanır
 - **Sonuçlar ATS'ye geri döner.** Aday bitirdiğinde prepza, ATS'de adaya notunu, geçip geçmediğini, varsa dürüstlük uyarılarını (sayfadan ayrılma, kopyalama girişimleri, soruyu okumaya yetmeyecek kadar hızlı seçilen cevaplar) ve tüm cevapları içeren değerlendirme kartının bağlantısını içeren bir not veya yorum ekler.
 - **Başarısızlıklar gözden kaçmaz.** Bir aday davet edilemezse, örneğin şirketin kredisi bittiği, e-posta sınırına ulaştığı veya prepza davetleri duraklattığı için, şirketin tüm üyeleri ATS'nin adını belirten bir bildirim alır. Kredi yetersizliği yüzünden davet edilemeyen adaylar kredi yüklendikten sonra otomatik olarak davet edilir ve herhangi bir ilanın bekleyen adayları tek tıkla yeniden davet edilebilir.
 - **Kullanıyorsanız Slack.** prepza, testi bitiren bir aday ya da davet edilemeyen bir ATS adayı gibi bildirimleri seçtiğiniz bir Slack kanalına gönderebilir.
-- **Kendi platformunuz.** ATS'niz listede yoksa prepza'nın [API](/api-docs)'si, bir API anahtarıyla aday davet etmenize ve bir aday bitirdiğinde imzalı bir webhook almanıza olanak tanır.
+- **Kendi platformunuz.** ATS'niz listede yoksa prepza'nın [API](/api-docs)'si, bir API anahtarıyla aday davet etmenize ve bir aday başladığında, bitirdiğinde, daveti kendisine ulaşamadığında, davetinin süresi dolduğunda veya kaldırıldığında ve bir mülakat hazır olduğunda imzalı bir webhook almanıza olanak tanır.
 - **Veriler belirli bir süre saklanır.** Bir ATS'den kaydedilen adaylar 365 gün sonra ya da daha önce, mülakatları veya şirketleriyle birlikte silinir.
 
 Bazı ATS'ler kendi tarafında bir adım gerektirir. Greenhouse, Teamtailor ve Recruitee webhook'u elle eklemenizi ister; prepza'nın Talimatlar penceresi adresi ve gizli anahtarın nereye yapıştırılacağını gösterir. Workable ve Breezy HR'ın webhook'larını prepza kendisi kurar.

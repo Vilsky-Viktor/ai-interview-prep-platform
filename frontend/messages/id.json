@@ -1361,7 +1361,7 @@
     "removeKeyTitle": "Hapus kunci ini?",
     "removeKeyText": "Semua yang memakai “{name}” akan langsung berhenti berfungsi.",
     "webhooksTitle": "Webhook",
-    "webhooksText": "Saat kandidat selesai, prepza mengirim hasilnya ke alamat-alamat ini, ditandatangani dengan secret masing-masing.",
+    "webhooksText": "prepza memberi tahu alamat-alamat ini saat kandidat mulai, selesai (beserta hasilnya), atau dihapus, saat undangannya tidak sampai atau kedaluwarsa, dan saat wawancara siap. Setiap permintaan ditandatangani dengan secret alamat tersebut.",
     "noWebhooks": "Belum ada webhook.",
     "failing": "Tidak merespons: hasil terbaru tidak sampai ke alamat ini",
     "stopped": "Dihentikan: anggota yang menambahkannya bukan lagi pemilik atau admin. Tambahkan lagi agar tetap menerima hasil.",
@@ -1373,6 +1373,20 @@
     "copySecret": "Salin secret",
     "secretCopied": "Secret disalin",
     "added": "ditambahkan {date}",
+    "sendTest": "Kirim event uji",
+    "testSent": "Event uji berhasil terkirim.",
+    "testNotTaken": "Endpoint tidak menerima event uji. Alasannya ada di log pengiriman.",
+    "testFailed": "Tidak dapat mengirim event uji.",
+    "log": "Log pengiriman",
+    "logText": "20 event terakhir yang dikirim ke {url}, dari yang terbaru.",
+    "logEmpty": "Belum ada yang dikirim.",
+    "logFailed": "Tidak dapat memuat log pengiriman.",
+    "results": {
+      "delivered": "Terkirim",
+      "skipped": "Dilewati",
+      "answered": "Dijawab {status}",
+      "error": "Gagal: {error}"
+    },
     "removeWebhook": "Hapus webhook",
     "removeWebhookTitle": "Hapus webhook ini?",
     "removeWebhookText": "{url} tidak akan menerima event lagi.",
@@ -1920,9 +1934,10 @@
       "text": "Hubungkan platformmu sendiri, seperti situs karier, ke prepza.",
       "actions": [
         "Buat kunci API: kunci ini membaca wawancara dan kandidatmu serta mengundang kandidat atas namamu.",
-        "Tambahkan webhook: saat kandidat selesai, hasilnya dikirim ke alamat HTTPS-mu, dengan tanda tangan.",
+        "Tambahkan webhook: prepza memberi tahu alamat HTTPS-mu, dengan tanda tangan, saat kandidat mulai, selesai (beserta hasilnya), atau dihapus, saat undangannya tidak sampai atau kedaluwarsa, dan saat wawancara siap.",
+        "Kirim event uji ke webhook, dan lihat hasil setiap pengiriman di log pengirimannya.",
         "Hapus kunci dan webhook yang tidak lagi kamu pakai.",
-        "Buka dokumentasi API untuk setiap endpoint dan event."
+        "Buka dokumentasi pengembang untuk setiap endpoint dan event, serta SDK."
       ],
       "tips": [
         "Kunci baru dan secret webhook hanya ditampilkan sekali: segera salin.",

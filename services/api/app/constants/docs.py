@@ -69,11 +69,16 @@ a work email on that domain, prepza reviews the company and adds the verified ba
 
 # Web hooks
 
-Owners and admins can add up to 5 web hook endpoints on the same API page. When a candidate
-finishes an interview, prepza sends a `candidate.finished` event as a `POST` request to each
-endpoint. A candidate's results never change after they finish: a fixed question applies only to
-candidates who start after the fix. Endpoints must use HTTPS and be reachable from the public
-internet.
+Owners and admins can add up to 5 web hook endpoints on the same API page. Each endpoint gets
+every event below as a `POST` request: a candidate started, finished (with their results), wasn't
+reached by the invitation email, expired or was removed, and an interview is ready. Ignore the
+types you don't need. A candidate's results never change after they finish: a fixed question
+applies only to candidates who start after the fix. Endpoints must use HTTPS and be reachable
+from the public internet.
+
+On the API page, **send test event** sends a signed `test` event to an endpoint at once, and the
+**delivery log** shows its latest 20 sends: each event's type, when, and whether it was
+delivered, the status the endpoint answered, or what went wrong.
 
 Every request carries a `Prepza-Signature` header in the form `t=<timestamp>,v1=<signature>`. The
 signature is the hex-encoded HMAC-SHA256 of `<timestamp>.<raw request body>`, computed with the

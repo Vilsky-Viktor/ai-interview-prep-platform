@@ -116,7 +116,7 @@ Automaatikaks ilma AI-ta on prepzal API, mida kirjeldab selle [arendajate dokume
 
 1. Omanik või administraator avab ettevõtte vahekaardi **Integratsioonid**, siis **API**, ja valib **Uus võti**. Pane sellele nimeks platvorm, mis seda kasutama hakkab, ja vali, millal see aegub. Võtit näidatakse ainult üks kord; hoia seda turvalises kohas.
 2. Sinu platvorm saadab selle võtmega päringuid: näitab ettevõtte intervjuusid, näitab või loeb kandidaate koos nende hinde, läbimise ja aususe märgetega ning kutsub kandidaadi.
-3. Lisa **webhook**: aadress sinu platvormil, mida prepza kutsub allkirjastatult kohe, kui kandidaat lõpetab, et sa ei peaks pidevalt järele küsima.
+3. Lisa **webhook**: aadress sinu platvormil, mida prepza kutsub allkirjastatult kui kandidaat alustab, lõpetab, kutse ei jõua temani, tema kutse aegub või ta eemaldatakse, ning kui intervjuu on valmis, et sa ei peaks pidevalt järele küsima. API lehelt saad sellele saata testsündmuse ja näha selle saatmislogi.
 
 Iga kandidaadiga tuleb kaasa link tema täielikele tulemustele prepzas ja, kuni ta pole lõpetanud, tema enda kutselink, nii et sinu platvorm saab selle soovi korral saata oma sõnumis. Kui sinu platvorm juba teab, kes kandidaat on, kutsu ta ilma sisselogimiseta: prepza ei saada e-kirju ja kandidaat teeb intervjuu lingi kaudu ilma prepzasse sisse logimata, nii et saada link ainult talle. Kutse võib ka viia kandidaadi lõpetamislehel oleva nupuga tagasi sinu saidile ning määrata heleda või tumeda teema sinu ettevõtte värvides. Sinu enda leht saab prepza SDK abil intervjuu ise kuvada. Kandidaatide tagasi suunamiseks ja intervjuu kuvamiseks sinu saidil peab ettevõte olema kinnitatud ning see toimib ainult tema veebisaidi domeenil.
 

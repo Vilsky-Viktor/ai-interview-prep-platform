@@ -40,6 +40,14 @@ async def add(
     return hook
 
 
+async def get(company_id: uuid.UUID, webhook_id: uuid.UUID) -> Webhook | None:
+    """The company's web hook, or None for one of another company."""
+    async with Session() as session:
+        return await session.scalar(
+            select(Webhook).where(Webhook.company_id == company_id, Webhook.id == webhook_id)
+        )
+
+
 async def remove(company_id: uuid.UUID, webhook_id: uuid.UUID) -> bool:
     """Whether there was such a web hook of the company; what it got goes with it."""
     query = delete(Webhook).where(Webhook.company_id == company_id, Webhook.id == webhook_id)

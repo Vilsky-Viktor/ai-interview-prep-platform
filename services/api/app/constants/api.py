@@ -60,3 +60,6 @@ INVITE_LINK = "{site}/invite/{token}"
 
 # The API page, as a notification opens it.
 API_PAGE = "/companies/{company_id}/integrations/api"
+
+# Each web hook's delivery log keeps its latest sends.
+WEBHOOK_LOG_KEPT = 20

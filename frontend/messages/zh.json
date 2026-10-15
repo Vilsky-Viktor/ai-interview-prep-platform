@@ -1352,7 +1352,7 @@
     "removeKeyTitle": "删除此密钥？",
     "removeKeyText": "所有使用“{name}”的地方都会立即停止工作。",
     "webhooksTitle": "Webhook",
-    "webhooksText": "候选人完成后，prepza 会将其结果发送到这些地址，并用各自的签名密钥签名。",
+    "webhooksText": "当候选人开始、完成（附带结果）、邀请未能送达、邀请过期或被移除时，以及面试准备就绪时，prepza 会通知这些地址，每个请求都用该地址的签名密钥签名。",
     "noWebhooks": "还没有 Webhook。",
     "failing": "无响应：最近的结果未能送达",
     "stopped": "已停止：添加它的成员已不再是所有者或管理员。请重新添加，以继续接收结果。",
@@ -1364,6 +1364,20 @@
     "copySecret": "复制签名密钥",
     "secretCopied": "签名密钥已复制",
     "added": "添加于 {date}",
+    "sendTest": "发送测试事件",
+    "testSent": "测试事件已送达。",
+    "testNotTaken": "该端点未接受测试事件，原因见其投递日志。",
+    "testFailed": "无法发送测试事件。",
+    "log": "投递日志",
+    "logText": "最近发送到 {url} 的 20 个事件，最新的在前。",
+    "logEmpty": "还没有发送过任何事件。",
+    "logFailed": "无法加载投递日志。",
+    "results": {
+      "delivered": "已送达",
+      "skipped": "已跳过",
+      "answered": "返回 {status}",
+      "error": "失败：{error}"
+    },
     "removeWebhook": "删除 Webhook",
     "removeWebhookTitle": "删除此 Webhook？",
     "removeWebhookText": "{url} 将不再接收事件。",
@@ -1901,9 +1915,10 @@
       "text": "将你自己的平台（例如招聘官网）连接到 prepza。",
       "actions": [
         "创建 API 密钥：以你的身份读取面试和候选人，并邀请候选人。",
-        "添加 Webhook：候选人完成面试后，结果会签名发送到你的 HTTPS 地址。",
+        "添加 Webhook：当候选人开始、完成（附带结果）、邀请未能送达、邀请过期或被移除时，以及面试准备就绪时，prepza 会向你的 HTTPS 地址发送带签名的通知。",
+        "向 Webhook 发送测试事件，并在投递日志中查看每次发送的结果。",
         "删除不再使用的密钥和 Webhook。",
-        "打开 API 文档，查看所有端点和事件。"
+        "打开开发者文档，查看所有端点和事件，以及 SDK。"
       ],
       "tips": [
         "新密钥和 Webhook 的签名密钥只显示一次：请立即复制。",

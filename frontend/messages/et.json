@@ -1365,7 +1365,7 @@
     "removeKeyTitle": "Kas kustutada see võti?",
     "removeKeyText": "Kõik, mis kasutab võtit „{name}“, lakkab kohe töötamast.",
     "webhooksTitle": "Webhookid",
-    "webhooksText": "Kui kandidaat lõpetab, saadab prepza tema tulemused nendele aadressidele, allkirjastatuna iga aadressi saladusega.",
+    "webhooksText": "prepza teavitab neid aadresse, kui kandidaat alustab, lõpetab (koos tulemustega), kutse ei jõua temani, tema kutse aegub või ta eemaldatakse, ning kui intervjuu on valmis; iga päring on allkirjastatud aadressi saladusega.",
     "noWebhooks": "Webhooke veel pole.",
     "failing": "Ei vasta: viimased tulemused ei jõudnud kohale",
     "stopped": "Peatatud: selle lisanud liige pole enam omanik ega administraator. Lisa see uuesti, et tulemusi edasi saada.",
@@ -1377,6 +1377,20 @@
     "copySecret": "Kopeeri saladus",
     "secretCopied": "Saladus kopeeritud",
     "added": "lisatud {date}",
+    "sendTest": "Saada testsündmus",
+    "testSent": "Testsündmus jõudis kohale.",
+    "testNotTaken": "Otspunkt ei võtnud testsündmust vastu. Põhjus on kirjas saatmislogis.",
+    "testFailed": "Testsündmust ei õnnestunud saata.",
+    "log": "Saatmislogi",
+    "logText": "Viimased 20 aadressile {url} saadetud sündmust, uusimad eespool.",
+    "logEmpty": "Midagi pole veel saadetud.",
+    "logFailed": "Saatmislogi laadimine ebaõnnestus.",
+    "results": {
+      "delivered": "Kohale jõudnud",
+      "skipped": "Vahele jäetud",
+      "answered": "Vastas {status}",
+      "error": "Ebaõnnestus: {error}"
+    },
     "removeWebhook": "Kustuta webhook",
     "removeWebhookTitle": "Kas kustutada see webhook?",
     "removeWebhookText": "{url} ei saa enam sündmusi.",
@@ -1924,9 +1938,10 @@
       "text": "Ühenda prepzaga oma platvorm, näiteks karjäärileht.",
       "actions": [
         "Loo API-võti: see loeb sinu intervjuusid ja kandidaate ning kutsub kandidaate sinu nimel.",
-        "Lisa webhook: kui kandidaat lõpetab, saadetakse tema tulemused allkirjastatult sinu HTTPS-aadressile.",
+        "Lisa webhook: prepza teavitab allkirjastatult sinu HTTPS-aadressi, kui kandidaat alustab, lõpetab (koos tulemustega), kutse ei jõua temani, tema kutse aegub või ta eemaldatakse, ning kui intervjuu on valmis.",
+        "Saada webhookile testsündmus ja vaata saatmislogist, kuidas iga saatmine läks.",
         "Kustuta võtmed ja webhookid, mida enam ei kasuta.",
-        "Ava API dokumentatsioon kõigi otspunktide ja sündmustega."
+        "Ava arendajate dokumentatsioon kõigi otspunktide ja sündmustega ning SDK."
       ],
       "tips": [
         "Uut võtit ja webhooki saladust näidatakse ainult üks kord: kopeeri need kohe.",

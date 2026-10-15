@@ -2,7 +2,7 @@
 title: "So verbindest du Fachtests mit deinem ATS"
 seoTitle: "Fachtests mit dem ATS verbinden: ein Praxisleitfaden"
 description: "Fachtests automatisch über dein ATS versenden und Ergebnisse dort erhalten, Entscheidungen bei Menschen lassen und wissen, was du zuerst prüfen solltest."
-updated: "2026-10-14"
+updated: "2026-10-15"
 ---
 
 # So verbindest du Fachtests mit deinem ATS
@@ -93,7 +93,7 @@ prepza verbindet sich mit **Workable, Greenhouse, Teamtailor, Recruitee und Bree
 - **Ergebnisse zurück im ATS.** Wenn ein Kandidat fertig ist, fügt prepza ihm im ATS eine Notiz oder einen Kommentar hinzu, mit seinem Ergebnis, ob er bestanden hat, Hinweisen zur Integrität (Verlassen der Seite, Kopierversuche, Antworten, die zu schnell gewählt wurden, um die Frage gelesen zu haben) und einem Link zu seiner Auswertung mit allen Antworten.
 - **Fehler bleiben nicht unbemerkt.** Kann ein Kandidat nicht eingeladen werden, etwa weil das Unternehmen keine Credits mehr hat, ein E-Mail-Limit erreicht hat oder weil prepza Einladungen vorübergehend pausiert hat, erhalten alle Mitglieder des Unternehmens eine Benachrichtigung mit dem Namen des ATS. Kandidaten, die mangels Credits nicht eingeladen wurden, werden nach einer Aufladung automatisch eingeladen, und die wartenden Kandidaten jeder Stelle lassen sich mit einem Klick erneut einladen.
 - **Slack, wenn du es nutzt.** prepza kann Benachrichtigungen, etwa über einen Kandidaten, der fertig ist, oder einen ATS-Kandidaten, der nicht eingeladen werden konnte, in einem Slack-Kanal deiner Wahl posten.
-- **Deine eigene Plattform.** Steht dein ATS nicht auf der Liste, kannst du über die [API](/api-docs) von prepza Kandidaten mit einem API-Schlüssel einladen und einen signierten Webhook erhalten, wenn ein Kandidat fertig ist.
+- **Deine eigene Plattform.** Steht dein ATS nicht auf der Liste, kannst du über die [API](/api-docs) von prepza Kandidaten mit einem API-Schlüssel einladen und einen signierten Webhook erhalten, wenn ein Kandidat beginnt, fertig ist, seine Einladung nicht zugestellt werden kann oder abläuft oder er entfernt wird, und wenn ein Interview bereit ist.
 - **Daten für eine feste Zeit gespeichert.** Aus einem ATS übernommene Kandidaten werden nach 365 Tagen gelöscht, oder früher zusammen mit ihrem Interview oder Unternehmen.
 
 Manche ATS brauchen einen Schritt auf ihrer Seite. Bei Greenhouse, Teamtailor und Recruitee fügst du einen Webhook von Hand hinzu; der Dialog Anleitung in prepza zeigt die Adresse und wo du das Secret einfügst. Die Webhooks von Workable und Breezy HR richtet prepza selbst ein.

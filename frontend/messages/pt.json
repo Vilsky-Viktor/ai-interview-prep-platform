@@ -1357,7 +1357,7 @@
     "removeKeyTitle": "Excluir esta chave?",
     "removeKeyText": "Tudo o que usa “{name}” para de funcionar imediatamente.",
     "webhooksTitle": "Webhooks",
-    "webhooksText": "Quando um candidato termina, a prepza envia os resultados dele para estes endereços, assinados com o segredo de cada um.",
+    "webhooksText": "A prepza avisa estes endereços quando um candidato começa ou termina (com os resultados), quando o convite não chega até ele ou expira, quando ele é removido e quando uma entrevista fica pronta. Cada requisição é assinada com o segredo do endereço.",
     "noWebhooks": "Nenhum webhook ainda.",
     "failing": "Não responde: os resultados recentes não chegaram",
     "stopped": "Parado: o membro que o adicionou não é mais proprietário nem administrador. Adicione-o de novo para continuar recebendo resultados.",
@@ -1369,6 +1369,20 @@
     "copySecret": "Copiar segredo",
     "secretCopied": "Segredo copiado",
     "added": "adicionado em {date}",
+    "sendTest": "Enviar evento de teste",
+    "testSent": "O evento de teste foi entregue.",
+    "testNotTaken": "O endpoint não aceitou o evento de teste. O registro de entregas mostra o motivo.",
+    "testFailed": "Não foi possível enviar o evento de teste.",
+    "log": "Registro de entregas",
+    "logText": "Os últimos 20 eventos enviados para {url}, do mais recente ao mais antigo.",
+    "logEmpty": "Nada enviado ainda.",
+    "logFailed": "Não foi possível carregar o registro de entregas.",
+    "results": {
+      "delivered": "Entregue",
+      "skipped": "Ignorado",
+      "answered": "Respondeu {status}",
+      "error": "Falhou: {error}"
+    },
     "removeWebhook": "Excluir webhook",
     "removeWebhookTitle": "Excluir este webhook?",
     "removeWebhookText": "{url} deixa de receber eventos.",
@@ -1916,9 +1930,10 @@
       "text": "Conecte sua própria plataforma, como seu site de carreiras, à prepza.",
       "actions": [
         "Crie uma chave de API: ela lê suas entrevistas e candidatos e convida candidatos em seu nome.",
-        "Adicione um webhook: quando um candidato termina, os resultados dele vão assinados para o seu endereço HTTPS.",
+        "Adicione um webhook: a prepza avisa o seu endereço HTTPS, com assinatura, quando um candidato começa ou termina (com os resultados), quando o convite não chega até ele ou expira, quando ele é removido e quando uma entrevista fica pronta.",
+        "Envie um evento de teste a um webhook e veja no registro de entregas o resultado de cada envio.",
         "Exclua as chaves e os webhooks que você não usa mais.",
-        "Abra a documentação da API com cada endpoint e evento."
+        "Abra a documentação para desenvolvedores com cada endpoint e evento, e o SDK."
       ],
       "tips": [
         "Uma chave nova e o segredo de um webhook aparecem só uma vez: copie-os na hora.",

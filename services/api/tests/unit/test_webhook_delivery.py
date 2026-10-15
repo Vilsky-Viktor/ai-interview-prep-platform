@@ -23,7 +23,7 @@ FINISHED = {
 
 
 def finish(event_id="e1"):
-    asyncio.run(delivery.finished(FINISHED, event_id))
+    asyncio.run(delivery.candidate_event("candidate.finished", FINISHED, event_id))
 
 
 def test_each_web_hook_gets_the_interview_and_candidate_signed(endpoints):

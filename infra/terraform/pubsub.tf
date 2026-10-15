@@ -27,9 +27,10 @@ resource "google_pubsub_subscription" "dead_letter" {
 # a filter replaces the subscription, dropping the messages it still holds: apply when its backlog
 # is empty. Funnel events go only to BigQuery (analytics.tf).
 # Pub/Sub caps a filter at 256 bytes: each type adds 24 bytes plus its name. A type ending in ".*"
-# matches every type with that prefix (hasPrefix): notifications takes all "candidate." events
-# that way, as listing them one by one outgrew the cap, and ignores the ones it doesn't handle.
-# notifications' filter is 236 bytes, ats' 235, companies' 167, api's 118, the assistant's 35. A
+# matches every type with that prefix (hasPrefix): notifications and api take all "candidate."
+# events that way, as listing them one by one outgrew the cap, and ignore the ones they don't
+# handle. notifications' filter is 236 bytes, ats' 235, companies' 167, api's 118, the
+# assistant's 35. A
 # new consumer's subscription is created on apply and gets only the events published after that.
 locals {
   consumes = {
@@ -37,7 +38,7 @@ locals {
     companies     = ["generation.completed", "generation.failed", "generation.cancelled", "interview.finished"]
     notifications = ["notification.requested", "candidate.*", "member.invited", "report.shared", "contact.sent", "company.deleted"]
     ats           = ["candidate.finished", "candidate.removed", "interview.ready", "interview.deleted", "company.deleted", "credits.added"]
-    api           = ["candidate.finished", "candidate.removed", "company.deleted"]
+    api           = ["candidate.*", "interview.ready", "company.deleted"]
     assistant     = ["company.deleted"]
   }
 }

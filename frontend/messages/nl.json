@@ -1357,7 +1357,7 @@
     "removeKeyTitle": "Deze sleutel verwijderen?",
     "removeKeyText": "Alles wat “{name}” gebruikt, werkt meteen niet meer.",
     "webhooksTitle": "Webhooks",
-    "webhooksText": "Als een kandidaat klaar is, stuurt prepza de resultaten naar deze adressen, ondertekend met het secret van elk adres.",
+    "webhooksText": "prepza laat deze adressen weten wanneer een kandidaat begint of klaar is (met de resultaten), wanneer de uitnodiging een kandidaat niet bereikt of verloopt, wanneer een kandidaat wordt verwijderd en wanneer een interview klaarstaat. Elk verzoek is ondertekend met het secret van het adres.",
     "noWebhooks": "Nog geen webhooks.",
     "failing": "Reageert niet: recente resultaten zijn niet aangekomen",
     "stopped": "Gestopt: het lid dat hem heeft toegevoegd is geen eigenaar of beheerder meer. Voeg hem opnieuw toe om resultaten te blijven ontvangen.",
@@ -1369,6 +1369,20 @@
     "copySecret": "Secret kopiëren",
     "secretCopied": "Secret gekopieerd",
     "added": "toegevoegd op {date}",
+    "sendTest": "Testgebeurtenis versturen",
+    "testSent": "De testgebeurtenis is afgeleverd.",
+    "testNotTaken": "Het endpoint heeft de testgebeurtenis niet aangenomen. In het afleverlogboek staat waarom.",
+    "testFailed": "Kan de testgebeurtenis niet versturen.",
+    "log": "Afleverlogboek",
+    "logText": "De laatste 20 gebeurtenissen die naar {url} zijn verstuurd, nieuwste eerst.",
+    "logEmpty": "Nog niets verstuurd.",
+    "logFailed": "Kan het afleverlogboek niet laden.",
+    "results": {
+      "delivered": "Afgeleverd",
+      "skipped": "Overgeslagen",
+      "answered": "Antwoordde {status}",
+      "error": "Mislukt: {error}"
+    },
     "removeWebhook": "Webhook verwijderen",
     "removeWebhookTitle": "Deze webhook verwijderen?",
     "removeWebhookText": "{url} ontvangt geen gebeurtenissen meer.",
@@ -1916,9 +1930,10 @@
       "text": "Koppel je eigen platform, zoals je vacaturesite, aan prepza.",
       "actions": [
         "Maak een API-sleutel aan: die leest je interviews en kandidaten en nodigt namens jou kandidaten uit.",
-        "Voeg een webhook toe: als een kandidaat klaar is, gaan de resultaten ondertekend naar je HTTPS-adres.",
+        "Voeg een webhook toe: prepza laat je HTTPS-adres ondertekend weten wanneer een kandidaat begint of klaar is (met de resultaten), wanneer de uitnodiging een kandidaat niet bereikt of verloopt, wanneer een kandidaat wordt verwijderd en wanneer een interview klaarstaat.",
+        "Stuur een webhook een testgebeurtenis en zie in het afleverlogboek hoe elke verzending is verlopen.",
         "Verwijder de sleutels en webhooks die je niet meer gebruikt.",
-        "Open de API-documentatie voor elk endpoint en elke gebeurtenis."
+        "Open de ontwikkelaarsdocumentatie voor elk endpoint en elke gebeurtenis, en de SDK."
       ],
       "tips": [
         "Een nieuwe sleutel en het secret van een webhook worden maar één keer getoond: kopieer ze meteen.",

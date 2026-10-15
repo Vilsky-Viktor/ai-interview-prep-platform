@@ -628,6 +628,128 @@
      }
     }
    }
+  },
+  "/manage/webhooks/{webhook_id}/test": {
+   "post": {
+    "tags": [
+     "manage"
+    ],
+    "summary": "Test Webhook",
+    "description": "Owners and admins send a signed test event to a web hook, now.",
+    "operationId": "test_webhook_manage_webhooks__webhook_id__test_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "webhook_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Webhook Id"
+      }
+     },
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/WebhookTestOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/manage/webhooks/{webhook_id}/log": {
+   "get": {
+    "tags": [
+     "manage"
+    ],
+    "summary": "Webhook Log",
+    "description": "A web hook's latest sends and how they went, newest first; every member sees them.",
+    "operationId": "webhook_log_manage_webhooks__webhook_id__log_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "webhook_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Webhook Id"
+      }
+     },
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/WebhookAttemptOut"
+         },
+         "title": "Response Webhook Log Manage Webhooks  Webhook Id  Log Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
   }
  },
  "components": {
@@ -762,6 +884,23 @@
     ],
     "title": "Candidate"
    },
+   "CandidateEvent": {
+    "properties": {
+     "interview": {
+      "$ref": "#/components/schemas/Interview"
+     },
+     "candidate": {
+      "$ref": "#/components/schemas/Candidate"
+     }
+    },
+    "type": "object",
+    "required": [
+     "interview",
+     "candidate"
+    ],
+    "title": "CandidateEvent",
+    "description": "The `data` object of a candidate's event (`candidate.finished`, `candidate.started`,\n`candidate.undelivered`, `candidate.expired`): the interview and the candidate as they are\nwhen it's sent."
+   },
    "CandidateIn": {
     "properties": {
      "email": {
@@ -819,23 +958,6 @@
      "email"
     ],
     "title": "CandidateIn"
-   },
-   "FinishedEvent": {
-    "properties": {
-     "interview": {
-      "$ref": "#/components/schemas/Interview"
-     },
-     "candidate": {
-      "$ref": "#/components/schemas/Candidate"
-     }
-    },
-    "type": "object",
-    "required": [
-     "interview",
-     "candidate"
-    ],
-    "title": "FinishedEvent",
-    "description": "The `data` object of a `candidate.finished` event."
    },
    "HTTPValidationError": {
     "properties": {
@@ -905,6 +1027,19 @@
      "created_at"
     ],
     "title": "Interview"
+   },
+   "InterviewEvent": {
+    "properties": {
+     "interview": {
+      "$ref": "#/components/schemas/Interview"
+     }
+    },
+    "type": "object",
+    "required": [
+     "interview"
+    ],
+    "title": "InterviewEvent",
+    "description": "The `data` object of an `interview.ready` event."
    },
    "KeyExpiry": {
     "type": "string",
@@ -1103,6 +1238,32 @@
     ],
     "title": "NewWebhookOut"
    },
+   "RemovedEvent": {
+    "properties": {
+     "interview_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Interview Id"
+     },
+     "candidate_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Candidate Id"
+     },
+     "email": {
+      "type": "string",
+      "title": "Email"
+     }
+    },
+    "type": "object",
+    "required": [
+     "interview_id",
+     "candidate_id",
+     "email"
+    ],
+    "title": "RemovedEvent",
+    "description": "The `data` object of a `candidate.removed` event: who was removed, as the candidate is\ngone."
+   },
    "Signals": {
     "properties": {
      "tab_leaves": {
@@ -1129,6 +1290,12 @@
     ],
     "title": "Signals",
     "description": "Integrity signals recorded while the candidate answered.\n\nThey can have innocent causes; never reject a candidate automatically on them."
+   },
+   "TestEvent": {
+    "properties": {},
+    "type": "object",
+    "title": "TestEvent",
+    "description": "The `data` object of a `test` event: empty."
    },
    "ValidationError": {
     "properties": {
@@ -1169,6 +1336,36 @@
      "type"
     ],
     "title": "ValidationError"
+   },
+   "WebhookAttemptOut": {
+    "properties": {
+     "event_type": {
+      "type": "string",
+      "title": "Event Type"
+     },
+     "ok": {
+      "type": "boolean",
+      "title": "Ok"
+     },
+     "result": {
+      "type": "string",
+      "title": "Result"
+     },
+     "at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "event_type",
+     "ok",
+     "result",
+     "at"
+    ],
+    "title": "WebhookAttemptOut",
+    "description": "A send in a web hook's delivery log."
    },
    "WebhookIn": {
     "properties": {
@@ -1219,6 +1416,19 @@
      "failing"
     ],
     "title": "WebhookOut"
+   },
+   "WebhookTestOut": {
+    "properties": {
+     "ok": {
+      "type": "boolean",
+      "title": "Ok"
+     }
+    },
+    "type": "object",
+    "required": [
+     "ok"
+    ],
+    "title": "WebhookTestOut"
    }
   },
   "securitySchemes": {

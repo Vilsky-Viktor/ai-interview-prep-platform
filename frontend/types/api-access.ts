@@ -26,6 +26,15 @@ export type ApiWebhook = {
 
 export type NewApiWebhook = ApiWebhook & { secret: string }
 
+// A send in a web hook's delivery log; `result` is "delivered", "skipped", the status the
+// endpoint answered, or the error on the way.
+export type WebhookAttempt = {
+  event_type: string
+  ok: boolean
+  result: string
+  at: string
+}
+
 export type ApiSettings = {
   keys: ApiKey[]
   webhooks: ApiWebhook[]

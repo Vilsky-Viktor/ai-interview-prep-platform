@@ -1361,7 +1361,7 @@
     "removeKeyTitle": "Delete this key?",
     "removeKeyText": "Anything using “{name}” stops working at once.",
     "webhooksTitle": "Web hooks",
-    "webhooksText": "When a candidate finishes, prepza sends their results to these addresses, signed with each one's secret.",
+    "webhooksText": "prepza tells these addresses when a candidate starts, finishes (with their results), isn't reached, expires or is removed, and when an interview is ready, each request signed with the address's secret.",
     "noWebhooks": "No web hooks yet.",
     "failing": "Not answering: recent results didn't reach it",
     "stopped": "Stopped: the member who added it is no longer an owner or admin. Add it again to keep getting results.",
@@ -1373,6 +1373,20 @@
     "copySecret": "Copy secret",
     "secretCopied": "Secret copied",
     "added": "added {date}",
+    "sendTest": "Send test event",
+    "testSent": "The test event was delivered.",
+    "testNotTaken": "The endpoint didn't take the test event. Its delivery log says why.",
+    "testFailed": "Couldn't send the test event.",
+    "log": "Delivery log",
+    "logText": "The latest 20 events sent to {url}, newest first.",
+    "logEmpty": "Nothing sent yet.",
+    "logFailed": "Couldn't load the delivery log.",
+    "results": {
+      "delivered": "Delivered",
+      "skipped": "Skipped",
+      "answered": "Answered {status}",
+      "error": "Failed: {error}"
+    },
     "removeWebhook": "Delete web hook",
     "removeWebhookTitle": "Delete this web hook?",
     "removeWebhookText": "{url} stops getting events.",
@@ -1920,9 +1934,10 @@
       "text": "Connect your own platform, such as your careers site, to prepza.",
       "actions": [
         "Create an API key: it reads your interviews and candidates and invites candidates as you.",
-        "Add a web hook: when a candidate finishes, their results go to your HTTPS address, signed.",
+        "Add a web hook: prepza tells your HTTPS address, signed, when a candidate starts, finishes (with their results), isn't reached, expires or is removed, and when an interview is ready.",
+        "Send a web hook a test event, and see what each send got in its delivery log.",
         "Delete the keys and web hooks you no longer use.",
-        "Open the API docs for every endpoint and event."
+        "Open the developer docs for every endpoint and event, and the SDK."
       ],
       "tips": [
         "A new key and a web hook's secret show only once: copy them right away.",

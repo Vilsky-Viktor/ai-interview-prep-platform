@@ -1357,7 +1357,7 @@
     "removeKeyTitle": "Xóa khóa này?",
     "removeKeyText": "Mọi thứ đang dùng “{name}” sẽ ngừng hoạt động ngay lập tức.",
     "webhooksTitle": "Webhook",
-    "webhooksText": "Khi ứng viên hoàn thành, prepza gửi kết quả đến các địa chỉ này, được ký bằng khóa bí mật của từng địa chỉ.",
+    "webhooksText": "prepza báo cho các địa chỉ này khi ứng viên bắt đầu, hoàn thành (kèm kết quả), không nhận được lời mời, hết hạn lời mời hoặc bị xóa khỏi buổi phỏng vấn, và khi một buổi phỏng vấn sẵn sàng; mỗi yêu cầu được ký bằng khóa bí mật của địa chỉ đó.",
     "noWebhooks": "Chưa có webhook nào.",
     "failing": "Không phản hồi: các kết quả gần đây không đến được",
     "stopped": "Đã dừng: thành viên thêm nó không còn là chủ sở hữu hay quản trị viên. Hãy thêm lại để tiếp tục nhận kết quả.",
@@ -1369,6 +1369,20 @@
     "copySecret": "Sao chép khóa bí mật",
     "secretCopied": "Đã sao chép khóa bí mật",
     "added": "thêm ngày {date}",
+    "sendTest": "Gửi sự kiện thử nghiệm",
+    "testSent": "Sự kiện thử nghiệm đã được gửi tới nơi.",
+    "testNotTaken": "Endpoint không nhận sự kiện thử nghiệm. Nhật ký gửi cho biết lý do.",
+    "testFailed": "Không gửi được sự kiện thử nghiệm.",
+    "log": "Nhật ký gửi",
+    "logText": "20 sự kiện gần nhất đã gửi tới {url}, mới nhất trước.",
+    "logEmpty": "Chưa gửi gì.",
+    "logFailed": "Không tải được nhật ký gửi.",
+    "results": {
+      "delivered": "Đã gửi tới",
+      "skipped": "Đã bỏ qua",
+      "answered": "Phản hồi {status}",
+      "error": "Thất bại: {error}"
+    },
     "removeWebhook": "Xóa webhook",
     "removeWebhookTitle": "Xóa webhook này?",
     "removeWebhookText": "{url} sẽ không nhận sự kiện nữa.",
@@ -1916,9 +1930,10 @@
       "text": "Kết nối nền tảng của riêng bạn, chẳng hạn trang tuyển dụng, với prepza.",
       "actions": [
         "Tạo khóa API: khóa này đọc buổi phỏng vấn, ứng viên và mời ứng viên thay mặt bạn.",
-        "Thêm webhook: khi ứng viên làm xong, kết quả được gửi tới địa chỉ HTTPS của bạn, có chữ ký.",
+        "Thêm webhook: prepza báo tới địa chỉ HTTPS của bạn, có chữ ký, khi ứng viên bắt đầu, làm xong (kèm kết quả), không nhận được lời mời, hết hạn lời mời hoặc bị xóa khỏi buổi phỏng vấn, và khi một buổi phỏng vấn sẵn sàng.",
+        "Gửi sự kiện thử nghiệm tới một webhook và xem kết quả của từng lần gửi trong nhật ký gửi.",
         "Xóa các khóa và webhook bạn không dùng nữa.",
-        "Mở tài liệu API để xem mọi endpoint và sự kiện."
+        "Mở tài liệu cho nhà phát triển để xem mọi endpoint, sự kiện và SDK."
       ],
       "tips": [
         "Khóa mới và khóa bí mật của webhook chỉ hiện một lần: hãy sao chép ngay.",

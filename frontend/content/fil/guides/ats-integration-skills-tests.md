@@ -2,7 +2,7 @@
 title: "Paano ikonekta ang skills tests sa iyong ATS"
 seoTitle: "Paano Ikonekta ang Skills Tests sa ATS: Praktikal na Gabay"
 description: "Awtomatikong magpadala ng skills tests at tumanggap ng resulta sa iyong ATS, hayaang tao ang magpasya, at alamin kung ano ang unang dapat i-check."
-updated: "2026-10-14"
+updated: "2026-10-15"
 ---
 
 # Paano ikonekta ang skills tests sa iyong ATS
@@ -93,7 +93,7 @@ Kumokonekta ang prepza sa **Workable, Greenhouse, Teamtailor, Recruitee at Breez
 - **Bumabalik sa ATS ang mga resulta.** Kapag tapos na ang isang aplikante, nagdadagdag ang prepza ng note o comment sa kanya sa ATS na may grade niya, kung pumasa siya, anumang integrity flag (pag-alis sa page, pagtatangkang kumopya, mga sagot na napili nang masyadong mabilis para nabasa ang tanong), at link sa kanyang scorecard na may bawat sagot.
 - **Hindi nakakalusot ang mga pagpalya.** Kapag hindi maimbitahan ang isang aplikante, halimbawa dahil ubos na ang credits ng kumpanya, naabot na ang email limit, o pansamantalang ipina-pause ng prepza ang mga imbitasyon, makakatanggap ang lahat ng miyembro ng kumpanya ng notification na nagsasabi kung aling ATS. Awtomatikong iniimbitahan pagkatapos ng top-up ang mga aplikanteng hindi naimbitahan dahil kulang ang credits, at puwedeng imbitahan ulit sa isang click ang mga naghihintay na aplikante ng kahit anong job.
 - **Slack, kung ginagamit mo ito.** Puwedeng mag-post ang prepza ng mga notification, gaya ng aplikanteng tapos na o ng aplikante mula sa ATS na hindi naimbitahan, sa Slack channel na pipiliin mo.
-- **Ang sarili mong platform.** Kung wala sa listahan ang ATS mo, hinahayaan ka ng [API](/api-docs) ng prepza na mag-imbita ng mga aplikante gamit ang API key at makatanggap ng signed webhook kapag tapos na ang isang aplikante.
+- **Ang sarili mong platform.** Kung wala sa listahan ang ATS mo, hinahayaan ka ng [API](/api-docs) ng prepza na mag-imbita ng mga aplikante gamit ang API key at makatanggap ng signed webhook kapag nagsimula, natapos, hindi naabot ng imbitasyon, nag-expire ang imbitasyon, o tinanggal ang isang aplikante, at kapag handa na ang isang interview.
 - **Itinatago ang data sa takdang panahon.** Binubura ang mga aplikanteng na-save mula sa ATS pagkalipas ng 365 araw, o mas maaga kasabay ng kanilang interview o kumpanya.
 
 May mga ATS na nangangailangan ng hakbang sa kanilang panig. Hinihiling ng Greenhouse, Teamtailor at Recruitee na magdagdag ka ng webhook nang mano-mano; ipinapakita ng dialog na Mga tagubilin ng prepza ang address at kung saan ipe-paste ang secret nito. Ang prepza mismo ang nagse-set up ng webhooks ng Workable at Breezy HR.

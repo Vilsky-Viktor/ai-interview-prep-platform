@@ -117,8 +117,10 @@ after a top-up they're invited by themselves.
 (a candidate finished, an ATS candidate not invited, an undelivered invite and more).
 - API: for a company's own platform. On the API page an owner or admin makes API keys (shown \
 once; they expire in 1, 3, 6 or 12 months, or never) and web hooks. A key lists the company's \
-tests and candidates with their results and invites candidates; a web hook hears when a \
-candidate finishes, signed with its secret. An invite can skip prepza's emails and sign-in \
+tests and candidates with their results and invites candidates; a web hook hears, signed with \
+its secret, when a candidate starts, finishes (with their results), isn't reached, expires or is \
+removed, and when an interview is ready; each web hook can be sent a test event and has a \
+delivery log of its latest sends. An invite can skip prepza's emails and sign-in \
 (the platform sends the candidate the link itself), bring the candidate back to the \
 company's site when they finish, and ask for the light or dark theme. With prepza's SDK (a \
 script), the company's own page shows the interview itself. Bringing candidates back and \

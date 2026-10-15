@@ -2,7 +2,7 @@
 title: "Zo koppel je vaardigheidstests aan je ATS"
 seoTitle: "Vaardigheidstests koppelen aan je ATS: een praktische gids"
 description: "Verstuur vaardigheidstests en ontvang resultaten automatisch via je ATS, laat selectiebeslissingen bij mensen en weet wat je eerst moet controleren."
-updated: "2026-10-14"
+updated: "2026-10-15"
 ---
 
 # Zo koppel je vaardigheidstests aan je ATS
@@ -93,7 +93,7 @@ prepza koppelt met **Workable, Greenhouse, Teamtailor, Recruitee en Breezy HR**.
 - **Resultaten terug in het ATS.** Als een kandidaat klaar is, zet prepza een notitie of opmerking bij de kandidaat in het ATS met het cijfer, of de kandidaat geslaagd is, eventuele integriteitssignalen (de pagina verlaten, kopieerpogingen, antwoorden die te snel zijn gekozen om de vraag te hebben gelezen) en een link naar de scorekaart met alle antwoorden.
 - **Mislukte uitnodigingen vallen op.** Als een kandidaat niet kan worden uitgenodigd, bijvoorbeeld omdat het bedrijf geen credits meer heeft, een e-maillimiet heeft bereikt, of omdat prepza uitnodigingen tijdelijk heeft gepauzeerd, krijgen alle leden van het bedrijf een melding met de naam van het ATS. Kandidaten die wegens te weinig credits niet zijn uitgenodigd, worden na een opwaardering automatisch uitgenodigd, en de wachtende kandidaten van elke vacature kun je met één klik opnieuw uitnodigen.
 - **Slack, als je dat gebruikt.** prepza kan meldingen, zoals een kandidaat die klaar is of een ATS-kandidaat die niet kon worden uitgenodigd, in een Slack-kanaal naar keuze plaatsen.
-- **Je eigen platform.** Staat je ATS er niet bij, dan kun je met de [API](/api-docs) van prepza kandidaten uitnodigen met een API-sleutel en een ondertekende webhook ontvangen wanneer een kandidaat klaar is.
+- **Je eigen platform.** Staat je ATS er niet bij, dan kun je met de [API](/api-docs) van prepza kandidaten uitnodigen met een API-sleutel en een ondertekende webhook ontvangen wanneer een kandidaat begint of klaar is, wanneer de uitnodiging een kandidaat niet bereikt of verloopt, wanneer een kandidaat wordt verwijderd en wanneer een interview klaarstaat.
 - **Gegevens voor een vaste termijn bewaard.** Kandidaten die uit een ATS zijn opgeslagen, worden na 365 dagen verwijderd, of eerder samen met hun interview of bedrijf.
 
 Sommige ATS'en vragen een stap aan hun kant. Bij Greenhouse, Teamtailor en Recruitee voeg je een webhook met de hand toe; het venster Instructies in prepza toont het adres en waar je het secret plakt. De webhooks van Workable en Breezy HR stelt prepza zelf in.

@@ -209,7 +209,7 @@ async def set_generated(
     for it) with them, once per event."""
     async with Session() as session:
         new = await processed_events.claim(session, event_id)
-        interview_id = await session.scalar(
+        row = await session.execute(
             update(Interview)
             .where(Interview.generation_id == generation_id)
             .values(
@@ -218,14 +218,20 @@ async def set_generated(
                 generation_failed=False,
                 ready_at=func.coalesce(Interview.ready_at, func.now()),
             )
-            .returning(Interview.id)
+            .returning(Interview.id, Interview.company_id)
         )
+        found = row.one_or_none()
 
         if new:
             outbox.add(session, OutboxEvent, NOTIFICATION_REQUESTED, notice)
 
-        if new and interview_id is not None:
-            outbox.add(session, OutboxEvent, INTERVIEW_READY, {"interview_id": str(interview_id)})
+        if new and found is not None:
+            outbox.add(
+                session,
+                OutboxEvent,
+                INTERVIEW_READY,
+                {"interview_id": str(found.id), "company_id": str(found.company_id)},
+            )
 
         await session.commit()
 

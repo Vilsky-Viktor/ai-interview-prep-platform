@@ -1,38 +1,45 @@
 import asyncio
+import json
 import logging
 import socket
 import time
+from collections.abc import Awaitable, Callable
 from datetime import UTC, datetime
-from uuid import UUID
+from uuid import UUID, uuid4
 
 import httpx
 from fastapi import HTTPException, status
 from fastapi.encoders import jsonable_encoder
 from prepza_common.encryption import decrypt
 from prepza_common.notifications import NotificationKind, Recipient, notification, publish_quietly
+from pydantic import BaseModel
 
 from app.config.settings import settings
 from app.constants.api import API_PAGE, RETRY_BATCH, RETRY_GIVE_UP
-from app.constants.events import CANDIDATE_FINISHED
+from app.constants.events import CANDIDATE_REMOVED, INTERVIEW_READY, TEST_EVENT
 from app.helpers.public import candidate_of, interview_of
 from app.helpers.webhooks import body_of, public_address, retry_delay, signature
 from app.integrations import companies
 from app.integrations import webhooks as endpoints
 from app.models.api import Webhook, WebhookRetry
-from app.schemas.public import FinishedEvent
+from app.schemas.public import CandidateEvent, InterviewEvent, RemovedEvent
+from app.storage import webhook_log, webhooks
 from app.storage import webhook_retries as retries
-from app.storage import webhooks
 
 logger = logging.getLogger(__name__)
 
 
-async def finished(data: dict, event_id: str) -> None:
-    """A candidate finished (companies' candidate.finished): each of the company's web hooks gets
-    the interview and the candidate, once, while whoever added it is still an owner or admin.
-    Web hooks that already got it are skipped, so a redelivered event reaches only the ones that
-    failed. A web hook that doesn't take it is left to the retry job, and the event is done: a
-    company's failing endpoint doesn't hold up Pub/Sub for everyone."""
-    company_id = UUID(data["company_id"])
+async def send(
+    event_type: str,
+    company_id: UUID,
+    event_id: str,
+    build: Callable[[], Awaitable[BaseModel | None]],
+) -> None:
+    """Sends an event to each of the company's web hooks, once, while whoever added it is still
+    an owner or admin; `build` makes its data, or None when there's nothing to tell any more.
+    Web hooks that already got it are skipped, so a redelivered event reaches only the ones
+    that failed. A web hook that doesn't take it is left to the retry job, and the event is
+    done: a company's failing endpoint doesn't hold up Pub/Sub for everyone."""
     hooks = [
         hook
         for hook in await webhooks.of_company(company_id)
@@ -52,24 +59,12 @@ async def finished(data: dict, event_id: str) -> None:
     if not hooks:
         return
 
-    interview_id, invite_id = UUID(data["interview_id"]), UUID(data["candidate_invite_id"])
+    data = await build()
 
-    try:
-        interview = await companies.interview(company_id, interview_id)
-        candidate = await companies.candidate(company_id, interview_id, invite_id)
-    except HTTPException as error:
-        # The interview or the candidate is gone since: nothing to tell. Any other refusal
-        # (busy, unavailable) raises, so Pub/Sub sends the event again; nothing was sent yet.
-        if error.status_code != status.HTTP_404_NOT_FOUND:
-            raise
-
+    if data is None:
         return
 
-    event = FinishedEvent(
-        interview=interview_of(interview),
-        candidate=candidate_of(candidate, company_id, interview_id, settings.site_url),
-    )
-    body = body_of(event_id, CANDIDATE_FINISHED, jsonable_encoder(event))
+    body = body_of(event_id, event_type, jsonable_encoder(data))
     # All at once, so slow endpoints together stay within Pub/Sub's acknowledgement deadline.
     taken = await asyncio.gather(*(deliver(hook, event_id, body) for hook in hooks))
     next_at = datetime.now(UTC) + retry_delay(1)
@@ -77,6 +72,69 @@ async def finished(data: dict, event_id: str) -> None:
     for hook, ok in zip(hooks, taken, strict=True):
         if not ok:
             await retries.add(hook.id, event_id, body.decode(), next_at)
+
+
+async def candidate_event(event_type: str, data: dict, event_id: str) -> None:
+    """A candidate finished, started, wasn't reached or expired: the interview and the
+    candidate as they are now."""
+    company_id = UUID(data["company_id"])
+    interview_id, invite_id = UUID(data["interview_id"]), UUID(data["candidate_invite_id"])
+
+    async def build() -> CandidateEvent | None:
+        try:
+            interview = await companies.interview(company_id, interview_id)
+            candidate = await companies.candidate(company_id, interview_id, invite_id)
+        except HTTPException as error:
+            # The interview or the candidate is gone since: nothing to tell. Any other refusal
+            # (busy, unavailable) raises, so Pub/Sub sends the event again; nothing was sent.
+            if error.status_code != status.HTTP_404_NOT_FOUND:
+                raise
+
+            return None
+
+        return CandidateEvent(
+            interview=interview_of(interview),
+            candidate=candidate_of(candidate, company_id, interview_id, settings.site_url),
+        )
+
+    await send(event_type, company_id, event_id, build)
+
+
+async def removed(data: dict, event_id: str) -> None:
+    """A candidate was removed: who it was, from the event itself, as the candidate is gone."""
+
+    async def build() -> RemovedEvent:
+        return RemovedEvent(
+            interview_id=data["interview_id"],
+            candidate_id=data["candidate_invite_id"],
+            email=data["email"],
+        )
+
+    await send(CANDIDATE_REMOVED, UUID(data["company_id"]), event_id, build)
+
+
+async def interview_ready(data: dict, event_id: str) -> None:
+    company_id, interview_id = UUID(data["company_id"]), UUID(data["interview_id"])
+
+    async def build() -> InterviewEvent | None:
+        try:
+            interview = await companies.interview(company_id, interview_id)
+        except HTTPException as error:
+            if error.status_code != status.HTTP_404_NOT_FOUND:
+                raise
+
+            return None
+
+        return InterviewEvent(interview=interview_of(interview))
+
+    await send(INTERVIEW_READY, company_id, event_id, build)
+
+
+async def test(hook: Webhook) -> bool:
+    """A signed test event, sent now, whether the web hook took it; its log shows it too."""
+    event_id = str(uuid4())
+
+    return await deliver(hook, event_id, body_of(event_id, TEST_EVENT, {}))
 
 
 async def retry() -> int:
@@ -160,11 +218,13 @@ async def deliver(hook: Webhook, event_id: str, body: bytes) -> bool:
         logger.info(
             "Web hook %s didn't take %s: address lookup failed: %s", hook.id, event_id, error
         )
+        await log(hook, event_id, body, False, "address not found")
 
         return False
 
     if secret is None or address is None:
         logger.warning("Skipped web hook %s: unreadable secret or non-public address", hook.id)
+        await log(hook, event_id, body, True, "skipped")
 
         return True
 
@@ -178,12 +238,19 @@ async def deliver(hook: Webhook, event_id: str, body: bytes) -> bool:
             else type(error).__name__
         )
         logger.info("Web hook %s didn't take %s: %s", hook.id, event_id, reason)
+        await log(hook, event_id, body, False, str(reason))
 
         return False
 
     await webhooks.mark_delivered(hook.id, event_id)
+    await log(hook, event_id, body, True, "delivered")
 
     if hook.failing:
         await webhooks.set_failing(hook.id, False)
 
     return True
+
+
+async def log(hook: Webhook, event_id: str, body: bytes, ok: bool, result: str) -> None:
+    """Into the web hook's delivery log: its event's type, read from the body it was sent."""
+    await webhook_log.add(hook.id, event_id, json.loads(body)["type"], ok, result)

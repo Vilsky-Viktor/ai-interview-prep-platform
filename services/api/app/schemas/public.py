@@ -103,8 +103,29 @@ class CandidateIn(BaseModel):
     )
 
 
-class FinishedEvent(BaseModel):
-    """The `data` object of a `candidate.finished` event."""
+class CandidateEvent(BaseModel):
+    """The `data` object of a candidate's event (`candidate.finished`, `candidate.started`,
+    `candidate.undelivered`, `candidate.expired`): the interview and the candidate as they are
+    when it's sent."""
 
     interview: Interview
     candidate: Candidate
+
+
+class RemovedEvent(BaseModel):
+    """The `data` object of a `candidate.removed` event: who was removed, as the candidate is
+    gone."""
+
+    interview_id: UUID
+    candidate_id: UUID
+    email: str
+
+
+class InterviewEvent(BaseModel):
+    """The `data` object of an `interview.ready` event."""
+
+    interview: Interview
+
+
+class TestEvent(BaseModel):
+    """The `data` object of a `test` event: empty."""

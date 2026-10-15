@@ -3,8 +3,10 @@ from datetime import datetime
 
 from sqlalchemy import select, update
 
+from app.constants.events import CANDIDATE_EXPIRED
 from app.constants.invites import InviteStatus
 from app.models.invites import CandidateInvite
+from app.storage import candidate_events
 from app.storage.db import Session
 
 
@@ -36,8 +38,12 @@ async def mark_expired(invite_id: uuid.UUID, before: datetime) -> bool:
                 CandidateInvite.sent_at < before,
             )
             .values(status=InviteStatus.EXPIRED)
-            .returning(CandidateInvite.id)
+            .returning(CandidateInvite.interview_id)
         )
+
+        if marked is not None:
+            await candidate_events.add(session, CANDIDATE_EXPIRED, invite_id, marked)
+
         await session.commit()
 
     return marked is not None
