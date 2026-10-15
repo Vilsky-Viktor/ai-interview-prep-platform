@@ -73,7 +73,7 @@ data: {"delta": " with 82%."}
 data: {"done": {"message_id": "a93e…"}}
 ```
 
-- Before anything streams, plain HTTP errors: sign-in (`401`), the emergency pause (`503`), maintenance, a company that isn't one of the user's (from companies' list for their token) or a conversation they can't see (`404`), the limits (`429`), a message over 2,000 characters (`422`).
+- Before anything streams, plain HTTP errors: sign-in (`401`), the emergency pause (`503`), maintenance, a company that isn't one of the user's (companies' internal list of them, however many) or a conversation they can't see (`404`), the limits (`429`), a message over 2,000 characters (`422`).
 - A turn asks the model, runs the tools it calls (up to 4 at once, 20 s each) and asks again with their results, at most 6 times; then the model must answer with what it has. A turn takes at most 90 s. A comment (`: keep-alive`) goes out every 15 s without events.
 - A tool's error (a `403` for the user's role, `402` without credits, a service that didn't answer) goes to the model, which explains it.
 - The model failing or the turn running out of time ends with `{"error": "Couldn't get a reply right now. Please try again."}` (translated). A service refusing the user's token mid-turn ends with `{"error": …, "code": "session_expired"}`: the panel refreshes the token and sends the message again, once.
@@ -119,7 +119,7 @@ The limits for everyone hold only people in a company that never topped up, so f
 ## Roles, tenancy and privacy
 
 - Signed-in users only. Every tool and action calls the services' user-facing routes with the user's own token, never a service-to-service bypass, so roles, credits, the pause and every other rule apply unchanged there: a viewer reads what a viewer sees. The token is never stored, logged or shown to the model.
-- A company that isn't among the user's (companies' list for their token) is refused before anything is called with it: the picked company, any `company_id` a tool is given, and a pending action's company on confirm.
+- A company that isn't among the user's is refused before anything is called with it: the picked company, any `company_id` a tool is given (in the panel and through an AI app alike), and a pending action's company on confirm. The list is companies' internal one (`/internal/users/{id}/companies`, every company, no page limit), kept 10 seconds (`constants/tenancy.py`) so a confirm reads it once, and read again after an action that made a company.
 - Never `/internal/` or `/superadmin/` routes, and a write only with `confirm: True` (the tool loader refuses them).
 - Reads of a candidate's results go to companies with a signed `X-Assistant` header: the audit log records them as the assistant's (`via: "assistant"`, or `"mcp"` through an AI app), and they're kept out of the "results viewed" funnel.
 - Questions and the data the tools read are sent to OpenAI (no training). Each tool's data is trimmed to the fields it needs. A link's code reaches the model only as the full link the app's page copies (`TOKEN_LINKS`): a candidate's invite link (owners and admins, until they finish) and an interview's shareable link. Team members' join links are never read: they give access to the company, and AI apps use the same tools. Every model call is made with `store=false` (`prepza_common.llm.chat_model`), so OpenAI keeps nothing beyond its 30-day abuse monitoring; the assistant's tool loops send the model's encrypted reasoning back with each call instead (`MODEL_INCLUDE`).

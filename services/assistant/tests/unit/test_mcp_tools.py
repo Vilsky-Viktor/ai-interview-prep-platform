@@ -9,6 +9,7 @@ from prepza_common.secrets_check import SECRET_REMOVED
 from prepza_common.user import User
 
 from app.constants.actions_flow import NOTHING_TO_CHANGE, SUBJECT_NOT_FOUND
+from app.constants.chat import COMPANY_NOT_FOUND
 from app.constants.mcp import ACCOUNT_GONE, EXCLUDED_TOOL
 from app.helpers.mcp_schema import mcp_tool
 from app.integrations import firebase_tokens, services
@@ -192,3 +193,12 @@ def test_changing_the_language_drops_the_kept_sign_in(calls, monkeypatch):
     called("update_language", {"language": "fr"})
 
     assert forgotten == ["ann"]
+
+
+def test_a_company_that_isnt_the_users_isnt_called_through_mcp(calls):
+    other = "00000000-0000-4000-8000-000000000099"
+
+    error, content = called("get_company", {"company_id": other})
+
+    assert (error, content) == (True, {"error": translate(COMPANY_NOT_FOUND, "de")})
+    assert calls == []

@@ -1,3 +1,6 @@
+# The action that makes a company: the user's companies are read again after it.
+CREATE_COMPANY = "create_company"
+
 # Actions on companies, their team and verification (see actions.py for the entries' keys).
 
 COMPANY_PAGE = "/companies/{company_id}/interviews"
@@ -12,7 +15,7 @@ MEMBER_SUBJECT = {
 }
 
 COMPANY_ACTIONS = {
-    "create_company": {
+    CREATE_COMPANY: {
         "service": "companies",
         "method": "POST",
         "path": "/companies",

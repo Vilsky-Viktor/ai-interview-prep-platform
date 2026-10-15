@@ -6,6 +6,7 @@ from prepza_common.user import User
 
 from app.constants.actions_flow import CONFIRMED_NOTE
 from app.constants.chat import HISTORY_CHARACTERS, HISTORY_MESSAGES
+from app.constants.company_actions import CREATE_COMPANY
 from app.models.answers import Turn
 from app.services import actions
 from app.services.chat import build_messages
@@ -29,8 +30,9 @@ async def confirm(
         conversation_id, action_id, user, token, language, referral
     )
     company_id = UUID(pending["company_id"]) if pending["company_id"] else None
-    # A company the action made is the user's now, for the tools that follow.
-    companies = await user_companies(token, language)
+    # A company the action made is the user's now, for the tools that follow; any other action
+    # leaves the list it was checked against.
+    companies = await user_companies(user.uid, fresh=tool.name == CREATE_COMPANY)
     turn = Turn(
         conversation_id,
         user.uid,

@@ -96,7 +96,7 @@ def test_a_company_no_longer_the_users_is_refused_on_confirm(redis, writes, monk
     result = asyncio.run(actions.prepare(tools()["rename_company"], arguments, TURN))
     assert result.block["subject"] == "Acme"
 
-    async def none_left(token, language):
+    async def none_left(user_id, fresh=False):
         return frozenset()
 
     monkeypatch.setattr(actions, "user_companies", none_left)

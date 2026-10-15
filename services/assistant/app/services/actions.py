@@ -182,7 +182,7 @@ async def owned_action(
     if pending["user_id"] != user.uid or pending["conversation_id"] != str(conversation_id):
         raise HTTPException(status.HTTP_404_NOT_FOUND, ACTION_GONE)
 
-    require_company(pending["company_id"], await user_companies(token, language))
+    require_company(pending["company_id"], await user_companies(user.uid))
 
     return pending
 

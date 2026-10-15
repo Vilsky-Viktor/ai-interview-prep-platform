@@ -84,7 +84,7 @@ def redis(monkeypatch):
     async def owned(conversation_id, user_id, token, language):
         return None
 
-    async def companies(token, language):
+    async def companies(user_id, fresh=False):
         return frozenset({COMPANY})
 
     monkeypatch.setattr(actions, "refuse_if_paused", nothing)
@@ -126,3 +126,18 @@ def writes(monkeypatch):
     monkeypatch.setattr(services, "send", send)
 
     return made
+
+
+@pytest.fixture(autouse=True)
+def users_companies(monkeypatch):
+    """Companies' list of the user's companies, faked: COMPANY, unless a test says otherwise;
+    nothing is kept between tests."""
+    from prepza_common import memory_cache
+
+    from app.integrations import companies
+
+    async def company_ids(user_id):
+        return [COMPANY]
+
+    monkeypatch.setattr(companies, "company_ids", company_ids)
+    monkeypatch.setattr(memory_cache, "_entries", {})

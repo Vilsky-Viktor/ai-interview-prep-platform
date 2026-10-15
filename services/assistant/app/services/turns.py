@@ -56,7 +56,7 @@ async def start(body: ChatRequest, user: User, token: str, language: str) -> Asy
         conversation = await open_conversation(body.conversation_id, user.uid, token, language)
 
     # The company picked in the panel, for this message: one of the user's, or none.
-    companies = await user_companies(token, language)
+    companies = await user_companies(user.uid)
     require_company(company_id, companies)
 
     await limits.check(redis, user.uid, company_id)

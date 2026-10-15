@@ -73,7 +73,7 @@ def test_paused_or_over_a_limit_is_refused_before_anything_is_saved(
     async def not_paused(redis):
         pass
 
-    async def companies(token, language):
+    async def companies(user_id, fresh=False):
         return frozenset()
 
     monkeypatch.setattr(turns, "refuse_if_paused", not_paused)
@@ -89,7 +89,7 @@ def test_a_new_conversation_only_about_a_company_the_user_can_see(
     async def not_paused(redis):
         pass
 
-    async def companies(token, language):
+    async def companies(user_id, fresh=False):
         return frozenset({"another-company"})
 
     monkeypatch.setattr(turns, "refuse_if_paused", not_paused)

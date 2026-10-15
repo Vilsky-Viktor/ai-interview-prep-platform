@@ -15,6 +15,7 @@ from prepza_common.user import User
 
 from app.config.settings import settings
 from app.constants.actions_flow import NOTHING_TO_CHANGE, SUBJECT_NOT_FOUND
+from app.constants.chat import COMPANY_NOT_FOUND
 from app.constants.limits import (
     ACTIONS_PER_USER_HOUR,
     MCP_CALLS_PER_USER_DAY,
@@ -37,6 +38,7 @@ from app.models.tools import Tool
 from app.services.actions import subject_of, unchanged
 from app.services.oauth_provider import Access, funnel_client
 from app.services.registry import tools
+from app.services.tenancy import foreign_company, user_companies
 from app.services.tool_calls import call_tool
 from app.storage import oauth
 
@@ -137,6 +139,10 @@ async def call(name: str, arguments: dict, access: Access) -> types.CallToolResu
     try:
         await count_call(user.uid)
         await mark_active(access)
+
+        # As in the app's panel: a company that isn't one of the user's isn't called at all.
+        if foreign_company(arguments, await user_companies(user.uid)):
+            return error_result(translate(COMPANY_NOT_FOUND, user.language))
 
         if tool.method != "GET":
             checked = await checked_write(tool, arguments, user, token)
