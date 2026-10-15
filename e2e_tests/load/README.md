@@ -50,7 +50,7 @@ A run fails (k6 exits non-zero) when any is crossed:
 
 These are for the local stack: one uvicorn process per service in reload mode, Next's dev server, the Pub/Sub emulator, all in one Docker VM on a laptop, often shared with other test runs. They catch a regression, not a capacity.
 
-Targets for staging and production (Cloud Run, a production frontend build): p95 under 300 ms and p99 under 1 s for `step` and `answer`, under 500 ms for the dashboard's endpoints and `start`, under 1 s for server-rendered pages; errors under 0.1%. Check them there at 50, 200 and 500 users at once, against the `public` scenario only or on a staging copy with its own Auth project, never on production.
+Targets for production (Cloud Run, a production frontend build): p95 under 300 ms and p99 under 1 s for `step` and `answer`, under 500 ms for the dashboard's endpoints and `start`, under 1 s for server-rendered pages; errors under 0.1%. Check them at 50, 200 and 500 users at once on a test environment with the `public` scenario (the signed-in ones run only locally); there's no test environment yet, so that needs one first.
 
 ## Clean-up
 
