@@ -37,7 +37,7 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
      - GitHub: create an OAuth app (GitHub → Settings → Developer settings → OAuth Apps) with the callback URL `https://<authDomain>/__/auth/handler`. Set `github_client_id` and `github_client_secret` in `terraform.tfvars`.
      - LinkedIn: first upgrade the project to Identity Platform (Firebase console → Authentication → Settings; OpenID Connect providers are free for 50 monthly users, then about $0.015 each). Create a LinkedIn app with the product "Sign In with LinkedIn using OpenID Connect" and the same callback URL. Set `linkedin_client_id` and `linkedin_client_secret`.
      - Terraform (`auth.tf`) creates each provider once its client id is set.
-   - **Project settings → Your apps:** add a Web app. Note its `apiKey` and `authDomain` for the frontend build; the `apiKey` is also `firebase_web_api_key` in `terraform.tfvars` (the assistant signs AI apps' users in with it).
+   - **Project settings → Your apps:** add a Web app. Note its `apiKey` and `authDomain` for the frontend build; the `apiKey` is also `firebase_web_api_key` in `terraform.tfvars` (the assistant signs AI apps' users in with it, so the plan and the assistant refuse an empty one). In Google Cloud's Credentials, restrict that key to its APIs (Identity Toolkit API and Token Service API) if you restrict it at all, never to websites (HTTP referrers): the assistant calls from the server, with no referrer, and every AI app call would fail.
 3. **Create the bucket for Terraform's state.**
    ```bash
    gcloud storage buckets create gs://prepza-prod-terraform --location=europe-west1 --uniform-bucket-level-access

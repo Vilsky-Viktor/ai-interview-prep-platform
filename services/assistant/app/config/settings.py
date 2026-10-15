@@ -32,7 +32,8 @@ class Settings(ServiceSettings):
     site_url: str
     # Firebase's public web key (the frontend's NEXT_PUBLIC_FIREBASE_API_KEY): an AI app's calls
     # sign the user in with a custom token, to call the other services as them.
-    firebase_web_api_key: str
+    # Required: without it every AI app's call would fail while the service looks healthy.
+    firebase_web_api_key: str = Field(min_length=1)
 
     @property
     def sqlalchemy_url(self) -> str:

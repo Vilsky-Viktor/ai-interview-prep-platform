@@ -64,8 +64,13 @@ variable "backend_sentry_dsn" {
 }
 
 variable "firebase_web_api_key" {
-  description = "The Firebase web app's apiKey (the frontend's NEXT_PUBLIC_FIREBASE_API_KEY); public by design. The assistant signs AI apps' users in with it."
+  description = "The Firebase web app's apiKey (the frontend's NEXT_PUBLIC_FIREBASE_API_KEY); public by design. The assistant signs AI apps' users in with it, from the server: restrict the key to its APIs (Identity Toolkit, Token Service), never to websites (HTTP referrers), which would refuse the server's calls."
   type        = string
+
+  validation {
+    condition     = length(var.firebase_web_api_key) > 0
+    error_message = "firebase_web_api_key is required: without it every AI app call fails."
+  }
 }
 
 variable "paddle_environment" {
