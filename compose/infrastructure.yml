@@ -19,7 +19,7 @@ services:
 
   redis:
     restart: unless-stopped
-    image: redis:8-alpine
+    image: redis:8.10.2-alpine@sha256:3811787313eba226a2ef38658c6ccb91cd5e110edc89c37767de373120a0e5a0
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s
@@ -29,13 +29,13 @@ services:
   # Google's Pub/Sub emulator: events between services, pushed like in Google Cloud.
   pubsub:
     restart: unless-stopped
-    image: google/cloud-sdk:emulators
+    image: google/cloud-sdk:589.0.0-emulators@sha256:c90e4a90a79d363c2aea51824f00bd6c3932c74927a4ab120f33775cbb48a762
     command: gcloud beta emulators pubsub start --host-port=0.0.0.0:8085 --project=${FIREBASE_PROJECT_ID}
 
   # Creates the topic and push subscriptions before the services start.
   pubsub-setup:
     restart: "no"
-    image: curlimages/curl:8.17.0
+    image: curlimages/curl:8.17.0@sha256:935d9100e9ba842cdb060de42472c7ca90cfe9a7c96e4dacb55e79e560b3ff40
     entrypoint: ["sh", "/pubsub-setup.sh"]
     volumes:
       - ./scripts/local/pubsub-setup.sh:/pubsub-setup.sh:ro
@@ -47,7 +47,7 @@ services:
 
   mailpit:
     restart: unless-stopped
-    image: axllent/mailpit
+    image: axllent/mailpit:v1.31.4@sha256:b68349e3a014b90c5610bfb26b2ae36f3892d7b8cf25ee140c6c71c98d2fcf48
     ports:
       # Web UI with every email sent locally.
       - "8125:8025"

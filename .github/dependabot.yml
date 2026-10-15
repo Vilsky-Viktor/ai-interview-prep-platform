@@ -1,6 +1,6 @@
-# Weekly pull requests that update the pinned base images (tag and digest), GitHub Actions
-# (pinned by commit) and the frontend's and services' packages (their lock files). Merge after CI
-# passes; close to skip a version.
+# Weekly pull requests that update the pinned images (tag and digest: base images and the local
+# stack's), GitHub Actions (pinned by commit) and the frontend's and services' packages (their lock
+# files). Merge after CI passes; close to skip a version.
 version: 2
 updates:
   - package-ecosystem: docker
@@ -23,6 +23,18 @@ updates:
       base-images:
         patterns: ["*"]
     # Minor and patch updates only: a new major (Node 26, Python 3.15, Postgres 19) is planned by hand.
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+
+  # The local and CI stack's other images (compose/), pinned the same way.
+  - package-ecosystem: docker-compose
+    directory: /compose
+    schedule:
+      interval: weekly
+    groups:
+      compose-images:
+        patterns: ["*"]
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
