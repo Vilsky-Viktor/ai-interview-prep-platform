@@ -1,6 +1,7 @@
 import asyncio
 import uuid
 from datetime import UTC, datetime, timedelta
+from types import SimpleNamespace
 
 import httpx
 import pytest
@@ -82,6 +83,42 @@ def test_a_company_goes_with_its_only_owner_other_memberships_just_end(calls, mo
         ("verification", "ann@example.com"),
         ("audit", "ann"),
     ]
+
+
+def test_a_candidate_deleting_their_account_mid_interview_is_settled_as_if_removed(
+    calls, monkeypatch
+):
+    """One who picked an answer is charged, as when a company removes them; one who didn't
+    gets the company its credits back. Deleting the account isn't a way out of the charge."""
+    picked = SimpleNamespace(id=uuid.uuid4(), status=InviteStatus.IN_PROCESS, hold_key="h1")
+    opened = SimpleNamespace(id=uuid.uuid4(), status=InviteStatus.IN_PROCESS, hold_key="h2")
+    waiting = SimpleNamespace(id=uuid.uuid4(), status=InviteStatus.INVITED, hold_key="h3")
+    settled = []
+
+    async def unfinished(user_id, email):
+        return [picked, opened, waiting]
+
+    async def scores(invite_ids):
+        return {str(picked.id): {"picked": 2}, str(opened.id): {"picked": 0}}
+
+    async def charge(key):
+        settled.append(("charged", key))
+
+    async def release(key):
+        settled.append(("released", key))
+
+    async def no_memberships(user_id):
+        return []
+
+    monkeypatch.setattr(accounts, "memberships", no_memberships)
+    monkeypatch.setattr(accounts, "unfinished_invites", unfinished)
+    monkeypatch.setattr(rounds, "invite_scores", scores)
+    monkeypatch.setattr(billing, "charge_candidate", charge)
+    monkeypatch.setattr(billing, "release_candidate", release)
+
+    asyncio.run(account_service.delete_user("ann", "ann@example.com"))
+
+    assert settled == [("charged", "h1"), ("released", "h2"), ("released", "h3")]
 
 
 def test_an_owner_of_a_company_others_joined_cant_delete_their_account_yet(calls, monkeypatch):

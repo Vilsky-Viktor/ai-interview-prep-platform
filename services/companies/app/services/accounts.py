@@ -52,7 +52,9 @@ async def delete_user(user_id: str, email: str) -> None:
         else:
             await accounts.remove_member(member.id)
 
-    await candidate_billing.release_unfinished(await accounts.candidate_invites(user_id, email))
+    # As if the company removed them: one who picked an answer is charged, the others' credits
+    # come back. Rounds still has their answers, as library asks companies first.
+    await candidate_billing.settle_removed(await accounts.unfinished_invites(user_id, email))
     await accounts.forget_candidate(user_id, email)
     await accounts.forget_verification_email(email)
     await audit.forget_user(user_id)

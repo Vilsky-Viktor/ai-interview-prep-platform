@@ -22,7 +22,7 @@ def no_billing_calls(monkeypatch):
     async def none_unfinished(interview_id):
         return []
 
-    monkeypatch.setattr(accounts, "candidate_invites", no_invites)
+    monkeypatch.setattr(accounts, "unfinished_invites", no_invites)
     monkeypatch.setattr(invites, "unfinished", none_unfinished)
 
 

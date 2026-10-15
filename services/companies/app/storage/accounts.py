@@ -56,17 +56,15 @@ async def remove_member(member_id) -> None:
         await session.commit()
 
 
-async def candidate_invites(user_id: str, email: str) -> list[tuple]:
-    """(interview id, email, status, hold key) of every invite the user was sent or accepted."""
-    query = select(
-        CandidateInvite.interview_id,
-        CandidateInvite.email,
-        CandidateInvite.status,
-        CandidateInvite.hold_key,
-    ).where(or_(CandidateInvite.user_id == user_id, CandidateInvite.email == email.lower()))
+async def unfinished_invites(user_id: str, email: str) -> list[CandidateInvite]:
+    """The invites the user was sent or accepted that they haven't finished."""
+    query = select(CandidateInvite).where(
+        or_(CandidateInvite.user_id == user_id, CandidateInvite.email == email.lower()),
+        CandidateInvite.status != InviteStatus.FINISHED,
+    )
 
     async with Session() as session:
-        return [tuple(row) for row in await session.execute(query)]
+        return list(await session.scalars(query))
 
 
 async def forget_candidate(user_id: str, email: str) -> None:
