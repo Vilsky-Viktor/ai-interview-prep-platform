@@ -1,3 +1,5 @@
+import logging
+
 from app.constants.unsubscribe import USER_SETTINGS
 from app.constants.webhooks import (
     CANDIDATE_INVITE_KIND,
@@ -9,6 +11,8 @@ from app.constants.webhooks import (
 from app.integrations import companies
 from app.services.unsubscribe import apply
 
+logger = logging.getLogger(__name__)
+
 
 async def handle(event: dict) -> None:
     """Tells the invite's owner its email wasn't delivered, and turns off an optional email the
@@ -17,6 +21,8 @@ async def handle(event: dict) -> None:
         return
 
     tags = (event.get("data") or {}).get("tags") or {}
+    # Counted for the bounce alert (infra/terraform/monitoring_logs.tf); no address, only its kind.
+    logger.info("Email not delivered (%s): %s", event["type"], tags.get(KIND_TAG, "untagged"))
 
     if event["type"] == COMPLAINED_EVENT:
         await complained(tags)

@@ -150,3 +150,15 @@ variable "bing_site_verification" {
   type        = string
   default     = ""
 }
+
+variable "ai_spend_alert_hourly" {
+  description = "Alert when generation's OpenAI spend in one hour is above this, in USD."
+  type        = number
+  default     = 20
+}
+
+variable "email_bounce_alert_hourly" {
+  description = "Alert when more emails than this bounce or are marked as spam in one hour."
+  type        = number
+  default     = 20
+}
