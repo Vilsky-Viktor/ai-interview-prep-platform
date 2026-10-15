@@ -14,13 +14,15 @@ router = APIRouter(prefix="/internal", tags=["internal"])
 @router.delete("/users/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_user(user_id: str, body: UserEmailIn, caller: ServiceCaller) -> None:
     """Library, deleting an account: the user's own notifications go, and companies'
-    notifications about them as a candidate (their email and grade); the Slack channels they
+    notifications about them as a candidate (their email and grade), and owners' notifications
+    that they joined a company (their email); the Slack channels they
     connected stay with their companies, without their id, and each company is told they need
     reconnecting. The log of digests and reminders
     sent to them goes too."""
     await notifications.remove_user(user_id)
     await sent_emails.remove_user(user_id)
     await notifications.remove_candidate(body.email)
+    await notifications.remove_member(body.email)
 
     for company_id in await slack.forget_maker(user_id):
         await slack_service.stopped(company_id)

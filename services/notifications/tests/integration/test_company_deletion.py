@@ -74,3 +74,29 @@ def test_an_erased_candidate_leaves_only_that_companys_bell_and_a_deleted_accoun
     assert own == ["stays@x.com"]
     assert other == ["gone@x.com"]
     assert other_after_account == []
+
+
+def test_a_deleted_account_takes_the_owners_notice_that_it_joined(run):
+    owner = f"owner-{uuid.uuid4()}"
+
+    def joined(email):
+        return notification(
+            Recipient.USER,
+            owner,
+            NotificationKind.MEMBER_JOINED,
+            "/x",
+            key=str(uuid.uuid4()),
+            email=email,
+            name="Acme",
+            role="admin",
+        )
+
+    async def scenario():
+        await notifications.add(str(uuid.uuid4()), joined("gone@x.com"))
+        await notifications.add(str(uuid.uuid4()), joined("stays@x.com"))
+        await notifications.remove_member("Gone@x.com")
+        left = await notifications.latest([(Recipient.USER, owner)], limit=None)
+
+        return [item.data["email"] for item in left]
+
+    assert run(scenario()) == ["stays@x.com"]

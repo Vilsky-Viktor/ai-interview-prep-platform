@@ -26,7 +26,7 @@ The owner can make an admin who has joined the owner: the role picker on that ad
 
 ### Deleting an account that owns companies
 
-The delete-account dialog asks companies what deleting the account does to the companies the user owns (`GET /companies/account/deletion`): one others have joined blocks it, listed with a link to its team, until another member is made its owner or the company is deleted; one only the user is in is deleted with the account, listed with its credits. Companies also refuses the deletion itself (409) while the user owns a company others joined; library asks companies first, so nothing is deleted then.
+The delete-account dialog asks companies what deleting the account does to the companies the user owns (`GET /companies/account/deletion`): one others have joined blocks it, listed with a link to its team, until another member is made its owner or the company is deleted; one only the user is in is deleted with the account, listed with its credits. Companies also refuses the deletion itself (409) while the user owns a company others joined; library asks companies first, so nothing is deleted then. Deleting the account also clears it as a company's verification proof (`verification_email`; the company keeps its verification) and takes the owner's "member joined" notification that names it; "Download my data" lists the companies it verified (`company_verifications`).
 
 ## Brand
 

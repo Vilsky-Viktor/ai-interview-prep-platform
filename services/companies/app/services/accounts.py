@@ -54,4 +54,5 @@ async def delete_user(user_id: str, email: str) -> None:
 
     await candidate_billing.release_unfinished(await accounts.candidate_invites(user_id, email))
     await accounts.forget_candidate(user_id, email)
+    await accounts.forget_verification_email(email)
     await audit.forget_user(user_id)

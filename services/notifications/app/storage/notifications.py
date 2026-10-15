@@ -1,6 +1,6 @@
 from datetime import UTC, datetime, timedelta
 
-from prepza_common.notifications import Recipient
+from prepza_common.notifications import NotificationKind, Recipient
 from sqlalchemy import delete, func, select, tuple_
 from sqlalchemy.dialects.postgresql import insert
 
@@ -209,6 +209,19 @@ async def remove_candidate(email: str, company_id: str | None = None) -> None:
 
     async with Session() as session:
         await session.execute(query)
+        await session.commit()
+
+
+async def remove_member(email: str) -> None:
+    """An owner's notifications that this person joined their company go with the person's
+    account. Safe to repeat."""
+    async with Session() as session:
+        await session.execute(
+            delete(Notification).where(
+                Notification.kind == NotificationKind.MEMBER_JOINED,
+                Notification.data["email"].astext == email.lower(),
+            )
+        )
         await session.commit()
 
 

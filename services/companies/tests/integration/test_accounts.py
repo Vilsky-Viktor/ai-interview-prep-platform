@@ -57,3 +57,23 @@ def test_only_invites_older_than_the_cutoff_expire(run):
         (row[0], row[2], row[3]) for row in everything
     ]
     assert after is None
+
+
+def test_a_deleted_accounts_verification_email_goes_and_is_in_its_data_until_then(run):
+    from app.storage import verification
+
+    async def scenario():
+        company = await companies.create(f"Acme {uuid.uuid4()}", "ann", "ann@example.com")
+        email = f"Ann-{uuid.uuid4().hex[:8]}@Acme.com"
+        await verification.set_website(company.id, "acme.com", email)
+        exported = await accounts.export("ann", email.lower())
+        await accounts.forget_verification_email(email.lower())
+        after = await companies.get(company.id)
+
+        return company.name, email, exported["company_verifications"], after
+
+    name, email, exported, after = run(scenario())
+
+    assert exported == [{"company": name, "verification_email": email}]
+    assert after.verification_email is None
+    assert after.website_domain == "acme.com"

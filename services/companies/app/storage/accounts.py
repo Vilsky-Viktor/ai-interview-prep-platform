@@ -87,6 +87,18 @@ async def forget_candidate(user_id: str, email: str) -> None:
         await session.commit()
 
 
+async def forget_verification_email(email: str) -> None:
+    """A company keeps its verification, but not the email of a person who deleted their account
+    as its proof."""
+    async with Session() as session:
+        await session.execute(
+            update(Company)
+            .where(func.lower(Company.verification_email) == email.lower())
+            .values(verification_email=None)
+        )
+        await session.commit()
+
+
 async def export(user_id: str, email: str) -> dict:
     async with Session() as session:
         companies = await session.execute(
@@ -103,6 +115,11 @@ async def export(user_id: str, email: str) -> dict:
             )
             .join(Interview, Interview.id == CandidateInvite.interview_id)
             .where(or_(CandidateInvite.user_id == user_id, CandidateInvite.email == email.lower()))
+        )
+        verifications = await session.execute(
+            select(Company.name, Company.verification_email).where(
+                func.lower(Company.verification_email) == email.lower()
+            )
         )
         decisions = await session.execute(
             select(
@@ -124,6 +141,9 @@ async def export(user_id: str, email: str) -> dict:
             "interview_invites": [
                 {"interview": title, "name": name, "status": status, "invited_at": at}
                 for title, name, status, at in invites
+            ],
+            "company_verifications": [
+                {"company": name, "verification_email": proof} for name, proof in verifications
             ],
             "company_decisions": [
                 {"company": name, "action": action, "target_id": target_id, "via": via, "at": at}

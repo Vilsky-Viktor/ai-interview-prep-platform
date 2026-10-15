@@ -19,6 +19,9 @@ def test_deleting_an_account_reads_the_email_from_the_body_and_forgets_their_cha
     async def remove_candidate(email):
         done.append(("candidate", email))
 
+    async def remove_member(email):
+        done.append(("member", email))
+
     async def forget_maker(user_id):
         done.append(("slack", user_id))
 
@@ -26,6 +29,7 @@ def test_deleting_an_account_reads_the_email_from_the_body_and_forgets_their_cha
 
     monkeypatch.setattr(notifications, "remove_user", remove_user)
     monkeypatch.setattr(notifications, "remove_candidate", remove_candidate)
+    monkeypatch.setattr(notifications, "remove_member", remove_member)
 
     async def forget_sent(user_id):
         done.append(("sent", user_id))
@@ -42,6 +46,7 @@ def test_deleting_an_account_reads_the_email_from_the_body_and_forgets_their_cha
         ("own", "u1"),
         ("sent", "u1"),
         ("candidate", "ann@example.com"),
+        ("member", "ann@example.com"),
         ("slack", "u1"),
     ]
 
