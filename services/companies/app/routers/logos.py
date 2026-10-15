@@ -8,7 +8,7 @@ from prepza_common.auth import CurrentUser
 from app.constants.brand import PREPZA_COLORS, Theme
 from app.constants.logos import LOGO_CACHE
 from app.helpers.brand import color_sets, style_of, unreadable
-from app.helpers.logos import logo_path, logo_type
+from app.helpers.logos import for_email, logo_path, logo_type
 from app.helpers.return_urls import with_invite
 from app.schemas.logos import (
     BrandColorSets,
@@ -40,12 +40,18 @@ async def set_logo(company_id: UUID, body: LogoIn, user: CurrentUser) -> LogoOut
 
     media_type = logo_type(content)
 
-    if media_type is None:
+    try:
+        stored = for_email(content, media_type) if media_type else None
+    except OSError:
+        # A WebP whose first bytes look right but that can't be read.
+        stored = None
+
+    if stored is None:
         raise HTTPException(
             status.HTTP_422_UNPROCESSABLE_CONTENT, "Use a PNG, JPEG or WebP image up to 500 KB"
         )
 
-    await companies.set_logo(company.id, content, media_type)
+    await companies.set_logo(company.id, *stored)
 
     return LogoOut(logo_url=logo_path(await companies.get(company.id)))
 
