@@ -12,8 +12,8 @@ from app.integrations import teamtailor
 from app.integrations.errors import KeyRejected
 from app.main import app
 from app.models.ats import AtsConnection
-from app.storage import ats
-from tests.unit.test_teamtailor import signature
+from app.storage import ats, ats_links
+from tests.unit.test_teamtailor_signatures import signature
 
 COMPANY_ID = uuid.uuid4()
 HOST = "https://api.na.teamtailor.com"
@@ -87,7 +87,7 @@ def stored(monkeypatch, companies_api):
     monkeypatch.setattr(ats, "connection", connection)
     monkeypatch.setattr(ats, "connection_by_id", connection_by_id)
     monkeypatch.setattr(ats, "set_credentials", set_credentials)
-    monkeypatch.setattr(ats, "link_for_job", link_for_job)
+    monkeypatch.setattr(ats_links, "link_for_job", link_for_job)
     monkeypatch.setattr(teamtailor, "region", region)
     monkeypatch.setattr(teamtailor, "check", check)
     monkeypatch.setattr(teamtailor, "member_id", member_id)

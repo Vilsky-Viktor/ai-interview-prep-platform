@@ -17,7 +17,7 @@ from app.schemas.ats import (
 )
 from app.services import ats as integrations
 from app.services import ats_candidates as ats_candidates_service
-from app.storage import ats, ats_candidates
+from app.storage import ats, ats_candidates, ats_links
 
 router = APIRouter(tags=["ats"])
 
@@ -51,7 +51,7 @@ async def disconnect(company_id: UUID, provider: AtsProvider, user: CurrentUser)
     connection = await ats.connection(company_id, provider)
 
     if connection is not None:
-        await integrations.release(connection, await ats.subscriptions(company_id))
+        await integrations.release(connection, await ats_links.subscriptions(company_id))
 
     await ats.disconnect(company_id, provider)
 
@@ -91,7 +91,7 @@ async def job_text_of(
 async def list_links(company_id: UUID, user: CurrentUser) -> list[JobLinkOut]:
     await companies.require(company_id, user.uid)
     counts = await ats_candidates.counts(company_id)
-    found = await ats.links(company_id)
+    found = await ats_links.links(company_id)
     interviews = await companies.interviews({link.interview_id for link, _ in found})
 
     return [
@@ -144,7 +144,7 @@ async def add_link(company_id: UUID, body: JobLinkIn, user: CurrentUser) -> None
             status.HTTP_404_NOT_FOUND, f"That job or stage isn't in {ATS_NAMES[body.provider]}"
         )
 
-    link_id = await ats.add_link(connection.id, body.interview_id, job, stage)
+    link_id = await ats_links.add_link(connection.id, body.interview_id, job, stage)
 
     if link_id is None:
         raise HTTPException(status.HTTP_409_CONFLICT, "That job is already linked")
@@ -157,21 +157,21 @@ async def add_link(company_id: UUID, body: JobLinkIn, user: CurrentUser) -> None
     try:
         subscription = await integrations.subscribe(connection, link_id, job["id"], stage["id"])
     except Exception:
-        await ats.remove_link(company_id, link_id)
+        await ats_links.remove_link(company_id, link_id)
         raise
 
-    await ats.set_subscription(link_id, subscription)
+    await ats_links.set_subscription(link_id, subscription)
 
 
 @router.delete("/links/{link_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def remove_link(company_id: UUID, link_id: UUID, user: CurrentUser) -> None:
     await companies.require(company_id, user.uid, editor=True)
-    found = await ats.link(link_id)
+    found = await ats_links.link(link_id)
 
     if found is not None and found[1].company_id == company_id:
-        await integrations.unsubscribe(found[1], await ats.subscriptions(company_id, link_id))
+        await integrations.unsubscribe(found[1], await ats_links.subscriptions(company_id, link_id))
 
-    if not await ats.remove_link(company_id, link_id):
+    if not await ats_links.remove_link(company_id, link_id):
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Link not found")
 
 

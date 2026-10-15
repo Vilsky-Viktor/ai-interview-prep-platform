@@ -7,7 +7,7 @@ import pytest
 from app.models.ats import AtsConnection, AtsJobLink
 from app.services import ats as integrations
 from app.services import ats_candidates
-from app.storage import ats
+from app.storage import ats, ats_links
 
 INTERVIEW_ID = uuid.uuid4()
 COMPANY_ID = uuid.uuid4()
@@ -37,7 +37,7 @@ def calls(monkeypatch):
     monkeypatch.setattr(ats_candidates, "report", record("report"))
     monkeypatch.setattr(ats_candidates, "invite_waiting", record("invite_waiting"))
     monkeypatch.setattr(ats_candidates, "topped_up", record("topped_up"))
-    monkeypatch.setattr(ats, "delete_interview", record("delete_interview"))
+    monkeypatch.setattr(ats_links, "delete_interview", record("delete_interview"))
     monkeypatch.setattr(ats, "delete_company", record("delete_company"))
     monkeypatch.setattr(integrations, "unsubscribe", record("unsubscribe"))
     monkeypatch.setattr(integrations, "release", record("release"))
@@ -51,9 +51,9 @@ def calls(monkeypatch):
     async def subscriptions(company_id):
         return []
 
-    monkeypatch.setattr(ats, "interview_links", interview_links)
+    monkeypatch.setattr(ats_links, "interview_links", interview_links)
     monkeypatch.setattr(ats, "connections", connections)
-    monkeypatch.setattr(ats, "subscriptions", subscriptions)
+    monkeypatch.setattr(ats_links, "subscriptions", subscriptions)
 
     return seen
 
@@ -93,9 +93,9 @@ def test_what_prepza_set_up_in_the_ats_is_cancelled_before_the_rows_go(client, c
     async def subscriptions(company_id):
         return ["sub-1", "sub-2"]
 
-    monkeypatch.setattr(ats, "interview_links", interview_links)
+    monkeypatch.setattr(ats_links, "interview_links", interview_links)
     monkeypatch.setattr(ats, "connections", connections)
-    monkeypatch.setattr(ats, "subscriptions", subscriptions)
+    monkeypatch.setattr(ats_links, "subscriptions", subscriptions)
 
     push(client, "interview.deleted", {"interview_id": str(INTERVIEW_ID), "company_id": "c"})
     push(client, "company.deleted", {"company_id": str(COMPANY_ID)})

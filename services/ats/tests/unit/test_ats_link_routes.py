@@ -5,7 +5,7 @@ import pytest
 from prepza_common import http
 
 from app.integrations import workable
-from app.storage import ats
+from app.storage import ats_links
 from tests.unit.workable_setup import (
     COMPANY_ID,
     INTERVIEW_ID,
@@ -63,7 +63,7 @@ def test_linked_jobs_show_their_interviews_titles_from_companies(client, stored,
     async def links(company_id):
         return found
 
-    monkeypatch.setattr(ats, "links", links)
+    monkeypatch.setattr(ats_links, "links", links)
     sign_in("vic")
 
     titles = [

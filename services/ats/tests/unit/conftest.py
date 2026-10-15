@@ -10,7 +10,7 @@ from app.integrations import companies, workable
 from app.integrations.errors import KeyRejected
 from app.main import app
 from app.models.ats import AtsConnection
-from app.storage import ats, ats_candidates
+from app.storage import ats, ats_candidates, ats_links
 from tests.unit.workable_setup import (
     COMPANY_ID,
     INTERVIEW_ID,
@@ -159,11 +159,11 @@ def stored(monkeypatch, companies_api):
         "connection": connection,
         "connections": connections,
         "disconnect": disconnect,
-        "add_link": add_link,
-        "set_subscription": set_subscription,
-        "subscriptions": subscriptions,
     }.items():
         monkeypatch.setattr(ats, name, fake)
+    monkeypatch.setattr(ats_links, "add_link", add_link)
+    monkeypatch.setattr(ats_links, "set_subscription", set_subscription)
+    monkeypatch.setattr(ats_links, "subscriptions", subscriptions)
     monkeypatch.setattr(workable, "check", check)
     monkeypatch.setattr(workable, "jobs", jobs)
     monkeypatch.setattr(workable, "job", job)

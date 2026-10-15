@@ -12,7 +12,7 @@ from app.constants.events import (
 )
 from app.services import ats as integrations
 from app.services import ats_candidates
-from app.storage import ats
+from app.storage import ats, ats_links
 from app.storage import ats_candidates as ats_candidates_storage
 
 logger = logging.getLogger(__name__)
@@ -21,17 +21,17 @@ logger = logging.getLogger(__name__)
 async def interview_deleted(interview_id: UUID) -> None:
     """Workable's notifications for the interview's linked jobs are cancelled (as far as Workable
     answers), then its links and candidates go."""
-    for link, connection in await ats.interview_links(interview_id):
+    for link, connection in await ats_links.interview_links(interview_id):
         if link.subscription_id:
             await integrations.unsubscribe(connection, [link.subscription_id])
 
-    await ats.delete_interview(interview_id)
+    await ats_links.delete_interview(interview_id)
 
 
 async def company_deleted(company_id: UUID) -> None:
     """What prepza set up in the company's ATSs is cancelled (as far as each answers), then its
     connections go, with their linked jobs and candidates."""
-    subscriptions = await ats.subscriptions(company_id)
+    subscriptions = await ats_links.subscriptions(company_id)
 
     for connection in await ats.connections(company_id):
         await integrations.release(connection, subscriptions)

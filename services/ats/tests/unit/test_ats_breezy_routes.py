@@ -13,7 +13,7 @@ from app.integrations import breezy
 from app.integrations.errors import KeyRejected
 from app.main import app
 from app.models.ats import AtsConnection
-from app.storage import ats
+from app.storage import ats, ats_links
 from tests.unit.test_breezy import signature
 
 COMPANY_ID = uuid.uuid4()
@@ -104,10 +104,10 @@ def stored(monkeypatch, companies_api):
         "set_credentials": set_credentials,
         "disconnect": disconnect,
         "restore_broken": restore_broken,
-        "link_for_job": link_for_job,
-        "subscriptions": subscriptions,
     }.items():
         monkeypatch.setattr(ats, name, fake)
+    monkeypatch.setattr(ats_links, "link_for_job", link_for_job)
+    monkeypatch.setattr(ats_links, "subscriptions", subscriptions)
     monkeypatch.setattr(settings, "ats_encryption_key", key)
     monkeypatch.setattr(breezy, "company", company)
     monkeypatch.setattr(breezy, "check", check)

@@ -11,7 +11,7 @@ from app.models.ats import AtsCandidate, AtsConnection, AtsJobLink
 from app.services import ats as integrations
 from app.services import ats_candidates as flow
 from app.services import ats_webhooks as hooks
-from app.storage import ats, ats_candidates, ats_results
+from app.storage import ats, ats_candidates, ats_links, ats_results
 from tests.unit.conftest import interview
 from tests.unit.test_breezy import signature
 
@@ -103,7 +103,7 @@ def world(monkeypatch, companies_api):
         state["deleted"].append((company, token, endpoint_id))
 
     monkeypatch.setattr(ats, "connection_by_id", connection_by_id)
-    monkeypatch.setattr(ats, "link_for_job", link_for_job)
+    monkeypatch.setattr(ats_links, "link_for_job", link_for_job)
     monkeypatch.setattr(integrations, "credentials", key)
     monkeypatch.setattr(ats_candidates, "add", add)
     monkeypatch.setattr(ats_candidates, "claim", claim)

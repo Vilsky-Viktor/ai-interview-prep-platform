@@ -9,7 +9,7 @@ from app.integrations import companies
 from app.models.ats import AtsCandidate, AtsJobLink
 from app.services import ats_candidates as candidate_service
 from app.services.events import handle
-from app.storage import ats, ats_candidates
+from app.storage import ats, ats_candidates, ats_links
 from app.storage.db import Session
 
 JOB = {"id": "A1", "name": "Accountant"}
@@ -20,7 +20,7 @@ async def linked(company_id, interview_id, job=JOB, maker="ann"):
     """A Workable connection with one job linked to the interview and one candidate sent."""
     await ats.connect(company_id, AtsProvider.WORKABLE, "acme", "sealed", maker)
     connection = await ats.connection(company_id, AtsProvider.WORKABLE)
-    link_id = await ats.add_link(connection.id, interview_id, job, STAGE)
+    link_id = await ats_links.add_link(connection.id, interview_id, job, STAGE)
     row = await ats_candidates.add(connection.id, link_id, interview_id, "c-1", "Ann@x.com")
 
     return connection, link_id, row
@@ -35,7 +35,7 @@ def test_a_deleted_interview_takes_its_links_and_candidates_even_when_delivered_
     async def scenario():
         company, deleted, kept = uuid.uuid4(), uuid.uuid4(), uuid.uuid4()
         connection, _, _ = await linked(company, deleted)
-        await ats.add_link(connection.id, kept, {"id": "B2", "name": "Clerk"}, STAGE)
+        await ats_links.add_link(connection.id, kept, {"id": "B2", "name": "Clerk"}, STAGE)
         event = {"interview_id": str(deleted), "company_id": str(company)}
         await handle("interview.deleted", event)
         await handle("interview.deleted", event)

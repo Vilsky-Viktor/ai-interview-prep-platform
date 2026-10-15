@@ -5,7 +5,7 @@ from sqlalchemy import update
 
 from app.constants.ats import AtsProvider, CandidateStatus, FailReason
 from app.models.ats import AtsCandidate
-from app.storage import ats, ats_candidates, ats_results
+from app.storage import ats, ats_candidates, ats_links, ats_results
 from app.storage.db import Session
 
 JOB = {"id": "A1", "name": "Accountant"}
@@ -18,15 +18,15 @@ def test_a_reconnect_keeps_linked_jobs_and_a_disconnect_removes_them(run):
         interview = uuid.uuid4()
         await ats.connect(company, AtsProvider.WORKABLE, "acme", "sealed-1", "ann")
         connection = await ats.connection(company, AtsProvider.WORKABLE)
-        first = await ats.add_link(connection.id, interview, JOB, STAGE)
+        first = await ats_links.add_link(connection.id, interview, JOB, STAGE)
         # The same job twice is refused; one job has one interview.
-        again = await ats.add_link(connection.id, interview, JOB, STAGE)
+        again = await ats_links.add_link(connection.id, interview, JOB, STAGE)
         await ats.mark_broken(connection.id)
         await ats.connect(company, AtsProvider.WORKABLE, "acme", "sealed-2", "bob")
         reconnected = await ats.connection(company, AtsProvider.WORKABLE)
-        kept = await ats.links(company)
+        kept = await ats_links.links(company)
         await ats.disconnect(company, AtsProvider.WORKABLE)
-        gone = await ats.links(company), await ats.connections(company)
+        gone = await ats_links.links(company), await ats.connections(company)
         await ats.delete_company(company)
 
         return connection, first, again, reconnected, kept, gone
@@ -54,11 +54,11 @@ def test_a_company_only_unlinks_its_own_jobs(run):
         interview = uuid.uuid4()
         await ats.connect(mine, AtsProvider.WORKABLE, "acme", "sealed", "ann")
         connection = await ats.connection(mine, AtsProvider.WORKABLE)
-        await ats.add_link(connection.id, interview, JOB, STAGE)
-        [(link, _)] = await ats.links(mine)
-        by_them = await ats.remove_link(theirs, link.id)
-        by_me = await ats.remove_link(mine, link.id)
-        left = await ats.links(mine)
+        await ats_links.add_link(connection.id, interview, JOB, STAGE)
+        [(link, _)] = await ats_links.links(mine)
+        by_them = await ats_links.remove_link(theirs, link.id)
+        by_me = await ats_links.remove_link(mine, link.id)
+        left = await ats_links.links(mine)
         await ats.delete_company(mine)
         await ats.delete_company(theirs)
 
@@ -75,7 +75,7 @@ def test_a_candidate_is_one_row_claimed_once_counted_and_reported_once(run):
         interview = uuid.uuid4()
         await ats.connect(company, AtsProvider.WORKABLE, "acme", "sealed", "ann", "m-1")
         connection = await ats.connection(company, AtsProvider.WORKABLE)
-        link_id = await ats.add_link(connection.id, interview, JOB, STAGE)
+        link_id = await ats_links.add_link(connection.id, interview, JOB, STAGE)
         first = await ats_candidates.add(connection.id, link_id, interview, "c-1", "A@x.com")
         again = await ats_candidates.add(connection.id, link_id, interview, "c-1", "a@x.com")
         claims = [
@@ -153,10 +153,10 @@ def test_a_greenhouse_event_finds_its_linked_job_by_connection_and_job_id(run):
         await ats.connect(company, AtsProvider.WORKABLE, "acme", "sealed", "ann")
         greenhouse = await ats.connection(company, AtsProvider.GREENHOUSE)
         workable = await ats.connection(company, AtsProvider.WORKABLE)
-        link_id = await ats.add_link(greenhouse.id, interview, JOB, STAGE)
-        found = await ats.link_for_job(greenhouse.id, "A1")
-        other_job = await ats.link_for_job(greenhouse.id, "B2")
-        other_ats = await ats.link_for_job(workable.id, "A1")
+        link_id = await ats_links.add_link(greenhouse.id, interview, JOB, STAGE)
+        found = await ats_links.link_for_job(greenhouse.id, "A1")
+        other_job = await ats_links.link_for_job(greenhouse.id, "B2")
+        other_ats = await ats_links.link_for_job(workable.id, "A1")
         await ats.delete_company(company)
 
         return link_id, found, other_job, other_ats
@@ -198,7 +198,7 @@ def test_a_top_up_finds_only_the_companys_recent_linked_candidates_short_of_cred
         greenhouse = await ats.connection(company, AtsProvider.GREENHOUSE)
         theirs = await ats.connection(other_company, AtsProvider.WORKABLE)
         links = {
-            connection.id: await ats.add_link(connection.id, interview, JOB, STAGE)
+            connection.id: await ats_links.add_link(connection.id, interview, JOB, STAGE)
             for connection in (workable, greenhouse, theirs)
         }
         rows = {
@@ -276,10 +276,10 @@ def test_an_interviews_links_and_whether_a_connection_has_any(run):
         await ats.connect(company, AtsProvider.TEAMTAILOR, "Acme", "sealed", "ann")
         workable = await ats.connection(company, AtsProvider.WORKABLE)
         teamtailor = await ats.connection(company, AtsProvider.TEAMTAILOR)
-        link_id = await ats.add_link(workable.id, interview, JOB, STAGE)
-        await ats.add_link(workable.id, uuid.uuid4(), {"id": "B2", "name": "Support"}, STAGE)
-        found = await ats.interview_links(interview)
-        has = await ats.has_links(workable.id), await ats.has_links(teamtailor.id)
+        link_id = await ats_links.add_link(workable.id, interview, JOB, STAGE)
+        await ats_links.add_link(workable.id, uuid.uuid4(), {"id": "B2", "name": "Support"}, STAGE)
+        found = await ats_links.interview_links(interview)
+        has = await ats_links.has_links(workable.id), await ats_links.has_links(teamtailor.id)
         await ats.delete_company(company)
 
         return link_id, found, has

@@ -13,7 +13,7 @@ from app.models.ats import AtsCandidate, AtsConnection, AtsJobLink
 from app.services import ats as integrations
 from app.services import ats_candidates as flow
 from app.services import ats_webhooks as hooks
-from app.storage import ats, ats_candidates
+from app.storage import ats, ats_candidates, ats_links
 from tests.unit.conftest import interview
 
 TOKEN = "account-token"
@@ -109,7 +109,7 @@ def world(monkeypatch, companies_api):
     async def flush():
         state["flushed"] += 1
 
-    monkeypatch.setattr(ats, "link", get_link)
+    monkeypatch.setattr(ats_links, "link", get_link)
     monkeypatch.setattr(integrations, "credentials", key)
     monkeypatch.setattr(ats_candidates, "add", add)
     monkeypatch.setattr(ats_candidates, "claim", claim)

@@ -22,7 +22,7 @@ from app.helpers.ats import (
 )
 from app.services import ats as integrations
 from app.services import ats_candidates as flow
-from app.storage import ats
+from app.storage import ats, ats_links
 
 # The events each ATS's web hook sends: checked as that ATS's, then a candidate who reached a
 # linked job's stage is handed to the candidate flow (ats_candidates.arrived). Anything for a job,
@@ -35,7 +35,7 @@ async def receive_workable(link_id: UUID, body: bytes, signature: str) -> None:
     """A Workable event for a linked job: a candidate moved into its stage gets the interview.
     Only events signed with the account's token count; anything for a job or link that's gone,
     or another event, is ignored, so Workable doesn't send it again."""
-    found = await ats.link(link_id)
+    found = await ats_links.link(link_id)
 
     if found is None:
         return
@@ -95,7 +95,7 @@ async def receive_greenhouse(connection_id: UUID, body: bytes, signature: str) -
         return
 
     for job in application.get("jobs") or []:
-        link = await ats.link_for_job(connection.id, str(job.get("id")))
+        link = await ats_links.link_for_job(connection.id, str(job.get("id")))
 
         # Its stage by id, or by name (which id Greenhouse's web hooks send isn't settled).
         if link and link.stage_id in (str(stage.get("id")), stage.get("name")):
@@ -139,11 +139,11 @@ async def receive_teamtailor(connection_id: UUID, body: bytes, signature: str) -
         return
 
     # Teamtailor sends every application's changes: read only while a job is linked.
-    if not await ats.has_links(connection.id):
+    if not await ats_links.has_links(connection.id):
         return
 
     found = await integrations.call(connection, "application", application_id=str(changed["id"]))
-    link = await ats.link_for_job(connection.id, found["job_id"] or "")
+    link = await ats_links.link_for_job(connection.id, found["job_id"] or "")
 
     if link and link.stage_id == found["stage_id"] and found["email"]:
         await flow.arrived(
@@ -182,7 +182,7 @@ async def receive_recruitee(connection_id: UUID, body: bytes, signature: str) ->
     ):
         return
 
-    link = await ats.link_for_job(connection.id, str((payload.get("offer") or {}).get("id")))
+    link = await ats_links.link_for_job(connection.id, str((payload.get("offer") or {}).get("id")))
 
     if link and link.stage_id == str(stage.get("id")):
         await flow.arrived(
@@ -214,7 +214,7 @@ async def receive_breezy(connection_id: UUID, body: bytes, signature: str) -> No
     if event.get("type") != BREEZY_STATUS_UPDATED or not candidate.get("email_address"):
         return
 
-    link = await ats.link_for_job(connection.id, str(position.get("_id")))
+    link = await ats_links.link_for_job(connection.id, str(position.get("_id")))
 
     if link and link.stage_id == str((found.get("stage") or {}).get("id")):
         reference = f"{position['_id']}:{candidate.get('_id')}"

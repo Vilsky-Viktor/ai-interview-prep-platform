@@ -14,7 +14,7 @@ from app.integrations import greenhouse
 from app.integrations.errors import KeyRejected
 from app.main import app
 from app.models.ats import AtsConnection
-from app.storage import ats
+from app.storage import ats, ats_links
 
 COMPANY_ID = uuid.uuid4()
 
@@ -70,7 +70,7 @@ def stored(monkeypatch, companies_api):
     monkeypatch.setattr(ats, "connect", connect)
     monkeypatch.setattr(ats, "connection", connection)
     monkeypatch.setattr(ats, "connection_by_id", connection_by_id)
-    monkeypatch.setattr(ats, "link_for_job", link_for_job)
+    monkeypatch.setattr(ats_links, "link_for_job", link_for_job)
 
     async def can_write(client_id, client_secret):
         return rows["can_write"]
