@@ -4,6 +4,7 @@ import { getLocale, getTranslations } from "next-intl/server"
 
 import { EmailText } from "@/components/email-text"
 import { DEFAULT_LOCALE } from "@/constants/i18n"
+import { formatDay } from "@/lib/format"
 import { textDirection } from "@/lib/locale"
 import { publicFetch } from "@/lib/server-api"
 import type { LegalDocument } from "@/types/help"
@@ -77,10 +78,10 @@ export async function LegalPage({
             )
           )}
           {document.state === "in_force" ? (
-            t("inForce", { date: shown })
+            t("inForce", { date: formatDay(shown, locale) })
           ) : (
             <>
-              {t(document.state, { date: shown })}{" "}
+              {t(document.state, { date: formatDay(shown, locale) })}{" "}
               <Link href={link(inForce)} className="underline">
                 {t("readInForce")}
               </Link>
@@ -130,10 +131,10 @@ export async function LegalPage({
             {versions.map((item) => (
               <li key={item}>
                 {item === shown ? (
-                  item
+                  formatDay(item, locale)
                 ) : (
                   <Link href={link(item)} className="underline">
-                    {item}
+                    {formatDay(item, locale)}
                   </Link>
                 )}
               </li>
