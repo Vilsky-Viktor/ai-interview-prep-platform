@@ -14,7 +14,7 @@ from app.main import app
 
 def company() -> str:
     """A company of its own for each test: the database is shared by the whole run."""
-    return f"c-{uuid.uuid4()}"
+    return str(uuid.uuid4())
 
 
 def finished(company_id: str, title: str = "Backend", **data) -> dict:
