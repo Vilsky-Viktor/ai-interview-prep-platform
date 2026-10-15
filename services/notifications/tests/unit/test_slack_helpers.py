@@ -96,6 +96,14 @@ def test_what_people_wrote_is_shown_not_read_as_slack_markup():
     )
 
 
+def test_an_interview_without_a_title_is_named_without_quotes():
+    finished = message(event(NotificationKind.CANDIDATE_FINISHED, email="a@b.c"), "https://x")
+    ready = message(event(NotificationKind.INTERVIEW_READY), "https://x")
+
+    assert finished.startswith("a@b.c finished an interview.")
+    assert ready.startswith("An interview is ready.")
+
+
 def test_a_kind_slack_doesnt_get_has_no_message():
     assert message(event(NotificationKind.QUESTION_FLAGGED, title="Acme"), "https://x") is None
 

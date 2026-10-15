@@ -48,7 +48,8 @@ def message(event: dict, site: str) -> str | None:
     """A notification as a Slack message (in English, like the bell's English text), linking to
     where it points; None for a kind Slack doesn't get."""
     data = event.get("data") or {}
-    title = data.get("title") or "an interview"
+    # An interview without its title yet is named without quotes.
+    named = f"“{data['title']}”" if data.get("title") else "an interview"
     # "Name (email)" once the candidate's name is known.
     candidate = (
         f"{data['candidate_name']} ({data.get('email')})"
@@ -56,14 +57,16 @@ def message(event: dict, site: str) -> str | None:
         else data.get("email")
     )
     texts = {
-        NotificationKind.CANDIDATE_FINISHED: f"{candidate} finished “{title}”"
+        NotificationKind.CANDIDATE_FINISHED: f"{candidate} finished {named}"
         + (f": {data['grade']}%." if data.get("grade") is not None else "."),
         NotificationKind.ATS_NOT_INVITED: f"{candidate} from {data.get('ats', 'your ATS')}"
-        f" wasn't invited to “{title}”: "
+        f" wasn't invited to {named}: "
         f"{NOT_INVITED.get(data.get('reason'), 'something went wrong')}.",
-        NotificationKind.INVITE_UNDELIVERED: f"The invite to {candidate} for “{title}”"
+        NotificationKind.INVITE_UNDELIVERED: f"The invite to {candidate} for {named}"
         " wasn't delivered.",
-        NotificationKind.INTERVIEW_READY: f"The interview “{title}” is ready.",
+        NotificationKind.INTERVIEW_READY: f"The interview {named} is ready."
+        if data.get("title")
+        else "An interview is ready.",
         NotificationKind.AUTO_TOP_UP_CHARGED: f"Automatic top-up added {data.get('credits')}"
         " credits.",
         NotificationKind.AUTO_TOP_UP_FAILED: "Automatic top-up couldn't charge the card. Top up"

@@ -24,6 +24,8 @@ async def remind_unstarted(before: datetime) -> int:
             CandidateInvite.status == InviteStatus.INVITED,
             CandidateInvite.sent_at < before,
             CandidateInvite.reminded_at.is_(None),
+            # A reminder names its interview: one without a stored title waits for it.
+            Interview.title.is_not(None),
         )
         .limit(REMINDERS_PER_RUN)
         .with_for_update(of=CandidateInvite, skip_locked=True)
@@ -43,7 +45,7 @@ async def remind_unstarted(before: datetime) -> int:
                     "company_id": str(company.id),
                     "email": invite.email,
                     "token": invite.token,
-                    "title": interview.title or "an interview",
+                    "title": interview.title,
                     "company": company.name,
                     "language": interview.language,
                     "logo_path": logo_path(company),

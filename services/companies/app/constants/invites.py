@@ -119,6 +119,8 @@ TOO_MANY_WITHOUT_CANDIDATES_UNPAID = (
 # Starting an interview with an email the sign-in hasn't verified (GitHub doesn't): a link to
 # confirm it was sent when they signed in.
 # Inviting a candidate who already finished (their results are in) again.
+# An interview without its questions (and so its title) yet takes no invites.
+INTERVIEW_NOT_READY = "Interview is still being generated"
 ALREADY_FINISHED = "This candidate already finished the interview."
 # A reminder asked for a candidate invited without prepza's emails or sign-in.
 NO_EMAILS_FOR_GUEST = "prepza doesn't email this candidate: send them their invite link yourself."

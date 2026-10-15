@@ -147,6 +147,7 @@ def test_marking_a_test_hired_turns_its_link_off(run):
 def test_a_candidate_who_has_not_started_is_reminded_once_until_invited_again(run):
     async def scenario():
         found = await interview()
+        await interviews.set_title(found.id, "Backend")
         invite, _ = await invites.upsert(found.id, "rita@example.com", "Backend", "Acme", "en")
         later = datetime.now(UTC) + timedelta(seconds=1)
         first = await reminders.remind_unstarted(later)
@@ -248,6 +249,7 @@ def test_a_candidate_invited_again_after_removal_is_held_under_a_new_key(run, mo
 
     async def scenario():
         found = await interview()
+        await interviews.set_title(found.id, "Backend")
         await interview_storage.set_set_id(found.id, uuid.uuid4())
         found = await interview_storage.get(found.id)
         company = await companies.get(found.company_id)

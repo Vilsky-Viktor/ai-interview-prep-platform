@@ -5,7 +5,13 @@ from prepza_common.rate_limit import hit_emails
 from prepza_common.user import User
 
 from app.config.settings import settings
-from app.constants.invites import ALREADY_FINISHED, COMPANY_SUSPENDED, NOT_STARTED, InviteStatus
+from app.constants.invites import (
+    ALREADY_FINISHED,
+    COMPANY_SUSPENDED,
+    INTERVIEW_NOT_READY,
+    NOT_STARTED,
+    InviteStatus,
+)
 from app.helpers.candidates import new_hold_key
 from app.helpers.interviews import interview_title
 from app.helpers.logos import logo_path
@@ -60,7 +66,12 @@ async def invite(
             settings.email_daily_limit,
             settings.email_recipient_daily_limit,
         )
-        title = await interview_title(interview) or "an interview"
+        title = await interview_title(interview)
+
+        # A ready interview has its title; without one, no email names it wrongly.
+        if not title:
+            raise HTTPException(status.HTTP_409_CONFLICT, INTERVIEW_NOT_READY)
+
         invite, revived = await invites.upsert(
             interview.id,
             email,

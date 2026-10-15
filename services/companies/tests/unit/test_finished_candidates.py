@@ -1,8 +1,10 @@
 import pytest
 
-from app.constants.invites import ALREADY_FINISHED, InviteStatus
+from app.constants.invites import ALREADY_FINISHED, INTERVIEW_NOT_READY, InviteStatus
 from app.helpers.candidates import row_actions
+from app.integrations import billing
 from app.main import app
+from app.services import candidate_invites
 from app.storage import invites
 from tests.unit.test_candidate_invites import URL, invite_setup
 
@@ -35,3 +37,23 @@ def test_a_finished_candidate_is_not_invited_again(client, monkeypatch):
 )
 def test_the_server_says_what_each_candidate_allows(status, can_resend, revokable):
     assert row_actions(status) == {"can_resend": can_resend, "revokable": revokable}
+
+
+def test_an_interview_without_its_title_sends_no_invite_and_keeps_no_credits(client, monkeypatch):
+    sent, used = invite_setup(monkeypatch)
+    released = []
+
+    async def no_title(interview):
+        return None
+
+    async def release(key):
+        released.append(key)
+
+    monkeypatch.setattr(candidate_invites, "interview_title", no_title)
+    monkeypatch.setattr(billing, "release_candidate", release)
+
+    response = client.post(URL, json={"email": "carol@example.com"})
+    app.dependency_overrides.clear()
+
+    assert (response.status_code, response.json()["detail"]) == (409, INTERVIEW_NOT_READY)
+    assert sent == [] and released == used

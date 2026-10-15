@@ -7,6 +7,7 @@ from prepza_common.names import clean_name
 from prepza_common.pause import refuse_if_paused
 
 from app.constants.invites import (
+    INTERVIEW_NOT_READY,
     MAX_BULK_INVITES,
     NAME_NEEDS_ONE_EMAIL,
     NO_EMAILS,
@@ -46,7 +47,7 @@ async def invite_many(interview_id: UUID, body: BulkInviteIn, user: CurrentUser)
     interview = await attach_set(interview)
 
     if interview.set_id is None:
-        raise HTTPException(status.HTTP_409_CONFLICT, "Interview is still being generated")
+        raise HTTPException(status.HTTP_409_CONFLICT, INTERVIEW_NOT_READY)
 
     refusal = list_refusal(body.text, body.filename)
 

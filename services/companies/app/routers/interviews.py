@@ -7,6 +7,7 @@ from prepza_common.paging import PageParams
 from prepza_common.pause import refuse_if_paused
 
 from app.constants.audit import AuditAction
+from app.constants.invites import INTERVIEW_NOT_READY
 from app.helpers.interviews import (
     attach_set,
     attach_set_if_reachable,
@@ -127,7 +128,7 @@ async def rename_interview(interview_id: UUID, body: TitleIn, user: CurrentUser)
     await require_editor(user, interview.company_id)
 
     if interview.set_id is None:
-        raise HTTPException(status.HTTP_409_CONFLICT, "Interview is still being generated")
+        raise HTTPException(status.HTTP_409_CONFLICT, INTERVIEW_NOT_READY)
 
     await library.rename_set(interview.set_id, body.title)
     await interviews.set_title(interview.id, body.title)

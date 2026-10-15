@@ -96,7 +96,7 @@ The service sends, as HTML with a plain-text version:
 - contact page messages, to `CONTACT_EMAIL` (hello@prepza.ai by default),
 - to company members: the activity digest, reminders, and failed automatic top-ups (see [Emails to company members](#emails-to-company-members)).
 
-Invites and reminders from a company prepza hasn't verified say so in a small line at the bottom.
+Invites and reminders from a company prepza hasn't verified say so in a small line at the bottom. Every invite and reminder names its interview: an interview without its title (its questions not made yet) takes no invite (409), and its reminders wait for the title. The bell and Slack name an interview without a title in words, without empty quotes, in every language.
 
 `SITE_URL` is the site address that links in emails point to; emails link only there (no shorteners or tracking redirects).
 

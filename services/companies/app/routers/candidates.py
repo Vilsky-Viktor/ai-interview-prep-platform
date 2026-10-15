@@ -11,6 +11,7 @@ from prepza_common.pause import refuse_if_paused
 from app.constants.audit import AuditAction
 from app.constants.invites import (
     EXTRA_TIME_OPTIONS,
+    INTERVIEW_NOT_READY,
     MAX_SEARCH_LENGTH,
     NOT_STARTED,
     CandidateFilter,
@@ -51,7 +52,7 @@ async def invite_candidate(
     interview = await attach_set(interview)
 
     if interview.set_id is None:
-        raise HTTPException(status.HTTP_409_CONFLICT, "Interview is still being generated")
+        raise HTTPException(status.HTTP_409_CONFLICT, INTERVIEW_NOT_READY)
 
     invite = await candidate_invites.invite(interview, company, user, str(body.email), body.name)
     await outbox_service.flush_quietly()
