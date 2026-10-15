@@ -23,6 +23,7 @@ PRIVACY_SECTIONS = [
             "Contact messages: the name, email address and message you send through the contact page.",
             "Interviews, if a company invites you: the email you were invited with, your answers, how long each answer took, when you left the interview page, copied text or answered too fast to have read the question, any extra time the company gave you (no reason is recorded), and your ratings and reports of questions. You are told about this before you start.",
             "Technical: error reports without your IP address or email, and short-lived server logs needed to run and secure the service.",
+            "The \"I'm not a robot\" check: when you send the contact form, ask the help chat a first question, start an interview through a job ad's link, create your first company, or approve the topics of a company that hasn't paid yet, Cloudflare Turnstile looks at your browser (such as its type, how it behaves and the address it connects from) to tell a person from a script. We receive only whether the check passed.",
             "AI apps you connect: the app's name and the site it returns to, and when you connected it and last used it. Its access is kept only as a one-way hash.",
             "The terms you accepted: the version of the terms in force when you signed up, and when, as proof of what you agreed to. It's deleted with your account.",
             "Tools a company connects: the keys or tokens its owner or admin creates in its applicant tracking system (Workable, Greenhouse, Teamtailor, Recruitee or Breezy HR) or Slack, stored encrypted; a one-way hash of each prepza API key and the addresses of its web hooks; and, from its applicant tracking system, the email, name and id of each candidate it sends to prepza.",
@@ -59,6 +60,7 @@ PRIVACY_SECTIONS = [
             "Resend: sending emails: invites and reminders to candidates, reports, emails to company members such as the activity digest, and contact messages (in the EU, Ireland).",
             "Google Workspace: our email inbox, which receives contact messages and the emails you send us (Google Ireland Ltd; mail may be stored outside the EU, under the EU-US Data Privacy Framework and standard contractual clauses).",
             "Sentry: error reports, with emails removed (in the EU).",
+            'Cloudflare (Turnstile; Cloudflare, Inc., United States, under the EU-US Data Privacy Framework): the "I\'m not a robot" check.',
             "Google Cloud, our hosting provider, which stores the data (in the EU, Belgium).",
             "Upstash: short-lived counters for rate limits and live updates (in the EU, Belgium).",
             "Paddle sells the top-ups as the merchant of record: it handles payments and taxes as an independent controller, under its own privacy policy.",
@@ -86,7 +88,7 @@ PRIVACY_SECTIONS = [
     {
         "heading": "Transfers outside the EU",
         "paragraphs": [
-            "Two of these providers handle data in the United States: Google, for sign-in, and OpenAI. These transfers are covered by the EU-US Data Privacy Framework or the European Commission's standard contractual clauses, as noted above. Write to us for a copy of the safeguards that apply.",
+            "Three of these providers handle data in the United States: Google, for sign-in, OpenAI, and Cloudflare, for the \"I'm not a robot\" check. These transfers are covered by the EU-US Data Privacy Framework or the European Commission's standard contractual clauses, as noted above. Write to us for a copy of the safeguards that apply.",
         ],
     },
     {
@@ -127,6 +129,7 @@ PRIVACY_SECTIONS = [
             "To keep you signed in: a cookie (prepza_token, until you sign out) and the browser storage of our sign-in provider, Google Firebase. While you connect an AI app, a cookie (prepza_connect) lasts the few minutes it takes.",
             "To remember your choices: your language (a cookie, prepza_locale, for a year), your light or dark theme, the width of the assistant's panel, how you last invited candidates, that you signed in on this browser before, and your conversation with the assistant (until you sign in, only in this tab). They stay in your browser until you clear them.",
             "A referral link: only if you choose to keep it, a cookie (prepza_ref) remembers the link you came through for 30 days, so the credits reach both companies.",
+            'The "I\'m not a robot" check runs in a small frame from Cloudflare when a form needs it, and sets no tracking cookies.',
         ],
     },
     {

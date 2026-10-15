@@ -206,8 +206,8 @@ ACCOUNT_OWNS_SHARED = (
 # companies the DPA a new company does.
 LEGAL_VERSIONS = {
     "terms": "2026-10-14",
-    "privacy": "2026-10-14",
-    "dpa": "2026-10-14",
+    "privacy": "2026-10-29",
+    "dpa": "2026-10-29",
 }
 
 # The sign-in a company's own platform gives its candidate with the invite link (no email, no

@@ -1,6 +1,6 @@
 # Data protection impact assessment (DPIA): template for companies using prepza
 
-Version: 2026-10-14\
+Version: 2026-10-29\
 Operator: Arcolabs OÜ (registry code 17587452), Sepapaja tn 6, 15551 Tallinn, Harju maakond, Estonia; hello@prepza.ai
 
 For companies that invite candidates through prepza. Your company is the **controller** of
@@ -80,6 +80,7 @@ multiple-choice test, as one input to a hiring decision made by **[COMPANY: who]
 - Resend (emails; EU, Ireland).
 - Google Workspace (prepza's email inbox: messages from companies and candidates, and requests passed on to the company; Google Ireland Ltd, mail may be stored outside the EU under the EU-US Data Privacy Framework and standard contractual clauses).
 - Sentry (error reports, without email addresses; EU).
+- Cloudflare (the "I'm not a robot" check, Turnstile, when a candidate starts through a job ad's link: their browser's signals and address, from which prepza keeps only whether it passed; Cloudflare, Inc., United States, under the EU-US Data Privacy Framework).
 - Upstash (short-lived counters for limits and live updates; EU, Belgium).
 - Paddle (payments; receives no candidate data).
 
