@@ -1,4 +1,5 @@
 from prepza_common import http
+from prepza_common.http import bearer
 
 from app.config.settings import settings
 from app.service_auth import service_token
@@ -9,7 +10,7 @@ async def company_ids(user_id: str) -> list[str]:
     raises when companies doesn't answer."""
     response = await http.get_client().get(
         f"{settings.companies_url}/internal/users/{user_id}/companies",
-        headers={"Authorization": f"Bearer {service_token('companies')}"},
+        headers=bearer(service_token("companies")),
     )
     response.raise_for_status()
 

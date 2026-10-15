@@ -2,6 +2,7 @@ from uuid import UUID
 
 import httpx
 from prepza_common import http
+from prepza_common.http import bearer
 
 from app.config.settings import settings
 from app.service_auth import service_token
@@ -26,7 +27,7 @@ async def create(
             "generate_in": generate_in,
             "paid": paid,
         },
-        headers={"Authorization": f"Bearer {service_token('generation')}"},
+        headers=bearer(service_token("generation")),
     )
 
     response.raise_for_status()
@@ -41,7 +42,7 @@ async def regenerate_question(
     return await http.get_client().post(
         f"{settings.generation_url}/internal/questions/{question_id}/regenerate",
         json={"user_id": user_id, "set_id": str(set_id), "paid": paid},
-        headers={"Authorization": f"Bearer {service_token('generation')}"},
+        headers=bearer(service_token("generation")),
         timeout=120,
     )
 
@@ -51,7 +52,7 @@ async def get(generation_id: UUID, company_id: UUID) -> dict | None:
     response = await http.get_client().get(
         f"{settings.generation_url}/internal/generations/{generation_id}",
         params={"company_id": str(company_id)},
-        headers={"Authorization": f"Bearer {service_token('generation')}"},
+        headers=bearer(service_token("generation")),
     )
 
     if response.status_code == httpx.codes.NOT_FOUND:
@@ -68,7 +69,7 @@ async def review(generation_id: UUID, company_id: UUID, body: dict) -> httpx.Res
         f"{settings.generation_url}/internal/generations/{generation_id}/review",
         params={"company_id": str(company_id)},
         json=body,
-        headers={"Authorization": f"Bearer {service_token('generation')}"},
+        headers=bearer(service_token("generation")),
     )
 
 
@@ -77,7 +78,7 @@ async def cancel(generation_id: UUID, company_id: UUID) -> httpx.Response:
     return await http.get_client().post(
         f"{settings.generation_url}/internal/generations/{generation_id}/cancel",
         params={"company_id": str(company_id)},
-        headers={"Authorization": f"Bearer {service_token('generation')}"},
+        headers=bearer(service_token("generation")),
     )
 
 
@@ -86,5 +87,5 @@ async def retry(generation_id: UUID, company_id: UUID) -> httpx.Response:
     return await http.get_client().post(
         f"{settings.generation_url}/internal/generations/{generation_id}/retry",
         params={"company_id": str(company_id)},
-        headers={"Authorization": f"Bearer {service_token('generation')}"},
+        headers=bearer(service_token("generation")),
     )

@@ -2,6 +2,7 @@ import uuid
 from types import SimpleNamespace
 
 from prepza_common import http
+from prepza_common.http import bearer
 
 from app.services import outbox
 from app.storage import preparations
@@ -47,7 +48,7 @@ def test_a_replaced_question_leaves_past_answers_alone(client, monkeypatch):
     response = client.put(
         f"/internal/questions/{QUESTION_ID}",
         json={"text": "What is debit?", "options": OPTIONS},
-        headers={"Authorization": f"Bearer {token()}"},
+        headers=bearer(token()),
     )
 
     assert response.status_code == 204

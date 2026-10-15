@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from prepza_common import company_access, http
+from prepza_common.http import bearer
 
 from app.config.settings import settings
 from app.integrations.batches import post_ids
@@ -10,7 +11,7 @@ from app.service_auth import service_token
 async def invite_undelivered(invite_id: str) -> None:
     response = await http.get_client().post(
         f"{settings.companies_url}/internal/invites/{invite_id}/undelivered",
-        headers={"Authorization": f"Bearer {service_token('companies')}"},
+        headers=bearer(service_token("companies")),
     )
 
     response.raise_for_status()
@@ -20,7 +21,7 @@ async def company_ids(user_id: str) -> list[str]:
     """Every company the user belongs to: they see its notifications too."""
     response = await http.get_client().get(
         f"{settings.companies_url}/internal/users/{user_id}/companies",
-        headers={"Authorization": f"Bearer {service_token('companies')}"},
+        headers=bearer(service_token("companies")),
     )
 
     response.raise_for_status()
@@ -34,7 +35,7 @@ async def invited_company_ids(email: str) -> list[str]:
     response = await http.get_client().post(
         f"{settings.companies_url}/internal/invites/companies",
         json={"email": email},
-        headers={"Authorization": f"Bearer {service_token('companies')}"},
+        headers=bearer(service_token("companies")),
     )
 
     response.raise_for_status()
@@ -74,7 +75,7 @@ async def waiting_interviews(ready: tuple[datetime, datetime], started: tuple[da
             "started_after": started[0].isoformat(),
             "started_before": started[1].isoformat(),
         },
-        headers={"Authorization": f"Bearer {service_token('companies')}"},
+        headers=bearer(service_token("companies")),
     )
 
     response.raise_for_status()
@@ -86,7 +87,7 @@ async def editor_ids() -> list[str]:
     """Every owner and admin of a company, for a notice about the data processing agreement."""
     response = await http.get_client().get(
         f"{settings.companies_url}/internal/companies/editors",
-        headers={"Authorization": f"Bearer {service_token('companies')}"},
+        headers=bearer(service_token("companies")),
     )
 
     response.raise_for_status()

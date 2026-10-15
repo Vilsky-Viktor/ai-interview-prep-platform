@@ -1,5 +1,6 @@
 import httpx
 from prepza_common import http
+from prepza_common.http import bearer
 
 from app.config.settings import settings
 from app.constants.slack import (
@@ -71,7 +72,7 @@ async def revoke(token: str) -> None:
     try:
         await http.get_client().post(
             SLACK_REVOKE_URL,
-            headers={"Authorization": f"Bearer {token}"},
+            headers=bearer(token),
             timeout=SLACK_TIMEOUT_SECONDS,
         )
     except httpx.HTTPError:

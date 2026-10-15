@@ -2,6 +2,7 @@ from uuid import UUID
 
 import httpx
 from prepza_common import http
+from prepza_common.http import bearer
 from prepza_common.sets import PreparationIn, QuestionIn
 
 from app.config.settings import settings
@@ -24,7 +25,7 @@ async def _create(kind: str, preparation: PreparationIn) -> UUID:
     response = await http.get_client().post(
         f"{settings.library_url}/internal/{kind}",
         json=preparation.model_dump(mode="json"),
-        headers={"Authorization": f"Bearer {service_token('library')}"},
+        headers=bearer(service_token("library")),
     )
 
     response.raise_for_status()
@@ -36,7 +37,7 @@ async def delete_set(set_id: UUID) -> None:
     """Deletes a saved test or template; safe to repeat."""
     response = await http.get_client().delete(
         f"{settings.library_url}/internal/interviews/{set_id}",
-        headers={"Authorization": f"Bearer {service_token('library')}"},
+        headers=bearer(service_token("library")),
     )
 
     response.raise_for_status()
@@ -45,7 +46,7 @@ async def delete_set(set_id: UUID) -> None:
 async def get_question_context(question_id: UUID) -> QuestionContext | None:
     response = await http.get_client().get(
         f"{settings.library_url}/internal/questions/{question_id}/context",
-        headers={"Authorization": f"Bearer {service_token('library')}"},
+        headers=bearer(service_token("library")),
     )
 
     if response.status_code == httpx.codes.NOT_FOUND:
@@ -60,7 +61,7 @@ async def replace_question(question_id: UUID, question: RegeneratedQuestion) -> 
     response = await http.get_client().put(
         f"{settings.library_url}/internal/questions/{question_id}",
         json=question.model_dump(),
-        headers={"Authorization": f"Bearer {service_token('library')}"},
+        headers=bearer(service_token("library")),
     )
 
     response.raise_for_status()
@@ -69,7 +70,7 @@ async def replace_question(question_id: UUID, question: RegeneratedQuestion) -> 
 async def get_question_quality(question_id: UUID) -> QuestionQuality | None:
     response = await http.get_client().get(
         f"{settings.library_url}/internal/questions/{question_id}/quality",
-        headers={"Authorization": f"Bearer {service_token('library')}"},
+        headers=bearer(service_token("library")),
     )
 
     if response.status_code == httpx.codes.NOT_FOUND:
@@ -83,7 +84,7 @@ async def get_question_quality(question_id: UUID) -> QuestionQuality | None:
 async def keep_question(question_id: UUID) -> None:
     response = await http.get_client().post(
         f"{settings.library_url}/internal/questions/{question_id}/keep",
-        headers={"Authorization": f"Bearer {service_token('library')}"},
+        headers=bearer(service_token("library")),
     )
 
     response.raise_for_status()
@@ -94,7 +95,7 @@ async def find_reusable(request: ReuseIn) -> list[QuestionIn]:
     response = await http.get_client().post(
         f"{settings.library_url}/internal/reuse",
         json=request.model_dump(),
-        headers={"Authorization": f"Bearer {service_token('library')}"},
+        headers=bearer(service_token("library")),
     )
 
     response.raise_for_status()
@@ -107,7 +108,7 @@ async def missing_embeddings(limit: int) -> list[dict]:
     response = await http.get_client().get(
         f"{settings.library_url}/internal/embeddings/missing",
         params={"limit": limit},
-        headers={"Authorization": f"Bearer {service_token('library')}"},
+        headers=bearer(service_token("library")),
     )
 
     response.raise_for_status()
@@ -119,7 +120,7 @@ async def save_embeddings(embeddings: dict[str, list[float]]) -> None:
     response = await http.get_client().put(
         f"{settings.library_url}/internal/embeddings",
         json=[{"id": topic_id, "embedding": value} for topic_id, value in embeddings.items()],
-        headers={"Authorization": f"Bearer {service_token('library')}"},
+        headers=bearer(service_token("library")),
     )
 
     response.raise_for_status()
@@ -129,7 +130,7 @@ async def get_question_ids(set_id: UUID) -> list[list[UUID]]:
     """Each topic's question ids in a set."""
     response = await http.get_client().get(
         f"{settings.library_url}/internal/sets/{set_id}/content",
-        headers={"Authorization": f"Bearer {service_token('library')}"},
+        headers=bearer(service_token("library")),
     )
 
     response.raise_for_status()
@@ -144,7 +145,7 @@ async def get_news_source(news_id: UUID) -> NewsSource | None:
     """A news post's English text and the languages it lacks; None once it's deleted."""
     response = await http.get_client().get(
         f"{settings.library_url}/internal/news/{news_id}",
-        headers={"Authorization": f"Bearer {service_token('library')}"},
+        headers=bearer(service_token("library")),
     )
 
     if response.status_code == httpx.codes.NOT_FOUND:
@@ -166,7 +167,7 @@ async def save_news_translations(
             "text": source.text,
             "translations": {code: item.model_dump() for code, item in translations.items()},
         },
-        headers={"Authorization": f"Bearer {service_token('library')}"},
+        headers=bearer(service_token("library")),
     )
 
     response.raise_for_status()

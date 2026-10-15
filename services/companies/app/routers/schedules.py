@@ -2,16 +2,17 @@ import logging
 from datetime import UTC, datetime, timedelta
 
 from fastapi import APIRouter, status
-from prepza_common import pause
+from prepza_common import pause, processed_events
 from prepza_common.google import Invoker
 
 from app.constants.events import PROCESSED_EVENT_DAYS
 from app.integrations.redis import get_redis
+from app.models.events import ProcessedEvent
 from app.services import outbox as outbox_service
 from app.services.candidate_billing import expire_unstarted
 from app.services.reminders import remind_unstarted
 from app.services.retention import delete_expired_candidates, delete_old_audit_events
-from app.storage import processed_events
+from app.storage.db import Session
 
 logger = logging.getLogger(__name__)
 
@@ -33,7 +34,9 @@ async def retention() -> None:
         logger.info("Deleted %d old audit events", audited)
 
     # Events are remembered only while Pub/Sub may deliver them again.
-    await processed_events.forget(datetime.now(UTC) - timedelta(days=PROCESSED_EVENT_DAYS))
+    await processed_events.forget(
+        Session, ProcessedEvent, datetime.now(UTC) - timedelta(days=PROCESSED_EVENT_DAYS)
+    )
 
 
 @router.post("/invite-expiry", status_code=status.HTTP_204_NO_CONTENT)

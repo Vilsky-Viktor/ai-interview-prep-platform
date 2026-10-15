@@ -11,9 +11,10 @@ from app.constants.invites import InviteStatus
 from app.constants.roles import Role
 from app.integrations import billing, rounds
 from app.models.companies import Company, Member
+from app.routers import schedules
 from app.services import accounts as account_service
 from app.services import company_deletion, retention
-from app.storage import accounts, audit, processed_events
+from app.storage import accounts, audit
 
 INTERVIEW_ID = uuid.uuid4()
 
@@ -179,14 +180,14 @@ def test_cloud_scheduler_runs_retention_through_its_route(client, monkeypatch):
 
         return 0
 
-    async def forget(before):
+    async def forget(sessionmaker, model, before):
         cutoffs.append(before)
 
         return 0
 
     monkeypatch.setattr(accounts, "expired_invites", expired_invites)
     monkeypatch.setattr(audit, "delete_before", delete_before)
-    monkeypatch.setattr(processed_events, "forget", forget)
+    monkeypatch.setattr(schedules.processed_events, "forget", forget)
 
     assert client.post("/internal/schedules/retention").status_code == 204
     # Audit events go after 24 months; the notes of processed events after Pub/Sub's redeliveries.

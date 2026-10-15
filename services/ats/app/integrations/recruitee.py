@@ -1,4 +1,5 @@
 from fastapi import status
+from prepza_common.http import bearer
 
 from app.constants.ats import RECRUITEE_API, RECRUITEE_OPEN_JOBS
 from app.integrations.ats_http import REJECTED, checked, json_of, send
@@ -14,7 +15,7 @@ async def _call(
     method: str, company: str, token: str, path: str, params=None, body=None, rejected=REJECTED
 ) -> dict:
     url = RECRUITEE_API.format(company=company) + path
-    headers = {"Authorization": f"Bearer {token}"}
+    headers = bearer(token)
     response = await send(method, url, headers, UNAVAILABLE, params, body)
 
     return json_of(checked(response, UNAVAILABLE, rejected))

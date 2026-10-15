@@ -3,7 +3,7 @@ from uuid import UUID
 import httpx
 from fastapi import HTTPException, status
 from prepza_common import http
-from prepza_common.http import passed_on
+from prepza_common.http import bearer, passed_on
 
 from app.config.settings import settings
 from app.constants.billing import WELCOME_ATTEMPTS
@@ -11,7 +11,7 @@ from app.service_auth import service_token
 
 
 def _headers() -> dict:
-    return {"Authorization": f"Bearer {service_token('billing')}"}
+    return bearer(service_token("billing"))
 
 
 async def hold_candidate(company_id: UUID, key: str) -> None:

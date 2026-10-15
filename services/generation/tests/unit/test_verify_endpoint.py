@@ -4,6 +4,7 @@ from datetime import UTC, datetime, timedelta
 from types import SimpleNamespace
 
 import jwt
+from prepza_common.http import bearer
 
 from app.constants.generation import VERIFY_QUESTION
 from app.constants.quality import QualityFlag
@@ -35,7 +36,7 @@ def test_verify_endpoint_queues_the_worker_job(client, queued, monkeypatch):
     response = client.post(
         f"/internal/questions/{QUESTION_ID}/verify",
         json={"flag": "wrong_key"},
-        headers={"Authorization": f"Bearer {service_token}"},
+        headers=bearer(service_token),
     )
 
     assert response.status_code == 202
@@ -93,7 +94,7 @@ def test_verify_jobs_past_the_daily_cap_are_refused_but_fix_now_is_not(client, q
         algorithm="HS256",
     )
     url = f"/internal/questions/{QUESTION_ID}/verify"
-    headers = {"Authorization": f"Bearer {service_token}"}
+    headers = bearer(service_token)
 
     assert client.post(url, json={"flag": "rewrite"}, headers=headers).status_code == 503
     assert queued == []

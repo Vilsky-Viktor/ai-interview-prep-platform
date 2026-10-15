@@ -1,6 +1,7 @@
 import uuid
 from types import SimpleNamespace
 
+from prepza_common.http import bearer
 from prepza_common.notifications import notification
 from prepza_common.service_auth import issue_token
 
@@ -46,7 +47,7 @@ def test_notifications_marks_an_invite_undelivered_and_the_company_is_told(clien
         # Slack opens the candidate, where the invite is resent.
         candidate_link=f"/companies/{company}/interviews/{INTERVIEW.id}/candidates/{INVITE_ID}",
     )
-    assert client.post(URL, headers={"Authorization": f"Bearer {token}"}).status_code == 204
+    assert client.post(URL, headers=bearer(token)).status_code == 204
     assert marked == [(INVITE_ID, undelivered)]
 
 
@@ -68,7 +69,7 @@ def test_notifications_asks_which_companies_invited_an_address(client, monkeypat
     response = client.post(
         "/internal/invites/companies",
         json={"email": "ann@example.com"},
-        headers={"Authorization": f"Bearer {token}"},
+        headers=bearer(token),
     )
 
     assert response.json() == {"company_ids": ["c-1"]}

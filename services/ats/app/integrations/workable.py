@@ -1,5 +1,6 @@
 import httpx
 from fastapi import status
+from prepza_common.http import bearer
 
 from app.constants.ats import (
     WORKABLE_API,
@@ -27,7 +28,7 @@ async def _call(
     """One call to Workable's API (ats_http: a refused key raises KeyRejected; something gone,
     a 404; anything else that fails, a 502 the caller can retry)."""
     url = WORKABLE_API.format(subdomain=subdomain) + path
-    headers = {"Authorization": f"Bearer {token}"}
+    headers = bearer(token)
     response = await send(method, url, headers, UNAVAILABLE, params, body)
 
     return json_of(checked(response, UNAVAILABLE, rejected))

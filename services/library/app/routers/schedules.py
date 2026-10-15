@@ -2,14 +2,17 @@ import logging
 from datetime import UTC, datetime, timedelta
 
 from fastapi import APIRouter, status
+from prepza_common import processed_events
 from prepza_common.google import Invoker
 
 from app.constants.events import PROCESSED_EVENT_DAYS
 from app.constants.reuse import REVEAL_AFTER_IDLE_DAYS
+from app.models.events import ProcessedEvent
 from app.services import news as news_service
 from app.services import outbox as outbox_service
 from app.services import quality as quality_service
-from app.storage import bank, processed_events
+from app.storage import bank
+from app.storage.db import Session
 
 logger = logging.getLogger(__name__)
 
@@ -35,4 +38,6 @@ async def move_bank_stages() -> None:
     logger.info("Sent %d flagged questions to the verifier again", resent)
     untranslated = await news_service.resend_untranslated()
     logger.info("Sent %d news posts to be translated again", untranslated)
-    await processed_events.forget(now - timedelta(days=PROCESSED_EVENT_DAYS))
+    await processed_events.forget(
+        Session, ProcessedEvent, now - timedelta(days=PROCESSED_EVENT_DAYS)
+    )

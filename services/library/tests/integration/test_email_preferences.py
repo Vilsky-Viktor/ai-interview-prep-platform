@@ -1,6 +1,7 @@
 import asyncio
 
 import httpx
+from prepza_common.http import bearer
 
 from app.config.settings import settings
 from app.constants.emails import CONSENT_TEXT_VERSION, DEFAULTS
@@ -132,7 +133,7 @@ def test_an_unsubscribe_link_turns_settings_off_once_logged_as_an_unsubscribe(ru
                 response = await client.post(
                     "/internal/users/leaving/unsubscribe",
                     json={"settings": ["updates", "reminders"]},
-                    headers={"Authorization": f"Bearer {token(settings.service_secret)}"},
+                    headers=bearer(token(settings.service_secret)),
                 )
 
         return response.json(), await emails.consents("leaving")

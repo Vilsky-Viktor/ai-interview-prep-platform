@@ -2,6 +2,7 @@ import uuid
 from datetime import UTC, datetime, timedelta
 
 import jwt
+from prepza_common.http import bearer
 
 from app.constants.sets import SetKind
 from app.models.sets import QuestionSet
@@ -28,9 +29,7 @@ def token(secret="test-secret-that-is-at-least-32-bytes", lifetime=60):
 
 
 def post(client, value):
-    return client.post(
-        "/internal/interviews", json=PAYLOAD, headers={"Authorization": f"Bearer {value}"}
-    )
+    return client.post("/internal/interviews", json=PAYLOAD, headers=bearer(value))
 
 
 def test_create_with_service_token(client, monkeypatch):
@@ -68,7 +67,7 @@ def test_retried_interview_save_returns_the_existing_set(client, monkeypatch):
     response = client.post(
         "/internal/interviews",
         json=PAYLOAD,
-        headers={"Authorization": f"Bearer {token()}"},
+        headers=bearer(token()),
     )
 
     assert response.json() == {"id": str(existing_id)}
@@ -87,7 +86,7 @@ def interview_delete(client, monkeypatch, kind):
     monkeypatch.setattr(preparations, "remove", fake_remove)
     response = client.delete(
         f"/internal/interviews/{GENERATION_ID}",
-        headers={"Authorization": f"Bearer {token()}"},
+        headers=bearer(token()),
     )
 
     return response.status_code, removed

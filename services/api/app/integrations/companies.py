@@ -3,7 +3,7 @@ from uuid import UUID
 
 from fastapi import status
 from prepza_common import company_access, company_invites, http
-from prepza_common.http import passed_on
+from prepza_common.http import bearer, passed_on
 
 from app.config.settings import settings
 from app.service_auth import service_token
@@ -21,7 +21,7 @@ PASSED_ON = {
 
 
 def _headers() -> dict:
-    return {"Authorization": f"Bearer {service_token('companies')}"}
+    return bearer(service_token("companies"))
 
 
 async def _call(method: str, path: str, params: dict | None = None, body: dict | None = None):

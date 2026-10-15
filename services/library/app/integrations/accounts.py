@@ -1,4 +1,5 @@
 from prepza_common import http
+from prepza_common.http import bearer
 
 from app.config.settings import settings
 from app.service_auth import service_token
@@ -26,7 +27,7 @@ async def delete_user(service: str, user_id: str, email: str) -> None:
         "DELETE",
         f"{services()[service]}/internal/users/{user_id}",
         json={"email": email},
-        headers={"Authorization": f"Bearer {service_token(service)}"},
+        headers=bearer(service_token(service)),
     )
 
     response.raise_for_status()
@@ -36,7 +37,7 @@ async def export_user(service: str, user_id: str, email: str) -> dict:
     response = await http.get_client().post(
         f"{services()[service]}/internal/users/{user_id}/export",
         json={"email": email},
-        headers={"Authorization": f"Bearer {service_token(service)}"},
+        headers=bearer(service_token(service)),
     )
 
     response.raise_for_status()

@@ -2,6 +2,7 @@ from uuid import UUID
 
 import httpx
 from prepza_common import http
+from prepza_common.http import bearer
 
 from app.config.settings import settings
 from app.service_auth import service_token
@@ -10,7 +11,7 @@ from app.service_auth import service_token
 async def get_set(set_id: UUID) -> dict | None:
     response = await http.get_client().get(
         f"{settings.library_url}/internal/sets/{set_id}",
-        headers={"Authorization": f"Bearer {service_token('library')}"},
+        headers=bearer(service_token("library")),
     )
 
     if response.status_code == httpx.codes.NOT_FOUND:
@@ -25,7 +26,7 @@ async def practice_content(template_id: UUID) -> dict | None:
     """A template's revealed questions by topic, with answers; None when there's no template."""
     response = await http.get_client().get(
         f"{settings.library_url}/internal/templates/{template_id}/practice",
-        headers={"Authorization": f"Bearer {service_token('library')}"},
+        headers=bearer(service_token("library")),
     )
 
     if response.status_code == httpx.codes.NOT_FOUND:

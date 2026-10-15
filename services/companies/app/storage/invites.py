@@ -2,7 +2,7 @@ import secrets
 import uuid
 from datetime import UTC, datetime
 
-from prepza_common import outbox
+from prepza_common import outbox, processed_events
 from prepza_common.notifications import NOTIFICATION_REQUESTED
 from sqlalchemy import delete, func, select, update
 from sqlalchemy.dialects.postgresql import insert
@@ -16,10 +16,11 @@ from app.constants.events import (
 )
 from app.constants.invites import NOT_STARTED, InviteStatus
 from app.helpers.candidates import new_hold_key
+from app.models.events import ProcessedEvent
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
 from app.models.outbox import OutboxEvent
-from app.storage import candidate_events, processed_events
+from app.storage import candidate_events
 from app.storage.db import Session
 
 
@@ -227,7 +228,7 @@ async def finish(
     grade and integrity flag, and the company's notification and the candidate.finished event
     (`result`), if any: once per event, and none for a candidate erased meanwhile."""
     async with Session() as session:
-        new = await processed_events.claim(session, event_id)
+        new = await processed_events.claim(session, ProcessedEvent, event_id)
         # A candidate erased meanwhile (removed, or their account deleted) stays erased.
         updated = await session.scalar(
             update(CandidateInvite)

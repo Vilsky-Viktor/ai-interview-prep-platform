@@ -1,11 +1,13 @@
 from types import SimpleNamespace
 
+from prepza_common.http import bearer
+
 from app.constants.credits import CANDIDATE_CREDITS
 from app.service_auth import service_token
 from app.services import auto_top_ups
 from app.storage import ledger, purchases
 
-AUTH = {"Authorization": f"Bearer {service_token('billing')}"}
+AUTH = bearer(service_token("billing"))
 HOLD = {"company_id": "acme", "key": "session-1"}
 
 

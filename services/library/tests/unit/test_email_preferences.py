@@ -1,5 +1,6 @@
 import pytest
 from prepza_common.auth import current_user
+from prepza_common.http import bearer
 from prepza_common.user import User
 
 from app.constants.emails import DEFAULTS
@@ -97,7 +98,7 @@ def test_notifications_unsubscribes_a_user_from_an_email_link(client, signed_in)
     response = client.post(
         "/internal/users/ann/unsubscribe",
         json={"settings": ["candidate_finished", "interview_ready"]},
-        headers={"Authorization": f"Bearer {token()}"},
+        headers=bearer(token()),
     )
 
     assert response.status_code == 200
@@ -112,7 +113,7 @@ def test_an_unsubscribe_names_known_settings(client, signed_in, settings):
     response = client.post(
         "/internal/users/ann/unsubscribe",
         json={"settings": settings},
-        headers={"Authorization": f"Bearer {token()}"},
+        headers=bearer(token()),
     )
 
     assert response.status_code == 422

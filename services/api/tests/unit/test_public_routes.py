@@ -3,6 +3,7 @@ from datetime import UTC, datetime, timedelta
 
 import pytest
 from prepza_common import rate_limit
+from prepza_common.http import bearer
 from prepza_common.tokens import hashed
 from redis.exceptions import ConnectionError as RedisConnectionError
 
@@ -26,7 +27,7 @@ def key(stored):
 
 
 def call(client, method, path, key=KEY, **kwargs):
-    headers = {"Authorization": f"Bearer {key}"} if key else {}
+    headers = bearer(key) if key else {}
 
     return client.request(method, path, headers=headers, **kwargs)
 

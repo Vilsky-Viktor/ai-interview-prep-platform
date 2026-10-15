@@ -1,9 +1,11 @@
 import uuid
 from datetime import UTC, datetime, timedelta
 
+from prepza_common import processed_events
 from sqlalchemy import text, update
 
 from app.constants.sets import Stage
+from app.models.events import ProcessedEvent
 from app.models.sets import Question
 from app.services.answer_events import handle
 from app.storage import (
@@ -11,7 +13,6 @@ from app.storage import (
     answer_stats,
     feedback,
     preparations,
-    processed_events,
     quality,
     templates,
 )
@@ -90,7 +91,9 @@ def test_old_notes_of_processed_events_are_forgotten(run):
         question = (await preparations.get_content(template)).topics[0].questions[0]
         event_id = str(uuid.uuid4())
         await answer_stats.record_answer(event_id, question.id, question.text, "right", True)
-        forgotten = await processed_events.forget(datetime.now(UTC) + timedelta(seconds=1))
+        forgotten = await processed_events.forget(
+            Session, ProcessedEvent, datetime.now(UTC) + timedelta(seconds=1)
+        )
         # Forgotten, it would count again: only events past Pub/Sub's redeliveries are dropped.
         again = await answer_stats.record_answer(
             event_id, question.id, question.text, "right", True

@@ -5,6 +5,7 @@ from datetime import UTC, datetime, timedelta
 import jwt
 import pytest
 from prepza_common.constants import MAX_NEWS_TEXT_LENGTH
+from prepza_common.http import bearer
 
 from app.constants.generation import TRANSLATE_NEWS
 from app.integrations import library, llm
@@ -113,7 +114,7 @@ def test_the_translate_endpoint_queues_the_worker_job(client, queued):
 
     response = client.post(
         f"/internal/news/{NEWS_ID}/translate",
-        headers={"Authorization": f"Bearer {service_token}"},
+        headers=bearer(service_token),
     )
 
     assert response.status_code == 202

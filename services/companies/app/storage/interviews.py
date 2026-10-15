@@ -1,7 +1,7 @@
 import uuid
 from datetime import UTC, datetime
 
-from prepza_common import outbox
+from prepza_common import outbox, processed_events
 from prepza_common.notifications import NOTIFICATION_REQUESTED
 from sqlalchemy import delete, func, select, update
 
@@ -9,11 +9,11 @@ from app.constants.events import INTERVIEW_DELETED, INTERVIEW_READY
 from app.constants.invites import InviteStatus
 from app.helpers.search import escape_like
 from app.helpers.sync import changed_since
+from app.models.events import ProcessedEvent
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
 from app.models.outbox import OutboxEvent
 from app.schemas.interviews import InterviewSettings
-from app.storage import processed_events
 from app.storage.db import Session
 
 
@@ -221,7 +221,7 @@ async def set_generated(
     company's notification and the interview.ready event (ats invites the candidates waiting
     for it) with them, once per event."""
     async with Session() as session:
-        new = await processed_events.claim(session, event_id)
+        new = await processed_events.claim(session, ProcessedEvent, event_id)
         row = await session.execute(
             update(Interview)
             .where(Interview.generation_id == generation_id)
@@ -253,7 +253,7 @@ async def mark_failed(generation_id: uuid.UUID, event_id: str) -> None:
     """Marks the interview of a failed generation, once per event: a late redelivery doesn't
     mark it again after a retry. One with its questions already isn't touched."""
     async with Session() as session:
-        if await processed_events.claim(session, event_id):
+        if await processed_events.claim(session, ProcessedEvent, event_id):
             await session.execute(
                 update(Interview)
                 .where(Interview.generation_id == generation_id, Interview.set_id.is_(None))

@@ -2,6 +2,7 @@ import uuid
 from datetime import UTC, datetime
 from types import SimpleNamespace
 
+from prepza_common.http import bearer
 from prepza_common.service_auth import issue_token
 
 from app.storage import generations
@@ -25,7 +26,7 @@ def test_statuses_say_who_started_each_generation_and_since_when(client, monkeyp
     response = client.post(
         "/internal/generations/statuses",
         json={"ids": [str(found.id), str(uuid.uuid4())]},
-        headers={"Authorization": f"Bearer {TOKEN}"},
+        headers=bearer(TOKEN),
     )
 
     assert response.json() == {

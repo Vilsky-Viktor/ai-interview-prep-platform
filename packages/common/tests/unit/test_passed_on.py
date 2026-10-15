@@ -5,7 +5,7 @@ import httpx
 import pytest
 from fastapi import HTTPException
 from prepza_common import company_invites, http
-from prepza_common.http import passed_on
+from prepza_common.http import bearer, passed_on
 
 
 def answer(code: int, body=None) -> httpx.Response:
@@ -47,3 +47,7 @@ def test_an_invite_through_companies_returns_its_id_or_its_refusal(monkeypatch):
     with pytest.raises(HTTPException) as refused:
         asyncio.run(company_invites.invite("http://companies", "t", made, body, {409}))
     assert refused.value.detail == "Interview is still being generated"
+
+
+def test_a_token_goes_in_the_authorization_header():
+    assert bearer("t0ken") == {"Authorization": "Bearer t0ken"}

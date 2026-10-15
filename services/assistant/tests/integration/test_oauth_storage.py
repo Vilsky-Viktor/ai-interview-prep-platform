@@ -6,6 +6,7 @@ import uuid
 from datetime import UTC, datetime, timedelta
 
 import httpx
+from prepza_common.http import bearer
 from prepza_common.service_auth import issue_token
 from prepza_common.tokens import hashed
 from sqlalchemy import update
@@ -24,7 +25,7 @@ def internal() -> httpx.AsyncClient:
     return httpx.AsyncClient(
         transport=httpx.ASGITransport(app=app),
         base_url="http://assistant",
-        headers={"Authorization": f"Bearer {token}"},
+        headers=bearer(token),
     )
 
 

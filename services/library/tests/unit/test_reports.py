@@ -1,13 +1,14 @@
 import uuid
 
 import pytest
+from prepza_common.http import bearer
 
 from app.storage import feedback
 from tests.unit.fake_redis import FakeRedis
 from tests.unit.test_internal import token
 
 QUESTION_ID = uuid.uuid4()
-AUTH = {"Authorization": f"Bearer {token()}"}
+AUTH = bearer(token())
 
 
 @pytest.fixture(autouse=True)

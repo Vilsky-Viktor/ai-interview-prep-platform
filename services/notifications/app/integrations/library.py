@@ -1,4 +1,5 @@
 from prepza_common import http
+from prepza_common.http import bearer
 
 from app.config.settings import settings
 from app.integrations.batches import post_ids
@@ -10,7 +11,7 @@ async def unsubscribe(user_id: str, email_settings: list[str]) -> None:
     response = await http.get_client().post(
         f"{settings.library_url}/internal/users/{user_id}/unsubscribe",
         json={"settings": email_settings},
-        headers={"Authorization": f"Bearer {service_token('library')}"},
+        headers=bearer(service_token("library")),
     )
 
     response.raise_for_status()
@@ -28,7 +29,7 @@ async def user_ids() -> list[str]:
     """Every account, for a notice about the terms or the privacy policy."""
     response = await http.get_client().get(
         f"{settings.library_url}/internal/users/ids",
-        headers={"Authorization": f"Bearer {service_token('library')}"},
+        headers=bearer(service_token("library")),
     )
 
     response.raise_for_status()

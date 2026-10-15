@@ -3,6 +3,7 @@ from datetime import UTC, datetime
 from types import SimpleNamespace
 
 import pytest
+from prepza_common.http import bearer
 from prepza_common.service_auth import issue_token
 
 from app.routers import internal_api
@@ -27,7 +28,7 @@ INVITE = SimpleNamespace(
     updated_at=datetime(2026, 10, 3, 9, 20, tzinfo=UTC),
 )
 TOKEN = issue_token("api", "companies", "test-secret-that-is-at-least-32-bytes")
-HEADERS = {"Authorization": f"Bearer {TOKEN}"}
+HEADERS = bearer(TOKEN)
 BASE = f"/internal/companies/{COMPANY_ID}/interviews"
 
 

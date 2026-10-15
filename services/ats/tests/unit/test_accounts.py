@@ -1,6 +1,7 @@
 import uuid
 from datetime import UTC, datetime
 
+from prepza_common.http import bearer
 from prepza_common.service_auth import issue_token
 
 from app.models.ats import AtsCandidate, AtsConnection
@@ -10,7 +11,7 @@ SECRET = "test-secret-that-is-at-least-32-bytes"
 
 
 def headers(callee="ats"):
-    return {"Authorization": f"Bearer {issue_token('library', callee, SECRET)}"}
+    return bearer(issue_token("library", callee, SECRET))
 
 
 def test_deleting_an_account_deletes_its_candidates_and_forgets_its_connections(

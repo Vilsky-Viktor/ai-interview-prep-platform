@@ -14,6 +14,12 @@ def get_client() -> httpx.AsyncClient:
     )
 
 
+def bearer(token: str) -> dict[str, str]:
+    """The Authorization header carrying `token`: another service's, a user's, or a provider's
+    key."""
+    return {"Authorization": f"Bearer {token}"}
+
+
 def passed_on(response: httpx.Response, codes: Collection[int] | None = None) -> httpx.Response:
     """Another service's answer, once it worked. Its refusals in `codes` (any refusal, without
     them) reach the client unchanged, status and reason; another failure raises."""

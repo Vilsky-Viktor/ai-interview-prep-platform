@@ -3,6 +3,7 @@ from types import SimpleNamespace
 
 import pytest
 from fastapi import HTTPException
+from prepza_common.http import bearer
 from prepza_common.service_auth import issue_token
 
 from app.constants.invites import RETURN_URL_OFF_DOMAIN
@@ -24,7 +25,7 @@ READY = SimpleNamespace(
 )
 MAKING = SimpleNamespace(id=uuid.uuid4(), company_id=COMPANY.id, title=None, set_id=None)
 TOKEN = issue_token("ats", "companies", "test-secret-that-is-at-least-32-bytes")
-HEADERS = {"Authorization": f"Bearer {TOKEN}"}
+HEADERS = bearer(TOKEN)
 ACCESS = f"/internal/companies/{COMPANY.id}/access"
 
 

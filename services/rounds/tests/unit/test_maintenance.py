@@ -1,6 +1,8 @@
 import asyncio
 from datetime import timedelta
 
+from prepza_common.http import bearer
+
 from app.routers import internal_maintenance, schedules
 from app.service_auth import service_token
 
@@ -15,7 +17,7 @@ def test_the_running_count_is_for_services_only(client, monkeypatch):
 
     response = client.get(
         "/internal/maintenance/running",
-        headers={"Authorization": f"Bearer {service_token('rounds')}"},
+        headers=bearer(service_token("rounds")),
     )
 
     assert response.json() == {"running": 3}
@@ -35,7 +37,7 @@ def test_giving_time_back_is_for_services_only(client, monkeypatch):
     response = client.post(
         url,
         json={"seconds": 90},
-        headers={"Authorization": f"Bearer {service_token('rounds')}"},
+        headers=bearer(service_token("rounds")),
     )
 
     assert response.status_code == 204

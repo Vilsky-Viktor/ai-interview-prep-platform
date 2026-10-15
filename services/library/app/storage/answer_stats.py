@@ -1,10 +1,11 @@
 import uuid
 
+from prepza_common import processed_events
 from sqlalchemy import select, text
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.models.events import ProcessedEvent
 from app.models.sets import Question
-from app.storage import processed_events
 from app.storage.db import Session
 
 # Counts one answer. Only when the question still has the text that was answered: an answer
@@ -75,7 +76,7 @@ async def record_answer(
     per event. How often each counted question has now been shown, or None when the event was
     counted before. A question whose text has changed since isn't counted."""
     async with Session() as session:
-        if not await processed_events.claim(session, event_id):
+        if not await processed_events.claim(session, ProcessedEvent, event_id):
             return None
 
         questions = (await with_sources(session, [question_id]))[question_id]
@@ -109,7 +110,7 @@ async def record_results(
     event. `group` is the candidate's: strong, weak, or None in between (not counted there).
     The questions counted, or None when the event was counted before."""
     async with Session() as session:
-        if not await processed_events.claim(session, event_id):
+        if not await processed_events.claim(session, ProcessedEvent, event_id):
             return None
 
         ids = [uuid.UUID(result["question_id"]) for result in results]

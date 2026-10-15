@@ -3,6 +3,7 @@
 # while whoever made them is still an owner or admin.
 from fastapi import HTTPException, status
 from prepza_common import http
+from prepza_common.http import bearer
 
 
 async def access(companies_url: str, token: str, company_id, user_id: str) -> dict:
@@ -12,7 +13,7 @@ async def access(companies_url: str, token: str, company_id, user_id: str) -> di
     response = await http.get_client().get(
         f"{companies_url}/internal/companies/{company_id}/access",
         params={"user_id": user_id},
-        headers={"Authorization": f"Bearer {token}"},
+        headers=bearer(token),
     )
 
     if response.status_code == status.HTTP_404_NOT_FOUND:

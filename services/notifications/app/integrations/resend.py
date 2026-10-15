@@ -1,5 +1,6 @@
 from fastapi import status
 from prepza_common import http
+from prepza_common.http import bearer
 
 from app.config.settings import settings
 from app.constants.email import RESEND_EMAILS_URL, RESEND_REFUSED, SEND_TIMEOUT_S
@@ -19,10 +20,7 @@ async def send(email: Email, idempotency_key: str) -> None:
     never sends twice, so retries are safe."""
     response = await http.get_client().post(
         RESEND_EMAILS_URL,
-        headers={
-            "Authorization": f"Bearer {settings.resend_api_key}",
-            "Idempotency-Key": idempotency_key,
-        },
+        headers={**bearer(settings.resend_api_key), "Idempotency-Key": idempotency_key},
         json={
             "from": settings.mail_from_updates if email.optional else settings.mail_from,
             "to": [email.to],

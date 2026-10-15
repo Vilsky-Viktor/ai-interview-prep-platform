@@ -5,6 +5,7 @@ import logging
 
 from prepza_common import http
 from prepza_common.google import access_token, running_locally
+from prepza_common.http import bearer
 
 from app.config.settings import settings
 from app.constants.generation import CLOUD_TASKS_URL, TASK_DEADLINE_SECONDS
@@ -52,7 +53,7 @@ async def enqueue(path: str, payload: dict) -> None:
     response = await http.get_client().post(
         f"{CLOUD_TASKS_URL}/v2/{settings.tasks_queue}/tasks",
         json={"task": task},
-        headers={"Authorization": f"Bearer {await asyncio.to_thread(access_token)}"},
+        headers=bearer(await asyncio.to_thread(access_token)),
     )
 
     response.raise_for_status()

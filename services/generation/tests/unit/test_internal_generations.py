@@ -1,6 +1,7 @@
 import uuid
 
 import pytest
+from prepza_common.http import bearer
 from pydantic import ValidationError
 
 from app.constants.generation import MAX_INSTRUCTIONS_LENGTH, RUN_GENERATION
@@ -15,7 +16,7 @@ GENERATION_ID = uuid.uuid4()
 
 
 def headers():
-    return {"Authorization": f"Bearer {service_token('generation')}"}
+    return bearer(service_token("generation"))
 
 
 def company_generation():

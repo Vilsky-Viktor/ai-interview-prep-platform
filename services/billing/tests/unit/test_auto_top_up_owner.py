@@ -1,13 +1,14 @@
 from types import SimpleNamespace
 
 import pytest
+from prepza_common.http import bearer
 
 from app.constants.products import AUTO_TOP_UP_THRESHOLDS, NOT_YOUR_AUTO_TOP_UP
 from app.service_auth import service_token
 from app.services import auto_top_ups as service
 from app.storage import auto_top_ups
 
-AUTH = {"Authorization": f"Bearer {service_token('billing')}"}
+AUTH = bearer(service_token("billing"))
 URL = "/internal/companies/acme/auto-top-up"
 CHOICE = {"product": "topup_1000", "threshold": AUTO_TOP_UP_THRESHOLDS[-1]}
 

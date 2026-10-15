@@ -2,6 +2,7 @@ import uuid
 from datetime import UTC, datetime
 
 import pytest
+from prepza_common.http import bearer
 
 from app.constants.credits import Reason
 from app.helpers.history import history_entry_out, transaction_id
@@ -10,7 +11,7 @@ from app.models.billing import Entry
 from app.service_auth import service_token
 from app.storage import history, purchases
 
-AUTH = {"Authorization": f"Bearer {service_token('billing')}"}
+AUTH = bearer(service_token("billing"))
 NOW = datetime(2026, 10, 10, 12, tzinfo=UTC)
 
 

@@ -1,6 +1,7 @@
 import httpx
 from prepza_common import http
 from prepza_common.constants import REFERRAL_COOKIE, VIA_ASSISTANT
+from prepza_common.http import bearer
 
 from app.config.settings import settings
 from app.constants.tool_calls import (
@@ -34,7 +35,7 @@ async def send(
     """A call to another service's user-facing route as the user, in their language: a read, or
     a write the user confirmed. Companies also gets the assistant's signed header naming what it
     came through (`via`: the assistant or an AI app), so it audits it as such."""
-    headers = {"Authorization": f"Bearer {token}", "Accept-Language": language}
+    headers = {**bearer(token), "Accept-Language": language}
 
     if service == "companies":
         headers[ASSISTANT_HEADER] = service_token("companies", via)

@@ -3,6 +3,7 @@ import uuid
 import pytest
 from prepza_common.auth import current_user
 from prepza_common.constants import PAUSED
+from prepza_common.http import bearer
 from prepza_common.user import User
 
 from app.main import app
@@ -46,7 +47,7 @@ def test_paused_the_verifier_takes_no_new_question(client, queued):
     refused = client.post(
         f"/internal/questions/{uuid.uuid4()}/verify",
         json={"flag": "wrong_key", "now": True},
-        headers={"Authorization": f"Bearer {service_token('generation')}"},
+        headers=bearer(service_token("generation")),
     )
 
     assert refused.status_code == 503

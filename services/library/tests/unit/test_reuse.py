@@ -1,5 +1,7 @@
 import uuid
 
+from prepza_common.http import bearer
+
 from app.storage import reuse
 from tests.unit.test_internal import token
 
@@ -8,7 +10,7 @@ OPTIONS = [{"answer": "Debit cash", "correct": True}, {"answer": "Credit cash", 
 
 
 def find(client, body):
-    return client.post("/internal/reuse", json=body, headers={"Authorization": f"Bearer {token()}"})
+    return client.post("/internal/reuse", json=body, headers=bearer(token()))
 
 
 def test_proven_questions_are_offered_for_a_similar_topic(client, monkeypatch):

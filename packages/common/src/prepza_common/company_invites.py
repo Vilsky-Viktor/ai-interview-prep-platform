@@ -3,7 +3,7 @@
 from uuid import UUID
 
 from prepza_common import http
-from prepza_common.http import passed_on
+from prepza_common.http import bearer, passed_on
 
 
 async def invite(
@@ -14,7 +14,7 @@ async def invite(
     response = await http.get_client().post(
         f"{companies_url}/internal/interviews/{interview_id}/invites",
         json=body,
-        headers={"Authorization": f"Bearer {token}"},
+        headers=bearer(token),
     )
 
     return UUID(passed_on(response, refusals).json()["invite_id"])

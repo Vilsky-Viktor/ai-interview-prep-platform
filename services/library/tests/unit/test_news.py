@@ -7,6 +7,7 @@ import jwt
 import pytest
 from prepza_common.auth import current_user
 from prepza_common.constants import MAX_NEWS_TEXT_LENGTH, MAX_NEWS_TITLE_LENGTH
+from prepza_common.http import bearer
 from prepza_common.user import User
 
 from app.integrations import generation
@@ -204,7 +205,7 @@ def test_only_services_read_and_translate_posts(client, monkeypatch):
     assert client.get(f"/internal/news/{POST_ID}").status_code == 401
     assert client.put(f"/internal/news/{POST_ID}/translations", json=body).status_code == 401
 
-    headers = {"Authorization": f"Bearer {service_token()}"}
+    headers = bearer(service_token())
     found = client.get(f"/internal/news/{POST_ID}", headers=headers)
     put = client.put(f"/internal/news/{POST_ID}/translations", json=body, headers=headers)
     too_long = body | {"translations": {"de": {"title": "D", "text": "x" * 501}}}

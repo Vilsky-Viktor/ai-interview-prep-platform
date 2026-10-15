@@ -1,4 +1,5 @@
 from prepza_common import http
+from prepza_common.http import bearer
 
 from app.constants.member_emails import MAX_IDS_PER_CALL
 
@@ -12,7 +13,7 @@ async def post_ids(url: str, token: str, field: str, ids: list[str], answer: str
         response = await http.get_client().post(
             url,
             json={field: ids[start : start + MAX_IDS_PER_CALL]},
-            headers={"Authorization": f"Bearer {token}"},
+            headers=bearer(token),
         )
         response.raise_for_status()
         found += response.json()[answer]

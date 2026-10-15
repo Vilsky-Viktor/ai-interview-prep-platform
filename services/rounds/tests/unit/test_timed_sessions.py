@@ -4,6 +4,7 @@ from uuid import uuid4
 
 import pytest
 from fastapi import HTTPException
+from prepza_common.http import bearer
 from prepza_common.user import User
 
 from app.constants.rounds import TIME_UP
@@ -71,7 +72,7 @@ def test_starting_a_timed_interview_passes_the_seconds_per_question(client, monk
     response = client.post(
         "/internal/sessions",
         json=body,
-        headers={"Authorization": f"Bearer {service_token('rounds')}"},
+        headers=bearer(service_token("rounds")),
     )
 
     assert response.status_code == 201

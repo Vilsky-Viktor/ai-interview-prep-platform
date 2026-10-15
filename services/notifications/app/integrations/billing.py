@@ -1,4 +1,5 @@
 from prepza_common import http
+from prepza_common.http import bearer
 
 from app.config.settings import settings
 from app.service_auth import service_token
@@ -9,7 +10,7 @@ async def low_companies() -> list[dict]:
     "available"}."""
     response = await http.get_client().get(
         f"{settings.billing_url}/internal/companies/low",
-        headers={"Authorization": f"Bearer {service_token('billing')}"},
+        headers=bearer(service_token("billing")),
     )
 
     response.raise_for_status()

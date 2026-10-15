@@ -7,6 +7,7 @@ import uuid
 
 import httpx
 from langchain_core.messages import ToolMessage
+from prepza_common.http import bearer
 from prepza_common.service_auth import issue_token
 from sqlalchemy import select
 
@@ -30,7 +31,7 @@ def library() -> dict:
     """Library's signed token, as it calls to delete or export a user's data."""
     token = issue_token("library", "assistant", os.environ["SERVICE_SECRET"])
 
-    return {"Authorization": f"Bearer {token}"}
+    return bearer(token)
 
 
 def test_a_conversation_is_streamed_saved_listed_exported_and_deleted(run, user, monkeypatch):
@@ -115,7 +116,7 @@ async def tool_calls_of(message_id) -> list[ToolCall]:
 
 def test_a_company_the_user_cant_see_is_refused_and_a_stored_one_is_deleted(run, user):
     uid, token = user
-    headers = {"Authorization": f"Bearer {token}"}
+    headers = bearer(token)
     company_id = uuid.uuid4()
 
     async def scenario():
@@ -138,7 +139,7 @@ def test_a_company_the_user_cant_see_is_refused_and_a_stored_one_is_deleted(run,
 
 def test_someone_elses_conversation_is_not_found(run, user):
     _, token = user
-    headers = {"Authorization": f"Bearer {token}"}
+    headers = bearer(token)
 
     async def scenario():
         other = await conversations.create("someone-else", None, "Theirs")

@@ -4,6 +4,7 @@ import time
 import httpx
 from fastapi import HTTPException, status
 from prepza_common import http
+from prepza_common.http import bearer
 
 from app.constants.ats import (
     ATS_TIMEOUT_SECONDS,
@@ -69,7 +70,7 @@ async def _call(
     404 is what was asked for being gone (a candidate deleted), not a refused key."""
     for fresh in (False, True):
         token = await _token(client_id, client_secret, fresh)
-        headers = {"Authorization": f"Bearer {token}"}
+        headers = bearer(token)
         response = await send(method, url, headers, UNAVAILABLE, params, body)
 
         if response.status_code != status.HTTP_401_UNAUTHORIZED:

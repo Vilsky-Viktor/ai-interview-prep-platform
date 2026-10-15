@@ -1,4 +1,5 @@
 from prepza_common import http
+from prepza_common.http import bearer
 
 from app.config.settings import settings
 from app.constants.products import PADDLE_API
@@ -9,7 +10,7 @@ def _url(path: str) -> str:
 
 
 def _headers() -> dict:
-    return {"Authorization": f"Bearer {settings.paddle_api_key}"}
+    return bearer(settings.paddle_api_key)
 
 
 async def charge(subscription_id: str, price_id: str) -> None:

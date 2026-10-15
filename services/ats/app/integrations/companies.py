@@ -2,6 +2,7 @@ from uuid import UUID
 
 from fastapi import status
 from prepza_common import company_access, company_invites, http
+from prepza_common.http import bearer
 
 from app.config.settings import settings
 from app.service_auth import service_token
@@ -19,7 +20,7 @@ INVITE_REFUSALS = {
 
 
 def _headers() -> dict:
-    return {"Authorization": f"Bearer {service_token('companies')}"}
+    return bearer(service_token("companies"))
 
 
 async def access(company_id: UUID, user_id: str) -> dict:

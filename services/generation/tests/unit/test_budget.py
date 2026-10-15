@@ -4,6 +4,7 @@ from types import SimpleNamespace
 
 import pytest
 from fastapi import HTTPException
+from prepza_common.http import bearer
 
 from app.config.settings import settings
 from app.constants.generation import GENERATIONS_PAUSED
@@ -112,7 +113,7 @@ def test_a_regenerated_question_counts_toward_the_limit_unless_the_company_paid(
     client.post(
         f"/internal/questions/{uuid.uuid4()}/regenerate",
         json={"user_id": "bob", "set_id": str(set_id), "paid": paid},
-        headers={"Authorization": f"Bearer {service_token('generation')}"},
+        headers=bearer(service_token("generation")),
     )
 
     assert counted == [paid]

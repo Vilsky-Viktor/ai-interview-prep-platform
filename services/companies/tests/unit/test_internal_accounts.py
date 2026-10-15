@@ -1,3 +1,4 @@
+from prepza_common.http import bearer
 from prepza_common.service_auth import issue_token
 
 from app.services import accounts as account_service
@@ -22,7 +23,7 @@ def test_notifications_gets_every_company_of_a_user(client, monkeypatch):
     monkeypatch.setattr(companies, "ids_for_user", fake_ids)
     token = issue_token("notifications", "companies", "test-secret-that-is-at-least-32-bytes")
 
-    response = client.get(URL, headers={"Authorization": f"Bearer {token}"})
+    response = client.get(URL, headers=bearer(token))
 
     assert response.status_code == 200
     assert response.json() == {"company_ids": ["acme", "globex"]}

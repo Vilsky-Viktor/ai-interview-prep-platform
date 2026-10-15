@@ -1,6 +1,8 @@
 import uuid
 from types import SimpleNamespace
 
+from prepza_common.http import bearer
+
 from app.storage import preparations
 from tests.unit.test_internal import token
 
@@ -35,7 +37,7 @@ def test_practice_gets_only_revealed_questions_and_skips_empty_topics(client, mo
         return template if set_id == TEMPLATE_ID else None
 
     monkeypatch.setattr(preparations, "get_content", get_content)
-    headers = {"Authorization": f"Bearer {token()}"}
+    headers = bearer(token())
 
     found = client.get(f"/internal/templates/{TEMPLATE_ID}/practice", headers=headers).json()
     missing = client.get(f"/internal/templates/{uuid.uuid4()}/practice", headers=headers)

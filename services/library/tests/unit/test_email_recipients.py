@@ -1,12 +1,13 @@
 from types import SimpleNamespace
 
 from firebase_admin import auth as firebase_auth
+from prepza_common.http import bearer
 
 from app.constants.emails import DEFAULTS
 from app.storage import emails
 from tests.unit.test_internal import token
 
-HEADERS = {"Authorization": f"Bearer {token()}"}
+HEADERS = bearer(token())
 
 
 def account(uid, email, language=None, disabled=False):
