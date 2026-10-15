@@ -10,7 +10,7 @@ import { useAuth } from "@/components/auth-provider"
 import { InviteIntro } from "@/components/company/invite-intro"
 import { LinkStatus } from "@/components/link-status"
 import { Button } from "@/components/ui/button"
-import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
+import { apiErrorMessage, apiFetch, serviceRefusal } from "@/lib/api"
 import { humanHeaders } from "@/lib/human-check"
 import { refreshVerification } from "@/lib/auth"
 import { useBrandColors } from "@/hooks/use-brand-colors"
@@ -69,10 +69,9 @@ export function LinkView({ token }: { token: string }) {
     } catch (error) {
       // Already finished, the company has stopped taking candidates, or their email isn't
       // confirmed yet: the API says which.
-      const refused =
-        error instanceof ApiError && [403, 409].includes(error.status)
       toast.error(
-        refused ? error.message : apiErrorMessage(error, session("startFailed"))
+        serviceRefusal(error, [403, 409]) ??
+          apiErrorMessage(error, session("startFailed"))
       )
     }
 

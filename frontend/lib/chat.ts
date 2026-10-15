@@ -40,7 +40,8 @@ export async function streamEvents<T>(
 
     throw new ApiError(
       response.status,
-      detail ?? `Chat failed with status ${response.status}`
+      detail ?? `Chat failed with status ${response.status}`,
+      detail !== null
     )
   }
 

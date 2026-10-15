@@ -8,7 +8,7 @@ import { toast } from "sonner"
 import { useSignIn } from "@/components/sign-in-dialog"
 import { useAuth } from "@/components/auth-provider"
 import { Button } from "@/components/ui/button"
-import { ApiError, apiErrorMessage } from "@/lib/api"
+import { apiErrorMessage, serviceRefusal } from "@/lib/api"
 import { startPracticeRound } from "@/lib/practice"
 
 /** Starts a free practice round on the template: signs in first when needed, then goes straight
@@ -39,9 +39,8 @@ export function StartPractice({
       router.push(await startPracticeRound(templateId))
     } catch (error) {
       // No practice questions yet: the API says so.
-      const refused = error instanceof ApiError && error.status === 409
       toast.error(
-        refused ? error.message : apiErrorMessage(error, t("startFailed"))
+        serviceRefusal(error, [409]) ?? apiErrorMessage(error, t("startFailed"))
       )
       setStarting(false)
     }

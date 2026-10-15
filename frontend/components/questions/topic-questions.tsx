@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/dialog"
 import { VirtualList } from "@/components/virtual-list"
 import { WarningCard } from "@/components/warning-card"
-import { ApiError, apiFetch } from "@/lib/api"
+import { apiFetch, serviceRefusal } from "@/lib/api"
 import type { QuestionStats } from "@/types/feedback"
 
 export function TopicQuestions({
@@ -83,9 +83,7 @@ export function TopicQuestions({
     } catch (error) {
       toast.error(
         // A daily limit or the emergency pause explains itself; anything else is generic.
-        error instanceof ApiError && [429, 503].includes(error.status)
-          ? error.message
-          : t("regenerateFailed")
+        serviceRefusal(error, [429, 503]) ?? t("regenerateFailed")
       )
     } finally {
       setRegeneratingId(null)

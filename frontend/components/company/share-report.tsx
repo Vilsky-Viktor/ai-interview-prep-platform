@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { MAX_EMAIL_LENGTH } from "@/constants/limits"
-import { ApiError, apiFetch } from "@/lib/api"
+import { apiFetch, serviceRefusal } from "@/lib/api"
 import { fileBase64 } from "@/lib/files"
 import { useOrigin } from "@/lib/origin"
 
@@ -65,12 +65,8 @@ export function ShareReport({
       setEmail("")
       onOpenChange(false)
     } catch (error) {
-      // Too many emails: the API's message says when to try again.
       // Too many emails, or nothing to report yet: the API's message says why.
-      const explained =
-        error instanceof ApiError &&
-        (error.status === 429 || error.status === 409)
-      toast.error(explained ? error.message : t("sendFailed"))
+      toast.error(serviceRefusal(error, [409, 429]) ?? t("sendFailed"))
     } finally {
       setSending(false)
     }

@@ -17,7 +17,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { ApiError, apiFetch } from "@/lib/api"
+import { apiFetch, serviceRefusal } from "@/lib/api"
 import type { Verification, VerificationStatus } from "@/types/company"
 
 /** "Verify" beside an unverified company's name (the pending clock while it's reviewed): its website, sent for a superadmin's review
@@ -61,8 +61,7 @@ export function VerifyCompany({
       router.refresh()
     } catch (error) {
       // Not a website, or a free mail service: the API says which.
-      const invalid = error instanceof ApiError && error.status === 422
-      toast.error(invalid ? error.message : t("failed"))
+      toast.error(serviceRefusal(error, [422]) ?? t("failed"))
     } finally {
       setSaving(false)
     }

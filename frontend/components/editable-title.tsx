@@ -14,7 +14,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { MAX_TITLE_LENGTH } from "@/constants/limits"
-import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
+import { apiErrorMessage, apiFetch, serviceRefusal } from "@/lib/api"
 
 const titleClass =
   "font-heading text-3xl font-medium tracking-tight text-balance normal-case"
@@ -106,9 +106,8 @@ export function EditableTitle({
       router.refresh()
     } catch (error) {
       // Says why, e.g. when another company already has the name.
-      const refused = error instanceof ApiError && error.status === 409
       toast.error(
-        refused ? error.message : apiErrorMessage(error, t("titleFailed"))
+        serviceRefusal(error, [409]) ?? apiErrorMessage(error, t("titleFailed"))
       )
     } finally {
       savingRef.current = false

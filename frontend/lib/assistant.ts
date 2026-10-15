@@ -93,9 +93,12 @@ export async function transcribe(audio: Blob): Promise<string> {
   const body = await response.json().catch(() => null)
 
   if (!response.ok) {
+    const detail = errorDetail(body)
+
     throw new ApiError(
       response.status,
-      errorDetail(body) ?? `Transcription failed with status ${response.status}`
+      detail ?? `Transcription failed with status ${response.status}`,
+      detail !== null
     )
   }
 

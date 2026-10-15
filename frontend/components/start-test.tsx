@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import type { Locale } from "@/constants/i18n"
 import { MAX_COMPANY_NAME_LENGTH, MAX_GOAL_LENGTH } from "@/constants/limits"
-import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
+import { apiErrorMessage, apiFetch, serviceRefusal } from "@/lib/api"
 import { refreshVerification } from "@/lib/auth"
 import { humanHeaders } from "@/lib/human-check"
 import { isSubmitShortcut } from "@/lib/keys"
@@ -112,8 +112,10 @@ export function StartTest({
         `/generate/${interview.generation_id}?next=/companies/${id}/interviews/${interview.id}`
       )
     } catch (error) {
-      if (error instanceof ApiError && error.status === 409) {
-        setNameError(error.message)
+      const refused = serviceRefusal(error, [409])
+
+      if (refused) {
+        setNameError(refused)
       } else {
         toast.error(apiErrorMessage(error, t("failed")))
       }

@@ -1,6 +1,11 @@
 import { describe, expect, it, vi } from "vitest"
 
-import { errorDetail } from "@/lib/api"
+import {
+  ApiError,
+  apiErrorMessage,
+  errorDetail,
+  serviceRefusal,
+} from "@/lib/api"
 
 vi.mock("@/lib/firebase", () => ({ firebaseAuth: async () => ({}) }))
 
@@ -28,5 +33,30 @@ describe("errorDetail", () => {
     expect(errorDetail({ detail: [] })).toBeNull()
     expect(errorDetail({ detail: [{ loc: ["body"] }] })).toBeNull()
     expect(errorDetail({ detail: 42 })).toBeNull()
+  })
+})
+
+describe("serviceRefusal and apiErrorMessage", () => {
+  it("show the service's own message for the statuses asked", () => {
+    const refused = new ApiError(
+      429,
+      "Too many requests. Try again later.",
+      true
+    )
+
+    expect(serviceRefusal(refused, [429])).toBe(
+      "Too many requests. Try again later."
+    )
+    expect(serviceRefusal(refused, [409])).toBeNull()
+    expect(apiErrorMessage(refused, "Couldn't send.")).toBe(
+      "Too many requests. Try again later."
+    )
+  })
+
+  it("never show a load balancer's page, only the fallback", () => {
+    const busy = new ApiError(429, "Request failed with status 429")
+
+    expect(serviceRefusal(busy, [429])).toBeNull()
+    expect(apiErrorMessage(busy, "Couldn't send.")).toBe("Couldn't send.")
   })
 })

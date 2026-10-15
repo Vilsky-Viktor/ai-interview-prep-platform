@@ -19,7 +19,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { ApiError, apiFetch } from "@/lib/api"
+import { apiFetch, serviceRefusal } from "@/lib/api"
 import { fileBase64 } from "@/lib/files"
 
 const BOX =
@@ -58,8 +58,9 @@ export function LogoPicker({
       router.refresh()
     } catch (error) {
       // A file that isn't a PNG, JPEG or WebP up to 500 KB: the API says so.
-      const invalid = error instanceof ApiError && error.status < 500
-      toast.error(invalid ? error.message : t("logoFailed"))
+      toast.error(
+        serviceRefusal(error, [403, 404, 413, 422]) ?? t("logoFailed")
+      )
     } finally {
       setSaving(false)
     }

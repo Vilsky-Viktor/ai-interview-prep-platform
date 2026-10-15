@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { MAX_COMPANY_NAME_LENGTH } from "@/constants/limits"
-import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
+import { apiErrorMessage, apiFetch, serviceRefusal } from "@/lib/api"
 import { refreshVerification } from "@/lib/auth"
 import { humanHeaders } from "@/lib/human-check"
 import type { Company } from "@/types/company"
@@ -71,8 +71,10 @@ export function CreateCompany({ templateId }: { templateId?: string }) {
       )
     } catch (error) {
       // A name taken (409) or too short (422) is said under the field.
-      if (error instanceof ApiError && [409, 422].includes(error.status)) {
-        setNameError(error.message)
+      const refused = serviceRefusal(error, [409, 422])
+
+      if (refused) {
+        setNameError(refused)
       } else {
         toast.error(apiErrorMessage(error, t("createFailed")))
       }

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 
-import { ApiError, apiFetch } from "@/lib/api"
+import { apiFetch, serviceRefusal } from "@/lib/api"
 import { linkFailure } from "@/lib/link-status"
 
 // What a page opened from a link (an invite, a job link, an unsubscribe link) knows of it: still
@@ -37,11 +37,7 @@ export function useLinkData<T>(path: string | null, refresh?: unknown) {
       .catch((error) => {
         if (current) {
           setStatus(linkFailure(error))
-          setGone(
-            error instanceof ApiError && error.status === 410
-              ? error.message
-              : null
-          )
+          setGone(serviceRefusal(error, [410]))
         }
       })
 

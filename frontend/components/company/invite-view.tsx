@@ -11,7 +11,7 @@ import { LinkStatus } from "@/components/link-status"
 import { useSignIn } from "@/components/sign-in-dialog"
 import { Button } from "@/components/ui/button"
 import { WarningCard } from "@/components/warning-card"
-import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
+import { apiErrorMessage, apiFetch, serviceRefusal } from "@/lib/api"
 import { refreshVerification, signInAsGuest } from "@/lib/auth"
 import { useBrandColors } from "@/hooks/use-brand-colors"
 import { useLinkData } from "@/hooks/use-link-data"
@@ -90,10 +90,9 @@ export function InviteView({
       setStarting(false)
     } catch (error) {
       // Another email, or theirs not confirmed yet, or the pause: the API says which.
-      const refused =
-        error instanceof ApiError && [403, 409].includes(error.status)
       toast.error(
-        refused ? error.message : apiErrorMessage(error, session("startFailed"))
+        serviceRefusal(error, [403, 409]) ??
+          apiErrorMessage(error, session("startFailed"))
       )
       setStarting(false)
     }

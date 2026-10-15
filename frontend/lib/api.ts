@@ -1,10 +1,14 @@
 import { DEFAULT_LOCALE } from "@/constants/i18n"
 import { firebaseAuth } from "@/lib/firebase"
 
+/** A refused request. `fromService`: the message is the service's own (in the user's language);
+ * otherwise the load balancer or the platform answered (an HTML 429, 502 or 503) and the message
+ * is only for the logs. */
 export class ApiError extends Error {
   constructor(
     public status: number,
-    message: string
+    message: string,
+    public fromService = false
   ) {
     super(message)
   }
@@ -56,7 +60,8 @@ export async function apiFetch<T>(
 
     throw new ApiError(
       response.status,
-      detail ?? `Request failed with status ${response.status}`
+      detail ?? `Request failed with status ${response.status}`,
+      detail !== null
     )
   }
 
@@ -67,16 +72,21 @@ export async function apiFetch<T>(
   return response.json()
 }
 
-/** The service's own message for nothing left to use (402), rate limits (429), invalid
-input (422) and a temporary pause (503), whose rules live in the backend; the fallback for
-anything else. */
-export function apiErrorMessage(error: unknown, fallback: string): string {
-  if (
-    error instanceof ApiError &&
-    [402, 422, 429, 503].includes(error.status)
-  ) {
-    return error.message
-  }
+/** The service's own message when it refused with one of `statuses` (its rules live in the
+backend, which says why); null for anything else, a page the load balancer answered too. */
+export function serviceRefusal(
+  error: unknown,
+  statuses: number[]
+): string | null {
+  return error instanceof ApiError &&
+    error.fromService &&
+    statuses.includes(error.status)
+    ? error.message
+    : null
+}
 
-  return fallback
+/** The service's own message for nothing left to use (402), rate limits (429), invalid
+input (422) and a temporary pause (503); the fallback for anything else. */
+export function apiErrorMessage(error: unknown, fallback: string): string {
+  return serviceRefusal(error, [402, 422, 429, 503]) ?? fallback
 }
