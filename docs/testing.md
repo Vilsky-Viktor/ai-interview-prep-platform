@@ -108,7 +108,11 @@ Playwright tests of the signed-in pages, in the same Docker image, against the r
 **What they cover:**
 
 - a company owner making an interview from a template and inviting a candidate,
-- a candidate taking an interview,
+- a candidate taking an interview, a question's time running out included,
+- a job ad's shareable link: starting from it, and continuing from the candidate's own link after it's turned off,
+- an expired invite, which asks to have it sent again,
+- extra time: a candidate given it sees the longer time per question on their invite,
+- a candidate whose email isn't confirmed, told to confirm it,
 - the team and a viewer,
 - verification,
 - the admin zone's pass rates, stats, pause and maintenance mode (turned off again afterwards),
