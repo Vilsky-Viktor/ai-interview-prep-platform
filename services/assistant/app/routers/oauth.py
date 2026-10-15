@@ -1,6 +1,3 @@
-import logging
-
-from fastapi import HTTPException
 from mcp.server.auth.handlers.metadata import MetadataHandler
 from mcp.server.auth.middleware.client_auth import AuthenticationError, ClientAuthenticator
 from mcp.server.auth.routes import (
@@ -13,67 +10,25 @@ from mcp.server.auth.routes import (
     create_protected_resource_routes,
 )
 from mcp.server.auth.settings import ClientRegistrationOptions, RevocationOptions
-from prepza_common.client_ip import client_ip
-from prepza_common.constants import DAY_SECONDS, HOUR_SECONDS
-from prepza_common.rate_limit import hit
 from starlette.requests import Request
 from starlette.responses import JSONResponse, Response
 from starlette.routing import Route
-from starlette.types import ASGIApp, Receive, Scope, Send
 
 from app.constants.limits import (
     AUTHORIZATIONS_PER_IP_HOUR,
     REGISTRATIONS_PER_DAY,
     REGISTRATIONS_PER_IP_HOUR,
 )
-from app.constants.mcp import MCP_SCOPE
+from app.constants.mcp import (
+    AUTH_METHODS,
+    AUTHORIZATION_METADATA_PATH,
+    MCP_SCOPE,
+    ROOT_RESOURCE_METADATA_PATH,
+)
 from app.helpers.authorize_guard import GuardAuthorize
-from app.integrations.redis import get_redis
-from app.services.oauth_provider import Provider, auth_settings
-
-logger = logging.getLogger(__name__)
-
-AUTHORIZATION_METADATA_PATH = "/.well-known/oauth-authorization-server"
-# Some apps look for the resource's metadata at the root, without the resource's path.
-ROOT_RESOURCE_METADATA_PATH = "/.well-known/oauth-protected-resource"
-# Apps registered without a secret (most do: Claude Code, MCP Inspector) are welcome too.
-AUTH_METHODS = ["none", "client_secret_post", "client_secret_basic"]
-
-
-class Limited:
-    """An endpoint of the OAuth server counted per address in an hour, and with `daily`, for
-    everyone in a day; over a limit, refused (429) with an OAuth `error`. With Redis down, not
-    counted rather than refused."""
-
-    def __init__(
-        self, app: ASGIApp, name: str, error: str, per_ip_hour: int, daily: int | None = None
-    ):
-        self.app = app
-        self.name = name
-        self.error = error
-        self.per_ip_hour = per_ip_hour
-        self.daily = daily
-
-    async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
-        if scope["method"] in ("GET", "POST"):
-            redis = get_redis()
-            key = f"rate:assistant:mcp:{self.name}"
-
-            try:
-                address = client_ip(Request(scope))
-                await hit(redis, f"{key}:{address}", self.per_ip_hour, HOUR_SECONDS)
-
-                if self.daily is not None:
-                    await hit(redis, key, self.daily, DAY_SECONDS)
-            except HTTPException as error:
-                body = {"error": self.error, "error_description": error.detail}
-                await JSONResponse(body, status_code=error.status_code)(scope, receive, send)
-
-                return
-            except Exception:
-                logger.warning("The %s limit skipped, Redis failed", self.name, exc_info=True)
-
-        await self.app(scope, receive, send)
+from app.helpers.oauth import auth_settings
+from app.services.oauth_limits import Limited
+from app.services.oauth_provider import Provider
 
 
 async def revoke(request: Request) -> Response:

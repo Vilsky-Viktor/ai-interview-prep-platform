@@ -13,8 +13,8 @@ from app.constants.chat import COMPANY_NOT_FOUND
 from app.constants.mcp import ACCOUNT_GONE, EXCLUDED_TOOL
 from app.helpers.mcp_schema import mcp_tool
 from app.integrations import firebase_tokens, services
+from app.models.oauth_tokens import Access
 from app.services import mcp_tools
-from app.services.oauth_provider import Access
 from app.services.registry import tools
 
 COMPANY = "8c1d2b8e-1a2b-4c3d-8e9f-0a1b2c3d4e5f"

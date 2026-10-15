@@ -13,9 +13,10 @@ from starlette.routing import Route
 from starlette.types import Receive, Scope, Send
 
 from app.constants.mcp import MCP_PATH, MCP_SCOPE
+from app.helpers.oauth import auth_settings
 from app.prompts.mcp import MCP_INSTRUCTIONS
 from app.services import mcp_tools
-from app.services.oauth_provider import Provider, auth_settings
+from app.services.oauth_provider import Provider
 
 
 async def list_tools(ctx, params) -> types.ListToolsResult:

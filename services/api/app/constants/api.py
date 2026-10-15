@@ -30,7 +30,6 @@ MAX_NAME_LENGTH = 80
 MAX_URL_LENGTH = 500
 # Requests per company per minute, all its keys together.
 REQUESTS_PER_MINUTE = 60
-MINUTE_SECONDS = 60
 # How long a key maker's access (still an owner or admin?) is trusted before companies is asked
 # again, in this instance's memory.
 ACCESS_CACHE_SECONDS = 60

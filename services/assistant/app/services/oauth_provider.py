@@ -4,112 +4,31 @@ import secrets
 from datetime import UTC, datetime, timedelta
 from uuid import UUID
 
-from fastapi import HTTPException
 from mcp.server.auth.provider import (
-    AccessToken,
-    AuthorizationCode,
     AuthorizationParams,
     AuthorizeError,
-    RefreshToken,
     RegistrationError,
     TokenError,
 )
-from mcp.server.auth.settings import AuthSettings
 from mcp.shared.auth import OAuthClientInformationFull, OAuthToken
 from prepza_common.analytics import track
-from prepza_common.rate_limit import hit
-from prepza_common.tokens import hashed, new_token
+from prepza_common.tokens import hashed
 
 from app.config.settings import settings
-from app.constants.limits import (
-    MAX_REGISTRATION_BYTES,
-    MAX_STATE_LENGTH,
-    TOKEN_REQUESTS_PER_CLIENT_MINUTE,
-)
+from app.constants.limits import MAX_REGISTRATION_BYTES, MAX_STATE_LENGTH
 from app.constants.mcp import (
-    ACCESS_SECONDS,
     CONNECT_PATH,
-    FUNNEL_CLIENTS,
-    MCP_PATH,
     MCP_SCOPE,
-    MINUTE_SECONDS,
     REFRESH_REUSE_GRACE_SECONDS,
-    REFRESH_SECONDS,
-    TOKEN_BYTES,
-    TOKEN_PREFIX,
 )
 from app.helpers.mcp_clients import describe_client, refused_redirect
-from app.integrations.redis import get_redis
+from app.helpers.oauth import funnel_client, new_tokens, resource_url
 from app.models.oauth import McpGrant
+from app.models.oauth_tokens import Access, Code, Refresh
+from app.services.oauth_limits import limit_tokens
 from app.storage import oauth, oauth_requests
 
 logger = logging.getLogger(__name__)
-
-
-def resource_url() -> str:
-    """The MCP endpoint, the one resource prepza's access is for."""
-    return settings.site_url.rstrip("/") + MCP_PATH
-
-
-def auth_settings() -> AuthSettings:
-    """The site as the authorization server (its root is the issuer) and the MCP endpoint as
-    the resource, as URLs the SDK writes without a trailing slash."""
-    return AuthSettings(
-        issuer_url=settings.site_url.rstrip("/"),
-        resource_server_url=resource_url(),
-        validate_token_resource=True,
-    )
-
-
-def funnel_client(client_name: str) -> str:
-    return FUNNEL_CLIENTS.get(client_name, "other")
-
-
-class Code(AuthorizationCode):
-    """A code the user's allowing gave the app, with what the connection is called."""
-
-    client_name: str
-    redirect_host: str
-
-
-class Refresh(RefreshToken):
-    grant_id: str
-
-
-class Access(AccessToken):
-    grant_id: str
-    client_name: str
-
-
-def new_tokens() -> tuple[OAuthToken, dict]:
-    """A new access and refresh token for the app, and what the connection keeps of them."""
-    access, access_hash = new_token(TOKEN_PREFIX, TOKEN_BYTES)
-    refresh, refresh_hash = new_token(TOKEN_PREFIX, TOKEN_BYTES)
-    now = datetime.now(UTC)
-    kept = {
-        "access_hash": access_hash,
-        "access_expires_at": now + timedelta(seconds=ACCESS_SECONDS),
-        "refresh_hash": refresh_hash,
-        "refresh_expires_at": now + timedelta(seconds=REFRESH_SECONDS),
-    }
-    token = OAuthToken(
-        access_token=access, expires_in=ACCESS_SECONDS, scope=MCP_SCOPE, refresh_token=refresh
-    )
-
-    return token, kept
-
-
-async def limit_tokens(client_id: str) -> None:
-    """Counts one token request of the app; over the limit, refused. With Redis down, not
-    counted rather than refused."""
-    key = f"rate:assistant:mcp:token:{client_id}"
-
-    try:
-        await hit(get_redis(), key, TOKEN_REQUESTS_PER_CLIENT_MINUTE, MINUTE_SECONDS)
-    except HTTPException:
-        raise TokenError("invalid_request", "Too many token requests; try again in a minute.")
-    except Exception:
-        logger.warning("Token request limit skipped, Redis failed", exc_info=True)
 
 
 async def revoke_if_replayed(refresh_hash: str) -> None:

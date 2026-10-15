@@ -1,7 +1,8 @@
 from fastapi import HTTPException
+from mcp.shared.auth import OAuthClientInformationFull
 
-from app.routers import oauth as oauth_router
-from app.services import oauth_provider
+from app.models.oauth_tokens import Access
+from app.services import oauth_limits, oauth_provider
 from app.storage import oauth
 
 SITE = "http://localhost:8090"
@@ -49,7 +50,7 @@ def test_an_app_registers_without_a_secret_within_the_limits(client, monkeypatch
         counted.append(key)
 
     monkeypatch.setattr(oauth, "save_client", save_client)
-    monkeypatch.setattr(oauth_router, "hit", hit)
+    monkeypatch.setattr(oauth_limits, "hit", hit)
     body = {
         "client_name": "Claude Code",
         "redirect_uris": ["http://localhost:3118/callback"],
@@ -68,7 +69,7 @@ def test_registering_too_often_is_refused(client, monkeypatch):
     async def over(redis, key, limit, window):
         raise HTTPException(429, "Too many requests. Try again later.")
 
-    monkeypatch.setattr(oauth_router, "hit", over)
+    monkeypatch.setattr(oauth_limits, "hit", over)
 
     response = client.post("/register", json={"redirect_uris": ["http://localhost/cb"]})
 
@@ -77,10 +78,10 @@ def test_registering_too_often_is_refused(client, monkeypatch):
 
 def test_an_app_without_a_secret_revokes_its_token(client, monkeypatch):
     revoked = []
-    app_client = oauth_provider.OAuthClientInformationFull(
+    app_client = OAuthClientInformationFull(
         client_id="c1", redirect_uris=["http://localhost/cb"], token_endpoint_auth_method="none"
     )
-    access = oauth_provider.Access(
+    access = Access(
         token="pzm_a", client_id="c1", scopes=["prepza"], grant_id="g", client_name="App"
     )
 

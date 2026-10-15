@@ -7,8 +7,11 @@ MCP_SCOPE = "prepza"
 # allows or denies an app (the frontend's page).
 MCP_PATH = "/mcp"
 CONNECT_PATH = "/connect"
-
-MINUTE_SECONDS = 60
+AUTHORIZATION_METADATA_PATH = "/.well-known/oauth-authorization-server"
+# Some apps look for the resource's metadata at the root, without the resource's path.
+ROOT_RESOURCE_METADATA_PATH = "/.well-known/oauth-protected-resource"
+# Apps registered without a secret (most do: Claude Code, MCP Inspector) are welcome too.
+AUTH_METHODS = ["none", "client_secret_post", "client_secret_basic"]
 
 # Tokens: this prefix and random bytes; only their hashes are kept.
 TOKEN_PREFIX = "pzm_"
@@ -88,3 +91,6 @@ UPDATE_LANGUAGE = "update_language"
 # that on every instance: signing in again checks the account.
 EXPIRY_MARGIN_SECONDS = 300
 MAX_KEEP_SECONDS = 300
+ID_TOKEN_CACHE_KEY = "mcp:id-token:{uid}"
+# Firebase's sign-in API, where an AI app's calls get the user's ID token.
+IDENTITY_TOOLKIT = "https://identitytoolkit.googleapis.com/v1"

@@ -9,7 +9,7 @@ from mcp.server.auth.provider import AuthorizationParams, AuthorizeError, TokenE
 from mcp.shared.auth import OAuthClientInformationFull
 from prepza_common.tokens import hashed
 
-from app.services import oauth_provider
+from app.services import oauth_limits, oauth_provider
 from app.services.oauth_provider import Provider
 from app.storage import oauth, oauth_requests
 
@@ -89,7 +89,7 @@ def kept(monkeypatch):
     monkeypatch.setattr(oauth, "rotate", rotate)
     monkeypatch.setattr(oauth, "remove", remove)
     monkeypatch.setattr(oauth_provider, "track", track)
-    monkeypatch.setattr(oauth_provider, "hit", nothing)
+    monkeypatch.setattr(oauth_limits, "hit", nothing)
 
     return store
 
@@ -225,9 +225,9 @@ def test_too_many_token_requests_are_refused(kept, monkeypatch):
     async def over(*args, **kwargs):
         raise HTTPException(429, "Too many")
 
-    monkeypatch.setattr(oauth_provider, "hit", over)
+    monkeypatch.setattr(oauth_limits, "hit", over)
 
     with pytest.raises(TokenError) as refused:
-        asyncio.run(oauth_provider.limit_tokens("c1"))
+        asyncio.run(oauth_limits.limit_tokens("c1"))
 
     assert refused.value.error == "invalid_request"

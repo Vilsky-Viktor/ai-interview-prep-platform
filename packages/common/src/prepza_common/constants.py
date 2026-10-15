@@ -22,7 +22,8 @@ TRACE_FIELD = "logging.googleapis.com/trace"
 # secret, so every event is refused. The alert in infra/terraform/monitoring.tf matches it.
 WEBHOOK_SIGNATURE_REFUSED = "web hook signature refused"
 SIGN_IN_UNAVAILABLE = "Sign-in is temporarily unavailable. Please try again shortly."
-HOUR_SECONDS = 60 * 60
+MINUTE_SECONDS = 60
+HOUR_SECONDS = 60 * MINUTE_SECONDS
 DAY_SECONDS = 24 * HOUR_SECONDS
 
 # Database connections per process: at most DB_POOL_SIZE + DB_MAX_OVERFLOW. Services with few,

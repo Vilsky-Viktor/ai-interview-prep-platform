@@ -10,9 +10,9 @@ from prepza_common.service_auth import issue_token
 from prepza_common.tokens import hashed
 from sqlalchemy import update
 
+from app.helpers.oauth import new_tokens
 from app.main import app
 from app.models.oauth import McpGrant, OAuthClient
-from app.services.oauth_provider import new_tokens
 from app.storage import oauth, oauth_requests
 from app.storage.db import Session
 

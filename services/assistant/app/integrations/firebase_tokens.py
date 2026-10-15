@@ -6,10 +6,12 @@ from prepza_common.auth import verify
 from prepza_common.user import User
 
 from app.config.settings import settings
-from app.constants.mcp import EXPIRY_MARGIN_SECONDS, MAX_KEEP_SECONDS
-
-CACHE_KEY = "mcp:id-token:{uid}"
-IDENTITY_TOOLKIT = "https://identitytoolkit.googleapis.com/v1"
+from app.constants.mcp import (
+    EXPIRY_MARGIN_SECONDS,
+    ID_TOKEN_CACHE_KEY,
+    IDENTITY_TOOLKIT,
+    MAX_KEEP_SECONDS,
+)
 
 
 def identity_url() -> str:
@@ -25,7 +27,7 @@ async def sign_in(uid: str) -> tuple[User, str] | None:
     go to the other services with it, which check it as any user's. Kept in memory for at most
     MAX_KEEP_SECONDS. None when the account is gone or disabled; never for an unknown uid (a
     custom token would create that user)."""
-    cached = memory_cache.get(CACHE_KEY.format(uid=uid))
+    cached = memory_cache.get(ID_TOKEN_CACHE_KEY.format(uid=uid))
 
     if cached is not None:
         return cached
@@ -52,11 +54,11 @@ async def sign_in(uid: str) -> tuple[User, str] | None:
         return None
 
     seconds = min(int(found["expiresIn"]) - EXPIRY_MARGIN_SECONDS, MAX_KEEP_SECONDS)
-    memory_cache.put(CACHE_KEY.format(uid=uid), (user, found["idToken"]), seconds)
+    memory_cache.put(ID_TOKEN_CACHE_KEY.format(uid=uid), (user, found["idToken"]), seconds)
 
     return user, found["idToken"]
 
 
 def forget(uid: str) -> None:
     """Drops the user's kept token, so the next call signs in again (their language changed)."""
-    memory_cache.put(CACHE_KEY.format(uid=uid), None, 0)
+    memory_cache.put(ID_TOKEN_CACHE_KEY.format(uid=uid), None, 0)

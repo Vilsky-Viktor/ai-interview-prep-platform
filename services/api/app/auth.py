@@ -6,6 +6,7 @@ from uuid import UUID
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from prepza_common import memory_cache
+from prepza_common.constants import MINUTE_SECONDS
 from prepza_common.rate_limit import hit
 from prepza_common.tokens import hashed
 from redis.exceptions import RedisError
@@ -13,7 +14,6 @@ from redis.exceptions import RedisError
 from app.constants.api import (
     ACCESS_CACHE_SECONDS,
     LAST_USED_EVERY,
-    MINUTE_SECONDS,
     REQUESTS_PER_MINUTE,
 )
 from app.helpers.keys import expired
