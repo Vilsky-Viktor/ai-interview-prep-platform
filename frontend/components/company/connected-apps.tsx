@@ -1,15 +1,15 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { useLocale, useTranslations } from "next-intl"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
+import { useLocalTime } from "@/hooks/use-local-time"
 import { ConfirmDialog } from "@/components/confirm-dialog"
 import { Button } from "@/components/ui/button"
 import { LIST_BOX } from "@/constants/lists"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
-import { formatDate } from "@/lib/format"
 import type { AiConnection } from "@/types/connections"
 
 /** The AI apps the user connected to their account, in one list like the API keys: each with
@@ -20,7 +20,7 @@ export function ConnectedApps({
   connections: AiConnection[]
 }) {
   const t = useTranslations("aiApps")
-  const locale = useLocale()
+  const localTime = useLocalTime()
 
   return (
     <section className="space-y-6">
@@ -41,14 +41,14 @@ export function ConnectedApps({
                   {" · "}
                   <time suppressHydrationWarning>
                     {t("connectedOn", {
-                      date: formatDate(app.created_at, locale),
+                      date: localTime.date(app.created_at),
                     })}
                   </time>
                   {" · "}
                   <time suppressHydrationWarning>
                     {app.last_used_at
                       ? t("lastUsed", {
-                          date: formatDate(app.last_used_at, locale),
+                          date: localTime.date(app.last_used_at),
                         })
                       : t("neverUsed")}
                   </time>

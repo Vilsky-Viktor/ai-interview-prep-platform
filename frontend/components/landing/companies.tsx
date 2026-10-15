@@ -1,12 +1,12 @@
 import { cn } from "cn"
-import { getLocale, getNow, getTranslations } from "next-intl/server"
+import { getNow, getTranslations } from "next-intl/server"
 
 import { CandidateSignals } from "@/components/company/candidate-signals"
 import { CandidateStatsDemo } from "@/components/landing/candidate-stats-demo"
 import { LandingSection, Stage } from "@/components/landing/section"
 import { Badge } from "@/components/ui/badge"
 import { DEMO_PASS_MARK } from "@/constants/landing"
-import { formatDate } from "@/lib/format"
+import { LocalDate } from "@/components/local-date"
 import { gradeTone } from "@/lib/grade-tone"
 import type { Candidate } from "@/types/company"
 
@@ -55,7 +55,6 @@ export async function CompaniesSection() {
   const t = await getTranslations("landing.companies")
   const candidates = await getTranslations("candidates")
   const statuses = await getTranslations("candidateStatus")
-  const locale = await getLocale()
   const now = (await getNow()).getTime()
 
   return (
@@ -79,10 +78,9 @@ export async function CompaniesSection() {
                     </span>
                     {/* The date, then any signals, as in the real list. */}
                     <span className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
-                      {formatDate(
-                        new Date(now - daysAgo * DAY_MS).toISOString(),
-                        locale
-                      )}
+                      <LocalDate
+                        iso={new Date(now - daysAgo * DAY_MS).toISOString()}
+                      />
                       <CandidateSignals candidate={signals as Candidate} />
                     </span>
                   </span>

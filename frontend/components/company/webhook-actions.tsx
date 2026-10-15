@@ -1,10 +1,11 @@
 "use client"
 
 import { HistoryIcon, SendIcon } from "lucide-react"
-import { useLocale, useTranslations } from "next-intl"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
+import { useLocalTime } from "@/hooks/use-local-time"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -21,7 +22,6 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
-import { formatDateTime } from "@/lib/format"
 import type { ApiWebhook, WebhookAttempt } from "@/types/api-access"
 
 const ICON_BUTTON =
@@ -111,7 +111,7 @@ function IconButton({
 function WebhookLog({ path, url }: { path: string; url: string }) {
   const t = useTranslations("api")
   const common = useTranslations("common")
-  const locale = useLocale()
+  const localTime = useLocalTime()
   const [open, setOpen] = useState(false)
   const [attempts, setAttempts] = useState<WebhookAttempt[] | null>(null)
 
@@ -169,7 +169,7 @@ function WebhookLog({ path, url }: { path: string; url: string }) {
                       suppressHydrationWarning
                       className="block text-sm text-muted-foreground"
                     >
-                      {formatDateTime(attempt.at, locale)}
+                      {localTime.dateTime(attempt.at)}
                     </time>
                   </span>
                   <span

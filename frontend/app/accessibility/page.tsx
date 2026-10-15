@@ -6,7 +6,7 @@ import {
   ACCESSIBILITY_REVIEWED,
 } from "@/constants/accessibility"
 import { OPERATOR } from "@/constants/operator"
-import { formatDate } from "@/lib/format"
+import { formatDay } from "@/lib/format"
 import { pageMetadata } from "@/lib/site"
 
 export async function generateMetadata() {
@@ -58,7 +58,7 @@ export default async function AccessibilityPage() {
         </p>
       </section>
       <p className="text-sm text-muted-foreground">
-        {t("reviewed", { date: formatDate(ACCESSIBILITY_REVIEWED, locale) })}
+        {t("reviewed", { date: formatDay(ACCESSIBILITY_REVIEWED, locale) })}
       </p>
     </main>
   )

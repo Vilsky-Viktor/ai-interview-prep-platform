@@ -1,10 +1,11 @@
 "use client"
 
 import { FlagIcon } from "lucide-react"
-import { useLocale, useTranslations } from "next-intl"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
+import { useLocalTime } from "@/hooks/use-local-time"
 import { AnswerOptions } from "@/components/questions/answer-options"
 import { QuestionReports } from "@/components/questions/question-reports"
 import { QuestionText } from "@/components/questions/question-text"
@@ -14,7 +15,6 @@ import { Button } from "@/components/ui/button"
 import { VirtualList } from "@/components/virtual-list"
 import { usePagedList } from "@/hooks/use-paged-list"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
-import { formatDate } from "@/lib/format"
 import type { QualityRow } from "@/types/superadmin"
 import { LIST_BOX } from "@/constants/lists"
 
@@ -35,7 +35,7 @@ export function QualityList({
   empty: string
 }) {
   const t = useTranslations("superadmin")
-  const locale = useLocale()
+  const localTime = useLocalTime()
   const { items, loadMore } = usePagedList<QualityRow>(path, rowKey, initial)
   // Dismissed here, so gone from the list; sent to the verifier, so waiting.
   const [dismissed, setDismissed] = useState<string[]>([])
@@ -105,7 +105,7 @@ export function QualityList({
                   <span className="normal-case">{row.set_title}</span> ·{" "}
                   {t(`kinds.${row.set_kind}`)} ·{" "}
                   <time dateTime={row.at} suppressHydrationWarning>
-                    {formatDate(row.at, locale)}
+                    {localTime.date(row.at)}
                   </time>
                 </p>
               </div>

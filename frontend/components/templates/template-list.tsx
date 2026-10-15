@@ -2,8 +2,9 @@
 
 import { LayersIcon } from "lucide-react"
 import Link from "next/link"
-import { useLocale, useTranslations } from "next-intl"
+import { useTranslations } from "next-intl"
 
+import { useLocalTime } from "@/hooks/use-local-time"
 import { useUrlLocale } from "@/components/localized-link"
 import { UseTemplate } from "@/components/templates/use-template"
 import { Badge } from "@/components/ui/badge"
@@ -15,7 +16,6 @@ import {
 import { VirtualList } from "@/components/virtual-list"
 import { usePagedList } from "@/hooks/use-paged-list"
 import { byId } from "@/lib/paged-list"
-import { formatDate } from "@/lib/format"
 import { localizedPath } from "@/lib/locale-path"
 import type { TemplateSummary } from "@/types/superadmin"
 import { LIST_BOX } from "@/constants/lists"
@@ -40,7 +40,7 @@ export function TemplateList({
   bySlug?: boolean
 }) {
   const t = useTranslations("templates")
-  const locale = useLocale()
+  const localTime = useLocalTime()
   const urlLocale = useUrlLocale()
   const { items, loadMore } = usePagedList(path, byId, initial)
 
@@ -64,7 +64,7 @@ export function TemplateList({
               </span>
               <span className="block text-sm text-muted-foreground">
                 <time dateTime={template.created_at} suppressHydrationWarning>
-                  {formatDate(template.created_at, locale)}
+                  {localTime.date(template.created_at)}
                 </time>
               </span>
             </span>

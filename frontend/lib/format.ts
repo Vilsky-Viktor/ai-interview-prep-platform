@@ -1,17 +1,19 @@
-/** In the runtime's time zone, so the server and the browser can differ: lists rendered on both
-put it in <time suppressHydrationWarning>, and the browser's local date wins. */
-export function formatDate(iso: string, locale: string) {
-  return new Intl.DateTimeFormat(locale, { dateStyle: "medium" }).format(
-    new Date(iso)
-  )
+/** A moment as a medium date in the language asked, in `timeZone` (the runtime's when none).
+ * Pages show moments through useLocalTime or LocalDate, in the visitor's own time zone. */
+export function formatDate(iso: string, locale: string, timeZone?: string) {
+  return new Intl.DateTimeFormat(locale, {
+    dateStyle: "medium",
+    timeZone,
+  }).format(new Date(iso))
 }
 
-/** A moment as a medium date and a short time in the language asked, in the runtime's time zone
- * (render it in <time suppressHydrationWarning>, like formatDate). */
-export function formatDateTime(iso: string, locale: string) {
+/** A moment as a medium date and a short time in the language asked, in `timeZone` (the
+ * runtime's when none), like formatDate. */
+export function formatDateTime(iso: string, locale: string, timeZone?: string) {
   return new Intl.DateTimeFormat(locale, {
     dateStyle: "medium",
     timeStyle: "short",
+    timeZone,
   }).format(new Date(iso))
 }
 

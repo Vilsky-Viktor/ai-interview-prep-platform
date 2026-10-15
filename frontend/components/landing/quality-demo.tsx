@@ -1,5 +1,7 @@
 "use client"
 
+import { LocalDate } from "@/components/local-date"
+
 import { cn } from "cn"
 import {
   CircleAlertIcon,
@@ -124,7 +126,8 @@ export function QualityDemo({
   good: DemoQuestion
   weak: DemoQuestion
   better: DemoQuestion
-  report: { reason: string; date: string; comment: string }
+  // `at`: when the report was made, shown as the visitor's own date.
+  report: { reason: string; at: string; comment: string }
   labels: {
     regenerate: string
     regenerating: string
@@ -209,7 +212,9 @@ export function QualityDemo({
               <div className="space-y-1 bg-muted/40 p-4 text-sm sm:p-5 sm:pe-6">
                 <p className="flex flex-wrap items-baseline justify-between gap-2">
                   <span className="font-medium">{report.reason}</span>
-                  <span className="text-muted-foreground">{report.date}</span>
+                  <span className="text-muted-foreground">
+                    <LocalDate iso={report.at} />
+                  </span>
                 </p>
                 <p className="font-light text-muted-foreground">
                   {report.comment}

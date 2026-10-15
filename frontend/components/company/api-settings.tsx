@@ -1,11 +1,11 @@
 "use client"
 
-import { useLocale, useTranslations } from "next-intl"
+import { useTranslations } from "next-intl"
 
+import { useLocalTime } from "@/hooks/use-local-time"
 import { CreateDialog, RemoveButton } from "@/components/company/api-dialogs"
 import { WebhookActions } from "@/components/company/webhook-actions"
 import { MAX_KEY_NAME, MAX_WEBHOOK_URL } from "@/constants/api"
-import { formatDate } from "@/lib/format"
 import type { ApiKey, ApiWebhook } from "@/types/api-access"
 import { LIST_BOX } from "@/constants/lists"
 
@@ -87,7 +87,7 @@ export function ApiKeys({
   canEdit: boolean
 }) {
   const t = useTranslations("api")
-  const locale = useLocale()
+  const localTime = useLocalTime()
   const manage = `/v1/manage/keys`
 
   return (
@@ -103,7 +103,7 @@ export function ApiKeys({
               <span className="font-mono">{key.shown}…</span>
               {" · "}
               <time suppressHydrationWarning>
-                {t("created", { date: formatDate(key.created_at, locale) })}
+                {t("created", { date: localTime.date(key.created_at) })}
               </time>
               {" · "}
               {key.expired ? (
@@ -111,7 +111,7 @@ export function ApiKeys({
               ) : (
                 <time suppressHydrationWarning>
                   {key.expires_at
-                    ? t("expires", { date: formatDate(key.expires_at, locale) })
+                    ? t("expires", { date: localTime.date(key.expires_at) })
                     : t("neverExpires")}
                 </time>
               )}
@@ -119,7 +119,7 @@ export function ApiKeys({
               <time suppressHydrationWarning>
                 {key.last_used_at
                   ? t("lastUsed", {
-                      date: formatDate(key.last_used_at, locale),
+                      date: localTime.date(key.last_used_at),
                     })
                   : t("neverUsed")}
               </time>
@@ -154,7 +154,7 @@ export function ApiWebhooks({
   canEdit: boolean
 }) {
   const t = useTranslations("api")
-  const locale = useLocale()
+  const localTime = useLocalTime()
   const manage = `/v1/manage/webhooks`
 
   return (
@@ -168,7 +168,7 @@ export function ApiWebhooks({
           details={
             <>
               <time suppressHydrationWarning>
-                {t("added", { date: formatDate(hook.created_at, locale) })}
+                {t("added", { date: localTime.date(hook.created_at) })}
               </time>
               {(hook.stopped || hook.failing) && (
                 <>

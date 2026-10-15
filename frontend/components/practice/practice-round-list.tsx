@@ -1,12 +1,12 @@
 "use client"
 
 import Link from "next/link"
-import { useLocale, useTranslations } from "next-intl"
+import { useTranslations } from "next-intl"
 
+import { useLocalTime } from "@/hooks/use-local-time"
 import { VirtualList } from "@/components/virtual-list"
 import { LIST_BOX } from "@/constants/lists"
 import { usePagedList } from "@/hooks/use-paged-list"
-import { formatDate } from "@/lib/format"
 import type { PracticeRoundSummary } from "@/types/round"
 
 function byRound(round: PracticeRoundSummary) {
@@ -23,7 +23,7 @@ export function PracticeRoundList({
   initial: PracticeRoundSummary[]
 }) {
   const t = useTranslations("practice")
-  const locale = useLocale()
+  const localTime = useLocalTime()
   const { items, loadMore } = usePagedList(
     `/rounds/practice/${templateId}/rounds`,
     byRound,
@@ -53,7 +53,7 @@ export function PracticeRoundList({
             className="text-lg"
             suppressHydrationWarning
           >
-            {formatDate(round.started_at, locale)}
+            {localTime.date(round.started_at)}
           </time>
           {/* Progress and grade, labelled like the candidate list's numbers. */}
           <span className="flex shrink-0 items-center gap-6 sm:gap-10">

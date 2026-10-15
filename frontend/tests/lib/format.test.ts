@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest"
 
 import {
   formatDate,
+  formatDateTime,
   formatDay,
   formatPrice,
   formatPriceRange,
@@ -20,6 +21,15 @@ describe("formatDate", () => {
   it("writes a medium date in the language asked", () => {
     expect(formatDate(iso, "en")).toBe("Mar 5, 2026")
     expect(formatDate(iso, "de")).toBe("05.03.2026")
+  })
+
+  it("writes the day in the time zone asked", () => {
+    // 2:00 UTC is still the evening before in New York.
+    const late = "2026-10-15T02:00:00Z"
+
+    expect(formatDate(late, "en", "UTC")).toBe("Oct 15, 2026")
+    expect(formatDate(late, "en", "America/New_York")).toBe("Oct 14, 2026")
+    expect(formatDateTime(late, "en", "America/New_York")).toBe("Oct 14, 2026, 10:00 PM")
   })
 })
 

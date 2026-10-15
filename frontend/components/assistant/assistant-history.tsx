@@ -1,10 +1,11 @@
 "use client"
 
 import { Trash2Icon } from "lucide-react"
-import { useLocale, useTranslations } from "next-intl"
+import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
 
+import { useLocalTime } from "@/hooks/use-local-time"
 import { ConfirmDialog } from "@/components/confirm-dialog"
 import { Button } from "@/components/ui/button"
 import {
@@ -14,7 +15,6 @@ import {
 } from "@/components/ui/tooltip"
 import { apiErrorMessage } from "@/lib/api"
 import { deleteConversation, listConversations } from "@/lib/assistant"
-import { formatDate } from "@/lib/format"
 import type { Conversation } from "@/types/assistant"
 
 /** The user's past conversations with the assistant, the latest first: one opens, the bin
@@ -30,7 +30,7 @@ export function AssistantHistory({
 }) {
   const t = useTranslations("assistant")
   const common = useTranslations("common")
-  const locale = useLocale()
+  const localTime = useLocalTime()
   const [items, setItems] = useState<Conversation[] | null>(null)
   // The conversation the user asked to delete, until they confirm or keep it.
   const [deleting, setDeleting] = useState<string | null>(null)
@@ -102,7 +102,7 @@ export function AssistantHistory({
                 </span>
                 <span className="block truncate text-sm text-muted-foreground">
                   <time dateTime={item.updated_at} suppressHydrationWarning>
-                    {formatDate(item.updated_at, locale)}
+                    {localTime.date(item.updated_at)}
                   </time>
                   {item.company_id && companyNames[item.company_id] && (
                     <> · {companyNames[item.company_id]}</>

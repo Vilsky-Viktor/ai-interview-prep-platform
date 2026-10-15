@@ -2,12 +2,12 @@
 
 import { cn } from "cn"
 import Link from "next/link"
-import { useLocale, useTranslations } from "next-intl"
+import { useTranslations } from "next-intl"
 
+import { useLocalTime } from "@/hooks/use-local-time"
 import { CandidateSignals } from "@/components/company/candidate-signals"
 import { NoName } from "@/components/company/no-name"
 import { Badge } from "@/components/ui/badge"
-import { formatDate } from "@/lib/format"
 import { gradeTone } from "@/lib/grade-tone"
 import type { Candidate } from "@/types/company"
 
@@ -41,7 +41,7 @@ export function CandidateRow({
 }) {
   const t = useTranslations("candidates")
   const statuses = useTranslations("candidateStatus")
-  const locale = useLocale()
+  const localTime = useLocalTime()
 
   return (
     <Link
@@ -64,7 +64,7 @@ export function CandidateRow({
           <span className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
             {candidate.created_at && (
               <time dateTime={candidate.created_at} suppressHydrationWarning>
-                {formatDate(candidate.created_at, locale)}
+                {localTime.date(candidate.created_at)}
               </time>
             )}
             <CandidateSignals candidate={candidate} />

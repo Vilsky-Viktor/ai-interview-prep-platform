@@ -1,8 +1,9 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { useLocale, useTranslations } from "next-intl"
+import { useTranslations } from "next-intl"
 
+import { useLocalTime } from "@/hooks/use-local-time"
 import { DeclineVerification } from "@/components/superadmin/decline-verification"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -10,7 +11,6 @@ import { VirtualList } from "@/components/virtual-list"
 import { usePagedList } from "@/hooks/use-paged-list"
 import { apiFetch } from "@/lib/api"
 import { decisionFailed } from "@/lib/verification"
-import { formatDate } from "@/lib/format"
 import type { VerificationRequest } from "@/types/superadmin"
 import { LIST_BOX } from "@/constants/lists"
 
@@ -29,7 +29,7 @@ export function VerificationList({
   initial: VerificationRequest[]
 }) {
   const t = useTranslations("superadmin")
-  const locale = useLocale()
+  const localTime = useLocalTime()
   const router = useRouter()
   const { items, loadMore } = usePagedList<VerificationRequest>(
     path,
@@ -96,7 +96,7 @@ export function VerificationList({
                   <>
                     {" · "}
                     <time dateTime={date} suppressHydrationWarning>
-                      {formatDate(date, locale)}
+                      {localTime.date(date)}
                     </time>
                   </>
                 )}

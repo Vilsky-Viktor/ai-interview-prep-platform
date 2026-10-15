@@ -1,11 +1,11 @@
 "use client"
 
-import { useLocale, useTranslations } from "next-intl"
+import { useTranslations } from "next-intl"
 
+import { useLocalTime } from "@/hooks/use-local-time"
 import { VirtualList } from "@/components/virtual-list"
 import { usePagedList } from "@/hooks/use-paged-list"
 import { byId } from "@/lib/paged-list"
-import { formatDate } from "@/lib/format"
 import type { QuestionReport } from "@/types/feedback"
 
 /** A question's reports in their own scroll box, loading more as the user scrolls it. */
@@ -13,7 +13,7 @@ export function QuestionReports({ path }: { path: string }) {
   const t = useTranslations("questions")
   const common = useTranslations("common")
   const reasons = useTranslations("reportReasons")
-  const locale = useLocale()
+  const localTime = useLocalTime()
   const { items, loaded, loadMore } = usePagedList<QuestionReport>(path, byId)
 
   if (!loaded) {
@@ -40,7 +40,7 @@ export function QuestionReports({ path }: { path: string }) {
                 : report.reason}
             </span>
             <span className="text-muted-foreground">
-              {formatDate(report.created_at, locale)}
+              {localTime.date(report.created_at)}
             </span>
           </p>
           {report.comment && (

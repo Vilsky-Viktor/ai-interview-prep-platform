@@ -7,7 +7,7 @@ import { StartCard } from "@/components/content/start-card"
 import { JsonLd } from "@/components/json-ld"
 import { DEFAULT_LOCALE } from "@/constants/i18n"
 import type { ContentPage } from "@/lib/content"
-import { formatDate } from "@/lib/format"
+import { formatDay } from "@/lib/format"
 import { textDirection } from "@/lib/locale"
 import { localizeHref } from "@/lib/locale-path"
 import { previewImage, siteUrl, urlLocale } from "@/lib/site"
@@ -68,7 +68,7 @@ export async function ContentArticle({
           {t("updated")}{" "}
           <time dateTime={page.updated}>
             {/* At midday UTC, so the day is the same in any time zone. */}
-            {formatDate(`${page.updated}T12:00:00Z`, locale)}
+            {formatDay(page.updated, locale)}
           </time>
         </p>
       </header>

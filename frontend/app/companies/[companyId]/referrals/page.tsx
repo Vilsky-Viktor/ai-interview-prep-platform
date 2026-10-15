@@ -1,13 +1,13 @@
 import { GiftIcon } from "lucide-react"
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
-import { getLocale, getTranslations } from "next-intl/server"
+import { getTranslations } from "next-intl/server"
 
 import { ReferralLink } from "@/components/billing/referral-link"
 import { CompanyHeader } from "@/components/company/company-header"
 import { SignInPrompt } from "@/components/sign-in-prompt"
 import { TOKEN_COOKIE } from "@/constants/auth"
-import { formatDate } from "@/lib/format"
+import { LocalDate } from "@/components/local-date"
 import { serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
 import type { Company, CompanyReferral } from "@/types/company"
@@ -22,7 +22,6 @@ export default async function ReferralsPage({
 }) {
   const { companyId } = await params
   const referralText = await getTranslations("referral")
-  const locale = await getLocale()
   const signedIn = (await cookies()).has(TOKEN_COOKIE)
   const company = signedIn
     ? await serverFetch<Company>(`/companies/companies/${companyId}`)
@@ -88,7 +87,7 @@ export default async function ReferralsPage({
                       {reward.name ?? referralText("deletedCompany")}
                     </span>
                     <span className="block text-sm text-muted-foreground">
-                      {formatDate(reward.rewarded_at, locale)}
+                      <LocalDate iso={reward.rewarded_at} />
                     </span>
                   </span>
                   <span className="shrink-0 text-primary tabular-nums">

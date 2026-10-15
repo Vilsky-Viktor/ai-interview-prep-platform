@@ -1,11 +1,10 @@
-import { getLocale, getNow, getTranslations } from "next-intl/server"
+import { getNow, getTranslations } from "next-intl/server"
 
 import {
   type DemoQuestion,
   QualityDemo,
 } from "@/components/landing/quality-demo"
 import { LandingSection, Stage } from "@/components/landing/section"
-import { formatDate } from "@/lib/format"
 
 // Which option of each pictured question is right; the weak one's key is debatable on purpose.
 const CORRECT = { good: 0, weak: 2, better: 1 } as const
@@ -24,7 +23,7 @@ export async function QualitySection() {
       correct: index === CORRECT[key],
     })),
   })
-  const reported = formatDate((await getNow()).toISOString(), await getLocale())
+  const reported = (await getNow()).toISOString()
 
   return (
     <LandingSection title={t("title")} text={t("text")}>
@@ -36,7 +35,7 @@ export async function QualitySection() {
           better={question("better")}
           report={{
             reason: reasons("unclear"),
-            date: reported,
+            at: reported,
             comment: t("comment"),
           }}
           labels={{

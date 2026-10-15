@@ -377,3 +377,13 @@ export async function addPracticeRounds(
     }
   });
 }
+
+/** Moves a throwaway candidate's invite to `iso`, as if they were invited then. */
+export async function setInvitedAt(email: string, iso: string) {
+  await withDatabase("companies", (client) =>
+    client.query(
+      "UPDATE candidate_invites SET created_at = $2 WHERE email = $1",
+      [email, iso],
+    ),
+  );
+}

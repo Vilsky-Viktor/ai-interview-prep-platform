@@ -1,15 +1,15 @@
 "use client"
 
 import { UsersIcon } from "lucide-react"
-import { useLocale, useTranslations } from "next-intl"
+import { useTranslations } from "next-intl"
 
+import { useLocalTime } from "@/hooks/use-local-time"
 import { InterviewStatus } from "@/components/company/interview-status"
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { formatDate } from "@/lib/format"
 
 /** An interview's row content: its title and date, then its status (when it has one) and how
  * many candidates it has. */
@@ -25,7 +25,7 @@ export function InterviewSummary({
   candidateCount: number
 }) {
   const t = useTranslations("interviews")
-  const locale = useLocale()
+  const localTime = useLocalTime()
 
   return (
     <>
@@ -33,7 +33,7 @@ export function InterviewSummary({
         <span className="block text-lg font-medium">{title}</span>
         <span className="block text-sm text-muted-foreground">
           <time dateTime={createdAt} suppressHydrationWarning>
-            {formatDate(createdAt, locale)}
+            {localTime.date(createdAt)}
           </time>
         </span>
       </span>

@@ -4,8 +4,9 @@ import { cn } from "cn"
 import Link from "next/link"
 import { useFormatter, useLocale, useTranslations } from "next-intl"
 
+import { useLocalTime } from "@/hooks/use-local-time"
 import { InvoiceLink } from "@/components/billing/invoice-link"
-import { formatDate, formatPrice } from "@/lib/format"
+import { formatPrice } from "@/lib/format"
 import type { CreditHistoryEntry } from "@/types/company"
 
 /** One movement of a company's credits: what it was, when, and the credits it moved; a top-up
@@ -20,6 +21,7 @@ export function HistoryRow({
   const t = useTranslations("companyBilling")
   const format = useFormatter()
   const locale = useLocale()
+  const localTime = useLocalTime()
   const candidate = entry.candidate
 
   const content = (
@@ -46,7 +48,7 @@ export function HistoryRow({
         )}
         <span className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground max-sm:justify-center">
           <time dateTime={entry.created_at} suppressHydrationWarning>
-            {formatDate(entry.created_at, locale)}
+            {localTime.date(entry.created_at)}
           </time>
           {entry.total != null && entry.currency && (
             <span className="tabular-nums">

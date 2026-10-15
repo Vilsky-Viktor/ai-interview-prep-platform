@@ -1,17 +1,17 @@
 "use client"
 
 import { PencilIcon, Trash2Icon } from "lucide-react"
-import { useLocale, useTranslations } from "next-intl"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
+import { useLocalTime } from "@/hooks/use-local-time"
 import { VerifiedBadge } from "@/components/company/verified-badge"
 import { ConfirmDialog } from "@/components/confirm-dialog"
 import { RenameCompanyDialog } from "@/components/superadmin/rename-company-dialog"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
-import { formatDate } from "@/lib/format"
 import type { SuperadminCompany } from "@/types/superadmin"
 
 type Step = "suspend" | "delete" | "rename"
@@ -26,7 +26,7 @@ export function CompanyModerationRow({
   onChanged: () => void
 }) {
   const t = useTranslations("superadmin")
-  const locale = useLocale()
+  const localTime = useLocalTime()
   const [asking, setAsking] = useState<Step>()
   const [busy, setBusy] = useState(false)
   const path = `/companies/superadmin/companies/${company.id}`
@@ -69,7 +69,7 @@ export function CompanyModerationRow({
         <span className="text-sm text-muted-foreground">
           {t("companyDetails", {
             members: company.members,
-            date: formatDate(company.created_at, locale),
+            date: localTime.date(company.created_at),
           })}
         </span>
       </span>
