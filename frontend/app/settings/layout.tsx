@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { cookies } from "next/headers"
 import { getTranslations } from "next-intl/server"
 
+import { PageHeader } from "@/components/page-header"
 import { SignInPrompt } from "@/components/sign-in-prompt"
 import { TOKEN_COOKIE } from "@/constants/auth"
 
@@ -21,9 +22,14 @@ export default async function SettingsLayout({
 
   return (
     <main className="mx-auto max-w-5xl space-y-8 px-6 py-12">
-      <h1 className="font-heading text-3xl font-medium tracking-tight">
-        {t("title")}
-      </h1>
+      <PageHeader
+        help="settings"
+        title={
+          <h1 className="font-heading text-3xl font-medium tracking-tight">
+            {t("title")}
+          </h1>
+        }
+      />
 
       {signedIn ? (
         <div className="space-y-8">{children}</div>

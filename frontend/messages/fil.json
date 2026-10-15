@@ -1850,6 +1850,7 @@
         "I-download ang report bilang PDF, o i-share ito sa email.",
         "Magbigay ng extra time bago siya magsimula, halimbawa dahil sa kapansanan.",
         "Idagdag o i-edit ang pangalan ng aplikante.",
+        "Kopyahin ang invite link niya para ikaw mismo ang magpadala kung hindi dumating ang email; nandiyan ito hanggang matapos siya.",
         "Ipadala muli o bawiin ang imbitasyon, o burahin ang aplikante kasama ang kanyang resulta."
       ],
       "tips": [
@@ -1885,7 +1886,7 @@
       "title": "Team",
       "text": "Ang mga taong humahawak sa mga interview ng kumpanyang ito, at ang kanilang mga role.",
       "actions": [
-        "Magdagdag ng miyembro sa email, bilang admin o viewer.",
+        "Magdagdag ng miyembro sa email, bilang admin o viewer: ie-email sa kanila ang link para sumali.",
         "Palitan ang role ng miyembro mula admin patungong viewer o pabalik.",
         "Kopyahin ang link ng nakabinbing imbitasyon, o alisin ang isang miyembro o imbitasyon."
       ],
@@ -1999,6 +2000,31 @@
       "tips": [
         "Kumikilos ang app bilang ikaw, sa bawat kumpanyang kasali ka. Karamihan sa mga app ay nagtatanong muna bago magbago ng anuman.",
         "Hindi nito makikita ang password o mga API key mo, at hindi nito mabubura ang account mo o ang isang kumpanya."
+      ]
+    },
+    "topUp": {
+      "title": "Mag-top up",
+      "text": "Bumili ng credits para sa kahit anong kumpanya kung saan ka may-ari o admin.",
+      "actions": [
+        "Pumili ng kumpanya at top-up: mas mura bawat aplikante ang mas malalaking top-up.",
+        "Magbayad sa checkout ng Paddle; darating ang credits sa loob ng ilang segundo.",
+        "Buksan ang presyo para ikumpara ang mga top-up."
+      ],
+      "tips": [
+        "500 credits ang bawat aplikante: nire-reserve kapag inimbitahan siya, sinisingil kapag sumagot siya, at ibinabalik kung hindi.",
+        "Hindi nag-e-expire ang credits. Nasa tab na Billing ng kumpanya ang invoice ng bawat top-up."
+      ]
+    },
+    "settings": {
+      "title": "Mga setting",
+      "text": "Ang sarili mong account: ang wikang gamit ng prepza sa iyo, ang mga email na natatanggap mo, at ang iyong data.",
+      "actions": [
+        "Piliin ang wika ng site, ng help chat at ng iyong mga email.",
+        "Piliin kung aling opsyonal na email ang matatanggap mo; laging ipinapadala ang mga email ng serbisyo, gaya ng mga imbitasyon, report at problema sa bayad.",
+        "I-download ang lahat ng hawak ng prepza tungkol sa iyo, o burahin ang iyong account."
+      ],
+      "tips": [
+        "Kapag binura mo ang iyong account, mabubura rin ang mga kumpanyang ikaw lang ang miyembro. Ang kumpanyang may iba nang sumali ay kailangan munang magkaroon ng ibang may-ari."
       ]
     }
   },

@@ -44,6 +44,15 @@ test("the info buttons explain the companies list, an interview and a candidate"
 
   await visit(owner, `${interviewHref}/candidates/${candidate.id}`)
   await checkHelp(owner, "Candidate report", /Download the report/)
+  await checkHelp(owner, "Candidate report", /Copy their invite link/)
+
+  // The team's help says the join link is emailed; top up and settings have their own.
+  await visit(owner, `/companies/${company.id}/members`)
+  await checkHelp(owner, "Team", /emailed a link to join/)
+  await visit(owner, "/top-up")
+  await checkHelp(owner, "Top up", /Pick a company and a top-up/)
+  await visit(owner, "/settings")
+  await checkHelp(owner, "Settings", /delete your account/)
 
   // The companies list's back arrow goes to the home page.
   await visit(owner, "/companies")

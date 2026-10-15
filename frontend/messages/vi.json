@@ -1842,6 +1842,7 @@
         "Tải báo cáo xuống dưới dạng PDF, hoặc chia sẻ qua email.",
         "Cho thêm thời gian trước khi họ bắt đầu, ví dụ vì khuyết tật.",
         "Thêm hoặc sửa họ tên ứng viên.",
+        "Sao chép liên kết mời của ứng viên để tự gửi nếu email không đến; liên kết vẫn dùng được cho đến khi họ làm xong.",
         "Gửi lại hoặc thu hồi lời mời, hoặc xóa ứng viên cùng kết quả của họ."
       ],
       "tips": [
@@ -1877,7 +1878,7 @@
       "title": "Nhóm",
       "text": "Những người làm việc với các buổi phỏng vấn của công ty này, và vai trò của họ.",
       "actions": [
-        "Thêm thành viên qua email, với vai trò quản trị viên hoặc người xem.",
+        "Thêm thành viên qua email, với vai trò quản trị viên hoặc người xem: họ sẽ nhận email có liên kết để tham gia.",
         "Đổi vai trò của thành viên giữa quản trị viên và người xem.",
         "Sao chép liên kết của lời mời đang chờ, hoặc xóa thành viên hay lời mời."
       ],
@@ -1991,6 +1992,31 @@
       "tips": [
         "Ứng dụng hành động thay mặt bạn, trong mọi công ty bạn tham gia. Hầu hết ứng dụng hỏi bạn trước khi thay đổi bất cứ điều gì.",
         "Ứng dụng không thể xem mật khẩu hay khóa API của bạn, và không thể xóa tài khoản của bạn hay một công ty."
+      ]
+    },
+    "topUp": {
+      "title": "Nạp credit",
+      "text": "Mua credit cho bất kỳ công ty nào mà bạn là chủ sở hữu hoặc quản trị viên.",
+      "actions": [
+        "Chọn công ty và gói nạp: gói càng lớn thì chi phí cho mỗi ứng viên càng thấp.",
+        "Thanh toán trên trang thanh toán của Paddle; credit sẽ vào trong vài giây.",
+        "Mở bảng giá để so sánh các gói nạp."
+      ],
+      "tips": [
+        "Mỗi ứng viên tốn 500 credit: được giữ lại khi mời, bị trừ khi ứng viên trả lời và được hoàn lại nếu không.",
+        "Credit không bao giờ hết hạn. Hóa đơn của mỗi lần nạp nằm ở thẻ Thanh toán của công ty."
+      ]
+    },
+    "settings": {
+      "title": "Cài đặt",
+      "text": "Tài khoản của riêng bạn: ngôn ngữ prepza dùng với bạn, các email bạn nhận và dữ liệu của bạn.",
+      "actions": [
+        "Chọn ngôn ngữ của trang web, chat hỗ trợ và email của bạn.",
+        "Chọn những email không bắt buộc bạn muốn nhận; email dịch vụ, như lời mời, báo cáo và sự cố thanh toán, luôn được gửi.",
+        "Tải xuống mọi thứ prepza lưu về bạn, hoặc xóa tài khoản."
+      ],
+      "tips": [
+        "Xóa tài khoản sẽ xóa các công ty chỉ có mình bạn. Công ty đã có người khác tham gia cần có chủ sở hữu khác trước."
       ]
     }
   },

@@ -1846,6 +1846,7 @@
         "Téléchargez le rapport en PDF, ou partagez-le par e-mail.",
         "Accordez du temps supplémentaire avant le début, par exemple en cas de handicap.",
         "Ajoutez ou modifiez le nom du candidat.",
+        "Copiez son lien d'invitation pour l'envoyer vous-même si l'e-mail n'est pas arrivé ; il reste disponible jusqu'à ce que le candidat ait terminé.",
         "Renvoyez ou révoquez l'invitation, ou supprimez le candidat avec ses résultats."
       ],
       "tips": [
@@ -1881,7 +1882,7 @@
       "title": "Équipe",
       "text": "Les personnes qui travaillent sur les entretiens de cette entreprise, et leurs rôles.",
       "actions": [
-        "Ajoutez un membre par e-mail, comme admin ou lecteur.",
+        "Ajoutez un membre par e-mail, comme admin ou lecteur : il reçoit par e-mail un lien pour rejoindre l'équipe.",
         "Changez le rôle d'un membre entre admin et lecteur.",
         "Copiez le lien d'une invitation en attente, ou retirez un membre ou une invitation."
       ],
@@ -1995,6 +1996,31 @@
       "tips": [
         "Une application agit en votre nom, dans chaque entreprise dont vous faites partie. La plupart des applications vous demandent avant de modifier quoi que ce soit.",
         "Elle ne peut pas voir votre mot de passe ni vos clés API, ni supprimer votre compte ou une entreprise."
+      ]
+    },
+    "topUp": {
+      "title": "Recharger",
+      "text": "Achetez des crédits pour toute entreprise dont vous êtes propriétaire ou admin.",
+      "actions": [
+        "Choisissez une entreprise et une recharge : les plus grandes coûtent moins cher par candidat.",
+        "Payez sur la page de paiement de Paddle ; les crédits arrivent en quelques secondes.",
+        "Ouvrez les tarifs pour comparer les recharges."
+      ],
+      "tips": [
+        "Un candidat coûte 500 crédits : réservés à l'invitation, débités dès qu'il répond et rendus s'il ne répond pas.",
+        "Les crédits n'expirent jamais. La facture de chaque recharge se trouve dans l'onglet Facturation de l'entreprise."
+      ]
+    },
+    "settings": {
+      "title": "Paramètres",
+      "text": "Votre propre compte : la langue dans laquelle prepza s'adresse à vous, les e-mails que vous recevez et vos données.",
+      "actions": [
+        "Choisissez la langue du site, du chat d'aide et de vos e-mails.",
+        "Choisissez les e-mails facultatifs que vous recevez ; les e-mails de service, comme les invitations, les rapports et les problèmes de paiement, sont toujours envoyés.",
+        "Téléchargez tout ce que prepza conserve sur vous, ou supprimez votre compte."
+      ],
+      "tips": [
+        "Supprimer votre compte supprime les entreprises dont vous êtes le seul membre. Une entreprise que d'autres ont rejointe a d'abord besoin d'un autre propriétaire."
       ]
     }
   },

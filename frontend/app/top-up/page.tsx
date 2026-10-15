@@ -3,6 +3,7 @@ import Link from "next/link"
 import { getTranslations } from "next-intl/server"
 
 import { BalanceRow } from "@/components/billing/balance-row"
+import { PageHeader } from "@/components/page-header"
 import { RefreshOnFocus } from "@/components/billing/refresh-on-focus"
 import { SignInPrompt } from "@/components/sign-in-prompt"
 import { Button } from "@/components/ui/button"
@@ -37,22 +38,27 @@ export default async function TopUpPage() {
   return (
     <main className="mx-auto max-w-5xl space-y-12 px-6 py-12">
       <RefreshOnFocus />
-      <div className="space-y-2">
-        <div className="flex items-center justify-between gap-4">
-          <h1 className="font-heading text-4xl font-medium tracking-tight">
-            {t("title")}
-          </h1>
-          <Button
-            variant="outline"
-            className="h-12 px-6 text-base"
-            render={<Link href="/pricing" />}
-            nativeButton={false}
-          >
-            {t("pricing")}
-          </Button>
-        </div>
-        <p className="text-base text-muted-foreground">{t("intro")}</p>
-      </div>
+      <PageHeader
+        help="topUp"
+        title={
+          <div className="space-y-2">
+            <div className="flex items-center justify-between gap-4">
+              <h1 className="font-heading text-4xl font-medium tracking-tight">
+                {t("title")}
+              </h1>
+              <Button
+                variant="outline"
+                className="h-12 px-6 text-base"
+                render={<Link href="/pricing" />}
+                nativeButton={false}
+              >
+                {t("pricing")}
+              </Button>
+            </div>
+            <p className="text-base text-muted-foreground">{t("intro")}</p>
+          </div>
+        }
+      />
 
       {!signedIn && <SignInPrompt />}
 

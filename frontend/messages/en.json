@@ -1846,6 +1846,7 @@
         "Download the report as a PDF, or share it by email.",
         "Give extra time before they start, for example for a disability.",
         "Add or edit the candidate's name.",
+        "Copy their invite link to send it yourself, if the email didn't arrive; it's there until they finish.",
         "Resend or revoke the invite, or delete the candidate with their results."
       ],
       "tips": [
@@ -1881,7 +1882,7 @@
       "title": "Team",
       "text": "The people who work on this company's interviews, and their roles.",
       "actions": [
-        "Add a member by email, as an admin or a viewer.",
+        "Add a member by email, as an admin or a viewer: they're emailed a link to join.",
         "Change a member's role between admin and viewer.",
         "Copy a pending invite's link, or remove a member or an invite."
       ],
@@ -1995,6 +1996,31 @@
       "tips": [
         "An app acts as you, in every company you're in. Most apps ask you before they change anything.",
         "It can't see your password or API keys, and can't delete your account or a company."
+      ]
+    },
+    "topUp": {
+      "title": "Top up",
+      "text": "Buy credits for any company you belong to as an owner or admin.",
+      "actions": [
+        "Pick a company and a top-up: larger ones cost less per candidate.",
+        "Pay in Paddle's checkout; the credits arrive within seconds.",
+        "Open pricing to compare the top-ups."
+      ],
+      "tips": [
+        "A candidate costs 500 credits: reserved when they're invited, charged once they answer, and given back if they don't.",
+        "Credits never expire. Each top-up's invoice is on the company's billing tab."
+      ]
+    },
+    "settings": {
+      "title": "Settings",
+      "text": "Your own account: the language prepza speaks to you, the emails you get, and your data.",
+      "actions": [
+        "Choose the language of the site, the help chat and your emails.",
+        "Choose which optional emails you get; service emails, such as invites, reports and billing problems, always go out.",
+        "Download everything prepza holds about you, or delete your account."
+      ],
+      "tips": [
+        "Deleting your account deletes the companies only you are in. A company others have joined needs another owner first."
       ]
     }
   },

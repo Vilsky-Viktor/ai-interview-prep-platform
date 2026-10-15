@@ -1846,6 +1846,7 @@
         "Pobierz raport jako PDF albo udostępnij go e-mailem.",
         "Daj dodatkowy czas, zanim kandydat zacznie, np. z powodu niepełnosprawności.",
         "Dodaj lub edytuj imię i nazwisko kandydata.",
+        "Skopiuj link z zaproszeniem, aby wysłać go samodzielnie, jeśli e-mail nie dotarł; jest dostępny, dopóki kandydat nie skończy.",
         "Wyślij zaproszenie ponownie lub je wycofaj albo usuń kandydata razem z jego wynikami."
       ],
       "tips": [
@@ -1881,7 +1882,7 @@
       "title": "Zespół",
       "text": "Osoby, które pracują nad rozmowami tej firmy, i ich role.",
       "actions": [
-        "Dodaj członka zespołu e-mailem jako administratora lub obserwatora.",
+        "Dodaj członka zespołu e-mailem jako administratora lub obserwatora: dostanie e-mailem link, by dołączyć.",
         "Zmień rolę członka zespołu między administratorem a obserwatorem.",
         "Skopiuj link oczekującego zaproszenia albo usuń członka zespołu lub zaproszenie."
       ],
@@ -1995,6 +1996,31 @@
       "tips": [
         "Aplikacja działa w Twoim imieniu, w każdej firmie, do której należysz. Większość aplikacji pyta Cię, zanim cokolwiek zmieni.",
         "Nie widzi Twojego hasła ani kluczy API i nie może usunąć Twojego konta ani firmy."
+      ]
+    },
+    "topUp": {
+      "title": "Doładowanie",
+      "text": "Kupuj kredyty dla każdej firmy, w której jesteś właścicielem lub administratorem.",
+      "actions": [
+        "Wybierz firmę i doładowanie: większe kosztują mniej za kandydata.",
+        "Zapłać na stronie płatności Paddle; kredyty pojawią się w kilka sekund.",
+        "Otwórz cennik, by porównać doładowania."
+      ],
+      "tips": [
+        "Kandydat kosztuje 500 kredytów: są rezerwowane przy zaproszeniu, pobierane, gdy odpowie, i zwracane, jeśli nie odpowie.",
+        "Kredyty nie wygasają. Faktura każdego doładowania jest na karcie Rozliczenia firmy."
+      ]
+    },
+    "settings": {
+      "title": "Ustawienia",
+      "text": "Twoje własne konto: język, w którym prepza się do Ciebie zwraca, e-maile, które dostajesz, i Twoje dane.",
+      "actions": [
+        "Wybierz język strony, czatu pomocy i Twoich e-maili.",
+        "Wybierz, które opcjonalne e-maile dostajesz; e-maile serwisowe, takie jak zaproszenia, raporty i problemy z płatnościami, są wysyłane zawsze.",
+        "Pobierz wszystko, co prepza przechowuje na Twój temat, albo usuń konto."
+      ],
+      "tips": [
+        "Usunięcie konta usuwa firmy, w których jesteś tylko Ty. Firma, do której dołączyli inni, potrzebuje najpierw innego właściciela."
       ]
     }
   },

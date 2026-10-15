@@ -1846,6 +1846,7 @@
         "Lade den Bericht als PDF herunter oder teile ihn per E-Mail.",
         "Gib vor dem Start zusätzliche Zeit, zum Beispiel bei einer Behinderung.",
         "Füge den Namen des Kandidaten hinzu oder bearbeite ihn.",
+        "Kopiere den Einladungslink, um ihn selbst zu schicken, falls die E-Mail nicht angekommen ist; er bleibt verfügbar, bis der Kandidat fertig ist.",
         "Sende die Einladung erneut, widerrufe sie oder lösche den Kandidaten mit seinen Ergebnissen."
       ],
       "tips": [
@@ -1881,7 +1882,7 @@
       "title": "Team",
       "text": "Die Personen, die an den Interviews dieses Unternehmens arbeiten, und ihre Rollen.",
       "actions": [
-        "Füge ein Mitglied per E-Mail hinzu, als Admin oder Betrachter.",
+        "Füge ein Mitglied per E-Mail hinzu, als Admin oder Betrachter: Die Person bekommt per E-Mail einen Link zum Beitreten.",
         "Ändere die Rolle eines Mitglieds zwischen Admin und Betrachter.",
         "Kopiere den Link einer offenen Einladung oder entferne ein Mitglied oder eine Einladung."
       ],
@@ -1995,6 +1996,31 @@
       "tips": [
         "Eine App handelt in deinem Namen, in jedem Unternehmen, in dem du Mitglied bist. Die meisten Apps fragen dich, bevor sie etwas ändern.",
         "Sie sieht weder dein Passwort noch deine API-Schlüssel und kann weder dein Konto noch ein Unternehmen löschen."
+      ]
+    },
+    "topUp": {
+      "title": "Aufladen",
+      "text": "Kaufe Credits für jedes Unternehmen, in dem du Inhaber oder Admin bist.",
+      "actions": [
+        "Wähle ein Unternehmen und eine Aufladung: Größere kosten pro Kandidat weniger.",
+        "Bezahle auf der Bezahlseite von Paddle; die Credits sind in wenigen Sekunden da.",
+        "Öffne die Preise, um die Aufladungen zu vergleichen."
+      ],
+      "tips": [
+        "Ein Kandidat kostet 500 Credits: reserviert bei der Einladung, abgebucht, sobald er antwortet, und zurückgegeben, wenn nicht.",
+        "Credits verfallen nie. Die Rechnung jeder Aufladung findest du im Tab „Abrechnung“ des Unternehmens."
+      ]
+    },
+    "settings": {
+      "title": "Einstellungen",
+      "text": "Dein eigenes Konto: die Sprache, in der prepza mit dir spricht, die E-Mails, die du bekommst, und deine Daten.",
+      "actions": [
+        "Wähle die Sprache der Website, des Hilfe-Chats und deiner E-Mails.",
+        "Wähle, welche optionalen E-Mails du bekommst; Service-E-Mails wie Einladungen, Berichte und Zahlungsprobleme werden immer gesendet.",
+        "Lade alles herunter, was prepza über dich speichert, oder lösche dein Konto."
+      ],
+      "tips": [
+        "Wenn du dein Konto löschst, werden die Unternehmen gelöscht, in denen nur du bist. Ein Unternehmen, dem andere beigetreten sind, braucht zuerst einen anderen Inhaber."
       ]
     }
   },

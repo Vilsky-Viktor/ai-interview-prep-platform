@@ -23,6 +23,8 @@ export const PAGE_HELP_KEYS = [
   "referrals",
   "brand",
   "billing",
+  "topUp",
+  "settings",
 ] as const
 
 // A company's tabs and an interview's tabs, each with its own text.

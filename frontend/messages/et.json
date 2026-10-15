@@ -1850,6 +1850,7 @@
         "Laadi aruanne alla PDF-ina või jaga seda e-kirjaga.",
         "Anna enne alustamist lisaaega, näiteks puude tõttu.",
         "Lisa või muuda kandidaadi nime.",
+        "Kopeeri kandidaadi kutselink, et see ise saata, kui e-kiri kohale ei jõudnud; see on olemas, kuni ta on lõpetanud.",
         "Saada kutse uuesti või tühista see või kustuta kandidaat koos tulemustega."
       ],
       "tips": [
@@ -1885,7 +1886,7 @@
       "title": "Meeskond",
       "text": "Inimesed, kes töötavad selle ettevõtte intervjuudega, ja nende rollid.",
       "actions": [
-        "Lisa liige e-posti teel administraatori või vaatajana.",
+        "Lisa liige e-posti teel administraatori või vaatajana: talle saadetakse e-kirjaga link liitumiseks.",
         "Muuda liikme rolli administraatori ja vaataja vahel.",
         "Kopeeri ootel kutse link või eemalda liige või kutse."
       ],
@@ -1999,6 +2000,31 @@
       "tips": [
         "Rakendus tegutseb sinu nimel kõigis ettevõtetes, kuhu sa kuulud. Enamik rakendusi küsib sinult enne, kui midagi muudab.",
         "See ei näe sinu parooli ega API-võtmeid ega saa kustutada sinu kontot ega ettevõtet."
+      ]
+    },
+    "topUp": {
+      "title": "Laadi juurde",
+      "text": "Osta krediiti igale ettevõttele, kus oled omanik või administraator.",
+      "actions": [
+        "Vali ettevõte ja juurdelaadimine: suuremad on kandidaadi kohta odavamad.",
+        "Maksa Paddle'i makselehel; krediidid jõuavad kohale mõne sekundiga.",
+        "Ava hinnad, et juurdelaadimisi võrrelda."
+      ],
+      "tips": [
+        "Kandidaat maksab 500 krediiti: need broneeritakse kutsumisel, arvestatakse maha, kui ta vastab, ja antakse tagasi, kui ta ei vasta.",
+        "Krediidid ei aegu. Iga juurdelaadimise arve on ettevõtte vahekaardil „Arveldus“."
+      ]
+    },
+    "settings": {
+      "title": "Seaded",
+      "text": "Sinu enda konto: keel, milles prepza sinuga räägib, e-kirjad, mida saad, ja sinu andmed.",
+      "actions": [
+        "Vali saidi, abivestluse ja oma e-kirjade keel.",
+        "Vali, milliseid valikulisi e-kirju saad; teenusekirjad, näiteks kutsed, aruanded ja makseprobleemid, saadetakse alati.",
+        "Laadi alla kõik, mida prepza sinu kohta hoiab, või kustuta oma konto."
+      ],
+      "tips": [
+        "Konto kustutamine kustutab ettevõtted, kus oled ainult sina. Ettevõte, millega teised on liitunud, vajab enne teist omanikku."
       ]
     }
   },

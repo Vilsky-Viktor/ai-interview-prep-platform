@@ -1846,6 +1846,7 @@
         "Scarica il report in PDF o condividilo via email.",
         "Concedi tempo extra prima che inizi, ad esempio per una disabilità.",
         "Aggiungi o modifica il nome del candidato.",
+        "Copia il suo link d'invito per inviarlo tu, se l'email non è arrivata; resta disponibile finché il candidato non ha finito.",
         "Invia di nuovo o revoca l'invito, oppure elimina il candidato con i suoi risultati."
       ],
       "tips": [
@@ -1881,7 +1882,7 @@
       "title": "Team",
       "text": "Le persone che lavorano ai colloqui di questa azienda e i loro ruoli.",
       "actions": [
-        "Aggiungi un membro via email, come amministratore o visualizzatore.",
+        "Aggiungi un membro via email, come amministratore o visualizzatore: riceverà via email un link per unirsi.",
         "Cambia il ruolo di un membro tra amministratore e visualizzatore.",
         "Copia il link di un invito in sospeso, oppure rimuovi un membro o un invito."
       ],
@@ -1995,6 +1996,31 @@
       "tips": [
         "Un'app agisce a tuo nome, in ogni azienda di cui fai parte. La maggior parte delle app ti chiede conferma prima di cambiare qualsiasi cosa.",
         "Non può vedere la tua password né le tue chiavi API, né eliminare il tuo account o un'azienda."
+      ]
+    },
+    "topUp": {
+      "title": "Ricarica",
+      "text": "Acquista crediti per qualsiasi azienda di cui sei proprietario o amministratore.",
+      "actions": [
+        "Scegli un'azienda e una ricarica: quelle più grandi costano meno per candidato.",
+        "Paga sulla pagina di pagamento di Paddle; i crediti arrivano in pochi secondi.",
+        "Apri i prezzi per confrontare le ricariche."
+      ],
+      "tips": [
+        "Un candidato costa 500 crediti: riservati quando lo inviti, addebitati quando risponde e restituiti se non risponde.",
+        "I crediti non scadono. La fattura di ogni ricarica è nella scheda Fatturazione dell'azienda."
+      ]
+    },
+    "settings": {
+      "title": "Impostazioni",
+      "text": "Il tuo account: la lingua in cui prepza ti parla, le email che ricevi e i tuoi dati.",
+      "actions": [
+        "Scegli la lingua del sito, della chat di assistenza e delle tue email.",
+        "Scegli quali email facoltative ricevere; le email di servizio, come inviti, report e problemi di pagamento, vengono sempre inviate.",
+        "Scarica tutto ciò che prepza conserva su di te o elimina il tuo account."
+      ],
+      "tips": [
+        "Eliminare il tuo account elimina le aziende in cui ci sei solo tu. Un'azienda a cui si sono uniti altri ha prima bisogno di un altro proprietario."
       ]
     }
   },

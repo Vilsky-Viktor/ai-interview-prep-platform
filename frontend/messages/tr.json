@@ -1845,6 +1845,7 @@
         "Raporu PDF olarak indirin veya e-postayla paylaşın.",
         "Başlamadan önce ek süre verin, örneğin bir engel durumu için.",
         "Adayın adını ekleyin veya düzenleyin.",
+        "E-posta ulaşmadıysa kendiniz göndermek için davet bağlantısını kopyalayın; aday bitirene kadar orada kalır.",
         "Daveti yeniden gönderin veya geri alın ya da adayı sonuçlarıyla birlikte silin."
       ],
       "tips": [
@@ -1880,7 +1881,7 @@
       "title": "Ekip",
       "text": "Bu şirketin mülakatları üzerinde çalışan kişiler ve rolleri.",
       "actions": [
-        "E-postayla yönetici veya görüntüleyici olarak üye ekleyin.",
+        "E-postayla yönetici veya görüntüleyici olarak üye ekleyin: katılmaları için e-postayla bir bağlantı gönderilir.",
         "Bir üyenin rolünü yönetici ile görüntüleyici arasında değiştirin.",
         "Bekleyen bir davetin bağlantısını kopyalayın ya da bir üyeyi veya daveti kaldırın."
       ],
@@ -1994,6 +1995,31 @@
       "tips": [
         "Uygulama, üyesi olduğunuz her şirkette sizin adınıza hareket eder. Çoğu uygulama bir şeyi değiştirmeden önce size sorar.",
         "Şifrenizi veya API anahtarlarınızı göremez; hesabınızı veya bir şirketi silemez."
+      ]
+    },
+    "topUp": {
+      "title": "Kredi yükle",
+      "text": "Sahibi veya yöneticisi olduğunuz her şirket için kredi satın alın.",
+      "actions": [
+        "Bir şirket ve bir yükleme seçin: büyük yüklemelerde aday başına maliyet daha düşüktür.",
+        "Paddle'ın ödeme sayfasında ödeyin; krediler saniyeler içinde gelir.",
+        "Yüklemeleri karşılaştırmak için fiyatları açın."
+      ],
+      "tips": [
+        "Bir aday 500 krediye mal olur: davet edildiğinde ayrılır, yanıt verdiğinde düşülür, vermezse iade edilir.",
+        "Krediler hiç sona ermez. Her yüklemenin faturası şirketin Faturalandırma sekmesindedir."
+      ]
+    },
+    "settings": {
+      "title": "Ayarlar",
+      "text": "Kendi hesabınız: prepza'nın sizinle konuştuğu dil, aldığınız e-postalar ve verileriniz.",
+      "actions": [
+        "Sitenin, yardım sohbetinin ve e-postalarınızın dilini seçin.",
+        "Hangi isteğe bağlı e-postaları alacağınızı seçin; davetler, raporlar ve ödeme sorunları gibi hizmet e-postaları her zaman gönderilir.",
+        "prepza'nın sizin hakkınızda tuttuğu her şeyi indirin veya hesabınızı silin."
+      ],
+      "tips": [
+        "Hesabınızı silmek, yalnızca sizin bulunduğunuz şirketleri de siler. Başkalarının katıldığı bir şirkete önce başka bir sahip gerekir."
       ]
     }
   },

@@ -1846,6 +1846,7 @@
         "Unduh laporan sebagai PDF, atau bagikan lewat email.",
         "Beri waktu ekstra sebelum kandidat mulai, misalnya karena disabilitas.",
         "Tambah atau ubah nama kandidat.",
+        "Salin tautan undangannya untuk kamu kirim sendiri jika email tidak sampai; tautan ini tersedia sampai kandidat selesai.",
         "Kirim ulang atau cabut undangan, atau hapus kandidat beserta hasilnya."
       ],
       "tips": [
@@ -1881,7 +1882,7 @@
       "title": "Tim",
       "text": "Orang-orang yang mengelola wawancara perusahaan ini, dan perannya.",
       "actions": [
-        "Tambah anggota lewat email, sebagai admin atau pelihat.",
+        "Tambah anggota lewat email, sebagai admin atau pelihat: mereka akan menerima email berisi tautan untuk bergabung.",
         "Ubah peran anggota antara admin dan pelihat.",
         "Salin tautan undangan yang tertunda, atau hapus anggota atau undangan."
       ],
@@ -1995,6 +1996,31 @@
       "tips": [
         "Aplikasi bertindak sebagai kamu, di setiap perusahaan tempatmu bergabung. Sebagian besar aplikasi bertanya dulu sebelum mengubah apa pun.",
         "Aplikasi tidak bisa melihat kata sandi atau kunci API-mu, dan tidak bisa menghapus akunmu atau perusahaan."
+      ]
+    },
+    "topUp": {
+      "title": "Isi ulang",
+      "text": "Beli kredit untuk perusahaan mana pun tempat kamu menjadi pemilik atau admin.",
+      "actions": [
+        "Pilih perusahaan dan paket isi ulang: paket yang lebih besar lebih murah per kandidat.",
+        "Bayar di halaman pembayaran Paddle; kredit masuk dalam hitungan detik.",
+        "Buka harga untuk membandingkan paket isi ulang."
+      ],
+      "tips": [
+        "Satu kandidat memakan 500 kredit: dicadangkan saat ia diundang, dipotong setelah ia menjawab, dan dikembalikan jika tidak.",
+        "Kredit tidak pernah kedaluwarsa. Faktur setiap isi ulang ada di tab Tagihan perusahaan."
+      ]
+    },
+    "settings": {
+      "title": "Pengaturan",
+      "text": "Akunmu sendiri: bahasa yang dipakai prepza denganmu, email yang kamu terima, dan datamu.",
+      "actions": [
+        "Pilih bahasa untuk situs, chat bantuan, dan email yang kamu terima.",
+        "Pilih email opsional mana yang kamu terima; email layanan, seperti undangan, laporan, dan masalah pembayaran, selalu dikirim.",
+        "Unduh semua yang disimpan prepza tentangmu, atau hapus akunmu."
+      ],
+      "tips": [
+        "Menghapus akunmu juga menghapus perusahaan yang hanya berisi kamu. Perusahaan yang sudah diikuti orang lain perlu pemilik lain terlebih dahulu."
       ]
     }
   },

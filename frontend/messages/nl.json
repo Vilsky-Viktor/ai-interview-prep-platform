@@ -1842,6 +1842,7 @@
         "Download het rapport als PDF, of deel het per e-mail.",
         "Geef extra tijd voordat de kandidaat begint, bijvoorbeeld bij een beperking.",
         "Voeg de naam van de kandidaat toe of bewerk die.",
+        "Kopieer de uitnodigingslink om die zelf te sturen als de e-mail niet is aangekomen; hij blijft beschikbaar tot de kandidaat klaar is.",
         "Verstuur de uitnodiging opnieuw of trek die in, of verwijder de kandidaat met de resultaten."
       ],
       "tips": [
@@ -1877,7 +1878,7 @@
       "title": "Team",
       "text": "De mensen die aan de interviews van dit bedrijf werken, en hun rollen.",
       "actions": [
-        "Voeg een lid toe per e-mail, als beheerder of kijker.",
+        "Voeg een lid toe per e-mail, als beheerder of kijker: die krijgt per e-mail een link om lid te worden.",
         "Wijzig de rol van een lid tussen beheerder en kijker.",
         "Kopieer de link van een openstaande uitnodiging, of verwijder een lid of een uitnodiging."
       ],
@@ -1991,6 +1992,31 @@
       "tips": [
         "Een app handelt namens jou, in elk bedrijf waar je lid van bent. De meeste apps vragen het je voordat ze iets wijzigen.",
         "Hij kan je wachtwoord en API-sleutels niet zien, en kan je account of een bedrijf niet verwijderen."
+      ]
+    },
+    "topUp": {
+      "title": "Opwaarderen",
+      "text": "Koop credits voor elk bedrijf waarvan je eigenaar of beheerder bent.",
+      "actions": [
+        "Kies een bedrijf en een opwaardering: grotere kosten minder per kandidaat.",
+        "Betaal op de betaalpagina van Paddle; de credits staan er binnen enkele seconden.",
+        "Open de prijzen om de opwaarderingen te vergelijken."
+      ],
+      "tips": [
+        "Een kandidaat kost 500 credits: gereserveerd bij de uitnodiging, afgeschreven zodra die antwoordt en teruggegeven als dat niet gebeurt.",
+        "Credits verlopen nooit. De factuur van elke opwaardering staat op het tabblad Facturering van het bedrijf."
+      ]
+    },
+    "settings": {
+      "title": "Instellingen",
+      "text": "Je eigen account: de taal waarin prepza tegen je praat, de e-mails die je krijgt en je gegevens.",
+      "actions": [
+        "Kies de taal van de site, de hulpchat en je e-mails.",
+        "Kies welke optionele e-mails je krijgt; service-e-mails, zoals uitnodigingen, rapporten en betalingsproblemen, worden altijd verstuurd.",
+        "Download alles wat prepza over je bewaart, of verwijder je account."
+      ],
+      "tips": [
+        "Als je je account verwijdert, worden de bedrijven verwijderd waarin alleen jij zit. Een bedrijf waar anderen lid van zijn geworden, heeft eerst een andere eigenaar nodig."
       ]
     }
   },

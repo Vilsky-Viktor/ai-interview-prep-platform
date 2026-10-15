@@ -1842,6 +1842,7 @@
         "Baixe o relatório em PDF ou compartilhe-o por e-mail.",
         "Dê tempo extra antes de começar, por exemplo por uma deficiência.",
         "Adicione ou edite o nome do candidato.",
+        "Copie o link de convite para enviá-lo você mesmo, se o e-mail não chegou; ele fica disponível até o candidato terminar.",
         "Reenvie ou revogue o convite, ou exclua o candidato com seus resultados."
       ],
       "tips": [
@@ -1877,7 +1878,7 @@
       "title": "Equipe",
       "text": "As pessoas que trabalham nas entrevistas desta empresa e seus papéis.",
       "actions": [
-        "Adicione um membro por e-mail, como administrador ou visualizador.",
+        "Adicione um membro por e-mail, como administrador ou visualizador: ele recebe por e-mail um link para entrar.",
         "Altere o papel de um membro entre administrador e visualizador.",
         "Copie o link de um convite pendente ou remova um membro ou um convite."
       ],
@@ -1991,6 +1992,31 @@
       "tips": [
         "Um app age em seu nome, em todas as empresas de que você participa. A maioria dos apps pergunta antes de alterar qualquer coisa.",
         "Ele não pode ver sua senha nem suas chaves de API, nem excluir sua conta ou uma empresa."
+      ]
+    },
+    "topUp": {
+      "title": "Recarregar",
+      "text": "Compre créditos para qualquer empresa da qual você é proprietário ou administrador.",
+      "actions": [
+        "Escolha uma empresa e uma recarga: as maiores custam menos por candidato.",
+        "Pague na página de pagamento da Paddle; os créditos chegam em segundos.",
+        "Abra os preços para comparar as recargas."
+      ],
+      "tips": [
+        "Um candidato custa 500 créditos: reservados quando ele é convidado, cobrados quando ele responde e devolvidos se não responder.",
+        "Os créditos não expiram. A fatura de cada recarga fica na aba Faturamento da empresa."
+      ]
+    },
+    "settings": {
+      "title": "Configurações",
+      "text": "Sua própria conta: o idioma em que a prepza fala com você, os e-mails que você recebe e seus dados.",
+      "actions": [
+        "Escolha o idioma do site, do chat de ajuda e dos seus e-mails.",
+        "Escolha quais e-mails opcionais você recebe; e-mails de serviço, como convites, relatórios e problemas de pagamento, são sempre enviados.",
+        "Baixe tudo o que a prepza guarda sobre você ou exclua sua conta."
+      ],
+      "tips": [
+        "Excluir sua conta exclui as empresas em que só você está. Uma empresa em que outras pessoas entraram precisa antes de outro proprietário."
       ]
     }
   },
