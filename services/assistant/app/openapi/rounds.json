@@ -612,7 +612,7 @@
      "practice"
     ],
     "summary": "List Rounds",
-    "description": "The talent's rounds on the template, newest first, to see their progress.",
+    "description": "The talent's rounds on the template, newest first, a page at a time, to see their\nprogress.",
     "operationId": "list_rounds_practice__template_id__rounds_get",
     "security": [
      {
@@ -629,6 +629,33 @@
        "format": "uuid",
        "title": "Template Id"
       }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
      }
     ],
     "responses": {
