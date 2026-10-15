@@ -30,3 +30,6 @@ DEFAULT_TOPIC_QUESTIONS = 10
 # instance for the test's page: a count that changes (a question revealed in practice is no
 # longer served) shows within it. Candidates starting always read the questions afresh.
 SET_CACHE_SECONDS = 30
+# Previews one person starts in an hour, as many as practice rounds: each creates sessions in
+# rounds, though it charges nothing.
+PREVIEWS_PER_USER_HOUR = 20

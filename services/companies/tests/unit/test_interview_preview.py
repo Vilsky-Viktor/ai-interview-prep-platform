@@ -2,6 +2,7 @@ import uuid
 from datetime import UTC, datetime
 
 import pytest
+from fastapi import HTTPException
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
@@ -9,6 +10,7 @@ from app.integrations import library, rounds
 from app.main import app
 from app.models.companies import Company, Member
 from app.models.interviews import Interview
+from app.routers import interviews as interview_routes
 from app.storage import companies, interviews
 
 COMPANY_ID = uuid.uuid4()
@@ -18,7 +20,8 @@ SESSION_ID = uuid.uuid4()
 
 @pytest.fixture
 def started(monkeypatch):
-    """Bob, a viewer of the company, and one ready test; returns what rounds was asked for."""
+    """Bob, a viewer of the company, and one ready test; returns the previews counted (their
+    keys) and what rounds was asked for."""
     asked = []
     company = Company(id=COMPANY_ID, name="Acme", created_at=datetime.now(UTC))
     company.members = [
@@ -57,6 +60,10 @@ def started(monkeypatch):
 
         return [{"id": str(SESSION_ID), "topic_title": "SQL", "status": "in_progress"}]
 
+    async def counted(redis, key, limit, window):
+        asked.append(key)
+
+    monkeypatch.setattr(interview_routes, "hit", counted)
     monkeypatch.setattr(interviews, "get", get_interview)
     monkeypatch.setattr(companies, "get", get_company)
     monkeypatch.setattr(library, "get_content", content)
@@ -75,7 +82,8 @@ def test_any_member_previews_a_test_as_a_candidate_would_for_free(client, starte
 
     assert response.status_code == 201
     assert response.json() == {"session_id": str(SESSION_ID)}
-    [payload] = started
+    [counted, payload] = started
+    assert counted == "rate:previews:bob"
     # Marked as a preview, timed like the real test, and with no invite behind it to charge.
     assert payload["preview"] is True
     assert payload["question_seconds"] == 45
@@ -89,4 +97,14 @@ def test_someone_outside_the_company_cant(client, started):
     )
 
     assert client.post(f"/interviews/{uuid.uuid4()}/preview").status_code == 404
+    assert started == []
+
+
+def test_previews_over_the_hourly_limit_are_refused(client, started, monkeypatch):
+    async def over(redis, key, limit, window):
+        raise HTTPException(429, "Too many requests. Try again later.")
+
+    monkeypatch.setattr(interview_routes, "hit", over)
+
+    assert client.post(f"/interviews/{uuid.uuid4()}/preview").status_code == 429
     assert started == []

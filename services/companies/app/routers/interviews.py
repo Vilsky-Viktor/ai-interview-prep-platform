@@ -4,10 +4,13 @@ from uuid import UUID, uuid4
 from fastapi import APIRouter, HTTPException, Query, status
 from prepza_common.analytics import track
 from prepza_common.auth import CurrentUser
+from prepza_common.constants import HOUR_SECONDS
 from prepza_common.paging import PageParams
 from prepza_common.pause import refuse_if_paused
+from prepza_common.rate_limit import hit
 
 from app.constants.audit import AuditAction
+from app.constants.interviews import PREVIEWS_PER_USER_HOUR
 from app.constants.invites import INTERVIEW_NOT_READY, MAX_SEARCH_LENGTH
 from app.helpers.interviews import (
     attach_set,
@@ -149,6 +152,7 @@ async def preview_interview(interview_id: UUID, user: CurrentUser) -> PreviewOut
     candidate list, and its answers out of the questions' statistics. Each preview is new."""
     await refuse_if_paused(get_redis())
     interview, _, _ = await interview_for(user, interview_id)
+    await hit(get_redis(), f"rate:previews:{user.uid}", PREVIEWS_PER_USER_HOUR, HOUR_SECONDS)
     interview = await attach_set(interview)
     content = await library.get_content(interview.set_id) if interview.set_id else None
 

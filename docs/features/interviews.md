@@ -67,6 +67,7 @@ Any company member can preview an interview as a candidate, with the play button
 - It is free.
 - It is kept out of the candidate list.
 - Its answers are kept out of the questions' statistics.
+- A person starts at most 20 previews an hour, as many as practice rounds (`PREVIEWS_PER_USER_HOUR`).
 
 ## Lists and text fields
 
