@@ -214,6 +214,7 @@ MESSAGES = {
     "Use at least 2 characters.": "استخدم حرفين على الأقل.",
     "Invalid arguments": "وسائط غير صالحة",
     "Not found, or you don't have access to it.": "غير موجود، أو ليس لديك صلاحية الوصول إليه.",
+    "Nothing to change: those values are already set.": "لا يوجد ما يلزم تغييره: هذه القيم مضبوطة بالفعل.",
     "The service didn't answer. Try again later.": "لم تستجب الخدمة. حاول مرة أخرى لاحقًا.",
     "There is no such tool.": "لا توجد أداة بهذا الاسم.",
 }

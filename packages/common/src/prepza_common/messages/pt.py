@@ -214,6 +214,7 @@ MESSAGES = {
     "Use at least 2 characters.": "Use pelo menos 2 caracteres.",
     "Invalid arguments": "Argumentos inválidos",
     "Not found, or you don't have access to it.": "Não encontrado, ou você não tem acesso.",
+    "Nothing to change: those values are already set.": "Nada a alterar: esses valores já estão definidos.",
     "The service didn't answer. Try again later.": "O serviço não respondeu. Tente novamente mais tarde.",
     "There is no such tool.": "Essa ferramenta não existe.",
 }

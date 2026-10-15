@@ -214,6 +214,7 @@ MESSAGES = {
     "Use at least 2 characters.": "Gunakan minimal 2 karakter.",
     "Invalid arguments": "Argumen tidak valid",
     "Not found, or you don't have access to it.": "Tidak ditemukan, atau Anda tidak punya akses ke sana.",
+    "Nothing to change: those values are already set.": "Tidak ada yang perlu diubah: nilai-nilai tersebut sudah diatur.",
     "The service didn't answer. Try again later.": "Layanan tidak merespons. Coba lagi nanti.",
     "There is no such tool.": "Tidak ada alat seperti itu.",
 }

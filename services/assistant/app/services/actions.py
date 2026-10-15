@@ -118,6 +118,30 @@ async def credits_lost(tool: Tool, company_id: str | None, turn: Turn) -> dict |
     return {"available": found["available"], "candidates": found.get("candidates", 0)}
 
 
+async def checked_arguments(
+    tool: Tool, arguments: dict, token: str, language: str
+) -> tuple[dict, dict | None]:
+    """A write's arguments with only what changes, and what it's about as it is now, read with
+    the user's token: a 404 when it isn't theirs to see, a 422 when nothing would change. The
+    same checks for the panel's actions and AI apps' writes."""
+    try:
+        current = await subject_of(tool, arguments, token, language)
+    except LookupError:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, SUBJECT_NOT_FOUND)
+
+    arguments = unchanged(tool, arguments, current)
+
+    if tool.body_params and not any(name in arguments for name in tool.body_params):
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, NOTHING_TO_CHANGE)
+
+    return arguments, current
+
+
+async def count_action(redis, user_id: str) -> None:
+    """Counts one write of the user's, in the panel or an AI app; over the hourly limit, a 429."""
+    await hit(redis, f"rate:assistant:actions:{user_id}", ACTIONS_PER_USER_HOUR, HOUR_SECONDS)
+
+
 async def prepare(tool: Tool, arguments: dict, turn: Turn) -> ToolResult:
     """What the model asked for, kept (in Redis, for a short while) for the user to confirm: bound
     to them, the conversation and the company. Nothing runs yet; what it's about is read with
@@ -130,16 +154,9 @@ async def prepare(tool: Tool, arguments: dict, turn: Turn) -> ToolResult:
         return ToolResult(tool.name, arguments, None, content, None, 0)
 
     try:
-        current = await subject_of(tool, arguments, turn.token, turn.language)
-    except LookupError:
-        content = {"error": 404, "detail": translate(SUBJECT_NOT_FOUND, turn.language)}
-
-        return ToolResult(tool.name, arguments, None, content, None, 0)
-
-    arguments = unchanged(tool, arguments, current)
-
-    if tool.body_params and not any(name in arguments for name in tool.body_params):
-        content = {"error": 422, "detail": NOTHING_TO_CHANGE}
+        arguments, current = await checked_arguments(tool, arguments, turn.token, turn.language)
+    except HTTPException as error:
+        content = {"error": error.status_code, "detail": translate(error.detail, turn.language)}
 
         return ToolResult(tool.name, arguments, None, content, None, 0)
 
@@ -220,7 +237,7 @@ async def run(
     await refuse_if_paused(redis)
     pending = await owned_action(conversation_id, action_id, user, token, language)
     company_id = UUID(pending["company_id"]) if pending["company_id"] else None
-    await hit(redis, f"rate:assistant:actions:{user.uid}", ACTIONS_PER_USER_HOUR, HOUR_SECONDS)
+    await count_action(redis, user.uid)
     await limits.check(redis, user.uid, company_id)
     pending = await claim(action_id)
     tool = tools()[pending["tool"]]

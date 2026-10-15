@@ -214,6 +214,7 @@ MESSAGES = {
     "Use at least 2 characters.": "הזינו לפחות 2 תווים.",
     "Invalid arguments": "ארגומנטים לא תקינים",
     "Not found, or you don't have access to it.": "לא נמצא, או שאין לך גישה אליו.",
+    "Nothing to change: those values are already set.": "אין מה לשנות: הערכים האלה כבר מוגדרים.",
     "The service didn't answer. Try again later.": "השירות לא הגיב. נסו שוב מאוחר יותר.",
     "There is no such tool.": "אין כלי כזה.",
 }

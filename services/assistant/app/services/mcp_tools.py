@@ -6,18 +6,16 @@ from datetime import UTC, datetime
 import mcp_types as types
 from fastapi import HTTPException
 from prepza_common.analytics import track
-from prepza_common.constants import DAY_SECONDS, HOUR_SECONDS, MINUTE_SECONDS
+from prepza_common.constants import DAY_SECONDS, MINUTE_SECONDS
 from prepza_common.i18n import translate
 from prepza_common.pause import refuse_if_paused
-from prepza_common.rate_limit import hit, hit_or_skip
+from prepza_common.rate_limit import hit_or_skip
 from prepza_common.secrets_check import SECRET_REMOVED, secret_in
 from prepza_common.user import User
 
 from app.config.settings import settings
-from app.constants.actions_flow import NOTHING_TO_CHANGE, SUBJECT_NOT_FOUND
 from app.constants.chat import COMPANY_NOT_FOUND
 from app.constants.limits import (
-    ACTIONS_PER_USER_HOUR,
     MCP_CALLS_PER_USER_DAY,
     MCP_CALLS_PER_USER_MINUTE,
 )
@@ -36,7 +34,7 @@ from app.integrations import firebase_tokens
 from app.integrations.redis import get_redis
 from app.models.oauth_tokens import Access
 from app.models.tools import Tool
-from app.services.actions import subject_of, unchanged
+from app.services.actions import checked_arguments, count_action
 from app.services.registry import tools
 from app.services.tenancy import foreign_company, user_companies
 from app.services.tool_calls import call_tool
@@ -86,23 +84,14 @@ async def mark_active(access: Access) -> None:
         logger.warning("Couldn't record an AI app's use", exc_info=True)
 
 
-async def checked_write(tool: Tool, arguments: dict, user: User, token: str) -> dict | str:
+async def checked_write(tool: Tool, arguments: dict, user: User, token: str) -> dict:
     """A write's arguments once it may run, as in the app: nothing while paused, about something
-    the user may see, with only what changes, within their hourly actions. Otherwise why not."""
+    the user may see, with only what changes, within their hourly actions. Otherwise an
+    HTTPException saying why not."""
     redis = get_redis()
     await refuse_if_paused(redis)
-
-    try:
-        current = await subject_of(tool, arguments, token, user.language)
-    except LookupError:
-        return translate(SUBJECT_NOT_FOUND, user.language)
-
-    arguments = unchanged(tool, arguments, current)
-
-    if tool.body_params and not any(name in arguments for name in tool.body_params):
-        return NOTHING_TO_CHANGE
-
-    await hit(redis, f"rate:assistant:actions:{user.uid}", ACTIONS_PER_USER_HOUR, HOUR_SECONDS)
+    arguments, _ = await checked_arguments(tool, arguments, token, user.language)
+    await count_action(redis, user.uid)
 
     return arguments
 
@@ -140,12 +129,7 @@ async def call(name: str, arguments: dict, access: Access) -> types.CallToolResu
             return error_result(translate(COMPANY_NOT_FOUND, user.language))
 
         if tool.method != "GET":
-            checked = await checked_write(tool, arguments, user, token)
-
-            if isinstance(checked, str):
-                return error_result(checked)
-
-            arguments = checked
+            arguments = await checked_write(tool, arguments, user, token)
     except HTTPException as error:
         return error_result(translate(str(error.detail), user.language))
 

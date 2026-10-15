@@ -214,6 +214,7 @@ MESSAGES = {
     "Use at least 2 characters.": "请至少输入 2 个字符。",
     "Invalid arguments": "参数无效",
     "Not found, or you don't have access to it.": "未找到，或你没有访问权限。",
+    "Nothing to change: those values are already set.": "无需更改：这些值已经设置好了。",
     "The service didn't answer. Try again later.": "服务没有响应，请稍后再试。",
     "There is no such tool.": "没有这个工具。",
 }

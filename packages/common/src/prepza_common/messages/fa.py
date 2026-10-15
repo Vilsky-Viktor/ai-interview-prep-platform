@@ -214,6 +214,7 @@ MESSAGES = {
     "Use at least 2 characters.": "حداقل ۲ نویسه وارد کنید.",
     "Invalid arguments": "آرگومان‌ها نامعتبر است",
     "Not found, or you don't have access to it.": "پیدا نشد یا به آن دسترسی ندارید.",
+    "Nothing to change: those values are already set.": "تغییری لازم نیست: این مقادیر از قبل تنظیم شده‌اند.",
     "The service didn't answer. Try again later.": "سرویس پاسخ نداد. بعداً دوباره امتحان کنید.",
     "There is no such tool.": "چنین ابزاری وجود ندارد.",
 }

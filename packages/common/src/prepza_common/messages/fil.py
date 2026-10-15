@@ -214,6 +214,7 @@ MESSAGES = {
     "Use at least 2 characters.": "Gumamit ng hindi bababa sa 2 character.",
     "Invalid arguments": "Hindi valid ang mga argument",
     "Not found, or you don't have access to it.": "Hindi nakita, o wala kang access dito.",
+    "Nothing to change: those values are already set.": "Walang babaguhin: nakatakda na ang mga value na iyon.",
     "The service didn't answer. Try again later.": "Hindi sumagot ang serbisyo. Subukang muli mamaya.",
     "There is no such tool.": "Walang ganoong tool.",
 }

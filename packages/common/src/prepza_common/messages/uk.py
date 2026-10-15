@@ -214,6 +214,7 @@ MESSAGES = {
     "Use at least 2 characters.": "Використайте щонайменше 2 символи.",
     "Invalid arguments": "Недійсні аргументи",
     "Not found, or you don't have access to it.": "Не знайдено або у вас немає до цього доступу.",
+    "Nothing to change: those values are already set.": "Нічого змінювати: ці значення вже встановлено.",
     "The service didn't answer. Try again later.": "Сервіс не відповів. Спробуйте пізніше.",
     "There is no such tool.": "Такого інструмента немає.",
 }

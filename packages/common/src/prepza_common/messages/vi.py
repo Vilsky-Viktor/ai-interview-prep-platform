@@ -214,6 +214,7 @@ MESSAGES = {
     "Use at least 2 characters.": "Hãy dùng ít nhất 2 ký tự.",
     "Invalid arguments": "Đối số không hợp lệ",
     "Not found, or you don't have access to it.": "Không tìm thấy, hoặc bạn không có quyền truy cập.",
+    "Nothing to change: those values are already set.": "Không có gì để thay đổi: các giá trị này đã được đặt sẵn.",
     "The service didn't answer. Try again later.": "Dịch vụ không phản hồi. Vui lòng thử lại sau.",
     "There is no such tool.": "Không có công cụ này.",
 }

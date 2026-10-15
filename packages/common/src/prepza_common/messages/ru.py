@@ -214,6 +214,7 @@ MESSAGES = {
     "Use at least 2 characters.": "Используйте не меньше 2 символов.",
     "Invalid arguments": "Неверные аргументы",
     "Not found, or you don't have access to it.": "Не найдено или у вас нет к этому доступа.",
+    "Nothing to change: those values are already set.": "Нечего менять: эти значения уже установлены.",
     "The service didn't answer. Try again later.": "Сервис не ответил. Попробуйте позже.",
     "There is no such tool.": "Такого инструмента нет.",
 }

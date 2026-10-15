@@ -214,6 +214,7 @@ MESSAGES = {
     "Use at least 2 characters.": "2 文字以上で入力してください。",
     "Invalid arguments": "引数が無効です",
     "Not found, or you don't have access to it.": "見つからないか、アクセス権がありません。",
+    "Nothing to change: those values are already set.": "変更する項目はありません。これらの値はすでに設定されています。",
     "The service didn't answer. Try again later.": "サービスから応答がありませんでした。しばらくしてからもう一度お試しください。",
     "There is no such tool.": "そのようなツールはありません。",
 }

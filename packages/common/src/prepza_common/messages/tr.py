@@ -214,6 +214,7 @@ MESSAGES = {
     "Use at least 2 characters.": "En az 2 karakter kullanın.",
     "Invalid arguments": "Geçersiz argümanlar",
     "Not found, or you don't have access to it.": "Bulunamadı veya buna erişiminiz yok.",
+    "Nothing to change: those values are already set.": "Değiştirilecek bir şey yok: bu değerler zaten ayarlı.",
     "The service didn't answer. Try again later.": "Hizmet yanıt vermedi. Daha sonra tekrar deneyin.",
     "There is no such tool.": "Böyle bir araç yok.",
 }

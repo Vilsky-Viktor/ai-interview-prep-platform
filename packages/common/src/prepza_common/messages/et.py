@@ -226,6 +226,7 @@ MESSAGES = {
     "Use at least 2 characters.": "Kasuta vähemalt 2 tähemärki.",
     "Invalid arguments": "Vigased argumendid",
     "Not found, or you don't have access to it.": "Ei leitud või sul pole sellele ligipääsu.",
+    "Nothing to change: those values are already set.": "Pole midagi muuta: need väärtused on juba määratud.",
     "The service didn't answer. Try again later.": "Teenus ei vastanud. Proovi hiljem uuesti.",
     "There is no such tool.": "Sellist tööriista pole.",
 }

@@ -214,6 +214,7 @@ MESSAGES = {
     "Use at least 2 characters.": "2자 이상 입력하세요.",
     "Invalid arguments": "잘못된 인수입니다",
     "Not found, or you don't have access to it.": "찾을 수 없거나 접근 권한이 없습니다.",
+    "Nothing to change: those values are already set.": "변경할 항목이 없습니다. 해당 값이 이미 설정되어 있습니다.",
     "The service didn't answer. Try again later.": "서비스가 응답하지 않았습니다. 잠시 후 다시 시도해 주세요.",
     "There is no such tool.": "그런 도구는 없습니다.",
 }

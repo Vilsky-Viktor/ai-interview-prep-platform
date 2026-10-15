@@ -214,6 +214,7 @@ MESSAGES = {
     "Use at least 2 characters.": "कम से कम 2 अक्षर इस्तेमाल करें।",
     "Invalid arguments": "आर्ग्युमेंट अमान्य हैं",
     "Not found, or you don't have access to it.": "नहीं मिला, या आपके पास इसकी एक्सेस नहीं है।",
+    "Nothing to change: those values are already set.": "बदलने के लिए कुछ नहीं है: ये मान पहले से सेट हैं।",
     "The service didn't answer. Try again later.": "सेवा ने जवाब नहीं दिया। कृपया बाद में फिर से कोशिश करें।",
     "There is no such tool.": "ऐसा कोई टूल नहीं है।",
 }

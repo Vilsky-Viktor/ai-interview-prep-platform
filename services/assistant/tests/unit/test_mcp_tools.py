@@ -70,7 +70,7 @@ def calls(monkeypatch):
     monkeypatch.setattr(services, "get", get)
     monkeypatch.setattr(firebase_tokens, "sign_in", signed_in)
 
-    for name in ("hit", "refuse_if_paused", "track", "mark_active"):
+    for name in ("count_action", "hit_or_skip", "refuse_if_paused", "track", "mark_active"):
         monkeypatch.setattr(mcp_tools, name, nothing)
 
     return made
@@ -153,7 +153,7 @@ def test_a_partial_update_that_changes_nothing_isnt_sent(calls):
 
     error, content = called("rename_company", {"company_id": COMPANY, "title": "Acme"})
 
-    assert error and content == {"error": NOTHING_TO_CHANGE}
+    assert error and content == {"error": translate(NOTHING_TO_CHANGE, "de")}
     assert [call[0] for call in calls] == ["GET"]
 
 
