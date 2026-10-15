@@ -7,6 +7,7 @@ from prepza_common.constants import (
     EMAIL_PATTERN,
     QUERY_FIELDS,
     REDACTED_EMAIL,
+    UNTRACED_PATHS,
     URL_PATTERN,
     URL_SCRUBBED,
 )
@@ -31,6 +32,20 @@ def before_send(event, hint):
     return scrub(event)
 
 
+def traces_sampler(context: dict) -> float:
+    """A call inside a traced request follows it; uptime checks, scheduled jobs and events
+    aren't traced on their own; other requests at the set rate."""
+    if context.get("parent_sampled") is not None:
+        return float(context["parent_sampled"])
+
+    path = context.get("asgi_scope", {}).get("path", "")
+
+    if path.startswith(UNTRACED_PATHS):
+        return 0.0
+
+    return float(os.getenv("SENTRY_TRACES_SAMPLE_RATE", DEFAULT_TRACES_SAMPLE_RATE))
+
+
 def init_sentry(service: str, integrations: list | None = None) -> None:
     """Reports errors to Sentry when BACKEND_SENTRY_DSN is set; local development and tests send nothing.
 
@@ -50,9 +65,7 @@ def init_sentry(service: str, integrations: list | None = None) -> None:
         environment=os.getenv("SENTRY_ENVIRONMENT", "production"),
         release=os.getenv("SENTRY_RELEASE") or None,
         server_name=service,
-        traces_sample_rate=float(
-            os.getenv("SENTRY_TRACES_SAMPLE_RATE", DEFAULT_TRACES_SAMPLE_RATE)
-        ),
+        traces_sampler=traces_sampler,
         send_default_pii=False,
         max_request_body_size="never",
         include_local_variables=False,

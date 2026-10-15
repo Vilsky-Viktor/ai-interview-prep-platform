@@ -52,6 +52,10 @@ DELETED_USER = "deleted-user"
 
 # Sentry: share of requests traced for performance, and emails scrubbed from every event.
 DEFAULT_TRACES_SAMPLE_RATE = "0.1"
+# Requests never traced unless part of a traced one: uptime checks (/ready every minute per
+# service), and scheduled jobs and Pub/Sub pushes (/internal/), thousands a day with no user
+# waiting. Their errors are still reported.
+UNTRACED_PATHS = ("/ready", "/health", "/internal/")
 EMAIL_PATTERN = r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"
 REDACTED_EMAIL = "[email]"
 # A URL's path, query and user info can carry credentials (a Slack web hook's path, a customer's
