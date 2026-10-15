@@ -93,6 +93,7 @@
     "keep": "Giữ lại",
     "edit": "Sửa",
     "retry": "Thử lại",
+    "skipToContent": "Chuyển đến nội dung",
     "loadMoreFailed": "Không thể tải thêm. Vui lòng thử lại.",
     "submitHint": "⌘/Ctrl + Enter để gửi",
     "failed": "Đã xảy ra lỗi. Vui lòng thử lại.",
@@ -2095,7 +2096,8 @@
       "languages": "Trang web có 23 ngôn ngữ, hiển thị từ phải sang trái với các ngôn ngữ viết theo cách đó.",
       "phones": "Các trang vừa với màn hình điện thoại và vẫn dùng được khi phóng to.",
       "text": "Câu hỏi phỏng vấn là văn bản kèm các lựa chọn trả lời: không cần âm thanh hay video.",
-      "extraTime": "Công ty có thể cho bạn thêm thời gian ở mỗi câu hỏi. Hãy đề nghị công ty điều này, hoặc một sự điều chỉnh hỗ trợ khác, trước khi bắt đầu; bạn không cần nói lý do."
+      "extraTime": "Công ty có thể cho bạn thêm thời gian ở mỗi câu hỏi. Hãy đề nghị công ty điều này, hoặc một sự điều chỉnh hỗ trợ khác, trước khi bắt đầu; bạn không cần nói lý do.",
+      "keyboard": "Bằng bàn phím: liên kết “Chuyển đến nội dung” luôn đứng đầu mỗi trang, bạn chuyển giữa các thẻ bằng phím mũi tên, và trình đọc màn hình thông báo các lỗi của biểu mẫu."
     },
     "limits": {
       "title": "Những điểm còn thiếu sót",

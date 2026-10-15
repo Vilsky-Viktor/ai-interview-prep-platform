@@ -93,6 +93,7 @@
     "keep": "Conserver",
     "edit": "Modifier",
     "retry": "Réessayer",
+    "skipToContent": "Aller au contenu",
     "loadMoreFailed": "Impossible de charger la suite. Veuillez réessayer.",
     "submitHint": "⌘/Ctrl + Entrée pour envoyer",
     "failed": "Une erreur s'est produite. Veuillez réessayer.",
@@ -2099,7 +2100,8 @@
       "languages": "Le site en 23 langues, de droite à gauche pour les langues qui s'écrivent ainsi.",
       "phones": "Les pages s'adaptent aux écrans de téléphone et fonctionnent quand vous zoomez.",
       "text": "Les questions d'entretien sont du texte avec des options de réponse : aucun audio ni vidéo n'est nécessaire.",
-      "extraTime": "Une entreprise peut vous accorder du temps supplémentaire pour chaque question. Demandez-le à l'entreprise, ou demandez un autre aménagement, avant de commencer ; vous n'avez pas à dire pourquoi."
+      "extraTime": "Une entreprise peut vous accorder du temps supplémentaire pour chaque question. Demandez-le à l'entreprise, ou demandez un autre aménagement, avant de commencer ; vous n'avez pas à dire pourquoi.",
+      "keyboard": "Au clavier : un lien « Aller au contenu » vient en premier sur chaque page, vous passez d'un onglet à l'autre avec les touches fléchées, et les lecteurs d'écran annoncent les erreurs d'un formulaire."
     },
     "limits": {
       "title": "Ce qui n'est pas encore au point",

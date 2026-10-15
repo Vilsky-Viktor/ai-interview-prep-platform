@@ -93,6 +93,7 @@
     "keep": "Keep",
     "edit": "Edit",
     "retry": "Try again",
+    "skipToContent": "Skip to content",
     "loadMoreFailed": "Couldn't load more. Please try again.",
     "submitHint": "⌘/Ctrl + Enter to send",
     "failed": "Something went wrong. Please try again.",
@@ -2099,7 +2100,8 @@
       "languages": "The site in 23 languages, right to left where the language is written that way.",
       "phones": "Pages fit phone screens and work when you zoom in.",
       "text": "Interview questions are text with answer options: no audio or video is needed.",
-      "extraTime": "A company can give you extra time on each question. Ask the company for it, or for another accommodation, before you start; you don't have to say why."
+      "extraTime": "A company can give you extra time on each question. Ask the company for it, or for another accommodation, before you start; you don't have to say why.",
+      "keyboard": "From the keyboard: a \"Skip to content\" link comes first on every page, tabs move with the arrow keys, and screen readers announce a form's errors."
     },
     "limits": {
       "title": "What falls short",

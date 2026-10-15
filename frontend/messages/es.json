@@ -93,6 +93,7 @@
     "keep": "Conservar",
     "edit": "Editar",
     "retry": "Reintentar",
+    "skipToContent": "Saltar al contenido",
     "loadMoreFailed": "No se pudo cargar más. Inténtalo de nuevo.",
     "submitHint": "⌘/Ctrl + Enter para enviar",
     "failed": "Algo salió mal. Inténtalo de nuevo.",
@@ -2099,7 +2100,8 @@
       "languages": "El sitio en 23 idiomas, de derecha a izquierda en los idiomas que se escriben así.",
       "phones": "Las páginas se adaptan a pantallas de móvil y funcionan al ampliar.",
       "text": "Las preguntas de la entrevista son texto con opciones de respuesta: no hace falta audio ni vídeo.",
-      "extraTime": "Una empresa puede darte tiempo adicional en cada pregunta. Pídeselo a la empresa, o pide otro ajuste, antes de empezar; no tienes que decir por qué."
+      "extraTime": "Una empresa puede darte tiempo adicional en cada pregunta. Pídeselo a la empresa, o pide otro ajuste, antes de empezar; no tienes que decir por qué.",
+      "keyboard": "Con el teclado: un enlace «Saltar al contenido» aparece primero en cada página, las pestañas se recorren con las teclas de flecha y los lectores de pantalla anuncian los errores de un formulario."
     },
     "limits": {
       "title": "Lo que aún no está a la altura",

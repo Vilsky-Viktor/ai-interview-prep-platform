@@ -93,6 +93,7 @@
     "keep": "Jäta alles",
     "edit": "Muuda",
     "retry": "Proovi uuesti",
+    "skipToContent": "Liigu sisu juurde",
     "loadMoreFailed": "Rohkem ei õnnestunud laadida. Proovi uuesti.",
     "submitHint": "Saatmiseks ⌘/Ctrl + Enter",
     "failed": "Midagi läks valesti. Proovi uuesti.",
@@ -2103,7 +2104,8 @@
       "languages": "Sait 23 keeles, paremalt vasakule neis keeltes, mida nii kirjutatakse.",
       "phones": "Lehed mahuvad telefoniekraanile ja toimivad ka suurendatult.",
       "text": "Intervjuu küsimused on tekst koos vastusevariantidega: heli ega videot pole vaja.",
-      "extraTime": "Ettevõte võib anda sulle igale küsimusele lisaaega. Küsi ettevõttelt seda või mõnda muud kohandust enne alustamist; põhjust ei pea ütlema."
+      "extraTime": "Ettevõte võib anda sulle igale küsimusele lisaaega. Küsi ettevõttelt seda või mõnda muud kohandust enne alustamist; põhjust ei pea ütlema.",
+      "keyboard": "Klaviatuuriga: igal lehel on esimesena link „Liigu sisu juurde“, vahekaartide vahel liigud nooleklahvidega ja ekraanilugejad loevad ette vormi vead."
     },
     "limits": {
       "title": "Mis veel ei vasta ootustele",

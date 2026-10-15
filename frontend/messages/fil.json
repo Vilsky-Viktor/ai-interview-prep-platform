@@ -93,6 +93,7 @@
     "keep": "Panatilihin",
     "edit": "I-edit",
     "retry": "Subukang muli",
+    "skipToContent": "Lumaktaw sa nilalaman",
     "loadMoreFailed": "Hindi makapag-load ng higit pa. Pakisubukang muli.",
     "submitHint": "⌘/Ctrl + Enter para ipadala",
     "failed": "Nagkaproblema. Pakisubukang muli.",
@@ -2103,7 +2104,8 @@
       "languages": "Ang site sa 23 wika, mula kanan pakaliwa sa mga wikang ganoon isinusulat.",
       "phones": "Kasya ang mga page sa screen ng phone at gumagana kahit naka-zoom in.",
       "text": "Ang mga tanong sa interview ay text na may mga pagpipiliang sagot: hindi kailangan ng audio o video.",
-      "extraTime": "Puwedeng bigyan ka ng kumpanya ng dagdag na oras sa bawat tanong. Hingin ito sa kumpanya, o ibang accommodation, bago ka magsimula; hindi mo kailangang sabihin kung bakit."
+      "extraTime": "Puwedeng bigyan ka ng kumpanya ng dagdag na oras sa bawat tanong. Hingin ito sa kumpanya, o ibang accommodation, bago ka magsimula; hindi mo kailangang sabihin kung bakit.",
+      "keyboard": "Mula sa keyboard: nauuna sa bawat page ang link na “Lumaktaw sa nilalaman”, lumilipat ang mga tab gamit ang mga arrow key, at binabasa nang malakas ng mga screen reader ang mga error ng form."
     },
     "limits": {
       "title": "Ang kulang pa",

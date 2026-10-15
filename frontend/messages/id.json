@@ -93,6 +93,7 @@
     "keep": "Biarkan",
     "edit": "Ubah",
     "retry": "Coba lagi",
+    "skipToContent": "Langsung ke konten",
     "loadMoreFailed": "Tidak bisa memuat lagi. Coba lagi.",
     "submitHint": "⌘/Ctrl + Enter untuk mengirim",
     "failed": "Terjadi kesalahan. Coba lagi.",
@@ -2099,7 +2100,8 @@
       "languages": "Situs dalam 23 bahasa, dari kanan ke kiri untuk bahasa yang ditulis seperti itu.",
       "phones": "Halaman pas di layar ponsel dan tetap berfungsi saat diperbesar.",
       "text": "Pertanyaan wawancara berupa teks dengan pilihan jawaban: tidak perlu audio atau video.",
-      "extraTime": "Perusahaan bisa memberimu waktu tambahan di setiap pertanyaan. Mintalah kepada perusahaan, atau minta akomodasi lain, sebelum kamu mulai; kamu tidak perlu menyebutkan alasannya."
+      "extraTime": "Perusahaan bisa memberimu waktu tambahan di setiap pertanyaan. Mintalah kepada perusahaan, atau minta akomodasi lain, sebelum kamu mulai; kamu tidak perlu menyebutkan alasannya.",
+      "keyboard": "Dengan keyboard: tautan “Langsung ke konten” muncul pertama di setiap halaman, tab berpindah dengan tombol panah, dan pembaca layar membacakan kesalahan pada formulir."
     },
     "limits": {
       "title": "Yang masih kurang",

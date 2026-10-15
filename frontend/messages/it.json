@@ -93,6 +93,7 @@
     "keep": "Mantieni",
     "edit": "Modifica",
     "retry": "Riprova",
+    "skipToContent": "Vai al contenuto",
     "loadMoreFailed": "Impossibile caricare altro. Riprova.",
     "submitHint": "⌘/Ctrl + Invio per inviare",
     "failed": "Qualcosa è andato storto. Riprova.",
@@ -2099,7 +2100,8 @@
       "languages": "Il sito in 23 lingue, da destra a sinistra per le lingue che si scrivono così.",
       "phones": "Le pagine si adattano agli schermi dei telefoni e funzionano anche con lo zoom.",
       "text": "Le domande del colloquio sono testo con opzioni di risposta: non servono audio né video.",
-      "extraTime": "Un'azienda può darti tempo aggiuntivo per ogni domanda. Chiedilo all'azienda, oppure chiedi un altro accomodamento, prima di iniziare; non devi spiegare perché."
+      "extraTime": "Un'azienda può darti tempo aggiuntivo per ogni domanda. Chiedilo all'azienda, oppure chiedi un altro accomodamento, prima di iniziare; non devi spiegare perché.",
+      "keyboard": "Da tastiera: in ogni pagina viene per primo il link «Vai al contenuto», ti sposti tra le schede con i tasti freccia e gli screen reader annunciano gli errori di un modulo."
     },
     "limits": {
       "title": "Cosa non è ancora all'altezza",

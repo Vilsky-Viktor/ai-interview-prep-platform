@@ -93,6 +93,7 @@
     "keep": "Manter",
     "edit": "Editar",
     "retry": "Tentar novamente",
+    "skipToContent": "Pular para o conteúdo",
     "loadMoreFailed": "Não foi possível carregar mais. Tente novamente.",
     "submitHint": "⌘/Ctrl + Enter para enviar",
     "failed": "Algo deu errado. Tente novamente.",
@@ -2095,7 +2096,8 @@
       "languages": "O site em 23 idiomas, da direita para a esquerda nos idiomas escritos assim.",
       "phones": "As páginas cabem em telas de celular e funcionam com zoom.",
       "text": "As perguntas da entrevista são texto com opções de resposta: não é preciso áudio nem vídeo.",
-      "extraTime": "Uma empresa pode dar a você tempo extra em cada pergunta. Peça isso à empresa, ou outra adaptação, antes de começar; você não precisa dizer o motivo."
+      "extraTime": "Uma empresa pode dar a você tempo extra em cada pergunta. Peça isso à empresa, ou outra adaptação, antes de começar; você não precisa dizer o motivo.",
+      "keyboard": "Pelo teclado: um link “Pular para o conteúdo” vem primeiro em cada página, você troca de aba com as teclas de seta e os leitores de tela anunciam os erros de um formulário."
     },
     "limits": {
       "title": "O que ainda deixa a desejar",

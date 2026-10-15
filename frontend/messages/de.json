@@ -93,6 +93,7 @@
     "keep": "Behalten",
     "edit": "Bearbeiten",
     "retry": "Erneut versuchen",
+    "skipToContent": "Zum Inhalt springen",
     "loadMoreFailed": "Es konnte nicht mehr geladen werden. Bitte versuche es erneut.",
     "submitHint": "⌘/Strg + Enter zum Senden",
     "failed": "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
@@ -2099,7 +2100,8 @@
       "languages": "Die Website in 23 Sprachen, von rechts nach links, wo die Sprache so geschrieben wird.",
       "phones": "Die Seiten passen auf Smartphone-Bildschirme und funktionieren auch, wenn du hineinzoomst.",
       "text": "Interviewfragen sind Text mit Antwortoptionen: Audio oder Video ist nicht nötig.",
-      "extraTime": "Ein Unternehmen kann dir bei jeder Frage mehr Zeit geben. Bitte das Unternehmen darum oder um eine andere Anpassung, bevor du beginnst; du musst nicht sagen, warum."
+      "extraTime": "Ein Unternehmen kann dir bei jeder Frage mehr Zeit geben. Bitte das Unternehmen darum oder um eine andere Anpassung, bevor du beginnst; du musst nicht sagen, warum.",
+      "keyboard": "Per Tastatur: Auf jeder Seite kommt zuerst ein Link „Zum Inhalt springen“, zwischen Tabs wechselst du mit den Pfeiltasten, und Screenreader lesen die Fehler eines Formulars vor."
     },
     "limits": {
       "title": "Was noch nicht reicht",

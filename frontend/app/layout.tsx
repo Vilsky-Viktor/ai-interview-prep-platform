@@ -54,6 +54,7 @@ export default async function RootLayout({
   // The Content-Security-Policy's nonce from proxy.ts, for the theme's inline script.
   const nonce = (await headers()).get("x-nonce") ?? undefined
   const locale = await getLocale()
+  const common = await getTranslations("common")
 
   return (
     // In-page links ("how it works" on the home page) scroll smoothly; Next.js turns it off for
@@ -83,9 +84,21 @@ export default async function RootLayout({
                   <SignInProvider>
                     <AssistantProvider>
                       <NotOnTimedPage>
+                        {/* For keyboards and screen readers: past the header to the page,
+                            shown only when tabbed to. */}
+                        <a
+                          href="#content"
+                          className="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-50 focus:rounded-full focus:border focus:bg-background focus:px-5 focus:py-3 focus:text-base"
+                        >
+                          {common("skipToContent")}
+                        </a>
                         <SiteHeader />
                       </NotOnTimedPage>
-                      <div className="flex flex-1 flex-col [&>*]:w-full">
+                      <div
+                        id="content"
+                        tabIndex={-1}
+                        className="flex flex-1 flex-col outline-none [&>*]:w-full"
+                      >
                         <MaintenanceNotice />
                         {children}
                       </div>

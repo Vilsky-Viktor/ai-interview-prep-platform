@@ -100,6 +100,17 @@ test("a company's pages on a phone", async ({ signInAs }) => {
     const role = await box(member.getByText("owner", { exact: true }));
     expect(role.top).toBeGreaterThanOrEqual(email.bottom);
 
+    // The last tab, past the screen's edge, is scrolled into view in its row when it's open.
+    await visit(user, `/companies/${company.id}/referrals`);
+    const shown = await user.evaluate((id) => {
+      const tab = document.querySelector(`main nav a[href="/companies/${id}/referrals"]`);
+      const row = tab?.closest("nav")?.parentElement;
+      const [inner, outer] = [tab, row].map((element) => element!.getBoundingClientRect());
+
+      return inner.left >= outer.left - 1 && inner.right <= outer.right + 1;
+    }, company.id);
+    expect(shown).toBe(true);
+
     // Integrations: a small logo beside the name, the buttons on the line under both.
     await visit(user, `/companies/${company.id}/integrations`);
     const slack = user.getByRole("listitem").filter({ hasText: "Slack" });

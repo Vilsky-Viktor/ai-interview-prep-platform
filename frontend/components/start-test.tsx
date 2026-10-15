@@ -227,10 +227,21 @@ export function StartTest({
             placeholder={t("companyName")}
             aria-label={t("companyName")}
             aria-invalid={nameError !== null}
+            aria-describedby={
+              nameError ? "start-company-name-error" : undefined
+            }
             className="h-12 bg-background text-base"
             autoFocus
           />
-          {nameError && <p className="text-sm text-destructive">{nameError}</p>}
+          {nameError && (
+            <p
+              id="start-company-name-error"
+              role="alert"
+              className="text-sm text-destructive"
+            >
+              {nameError}
+            </p>
+          )}
           {companies.length === 0 && freeCandidates !== null && (
             <p className="text-sm text-muted-foreground">
               {t("freeCandidates", { count: freeCandidates })}

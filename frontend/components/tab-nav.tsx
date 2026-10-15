@@ -27,16 +27,58 @@ export function TabNav({
 }) {
   const active = useRef<HTMLAnchorElement & HTMLButtonElement>(null)
 
+  const row = useRef<HTMLDivElement>(null)
+
+  // The current tab brought into view by scrolling the row alone: scrollIntoView would also
+  // move where the keyboard's Tab starts, past the skip link and the header.
   useEffect(() => {
-    active.current?.scrollIntoView({ block: "nearest", inline: "nearest" })
+    const tab = active.current?.getBoundingClientRect()
+    const box = row.current?.getBoundingClientRect()
+
+    if (!tab || !box) {
+      return
+    }
+
+    const before = tab.left - box.left
+    const after = tab.right - box.right
+    row.current?.scrollBy({ left: before < 0 ? before : Math.max(after, 0) })
   }, [current])
+
+  // As a tablist: the arrow keys move to the next or previous tab (mirrored right to left),
+  // Home and End to the first and last, and the tab it lands on is selected and focused.
+  function onKeyDown(event: React.KeyboardEvent<HTMLElement>) {
+    const rtl = getComputedStyle(event.currentTarget).direction === "rtl"
+    const step = { ArrowRight: rtl ? -1 : 1, ArrowLeft: rtl ? 1 : -1 }[
+      event.key
+    ]
+    const index = items.findIndex((item) => item.id === current)
+    const next =
+      event.key === "Home"
+        ? 0
+        : event.key === "End"
+          ? items.length - 1
+          : step === undefined
+            ? null
+            : (index + step + items.length) % items.length
+
+    if (next === null || !onSelect) {
+      return
+    }
+
+    event.preventDefault()
+    onSelect(items[next].id)
+    const tabs =
+      event.currentTarget.querySelectorAll<HTMLElement>('[role="tab"]')
+    tabs[next]?.focus()
+  }
 
   return (
     // The row scrolls; the line under the tabs is the inner row's, so the current tab's blue
     // line isn't clipped.
-    <div className="[scrollbar-width:none] overflow-x-auto">
+    <div ref={row} className="[scrollbar-width:none] overflow-x-auto">
       <nav
         role={onSelect ? "tablist" : undefined}
+        onKeyDown={onSelect ? onKeyDown : undefined}
         // Tabs inside a dialog fit its width: closer together on a phone, a long label wraps.
         className={cn(
           "flex border-b",
@@ -65,6 +107,8 @@ export function TabNav({
               type="button"
               role="tab"
               aria-selected={item.id === current}
+              // Only the current tab is in the Tab order; the arrow keys reach the others.
+              tabIndex={item.id === current ? 0 : -1}
               className={className}
               onClick={() => onSelect(item.id)}
             >

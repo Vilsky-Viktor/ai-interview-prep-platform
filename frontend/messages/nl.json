@@ -93,6 +93,7 @@
     "keep": "Behouden",
     "edit": "Bewerken",
     "retry": "Opnieuw proberen",
+    "skipToContent": "Naar de inhoud springen",
     "loadMoreFailed": "Er kon niet meer worden geladen. Probeer het opnieuw.",
     "submitHint": "⌘/Ctrl + Enter om te verzenden",
     "failed": "Er ging iets mis. Probeer het opnieuw.",
@@ -2095,7 +2096,8 @@
       "languages": "De site in 23 talen, van rechts naar links waar de taal zo wordt geschreven.",
       "phones": "Pagina's passen op telefoonschermen en werken als je inzoomt.",
       "text": "Interviewvragen zijn tekst met antwoordopties: audio of video is niet nodig.",
-      "extraTime": "Een bedrijf kan je per vraag extra tijd geven. Vraag het bedrijf daarom, of om een andere aanpassing, voordat je begint; je hoeft niet te zeggen waarom."
+      "extraTime": "Een bedrijf kan je per vraag extra tijd geven. Vraag het bedrijf daarom, of om een andere aanpassing, voordat je begint; je hoeft niet te zeggen waarom.",
+      "keyboard": "Met het toetsenbord: op elke pagina komt eerst een link “Naar de inhoud springen”, tussen tabbladen ga je met de pijltjestoetsen, en schermlezers lezen de fouten in een formulier voor."
     },
     "limits": {
       "title": "Wat nog tekortschiet",

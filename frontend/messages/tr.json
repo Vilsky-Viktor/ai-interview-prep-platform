@@ -93,6 +93,7 @@
     "keep": "Sakla",
     "edit": "Düzenle",
     "retry": "Tekrar dene",
+    "skipToContent": "İçeriğe geç",
     "loadMoreFailed": "Daha fazlası yüklenemedi. Lütfen tekrar deneyin.",
     "submitHint": "Göndermek için ⌘/Ctrl + Enter",
     "failed": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
@@ -2098,7 +2099,8 @@
       "languages": "Site 23 dilde; sağdan sola yazılan dillerde sağdan sola.",
       "phones": "Sayfalar telefon ekranlarına sığar ve yakınlaştırdığınızda da çalışır.",
       "text": "Mülakat soruları cevap seçenekleri olan metinlerdir: ses veya video gerekmez.",
-      "extraTime": "Bir şirket size her soru için ek süre verebilir. Başlamadan önce bunu ya da başka bir düzenlemeyi şirketten isteyin; nedenini söylemek zorunda değilsiniz."
+      "extraTime": "Bir şirket size her soru için ek süre verebilir. Başlamadan önce bunu ya da başka bir düzenlemeyi şirketten isteyin; nedenini söylemek zorunda değilsiniz.",
+      "keyboard": "Klavyeyle: her sayfada ilk olarak “İçeriğe geç” bağlantısı gelir, sekmeler arasında ok tuşlarıyla geçilir ve ekran okuyucular formdaki hataları seslendirir."
     },
     "limits": {
       "title": "Eksik kalanlar",
