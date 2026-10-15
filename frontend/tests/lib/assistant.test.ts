@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 
 import { ApiError } from "@/lib/api"
 import {
+  answerHref,
   answerParts,
   helpConversation,
   withCard,
@@ -245,5 +246,22 @@ describe("helpConversation", () => {
       { role: "user", content: "How do I start?" },
       { role: "assistant", content: "Paste it.", signature: "abc" },
     ])
+  })
+})
+
+describe("answerHref", () => {
+  it("keeps a link to a page the panel knows, by its path alone", () => {
+    expect(answerHref("/companies/c1/interviews/i1")).toBe(
+      "/companies/c1/interviews/i1"
+    )
+    expect(answerHref("/pricing#faq")).toBe("/pricing")
+    expect(answerHref("/generate/g1?next=//evil.example")).toBe("/generate/g1")
+  })
+
+  it("drops a link to any other page, or off the site", () => {
+    expect(answerHref("/connect?request=r1")).toBeNull()
+    expect(answerHref("/join/token")).toBeNull()
+    expect(answerHref("https://evil.example/pricing")).toBeNull()
+    expect(answerHref("//evil.example/pricing")).toBeNull()
   })
 })

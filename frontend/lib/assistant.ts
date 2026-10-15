@@ -116,6 +116,22 @@ export function inAppHref(href: unknown): string | null {
   return href.includes("\\") ? null : href
 }
 
+/** A link in an answer's text, only to a page the panel knows (linkPage), by its path alone:
+ * text the model read (a candidate's answer, a job description) could steer it into writing
+ * others, such as an AI app's approval (/connect?request=…) or a redirect (?next=…). Null for
+ * anything else. */
+export function answerHref(href: unknown): string | null {
+  const inApp = inAppHref(href)
+
+  if (!inApp) {
+    return null
+  }
+
+  const path = inApp.split(/[?#]/)[0]
+
+  return linkPage(path) ? path : null
+}
+
 /** The "assistant.pages" message naming the page a link opens, or null for a page the panel
  * doesn't know. */
 export function linkPage(href: string): string | null {
