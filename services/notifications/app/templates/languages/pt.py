@@ -3,7 +3,7 @@
 # The footer of reminders to a company's owners and admins.
 MEMBER_FOOTER = (
     "Este e-mail foi enviado para {email} porque você é proprietário ou administrador de "
-    "uma empresa no prepza."
+    "uma empresa na prepza."
 )
 
 TEXTS = {
@@ -100,11 +100,11 @@ TEXTS = {
         "de candidatos com este endereço na prepza. Se você não esperava por ele, pode ignorá-lo.",
     },
     "digest": {
-        "subject": "Seu resumo de atividades no prepza",
+        "subject": "Seu resumo de atividades na prepza",
         "preheader": "O que aconteceu nas suas empresas nas últimas 24 horas.",
         "heading": "Seu resumo de atividades",
         "lines": [
-            "Veja o que aconteceu nas suas empresas no prepza nas últimas 24 horas.",
+            "Veja o que aconteceu nas suas empresas na prepza nas últimas 24 horas.",
         ],
         "rows": {
             "candidate_finished": "Candidatos que concluíram: {count} · “{title}”",
@@ -112,7 +112,7 @@ TEXTS = {
             "ats_not_invited": "Candidatos do ATS não convidados: {count}",
             "interview_ready": "Entrevista pronta: “{title}”",
         },
-        "button": "Abrir o prepza",
+        "button": "Abrir a prepza",
         "footer": (
             "Este e-mail foi enviado para {email} porque você é membro de uma empresa no "
             "prepza e recebe o resumo de atividades dela."
@@ -249,7 +249,7 @@ TEXTS = {
         "button": "Recarregar",
         "footer": (
             "Este e-mail foi enviado para {email} porque você é proprietário ou "
-            "administrador de {company} no prepza. Ele trata do faturamento da sua empresa,"
+            "administrador de {company} na prepza. Ele trata do faturamento da sua empresa,"
             " por isso é enviado independentemente das suas configurações de e-mail."
         ),
     },
