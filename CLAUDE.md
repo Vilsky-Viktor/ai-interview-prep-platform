@@ -83,3 +83,13 @@
     meaning: English "learner" covers anyone learning, while its literal translation
     elsewhere may mean only a school pupil or a university student; Persian «نامزد»
     for "candidate" also means an election candidate or a fiancé («متقاضی» is right).
+
+13. **Commit messages.**
+    - **Imperative mood:** the subject is a command ("Add", "Fix", "Remove"), never past
+      tense; it completes "If applied, this commit will...".
+    - **Short subject:** at most 50 characters (72 at the very most), so Git tools and
+      GitHub never cut it off.
+    - **No period** at the end of the subject, and its **first letter capitalized**.
+    - **A blank line** between the subject and the body.
+    - **Body wrapped at 72 characters**, so `git log` reads well in a terminal.
+    - **Why over how:** the body explains why the change was needed; the diff shows how.
