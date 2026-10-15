@@ -30,7 +30,7 @@ export async function PricingSection() {
       text={t("text", { free: catalog.free_candidates })}
       extra={see}
     >
-      <ul className="mx-auto grid w-full max-w-3xl gap-4 sm:grid-cols-3">
+      <ul className="grid w-full gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {catalog.candidate_prices.map((tier, index) => (
           <li
             key={tier.from_dollars}

@@ -51,6 +51,9 @@ test("the home page's pricing shows the catalog's prices and free candidates", a
     maximumFractionDigits: 0,
   }).formatRange(prices.candidate_cents_min / 100, prices.candidate_cents_max / 100);
   await expect(section).toContainText(`${range} per candidate`);
+  // All the prices on one row on a desktop.
+  await section.scrollIntoViewIfNeeded();
+  await section.screenshot({ path: test.info().outputPath("pricing.png") });
 });
 
 test("the pricing page shows the catalog's free candidates", async ({ page }) => {

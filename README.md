@@ -16,11 +16,11 @@ Timed knowledge interviews for hiring, made from a job description or a ready-ma
 - **Scorecards and reports:** grades against a pass mark, integrity flags, and PDF reports to download, email or share.
 - **Invites three ways:** by email, from a list or file, or through one shareable link for a job ad.
 - **Teams and verified companies:** owners, admins and viewers; a check next to a verified company's name.
-- **The company's brand:** candidates see the whole interview process with the company's logo, font, corner rounding and colors (a light and a dark set, kept readable), without prepza's header or footer.
+- **The company's brand:** on its brand tab a company sets its logo, colors (a light and a dark set, refused when any text would be hard to read), font (prepza's Poppins and Geist pair or one of the most used web fonts) and how round cards and buttons are, with a live preview; candidates see the whole interview process in them, without prepza's header or footer, in the theme the link, SDK or API asks for, or their own.
 - **Questions that fix themselves:** answers, votes and reports flag weak questions, and a verifier fixes them.
 - **ATS integrations:** candidates from Workable, Greenhouse, Teamtailor, Recruitee and Breezy HR are invited automatically, and results go back.
 - **Slack:** a company picks a channel and which of its notifications go there.
-- **Public API:** API keys to list interviews, invite candidates (also straight from a company's own platform: no sign-in, no emails, back to that platform at the end, or the interview embedded in its own page) and read results, and a signed web hook when a candidate finishes; its reference is on the site.
+- **Public API:** API keys to list interviews, invite candidates (also straight from a company's own platform: no sign-in, no emails, back to that platform at the end, or the interview embedded in its own page with prepza's SDK, on a verified company's website) and read results, and a signed web hook when a candidate finishes; the developer docs on the site cover the API, web hooks, the SDK and the objects.
 - **AI apps over MCP:** Claude, ChatGPT and other AI apps connect at `/mcp` once the user allows them, and read and change what the user can, with the user's permissions.
 - **Pay per candidate:** credits that never expire, $2–5 per candidate, with no paid subscription (an optional automatic top-up saves the card with Paddle as a $0 subscription).
 - **Free practice:** people preparing for a role practise on the templates' revealed questions.
@@ -52,7 +52,7 @@ Then open the app at http://localhost:8090. Sign-in uses the Firebase Auth emula
 | [Templates and practice](docs/features/templates-and-practice.md) | The question bank, copying templates, slugs, free practice |
 | [Credits and payments](docs/features/billing.md) | Credits, top-ups, automatic top-up, referrals, a company's billing tab, setting up Paddle |
 | [ATS integrations](docs/features/ats.md) | Connecting Workable, Greenhouse, Teamtailor, Recruitee and Breezy HR, linked jobs, results back to the ATS |
-| [Public API](docs/features/api.md) | API keys and their expiry, the routes, signed web hooks, the API page and docs |
+| [Public API](docs/features/api.md) | API keys and their expiry, the routes, invites without sign-in, return addresses and themes, signed web hooks, the SDK that embeds the interview, the API page and the developer docs |
 | [Notifications and emails](docs/features/notifications.md) | The bell, emails, Slack, setting up Resend and Slack |
 | [In-app assistant](docs/features/assistant.md) | The "ask agent" panel: answers about a user's companies and about prepza (FAQ answers when signed out), voice input, its limits, retention and tools |
 | [AI apps over MCP](docs/features/mcp.md) | Connecting Claude, ChatGPT and other AI apps: the consent page, OAuth, the tools, connections, limits |

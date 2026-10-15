@@ -1,5 +1,6 @@
 "use client"
 
+import { cn } from "cn"
 import { useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { useState } from "react"
@@ -111,10 +112,15 @@ export function BrandColorsForm({
       setOwn({ light: false, dark: false })
     }, t("resetDone"))
 
-  // Reset and save; under them, smaller, the way back to prepza's. At the top and again at the
-  // bottom; on a phone, centered with room above and below.
-  const actions = (
-    <div className="flex flex-col items-end gap-2 max-sm:w-full max-sm:items-center max-sm:py-4">
+  // Reset and save; under them, smaller, the way back to prepza's. At the top on the right and
+  // again at the bottom (`centered`), centered; on a phone, centered with room above and below.
+  const actions = (centered = false) => (
+    <div
+      className={cn(
+        "flex flex-col gap-2 max-sm:w-full max-sm:items-center max-sm:py-4",
+        centered ? "w-full items-center" : "items-end"
+      )}
+    >
       <div className="flex gap-2">
         <Button
           variant="outline"
@@ -158,7 +164,7 @@ export function BrandColorsForm({
           </h2>
           <p className="text-muted-foreground">{t("colorsText")}</p>
         </div>
-        {actions}
+        {actions()}
       </div>
       <TabNav
         items={THEMES.map((id) => ({ id, label: t(`themes.${id}`) }))}
@@ -209,7 +215,7 @@ export function BrandColorsForm({
           <BrandPreview colors={shown} look={look} />
         </div>
       </div>
-      <div className="flex justify-end max-sm:justify-center">{actions}</div>
+      {actions(true)}
     </section>
   )
 }
