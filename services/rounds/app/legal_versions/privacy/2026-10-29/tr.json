@@ -12,9 +12,9 @@
       "heading": "Ne topluyoruz",
       "items": [
         "Hesap: giriş yaptığınız Google, LinkedIn veya GitHub hesabından adınız, e-posta adresiniz, profil fotoğrafınız ve hesap kimliğiniz ile bunlardan hangilerinin hesabınıza bağlı olduğu.",
-        "Bize verdikleriniz: yapıştırdığınız iş tanımları ve bunlardan oluşturulan mülakatlar, davet ettiğiniz adayların e-posta adresleri (ve adlarını verir veya düzeltirseniz adları) ile rapor gönderdiğiniz kişilerin e-posta adresleri ve sorulara verdiğiniz puanlar ve sorularla ilgili bildirimleriniz.",
+        "Bize verdikleriniz: yapıştırdığınız iş tanımları ve bunlardan oluşturulan mülakatlar, davet ettiğiniz adayların e-posta adresleri (ve adlarını verir veya düzeltirseniz adları), şirketinizin ekibine davet ettiğiniz kişilerin e-posta adresleri ile rapor gönderdiğiniz kişilerin e-posta adresleri ve sorulara verdiğiniz puanlar ve sorularla ilgili bildirimleriniz.",
         "Asistan: giriş yapmışken ona yazdıklarınız veya söyledikleriniz (sesli mesaj metne dönüştürülür ve hiçbir zaman saklanmaz) ve onun cevapları; böylece bir sohbete geri dönebilirsiniz. Size cevap vermek için okuduklarını, örneğin adayların sonuçlarını saklamaz: bir sohbeti yeniden açtığınızda bunları mevcut erişiminizle yeniden getirir. Giriş yapmamışsanız sorularınız yalnızca cevaplanmak için kullanılır ve saklanmaz. Anahtar, token veya parola içeren bir mesaj hemen kaldırılır: saklanmaz ve başka bir yere gönderilmez.",
-        "Şirketler: şirketin adı, logosu ve web sitesi ile şirketin doğrulandığı e-posta alan adı.",
+        "Şirketler: şirketin adı, logosu ve web sitesi ile şirketin doğrulandığı e-posta alan adı; bir sahip veya yönetici doğrulama istediğinde, onayladığı o alan adındaki e-posta adresi ve incelemeye gönderdiği şirket adı.",
         "Pratik: ücretsiz pratik mülakatlarına girerseniz cevaplarınız, notlarınız ve her cevabın ne kadar sürdüğü. Bunları yalnızca siz görürsünüz.",
         "İletişim mesajları: iletişim sayfası üzerinden gönderdiğiniz ad, e-posta adresi ve mesaj.",
         "Mülakatlar, bir şirket sizi davet ederse: davet edildiğiniz e-posta adresi, cevaplarınız, her cevabın ne kadar sürdüğü, mülakat sayfasından ne zaman ayrıldığınız, ne zaman metin kopyaladığınız veya soruyu okumaya yetmeyecek kadar hızlı cevap verdiğiniz, şirketin size tanıdığı ek süre (hiçbir gerekçe kaydedilmez) ve sorulara verdiğiniz puanlar ve sorularla ilgili bildirimleriniz. Bu size başlamadan önce bildirilir.",
@@ -65,7 +65,7 @@
     {
       "heading": "Bir şirketin bağladığı araçlar",
       "paragraphs": [
-        "Bir şirket kendi araçlarını prepza'ya bağlayabilir; bu durumda, şirketin talep ettiği hizmetin bir parçası olarak, şirketin talimatıyla bu araçlara veri göndeririz: şirketin aday takip sistemi (Workable, Greenhouse, Teamtailor, Recruitee veya Breezy HR) notunuzu, geçme notuna ulaşıp ulaşmadığını, dürüstlük sinyallerini ve sonuçlarınıza bir bağlantıyı alır; şirketin seçtiği bir Slack kanalı, bitirdiğiniz ve notunuz gibi şirketin bildirimlerini alır; şirketin kendi sistemleri ise prepza'nın API'si veya webhook'ları aracılığıyla e-posta adresinizi, ilerlemenizi, notunuzu ve dürüstlük sinyallerini alır. AB dışında olabilecek bu araçları şirket seçer ve kontrol eder; bunların verilerinizi nasıl kullandığından da şirket sorumludur."
+        "Bir şirket kendi araçlarını prepza'ya bağlayabilir; bu durumda, şirketin talep ettiği hizmetin bir parçası olarak, şirketin talimatıyla bu araçlara veri göndeririz: şirketin aday takip sistemi (Workable, Greenhouse, Teamtailor, Recruitee veya Breezy HR) notunuzu, geçme notuna ulaşıp ulaşmadığını, dürüstlük sinyallerini ve sonuçlarınıza bir bağlantıyı alır; şirketin seçtiği bir Slack kanalı, bitirdiğiniz ve notunuz gibi şirketin bildirimlerini alır; şirketin kendi sistemleri ise prepza'nın API'si veya webhook'ları aracılığıyla e-posta adresinizi, adınızı, ilerlemenizi, notunuzu, geçme notuna ulaşıp ulaşmadığınızı, dürüstlük sinyallerini ve davet bağlantınızı alır. AB dışında olabilecek bu araçları şirket seçer ve kontrol eder; bunların verilerinizi nasıl kullandığından da şirket sorumludur."
       ]
     },
     {

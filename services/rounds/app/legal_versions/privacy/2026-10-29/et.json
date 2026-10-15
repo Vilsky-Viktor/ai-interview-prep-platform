@@ -12,9 +12,9 @@
       "heading": "Mida me kogume",
       "items": [
         "Konto: sinu nimi, e-posti aadress, profiilipilt ja konto ID sellelt Google'i, LinkedIni või GitHubi kontolt, millega sisse logid, ning see, millised neist on sinu kontoga seotud.",
-        "Mida sa meile annad: töökuulutuste kirjeldused, mida kleebid, ja nende põhjal loodud intervjuud, sinu kutsutud kandidaatide e-posti aadressid (ja nende nimed, kui need annad või parandad) ning nende inimeste e-posti aadressid, kellele saadad aruande, ning sinu küsimuste hinnangud ja küsimustest teatamised.",
+        "Mida sa meile annad: töökuulutuste kirjeldused, mida kleebid, ja nende põhjal loodud intervjuud, sinu kutsutud kandidaatide e-posti aadressid (ja nende nimed, kui need annad või parandad), nende inimeste e-posti aadressid, keda kutsud oma ettevõtte meeskonda, ning nende inimeste e-posti aadressid, kellele saadad aruande, ning sinu küsimuste hinnangud ja küsimustest teatamised.",
         "Assistent: kui oled sisse logitud, see, mida talle kirjutad või ütled (häälsõnum muudetakse tekstiks ja seda ei salvestata kunagi), ja tema vastused, et saaksid vestluse juurde tagasi tulla. Ta ei säilita seda, mida ta sulle vastamiseks luges, näiteks kandidaatide tulemusi: kui avad vestluse uuesti, toob ta need uuesti sinu praeguse juurdepääsuga. Kui sa pole sisse logitud, kasutatakse sinu küsimusi ainult neile vastamiseks ja neid ei salvestata. Sõnum, mis sisaldab võtit, tokenit või parooli, eemaldatakse kohe: seda ei salvestata ega edastata.",
-        "Ettevõtted: ettevõtte nimi, logo ja veebisait ning e-posti domeen, millega see kinnitati.",
+        "Ettevõtted: ettevõtte nimi, logo ja veebisait ning e-posti domeen, millega see kinnitati; kui omanik või administraator taotleb kinnitamist, selle domeeni e-posti aadress, mille ta kinnitas, ja ettevõtte nimi, mille ta ülevaatusele saatis.",
         "Harjutamine: kui teed tasuta harjutusintervjuusid, sinu vastused, hinded ja see, kui kaua iga vastus aega võttis. Neid näed ainult sina.",
         "Kontaktsõnumid: nimi, e-posti aadress ja sõnum, mille saadad kontaktilehe kaudu.",
         "Intervjuud, kui ettevõte sind kutsub: e-posti aadress, millega sind kutsuti, sinu vastused, kui kaua iga vastus aega võttis, millal lahkusid intervjuu lehelt, kopeerisid teksti või vastasid liiga kiiresti, et küsimust lugeda jõuda, ettevõtte antud lisaaeg (põhjust ei salvestata) ning sinu küsimuste hinnangud ja küsimustest teatamised. Sulle öeldakse seda enne alustamist.",
@@ -65,7 +65,7 @@
     {
       "heading": "Ettevõtte ühendatud tööriistad",
       "paragraphs": [
-        "Ettevõte saab ühendada prepzaga oma tööriistad ja siis saadame neile andmeid ettevõtte juhiste alusel osana teenusest, mida ettevõte on soovinud: ettevõtte värbamissüsteem (Workable, Greenhouse, Teamtailor, Recruitee või Breezy HR) saab sinu hinde, selle, kas see ületas läbimise läve, kahtlase käitumise märked ja lingi sinu tulemustele; ettevõtte valitud Slacki kanal saab ettevõtte teavitused, näiteks et lõpetasid, ja sinu hinde; ning ettevõtte enda süsteemid saavad prepza API või veebikonksude kaudu sinu e-posti aadressi, edenemise, hinde ja kahtlase käitumise märked. Ettevõte valib ja kontrollib neid tööriistu, mis võivad asuda väljaspool ELi, ning vastutab selle eest, kuidas need sinu andmeid kasutavad."
+        "Ettevõte saab ühendada prepzaga oma tööriistad ja siis saadame neile andmeid ettevõtte juhiste alusel osana teenusest, mida ettevõte on soovinud: ettevõtte värbamissüsteem (Workable, Greenhouse, Teamtailor, Recruitee või Breezy HR) saab sinu hinde, selle, kas see ületas läbimise läve, kahtlase käitumise märked ja lingi sinu tulemustele; ettevõtte valitud Slacki kanal saab ettevõtte teavitused, näiteks et lõpetasid, ja sinu hinde; ning ettevõtte enda süsteemid saavad prepza API või veebikonksude kaudu sinu e-posti aadressi, nime, edenemise, hinde, selle, kas saavutasid läbimise läve, kahtlase käitumise märked ja sinu kutselingi. Ettevõte valib ja kontrollib neid tööriistu, mis võivad asuda väljaspool ELi, ning vastutab selle eest, kuidas need sinu andmeid kasutavad."
       ]
     },
     {
