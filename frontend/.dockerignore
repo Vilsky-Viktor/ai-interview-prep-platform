@@ -1,4 +1,10 @@
 node_modules
 .next
-.env.development
 .pnpm-store
+# Local settings and secrets: a production build would otherwise bake them in.
+.env*
+# Tests and build leftovers aren't part of the image.
+tests
+coverage
+vitest.config.ts
+*.tsbuildinfo
