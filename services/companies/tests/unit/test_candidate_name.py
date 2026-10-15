@@ -17,7 +17,7 @@ from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
 from app.routers import candidates as candidates_router
 from app.routers import invites as invites_router
-from app.services import candidate_start
+from app.services import candidate_start, interview_access
 from app.storage import candidates, companies, interviews
 from app.storage import invites as invite_store
 from tests.unit import fake_candidates
@@ -182,8 +182,8 @@ def test_a_single_invite_passes_its_name(client, candidate, monkeypatch):
         )
 
     monkeypatch.setattr(candidates_router.candidate_invites, "invite", invite)
-    monkeypatch.setattr(candidates_router, "attach_set", fake_attach)
-    monkeypatch.setattr(candidates_router, "refuse_if_paused", nothing)
+    monkeypatch.setattr(interview_access, "attach_set", fake_attach)
+    monkeypatch.setattr(interview_access, "refuse_if_paused", nothing)
     monkeypatch.setattr(candidates_router.outbox_service, "flush_quietly", nothing)
     sign_in("olga")
     body = {"email": "ann@example.com", "name": "Ann Lee"}

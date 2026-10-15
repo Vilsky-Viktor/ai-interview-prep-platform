@@ -13,7 +13,7 @@ from app.main import app
 from app.models.companies import Company, Member
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
-from app.storage import companies, interviews, invites
+from app.storage import candidates, companies, interviews, invites
 
 SECRET = "test-secret-that-is-at-least-32-bytes"
 COMPANY_ID = uuid.uuid4()
@@ -39,15 +39,15 @@ def candidate(monkeypatch):
     async def fake_company(_id):
         return company
 
-    async def fake_invite(_id):
-        return invite
+    async def fake_invite(interview_id, invite_id):
+        return invite if invite.interview_id == interview_id else None
 
     async def fake_set(invite_id, extra_time):
         saved["extra_time"] = extra_time
 
     monkeypatch.setattr(interviews, "get", fake_interview)
     monkeypatch.setattr(companies, "get", fake_company)
-    monkeypatch.setattr(invites, "get", fake_invite)
+    monkeypatch.setattr(candidates, "get", fake_invite)
     monkeypatch.setattr(invites, "set_extra_time", fake_set)
     app.dependency_overrides[current_user] = lambda: User(
         uid="bob", email="bob@example.com", email_verified=True

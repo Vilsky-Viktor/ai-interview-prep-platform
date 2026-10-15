@@ -31,6 +31,7 @@ from app.service_auth import Via
 from app.services import interview_creation, set_cache
 from app.services.access import can_edit, require_company, require_editor
 from app.services.candidate_billing import release_unfinished, settle_removed
+from app.services.interview_access import interview_for
 from app.storage import audit, candidates, interviews, invites
 
 router = APIRouter(prefix="/interviews", tags=["interviews"])
@@ -88,12 +89,7 @@ async def list_interviews(
 
 @router.get("/{interview_id}")
 async def get_interview(interview_id: UUID, user: CurrentUser) -> InterviewDetail:
-    interview = await interviews.get(interview_id)
-
-    if interview is None:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Interview not found")
-
-    _, member = await require_company(user, interview.company_id)
+    interview, _, member = await interview_for(user, interview_id)
     interview = await attach_set_if_reachable(interview)
     totals = await candidates.counts([interview.id])
     base = await interview_out(interview, totals.get(interview.id, 0))
@@ -108,12 +104,7 @@ async def get_interview(interview_id: UUID, user: CurrentUser) -> InterviewDetai
 async def update_settings(
     interview_id: UUID, body: InterviewSettings, user: CurrentUser, via: Via
 ) -> None:
-    interview = await interviews.get(interview_id)
-
-    if interview is None:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Interview not found")
-
-    await require_editor(user, interview.company_id)
+    interview, _, _ = await interview_for(user, interview_id, editor=True)
     await interviews.update_settings(interview.id, body)
 
     if body.pass_mark is not None and body.pass_mark != interview.pass_mark:
@@ -125,12 +116,7 @@ async def update_settings(
 @router.patch("/{interview_id}/title", status_code=status.HTTP_204_NO_CONTENT)
 async def rename_interview(interview_id: UUID, body: TitleIn, user: CurrentUser) -> None:
     """Company owners and admins can rename an interview once it has been generated."""
-    interview = await interviews.get(interview_id)
-
-    if interview is None:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Interview not found")
-
-    await require_editor(user, interview.company_id)
+    interview, _, _ = await interview_for(user, interview_id, editor=True)
 
     if interview.set_id is None:
         raise HTTPException(status.HTTP_409_CONFLICT, INTERVIEW_NOT_READY)
@@ -143,12 +129,7 @@ async def rename_interview(interview_id: UUID, body: TitleIn, user: CurrentUser)
 async def delete_interview(interview_id: UUID, user: CurrentUser) -> None:
     """Credits, results and questions go first, so a failure leaves the interview to delete
     again."""
-    interview = await interviews.get(interview_id)
-
-    if interview is None:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Interview not found")
-
-    await require_editor(user, interview.company_id)
+    interview, _, _ = await interview_for(user, interview_id, editor=True)
     interview = await attach_set(interview)
 
     if interview.set_id is None:
@@ -167,12 +148,7 @@ async def preview_interview(interview_id: UUID, user: CurrentUser) -> PreviewOut
     """A company member takes their own test as a candidate would: free, kept out of the
     candidate list, and its answers out of the questions' statistics. Each preview is new."""
     await refuse_if_paused(get_redis())
-    interview = await interviews.get(interview_id)
-
-    if interview is None:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Interview not found")
-
-    await require_company(user, interview.company_id)
+    interview, _, _ = await interview_for(user, interview_id)
     interview = await attach_set(interview)
     content = await library.get_content(interview.set_id) if interview.set_id else None
 

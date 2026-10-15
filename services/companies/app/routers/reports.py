@@ -13,9 +13,9 @@ from app.schemas.reports import InterviewReportOut, ReportEmailIn
 from app.service_auth import Via
 from app.services import candidate_results
 from app.services import outbox as outbox_service
-from app.services.access import require_company
+from app.services.interview_access import candidate_for, interview_for
 from app.services.report_emails import allow_report_email
-from app.storage import audit, candidates, interviews, reports
+from app.storage import audit, candidates, reports
 
 router = APIRouter(prefix="/interviews", tags=["reports"])
 
@@ -29,13 +29,10 @@ async def email_report(
     """Emails the candidate's PDF report, made on their page, to someone such as a hiring
     manager. A reply goes to the member who sent it. Counts towards the member's email limits
     and the company's daily reports."""
-    interview = await interviews.get(interview_id)
-    invite = await candidates.get(interview_id, invite_id) if interview else None
+    interview, invite, company, _ = await candidate_for(user, interview_id, invite_id)
 
-    if interview is None or invite is None or invite.status == InviteStatus.DELETED:
+    if invite.status == InviteStatus.DELETED:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Candidate not found")
-
-    company, _ = await require_company(user, interview.company_id)
 
     email = str(body.email).lower()
     await allow_report_email(user, company, interview, body.pdf, f"report:{invite.id}:{email}")
@@ -57,12 +54,7 @@ async def email_report(
 
 @router.get("/{interview_id}/report")
 async def interview_report(interview_id: UUID, user: CurrentUser) -> InterviewReportOut:
-    interview = await interviews.get(interview_id)
-
-    if interview is None:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Interview not found")
-
-    company, _ = await require_company(user, interview.company_id)
+    interview, company, _ = await interview_for(user, interview_id)
     await candidate_results.backfill(interview.id)
     every = await candidates.for_report(interview.id)
     totals = await rounds.invite_scores([invite.id for invite in every])
@@ -84,12 +76,7 @@ async def email_interview_report(
     interview_id: UUID, body: ReportEmailIn, user: CurrentUser, via: Via
 ) -> None:
     """Emails the test's candidates report, made on its candidates tab, like a candidate's."""
-    interview = await interviews.get(interview_id)
-
-    if interview is None:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Interview not found")
-
-    company, _ = await require_company(user, interview.company_id)
+    interview, company, _ = await interview_for(user, interview_id)
 
     email = str(body.email).lower()
     await allow_report_email(user, company, interview, body.pdf, f"report:{interview.id}:{email}")

@@ -4,10 +4,8 @@ from uuid import UUID
 from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
 from prepza_common.names import clean_name
-from prepza_common.pause import refuse_if_paused
 
 from app.constants.invites import (
-    INTERVIEW_NOT_READY,
     MAX_BULK_INVITES,
     NAME_NEEDS_ONE_EMAIL,
     NO_EMAILS,
@@ -17,14 +15,12 @@ from app.constants.invites import (
     SkipReason,
 )
 from app.helpers.candidate_lists import read_list
-from app.helpers.interviews import attach_set
 from app.helpers.list_files import list_refusal
-from app.integrations.redis import get_redis
 from app.schemas.invites import BulkInviteIn, BulkInviteOut, LineProblemOut, SkippedInvite
 from app.services import candidate_invites
 from app.services import outbox as outbox_service
-from app.services.access import require_editor
-from app.storage import interviews, invites
+from app.services.interview_access import interview_for, ready_for_invites
+from app.storage import invites
 
 logger = logging.getLogger(__name__)
 
@@ -36,18 +32,8 @@ async def invite_many(interview_id: UUID, body: BulkInviteIn, user: CurrentUser)
     """Invites every email in a pasted or uploaded list, one by one as a single invite would,
     with the names the list gives ("Name <email>", "email, Name", or a CSV's name columns), and
     says who was invited and why the others weren't."""
-    interview = await interviews.get(interview_id)
-
-    if interview is None:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Interview not found")
-
-    company, _ = await require_editor(user, interview.company_id)
-    # Paused, no invite (new or sent again) goes out: its candidate couldn't start.
-    await refuse_if_paused(get_redis())
-    interview = await attach_set(interview)
-
-    if interview.set_id is None:
-        raise HTTPException(status.HTTP_409_CONFLICT, INTERVIEW_NOT_READY)
+    interview, company, _ = await interview_for(user, interview_id, editor=True)
+    interview = await ready_for_invites(interview)
 
     refusal = list_refusal(body.text, body.filename)
 

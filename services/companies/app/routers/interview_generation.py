@@ -15,17 +15,18 @@ from app.models.interviews import Interview
 from app.schemas.generations import GenerationOut
 from app.schemas.interviews import ReviewIn
 from app.service_auth import Via
-from app.services.access import require_company, require_editor
+from app.services.interview_access import interview_for
 from app.storage import audit, interviews
 
 router = APIRouter(prefix="/interviews", tags=["interviews"])
 
 
-async def get_interview(interview_id: UUID) -> Interview:
-    interview = await interviews.get(interview_id)
+async def get_interview(user: CurrentUser, interview_id: UUID, editor: bool = False) -> Interview:
+    """The user's interview (interview_for), only one with a generation to follow."""
+    interview, _, _ = await interview_for(user, interview_id, editor)
 
     # A test made from a template has no generation to follow.
-    if interview is None or interview.generation_id is None:
+    if interview.generation_id is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Interview not found")
 
     return interview
@@ -48,8 +49,7 @@ def passed_through(response: httpx.Response) -> dict:
 @router.get("/{interview_id}/generation")
 async def get_generation(interview_id: UUID, user: CurrentUser) -> GenerationOut:
     """Every company member follows the generation, not only the admin who started it."""
-    interview = await get_interview(interview_id)
-    await require_company(user, interview.company_id)
+    interview = await get_interview(user, interview_id)
     found = await generation_api.get(interview.generation_id, interview.company_id)
 
     if found is None:
@@ -66,8 +66,7 @@ async def review_generation(
     shows it's a person on the site first, as generating costs; the assistant and AI apps (no
     browser) can't be asked."""
     await refuse_if_paused(get_redis())
-    interview = await get_interview(interview_id)
-    await require_editor(user, interview.company_id)
+    interview = await get_interview(user, interview_id, editor=True)
 
     if (
         via is None
@@ -90,8 +89,7 @@ async def review_generation(
 @router.post("/{interview_id}/generation/retry")
 async def retry_generation(interview_id: UUID, user: CurrentUser) -> dict:
     await refuse_if_paused(get_redis())
-    interview = await get_interview(interview_id)
-    await require_editor(user, interview.company_id)
+    interview = await get_interview(user, interview_id, editor=True)
     retried = passed_through(
         await generation_api.retry(interview.generation_id, interview.company_id)
     )
@@ -104,8 +102,7 @@ async def retry_generation(interview_id: UUID, user: CurrentUser) -> dict:
 @router.post("/{interview_id}/generation/cancel")
 async def cancel_generation(interview_id: UUID, user: CurrentUser) -> dict:
     """Removes the interview too, so it isn't left without questions."""
-    interview = await get_interview(interview_id)
-    await require_editor(user, interview.company_id)
+    interview = await get_interview(user, interview_id, editor=True)
     cancelled = passed_through(
         await generation_api.cancel(interview.generation_id, interview.company_id)
     )

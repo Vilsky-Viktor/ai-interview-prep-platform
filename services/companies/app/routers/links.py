@@ -29,8 +29,9 @@ from app.integrations.redis import get_redis
 from app.schemas.invites import InviteStartOut, LinkIn, LinkOut, LinkView
 from app.schemas.logos import BrandColorSets, BrandStyle
 from app.services import outbox as outbox_service
-from app.services.access import refuse_if_suspended, require_editor
+from app.services.access import refuse_if_suspended
 from app.services.candidate_start import start_sessions
+from app.services.interview_access import interview_for
 from app.storage import companies, interviews, invites, link_invites
 
 # One link for many candidates: a company puts it in a job ad, and each person who opens it
@@ -62,12 +63,7 @@ async def joined_details(interview) -> dict:
 @router.put("/interviews/{interview_id}/link")
 async def set_link(interview_id: UUID, body: LinkIn, user: CurrentUser) -> LinkOut:
     """Owners and admins turn the link on (a new code) or off (it stops working at once)."""
-    interview = await interviews.get(interview_id)
-
-    if interview is None:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Interview not found")
-
-    await require_editor(user, interview.company_id)
+    interview, _, _ = await interview_for(user, interview_id, editor=True)
     token = (interview.link_token or secrets.token_urlsafe(LINK_TOKEN_BYTES)) if body.on else None
     await interviews.set_link(interview.id, token)
 

@@ -2,16 +2,14 @@ import asyncio
 from typing import Annotated
 from uuid import UUID
 
-from fastapi import APIRouter, HTTPException, Query, status
+from fastapi import APIRouter, Query, status
 from prepza_common.analytics import track
 from prepza_common.auth import CurrentUser
 from prepza_common.paging import PageParams
-from prepza_common.pause import refuse_if_paused
 
 from app.constants.audit import AuditAction
 from app.constants.invites import (
     EXTRA_TIME_OPTIONS,
-    INTERVIEW_NOT_READY,
     MAX_SEARCH_LENGTH,
     NOT_STARTED,
     CandidateFilter,
@@ -20,19 +18,18 @@ from app.constants.invites import (
 )
 from app.helpers.candidates import open_link_token, passed, row_actions, section_passed
 from app.helpers.interviews import (
-    attach_set,
     interview_title,
 )
 from app.helpers.logos import logo_path
 from app.integrations import rounds
-from app.integrations.redis import get_redis
 from app.schemas.invites import CandidateFiltersOut, CandidateIn, CandidateNameIn, CandidateOut
 from app.schemas.scorecards import ScorecardOut
 from app.service_auth import Via
 from app.services import candidate_changes, candidate_invites, candidate_results
 from app.services import outbox as outbox_service
-from app.services.access import can_edit, require_company, require_editor
-from app.storage import audit, candidates, interviews
+from app.services.access import can_edit
+from app.services.interview_access import candidate_for, interview_for, ready_for_invites
+from app.storage import audit
 
 router = APIRouter(prefix="/interviews", tags=["interviews"])
 
@@ -41,18 +38,8 @@ router = APIRouter(prefix="/interviews", tags=["interviews"])
 async def invite_candidate(
     interview_id: UUID, body: CandidateIn, user: CurrentUser
 ) -> CandidateOut:
-    interview = await interviews.get(interview_id)
-
-    if interview is None:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Interview not found")
-
-    company, _ = await require_editor(user, interview.company_id)
-    # Paused, no invite (new or sent again) goes out: its candidate couldn't start.
-    await refuse_if_paused(get_redis())
-    interview = await attach_set(interview)
-
-    if interview.set_id is None:
-        raise HTTPException(status.HTTP_409_CONFLICT, INTERVIEW_NOT_READY)
+    interview, company, _ = await interview_for(user, interview_id, editor=True)
+    interview = await ready_for_invites(interview)
 
     invite = await candidate_invites.invite(interview, company, user, str(body.email), body.name)
     await outbox_service.flush_quietly()
@@ -83,12 +70,7 @@ async def list_candidates(
     filter_by: Annotated[CandidateFilter | None, Query(alias="status")] = None,
 ) -> list[CandidateOut]:
     """A page at a time (candidate_results.page)."""
-    interview = await interviews.get(interview_id)
-
-    if interview is None:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Interview not found")
-
-    await require_company(user, interview.company_id)
+    interview, _, _ = await interview_for(user, interview_id)
     by_grade = sort == CandidateSort.GRADE
 
     return await candidate_results.page(
@@ -101,13 +83,7 @@ async def revoke_candidate(
     interview_id: UUID, invite_id: UUID, user: CurrentUser, via: Via
 ) -> None:
     """Withdraws an invite not used yet, or erases a candidate who started (candidate_changes)."""
-    interview = await interviews.get(interview_id)
-    invite = await candidates.get(interview_id, invite_id) if interview else None
-
-    if interview is None or invite is None:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Candidate not found")
-
-    await require_editor(user, interview.company_id)
+    interview, invite, _, _ = await candidate_for(user, interview_id, invite_id, editor=True)
     await candidate_changes.remove(interview, invite, user.uid, via)
 
 
@@ -117,13 +93,7 @@ async def rename_candidate(
 ) -> None:
     """Owners and admins correct the name a candidate's sign-in gave, a nickname for example; a
     blank name makes it not known. The sign-in fills only a name not known, so this one stays."""
-    interview = await interviews.get(interview_id)
-    invite = await candidates.get(interview_id, invite_id) if interview else None
-
-    if interview is None or invite is None:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Candidate not found")
-
-    await require_editor(user, interview.company_id)
+    _, invite, _, _ = await candidate_for(user, interview_id, invite_id, editor=True)
     await candidate_changes.rename(invite, body.name)
 
 
@@ -136,13 +106,7 @@ async def candidate_scorecard(
 ) -> ScorecardOut:
     """A view through the in-app assistant or an AI app (a valid X-Assistant token) is audited
     as via it and isn't the funnel's "results viewed"."""
-    interview = await interviews.get(interview_id)
-    invite = await candidates.get(interview_id, invite_id) if interview else None
-
-    if interview is None or invite is None:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Candidate not found")
-
-    company, member = await require_company(user, interview.company_id)
+    interview, invite, company, member = await candidate_for(user, interview_id, invite_id)
     # Both from rounds, asked at once.
     card, scores = await asyncio.gather(
         rounds.scorecard(invite.id), rounds.invite_scores([invite.id])
