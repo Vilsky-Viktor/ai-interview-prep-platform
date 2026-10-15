@@ -3,8 +3,9 @@ import pytest
 
 from app.integrations import billing
 from app.routers import links
+from app.services import interview_access
 from app.storage import invites
-from tests.unit.test_links import linked  # noqa: F401
+from tests.unit.test_links import INTERVIEW, linked  # noqa: F401
 
 URL = "/links/abc/start"
 
@@ -74,3 +75,60 @@ def test_a_lost_answer_from_billing_gives_back_only_a_hold_made_just_now(
         client.post(URL)
 
     assert released == (linked["held"] if given_back else [])
+
+
+def not_ready(monkeypatch):
+    """The link's interview without its questions yet (its generation still running)."""
+    interview = INTERVIEW.__class__(
+        id=INTERVIEW.id,
+        company_id=INTERVIEW.company_id,
+        generation_id=None,
+        set_id=None,
+        question_seconds=60,
+        link_token="abc",
+    )
+
+    async def get_by_link(token):
+        return interview
+
+    async def as_is(found):
+        return found
+
+    async def editable(user, interview_id, editor=False):
+        return interview, None, None
+
+    monkeypatch.setattr(links.interviews, "get_by_link", get_by_link)
+    monkeypatch.setattr(links, "attach_set", as_is)
+    monkeypatch.setattr(interview_access, "attach_set", as_is)
+    monkeypatch.setattr(links, "interview_for", editable)
+
+
+def test_a_link_to_an_interview_without_questions_holds_nothing(
+    client,
+    linked,  # noqa: F811
+    monkeypatch,
+):
+    """Turned on too early (before that was refused), it says it's not ready yet."""
+    not_ready(monkeypatch)
+
+    assert client.post(URL).status_code == 409
+    assert linked["held"] == []
+
+
+def test_the_link_turns_on_only_once_the_interview_has_its_questions(
+    client,
+    linked,  # noqa: F811
+    monkeypatch,
+):
+    not_ready(monkeypatch)
+    turned = []
+
+    async def set_link(interview_id, token):
+        turned.append(token)
+
+    monkeypatch.setattr(links.interviews, "set_link", set_link)
+    on = client.put(f"/interviews/{INTERVIEW.id}/link", json={"on": True})
+    off = client.put(f"/interviews/{INTERVIEW.id}/link", json={"on": False})
+
+    assert (on.status_code, off.status_code) == (409, 200)
+    assert turned == [None]

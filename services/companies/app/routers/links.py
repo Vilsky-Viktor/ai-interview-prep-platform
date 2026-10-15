@@ -13,6 +13,7 @@ from prepza_common.rate_limit import hit
 from app.config.settings import settings
 from app.constants.invites import (
     EMAIL_NOT_VERIFIED,
+    INTERVIEW_NOT_READY,
     LINK_CLOSED,
     LINK_STARTS_PER_HOUR,
     LINK_STARTS_PER_IP_HOUR,
@@ -31,7 +32,7 @@ from app.schemas.logos import BrandColorSets, BrandStyle
 from app.services import outbox as outbox_service
 from app.services.access import refuse_if_suspended
 from app.services.candidate_start import start_sessions
-from app.services.interview_access import interview_for
+from app.services.interview_access import interview_for, ready_for_invites
 from app.storage import companies, interviews, invites, link_invites
 
 # One link for many candidates: a company puts it in a job ad, and each person who opens it
@@ -62,8 +63,14 @@ async def joined_details(interview) -> dict:
 
 @router.put("/interviews/{interview_id}/link")
 async def set_link(interview_id: UUID, body: LinkIn, user: CurrentUser) -> LinkOut:
-    """Owners and admins turn the link on (a new code) or off (it stops working at once)."""
+    """Owners and admins turn the link on (a new code) or off (it stops working at once). On
+    only once it has its questions, as for an invite: visitors could otherwise hold credits for
+    an interview they can't start."""
     interview, _, _ = await interview_for(user, interview_id, editor=True)
+
+    if body.on:
+        await ready_for_invites(interview)
+
     token = (interview.link_token or secrets.token_urlsafe(LINK_TOKEN_BYTES)) if body.on else None
     await interviews.set_link(interview.id, token)
 
@@ -99,6 +106,12 @@ async def start_link(token: str, user: CurrentUser, request: Request) -> InviteS
 
     if not user.email_verified:
         raise HTTPException(status.HTTP_403_FORBIDDEN, EMAIL_NOT_VERIFIED)
+
+    # A link turned on before its questions were made holds nothing until they are.
+    interview = await attach_set(interview)
+
+    if interview.set_id is None:
+        raise HTTPException(status.HTTP_409_CONFLICT, INTERVIEW_NOT_READY)
 
     current, stored = await invites.held(interview.id, user.email)
     key = stored if current else new_hold_key(interview.id)
