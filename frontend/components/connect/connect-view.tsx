@@ -11,8 +11,9 @@ import { InfoCard } from "@/components/warning-card"
 import { ApiError, apiFetch } from "@/lib/api"
 import type { ConnectRequest } from "@/types/connections"
 
-/** The consent page's states: an expired or used request; signed out, which app asks (when the
- * API says so before sign-in) and Sign in; signed in, the consent card. */
+/** The consent page's states: an expired or used request (also one that expires while the
+ * card is open); signed out, Sign in (the request is read only signed in); signed in, the
+ * consent card. */
 export function ConnectView({ requestId }: { requestId: string }) {
   const t = useTranslations("connect")
   const { user, loading } = useAuth()
@@ -21,9 +22,9 @@ export function ConnectView({ requestId }: { requestId: string }) {
   const [expired, setExpired] = useState(!requestId)
   const [read, setRead] = useState(false)
 
-  // Read signed in or not; again after signing in, so the card appears in place.
+  // Read once signed in, so the card appears in place after signing in.
   useEffect(() => {
-    if (loading || !requestId) {
+    if (loading || !user || !requestId) {
       return
     }
 
@@ -43,7 +44,7 @@ export function ConnectView({ requestId }: { requestId: string }) {
     return <InfoCard className="w-full max-w-md">{t("expired")}</InfoCard>
   }
 
-  if (!read) {
+  if (loading) {
     return null
   }
 
@@ -52,14 +53,7 @@ export function ConnectView({ requestId }: { requestId: string }) {
       <div className="w-full max-w-md space-y-6 rounded-2xl border p-6 sm:p-8">
         <div className="space-y-3">
           <h1 className="font-heading text-3xl font-medium tracking-tight text-balance">
-            {request
-              ? t.rich("title", {
-                  client: request.client_name,
-                  name: (chunks) => (
-                    <span className="normal-case">{chunks}</span>
-                  ),
-                })
-              : t("titleAny")}
+            {t("titleAny")}
           </h1>
           <p className="text-base text-muted-foreground">{t("signInText")}</p>
         </div>
@@ -68,6 +62,10 @@ export function ConnectView({ requestId }: { requestId: string }) {
         </Button>
       </div>
     )
+  }
+
+  if (!read) {
+    return null
   }
 
   if (!request) {
@@ -83,6 +81,7 @@ export function ConnectView({ requestId }: { requestId: string }) {
       requestId={requestId}
       request={request}
       email={user.email ?? ""}
+      onExpired={() => setExpired(true)}
     />
   )
 }

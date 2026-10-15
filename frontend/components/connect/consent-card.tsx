@@ -16,10 +16,13 @@ export function ConsentCard({
   requestId,
   request,
   email,
+  onExpired,
 }: {
   requestId: string
   request: ConnectRequest
   email: string
+  // The request expired (10 minutes, signing in included) or was answered meanwhile.
+  onExpired: () => void
 }) {
   const t = useTranslations("connect")
   const common = useTranslations("common")
@@ -36,6 +39,12 @@ export function ConsentCard({
       )
       window.location.assign(redirect_url)
     } catch (error) {
+      if (error instanceof ApiError && error.status === 404) {
+        onExpired()
+
+        return
+      }
+
       // Started in another browser: the API says to start again from the app.
       const refused = error instanceof ApiError && error.status === 403
       toast.error(

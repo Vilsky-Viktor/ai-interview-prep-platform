@@ -134,4 +134,17 @@ test("the consent page asks before an AI app may use the account", async ({ sign
   await shot(user, "consent")
   await user.getByRole("button", { name: "Deny" }).click()
   await expect(user).toHaveURL(/\/\?error=access_denied$/)
+
+  // A request that runs out while the card is open says it expired, not "something went wrong".
+  await user.route("**/assistant/connect/e2e-expiring", (route) =>
+    route.fulfill({
+      json: { client_name: "E2E App", redirect_host: "e2e.example.com", known_client: false },
+    })
+  )
+  await user.route("**/assistant/connect/e2e-expiring/approve", (route) =>
+    route.fulfill({ status: 404, json: { detail: "Not found" } })
+  )
+  await visit(user, "/connect?request=e2e-expiring")
+  await user.getByRole("button", { name: "Allow" }).click()
+  await expect(user.getByText("This link has expired or was already used.", { exact: false })).toBeVisible()
 })
