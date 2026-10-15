@@ -29,6 +29,12 @@ async def access(company_id: UUID, user_id: str) -> dict:
     )
 
 
+async def require(company_id, user_id: str, editor: bool = False) -> None:
+    """A member may look; only an editor (owner or admin) may change. Otherwise a 404, as if
+    the company weren't there, or a 403 for a viewer changing."""
+    company_access.require(await access(company_id, user_id), editor)
+
+
 async def interviews(ids) -> dict[UUID, dict]:
     """The interviews that exist among `ids`, by id: each with its company_id, title, and
     whether its questions are ready."""

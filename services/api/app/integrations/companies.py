@@ -47,6 +47,12 @@ async def access(company_id: UUID, user_id: str) -> dict:
     )
 
 
+async def require(company_id, user_id: str, editor: bool = False) -> None:
+    """A member may look; only an editor (owner or admin) may change. Otherwise a 404, as if
+    the company weren't there, or a 403 for a viewer changing."""
+    company_access.require(await access(company_id, user_id), editor)
+
+
 def _list_params(offset: int, limit: int, since: datetime | None, after: UUID | None) -> dict:
     params = {"offset": offset, "limit": limit}
 

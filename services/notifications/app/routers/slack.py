@@ -2,6 +2,7 @@ from fastapi import APIRouter, status
 from fastapi.responses import RedirectResponse
 from prepza_common.auth import CurrentUser
 
+from app.integrations import companies
 from app.schemas.slack import SlackKindsIn, SlackOut, SlackStartOut
 from app.services import slack
 
@@ -11,7 +12,7 @@ router = APIRouter(prefix="/slack", tags=["slack"])
 @router.get("")
 async def get_slack(company_id: str, user: CurrentUser) -> SlackOut:
     """The company's Slack channel and the notifications it gets; every member sees it."""
-    await slack.require(company_id, user.uid, editor=False)
+    await companies.require(company_id, user.uid)
 
     return await slack.overview(company_id)
 
@@ -19,7 +20,7 @@ async def get_slack(company_id: str, user: CurrentUser) -> SlackOut:
 @router.get("/start")
 async def start(company_id: str, user: CurrentUser) -> SlackStartOut:
     """Where "Add to Slack" goes: Slack's page to approve prepza and pick a channel."""
-    await slack.require(company_id, user.uid, editor=True)
+    await companies.require(company_id, user.uid, editor=True)
 
     return SlackStartOut(url=await slack.start(company_id, user.uid))
 
@@ -33,11 +34,11 @@ async def callback(state: str, code: str | None = None, error: str | None = None
 
 @router.put("/kinds", status_code=status.HTTP_204_NO_CONTENT)
 async def set_kinds(company_id: str, body: SlackKindsIn, user: CurrentUser) -> None:
-    await slack.require(company_id, user.uid, editor=True)
+    await companies.require(company_id, user.uid, editor=True)
     await slack.set_kinds(company_id, body.kinds)
 
 
 @router.delete("", status_code=status.HTTP_204_NO_CONTENT)
 async def disconnect(company_id: str, user: CurrentUser) -> None:
-    await slack.require(company_id, user.uid, editor=True)
+    await companies.require(company_id, user.uid, editor=True)
     await slack.disconnect(company_id)

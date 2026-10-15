@@ -49,6 +49,12 @@ async def access(company_id: str, user_id: str) -> dict:
     )
 
 
+async def require(company_id, user_id: str, editor: bool = False) -> None:
+    """A member may look; only an editor (owner or admin) may change. Otherwise a 404, as if
+    the company weren't there, or a 403 for a viewer changing."""
+    company_access.require(await access(company_id, user_id), editor)
+
+
 async def members(company_ids: list[str]) -> list[dict]:
     """The companies of those ids that still exist: {"id", "name", "members": [{"user_id",
     "editor"}]}, an editor being an owner or admin."""

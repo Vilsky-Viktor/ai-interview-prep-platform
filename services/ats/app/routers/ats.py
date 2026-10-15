@@ -17,7 +17,6 @@ from app.schemas.ats import (
 )
 from app.services import ats as integrations
 from app.services import ats_candidates as ats_candidates_service
-from app.services.access import require_company, require_editor
 from app.storage import ats, ats_candidates
 
 router = APIRouter(tags=["ats"])
@@ -27,7 +26,7 @@ router = APIRouter(tags=["ats"])
 async def list_connections(company_id: UUID, user: CurrentUser) -> IntegrationsOut:
     """The company's ATS connections; every member sees them, only owners and admins change
     them."""
-    await require_company(user, company_id)
+    await companies.require(company_id, user.uid)
     rows = await ats.connections(company_id)
 
     return IntegrationsOut(
@@ -48,7 +47,7 @@ async def list_connections(company_id: UUID, user: CurrentUser) -> IntegrationsO
 async def disconnect(company_id: UUID, provider: AtsProvider, user: CurrentUser) -> None:
     """Disconnects: Workable's notifications and Breezy HR's web hook are cancelled, then the key
     is deleted, and its linked jobs with it."""
-    await require_editor(user, company_id)
+    await companies.require(company_id, user.uid, editor=True)
     connection = await ats.connection(company_id, provider)
 
     if connection is not None:
@@ -59,7 +58,7 @@ async def disconnect(company_id: UUID, provider: AtsProvider, user: CurrentUser)
 
 @router.get("/{provider}/jobs")
 async def list_jobs(company_id: UUID, provider: AtsProvider, user: CurrentUser) -> list[AtsItemOut]:
-    await require_editor(user, company_id)
+    await companies.require(company_id, user.uid, editor=True)
     connection = await integrations.connected(company_id, provider)
 
     return [AtsItemOut(**job) for job in await integrations.jobs(connection)]
@@ -69,7 +68,7 @@ async def list_jobs(company_id: UUID, provider: AtsProvider, user: CurrentUser) 
 async def list_stages(
     company_id: UUID, provider: AtsProvider, job_id: str, user: CurrentUser
 ) -> list[AtsItemOut]:
-    await require_editor(user, company_id)
+    await companies.require(company_id, user.uid, editor=True)
     connection = await integrations.connected(company_id, provider)
 
     return [AtsItemOut(**stage) for stage in await integrations.stages(connection, job_id)]
@@ -81,7 +80,7 @@ async def job_text_of(
 ) -> JobTextOut:
     """A job's title, description, requirements and benefits as plain text, to make an
     interview from (the same limit as a pasted job description)."""
-    await require_editor(user, company_id)
+    await companies.require(company_id, user.uid, editor=True)
     connection = await integrations.connected(company_id, provider)
     found = await integrations.job(connection, job_id)
 
@@ -90,7 +89,7 @@ async def job_text_of(
 
 @router.get("/links")
 async def list_links(company_id: UUID, user: CurrentUser) -> list[JobLinkOut]:
-    await require_company(user, company_id)
+    await companies.require(company_id, user.uid)
     counts = await ats_candidates.counts(company_id)
     found = await ats.links(company_id)
     interviews = await companies.interviews({link.interview_id for link, _ in found})
@@ -117,7 +116,7 @@ async def list_links(company_id: UUID, user: CurrentUser) -> list[JobLinkOut]:
 async def add_link(company_id: UUID, body: JobLinkIn, user: CurrentUser) -> None:
     """Links an ATS job to one of the company's interviews: its candidates who reach the stage
     will get the interview. A job has one interview."""
-    await require_editor(user, company_id)
+    await companies.require(company_id, user.uid, editor=True)
     connection = await integrations.connected(company_id, body.provider)
     interview = (await companies.interviews([body.interview_id])).get(body.interview_id)
 
@@ -166,7 +165,7 @@ async def add_link(company_id: UUID, body: JobLinkIn, user: CurrentUser) -> None
 
 @router.delete("/links/{link_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def remove_link(company_id: UUID, link_id: UUID, user: CurrentUser) -> None:
-    await require_editor(user, company_id)
+    await companies.require(company_id, user.uid, editor=True)
     found = await ats.link(link_id)
 
     if found is not None and found[1].company_id == company_id:
@@ -180,5 +179,5 @@ async def remove_link(company_id: UUID, link_id: UUID, user: CurrentUser) -> Non
 async def retry_candidates(company_id: UUID, link_id: UUID, user: CurrentUser) -> None:
     """Invites again the candidates the ATS sent for this job who weren't invited (after a
     top-up, or once the pause is off)."""
-    await require_editor(user, company_id)
+    await companies.require(company_id, user.uid, editor=True)
     await ats_candidates_service.retry(company_id, link_id)

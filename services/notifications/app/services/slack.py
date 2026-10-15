@@ -5,7 +5,6 @@ from urllib.parse import urlencode
 
 import httpx
 from fastapi import HTTPException, status
-from prepza_common import company_access
 from prepza_common.encryption import decrypt, encrypt
 from prepza_common.notifications import NotificationKind, Recipient, notification
 
@@ -36,11 +35,6 @@ def available() -> bool:
     return bool(
         settings.slack_client_id and settings.slack_client_secret and settings.slack_encryption_key
     )
-
-
-async def require(company_id: str, user_id: str, editor: bool) -> None:
-    """A member may look; only an editor (owner or admin) may change."""
-    company_access.require(await companies.access(company_id, user_id), editor)
 
 
 async def overview(company_id: str) -> SlackOut:
@@ -93,7 +87,7 @@ async def finish(code: str | None, state: str, error: str | None) -> str:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "This Slack link expired: try again")
 
     company_id, user_id, _ = found
-    await require(company_id, user_id, editor=True)
+    await companies.require(company_id, user_id, editor=True)
     page = SLACK_PAGE.format(site=settings.site_url, company_id=company_id)
 
     if error or not code:

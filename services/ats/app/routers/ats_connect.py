@@ -16,7 +16,7 @@ from app.constants.ats import (
     AtsProvider,
 )
 from app.helpers.ats import subdomain
-from app.integrations import breezy, greenhouse, recruitee, teamtailor, workable
+from app.integrations import breezy, companies, greenhouse, recruitee, teamtailor, workable
 from app.integrations.errors import KeyRejected
 from app.schemas.ats import (
     BreezyIn,
@@ -28,7 +28,6 @@ from app.schemas.ats import (
     WorkableIn,
 )
 from app.services import ats as integrations
-from app.services.access import require_editor
 from app.storage import ats
 
 # Connecting each ATS, and the web hooks companies set up themselves (Greenhouse, Teamtailor,
@@ -50,7 +49,7 @@ async def kept_secret(company_id: UUID, provider: AtsProvider) -> str | None:
 async def connect_workable(company_id: UUID, body: WorkableIn, user: CurrentUser) -> None:
     """Connects Workable with an account's API access token, checked with one read first. A
     second connect replaces the key."""
-    await require_editor(user, company_id)
+    await companies.require(company_id, user.uid, editor=True)
     integrations.require_available()
     account = subdomain(body.account, ".workable.com")
 
@@ -81,7 +80,7 @@ async def connect_greenhouse(company_id: UUID, body: GreenhouseIn, user: Current
     """Connects Greenhouse with a Harvest V3 (OAuth) API credential, checked with one read
     first. Each connection gets its own secret key for the web hook the company sets up; a
     reconnect keeps it, so the web hook goes on working."""
-    await require_editor(user, company_id)
+    await companies.require(company_id, user.uid, editor=True)
     integrations.require_available()
     client_id, client_secret = body.client_id.strip(), body.client_secret.strip()
 
@@ -114,7 +113,7 @@ async def connect_teamtailor(company_id: UUID, body: TeamtailorIn, user: Current
     """Connects Teamtailor with an Admin, Read/Write API key, checked first in each region until
     one accepts it. The web hook's signature key comes later (Teamtailor makes it); a reconnect
     keeps it."""
-    await require_editor(user, company_id)
+    await companies.require(company_id, user.uid, editor=True)
     integrations.require_available()
     key = body.key.strip()
 
@@ -146,7 +145,7 @@ async def connect_recruitee(company_id: UUID, body: RecruiteeIn, user: CurrentUs
     """Connects Recruitee with the company's address and a personal API token (it acts as the
     person who made it), checked with one read first. The web hook's secret comes later
     (Recruitee shows it); a reconnect keeps it."""
-    await require_editor(user, company_id)
+    await companies.require(company_id, user.uid, editor=True)
     integrations.require_available()
     account = subdomain(body.account, RECRUITEE_DOMAIN)
 
@@ -182,7 +181,7 @@ async def connect_breezy(company_id: UUID, body: BreezyIn, user: CurrentUser) ->
     with one read first, then creates the web hook that sends its stage changes, whose secret
     Breezy gives only now. A reconnect replaces the earlier web hook; one that fails keeps the
     earlier connection, marked for reconnecting."""
-    await require_editor(user, company_id)
+    await companies.require(company_id, user.uid, editor=True)
     integrations.require_available()
     token = body.token.strip()
 
@@ -238,7 +237,7 @@ async def connect_breezy(company_id: UUID, body: BreezyIn, user: CurrentUser) ->
 async def webhook(company_id: UUID, provider: AtsProvider, user: CurrentUser) -> WebhookOut:
     """Where the company's web hook sends its events, and its secret key (empty while one the
     ATS makes isn't saved yet); owners and admins only."""
-    await require_editor(user, company_id)
+    await companies.require(company_id, user.uid, editor=True)
 
     if provider not in WEBHOOKS:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "No web hook to set up")
@@ -256,7 +255,7 @@ async def save_webhook_key(
 ) -> None:
     """Saves the secret key the ATS made for the company's web hook (Teamtailor, Recruitee): its
     events count from then on."""
-    await require_editor(user, company_id)
+    await companies.require(company_id, user.uid, editor=True)
 
     if provider not in PASTED_KEYS:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "No web hook key to save")
