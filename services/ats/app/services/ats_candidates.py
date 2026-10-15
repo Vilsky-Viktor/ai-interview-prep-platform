@@ -120,7 +120,7 @@ async def invite(row: AtsCandidate, connection: AtsConnection, interview: dict |
 async def refused(
     row: AtsCandidate, connection: AtsConnection, interview: dict, reason: str
 ) -> None:
-    """Kept as not invited, to retry; owners and admins hear why, and from which ATS."""
+    """Kept as not invited, to retry; the company's members hear why, and from which ATS."""
     name = ATS_NAMES[connection.provider]
     notice = ats_not_invited(
         interview["company_id"],
