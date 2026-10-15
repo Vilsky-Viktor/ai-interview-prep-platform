@@ -34,3 +34,11 @@ HEARTBEAT_SECONDS = 20
 # stream service has; a slot left by a crash frees itself after the longest a stream lives.
 MAX_STREAMS_PER_USER = 10
 STREAM_SLOT_SECONDS = 3600
+# A user's companies are kept this long, so every tab's (re)connect doesn't ask companies.
+COMPANY_IDS_SECONDS = 60
+COMPANY_IDS_KEY = "notifications:company-ids:{user_id}"
+# A stream ends after this long, so the tab reconnects and hears a company joined meanwhile;
+# sooner, after STREAM_RETRY_SECONDS, when companies didn't answer and it holds only the user's
+# own notifications.
+STREAM_REFRESH_SECONDS = 300
+STREAM_RETRY_SECONDS = 60

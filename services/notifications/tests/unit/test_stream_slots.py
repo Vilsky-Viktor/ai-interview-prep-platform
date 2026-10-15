@@ -27,7 +27,7 @@ class FakeRedis:
 def redis(monkeypatch):
     fake = FakeRedis()
 
-    async def changes(user_id):
+    async def changes(user_id, fresh=False):
         yield ": connected\n\n"
 
     monkeypatch.setattr(feed, "get_redis", lambda: fake)

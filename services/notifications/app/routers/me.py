@@ -11,10 +11,10 @@ router = APIRouter(prefix="/me", tags=["notifications"])
 
 
 @router.get("")
-async def get_feed(user: CurrentUser) -> FeedOut:
+async def get_feed(user: CurrentUser, fresh: bool = False) -> FeedOut:
     """The bell: the latest notifications, the user's own and their companies', and how many
-    came since they last opened it."""
-    return await feed(user.uid)
+    came since they last opened it; `fresh` reads the companies again (right after joining)."""
+    return await feed(user.uid, fresh)
 
 
 @router.post("/seen", status_code=status.HTTP_204_NO_CONTENT)
@@ -24,8 +24,8 @@ async def mark_seen(user: CurrentUser) -> None:
 
 
 @router.get("/stream")
-async def stream(user: CurrentUser) -> StreamingResponse:
+async def stream(user: CurrentUser, fresh: bool = False) -> StreamingResponse:
     """Server-sent events while a tab is open: {"new": true} as soon as a notification comes,
     so the bell reloads; heartbeat comments in between. At most MAX_STREAMS_PER_USER at once;
     the bell refreshes on its own without one."""
-    return event_stream(await open_stream(user.uid))
+    return event_stream(await open_stream(user.uid, fresh))

@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
+import { COMPANIES_CHANGED } from "@/constants/notifications"
 import { useAuth } from "@/components/auth-provider"
 import { useSignIn } from "@/components/sign-in-dialog"
 import { LinkStatus } from "@/components/link-status"
@@ -43,6 +44,8 @@ export function AdminInvite({ token }: { token: string }) {
       await apiFetch(`/companies/members/invites/${token}/accept`, {
         method: "POST",
       })
+      // The bell hears the company just joined at once.
+      window.dispatchEvent(new Event(COMPANIES_CHANGED))
       router.push("/companies")
     } catch (error) {
       const forbidden = error instanceof ApiError && error.status === 403

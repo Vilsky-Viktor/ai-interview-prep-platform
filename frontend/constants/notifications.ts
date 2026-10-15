@@ -46,3 +46,6 @@ export const NOTIFICATION_LOOKS: Record<
   member_joined: { icon: UserPlusIcon, alert: false },
   ownership_received: { icon: CrownIcon, alert: false },
 }
+// Sent on the window when the user joins a company: the bell reconnects with their companies
+// read again, so it hears the new one at once.
+export const COMPANIES_CHANGED = "prepza:companies-changed"

@@ -14,7 +14,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { MAX_BADGE_COUNT, NOTIFICATION_LOOKS } from "@/constants/notifications"
+import {
+  COMPANIES_CHANGED,
+  MAX_BADGE_COUNT,
+  NOTIFICATION_LOOKS,
+} from "@/constants/notifications"
 import { apiFetch } from "@/lib/api"
 import { watchNotifications } from "@/lib/notifications"
 import type { AppNotification, NotificationFeed } from "@/types/notifications"
@@ -67,10 +71,19 @@ export function NotificationBell() {
   const text = useNotificationText()
   const [feed, setFeed] = useState<NotificationFeed | null>(null)
 
-  const load = useCallback(() => {
-    apiFetch<NotificationFeed>("/notifications/me")
+  // Bumped when the user joins a company: the stream starts again with their companies fresh.
+  const [joined, setJoined] = useState(0)
+  const load = useCallback((fresh = false) => {
+    apiFetch<NotificationFeed>(`/notifications/me${fresh ? "?fresh=true" : ""}`)
       .then(setFeed)
       .catch(() => {})
+  }, [])
+
+  useEffect(() => {
+    const changed = () => setJoined((count) => count + 1)
+    window.addEventListener(COMPANIES_CHANGED, changed)
+
+    return () => window.removeEventListener(COMPANIES_CHANGED, changed)
   }, [])
 
   // Live while signed in: the stream says when something new came, and each (re)connect
@@ -81,10 +94,16 @@ export function NotificationBell() {
     }
 
     const controller = new AbortController()
-    void watchNotifications(controller.signal, load, load)
+    const fresh = joined > 0
+    void watchNotifications(
+      controller.signal,
+      () => load(fresh),
+      () => load(),
+      fresh
+    )
 
     return () => controller.abort()
-  }, [user, load])
+  }, [user, load, joined])
 
   if (!user || feed === null) {
     return null

@@ -3,23 +3,28 @@ import { authHeaders } from "@/lib/api"
 
 /** Keeps the bell's live stream open until `signal` aborts, calling onNew whenever a
  * notification comes, and onOpen each time it (re)connects so nothing missed meanwhile is lost.
- * A dropped stream (the server's hour is up, a deploy, the network) reconnects by itself. */
+ * A dropped stream (the server ends it every few minutes, a deploy, the network) reconnects by
+ * itself; with `fresh`, the first connect reads the user's companies again. */
 export async function watchNotifications(
   signal: AbortSignal,
   onOpen: () => void,
-  onNew: () => void
+  onNew: () => void,
+  fresh = false
 ) {
   let wait = RECONNECT_MS
+  // Only the first connect asks for the companies fresh (right after joining one).
+  let query = fresh ? "?fresh=true" : ""
 
   while (!signal.aborted) {
     try {
-      const response = await fetch("/api/notifications/me/stream", {
+      const response = await fetch(`/api/notifications/me/stream${query}`, {
         headers: await authHeaders(),
         signal,
       })
 
       if (response.ok && response.body) {
         wait = RECONNECT_MS
+        query = ""
         onOpen()
         const reader = response.body
           .pipeThrough(new TextDecoderStream())
@@ -46,7 +51,11 @@ export async function watchNotifications(
       return
     }
 
-    await new Promise((resolve) => setTimeout(resolve, wait))
+    // Spread out, so tabs that lost their streams together (a deploy) don't all come back at
+    // once.
+    await new Promise((resolve) =>
+      setTimeout(resolve, wait * (0.5 + Math.random()))
+    )
     wait = Math.min(wait * 2, MAX_RECONNECT_MS)
   }
 }

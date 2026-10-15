@@ -1,16 +1,24 @@
 import asyncio
+import logging
+import time
 from collections.abc import AsyncIterator
 
+import httpx
 from fastapi import HTTPException, status
+from prepza_common import memory_cache
 from prepza_common.constants import RATE_LIMITED
 from prepza_common.notifications import Recipient
 from prepza_common.sse import sse_event
 
 from app.constants.notifications import (
     CHANNEL,
+    COMPANY_IDS_KEY,
+    COMPANY_IDS_SECONDS,
     DROPDOWN_LIMIT,
     HEARTBEAT_SECONDS,
     MAX_STREAMS_PER_USER,
+    STREAM_REFRESH_SECONDS,
+    STREAM_RETRY_SECONDS,
     STREAM_SLOT_SECONDS,
 )
 from app.integrations import companies
@@ -20,16 +28,33 @@ from app.schemas.notifications import FeedOut, NotificationOut
 from app.storage import notifications
 from app.storage.notifications import Recipients
 
-
-async def recipients_of(user_id: str) -> Recipients:
-    """The user's own notifications, and those of every company they belong to."""
-    ids = await companies.company_ids(user_id)
-
-    return [(Recipient.USER, user_id), *((Recipient.COMPANY, company_id) for company_id in ids)]
+logger = logging.getLogger(__name__)
 
 
-async def feed(user_id: str) -> FeedOut:
-    recipients = await recipients_of(user_id)
+async def recipients_of(user_id: str, fresh: bool = False) -> tuple[Recipients, bool]:
+    """The user's own notifications, and those of every company they belong to (kept for
+    COMPANY_IDS_SECONDS, read again when `fresh`, as right after joining one); whether the
+    companies are in: when companies doesn't answer, only the user's own."""
+    key = COMPANY_IDS_KEY.format(user_id=user_id)
+    ids = None if fresh else memory_cache.get(key)
+
+    if ids is None:
+        try:
+            ids = await companies.company_ids(user_id)
+        except httpx.HTTPError as error:
+            logger.warning("Companies didn't say %s's companies: %s", user_id, error)
+
+            return [(Recipient.USER, user_id)], False
+
+        memory_cache.put(key, ids, COMPANY_IDS_SECONDS)
+
+    own = (Recipient.USER, user_id)
+
+    return [own, *((Recipient.COMPANY, company_id) for company_id in ids)], True
+
+
+async def feed(user_id: str, fresh: bool = False) -> FeedOut:
+    recipients, _ = await recipients_of(user_id, fresh)
     items = await notifications.latest(recipients, DROPDOWN_LIMIT)
 
     return FeedOut(
@@ -44,17 +69,19 @@ async def announce(recipient: str, recipient_id: str) -> None:
     await get_redis().publish(channel, "new")
 
 
-async def changes(user_id: str) -> AsyncIterator[str]:
+async def changes(user_id: str, fresh: bool = False) -> AsyncIterator[str]:
     """Server-sent events for one open tab: {"new": true} whenever one of the user's recipients
     gets a notification, and a comment every HEARTBEAT_SECONDS so the connection stays open. The
-    instance's tabs share one Redis subscription."""
-    recipients = await recipients_of(user_id)
+    instance's tabs share one Redis subscription. It ends after STREAM_REFRESH_SECONDS (or
+    STREAM_RETRY_SECONDS without the companies), and the tab reconnects with what's current."""
+    recipients, complete = await recipients_of(user_id, fresh)
     channels = [CHANNEL.format(recipient=kind, recipient_id=id_) for kind, id_ in recipients]
+    ends_at = time.monotonic() + (STREAM_REFRESH_SECONDS if complete else STREAM_RETRY_SECONDS)
 
     async with listening(channels) as heard:
         yield ": connected\n\n"
 
-        while True:
+        while time.monotonic() < ends_at:
             try:
                 await asyncio.wait_for(heard.wait(), HEARTBEAT_SECONDS)
             except TimeoutError:
@@ -67,7 +94,7 @@ async def changes(user_id: str) -> AsyncIterator[str]:
             yield sse_event({"new": True})
 
 
-async def open_stream(user_id: str) -> AsyncIterator[str]:
+async def open_stream(user_id: str, fresh: bool = False) -> AsyncIterator[str]:
     """One open tab's stream, in one of the user's MAX_STREAMS_PER_USER slots; refused (429)
     when they're all taken. The slot is given back when the stream ends."""
     key = f"streams:user:{user_id}"
@@ -80,7 +107,7 @@ async def open_stream(user_id: str) -> AsyncIterator[str]:
 
         raise HTTPException(status.HTTP_429_TOO_MANY_REQUESTS, RATE_LIMITED)
 
-    return in_slot(key, changes(user_id))
+    return in_slot(key, changes(user_id, fresh))
 
 
 async def in_slot(key: str, stream: AsyncIterator[str]) -> AsyncIterator[str]:
