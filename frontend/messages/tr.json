@@ -65,7 +65,8 @@
     "compare": "Karşılaştır",
     "guides": "Rehberler",
     "apiDocs": "Geliştirici belgeleri",
-    "news": "Haberler"
+    "news": "Haberler",
+    "accessibility": "Erişilebilirlik"
   },
   "signIn": {
     "title": "Giriş yap",
@@ -2071,5 +2072,31 @@
     "footnote": "Bağlantısını istediğiniz zaman bir şirketin Entegrasyonlar → Yapay zekâ uygulamaları bölümünden kesebilirsiniz.",
     "expired": "Bu bağlantının süresi dolmuş ya da bağlantı zaten kullanılmış. Bağlamaya yapay zekâ uygulamanızdan yeniden başlayın.",
     "loadFailed": "Bu istek yüklenemedi. Lütfen tekrar deneyin."
+  },
+  "accessibility": {
+    "title": "Erişilebilirlik",
+    "description": "prepza'nın engelli kişiler için nasıl çalıştığı, nerede yetersiz kaldığı ve bunu bize nasıl bildirebileceğiniz.",
+    "intro": "Herkesin prepza'yı kullanabilmesini istiyoruz: bir şirketin size gönderdiği mülakata girmek, pratik yapmak ve bir şirketin işe alım sürecini yürütmek için. Web İçeriği Erişilebilirlik Yönergeleri (WCAG) 2.2'nin AA düzeyini karşılamayı hedefliyoruz.",
+    "done": {
+      "title": "Neler yapıyoruz",
+      "themes": "Cihazınızın ayarına göre açık ve koyu tema.",
+      "contrast": "Bir şirketin mülakat sayfaları için seçtiği renkler, üzerlerindeki metin zor okunacaksa (WCAG kontrastının altında) reddedilir.",
+      "languages": "Site 23 dilde; sağdan sola yazılan dillerde sağdan sola.",
+      "phones": "Sayfalar telefon ekranlarına sığar ve yakınlaştırdığınızda da çalışır.",
+      "text": "Mülakat soruları cevap seçenekleri olan metinlerdir: ses veya video gerekmez.",
+      "extraTime": "Bir şirket size her soru için ek süre verebilir. Başlamadan önce bunu ya da başka bir düzenlemeyi şirketten isteyin; nedenini söylemek zorunda değilsiniz."
+    },
+    "limits": {
+      "title": "Eksik kalanlar",
+      "timed": "Mülakat soruları, şirketin değerlendirmesinin gerektirdiği gibi sürelidir. Daha fazla süreye ihtiyacınız varsa başlamadan önce şirketten ek süre isteyin.",
+      "audit": "prepza henüz bağımsız olarak denetlenmedi; bu yüzden bazı bölümler WCAG 2.2 AA'yı karşılamayabilir.",
+      "providers": "Kredi ödemesi (Paddle'ın ödeme sayfası) ve “Ben robot değilim” doğrulaması (Cloudflare Turnstile) bu sağlayıcılar tarafından, kendi erişilebilirlikleriyle yürütülür."
+    },
+    "feedback": {
+      "title": "Bize bildirin",
+      "text": "prepza'da kullanmakta zorlandığınız bir şey varsa ya da onu başka bir biçimde istiyorsanız <email></email> adresine yazın. 14 gün içinde yanıt veriyoruz.",
+      "authority": "Yanıtımızdan memnun kalmazsanız Estonya Tüketiciyi Koruma ve Teknik Düzenleme Kurumuna (TTJA) başvurabilirsiniz."
+    },
+    "reviewed": "Son gözden geçirme: {date}."
   }
 }

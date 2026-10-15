@@ -10,7 +10,8 @@ Settings and Top up. The footer has three columns: skills tests by role, pre-emp
 AI interviews, comparisons and guides; the privacy policy, terms, the legal docs (documents for \
 companies) and the developer docs (the API, web hooks, the SDK and objects); free practice, the FAQ, an about page (the company and its solo founder, Viktor \
 Vilskyi), a news page with prepza's latest updates, and a contact page with a form (name, email, \
-message) that reaches the prepza team. \
+message) that reaches the prepza team, and an accessibility statement (what works for people with \
+disabilities, what falls short, and where to report a problem: hello@prepza.ai). \
 Signing in is with Google, LinkedIn or GitHub.
 
 Companies:

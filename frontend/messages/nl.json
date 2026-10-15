@@ -65,7 +65,8 @@
     "compare": "Vergelijken",
     "guides": "Gidsen",
     "apiDocs": "Ontwikkelaarsdocumentatie",
-    "news": "Nieuws"
+    "news": "Nieuws",
+    "accessibility": "Toegankelijkheid"
   },
   "signIn": {
     "title": "Inloggen",
@@ -2068,5 +2069,31 @@
     "footnote": "Ontkoppel hem wanneer je wilt in Integraties → AI-apps van een bedrijf.",
     "expired": "Deze link is verlopen of al gebruikt. Begin opnieuw met koppelen vanuit je AI-app.",
     "loadFailed": "Dit verzoek kon niet worden geladen. Probeer het opnieuw."
+  },
+  "accessibility": {
+    "title": "Toegankelijkheid",
+    "description": "Hoe prepza werkt voor mensen met een beperking, wat nog tekortschiet en hoe je het ons laat weten.",
+    "intro": "We willen dat iedereen prepza kan gebruiken: om een interview te doen dat een bedrijf je stuurt, om te oefenen en om de werving van een bedrijf te regelen. We streven naar niveau AA van de Richtlijnen voor Toegankelijkheid van Webcontent (WCAG) 2.2.",
+    "done": {
+      "title": "Wat we doen",
+      "themes": "Een licht en een donker thema, volgens de instelling van je apparaat.",
+      "contrast": "Kleuren die een bedrijf kiest voor zijn interviewpagina's worden geweigerd als tekst erop moeilijk leesbaar zou zijn (onder het WCAG-contrast).",
+      "languages": "De site in 23 talen, van rechts naar links waar de taal zo wordt geschreven.",
+      "phones": "Pagina's passen op telefoonschermen en werken als je inzoomt.",
+      "text": "Interviewvragen zijn tekst met antwoordopties: audio of video is niet nodig.",
+      "extraTime": "Een bedrijf kan je per vraag extra tijd geven. Vraag het bedrijf daarom, of om een andere aanpassing, voordat je begint; je hoeft niet te zeggen waarom."
+    },
+    "limits": {
+      "title": "Wat nog tekortschiet",
+      "timed": "Interviewvragen hebben een tijdslimiet, zoals de beoordeling van het bedrijf vereist. Heb je meer tijd nodig, vraag het bedrijf dan om extra tijd voordat je begint.",
+      "audit": "prepza is nog niet onafhankelijk getoetst, dus sommige onderdelen voldoen mogelijk niet aan WCAG 2.2 AA.",
+      "providers": "Betalen voor credits (de betaalpagina van Paddle) en de controle “Ik ben geen robot” (Cloudflare Turnstile) worden door die aanbieders verzorgd, met hun eigen toegankelijkheid."
+    },
+    "feedback": {
+      "title": "Laat het ons weten",
+      "text": "Is iets op prepza lastig voor je om te gebruiken, of heb je het in een andere vorm nodig? Schrijf naar <email></email>. We antwoorden binnen 14 dagen.",
+      "authority": "Ben je niet tevreden met ons antwoord, dan kun je contact opnemen met de Estse Autoriteit voor Consumentenbescherming en Technische Regulering (TTJA)."
+    },
+    "reviewed": "Laatst herzien: {date}."
   }
 }

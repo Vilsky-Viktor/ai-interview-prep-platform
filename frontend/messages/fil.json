@@ -65,7 +65,8 @@
     "compare": "Ikumpara",
     "guides": "Mga gabay",
     "apiDocs": "Dokumentasyon para sa mga developer",
-    "news": "Balita"
+    "news": "Balita",
+    "accessibility": "Accessibility"
   },
   "signIn": {
     "title": "Mag-sign in",
@@ -2076,5 +2077,31 @@
     "footnote": "I-disconnect ito anumang oras sa Mga integration → Mga AI app ng isang kumpanya.",
     "expired": "Expired na o nagamit na ang link na ito. Simulan ulit ang pag-connect mula sa AI app mo.",
     "loadFailed": "Hindi ma-load ang request na ito. Pakisubukang muli."
+  },
+  "accessibility": {
+    "title": "Accessibility",
+    "description": "Paano gumagana ang prepza para sa mga taong may kapansanan, ano pa ang kulang, at paano kami sasabihan.",
+    "intro": "Gusto naming magamit ng lahat ang prepza: para kumuha ng interview na ipinadala sa iyo ng isang kumpanya, para mag-practice, at para patakbuhin ang hiring ng isang kumpanya. Layunin naming maabot ang level AA ng Web Content Accessibility Guidelines (WCAG) 2.2.",
+    "done": {
+      "title": "Ang ginagawa namin",
+      "themes": "Light at dark na tema, ayon sa setting ng device mo.",
+      "contrast": "Tinatanggihan ang mga kulay na pinipili ng kumpanya para sa mga page ng interview nito kapag mahirap basahin ang text sa mga ito (mas mababa sa WCAG contrast).",
+      "languages": "Ang site sa 23 wika, mula kanan pakaliwa sa mga wikang ganoon isinusulat.",
+      "phones": "Kasya ang mga page sa screen ng phone at gumagana kahit naka-zoom in.",
+      "text": "Ang mga tanong sa interview ay text na may mga pagpipiliang sagot: hindi kailangan ng audio o video.",
+      "extraTime": "Puwedeng bigyan ka ng kumpanya ng dagdag na oras sa bawat tanong. Hingin ito sa kumpanya, o ibang accommodation, bago ka magsimula; hindi mo kailangang sabihin kung bakit."
+    },
+    "limits": {
+      "title": "Ang kulang pa",
+      "timed": "May takdang oras ang mga tanong sa interview, ayon sa hinihingi ng assessment ng kumpanya. Kung kailangan mo ng mas maraming oras, humingi ng dagdag na oras sa kumpanya bago ka magsimula.",
+      "audit": "Hindi pa independiyenteng na-audit ang prepza, kaya maaaring may mga bahaging hindi pa umaabot sa WCAG 2.2 AA.",
+      "providers": "Ang pagbabayad para sa credits (checkout ng Paddle) at ang “Hindi ako robot” na check (Cloudflare Turnstile) ay pinapatakbo ng mga provider na iyon, ayon sa sarili nilang accessibility."
+    },
+    "feedback": {
+      "title": "Sabihin sa amin",
+      "text": "Kung may bagay sa prepza na mahirap mong gamitin, o kailangan mo ito sa ibang anyo, sumulat sa <email></email>. Sumasagot kami sa loob ng 14 na araw.",
+      "authority": "Kung hindi ka kuntento sa sagot namin, puwede kang makipag-ugnayan sa Consumer Protection and Technical Regulatory Authority ng Estonia (TTJA)."
+    },
+    "reviewed": "Huling sinuri: {date}."
   }
 }

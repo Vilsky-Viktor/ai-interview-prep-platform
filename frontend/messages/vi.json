@@ -65,7 +65,8 @@
     "compare": "So sánh",
     "guides": "Hướng dẫn",
     "apiDocs": "Tài liệu cho nhà phát triển",
-    "news": "Tin tức"
+    "news": "Tin tức",
+    "accessibility": "Khả năng tiếp cận"
   },
   "signIn": {
     "title": "Đăng nhập",
@@ -2068,5 +2069,31 @@
     "footnote": "Ngắt kết nối bất cứ lúc nào trong Tích hợp → Ứng dụng AI của một công ty.",
     "expired": "Liên kết này đã hết hạn hoặc đã được dùng. Hãy bắt đầu kết nối lại từ ứng dụng AI của bạn.",
     "loadFailed": "Không thể tải yêu cầu này. Vui lòng thử lại."
+  },
+  "accessibility": {
+    "title": "Khả năng tiếp cận",
+    "description": "prepza hoạt động thế nào với người khuyết tật, điều gì còn thiếu sót và cách báo cho chúng tôi.",
+    "intro": "Chúng tôi muốn ai cũng dùng được prepza: để làm bài phỏng vấn một công ty gửi cho bạn, để luyện tập và để điều hành việc tuyển dụng của một công ty. Chúng tôi hướng tới mức AA của Hướng dẫn về Khả năng Tiếp cận Nội dung Web (WCAG) 2.2.",
+    "done": {
+      "title": "Những gì chúng tôi làm",
+      "themes": "Giao diện sáng và tối, theo cài đặt của thiết bị bạn.",
+      "contrast": "Màu mà công ty chọn cho các trang phỏng vấn của mình sẽ bị từ chối nếu chữ trên đó khó đọc (độ tương phản dưới mức WCAG).",
+      "languages": "Trang web có 23 ngôn ngữ, hiển thị từ phải sang trái với các ngôn ngữ viết theo cách đó.",
+      "phones": "Các trang vừa với màn hình điện thoại và vẫn dùng được khi phóng to.",
+      "text": "Câu hỏi phỏng vấn là văn bản kèm các lựa chọn trả lời: không cần âm thanh hay video.",
+      "extraTime": "Công ty có thể cho bạn thêm thời gian ở mỗi câu hỏi. Hãy đề nghị công ty điều này, hoặc một sự điều chỉnh hỗ trợ khác, trước khi bắt đầu; bạn không cần nói lý do."
+    },
+    "limits": {
+      "title": "Những điểm còn thiếu sót",
+      "timed": "Câu hỏi phỏng vấn có giới hạn thời gian, theo yêu cầu đánh giá của công ty. Nếu cần thêm thời gian, hãy đề nghị công ty cho thêm thời gian trước khi bắt đầu.",
+      "audit": "prepza chưa được kiểm định độc lập, nên một số phần có thể chưa đáp ứng WCAG 2.2 AA.",
+      "providers": "Việc thanh toán credit (trang thanh toán của Paddle) và bước kiểm tra “Tôi không phải là người máy” (Cloudflare Turnstile) do các nhà cung cấp đó vận hành, theo khả năng tiếp cận riêng của họ."
+    },
+    "feedback": {
+      "title": "Báo cho chúng tôi",
+      "text": "Nếu có gì trên prepza khó dùng với bạn, hoặc bạn cần ở dạng khác, hãy viết tới <email></email>. Chúng tôi trả lời trong vòng 14 ngày.",
+      "authority": "Nếu không hài lòng với câu trả lời của chúng tôi, bạn có thể liên hệ Cơ quan Bảo vệ Người tiêu dùng và Quản lý Kỹ thuật Estonia (TTJA)."
+    },
+    "reviewed": "Xem xét lần cuối: {date}."
   }
 }

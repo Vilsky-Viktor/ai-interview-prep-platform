@@ -65,7 +65,8 @@
     "compare": "Compare",
     "guides": "Guides",
     "apiDocs": "Developer docs",
-    "news": "News"
+    "news": "News",
+    "accessibility": "Accessibility"
   },
   "signIn": {
     "title": "Sign in",
@@ -2072,5 +2073,31 @@
     "footnote": "Disconnect it any time in a company's Integrations → AI apps.",
     "expired": "This link has expired or was already used. Start connecting again from your AI app.",
     "loadFailed": "Couldn't load this request. Please try again."
+  },
+  "accessibility": {
+    "title": "Accessibility",
+    "description": "How prepza works for people with disabilities, what falls short, and how to tell us.",
+    "intro": "We want everyone to be able to use prepza: to take an interview a company sends you, to practise, and to run a company's hiring. We aim to meet level AA of the Web Content Accessibility Guidelines (WCAG) 2.2.",
+    "done": {
+      "title": "What we do",
+      "themes": "Light and dark themes, following your device's setting.",
+      "contrast": "Colors a company chooses for its interview pages are refused when text on them would be hard to read (below WCAG contrast).",
+      "languages": "The site in 23 languages, right to left where the language is written that way.",
+      "phones": "Pages fit phone screens and work when you zoom in.",
+      "text": "Interview questions are text with answer options: no audio or video is needed.",
+      "extraTime": "A company can give you extra time on each question. Ask the company for it, or for another accommodation, before you start; you don't have to say why."
+    },
+    "limits": {
+      "title": "What falls short",
+      "timed": "Interview questions are timed, as the company's assessment requires. If you need more time, ask the company for extra time before you start.",
+      "audit": "prepza hasn't been audited independently yet, so some parts may not meet WCAG 2.2 AA.",
+      "providers": "Paying for credits (Paddle's checkout) and the \"I'm not a robot\" check (Cloudflare Turnstile) are run by those providers, under their own accessibility."
+    },
+    "feedback": {
+      "title": "Tell us",
+      "text": "If something on prepza is hard for you to use, or you need it in another form, write to <email></email>. We answer within 14 days.",
+      "authority": "If you aren't satisfied with our answer, you can contact the Estonian Consumer Protection and Technical Regulatory Authority (TTJA)."
+    },
+    "reviewed": "Last reviewed {date}."
   }
 }

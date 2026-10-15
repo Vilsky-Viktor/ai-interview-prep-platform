@@ -65,7 +65,8 @@
     "compare": "Porównanie",
     "guides": "Poradniki",
     "apiDocs": "Dokumentacja dla deweloperów",
-    "news": "Aktualności"
+    "news": "Aktualności",
+    "accessibility": "Dostępność"
   },
   "signIn": {
     "title": "Zaloguj się",
@@ -2072,5 +2073,31 @@
     "footnote": "Odłączysz ją w każdej chwili w zakładce Integracje → Aplikacje AI firmy.",
     "expired": "Ten link wygasł lub został już użyty. Zacznij łączenie od nowa w swojej aplikacji AI.",
     "loadFailed": "Nie udało się wczytać tej prośby. Spróbuj ponownie."
+  },
+  "accessibility": {
+    "title": "Dostępność",
+    "description": "Jak prepza działa dla osób z niepełnosprawnościami, czego jeszcze brakuje i jak nam to zgłosić.",
+    "intro": "Chcemy, aby każdy mógł korzystać z prepza: przejść rozmowę, którą wysyła Ci firma, ćwiczyć i prowadzić rekrutację w firmie. Dążymy do spełnienia poziomu AA Wytycznych dla dostępności treści internetowych (WCAG) 2.2.",
+    "done": {
+      "title": "Co robimy",
+      "themes": "Jasny i ciemny motyw, zgodnie z ustawieniem Twojego urządzenia.",
+      "contrast": "Kolory, które firma wybiera dla stron swojej rozmowy, są odrzucane, gdy tekst na nich byłby trudny do odczytania (kontrast poniżej wymagań WCAG).",
+      "languages": "Strona w 23 językach, od prawej do lewej tam, gdzie język tak się zapisuje.",
+      "phones": "Strony mieszczą się na ekranach telefonów i działają po powiększeniu.",
+      "text": "Pytania w rozmowie to tekst z opcjami odpowiedzi: nie trzeba audio ani wideo.",
+      "extraTime": "Firma może dać Ci dodatkowy czas na każde pytanie. Zanim zaczniesz, poproś firmę o niego albo o inne dostosowanie; nie musisz mówić dlaczego."
+    },
+    "limits": {
+      "title": "Czego jeszcze brakuje",
+      "timed": "Pytania w rozmowie mają limit czasu, bo wymaga tego ocena prowadzona przez firmę. Jeśli potrzebujesz więcej czasu, przed startem poproś firmę o dodatkowy czas.",
+      "audit": "prepza nie przeszła jeszcze niezależnego audytu, więc niektóre części mogą nie spełniać WCAG 2.2 AA.",
+      "providers": "Płatność za kredyty (strona płatności Paddle) i weryfikację „Nie jestem robotem” (Cloudflare Turnstile) obsługują ci dostawcy, z ich własną dostępnością."
+    },
+    "feedback": {
+      "title": "Daj nam znać",
+      "text": "Jeśli coś w prepza jest dla Ciebie trudne w użyciu albo potrzebujesz tego w innej formie, napisz na <email></email>. Odpowiadamy w ciągu 14 dni.",
+      "authority": "Jeśli nasza odpowiedź Cię nie zadowala, możesz zwrócić się do Estońskiego Urzędu Ochrony Konsumentów i Regulacji Technicznych (TTJA)."
+    },
+    "reviewed": "Ostatni przegląd: {date}."
   }
 }

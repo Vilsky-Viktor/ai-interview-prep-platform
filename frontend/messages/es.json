@@ -65,7 +65,8 @@
     "compare": "Comparar",
     "guides": "Guías",
     "apiDocs": "Documentación para desarrolladores",
-    "news": "Novedades"
+    "news": "Novedades",
+    "accessibility": "Accesibilidad"
   },
   "signIn": {
     "title": "Iniciar sesión",
@@ -2072,5 +2073,31 @@
     "footnote": "Desconéctala cuando quieras en Integraciones → Apps de IA de una empresa.",
     "expired": "Este enlace ha caducado o ya se usó. Vuelve a empezar la conexión desde tu app de IA.",
     "loadFailed": "No se pudo cargar esta solicitud. Inténtalo de nuevo."
+  },
+  "accessibility": {
+    "title": "Accesibilidad",
+    "description": "Cómo funciona prepza para las personas con discapacidad, qué aún no está a la altura y cómo avisarnos.",
+    "intro": "Queremos que todo el mundo pueda usar prepza: para hacer una entrevista que te envía una empresa, para practicar y para gestionar la selección de personal de una empresa. Nuestro objetivo es cumplir el nivel AA de las Pautas de Accesibilidad para el Contenido Web (WCAG) 2.2.",
+    "done": {
+      "title": "Lo que hacemos",
+      "themes": "Temas claro y oscuro, según la configuración de tu dispositivo.",
+      "contrast": "Los colores que una empresa elige para sus páginas de entrevista se rechazan si el texto sobre ellos fuera difícil de leer (por debajo del contraste de las WCAG).",
+      "languages": "El sitio en 23 idiomas, de derecha a izquierda en los idiomas que se escriben así.",
+      "phones": "Las páginas se adaptan a pantallas de móvil y funcionan al ampliar.",
+      "text": "Las preguntas de la entrevista son texto con opciones de respuesta: no hace falta audio ni vídeo.",
+      "extraTime": "Una empresa puede darte tiempo adicional en cada pregunta. Pídeselo a la empresa, o pide otro ajuste, antes de empezar; no tienes que decir por qué."
+    },
+    "limits": {
+      "title": "Lo que aún no está a la altura",
+      "timed": "Las preguntas de la entrevista tienen tiempo limitado, como exige la evaluación de la empresa. Si necesitas más tiempo, pide a la empresa tiempo adicional antes de empezar.",
+      "audit": "prepza aún no ha pasado una auditoría independiente, así que algunas partes podrían no cumplir las WCAG 2.2 AA.",
+      "providers": "El pago de créditos (la página de pago de Paddle) y la comprobación «No soy un robot» (Cloudflare Turnstile) los gestionan esos proveedores, con su propia accesibilidad."
+    },
+    "feedback": {
+      "title": "Cuéntanoslo",
+      "text": "Si algo en prepza te resulta difícil de usar, o lo necesitas en otro formato, escribe a <email></email>. Respondemos en un plazo de 14 días.",
+      "authority": "Si no te satisface nuestra respuesta, puedes contactar con la Autoridad Estonia de Protección del Consumidor y Regulación Técnica (TTJA)."
+    },
+    "reviewed": "Última revisión: {date}."
   }
 }

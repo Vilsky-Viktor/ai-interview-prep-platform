@@ -65,7 +65,8 @@
     "compare": "Võrdlus",
     "guides": "Juhendid",
     "apiDocs": "Arendajate dokumentatsioon",
-    "news": "Uudised"
+    "news": "Uudised",
+    "accessibility": "Ligipääsetavus"
   },
   "signIn": {
     "title": "Logi sisse",
@@ -2076,5 +2077,31 @@
     "footnote": "Ühenduse saad igal ajal katkestada ettevõtte vahekaardil Integratsioonid → AI-rakendused.",
     "expired": "See link on aegunud või juba kasutatud. Alusta ühendamist uuesti oma AI-rakendusest.",
     "loadFailed": "Seda päringut ei õnnestunud laadida. Proovi uuesti."
+  },
+  "accessibility": {
+    "title": "Ligipääsetavus",
+    "description": "Kuidas prepza toimib puudega inimestele, mis veel ei vasta ootustele ja kuidas sellest meile teada anda.",
+    "intro": "Tahame, et kõik saaksid prepzat kasutada: teha intervjuud, mille ettevõte sulle saadab, harjutada ja juhtida ettevõtte värbamist. Meie eesmärk on vastata veebisisu juurdepääsetavuse suuniste (WCAG) 2.2 tasemele AA.",
+    "done": {
+      "title": "Mida me teeme",
+      "themes": "Hele ja tume teema vastavalt sinu seadme seadistusele.",
+      "contrast": "Värvid, mille ettevõte oma intervjuulehtedele valib, lükatakse tagasi, kui neil olevat teksti oleks raske lugeda (kontrast alla WCAG nõude).",
+      "languages": "Sait 23 keeles, paremalt vasakule neis keeltes, mida nii kirjutatakse.",
+      "phones": "Lehed mahuvad telefoniekraanile ja toimivad ka suurendatult.",
+      "text": "Intervjuu küsimused on tekst koos vastusevariantidega: heli ega videot pole vaja.",
+      "extraTime": "Ettevõte võib anda sulle igale küsimusele lisaaega. Küsi ettevõttelt seda või mõnda muud kohandust enne alustamist; põhjust ei pea ütlema."
+    },
+    "limits": {
+      "title": "Mis veel ei vasta ootustele",
+      "timed": "Intervjuu küsimustel on ajapiirang, nagu ettevõtte hindamine nõuab. Kui vajad rohkem aega, küsi ettevõttelt enne alustamist lisaaega.",
+      "audit": "prepzat pole veel sõltumatult auditeeritud, seega ei pruugi mõned osad vastata WCAG 2.2 AA nõuetele.",
+      "providers": "Krediitide eest maksmist (Paddle'i makseleht) ja kontrolli „Ma ei ole robot” (Cloudflare Turnstile) haldavad need teenusepakkujad, oma ligipääsetavusega."
+    },
+    "feedback": {
+      "title": "Anna meile teada",
+      "text": "Kui midagi prepzas on sul raske kasutada või vajad seda muul kujul, kirjuta aadressil <email></email>. Vastame 14 päeva jooksul.",
+      "authority": "Kui sa meie vastusega rahul ei ole, võid pöörduda Tarbijakaitse ja Tehnilise Järelevalve Ameti (TTJA) poole."
+    },
+    "reviewed": "Viimati üle vaadatud: {date}."
   }
 }

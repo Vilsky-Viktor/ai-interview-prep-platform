@@ -65,7 +65,8 @@
     "compare": "Bandingkan",
     "guides": "Panduan",
     "apiDocs": "Dokumentasi pengembang",
-    "news": "Berita"
+    "news": "Berita",
+    "accessibility": "Aksesibilitas"
   },
   "signIn": {
     "title": "Masuk",
@@ -2072,5 +2073,31 @@
     "footnote": "Putuskan kapan saja di Integrasi → Aplikasi AI sebuah perusahaan.",
     "expired": "Tautan ini sudah kedaluwarsa atau sudah dipakai. Mulai hubungkan lagi dari aplikasi AI-mu.",
     "loadFailed": "Permintaan ini tidak bisa dimuat. Coba lagi."
+  },
+  "accessibility": {
+    "title": "Aksesibilitas",
+    "description": "Cara prepza bekerja bagi penyandang disabilitas, apa yang masih kurang, dan cara memberi tahu kami.",
+    "intro": "Kami ingin semua orang bisa memakai prepza: untuk mengikuti wawancara yang dikirim perusahaan kepadamu, untuk berlatih, dan untuk menjalankan rekrutmen perusahaan. Kami menargetkan level AA dari Pedoman Aksesibilitas Konten Web (WCAG) 2.2.",
+    "done": {
+      "title": "Yang kami lakukan",
+      "themes": "Tema terang dan gelap, mengikuti pengaturan perangkatmu.",
+      "contrast": "Warna yang dipilih perusahaan untuk halaman wawancaranya ditolak jika teks di atasnya akan sulit dibaca (di bawah kontras WCAG).",
+      "languages": "Situs dalam 23 bahasa, dari kanan ke kiri untuk bahasa yang ditulis seperti itu.",
+      "phones": "Halaman pas di layar ponsel dan tetap berfungsi saat diperbesar.",
+      "text": "Pertanyaan wawancara berupa teks dengan pilihan jawaban: tidak perlu audio atau video.",
+      "extraTime": "Perusahaan bisa memberimu waktu tambahan di setiap pertanyaan. Mintalah kepada perusahaan, atau minta akomodasi lain, sebelum kamu mulai; kamu tidak perlu menyebutkan alasannya."
+    },
+    "limits": {
+      "title": "Yang masih kurang",
+      "timed": "Pertanyaan wawancara diberi batas waktu, sesuai kebutuhan penilaian perusahaan. Jika butuh waktu lebih, minta waktu tambahan kepada perusahaan sebelum kamu mulai.",
+      "audit": "prepza belum diaudit secara independen, jadi beberapa bagian mungkin belum memenuhi WCAG 2.2 AA.",
+      "providers": "Pembayaran kredit (halaman pembayaran Paddle) dan pemeriksaan “Saya bukan robot” (Cloudflare Turnstile) dijalankan oleh penyedia tersebut, dengan aksesibilitas mereka sendiri."
+    },
+    "feedback": {
+      "title": "Beri tahu kami",
+      "text": "Jika ada yang sulit kamu gunakan di prepza, atau kamu membutuhkannya dalam bentuk lain, tulis ke <email></email>. Kami menjawab dalam 14 hari.",
+      "authority": "Jika kamu tidak puas dengan jawaban kami, kamu bisa menghubungi Otoritas Perlindungan Konsumen dan Regulasi Teknis Estonia (TTJA)."
+    },
+    "reviewed": "Terakhir ditinjau: {date}."
   }
 }

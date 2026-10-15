@@ -24,6 +24,7 @@ test("the footer groups its links by product, resources and company", async ({ p
     /contact us/i,
     /privacy/i,
     /terms/i,
+    /accessibility/i,
   ]);
 });
 
@@ -36,5 +37,23 @@ test("the footer and the contact page name the company that runs prepza", async 
   );
   await expect(page.getByRole("main")).toContainText(
     "prepza is run by Arcolabs OÜ, registry code 17587452, Sepapaja tn 6, 15551 Tallinn, Harju maakond, Estonia. Email: hello@prepza.ai"
+  );
+});
+
+// The accessibility statement: what works, what falls short, and where to write, in the
+// visitor's language.
+test("the accessibility statement says where to report a problem", async ({ page }) => {
+  await page.goto("/accessibility");
+  const main = page.getByRole("main");
+  await expect(main.getByRole("heading", { level: 1 })).toHaveText(/accessibility/i);
+  await expect(main.getByRole("link", { name: "hello@prepza.ai" })).toHaveAttribute(
+    "href",
+    "mailto:hello@prepza.ai"
+  );
+  await expect(main).toContainText("WCAG 2.2");
+
+  await page.goto("/de/accessibility");
+  await expect(page.getByRole("main").getByRole("heading", { level: 1 })).not.toHaveText(
+    /^accessibility\.?$/i
   );
 });

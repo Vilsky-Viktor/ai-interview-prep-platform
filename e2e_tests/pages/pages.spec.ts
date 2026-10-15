@@ -11,6 +11,7 @@ const PAGES = [
   "/faq",
   "/about",
   "/contact",
+  "/accessibility",
   "/practice",
   "/tests",
   "/compare",
