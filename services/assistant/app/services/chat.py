@@ -11,6 +11,7 @@ from langchain_core.messages import (
 )
 from prepza_common.constants import LANGUAGES
 from prepza_common.i18n import translate
+from prepza_common.llm import estimated_input, estimated_tokens
 from prepza_common.scope import SCOPE_RULE
 
 from app.constants.chat import COMPANY_NOT_FOUND, MAX_TOOL_STEPS, ToolState
@@ -91,19 +92,27 @@ async def converse(messages: list[BaseMessage], turn: Turn, answer: Answer, emit
 
 
 async def ask(model, messages: list[BaseMessage], answer: Answer, emit: Emit) -> AIMessageChunk:
-    """One model call: its text streams to the panel as it comes; its tokens are counted."""
+    """One model call: its text streams to the panel as it comes; its tokens are counted, and
+    estimated when the call is cut short (cancelled, timed out, failed), which reports none,
+    though the model read the messages and wrote what came."""
     reply = AIMessageChunk(content="")
 
-    async for chunk in model.astream(messages):
-        reply += chunk
+    try:
+        async for chunk in model.astream(messages):
+            reply += chunk
 
-        if chunk.text:
-            answer.parts.append(chunk.text)
-            emit({"delta": chunk.text})
-
-    if reply.usage_metadata:
-        answer.input_tokens += reply.usage_metadata["input_tokens"]
-        answer.output_tokens += reply.usage_metadata["output_tokens"]
+            if chunk.text:
+                answer.parts.append(chunk.text)
+                emit({"delta": chunk.text})
+    finally:
+        if reply.usage_metadata:
+            answer.input_tokens += reply.usage_metadata["input_tokens"]
+            answer.output_tokens += reply.usage_metadata["output_tokens"]
+        else:
+            answer.input_tokens += estimated_input(messages)
+            answer.output_tokens += estimated_tokens(
+                str(reply.content) + str(reply.tool_call_chunks)
+            )
 
     return reply
 

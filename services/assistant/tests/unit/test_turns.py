@@ -177,4 +177,6 @@ def test_a_stopped_turn_is_saved_cancelled_with_its_text_so_far(monkeypatch, sav
     asyncio.run(asyncio.wait_for(scenario(), 2))
 
     assert saved == [(Status.CANCELLED, "Half", [])]
-    assert saved.tokens == [("ann", 0)]
+    # Cut short, the call reported no tokens: what it read and wrote is estimated and counted.
+    [(user, tokens)] = saved.tokens
+    assert user == "ann" and tokens > 0

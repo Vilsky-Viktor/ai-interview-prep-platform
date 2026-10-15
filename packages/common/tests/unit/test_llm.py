@@ -1,6 +1,12 @@
 import pytest
 from langchain_core.messages import AIMessage, HumanMessage
-from prepza_common.llm import call_cost, chat_model, latest_messages
+from prepza_common.llm import (
+    call_cost,
+    chat_model,
+    estimated_input,
+    estimated_tokens,
+    latest_messages,
+)
 
 
 @pytest.fixture(autouse=True)
@@ -49,3 +55,9 @@ def test_only_the_latest_messages_that_fit_are_kept():
 
 def test_a_message_without_text_adds_nothing():
     assert latest_messages([(True, "Hi"), (False, "")], 1_000) == [HumanMessage(content="Hi")]
+
+
+def test_a_call_cut_short_is_estimated_at_four_characters_a_token():
+    assert estimated_tokens("") == 0
+    assert estimated_tokens("abcde") == 2
+    assert estimated_input([HumanMessage(content="abcd"), AIMessage(content="efgh")]) == 2

@@ -11,6 +11,24 @@ from tests.unit.test_help import CATALOG, fake_catalog
 BODY = {"messages": [{"role": "user", "content": "How do I start?"}]}
 
 
+def test_an_answer_that_fails_halfway_still_counts_its_tokens_estimated(
+    client, monkeypatch, help_spending
+):
+    async def failing(messages, used):
+        yield "x" * 40
+        raise TimeoutError
+
+    monkeypatch.setattr("app.routers.help.billing.catalog", fake_catalog(CATALOG))
+    monkeypatch.setattr("app.routers.help.stream_reply", failing)
+
+    client.post("/help/chat", json=BODY)
+
+    # The model read the guide and the question, and wrote 40 characters: about 10 tokens.
+    [(_, checked), (_, spent)] = help_spending
+    assert checked == 0
+    assert spent > 10
+
+
 def test_an_answer_counts_its_tokens_against_the_days_budget(client, monkeypatch, help_spending):
     async def fake_stream(messages, used):
         used["tokens"] = 1_234

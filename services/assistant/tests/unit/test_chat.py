@@ -5,12 +5,12 @@ import uuid
 
 import httpx
 import pytest
-from langchain_core.messages import HumanMessage, SystemMessage, ToolMessage
+from langchain_core.messages import AIMessageChunk, HumanMessage, SystemMessage, ToolMessage
 
 from app.constants.chat import MAX_TOOL_STEPS
 from app.integrations import llm, services
 from app.models.answers import Answer, Turn
-from app.services.chat import SessionExpired, build_messages, converse
+from app.services.chat import SessionExpired, ask, build_messages, converse
 from app.services.registry import tools
 from tests.fake_model import FakeModel, calls, text
 
@@ -230,3 +230,21 @@ def test_the_prompt_names_candidates_by_name_or_else_by_email():
 
     assert "by their name when the data has one, and by their email when its name is null" in system
     assert 'never call a missing name "unknown"' in system
+
+
+def test_a_call_cut_short_still_counts_its_tokens_estimated():
+    """Cancelled, timed out or failed, a call reports no tokens, though the model read the
+    messages and wrote what came: they're estimated, so the budgets count them."""
+
+    class CutShort:
+        async def astream(self, messages):
+            yield AIMessageChunk(content="Two candidates")
+            raise TimeoutError
+
+    answer = Answer()
+    prompt = [HumanMessage(content="x" * 400)]
+
+    with pytest.raises(TimeoutError):
+        asyncio.run(ask(CutShort(), prompt, answer, lambda event: None))
+
+    assert (answer.input_tokens, answer.output_tokens) == (100, 4)

@@ -197,6 +197,9 @@ OPERATOR = {
 
 # USD per million input and output tokens (OpenAI's pricing page, October 2026): the cost
 # generation logs for each run (llm.call_cost) and the offline tests report.
+# A model call cut short (cancelled, timed out, failed) reports no tokens: they are estimated at
+# about this many characters each, as for English text.
+CHARS_PER_TOKEN = 4
 MODEL_PRICES = {
     "gpt-6-luna": (0.10, 0.50),
     "gpt-6.1-sol": (2.00, 10.00),

@@ -1,5 +1,6 @@
 import logging
 
+import anyio
 from fastapi import APIRouter, HTTPException, Query, Request, status
 from fastapi.responses import PlainTextResponse, StreamingResponse
 from prepza_common.analytics import track
@@ -8,6 +9,7 @@ from prepza_common.client_ip import client_ip
 from prepza_common.constants import DAY_SECONDS, DEFAULT_LANGUAGE, HOUR_SECONDS, LEGAL_VERSIONS
 from prepza_common.human_check import require_human
 from prepza_common.i18n import request_language, translate
+from prepza_common.llm import estimated_input, estimated_tokens
 from prepza_common.pause import refuse_if_paused
 from prepza_common.rate_limit import hit, spend
 from prepza_common.secrets_check import secret_in
@@ -139,8 +141,15 @@ async def help_chat(
             yield sse_event({"error": translate(CHAT_FAILED, language)})
 
             return
+        finally:
+            # However the answer ends (written, failed, the visitor gone), its tokens count:
+            # estimated when the model was cut short and reported none. Shielded, as a visitor
+            # leaving cancels the request.
+            tokens = used.get("tokens") or estimated_input(messages) + estimated_tokens(reply)
 
-        await record_spend(redis, used.get("tokens", 0))
+            with anyio.CancelScope(shield=True):
+                await record_spend(redis, tokens)
+
         await track("help_chat_turn", user_id=user.uid if user else None, turn=len(body.messages))
 
         # The page sends it back with the reply, which the next answer then reads.

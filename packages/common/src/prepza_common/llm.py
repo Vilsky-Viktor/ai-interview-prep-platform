@@ -3,7 +3,7 @@ extra (langchain-openai); the key comes from OPENAI_API_KEY."""
 
 from langchain_core.messages import AIMessage, BaseMessage, HumanMessage
 from langchain_openai import ChatOpenAI
-from prepza_common.constants import MODEL_PRICES
+from prepza_common.constants import CHARS_PER_TOKEN, MODEL_PRICES
 
 
 def chat_model(
@@ -57,3 +57,14 @@ def latest_messages(messages: list[tuple[bool, str]], room: int) -> list[BaseMes
         kept.insert(0, kind(content=text))
 
     return kept
+
+
+def estimated_tokens(text: str) -> int:
+    """The tokens of `text`, for a model call cut short that reported none: about
+    CHARS_PER_TOKEN characters each, rounded up."""
+    return -(-len(text) // CHARS_PER_TOKEN)
+
+
+def estimated_input(messages: list[BaseMessage]) -> int:
+    """The tokens a model call read, estimated from its messages (see estimated_tokens)."""
+    return estimated_tokens("".join(str(message.content) for message in messages))
