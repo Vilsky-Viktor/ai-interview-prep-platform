@@ -3,6 +3,7 @@ from fastapi import HTTPException
 
 import app.routers.help as help_routes
 from app.config.settings import settings
+from app.helpers.help_replies import reply_signature
 from tests.unit.test_help import CATALOG, fake_catalog
 
 QUESTION = {"role": "user", "content": "How do I start?"}
@@ -37,12 +38,18 @@ def checks(monkeypatch):
     return state
 
 
-def test_a_visitor_is_asked_with_their_chats_first_message_only(client, checks):
+def test_a_visitor_is_asked_until_their_chat_has_a_reply(client, checks):
+    """A reply is signed only after the check, so a made-up one doesn't skip it."""
     client.post("/help/chat", json={"messages": [QUESTION]})
-    later = [QUESTION, {"role": "assistant", "content": "Paste it."}, QUESTION]
-    client.post("/help/chat", json={"messages": later})
+    reply = {"role": "assistant", "content": "Paste it."}
+    signed = {**reply, "signature": reply_signature("Paste it.", settings.service_secret)}
+    client.post("/help/chat", json={"messages": [QUESTION, signed, QUESTION]})
 
     assert checks["asked"] == ["/help/chat"]
+
+    client.post("/help/chat", json={"messages": [QUESTION, reply, QUESTION]})
+
+    assert checks["asked"] == ["/help/chat", "/help/chat"]
 
 
 def test_a_contact_message_is_asked_and_one_that_fails_isnt_sent(client, checks, monkeypatch):

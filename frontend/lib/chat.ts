@@ -82,18 +82,23 @@ export async function streamEvents<T>(
 }
 
 /** Asks prepza's help chat (signed-out visitors' assistant); the panel keeps the conversation
-and sends it whole. Its events: {"delta"}, and a {"block"} sign-in card when the visitor asks to
-sign in. A chat's first question shows the visitor is a person (lib/human-check.ts). */
+and sends it whole, each reply with the signature the chat gave it (the chat reads no reply
+without one). Its events: {"delta"}, a {"block"} sign-in card when the visitor asks to sign in,
+and {"done"} with the reply's signature. Until the chat has a signed reply, a question shows
+the visitor is a person (lib/human-check.ts). */
 export function streamHelp(
   messages: HelpMessage[],
   onEvent: (event: {
     delta?: string
     block?: AssistantBlock
     removed?: boolean
+    signature?: string
   }) => void,
   signal: AbortSignal
 ) {
-  const first = messages.length === 1
+  const first = !messages.some(
+    (message) => message.role === "assistant" && message.signature
+  )
 
   return humanHeaders(first).then((headers) =>
     streamEvents("/rounds/help/chat", { messages }, onEvent, signal, headers)

@@ -8,6 +8,7 @@ from app.constants.help import (
     MAX_HELP_MESSAGES,
     MAX_HELP_QUESTION_LENGTH,
     QUESTION_TOO_LONG,
+    SIGNATURE_LENGTH,
     HelpRole,
 )
 
@@ -15,6 +16,8 @@ from app.constants.help import (
 class HelpMessage(BaseModel):
     role: HelpRole
     content: str = Field(min_length=1, max_length=MAX_HELP_MESSAGE_LENGTH)
+    # A reply's signature, as the help chat gave it when it wrote the reply.
+    signature: str | None = Field(default=None, max_length=SIGNATURE_LENGTH)
 
 
 class HelpChatRequest(BaseModel):

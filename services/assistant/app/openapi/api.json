@@ -823,7 +823,7 @@
      "manage"
     ],
     "summary": "Get Settings",
-    "description": "Every member sees the keys (never the keys themselves) and web hooks.",
+    "description": "Every member sees the keys (never the keys themselves) and web hooks; only owners and\nadmins their whole addresses.",
     "operationId": "get_settings_manage_get",
     "security": [
      {

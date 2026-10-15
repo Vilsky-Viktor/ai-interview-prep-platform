@@ -102,7 +102,7 @@ What each service does for users is described in the feature pages, linked from 
 
 ## The "I'm not a robot" check
 
-Where a script could spend a company's credits or prepza's AI capacity, the browser shows it's a person first, with Cloudflare Turnstile: a new candidate starting through a job ad's link, a person's first company (it gets the welcome credits), an unpaid company's topic review (before the questions are generated), the contact form, and a visitor's first help chat message (the chat has no id to remember a passed check by).
+Where a script could spend a company's credits or prepza's AI capacity, the browser shows it's a person first, with Cloudflare Turnstile: a new candidate starting through a job ad's link, a person's first company (it gets the welcome credits), an unpaid company's topic review (before the questions are generated), the contact form, and a visitor's help chat until it has a reply (the chat has no id to remember a passed check by; a reply is signed by the chat, so one made up doesn't count).
 
 - The browser asks for a one-time token just before the request (`frontend/lib/human-check.ts`: most people see nothing; the few Cloudflare isn't sure about get a small challenge at the bottom of the screen) and sends it in `X-Human-Check`.
 - The service checks it with Cloudflare (`prepza_common/human_check.py`, `require_human`), with `TURNSTILE_SECRET_KEY`: missing or refused, a 403 saying so. Without the secret there's no check; if Cloudflare doesn't answer, the request goes through, as the routes keep their rate limits.

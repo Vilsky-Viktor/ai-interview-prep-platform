@@ -166,7 +166,12 @@ export function pageCompany(path: string): string | null {
 export function helpConversation(messages: ChatMessage[]): HelpMessage[] {
   return messages
     .filter((message) => message.content && !message.error)
-    .map(({ role, content }) => ({ role, content }))
+    .map(({ role, content, signature }) => ({
+      role,
+      content,
+      // A help chat reply goes with its signature, or the chat doesn't read it.
+      ...(signature && { signature }),
+    }))
 }
 
 /** `messages` with one action card's fields changed, wherever it is. */

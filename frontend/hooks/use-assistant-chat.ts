@@ -95,6 +95,10 @@ export function useAssistantChat(
         content: answer.content + delta,
       }))
     }
+
+    if (event.signature) {
+      updateAnswer((answer) => ({ ...answer, signature: event.signature }))
+    }
   }
 
   function onEvent(event: AssistantEvent) {

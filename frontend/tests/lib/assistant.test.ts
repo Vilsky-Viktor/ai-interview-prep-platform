@@ -3,6 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 import { ApiError } from "@/lib/api"
 import {
   answerParts,
+  helpConversation,
   withCard,
   withoutSignIn,
   withoutSecret,
@@ -224,5 +225,25 @@ describe("withoutSecret", () => {
     })
     expect(cleaned[0]).toEqual(messages[0])
     expect(JSON.stringify(cleaned)).not.toContain("pz_secret")
+  })
+})
+
+describe("helpConversation", () => {
+  it("sends a reply with the signature the help chat gave it", () => {
+    expect(
+      helpConversation([
+        { role: "user", content: "How do I start?", blocks: [] },
+        {
+          role: "assistant",
+          content: "Paste it.",
+          blocks: [],
+          signature: "abc",
+        },
+        { role: "assistant", content: "", blocks: [] },
+      ])
+    ).toEqual([
+      { role: "user", content: "How do I start?" },
+      { role: "assistant", content: "Paste it.", signature: "abc" },
+    ])
   })
 })

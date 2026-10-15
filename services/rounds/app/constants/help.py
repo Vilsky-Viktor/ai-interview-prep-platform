@@ -18,6 +18,8 @@ class LegalDocument(StrEnum):
 # length, the bounds on what's sent, and the earlier messages the model sees with a question.
 MAX_HELP_QUESTION_LENGTH = 1_000
 MAX_HELP_MESSAGE_LENGTH = 10_000
+# A reply's signature: SHA-256, in hex.
+SIGNATURE_LENGTH = 64
 MAX_HELP_MESSAGES = 200
 HELP_HISTORY_MESSAGES = 10
 # The page's conversation can't be checked, so the model sees at most this many characters of

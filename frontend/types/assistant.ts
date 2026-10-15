@@ -63,6 +63,8 @@ export type AssistantEvent = {
   removed?: boolean
   // The conversation's new title, for the history.
   title?: string
+  // The help chat's signature of its reply, with its last event: sent back with the reply.
+  signature?: string
 }
 
 export type AssistantMessage = {
@@ -105,6 +107,8 @@ export type ChatMessage = {
   // A question: typed or spoken; removed when it had a secret in it.
   source?: "text" | "voice"
   removed?: boolean
+  // A help chat reply's signature, which the next question sends back with it.
+  signature?: string
   // An answer's tools so far, by their progress labels.
   progress?: string[]
   // An answer that failed, with what to show and whether a retry can fix it.

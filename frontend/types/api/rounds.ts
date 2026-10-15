@@ -668,6 +668,8 @@ export interface components {
       role: components["schemas"]["HelpRole"]
       /** Content */
       content: string
+      /** Signature */
+      signature?: string | null
     }
     /**
      * HelpRole

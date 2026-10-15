@@ -93,6 +93,34 @@ test("a visitor asking to sign in gets the sign-in card, their way first", async
   await expect(ways.first()).toHaveAccessibleName(/GitHub/);
 });
 
+test("a reply goes back with its signature, and the next question isn't checked again", async ({ page }) => {
+  const sent: { body: { messages: object[] }; checked: boolean }[] = [];
+  await page.route("**/api/rounds/help/chat", (route) => {
+    const request = route.request();
+    sent.push({ body: request.postDataJSON(), checked: "x-human-check" in request.headers() });
+    const events = [{ delta: "Paste it." }, { done: true, signature: `sig-${sent.length}` }];
+
+    return route.fulfill({
+      contentType: "text/event-stream",
+      body: events.map((event) => `data: ${JSON.stringify(event)}\n\n`).join(""),
+    });
+  });
+  const panel = await openPanel(page);
+  await panel.getByRole("textbox").fill("How do I start?");
+  await panel.getByRole("button", { name: "Send" }).click();
+  await expect(panel.getByRole("list").getByText("Paste it.")).toBeVisible();
+  await panel.getByRole("textbox").fill("And then?");
+  await panel.getByRole("button", { name: "Send" }).click();
+  await expect.poll(() => sent.length).toBe(2);
+
+  expect(sent[1].body.messages).toEqual([
+    { role: "user", content: "How do I start?" },
+    { role: "assistant", content: "Paste it.", signature: "sig-1" },
+    { role: "user", content: "And then?" },
+  ]);
+  expect(sent.map((request) => request.checked)).toEqual([true, false]);
+});
+
 test("a failed answer shows its error and Try again asks again", async ({ page }) => {
   let calls = 0;
   await page.route("**/api/rounds/help/chat", (route) => {

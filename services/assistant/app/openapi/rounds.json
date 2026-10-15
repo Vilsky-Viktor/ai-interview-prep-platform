@@ -1658,6 +1658,18 @@
       "maxLength": 10000,
       "minLength": 1,
       "title": "Content"
+     },
+     "signature": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 64
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Signature"
      }
     },
     "type": "object",

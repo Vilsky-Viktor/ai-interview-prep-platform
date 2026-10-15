@@ -21,12 +21,14 @@ from app.constants.help import (
     HELP_SPEND_KEY,
     HELP_TOKENS_PER_DAY,
     PRICES_UNAVAILABLE,
+    HelpRole,
     LegalDocument,
 )
 from app.constants.legal import NO_SUCH_VERSION
 from app.constants.rounds import CHAT_FAILED
 from app.helpers import legal
 from app.helpers.help import faq_items
+from app.helpers.help_replies import reply_signature, trusted
 from app.helpers.sign_in import secret_reply, with_sign_in
 from app.integrations import billing
 from app.integrations.redis import get_redis
@@ -107,10 +109,11 @@ async def help_chat(
 
     redis = get_redis()
     await refuse_if_paused(redis)
+    conversation = trusted(body.messages, settings.service_secret)
 
-    # A visitor shows they're a person once, with their chat's first message: the chat has no
-    # id to remember it by, and the check shows nothing to most people.
-    if user is None and len(body.messages) == 1:
+    # A visitor shows they're a person once, until the chat has a reply: the chat has no id to
+    # remember it by, a signed reply came only after the check, and it shows nothing to most.
+    if user is None and not any(item.role == HelpRole.ASSISTANT for item in conversation):
         await require_human(request, settings.turnstile_secret_key)
 
     if user:
@@ -121,12 +124,15 @@ async def help_chat(
     # The day's token budget, checked before the answer and counted after it.
     await spend(redis, HELP_SPEND_KEY, 0, HELP_TOKENS_PER_DAY, DAY_SECONDS)
 
-    messages = build_messages(body.messages, language, await billing.catalog())
+    messages = build_messages(conversation, language, await billing.catalog())
     used: dict = {}
 
     async def events():
+        reply = ""
+
         try:
             async for event in with_sign_in(stream_reply(messages, used)):
+                reply += event.get("delta", "")
                 yield sse_event(event)
         except Exception:
             logger.exception("Help chat failed")
@@ -137,7 +143,10 @@ async def help_chat(
         await record_spend(redis, used.get("tokens", 0))
         await track("help_chat_turn", user_id=user.uid if user else None, turn=len(body.messages))
 
-        yield sse_event({"done": True})
+        # The page sends it back with the reply, which the next answer then reads.
+        yield sse_event(
+            {"done": True, "signature": reply_signature(reply, settings.service_secret)}
+        )
 
     return event_stream(events())
 
