@@ -1,4 +1,5 @@
 import hashlib
+import hmac
 import secrets
 
 
@@ -14,3 +15,10 @@ def new_token(prefix: str, size: int) -> tuple[str, str]:
     token = prefix + secrets.token_urlsafe(size)
 
     return token, hashed(token)
+
+
+def same_secret(given: str, expected: str) -> bool:
+    """Whether a received signature or token is the expected one, in constant time. Compared as
+    bytes: hmac.compare_digest refuses text that isn't ASCII with an error, which anyone could
+    send to make a server error."""
+    return hmac.compare_digest(given.encode(), expected.encode())

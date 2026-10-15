@@ -142,3 +142,9 @@ def test_a_bounce_on_an_optional_email_changes_no_settings(client, reported):
     signed_post(client, event("email.suppressed", "reminders", "ann"))
 
     assert reported == []
+
+
+def test_a_signature_beyond_ascii_is_refused_not_an_error():
+    secret = "whsec_" + base64.b64encode(b"key").decode()
+
+    assert signature_valid("m1", "1000", "v1,ä", b"{}", secret, 1000, 300) is False

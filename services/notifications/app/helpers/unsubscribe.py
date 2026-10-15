@@ -4,6 +4,8 @@ import hashlib
 import hmac
 import json
 
+from prepza_common.tokens import same_secret
+
 from app.constants.unsubscribe import (
     CANDIDATE_FIELDS,
     ONE_CLICK_BODY,
@@ -64,7 +66,7 @@ def verify(token: str, secret: str) -> dict | None:
     """The token's payload when prepza signed it and it names everything its type needs."""
     body, _, received = token.partition(".")
 
-    if not hmac.compare_digest(signature(body, secret), received):
+    if not same_secret(signature(body, secret), received):
         return None
 
     try:

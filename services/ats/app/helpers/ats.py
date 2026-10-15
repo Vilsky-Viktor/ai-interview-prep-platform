@@ -7,6 +7,7 @@ import time
 from html.parser import HTMLParser
 
 from prepza_common.constants import DEFAULT_LANGUAGE
+from prepza_common.tokens import same_secret
 
 from app.constants.ats import SUBDOMAIN, TEAMTAILOR_SIGNATURE_SECONDS
 from app.templates.comments import COMMENTS
@@ -71,7 +72,7 @@ def workable_signed(token: str, body: bytes, signature: str) -> bool:
     given = signature.strip()
 
     return any(
-        hmac.compare_digest(given, expected)
+        same_secret(given, expected)
         for expected in (digest.hex(), base64.b64encode(digest).decode())
     )
 
@@ -81,7 +82,7 @@ def greenhouse_signed(secret: str, body: bytes, signature: str) -> bool:
     HMAC-SHA256 hex digest of the raw body with the secret key the company set."""
     expected = hmac.new(secret.encode(), body, hashlib.sha256).hexdigest()
 
-    return hmac.compare_digest(signature.strip().removeprefix("sha256 "), expected)
+    return same_secret(signature.strip().removeprefix("sha256 "), expected)
 
 
 def teamtailor_signed(secret: str, body: bytes, signature: str) -> bool:
@@ -107,7 +108,7 @@ def teamtailor_signed(secret: str, body: bytes, signature: str) -> bool:
     signed = parts["t"].encode() + b"." + body
     expected = hmac.new(secret.encode(), signed, hashlib.sha256).hexdigest()
 
-    return hmac.compare_digest(parts["v2"], expected)
+    return same_secret(parts["v2"], expected)
 
 
 def recruitee_signed(secret: str, body: bytes, signature: str) -> bool:
@@ -115,7 +116,7 @@ def recruitee_signed(secret: str, body: bytes, signature: str) -> bool:
     hex digest of the raw body with the secret Recruitee shows for the web hook."""
     expected = hmac.new(secret.encode(), body, hashlib.sha256).hexdigest()
 
-    return hmac.compare_digest(signature.strip().lower(), expected)
+    return same_secret(signature.strip().lower(), expected)
 
 
 def breezy_signed(secret: str, body: bytes, signature: str) -> bool:
@@ -130,7 +131,7 @@ def breezy_signed(secret: str, body: bytes, signature: str) -> bool:
     given = signature.strip().lower()
 
     return any(
-        hmac.compare_digest(given, hmac.new(secret.encode(), signed, hashlib.sha256).hexdigest())
+        same_secret(given, hmac.new(secret.encode(), signed, hashlib.sha256).hexdigest())
         for signed in (body, compact)
     )
 

@@ -151,3 +151,7 @@ def test_the_catalog_lists_every_product_and_which_are_on_sale(client):
         "topup_50"
     ] == "pri_topup_50"
     assert products[1]["price_id"] is None
+
+
+def test_a_signature_beyond_ascii_is_refused_not_an_error():
+    assert signature_valid("ts=1000;h1=ä", b"{}", SECRET, 1000, WEBHOOK_TOLERANCE_SECONDS) is False

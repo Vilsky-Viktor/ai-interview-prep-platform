@@ -3,6 +3,8 @@ import binascii
 import hashlib
 import hmac
 
+from prepza_common.tokens import same_secret
+
 
 def signature_valid(
     message_id: str,
@@ -31,4 +33,4 @@ def signature_valid(
     expected = base64.b64encode(hmac.new(key, signed, hashlib.sha256).digest()).decode()
     received = [part.split(",", 1)[1] for part in header.split() if part.startswith("v1,")]
 
-    return any(hmac.compare_digest(expected, signature) for signature in received)
+    return any(same_secret(expected, signature) for signature in received)

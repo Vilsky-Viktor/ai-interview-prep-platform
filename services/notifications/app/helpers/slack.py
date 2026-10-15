@@ -4,6 +4,7 @@ import hmac
 import re
 
 from prepza_common.notifications import NotificationKind
+from prepza_common.tokens import same_secret
 
 from app.constants.slack import LINKABLE_DOT, ZERO_WIDTH_SPACE
 
@@ -44,7 +45,7 @@ def read_state(secret: str, state: str, now: int) -> tuple[str, str, str] | None
     payload = f"{company_id}|{user_id}|{expires}|{nonce}"
     expected = hmac.new(secret.encode(), payload.encode(), hashlib.sha256).hexdigest()
 
-    if not hmac.compare_digest(signature, expected) or int(expires) < now:
+    if not same_secret(signature, expected) or int(expires) < now:
         return None
 
     return company_id, user_id, nonce

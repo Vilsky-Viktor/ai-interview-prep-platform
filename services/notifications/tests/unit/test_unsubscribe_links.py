@@ -150,3 +150,7 @@ def test_tokens_are_compact_json_so_the_same_wish_makes_the_same_link():
         "type": "updates",
         "user_id": "ann",
     }
+
+
+def test_a_link_signed_beyond_ascii_is_refused_not_an_error():
+    assert verify("e30.ä", "secret") is None

@@ -177,3 +177,9 @@ def test_a_refused_code_says_why(monkeypatch):
 
 def client(answer: httpx.Response) -> httpx.AsyncClient:
     return httpx.AsyncClient(transport=httpx.MockTransport(lambda request: answer))
+
+
+def test_a_state_signed_beyond_ascii_is_refused_not_an_error():
+    state = base64.urlsafe_b64encode("c1|u1|9999999999|n1|ä".encode()).decode()
+
+    assert read_state("secret", state, 1000) is None

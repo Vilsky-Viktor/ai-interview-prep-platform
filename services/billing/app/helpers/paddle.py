@@ -1,6 +1,8 @@
 import hashlib
 import hmac
 
+from prepza_common.tokens import same_secret
+
 
 def signature_valid(header: str, body: bytes, secret: str, now: float, tolerance: int) -> bool:
     """Checks Paddle's `Paddle-Signature: ts=...;h1=...`: an HMAC-SHA256 of "ts:body" with the
@@ -20,4 +22,4 @@ def signature_valid(header: str, body: bytes, secret: str, now: float, tolerance
         secret.encode(), f"{timestamp}:".encode() + body, hashlib.sha256
     ).hexdigest()
 
-    return any(hmac.compare_digest(expected, value) for value in received)
+    return any(same_secret(expected, value) for value in received)
