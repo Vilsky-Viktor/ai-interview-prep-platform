@@ -216,3 +216,19 @@ def test_an_owner_given_the_welcome_gift_under_the_old_key_isnt_given_it_again(r
 
     assert run(scenario()) is False
     assert first != second
+
+
+def test_a_welcome_asked_again_counts_once_and_still_records_the_referral(run):
+    acme, newco = company(), company()
+
+    async def scenario():
+        await ledger.welcome_company(acme, f"{acme}@example.com")
+        code = (await ledger.wallet(COMPANY, acme)).referral_code
+        # The first answer was lost: companies asks again for the same company.
+        first = await ledger.welcome_company(newco, f"{newco}@example.com")
+        again = await ledger.welcome_company(newco, f"{newco}@example.com")
+        recorded = again and await referrals.record(code, COMPANY, newco, [])
+
+        return first, again, recorded, await available(COMPANY, newco)
+
+    assert run(scenario()) == (True, True, True, WELCOME_COMPANY)

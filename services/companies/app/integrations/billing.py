@@ -5,6 +5,7 @@ from fastapi import HTTPException, status
 from prepza_common import http
 
 from app.config.settings import settings
+from app.constants.billing import WELCOME_ATTEMPTS
 from app.service_auth import service_token
 
 
@@ -50,14 +51,22 @@ async def welcome_company(
     company_id: UUID, owner_email: str, referral: str | None, related: list[str]
 ) -> None:
     """The welcome credits come once per owner's email; billing keeps only a hash of it. A
-    referral code counts unless it's from one of the owner's other companies (`related`)."""
-    response = await http.get_client().post(
-        f"{settings.billing_url}/internal/companies/{company_id}/welcome",
-        json={"owner_email": owner_email, "referral": referral, "related": related},
-        headers=_headers(),
-    )
+    referral code counts unless it's from one of the owner's other companies (`related`).
+    Billing gives it once per company, so a failed try is repeated: its answer may have been
+    lost after the gift was given."""
+    for attempt in range(WELCOME_ATTEMPTS):
+        try:
+            response = await http.get_client().post(
+                f"{settings.billing_url}/internal/companies/{company_id}/welcome",
+                json={"owner_email": owner_email, "referral": referral, "related": related},
+                headers=_headers(),
+            )
+            response.raise_for_status()
 
-    response.raise_for_status()
+            return
+        except Exception:
+            if attempt == WELCOME_ATTEMPTS - 1:
+                raise
 
 
 async def company_referral(company_id: UUID) -> dict:

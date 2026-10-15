@@ -43,7 +43,8 @@ async def running_low(owner_type: str) -> list[Wallet]:
 
 async def welcome_company(company_id: str, owner_email: str) -> bool:
     """Creates the company's wallet with the welcome credits, once per owner's email: a person's
-    first company. Deleting and creating one again doesn't repeat it. True when the gift is new."""
+    first company. Deleting and creating one again doesn't repeat it. True when this company got
+    the gift, now or in an earlier try whose answer was lost."""
     async with Session() as session:
         await ensure(session, OwnerType.COMPANY, company_id)
         given_before = await session.get(Gift, legacy_gift_key(WELCOME_GIFT, owner_email))
@@ -66,9 +67,12 @@ async def welcome_company(company_id: str, owner_email: str) -> bool:
                 Reason.WELCOME,
             )
 
+        welcomed = await session.scalar(
+            select(Entry.key).where(Entry.key == f"welcome:{company_id}")
+        )
         await session.commit()
 
-        return bool(new)
+        return welcomed is not None
 
 
 async def reserve(owner_type: str, owner_id: str, amount: int, key: str, reason: str) -> bool:

@@ -2,3 +2,7 @@
 class Reason:
     TOPUP = "topup"
     CANDIDATE = "candidate"
+
+
+# How often a new company's welcome credits are asked for before the company is removed again.
+WELCOME_ATTEMPTS = 3

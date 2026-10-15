@@ -80,7 +80,7 @@ async def create_company(
     if company is None:
         raise HTTPException(status.HTTP_409_CONFLICT, COMPANY_NAME_TAKEN)
 
-    # Without its wallet and welcome credits the company is removed again, so trying again
+    # When billing still fails after its tries, the company is removed again, so trying again
     # doesn't find its name taken.
     try:
         await billing.welcome_company(
