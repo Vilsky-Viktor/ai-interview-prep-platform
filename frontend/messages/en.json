@@ -1445,7 +1445,7 @@
   },
   "apiDocs": {
     "title": "Developer docs",
-    "description": "prepza's developer docs: get an API key, create interviews, invite and manage candidates, read their results, receive them by web hook and embed the interview with the SDK.",
+    "description": "prepza's developer docs: get an API key, create interviews, invite and manage candidates, read results, receive them by web hook and embed the interview with the SDK.",
     "tabs": {
       "api": "API",
       "webhooks": "Web hooks",
