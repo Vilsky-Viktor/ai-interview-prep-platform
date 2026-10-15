@@ -1,6 +1,7 @@
 # Messages the services show users, in Hindi, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This candidate already finished the interview.": "यह उम्मीदवार इंटरव्यू पहले ही पूरा कर चुका है।",
     "Confirm you're not a robot, then try again.": "पुष्टि करें कि आप रोबोट नहीं हैं, फिर दोबारा कोशिश करें।",
     "This company is suspended. Contact hello@prepza.ai to find out more.": "यह कंपनी निलंबित है। ज़्यादा जानने के लिए hello@prepza.ai पर संपर्क करें।",
     "This interview isn't available.": "यह इंटरव्यू उपलब्ध नहीं है।",

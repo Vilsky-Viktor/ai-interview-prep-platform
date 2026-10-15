@@ -3994,7 +3994,7 @@
      "internal"
     ],
     "summary": "Invite",
-    "description": "A candidate an ATS sent is invited, as the member who connected it. Refused with 503\nduring the emergency pause, 402 without credits and 429 over the email limits; 404 when the\ninterview is gone, 409 while it has no questions yet, and 403 when that member is no longer\nan owner or admin (a removed member's connection invites no one).",
+    "description": "A candidate an ATS sent is invited, as the member who connected it. Refused with 503\nduring the emergency pause, 402 without credits and 429 over the email limits; 404 when the\ninterview is gone, 409 while it has no questions yet, and 403 when that member is no longer\nan owner or admin (a removed member's connection invites no one). A candidate who already\nfinished is returned as they are.",
     "operationId": "invite_internal_interviews__interview_id__invites_post",
     "security": [
      {
@@ -6408,6 +6408,16 @@
       ],
       "title": "Invite Token"
      },
+     "can_resend": {
+      "type": "boolean",
+      "title": "Can Resend",
+      "default": false
+     },
+     "revokable": {
+      "type": "boolean",
+      "title": "Revokable",
+      "default": false
+     },
      "sections": {
       "anyOf": [
        {
@@ -6625,6 +6635,16 @@
        }
       ],
       "title": "Invite Token"
+     },
+     "can_resend": {
+      "type": "boolean",
+      "title": "Can Resend",
+      "default": false
+     },
+     "revokable": {
+      "type": "boolean",
+      "title": "Revokable",
+      "default": false
      },
      "sections": {
       "anyOf": [
@@ -8780,6 +8800,16 @@
      "can_edit": {
       "type": "boolean",
       "title": "Can Edit"
+     },
+     "can_resend": {
+      "type": "boolean",
+      "title": "Can Resend",
+      "default": false
+     },
+     "revokable": {
+      "type": "boolean",
+      "title": "Revokable",
+      "default": false
      },
      "extra_time_options": {
       "items": {

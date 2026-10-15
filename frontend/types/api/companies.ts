@@ -14,7 +14,11 @@ export interface paths {
     /** List Companies */
     get: operations["list_companies_companies_get"]
     put?: never
-    /** Create Company */
+    /**
+     * Create Company
+     * @description A person's first company, which gets the welcome credits, needs them to show they're a
+     *     person, on the site; through the assistant or an AI app (no browser) it can't be asked.
+     */
     post: operations["create_company_companies_post"]
     delete?: never
     options?: never
@@ -671,7 +675,9 @@ export interface paths {
     put?: never
     /**
      * Review Generation
-     * @description Approved topics resume the generation, so a pause refuses it.
+     * @description Approved topics resume the generation, so a pause refuses it. A company that never paid
+     *     shows it's a person on the site first, as generating costs; the assistant and AI apps (no
+     *     browser) can't be asked.
      */
     post: operations["review_generation_interviews__interview_id__generation_review_post"]
     delete?: never
@@ -1229,7 +1235,8 @@ export interface paths {
      * @description A candidate an ATS sent is invited, as the member who connected it. Refused with 503
      *     during the emergency pause, 402 without credits and 429 over the email limits; 404 when the
      *     interview is gone, 409 while it has no questions yet, and 403 when that member is no longer
-     *     an owner or admin (a removed member's connection invites no one).
+     *     an owner or admin (a removed member's connection invites no one). A candidate who already
+     *     finished is returned as they are.
      */
     post: operations["invite_internal_interviews__interview_id__invites_post"]
     delete?: never
@@ -2202,6 +2209,16 @@ export interface components {
       finished_at?: string | null
       /** Invite Token */
       invite_token?: string | null
+      /**
+       * Can Resend
+       * @default false
+       */
+      can_resend: boolean
+      /**
+       * Revokable
+       * @default false
+       */
+      revokable: boolean
       /** Sections */
       sections?: components["schemas"]["SectionGrade"][] | null
     }
@@ -2305,6 +2322,16 @@ export interface components {
       finished_at?: string | null
       /** Invite Token */
       invite_token?: string | null
+      /**
+       * Can Resend
+       * @default false
+       */
+      can_resend: boolean
+      /**
+       * Revokable
+       * @default false
+       */
+      revokable: boolean
       /** Sections */
       sections?: components["schemas"]["SectionGrade"][] | null
       /**
@@ -3158,6 +3185,16 @@ export interface components {
       extra_time: number
       /** Can Edit */
       can_edit: boolean
+      /**
+       * Can Resend
+       * @default false
+       */
+      can_resend: boolean
+      /**
+       * Revokable
+       * @default false
+       */
+      revokable: boolean
       /** Extra Time Options */
       extra_time_options: number[]
       /** Invite Token */

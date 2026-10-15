@@ -1,6 +1,7 @@
 # Messages the services show users, in Turkish, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This candidate already finished the interview.": "Bu aday mülakatı zaten tamamladı.",
     "Confirm you're not a robot, then try again.": "Robot olmadığınızı doğrulayın ve tekrar deneyin.",
     "This company is suspended. Contact hello@prepza.ai to find out more.": "Bu şirket askıya alındı. Daha fazla bilgi için hello@prepza.ai adresine yazın.",
     "This interview isn't available.": "Bu mülakat kullanılamıyor.",

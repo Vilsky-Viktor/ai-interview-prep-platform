@@ -1,6 +1,7 @@
 # Messages the services show users, in Chinese (Simplified), keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This candidate already finished the interview.": "这位候选人已经完成了面试。",
     "Confirm you're not a robot, then try again.": "请确认你不是机器人，然后重试。",
     "This company is suspended. Contact hello@prepza.ai to find out more.": "此公司已被暂停。如需了解详情，请联系 hello@prepza.ai。",
     "This interview isn't available.": "此面试不可用。",

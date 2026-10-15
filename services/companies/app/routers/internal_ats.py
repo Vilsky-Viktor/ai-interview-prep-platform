@@ -5,7 +5,7 @@ from fastapi import APIRouter, HTTPException, Query, status
 from prepza_common.pause import refuse_if_paused
 from prepza_common.user import User
 
-from app.constants.invites import RETURN_URL_OFF_DOMAIN
+from app.constants.invites import RETURN_URL_OFF_DOMAIN, InviteStatus
 from app.helpers.return_urls import on_domain
 from app.integrations.redis import get_redis
 from app.schemas.internal_ats import AccessOut, AtsInviteIn, AtsInviteOut, InterviewBriefOut
@@ -13,7 +13,7 @@ from app.service_auth import ServiceCaller
 from app.services import candidate_invites
 from app.services import outbox as outbox_service
 from app.services.access import can_edit, member_of
-from app.storage import companies, interviews
+from app.storage import companies, interviews, invites
 
 router = APIRouter(prefix="/internal", tags=["internal"])
 
@@ -50,7 +50,8 @@ async def invite(interview_id: UUID, body: AtsInviteIn, caller: ServiceCaller) -
     """A candidate an ATS sent is invited, as the member who connected it. Refused with 503
     during the emergency pause, 402 without credits and 429 over the email limits; 404 when the
     interview is gone, 409 while it has no questions yet, and 403 when that member is no longer
-    an owner or admin (a removed member's connection invites no one)."""
+    an owner or admin (a removed member's connection invites no one). A candidate who already
+    finished is returned as they are."""
     interview = await interviews.get(interview_id)
 
     if interview is None:
@@ -68,6 +69,12 @@ async def invite(interview_id: UUID, body: AtsInviteIn, caller: ServiceCaller) -
 
     if body.return_url and not on_domain(body.return_url, company.verified_domain):
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, RETURN_URL_OFF_DOMAIN)
+
+    # A candidate who already finished keeps their results, and isn't emailed again.
+    found = await invites.find(interview_id, str(body.email))
+
+    if found is not None and found.status == InviteStatus.FINISHED:
+        return AtsInviteOut(invite_id=found.id)
 
     user = User(uid=body.sender_id, email="", email_verified=True)
     sent = await candidate_invites.invite(

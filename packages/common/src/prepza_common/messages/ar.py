@@ -1,6 +1,7 @@
 # Messages the services show users, in Arabic, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This candidate already finished the interview.": "أنهى هذا المرشح المقابلة بالفعل.",
     "Confirm you're not a robot, then try again.": "أكّد أنك لست روبوتًا، ثم حاول مرة أخرى.",
     "This company is suspended. Contact hello@prepza.ai to find out more.": "هذه الشركة معلّقة. تواصل مع hello@prepza.ai لمعرفة المزيد.",
     "This interview isn't available.": "هذه المقابلة غير متاحة.",

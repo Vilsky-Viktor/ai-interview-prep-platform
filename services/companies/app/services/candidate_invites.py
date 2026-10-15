@@ -5,7 +5,7 @@ from prepza_common.rate_limit import hit_emails
 from prepza_common.user import User
 
 from app.config.settings import settings
-from app.constants.invites import COMPANY_SUSPENDED, NOT_STARTED, InviteStatus
+from app.constants.invites import ALREADY_FINISHED, COMPANY_SUSPENDED, NOT_STARTED, InviteStatus
 from app.helpers.candidates import new_hold_key
 from app.helpers.interviews import interview_title
 from app.helpers.logos import logo_path
@@ -39,6 +39,10 @@ async def invite(
 
     current, stored = await invites.held(interview.id, email)
     key = stored if current else new_hold_key(interview.id)
+
+    # Their results are in: inviting them again would only email them for nothing.
+    if current == InviteStatus.FINISHED:
+        raise HTTPException(status.HTTP_409_CONFLICT, ALREADY_FINISHED)
 
     # A candidate who hasn't started has credits set aside: new, or sent again after expiring.
     # Credits first, so an invite refused for them never uses up the email limits.

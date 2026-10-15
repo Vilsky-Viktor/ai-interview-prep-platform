@@ -1,6 +1,7 @@
 # Messages the services show users, in Dutch, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This candidate already finished the interview.": "Deze kandidaat heeft het sollicitatiegesprek al afgerond.",
     "Confirm you're not a robot, then try again.": "Bevestig dat je geen robot bent en probeer het opnieuw.",
     "This company is suspended. Contact hello@prepza.ai to find out more.": "Dit bedrijf is geschorst. Neem contact op met hello@prepza.ai voor meer informatie.",
     "This interview isn't available.": "Dit interview is niet beschikbaar.",

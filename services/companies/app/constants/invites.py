@@ -118,6 +118,8 @@ TOO_MANY_WITHOUT_CANDIDATES_UNPAID = (
 )
 # Starting an interview with an email the sign-in hasn't verified (GitHub doesn't): a link to
 # confirm it was sent when they signed in.
+# Inviting a candidate who already finished (their results are in) again.
+ALREADY_FINISHED = "This candidate already finished the interview."
 NOT_THE_GUEST = "Open the interview from the link the company gave you."
 EMAIL_NOT_VERIFIED = "Confirm your email first: open the link we sent you, then try again."
 # A company a superadmin suspended: its members see why, and candidates that the interview isn't

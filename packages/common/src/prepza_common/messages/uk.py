@@ -1,6 +1,7 @@
 # Messages the services show users, in Ukrainian, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This candidate already finished the interview.": "Цей кандидат уже пройшов співбесіду.",
     "Confirm you're not a robot, then try again.": "Підтвердьте, що ви не робот, і спробуйте ще раз.",
     "This company is suspended. Contact hello@prepza.ai to find out more.": "Цю компанію призупинено. Докладніше — за адресою hello@prepza.ai.",
     "This interview isn't available.": "Ця співбесіда недоступна.",

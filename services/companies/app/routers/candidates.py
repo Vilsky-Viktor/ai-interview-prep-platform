@@ -17,7 +17,7 @@ from app.constants.invites import (
     CandidateSort,
     InviteStatus,
 )
-from app.helpers.candidates import open_link_token, passed, section_passed
+from app.helpers.candidates import open_link_token, passed, row_actions, section_passed
 from app.helpers.interviews import (
     attach_set,
     interview_title,
@@ -63,6 +63,7 @@ async def invite_candidate(
         name=invite.name,
         status=invite.status,
         created_at=invite.created_at,
+        **row_actions(invite.status),
     )
 
 
@@ -187,6 +188,7 @@ async def candidate_scorecard(
         status=invite.status,
         extra_time=invite.extra_time,
         can_edit=can_edit(member),
+        **row_actions(invite.status),
         extra_time_options=(
             list(EXTRA_TIME_OPTIONS) if invite.status in NOT_STARTED and can_edit(member) else []
         ),

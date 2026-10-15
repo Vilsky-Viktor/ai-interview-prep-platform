@@ -90,7 +90,8 @@ async def invite_candidate(interview_id: UUID, body: CandidateIn, key: ApiKeyDep
     candidate signs in with that email; with `sign_in` false, your platform sends them to the
     response's `invite_url`, which opens the interview without signing in. With a `return_url`,
     the finished page takes the candidate back to your platform. Inviting an address that was
-    already invited sends the invitation again, if emails are on."""
+    already invited sends the invitation again, if emails are on; one who already finished is
+    returned as they are, without an email."""
     await companies.interview(key.company_id, interview_id)
     invite_id = await companies.invite(
         interview_id,

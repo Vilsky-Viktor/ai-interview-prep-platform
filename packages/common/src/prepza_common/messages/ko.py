@@ -1,6 +1,7 @@
 # Messages the services show users, in Korean, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This candidate already finished the interview.": "이 지원자는 이미 면접을 마쳤습니다.",
     "Confirm you're not a robot, then try again.": "로봇이 아님을 확인한 후 다시 시도하세요.",
     "This company is suspended. Contact hello@prepza.ai to find out more.": "이 회사는 정지되었습니다. 자세한 내용은 hello@prepza.ai로 문의하세요.",
     "This interview isn't available.": "이 면접은 이용할 수 없습니다.",

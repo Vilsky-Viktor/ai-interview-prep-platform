@@ -1,6 +1,7 @@
 # Messages the services show users, in Filipino, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This candidate already finished the interview.": "Natapos na ng kandidatong ito ang interview.",
     "Confirm you're not a robot, then try again.": "Kumpirmahin na hindi ka robot, saka subukan ulit.",
     "This company is suspended. Contact hello@prepza.ai to find out more.": "Naka-suspend ang kumpanyang ito. Makipag-ugnayan sa hello@prepza.ai para sa higit pang detalye.",
     "This interview isn't available.": "Hindi available ang interview na ito.",

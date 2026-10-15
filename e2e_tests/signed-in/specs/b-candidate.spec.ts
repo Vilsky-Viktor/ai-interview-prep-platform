@@ -116,6 +116,10 @@ test("candidate takes the interview from the invite link", async ({
   await owner.getByText(email, { exact: true }).first().click();
   await expect(owner.getByText(first ?? "").first()).toBeVisible();
   await expect(owner.getByText(/^\d+\.$/)).toHaveCount(0);
+  // A finished candidate's invite isn't sent again.
+  await expect(
+    owner.getByRole("button", { name: "Resend invite" }),
+  ).toHaveCount(0);
   await shot(owner, "owner-report");
 });
 
@@ -182,5 +186,8 @@ test("a candidate's page has their invite link to copy", async ({
   await expect(owner.getByRole("textbox", { name: "Copy link" })).toHaveValue(
     new RegExp(`/invite/${await inviteToken(email)}$`),
   );
+  await expect(
+    owner.getByRole("button", { name: "Resend invite" }),
+  ).toBeVisible();
   await shot(owner, "candidate-invite-link");
 });

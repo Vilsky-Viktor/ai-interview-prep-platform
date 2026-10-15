@@ -1,6 +1,7 @@
 # Messages the services show users, in Thai, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This candidate already finished the interview.": "ผู้สมัครรายนี้ทำการสัมภาษณ์เสร็จแล้ว",
     "Confirm you're not a robot, then try again.": "ยืนยันว่าคุณไม่ใช่โรบอต แล้วลองอีกครั้ง",
     "This company is suspended. Contact hello@prepza.ai to find out more.": "บริษัทนี้ถูกระงับ ติดต่อ hello@prepza.ai เพื่อดูรายละเอียดเพิ่มเติม",
     "This interview isn't available.": "การสัมภาษณ์นี้ไม่พร้อมใช้งาน",

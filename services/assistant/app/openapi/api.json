@@ -229,7 +229,7 @@
      "Candidates"
     ],
     "summary": "Invite a candidate",
-    "description": "Invites the candidate to the interview on behalf of the key's creator and reserves credits\nfor them, with their name if given. By default prepza emails the invitation and the\ncandidate signs in with that email; with `sign_in` false, your platform sends them to the\nresponse's `invite_url`, which opens the interview without signing in. With a `return_url`,\nthe finished page takes the candidate back to your platform. Inviting an address that was\nalready invited sends the invitation again, if emails are on.",
+    "description": "Invites the candidate to the interview on behalf of the key's creator and reserves credits\nfor them, with their name if given. By default prepza emails the invitation and the\ncandidate signs in with that email; with `sign_in` false, your platform sends them to the\nresponse's `invite_url`, which opens the interview without signing in. With a `return_url`,\nthe finished page takes the candidate back to your platform. Inviting an address that was\nalready invited sends the invitation again, if emails are on; one who already finished is\nreturned as they are, without an email.",
     "operationId": "invite_candidate_interviews__interview_id__candidates_post",
     "security": [
      {

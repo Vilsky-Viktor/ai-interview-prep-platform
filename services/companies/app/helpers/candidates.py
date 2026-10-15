@@ -1,6 +1,6 @@
 import uuid
 
-from app.constants.invites import OPEN, SIGNAL_KEYS
+from app.constants.invites import NOT_STARTED, OPEN, SIGNAL_KEYS, InviteStatus
 from app.schemas.invites import CandidateOut, CompanyCandidateOut
 
 
@@ -82,6 +82,7 @@ def candidate_out(invite, totals: dict, interview, with_link: bool = False) -> C
         started_at=invite.started_at,
         finished_at=invite.finished_at,
         invite_token=open_link_token(invite) if with_link else None,
+        **row_actions(invite.status),
     )
 
 
@@ -97,3 +98,11 @@ def company_candidate_out(invite, totals: dict, interview) -> CompanyCandidateOu
 def candidate_seconds(question_seconds: int, extra_time: int | None) -> int:
     """Each question's time for a candidate, with any extra time they were given."""
     return round(question_seconds * (100 + (extra_time or 0)) / 100)
+
+
+def row_actions(status: str) -> dict:
+    """What a candidate's row offers, by their invite's status."""
+    return {
+        "can_resend": status not in (InviteStatus.FINISHED, InviteStatus.DELETED),
+        "revokable": status in NOT_STARTED,
+    }

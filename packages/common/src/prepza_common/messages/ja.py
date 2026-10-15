@@ -1,6 +1,7 @@
 # Messages the services show users, in Japanese, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This candidate already finished the interview.": "この候補者はすでに面接を終えています。",
     "Confirm you're not a robot, then try again.": "ロボットではないことを確認してから、もう一度お試しください。",
     "This company is suspended. Contact hello@prepza.ai to find out more.": "この会社は停止されています。詳しくは hello@prepza.ai までお問い合わせください。",
     "This interview isn't available.": "この面接は利用できません。",

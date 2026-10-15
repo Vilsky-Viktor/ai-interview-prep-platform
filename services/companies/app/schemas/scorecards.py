@@ -53,6 +53,9 @@ class ScorecardOut(BaseModel):
     extra_time: int
     # Whether the user may change the candidate (extra time, revoke): not a viewer.
     can_edit: bool
+    # What the candidate's actions offer (helpers/candidates.py row_actions).
+    can_resend: bool = False
+    revokable: bool = False
     # What extra time can still be given: only before the candidate starts, and not by a viewer.
     extra_time_options: list[int]
     # The invite link's token, to copy and send in case the email didn't arrive or got lost: until

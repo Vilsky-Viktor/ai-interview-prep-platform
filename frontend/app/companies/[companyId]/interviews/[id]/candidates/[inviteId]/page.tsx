@@ -136,7 +136,8 @@ export default async function ScorecardPage({
                 interviewId={id}
                 inviteId={inviteId}
                 email={card.email}
-                status={card.status}
+                canResend={card.can_resend ?? false}
+                revokable={card.revokable ?? false}
                 backHref={`/companies/${companyId}/interviews/${id}?tab=candidates`}
               />
             )}

@@ -8,7 +8,7 @@ from prepza_common.service_auth import issue_token
 from app.constants.invites import RETURN_URL_OFF_DOMAIN
 from app.services import candidate_invites
 from app.services import outbox as outbox_service
-from app.storage import companies, interviews
+from app.storage import companies, interviews, invites
 
 COMPANY = SimpleNamespace(
     id=uuid.uuid4(),
@@ -53,11 +53,15 @@ def stored(monkeypatch):
     async def flush():
         calls["flushes"] += 1
 
+    async def find(interview_id, email):
+        return calls.get("found")
+
     monkeypatch.setattr(companies, "get", get_company)
     monkeypatch.setattr(interviews, "get", get_interview)
     monkeypatch.setattr(interviews, "by_ids", by_ids)
     monkeypatch.setattr(candidate_invites, "invite", invite)
     monkeypatch.setattr(outbox_service, "flush_quietly", flush)
+    monkeypatch.setattr(invites, "find", find)
 
     return calls
 
@@ -102,6 +106,16 @@ def test_ats_invites_a_candidate_as_the_member_who_connected_it(client, stored):
     assert response.json() == {"invite_id": str(uuid.UUID(int=7))}
     assert stored["invites"] == [(READY.id, COMPANY.id, "ann", "Cara@example.com")]
     assert stored["flushes"] == 1
+
+
+def test_a_candidate_who_finished_is_returned_without_another_email(client, stored):
+    stored["found"] = SimpleNamespace(id=uuid.UUID(int=9), status="finished")
+    body = {"email": "cara@example.com", "sender_id": "ann"}
+    response = client.post(f"/internal/interviews/{READY.id}/invites", json=body, headers=HEADERS)
+
+    assert response.status_code == 201
+    assert response.json() == {"invite_id": str(uuid.UUID(int=9))}
+    assert stored["invites"] == []
 
 
 @pytest.mark.parametrize(("interview_id", "code"), [(uuid.uuid4(), 404), (MAKING.id, 409)])

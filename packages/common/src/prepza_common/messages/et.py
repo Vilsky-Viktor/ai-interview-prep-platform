@@ -1,6 +1,7 @@
 # Messages the services show users, in Estonian, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This candidate already finished the interview.": "See kandidaat on intervjuu juba lõpetanud.",
     "Confirm you're not a robot, then try again.": "Kinnita, et sa pole robot, ja proovi uuesti.",
     "This company is suspended. Contact hello@prepza.ai to find out more.": "See ettevõte on peatatud. Lisateabe saamiseks kirjuta hello@prepza.ai.",
     "This interview isn't available.": "See intervjuu ei ole saadaval.",

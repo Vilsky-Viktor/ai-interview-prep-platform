@@ -48,6 +48,10 @@ class CandidateOut(BaseModel):
     # The invite link's token, only for the public API (`with_link`): until the candidate
     # finishes, while the link works.
     invite_token: str | None = None
+    # What its row offers: sending the invite again (not once finished, nor erased), and whether
+    # removing it revokes an invite not used yet (else it erases a candidate who started).
+    can_resend: bool = False
+    revokable: bool = False
     # Each section's grade, only for one candidate through the public API.
     sections: list[SectionGrade] | None = None
 

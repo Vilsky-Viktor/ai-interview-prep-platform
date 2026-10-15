@@ -1,6 +1,7 @@
 # Messages the services show users, in Hebrew, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This candidate already finished the interview.": "המועמד או המועמדת כבר סיימו את הראיון.",
     "Confirm you're not a robot, then try again.": "אשרו שאינכם רובוט, ואז נסו שוב.",
     "This company is suspended. Contact hello@prepza.ai to find out more.": "החברה הזו מושעית. לפרטים נוספים יש לפנות אל hello@prepza.ai.",
     "This interview isn't available.": "הראיון הזה אינו זמין.",

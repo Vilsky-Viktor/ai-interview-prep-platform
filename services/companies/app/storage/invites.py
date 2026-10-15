@@ -117,27 +117,27 @@ async def upsert(
         return invite, revived
 
 
-async def held(interview_id, email: str) -> tuple[str | None, str | None]:
-    """The invite's status and its credits' key, or (None, None) when this email hasn't been
-    invited."""
-    query = select(CandidateInvite.status, CandidateInvite.hold_key).where(
-        CandidateInvite.interview_id == interview_id, CandidateInvite.email == email.lower()
-    )
-
-    async with Session() as session:
-        row = (await session.execute(query)).first()
-
-    return (row[0], row[1]) if row else (None, None)
-
-
-async def status_of(interview_id, email: str) -> str | None:
-    """The invite's status, or None when this email hasn't been invited."""
-    query = select(CandidateInvite.status).where(
+async def find(interview_id, email: str) -> CandidateInvite | None:
+    """The email's invite to the interview, or None when it hasn't been invited."""
+    query = select(CandidateInvite).where(
         CandidateInvite.interview_id == interview_id, CandidateInvite.email == email.lower()
     )
 
     async with Session() as session:
         return await session.scalar(query)
+
+
+async def held(interview_id, email: str) -> tuple[str | None, str | None]:
+    """The invite's status and its credits' key, or (None, None) when this email hasn't been
+    invited."""
+    found = await find(interview_id, email)
+
+    return (found.status, found.hold_key) if found else (None, None)
+
+
+async def status_of(interview_id, email: str) -> str | None:
+    """The invite's status, or None when this email hasn't been invited."""
+    return (await held(interview_id, email))[0]
 
 
 async def unfinished(interview_id) -> list[CandidateInvite]:

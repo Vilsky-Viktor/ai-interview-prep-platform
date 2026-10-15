@@ -22,7 +22,10 @@ type CandidateActionsProps = {
   interviewId: string
   inviteId: string
   email: string
-  status: string
+  // What the service says the candidate's actions offer: sending the invite again, and whether
+  // removing revokes an unused invite (else it erases a candidate who started).
+  canResend: boolean
+  revokable: boolean
   // Where to go once the invite is revoked.
   backHref: string
 }
@@ -34,7 +37,8 @@ export function CandidateActions({
   interviewId,
   inviteId,
   email,
-  status,
+  canResend,
+  revokable: unused,
   backHref,
 }: CandidateActionsProps) {
   const t = useTranslations("candidates")
@@ -43,8 +47,6 @@ export function CandidateActions({
   const [busy, setBusy] = useState(false)
   const [confirmRevoke, setConfirmRevoke] = useState(false)
   const path = `/companies/interviews/${interviewId}/candidates`
-  // An invite not used yet is revoked; a candidate who started is deleted with their results.
-  const unused = ["invited", "undelivered", "expired"].includes(status)
 
   async function resend() {
     setBusy(true)
@@ -80,7 +82,7 @@ export function CandidateActions({
 
   return (
     <div className="flex items-center gap-2">
-      {status !== "finished" && (
+      {canResend && (
         <Button variant="outline" disabled={busy} onClick={resend}>
           {t("resend")}
         </Button>

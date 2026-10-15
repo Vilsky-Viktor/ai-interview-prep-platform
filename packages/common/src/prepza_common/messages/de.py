@@ -1,6 +1,7 @@
 # Messages the services show users, in German, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "This candidate already finished the interview.": "Diese Person hat das Interview bereits abgeschlossen.",
     "Confirm you're not a robot, then try again.": "Bestätige, dass du kein Roboter bist, und versuche es dann erneut.",
     "This company is suspended. Contact hello@prepza.ai to find out more.": "Dieses Unternehmen ist gesperrt. Mehr erfährst du unter hello@prepza.ai.",
     "This interview isn't available.": "Dieses Interview ist nicht verfügbar.",
