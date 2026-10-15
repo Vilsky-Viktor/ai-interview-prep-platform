@@ -30,7 +30,7 @@ from app.schemas.practice import (
     PracticeStartOut,
     PracticeTopicProgress,
 )
-from app.storage import sessions
+from app.storage import practice_sessions, sessions
 
 # Free practice for talents: timed rounds on a template's revealed questions, up to
 # PRACTICE_ROUNDS_PER_HOUR, each with fresh random questions and every right answer shown after.
@@ -52,7 +52,7 @@ async def start_practice(template_id: UUID, user: CurrentUser) -> PracticeStartO
     round_id = uuid.uuid4()
     # Only a talent's first round counts in the questions' statistics: later rounds repeat
     # questions whose answers were shown, so they measure memory, not knowledge.
-    repeat = bool(await sessions.practice_for_user(user.uid, template_id))
+    repeat = await practice_sessions.practiced(user.uid, template_id)
     rows = await sessions.create_many(
         user.uid,
         round_id,
@@ -103,10 +103,10 @@ async def get_round(round_id: UUID, user: CurrentUser) -> PracticeRoundOut:
 @router.get("/{template_id}/rounds")
 async def list_rounds(template_id: UUID, user: CurrentUser) -> list[PracticeRoundSummary]:
     """The talent's rounds on the template, newest first, to see their progress."""
-    return round_summaries(await sessions.practice_for_user(user.uid, template_id))
+    return round_summaries(await practice_sessions.practice_for_user(user.uid, template_id))
 
 
 @router.get("/{template_id}/progress")
 async def topic_progress_route(template_id: UUID, user: CurrentUser) -> list[PracticeTopicProgress]:
     """How far the talent got on each of the template's topics in their latest round."""
-    return topic_progress(await sessions.practice_for_user(user.uid, template_id))
+    return topic_progress(await practice_sessions.practice_for_user(user.uid, template_id))

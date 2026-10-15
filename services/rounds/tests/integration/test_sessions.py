@@ -3,7 +3,7 @@ import uuid
 
 from app.constants.integrity import MAX_SIGNALS_PER_QUESTION
 from app.models.answers import Answer
-from app.storage import sessions
+from app.storage import practice_sessions, sessions
 from tests.integration.factories import option_index, topic
 
 
@@ -123,10 +123,15 @@ def test_a_talents_practice_rounds_on_a_template_are_found_and_kept_apart(run):
         # A company's interview on the same set isn't practice.
         await sessions.create_many(user, uuid.uuid4(), [practice_topic], 60)
 
-        return first, second, await sessions.practice_for_user(user, practice_topic.preparation_id)
+        rows = await practice_sessions.practice_for_user(user, practice_topic.preparation_id)
+        before = await practice_sessions.practiced(user, practice_topic.preparation_id)
+        never = await practice_sessions.practiced(f"other-{user}", practice_topic.preparation_id)
 
-    first, second, rows = run(scenario())
+        return first, second, rows, before, never
 
+    first, second, rows, before, never = run(scenario())
+
+    assert (before, never) == (True, False)
     assert {row.candidate_invite_id for row in rows} == {first, second}
     assert all(row.practice for row in rows)
 

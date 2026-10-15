@@ -8,7 +8,7 @@ from prepza_common.user import User
 
 from app.integrations import library
 from app.main import app
-from app.storage import sessions
+from app.storage import practice_sessions, sessions
 
 TEMPLATE_ID = uuid.uuid4()
 ROUND_ID = uuid.uuid4()
@@ -92,12 +92,12 @@ def test_a_round_takes_up_to_ten_fresh_questions_a_topic_and_only_the_first_coun
 
     earlier = []
 
-    async def fake_practice(user_id, template_id):
-        return earlier
+    async def fake_practiced(user_id, template_id):
+        return bool(earlier)
 
     monkeypatch.setattr(library, "practice_content", fake_content)
     monkeypatch.setattr(sessions, "create_many", fake_create)
-    monkeypatch.setattr(sessions, "practice_for_user", fake_practice)
+    monkeypatch.setattr(practice_sessions, "practiced", fake_practiced)
 
     response = client.post(f"/practice/{TEMPLATE_ID}")
 
@@ -166,7 +166,7 @@ def test_the_history_lists_rounds_newest_first_with_their_grades(client, monkeyp
     async def fake_practice(user_id, template_id):
         return [first, second]
 
-    monkeypatch.setattr(sessions, "practice_for_user", fake_practice)
+    monkeypatch.setattr(practice_sessions, "practice_for_user", fake_practice)
 
     rounds = client.get(f"/practice/{TEMPLATE_ID}/rounds").json()
 
@@ -189,7 +189,7 @@ def test_each_topic_shows_how_far_the_latest_round_got(client, monkeypatch):
     async def fake_practice(user_id, template_id):
         return [older, latest]
 
-    monkeypatch.setattr(sessions, "practice_for_user", fake_practice)
+    monkeypatch.setattr(practice_sessions, "practice_for_user", fake_practice)
 
     progress = client.get(f"/practice/{TEMPLATE_ID}/progress").json()
 

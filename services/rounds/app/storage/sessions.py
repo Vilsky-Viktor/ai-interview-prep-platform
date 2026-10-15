@@ -309,19 +309,3 @@ async def remove_for_interview(interview_set_id: uuid.UUID) -> None:
     async with Db() as session:
         await session.execute(delete(Session).where(Session.interview_set_id == interview_set_id))
         await session.commit()
-
-
-async def practice_for_user(user_id: str, template_id: uuid.UUID) -> list[Session]:
-    """Every practice section the talent took on the template, with answers."""
-    query = (
-        select(Session)
-        .where(
-            Session.user_id == user_id,
-            Session.interview_set_id == template_id,
-            Session.practice.is_(True),
-        )
-        .options(selectinload(Session.answers))
-    )
-
-    async with Db() as session:
-        return list(await session.scalars(query))
