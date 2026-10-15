@@ -212,4 +212,8 @@ MESSAGES = {
     "prepza doesn't email this candidate: send them their invite link yourself.": "prepza לא שולחת אימיילים למועמד הזה: שלחו לו בעצמכם את קישור ההזמנה.",
     "Use at least 3 characters.": "הזינו לפחות 3 תווים.",
     "Use at least 2 characters.": "הזינו לפחות 2 תווים.",
+    "Invalid arguments": "ארגומנטים לא תקינים",
+    "Not found, or you don't have access to it.": "לא נמצא, או שאין לך גישה אליו.",
+    "The service didn't answer. Try again later.": "השירות לא הגיב. נסו שוב מאוחר יותר.",
+    "There is no such tool.": "אין כלי כזה.",
 }

@@ -212,4 +212,8 @@ MESSAGES = {
     "prepza doesn't email this candidate: send them their invite link yourself.": "prepza 不会给这位候选人发送邮件：请你自己把邀请链接发给对方。",
     "Use at least 3 characters.": "请至少输入 3 个字符。",
     "Use at least 2 characters.": "请至少输入 2 个字符。",
+    "Invalid arguments": "参数无效",
+    "Not found, or you don't have access to it.": "未找到，或你没有访问权限。",
+    "The service didn't answer. Try again later.": "服务没有响应，请稍后再试。",
+    "There is no such tool.": "没有这个工具。",
 }

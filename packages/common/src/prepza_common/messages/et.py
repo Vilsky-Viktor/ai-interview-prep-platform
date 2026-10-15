@@ -224,4 +224,8 @@ MESSAGES = {
     "prepza doesn't email this candidate: send them their invite link yourself.": "prepza ei saada sellele kandidaadile e-kirju: saada talle kutselink ise.",
     "Use at least 3 characters.": "Kasuta vähemalt 3 tähemärki.",
     "Use at least 2 characters.": "Kasuta vähemalt 2 tähemärki.",
+    "Invalid arguments": "Vigased argumendid",
+    "Not found, or you don't have access to it.": "Ei leitud või sul pole sellele ligipääsu.",
+    "The service didn't answer. Try again later.": "Teenus ei vastanud. Proovi hiljem uuesti.",
+    "There is no such tool.": "Sellist tööriista pole.",
 }

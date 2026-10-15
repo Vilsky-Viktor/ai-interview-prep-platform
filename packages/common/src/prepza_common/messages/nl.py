@@ -212,4 +212,8 @@ MESSAGES = {
     "prepza doesn't email this candidate: send them their invite link yourself.": "prepza mailt deze kandidaat niet: stuur de kandidaat zelf de uitnodigingslink.",
     "Use at least 3 characters.": "Gebruik minstens 3 tekens.",
     "Use at least 2 characters.": "Gebruik minstens 2 tekens.",
+    "Invalid arguments": "Ongeldige argumenten",
+    "Not found, or you don't have access to it.": "Niet gevonden, of je hebt er geen toegang toe.",
+    "The service didn't answer. Try again later.": "De dienst gaf geen antwoord. Probeer het later opnieuw.",
+    "There is no such tool.": "Deze tool bestaat niet.",
 }

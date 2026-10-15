@@ -212,4 +212,8 @@ MESSAGES = {
     "prepza doesn't email this candidate: send them their invite link yourself.": "prepza tidak mengirim email ke kandidat ini: kirim sendiri tautan undangannya kepada mereka.",
     "Use at least 3 characters.": "Gunakan minimal 3 karakter.",
     "Use at least 2 characters.": "Gunakan minimal 2 karakter.",
+    "Invalid arguments": "Argumen tidak valid",
+    "Not found, or you don't have access to it.": "Tidak ditemukan, atau Anda tidak punya akses ke sana.",
+    "The service didn't answer. Try again later.": "Layanan tidak merespons. Coba lagi nanti.",
+    "There is no such tool.": "Tidak ada alat seperti itu.",
 }

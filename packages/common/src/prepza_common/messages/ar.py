@@ -212,4 +212,8 @@ MESSAGES = {
     "prepza doesn't email this candidate: send them their invite link yourself.": "لا يرسل prepza رسائل بريد إلكتروني إلى هذا المرشح: أرسل إليه رابط الدعوة بنفسك.",
     "Use at least 3 characters.": "استخدم 3 أحرف على الأقل.",
     "Use at least 2 characters.": "استخدم حرفين على الأقل.",
+    "Invalid arguments": "وسائط غير صالحة",
+    "Not found, or you don't have access to it.": "غير موجود، أو ليس لديك صلاحية الوصول إليه.",
+    "The service didn't answer. Try again later.": "لم تستجب الخدمة. حاول مرة أخرى لاحقًا.",
+    "There is no such tool.": "لا توجد أداة بهذا الاسم.",
 }

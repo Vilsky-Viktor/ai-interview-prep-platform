@@ -212,4 +212,8 @@ MESSAGES = {
     "prepza doesn't email this candidate: send them their invite link yourself.": "Hindi nag-e-email ang prepza sa kandidatong ito: ikaw na ang magpadala sa kanila ng invite link nila.",
     "Use at least 3 characters.": "Gumamit ng hindi bababa sa 3 character.",
     "Use at least 2 characters.": "Gumamit ng hindi bababa sa 2 character.",
+    "Invalid arguments": "Hindi valid ang mga argument",
+    "Not found, or you don't have access to it.": "Hindi nakita, o wala kang access dito.",
+    "The service didn't answer. Try again later.": "Hindi sumagot ang serbisyo. Subukang muli mamaya.",
+    "There is no such tool.": "Walang ganoong tool.",
 }

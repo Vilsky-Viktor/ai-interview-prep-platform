@@ -212,4 +212,8 @@ MESSAGES = {
     "prepza doesn't email this candidate: send them their invite link yourself.": "prepza는 이 지원자에게 이메일을 보내지 않습니다. 초대 링크를 직접 보내 주세요.",
     "Use at least 3 characters.": "3자 이상 입력하세요.",
     "Use at least 2 characters.": "2자 이상 입력하세요.",
+    "Invalid arguments": "잘못된 인수입니다",
+    "Not found, or you don't have access to it.": "찾을 수 없거나 접근 권한이 없습니다.",
+    "The service didn't answer. Try again later.": "서비스가 응답하지 않았습니다. 잠시 후 다시 시도해 주세요.",
+    "There is no such tool.": "그런 도구는 없습니다.",
 }

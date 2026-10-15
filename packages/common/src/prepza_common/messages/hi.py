@@ -212,4 +212,8 @@ MESSAGES = {
     "prepza doesn't email this candidate: send them their invite link yourself.": "prepza इस उम्मीदवार को ईमेल नहीं भेजता: उन्हें उनका इनवाइट लिंक खुद भेजें।",
     "Use at least 3 characters.": "कम से कम 3 अक्षर इस्तेमाल करें।",
     "Use at least 2 characters.": "कम से कम 2 अक्षर इस्तेमाल करें।",
+    "Invalid arguments": "आर्ग्युमेंट अमान्य हैं",
+    "Not found, or you don't have access to it.": "नहीं मिला, या आपके पास इसकी एक्सेस नहीं है।",
+    "The service didn't answer. Try again later.": "सेवा ने जवाब नहीं दिया। कृपया बाद में फिर से कोशिश करें।",
+    "There is no such tool.": "ऐसा कोई टूल नहीं है।",
 }

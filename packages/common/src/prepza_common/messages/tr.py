@@ -212,4 +212,8 @@ MESSAGES = {
     "prepza doesn't email this candidate: send them their invite link yourself.": "prepza bu adaya e-posta göndermiyor: davet bağlantısını ona kendiniz gönderin.",
     "Use at least 3 characters.": "En az 3 karakter kullanın.",
     "Use at least 2 characters.": "En az 2 karakter kullanın.",
+    "Invalid arguments": "Geçersiz argümanlar",
+    "Not found, or you don't have access to it.": "Bulunamadı veya buna erişiminiz yok.",
+    "The service didn't answer. Try again later.": "Hizmet yanıt vermedi. Daha sonra tekrar deneyin.",
+    "There is no such tool.": "Böyle bir araç yok.",
 }

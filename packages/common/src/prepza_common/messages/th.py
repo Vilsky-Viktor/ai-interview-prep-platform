@@ -212,4 +212,8 @@ MESSAGES = {
     "prepza doesn't email this candidate: send them their invite link yourself.": "prepza ไม่ส่งอีเมลถึงผู้สมัครรายนี้ โปรดส่งลิงก์คำเชิญให้ผู้สมัครด้วยตัวเอง",
     "Use at least 3 characters.": "ใช้อย่างน้อย 3 ตัวอักษร",
     "Use at least 2 characters.": "ใช้อย่างน้อย 2 ตัวอักษร",
+    "Invalid arguments": "อาร์กิวเมนต์ไม่ถูกต้อง",
+    "Not found, or you don't have access to it.": "ไม่พบ หรือคุณไม่มีสิทธิ์เข้าถึง",
+    "The service didn't answer. Try again later.": "บริการไม่ตอบสนอง โปรดลองอีกครั้งในภายหลัง",
+    "There is no such tool.": "ไม่มีเครื่องมือนี้",
 }

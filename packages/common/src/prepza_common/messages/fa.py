@@ -212,4 +212,8 @@ MESSAGES = {
     "prepza doesn't email this candidate: send them their invite link yourself.": "prepza به این متقاضی ایمیل نمی‌فرستد: پیوند دعوتش را خودتان برایش بفرستید.",
     "Use at least 3 characters.": "حداقل ۳ نویسه وارد کنید.",
     "Use at least 2 characters.": "حداقل ۲ نویسه وارد کنید.",
+    "Invalid arguments": "آرگومان‌ها نامعتبر است",
+    "Not found, or you don't have access to it.": "پیدا نشد یا به آن دسترسی ندارید.",
+    "The service didn't answer. Try again later.": "سرویس پاسخ نداد. بعداً دوباره امتحان کنید.",
+    "There is no such tool.": "چنین ابزاری وجود ندارد.",
 }

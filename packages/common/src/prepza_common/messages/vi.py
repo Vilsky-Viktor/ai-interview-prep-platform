@@ -212,4 +212,8 @@ MESSAGES = {
     "prepza doesn't email this candidate: send them their invite link yourself.": "prepza không gửi email cho ứng viên này: bạn hãy tự gửi liên kết lời mời cho họ.",
     "Use at least 3 characters.": "Hãy dùng ít nhất 3 ký tự.",
     "Use at least 2 characters.": "Hãy dùng ít nhất 2 ký tự.",
+    "Invalid arguments": "Đối số không hợp lệ",
+    "Not found, or you don't have access to it.": "Không tìm thấy, hoặc bạn không có quyền truy cập.",
+    "The service didn't answer. Try again later.": "Dịch vụ không phản hồi. Vui lòng thử lại sau.",
+    "There is no such tool.": "Không có công cụ này.",
 }

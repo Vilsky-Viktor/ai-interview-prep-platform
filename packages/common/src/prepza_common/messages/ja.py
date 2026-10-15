@@ -212,4 +212,8 @@ MESSAGES = {
     "prepza doesn't email this candidate: send them their invite link yourself.": "prepza はこの候補者にメールを送りません。招待リンクはご自身で送ってください。",
     "Use at least 3 characters.": "3 文字以上で入力してください。",
     "Use at least 2 characters.": "2 文字以上で入力してください。",
+    "Invalid arguments": "引数が無効です",
+    "Not found, or you don't have access to it.": "見つからないか、アクセス権がありません。",
+    "The service didn't answer. Try again later.": "サービスから応答がありませんでした。しばらくしてからもう一度お試しください。",
+    "There is no such tool.": "そのようなツールはありません。",
 }
