@@ -225,19 +225,22 @@ async def finish(
 ) -> None:
     """Marks the invite finished (the candidates list may have already) with the candidate's
     grade and integrity flag, and the company's notification and the candidate.finished event
-    (`result`), if any: once per event."""
+    (`result`), if any: once per event, and none for a candidate erased meanwhile."""
     async with Session() as session:
         new = await processed_events.claim(session, event_id)
-        await session.execute(
+        # A candidate erased meanwhile (removed, or their account deleted) stays erased.
+        updated = await session.scalar(
             update(CandidateInvite)
-            .where(CandidateInvite.id == invite_id)
+            .where(CandidateInvite.id == invite_id, CandidateInvite.status != InviteStatus.DELETED)
             .values(
                 status=InviteStatus.FINISHED,
                 grade=grade,
                 flagged=flagged,
                 finished_at=func.coalesce(CandidateInvite.finished_at, func.now()),
             )
+            .returning(CandidateInvite.id)
         )
+        new = new and updated is not None
 
         if notice and new:
             outbox.add(session, OutboxEvent, NOTIFICATION_REQUESTED, notice)
