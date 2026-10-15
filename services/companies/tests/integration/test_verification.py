@@ -2,6 +2,7 @@ import uuid
 
 from alembic import command
 from alembic.config import Config
+from prepza_common.db import sqlalchemy_url
 from sqlalchemy import create_engine, select, text
 
 from app.config.settings import settings
@@ -113,7 +114,7 @@ def test_the_list_has_pending_first_then_the_latest_decided(run):
 
 def test_the_migration_keeps_verified_companies_approved():
     config = Config("alembic.ini")
-    engine = create_engine(settings.sqlalchemy_url)
+    engine = create_engine(sqlalchemy_url(settings.database_url))
     verified, waiting = uuid.uuid4(), uuid.uuid4()
     command.downgrade(config, "0026")
 

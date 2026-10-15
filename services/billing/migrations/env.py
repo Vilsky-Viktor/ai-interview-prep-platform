@@ -1,6 +1,7 @@
 from logging.config import fileConfig
 
 from alembic import context
+from prepza_common.db import sqlalchemy_url
 from sqlalchemy import create_engine
 
 import app.models.billing  # noqa: F401  registers the tables on Base.metadata
@@ -9,7 +10,7 @@ from app.models.base import Base
 
 fileConfig(context.config.config_file_name)
 
-engine = create_engine(settings.sqlalchemy_url)
+engine = create_engine(sqlalchemy_url(settings.database_url))
 
 with engine.connect() as connection:
     context.configure(connection=connection, target_metadata=Base.metadata)

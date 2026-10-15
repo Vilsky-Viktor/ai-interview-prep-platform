@@ -481,7 +481,8 @@ export interface paths {
     /**
      * Delete User
      * @description Library, deleting an account: an ATS's records of them as a candidate go; the ATS
-     *     connections they made stay with their companies, without their id.
+     *     connections they made stay with their companies, without their id, and each company is
+     *     told they need reconnecting.
      */
     delete: operations["delete_user_internal_users__user_id__delete"]
     options?: never
@@ -504,44 +505,6 @@ export interface paths {
      *     connections they made.
      */
     post: operations["export_user_internal_users__user_id__export_post"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/health": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /** Health */
-    get: operations["health_health_get"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/ready": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /**
-     * Ready
-     * @description Ready once the database answers; Docker's healthcheck and the startup probe use this. Redis
-     *     isn't checked: an outage there shouldn't stop the service from starting.
-     */
-    get: operations["ready_ready_get"]
-    put?: never
-    post?: never
     delete?: never
     options?: never
     head?: never
@@ -694,6 +657,8 @@ export interface components {
       }
       /** Messageid */
       messageId: string
+      /** Publishtime */
+      publishTime?: string | null
     }
     /** RecruiteeIn */
     RecruiteeIn: {
@@ -1572,50 +1537,6 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  health_health_get: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": {
-            [key: string]: unknown
-          }
-        }
-      }
-    }
-  }
-  ready_ready_get: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": {
-            [key: string]: unknown
-          }
         }
       }
     }

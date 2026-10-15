@@ -21,6 +21,7 @@ TRACE_FIELD = "logging.googleapis.com/trace"
 # Logged when a provider's web hook (Paddle, Resend) fails its signature check: usually a wrong
 # secret, so every event is refused. The alert in infra/terraform/monitoring.tf matches it.
 WEBHOOK_SIGNATURE_REFUSED = "web hook signature refused"
+NOT_READY = "Not ready"
 SIGN_IN_UNAVAILABLE = "Sign-in is temporarily unavailable. Please try again shortly."
 MINUTE_SECONDS = 60
 HOUR_SECONDS = 60 * MINUTE_SECONDS

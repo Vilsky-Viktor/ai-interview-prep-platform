@@ -24,9 +24,5 @@ class Settings(ServiceSettings):
     rounds_url: str
     billing_url: str
 
-    @property
-    def sqlalchemy_url(self) -> str:
-        return self.database_url.replace("postgresql://", "postgresql+psycopg://", 1)
-
 
 settings = Settings()

@@ -70,7 +70,8 @@ export interface paths {
     /**
      * Add Signal
      * @description The candidate's browser reports leaving the page or copying, saved with the question on
-     *     screen so the scorecard can show where it happened.
+     *     screen so the scorecard can show where it happened; and coming back, with how long the leave
+     *     lasted, which decides whether it counts (helpers/integrity.py).
      */
     post: operations["add_signal_sessions__session_id__signals_post"]
     delete?: never
@@ -239,7 +240,8 @@ export interface paths {
     }
     /**
      * List Rounds
-     * @description The talent's rounds on the template, newest first, to see their progress.
+     * @description The talent's rounds on the template, newest first, a page at a time, to see their
+     *     progress.
      */
     get: operations["list_rounds_practice__template_id__rounds_get"]
     put?: never
@@ -331,7 +333,8 @@ export interface paths {
     }
     /**
      * Get Faq
-     * @description The FAQ in the page's language, with today's prices; public.
+     * @description The FAQ in the page's language, with today's prices; public. Without prices (billing not
+     *     answering) it's refused rather than built with blanks: the site keeps its last good page.
      */
     get: operations["get_faq_help_faq_get"]
     put?: never
@@ -420,7 +423,8 @@ export interface paths {
     put?: never
     /**
      * Contact
-     * @description The contact page's message; notifications emails it to prepza's inbox. Public.
+     * @description The contact page's message; notifications emails it to prepza's inbox. Public, so the
+     *     sender shows they're a person.
      */
     post: operations["contact_help_contact_post"]
     delete?: never
@@ -685,44 +689,6 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  "/health": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /** Health */
-    get: operations["health_health_get"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/ready": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /**
-     * Ready
-     * @description Ready once the database answers; Docker's healthcheck and the startup probe use this. Redis
-     *     isn't checked: an outage there shouldn't stop the service from starting.
-     */
-    get: operations["ready_ready_get"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
 }
 export type webhooks = Record<string, never>
 export interface components {
@@ -806,7 +772,7 @@ export interface components {
      * @description What the candidate's browser reports during an interview.
      * @enum {string}
      */
-    IntegritySignal: "tab_leave" | "copy"
+    IntegritySignal: "tab_leave" | "copy" | "tab_return"
     /**
      * InterviewStep
      * @description Where a candidate's interview stands: the section on screen and its waiting question,
@@ -1198,6 +1164,8 @@ export interface components {
     /** SignalIn */
     SignalIn: {
       kind: components["schemas"]["IntegritySignal"]
+      /** Seconds */
+      seconds?: number | null
     }
     /** StatsOut */
     StatsOut: {
@@ -1627,7 +1595,12 @@ export interface operations {
   }
   list_rounds_practice__template_id__rounds_get: {
     parameters: {
-      query?: never
+      query?: {
+        /** @description Number of items to skip */
+        offset?: number
+        /** @description Number of items to return, up to 100 */
+        limit?: number
+      }
       header?: never
       path: {
         template_id: string
@@ -2356,50 +2329,6 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  health_health_get: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": {
-            [key: string]: unknown
-          }
-        }
-      }
-    }
-  }
-  ready_ready_get: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": {
-            [key: string]: unknown
-          }
         }
       }
     }

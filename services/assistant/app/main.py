@@ -2,9 +2,10 @@ import logging
 from contextlib import asynccontextmanager
 
 import firebase_admin
-from fastapi import FastAPI, HTTPException, status
+from fastapi import FastAPI
 from prepza_common import http
 from prepza_common.body_limit import BodyLimitMiddleware
+from prepza_common.health import health_router
 from prepza_common.i18n import add_localized_errors
 from prepza_common.logging import RequestLogMiddleware, configure_logging
 from prepza_common.maintenance import MaintenanceMiddleware
@@ -26,7 +27,7 @@ from app.routers import (
     transcribe,
 )
 from app.services.registry import tools
-from app.storage.db import ping as ping_database
+from app.storage.db import engine
 
 configure_logging()
 # httpx logs every request's full URL at INFO; a tool's query can hold what the user searched for.
@@ -70,19 +71,4 @@ app.include_router(connect.router)
 app.router.routes.extend([*oauth.routes(), *mcp.routes()])
 
 
-@app.get("/health")
-def health() -> dict:
-    return {"status": "ok"}
-
-
-@app.get("/ready")
-async def ready() -> dict:
-    """Ready once the database answers; Docker's healthcheck and the startup probe use this. Redis
-    isn't checked: an outage there shouldn't stop the service from starting."""
-    try:
-        await ping_database()
-    except Exception:
-        logging.getLogger(__name__).exception("Not ready")
-        raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "Not ready")
-
-    return {"status": "ready"}
+app.include_router(health_router(engine))

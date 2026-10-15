@@ -21,9 +21,5 @@ class Settings(ServiceSettings):
     paddle_api_key: str = ""
     paddle_price_auto_top_up: str = ""
 
-    @property
-    def sqlalchemy_url(self) -> str:
-        return self.database_url.replace("postgresql://", "postgresql+psycopg://", 1)
-
 
 settings = Settings()

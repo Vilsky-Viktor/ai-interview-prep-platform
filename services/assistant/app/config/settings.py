@@ -35,9 +35,5 @@ class Settings(ServiceSettings):
     # Required: without it every AI app's call would fail while the service looks healthy.
     firebase_web_api_key: str = Field(min_length=1)
 
-    @property
-    def sqlalchemy_url(self) -> str:
-        return self.database_url.replace("postgresql://", "postgresql+psycopg://", 1)
-
 
 settings = Settings()

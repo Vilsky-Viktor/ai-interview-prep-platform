@@ -43,9 +43,5 @@ class Settings(ServiceSettings):
     slack_client_secret: str = ""
     slack_encryption_key: str = ""
 
-    @property
-    def sqlalchemy_url(self) -> str:
-        return self.database_url.replace("postgresql://", "postgresql+psycopg://", 1)
-
 
 settings = Settings()

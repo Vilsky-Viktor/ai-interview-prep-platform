@@ -6,8 +6,25 @@
      "notifications"
     ],
     "summary": "Get Feed",
-    "description": "The bell: the latest notifications, the user's own and their companies', and how many\ncame since they last opened it.",
+    "description": "The bell: the latest notifications, the user's own and their companies', and how many\ncame since they last opened it; `fresh` reads the companies again (right after joining).",
     "operationId": "get_feed_me_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "fresh",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "boolean",
+       "default": false,
+       "title": "Fresh"
+      }
+     }
+    ],
     "responses": {
      "200": {
       "description": "Successful Response",
@@ -18,13 +35,18 @@
         }
        }
       }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
      }
-    },
-    "security": [
-     {
-      "HTTPBearer": []
-     }
-    ]
+    }
    }
   },
   "/me/seen": {
@@ -55,6 +77,23 @@
     "summary": "Stream",
     "description": "Server-sent events while a tab is open: {\"new\": true} as soon as a notification comes,\nso the bell reloads; heartbeat comments in between. At most MAX_STREAMS_PER_USER at once;\nthe bell refreshes on its own without one.",
     "operationId": "stream_me_stream_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "fresh",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "boolean",
+       "default": false,
+       "title": "Fresh"
+      }
+     }
+    ],
     "responses": {
      "200": {
       "description": "Successful Response",
@@ -63,13 +102,18 @@
         "schema": {}
        }
       }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
      }
-    },
-    "security": [
-     {
-      "HTTPBearer": []
-     }
-    ]
+    }
    }
   },
   "/internal/events": {
@@ -769,47 +813,6 @@
     "responses": {
      "204": {
       "description": "Successful Response"
-     }
-    }
-   }
-  },
-  "/health": {
-   "get": {
-    "summary": "Health",
-    "operationId": "health_health_get",
-    "responses": {
-     "200": {
-      "description": "Successful Response",
-      "content": {
-       "application/json": {
-        "schema": {
-         "additionalProperties": true,
-         "type": "object",
-         "title": "Response Health Health Get"
-        }
-       }
-      }
-     }
-    }
-   }
-  },
-  "/ready": {
-   "get": {
-    "summary": "Ready",
-    "description": "Ready once the database answers; Docker's healthcheck and the startup probe use this. Redis\nisn't checked: an outage there shouldn't stop the service from starting.",
-    "operationId": "ready_ready_get",
-    "responses": {
-     "200": {
-      "description": "Successful Response",
-      "content": {
-       "application/json": {
-        "schema": {
-         "additionalProperties": true,
-         "type": "object",
-         "title": "Response Ready Ready Get"
-        }
-       }
-      }
      }
     }
    }

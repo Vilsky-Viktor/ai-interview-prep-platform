@@ -18,9 +18,5 @@ class Settings(ServiceSettings):
     # titles, and sending an invite.
     companies_url: str
 
-    @property
-    def sqlalchemy_url(self) -> str:
-        return self.database_url.replace("postgresql://", "postgresql+psycopg://", 1)
-
 
 settings = Settings()

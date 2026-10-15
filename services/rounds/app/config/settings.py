@@ -27,9 +27,5 @@ class Settings(ServiceSettings):
     # each visitor's IP.
     contact_daily_limit: int = Field(default=200, ge=0)
 
-    @property
-    def sqlalchemy_url(self) -> str:
-        return self.database_url.replace("postgresql://", "postgresql+psycopg://", 1)
-
 
 settings = Settings()

@@ -1412,6 +1412,7 @@
      "interviews"
     ],
     "summary": "List Interviews",
+    "description": "The company's interviews, newest first; `q` narrows them to titles containing it.",
     "operationId": "list_interviews_interviews_get",
     "security": [
      {
@@ -1427,6 +1428,17 @@
        "type": "string",
        "format": "uuid",
        "title": "Company Id"
+      }
+     },
+     {
+      "name": "q",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "maxLength": 254,
+       "default": "",
+       "title": "Q"
       }
      },
      {
@@ -6109,67 +6121,6 @@
      }
     }
    }
-  },
-  "/health": {
-   "get": {
-    "summary": "Health",
-    "operationId": "health_health_get",
-    "responses": {
-     "200": {
-      "description": "Successful Response",
-      "content": {
-       "application/json": {
-        "schema": {
-         "additionalProperties": true,
-         "type": "object",
-         "title": "Response Health Health Get"
-        }
-       }
-      }
-     },
-     "422": {
-      "description": "Validation Error",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/HTTPValidationError"
-        }
-       }
-      }
-     }
-    }
-   }
-  },
-  "/ready": {
-   "get": {
-    "summary": "Ready",
-    "description": "Ready once the database answers; Docker's healthcheck and the startup probe use this. Redis\nisn't checked: an outage there shouldn't stop the service from starting.",
-    "operationId": "ready_ready_get",
-    "responses": {
-     "200": {
-      "description": "Successful Response",
-      "content": {
-       "application/json": {
-        "schema": {
-         "additionalProperties": true,
-         "type": "object",
-         "title": "Response Ready Ready Get"
-        }
-       }
-      }
-     },
-     "422": {
-      "description": "Validation Error",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/HTTPValidationError"
-        }
-       }
-      }
-     }
-    }
-   }
   }
  },
  "components": {
@@ -7311,7 +7262,6 @@
      "name": {
       "type": "string",
       "maxLength": 45,
-      "minLength": 1,
       "title": "Name"
      }
     },
@@ -7404,7 +7354,6 @@
      "name": {
       "type": "string",
       "maxLength": 45,
-      "minLength": 1,
       "title": "Name"
      }
     },
@@ -7557,7 +7506,6 @@
      "title": {
       "type": "string",
       "maxLength": 45,
-      "minLength": 1,
       "title": "Title"
      }
     },
@@ -9875,7 +9823,6 @@
      "title": {
       "type": "string",
       "maxLength": 70,
-      "minLength": 1,
       "title": "Title"
      }
     },

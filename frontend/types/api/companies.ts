@@ -404,7 +404,10 @@ export interface paths {
       path?: never
       cookie?: never
     }
-    /** List Interviews */
+    /**
+     * List Interviews
+     * @description The company's interviews, newest first; `q` narrows them to titles containing it.
+     */
     get: operations["list_interviews_interviews_get"]
     put?: never
     /** Create Interview */
@@ -1935,44 +1938,6 @@ export interface paths {
     put?: never
     /** Decline */
     post: operations["decline_superadmin_verifications__company_id__decline_post"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/health": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /** Health */
-    get: operations["health_health_get"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/ready": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /**
-     * Ready
-     * @description Ready once the database answers; Docker's healthcheck and the startup probe use this. Redis
-     *     isn't checked: an outage there shouldn't stop the service from starting.
-     */
-    get: operations["ready_ready_get"]
-    put?: never
-    post?: never
     delete?: never
     options?: never
     head?: never
@@ -4428,6 +4393,7 @@ export interface operations {
     parameters: {
       query: {
         company_id: string
+        q?: string
         /** @description Number of items to skip */
         offset?: number
         /** @description Number of items to return, up to 100 */
@@ -7214,68 +7180,6 @@ export interface operations {
           [name: string]: unknown
         }
         content?: never
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  health_health_get: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": {
-            [key: string]: unknown
-          }
-        }
-      }
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  ready_ready_get: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": {
-            [key: string]: unknown
-          }
-        }
       }
       /** @description Validation Error */
       422: {

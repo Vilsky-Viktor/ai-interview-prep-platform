@@ -1,8 +1,8 @@
-import logging
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, HTTPException, status
+from fastapi import FastAPI
 from prepza_common import http
+from prepza_common.health import health_router
 from prepza_common.logging import RequestLogMiddleware, configure_logging
 from prepza_common.sentry import init_sentry
 
@@ -10,7 +10,7 @@ from app.integrations.redis import get_redis
 from app.routers import jobs, schedules
 from app.services.graph import build_graph
 from app.storage.checkpointer import open_checkpointer
-from app.storage.db import ping as ping_database
+from app.storage.db import engine
 
 configure_logging()
 init_sentry("generation-worker")
@@ -36,18 +36,4 @@ app.include_router(jobs.router)
 app.include_router(schedules.router)
 
 
-@app.get("/health")
-def health() -> dict:
-    return {"status": "ok"}
-
-
-@app.get("/ready")
-async def ready() -> dict:
-    try:
-        await ping_database()
-    except Exception:
-        logging.getLogger(__name__).exception("Not ready")
-
-        raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "Not ready")
-
-    return {"status": "ready"}
+app.include_router(health_router(engine))

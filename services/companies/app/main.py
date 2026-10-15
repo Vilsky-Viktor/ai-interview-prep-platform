@@ -1,10 +1,10 @@
-import logging
 from contextlib import asynccontextmanager
 
 import firebase_admin
-from fastapi import Depends, FastAPI, HTTPException, status
+from fastapi import Depends, FastAPI
 from prepza_common import http
 from prepza_common.body_limit import BodyLimitMiddleware
+from prepza_common.health import health_router
 from prepza_common.i18n import add_localized_errors
 from prepza_common.logging import RequestLogMiddleware, configure_logging
 from prepza_common.maintenance import MaintenanceMiddleware
@@ -48,7 +48,7 @@ from app.routers import (
     verification,
 )
 from app.service_auth import remember_via
-from app.storage.db import ping as ping_database
+from app.storage.db import engine
 
 configure_logging()
 init_sentry("companies")
@@ -108,20 +108,4 @@ app.include_router(ai_apps.router)
 app.include_router(superadmin_verification.router)
 
 
-@app.get("/health")
-def health() -> dict:
-    return {"status": "ok"}
-
-
-@app.get("/ready")
-async def ready() -> dict:
-    """Ready once the database answers; Docker's healthcheck and the startup probe use this. Redis
-    isn't checked: an outage there shouldn't stop the service from starting."""
-    try:
-        await ping_database()
-    except Exception:
-        logging.getLogger(__name__).exception("Not ready")
-
-        raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "Not ready")
-
-    return {"status": "ready"}
+app.include_router(health_router(engine))

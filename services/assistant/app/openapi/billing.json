@@ -1000,47 +1000,6 @@
      }
     }
    }
-  },
-  "/health": {
-   "get": {
-    "summary": "Health",
-    "operationId": "health_health_get",
-    "responses": {
-     "200": {
-      "description": "Successful Response",
-      "content": {
-       "application/json": {
-        "schema": {
-         "additionalProperties": true,
-         "type": "object",
-         "title": "Response Health Health Get"
-        }
-       }
-      }
-     }
-    }
-   }
-  },
-  "/ready": {
-   "get": {
-    "summary": "Ready",
-    "description": "Ready only once the database answers; Docker's healthcheck uses this.",
-    "operationId": "ready_ready_get",
-    "responses": {
-     "200": {
-      "description": "Successful Response",
-      "content": {
-       "application/json": {
-        "schema": {
-         "additionalProperties": true,
-         "type": "object",
-         "title": "Response Ready Ready Get"
-        }
-       }
-      }
-     }
-    }
-   }
   }
  },
  "components": {

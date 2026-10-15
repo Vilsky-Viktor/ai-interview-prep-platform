@@ -386,6 +386,26 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/superadmin/stats": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Stats
+     * @description Users who signed up, all time or in one year or month, for the stats tab.
+     */
+    get: operations["get_stats_superadmin_stats_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/templates/filters": {
     parameters: {
       query?: never
@@ -698,6 +718,26 @@ export interface paths {
      *     answered keep their own copy of the question, and their marks.
      */
     put: operations["replace_question_internal_questions__question_id__put"]
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/users/ids": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * User Ids
+     * @description Notifications, for a notice about the terms or the privacy policy: every account.
+     */
+    get: operations["user_ids_internal_users_ids_get"]
+    put?: never
     post?: never
     delete?: never
     options?: never
@@ -1062,44 +1102,6 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  "/health": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /** Health */
-    get: operations["health_health_get"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/ready": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /**
-     * Ready
-     * @description Ready once the database answers; Docker's healthcheck and the startup probe use this. Redis
-     *     isn't checked: an outage there shouldn't stop the service from starting.
-     */
-    get: operations["ready_ready_get"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
 }
 export type webhooks = Record<string, never>
 export interface components {
@@ -1451,6 +1453,8 @@ export interface components {
       }
       /** Messageid */
       messageId: string
+      /** Publishtime */
+      publishTime?: string | null
     }
     /**
      * QuestionContext
@@ -1772,6 +1776,15 @@ export interface components {
         | "fil"
         | "et"
     }
+    /** StatsOut */
+    StatsOut: {
+      /** Counts */
+      counts: {
+        [key: string]: number
+      }
+      /** Currency */
+      currency?: string | null
+    }
     /** TemplateCopyIn */
     TemplateCopyIn: {
       /** Company Id */
@@ -1941,6 +1954,11 @@ export interface components {
     UserEmailIn: {
       /** Email */
       email: string
+    }
+    /** UserIdsOut */
+    UserIdsOut: {
+      /** User Ids */
+      user_ids: string[]
     }
     /** ValidationError */
     ValidationError: {
@@ -2762,6 +2780,37 @@ export interface operations {
       }
     }
   }
+  get_stats_superadmin_stats_get: {
+    parameters: {
+      query?: {
+        period?: string | null
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["StatsOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
   template_filters_templates_filters_get: {
     parameters: {
       query?: never
@@ -3362,6 +3411,26 @@ export interface operations {
       }
     }
   }
+  user_ids_internal_users_ids_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["UserIdsOut"]
+        }
+      }
+    }
+  }
   get_email_preferences_internal_users__user_id__email_preferences_get: {
     parameters: {
       query?: never
@@ -3937,50 +4006,6 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["HTTPValidationError"]
-        }
-      }
-    }
-  }
-  health_health_get: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": {
-            [key: string]: unknown
-          }
-        }
-      }
-    }
-  }
-  ready_ready_get: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": {
-            [key: string]: unknown
-          }
         }
       }
     }

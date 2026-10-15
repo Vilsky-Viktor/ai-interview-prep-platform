@@ -46,9 +46,5 @@ class Settings(ServiceSettings):
     # stays under OpenAI's 500 requests a minute on its first tier.
     llm_requests_per_second: int = Field(default=8, ge=0)
 
-    @property
-    def sqlalchemy_url(self) -> str:
-        return self.database_url.replace("postgresql://", "postgresql+psycopg://", 1)
-
 
 settings = Settings()

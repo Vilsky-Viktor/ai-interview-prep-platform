@@ -12,3 +12,9 @@ def test_pooled_connections_are_replaced_by_age_not_pinged_on_every_use():
     assert options["pool_recycle"] == DB_POOL_RECYCLE_SECONDS
     assert "pool_pre_ping" not in options
     assert (options["pool_size"], options["max_overflow"]) == (2, 1)
+
+
+def test_a_database_url_connects_through_psycopg():
+    url = "postgresql://user:pass@db:5432/companies"
+
+    assert db.sqlalchemy_url(url) == "postgresql+psycopg://user:pass@db:5432/companies"
