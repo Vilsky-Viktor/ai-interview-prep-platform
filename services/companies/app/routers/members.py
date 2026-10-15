@@ -10,6 +10,7 @@ from app.config.settings import settings
 from app.constants.audit import AuditAction
 from app.constants.invites import MAX_OWNED_COMPANIES
 from app.constants.roles import (
+    ALREADY_INVITED,
     MAX_PENDING_INVITES,
     MEMBER_INVITES_PER_UNPAID_DAY,
     ONLY_ADMINS_OWN,
@@ -68,7 +69,7 @@ async def invite_member(company_id: UUID, body: MemberIn, user: CurrentUser) -> 
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "You're already a member")
 
     if any(member.invited_email == email for member in company.members):
-        raise HTTPException(status.HTTP_409_CONFLICT, "That email is already invited")
+        raise HTTPException(status.HTTP_409_CONFLICT, ALREADY_INVITED)
 
     if sum(member.user_id is None for member in company.members) >= MAX_PENDING_INVITES:
         raise HTTPException(status.HTTP_409_CONFLICT, TOO_MANY_PENDING)
@@ -95,6 +96,10 @@ async def invite_member(company_id: UUID, body: MemberIn, user: CurrentUser) -> 
     }
 
     member = await members.add(company.id, email, body.role, sender)
+
+    # Invited by another request at the same moment.
+    if member is None:
+        raise HTTPException(status.HTTP_409_CONFLICT, ALREADY_INVITED)
     # The email goes out now; the outbox's regular run sends it if this fails.
     await outbox_service.flush_quietly()
 
@@ -200,6 +205,9 @@ async def accept_admin_invite(token: str, user: CurrentUser) -> None:
             status.HTTP_403_FORBIDDEN, "This invite was sent to a different email address"
         )
 
-    await members.accept(member, company, user.uid)
+    # Removed meanwhile by the owner.
+    if not await members.accept(member, company, user.uid):
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Invite not found")
+
     # The owner's notification goes out now; the outbox's regular run sends it if this fails.
     await outbox_service.flush_quietly()

@@ -3,6 +3,7 @@ import secrets
 from prepza_common import outbox
 from prepza_common.notifications import NOTIFICATION_REQUESTED
 from sqlalchemy import delete, select, update
+from sqlalchemy.exc import IntegrityError
 
 from app.constants.events import MEMBER_INVITED
 from app.constants.roles import Role
@@ -12,9 +13,10 @@ from app.models.outbox import OutboxEvent
 from app.storage.db import Session
 
 
-async def add(company_id, email: str, role: str, sender: dict) -> Member:
+async def add(company_id, email: str, role: str, sender: dict) -> Member | None:
     """A pending invite; the role applies once it's accepted. Its email's event is saved with it:
-    `sender` (the company, its logo, the inviter and their language) and the join link's token."""
+    `sender` (the company, its logo, the inviter and their language) and the join link's token.
+    None when the email was invited meanwhile."""
     member = Member(
         company_id=company_id,
         invited_email=email.lower(),
@@ -30,7 +32,11 @@ async def add(company_id, email: str, role: str, sender: dict) -> Member:
             MEMBER_INVITED,
             {**sender, "email": member.invited_email, "token": member.token, "role": role},
         )
-        await session.commit()
+
+        try:
+            await session.commit()
+        except IntegrityError:
+            return None
 
     return member
 
@@ -48,10 +54,15 @@ async def get_by_token(token: str) -> tuple[Member, Company] | None:
         return tuple(row) if row else None
 
 
-async def accept(member: Member, company: Company, user_id: str) -> None:
-    """Joins the member, and tells the owner in the bell, in the same transaction."""
+async def accept(member: Member, company: Company, user_id: str) -> bool:
+    """Joins the member, and tells the owner in the bell, in the same transaction; locked, so
+    two clicks at once join and tell once. False when the invite was removed meanwhile."""
     async with Session() as session:
-        row = await session.get(Member, member.id)
+        row = await session.scalar(select(Member).where(Member.id == member.id).with_for_update())
+
+        if row is None:
+            return False
+
         joining = row.user_id is None
 
         if joining:
@@ -70,6 +81,8 @@ async def accept(member: Member, company: Company, user_id: str) -> None:
             )
 
         await session.commit()
+
+    return True
 
 
 async def transfer_ownership(company: Company, owner: Member, member: Member) -> bool:

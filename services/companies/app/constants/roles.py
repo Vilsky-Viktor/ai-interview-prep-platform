@@ -21,3 +21,4 @@ TOO_MANY_PENDING = "Too many invites waiting. Remove some, or wait for them to j
 # as an admin, and not one who already owns as many companies as one person may.
 ONLY_ADMINS_OWN = "Only an admin who has joined can become the owner."
 OWNS_TOO_MANY = "They already own 3 companies, as many as one person may."
+ALREADY_INVITED = "That email is already invited"

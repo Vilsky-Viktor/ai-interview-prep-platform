@@ -49,6 +49,8 @@ def stored_invite(monkeypatch):
     async def fake_accept(item, company, user_id):
         accepted.append(user_id)
 
+        return True
+
     monkeypatch.setattr(members, "get_by_token", fake_get)
     monkeypatch.setattr(members, "accept", fake_accept)
     monkeypatch.setattr(outbox_service, "flush_quietly", fake_flush)

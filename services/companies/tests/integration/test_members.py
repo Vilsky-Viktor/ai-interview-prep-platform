@@ -1,3 +1,4 @@
+import asyncio
 import uuid
 
 from sqlalchemy import select
@@ -132,3 +133,31 @@ def test_the_owner_hears_once_that_a_member_joined(run):
             "key": f"member_joined:{dan.id}",
         }
     ]
+
+
+def test_two_joins_at_once_tell_the_owner_once_and_a_removed_invite_joins_no_one(run):
+    async def scenario():
+        company = await companies.create(f"Members {uuid.uuid4()}", "ann", "ann@example.com")
+        bob = await members.add(company.id, "bob@example.com", "admin", {})
+        cid = await members.add(company.id, "cid@example.com", "admin", {})
+        twice = await members.add(company.id, "cid@example.com", "admin", {})
+        both = await asyncio.gather(
+            members.accept(bob, company, "bob"), members.accept(bob, company, "bob")
+        )
+        await members.remove(cid.id)
+        removed = await members.accept(cid, company, "cid")
+
+        async with Session() as session:
+            joined = (
+                await session.scalars(
+                    select(OutboxEvent).where(
+                        OutboxEvent.data["key"].astext == f"member_joined:{bob.id}"
+                    )
+                )
+            ).all()
+
+        await companies.delete(company.id)
+
+        return twice, both, removed, len(joined)
+
+    assert run(scenario()) == (None, [True, True], False, 1)
