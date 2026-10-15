@@ -140,7 +140,7 @@ Emails go out through Resend in two streams, each from its own domain, so spam c
 
 | Stream | Emails | Sender (`terraform.tfvars`) |
 | --- | --- | --- |
-| Service | candidate invites and reminders, shared reports, failed automatic top-ups, contact messages | `mail_from = "prepza. <no-reply@prepza.ai>"` |
+| Service | candidate invites and reminders, team invites, shared reports, failed automatic top-ups, contact messages | `mail_from = "prepza. <no-reply@prepza.ai>"` |
 | Optional | the activity digest and reminders (later product updates and offers) | `mail_from_updates = "prepza. <updates@mail.prepza.ai>"` |
 
 The DNS records below are what Gmail, Yahoo (their 2024 rules for bulk senders) and Outlook check. Add them in GoDaddy's DNS, where a record's name is relative to `prepza.ai` (`send` means `send.prepza.ai`):

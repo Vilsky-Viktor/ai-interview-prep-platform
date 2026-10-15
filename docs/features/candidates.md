@@ -147,7 +147,7 @@ A report is a PDF, made in the browser, for one candidate or for all of an inter
 
 ## Email limits
 
-Candidate invite and report emails are limited:
+Candidate invites, emailed reports and [team invites](companies.md) count towards the limits of the member who sends them, per user and per recipient; emailed reports also towards their company's:
 
 | Limit | Setting | Default |
 |---|---|---|
