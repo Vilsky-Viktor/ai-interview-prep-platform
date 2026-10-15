@@ -61,7 +61,9 @@ async def send(rows: list, timeout: float) -> None:
     """Publishes the rows in one call and marks them published. When Pub/Sub rejects the call,
     each row is tried alone, so only a row it won't take is counted against. Any other failure
     (an outage) raises and counts against no row."""
-    messages = [pubsub.message(row.event_type, row.data, str(row.id)) for row in rows]
+    messages = [
+        pubsub.message(row.event_type, row.data, str(row.id), row.created_at) for row in rows
+    ]
 
     try:
         await pubsub.publish_batch(messages, timeout)

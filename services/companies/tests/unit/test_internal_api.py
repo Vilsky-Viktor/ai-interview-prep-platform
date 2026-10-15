@@ -20,6 +20,10 @@ INVITE = SimpleNamespace(
     status="finished",
     token="tok-anna",
     created_at=datetime(2026, 10, 2, tzinfo=UTC),
+    flagged=False,
+    extra_time=50,
+    started_at=datetime(2026, 10, 3, 9, tzinfo=UTC),
+    finished_at=datetime(2026, 10, 3, 9, 20, tzinfo=UTC),
 )
 TOKEN = issue_token("api", "companies", "test-secret-that-is-at-least-32-bytes")
 HEADERS = {"Authorization": f"Bearer {TOKEN}"}
@@ -64,6 +68,13 @@ def stored(monkeypatch):
     async def scores(ids):
         return {str(INVITE.id): {"finished": True, "grade": 86, "progress": 100, "copies": 1}}
 
+    async def scorecard(invite_id):
+        # Two sections: one finished, one not.
+        return [
+            {"topic_title": "SQL", "final_score": 90},
+            {"topic_title": "APIs", "final_score": None},
+        ]
+
     async def page(interview, offset, limit, by_grade, q="", filter_by=None, with_link=False):
         asked.append(("candidates", offset, limit, by_grade, with_link))
 
@@ -75,6 +86,7 @@ def stored(monkeypatch):
     monkeypatch.setattr(candidates, "get", get_candidate)
     monkeypatch.setattr(internal_api, "interview_out", interview_out)
     monkeypatch.setattr(internal_api.rounds, "invite_scores", scores)
+    monkeypatch.setattr(internal_api.rounds, "scorecard", scorecard)
     monkeypatch.setattr(candidate_results, "page", page)
 
     return asked
@@ -100,6 +112,13 @@ def test_a_candidate_comes_with_their_results(client):
 
     assert (found["grade"], found["passed"], found["copies"]) == (86, True, 1)
     assert found["name"] == "Anna Nowak"
+    assert (found["extra_time"], found["flagged"]) == (50, False)
+    assert found["finished_at"] == "2026-10-03T09:20:00Z"
+    # One candidate comes with each section's grade.
+    assert found["sections"] == [
+        {"title": "SQL", "grade": 90},
+        {"title": "APIs", "grade": None},
+    ]
     # Finished: no invite link.
     assert found["invite_token"] is None
 

@@ -3,24 +3,35 @@ import base64
 import json
 import os
 import uuid
+from datetime import UTC, datetime
 
 from prepza_common import http
 from prepza_common.constants import (
     EVENT_ID_ATTRIBUTE,
     EVENTS_TOPIC,
     HTTP_TIMEOUT_SECONDS,
+    OCCURRED_AT_ATTRIBUTE,
     PUBSUB_URL,
 )
 from prepza_common.google import access_token, project, running_locally
 from pydantic import BaseModel
 
 
-def message(event_type: str, data: dict, event_id: str | None = None) -> dict:
+def message(
+    event_type: str,
+    data: dict,
+    event_id: str | None = None,
+    occurred_at: datetime | None = None,
+) -> dict:
     """One event as Pub/Sub takes it, with its own id: `event_id` when given (it stays the same on
     a re-send), otherwise a new one. Consumers never fall back on Pub/Sub's message id, which the
     local emulator numbers from 1 again after a restart, so a new event could look like one already
     handled and be dropped."""
-    attributes = {"type": event_type, EVENT_ID_ATTRIBUTE: event_id or uuid.uuid4().hex}
+    attributes = {
+        "type": event_type,
+        EVENT_ID_ATTRIBUTE: event_id or uuid.uuid4().hex,
+        OCCURRED_AT_ATTRIBUTE: (occurred_at or datetime.now(UTC)).isoformat(),
+    }
 
     return {"data": base64.b64encode(json.dumps(data).encode()).decode(), "attributes": attributes}
 
@@ -56,6 +67,7 @@ class PushMessage(BaseModel):
     data: str = ""
     attributes: dict[str, str] = {}
     messageId: str
+    publishTime: str | None = None
 
 
 class PushBody(BaseModel):
@@ -73,3 +85,11 @@ def event_of(body: PushBody) -> tuple[str, dict, str]:
     event_id = attributes.get(EVENT_ID_ATTRIBUTE) or body.message.messageId
 
     return attributes.get("type", ""), data, event_id
+
+
+def occurred_at(body: PushBody) -> datetime:
+    """When the change behind the event happened: its outbox row's time, else when Pub/Sub got
+    it (events published before the attribute existed)."""
+    stamp = body.message.attributes.get(OCCURRED_AT_ATTRIBUTE) or body.message.publishTime
+
+    return datetime.fromisoformat(stamp) if stamp else datetime.now(UTC)

@@ -12,8 +12,8 @@ from app.constants.events import (
 from app.schemas.public import CandidateEvent, InterviewEvent, RemovedEvent, TestEvent
 
 # The events a web hook gets, for the reference only (main.py passes them to the app). Each
-# request body is a JSON object with the event's `id`, its `type` and `data`, described with
-# each.
+# request body is a JSON object with the event's `id`, its `type`, `occurred_at` and `data`,
+# described with each.
 webhooks = APIRouter()
 
 

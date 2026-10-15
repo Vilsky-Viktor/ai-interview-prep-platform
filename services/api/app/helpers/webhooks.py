@@ -4,7 +4,7 @@ import ipaddress
 import json
 import secrets
 import socket
-from datetime import timedelta
+from datetime import datetime, timedelta
 from urllib.parse import urlsplit
 
 from app.constants.api import RETRY_FIRST_DELAY, RETRY_MAX_DELAY
@@ -15,9 +15,15 @@ def new_secret() -> str:
     return "whsec_" + secrets.token_urlsafe(30)
 
 
-def body_of(event_id: str, event_type: str, data: dict) -> bytes:
-    """What a web hook gets: the event's id (the same on a repeat), its type and data."""
-    event = {"id": event_id, "type": event_type, "data": data}
+def body_of(event_id: str, event_type: str, data: dict, occurred_at: datetime) -> bytes:
+    """What a web hook gets: the event's id (the same on a repeat), its type, when the change
+    happened (to put events in order: a retried event can arrive after a later one) and data."""
+    event = {
+        "id": event_id,
+        "type": event_type,
+        "occurred_at": occurred_at.isoformat(),
+        "data": data,
+    }
 
     return json.dumps(event, separators=(",", ":")).encode()
 

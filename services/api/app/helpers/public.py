@@ -33,9 +33,14 @@ def candidate_of(found: dict, company_id, interview_id, site: str) -> Candidate:
             copies=found["copies"],
             fast_answers=found["fast_answers"],
         ),
+        flagged=found.get("flagged", False),
+        extra_time=found.get("extra_time", 0),
+        sections=found.get("sections"),
         results_url=CANDIDATE_LINK.format(
             site=site, company_id=company_id, interview_id=interview_id, invite_id=found["id"]
         ),
         invite_url=INVITE_LINK.format(site=site, token=token) if token else None,
         created_at=found["created_at"],
+        started_at=found.get("started_at"),
+        finished_at=found.get("finished_at"),
     )

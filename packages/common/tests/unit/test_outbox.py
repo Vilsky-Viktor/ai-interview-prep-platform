@@ -1,5 +1,6 @@
 import asyncio
 import contextvars
+from datetime import UTC, datetime
 from types import SimpleNamespace
 
 import httpx
@@ -10,7 +11,12 @@ from prepza_common.constants import OUTBOX_BATCH, OUTBOX_MAX_ATTEMPTS
 
 def row(name, attempts=0):
     return SimpleNamespace(
-        id=name, event_type=f"{name}.done", data={}, attempts=attempts, published_at=None
+        id=name,
+        event_type=f"{name}.done",
+        data={},
+        attempts=attempts,
+        published_at=None,
+        created_at=datetime(2026, 10, 15, tzinfo=UTC),
     )
 
 

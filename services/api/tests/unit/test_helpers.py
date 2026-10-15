@@ -43,10 +43,16 @@ def test_months_are_calendar_months(start, months, end):
 
 
 def test_a_web_hook_is_signed_over_its_time_and_raw_body():
-    body = body_of("e1", "candidate.finished", {"a": 1})
+    body = body_of("e1", "candidate.finished", {"a": 1}, datetime(2026, 10, 15, 8, tzinfo=UTC))
     expected = hmac.new(b"whsec_x", b"1760000000." + body, hashlib.sha256).hexdigest()
 
-    assert json.loads(body) == {"id": "e1", "type": "candidate.finished", "data": {"a": 1}}
+    assert json.loads(body) == {
+        "id": "e1",
+        "type": "candidate.finished",
+        # When it happened: a retried event can arrive after a later one.
+        "occurred_at": "2026-10-15T08:00:00+00:00",
+        "data": {"a": 1},
+    }
     assert signature("whsec_x", 1760000000, body) == f"t=1760000000,v1={expected}"
 
 

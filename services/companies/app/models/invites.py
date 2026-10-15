@@ -53,3 +53,7 @@ class CandidateInvite(Base):
     # The theme its pages show (constants/brand.py's Theme), as the API asked; None: the
     # candidate's own.
     theme: Mapped[str | None] = mapped_column(String(8))
+    # When the candidate first started, and when they finished; None before (and for candidates
+    # from before these were kept).
+    started_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    finished_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))

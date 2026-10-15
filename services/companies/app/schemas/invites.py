@@ -18,6 +18,12 @@ class CandidateIn(BaseModel):
     name: str | None = None
 
 
+class SectionGrade(BaseModel):
+    title: str
+    # None until the section is finished.
+    grade: int | None = None
+
+
 class CandidateOut(BaseModel):
     id: UUID
     email: str
@@ -32,10 +38,18 @@ class CandidateOut(BaseModel):
     tab_leaves: int = 0
     copies: int = 0
     fast_answers: int = 0
+    # Too many integrity signals to trust the result, as the ATS integrations are told.
+    flagged: bool = False
+    # Extra time per question, as a percentage of its time.
+    extra_time: int = 0
     created_at: datetime
+    started_at: datetime | None = None
+    finished_at: datetime | None = None
     # The invite link's token, only for the public API (`with_link`): until the candidate
     # finishes, while the link works.
     invite_token: str | None = None
+    # Each section's grade, only for one candidate through the public API.
+    sections: list[SectionGrade] | None = None
 
 
 class CompanyCandidateOut(CandidateOut):

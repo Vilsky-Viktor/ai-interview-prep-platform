@@ -6357,10 +6357,44 @@
       "title": "Fast Answers",
       "default": 0
      },
+     "flagged": {
+      "type": "boolean",
+      "title": "Flagged",
+      "default": false
+     },
+     "extra_time": {
+      "type": "integer",
+      "title": "Extra Time",
+      "default": 0
+     },
      "created_at": {
       "type": "string",
       "format": "date-time",
       "title": "Created At"
+     },
+     "started_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Started At"
+     },
+     "finished_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Finished At"
      },
      "invite_token": {
       "anyOf": [
@@ -6372,6 +6406,20 @@
        }
       ],
       "title": "Invite Token"
+     },
+     "sections": {
+      "anyOf": [
+       {
+        "items": {
+         "$ref": "#/components/schemas/SectionGrade"
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Sections"
      }
     },
     "type": "object",
@@ -6527,10 +6575,44 @@
       "title": "Fast Answers",
       "default": 0
      },
+     "flagged": {
+      "type": "boolean",
+      "title": "Flagged",
+      "default": false
+     },
+     "extra_time": {
+      "type": "integer",
+      "title": "Extra Time",
+      "default": 0
+     },
      "created_at": {
       "type": "string",
       "format": "date-time",
       "title": "Created At"
+     },
+     "started_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Started At"
+     },
+     "finished_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Finished At"
      },
      "invite_token": {
       "anyOf": [
@@ -6542,6 +6624,20 @@
        }
       ],
       "title": "Invite Token"
+     },
+     "sections": {
+      "anyOf": [
+       {
+        "items": {
+         "$ref": "#/components/schemas/SectionGrade"
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Sections"
      },
      "interview_id": {
       "type": "string",
@@ -8340,6 +8436,17 @@
      "messageId": {
       "type": "string",
       "title": "Messageid"
+     },
+     "publishTime": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Publishtime"
      }
     },
     "type": "object",
@@ -8917,6 +9024,30 @@
     ],
     "title": "ScorecardSection",
     "description": "One topic's round."
+   },
+   "SectionGrade": {
+    "properties": {
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "grade": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Grade"
+     }
+    },
+    "type": "object",
+    "required": [
+     "title"
+    ],
+    "title": "SectionGrade"
    },
    "SessionSummary": {
     "properties": {

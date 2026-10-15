@@ -4,7 +4,7 @@ from datetime import UTC, datetime
 
 from prepza_common import outbox
 from prepza_common.notifications import NOTIFICATION_REQUESTED
-from sqlalchemy import delete, select, update
+from sqlalchemy import delete, func, select, update
 from sqlalchemy.dialects.postgresql import insert
 
 from app.constants.events import (
@@ -186,6 +186,7 @@ async def start(invite_id: uuid.UUID, user_id: str, name: str | None = None) -> 
 
         if stored.status in NOT_STARTED:
             stored.status = InviteStatus.IN_PROCESS
+            stored.started_at = stored.started_at or datetime.now(UTC)
             await candidate_events.add(session, CANDIDATE_STARTED, stored.id, stored.interview_id)
 
         await session.commit()
@@ -230,7 +231,12 @@ async def finish(
         await session.execute(
             update(CandidateInvite)
             .where(CandidateInvite.id == invite_id)
-            .values(status=InviteStatus.FINISHED, grade=grade, flagged=flagged)
+            .values(
+                status=InviteStatus.FINISHED,
+                grade=grade,
+                flagged=flagged,
+                finished_at=func.coalesce(CandidateInvite.finished_at, func.now()),
+            )
         )
 
         if notice and new:

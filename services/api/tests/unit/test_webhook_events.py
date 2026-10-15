@@ -143,3 +143,12 @@ def test_only_editors_send_test_events_and_only_to_their_companys_hooks(
     other = "00000000-0000-4000-8000-000000000000"
 
     assert client.post(f"/manage/webhooks/{other}/test", params=params).status_code == 404
+
+
+def test_an_event_says_when_its_change_happened(endpoints):
+    endpoints["hook"]("https://a.example/x")
+    happened = datetime(2026, 10, 15, 8, 30, tzinfo=UTC)
+    asyncio.run(events.handle("candidate.started", CANDIDATE_DATA, "e1", happened))
+    [(_, body, _)] = endpoints["posted"]
+
+    assert body["occurred_at"] == "2026-10-15T08:30:00+00:00"

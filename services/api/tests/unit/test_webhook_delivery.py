@@ -11,6 +11,7 @@ from app.services import events
 from app.services import webhooks as delivery
 from tests.unit.conftest import CANDIDATE, COMPANY, INTERVIEW
 
+HAPPENED = datetime(2026, 10, 15, 8, tzinfo=UTC)
 FINISHED = {
     "candidate_invite_id": str(CANDIDATE),
     "interview_id": str(INTERVIEW),
@@ -23,7 +24,7 @@ FINISHED = {
 
 
 def finish(event_id="e1"):
-    asyncio.run(delivery.candidate_event("candidate.finished", FINISHED, event_id))
+    asyncio.run(delivery.candidate_event("candidate.finished", FINISHED, event_id, HAPPENED))
 
 
 def test_each_web_hook_gets_the_interview_and_candidate_signed(endpoints):

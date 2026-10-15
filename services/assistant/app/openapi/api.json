@@ -846,10 +846,37 @@
      "signals": {
       "$ref": "#/components/schemas/Signals"
      },
+     "flagged": {
+      "type": "boolean",
+      "title": "Flagged",
+      "description": "Whether the integrity signals are too many to trust the result as it is: worth a person's look at the full results, not a reason to reject",
+      "default": false
+     },
+     "extra_time": {
+      "type": "integer",
+      "title": "Extra Time",
+      "description": "Extra time per question the company gave the candidate, in percent",
+      "default": 0
+     },
+     "sections": {
+      "anyOf": [
+       {
+        "items": {
+         "$ref": "#/components/schemas/Section"
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Sections",
+      "description": "Each section's grade, in order; only when one candidate is read, and in web hook events (null in lists)"
+     },
      "results_url": {
       "type": "string",
       "title": "Results Url",
-      "description": "Link to the candidate's full results in prepza"
+      "description": "Link to the candidate's full results and report in prepza"
      },
      "invite_url": {
       "anyOf": [
@@ -868,6 +895,32 @@
       "format": "date-time",
       "title": "Created At",
       "description": "When the invitation was first sent"
+     },
+     "started_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Started At",
+      "description": "When the candidate started; null before"
+     },
+     "finished_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Finished At",
+      "description": "When the candidate finished; null before"
      }
     },
     "type": "object",
@@ -1263,6 +1316,32 @@
     ],
     "title": "RemovedEvent",
     "description": "The `data` object of a `candidate.removed` event: who was removed, as the candidate is\ngone."
+   },
+   "Section": {
+    "properties": {
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "grade": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Grade",
+      "description": "The section's grade in percent; null until it's finished"
+     }
+    },
+    "type": "object",
+    "required": [
+     "title"
+    ],
+    "title": "Section",
+    "description": "One section of a candidate's interview."
    },
    "Signals": {
     "properties": {

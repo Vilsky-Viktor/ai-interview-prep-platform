@@ -60,6 +60,9 @@ PUBSUB_URL = "https://pubsub.googleapis.com"
 # The attribute that carries an event's own id (its outbox row's), the same on every re-send, so
 # consumers can handle it once; events sent without an outbox go without it.
 EVENT_ID_ATTRIBUTE = "event_id"
+# When the change behind an event happened (ISO 8601): the outbox row's time, the same however
+# often it's published, so a consumer can put events in order.
+OCCURRED_AT_ATTRIBUTE = "occurred_at"
 # Publishing from inside a user's request waits at most this long; the scheduled flush sends
 # whatever didn't make it.
 PUBLISH_IN_REQUEST_TIMEOUT_SECONDS = 5

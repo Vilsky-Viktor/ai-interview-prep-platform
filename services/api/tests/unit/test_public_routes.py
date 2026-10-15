@@ -256,3 +256,26 @@ def test_the_reference_says_results_must_not_reject_candidates_automatically(cli
         "reject a candidate automatically"
         in spec["components"]["schemas"]["Signals"]["description"]
     )
+
+
+def test_a_candidate_reads_with_the_flag_extra_time_times_and_sections():
+    found = candidate_of(
+        candidate(
+            flagged=True,
+            extra_time=25,
+            started_at="2026-10-15T08:00:00Z",
+            finished_at="2026-10-15T08:20:00Z",
+            sections=[{"title": "SQL", "grade": 90}],
+        ),
+        COMPANY,
+        INTERVIEW,
+        "https://prepza.ai",
+    )
+
+    assert (found.flagged, found.extra_time) == (True, 25)
+    assert found.started_at is not None and found.finished_at is not None
+    assert [(section.title, section.grade) for section in found.sections] == [("SQL", 90)]
+
+
+def test_a_candidate_from_a_list_has_no_sections():
+    assert candidate_of(candidate(), COMPANY, INTERVIEW, "https://prepza.ai").sections is None

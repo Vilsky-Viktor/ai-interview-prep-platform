@@ -1,6 +1,6 @@
 from fastapi import APIRouter, status
 from prepza_common.google import Invoker
-from prepza_common.pubsub import PushBody, event_of
+from prepza_common.pubsub import PushBody, event_of, occurred_at
 
 from app.services.events import handle
 
@@ -13,4 +13,4 @@ async def receive_event(body: PushBody) -> None:
     with backoff, and moves it to the dead-letter topic after the subscription's maximum
     attempts."""
     event_type, data, event_id = event_of(body)
-    await handle(event_type, data, event_id)
+    await handle(event_type, data, event_id, occurred_at(body))

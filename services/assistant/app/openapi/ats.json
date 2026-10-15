@@ -1590,6 +1590,17 @@
      "messageId": {
       "type": "string",
       "title": "Messageid"
+     },
+     "publishTime": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Publishtime"
      }
     },
     "type": "object",

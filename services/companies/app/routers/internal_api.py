@@ -1,3 +1,4 @@
+import asyncio
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
@@ -7,7 +8,7 @@ from app.helpers.candidates import candidate_out
 from app.helpers.interviews import attach_set_if_reachable, interview_out
 from app.integrations import rounds
 from app.schemas.interviews import InterviewOut
-from app.schemas.invites import CandidateOut
+from app.schemas.invites import CandidateOut, SectionGrade
 from app.service_auth import ServiceCaller
 from app.services import candidate_results
 from app.storage import candidates, interviews
@@ -68,6 +69,14 @@ async def get_candidate(
     if invite is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Candidate not found")
 
-    totals = await rounds.invite_scores([invite.id])
+    # Both from rounds, asked at once.
+    totals, card = await asyncio.gather(
+        rounds.invite_scores([invite.id]), rounds.scorecard(invite.id)
+    )
+    found = candidate_out(invite, totals.get(str(invite.id)) or {}, interview, with_link=True)
+    found.sections = [
+        SectionGrade(title=section["topic_title"], grade=section["final_score"])
+        for section in card or []
+    ]
 
-    return candidate_out(invite, totals.get(str(invite.id)) or {}, interview, with_link=True)
+    return found

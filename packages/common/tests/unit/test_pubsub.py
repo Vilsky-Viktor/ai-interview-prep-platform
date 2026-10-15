@@ -1,6 +1,7 @@
 import asyncio
 import base64
 import json
+from datetime import UTC, datetime
 from unittest import mock
 
 import pytest
@@ -72,12 +73,22 @@ def test_a_batch_goes_in_one_call_with_each_events_own_id(client, monkeypatch):
     monkeypatch.setenv("GOOGLE_CLOUD_PROJECT", "demo-prepza")
 
     asyncio.run(
-        pubsub.publish_batch([pubsub.message("a.done", {}, "id-1"), pubsub.message("b.done", {})])
+        pubsub.publish_batch(
+            [
+                pubsub.message("a.done", {}, "id-1", datetime(2026, 10, 15, tzinfo=UTC)),
+                pubsub.message("b.done", {}),
+            ]
+        )
     )
 
     [(_, body, _)] = client.calls
     [given, new] = [message["attributes"] for message in body["messages"]]
-    assert given == {"type": "a.done", "event_id": "id-1"}
+    # With when it happened, the same on a re-send.
+    assert given == {
+        "type": "a.done",
+        "event_id": "id-1",
+        "occurred_at": "2026-10-15T00:00:00+00:00",
+    }
     assert new["type"] == "b.done"
     assert new["event_id"]
 
@@ -103,3 +114,16 @@ def test_a_push_with_an_event_id_is_known_by_it_across_re_sends():
     )
 
     assert event_of(body) == ("candidate.invited", {}, "row-1")
+
+
+def test_an_event_says_when_it_happened_else_when_it_was_published():
+    def push(attributes, publish_time=None):
+        message = pubsub.PushMessage(attributes=attributes, messageId="1", publishTime=publish_time)
+
+        return pubsub.PushBody(message=message, subscription="s")
+
+    happened = push({"occurred_at": "2026-10-15T08:00:00+00:00"}, "2026-10-15T09:00:00Z")
+    older = push({}, "2026-10-15T09:00:00Z")
+
+    assert pubsub.occurred_at(happened) == datetime(2026, 10, 15, 8, tzinfo=UTC)
+    assert pubsub.occurred_at(older) == datetime(2026, 10, 15, 9, tzinfo=UTC)

@@ -90,6 +90,10 @@ are retried with growing pauses, from 5 minutes up to 6 hours apart, for 3 days;
 web hook is marked as failing on the API page until it takes an event again. An event can
 occasionally arrive more than once; use its `id` to ignore duplicates.
 
+Each request body is a JSON object with the event's `id`, its `type`, `occurred_at` (when the
+change happened, in ISO 8601) and its `data`. A retried event can arrive after a later one, so
+order a candidate's events by `occurred_at`, not by when they arrive.
+
 # SDK
 
 Your page can show the interview itself, for a candidate invited with `sign_in` false. Your

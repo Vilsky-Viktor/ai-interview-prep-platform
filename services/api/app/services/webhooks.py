@@ -33,6 +33,7 @@ async def send(
     event_type: str,
     company_id: UUID,
     event_id: str,
+    occurred_at: datetime,
     build: Callable[[], Awaitable[BaseModel | None]],
 ) -> None:
     """Sends an event to each of the company's web hooks, once, while whoever added it is still
@@ -64,7 +65,7 @@ async def send(
     if data is None:
         return
 
-    body = body_of(event_id, event_type, jsonable_encoder(data))
+    body = body_of(event_id, event_type, jsonable_encoder(data), occurred_at)
     # All at once, so slow endpoints together stay within Pub/Sub's acknowledgement deadline.
     taken = await asyncio.gather(*(deliver(hook, event_id, body) for hook in hooks))
     next_at = datetime.now(UTC) + retry_delay(1)
@@ -74,7 +75,9 @@ async def send(
             await retries.add(hook.id, event_id, body.decode(), next_at)
 
 
-async def candidate_event(event_type: str, data: dict, event_id: str) -> None:
+async def candidate_event(
+    event_type: str, data: dict, event_id: str, occurred_at: datetime
+) -> None:
     """A candidate finished, started, wasn't reached or expired: the interview and the
     candidate as they are now."""
     company_id = UUID(data["company_id"])
@@ -97,10 +100,10 @@ async def candidate_event(event_type: str, data: dict, event_id: str) -> None:
             candidate=candidate_of(candidate, company_id, interview_id, settings.site_url),
         )
 
-    await send(event_type, company_id, event_id, build)
+    await send(event_type, company_id, event_id, occurred_at, build)
 
 
-async def removed(data: dict, event_id: str) -> None:
+async def removed(data: dict, event_id: str, occurred_at: datetime) -> None:
     """A candidate was removed: who it was, from the event itself, as the candidate is gone."""
 
     async def build() -> RemovedEvent:
@@ -110,10 +113,10 @@ async def removed(data: dict, event_id: str) -> None:
             email=data["email"],
         )
 
-    await send(CANDIDATE_REMOVED, UUID(data["company_id"]), event_id, build)
+    await send(CANDIDATE_REMOVED, UUID(data["company_id"]), event_id, occurred_at, build)
 
 
-async def interview_ready(data: dict, event_id: str) -> None:
+async def interview_ready(data: dict, event_id: str, occurred_at: datetime) -> None:
     company_id, interview_id = UUID(data["company_id"]), UUID(data["interview_id"])
 
     async def build() -> InterviewEvent | None:
@@ -127,14 +130,14 @@ async def interview_ready(data: dict, event_id: str) -> None:
 
         return InterviewEvent(interview=interview_of(interview))
 
-    await send(INTERVIEW_READY, company_id, event_id, build)
+    await send(INTERVIEW_READY, company_id, event_id, occurred_at, build)
 
 
 async def test(hook: Webhook) -> bool:
     """A signed test event, sent now, whether the web hook took it; its log shows it too."""
     event_id = str(uuid4())
 
-    return await deliver(hook, event_id, body_of(event_id, TEST_EVENT, {}))
+    return await deliver(hook, event_id, body_of(event_id, TEST_EVENT, {}, datetime.now(UTC)))
 
 
 async def retry() -> int:

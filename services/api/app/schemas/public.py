@@ -28,6 +28,15 @@ class Signals(BaseModel):
     fast_answers: int = Field(description="Answers given too quickly to have read the question")
 
 
+class Section(BaseModel):
+    """One section of a candidate's interview."""
+
+    title: str
+    grade: int | None = Field(
+        default=None, description="The section's grade in percent; null until it's finished"
+    )
+
+
 class Candidate(BaseModel):
     id: UUID
     email: str
@@ -52,7 +61,27 @@ class Candidate(BaseModel):
         )
     )
     signals: Signals
-    results_url: str = Field(description="Link to the candidate's full results in prepza")
+    flagged: bool = Field(
+        default=False,
+        description=(
+            "Whether the integrity signals are too many to trust the result as it is: worth a "
+            "person's look at the full results, not a reason to reject"
+        ),
+    )
+    extra_time: int = Field(
+        default=0,
+        description="Extra time per question the company gave the candidate, in percent",
+    )
+    sections: list[Section] | None = Field(
+        default=None,
+        description=(
+            "Each section's grade, in order; only when one candidate is read, and in web hook "
+            "events (null in lists)"
+        ),
+    )
+    results_url: str = Field(
+        description="Link to the candidate's full results and report in prepza"
+    )
     invite_url: str | None = Field(
         default=None,
         description=(
@@ -61,6 +90,12 @@ class Candidate(BaseModel):
         ),
     )
     created_at: datetime = Field(description="When the invitation was first sent")
+    started_at: datetime | None = Field(
+        default=None, description="When the candidate started; null before"
+    )
+    finished_at: datetime | None = Field(
+        default=None, description="When the candidate finished; null before"
+    )
 
 
 class CandidateIn(BaseModel):

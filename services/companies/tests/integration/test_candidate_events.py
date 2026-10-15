@@ -74,3 +74,23 @@ def test_an_interview_ready_says_whose_it_is(run):
         "interview.ready",
         {"interview_id": str(interview.id), "company_id": str(company.id)},
     ) in told
+
+
+def test_a_candidates_start_and_finish_times_are_kept_from_the_first_time(run):
+    async def scenario():
+        company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
+        interview = await interviews.create(company.id, uuid.uuid4(), "en")
+        invite, _ = await invites.upsert(interview.id, "t@example.com", "B", "A", "en")
+        await invites.start(invite.id, "u1")
+        first = await invites.get(invite.id)
+        # Back through the link later: the first start stays.
+        await invites.start(invite.id, "u1")
+        await invites.finish(invite.id, 80, False, None)
+        await invites.finish(invite.id, 80, False, None)
+
+        return first.started_at, await invites.get(invite.id)
+
+    started_at, done = run(scenario())
+
+    assert started_at is not None and done.started_at == started_at
+    assert done.finished_at is not None and done.finished_at >= started_at

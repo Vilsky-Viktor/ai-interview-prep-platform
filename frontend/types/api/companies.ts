@@ -2024,15 +2024,30 @@ export interface components {
      * @enum {string}
      */
     BrandFont:
-      | "poppins"
-      | "geist"
+      | "poppins_geist"
       | "inter"
       | "roboto"
       | "open_sans"
       | "lato"
       | "montserrat"
       | "nunito"
+      | "raleway"
+      | "work_sans"
+      | "source_sans_3"
+      | "noto_sans"
+      | "pt_sans"
+      | "ubuntu"
+      | "rubik"
+      | "manrope"
+      | "dm_sans"
+      | "ibm_plex_sans"
+      | "mulish"
+      | "fira_sans"
+      | "plus_jakarta_sans"
+      | "outfit"
       | "merriweather"
+      | "lora"
+      | "playfair_display"
     /**
      * BrandOut
      * @description Who a candidate's interview is for, shown while they take it.
@@ -2054,7 +2069,7 @@ export interface components {
      *     pages.
      */
     BrandStyle: {
-      /** @default poppins */
+      /** @default poppins_geist */
       font: components["schemas"]["BrandFont"]
       /**
        * Radius
@@ -2167,12 +2182,28 @@ export interface components {
        */
       fast_answers: number
       /**
+       * Flagged
+       * @default false
+       */
+      flagged: boolean
+      /**
+       * Extra Time
+       * @default 0
+       */
+      extra_time: number
+      /**
        * Created At
        * Format: date-time
        */
       created_at: string
+      /** Started At */
+      started_at?: string | null
+      /** Finished At */
+      finished_at?: string | null
       /** Invite Token */
       invite_token?: string | null
+      /** Sections */
+      sections?: components["schemas"]["SectionGrade"][] | null
     }
     /**
      * CandidateSort
@@ -2254,12 +2285,28 @@ export interface components {
        */
       fast_answers: number
       /**
+       * Flagged
+       * @default false
+       */
+      flagged: boolean
+      /**
+       * Extra Time
+       * @default 0
+       */
+      extra_time: number
+      /**
        * Created At
        * Format: date-time
        */
       created_at: string
+      /** Started At */
+      started_at?: string | null
+      /** Finished At */
+      finished_at?: string | null
       /** Invite Token */
       invite_token?: string | null
+      /** Sections */
+      sections?: components["schemas"]["SectionGrade"][] | null
       /**
        * Interview Id
        * Format: uuid
@@ -2959,6 +3006,8 @@ export interface components {
       }
       /** Messageid */
       messageId: string
+      /** Publishtime */
+      publishTime?: string | null
     }
     /** QuestionOption */
     QuestionOption: {
@@ -3183,6 +3232,13 @@ export interface components {
       review: components["schemas"]["ScorecardQuestion"][]
       /** Passed */
       passed: boolean | null
+    }
+    /** SectionGrade */
+    SectionGrade: {
+      /** Title */
+      title: string
+      /** Grade */
+      grade?: number | null
     }
     /** SessionSummary */
     SessionSummary: {
