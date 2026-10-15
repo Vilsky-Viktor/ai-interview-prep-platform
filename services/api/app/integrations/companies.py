@@ -1,8 +1,9 @@
 from datetime import datetime
 from uuid import UUID
 
-from fastapi import HTTPException, status
-from prepza_common import company_access, http
+from fastapi import status
+from prepza_common import company_access, company_invites, http
+from prepza_common.http import passed_on
 
 from app.config.settings import settings
 from app.service_auth import service_token
@@ -30,10 +31,7 @@ async def _call(method: str, path: str, params: dict | None = None, body: dict |
         method, f"{settings.companies_url}{path}", params=params, json=body, headers=_headers()
     )
 
-    if response.status_code in PASSED_ON:
-        raise HTTPException(response.status_code, response.json().get("detail"))
-
-    response.raise_for_status()
+    passed_on(response, PASSED_ON)
 
     return response.json() if response.content else None
 
@@ -108,25 +106,18 @@ async def invite(
 ) -> UUID:
     """Invites the candidate as `sender_id` would, and returns the invite's id. Companies'
     refusals (PASSED_ON) raise an HTTPException with its status and reason."""
-    response = await http.get_client().post(
-        f"{settings.companies_url}/internal/interviews/{interview_id}/invites",
-        json={
-            "email": email,
-            "sender_id": sender_id,
-            "name": name,
-            "return_url": return_url,
-            "sign_in": sign_in,
-            "theme": theme,
-        },
-        headers=_headers(),
+    body = {
+        "email": email,
+        "sender_id": sender_id,
+        "name": name,
+        "return_url": return_url,
+        "sign_in": sign_in,
+        "theme": theme,
+    }
+
+    return await company_invites.invite(
+        settings.companies_url, service_token("companies"), interview_id, body, PASSED_ON
     )
-
-    if response.status_code in PASSED_ON:
-        raise HTTPException(response.status_code, response.json().get("detail"))
-
-    response.raise_for_status()
-
-    return UUID(response.json()["invite_id"])
 
 
 def _candidate_path(company_id: UUID, interview_id: UUID, invite_id: UUID) -> str:

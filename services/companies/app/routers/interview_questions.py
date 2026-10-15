@@ -2,6 +2,7 @@ from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
 from prepza_common.auth import CurrentUser
+from prepza_common.http import passed_on
 from prepza_common.paging import PageParams
 from prepza_common.pause import refuse_if_paused
 
@@ -71,10 +72,7 @@ async def regenerate_question(interview_id: UUID, question_id: UUID, user: Curre
         question_id, interview.set_id, user.uid, await billing.company_paid(interview.company_id)
     )
 
-    if response.is_error:
-        raise HTTPException(response.status_code, response.json().get("detail"))
-
-    return response.json()
+    return passed_on(response).json()
 
 
 @router.post(

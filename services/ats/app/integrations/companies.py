@@ -1,7 +1,7 @@
 from uuid import UUID
 
-from fastapi import HTTPException, status
-from prepza_common import company_access, http
+from fastapi import status
+from prepza_common import company_access, company_invites, http
 
 from app.config.settings import settings
 from app.service_auth import service_token
@@ -49,16 +49,9 @@ async def interviews(ids) -> dict[UUID, dict]:
 async def invite(interview_id: UUID, email: str, sender_id: str, name: str | None = None) -> UUID:
     """Invites the candidate to the interview as `sender_id` would, with their name from the ATS
     (companies keeps a name already known), and returns the invite's id.
-    A refusal raises an HTTPException with companies' status (INVITE_REFUSALS)."""
-    response = await http.get_client().post(
-        f"{settings.companies_url}/internal/interviews/{interview_id}/invites",
-        json={"email": email, "sender_id": sender_id, "name": name},
-        headers=_headers(),
+    A refusal raises an HTTPException with companies' status and reason (INVITE_REFUSALS)."""
+    body = {"email": email, "sender_id": sender_id, "name": name}
+
+    return await company_invites.invite(
+        settings.companies_url, service_token("companies"), interview_id, body, INVITE_REFUSALS
     )
-
-    if response.status_code in INVITE_REFUSALS:
-        raise HTTPException(response.status_code)
-
-    response.raise_for_status()
-
-    return UUID(response.json()["invite_id"])

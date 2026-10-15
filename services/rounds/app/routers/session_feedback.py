@@ -3,6 +3,7 @@ from uuid import UUID
 import httpx
 from fastapi import APIRouter, HTTPException, Response, status
 from prepza_common.auth import CurrentUser
+from prepza_common.http import passed_on
 
 from app.helpers.rounds import find_question
 from app.integrations import feedback
@@ -22,10 +23,7 @@ async def require_session_question(session_id: UUID, question_id: UUID, user: Cu
 
 def passed_through(response: httpx.Response) -> Response:
     """Keeps the library's 409 (already rated or reported) and validation errors for the client."""
-    if response.status_code in (status.HTTP_409_CONFLICT, 422):
-        raise HTTPException(response.status_code, response.json().get("detail"))
-
-    response.raise_for_status()
+    passed_on(response, {status.HTTP_409_CONFLICT, status.HTTP_422_UNPROCESSABLE_CONTENT})
 
     return Response(response.content, response.status_code, media_type="application/json")
 

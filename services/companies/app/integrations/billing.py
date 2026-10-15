@@ -3,6 +3,7 @@ from uuid import UUID
 import httpx
 from fastapi import HTTPException, status
 from prepza_common import http
+from prepza_common.http import passed_on
 
 from app.config.settings import settings
 from app.constants.billing import WELCOME_ATTEMPTS
@@ -155,12 +156,9 @@ async def turn_on_auto_top_up(company_id: UUID, body: dict, buyer_id: str) -> di
         headers=_headers(),
     )
 
-    if response.status_code in (status.HTTP_403_FORBIDDEN, status.HTTP_422_UNPROCESSABLE_CONTENT):
-        raise HTTPException(response.status_code, response.json()["detail"])
+    refusals = {status.HTTP_403_FORBIDDEN, status.HTTP_422_UNPROCESSABLE_CONTENT}
 
-    response.raise_for_status()
-
-    return response.json()
+    return passed_on(response, refusals).json()
 
 
 async def turn_off_auto_top_up(company_id: UUID, buyer_id: str | None = None) -> None:
@@ -213,9 +211,4 @@ async def company_checkout(company_id: UUID, price_id: str, buyer_id: str) -> st
         headers=_headers(),
     )
 
-    if response.status_code == status.HTTP_422_UNPROCESSABLE_CONTENT:
-        raise HTTPException(response.status_code, response.json()["detail"])
-
-    response.raise_for_status()
-
-    return response.json()["transaction_id"]
+    return passed_on(response, {status.HTTP_422_UNPROCESSABLE_CONTENT}).json()["transaction_id"]

@@ -1,13 +1,14 @@
 from uuid import UUID
 
-import httpx
 from fastapi import APIRouter, HTTPException, Request, status
 from prepza_common.auth import CurrentUser
+from prepza_common.http import passed_on
 from prepza_common.human_check import require_human
 from prepza_common.pause import refuse_if_paused
 
 from app.config.settings import settings
 from app.constants.audit import AuditAction
+from app.constants.generation import GENERATION_REFUSALS
 from app.integrations import billing
 from app.integrations import generation as generation_api
 from app.integrations.redis import get_redis
@@ -30,20 +31,6 @@ async def get_interview(user: CurrentUser, interview_id: UUID, editor: bool = Fa
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Interview not found")
 
     return interview
-
-
-def passed_through(response: httpx.Response) -> dict:
-    """Keeps the generation service's 404, 409 (wrong state) and 422 (invalid) for the client."""
-    if response.status_code in (
-        status.HTTP_404_NOT_FOUND,
-        status.HTTP_409_CONFLICT,
-        status.HTTP_422_UNPROCESSABLE_CONTENT,
-    ):
-        raise HTTPException(response.status_code, response.json().get("detail"))
-
-    response.raise_for_status()
-
-    return response.json()
 
 
 @router.get("/{interview_id}/generation")
@@ -78,7 +65,7 @@ async def review_generation(
     response = await generation_api.review(
         interview.generation_id, interview.company_id, body.model_dump()
     )
-    reviewed = passed_through(response)
+    reviewed = passed_on(response, GENERATION_REFUSALS).json()
     await audit.record(
         interview.company_id, user.uid, AuditAction.TOPICS_APPROVED, interview.id, via=via
     )
@@ -90,9 +77,10 @@ async def review_generation(
 async def retry_generation(interview_id: UUID, user: CurrentUser) -> dict:
     await refuse_if_paused(get_redis())
     interview = await get_interview(user, interview_id, editor=True)
-    retried = passed_through(
-        await generation_api.retry(interview.generation_id, interview.company_id)
-    )
+    retried = passed_on(
+        await generation_api.retry(interview.generation_id, interview.company_id),
+        GENERATION_REFUSALS,
+    ).json()
     # Generating again: its lists stop showing the failure.
     await interviews.set_generation_failed(interview.id, False)
 
@@ -103,9 +91,10 @@ async def retry_generation(interview_id: UUID, user: CurrentUser) -> dict:
 async def cancel_generation(interview_id: UUID, user: CurrentUser) -> dict:
     """Removes the interview too, so it isn't left without questions."""
     interview = await get_interview(user, interview_id, editor=True)
-    cancelled = passed_through(
-        await generation_api.cancel(interview.generation_id, interview.company_id)
-    )
+    cancelled = passed_on(
+        await generation_api.cancel(interview.generation_id, interview.company_id),
+        GENERATION_REFUSALS,
+    ).json()
     await interviews.remove(interview.id)
 
     return cancelled
