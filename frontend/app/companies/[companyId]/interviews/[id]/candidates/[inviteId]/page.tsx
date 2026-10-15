@@ -1,6 +1,6 @@
 import { InfoIcon, LinkIcon } from "lucide-react"
 import { notFound } from "next/navigation"
-import { getTranslations } from "next-intl/server"
+import { getLocale, getTranslations } from "next-intl/server"
 import { cn } from "cn"
 
 import { BackLink } from "@/components/back-link"
@@ -23,6 +23,7 @@ import { gradeTone } from "@/lib/grade-tone"
 import { serverFetch, signedIn } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
 import type { Scorecard } from "@/types/company"
+import { formatPercent } from "@/lib/format"
 
 export const generateMetadata = () => translatedTitle("candidates", "scorecard")
 
@@ -37,6 +38,7 @@ export default async function ScorecardPage({
 
   const { companyId, id, inviteId } = await params
   const reportT = await getTranslations("report")
+  const locale = await getLocale()
   const t = await getTranslations("candidates")
   const statuses = await getTranslations("candidateStatus")
   const card = await serverFetch<Scorecard>(
@@ -173,7 +175,7 @@ export default async function ScorecardPage({
       {card.sessions.length > 0 && (
         <GradeCard>
           <GradeBlock
-            value={card.grade == null ? "—" : `${card.grade}%`}
+            value={formatPercent(card.grade, locale)}
             label={t("grade")}
             tone={
               card.passed == null
@@ -224,7 +226,7 @@ export default async function ScorecardPage({
                 <IntegrityLine session={session} />
               </div>
               <p className={cn("text-5xl font-light tabular-nums", tone)}>
-                {score == null ? "—" : `${score}%`}
+                {formatPercent(score, locale)}
               </p>
             </div>
             <ScorecardReview items={session.review} />

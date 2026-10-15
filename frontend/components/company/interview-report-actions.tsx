@@ -1,6 +1,6 @@
 "use client"
 
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 import { useState } from "react"
 import { flushSync } from "react-dom"
 
@@ -21,6 +21,7 @@ export function InterviewReportActions({
   title: string
 }) {
   const t = useTranslations("report")
+  const locale = useLocale()
   const candidates = useTranslations("candidates")
   const [report, setReport] = useState<InterviewReportData | null>(null)
 
@@ -45,10 +46,13 @@ export function InterviewReportActions({
         emailPath={`/companies/interviews/${interviewId}/report/email`}
         summary={
           report
-            ? candidatesSummary(report, (key, values) =>
-                ["pageLeaves", "copies", "fastAnswers"].includes(key)
-                  ? candidates(key, values)
-                  : t(key, values)
+            ? candidatesSummary(
+                report,
+                (key, values) =>
+                  ["pageLeaves", "copies", "fastAnswers"].includes(key)
+                    ? candidates(key, values)
+                    : t(key, values),
+                locale
               )
             : ""
         }

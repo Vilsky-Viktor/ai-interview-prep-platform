@@ -1,6 +1,6 @@
 "use client"
 
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 
 import { ReportActions } from "@/components/company/report-actions"
 import { REPORT_ID } from "@/constants/report"
@@ -18,6 +18,7 @@ export function CandidateReportActions({
   report: CandidateReportData
 }) {
   const t = useTranslations("report")
+  const locale = useLocale()
   const candidates = useTranslations("candidates")
 
   return (
@@ -25,10 +26,13 @@ export function CandidateReportActions({
       reportId={REPORT_ID}
       fileName={t("fileName", { email: report.email })}
       emailPath={`/companies/interviews/${interviewId}/candidates/${inviteId}/report/email`}
-      summary={reportSummary(report, (key, values) =>
-        ["pageLeaves", "copies", "fastAnswers"].includes(key)
-          ? candidates(key, values)
-          : t(key, values)
+      summary={reportSummary(
+        report,
+        (key, values) =>
+          ["pageLeaves", "copies", "fastAnswers"].includes(key)
+            ? candidates(key, values)
+            : t(key, values),
+        locale
       )}
     />
   )

@@ -1,5 +1,5 @@
 import { cn } from "cn"
-import { getNow, getTranslations } from "next-intl/server"
+import { getLocale, getNow, getTranslations } from "next-intl/server"
 
 import { CandidateSignals } from "@/components/company/candidate-signals"
 import { CandidateStatsDemo } from "@/components/landing/candidate-stats-demo"
@@ -9,6 +9,7 @@ import { DEMO_PASS_MARK } from "@/constants/landing"
 import { LocalDate } from "@/components/local-date"
 import { gradeTone } from "@/lib/grade-tone"
 import type { Candidate } from "@/types/company"
+import { formatPercent } from "@/lib/format"
 
 const POINTS = ["own", "timed", "flags", "answers"] as const
 const DAY_MS = 24 * 60 * 60 * 1000
@@ -53,6 +54,7 @@ const CANDIDATES = [
  * (components/company/candidate-list.tsx), then what keeps the interview fair. */
 export async function CompaniesSection() {
   const t = await getTranslations("landing.companies")
+  const locale = await getLocale()
   const candidates = await getTranslations("candidates")
   const statuses = await getTranslations("candidateStatus")
   const now = (await getNow()).getTime()
@@ -97,7 +99,7 @@ export async function CompaniesSection() {
                       <>
                         <span className="w-20 text-center sm:w-24">
                           <span className="block text-2xl font-light tabular-nums">
-                            {progress}%
+                            {formatPercent(progress, locale)}
                           </span>
                           <span className="block text-sm text-muted-foreground">
                             {candidates("progress")}
@@ -113,7 +115,7 @@ export async function CompaniesSection() {
                               )
                             )}
                           >
-                            {grade == null ? "—" : `${grade}%`}
+                            {formatPercent(grade, locale)}
                           </span>
                           <span className="block text-sm text-muted-foreground">
                             {candidates("grade")}

@@ -33,7 +33,7 @@ describe("candidateLabel", () => {
 
 describe("reportSummary", () => {
   it("names the candidate in the shared summary", () => {
-    expect(reportSummary(report, t).split("\n")[1]).toMatch(
+    expect(reportSummary(report, t, "en").split("\n")[1]).toMatch(
       /^Ann Lee \(ann@example\.com\): 80%, /
     )
   })

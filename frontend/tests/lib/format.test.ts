@@ -4,6 +4,7 @@ import {
   formatDate,
   formatDateTime,
   formatDay,
+  formatPercent,
   formatPrice,
   formatPriceRange,
   today,
@@ -29,7 +30,9 @@ describe("formatDate", () => {
 
     expect(formatDate(late, "en", "UTC")).toBe("Oct 15, 2026")
     expect(formatDate(late, "en", "America/New_York")).toBe("Oct 14, 2026")
-    expect(formatDateTime(late, "en", "America/New_York")).toBe("Oct 14, 2026, 10:00 PM")
+    expect(formatDateTime(late, "en", "America/New_York")).toBe(
+      "Oct 14, 2026, 10:00 PM"
+    )
   })
 })
 
@@ -72,5 +75,15 @@ describe("formatPriceRange", () => {
 
   it("shows cents when either end has them", () => {
     expect(plain(formatPriceRange(50, 300, "USD", "en"))).toBe("$0.50 – $3.00")
+  })
+})
+
+describe("formatPercent", () => {
+  it("writes a percentage as each language does, and a dash for none", () => {
+    expect(formatPercent(85, "en")).toBe("85%")
+    expect(formatPercent(85, "tr")).toBe("%85")
+    expect(formatPercent(85, "fr")).toMatch(/^85\s%$/)
+    expect(formatPercent(85, "de")).toMatch(/^85\s%$/)
+    expect(formatPercent(null, "en")).toBe("—")
   })
 })

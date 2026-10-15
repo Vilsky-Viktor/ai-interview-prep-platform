@@ -1,13 +1,14 @@
 "use client"
 
 import Link from "next/link"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 
 import { useLocalTime } from "@/hooks/use-local-time"
 import { VirtualList } from "@/components/virtual-list"
 import { LIST_BOX } from "@/constants/lists"
 import { usePagedList } from "@/hooks/use-paged-list"
 import type { PracticeRoundSummary } from "@/types/round"
+import { formatPercent } from "@/lib/format"
 
 function byRound(round: PracticeRoundSummary) {
   return round.round_id
@@ -23,6 +24,7 @@ export function PracticeRoundList({
   initial: PracticeRoundSummary[]
 }) {
   const t = useTranslations("practice")
+  const locale = useLocale()
   const localTime = useLocalTime()
   const { items, loadMore } = usePagedList(
     `/rounds/practice/${templateId}/rounds`,
@@ -59,7 +61,7 @@ export function PracticeRoundList({
           <span className="flex shrink-0 items-center gap-6 sm:gap-10">
             <span className="w-20 text-center sm:w-24">
               <span className="block text-2xl font-light tabular-nums">
-                {round.progress}%
+                {formatPercent(round.progress, locale)}
               </span>
               <span className="block text-sm text-muted-foreground">
                 {t("progressLabel")}
@@ -73,7 +75,7 @@ export function PracticeRoundList({
                     : "block text-2xl font-light tabular-nums"
                 }
               >
-                {round.grade == null ? "—" : `${round.grade}%`}
+                {formatPercent(round.grade, locale)}
               </span>
               <span className="block text-sm text-muted-foreground">
                 {t("gradeLabel")}

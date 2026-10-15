@@ -1,7 +1,7 @@
 import { cookies } from "next/headers"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { getTranslations } from "next-intl/server"
+import { getLocale, getTranslations } from "next-intl/server"
 
 import { GradeBlock, GradeCard } from "@/components/grade-card"
 import { BackLink } from "@/components/back-link"
@@ -15,6 +15,7 @@ import { TOKEN_COOKIE } from "@/constants/auth"
 import { serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
 import type { PracticeRound } from "@/types/round"
+import { formatPercent } from "@/lib/format"
 
 export const generateMetadata = () => translatedTitle("practice", "results")
 
@@ -27,6 +28,7 @@ export default async function PracticeRoundPage({
 }) {
   const { roundId } = await params
   const t = await getTranslations("practice")
+  const locale = await getLocale()
 
   if (!(await cookies()).has(TOKEN_COOKIE)) {
     return (
@@ -85,7 +87,10 @@ export default async function PracticeRoundPage({
         <>
           {/* The grade, and how many the talent picked an answer for. */}
           <GradeCard>
-            <GradeBlock value={`${round.grade ?? 0}%`} label={t("grade")} />
+            <GradeBlock
+              value={formatPercent(round.grade ?? 0, locale)}
+              label={t("grade")}
+            />
             <GradeBlock
               value={
                 <>
@@ -106,7 +111,7 @@ export default async function PracticeRoundPage({
                 </h2>
                 <p className="w-24 text-center">
                   <span className="block text-4xl font-light tabular-nums">
-                    {topic.score == null ? "—" : `${topic.score}%`}
+                    {formatPercent(topic.score, locale)}
                   </span>
                   <span className="block text-sm text-muted-foreground">
                     {t("gradeLabel")}

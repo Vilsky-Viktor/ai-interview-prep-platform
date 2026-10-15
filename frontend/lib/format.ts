@@ -78,3 +78,14 @@ export function compactPrice(cents: number, currency: string, locale: string) {
     maximumFractionDigits: 1,
   }).format(cents / 100)
 }
+
+/** A percentage (0 to 100) as the language writes it ("85 %" in French, "%85" in Turkish); "—"
+ * for none (a grade not known yet). */
+export function formatPercent(
+  value: number | null | undefined,
+  locale: string
+) {
+  return value == null
+    ? "—"
+    : new Intl.NumberFormat(locale, { style: "percent" }).format(value / 100)
+}

@@ -2,7 +2,7 @@
 
 import { cn } from "cn"
 import Link from "next/link"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 
 import { useLocalTime } from "@/hooks/use-local-time"
 import { CandidateSignals } from "@/components/company/candidate-signals"
@@ -10,6 +10,7 @@ import { NoName } from "@/components/company/no-name"
 import { Badge } from "@/components/ui/badge"
 import { gradeTone } from "@/lib/grade-tone"
 import type { Candidate } from "@/types/company"
+import { formatPercent } from "@/lib/format"
 
 // What a row shows; the assistant's answers may leave out the date or the progress.
 export type CandidateRowData = Pick<
@@ -40,6 +41,7 @@ export function CandidateRow({
   canEdit?: boolean
 }) {
   const t = useTranslations("candidates")
+  const locale = useLocale()
   const statuses = useTranslations("candidateStatus")
   const localTime = useLocalTime()
 
@@ -74,7 +76,7 @@ export function CandidateRow({
         <span className="flex shrink-0 items-center justify-center gap-6 @xl:justify-normal @xl:gap-10">
           <span className="w-20 text-center @xl:w-24">
             <span className="block text-2xl font-light tabular-nums">
-              {candidate.progress == null ? "—" : `${candidate.progress}%`}
+              {formatPercent(candidate.progress, locale)}
             </span>
             <span className="block text-sm text-muted-foreground">
               {t("progress")}
@@ -88,7 +90,7 @@ export function CandidateRow({
                 gradeTone(candidate.passed)
               )}
             >
-              {candidate.grade == null ? "—" : `${candidate.grade}%`}
+              {formatPercent(candidate.grade, locale)}
             </span>
             <span className="block text-sm text-muted-foreground">
               {t("grade")}

@@ -1,7 +1,7 @@
 "use client"
 
 import { cn } from "cn"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 
 import { CompanyLogo } from "@/components/company/company-logo"
 import { VerifiedBadge } from "@/components/company/verified-badge"
@@ -9,12 +9,14 @@ import { Wordmark } from "@/components/wordmark"
 import { INTERVIEW_REPORT_ID } from "@/constants/report"
 import { gradeTone } from "@/lib/grade-tone"
 import type { InterviewReportData } from "@/types/company"
+import { formatPercent } from "@/lib/format"
 
 /** All of a test's candidates with their totals, best first, for the PDF: like a candidate's
  * report, a row per candidate instead of a row per topic. It sits off screen, always in the
  * light design, and runs over as many A4 pages as it needs. */
 export function InterviewReport({ report }: { report: InterviewReportData }) {
   const t = useTranslations("report")
+  const locale = useLocale()
   const candidates = useTranslations("candidates")
 
   return (
@@ -88,7 +90,7 @@ export function InterviewReport({ report }: { report: InterviewReportData }) {
               </div>
               <div className="flex shrink-0 items-center gap-6">
                 <Total label={candidates("progress")}>
-                  {candidate.progress}%
+                  {formatPercent(candidate.progress, locale)}
                 </Total>
                 <Total
                   label={candidates("grade")}
@@ -97,7 +99,7 @@ export function InterviewReport({ report }: { report: InterviewReportData }) {
                     gradeTone(candidate.passed)
                   )}
                 >
-                  {candidate.grade == null ? "—" : `${candidate.grade}%`}
+                  {formatPercent(candidate.grade, locale)}
                 </Total>
               </div>
             </li>

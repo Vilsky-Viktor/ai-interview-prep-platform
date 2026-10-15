@@ -1,4 +1,4 @@
-import { getTranslations } from "next-intl/server"
+import { getLocale, getTranslations } from "next-intl/server"
 import { cn } from "cn"
 
 import { CompanyLogo } from "@/components/company/company-logo"
@@ -9,6 +9,7 @@ import { Wordmark } from "@/components/wordmark"
 import { REPORT_ID } from "@/constants/report"
 import { gradeTone } from "@/lib/grade-tone"
 import type { CandidateReportData } from "@/types/company"
+import { formatPercent } from "@/lib/format"
 
 /** The candidate's report the PDF is made from: one compact A4-wide page with the logo, the
  * overall result and each topic's score and signals, never the questions. It sits off screen,
@@ -21,6 +22,7 @@ export async function CandidateReport({
   const { company, logoUrl, title, email, grade, passed, passMark, sections } =
     report
   const t = await getTranslations("report")
+  const locale = await getLocale()
 
   return (
     <div
@@ -69,7 +71,7 @@ export async function CandidateReport({
             grade == null && "text-muted-foreground"
           )}
         >
-          {grade == null ? "—" : `${grade}%`}
+          {formatPercent(grade, locale)}
         </p>
         <p className="text-sm">
           <PassStatus passed={passed} passMark={passMark} />
@@ -92,7 +94,7 @@ export async function CandidateReport({
                 section.final_score == null && "text-muted-foreground"
               )}
             >
-              {section.final_score == null ? "—" : `${section.final_score}%`}
+              {formatPercent(section.final_score, locale)}
             </p>
           </li>
         ))}

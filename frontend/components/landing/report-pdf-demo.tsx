@@ -1,5 +1,5 @@
 import { cn } from "cn"
-import { getTranslations } from "next-intl/server"
+import { getLocale, getTranslations } from "next-intl/server"
 
 import { VerifiedBadge } from "@/components/company/verified-badge"
 import { DemoLogo } from "@/components/landing/demo-logo"
@@ -7,6 +7,7 @@ import { PdfIcon } from "@/components/pdf-icon"
 import { Wordmark } from "@/components/wordmark"
 import { DEMO_PASS_MARK } from "@/constants/landing"
 import { gradeTone } from "@/lib/grade-tone"
+import { formatPercent } from "@/lib/format"
 
 // The picture's candidates, best first, as the report lists them.
 const CANDIDATES = [
@@ -20,6 +21,7 @@ const CANDIDATES = [
  * (components/company/interview-report.tsx), small, always light like the real one. */
 export async function ReportPdfDemo({ role }: { role: string }) {
   const t = await getTranslations("report")
+  const locale = await getLocale()
   const candidates = await getTranslations("candidates")
 
   return (
@@ -77,7 +79,7 @@ export async function ReportPdfDemo({ role }: { role: string }) {
               </div>
               <div className="flex shrink-0 items-center gap-2">
                 <Total label={candidates("progress")}>
-                  {candidate.progress}%
+                  {formatPercent(candidate.progress, locale)}
                 </Total>
                 <Total
                   label={candidates("grade")}
@@ -89,7 +91,7 @@ export async function ReportPdfDemo({ role }: { role: string }) {
                     )
                   )}
                 >
-                  {candidate.grade}%
+                  {formatPercent(candidate.grade, locale)}
                 </Total>
               </div>
             </li>
