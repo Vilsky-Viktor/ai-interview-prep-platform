@@ -16,11 +16,12 @@ from app.services import slack as service
 from app.storage import slack as storage
 
 KEY = "Zm9vYmFyYmF6cXV4cXV1eGNvcmdlZ3JhdWx0Z2FycGw="
+C1 = "8c1d2b8e-1a2b-4c3d-8e9f-0a1b2c3d4e5f"
 
 
 @pytest.fixture(autouse=True)
 def configured(monkeypatch):
-    """Slack set up on the server, and Ann signed in as an owner of c1."""
+    """Slack set up on the server, and Ann signed in as an owner of C1."""
     monkeypatch.setattr(settings, "slack_client_id", "client")
     monkeypatch.setattr(settings, "slack_client_secret", "secret")
     monkeypatch.setattr(settings, "slack_encryption_key", KEY)
@@ -52,6 +53,20 @@ def nonces(monkeypatch):
     return found
 
 
+def test_a_company_id_that_isnt_one_is_refused_before_companies_is_asked(client, monkeypatch):
+    asked = []
+
+    async def access(company_id, user_id):
+        asked.append(company_id)
+
+        return {"member": True, "editor": True}
+
+    monkeypatch.setattr(companies, "access", access)
+
+    assert client.get("/slack?company_id=../users/u1").status_code == 422
+    assert asked == []
+
+
 def member(monkeypatch, editor: bool, is_member: bool = True):
     async def access(company_id, user_id):
         return {"member": is_member, "editor": editor}
@@ -60,7 +75,7 @@ def member(monkeypatch, editor: bool, is_member: bool = True):
 
 
 def test_add_to_slack_goes_to_slacks_page_with_a_signed_state(client, monkeypatch, nonces):
-    url = client.get("/slack/start?company_id=c1").json()["url"]
+    url = client.get(f"/slack/start?company_id={C1}").json()["url"]
     query = parse_qs(urlparse(url).query)
 
     assert url.startswith("https://slack.com/oauth/v2/authorize?")
@@ -74,7 +89,7 @@ def test_a_state_works_once_and_only_for_a_current_editor(client, monkeypatch, s
         return {"team": "Acme", "channel": "#hiring", "url": "https://hooks/x", "token": "t"}
 
     monkeypatch.setattr(slack_api, "exchange", exchange)
-    url = client.get("/slack/start?company_id=c1").json()["url"]
+    url = client.get(f"/slack/start?company_id={C1}").json()["url"]
     started = parse_qs(urlparse(url).query)["state"][0]
 
     assert callback(client, f"code=ok&state={started}").status_code == 303
@@ -90,17 +105,17 @@ def test_a_state_works_once_and_only_for_a_current_editor(client, monkeypatch, s
 def test_a_viewer_cant_add_slack_and_a_stranger_doesnt_see_the_company(client, monkeypatch):
     member(monkeypatch, editor=False)
 
-    assert client.get("/slack/start?company_id=c1").status_code == 403
-    assert client.delete("/slack?company_id=c1").status_code == 403
+    assert client.get(f"/slack/start?company_id={C1}").status_code == 403
+    assert client.delete(f"/slack?company_id={C1}").status_code == 403
 
     member(monkeypatch, editor=False, is_member=False)
 
-    assert client.get("/slack?company_id=c1").status_code == 404
+    assert client.get(f"/slack?company_id={C1}").status_code == 404
 
 
 def test_slack_not_set_up_on_the_server_says_so(client, monkeypatch):
     monkeypatch.setattr(settings, "slack_client_id", "")
-    response = client.get("/slack/start?company_id=c1")
+    response = client.get(f"/slack/start?company_id={C1}")
 
     assert response.status_code == 503
     assert response.json()["detail"] == "Slack isn't set up yet"
@@ -111,12 +126,12 @@ def state(expires_in=60):
     nonce = f"n{time.time_ns()}"
     service.get_redis().nonces[f"slack:state:{nonce}"] = 1
 
-    return signed_state(settings.service_secret, "c1", "u1", int(time.time()) + expires_in, nonce)
+    return signed_state(settings.service_secret, C1, "u1", int(time.time()) + expires_in, nonce)
 
 
 @pytest.fixture
 def saved(monkeypatch):
-    """What the callback saves and which earlier apps it removes; c1 had no channel before, and
+    """What the callback saves and which earlier apps it removes; C1 had no channel before, and
     no other company has one."""
     found = {"saved": None, "revoked": [], "earlier": None}
 
@@ -155,8 +170,10 @@ def test_back_from_slack_the_channel_is_saved_sealed_with_the_default_kinds(
     company_id, team, channel, webhook, token, kinds, user_id = saved["saved"]
 
     assert response.status_code == 303
-    assert response.headers["location"].endswith("/companies/c1/integrations/slack?slack=connected")
-    assert (company_id, team, channel, user_id) == ("c1", "Acme", "#hiring", "u1")
+    assert response.headers["location"].endswith(
+        f"/companies/{C1}/integrations/slack?slack=connected"
+    )
+    assert (company_id, team, channel, user_id) == (C1, "Acme", "#hiring", "u1")
     assert "https://hooks/x" not in webhook and token != "t"
     assert "candidate_finished" in kinds and "interview_ready" not in kinds
 
@@ -217,5 +234,5 @@ def test_only_known_kinds_are_saved(client, monkeypatch):
     monkeypatch.setattr(storage, "set_kinds", set_kinds)
     body = {"kinds": ["interview_ready", "made_up", "candidate_finished"]}
 
-    assert client.put("/slack/kinds?company_id=c1", json=body).status_code == 204
+    assert client.put(f"/slack/kinds?company_id={C1}", json=body).status_code == 204
     assert chosen == [["candidate_finished", "interview_ready"]]

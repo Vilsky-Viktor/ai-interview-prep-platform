@@ -1,3 +1,5 @@
+from uuid import UUID
+
 from fastapi import APIRouter, status
 from fastapi.responses import RedirectResponse
 from prepza_common.auth import CurrentUser
@@ -10,19 +12,19 @@ router = APIRouter(prefix="/slack", tags=["slack"])
 
 
 @router.get("")
-async def get_slack(company_id: str, user: CurrentUser) -> SlackOut:
+async def get_slack(company_id: UUID, user: CurrentUser) -> SlackOut:
     """The company's Slack channel and the notifications it gets; every member sees it."""
-    await companies.require(company_id, user.uid)
+    await companies.require(str(company_id), user.uid)
 
-    return await slack.overview(company_id)
+    return await slack.overview(str(company_id))
 
 
 @router.get("/start")
-async def start(company_id: str, user: CurrentUser) -> SlackStartOut:
+async def start(company_id: UUID, user: CurrentUser) -> SlackStartOut:
     """Where "Add to Slack" goes: Slack's page to approve prepza and pick a channel."""
-    await companies.require(company_id, user.uid, editor=True)
+    await companies.require(str(company_id), user.uid, editor=True)
 
-    return SlackStartOut(url=await slack.start(company_id, user.uid))
+    return SlackStartOut(url=await slack.start(str(company_id), user.uid))
 
 
 @router.get("/callback")
@@ -33,12 +35,12 @@ async def callback(state: str, code: str | None = None, error: str | None = None
 
 
 @router.put("/kinds", status_code=status.HTTP_204_NO_CONTENT)
-async def set_kinds(company_id: str, body: SlackKindsIn, user: CurrentUser) -> None:
-    await companies.require(company_id, user.uid, editor=True)
-    await slack.set_kinds(company_id, body.kinds)
+async def set_kinds(company_id: UUID, body: SlackKindsIn, user: CurrentUser) -> None:
+    await companies.require(str(company_id), user.uid, editor=True)
+    await slack.set_kinds(str(company_id), body.kinds)
 
 
 @router.delete("", status_code=status.HTTP_204_NO_CONTENT)
-async def disconnect(company_id: str, user: CurrentUser) -> None:
-    await companies.require(company_id, user.uid, editor=True)
-    await slack.disconnect(company_id)
+async def disconnect(company_id: UUID, user: CurrentUser) -> None:
+    await companies.require(str(company_id), user.uid, editor=True)
+    await slack.disconnect(str(company_id))
