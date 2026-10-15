@@ -131,4 +131,4 @@ See [CLAUDE.md](../CLAUDE.md). In short:
 - the simplest solution that works,
 - no business logic on the frontend: rules, thresholds and decisions live in the services.
 
-Claude Code skills for the repo's recurring work live in `.claude/skills/`: `translate` (a text in all 23 languages), `api-types` (the assistant's API snapshots and the frontend's types), `verify` (which suites to run, and the slow dev server), `review-batch` (working through a platform review), `ui-check` (screenshots, desktop and phone) and `migration` (an Alembic migration).
+Claude Code skills for the repo's recurring work live in `.claude/skills/`: `translate` (a text in all 23 languages), `api-types` (the assistant's API snapshots and the frontend's types), `verify` (which suites to run, and the slow dev server), `review-batch` (working through a platform review), `ui-build` (a screen in the app's design language, from its shared components), `ui-check` (screenshots, desktop and phone) and `migration` (an Alembic migration).
