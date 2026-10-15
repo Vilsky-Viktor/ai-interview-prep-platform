@@ -15,6 +15,7 @@ import {
 } from "@/constants/limits"
 import { useOneAtATime } from "@/hooks/use-one-at-a-time"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
+import { humanHeaders } from "@/lib/human-check"
 import { isSubmitShortcut } from "@/lib/keys"
 
 // No border, only a focus outline, like the chat inputs.
@@ -44,6 +45,7 @@ export function ContactForm() {
         await apiFetch("/rounds/help/contact", {
           method: "POST",
           body: JSON.stringify({ name, email, message }),
+          headers: await humanHeaders(),
         })
         setSentTo(email.trim())
       } catch (error) {

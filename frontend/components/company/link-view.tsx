@@ -11,6 +11,7 @@ import { InviteIntro } from "@/components/company/invite-intro"
 import { LinkStatus } from "@/components/link-status"
 import { Button } from "@/components/ui/button"
 import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
+import { humanHeaders } from "@/lib/human-check"
 import { refreshVerification } from "@/lib/auth"
 import { useBrandColors } from "@/hooks/use-brand-colors"
 import { useLinkData } from "@/hooks/use-link-data"
@@ -52,7 +53,8 @@ export function LinkView({ token }: { token: string }) {
     try {
       const result = await apiFetch<{ sessions: SessionSummary[] }>(
         `/companies/links/${token}/start`,
-        { method: "POST" }
+        // A new candidate shows they're a person.
+        { method: "POST", headers: await humanHeaders() }
       )
       const next =
         result.sessions.find((item) => item.status !== "finished") ??

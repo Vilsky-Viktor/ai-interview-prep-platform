@@ -1,6 +1,7 @@
 # Messages the services show users, in Russian, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Confirm you're not a robot, then try again.": "Подтвердите, что вы не робот, и попробуйте снова.",
     "This company is suspended. Contact hello@prepza.ai to find out more.": "Эта компания приостановлена. Подробнее — по адресу hello@prepza.ai.",
     "This interview isn't available.": "Это собеседование недоступно.",
     "Only an admin who has joined can become the owner.": "Владельцем может стать только администратор, который уже присоединился.",

@@ -1,11 +1,14 @@
 from uuid import UUID
 
 import httpx
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, Request, status
 from prepza_common.auth import CurrentUser
+from prepza_common.human_check import require_human
 from prepza_common.pause import refuse_if_paused
 
+from app.config.settings import settings
 from app.constants.audit import AuditAction
+from app.integrations import billing
 from app.integrations import generation as generation_api
 from app.integrations.redis import get_redis
 from app.models.interviews import Interview
@@ -57,12 +60,22 @@ async def get_generation(interview_id: UUID, user: CurrentUser) -> GenerationOut
 
 @router.post("/{interview_id}/generation/review")
 async def review_generation(
-    interview_id: UUID, body: ReviewIn, user: CurrentUser, via: Via
+    interview_id: UUID, body: ReviewIn, user: CurrentUser, via: Via, request: Request
 ) -> dict:
-    """Approved topics resume the generation, so a pause refuses it."""
+    """Approved topics resume the generation, so a pause refuses it. A company that never paid
+    shows it's a person on the site first, as generating costs; the assistant and AI apps (no
+    browser) can't be asked."""
     await refuse_if_paused(get_redis())
     interview = await get_interview(interview_id)
     await require_editor(user, interview.company_id)
+
+    if (
+        via is None
+        and settings.turnstile_secret_key
+        and not await billing.company_paid(interview.company_id)
+    ):
+        await require_human(request, settings.turnstile_secret_key)
+
     response = await generation_api.review(
         interview.generation_id, interview.company_id, body.model_dump()
     )

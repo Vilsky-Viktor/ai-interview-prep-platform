@@ -1,6 +1,7 @@
 # Messages the services show users, in Ukrainian, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Confirm you're not a robot, then try again.": "Підтвердьте, що ви не робот, і спробуйте ще раз.",
     "This company is suspended. Contact hello@prepza.ai to find out more.": "Цю компанію призупинено. Докладніше — за адресою hello@prepza.ai.",
     "This interview isn't available.": "Ця співбесіда недоступна.",
     "Only an admin who has joined can become the owner.": "Власником може стати лише адміністратор, який уже приєднався.",

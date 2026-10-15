@@ -44,7 +44,11 @@ export async function apiFetch<T>(
 ): Promise<T> {
   const response = await fetch(`/api${path}`, {
     ...init,
-    headers: { "Content-Type": "application/json", ...(await authHeaders()) },
+    headers: {
+      "Content-Type": "application/json",
+      ...(init?.headers as Record<string, string> | undefined),
+      ...(await authHeaders()),
+    },
   })
 
   if (!response.ok) {

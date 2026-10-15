@@ -1,6 +1,7 @@
 # Messages the services show users, in Italian, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Confirm you're not a robot, then try again.": "Conferma di non essere un robot, poi riprova.",
     "This company is suspended. Contact hello@prepza.ai to find out more.": "Questa azienda è sospesa. Scrivi a hello@prepza.ai per saperne di più.",
     "This interview isn't available.": "Questo colloquio non è disponibile.",
     "Only an admin who has joined can become the owner.": "Solo un amministratore che si è unito può diventare il proprietario.",

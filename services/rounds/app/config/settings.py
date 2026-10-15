@@ -3,6 +3,9 @@ from pydantic import Field
 
 
 class Settings(ServiceSettings):
+    # Cloudflare Turnstile's secret: the "I'm not a robot" check on the contact form and a
+    # visitor's first help chat message. Empty: no check.
+    turnstile_secret_key: str = ""
     # The API description (/docs, /openapi.json) lists every route, internal ones too, so it's
     # served only in development, where the frontend's types are generated from it.
     api_docs: bool = False

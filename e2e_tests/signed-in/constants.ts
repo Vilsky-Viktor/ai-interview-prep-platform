@@ -43,3 +43,5 @@ export const WARM_UP_PATHS = [
 
 // The web hook secret key of the Greenhouse connection the tests save.
 export const GREENHOUSE_E2E_SECRET = "e2e-webhook-secret"
+// Cloudflare Turnstile's dummy token: the local test secret passes it (prepza_common human_check).
+export const HUMAN_CHECK_TOKEN = "XXXX.DUMMY.TOKEN.XXXX"

@@ -1147,7 +1147,7 @@
      "help"
     ],
     "summary": "Contact",
-    "description": "The contact page's message; notifications emails it to prepza's inbox. Public.",
+    "description": "The contact page's message; notifications emails it to prepza's inbox. Public, so the\nsender shows they're a person.",
     "operationId": "contact_help_contact_post",
     "requestBody": {
      "content": {

@@ -1,6 +1,7 @@
 # Messages the services show users, in Hebrew, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Confirm you're not a robot, then try again.": "אשרו שאינכם רובוט, ואז נסו שוב.",
     "This company is suspended. Contact hello@prepza.ai to find out more.": "החברה הזו מושעית. לפרטים נוספים יש לפנות אל hello@prepza.ai.",
     "This interview isn't available.": "הראיון הזה אינו זמין.",
     "Only an admin who has joined can become the owner.": "רק מנהל שכבר הצטרף יכול להפוך לבעלים.",

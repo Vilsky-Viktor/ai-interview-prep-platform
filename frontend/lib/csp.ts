@@ -2,6 +2,7 @@ import {
   ACCOUNT_IMAGE_ORIGINS,
   FIREBASE_CONNECT_ORIGINS,
   PADDLE_ORIGINS,
+  TURNSTILE_ORIGINS,
 } from "@/constants/security"
 
 /**
@@ -32,7 +33,7 @@ export function contentSecurityPolicy(
     `img-src 'self' blob: data: ${[...ACCOUNT_IMAGE_ORIGINS, ...PADDLE_ORIGINS].join(" ")}`,
     "font-src 'self'",
     `connect-src 'self' ${[...FIREBASE_CONNECT_ORIGINS, ...PADDLE_ORIGINS].join(" ")} ${emulator}${devConnect}`,
-    `frame-src https://${authDomain} https://apis.google.com ${PADDLE_ORIGINS.join(" ")} ${emulator}`,
+    `frame-src https://${authDomain} https://apis.google.com ${[...PADDLE_ORIGINS, ...TURNSTILE_ORIGINS].join(" ")} ${emulator}`,
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'self'",

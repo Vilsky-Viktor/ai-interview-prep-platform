@@ -76,6 +76,7 @@ The shareable link (`/apply/{token}`) is one link per interview, for a job ad. O
 - On their first start, they're emailed their own invite link (`/invite/{token}`), to continue if they leave: companies saves `candidate.joined` with the new invite, once, and notifications sends it (not to an address that stopped the company's emails). The page says so.
 - Turning it off, or marking the interview as hired, stops it at once for new candidates; those who started continue from their own link.
 - Extra time can't be given to them, as their invite is made when they start: the page tells them to ask the company for a personal invite before they start.
+- A new candidate shows they're a person first ([the "I'm not a robot" check](../architecture.md#the-im-not-a-robot-check)).
 - It takes at most 30 new candidates an hour, and one address starts at most 10 an hour across all links (`LINK_STARTS_PER_HOUR`, `LINK_STARTS_PER_IP_HOUR`), so a script with many accounts can't use up a company's credits; over either, a 429. A candidate already invited is never held back by them.
 
 ## Taking an interview

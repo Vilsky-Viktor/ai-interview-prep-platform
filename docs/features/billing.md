@@ -22,7 +22,7 @@ Companies pay per candidate from a wallet of credits. There's no paid subscripti
 - An automatic top-up that a hold calls for is charged after billing answers the hold, so an invite never waits on Paddle.
 - Each invite has its own hold, so a candidate removed and invited again is charged again when they finish. Its key is the invite's own, `{interview_id}:{random}` (companies' `hold_key`), never the candidate's email, so billing keeps no candidate's email (the keys made before were rewritten that way, by billing's migration 0011 and companies' 0036 with `prepza_common.credit_keys`).
 - Whenever a company gets credits (a top-up, a referral reward, a chargeback reversed), billing publishes `credits.added`: candidates its ATSs sent that weren't invited for lack of credits are invited then (see [ATS integrations](ats.md)).
-- A person's first company gets 1,500 credits, enough for 3 candidates.
+- A person's first company gets 1,500 credits, enough for 3 candidates; on the site, creating it asks them to show they're a person first ([the "I'm not a robot" check](../architecture.md#the-im-not-a-robot-check)).
 - The welcome gift is given once per inbox: case, a `+tag` and Gmail's dots don't make a new one (`app/helpers/gifts.py` in billing).
 
 Until its first top-up, a company can have 1 generated interview waiting without a candidate before it generates another, and generates at most 3 a day; after it, 5 waiting and 10 a day. Interviews copied from templates don't count, and retrying a failed generation isn't a new one.

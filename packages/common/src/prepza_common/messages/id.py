@@ -1,6 +1,7 @@
 # Messages the services show users, in Indonesian, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Confirm you're not a robot, then try again.": "Konfirmasi bahwa Anda bukan robot, lalu coba lagi.",
     "This company is suspended. Contact hello@prepza.ai to find out more.": "Perusahaan ini ditangguhkan. Hubungi hello@prepza.ai untuk tahu lebih lanjut.",
     "This interview isn't available.": "Wawancara ini tidak tersedia.",
     "Only an admin who has joined can become the owner.": "Hanya admin yang sudah bergabung yang bisa menjadi pemilik.",

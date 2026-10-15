@@ -6,9 +6,11 @@ from prepza_common.analytics import track
 from prepza_common.auth import CurrentUser, OptionalUser
 from prepza_common.client_ip import client_ip
 from prepza_common.constants import HOUR_SECONDS
+from prepza_common.human_check import require_human
 from prepza_common.pause import refuse_if_paused
 from prepza_common.rate_limit import hit
 
+from app.config.settings import settings
 from app.constants.invites import (
     EMAIL_NOT_VERIFIED,
     LINK_CLOSED,
@@ -114,9 +116,10 @@ async def start_link(token: str, user: CurrentUser, request: Request) -> InviteS
     if current != InviteStatus.IN_PROCESS:
         await refuse_if_paused(get_redis())
 
-    # A new candidate counts toward the link's and their address's hourly limits; one already
-    # invited is never held back by them.
+    # A new candidate shows they're a person and counts toward the link's and their address's
+    # hourly limits; one already invited is never held back by them.
     if current is None:
+        await require_human(request, settings.turnstile_secret_key)
         redis = get_redis()
         await hit(redis, f"rate:link-starts:{interview.id}", LINK_STARTS_PER_HOUR, HOUR_SECONDS)
         address = client_ip(request)

@@ -6,6 +6,7 @@ from prepza_common.analytics import track
 from prepza_common.auth import OptionalUser
 from prepza_common.client_ip import client_ip
 from prepza_common.constants import DAY_SECONDS, DEFAULT_LANGUAGE, HOUR_SECONDS, LEGAL_VERSIONS
+from prepza_common.human_check import require_human
 from prepza_common.i18n import request_language, translate
 from prepza_common.pause import refuse_if_paused
 from prepza_common.rate_limit import hit
@@ -101,6 +102,11 @@ async def help_chat(
     redis = get_redis()
     await refuse_if_paused(redis)
 
+    # A visitor shows they're a person once, with their chat's first message: the chat has no
+    # id to remember it by, and the check shows nothing to most people.
+    if user is None and len(body.messages) == 1:
+        await require_human(request, settings.turnstile_secret_key)
+
     if user:
         await hit(redis, f"rate:help:{user.uid}", settings.help_user_limit, HOUR_SECONDS)
 
@@ -128,7 +134,9 @@ async def help_chat(
 
 @router.post("/contact", status_code=status.HTTP_204_NO_CONTENT)
 async def contact(body: ContactRequest, request: Request) -> None:
-    """The contact page's message; notifications emails it to prepza's inbox. Public."""
+    """The contact page's message; notifications emails it to prepza's inbox. Public, so the
+    sender shows they're a person."""
+    await require_human(request, settings.turnstile_secret_key)
     redis = get_redis()
     await hit(redis, f"rate:contact:ip:{client_ip(request)}", CONTACT_IP_LIMIT, DAY_SECONDS)
     await hit(redis, "rate:contact:all", settings.contact_daily_limit, DAY_SECONDS)

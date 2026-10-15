@@ -6,6 +6,7 @@
      "companies"
     ],
     "summary": "Create Company",
+    "description": "A person's first company, which gets the welcome credits, needs them to show they're a\nperson, on the site; through the assistant or an AI app (no browser) it can't be asked.",
     "operationId": "create_company_companies_post",
     "security": [
      {
@@ -2365,7 +2366,7 @@
      "interviews"
     ],
     "summary": "Review Generation",
-    "description": "Approved topics resume the generation, so a pause refuses it.",
+    "description": "Approved topics resume the generation, so a pause refuses it. A company that never paid\nshows it's a person on the site first, as generating costs; the assistant and AI apps (no\nbrowser) can't be asked.",
     "operationId": "review_generation_interviews__interview_id__generation_review_post",
     "security": [
      {

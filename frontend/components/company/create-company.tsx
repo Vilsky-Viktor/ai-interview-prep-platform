@@ -19,6 +19,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { MAX_COMPANY_NAME_LENGTH } from "@/constants/limits"
 import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
+import { humanHeaders } from "@/lib/human-check"
 import type { Company } from "@/types/company"
 
 export function CreateCompany({ templateId }: { templateId?: string }) {
@@ -57,6 +58,7 @@ export function CreateCompany({ templateId }: { templateId?: string }) {
       const company = await apiFetch<Company>("/companies/companies", {
         method: "POST",
         body: JSON.stringify({ name: name.trim() }),
+        headers: await humanHeaders(),
       })
       // Choosing where to use a free test: the new company opens on that test.
       router.replace(

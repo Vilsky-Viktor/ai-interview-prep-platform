@@ -1,6 +1,7 @@
 # Messages the services show users, in Hindi, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Confirm you're not a robot, then try again.": "पुष्टि करें कि आप रोबोट नहीं हैं, फिर दोबारा कोशिश करें।",
     "This company is suspended. Contact hello@prepza.ai to find out more.": "यह कंपनी निलंबित है। ज़्यादा जानने के लिए hello@prepza.ai पर संपर्क करें।",
     "This interview isn't available.": "यह इंटरव्यू उपलब्ध नहीं है।",
     "Only an admin who has joined can become the owner.": "केवल वही एडमिन मालिक बन सकता है जो जुड़ चुका है।",

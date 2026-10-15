@@ -35,6 +35,7 @@ x-generation-env: &generation-env
 
 x-rounds-env: &rounds-env
   DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/rounds
+  TURNSTILE_SECRET_KEY: ${TURNSTILE_SECRET_KEY:-}
   REDIS_URL: redis://redis:6379
   LIBRARY_URL: http://library:8000
   BILLING_URL: http://billing:8000
@@ -51,6 +52,7 @@ x-rounds-env: &rounds-env
   CONTACT_DAILY_LIMIT: ${CONTACT_DAILY_LIMIT:-200}
 
 x-companies-env: &companies-env
+  TURNSTILE_SECRET_KEY: ${TURNSTILE_SECRET_KEY:-}
   # Candidate invite email limits.
   EMAIL_HOURLY_LIMIT: ${EMAIL_HOURLY_LIMIT:-100}
   EMAIL_DAILY_LIMIT: ${EMAIL_DAILY_LIMIT:-200}

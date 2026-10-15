@@ -1,6 +1,7 @@
 # Messages the services show users, in Spanish, keyed by the English text they're raised with.
 
 MESSAGES = {
+    "Confirm you're not a robot, then try again.": "Confirma que no eres un robot y vuelve a intentarlo.",
     "This company is suspended. Contact hello@prepza.ai to find out more.": "Esta empresa está suspendida. Escribe a hello@prepza.ai para saber más.",
     "This interview isn't available.": "Esta entrevista no está disponible.",
     "Only an admin who has joined can become the owner.": "Solo un administrador que ya se unió puede ser el propietario.",

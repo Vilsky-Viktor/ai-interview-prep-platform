@@ -5,8 +5,10 @@ from fastapi import APIRouter, HTTPException, Request, status
 from prepza_common.analytics import track
 from prepza_common.auth import CurrentUser
 from prepza_common.constants import REFERRAL_COOKIE
+from prepza_common.human_check import require_human
 from prepza_common.paging import PageParams
 
+from app.config.settings import settings
 from app.constants.invites import COMPANY_NAME_TAKEN, MAX_OWNED_COMPANIES, TOO_MANY_COMPANIES
 from app.constants.roles import EDITORS, Role
 from app.helpers.brand import color_sets, style_of
@@ -23,6 +25,7 @@ from app.schemas.companies import (
     ReferralRewardOut,
 )
 from app.schemas.logos import BrandColorSets, BrandStyle
+from app.service_auth import Via
 from app.services import company_deletion
 from app.services.access import can_edit, is_owner, require_company, require_editor
 from app.services.verification import verify_by_email
@@ -57,8 +60,17 @@ def company_out(company: Company, user_id: str, interview_count: int = 0) -> Com
 
 
 @router.post("", status_code=status.HTTP_201_CREATED)
-async def create_company(body: CompanyCreate, user: CurrentUser, request: Request) -> CompanyOut:
-    if await companies.owned_count(user.uid) >= MAX_OWNED_COMPANIES:
+async def create_company(
+    body: CompanyCreate, user: CurrentUser, request: Request, via: Via
+) -> CompanyOut:
+    """A person's first company, which gets the welcome credits, needs them to show they're a
+    person, on the site; through the assistant or an AI app (no browser) it can't be asked."""
+    owned = await companies.owned_count(user.uid)
+
+    if owned == 0 and via is None:
+        await require_human(request, settings.turnstile_secret_key)
+
+    if owned >= MAX_OWNED_COMPANIES:
         await track("limit_hit", user_id=user.uid, which="companies_owned")
 
         raise HTTPException(status.HTTP_429_TOO_MANY_REQUESTS, TOO_MANY_COMPANIES)

@@ -1,6 +1,6 @@
 import { expect, type Page, test } from "@playwright/test"
 
-import { API_URL, MIN_QUESTION_SECONDS } from "../constants"
+import { API_URL, HUMAN_CHECK_TOKEN, MIN_QUESTION_SECONDS } from "../constants"
 import { tokenOf } from "./sign-in"
 import { randomId } from "./users"
 
@@ -11,7 +11,12 @@ type Template = { id: string; title: string; topic_count: number }
 export async function api<T>(page: Page, method: string, path: string, body?: unknown) {
   const response = await page.request.fetch(`${API_URL}${path}`, {
     method,
-    headers: { Authorization: `Bearer ${await tokenOf(page)}` },
+    headers: {
+      Authorization: `Bearer ${await tokenOf(page)}`,
+      // The "I'm not a robot" check: Cloudflare's dummy token, which its test keys (the local
+      // ones) always pass.
+      "X-Human-Check": HUMAN_CHECK_TOKEN,
+    },
     data: body,
   })
   expect(response.ok(), `${method} ${path} -> ${response.status()}`).toBe(true)

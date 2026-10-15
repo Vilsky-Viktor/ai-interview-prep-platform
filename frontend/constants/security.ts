@@ -16,3 +16,11 @@ export const ACCOUNT_IMAGE_ORIGINS = ["https://*.googleusercontent.com"]
 
 // Sentry: share of page loads and requests traced for performance.
 export const SENTRY_TRACES_SAMPLE_RATE = 0.1
+
+// Cloudflare Turnstile, the "I'm not a robot" check (lib/human-check.ts): its script, and its
+// frame, which shows a challenge to the few people it isn't sure about.
+export const TURNSTILE_SCRIPT =
+  "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+export const TURNSTILE_ORIGINS = ["https://challenges.cloudflare.com"]
+// The header a request carries its token in (services check it: prepza_common human_check).
+export const HUMAN_CHECK_HEADER = "X-Human-Check"

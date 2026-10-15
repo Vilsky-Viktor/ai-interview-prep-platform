@@ -1,3 +1,4 @@
+import { humanHeaders } from "@/lib/human-check"
 import { ApiError, authHeaders, errorDetail } from "@/lib/api"
 import type { AssistantBlock } from "@/types/assistant"
 import type { HelpMessage } from "@/types/help"
@@ -20,11 +21,16 @@ export async function streamEvents<T>(
   path: string,
   body: unknown,
   onEvent: (event: T) => void,
-  signal: AbortSignal
+  signal: AbortSignal,
+  headers: Record<string, string> = {}
 ) {
   const response = await fetch(`/api${path}`, {
     method: "POST",
-    headers: { "Content-Type": "application/json", ...(await authHeaders()) },
+    headers: {
+      "Content-Type": "application/json",
+      ...headers,
+      ...(await authHeaders()),
+    },
     body: JSON.stringify(body),
     signal,
   })
@@ -77,7 +83,7 @@ export async function streamEvents<T>(
 
 /** Asks prepza's help chat (signed-out visitors' assistant); the panel keeps the conversation
 and sends it whole. Its events: {"delta"}, and a {"block"} sign-in card when the visitor asks to
-sign in. */
+sign in. A chat's first question shows the visitor is a person (lib/human-check.ts). */
 export function streamHelp(
   messages: HelpMessage[],
   onEvent: (event: {
@@ -87,5 +93,9 @@ export function streamHelp(
   }) => void,
   signal: AbortSignal
 ) {
-  return streamEvents("/rounds/help/chat", { messages }, onEvent, signal)
+  const first = messages.length === 1
+
+  return humanHeaders(first).then((headers) =>
+    streamEvents("/rounds/help/chat", { messages }, onEvent, signal, headers)
+  )
 }

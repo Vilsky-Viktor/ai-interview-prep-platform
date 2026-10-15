@@ -15,7 +15,7 @@ Generating an interview is free. Until its first top-up, a company can have 1 ge
 
 ### Reviewing the topics
 
-Before anything expensive runs, the company reviews the proposed topics, for free:
+Before anything expensive runs, the company reviews the proposed topics, for free (a company that never paid shows it's a person when it approves them: [the "I'm not a robot" check](../architecture.md#the-im-not-a-robot-check)):
 
 - uncheck the topics it doesn't need,
 - rename a topic or edit its subtopics in place,

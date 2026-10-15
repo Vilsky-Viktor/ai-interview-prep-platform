@@ -15,6 +15,7 @@ import { SignInPrompt } from "@/components/sign-in-prompt"
 import { Button } from "@/components/ui/button"
 import { ACTIVE_STATUSES, POLL_MIN_MS } from "@/constants/generation"
 import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
+import { humanHeaders } from "@/lib/human-check"
 import { topUpAction } from "@/lib/credits"
 import { nextPollDelay } from "@/lib/poll"
 import type { DraftTopic, Generation } from "@/types/generation"
@@ -133,9 +134,11 @@ export function GenerationView({
     topics: DraftTopic[] | null
   ) {
     try {
+      // A company that never paid shows it's a person before its questions are made.
       const next = await apiFetch<Generation>(`${path}/review`, {
         method: "POST",
         body: JSON.stringify({ selected, instructions, topics }),
+        headers: await humanHeaders(),
       })
       setGeneration(next)
       setRound((value) => value + 1)

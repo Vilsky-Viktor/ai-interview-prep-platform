@@ -100,6 +100,16 @@ What each service does for users is described in the feature pages, linked from 
 - **Sign-in:** users sign in with Firebase Authentication. The local setup uses the Firebase emulator, so no Firebase project is needed.
 - **AI apps' calls:** an AI app connected over MCP holds an opaque token prepza issued (OAuth 2.1 with PKCE). For each of its calls the assistant signs the user in with a Firebase custom token, exchanged for the user's ID token (kept until shortly before it expires), and calls the services with it as the panel does; the services check it like any user's ([AI apps over MCP](features/mcp.md#calling-the-services-as-the-user)).
 
+## The "I'm not a robot" check
+
+Where a script could spend a company's credits or prepza's AI capacity, the browser shows it's a person first, with Cloudflare Turnstile: a new candidate starting through a job ad's link, a person's first company (it gets the welcome credits), an unpaid company's topic review (before the questions are generated), the contact form, and a visitor's first help chat message (the chat has no id to remember a passed check by).
+
+- The browser asks for a one-time token just before the request (`frontend/lib/human-check.ts`: most people see nothing; the few Cloudflare isn't sure about get a small challenge at the bottom of the screen) and sends it in `X-Human-Check`.
+- The service checks it with Cloudflare (`prepza_common/human_check.py`, `require_human`), with `TURNSTILE_SECRET_KEY`: missing or refused, a 403 saying so. Without the secret there's no check; if Cloudflare doesn't answer, the request goes through, as the routes keep their rate limits.
+- The in-app assistant and AI apps create companies and approve topics from the server, with no browser to ask: their requests (`X-Assistant`, signed) aren't checked.
+- Locally and in CI, Cloudflare's test keys pass every check (and the browser tests' dummy token `XXXX.DUMMY.TOKEN.XXXX`); production has its own keys: the site key is built into the frontend (`NEXT_PUBLIC_TURNSTILE_SITE_KEY`), the secret is in Secret Manager.
+- Cloudflare sees the visitor's browser signals and address, so it's in the privacy policy and, for candidates, a sub-processor in the DPA (both from their 2026-10-29 versions): production sets the secret only once those apply.
+
 ## Background work
 
 | Kind | In Google Cloud | Examples |

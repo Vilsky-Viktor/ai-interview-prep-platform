@@ -78,6 +78,7 @@ The help chat (rounds' `POST /help/chat`) answers signed-out visitors in the [as
 
 - It answers only from the platform guide, the FAQ, the prices, the terms and the privacy policy, and keeps to prepza and hiring with it, like the assistant (`prepza_common.scope.SCOPE_RULE`).
 - It answers in the page's language.
+- A visitor's first question shows they're a person ([the "I'm not a robot" check](../architecture.md#the-im-not-a-robot-check)).
 - Nothing of the conversation is stored: the panel sends it whole each time.
 - A conversation with a secret in it (a key, a token, a password) is answered at once with a fixed reply, before the limits or the model, and nothing of it is used; see [the assistant's secrets](assistant.md#secrets-pasted-into-the-chat).
 - A visitor asking to sign in or sign up, or to do something that needs an account (create a company, …), gets a sign-in card in the panel (the site's own sign-in buttons, the way they named first): the model starts its reply with a `[[sign_in:<provider>]]` marker, which the service turns into a `{"block": {"kind": "sign_in", "provider"}}` event.
@@ -134,6 +135,7 @@ The description's text may hold bold, inline code, links (`[text](/api-docs?tab=
 
 - The message is emailed to hello@prepza.ai (`CONTACT_EMAIL` in notifications).
 - The visitor's address is the reply-to, so answering the email answers them.
+- The sender shows they're a person first ([the "I'm not a robot" check](../architecture.md#the-im-not-a-robot-check)).
 - At most 5 messages a day per address (the `CONTACT_IP_LIMIT` constant in `services/rounds/app/constants/contact.py`).
 - At most 200 a day in all (the `CONTACT_DAILY_LIMIT` setting).
 
