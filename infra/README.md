@@ -12,7 +12,7 @@ Terraform for prepza on Google Cloud, in one region (`europe-west1`, Belgium) be
   - Cloud CDN for static files;
   - the security headers the local nginx gateway adds (HSTS, nosniff, `X-Frame-Options` on the APIs, `Referrer-Policy`, `Permissions-Policy`); the frontend sets its own Content-Security-Policy, whose `frame-ancestors` lets no site frame a page but a company's own its embedded interview;
   - a Cloud Armor rule that blocks `/api/*/internal/`.
-- **Secret Manager** for secrets, and **Artifact Registry** for images.
+- **Secret Manager** for secrets, and **Artifact Registry** for images: released versions' images (`v*` tags) and each image's 10 newest are kept, and the rest are deleted after 30 days.
 
 Outside Google Cloud: Redis on **Upstash** (rate limits, the LLM limiter, the draft cache, live notifications), **Firebase Authentication** (same project), **Resend**, **Sentry** and **Paddle**.
 
