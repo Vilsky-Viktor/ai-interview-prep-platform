@@ -41,10 +41,12 @@ async def connect(
     credentials: str,
     user_id: str,
     member_id: str | None = None,
+    language: str | None = None,
 ) -> None:
     """Saves the company's connection to `provider`, replacing an earlier one's key (a
-    reconnect keeps its linked jobs)."""
+    reconnect keeps its linked jobs), with the connecting member's interface `language`."""
     values = {
+        "language": language,
         "account": account,
         "credentials": credentials,
         "status": ConnectionStatus.CONNECTED,

@@ -89,9 +89,12 @@ def stored(monkeypatch, companies_api):
     }
     rows = {"connection": None, "links": [], "subscriptions": [], "targets": [], "read": []}
 
-    async def connect(company_id, provider, account, credentials, user_id, member_id=None):
+    async def connect(
+        company_id, provider, account, credentials, user_id, member_id=None, language=None
+    ):
         rows["connection"] = AtsConnection(
             member_id=member_id,
+            language=language,
             id=uuid.uuid4(),
             company_id=company_id,
             provider=provider,

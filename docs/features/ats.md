@@ -133,7 +133,7 @@ prepza sets up Breezy HR's web hook itself, so the company only pastes the key:
 
 ## Results back to the ATS
 
-When such a candidate finishes, companies publishes `candidate.finished` (grade, passed, flagged), and ats writes a comment about them in the ATS, in the interview's language when the event carries it as `language` (one of the 23 the app speaks, with the app's own words for grade, passing grade, flags and scorecard), and in English when it carries none or an unknown one. The texts are in `services/ats/app/templates/languages/<language>.py`:
+When such a candidate finishes, companies publishes `candidate.finished` (grade, passed, flagged), and ats writes a comment about them in the ATS, for the company's team: in the interface language of the member who connected the ATS (saved on the connection when they connect, `language`; a reconnect updates it), else in the interview's language the event carries as `language` (one of the 23 the app speaks, with the app's own words for grade, passing grade, flags and scorecard), and in English when neither is known. The texts are in `services/ats/app/templates/languages/<language>.py`:
 
 - their grade,
 - whether they passed,

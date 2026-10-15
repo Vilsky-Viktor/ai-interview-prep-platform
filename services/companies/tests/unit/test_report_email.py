@@ -104,6 +104,17 @@ def test_a_member_emails_the_pdf_report_and_replies_go_to_them(client, queued):
     assert event["pdf"] == PDF
 
 
+def test_a_report_email_is_in_the_senders_language_not_the_tests(client, queued):
+    app.dependency_overrides[current_user] = lambda: User(
+        uid="bob", email="bob@example.com", email_verified=True, name="Bob", language="de"
+    )
+
+    client.post(URL, json={"email": "boss@example.com", "pdf": PDF})
+
+    [event] = queued
+    assert event["language"] == "de"
+
+
 def test_only_a_pdf_is_emailed(client, queued):
     not_pdf = base64.b64encode(b"<html>hello</html>").decode()
 

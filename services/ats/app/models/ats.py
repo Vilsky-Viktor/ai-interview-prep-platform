@@ -34,6 +34,8 @@ class AtsConnection(Base):
     # When the ATS first refused the results written back while the key still read: the company
     # was told once. Cleared by a reconnect or a write that goes through.
     write_refused_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    # The interface language of the member who connected it: results go back to the ATS in it.
+    language: Mapped[str | None] = mapped_column(String(8))
 
 
 class AtsJobLink(Base):

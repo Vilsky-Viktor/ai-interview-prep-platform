@@ -35,7 +35,9 @@ def stored(monkeypatch, companies_api):
     companies_api["roles"] = {(COMPANY_ID, "ann"): "admin"}
     rows = {"key": key, "connection": None, "checked": []}
 
-    async def connect(company_id, provider, account, credentials, user_id, member_id=None):
+    async def connect(
+        company_id, provider, account, credentials, user_id, member_id=None, language=None
+    ):
         earlier = rows["connection"]
         rows["connection"] = AtsConnection(
             id=earlier.id if earlier else uuid.uuid4(),

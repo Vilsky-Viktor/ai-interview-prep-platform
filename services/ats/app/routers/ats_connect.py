@@ -71,7 +71,9 @@ async def connect_workable(company_id: UUID, body: WorkableIn, user: CurrentUser
     credentials = integrations.seal({"subdomain": account, "token": token})
     # Who results are written back as: the connecting user's Workable member, or an admin.
     member = await workable.member_id(account, token, user.email)
-    await ats.connect(company_id, AtsProvider.WORKABLE, account, credentials, user.uid, member)
+    await ats.connect(
+        company_id, AtsProvider.WORKABLE, account, credentials, user.uid, member, user.language
+    )
 
 
 @router.put("/greenhouse", status_code=status.HTTP_204_NO_CONTENT)
@@ -102,7 +104,9 @@ async def connect_greenhouse(company_id: UUID, body: GreenhouseIn, user: Current
         }
     )
     # Greenhouse names no account: the page shows the company it's connected for instead.
-    await ats.connect(company_id, AtsProvider.GREENHOUSE, "", sealed, user.uid)
+    await ats.connect(
+        company_id, AtsProvider.GREENHOUSE, "", sealed, user.uid, language=user.language
+    )
 
 
 @router.put("/teamtailor", status_code=status.HTTP_204_NO_CONTENT)
@@ -132,7 +136,9 @@ async def connect_teamtailor(company_id: UUID, body: TeamtailorIn, user: Current
     # Who results are written back as: the connecting user's Teamtailor user, or an admin.
     member = await teamtailor.member_id(host, key, user.email)
     sealed = integrations.seal(credentials)
-    await ats.connect(company_id, AtsProvider.TEAMTAILOR, company, sealed, user.uid, member)
+    await ats.connect(
+        company_id, AtsProvider.TEAMTAILOR, company, sealed, user.uid, member, user.language
+    )
 
 
 @router.put("/recruitee", status_code=status.HTTP_204_NO_CONTENT)
@@ -165,7 +171,9 @@ async def connect_recruitee(company_id: UUID, body: RecruiteeIn, user: CurrentUs
         credentials["webhook_secret"] = kept
 
     sealed = integrations.seal(credentials)
-    await ats.connect(company_id, AtsProvider.RECRUITEE, account, sealed, user.uid)
+    await ats.connect(
+        company_id, AtsProvider.RECRUITEE, account, sealed, user.uid, language=user.language
+    )
 
 
 @router.put("/breezy", status_code=status.HTTP_204_NO_CONTENT)
@@ -200,7 +208,9 @@ async def connect_breezy(company_id: UUID, body: BreezyIn, user: CurrentUser) ->
 
     credentials = {"company": found["id"], "token": token}
     sealed = integrations.seal(credentials)
-    await ats.connect(company_id, AtsProvider.BREEZY, found["name"], sealed, user.uid)
+    await ats.connect(
+        company_id, AtsProvider.BREEZY, found["name"], sealed, user.uid, language=user.language
+    )
     connection = await ats.connection(company_id, AtsProvider.BREEZY)
     url = BREEZY_WEBHOOK.format(site=settings.site_url, connection_id=connection.id)
 

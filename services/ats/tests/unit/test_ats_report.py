@@ -12,6 +12,7 @@ from app.models.ats import AtsCandidate, AtsConnection
 from app.services import ats as integrations
 from app.services import ats_candidates as flow
 from app.storage import ats, ats_results
+from app.templates.comments import COMMENTS
 
 INTERVIEW_ID = uuid.uuid4()
 COMPANY_ID = uuid.uuid4()
@@ -143,6 +144,15 @@ def test_results_are_written_in_the_language_of_the_interview(finished):
     [(_, _, text)] = state["comments"]
     assert "Ergebnis: 82 % (bestanden)" in text
     assert "Grade" not in text
+
+
+def test_results_are_written_in_the_language_of_whoever_connected_the_ats(finished):
+    state, connection = finished
+    connection.language = "uk"
+    asyncio.run(flow.report({**result(state["row"].invite_id), "language": "de"}))
+
+    [(_, _, text)] = state["comments"]
+    assert COMMENTS["uk"]["decide"] in text
 
 
 def test_a_candidate_no_ats_sent_is_ignored(finished):

@@ -234,7 +234,8 @@ async def report(data: dict) -> None:
         data["passed"],
         data["flagged"],
         link,
-        language=data.get("language"),
+        # The team's language, as the member who connected the ATS uses prepza; else the test's.
+        language=connection.language or data.get("language"),
     )
 
     try:
