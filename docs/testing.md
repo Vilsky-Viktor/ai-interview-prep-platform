@@ -85,7 +85,7 @@ They check:
 - the footer at the end,
 - lowercase titles (articles keep their capitals).
 
-Other specs check the home page's sections: the advantages' titles beside their icons in every language (`advantages.spec.ts`), the ATSs, Slack, the API and MCP with a point each for the ATS, the API and MCP (`ats.spec.ts`), the catalog's prices and free candidates on the home and pricing pages (`pricing.spec.ts`), the chat apps a report can be shared to (`reports.spec.ts`), smooth scrolling and back to top (`scroll.spec.ts`), and the API docs (`api-docs.spec.ts`). `news.spec.ts` checks the news page in English and German whatever posts exist: indexable, its title, description, canonical and hreflang addresses (x-default too), link-preview picture, `Blog` structured data, the RSS link in its head and its RSS icon; the RSS feed in both languages (content type, channel, items linking to the page); the sitemap listing the page but not the feed; and the footer's news link. `connect.spec.ts` checks the AI app consent page signed out: without a request it says the link expired, with one it asks to sign in first (naming the app when the API does), and it isn't indexed. `unsubscribe.spec.ts` checks the unsubscribe page: an invalid link says so, the page isn't indexed, and a candidate's link to a made-up company changes nothing until "Confirm". It signs that link with `EMAIL_LINK_SECRET`, which `pages.sh` passes from `.env` without printing it; each run leaves its made-up companies' opt-outs in the local notifications database.
+Other specs check the home page's sections: the advantages' titles beside their icons in every language (`advantages.spec.ts`), the ATSs, Slack, the API and MCP with a point each for the ATS, the API and MCP (`ats.spec.ts`), the catalog's prices and free candidates on the home and pricing pages (`pricing.spec.ts`), the chat apps a report can be shared to (`reports.spec.ts`), smooth scrolling and back to top (`scroll.spec.ts`), the API docs (`api-docs.spec.ts`), the demo videos at the top and at the end, opening YouTube, with "ask agent" between them and the agent's preview (`demos.spec.ts`), the four ways candidates get an interview, every ATS with its logo (`invite-ways.spec.ts`), and the info button explaining how prepza works (`page-help.spec.ts`). `assistant.spec.ts` checks the assistant signed out: FAQ answers only (stubbed: no OpenAI), a sign-in card when asked, a failed answer's Try again, a reload in the middle of a chat, and the panel and a dialog opening and closing fully with and without reduced motion. `phone-layout.spec.ts` checks the public pages on a phone: previews and the home page's box across the screen, the footer one centered column, dialogs across the screen, no keyboard hint on a touch screen, and a practice page starting under its tags. `footer.spec.ts` checks the footer's three columns of links, the company that runs prepza named in the footer and on the contact page, and where the accessibility statement says to report a problem. `legal-versions.spec.ts` checks that every version of the terms stays readable, saying whether it applies, and shows in the page's language with a link to the binding English. `sign-in.spec.ts` checks that the sign-in card asks about emails only on a browser no one has signed in on. `signed-in-links.spec.ts` checks that links into a company's pages (a scorecard, an interview, a template, a generation) opened signed out ask to sign in instead of "Page not found". `link-errors.spec.ts` checks that an invite says its link is invalid only when it's gone, and offers to try again otherwise. `referral-notice.spec.ts` checks that a referral link is kept in a cookie only once the visitor agrees, and turning it down keeps nothing. `double-submit.spec.ts` checks that a contact message sent twice quickly goes once, and `error-report.spec.ts` that the error page's "Report" sends what the user was doing. `news.spec.ts` checks the news page in English and German whatever posts exist: indexable, its title, description, canonical and hreflang addresses (x-default too), link-preview picture, `Blog` structured data, the RSS link in its head and its RSS icon; the RSS feed in both languages (content type, channel, items linking to the page); the sitemap listing the page but not the feed; and the footer's news link. `connect.spec.ts` checks the AI app consent page signed out: without a request it says the link expired, with one it asks to sign in first (naming the app when the API does), and it isn't indexed. `unsubscribe.spec.ts` checks the unsubscribe page: an invalid link says so, the page isn't indexed, and a candidate's link to a made-up company changes nothing until "Confirm". It signs that link with `EMAIL_LINK_SECRET`, which `pages.sh` passes from `.env` without printing it; each run leaves its made-up companies' opt-outs in the local notifications database.
 
 `seo.spec.ts` checks language addresses and hreflang, titles, preview pictures, noindex on private pages, articles, links and the footer; `seo-templates.spec.ts` checks the template pages: a role page, a template's languages and its page in its language (links and levels), old addresses' redirects, robots.txt and the sitemap, and which templates are indexable (noindex on thin ones). `metadata.spec.ts` checks page descriptions, the compare hub's title, FAQ and article data, practice breadcrumbs, the direction of right-to-left template text, the preview picture's noindex and the footer's menu.
 
@@ -108,26 +108,50 @@ Playwright tests of the signed-in pages, in the same Docker image, against the r
 **What they cover:**
 
 - a company owner making an interview from a template and inviting a candidate,
+- inviting candidates with names three ways (one email, a list, a file) and finding one by name, the sign-in filling in a name once with an owner's correction kept, and the invite dialog saying what it couldn't read,
+- deleting an interview past the list's first page: it leaves the list at once, and the list goes on loading from the right place,
+- a title under three characters and a one-letter company name, refused with the reason,
 - a candidate taking an interview, a question's time running out included,
+- a candidate leaving the page: only a leave of 2 seconds or more counts, and the results say signals are the browser's report,
+- dates in the visitor's own time zone,
 - a job ad's shareable link: starting from it, and continuing from the candidate's own link after it's turned off,
 - an expired invite, which asks to have it sent again,
 - extra time: a candidate given it sees the longer time per question on their invite,
 - a candidate whose email isn't confirmed, told to confirm it,
 - the team and a viewer,
+- handing a company to an admin, who's told in the bell, and deleting an account that owns a company others joined, which waits, then names the companies deleted with it and their credits,
+- removing a company: the dialog says how many credits are lost, and nothing about credits when there are none,
 - verification,
 - the admin zone's pass rates, stats, pause and maintenance mode (turned off again afterwards),
+- the admin zone's companies: an unverified company's invite saying so, then finding, suspending (its members and its candidate who hasn't started see why), lifting, renaming and deleting a company,
 - the admin zone's news tab: the tabs' order, a post written in the dialog (the characters left, an over-long text refused by the API's message), shown in the tab and on the news page with its blue dot and date, edited with the pencil and deleted with the bin after confirming. Its posts are deleted at the end, even when it fails,
 - the admin zone's emails tab: finding an address in another case, turning off all its account's optional emails (still off after a reload), stopping and resuming one inviting company's emails, and "not found" for anyone else,
 - the candidates' PDF report,
 - a practice result leading to a company's test,
+- a talent's practice history, newest first, loading older rounds as it scrolls,
 - an interview's settings tab,
+- a company's brand tab: colors previewed as they're typed, unreadable ones refused, the font and rounding saved with them, and its candidate's invitation in those colors,
+- a WebP logo kept as PNG, which every email client shows,
 - API keys and web hooks,
+- a web hook's signed test event and its delivery log,
+- the API's operations: inviting a candidate twice with one idempotency key (invited once), correcting them, extra time, a reminder, finding them by email, the credits, removing them, and a new interview within the app's limits,
+- a candidate invited through the API taking the interview without signing in and going back to the company's platform, refused while the company's website isn't verified or the return address is off it,
+- a company's own site embedding a candidate's interview and hearing it finish,
 - each ATS: Workable's linked jobs, and connecting Greenhouse (with who connected it under its title), Teamtailor, Recruitee and Breezy HR,
 - Slack,
 - the MCP server: its row and Instructions (the server's address, Claude's and ChatGPT's steps, opening on the dialog itself with Close outside the scrolling body, full height on phones), the connected AI apps (saved straight into the assistant database and deleted at the end) and disconnecting them, and the consent page signed in (an expired request, and a request answered in the browser, denied),
+- an owner stopping AI apps from using the company's data and allowing them again (kept after a reload), the switch right to left in Arabic,
+- the company's bell saying when an ATS refuses the results written back, Slack stopped working or a web hook stopped, and opening that page to reconnect,
 - the integrations pages on a phone: small logos beside the names with the buttons under them, the pages' buttons under their titles, Reconnect on its own line, the linked jobs, and full-height Instructions,
+- a company's billing: where the credits came from and went and the candidates whose credits are reserved, for owners and admins; a viewer has no billing tab, and its address sends them back to the interviews,
+- a top-up opening the checkout the backend made in Paddle's overlay (skipped when Paddle's sandbox prices aren't in `.env`),
+- a balance saying on hover that it's the current balance, in the company's header and on the billing page,
 - the automatic top-up,
 - an interview whose generation failed,
+- the assistant: the welcome for the user's stage, an answer with a candidate row, voice through Chrome's fake microphone, the history, a reload in the middle of a chat, and a visitor who signs in from its sign-in card keeping their chat (answers stubbed: no OpenAI),
+- the assistant's actions: one runs once its card is confirmed, asking to sign out signs out, and a pasted secret is removed from the chat and explained, with the page it belongs on,
+- the info buttons under the back arrow, explaining the companies list, an interview and a candidate,
+- the signed-in pages on a phone: lists and panels out to the screen's edges, actions on their own lines, dialogs across the screen with their buttons side by side, timed questions with nothing around them, and an invitation's rules before its start,
 - email settings: the defaults, each kind saved as it changes, the activity digest's box (all, none, some), and what the sign-in's email boxes turn on, at a first sign-in and a later one,
 - unsubscribing: a user's activity digest link turns its four kinds off in Settings, and after a candidate's "Don't email me for <company>" link, the company's next invite to that address shows as undelivered. Links are signed with `EMAIL_LINK_SECRET` from `.env`.
 
