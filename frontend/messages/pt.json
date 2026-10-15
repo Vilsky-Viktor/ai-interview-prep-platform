@@ -74,7 +74,7 @@
     "link": "Este e-mail já tem uma conta na prepza. Continue da forma como você entrou antes, e o {provider} será vinculado a ela.",
     "consent": "Ao entrar, você confirma que tem 16 anos ou mais, concorda com os <terms>Termos</terms> e leu a <privacy>Política de privacidade</privacy>.",
     "failed": "Não foi possível entrar. Tente novamente.",
-    "verify": "Enviamos um link para verificar seu e-mail. Abra-o e depois entre de novo para fazer entrevistas.",
+    "verify": "Enviamos um link para verificar seu e-mail. Abra-o para fazer entrevistas e criar empresas.",
     "noUpdates": "Não quero receber novidades do produto e notícias",
     "promotions": "Quero receber ofertas e promoções",
     "emailsFailed": "Não foi possível salvar suas escolhas de e-mail. Você pode alterá-las em Configurações."

@@ -191,7 +191,7 @@ def take_interview(session_id: str, token: str) -> int:
 
 
 def company() -> None:
-    _, owner = sign_up("owner", owner=True)
+    _, owner = sign_up("owner", verified=True, owner=True)
     # Company names are unique across prepza, so each run gets its own.
     name = f"E2E Inc {uuid.uuid4().hex[:8]}"
     company_id = api("POST", "/companies/companies", owner, {"name": name})["id"]

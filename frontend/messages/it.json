@@ -74,7 +74,7 @@
     "link": "Questa email ha già un account prepza. Continua come hai fatto l'ultima volta e {provider} verrà collegato.",
     "consent": "Accedendo, confermi di avere almeno 16 anni, accetti i <terms>Termini</terms> e di aver letto l’<privacy>Informativa sulla privacy</privacy>.",
     "failed": "Accesso non riuscito. Riprova.",
-    "verify": "Ti abbiamo inviato un link per verificare la tua email. Aprilo, poi accedi di nuovo per svolgere i colloqui.",
+    "verify": "Ti abbiamo inviato un link per verificare la tua email. Aprilo per svolgere i colloqui e creare aziende.",
     "noUpdates": "Non inviarmi novità sul prodotto e notizie",
     "promotions": "Inviami offerte e promozioni",
     "emailsFailed": "Impossibile salvare le tue scelte email. Puoi cambiarle nelle Impostazioni."

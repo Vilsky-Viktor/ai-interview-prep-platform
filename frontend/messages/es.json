@@ -74,7 +74,7 @@
     "link": "Este correo ya tiene una cuenta de prepza. Continúa como iniciaste sesión la otra vez y {provider} se vinculará a ella.",
     "consent": "Al iniciar sesión, confirmas que tienes 16 años o más, aceptas los <terms>Términos</terms> y has leído la <privacy>Política de privacidad</privacy>.",
     "failed": "No se pudo iniciar sesión. Inténtalo de nuevo.",
-    "verify": "Te enviamos un enlace para verificar tu correo. Ábrelo y vuelve a iniciar sesión para hacer entrevistas.",
+    "verify": "Te enviamos un enlace para verificar tu correo. Ábrelo para hacer entrevistas y crear empresas.",
     "noUpdates": "No quiero recibir novedades del producto",
     "promotions": "Quiero recibir ofertas y promociones",
     "emailsFailed": "No se pudieron guardar tus preferencias de correo. Puedes cambiarlas en Ajustes."

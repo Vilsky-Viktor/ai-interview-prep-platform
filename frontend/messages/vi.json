@@ -74,7 +74,7 @@
     "link": "Email này đã có tài khoản prepza. Hãy tiếp tục theo cách bạn đã đăng nhập trước đây, và {provider} sẽ được liên kết với tài khoản đó.",
     "consent": "Khi đăng nhập, bạn xác nhận mình từ 16 tuổi trở lên, đồng ý với <terms>Điều khoản</terms> và đã đọc <privacy>Chính sách quyền riêng tư</privacy>.",
     "failed": "Đăng nhập không thành công. Vui lòng thử lại.",
-    "verify": "Chúng tôi đã gửi cho bạn một liên kết để xác minh email. Hãy mở liên kết, rồi đăng nhập lại để tham gia phỏng vấn.",
+    "verify": "Chúng tôi đã gửi cho bạn một liên kết để xác minh email. Hãy mở liên kết để tham gia phỏng vấn và tạo công ty.",
     "noUpdates": "Không gửi cho tôi cập nhật sản phẩm và tin tức",
     "promotions": "Gửi cho tôi ưu đãi và khuyến mãi",
     "emailsFailed": "Không lưu được lựa chọn email của bạn. Bạn có thể thay đổi trong Cài đặt."

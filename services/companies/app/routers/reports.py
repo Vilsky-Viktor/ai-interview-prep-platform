@@ -8,6 +8,7 @@ from app.constants.invites import InviteStatus
 from app.helpers.candidates import candidate_label, candidate_out
 from app.helpers.interviews import interview_title
 from app.helpers.logos import logo_path
+from app.helpers.reports import report_sender
 from app.integrations import rounds
 from app.schemas.reports import InterviewReportOut, ReportEmailIn
 from app.service_auth import Via
@@ -39,12 +40,10 @@ async def email_report(
     await reports.queue_email(
         {
             "email": email,
-            "sender": user.name or user.email,
-            "reply_to": user.email,
+            **report_sender(user, interview),
             "company": company.name,
             "title": await interview_title(interview) or "",
             "candidate": candidate_label(invite),
-            "language": user.language or interview.language,
             "pdf": body.pdf,
         }
     )
@@ -85,11 +84,9 @@ async def email_interview_report(
         {
             "kind": "candidates",
             "email": email,
-            "sender": user.name or user.email,
-            "reply_to": user.email,
+            **report_sender(user, interview),
             "company": company.name,
             "title": title,
-            "language": user.language or interview.language,
             "pdf": body.pdf,
         }
     )

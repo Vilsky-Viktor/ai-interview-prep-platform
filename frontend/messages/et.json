@@ -74,7 +74,7 @@
     "link": "Selle e-posti aadressiga on juba prepza konto. Jätka samal viisil nagu varem ja {provider} seotakse selle kontoga.",
     "consent": "Sisse logides kinnitad, et oled vähemalt 16-aastane, nõustud <terms>tingimustega</terms> ja oled lugenud <privacy>privaatsuspoliitikat</privacy>.",
     "failed": "Sisselogimine ebaõnnestus. Proovi uuesti.",
-    "verify": "Saatsime sulle lingi e-posti aadressi kinnitamiseks. Ava see ja logi siis uuesti sisse, et intervjuusid teha.",
+    "verify": "Saatsime sulle lingi e-posti aadressi kinnitamiseks. Ava see, et intervjuusid teha ja ettevõtteid luua.",
     "noUpdates": "Ma ei soovi tooteuudiseid",
     "promotions": "Soovin saada pakkumisi ja kampaaniaid",
     "emailsFailed": "E-kirjade valikut ei õnnestunud salvestada. Saad seda muuta seadetes."

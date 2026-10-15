@@ -74,7 +74,7 @@
     "link": "Email ini sudah punya akun prepza. Lanjutkan dengan cara kamu masuk sebelumnya, dan {provider} akan ditautkan ke akun tersebut.",
     "consent": "Dengan masuk, kamu menyatakan berusia 16 tahun ke atas, menyetujui <terms>Ketentuan</terms>, dan telah membaca <privacy>Kebijakan privasi</privacy>.",
     "failed": "Gagal masuk. Coba lagi.",
-    "verify": "Kami mengirimkan tautan untuk memverifikasi email-mu. Buka tautannya, lalu masuk lagi untuk mengikuti wawancara.",
+    "verify": "Kami mengirimkan tautan untuk memverifikasi email-mu. Buka tautannya untuk mengikuti wawancara dan membuat perusahaan.",
     "noUpdates": "Jangan kirimi saya pembaruan produk dan berita",
     "promotions": "Kirimi saya penawaran dan promosi",
     "emailsFailed": "Pilihan email-mu gagal disimpan. Kamu bisa mengubahnya di Pengaturan."

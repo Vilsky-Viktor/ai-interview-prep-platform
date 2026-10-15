@@ -16,6 +16,7 @@ import { Textarea } from "@/components/ui/textarea"
 import type { Locale } from "@/constants/i18n"
 import { MAX_COMPANY_NAME_LENGTH, MAX_GOAL_LENGTH } from "@/constants/limits"
 import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
+import { refreshVerification } from "@/lib/auth"
 import { humanHeaders } from "@/lib/human-check"
 import { isSubmitShortcut } from "@/lib/keys"
 import type { Company, Interview } from "@/types/company"
@@ -77,7 +78,9 @@ export function StartTest({
       return chosen
     }
 
-    // A person's first company asks them to show they're a person (it gets the welcome credits).
+    // A person's first company asks them to show they're a person (it gets the welcome credits),
+    // and every company a verified email: one verified since signing in counts at once.
+    await refreshVerification()
     const company = await apiFetch<Company>("/companies/companies", {
       method: "POST",
       body: JSON.stringify({ name: name.trim() }),

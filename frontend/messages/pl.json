@@ -74,7 +74,7 @@
     "link": "Ten adres e-mail ma już konto w prepza. Kontynuuj tak, jak logowałeś się wcześniej, a {provider} zostanie z nim połączony.",
     "consent": "Logując się, potwierdzasz, że masz co najmniej 16 lat, akceptujesz <terms>Regulamin</terms> i zapoznałeś się z <privacy>Polityką prywatności</privacy>.",
     "failed": "Nie udało się zalogować. Spróbuj ponownie.",
-    "verify": "Wysłaliśmy Ci link do potwierdzenia adresu e-mail. Otwórz go, a potem zaloguj się ponownie, aby brać udział w rozmowach.",
+    "verify": "Wysłaliśmy Ci link do potwierdzenia adresu e-mail. Otwórz go, aby brać udział w rozmowach i tworzyć firmy.",
     "noUpdates": "Nie chcę otrzymywać nowości o produkcie i aktualności",
     "promotions": "Chcę otrzymywać oferty i promocje",
     "emailsFailed": "Nie udało się zapisać Twoich wyborów dotyczących e-maili. Możesz je zmienić w Ustawieniach."

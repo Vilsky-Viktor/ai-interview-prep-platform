@@ -19,6 +19,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { MAX_COMPANY_NAME_LENGTH } from "@/constants/limits"
 import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
+import { refreshVerification } from "@/lib/auth"
 import { humanHeaders } from "@/lib/human-check"
 import type { Company } from "@/types/company"
 
@@ -53,6 +54,8 @@ export function CreateCompany({ templateId }: { templateId?: string }) {
     }
 
     setSaving(true)
+    // An email verified since signing in counts at once (a company needs a verified one).
+    await refreshVerification()
 
     try {
       const company = await apiFetch<Company>("/companies/companies", {

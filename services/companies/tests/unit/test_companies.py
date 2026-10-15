@@ -16,9 +16,9 @@ OWNED_ID = uuid.uuid4()
 JOINED_ID = uuid.uuid4()
 
 
-def sign_in(email="bob@example.com", uid="bob"):
+def sign_in(email="bob@example.com", uid="bob", verified=True):
     app.dependency_overrides[current_user] = lambda: User(
-        uid=uid, email=email, email_verified=True, name="Bob"
+        uid=uid, email=email, email_verified=verified, name="Bob"
     )
 
 
@@ -174,6 +174,24 @@ def test_a_taken_company_name_is_refused(client, monkeypatch):
 
     assert response.status_code == 409
     assert "Namen" in response.json()["detail"]
+
+
+def test_an_unverified_email_creates_no_company(client, monkeypatch):
+    """The welcome credits come once per email: a sign-in that didn't verify its address
+    (GitHub's, say) can't claim someone else's."""
+    sign_in(verified=False)
+    made = []
+
+    async def create(name, user_id, email):
+        made.append(name)
+
+    monkeypatch.setattr(companies, "create", create)
+
+    response = client.post("/companies", json={"name": "Acme"})
+
+    assert response.status_code == 403
+    assert "Confirm your email" in response.json()["detail"]
+    assert made == []
 
 
 def test_a_company_name_longer_than_a_heading_is_refused(client):

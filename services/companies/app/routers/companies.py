@@ -8,7 +8,12 @@ from prepza_common.human_check import require_human
 from prepza_common.paging import PageParams
 
 from app.config.settings import settings
-from app.constants.invites import COMPANY_NAME_TAKEN, MAX_OWNED_COMPANIES, TOO_MANY_COMPANIES
+from app.constants.invites import (
+    COMPANY_NAME_TAKEN,
+    EMAIL_NOT_VERIFIED,
+    MAX_OWNED_COMPANIES,
+    TOO_MANY_COMPANIES,
+)
 from app.constants.roles import EDITORS, Role
 from app.helpers.brand import color_sets, style_of
 from app.helpers.logos import logo_path
@@ -62,8 +67,13 @@ def company_out(company: Company, user_id: str, interview_count: int = 0) -> Com
 async def create_company(
     body: CompanyCreate, user: CurrentUser, request: Request, via: Via
 ) -> CompanyOut:
-    """A person's first company, which gets the welcome credits, needs them to show they're a
-    person, on the site; through the assistant or an AI app (no browser) it can't be asked."""
+    """A company needs its owner's verified email, as the welcome credits come once per email. A
+    person's first company, which gets them, needs them to show they're a person, on the site;
+    through the assistant or an AI app (no browser) it can't be asked."""
+    # The welcome credits come once per owner's email: only a verified one may claim them.
+    if not user.email_verified:
+        raise HTTPException(status.HTTP_403_FORBIDDEN, EMAIL_NOT_VERIFIED)
+
     owned = await companies.owned_count(user.uid)
 
     if owned == 0 and via is None:

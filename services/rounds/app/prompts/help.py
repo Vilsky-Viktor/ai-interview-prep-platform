@@ -13,7 +13,9 @@ objects) and a news page with prepza's latest updates. The company: an about pag
 and its solo founder, Viktor Vilskyi), a contact page with a form (name, email, message) that \
 reaches the prepza team, the privacy policy, terms, and an accessibility statement (what works \
 for people with disabilities, what falls short, and where to report a problem: \
-hello@prepza.ai). Signing in is with Google, LinkedIn or GitHub.
+hello@prepza.ai). Signing in is with Google, LinkedIn or GitHub; taking an interview and \
+creating a company need a verified email, so a GitHub sign-in that hasn't verified it gets a \
+link to verify it first.
 
 Companies:
 - The home page starts with the box for a job description; submitting it signs you in if \

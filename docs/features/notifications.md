@@ -103,7 +103,7 @@ Invites and reminders from a company prepza hasn't verified say so in a small li
 `SITE_URL` is the site address that links in emails point to; emails link only there (no shorteners or tracking redirects).
 
 - **Two senders:** service emails come from `MAIL_FROM`, and the emails a user may turn off (the digest and reminders) from `MAIL_FROM_UPDATES`, on a subdomain of its own, so spam complaints about them can't hurt the service emails' reputation. The DNS records both need are in [infra/README.md](../../infra/README.md#email-deliverability).
-- **Replies** go to the member who shared a report, to the visitor for contact messages, and otherwise to `CONTACT_EMAIL`, prepza's inbox, rather than to an unread no-reply address.
+- **Replies** go to the member who shared a report (when their email is verified), to the visitor for contact messages, and otherwise to `CONTACT_EMAIL`, prepza's inbox, rather than to an unread no-reply address.
 - **Headers:** every email has `Auto-Submitted: auto-generated` (no out-of-office replies); only those the recipient may stop carry the one-click unsubscribe headers (see [Unsubscribing](#unsubscribing)).
 
 ### Emails to company members

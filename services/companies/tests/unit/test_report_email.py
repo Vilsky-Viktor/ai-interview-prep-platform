@@ -104,6 +104,15 @@ def test_a_member_emails_the_pdf_report_and_replies_go_to_them(client, queued):
     assert event["pdf"] == PDF
 
 
+def test_replies_go_to_prepzas_inbox_while_the_senders_email_isnt_verified(client, queued):
+    app.dependency_overrides[current_user] = lambda: User(
+        uid="bob", email="bob@example.com", email_verified=False, name="Bob"
+    )
+
+    assert client.post(URL, json={"email": "boss@example.com", "pdf": PDF}).status_code == 202
+    assert queued[0]["reply_to"] is None
+
+
 def test_a_report_email_is_in_the_senders_language_not_the_tests(client, queued):
     app.dependency_overrides[current_user] = lambda: User(
         uid="bob", email="bob@example.com", email_verified=True, name="Bob", language="de"

@@ -74,7 +74,7 @@
     "link": "Cet e-mail a déjà un compte prepza. Continuez comme lors de votre dernière connexion, et {provider} y sera associé.",
     "consent": "En vous connectant, vous confirmez avoir 16 ans ou plus, acceptez les <terms>Conditions</terms> et avoir lu la <privacy>Politique de confidentialité</privacy>.",
     "failed": "La connexion a échoué. Veuillez réessayer.",
-    "verify": "Nous vous avons envoyé un lien pour vérifier votre e-mail. Ouvrez-le, puis reconnectez-vous pour passer des entretiens.",
+    "verify": "Nous vous avons envoyé un lien pour vérifier votre e-mail. Ouvrez-le pour passer des entretiens et créer des entreprises.",
     "noUpdates": "Ne pas recevoir les nouveautés du produit ni les actualités",
     "promotions": "Recevoir les offres et promotions",
     "emailsFailed": "Impossible d'enregistrer vos choix d'e-mail. Vous pouvez les modifier dans les Paramètres."
