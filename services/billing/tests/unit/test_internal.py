@@ -5,6 +5,7 @@ from prepza_common.http import bearer
 from app.constants.credits import CANDIDATE_CREDITS
 from app.service_auth import service_token
 from app.services import auto_top_ups
+from app.storage import auto_top_ups as auto_top_up_rows
 from app.storage import ledger, purchases
 
 AUTH = bearer(service_token("billing"))
@@ -83,17 +84,43 @@ def test_a_removed_members_card_turns_off_only_their_auto_top_up(client, monkeyp
     assert calls == [("company", "acme", "ann")]
 
 
-def test_library_exports_a_users_purchases_with_a_post(client, monkeypatch):
-    """The export is a POST, like every service's, so library sends nothing in the URL."""
+def test_library_exports_a_users_purchases_and_automatic_top_ups_with_a_post(client, monkeypatch):
+    """The export is a POST, like every service's, so library sends nothing in the URL. An
+    automatic top-up the user turned on charges their card, so it's theirs to see too."""
 
     async def purchases_of(user_id):
         return []
 
+    async def of_buyer(buyer_id):
+        return [
+            SimpleNamespace(
+                owner_id="acme",
+                product="topup_50",
+                threshold=500,
+                subscription_id="sub_1",
+                charged_at=None,
+                failed_at=None,
+            )
+        ]
+
     monkeypatch.setattr(purchases, "purchases_of", purchases_of)
+    monkeypatch.setattr(auto_top_up_rows, "of_buyer", of_buyer)
 
     response = client.post("/internal/users/ann/export", headers=AUTH)
 
-    assert response.json() == {"purchases": []}
+    assert response.json() == {
+        "auto_top_ups": [
+            {
+                "company_id": "acme",
+                "product": "topup_50",
+                "threshold": 500,
+                "started": True,
+                "last_charged_at": None,
+                "last_declined_at": None,
+            }
+        ],
+        "purchases": [],
+    }
 
 
 def test_low_companies_say_how_many_credits_are_available(client, monkeypatch):

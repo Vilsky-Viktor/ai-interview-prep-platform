@@ -25,6 +25,7 @@ from app.service_auth import ServiceCaller
 from app.services import auto_top_ups
 from app.services.catalog import price_cents_for
 from app.services.referrals import referral_out
+from app.storage import auto_top_ups as auto_top_up_rows
 from app.storage import history, ledger, purchases, referrals
 
 router = APIRouter(prefix="/internal", tags=["internal"])
@@ -163,9 +164,21 @@ async def delete_user(user_id: str, caller: ServiceCaller) -> None:
 
 @router.post("/users/{user_id}/export")
 async def export_user(user_id: str, caller: ServiceCaller) -> dict:
-    """What the user bought for their companies."""
+    """What the user bought for their companies, and the automatic top-ups they turned on
+    (charged to their card once started)."""
     return jsonable_encoder(
         {
+            "auto_top_ups": [
+                {
+                    "company_id": row.owner_id,
+                    "product": row.product,
+                    "threshold": row.threshold,
+                    "started": row.subscription_id is not None,
+                    "last_charged_at": row.charged_at,
+                    "last_declined_at": row.failed_at,
+                }
+                for row in await auto_top_up_rows.of_buyer(user_id)
+            ],
             "purchases": [
                 {
                     "product": item.product,

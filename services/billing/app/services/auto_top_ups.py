@@ -102,7 +102,8 @@ async def forget_buyer(buyer_id: str) -> None:
     """A deleted account's card is never charged again: its automatic top-ups' subscriptions
     are cancelled, then they go off. If Paddle can't cancel one, this raises and the account's
     deletion is tried again."""
-    cancelled = set(await auto_top_ups.subscriptions_of_buyer(buyer_id))
+    rows = await auto_top_ups.of_buyer(buyer_id)
+    cancelled = {row.subscription_id for row in rows if row.subscription_id}
 
     for subscription_id in cancelled:
         await cancel(subscription_id)
