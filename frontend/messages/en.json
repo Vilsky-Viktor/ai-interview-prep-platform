@@ -1301,7 +1301,9 @@
     "bzStepPaste": "Paste the key below. We add the web hook in Breezy HR ourselves.",
     "atsGroup": "ATS",
     "messagingGroup": "Messaging",
-    "apiGroup": "API"
+    "apiGroup": "API",
+    "searchInterview": "Search interviews",
+    "noInterview": "No interview has that in its title."
   },
   "slack": {
     "add": "Add to Slack",

@@ -1301,7 +1301,9 @@
     "bzStepPaste": "Wklej klucz poniżej. Webhook w Breezy HR dodamy sami.",
     "atsGroup": "ATS",
     "messagingGroup": "Komunikatory",
-    "apiGroup": "API"
+    "apiGroup": "API",
+    "searchInterview": "Szukaj rozmów",
+    "noInterview": "Żadna rozmowa nie ma tego w tytule."
   },
   "slack": {
     "add": "Dodaj do Slacka",

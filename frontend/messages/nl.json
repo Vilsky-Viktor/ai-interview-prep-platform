@@ -1297,7 +1297,9 @@
     "bzStepPaste": "Plak de sleutel hieronder. De webhook in Breezy HR voegen we zelf toe.",
     "atsGroup": "ATS",
     "messagingGroup": "Berichtenapps",
-    "apiGroup": "API"
+    "apiGroup": "API",
+    "searchInterview": "Interviews zoeken",
+    "noInterview": "Geen interview heeft dit in de titel."
   },
   "slack": {
     "add": "Toevoegen aan Slack",

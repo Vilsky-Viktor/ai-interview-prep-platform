@@ -6,6 +6,7 @@ import { useState } from "react"
 import { toast } from "sonner"
 
 import { DescriptionBox } from "@/components/description-box"
+import { InterviewPicker } from "@/components/company/interview-picker"
 import { MenuPill } from "@/components/menu-pill"
 import { Button } from "@/components/ui/button"
 import {
@@ -205,18 +206,13 @@ export function LinkJob({
             onChange={setStage}
             disabled={stages === null || saving}
           />
-          <MenuPill
+          <InterviewPicker
+            companyId={companyId}
+            interviews={interviews}
+            first={{ value: NEW, label: t("newFromJob") }}
             ariaLabel={t("interview")}
             placeholder={t("pickInterview")}
             value={interview}
-            options={[
-              { value: NEW, label: t("newFromJob") },
-              ...interviews.map((item) => ({
-                value: item.id,
-                label: item.title ?? "",
-                keepCase: true,
-              })),
-            ]}
             onChange={chooseInterview}
             disabled={saving}
           />

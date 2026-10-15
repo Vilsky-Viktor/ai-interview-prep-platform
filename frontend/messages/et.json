@@ -1305,7 +1305,9 @@
     "bzStepPaste": "Kleebi võti allpool. Webhooki lisame Breezy HR-is ise.",
     "atsGroup": "ATS",
     "messagingGroup": "Sõnumirakendused",
-    "apiGroup": "API"
+    "apiGroup": "API",
+    "searchInterview": "Otsi intervjuud",
+    "noInterview": "Ühegi intervjuu pealkirjas seda pole."
   },
   "slack": {
     "add": "Lisa Slacki",

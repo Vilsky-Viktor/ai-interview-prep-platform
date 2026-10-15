@@ -1,5 +1,5 @@
 import { expect, test } from "../fixtures"
-import { createCompany, createInterview } from "../helpers/api"
+import { api, createCompany, createInterview } from "../helpers/api"
 import { addAtsConnection } from "../helpers/db"
 import { openDialog, visit } from "../helpers/navigation"
 import { shot } from "../helpers/screenshots"
@@ -79,8 +79,24 @@ test("an owner sees how to connect Workable and manages its linked jobs", async 
   await owner.getByRole("menuitemradio", { name: "Senior Accountant" }).click()
   await owner.getByRole("button", { name: "Stage", exact: true }).click()
   await owner.getByRole("menuitemradio", { name: "Assessment" }).click()
-  await owner.getByRole("button", { name: "Interview", exact: true }).click()
-  await owner.getByRole("menuitemradio", { name: /new interview from this job/i }).click()
+  // The interview: the newest ones, and any of the company's found by its title.
+  const { title } = await api<{ title: string }>(owner, "GET", `/companies/interviews/${interviewId}`)
+  await owner.getByRole("combobox", { name: "Interview" }).click()
+  await shot(owner, "interview-picker")
+  const search = owner.getByRole("combobox", { name: "Search interviews" })
+  await search.fill(title.slice(0, 5))
+  await expect(owner.getByRole("option", { name: title })).toBeVisible()
+  await search.fill("no interview has this e2e text")
+  await expect(owner.getByText("No interview has that in its title.")).toBeVisible()
+  await shot(owner, "interview-search")
+  // A test chosen: the picker shows its title, closed.
+  await search.fill(title.slice(0, 5))
+  await owner.getByRole("option", { name: title }).click()
+  await expect(owner.getByRole("combobox", { name: "Interview" })).toHaveText(title)
+  await shot(owner, "interview-chosen")
+  await owner.getByRole("combobox", { name: "Interview" }).click()
+  await owner.getByRole("combobox", { name: "Search interviews" }).fill("")
+  await owner.getByRole("option", { name: /new interview from this job/i }).click()
   await expect(owner.getByRole("textbox", { name: "The job from Workable" })).toHaveValue(
     "Senior Accountant\n\nOwn our monthly close."
   )

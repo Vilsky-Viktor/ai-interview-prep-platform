@@ -7,6 +7,7 @@ from sqlalchemy import delete, func, select, update
 
 from app.constants.events import INTERVIEW_DELETED, INTERVIEW_READY
 from app.constants.invites import InviteStatus
+from app.helpers.search import escape_like
 from app.helpers.sync import changed_since
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
@@ -109,10 +110,15 @@ async def list_for_company(
     limit: int | None = None,
     since: datetime | None = None,
     after: uuid.UUID | None = None,
+    q: str = "",
 ) -> list[Interview]:
     """Newest first; without a limit, all of them (deleting a company goes through each). With
-    `since`, those changed since, oldest change first (changed_since)."""
+    `since`, those changed since, oldest change first (changed_since); with `q`, those whose
+    title contains it as typed, in any case."""
     filters = [Interview.company_id == company_id]
+
+    if q:
+        filters.append(Interview.title.ilike(f"%{escape_like(q.lower())}%", escape="\\"))
     order = [Interview.created_at.desc(), Interview.id]
 
     if since is not None:

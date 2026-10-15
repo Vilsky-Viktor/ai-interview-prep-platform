@@ -1292,7 +1292,9 @@
     "bzStepPaste": "הדביקו את המפתח למטה. את הוובהוק ב-Breezy HR נוסיף בעצמנו.",
     "atsGroup": "ATS",
     "messagingGroup": "אפליקציות הודעות",
-    "apiGroup": "API"
+    "apiGroup": "API",
+    "searchInterview": "חיפוש ראיונות",
+    "noInterview": "אין ראיון שהכותרת שלו מכילה את זה."
   },
   "slack": {
     "add": "הוספה ל-Slack",

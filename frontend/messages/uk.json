@@ -1301,7 +1301,9 @@
     "bzStepPaste": "Вставте ключ нижче. Вебхук у Breezy HR ми додамо самі.",
     "atsGroup": "ATS",
     "messagingGroup": "Месенджери",
-    "apiGroup": "API"
+    "apiGroup": "API",
+    "searchInterview": "Пошук співбесіди",
+    "noInterview": "Жодна співбесіда не має цього в назві."
   },
   "slack": {
     "add": "Додати до Slack",

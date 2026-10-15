@@ -1,13 +1,14 @@
+from typing import Annotated
 from uuid import UUID, uuid4
 
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, Query, status
 from prepza_common.analytics import track
 from prepza_common.auth import CurrentUser
 from prepza_common.paging import PageParams
 from prepza_common.pause import refuse_if_paused
 
 from app.constants.audit import AuditAction
-from app.constants.invites import INTERVIEW_NOT_READY
+from app.constants.invites import INTERVIEW_NOT_READY, MAX_SEARCH_LENGTH
 from app.helpers.interviews import (
     attach_set,
     attach_set_if_reachable,
@@ -72,10 +73,14 @@ async def create_from_template(
 
 @router.get("")
 async def list_interviews(
-    company_id: UUID, user: CurrentUser, page: PageParams
+    company_id: UUID,
+    user: CurrentUser,
+    page: PageParams,
+    q: Annotated[str, Query(max_length=MAX_SEARCH_LENGTH)] = "",
 ) -> list[InterviewOut]:
+    """The company's interviews, newest first; `q` narrows them to titles containing it."""
     company, _ = await require_company(user, company_id)
-    rows = await interviews.list_for_company(company.id, page.offset, page.limit)
+    rows = await interviews.list_for_company(company.id, page.offset, page.limit, q=q.strip())
     totals = await candidates.counts([item.id for item in rows])
 
     return [await interview_out(item, totals.get(item.id, 0)) for item in rows]

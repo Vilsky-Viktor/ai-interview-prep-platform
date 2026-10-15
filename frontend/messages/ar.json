@@ -1297,7 +1297,9 @@
     "bzStepPaste": "الصق المفتاح أدناه. سنضيف الويب هوك في Breezy HR بأنفسنا.",
     "atsGroup": "ATS",
     "messagingGroup": "تطبيقات المراسلة",
-    "apiGroup": "API"
+    "apiGroup": "API",
+    "searchInterview": "ابحث عن مقابلة",
+    "noInterview": "لا توجد مقابلة يحتوي عنوانها على ذلك."
   },
   "slack": {
     "add": "إضافة إلى Slack",

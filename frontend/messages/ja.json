@@ -1305,7 +1305,9 @@
     "bzStepPaste": "下にキーを貼り付けてください。Breezy HR の Webhook はこちらで追加します。",
     "atsGroup": "ATS",
     "messagingGroup": "メッセージアプリ",
-    "apiGroup": "API"
+    "apiGroup": "API",
+    "searchInterview": "面接を検索",
+    "noInterview": "タイトルにこの語句を含む面接はありません。"
   },
   "slack": {
     "add": "Slack に追加",

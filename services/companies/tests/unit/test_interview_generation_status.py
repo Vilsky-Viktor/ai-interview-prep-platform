@@ -76,7 +76,7 @@ def test_listing_never_asks_generation_and_shows_the_stored_failure(client, monk
     async def found(_company_id):
         return company
 
-    async def listed(company_id, offset, limit):
+    async def listed(company_id, offset, limit, **filters):
         return rows
 
     async def counts(ids):

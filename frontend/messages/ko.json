@@ -1292,7 +1292,9 @@
     "bzStepPaste": "아래에 키를 붙여 넣으세요. Breezy HR의 웹훅은 저희가 직접 추가합니다.",
     "atsGroup": "ATS",
     "messagingGroup": "메신저",
-    "apiGroup": "API"
+    "apiGroup": "API",
+    "searchInterview": "면접 검색",
+    "noInterview": "제목에 이 내용이 포함된 면접이 없습니다."
   },
   "slack": {
     "add": "Slack에 추가",

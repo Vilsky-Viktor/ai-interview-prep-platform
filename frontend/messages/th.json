@@ -1296,7 +1296,9 @@
     "bzStepPaste": "วางคีย์ด้านล่าง เราจะเพิ่มเว็บฮุกใน Breezy HR เอง",
     "atsGroup": "ATS",
     "messagingGroup": "แอปส่งข้อความ",
-    "apiGroup": "API"
+    "apiGroup": "API",
+    "searchInterview": "ค้นหาการสัมภาษณ์",
+    "noInterview": "ไม่มีการสัมภาษณ์ที่มีคำนี้ในชื่อ"
   },
   "slack": {
     "add": "เพิ่มลงใน Slack",

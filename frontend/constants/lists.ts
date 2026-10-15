@@ -28,3 +28,5 @@ export const INTEGRATION_LINK =
 /** The logo tile: full height of the row; on phones a small rounded tile beside the name. */
 export const INTEGRATION_LOGO =
   "-my-6 me-2 flex size-[6.25rem] shrink-0 items-center justify-center overflow-hidden bg-muted max-sm:m-0 max-sm:size-12 max-sm:self-start max-sm:rounded-lg"
+// A search as you type asks the service once typing pauses this long.
+export const SEARCH_DELAY_MS = 300

@@ -1301,7 +1301,9 @@
     "bzStepPaste": "Tempel kunci di bawah. Webhook di Breezy HR kami tambahkan sendiri.",
     "atsGroup": "ATS",
     "messagingGroup": "Aplikasi pesan",
-    "apiGroup": "API"
+    "apiGroup": "API",
+    "searchInterview": "Cari wawancara",
+    "noInterview": "Tidak ada wawancara yang judulnya memuat itu."
   },
   "slack": {
     "add": "Tambahkan ke Slack",
