@@ -33,6 +33,7 @@ export function LinkView({ token }: { token: string }) {
     data: link,
     status,
     retry,
+    gone,
   } = useLinkData<JobLink>(
     loading ? null : `/companies/links/${token}`,
     user?.uid
@@ -82,7 +83,7 @@ export function LinkView({ token }: { token: string }) {
     return (
       <LinkStatus
         status={status === "ready" ? "loading" : status}
-        invalid={share("invalid")}
+        invalid={gone ?? share("invalid")}
         onRetry={retry}
       />
     )

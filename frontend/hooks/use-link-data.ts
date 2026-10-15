@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 
-import { apiFetch } from "@/lib/api"
+import { ApiError, apiFetch } from "@/lib/api"
 import { linkFailure } from "@/lib/link-status"
 
 // What a page opened from a link (an invite, a job link, an unsubscribe link) knows of it: still
@@ -11,11 +11,14 @@ import { linkFailure } from "@/lib/link-status"
 export type LinkStatus = "loading" | "missing" | "failed" | "ready"
 
 /** Reads `path` once `path` is set, and again when `refresh` changes (a sign-in) or on retry().
- * A link is called invalid only when the API says it's gone; anything else can be retried. */
+ * A link is called invalid only when the API says it's gone; anything else can be retried.
+ * `gone` is the API's reason when it said why (410: an invite that expired, an interview no
+ * longer available), in the reader's language. */
 export function useLinkData<T>(path: string | null, refresh?: unknown) {
   const [data, setData] = useState<T | null>(null)
   const [status, setStatus] = useState<LinkStatus>("loading")
   const [attempt, setAttempt] = useState(0)
+  const [gone, setGone] = useState<string | null>(null)
 
   useEffect(() => {
     if (path === null) {
@@ -34,6 +37,11 @@ export function useLinkData<T>(path: string | null, refresh?: unknown) {
       .catch((error) => {
         if (current) {
           setStatus(linkFailure(error))
+          setGone(
+            error instanceof ApiError && error.status === 410
+              ? error.message
+              : null
+          )
         }
       })
 
@@ -47,5 +55,5 @@ export function useLinkData<T>(path: string | null, refresh?: unknown) {
     setAttempt((count) => count + 1)
   }
 
-  return { data, status, retry }
+  return { data, status, retry, gone }
 }

@@ -105,6 +105,7 @@ MESSAGES = {
     "Invalid API key": "잘못된 API 키입니다",
     "Invalid signature": "잘못된 서명입니다",
     "Invite not found": "초대를 찾을 수 없습니다",
+    "This invite has expired. Ask the company to send it again.": "이 초대는 만료되었습니다. 회사에 다시 보내 달라고 요청해 주세요.",
     "Link not found": "링크를 찾을 수 없습니다",
     "Member not found": "멤버를 찾을 수 없습니다",
     "No logo": "로고가 없습니다",

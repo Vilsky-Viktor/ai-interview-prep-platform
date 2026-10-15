@@ -37,7 +37,7 @@ A candidate's credits are set aside on invite and given back if they never answe
 | When | What happens |
 |---|---|
 | Not started after 3 days | One reminder email. A daily job runs it (`/internal/schedules/invite-reminders`) |
-| Not started within 30 days | The invite expires and its credits come back. Sending it again, or the candidate starting through the shareable link, sets them aside again |
+| Not started within 30 days | The invite expires and its credits come back; its link says it expired and to ask the company to send it again (`410`, `INVITE_EXPIRED`). Sending it again, or the candidate starting through the shareable link, sets them aside again |
 
 Candidates can also arrive from an ATS (see [ATS integrations](ats.md)).
 

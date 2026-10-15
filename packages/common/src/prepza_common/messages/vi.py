@@ -105,6 +105,7 @@ MESSAGES = {
     "Invalid API key": "Khóa API không hợp lệ",
     "Invalid signature": "Chữ ký không hợp lệ",
     "Invite not found": "Không tìm thấy lời mời",
+    "This invite has expired. Ask the company to send it again.": "Lời mời này đã hết hạn. Hãy đề nghị công ty gửi lại lời mời.",
     "Link not found": "Không tìm thấy liên kết",
     "Member not found": "Không tìm thấy thành viên",
     "No logo": "Không có logo",

@@ -5,11 +5,19 @@ from prepza_common.auth import CurrentUser
 from prepza_common.constants import VIA_MCP
 
 from app.constants.ai_apps import AI_APPS_OFF
-from app.constants.invites import COMPANY_SUSPENDED, INTERVIEW_UNAVAILABLE, InviteStatus
+from app.constants.invites import (
+    COMPANY_SUSPENDED,
+    INTERVIEW_UNAVAILABLE,
+    INVITE_EXPIRED,
+    InviteStatus,
+)
 from app.constants.roles import EDITORS, Role
 from app.models.companies import Company, Member
+from app.models.interviews import Interview
+from app.models.invites import CandidateInvite
 from app.service_auth import REQUEST_VIA
 from app.storage import companies
+from app.storage import invites as invite_store
 
 
 async def require_company(user: CurrentUser, company_id: UUID) -> tuple[Company, Member]:
@@ -65,3 +73,17 @@ def refuse_if_suspended(company: Company | None, invite_status: str | None) -> N
 
     if suspended and invite_status != InviteStatus.IN_PROCESS:
         raise HTTPException(status.HTTP_410_GONE, INTERVIEW_UNAVAILABLE)
+
+
+async def open_invite(token: str) -> tuple[CandidateInvite, Interview]:
+    """The invite a candidate's link names, with its interview: not found (404) when there's
+    none, and gone (410, saying the company can send it again) once it expired."""
+    found = await invite_store.get_by_token(token)
+
+    if found is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Invite not found")
+
+    if found[0].status == InviteStatus.EXPIRED:
+        raise HTTPException(status.HTTP_410_GONE, INVITE_EXPIRED)
+
+    return found

@@ -39,6 +39,7 @@ export function InviteView({
     data: invite,
     status,
     retry,
+    gone,
   } = useLinkData<Invite>(
     loading ? null : `/companies/invites/${token}`,
     user?.uid
@@ -102,7 +103,7 @@ export function InviteView({
     return (
       <LinkStatus
         status={status === "ready" ? "loading" : status}
-        invalid={share("invalid")}
+        invalid={gone ?? share("invalid")}
         onRetry={retry}
       />
     )

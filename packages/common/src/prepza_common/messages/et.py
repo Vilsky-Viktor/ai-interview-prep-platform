@@ -117,6 +117,7 @@ MESSAGES = {
     "Invalid API key": "Vigane API-võti",
     "Invalid signature": "Vigane allkiri",
     "Invite not found": "Kutset ei leitud",
+    "This invite has expired. Ask the company to send it again.": "See kutse on aegunud. Palu ettevõttel see uuesti saata.",
     "Link not found": "Linki ei leitud",
     "Member not found": "Liiget ei leitud",
     "No logo": "Logo puudub",

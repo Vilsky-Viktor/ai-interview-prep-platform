@@ -105,6 +105,7 @@ MESSAGES = {
     "Invalid API key": "Hindi valid ang API key",
     "Invalid signature": "Hindi valid ang signature",
     "Invite not found": "Hindi nakita ang imbitasyon",
+    "This invite has expired. Ask the company to send it again.": "Expired na ang imbitasyong ito. Hilingin sa kumpanya na ipadala ito ulit.",
     "Link not found": "Hindi nakita ang link",
     "Member not found": "Hindi nakita ang miyembro",
     "No logo": "Walang logo",

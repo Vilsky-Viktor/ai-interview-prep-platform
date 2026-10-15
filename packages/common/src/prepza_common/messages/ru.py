@@ -105,6 +105,7 @@ MESSAGES = {
     "Invalid API key": "Неверный API-ключ",
     "Invalid signature": "Неверная подпись",
     "Invite not found": "Приглашение не найдено",
+    "This invite has expired. Ask the company to send it again.": "Срок действия этого приглашения истёк. Попросите компанию отправить его снова.",
     "Link not found": "Ссылка не найдена",
     "Member not found": "Участник не найден",
     "No logo": "Нет логотипа",

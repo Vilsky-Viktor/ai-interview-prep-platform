@@ -105,6 +105,7 @@ MESSAGES = {
     "Invalid API key": "מפתח API לא תקין",
     "Invalid signature": "חתימה לא תקינה",
     "Invite not found": "ההזמנה לא נמצאה",
+    "This invite has expired. Ask the company to send it again.": "תוקף ההזמנה הזו פג. בקשו מהחברה לשלוח אותה שוב.",
     "Link not found": "הקישור לא נמצא",
     "Member not found": "חבר הצוות לא נמצא",
     "No logo": "אין לוגו",

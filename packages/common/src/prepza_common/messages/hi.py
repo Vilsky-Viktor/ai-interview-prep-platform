@@ -105,6 +105,7 @@ MESSAGES = {
     "Invalid API key": "API कुंजी अमान्य है",
     "Invalid signature": "सिग्नेचर अमान्य है",
     "Invite not found": "इनवाइट नहीं मिला",
+    "This invite has expired. Ask the company to send it again.": "यह इनवाइट एक्सपायर हो गया है। कंपनी से इसे फिर से भेजने के लिए कहें।",
     "Link not found": "लिंक नहीं मिला",
     "Member not found": "सदस्य नहीं मिला",
     "No logo": "कोई लोगो नहीं है",

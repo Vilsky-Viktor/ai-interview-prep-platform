@@ -6,7 +6,7 @@ from prepza_common.auth import current_user
 from prepza_common.user import User
 
 import app.routers.invites as routes
-from app.constants.invites import NOT_THE_GUEST, InviteStatus
+from app.constants.invites import INVITE_EXPIRED, NOT_THE_GUEST, InviteStatus
 from app.main import app
 from tests.unit.test_invites import INVITE_ID, invite_page, stored_invite  # noqa: F401 (fixtures)
 
@@ -61,7 +61,10 @@ def test_an_expired_guest_invitation_signs_no_one_in(
 ):
     invite_page.status = InviteStatus.EXPIRED
 
-    assert client.post("/invites/token-1/guest").status_code == 404
+    # Gone, saying the company can send it again: on the invitation and for its sign-in.
+    for response in (client.get("/invites/token-1"), client.post("/invites/token-1/guest")):
+        assert response.status_code == 410
+        assert response.json()["detail"] == INVITE_EXPIRED
 
 
 def test_the_guest_starts_without_an_email(client, guest_invite):

@@ -11,10 +11,9 @@ from app.integrations.firebase_tokens import guest_token, guest_uid
 from app.integrations.redis import get_redis
 from app.schemas.invites import GuestTokenOut, InviteStartOut, InviteView
 from app.schemas.logos import BrandColorSets, BrandStyle
-from app.services.access import refuse_if_suspended
+from app.services.access import open_invite, refuse_if_suspended
 from app.services.candidate_start import start_sessions
 from app.storage import companies
-from app.storage import invites as invite_store
 
 router = APIRouter(prefix="/invites", tags=["invites"])
 
@@ -23,13 +22,8 @@ router = APIRouter(prefix="/invites", tags=["invites"])
 async def get_invite(token: str, user: OptionalUser) -> InviteView:
     """The invitation, also before signing in, so the page shows what it's for; the candidate's
     email only once someone is signed in."""
-    found = await invite_store.get_by_token(token)
-
     # An expired invite's link stops working until the company sends it again.
-    if found is None or found[0].status == InviteStatus.EXPIRED:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Invite not found")
-
-    invite, interview = found
+    invite, interview = await open_invite(token)
     interview = await attach_set(interview)
     title = await interview_title(interview)
 
@@ -56,24 +50,19 @@ async def get_invite(token: str, user: OptionalUser) -> InviteView:
 @router.post("/{token}/guest")
 async def sign_in_guest(token: str) -> GuestTokenOut:
     """A sign-in for the candidate a company's own platform sent: the link is all they need."""
-    found = await invite_store.get_by_token(token)
+    invite, _ = await open_invite(token)
 
-    if found is None or found[0].status == InviteStatus.EXPIRED or not found[0].guest:
+    if not invite.guest:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Invite not found")
 
-    return GuestTokenOut(token=await guest_token(found[0].id))
+    return GuestTokenOut(token=await guest_token(invite.id))
 
 
 @router.post("/{token}/start")
 async def start_invite(token: str, user: CurrentUser) -> InviteStartOut:
     """Only the invited, verified email can start, so a forwarded link is useless to anyone else;
     a guest invite, only its guest (its link signs them in)."""
-    found = await invite_store.get_by_token(token)
-
-    if found is None or found[0].status == InviteStatus.EXPIRED:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Invite not found")
-
-    invite, interview = found
+    invite, interview = await open_invite(token)
 
     if invite.guest:
         if user.uid != guest_uid(invite.id):

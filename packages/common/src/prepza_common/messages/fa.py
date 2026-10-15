@@ -105,6 +105,7 @@ MESSAGES = {
     "Invalid API key": "کلید API نامعتبر است",
     "Invalid signature": "امضا نامعتبر است",
     "Invite not found": "دعوت پیدا نشد",
+    "This invite has expired. Ask the company to send it again.": "این دعوت منقضی شده است. از شرکت بخواهید دوباره آن را بفرستد.",
     "Link not found": "پیوند پیدا نشد",
     "Member not found": "عضو پیدا نشد",
     "No logo": "لوگویی وجود ندارد",

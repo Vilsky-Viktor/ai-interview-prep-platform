@@ -128,6 +128,8 @@ ALREADY_FINISHED = "This candidate already finished the interview."
 # A reminder asked for a candidate invited without prepza's emails or sign-in.
 NO_EMAILS_FOR_GUEST = "prepza doesn't email this candidate: send them their invite link yourself."
 NOT_THE_GUEST = "Open the interview from the link the company gave you."
+# An invite not started within INVITE_EXPIRY_DAYS; sending it again makes the link work again.
+INVITE_EXPIRED = "This invite has expired. Ask the company to send it again."
 EMAIL_NOT_VERIFIED = "Confirm your email first: open the link we sent you, then try again."
 # A company a superadmin suspended: its members see why, and candidates that the interview isn't
 # available (one already in it may finish).

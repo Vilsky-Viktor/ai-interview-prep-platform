@@ -105,6 +105,7 @@ MESSAGES = {
     "Invalid API key": "Chiave API non valida",
     "Invalid signature": "Firma non valida",
     "Invite not found": "Invito non trovato",
+    "This invite has expired. Ask the company to send it again.": "Questo invito è scaduto. Chiedi all'azienda di inviartelo di nuovo.",
     "Link not found": "Link non trovato",
     "Member not found": "Membro non trovato",
     "No logo": "Nessun logo",

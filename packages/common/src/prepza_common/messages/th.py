@@ -105,6 +105,7 @@ MESSAGES = {
     "Invalid API key": "คีย์ API ไม่ถูกต้อง",
     "Invalid signature": "ลายเซ็นไม่ถูกต้อง",
     "Invite not found": "ไม่พบคำเชิญ",
+    "This invite has expired. Ask the company to send it again.": "คำเชิญนี้หมดอายุแล้ว โปรดขอให้บริษัทส่งคำเชิญอีกครั้ง",
     "Link not found": "ไม่พบลิงก์",
     "Member not found": "ไม่พบสมาชิก",
     "No logo": "ไม่มีโลโก้",

@@ -105,6 +105,7 @@ MESSAGES = {
     "Invalid API key": "Kunci API tidak valid",
     "Invalid signature": "Tanda tangan tidak valid",
     "Invite not found": "Undangan tidak ditemukan",
+    "This invite has expired. Ask the company to send it again.": "Undangan ini sudah kedaluwarsa. Minta perusahaan untuk mengirimkannya lagi.",
     "Link not found": "Tautan tidak ditemukan",
     "Member not found": "Anggota tidak ditemukan",
     "No logo": "Tidak ada logo",

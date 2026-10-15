@@ -105,6 +105,7 @@ MESSAGES = {
     "Invalid API key": "Geçersiz API anahtarı",
     "Invalid signature": "Geçersiz imza",
     "Invite not found": "Davet bulunamadı",
+    "This invite has expired. Ask the company to send it again.": "Bu davetin süresi doldu. Şirketten daveti yeniden göndermesini isteyin.",
     "Link not found": "Bağlantı bulunamadı",
     "Member not found": "Üye bulunamadı",
     "No logo": "Logo yok",

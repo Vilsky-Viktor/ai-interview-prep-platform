@@ -105,6 +105,7 @@ MESSAGES = {
     "Invalid API key": "API 密钥无效",
     "Invalid signature": "签名无效",
     "Invite not found": "未找到邀请",
+    "This invite has expired. Ask the company to send it again.": "此邀请已过期。请联系公司重新发送。",
     "Link not found": "未找到链接",
     "Member not found": "未找到成员",
     "No logo": "没有徽标",

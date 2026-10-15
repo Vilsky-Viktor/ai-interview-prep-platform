@@ -105,6 +105,7 @@ MESSAGES = {
     "Invalid API key": "無効な API キーです",
     "Invalid signature": "無効な署名です",
     "Invite not found": "招待が見つかりません",
+    "This invite has expired. Ask the company to send it again.": "この招待は有効期限が切れています。企業に再送を依頼してください。",
     "Link not found": "リンクが見つかりません",
     "Member not found": "メンバーが見つかりません",
     "No logo": "ロゴがありません",

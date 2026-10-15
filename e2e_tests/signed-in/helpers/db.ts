@@ -97,3 +97,10 @@ export async function setInvitedAt(email: string, iso: string) {
     ),
   );
 }
+
+/** Expires a throwaway candidate's invites, as the daily job does to one not started in time. */
+export async function expireInvite(email: string) {
+  await withDatabase("companies", (client) =>
+    client.query("UPDATE candidate_invites SET status = 'expired' WHERE email = $1", [email]),
+  );
+}
