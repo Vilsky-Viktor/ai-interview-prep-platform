@@ -13,7 +13,7 @@ def test_a_company_name_of_two_characters_is_fine(name):
     assert CompanyNameIn(name=name).name == name.strip()
 
 
-@pytest.mark.parametrize("name", ["", "A", "  A  "])
+@pytest.mark.parametrize("name", ["", "A", "  A  ", "     "])
 def test_a_shorter_company_name_is_refused_saying_why(name):
     for build in (
         lambda: CompanyCreate(name=name),

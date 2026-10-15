@@ -84,7 +84,7 @@ async def create_company(
 
         raise HTTPException(status.HTTP_429_TOO_MANY_REQUESTS, TOO_MANY_COMPANIES)
 
-    company = await companies.create(body.name.strip(), user.uid, user.email)
+    company = await companies.create(body.name, user.uid, user.email)
 
     if company is None:
         raise HTTPException(status.HTTP_409_CONFLICT, COMPANY_NAME_TAKEN)
