@@ -4,6 +4,7 @@ import { cn } from "cn"
 import { CheckIcon, XIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
 
+import { gradeTone } from "@/lib/grade-tone"
 import { InlineText } from "@/components/questions/inline-text"
 
 /** A question's answer options: the right one with a green check, the wrong ones with a red
@@ -32,13 +33,13 @@ export function AnswerOptions({
           {/* Right and wrong in the scorecards' colors. */}
           {option.correct ? (
             <CheckIcon
-              className="mt-0.5 size-4 shrink-0 text-green-600 dark:text-green-400"
+              className={cn("mt-0.5 size-4 shrink-0", gradeTone(true))}
               role="img"
               aria-label={t("correct")}
             />
           ) : (
             <XIcon
-              className="mt-0.5 size-4 shrink-0 text-red-600 dark:text-red-400"
+              className={cn("mt-0.5 size-4 shrink-0", gradeTone(false))}
               role="img"
               aria-label={t("wrong")}
             />

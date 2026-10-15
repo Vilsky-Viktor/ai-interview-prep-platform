@@ -211,12 +211,7 @@ export default async function ScorecardPage({
 
       {card.sessions.map((session) => {
         const score = session.final_score
-        const tone =
-          session.passed === true
-            ? "text-green-600 dark:text-green-400"
-            : session.passed === false
-              ? "text-red-600 dark:text-red-400"
-              : "text-muted-foreground"
+        const tone = gradeTone(session.passed) || "text-muted-foreground"
 
         return (
           <section key={session.id} className="space-y-4">

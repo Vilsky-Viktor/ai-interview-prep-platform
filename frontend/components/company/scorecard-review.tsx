@@ -4,6 +4,7 @@ import { cn } from "cn"
 import { MinusIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
 
+import { gradeTone } from "@/lib/grade-tone"
 import { InlineText } from "@/components/questions/inline-text"
 import { QuestionText } from "@/components/questions/question-text"
 import { VirtualList } from "@/components/virtual-list"
@@ -44,7 +45,7 @@ export function ScorecardMark({ item }: { item: ReviewItem }) {
   // Unanswered and timed-out questions count as wrong.
   if (!answer || answer.option_index == null) {
     return (
-      <span className="shrink-0 text-lg font-light text-red-600 dark:text-red-400">
+      <span className={cn("shrink-0 text-lg font-light", gradeTone(false))}>
         {answer ? t("timeOut") : rounds("notAnswered")}
       </span>
     )
@@ -52,12 +53,7 @@ export function ScorecardMark({ item }: { item: ReviewItem }) {
 
   return (
     <span
-      className={cn(
-        "shrink-0 text-lg font-light",
-        answer.correct
-          ? "text-green-700 dark:text-green-400"
-          : "text-red-600 dark:text-red-400"
-      )}
+      className={cn("shrink-0 text-lg font-light", gradeTone(answer.correct))}
     >
       {rounds(verdict(answer.correct))}
     </span>
