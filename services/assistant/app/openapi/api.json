@@ -1012,6 +1012,37 @@
     ],
     "title": "CandidateIn"
    },
+   "CandidateWebhook": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "title": "Id",
+      "description": "The event's id: the same when it's sent again"
+     },
+     "type": {
+      "type": "string",
+      "title": "Type",
+      "description": "The event's type, such as candidate.finished"
+     },
+     "occurred_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Occurred At",
+      "description": "When the change happened, to put events in order: a retried one can arrive after a later one"
+     },
+     "data": {
+      "$ref": "#/components/schemas/CandidateEvent"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "type",
+     "occurred_at",
+     "data"
+    ],
+    "title": "CandidateWebhook"
+   },
    "HTTPValidationError": {
     "properties": {
      "detail": {
@@ -1093,6 +1124,37 @@
     ],
     "title": "InterviewEvent",
     "description": "The `data` object of an `interview.ready` event."
+   },
+   "InterviewWebhook": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "title": "Id",
+      "description": "The event's id: the same when it's sent again"
+     },
+     "type": {
+      "type": "string",
+      "title": "Type",
+      "description": "The event's type, such as candidate.finished"
+     },
+     "occurred_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Occurred At",
+      "description": "When the change happened, to put events in order: a retried one can arrive after a later one"
+     },
+     "data": {
+      "$ref": "#/components/schemas/InterviewEvent"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "type",
+     "occurred_at",
+     "data"
+    ],
+    "title": "InterviewWebhook"
    },
    "KeyExpiry": {
     "type": "string",
@@ -1317,6 +1379,37 @@
     "title": "RemovedEvent",
     "description": "The `data` object of a `candidate.removed` event: who was removed, as the candidate is\ngone."
    },
+   "RemovedWebhook": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "title": "Id",
+      "description": "The event's id: the same when it's sent again"
+     },
+     "type": {
+      "type": "string",
+      "title": "Type",
+      "description": "The event's type, such as candidate.finished"
+     },
+     "occurred_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Occurred At",
+      "description": "When the change happened, to put events in order: a retried one can arrive after a later one"
+     },
+     "data": {
+      "$ref": "#/components/schemas/RemovedEvent"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "type",
+     "occurred_at",
+     "data"
+    ],
+    "title": "RemovedWebhook"
+   },
    "Section": {
     "properties": {
      "title": {
@@ -1375,6 +1468,37 @@
     "type": "object",
     "title": "TestEvent",
     "description": "The `data` object of a `test` event: empty."
+   },
+   "TestWebhook": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "title": "Id",
+      "description": "The event's id: the same when it's sent again"
+     },
+     "type": {
+      "type": "string",
+      "title": "Type",
+      "description": "The event's type, such as candidate.finished"
+     },
+     "occurred_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Occurred At",
+      "description": "When the change happened, to put events in order: a retried one can arrive after a later one"
+     },
+     "data": {
+      "$ref": "#/components/schemas/TestEvent"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "type",
+     "occurred_at",
+     "data"
+    ],
+    "title": "TestWebhook"
    },
    "ValidationError": {
     "properties": {

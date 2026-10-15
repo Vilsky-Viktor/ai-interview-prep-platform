@@ -37,6 +37,9 @@ test("the developer docs explain the API, web hooks, the SDK and the objects", a
   await expect(page.getByText("candidate.finished", { exact: true }).first()).toBeVisible();
   // A finished candidate's results never change, so nothing is sent after it.
   await expect(page.getByText("candidate.rescored", { exact: true })).toHaveCount(0);
+  // Each event's body is shown as it's sent: its id, type and time around the data.
+  await expect(page.getByText("occurred_at", { exact: true }).first()).toBeVisible();
+  await page.screenshot({ path: test.info().outputPath("webhooks.png"), fullPage: true });
 
   // The SDK: the script and how to embed the interview.
   await expect(tabs.getByRole("link", { name: "SDK" })).toHaveAttribute("href", "/api-docs?tab=sdk");
