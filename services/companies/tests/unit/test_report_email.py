@@ -164,11 +164,9 @@ def test_the_tests_report_is_emailed_as_a_candidates_report(client, queued):
 
     assert response.status_code == 202
     [event] = queued
-    assert (event["kind"], event["title"], event["filename"]) == (
-        "candidates",
-        "Backend",
-        "Candidates Backend.pdf",
-    )
+    # Notifications names the attachment, in the email's language.
+    assert (event["kind"], event["title"]) == ("candidates", "Backend")
+    assert "filename" not in event
     assert "candidate" not in event
 
 

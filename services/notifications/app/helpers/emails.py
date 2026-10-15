@@ -4,6 +4,7 @@ from prepza_common.constants import DEFAULT_LANGUAGE, OPERATOR, RTL_LANGUAGES
 
 from app.constants.unsubscribe import SETTINGS_PATH, UnsubscribeType
 from app.constants.webhooks import CANDIDATE_INVITE_KIND, ID_TAG, KIND_TAG
+from app.helpers.attachments import pdf_name
 from app.helpers.unsubscribe import candidate_token, one_click_headers, page_url, user_token
 from app.models.email import Email
 from app.templates.contact import CONTACT_HTML, CONTACT_SUBJECT, CONTACT_TEXT
@@ -253,10 +254,14 @@ def optional_email(
 def report_email(data: dict, site_url: str) -> Email:
     """A PDF report, from a company member to someone such as a hiring manager: a candidate's,
     or all of a test's candidates' ("kind": "candidates"); replying answers the member."""
+    kind = data.get("kind", "report")
     texts = {key: value for key, value in data.items() if key not in ("pdf", "kind")}
-    email = render(data.get("kind", "report"), texts, site_url)
+    email = render(kind, texts, site_url)
     email.reply_to = data["reply_to"]
-    email.attachments = [(data["filename"], data["pdf"])]
+    # Named in the email's language: its heading, then the candidate or the test.
+    heading = EMAILS[email_language(kind, data.get("language"))][kind]["heading"]
+    named = data.get("title") if kind == "candidates" else data.get("candidate")
+    email.attachments = [(pdf_name(heading, named or ""), data["pdf"])]
 
     return email
 

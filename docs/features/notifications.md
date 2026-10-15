@@ -92,7 +92,7 @@ The service sends, as HTML with a plain-text version:
 - candidate invites,
 - candidates' reminders,
 - to a candidate who started through a shareable link, their own invite link to continue,
-- emailed reports, with the PDF attached, in the language of the member who sends them (the test's when theirs isn't known),
+- emailed reports, with the PDF attached, in the language of the member who sends them (the test's when theirs isn't known); the PDF is named in that language, its heading and then the candidate or the test, without characters that break a file name (`helpers/attachments.py`),
 - contact page messages, to `CONTACT_EMAIL` (hello@prepza.ai by default),
 - to company members: the activity digest, reminders, and failed automatic top-ups (see [Emails to company members](#emails-to-company-members)).
 

@@ -6,3 +6,7 @@ RESEND_REFUSED = (400, 422)
 # On every email (RFC 3834): sent by a program, so mail servers and clients send it no
 # out-of-office or other automatic replies.
 AUTOMATED_HEADERS = {"Auto-Submitted": "auto-generated"}
+# A report's attachment name: characters file systems or mail clients mishandle become spaces,
+# and the name is cut to this length before ".pdf".
+UNSAFE_FILENAME = r'[\\/:*?"<>|\x00-\x1f\x7f]+'
+MAX_FILENAME_LENGTH = 100

@@ -48,7 +48,6 @@ async def email_report(
             "title": await interview_title(interview) or "",
             "candidate": candidate_label(invite),
             "language": user.language or interview.language,
-            "filename": f"Report {invite.email}.pdf",
             "pdf": body.pdf,
         }
     )
@@ -104,7 +103,6 @@ async def email_interview_report(
             "company": company.name,
             "title": title,
             "language": user.language or interview.language,
-            "filename": f"Candidates {title}.pdf".strip(),
             "pdf": body.pdf,
         }
     )

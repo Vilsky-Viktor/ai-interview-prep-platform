@@ -17,7 +17,6 @@ DATA = {
     "title": "Backend",
     "candidate": "ann@example.com",
     "language": "en",
-    "filename": "Report ann@example.com.pdf",
     "pdf": PDF,
 }
 
@@ -28,7 +27,7 @@ def test_the_report_email_carries_the_pdf_and_replies_go_to_the_sender():
     assert email.to == "boss@example.com"
     assert email.subject == "Candidate report: ann@example.com"
     assert email.reply_to == "bob@example.com"
-    assert email.attachments == [("Report ann@example.com.pdf", PDF)]
+    assert email.attachments == [("Candidate report – ann@example.com.pdf", PDF)]
     # The PDF travels as an attachment only; its own reason for being sent is in the footer.
     assert PDF not in email.html and PDF not in email.text
     assert "Bob shared a candidate report with this address" in email.text
@@ -36,12 +35,12 @@ def test_the_report_email_carries_the_pdf_and_replies_go_to_the_sender():
 
 def test_the_report_of_all_candidates_has_its_own_text():
     data = {key: value for key, value in DATA.items() if key != "candidate"}
-    data |= {"kind": "candidates", "language": "en", "filename": "Candidates Backend.pdf"}
+    data |= {"kind": "candidates", "language": "en"}
 
     email = report_email(data, "https://prepza.com")
 
     assert email.subject == "Report of all candidates: Backend"
-    assert email.attachments == [("Candidates Backend.pdf", PDF)]
+    assert email.attachments == [("Candidates report – Backend.pdf", PDF)]
     assert "Bob shared a candidates report with this address" in email.text
 
 
@@ -62,7 +61,9 @@ def test_resend_gets_the_attachment(monkeypatch):
 
     asyncio.run(resend.send(report_email(DATA, ""), "k"))
 
-    assert sent["attachments"] == [{"filename": "Report ann@example.com.pdf", "content": PDF}]
+    assert sent["attachments"] == [
+        {"filename": "Candidate report – ann@example.com.pdf", "content": PDF}
+    ]
     assert sent["reply_to"] == "bob@example.com"
 
 
@@ -87,7 +88,7 @@ def test_smtp_attaches_the_pdf(monkeypatch):
     smtp.send_sync(report_email(DATA, ""))
 
     [attachment] = list(sent[0].iter_attachments())
-    assert attachment.get_filename() == "Report ann@example.com.pdf"
+    assert attachment.get_filename() == "Candidate report – ann@example.com.pdf"
     assert attachment.get_content() == b"%PDF-1.3 a report"
 
 
@@ -135,3 +136,14 @@ def test_an_invite_from_a_company_with_a_logo_shows_it_beside_the_title():
     rtl = candidate_invite_email({**data, "language": "ar"}, "https://prepza.com/", "secret")
 
     assert "padding:0 16px 0 0;" in rtl.html
+
+
+def test_an_attachment_is_named_in_the_emails_language_without_unsafe_characters():
+    data = DATA | {"language": "de", "candidate": 'Ann "A/B" Lee (ann@example.com)'}
+
+    [(name, _)] = report_email(data, "https://prepza.com").attachments
+
+    assert name.endswith(".pdf")
+    assert not any(char in name for char in '/\\:*?"<>|')
+    assert "Ann A B Lee" in name
+    assert not name.startswith("Candidate report")
