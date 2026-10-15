@@ -1,7 +1,7 @@
 import uuid
 from datetime import UTC, datetime
 
-from sqlalchemy import DateTime, String, Text, UniqueConstraint
+from sqlalchemy import DateTime, Index, String, Text, UniqueConstraint, text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.models.base import Base
@@ -87,7 +87,11 @@ class Entry(Base):
     chargeback also keeps the money it moved, and a top-up whether it was automatic."""
 
     __tablename__ = "entries"
-    __table_args__ = (UniqueConstraint("key", name="uq_entries_key"),)
+    __table_args__ = (
+        UniqueConstraint("key", name="uq_entries_key"),
+        # A wallet's history, newest first, a page at a time (storage/history.py).
+        Index("ix_entries_history", "owner_type", "owner_id", text("created_at DESC"), "id"),
+    )
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
     key: Mapped[str] = mapped_column(String(160))
