@@ -55,6 +55,18 @@ resource "google_logging_metric" "emails_undelivered" {
   }
 }
 
+# Generations that failed: a run that errored (its task still succeeds, so the task alert below
+# never sees it), and the sweep marking stuck ones as failed.
+resource "google_logging_metric" "generations_failed" {
+  name   = "prepza_generations_failed"
+  filter = "resource.type=\"cloud_run_revision\" AND resource.labels.service_name=(\"generation\" OR \"generation-worker\") AND severity>=WARNING AND (jsonPayload.message=~\"^Generation \\S+ failed$\" OR jsonPayload.message:\"stuck generations as failed\")"
+
+  metric_descriptor {
+    metric_kind = "DELTA"
+    value_type  = "INT64"
+  }
+}
+
 locals {
   # Each: its metric, the threshold over the window, the window, and what to do.
   log_alerts = {
@@ -85,6 +97,15 @@ locals {
       threshold = var.ai_spend_alert_hourly
       window    = "3600s"
       text      = "Generation's OpenAI spend in the last hour is above the alert level. Check the generation runs in the logs (each logs what it spent) for a loop or abuse, and the daily caps."
+    }
+    generations = {
+      name      = "prepza generations failing"
+      condition = "Over 2 generations failed in an hour"
+      filter    = "metric.type=\"logging.googleapis.com/user/${google_logging_metric.generations_failed.name}\" AND resource.type=\"cloud_run_revision\""
+      aligner   = "ALIGN_DELTA"
+      threshold = 2
+      window    = "3600s"
+      text      = "Generations fail: companies see \"Generation failed\" and must press Retry. Check generation-worker's logs and Sentry for the error, and OpenAI. See docs/runbooks.md (A stuck generation, OpenAI down)."
     }
     bounces = {
       name      = "prepza emails bouncing"

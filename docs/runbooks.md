@@ -56,7 +56,7 @@ What to do when a provider fails, a generation hangs or a deploy's migration fai
 **How you notice**
 
 - **prepza OpenAI failing:** over 10 OpenAI errors in 15 minutes ([monitoring_logs.tf](../infra/terraform/monitoring_logs.tf)). It counts errors whose traceback or message names `openai.`: generation's and the help chat's failures by their traceback, the assistant's by its message, which names only the error's type, such as `openai.APIConnectionError` ([turns.py](../services/assistant/app/services/turns.py)).
-- **prepza generation tasks failing** doesn't fire for generations: a generation job never fails its task, it saves the failure on the generation ([jobs.py](../services/generation/app/services/jobs.py)). News translations do fail their task.
+- **prepza generations failing:** over 2 generations failed in an hour, counted from the logs: a run that errored, or the sweep marking stuck ones failed ([monitoring_logs.tf](../infra/terraform/monitoring_logs.tf)). A failed generation doesn't fail its task, which saves the failure on the generation ([jobs.py](../services/generation/app/services/jobs.py)), so **prepza generation tasks failing** fires for other tasks, such as news translations, and a worker that crashes.
 - Users: a generation ends as failed, "Generation failed. Please try again.", with **Retry**; the help chat and the assistant answer "Couldn't get a reply right now. Please try again."; voice input fails with a `502` ([assistant.md](features/assistant.md)). Candidates' interviews don't call OpenAI.
 
 **What the system does by itself**
@@ -119,6 +119,7 @@ What to do when a provider fails, a generation hangs or a deploy's migration fai
 **How you notice**
 
 - **prepza generation queue backed up:** over 50 tasks queued for 15 minutes ([monitoring_backlog.tf](../infra/terraform/monitoring_backlog.tf)).
+- **prepza generations failing:** over 2 generations failed in an hour; the sweep's "stuck generations as failed" counts too ([monitoring_logs.tf](../infra/terraform/monitoring_logs.tf)).
 - **prepza generation tasks failing:** over 20% of task attempts failed for 30 minutes; Cloud Tasks drops a task after its last attempt ([monitoring_logs.tf](../infra/terraform/monitoring_logs.tf)).
 - Users: a generation's page keeps showing its progress and never ends, and a user reports it.
 
