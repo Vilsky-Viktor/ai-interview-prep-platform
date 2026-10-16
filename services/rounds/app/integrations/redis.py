@@ -1,5 +1,6 @@
 from functools import cache
 
+from prepza_common.redis_client import redis_client
 from redis.asyncio import Redis
 
 from app.config.settings import settings
@@ -7,4 +8,4 @@ from app.config.settings import settings
 
 @cache
 def get_redis() -> Redis:
-    return Redis.from_url(settings.redis_url)
+    return redis_client(settings.redis_url)

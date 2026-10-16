@@ -42,6 +42,11 @@ DB_MAX_OVERFLOW = 5
 # and the Cloud SQL connector none); one killed by a database restart fails one request, and
 # SQLAlchemy then replaces the whole pool.
 DB_POOL_RECYCLE_SECONDS = 1800
+# A Redis command whose connection dropped (Redis restarted, or the network blinked) is tried
+# again on a new one, up to this many times, instead of failing its request; a connection
+# idle this long is checked before use.
+REDIS_RETRIES = 3
+REDIS_HEALTH_CHECK_SECONDS = 30
 
 # Lists are served a page at a time; a page holds at most this many items.
 MAX_PAGE_SIZE = 100

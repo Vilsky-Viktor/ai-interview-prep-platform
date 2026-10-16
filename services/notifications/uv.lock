@@ -917,6 +917,7 @@ dependencies = [
     { name = "httpx" },
     { name = "pydantic-settings" },
     { name = "pyjwt" },
+    { name = "redis" },
     { name = "sentry-sdk", extra = ["fastapi"] },
     { name = "sqlalchemy", extra = ["asyncio"] },
 ]
@@ -931,6 +932,7 @@ requires-dist = [
     { name = "langchain-openai", marker = "extra == 'llm'", specifier = ">=1.6.6" },
     { name = "pydantic-settings", specifier = ">=2.15.0" },
     { name = "pyjwt", specifier = ">=2.15.1" },
+    { name = "redis", specifier = ">=8.1.0" },
     { name = "sentry-sdk", extras = ["fastapi"], specifier = ">=2.71.0" },
     { name = "sqlalchemy", extras = ["asyncio"], specifier = ">=2.1.1" },
 ]

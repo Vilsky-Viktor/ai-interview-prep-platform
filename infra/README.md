@@ -14,7 +14,7 @@ Terraform for prepza on Google Cloud, in one region (`europe-west1`, Belgium) be
   - a Cloud Armor rule that blocks `/api/*/internal/`.
 - **Secret Manager** for secrets, and **Artifact Registry** for images: released versions' images (`v*` tags) and each image's 10 newest are kept, and the rest are deleted after 30 days.
 
-Outside Google Cloud: Redis on **Upstash** (rate limits, the LLM limiter, the draft cache, live notifications), **Firebase Authentication** (same project), **Resend**, **Sentry** and **Paddle**.
+Outside Google Cloud: Redis on **Upstash** (rate limits, the LLM limiter, the draft cache, live notifications, and the emergency pause, maintenance mode and the daily generation cap: a flushed or replaced database lifts them, so turn them on again after one), **Firebase Authentication** (same project), **Resend**, **Sentry** and **Paddle**.
 
 ## Bootstrap (once)
 
@@ -43,7 +43,7 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
    gcloud storage buckets create gs://prepza-prod-terraform --location=europe-west1 --uniform-bucket-level-access
    gcloud storage buckets update gs://prepza-prod-terraform --versioning
    ```
-4. **Create Redis on Upstash.** Pick the Google Cloud region `europe-west1`, and copy its `rediss://` URL.
+4. **Create Redis on Upstash.** Pick the Google Cloud region `europe-west1` and a paid plan (pay as you go, or a fixed plan once traffic grows): every request reads the pause and its rate limits, so the free plan's monthly command limit runs out in days, and Redis then refuses every command until the month ends. Copy its `rediss://` URL. Services retry a command whose connection dropped, and the Redis alert (below) fires when commands keep failing.
 5. **Set your variables.**
    ```bash
    cd infra/terraform
