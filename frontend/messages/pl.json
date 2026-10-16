@@ -1377,6 +1377,7 @@
     "results": {
       "delivered": "Dostarczono",
       "skipped": "Pominięto",
+      "unreadable": "Nie wysłano: problem po stronie prepza.",
       "answered": "Odpowiedź {status}",
       "error": "Błąd: {error}"
     },

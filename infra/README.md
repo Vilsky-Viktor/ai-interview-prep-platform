@@ -102,6 +102,8 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
    Terraform makes the generated ones itself: each service's secret for internal calls, the database passwords, `analytics-salt`, `preview-secret` (signs the frontend's link-preview titles) and `email-link-secret` (signs the unsubscribe links in emails; replacing it breaks the links in emails already sent).
 
    Services read `latest` when they start, so redeploy (step 9) after setting secrets.
+
+   **Replacing an encryption key** (`ats-encryption-key`, `api-encryption-key`, `slack-encryption-key`, after a leak, say): set the secret to the new key and the old one, comma-separated, new first, and redeploy. New secrets are sealed with the new key, and both read what's stored. Keep the old key in the list: what it sealed stays sealed with it until it's saved again (a reconnected ATS or Slack channel, a new web hook). Removing it makes those unreadable, as a new key alone would.
 9. **Run the migrations, then restart the services** so they pick up the secrets.
    ```bash
    for db in library generation rounds companies billing notifications ats api assistant; do

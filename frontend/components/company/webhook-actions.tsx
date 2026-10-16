@@ -132,6 +132,11 @@ function WebhookLog({ path, url }: { path: string; url: string }) {
       return t(`results.${attempt.result}`)
     }
 
+    // Our key can't read its secret: nothing the company can fix, and retried once it's back.
+    if (attempt.result === "secret unreadable") {
+      return t("results.unreadable")
+    }
+
     // The status the endpoint answered, or what went wrong on the way.
     return /^\d{3}$/.test(attempt.result)
       ? t("results.answered", { status: attempt.result })

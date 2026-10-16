@@ -1368,6 +1368,7 @@
     "results": {
       "delivered": "전달됨",
       "skipped": "건너뜀",
+      "unreadable": "전송 안 됨: prepza 측 문제입니다.",
       "answered": "응답 {status}",
       "error": "실패: {error}"
     },

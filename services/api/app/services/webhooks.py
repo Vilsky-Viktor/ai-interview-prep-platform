@@ -227,9 +227,10 @@ async def resend(row: WebhookRetry, hook: Webhook, editor: bool) -> None:
 
 async def deliver(hook: Webhook, event_id: str, body: bytes) -> bool:
     """Sends the event to one web hook; whether it took it (one that does no longer shows as
-    failing). An address that no longer leads to
-    the public internet, or a secret that can't be read, is skipped as taken: retrying can't
-    help. An address that doesn't resolve now is a failure, retried like a refused send."""
+    failing). An address that no longer leads to the public internet is skipped as taken:
+    retrying can't help. An address that doesn't resolve now, or a secret that can't be read
+    (API_ENCRYPTION_KEY lost the key that sealed it), is a failure, retried like a refused send,
+    so the web hook shows as failing rather than missing events unseen."""
     secret = decrypt(settings.api_encryption_key, hook.secret)
 
     try:
@@ -242,8 +243,14 @@ async def deliver(hook: Webhook, event_id: str, body: bytes) -> bool:
 
         return False
 
-    if secret is None or address is None:
-        logger.warning("Skipped web hook %s: unreadable secret or non-public address", hook.id)
+    if secret is None:
+        logger.error("Web hook %s's secret can't be read with API_ENCRYPTION_KEY", hook.id)
+        await log(hook, event_id, body, False, "secret unreadable")
+
+        return False
+
+    if address is None:
+        logger.warning("Skipped web hook %s: non-public address", hook.id)
         await log(hook, event_id, body, True, "skipped")
 
         return True

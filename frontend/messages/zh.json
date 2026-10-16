@@ -1368,6 +1368,7 @@
     "results": {
       "delivered": "已送达",
       "skipped": "已跳过",
+      "unreadable": "未发送：prepza 方面的问题。",
       "answered": "返回 {status}",
       "error": "失败：{error}"
     },

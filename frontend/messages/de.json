@@ -1377,6 +1377,7 @@
     "results": {
       "delivered": "Zugestellt",
       "skipped": "Übersprungen",
+      "unreadable": "Nicht gesendet: ein Problem bei prepza.",
       "answered": "Antwort {status}",
       "error": "Fehlgeschlagen: {error}"
     },

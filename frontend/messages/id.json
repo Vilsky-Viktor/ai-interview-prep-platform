@@ -1377,6 +1377,7 @@
     "results": {
       "delivered": "Terkirim",
       "skipped": "Dilewati",
+      "unreadable": "Tidak terkirim: ada masalah di pihak prepza.",
       "answered": "Dijawab {status}",
       "error": "Gagal: {error}"
     },

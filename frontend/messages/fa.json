@@ -1373,6 +1373,7 @@
     "results": {
       "delivered": "تحویل شد",
       "skipped": "نادیده گرفته شد",
+      "unreadable": "ارسال نشد: مشکلی از سمت prepza.",
       "answered": "پاسخ {status}",
       "error": "ناموفق: {error}"
     },

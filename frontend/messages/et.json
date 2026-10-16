@@ -1381,6 +1381,7 @@
     "results": {
       "delivered": "Kohale jõudnud",
       "skipped": "Vahele jäetud",
+      "unreadable": "Saatmata: probleem prepza poolel.",
       "answered": "Vastas {status}",
       "error": "Ebaõnnestus: {error}"
     },

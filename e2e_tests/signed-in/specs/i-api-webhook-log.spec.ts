@@ -1,5 +1,6 @@
 import { expect, test } from "../fixtures"
 import { api, createCompany } from "../helpers/api"
+import { sealWebhookSecretsElsewhere } from "../helpers/db"
 import { openDialog, visit } from "../helpers/navigation"
 import { shot } from "../helpers/screenshots"
 import { ownerEmail } from "../helpers/users"
@@ -25,4 +26,15 @@ test("an owner tests a web hook and reads its delivery log", async ({ signInAs }
   const log = owner.getByRole("dialog")
   await expect(log.getByText("test", { exact: true })).toBeVisible()
   await shot(owner, "log")
+  await owner.keyboard.press("Escape")
+
+  // Our key can't read the web hook's secret: the log says it's on prepza's side, not theirs.
+  await sealWebhookSecretsElsewhere(company.id)
+  await owner.getByRole("button", { name: "Send test event" }).click()
+  await expect(owner.getByText("didn't take the test event").last()).toBeVisible({ timeout: 30_000 })
+  await openDialog(owner, owner.getByRole("button", { name: "Delivery log" }))
+  await expect(
+    owner.getByRole("dialog").getByText("Not sent: a problem on prepza's side.")
+  ).toBeVisible()
+  await shot(owner, "log-unreadable")
 })

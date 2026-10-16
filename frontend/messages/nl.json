@@ -1373,6 +1373,7 @@
     "results": {
       "delivered": "Afgeleverd",
       "skipped": "Overgeslagen",
+      "unreadable": "Niet verzonden: een probleem bij prepza.",
       "answered": "Antwoordde {status}",
       "error": "Mislukt: {error}"
     },

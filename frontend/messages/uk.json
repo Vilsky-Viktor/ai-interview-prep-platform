@@ -1377,6 +1377,7 @@
     "results": {
       "delivered": "Доставлено",
       "skipped": "Пропущено",
+      "unreadable": "Не надіслано: проблема на боці prepza.",
       "answered": "Відповідь {status}",
       "error": "Помилка: {error}"
     },

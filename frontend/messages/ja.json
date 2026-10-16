@@ -1381,6 +1381,7 @@
     "results": {
       "delivered": "配信済み",
       "skipped": "スキップ",
+      "unreadable": "未送信：prepza 側の問題です。",
       "answered": "応答 {status}",
       "error": "失敗：{error}"
     },

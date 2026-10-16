@@ -1381,6 +1381,7 @@
     "results": {
       "delivered": "Naihatid",
       "skipped": "Nilaktawan",
+      "unreadable": "Hindi naipadala: may problema sa panig ng prepza.",
       "answered": "Sumagot ng {status}",
       "error": "Nabigo: {error}"
     },

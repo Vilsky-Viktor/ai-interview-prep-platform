@@ -1,15 +1,22 @@
-from cryptography.fernet import Fernet, InvalidToken
+from cryptography.fernet import Fernet, InvalidToken, MultiFernet
+
+
+def keys(setting: str) -> MultiFernet:
+    """A key setting (ATS_ENCRYPTION_KEY, SLACK_ENCRYPTION_KEY, ...): one Fernet key, or several
+    separated by commas while one is being replaced, the new one first. Everything is sealed
+    with the first; what any of them sealed can be read."""
+    return MultiFernet([Fernet(key.strip()) for key in setting.split(",")])
 
 
 def encrypt(key: str, text: str) -> str:
-    """`text` encrypted with `key` (a Fernet key, like ATS_ENCRYPTION_KEY or SLACK_ENCRYPTION_KEY)."""
-    return Fernet(key).encrypt(text.encode()).decode()
+    """`text` encrypted with `key`'s first key (see `keys`)."""
+    return keys(key).encrypt(text.encode()).decode()
 
 
 def decrypt(key: str, token: str) -> str | None:
-    """What `encrypt` sealed, or None when it was sealed with another key or changed, or the key
-    is missing or isn't a Fernet key."""
+    """What `encrypt` sealed with any of `key`'s keys, or None when another key sealed it, it
+    was changed, or the setting is missing or isn't Fernet keys."""
     try:
-        return Fernet(key).decrypt(token.encode()).decode()
+        return keys(key).decrypt(token.encode()).decode()
     except (InvalidToken, ValueError):
         return None

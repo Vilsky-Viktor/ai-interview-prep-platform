@@ -53,7 +53,7 @@ Everything is under `https://<domain>/api/v1`, with `Authorization: Bearer pz_..
 - A candidate also carries `flagged` (the integrity verdict the ATS gets), `extra_time` (percent per question), `started_at` and `finished_at` (companies keeps them since migration 0044, from the first start and the finish; earlier candidates have none).
 - Every event body has `occurred_at`: when the change happened, the outbox row's time, which the outbox sends as a Pub/Sub attribute (`OCCURRED_AT_ATTRIBUTE`, the same on every re-send; events from before it fall back to Pub/Sub's publish time). A retried event can arrive after a later one, so clients order by it.
 - Testing and the delivery log: on each web hook row of the API page, owners and admins **send test event** (`POST /manage/webhooks/{id}/test`, a signed `test` event sent at once, the answer saying whether it was taken), and every member opens its **delivery log** (`GET /manage/webhooks/{id}/log`): its latest 20 sends (`webhook_attempts`, `WEBHOOK_LOG_KEPT`), each with the event's type, when, whether it was taken and what happened ("delivered", "skipped", the status answered, or the error's name), no candidate's data.
-- A web hook whose secret can't be read, or whose address no longer leads to the public internet, is skipped. An address whose lookup fails counts as a failed send and is retried. A candidate or interview deleted since is told to nobody; if the companies service can't answer for now, the event fails and Pub/Sub retries it, and nothing has been sent yet.
+- A web hook whose address no longer leads to the public internet is skipped. One whose secret can't be read (its key gone from `API_ENCRYPTION_KEY`) counts as a failed send, logged "secret unreadable" (the delivery log says "Not sent: a problem on prepza's side.") and retried, so it shows as failing and its events go out once the key is back. An address whose lookup fails counts as a failed send and is retried. A candidate or interview deleted since is told to nobody; if the companies service can't answer for now, the event fails and Pub/Sub retries it, and nothing has been sent yet.
 
 ## The API page
 
@@ -72,4 +72,4 @@ Everything is under `https://<domain>/api/v1`, with `Authorization: Bearer pz_..
 
 | Setting | What it does |
 |---|---|
-| `API_ENCRYPTION_KEY` | The Fernet key that encrypts web hooks' secrets. Empty: keys work, but web hooks can't be added ("Web hooks aren't set up yet") and none is sent. Keep it: a new key makes every web hook unreadable, so they have to be added again |
+| `API_ENCRYPTION_KEY` | The Fernet key that encrypts web hooks' secrets. Empty: keys work, but web hooks can't be added ("Web hooks aren't set up yet") and none is sent. Keep it: a new key makes every web hook unreadable, so they have to be added again. To replace it, list the new key and the old one, comma-separated, new first (see [infra/README.md](../../infra/README.md), step 8) |

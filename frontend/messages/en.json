@@ -1377,6 +1377,7 @@
     "results": {
       "delivered": "Delivered",
       "skipped": "Skipped",
+      "unreadable": "Not sent: a problem on prepza's side.",
       "answered": "Answered {status}",
       "error": "Failed: {error}"
     },

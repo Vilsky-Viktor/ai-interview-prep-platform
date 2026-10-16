@@ -1373,6 +1373,7 @@
     "results": {
       "delivered": "تم التسليم",
       "skipped": "تم التخطي",
+      "unreadable": "لم يُرسَل: مشكلة من جهة prepza.",
       "answered": "ردّ بـ {status}",
       "error": "فشل: {error}"
     },

@@ -73,7 +73,7 @@ A company can send its notifications to one Slack channel too, from its integrat
    ```bash
    python3 -c "import base64,os; print(base64.urlsafe_b64encode(os.urandom(32)).decode())"
    ```
-   Keep it: a new key makes every company reconnect.
+   Keep it: a new key makes every company reconnect. To replace it, list the new key and the old one, comma-separated, new first (see [infra/README.md](../../infra/README.md), step 8).
 5. Restart notifications.
 
 Until all three are set, "Add to Slack" answers "Slack isn't set up yet" and nothing is posted.

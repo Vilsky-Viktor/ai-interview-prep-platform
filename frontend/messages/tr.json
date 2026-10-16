@@ -1376,6 +1376,7 @@
     "results": {
       "delivered": "Teslim edildi",
       "skipped": "Atlandı",
+      "unreadable": "Gönderilmedi: prepza tarafında bir sorun var.",
       "answered": "Yanıt: {status}",
       "error": "Başarısız: {error}"
     },

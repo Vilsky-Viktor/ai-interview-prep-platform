@@ -1373,6 +1373,7 @@
     "results": {
       "delivered": "Đã gửi tới",
       "skipped": "Đã bỏ qua",
+      "unreadable": "Chưa gửi: lỗi từ phía prepza.",
       "answered": "Phản hồi {status}",
       "error": "Thất bại: {error}"
     },

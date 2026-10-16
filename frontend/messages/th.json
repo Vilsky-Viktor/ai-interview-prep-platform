@@ -1372,6 +1372,7 @@
     "results": {
       "delivered": "ส่งถึงแล้ว",
       "skipped": "ข้าม",
+      "unreadable": "ยังไม่ได้ส่ง: เกิดปัญหาที่ฝั่ง prepza",
       "answered": "ตอบกลับ {status}",
       "error": "ล้มเหลว: {error}"
     },

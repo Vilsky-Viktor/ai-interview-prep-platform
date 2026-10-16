@@ -3,6 +3,7 @@ from datetime import UTC, datetime, timedelta
 
 import httpx
 import pytest
+from cryptography.fernet import Fernet
 from fastapi import HTTPException
 
 from app.constants.api import RETRY_FIRST_DELAY
@@ -120,19 +121,25 @@ def test_a_candidate_or_interview_gone_since_tells_nobody(endpoints, companies_a
     assert endpoints["posted"] == []
 
 
-def test_an_address_no_longer_public_or_an_unreadable_secret_is_skipped(endpoints, monkeypatch):
+def test_an_address_no_longer_public_is_skipped(endpoints):
     endpoints["hook"]("https://a.example/x")
     endpoints["public"] = False
 
     finish()
 
     assert endpoints["posted"] == []
+    assert endpoints["retries"] == {}
 
-    monkeypatch.setattr(delivery.settings, "api_encryption_key", "")
-    endpoints["public"] = True
-    finish("e2")
+
+def test_an_unreadable_secret_is_retried_so_the_web_hook_shows_as_failing(endpoints, monkeypatch):
+    """A key lost from API_ENCRYPTION_KEY: the events wait, and once it's back they go out."""
+    hook = endpoints["hook"]("https://a.example/x")
+    monkeypatch.setattr(delivery.settings, "api_encryption_key", Fernet.generate_key().decode())
+
+    finish()
 
     assert endpoints["posted"] == []
+    assert list(endpoints["retries"]) == [(hook.id, "e1")]
 
 
 def test_an_address_that_doesnt_resolve_now_is_retried(endpoints):

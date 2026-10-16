@@ -1372,6 +1372,7 @@
     "results": {
       "delivered": "पहुँच गया",
       "skipped": "छोड़ा गया",
+      "unreadable": "नहीं भेजा गया: prepza की ओर से समस्या।",
       "answered": "जवाब {status}",
       "error": "विफल: {error}"
     },

@@ -104,3 +104,11 @@ export async function expireInvite(email: string) {
     client.query("UPDATE candidate_invites SET status = 'expired' WHERE email = $1", [email]),
   );
 }
+
+/** Seals a test company's web hooks' secrets with a key the api service doesn't have, as if
+ * that key were lost from API_ENCRYPTION_KEY. */
+export async function sealWebhookSecretsElsewhere(companyId: string) {
+  await withDatabase("api", (client) =>
+    client.query("UPDATE webhooks SET secret = 'sealed-elsewhere' WHERE company_id = $1", [companyId]),
+  );
+}

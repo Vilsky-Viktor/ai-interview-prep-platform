@@ -1373,6 +1373,7 @@
     "results": {
       "delivered": "Entregue",
       "skipped": "Ignorado",
+      "unreadable": "Não enviado: um problema do lado da prepza.",
       "answered": "Respondeu {status}",
       "error": "Falhou: {error}"
     },
