@@ -96,6 +96,12 @@ variable "alert_email" {
   type        = string
 }
 
+variable "alert_sms" {
+  description = "A phone number in international format (+372...) that also gets every alert by text message. Empty: email only."
+  type        = string
+  default     = ""
+}
+
 variable "billing_account" {
   description = "The billing account the project uses (XXXXXX-XXXXXX-XXXXXX), for the monthly budget."
   type        = string

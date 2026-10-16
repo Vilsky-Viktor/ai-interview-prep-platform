@@ -69,6 +69,7 @@ Then open the app at http://localhost:8090. Sign-in uses the Firebase Auth emula
 | [Development](docs/development.md) | Running locally, settings, the local stack, everyday commands, conventions |
 | [Testing](docs/testing.md) | Unit, integration, browser, end-to-end and load tests; CI |
 | [Deployment](docs/deployment.md) | Production images, migrations, Sentry, CI/CD, releases and rollbacks |
+| [Runbooks](docs/runbooks.md) | What to do when Paddle, OpenAI, Resend or Redis fails, a generation is stuck or a deploy's migration fails |
 | [infra/README.md](infra/README.md) | Google Cloud with Terraform: bootstrap, deploys, restore drill |
 | [packages/common](packages/common/README.md) | The code the API services share |
 | [e2e_tests/load/README.md](e2e_tests/load/README.md) | Load test settings, thresholds and results |

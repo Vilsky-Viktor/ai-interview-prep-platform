@@ -17,6 +17,24 @@ resource "google_monitoring_notification_channel" "email" {
   depends_on = [google_project_service.apis]
 }
 
+# A second way to be reached, as an email can sit unread: every alert also goes by text message to
+# alert_sms when it's set.
+resource "google_monitoring_notification_channel" "sms" {
+  count        = var.alert_sms == "" ? 0 : 1
+  display_name = "prepza alerts (SMS)"
+  type         = "sms"
+  labels       = { number = var.alert_sms }
+
+  depends_on = [google_project_service.apis]
+}
+
+locals {
+  alert_channels = concat(
+    [google_monitoring_notification_channel.email.id],
+    google_monitoring_notification_channel.sms[*].id,
+  )
+}
+
 resource "google_monitoring_uptime_check_config" "check" {
   for_each     = local.uptime_paths
   display_name = "prepza ${each.key}"
@@ -70,7 +88,7 @@ resource "google_monitoring_alert_policy" "down" {
     mime_type = "text/markdown"
   }
 
-  notification_channels = [google_monitoring_notification_channel.email.id]
+  notification_channels = local.alert_channels
 }
 
 # Cost: a monthly budget on the billing account, scoped to this project. Emails at 50%, 90% and
@@ -107,7 +125,7 @@ resource "google_billing_budget" "monthly" {
   }
 
   all_updates_rule {
-    monitoring_notification_channels = [google_monitoring_notification_channel.email.id]
+    monitoring_notification_channels = local.alert_channels
     disable_default_iam_recipients   = false
   }
 
@@ -141,7 +159,7 @@ resource "google_monitoring_alert_policy" "dead_letters" {
     mime_type = "text/markdown"
   }
 
-  notification_channels = [google_monitoring_notification_channel.email.id]
+  notification_channels = local.alert_channels
 }
 
 # Scheduler: a periodic job (jobs.tf) whose run failed, from Cloud Scheduler's own error logs.
@@ -174,7 +192,7 @@ resource "google_monitoring_alert_policy" "scheduler_failed" {
     mime_type = "text/markdown"
   }
 
-  notification_channels = [google_monitoring_notification_channel.email.id]
+  notification_channels = local.alert_channels
 }
 
 # Web hooks refused: Paddle's or Resend's signature check failed (WEBHOOK_SIGNATURE_REFUSED in
@@ -209,7 +227,7 @@ resource "google_monitoring_alert_policy" "webhook_signature_refused" {
     mime_type = "text/markdown"
   }
 
-  notification_channels = [google_monitoring_notification_channel.email.id]
+  notification_channels = local.alert_channels
 }
 
 # Server errors: a Cloud Run service answering more than 5% of its requests with a 5xx for ten
@@ -249,7 +267,7 @@ resource "google_monitoring_alert_policy" "server_errors" {
     mime_type = "text/markdown"
   }
 
-  notification_channels = [google_monitoring_notification_channel.email.id]
+  notification_channels = local.alert_channels
 }
 
 # Candidates' answers: the interview service (rounds) slow to answer for ten minutes, which a
@@ -280,5 +298,5 @@ resource "google_monitoring_alert_policy" "rounds_latency" {
     mime_type = "text/markdown"
   }
 
-  notification_channels = [google_monitoring_notification_channel.email.id]
+  notification_channels = local.alert_channels
 }

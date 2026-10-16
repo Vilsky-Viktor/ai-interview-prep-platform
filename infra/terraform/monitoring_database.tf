@@ -29,7 +29,7 @@ resource "google_monitoring_alert_policy" "database_connections" {
     mime_type = "text/markdown"
   }
 
-  notification_channels = [google_monitoring_notification_channel.email.id]
+  notification_channels = local.alert_channels
 }
 
 # Database CPU: busy above 80% for fifteen minutes.
@@ -58,7 +58,7 @@ resource "google_monitoring_alert_policy" "database_cpu" {
     mime_type = "text/markdown"
   }
 
-  notification_channels = [google_monitoring_notification_channel.email.id]
+  notification_channels = local.alert_channels
 }
 
 # Database memory: above 90% for fifteen minutes, before Postgres starts failing queries.
@@ -87,7 +87,7 @@ resource "google_monitoring_alert_policy" "database_memory" {
     mime_type = "text/markdown"
   }
 
-  notification_channels = [google_monitoring_notification_channel.email.id]
+  notification_channels = local.alert_channels
 }
 
 # Database disk: above 85% full. Storage grows by itself, but a fast fill means something writes too much.
@@ -116,7 +116,7 @@ resource "google_monitoring_alert_policy" "database_disk" {
     mime_type = "text/markdown"
   }
 
-  notification_channels = [google_monitoring_notification_channel.email.id]
+  notification_channels = local.alert_channels
 }
 
 # Backups: a Cloud SQL backup run that failed, from its own error logs. The drill
@@ -146,5 +146,5 @@ resource "google_monitoring_alert_policy" "database_backup_failed" {
     mime_type = "text/markdown"
   }
 
-  notification_channels = [google_monitoring_notification_channel.email.id]
+  notification_channels = local.alert_channels
 }

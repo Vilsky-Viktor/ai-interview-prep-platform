@@ -29,7 +29,7 @@ resource "google_monitoring_alert_policy" "events_waiting" {
     mime_type = "text/markdown"
   }
 
-  notification_channels = [google_monitoring_notification_channel.email.id]
+  notification_channels = local.alert_channels
 }
 
 # Generation jobs: more than 50 tasks in the Cloud Tasks queue (jobs.tf) for 15 minutes, so the
@@ -59,5 +59,5 @@ resource "google_monitoring_alert_policy" "tasks_waiting" {
     mime_type = "text/markdown"
   }
 
-  notification_channels = [google_monitoring_notification_channel.email.id]
+  notification_channels = local.alert_channels
 }

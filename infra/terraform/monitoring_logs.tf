@@ -132,7 +132,7 @@ resource "google_monitoring_alert_policy" "logs" {
     mime_type = "text/markdown"
   }
 
-  notification_channels = [google_monitoring_notification_channel.email.id]
+  notification_channels = local.alert_channels
 }
 
 # Generation tasks: a task's attempt that fails is retried, and dropped after its last; many
@@ -174,5 +174,5 @@ resource "google_monitoring_alert_policy" "tasks_failing" {
     mime_type = "text/markdown"
   }
 
-  notification_channels = [google_monitoring_notification_channel.email.id]
+  notification_channels = local.alert_channels
 }
