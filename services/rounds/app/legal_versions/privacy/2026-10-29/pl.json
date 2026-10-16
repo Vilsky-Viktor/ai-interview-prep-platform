@@ -27,7 +27,8 @@
         "E-maile do członków firm: rejestr wysłanych Ci podsumowań aktywności i przypomnień oraz tego, czego dotyczyło każde przypomnienie, aby żadne nie zostało wysłane dwukrotnie.",
         "Kandydaci, którzy rezygnują z e-maili firmy: skrót jednokierunkowy ich adresu e-mail, wraz z firmą oraz, jeśli zrezygnowali tylko z przypomnień dotyczących jednej rozmowy, tym zaproszeniem. Nie da się go z powrotem zamienić na adres e-mail.",
         "Polecenia: przez czyj link polecający Ty lub Twoja firma do nas trafiliście i czy przyznano już za to nagrodę.",
-        "Statystyki użytkowania: kroki takie jak rejestracja, utworzenie firmy, zaproszenie kandydata czy doładowanie, z wartościami takimi jak wynik lub kwota. Identyfikator Twojego konta zastępowany jest kodem, którego nie da się powiązać z Tobą, i nie są uwzględniane żadne imiona, nazwiska, adresy e-mail ani teksty."
+        "Zakupy: dla każdego doładowania firma, dla której było, kto je kupił, co zostało kupione, kwota łączna i waluta, identyfikator transakcji Paddle oraz kiedy. Dane karty i dane rozliczeniowe przechowuje Paddle, nie my.",
+        "Statystyki użytkowania: kroki takie jak rejestracja, utworzenie firmy, zaproszenie kandydata czy doładowanie, z wartościami takimi jak wynik lub kwota. Identyfikator Twojego konta zastępowany jest kodem utworzonym za pomocą tajnego klucza, który przechowujemy, więc statystyki nie wskazują Cię z imienia i nazwiska, ale są to dane spseudonimizowane, a nie anonimowe: przy użyciu klucza kod odpowiada identyfikatorowi Twojego konta. Identyfikator firmy jest zachowywany bez zmian. Nie są uwzględniane żadne imiona, nazwiska, adresy e-mail ani teksty."
       ]
     },
     {
@@ -41,6 +42,7 @@
         "Zapamiętanie, że kandydat zrezygnował z e-maili firmy, aby prepza nie wysyłała mu już e-maili w imieniu tej firmy (uszanowanie jego sprzeciwu).",
         "Zapewnienie bezpieczeństwa i działania prepza: zapobieganie nadużyciom, limity zapytań, raporty o błędach i statystyki poprawiające jakość pytań (nasz prawnie uzasadniony interes).",
         "Statystyki użytkowania pokazują, które części prepza pomagają ludziom oraz które ceny i limity się sprawdzają, abyśmy mogli je ulepszać (nasz prawnie uzasadniony interes).",
+        "Dokumentacja zakupów, przechowywana na potrzeby księgowości zgodnie z wymogami estońskich przepisów o rachunkowości (obowiązek prawny).",
         "Oznaczanie firmy jako zweryfikowanej poprzez porównanie jej strony internetowej z domenami e-mail jej właścicieli i administratorów (nasz prawnie uzasadniony interes).",
         "Wyniki rozmów, czasy i ostrzeżenia o podejrzanych zachowaniach pomagają rekrutującej firmie sprawiedliwie ocenić Twoje odpowiedzi (prawnie uzasadniony interes firmy). Decyzję o zatrudnieniu podejmują ludzie w firmie; prepza sama nie podejmuje żadnej decyzji w Twojej sprawie. Możesz poprosić firmę o weryfikację Twojego wyniku przez człowieka, a przed rozpoczęciem o dostosowanie, takie jak dodatkowy czas."
       ]
@@ -48,7 +50,7 @@
     {
       "heading": "Komu je udostępniamy",
       "paragraphs": [
-        "Udostępniamy dane dostawcom usług, którzy prowadzą prepza w naszym imieniu, na podstawie umów, które je chronią:"
+        "Udostępniamy dane dostawcom usług, którzy prowadzą prepza w naszym imieniu, na podstawie umów, które je chronią, oraz Paddle, który sprzedaje doładowania:"
       ],
       "items": [
         "Google (Firebase Authentication; Google LLC, Stany Zjednoczone, w ramach Ram ochrony danych UE-USA): logowanie. LinkedIn i GitHub jedynie potwierdzają Twoją tożsamość, gdy logujesz się przez nie; nie otrzymujemy od nich niczego więcej.",
@@ -59,7 +61,7 @@
         "Cloudflare (Turnstile; Cloudflare, Inc., Stany Zjednoczone, w ramach Ram ochrony danych UE-USA): weryfikacja „Nie jestem robotem”.",
         "Google Cloud, nasz dostawca hostingu, który przechowuje dane (w UE, Belgia).",
         "Upstash: krótkotrwałe liczniki limitów użycia i aktualizacji na żywo (w UE, Belgia).",
-        "Paddle sprzedaje doładowania jako odsprzedawca (merchant of record): obsługuje płatności i podatki jako niezależny administrator danych, zgodnie z własną polityką prywatności."
+        "Paddle (Paddle.com Market Ltd, Wielka Brytania) nie jest jednym z nich: sam sprzedaje doładowania jako odsprzedawca (merchant of record) i jest administratorem danych dotyczących płatności, podatków i rozliczeń, które zbiera, zgodnie z własną polityką prywatności. Przekazujemy mu adres e-mail członka, który dokonuje zakupu, a on informuje nas, co zostało kupione i opłacone."
       ]
     },
     {

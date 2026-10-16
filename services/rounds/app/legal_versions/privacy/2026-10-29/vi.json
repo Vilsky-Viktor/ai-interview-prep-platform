@@ -27,7 +27,8 @@
         "Email gửi thành viên công ty: bản ghi các bản tóm tắt hoạt động và lời nhắc chúng tôi đã gửi cho bạn, và mỗi lời nhắc nói về điều gì, để không có email nào bị gửi hai lần.",
         "Ứng viên ngừng nhận email của một công ty: hàm băm một chiều của địa chỉ email của họ, cùng với công ty đó và, nếu họ chỉ ngừng nhận lời nhắc của một buổi phỏng vấn, lời mời đó. Hàm băm này không thể chuyển ngược lại thành email.",
         "Giới thiệu: bạn hoặc công ty của bạn đến qua liên kết giới thiệu của ai, và lượt giới thiệu đó đã được thưởng hay chưa.",
-        "Thống kê sử dụng: các bước như đăng ký, tạo công ty, mời ứng viên hoặc nạp credit, kèm các con số như điểm hoặc số tiền. ID tài khoản của bạn được thay bằng một mã không thể truy ngược về bạn, và không bao gồm tên, email hay văn bản nào."
+        "Giao dịch mua: với mỗi lần nạp credit, công ty được nạp, người mua, những gì đã mua, tổng tiền và loại tiền tệ, mã giao dịch của Paddle và thời điểm mua. Paddle, không phải chúng tôi, lưu giữ thông tin thẻ và thông tin thanh toán.",
+        "Thống kê sử dụng: các bước như đăng ký, tạo công ty, mời ứng viên hoặc nạp credit, kèm các con số như điểm hoặc số tiền. ID tài khoản của bạn được thay bằng một mã tạo từ một khóa bí mật do chúng tôi nắm giữ, nên số liệu thống kê không nêu tên bạn, nhưng chúng là dữ liệu được bí danh hóa, không phải ẩn danh: với khóa đó, mã này khớp với ID tài khoản của bạn. ID của công ty được giữ nguyên. Không bao gồm tên, email hay văn bản nào."
       ]
     },
     {
@@ -41,6 +42,7 @@
         "Ghi nhớ rằng một ứng viên đã ngừng nhận email của một công ty, để prepza không gửi email cho họ thay mặt công ty đó nữa (tôn trọng sự phản đối của họ).",
         "Để giữ prepza an toàn và hoạt động: ngăn chặn lạm dụng, giới hạn tần suất truy cập, báo cáo lỗi và thống kê giúp cải thiện chất lượng câu hỏi (lợi ích hợp pháp của chúng tôi).",
         "Thống kê sử dụng cho thấy những phần nào của prepza giúp ích cho mọi người và mức giá cũng như giới hạn nào phù hợp, để chúng tôi có thể cải thiện chúng (lợi ích hợp pháp của chúng tôi).",
+        "Hồ sơ mua hàng, được lưu giữ cho công tác kế toán theo yêu cầu của luật kế toán Estonia (nghĩa vụ pháp lý).",
         "Hiển thị một công ty là đã xác minh, bằng cách đối chiếu trang web của công ty với tên miền email của chủ sở hữu và quản trị viên công ty (lợi ích hợp pháp của chúng tôi).",
         "Kết quả phỏng vấn, thời gian trả lời và các cảnh báo hành vi bất thường giúp công ty tuyển dụng đánh giá câu trả lời của bạn một cách công bằng (lợi ích hợp pháp của công ty). Những người tại công ty đưa ra quyết định tuyển dụng; prepza không tự mình đưa ra quyết định nào về bạn. Bạn có thể yêu cầu công ty để một người xem xét lại kết quả của bạn, và yêu cầu sự điều chỉnh hợp lý như thêm thời gian trước khi bạn bắt đầu."
       ]
@@ -48,7 +50,7 @@
     {
       "heading": "Chúng tôi chia sẻ dữ liệu với ai",
       "paragraphs": [
-        "Chúng tôi chia sẻ dữ liệu với các nhà cung cấp dịch vụ vận hành prepza cho chúng tôi, theo các thỏa thuận bảo vệ dữ liệu đó:"
+        "Chúng tôi chia sẻ dữ liệu với các nhà cung cấp dịch vụ vận hành prepza cho chúng tôi, theo các thỏa thuận bảo vệ dữ liệu đó, và với Paddle, bên bán các gói nạp credit:"
       ],
       "items": [
         "Google (Firebase Authentication; Google LLC, Hoa Kỳ, theo EU-US Data Privacy Framework): đăng nhập. LinkedIn và GitHub chỉ xác nhận bạn là ai khi bạn đăng nhập bằng họ; chúng tôi không nhận bất cứ thứ gì khác từ họ.",
@@ -59,7 +61,7 @@
         "Cloudflare (Turnstile; Cloudflare, Inc., Hoa Kỳ, theo EU-US Data Privacy Framework): bước kiểm tra \"Tôi không phải là người máy\".",
         "Google Cloud, nhà cung cấp dịch vụ lưu trữ máy chủ của chúng tôi, nơi lưu trữ dữ liệu (tại EU, Bỉ).",
         "Upstash: bộ đếm ngắn hạn cho giới hạn sử dụng và cập nhật trực tiếp (tại EU, Bỉ).",
-        "Paddle bán các gói nạp credit với tư cách merchant of record: Paddle xử lý thanh toán và thuế với tư cách bên kiểm soát độc lập, theo chính sách quyền riêng tư của chính Paddle."
+        "Paddle (Paddle.com Market Ltd, Vương quốc Anh) không phải là một trong số đó: Paddle tự bán các gói nạp credit với tư cách merchant of record, và là bên kiểm soát đối với thông tin thanh toán, thuế và hóa đơn mà Paddle thu thập, theo chính sách quyền riêng tư của chính Paddle. Chúng tôi chuyển cho Paddle email của thành viên mua hàng, và Paddle cho chúng tôi biết những gì đã được mua và thanh toán."
       ]
     },
     {

@@ -5,7 +5,7 @@
       "heading": "Mida töödeldakse",
       "items": [
         "Eesmärk: ettevõtte intervjuude läbiviimine: kandidaatide kutsumine, nende vastuste ajavõtt ja hindamine, tulemuste ja kahtlase käitumise märgete näitamine ettevõttele, ettevõtte soovitud e-kirjade saatmine, tulemuste saatmine ettevõtte ühendatud tööriistadesse (tema värbamissüsteem, Slack ja tema enda süsteemid prepza API ja veebikonksude kaudu) ning tulemuste säilitamine ettevõtte jaoks.",
-        "Isikud: kandidaadid, keda ettevõte kutsub, kes kandideerivad ettevõtte lingi kaudu või kelle ettevõtte värbamissüsteem saadab, ning ettevõtte liikmed.",
+        "Isikud: kandidaadid, keda ettevõte kutsub, kes kandideerivad ettevõtte lingi kaudu või kelle ettevõtte värbamissüsteem saadab. Ettevõtte liikmed ei ole siin hõlmatud: prepza on nende kontode vastutav töötleja oma privaatsuspoliitika alusel.",
         "Andmed: kandidaatide e-posti aadressid, nende nimed (ettevõtte või tema värbamissüsteemi antud või nende sisselogimisest) ja konto ID-d nende sisselogimisest, nende vastused, kui kaua iga vastus aega võttis, lehelt lahkumised, kopeerimiskatsed ja intervjuu ajal liiga kiiresti, küsimust lugeda jõudmata antud vastused, ettevõtte antud lisaaeg (ilma põhjuseta) ja tulemused; värbamissüsteemi saadetud kandidaatide e-posti aadress, nimi ja ID selles süsteemis; nende inimeste e-posti aadressid, kellele ettevõte saadab aruande; ning iga ettevõtte e-kirjadest loobunud kandidaadi e-posti aadressi ühesuunaline räsi.",
         "Kestus: seni, kuni ettevõte kasutab prepzat. Kandidaatide tulemused kustutatakse 12 kuud pärast nende kutse viimast saatmist, värbamissüsteemi saadetud kandidaadid 12 kuud pärast nende saabumist ja kõik andmed ettevõtte kustutamisel."
       ]

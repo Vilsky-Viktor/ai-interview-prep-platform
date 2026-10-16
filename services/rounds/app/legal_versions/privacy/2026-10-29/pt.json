@@ -27,7 +27,8 @@
         "E-mails aos membros da empresa: um registro dos resumos de atividades e lembretes que enviamos a você, e do assunto de cada lembrete, para que nenhum seja enviado duas vezes.",
         "Candidatos que deixam de receber os e-mails de uma empresa: um hash unidirecional do endereço de e-mail deles, com a empresa e, se deixaram de receber apenas os lembretes de uma entrevista, esse convite. Ele não pode ser convertido de volta no e-mail.",
         "Indicações: por meio do link de indicação de quem você ou sua empresa chegou, e se ele já foi recompensado.",
-        "Estatísticas de uso: etapas como o cadastro, a criação de uma empresa, um candidato convidado ou uma recarga, com valores como uma pontuação ou um montante. O ID da sua conta é substituído por um código que não pode ser associado a você, e nenhum nome, e-mail ou texto é incluído."
+        "Compras: para cada recarga, a empresa a que se destinava, quem a comprou, o que foi comprado, o total e a moeda, o ID da transação da Paddle e quando. Os dados do cartão e de faturamento ficam com a Paddle, não conosco.",
+        "Estatísticas de uso: etapas como o cadastro, a criação de uma empresa, um candidato convidado ou uma recarga, com valores como uma pontuação ou um montante. O ID da sua conta é substituído por um código gerado com uma chave secreta que mantemos, de modo que as estatísticas não identificam você pelo nome, mas são pseudonimizadas, não anônimas: com a chave, o código corresponde ao ID da sua conta. O ID de uma empresa é mantido como está. Nenhum nome, e-mail ou texto é incluído."
       ]
     },
     {
@@ -41,6 +42,7 @@
         "Lembrar que um candidato deixou de receber os e-mails de uma empresa, para que a prepza não volte a enviar e-mails a ele em nome dessa empresa (respeitando a oposição dele).",
         "Para manter a prepza segura e funcionando: prevenção de abusos, limites de requisições, relatórios de erros e estatísticas que melhoram a qualidade das perguntas (nosso interesse legítimo).",
         "As estatísticas de uso mostram quais partes da prepza ajudam as pessoas e quais preços e limites funcionam, para que possamos melhorá-los (nosso interesse legítimo).",
+        "Registros de compras, mantidos para a contabilidade conforme exige a legislação contábil da Estônia (obrigação legal).",
         "Mostrar uma empresa como verificada, comparando o site dela com os domínios de e-mail dos seus proprietários e administradores (nosso interesse legítimo).",
         "Os resultados da entrevista, os tempos e os sinais de integridade ajudam a empresa contratante a avaliar suas respostas de forma justa (interesse legítimo da empresa). As pessoas da empresa tomam a decisão de contratação; a prepza não toma, por si só, nenhuma decisão sobre você. Você pode pedir à empresa que uma pessoa revise o seu resultado e, antes de começar, uma adaptação, como tempo extra."
       ]
@@ -48,7 +50,7 @@
     {
       "heading": "Com quem os compartilhamos",
       "paragraphs": [
-        "Compartilhamos dados com os prestadores de serviços que operam a prepza para nós, com base em acordos que os protegem:"
+        "Compartilhamos dados com os prestadores de serviços que operam a prepza para nós, com base em acordos que os protegem, e com a Paddle, que vende as recargas:"
       ],
       "items": [
         "Google (Firebase Authentication; Google LLC, Estados Unidos, com base no Quadro de Privacidade de Dados UE-EUA): login. O LinkedIn e o GitHub apenas confirmam quem você é quando você entra com eles; não recebemos mais nada deles.",
@@ -59,7 +61,7 @@
         "Cloudflare (Turnstile; Cloudflare, Inc., Estados Unidos, com base no Quadro de Privacidade de Dados UE-EUA): a verificação \"Não sou um robô\".",
         "Google Cloud, nosso provedor de hospedagem, que armazena os dados (na UE, Bélgica).",
         "Upstash: contadores de curta duração para limites de uso e atualizações ao vivo (na UE, Bélgica).",
-        "A Paddle vende as recargas como merchant of record (revendedora): ela cuida dos pagamentos e impostos como responsável pelo tratamento independente, nos termos da sua própria política de privacidade."
+        "A Paddle (Paddle.com Market Ltd, Reino Unido) não é um deles: ela mesma vende as recargas, como merchant of record (revendedora), e é a responsável pelo tratamento dos dados de pagamento, fiscais e de faturamento que coleta, nos termos da sua própria política de privacidade. Passamos a ela o e-mail do membro que compra, e ela nos informa o que foi comprado e pago."
       ]
     },
     {

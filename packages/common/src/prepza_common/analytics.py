@@ -10,10 +10,14 @@ from prepza_common.pubsub import publish
 logger = logging.getLogger(__name__)
 
 
-def pseudonym(user_id: str) -> str:
-    """The user as analytics knows them: a salted hash, never the id or email. Once the account
-    is deleted, nothing links it back to a person."""
+def pseudonym(user_id: str) -> str | None:
+    """The user as analytics knows them: a keyed hash (ANALYTICS_SALT), never the id or email.
+    Pseudonymous: whoever holds the key can match it to an id. None without the key, as anyone
+    with the ids could match an unkeyed hash."""
     salt = os.environ.get("ANALYTICS_SALT", "")
+
+    if not salt:
+        return None
 
     return hmac.new(salt.encode(), user_id.encode(), hashlib.sha256).hexdigest()[:32]
 
@@ -28,9 +32,16 @@ async def track(
     """Records one funnel event (internal_docs/measurement.md). Best effort: it waits for Pub/Sub
     only as long as an in-request publish may, and a lost event is logged and never breaks the
     request. `props` hold counts and choices only, never text people wrote."""
+    user = pseudonym(user_id) if user_id else None
+
+    if user_id and user is None:
+        logger.error("ANALYTICS_SALT isn't set: funnel event %s about a user not recorded", event)
+
+        return
+
     data = {
         "at": datetime.now(UTC).isoformat(),
-        "user": pseudonym(user_id) if user_id else None,
+        "user": user,
         "company": str(company_id) if company_id else None,
         "props": props,
     }

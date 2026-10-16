@@ -27,7 +27,8 @@
         "Email ai membri delle aziende: un registro dei riepiloghi attività e dei promemoria che ti abbiamo inviato, e dell'oggetto di ciascun promemoria, così che nessuno venga inviato due volte.",
         "Candidati che bloccano le email di un'azienda: un hash unidirezionale del loro indirizzo email, con l'azienda e, se hanno bloccato solo i promemoria di un colloquio, il relativo invito. Non può essere riconvertito nell'email.",
         "Referral: il link referral tramite cui tu o la tua azienda siete arrivati, e se il referral è stato premiato.",
-        "Statistiche di utilizzo: passaggi come la registrazione, la creazione di un'azienda, l'invito di un candidato o una ricarica, con valori come un punteggio o un importo. L'ID del tuo account è sostituito da un codice che non può essere ricondotto a te, e non sono inclusi nomi, email né testi."
+        "Acquisti: per ogni ricarica, l'azienda a cui era destinata, chi l'ha acquistata, cosa è stato acquistato, il totale e la valuta, l'ID della transazione di Paddle e quando. I dati della carta e di fatturazione li conserva Paddle, non noi.",
+        "Statistiche di utilizzo: passaggi come la registrazione, la creazione di un'azienda, l'invito di un candidato o una ricarica, con valori come un punteggio o un importo. L'ID del tuo account è sostituito da un codice generato con una chiave segreta in nostro possesso, così le statistiche non ti nominano, ma sono pseudonimizzate, non anonime: con la chiave, il codice corrisponde all'ID del tuo account. L'ID di un'azienda è conservato così com'è. Non sono inclusi nomi, email né testi."
       ]
     },
     {
@@ -41,6 +42,7 @@
         "Ricordare che un candidato ha bloccato le email di un'azienda, così che prepza non gli scriva più per quell'azienda (rispetto della sua opposizione).",
         "Per mantenere prepza sicuro e funzionante: prevenzione degli abusi, limiti di frequenza, report degli errori e statistiche che migliorano la qualità delle domande (nostro legittimo interesse).",
         "Le statistiche di utilizzo mostrano quali parti di prepza aiutano le persone e quali prezzi e limiti funzionano, così possiamo migliorarli (nostro legittimo interesse).",
+        "Registrazioni degli acquisti, conservate per la contabilità come richiede la normativa contabile estone (obbligo legale).",
         "Mostrare un'azienda come verificata, confrontando il suo sito web con i domini email dei suoi proprietari e amministratori (nostro legittimo interesse).",
         "I risultati dei colloqui, i tempi e i segnali di integrità aiutano l'azienda che assume a valutare le tue risposte in modo equo (legittimo interesse dell'azienda). Sono le persone dell'azienda a prendere la decisione di assunzione; prepza non prende da solo alcuna decisione su di te. Puoi chiedere all'azienda che una persona riesamini il tuo risultato e, prima di iniziare, un accomodamento come del tempo extra."
       ]
@@ -48,7 +50,7 @@
     {
       "heading": "Con chi li condividiamo",
       "paragraphs": [
-        "Condividiamo i dati con i fornitori di servizi che gestiscono prepza per noi, in base ad accordi che li proteggono:"
+        "Condividiamo i dati con i fornitori di servizi che gestiscono prepza per noi, in base ad accordi che li proteggono, e con Paddle, che vende le ricariche:"
       ],
       "items": [
         "Google (Firebase Authentication; Google LLC, Stati Uniti, nell'ambito del quadro UE-USA per la protezione dei dati personali): accesso. LinkedIn e GitHub confermano solo chi sei quando accedi con loro; non riceviamo nient'altro da loro.",
@@ -59,7 +61,7 @@
         "Cloudflare (Turnstile; Cloudflare, Inc., Stati Uniti, nell'ambito del quadro UE-USA per la protezione dei dati personali): la verifica «Non sono un robot».",
         "Google Cloud, il nostro fornitore di hosting, che conserva i dati (nell'UE, Belgio).",
         "Upstash: contatori di breve durata per i limiti di utilizzo e gli aggiornamenti in tempo reale (nell'UE, Belgio).",
-        "Paddle vende le ricariche come merchant of record: gestisce pagamenti e imposte come titolare autonomo del trattamento, secondo la propria informativa sulla privacy."
+        "Paddle (Paddle.com Market Ltd, Regno Unito) non è uno di questi: vende direttamente le ricariche, come merchant of record, ed è titolare del trattamento dei dati di pagamento, fiscali e di fatturazione che raccoglie, secondo la propria informativa sulla privacy. Gli trasmettiamo l'email del membro che acquista, e ci comunica cosa è stato acquistato e pagato."
       ]
     },
     {

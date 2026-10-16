@@ -27,7 +27,8 @@
         "E-mails aux membres d'une entreprise : un registre des récapitulatifs d'activité et des rappels que nous vous avons envoyés, et de l'objet de chaque rappel, afin qu'aucun ne soit envoyé deux fois.",
         "Candidats qui refusent les e-mails d'une entreprise : un hachage à sens unique de leur adresse e-mail, avec l'entreprise et, s'ils n'ont refusé que les rappels d'un entretien, l'invitation concernée. Il ne peut pas être reconverti en adresse e-mail.",
         "Parrainage : le lien de parrainage par lequel vous ou votre entreprise êtes arrivés, et si ce parrainage a été récompensé.",
-        "Statistiques d'utilisation : des étapes comme l'inscription, la création d'une entreprise, l'invitation d'un candidat ou une recharge, avec des valeurs comme un score ou un montant. L'identifiant de votre compte est remplacé par un code qui ne permet pas de remonter jusqu'à vous, et aucun nom, e-mail ni texte n'est inclus."
+        "Achats : pour chaque recharge, l'entreprise concernée, qui l'a achetée, ce qui a été acheté, le montant total et la devise, l'identifiant de transaction de Paddle et la date. Ce n'est pas nous mais Paddle qui conserve les données de carte et de facturation.",
+        "Statistiques d'utilisation : des étapes comme l'inscription, la création d'une entreprise, l'invitation d'un candidat ou une recharge, avec des valeurs comme un score ou un montant. L'identifiant de votre compte est remplacé par un code généré avec une clé secrète que nous détenons, de sorte que les statistiques ne vous nomment pas, mais elles sont pseudonymisées, et non anonymes : avec la clé, le code correspond à l'identifiant de votre compte. L'identifiant d'une entreprise est conservé tel quel. Aucun nom, e-mail ni texte n'est inclus."
       ]
     },
     {
@@ -41,6 +42,7 @@
         "Mémoriser qu'un candidat a refusé les e-mails d'une entreprise, afin que prepza ne lui écrive plus pour cette entreprise (respect de son opposition).",
         "Pour garder prepza sûr et opérationnel : prévention des abus, limites de fréquence, rapports d'erreur et statistiques qui améliorent la qualité des questions (notre intérêt légitime).",
         "Les statistiques d'utilisation montrent quelles parties de prepza aident les utilisateurs et quels prix et limites fonctionnent, afin que nous puissions les améliorer (notre intérêt légitime).",
+        "Registres d'achat, conservés pour la comptabilité comme l'exige la législation comptable estonienne (obligation légale).",
         "Afficher une entreprise comme vérifiée, en comparant son site web aux domaines e-mail de ses propriétaires et admins (notre intérêt légitime).",
         "Les résultats d'entretien, les durées et les signaux d'intégrité aident l'entreprise qui recrute à évaluer vos réponses équitablement (intérêt légitime de l'entreprise). Ce sont des personnes de l'entreprise qui prennent la décision de recrutement ; prepza ne prend de lui-même aucune décision vous concernant. Vous pouvez demander à l'entreprise qu'une personne réexamine votre résultat, ainsi qu'un aménagement comme du temps supplémentaire avant de commencer."
       ]
@@ -48,7 +50,7 @@
     {
       "heading": "Avec qui nous les partageons",
       "paragraphs": [
-        "Nous partageons des données avec les prestataires qui font fonctionner prepza pour nous, dans le cadre d'accords qui les protègent :"
+        "Nous partageons des données avec les prestataires qui font fonctionner prepza pour nous, dans le cadre d'accords qui les protègent, ainsi qu'avec Paddle, qui vend les recharges :"
       ],
       "items": [
         "Google (Firebase Authentication ; Google LLC, États-Unis, au titre du cadre de protection des données UE-États-Unis) : connexion. LinkedIn et GitHub confirment seulement votre identité lorsque vous vous connectez avec eux ; nous ne recevons rien d'autre de leur part.",
@@ -59,7 +61,7 @@
         "Cloudflare (Turnstile ; Cloudflare, Inc., États-Unis, au titre du cadre de protection des données UE-États-Unis) : la vérification « Je ne suis pas un robot ».",
         "Google Cloud, notre hébergeur, qui stocke les données (dans l'UE, en Belgique).",
         "Upstash : compteurs de courte durée pour les limites d'utilisation et les mises à jour en direct (dans l'UE, en Belgique).",
-        "Paddle vend les recharges en tant que revendeur (merchant of record) : il gère les paiements et les taxes en tant que responsable du traitement indépendant, selon sa propre politique de confidentialité."
+        "Paddle (Paddle.com Market Ltd, Royaume-Uni) n'en fait pas partie : il vend lui-même les recharges, en tant que revendeur (merchant of record), et est le responsable du traitement des données de paiement, fiscales et de facturation qu'il collecte, selon sa propre politique de confidentialité. Nous lui transmettons l'e-mail du membre qui achète, et il nous indique ce qui a été acheté et payé."
       ]
     },
     {

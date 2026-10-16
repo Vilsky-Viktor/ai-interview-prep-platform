@@ -27,7 +27,8 @@
         "Email kepada anggota perusahaan: catatan ringkasan aktivitas dan pengingat yang kami kirimkan kepadamu, dan tentang apa setiap pengingat, agar tidak ada yang terkirim dua kali.",
         "Kandidat yang menghentikan email dari suatu perusahaan: hash satu arah dari alamat email mereka, beserta perusahaannya dan, jika mereka hanya menghentikan pengingat untuk satu wawancara, undangan tersebut. Hash ini tidak dapat diubah kembali menjadi alamat email.",
         "Referal: melalui tautan referal siapa kamu atau perusahaanmu datang, dan apakah referal itu sudah diberi imbalan.",
-        "Statistik penggunaan: langkah-langkah seperti mendaftar, pembuatan perusahaan, undangan kandidat, atau isi ulang, dengan angka seperti skor atau jumlah. ID akunmu diganti dengan kode yang tidak dapat dilacak kembali kepadamu, dan tidak ada nama, email, atau teks yang disertakan."
+        "Pembelian: untuk setiap isi ulang, perusahaan tujuannya, siapa yang membelinya, apa yang dibeli, total dan mata uangnya, ID transaksi Paddle, serta waktunya. Paddle, bukan kami, yang menyimpan detail kartu dan penagihan.",
+        "Statistik penggunaan: langkah-langkah seperti mendaftar, pembuatan perusahaan, undangan kandidat, atau isi ulang, dengan angka seperti skor atau jumlah. ID akunmu diganti dengan kode yang dibuat menggunakan kunci rahasia yang kami pegang, sehingga statistik tidak menyebut namamu, tetapi statistik itu berupa data pseudonim, bukan anonim: dengan kunci tersebut, kode itu cocok dengan ID akunmu. ID perusahaan disimpan apa adanya. Tidak ada nama, email, atau teks yang disertakan."
       ]
     },
     {
@@ -41,6 +42,7 @@
         "Mengingat bahwa seorang kandidat telah menghentikan email dari suatu perusahaan, agar prepza tidak mengirim email kepadanya atas nama perusahaan itu lagi (menghormati keberatannya).",
         "Untuk menjaga prepza tetap aman dan berfungsi: mencegah penyalahgunaan, pembatasan laju (rate limit), laporan kesalahan, dan statistik yang meningkatkan kualitas soal (kepentingan sah kami).",
         "Statistik penggunaan menunjukkan bagian mana dari prepza yang membantu orang serta harga dan batasan mana yang berjalan baik, agar kami bisa memperbaikinya (kepentingan sah kami).",
+        "Catatan pembelian, disimpan untuk pembukuan sebagaimana diwajibkan oleh hukum akuntansi Estonia (kewajiban hukum).",
         "Menampilkan perusahaan sebagai terverifikasi, dengan mencocokkan situs webnya dengan domain email pemilik dan adminnya (kepentingan sah kami).",
         "Hasil wawancara, waktu menjawab, dan sinyal integritas membantu perusahaan yang merekrut menilai jawabanmu secara adil (kepentingan sah perusahaan). Orang-orang di perusahaan yang membuat keputusan perekrutan; prepza tidak membuat keputusan apa pun tentangmu secara mandiri. Kamu bisa meminta perusahaan agar hasilmu ditinjau oleh manusia, dan meminta penyesuaian seperti waktu tambahan sebelum kamu mulai."
       ]
@@ -48,7 +50,7 @@
     {
       "heading": "Dengan siapa kami membagikannya",
       "paragraphs": [
-        "Kami membagikan data kepada penyedia layanan yang menjalankan prepza untuk kami, berdasarkan perjanjian yang melindunginya:"
+        "Kami membagikan data kepada penyedia layanan yang menjalankan prepza untuk kami, berdasarkan perjanjian yang melindunginya, serta kepada Paddle, yang menjual isi ulang:"
       ],
       "items": [
         "Google (Firebase Authentication; Google LLC, Amerika Serikat, berdasarkan EU-US Data Privacy Framework): proses masuk. LinkedIn dan GitHub hanya mengonfirmasi identitasmu saat kamu masuk dengan akun mereka; kami tidak menerima hal lain dari mereka.",
@@ -59,7 +61,7 @@
         "Cloudflare (Turnstile; Cloudflare, Inc., Amerika Serikat, berdasarkan EU-US Data Privacy Framework): pemeriksaan \"Saya bukan robot\".",
         "Google Cloud, penyedia hosting kami, yang menyimpan data (di UE, Belgia).",
         "Upstash: penghitung berumur pendek untuk batas penggunaan dan pembaruan langsung (di UE, Belgia).",
-        "Paddle menjual isi ulang sebagai merchant of record: Paddle menangani pembayaran dan pajak sebagai pengendali independen, berdasarkan kebijakan privasinya sendiri."
+        "Paddle (Paddle.com Market Ltd, Inggris Raya) bukan salah satunya: Paddle menjual isi ulang sendiri, sebagai merchant of record, dan merupakan pengendali detail pembayaran, pajak, dan penagihan yang dikumpulkannya, berdasarkan kebijakan privasinya sendiri. Kami memberikan email anggota yang membeli kepada Paddle, dan Paddle memberi tahu kami apa yang dibeli dan dibayar."
       ]
     },
     {

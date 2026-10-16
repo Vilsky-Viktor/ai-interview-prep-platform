@@ -27,7 +27,8 @@
         "E-kirjad ettevõtte liikmetele: kirje sulle saadetud tegevuste kokkuvõtete ja meeldetuletuste kohta ning selle kohta, millest iga meeldetuletus oli, et ühtki ei saadetaks kaks korda.",
         "Kandidaadid, kes loobuvad ettevõtte e-kirjadest: nende e-posti aadressi ühesuunaline räsi koos ettevõttega ja, kui nad loobusid ainult ühe intervjuu meeldetuletustest, selle kutsega. Seda ei saa tagasi e-posti aadressiks muuta.",
         "Soovitused: kelle soovituslingi kaudu sina või sinu ettevõte tuli ja kas selle eest on preemia antud.",
-        "Kasutusstatistika: sammud, nagu registreerumine, ettevõtte loomine, kandidaadi kutsumine või juurdelaadimine, koos arvväärtustega, nagu punktisumma või summa. Sinu konto ID asendatakse koodiga, mida ei saa sinuni tagasi viia, ning nimesid, e-posti aadresse ega tekste ei lisata."
+        "Ostud: iga juurdelaadimise kohta ettevõte, kellele see oli, kes selle ostis, mida osteti, kogusumma ja valuuta, Paddle'i tehingu ID ja aeg. Kaardi- ja arveldusandmeid hoiab Paddle, mitte meie.",
+        "Kasutusstatistika: sammud, nagu registreerumine, ettevõtte loomine, kandidaadi kutsumine või juurdelaadimine, koos arvväärtustega, nagu punktisumma või summa. Sinu konto ID asendatakse koodiga, mis on loodud meie hoitava salajase võtmega, nii et statistika ei nimeta sind, kuid see on pseudonüümitud, mitte anonüümne: võtme abil vastab kood sinu konto ID-le. Ettevõtte ID jäetakse muutmata. Nimesid, e-posti aadresse ega tekste ei lisata."
       ]
     },
     {
@@ -41,6 +42,7 @@
         "Meeles pidamine, et kandidaat loobus ettevõtte e-kirjadest, et prepza ei saadaks talle selle ettevõtte nimel enam e-kirju (tema vastuväite austamine).",
         "prepza turvalisuse ja toimimise tagamiseks: kuritarvitamise ennetamine, päringupiirangud, vearaportid ja statistika, mis parandab küsimuste kvaliteeti (meie õigustatud huvi).",
         "Kasutusstatistika näitab, millised prepza osad inimesi aitavad ning millised hinnad ja piirangud toimivad, et saaksime neid parandada (meie õigustatud huvi).",
+        "Ostukirjed, mida hoiame raamatupidamise jaoks, nagu Eesti raamatupidamisseadus nõuab (juriidiline kohustus).",
         "Ettevõtte kinnitatuna näitamine, võrreldes selle veebisaiti omanike ja administraatorite e-posti domeenidega (meie õigustatud huvi).",
         "Intervjuu tulemused, ajad ja kahtlase käitumise märked aitavad värbaval ettevõttel sinu vastuseid õiglaselt hinnata (ettevõtte õigustatud huvi). Värbamisotsuse teevad ettevõtte inimesed; prepza ei tee sinu kohta ise ühtegi otsust. Võid paluda ettevõttelt, et sinu tulemuse vaataks üle inimene, ja enne alustamist kohandust, näiteks lisaaega."
       ]
@@ -48,7 +50,7 @@
     {
       "heading": "Kellega me neid jagame",
       "paragraphs": [
-        "Jagame andmeid teenusepakkujatega, kes käitavad prepzat meie jaoks, lepingute alusel, mis andmeid kaitsevad:"
+        "Jagame andmeid teenusepakkujatega, kes käitavad prepzat meie jaoks, lepingute alusel, mis andmeid kaitsevad, ning Paddle'iga, kes müüb juurdelaadimisi:"
       ],
       "items": [
         "Google (Firebase Authentication; Google LLC, Ameerika Ühendriigid, ELi–USA andmekaitseraamistiku alusel): sisselogimine. LinkedIn ja GitHub kinnitavad ainult sinu isiku, kui logid nendega sisse; me ei saa neilt midagi muud.",
@@ -59,7 +61,7 @@
         "Cloudflare (Turnstile; Cloudflare, Inc., Ameerika Ühendriigid, ELi–USA andmekaitseraamistiku alusel): kontroll „Ma ei ole robot“.",
         "Google Cloud, meie majutusteenuse pakkuja, kes andmeid säilitab (ELis, Belgias).",
         "Upstash: lühiajalised loendurid kasutuspiirangute ja reaalajas uuenduste jaoks (EL-is, Belgias).",
-        "Paddle müüb juurdelaadimisi edasimüüjana (merchant of record): ta tegeleb maksete ja maksudega iseseisva vastutava töötlejana oma privaatsuspoliitika alusel."
+        "Paddle (Paddle.com Market Ltd, Ühendkuningriik) nende hulka ei kuulu: ta müüb juurdelaadimisi ise, edasimüüjana (merchant of record), ning on enda kogutud makse-, maksu- ja arveldusandmete vastutav töötleja oma privaatsuspoliitika alusel. Edastame talle ostva liikme e-posti aadressi ja tema teatab meile, mida osteti ja mille eest maksti."
       ]
     },
     {

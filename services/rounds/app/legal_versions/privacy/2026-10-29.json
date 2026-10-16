@@ -27,7 +27,8 @@
         "Emails to company members: a record of the activity digests and reminders we sent you, and what each reminder was about, so none is sent twice.",
         "Candidates who stop a company's emails: a one-way hash of their email address, with the company and, if they stopped only an interview's reminders, that invite. It can't be turned back into the email.",
         "Referrals: whose referral link you or your company came through, and whether it has been rewarded.",
-        "Usage statistics: steps such as signing up, a company being created, a candidate invited or a top-up, with counts like a score or an amount. Your account id is replaced by a code that can't be traced back to you, and no names, emails or texts are included."
+        "Purchases: for each top-up, the company it was for, who bought it, what was bought, the total and currency, Paddle's transaction id and when. Paddle, not us, keeps the card and billing details.",
+        "Usage statistics: steps such as signing up, a company being created, a candidate invited or a top-up, with counts like a score or an amount. Your account id is replaced by a code made with a secret key we hold, so the statistics don't name you, but they are pseudonymous, not anonymous: with the key, the code matches your account id. A company's id is kept as it is. No names, emails or texts are included."
       ]
     },
     {
@@ -41,6 +42,7 @@
         "Remembering that a candidate stopped a company's emails, so prepza doesn't email them for that company again (respecting their objection).",
         "To keep prepza secure and working: preventing abuse, rate limits, error reports, and statistics that improve question quality (our legitimate interest).",
         "Usage statistics show which parts of prepza help people and which prices and limits work, so we can improve them (our legitimate interest).",
+        "Purchase records, kept for bookkeeping as Estonian accounting law requires (legal obligation).",
         "Showing a company as verified, by checking its website against the email domains of its owners and admins (our legitimate interest).",
         "Interview results, timings and integrity signals help the hiring company assess your answers fairly (the company's legitimate interest). People at the company make the hiring decision; prepza makes no decision about you on its own. You can ask the company for a person to review your result, and for an accommodation such as extra time before you start."
       ]
@@ -48,7 +50,7 @@
     {
       "heading": "Who we share it with",
       "paragraphs": [
-        "We share data with the service providers that run prepza for us, under agreements that protect it:"
+        "We share data with the service providers that run prepza for us, under agreements that protect it, and with Paddle, which sells the top-ups:"
       ],
       "items": [
         "Google (Firebase Authentication; Google LLC, United States, under the EU-US Data Privacy Framework): sign-in. LinkedIn and GitHub only confirm who you are when you sign in with them; we don't receive anything else from them.",
@@ -59,7 +61,7 @@
         "Cloudflare (Turnstile; Cloudflare, Inc., United States, under the EU-US Data Privacy Framework): the \"I'm not a robot\" check.",
         "Google Cloud, our hosting provider, which stores the data (in the EU, Belgium).",
         "Upstash: short-lived counters for rate limits and live updates (in the EU, Belgium).",
-        "Paddle sells the top-ups as the merchant of record: it handles payments and taxes as an independent controller, under its own privacy policy."
+        "Paddle (Paddle.com Market Ltd, United Kingdom) isn't one of them: it sells the top-ups itself, as the merchant of record, and is the controller of the payment, tax and billing details it collects, under its own privacy policy. We pass it the email of the member buying, and it tells us what was bought and paid."
       ]
     },
     {

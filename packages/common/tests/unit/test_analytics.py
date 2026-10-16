@@ -33,3 +33,20 @@ def test_the_same_user_gets_the_same_pseudonym_only_with_the_same_salt(monkeypat
     monkeypatch.setenv("ANALYTICS_SALT", "two")
 
     assert analytics.pseudonym("ann") != first
+
+
+def test_without_the_key_no_event_about_a_user_is_recorded(monkeypatch, caplog):
+    """An unkeyed hash of an id could be matched by anyone holding the ids."""
+    sent = []
+
+    async def fake_publish(event_type, data, timeout):
+        sent.append(data)
+
+    monkeypatch.setenv("ANALYTICS_SALT", "")
+    monkeypatch.setattr(analytics, "publish", fake_publish)
+    asyncio.run(analytics.track("signed_up", user_id="ann"))
+    asyncio.run(analytics.track("page_seen", company_id="acme"))
+
+    assert analytics.pseudonym("ann") is None
+    assert [data["company"] for data in sent] == ["acme"]
+    assert "ANALYTICS_SALT isn't set" in caplog.text

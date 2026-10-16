@@ -27,7 +27,8 @@
         "Mga email sa mga miyembro ng kumpanya: isang talaan ng mga buod ng aktibidad at paalala na ipinadala namin sa iyo, at kung tungkol saan ang bawat paalala, para walang maipadala nang dalawang beses.",
         "Mga aplikanteng nagpapahinto sa mga email ng isang kumpanya: isang one-way hash ng kanilang email address, kasama ang kumpanya at, kung ang mga paalala lang ng isang interview ang ipinahinto nila, ang imbitasyong iyon. Hindi na ito maibabalik sa email.",
         "Mga referral: kung kaninong referral link ka o ang iyong kumpanya dumaan, at kung nabigyan na ito ng reward.",
-        "Usage statistics: mga hakbang gaya ng pag-sign up, paggawa ng kumpanya, pag-imbita ng aplikante o pag-top up, kasama ang mga bilang gaya ng score o halaga. Pinapalitan ang iyong account id ng code na hindi na matutunton pabalik sa iyo, at walang kasamang pangalan, email o text."
+        "Mga pagbili: para sa bawat top-up, ang kumpanyang pinaglaanan nito, kung sino ang bumili, kung ano ang binili, ang kabuuan at currency, ang transaction id ng Paddle at kung kailan. Ang Paddle, hindi kami, ang nag-iingat ng mga detalye ng card at billing.",
+        "Usage statistics: mga hakbang gaya ng pag-sign up, paggawa ng kumpanya, pag-imbita ng aplikante o pag-top up, kasama ang mga bilang gaya ng score o halaga. Pinapalitan ang iyong account id ng code na ginawa gamit ang isang lihim na key na hawak namin, kaya hindi ka pinangangalanan ng mga istatistika, pero pseudonymous ang mga ito, hindi anonymous: gamit ang key, tumutugma ang code sa iyong account id. Pinananatili nang walang pagbabago ang id ng isang kumpanya. Walang kasamang pangalan, email o text."
       ]
     },
     {
@@ -41,6 +42,7 @@
         "Pagtatanda na ipinahinto ng isang aplikante ang mga email ng isang kumpanya, para hindi na siya i-email ulit ng prepza para sa kumpanyang iyon (paggalang sa kanyang pagtutol).",
         "Para panatilihing ligtas at gumagana ang prepza: pagpigil sa pang-aabuso, mga rate limit, mga error report, at mga istatistikang nagpapahusay sa kalidad ng mga tanong (ang aming lehitimong interes).",
         "Ipinapakita ng usage statistics kung aling mga bahagi ng prepza ang nakatutulong sa mga tao at kung aling mga presyo at limitasyon ang gumagana, para mapahusay namin ang mga ito (ang aming lehitimong interes).",
+        "Mga talaan ng pagbili, iniingatan para sa bookkeeping ayon sa hinihingi ng batas sa accounting ng Estonia (legal na obligasyon).",
         "Pagpapakita sa isang kumpanya bilang na-verify, sa pamamagitan ng paghahambing ng website nito sa mga email domain ng mga may-ari at admin nito (ang aming lehitimong interes).",
         "Tinutulungan ng mga resulta ng interview, mga oras ng pagsagot at integrity signals ang kumpanyang nagha-hire na suriin nang patas ang iyong mga sagot (ang lehitimong interes ng kumpanya). Ang mga tao sa kumpanya ang gumagawa ng desisyon sa pag-hire; walang desisyong ginagawa ang prepza tungkol sa iyo nang mag-isa. Maaari mong hilingin sa kumpanya na suriin ng isang tao ang iyong resulta, at humiling ng akomodasyon gaya ng dagdag na oras bago ka magsimula."
       ]
@@ -48,7 +50,7 @@
     {
       "heading": "Kanino namin ito ibinabahagi",
       "paragraphs": [
-        "Ibinabahagi namin ang data sa mga service provider na nagpapatakbo ng prepza para sa amin, sa ilalim ng mga kasunduang nagpoprotekta rito:"
+        "Ibinabahagi namin ang data sa mga service provider na nagpapatakbo ng prepza para sa amin, sa ilalim ng mga kasunduang nagpoprotekta rito, at sa Paddle, na nagbebenta ng mga top-up:"
       ],
       "items": [
         "Google (Firebase Authentication; Google LLC, United States, sa ilalim ng EU-US Data Privacy Framework): pag-sign in. Kinukumpirma lang ng LinkedIn at GitHub kung sino ka kapag nag-sign in ka gamit ang mga ito; wala na kaming ibang natatanggap mula sa kanila.",
@@ -59,7 +61,7 @@
         "Cloudflare (Turnstile; Cloudflare, Inc., United States, sa ilalim ng EU-US Data Privacy Framework): ang \"I'm not a robot\" na pagsusuri.",
         "Google Cloud, ang aming hosting provider, na nag-iimbak ng data (sa EU, Belgium).",
         "Upstash: mga panandaliang counter para sa mga limitasyon sa paggamit at mga live na update (sa EU, Belgium).",
-        "Ibinebenta ng Paddle ang mga top-up bilang merchant of record: hinahawakan nito ang mga bayad at buwis bilang isang independiyenteng controller, sa ilalim ng sarili nitong patakaran sa privacy."
+        "Ang Paddle (Paddle.com Market Ltd, United Kingdom) ay hindi isa sa kanila: ito mismo ang nagbebenta ng mga top-up, bilang merchant of record, at ito ang controller ng mga detalye ng bayad, buwis at billing na kinokolekta nito, sa ilalim ng sarili nitong patakaran sa privacy. Ibinibigay namin dito ang email ng miyembrong bumibili, at sinasabi nito sa amin kung ano ang binili at binayaran."
       ]
     },
     {

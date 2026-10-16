@@ -27,7 +27,8 @@
         "E-mails aan leden van bedrijven: een registratie van de activiteitenoverzichten en herinneringen die we je hebben gestuurd, en waarover elke herinnering ging, zodat er geen twee keer wordt verstuurd.",
         "Kandidaten die de e-mails van een bedrijf stopzetten: een eenrichtingshash van hun e-mailadres, met het bedrijf en, als ze alleen de herinneringen van een interview hebben stopgezet, die uitnodiging. Deze hash kan niet worden teruggerekend naar het e-mailadres.",
         "Doorverwijzingen: via wiens doorverwijslink jij of je bedrijf binnenkwam, en of daarvoor al een beloning is gegeven.",
-        "Gebruiksstatistieken: stappen zoals aanmelden, het aanmaken van een bedrijf, een uitgenodigde kandidaat of een opwaardering, met waarden zoals een score of een bedrag. Je account-id wordt vervangen door een code die niet naar jou te herleiden is, en er worden geen namen, e-mailadressen of teksten in opgenomen."
+        "Aankopen: voor elke opwaardering het bedrijf waarvoor die was, wie die kocht, wat er werd gekocht, het totaal en de valuta, de transactie-id van Paddle en wanneer. Paddle, niet wij, bewaart de kaart- en factuurgegevens.",
+        "Gebruiksstatistieken: stappen zoals aanmelden, het aanmaken van een bedrijf, een uitgenodigde kandidaat of een opwaardering, met waarden zoals een score of een bedrag. Je account-id wordt vervangen door een code die is gemaakt met een geheime sleutel die wij bewaren, zodat de statistieken je niet bij naam noemen, maar ze zijn gepseudonimiseerd, niet anoniem: met de sleutel komt de code overeen met je account-id. De id van een bedrijf blijft zoals hij is. Er worden geen namen, e-mailadressen of teksten in opgenomen."
       ]
     },
     {
@@ -41,6 +42,7 @@
         "Onthouden dat een kandidaat de e-mails van een bedrijf heeft stopgezet, zodat prepza die kandidaat voor dat bedrijf niet meer e-mailt (respecteren van het bezwaar).",
         "Om prepza veilig en werkend te houden: misbruik voorkomen, rate limits, foutrapporten en statistieken die de kwaliteit van vragen verbeteren (ons gerechtvaardigd belang).",
         "Gebruiksstatistieken laten zien welke onderdelen van prepza mensen helpen en welke prijzen en limieten werken, zodat we ze kunnen verbeteren (ons gerechtvaardigd belang).",
+        "Aankoopgegevens, bewaard voor de boekhouding zoals de Estse boekhoudwetgeving vereist (wettelijke verplichting).",
         "Een bedrijf als geverifieerd tonen, door de website ervan te vergelijken met de e-maildomeinen van de eigenaren en beheerders (ons gerechtvaardigd belang).",
         "Interviewresultaten, tijden en integriteitssignalen helpen het wervende bedrijf je antwoorden eerlijk te beoordelen (het gerechtvaardigd belang van het bedrijf). Mensen bij het bedrijf nemen de wervingsbeslissing; prepza neemt zelf geen beslissing over jou. Je kunt het bedrijf vragen om een beoordeling van je resultaat door een mens, en vóór je begint om een aanpassing zoals extra tijd."
       ]
@@ -48,7 +50,7 @@
     {
       "heading": "Met wie we het delen",
       "paragraphs": [
-        "We delen gegevens met de dienstverleners die prepza voor ons draaien, op grond van overeenkomsten die de gegevens beschermen:"
+        "We delen gegevens met de dienstverleners die prepza voor ons draaien, op grond van overeenkomsten die de gegevens beschermen, en met Paddle, dat de opwaarderingen verkoopt:"
       ],
       "items": [
         "Google (Firebase Authentication; Google LLC, Verenigde Staten, onder het EU-VS-kader voor gegevensbescherming): inloggen. LinkedIn en GitHub bevestigen alleen wie je bent wanneer je met hen inlogt; we ontvangen verder niets van hen.",
@@ -59,7 +61,7 @@
         "Cloudflare (Turnstile; Cloudflare, Inc., Verenigde Staten, onder het EU-VS-kader voor gegevensbescherming): de controle 'Ik ben geen robot'.",
         "Google Cloud, onze hostingprovider, die de gegevens opslaat (in de EU, België).",
         "Upstash: kortlevende tellers voor gebruikslimieten en live-updates (in de EU, België).",
-        "Paddle verkoopt de opwaarderingen als wederverkoper (merchant of record): het verwerkt betalingen en belastingen als zelfstandige verwerkingsverantwoordelijke, onder zijn eigen privacybeleid."
+        "Paddle (Paddle.com Market Ltd, Verenigd Koninkrijk) hoort daar niet bij: het verkoopt de opwaarderingen zelf, als wederverkoper (merchant of record), en is de verwerkingsverantwoordelijke voor de betalings-, belasting- en factuurgegevens die het verzamelt, onder zijn eigen privacybeleid. Wij geven het het e-mailadres van het lid dat koopt door, en het laat ons weten wat er is gekocht en betaald."
       ]
     },
     {
