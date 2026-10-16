@@ -223,7 +223,8 @@ export interface paths {
     /**
      * Change Preferences
      * @description Changes some of the user's settings, each change logged with the admin source and the
-     *     superadmin's id. Safe to repeat: a setting already as asked logs nothing.
+     *     superadmin's id. Marketing only goes off: consent to it is the user's own. Safe to repeat: a
+     *     setting already as asked logs nothing.
      */
     put: operations["change_preferences_superadmin_emails__user_id__preferences_put"]
     post?: never

@@ -217,4 +217,5 @@ MESSAGES = {
     "Nothing to change: those values are already set.": "אין מה לשנות: הערכים האלה כבר מוגדרים.",
     "The service didn't answer. Try again later.": "השירות לא הגיב. נסו שוב מאוחר יותר.",
     "There is no such tool.": "אין כלי כזה.",
+    "Only the person can turn on product updates and offers. You can only turn them off.": "רק האדם עצמו יכול להפעיל עדכוני מוצר ומבצעים. אתם יכולים רק לכבות אותם.",
 }

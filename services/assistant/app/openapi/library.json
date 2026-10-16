@@ -705,7 +705,7 @@
      "superadmin"
     ],
     "summary": "Change Preferences",
-    "description": "Changes some of the user's settings, each change logged with the admin source and the\nsuperadmin's id. Safe to repeat: a setting already as asked logs nothing.",
+    "description": "Changes some of the user's settings, each change logged with the admin source and the\nsuperadmin's id. Marketing only goes off: consent to it is the user's own. Safe to repeat: a\nsetting already as asked logs nothing.",
     "operationId": "change_preferences_superadmin_emails__user_id__preferences_put",
     "security": [
      {

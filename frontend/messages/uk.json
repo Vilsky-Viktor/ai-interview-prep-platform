@@ -235,6 +235,7 @@
     "noCompanies": "Жодна компанія не запрошувала цю адресу.",
     "companySending": "Листи надсилаються",
     "companyStopped": "Усі листи зупинено",
+    "companyStoppedByThem": "Усі листи людина зупинила сама",
     "remindersStopped": "{count, plural, other {Запрошень зі зупиненими нагадуваннями: #}}",
     "stopEmails": "Зупинити листи",
     "resumeEmails": "Відновити листи",

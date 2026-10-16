@@ -4,6 +4,7 @@ import { expect, test } from "../fixtures"
 import { createCompany, createInterview, inviteCandidate } from "../helpers/api"
 import { visit } from "../helpers/navigation"
 import { shot } from "../helpers/screenshots"
+import { companyUnsubscribePath } from "../helpers/unsubscribe"
 import { ownerEmail, throwawayEmail } from "../helpers/users"
 
 // Every optional email, as Settings → Emails names them.
@@ -31,8 +32,10 @@ function companyRow(page: Page, name: string) {
 }
 
 // Someone asked prepza by email to stop its emails: a superadmin finds the address, turns its
-// account's optional emails off and stops one inviting company's emails, then resumes them.
+// account's optional emails off and stops one inviting company's emails, then resumes them. Only
+// the person turns marketing on, and a stop they made from an email's link stays theirs.
 test("superadmin stops and resumes the emails to an address", async ({
+  browser,
   signInAs,
   signInSuperadmin,
 }) => {
@@ -45,8 +48,16 @@ test("superadmin stops and resumes the emails to an address", async ({
     const owner = await signInAs(ownerEmail())
     const company = await createCompany(owner)
     await inviteCandidate(owner, await createInterview(owner, company.id), address)
-    companies.push(company.name)
+    companies.push(company)
   }
+
+  // The person stopped the second company's emails themselves, from an email's link.
+  const context = await browser.newContext()
+  const guest = await context.newPage()
+  await visit(guest, companyUnsubscribePath(address, companies[1].id, companies[1].name))
+  await guest.getByRole("button", { name: "Confirm" }).click()
+  await expect(guest.getByRole("heading", { name: /^You're unsubscribed/ })).toBeVisible()
+  await context.close()
 
   const superadmin = await signInSuperadmin()
   await visit(superadmin, "/superadmin/emails")
@@ -57,9 +68,10 @@ test("superadmin stops and resumes the emails to an address", async ({
   await expect(superadmin.getByRole("checkbox", { name: /^Reminders/ })).toBeChecked()
   await expect(superadmin.getByRole("checkbox", { name: /^Offers and promotions/ })).not.toBeChecked()
 
-  for (const name of companies) {
-    await expect(companyRow(superadmin, name)).toContainText("Emails are sent")
-  }
+  await expect(companyRow(superadmin, companies[0].name)).toContainText("Emails are sent")
+  const theirs = companyRow(superadmin, companies[1].name)
+  await expect(theirs).toContainText("They stopped all emails themselves")
+  await expect(theirs.getByRole("button")).toHaveCount(0)
 
   await shot(superadmin, "emails-found")
 
@@ -77,11 +89,21 @@ test("superadmin stops and resumes the emails to an address", async ({
     await expect(superadmin.getByRole("checkbox", { name })).not.toBeChecked()
   }
 
-  // One company's emails stopped, the other's still sent; then resumed.
-  const [stopped, other] = companies
+  // Marketing goes back on only by the person's own choice.
+  await superadmin.getByRole("checkbox", { name: /^Offers and promotions/ }).click()
+  await expect(
+    superadmin.getByText("Only the person can turn on product updates and offers.", { exact: false })
+  ).toBeVisible()
+  await shot(superadmin, "emails-marketing-refused")
+  await superadmin.reload()
+  await find(superadmin, address)
+  await expect(superadmin.getByRole("checkbox", { name: /^Offers and promotions/ })).not.toBeChecked()
+
+  // One company's emails stopped (the person's own stop stays as it is); then resumed.
+  const stopped = companies[0].name
   await companyRow(superadmin, stopped).getByRole("button", { name: "Stop emails" }).click()
   await expect(companyRow(superadmin, stopped)).toContainText("All emails stopped")
-  await expect(companyRow(superadmin, other)).toContainText("Emails are sent")
+  await expect(theirs).toContainText("They stopped all emails themselves")
   await shot(superadmin, "emails-stopped")
   await superadmin.setViewportSize({ width: 390, height: 844 })
   await shot(superadmin, "emails-stopped-phone")

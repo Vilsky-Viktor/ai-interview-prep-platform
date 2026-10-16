@@ -217,4 +217,5 @@ MESSAGES = {
     "Nothing to change: those values are already set.": "Tidak ada yang perlu diubah: nilai-nilai tersebut sudah diatur.",
     "The service didn't answer. Try again later.": "Layanan tidak merespons. Coba lagi nanti.",
     "There is no such tool.": "Tidak ada alat seperti itu.",
+    "Only the person can turn on product updates and offers. You can only turn them off.": "Hanya orang itu sendiri yang dapat mengaktifkan pembaruan produk dan penawaran. Anda hanya dapat mematikannya.",
 }

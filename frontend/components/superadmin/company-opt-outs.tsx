@@ -14,7 +14,8 @@ import { LIST_BOX } from "@/constants/lists"
 type Company = CandidateOptOuts["companies"][number]
 
 /** The companies that invited the address, or whose emails it stopped: each one's emails are
- * stopped here, or let through again when the person changed their mind. */
+ * stopped here, or let through again when the person changed their mind. Only a stop made here
+ * can be lifted here; the person's own, from an email's link, stay theirs. */
 export function CompanyOptOuts({
   email,
   initial,
@@ -41,7 +42,9 @@ export function CompanyOptOuts({
 
   function state(company: Company) {
     if (company.stopped) {
-      return t("companyStopped")
+      return t(
+        company.stopped_by_admin ? "companyStopped" : "companyStoppedByThem"
+      )
     }
 
     if (company.stopped_reminders > 0) {
@@ -60,51 +63,45 @@ export function CompanyOptOuts({
         <p className="text-muted-foreground">{t("noCompanies")}</p>
       ) : (
         <div className={LIST_BOX}>
-          {companies.map((company) => {
-            const stopping = company.stopped || company.stopped_reminders > 0
-
-            return (
-              <div
-                key={company.company_id}
-                className="flex items-center gap-6 p-4 sm:p-6"
-              >
-                <div className="min-w-0 flex-1 space-y-1">
-                  <p className="text-lg font-light break-words">
-                    {company.name}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    {state(company)}
-                  </p>
-                </div>
-                {/* Stopping covers everything; letting through again also lifts any
-                    invite's stopped reminders. */}
-                <span className="flex shrink-0 gap-2">
-                  {stopping && (
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="h-8 px-3 text-sm"
-                      disabled={saving === company.company_id}
-                      onClick={() => change(company, false)}
-                    >
-                      {t("resumeEmails")}
-                    </Button>
-                  )}
-                  {!company.stopped && (
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="h-8 px-3 text-sm"
-                      disabled={saving === company.company_id}
-                      onClick={() => change(company, true)}
-                    >
-                      {t("stopEmails")}
-                    </Button>
-                  )}
-                </span>
+          {companies.map((company) => (
+            <div
+              key={company.company_id}
+              className="flex items-center gap-6 p-4 sm:p-6"
+            >
+              <div className="min-w-0 flex-1 space-y-1">
+                <p className="text-lg font-light break-words">{company.name}</p>
+                <p className="text-sm text-muted-foreground">
+                  {state(company)}
+                </p>
               </div>
-            )
-          })}
+              {/* Stopping covers everything; letting through again lifts only a stop
+                  made here. */}
+              <span className="flex shrink-0 gap-2">
+                {company.stopped_by_admin && (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="h-8 px-3 text-sm"
+                    disabled={saving === company.company_id}
+                    onClick={() => change(company, false)}
+                  >
+                    {t("resumeEmails")}
+                  </Button>
+                )}
+                {!company.stopped && (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="h-8 px-3 text-sm"
+                    disabled={saving === company.company_id}
+                    onClick={() => change(company, true)}
+                  >
+                    {t("stopEmails")}
+                  </Button>
+                )}
+              </span>
+            </div>
+          ))}
         </div>
       )}
     </SettingsSection>

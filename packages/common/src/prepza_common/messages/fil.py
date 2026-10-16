@@ -217,4 +217,5 @@ MESSAGES = {
     "Nothing to change: those values are already set.": "Walang babaguhin: nakatakda na ang mga value na iyon.",
     "The service didn't answer. Try again later.": "Hindi sumagot ang serbisyo. Subukang muli mamaya.",
     "There is no such tool.": "Walang ganoong tool.",
+    "Only the person can turn on product updates and offers. You can only turn them off.": "Ang tao lang mismo ang puwedeng mag-on ng mga update tungkol sa produkto at mga alok. Puwede mo lang i-off ang mga ito.",
 }

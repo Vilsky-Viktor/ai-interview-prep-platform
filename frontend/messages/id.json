@@ -235,6 +235,7 @@
     "noCompanies": "Belum ada perusahaan yang mengundang alamat ini.",
     "companySending": "Email dikirim",
     "companyStopped": "Semua email dihentikan",
+    "companyStoppedByThem": "Semua email dihentikan sendiri oleh orang tersebut",
     "remindersStopped": "{count, plural, other {Pengingat dihentikan untuk # undangan}}",
     "stopEmails": "Hentikan email",
     "resumeEmails": "Lanjutkan email",

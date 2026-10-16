@@ -217,4 +217,5 @@ MESSAGES = {
     "Nothing to change: those values are already set.": "تغییری لازم نیست: این مقادیر از قبل تنظیم شده‌اند.",
     "The service didn't answer. Try again later.": "سرویس پاسخ نداد. بعداً دوباره امتحان کنید.",
     "There is no such tool.": "چنین ابزاری وجود ندارد.",
+    "Only the person can turn on product updates and offers. You can only turn them off.": "فقط خودِ فرد می‌تواند تازه‌های محصول و پیشنهادها را روشن کند. شما فقط می‌توانید آن‌ها را خاموش کنید.",
 }

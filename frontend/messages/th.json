@@ -235,6 +235,7 @@
     "noCompanies": "ยังไม่มีบริษัทใดเชิญที่อยู่นี้",
     "companySending": "มีการส่งอีเมล",
     "companyStopped": "หยุดอีเมลทั้งหมดแล้ว",
+    "companyStoppedByThem": "เจ้าตัวหยุดอีเมลทั้งหมดเองแล้ว",
     "remindersStopped": "{count, plural, other {หยุดการเตือนความจำสำหรับคำเชิญ # รายการแล้ว}}",
     "stopEmails": "หยุดอีเมล",
     "resumeEmails": "ส่งอีเมลต่อ",

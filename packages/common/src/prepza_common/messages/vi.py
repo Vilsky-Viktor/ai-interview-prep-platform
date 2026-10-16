@@ -217,4 +217,5 @@ MESSAGES = {
     "Nothing to change: those values are already set.": "Không có gì để thay đổi: các giá trị này đã được đặt sẵn.",
     "The service didn't answer. Try again later.": "Dịch vụ không phản hồi. Vui lòng thử lại sau.",
     "There is no such tool.": "Không có công cụ này.",
+    "Only the person can turn on product updates and offers. You can only turn them off.": "Chỉ chính người đó mới bật được cập nhật sản phẩm và ưu đãi. Bạn chỉ có thể tắt chúng.",
 }

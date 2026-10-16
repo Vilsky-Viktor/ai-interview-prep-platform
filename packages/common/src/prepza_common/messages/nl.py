@@ -217,4 +217,5 @@ MESSAGES = {
     "Nothing to change: those values are already set.": "Niets te wijzigen: die waarden zijn al ingesteld.",
     "The service didn't answer. Try again later.": "De dienst gaf geen antwoord. Probeer het later opnieuw.",
     "There is no such tool.": "Deze tool bestaat niet.",
+    "Only the person can turn on product updates and offers. You can only turn them off.": "Alleen de persoon zelf kan productupdates en aanbiedingen aanzetten. Jij kunt ze alleen uitzetten.",
 }

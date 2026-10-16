@@ -24,6 +24,10 @@ async def companies_for(email: str) -> list[dict]:
                 "stopped": any(
                     row.company_id == company["id"] and row.invite_id is None for row in rows
                 ),
+                "stopped_by_admin": any(
+                    row.company_id == company["id"] and row.invite_id is None and row.by_admin
+                    for row in rows
+                ),
                 "stopped_reminders": sum(
                     row.company_id == company["id"] and row.invite_id is not None for row in rows
                 ),
@@ -35,17 +39,18 @@ async def companies_for(email: str) -> list[dict]:
 
 
 async def set_stopped(email: str, company_id: str, stopped: bool, superadmin_id: str) -> None:
-    """Stops every email from a company that invited the address, or lets them all through
-    again (reminders too). Safe to repeat. Who did it goes to the logs, without the address."""
+    """Stops every email from a company that invited the address, or lifts that stop again;
+    the candidate's own stops, from an email's link, stay. Safe to repeat. Who did it goes to
+    the logs, without the address."""
     address = address_hash(email)
 
     if stopped:
         if company_id not in await companies.invited_company_ids(email):
             raise HTTPException(status.HTTP_404_NOT_FOUND, "Not found")
 
-        await opt_outs.add(address, company_id)
+        await opt_outs.add(address, company_id, by_admin=True)
     else:
-        await opt_outs.remove(address, company_id)
+        await opt_outs.remove_admin_stop(address, company_id)
 
     logger.warning(
         "Company %s's emails to address %s %s by superadmin %s",

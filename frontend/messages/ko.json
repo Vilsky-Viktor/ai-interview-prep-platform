@@ -235,6 +235,7 @@
     "noCompanies": "이 주소를 초대한 회사가 없습니다.",
     "companySending": "이메일이 발송됩니다",
     "companyStopped": "모든 이메일 중지됨",
+    "companyStoppedByThem": "본인이 직접 모든 이메일 중지함",
     "remindersStopped": "{count, plural, other {초대 #건의 리마인더 중지됨}}",
     "stopEmails": "이메일 중지",
     "resumeEmails": "이메일 재개",

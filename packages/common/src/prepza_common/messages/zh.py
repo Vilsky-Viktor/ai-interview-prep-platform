@@ -217,4 +217,5 @@ MESSAGES = {
     "Nothing to change: those values are already set.": "无需更改：这些值已经设置好了。",
     "The service didn't answer. Try again later.": "服务没有响应，请稍后再试。",
     "There is no such tool.": "没有这个工具。",
+    "Only the person can turn on product updates and offers. You can only turn them off.": "只有本人才能开启产品更新和优惠。你只能关闭它们。",
 }

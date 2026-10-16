@@ -217,4 +217,5 @@ MESSAGES = {
     "Nothing to change: those values are already set.": "ไม่มีอะไรต้องเปลี่ยน: ค่าเหล่านั้นตั้งไว้แล้ว",
     "The service didn't answer. Try again later.": "บริการไม่ตอบสนอง โปรดลองอีกครั้งในภายหลัง",
     "There is no such tool.": "ไม่มีเครื่องมือนี้",
+    "Only the person can turn on product updates and offers. You can only turn them off.": "เฉพาะเจ้าตัวเท่านั้นที่เปิดรับอัปเดตผลิตภัณฑ์และข้อเสนอได้ คุณปิดได้อย่างเดียว",
 }

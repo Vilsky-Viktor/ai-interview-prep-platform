@@ -40,6 +40,10 @@ class ConsentBasis(StrEnum):
 # the opt-out); everything else is on until they turn it off.
 MARKETING_SETTINGS = {EmailSetting.UPDATES, EmailSetting.PROMOTIONS}
 DEFAULTS = {setting: setting not in MARKETING_SETTINGS for setting in EmailSetting}
+# Consent to marketing comes only from the user: a superadmin may turn it off for them, never on.
+ADMIN_CANT_CONSENT = (
+    "Only the person can turn on product updates and offers. You can only turn them off."
+)
 
 # Notifications asks for at most this many users' addresses and preferences in one call; Firebase
 # looks up at most FIREBASE_LOOKUP_LIMIT accounts at once.

@@ -45,7 +45,9 @@ def acme(monkeypatch):
     app.dependency_overrides.clear()
 
 
-def test_stopping_twice_stores_one_opt_out_and_letting_through_removes_reminders_too(run, acme):
+def test_stopping_twice_stores_one_stop_and_lifting_it_keeps_the_candidates_own(run, acme):
+    """The superadmin's stop is lifted; the reminders the candidate stopped from an email's link
+    stay stopped, and a stop the candidate made themselves can't be lifted there."""
     email = f"dee-{uuid.uuid4()}@example.com"
     address = address_hash(email)
 
@@ -71,17 +73,23 @@ def test_stopping_twice_stores_one_opt_out_and_letting_through_removes_reminders
             for _ in range(2):
                 through = await client.put("/superadmin/candidate-opt-outs", json=body)
 
-            looked = await client.post(
-                "/superadmin/candidate-opt-outs/lookup", json={"email": email}
-            )
+            # The candidate stops every email themselves; the superadmin can't lift that.
+            await opt_outs.add(address, acme)
+            kept = await client.put("/superadmin/candidate-opt-outs", json=body)
 
-        return stops, stored, through.json(), looked.json(), await count()
+        return stops, stored, through.json(), kept.json(), await count()
 
-    stops, stored, through, looked, left = run(scenario())
+    stops, stored, through, kept, left = run(scenario())
 
-    stopped = {"company_id": acme, "name": "Acme", "stopped": True, "stopped_reminders": 1}
+    stopped = {
+        "company_id": acme,
+        "name": "Acme",
+        "stopped": True,
+        "stopped_by_admin": True,
+        "stopped_reminders": 1,
+    }
     assert stops == [{"companies": [stopped]}, {"companies": [stopped]}]
     assert stored == 2
-    cleared = {**stopped, "stopped": False, "stopped_reminders": 0}
-    assert through == looked == {"companies": [cleared]}
-    assert left == 0
+    assert through == {"companies": [{**stopped, "stopped": False, "stopped_by_admin": False}]}
+    assert kept == {"companies": [{**stopped, "stopped_by_admin": False}]}
+    assert left == 2

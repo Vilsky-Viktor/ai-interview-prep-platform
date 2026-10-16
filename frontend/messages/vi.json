@@ -235,6 +235,7 @@
     "noCompanies": "Chưa có công ty nào mời địa chỉ này.",
     "companySending": "Email vẫn được gửi",
     "companyStopped": "Đã dừng mọi email",
+    "companyStoppedByThem": "Người này đã tự dừng mọi email",
     "remindersStopped": "{count, plural, other {Đã dừng lời nhắc cho # lời mời}}",
     "stopEmails": "Dừng email",
     "resumeEmails": "Gửi lại email",

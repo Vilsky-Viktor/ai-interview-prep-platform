@@ -217,4 +217,5 @@ MESSAGES = {
     "Nothing to change: those values are already set.": "Нечего менять: эти значения уже установлены.",
     "The service didn't answer. Try again later.": "Сервис не ответил. Попробуйте позже.",
     "There is no such tool.": "Такого инструмента нет.",
+    "Only the person can turn on product updates and offers. You can only turn them off.": "Включить новости продукта и предложения может только сам человек. Вы можете их только выключить.",
 }

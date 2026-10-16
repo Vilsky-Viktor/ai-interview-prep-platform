@@ -235,6 +235,7 @@
     "noCompanies": "لم تدعُ أي شركة هذا العنوان.",
     "companySending": "تُرسَل رسائل البريد",
     "companyStopped": "أُوقفت كل رسائل البريد",
+    "companyStoppedByThem": "أوقف الشخص بنفسه كل رسائل البريد",
     "remindersStopped": "{count, plural, other {الدعوات التي أُوقفت تذكيراتها: #}}",
     "stopEmails": "إيقاف رسائل البريد",
     "resumeEmails": "استئناف رسائل البريد",

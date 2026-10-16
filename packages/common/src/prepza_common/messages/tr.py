@@ -217,4 +217,5 @@ MESSAGES = {
     "Nothing to change: those values are already set.": "Değiştirilecek bir şey yok: bu değerler zaten ayarlı.",
     "The service didn't answer. Try again later.": "Hizmet yanıt vermedi. Daha sonra tekrar deneyin.",
     "There is no such tool.": "Böyle bir araç yok.",
+    "Only the person can turn on product updates and offers. You can only turn them off.": "Ürün güncellemelerini ve teklifleri yalnızca kişinin kendisi açabilir. Siz yalnızca kapatabilirsiniz.",
 }

@@ -217,4 +217,5 @@ MESSAGES = {
     "Nothing to change: those values are already set.": "لا يوجد ما يلزم تغييره: هذه القيم مضبوطة بالفعل.",
     "The service didn't answer. Try again later.": "لم تستجب الخدمة. حاول مرة أخرى لاحقًا.",
     "There is no such tool.": "لا توجد أداة بهذا الاسم.",
+    "Only the person can turn on product updates and offers. You can only turn them off.": "لا يمكن تشغيل تحديثات المنتج والعروض إلا من قِبل الشخص نفسه. يمكنك إيقافها فقط.",
 }

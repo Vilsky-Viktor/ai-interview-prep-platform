@@ -5,13 +5,15 @@ from app.models.opt_outs import CandidateOptOut
 from app.storage.db import Session
 
 
-async def add(address: str, company_id: str, invite_id: str | None = None) -> None:
+async def add(
+    address: str, company_id: str, invite_id: str | None = None, by_admin: bool = False
+) -> None:
     """Stops the company's emails to the address (its hash), or with `invite_id` only that
-    invite's reminders. Safe to repeat."""
+    invite's reminders. Safe to repeat; a stop already there keeps who made it."""
     async with Session() as session:
         await session.execute(
             insert(CandidateOptOut)
-            .values(address=address, company_id=company_id, invite_id=invite_id)
+            .values(address=address, company_id=company_id, invite_id=invite_id, by_admin=by_admin)
             .on_conflict_do_nothing()
         )
         await session.commit()
@@ -41,13 +43,16 @@ async def of_address(address: str) -> list[CandidateOptOut]:
         return list(await session.scalars(query))
 
 
-async def remove(address: str, company_id: str) -> None:
-    """The address (its hash) hears from the company again: its opt-out from all the company's
-    emails and from any invite's reminders go. Safe to repeat."""
+async def remove_admin_stop(address: str, company_id: str) -> None:
+    """Lifts the stop a superadmin made on the company's emails to the address (its hash). The
+    candidate's own stops, from an email's link, stay: only they decided them. Safe to
+    repeat."""
     async with Session() as session:
         await session.execute(
             delete(CandidateOptOut).where(
-                CandidateOptOut.address == address, CandidateOptOut.company_id == company_id
+                CandidateOptOut.address == address,
+                CandidateOptOut.company_id == company_id,
+                CandidateOptOut.by_admin,
             )
         )
         await session.commit()

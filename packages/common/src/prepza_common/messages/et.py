@@ -229,4 +229,5 @@ MESSAGES = {
     "Nothing to change: those values are already set.": "Pole midagi muuta: need väärtused on juba määratud.",
     "The service didn't answer. Try again later.": "Teenus ei vastanud. Proovi hiljem uuesti.",
     "There is no such tool.": "Sellist tööriista pole.",
+    "Only the person can turn on product updates and offers. You can only turn them off.": "Tooteuudised ja pakkumised saab sisse lülitada ainult inimene ise. Sina saad need ainult välja lülitada.",
 }

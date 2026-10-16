@@ -6,7 +6,7 @@ from firebase_admin import auth as firebase_auth
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
-from app.constants.emails import DEFAULTS
+from app.constants.emails import ADMIN_CANT_CONSENT, DEFAULTS
 from app.main import app
 from app.storage import emails
 
@@ -96,6 +96,23 @@ def test_a_change_to_an_account_that_is_gone_is_not_found(client, signed_in):
 
     assert response.status_code == 404
     assert signed_in.changes == []
+
+
+@pytest.mark.parametrize("changes", [{"updates": True}, {"promotions": True, "reminders": False}])
+def test_a_superadmin_cannot_turn_marketing_on_for_someone(client, signed_in, changes):
+    """Consent to marketing is the user's own; turning the digest or reminders back on isn't
+    marketing, so it stays allowed."""
+    response = client.put("/superadmin/emails/ann/preferences", json={"changes": changes})
+
+    assert response.status_code == 422
+    assert response.json()["detail"] == ADMIN_CANT_CONSENT
+    assert signed_in.changes == []
+    assert (
+        client.put(
+            "/superadmin/emails/ann/preferences", json={"changes": {"reminders": True}}
+        ).status_code
+        == 200
+    )
 
 
 @pytest.mark.parametrize("changes", [{}, {"newsletter": False}])

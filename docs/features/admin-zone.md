@@ -169,10 +169,10 @@ POST /notifications/superadmin/legal-notices/{terms|privacy|dpa}
 Stops the emails prepza sends to an address, for someone who asked by email rather than with a link (see [Unsubscribing](notifications.md#unsubscribing)).
 
 - **Find:** an email address, whatever its case. It's sent in the request body, never in a page or API address, which logs record.
-- **prepza account:** whether an account signs in with that address (library asks Firebase). If so, its email settings, as Settings → Emails shows them, each changed at once, and "Turn off all optional emails". Service emails can't be turned off.
-- **Emails from companies:** the companies that invited the address (companies' invites) or whose emails it stopped, by name, each "Emails are sent", "All emails stopped" or "Reminders stopped for N invites":
+- **prepza account:** whether an account signs in with that address (library asks Firebase). If so, its email settings, as Settings → Emails shows them, each changed at once, and "Turn off all optional emails". Service emails can't be turned off. Product updates and offers can only be turned off here: consent to marketing is the user's own, so turning one on is refused ("Only the person can turn on product updates and offers.").
+- **Emails from companies:** the companies that invited the address (companies' invites) or whose emails it stopped, by name, each "Emails are sent", "All emails stopped" (by a superadmin), "They stopped all emails themselves" (from an email's link) or "Reminders stopped for N invites":
   - "Stop emails" stops every email from that company to the address, only for a company that invited it.
-  - "Resume emails" lets them through again, reminders included (the person changed their mind).
+  - "Resume emails" lets them through again (the person changed their mind), only after a superadmin's stop. The person's own stops, of all the company's emails or of an invite's reminders, stay: only they made them, and the row has no button for them.
 
 Both are safe to repeat. A company that's gone isn't listed.
 

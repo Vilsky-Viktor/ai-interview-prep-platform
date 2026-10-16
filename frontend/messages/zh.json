@@ -235,6 +235,7 @@
     "noCompanies": "没有公司邀请过这个地址。",
     "companySending": "邮件正常发送",
     "companyStopped": "已停止所有邮件",
+    "companyStoppedByThem": "本人已停止所有邮件",
     "remindersStopped": "{count, plural, other {已停止 # 个邀请的提醒}}",
     "stopEmails": "停止邮件",
     "resumeEmails": "恢复邮件",

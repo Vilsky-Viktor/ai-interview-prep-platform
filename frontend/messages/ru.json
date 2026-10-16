@@ -235,6 +235,7 @@
     "noCompanies": "Ни одна компания не приглашала этот адрес.",
     "companySending": "Письма отправляются",
     "companyStopped": "Все письма остановлены",
+    "companyStoppedByThem": "Все письма человек остановил сам",
     "remindersStopped": "{count, plural, other {Приглашений с остановленными напоминаниями: #}}",
     "stopEmails": "Остановить письма",
     "resumeEmails": "Возобновить письма",

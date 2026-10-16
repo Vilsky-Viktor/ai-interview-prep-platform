@@ -217,4 +217,5 @@ MESSAGES = {
     "Nothing to change: those values are already set.": "Nada a alterar: esses valores já estão definidos.",
     "The service didn't answer. Try again later.": "O serviço não respondeu. Tente novamente mais tarde.",
     "There is no such tool.": "Essa ferramenta não existe.",
+    "Only the person can turn on product updates and offers. You can only turn them off.": "Só a própria pessoa pode ativar as novidades do produto e as ofertas. Você só pode desativá-las.",
 }

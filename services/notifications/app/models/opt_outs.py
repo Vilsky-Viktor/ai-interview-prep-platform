@@ -1,13 +1,14 @@
 from datetime import UTC, datetime
 
-from sqlalchemy import DateTime, Index, String
+from sqlalchemy import Boolean, DateTime, Index, String, false
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.models.base import Base
 
 
 class CandidateOptOut(Base):
-    """A candidate who asked a company's emails to stop, from a link in one: every email from the
+    """A candidate who asked a company's emails to stop, from a link in one (or a superadmin, for
+    someone who asked prepza): every email from the
     company to this address, or (with `invite_id`) only that invite's reminders. The address is
     kept as its SHA-256 (helpers/unsubscribe.py address_hash), never in the clear. Kept when the
     company erases the candidate, so their wish outlives it; gone with the company."""
@@ -29,6 +30,8 @@ class CandidateOptOut(Base):
     address: Mapped[str] = mapped_column(String(64))
     company_id: Mapped[str] = mapped_column(String(128), index=True)
     invite_id: Mapped[str | None] = mapped_column(String(64))
+    # Made by a superadmin for someone who asked prepza; only those are lifted again there.
+    by_admin: Mapped[bool] = mapped_column(Boolean, default=False, server_default=false())
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )

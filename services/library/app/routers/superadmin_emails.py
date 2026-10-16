@@ -4,7 +4,7 @@ from fastapi import APIRouter, HTTPException, status
 from prepza_common.superadmin import SuperadminUser
 from prepza_common.user import UserEmailIn
 
-from app.constants.emails import ConsentSource
+from app.constants.emails import ADMIN_CANT_CONSENT, MARKETING_SETTINGS, ConsentSource
 from app.schemas.emails import (
     AdminEmailChangesIn,
     EmailAccountOut,
@@ -43,7 +43,11 @@ async def change_preferences(
     user_id: str, body: AdminEmailChangesIn, superadmin: SuperadminUser
 ) -> EmailPreferencesOut:
     """Changes some of the user's settings, each change logged with the admin source and the
-    superadmin's id. Safe to repeat: a setting already as asked logs nothing."""
+    superadmin's id. Marketing only goes off: consent to it is the user's own. Safe to repeat: a
+    setting already as asked logs nothing."""
+    if any(on and setting in MARKETING_SETTINGS for setting, on in body.changes.items()):
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, ADMIN_CANT_CONSENT)
+
     if not await account_exists(user_id):
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Not found")
 

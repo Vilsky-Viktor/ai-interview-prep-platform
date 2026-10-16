@@ -235,6 +235,7 @@
     "noCompanies": "このアドレスを招待した会社はありません。",
     "companySending": "メールは送信されます",
     "companyStopped": "すべてのメールを停止中",
+    "companyStoppedByThem": "本人がすべてのメールを停止中",
     "remindersStopped": "{count, plural, other {# 件の招待のリマインダーを停止中}}",
     "stopEmails": "メールを停止",
     "resumeEmails": "メールを再開",

@@ -235,6 +235,7 @@
     "noCompanies": "Ninguna empresa ha invitado a esta dirección.",
     "companySending": "Los correos se envían",
     "companyStopped": "Todos los correos detenidos",
+    "companyStoppedByThem": "Todos los correos detenidos por la propia persona",
     "remindersStopped": "{count, plural, one {Recordatorios detenidos para # invitación} other {Recordatorios detenidos para # invitaciones}}",
     "stopEmails": "Detener correos",
     "resumeEmails": "Reanudar correos",

@@ -235,6 +235,7 @@
     "noCompanies": "Bu adresi davet eden bir şirket yok.",
     "companySending": "E-postalar gönderiliyor",
     "companyStopped": "Tüm e-postalar durduruldu",
+    "companyStoppedByThem": "Tüm e-postaları kişi kendisi durdurdu",
     "remindersStopped": "{count, plural, other {# davet için hatırlatmalar durduruldu}}",
     "stopEmails": "E-postaları durdur",
     "resumeEmails": "E-postaları sürdür",

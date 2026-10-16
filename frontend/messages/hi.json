@@ -235,6 +235,7 @@
     "noCompanies": "किसी कंपनी ने इस पते को इनवाइट नहीं किया है।",
     "companySending": "ईमेल भेजे जाते हैं",
     "companyStopped": "सभी ईमेल रोके गए",
+    "companyStoppedByThem": "सभी ईमेल व्यक्ति ने खुद रोके",
     "remindersStopped": "{count, plural, one {# इनवाइट के रिमाइंडर रोके गए} other {# इनवाइट के रिमाइंडर रोके गए}}",
     "stopEmails": "ईमेल रोकें",
     "resumeEmails": "ईमेल फिर शुरू करें",

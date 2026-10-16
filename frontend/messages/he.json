@@ -235,6 +235,7 @@
     "noCompanies": "אף חברה לא הזמינה את הכתובת הזו.",
     "companySending": "האימיילים נשלחים",
     "companyStopped": "כל האימיילים הופסקו",
+    "companyStoppedByThem": "כל האימיילים הופסקו על ידי האדם עצמו",
     "remindersStopped": "{count, plural, one {התזכורות הופסקו להזמנה אחת} other {התזכורות הופסקו ל-# הזמנות}}",
     "stopEmails": "עצירת אימיילים",
     "resumeEmails": "חידוש אימיילים",

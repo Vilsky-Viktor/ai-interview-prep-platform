@@ -235,6 +235,7 @@
     "noCompanies": "No company has invited this address.",
     "companySending": "Emails are sent",
     "companyStopped": "All emails stopped",
+    "companyStoppedByThem": "They stopped all emails themselves",
     "remindersStopped": "{count, plural, one {Reminders stopped for # invite} other {Reminders stopped for # invites}}",
     "stopEmails": "Stop emails",
     "resumeEmails": "Resume emails",

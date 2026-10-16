@@ -217,4 +217,5 @@ MESSAGES = {
     "Nothing to change: those values are already set.": "बदलने के लिए कुछ नहीं है: ये मान पहले से सेट हैं।",
     "The service didn't answer. Try again later.": "सेवा ने जवाब नहीं दिया। कृपया बाद में फिर से कोशिश करें।",
     "There is no such tool.": "ऐसा कोई टूल नहीं है।",
+    "Only the person can turn on product updates and offers. You can only turn them off.": "प्रोडक्ट अपडेट और ऑफ़र केवल वही व्यक्ति खुद चालू कर सकता है। आप उन्हें केवल बंद कर सकते हैं।",
 }

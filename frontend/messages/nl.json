@@ -235,6 +235,7 @@
     "noCompanies": "Geen bedrijf heeft dit adres uitgenodigd.",
     "companySending": "E-mails worden verstuurd",
     "companyStopped": "Alle e-mails gestopt",
+    "companyStoppedByThem": "Alle e-mails door de persoon zelf gestopt",
     "remindersStopped": "{count, plural, one {Herinneringen gestopt voor # uitnodiging} other {Herinneringen gestopt voor # uitnodigingen}}",
     "stopEmails": "E-mails stoppen",
     "resumeEmails": "E-mails hervatten",

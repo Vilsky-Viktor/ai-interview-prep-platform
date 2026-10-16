@@ -17,22 +17,23 @@ URL = "/superadmin/candidate-opt-outs"
 @pytest.fixture
 def signed_in(monkeypatch):
     """Acme and Bolt invited Ann; Ann stopped Acme's emails and one of Bolt's invites' reminders,
-    and Cold's emails before Cold erased her. Signs in as the superadmin Sam, or as `email`."""
+    and a superadmin stopped Cold's emails before Cold erased her. Signs in as the superadmin
+    Sam, or as `email`."""
     monkeypatch.setenv("SUPERADMIN_EMAILS", "sam@prepza.dev")
     rows = [
-        SimpleNamespace(company_id="acme", invite_id=None),
-        SimpleNamespace(company_id="bolt", invite_id="i-1"),
-        SimpleNamespace(company_id="cold", invite_id=None),
+        SimpleNamespace(company_id="acme", invite_id=None, by_admin=False),
+        SimpleNamespace(company_id="bolt", invite_id="i-1", by_admin=False),
+        SimpleNamespace(company_id="cold", invite_id=None, by_admin=True),
     ]
     calls = SimpleNamespace(added=[], removed=[], invited=[], names=[])
 
     async def of_address(address):
         return rows if address == ANN else []
 
-    async def add(address, company_id, invite_id=None):
-        calls.added.append((address, company_id, invite_id))
+    async def add(address, company_id, invite_id=None, by_admin=False):
+        calls.added.append((address, company_id, invite_id, by_admin))
 
-    async def remove(address, company_id):
+    async def remove_admin_stop(address, company_id):
         calls.removed.append((address, company_id))
 
     async def invited_company_ids(email):
@@ -48,7 +49,7 @@ def signed_in(monkeypatch):
 
     monkeypatch.setattr(opt_outs, "of_address", of_address)
     monkeypatch.setattr(opt_outs, "add", add)
-    monkeypatch.setattr(opt_outs, "remove", remove)
+    monkeypatch.setattr(opt_outs, "remove_admin_stop", remove_admin_stop)
     monkeypatch.setattr(companies, "invited_company_ids", invited_company_ids)
     monkeypatch.setattr(companies, "members", members)
 
@@ -72,9 +73,27 @@ def test_the_lookup_lists_invited_and_opted_out_companies_by_name_whatever_the_c
     assert response.status_code == 200
     assert response.json() == {
         "companies": [
-            {"company_id": "acme", "name": "acme", "stopped": True, "stopped_reminders": 0},
-            {"company_id": "bolt", "name": "Bolt", "stopped": False, "stopped_reminders": 1},
-            {"company_id": "cold", "name": "Cold", "stopped": True, "stopped_reminders": 0},
+            {
+                "company_id": "acme",
+                "name": "acme",
+                "stopped": True,
+                "stopped_by_admin": False,
+                "stopped_reminders": 0,
+            },
+            {
+                "company_id": "bolt",
+                "name": "Bolt",
+                "stopped": False,
+                "stopped_by_admin": False,
+                "stopped_reminders": 1,
+            },
+            {
+                "company_id": "cold",
+                "name": "Cold",
+                "stopped": True,
+                "stopped_by_admin": True,
+                "stopped_reminders": 0,
+            },
         ]
     }
     # Every name in one call to companies.
@@ -88,7 +107,7 @@ def test_a_superadmin_stops_an_inviting_companys_emails_and_it_is_logged(client,
         response = client.put(URL, json=body)
 
     assert response.status_code == 200
-    assert signed_in.added == [(ANN, "bolt", None)]
+    assert signed_in.added == [(ANN, "bolt", None, True)]
     assert "by superadmin sam" in caplog.text
     assert "ann@example.com" not in caplog.text
 
@@ -100,7 +119,7 @@ def test_only_a_company_that_invited_the_address_can_be_stopped(client, signed_i
     assert signed_in.added == []
 
 
-def test_a_superadmin_lets_a_companys_emails_through_again(client, signed_in):
+def test_a_superadmin_lifts_a_superadmins_stop(client, signed_in):
     body = {"email": "ANN@example.com", "company_id": "cold", "stopped": False}
 
     assert client.put(URL, json=body).status_code == 200

@@ -235,6 +235,7 @@
     "noCompanies": "Nenhuma empresa convidou este endereço.",
     "companySending": "Os e-mails são enviados",
     "companyStopped": "Todos os e-mails interrompidos",
+    "companyStoppedByThem": "Todos os e-mails interrompidos pela própria pessoa",
     "remindersStopped": "{count, plural, one {Lembretes interrompidos para # convite} other {Lembretes interrompidos para # convites}}",
     "stopEmails": "Interromper e-mails",
     "resumeEmails": "Retomar e-mails",

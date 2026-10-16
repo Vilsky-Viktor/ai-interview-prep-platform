@@ -13,11 +13,13 @@ class UnsubscribeOut(BaseModel):
 
 class CompanyOptOutOut(BaseModel):
     """A company that invited an address, or whose emails it stopped: whether every email from
-    the company to it is stopped, and for how many invites only the reminders are."""
+    the company to it is stopped, whether a superadmin stopped them (only that can be lifted
+    there; the candidate's own stops stay), and for how many invites only the reminders are."""
 
     company_id: str
     name: str
     stopped: bool
+    stopped_by_admin: bool
     stopped_reminders: int
 
 
