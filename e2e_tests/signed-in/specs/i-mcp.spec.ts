@@ -1,5 +1,7 @@
 import type { Locator, Page } from "@playwright/test"
+import { createHash, randomBytes } from "node:crypto"
 
+import { FRONTEND_URL } from "../constants"
 import { expect, test } from "../fixtures"
 import { createCompany } from "../helpers/api"
 import { addAiConnections, deleteAiConnections } from "../helpers/db-integrations"
@@ -147,4 +149,73 @@ test("the consent page asks before an AI app may use the account", async ({ sign
   await visit(user, "/connect?request=e2e-expiring")
   await user.getByRole("button", { name: "Allow" }).click()
   await expect(user.getByText("This link has expired or was already used.", { exact: false })).toBeVisible()
+})
+
+// Allow completes the connection for real: an app on the user's computer registers and asks
+// prepza through /authorize, as Claude Code does; Allow sends the browser back to the app with a
+// code and the state it sent, and the app exchanges the code for its tokens. The app's own page
+// isn't there, so the browser's return to it is answered by the test.
+test("Allow on the consent page connects the AI app", async ({ signInAs }) => {
+  const owner = await signInAs(throwawayEmail("mcp-allow"))
+  const uid = await uidOf(owner)
+  const company = await createCompany(owner)
+  const callback = "http://127.0.0.1:53682/callback"
+  const name = "E2E Local App"
+  const registered = await owner.request.post(`${FRONTEND_URL}/register`, {
+    data: {
+      client_name: name,
+      redirect_uris: [callback],
+      token_endpoint_auth_method: "none",
+      grant_types: ["authorization_code", "refresh_token"],
+      response_types: ["code"],
+    },
+  })
+  expect(registered.status()).toBe(201)
+  const clientId: string = (await registered.json()).client_id
+  const verifier = randomBytes(32).toString("base64url")
+  const challenge = createHash("sha256").update(verifier).digest("base64url")
+  await owner.route(`${callback}*`, (route) => route.fulfill({ body: "Back in the app" }))
+
+  try {
+    const query = new URLSearchParams({
+      response_type: "code",
+      client_id: clientId,
+      redirect_uri: callback,
+      code_challenge: challenge,
+      code_challenge_method: "S256",
+      state: "e2e-state",
+    })
+    await visit(owner, `/authorize?${query}`)
+    await expect(owner).toHaveURL(/\/connect\?request=/)
+    await expect(owner.getByRole("heading", { name: `Connect ${name} to prepza` })).toBeVisible()
+    await expect(owner.getByText("prepza doesn't know this app.", { exact: false })).toHaveCount(0)
+    await shot(owner, "consent-local-app")
+    await owner.getByRole("button", { name: "Allow" }).click()
+    await expect(owner).toHaveURL(/^http:\/\/127\.0\.0\.1:53682\/callback\?code=[^&]+&state=e2e-state$/)
+    const code = new URL(owner.url()).searchParams.get("code") ?? ""
+
+    // The app's side: the code buys its tokens, once.
+    const exchange = () =>
+      owner.request.post(`${FRONTEND_URL}/token`, {
+        form: {
+          grant_type: "authorization_code",
+          code,
+          redirect_uri: callback,
+          client_id: clientId,
+          code_verifier: verifier,
+        },
+      })
+    const tokens = await exchange()
+    expect(tokens.status()).toBe(200)
+    expect((await tokens.json()).access_token).toMatch(/^pzm_/)
+    expect((await exchange()).status()).toBe(400)
+
+    // The user sees the app connected.
+    await visit(owner, `/companies/${company.id}/integrations/ai`)
+    const app = owner.getByRole("main").getByRole("listitem").filter({ hasText: name })
+    await expect(app.getByRole("button", { name: "Disconnect" })).toBeVisible()
+    await shot(owner, "apps-after-allow")
+  } finally {
+    await deleteAiConnections(uid, [clientId])
+  }
 })

@@ -1,3 +1,4 @@
+import { randomUUID } from "node:crypto";
 import pg from "pg";
 
 import { POSTGRES_HOST } from "../constants";
@@ -111,4 +112,22 @@ export async function sealWebhookSecretsElsewhere(companyId: string) {
   await withDatabase("api", (client) =>
     client.query("UPDATE webhooks SET secret = 'sealed-elsewhere' WHERE company_id = $1", [companyId]),
   );
+}
+
+/** A paid top-up in a throwaway company's history, written as billing's Paddle webhook writes it
+ * (storage/purchases.py grant): its entry, keyed "{transaction}:{product}", and the balance. Not
+ * its purchase row, which outlives the company. Locally Paddle's prices aren't set, so a signed
+ * webhook would grant nothing. Deleting the company deletes both. */
+export async function addTopUp(companyId: string, credits: number, totalCents: number) {
+  await withDatabase("billing", async (client) => {
+    await client.query(
+      `INSERT INTO entries (id, key, owner_type, owner_id, amount, reason, total, currency)
+       VALUES (gen_random_uuid(), $1, 'company', $2, $3, 'topup', $4, 'USD')`,
+      [`txn_e2e${randomUUID().replaceAll("-", "")}:topup_50`, companyId, credits, String(totalCents)],
+    );
+    await client.query(
+      "UPDATE wallets SET balance = balance + $2 WHERE owner_type = 'company' AND owner_id = $1",
+      [companyId, credits],
+    );
+  });
 }

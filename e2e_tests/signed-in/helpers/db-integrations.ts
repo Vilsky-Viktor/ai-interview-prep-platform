@@ -192,14 +192,16 @@ export async function addAiConnections(userId: string, names: string[]) {
   });
 }
 
-/** Deletes a throwaway user's AI apps and connections that addAiConnections made. */
-export async function deleteAiConnections(userId: string) {
+/** Deletes a throwaway user's AI apps and connections that addAiConnections made, and the apps
+ * a test registered itself (`clientIds`). */
+export async function deleteAiConnections(userId: string, clientIds: string[] = []) {
   await withDatabase("assistant", async (client) => {
     await client.query("DELETE FROM mcp_grants WHERE user_id = $1", [userId]);
     // The tests' apps left without a connection (disconnected on the page or just now).
     await client.query(
-      `DELETE FROM oauth_clients WHERE client_id LIKE 'e2e-%'
+      `DELETE FROM oauth_clients WHERE (client_id LIKE 'e2e-%' OR client_id = ANY($1))
          AND client_id NOT IN (SELECT client_id FROM mcp_grants)`,
+      [clientIds],
     );
   });
 }

@@ -2,6 +2,7 @@ import type { Page } from "@playwright/test";
 
 import { expect, test } from "../fixtures";
 import {
+  api,
   createCompany,
   createInterview,
   inviteCandidate,
@@ -227,4 +228,28 @@ test("owner adds a viewer, who sees the company read-only", async ({
   await expect(page.getByRole("button", { name: "Add member" })).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Role" })).toHaveCount(0);
   await shot(page, "viewer-team");
+});
+
+// A join link opened by someone signed in with another email: a warning to sign in with the
+// invited one, and no Join button.
+test("a join link warns a user signed in with another email", async ({
+  signInAs,
+}) => {
+  const owner = await signInAs(ownerEmail());
+  const company = await createCompany(owner);
+  const member = await api<{ token: string }>(
+    owner,
+    "POST",
+    `/companies/members?company_id=${company.id}`,
+    { email: throwawayEmail("invited"), role: "viewer" },
+  );
+
+  const other = await signInAs(throwawayEmail("other"));
+  await visit(other, `/join/${member.token}`);
+  await expect(other.getByRole("heading", { name: company.name })).toBeVisible();
+  await expect(other.getByRole("status")).toContainText(
+    "The email does not match. Sign in with the invitation email to join.",
+  );
+  await expect(other.getByRole("button", { name: "Join company" })).toHaveCount(0);
+  await shot(other, "join-other-email");
 });
