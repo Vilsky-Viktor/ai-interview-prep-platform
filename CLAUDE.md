@@ -56,12 +56,19 @@
    `e2e_tests/signed-in` signed in). A bug fix adds a test that fails without it.
    Run the affected suites before calling the work done.
 
-   Tests check what the product does, never its wording: no assertions on, and no locators
-   by, placeholders, headings' copy, button labels, tooltips or messages, which change freely.
-   Find elements by role and position, or by a `data-testid` when nothing else tells them
-   apart, and assert behaviour and data (what was found, saved, refused or changed, and the
-   data the test made). Error messages are checked: what a refusal or failure tells the user is
-   behaviour. An accessible name is checked only where it is the feature itself.
+   Tests check what the product does, never fixed wording. The line: does the text depend on
+   what happened, or would it read the same whatever happened?
+   - Tested: data (anything from input, the API or the database: names, emails, notes,
+     amounts, counts, prices, grades, dates and the formats the code gives them); error and
+     refusal messages, word for word, as their text is the reason the system gives; whether a
+     state-dependent element appears (a notification, toast, badge or notice), its kind
+     (error or success) and the data it carries, found by role, a `data-testid` or a state
+     attribute, never by its fixed wording; and an accessible name where it is the feature
+     itself (an icon-only button's label).
+   - Not tested: fixed text that reads the same whatever happens: headings, labels,
+     placeholders, descriptions, help texts, tooltips, empty-state sentences, and the wording
+     of success toasts and notices. No locator depends on it either: find elements by role and
+     position, or by a `data-testid` when nothing else tells them apart.
 
 9. **READMEs stay current.** When a change affects anything a README describes
    (features, behaviour, setup, settings, commands, tests, deployment), update that

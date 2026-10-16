@@ -28,15 +28,24 @@ Run a unit test's whole suite, not one file: fakes in other files often depend o
 
 ## What a test checks
 
-Behaviour and data, never wording (CLAUDE.md rule 8). No assertions on, and no locators by,
-placeholders, headings' copy, button labels, tooltips or messages: copy changes freely and such a
-check proves nothing. Find elements by role and position (`getByRole("main").getByRole("textbox")`,
-a dialog's `spinbutton`, `.first()`), or by a `data-testid` added to the component when nothing
-else tells them apart. Assert what was found, saved, refused or changed, and the data the test
-made (its company's name, an email, a note). Error messages are checked by their text: what a
-refusal or failure tells the user ("That would take the available balance below zero.") is
-behaviour. An accessible name is checked only where it is the feature itself (an icon button's
-screen-reader label).
+The line (CLAUDE.md rule 8): does the text depend on what happened, or would it read the same
+whatever happened?
+
+- **Tested:** data (anything from input, the API or the database: names, emails, notes,
+  amounts, counts, prices, grades, dates and their per-language formats); error and refusal
+  messages, word for word ("That would take the available balance below zero."); whether a
+  state-dependent element appears (a notification, toast, badge or notice), its kind (error or
+  success) and the data it carries; an accessible name where it is the feature (an icon-only
+  button's label).
+- **Not tested:** fixed text that reads the same whatever happens: headings, labels,
+  placeholders, descriptions, help texts, tooltips, empty-state sentences, the wording of
+  success toasts and notices.
+
+Find elements by role and position (`getByRole("main").getByRole("textbox")`, a dialog's
+`spinbutton`, `.first()`), by structure (`a[href$="/billing"]`, a state attribute such as
+`data-copied`), or by a `data-testid` added to the component when nothing else tells them
+apart, never by fixed wording. A toast: `[data-sonner-toast][data-type="error"]` for its kind,
+its text only when it's an error.
 
 ## The local dev server
 
