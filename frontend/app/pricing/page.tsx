@@ -33,6 +33,7 @@ function PriceRow({ what, price }: { what: string; price: string }) {
 
 export default async function PricingPage() {
   const t = await getTranslations("pricing")
+  const billing = await getTranslations("billing")
   const locale = await getLocale()
   // Billing not answering (starting up, or failing): the page says so instead of its prices,
   // rather than showing nothing or the error page.
@@ -103,9 +104,14 @@ export default async function PricingPage() {
             />
           ))}
         </ul>
-        <div className="mx-auto flex w-fit items-center gap-3 rounded-2xl bg-muted px-5 py-4 text-base text-muted-foreground">
-          <InfoIcon aria-hidden className="size-6 shrink-0 text-primary" />
-          <p>{t("credits")}</p>
+        <div className="space-y-4">
+          <div className="mx-auto flex w-fit items-center gap-3 rounded-2xl bg-muted px-5 py-4 text-base text-muted-foreground">
+            <InfoIcon aria-hidden className="size-6 shrink-0 text-primary" />
+            <p>{t("credits")}</p>
+          </div>
+          <p className="text-center text-sm text-muted-foreground">
+            {billing("taxes")}
+          </p>
         </div>
       </section>
 

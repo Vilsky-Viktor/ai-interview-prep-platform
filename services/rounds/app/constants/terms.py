@@ -16,6 +16,7 @@ TERMS_SECTIONS = [
         "heading": "The service and its limits",
         "items": [
             "Questions and answers are written by AI and can be wrong. We check and improve them continuously, and a company reviews its interviews before inviting candidates, but a result is one input for a hiring decision, not a qualification.",
+            "The assistant and the help chat also answer with AI and can be wrong: check what matters before relying on it. The assistant changes something only after you confirm it. AI apps you connect, such as Claude or ChatGPT, are run by their own providers, who are responsible for what they say and do.",
         ],
     },
     {
@@ -61,7 +62,7 @@ TERMS_SECTIONS = [
         "heading": "Credits and payments",
         "items": [
             "prepza is paid with credits: 1 US dollar buys 100 credits, and larger top-ups buy more credits per dollar. What each thing costs in credits is on the pricing page and is shown before you use it.",
-            "Top-ups are sold by Paddle, who acts as the reseller (merchant of record): Paddle takes the payment, charges any VAT or sales tax, and issues the receipt or invoice.",
+            "Top-ups are sold by Paddle, who acts as the reseller (merchant of record): Paddle takes the payment, charges any VAT or sales tax, and issues the receipt or invoice. Businesses and consumers can both buy them. Where prices normally include VAT, as in the EU and the UK, the prices on the pricing page include it; elsewhere, such as in the United States, sales tax is added at checkout. The checkout shows the total before you pay.",
             "Credits belong to a company and are used for its candidates; its owner and admins can top them up. Credits can't be transferred between accounts or companies, sold, or paid out as money.",
             "Automatic top-up is optional and off unless you turn it on. When you turn it on, you authorise Paddle to save your card and to charge it the top-up amount you chose each time the available balance falls under the level you chose, without asking again. Paddle emails a receipt for every charge. You can change or turn it off at any time on the top-up page, which also cancels the saved card's authorisation; charges already made follow the refund rules below.",
             "Credits don't expire. Deleting a company deletes its credits, and they aren't refunded: ask for any refund you're due before deleting it.",
@@ -89,6 +90,8 @@ TERMS_SECTIONS = [
         "heading": "Law",
         "paragraphs": [
             f"Estonian law applies, without taking away the mandatory protections of the country you live in. Questions about these terms: {COMPANY['email']}.",
+            "A dispute with a business goes to Harju County Court (Harju Maakohus) in Tallinn. As a consumer, you can also go to the courts where you live.",
+            f"If you're a consumer, write to us first at {COMPANY['email']}: we answer within 15 days. If we can't agree and you live in Estonia, you can take the dispute to the Consumer Disputes Committee (Tarbijavaidluste komisjon) of the Consumer Protection and Technical Regulatory Authority, ttja.ee, free of charge.",
         ],
     },
 ]

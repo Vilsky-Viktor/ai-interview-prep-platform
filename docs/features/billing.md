@@ -98,9 +98,9 @@ Deleting a company deletes its credits: billing's internal `DELETE /internal/com
 
 ## Setting up Paddle
 
-`billing` sells through [Paddle](https://www.paddle.com), which is the merchant of record: it handles VAT and sales tax.
+`billing` sells through [Paddle](https://www.paddle.com), which is the merchant of record: it handles VAT and sales tax. Businesses and consumers can both buy; prices include VAT where that's the norm (the EU, the UK) and have sales tax added elsewhere (the US).
 
-1. In Paddle (start with the sandbox), create a product with a USD price for each top-up in `services/billing/app/constants/products.py` ($50, $200, $600, $1,000), and a client-side token.
+1. In Paddle (start with the sandbox), create a product with a USD price for each top-up in `services/billing/app/constants/products.py` ($50, $200, $600, $1,000), each with its **Tax** set to **Automatic based on location** (`tax_mode: location`): the price includes VAT where prices normally do, as in the EU and the UK, and sales tax is added elsewhere, as the pricing page and the terms say, so consumers in the EU see the price they pay. Also create a client-side token.
 2. Under Developer tools → Notifications, add a webhook destination at `https://<your domain>/api/billing/webhooks/paddle` for these events, then copy its secret key:
 
    | Event | Why |

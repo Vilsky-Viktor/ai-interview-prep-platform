@@ -328,6 +328,7 @@
     "creditsWord": "{count, plural, one {credito} other {crediti}}",
     "topUpTitle": "Ricarica: {name}",
     "topUpNote": "Ogni ricarica copre un numero intero di candidati; quelle più grandi costano meno per candidato. I crediti non scadono.",
+    "taxes": "I prezzi includono l'IVA dove è la norma, come nell'UE e nel Regno Unito; altrove, ad esempio negli Stati Uniti, l'imposta sulle vendite viene aggiunta al momento del pagamento.",
     "candidates": "{count, plural, one {# candidato} other {# candidati}}",
     "each": "{price} ciascuno",
     "reserved": "{count, plural, one {# credito riservato} other {# crediti riservati}}",

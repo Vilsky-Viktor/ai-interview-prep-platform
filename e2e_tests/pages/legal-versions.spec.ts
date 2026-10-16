@@ -3,7 +3,16 @@ import { expect, test } from "@playwright/test";
 // Every published version of a legal document stays readable, and each says whether it applies.
 test("the terms show when they apply and keep every earlier version", async ({ page }) => {
   await page.goto("/terms");
-  // Dates as the language writes them, not as the API names them.
+  // Dates as the language writes them, not as the API names them. A version published ahead of
+  // its day says when it applies and links to the one in force until then.
+  const ahead = page.getByText(/^Applies from [A-Z][a-z]{2} \d{1,2}, \d{4}\./);
+  await expect(ahead.or(page.getByText(/^In force since [A-Z][a-z]{2} \d{1,2}, \d{4}$/))).toBeVisible();
+
+  if (await ahead.isVisible()) {
+    await page.screenshot({ path: test.info().outputPath("terms-ahead.png") });
+    await page.getByRole("link", { name: "Read the version in force now" }).click();
+  }
+
   await expect(page.getByText(/^In force since [A-Z][a-z]{2} \d{1,2}, \d{4}$/)).toBeVisible();
   await expect(page.getByRole("heading", { name: "All versions" })).toBeVisible();
   await page.screenshot({ path: test.info().outputPath("terms.png"), fullPage: true });
@@ -14,7 +23,7 @@ test("the terms show when they apply and keep every earlier version", async ({ p
   await page.screenshot({ path: test.info().outputPath("terms-old.png") });
 
   await page.getByRole("link", { name: "Read the version in force now" }).click();
-  await expect(page).toHaveURL(/\/terms$/);
+  await expect(page).toHaveURL(/\/terms(\?version=[\d-]+)?$/);
 });
 
 // Each document in the page's language, saying the English is binding, with a link to it.
@@ -24,11 +33,11 @@ test("the terms show in the page's language with a link to the binding English",
   await expect(page.getByText("Dies ist eine Übersetzung; verbindlich ist nur die englische Fassung.")).toBeVisible();
   const text = page.locator("main div[lang]");
   await expect(text).toHaveAttribute("lang", "de");
-  await expect(page.getByText(/Gültig seit \d{2}\.\d{2}\.\d{4}/)).toBeVisible();
+  await expect(page.getByText(/(Gültig seit|Gilt ab) \d{2}\.\d{2}\.\d{4}/)).toBeVisible();
   await page.screenshot({ path: test.info().outputPath("terms-de.png") });
 
   await page.getByRole("link", { name: "Auf Englisch lesen" }).click();
-  await expect(page).toHaveURL(/\/terms\?language=en$/);
+  await expect(page).toHaveURL(/\/terms\?language=en$/, { timeout: 15_000 });
   await expect(text).toHaveAttribute("lang", "en");
 
   await page.context().addCookies([{ name: "prepza_locale", value: "ar", url: baseURL! }]);

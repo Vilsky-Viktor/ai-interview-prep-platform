@@ -328,6 +328,7 @@
     "creditsWord": "{count, plural, other {크레딧}}",
     "topUpTitle": "충전: {name}",
     "topUpNote": "충전은 지원자 단위로 구매하며, 금액이 클수록 지원자당 비용이 낮아집니다. 크레딧은 만료되지 않습니다.",
+    "taxes": "EU와 영국처럼 부가가치세(VAT) 포함이 일반적인 곳에서는 가격에 VAT가 포함되어 있으며, 미국 등 그 밖의 지역에서는 결제 시 판매세가 추가됩니다.",
     "candidates": "{count, plural, other {지원자 #명}}",
     "each": "1명당 {price}",
     "reserved": "{count, plural, other {# 크레딧 예약됨}}",

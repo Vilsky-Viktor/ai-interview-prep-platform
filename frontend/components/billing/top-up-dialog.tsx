@@ -54,7 +54,7 @@ export function TopUpDialog({
         <DialogHeader>
           <DialogTitle>{t("topUpTitle", { name: title })}</DialogTitle>
           <DialogDescription className="text-base">
-            {t("topUpNote")}
+            {t("topUpNote")} {t("taxes")}
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-3 sm:grid-cols-2">
