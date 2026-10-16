@@ -1,76 +1,83 @@
+import logging
+
+import httpx
 from prepza_common import http
 from prepza_common.http import bearer
 
 from app.config.settings import settings
 from app.constants.products import PADDLE_API
 
-
-def _url(path: str) -> str:
-    return f"{PADDLE_API[settings.paddle_environment]}{path}"
+logger = logging.getLogger(__name__)
 
 
-def _headers() -> dict:
-    return bearer(settings.paddle_api_key)
+async def _call(method: str, path: str, **kwargs) -> httpx.Response:
+    """One call to Paddle's API; a refusal raises. Paddle itself failing (no answer, or a 5xx) is
+    logged as "Paddle unavailable", which the "prepza Paddle failing" alert counts; a refusal,
+    such as a declined card, isn't."""
+    try:
+        response = await http.get_client().request(
+            method,
+            f"{PADDLE_API[settings.paddle_environment]}{path}",
+            headers=bearer(settings.paddle_api_key),
+            **kwargs,
+        )
+    except httpx.TransportError as error:
+        logger.error("Paddle unavailable: %s", type(error).__name__)
+
+        raise
+
+    if response.status_code >= 500:
+        logger.error("Paddle unavailable: %d", response.status_code)
+
+    response.raise_for_status()
+
+    return response
 
 
 async def charge(subscription_id: str, price_id: str) -> None:
     """Bills one top-up to the subscription's saved card now. Its transaction.completed webhook
     adds the credits; a declined card raises and changes nothing."""
-    response = await http.get_client().post(
-        _url(f"/subscriptions/{subscription_id}/charge"),
+    await _call(
+        "POST",
+        f"/subscriptions/{subscription_id}/charge",
         json={
             "effective_from": "immediately",
             "items": [{"price_id": price_id, "quantity": 1}],
             "on_payment_failure": "prevent_change",
         },
-        headers=_headers(),
     )
-
-    response.raise_for_status()
 
 
 async def create_transaction(price_id: str, custom_data: dict) -> str:
     """A checkout's transaction for one top-up, with whose wallet it's for set here, not in the
     browser; Paddle.js opens it by its id."""
-    response = await http.get_client().post(
-        _url("/transactions"),
+    response = await _call(
+        "POST",
+        "/transactions",
         json={"items": [{"price_id": price_id, "quantity": 1}], "custom_data": custom_data},
-        headers=_headers(),
     )
-
-    response.raise_for_status()
 
     return response.json()["data"]["id"]
 
 
 async def cancel(subscription_id: str) -> None:
     """Ends the subscription at once, so the card isn't kept for us."""
-    response = await http.get_client().post(
-        _url(f"/subscriptions/{subscription_id}/cancel"),
+    await _call(
+        "POST",
+        f"/subscriptions/{subscription_id}/cancel",
         json={"effective_from": "immediately"},
-        headers=_headers(),
     )
-
-    response.raise_for_status()
 
 
 async def subscription_status(subscription_id: str) -> str:
     """The subscription's status now: active, canceled and so on."""
-    response = await http.get_client().get(
-        _url(f"/subscriptions/{subscription_id}"), headers=_headers()
-    )
-
-    response.raise_for_status()
+    response = await _call("GET", f"/subscriptions/{subscription_id}")
 
     return response.json()["data"]["status"]
 
 
 async def invoice_url(transaction_id: str) -> str:
     """A temporary link to the transaction's invoice PDF."""
-    response = await http.get_client().get(
-        _url(f"/transactions/{transaction_id}/invoice"), headers=_headers()
-    )
-
-    response.raise_for_status()
+    response = await _call("GET", f"/transactions/{transaction_id}/invoice")
 
     return response.json()["data"]["url"]

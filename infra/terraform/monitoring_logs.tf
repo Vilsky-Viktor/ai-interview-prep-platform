@@ -67,8 +67,21 @@ resource "google_logging_metric" "generations_failed" {
   }
 }
 
+# billing logs "Paddle unavailable" when Paddle's API doesn't answer or answers with a 5xx (not a
+# refusal such as a declined card).
+resource "google_logging_metric" "paddle_unavailable" {
+  name   = "prepza_paddle_unavailable"
+  filter = "resource.type=\"cloud_run_revision\" AND resource.labels.service_name=\"billing\" AND jsonPayload.message:\"Paddle unavailable\""
+
+  metric_descriptor {
+    metric_kind = "DELTA"
+    value_type  = "INT64"
+  }
+}
+
 locals {
-  # Each: its metric, the threshold over the window, the window, and what to do.
+  # Each: its metric (a log-based one, or Cloud Run's), the threshold over the window, the
+  # window, and what to do.
   log_alerts = {
     redis = {
       name      = "prepza Redis failing"
@@ -106,6 +119,24 @@ locals {
       threshold = 2
       window    = "3600s"
       text      = "Generations fail: companies see \"Generation failed\" and must press Retry. Check generation-worker's logs and Sentry for the error, and OpenAI. See docs/runbooks.md (A stuck generation, OpenAI down)."
+    }
+    paddle = {
+      name      = "prepza Paddle failing"
+      condition = "Over 3 calls to Paddle failed in 15 minutes"
+      filter    = "metric.type=\"logging.googleapis.com/user/${google_logging_metric.paddle_unavailable.name}\" AND resource.type=\"cloud_run_revision\""
+      aligner   = "ALIGN_DELTA"
+      threshold = 3
+      window    = "900s"
+      text      = "Paddle's API doesn't answer: checkouts don't open, automatic top-ups and invoices fail. Check Paddle's status page and the paddle-api-key secret. See docs/runbooks.md (Paddle down)."
+    }
+    migrations = {
+      name      = "prepza migration failed"
+      condition = "A database migration or roles job failed"
+      filter    = "metric.type=\"run.googleapis.com/job/completed_execution_count\" AND resource.type=\"cloud_run_job\" AND metric.label.result=\"failed\""
+      aligner   = "ALIGN_DELTA"
+      threshold = 0
+      window    = "300s"
+      text      = "A deploy's migration (or db-roles) job failed, and the deploy stopped before moving any service. See docs/runbooks.md (A failed migration during a deploy)."
     }
     bounces = {
       name      = "prepza emails bouncing"

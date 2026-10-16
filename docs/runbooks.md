@@ -28,7 +28,7 @@ What to do when a provider fails, a generation hangs or a deploy's migration fai
 
 **How you notice**
 
-- No alert is specific to Paddle. **prepza server errors** fires once failed checkouts and invoices make a service answer more than 5% of its requests with server errors for 10 minutes ([monitoring.tf](../infra/terraform/monitoring.tf)).
+- **prepza Paddle failing:** over 3 calls to Paddle's API failed in 15 minutes: no answer, or a 5xx. billing logs each as "Paddle unavailable"; a refusal such as a declined card doesn't count ([paddle.py](../services/billing/app/integrations/paddle.py), [monitoring_logs.tf](../infra/terraform/monitoring_logs.tf)). **prepza server errors** may fire too, once failed checkouts and invoices pass 5% of a service's requests ([monitoring.tf](../infra/terraform/monitoring.tf)).
 - **prepza web hook signature refused** means our secret is wrong, not that Paddle is down (see the last step).
 - Users: **Top up** says "Couldn't open the checkout. Please try again." ([buy-button.tsx](../frontend/components/billing/buy-button.tsx)); invoice downloads fail; turning automatic top-up off, or deleting a company or an account with one, fails and can be tried again ([auto_top_ups.py](../services/billing/app/services/auto_top_ups.py)). Prices still show: the catalog comes from billing's settings, not from Paddle ([billing.py](../services/billing/app/routers/billing.py)).
 
@@ -152,7 +152,7 @@ What to do when a provider fails, a generation hangs or a deploy's migration fai
 
 **How you notice**
 
-- No alert in `monitoring*.tf` covers it: the **Deploy** run fails in GitHub Actions, at its **Migrations** step (or **Database users**, the `db-roles` job before it).
+- **prepza migration failed:** a Cloud Run job (a `<db>-migrate` job or `db-roles`) finished as failed ([monitoring_logs.tf](../infra/terraform/monitoring_logs.tf)). The **Deploy** run also fails in GitHub Actions, at its **Migrations** step (or **Database users**).
 - Users see nothing: the services step hasn't run, so every service still runs the previous version ([infra/README.md](../infra/README.md#deploys)).
 
 **What the system does by itself**
