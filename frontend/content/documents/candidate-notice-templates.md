@@ -1,6 +1,6 @@
 # Candidate notice templates
 
-Version of 2026-10-14. Arcolabs OÜ (registry code 17587452), Sepapaja tn 6, 15551 Tallinn, Estonia; hello@prepza.ai.
+Version of 2026-10-16. Arcolabs OÜ (registry code 17587452), Sepapaja tn 6, 15551 Tallinn, Estonia; hello@prepza.ai.
 
 For companies to adapt and send **before** inviting candidates to a prepza interview. Replace
 everything in [brackets]. The notice is yours to give as the employer: these templates cover what
@@ -32,15 +32,17 @@ your audit summary is published (see prepza's instructions for companies).
 > **What it assesses.** A timed multiple-choice test of job knowledge in these areas, taken from
 > the job's requirements: [list topics]. Each question has a time limit of [N] seconds. Your score
 > is the percentage of questions answered correctly. The tool also records how long each answer
-> took, and when you left the test page or copied text during it.
+> took, when you left the test page or copied text during it, and answers given too fast to have
+> read the question; [Company] may give you extra time, which is recorded without a reason.
 >
 > **How it is used.** Your score is compared with a passing grade of [N]% and with other
 > candidates' scores. [Name or role at Company] reviews every result before any decision, together
 > with [your application / interviews]. The tool does not make the hiring decision.
 >
-> **Data.** The tool uses only your email address, your name (from your application or your
-> sign-in), the account id from your sign-in, and your answers in the test, with how long each
-> took, page leaves and copy attempts. The questions were written with AI from the job description,
+> **Data.** The tool uses your email address, your name (from your application or your sign-in),
+> the account id from your sign-in, and your answers in the test, with how long each took, page
+> leaves, copy attempts, answers too fast to have read the question, and any extra time you were
+> given. The questions were written with AI from the job description,
 > on topics [Company] chose. Your test data is kept by prepza for 12 months after your invitation, then
 > deleted. [Company's own retention policy: ...]. More information about the data collected, its
 > source and retention policy is available on request at [contact], within 30 days of a written
@@ -69,8 +71,9 @@ your audit summary is published (see prepza's instructions for companies).
 > next question or finish. When a question's time runs out, your pick counts; with no pick, it
 > counts as wrong.
 >
-> **What is recorded.** Your answers, whether each was right, how long each took, and when you left
-> the test page or copied text. You won't see your score.
+> **What is recorded.** Your answers, whether each was right, how long each took, when you left the
+> test page or copied text, and answers given too fast to have read the question. If we give you
+> extra time, that is recorded too, without a reason. You won't see your score.
 >
 > **How we use it.** Your result is one part of our assessment, alongside [your CV / interviews].
 > A person at [Company] reviews it; no decision is made automatically. You can ask us for a human
