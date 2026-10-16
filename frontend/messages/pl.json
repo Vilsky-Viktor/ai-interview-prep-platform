@@ -75,6 +75,7 @@
     "consent": "Logując się, potwierdzasz, że masz co najmniej 16 lat, akceptujesz <terms>Regulamin</terms> i zapoznałeś się z <privacy>Polityką prywatności</privacy>.",
     "failed": "Nie udało się zalogować. Spróbuj ponownie.",
     "verify": "Wysłaliśmy Ci link do potwierdzenia adresu e-mail. Otwórz go, aby brać udział w rozmowach i tworzyć firmy.",
+    "verifyFailed": "Logowanie się powiodło, ale nie udało nam się wysłać Ci linku do potwierdzenia adresu e-mail. Wyloguj się i zaloguj ponownie, aby otrzymać nowy.",
     "noUpdates": "Nie chcę otrzymywać nowości o produkcie i aktualności",
     "promotions": "Chcę otrzymywać oferty i promocje",
     "emailsFailed": "Nie udało się zapisać Twoich wyborów dotyczących e-maili. Możesz je zmienić w Ustawieniach."

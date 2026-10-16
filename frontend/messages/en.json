@@ -75,6 +75,7 @@
     "consent": "By signing in, you confirm you're 16 or older, agree to the <terms>Terms</terms> and have read the <privacy>Privacy policy</privacy>.",
     "failed": "Sign-in failed. Please try again.",
     "verify": "We sent you a link to verify your email. Open it to take interviews and create companies.",
+    "verifyFailed": "You're signed in, but we couldn't send the link to verify your email. Sign out and sign in again to get a new one.",
     "noUpdates": "Don't send me product updates and news",
     "promotions": "Send me offers and promotions",
     "emailsFailed": "Couldn't save your email choices. You can change them in Settings."

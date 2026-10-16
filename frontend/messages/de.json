@@ -75,6 +75,7 @@
     "consent": "Mit der Anmeldung bestätigst du, dass du mindestens 16 Jahre alt bist, akzeptierst die <terms>Nutzungsbedingungen</terms> und hast die <privacy>Datenschutzerklärung</privacy> gelesen.",
     "failed": "Die Anmeldung ist fehlgeschlagen. Bitte versuche es erneut.",
     "verify": "Wir haben dir einen Link zur Bestätigung deiner E-Mail-Adresse geschickt. Öffne ihn, um Interviews zu machen und Unternehmen zu erstellen.",
+    "verifyFailed": "Du bist angemeldet, aber wir konnten dir den Link zur Bestätigung deiner E-Mail-Adresse nicht schicken. Melde dich ab und wieder an, um einen neuen zu erhalten.",
     "noUpdates": "Ich möchte keine Produkt-Updates und Neuigkeiten erhalten",
     "promotions": "Ich möchte Angebote und Aktionen erhalten",
     "emailsFailed": "Deine E-Mail-Auswahl konnte nicht gespeichert werden. Du kannst sie in den Einstellungen ändern."

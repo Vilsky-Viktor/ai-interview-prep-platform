@@ -75,6 +75,7 @@
     "consent": "Sa pag-sign in, kinukumpirma mong 16 taong gulang ka o higit pa, sumasang-ayon ka sa <terms>Mga tuntunin</terms>, at nabasa mo ang <privacy>Patakaran sa privacy</privacy>.",
     "failed": "Hindi nakapag-sign in. Pakisubukang muli.",
     "verify": "Nagpadala kami sa iyo ng link para i-verify ang iyong email. Buksan ito para makasagot ng mga interview at makagawa ng mga kumpanya.",
+    "verifyFailed": "Naka-sign in ka na, pero hindi namin naipadala ang link para i-verify ang iyong email. Mag-sign out at mag-sign in ulit para makakuha ng bagong link.",
     "noUpdates": "Huwag akong padalhan ng mga update at balita tungkol sa produkto",
     "promotions": "Padalhan ako ng mga alok at promo",
     "emailsFailed": "Hindi na-save ang mga pinili mo para sa email. Mababago mo ito sa Mga setting."

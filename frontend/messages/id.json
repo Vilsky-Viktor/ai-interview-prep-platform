@@ -75,6 +75,7 @@
     "consent": "Dengan masuk, kamu menyatakan berusia 16 tahun ke atas, menyetujui <terms>Ketentuan</terms>, dan telah membaca <privacy>Kebijakan privasi</privacy>.",
     "failed": "Gagal masuk. Coba lagi.",
     "verify": "Kami mengirimkan tautan untuk memverifikasi email-mu. Buka tautannya untuk mengikuti wawancara dan membuat perusahaan.",
+    "verifyFailed": "Kamu sudah masuk, tetapi kami tidak dapat mengirim tautan untuk memverifikasi email-mu. Keluar lalu masuk lagi untuk mendapatkan tautan baru.",
     "noUpdates": "Jangan kirimi saya pembaruan produk dan berita",
     "promotions": "Kirimi saya penawaran dan promosi",
     "emailsFailed": "Pilihan email-mu gagal disimpan. Kamu bisa mengubahnya di Pengaturan."

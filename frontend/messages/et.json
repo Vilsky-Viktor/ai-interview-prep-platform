@@ -75,6 +75,7 @@
     "consent": "Sisse logides kinnitad, et oled vähemalt 16-aastane, nõustud <terms>tingimustega</terms> ja oled lugenud <privacy>privaatsuspoliitikat</privacy>.",
     "failed": "Sisselogimine ebaõnnestus. Proovi uuesti.",
     "verify": "Saatsime sulle lingi e-posti aadressi kinnitamiseks. Ava see, et intervjuusid teha ja ettevõtteid luua.",
+    "verifyFailed": "Oled sisse logitud, kuid me ei saanud sulle e-posti aadressi kinnitamise linki saata. Logi välja ja uuesti sisse, et saada uus link.",
     "noUpdates": "Ma ei soovi tooteuudiseid",
     "promotions": "Soovin saada pakkumisi ja kampaaniaid",
     "emailsFailed": "E-kirjade valikut ei õnnestunud salvestada. Saad seda muuta seadetes."

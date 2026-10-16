@@ -79,11 +79,14 @@ export async function signIn(name: SignInProvider): Promise<SignInResult> {
     pending = null
 
     // Invites need a verified email; some ways of signing in (GitHub) don't verify it, so a
-    // link is sent to confirm it.
+    // link is sent to confirm it. Each sign-in sends a new one, so a failed send is said.
     if (!user.emailVerified) {
-      await firebase.sendEmailVerification(user).catch(() => {})
+      const sent = await firebase.sendEmailVerification(user).then(
+        () => true,
+        () => false
+      )
 
-      return "verify"
+      return sent ? "verify" : "verifyFailed"
     }
 
     return "done"

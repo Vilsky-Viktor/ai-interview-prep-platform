@@ -15,7 +15,7 @@ reaches the prepza team, the privacy policy, terms, and an accessibility stateme
 for people with disabilities, what falls short, and where to report a problem: \
 hello@prepza.ai). Signing in is with Google, LinkedIn or GitHub; taking an interview and \
 creating a company need a verified email, so a GitHub sign-in that hasn't verified it gets a \
-link to verify it first.
+link to verify it first; if the link never came, signing out and in again sends a new one.
 
 Companies:
 - The home page starts with the box for a job description; submitting it signs you in if \

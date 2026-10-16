@@ -71,7 +71,9 @@ export function SignInOptions({
     setBusy(true)
     const result = await signIn(name)
 
-    if (!returning && (result === "done" || result === "verify")) {
+    const signedIn = ["done", "verify", "verifyFailed"].includes(result)
+
+    if (!returning && signedIn) {
       await saveEmails()
     }
 
@@ -81,6 +83,9 @@ export function SignInOptions({
       onSignedIn?.()
     } else if (result === "verify") {
       toast.info(t("verify"))
+      onSignedIn?.()
+    } else if (result === "verifyFailed") {
+      toast.error(t("verifyFailed"))
       onSignedIn?.()
     } else if (result === "link") {
       setLinking(name)

@@ -75,6 +75,7 @@
     "consent": "Khi đăng nhập, bạn xác nhận mình từ 16 tuổi trở lên, đồng ý với <terms>Điều khoản</terms> và đã đọc <privacy>Chính sách quyền riêng tư</privacy>.",
     "failed": "Đăng nhập không thành công. Vui lòng thử lại.",
     "verify": "Chúng tôi đã gửi cho bạn một liên kết để xác minh email. Hãy mở liên kết để tham gia phỏng vấn và tạo công ty.",
+    "verifyFailed": "Bạn đã đăng nhập, nhưng chúng tôi không gửi được liên kết để xác minh email. Hãy đăng xuất rồi đăng nhập lại để nhận liên kết mới.",
     "noUpdates": "Không gửi cho tôi cập nhật sản phẩm và tin tức",
     "promotions": "Gửi cho tôi ưu đãi và khuyến mãi",
     "emailsFailed": "Không lưu được lựa chọn email của bạn. Bạn có thể thay đổi trong Cài đặt."

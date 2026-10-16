@@ -75,6 +75,7 @@
     "consent": "Al iniciar sesión, confirmas que tienes 16 años o más, aceptas los <terms>Términos</terms> y has leído la <privacy>Política de privacidad</privacy>.",
     "failed": "No se pudo iniciar sesión. Inténtalo de nuevo.",
     "verify": "Te enviamos un enlace para verificar tu correo. Ábrelo para hacer entrevistas y crear empresas.",
+    "verifyFailed": "Has iniciado sesión, pero no pudimos enviarte el enlace para verificar tu correo. Cierra sesión y vuelve a iniciarla para recibir uno nuevo.",
     "noUpdates": "No quiero recibir novedades del producto",
     "promotions": "Quiero recibir ofertas y promociones",
     "emailsFailed": "No se pudieron guardar tus preferencias de correo. Puedes cambiarlas en Ajustes."

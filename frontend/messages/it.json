@@ -75,6 +75,7 @@
     "consent": "Accedendo, confermi di avere almeno 16 anni, accetti i <terms>Termini</terms> e di aver letto l’<privacy>Informativa sulla privacy</privacy>.",
     "failed": "Accesso non riuscito. Riprova.",
     "verify": "Ti abbiamo inviato un link per verificare la tua email. Aprilo per svolgere i colloqui e creare aziende.",
+    "verifyFailed": "Hai effettuato l'accesso, ma non siamo riusciti a inviarti il link per verificare la tua email. Esci e accedi di nuovo per riceverne uno nuovo.",
     "noUpdates": "Non inviarmi novità sul prodotto e notizie",
     "promotions": "Inviami offerte e promozioni",
     "emailsFailed": "Impossibile salvare le tue scelte email. Puoi cambiarle nelle Impostazioni."

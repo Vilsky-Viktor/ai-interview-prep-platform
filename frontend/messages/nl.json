@@ -75,6 +75,7 @@
     "consent": "Door in te loggen bevestig je dat je 16 jaar of ouder bent, ga je akkoord met de <terms>Voorwaarden</terms> en heb je het <privacy>Privacybeleid</privacy> gelezen.",
     "failed": "Inloggen is mislukt. Probeer het opnieuw.",
     "verify": "We hebben je een link gestuurd om je e-mailadres te verifiëren. Open hem om interviews te doen en bedrijven aan te maken.",
+    "verifyFailed": "Je bent ingelogd, maar we konden je geen link sturen om je e-mailadres te verifiëren. Log uit en weer in om een nieuwe te krijgen.",
     "noUpdates": "Stuur me geen productupdates en nieuws",
     "promotions": "Stuur me aanbiedingen en acties",
     "emailsFailed": "Je e-mailkeuzes konden niet worden opgeslagen. Je kunt ze wijzigen in Instellingen."

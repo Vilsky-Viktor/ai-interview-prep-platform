@@ -75,6 +75,7 @@
     "consent": "Giriş yaparak 16 yaşında veya daha büyük olduğunuzu onaylar, <terms>Koşulları</terms> kabul eder ve <privacy>Gizlilik politikasını</privacy> okuduğunuzu belirtirsiniz.",
     "failed": "Giriş yapılamadı. Lütfen tekrar deneyin.",
     "verify": "E-postanızı doğrulamanız için bir bağlantı gönderdik. Mülakatlara girmek ve şirket oluşturmak için bağlantıyı açın.",
+    "verifyFailed": "Giriş yaptınız ancak e-postanızı doğrulamanız için bağlantıyı gönderemedik. Yeni bir bağlantı almak için çıkış yapıp tekrar giriş yapın.",
     "noUpdates": "Bana ürün güncellemeleri ve haberler göndermeyin",
     "promotions": "Bana teklifler ve kampanyalar gönderin",
     "emailsFailed": "E-posta tercihleriniz kaydedilemedi. Bunları Ayarlar'dan değiştirebilirsiniz."
