@@ -1,6 +1,6 @@
 # Using prepza responsibly: instructions for companies
 
-Version of 2026-10-15. Arcolabs OÜ (registry code 17587452), Sepapaja tn 6, 15551 Tallinn, Estonia; hello@prepza.ai.
+Version of 2026-10-16. Arcolabs OÜ (registry code 17587452), Sepapaja tn 6, 15551 Tallinn, Estonia; hello@prepza.ai.
 
 For owners and admins of a company on prepza. These are prepza's instructions for use under the
 EU AI Act (Art. 13). Your own duties as an employer, under the employment and data protection law
@@ -98,7 +98,10 @@ People at your company make the hiring decision. prepza never tells a candidate 
   each change. AI apps (Claude, ChatGPT and others) a member connects act with that member's
   access, and the data they read goes to that app's provider. Owners and admins can turn AI apps
   off for the company (Integrations → AI apps → **Allow AI apps**). The same human review applies
-  to results read through them.
+  to results read through them. Both answer with AI and can misstate or leave out part of a
+  result: before acting on what they say about a candidate, check the candidate's scorecard, and
+  don't let them decide about a candidate. They don't change grades; they read what prepza
+  recorded.
 
 ## 6. Choosing a passing grade
 
@@ -240,6 +243,11 @@ From 2027-12-02, when you use prepza in the EU:
 - **Maintenance:** prepza runs and updates it. During a maintenance break the site is closed and
   candidates' timers stop, so no one loses time. In an emergency prepza can pause new interviews;
   candidates already in one can finish.
+- **Lifetime and updates:** prepza is a hosted service with no set end of life: prepza maintains
+  it for as long as it offers it, and updates it continuously, with nothing for you to install or
+  do. A new AI model or prompt is released only after it meets the accuracy target in section 3.
+  If prepza ever stops offering the service, you are emailed in advance, with time to download
+  your results.
 - **Changes:** questions are improved continuously (section 3); a fix applies only to candidates
   who start after it. A change to how grades are worked out or to these instructions is published
   here with a new version date. A significant change to the terms or the data processing agreement
