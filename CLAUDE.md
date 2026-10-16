@@ -56,6 +56,12 @@
    `e2e_tests/signed-in` signed in). A bug fix adds a test that fails without it.
    Run the affected suites before calling the work done.
 
+   Tests check what the product does, never its wording: no assertions on, and no locators
+   by, placeholders, headings' copy, button labels, tooltips or messages, which change freely.
+   Find elements by role and position, or by a `data-testid` when nothing else tells them
+   apart, and assert behaviour and data (what was found, saved, refused or changed, and the
+   data the test made). An accessible name is checked only where it is the feature itself.
+
 9. **READMEs stay current.** When a change affects anything a README describes
    (features, behaviour, setup, settings, commands, tests, deployment), update that
    README in the same change: the root `README.md`, `infra/README.md` and any README

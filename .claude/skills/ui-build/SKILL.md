@@ -63,4 +63,5 @@ No new colors, shadows, gradients or effects unless asked.
 ## Before tests
 
 Show the new UI first: take desktop and phone screenshots (the `ui-check` skill), send them, and
-wait for the user's confirmation. Write the tests once the design is confirmed.
+wait for the user's confirmation. Write the tests once the design is confirmed. They check what the
+screen does, not its wording (see the `verify` skill, "What a test checks").

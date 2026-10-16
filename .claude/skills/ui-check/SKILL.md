@@ -16,6 +16,8 @@ scripts: they sign in through the Auth emulator with throwaway users and clean u
 - **Public pages:** in `e2e_tests/pages/`, `page.screenshot({ path: test.info().outputPath("name.png") })`.
 - **Phone:** `await page.setViewportSize(PHONE)` (`helpers/layout.ts`, 390 × 844).
 - Show exactly the state asked for: closed or open, empty or filled, focused or not.
+- Reach that state the way a test does: by role and position or a `data-testid`, never by the
+  screen's wording (see the `verify` skill, "What a test checks").
 
 Keep a screenshot step in the spec when the screen is new: it's how the next change gets its
 "before".

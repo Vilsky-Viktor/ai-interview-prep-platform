@@ -24,6 +24,16 @@ Rule 8: every change ships with its tests, and the affected suites run before it
 
 Run a unit test's whole suite, not one file: fakes in other files often depend on what changed.
 
+## What a test checks
+
+Behaviour and data, never wording (CLAUDE.md rule 8). No assertions on, and no locators by,
+placeholders, headings' copy, button labels, tooltips or messages: copy changes freely and such a
+check proves nothing. Find elements by role and position (`getByRole("main").getByRole("textbox")`,
+a dialog's `spinbutton`, `.first()`), or by a `data-testid` added to the component when nothing
+else tells them apart. Assert what was found, saved, refused or changed, and the data the test
+made (its company's name, an email, a note). An accessible name is checked only where it is the
+feature itself (an icon button's screen-reader label).
+
 ## The local dev server
 
 The frontend is a Next.js dev server and compiles pages on first visit, so browser tests can
