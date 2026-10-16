@@ -107,4 +107,9 @@ FAQ = [
         "question": "Puis-je supprimer mon compte ?",
         "answer": "Oui, dans les Paramètres. Votre compte et vos données sont supprimés, et vous pouvez d'abord télécharger une copie de vos données.",
     },
+    {
+        "key": "report",
+        "question": "Comment signaler un problème ?",
+        "answer": "Écrivez-nous depuis la page de contact et collez l'ID de ce qui est concerné : « copier l'id » se trouve sous le nom d'une entreprise, d'un entretien ou d'un candidat, et celui de votre compte dans le menu de votre compte et dans les Paramètres. Avec l'ID, nous le retrouvons aussitôt.",
+    },
 ]

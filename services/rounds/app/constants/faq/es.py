@@ -107,4 +107,9 @@ FAQ = [
         "question": "¿Puedo eliminar mi cuenta?",
         "answer": "Sí, en Ajustes. Tu cuenta y tus datos se eliminan, y antes puedes descargar una copia de tus datos.",
     },
+    {
+        "key": "report",
+        "question": "¿Cómo informo de un problema?",
+        "answer": "Escríbenos desde la página de contacto y pega el ID de aquello de lo que se trate: «copiar id» está debajo del nombre de una empresa, una entrevista o un candidato, y el de tu cuenta, en el menú de tu cuenta y en Ajustes. Con el ID lo encontramos enseguida.",
+    },
 ]

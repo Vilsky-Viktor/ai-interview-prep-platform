@@ -9,6 +9,7 @@ import { RemoveMember } from "@/components/company/remove-member"
 import { RolePicker } from "@/components/company/role-picker"
 import { CopyField } from "@/components/copy-field"
 import { Badge } from "@/components/ui/badge"
+import { WrappedEmail } from "@/components/wrapped-email"
 import type { MemberRole } from "@/constants/roles"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 import type { CompanyMember } from "@/types/company"
@@ -55,8 +56,8 @@ export function MemberRow({
           the email. */}
       <div className="flex items-center justify-between gap-4 max-sm:flex-wrap max-sm:gap-3">
         <span className="min-w-0 max-sm:basis-full">
-          <span className="block text-lg font-medium break-words">
-            {member.email}
+          <span className="block text-lg font-medium">
+            <WrappedEmail email={member.email} />
           </span>
           <span className="text-sm text-muted-foreground">
             {member.joined ? t("joined") : t("invited")}

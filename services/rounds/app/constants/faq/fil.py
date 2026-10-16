@@ -107,4 +107,9 @@ FAQ = [
         "question": "Puwede ko bang burahin ang account ko?",
         "answer": "Oo, sa Settings. Buburahin ang account at data mo, at puwede mo munang i-download ang kopya ng data mo.",
     },
+    {
+        "key": "report",
+        "question": "Paano ako mag-uulat ng problema?",
+        "answer": "Sumulat sa amin sa page na Makipag-ugnayan at i-paste ang ID ng tinutukoy mo: nasa ilalim ng pangalan ng kumpanya, interview o aplikante ang “kopyahin ang id”, at nasa menu ng account mo at sa Mga setting ang ID ng iyong account. Sa ID, agad namin itong mahahanap.",
+    },
 ]

@@ -1,6 +1,7 @@
 import { getLocale, getTranslations } from "next-intl/server"
 
 import { AccountData } from "@/components/settings/account-data"
+import { AccountId } from "@/components/settings/account-id"
 import { EmailPreferencesSetting } from "@/components/settings/email-preferences"
 import { LanguageSetting } from "@/components/settings/language-setting"
 import { SettingsSection } from "@/components/settings/settings-section"
@@ -28,9 +29,15 @@ export default async function GeneralSettingsPage() {
           <EmailPreferencesSetting initial={emails} />
         </SettingsSection>
       )}
-      <SettingsSection title={t("yourData")} description={t("yourDataNote")}>
-        <AccountData />
-      </SettingsSection>
+      {/* Side by side on desktop, one under the other otherwise. */}
+      <div className="grid gap-8 lg:grid-cols-2">
+        <SettingsSection title={t("account")} description={t("accountNote")}>
+          <AccountId />
+        </SettingsSection>
+        <SettingsSection title={t("yourData")} description={t("yourDataNote")}>
+          <AccountData />
+        </SettingsSection>
+      </div>
     </>
   )
 }

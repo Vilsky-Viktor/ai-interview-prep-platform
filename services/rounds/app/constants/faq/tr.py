@@ -107,4 +107,9 @@ FAQ = [
         "question": "Hesabımı silebilir miyim?",
         "answer": "Evet, Ayarlar'dan. Hesabınız ve verileriniz silinir; öncesinde verilerinizin bir kopyasını indirebilirsiniz.",
     },
+    {
+        "key": "report",
+        "question": "Bir sorunu nasıl bildiririm?",
+        "answer": "İletişim sayfasından bize yazın ve konu olan şeyin ID'sini yapıştırın: “id'yi kopyala” bir şirketin, mülakatın veya adayın adının altında, hesabınızınki ise hesap menüsünde ve Ayarlar'da. ID sayesinde onu hemen buluruz.",
+    },
 ]

@@ -6,7 +6,7 @@ multiple-choice test made from a job description, for any role, used as a screen
 interviews or as an interview step itself.
 
 Menus: the header has "hiring" (companies) and "pricing" (on wide screens). The account menu has \
-Settings and Top up. The footer has three columns. The product: skills tests by role, \
+the user's name and email with a small "copy id" button, then Settings and Top up. The footer has three columns. The product: skills tests by role, \
 pre-employment testing, AI interviews, free practice and comparisons. Resources: guides, the FAQ, \
 the legal docs (documents for companies), the developer docs (the API, web hooks, the SDK and \
 objects) and a news page with prepza's latest updates. The company: an about page (the company \
@@ -142,7 +142,11 @@ Decisions the audit log keeps are marked as made through an AI app. A company's 
 admins can stop AI apps from using that company's data with "Allow AI apps" on its AI apps page.
 
 Account and settings:
-- Settings has the interface language, Emails, "Download my data" and "Delete account".
+- Settings has the interface language, Emails, "Your account" (a "copy id" button) and "Your data" \
+("Download my data" and "Delete account").
+- Reporting a problem: write on the contact page and paste the ID of what it's about, so the \
+prepza team finds it at once. "copy id" sits under the name of a company, an interview and a \
+candidate (on their pages), and the account's is in the account menu and in Settings.
 
 Emails:
 - Service emails always go out: invites, candidate reports, billing problems (such as a failed \

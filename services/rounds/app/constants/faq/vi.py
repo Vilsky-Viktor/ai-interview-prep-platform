@@ -107,4 +107,9 @@ FAQ = [
         "question": "Tôi có thể xóa tài khoản không?",
         "answer": "Có, trong Cài đặt. Tài khoản và dữ liệu của bạn bị xóa, và trước đó bạn có thể tải xuống bản sao dữ liệu.",
     },
+    {
+        "key": "report",
+        "question": "Làm sao để báo cáo sự cố?",
+        "answer": "Hãy viết cho chúng tôi qua trang liên hệ và dán ID của đối tượng liên quan: “sao chép id” nằm dưới tên của công ty, buổi phỏng vấn hoặc ứng viên, còn ID tài khoản của bạn nằm trong menu tài khoản và trong Cài đặt. Có ID, chúng tôi tìm thấy ngay.",
+    },
 ]

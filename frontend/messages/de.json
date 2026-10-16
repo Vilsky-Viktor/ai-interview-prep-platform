@@ -4,6 +4,8 @@
     "language": "Sprache",
     "languageNote": "Für die Oberfläche und die Antworten im Hilfe-Chat sowie die Sprache, in der neue Interviews starten. Du kannst ein Interview in jeder unterstützten Sprache erstellen.",
     "languageFailed": "Die Sprache konnte nicht geändert werden. Bitte versuche es erneut.",
+    "account": "Dein Konto",
+    "accountNote": "Gib diese ID an, wenn du uns wegen deines Kontos schreibst.",
     "yourData": "Deine Daten",
     "yourDataNote": "Lade alles herunter, was prepza. über dich speichert, oder lösche dein Konto.",
     "download": "Meine Daten herunterladen",
@@ -103,7 +105,9 @@
     "titleFailed": "Der Titel konnte nicht gespeichert werden.",
     "loading": "Wird geladen…",
     "send": "Senden",
-    "thinking": "Denkt nach…"
+    "thinking": "Denkt nach…",
+    "copyId": "ID kopieren",
+    "idCopied": "ID kopiert"
   },
   "errors": {
     "title": "Etwas ist schiefgelaufen",
@@ -1047,6 +1051,7 @@
   "contact": {
     "title": "Kontakt",
     "intro": "Fragen, Ideen, Partnerschaften oder funktioniert etwas nicht? Schreib uns, wir antworten per E-Mail.",
+    "idHint": "Du schreibst wegen eines Unternehmens, eines Interviews, eines Kandidaten oder deines Kontos? Füge die ID ein: „id kopieren“ steht unter dem Namen, die ID deines Kontos im Kontomenü.",
     "description": "Kontaktiere das prepza-Team: Fragen zu Einstellungstests, Ideen, Partnerschaftsangebote oder etwas funktioniert nicht. Wir antworten per E-Mail.",
     "name": "Name",
     "email": "E-Mail",

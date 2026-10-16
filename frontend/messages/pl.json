@@ -4,6 +4,8 @@
     "language": "Język",
     "languageNote": "Dla interfejsu i odpowiedzi czatu pomocy oraz język, w którym zaczynają się nowe rozmowy. Rozmowę możesz utworzyć w każdym obsługiwanym języku.",
     "languageFailed": "Nie udało się zmienić języka. Spróbuj ponownie.",
+    "account": "Twoje konto",
+    "accountNote": "Podaj to ID, gdy piszesz do nas w sprawie swojego konta.",
     "yourData": "Twoje dane",
     "yourDataNote": "Pobierz wszystko, co prepza. przechowuje na Twój temat, albo usuń konto.",
     "download": "Pobierz moje dane",
@@ -103,7 +105,9 @@
     "titleFailed": "Nie udało się zapisać tytułu.",
     "loading": "Wczytywanie…",
     "send": "Wyślij",
-    "thinking": "Myślę…"
+    "thinking": "Myślę…",
+    "copyId": "Kopiuj ID",
+    "idCopied": "Skopiowano ID"
   },
   "errors": {
     "title": "Coś poszło nie tak",
@@ -1047,6 +1051,7 @@
   "contact": {
     "title": "Skontaktuj się z nami",
     "intro": "Masz pytanie, pomysł, propozycję współpracy albo coś nie działa? Napisz do nas, a odpowiemy e-mailem.",
+    "idHint": "Piszesz w sprawie firmy, rozmowy, kandydata albo swojego konta? Wklej jego ID: „kopiuj id” jest pod nazwą, a ID Twojego konta — w menu konta.",
     "description": "Skontaktuj się z zespołem prepza: pytania o testy rekrutacyjne, pomysły, propozycje współpracy albo coś nie działa. Odpowiadamy e-mailem.",
     "name": "Imię",
     "email": "E-mail",

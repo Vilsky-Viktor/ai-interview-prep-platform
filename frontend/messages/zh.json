@@ -4,6 +4,8 @@
     "language": "语言",
     "languageNote": "用于界面和帮助聊天的回复，以及新面试的默认语言。你可以用任何支持的语言创建面试。",
     "languageFailed": "无法更改语言，请重试。",
+    "account": "你的账户",
+    "accountNote": "就账户问题联系我们时，请提供这个 ID。",
     "yourData": "你的数据",
     "yourDataNote": "下载 prepza. 保存的所有关于你的数据，或删除你的账户。",
     "download": "下载我的数据",
@@ -103,7 +105,9 @@
     "titleFailed": "无法保存标题。",
     "loading": "正在加载…",
     "send": "发送",
-    "thinking": "思考中…"
+    "thinking": "思考中…",
+    "copyId": "复制 ID",
+    "idCopied": "ID 已复制"
   },
   "errors": {
     "title": "出了点问题",
@@ -1038,6 +1042,7 @@
   "contact": {
     "title": "联系我们",
     "intro": "有问题、想法、合作意向，或者遇到故障？给我们留言，我们会通过电子邮件回复。",
+    "idHint": "要咨询某个公司、面试、候选人或你的账户？请粘贴它的 ID：“复制 id”在名称下方，你的账户 ID 在账户菜单中。",
     "description": "联系 prepza 团队：关于招聘测评的问题、想法、合作意向或遇到的故障，都可以给我们留言。我们会通过电子邮件回复。",
     "name": "姓名",
     "email": "电子邮件",

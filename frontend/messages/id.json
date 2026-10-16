@@ -4,6 +4,8 @@
     "language": "Bahasa",
     "languageNote": "Untuk antarmuka dan balasan chat bantuan, serta bahasa awal wawancara baru. Kamu bisa membuat wawancara dalam bahasa apa pun yang didukung.",
     "languageFailed": "Bahasa tidak bisa diubah. Coba lagi.",
+    "account": "Akunmu",
+    "accountNote": "Sebutkan ID ini saat kamu menulis kepada kami tentang akunmu.",
     "yourData": "Datamu",
     "yourDataNote": "Unduh semua yang disimpan prepza. tentangmu, atau hapus akunmu.",
     "download": "Unduh dataku",
@@ -103,7 +105,9 @@
     "titleFailed": "Judul tidak bisa disimpan.",
     "loading": "Memuat…",
     "send": "Kirim",
-    "thinking": "Sedang berpikir…"
+    "thinking": "Sedang berpikir…",
+    "copyId": "Salin ID",
+    "idCopied": "ID disalin"
   },
   "errors": {
     "title": "Terjadi kesalahan",
@@ -1047,6 +1051,7 @@
   "contact": {
     "title": "Hubungi kami",
     "intro": "Ada pertanyaan, ide, tawaran kemitraan, atau ada yang tidak berfungsi? Tulis pesan untuk kami dan kami akan membalas lewat email.",
+    "idHint": "Menulis tentang perusahaan, wawancara, kandidat, atau akunmu? Tempelkan ID-nya: “salin id” ada di bawah namanya, dan ID akunmu ada di menu akun.",
     "description": "Hubungi tim prepza: pertanyaan tentang tes seleksi karyawan, ide, tawaran kemitraan, atau ada yang tidak berfungsi. Kami membalas lewat email.",
     "name": "Nama",
     "email": "Email",

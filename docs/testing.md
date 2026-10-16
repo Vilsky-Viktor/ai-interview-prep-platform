@@ -144,6 +144,7 @@ Playwright tests of the signed-in pages, in the same Docker image, against the r
 - an owner stopping AI apps from using the company's data and allowing them again (kept after a reload), the switch right to left in Arabic,
 - the company's bell saying when an ATS refuses the results written back, Slack stopped working or a web hook stopped, and opening that page to reconnect,
 - the integrations pages on a phone: small logos beside the names with the buttons under them, the pages' buttons under their titles, Reconnect on its own line, the linked jobs, and full-height Instructions,
+- "copy id" on a company, an interview, a candidate, Settings and the account menu, each copying its own ID, and a long email on a candidate's page breaking before its @ on a phone instead of running off the screen,
 - a company's billing: where the credits came from and went (a top-up, written as Paddle's web hook writes it, and a finished candidate's charge, opening their page) and the candidates whose credits are reserved, for owners and admins; a viewer has no billing tab, and its address sends them back to the interviews,
 - a top-up opening the checkout the backend made in Paddle's overlay (skipped when Paddle's sandbox prices aren't in `.env`),
 - a balance saying on hover that it's the current balance, in the company's header and on the billing page,

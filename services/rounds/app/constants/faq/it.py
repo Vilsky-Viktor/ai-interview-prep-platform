@@ -107,4 +107,9 @@ FAQ = [
         "question": "Posso eliminare il mio account?",
         "answer": "Sì, nelle Impostazioni. Il tuo account e i tuoi dati vengono eliminati, e prima puoi scaricarne una copia.",
     },
+    {
+        "key": "report",
+        "question": "Come segnalo un problema?",
+        "answer": "Scrivici dalla pagina dei contatti e incolla l'ID di ciò di cui si tratta: «copia id» è sotto il nome di un'azienda, di un colloquio o di un candidato, e quello del tuo account è nel menu dell'account e nelle Impostazioni. Con l'ID lo troviamo subito.",
+    },
 ]

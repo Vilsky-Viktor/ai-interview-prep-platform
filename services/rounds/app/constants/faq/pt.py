@@ -107,4 +107,9 @@ FAQ = [
         "question": "Posso excluir minha conta?",
         "answer": "Sim, nas Configurações. Sua conta e seus dados são excluídos, e antes você pode baixar uma cópia dos seus dados.",
     },
+    {
+        "key": "report",
+        "question": "Como relato um problema?",
+        "answer": "Escreva para nós pela página de contato e cole o ID do que se trata: “copiar id” fica abaixo do nome de uma empresa, entrevista ou candidato, e o da sua conta, no menu da conta e em Configurações. Com o ID, encontramos na hora.",
+    },
 ]

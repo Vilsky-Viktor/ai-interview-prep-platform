@@ -4,6 +4,8 @@
     "language": "Taal",
     "languageNote": "Voor de interface en de antwoorden van de hulpchat, en de taal waarin nieuwe interviews starten. Je kunt een interview in elke ondersteunde taal maken.",
     "languageFailed": "De taal kon niet worden gewijzigd. Probeer het opnieuw.",
+    "account": "Je account",
+    "accountNote": "Vermeld deze ID als je ons over je account schrijft.",
     "yourData": "Je gegevens",
     "yourDataNote": "Download alles wat prepza. over je bewaart, of verwijder je account.",
     "download": "Mijn gegevens downloaden",
@@ -103,7 +105,9 @@
     "titleFailed": "De titel kon niet worden opgeslagen.",
     "loading": "Laden…",
     "send": "Verzenden",
-    "thinking": "Denkt na…"
+    "thinking": "Denkt na…",
+    "copyId": "ID kopiëren",
+    "idCopied": "ID gekopieerd"
   },
   "errors": {
     "title": "Er ging iets mis",
@@ -1043,6 +1047,7 @@
   "contact": {
     "title": "Neem contact op",
     "intro": "Vragen, ideeën, samenwerking of werkt er iets niet? Schrijf ons en we antwoorden per e-mail.",
+    "idHint": "Schrijf je over een bedrijf, een interview, een kandidaat of je account? Plak de ID: “id kopiëren” staat onder de naam, en die van je account in je accountmenu.",
     "description": "Neem contact op met het prepza-team: vragen over selectietesten, ideeën, samenwerkingsvoorstellen of iets dat niet werkt. We antwoorden per e-mail.",
     "name": "Naam",
     "email": "E-mail",

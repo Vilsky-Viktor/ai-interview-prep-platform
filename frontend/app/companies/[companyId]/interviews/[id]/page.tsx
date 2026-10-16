@@ -10,6 +10,7 @@ import { InterviewNav } from "@/components/company/interview-nav"
 import { InterviewReportActions } from "@/components/company/interview-report-actions"
 import { TryInterview } from "@/components/company/try-interview"
 import { EditableTitle } from "@/components/editable-title"
+import { EntityId } from "@/components/entity-id"
 import { InterviewSettings } from "@/components/company/interview-settings"
 import { InterviewStatus } from "@/components/company/interview-status"
 import { InviteCandidate } from "@/components/company/invite-candidate"
@@ -137,12 +138,12 @@ export default async function InterviewPage({
                       : t("generating")}
                   </h1>
                 )}
-                {/* The status under the title, before the buttons on phones. */}
-                {ready && (
-                  <div className="mt-1 flex">
-                    <InterviewStatus status={interview.status} />
-                  </div>
-                )}
+                {/* The status under the title, before the buttons on phones, and the id to
+                    quote when writing to prepza (also while generating, or after a failure). */}
+                <div className="mt-1 flex flex-wrap items-center gap-x-4">
+                  {ready && <InterviewStatus status={interview.status} />}
+                  <EntityId id={interview.id} />
+                </div>
               </div>
               {/* The test's own actions sit on its tab; inviting, on the candidates tab. The
                   buttons overhang the title's line, so the row is as tall as the title on every

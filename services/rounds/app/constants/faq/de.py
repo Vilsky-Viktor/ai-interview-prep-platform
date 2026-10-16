@@ -107,4 +107,9 @@ FAQ = [
         "question": "Kann ich mein Konto löschen?",
         "answer": "Ja, in den Einstellungen. Dein Konto und deine Daten werden gelöscht, und vorher kannst du eine Kopie deiner Daten herunterladen.",
     },
+    {
+        "key": "report",
+        "question": "Wie melde ich ein Problem?",
+        "answer": "Schreib uns über die Kontaktseite und füge die ID dessen ein, worum es geht: „id kopieren“ steht unter dem Namen eines Unternehmens, eines Interviews oder eines Kandidaten, die ID deines Kontos im Kontomenü und in den Einstellungen. Mit der ID finden wir es sofort.",
+    },
 ]

@@ -11,6 +11,7 @@ import { VerifiedBadge } from "@/components/company/verified-badge"
 import { WarningCard } from "@/components/warning-card"
 import { VerifyCompany } from "@/components/company/verify-company"
 import { EditableTitle } from "@/components/editable-title"
+import { EntityId } from "@/components/entity-id"
 import { MAX_COMPANY_NAME_LENGTH } from "@/constants/limits"
 import { COMPANY_TAB_HELP } from "@/constants/page-help"
 import type { VerificationStatus } from "@/types/company"
@@ -73,31 +74,36 @@ export function CompanyHeader({
           />
         </div>
         {/* Renamed in place, like a test's title; the name stays unique across prepza. Then the
-            verified badge, the pending one while a superadmin reviews it, or the way to verify. */}
-        <div className="me-4 flex min-w-0 flex-1 items-center gap-3">
-          <div className="min-w-0">
-            <EditableTitle
-              title={name}
-              path={`/companies/companies/${companyId}/name`}
-              maxLength={MAX_COMPANY_NAME_LENGTH}
-              editable={canEdit}
-              hint={reviewed ? verify("renameHint") : undefined}
-            />
+            verified badge, the pending one while a superadmin reviews it, or the way to verify;
+            under the name, the id to quote when writing to prepza about the company. The logo
+            and the back arrow are centred on both lines. */}
+        <div className="me-4 min-w-0 flex-1">
+          <div className="flex min-w-0 items-center gap-3">
+            <div className="min-w-0">
+              <EditableTitle
+                title={name}
+                path={`/companies/companies/${companyId}/name`}
+                maxLength={MAX_COMPANY_NAME_LENGTH}
+                editable={canEdit}
+                hint={reviewed ? verify("renameHint") : undefined}
+              />
+            </div>
+            {verifiedDomain ? (
+              <VerifiedBadge domain={verifiedDomain} className="size-7" />
+            ) : canEdit ? (
+              <VerifyCompany
+                companyId={companyId}
+                websiteDomain={websiteDomain}
+                status={verificationStatus}
+                declineReason={declineReason}
+              />
+            ) : (
+              verificationStatus === "pending" && (
+                <PendingBadge className="size-7" />
+              )
+            )}
           </div>
-          {verifiedDomain ? (
-            <VerifiedBadge domain={verifiedDomain} className="size-7" />
-          ) : canEdit ? (
-            <VerifyCompany
-              companyId={companyId}
-              websiteDomain={websiteDomain}
-              status={verificationStatus}
-              declineReason={declineReason}
-            />
-          ) : (
-            verificationStatus === "pending" && (
-              <PendingBadge className="size-7" />
-            )
-          )}
+          <EntityId id={companyId} />
         </div>
         {action && (
           <div className="max-sm:my-4 max-sm:basis-full max-sm:*:w-full">

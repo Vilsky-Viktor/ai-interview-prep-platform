@@ -4,6 +4,8 @@
     "language": "Wika",
     "languageNote": "Para sa interface at mga sagot ng help chat, at ang wikang unang gagamitin ng mga bagong interview. Puwede kang gumawa ng interview sa kahit anong suportadong wika.",
     "languageFailed": "Hindi mabago ang wika. Pakisubukang muli.",
+    "account": "Ang iyong account",
+    "accountNote": "Ibigay ang ID na ito kapag sumulat ka sa amin tungkol sa iyong account.",
     "yourData": "Ang iyong data",
     "yourDataNote": "I-download ang lahat ng hawak ng prepza. tungkol sa iyo, o burahin ang iyong account.",
     "download": "I-download ang aking data",
@@ -103,7 +105,9 @@
     "titleFailed": "Hindi ma-save ang pamagat.",
     "loading": "Naglo-load…",
     "send": "Ipadala",
-    "thinking": "Nag-iisip…"
+    "thinking": "Nag-iisip…",
+    "copyId": "Kopyahin ang ID",
+    "idCopied": "Nakopya ang ID"
   },
   "errors": {
     "title": "Nagkaproblema",
@@ -1051,6 +1055,7 @@
   "contact": {
     "title": "Makipag-ugnayan sa amin",
     "intro": "May tanong, ideya, alok na partnership, o may hindi gumagana? Sumulat sa amin at sasagot kami sa email.",
+    "idHint": "Sumusulat tungkol sa isang kumpanya, interview, aplikante o sa iyong account? I-paste ang ID nito: nasa ilalim ng pangalan nito ang “kopyahin ang id”, at nasa menu ng account mo ang ID ng iyong account.",
     "description": "Makipag-ugnayan sa team ng prepza: mga tanong tungkol sa pre-employment assessment, mga ideya, alok na partnership, o may hindi gumagana. Sumasagot kami sa email.",
     "name": "Pangalan",
     "email": "Email",

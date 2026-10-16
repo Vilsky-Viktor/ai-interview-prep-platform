@@ -107,4 +107,9 @@ FAQ = [
         "question": "Kas saan oma konto kustutada?",
         "answer": "Jah, seadetes. Sinu konto ja andmed kustutatakse ning enne seda saad oma andmetest koopia alla laadida.",
     },
+    {
+        "key": "report",
+        "question": "Kuidas probleemist teada anda?",
+        "answer": "Kirjuta meile kontaktilehel ja kleebi selle ID, millest jutt käib: „kopeeri id“ on ettevõtte, intervjuu või kandidaadi nime all, sinu konto oma aga kontomenüüs ja seadetes. ID järgi leiame selle kohe üles.",
+    },
 ]

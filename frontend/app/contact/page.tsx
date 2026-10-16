@@ -20,6 +20,8 @@ export default async function ContactPage() {
           {t("title")}
         </h1>
         <p className="text-base text-muted-foreground">{t("intro")}</p>
+        {/* What to quote, so support finds what the message is about at once. */}
+        <p className="text-base text-muted-foreground">{t("idHint")}</p>
         <p className="text-sm text-muted-foreground">
           {t("operator", {
             name: OPERATOR.name,

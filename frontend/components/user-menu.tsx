@@ -16,6 +16,7 @@ import { useAuth } from "@/components/auth-provider"
 import { ThemeModes } from "@/components/theme-toggle"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
+import { CopyIdItem } from "@/components/copy-id-item"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -95,6 +96,9 @@ export function UserMenu() {
             </p>
             <p className="truncate font-normal">{user.email}</p>
           </DropdownMenuLabel>
+          {/* The account's id, to quote when writing to prepza: a menu item, reached with the
+              arrow keys too, that stays open to show it copied. */}
+          <CopyIdItem id={user.uid} />
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem

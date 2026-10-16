@@ -4,6 +4,7 @@ import Link from "next/link"
 
 import { NoName } from "@/components/company/no-name"
 import { VirtualList } from "@/components/virtual-list"
+import { WrappedEmail } from "@/components/wrapped-email"
 import { LIST_BOX } from "@/constants/lists"
 import { usePagedList } from "@/hooks/use-paged-list"
 import type { CreditCandidate } from "@/types/company"
@@ -39,8 +40,8 @@ export function ReservedList({
           href={`/companies/${companyId}/interviews/${candidate.interview_id}/candidates/${candidate.invite_id}`}
           className="block space-y-1 p-6 transition-colors hover:bg-muted/50 active:bg-muted/50"
         >
-          <span className="block text-lg font-medium break-all">
-            {candidate.email}
+          <span className="block text-lg font-medium">
+            <WrappedEmail email={candidate.email} />
           </span>
           <span className="block text-sm break-all text-muted-foreground">
             {candidate.name ?? <NoName hint="list" />}

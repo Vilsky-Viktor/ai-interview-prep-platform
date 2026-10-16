@@ -4,6 +4,8 @@
     "language": "Keel",
     "languageNote": "Liidese ja abivestluse vastuste jaoks ning keel, milles uued intervjuud algavad. Intervjuu saad luua igas toetatud keeles.",
     "languageFailed": "Keelt ei õnnestunud muuta. Proovi uuesti.",
+    "account": "Sinu konto",
+    "accountNote": "Lisa see ID, kui kirjutad meile oma konto kohta.",
     "yourData": "Sinu andmed",
     "yourDataNote": "Laadi alla kõik, mida prepza. sinu kohta hoiab, või kustuta oma konto.",
     "download": "Laadi minu andmed alla",
@@ -103,7 +105,9 @@
     "titleFailed": "Pealkirja ei õnnestunud salvestada.",
     "loading": "Laadimine…",
     "send": "Saada",
-    "thinking": "Mõtleb…"
+    "thinking": "Mõtleb…",
+    "copyId": "Kopeeri ID",
+    "idCopied": "ID kopeeritud"
   },
   "errors": {
     "title": "Midagi läks valesti",
@@ -1051,6 +1055,7 @@
   "contact": {
     "title": "Võta meiega ühendust",
     "intro": "Küsimus, idee, koostööpakkumine või midagi ei tööta? Kirjuta meile ja vastame e-postiga.",
+    "idHint": "Kirjutad ettevõtte, intervjuu, kandidaadi või oma konto kohta? Kleebi selle ID: „kopeeri id“ on nime all, sinu konto oma aga kontomenüüs.",
     "description": "Võta ühendust prepza meeskonnaga: küsimused värbamistestide kohta, ideed, koostööpakkumised või midagi ei tööta. Vastame e-postiga.",
     "name": "Nimi",
     "email": "E-post",

@@ -107,4 +107,9 @@ FAQ = [
         "question": "Bisakah aku menghapus akunku?",
         "answer": "Bisa, di Pengaturan. Akun dan datamu dihapus, dan sebelumnya kamu bisa mengunduh salinan datamu.",
     },
+    {
+        "key": "report",
+        "question": "Bagaimana cara melaporkan masalah?",
+        "answer": "Tulis pesan kepada kami di halaman kontak dan tempelkan ID hal yang kamu maksud: “salin id” ada di bawah nama perusahaan, wawancara, atau kandidat, dan ID akunmu ada di menu akun serta di Pengaturan. Dengan ID itu, kami langsung menemukannya.",
+    },
 ]

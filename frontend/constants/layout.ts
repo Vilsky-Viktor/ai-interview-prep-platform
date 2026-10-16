@@ -9,3 +9,6 @@ export const TIMED_PAGE = /^(\/[a-z]{2,3})?\/sessions\//
 // invitation: like its interview, they show the company only, without prepza's header and footer.
 export const COMPANY_INTERVIEW_PAGE =
   /^(\/[a-z]{2,3})?\/((invite|apply|embedded)\/|companies\/[^/]+\/interviews\/[^/]+\/try$)/
+
+// How long a copy button shows its check mark after copying.
+export const COPIED_MS = 3000

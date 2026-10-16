@@ -107,4 +107,9 @@ FAQ = [
         "question": "Czy mogę usunąć konto?",
         "answer": "Tak, w Ustawieniach. Twoje konto i dane zostają usunięte, a wcześniej możesz pobrać ich kopię.",
     },
+    {
+        "key": "report",
+        "question": "Jak zgłosić problem?",
+        "answer": "Napisz do nas na stronie kontaktowej i wklej ID tego, czego dotyczy sprawa: „kopiuj id” jest pod nazwą firmy, rozmowy lub kandydata, a ID Twojego konta — w menu konta i w Ustawieniach. Dzięki ID od razu to znajdziemy.",
+    },
 ]

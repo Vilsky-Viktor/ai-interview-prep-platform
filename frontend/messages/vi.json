@@ -4,6 +4,8 @@
     "language": "Ngôn ngữ",
     "languageNote": "Dùng cho giao diện và câu trả lời của chat hỗ trợ, cùng ngôn ngữ mặc định của buổi phỏng vấn mới. Bạn có thể tạo buổi phỏng vấn bằng bất kỳ ngôn ngữ nào được hỗ trợ.",
     "languageFailed": "Không thể đổi ngôn ngữ. Vui lòng thử lại.",
+    "account": "Tài khoản của bạn",
+    "accountNote": "Hãy ghi ID này khi bạn viết cho chúng tôi về tài khoản của mình.",
     "yourData": "Dữ liệu của bạn",
     "yourDataNote": "Tải xuống mọi thứ prepza. lưu về bạn, hoặc xóa tài khoản.",
     "download": "Tải dữ liệu của tôi",
@@ -103,7 +105,9 @@
     "titleFailed": "Không thể lưu tiêu đề.",
     "loading": "Đang tải…",
     "send": "Gửi",
-    "thinking": "Đang suy nghĩ…"
+    "thinking": "Đang suy nghĩ…",
+    "copyId": "Sao chép ID",
+    "idCopied": "Đã sao chép ID"
   },
   "errors": {
     "title": "Đã xảy ra lỗi",
@@ -1043,6 +1047,7 @@
   "contact": {
     "title": "Liên hệ với chúng tôi",
     "intro": "Bạn có câu hỏi, ý tưởng, đề xuất hợp tác hoặc gặp sự cố? Hãy viết cho chúng tôi, chúng tôi sẽ trả lời qua email.",
+    "idHint": "Bạn viết về một công ty, buổi phỏng vấn, ứng viên hay tài khoản của mình? Hãy dán ID của nó: “sao chép id” nằm dưới tên, còn ID tài khoản của bạn nằm trong menu tài khoản.",
     "description": "Liên hệ đội ngũ prepza: câu hỏi về bài test tuyển dụng, ý tưởng, đề xuất hợp tác hoặc sự cố. Chúng tôi trả lời qua email.",
     "name": "Tên",
     "email": "Email",

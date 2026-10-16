@@ -6,6 +6,7 @@ import { useLocale, useTranslations } from "next-intl"
 import { CompanyLogo } from "@/components/company/company-logo"
 import { VerifiedBadge } from "@/components/company/verified-badge"
 import { Wordmark } from "@/components/wordmark"
+import { WrappedEmail } from "@/components/wrapped-email"
 import { INTERVIEW_REPORT_ID } from "@/constants/report"
 import { gradeTone } from "@/lib/grade-tone"
 import type { InterviewReportData } from "@/types/company"
@@ -74,8 +75,8 @@ export function InterviewReport({ report }: { report: InterviewReportData }) {
               className="flex break-inside-avoid items-center justify-between gap-4 px-4 py-2.5"
             >
               <div className="min-w-0 space-y-0.5">
-                <p className="text-base font-medium break-all">
-                  {candidate.email}
+                <p className="text-base font-medium">
+                  <WrappedEmail email={candidate.email} />
                 </p>
                 {candidate.name && (
                   <p className="text-sm break-all text-muted-foreground">

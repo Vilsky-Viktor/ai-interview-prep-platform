@@ -4,6 +4,8 @@
     "language": "Dil",
     "languageNote": "Arayüz ve yardım sohbetinin yanıtları için, ayrıca yeni mülakatların başladığı dil. Mülakatı desteklenen herhangi bir dilde oluşturabilirsiniz.",
     "languageFailed": "Dil değiştirilemedi. Lütfen tekrar deneyin.",
+    "account": "Hesabınız",
+    "accountNote": "Hesabınızla ilgili bize yazarken bu ID'yi belirtin.",
     "yourData": "Verileriniz",
     "yourDataNote": "prepza.'nın sizin hakkınızda tuttuğu her şeyi indirin veya hesabınızı silin.",
     "download": "Verilerimi indir",
@@ -103,7 +105,9 @@
     "titleFailed": "Başlık kaydedilemedi.",
     "loading": "Yükleniyor…",
     "send": "Gönder",
-    "thinking": "Düşünüyor…"
+    "thinking": "Düşünüyor…",
+    "copyId": "ID'yi kopyala",
+    "idCopied": "ID kopyalandı"
   },
   "errors": {
     "title": "Bir şeyler ters gitti",
@@ -1046,6 +1050,7 @@
   "contact": {
     "title": "Bize ulaşın",
     "intro": "Bir sorunuz, fikriniz veya iş birliği teklifiniz mi var, ya da bir şey çalışmıyor mu? Bize yazın, size e-postayla yanıt verelim.",
+    "idHint": "Bir şirket, mülakat, aday veya hesabınız hakkında mı yazıyorsunuz? ID'sini yapıştırın: “id'yi kopyala” adının altında, hesabınızınki ise hesap menüsünde.",
     "description": "prepza ekibiyle iletişime geçin: işe alım testleriyle ilgili sorular, fikirler, iş birliği teklifleri ya da çalışmayan bir şey. E-postayla yanıt veriyoruz.",
     "name": "Ad",
     "email": "E-posta",

@@ -8,6 +8,7 @@ import { useLocalTime } from "@/hooks/use-local-time"
 import { CandidateSignals } from "@/components/company/candidate-signals"
 import { NoName } from "@/components/company/no-name"
 import { Badge } from "@/components/ui/badge"
+import { WrappedEmail } from "@/components/wrapped-email"
 import { gradeTone } from "@/lib/grade-tone"
 import type { Candidate } from "@/types/company"
 import { formatPercent } from "@/lib/format"
@@ -54,8 +55,12 @@ export function CandidateRow({
       <span className="flex flex-col gap-4 p-4 @xl:flex-row @xl:items-center @xl:justify-between @xl:p-6">
         <span className="min-w-0 space-y-1">
           <span className="block">
-            <span className="block text-lg font-medium break-all">
-              {candidate.status === "deleted" ? t("deleted") : candidate.email}
+            <span className="block text-lg font-medium">
+              {candidate.status === "deleted" ? (
+                t("deleted")
+              ) : (
+                <WrappedEmail email={candidate.email} />
+              )}
             </span>
             {candidate.status !== "deleted" && (
               <span className="block text-sm leading-tight break-all text-muted-foreground">

@@ -4,6 +4,8 @@
     "language": "Language",
     "languageNote": "For the interface and the help chat's replies, and the language new interviews start in. You can create an interview in any supported language.",
     "languageFailed": "Couldn't change the language. Please try again.",
+    "account": "Your account",
+    "accountNote": "Quote this ID when you write to us about your account.",
     "yourData": "Your data",
     "yourDataNote": "Download everything prepza. holds about you, or delete your account.",
     "download": "Download my data",
@@ -103,7 +105,9 @@
     "titleFailed": "Couldn't save the title.",
     "loading": "Loading…",
     "send": "Send",
-    "thinking": "Thinking…"
+    "thinking": "Thinking…",
+    "copyId": "Copy ID",
+    "idCopied": "ID copied"
   },
   "errors": {
     "title": "Something went wrong",
@@ -1047,6 +1051,7 @@
   "contact": {
     "title": "Contact us",
     "intro": "Questions, ideas, partnership or something not working? Write to us and we'll reply by email.",
+    "idHint": "Writing about a company, an interview, a candidate or your account? Paste its ID: \"copy id\" is under its name, and your account's is in your account menu.",
     "description": "Contact the prepza team with questions about skills tests for hiring, ideas, partnership offers or something that isn't working. We reply by email.",
     "name": "Name",
     "email": "Email",

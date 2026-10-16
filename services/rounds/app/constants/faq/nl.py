@@ -107,4 +107,9 @@ FAQ = [
         "question": "Kan ik mijn account verwijderen?",
         "answer": "Ja, in Instellingen. Je account en je gegevens worden verwijderd, en vooraf kun je een kopie van je gegevens downloaden.",
     },
+    {
+        "key": "report",
+        "question": "Hoe meld ik een probleem?",
+        "answer": "Schrijf ons via de contactpagina en plak de ID van waar het om gaat: “id kopiëren” staat onder de naam van een bedrijf, een interview of een kandidaat, en die van je account in je accountmenu en in Instellingen. Met de ID vinden we het meteen.",
+    },
 ]

@@ -142,6 +142,17 @@ The description's text may hold bold, inline code, links (`[text](/api-docs?tab=
 - At most 5 messages a day per address (the `CONTACT_IP_LIMIT` constant in `services/rounds/app/constants/contact.py`).
 - At most 200 a day in all (the `CONTACT_DAILY_LIMIT` setting).
 
+### IDs to quote
+
+So support finds what a message is about at once, the page asks visitors to paste the ID of what they write about. Each one has a "copy id" button (`components/entity-id.tsx`) that copies its ID and shows a check mark for 3 seconds:
+
+- a company's, under its name in the company's header;
+- an interview's, under its title, beside its status (also while it generates, or after it failed);
+- a candidate's invite, on the line under their email;
+- the account's (the Firebase uid), as a small button under the email in the account menu, and as a button in Settings, under "Your account".
+
+The FAQ ("How do I report a problem?") and the help chat and assistant's guide say the same. An email shown large (a candidate's page, the candidate, team and credits-held lists, the interview report) breaks before its `@` when it doesn't fit (`components/wrapped-email.tsx`), so it never runs off a phone's screen.
+
 ## News
 
 `/news` ("prepza news.") lists prepza's posts newest first, one after another: title (ending with the blue dot, like the site's headings), date and text. No pictures, links or detail pages; the text is plain, with its line breaks. Superadmins write them in the [admin zone](admin-zone.md#news).

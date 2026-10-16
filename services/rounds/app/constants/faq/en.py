@@ -106,4 +106,9 @@ FAQ = [
         "question": "Can I delete my account?",
         "answer": "Yes, in Settings. Your account and your data are deleted, and you can download a copy of your data first.",
     },
+    {
+        "key": "report",
+        "question": "How do I report a problem?",
+        "answer": "Write to us on the contact page and paste the ID of what it's about: \"copy id\" is under the name of a company, an interview or a candidate, and your account's is in your account menu and in Settings. With the ID we find it at once.",
+    },
 ]

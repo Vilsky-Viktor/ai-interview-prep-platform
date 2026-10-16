@@ -15,9 +15,11 @@ import { EditableTitle } from "@/components/editable-title"
 import { GradeBlock, GradeCard } from "@/components/grade-card"
 import { NoName } from "@/components/company/no-name"
 import { PassStatus } from "@/components/company/pass-status"
+import { EntityId } from "@/components/entity-id"
 import { PageHeader } from "@/components/page-header"
 import { SignInPage } from "@/components/sign-in-page"
 import { Badge } from "@/components/ui/badge"
+import { WrappedEmail } from "@/components/wrapped-email"
 import { MAX_CANDIDATE_NAME_LENGTH } from "@/constants/limits"
 import { gradeTone } from "@/lib/grade-tone"
 import { serverFetch, signedIn } from "@/lib/server-api"
@@ -93,7 +95,7 @@ export default async function ScorecardPage({
           title={
             <div className="space-y-1">
               <h1 className="font-heading text-3xl font-medium tracking-tight">
-                {deleted ? t("deleted") : card.email}
+                {deleted ? t("deleted") : <WrappedEmail email={card.email} />}
               </h1>
               {/* The name and the status on one line, to save one. */}
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
@@ -120,6 +122,7 @@ export default async function ScorecardPage({
                 >
                   {statuses(card.status)}
                 </Badge>
+                <EntityId id={inviteId} />
               </div>
             </div>
           }
@@ -190,9 +193,9 @@ export default async function ScorecardPage({
       )}
 
       {/* The score supports a decision people make; in the gray info card, like the practice
-          test page's. */}
+          test page's. On phones it spans the screen, with square corners. */}
       {card.sessions.length > 0 && (
-        <div className="flex items-center gap-3 rounded-2xl border bg-muted px-5 py-4 text-sm text-muted-foreground">
+        <div className="flex items-center gap-3 rounded-2xl border bg-muted px-5 py-4 text-sm text-muted-foreground max-sm:-mx-6 max-sm:rounded-none max-sm:border-x-0 max-sm:px-6">
           <InfoIcon aria-hidden className="size-6 shrink-0 text-primary" />
           <p>
             {reportT("humanReview")}

@@ -1,6 +1,7 @@
 import { expect, type Page, test } from "@playwright/test"
 
 import { API_URL, HUMAN_CHECK_TOKEN, MIN_QUESTION_SECONDS } from "../constants"
+import { inviteToken } from "./db"
 import { tokenOf } from "./sign-in"
 import { randomId } from "./users"
 
@@ -63,6 +64,26 @@ export async function createInterview(page: Page, companyId: string) {
   })
 
   return interview.id
+}
+
+/** The invited candidate, signed in on `candidate`, starts their invite, answers one question and
+ * finishes, as the app's player does. */
+export async function finishOneAnswer(candidate: Page, email: string) {
+  const { sessions } = await api<{ sessions: { id: string }[] }>(
+    candidate,
+    "POST",
+    `/companies/invites/${await inviteToken(email)}/start`
+  )
+  const step = await api<{ session: { id: string }; question: { question_id: string } }>(
+    candidate,
+    "POST",
+    `/rounds/sessions/${sessions[0].id}/step`
+  )
+  await api(candidate, "POST", `/rounds/sessions/${step.session.id}/answers`, {
+    question_id: step.question.question_id,
+    option_index: 0,
+  })
+  await api(candidate, "POST", `/rounds/sessions/${sessions[0].id}/finish-interview`)
 }
 
 /** Invites one candidate to the interview. */

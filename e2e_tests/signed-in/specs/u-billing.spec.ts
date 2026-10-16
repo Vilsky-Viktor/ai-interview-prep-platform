@@ -3,9 +3,10 @@ import {
   api,
   createCompany,
   createInterview,
+  finishOneAnswer,
   inviteCandidate,
 } from "../helpers/api";
-import { addTopUp, inviteToken } from "../helpers/db";
+import { addTopUp } from "../helpers/db";
 import { openTab, visit } from "../helpers/navigation";
 import { shot } from "../helpers/screenshots";
 import { ownerEmail, throwawayEmail } from "../helpers/users";
@@ -88,24 +89,7 @@ test("the history lists a top-up and a candidate's charge", async ({
 
   // The candidate answers one question and finishes, as the app's player does.
   const candidate = await signInAs(email);
-  const { sessions } = await api<{ sessions: { id: string }[] }>(
-    candidate,
-    "POST",
-    `/companies/invites/${await inviteToken(email)}/start`,
-  );
-  const step = await api<{
-    session: { id: string };
-    question: { question_id: string };
-  }>(candidate, "POST", `/rounds/sessions/${sessions[0].id}/step`);
-  await api(candidate, "POST", `/rounds/sessions/${step.session.id}/answers`, {
-    question_id: step.question.question_id,
-    option_index: 0,
-  });
-  await api(
-    candidate,
-    "POST",
-    `/rounds/sessions/${sessions[0].id}/finish-interview`,
-  );
+  await finishOneAnswer(candidate, email);
 
   const topUp = owner.getByRole("listitem").filter({ hasText: "Top-up" });
   const charge = owner.getByRole("link").filter({ hasText: email });

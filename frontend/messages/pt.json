@@ -4,6 +4,8 @@
     "language": "Idioma",
     "languageNote": "Para a interface e as respostas do chat de ajuda, e o idioma em que novas entrevistas começam. Você pode criar uma entrevista em qualquer idioma disponível.",
     "languageFailed": "Não foi possível alterar o idioma. Tente novamente.",
+    "account": "Sua conta",
+    "accountNote": "Informe este ID quando nos escrever sobre sua conta.",
     "yourData": "Seus dados",
     "yourDataNote": "Baixe tudo o que a prepza. guarda sobre você ou exclua sua conta.",
     "download": "Baixar meus dados",
@@ -103,7 +105,9 @@
     "titleFailed": "Não foi possível salvar o título.",
     "loading": "Carregando…",
     "send": "Enviar",
-    "thinking": "Pensando…"
+    "thinking": "Pensando…",
+    "copyId": "Copiar ID",
+    "idCopied": "ID copiado"
   },
   "errors": {
     "title": "Algo deu errado",
@@ -1043,6 +1047,7 @@
   "contact": {
     "title": "Fale conosco",
     "intro": "Dúvidas, ideias, parcerias ou algo não está funcionando? Escreva para nós e responderemos por e-mail.",
+    "idHint": "Vai escrever sobre uma empresa, uma entrevista, um candidato ou sua conta? Cole o ID: “copiar id” fica abaixo do nome, e o da sua conta, no menu da conta.",
     "description": "Fale com a equipe da prepza: dúvidas sobre testes de recrutamento e seleção, ideias, propostas de parceria ou algo que não está funcionando. Respondemos por e-mail.",
     "name": "Nome",
     "email": "E-mail",
