@@ -112,9 +112,9 @@ You need `gcloud`, Docker and Terraform 1.9+ (or `docker run hashicorp/terraform
      gcloud run services update $service --region=europe-west1 --update-labels=restarted=$(date +%s)
    done
    ```
-10. **Point the domain at the load balancer.** In GoDaddy's DNS, add an **A record** for `@` with the value of `terraform output site_ip`. Google then issues the certificate, which can take up to about an hour:
+10. **Point the domain at the load balancer.** In GoDaddy's DNS, add an **A record** for `@` with the value of `terraform output site_ip`, and keep GoDaddy's **CNAME** `www` → `@` (add it if it's missing): `www.prepza.ai` redirects to `prepza.ai`. Google then issues both certificates, which can take up to about an hour; each is independent, so the site works even while `www`'s is pending:
     ```bash
-    gcloud compute ssl-certificates describe prepza --global --format='value(managed.status)'
+    gcloud compute ssl-certificates list --global --format='table(name,managed.status)'
     ```
     Until the certificate is active, the uptime checks fail and their alerts email you; they clear by themselves once the site answers.
 11. **Update the services that call back to the site:**

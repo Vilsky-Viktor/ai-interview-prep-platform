@@ -13,6 +13,16 @@ resource "google_compute_managed_ssl_certificate" "site" {
   }
 }
 
+# www. only redirects to the domain (the URL map below), with a certificate of its own: one
+# certificate for both would stay inactive, the domain's included, until www's DNS points here.
+resource "google_compute_managed_ssl_certificate" "www" {
+  name = "prepza-www"
+
+  managed {
+    domains = ["www.${var.domain}"]
+  }
+}
+
 locals {
   public_services = { for name, service in local.services : name => service if service.public }
 }
@@ -128,8 +138,24 @@ resource "google_compute_url_map" "site" {
   default_service = google_compute_backend_service.service["frontend"].id
 
   host_rule {
+    hosts        = ["www.${var.domain}"]
+    path_matcher = "www"
+  }
+
+  host_rule {
     hosts        = ["*"]
     path_matcher = "routes"
+  }
+
+  path_matcher {
+    name = "www"
+
+    default_url_redirect {
+      host_redirect          = var.domain
+      https_redirect         = true
+      strip_query            = false
+      redirect_response_code = "MOVED_PERMANENTLY_DEFAULT"
+    }
   }
 
   path_matcher {
@@ -192,7 +218,7 @@ resource "google_compute_url_map" "site" {
 resource "google_compute_target_https_proxy" "site" {
   name             = "prepza"
   url_map          = google_compute_url_map.site.id
-  ssl_certificates = [google_compute_managed_ssl_certificate.site.id]
+  ssl_certificates = [google_compute_managed_ssl_certificate.site.id, google_compute_managed_ssl_certificate.www.id]
 }
 
 resource "google_compute_global_forwarding_rule" "https" {
