@@ -95,7 +95,7 @@ FAQ = [
     {
         "key": "privacy",
         "question": "Cosa succede alle descrizioni dei ruoli e alle risposte?",
-        "answer": "Le descrizioni dei ruoli servono a creare i tuoi colloqui, e le risposte dei candidati a valutarli, solo per la tua azienda. L'informativa sulla privacy spiega cosa conserviamo, per quanto tempo e i diritti di ciascuno.",
+        "answer": "Le descrizioni dei ruoli servono a creare i colloqui della tua azienda, e le risposte dei candidati a valutarli per la tua azienda. prepza usa anche le risposte aggregate, senza identificare nessuno, per misurare e migliorare la qualità delle domande. L'informativa sulla privacy spiega cosa conserviamo, per quanto tempo e i diritti di ciascuno.",
     },
     {
         "key": "emails",

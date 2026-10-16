@@ -94,7 +94,7 @@ FAQ = [
     {
         "key": "privacy",
         "question": "What happens to job descriptions and answers?",
-        "answer": "Job descriptions are used to build your interviews, and candidates' answers to score them, for your company only. The privacy policy explains what we keep, for how long, and everyone's rights.",
+        "answer": "Job descriptions are used to build your company's interviews, and candidates' answers to score them for your company. prepza also uses answers combined, without identifying anyone, to measure and improve the quality of questions. The privacy policy explains what we keep, for how long, and everyone's rights.",
     },
     {
         "key": "emails",

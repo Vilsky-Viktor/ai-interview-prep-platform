@@ -95,7 +95,7 @@ FAQ = [
     {
         "key": "privacy",
         "question": "Was passiert mit Stellenbeschreibungen und Antworten?",
-        "answer": "Stellenbeschreibungen werden genutzt, um deine Interviews zu erstellen, und die Antworten der Kandidaten, um sie zu bewerten, nur für dein Unternehmen. Die Datenschutzerklärung erklärt, was wir speichern, wie lange und welche Rechte alle haben.",
+        "answer": "Stellenbeschreibungen werden genutzt, um die Interviews deines Unternehmens zu erstellen, und die Antworten der Kandidaten, um sie für dein Unternehmen zu bewerten. Außerdem nutzt prepza die Antworten zusammengefasst und ohne Identifizierung einzelner Personen, um die Qualität der Fragen zu messen und zu verbessern. Die Datenschutzerklärung erklärt, was wir speichern, wie lange und welche Rechte alle haben.",
     },
     {
         "key": "emails",

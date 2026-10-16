@@ -95,7 +95,7 @@ FAQ = [
     {
         "key": "privacy",
         "question": "İş tanımları ve cevaplara ne olur?",
-        "answer": "İş tanımları mülakatlarınızı hazırlamak, adayların cevapları ise onları puanlamak için yalnızca şirketiniz adına kullanılır. Gizlilik politikası neleri, ne kadar süre sakladığımızı ve herkesin haklarını açıklar.",
+        "answer": "İş tanımları şirketinizin mülakatlarını hazırlamak, adayların cevapları ise onları şirketiniz adına puanlamak için kullanılır. prepza ayrıca cevapları birleştirilmiş şekilde ve kimseyi tanımlamadan, soruların kalitesini ölçmek ve iyileştirmek için kullanır. Gizlilik politikası neleri, ne kadar süre sakladığımızı ve herkesin haklarını açıklar.",
     },
     {
         "key": "emails",

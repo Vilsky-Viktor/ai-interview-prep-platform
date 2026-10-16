@@ -95,7 +95,7 @@ FAQ = [
     {
         "key": "privacy",
         "question": "Que deviennent les fiches de poste et les réponses ?",
-        "answer": "Les fiches de poste servent à créer vos entretiens, et les réponses des candidats à les noter, uniquement pour votre entreprise. La politique de confidentialité explique ce que nous conservons, pendant combien de temps, et les droits de chacun.",
+        "answer": "Les fiches de poste servent à créer les entretiens de votre entreprise, et les réponses des candidats à les noter pour votre entreprise. prepza utilise aussi les réponses agrégées, sans identifier personne, pour mesurer et améliorer la qualité des questions. La politique de confidentialité explique ce que nous conservons, pendant combien de temps, et les droits de chacun.",
     },
     {
         "key": "emails",

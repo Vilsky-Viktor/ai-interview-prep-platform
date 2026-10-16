@@ -95,7 +95,7 @@ FAQ = [
     {
         "key": "privacy",
         "question": "Ano ang nangyayari sa mga job description at mga sagot?",
-        "answer": "Ginagamit ang mga job description para buuin ang iyong mga interview, at ang mga sagot ng aplikante para i-score ang mga ito, para sa iyong kumpanya lang. Ipinapaliwanag ng privacy policy kung ano ang itinatago namin, gaano katagal, at ang mga karapatan ng lahat.",
+        "answer": "Ginagamit ang mga job description para buuin ang mga interview ng iyong kumpanya, at ang mga sagot ng aplikante para i-score ang mga ito para sa iyong kumpanya. Ginagamit din ng prepza ang mga sagot nang pinagsama-sama at nang hindi kinikilala ang sinuman, para sukatin at pahusayin ang kalidad ng mga tanong. Ipinapaliwanag ng privacy policy kung ano ang itinatago namin, gaano katagal, at ang mga karapatan ng lahat.",
     },
     {
         "key": "emails",

@@ -95,7 +95,7 @@ FAQ = [
     {
         "key": "privacy",
         "question": "Wat gebeurt er met functieomschrijvingen en antwoorden?",
-        "answer": "Functieomschrijvingen worden gebruikt om je interviews te maken, en de antwoorden van kandidaten om ze te beoordelen, alleen voor jouw bedrijf. Het privacybeleid legt uit wat we bewaren, hoe lang en welke rechten iedereen heeft.",
+        "answer": "Functieomschrijvingen worden gebruikt om de interviews van jouw bedrijf te maken, en de antwoorden van kandidaten om ze voor jouw bedrijf te beoordelen. prepza gebruikt antwoorden ook samengevoegd, zonder iemand te identificeren, om de kwaliteit van vragen te meten en te verbeteren. Het privacybeleid legt uit wat we bewaren, hoe lang en welke rechten iedereen heeft.",
     },
     {
         "key": "emails",
