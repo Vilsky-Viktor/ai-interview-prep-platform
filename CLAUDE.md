@@ -99,3 +99,11 @@
     - **A blank line** between the subject and the body.
     - **Body wrapped at 72 characters**, so `git log` reads well in a terminal.
     - **Why over how:** the body explains why the change was needed; the diff shows how.
+
+14. **UI changes: approval first, then everything else.** For any change a user sees,
+    build it in English only and show it (the user reviews it on the local site, plus
+    screenshots from one short run), then wait for the user's approval. Until then, write no
+    tests, run no test suites and translate nothing: running tests slows the local site down
+    so much that the user can't move between pages to review it. Once the UI is approved,
+    write and run its tests, translate it into every language, and update READMEs, docs,
+    help texts, the FAQ, the assistant's knowledge and articles.

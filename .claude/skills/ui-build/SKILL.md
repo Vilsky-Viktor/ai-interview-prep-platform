@@ -60,8 +60,13 @@ No new colors, shadows, gradients or effects unless asked.
 - **Every text in 23 languages**: use the `translate` skill.
 - **Every icon-only button** has an `aria-label` and a tooltip.
 
-## Before tests
+## Approval first (CLAUDE.md rule 14)
 
-Show the new UI first: take desktop and phone screenshots (the `ui-check` skill), send them, and
-wait for the user's confirmation. Write the tests once the design is confirmed. They check what the
-screen does, not its wording (see the `verify` skill, "What a test checks").
+Build it in English only. Show it: the user reviews it on the local site, and send desktop and
+phone screenshots from one short run (the `ui-check` skill). Then wait. Until the user approves
+the UI, write no tests, run no test suites and translate nothing: a test run slows the local
+site so much that the user can't move between pages to review it.
+
+Once approved: write and run the tests (they check what the screen does, not its wording; see
+the `verify` skill, "What a test checks"), translate into every language (the `translate`
+skill), and update READMEs, docs, help texts, the FAQ, the assistant's knowledge and articles.

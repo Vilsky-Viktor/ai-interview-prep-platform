@@ -6,6 +6,8 @@ description: Choose and run the right test suites for a change (unit, database, 
 # Verify a change
 
 Rule 8: every change ships with its tests, and the affected suites run before it's done.
+For a change a user sees, only after the user has approved the UI (rule 14): a test run slows
+the local site so much that the user can't review it meanwhile.
 
 ## Which suites
 

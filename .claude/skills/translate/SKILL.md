@@ -5,6 +5,9 @@ description: Add or change a user-facing text in all 23 languages, frontend mess
 
 # Translate a text into every language
 
+For a change a user sees, translate only after the user has approved the UI in English (CLAUDE.md
+rule 14).
+
 prepza speaks 23 languages (`frontend/constants/i18n.ts` `LOCALES`). A text changed in English
 must change in all of them in the same commit.
 
