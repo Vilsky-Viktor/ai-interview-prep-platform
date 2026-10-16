@@ -6,6 +6,7 @@ import { useState } from "react"
 import { toast } from "sonner"
 
 import { useLocalTime } from "@/hooks/use-local-time"
+import { IconButton } from "@/components/icon-button"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -16,16 +17,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 import type { ApiWebhook, WebhookAttempt } from "@/types/api-access"
-
-const ICON_BUTTON =
-  "size-12 shrink-0 text-muted-foreground hover:text-foreground"
 
 /** A web hook's own actions on the API page: owners and admins send it a signed test event;
  * anyone sees its delivery log, its latest sends and how they went. */
@@ -72,38 +65,6 @@ export function WebhookActions({
       )}
       <WebhookLog path={`${path}/log?company_id=${companyId}`} url={hook.url} />
     </>
-  )
-}
-
-function IconButton({
-  label,
-  disabled,
-  onClick,
-  children,
-}: {
-  label: string
-  disabled?: boolean
-  onClick: () => void
-  children: React.ReactNode
-}) {
-  return (
-    <Tooltip>
-      <TooltipTrigger
-        render={
-          <Button
-            variant="ghost"
-            size="icon"
-            className={ICON_BUTTON}
-            aria-label={label}
-            disabled={disabled}
-            onClick={onClick}
-          />
-        }
-      >
-        {children}
-      </TooltipTrigger>
-      <TooltipContent>{label}</TooltipContent>
-    </Tooltip>
   )
 }
 

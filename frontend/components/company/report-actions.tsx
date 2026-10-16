@@ -6,11 +6,8 @@ import { useState } from "react"
 import { toast } from "sonner"
 
 import { ShareReport } from "@/components/company/share-report"
-import { Button } from "@/components/ui/button"
+import { IconButton } from "@/components/icon-button"
 import { reportPdf } from "@/lib/report-pdf"
-
-const ICON_BUTTON =
-  "size-12 shrink-0 text-muted-foreground hover:text-foreground"
 
 /** Download a PDF report, or share it by email or chat. It's made from the hidden element
  * `reportId` (over several pages with `pages`), which `load`, when given, renders first;
@@ -80,26 +77,12 @@ export function ReportActions({
 
   return (
     <>
-      <Button
-        variant="ghost"
-        size="icon"
-        className={ICON_BUTTON}
-        aria-label={t("download")}
-        disabled={busy}
-        onClick={download}
-      >
+      <IconButton label={t("download")} disabled={busy} onClick={download}>
         <DownloadIcon className="size-6" />
-      </Button>
-      <Button
-        variant="ghost"
-        size="icon"
-        className={ICON_BUTTON}
-        aria-label={t("share")}
-        disabled={busy}
-        onClick={share}
-      >
+      </IconButton>
+      <IconButton label={t("share")} disabled={busy} onClick={share}>
         <Share2Icon className="size-6" />
-      </Button>
+      </IconButton>
       <ShareReport
         open={sharing}
         onOpenChange={setSharing}

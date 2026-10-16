@@ -3,16 +3,13 @@ import Link from "next/link"
 import { getLocale, getTranslations } from "next-intl/server"
 
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { IconButton } from "@/components/icon-button"
 import { DOCUMENTS } from "@/constants/documents"
 import { DEFAULT_LOCALE } from "@/constants/i18n"
 import { pageMetadata } from "@/lib/site"
 import { LIST_BOX } from "@/constants/lists"
 
 // Like the report's download button (components/company/report-actions.tsx).
-const ICON_BUTTON =
-  "size-12 shrink-0 text-muted-foreground hover:text-foreground"
-
 export async function generateMetadata() {
   const t = await getTranslations("docs")
 
@@ -71,16 +68,12 @@ export default async function DocsPage() {
               >
                 {item.format}
               </Badge>
-              <Button
-                variant="ghost"
-                size="icon"
-                className={ICON_BUTTON}
-                aria-label={t("download", { format: item.format })}
+              <IconButton
+                label={t("download", { format: item.format })}
                 render={<a href={item.href} download />}
-                nativeButton={false}
               >
                 <DownloadIcon className="size-6" />
-              </Button>
+              </IconButton>
             </div>
           </li>
         ))}
