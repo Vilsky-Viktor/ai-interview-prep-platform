@@ -55,7 +55,7 @@ What to do when a provider fails, a generation hangs or a deploy's migration fai
 
 **How you notice**
 
-- **prepza OpenAI failing:** over 10 OpenAI errors in 15 minutes ([monitoring_logs.tf](../infra/terraform/monitoring_logs.tf)). It counts errors logged with an `openai.` traceback: generation's and the help chat's failures. The assistant logs a failure by its type only, with no traceback, so its failures alone don't count toward it ([turns.py](../services/assistant/app/services/turns.py)).
+- **prepza OpenAI failing:** over 10 OpenAI errors in 15 minutes ([monitoring_logs.tf](../infra/terraform/monitoring_logs.tf)). It counts errors whose traceback or message names `openai.`: generation's and the help chat's failures by their traceback, the assistant's by its message, which names only the error's type, such as `openai.APIConnectionError` ([turns.py](../services/assistant/app/services/turns.py)).
 - **prepza generation tasks failing** doesn't fire for generations: a generation job never fails its task, it saves the failure on the generation ([jobs.py](../services/generation/app/services/jobs.py)). News translations do fail their task.
 - Users: a generation ends as failed, "Generation failed. Please try again.", with **Retry**; the help chat and the assistant answer "Couldn't get a reply right now. Please try again."; voice input fails with a `502` ([assistant.md](features/assistant.md)). Candidates' interviews don't call OpenAI.
 

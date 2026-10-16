@@ -4,6 +4,7 @@ import uuid
 
 import anyio
 import httpx
+import openai
 import pytest
 from prepza_common.sse import KEEP_ALIVE
 
@@ -110,6 +111,18 @@ def test_a_failing_model_is_an_error_to_try_again(monkeypatch, saved):
 
     assert events_of(collect())[-1] == {"error": CHAT_FAILED}
     assert saved == [(Status.FAILED, "", [])]
+
+
+def test_openai_failing_is_logged_by_its_module_for_the_alert(monkeypatch, saved, caplog):
+    """The "prepza OpenAI failing" alert counts errors naming "openai."; nothing of the
+    conversation is logged."""
+    failure = openai.APIConnectionError(request=httpx.Request("POST", "https://api.openai.com"))
+    script(monkeypatch, failure)
+
+    collect()
+
+    assert "An assistant turn failed: openai.APIConnectionError" in caplog.text
+    assert "api.openai.com" not in caplog.text
 
 
 def test_an_expired_session_says_so_with_its_code(monkeypatch, saved):

@@ -127,9 +127,12 @@ async def run_turn(turn: Turn, prompt: list, emit: Emit) -> None:
         status = Status.FAILED
         error = {"error": translate(SESSION_EXPIRED, turn.language), "code": SESSION_EXPIRED_CODE}
     except Exception as failure:  # noqa: BLE001 - logged by its type only
-        # The model failed, or the turn ran out of time. Only the error's type: its message or
-        # traceback could quote the conversation.
-        logger.error("An assistant turn failed: %s", type(failure).__name__)
+        # The model failed, or the turn ran out of time. Only the error's type, with its module
+        # ("openai.APIConnectionError", which the OpenAI alert counts): its message or traceback
+        # could quote the conversation.
+        logger.error(
+            "An assistant turn failed: %s.%s", type(failure).__module__, type(failure).__name__
+        )
         status = Status.FAILED
         error = {"error": translate(CHAT_FAILED, turn.language)}
 

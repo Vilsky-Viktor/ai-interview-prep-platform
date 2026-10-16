@@ -13,8 +13,9 @@ resource "google_logging_metric" "redis_errors" {
 }
 
 resource "google_logging_metric" "openai_errors" {
-  name   = "prepza_openai_errors"
-  filter = "resource.type=\"cloud_run_revision\" AND severity>=ERROR AND (jsonPayload.exc:\"openai.\" OR textPayload:\"openai.\")"
+  name = "prepza_openai_errors"
+  # A traceback naming openai, or a message that does (the assistant logs only the error's type).
+  filter = "resource.type=\"cloud_run_revision\" AND severity>=ERROR AND (jsonPayload.exc:\"openai.\" OR jsonPayload.message:\"openai.\" OR textPayload:\"openai.\")"
 
   metric_descriptor {
     metric_kind = "DELTA"
