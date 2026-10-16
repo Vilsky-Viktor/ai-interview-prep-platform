@@ -157,7 +157,7 @@ One row per legal document (terms, privacy policy, data processing agreement): i
 
 - the terms and the privacy policy to every account, the DPA to every company's owners and admins (the API says which: `audience`),
 - only for a version that applies at least 14 days from now (`LEGAL_NOTICE_DAYS`), and once per version: notifications refuses otherwise, and the row says why,
-- from the next morning's runs (every minute from 9:00 UTC for an hour, as the digest), each going on where the last stopped and nobody getting it twice (the sent log), until everyone has it.
+- from the next morning's runs (every minute from 9:00 UTC for an hour, and again from 12:00 to catch up, as the digest), each going on where the last stopped and nobody getting it twice (the sent log), until everyone has it.
 
 ```
 GET  /notifications/superadmin/legal-notices

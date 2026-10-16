@@ -98,7 +98,7 @@ What to do when a provider fails, a generation hangs or a deploy's migration fai
 - **Event emails** (invites, reports, contact messages): a failed send answers Pub/Sub with an error, and Pub/Sub retries with backoff (10 seconds to 10 minutes), for 50 attempts, several hours, before dead-lettering the event ([events.py](../services/notifications/app/routers/events.py), [infra/README.md](../infra/README.md)). A wrong API key and Resend's own errors are retried the same way; only a `400` or `422` is final, and an invite refused that way shows as undelivered ([constants/email.py](../services/notifications/app/constants/email.py), [delivery.py](../services/notifications/app/services/delivery.py)).
 - **No email twice:** each send carries an idempotency key (the event's id), and Resend sends the same key once within 24 hours ([resend.py](../services/notifications/app/integrations/resend.py)).
 - **Over Resend's rate limit:** the event answers `429` and Pub/Sub retries; a morning run stops and the next minute's run goes on ([schedules.py](../services/notifications/app/routers/schedules.py)).
-- **Morning emails:** a run that fails gives back the claim on the email it failed, so the next run, a minute later, sends it. A failed run isn't retried itself: the next one goes on, until the hour ends ([member_sends.py](../services/notifications/app/services/member_sends.py), [infra/README.md](../infra/README.md)).
+- **Morning emails:** a run that fails gives back the claim on the email it failed, so the next run, a minute later, sends it. A failed run isn't retried itself: the next one goes on, until the hour ends, and the catch-up hour three hours later sends what's left ([member_sends.py](../services/notifications/app/services/member_sends.py), [infra/README.md](../infra/README.md)).
 
 **What to do**
 
@@ -110,7 +110,7 @@ What to do when a provider fails, a generation hangs or a deploy's migration fai
    ```
 3. If Resend is down, wait: Pub/Sub keeps retrying for several hours. Nothing needs switching.
 4. If **prepza events dead-lettered** fires, replay the dead-lettered events once Resend is back, with the loop in [infra/README.md](../infra/README.md#notes) ("Dead-lettered events"). A replay more than 24 hours after an email's first attempt isn't covered by Resend's idempotency key, so an email that went through but wasn't confirmed could arrive twice.
-5. Morning emails that didn't go out within their hour are missed for that day ([member_sends.py](../services/notifications/app/services/member_sends.py)); there's no documented way to send them later.
+5. Morning emails that didn't go out within their hour go out in its catch-up hour, three hours later (digest 10:00, reminders 11:00, legal notices 12:00 UTC; [jobs.tf](../infra/terraform/jobs.tf)); the digest covers the same 24 hours ([digest.py](../services/notifications/app/services/digest.py)). If Resend is still down then, they wait for the next day.
 
 **Resolved when** notifications' subscription has no backlog (**prepza events waiting** closes), `events-dead-letter` is empty, and a test invite to your own address arrives.
 

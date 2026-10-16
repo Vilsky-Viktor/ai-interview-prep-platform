@@ -28,7 +28,8 @@ def deadline() -> float:
 
 
 def stopped(kind: MemberEmail) -> None:
-    """The next run goes on, unless this was the hour's last: then some users miss this one."""
+    """The next run goes on. At an hour's last run, the rest wait for the catch-up hour, and an
+    error says sending is too slow for its hour."""
     if datetime.now(UTC).minute >= LAST_RUN_MINUTE:
         logger.error(
             "The %s emails didn't all go out within their hour: sending needs speeding up", kind

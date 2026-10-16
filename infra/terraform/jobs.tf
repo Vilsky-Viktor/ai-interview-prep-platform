@@ -36,12 +36,12 @@ locals {
     assistant-retention = { service = "assistant", path = "/internal/schedules/retention", cron = "0 4 * * *" }
     # Emails to company members, in the morning (UTC): every minute for an hour, each run
     # going on where the last stopped (none is sent twice): the activity digest from 7:00,
-    # reminders from 8:00.
-    member-digest    = { service = "notifications", path = "/internal/schedules/digest", cron = "* 7 * * *" }
-    member-reminders = { service = "notifications", path = "/internal/schedules/reminders", cron = "* 8 * * *" }
+    # reminders from 8:00; each again three hours later, catching up on what the first missed.
+    member-digest    = { service = "notifications", path = "/internal/schedules/digest", cron = "* 7,10 * * *" }
+    member-reminders = { service = "notifications", path = "/internal/schedules/reminders", cron = "* 8,11 * * *" }
     # Notices of a legal document's change a superadmin asked for, in the morning after (UTC),
     # the same way; at least 14 days before the change applies.
-    legal-notices = { service = "notifications", path = "/internal/schedules/legal-notices", cron = "* 9 * * *" }
+    legal-notices = { service = "notifications", path = "/internal/schedules/legal-notices", cron = "* 9,12 * * *" }
     # ATS candidates still waiting or whose invite stalled, results kept while a connection was
     # broken or the ATS failed, and candidates past their retention.
     ats-recover = { service = "ats", path = "/internal/schedules/recover", cron = "*/10 * * * *" }

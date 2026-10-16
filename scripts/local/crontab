@@ -9,11 +9,11 @@
 # Assistant conversations idle past their retention.
 0 4 * * * curl -s -X POST http://assistant:8000/internal/schedules/retention
 # The activity digest and reminders to company members (notifications), every minute for an
-# hour each morning.
-* 7 * * * curl -s -X POST http://notifications:8000/internal/schedules/digest
-* 8 * * * curl -s -X POST http://notifications:8000/internal/schedules/reminders
+# hour each morning, and again for a catch-up hour three hours later.
+* 7,10 * * * curl -s -X POST http://notifications:8000/internal/schedules/digest
+* 8,11 * * * curl -s -X POST http://notifications:8000/internal/schedules/reminders
 # Notices of a legal document's change a superadmin asked for (notifications).
-* 9 * * * curl -s -X POST http://notifications:8000/internal/schedules/legal-notices
+* 9,12 * * * curl -s -X POST http://notifications:8000/internal/schedules/legal-notices
 # ATS candidates whose invite stalled, and old ones (the ats service), every 10 minutes.
 */10 * * * * curl -s -X POST http://ats:8000/internal/schedules/recover
 # Events companies' web hooks didn't take (the api service), every 5 minutes.

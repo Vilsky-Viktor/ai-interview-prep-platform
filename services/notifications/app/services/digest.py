@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 
 from app.config.settings import settings
-from app.constants.member_emails import DIGEST_HOURS, MemberEmail
+from app.constants.member_emails import DIGEST_HOUR, DIGEST_HOURS, MemberEmail
 from app.constants.unsubscribe import DIGEST_KINDS
 from app.helpers.member_emails import digest_email
 from app.helpers.member_selection import digest_sections
@@ -12,9 +12,9 @@ from app.storage import notifications
 
 async def send_digests(now: datetime) -> int:
     """The activity digest: one email a day to each member of a company that had activity of a
-    kind they get, in the 24 hours before the hour this run is in (the same for every run that
-    hour), covering all their companies. Returns how many were sent."""
-    until = now.replace(minute=0, second=0, microsecond=0)
+    kind they get, in the 24 hours before the day's DIGEST_HOUR (the same for every run that day,
+    the catch-up hour's too), covering all their companies. Returns how many were sent."""
+    until = now.replace(hour=DIGEST_HOUR, minute=0, second=0, microsecond=0)
     stop = deadline()
     activity = await notifications.companies_activity(
         DIGEST_KINDS, until - timedelta(hours=DIGEST_HOURS), until

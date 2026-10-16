@@ -124,6 +124,28 @@ def test_the_digest_goes_to_every_member_once_a_day_for_the_hours_before_this_on
     assert {claim[1:4] for claim in world["claims"]} == {("digest", NOW.date(), 1)}
 
 
+def test_the_catch_up_hours_digest_covers_the_same_day_and_skips_who_got_it(world, monkeypatch):
+    """Its window is the morning run's: a member the first hour missed gets the same digest."""
+    claim = sent_emails.claim
+
+    async def once(user_id, kind, today, every_days, items):
+        # Ann got hers in the first hour.
+        if user_id == "ann":
+            return None
+
+        return await claim(user_id, kind, today, every_days, items)
+
+    monkeypatch.setattr(sent_emails, "claim", once)
+    sent = asyncio.run(digest.send_digests(NOW.replace(hour=10, minute=5)))
+
+    assert sent == 1
+    assert [email.to for email, _ in world["sent"]] == ["vic@example.com"]
+    assert world["window"] == (
+        datetime(2026, 10, 7, 7, tzinfo=UTC),
+        datetime(2026, 10, 8, 7, tzinfo=UTC),
+    )
+
+
 def test_no_digest_to_a_member_who_turned_its_kinds_off(world):
     world["people"] = [person("ann", candidate_finished=False), person("vic")]
 

@@ -25,13 +25,15 @@ MAX_IDS_PER_CALL = 1000
 # long between two emails, so it stays under Resend's per-second limit with room for invites.
 RUN_SECONDS = 40
 SEND_INTERVAL_SECONDS = 0.6
-# The minute of the hour's last run (jobs.tf runs them every minute for an hour): one that still
-# leaves emails unsent leaves them for good, so it logs an error.
+# The minute of the hour's last run (jobs.tf runs them every minute for an hour, and again for a
+# catch-up hour three hours later, which sends what the first missed): one that still leaves
+# emails unsent logs an error, as sending is too slow for its hour.
 LAST_RUN_MINUTE = 59
 
-# The digest covers the 24 hours before the start of the hour its runs are in, the same window
-# for every run of a day.
+# The digest covers the 24 hours before DIGEST_HOUR (UTC) of the day, the same window for every
+# run of a day, the catch-up hour's included.
 DIGEST_HOURS = 24
+DIGEST_HOUR = 7
 
 # A reminder of each kind reaches a user at most once in REMINDER_DAYS.
 REMINDER_DAYS = 7
