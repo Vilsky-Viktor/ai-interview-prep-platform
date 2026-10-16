@@ -2,6 +2,7 @@ import asyncio
 from datetime import UTC, datetime
 from uuid import uuid4
 
+import pytest
 from fastapi import HTTPException
 from fastapi.testclient import TestClient
 from prepza_common.auth import current_user
@@ -211,3 +212,39 @@ def test_coming_back_records_how_long_the_leave_lasted(monkeypatch):
     assert negative.status_code == 422
     # A return is no signal of its own: it only times the leave.
     assert calls == [("away", 1.5)]
+
+
+@pytest.mark.parametrize("kind", ["practice", "preview"])
+def test_a_practice_round_or_a_preview_records_no_signals(monkeypatch, kind):
+    """No one assesses them, so nothing about leaving the page or copying is kept."""
+    row = session(seconds=10)
+    row.answers = []
+    row.question_shown_at = datetime.now(UTC)
+    setattr(row, kind, True)
+    counted = []
+
+    async def fake_get(session_id):
+        return row
+
+    async def fake_add_signal(session_id, question_id, kind):
+        counted.append(kind)
+
+    async def fake_set_away(session_id, seconds):
+        counted.append("away")
+
+    monkeypatch.setattr(sessions, "get", fake_get)
+    monkeypatch.setattr(signals, "add_signal", fake_add_signal)
+    monkeypatch.setattr(signals, "set_away", fake_set_away)
+    app.dependency_overrides[current_user] = lambda: User(
+        uid="cand", email="cand@example.com", email_verified=True
+    )
+
+    try:
+        client = TestClient(app)
+        leave = client.post(f"/sessions/{row.id}/signals", json={"kind": "tab_leave"})
+        back = client.post(f"/sessions/{row.id}/signals", json={"kind": "tab_return", "seconds": 3})
+    finally:
+        app.dependency_overrides.clear()
+
+    assert (leave.status_code, back.status_code) == (204, 204)
+    assert counted == []

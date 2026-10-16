@@ -21,10 +21,11 @@ router = APIRouter(prefix="/sessions", tags=["sessions"])
 async def add_signal(session_id: UUID, body: SignalIn, user: CurrentUser) -> None:
     """The candidate's browser reports leaving the page or copying, saved with the question on
     screen so the scorecard can show where it happened; and coming back, with how long the leave
-    lasted, which decides whether it counts (helpers/integrity.py)."""
+    lasted, which decides whether it counts (helpers/integrity.py). Only in a company's
+    interview: a practice round or a preview records none, as no one assesses them."""
     row = await get_own_session(session_id, user)
 
-    if row.status != RoundStatus.IN_PROGRESS:
+    if row.status != RoundStatus.IN_PROGRESS or row.practice or row.preview:
         return
 
     await hit(get_redis(), f"rate:signals:{row.id}", SIGNALS_PER_MINUTE, SIGNALS_WINDOW_SECONDS)

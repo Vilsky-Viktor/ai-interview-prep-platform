@@ -121,7 +121,7 @@ A scorecard shows every answer, whether it was right and how long it took. It fl
 - times the candidate left the page,
 - copy attempts.
 
-One session's browser may report a page leave or a copy 60 times a minute (a 429 past that), and a question keeps at most 50 (`MAX_SIGNALS_PER_QUESTION`): one already flags the candidate, so a script can't flood the scorecard.
+Only a company's interview records page leaves and copies: a talent's practice round and a member's preview record none, as no one assesses them. One session's browser may report a page leave or a copy 60 times a minute (a 429 past that), and a question keeps at most 50 (`MAX_SIGNALS_PER_QUESTION`): one already flags the candidate, so a script can't flood the scorecard.
 
 A page leave is reported when the page loses focus, and how long it lasted when it gets focus back (`tab_return`, stored as the leave's `away_seconds`). Rounds counts a leave only when it lasted at least 2 seconds (`MIN_TAB_LEAVE_SECONDS`), so a notification or a permission prompt taking focus for a moment is kept but not counted; a leave the candidate never came back from counts. Any counted signal flags the candidate, so a company trying an interview itself sees exactly what a candidate's would show. Signals are what the candidate's browser reports: the scorecard and the PDF report say so when there are any (a reason to look closer, not proof), and so does the result comment in the ATS.
 
