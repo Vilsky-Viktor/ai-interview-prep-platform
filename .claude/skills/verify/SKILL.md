@@ -33,8 +33,10 @@ placeholders, headings' copy, button labels, tooltips or messages: copy changes 
 check proves nothing. Find elements by role and position (`getByRole("main").getByRole("textbox")`,
 a dialog's `spinbutton`, `.first()`), or by a `data-testid` added to the component when nothing
 else tells them apart. Assert what was found, saved, refused or changed, and the data the test
-made (its company's name, an email, a note). An accessible name is checked only where it is the
-feature itself (an icon button's screen-reader label).
+made (its company's name, an email, a note). Error messages are checked by their text: what a
+refusal or failure tells the user ("That would take the available balance below zero.") is
+behaviour. An accessible name is checked only where it is the feature itself (an icon button's
+screen-reader label).
 
 ## The local dev server
 
