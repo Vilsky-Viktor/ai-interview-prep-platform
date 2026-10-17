@@ -240,4 +240,7 @@ MESSAGES = {
     "This campaign hasn't been sent.": "Цю розсилку не надсилали.",
     "This campaign was already sent, so it can't be changed.": "Цю розсилку вже надіслано, тому її не можна змінити.",
     "Today's limit of campaigns of this kind ({limit}) is reached. Send the next one tomorrow.": "Сьогоднішній ліміт розсилок цього виду ({limit}) вичерпано. Надішліть наступну завтра.",
+    "An interview needs at least one topic with questions.": "У співбесіді має бути хоча б одна тема з питаннями.",
+    "Choose at most {count} topics": "Тем можна обрати не більше: {count}",
+    "A topic can have at most {count} subtopics": "Підтем у темі може бути не більше: {count}",
 }

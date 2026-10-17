@@ -240,4 +240,7 @@ MESSAGES = {
     "This campaign hasn't been sent.": "这封群发邮件尚未发送。",
     "This campaign was already sent, so it can't be changed.": "这封群发邮件已发送，无法更改。",
     "Today's limit of campaigns of this kind ({limit}) is reached. Send the next one tomorrow.": "今天此类群发已达上限（{limit} 次），请明天再发送下一封。",
+    "An interview needs at least one topic with questions.": "面试至少需要一个有题目的主题。",
+    "Choose at most {count} topics": "最多选择 {count} 个主题",
+    "A topic can have at most {count} subtopics": "一个主题最多有 {count} 个子主题",
 }

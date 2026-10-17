@@ -3099,6 +3099,8 @@ export interface components {
       topics: components["schemas"]["TopicOut"][]
       /** Total Minutes */
       total_minutes?: number | null
+      /** Total Questions */
+      total_questions?: number | null
       /**
        * Can Edit
        * @default false

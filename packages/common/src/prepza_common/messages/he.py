@@ -240,4 +240,7 @@ MESSAGES = {
     "This campaign hasn't been sent.": "הקמפיין הזה לא נשלח.",
     "This campaign was already sent, so it can't be changed.": "הקמפיין הזה כבר נשלח, ולכן אי אפשר לשנות אותו.",
     "Today's limit of campaigns of this kind ({limit}) is reached. Send the next one tomorrow.": "הגעתם למגבלה היומית של קמפיינים מסוג זה ({limit}). שלחו את הבא מחר.",
+    "An interview needs at least one topic with questions.": "ריאיון צריך לפחות נושא אחד עם שאלות.",
+    "Choose at most {count} topics": "בחרו לכל היותר {count} נושאים",
+    "A topic can have at most {count} subtopics": "לנושא יכולים להיות לכל היותר {count} תתי-נושאים",
 }

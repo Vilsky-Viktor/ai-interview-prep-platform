@@ -240,4 +240,7 @@ MESSAGES = {
     "This campaign hasn't been sent.": "Bu kampanya gönderilmedi.",
     "This campaign was already sent, so it can't be changed.": "Bu kampanya zaten gönderildi, bu yüzden değiştirilemez.",
     "Today's limit of campaigns of this kind ({limit}) is reached. Send the next one tomorrow.": "Bu türdeki kampanyalar için bugünkü sınıra ({limit}) ulaşıldı. Sonrakini yarın gönderin.",
+    "An interview needs at least one topic with questions.": "Bir mülakatta sorusu olan en az bir konu olmalı.",
+    "Choose at most {count} topics": "En fazla {count} konu seçin",
+    "A topic can have at most {count} subtopics": "Bir konunun en fazla {count} alt konusu olabilir",
 }

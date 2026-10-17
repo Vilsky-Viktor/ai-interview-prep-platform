@@ -240,4 +240,7 @@ MESSAGES = {
     "This campaign hasn't been sent.": "Chiến dịch này chưa được gửi.",
     "This campaign was already sent, so it can't be changed.": "Chiến dịch này đã được gửi nên không thể thay đổi.",
     "Today's limit of campaigns of this kind ({limit}) is reached. Send the next one tomorrow.": "Đã đạt giới hạn hôm nay cho chiến dịch loại này ({limit}). Vui lòng gửi chiến dịch tiếp theo vào ngày mai.",
+    "An interview needs at least one topic with questions.": "Buổi phỏng vấn cần ít nhất một chủ đề có câu hỏi.",
+    "Choose at most {count} topics": "Chọn tối đa {count} chủ đề",
+    "A topic can have at most {count} subtopics": "Mỗi chủ đề có tối đa {count} chủ đề con",
 }

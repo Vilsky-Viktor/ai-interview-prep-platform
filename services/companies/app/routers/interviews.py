@@ -17,6 +17,7 @@ from app.helpers.interviews import (
     attach_set_if_reachable,
     interview_minutes,
     interview_out,
+    interview_questions,
     interviews_page,
     session_topics,
     topics_out,
@@ -106,6 +107,7 @@ async def get_interview(interview_id: UUID, user: CurrentUser) -> InterviewDetai
         **base.model_dump(),
         topics=topics,
         total_minutes=interview_minutes(found, interview.topic_limits, interview.question_seconds),
+        total_questions=interview_questions(found, interview.topic_limits),
         can_edit=can_edit(member),
     )
 

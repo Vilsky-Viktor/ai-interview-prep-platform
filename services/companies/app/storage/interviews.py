@@ -1,4 +1,5 @@
 import uuid
+from collections.abc import Callable
 from datetime import UTC, datetime
 
 from prepza_common import outbox
@@ -154,11 +155,24 @@ async def update_settings(interview_id, settings: InterviewSettings) -> None:
         await session.commit()
 
 
-async def set_topic_limit(interview_id, topic_id: uuid.UUID, limit: int) -> None:
+async def set_topic_limit(
+    interview_id, topic_id: uuid.UUID, limit: int, allowed: Callable[[dict[str, int]], bool]
+) -> bool:
+    """Sets the topic's number of questions, when `allowed` takes the new numbers; False, with
+    nothing changed, when it doesn't. Locked, so two changes at once both see the other."""
     async with Session() as session:
-        interview = await session.get(Interview, interview_id)
-        interview.topic_limits = {**interview.topic_limits, str(topic_id): limit}
+        interview = await session.scalar(
+            select(Interview).where(Interview.id == interview_id).with_for_update()
+        )
+        limits = {**interview.topic_limits, str(topic_id): limit}
+
+        if not allowed(limits):
+            return False
+
+        interview.topic_limits = limits
         await session.commit()
+
+    return True
 
 
 async def remove(interview_id) -> list[tuple]:

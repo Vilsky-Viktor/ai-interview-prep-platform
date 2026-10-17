@@ -240,4 +240,7 @@ MESSAGES = {
     "This campaign hasn't been sent.": "यह कैंपेन भेजा नहीं गया है।",
     "This campaign was already sent, so it can't be changed.": "यह कैंपेन पहले ही भेजा जा चुका है, इसलिए इसे बदला नहीं जा सकता।",
     "Today's limit of campaigns of this kind ({limit}) is reached. Send the next one tomorrow.": "इस प्रकार के कैंपेन की आज की सीमा ({limit}) पूरी हो गई है। अगला कैंपेन कल भेजें।",
+    "An interview needs at least one topic with questions.": "इंटरव्यू में सवालों वाला कम से कम एक विषय होना चाहिए।",
+    "Choose at most {count} topics": "ज़्यादा से ज़्यादा {count} विषय चुनें",
+    "A topic can have at most {count} subtopics": "किसी विषय में ज़्यादा से ज़्यादा {count} उप-विषय हो सकते हैं",
 }

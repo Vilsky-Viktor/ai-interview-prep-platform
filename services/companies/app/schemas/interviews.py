@@ -90,6 +90,8 @@ class InterviewDetail(InterviewOut):
     # The whole interview at its time per question, in minutes, as a candidate sees it before
     # starting; None while its questions aren't known.
     total_minutes: int | None = None
+    # Every question a candidate gets, over all topics; None while its questions aren't known.
+    total_questions: int | None = None
     # Whether the user may change the test and its candidates: owners and admins, not viewers.
     can_edit: bool = False
 
@@ -104,8 +106,8 @@ class ReviewIn(BaseModel):
 
 
 class TopicLimitIn(BaseModel):
-    # The topic's whole size gives every candidate every question.
-    limit: int = Field(ge=1)
+    # The topic's whole size gives every candidate every question; 0 leaves the topic out.
+    limit: int = Field(ge=0)
 
 
 class InterviewSettings(BaseModel):

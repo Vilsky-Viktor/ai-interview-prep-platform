@@ -240,4 +240,7 @@ MESSAGES = {
     "This campaign hasn't been sent.": "لم تُرسَل هذه الحملة.",
     "This campaign was already sent, so it can't be changed.": "أُرسلت هذه الحملة بالفعل، لذا لا يمكن تغييرها.",
     "Today's limit of campaigns of this kind ({limit}) is reached. Send the next one tomorrow.": "تم بلوغ الحد اليومي لحملات هذا النوع ({limit}). أرسل الحملة التالية غدًا.",
+    "An interview needs at least one topic with questions.": "تحتاج المقابلة إلى موضوع واحد على الأقل فيه أسئلة.",
+    "Choose at most {count} topics": "اختر {count} مواضيع على الأكثر",
+    "A topic can have at most {count} subtopics": "يمكن أن يضم الموضوع {count} مواضيع فرعية على الأكثر",
 }

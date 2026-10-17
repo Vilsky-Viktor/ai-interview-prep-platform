@@ -250,4 +250,7 @@ MESSAGES = {
     "This campaign hasn't been sent.": "Seda kampaaniat pole saadetud.",
     "This campaign was already sent, so it can't be changed.": "See kampaania on juba saadetud, seega seda ei saa muuta.",
     "Today's limit of campaigns of this kind ({limit}) is reached. Send the next one tomorrow.": "Tänane seda liiki kampaaniate limiit ({limit}) on täis. Saada järgmine homme.",
+    "An interview needs at least one topic with questions.": "Intervjuul peab olema vähemalt üks küsimustega teema.",
+    "Choose at most {count} topics": "Vali kuni {count} teemat",
+    "A topic can have at most {count} subtopics": "Teemal võib olla kuni {count} alateemat",
 }

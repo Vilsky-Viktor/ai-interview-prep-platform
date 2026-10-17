@@ -240,4 +240,7 @@ MESSAGES = {
     "This campaign hasn't been sent.": "Kampanye ini belum dikirim.",
     "This campaign was already sent, so it can't be changed.": "Kampanye ini sudah dikirim, jadi tidak bisa diubah.",
     "Today's limit of campaigns of this kind ({limit}) is reached. Send the next one tomorrow.": "Batas hari ini untuk kampanye jenis ini ({limit}) sudah tercapai. Kirim yang berikutnya besok.",
+    "An interview needs at least one topic with questions.": "Wawancara memerlukan setidaknya satu topik yang berisi soal.",
+    "Choose at most {count} topics": "Pilih maksimal {count} topik",
+    "A topic can have at most {count} subtopics": "Satu topik boleh memiliki maksimal {count} subtopik",
 }

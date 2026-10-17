@@ -240,4 +240,7 @@ MESSAGES = {
     "This campaign hasn't been sent.": "この配信はまだ送信されていません。",
     "This campaign was already sent, so it can't be changed.": "この配信はすでに送信されたため、変更できません。",
     "Today's limit of campaigns of this kind ({limit}) is reached. Send the next one tomorrow.": "この種類の配信は本日の上限（{limit} 件）に達しました。次の配信は明日送信してください。",
+    "An interview needs at least one topic with questions.": "面接には、問題のあるトピックが少なくとも 1 つ必要です。",
+    "Choose at most {count} topics": "トピックは最大 {count} 件まで選んでください",
+    "A topic can have at most {count} subtopics": "1 つのトピックのサブトピックは最大 {count} 件です",
 }

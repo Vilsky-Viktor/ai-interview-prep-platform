@@ -240,4 +240,7 @@ MESSAGES = {
     "This campaign hasn't been sent.": "Diese Kampagne wurde nicht gesendet.",
     "This campaign was already sent, so it can't be changed.": "Diese Kampagne wurde bereits gesendet und lässt sich daher nicht mehr ändern.",
     "Today's limit of campaigns of this kind ({limit}) is reached. Send the next one tomorrow.": "Das heutige Limit für Kampagnen dieser Art ({limit}) ist erreicht. Sende die nächste morgen.",
+    "An interview needs at least one topic with questions.": "Ein Interview braucht mindestens ein Thema mit Fragen.",
+    "Choose at most {count} topics": "Wähle höchstens {count} Themen",
+    "A topic can have at most {count} subtopics": "Ein Thema kann höchstens {count} Unterthemen haben",
 }

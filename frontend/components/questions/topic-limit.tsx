@@ -30,7 +30,7 @@ export function TopicLimit({
       return
     }
 
-    if (!Number.isInteger(number) || number < 1 || number > count) {
+    if (!Number.isInteger(number) || number < 0 || number > count) {
       toast.error(t("limitRange", { count }))
       setValue(saved)
 
@@ -57,7 +57,7 @@ export function TopicLimit({
     <Input
       type="number"
       inputMode="numeric"
-      min={1}
+      min={0}
       max={count}
       value={value}
       disabled={saving}

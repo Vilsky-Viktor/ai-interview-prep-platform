@@ -240,4 +240,7 @@ MESSAGES = {
     "This campaign hasn't been sent.": "Hindi pa naipadala ang campaign na ito.",
     "This campaign was already sent, so it can't be changed.": "Naipadala na ang campaign na ito, kaya hindi na ito mababago.",
     "Today's limit of campaigns of this kind ({limit}) is reached. Send the next one tomorrow.": "Naabot na ang limit ngayong araw sa mga campaign ng ganitong uri ({limit}). Ipadala bukas ang susunod.",
+    "An interview needs at least one topic with questions.": "Kailangan ng interview ng kahit isang topic na may mga tanong.",
+    "Choose at most {count} topics": "Pumili ng hanggang {count} topic",
+    "A topic can have at most {count} subtopics": "Hanggang {count} subtopic lang ang puwede sa isang topic",
 }

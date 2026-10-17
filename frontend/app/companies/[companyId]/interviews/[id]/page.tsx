@@ -11,18 +11,17 @@ import { InterviewReportActions } from "@/components/company/interview-report-ac
 import { TryInterview } from "@/components/company/try-interview"
 import { EditableTitle } from "@/components/editable-title"
 import { EntityId } from "@/components/entity-id"
+import { InterviewEstimate } from "@/components/company/interview-estimate"
 import { InterviewSettings } from "@/components/company/interview-settings"
+import { InterviewTopics } from "@/components/company/interview-topics"
 import { InterviewStatus } from "@/components/company/interview-status"
 import { InviteCandidate } from "@/components/company/invite-candidate"
 import { ShareLink } from "@/components/company/share-link"
 import { PageHeader } from "@/components/page-header"
-import { SubtopicList } from "@/components/questions/subtopic-list"
-import { TopicQuestionLimit } from "@/components/questions/topic-question-limit"
-import { TopicQuestions } from "@/components/questions/topic-questions"
 import { SignInPage } from "@/components/sign-in-page"
 import { Button } from "@/components/ui/button"
 import { CANDIDATE_SORTS } from "@/constants/interviews"
-import { PAGE_SIZE, LIST_BOX } from "@/constants/lists"
+import { PAGE_SIZE } from "@/constants/lists"
 import { INTERVIEW_TAB_HELP } from "@/constants/page-help"
 import { serverFetch, signedIn } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
@@ -107,7 +106,6 @@ export default async function InterviewPage({
 
   const interviewsHref = `/companies/${companyId}/interviews`
   const interviewHref = `${interviewsHref}/${id}`
-  const questionsPath = `/companies/interviews/${id}/questions`
   const ready = Boolean(interview.set_id)
   // Viewers see everything but change nothing.
   const canEdit = interview.can_edit
@@ -223,6 +221,16 @@ export default async function InterviewPage({
             canEdit={canEdit}
           />
         )}
+        {/* What it adds up to for each candidate, on the topics tab, once its topics are known. */}
+        {current === "topics" &&
+          interview.total_questions != null &&
+          interview.total_minutes != null && (
+            <InterviewEstimate
+              questions={interview.total_questions}
+              questionSeconds={interview.question_seconds}
+              minutes={interview.total_minutes}
+            />
+          )}
       </div>
 
       {current === "settings" ? (
@@ -255,44 +263,11 @@ export default async function InterviewPage({
           />
         </div>
       ) : (
-        interview.topics.length > 0 && (
-          <ul className={LIST_BOX}>
-            {interview.topics.map((topic) => (
-              // On phones the questions' button and their number take the line under the
-              // topic.
-              <li
-                key={topic.id}
-                className="flex items-center justify-between gap-6 p-4 max-sm:flex-col max-sm:items-stretch max-sm:gap-6 max-sm:px-6 max-sm:py-8 sm:p-6"
-              >
-                <span className="max-w-3xl min-w-0 space-y-3">
-                  <span className="block text-lg font-medium">
-                    {topic.title}
-                  </span>
-                  <SubtopicList subtopics={topic.subtopics} />
-                </span>
-                <span className="flex shrink-0 flex-col items-center gap-3 max-sm:flex-row max-sm:flex-wrap">
-                  {/* Viewers read the questions; only owners and admins change them. */}
-                  <TopicQuestions
-                    title={topic.title}
-                    path={`/companies/interviews/${id}/topics/${topic.id}/questions`}
-                    regeneratePath={canEdit ? questionsPath : undefined}
-                    wrongPath={canEdit ? questionsPath : undefined}
-                    reportsPath={canEdit ? questionsPath : undefined}
-                  />
-                  <TopicQuestionLimit
-                    count={topic.question_count}
-                    limit={topic.question_limit}
-                    limitPath={
-                      canEdit
-                        ? `/companies/interviews/${id}/topics/${topic.id}/limit`
-                        : undefined
-                    }
-                  />
-                </span>
-              </li>
-            ))}
-          </ul>
-        )
+        <InterviewTopics
+          interviewId={id}
+          topics={interview.topics}
+          canEdit={canEdit}
+        />
       )}
     </main>
   )

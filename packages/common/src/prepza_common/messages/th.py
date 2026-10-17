@@ -240,4 +240,7 @@ MESSAGES = {
     "This campaign hasn't been sent.": "แคมเปญนี้ยังไม่ได้ส่ง",
     "This campaign was already sent, so it can't be changed.": "แคมเปญนี้ส่งไปแล้ว จึงแก้ไขไม่ได้",
     "Today's limit of campaigns of this kind ({limit}) is reached. Send the next one tomorrow.": "ถึงขีดจำกัดของวันนี้สำหรับแคมเปญประเภทนี้ ({limit}) แล้ว โปรดส่งแคมเปญถัดไปพรุ่งนี้",
+    "An interview needs at least one topic with questions.": "การสัมภาษณ์ต้องมีอย่างน้อยหนึ่งหัวข้อที่มีคำถาม",
+    "Choose at most {count} topics": "เลือกได้สูงสุด {count} หัวข้อ",
+    "A topic can have at most {count} subtopics": "หัวข้อหนึ่งมีหัวข้อย่อยได้สูงสุด {count} หัวข้อ",
 }

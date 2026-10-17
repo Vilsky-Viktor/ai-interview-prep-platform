@@ -7,6 +7,8 @@ from prepza_common.http import passed_on
 from prepza_common.paging import PageParams
 from prepza_common.pause import refuse_if_paused
 
+from app.constants.interviews import NO_QUESTIONS_LEFT
+from app.helpers.interviews import interview_questions
 from app.integrations import billing, library
 from app.integrations import generation as generation_api
 from app.integrations.redis import get_redis
@@ -62,7 +64,13 @@ async def set_topic_limit(
             f"The topic has only {topic['question_count']} questions",
         )
 
-    await interviews.set_topic_limit(interview.id, topic_id, body.limit)
+    # Every candidate gets at least one question.
+    def keeps_questions(limits: dict[str, int]) -> bool:
+        return bool(interview_questions(found, limits))
+
+    if not await interviews.set_topic_limit(interview.id, topic_id, body.limit, keeps_questions):
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, NO_QUESTIONS_LEFT)
+
     await audit.record_interview(interview, user.uid, AuditAction.INTERVIEW_SETTINGS_CHANGED)
 
 

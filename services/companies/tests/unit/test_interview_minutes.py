@@ -2,7 +2,7 @@ import uuid
 
 from app.constants.interviews import DEFAULT_TOPIC_QUESTIONS
 from app.helpers.candidates import candidate_seconds
-from app.helpers.interviews import interview_minutes
+from app.helpers.interviews import interview_minutes, interview_questions
 
 PYTHON = str(uuid.uuid4())
 SQL = str(uuid.uuid4())
@@ -39,3 +39,21 @@ def test_extra_time_lengthens_the_whole_interview_rounded_up():
 
 def test_the_whole_interview_is_unknown_until_its_questions_are():
     assert interview_minutes(None, {}, 60) is None
+
+
+def test_total_questions_add_up_each_topics_number_capped_by_its_bank():
+    # Python's default 10 and SQL's 6 chosen by hand.
+    assert interview_questions(a_set(20, 20), {SQL: 6}) == DEFAULT_TOPIC_QUESTIONS + 6
+    # A bank smaller than its number gives what it has: 3 of Python's 10, 4 of SQL's 25.
+    assert interview_questions(a_set(3, 4), {SQL: 25}) == 7
+    # A topic at 0 gives none.
+    assert interview_questions(a_set(20, 20), {PYTHON: 0, SQL: 8}) == 8
+    assert interview_questions(None, {}) is None
+
+
+def test_the_whole_interview_agrees_with_its_total_questions():
+    limits = {PYTHON: 0, SQL: 7}
+
+    # 7 questions at 50 seconds each are 350 seconds: 5.8 minutes, rounded up.
+    assert interview_questions(a_set(20, 20), limits) == 7
+    assert interview_minutes(a_set(20, 20), limits, 50) == 6

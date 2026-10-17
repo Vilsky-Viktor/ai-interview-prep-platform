@@ -240,4 +240,7 @@ MESSAGES = {
     "This campaign hasn't been sent.": "این کمپین ارسال نشده است.",
     "This campaign was already sent, so it can't be changed.": "این کمپین قبلاً ارسال شده است، بنابراین قابل تغییر نیست.",
     "Today's limit of campaigns of this kind ({limit}) is reached. Send the next one tomorrow.": "سقف امروز برای کمپین‌های این نوع ({limit}) پر شده است. کمپین بعدی را فردا ارسال کنید.",
+    "An interview needs at least one topic with questions.": "هر مصاحبه دست‌کم به یک موضوع با پرسش نیاز دارد.",
+    "Choose at most {count} topics": "حداکثر {count} موضوع انتخاب کنید",
+    "A topic can have at most {count} subtopics": "هر موضوع حداکثر {count} زیرموضوع می‌تواند داشته باشد",
 }

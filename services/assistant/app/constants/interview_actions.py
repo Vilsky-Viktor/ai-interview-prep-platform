@@ -113,7 +113,7 @@ INTERVIEW_ACTIONS = {
     "set_topic_limit": interview_action(
         "PUT",
         "/interviews/{interview_id}/topics/{topic_id}/limit",
-        "Set how many questions of a topic each candidate gets.",
+        "Set how many questions of a topic each candidate gets; 0 leaves the topic out.",
         params=["topic_id"],
         body=["limit"],
     ),

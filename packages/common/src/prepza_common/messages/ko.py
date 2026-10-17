@@ -240,4 +240,7 @@ MESSAGES = {
     "This campaign hasn't been sent.": "이 캠페인은 발송되지 않았습니다.",
     "This campaign was already sent, so it can't be changed.": "이 캠페인은 이미 발송되어 변경할 수 없습니다.",
     "Today's limit of campaigns of this kind ({limit}) is reached. Send the next one tomorrow.": "오늘 이 종류의 캠페인 한도({limit}개)에 도달했습니다. 다음 캠페인은 내일 발송해 주세요.",
+    "An interview needs at least one topic with questions.": "면접에는 문제가 있는 주제가 하나 이상 있어야 합니다.",
+    "Choose at most {count} topics": "주제는 최대 {count}개까지 선택하세요",
+    "A topic can have at most {count} subtopics": "한 주제의 하위 주제는 최대 {count}개입니다",
 }

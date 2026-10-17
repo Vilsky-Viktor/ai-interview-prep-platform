@@ -9178,6 +9178,17 @@
       ],
       "title": "Total Minutes"
      },
+     "total_questions": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Total Questions"
+     },
      "can_edit": {
       "type": "boolean",
       "title": "Can Edit",
@@ -11738,7 +11749,7 @@
     "properties": {
      "limit": {
       "type": "integer",
-      "minimum": 1.0,
+      "minimum": 0.0,
       "title": "Limit"
      }
     },

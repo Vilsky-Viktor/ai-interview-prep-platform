@@ -123,13 +123,22 @@ def topics_out(found: dict, limits: dict[str, int]) -> list[TopicOut]:
     ]
 
 
-def interview_minutes(found: dict | None, limits: dict[str, int], seconds: int) -> int | None:
-    """The whole interview's time, in minutes rounded up: every question a candidate gets at
-    `seconds` each. None while the interview's questions aren't known."""
+def interview_questions(found: dict | None, limits: dict[str, int]) -> int | None:
+    """Every question a candidate gets, over all topics. None while the interview's questions
+    aren't known."""
     if not found:
         return None
 
-    questions = sum(topic.question_limit for topic in topics_out(found, limits))
+    return sum(topic.question_limit for topic in topics_out(found, limits))
+
+
+def interview_minutes(found: dict | None, limits: dict[str, int], seconds: int) -> int | None:
+    """The whole interview's time, in minutes rounded up: every question a candidate gets at
+    `seconds` each. None while the interview's questions aren't known."""
+    questions = interview_questions(found, limits)
+
+    if questions is None:
+        return None
 
     return math.ceil(questions * seconds / 60)
 
@@ -144,7 +153,8 @@ def pick_questions(questions: list, limit: int, share: float) -> list:
 
 
 def session_topics(interview: Interview, content: dict, share: float) -> list[dict]:
-    """Each topic with a fresh random subset of its questions, as rounds starts sessions."""
+    """Each topic with a fresh random subset of its questions, as rounds starts sessions. A topic
+    set to 0 questions is left out: the candidate never sees it, and it never counts."""
     return [
         {
             "id": topic["id"],
@@ -155,4 +165,5 @@ def session_topics(interview: Interview, content: dict, share: float) -> list[di
             ),
         }
         for topic in content["topics"]
+        if topic_limit(interview.topic_limits, topic["id"]) > 0
     ]

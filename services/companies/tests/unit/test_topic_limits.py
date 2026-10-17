@@ -5,7 +5,7 @@ from prepza_common.auth import current_user
 from prepza_common.user import User
 
 from app.constants.interviews import DEFAULT_TOPIC_QUESTIONS
-from app.helpers.interviews import pick_questions, topics_out
+from app.helpers.interviews import pick_questions, session_topics, topics_out
 from app.integrations import library
 from app.main import app
 from app.models.companies import Company, Member
@@ -15,9 +15,12 @@ from app.storage import companies, interviews
 COMPANY_ID = uuid.uuid4()
 INTERVIEW_ID = uuid.uuid4()
 TOPIC_ID = uuid.uuid4()
+OTHER_ID = uuid.uuid4()
 
 
-def setup(monkeypatch, saved):
+def setup(monkeypatch, saved, limits=None, topics=None):
+    """An interview with `topics` (SQL, 10 questions, by default) at `limits`; saved numbers go to
+    `saved` and become the interview's, as the storage's `allowed` check lets them."""
     app.dependency_overrides[current_user] = lambda: User(
         uid="bob", email="bob@example.com", email_verified=True, name="Bob"
     )
@@ -26,7 +29,7 @@ def setup(monkeypatch, saved):
         company_id=COMPANY_ID,
         generation_id=uuid.uuid4(),
         set_id=uuid.uuid4(),
-        topic_limits={},
+        topic_limits=dict(limits or {}),
     )
     company = Company(id=COMPANY_ID, name="My company", created_at=datetime.now(UTC))
     company.members = [
@@ -46,10 +49,18 @@ def setup(monkeypatch, saved):
         return company
 
     async def fake_set(_set_id):
-        return {"topics": [{"id": str(TOPIC_ID), "title": "SQL", "question_count": 10}]}
+        return {"topics": topics or [{"id": str(TOPIC_ID), "title": "SQL", "question_count": 10}]}
 
-    async def fake_save(_interview_id, topic_id, limit):
+    async def fake_save(_interview_id, topic_id, limit, allowed):
+        new = {**interview.topic_limits, str(topic_id): limit}
+
+        if not allowed(new):
+            return False
+
+        interview.topic_limits = new
         saved.append((topic_id, limit))
+
+        return True
 
     monkeypatch.setattr(interviews, "get", fake_interview)
     monkeypatch.setattr(companies, "get", fake_company)
@@ -63,7 +74,7 @@ def test_limit_cannot_exceed_topic_questions(client, monkeypatch):
     url = f"/interviews/{INTERVIEW_ID}/topics/{TOPIC_ID}/limit"
 
     assert client.put(url, json={"limit": 11}).status_code == 422
-    assert client.put(url, json={"limit": 0}).status_code == 422
+    assert client.put(url, json={"limit": -1}).status_code == 422
     assert client.put(url, json={"limit": None}).status_code == 422
     assert client.put(url, json={"limit": 5}).status_code == 204
     # The whole topic: every candidate gets every question.
@@ -71,6 +82,59 @@ def test_limit_cannot_exceed_topic_questions(client, monkeypatch):
     assert saved == [(TOPIC_ID, 5), (TOPIC_ID, 10)]
 
     app.dependency_overrides.clear()
+
+
+def two_topics():
+    return [
+        {"id": str(TOPIC_ID), "title": "SQL", "question_count": 10},
+        {"id": str(OTHER_ID), "title": "Git", "question_count": 10},
+    ]
+
+
+def test_a_topic_can_be_set_to_0_questions_while_another_has_some(client, monkeypatch):
+    saved = []
+    setup(monkeypatch, saved, topics=two_topics())
+
+    response = client.put(f"/interviews/{INTERVIEW_ID}/topics/{TOPIC_ID}/limit", json={"limit": 0})
+
+    assert response.status_code == 204
+    assert saved == [(TOPIC_ID, 0)]
+
+    app.dependency_overrides.clear()
+
+
+def test_the_last_topic_with_questions_cannot_be_set_to_0(client, monkeypatch):
+    saved = []
+    setup(monkeypatch, saved, limits={str(OTHER_ID): 0}, topics=two_topics())
+
+    response = client.put(f"/interviews/{INTERVIEW_ID}/topics/{TOPIC_ID}/limit", json={"limit": 0})
+
+    assert response.status_code == 422
+    assert response.json()["detail"] == "An interview needs at least one topic with questions."
+    assert saved == []
+
+    app.dependency_overrides.clear()
+
+
+def test_a_session_leaves_out_a_topic_set_to_0():
+    interview = Interview(topic_limits={str(OTHER_ID): 0, str(TOPIC_ID): 2})
+    options = [{"answer": "a", "correct": True}, {"answer": "b", "correct": False}]
+    content = {
+        "id": "preparation",
+        "topics": [
+            {
+                "id": str(topic_id),
+                "title": title,
+                "questions": [{"id": i, "options": options} for i in range(5)],
+            }
+            for topic_id, title in ((TOPIC_ID, "SQL"), (OTHER_ID, "Git"))
+        ],
+    }
+
+    topics = session_topics(interview, content, 0.1)
+
+    assert [topic["title"] for topic in topics] == ["SQL"]
+    assert len(topics[0]["questions"]) == 2
 
 
 def test_unknown_topic_is_not_found(client, monkeypatch):
