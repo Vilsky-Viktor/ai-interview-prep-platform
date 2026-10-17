@@ -16,6 +16,7 @@ import { refreshVerification } from "@/lib/auth"
 import { useBrandColors } from "@/hooks/use-brand-colors"
 import { useLinkData } from "@/hooks/use-link-data"
 import type { JobLink, SessionSummary } from "@/types/company"
+import { START_BUTTON } from "@/constants/start-page"
 
 /** What someone sees from a test's shareable link: the same intro as an invite; starting signs
  * them in with Google first, which gives their name and verified email. */
@@ -95,14 +96,11 @@ export function LinkView({ token }: { token: string }) {
       verifiedDomain={link.verified_domain}
       title={link.title}
       questionSeconds={link.question_seconds}
+      totalMinutes={link.total_minutes}
       finished={link.status === "finished"}
       viaLink
       action={
-        <Button
-          className="h-12 px-6 text-base"
-          disabled={starting}
-          onClick={start}
-        >
+        <Button className={START_BUTTON} disabled={starting} onClick={start}>
           {link.status === "in_process" ? t("continue") : t("start")}
         </Button>
       }

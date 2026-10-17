@@ -59,6 +59,7 @@ export function UserMenu() {
         variant="outline"
         className="px-4 max-[399px]:w-8 max-[399px]:px-0"
         aria-label={t("signIn")}
+        data-testid="header-sign-in"
         onClick={() => signIn()}
       >
         <LogInIcon aria-hidden className="hidden max-[399px]:block" />
@@ -74,6 +75,7 @@ export function UserMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
+        data-testid="account-menu"
         render={
           <Button
             variant="ghost"

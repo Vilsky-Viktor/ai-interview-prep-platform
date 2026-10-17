@@ -10,6 +10,9 @@ type AtsSchemas = ats["schemas"]
 export type Company = Schemas["CompanyOut"]
 export type CompanyBalance = Schemas["CompanyBalanceOut"]
 export type CompanyMember = Schemas["MemberOut"]
+// A row of a company's action log: what a member did, about what, when and through what.
+export type CompanyAction = Schemas["ActionOut"]
+export type ActionGroup = Schemas["AuditGroup"]
 // What deleting the account does to the companies the user owns.
 export type AccountDeletion = Schemas["AccountDeletionOut"]
 export type AdminInvite = Schemas["AdminInviteOut"]
@@ -115,3 +118,6 @@ export type Scorecard = {
 }
 // The maintenance switch, as superadmins see it: on, and how many interviews are running.
 export type MaintenanceSwitchState = Schemas["MaintenanceSwitchOut"]
+
+/** The limits the site's texts quote (the most candidates one invite list may hold). */
+export type InviteLimits = Schemas["LimitsOut"]

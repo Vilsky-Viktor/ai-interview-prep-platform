@@ -65,6 +65,7 @@ export default async function InterviewsPage({
         declineReason={company.decline_reason ?? null}
         current="interviews"
         canEdit={company.can_edit}
+        canSeeActions={company.can_see_actions}
         action={
           <div className="flex shrink-0 items-center gap-6 max-sm:flex-col max-sm:items-stretch max-sm:gap-3">
             {credits != null && catalog && (

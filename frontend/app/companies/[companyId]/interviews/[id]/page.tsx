@@ -30,6 +30,7 @@ import type {
   Candidate,
   CandidateFilters,
   InterviewDetail,
+  InviteLimits,
 } from "@/types/company"
 
 export const generateMetadata = () => translatedTitle("interviews", "interview")
@@ -75,7 +76,7 @@ export default async function InterviewPage({
 
   // Fetched together, and the candidates only for their tab. Their first page renders on the
   // server; the rest load as the user scrolls.
-  const [interview, filters, firstPage] = await Promise.all([
+  const [interview, filters, firstPage, limits] = await Promise.all([
     serverFetch<InterviewDetail>(`/companies/interviews/${id}`),
     shownCandidates
       ? serverFetch<CandidateFilters>(
@@ -87,6 +88,8 @@ export default async function InterviewPage({
           `${candidatesPath(askedStatus ?? null)}&limit=${PAGE_SIZE}`
         )
       : null,
+    // The invite dialog's texts quote the current limit.
+    serverFetch<InviteLimits>("/companies/limits"),
   ])
   // Only what the API offers; anything else in the address is ignored.
   const status =
@@ -132,7 +135,14 @@ export default async function InterviewPage({
                     editable={canEdit}
                   />
                 ) : (
-                  <h1 className="font-heading text-3xl font-medium tracking-tight text-balance">
+                  <h1
+                    className="font-heading text-3xl font-medium tracking-tight text-balance"
+                    data-testid={
+                      interview.generation_failed
+                        ? "generation-failed"
+                        : undefined
+                    }
+                  >
                     {interview.generation_failed
                       ? t("generationFailed")
                       : t("generating")}
@@ -181,6 +191,7 @@ export default async function InterviewPage({
                         <InviteCandidate
                           interviewId={interview.id}
                           candidatesHref={`${interviewHref}?tab=candidates`}
+                          maxInvites={limits?.max_bulk_invites ?? null}
                         />
                       )}
                     </>

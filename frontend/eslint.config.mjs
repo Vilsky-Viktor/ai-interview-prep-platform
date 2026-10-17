@@ -14,6 +14,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // The MCP examples the developer docs show: their own packages, not the site's.
+    "content/mcp/**",
   ]),
 ]);
 

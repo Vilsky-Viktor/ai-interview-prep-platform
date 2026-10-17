@@ -5,12 +5,16 @@ import { MinusIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
 
 import { gradeTone } from "@/lib/grade-tone"
+import { AnswerOptions } from "@/components/questions/answer-options"
+import { AnswerPoints } from "@/components/questions/answer-points"
 import { InlineText } from "@/components/questions/inline-text"
+import { MultiChoiceTag } from "@/components/questions/multi-choice-tag"
 import { QuestionText } from "@/components/questions/question-text"
 import { VirtualList } from "@/components/virtual-list"
-import { answerText, verdict } from "@/lib/rounds"
+import { verdict } from "@/lib/rounds"
 import type { ReviewItem } from "@/types/round"
 import { LIST_BOX } from "@/constants/lists"
+import { WARNING_TONE } from "@/constants/tones"
 
 export function ScorecardReview({ items }: { items: ReviewItem[] }) {
   return (
@@ -23,10 +27,11 @@ export function ScorecardReview({ items }: { items: ReviewItem[] }) {
         <div className="space-y-4 p-6 max-sm:py-8">
           {/* On phones whether it was right sits above the question, centered. */}
           <div className="flex items-start justify-between gap-4 max-sm:flex-col-reverse max-sm:items-center">
-            <QuestionText
-              text={item.text}
-              className="min-w-0 text-lg font-light max-sm:self-stretch"
-            />
+            {/* A multi-answer question tagged as while it was played. */}
+            <div className="min-w-0 space-y-3 max-sm:self-stretch">
+              {item.multi && <MultiChoiceTag />}
+              <QuestionText text={item.text} className="text-lg font-light" />
+            </div>
             <ScorecardMark item={item} />
           </div>
           <ScorecardAnswer item={item} />
@@ -43,19 +48,31 @@ export function ScorecardMark({ item }: { item: ReviewItem }) {
   const answer = item.answer
 
   // Unanswered and timed-out questions count as wrong.
-  if (!answer || answer.option_index == null) {
+  if (!answer || answer.timed_out) {
     return (
-      <span className={cn("shrink-0 text-lg font-light", gradeTone(false))}>
+      <span
+        data-verdict={answer ? "timeOut" : "notAnswered"}
+        className={cn("shrink-0 text-lg font-light", gradeTone(false))}
+      >
         {answer ? t("timeOut") : rounds("notAnswered")}
       </span>
     )
   }
 
+  const shown = verdict(answer.correct, answer.score)
+
   return (
     <span
-      className={cn("shrink-0 text-lg font-light", gradeTone(answer.correct))}
+      data-verdict={shown}
+      className={cn(
+        "shrink-0 text-lg font-light",
+        // Partly right (a multi-answer answer with some points) in the warnings' amber.
+        !answer.correct && answer.score
+          ? WARNING_TONE
+          : gradeTone(answer.correct)
+      )}
     >
-      {rounds(verdict(answer.correct))}
+      {rounds(shown)}
     </span>
   )
 }
@@ -107,24 +124,35 @@ function ScorecardAnswer({ item }: { item: ReviewItem }) {
   const t = useTranslations("scorecard")
   const duration = useDuration()
 
-  if (!item.answer || item.answer.option_index == null) {
+  if (!item.answer || item.answer.timed_out) {
     return null
   }
 
-  const { seconds, fast } = item.answer
+  const { seconds, fast, picks } = item.answer
 
   return (
     <div className="space-y-2">
-      <p className="bidi-auto rounded-xl bg-muted px-5 py-4 text-lg leading-relaxed font-light whitespace-pre-wrap">
-        <InlineText text={answerText(item)} />
-      </p>
+      {/* A multi-answer question's ticks, each marked right or wrong, with the points. */}
+      {item.multi ? (
+        <>
+          <AnswerOptions
+            options={picks.map((index) => ({
+              answer: item.options[index],
+              correct: Boolean(item.correct_indexes?.includes(index)),
+            }))}
+            className="rounded-xl bg-muted px-5 py-4 text-lg font-light"
+          />
+          <AnswerPoints item={item} />
+        </>
+      ) : (
+        <p className="bidi-auto rounded-xl bg-muted px-5 py-4 text-lg leading-relaxed font-light whitespace-pre-wrap">
+          <InlineText text={item.options[picks[0]]} />
+        </p>
+      )}
       {/* Not known for answers given before timing was recorded. */}
       {seconds != null && (
         <p
-          className={cn(
-            "text-sm text-muted-foreground",
-            fast && "text-amber-600 dark:text-amber-400"
-          )}
+          className={cn("text-sm text-muted-foreground", fast && WARNING_TONE)}
         >
           {t.rich("answeredIn", {
             time: duration(seconds),

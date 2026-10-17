@@ -20,6 +20,7 @@ import { breadcrumbData } from "@/lib/structured-data"
 import type { FaqItem } from "@/types/help"
 import type { SampleQuestion, Template } from "@/types/superadmin"
 import { LIST_BOX } from "@/constants/lists"
+import { PageKey } from "@/components/page-key"
 
 type Params = { params: Promise<{ slug: string }> }
 
@@ -84,6 +85,7 @@ export default async function RoleTestPage({ params }: Params) {
 
   return (
     <main className="mx-auto max-w-5xl space-y-10 px-6 py-12">
+      <PageKey page="test" />
       <JsonLd
         data={breadcrumbData(siteUrl(), [
           { name: "prepza", path: at("/") },

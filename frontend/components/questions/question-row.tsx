@@ -14,6 +14,7 @@ import { toast } from "sonner"
 
 import { AnswerOptions } from "@/components/questions/answer-options"
 import { QuestionReports } from "@/components/questions/question-reports"
+import { MultiChoiceTag } from "@/components/questions/multi-choice-tag"
 import { QuestionText } from "@/components/questions/question-text"
 import { Button } from "@/components/ui/button"
 import {
@@ -72,6 +73,12 @@ export function QuestionRow({
         )}
       >
         <QuestionText text={question.text} />
+        {/* Candidates tick every right option of it. */}
+        {question.multi && (
+          <div className="mt-3">
+            <MultiChoiceTag />
+          </div>
+        )}
         <AnswerOptions options={question.options} className="mt-3" />
       </div>
       <div className="self-center py-5 ps-5 pe-6 text-sm whitespace-nowrap text-muted-foreground tabular-nums max-sm:px-5 max-sm:pt-0 max-sm:pb-7">

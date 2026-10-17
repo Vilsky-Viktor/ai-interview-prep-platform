@@ -10,6 +10,7 @@ import { ConfirmDialog } from "@/components/confirm-dialog"
 import { InstructionsDialog } from "@/components/instructions-dialog"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { Dotted } from "@/components/dot"
 import { INTEGRATION_ACTIONS } from "@/constants/lists"
 import { SLACK } from "@/constants/slack"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
@@ -38,7 +39,7 @@ export function SlackRow({
       }
       name={SLACK.name}
       status={<SlackStatus slack={slack} />}
-      text={slack.connected && `${slack.team} · ${slack.channel}`}
+      text={slack.connected && <Dotted items={[slack.team, slack.channel]} />}
       actions={
         <SlackActions companyId={companyId} slack={slack} canEdit={canEdit} />
       }
@@ -110,7 +111,7 @@ export function SlackActions({
   }
 
   return (
-    <span className={INTEGRATION_ACTIONS}>
+    <span className={INTEGRATION_ACTIONS} data-testid="integration-actions">
       <InstructionsDialog
         title={t("instructionsTitle")}
         steps={STEPS.map((step) => t(step))}

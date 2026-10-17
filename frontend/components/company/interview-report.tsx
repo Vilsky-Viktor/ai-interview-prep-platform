@@ -7,6 +7,7 @@ import { CompanyLogo } from "@/components/company/company-logo"
 import { VerifiedBadge } from "@/components/company/verified-badge"
 import { Wordmark } from "@/components/wordmark"
 import { WrappedEmail } from "@/components/wrapped-email"
+import { Dot, Dotted } from "@/components/dot"
 import { INTERVIEW_REPORT_ID } from "@/constants/report"
 import { gradeTone } from "@/lib/grade-tone"
 import type { InterviewReportData } from "@/types/company"
@@ -47,9 +48,9 @@ export function InterviewReport({ report }: { report: InterviewReportData }) {
                 className="ms-1 size-4"
               />
             )}
-            {" · "}
+            <Dot />
             {t("candidateCount", { count: report.candidates.length })}
-            {" · "}
+            <Dot />
             {t("passMark", { mark: report.pass_mark })}
           </p>
           <h1 className="font-heading text-2xl font-medium tracking-tight normal-case">
@@ -85,7 +86,7 @@ export function InterviewReport({ report }: { report: InterviewReportData }) {
                 )}
                 {signals.length > 0 && (
                   <p className="text-sm text-amber-600">
-                    {signals.join(" · ")}
+                    <Dotted items={signals} />
                   </p>
                 )}
               </div>

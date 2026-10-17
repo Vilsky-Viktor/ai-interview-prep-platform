@@ -8,6 +8,7 @@ import { DeclineVerification } from "@/components/superadmin/decline-verificatio
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { VirtualList } from "@/components/virtual-list"
+import { Dot } from "@/components/dot"
 import { usePagedList } from "@/hooks/use-paged-list"
 import { apiFetch } from "@/lib/api"
 import { decisionFailed } from "@/lib/verification"
@@ -91,10 +92,15 @@ export function VerificationList({
                 >
                   {row.domain}
                 </a>
-                {row.email && ` · ${row.email}`}
+                {row.email && (
+                  <>
+                    <Dot />
+                    {row.email}
+                  </>
+                )}
                 {date && (
                   <>
-                    {" · "}
+                    <Dot />
                     <time dateTime={date} suppressHydrationWarning>
                       {localTime.date(date)}
                     </time>

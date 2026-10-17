@@ -92,6 +92,7 @@ export default async function BillingPage({
         declineReason={company.decline_reason ?? null}
         current="billing"
         canEdit={company.can_edit}
+        canSeeActions={company.can_see_actions}
       />
       {credits && catalog && (
         <div className={LIST_BOX}>

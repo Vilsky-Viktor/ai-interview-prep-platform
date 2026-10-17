@@ -28,6 +28,7 @@ export function CompanyHeader({
   current,
   action,
   canEdit,
+  canSeeActions = false,
 }: {
   companyId: string
   name: string
@@ -42,6 +43,8 @@ export function CompanyHeader({
   action?: ReactNode
   // Owners and admins change the logo, name and website; viewers only see them.
   canEdit: boolean
+  // The owner sees the action log's tab.
+  canSeeActions?: boolean
   // A superadmin suspended the company: it can be read, not changed.
   suspended?: boolean
 }) {
@@ -111,7 +114,12 @@ export function CompanyHeader({
           </div>
         )}
       </div>
-      <CompanyNav companyId={companyId} current={current} canEdit={canEdit} />
+      <CompanyNav
+        companyId={companyId}
+        current={current}
+        canEdit={canEdit}
+        canSeeActions={canSeeActions}
+      />
       {suspended && (
         // Edge to edge on a phone.
         <WarningCard className="-mx-6 rounded-none sm:mx-0 sm:rounded-2xl">

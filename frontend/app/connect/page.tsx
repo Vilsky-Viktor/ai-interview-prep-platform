@@ -1,5 +1,6 @@
 import { ConnectView } from "@/components/connect/connect-view"
 import { translatedTitle } from "@/lib/site"
+import { PageKey } from "@/components/page-key"
 
 export const generateMetadata = () => translatedTitle("connect", "pageTitle")
 
@@ -14,6 +15,7 @@ export default async function ConnectPage({
 
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-6 py-12">
+      <PageKey page="connect" />
       <ConnectView requestId={request ?? ""} />
     </main>
   )

@@ -1,8 +1,9 @@
-export type TextPart = { code: boolean; text: string }
+export type TextPart = { code: boolean; text: string; language?: string }
 
 // A language tag counts only when a new line follows it: "```SELECT 1```" is all code.
-const CODE_BLOCK = /```(?:[\w+-]*\n)?([\s\S]*?)```/g
-const INLINE_CODE = /`([^`\n]+)`/g
+const CODE_BLOCK = /```(?:([\w+-]*)\n)?([\s\S]*?)```/g
+// Its empty first group stands for the language, as in CODE_BLOCK.
+const INLINE_CODE = /`()([^`\n]+)`/g
 
 function split(text: string, pattern: RegExp): TextPart[] {
   const parts: TextPart[] = []
@@ -15,7 +16,11 @@ function split(text: string, pattern: RegExp): TextPart[] {
       parts.push({ code: false, text: before })
     }
 
-    parts.push({ code: true, text: match[1].replace(/\n$/, "") })
+    parts.push({
+      code: true,
+      text: match[2].replace(/\n$/, ""),
+      language: match[1] || undefined,
+    })
     last = match.index + match[0].length
   }
 
@@ -28,7 +33,8 @@ function split(text: string, pattern: RegExp): TextPart[] {
   return parts
 }
 
-/** Fenced ``` blocks become code parts; everything else stays text. */
+/** Fenced ``` blocks become code parts, with their language ("```python"); everything else
+ * stays text. */
 export function splitCodeBlocks(text: string): TextPart[] {
   return split(text, CODE_BLOCK).filter((part) => part.code || part.text.trim())
 }

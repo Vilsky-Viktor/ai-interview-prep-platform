@@ -37,6 +37,7 @@ export function TopUpDialog({
   return (
     <Dialog>
       <DialogTrigger
+        data-testid="top-up"
         render={
           card ? (
             <button

@@ -1,7 +1,9 @@
 import { notFound } from "next/navigation"
 import { getLocale, getTranslations } from "next-intl/server"
 
+import { DocSection } from "@/components/api-docs/doc-section"
 import { Fields } from "@/components/api-docs/fields"
+import { McpTab } from "@/components/api-docs/mcp-tab"
 import { Operation } from "@/components/api-docs/operation"
 import { RichText } from "@/components/api-docs/rich-text"
 import { CopyValue } from "@/components/copy-field"
@@ -9,6 +11,8 @@ import { TabNav } from "@/components/tab-nav"
 import { JsonLd } from "@/components/json-ld"
 import { DOC_TABS } from "@/constants/api-docs"
 import { DEFAULT_LOCALE } from "@/constants/i18n"
+import { MCP_TOOLS_PATH } from "@/constants/mcp-docs"
+import { mcpExamples } from "@/lib/mcp-examples"
 import {
   descriptionTabs,
   fieldsOf,
@@ -18,7 +22,9 @@ import {
 import { publicFetch } from "@/lib/server-api"
 import { pageMetadata, previewImage, siteUrl } from "@/lib/site"
 import { breadcrumbData, techArticleData } from "@/lib/structured-data"
+import type { McpTools } from "@/types/mcp"
 import type { OpenApi } from "@/types/openapi"
+import { PageKey } from "@/components/page-key"
 
 export async function generateMetadata() {
   const t = await getTranslations("apiDocs")
@@ -27,8 +33,9 @@ export async function generateMetadata() {
 }
 
 /** The developer docs, read from the API's own description, so they always match it: a tab for
- * the API (how to sign in, its routes), its web hooks, the SDK that embeds the interview, and
- * the objects they return. English only, like the legal pages. */
+ * the API (how to sign in, its routes), its web hooks, the SDK that embeds the interview, the
+ * MCP server (its tools and limits read from the server), and the objects they return. English
+ * only, like the legal pages. */
 export default async function ApiDocsPage({
   searchParams,
 }: {
@@ -50,7 +57,7 @@ export default async function ApiDocsPage({
     href: id === "api" ? "/api-docs" : `/api-docs?tab=${id}`,
     label: id === "objects" ? t("objects") : t(`tabs.${id}`),
     // Acronyms keep their capitals in the lowercase tabs.
-    keepCase: id === "api" || id === "sdk",
+    keepCase: id === "api" || id === "sdk" || id === "mcp",
   }))
 
   const base = spec.servers?.[0]?.url ?? ""
@@ -58,6 +65,7 @@ export default async function ApiDocsPage({
 
   return (
     <main className="mx-auto max-w-5xl space-y-12 px-6 py-12">
+      <PageKey page="apiDocs" />
       <JsonLd
         data={[
           techArticleData(site, {
@@ -85,14 +93,14 @@ export default async function ApiDocsPage({
         {current === "api" && (
           <>
             {texts.api && <RichText text={texts.api} />}
-            <Section title={t("baseUrl")}>
+            <DocSection title={t("baseUrl")}>
               <CopyValue
                 value={base}
                 label={t("copyBaseUrl")}
                 copied={t("baseUrlCopied")}
               />
-            </Section>
-            <Section title={t("endpoints")}>
+            </DocSection>
+            <DocSection title={t("endpoints")}>
               {operationsOf(spec.paths).map((item) => (
                 <Operation
                   key={`${item.method} ${item.path}`}
@@ -100,22 +108,31 @@ export default async function ApiDocsPage({
                   {...item}
                 />
               ))}
-            </Section>
+            </DocSection>
           </>
         )}
         {current === "webhooks" && (
           <>
             {texts.webhooks && <RichText text={texts.webhooks} />}
             {spec.webhooks && (
-              <Section title={t("webhooks")}>
+              <DocSection title={t("webhooks")}>
                 {operationsOf(spec.webhooks).map((item) => (
                   <Operation key={item.path} spec={spec} {...item} />
                 ))}
-              </Section>
+              </DocSection>
             )}
           </>
         )}
         {current === "sdk" && texts.sdk && <RichText text={texts.sdk} />}
+        {current === "mcp" && (
+          <McpTab
+            site={site}
+            examples={await mcpExamples()}
+            tools={await publicFetch<McpTools>(MCP_TOOLS_PATH, {
+              locale: "en",
+            })}
+          />
+        )}
         {current === "objects" &&
           schemasOf(spec).map(([name, schema]) => (
             <article key={name} id={name} className="scroll-mt-20 space-y-3">
@@ -128,20 +145,5 @@ export default async function ApiDocsPage({
           ))}
       </div>
     </main>
-  )
-}
-
-function Section({
-  title,
-  children,
-}: {
-  title: string
-  children: React.ReactNode
-}) {
-  return (
-    <section className="space-y-6">
-      <h2 className="font-heading text-2xl font-medium">{title}</h2>
-      {children}
-    </section>
   )
 }

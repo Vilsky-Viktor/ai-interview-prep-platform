@@ -9,6 +9,7 @@ import type {
   AssistantEvent,
   Conversation,
   ConversationDetail,
+  PageContext,
 } from "@/types/assistant"
 import type { HelpMessage } from "@/types/help"
 
@@ -21,7 +22,7 @@ export function streamAssistant(
     conversation_id?: string
     company_id?: string
     source?: "text" | "voice"
-    page?: string
+    page?: PageContext
     earlier?: { role: "user" | "assistant"; content: string }[]
   },
   onEvent: (event: AssistantEvent) => void,

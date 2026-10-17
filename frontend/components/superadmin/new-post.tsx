@@ -18,6 +18,7 @@ export function NewPost() {
       <Button
         className="h-12 shrink-0 px-6 text-base"
         onClick={() => setOpen(true)}
+        data-testid="new-post"
       >
         {t("newPost")}
       </Button>

@@ -11,7 +11,10 @@ export interface paths {
       path?: never
       cookie?: never
     }
-    /** List Companies */
+    /**
+     * List Companies
+     * @description The user's companies; for an AI agent signed in with an API key, the key's only.
+     */
     get: operations["list_companies_companies_get"]
     put?: never
     /**
@@ -159,9 +162,31 @@ export interface paths {
     }
     /**
      * List Audit Events
-     * @description The company's recorded human decisions, newest first; for the owner only.
+     * @description Every action the company's members took, newest first; for the owner only.
      */
     get: operations["list_audit_events_companies__company_id__audit_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/companies/{company_id}/actions": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * List Actions
+     * @description The company's action log, newest first, each action with who took it and what it was
+     *     about; for the owner only. Only one member's (`member_id`, a joined member), one group's, or
+     *     those from `from` and before `to`.
+     */
+    get: operations["list_actions_companies__company_id__actions_get"]
     put?: never
     post?: never
     delete?: never
@@ -698,8 +723,8 @@ export interface paths {
     /**
      * Review Generation
      * @description Approved topics resume the generation, so a pause refuses it. A company that never paid
-     *     shows it's a person on the site first, as generating costs; the assistant and AI apps (no
-     *     browser) can't be asked.
+     *     shows it's a person on the site first, as generating costs (the assistant and AI apps, with
+     *     no browser, can't be asked), and is refused once today's unpaid AI spend reached its cap.
      */
     post: operations["review_generation_interviews__interview_id__generation_review_post"]
     delete?: never
@@ -717,7 +742,10 @@ export interface paths {
     }
     get?: never
     put?: never
-    /** Retry Generation */
+    /**
+     * Retry Generation
+     * @description Runs the generation again, so it's refused as a review is (without the person check).
+     */
     post: operations["retry_generation_interviews__interview_id__generation_retry_post"]
     delete?: never
     options?: never
@@ -892,6 +920,26 @@ export interface paths {
      *     a guest invite, only its guest (its link signs them in).
      */
     post: operations["start_invite_invites__token__start_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/limits": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Limits
+     * @description For any signed-in user: the limits' current values, as edited in the admin zone.
+     */
+    get: operations["get_limits_limits_get"]
+    put?: never
+    post?: never
     delete?: never
     options?: never
     head?: never
@@ -1869,6 +1917,234 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/superadmin/support/search": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Search
+     * @description What a link, an id, a Paddle transaction, an email address or part of a company's name
+     *     leads to, at most SUPPORT_RESULTS.
+     */
+    post: operations["search_superadmin_support_search_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/support/companies/{company_id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Get Company */
+    get: operations["get_company_superadmin_support_companies__company_id__get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/support/companies/{company_id}/history": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get History
+     * @description Every movement of the company's credits, newest first, as its billing tab shows them.
+     */
+    get: operations["get_history_superadmin_support_companies__company_id__history_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/support/companies/{company_id}/reserved": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Get Reserved */
+    get: operations["get_reserved_superadmin_support_companies__company_id__reserved_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/support/companies/{company_id}/interviews": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Get Interviews */
+    get: operations["get_interviews_superadmin_support_companies__company_id__interviews_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/support/companies/{company_id}/audit": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Audit
+     * @description The company's action log, newest first, as its owner sees it.
+     */
+    get: operations["get_audit_superadmin_support_companies__company_id__audit_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/support/companies/{company_id}/invoice": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Invoice
+     * @description A temporary link to the invoice of one of the company's top-ups.
+     */
+    get: operations["get_invoice_superadmin_support_companies__company_id__invoice_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/support/companies/{company_id}/adjustments": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Adjust Credits
+     * @description Adds or removes credits with a note the company's history shows; safe to repeat with the
+     *     same key. Billing refuses taking the available balance below zero (409).
+     */
+    post: operations["adjust_credits_superadmin_support_companies__company_id__adjustments_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/support/users/{user_id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get User
+     * @description The account with that id (as "copy id" gives it): its companies and the top-ups it paid
+     *     for. 404 when there's neither an account nor a membership.
+     */
+    get: operations["get_user_superadmin_support_users__user_id__get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/support/candidates/{invite_id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Get Candidate */
+    get: operations["get_candidate_superadmin_support_candidates__invite_id__get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/support/interviews/{interview_id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Get Interview */
+    get: operations["get_interview_superadmin_support_interviews__interview_id__get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/support/interviews/{interview_id}/candidates": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Interview Candidates
+     * @description The interview's candidates, newest first.
+     */
+    get: operations["get_interview_candidates_superadmin_support_interviews__interview_id__candidates_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/companies/{company_id}/ai-apps": {
     parameters: {
       query?: never
@@ -1966,6 +2242,44 @@ export interface components {
       deleted: components["schemas"]["LostCompany"][]
     }
     /**
+     * ActionOut
+     * @description A row of a company's action log (its owner's tab, the admin zone's support page): its
+     *     group, who took it (`user_email`, None once they're no longer a member), and what it was
+     *     about: `target_kind` and `target` (a candidate's or member's email, an interview's title, an
+     *     API key's name, a web hook's host, an integration's name; None for the company itself, or a
+     *     person who's gone), and what it took away (`removed`: an API key's narrowed permissions).
+     */
+    ActionOut: {
+      /** User Id */
+      user_id: string
+      /** Action */
+      action: string
+      /** Target Id */
+      target_id: string | null
+      /** Via */
+      via?: string | null
+      /**
+       * Created At
+       * Format: date-time
+       */
+      created_at: string
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string
+      /** Group */
+      group: string | null
+      /** User Email */
+      user_email: string | null
+      /** Target Kind */
+      target_kind: string | null
+      /** Target */
+      target: string | null
+      /** Removed */
+      removed?: string[] | null
+    }
+    /**
      * AdminInviteOut
      * @description What the invited member sees before accepting.
      */
@@ -2038,6 +2352,17 @@ export interface components {
        */
       created_at: string
     }
+    /**
+     * AuditGroup
+     * @enum {string}
+     */
+    AuditGroup:
+      | "interviews"
+      | "candidates"
+      | "team"
+      | "company"
+      | "billing"
+      | "integrations"
     /**
      * AutoTopUpIn
      * @description Which top-up to buy, and under which available balance (credits).
@@ -2496,6 +2821,11 @@ export interface components {
       can_delete: boolean
       /** Can Manage Members */
       can_manage_members: boolean
+      /**
+       * Can See Actions
+       * @default false
+       */
+      can_see_actions: boolean
       /** Interview Count */
       interview_count: number
       /** Logo Url */
@@ -2678,6 +3008,8 @@ export interface components {
       candidate: components["schemas"]["CreditCandidateOut"] | null
       /** Candidate Deleted */
       candidate_deleted: boolean
+      /** Note */
+      note?: string | null
     }
     /** InterviewBriefOut */
     InterviewBriefOut: {
@@ -2765,6 +3097,8 @@ export interface components {
       updated_at?: string | null
       /** Topics */
       topics: components["schemas"]["TopicOut"][]
+      /** Total Minutes */
+      total_minutes?: number | null
       /**
        * Can Edit
        * @default false
@@ -2871,6 +3205,8 @@ export interface components {
       status: string
       /** Question Seconds */
       question_seconds: number
+      /** Total Minutes */
+      total_minutes?: number | null
       /**
        * Guest
        * @default false
@@ -2897,6 +3233,14 @@ export interface components {
     InvoiceOut: {
       /** Url */
       url: string
+    }
+    /**
+     * LimitsOut
+     * @description The current limits the site's texts quote: the most emails one list may invite.
+     */
+    LimitsOut: {
+      /** Max Bulk Invites */
+      max_bulk_invites: number
     }
     /**
      * LineProblemOut
@@ -2938,6 +3282,8 @@ export interface components {
       brand_style?: components["schemas"]["BrandStyle"] | null
       /** Question Seconds */
       question_seconds: number
+      /** Total Minutes */
+      total_minutes?: number | null
       /** Status */
       status?: string | null
     }
@@ -3165,6 +3511,11 @@ export interface components {
       text: string
       /** Options */
       options: components["schemas"]["QuestionOption"][]
+      /**
+       * Multi
+       * @default false
+       */
+      multi: boolean
       /** Likes */
       likes: number
       /** Dislikes */
@@ -3268,8 +3619,24 @@ export interface components {
       answer_id: string
       /** Option Index */
       option_index: number | null
+      /**
+       * Picks
+       * @default []
+       */
+      picks: number[]
+      /**
+       * Timed Out
+       * @default false
+       */
+      timed_out: boolean
+      /** Right Picks */
+      right_picks?: number | null
+      /** Wrong Picks */
+      wrong_picks?: number | null
       /** Correct */
       correct: boolean | null
+      /** Score */
+      score?: number | null
       /** Seconds */
       seconds?: number | null
       /**
@@ -3339,8 +3706,15 @@ export interface components {
       text: string
       /** Options */
       options: string[]
+      /**
+       * Multi
+       * @default false
+       */
+      multi: boolean
       /** Correct Option Index */
       correct_option_index: number | null
+      /** Correct Indexes */
+      correct_indexes?: number[] | null
       answer: components["schemas"]["ScorecardAnswer"] | null
       /**
        * Tab Leaves
@@ -3436,6 +3810,290 @@ export interface components {
        * Format: date-time
        */
       created_at: string
+    }
+    /**
+     * SupportAdjustmentIn
+     * @description Credits a superadmin adds (positive) or removes (negative), with the reason the company's
+     *     history shows; `key` makes a repeated request count once.
+     */
+    SupportAdjustmentIn: {
+      /** Amount */
+      amount: number
+      /** Note */
+      note: string
+      /**
+       * Key
+       * Format: uuid
+       */
+      key: string
+    }
+    /**
+     * SupportCandidateOut
+     * @description A candidate as support sees them, without their questions or answers. `extra_time` is a
+     *     percentage of each question's time; `credits` says whether billing holds, charged or gave
+     *     back their credits (None when it never held any).
+     */
+    SupportCandidateOut: {
+      /**
+       * Invite Id
+       * Format: uuid
+       */
+      invite_id: string
+      /** Email */
+      email: string
+      /** Name */
+      name: string | null
+      /** Status */
+      status: string
+      /**
+       * Company Id
+       * Format: uuid
+       */
+      company_id: string
+      /** Company Name */
+      company_name: string
+      /**
+       * Interview Id
+       * Format: uuid
+       */
+      interview_id: string
+      /** Interview Title */
+      interview_title: string | null
+      /**
+       * Invited At
+       * Format: date-time
+       */
+      invited_at: string
+      /**
+       * Last Sent At
+       * Format: date-time
+       */
+      last_sent_at: string
+      /** Started At */
+      started_at: string | null
+      /** Finished At */
+      finished_at: string | null
+      /** Grade */
+      grade: number | null
+      /** Passed */
+      passed: boolean | null
+      /** Extra Time */
+      extra_time: number
+      signals: components["schemas"]["SupportSignalsOut"]
+      /** Credits */
+      credits: ("held" | "charged" | "released") | null
+    }
+    /**
+     * SupportCandidateRowOut
+     * @description A row of an interview's candidates.
+     */
+    SupportCandidateRowOut: {
+      /**
+       * Invite Id
+       * Format: uuid
+       */
+      invite_id: string
+      /** Email */
+      email: string
+      /** Name */
+      name: string | null
+      /** Status */
+      status: string
+      /** Grade */
+      grade: number | null
+      /**
+       * Created At
+       * Format: date-time
+       */
+      created_at: string
+    }
+    /**
+     * SupportCompanyOut
+     * @description A company as support sees it: its people, and its credits (`reserved` is set aside for
+     *     candidates who haven't finished).
+     */
+    SupportCompanyOut: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string
+      /** Name */
+      name: string
+      verification_status: components["schemas"]["VerificationStatus"]
+      /** Verified Domain */
+      verified_domain: string | null
+      /** Suspended */
+      suspended: boolean
+      /**
+       * Created At
+       * Format: date-time
+       */
+      created_at: string
+      /** Members */
+      members: components["schemas"]["SupportMemberOut"][]
+      /** Balance */
+      balance: number
+      /** Reserved */
+      reserved: number
+    }
+    /**
+     * SupportInterviewOut
+     * @description An interview as support sees it: its topics by name, never its questions.
+     */
+    SupportInterviewOut: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string
+      /** Title */
+      title: string | null
+      /** Status */
+      status: string
+      /**
+       * Company Id
+       * Format: uuid
+       */
+      company_id: string
+      /** Company Name */
+      company_name: string
+      /**
+       * Created At
+       * Format: date-time
+       */
+      created_at: string
+      /** Generation Id */
+      generation_id: string | null
+      /** Generation Failed */
+      generation_failed: boolean
+      /** Topics */
+      topics: string[]
+      /** Question Seconds */
+      question_seconds: number
+      /** Pass Mark */
+      pass_mark: number
+      /** Candidate Count */
+      candidate_count: number
+    }
+    /**
+     * SupportKind
+     * @description What a support search result is.
+     * @enum {string}
+     */
+    SupportKind: "company" | "interview" | "candidate" | "user"
+    /**
+     * SupportMemberOut
+     * @description An owner, admin or viewer; `user_id` is None until an invited one joins.
+     */
+    SupportMemberOut: {
+      /** Email */
+      email: string
+      /** Role */
+      role: string
+      /** User Id */
+      user_id: string | null
+    }
+    /**
+     * SupportResultOut
+     * @description An account (its id the account's, its title the account's address), or a company, an
+     *     interview or a candidate (an invite, its title the candidate's email) with the company it
+     *     belongs to; an account belongs to none.
+     */
+    SupportResultOut: {
+      kind: components["schemas"]["SupportKind"]
+      /** Id */
+      id: string
+      /** Title */
+      title: string
+      /** Company Id */
+      company_id?: string | null
+      /** Company Name */
+      company_name?: string | null
+    }
+    /**
+     * SupportSearchIn
+     * @description A link or path from prepza's site, an id (an account's, a company's, an interview's, a
+     *     candidate's or a Paddle transaction's), an email address, or part of a company's name.
+     */
+    SupportSearchIn: {
+      /** Query */
+      query: string
+    }
+    /** SupportSearchOut */
+    SupportSearchOut: {
+      /** Results */
+      results: components["schemas"]["SupportResultOut"][]
+    }
+    /**
+     * SupportSignalsOut
+     * @description How many integrity signals the candidate gave: page leaves, copy attempts and answers
+     *     picked too fast to have read.
+     */
+    SupportSignalsOut: {
+      /** Tab Leaves */
+      tab_leaves: number
+      /** Copies */
+      copies: number
+      /** Fast Answers */
+      fast_answers: number
+    }
+    /**
+     * SupportTopUpOut
+     * @description A top-up the account paid for into a company: `total` in minor units, tax included;
+     *     `company_name` None once the company is deleted.
+     */
+    SupportTopUpOut: {
+      /** Transaction Id */
+      transaction_id: string
+      /**
+       * Company Id
+       * Format: uuid
+       */
+      company_id: string
+      /** Company Name */
+      company_name: string | null
+      /** Total */
+      total: string
+      /** Currency */
+      currency: string
+      /**
+       * Created At
+       * Format: date-time
+       */
+      created_at: string
+    }
+    /**
+     * SupportUserCompanyOut
+     * @description A company the account is a member of, with its role there.
+     */
+    SupportUserCompanyOut: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string
+      /** Name */
+      name: string
+      /** Role */
+      role: string
+    }
+    /**
+     * SupportUserOut
+     * @description An account as support sees it: `email` and `created_at` None once the account is gone
+     *     (its memberships may outlive it), or when its sign-in has none.
+     */
+    SupportUserOut: {
+      /** User Id */
+      user_id: string
+      /** Email */
+      email: string | null
+      /** Created At */
+      created_at: string | null
+      /** Companies */
+      companies: components["schemas"]["SupportUserCompanyOut"][]
+      /** Top Ups */
+      top_ups: components["schemas"]["SupportTopUpOut"][]
     }
     /**
      * Theme
@@ -3919,6 +4577,46 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["AuditEventOut"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  list_actions_companies__company_id__actions_get: {
+    parameters: {
+      query?: {
+        member_id?: string | null
+        group?: components["schemas"]["AuditGroup"] | null
+        from?: string | null
+        to?: string | null
+        /** @description Number of items to skip */
+        offset?: number
+        /** @description Number of items to return, up to 100 */
+        limit?: number
+      }
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["ActionOut"][]
         }
       }
       /** @description Validation Error */
@@ -5356,6 +6054,35 @@ export interface operations {
       }
     }
   }
+  get_limits_limits_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["LimitsOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
   set_link_interviews__interview_id__link_put: {
     parameters: {
       query?: never
@@ -6230,7 +6957,9 @@ export interface operations {
   }
   rename_candidate_internal_companies__company_id__interviews__interview_id__candidates__invite_id__name_patch: {
     parameters: {
-      query?: never
+      query: {
+        user_id: string
+      }
       header?: never
       path: {
         company_id: string
@@ -7052,6 +7781,409 @@ export interface operations {
           [name: string]: unknown
         }
         content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  search_superadmin_support_search_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["SupportSearchIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["SupportSearchOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_company_superadmin_support_companies__company_id__get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["SupportCompanyOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_history_superadmin_support_companies__company_id__history_get: {
+    parameters: {
+      query?: {
+        /** @description Number of items to skip */
+        offset?: number
+        /** @description Number of items to return, up to 100 */
+        limit?: number
+      }
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HistoryEntryOut"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_reserved_superadmin_support_companies__company_id__reserved_get: {
+    parameters: {
+      query?: {
+        /** @description Number of items to skip */
+        offset?: number
+        /** @description Number of items to return, up to 100 */
+        limit?: number
+      }
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["CreditCandidateOut"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_interviews_superadmin_support_companies__company_id__interviews_get: {
+    parameters: {
+      query?: {
+        /** @description Number of items to skip */
+        offset?: number
+        /** @description Number of items to return, up to 100 */
+        limit?: number
+      }
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["InterviewOut"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_audit_superadmin_support_companies__company_id__audit_get: {
+    parameters: {
+      query?: {
+        /** @description Number of items to skip */
+        offset?: number
+        /** @description Number of items to return, up to 100 */
+        limit?: number
+      }
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["ActionOut"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_invoice_superadmin_support_companies__company_id__invoice_get: {
+    parameters: {
+      query: {
+        transaction_id: string
+      }
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["InvoiceOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  adjust_credits_superadmin_support_companies__company_id__adjustments_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["SupportAdjustmentIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_user_superadmin_support_users__user_id__get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        user_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["SupportUserOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_candidate_superadmin_support_candidates__invite_id__get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        invite_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["SupportCandidateOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_interview_superadmin_support_interviews__interview_id__get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        interview_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["SupportInterviewOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_interview_candidates_superadmin_support_interviews__interview_id__candidates_get: {
+    parameters: {
+      query?: {
+        /** @description Number of items to skip */
+        offset?: number
+        /** @description Number of items to return, up to 100 */
+        limit?: number
+      }
+      header?: never
+      path: {
+        interview_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["SupportCandidateRowOut"][]
+        }
       }
       /** @description Validation Error */
       422: {

@@ -86,6 +86,7 @@ export function CreateCompany({ templateId }: { templateId?: string }) {
   return (
     <Dialog open={open} onOpenChange={handleOpen}>
       <DialogTrigger
+        data-testid="new-company"
         render={<Button className="h-12 px-6 text-base max-sm:w-full" />}
       >
         {t("new")}

@@ -8,6 +8,7 @@ import { DOCUMENTS } from "@/constants/documents"
 import { DEFAULT_LOCALE } from "@/constants/i18n"
 import { pageMetadata } from "@/lib/site"
 import { LIST_BOX } from "@/constants/lists"
+import { PageKey } from "@/components/page-key"
 
 // Like the report's download button (components/company/report-actions.tsx).
 export async function generateMetadata() {
@@ -23,6 +24,7 @@ export default async function DocsPage() {
 
   return (
     <main className="mx-auto max-w-5xl space-y-8 px-6 py-12">
+      <PageKey page="documents" />
       <header className="space-y-4">
         <h1 className="font-heading text-3xl font-medium tracking-tight">
           {t("title")}

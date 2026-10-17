@@ -1,26 +1,30 @@
 import { notFound } from "next/navigation"
 
 import { LegalNotices } from "@/components/superadmin/legal-notices"
+import { LimitSettings } from "@/components/superadmin/limit-settings"
 import { MaintenanceSwitch } from "@/components/superadmin/maintenance-switch"
 import { PauseSwitch } from "@/components/superadmin/pause-switch"
 import { SuperadminHeader } from "@/components/superadmin/superadmin-header"
 import { serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
-import type { LegalNotice } from "@/types/superadmin"
+import type { LegalNotice, LimitChange, Limits } from "@/types/superadmin"
 
 export const generateMetadata = () => translatedTitle("superadmin", "zone")
 
-/** The admin zone's controls: the emergency pause, maintenance mode and the legal notices. The pause's state is
+/** The admin zone's controls: the emergency pause, maintenance mode, the legal notices and every
+ * limit, editable. The pause's state is
  * public (pages show a notice), so the page asks who's signed in; maintenance's is for
  * superadmins only. The API turns both for superadmins only. */
 export default async function ControlsPage() {
-  const [pause, maintenance, notices] = await Promise.all([
+  const [pause, maintenance, notices, limits, changes] = await Promise.all([
     serverFetch<{ paused: boolean }>("/companies/pause"),
     serverFetch<{ on: boolean }>("/companies/superadmin/maintenance"),
     serverFetch<LegalNotice[]>("/notifications/superadmin/legal-notices"),
+    serverFetch<Limits>("/billing/superadmin/limits"),
+    serverFetch<LimitChange[]>("/billing/superadmin/limits/changes"),
   ])
 
-  if (!pause || !maintenance || !notices) {
+  if (!pause || !maintenance || !notices || !limits || !changes) {
     notFound()
   }
 
@@ -31,6 +35,7 @@ export default async function ControlsPage() {
         <PauseSwitch paused={pause.paused} />
         <MaintenanceSwitch on={maintenance.on} />
         <LegalNotices initial={notices} />
+        <LimitSettings initial={limits} initialChanges={changes} />
       </div>
     </main>
   )

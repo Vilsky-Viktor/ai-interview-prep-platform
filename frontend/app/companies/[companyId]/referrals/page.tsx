@@ -57,6 +57,7 @@ export default async function ReferralsPage({
         declineReason={company.decline_reason ?? null}
         current="referrals"
         canEdit={company.can_edit}
+        canSeeActions={company.can_see_actions}
       />
       {referral && (
         <>

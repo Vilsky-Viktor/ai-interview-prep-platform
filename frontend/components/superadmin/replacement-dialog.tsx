@@ -29,6 +29,7 @@ export function ReplacementDialog({
   return (
     <Dialog>
       <DialogTrigger
+        data-testid="replaced-with"
         render={
           <Button variant="outline" size="sm" className="h-8 px-3 text-sm" />
         }

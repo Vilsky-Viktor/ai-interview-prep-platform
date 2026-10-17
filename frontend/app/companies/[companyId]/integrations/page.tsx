@@ -72,6 +72,7 @@ export default async function IntegrationsPage({
         declineReason={company.decline_reason ?? null}
         current="integrations"
         canEdit={company.can_edit}
+        canSeeActions={company.can_see_actions}
       />
       {slack && (
         <section className="space-y-6">

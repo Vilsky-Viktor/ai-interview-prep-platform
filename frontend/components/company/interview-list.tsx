@@ -49,6 +49,9 @@ export function InterviewList({
         <div className="relative flex items-center gap-2 p-6 pe-3 transition-colors hover:bg-muted/50 active:bg-muted/50">
           <Link
             href={`/companies/${companyId}/interviews/${interview.id}`}
+            data-testid={
+              interview.generation_failed ? "generation-failed" : undefined
+            }
             className="flex min-w-0 flex-1 items-center justify-between gap-4 after:absolute after:inset-0 max-sm:[&_[data-slot=interview-stats]]:hidden"
           >
             <InterviewSummary

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 import { getLocale, getTranslations } from "next-intl/server"
 
 import { EmailText } from "@/components/email-text"
+import { PageKey } from "@/components/page-key"
 import { DEFAULT_LOCALE } from "@/constants/i18n"
 import { formatDay } from "@/lib/format"
 import { textDirection } from "@/lib/locale"
@@ -60,6 +61,7 @@ export async function LegalPage({
 
   return (
     <main className="mx-auto max-w-5xl space-y-10 px-6 py-12">
+      <PageKey page={name} />
       <header className="space-y-4">
         <h1 className="font-heading text-4xl font-medium tracking-tight">
           {t(`titles.${name}`)}

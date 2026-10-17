@@ -58,6 +58,7 @@ export default async function BrandPage({
         declineReason={company.decline_reason ?? null}
         current="brand"
         canEdit={company.can_edit}
+        canSeeActions={company.can_see_actions}
       />
       <section className="flex items-center gap-5">
         <LogoPicker

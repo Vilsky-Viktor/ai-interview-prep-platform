@@ -140,7 +140,7 @@ export function AtsActions({
   }
 
   return (
-    <span className={INTEGRATION_ACTIONS}>
+    <span className={INTEGRATION_ACTIONS} data-testid="integration-actions">
       <CandidateFlow provider={provider} open={info} onOpenChange={setInfo}>
         {canEdit && hooked && connection?.status === "connected" && (
           <AtsWebhook

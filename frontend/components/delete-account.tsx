@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
+import { Dot } from "@/components/dot"
 import {
   Dialog,
   DialogClose,
@@ -99,8 +100,12 @@ export function DeleteAccount({
               {owned?.deleted.map((company) => (
                 <li key={company.id}>
                   {company.name}
-                  {company.credits !== null &&
-                    ` · ${t("credits", { count: company.credits })}`}
+                  {company.credits !== null && (
+                    <>
+                      <Dot />
+                      {t("credits", { count: company.credits })}
+                    </>
+                  )}
                 </li>
               ))}
             </ul>

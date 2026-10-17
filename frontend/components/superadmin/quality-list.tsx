@@ -13,6 +13,7 @@ import { ReplacementDialog } from "@/components/superadmin/replacement-dialog"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { VirtualList } from "@/components/virtual-list"
+import { Dot } from "@/components/dot"
 import { usePagedList } from "@/hooks/use-paged-list"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 import type { QualityRow } from "@/types/superadmin"
@@ -102,8 +103,10 @@ export function QualityList({
                   className="line-clamp-3 font-light"
                 />
                 <p className="text-xs text-muted-foreground">
-                  <span className="normal-case">{row.set_title}</span> ·{" "}
-                  {t(`kinds.${row.set_kind}`)} ·{" "}
+                  <span className="normal-case">{row.set_title}</span>
+                  <Dot />
+                  {t(`kinds.${row.set_kind}`)}
+                  <Dot />
                   <time dateTime={row.at} suppressHydrationWarning>
                     {localTime.date(row.at)}
                   </time>
@@ -122,8 +125,14 @@ export function QualityList({
               )}
               <span>
                 {t("answers", { count: row.answers })}
-                {row.answers > 0 &&
-                  ` · ${t("right", { percent: Math.round((row.correct / row.answers) * 100) })}`}
+                {row.answers > 0 && (
+                  <>
+                    <Dot />
+                    {t("right", {
+                      percent: Math.round((row.correct / row.answers) * 100),
+                    })}
+                  </>
+                )}
               </span>
               {row.reports > 0 ? (
                 <button

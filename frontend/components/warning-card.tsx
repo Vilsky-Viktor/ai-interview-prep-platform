@@ -1,7 +1,12 @@
 import { cn } from "cn"
 import { InfoIcon, TriangleAlertIcon } from "lucide-react"
 
-type CardProps = { children: React.ReactNode; className?: string }
+type CardProps = {
+  children: React.ReactNode
+  className?: string
+  // A button at the end, such as one closing the notice.
+  action?: React.ReactNode
+}
 
 /** A notice on a gray card: a large sign and the text in the muted color, as the maintenance
  * notice shows it. */
@@ -9,6 +14,7 @@ function NoticeCard({
   children,
   className,
   icon,
+  action,
 }: CardProps & { icon: React.ReactNode }) {
   return (
     <div
@@ -20,6 +26,7 @@ function NoticeCard({
     >
       {icon}
       <p className="text-muted-foreground">{children}</p>
+      {action && <div className="ms-auto shrink-0">{action}</div>}
     </div>
   )
 }

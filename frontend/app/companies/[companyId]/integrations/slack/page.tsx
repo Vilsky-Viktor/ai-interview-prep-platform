@@ -12,6 +12,7 @@ import { SlackKinds } from "@/components/company/slack-kinds"
 import { SlackReturned } from "@/components/company/slack-returned"
 import { PageHeader } from "@/components/page-header"
 import { SignInPrompt } from "@/components/sign-in-prompt"
+import { Dot } from "@/components/dot"
 import { TOKEN_COOKIE } from "@/constants/auth"
 import { SLACK } from "@/constants/slack"
 import { serverFetch } from "@/lib/server-api"
@@ -85,7 +86,9 @@ export default async function SlackPage({
                 </div>
                 {slack.connected && (
                   <p className="text-base text-muted-foreground">
-                    {slack.team} · {slack.channel}
+                    {slack.team}
+                    <Dot />
+                    {slack.channel}
                   </p>
                 )}
                 {/* On phones "connected" goes under the name and channel. */}

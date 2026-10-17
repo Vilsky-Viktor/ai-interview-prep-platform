@@ -9,14 +9,14 @@ describe("splitCodeBlocks", () => {
     ])
   })
 
-  it("makes a fenced block a code part, without its language or last new line", () => {
+  it("makes a fenced block a code part with its language, without its last new line", () => {
     expect(
       splitCodeBlocks(
         "What does it print?\n```python\nprint(1)\n```\nPick one."
       )
     ).toEqual([
       { code: false, text: "What does it print?\n" },
-      { code: true, text: "print(1)" },
+      { code: true, text: "print(1)", language: "python" },
       { code: false, text: "\nPick one." },
     ])
   })
@@ -30,16 +30,16 @@ describe("splitCodeBlocks", () => {
   })
 
   it("takes a fence without a language", () => {
-    expect(splitCodeBlocks("```\nx\ny\n```")).toEqual([
-      { code: true, text: "x\ny" },
+    expect(splitCodeBlocks("```\nx\ny\n```")).toStrictEqual([
+      { code: true, text: "x\ny", language: undefined },
     ])
   })
 
   it("drops text between blocks that is only whitespace", () => {
     expect(splitCodeBlocks("```c++\na\n```\n\n```objective-c\nb\n```")).toEqual(
       [
-        { code: true, text: "a" },
-        { code: true, text: "b" },
+        { code: true, text: "a", language: "c++" },
+        { code: true, text: "b", language: "objective-c" },
       ]
     )
   })

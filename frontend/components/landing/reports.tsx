@@ -18,7 +18,7 @@ export async function ReportsSection() {
   const brand = await getTranslations("landing.brand")
 
   return (
-    <LandingSection title={t("title")} text={t("text")}>
+    <LandingSection id="reports" title={t("title")} text={t("text")}>
       <Stage wide>
         <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-2 [&>*]:min-w-0">
           <div className="space-y-3 text-start">
@@ -37,7 +37,10 @@ export async function ReportsSection() {
                   {report("shareTitle")}
                   <span className="text-primary">.</span>
                 </p>
-                <span className="ms-auto flex flex-wrap items-center justify-end gap-1 text-muted-foreground">
+                <span
+                  data-testid="share-apps"
+                  className="ms-auto flex flex-wrap items-center justify-end gap-1 text-muted-foreground"
+                >
                   <span className="me-2 text-sm lowercase">
                     {report("orSummary")}
                   </span>

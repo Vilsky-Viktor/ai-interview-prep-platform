@@ -87,7 +87,10 @@ export function RemoveCompany({
             </DialogTitle>
             <DialogDescription>{t("removeText")}</DialogDescription>
             {credits && credits.available > 0 && (
-              <p className="text-base text-destructive">
+              <p
+                className="text-base text-destructive"
+                data-testid="remove-credits"
+              >
                 {t("removeCredits", {
                   credits: credits.available,
                   candidates: credits.candidates,

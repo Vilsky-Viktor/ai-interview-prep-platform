@@ -2,20 +2,22 @@ import { notFound } from "next/navigation"
 import { getTranslations } from "next-intl/server"
 
 import { DeleteTemplate } from "@/components/superadmin/delete-template"
+import { TemplateAdditions } from "@/components/superadmin/template-additions"
 import { BackLink } from "@/components/back-link"
 import { EditableTitle } from "@/components/editable-title"
 import { PageHeader } from "@/components/page-header"
 import { SubtopicList } from "@/components/questions/subtopic-list"
-import { TopicQuestionLimit } from "@/components/questions/topic-question-limit"
 import { TopicQuestions } from "@/components/questions/topic-questions"
+import { DottedText } from "@/components/dot"
 import { serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
-import type { Template } from "@/types/superadmin"
+import type { Addition } from "@/types/generation"
+import type { PooledTemplate } from "@/types/superadmin"
 import { LIST_BOX } from "@/constants/lists"
 
 export const generateMetadata = () => translatedTitle("superadmin", "templates")
 
-/** One template: rename or delete it, and check or re-generate its questions. */
+/** One template: rename or delete it, check or re-generate its questions, and add more. */
 export default async function TemplatePage({
   params,
 }: {
@@ -23,9 +25,12 @@ export default async function TemplatePage({
 }) {
   const { id } = await params
   const t = await getTranslations("superadmin")
-  const template = await serverFetch<Template>(
-    `/library/superadmin/templates/${id}`
-  )
+  const [template, addition] = await Promise.all([
+    serverFetch<PooledTemplate>(`/library/superadmin/templates/${id}`),
+    serverFetch<Addition>(
+      `/generate/superadmin/templates/${id}/additions/latest`
+    ),
+  ])
 
   if (!template) {
     notFound()
@@ -40,11 +45,20 @@ export default async function TemplatePage({
           <BackLink href="/superadmin/templates">{t("templates")}</BackLink>
         }
         title={
-          <div className="flex items-start justify-between gap-4">
+          // The actions on the title's line, "add questions" last; a run's progress goes on its
+          // own line below.
+          <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="min-w-0 flex-1">
               <EditableTitle title={template.title} path={`${base}/title`} />
             </div>
             <DeleteTemplate templateId={id} title={template.title} />
+            {addition && (
+              <TemplateAdditions
+                templateId={id}
+                short={template.short}
+                initial={addition}
+              />
+            )}
           </div>
         }
       />
@@ -68,7 +82,17 @@ export default async function TemplatePage({
                 wrongPath={`${base}/questions`}
                 reportsPath={`${base}/questions`}
               />
-              <TopicQuestionLimit count={topic.question_count} limit={null} />
+              <p
+                className="text-sm whitespace-nowrap text-muted-foreground tabular-nums"
+                data-testid="pool-counts"
+              >
+                <DottedText
+                  text={t("poolCounts", {
+                    practice: topic.practice_count,
+                    company: topic.company_count,
+                  })}
+                />
+              </p>
             </span>
           </li>
         ))}

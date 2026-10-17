@@ -1,23 +1,17 @@
 import { apiFetch } from "@/lib/api"
 import { DIGEST_KINDS, OTHER_EMAILS } from "@/constants/emails"
 import type { EmailChanges, EmailPreferences } from "@/types/emails"
-import type { CandidateOptOuts, EmailLookup } from "@/types/superadmin"
+import type { CandidateOptOuts } from "@/types/superadmin"
 
 const OPT_OUTS = "/notifications/superadmin/candidate-opt-outs"
 
-/** The admin zone's emails tab: the account with the address, and the companies that invited
- * it. The address goes in the body, never a page or API address, which logs record. */
-export async function findAddress(email: string) {
-  const body = JSON.stringify({ email })
-  const [lookup, optOuts] = await Promise.all([
-    apiFetch<EmailLookup>("/library/superadmin/emails/lookup", {
-      method: "POST",
-      body,
-    }),
-    apiFetch<CandidateOptOuts>(`${OPT_OUTS}/lookup`, { method: "POST", body }),
-  ])
-
-  return { lookup, optOuts }
+/** The companies that invited an address, and what it stopped. The address goes in the body,
+ * never a page or API address, which logs record. */
+export function companyEmails(email: string) {
+  return apiFetch<CandidateOptOuts>(`${OPT_OUTS}/lookup`, {
+    method: "POST",
+    body: JSON.stringify({ email }),
+  })
 }
 
 /** Every setting the Settings page shows, turned off. */

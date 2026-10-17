@@ -13,9 +13,12 @@ import { MAX_BULK_TEXT_LENGTH } from "@/constants/limits"
  * to send (it isn't read: the service would refuse it the same way); "" when it's fine. */
 export function InviteFileTab({
   file,
+  maxInvites,
   onChoose,
 }: {
   file: File | null
+  // The most candidates one file may invite; null when the API didn't say.
+  maxInvites: number | null
   onChoose: (file: File | null, tooLarge: string) => void
 }) {
   const t = useTranslations("interviews")
@@ -55,7 +58,9 @@ export function InviteFileTab({
         }}
       />
       <p className="px-6 py-2 text-center text-sm text-muted-foreground">
-        {t("fileFormats")}
+        {maxInvites === null
+          ? t("fileFormatsNoLimit")
+          : t("fileFormats", { count: maxInvites })}
       </p>
       <div className="flex flex-wrap justify-center gap-3">
         {INVITE_EXAMPLES.map((example) => (

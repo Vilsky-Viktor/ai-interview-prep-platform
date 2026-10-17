@@ -16,7 +16,10 @@ export async function MaintenanceNotice() {
   const t = await getTranslations("maintenance")
 
   return (
-    <div className="mx-auto -mb-8 max-w-5xl px-6 pt-6">
+    <div
+      data-testid="maintenance-notice"
+      className="mx-auto -mb-8 max-w-5xl px-6 pt-6"
+    >
       <WarningCard>{t("notice")}</WarningCard>
     </div>
   )

@@ -10,6 +10,8 @@ export type ApiKey = {
   expires_at: string | null
   expired: boolean
   last_used_at: string | null
+  // What it may do, such as "candidates:read"; only ever narrowed after it's made.
+  permissions: string[]
 }
 
 export type ApiWebhook = {
@@ -36,4 +38,15 @@ export type ApiSettings = {
   webhooks: ApiWebhook[]
   // When a new key can expire: in "1", "3", "6" or "12" months, or "never".
   expiries: string[]
+  // The permissions a key can have by group, in order; the read each permission that changes
+  // something comes with; and what a new key starts with.
+  permission_groups: Record<string, string[]>
+  implied: Record<string, string>
+  default_permissions: string[]
 }
+
+// What the key permission checkboxes need from the API page's settings.
+export type PermissionOptions = Pick<
+  ApiSettings,
+  "permission_groups" | "implied"
+>

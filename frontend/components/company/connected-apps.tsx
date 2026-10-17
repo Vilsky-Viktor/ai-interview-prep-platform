@@ -8,6 +8,7 @@ import { toast } from "sonner"
 import { useLocalTime } from "@/hooks/use-local-time"
 import { ConfirmDialog } from "@/components/confirm-dialog"
 import { Button } from "@/components/ui/button"
+import { Dot } from "@/components/dot"
 import { LIST_BOX } from "@/constants/lists"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 import type { AiConnection } from "@/types/connections"
@@ -38,13 +39,13 @@ export function ConnectedApps({
                 </span>
                 <span className="block text-sm text-muted-foreground">
                   {app.redirect_host}
-                  {" · "}
+                  <Dot />
                   <time suppressHydrationWarning>
                     {t("connectedOn", {
                       date: localTime.date(app.created_at),
                     })}
                   </time>
-                  {" · "}
+                  <Dot />
                   <time suppressHydrationWarning>
                     {app.last_used_at
                       ? t("lastUsed", {

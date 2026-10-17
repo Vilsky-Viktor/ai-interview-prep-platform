@@ -19,7 +19,7 @@ export async function AtsSection() {
   const t = await getTranslations("landing.ats")
 
   return (
-    <LandingSection title={t("title")} text={t("text")}>
+    <LandingSection id="integrations" title={t("title")} text={t("text")}>
       {/* Four to a row (two on phones): the ATSs and Slack as their full logos, then the API and
           MCP as their mark and name. */}
       <ul className="mx-auto mt-10 flex w-full max-w-4xl flex-wrap items-center justify-center gap-y-8">

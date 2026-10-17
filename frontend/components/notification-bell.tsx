@@ -3,7 +3,7 @@
 import { cn } from "cn"
 import { BellIcon } from "lucide-react"
 import Link from "next/link"
-import { useFormatter, useNow, useTranslations } from "next-intl"
+import { useFormatter, useLocale, useNow, useTranslations } from "next-intl"
 import { useCallback, useEffect, useState } from "react"
 
 import { useAuth } from "@/components/auth-provider"
@@ -20,6 +20,7 @@ import {
   NOTIFICATION_LOOKS,
 } from "@/constants/notifications"
 import { apiFetch } from "@/lib/api"
+import { formatDay } from "@/lib/format"
 import { watchNotifications } from "@/lib/notifications"
 import type { AppNotification, NotificationFeed } from "@/types/notifications"
 
@@ -28,6 +29,7 @@ import type { AppNotification, NotificationFeed } from "@/types/notifications"
 function useNotificationText() {
   const t = useTranslations("notifications.kinds")
   const format = useFormatter()
+  const locale = useLocale()
 
   return (item: AppNotification) => {
     const data = item.data as Record<string, string | number | undefined>
@@ -54,6 +56,8 @@ function useNotificationText() {
       count: typeof data.count === "number" ? data.count : 1,
       credits:
         typeof data.credits === "number" ? format.number(data.credits) : "",
+      // The day a legal document's new version applies.
+      date: typeof data.date === "string" ? formatDay(data.date, locale) : "",
     }
 
     return t.has(item.kind) ? t(item.kind, values) : null
@@ -123,6 +127,7 @@ export function NotificationBell() {
   return (
     <DropdownMenu onOpenChange={open}>
       <DropdownMenuTrigger
+        data-testid="notifications"
         render={
           <Button
             variant="ghost"

@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest"
 import { apiFetch } from "@/lib/api"
 import {
   allOptionalEmailsOff,
-  findAddress,
+  companyEmails,
   saveForUser,
   setCompanyEmails,
 } from "@/lib/superadmin-emails"
@@ -12,18 +12,13 @@ vi.mock("@/lib/api", () => ({ apiFetch: vi.fn(async () => ({})) }))
 
 beforeEach(() => vi.mocked(apiFetch).mockClear())
 
-describe("findAddress", () => {
-  it("asks library and notifications with the address in the body", async () => {
-    await findAddress("ann@example.com")
+describe("companyEmails", () => {
+  it("asks notifications with the address in the body", async () => {
+    await companyEmails("ann@example.com")
 
-    const body = JSON.stringify({ email: "ann@example.com" })
-    expect(apiFetch).toHaveBeenCalledWith("/library/superadmin/emails/lookup", {
-      method: "POST",
-      body,
-    })
     expect(apiFetch).toHaveBeenCalledWith(
       "/notifications/superadmin/candidate-opt-outs/lookup",
-      { method: "POST", body }
+      { method: "POST", body: JSON.stringify({ email: "ann@example.com" }) }
     )
   })
 })

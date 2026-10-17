@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server"
 import { VerifiedBadge } from "@/components/company/verified-badge"
 import { DemoLogo } from "@/components/landing/demo-logo"
 import { LandingSection, PANEL, Stage } from "@/components/landing/section"
+import { DottedText } from "@/components/dot"
 
 const POINTS = ["email", "interview", "report", "verified"] as const
 
@@ -31,7 +32,7 @@ export async function BrandSection() {
             </p>
           </div>
           <p className="font-heading text-3xl font-medium tracking-tight">
-            {t("role")}
+            <DottedText text={t("role")} />
           </p>
         </div>
       </Stage>

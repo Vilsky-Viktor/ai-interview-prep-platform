@@ -10,6 +10,7 @@ import { publicFetch } from "@/lib/server-api"
 import { pageMetadata, siteUrl } from "@/lib/site"
 import { softwareData } from "@/lib/structured-data"
 import type { Catalog } from "@/types/billing"
+import { PageKey } from "@/components/page-key"
 
 export async function generateMetadata() {
   const t = await getTranslations("pricing")
@@ -61,6 +62,7 @@ export default async function PricingPage() {
   if (!catalog) {
     return (
       <main className="mx-auto max-w-5xl space-y-16 px-6 py-12">
+        <PageKey page="pricing" />
         {header}
         <InfoCard>{t("unavailable")}</InfoCard>
       </main>
@@ -71,6 +73,7 @@ export default async function PricingPage() {
 
   return (
     <main className="mx-auto max-w-5xl space-y-16 px-6 py-12">
+      <PageKey page="pricing" />
       <JsonLd data={softwareData(siteUrl(), t("intro"), catalog)} />
       {header}
 

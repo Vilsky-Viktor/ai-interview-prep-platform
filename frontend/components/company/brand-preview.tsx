@@ -43,7 +43,7 @@ export function BrandPreview({
       <p className="text-lg">{t("sampleQuestion")}</p>
       <ChoiceOptions
         options={t.raw("sampleOptions") as string[]}
-        chosen={0}
+        chosen={[0]}
         disabled
         onChoose={() => {}}
       />

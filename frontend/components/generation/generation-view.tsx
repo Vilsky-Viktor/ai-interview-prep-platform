@@ -13,11 +13,10 @@ import { GenerationProgress } from "@/components/generation/generation-progress"
 import { TopicReview } from "@/components/generation/topic-review"
 import { SignInPrompt } from "@/components/sign-in-prompt"
 import { Button } from "@/components/ui/button"
-import { ACTIVE_STATUSES, POLL_MIN_MS } from "@/constants/generation"
-import { ApiError, apiErrorMessage, apiFetch } from "@/lib/api"
+import { useGenerationPoll } from "@/hooks/use-generation-poll"
+import { apiErrorMessage, apiFetch } from "@/lib/api"
 import { humanHeaders } from "@/lib/human-check"
 import { topUpAction } from "@/lib/credits"
-import { nextPollDelay } from "@/lib/poll"
 import type { DraftTopic, Generation } from "@/types/generation"
 
 export function GenerationView({
@@ -41,86 +40,9 @@ export function GenerationView({
   // Bumped after a review so polling starts again.
   const [round, setRound] = useState(0)
 
-  useEffect(() => {
-    if (!user) {
-      return
-    }
-
-    let active = true
-    let timer: ReturnType<typeof setTimeout> | undefined
-    let delay = POLL_MIN_MS
-    // The last poll's status and progress, to tell whether anything moved.
-    let last = ""
-    // Set while a poll is due but the tab is hidden; it runs once the tab shows again.
-    let paused = false
-
-    function schedule() {
-      if (document.hidden) {
-        paused = true
-
-        return
-      }
-
-      timer = setTimeout(load, delay)
-    }
-
-    function resume() {
-      if (document.hidden || !paused) {
-        return
-      }
-
-      paused = false
-      delay = POLL_MIN_MS
-      load()
-    }
-
-    async function load() {
-      try {
-        const next = await apiFetch<Generation>(path)
-
-        if (!active) {
-          return
-        }
-
-        setGeneration(next)
-        const seen = JSON.stringify([next.status, next.progress])
-        const changed = seen !== last
-        last = seen
-
-        if (ACTIVE_STATUSES.includes(next.status)) {
-          delay = nextPollDelay(delay, changed)
-          schedule()
-        }
-      } catch (error) {
-        if (!active) {
-          return
-        }
-
-        // Only an answer that it isn't there (or isn't theirs) means missing; a failed poll
-        // (network, a restart, a rate limit) tries again.
-        if (
-          error instanceof ApiError &&
-          [403, 404, 422].includes(error.status)
-        ) {
-          setMissing(true)
-
-          return
-        }
-
-        delay = nextPollDelay(delay, false)
-        schedule()
-      }
-    }
-
-    load()
-    document.addEventListener("visibilitychange", resume)
-
-    return () => {
-      active = false
-      clearTimeout(timer)
-      document.removeEventListener("visibilitychange", resume)
-    }
-  }, [user, path, round])
+  useGenerationPoll<Generation>(user ? path : null, round, setGeneration, () =>
+    setMissing(true)
+  )
 
   useEffect(() => {
     if (generation?.status === "done") {

@@ -42,7 +42,8 @@ export function ReportProblem() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
-        render={<Button variant="ghost" className="h-10 px-5 text-base" />}
+        render={<Button variant="ghost" className="h-12 px-6 text-base" />}
+        data-testid="report-problem"
       >
         {t("report")}
       </DialogTrigger>

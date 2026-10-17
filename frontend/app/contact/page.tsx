@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server"
 import { ContactForm } from "@/components/contact-form"
 import { OPERATOR } from "@/constants/operator"
 import { pageMetadata } from "@/lib/site"
+import { PageKey } from "@/components/page-key"
 
 export async function generateMetadata() {
   const t = await getTranslations("contact")
@@ -15,6 +16,7 @@ export default async function ContactPage() {
 
   return (
     <main className="mx-auto max-w-5xl space-y-10 px-6 py-12">
+      <PageKey page="contact" />
       <header className="space-y-4">
         <h1 className="font-heading text-4xl font-medium tracking-tight">
           {t("title")}

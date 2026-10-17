@@ -5,12 +5,33 @@ import { useState } from "react"
 import { toast } from "sonner"
 
 import { EmailPreferencesSetting } from "@/components/settings/email-preferences"
-import { SettingsSection } from "@/components/settings/settings-section"
 import { Button } from "@/components/ui/button"
 import { apiErrorMessage } from "@/lib/api"
 import { allOptionalEmailsOff, saveForUser } from "@/lib/superadmin-emails"
 import type { EmailChanges } from "@/types/emails"
 import type { EmailLookup } from "@/types/superadmin"
+
+/** A section of the support user page: a heading and its note, without a card around it,
+ * like the page's other sections. */
+function Section({
+  title,
+  description,
+  children,
+}: {
+  title: string
+  description: string
+  children?: React.ReactNode
+}) {
+  return (
+    <section className="space-y-4">
+      <div className="space-y-1">
+        <h2 className="text-lg font-medium">{title}</h2>
+        <p className="text-sm text-muted-foreground">{description}</p>
+      </div>
+      {children}
+    </section>
+  )
+}
 
 /** The account's email settings, as Settings → Emails shows them, changed on the user's behalf:
  * the API logs each change as the superadmin's. */
@@ -26,7 +47,7 @@ export function AccountEmails({
   const [saving, setSaving] = useState(false)
 
   if (!account || !preferences) {
-    return <SettingsSection title={t("account")} description={t("noAccount")} />
+    return <Section title={t("account")} description={t("noAccount")} />
   }
 
   async function save(changes: EmailChanges) {
@@ -50,7 +71,7 @@ export function AccountEmails({
   }
 
   return (
-    <SettingsSection
+    <Section
       title={t("account")}
       description={t("accountText", { email: account.email })}
     >
@@ -64,9 +85,10 @@ export function AccountEmails({
         className="h-10 px-5"
         disabled={saving}
         onClick={turnOffAll}
+        data-testid="turn-off-all"
       >
         {t("turnOffAll")}
       </Button>
-    </SettingsSection>
+    </Section>
   )
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import { SquarePenIcon, Trash2Icon } from "lucide-react"
+import { SendIcon, SquarePenIcon, Trash2Icon } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useLocale, useTranslations } from "next-intl"
 import { useState } from "react"
@@ -18,8 +18,9 @@ import { byId } from "@/lib/paged-list"
 import type { AdminNewsPost } from "@/types/news"
 import { LIST_BOX } from "@/constants/lists"
 
-/** The news tab's posts, newest first, like the templates list: each row's pencil opens the post
- * to edit, and its bin deletes it after asking. A badge tells whether the post is translated into
+/** The news tab's posts, newest first, like the templates list: each row's paper plane makes a
+ * product-update campaign of it, its pencil opens the post to edit, and its bin deletes it after
+ * asking. A badge tells whether the post is translated into
  * every language yet. */
 export function NewsAdminList({ initial }: { initial: AdminNewsPost[] }) {
   const t = useTranslations("superadmin")
@@ -34,6 +35,23 @@ export function NewsAdminList({ initial }: { initial: AdminNewsPost[] }) {
   const [editing, setEditing] = useState<AdminNewsPost | null>(null)
   const [deleting, setDeleting] = useState<AdminNewsPost | null>(null)
   const [busy, setBusy] = useState(false)
+  const [starting, setStarting] = useState(false)
+
+  /** A new product update filled with the post (the API makes it), opened to check and send. */
+  async function sendAsCampaign(post: AdminNewsPost) {
+    setStarting(true)
+
+    try {
+      const campaign = await apiFetch<{ id: string }>(
+        `/notifications/superadmin/campaigns/from-news/${post.id}`,
+        { method: "POST" }
+      )
+      router.push(`/superadmin/campaigns/${campaign.id}`)
+    } catch (error) {
+      toast.error(apiErrorMessage(error, t("campaignSaveFailed")))
+      setStarting(false)
+    }
+  }
 
   async function remove() {
     if (!deleting) {
@@ -90,6 +108,17 @@ export function NewsAdminList({ initial }: { initial: AdminNewsPost[] }) {
               {post.translated ? t("translated") : t("translating")}
             </Badge>
             <div className="flex shrink-0 items-center max-sm:ms-auto max-sm:-me-3">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="size-12 text-muted-foreground hover:text-foreground"
+                aria-label={t("sendAsCampaign")}
+                tooltip={t("sendAsCampaign")}
+                disabled={starting}
+                onClick={() => sendAsCampaign(post)}
+              >
+                <SendIcon className="size-6" />
+              </Button>
               <Button
                 variant="ghost"
                 size="icon"

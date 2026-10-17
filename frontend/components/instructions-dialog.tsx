@@ -40,6 +40,7 @@ export function InstructionsDialog({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger
+        data-testid="instructions"
         render={
           <Button variant="outline" className="h-10 shrink-0 px-5 text-base" />
         }

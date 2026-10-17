@@ -8,21 +8,24 @@ export type CompanyTab =
   | "interviews"
   | "templates"
   | "members"
+  | "actions"
   | "integrations"
   | "brand"
   | "referrals"
   | "billing"
 
 /** A company's tabs; brand and billing only for owners and admins (`canEdit`), who set its
- * colors and top up. */
+ * colors and top up; the action log only for the owner (`canSeeActions`). */
 export function CompanyNav({
   companyId,
   current,
   canEdit,
+  canSeeActions,
 }: {
   companyId: string
   current: CompanyTab
   canEdit: boolean
+  canSeeActions: boolean
 }) {
   const t = useTranslations("company")
   const items = [
@@ -57,6 +60,15 @@ export function CompanyNav({
             id: "billing",
             href: `/companies/${companyId}/billing`,
             label: t("billing"),
+          },
+        ]
+      : []),
+    ...(canSeeActions
+      ? [
+          {
+            id: "actions",
+            href: `/companies/${companyId}/actions`,
+            label: t("actions"),
           },
         ]
       : []),

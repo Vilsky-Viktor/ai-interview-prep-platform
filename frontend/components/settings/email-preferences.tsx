@@ -62,7 +62,7 @@ export function EmailPreferencesSetting({
 
   return (
     <div className="space-y-4">
-      <div className={LIST_BOX}>
+      <div className={LIST_BOX} data-testid="email-preferences">
         <div className="space-y-4 p-4 sm:p-6">
           {block(
             // Turns every kind on or off at once; a dash when only some are on.

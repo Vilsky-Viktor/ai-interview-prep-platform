@@ -32,7 +32,7 @@ export function BalanceTooltip({
       <TooltipTrigger render={<span className={className} />}>
         {compactNumber(shown, locale)}
       </TooltipTrigger>
-      <TooltipContent>
+      <TooltipContent data-testid="balance-tooltip">
         <p>{t("currentBalance", { amount: format.number(balance) })}</p>
         {note && <p>{note}</p>}
       </TooltipContent>

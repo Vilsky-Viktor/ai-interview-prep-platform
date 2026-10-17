@@ -126,6 +126,7 @@ export function BrandColorsForm({
           variant="outline"
           className="h-12 px-6 text-base"
           disabled={saving || !changed}
+          data-testid="brand-reset"
           onClick={() => {
             setColors((sets) => ({ ...sets, [theme]: last.colors[theme] }))
             setLook(last.look)
@@ -136,6 +137,7 @@ export function BrandColorsForm({
         <Button
           className="h-12 px-6 text-base"
           disabled={saving || !changed}
+          data-testid="brand-save"
           onClick={save}
         >
           {t("save")}
@@ -147,6 +149,7 @@ export function BrandColorsForm({
           size="sm"
           className="h-8 px-4 font-light"
           disabled={saving}
+          data-testid="brand-reset-prepza"
           onClick={resetToPrepza}
         >
           {t("resetPrepza")}
@@ -175,7 +178,11 @@ export function BrandColorsForm({
         <div className="space-y-10">
           <ul className={LIST_BOX}>
             {BRAND_GROUPS.map((group) => (
-              <li key={group.id} className="space-y-4 p-6">
+              <li
+                key={group.id}
+                className="space-y-4 p-6"
+                data-testid={`brand-${group.id}`}
+              >
                 <div className="space-y-1">
                   <span className="block text-xl font-medium">
                     {t(`groups.${group.id}.name`)}

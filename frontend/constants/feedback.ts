@@ -2,6 +2,7 @@
 export const REPORT_REASONS = [
   "wrong_answer",
   "unclear",
+  "hard_to_read",
   "off_topic",
   "other",
 ] as const

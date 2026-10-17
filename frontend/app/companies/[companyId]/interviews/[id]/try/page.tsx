@@ -9,6 +9,7 @@ import { SignInPage } from "@/components/sign-in-page"
 import { serverFetch, signedIn } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
 import type { Company, InterviewDetail } from "@/types/company"
+import { START_PAGE } from "@/constants/start-page"
 
 export const generateMetadata = () => translatedTitle("invite", "title")
 
@@ -35,7 +36,7 @@ export default async function TryInterviewPage({
 
   // Laid out like the candidate's invite page.
   return (
-    <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-6 py-12">
+    <main className={START_PAGE}>
       <BrandColorsOn
         colors={company.candidate_colors ?? null}
         look={company.brand_style ?? null}
@@ -54,6 +55,7 @@ export default async function TryInterviewPage({
           verifiedDomain={company.verified_domain}
           title={interview.title}
           questionSeconds={interview.question_seconds}
+          totalMinutes={interview.total_minutes}
           finished={false}
           action={<StartPreview companyId={companyId} interviewId={id} />}
         />

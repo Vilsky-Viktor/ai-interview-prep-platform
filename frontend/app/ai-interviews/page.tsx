@@ -1,7 +1,7 @@
 import { categoryRoute } from "@/components/content/content-routes"
 
 /** A category page (content/pages/ai-interviews.md). */
-const route = categoryRoute("ai-interviews")
+const route = categoryRoute("ai-interviews", "aiInterviews")
 
 export const generateMetadata = route.generateMetadata
 

@@ -17,7 +17,8 @@ export interface paths {
      * Add Signal
      * @description The candidate's browser reports leaving the page or copying, saved with the question on
      *     screen so the scorecard can show where it happened; and coming back, with how long the leave
-     *     lasted, which decides whether it counts (helpers/integrity.py).
+     *     lasted, which decides whether it counts (helpers/integrity.py). Only in a company's
+     *     interview: a practice round or a preview records none, as no one assesses them.
      */
     post: operations["add_signal_sessions__session_id__signals_post"]
     delete?: never
@@ -273,6 +274,27 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/help/pages/{key}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Page Guide
+     * @description A page's guide, by its key, in the page's language (English until it's translated): its
+     *     info button shows it, and the assistant reads it about the page the user is on; public.
+     */
+    get: operations["get_page_guide_help_pages__key__get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/help/legal/{document}": {
     parameters: {
       query?: never
@@ -498,6 +520,26 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/superadmin/budgets": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Budgets
+     * @description How much of the help chat's shared daily budgets is used today, for the AI costs tab.
+     */
+    get: operations["get_budgets_superadmin_budgets_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/internal/users/{user_id}": {
     parameters: {
       query?: never
@@ -600,7 +642,11 @@ export interface paths {
 export type webhooks = Record<string, never>
 export interface components {
   schemas: {
-    /** AnswerCreate */
+    /**
+     * AnswerCreate
+     * @description The option picked on a single-answer question, or the options ticked on a multi-answer
+     *     one ("select all that apply").
+     */
     AnswerCreate: {
       /**
        * Question Id
@@ -608,7 +654,9 @@ export interface components {
        */
       question_id: string
       /** Option Index */
-      option_index: number
+      option_index?: number | null
+      /** Picks */
+      picks?: number[] | null
     }
     /** AnswerView */
     AnswerView: {
@@ -619,8 +667,24 @@ export interface components {
       answer_id: string
       /** Option Index */
       option_index: number | null
+      /**
+       * Picks
+       * @default []
+       */
+      picks: number[]
+      /**
+       * Timed Out
+       * @default false
+       */
+      timed_out: boolean
+      /** Right Picks */
+      right_picks?: number | null
+      /** Wrong Picks */
+      wrong_picks?: number | null
       /** Correct */
       correct: boolean | null
+      /** Score */
+      score?: number | null
       /** Seconds */
       seconds?: number | null
       /**
@@ -628,6 +692,26 @@ export interface components {
        * @default false
        */
       fast: boolean
+    }
+    /**
+     * BudgetOut
+     * @description How much of a shared daily budget (a limit for everyone) is used today, for the admin
+     *     zone's AI costs tab: each owning service's GET /superadmin/budgets.
+     */
+    BudgetOut: {
+      /** Name */
+      name: string
+      /** Used */
+      used: number
+      /** Limit */
+      limit: number
+      /** Unit */
+      unit: string
+      /**
+       * Share
+       * @description Of the limit, the share used, 0 to 1 (more once over it).
+       */
+      readonly share: number
     }
     /** ContactRequest */
     ContactRequest: {
@@ -657,11 +741,15 @@ export interface components {
     }
     /**
      * HelpChatRequest
-     * @description The conversation so far, ending with the new question; the page keeps it.
+     * @description The conversation so far, ending with the new question; the page keeps it. `page`: the
+     *     key of the page the visitor asks on, whose guide the answer reads (an unknown one is
+     *     ignored).
      */
     HelpChatRequest: {
       /** Messages */
       messages: components["schemas"]["HelpMessage"][]
+      /** Page */
+      page?: string | null
     }
     /** HelpMessage */
     HelpMessage: {
@@ -763,6 +851,11 @@ export interface components {
       text: string
       /** Options */
       options: string[]
+      /**
+       * Multi
+       * @default false
+       */
+      multi: boolean
       /** Seconds Left */
       seconds_left?: number | null
     }
@@ -772,6 +865,22 @@ export interface components {
       answer: string
       /** Correct */
       correct: boolean
+    }
+    /**
+     * PageGuideOut
+     * @description A page's guide: what it's for (`text`), what you can do there and tips.
+     */
+    PageGuideOut: {
+      /** Key */
+      key: string
+      /** Title */
+      title: string
+      /** Text */
+      text: string
+      /** Actions */
+      actions: string[]
+      /** Tips */
+      tips: string[]
     }
     /**
      * PracticeRoundOut
@@ -917,7 +1026,7 @@ export interface components {
     }
     /**
      * ReviewItem
-     * @description One question of a round. The correct option only once it's answered.
+     * @description One question of a round. The correct options only once it's answered.
      */
     ReviewItem: {
       /**
@@ -931,8 +1040,15 @@ export interface components {
       text: string
       /** Options */
       options: string[]
+      /**
+       * Multi
+       * @default false
+       */
+      multi: boolean
       /** Correct Option Index */
       correct_option_index: number | null
+      /** Correct Indexes */
+      correct_indexes?: number[] | null
       answer: components["schemas"]["AnswerView"] | null
       /**
        * Tab Leaves
@@ -1590,6 +1706,37 @@ export interface operations {
       }
     }
   }
+  get_page_guide_help_pages__key__get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        key: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["PageGuideOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
   get_legal_help_legal__document__get: {
     parameters: {
       query?: {
@@ -1939,6 +2086,26 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_budgets_superadmin_budgets_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["BudgetOut"][]
         }
       }
     }

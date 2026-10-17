@@ -1,5 +1,6 @@
 // The in-app assistant's API (services/assistant), as the panel reads it; a signed-out
 // visitor's answers come from rounds' help chat.
+import type { PageHelpKey } from "@/types/page-help"
 import type { SignInProvider } from "@/types/sign-in"
 
 /** What the panel shows under an answer for one tool's result: its items, each with the page
@@ -113,4 +114,15 @@ export type ChatMessage = {
   progress?: string[]
   // An answer that failed, with what to show and whether a retry can fix it.
   error?: string
+}
+
+// The page a message is asked on (lib/page-context.ts): context for the assistant only.
+export type PageContext = {
+  key: PageHelpKey
+  path: string
+  company_id?: string
+  interview_id?: string
+  candidate_id?: string
+  template_id?: string
+  practice_round_id?: string
 }

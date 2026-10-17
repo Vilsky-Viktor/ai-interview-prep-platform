@@ -21,6 +21,7 @@ import { breadcrumbData } from "@/lib/structured-data"
 import type { PracticeSize, PracticeTopicProgress } from "@/types/round"
 import type { Template } from "@/types/superadmin"
 import { LIST_BOX } from "@/constants/lists"
+import { PageKey } from "@/components/page-key"
 
 export async function generateMetadata({
   params,
@@ -93,6 +94,7 @@ export default async function PracticeTestPage({
 
   return (
     <main className="mx-auto max-w-5xl space-y-8 px-6 py-12">
+      <PageKey page="practiceTest" />
       <JsonLd
         data={breadcrumbData(siteUrl(), [
           { name: "prepza", path: at("/") },

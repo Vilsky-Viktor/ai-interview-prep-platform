@@ -15,6 +15,7 @@ import { localizedPath } from "@/lib/locale-path"
 import { newsPosts } from "@/lib/news-posts"
 import { pageMetadata, siteUrl, urlLocale } from "@/lib/site"
 import { newsData } from "@/lib/structured-data"
+import { PageKey } from "@/components/page-key"
 
 /** The page's own address, or its feed's, in the language of the address it was asked for. */
 async function ownPath(path: string) {
@@ -59,6 +60,7 @@ export default async function NewsPage() {
 
   return (
     <main className="mx-auto max-w-5xl space-y-8 px-6 py-12">
+      <PageKey page="news" />
       <JsonLd data={blog} />
       {/* The title and its line on the left, the feed on the right, as a list page's action. */}
       <div className="flex items-center gap-6">

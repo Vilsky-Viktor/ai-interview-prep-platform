@@ -11,10 +11,12 @@ const nextConfig: NextConfig = {
   },
   // The dev server serves its scripts to a phone on the local network too (development only).
   allowedDevOrigins: ["192.168.*.*", "10.*.*.*", "172.*.*.*"],
-  // The preview pictures' font files, read at request time, go into the standalone server.
+  // The preview pictures' font files and the developer docs' MCP examples, read at request
+  // time, go into the standalone server.
   outputFileTracingIncludes: {
     "/preview": ["./assets/fonts/**"],
     "/opengraph-image": ["./assets/fonts/**"],
+    "/api-docs": ["./content/mcp/**"],
   },
   // Titles, canonical addresses and hreflang always go in the <head>, for every visitor and
   // crawler: Next.js would otherwise stream a slow page's metadata into the body, which only

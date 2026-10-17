@@ -6,6 +6,7 @@ import { DEFAULT_LOCALE } from "@/constants/i18n"
 import { localizedPath } from "@/lib/locale-path"
 import { pageMetadata, urlLocale } from "@/lib/site"
 import { PUBLIC_TEMPLATES_PATH } from "@/constants/lists"
+import { PageKey } from "@/components/page-key"
 
 export async function generateMetadata() {
   const t = await getTranslations("tests")
@@ -32,6 +33,7 @@ export default async function TestsPage({
 
   return (
     <main className="mx-auto max-w-5xl space-y-8 px-6 py-12">
+      <PageKey page="tests" />
       <div className="space-y-2">
         <h1 className="font-heading text-3xl font-medium tracking-tight">
           {t("title")}

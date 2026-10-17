@@ -6,17 +6,25 @@ import { useFormatter, useLocale, useTranslations } from "next-intl"
 
 import { useLocalTime } from "@/hooks/use-local-time"
 import { InvoiceLink } from "@/components/billing/invoice-link"
+import { Dotted } from "@/components/dot"
+import { candidateHref, type CandidateLinks } from "@/lib/candidate-links"
 import { formatPrice } from "@/lib/format"
 import type { CreditHistoryEntry } from "@/types/company"
 
 /** One movement of a company's credits: what it was, when, and the credits it moved; a top-up
- * with what was paid and its invoice, a candidate's charge with the candidate and their test. */
+ * with what was paid and its invoice, a candidate's charge with the candidate and their test,
+ * an adjustment with why. `api` is the company's billing routes; `links` is where a charge's
+ * candidate opens (the company's page, or the admin zone's support page). */
 export function HistoryRow({
   companyId,
   entry,
+  api,
+  links,
 }: {
   companyId: string
   entry: CreditHistoryEntry
+  api: string
+  links: CandidateLinks
 }) {
   const t = useTranslations("companyBilling")
   const format = useFormatter()
@@ -36,9 +44,17 @@ export function HistoryRow({
         </span>
         {candidate && (
           <span className="block text-sm break-all text-muted-foreground normal-case">
-            {[candidate.name && candidate.email, candidate.interview_title]
-              .filter(Boolean)
-              .join(" · ")}
+            <Dotted
+              items={[
+                candidate.name && candidate.email,
+                candidate.interview_title,
+              ]}
+            />
+          </span>
+        )}
+        {entry.note && (
+          <span className="block text-sm break-words text-muted-foreground normal-case">
+            {entry.note}
           </span>
         )}
         {entry.candidate_deleted && (
@@ -57,10 +73,7 @@ export function HistoryRow({
           )}
           {entry.automatic && <span>{t("automatic")}</span>}
           {entry.invoice_id && (
-            <InvoiceLink
-              companyId={companyId}
-              transactionId={entry.invoice_id}
-            />
+            <InvoiceLink api={api} transactionId={entry.invoice_id} />
           )}
         </span>
       </span>
@@ -78,7 +91,7 @@ export function HistoryRow({
   // A candidate's charge opens the candidate.
   return candidate ? (
     <Link
-      href={`/companies/${companyId}/interviews/${candidate.interview_id}/candidates/${candidate.invite_id}`}
+      href={candidateHref(links, companyId, candidate)}
       className="block transition-colors hover:bg-muted/50 active:bg-muted/50"
     >
       {content}

@@ -86,6 +86,7 @@ export function VerifyCompany({
         />
       ) : (
         <DialogTrigger
+          data-testid="verify-company"
           render={
             <button
               type="button"

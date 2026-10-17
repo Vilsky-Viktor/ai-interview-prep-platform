@@ -145,7 +145,10 @@ export function AutoTopUpSetting({
       {/* Off: a button that says what it does. On (or waiting for the card): the setting, with
           the app's edit icon to change it. */}
       {summary ? (
-        <p className="text-sm text-muted-foreground">
+        <p
+          className="text-sm text-muted-foreground"
+          data-testid="auto-top-up-on"
+        >
           {summary}
           <DialogTrigger
             render={
@@ -163,6 +166,7 @@ export function AutoTopUpSetting({
         </p>
       ) : (
         <DialogTrigger
+          data-testid="set-up-auto-top-up"
           render={
             <Button
               type="button"

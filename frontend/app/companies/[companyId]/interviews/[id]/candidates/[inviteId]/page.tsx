@@ -195,7 +195,10 @@ export default async function ScorecardPage({
       {/* The score supports a decision people make; in the gray info card, like the practice
           test page's. On phones it spans the screen, with square corners. */}
       {card.sessions.length > 0 && (
-        <div className="flex items-center gap-3 rounded-2xl border bg-muted px-5 py-4 text-sm text-muted-foreground max-sm:-mx-6 max-sm:rounded-none max-sm:border-x-0 max-sm:px-6">
+        <div
+          data-testid="human-review"
+          className="flex items-center gap-3 rounded-2xl border bg-muted px-5 py-4 text-sm text-muted-foreground max-sm:-mx-6 max-sm:rounded-none max-sm:border-x-0 max-sm:px-6"
+        >
           <InfoIcon aria-hidden className="size-6 shrink-0 text-primary" />
           <p>
             {reportT("humanReview")}

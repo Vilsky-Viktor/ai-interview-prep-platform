@@ -126,6 +126,77 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/superadmin/budgets": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Budgets
+     * @description How much of generation's shared daily budgets is used today (the AI costs tab).
+     */
+    get: operations["get_budgets_superadmin_budgets_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/templates/{template_id}/additions/latest": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Latest Addition */
+    get: operations["latest_addition_superadmin_templates__template_id__additions_latest_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/templates/{template_id}/top-up": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Top Up */
+    post: operations["top_up_superadmin_templates__template_id__top_up_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/templates/{template_id}/additions": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Add Questions */
+    post: operations["add_questions_superadmin_templates__template_id__additions_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/internal/generations": {
     parameters: {
       query?: never
@@ -310,6 +381,27 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/internal/campaigns/{campaign_id}/translate": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Translate Campaign
+     * @description Notifications saved a campaign; the worker translates it into the languages it lacks.
+     *     While paused the call is refused, and saving the campaign again sends it again.
+     */
+    post: operations["translate_campaign_internal_campaigns__campaign_id__translate_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/internal/users/{user_id}": {
     parameters: {
       query?: never
@@ -351,6 +443,56 @@ export interface paths {
 export type webhooks = Record<string, never>
 export interface components {
   schemas: {
+    /**
+     * AdditionCreate
+     * @description A superadmin's addition: the questions to add to every topic of a template.
+     */
+    AdditionCreate: {
+      /**
+       * Count
+       * @default 30
+       */
+      count: number
+    }
+    /**
+     * AdditionOut
+     * @description A template's latest question addition, none when it never had one, and the numbers a
+     *     superadmin's addition may ask for.
+     */
+    AdditionOut: {
+      /** Id */
+      id?: string | null
+      status?: components["schemas"]["Status"] | null
+      progress?: components["schemas"]["GenerationProgress"] | null
+      /** Error */
+      error?: string | null
+      /** Default Count */
+      readonly default_count: number
+      /** Count Step */
+      readonly count_step: number
+      /** Max Count */
+      readonly max_count: number
+    }
+    /**
+     * BudgetOut
+     * @description How much of a shared daily budget (a limit for everyone) is used today, for the admin
+     *     zone's AI costs tab: each owning service's GET /superadmin/budgets.
+     */
+    BudgetOut: {
+      /** Name */
+      name: string
+      /** Used */
+      used: number
+      /** Limit */
+      limit: number
+      /** Unit */
+      unit: string
+      /**
+       * Share
+       * @description Of the limit, the share used, 0 to 1 (more once over it).
+       */
+      readonly share: number
+    }
     /** DraftTopic */
     DraftTopic: {
       /** Main Topic */
@@ -374,7 +516,7 @@ export interface components {
      * GenerationKind
      * @enum {string}
      */
-    GenerationKind: "interview" | "template"
+    GenerationKind: "interview" | "template" | "template_questions"
     /** GenerationOut */
     GenerationOut: {
       /**
@@ -852,6 +994,123 @@ export interface operations {
       }
     }
   }
+  get_budgets_superadmin_budgets_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["BudgetOut"][]
+        }
+      }
+    }
+  }
+  latest_addition_superadmin_templates__template_id__additions_latest_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        template_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["AdditionOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  top_up_superadmin_templates__template_id__top_up_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        template_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      201: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["AdditionOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  add_questions_superadmin_templates__template_id__additions_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        template_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["AdditionCreate"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      201: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["AdditionOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
   create_interview_generation_internal_generations_post: {
     parameters: {
       query?: never
@@ -1130,6 +1389,37 @@ export interface operations {
       header?: never
       path: {
         news_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      202: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": unknown
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  translate_campaign_internal_campaigns__campaign_id__translate_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        campaign_id: string
       }
       cookie?: never
     }

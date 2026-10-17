@@ -15,7 +15,7 @@ export async function AgentSection() {
   const t = await getTranslations("landing.agent")
 
   return (
-    <LandingSection title={t("title")} text={t("text")}>
+    <LandingSection id="agent" title={t("title")} text={t("text")}>
       {/* The button sits on the picture's top edge, half over its background, like "browse"
           in the try-first section. */}
       <div className="relative mt-4">

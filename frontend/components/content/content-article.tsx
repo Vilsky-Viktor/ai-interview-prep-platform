@@ -5,6 +5,7 @@ import { BackLink } from "@/components/back-link"
 import { Markdown } from "@/components/content/markdown"
 import { StartCard } from "@/components/content/start-card"
 import { JsonLd } from "@/components/json-ld"
+import { PageKey } from "@/components/page-key"
 import { DEFAULT_LOCALE } from "@/constants/i18n"
 import type { ContentPage } from "@/lib/content"
 import { formatDay } from "@/lib/format"
@@ -12,18 +13,21 @@ import { textDirection } from "@/lib/locale"
 import { localizeHref } from "@/lib/locale-path"
 import { previewImage, siteUrl, urlLocale } from "@/lib/site"
 import { articleData, breadcrumbData } from "@/lib/structured-data"
+import type { PageHelpKey } from "@/types/page-help"
 
 /** One content page (a category page, a comparison or a guide): its heading, date and text,
  * then the way to a first test, in the language it's written in (English where it has no
  * translation yet, with a note). `section` is the hub it belongs to, for the back link and the
- * breadcrumb. */
+ * breadcrumb; `pageKey`, its guide's key. */
 export async function ContentArticle({
   page,
   path,
+  pageKey,
   section,
 }: {
   page: ContentPage
   path: string
+  pageKey: PageHelpKey
   section?: { name: string; path: string }
 }) {
   const t = await getTranslations("content")
@@ -38,6 +42,7 @@ export async function ContentArticle({
 
   return (
     <main className="mx-auto max-w-5xl space-y-10 px-6 py-12">
+      <PageKey page={pageKey} />
       <JsonLd
         data={[
           articleData(siteUrl(), {

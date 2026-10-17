@@ -8,6 +8,7 @@ import { AssistantProvider } from "@/components/assistant/assistant-provider"
 import { AuthProvider } from "@/components/auth-provider"
 import { CjkFonts } from "@/components/cjk-fonts"
 import { UrlLocaleProvider } from "@/components/localized-link"
+import { LegalBanner } from "@/components/legal-banner"
 import { MaintenanceNotice } from "@/components/maintenance-notice"
 import { ScrollTopButton } from "@/components/scroll-top-button"
 import { SignInProvider } from "@/components/sign-in-dialog"
@@ -100,6 +101,9 @@ export default async function RootLayout({
                         className="flex flex-1 flex-col outline-none [&>*]:w-full"
                       >
                         <MaintenanceNotice />
+                        <NotOnTimedPage>
+                          <LegalBanner />
+                        </NotOnTimedPage>
                         {children}
                       </div>
                       <NotOnTimedPage>

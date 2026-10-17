@@ -41,7 +41,10 @@ export function ActionCard({
   const fields = Object.entries(card.preview ?? {})
 
   return (
-    <div className="space-y-3 rounded-2xl border p-4 text-sm">
+    <div
+      className="space-y-3 rounded-2xl border p-4 text-sm"
+      data-testid="action-card"
+    >
       <div className="space-y-0.5">
         <p className="font-medium">
           {t.has(`titles.${tool}`) ? t(`titles.${tool}`) : t("generic")}

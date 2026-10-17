@@ -3,6 +3,7 @@
 import { cn } from "cn"
 import { BadgeQuestionMarkIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
+import { useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -19,11 +20,14 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import type { PageHelpKey } from "@/types/page-help"
+import { usePageKey } from "@/hooks/use-page-key"
+import { apiErrorMessage, apiFetch } from "@/lib/api"
+import type { PageGuide, PageHelpKey } from "@/types/page-help"
 
-/** A page's info button: a muted icon that opens a short guide to the page, from
- * "pageHelp.<page>" in the messages: what it's for, what you can do there and a tip or two.
- * `className` places it; BackLink puts it under its arrow. */
+/** A page's info button: a muted icon that opens a short guide to the page, which rounds serves
+ * (the assistant reads the same): what it's for, what you can do there and a tip or two. It also
+ * registers the page's key for the assistant. `className` places it; BackLink puts it under its
+ * arrow. */
 export function PageHelp({
   page,
   className,
@@ -34,11 +38,27 @@ export function PageHelp({
   const t = useTranslations("pageHelp")
   const common = useTranslations("common")
   const label = t("label")
-  const actions = t.raw(`${page}.actions`) as string[]
-  const tips = t.raw(`${page}.tips`) as string[]
+  // The guide, fetched the first time the dialog opens.
+  const [guide, setGuide] = useState<PageGuide | null>(null)
+  const [error, setError] = useState<string | null>(null)
+
+  usePageKey(page)
+
+  function load(open: boolean) {
+    if (!open || guide?.key === page) {
+      return
+    }
+
+    setError(null)
+    apiFetch<PageGuide>(`/rounds/help/pages/${page}`)
+      .then(setGuide)
+      .catch((failure) => setError(apiErrorMessage(failure, common("failed"))))
+  }
+
+  const shown = guide?.key === page ? guide : null
 
   return (
-    <Dialog>
+    <Dialog onOpenChange={load}>
       <Tooltip>
         <TooltipTrigger
           render={
@@ -47,6 +67,7 @@ export function PageHelp({
                 <button
                   type="button"
                   aria-label={label}
+                  data-testid="page-help"
                   className={cn(
                     "inline-flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-xl text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50",
                     className
@@ -67,11 +88,24 @@ export function PageHelp({
         bodyClassName="gap-6"
       >
         <DialogHeader>
-          <DialogTitle>{t(`${page}.title`)}</DialogTitle>
+          <DialogTitle>{shown?.title ?? label}</DialogTitle>
         </DialogHeader>
-        <p className="text-base text-muted-foreground">{t(`${page}.text`)}</p>
-        <HelpList title={t("actionsTitle")} items={actions} />
-        <HelpList title={t("tipsTitle")} items={tips} />
+        {shown ? (
+          <>
+            <p className="text-base text-muted-foreground">{shown.text}</p>
+            <HelpList title={t("actionsTitle")} items={shown.actions} />
+            <HelpList title={t("tipsTitle")} items={shown.tips} />
+          </>
+        ) : (
+          <p
+            className={cn(
+              "text-base",
+              error ? "text-destructive" : "text-muted-foreground"
+            )}
+          >
+            {error ?? common("loading")}
+          </p>
+        )}
         <DialogFooter>
           <DialogClose
             render={

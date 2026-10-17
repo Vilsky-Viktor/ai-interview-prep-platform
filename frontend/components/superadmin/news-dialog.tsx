@@ -20,10 +20,7 @@ import { MAX_NEWS_TEXT_LENGTH, MAX_NEWS_TITLE_LENGTH } from "@/constants/limits"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 import { today } from "@/lib/format"
 import type { AdminNewsPost } from "@/types/news"
-
-// The site's grey fields without a border, outlined while focused (as the report dialog's).
-const FIELD =
-  "border-transparent bg-muted px-6 text-lg shadow-none focus-visible:border-ring focus-visible:ring-0 md:text-lg dark:bg-input/30"
+import { GRAY_FIELD } from "@/constants/fields"
 
 /** Writes a news post in English, or edits `post`: its title, day (today for a new one) and
  * text, with how many characters the text has left. The API checks the limits. */
@@ -83,7 +80,7 @@ export function NewsDialog({
             aria-label={common("title")}
             value={title}
             onChange={(event) => setTitle(event.target.value)}
-            className={`h-14 ${FIELD}`}
+            className={`h-14 ${GRAY_FIELD}`}
           />
           <Input
             required
@@ -91,7 +88,7 @@ export function NewsDialog({
             aria-label={t("postDate")}
             value={day}
             onChange={(event) => setDay(event.target.value)}
-            className={`h-14 w-auto ${FIELD}`}
+            className={`h-14 w-auto ${GRAY_FIELD}`}
           />
           <div className="space-y-2">
             <Textarea
@@ -102,7 +99,7 @@ export function NewsDialog({
               value={text}
               onChange={(event) => setText(event.target.value)}
               // A long unbroken word wraps instead of widening the dialog.
-              className={`min-h-48 resize-none rounded-xl py-4 wrap-anywhere ${FIELD}`}
+              className={`min-h-48 resize-none rounded-xl py-4 wrap-anywhere ${GRAY_FIELD}`}
             />
             <p
               aria-live="polite"

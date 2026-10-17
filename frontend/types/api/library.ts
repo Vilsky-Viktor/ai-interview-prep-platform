@@ -110,7 +110,11 @@ export interface paths {
       path?: never
       cookie?: never
     }
-    /** Get Template Detail */
+    /**
+     * Get Template Detail
+     * @description Its topics with their practice and company question counts, and whether a top-up has
+     *     anything to write.
+     */
     get: operations["get_template_detail_superadmin_templates__template_id__get"]
     put?: never
     post?: never
@@ -206,6 +210,27 @@ export interface paths {
      * @description The account signed in with the address, whatever its case, with its email settings.
      */
     post: operations["look_up_superadmin_emails_lookup_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/emails/accounts/{user_id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Account
+     * @description The account with that id (the support tab's user page), with its email settings; 404
+     *     when there's none, or it has no address to email (a company's guest candidate).
+     */
+    get: operations["get_account_superadmin_emails_accounts__user_id__get"]
+    put?: never
+    post?: never
     delete?: never
     options?: never
     head?: never
@@ -491,8 +516,8 @@ export interface paths {
     }
     /**
      * Sample Questions
-     * @description A few of the template's revealed questions, with answers, spread across its topics, for
-     *     its practice page. Private and retiring questions are never shown.
+     * @description A few of the template's practice questions, with answers, spread across its topics, for
+     *     its practice page. Company questions are never shown.
      */
     get: operations["sample_questions_templates__key__sample_get"]
     put?: never
@@ -735,7 +760,8 @@ export interface paths {
     }
     /**
      * User Ids
-     * @description Notifications, for a notice about the terms or the privacy policy: every account.
+     * @description Notifications: every account, for a notice about the terms or the privacy policy; with a
+     *     `setting`, the users who have it on (a campaign's product updates or offers).
      */
     get: operations["user_ids_internal_users_ids_get"]
     put?: never
@@ -788,6 +814,87 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/internal/accounts/{user_id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Account
+     * @description 404 when there's no account with that id.
+     */
+    get: operations["get_account_internal_accounts__user_id__get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/accounts/lookup": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Look Up
+     * @description The account signed in with the address, whatever its case; 404 when there's none.
+     */
+    post: operations["look_up_internal_accounts_lookup_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/templates/{template_id}/additions": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Addition Context
+     * @description Each topic with every question's text, and what it lacks of each pool.
+     */
+    get: operations["addition_context_internal_templates__template_id__additions_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/templates/{template_id}/questions": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Add Questions
+     * @description Saves the new questions of every topic at once; each topic's new question ids, for the
+     *     answer-key checks. Interviews already copied from the template don't change.
+     */
+    post: operations["add_questions_internal_templates__template_id__questions_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/internal/schedules/outbox": {
     parameters: {
       query?: never
@@ -819,12 +926,12 @@ export interface paths {
     get?: never
     put?: never
     /**
-     * Move Bank Stages
-     * @description Daily, from Cloud Scheduler: bank questions move one way, private to retiring to
-     *     revealed (constants/sets.py Stage). The same daily run sends flags the verifier hasn't acted
-     *     on to it again, and forgets old notes of processed events.
+     * Daily Housekeeping
+     * @description Daily, from Cloud Scheduler: sends flags the verifier hasn't acted on to it again, news
+     *     posts still missing translations to be translated again, and forgets old notes of processed
+     *     events.
      */
-    post: operations["move_bank_stages_internal_schedules_bank_post"]
+    post: operations["daily_housekeeping_internal_schedules_bank_post"]
     delete?: never
     options?: never
     head?: never
@@ -910,6 +1017,26 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/internal/news/titles": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * News Titles
+     * @description The posts' titles in the reader's language, in English until it's translated.
+     */
+    post: operations["news_titles_internal_news_titles_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/internal/news/{news_id}": {
     parameters: {
       query?: never
@@ -957,7 +1084,7 @@ export interface paths {
     }
     /**
      * Practice Content
-     * @description The template's revealed questions, with answers, by topic; topics without any are left
+     * @description The template's practice questions, with answers, by topic; topics without any are left
      *     out. Rounds picks each practice round's questions from them.
      */
     get: operations["practice_content_internal_templates__template_id__practice_get"]
@@ -1037,7 +1164,7 @@ export interface paths {
     put?: never
     /**
      * Find Reusable
-     * @description Proven private bank questions on a similar topic, for a new generation.
+     * @description Proven company bank questions on a similar topic, for a new generation.
      */
     post: operations["find_reusable_internal_reuse_post"]
     delete?: never
@@ -1083,10 +1210,105 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/internal/code/untagged": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * List Untagged Code
+     * @description Questions whose example has no language yet, or with `text` the ones tagged "text", in id
+     *     order after `after`: for generation's tag_code_languages job.
+     */
+    get: operations["list_untagged_code_internal_code_untagged_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/code/languages": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /**
+     * Save Code Languages
+     * @description Each listed question's example gets its language; with `text`, ones tagged "text".
+     */
+    put: operations["save_code_languages_internal_code_languages_put"]
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
 }
 export type webhooks = Record<string, never>
 export interface components {
   schemas: {
+    /**
+     * AccountOut
+     * @description A prepza account, for the admin zone's support tab: `email` is None for an account
+     *     without one (a company's guest candidate), `created_at` when Firebase doesn't say.
+     */
+    AccountOut: {
+      /** User Id */
+      user_id: string
+      /** Email */
+      email: string | null
+      /** Created At */
+      created_at: string | null
+    }
+    /**
+     * AddedQuestionsIn
+     * @description Questions generation adds to a template's topics, saved in one go.
+     */
+    AddedQuestionsIn: {
+      /** Topics */
+      topics: components["schemas"]["TopicAdditionIn"][]
+    }
+    /**
+     * AdditionContext
+     * @description A template's topics, for adding questions to them (library's internal_additions.py).
+     */
+    AdditionContext: {
+      /** Level */
+      level: string
+      /** Language */
+      language: string
+      /** Topics */
+      topics: components["schemas"]["AdditionTopic"][]
+    }
+    /**
+     * AdditionTopic
+     * @description A template topic, as generation needs it to add questions to it.
+     */
+    AdditionTopic: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string
+      /** Title */
+      title: string
+      /** Subtopics */
+      subtopics: string[]
+      /** Texts */
+      texts: string[]
+      /** Practice Missing */
+      practice_missing: number
+      /** Company Missing */
+      company_missing: number
+    }
     /**
      * AdminEmailChangesIn
      * @description A superadmin's changes to a user's settings; the rest stay as they are.
@@ -1120,6 +1342,16 @@ export interface components {
       updated_at: string
       /** Translated */
       translated: boolean
+    }
+    /** CodeLanguageIn */
+    CodeLanguageIn: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string
+      /** Language */
+      language: string
     }
     /** CreatedOut */
     CreatedOut: {
@@ -1352,6 +1584,49 @@ export interface components {
       /** Missing */
       missing: string[]
     }
+    /**
+     * NewsTitlesIn
+     * @description Posts the bell names (notifications), and the reader's language.
+     */
+    NewsTitlesIn: {
+      /** News Ids */
+      news_ids: string[]
+      /**
+       * Language
+       * @enum {string}
+       */
+      language:
+        | "en"
+        | "ru"
+        | "uk"
+        | "es"
+        | "pt"
+        | "de"
+        | "fr"
+        | "it"
+        | "pl"
+        | "nl"
+        | "tr"
+        | "ar"
+        | "he"
+        | "fa"
+        | "ja"
+        | "zh"
+        | "ko"
+        | "hi"
+        | "id"
+        | "th"
+        | "vi"
+        | "fil"
+        | "et"
+    }
+    /** NewsTitlesOut */
+    NewsTitlesOut: {
+      /** Titles */
+      titles: {
+        [key: string]: string
+      }
+    }
     /** NewsTranslationIn */
     NewsTranslationIn: {
       /** Title */
@@ -1380,6 +1655,62 @@ export interface components {
       answer: string
       /** Correct */
       correct: boolean
+    }
+    /**
+     * PoolTopicOut
+     * @description A template topic as its superadmin page shows it: its questions by pool.
+     */
+    PoolTopicOut: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string
+      /** Title */
+      title: string
+      /** Subtopics */
+      subtopics: string[]
+      /** Practice Count */
+      practice_count: number
+      /** Company Count */
+      company_count: number
+    }
+    /** PooledTemplateOut */
+    PooledTemplateOut: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string
+      /** Slug */
+      slug: string | null
+      /** Title */
+      title: string
+      /** Level */
+      level: string
+      /** Language */
+      language: string
+      /** Topic Count */
+      topic_count: number
+      /**
+       * Created At
+       * Format: date-time
+       */
+      created_at: string
+      /**
+       * Updated At
+       * Format: date-time
+       */
+      updated_at: string
+      /**
+       * Indexable
+       * @default false
+       */
+      indexable: boolean
+      /** Topics */
+      topics: components["schemas"]["PoolTopicOut"][]
+      /** Short */
+      short: boolean
     }
     /**
      * PreparationIn
@@ -1461,6 +1792,16 @@ export interface components {
       subtopics: string[]
       /** Existing */
       existing: string[]
+      /**
+       * Multi
+       * @default false
+       */
+      multi: boolean
+      /**
+       * Example
+       * @default false
+       */
+      example: boolean
     }
     /** QuestionIn */
     QuestionIn: {
@@ -1529,6 +1870,11 @@ export interface components {
       text: string
       /** Options */
       options: components["schemas"]["OptionIn"][]
+      /**
+       * Multi
+       * @default false
+       */
+      multi: boolean
       /**
        * Likes
        * @default 0
@@ -1635,7 +1981,8 @@ export interface components {
      * ReportReason
      * @enum {string}
      */
-    ReportReason: "wrong_answer" | "unclear" | "off_topic" | "other"
+    ReportReason:
+      "wrong_answer" | "unclear" | "hard_to_read" | "off_topic" | "other"
     /** ReuseIn */
     ReuseIn: {
       /** Embedding */
@@ -1664,7 +2011,7 @@ export interface components {
     }
     /**
      * SampleQuestionOut
-     * @description A revealed question of a template, with its answer, shown on its public practice page.
+     * @description A practice question of a template, with its answer, shown on its public practice page.
      */
     SampleQuestionOut: {
       /**
@@ -1691,6 +2038,8 @@ export interface components {
       id: string
       /** Title */
       title: string
+      /** Level */
+      level: string
       /** Topics */
       topics: components["schemas"]["SetTopicOut"][]
     }
@@ -1785,6 +2134,8 @@ export interface components {
       title: string
       /** Language */
       language: string
+      /** Level */
+      level: string
     }
     /**
      * TemplateFiltersOut
@@ -1872,6 +2223,21 @@ export interface components {
       /** Title */
       title: string
     }
+    /**
+     * TopicAdditionIn
+     * @description New questions for one topic of a template, by the pool each goes to.
+     */
+    TopicAdditionIn: {
+      /**
+       * Topic Id
+       * Format: uuid
+       */
+      topic_id: string
+      /** Practice */
+      practice: components["schemas"]["QuestionIn"][]
+      /** Company */
+      company: components["schemas"]["QuestionIn"][]
+    }
     /** TopicEmbedding */
     TopicEmbedding: {
       /**
@@ -1926,6 +2292,16 @@ export interface components {
     UnsubscribeIn: {
       /** Settings */
       settings: components["schemas"]["EmailSetting"][]
+    }
+    /** UntaggedQuestion */
+    UntaggedQuestion: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string
+      /** Text */
+      text: string
     }
     /**
      * UserEmailIn
@@ -2187,7 +2563,7 @@ export interface operations {
           [name: string]: unknown
         }
         content: {
-          "application/json": components["schemas"]["TemplateOut"]
+          "application/json": components["schemas"]["PooledTemplateOut"]
         }
       }
       /** @description Validation Error */
@@ -2382,6 +2758,37 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["EmailLookupOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_account_superadmin_emails_accounts__user_id__get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        user_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["EmailAccountOut"]
         }
       }
       /** @description Validation Error */
@@ -3394,7 +3801,9 @@ export interface operations {
   }
   user_ids_internal_users_ids_get: {
     parameters: {
-      query?: never
+      query?: {
+        setting?: ("updates" | "promotions") | null
+      }
       header?: never
       path?: never
       cookie?: never
@@ -3408,6 +3817,15 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["UserIdsOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
         }
       }
     }
@@ -3480,6 +3898,136 @@ export interface operations {
       }
     }
   }
+  get_account_internal_accounts__user_id__get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        user_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["AccountOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  look_up_internal_accounts_lookup_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["UserEmailIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["AccountOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  addition_context_internal_templates__template_id__additions_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        template_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["AdditionContext"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  add_questions_internal_templates__template_id__questions_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        template_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["AddedQuestionsIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      201: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": string[][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
   flush_outbox_internal_schedules_outbox_post: {
     parameters: {
       query?: never
@@ -3498,7 +4046,7 @@ export interface operations {
       }
     }
   }
-  move_bank_stages_internal_schedules_bank_post: {
+  daily_housekeeping_internal_schedules_bank_post: {
     parameters: {
       query?: never
       header?: never
@@ -3668,6 +4216,39 @@ export interface operations {
         }
         content: {
           "application/json": unknown
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  news_titles_internal_news_titles_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["NewsTitlesIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["NewsTitlesOut"]
         }
       }
       /** @description Validation Error */
@@ -3939,6 +4520,72 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": components["schemas"]["TopicEmbedding"][]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  list_untagged_code_internal_code_untagged_get: {
+    parameters: {
+      query?: {
+        limit?: number
+        text?: boolean
+        after?: string | null
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["UntaggedQuestion"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  save_code_languages_internal_code_languages_put: {
+    parameters: {
+      query?: {
+        text?: boolean
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["CodeLanguageIn"][]
       }
     }
     responses: {

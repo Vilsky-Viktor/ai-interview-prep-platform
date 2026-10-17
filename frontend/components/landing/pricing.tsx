@@ -26,6 +26,7 @@ export async function PricingSection() {
 
   return (
     <LandingSection
+      id="pricing"
       title={t("title")}
       text={t("text", { free: catalog.free_candidates })}
       extra={see}

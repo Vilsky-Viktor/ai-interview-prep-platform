@@ -84,6 +84,7 @@ export function CompanyOptOuts({
                     className="h-8 px-3 text-sm"
                     disabled={saving === company.company_id}
                     onClick={() => change(company, false)}
+                    data-testid="resume-emails"
                   >
                     {t("resumeEmails")}
                   </Button>
@@ -95,6 +96,7 @@ export function CompanyOptOuts({
                     className="h-8 px-3 text-sm"
                     disabled={saving === company.company_id}
                     onClick={() => change(company, true)}
+                    data-testid="stop-emails"
                   >
                     {t("stopEmails")}
                   </Button>

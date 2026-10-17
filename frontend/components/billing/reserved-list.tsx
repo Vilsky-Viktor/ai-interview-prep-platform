@@ -5,8 +5,10 @@ import Link from "next/link"
 import { NoName } from "@/components/company/no-name"
 import { VirtualList } from "@/components/virtual-list"
 import { WrappedEmail } from "@/components/wrapped-email"
+import { Dot } from "@/components/dot"
 import { LIST_BOX } from "@/constants/lists"
 import { usePagedList } from "@/hooks/use-paged-list"
+import { candidateHref, type CandidateLinks } from "@/lib/candidate-links"
 import type { CreditCandidate } from "@/types/company"
 
 function byInvite(candidate: CreditCandidate) {
@@ -14,19 +16,21 @@ function byInvite(candidate: CreditCandidate) {
 }
 
 /** Candidates invited who haven't finished, whose credits are set aside, newest first; each
- * opens the candidate. `initial` is the server's first page. */
+ * opens the candidate. `initial` is the server's first page. `api` is the company's billing
+ * routes, its own by default; the admin zone's support page passes its own and
+ * `links="support"`, so its candidates open there. */
 export function ReservedList({
   companyId,
   initial,
+  api = `/companies/companies/${companyId}/billing`,
+  links = "company",
 }: {
   companyId: string
   initial: CreditCandidate[]
+  api?: string
+  links?: CandidateLinks
 }) {
-  const { items, loadMore } = usePagedList(
-    `/companies/companies/${companyId}/billing/reserved`,
-    byInvite,
-    initial
-  )
+  const { items, loadMore } = usePagedList(`${api}/reserved`, byInvite, initial)
 
   return (
     <VirtualList
@@ -35,24 +39,33 @@ export function ReservedList({
       estimateSize={105}
       onEndReached={loadMore}
       className={LIST_BOX}
-      renderItem={(candidate) => (
-        <Link
-          href={`/companies/${companyId}/interviews/${candidate.interview_id}/candidates/${candidate.invite_id}`}
-          className="block space-y-1 p-6 transition-colors hover:bg-muted/50 active:bg-muted/50"
-        >
-          <span className="block text-lg font-medium">
-            <WrappedEmail email={candidate.email} />
-          </span>
-          <span className="block text-sm break-all text-muted-foreground">
-            {candidate.name ?? <NoName hint="list" />}
-            {candidate.interview_title && (
-              <span className="normal-case">
-                {` · ${candidate.interview_title}`}
-              </span>
-            )}
-          </span>
-        </Link>
-      )}
+      renderItem={(candidate) => {
+        const content = (
+          <>
+            <span className="block text-lg font-medium">
+              <WrappedEmail email={candidate.email} />
+            </span>
+            <span className="block text-sm break-all text-muted-foreground">
+              {candidate.name ?? <NoName hint="list" />}
+              {candidate.interview_title && (
+                <span className="normal-case">
+                  <Dot />
+                  {candidate.interview_title}
+                </span>
+              )}
+            </span>
+          </>
+        )
+
+        return (
+          <Link
+            href={candidateHref(links, companyId, candidate)}
+            className="block space-y-1 p-6 transition-colors hover:bg-muted/50 active:bg-muted/50"
+          >
+            {content}
+          </Link>
+        )
+      }}
     />
   )
 }

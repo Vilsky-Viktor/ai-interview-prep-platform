@@ -31,7 +31,7 @@ export async function InviteWaysSection() {
   const t = await getTranslations("landing.invite")
 
   return (
-    <LandingSection title={t("title")} text={t("text")}>
+    <LandingSection id="invite" title={t("title")} text={t("text")}>
       <ul className="mx-auto mt-8 grid w-full max-w-4xl grid-cols-1 gap-8 pe-4 sm:grid-cols-2 sm:pe-0">
         {WAYS.map(({ key, Icon }) => (
           <li

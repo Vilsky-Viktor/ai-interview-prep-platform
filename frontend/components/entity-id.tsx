@@ -42,6 +42,8 @@ export function EntityId({
       variant="outline"
       className={FORMS[form]}
       aria-label={label}
+      data-testid="copy-id"
+      data-copied={copied}
       onClick={copy}
     >
       {form === "button" && icon}

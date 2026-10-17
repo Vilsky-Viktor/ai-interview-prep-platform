@@ -82,7 +82,10 @@ export default async function ApiPage({
                 </div>
               </div>
               {/* The docs, and the open tab's action for owners and admins. */}
-              <div className="flex shrink-0 items-center gap-3 max-sm:mt-4 max-sm:*:flex-1">
+              <div
+                className="flex shrink-0 items-center gap-3 max-sm:mt-4 max-sm:*:flex-1"
+                data-testid="integration-actions"
+              >
                 <Button
                   variant="outline"
                   className="h-10 px-5 text-base"
@@ -96,6 +99,8 @@ export default async function ApiPage({
                     <NewKey
                       companyId={companyId}
                       expiries={settings.expiries}
+                      options={settings}
+                      defaults={settings.default_permissions}
                     />
                   ) : (
                     <AddWebhook companyId={companyId} />
@@ -110,6 +115,7 @@ export default async function ApiPage({
         <ApiKeys
           companyId={companyId}
           keys={settings.keys}
+          options={settings}
           canEdit={company.can_edit}
         />
       ) : (

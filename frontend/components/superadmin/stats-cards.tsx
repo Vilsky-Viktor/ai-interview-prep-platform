@@ -1,13 +1,14 @@
 import { useLocale, useTranslations } from "next-intl"
 
+import { NumberCards } from "@/components/superadmin/number-cards"
 import { STATS_CARDS, STATS_SOURCES } from "@/constants/stats"
 import { compactNumber, compactPrice } from "@/lib/format"
 import type { Stats } from "@/types/superadmin"
 
 type Source = (typeof STATS_SOURCES)[number]
 
-/** The numbers as cards, three to a row and centred, like the pricing cards, short from a
- * thousand up ("1.5K", "$12.3K"); a dash where the service didn't answer. */
+/** The numbers as cards (NumberCards), short from a thousand up ("1.5K", "$12.3K"); a dash
+ * where the service didn't answer. */
 export function StatsCards({ stats }: { stats: Record<Source, Stats | null> }) {
   const t = useTranslations("superadmin")
   const locale = useLocale()
@@ -28,20 +29,12 @@ export function StatsCards({ stats }: { stats: Record<Source, Stats | null> }) {
   }
 
   return (
-    <dl className="flex flex-wrap justify-center gap-4">
-      {STATS_CARDS.map((card) => (
-        <div
-          key={card.metric}
-          className="flex w-full flex-col-reverse gap-1 rounded-2xl border p-6 text-center sm:w-[calc((100%-1rem)/2)] lg:w-[calc((100%-2rem)/3)]"
-        >
-          <dt className="text-sm text-muted-foreground">
-            {t(`statsCards.${card.metric}`)}
-          </dt>
-          <dd className="font-heading text-5xl font-medium tracking-tight text-primary tabular-nums">
-            {value(card)}
-          </dd>
-        </div>
-      ))}
-    </dl>
+    <NumberCards
+      items={STATS_CARDS.map((card) => ({
+        key: card.metric,
+        label: t(`statsCards.${card.metric}`),
+        value: value(card),
+      }))}
+    />
   )
 }

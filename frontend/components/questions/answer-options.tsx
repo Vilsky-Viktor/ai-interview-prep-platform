@@ -7,15 +7,15 @@ import { useTranslations } from "next-intl"
 import { gradeTone } from "@/lib/grade-tone"
 import { InlineText } from "@/components/questions/inline-text"
 
-/** A question's answer options: the right one with a green check, the wrong ones with a red
- * cross, in the scorecards' colors. `picked` marks the option a talent chose in practice. */
+/** A question's answer options: the right ones with a green check, the wrong ones with a red
+ * cross, in the scorecards' colors. `picked` marks the options a talent or candidate chose. */
 export function AnswerOptions({
   options,
   picked,
   className,
 }: {
   options: { answer: string; correct: boolean }[]
-  picked?: number | null
+  picked?: number[]
   className?: string
 }) {
   const t = useTranslations("questions")
@@ -46,7 +46,7 @@ export function AnswerOptions({
           )}
           <span className="bidi-auto">
             <InlineText text={option.answer} />
-            {picked === index && (
+            {picked?.includes(index) && (
               <span className="ms-2 text-muted-foreground">
                 {t("yourAnswer")}
               </span>

@@ -16,6 +16,7 @@ import { serverFetch } from "@/lib/server-api"
 import { translatedTitle } from "@/lib/site"
 import type { PracticeRound } from "@/types/round"
 import { formatPercent } from "@/lib/format"
+import { PageKey } from "@/components/page-key"
 
 export const generateMetadata = () => translatedTitle("practice", "results")
 
@@ -33,6 +34,7 @@ export default async function PracticeRoundPage({
   if (!(await cookies()).has(TOKEN_COOKIE)) {
     return (
       <main className="mx-auto max-w-5xl px-6 py-12">
+        <PageKey page="practiceRound" />
         <SignInPrompt />
       </main>
     )
@@ -48,6 +50,7 @@ export default async function PracticeRoundPage({
 
   return (
     <main className="mx-auto max-w-5xl space-y-10 px-6 py-12">
+      <PageKey page="practiceRound" />
       <PageHeader
         back={
           <BackLink href={`/practice/${round.template_id}`}>

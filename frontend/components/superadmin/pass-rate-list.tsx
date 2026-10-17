@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl"
 
 import { Badge } from "@/components/ui/badge"
 import { VirtualList } from "@/components/virtual-list"
+import { Dot } from "@/components/dot"
 import { usePagedList } from "@/hooks/use-paged-list"
 import type { PassRate } from "@/types/superadmin"
 import { LIST_BOX } from "@/constants/lists"
@@ -57,11 +58,13 @@ export function PassRateList({
               </Badge>
             )}
             <span>
-              {t("finished", { count: row.finished })} ·{" "}
+              {t("finished", { count: row.finished })}
+              <Dot />
               {t("passed", { percent: row.pass_rate })}
             </span>
             <span>
-              {t("passMark", { percent: row.pass_mark })} ·{" "}
+              {t("passMark", { percent: row.pass_mark })}
+              <Dot />
               {t("averageGrade", { percent: row.average_grade })}
             </span>
             {row.timeout_share !== null && (

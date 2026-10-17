@@ -2,6 +2,7 @@ import { humanHeaders } from "@/lib/human-check"
 import { ApiError, authHeaders, errorDetail } from "@/lib/api"
 import type { AssistantBlock } from "@/types/assistant"
 import type { HelpMessage } from "@/types/help"
+import type { PageHelpKey } from "@/types/page-help"
 
 /** An error event in a stream: its message, already in the user's language, and its code when
 the service gave one (the assistant's "session_expired"). */
@@ -86,7 +87,8 @@ export async function streamEvents<T>(
 and sends it whole, each reply with the signature the chat gave it (the chat reads no reply
 without one). Its events: {"delta"}, a {"block"} sign-in card when the visitor asks to sign in,
 and {"done"} with the reply's signature. Until the chat has a signed reply, a question shows
-the visitor is a person (lib/human-check.ts). */
+the visitor is a person (lib/human-check.ts). `page`: the key of the page the visitor asks on,
+whose guide the answer reads. */
 export function streamHelp(
   messages: HelpMessage[],
   onEvent: (event: {
@@ -95,13 +97,20 @@ export function streamHelp(
     removed?: boolean
     signature?: string
   }) => void,
-  signal: AbortSignal
+  signal: AbortSignal,
+  page?: PageHelpKey
 ) {
   const first = !messages.some(
     (message) => message.role === "assistant" && message.signature
   )
 
   return humanHeaders(first).then((headers) =>
-    streamEvents("/rounds/help/chat", { messages }, onEvent, signal, headers)
+    streamEvents(
+      "/rounds/help/chat",
+      { messages, ...(page && { page }) },
+      onEvent,
+      signal,
+      headers
+    )
   )
 }

@@ -46,9 +46,12 @@ const INPUT = "h-16 border-0 px-6 text-lg focus-visible:ring-0 md:text-lg"
 export function InviteCandidate({
   interviewId,
   candidatesHref,
+  maxInvites,
 }: {
   interviewId: string
   candidatesHref: string
+  // The most candidates one list or file may invite; null when the API didn't say.
+  maxInvites: number | null
 }) {
   const t = useTranslations("interviews")
   const share = useTranslations("share")
@@ -156,6 +159,7 @@ export function InviteCandidate({
   return (
     <Dialog open={open} onOpenChange={openDialog}>
       <DialogTrigger
+        data-testid="new-candidate"
         render={
           <Button className="h-12 shrink-0 px-6 text-base max-sm:basis-full" />
         }
@@ -217,11 +221,12 @@ export function InviteCandidate({
                 }}
                 className="max-h-64 min-h-28 resize-none rounded-[2rem] border-transparent px-6 py-[18px] text-lg focus-visible:border-ring focus-visible:ring-0 md:text-lg"
               />
-              <InviteExample />
+              <InviteExample maxInvites={maxInvites} />
             </>
           )}
           {tab === "file" && (
             <InviteFileTab
+              maxInvites={maxInvites}
               file={file}
               onChoose={(chosen, tooLarge) => {
                 setFile(chosen)

@@ -1,6 +1,6 @@
 "use client"
 
-import { usePathname } from "next/navigation"
+import { useParams, usePathname } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { useEffect, useRef, useState } from "react"
 import { toast } from "sonner"
@@ -17,6 +17,8 @@ import {
 import { clearChat } from "@/lib/assistant-storage"
 import { signOut } from "@/lib/auth"
 import { StreamError, streamHelp } from "@/lib/chat"
+import { pageContext } from "@/lib/page-context"
+import { pageKey } from "@/lib/page-key"
 import { useActionCards } from "@/hooks/use-action-cards"
 import { useChatRestore } from "@/hooks/use-chat-restore"
 import type { AssistantEvent, ChatMessage } from "@/types/assistant"
@@ -25,7 +27,8 @@ import type { AssistantEvent, ChatMessage } from "@/types/assistant"
 const SESSION_EXPIRED = "session_expired"
 
 /** The assistant's conversation in the panel: its messages, the answer streaming into the last
- * one. Each message goes with the company picked in the panel (`company`; null: all of them).
+ * one. Each message goes with the company picked in the panel (`company`; null: all of them)
+ * and the page it's asked on (its guide's key, path and ids; signed out, the key only).
  * Signed out, the FAQ's help chat answers instead: the conversation lives only here (and in the
  * tab's sessionStorage). A reload brings back a recent chat; a visitor who signs in keeps their
  * chat, which the first message then saves as the start of a conversation. Actions the
@@ -37,6 +40,7 @@ export function useAssistantChat(
 ) {
   const t = useTranslations("assistant")
   const pathname = usePathname()
+  const params = useParams()
   const [conversationId, setConversationId] = useState<string | null>(null)
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [streaming, setStreaming] = useState(false)
@@ -171,6 +175,7 @@ export function useAssistantChat(
       source,
     }
     const answer: ChatMessage = { role: "assistant", content: "", blocks: [] }
+    const page = pageContext(pageKey(), params, pathname)
     const error = await streamAnswer(
       [...earlier, question, answer],
       (handle, signal) =>
@@ -179,7 +184,7 @@ export function useAssistantChat(
               {
                 message: text,
                 source,
-                page: pathname,
+                ...(page && { page }),
                 ...(company && { company_id: company }),
                 // A new conversation starts with what the user asked before signing in.
                 ...(conversation
@@ -189,7 +194,12 @@ export function useAssistantChat(
               handle,
               signal
             )
-          : streamHelp(helpConversation([...earlier, question]), handle, signal)
+          : streamHelp(
+              helpConversation([...earlier, question]),
+              handle,
+              signal,
+              page?.key
+            )
     )
 
     if (

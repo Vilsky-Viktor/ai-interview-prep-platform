@@ -25,7 +25,8 @@ import { Input } from "@/components/ui/input"
 import { WarningCard } from "@/components/warning-card"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 
-/** Making a key or a web hook: one field, then what the API made, shown this once to copy. */
+/** Making a key or a web hook: one field (and a key's expiry and permissions), then what the API
+ * made, shown this once to copy. */
 export function CreateDialog({
   path,
   field,
@@ -37,6 +38,7 @@ export function CreateDialog({
   failed,
   shown,
   choice,
+  ticks,
 }: {
   // The /manage route that makes it, and the field it takes.
   path: string
@@ -65,12 +67,23 @@ export function CreateDialog({
     // An option with a warning under the select while it's picked (a key that never expires).
     warning?: { value: string; text: string }
   }
+  // Checkboxes to tick, if any (a key's permissions): their name in the body, what's ticked at
+  // first, and the checkboxes themselves; at least one must be ticked.
+  ticks?: {
+    field: string
+    initial: string[]
+    render: (
+      ticked: string[],
+      onChange: (ticked: string[]) => void
+    ) => React.ReactNode
+  }
 }) {
   const common = useTranslations("common")
   const router = useRouter()
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState("")
   const [picked, setPicked] = useState<string | null>(null)
+  const [ticked, setTicked] = useState(ticks?.initial ?? [])
   const [saving, setSaving] = useState(false)
   const [created, setCreated] = useState<string | null>(null)
 
@@ -84,6 +97,7 @@ export function CreateDialog({
         body: JSON.stringify({
           [field]: value,
           ...(choice ? { [choice.field]: picked } : {}),
+          ...(ticks ? { [ticks.field]: ticked } : {}),
         }),
       })
       setCreated(answer[shown.value])
@@ -105,6 +119,7 @@ export function CreateDialog({
     if (!next) {
       setValue("")
       setPicked(null)
+      setTicked(ticks?.initial ?? [])
       setCreated(null)
     }
   }
@@ -172,6 +187,7 @@ export function CreateDialog({
               {choice?.warning && picked === choice.warning.value && (
                 <WarningCard>{choice.warning.text}</WarningCard>
               )}
+              {ticks?.render(ticked, setTicked)}
             </form>
             <DialogFooter>
               <DialogClose
@@ -189,7 +205,12 @@ export function CreateDialog({
                 type="submit"
                 form={`create-${field}`}
                 className="h-10 px-5 text-base"
-                disabled={saving || !value.trim() || (!!choice && !picked)}
+                disabled={
+                  saving ||
+                  !value.trim() ||
+                  (!!choice && !picked) ||
+                  (!!ticks && !ticked.length)
+                }
               >
                 {label}
               </Button>

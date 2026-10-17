@@ -117,6 +117,7 @@ export function SignInOptions({
                 variant="outline"
                 className="h-12 w-full gap-3 text-base"
                 disabled={busy}
+                data-testid={`sign-in-${name}`}
                 onClick={() => choose(name)}
               >
                 <Icon />
@@ -147,6 +148,7 @@ export function SignInOptions({
                   className="size-5 shrink-0 [&_[data-slot=checkbox-indicator]>svg]:size-3.5"
                   checked={emails[choice]}
                   disabled={busy}
+                  data-testid={`email-box-${choice}`}
                   onCheckedChange={(checked) =>
                     setEmails({ ...emails, [choice]: checked })
                   }

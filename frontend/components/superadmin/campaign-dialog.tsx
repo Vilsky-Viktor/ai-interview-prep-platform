@@ -1,0 +1,187 @@
+"use client"
+
+import { useTranslations } from "next-intl"
+import { useState } from "react"
+import { toast } from "sonner"
+
+import { PillSelect } from "@/components/pill-select"
+import { TextEditor } from "@/components/text-editor"
+import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { LANGUAGE_NAMES, type Locale } from "@/constants/i18n"
+import {
+  MAX_CAMPAIGN_BUTTON_LENGTH,
+  MAX_CAMPAIGN_SUBJECT_LENGTH,
+  MAX_CAMPAIGN_TEXT_LENGTH,
+} from "@/constants/limits"
+import { apiErrorMessage, apiFetch } from "@/lib/api"
+import type { Campaign } from "@/types/campaigns"
+import { GRAY_FIELD } from "@/constants/fields"
+
+const KINDS = ["updates", "promotions"] as const
+const PATH = "/notifications/superadmin/campaigns"
+
+/** Writes a campaign, as the news tab's dialog writes a post: a new one in English (its kind,
+ * subject, text with its styles and an optional button), or `campaign` in `language`: in English with its kind
+ * and button link too, in another language only its texts. The API checks the limits and the
+ * link. */
+export function CampaignDialog({
+  open,
+  onOpenChange,
+  campaign,
+  language = "en",
+  onSaved,
+}: {
+  open: boolean
+  onOpenChange: (open: boolean) => void
+  campaign?: Campaign
+  language?: string
+  onSaved: (campaign: Campaign) => void
+}) {
+  const t = useTranslations("superadmin")
+  const common = useTranslations("common")
+  const english = language === "en"
+  const texts = campaign?.texts[language] ?? campaign?.texts.en
+  const [kind, setKind] = useState<string>(campaign?.kind ?? "updates")
+  const [subject, setSubject] = useState(texts?.subject ?? "")
+  const [text, setText] = useState(texts?.text ?? "")
+  const [button, setButton] = useState(texts?.button ?? "")
+  const [link, setLink] = useState(campaign?.link ?? "")
+  const [saving, setSaving] = useState(false)
+
+  async function save(event: React.FormEvent) {
+    event.preventDefault()
+    setSaving(true)
+    const body = { subject, text, button: button || null }
+
+    try {
+      const saved = await apiFetch<Campaign>(
+        !campaign
+          ? PATH
+          : english
+            ? `${PATH}/${campaign.id}`
+            : `${PATH}/${campaign.id}/texts/${language}`,
+        {
+          method: campaign ? "PUT" : "POST",
+          body: JSON.stringify(
+            english ? { ...body, kind, link: link || null } : body
+          ),
+        }
+      )
+      onSaved(saved)
+      onOpenChange(false)
+    } catch (error) {
+      toast.error(apiErrorMessage(error, t("campaignSaveFailed")))
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  const name = LANGUAGE_NAMES[language as Locale]
+
+  return (
+    <Dialog open={open} onOpenChange={(next) => !saving && onOpenChange(next)}>
+      <DialogContent showCloseButton={false} className="sm:max-w-xl">
+        <DialogHeader>
+          <DialogTitle>
+            {!campaign
+              ? t("newCampaign")
+              : english
+                ? t("editCampaign")
+                : t("editCampaignIn", { language: name })}
+          </DialogTitle>
+          <DialogDescription>
+            {english
+              ? t("campaignInEnglish")
+              : t("campaignInLanguage", { language: name })}
+          </DialogDescription>
+        </DialogHeader>
+        <form id="campaign" onSubmit={save} className="min-w-0 space-y-4">
+          {english && (
+            <PillSelect
+              label={t("campaignKind")}
+              value={kind}
+              options={KINDS.map((value) => ({
+                value,
+                label: t(`campaignKinds.${value}`),
+              }))}
+              onChange={setKind}
+            />
+          )}
+          <Input
+            required
+            maxLength={MAX_CAMPAIGN_SUBJECT_LENGTH}
+            placeholder={t("campaignSubjectPlaceholder")}
+            aria-label={t("campaignSubject")}
+            value={subject}
+            onChange={(event) => setSubject(event.target.value)}
+            className={`h-14 ${GRAY_FIELD}`}
+          />
+          <div className="space-y-2">
+            <TextEditor
+              value={text}
+              onChange={setText}
+              label={t("campaignText")}
+              placeholder={t("campaignTextPlaceholder")}
+            />
+            <p
+              aria-live="polite"
+              className="text-end text-sm text-muted-foreground tabular-nums"
+            >
+              {t("charactersLeft", {
+                count: MAX_CAMPAIGN_TEXT_LENGTH - text.length,
+              })}
+            </p>
+          </div>
+          <Input
+            maxLength={MAX_CAMPAIGN_BUTTON_LENGTH}
+            placeholder={t("campaignButton")}
+            aria-label={t("campaignButton")}
+            value={button}
+            onChange={(event) => setButton(event.target.value)}
+            className={`h-14 ${GRAY_FIELD}`}
+          />
+          {english && (
+            <Input
+              placeholder={t("campaignLinkPlaceholder")}
+              aria-label={t("campaignLink")}
+              value={link}
+              onChange={(event) => setLink(event.target.value)}
+              className={`h-14 ${GRAY_FIELD}`}
+            />
+          )}
+        </form>
+        <DialogFooter>
+          <DialogClose
+            render={
+              <Button
+                variant="outline"
+                className="h-10 px-5 text-base"
+                disabled={saving}
+              />
+            }
+          >
+            {common("cancel")}
+          </DialogClose>
+          <Button
+            type="submit"
+            form="campaign"
+            className="h-10 px-5 text-base"
+            disabled={saving}
+          >
+            {saving ? common("saving") : common("save")}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  )
+}

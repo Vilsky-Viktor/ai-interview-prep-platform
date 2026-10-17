@@ -2,7 +2,9 @@
 
 import { ScorecardMark } from "@/components/company/scorecard-review"
 import { AnswerOptions } from "@/components/questions/answer-options"
+import { AnswerPoints } from "@/components/questions/answer-points"
 import { QuestionActions } from "@/components/questions/question-actions"
+import { MultiChoiceTag } from "@/components/questions/multi-choice-tag"
 import { QuestionText } from "@/components/questions/question-text"
 import { VirtualList } from "@/components/virtual-list"
 import type { ReviewItem } from "@/types/round"
@@ -29,21 +31,23 @@ export function PracticeReview({
         <div className="space-y-4 p-6 max-sm:py-8">
           {/* On phones whether it was right sits above the question, centered. */}
           <div className="flex items-start justify-between gap-8 max-sm:flex-col-reverse max-sm:items-center max-sm:gap-4">
-            <QuestionText
-              text={item.text}
-              className="min-w-0 text-lg font-light max-sm:self-stretch"
-            />
+            {/* A multi-answer question tagged as while it was played. */}
+            <div className="min-w-0 space-y-3 max-sm:self-stretch">
+              {item.multi && <MultiChoiceTag />}
+              <QuestionText text={item.text} className="text-lg font-light" />
+            </div>
             <ScorecardMark item={item} />
           </div>
           <AnswerOptions
             options={item.options.map((answer, index) => ({
               answer,
-              correct: index === item.correct_option_index,
+              correct: Boolean(item.correct_indexes?.includes(index)),
             }))}
-            // null when unanswered or timed out: still a practice report.
-            picked={item.answer?.option_index ?? null}
+            // None when unanswered or timed out: still a practice report.
+            picked={item.answer?.picks ?? []}
             className="text-base"
           />
+          <AnswerPoints item={item} />
           <div className="max-sm:pt-4">
             <QuestionActions
               basePath={`/rounds/sessions/${sessionId}/questions/${item.question_id}`}

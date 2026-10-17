@@ -38,7 +38,10 @@ export function BalanceRow({
           <p className="truncate text-lg font-medium">{name}</p>
         )}
         {!!reserved && (
-          <p className="text-sm text-muted-foreground">
+          <p
+            className="text-sm text-muted-foreground"
+            data-testid="reserved-credits"
+          >
             {t("reserved", { count: reserved })}
           </p>
         )}

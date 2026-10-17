@@ -54,6 +54,7 @@ export default async function MembersPage({
         declineReason={company.decline_reason ?? null}
         current="members"
         canEdit={company.can_edit}
+        canSeeActions={company.can_see_actions}
         action={
           company.can_manage_members ? (
             <InviteAdmin companyId={companyId} />

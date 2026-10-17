@@ -32,14 +32,17 @@ export function LinkStatus({
 
   if (status === "missing") {
     return (
-      <p className="py-24 text-center text-base text-muted-foreground">
+      <p
+        data-testid="link-invalid"
+        className="py-24 text-center text-base text-muted-foreground"
+      >
         {invalid}
       </p>
     )
   }
 
   return (
-    <div className="space-y-4 py-24 text-center">
+    <div data-testid="link-failed" className="space-y-4 py-24 text-center">
       <p className="text-base text-muted-foreground">{common("failed")}</p>
       <Button
         variant="outline"

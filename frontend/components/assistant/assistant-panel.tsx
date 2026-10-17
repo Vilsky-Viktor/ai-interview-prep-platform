@@ -17,6 +17,7 @@ import { MAX_HELP_QUESTION_LENGTH } from "@/constants/limits"
 import { useAssistantChat } from "@/hooks/use-assistant-chat"
 import { useCompanyChoice } from "@/hooks/use-company-choice"
 import { useContainedScroll } from "@/hooks/use-contained-scroll"
+import { useCurrentPageKey } from "@/hooks/use-page-key"
 import { apiFetch } from "@/lib/api"
 import { getConfig, getWelcomeStage, pageCompany } from "@/lib/assistant"
 import {
@@ -68,6 +69,7 @@ export function AssistantPanel({
   // The panel's element, there only while it's open.
   const [popup, setPopup] = useState<HTMLDivElement | null>(null)
   const field = useRef<HTMLTextAreaElement>(null)
+  const onGuidedPage = useCurrentPageKey() !== null
 
   // Each time it opens: the limits once, and the companies, which may have changed.
   useEffect(() => {
@@ -226,6 +228,7 @@ export function AssistantPanel({
               streaming={chat.streaming}
               signedIn={signedIn}
               stage={signedIn ? stage : "signed_out"}
+              onPage={onGuidedPage}
               onAsk={(question) => {
                 send(question)
                 focusInput()

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 
 import { Caret } from "@/components/landing/caret"
 import { API_EXAMPLE } from "@/constants/api"
+import { type CodeToken, useHighlight } from "@/hooks/use-highlight"
 
 // The request's first lines, then its body, typed a letter each TYPE_MS; the answer comes
 // ANSWER_MS later and shows for HOLD_MS before it starts again.
@@ -70,8 +71,18 @@ export function ApiDemo() {
   return (
     <div className="divide-y overflow-x-auto font-mono leading-relaxed">
       <div className="grid gap-x-10 gap-y-2 p-5 sm:grid-cols-2">
-        <Typed text={request.head} shown={head} caret={typing && body === 0} />
-        <Typed text={request.body} shown={body} caret={typing && body > 0} />
+        <Typed
+          text={request.head}
+          language="http"
+          shown={head}
+          caret={typing && body === 0}
+        />
+        <Typed
+          text={request.body}
+          language="json"
+          shown={body}
+          caret={typing && body > 0}
+        />
       </div>
       {/* The answer, there all along so the card keeps its size, fades in once it comes. */}
       <div
@@ -80,28 +91,59 @@ export function ApiDemo() {
           !answered && "opacity-0"
         )}
       >
-        <pre>{response.head}</pre>
-        <pre>{response.body}</pre>
+        <Typed text={response.head} language="http" />
+        <Typed text={response.body} language="json" />
       </div>
     </div>
   )
 }
 
-/** `text` with its first `shown` letters visible and the rest holding their place. */
+/** `text` in its language's colors, with its first `shown` letters visible (all by default) and
+ * the rest holding their place. */
 function Typed({
   text,
-  shown,
-  caret,
+  language,
+  shown = text.length,
+  caret = false,
 }: {
   text: string
-  shown: number
-  caret: boolean
+  language: string
+  shown?: number
+  caret?: boolean
 }) {
+  const lines = useHighlight(text, language)
+  const tokens: CodeToken[] = lines
+    ? lines.flatMap((line, index) =>
+        index > 0 ? [{ content: "\n" }, ...line] : line
+      )
+    : [{ content: text }]
+  // Where each token starts in the text, and the token the caret ends.
+  const starts = tokens.map((_, index) =>
+    tokens.slice(0, index).reduce((sum, token) => sum + token.content.length, 0)
+  )
+  const caretAt = tokens.findIndex(
+    (token, index) => starts[index] + token.content.length >= shown
+  )
+
   return (
     <pre>
-      {text.slice(0, shown)}
-      {caret && <Caret />}
-      <span className="invisible">{text.slice(shown)}</span>
+      {tokens.map((token, index) => {
+        const start = starts[index]
+        const visible = token.content.slice(0, Math.max(0, shown - start))
+        const hidden = token.content.slice(visible.length)
+
+        return (
+          <span
+            key={index}
+            style={token.style}
+            className="text-(--shiki-light) dark:text-(--shiki-dark)"
+          >
+            {visible}
+            {caret && index === caretAt && <Caret />}
+            {hidden && <span className="invisible">{hidden}</span>}
+          </span>
+        )
+      })}
     </pre>
   )
 }

@@ -34,6 +34,14 @@ export function today(now = new Date()) {
   return `${now.getFullYear()}-${month}-${day}`
 }
 
+/** The moment a day a date field gave ("2026-10-08") starts in the browser's time zone, as the
+ * API takes it; `after` days later (1: the moment it ends). */
+export function dayStart(day: string, after = 0) {
+  const [year, month, date] = day.split("-").map(Number)
+
+  return new Date(year, month - 1, date + after).toISOString()
+}
+
 /** 2400 cents in USD: "$24". */
 export function formatPrice(cents: number, currency: string, locale: string) {
   return new Intl.NumberFormat(locale, {
@@ -77,6 +85,29 @@ export function compactPrice(cents: number, currency: string, locale: string) {
     notation: "compact",
     maximumFractionDigits: 1,
   }).format(cents / 100)
+}
+
+/** US dollars as AI costs come (not cents): to the cent from $1 up, and to three significant
+ * digits below it, so one call's cost ("$0.00123") still shows. */
+export function formatUsd(value: number, locale: string) {
+  const small = value > 0 && value < 1
+
+  return new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency: "USD",
+    ...(small
+      ? { maximumSignificantDigits: 3 }
+      : { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+  }).format(value)
+}
+
+/** Seconds as the language writes them short ("75 sec", "75 s"). */
+export function formatSeconds(value: number, locale: string) {
+  return new Intl.NumberFormat(locale, {
+    style: "unit",
+    unit: "second",
+    unitDisplay: "short",
+  }).format(value)
 }
 
 /** A percentage (0 to 100) as the language writes it ("85 %" in French, "%85" in Turkish); "—"

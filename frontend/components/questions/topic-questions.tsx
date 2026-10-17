@@ -93,6 +93,7 @@ export function TopicQuestions({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
+        data-testid="manage-questions"
         render={<Button variant="outline" className="h-9 shrink-0 px-4" />}
       >
         {t("manage")}

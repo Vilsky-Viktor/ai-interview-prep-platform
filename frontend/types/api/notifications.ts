@@ -13,10 +13,32 @@ export interface paths {
     }
     /**
      * Get Feed
-     * @description The bell: the latest notifications, the user's own and their companies', and how many
-     *     came since they last opened it; `fresh` reads the companies again (right after joining).
+     * @description The bell: the latest notifications, the user's own, their companies' and everyone's
+     *     newer than their account, and how many came since they last opened it, in their language;
+     *     `fresh` reads the companies again (right after joining).
      */
     get: operations["get_feed_me_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/me/legal-changes": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Legal Changes
+     * @description The legal documents' new versions noticed and not yet in force that concern the user,
+     *     for the site's banner until they apply.
+     */
+    get: operations["legal_changes_me_legal_changes_get"]
     put?: never
     post?: never
     delete?: never
@@ -129,7 +151,7 @@ export interface paths {
      *     that they joined a company (their email); the Slack channels they
      *     connected stay with their companies, without their id, and each company is told they need
      *     reconnecting. The log of digests and reminders
-     *     sent to them goes too.
+     *     sent to them goes too, and their rows in bulk sends (legal notices, campaigns).
      */
     delete: operations["delete_user_internal_users__user_id__delete"]
     options?: never
@@ -336,9 +358,271 @@ export interface paths {
     put?: never
     /**
      * Send Notice
-     * @description Emails the change to the document's current version, from the next morning's run.
+     * @description Emails the change to the document's current version from the next sending hour, and puts
+     *     it in the bell.
      */
     post: operations["send_notice_superadmin_legal_notices__document__post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/campaigns": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * List Campaigns
+     * @description Newest first, with each sent one's counts.
+     */
+    get: operations["list_campaigns_superadmin_campaigns_get"]
+    put?: never
+    /** Create Campaign */
+    post: operations["create_campaign_superadmin_campaigns_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/campaigns/from-news/{news_id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Campaign From News
+     * @description A new product update with the news post's title, text and a button to it.
+     */
+    post: operations["campaign_from_news_superadmin_campaigns_from_news__news_id__post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/campaigns/{campaign_id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Get Campaign */
+    get: operations["get_campaign_superadmin_campaigns__campaign_id__get"]
+    /**
+     * Update Campaign
+     * @description Until it's sent; a changed English text is translated again.
+     */
+    put: operations["update_campaign_superadmin_campaigns__campaign_id__put"]
+    post?: never
+    /**
+     * Delete Campaign
+     * @description Only one not sent yet.
+     */
+    delete: operations["delete_campaign_superadmin_campaigns__campaign_id__delete"]
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/campaigns/{campaign_id}/texts/{language}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /**
+     * Set Campaign Texts
+     * @description One other language's own wording, until it's sent.
+     */
+    put: operations["set_campaign_texts_superadmin_campaigns__campaign_id__texts__language__put"]
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/campaigns/{campaign_id}/recipients": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Count Recipients */
+    get: operations["count_recipients_superadmin_campaigns__campaign_id__recipients_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/campaigns/{campaign_id}/preview": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Preview Campaign
+     * @description The email as a user in that language gets it.
+     */
+    get: operations["preview_campaign_superadmin_campaigns__campaign_id__preview_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/campaigns/{campaign_id}/test": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Send Test
+     * @description The email in that language to the superadmin's own address.
+     */
+    post: operations["send_test_superadmin_campaigns__campaign_id__test_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/campaigns/{campaign_id}/send": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Send Campaign
+     * @description Starts it at once; it can't be changed after. At most one of each kind a day.
+     */
+    post: operations["send_campaign_superadmin_campaigns__campaign_id__send_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/campaigns/{campaign_id}/stop": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Stop Campaign
+     * @description Its remaining recipients aren't sent it.
+     */
+    post: operations["stop_campaign_superadmin_campaigns__campaign_id__stop_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/suppressed/lookup": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Look Up */
+    post: operations["look_up_superadmin_suppressed_lookup_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/suppressed/remove": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Remove
+     * @description Safe to repeat.
+     */
+    post: operations["remove_superadmin_suppressed_remove_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/campaigns/{campaign_id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Campaign Source
+     * @description Its English texts and the languages it lacks; none once it's sent.
+     */
+    get: operations["get_campaign_source_internal_campaigns__campaign_id__get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/campaigns/{campaign_id}/translations": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /**
+     * Save Campaign Translations
+     * @description Safe to repeat; translations of an older text, or of a campaign sent or deleted since,
+     *     are dropped, and a language edited by hand keeps its wording.
+     */
+    put: operations["save_campaign_translations_internal_campaigns__campaign_id__translations_put"]
+    post?: never
     delete?: never
     options?: never
     head?: never
@@ -387,7 +671,7 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  "/internal/schedules/legal-notices": {
+  "/internal/schedules/bulk": {
     parameters: {
       query?: never
       header?: never
@@ -397,11 +681,11 @@ export interface paths {
     get?: never
     put?: never
     /**
-     * Legal
-     * @description Every minute for an hour each morning, from Cloud Scheduler: the legal notices asked for,
-     *     each going on where the last run stopped; nobody gets one twice.
+     * Bulk
+     * @description Every minute from 08:00 to 18:59 UTC, from Cloud Scheduler: legal notices and campaigns,
+     *     each run going on where the last one stopped; nobody gets one twice.
      */
-    post: operations["legal_internal_schedules_legal_notices_post"]
+    post: operations["bulk_internal_schedules_bulk_post"]
     delete?: never
     options?: never
     head?: never
@@ -412,6 +696,156 @@ export interface paths {
 export type webhooks = Record<string, never>
 export interface components {
   schemas: {
+    /** CampaignCounts */
+    CampaignCounts: {
+      /** Pending */
+      pending: number
+      /** Sent */
+      sent: number
+      /** Skipped */
+      skipped: number
+      /** Failed */
+      failed: number
+      /** Unsubscribed */
+      unsubscribed: number
+      /** Complained */
+      complained: number
+    }
+    /**
+     * CampaignIn
+     * @description A campaign as a superadmin writes it, in English: a product update or an offer, and the
+     *     page on the site its button opens.
+     */
+    CampaignIn: {
+      /** Subject */
+      subject: string
+      /** Text */
+      text: string
+      /** Button */
+      button?: string | null
+      /**
+       * Kind
+       * @enum {string}
+       */
+      kind: "updates" | "promotions"
+      /** Link */
+      link?: string | null
+    }
+    /** CampaignOut */
+    CampaignOut: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string
+      /**
+       * Kind
+       * @enum {string}
+       */
+      kind: "updates" | "promotions"
+      /** Subject */
+      subject: string
+      /**
+       * Created At
+       * Format: date-time
+       */
+      created_at: string
+      /** Sent At */
+      sent_at: string | null
+      /** Translated */
+      translated: boolean
+      /**
+       * Status
+       * @enum {string}
+       */
+      status: "draft" | "sending" | "sent" | "stopped"
+      counts: components["schemas"]["CampaignCounts"] | null
+      /** Link */
+      link: string | null
+      /** Texts */
+      texts: {
+        [key: string]: components["schemas"]["CampaignTexts"]
+      }
+    }
+    /**
+     * CampaignRowOut
+     * @description A campaign in the list: its English subject, whether every language has its texts, where
+     *     it stands (a draft, being sent, sent to everyone, or stopped) and once it's sent, its
+     *     counts.
+     */
+    CampaignRowOut: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string
+      /**
+       * Kind
+       * @enum {string}
+       */
+      kind: "updates" | "promotions"
+      /** Subject */
+      subject: string
+      /**
+       * Created At
+       * Format: date-time
+       */
+      created_at: string
+      /** Sent At */
+      sent_at: string | null
+      /** Translated */
+      translated: boolean
+      /**
+       * Status
+       * @enum {string}
+       */
+      status: "draft" | "sending" | "sent" | "stopped"
+      counts: components["schemas"]["CampaignCounts"] | null
+    }
+    /**
+     * CampaignSourceOut
+     * @description A campaign to translate (generation): its English texts and the languages it lacks.
+     */
+    CampaignSourceOut: {
+      /** Subject */
+      subject: string
+      /** Text */
+      text: string
+      /** Button */
+      button: string | null
+      /** Missing */
+      missing: string[]
+    }
+    /**
+     * CampaignTexts
+     * @description A campaign in one language: its subject (also the email's heading), its text (in Markdown:
+     *     the editor's bold, italic, links and lists) and its button's text.
+     */
+    CampaignTexts: {
+      /** Subject */
+      subject: string
+      /** Text */
+      text: string
+      /** Button */
+      button?: string | null
+    }
+    /**
+     * CampaignTranslationsIn
+     * @description Translations of the campaign's English texts (subject, text, button): saved only while it
+     *     still reads so and isn't sent.
+     */
+    CampaignTranslationsIn: {
+      /** Subject */
+      subject: string
+      /** Text */
+      text: string
+      /** Button */
+      button: string | null
+      /** Translations */
+      translations: {
+        [key: string]: components["schemas"]["CampaignTexts"]
+      }
+    }
     /**
      * CandidateOptOutIn
      * @description A superadmin stops a company's emails to the address, or lets them through again.
@@ -459,6 +893,16 @@ export interface components {
       /** Detail */
       detail?: components["schemas"]["ValidationError"][]
     }
+    /**
+     * LegalChangeOut
+     * @description A document's new version, noticed and applying from `version` (a day).
+     */
+    LegalChangeOut: {
+      /** Document */
+      document: string
+      /** Version */
+      version: string
+    }
     /** LegalNoticeOut */
     LegalNoticeOut: {
       /** Document */
@@ -504,6 +948,13 @@ export interface components {
        */
       created_at: string
     }
+    /** PreviewOut */
+    PreviewOut: {
+      /** Subject */
+      subject: string
+      /** Html */
+      html: string
+    }
     /**
      * PushBody
      * @description What Pub/Sub sends to a push endpoint.
@@ -532,6 +983,15 @@ export interface components {
       /** Publishtime */
       publishTime?: string | null
     }
+    /**
+     * RecipientsOut
+     * @description Who the campaign would reach now: users with its setting on, not suppressed, with an
+     *     address.
+     */
+    RecipientsOut: {
+      /** Count */
+      count: number
+    }
     /** SlackKindsIn */
     SlackKindsIn: {
       /** Kinds */
@@ -559,6 +1019,16 @@ export interface components {
     SlackStartOut: {
       /** Url */
       url: string
+    }
+    /**
+     * SuppressionOut
+     * @description The address's place on the suppression list; both None when it isn't on it.
+     */
+    SuppressionOut: {
+      /** Reason */
+      reason: string | null
+      /** Created At */
+      created_at: string | null
     }
     /**
      * UnsubscribeOut
@@ -646,6 +1116,26 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  legal_changes_me_legal_changes_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["LegalChangeOut"][]
         }
       }
     }
@@ -1146,6 +1636,591 @@ export interface operations {
       }
     }
   }
+  list_campaigns_superadmin_campaigns_get: {
+    parameters: {
+      query?: {
+        /** @description Number of items to skip */
+        offset?: number
+        /** @description Number of items to return, up to 100 */
+        limit?: number
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["CampaignRowOut"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  create_campaign_superadmin_campaigns_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["CampaignIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      201: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["CampaignOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  campaign_from_news_superadmin_campaigns_from_news__news_id__post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        news_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      201: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["CampaignOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_campaign_superadmin_campaigns__campaign_id__get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        campaign_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["CampaignOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  update_campaign_superadmin_campaigns__campaign_id__put: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        campaign_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["CampaignIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["CampaignOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  delete_campaign_superadmin_campaigns__campaign_id__delete: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        campaign_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  set_campaign_texts_superadmin_campaigns__campaign_id__texts__language__put: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        campaign_id: string
+        language:
+          | "en"
+          | "ru"
+          | "uk"
+          | "es"
+          | "pt"
+          | "de"
+          | "fr"
+          | "it"
+          | "pl"
+          | "nl"
+          | "tr"
+          | "ar"
+          | "he"
+          | "fa"
+          | "ja"
+          | "zh"
+          | "ko"
+          | "hi"
+          | "id"
+          | "th"
+          | "vi"
+          | "fil"
+          | "et"
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["CampaignTexts"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["CampaignOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  count_recipients_superadmin_campaigns__campaign_id__recipients_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        campaign_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["RecipientsOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  preview_campaign_superadmin_campaigns__campaign_id__preview_get: {
+    parameters: {
+      query?: {
+        language?:
+          | "en"
+          | "ru"
+          | "uk"
+          | "es"
+          | "pt"
+          | "de"
+          | "fr"
+          | "it"
+          | "pl"
+          | "nl"
+          | "tr"
+          | "ar"
+          | "he"
+          | "fa"
+          | "ja"
+          | "zh"
+          | "ko"
+          | "hi"
+          | "id"
+          | "th"
+          | "vi"
+          | "fil"
+          | "et"
+      }
+      header?: never
+      path: {
+        campaign_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["PreviewOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  send_test_superadmin_campaigns__campaign_id__test_post: {
+    parameters: {
+      query?: {
+        language?:
+          | "en"
+          | "ru"
+          | "uk"
+          | "es"
+          | "pt"
+          | "de"
+          | "fr"
+          | "it"
+          | "pl"
+          | "nl"
+          | "tr"
+          | "ar"
+          | "he"
+          | "fa"
+          | "ja"
+          | "zh"
+          | "ko"
+          | "hi"
+          | "id"
+          | "th"
+          | "vi"
+          | "fil"
+          | "et"
+      }
+      header?: never
+      path: {
+        campaign_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  send_campaign_superadmin_campaigns__campaign_id__send_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        campaign_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["CampaignOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  stop_campaign_superadmin_campaigns__campaign_id__stop_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        campaign_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["CampaignOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  look_up_superadmin_suppressed_lookup_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["UserEmailIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["SuppressionOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  remove_superadmin_suppressed_remove_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["UserEmailIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["SuppressionOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_campaign_source_internal_campaigns__campaign_id__get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        campaign_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["CampaignSourceOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  save_campaign_translations_internal_campaigns__campaign_id__translations_put: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        campaign_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["CampaignTranslationsIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
   digest_internal_schedules_digest_post: {
     parameters: {
       query?: never
@@ -1182,7 +2257,7 @@ export interface operations {
       }
     }
   }
-  legal_internal_schedules_legal_notices_post: {
+  bulk_internal_schedules_bulk_post: {
     parameters: {
       query?: never
       header?: never

@@ -12,10 +12,12 @@ import {
 } from "@/components/ui/tooltip"
 
 /** A button that is only an icon: its `label` names it for screen readers and shows on hover.
- * `render` makes it a link (an `<a>`) instead; `className` can make it smaller. */
+ * `render` makes it a link (an `<a>`) instead; `className` can make it smaller. `pressed` makes
+ * it a toggle (an editor's bold), shown darker while on. */
 export function IconButton({
   label,
   disabled,
+  pressed,
   onClick,
   render,
   className,
@@ -23,6 +25,7 @@ export function IconButton({
 }: {
   label: string
   disabled?: boolean
+  pressed?: boolean
   onClick?: () => void
   render?: ReactElement
   className?: string
@@ -37,9 +40,11 @@ export function IconButton({
             size="icon"
             className={cn(
               "size-12 shrink-0 text-muted-foreground hover:text-foreground",
+              pressed && "bg-muted text-foreground",
               className
             )}
             aria-label={label}
+            aria-pressed={pressed}
             disabled={disabled}
             onClick={onClick}
             render={render}

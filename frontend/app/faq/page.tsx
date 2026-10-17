@@ -5,6 +5,7 @@ import { JsonLd } from "@/components/json-ld"
 import { publicFetch } from "@/lib/server-api"
 import { pageMetadata } from "@/lib/site"
 import type { FaqItem } from "@/types/help"
+import { PageKey } from "@/components/page-key"
 
 export async function generateMetadata() {
   const t = await getTranslations("faq")
@@ -29,6 +30,7 @@ export default async function FaqPage() {
 
   return (
     <main className="mx-auto max-w-5xl space-y-10 px-6 py-12">
+      <PageKey page="faq" />
       {/* None without questions: an empty FAQPage is invalid. */}
       {items.length > 0 && <JsonLd data={structured} />}
       <header className="space-y-4">

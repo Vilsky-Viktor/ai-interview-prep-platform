@@ -1,4 +1,6 @@
-// The pages with an info button; each has its text under "pageHelp.<key>" in the messages.
+// Every page where the assistant's panel opens, by its guide's key (rounds serves each guide from
+// /help/pages/<key>; prepza_common's PAGE_KEYS lists the same). Each page registers its key, with
+// its info button (PageHelp) or PageKey; the admin zone's pages have none.
 export const PAGE_HELP_KEYS = [
   "landing",
   "companies",
@@ -15,6 +17,7 @@ export const PAGE_HELP_KEYS = [
   "templates",
   "template",
   "team",
+  "actions",
   "integrations",
   "ats",
   "slack",
@@ -25,6 +28,32 @@ export const PAGE_HELP_KEYS = [
   "billing",
   "topUp",
   "settings",
+  "join",
+  "connect",
+  "news",
+  "practice",
+  "practiceTest",
+  "practiceHistory",
+  "practiceRound",
+  "pricing",
+  "tests",
+  "test",
+  "aiInterviews",
+  "preEmploymentTesting",
+  "compare",
+  "comparison",
+  "guides",
+  "guide",
+  "faq",
+  "about",
+  "contact",
+  "apiDocs",
+  "accessibility",
+  "documents",
+  "terms",
+  "privacy",
+  "dpa",
+  "unsubscribe",
 ] as const
 
 // A company's tabs and an interview's tabs, each with its own text.
@@ -32,6 +61,7 @@ export const COMPANY_TAB_HELP = {
   interviews: "interviews",
   templates: "templates",
   members: "team",
+  actions: "actions",
   integrations: "integrations",
   brand: "brand",
   referrals: "referrals",

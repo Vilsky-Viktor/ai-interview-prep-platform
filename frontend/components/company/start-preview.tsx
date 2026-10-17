@@ -7,6 +7,7 @@ import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
+import { START_BUTTON } from "@/constants/start-page"
 
 /** The preview's "accept & start": a free run of the test as a candidate, kept out of the
  * candidate list; the player links back to the test it came from. */
@@ -40,7 +41,12 @@ export function StartPreview({
   }
 
   return (
-    <Button className="h-12 px-6 text-base" disabled={starting} onClick={start}>
+    <Button
+      className={START_BUTTON}
+      disabled={starting}
+      onClick={start}
+      data-testid="accept-start"
+    >
       {t("start")}
     </Button>
   )

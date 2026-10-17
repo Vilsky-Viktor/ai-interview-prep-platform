@@ -2,6 +2,7 @@ import { LinkView } from "@/components/company/link-view"
 import { PausedNotice } from "@/components/paused-notice"
 import { isPaused } from "@/lib/pause"
 import { translatedTitle } from "@/lib/site"
+import { START_PAGE } from "@/constants/start-page"
 
 export const generateMetadata = () => translatedTitle("invite", "title")
 
@@ -14,7 +15,7 @@ export default async function ApplyPage({
   const { token } = await params
 
   return (
-    <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-6 py-12">
+    <main className={START_PAGE}>
       <PausedNotice paused={await isPaused()} className="mb-10 w-full" />
       <LinkView token={token} />
     </main>

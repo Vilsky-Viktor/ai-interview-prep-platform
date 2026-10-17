@@ -5,6 +5,7 @@ import { VerifiedBadge } from "@/components/company/verified-badge"
 import { DemoLogo } from "@/components/landing/demo-logo"
 import { PdfIcon } from "@/components/pdf-icon"
 import { Wordmark } from "@/components/wordmark"
+import { Dot, DottedText } from "@/components/dot"
 import { DEMO_PASS_MARK } from "@/constants/landing"
 import { gradeTone } from "@/lib/grade-tone"
 import { formatPercent } from "@/lib/format"
@@ -37,13 +38,13 @@ export async function ReportPdfDemo({ role }: { role: string }) {
           <p className="text-xs text-muted-foreground">
             Acme
             <VerifiedBadge domain="acme.com" className="ms-1 size-3" />
-            {" · "}
+            <Dot />
             {t("candidateCount", { count: CANDIDATES.length })}
-            {" · "}
+            <Dot />
             {t("passMark", { mark: DEMO_PASS_MARK })}
           </p>
           <p className="font-heading text-lg font-medium tracking-tight">
-            {role}
+            <DottedText text={role} />
           </p>
         </div>
       </div>
@@ -67,10 +68,10 @@ export async function ReportPdfDemo({ role }: { role: string }) {
                   {candidate.email}
                 </p>
                 {signals.length > 0 && (
-                  <p className="flex flex-wrap gap-x-1.5 text-xs text-amber-600">
+                  <p className="flex flex-wrap text-xs text-amber-600">
                     {signals.map((signal, index) => (
                       <span key={index} className="whitespace-nowrap">
-                        {index > 0 && "· "}
+                        {index > 0 && <Dot />}
                         {signal}
                       </span>
                     ))}

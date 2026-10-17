@@ -48,7 +48,12 @@ export interface paths {
       path?: never
       cookie?: never
     }
-    get?: never
+    /**
+     * Candidate Hold
+     * @description Whether a candidate's credits are set aside, charged or given back, for the admin zone's
+     *     support tab; 404 when none were held.
+     */
+    get: operations["candidate_hold_internal_candidates_hold_get"]
     put?: never
     /**
      * Hold Candidate
@@ -210,6 +215,27 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/internal/companies/{company_id}/adjustments": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Adjust Company
+     * @description A superadmin adds or removes credits (companies checks who and logs it). Safe to repeat
+     *     with the same key; refused when it would take the available balance below zero.
+     */
+    post: operations["adjust_company_internal_companies__company_id__adjustments_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   "/internal/companies/{company_id}/invoice": {
     parameters: {
       query?: never
@@ -222,6 +248,48 @@ export interface paths {
      * @description The invoice of one of the company's top-ups; 404 for anyone else's transaction.
      */
     get: operations["company_invoice_internal_companies__company_id__invoice_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/purchases": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Buyer Purchases
+     * @description The company top-ups someone paid for, one per transaction, newest first, at most
+     *     MAX_BUYER_PURCHASES, for the admin zone's support tab.
+     */
+    get: operations["buyer_purchases_internal_purchases_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/purchases/{transaction_id}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Purchase Owner
+     * @description Whose wallet a top-up's Paddle transaction paid into, for the admin zone's support
+     *     search; 404 when no top-up has that transaction.
+     */
+    get: operations["purchase_owner_internal_purchases__transaction_id__get"]
     put?: never
     post?: never
     delete?: never
@@ -300,8 +368,8 @@ export interface paths {
     post?: never
     /**
      * Delete User
-     * @description The user's purchases for their companies stay for bookkeeping, without their id; any
-     *     automatic top-up paid with their card goes off.
+     * @description The user's purchases for their companies stay for bookkeeping, without their id, and so
+     *     do their AI costs and limit hits; any automatic top-up paid with their card goes off.
      */
     delete: operations["delete_user_internal_users__user_id__delete"]
     options?: never
@@ -320,7 +388,8 @@ export interface paths {
     put?: never
     /**
      * Export User
-     * @description What the user bought for their companies.
+     * @description What the user bought for their companies, and the automatic top-ups they turned on
+     *     (charged to their card once started).
      */
     post: operations["export_user_internal_users__user_id__export_post"]
     delete?: never
@@ -372,10 +441,211 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/superadmin/ai-costs": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Ai Costs
+     * @description What AI cost, all time or in one year or month, and why.
+     */
+    get: operations["get_ai_costs_superadmin_ai_costs_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/limit-hits": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Get Limit Hits */
+    get: operations["get_limit_hits_superadmin_limit_hits_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/ai-spend": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Ai Spend
+     * @description One company's or user's AI spend lately, for its support page.
+     */
+    get: operations["get_ai_spend_superadmin_ai_spend_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/limits": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Get Limits */
+    get: operations["get_limits_superadmin_limits_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/limits/changes": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Changes
+     * @description The latest changes, newest first.
+     */
+    get: operations["get_changes_superadmin_limits_changes_get"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/superadmin/limits/{name}": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    /**
+     * Set Limit
+     * @description A value out of the limit's bounds is refused (422).
+     */
+    put: operations["set_limit_superadmin_limits__name__put"]
+    post?: never
+    /** Reset Limit */
+    delete: operations["reset_limit_superadmin_limits__name__delete"]
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/internal/events": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Receive Event
+     * @description Pub/Sub pushes the services' records of AI calls and limit hits here.
+     */
+    post: operations["receive_event_internal_events_post"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
 }
 export type webhooks = Record<string, never>
 export interface components {
   schemas: {
+    /** ActionOut */
+    ActionOut: {
+      /** Spend */
+      spend: number
+      /** Calls */
+      calls: number
+      /** Action */
+      action: string
+      /** Units */
+      units: number
+      /** Unit Cost */
+      unit_cost: number
+      /** Paid Spend */
+      paid_spend: number
+      /** Unpaid Spend */
+      unpaid_spend: number
+    }
+    /**
+     * AdjustmentIn
+     * @description A superadmin's adjustment of a company's credits: `amount` adds (positive) or removes
+     *     (negative); `note` says why, as the company's history shows it; `key` makes a repeated
+     *     request count once.
+     */
+    AdjustmentIn: {
+      /** Amount */
+      amount: number
+      /** Note */
+      note: string
+      /**
+       * Key
+       * Format: uuid
+       */
+      key: string
+    }
+    /** AiCostsOut */
+    AiCostsOut: {
+      totals: components["schemas"]["TotalsOut"]
+      month: components["schemas"]["MonthOut"]
+      unpaid_today: components["schemas"]["UnpaidTodayOut"]
+      /** Categories */
+      categories: components["schemas"]["CategoryOut"][]
+      /** Actions */
+      actions: components["schemas"]["ActionOut"][]
+      /** Models */
+      models: components["schemas"]["ModelOut"][]
+      /** Companies */
+      companies: components["schemas"]["SpenderOut"][]
+      /** Users */
+      users: components["schemas"]["SpenderOut"][]
+      /** By Month */
+      by_month: boolean
+      /** Days */
+      days: components["schemas"]["DayOut"][]
+    }
+    /**
+     * AiSpendOut
+     * @description A company's or user's AI spend over the last SPEND_DAYS days, for its support page.
+     */
+    AiSpendOut: {
+      /** Spend */
+      spend: number
+      /** Calls */
+      calls: number
+      /** Days */
+      days: number
+    }
     /**
      * AutoTopUpIn
      * @description Which top-up to buy, and under which available balance (credits).
@@ -425,6 +695,25 @@ export interface components {
       candidates: number
     }
     /**
+     * BuyerPurchaseOut
+     * @description A top-up someone paid for into a company: `total` in minor units, tax included.
+     */
+    BuyerPurchaseOut: {
+      /** Transaction Id */
+      transaction_id: string
+      /** Company Id */
+      company_id: string
+      /** Total */
+      total: string
+      /** Currency */
+      currency: string
+      /**
+       * Created At
+       * Format: date-time
+       */
+      created_at: string
+    }
+    /**
      * CandidatePriceOut
      * @description A candidate's price when credits are bought in a top-up from this many dollars.
      */
@@ -462,6 +751,17 @@ export interface components {
       /** Products */
       products: components["schemas"]["TopUpOut"][]
     }
+    /** CategoryOut */
+    CategoryOut: {
+      /** Spend */
+      spend: number
+      /** Calls */
+      calls: number
+      /** Category */
+      category: string
+      /** Share */
+      share: number
+    }
     /**
      * CheckoutOut
      * @description The Paddle checkout to open: its price and the custom data to send with it.
@@ -473,6 +773,16 @@ export interface components {
       custom_data: {
         [key: string]: string
       }
+    }
+    /** DayOut */
+    DayOut: {
+      /**
+       * Day
+       * Format: date
+       */
+      day: string
+      /** Spend */
+      spend: number
     }
     /** HTTPValidationError */
     HTTPValidationError: {
@@ -510,6 +820,25 @@ export interface components {
       transaction_id: string | null
       /** Hold Key */
       hold_key: string | null
+      /** Note */
+      note?: string | null
+    }
+    /** HitterOut */
+    HitterOut: {
+      /** Id */
+      id: string
+      /** Name */
+      name: string | null
+      /** Hits */
+      hits: number
+    }
+    /**
+     * HoldOut
+     * @description Credits set aside for one piece of work: open, charged or released.
+     */
+    HoldOut: {
+      /** Status */
+      status: string
     }
     /**
      * InvoiceOut
@@ -518,6 +847,94 @@ export interface components {
     InvoiceOut: {
       /** Url */
       url: string
+    }
+    /** LimitChangeOut */
+    LimitChangeOut: {
+      /** Name */
+      name: string
+      /** Old Value */
+      old_value: number | null
+      /** New Value */
+      new_value: number | null
+      /** Changed By Email */
+      changed_by_email: string
+      /**
+       * Changed At
+       * Format: date-time
+       */
+      changed_at: string
+    }
+    /** LimitHitListsOut */
+    LimitHitListsOut: {
+      /** Ours */
+      ours: components["schemas"]["LimitHitsOut"][]
+      /** Providers */
+      providers: components["schemas"]["LimitHitsOut"][]
+    }
+    /** LimitHitsOut */
+    LimitHitsOut: {
+      /** Limit */
+      limit: string
+      /** Kind */
+      kind: string
+      /** Scope */
+      scope: string
+      /** Value */
+      value: number | null
+      /** Unit */
+      unit: string | null
+      /** Window */
+      window: number | null
+      /** Hits */
+      hits: number
+      /** Companies */
+      companies: components["schemas"]["HitterOut"][]
+      /** Users */
+      users: components["schemas"]["HitterOut"][]
+    }
+    /** LimitIn */
+    LimitIn: {
+      /** Value */
+      value: number
+    }
+    /** LimitOut */
+    LimitOut: {
+      /** Name */
+      name: string
+      /** Service */
+      service: string
+      /** Value */
+      value: number
+      /** Default */
+      default: number
+      /** Changed */
+      changed: boolean
+      /** Unit */
+      unit: string
+      /** Window */
+      window: number | null
+      /** Lowest */
+      lowest: number
+      /** Highest */
+      highest: number
+      /** Scope */
+      scope: string
+      /** Audience */
+      audience: string | null
+      /** Counted */
+      counted: boolean
+      /** Hits */
+      hits: number
+      unpaid?: components["schemas"]["LimitOut"] | null
+    }
+    /** LimitsOut */
+    LimitsOut: {
+      /** Limits */
+      limits: components["schemas"]["LimitOut"][]
+      /** Providers */
+      providers: components["schemas"]["ProviderLimitOut"][]
+      /** Hits Days */
+      hits_days: number
     }
     /** LowCompaniesOut */
     LowCompaniesOut: {
@@ -531,6 +948,32 @@ export interface components {
       /** Available */
       available: number
     }
+    /** ModelOut */
+    ModelOut: {
+      /** Spend */
+      spend: number
+      /** Calls */
+      calls: number
+      /** Input Tokens */
+      input_tokens: number
+      /** Cached Input Tokens */
+      cached_input_tokens: number
+      /** Output Tokens */
+      output_tokens: number
+      /** Model */
+      model: string
+      /** Cached Share */
+      cached_share: number
+    }
+    /** MonthOut */
+    MonthOut: {
+      /** Spend */
+      spend: number
+      /** Budget */
+      budget: number
+      /** Share */
+      share: number
+    }
     /** OwnersIn */
     OwnersIn: {
       /** Owner Ids */
@@ -540,6 +983,53 @@ export interface components {
     PaidOut: {
       /** Paid */
       paid: boolean
+    }
+    /** ProviderLimitOut */
+    ProviderLimitOut: {
+      /** Name */
+      name: string
+      /** Provider */
+      provider: string
+      /** Hits */
+      hits: number
+    }
+    /**
+     * PurchaseOwnerOut
+     * @description Whose wallet a top-up's transaction paid into.
+     */
+    PurchaseOwnerOut: {
+      /** Owner Type */
+      owner_type: string
+      /** Owner Id */
+      owner_id: string
+    }
+    /**
+     * PushBody
+     * @description What Pub/Sub sends to a push endpoint.
+     */
+    PushBody: {
+      message: components["schemas"]["PushMessage"]
+      /** Subscription */
+      subscription: string
+    }
+    /** PushMessage */
+    PushMessage: {
+      /**
+       * Data
+       * @default
+       */
+      data: string
+      /**
+       * Attributes
+       * @default {}
+       */
+      attributes: {
+        [key: string]: string
+      }
+      /** Messageid */
+      messageId: string
+      /** Publishtime */
+      publishTime?: string | null
     }
     /**
      * ReferralOut
@@ -567,6 +1057,19 @@ export interface components {
        * Format: date-time
        */
       rewarded_at: string
+      /** Credits */
+      credits: number
+    }
+    /** SpenderOut */
+    SpenderOut: {
+      /** Spend */
+      spend: number
+      /** Calls */
+      calls: number
+      /** Id */
+      id: string
+      /** Name */
+      name: string | null
     }
     /** StatsOut */
     StatsOut: {
@@ -606,6 +1109,28 @@ export interface components {
       candidate_cents: number
       /** Price Id */
       price_id: string | null
+    }
+    /** TotalsOut */
+    TotalsOut: {
+      /** Spend */
+      spend: number
+      /** Calls */
+      calls: number
+      /** Input Tokens */
+      input_tokens: number
+      /** Cached Input Tokens */
+      cached_input_tokens: number
+      /** Output Tokens */
+      output_tokens: number
+    }
+    /** UnpaidTodayOut */
+    UnpaidTodayOut: {
+      /** Spend */
+      spend: number
+      /** Cap */
+      cap: number
+      /** Share */
+      share: number
     }
     /** ValidationError */
     ValidationError: {
@@ -679,6 +1204,37 @@ export interface operations {
           "application/json": {
             [key: string]: unknown
           }
+        }
+      }
+    }
+  }
+  candidate_hold_internal_candidates_hold_get: {
+    parameters: {
+      query: {
+        key: string
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HoldOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
         }
       }
     }
@@ -970,6 +1526,39 @@ export interface operations {
       }
     }
   }
+  adjust_company_internal_companies__company_id__adjustments_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        company_id: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["AdjustmentIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
   company_invoice_internal_companies__company_id__invoice_get: {
     parameters: {
       query: {
@@ -990,6 +1579,68 @@ export interface operations {
         }
         content: {
           "application/json": components["schemas"]["InvoiceOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  buyer_purchases_internal_purchases_get: {
+    parameters: {
+      query: {
+        buyer_id: string
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["BuyerPurchaseOut"][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  purchase_owner_internal_purchases__transaction_id__get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        transaction_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["PurchaseOwnerOut"]
         }
       }
       /** @description Validation Error */
@@ -1267,6 +1918,237 @@ export interface operations {
         content: {
           "application/json": components["schemas"]["StatsOut"]
         }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_ai_costs_superadmin_ai_costs_get: {
+    parameters: {
+      query?: {
+        period?: string | null
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["AiCostsOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_limit_hits_superadmin_limit_hits_get: {
+    parameters: {
+      query?: {
+        period?: string | null
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["LimitHitListsOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_ai_spend_superadmin_ai_spend_get: {
+    parameters: {
+      query?: {
+        company_id?: string | null
+        user_id?: string | null
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["AiSpendOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  get_limits_superadmin_limits_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["LimitsOut"]
+        }
+      }
+    }
+  }
+  get_changes_superadmin_limits_changes_get: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["LimitChangeOut"][]
+        }
+      }
+    }
+  }
+  set_limit_superadmin_limits__name__put: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        name: string
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["LimitIn"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["LimitsOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  reset_limit_superadmin_limits__name__delete: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        name: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["LimitsOut"]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"]
+        }
+      }
+    }
+  }
+  receive_event_internal_events_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["PushBody"]
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
       }
       /** @description Validation Error */
       422: {

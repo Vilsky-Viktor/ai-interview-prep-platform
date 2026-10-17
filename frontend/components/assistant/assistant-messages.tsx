@@ -13,12 +13,13 @@ import type { ChatMessage } from "@/types/assistant"
 /** The conversation in the panel: questions, answers with what their tools found, the tools
  * at work while one is written, and a failed answer's error with Try again. With no messages
  * yet, a welcome for the user's stage: what the assistant helps with there, and questions to
- * tap. */
+ * tap, first "What can I do on this page?" on a page with a guide (`onPage`). */
 export function AssistantMessages({
   messages,
   streaming,
   signedIn,
   stage,
+  onPage,
   onAsk,
   onRetry,
   onNavigate,
@@ -30,6 +31,7 @@ export function AssistantMessages({
   // The user's stage ("signed_out" when signed out), which the welcome is about; null while
   // it's unknown.
   stage: string | null
+  onPage: boolean
   onAsk: (question: string) => void
   onRetry: () => void
   onNavigate: () => void
@@ -40,9 +42,13 @@ export function AssistantMessages({
 
   if (messages.length === 0) {
     const questions = (stage && WELCOME_QUESTIONS[stage]) || []
+    const asks = [
+      ...(onPage ? [t("pageQuestion")] : []),
+      ...questions.map((key) => t(`welcome.${stage}.questions.${key}`)),
+    ]
 
     return (
-      <div className="space-y-6 py-6">
+      <div className="space-y-6 py-6" data-testid={`welcome-${stage}`}>
         <div className="space-y-2">
           <h2 className="font-heading text-2xl font-medium tracking-tight">
             {signedIn ? t("emptyTitle") : t("emptyTitleFaq")}
@@ -52,14 +58,14 @@ export function AssistantMessages({
           </p>
         </div>
         <ul className="space-y-2">
-          {questions.map((key) => (
-            <li key={key}>
+          {asks.map((question) => (
+            <li key={question}>
               <Button
                 variant="outline"
                 className="h-auto w-full justify-start rounded-2xl px-4 py-3 text-start text-sm whitespace-normal normal-case"
-                onClick={() => onAsk(t(`welcome.${stage}.questions.${key}`))}
+                onClick={() => onAsk(question)}
               >
-                {t(`welcome.${stage}.questions.${key}`)}
+                {question}
               </Button>
             </li>
           ))}
@@ -81,6 +87,7 @@ export function AssistantMessages({
               <li
                 key={index}
                 className="ms-auto w-fit text-sm text-muted-foreground italic"
+                data-testid="message-removed"
               >
                 {t("removed")}
               </li>

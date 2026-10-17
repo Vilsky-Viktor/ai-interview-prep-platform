@@ -66,7 +66,11 @@ export function DeclineVerification({
     <Dialog open={open} onOpenChange={(next) => !sending && setOpen(next)}>
       <DialogTrigger
         render={
-          <Button variant="destructive" size="sm" className="h-8 px-3 text-sm" />
+          <Button
+            variant="destructive"
+            size="sm"
+            className="h-8 px-3 text-sm"
+          />
         }
       >
         {t("decline")}

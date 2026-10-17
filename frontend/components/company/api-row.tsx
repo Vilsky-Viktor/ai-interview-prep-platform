@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl"
 
 import { IntegrationRow } from "@/components/company/integration-row"
 import { Button } from "@/components/ui/button"
+import { DottedText } from "@/components/dot"
 import { API_DOCS_PATH } from "@/constants/api"
 import { INTEGRATION_ACTIONS } from "@/constants/lists"
 import type { ApiSettings } from "@/types/api-access"
@@ -26,12 +27,16 @@ export function ApiRow({
       logo={<CodeXmlIcon className="size-10 max-sm:size-6" />}
       name={t("name")}
       text={
-        inUse
-          ? t("counts", {
+        inUse ? (
+          <DottedText
+            text={t("counts", {
               keys: settings.keys.length,
               webhooks: settings.webhooks.length,
-            })
-          : t("rowText")
+            })}
+          />
+        ) : (
+          t("rowText")
+        )
       }
       actions={
         <span className={INTEGRATION_ACTIONS}>

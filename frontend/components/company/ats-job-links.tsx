@@ -167,6 +167,7 @@ function InvitedCount({ count }: { count: number }) {
           <span
             className="me-6 flex items-center gap-1.5 text-sm text-muted-foreground tabular-nums"
             aria-label={t("invitedCount", { count })}
+            data-testid="invited-count"
           />
         }
       >
@@ -209,7 +210,10 @@ function NotInvited({
   }
 
   return (
-    <span className="flex flex-col items-center gap-2">
+    <span
+      className="flex flex-col items-center gap-2"
+      data-testid="not-invited"
+    >
       <span className="text-sm text-destructive">
         {t("notInvitedCount", { count: link.not_invited })}
       </span>

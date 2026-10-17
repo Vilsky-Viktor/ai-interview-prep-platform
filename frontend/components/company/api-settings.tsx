@@ -4,19 +4,29 @@ import { useTranslations } from "next-intl"
 
 import { useLocalTime } from "@/hooks/use-local-time"
 import { CreateDialog, RemoveButton } from "@/components/company/api-dialogs"
+import {
+  EditPermissions,
+  PermissionTags,
+  PermissionTicks,
+} from "@/components/company/api-permissions"
+import { Dot } from "@/components/dot"
 import { WebhookActions } from "@/components/company/webhook-actions"
 import { MAX_KEY_NAME, MAX_WEBHOOK_URL } from "@/constants/api"
-import type { ApiKey, ApiWebhook } from "@/types/api-access"
+import type { ApiKey, ApiWebhook, PermissionOptions } from "@/types/api-access"
 import { LIST_BOX } from "@/constants/lists"
 
-/** "New key", in the title row while the keys tab is open: a name and when it expires, then
- * the key itself, shown this once. */
+/** "New key", in the title row while the keys tab is open: a name, when it expires and what it
+ * may do (starting from the api service's defaults), then the key itself, shown this once. */
 export function NewKey({
   companyId,
   expiries,
+  options,
+  defaults,
 }: {
   companyId: string
   expiries: string[]
+  options: PermissionOptions
+  defaults: string[]
 }) {
   const t = useTranslations("api")
 
@@ -37,6 +47,17 @@ export function NewKey({
           label: t(`expiries.${expiry}`),
         })),
         warning: { value: "never", text: t("neverWarning") },
+      }}
+      ticks={{
+        field: "permissions",
+        initial: defaults,
+        render: (ticked, onChange) => (
+          <PermissionTicks
+            options={options}
+            ticked={ticked}
+            onChange={onChange}
+          />
+        ),
       }}
       shown={{
         value: "key",
@@ -76,14 +97,17 @@ export function AddWebhook({ companyId }: { companyId: string }) {
 }
 
 /** The company's API keys, in one list like the team's: each with its name, first characters,
- * when it was made, when it expires and when it was last used. Owners and admins delete them. */
+ * when it was made, when it expires and when it was last used, and a line of its permissions.
+ * Owners and admins narrow their permissions and delete them. */
 export function ApiKeys({
   companyId,
   keys,
+  options,
   canEdit,
 }: {
   companyId: string
   keys: ApiKey[]
+  options: PermissionOptions
   canEdit: boolean
 }) {
   const t = useTranslations("api")
@@ -100,12 +124,10 @@ export function ApiKeys({
           title={key.name}
           details={
             <>
-              <span className="font-mono">{key.shown}…</span>
-              {" · "}
               <time suppressHydrationWarning>
                 {t("created", { date: localTime.date(key.created_at) })}
               </time>
-              {" · "}
+              <Dot />
               {key.expired ? (
                 <span className="text-destructive">{t("expired")}</span>
               ) : (
@@ -115,7 +137,7 @@ export function ApiKeys({
                     : t("neverExpires")}
                 </time>
               )}
-              {" · "}
+              <Dot />
               <time suppressHydrationWarning>
                 {key.last_used_at
                   ? t("lastUsed", {
@@ -125,15 +147,28 @@ export function ApiKeys({
               </time>
             </>
           }
+          more={
+            <PermissionTags
+              permissions={key.permissions}
+              groups={options.permission_groups}
+            />
+          }
           remove={
             canEdit && (
-              <RemoveButton
-                path={`${manage}/${key.id}?company_id=${companyId}`}
-                label={t("removeKey")}
-                title={t("removeKeyTitle")}
-                text={t("removeKeyText", { name: key.name })}
-                failed={t("removeFailed")}
-              />
+              <span className="flex shrink-0 items-center">
+                <EditPermissions
+                  companyId={companyId}
+                  apiKey={key}
+                  options={options}
+                />
+                <RemoveButton
+                  path={`${manage}/${key.id}?company_id=${companyId}`}
+                  label={t("removeKey")}
+                  title={t("removeKeyTitle")}
+                  text={t("removeKeyText", { name: key.name })}
+                  failed={t("removeFailed")}
+                />
+              </span>
             )
           }
         />
@@ -172,7 +207,7 @@ export function ApiWebhooks({
               </time>
               {(hook.stopped || hook.failing) && (
                 <>
-                  {" · "}
+                  <Dot />
                   <span className="text-destructive">
                     {t(hook.stopped ? "stopped" : "failing")}
                   </span>
@@ -229,18 +264,30 @@ function Section({
 function Row({
   title,
   details,
+  more,
   remove,
 }: {
   title: string
   details: React.ReactNode
+  // A column centred between the title and the actions, if any (a key's permissions); under the
+  // title on phones.
+  more?: React.ReactNode
   remove: React.ReactNode
 }) {
   return (
-    <li className="flex items-center justify-between gap-4 p-6">
-      <span className="min-w-0 space-y-1">
+    <li className="flex flex-wrap items-center gap-4 p-6 sm:flex-nowrap">
+      <span
+        className={`min-w-0 space-y-1 ${more ? "max-sm:flex-1" : "flex-1"}`}
+      >
         <span className="block text-lg font-medium break-all">{title}</span>
         <span className="block text-sm text-muted-foreground">{details}</span>
       </span>
+      {/* Centred in the room between the title and the actions. */}
+      {more && (
+        <span className="order-last w-full sm:order-none sm:flex sm:flex-1 sm:justify-center">
+          {more}
+        </span>
+      )}
       {remove}
     </li>
   )

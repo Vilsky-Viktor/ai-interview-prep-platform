@@ -1,12 +1,15 @@
 import { describe, expect, it } from "vitest"
 
 import {
+  dayStart,
   formatDate,
   formatDateTime,
   formatDay,
   formatPercent,
   formatPrice,
   formatPriceRange,
+  formatSeconds,
+  formatUsd,
   today,
 } from "@/lib/format"
 
@@ -50,6 +53,20 @@ describe("today", () => {
   })
 })
 
+describe("dayStart", () => {
+  it("is when a local day starts, or ends with one day after", () => {
+    expect(dayStart("2026-10-08")).toBe(new Date(2026, 9, 8).toISOString())
+    expect(dayStart("2026-10-31", 1)).toBe(new Date(2026, 10, 1).toISOString())
+  })
+
+  it("gives back the same day in a date field, as the action log's filter shows it", () => {
+    const end = new Date(dayStart("2026-12-31", 1)).getTime()
+
+    expect(today(new Date(dayStart("2026-12-31")))).toBe("2026-12-31")
+    expect(today(new Date(end - 1))).toBe("2026-12-31")
+  })
+})
+
 describe("formatPrice", () => {
   it("leaves out the cents of a whole amount", () => {
     expect(formatPrice(2400, "USD", "en")).toBe("$24")
@@ -85,5 +102,29 @@ describe("formatPercent", () => {
     expect(formatPercent(85, "fr")).toMatch(/^85\s%$/)
     expect(formatPercent(85, "de")).toMatch(/^85\s%$/)
     expect(formatPercent(null, "en")).toBe("—")
+  })
+})
+
+describe("formatSeconds", () => {
+  it("writes seconds short, as each language does", () => {
+    expect(plain(formatSeconds(75, "en"))).toBe("75 sec")
+    expect(plain(formatSeconds(75, "de"))).toBe("75 Sek.")
+    expect(plain(formatSeconds(60, "ru"))).toBe("60 с")
+  })
+})
+
+describe("formatUsd", () => {
+  it("shows dollars to the cent from one dollar up", () => {
+    expect(formatUsd(1234.5, "en")).toBe("$1,234.50")
+    expect(formatUsd(0, "en")).toBe("$0.00")
+  })
+
+  it("keeps three significant digits below a dollar, so one call's cost shows", () => {
+    expect(formatUsd(0.001234, "en")).toBe("$0.00123")
+    expect(formatUsd(0.5, "en")).toBe("$0.5")
+  })
+
+  it("follows the language's way of writing money", () => {
+    expect(plain(formatUsd(12.5, "de"))).toBe("12,50 $")
   })
 })

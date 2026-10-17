@@ -1,5 +1,6 @@
 import { translatedTitle } from "@/lib/site"
 import { UnsubscribeView } from "@/components/unsubscribe-view"
+import { PageKey } from "@/components/page-key"
 
 export const generateMetadata = () => translatedTitle("unsubscribe", "title")
 
@@ -13,6 +14,7 @@ export default async function UnsubscribePage({
 
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-6 py-12">
+      <PageKey page="unsubscribe" />
       <UnsubscribeView token={token ?? ""} />
     </main>
   )

@@ -37,3 +37,10 @@ export const MAX_BULK_TEXT_LENGTH = 50000
 // prepza_common MAX_NEWS_TITLE_LENGTH and MAX_NEWS_TEXT_LENGTH: a news post.
 export const MAX_NEWS_TITLE_LENGTH = 120
 export const MAX_NEWS_TEXT_LENGTH = 500
+// prepza_common MAX_CAMPAIGN_SUBJECT_LENGTH, MAX_CAMPAIGN_TEXT_LENGTH and
+// MAX_CAMPAIGN_BUTTON_LENGTH: a campaign email.
+export const MAX_CAMPAIGN_SUBJECT_LENGTH = 120
+export const MAX_CAMPAIGN_TEXT_LENGTH = 2000
+export const MAX_CAMPAIGN_BUTTON_LENGTH = 40
+// billing MAX_ADJUSTMENT_NOTE: the reason a superadmin gives for adjusting credits.
+export const MAX_ADJUSTMENT_NOTE = 200

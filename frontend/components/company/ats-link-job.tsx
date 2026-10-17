@@ -182,7 +182,10 @@ export function LinkJob({
 
   return (
     <Dialog open={open} onOpenChange={openDialog}>
-      <DialogTrigger render={<Button className="h-12 px-6 text-base" />}>
+      <DialogTrigger
+        data-testid="link-job"
+        render={<Button className="h-12 px-6 text-base" />}
+      >
         {t("linkJob")}
       </DialogTrigger>
       <DialogContent showCloseButton={false} className="sm:max-w-2xl">

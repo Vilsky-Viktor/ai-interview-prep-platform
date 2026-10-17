@@ -23,7 +23,9 @@ export function NoName({ hint = "view" }: { hint?: keyof typeof HINTS }) {
 
   return (
     <Tooltip>
-      <TooltipTrigger render={<span />}>{t("noName")}</TooltipTrigger>
+      <TooltipTrigger render={<span data-testid="no-name" />}>
+        {t("noName")}
+      </TooltipTrigger>
       <TooltipContent>{t(HINTS[hint])}</TooltipContent>
     </Tooltip>
   )

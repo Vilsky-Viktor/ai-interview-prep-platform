@@ -1,6 +1,7 @@
 import { MinusIcon } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 import { cn } from "cn"
+import { WARNING_TONE } from "@/constants/tones"
 
 /** What the candidate's browser and timing showed; counts above zero stand out. */
 export async function IntegrityLine({
@@ -23,11 +24,7 @@ export async function IntegrityLine({
           {index > 0 && (
             <MinusIcon aria-hidden className="size-3.5 text-foreground" />
           )}
-          <span
-            className={cn(
-              counts[index] > 0 && "text-amber-600 dark:text-amber-400"
-            )}
-          >
+          <span className={cn(counts[index] > 0 && WARNING_TONE)}>
             {signal}
           </span>
         </span>

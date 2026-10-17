@@ -42,6 +42,7 @@ export function UseTemplate({
       className="h-10 shrink-0 px-5 text-base"
       disabled={busy}
       onClick={use}
+      data-testid="use-template"
     >
       {busy ? t("using") : t("use")}
     </Button>

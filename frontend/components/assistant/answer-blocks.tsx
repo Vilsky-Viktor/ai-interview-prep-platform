@@ -20,6 +20,7 @@ import { buttonVariants } from "@/components/ui/button"
 import { PAGE_LABELS } from "@/constants/assistant"
 import { answerParts, linkPage } from "@/lib/assistant"
 import type { AssistantBlock } from "@/types/assistant"
+import { WARNING_TONE } from "@/constants/tones"
 
 type Item = Record<string, unknown>
 
@@ -52,7 +53,7 @@ function CreditsItem({ item }: { item: Item }) {
         <BalanceTooltip
           className={cn(
             "font-medium text-foreground tabular-nums",
-            Boolean(item.low) && "text-amber-600 dark:text-amber-400"
+            Boolean(item.low) && WARNING_TONE
           )}
           shown={available}
           balance={available}

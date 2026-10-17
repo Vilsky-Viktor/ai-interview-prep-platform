@@ -49,11 +49,11 @@ export function LegalNotices({ initial }: { initial: LegalNotice[] }) {
           </span>
         </span>
       </div>
-      <ul className="divide-y">
+      <ul className="divide-y" data-testid="legal-notices">
         {notices.map((notice) => (
           <li
             key={notice.document}
-            className="flex flex-wrap items-center justify-between gap-3 py-3 ps-11"
+            className="flex flex-wrap items-center justify-between gap-3 py-5"
           >
             <span className="min-w-0 space-y-0.5">
               <span className="block">{name(notice)}</span>

@@ -83,7 +83,12 @@ export function CandidateActions({
   return (
     <div className="flex items-center gap-2">
       {canResend && (
-        <Button variant="outline" disabled={busy} onClick={resend}>
+        <Button
+          variant="outline"
+          disabled={busy}
+          onClick={resend}
+          data-testid="resend-invite"
+        >
           {t("resend")}
         </Button>
       )}

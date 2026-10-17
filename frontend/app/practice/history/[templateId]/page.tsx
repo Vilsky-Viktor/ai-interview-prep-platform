@@ -12,6 +12,7 @@ import { translatedTitle } from "@/lib/site"
 import type { PracticeRoundSummary } from "@/types/round"
 import type { Template } from "@/types/superadmin"
 import { PAGE_SIZE } from "@/constants/lists"
+import { PageKey } from "@/components/page-key"
 
 export const generateMetadata = () => translatedTitle("practice", "history")
 
@@ -28,6 +29,7 @@ export default async function PracticeHistoryPage({
   if (!(await cookies()).has(TOKEN_COOKIE)) {
     return (
       <main className="mx-auto max-w-5xl px-6 py-12">
+        <PageKey page="practiceHistory" />
         <SignInPrompt />
       </main>
     )
@@ -42,6 +44,7 @@ export default async function PracticeHistoryPage({
 
   return (
     <main className="mx-auto max-w-5xl space-y-8 px-6 py-12">
+      <PageKey page="practiceHistory" />
       <PageHeader
         back={
           <BackLink href={`/practice/${templateId}`}>{t("title")}</BackLink>

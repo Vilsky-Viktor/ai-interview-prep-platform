@@ -1,5 +1,6 @@
 import { translatedTitle } from "@/lib/site"
 import { AdminInvite } from "@/components/company/admin-invite"
+import { PageKey } from "@/components/page-key"
 
 export const generateMetadata = () => translatedTitle("members", "inviteTitle")
 
@@ -12,6 +13,7 @@ export default async function JoinPage({
 
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-6 py-12">
+      <PageKey page="join" />
       <AdminInvite token={token} />
     </main>
   )

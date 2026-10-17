@@ -21,3 +21,6 @@ export const CHATGPT_DEVELOPER_PATH = [
 ]
 export const CHATGPT_CREATE = "Create"
 export const CHATGPT_AUTH = "OAuth"
+
+// The developer docs' MCP tab: other AI apps and one's own agents.
+export const MCP_DOCS_PATH = "/api-docs?tab=mcp"

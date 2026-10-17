@@ -6,6 +6,7 @@ import { IntegrityLine } from "@/components/company/integrity-line"
 import { PassStatus } from "@/components/company/pass-status"
 import { VerifiedBadge } from "@/components/company/verified-badge"
 import { Wordmark } from "@/components/wordmark"
+import { Dot } from "@/components/dot"
 import { REPORT_ID } from "@/constants/report"
 import { gradeTone } from "@/lib/grade-tone"
 import type { CandidateReportData } from "@/types/company"
@@ -51,7 +52,12 @@ export async function CandidateReport({
                 className="ms-1 size-4"
               />
             )}
-            {title && ` · ${title}`}
+            {title && (
+              <>
+                <Dot />
+                {title}
+              </>
+            )}
           </p>
           <h1 className="font-heading text-2xl font-medium tracking-tight break-all">
             {email}

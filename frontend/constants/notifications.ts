@@ -6,7 +6,9 @@ import {
   FlagIcon,
   MailWarningIcon,
   PencilOffIcon,
+  NewspaperIcon,
   PackageCheckIcon,
+  ScaleIcon,
   SparklesIcon,
   UnplugIcon,
   UserCheckIcon,
@@ -45,7 +47,13 @@ export const NOTIFICATION_LOOKS: Record<
   webhook_stopped: { icon: UnplugIcon, alert: true },
   member_joined: { icon: UserPlusIcon, alert: false },
   ownership_received: { icon: CrownIcon, alert: false },
+  news: { icon: NewspaperIcon, alert: false },
+  legal_terms: { icon: ScaleIcon, alert: false },
+  legal_privacy: { icon: ScaleIcon, alert: false },
+  legal_dpa: { icon: ScaleIcon, alert: false },
 }
 // Sent on the window when the user joins a company: the bell reconnects with their companies
 // read again, so it hears the new one at once.
 export const COMPANIES_CHANGED = "prepza:companies-changed"
+// A closed legal banner stays closed in this browser, for that document's version.
+export const LEGAL_BANNER_KEY = "prepza:legal-banner:{document}:{version}"

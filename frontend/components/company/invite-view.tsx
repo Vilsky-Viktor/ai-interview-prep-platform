@@ -16,6 +16,7 @@ import { refreshVerification, signInAsGuest } from "@/lib/auth"
 import { useBrandColors } from "@/hooks/use-brand-colors"
 import { useLinkData } from "@/hooks/use-link-data"
 import type { InviteView as Invite, SessionSummary } from "@/types/company"
+import { START_BUTTON } from "@/constants/start-page"
 
 /** The invitation. Embedded in a company's site, `onStarted` opens the interview in place
  * instead of going to its page. */
@@ -117,19 +118,16 @@ export function InviteView({
       verifiedDomain={invite.verified_domain}
       title={invite.title}
       questionSeconds={invite.question_seconds}
+      totalMinutes={invite.total_minutes}
       finished={invite.status === "finished"}
       action={
         // A guest's link is all they need; anyone else signs in with the invited email.
         !invite.guest && !user ? (
-          <Button className="h-12 px-6 text-base" onClick={() => signIn()}>
+          <Button className={START_BUTTON} onClick={() => signIn()}>
             {t("signInToStart")}
           </Button>
         ) : invite.guest || matches ? (
-          <Button
-            className="h-12 px-6 text-base"
-            disabled={starting}
-            onClick={start}
-          >
+          <Button className={START_BUTTON} disabled={starting} onClick={start}>
             {invite.status === "in_process" ? t("continue") : t("start")}
           </Button>
         ) : (

@@ -26,7 +26,7 @@ export function RenameCompanyDialog({
   onOpenChange,
   onRenamed,
 }: {
-  company: SuperadminCompany
+  company: Pick<SuperadminCompany, "id" | "name">
   open: boolean
   onOpenChange: (open: boolean) => void
   onRenamed: () => void

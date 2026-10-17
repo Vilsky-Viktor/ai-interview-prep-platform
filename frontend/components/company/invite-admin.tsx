@@ -63,7 +63,10 @@ export function InviteAdmin({ companyId }: { companyId: string }) {
 
   return (
     <Dialog open={open} onOpenChange={(next) => !sending && setOpen(next)}>
-      <DialogTrigger render={<Button className="h-12 px-6 text-base" />}>
+      <DialogTrigger
+        data-testid="add-member"
+        render={<Button className="h-12 px-6 text-base" />}
+      >
         {t("addMember")}
       </DialogTrigger>
       <DialogContent showCloseButton={false} className="sm:max-w-lg">

@@ -4,6 +4,7 @@ import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 
 import { LocalizedLink } from "@/components/localized-link"
+import { MarkdownCode } from "@/components/markdown-code"
 
 // The site's text styles for each Markdown element, as on the legal pages. Headings keep their
 // capitals (names such as TestGorilla or EU), unlike the site's lowercase headings.
@@ -56,6 +57,7 @@ const ELEMENTS: ComponentProps<typeof ReactMarkdown>["components"] = {
         {children}
       </a>
     ),
+  pre: ({ children }) => <MarkdownCode>{children}</MarkdownCode>,
   table: ({ children }) => (
     <div className="overflow-x-auto rounded-2xl border">
       <table className="w-full text-sm">{children}</table>

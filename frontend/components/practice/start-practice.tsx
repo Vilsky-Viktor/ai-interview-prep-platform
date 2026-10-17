@@ -47,7 +47,12 @@ export function StartPractice({
   }
 
   return (
-    <Button className="h-12 px-6 text-base" disabled={starting} onClick={start}>
+    <Button
+      className="h-12 px-6 text-base"
+      disabled={starting}
+      data-testid="start-practice"
+      onClick={start}
+    >
       {label}
     </Button>
   )

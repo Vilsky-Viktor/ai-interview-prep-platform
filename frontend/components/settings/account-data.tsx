@@ -41,6 +41,7 @@ export function AccountData() {
       <Button
         variant="outline"
         className="h-10 px-5 text-destructive hover:text-destructive"
+        data-testid="delete-account"
         onClick={() => setDeleting(true)}
       >
         <Trash2Icon />

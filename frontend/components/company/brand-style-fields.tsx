@@ -25,7 +25,7 @@ export function BrandStyleFields({
 
   return (
     // The font, then the roundings on their own line.
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6" data-testid="brand-style">
       <PillSelect
         label={t("font")}
         value={look.font}

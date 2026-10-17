@@ -35,7 +35,7 @@ export function PanelHeader({
 
   return (
     <div className="flex h-14 shrink-0 items-center gap-1 border-b px-4">
-      <div className="min-w-0 flex-1">
+      <div className="min-w-0 flex-1" data-testid="assistant-company">
         {companies.length === 0 ? (
           <p className="truncate font-heading text-lg font-medium">{title}</p>
         ) : (
@@ -60,6 +60,7 @@ export function PanelHeader({
         size="icon"
         className="rounded-full"
         aria-label={t("newChat")}
+        data-testid="assistant-new-chat"
         onClick={onNewChat}
       >
         <SquarePenIcon className="size-5" />
@@ -70,6 +71,7 @@ export function PanelHeader({
           size="icon"
           className="rounded-full"
           aria-label={t("history")}
+          data-testid="assistant-history"
           aria-pressed={history}
           onClick={onHistory}
         >
@@ -83,6 +85,7 @@ export function PanelHeader({
             size="icon"
             className="rounded-full"
             aria-label={common("close")}
+            data-testid="assistant-close"
           />
         }
       >

@@ -11,6 +11,7 @@ import { JsonLd } from "@/components/json-ld"
 import { FOUNDER } from "@/constants/about"
 import { pageMetadata, siteUrl } from "@/lib/site"
 import { personData } from "@/lib/structured-data"
+import { PageKey } from "@/components/page-key"
 
 export async function generateMetadata() {
   const t = await getTranslations("about")
@@ -23,6 +24,7 @@ export default async function AboutPage() {
 
   return (
     <main className="mx-auto max-w-5xl space-y-16 px-6 py-12">
+      <PageKey page="about" />
       <JsonLd data={personData(siteUrl())} />
       <header className="space-y-4">
         <h1 className="font-heading text-4xl font-medium tracking-tight">

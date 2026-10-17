@@ -70,6 +70,7 @@ export default async function CompanyTemplatesPage({
         declineReason={company.decline_reason ?? null}
         current="templates"
         canEdit={company.can_edit}
+        canSeeActions={company.can_see_actions}
       />
       {/* Templates are generic; an interview from the job description fits the role closer. */}
       <div className="flex items-center gap-4 rounded-2xl bg-muted p-5 text-base">

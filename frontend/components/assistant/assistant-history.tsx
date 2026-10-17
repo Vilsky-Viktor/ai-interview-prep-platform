@@ -8,6 +8,7 @@ import { toast } from "sonner"
 import { useLocalTime } from "@/hooks/use-local-time"
 import { ConfirmDialog } from "@/components/confirm-dialog"
 import { Button } from "@/components/ui/button"
+import { Dot } from "@/components/dot"
 import {
   Tooltip,
   TooltipContent,
@@ -105,7 +106,10 @@ export function AssistantHistory({
                     {localTime.date(item.updated_at)}
                   </time>
                   {item.company_id && companyNames[item.company_id] && (
-                    <> · {companyNames[item.company_id]}</>
+                    <>
+                      <Dot />
+                      {companyNames[item.company_id]}
+                    </>
                   )}
                 </span>
               </TooltipTrigger>

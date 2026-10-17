@@ -104,22 +104,35 @@ export function descriptionTabs(text: string): Record<string, string> {
 /** A description's sections: its text up to the first "## " title (title null), then each
  * title with the blocks under it. A block is a paragraph, numbered steps when every line
  * starts a step ("1. ", "2. ") or goes on with one (indented), or code between "```" lines, kept
- * as written; text comes as text, bold, code and link pieces ("**", "`", "[text](href)"). */
+ * as written, with its language ("```python"; blocks that follow each other are one example in
+ * several languages); text comes as text, bold, code and link pieces ("**", "`", "[text](href)"). */
 export function richText(text: string) {
   const sections: {
     title: string | null
-    blocks: { steps: Pieces[] | null; pieces: Pieces; code?: string }[]
+    blocks: {
+      steps: Pieces[] | null
+      pieces: Pieces
+      // One example in its languages: code blocks that follow each other.
+      code?: { code: string; language?: string }[]
+    }[]
   }[] = [{ title: null, blocks: [] }]
 
-  for (const block of text.split(/\n\s*\n/)) {
+  for (const block of blocksOf(text)) {
     const lines = block.split("\n")
 
     if (block.startsWith("```")) {
-      sections[sections.length - 1].blocks.push({
-        steps: null,
-        pieces: [],
+      const blocks = sections[sections.length - 1].blocks
+      const variant = {
         code: lines.slice(1, -1).join("\n"),
-      })
+        language: lines[0].slice(3).trim() || undefined,
+      }
+      const previous = blocks[blocks.length - 1]
+
+      if (previous?.code) {
+        previous.code.push(variant)
+      } else {
+        blocks.push({ steps: null, pieces: [], code: [variant] })
+      }
     } else if (block.startsWith("## ")) {
       sections.push({ title: block.slice(3).trim(), blocks: [] })
     } else if (lines.every((line) => STEP.test(line) || /^\s/.test(line))) {
@@ -138,6 +151,16 @@ export function richText(text: string) {
   }
 
   return sections.filter((section) => section.title || section.blocks.length)
+}
+
+/** The text's blocks, split at blank lines, but each code fence whole, blank lines and all. */
+function blocksOf(text: string) {
+  return text
+    .split(/^(```[^\n]*\n[\s\S]*?\n```)$/m)
+    .flatMap((chunk) =>
+      chunk.startsWith("```") ? [chunk] : chunk.split(/\n\s*\n/)
+    )
+    .filter((block) => block.trim())
 }
 
 function pieces(paragraph: string) {

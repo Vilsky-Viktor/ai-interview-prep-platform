@@ -8,6 +8,7 @@ import { RefreshOnFocus } from "@/components/billing/refresh-on-focus"
 import { TopUpDialog } from "@/components/billing/top-up-dialog"
 import { useCountUp } from "@/hooks/use-count-up"
 import type { Catalog } from "@/types/billing"
+import { WARNING_TONE } from "@/constants/tones"
 
 /** The company's credits for candidates, with a top-up next to them, in the page header.
  * Without `canEdit` (a viewer) only the balance shows. */
@@ -36,7 +37,7 @@ export function CompanyCredits({
         className={cn(
           "font-medium text-foreground tabular-nums transition-colors duration-500",
           rising && "text-primary",
-          low && "text-amber-600 dark:text-amber-400"
+          low && WARNING_TONE
         )}
         note={low ? t("creditsLow") : undefined}
         shown={shown}

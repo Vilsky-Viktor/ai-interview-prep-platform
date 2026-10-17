@@ -17,6 +17,7 @@ export function InviteIntro({
   verifiedDomain,
   title,
   questionSeconds,
+  totalMinutes,
   finished,
   viaLink = false,
   action,
@@ -28,6 +29,8 @@ export function InviteIntro({
   verifiedDomain?: string | null
   title: string | null
   questionSeconds: number
+  // The whole interview at that pace, in minutes; left out while it isn't known.
+  totalMinutes?: number | null
   finished: boolean
   // Opened from the test's shareable link: their own link comes by email, and extra time needs
   // a personal invite.
@@ -38,22 +41,17 @@ export function InviteIntro({
 
   const header = (
     <div className="space-y-4">
-      {/* The logo, with who invited them on its right (under it, on phones), centered together. */}
+      {/* The logo, with who invited them under it, centered together. */}
       {company && (
-        <div className="flex items-center justify-center gap-4 max-sm:flex-col">
+        <div className="flex flex-col items-center justify-center gap-4 pb-3">
           {logoUrl && (
             <CompanyLogo
               url={logoUrl}
               name={company}
-              className="h-20 w-auto max-w-40 shrink-0 rounded-2xl object-contain"
+              className="h-28 w-auto max-w-56 shrink-0 rounded-3xl object-contain"
             />
           )}
-          <p
-            className={cn(
-              "text-base text-muted-foreground",
-              logoUrl && "text-start max-sm:text-center"
-            )}
-          >
+          <p className="text-base text-muted-foreground">
             {t.rich("invitedYou", {
               company,
               b: (chunks) => (
@@ -100,23 +98,36 @@ export function InviteIntro({
   // The test and its start on the left, the rules on the right; stacked on phones, the start
   // after the rules.
   return (
-    <div className="grid w-full items-center gap-10 max-md:text-center md:grid-cols-2 md:gap-16">
+    // From md up the grid fills the screen (these pages have no header), so the rules can run its
+    // full height.
+    <div className="grid w-full items-center gap-10 max-md:text-center md:min-h-dvh md:grid-cols-[5fr_6fr] md:gap-16">
       <div className="space-y-8 text-center max-md:contents">
         {header}
-        <p className="text-base text-muted-foreground">
-          {t("timePerQuestion")}
-          <span className="block">
-            <span className="text-3xl font-medium text-foreground tabular-nums">
-              {questionSeconds}
-            </span>{" "}
-            {t("secondsUnit")}
-          </span>
-        </p>
+        {/* The time per question and, when known, the whole interview's, side by side. */}
+        <div className="flex justify-center gap-12">
+          <TimeFact
+            label={t("timePerQuestion")}
+            value={questionSeconds}
+            unit={t("secondsUnit")}
+          />
+          {totalMinutes ? (
+            <TimeFact
+              label={t("wholeInterview")}
+              value={totalMinutes}
+              unit={t("minutesUnit")}
+              testId="total-minutes"
+            />
+          ) : null}
+        </div>
         <div className="max-md:order-last">{action}</div>
       </div>
       {/* The rules in a gray card, numbered in the brand color; on phones it spans the screen,
-          with square corners. */}
-      <ol className="-mx-6 space-y-4 bg-muted p-8 text-start text-base text-muted-foreground sm:mx-0 sm:rounded-2xl sm:p-10">
+          with square corners. Beside the start (md up) it runs the screen's full height, square,
+          scrolling inside when the rules don't fit. */}
+      <ol
+        data-testid="invite-rules"
+        className="-mx-6 space-y-4 bg-muted p-8 text-start text-base text-muted-foreground sm:mx-0 sm:rounded-2xl sm:p-10 md:flex md:max-h-dvh md:flex-col md:self-stretch md:overflow-y-auto md:rounded-none md:[&>li:first-child]:mt-auto md:[&>li:last-child]:mb-auto"
+      >
         {[
           t("pickOne"),
           t("changePick"),
@@ -152,5 +163,30 @@ export function InviteIntro({
         ))}
       </ol>
     </div>
+  )
+}
+
+/** One time before the start: its label over a large number and its unit. */
+function TimeFact({
+  label,
+  value,
+  unit,
+  testId,
+}: {
+  label: string
+  value: number
+  unit: string
+  testId?: string
+}) {
+  return (
+    <p className="text-base text-muted-foreground" data-testid={testId}>
+      <span className="text-sm">{label}</span>
+      <span className="block">
+        <span className="text-3xl font-medium text-foreground tabular-nums">
+          {value}
+        </span>{" "}
+        {unit}
+      </span>
+    </p>
   )
 }

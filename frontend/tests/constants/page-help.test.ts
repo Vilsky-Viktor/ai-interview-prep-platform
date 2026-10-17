@@ -1,21 +1,65 @@
-import { readdirSync, readFileSync } from "node:fs"
+import { existsSync, readdirSync, readFileSync } from "node:fs"
+import { dirname, join, relative } from "node:path"
 import { describe, expect, it } from "vitest"
 
+import { COMPANY_INTERVIEW_PAGE, TIMED_PAGE } from "@/constants/layout"
 import {
   COMPANY_TAB_HELP,
   INTERVIEW_TAB_HELP,
   PAGE_HELP_KEYS,
 } from "@/constants/page-help"
 
-type Help = { title: string; text: string; actions: string[]; tips: string[] }
-
-const messagesDir = new URL("../../messages/", import.meta.url)
-const helpOf = (code: string) =>
-  JSON.parse(readFileSync(new URL(`${code}.json`, messagesDir), "utf8"))
-    .pageHelp as Record<string, Help | string>
-const locales = readdirSync(messagesDir).map((name) =>
+const root = new URL("../../", import.meta.url).pathname
+const read = (path: string) => readFileSync(join(root, path), "utf8")
+const locales = readdirSync(join(root, "messages")).map((name) =>
   name.replace(".json", "")
 )
+
+// What registers a page's key for the assistant, and the shared component that does it for the
+// pages using it (each of which must register itself).
+const REGISTERS: [RegExp, string][] = [
+  [/<PageHelp\b/, "components/page-help.tsx"],
+  [/<PageKey\b/, "components/page-key.tsx"],
+  [/\bhelp=/, "components/back-link.tsx"],
+  [/<CompanyHeader\b/, "components/company/company-header.tsx"],
+  [/<LegalPage\b/, "components/legal-page.tsx"],
+  [
+    /\b(categoryRoute|hubArticleRoute)\(/,
+    "components/content/content-article.tsx",
+  ],
+  [/<GenerationView\b/, "components/generation/generation-view.tsx"],
+  [/<GenerationProgress\b/, "components/generation/generation-progress.tsx"],
+]
+
+/** Every page file under app/, as its route ("/companies/[companyId]/billing"). */
+function pages(dir = "app"): string[] {
+  return readdirSync(join(root, dir), { withFileTypes: true }).flatMap(
+    (entry) => {
+      const path = join(dir, entry.name)
+
+      if (entry.isDirectory()) {
+        return pages(path)
+      }
+
+      return entry.name === "page.tsx" ? [path] : []
+    }
+  )
+}
+
+/** The page's file and the layouts above it, which may register for it. */
+function sources(page: string) {
+  const files = [page]
+
+  for (let dir = dirname(page); dir !== "."; dir = dirname(dir)) {
+    const layout = join(dir, "layout.tsx")
+
+    if (existsSync(join(root, layout))) {
+      files.push(layout)
+    }
+  }
+
+  return files.map(read).join("\n")
+}
 
 describe("page help", () => {
   it("gives every company and interview tab its own page's text", () => {
@@ -33,23 +77,49 @@ describe("page help", () => {
     expect(COMPANY_TAB_HELP.members).toBe("team")
   })
 
-  it.each(locales)(
-    "has a title, a text, actions and tips for every page in %s",
-    (code) => {
-      const help = helpOf(code)
+  it("has the keys rounds serves guides for", () => {
+    const python = read("../packages/common/src/prepza_common/page_keys.py")
+    const keys = [...python.matchAll(/^\s+"(\w+)",$/gm)].map(
+      (match) => match[1]
+    )
 
-      for (const key of PAGE_HELP_KEYS) {
-        const page = help[key] as Help
+    expect([...PAGE_HELP_KEYS]).toEqual(keys)
+  })
 
-        expect(page.title, `${code} ${key}`).toBeTruthy()
-        expect(page.text, `${code} ${key}`).toBeTruthy()
-        expect(page.actions.length, `${code} ${key}`).toBeGreaterThan(0)
-        expect(page.tips.length, `${code} ${key}`).toBeGreaterThan(0)
-      }
+  it.each(locales)("keeps no guide text of its own in %s", (code) => {
+    const help = JSON.parse(read(`messages/${code}.json`)).pageHelp
 
-      expect(Object.keys(help).sort()).toEqual(
-        [...PAGE_HELP_KEYS, "label", "actionsTitle", "tipsTitle"].sort()
+    expect(Object.keys(help).sort()).toEqual([
+      "actionsTitle",
+      "label",
+      "tipsTitle",
+    ])
+  })
+
+  it("registers a key on every page where the assistant's panel opens", () => {
+    for (const [, component] of REGISTERS) {
+      expect(read(component), component).toMatch(
+        /usePageKey\(|<PageHelp\b|<PageKey\b|\bhelp=/
       )
     }
-  )
+
+    const missing = pages().filter((page) => {
+      const route =
+        "/" + relative("app", dirname(page)).replace(/\[[^\]]+\]/g, "x")
+      const source = sources(page)
+      // The admin zone, pages without the header (and so without the panel), the maintenance
+      // page shown in place of any page, and pages that only redirect.
+      const exempt =
+        route.startsWith("/superadmin") ||
+        TIMED_PAGE.test(route + "/") ||
+        COMPANY_INTERVIEW_PAGE.test(route + "/") ||
+        COMPANY_INTERVIEW_PAGE.test(route) ||
+        route === "/maintenance" ||
+        /\bredirect\(/.test(read(page))
+
+      return !exempt && !REGISTERS.some(([marker]) => marker.test(source))
+    })
+
+    expect(missing).toEqual([])
+  })
 })

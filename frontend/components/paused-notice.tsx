@@ -20,6 +20,7 @@ export async function PausedNotice({
   return (
     <div
       role="status"
+      data-testid="paused-notice"
       className={cn(
         "flex items-center gap-3 rounded-2xl border bg-muted px-5 py-4 text-base text-muted-foreground",
         className

@@ -130,6 +130,35 @@ describe("the API docs read the OpenAPI description", () => {
   it("keeps a code block as written", () => {
     const [section] = richText('```html\n<div id="a"></div>\n  <b>x</b>\n```')
 
-    expect(section.blocks[0].code).toBe('<div id="a"></div>\n  <b>x</b>')
+    expect(section.blocks[0].code).toEqual([
+      { code: '<div id="a"></div>\n  <b>x</b>', language: "html" },
+    ])
+  })
+
+  it("keeps a code block with blank lines whole", () => {
+    const [section] = richText(
+      "Before.\n\n```python\na = 1\n\nb = 2\n```\n\nAfter."
+    )
+
+    expect(section.blocks.map((block) => block.code)).toEqual([
+      undefined,
+      [{ code: "a = 1\n\nb = 2", language: "python" }],
+      undefined,
+    ])
+  })
+
+  it("makes code blocks that follow each other one example in several languages", () => {
+    const [section] = richText(
+      "```bash\ncurl x\n```\n\n```python\nget(x)\n```\n\nThen.\n\n```\nplain\n```"
+    )
+
+    expect(section.blocks.map((block) => block.code)).toEqual([
+      [
+        { code: "curl x", language: "bash" },
+        { code: "get(x)", language: "python" },
+      ],
+      undefined,
+      [{ code: "plain", language: undefined }],
+    ])
   })
 })

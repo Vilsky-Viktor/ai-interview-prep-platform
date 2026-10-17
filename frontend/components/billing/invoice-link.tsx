@@ -8,12 +8,13 @@ import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import { apiErrorMessage, apiFetch } from "@/lib/api"
 
-/** Opens a top-up's invoice: its link is made on request and expires soon after. */
+/** Opens a top-up's invoice: its link is made on request and expires soon after. `api` is the
+ * company's billing routes (its own, or the admin zone's support ones). */
 export function InvoiceLink({
-  companyId,
+  api,
   transactionId,
 }: {
-  companyId: string
+  api: string
   transactionId: string
 }) {
   const t = useTranslations("companyBilling")
@@ -24,7 +25,7 @@ export function InvoiceLink({
 
     try {
       const { url } = await apiFetch<{ url: string }>(
-        `/companies/companies/${companyId}/billing/invoice?transaction_id=${encodeURIComponent(transactionId)}`
+        `${api}/invoice?transaction_id=${encodeURIComponent(transactionId)}`
       )
       window.location.assign(url)
     } catch (error) {
