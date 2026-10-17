@@ -103,6 +103,11 @@ FAQ = [
         "answer": "Opisy stanowisk służą do tworzenia rozmów Twojej firmy, a odpowiedzi kandydatów do ich oceny na potrzeby Twojej firmy. prepza wykorzystuje też odpowiedzi w formie zagregowanej, bez identyfikowania kogokolwiek, do mierzenia i poprawy jakości pytań. [Polityka prywatności](/privacy) wyjaśnia, co przechowujemy, jak długo i jakie prawa przysługują każdemu.",
     },
     {
+        "key": "eu_ai_law",
+        "question": "Czy w UE można legalnie używać AI do wstępnej selekcji kandydatów?",
+        "answer": "Tak, na określonych zasadach. Zgodnie z unijnym AI Act narzędzia, które oceniają kandydatów, najpewniej należą do kategorii wysokiego ryzyka, z obowiązkami od 2 grudnia 2027, a RODO obowiązuje już teraz: decyzję o zatrudnieniu podejmuje człowiek, kandydaci wiedzą, że używana jest AI, a dokumentacja jest przechowywana. prepza działa właśnie tak: AI pisze pytania, osoby z Twojej firmy przeglądają wyniki i decydują, a kandydaci są informowani przed rozpoczęciem. To nie jest porada prawna; [Czy rekrutacja z AI jest legalna w UE?](/guides/is-ai-hiring-legal-in-the-eu) wyjaśnia zasady i terminy.",
+    },
+    {
         "key": "emails",
         "question": "Jakie e-maile wysyła prepza i jak je wyłączyć?",
         "answer": "E-maile serwisowe, takie jak zaproszenia, raporty, problemy z płatnością i zmiany naszego regulaminu, są wysyłane zawsze. Resztę, na przykład codzienne podsumowanie aktywności, przypomnienia i nowości o produkcie, wybierasz w Ustawieniach, w sekcji E-maile, albo wyłączasz linkiem „Wypisz się” w każdym e-mailu. Kandydaci mogą wyłączyć e-maile od Twojej firmy lub przypomnienia o danej rozmowie linkami w zaproszeniach i przypomnieniach. Aktualności prepza pojawiają się w Twoich powiadomieniach, pod dzwonkiem u góry; najważniejsze przychodzą też e-mailem jako nowości o produkcie, ale tylko wtedy, gdy to ustawienie jest włączone.",

@@ -103,6 +103,11 @@ FAQ = [
         "answer": "Functieomschrijvingen worden gebruikt om de interviews van jouw bedrijf te maken, en de antwoorden van kandidaten om ze voor jouw bedrijf te beoordelen. prepza gebruikt antwoorden ook samengevoegd, zonder iemand te identificeren, om de kwaliteit van vragen te meten en te verbeteren. Het [privacybeleid](/privacy) legt uit wat we bewaren, hoe lang en welke rechten iedereen heeft.",
     },
     {
+        "key": "eu_ai_law",
+        "question": "Is het legaal om AI te gebruiken voor de preselectie van kandidaten in de EU?",
+        "answer": "Ja, met regels. Onder de Europese AI-verordening (AI Act) zijn tools die kandidaten beoordelen zeer waarschijnlijk hoog risico, met verplichtingen vanaf 2 december 2027, en de AVG geldt nu al: een mens neemt het besluit om iemand aan te nemen, kandidaten horen dat er AI wordt gebruikt en alles wordt vastgelegd. prepza werkt zo: AI schrijft de vragen, mensen in jouw bedrijf bekijken de resultaten en beslissen, en kandidaten worden geïnformeerd voordat ze beginnen. Dit is geen juridisch advies; [Is AI bij werving en selectie legaal in de EU?](/guides/is-ai-hiring-legal-in-the-eu) legt de regels en de data uit.",
+    },
+    {
         "key": "emails",
         "question": "Welke e-mails stuurt prepza, en hoe stop ik ze?",
         "answer": "Service-e-mails, zoals uitnodigingen, rapporten, betalingsproblemen en wijzigingen in onze voorwaarden, worden altijd verstuurd. De rest, zoals het dagelijkse activiteitenoverzicht, herinneringen en productupdates, kies je in Instellingen, onder E-mails, of stop je met de link 'Afmelden' in elke e-mail. Kandidaten kunnen de e-mails van je bedrijf, of de herinneringen voor een interview, stoppen met de links in hun uitnodigingen en herinneringen. Nieuws van prepza staat bij je meldingen, de bel bovenaan; het belangrijkste nieuws komt ook per e-mail als productupdate, alleen zolang die instelling aan staat.",

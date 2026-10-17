@@ -103,6 +103,11 @@ FAQ = [
         "answer": "As descrições de vaga são usadas para criar as entrevistas da sua empresa, e as respostas dos candidatos para avaliá-las para a sua empresa. A prepza também usa as respostas agregadas, sem identificar ninguém, para medir e melhorar a qualidade das perguntas. A [política de privacidade](/privacy) explica o que guardamos, por quanto tempo e os direitos de cada pessoa.",
     },
     {
+        "key": "eu_ai_law",
+        "question": "É legal usar IA na triagem de candidatos na UE?",
+        "answer": "Sim, com regras. Pelo Regulamento de IA da UE (AI Act), ferramentas que avaliam candidatos muito provavelmente são de alto risco, com obrigações a partir de 2 de dezembro de 2027, e o GDPR já se aplica: uma pessoa toma a decisão de contratação, os candidatos são informados de que a IA é usada e são mantidos registros. A prepza funciona assim: a IA escreve as perguntas, pessoas da sua empresa revisam os resultados e decidem, e os candidatos são informados antes de começar. Isso não é aconselhamento jurídico; [O uso de IA no recrutamento é legal na UE?](/guides/is-ai-hiring-legal-in-the-eu) explica as regras e as datas.",
+    },
+    {
         "key": "emails",
         "question": "Quais e-mails a prepza envia, e como faço para pará-los?",
         "answer": 'E-mails de serviço, como convites, relatórios, problemas de pagamento e mudanças nos nossos termos, são sempre enviados. Os demais, como o resumo de atividades diário, os lembretes e as novidades do produto, você escolhe em Configurações, na seção E-mails, ou cancela pelo link "Cancelar inscrição" em cada e-mail. Os candidatos podem parar de receber os e-mails da sua empresa, ou os lembretes de uma entrevista, pelos links nos convites e lembretes.',

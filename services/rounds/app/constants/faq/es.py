@@ -103,6 +103,11 @@ FAQ = [
         "answer": "Las descripciones de puesto se usan para crear las entrevistas de tu empresa, y las respuestas de los candidatos, para puntuarlas para tu empresa. prepza también usa las respuestas agregadas, sin identificar a nadie, para medir y mejorar la calidad de las preguntas. La [política de privacidad](/privacy) explica qué guardamos, durante cuánto tiempo y los derechos de cada persona.",
     },
     {
+        "key": "eu_ai_law",
+        "question": "¿Es legal usar IA en la preselección de candidatos en la UE?",
+        "answer": "Sí, con normas. Según el Reglamento de IA de la UE (AI Act), las herramientas que puntúan a candidatos son muy probablemente de alto riesgo, con obligaciones desde el 2 de diciembre de 2027, y el RGPD ya se aplica: una persona toma la decisión de contratación, se informa a los candidatos de que se usa IA y se guardan registros. prepza funciona así: la IA redacta las preguntas, las personas de tu empresa revisan los resultados y deciden, y se informa a los candidatos antes de empezar. Esto no es asesoramiento jurídico; [¿Es legal usar IA en la selección de personal en la UE?](/guides/is-ai-hiring-legal-in-the-eu) explica las normas y las fechas.",
+    },
+    {
         "key": "emails",
         "question": "¿Qué correos envía prepza y cómo dejo de recibirlos?",
         "answer": "Los correos del servicio, como invitaciones, informes, problemas de pago y cambios en nuestros términos, se envían siempre. El resto, como el resumen de actividad diario, los recordatorios y las novedades del producto, lo eliges en Ajustes, en Correos, o lo detienes con el enlace «Cancelar la suscripción» de cada correo. Los candidatos pueden dejar de recibir los correos de tu empresa, o los recordatorios de una entrevista, con los enlaces de sus invitaciones y recordatorios. Las novedades de prepza aparecen en tus notificaciones, la campana de arriba; las más importantes también llegan por correo como novedad del producto, solo mientras ese ajuste esté activado.",

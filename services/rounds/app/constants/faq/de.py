@@ -103,6 +103,11 @@ FAQ = [
         "answer": "Stellenbeschreibungen werden genutzt, um die Interviews deines Unternehmens zu erstellen, und die Antworten der Kandidaten, um sie für dein Unternehmen zu bewerten. Außerdem nutzt prepza die Antworten zusammengefasst und ohne Identifizierung einzelner Personen, um die Qualität der Fragen zu messen und zu verbessern. Die [Datenschutzerklärung](/privacy) erklärt, was wir speichern, wie lange und welche Rechte alle haben.",
     },
     {
+        "key": "eu_ai_law",
+        "question": "Darf man in der EU KI für die Vorauswahl von Kandidaten nutzen?",
+        "answer": "Ja, mit Regeln. Nach der KI-Verordnung der EU (AI Act) gelten Tools, die Kandidaten bewerten, sehr wahrscheinlich als Hochrisiko-Systeme, mit Pflichten ab dem 2. Dezember 2027, und die DSGVO gilt schon heute: Ein Mensch trifft die Einstellungsentscheidung, Kandidaten erfahren, dass KI eingesetzt wird, und alles wird dokumentiert. prepza arbeitet genau so: KI schreibt die Fragen, Menschen in deinem Unternehmen prüfen die Ergebnisse und entscheiden, und Kandidaten werden informiert, bevor sie beginnen. Das ist keine Rechtsberatung; [Ist KI im Recruiting in der EU erlaubt?](/guides/is-ai-hiring-legal-in-the-eu) erklärt die Regeln und Fristen.",
+    },
+    {
         "key": "emails",
         "question": "Welche E-Mails sendet prepza und wie stelle ich sie ab?",
         "answer": "Service-E-Mails wie Einladungen, Berichte, Zahlungsprobleme und Änderungen unserer Bedingungen werden immer gesendet. Alles andere, etwa die tägliche Aktivitätsübersicht, Erinnerungen und Produkt-Updates, wählst du in den Einstellungen unter E-Mails oder stellst es mit dem Link „Abmelden“ in jeder E-Mail ab. Kandidaten können die E-Mails deines Unternehmens oder die Erinnerungen zu einem Interview mit den Links in ihren Einladungen und Erinnerungen abstellen. Neuigkeiten von prepza erscheinen in deinen Benachrichtigungen, der Glocke oben; die wichtigsten kommen außerdem als Produkt-Update per E-Mail, aber nur, solange diese Einstellung an ist.",

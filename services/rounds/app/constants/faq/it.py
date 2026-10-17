@@ -103,6 +103,11 @@ FAQ = [
         "answer": "Le descrizioni dei ruoli servono a creare i colloqui della tua azienda, e le risposte dei candidati a valutarli per la tua azienda. prepza usa anche le risposte aggregate, senza identificare nessuno, per misurare e migliorare la qualità delle domande. L'[informativa sulla privacy](/privacy) spiega cosa conserviamo, per quanto tempo e i diritti di ciascuno.",
     },
     {
+        "key": "eu_ai_law",
+        "question": "È legale usare l'IA per la preselezione dei candidati nell'UE?",
+        "answer": "Sì, con delle regole. Secondo il regolamento europeo sull'IA (AI Act), gli strumenti che valutano i candidati sono molto probabilmente ad alto rischio, con obblighi dal 2 dicembre 2027, e il GDPR si applica già: una persona prende la decisione di assunzione, i candidati vengono informati che si usa l'IA e si conserva una documentazione. prepza funziona così: l'IA scrive le domande, le persone della tua azienda esaminano i risultati e decidono, e i candidati vengono informati prima di iniziare. Questa non è una consulenza legale; [Usare l'IA nella selezione del personale è legale nell'UE?](/guides/is-ai-hiring-legal-in-the-eu) spiega le regole e le date.",
+    },
+    {
         "key": "emails",
         "question": "Quali email invia prepza e come posso interromperle?",
         "answer": 'Le email di servizio, come inviti, report, problemi di pagamento e modifiche ai nostri termini, vengono sempre inviate. Le altre, come il riepilogo attività giornaliero, i promemoria e le novità sul prodotto, le scegli nelle Impostazioni, alla voce Email, oppure le interrompi con il link "Annulla l\'iscrizione" in ogni email. I candidati possono interrompere le email della tua azienda, o i promemoria di un colloquio, con i link nei loro inviti e promemoria.',

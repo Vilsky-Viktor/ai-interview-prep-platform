@@ -102,6 +102,11 @@ FAQ = [
         "answer": "Job descriptions are used to build your company's interviews, and candidates' answers to score them for your company. prepza also uses answers combined, without identifying anyone, to measure and improve the quality of questions. The [privacy policy](/privacy) explains what we keep, for how long, and everyone's rights.",
     },
     {
+        "key": "eu_ai_law",
+        "question": "Is it legal to use AI to screen candidates in the EU?",
+        "answer": "Yes, with rules. Under the EU AI Act, tools that score candidates are very likely high-risk, with duties from 2 December 2027, and the GDPR already applies: a person makes the hiring decision, candidates are told AI is used, and records are kept. prepza works that way: AI writes the questions, people at your company review the results and decide, and candidates are told before they start. This isn't legal advice; [Is AI hiring legal in the EU?](/guides/is-ai-hiring-legal-in-the-eu) explains the rules and the dates.",
+    },
+    {
         "key": "emails",
         "question": "Which emails does prepza send, and how do I stop them?",
         "answer": "Service emails, such as invites, reports, billing problems and changes to our terms, are always sent. The rest, such as the daily activity digest, reminders and product updates, you choose in Settings, under Emails, or stop with the Unsubscribe link in each email. Candidates can stop your company's emails, or an interview's reminders, with the links in their invites and reminders. prepza's news shows in your notifications, the bell at the top; the major news also comes by email as a product update, only while that setting is on.",

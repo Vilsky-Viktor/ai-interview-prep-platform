@@ -103,6 +103,11 @@ FAQ = [
         "answer": "Mô tả công việc được dùng để tạo các buổi phỏng vấn của công ty bạn, và câu trả lời của ứng viên để chấm điểm cho công ty bạn. prepza cũng sử dụng câu trả lời ở dạng tổng hợp, không nhận dạng bất kỳ ai, để đo lường và cải thiện chất lượng câu hỏi. [Chính sách quyền riêng tư](/privacy) giải thích chúng tôi lưu gì, trong bao lâu, và quyền của mọi người.",
     },
     {
+        "key": "eu_ai_law",
+        "question": "Dùng AI để sàng lọc ứng viên ở EU có hợp pháp không?",
+        "answer": "Có, nhưng phải theo quy định. Theo Đạo luật AI của EU (EU AI Act), các công cụ chấm điểm ứng viên rất có thể thuộc nhóm rủi ro cao, với các nghĩa vụ áp dụng từ ngày 2/12/2027, và GDPR thì đã áp dụng: con người đưa ra quyết định tuyển dụng, ứng viên được thông báo rằng AI được sử dụng, và hồ sơ được lưu giữ. prepza hoạt động đúng như vậy: AI soạn câu hỏi, người trong công ty bạn xem xét kết quả và quyết định, và ứng viên được thông báo trước khi bắt đầu. Đây không phải là tư vấn pháp lý; [Dùng AI trong tuyển dụng có hợp pháp ở EU không?](/guides/is-ai-hiring-legal-in-the-eu) giải thích các quy định và mốc thời gian.",
+    },
+    {
         "key": "emails",
         "question": "prepza gửi những email nào, và làm sao để dừng nhận?",
         "answer": 'Email dịch vụ, như lời mời, báo cáo, vấn đề thanh toán và thay đổi điều khoản của chúng tôi, luôn được gửi. Những email còn lại, như tóm tắt hoạt động hằng ngày, lời nhắc và cập nhật sản phẩm, bạn chọn trong Cài đặt, mục Email, hoặc dừng bằng liên kết "Hủy đăng ký" trong mỗi email. Ứng viên có thể dừng nhận email từ công ty bạn, hoặc lời nhắc của một buổi phỏng vấn, bằng các liên kết trong lời mời và lời nhắc của họ.',

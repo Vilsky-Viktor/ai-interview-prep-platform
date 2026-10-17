@@ -103,6 +103,11 @@ FAQ = [
         "answer": "İş tanımları şirketinizin mülakatlarını hazırlamak, adayların cevapları ise onları şirketiniz adına puanlamak için kullanılır. prepza ayrıca cevapları birleştirilmiş şekilde ve kimseyi tanımlamadan, soruların kalitesini ölçmek ve iyileştirmek için kullanır. [Gizlilik politikası](/privacy) neleri, ne kadar süre sakladığımızı ve herkesin haklarını açıklar.",
     },
     {
+        "key": "eu_ai_law",
+        "question": "AB'de adayları ön elemek için yapay zekâ kullanmak yasal mı?",
+        "answer": "Evet, kurallara uyarak. AB Yapay Zekâ Yasası'na (AI Act) göre adayları puanlayan araçlar büyük olasılıkla yüksek risklidir ve yükümlülükler 2 Aralık 2027'den itibaren başlar; GDPR ise zaten geçerlidir: işe alım kararını bir insan verir, adaylara yapay zekâ kullanıldığı söylenir ve kayıt tutulur. prepza da böyle çalışır: soruları yapay zekâ yazar, şirketinizdeki kişiler sonuçları inceleyip karar verir ve adaylar başlamadan önce bilgilendirilir. Bu bir hukuki tavsiye değildir; [AB'de yapay zekâ ile işe alım yasal mı?](/guides/is-ai-hiring-legal-in-the-eu) kuralları ve tarihleri açıklar.",
+    },
+    {
         "key": "emails",
         "question": "prepza hangi e-postaları gönderir ve bunları nasıl durdururum?",
         "answer": 'Davetler, raporlar, ödeme sorunları ve koşullarımızdaki değişiklikler gibi hizmet e-postaları her zaman gönderilir. Günlük etkinlik özeti, hatırlatmalar ve ürün güncellemeleri gibi diğerlerini Ayarlar\'da, E-postalar bölümünde seçebilir ya da her e-postadaki "Abonelikten çık" bağlantısıyla durdurabilirsiniz. Adaylar, davet ve hatırlatma e-postalarındaki bağlantılarla şirketinizin e-postalarını ya da bir mülakatın hatırlatmalarını durdurabilir.',

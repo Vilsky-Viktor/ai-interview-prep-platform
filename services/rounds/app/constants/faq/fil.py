@@ -103,6 +103,11 @@ FAQ = [
         "answer": "Ginagamit ang mga job description para buuin ang mga interview ng iyong kumpanya, at ang mga sagot ng aplikante para i-score ang mga ito para sa iyong kumpanya. Ginagamit din ng prepza ang mga sagot nang pinagsama-sama at nang hindi kinikilala ang sinuman, para sukatin at pahusayin ang kalidad ng mga tanong. Ipinapaliwanag ng [privacy policy](/privacy) kung ano ang itinatago namin, gaano katagal, at ang mga karapatan ng lahat.",
     },
     {
+        "key": "eu_ai_law",
+        "question": "Legal ba ang paggamit ng AI sa pag-screen ng mga aplikante sa EU?",
+        "answer": "Oo, basta may sinusunod na patakaran. Sa ilalim ng EU AI Act, malaki ang posibilidad na high-risk ang mga tool na nag-i-score ng mga aplikante, na may mga obligasyon simula 2 Disyembre 2027, at umiiral na ang GDPR: tao ang gumagawa ng desisyon sa pag-hire, sinasabihan ang mga aplikante na ginagamit ang AI, at may itinatagong mga record. Ganito gumagana ang prepza: AI ang sumusulat ng mga tanong, ang mga tao sa iyong kumpanya ang nagre-review ng mga resulta at nagdedesisyon, at sinasabihan ang mga aplikante bago sila magsimula. Hindi ito legal advice; ipinapaliwanag ng [Legal ba ang AI hiring sa EU?](/guides/is-ai-hiring-legal-in-the-eu) ang mga patakaran at petsa.",
+    },
+    {
         "key": "emails",
         "question": "Anong mga email ang ipinapadala ng prepza, at paano ko ito ihihinto?",
         "answer": 'Laging ipinapadala ang mga email ng serbisyo, gaya ng mga imbitasyon, report, problema sa bayad at pagbabago sa aming mga tuntunin. Ang iba, gaya ng araw-araw na buod ng aktibidad, mga paalala at mga update tungkol sa produkto, ay pinipili mo sa Mga setting, sa ilalim ng Mga email, o inihihinto gamit ang link na "Mag-unsubscribe" sa bawat email. Puwedeng ihinto ng mga aplikante ang mga email ng iyong kumpanya, o ang mga paalala ng isang interview, gamit ang mga link sa kanilang mga imbitasyon at paalala.',

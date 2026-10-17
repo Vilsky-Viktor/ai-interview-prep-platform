@@ -103,6 +103,11 @@ FAQ = [
         "answer": "Les fiches de poste servent à créer les entretiens de votre entreprise, et les réponses des candidats à les noter pour votre entreprise. prepza utilise aussi les réponses agrégées, sans identifier personne, pour mesurer et améliorer la qualité des questions. La [politique de confidentialité](/privacy) explique ce que nous conservons, pendant combien de temps, et les droits de chacun.",
     },
     {
+        "key": "eu_ai_law",
+        "question": "Est-il légal d'utiliser l'IA pour présélectionner des candidats dans l'UE ?",
+        "answer": "Oui, avec des règles. Selon le règlement européen sur l'IA (AI Act), les outils qui notent des candidats sont très probablement à haut risque, avec des obligations à partir du 2 décembre 2027, et le RGPD s'applique déjà : une personne prend la décision d'embauche, les candidats sont informés de l'usage de l'IA et des traces sont conservées. prepza fonctionne ainsi : l'IA rédige les questions, des personnes de votre entreprise examinent les résultats et décident, et les candidats sont informés avant de commencer. Ceci n'est pas un conseil juridique ; [L'IA dans le recrutement est-elle légale dans l'UE ?](/guides/is-ai-hiring-legal-in-the-eu) explique les règles et les dates.",
+    },
+    {
         "key": "emails",
         "question": "Quels e-mails prepza envoie-t-il, et comment les arrêter ?",
         "answer": "Les e-mails de service, comme les invitations, les rapports, les problèmes de paiement et les modifications de nos conditions, sont toujours envoyés. Les autres, comme le récapitulatif d'activité quotidien, les rappels et les nouveautés du produit, se choisissent dans les Paramètres, sous E-mails, ou s'arrêtent avec le lien « Se désabonner » de chaque e-mail. Les candidats peuvent arrêter les e-mails de votre entreprise, ou les rappels d'un entretien, avec les liens de leurs invitations et rappels. Les actualités de prepza s'affichent dans vos notifications, la cloche en haut ; les plus importantes arrivent aussi par e-mail comme nouveauté du produit, uniquement tant que ce réglage est activé.",

@@ -103,6 +103,11 @@ FAQ = [
         "answer": "Deskripsi pekerjaan dipakai untuk membuat wawancara perusahaanmu, dan jawaban kandidat untuk menilainya bagi perusahaanmu. prepza juga menggunakan jawaban secara gabungan, tanpa mengidentifikasi siapa pun, untuk mengukur dan meningkatkan kualitas soal. [Kebijakan privasi](/privacy) menjelaskan apa yang kami simpan, berapa lama, dan hak setiap orang.",
     },
     {
+        "key": "eu_ai_law",
+        "question": "Apakah legal memakai AI untuk menyaring kandidat di UE?",
+        "answer": "Ya, dengan aturan. Menurut EU AI Act, alat yang menilai kandidat sangat mungkin tergolong berisiko tinggi, dengan kewajiban mulai 2 Desember 2027, dan GDPR sudah berlaku: keputusan perekrutan diambil oleh manusia, kandidat diberi tahu bahwa AI digunakan, dan catatan disimpan. prepza bekerja seperti itu: AI menulis soal, orang-orang di perusahaanmu meninjau hasilnya dan memutuskan, dan kandidat diberi tahu sebelum mulai. Ini bukan nasihat hukum; [Apakah rekrutmen dengan AI legal di UE?](/guides/is-ai-hiring-legal-in-the-eu) menjelaskan aturan dan tanggalnya.",
+    },
+    {
         "key": "emails",
         "question": "Email apa saja yang dikirim prepza, dan bagaimana cara menghentikannya?",
         "answer": 'Email layanan, seperti undangan, laporan, masalah pembayaran, dan perubahan ketentuan kami, selalu dikirim. Sisanya, seperti ringkasan aktivitas harian, pengingat, dan pembaruan produk, kamu pilih di Pengaturan, bagian Email, atau hentikan dengan tautan "Berhenti berlangganan" di setiap email. Kandidat bisa menghentikan email dari perusahaanmu, atau pengingat sebuah wawancara, lewat tautan di undangan dan pengingat mereka.',

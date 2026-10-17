@@ -103,6 +103,11 @@ FAQ = [
         "answer": "Töökuulutusi kasutatakse sinu ettevõtte intervjuude loomiseks ja kandidaatide vastuseid nende hindamiseks sinu ettevõtte jaoks. prepza kasutab vastuseid ka koondatult ja kedagi tuvastamata, et mõõta ja parandada küsimuste kvaliteeti. [Privaatsuspoliitika](/privacy) selgitab, mida me säilitame, kui kaua ja millised on kõigi õigused.",
     },
     {
+        "key": "eu_ai_law",
+        "question": "Kas ELis on seaduslik kasutada tehisaru kandidaatide eelvalikuks?",
+        "answer": "Jah, reeglite järgi. ELi tehisintellekti määruse (AI Act) alusel on kandidaate hindavad tööriistad väga tõenäoliselt suure riskiga, kohustustega alates 2. detsembrist 2027, ja GDPR kehtib juba praegu: värbamisotsuse teeb inimene, kandidaatidele öeldakse, et kasutatakse tehisaru, ja kõik dokumenteeritakse. prepza töötab just nii: tehisaru koostab küsimused, sinu ettevõtte inimesed vaatavad tulemused üle ja otsustavad ning kandidaatidele öeldakse seda enne alustamist. See ei ole õigusnõustamine; [Kas AI kasutamine värbamisel on ELis seaduslik?](/guides/is-ai-hiring-legal-in-the-eu) selgitab reegleid ja tähtaegu.",
+    },
+    {
         "key": "emails",
         "question": "Milliseid e-kirju prepza saadab ja kuidas neid peatada?",
         "answer": "Teenusekirjad, nagu kutsed, aruanded, makseprobleemid ja meie tingimuste muudatused, saadetakse alati. Ülejäänud, näiteks igapäevase tegevuste kokkuvõtte, meeldetuletused ja tooteuudised, valid seadetes jaotises E-kirjad või peatad iga kirja lingiga „Loobu tellimusest“. Kandidaadid saavad sinu ettevõtte kirjad või ühe intervjuu meeldetuletused peatada oma kutsetes ja meeldetuletustes olevate linkidega. prepza uudised on sinu teavitustes, ülaosas oleva kella all; olulisemad uudised tulevad ka e-kirjaga tooteuudisena, kuid ainult siis, kui see seade on sees.",
