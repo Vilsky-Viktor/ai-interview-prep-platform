@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Request
+from fastapi import HTTPException as RaisedHTTPException
 from fastapi.exception_handlers import (
     http_exception_handler,
     request_validation_exception_handler,
@@ -30,8 +31,22 @@ def translate(text: str, language: str) -> str:
     return TRANSLATIONS.get(language, {}).get(text, text)
 
 
+class TemplateError(RaisedHTTPException):
+    """An error whose message carries values, such as a limit's current number: `template` is
+    translated first, then filled in with `values`. FastAPI's HTTPException, so code that lets
+    those through (rate_limit.hit_or_skip) lets this one through too."""
+
+    def __init__(self, status_code: int, template: str, **values: object):
+        super().__init__(status_code, template.format(**values))
+        self.template = template
+        self.values = values
+
+
 async def localized_http_error(request: Request, error: HTTPException):
-    if isinstance(error.detail, str):
+    if isinstance(error, TemplateError):
+        language = request_language(request)
+        error.detail = translate(error.template, language).format(**error.values)
+    elif isinstance(error.detail, str):
         error.detail = translate(error.detail, request_language(request))
 
     return await http_exception_handler(request, error)

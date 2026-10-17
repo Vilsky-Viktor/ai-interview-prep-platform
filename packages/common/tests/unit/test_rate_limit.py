@@ -3,9 +3,15 @@ import asyncio
 import pytest
 from fastapi import HTTPException
 from prepza_common import rate_limit
-from prepza_common.rate_limit import hit, hit_emails, spend
+from prepza_common.ai_constants import LIMIT_HIT
+from prepza_common.limit_list import LIMITS
+from prepza_common.rate_limit import add_spent, hit, hit_emails, hit_or_skip, spend
 
-from tests.unit.fake_redis import FakeRedis
+from tests.unit.fake_redis import DownRedis, FakeRedis
+
+# A limit counted an hour, and one in tokens a day.
+HOURLY = "PRACTICE_ROUNDS_PER_HOUR"
+TOKENS = "TOKENS_PER_DAY"
 
 
 def statuses(calls):
@@ -22,24 +28,60 @@ def statuses(calls):
     return codes
 
 
-def test_hit_refuses_past_the_limit():
+def test_hit_refuses_past_the_limits_edited_value(published):
+    redis = FakeRedis({HOURLY: 2})
+
+    assert statuses([lambda: hit(redis, "key", HOURLY)] * 3) == [200, 200, 429]
+    # Counted over the limit's window, an hour.
+    assert redis.counts == {"key": 3}
+    assert redis.expiries == {"key": 3600}
+
+
+def test_without_an_edited_value_the_default_holds(published):
     redis = FakeRedis()
+    default = LIMITS[HOURLY].default
 
-    assert statuses([lambda: hit(redis, "key", 2, 60)] * 3) == [200, 200, 429]
+    codes = statuses([lambda: hit(redis, "key", HOURLY)] * (default + 1))
+
+    assert codes == [200] * default + [429]
 
 
-def test_a_zero_limit_is_off():
-    redis = FakeRedis()
+def test_a_refusal_says_the_current_value_and_is_recorded(published):
+    redis = FakeRedis({HOURLY: 1})
+    asyncio.run(hit(redis, "key", HOURLY, "At most {limit} an hour.", user_id="u1"))
 
-    assert statuses([lambda: hit(redis, "key", 0, 60)] * 5) == [200] * 5
+    with pytest.raises(HTTPException) as refused:
+        asyncio.run(hit(redis, "key", HOURLY, "At most {limit} an hour.", user_id="u1"))
+
+    assert refused.value.detail == "At most 1 an hour."
+    assert published == [
+        (
+            LIMIT_HIT,
+            {
+                "limit": HOURLY,
+                "kind": "ours",
+                "scope": "user",
+                "company_id": None,
+                "user_id": "u1",
+                "what": None,
+            },
+        )
+    ]
+
+
+@pytest.mark.parametrize("value", [-1, 0])
+def test_non_positive_limits_never_refuse(value, published):
+    redis = FakeRedis({HOURLY: value})
+
+    assert statuses([lambda: hit(redis, "key", HOURLY)] * 3) == [200, 200, 200]
     assert redis.counts == {}
 
 
-def test_emails_are_limited_per_recipient():
-    redis = FakeRedis()
+def test_emails_are_limited_per_recipient(published):
+    redis = FakeRedis({"EMAIL_RECIPIENT_DAILY_LIMIT": 3})
 
     def invite(recipient):
-        return lambda: hit_emails(redis, "ann", recipient, 30, 200, 3)
+        return lambda: hit_emails(redis, "ann", recipient)
 
     assert statuses([invite("set-1:bob@example.com")] * 4) == [200, 200, 200, 429]
     # Another address, or the same one for something else, has its own count.
@@ -49,79 +91,62 @@ def test_emails_are_limited_per_recipient():
     ]
 
 
-def test_emails_are_limited_per_sender_across_recipients():
-    redis = FakeRedis()
-    calls = [
-        lambda i=i: hit_emails(redis, "ann", f"set-1:{i}@example.com", 2, 200, 3) for i in range(3)
-    ]
+def test_emails_are_limited_per_sender_across_recipients(published):
+    redis = FakeRedis({"EMAIL_HOURLY_LIMIT": 2})
+    calls = [lambda i=i: hit_emails(redis, "ann", f"set-1:{i}@example.com") for i in range(3)]
 
     assert statuses(calls) == [200, 200, 429]
 
 
-@pytest.mark.parametrize("limit", [-1, 0])
-def test_non_positive_limits_never_refuse(limit):
-    redis = FakeRedis()
-
-    assert statuses([lambda: hit(redis, "key", limit, 60)] * 3) == [200, 200, 200]
-
-
-def test_spend_refuses_once_the_total_is_over_the_limit():
-    redis = FakeRedis()
-    calls = [lambda amount=amount: spend(redis, "key", amount, 100, 60) for amount in (60, 40, 1)]
+def test_spend_refuses_once_the_total_is_over_the_limit(published):
+    redis = FakeRedis({TOKENS: 100})
+    calls = [lambda amount=amount: spend(redis, "key", amount, TOKENS) for amount in (60, 40, 1)]
 
     assert statuses(calls) == [200, 200, 429]
     assert redis.counts == {"key": 101}
 
 
-def test_spending_nothing_only_checks_the_budget():
-    redis = FakeRedis()
+def test_spending_nothing_only_checks_the_budget(published):
+    redis = FakeRedis({TOKENS: 20})
 
     def check():
-        return spend(redis, "key", 0, 20, 60)
+        return spend(redis, "key", 0, TOKENS)
 
-    assert statuses([check, lambda: spend(redis, "key", 25, 20, 60), check]) == [200, 429, 429]
+    assert statuses([check, lambda: spend(redis, "key", 25, TOKENS), check]) == [200, 429, 429]
     assert redis.counts == {"key": 25}
 
 
-@pytest.mark.parametrize("limit", [-1, 0])
-def test_spend_with_no_limit_counts_nothing(limit):
-    redis = FakeRedis()
+@pytest.mark.parametrize("value", [-1, 0])
+def test_spend_with_no_limit_counts_nothing(value, published):
+    redis = FakeRedis({TOKENS: value})
 
-    assert statuses([lambda: spend(redis, "key", 1_000, limit, 60)] * 2) == [200, 200]
+    assert statuses([lambda: spend(redis, "key", 1_000, TOKENS)] * 2) == [200, 200]
     assert redis.counts == {}
 
 
-def test_with_redis_down_a_use_goes_uncounted(monkeypatch):
-    async def down(*args, **kwargs):
-        raise ConnectionError("Redis is down")
-
-    monkeypatch.setattr(rate_limit, "hit", down)
-
+def test_with_redis_down_a_use_goes_uncounted():
     # No exception: the request goes through.
-    asyncio.run(rate_limit.hit_or_skip(None, "rate:x:u1", 1, 60))
+    asyncio.run(hit_or_skip(DownRedis(), "rate:x:u1", HOURLY))
 
 
-def test_over_a_limit_that_skips_on_failure_is_still_refused(monkeypatch):
-    async def over(*args, **kwargs):
-        raise HTTPException(429, "Too many requests. Try again later.")
-
-    monkeypatch.setattr(rate_limit, "hit", over)
+def test_over_a_limit_that_skips_on_failure_is_still_refused(published):
+    redis = FakeRedis({HOURLY: 1})
+    asyncio.run(hit_or_skip(redis, "rate:x:u1", HOURLY))
 
     with pytest.raises(HTTPException) as refused:
-        asyncio.run(rate_limit.hit_or_skip(None, "rate:x:u1", 1, 60))
+        asyncio.run(hit_or_skip(redis, "rate:x:u1", HOURLY))
 
     assert refused.value.status_code == 429
 
 
-@pytest.mark.parametrize("error", [HTTPException(429, "over"), ConnectionError("Redis is down")])
-def test_adding_what_a_request_spent_never_fails_it(monkeypatch, error):
-    added = []
+def test_adding_what_a_request_spent_goes_over_without_refusing_it(published):
+    redis = FakeRedis({TOKENS: 100})
+    asyncio.run(add_spent(redis, "spend:x:all", 500, TOKENS))
 
-    async def spend(redis, key, amount, limit, window):
-        added.append((key, amount))
-        raise error
+    assert redis.counts == {"spend:x:all": 500}
+    # The next request is the one refused.
+    assert statuses([lambda: spend(redis, "spend:x:all", 0, TOKENS)]) == [429]
 
-    monkeypatch.setattr(rate_limit, "spend", spend)
-    asyncio.run(rate_limit.add_spent(None, "spend:x:all", 500, 1_000, 60))
 
-    assert added == [("spend:x:all", 500)]
+def test_adding_what_a_request_spent_never_fails_it_with_redis_down():
+    asyncio.run(rate_limit.add_spent(DownRedis(), "spend:x:all", 500, TOKENS))

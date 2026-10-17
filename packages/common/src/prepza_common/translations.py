@@ -4,6 +4,17 @@ from importlib import import_module
 
 from prepza_common.constants import DEFAULT_LANGUAGE, LANGUAGES
 
+# The calls whose message a user reads, with where it is: its position and its keyword. A limit's
+# refusal (rate_limit, limits.at_most) answers with the message it's given.
+MESSAGE_ARGS = {
+    "HTTPException": (1, "detail"),
+    "TemplateError": (1, "template"),
+    "hit": (3, "message"),
+    "hit_or_skip": (3, "message"),
+    "spend": (4, "message"),
+    "at_most": (4, "message"),
+}
+
 TRANSLATIONS = {
     code: import_module(f"prepza_common.messages.{code}").MESSAGES
     for code in LANGUAGES
@@ -12,7 +23,7 @@ TRANSLATIONS = {
 
 
 def raised_messages(app_dir) -> set[str]:
-    """Every fixed message a service raises as an HTTPException's detail, read from its code in
+    """Every fixed message a service raises (MESSAGE_ARGS), read from its code in
     `app_dir` (the service's `app` package): string literals and constants. Messages put
     together at run time (f-strings) can't be translated by their text, so they're left out.
     Services' tests check each one has a translation in every language."""
@@ -36,11 +47,12 @@ def raised_messages(app_dir) -> set[str]:
                 else getattr(node.func, "id", None)
             )
 
-            if called != "HTTPException":
+            if called not in MESSAGE_ARGS:
                 continue
 
-            detail = node.args[1] if len(node.args) > 1 else None
-            detail = next((item.value for item in node.keywords if item.arg == "detail"), detail)
+            index, keyword = MESSAGE_ARGS[called]
+            detail = node.args[index] if len(node.args) > index else None
+            detail = next((item.value for item in node.keywords if item.arg == keyword), detail)
 
             if isinstance(detail, ast.Constant) and isinstance(detail.value, str):
                 found.add(detail.value)

@@ -6,10 +6,27 @@ company that's gone is no access), translated messages, a small in-memory cache,
 stats counting and the limits several services read (`rate_limit.hit` counts uses, `rate_limit.spend`
 adds up a cost such as tokens against a budget) and server-sent events (`sse`: the help chat's
 and the assistant's answers, the bell's stream), secret tokens kept as their hashes (`tokens`: API
-keys, AI apps' access) and a visitor's address behind the load balancer (`client_ip`).
+keys, AI apps' access), a visitor's address behind the load balancer (`client_ip`) and
+"select all that apply" questions (`multi_answer`: which questions are, how many of a draw are,
+and the draw itself, by `MULTI_ANSWER_PERCENT`, a value in the admin zone's Controls).
 OpenAI chat models: `llm.chat_model` builds them one way for every service (a temperature only at
 reasoning effort `none`). It needs the package's `llm` extra (langchain-openai), so a service that
 calls OpenAI depends on `prepza-common[llm]`; the others don't install it.
+Limits: `limit_list.LIMITS` is every usage limit of ours (`limit_types.Limit`: its service, default,
+unit, window, lowest and highest value, scope), and the plain values tuned beside them
+(`counted=False`: nothing counts against them), and `limits.limit(redis, NAME)` its current value,
+as a superadmin edited it in the admin zone (billing writes the `limits:values` hash; each instance
+reads it at most every 30 seconds, and uses the default with Redis down). `limits.at_most` refuses
+one more of a count (keys, members), `limits.question_seconds` gives a new test's seconds a
+question by its level, and `limits.record_hit` records every refusal, ours or a
+provider's, as a log line (`prepza_limit_hits`) and a `limit.hit` event billing stores;
+`limit_schemas.BudgetOut` is a shared daily budget's use today, for the AI costs page.
+AI costs: `ai_constants` holds the prices (`MODEL_PRICES`, `TRANSCRIPTION_PRICES`, the Batch API's
+half) and every kind of AI call (`ACTIONS`), and `ai_usage.record` records one call with its tokens
+and cost as an "AI used" log line (`prepza_ai_spend`) and an `ai.used` event billing stores;
+`ai_usage.provider_refused` records OpenAI's rate limit and quota. `ai_cap` is the unpaid users'
+daily AI spend cap (`AI_SPEND_UNPAID_DAY`): `refuse_if_capped` answers 503 once today's spend
+reached it, and `add_unpaid` (billing) adds to it. Only `ai_usage` needs the `llm` extra.
 Request bodies: `body_limit.BodyLimitMiddleware` refuses one over 1 MB (`MAX_BODY_BYTES`) with a
 translated 413, counting a streamed body as it arrives; companies (report PDFs) and the assistant
 (voice messages) pass larger limits.

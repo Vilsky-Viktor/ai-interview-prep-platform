@@ -7,6 +7,8 @@ import logging
 
 from fastapi import HTTPException, status
 from prepza_common.constants import PAUSE_KEY, PAUSED
+from prepza_common.limit_list import PAUSED_LIMIT
+from prepza_common.limits import EVERYONE, record_hit
 
 logger = logging.getLogger(__name__)
 
@@ -21,8 +23,15 @@ async def is_paused(redis) -> bool:
         return False
 
 
-async def refuse_if_paused(redis) -> None:
+async def refuse_if_paused(
+    redis, what: str, company_id: object | None = None, user_id: str | None = None
+) -> None:
+    """Refuses `what` (a short name of what was asked, such as "help_chat") while paused, and
+    records the refusal like a limit's."""
     if await is_paused(redis):
+        kept = {"company_id": company_id, "user_id": user_id, "what": what}
+        await record_hit(PAUSED_LIMIT, scope=EVERYONE, **kept)
+
         raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, PAUSED)
 
 

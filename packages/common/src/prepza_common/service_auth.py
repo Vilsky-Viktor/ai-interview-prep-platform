@@ -16,19 +16,26 @@ def callee_secret(callee: str) -> str:
     return os.environ[f"{callee.upper()}_SERVICE_SECRET"]
 
 
-def issue_token(caller: str, callee: str, secret: str) -> str:
-    """A short-lived token from `caller`, usable only at `callee`, signed with `callee`'s key."""
+def issue_token(caller: str, callee: str, secret: str, extra: dict | None = None) -> str:
+    """A short-lived token from `caller`, usable only at `callee`, signed with `callee`'s key;
+    `extra` claims ride along, signed too."""
     now = datetime.now(UTC)
-    claims = {"iss": caller, "aud": callee, "iat": now, "exp": now + SERVICE_TOKEN_LIFETIME}
+    claims = {
+        **(extra or {}),
+        "iss": caller,
+        "aud": callee,
+        "iat": now,
+        "exp": now + SERVICE_TOKEN_LIFETIME,
+    }
 
     return jwt.encode(claims, secret, algorithm="HS256")
 
 
-def token_caller(token: str, secret: str, name: str) -> str | None:
-    """The calling service's name when `token` is addressed to service `name`, signed with its
-    key and not expired; None otherwise."""
+def token_claims(token: str, secret: str, name: str) -> dict | None:
+    """The claims of `token` when it's addressed to service `name`, signed with its key and not
+    expired; None otherwise."""
     try:
-        claims = jwt.decode(
+        return jwt.decode(
             token,
             secret,
             algorithms=["HS256"],
@@ -38,7 +45,13 @@ def token_caller(token: str, secret: str, name: str) -> str | None:
     except jwt.InvalidTokenError:
         return None
 
-    return claims["iss"]
+
+def token_caller(token: str, secret: str, name: str) -> str | None:
+    """The calling service's name when `token` is addressed to service `name`, signed with its
+    key and not expired; None otherwise."""
+    claims = token_claims(token, secret, name)
+
+    return claims["iss"] if claims else None
 
 
 def service_caller(secret: str, name: str):

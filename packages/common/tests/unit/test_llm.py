@@ -6,6 +6,7 @@ from prepza_common.llm import (
     estimated_input,
     estimated_tokens,
     latest_messages,
+    transcription_cost,
 )
 
 
@@ -61,3 +62,38 @@ def test_a_call_cut_short_is_estimated_at_four_characters_a_token():
     assert estimated_tokens("") == 0
     assert estimated_tokens("abcde") == 2
     assert estimated_input([HumanMessage(content="abcd"), AIMessage(content="efgh")]) == 2
+
+
+def test_cached_input_costs_its_own_price():
+    usage = {
+        "input_tokens": 1_000_000,
+        "input_token_details": {"cache_read": 400_000},
+        "output_tokens": 0,
+    }
+
+    # 600k fresh at $2.00 and 400k cached at $0.20 a million.
+    assert call_cost("gpt-6.1-sol", usage) == pytest.approx(1.2 + 0.08)
+
+
+def test_a_batch_api_call_costs_half():
+    usage = {"input_tokens": 1_000_000, "output_tokens": 100_000}
+
+    assert call_cost("gpt-6.1-sol", usage, batch=True) == pytest.approx(1.5)
+
+
+def test_a_dated_model_costs_its_models_price():
+    usage = {"input_tokens": 1_000_000, "output_tokens": 0}
+
+    assert call_cost("gpt-6-luna-2026-08-01", usage) == pytest.approx(0.10)
+    assert call_cost("gpt-6-lunar", usage) is None
+
+
+def test_embeddings_cost_their_input_only():
+    usage = {"input_tokens": 1_000_000, "output_tokens": 0}
+
+    assert call_cost("text-embedding-3-small", usage) == pytest.approx(0.02)
+
+
+def test_transcription_costs_by_the_minute():
+    assert transcription_cost("gpt-4o-mini-transcribe", 90) == pytest.approx(0.0045)
+    assert transcription_cost("unknown-model", 90) is None

@@ -41,12 +41,25 @@ class NotificationKind(StrEnum):
     # A superadmin approved or declined the company's verification.
     VERIFICATION_APPROVED = "verification_approved"
     VERIFICATION_DECLINED = "verification_declined"
+    # A news post was published: one notification for everyone (Recipient.ALL).
+    NEWS = "news"
+    # A legal document's new version applies from a day: everyone gets the terms' and the
+    # privacy policy's, companies' owners and admins the DPA's.
+    LEGAL_TERMS = "legal_terms"
+    LEGAL_PRIVACY = "legal_privacy"
+    LEGAL_DPA = "legal_dpa"
 
 
-# Who a notification is for: one user, or every member of a company.
+# Who a notification is for: one user, every member of a company, or every user (ALL, one row
+# that each user's feed shows when it's newer than their account).
 class Recipient(StrEnum):
     USER = "user"
     COMPANY = "company"
+    ALL = "all"
+
+
+# The recipient id of the notifications for everyone.
+EVERYONE = "everyone"
 
 
 def notification(

@@ -51,6 +51,11 @@ REDIS_HEALTH_CHECK_SECONDS = 30
 # Lists are served a page at a time; a page holds at most this many items.
 MAX_PAGE_SIZE = 100
 
+# A superadmin's adjustment of a company's credits (billing makes it, companies takes the
+# request): at most this many credits either way, and a note this long.
+MAX_ADJUSTMENT = 1_000_000
+MAX_ADJUSTMENT_NOTE = 200
+
 # Who a kept row is by once its user deleted their account (a referral, a generation, an ATS or
 # Slack connection, an audit entry): the row stays for its company, without their id.
 DELETED_USER = "deleted-user"
@@ -135,22 +140,12 @@ DEFAULT_LANGUAGE = "en"
 # The Firebase custom claim that carries the user's language in every ID token.
 LANGUAGE_CLAIM = "language"
 
-# Limits a service enforces and the help chat explains, so both read the same numbers.
-# Companies one person may own; the welcome credits come with the first one only (companies).
-MAX_OWNED_COMPANIES = 3
-# Interviews are free to generate, so each company may start this many a day (companies); fewer
-# until its first top-up (billing's "paid").
-INTERVIEWS_PER_DAY = 10
-INTERVIEWS_PER_DAY_UNPAID = 3
 # $1 buys this many credits (billing sells them; the FAQ shows prices in dollars too).
 CREDITS_PER_DOLLAR = 100
-# Generating an interview is free and paid for by its candidates: a company can have only this many
-# generated interviews waiting without one before it generates another; fewer until its first
-# top-up. Interviews copied from templates cost nothing and don't count.
-MAX_INTERVIEWS_WITHOUT_CANDIDATES = 5
-MAX_INTERVIEWS_WITHOUT_CANDIDATES_UNPAID = 1
-# Seconds each timed interview question starts with; an admin can change it (companies).
-DEFAULT_QUESTION_SECONDS = 60
+# The seconds a test's question may have, as an admin sets them (companies); each new test
+# starts with its level's (the QUESTION_SECONDS_* values in limit_list).
+MIN_QUESTION_SECONDS = 10
+MAX_QUESTION_SECONDS = 600
 
 # Funnel events for analytics go on the events topic with this type prefix; only they reach
 # BigQuery, and the services' push subscriptions leave them out.
@@ -174,6 +169,12 @@ MAX_GOAL_LENGTH = 10_000
 # (generation); a translation must fit them too.
 MAX_NEWS_TITLE_LENGTH = 120
 MAX_NEWS_TEXT_LENGTH = 500
+
+# A campaign's subject, text and button (notifications), written in English and translated into
+# each language (generation); a translation must fit them too.
+MAX_CAMPAIGN_SUBJECT_LENGTH = 120
+MAX_CAMPAIGN_TEXT_LENGTH = 2000
+MAX_CAMPAIGN_BUTTON_LENGTH = 40
 
 # The emergency pause (pause.py): one Redis key every service reads, and the message it refuses
 # with while it's on.
@@ -205,16 +206,9 @@ OPERATOR = {
     "email": "hello@prepza.ai",
 }
 
-# USD per million input and output tokens (OpenAI's pricing page, October 2026): the cost
-# generation logs for each run (llm.call_cost) and the offline tests report.
 # A model call cut short (cancelled, timed out, failed) reports no tokens: they are estimated at
-# about this many characters each, as for English text.
+# about this many characters each, as for English text. Prices are in ai_constants.py.
 CHARS_PER_TOKEN = 4
-MODEL_PRICES = {
-    "gpt-6-luna": (0.10, 0.50),
-    "gpt-6.1-sol": (2.00, 10.00),
-    "gpt-6-astra": (10.00, 50.00),
-}
 
 # Deleting an account that owns a company others have joined (companies refuses, library says
 # so): the company would go with their access and its paid credits.
@@ -229,8 +223,8 @@ ACCOUNT_OWNS_SHARED = (
 # companies the DPA a new company does.
 LEGAL_VERSIONS = {
     "terms": "2026-10-29",
-    "privacy": "2026-10-29",
-    "dpa": "2026-10-29",
+    "privacy": "2026-11-01",
+    "dpa": "2026-11-01",
 }
 
 # The sign-in a company's own platform gives its candidate with the invite link (no email, no

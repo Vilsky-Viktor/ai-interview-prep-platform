@@ -4,7 +4,13 @@ import jwt
 import pytest
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
-from prepza_common.service_auth import callee_secret, issue_token, service_caller, token_caller
+from prepza_common.service_auth import (
+    callee_secret,
+    issue_token,
+    service_caller,
+    token_caller,
+    token_claims,
+)
 
 LIBRARY_SECRET = "library-secret-that-is-at-least-32-bytes"
 ROUNDS_SECRET = "rounds-secret-that-is-at-least-32-bytes!"
@@ -74,3 +80,14 @@ def test_a_token_is_checked_without_a_request():
         is None
     )
     assert token_caller("not a token", LIBRARY_SECRET, "library") is None
+
+
+def test_extra_claims_ride_along_signed_and_never_replace_the_callers():
+    extra = {"company": "c1", "iss": "library"}
+    token = issue_token("assistant", "library", LIBRARY_SECRET, extra)
+
+    claims = token_claims(token, LIBRARY_SECRET, "library")
+
+    assert claims["company"] == "c1"
+    assert claims["iss"] == "assistant"
+    assert token_claims(token, ROUNDS_SECRET, "library") is None

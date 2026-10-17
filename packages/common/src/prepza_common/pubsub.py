@@ -1,6 +1,7 @@
 import asyncio
 import base64
 import json
+import logging
 import os
 import uuid
 from datetime import UTC, datetime
@@ -15,6 +16,8 @@ from prepza_common.constants import (
 )
 from prepza_common.google import access_token, project, running_locally
 from pydantic import BaseModel
+
+logger = logging.getLogger(__name__)
 
 
 def message(
@@ -61,6 +64,22 @@ async def publish_batch(messages: list[dict], timeout: float = HTTP_TIMEOUT_SECO
 async def publish(event_type: str, data: dict, timeout: float = HTTP_TIMEOUT_SECONDS) -> None:
     """Publishes one domain event (see publish_batch)."""
     await publish_batch([message(event_type, data)], timeout)
+
+
+async def publish_retried(event_type: str, data: dict, attempts: int, timeout: float) -> None:
+    """Publishes one event that has no outbox (a record of an AI call or a limit hit): tried
+    `attempts` times under one id, so a try that reached Pub/Sub after all is stored once; then
+    given up and logged, never raised."""
+    sent = message(event_type, data)
+
+    for attempt in range(1, attempts + 1):
+        try:
+            await publish_batch([sent], timeout)
+
+            return
+        except Exception:
+            if attempt == attempts:
+                logger.warning("Couldn't publish %s", event_type, exc_info=True)
 
 
 class PushMessage(BaseModel):

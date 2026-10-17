@@ -1,80 +1,112 @@
+"""Counting uses and costs against our limits (limit_list.LIMITS), by name: each one's value is
+the current one (limits.limit) and its window the list's. A refusal is recorded
+(limits.record_hit) and answers 429 with its message, in which "{limit}" is the limit's value."""
+
 import logging
 
 from fastapi import HTTPException, status
-from prepza_common.constants import DAY_SECONDS, HOUR_SECONDS, RATE_LIMITED
+from prepza_common.constants import RATE_LIMITED
+from prepza_common.i18n import TemplateError
+from prepza_common.limit_list import LIMITS
+from prepza_common.limits import limit, record_hit
 
 logger = logging.getLogger(__name__)
 
 
-async def hit(redis, key: str, limit: int, window: int, message: str = RATE_LIMITED) -> None:
-    """Counts one use in the window; over `limit`, a 429 with `message`. With Redis down, an
-    error: the request fails rather than going unlimited (see hit_or_skip)."""
-    if limit <= 0:
-        return
-
+async def counted(redis, key: str, amount: int, window: int) -> int:
+    """Adds `amount` to the window's total under `key`; the total."""
     # One transaction, so the counter never exists without its expiry.
-    async with redis.pipeline(transaction=True) as pipe:
-        pipe.set(key, 0, ex=window, nx=True)
-        pipe.incr(key)
-        _, count = await pipe.execute()
-
-    if count > limit:
-        raise HTTPException(status.HTTP_429_TOO_MANY_REQUESTS, message)
-
-
-async def spend(
-    redis, key: str, amount: int, limit: int, window: int, message: str = RATE_LIMITED
-) -> None:
-    """Adds `amount` (a cost, such as tokens or micro-dollars) to the window's total; once the
-    total is over `limit`, a 429 with `message`. An `amount` of 0 only checks the budget. With
-    Redis down, an error, as with hit."""
-    if limit <= 0:
-        return
-
-    # One transaction, so the total never exists without its expiry.
     async with redis.pipeline(transaction=True) as pipe:
         pipe.set(key, 0, ex=window, nx=True)
         pipe.incrby(key, amount)
         _, total = await pipe.execute()
 
-    if total > limit:
-        raise HTTPException(status.HTTP_429_TOO_MANY_REQUESTS, message)
+    return total
+
+
+async def refuse(name: str, value: float, message: str, company_id, user_id) -> None:
+    await record_hit(name, company_id=company_id, user_id=user_id)
+
+    raise TemplateError(status.HTTP_429_TOO_MANY_REQUESTS, message, limit=value)
+
+
+async def hit(
+    redis,
+    key: str,
+    name: str,
+    message: str = RATE_LIMITED,
+    *,
+    company_id: object | None = None,
+    user_id: str | None = None,
+) -> None:
+    """Counts one use of limit `name` under `key`; over it, refused. With Redis down, an
+    error: the request fails rather than going unlimited (see hit_or_skip). `company_id` and
+    `user_id` say whose refusal it was, for the record."""
+    await spend(redis, key, 1, name, message, company_id=company_id, user_id=user_id)
+
+
+async def spend(
+    redis,
+    key: str,
+    amount: int,
+    name: str,
+    message: str = RATE_LIMITED,
+    *,
+    company_id: object | None = None,
+    user_id: str | None = None,
+) -> None:
+    """Adds `amount` (a cost, such as tokens) to limit `name`'s total under `key`; once the
+    total is over the limit, refused. An `amount` of 0 only checks it. With Redis down, an
+    error, as with hit."""
+    value = await limit(redis, name)
+
+    if value <= 0:
+        return
+
+    if await counted(redis, key, amount, LIMITS[name].window) > value:
+        await refuse(name, value, message, company_id, user_id)
 
 
 async def hit_or_skip(
-    redis, key: str, limit: int, window: int, message: str = RATE_LIMITED
+    redis,
+    key: str,
+    name: str,
+    message: str = RATE_LIMITED,
+    *,
+    company_id: object | None = None,
+    user_id: str | None = None,
 ) -> None:
     """hit(), except that with Redis down the use goes uncounted rather than refused: for limits
     against abuse, where refusing everyone while Redis is down would be worse."""
     try:
-        await hit(redis, key, limit, window, message)
+        await hit(redis, key, name, message, company_id=company_id, user_id=user_id)
     except HTTPException:
         raise
     except Exception:
-        logger.warning("The %s limit skipped, Redis failed", key.rsplit(":", 1)[0], exc_info=True)
+        logger.warning("The %s limit skipped, Redis failed", name, exc_info=True)
 
 
-async def add_spent(redis, key: str, amount: int, limit: int, window: int) -> None:
+async def add_spent(
+    redis, key: str, amount: int, name: str, *, company_id=None, user_id=None
+) -> None:
     """Adds what a finished request cost to its budget. Going over refuses the next request,
     not this one; with Redis down, the cost is lost rather than the request's result."""
     try:
-        await spend(redis, key, amount, limit, window)
-    except HTTPException:
-        pass
+        value = await limit(redis, name)
+
+        if value > 0:
+            await counted(redis, key, amount, LIMITS[name].window)
     except Exception:
-        logger.warning(
-            "Spending on %s not counted, Redis failed", key.rsplit(":", 1)[0], exc_info=True
-        )
+        logger.warning("Spending on %s not counted, Redis failed", name, exc_info=True)
 
 
-async def hit_emails(
-    redis, sender: str, recipient: str, per_hour: int, per_day: int, per_recipient: int
-) -> None:
+async def hit_emails(redis, sender: str, recipient: str, company_id: object | None = None) -> None:
     """Limits invite emails, so nobody can spam from our domain.
 
     The sender's counts are shared by every service that sends invites. `recipient` names the
     address and what it's invited to, so resending to one person is limited on its own.
     """
-    await hit(redis, f"rate:emails:hour:{sender}", per_hour, HOUR_SECONDS)
-    await hit(redis, f"rate:emails:day:{sender}", per_day, DAY_SECONDS)
-    await hit(redis, f"rate:emails:recipient:{recipient}", per_recipient, DAY_SECONDS)
+    who = {"company_id": company_id, "user_id": sender}
+    await hit(redis, f"rate:emails:hour:{sender}", "EMAIL_HOURLY_LIMIT", **who)
+    await hit(redis, f"rate:emails:day:{sender}", "EMAIL_DAILY_LIMIT", **who)
+    await hit(redis, f"rate:emails:recipient:{recipient}", "EMAIL_RECIPIENT_DAILY_LIMIT", **who)
