@@ -135,7 +135,7 @@
   },
   "home": {
     "title": "测试每一位候选人\n招到最优秀的人才",
-    "text": "AI 根据你的职位描述生成专业的限时面试，每位候选人的题目都不同。每位候选人仅需 $2–5。"
+    "text": "AI 根据你的职位描述生成专业的限时面试，每位候选人都会随机抽到不同的题目。每位候选人仅需 $2–5。"
   },
   "start": {
     "placeholder": "粘贴职位描述，或描述这个职位以及候选人应该掌握的内容",
@@ -800,7 +800,7 @@
     "cancelText": "生成将立即停止，目前已生成的内容都不会保留。",
     "cancelling": "正在取消…",
     "cancelFailed": "无法取消生成，请重试。",
-    "writing": "正在编写你的题目",
+    "writing": "正在生成你的题目",
     "drafting": "正在拟定你的主题",
     "writingNote": "这需要几分钟。你可以离开此页面，我们会继续生成。",
     "draftingNote": "正在阅读你的目标并规划要涵盖的内容。",
@@ -1171,9 +1171,207 @@
   },
   "landing": {
     "more": "如何运作",
-    "demos": "演示",
+    "demos": "视频",
     "demosTooltip": "在 YouTube 上观看演示",
-    "askAgent": "问问智能助手"
+    "askAgent": "问问智能助手",
+    "create": {
+      "title": "几分钟创建一场面试",
+      "text": "粘贴职位描述并调整主题，或直接选用现成的模板。",
+      "describe": "粘贴职位描述",
+      "adjust": "调整主题",
+      "ask": "让 AI 修改主题",
+      "or": "或",
+      "fromTemplate": "从我们的模板"
+    },
+    "proof": {
+      "languages": "{count} 种语言",
+      "ready": "约 {minutes} 分钟即可完成",
+      "noSubscription": "无需订阅"
+    },
+    "sources": {
+      "title": "从任何渠道邀请候选人",
+      "text": "发送邮件、发布分享链接、导入文件，或让你的 ATS、自有平台或 AI 智能体帮你邀请。",
+      "labels": {
+        "ats": "你的 ATS",
+        "email": "邮件邀请",
+        "file": "批量导入",
+        "link": "招聘广告链接",
+        "api": "API",
+        "sdk": "SDK 嵌入",
+        "agent": "AI 智能体",
+        "apps": "AI 应用 (MCP)"
+      },
+      "interview": "面试",
+      "candidates": "{count, plural, other {<n>#</n> 位候选人}}"
+    },
+    "candidates": {
+      "title": "候选人看到的界面",
+      "text": "带有你的品牌的限时面试：单选题、多选题和实操题。",
+      "rules": {
+        "pick": "选择一个答案；标有“选择所有正确选项”的题目，请选出所有正确答案。",
+        "change": "进入下一题之前，你可以更改所选答案。",
+        "time": "时间用完后，将进入下一题。",
+        "unanswered": "未回答的题目计为错误。",
+        "saved": "进度会自动保存。",
+        "extraTime": "需要更多时间吗？请在开始前联系 {company}。",
+        "people": "{company} 的工作人员会审核结果并做出决定。",
+        "stay": "完成之前请停留在此页面。"
+      }
+    },
+    "shareReports": {
+      "title": "看清谁最优秀\n几秒内即可分享",
+      "text": "每位候选人的答案和成绩，通过邮件或聊天分享。",
+      "chatQuestion": "嘿，有人通过了吗？"
+    },
+    "automate": {
+      "title": "让招聘自动化",
+      "text": "连接你的平台、AI 应用和招聘网站，并在 Slack 中接收动态。",
+      "labels": {
+        "platform": "你的平台",
+        "api": "API",
+        "sdk": "SDK 嵌入",
+        "webhook": "Webhook",
+        "aiApp": "AI 应用",
+        "mcp": "MCP 服务器",
+        "jobBoard": "招聘网站",
+        "link": "招聘广告链接",
+        "slack": "Slack"
+      }
+    },
+    "justAsk": {
+      "title": "问问智能助手就行",
+      "text": "用日常语言提问：它会读取你的数据、解答操作问题，并在你确认后替你完成工作。",
+      "welcome": "今天有什么可以帮你的？",
+      "questions": {
+        "stats": "有多少候选人通过了 {interview}？",
+        "help": "如何给候选人额外时间？",
+        "invite": "邀请 {email} 参加 {interview}"
+      },
+      "steps": {
+        "stats": "正在读取报告…",
+        "help": "正在阅读指南…",
+        "invite": "正在准备，请你确认…"
+      },
+      "answers": {
+        "stats": "按 {passMark}% 的及格线，{total} 位候选人中有 {passed} 位通过（{percent}%）。最高成绩为 {best}%。",
+        "help": "在候选人页面上，可在其开始前为每道题增加 +25%、+50% 或 +100% 的时间。详见<link>技能测试时间设置指南</link>。",
+        "invite": "已邀请 {email} 参加 {interview}。"
+      },
+      "cards": {
+        "info": {
+          "title": "信息",
+          "text": "询问你的面试、候选人和结果。"
+        },
+        "help": {
+          "title": "帮助",
+          "text": "根据 prepza 的指南解答操作问题，用你的语言回答。"
+        },
+        "actions": {
+          "title": "操作",
+          "text": "邀请候选人、创建面试、更改设置。"
+        }
+      }
+    },
+    "trustQuality": {
+      "title": "信任、质量与合规",
+      "text": "题目持续改进，由人做决定，文档随时可用。",
+      "steps": {
+        "generated": {
+          "labels": "已生成",
+          "lines": "AI 编写题目。"
+        },
+        "checked": {
+          "labels": "已检查",
+          "lines": "题目就绪前，另一个 AI 在不看答案的情况下作答检查。"
+        },
+        "answered": {
+          "labels": "已作答",
+          "lines": "候选人作答、为题目评分并报告问题。"
+        },
+        "flagged": {
+          "labels": "已标记",
+          "lines": "作答、投票和举报会指出薄弱的题目，哪怕只是“读起来费劲”。"
+        },
+        "rewritten": {
+          "labels": "已改写",
+          "lines": "题目被修正或替换，重新进入循环。"
+        }
+      },
+      "cards": {
+        "person": {
+          "title": "由人做决定",
+          "text": "分数为你的决定提供依据，但不替你做决定。诚信标记提示你需要细看，而不是证据。"
+        },
+        "fair": {
+          "title": "对每位候选人都公平",
+          "text": "相同的计时和题型组合，为每个人随机抽题，有需要的人可获得额外时间。"
+        },
+        "laws": {
+          "title": "为合规而设计",
+          "text": "GDPR、欧盟《人工智能法案》、英国和美国的规定：<documents>相关文档</documents>可随时下载。"
+        },
+        "log": {
+          "title": "每项操作都有记录",
+          "text": "所有者可以查看公司里谁做了什么，记录在欧盟服务器上安全保存 12 个月。"
+        }
+      }
+    },
+    "moreQuestions": {
+      "title": "还有疑问？",
+      "videos": "视频",
+      "faq": "常见问题",
+      "guides": "指南"
+    },
+    "closing": {
+      "title": "创建你的第一场面试\n完全免费",
+      "start": "创建面试"
+    },
+    "comparison": {
+      "title": "比电话筛选更快\n比订阅更省钱",
+      "text": "无需花几个小时打电话，也没有月费：根据职位描述生成面试，按候选人付费。",
+      "time": "你花的时间",
+      "cost": "你付的费用",
+      "phone": {
+        "name": "电话筛选",
+        "time": "每位候选人约 30 分钟",
+        "cost": "团队的工时"
+      },
+      "subscription": {
+        "name": "测评工具",
+        "time": "每个职位都要挑选或编写测试",
+        "cost": "无论是否招聘都要付月费"
+      },
+      "prepza": {
+        "name": "prepza",
+        "time": "根据职位描述，每个职位约 10 分钟",
+        "cost": "每位作答的候选人 {price}"
+      },
+      "more": "与其他工具比较"
+    },
+    "freeToStart": {
+      "title": "所有功能免费\n按候选人付费",
+      "text": "包含所有功能。只有候选人至少回答了一道题，才会产生费用。",
+      "lines": {
+        "create": "创建面试",
+        "review": "与 AI 一起审核主题",
+        "invite": "邀请 {count} 位候选人",
+        "reports": "报告与分享",
+        "connect": "ATS、API、Slack、AI 智能体",
+        "answered": "{count} 位候选人已作答"
+      },
+      "total": "合计",
+      "each": "（每位候选人 {price}）",
+      "free": "{count, plural, other {前 # 位候选人免费}}",
+      "perCandidate": "每位候选人",
+      "pack": "{count} 位 {price}",
+      "see": "查看价格",
+      "notes": {
+        "subscription": "无需订阅",
+        "unanswered": "未作答的邀请不收费",
+        "expire": "点数永不过期",
+        "refund": "未使用的付费点数 14 天内可退款"
+      }
+    }
   },
   "faq": {
     "title": "常见问题",

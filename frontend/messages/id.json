@@ -135,7 +135,7 @@
   },
   "home": {
     "title": "Uji semua orang\nRekrut yang terbaik",
-    "text": "AI mengubah deskripsi pekerjaanmu menjadi wawancara berbatas waktu yang profesional, dengan soal unik untuk setiap kandidat. Hanya $2–5 per kandidat."
+    "text": "AI mengubah deskripsi pekerjaanmu menjadi wawancara berbatas waktu yang profesional, dengan soal acak tersendiri untuk setiap kandidat. Hanya $2–5 per kandidat."
   },
   "start": {
     "placeholder": "Tempel deskripsi pekerjaan, atau jelaskan posisinya dan apa yang perlu diketahui kandidat",
@@ -800,7 +800,7 @@
     "cancelText": "Pembuatan berhenti sekarang, dan tidak ada hasil yang disimpan.",
     "cancelling": "Membatalkan…",
     "cancelFailed": "Pembuatan tidak bisa dibatalkan. Coba lagi.",
-    "writing": "Menulis soal-soalmu",
+    "writing": "Membuat soal-soalmu",
     "drafting": "Menyusun topik-topikmu",
     "writingNote": "Ini butuh beberapa menit. Kamu boleh meninggalkan halaman ini; kami tetap bekerja.",
     "draftingNote": "Membaca tujuanmu dan merencanakan apa yang akan dibahas.",
@@ -1171,9 +1171,207 @@
   },
   "landing": {
     "more": "Cara kerjanya",
-    "demos": "Demo",
+    "demos": "Video",
     "demosTooltip": "Tonton demo di YouTube",
-    "askAgent": "tanya agen"
+    "askAgent": "tanya agen",
+    "create": {
+      "title": "Buat wawancara dalam hitungan menit",
+      "text": "Tempel deskripsi pekerjaan dan sesuaikan topiknya, atau pilih templat siap pakai.",
+      "describe": "Tempel deskripsimu",
+      "adjust": "Sesuaikan topiknya",
+      "ask": "Minta AI mengubah topiknya",
+      "or": "atau",
+      "fromTemplate": "Dari templat kami"
+    },
+    "proof": {
+      "languages": "{count} bahasa",
+      "ready": "Siap dalam ~{minutes} mnt",
+      "noSubscription": "Tanpa langganan"
+    },
+    "sources": {
+      "title": "Undang kandidat dari mana saja",
+      "text": "Kirimi mereka email, publikasikan tautan berbagi, impor file, atau biarkan ATS-mu, platformmu sendiri, atau agen AI yang mengirim mereka.",
+      "labels": {
+        "ats": "ATS-mu",
+        "email": "Undangan email",
+        "file": "Impor massal",
+        "link": "Tautan di iklan lowongan",
+        "api": "API",
+        "sdk": "Sematan SDK",
+        "agent": "Agen AI",
+        "apps": "Aplikasi AI (MCP)"
+      },
+      "interview": "Wawancara",
+      "candidates": "{count, plural, other {<n>#</n> kandidat}}"
+    },
+    "candidates": {
+      "title": "Yang dilihat kandidat",
+      "text": "Wawancara berbatas waktu dengan merekmu: pilihan tunggal, pilihan ganda, dan praktik.",
+      "rules": {
+        "pick": "Pilih satu jawaban, atau setiap jawaban yang benar jika tertulis Pilih semua jawaban yang benar.",
+        "change": "Kamu bisa mengubah pilihanmu sampai lanjut ke soal berikutnya.",
+        "time": "Saat waktu habis, soal berikutnya terbuka.",
+        "unanswered": "Soal yang tidak dijawab dihitung salah.",
+        "saved": "Kemajuanmu disimpan.",
+        "extraTime": "Butuh waktu lebih? Tanyakan ke {company} sebelum kamu mulai.",
+        "people": "Orang-orang di {company} meninjau hasilnya dan memutuskan.",
+        "stay": "Tetap di halaman ini sampai selesai."
+      }
+    },
+    "shareReports": {
+      "title": "Lihat siapa yang terbaik\nBagikan dalam hitungan detik",
+      "text": "Jawaban dan nilai setiap kandidat, dibagikan lewat email atau chat.",
+      "chatQuestion": "Hai, sudah ada yang lulus belum?"
+    },
+    "automate": {
+      "title": "Otomatiskan rekrutmenmu",
+      "text": "Hubungkan platformmu, aplikasi AI, dan situs lowongan kerja, lalu dapatkan kabar terbaru di Slack.",
+      "labels": {
+        "platform": "Platformmu",
+        "api": "API",
+        "sdk": "Sematan SDK",
+        "webhook": "Webhook",
+        "aiApp": "Aplikasi AI",
+        "mcp": "Server MCP",
+        "jobBoard": "Situs lowongan",
+        "link": "Tautan di iklan lowongan",
+        "slack": "Slack"
+      }
+    },
+    "justAsk": {
+      "title": "Tanya saja agennya",
+      "text": "Tanyakan dengan kata-kata biasa: agen membaca datamu, menjawab pertanyaan cara melakukan sesuatu, dan mengerjakannya setelah kamu konfirmasi.",
+      "welcome": "Ada yang bisa saya bantu hari ini?",
+      "questions": {
+        "stats": "Berapa kandidat yang lulus {interview}?",
+        "help": "Bagaimana cara memberi kandidat waktu tambahan?",
+        "invite": "Undang {email} ke {interview}"
+      },
+      "steps": {
+        "stats": "Membaca laporan…",
+        "help": "Membaca panduan…",
+        "invite": "Menyiapkannya untuk kamu konfirmasi…"
+      },
+      "answers": {
+        "stats": "{passed} dari {total} kandidat lulus ({percent}%) dengan nilai lulus {passMark}%. Nilai terbaik adalah {best}%.",
+        "help": "Di halaman kandidat, beri mereka +25%, +50%, atau +100% dari waktu setiap soal sebelum mereka mulai. Selengkapnya di <link>panduan batas waktu dan waktu tambahan</link>.",
+        "invite": "{email} sudah diundang ke {interview}."
+      },
+      "cards": {
+        "info": {
+          "title": "Info",
+          "text": "Tanyakan tentang wawancara, kandidat, dan hasilmu."
+        },
+        "help": {
+          "title": "Bantuan",
+          "text": "Jawaban cara melakukan sesuatu dari panduan prepza, dalam bahasamu."
+        },
+        "actions": {
+          "title": "Tindakan",
+          "text": "Undang kandidat, buat wawancara, ubah pengaturan."
+        }
+      }
+    },
+    "trustQuality": {
+      "title": "Kepercayaan, kualitas, dan kepatuhan",
+      "text": "Soal yang makin baik, manusia yang memutuskan, dokumen yang siap.",
+      "steps": {
+        "generated": {
+          "labels": "dibuat",
+          "lines": "AI menulis soal-soalnya."
+        },
+        "checked": {
+          "labels": "diperiksa",
+          "lines": "AI kedua memeriksa jawaban tanpa melihat kuncinya sebelum soal siap."
+        },
+        "answered": {
+          "labels": "dijawab",
+          "lines": "Kandidat menjawab, menilai soal, dan melaporkan masalah."
+        },
+        "flagged": {
+          "labels": "ditandai",
+          "lines": "Jawaban, suara, dan laporan menunjukkan soal yang lemah, bahkan \"sulit dibaca\"."
+        },
+        "rewritten": {
+          "labels": "ditulis ulang",
+          "lines": "Soal itu diperbaiki atau diganti, lalu kembali ke siklus."
+        }
+      },
+      "cards": {
+        "person": {
+          "title": "Manusia yang memutuskan",
+          "text": "Skor mendukung keputusanmu; skor tidak membuat keputusan. Tanda integritas adalah alasan untuk melihat lebih teliti, bukan bukti."
+        },
+        "fair": {
+          "title": "Adil bagi setiap kandidat",
+          "text": "Timer dan campuran jenis soal yang sama, soal yang diambil acak untuk setiap orang, dan waktu tambahan bagi yang membutuhkannya."
+        },
+        "laws": {
+          "title": "Dibuat untuk kepatuhan",
+          "text": "GDPR, EU AI Act, serta aturan Inggris dan AS: <documents>dokumennya</documents> siap diunduh."
+        },
+        "log": {
+          "title": "Setiap tindakan tercatat",
+          "text": "Pemilik melihat siapa melakukan apa di perusahaan, disimpan dengan aman selama 12 bulan di server Uni Eropa."
+        }
+      }
+    },
+    "moreQuestions": {
+      "title": "Ada pertanyaan lain?",
+      "videos": "video",
+      "faq": "Tanya jawab",
+      "guides": "panduan"
+    },
+    "closing": {
+      "title": "Buat wawancara pertamamu\nGratis",
+      "start": "Buat wawancara"
+    },
+    "comparison": {
+      "title": "Lebih cepat dari skrining telepon\nLebih murah dari langganan",
+      "text": "Tanpa berjam-jam menelepon dan tanpa biaya bulanan: wawancara dari deskripsi pekerjaanmu, dibayar per kandidat.",
+      "time": "Waktumu",
+      "cost": "Yang kamu bayar",
+      "phone": {
+        "name": "Skrining telepon",
+        "time": "~30 mnt per kandidat",
+        "cost": "Jam kerja timmu"
+      },
+      "subscription": {
+        "name": "Alat tes",
+        "time": "Tes yang harus dipilih atau ditulis untuk setiap posisi",
+        "cost": "Biaya bulanan, sedang merekrut atau tidak"
+      },
+      "prepza": {
+        "name": "prepza",
+        "time": "~10 mnt per posisi, dari deskripsi pekerjaanmu",
+        "cost": "{price} per kandidat yang menjawab"
+      },
+      "more": "Bandingkan dengan alat lain"
+    },
+    "freeToStart": {
+      "title": "Semuanya gratis\nBayar per kandidat",
+      "text": "Semua fitur sudah termasuk. Kandidat baru dikenai biaya setelah menjawab setidaknya satu soal.",
+      "lines": {
+        "create": "buat wawancara",
+        "review": "tinjau topik dengan AI",
+        "invite": "undang {count} kandidat",
+        "reports": "laporan dan berbagi",
+        "connect": "ATS, API, Slack, agen AI",
+        "answered": "{count} kandidat menjawab"
+      },
+      "total": "total",
+      "each": "({price} per kandidat)",
+      "free": "{count, plural, other {# kandidat gratis}} untuk memulai",
+      "perCandidate": "per kandidat",
+      "pack": "{count} seharga {price}",
+      "see": "Lihat harga",
+      "notes": {
+        "subscription": "tanpa langganan",
+        "unanswered": "undangan yang tidak dijawab gratis",
+        "expire": "kredit tidak pernah kedaluwarsa",
+        "refund": "kredit berbayar sisa bisa di-refund 14 hari"
+      }
+    }
   },
   "faq": {
     "title": "Pertanyaan yang sering diajukan",

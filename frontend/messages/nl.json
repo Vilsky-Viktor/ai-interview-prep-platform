@@ -135,7 +135,7 @@
   },
   "home": {
     "title": "Test iedereen\nNeem de besten aan",
-    "text": "AI maakt van je functieomschrijving een professioneel interview met tijdslimiet, met unieke vragen voor elke kandidaat. Slechts $2–5 per kandidaat."
+    "text": "AI maakt van je functieomschrijving een professioneel interview met tijdslimiet, met eigen willekeurige vragen voor elke kandidaat. Slechts $2–5 per kandidaat."
   },
   "start": {
     "placeholder": "Plak een functieomschrijving, of beschrijf de functie en wat een kandidaat moet weten",
@@ -800,7 +800,7 @@
     "cancelText": "Het stopt nu, en niets van wat tot nu toe is gegenereerd blijft bewaard.",
     "cancelling": "Annuleren…",
     "cancelFailed": "Het genereren kon niet worden geannuleerd. Probeer het opnieuw.",
-    "writing": "Je vragen worden geschreven",
+    "writing": "Je vragen worden gegenereerd",
     "drafting": "Je onderwerpen worden opgesteld",
     "writingNote": "Dit duurt een paar minuten. Je kunt deze pagina verlaten; wij gaan door.",
     "draftingNote": "We lezen je doel en plannen wat er aan bod komt.",
@@ -1171,9 +1171,207 @@
   },
   "landing": {
     "more": "Hoe het werkt",
-    "demos": "Demo's",
+    "demos": "Video",
     "demosTooltip": "Demo's bekijken op YouTube",
-    "askAgent": "vraag de agent"
+    "askAgent": "vraag de agent",
+    "create": {
+      "title": "Maak een interview in enkele minuten",
+      "text": "Plak een functieomschrijving en pas de onderwerpen aan, of kies een kant-en-klaar sjabloon.",
+      "describe": "Plak je omschrijving",
+      "adjust": "Pas de onderwerpen aan",
+      "ask": "Laat AI de onderwerpen aanpassen",
+      "or": "of",
+      "fromTemplate": "Uit onze sjablonen"
+    },
+    "proof": {
+      "languages": "{count} talen",
+      "ready": "Klaar in ~{minutes} minuten",
+      "noSubscription": "Geen abonnement"
+    },
+    "sources": {
+      "title": "Nodig kandidaten overal vandaan uit",
+      "text": "Mail ze, publiceer een deelbare link, importeer een bestand, of laat je ATS, je eigen platform of een AI-agent ze uitnodigen.",
+      "labels": {
+        "ats": "Je ATS",
+        "email": "Uitnodigingen per e-mail",
+        "file": "Bulkimport",
+        "link": "Link in de vacature",
+        "api": "API",
+        "sdk": "SDK-integratie",
+        "agent": "AI-agent",
+        "apps": "AI-apps (MCP)"
+      },
+      "interview": "Interview",
+      "candidates": "{count, plural, one {<n>#</n> kandidaat} other {<n>#</n> kandidaten}}"
+    },
+    "candidates": {
+      "title": "Wat kandidaten zien",
+      "text": "Een interview met tijdslimiet in je eigen huisstijl: één antwoord, meerdere antwoorden en praktijkopdrachten.",
+      "rules": {
+        "pick": "Kies één antwoord, of elk juist antwoord waar ‘Kies alle juiste opties’ staat.",
+        "change": "Je kunt je keuze wijzigen tot je verdergaat.",
+        "time": "Als de tijd om is, opent de volgende vraag.",
+        "unanswered": "Onbeantwoorde vragen tellen als fout.",
+        "saved": "Je voortgang wordt bewaard.",
+        "extraTime": "Meer tijd nodig? Vraag het aan {company} voordat je begint.",
+        "people": "Mensen bij {company} bekijken de resultaten en beslissen.",
+        "stay": "Blijf op deze pagina tot je klaar bent."
+      }
+    },
+    "shareReports": {
+      "title": "Zie wie de beste is\nDeel het in seconden",
+      "text": "De antwoorden en score van elke kandidaat, gedeeld per e-mail of chat.",
+      "chatQuestion": "Hé, is er al iemand geslaagd?"
+    },
+    "automate": {
+      "title": "Automatiseer je werving",
+      "text": "Koppel je platform, je AI-app en vacaturesites, en krijg updates in Slack.",
+      "labels": {
+        "platform": "Je platform",
+        "api": "API",
+        "sdk": "SDK-integratie",
+        "webhook": "Webhooks",
+        "aiApp": "AI-app",
+        "mcp": "MCP-server",
+        "jobBoard": "Vacaturesite",
+        "link": "Link in de vacature",
+        "slack": "Slack"
+      }
+    },
+    "justAsk": {
+      "title": "Vraag het gewoon de agent",
+      "text": "Vraag het in gewone woorden: hij leest je gegevens, beantwoordt vragen over hoe iets werkt en doet het werk zodra jij bevestigt.",
+      "welcome": "Waarmee kan ik je vandaag helpen?",
+      "questions": {
+        "stats": "Hoeveel kandidaten zijn geslaagd voor {interview}?",
+        "help": "Hoe geef ik een kandidaat extra tijd?",
+        "invite": "Nodig {email} uit voor {interview}"
+      },
+      "steps": {
+        "stats": "Rapport lezen…",
+        "help": "Gids lezen…",
+        "invite": "Klaarzetten zodat je kunt bevestigen…"
+      },
+      "answers": {
+        "stats": "{passed} van de {total} kandidaten zijn geslaagd ({percent}%) bij een slaaggrens van {passMark}%. De beste score is {best}%.",
+        "help": "Geef de kandidaat op zijn pagina +25%, +50% of +100% van de tijd van elke vraag voordat hij begint. Meer in de gids <link>Zo stel je de tijd van een vaardigheidstest in</link>.",
+        "invite": "{email} is uitgenodigd voor {interview}."
+      },
+      "cards": {
+        "info": {
+          "title": "Info",
+          "text": "Vraag naar je interviews, kandidaten en resultaten."
+        },
+        "help": {
+          "title": "Hulp",
+          "text": "Uitleg uit de gidsen van prepza, in jouw taal."
+        },
+        "actions": {
+          "title": "Acties",
+          "text": "Kandidaten uitnodigen, interviews maken, instellingen wijzigen."
+        }
+      }
+    },
+    "trustQuality": {
+      "title": "Vertrouwen, kwaliteit en compliance",
+      "text": "Vragen die beter worden, een mens die beslist, documenten die klaarstaan.",
+      "steps": {
+        "generated": {
+          "labels": "gegenereerd",
+          "lines": "AI schrijft de vragen."
+        },
+        "checked": {
+          "labels": "gecontroleerd",
+          "lines": "Een tweede AI controleert de antwoorden blind voordat de vraag klaar is."
+        },
+        "answered": {
+          "labels": "beantwoord",
+          "lines": "Kandidaten antwoorden, beoordelen vragen en melden problemen."
+        },
+        "flagged": {
+          "labels": "gemarkeerd",
+          "lines": "Antwoorden, stemmen en meldingen wijzen op een zwakke vraag, zelfs ‘lastig te lezen’."
+        },
+        "rewritten": {
+          "labels": "herschreven",
+          "lines": "Hij wordt verbeterd of vervangen, en gaat terug in de cyclus."
+        }
+      },
+      "cards": {
+        "person": {
+          "title": "Een mens beslist",
+          "text": "De score ondersteunt je beslissing, maar neemt die niet. Integriteitssignalen zijn een reden om beter te kijken, geen bewijs."
+        },
+        "fair": {
+          "title": "Eerlijk voor elke kandidaat",
+          "text": "Dezelfde timer en dezelfde mix van vraagsoorten, willekeurig gekozen vragen voor elke persoon, extra tijd voor wie dat nodig heeft."
+        },
+        "laws": {
+          "title": "Gebouwd voor compliance",
+          "text": "GDPR, de EU AI Act, regels in het VK en de VS: de <documents>documenten</documents> staan klaar om te downloaden."
+        },
+        "log": {
+          "title": "Elke actie vastgelegd",
+          "text": "Een eigenaar ziet wie wat heeft gedaan in het bedrijf, 12 maanden veilig bewaard op servers in de EU."
+        }
+      }
+    },
+    "moreQuestions": {
+      "title": "Nog vragen?",
+      "videos": "video's",
+      "faq": "FAQ",
+      "guides": "gidsen"
+    },
+    "closing": {
+      "title": "Maak je eerste interview\nHet is gratis",
+      "start": "Maak een interview"
+    },
+    "comparison": {
+      "title": "Sneller dan bellen\nGoedkoper dan een abonnement",
+      "text": "Geen uren aan de telefoon en geen maandelijkse kosten: een interview op basis van je functieomschrijving, betaald per kandidaat.",
+      "time": "Jouw tijd",
+      "cost": "Wat je betaalt",
+      "phone": {
+        "name": "Telefonische screenings",
+        "time": "~30 min per kandidaat",
+        "cost": "De uren van je team"
+      },
+      "subscription": {
+        "name": "Testtools",
+        "time": "Voor elke functie tests kiezen of schrijven",
+        "cost": "Maandelijkse kosten, of je nu werft of niet"
+      },
+      "prepza": {
+        "name": "prepza",
+        "time": "~10 min per functie, op basis van je functieomschrijving",
+        "cost": "{price} per kandidaat die antwoordt"
+      },
+      "more": "Vergelijk met andere tools"
+    },
+    "freeToStart": {
+      "title": "Alles is gratis\nBetaal per kandidaat",
+      "text": "Alle functies zijn inbegrepen. Een kandidaat kost pas iets als hij minstens één vraag heeft beantwoord.",
+      "lines": {
+        "create": "een interview maken",
+        "review": "onderwerpen nakijken met AI",
+        "invite": "{count} kandidaten uitnodigen",
+        "reports": "rapporten en delen",
+        "connect": "ATS, API, Slack, AI-agent",
+        "answered": "{count} kandidaten hebben geantwoord"
+      },
+      "total": "totaal",
+      "each": "({price} per kandidaat)",
+      "free": "{count, plural, one {# gratis kandidaat} other {# gratis kandidaten}} om te beginnen",
+      "perCandidate": "per kandidaat",
+      "pack": "{count} voor {price}",
+      "see": "Bekijk de prijzen",
+      "notes": {
+        "subscription": "geen abonnement",
+        "unanswered": "onbeantwoorde uitnodigingen kosten niets",
+        "expire": "credits verlopen nooit",
+        "refund": "ongebruikte betaalde credits 14 dagen lang terug te krijgen"
+      }
+    }
   },
   "faq": {
     "title": "Veelgestelde vragen",

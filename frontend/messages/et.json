@@ -135,7 +135,7 @@
   },
   "home": {
     "title": "Testi kõiki\nPalka parimad",
-    "text": "Tehisaru teeb sinu töökuulutusest professionaalse ajapiiranguga intervjuu, igale kandidaadile oma küsimustega. Vaid $2–5 kandidaadi kohta."
+    "text": "Tehisaru teeb sinu töökuulutusest professionaalse ajapiiranguga intervjuu, igale kandidaadile oma juhuslike küsimustega. Vaid $2–5 kandidaadi kohta."
   },
   "start": {
     "placeholder": "Kleebi töökuulutus või kirjelda rolli ja seda, mida kandidaat peaks teadma",
@@ -800,7 +800,7 @@
     "cancelText": "See peatub kohe ja seni loodust ei jäeta midagi alles.",
     "cancelling": "Tühistamine…",
     "cancelFailed": "Loomist ei õnnestunud tühistada. Proovi uuesti.",
-    "writing": "Kirjutame sinu küsimusi",
+    "writing": "Loome sinu küsimusi",
     "drafting": "Koostame sinu teemasid",
     "writingNote": "See võtab mõne minuti. Võid sellelt lehelt lahkuda, me jätkame.",
     "draftingNote": "Loeme sinu eesmärki ja planeerime, mida käsitleda.",
@@ -1171,9 +1171,207 @@
   },
   "landing": {
     "more": "Kuidas see töötab",
-    "demos": "Demod",
+    "demos": "Video",
     "demosTooltip": "Vaata demosid YouTube'is",
-    "askAgent": "küsi agendilt"
+    "askAgent": "küsi agendilt",
+    "create": {
+      "title": "Loo intervjuu mõne minutiga",
+      "text": "Kleebi töökuulutus ja kohanda teemasid või vali valmis mall.",
+      "describe": "Kleebi oma kuulutus",
+      "adjust": "Kohanda teemasid",
+      "ask": "Palu tehisarul teemasid muuta",
+      "or": "või",
+      "fromTemplate": "Meie mallidest"
+    },
+    "proof": {
+      "languages": "{count} keelt",
+      "ready": "Valmis ~{minutes} minutiga",
+      "noSubscription": "Ilma tellimuseta"
+    },
+    "sources": {
+      "title": "Kutsu kandidaate igalt poolt",
+      "text": "Saada neile e-kiri, avalda jagamislink, impordi fail või lase neid saata oma ATS-il, oma platvormil või AI-agendil.",
+      "labels": {
+        "ats": "Sinu ATS",
+        "email": "E-posti kutsed",
+        "file": "Hulgiimport",
+        "link": "Link töökuulutuses",
+        "api": "API",
+        "sdk": "SDK manustamine",
+        "agent": "AI-agent",
+        "apps": "AI-rakendused (MCP)"
+      },
+      "interview": "Intervjuu",
+      "candidates": "{count, plural, one {<n>#</n> kandidaat} other {<n>#</n> kandidaati}}"
+    },
+    "candidates": {
+      "title": "Mida kandidaadid näevad",
+      "text": "Ajapiiranguga intervjuu sinu brändis: üks õige vastus, mitu õiget vastust ja praktilised ülesanded.",
+      "rules": {
+        "pick": "Vali üks vastus või kõik õiged seal, kus on kirjas „Vali kõik sobivad variandid“.",
+        "change": "Saad valikut muuta, kuni liigud edasi.",
+        "time": "Kui aeg saab otsa, avaneb järgmine küsimus.",
+        "unanswered": "Vastamata küsimused loetakse valeks.",
+        "saved": "Sinu edenemine salvestatakse.",
+        "extraTime": "Vajad rohkem aega? Küsi seda enne alustamist: lisaaega saab anda {company}.",
+        "people": "Tulemused vaatavad üle ja otsuse teevad inimesed ettevõttest {company}.",
+        "stay": "Jää sellele lehele, kuni lõpetad."
+      }
+    },
+    "shareReports": {
+      "title": "Vaata, kes on parim\nJaga sekunditega",
+      "text": "Iga kandidaadi vastused ja hinne, jagatud e-kirja või vestluse kaudu.",
+      "chatQuestion": "Hei, kas keegi juba läbis?"
+    },
+    "automate": {
+      "title": "Automatiseeri värbamine",
+      "text": "Ühenda oma platvorm, AI-rakendus ja tööportaalid ning saa uuendusi Slackis.",
+      "labels": {
+        "platform": "Sinu platvorm",
+        "api": "API",
+        "sdk": "SDK manustamine",
+        "webhook": "Veebihaagid",
+        "aiApp": "AI-rakendus",
+        "mcp": "MCP-server",
+        "jobBoard": "Tööportaal",
+        "link": "Link töökuulutuses",
+        "slack": "Slack"
+      }
+    },
+    "justAsk": {
+      "title": "Lihtsalt küsi agendilt",
+      "text": "Küsi tavaliste sõnadega: agent loeb sinu andmeid, vastab „kuidas teha“ küsimustele ja teeb töö ära pärast sinu kinnitust.",
+      "welcome": "Kuidas saan täna aidata?",
+      "questions": {
+        "stats": "Mitu kandidaati läbis intervjuu {interview}?",
+        "help": "Kuidas anda kandidaadile lisaaega?",
+        "invite": "Kutsu {email} intervjuule {interview}"
+      },
+      "steps": {
+        "stats": "Loen aruannet…",
+        "help": "Loen juhendit…",
+        "invite": "Valmistan selle sulle kinnitamiseks ette…"
+      },
+      "answers": {
+        "stats": "{total} kandidaadist läbis {passed} ({percent}%) läbimise piiri {passMark}% juures. Parim hinne on {best}%.",
+        "help": "Kandidaadi lehel anna talle enne alustamist +25%, +50% või +100% iga küsimuse ajast. Lähemalt <link>juhendis ajastamise ja lisaaja kohta</link>.",
+        "invite": "{email} on kutsutud intervjuule {interview}."
+      },
+      "cards": {
+        "info": {
+          "title": "Info",
+          "text": "Küsi oma intervjuude, kandidaatide ja tulemuste kohta."
+        },
+        "help": {
+          "title": "Abi",
+          "text": "„Kuidas teha“ vastused prepza juhenditest, sinu keeles."
+        },
+        "actions": {
+          "title": "Toimingud",
+          "text": "Kutsu kandidaate, loo intervjuusid, muuda seadeid."
+        }
+      }
+    },
+    "trustQuality": {
+      "title": "Usaldus, kvaliteet ja vastavus",
+      "text": "Küsimused, mis lähevad paremaks, inimene, kes otsustab, dokumendid valmis.",
+      "steps": {
+        "generated": {
+          "labels": "loodud",
+          "lines": "Tehisaru kirjutab küsimused."
+        },
+        "checked": {
+          "labels": "kontrollitud",
+          "lines": "Teine tehisaru kontrollib vastuseid pimesi, enne kui küsimus on valmis."
+        },
+        "answered": {
+          "labels": "vastatud",
+          "lines": "Kandidaadid vastavad, hindavad küsimusi ja teatavad probleemidest."
+        },
+        "flagged": {
+          "labels": "märgitud",
+          "lines": "Vastused, hääled ja teated toovad esile nõrga küsimuse, isegi kui „seda on raske lugeda“."
+        },
+        "rewritten": {
+          "labels": "ümberkirjutatud",
+          "lines": "See parandatakse või asendatakse ja läheb ringi tagasi."
+        }
+      },
+      "cards": {
+        "person": {
+          "title": "Otsustab inimene",
+          "text": "Tulemus toetab sinu otsust, kuid ei tee seda sinu eest. Märked kahtlase käitumise kohta on põhjus lähemalt vaadata, mitte tõend."
+        },
+        "fair": {
+          "title": "Õiglane iga kandidaadi suhtes",
+          "text": "Sama taimer ja sama küsimuste liikide segu, küsimused valitakse igaühele juhuslikult, lisaaeg neile, kes seda vajavad."
+        },
+        "laws": {
+          "title": "Loodud vastavust silmas pidades",
+          "text": "GDPR, ELi tehisintellekti määrus (AI Act), Ühendkuningriigi ja USA reeglid: <documents>dokumendid</documents> on allalaadimiseks valmis."
+        },
+        "log": {
+          "title": "Iga toiming on kirjas",
+          "text": "Omanik näeb, kes mida ettevõttes tegi; logi hoitakse turvaliselt 12 kuud ELi serverites."
+        }
+      }
+    },
+    "moreQuestions": {
+      "title": "Veel küsimusi?",
+      "videos": "videod",
+      "faq": "KKK",
+      "guides": "juhendid"
+    },
+    "closing": {
+      "title": "Loo oma esimene intervjuu\nSee on tasuta",
+      "start": "Loo intervjuu"
+    },
+    "comparison": {
+      "title": "Kiirem kui telefonivestlused\nOdavam kui tellimused",
+      "text": "Ei tunde kõnedele ega kuutasu: intervjuu sinu töökuulutusest, tasu kandidaadi kohta.",
+      "time": "Sinu aeg",
+      "cost": "Mida maksad",
+      "phone": {
+        "name": "Telefonivestlused",
+        "time": "~30 min kandidaadi kohta",
+        "cost": "Sinu meeskonna tunnid"
+      },
+      "subscription": {
+        "name": "Testimisvahendid",
+        "time": "Testid, mis tuleb iga rolli jaoks valida või kirjutada",
+        "cost": "Kuutasu, värbad või mitte"
+      },
+      "prepza": {
+        "name": "prepza",
+        "time": "~10 min rolli kohta, sinu töökuulutusest",
+        "cost": "{price} iga vastava kandidaadi kohta"
+      },
+      "more": "Võrdle teiste tööriistadega"
+    },
+    "freeToStart": {
+      "title": "Kõik on tasuta\nMaksa kandidaadi kohta",
+      "text": "Kõik funktsioonid on hinnas. Kandidaat maksab alles siis, kui ta on vastanud vähemalt ühele küsimusele.",
+      "lines": {
+        "create": "loo intervjuu",
+        "review": "vaata teemad AI-ga üle",
+        "invite": "kutsu {count} kandidaati",
+        "reports": "aruanded ja jagamine",
+        "connect": "ATS, API, Slack, AI-agent",
+        "answered": "{count} kandidaati vastas"
+      },
+      "total": "kokku",
+      "each": "({price} kandidaadi kohta)",
+      "free": "{count, plural, one {# tasuta kandidaat} other {# tasuta kandidaati}} alustamiseks",
+      "perCandidate": "kandidaadi kohta",
+      "pack": "{count} hinnaga {price}",
+      "see": "Vaata hindu",
+      "notes": {
+        "subscription": "tellimust pole",
+        "unanswered": "vastamata kutsed ei maksa midagi",
+        "expire": "krediidid ei aegu",
+        "refund": "kasutamata ostetud krediidid saab 14 päeva jooksul tagasi"
+      }
+    }
   },
   "faq": {
     "title": "Korduma kippuvad küsimused",

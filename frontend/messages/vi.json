@@ -135,7 +135,7 @@
   },
   "home": {
     "title": "Kiểm tra mọi ứng viên\nTuyển người giỏi nhất",
-    "text": "AI biến mô tả công việc của bạn thành một buổi phỏng vấn có tính giờ chuyên nghiệp, với câu hỏi riêng cho mỗi ứng viên. Chỉ $2–5 mỗi ứng viên."
+    "text": "AI biến mô tả công việc của bạn thành một buổi phỏng vấn có tính giờ chuyên nghiệp, với bộ câu hỏi ngẫu nhiên riêng cho mỗi ứng viên. Chỉ $2–5 mỗi ứng viên."
   },
   "start": {
     "placeholder": "Dán mô tả công việc, hoặc mô tả vị trí và những gì ứng viên cần biết",
@@ -800,7 +800,7 @@
     "cancelText": "Việc tạo sẽ dừng ngay, và không giữ lại nội dung nào đã tạo.",
     "cancelling": "Đang hủy…",
     "cancelFailed": "Không thể hủy việc tạo. Vui lòng thử lại.",
-    "writing": "Đang viết câu hỏi của bạn",
+    "writing": "Đang tạo câu hỏi của bạn",
     "drafting": "Đang soạn các chủ đề của bạn",
     "writingNote": "Việc này mất vài phút. Bạn có thể rời trang này; chúng tôi vẫn tiếp tục.",
     "draftingNote": "Đang đọc mục tiêu của bạn và lên kế hoạch nội dung cần bao quát.",
@@ -1171,9 +1171,207 @@
   },
   "landing": {
     "more": "Cách hoạt động",
-    "demos": "Demo",
+    "demos": "Video",
     "demosTooltip": "Xem demo trên YouTube",
-    "askAgent": "hỏi trợ lý AI"
+    "askAgent": "hỏi trợ lý AI",
+    "create": {
+      "title": "Tạo buổi phỏng vấn trong vài phút",
+      "text": "Dán mô tả công việc rồi điều chỉnh các chủ đề, hoặc chọn một mẫu có sẵn.",
+      "describe": "Dán mô tả công việc",
+      "adjust": "Điều chỉnh chủ đề",
+      "ask": "Nhờ AI thay đổi chủ đề",
+      "or": "hoặc",
+      "fromTemplate": "Từ mẫu của chúng tôi"
+    },
+    "proof": {
+      "languages": "{count} ngôn ngữ",
+      "ready": "Sẵn sàng sau ~{minutes} phút",
+      "noSubscription": "Không cần gói đăng ký"
+    },
+    "sources": {
+      "title": "Mời ứng viên từ mọi nơi",
+      "text": "Gửi email, đăng liên kết chia sẻ, nhập tệp, hoặc để ATS, nền tảng của riêng bạn hay agent AI gửi lời mời.",
+      "labels": {
+        "ats": "ATS của bạn",
+        "email": "Mời qua email",
+        "file": "Nhập hàng loạt",
+        "link": "Liên kết trong tin tuyển dụng",
+        "api": "API",
+        "sdk": "Nhúng SDK",
+        "agent": "Agent AI",
+        "apps": "Ứng dụng AI (MCP)"
+      },
+      "interview": "Phỏng vấn",
+      "candidates": "{count, plural, other {<n>#</n> ứng viên}}"
+    },
+    "candidates": {
+      "title": "Ứng viên thấy gì",
+      "text": "Buổi phỏng vấn có tính giờ mang thương hiệu của bạn: một đáp án, nhiều đáp án và câu hỏi thực hành.",
+      "rules": {
+        "pick": "Chọn một đáp án, hoặc chọn mọi đáp án đúng ở câu có ghi Chọn tất cả phương án đúng.",
+        "change": "Bạn có thể đổi lựa chọn cho đến khi chuyển sang câu tiếp theo.",
+        "time": "Khi hết giờ, câu tiếp theo sẽ mở ra.",
+        "unanswered": "Câu chưa trả lời được tính là sai.",
+        "saved": "Tiến độ của bạn được lưu.",
+        "extraTime": "Bạn cần thêm thời gian? Hãy hỏi {company} trước khi bắt đầu.",
+        "people": "Người của {company} sẽ xem xét kết quả và đưa ra quyết định.",
+        "stay": "Hãy ở lại trang này cho đến khi làm xong."
+      }
+    },
+    "shareReports": {
+      "title": "Biết ngay ai giỏi nhất\nChia sẻ trong vài giây",
+      "text": "Câu trả lời và điểm của mọi ứng viên, chia sẻ qua email hoặc chat.",
+      "chatQuestion": "Này, đã có ai đạt chưa?"
+    },
+    "automate": {
+      "title": "Tự động hóa tuyển dụng",
+      "text": "Kết nối nền tảng của bạn, ứng dụng AI và các trang tuyển dụng, rồi nhận cập nhật trong Slack.",
+      "labels": {
+        "platform": "Nền tảng của bạn",
+        "api": "API",
+        "sdk": "Nhúng SDK",
+        "webhook": "Webhook",
+        "aiApp": "Ứng dụng AI",
+        "mcp": "Máy chủ MCP",
+        "jobBoard": "Trang tuyển dụng",
+        "link": "Liên kết trong tin tuyển dụng",
+        "slack": "Slack"
+      }
+    },
+    "justAsk": {
+      "title": "Chỉ cần hỏi trợ lý AI",
+      "text": "Hỏi bằng lời thường: trợ lý đọc dữ liệu của bạn, trả lời câu hỏi cách làm và thực hiện công việc sau khi bạn xác nhận.",
+      "welcome": "Hôm nay tôi có thể giúp gì cho bạn?",
+      "questions": {
+        "stats": "Có bao nhiêu ứng viên đạt {interview}?",
+        "help": "Làm sao để cho ứng viên thêm thời gian?",
+        "invite": "Mời {email} tham gia {interview}"
+      },
+      "steps": {
+        "stats": "Đang đọc báo cáo…",
+        "help": "Đang đọc hướng dẫn…",
+        "invite": "Đang chuẩn bị để bạn xác nhận…"
+      },
+      "answers": {
+        "stats": "{passed} trên {total} ứng viên đạt ({percent}%) với điểm đạt {passMark}%. Điểm cao nhất là {best}%.",
+        "help": "Trên trang của ứng viên, hãy cho họ thêm +25%, +50% hoặc +100% thời gian mỗi câu trước khi họ bắt đầu. Xem thêm trong <link>hướng dẫn đặt thời gian cho bài kiểm tra kỹ năng</link>.",
+        "invite": "Đã mời {email} tham gia {interview}."
+      },
+      "cards": {
+        "info": {
+          "title": "Thông tin",
+          "text": "Hỏi về các buổi phỏng vấn, ứng viên và kết quả của bạn."
+        },
+        "help": {
+          "title": "Trợ giúp",
+          "text": "Câu trả lời cách làm từ hướng dẫn của prepza, bằng ngôn ngữ của bạn."
+        },
+        "actions": {
+          "title": "Thao tác",
+          "text": "Mời ứng viên, tạo buổi phỏng vấn, đổi cài đặt."
+        }
+      }
+    },
+    "trustQuality": {
+      "title": "Tin cậy, chất lượng và tuân thủ",
+      "text": "Câu hỏi ngày càng tốt hơn, con người ra quyết định, tài liệu sẵn sàng.",
+      "steps": {
+        "generated": {
+          "labels": "đã tạo",
+          "lines": "AI viết câu hỏi."
+        },
+        "checked": {
+          "labels": "đã kiểm tra",
+          "lines": "Một AI thứ hai tự làm bài mà không xem đáp án để kiểm tra trước khi câu hỏi sẵn sàng."
+        },
+        "answered": {
+          "labels": "đã trả lời",
+          "lines": "Ứng viên trả lời, đánh giá câu hỏi và báo lỗi."
+        },
+        "flagged": {
+          "labels": "bị gắn cờ",
+          "lines": "Câu trả lời, lượt bình chọn và báo cáo chỉ ra câu hỏi yếu, kể cả khi chỉ là \"khó đọc\"."
+        },
+        "rewritten": {
+          "labels": "đã viết lại",
+          "lines": "Câu hỏi được sửa hoặc thay thế, rồi quay lại vòng lặp."
+        }
+      },
+      "cards": {
+        "person": {
+          "title": "Con người quyết định",
+          "text": "Điểm số hỗ trợ quyết định của bạn, không quyết định thay bạn. Cảnh báo hành vi bất thường là lý do để xem kỹ hơn, không phải bằng chứng."
+        },
+        "fair": {
+          "title": "Công bằng với mọi ứng viên",
+          "text": "Cùng đồng hồ và cùng tỷ lệ các loại câu hỏi, câu hỏi chọn ngẫu nhiên cho từng người, thêm thời gian cho người cần."
+        },
+        "laws": {
+          "title": "Xây dựng để tuân thủ",
+          "text": "GDPR, Đạo luật AI của EU, quy định của Anh và Mỹ: <documents>tài liệu</documents> sẵn sàng để tải về."
+        },
+        "log": {
+          "title": "Mọi thao tác đều được ghi lại",
+          "text": "Chủ sở hữu thấy ai đã làm gì trong công ty, dữ liệu được lưu an toàn 12 tháng trên máy chủ tại EU."
+        }
+      }
+    },
+    "moreQuestions": {
+      "title": "Còn câu hỏi khác?",
+      "videos": "video",
+      "faq": "Câu hỏi thường gặp",
+      "guides": "hướng dẫn"
+    },
+    "closing": {
+      "title": "Tạo buổi phỏng vấn đầu tiên\nHoàn toàn miễn phí",
+      "start": "Tạo buổi phỏng vấn"
+    },
+    "comparison": {
+      "title": "Nhanh hơn sàng lọc qua điện thoại\nRẻ hơn gói đăng ký",
+      "text": "Không tốn hàng giờ gọi điện, không phí hằng tháng: buổi phỏng vấn tạo từ mô tả công việc của bạn, trả tiền theo ứng viên.",
+      "time": "Thời gian của bạn",
+      "cost": "Chi phí",
+      "phone": {
+        "name": "Sàng lọc qua điện thoại",
+        "time": "~30 phút mỗi ứng viên",
+        "cost": "Thời gian của đội ngũ"
+      },
+      "subscription": {
+        "name": "Công cụ kiểm tra",
+        "time": "Phải chọn hoặc viết bài kiểm tra cho từng vị trí",
+        "cost": "Phí hằng tháng, dù có tuyển hay không"
+      },
+      "prepza": {
+        "name": "prepza",
+        "time": "~10 phút mỗi vị trí, từ mô tả công việc của bạn",
+        "cost": "{price} mỗi ứng viên đã trả lời"
+      },
+      "more": "So sánh với công cụ khác"
+    },
+    "freeToStart": {
+      "title": "Mọi thứ đều miễn phí\nTrả tiền theo ứng viên",
+      "text": "Bao gồm mọi tính năng. Chỉ tính phí một ứng viên khi họ đã trả lời ít nhất một câu hỏi.",
+      "lines": {
+        "create": "tạo buổi phỏng vấn",
+        "review": "xem xét chủ đề cùng AI",
+        "invite": "mời {count} ứng viên",
+        "reports": "báo cáo và chia sẻ",
+        "connect": "ATS, API, Slack, agent AI",
+        "answered": "{count} ứng viên đã trả lời"
+      },
+      "total": "tổng cộng",
+      "each": "({price} mỗi ứng viên)",
+      "free": "{count, plural, other {# ứng viên đầu tiên miễn phí}}",
+      "perCandidate": "mỗi ứng viên",
+      "pack": "{count} ứng viên giá {price}",
+      "see": "Xem bảng giá",
+      "notes": {
+        "subscription": "không có gói đăng ký",
+        "unanswered": "lời mời chưa được trả lời không mất phí",
+        "expire": "credit không bao giờ hết hạn",
+        "refund": "credit đã mua chưa dùng được hoàn tiền trong 14 ngày"
+      }
+    }
   },
   "faq": {
     "title": "Câu hỏi thường gặp",

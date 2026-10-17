@@ -135,7 +135,7 @@
   },
   "home": {
     "title": "Testez tout le monde\nRecrutez les meilleurs",
-    "text": "L'IA transforme votre fiche de poste en un entretien chronométré professionnel, avec des questions uniques pour chaque candidat. Seulement 2–5 $ par candidat."
+    "text": "L'IA transforme votre fiche de poste en un entretien chronométré professionnel, avec ses propres questions aléatoires pour chaque candidat. Seulement 2–5 $ par candidat."
   },
   "start": {
     "placeholder": "Collez une fiche de poste, ou décrivez le poste et ce qu'un candidat doit savoir",
@@ -800,7 +800,7 @@
     "cancelText": "Elle s'arrête maintenant, et rien de ce qui a été généré n'est conservé.",
     "cancelling": "Annulation…",
     "cancelFailed": "Impossible d'annuler la génération. Veuillez réessayer.",
-    "writing": "Rédaction de vos questions",
+    "writing": "Génération de vos questions",
     "drafting": "Ébauche de vos thèmes",
     "writingNote": "Cela prend quelques minutes. Vous pouvez quitter cette page ; nous continuons.",
     "draftingNote": "Nous lisons votre objectif et planifions ce qu'il faut couvrir.",
@@ -1171,9 +1171,207 @@
   },
   "landing": {
     "more": "Comment ça marche",
-    "demos": "Démos",
+    "demos": "Vidéo",
     "demosTooltip": "Voir les démos sur YouTube",
-    "askAgent": "demander à l'agent"
+    "askAgent": "demander à l'agent",
+    "create": {
+      "title": "Créez un entretien en quelques minutes",
+      "text": "Collez une fiche de poste et ajustez les thèmes, ou choisissez un modèle prêt à l'emploi.",
+      "describe": "Collez votre fiche",
+      "adjust": "Ajustez les thèmes",
+      "ask": "Demandez à l'IA de modifier les thèmes",
+      "or": "ou",
+      "fromTemplate": "Depuis nos modèles"
+    },
+    "proof": {
+      "languages": "{count} langues",
+      "ready": "Prêt en ~{minutes} minutes",
+      "noSubscription": "Sans abonnement"
+    },
+    "sources": {
+      "title": "Invitez des candidats de partout",
+      "text": "Envoyez-leur un e-mail, publiez un lien à partager, importez un fichier, ou laissez votre ATS, votre propre plateforme ou un agent IA les inviter.",
+      "labels": {
+        "ats": "Votre ATS",
+        "email": "Invitations par e-mail",
+        "file": "Imports en masse",
+        "link": "Lien dans l'annonce",
+        "api": "API",
+        "sdk": "SDK intégré",
+        "agent": "Agent IA",
+        "apps": "Apps IA (MCP)"
+      },
+      "interview": "Entretien",
+      "candidates": "{count, plural, one {<n>#</n> candidat} other {<n>#</n> candidats}}"
+    },
+    "candidates": {
+      "title": "Ce que voient les candidats",
+      "text": "Un entretien chronométré aux couleurs de votre marque : choix unique, choix multiple et mises en situation.",
+      "rules": {
+        "pick": "Choisissez une réponse, ou toutes les bonnes là où il est indiqué « Cochez toutes les bonnes réponses ».",
+        "change": "Vous pouvez changer votre choix jusqu'à ce que vous passiez à la suite.",
+        "time": "Quand le temps est écoulé, la question suivante s'ouvre.",
+        "unanswered": "Les questions sans réponse comptent comme fausses.",
+        "saved": "Votre progression est enregistrée.",
+        "extraTime": "Besoin de plus de temps ? Contactez {company} avant de commencer.",
+        "people": "Chez {company}, des personnes examinent les résultats et prennent la décision.",
+        "stay": "Restez sur cette page jusqu'à la fin."
+      }
+    },
+    "shareReports": {
+      "title": "Voyez qui est le meilleur\nPartagez-le en quelques secondes",
+      "text": "Les réponses et la note de chaque candidat, partagées par e-mail ou par chat.",
+      "chatQuestion": "Salut, quelqu'un a déjà réussi ?"
+    },
+    "automate": {
+      "title": "Automatisez votre recrutement",
+      "text": "Connectez votre plateforme, votre app IA et les sites d'emploi, et recevez les nouvelles dans Slack.",
+      "labels": {
+        "platform": "Votre plateforme",
+        "api": "API",
+        "sdk": "SDK intégré",
+        "webhook": "Webhooks",
+        "aiApp": "App IA",
+        "mcp": "Serveur MCP",
+        "jobBoard": "Site d'emploi",
+        "link": "Lien dans l'annonce",
+        "slack": "Slack"
+      }
+    },
+    "justAsk": {
+      "title": "Demandez simplement à l'agent",
+      "text": "Demandez avec vos mots : il lit vos données, répond aux questions pratiques et fait le travail une fois que vous avez confirmé.",
+      "welcome": "Comment puis-je vous aider aujourd'hui ?",
+      "questions": {
+        "stats": "Combien de candidats ont réussi {interview} ?",
+        "help": "Comment accorder du temps supplémentaire à un candidat ?",
+        "invite": "Invite {email} à {interview}"
+      },
+      "steps": {
+        "stats": "Lecture du rapport…",
+        "help": "Lecture du guide…",
+        "invite": "Préparation pour votre confirmation…"
+      },
+      "answers": {
+        "stats": "{passed} candidats sur {total} ont réussi ({percent} %) avec un seuil de réussite de {passMark} %. La meilleure note est de {best} %.",
+        "help": "Sur la page du candidat, accordez-lui +25 %, +50 % ou +100 % du temps de chaque question avant qu'il ne commence. Plus de détails dans le guide <link>Chronométrer un test de compétences</link>.",
+        "invite": "{email} est invité à {interview}."
+      },
+      "cards": {
+        "info": {
+          "title": "Infos",
+          "text": "Posez vos questions sur vos entretiens, vos candidats et leurs résultats."
+        },
+        "help": {
+          "title": "Aide",
+          "text": "Des réponses pratiques tirées des guides de prepza, dans votre langue."
+        },
+        "actions": {
+          "title": "Actions",
+          "text": "Inviter des candidats, créer des entretiens, modifier les paramètres."
+        }
+      }
+    },
+    "trustQuality": {
+      "title": "Confiance, qualité et conformité",
+      "text": "Des questions qui s'améliorent, une personne qui décide, des documents prêts.",
+      "steps": {
+        "generated": {
+          "labels": "générée",
+          "lines": "L'IA rédige les questions."
+        },
+        "checked": {
+          "labels": "vérifiée",
+          "lines": "Une seconde IA vérifie les réponses à l'aveugle avant que la question soit prête."
+        },
+        "answered": {
+          "labels": "répondue",
+          "lines": "Les candidats répondent, notent les questions et signalent les problèmes."
+        },
+        "flagged": {
+          "labels": "signalée",
+          "lines": "Réponses, votes et signalements repèrent une question faible, même « difficile à lire »."
+        },
+        "rewritten": {
+          "labels": "réécrite",
+          "lines": "Elle est corrigée ou remplacée, puis revient dans la boucle."
+        }
+      },
+      "cards": {
+        "person": {
+          "title": "Une personne décide",
+          "text": "La note éclaire votre décision, elle ne la prend pas. Les alertes d'intégrité invitent à regarder de plus près, elles ne prouvent rien."
+        },
+        "fair": {
+          "title": "Équitable pour chaque candidat",
+          "text": "Le même chronomètre et le même mélange de types de questions, des questions tirées au hasard pour chaque personne, du temps supplémentaire pour ceux qui en ont besoin."
+        },
+        "laws": {
+          "title": "Pensé pour la conformité",
+          "text": "GDPR, EU AI Act, règles du Royaume-Uni et des États-Unis : les <documents>documents</documents> sont prêts à télécharger."
+        },
+        "log": {
+          "title": "Chaque action enregistrée",
+          "text": "Le propriétaire voit qui a fait quoi dans l'entreprise, conservé en sécurité pendant 12 mois sur des serveurs dans l'UE."
+        }
+      }
+    },
+    "moreQuestions": {
+      "title": "D'autres questions ?",
+      "videos": "vidéos",
+      "faq": "FAQ",
+      "guides": "guides"
+    },
+    "closing": {
+      "title": "Créez votre premier entretien\nC'est gratuit",
+      "start": "Créer un entretien"
+    },
+    "comparison": {
+      "title": "Plus rapide que le téléphone\nMoins cher qu'un abonnement",
+      "text": "Pas d'heures au téléphone ni d'abonnement mensuel : un entretien à partir de votre fiche de poste, payé par candidat.",
+      "time": "Votre temps",
+      "cost": "Ce que vous payez",
+      "phone": {
+        "name": "Entretiens téléphoniques",
+        "time": "~30 min par candidat",
+        "cost": "Les heures de votre équipe"
+      },
+      "subscription": {
+        "name": "Outils de test",
+        "time": "Des tests à choisir ou à rédiger pour chaque poste",
+        "cost": "Un abonnement mensuel, que vous recrutiez ou non"
+      },
+      "prepza": {
+        "name": "prepza",
+        "time": "~10 min par poste, à partir de votre fiche de poste",
+        "cost": "{price} par candidat qui répond"
+      },
+      "more": "Comparer avec d'autres outils"
+    },
+    "freeToStart": {
+      "title": "Tout est gratuit\nPayez par candidat",
+      "text": "Toutes les fonctionnalités sont incluses. Un candidat n'est facturé qu'une fois qu'il a répondu à au moins une question.",
+      "lines": {
+        "create": "créer un entretien",
+        "review": "revoir les thèmes avec l'IA",
+        "invite": "inviter {count} candidats",
+        "reports": "rapports et partage",
+        "connect": "ATS, API, Slack, agent IA",
+        "answered": "{count} candidats ont répondu"
+      },
+      "total": "total",
+      "each": "({price} par candidat)",
+      "free": "{count, plural, one {# candidat gratuit} other {# candidats gratuits}} pour commencer",
+      "perCandidate": "par candidat",
+      "pack": "{count} pour {price}",
+      "see": "Voir les tarifs",
+      "notes": {
+        "subscription": "sans abonnement",
+        "unanswered": "les invitations sans réponse ne coûtent rien",
+        "expire": "les crédits n'expirent jamais",
+        "refund": "crédits payés non utilisés remboursables pendant 14 jours"
+      }
+    }
   },
   "faq": {
     "title": "Questions fréquentes",

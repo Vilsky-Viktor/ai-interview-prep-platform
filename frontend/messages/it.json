@@ -135,7 +135,7 @@
   },
   "home": {
     "title": "Metti alla prova tutti\nAssumi i migliori",
-    "text": "L'IA trasforma la tua descrizione del ruolo in un colloquio a tempo professionale, con domande uniche per ogni candidato. Solo $2–5 per candidato."
+    "text": "L'IA trasforma la tua descrizione del ruolo in un colloquio a tempo professionale, con domande casuali proprie per ogni candidato. Solo $2–5 per candidato."
   },
   "start": {
     "placeholder": "Incolla una descrizione del ruolo, oppure descrivi il ruolo e cosa dovrebbe sapere un candidato",
@@ -800,7 +800,7 @@
     "cancelText": "Si ferma ora, e nulla di quanto generato finora viene conservato.",
     "cancelling": "Annullamento…",
     "cancelFailed": "Impossibile annullare la generazione. Riprova.",
-    "writing": "Stiamo scrivendo le tue domande",
+    "writing": "Stiamo generando le tue domande",
     "drafting": "Stiamo abbozzando i tuoi argomenti",
     "writingNote": "Ci vogliono alcuni minuti. Puoi lasciare questa pagina: continuiamo noi.",
     "draftingNote": "Leggiamo il tuo obiettivo e pianifichiamo cosa coprire.",
@@ -1171,9 +1171,207 @@
   },
   "landing": {
     "more": "Come funziona",
-    "demos": "Demo",
+    "demos": "Video",
     "demosTooltip": "Guarda le demo su YouTube",
-    "askAgent": "chiedi all'agente"
+    "askAgent": "chiedi all'agente",
+    "create": {
+      "title": "Crea un colloquio in pochi minuti",
+      "text": "Incolla una descrizione del ruolo e regola gli argomenti, oppure scegli un modello pronto.",
+      "describe": "Incolla la descrizione",
+      "adjust": "Regola gli argomenti",
+      "ask": "Chiedi all'IA di cambiare gli argomenti",
+      "or": "oppure",
+      "fromTemplate": "Dai nostri modelli"
+    },
+    "proof": {
+      "languages": "{count} lingue",
+      "ready": "Pronto in ~{minutes} minuti",
+      "noSubscription": "Nessun abbonamento"
+    },
+    "sources": {
+      "title": "Invita candidati da ovunque",
+      "text": "Invitali via email, pubblica un link condivisibile, importa un file, oppure lascia che li invii il tuo ATS, la tua piattaforma o un agente IA.",
+      "labels": {
+        "ats": "Il tuo ATS",
+        "email": "Inviti via email",
+        "file": "Importazioni in blocco",
+        "link": "Link nell'annuncio",
+        "api": "API",
+        "sdk": "SDK integrato",
+        "agent": "Agente IA",
+        "apps": "App IA (MCP)"
+      },
+      "interview": "Colloquio",
+      "candidates": "{count, plural, one {<n>#</n> candidato} other {<n>#</n> candidati}}"
+    },
+    "candidates": {
+      "title": "Cosa vedono i candidati",
+      "text": "Un colloquio a tempo con il tuo brand: scelta singola, scelta multipla e prove pratiche.",
+      "rules": {
+        "pick": "Scegli una risposta, oppure tutte quelle corrette dove compare «Seleziona tutte le opzioni corrette».",
+        "change": "Puoi cambiare la tua scelta finché non vai avanti.",
+        "time": "Quando il tempo scade, si apre la domanda successiva.",
+        "unanswered": "Le domande senza risposta contano come sbagliate.",
+        "saved": "I progressi vengono salvati.",
+        "extraTime": "Ti serve più tempo? Contatta {company} prima di iniziare.",
+        "people": "I risultati vengono esaminati da persone e decide {company}.",
+        "stay": "Resta su questa pagina fino alla fine."
+      }
+    },
+    "shareReports": {
+      "title": "Scopri chi è il migliore\nCondividilo in pochi secondi",
+      "text": "Le risposte e il punteggio di ogni candidato, condivisi via email o in chat.",
+      "chatQuestion": "Ehi, qualcuno l'ha già superato?"
+    },
+    "automate": {
+      "title": "Automatizza le tue assunzioni",
+      "text": "Collega la tua piattaforma, la tua app IA e i siti di annunci di lavoro, e ricevi aggiornamenti in Slack.",
+      "labels": {
+        "platform": "La tua piattaforma",
+        "api": "API",
+        "sdk": "SDK integrato",
+        "webhook": "Webhook",
+        "aiApp": "App IA",
+        "mcp": "Server MCP",
+        "jobBoard": "Sito di annunci",
+        "link": "Link nell'annuncio",
+        "slack": "Slack"
+      }
+    },
+    "justAsk": {
+      "title": "Chiedi all'agente",
+      "text": "Chiedi con parole tue: legge i tuoi dati, risponde a domande su come fare e svolge il lavoro dopo la tua conferma.",
+      "welcome": "Come posso aiutarti oggi?",
+      "questions": {
+        "stats": "Quanti candidati hanno superato {interview}?",
+        "help": "Come do tempo extra a un candidato?",
+        "invite": "Invita {email} a {interview}"
+      },
+      "steps": {
+        "stats": "Sto leggendo il report…",
+        "help": "Sto leggendo la guida…",
+        "invite": "Lo preparo per la tua conferma…"
+      },
+      "answers": {
+        "stats": "{passed} candidati su {total} hanno superato il colloquio ({percent}%) con una soglia di superamento del {passMark}%. Il punteggio migliore è {best}%.",
+        "help": "Nella pagina del candidato, dagli +25%, +50% o +100% del tempo di ogni domanda prima che inizi. Approfondisci nella guida <link>Come impostare i tempi di un test di competenze</link>.",
+        "invite": "{email} è stato invitato a {interview}."
+      },
+      "cards": {
+        "info": {
+          "title": "Info",
+          "text": "Chiedi dei tuoi colloqui, candidati e risultati."
+        },
+        "help": {
+          "title": "Aiuto",
+          "text": "Risposte pratiche dalle guide di prepza, nella tua lingua."
+        },
+        "actions": {
+          "title": "Azioni",
+          "text": "Invitare candidati, creare colloqui, modificare le impostazioni."
+        }
+      }
+    },
+    "trustQuality": {
+      "title": "Fiducia, qualità e conformità",
+      "text": "Domande che migliorano, una persona che decide, documenti pronti.",
+      "steps": {
+        "generated": {
+          "labels": "generata",
+          "lines": "L'IA scrive le domande."
+        },
+        "checked": {
+          "labels": "verificata",
+          "lines": "Una seconda IA verifica le risposte alla cieca prima che sia pronta."
+        },
+        "answered": {
+          "labels": "risposta",
+          "lines": "I candidati rispondono, valutano le domande e segnalano problemi."
+        },
+        "flagged": {
+          "labels": "segnalata",
+          "lines": "Risposte, voti e segnalazioni indicano una domanda debole, anche «è difficile da leggere»."
+        },
+        "rewritten": {
+          "labels": "riscritta",
+          "lines": "Viene corretta o sostituita, e torna nel ciclo."
+        }
+      },
+      "cards": {
+        "person": {
+          "title": "Decide una persona",
+          "text": "Il punteggio supporta la tua decisione, non la prende al posto tuo. Le segnalazioni di integrità sono un motivo per guardare meglio, non una prova."
+        },
+        "fair": {
+          "title": "Equo per ogni candidato",
+          "text": "Lo stesso timer e lo stesso mix di tipi di domanda, domande estratte a caso per ogni persona, tempo extra per chi ne ha bisogno."
+        },
+        "laws": {
+          "title": "Pensato per la conformità",
+          "text": "GDPR, EU AI Act, norme del Regno Unito e degli Stati Uniti: i <documents>documenti</documents> sono pronti da scaricare."
+        },
+        "log": {
+          "title": "Ogni azione registrata",
+          "text": "Il proprietario vede chi ha fatto cosa nell'azienda, conservato in sicurezza per 12 mesi su server nell'UE."
+        }
+      }
+    },
+    "moreQuestions": {
+      "title": "Altre domande?",
+      "videos": "video",
+      "faq": "FAQ",
+      "guides": "guide"
+    },
+    "closing": {
+      "title": "Crea il tuo primo colloquio\nÈ gratis",
+      "start": "Crea un colloquio"
+    },
+    "comparison": {
+      "title": "Più veloce delle telefonate\nPiù economico degli abbonamenti",
+      "text": "Niente ore al telefono e nessun canone mensile: un colloquio dalla tua descrizione del ruolo, pagato per candidato.",
+      "time": "Il tuo tempo",
+      "cost": "Quanto paghi",
+      "phone": {
+        "name": "Colloqui telefonici",
+        "time": "~30 min per candidato",
+        "cost": "Le ore del tuo team"
+      },
+      "subscription": {
+        "name": "Strumenti di test",
+        "time": "Test da scegliere o scrivere per ogni ruolo",
+        "cost": "Un canone mensile, che tu assuma o no"
+      },
+      "prepza": {
+        "name": "prepza",
+        "time": "~10 min per ruolo, dalla tua descrizione del ruolo",
+        "cost": "{price} per candidato che risponde"
+      },
+      "more": "Confronta con altri strumenti"
+    },
+    "freeToStart": {
+      "title": "Tutto è gratis\nPaghi per candidato",
+      "text": "Tutte le funzioni sono incluse. Un candidato costa solo dopo aver risposto ad almeno una domanda.",
+      "lines": {
+        "create": "creare un colloquio",
+        "review": "rivedere gli argomenti con l'IA",
+        "invite": "invitare {count} candidati",
+        "reports": "report e condivisione",
+        "connect": "ATS, API, Slack, agente IA",
+        "answered": "{count} candidati hanno risposto"
+      },
+      "total": "totale",
+      "each": "({price} per candidato)",
+      "free": "{count, plural, one {# candidato gratuito} other {# candidati gratuiti}} per iniziare",
+      "perCandidate": "per candidato",
+      "pack": "{count} per {price}",
+      "see": "Vedi i prezzi",
+      "notes": {
+        "subscription": "nessun abbonamento",
+        "unanswered": "gli inviti senza risposta non costano nulla",
+        "expire": "i crediti non scadono",
+        "refund": "crediti pagati non usati rimborsabili per 14 giorni"
+      }
+    }
   },
   "faq": {
     "title": "Domande frequenti",

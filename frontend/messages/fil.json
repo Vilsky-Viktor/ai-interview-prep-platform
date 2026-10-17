@@ -135,7 +135,7 @@
   },
   "home": {
     "title": "I-test ang lahat\nI-hire ang pinakamahusay",
-    "text": "Ginagawang propesyonal na timed interview ng AI ang iyong job description, na may ibang mga tanong sa bawat aplikante. $2–5 lang bawat aplikante."
+    "text": "Ginagawang propesyonal na timed interview ng AI ang iyong job description, na may sariling random na mga tanong para sa bawat aplikante. $2–5 lang bawat aplikante."
   },
   "start": {
     "placeholder": "Mag-paste ng job description, o ilarawan ang role at ang dapat malaman ng aplikante",
@@ -800,7 +800,7 @@
     "cancelText": "Titigil ito ngayon, at walang mase-save sa nagawa na.",
     "cancelling": "Kinakansela…",
     "cancelFailed": "Hindi makansela ang paggawa. Pakisubukang muli.",
-    "writing": "Isinusulat ang iyong mga tanong",
+    "writing": "Ginagawa ang iyong mga tanong",
     "drafting": "Binubuo ang iyong mga topic",
     "writingNote": "Ilang minuto ito. Puwede kang umalis sa page na ito; tuloy kami.",
     "draftingNote": "Binabasa ang iyong layunin at pinaplano kung ano ang sasakupin.",
@@ -1171,9 +1171,207 @@
   },
   "landing": {
     "more": "Paano ito gumagana",
-    "demos": "Mga demo",
+    "demos": "Video",
     "demosTooltip": "Panoorin ang mga demo sa YouTube",
-    "askAgent": "magtanong sa agent"
+    "askAgent": "magtanong sa agent",
+    "create": {
+      "title": "Gumawa ng interview sa loob ng ilang minuto",
+      "text": "I-paste ang job description at ayusin ang mga topic, o pumili ng handang template.",
+      "describe": "I-paste ang iyong description",
+      "adjust": "Ayusin ang mga topic",
+      "ask": "Hilingin sa AI na baguhin ang mga topic",
+      "or": "o",
+      "fromTemplate": "Mula sa aming mga template"
+    },
+    "proof": {
+      "languages": "{count} wika",
+      "ready": "Handa sa ~{minutes} min",
+      "noSubscription": "Walang subscription"
+    },
+    "sources": {
+      "title": "Mag-imbita ng mga aplikante mula kahit saan",
+      "text": "I-email sila, mag-publish ng shareable link, mag-import ng file, o hayaang ang iyong ATS, sarili mong platform o isang AI agent ang magpadala sa kanila.",
+      "labels": {
+        "ats": "Iyong ATS",
+        "email": "Imbitasyon sa email",
+        "file": "Bulk import",
+        "link": "Link sa job ad",
+        "api": "API",
+        "sdk": "SDK embed",
+        "agent": "AI agent",
+        "apps": "Mga AI app (MCP)"
+      },
+      "interview": "Interview",
+      "candidates": "{count, plural, one {<n>#</n> aplikante} other {<n>#</n> aplikante}}"
+    },
+    "candidates": {
+      "title": "Ang nakikita ng mga aplikante",
+      "text": "Isang timed interview na may brand mo: single choice, multi-choice at praktikal.",
+      "rules": {
+        "pick": "Pumili ng isang sagot, o lahat ng tama kapag nakasulat ang Piliin ang lahat ng tamang opsyon.",
+        "change": "Mapapalitan mo ang pinili mo hanggang lumipat ka sa susunod.",
+        "time": "Kapag naubos ang oras, magbubukas ang susunod na tanong.",
+        "unanswered": "Ang mga hindi nasagot na tanong ay mabibilang na mali.",
+        "saved": "Naka-save ang progreso mo.",
+        "extraTime": "Kailangan mo ba ng mas maraming oras? Magtanong sa {company} bago ka magsimula.",
+        "people": "Mga tao sa {company} ang nagre-review ng mga resulta at nagpapasya.",
+        "stay": "Manatili sa page na ito hanggang matapos ka."
+      }
+    },
+    "shareReports": {
+      "title": "Tingnan kung sino ang pinakamagaling\nI-share sa loob ng ilang segundo",
+      "text": "Ang mga sagot at grade ng bawat aplikante, ishine-share sa email o chat.",
+      "chatQuestion": "Uy, may pumasa na ba?"
+    },
+    "automate": {
+      "title": "I-automate ang iyong hiring",
+      "text": "Ikonekta ang iyong platform, AI app at mga job board, at makatanggap ng mga update sa Slack.",
+      "labels": {
+        "platform": "Iyong platform",
+        "api": "API",
+        "sdk": "SDK embed",
+        "webhook": "Mga webhook",
+        "aiApp": "AI app",
+        "mcp": "MCP server",
+        "jobBoard": "Job board",
+        "link": "Link sa job ad",
+        "slack": "Slack"
+      }
+    },
+    "justAsk": {
+      "title": "Itanong lang sa agent",
+      "text": "Magtanong sa simpleng salita: binabasa nito ang iyong data, sinasagot ang mga tanong kung paano gawin ang isang bagay, at ginagawa ang trabaho pagkatapos mong kumpirmahin.",
+      "welcome": "Paano kita matutulungan ngayon?",
+      "questions": {
+        "stats": "Ilang aplikante ang pumasa sa {interview}?",
+        "help": "Paano ko bibigyan ng dagdag na oras ang isang aplikante?",
+        "invite": "Imbitahin si {email} sa {interview}"
+      },
+      "steps": {
+        "stats": "Binabasa ang report…",
+        "help": "Binabasa ang gabay…",
+        "invite": "Inihahanda para makumpirma mo…"
+      },
+      "answers": {
+        "stats": "{passed} sa {total} aplikante ang pumasa ({percent}%) sa {passMark}% na pass mark. Ang pinakamataas na grade ay {best}%.",
+        "help": "Sa page ng aplikante, bigyan siya ng +25%, +50% o +100% ng oras ng bawat tanong bago siya magsimula. Higit pa sa <link>gabay sa oras at dagdag na oras</link>.",
+        "invite": "Naimbitahan si {email} sa {interview}."
+      },
+      "cards": {
+        "info": {
+          "title": "Impormasyon",
+          "text": "Magtanong tungkol sa iyong mga interview, aplikante at resulta."
+        },
+        "help": {
+          "title": "Tulong",
+          "text": "Mga sagot kung paano gawin mula sa mga gabay ng prepza, sa iyong wika."
+        },
+        "actions": {
+          "title": "Mga aksyon",
+          "text": "Mag-imbita ng mga aplikante, gumawa ng mga interview, baguhin ang settings."
+        }
+      }
+    },
+    "trustQuality": {
+      "title": "Tiwala, kalidad at compliance",
+      "text": "Mga tanong na gumaganda, isang taong nagpapasya, mga dokumentong handa.",
+      "steps": {
+        "generated": {
+          "labels": "ginawa",
+          "lines": "Isinusulat ng AI ang mga tanong."
+        },
+        "checked": {
+          "labels": "sinuri",
+          "lines": "Sinusuri ng ikalawang AI ang mga sagot nang hindi nakikita ang tamang sagot bago ito maging handa."
+        },
+        "answered": {
+          "labels": "sinagot",
+          "lines": "Sumasagot ang mga aplikante, nire-rate ang mga tanong at nire-report ang mga problema."
+        },
+        "flagged": {
+          "labels": "na-flag",
+          "lines": "Itinuturo ng mga sagot, boto at report ang mahinang tanong, kahit \"mahirap itong basahin\"."
+        },
+        "rewritten": {
+          "labels": "isinulat muli",
+          "lines": "Inaayos o pinapalitan ito, at bumabalik sa loop."
+        }
+      },
+      "cards": {
+        "person": {
+          "title": "Tao ang nagpapasya",
+          "text": "Sinusuportahan ng score ang iyong desisyon; hindi ito ang nagpapasya. Ang mga integrity flag ay dahilan para tingnan nang mas mabuti, hindi patunay."
+        },
+        "fair": {
+          "title": "Patas sa bawat aplikante",
+          "text": "Parehong timer at halo ng uri ng tanong, mga tanong na random na pinipili para sa bawat tao, at dagdag na oras para sa mga nangangailangan."
+        },
+        "laws": {
+          "title": "Ginawa para sa compliance",
+          "text": "GDPR, ang EU AI Act, at mga patakaran ng UK at US: handa nang i-download ang mga <documents>dokumento</documents>."
+        },
+        "log": {
+          "title": "Nakatala ang bawat aksyon",
+          "text": "Nakikita ng owner kung sino ang gumawa ng ano sa kumpanya, at ligtas itong itinatabi nang 12 buwan sa mga server sa EU."
+        }
+      }
+    },
+    "moreQuestions": {
+      "title": "May iba pang tanong?",
+      "videos": "mga video",
+      "faq": "FAQ",
+      "guides": "mga gabay"
+    },
+    "closing": {
+      "title": "Gawin ang iyong unang interview\nLibre ito",
+      "start": "Gumawa ng interview"
+    },
+    "comparison": {
+      "title": "Mas mabilis kaysa phone screen\nMas mura kaysa subscription",
+      "text": "Walang oras-oras na tawag at walang buwanang bayad: isang interview mula sa iyong job description, bayad bawat aplikante.",
+      "time": "Iyong oras",
+      "cost": "Ang binabayaran mo",
+      "phone": {
+        "name": "Phone screen",
+        "time": "~30 min bawat aplikante",
+        "cost": "Oras ng iyong team"
+      },
+      "subscription": {
+        "name": "Mga testing tool",
+        "time": "Mga test na pipiliin o isusulat para sa bawat role",
+        "cost": "Buwanang bayad, nagha-hire ka man o hindi"
+      },
+      "prepza": {
+        "name": "prepza",
+        "time": "~10 min bawat role, mula sa iyong job description",
+        "cost": "{price} bawat aplikanteng sumasagot"
+      },
+      "more": "Ikumpara sa ibang tool"
+    },
+    "freeToStart": {
+      "title": "Libre ang lahat\nMagbayad bawat aplikante",
+      "text": "Kasama ang bawat feature. May bayad lang ang aplikante kapag nakasagot na siya ng kahit isang tanong.",
+      "lines": {
+        "create": "gumawa ng interview",
+        "review": "i-review ang mga topic kasama ang AI",
+        "invite": "mag-imbita ng {count} aplikante",
+        "reports": "mga report at pag-share",
+        "connect": "ATS, API, Slack, AI agent",
+        "answered": "{count} aplikante ang sumagot"
+      },
+      "total": "kabuuan",
+      "each": "({price} bawat aplikante)",
+      "free": "{count, plural, one {# libreng aplikante} other {# libreng aplikante}} para magsimula",
+      "perCandidate": "bawat aplikante",
+      "pack": "{count} sa halagang {price}",
+      "see": "Tingnan ang presyo",
+      "notes": {
+        "subscription": "walang subscription",
+        "unanswered": "walang bayad ang mga imbitasyong hindi sinagot",
+        "expire": "hindi nag-e-expire ang credits",
+        "refund": "mare-refund ang binayarang credits sa 14 araw"
+      }
+    }
   },
   "faq": {
     "title": "Mga madalas itanong",

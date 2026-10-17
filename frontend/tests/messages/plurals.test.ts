@@ -10,6 +10,7 @@ describe("Filipino free candidates", () => {
   it("names the number when it's more than one", () => {
     expect(t("start.freeCandidates", { count: 3 })).toContain("3")
     expect(t("pricing.welcome", { count: 3 })).toContain("3")
+    expect(t("landing.freeToStart.free", { count: 3 })).toContain("3")
   })
 
   it("says the first one when it's one", () => {

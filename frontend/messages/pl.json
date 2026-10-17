@@ -135,7 +135,7 @@
   },
   "home": {
     "title": "Sprawdź każdego\nZatrudniaj najlepszych",
-    "text": "AI zamienia Twój opis stanowiska w profesjonalną rozmowę na czas, z unikalnymi pytaniami dla każdego kandydata. Tylko $2–5 za kandydata."
+    "text": "AI zamienia Twój opis stanowiska w profesjonalną rozmowę na czas, z losowymi pytaniami dla każdego kandydata. Tylko $2–5 za kandydata."
   },
   "start": {
     "placeholder": "Wklej opis stanowiska albo opisz rolę i to, co kandydat powinien wiedzieć",
@@ -800,7 +800,7 @@
     "cancelText": "Zatrzyma się teraz i nic z dotychczas wygenerowanego nie zostanie zachowane.",
     "cancelling": "Anulowanie…",
     "cancelFailed": "Nie udało się anulować generowania. Spróbuj ponownie.",
-    "writing": "Piszemy Twoje pytania",
+    "writing": "Generujemy Twoje pytania",
     "drafting": "Szkicujemy Twoje tematy",
     "writingNote": "To potrwa kilka minut. Możesz opuścić stronę — pracujemy dalej.",
     "draftingNote": "Czytamy Twój cel i planujemy, co omówić.",
@@ -1171,9 +1171,207 @@
   },
   "landing": {
     "more": "Jak to działa",
-    "demos": "Dema",
+    "demos": "Wideo",
     "demosTooltip": "Obejrzyj dema na YouTube",
-    "askAgent": "zapytaj agenta"
+    "askAgent": "zapytaj agenta",
+    "create": {
+      "title": "Utwórz rozmowę w kilka minut",
+      "text": "Wklej opis stanowiska i dopasuj tematy albo wybierz gotowy szablon.",
+      "describe": "Wklej swój opis",
+      "adjust": "Dopasuj tematy",
+      "ask": "Poproś AI o zmianę tematów",
+      "or": "lub",
+      "fromTemplate": "Z naszych szablonów"
+    },
+    "proof": {
+      "languages": "{count, plural, one {# język} few {# języki} many {# języków} other {# języka}}",
+      "ready": "Gotowe w ~{minutes} min",
+      "noSubscription": "Bez abonamentu"
+    },
+    "sources": {
+      "title": "Zapraszaj kandydatów zewsząd",
+      "text": "Wyślij im e-mail, opublikuj link, zaimportuj plik albo pozwól, by zrobił to Twój ATS, Twoja platforma lub agent AI.",
+      "labels": {
+        "ats": "Twój ATS",
+        "email": "Zaproszenia e-mail",
+        "file": "Import masowy",
+        "link": "Link w ogłoszeniu",
+        "api": "API",
+        "sdk": "Osadzenie SDK",
+        "agent": "Agent AI",
+        "apps": "Aplikacje AI (MCP)"
+      },
+      "interview": "Rozmowa",
+      "candidates": "{count, plural, one {<n>#</n> kandydat} few {<n>#</n> kandydaci} many {<n>#</n> kandydatów} other {<n>#</n> kandydata}}"
+    },
+    "candidates": {
+      "title": "Co widzą kandydaci",
+      "text": "Rozmowa na czas w barwach Twojej marki: jednokrotny wybór, wielokrotny wybór i zadania praktyczne.",
+      "rules": {
+        "pick": "Wybierz jedną odpowiedź albo każdą poprawną tam, gdzie widnieje „Zaznacz wszystkie poprawne odpowiedzi”.",
+        "change": "Możesz zmienić wybór, dopóki nie przejdziesz dalej.",
+        "time": "Gdy czas minie, otwiera się następne pytanie.",
+        "unanswered": "Pytania bez odpowiedzi liczą się jako błędne.",
+        "saved": "Twój postęp jest zapisywany.",
+        "extraTime": "Potrzebujesz więcej czasu? Przed startem zapytaj, czy {company} może go przyznać.",
+        "people": "Wyniki sprawdzają ludzie, a decyzję podejmuje {company}.",
+        "stay": "Zostań na tej stronie do końca."
+      }
+    },
+    "shareReports": {
+      "title": "Zobacz, kto jest najlepszy\nUdostępnij w kilka sekund",
+      "text": "Odpowiedzi i wynik każdego kandydata, udostępniane e-mailem lub na czacie.",
+      "chatQuestion": "Hej, czy ktoś już zdał?"
+    },
+    "automate": {
+      "title": "Zautomatyzuj rekrutację",
+      "text": "Połącz swoją platformę, aplikację AI i portale z ofertami pracy, a powiadomienia otrzymuj na Slacku.",
+      "labels": {
+        "platform": "Twoja platforma",
+        "api": "API",
+        "sdk": "Osadzenie SDK",
+        "webhook": "Webhooki",
+        "aiApp": "Aplikacja AI",
+        "mcp": "Serwer MCP",
+        "jobBoard": "Portal z ofertami",
+        "link": "Link w ogłoszeniu",
+        "slack": "Slack"
+      }
+    },
+    "justAsk": {
+      "title": "Po prostu zapytaj agenta",
+      "text": "Pytaj zwykłymi słowami: agent czyta Twoje dane, odpowiada na pytania „jak to zrobić” i wykonuje pracę, gdy ją potwierdzisz.",
+      "welcome": "W czym mogę Ci dziś pomóc?",
+      "questions": {
+        "stats": "Ilu kandydatów zaliczyło rozmowę {interview}?",
+        "help": "Jak dać kandydatowi dodatkowy czas?",
+        "invite": "Zaproś {email} na rozmowę {interview}"
+      },
+      "steps": {
+        "stats": "Czytam raport…",
+        "help": "Czytam poradnik…",
+        "invite": "Przygotowuję to do Twojego potwierdzenia…"
+      },
+      "answers": {
+        "stats": "Rozmowę zaliczyło {passed} z {total} kandydatów ({percent}%) przy progu zaliczenia {passMark}%. Najlepszy wynik to {best}%.",
+        "help": "Na stronie kandydata przed startem daj mu +25%, +50% lub +100% czasu na każde pytanie. Więcej w <link>poradniku o limicie czasu i dodatkowym czasie</link>.",
+        "invite": "Wysłano zaproszenie do {email} na rozmowę {interview}."
+      },
+      "cards": {
+        "info": {
+          "title": "Informacje",
+          "text": "Pytaj o swoje rozmowy, kandydatów i wyniki."
+        },
+        "help": {
+          "title": "Pomoc",
+          "text": "Odpowiedzi „jak to zrobić” z poradników prepza, w Twoim języku."
+        },
+        "actions": {
+          "title": "Działania",
+          "text": "Zapraszaj kandydatów, twórz rozmowy, zmieniaj ustawienia."
+        }
+      }
+    },
+    "trustQuality": {
+      "title": "Zaufanie, jakość i zgodność z przepisami",
+      "text": "Pytania, które stają się coraz lepsze, człowiek, który decyduje, gotowe dokumenty.",
+      "steps": {
+        "generated": {
+          "labels": "wygenerowane",
+          "lines": "AI pisze pytania."
+        },
+        "checked": {
+          "labels": "sprawdzone",
+          "lines": "Drugie AI sprawdza odpowiedzi na ślepo, zanim pytanie będzie gotowe."
+        },
+        "answered": {
+          "labels": "rozwiązane",
+          "lines": "Kandydaci odpowiadają, oceniają pytania i zgłaszają problemy."
+        },
+        "flagged": {
+          "labels": "oznaczone",
+          "lines": "Odpowiedzi, głosy i zgłoszenia wskazują słabe pytanie, nawet gdy „trudno je przeczytać”."
+        },
+        "rewritten": {
+          "labels": "przepisane",
+          "lines": "Jest poprawiane lub zastępowane i wraca do obiegu."
+        }
+      },
+      "cards": {
+        "person": {
+          "title": "Decyduje człowiek",
+          "text": "Wynik wspiera Twoją decyzję, ale jej nie podejmuje. Ostrzeżenia o podejrzanych zachowaniach to powód, by przyjrzeć się bliżej, a nie dowód."
+        },
+        "fair": {
+          "title": "Uczciwie dla każdego kandydata",
+          "text": "Ten sam limit czasu i ten sam zestaw rodzajów pytań, pytania losowane dla każdej osoby, dodatkowy czas dla tych, którzy go potrzebują."
+        },
+        "laws": {
+          "title": "Stworzone z myślą o zgodności",
+          "text": "RODO, unijny AI Act, przepisy Wielkiej Brytanii i USA: <documents>dokumenty</documents> są gotowe do pobrania."
+        },
+        "log": {
+          "title": "Każde działanie zapisane",
+          "text": "Właściciel widzi, kto co zrobił w firmie; zapis jest bezpiecznie przechowywany przez 12 miesięcy na serwerach w UE."
+        }
+      }
+    },
+    "moreQuestions": {
+      "title": "Masz więcej pytań?",
+      "videos": "wideo",
+      "faq": "FAQ",
+      "guides": "poradniki"
+    },
+    "closing": {
+      "title": "Utwórz swoją pierwszą rozmowę\nZa darmo",
+      "start": "Utwórz rozmowę"
+    },
+    "comparison": {
+      "title": "Szybciej niż rozmowy telefoniczne\nTaniej niż abonamenty",
+      "text": "Bez godzin przy telefonie i bez miesięcznej opłaty: rozmowa z Twojego opisu stanowiska, płatna za kandydata.",
+      "time": "Twój czas",
+      "cost": "Ile płacisz",
+      "phone": {
+        "name": "Rozmowy telefoniczne",
+        "time": "~30 min na kandydata",
+        "cost": "Godziny Twojego zespołu"
+      },
+      "subscription": {
+        "name": "Narzędzia do testów",
+        "time": "Testy do wybrania lub napisania dla każdej roli",
+        "cost": "Miesięczna opłata, czy rekrutujesz, czy nie"
+      },
+      "prepza": {
+        "name": "prepza",
+        "time": "~10 min na rolę, z Twojego opisu stanowiska",
+        "cost": "{price} za kandydata, który odpowiada"
+      },
+      "more": "Porównaj z innymi narzędziami"
+    },
+    "freeToStart": {
+      "title": "Wszystko za darmo\nPłacisz za kandydata",
+      "text": "Wszystkie funkcje są w cenie. Kandydat kosztuje dopiero, gdy odpowie na co najmniej jedno pytanie.",
+      "lines": {
+        "create": "utwórz rozmowę",
+        "review": "przejrzyj tematy z AI",
+        "invite": "zaproś {count, plural, one {# kandydata} few {# kandydatów} many {# kandydatów} other {# kandydata}}",
+        "reports": "raporty i udostępnianie",
+        "connect": "ATS, API, Slack, agent AI",
+        "answered": "{count, plural, one {# kandydat odpowiedział} few {# kandydatów odpowiedziało} many {# kandydatów odpowiedziało} other {# kandydata odpowiedziało}}"
+      },
+      "total": "razem",
+      "each": "({price} za kandydata)",
+      "free": "{count, plural, one {# kandydat} few {# kandydaci} many {# kandydatów} other {# kandydata}} za darmo na start",
+      "perCandidate": "za kandydata",
+      "pack": "{count} za {price}",
+      "see": "Zobacz cennik",
+      "notes": {
+        "subscription": "bez abonamentu",
+        "unanswered": "zaproszenia bez odpowiedzi nic nie kosztują",
+        "expire": "kredyty nie wygasają",
+        "refund": "zwrot niewykorzystanych kredytów do 14 dni"
+      }
+    }
   },
   "faq": {
     "title": "Często zadawane pytania",

@@ -135,7 +135,7 @@
   },
   "home": {
     "title": "Herkesi test edin\nEn iyisini işe alın",
-    "text": "Yapay zekâ, iş tanımınızı her adaya özel sorularla profesyonel bir süreli mülakata dönüştürür. Aday başına yalnızca $2–5."
+    "text": "Yapay zekâ, iş tanımınızı her adaya kendi rastgele sorularıyla profesyonel, süreli bir mülakata dönüştürür. Aday başına yalnızca $2–5."
   },
   "start": {
     "placeholder": "Bir iş tanımı yapıştırın ya da pozisyonu ve adayın bilmesi gerekenleri anlatın",
@@ -800,7 +800,7 @@
     "cancelText": "Hemen durur ve şimdiye kadar oluşturulan hiçbir şey saklanmaz.",
     "cancelling": "İptal ediliyor…",
     "cancelFailed": "Oluşturma iptal edilemedi. Lütfen tekrar deneyin.",
-    "writing": "Sorularınız yazılıyor",
+    "writing": "Sorularınız oluşturuluyor",
     "drafting": "Konularınız taslak hâline getiriliyor",
     "writingNote": "Bu birkaç dakika sürer. Bu sayfadan çıkabilirsiniz; biz devam ederiz.",
     "draftingNote": "Hedefinizi okuyup neyin ele alınacağını planlıyoruz.",
@@ -1171,9 +1171,207 @@
   },
   "landing": {
     "more": "Nasıl çalışır",
-    "demos": "Demolar",
+    "demos": "Video",
     "demosTooltip": "Demoları YouTube'da izle",
-    "askAgent": "asistana sor"
+    "askAgent": "asistana sor",
+    "create": {
+      "title": "Dakikalar içinde mülakat oluşturun",
+      "text": "Bir iş tanımı yapıştırıp konuları düzenleyin ya da hazır bir şablon seçin.",
+      "describe": "İş tanımınızı yapıştırın",
+      "adjust": "Konuları düzenleyin",
+      "ask": "Konuları değiştirmesini yapay zekâdan isteyin",
+      "or": "veya",
+      "fromTemplate": "Şablonlarımızdan"
+    },
+    "proof": {
+      "languages": "{count} dil",
+      "ready": "~{minutes} dakikada hazır",
+      "noSubscription": "Abonelik yok"
+    },
+    "sources": {
+      "title": "Adayları her yerden davet edin",
+      "text": "E-postayla davet edin, bir paylaşım bağlantısı yayınlayın, bir dosya içe aktarın ya da adayları ATS'niz, kendi platformunuz veya bir yapay zekâ ajanı göndersin.",
+      "labels": {
+        "ats": "ATS'niz",
+        "email": "E-posta davetleri",
+        "file": "Toplu içe aktarma",
+        "link": "İlandaki bağlantı",
+        "api": "API",
+        "sdk": "SDK ile yerleştirme",
+        "agent": "Yapay zekâ ajanı",
+        "apps": "Yapay zekâ uygulamaları (MCP)"
+      },
+      "interview": "Mülakat",
+      "candidates": "{count, plural, one {<n>#</n> aday} other {<n>#</n> aday}}"
+    },
+    "candidates": {
+      "title": "Adaylar ne görür",
+      "text": "Markanıza özel, süreli bir mülakat: tek seçimli, çok seçimli ve uygulamalı sorular.",
+      "rules": {
+        "pick": "Bir cevap seçin ya da “Doğru olanların tümünü seçin” yazan yerlerde her doğru cevabı işaretleyin.",
+        "change": "Sonraki soruya geçene kadar seçiminizi değiştirebilirsiniz.",
+        "time": "Süre dolduğunda sonraki soru açılır.",
+        "unanswered": "Cevaplanmayan sorular yanlış sayılır.",
+        "saved": "İlerlemeniz kaydedilir.",
+        "extraTime": "Daha fazla süreye mi ihtiyacınız var? Başlamadan önce {company} ekibinden isteyin.",
+        "people": "Sonuçları {company} ekibindeki kişiler inceler ve karar verir.",
+        "stay": "Bitirene kadar bu sayfada kalın."
+      }
+    },
+    "shareReports": {
+      "title": "En iyisini görün\nSaniyeler içinde paylaşın",
+      "text": "Her adayın cevapları ve notu, e-postayla ya da sohbette paylaşılır.",
+      "chatQuestion": "Selam, geçen oldu mu?"
+    },
+    "automate": {
+      "title": "İşe alımınızı otomatikleştirin",
+      "text": "Platformunuzu, yapay zekâ uygulamanızı ve iş ilanı sitelerini bağlayın, güncellemeleri Slack'te alın.",
+      "labels": {
+        "platform": "Platformunuz",
+        "api": "API",
+        "sdk": "SDK ile yerleştirme",
+        "webhook": "Web kancaları",
+        "aiApp": "Yapay zekâ uygulaması",
+        "mcp": "MCP sunucusu",
+        "jobBoard": "İş ilanı sitesi",
+        "link": "İlandaki bağlantı",
+        "slack": "Slack"
+      }
+    },
+    "justAsk": {
+      "title": "Asistana sormanız yeterli",
+      "text": "Sade bir dille sorun: verilerinizi okur, “nasıl yapılır” sorularını yanıtlar ve siz onayladıktan sonra işi yapar.",
+      "welcome": "Bugün size nasıl yardımcı olabilirim?",
+      "questions": {
+        "stats": "{interview} mülakatını kaç aday geçti?",
+        "help": "Bir adaya nasıl ek süre veririm?",
+        "invite": "{email} adresini {interview} mülakatına davet et"
+      },
+      "steps": {
+        "stats": "Rapor okunuyor…",
+        "help": "Rehber okunuyor…",
+        "invite": "Onayınız için hazırlanıyor…"
+      },
+      "answers": {
+        "stats": "{total} adaydan {passed} tanesi %{passMark} geçme notuyla geçti (%{percent}). En yüksek not %{best}.",
+        "help": "Adayın sayfasında, başlamadan önce her soruya +%25, +%50 veya +%100 ek süre verin. Daha fazlası <link>süre ve ek süre rehberinde</link>.",
+        "invite": "{email} adresi {interview} mülakatına davet edildi."
+      },
+      "cards": {
+        "info": {
+          "title": "Bilgi",
+          "text": "Mülakatlarınızı, adaylarınızı ve sonuçlarınızı sorun."
+        },
+        "help": {
+          "title": "Yardım",
+          "text": "prepza rehberlerinden, kendi dilinizde “nasıl yapılır” yanıtları."
+        },
+        "actions": {
+          "title": "İşlemler",
+          "text": "Aday davet edin, mülakat oluşturun, ayarları değiştirin."
+        }
+      }
+    },
+    "trustQuality": {
+      "title": "Güven, kalite ve uyumluluk",
+      "text": "Gelişen sorular, karar veren bir insan, hazır belgeler.",
+      "steps": {
+        "generated": {
+          "labels": "oluşturuldu",
+          "lines": "Yapay zekâ soruları yazar."
+        },
+        "checked": {
+          "labels": "denetlendi",
+          "lines": "İkinci bir yapay zekâ, soru hazır olmadan önce cevapları körlemesine kontrol eder."
+        },
+        "answered": {
+          "labels": "cevaplandı",
+          "lines": "Adaylar cevaplar, soruları puanlar ve sorunları bildirir."
+        },
+        "flagged": {
+          "labels": "işaretlendi",
+          "lines": "Cevaplar, oylar ve bildirimler zayıf bir soruyu gösterir, “okuması zor” gibi bir sorunu bile."
+        },
+        "rewritten": {
+          "labels": "yenilendi",
+          "lines": "Soru düzeltilir ya da değiştirilir ve döngüye geri döner."
+        }
+      },
+      "cards": {
+        "person": {
+          "title": "Kararı bir insan verir",
+          "text": "Puan kararınızı destekler, kararı vermez. Dürüstlük uyarıları kanıt değil, daha yakından bakmak için bir nedendir."
+        },
+        "fair": {
+          "title": "Her adaya adil",
+          "text": "Aynı süre ve aynı soru türü karışımı, her kişi için rastgele seçilen sorular, ihtiyacı olanlara ek süre."
+        },
+        "laws": {
+          "title": "Uyumluluk için tasarlandı",
+          "text": "GDPR, AB Yapay Zekâ Yasası, Birleşik Krallık ve ABD kuralları: <documents>belgeler</documents> indirmeye hazır."
+        },
+        "log": {
+          "title": "Her işlem kayıt altında",
+          "text": "Şirket sahibi, şirkette kimin ne yaptığını görür; kayıtlar AB sunucularında 12 ay boyunca güvenle saklanır."
+        }
+      }
+    },
+    "moreQuestions": {
+      "title": "Başka sorunuz mu var?",
+      "videos": "videolar",
+      "faq": "SSS",
+      "guides": "rehberler"
+    },
+    "closing": {
+      "title": "İlk mülakatınızı oluşturun\nÜcretsiz",
+      "start": "Mülakat oluştur"
+    },
+    "comparison": {
+      "title": "Telefon görüşmelerinden hızlı\nAboneliklerden ucuz",
+      "text": "Telefonda saatler yok, aylık ücret yok: iş tanımınızdan bir mülakat, aday başına ödeme.",
+      "time": "Zamanınız",
+      "cost": "Ne ödersiniz",
+      "phone": {
+        "name": "Telefon görüşmeleri",
+        "time": "Aday başına ~30 dk",
+        "cost": "Ekibinizin saatleri"
+      },
+      "subscription": {
+        "name": "Test araçları",
+        "time": "Her pozisyon için seçilecek ya da yazılacak testler",
+        "cost": "İşe alım olsun olmasın aylık ücret"
+      },
+      "prepza": {
+        "name": "prepza",
+        "time": "Pozisyon başına ~10 dk, iş tanımınızdan",
+        "cost": "Yanıt veren aday başına {price}"
+      },
+      "more": "Diğer araçlarla karşılaştırın"
+    },
+    "freeToStart": {
+      "title": "Her şey ücretsiz\nAday başına ödeyin",
+      "text": "Tüm özellikler dahil. Bir aday ancak en az bir soruyu yanıtladığında ücretlendirilir.",
+      "lines": {
+        "create": "mülakat oluşturma",
+        "review": "konuları yapay zekâyla inceleme",
+        "invite": "{count} aday davet etme",
+        "reports": "raporlar ve paylaşım",
+        "connect": "ATS, API, Slack, yapay zekâ ajanı",
+        "answered": "{count} aday yanıtladı"
+      },
+      "total": "toplam",
+      "each": "(aday başına {price})",
+      "free": "Başlangıç için {count, plural, one {# ücretsiz aday} other {# ücretsiz aday}}",
+      "perCandidate": "aday başına",
+      "pack": "{count} aday: {price}",
+      "see": "Fiyatları görün",
+      "notes": {
+        "subscription": "abonelik yok",
+        "unanswered": "yanıtlanmayan davetler ücretsizdir",
+        "expire": "krediler hiç sona ermez",
+        "refund": "kullanılmayan ücretli krediler 14 gün içinde iade edilebilir"
+      }
+    }
   },
   "faq": {
     "title": "Sıkça sorulan sorular",
