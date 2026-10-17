@@ -7,11 +7,17 @@ from datetime import UTC, datetime, timedelta
 import httpx
 from sqlalchemy import func, select, update
 
-from app.constants.api import DELIVERIES_KEPT, LAST_USED_EVERY, MAX_KEYS, MAX_WEBHOOKS
+from app.constants.api import DELIVERIES_KEPT, LAST_USED_EVERY
 from app.main import app
 from app.models.api import ApiKey, Webhook, WebhookDelivery
 from app.storage import keys, webhooks
 from app.storage.db import Session
+
+# A company's most keys and web hooks (MAX_API_KEYS and MAX_WEBHOOKS in the limit list).
+MAX_KEYS = 10
+MAX_WEBHOOKS = 5
+# A new key's permissions.
+READS = ["interviews:read", "candidates:read"]
 
 
 def api() -> httpx.AsyncClient:
@@ -37,7 +43,7 @@ def test_a_key_is_found_by_its_hash_and_its_use_noted_at_most_once_a_minute(run)
     hashed = uuid.uuid4().hex * 2
 
     async def scenario():
-        made = await keys.add(company, "Site", "pz_abc", hashed, "u1", None, MAX_KEYS)
+        made = await keys.add(company, "Site", "pz_abc", hashed, "u1", None, READS, MAX_KEYS)
         found = await keys.by_hash(hashed)
         await keys.used(made.id)
         first = (await keys.by_hash(hashed)).last_used_at
@@ -95,8 +101,8 @@ def test_a_deleted_company_loses_its_keys_web_hooks_and_their_deliveries(run):
     deleted = push("company.deleted", {"company_id": str(company)}, f"m-{uuid.uuid4()}")
 
     async def scenario():
-        await keys.add(company, "Site", "pz_a", uuid.uuid4().hex * 2, "u1", None, MAX_KEYS)
-        await keys.add(other, "Site", "pz_b", uuid.uuid4().hex * 2, "u1", None, MAX_KEYS)
+        await keys.add(company, "Site", "pz_a", uuid.uuid4().hex * 2, "u1", None, READS, MAX_KEYS)
+        await keys.add(other, "Site", "pz_b", uuid.uuid4().hex * 2, "u1", None, READS, MAX_KEYS)
         hook = await webhooks.add(company, "https://example.com/x", "sealed", "u1", MAX_WEBHOOKS)
         await webhooks.mark_delivered(hook.id, "e1")
 
@@ -131,8 +137,10 @@ def test_a_deleted_account_loses_the_keys_and_web_hooks_it_made(run):
     company = uuid.uuid4()
 
     async def scenario():
-        await keys.add(company, "Mine", "pz_m", uuid.uuid4().hex * 2, "gone", None, MAX_KEYS)
-        await keys.add(company, "Theirs", "pz_t", uuid.uuid4().hex * 2, "stays", None, MAX_KEYS)
+        await keys.add(company, "Mine", "pz_m", uuid.uuid4().hex * 2, "gone", None, READS, MAX_KEYS)
+        await keys.add(
+            company, "Theirs", "pz_t", uuid.uuid4().hex * 2, "stays", None, READS, MAX_KEYS
+        )
         await webhooks.add(company, "https://example.com/x", "sealed", "gone", MAX_WEBHOOKS)
         exported = [key.name for key in await keys.of_user("gone")]
         await keys.remove_user("gone")
@@ -157,7 +165,7 @@ def test_one_below_the_limit_a_second_add_at_the_same_time_is_refused(run):
     company = uuid.uuid4()
 
     def new_key():
-        return keys.add(company, "Site", "pz_x", uuid.uuid4().hex * 2, "u1", None, MAX_KEYS)
+        return keys.add(company, "Site", "pz_x", uuid.uuid4().hex * 2, "u1", None, READS, MAX_KEYS)
 
     def new_hook():
         return webhooks.add(company, "https://example.com/x", "sealed", "u1", MAX_WEBHOOKS)
@@ -186,6 +194,7 @@ def test_one_below_the_limit_a_second_add_at_the_same_time_is_refused(run):
             shown="pz_y",
             hash=uuid.uuid4().hex * 2,
             created_by="u1",
+            permissions=READS,
         )
         hook = Webhook(company_id=company, url="https://example.com/y", secret="s", created_by="u1")
 

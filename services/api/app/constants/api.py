@@ -23,13 +23,8 @@ KEY_EXPIRY_MONTHS = {
     KeyExpiry.MONTHS_12: 12,
     KeyExpiry.NEVER: None,
 }
-# Keys and web hooks a company may have at once.
-MAX_KEYS = 10
-MAX_WEBHOOKS = 5
 MAX_NAME_LENGTH = 80
 MAX_URL_LENGTH = 500
-# Requests per company per minute, all its keys together.
-REQUESTS_PER_MINUTE = 60
 # How long a key maker's access (still an owner or admin?) is trusted before companies is asked
 # again, in this instance's memory.
 ACCESS_CACHE_SECONDS = 60

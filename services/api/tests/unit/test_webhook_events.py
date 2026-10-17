@@ -101,8 +101,10 @@ def test_a_test_event_is_signed_sent_and_logged(endpoints):
 
 @pytest.fixture
 def hook_routes(monkeypatch, endpoints):
-    """The company's web hooks for the API page's routes, with one logged send."""
+    """The company's web hooks for the API page's routes, with one logged send; the tests sent
+    are in `hook.tested_by`, as the action log gets them."""
     hook = endpoints["hook"]("https://a.example/x")
+    hook.tested_by = []
 
     async def get(company_id, webhook_id):
         return hook if company_id == COMPANY and webhook_id == hook.id else None
@@ -112,7 +114,11 @@ def hook_routes(monkeypatch, endpoints):
 
         return [SimpleNamespace(event_type="test", ok=True, result="delivered", at=sent)]
 
+    async def tested(found, user_id):
+        found.tested_by.append(user_id)
+
     monkeypatch.setattr(webhooks, "get", get)
+    monkeypatch.setattr(webhooks, "tested", tested)
     monkeypatch.setattr(manage.webhook_log_store, "latest", latest)
 
     return hook
@@ -123,6 +129,7 @@ def test_an_owner_sends_a_test_event_and_reads_the_log(client, companies_api, ho
     base = f"/manage/webhooks/{hook_routes.id}"
 
     assert client.post(f"{base}/test", params={"company_id": str(COMPANY)}).json() == {"ok": True}
+    assert hook_routes.tested_by == ["u1"]
     assert client.get(f"{base}/log", params={"company_id": str(COMPANY)}).json() == [
         {"event_type": "test", "ok": True, "result": "delivered", "at": "2026-10-15T00:00:00Z"}
     ]
@@ -143,6 +150,7 @@ def test_only_editors_send_test_events_and_only_to_their_companys_hooks(
     other = "00000000-0000-4000-8000-000000000000"
 
     assert client.post(f"/manage/webhooks/{other}/test", params=params).status_code == 404
+    assert hook_routes.tested_by == []
 
 
 def test_an_event_says_when_its_change_happened(endpoints):

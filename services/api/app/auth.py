@@ -2,18 +2,15 @@ from datetime import UTC, datetime
 from typing import Annotated
 from uuid import UUID
 
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, Request, status
+from fastapi.responses import JSONResponse
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from prepza_common import memory_cache
-from prepza_common.constants import MINUTE_SECONDS
 from prepza_common.rate_limit import hit_or_skip
 from prepza_common.tokens import hashed
 
-from app.constants.api import (
-    ACCESS_CACHE_SECONDS,
-    LAST_USED_EVERY,
-    REQUESTS_PER_MINUTE,
-)
+from app.constants.api import ACCESS_CACHE_SECONDS, LAST_USED_EVERY
+from app.constants.permissions import MISSING_PERMISSION, MISSING_PERMISSION_MESSAGE, Permission
 from app.helpers.keys import expired
 from app.integrations import companies
 from app.integrations.redis import get_redis
@@ -26,10 +23,15 @@ bearer = HTTPBearer(auto_error=False, description="A company's API key: `Bearer 
 async def api_key(
     credentials: Annotated[HTTPAuthorizationCredentials | None, Depends(bearer)],
 ) -> ApiKey:
-    """The API key the request carries. It works until it expires, while whoever made it is still
-    an owner or admin of its company, up to REQUESTS_PER_MINUTE requests a minute for the whole
-    company."""
-    found = await keys.by_hash(hashed(credentials.credentials)) if credentials else None
+    """The API key the request carries (checked_key)."""
+    return await checked_key(credentials.credentials if credentials else None)
+
+
+async def checked_key(raw: str | None) -> ApiKey:
+    """The key `raw` is, counted as one request. It works until it expires, while whoever made it
+    is still an owner or admin of its company, up to API_REQUESTS_PER_MINUTE requests a minute for
+    the whole company (the API and the MCP server together); a 401 or 429 otherwise."""
+    found = await keys.by_hash(hashed(raw)) if raw else None
 
     if found is None:
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Invalid API key")
@@ -57,7 +59,7 @@ async def limit(company_id: UUID) -> None:
     """Counts the request against its company. With Redis down, requests go through
     unlimited rather than all failing."""
     key = f"rate:api:{company_id}"
-    await hit_or_skip(get_redis(), key, REQUESTS_PER_MINUTE, MINUTE_SECONDS)
+    await hit_or_skip(get_redis(), key, "API_REQUESTS_PER_MINUTE", company_id=company_id)
 
 
 async def editor(company_id: UUID, user_id: str) -> bool:
@@ -74,3 +76,35 @@ async def editor(company_id: UUID, user_id: str) -> bool:
 
 
 ApiKeyDep = Annotated[ApiKey, Depends(api_key)]
+
+
+class MissingPermission(Exception):
+    """The key may not call the route: it doesn't have `permission`."""
+
+    def __init__(self, permission: Permission):
+        self.permission = permission
+
+
+async def missing_permission(request: Request, error: MissingPermission) -> JSONResponse:
+    """403 with the code `missing_permission` beside the usual `detail`, which names the
+    permission."""
+    message = MISSING_PERMISSION_MESSAGE.format(permission=error.permission)
+
+    return JSONResponse(
+        {"detail": message, "code": MISSING_PERMISSION}, status_code=status.HTTP_403_FORBIDDEN
+    )
+
+
+def needs(permission: Permission):
+    """A public route's key, which must have `permission`: `key: Annotated[ApiKey, needs(...)]`.
+    The API docs name it on the route (helpers/docs.py)."""
+
+    async def permitted(key: ApiKeyDep) -> ApiKey:
+        if permission not in key.permissions:
+            raise MissingPermission(permission)
+
+        return key
+
+    permitted.permission = permission
+
+    return Depends(permitted)

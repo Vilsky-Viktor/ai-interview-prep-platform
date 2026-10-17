@@ -4,6 +4,7 @@ from uuid import UUID
 from pydantic import BaseModel, Field
 
 from app.constants.api import MAX_NAME_LENGTH, MAX_URL_LENGTH, KeyExpiry
+from app.constants.permissions import DEFAULT_PERMISSIONS, Permission
 
 
 class KeyOut(BaseModel):
@@ -16,6 +17,7 @@ class KeyOut(BaseModel):
     expires_at: datetime | None
     expired: bool
     last_used_at: datetime | None
+    permissions: list[Permission]
 
 
 class NewKeyOut(KeyOut):
@@ -26,6 +28,15 @@ class NewKeyOut(KeyOut):
 class KeyIn(BaseModel):
     name: str = Field(min_length=1, max_length=MAX_NAME_LENGTH)
     expiry: KeyExpiry
+    # At least one; the reads they imply are added.
+    permissions: list[Permission] = Field(
+        default_factory=lambda: list(DEFAULT_PERMISSIONS), min_length=1
+    )
+
+
+class KeyPermissionsIn(BaseModel):
+    # Only ones the key already has, at least one; the reads they imply are kept.
+    permissions: list[Permission] = Field(min_length=1)
 
 
 class WebhookOut(BaseModel):
@@ -52,6 +63,11 @@ class ApiSettingsOut(BaseModel):
     # When a new key can expire, in order.
     expiries: list[str]
     webhooks: list[WebhookOut]
+    # The permissions a key can have, by what they touch, in order; the read each one that
+    # changes something comes with; and what a new key starts with.
+    permission_groups: dict[str, list[Permission]]
+    implied: dict[Permission, Permission]
+    default_permissions: list[Permission]
 
 
 class WebhookTestOut(BaseModel):

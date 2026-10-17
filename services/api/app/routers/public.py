@@ -5,10 +5,12 @@ from uuid import UUID
 from fastapi import APIRouter, Header, Query, status
 from prepza_common.paging import PageParams
 
-from app.auth import ApiKeyDep
+from app.auth import needs
 from app.config.settings import settings
+from app.constants.permissions import Permission
 from app.helpers.public import candidate_of, interview_of
 from app.integrations import companies
+from app.models.api import ApiKey
 from app.schemas.changes import CandidateUpdate, InterviewIn
 from app.schemas.public import Candidate, CandidateIn, Interview
 from app.services.idempotency import once
@@ -20,6 +22,12 @@ router = APIRouter(
     responses={
         401: {
             "description": "The API key is missing, invalid or expired, or its creator can no longer use it"
+        },
+        403: {
+            "description": (
+                "The API key doesn't have the permission the endpoint needs (`code` is "
+                "`missing_permission`)"
+            )
         },
         429: {"description": "Your company's keys exceeded 60 requests per minute"},
     },
@@ -57,7 +65,10 @@ IdempotencyKey = Annotated[
 
 @router.get("", summary="List interviews")
 async def list_interviews(
-    key: ApiKeyDep, page: PageParams, updated_since: UpdatedSince = None, after: After = None
+    key: Annotated[ApiKey, needs(Permission.INTERVIEWS_READ)],
+    page: PageParams,
+    updated_since: UpdatedSince = None,
+    after: After = None,
 ) -> list[Interview]:
     """Returns your company's interviews, newest first; with `updated_since`, the ones that
     changed since, oldest change first."""
@@ -69,7 +80,9 @@ async def list_interviews(
 
 
 @router.get("/{interview_id}", summary="Get an interview", responses=NOT_FOUND)
-async def get_interview(interview_id: UUID, key: ApiKeyDep) -> Interview:
+async def get_interview(
+    interview_id: UUID, key: Annotated[ApiKey, needs(Permission.INTERVIEWS_READ)]
+) -> Interview:
     """Returns one of your company's interviews."""
     return interview_of(await companies.interview(key.company_id, interview_id))
 
@@ -82,7 +95,7 @@ async def get_interview(interview_id: UUID, key: ApiKeyDep) -> Interview:
 )
 async def list_candidates(
     interview_id: UUID,
-    key: ApiKeyDep,
+    key: Annotated[ApiKey, needs(Permission.CANDIDATES_READ)],
     page: PageParams,
     updated_since: UpdatedSince = None,
     after: After = None,
@@ -102,7 +115,11 @@ async def list_candidates(
     tags=["Candidates"],
     responses=NOT_FOUND,
 )
-async def get_candidate(interview_id: UUID, candidate_id: UUID, key: ApiKeyDep) -> Candidate:
+async def get_candidate(
+    interview_id: UUID,
+    candidate_id: UUID,
+    key: Annotated[ApiKey, needs(Permission.CANDIDATES_READ)],
+) -> Candidate:
     """Returns one candidate of the interview with their progress and results."""
     found = await companies.candidate(key.company_id, interview_id, candidate_id)
 
@@ -133,7 +150,7 @@ async def get_candidate(interview_id: UUID, candidate_id: UUID, key: ApiKeyDep) 
 async def invite_candidate(
     interview_id: UUID,
     body: CandidateIn,
-    key: ApiKeyDep,
+    key: Annotated[ApiKey, needs(Permission.CANDIDATES_INVITE)],
     idempotency_key: IdempotencyKey = None,
 ) -> Candidate:
     """Invites the candidate to the interview on behalf of the key's creator and reserves credits
@@ -182,7 +199,9 @@ async def invite_candidate(
     },
 )
 async def create_interview(
-    body: InterviewIn, key: ApiKeyDep, idempotency_key: IdempotencyKey = None
+    body: InterviewIn,
+    key: Annotated[ApiKey, needs(Permission.INTERVIEWS_CREATE)],
+    idempotency_key: IdempotencyKey = None,
 ) -> Interview:
     """Makes an interview from a job description, as the key's creator would. Its questions take
     a few minutes: until `ready` is true, it can't take candidates; the `interview.ready` web
@@ -210,13 +229,16 @@ async def create_interview(
     },
 )
 async def update_candidate(
-    interview_id: UUID, candidate_id: UUID, body: CandidateUpdate, key: ApiKeyDep
+    interview_id: UUID,
+    candidate_id: UUID,
+    body: CandidateUpdate,
+    key: Annotated[ApiKey, needs(Permission.CANDIDATES_CHANGE)],
 ) -> Candidate:
     """Corrects the candidate's name, or gives them extra time on each question before they
     start, as an accommodation."""
     if "name" in body.model_fields_set:
         await companies.rename_candidate(
-            key.company_id, interview_id, candidate_id, body.name or ""
+            key.company_id, interview_id, candidate_id, body.name or "", key.created_by
         )
 
     if body.extra_time is not None:
@@ -235,7 +257,11 @@ async def update_candidate(
     summary="Remove a candidate",
     responses=NOT_FOUND,
 )
-async def remove_candidate(interview_id: UUID, candidate_id: UUID, key: ApiKeyDep) -> None:
+async def remove_candidate(
+    interview_id: UUID,
+    candidate_id: UUID,
+    key: Annotated[ApiKey, needs(Permission.CANDIDATES_DELETE)],
+) -> None:
     """Withdraws an invite the candidate hasn't used yet: its link stops working and its credits
     come back. A candidate who started is erased for good, with their answers and results, for
     example when they ask to have their data deleted; one who answered at least one question is
@@ -258,7 +284,11 @@ async def remove_candidate(interview_id: UUID, candidate_id: UUID, key: ApiKeyDe
         429: {"description": "The key's creator reached their email limits"},
     },
 )
-async def resend_invite(interview_id: UUID, candidate_id: UUID, key: ApiKeyDep) -> None:
+async def resend_invite(
+    interview_id: UUID,
+    candidate_id: UUID,
+    key: Annotated[ApiKey, needs(Permission.CANDIDATES_INVITE)],
+) -> None:
     """Emails the candidate their invitation again, as a reminder; an expired invitation comes
     back to life for another 30 days."""
     await companies.resend(key.company_id, interview_id, candidate_id, key.created_by)

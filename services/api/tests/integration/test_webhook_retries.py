@@ -3,10 +3,13 @@ import json
 import uuid
 from datetime import UTC, datetime, timedelta
 
-from app.constants.api import MAX_WEBHOOKS, RETRY_LEASE
+from app.constants.api import RETRY_LEASE
 from app.services.events import handle
 from app.storage import webhook_retries as retries
 from app.storage import webhooks
+
+# A company's most web hooks (MAX_WEBHOOKS in the limit list).
+MAX_WEBHOOKS = 5
 
 
 def test_an_event_is_kept_once_and_claimed_by_one_run_at_a_time(run):
@@ -48,7 +51,7 @@ def test_a_kept_event_waits_longer_goes_once_sent_and_with_its_web_hook(run):
         await retries.remove(hook.id, "e2")
         claimed = await retries.claim(25)
         await retries.add(hook.id, "e4", "{}", past)
-        await webhooks.remove(company, hook.id)
+        await webhooks.remove(company, hook.id, "u1")
 
         return claimed, await retries.claim(25)
 

@@ -1,11 +1,15 @@
 import uuid
 from datetime import UTC, datetime
 
+from prepza_common import audit
+from prepza_common.audit_actions import AuditAction, TargetKind
 from sqlalchemy import delete, func, select, update
 from sqlalchemy.dialects.postgresql import insert
 
 from app.constants.api import DELIVERIES_KEPT
+from app.helpers.webhooks import masked
 from app.models.api import Webhook, WebhookDelivery, WebhookRetry
+from app.models.outbox import OutboxEvent
 from app.storage.db import Session
 
 
@@ -21,7 +25,8 @@ async def add(
     company_id: uuid.UUID, url: str, sealed_secret: str, user_id: str, limit: int
 ) -> Webhook | None:
     """None when the company already has `limit` web hooks. One company's web hooks are added
-    one at a time, so two at once can't both pass the count."""
+    one at a time, so two at once can't both pass the count. The company's action log gets it
+    as `user_id`'s, by its site only (masked)."""
     count = select(func.count()).select_from(Webhook).where(Webhook.company_id == company_id)
     hook = Webhook(company_id=company_id, url=url, secret=sealed_secret, created_by=user_id)
 
@@ -34,6 +39,17 @@ async def add(
             return None
 
         session.add(hook)
+        await session.flush()
+        audit.add(
+            session,
+            OutboxEvent,
+            company_id,
+            user_id,
+            AuditAction.WEBHOOK_ADDED,
+            TargetKind.WEBHOOK,
+            hook.id,
+            masked(url),
+        )
         await session.commit()
         await session.refresh(hook)
 
@@ -48,15 +64,49 @@ async def get(company_id: uuid.UUID, webhook_id: uuid.UUID) -> Webhook | None:
         )
 
 
-async def remove(company_id: uuid.UUID, webhook_id: uuid.UUID) -> bool:
-    """Whether there was such a web hook of the company; what it got goes with it."""
-    query = delete(Webhook).where(Webhook.company_id == company_id, Webhook.id == webhook_id)
+async def remove(company_id: uuid.UUID, webhook_id: uuid.UUID, user_id: str) -> bool:
+    """Whether there was such a web hook of the company; what it got goes with it. The
+    company's action log gets it as `user_id`'s."""
+    query = (
+        delete(Webhook)
+        .where(Webhook.company_id == company_id, Webhook.id == webhook_id)
+        .returning(Webhook.url)
+    )
 
     async with Session() as session:
-        result = await session.execute(query)
+        url = await session.scalar(query)
+
+        if url is not None:
+            audit.add(
+                session,
+                OutboxEvent,
+                company_id,
+                user_id,
+                AuditAction.WEBHOOK_DELETED,
+                TargetKind.WEBHOOK,
+                webhook_id,
+                masked(url),
+            )
+
         await session.commit()
 
-    return result.rowcount > 0
+    return url is not None
+
+
+async def tested(hook: Webhook, user_id: str) -> None:
+    """A member sent the web hook a test event: the company's action log gets it."""
+    async with Session() as session:
+        audit.add(
+            session,
+            OutboxEvent,
+            hook.company_id,
+            user_id,
+            AuditAction.WEBHOOK_TESTED,
+            TargetKind.WEBHOOK,
+            hook.id,
+            masked(hook.url),
+        )
+        await session.commit()
 
 
 async def remove_company(company_id: uuid.UUID) -> None:

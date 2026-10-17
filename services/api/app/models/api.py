@@ -2,6 +2,7 @@ import uuid
 from datetime import UTC, datetime
 
 from sqlalchemy import DateTime, ForeignKey, String, Text, Uuid, false
+from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.models.base import Base
@@ -28,6 +29,8 @@ class ApiKey(Base):
     # None: it never expires.
     expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     last_used_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    # What it may do (constants/permissions.py): only ever narrowed after it's made.
+    permissions: Mapped[list[str]] = mapped_column(ARRAY(String(32)))
 
 
 class Webhook(Base):

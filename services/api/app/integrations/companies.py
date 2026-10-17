@@ -154,10 +154,10 @@ async def remove_candidate(
 
 
 async def rename_candidate(
-    company_id: UUID, interview_id: UUID, invite_id: UUID, name: str
+    company_id: UUID, interview_id: UUID, invite_id: UUID, name: str, user_id: str
 ) -> None:
     path = _candidate_path(company_id, interview_id, invite_id)
-    await _call("PATCH", f"{path}/name", body={"name": name})
+    await _call("PATCH", f"{path}/name", {"user_id": user_id}, {"name": name})
 
 
 async def set_extra_time(

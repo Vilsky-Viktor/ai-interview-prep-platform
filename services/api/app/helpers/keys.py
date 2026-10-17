@@ -4,6 +4,7 @@ from datetime import datetime
 from prepza_common.tokens import new_token
 
 from app.constants.api import KEY_BYTES, KEY_PREFIX, KEY_SHOWN
+from app.constants.permissions import IMPLIED, Permission
 
 
 def new_key() -> tuple[str, str, str]:
@@ -27,3 +28,10 @@ def add_months(moment: datetime, months: int) -> datetime:
     return moment.replace(
         year=year, month=month, day=min(moment.day, calendar.monthrange(year, month)[1])
     )
+
+
+def with_implied(permissions: list[Permission]) -> list[Permission]:
+    """The permissions with the reads they imply (IMPLIED), each once, in Permission's order."""
+    chosen = set(permissions) | {IMPLIED[item] for item in permissions if item in IMPLIED}
+
+    return [item for item in Permission if item in chosen]

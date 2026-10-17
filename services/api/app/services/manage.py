@@ -5,12 +5,22 @@ from uuid import UUID
 
 from fastapi import HTTPException, status
 from prepza_common.encryption import encrypt
+from prepza_common.i18n import TemplateError
+from prepza_common.limits import limit, record_hit
 
 from app.config.settings import settings
-from app.constants.api import KEY_EXPIRY_MONTHS, MAX_KEYS, MAX_WEBHOOKS, KeyExpiry
-from app.helpers.keys import add_months, expired, new_key
+from app.constants.api import KEY_EXPIRY_MONTHS, KeyExpiry
+from app.constants.permissions import (
+    DEFAULT_PERMISSIONS,
+    IMPLIED,
+    ONLY_NARROWING,
+    PERMISSION_GROUPS,
+    Permission,
+)
+from app.helpers.keys import add_months, expired, new_key, with_implied
 from app.helpers.webhooks import masked, new_secret, public_address
 from app.integrations import companies
+from app.integrations.redis import get_redis
 from app.models.api import ApiKey, Webhook
 from app.schemas.manage import (
     ApiSettingsOut,
@@ -45,6 +55,9 @@ async def overview(company_id: UUID, editor: bool) -> ApiSettingsOut:
             for hook in hooks
         ],
         expiries=list(KeyExpiry),
+        permission_groups=PERMISSION_GROUPS,
+        implied=IMPLIED,
+        default_permissions=DEFAULT_PERMISSIONS,
     )
 
 
@@ -57,23 +70,55 @@ def key_out(key: ApiKey) -> KeyOut:
         expires_at=key.expires_at,
         expired=expired(key.expires_at, datetime.now(UTC)),
         last_used_at=key.last_used_at,
+        permissions=key.permissions,
     )
 
 
-async def create_key(company_id: UUID, name: str, expiry: KeyExpiry, user_id: str) -> NewKeyOut:
+async def create_key(
+    company_id: UUID, name: str, expiry: KeyExpiry, permissions: list[Permission], user_id: str
+) -> NewKeyOut:
     key, shown, hashed = new_key()
     months = KEY_EXPIRY_MONTHS[expiry]
     expires_at = add_months(datetime.now(UTC), months) if months else None
-    row = await keys.add(company_id, name.strip(), shown, hashed, user_id, expires_at, MAX_KEYS)
+    most = await limit(get_redis(), "MAX_API_KEYS")
+    row = await keys.add(
+        company_id,
+        name.strip(),
+        shown,
+        hashed,
+        user_id,
+        expires_at,
+        with_implied(permissions),
+        most,
+    )
 
     if row is None:
-        raise HTTPException(status.HTTP_409_CONFLICT, "A company can have up to 10 API keys")
+        await record_hit("MAX_API_KEYS", company_id=company_id, user_id=user_id)
+
+        raise TemplateError(
+            status.HTTP_409_CONFLICT, "A company can have up to {limit} API keys", limit=most
+        )
 
     return NewKeyOut(**key_out(row).model_dump(), key=key)
 
 
-async def remove_key(company_id: UUID, key_id: UUID) -> None:
-    if not await keys.remove(company_id, key_id):
+async def narrow_key(
+    company_id: UUID, key_id: UUID, permissions: list[Permission], user_id: str
+) -> KeyOut:
+    """Only takes permissions away: a leaked key never gains one."""
+    row = await keys.narrow(company_id, key_id, with_implied(permissions), user_id)
+
+    if row is None and await keys.get(company_id, key_id) is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "API key not found")
+
+    if row is None:
+        raise HTTPException(status.HTTP_409_CONFLICT, ONLY_NARROWING)
+
+    return key_out(row)
+
+
+async def remove_key(company_id: UUID, key_id: UUID, user_id: str) -> None:
+    if not await keys.remove(company_id, key_id, user_id):
         raise HTTPException(status.HTTP_404_NOT_FOUND, "API key not found")
 
 
@@ -97,18 +142,23 @@ async def create_webhook(company_id: UUID, url: str, user_id: str) -> NewWebhook
 
     secret = new_secret()
     sealed = encrypt(settings.api_encryption_key, secret)
-    row = await webhooks.add(company_id, url, sealed, user_id, MAX_WEBHOOKS)
+    most = await limit(get_redis(), "MAX_WEBHOOKS")
+    row = await webhooks.add(company_id, url, sealed, user_id, most)
 
     if row is None:
-        raise HTTPException(status.HTTP_409_CONFLICT, "A company can have up to 5 web hooks")
+        await record_hit("MAX_WEBHOOKS", company_id=company_id, user_id=user_id)
+
+        raise TemplateError(
+            status.HTTP_409_CONFLICT, "A company can have up to {limit} web hooks", limit=most
+        )
 
     return NewWebhookOut(
         **WebhookOut.model_validate(row, from_attributes=True).model_dump(), secret=secret
     )
 
 
-async def remove_webhook(company_id: UUID, webhook_id: UUID) -> None:
-    if not await webhooks.remove(company_id, webhook_id):
+async def remove_webhook(company_id: UUID, webhook_id: UUID, user_id: str) -> None:
+    if not await webhooks.remove(company_id, webhook_id, user_id):
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Web hook not found")
 
 

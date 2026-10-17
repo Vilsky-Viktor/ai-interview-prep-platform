@@ -111,7 +111,7 @@ def test_a_candidate_is_renamed_given_extra_time_resent_and_removed(client, key,
     assert renamed.status_code == unchanged.status_code == 200
     assert (resent.status_code, removed.status_code, wrong_time.status_code) == (204, 204, 422)
     assert changes == [
-        ("rename_candidate", COMPANY, INTERVIEW, CANDIDATE, "Anna"),
+        ("rename_candidate", COMPANY, INTERVIEW, CANDIDATE, "Anna", "u1"),
         ("set_extra_time", COMPANY, INTERVIEW, CANDIDATE, 25, "u1"),
         ("resend", COMPANY, INTERVIEW, CANDIDATE, "u1"),
         ("remove_candidate", COMPANY, INTERVIEW, CANDIDATE, "u1"),

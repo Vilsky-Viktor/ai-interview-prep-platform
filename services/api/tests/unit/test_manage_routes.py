@@ -45,18 +45,6 @@ def test_a_key_needs_a_name_and_a_known_expiry(client, companies_api, stored, bo
     assert stored["keys"] == []
 
 
-def test_a_company_has_at_most_ten_keys(client, companies_api, stored):
-    sign_in()
-
-    for _ in range(10):
-        client.post(KEYS, json={"name": "Site", "expiry": "1"})
-
-    response = client.post(KEYS, json={"name": "Site", "expiry": "1"})
-
-    assert response.status_code == 409
-    assert len(stored["keys"]) == 10
-
-
 def test_a_viewer_sees_but_cant_change_and_a_stranger_sees_nothing(client, companies_api, stored):
     companies_api["roles"] = {"u1": "viewer"}
     sign_in()
@@ -146,15 +134,6 @@ def test_a_web_hook_must_reach_the_public_internet(client, companies_api, stored
     assert stored["webhooks"] == []
 
 
-def test_a_company_has_at_most_five_web_hooks(client, companies_api, stored, public):
-    sign_in()
-
-    for index in range(5):
-        client.post(HOOKS, json={"url": f"https://example.com/{index}"})
-
-    assert client.post(HOOKS, json={"url": "https://example.com/6"}).status_code == 409
-
-
 def test_without_an_encryption_key_web_hooks_cant_be_added(
     client, companies_api, stored, monkeypatch
 ):
@@ -167,7 +146,7 @@ def test_without_an_encryption_key_web_hooks_cant_be_added(
 
 
 def test_deleting_what_isnt_there_is_not_found(client, companies_api, monkeypatch):
-    async def nothing(company_id, item_id):
+    async def nothing(company_id, item_id, user_id):
         return False
 
     monkeypatch.setattr(manage.keys, "remove", nothing)

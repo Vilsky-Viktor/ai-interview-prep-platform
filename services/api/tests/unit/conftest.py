@@ -4,7 +4,7 @@ from types import SimpleNamespace
 
 import pytest
 from fastapi import HTTPException
-from prepza_common import memory_cache
+from prepza_common import limits, memory_cache
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
@@ -58,6 +58,19 @@ def configured(monkeypatch):
     monkeypatch.setattr(memory_cache, "_entries", {})
     yield
     app.dependency_overrides.clear()
+
+
+@pytest.fixture(autouse=True)
+def limit_hits(monkeypatch):
+    """The limit hits recorded (the data of each limit.hit event), never published."""
+    hits = []
+
+    async def publish(event_type, data, attempts, timeout):
+        hits.append(data)
+
+    monkeypatch.setattr(limits, "publish_retried", publish)
+
+    return hits
 
 
 def sign_in(uid="u1"):
@@ -124,8 +137,17 @@ def companies_api(monkeypatch):
 @pytest.fixture
 def stored(monkeypatch):
     """Keys and web hooks in memory instead of the database, and requests never rate limited
-    unless a test says so (the rate counters asked for are in "counted")."""
-    state = {"keys": [], "webhooks": [], "used": [], "limited": False, "counted": []}
+    unless a test says so (the rate counters asked for are in "counted"). A narrowing that takes
+    something away is in "narrowed" as (key id, user id, what it took away), as the action log
+    gets it."""
+    state = {
+        "keys": [],
+        "webhooks": [],
+        "used": [],
+        "limited": False,
+        "counted": [],
+        "narrowed": [],
+    }
 
     async def by_hash(hashed):
         return next((key for key in state["keys"] if key.hash == hashed), None)
@@ -133,7 +155,7 @@ def stored(monkeypatch):
     async def used(key_id):
         state["used"].append(key_id)
 
-    async def add_key(company_id, name, shown, hashed, user_id, expires_at, limit):
+    async def add_key(company_id, name, shown, hashed, user_id, expires_at, permissions, limit):
         if sum(key.company_id == company_id for key in state["keys"]) >= limit:
             return None
 
@@ -147,6 +169,7 @@ def stored(monkeypatch):
             created_at=datetime.now(UTC),
             expires_at=expires_at,
             last_used_at=None,
+            permissions=permissions,
         )
         state["keys"].append(key)
 
@@ -154,6 +177,24 @@ def stored(monkeypatch):
 
     async def keys_of(company_id):
         return [key for key in state["keys"] if key.company_id == company_id]
+
+    async def get_key(company_id, key_id):
+        return next((key for key in await keys_of(company_id) if key.id == key_id), None)
+
+    async def narrow(company_id, key_id, permissions, user_id):
+        key = await get_key(company_id, key_id)
+
+        if key is None or not set(permissions) <= set(key.permissions):
+            return None
+
+        removed = [item for item in key.permissions if item not in permissions]
+
+        if removed:
+            state["narrowed"].append((key.id, user_id, removed))
+
+        key.permissions = permissions
+
+        return key
 
     async def add_webhook(company_id, url, sealed, user_id, limit):
         if sum(hook.company_id == company_id for hook in state["webhooks"]) >= limit:
@@ -176,7 +217,7 @@ def stored(monkeypatch):
     async def webhooks_of(company_id):
         return [hook for hook in state["webhooks"] if hook.company_id == company_id]
 
-    async def hit(redis, key, limit, window, message="Too many requests. Try again later."):
+    async def hit(redis, key, name, message="Too many requests. Try again later.", **whose):
         state["counted"].append(key)
 
         if state["limited"]:
@@ -186,6 +227,8 @@ def stored(monkeypatch):
     monkeypatch.setattr(keys, "used", used)
     monkeypatch.setattr(keys, "add", add_key)
     monkeypatch.setattr(keys, "of_company", keys_of)
+    monkeypatch.setattr(keys, "get", get_key)
+    monkeypatch.setattr(keys, "narrow", narrow)
     monkeypatch.setattr(webhooks, "add", add_webhook)
     monkeypatch.setattr(webhooks, "of_company", webhooks_of)
     monkeypatch.setattr(auth, "hit_or_skip", hit)

@@ -15,7 +15,7 @@ def test_a_web_hooks_log_keeps_its_latest_sends_and_goes_with_it(run):
         await webhook_log.add(other.id, "x", "test", False, "500")
         kept = await webhook_log.latest(hook.id)
         others = await webhook_log.latest(other.id)
-        await webhooks.remove(hook.company_id, hook.id)
+        await webhooks.remove(hook.company_id, hook.id, "u1")
 
         return kept, others, await webhook_log.latest(hook.id)
 

@@ -18,8 +18,8 @@ soon as a candidate finishes.
    months, or never), then select **New key**.
 5. Copy the key and store it securely. It is shown only once: prepza keeps only a hash of it.
 
-A company can have up to 10 keys. An expired key returns `401`; make a new one before it
-expires. Deleting a key on the same page revokes it immediately.
+A company can have a limited number of keys; the API page refuses one more. An expired key
+returns `401`; make a new one before it expires. Deleting a key on the same page revokes it immediately.
 
 ## Authentication
 
@@ -28,9 +28,67 @@ A key belongs to one company and acts on behalf of the member who created it, so
 sent under that member's email limits. If the member leaves the company or is no longer an owner
 or admin, the key stops working and requests return `401`.
 
+## Example: inviting a candidate
+
+Invite a candidate to an interview and get their invite link, with a fresh `Idempotency-Key` so a
+retry can't invite them twice.
+
+```bash
+curl -X POST "https://prepza.ai/api/v1/interviews/$INTERVIEW_ID/candidates" \\
+  -H "Authorization: Bearer $PREPZA_API_KEY" \\
+  -H "Content-Type: application/json" \\
+  -H "Idempotency-Key: $(uuidgen)" \\
+  -d '{"email": "ada@example.com", "name": "Ada Lovelace"}'
+```
+
+```python
+import os
+import uuid
+
+import httpx
+
+interview_id = "YOUR_INTERVIEW_ID"
+api_key = os.environ["PREPZA_API_KEY"]
+idempotency_key = str(uuid.uuid4())
+
+response = httpx.post(
+    f"https://prepza.ai/api/v1/interviews/{interview_id}/candidates",
+    headers={
+        "Authorization": f"Bearer {api_key}",
+        "Idempotency-Key": idempotency_key,
+    },
+    json={"email": "ada@example.com", "name": "Ada Lovelace"},
+)
+response.raise_for_status()
+print(response.json()["invite_url"])
+```
+
+```typescript
+const interviewId = "YOUR_INTERVIEW_ID"
+const response = await fetch(
+  `https://prepza.ai/api/v1/interviews/${interviewId}/candidates`,
+  {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.PREPZA_API_KEY}`,
+      "Content-Type": "application/json",
+      "Idempotency-Key": crypto.randomUUID(),
+    },
+    body: JSON.stringify({ email: "ada@example.com", name: "Ada Lovelace" }),
+  },
+)
+
+if (!response.ok) {
+  throw new Error((await response.json()).detail)
+}
+
+const candidate = await response.json()
+console.log(candidate.invite_url)
+```
+
 ## Rate limits and pagination
 
-Your company's keys together can make up to 60 requests per minute; further requests return
+Your company's keys together have a limit of requests per minute; further requests return
 `429` until the minute ends. List endpoints return the newest items first and accept `offset` and `limit` (up to 100
 items per request).
 
@@ -87,7 +145,7 @@ a work email on that domain, prepza reviews the company and adds the verified ba
 
 # Web hooks
 
-Owners and admins can add up to 5 web hook endpoints on the same API page. Each endpoint gets
+Owners and admins can add a few web hook endpoints on the same API page. Each endpoint gets
 every event below as a `POST` request: a candidate started, finished (with their results), wasn't
 reached by the invitation email, expired or was removed, and an interview is ready. Ignore the
 types you don't need. A candidate's results never change after they finish: a fixed question
@@ -102,6 +160,53 @@ Every request carries a `Prepza-Signature` header in the form `t=<timestamp>,v1=
 signature is the hex-encoded HMAC-SHA256 of `<timestamp>.<raw request body>`, computed with the
 web hook's signing secret, which is shown once when the web hook is added. Verify the signature,
 and reject requests whose timestamp is more than a few minutes old, before processing an event.
+Pass the raw request body, as received, before any JSON parsing.
+
+```python
+import hashlib
+import hmac
+import time
+
+
+def verify(secret: str, header: str, body: bytes, tolerance: int = 300) -> bool:
+    # Whether a request came from prepza: its Prepza-Signature header and raw body.
+    parts = dict(part.split("=", 1) for part in header.split(","))
+    timestamp = int(parts["t"])
+    expected = hmac.new(
+        secret.encode(), f"{timestamp}.".encode() + body, hashlib.sha256
+    ).hexdigest()
+
+    return abs(time.time() - timestamp) <= tolerance and hmac.compare_digest(
+        expected, parts["v1"]
+    )
+```
+
+```typescript
+import { createHmac, timingSafeEqual } from "node:crypto"
+
+/** Whether a request came from prepza: its Prepza-Signature header and raw body. */
+export function verify(
+  secret: string,
+  header: string,
+  body: string,
+  tolerance = 300,
+): boolean {
+  const parts = Object.fromEntries(
+    header.split(",").map((part) => part.split("=", 2)),
+  )
+  const timestamp = Number(parts.t)
+  const expected = createHmac("sha256", secret)
+    .update(`${timestamp}.${body}`)
+    .digest("hex")
+  const fresh = Math.abs(Date.now() / 1000 - timestamp) <= tolerance
+
+  return (
+    fresh &&
+    parts.v1?.length === expected.length &&
+    timingSafeEqual(Buffer.from(expected), Buffer.from(parts.v1))
+  )
+}
+```
 
 Respond with any `2xx` status within 10 seconds to confirm delivery. Other responses and timeouts
 are retried with growing pauses, from 5 minutes up to 6 hours apart, for 3 days; after that the
@@ -124,9 +229,11 @@ domain (or a subdomain of it) and served over HTTPS: anywhere else the interview
 <div id="interview"></div>
 <script src="https://prepza.ai/embed/v1.js"></script>
 <script>
+  // The candidate's invite_url, which your server got when it invited them.
+  const candidateInviteUrl = "https://prepza.ai/invite/3fTq9xLk2VbN7wZr8YcP1mHd5sJ4gAe6uQo0RiKtEy"
   const interview = Prepza.embed({
     element: "#interview",
-    url: "https://prepza.ai/invite/3fTq9xLk2VbN7wZr8YcP1mHd5sJ4gAe6uQo0RiKtEy",
+    url: candidateInviteUrl,
     theme: "dark",
     onReady: () => {},
     onStart: () => {},

@@ -4,7 +4,8 @@ from alembic import context
 from prepza_common.db import sqlalchemy_url
 from sqlalchemy import create_engine
 
-import app.models.api  # noqa: F401
+import app.models.api
+import app.models.outbox  # noqa: F401
 from app.config.settings import settings
 from app.models.base import Base
 
