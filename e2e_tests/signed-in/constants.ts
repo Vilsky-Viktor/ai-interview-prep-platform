@@ -38,6 +38,10 @@ export const WARM_UP_PATHS = [
   "/superadmin/verification",
   "/superadmin/controls",
   "/superadmin/emails",
+  "/superadmin/news",
+  "/superadmin/campaigns",
+  `/superadmin/campaigns/${SOME_ID}`,
+  `/superadmin/support/users/${SOME_ID}`,
   "/settings",
 ]
 

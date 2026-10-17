@@ -16,8 +16,9 @@ test("the keyboard skips the header and moves between tabs with the arrows", asy
 
   // The skip link is the first Tab, even on a page whose tab row scrolled to its current tab;
   // hidden until then, it takes the focus past the header.
-  const skip = owner.getByRole("link", { name: "Skip to content" })
-  await expect(owner.getByRole("button", { name: "New candidate(s)" })).toBeVisible()
+  const skip = owner.locator('a[href="#content"]')
+  const invite = owner.getByTestId("new-candidate")
+  await expect(invite).toBeVisible()
   await owner.keyboard.press("Tab")
   await expect(skip).toBeFocused()
   await expect(skip).toBeVisible()
@@ -26,17 +27,16 @@ test("the keyboard skips the header and moves between tabs with the arrows", asy
   await expect(owner.locator("#content")).toBeFocused()
 
   // The invite dialog's tabs: the arrows move between them, Home and End to the ends.
-  await owner.getByRole("button", { name: "New candidate(s)" }).click()
-  const dialog = owner.getByRole("dialog")
-  const one = dialog.getByRole("tab", { name: "one", exact: true })
-  await one.click()
+  await invite.click()
+  const tabs = owner.getByRole("dialog").getByRole("tab")
+  const first = tabs.first()
+  await first.click()
   await owner.keyboard.press("ArrowRight")
-  const many = dialog.getByRole("tab", { name: "many", exact: true })
-  await expect(many).toBeFocused()
-  await expect(many).toHaveAttribute("aria-selected", "true")
+  await expect(tabs.nth(1)).toBeFocused()
+  await expect(tabs.nth(1)).toHaveAttribute("aria-selected", "true")
   await owner.keyboard.press("End")
-  await expect(dialog.getByRole("tab", { name: "upload", exact: true })).toBeFocused()
+  await expect(tabs.last()).toBeFocused()
   await owner.keyboard.press("Home")
-  await expect(one).toHaveAttribute("aria-selected", "true")
+  await expect(first).toHaveAttribute("aria-selected", "true")
   await shot(owner, "tabs-keyboard")
 })

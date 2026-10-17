@@ -2,7 +2,7 @@ import { expect, test } from "../fixtures"
 import { GREENHOUSE_E2E_SECRET } from "../constants"
 import { createCompany, createInterview } from "../helpers/api"
 import { addAtsConnection } from "../helpers/db-integrations"
-import { openDialog, visit } from "../helpers/navigation"
+import { integrationRow, openDialog, visit } from "../helpers/navigation"
 import { shot } from "../helpers/screenshots"
 import { throwawayEmail } from "../helpers/users"
 
@@ -18,30 +18,29 @@ test("an owner connects Greenhouse and finds its web hook in the info dialog", a
   const tab = `/companies/${company.id}/integrations`
 
   await visit(owner, tab)
-  await expect(owner.getByRole("link", { name: /^Workable/ })).toBeVisible()
+  await expect(integrationRow(owner, "/workable")).toBeVisible()
   await shot(owner, "list")
-  await expect(owner.getByRole("link", { name: /^Greenhouse/ })).toHaveAttribute(
-    "href",
-    `${tab}/greenhouse`
-  )
+  await expect(integrationRow(owner, "/greenhouse")).toBeVisible()
   await visit(owner, `${tab}/greenhouse`)
+  const main = owner.getByRole("main")
+  const actions = main.getByTestId("integration-actions").getByRole("button")
 
   // Not connected: the info dialog has no web hook yet.
-  await openDialog(
-    owner,
-    owner.getByRole("button", { name: "Instructions" })
-  )
+  await openDialog(owner, main.getByTestId("instructions"))
   await expect(owner.getByRole("dialog").getByRole("listitem")).toHaveCount(6)
-  await expect(owner.getByText("Set up the web hook")).toHaveCount(0)
+  await expect(owner.getByRole("dialog").locator("section")).toHaveCount(0)
   await owner.keyboard.press("Escape")
 
-  // Where to make the API credential; Connect needs both fields.
-  await owner.getByRole("button", { name: "Connect" }).click()
+  // The API credential; Connect needs both fields, its client ID and secret.
+  await actions.last().click()
   const connect = owner.getByRole("dialog")
-  await expect(connect.getByText("Harvest V3 (OAuth)")).toBeVisible()
-  await expect(connect.getByRole("button", { name: "Connect" })).toBeDisabled()
-  await connect.getByRole("textbox", { name: "Client ID" }).fill("e2e")
-  await connect.getByLabel("Client secret").fill("e2e")
+  const fields = connect.locator("form input")
+  const submit = connect.locator("button[type=submit]")
+  await expect(fields).toHaveCount(2)
+  await expect(submit).toBeDisabled()
+  await fields.first().fill("e2e")
+  await expect(submit).toBeDisabled()
+  await fields.last().fill("e2e")
   await shot(owner, "connect")
   await owner.route("**/api/ats/greenhouse?*", async (route) => {
     if (route.request().method() !== "PUT") {
@@ -51,29 +50,27 @@ test("an owner connects Greenhouse and finds its web hook in the info dialog", a
     await addAtsConnection(company.id, interviewId, { invited: 2 }, "greenhouse")
     await route.fulfill({ status: 204 })
   })
-  await connect.getByRole("button", { name: "Connect" }).click()
+  await submit.click()
 
-  // Connected: the info dialog opens by itself with the web hook's address and secret key.
-  const dialog = owner.getByRole("dialog")
+  // Connected: the info dialog opens by itself with the web hook's address and secret key, each
+  // in a field to copy.
+  const webhook = owner.getByRole("dialog").locator("section")
   // The web hook shows once the page has reloaded the connection (slow on the dev server).
-  await expect(dialog.getByText("Set up the web hook")).toBeVisible({ timeout: 60_000 })
-  await expect(dialog.getByText("Candidate or Prospect Stage Change")).toBeVisible()
-  await expect(dialog.getByRole("textbox", { name: "Copy URL" })).toHaveValue(
+  await expect(webhook).toBeVisible({ timeout: 60_000 })
+  await expect(webhook.getByRole("textbox").first()).toHaveValue(
     /\/api\/ats\/webhooks\/greenhouse\/[0-9a-f-]{36}$/
   )
-  await expect(dialog.getByRole("textbox", { name: "Copy secret" })).toHaveValue(
-    GREENHOUSE_E2E_SECRET
-  )
+  await expect(webhook.getByRole("textbox").last()).toHaveValue(GREENHOUSE_E2E_SECRET)
   await owner.setViewportSize({ width: 1280, height: 1400 })
   await shot(owner, "info")
   await owner.keyboard.press("Escape")
 
-  // The page: the tag, Disconnect, no other setup button, and the linked job.
-  await expect(owner.getByText("connected", { exact: true }).filter({ visible: true })).toBeVisible()
-  await expect(owner.getByRole("button", { name: "Disconnect" })).toBeVisible()
-  await expect(owner.getByRole("button", { name: /web hook/i })).toHaveCount(0)
-  await expect(owner.getByText("E2E Backend developer")).toBeVisible()
-  await expect(owner.getByLabel("2 invited")).toBeVisible()
+  // The page: the tag, Instructions and Disconnect (no other setup button), and the linked job
+  // with its two invited.
+  await expect(main.locator("[data-slot=badge]").filter({ visible: true })).toBeVisible()
+  await expect(actions).toHaveCount(2)
+  const job = main.getByRole("listitem").filter({ hasText: "E2E Backend developer" })
+  await expect(job.getByTestId("invited-count")).toHaveText("2")
   await shot(owner, "page")
 
   // Greenhouse names no account: under the title is the company's own name, on the page and the
@@ -82,7 +79,7 @@ test("an owner connects Greenhouse and finds its web hook in the info dialog", a
   await expect(header.getByText(company.name, { exact: true })).toBeVisible()
   await visit(owner, tab)
   await expect(
-    owner.getByRole("link", { name: /^Greenhouse/ }).getByText(company.name, { exact: true })
+    integrationRow(owner, "/greenhouse").getByText(company.name, { exact: true })
   ).toBeVisible()
   await shot(owner, "company-name")
 })

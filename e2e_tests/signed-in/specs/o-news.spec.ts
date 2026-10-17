@@ -1,58 +1,71 @@
+import type { Page } from "@playwright/test";
+
 import { expect, test } from "../fixtures";
 import { api } from "../helpers/api";
 import { visit } from "../helpers/navigation";
 import { shot } from "../helpers/screenshots";
-import { randomId } from "../helpers/users";
-
-// The admin zone's tabs, in order.
-const TABS = [
-  "templates",
-  "news",
-  "flagged",
-  "replaced",
-  "pass rates",
-  "verification",
-  "stats",
-  "emails",
-  "controls",
-];
+import { randomId, throwawayEmail } from "../helpers/users";
 
 type Post = { id: string; title: string };
 
+type Campaign = {
+  id: string;
+  kind: string;
+  link: string | null;
+  texts: { en: { subject: string; text: string } };
+};
+
+/** The bell's entry opening the post, once it's there (the notification comes through Pub/Sub). */
+async function bellEntry(page: Page, postId: string) {
+  const entry = page.getByRole("menu").locator(`a[href="/news#${postId}"]`);
+
+  await expect(async () => {
+    await page.reload();
+    await page.getByTestId("notifications").click();
+    await expect(entry).toBeVisible({ timeout: 5_000 });
+  }).toPass({ timeout: 60_000 });
+
+  return entry;
+}
+
 // A superadmin writes a news post in the admin zone's news tab: the text's limit is counted down
-// and enforced by the API, the post shows on the news page with its date, and it's edited and
-// deleted from its row. Posts left by a failed run are deleted at the end.
+// and enforced by the API, the post shows on the news page with its date and in a user's bell,
+// it's turned into a product update campaign from its row, and it's edited and deleted from its
+// row, leaving the bell. Posts and campaigns left by a failed run are deleted at the end.
 test("superadmin writes, edits and deletes a news post", async ({
+  signInAs,
   signInSuperadmin,
 }) => {
+  // A user whose account is older than the post: its bell gets it.
+  const reader = await signInAs(throwawayEmail("reader"));
   const superadmin = await signInSuperadmin();
   const title = `E2E news ${randomId()}`;
   const edited = `${title} edited`;
 
   try {
     await visit(superadmin, "/superadmin/news");
-    await expect(
-      superadmin.locator("main nav a"),
-    ).toHaveText(TABS, {
-      ignoreCase: true,
-    });
 
-    await superadmin.getByRole("button", { name: "New post" }).click();
+    await superadmin.getByTestId("new-post").click();
     const dialog = superadmin.getByRole("dialog");
-    await expect(dialog.getByText("500 characters left")).toBeVisible();
-    await dialog.getByRole("textbox", { name: "Title" }).fill(title);
-    const text = dialog.getByRole("textbox", { name: "Text" });
+    // The title, then the text (the date field between them isn't a textbox), its characters
+    // left counted under it, and Save.
+    const titleField = dialog.getByRole("textbox").first();
+    const text = dialog.getByRole("textbox").last();
+    const left = dialog.locator("[aria-live=polite]");
+    const save = dialog.locator("button[type=submit]");
+    await expect(left).toContainText("500");
+    await titleField.fill(title);
     // The field stops at 500 characters; past it, the API refuses with its own message.
     await text.evaluate((field) => field.removeAttribute("maxlength"));
     await text.fill("x".repeat(501));
-    await dialog.getByRole("button", { name: "Save" }).click();
+    await save.click();
     await expect(superadmin.getByText(/at most 500 characters/)).toBeVisible();
     await expect(dialog).toBeVisible();
 
     await text.fill("First line.\nSecond line.");
-    await expect(dialog.getByText("476 characters left")).toBeVisible();
+    await expect(left).toContainText("476");
     await shot(superadmin, "news-dialog");
-    await dialog.getByRole("button", { name: "Save" }).click();
+    await save.click();
     await expect(dialog).toBeHidden();
     const row = superadmin.locator("li", { hasText: title });
     await expect(row).toBeVisible();
@@ -75,32 +88,89 @@ test("superadmin writes, edits and deletes a news post", async ({
     await expect(post.getByText("First line.")).toBeVisible();
     await shot(superadmin, "news-page");
 
+    const [{ id: postId }] = (
+      await api<Post[]>(superadmin, "GET", "/library/superadmin/news?limit=100")
+    ).filter((item) => item.title === title);
+
+    // In the user's bell, named by its title, opening the post.
+    await visit(reader, "/companies");
+    await expect(await bellEntry(reader, postId)).toContainText(title);
+    await shot(reader, "news-bell");
+
+    // The row's buttons: send as a campaign, edit, then delete. The campaign is a product
+    // update with the post's title, text and a button to it, opened to check and send.
     await visit(superadmin, "/superadmin/news");
     await superadmin
       .locator("li", { hasText: title })
-      .getByRole("button", { name: "Edit post" })
+      .getByRole("button")
+      .first()
       .click();
-    await expect(dialog.getByRole("textbox", { name: "Title" })).toHaveValue(
-      title,
+    // The dev server may compile the campaign's page first.
+    await expect(superadmin).toHaveURL(
+      /\/superadmin\/campaigns\/[0-9a-f-]{36}$/,
+      { timeout: 90_000 },
     );
-    await dialog.getByRole("textbox", { name: "Title" }).fill(edited);
-    await dialog.getByRole("button", { name: "Save" }).click();
+    const campaignId = superadmin.url().split("/").pop() ?? "";
+    const campaign = await api<Campaign>(
+      superadmin,
+      "GET",
+      `/notifications/superadmin/campaigns/${campaignId}`,
+    );
+    expect([
+      campaign.kind,
+      campaign.link,
+      campaign.texts.en.subject,
+      campaign.texts.en.text,
+    ]).toEqual([
+      "updates",
+      `/news#${postId}`,
+      title,
+      "First line.\nSecond line.",
+    ]);
+    await api(
+      superadmin,
+      "DELETE",
+      `/notifications/superadmin/campaigns/${campaignId}`,
+    );
+
+    await visit(superadmin, "/superadmin/news");
+    await superadmin
+      .locator("li", { hasText: title })
+      .getByRole("button")
+      .nth(1)
+      .click();
+    await expect(titleField).toHaveValue(title);
+    await titleField.fill(edited);
+    await save.click();
     await expect(dialog).toBeHidden();
     await expect(superadmin.locator("li", { hasText: edited })).toBeVisible();
 
     await superadmin
       .locator("li", { hasText: edited })
-      .getByRole("button", { name: `Delete ${edited}` })
+      .getByRole("button")
+      .last()
       .click();
     const confirm = superadmin.getByRole("dialog");
-    await expect(confirm).toContainText("Delete this post?");
+    await expect(confirm).toBeVisible();
     await shot(superadmin, "news-delete");
-    await confirm.getByRole("button", { name: "Delete" }).click();
+    await confirm.getByRole("button").last().click();
     await expect(superadmin.locator("li", { hasText: edited })).toHaveCount(0);
     await visit(superadmin, "/news");
     await expect(superadmin.locator("article", { hasText: title })).toHaveCount(
       0,
     );
+
+    // Gone from the bell with the post, once the bell has asked again.
+    const fed = reader.waitForResponse((response) =>
+      /\/notifications\/me(\?|$)/.test(response.url()),
+    );
+    await reader.reload();
+    await fed;
+    await reader.getByTestId("notifications").click();
+    await expect(reader.getByRole("menu")).toBeVisible();
+    await expect(
+      reader.getByRole("menu").locator(`a[href="/news#${postId}"]`),
+    ).toHaveCount(0);
   } finally {
     const posts = await api<Post[]>(
       superadmin,

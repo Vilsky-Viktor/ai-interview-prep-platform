@@ -1,22 +1,26 @@
 import { withDatabase } from "./db";
 
-/** A throwaway template with one topic of `questions` private questions, saved straight into the
- * library database (a real one needs an OpenAI generation). A company can copy it only with at
- * least 10 (MIN_COPY_QUESTIONS in services/library); practice lists it either way. German, so
+/** A throwaway template with one topic of `questions` questions in `pool`, saved straight into
+ * the library database (a real one needs an OpenAI generation). A company can copy it only with
+ * at least 10 company questions (MIN_COPY_QUESTIONS in services/library); practice uses only
+ * practice ones. German, so
  * nothing that picks English templates to make interviews from (templatesBySize, the load
- * tests) takes it. Its right answers hold `inline code`. */
+ * tests) takes it. Its right answers hold `inline code`. Its `level` gives a company's test
+ * made from it its seconds a question. */
 export async function addTemplate(
   title: string,
   questions: number,
+  pool: "company" | "practice" = "company",
+  level: "basic" | "medium" | "hard" = "basic",
 ): Promise<string> {
   return withDatabase("library", async (client) => {
     const set = await client.query(
       `INSERT INTO sets (id, kind, owner_type, owner_id, title, source_text, level, language,
          requirements, topic_count, created_at)
-       VALUES (gen_random_uuid(), 'template', 'platform', 'prepza', $1, 'E2E', 'basic', 'de',
+       VALUES (gen_random_uuid(), 'template', 'platform', 'prepza', $1, 'E2E', $2, 'de',
          '[]', 1, now())
        RETURNING id`,
-      [title],
+      [title, level],
     );
     const id = set.rows[0].id;
     const topic = await client.query(
@@ -31,9 +35,9 @@ export async function addTemplate(
 
     for (let position = 0; position < questions; position++) {
       await client.query(
-        `INSERT INTO questions (id, topic_id, position, text, options, stage)
-         VALUES (gen_random_uuid(), $1, $2, $3, $4, 'private')`,
-        [topic.rows[0].id, position, `E2E question ${position + 1}?`, options],
+        `INSERT INTO questions (id, topic_id, position, text, options, stage, pool)
+         VALUES (gen_random_uuid(), $1, $2, $3, $4, 'private', $5)`,
+        [topic.rows[0].id, position, `E2E question ${position + 1}?`, options, pool],
       );
     }
 
@@ -85,5 +89,67 @@ export async function addPracticeRounds(
         [userId, templateId, index],
       );
     }
+  });
+}
+
+// A multi-answer ("select all that apply") question of multiAnswerTemplate's: three of its four
+// options are right, so ticking two of them and nothing wrong earns two thirds of its point.
+export const MULTI_QUESTION = "E2E: which of these are prime numbers?";
+export const MULTI_RIGHT = ["2", "3", "5"];
+export const MULTI_WRONG = "9";
+
+/** A throwaway template with one topic: `company` questions companies copy and `practice` ones
+ * for free practice, a third of each multi-answer (MULTI_QUESTION, numbered after the first),
+ * the rest single-answer with four options; saved straight into the library database, as
+ * addTemplate's. With 15 of each, a draw of 10 holds exactly its share (1 at 10%), so the
+ * question after the multi-answer one is single-answer. */
+export async function multiAnswerTemplate(
+  title: string,
+  company = 15,
+  practice = 15,
+): Promise<string> {
+  return withDatabase("library", async (client) => {
+    const set = await client.query(
+      `INSERT INTO sets (id, kind, owner_type, owner_id, title, source_text, level, language,
+         requirements, topic_count, created_at)
+       VALUES (gen_random_uuid(), 'template', 'platform', 'prepza', $1, 'E2E', 'basic', 'de',
+         '[]', 1, now())
+       RETURNING id`,
+      [title],
+    );
+    const id = set.rows[0].id;
+    const topic = await client.query(
+      `INSERT INTO topics (id, set_id, position, title, subtopics)
+       VALUES (gen_random_uuid(), $1, 0, 'E2E topic', '[]') RETURNING id`,
+      [id],
+    );
+    const single = JSON.stringify([
+      { answer: "Right", correct: true },
+      { answer: "Wrong one", correct: false },
+      { answer: "Wrong two", correct: false },
+      { answer: "Wrong three", correct: false },
+    ]);
+    const multi = JSON.stringify([
+      ...MULTI_RIGHT.map((answer) => ({ answer, correct: true })),
+      { answer: MULTI_WRONG, correct: false },
+    ]);
+    const pools = [
+      ...Array(company).fill("company"),
+      ...Array(practice).fill("practice"),
+    ];
+
+    for (const [position, pool] of pools.entries()) {
+      const isMulti = position % 3 === 0;
+      const text = isMulti
+        ? `${MULTI_QUESTION} (${position + 1})`
+        : `E2E question ${position + 1}?`;
+      await client.query(
+        `INSERT INTO questions (id, topic_id, position, text, options, stage, pool)
+         VALUES (gen_random_uuid(), $1, $2, $3, $4, 'private', $5)`,
+        [topic.rows[0].id, position, text, isMulti ? multi : single, pool],
+      );
+    }
+
+    return id;
   });
 }

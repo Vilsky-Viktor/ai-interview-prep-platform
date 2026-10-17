@@ -10,13 +10,15 @@ test("a contact message sent twice quickly goes once", async ({ page }) => {
   });
 
   await page.goto("/contact");
-  await page.getByRole("textbox", { name: "Name" }).fill("Ann");
-  await page.getByRole("textbox", { name: "Email" }).fill("ann@example.com");
-  const message = page.getByRole("textbox", { name: "Message" });
+  const form = page.locator("main form");
+  await form.locator('input[autocomplete="name"]').fill("Ann");
+  await form.locator('input[type="email"]').fill("ann@example.com");
+  const message = form.locator("textarea");
   await message.fill("Hello");
   await message.press("ControlOrMeta+Enter");
   await message.press("ControlOrMeta+Enter");
 
-  await expect(page.getByRole("status")).toBeVisible();
+  // Sent: the reply goes to the address given.
+  await expect(page.getByRole("status")).toContainText("ann@example.com");
   expect(sent).toBe(1);
 });

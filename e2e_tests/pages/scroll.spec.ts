@@ -7,7 +7,7 @@ test("how it works scrolls smoothly", async ({ page }, info) => {
   await page.goto("/")
   await page.waitForLoadState("networkidle")
   expect(await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior)).toBe("smooth")
-  await page.getByRole("link", { name: /how it works|more/i }).first().click()
+  await page.locator('main a[href="#how"]').click()
   // Midway through the animation the page is between the top and the section.
   await page.waitForTimeout(120)
   const midway = await page.evaluate(() => window.scrollY)
@@ -20,10 +20,12 @@ test("how it works scrolls smoothly", async ({ page }, info) => {
 // On a long page, "back to top" shows once it's scrolled down, and goes back to the top.
 test("back to top shows on a long page and returns to its top", async ({ page }) => {
   await page.goto("/")
-  await expect(page.getByRole("button", { name: "Back to top" })).toHaveCount(0)
+  const button = page.getByTestId("back-to-top")
+  await expect(button).toHaveCount(0)
   await page.mouse.wheel(0, 2500)
-  const button = page.getByRole("button", { name: "Back to top" })
   await expect(button).toBeVisible()
+  // An icon alone: its label is what screen readers read.
+  await expect(button).toHaveAccessibleName(/.+/)
   await button.click()
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0)
   await expect(button).toHaveCount(0)

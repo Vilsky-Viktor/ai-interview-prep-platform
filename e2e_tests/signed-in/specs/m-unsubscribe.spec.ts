@@ -1,17 +1,15 @@
 import { expect, test } from "../fixtures"
 import { createCompany, createInterview, inviteCandidate } from "../helpers/api"
+import { EMAIL_BOXES, emailBoxes } from "../helpers/emails"
 import { visit } from "../helpers/navigation"
 import { shot } from "../helpers/screenshots"
 import { tokenOf } from "../helpers/sign-in"
-import { companyUnsubscribePath, userUnsubscribePath } from "../helpers/unsubscribe"
+import {
+  companyUnsubscribePath,
+  confirmUnsubscribe,
+  userUnsubscribePath,
+} from "../helpers/unsubscribe"
 import { ownerEmail, throwawayEmail } from "../helpers/users"
-
-const KINDS = [
-  "Candidates who finished",
-  "Undelivered invites",
-  "ATS candidates not invited",
-  "Interviews ready",
-]
 
 // A user's "Unsubscribe" link from the activity digest: confirmed, it turns the digest's four
 // kinds off, as Settings shows.
@@ -21,22 +19,24 @@ test("a user unsubscribes from the activity digest", async ({ signInAs }) => {
   const userId = JSON.parse(Buffer.from(jwt.split(".")[1], "base64url").toString()).user_id
 
   await visit(user, userUnsubscribePath(userId, "digest"))
-  await expect(user.getByText("You won't get the activity digest anymore.")).toBeVisible()
   await shot(user, "digest")
-  await user.getByRole("button", { name: "Confirm" }).click()
-  await expect(user.getByRole("heading", { name: /^You're unsubscribed/ })).toBeVisible()
+  await confirmUnsubscribe(user)
+  // Done, signed in: the way to the email settings.
+  const settings = user.getByRole("main").locator('a[href="/settings"]')
+  await expect(settings).toBeVisible()
   await shot(user, "digest-done")
 
-  await user.getByRole("button", { name: "Email settings" }).click()
+  await settings.click()
   await expect(user).toHaveURL(/\/settings$/)
-  await expect(user.getByRole("checkbox", { name: /^Activity digest/ })).not.toBeChecked()
+  const boxes = emailBoxes(user)
+  await expect(boxes.nth(EMAIL_BOXES.digest)).not.toBeChecked()
 
-  for (const kind of KINDS) {
-    await expect(user.getByRole("checkbox", { name: kind, exact: true })).not.toBeChecked()
+  for (const kind of EMAIL_BOXES.kinds) {
+    await expect(boxes.nth(kind)).not.toBeChecked()
   }
 
   // Only the digest: reminders stay on.
-  await expect(user.getByRole("checkbox", { name: /^Reminders/ })).toBeChecked()
+  await expect(boxes.nth(EMAIL_BOXES.reminders)).toBeChecked()
 })
 
 // A candidate's "Don't email me for <company>" link, opened signed out: the company's next
@@ -50,11 +50,12 @@ test("a candidate stops a company's emails", async ({ signInAs, browser }) => {
   const context = await browser.newContext()
   const guest = await context.newPage()
   await visit(guest, companyUnsubscribePath(candidate, company.id, company.name))
-  await expect(guest.getByText(`You won't get emails from ${company.name} anymore.`)).toBeVisible()
-  await guest.getByRole("button", { name: "Confirm" }).click()
-  await expect(guest.getByRole("heading", { name: /^You're unsubscribed/ })).toBeVisible()
-  // Signed out: no settings to go to.
-  await expect(guest.getByRole("button", { name: "Email settings" })).toHaveCount(0)
+  // The page names the company whose emails stop.
+  await expect(guest.getByRole("main")).toContainText(company.name)
+  await confirmUnsubscribe(guest)
+  // Signed out: nothing left to press, no settings to go to.
+  await expect(guest.getByRole("main").getByRole("button")).toHaveCount(0)
+  await expect(guest.getByRole("main").locator('a[href="/settings"]')).toHaveCount(0)
   await shot(guest, "company-done")
   await context.close()
 
@@ -62,10 +63,13 @@ test("a candidate stops a company's emails", async ({ signInAs, browser }) => {
   await visit(owner, `/companies/${company.id}/interviews/${interviewId}?tab=candidates`)
   const row = owner.getByRole("link").filter({ hasText: candidate })
 
-  // The invite event reaches notifications, which reports it back: it takes a moment.
+  // The invite event reaches notifications, which reports it back: it takes a moment. An
+  // undelivered invite's status is the list's red one.
   await expect(async () => {
     await owner.reload()
-    await expect(row.getByText("undelivered", { exact: true })).toBeVisible({ timeout: 3_000 })
+    await expect(row.locator("[data-slot=badge][data-variant=destructive]")).toBeVisible({
+      timeout: 3_000,
+    })
   }).toPass({ timeout: 90_000, intervals: [2_000] })
   await shot(owner, "invite-undelivered")
 })

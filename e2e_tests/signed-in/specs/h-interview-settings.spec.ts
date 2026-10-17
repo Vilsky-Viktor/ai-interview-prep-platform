@@ -13,12 +13,13 @@ test("an owner changes an interview's settings on its settings tab", async ({ si
   const interviewUrl = `/companies/${company.id}/interviews/${interviewId}`
 
   await visit(owner, interviewUrl)
-  await owner.locator("main nav").getByRole("link", { name: "Settings" }).click()
+  await owner.locator('main nav a[href$="?tab=settings"]').click()
   await expect(owner).toHaveURL(new RegExp(`${interviewUrl}\\?tab=settings$`))
   await shot(owner, "settings-tab")
 
-  const seconds = owner.getByLabel("Time per question in seconds")
-  const mark = owner.getByLabel("Passing grade in percent")
+  // The time per question, then the passing grade.
+  const seconds = owner.getByRole("main").getByRole("spinbutton").first()
+  const mark = owner.getByRole("main").getByRole("spinbutton").nth(1)
   await seconds.fill("90")
   await seconds.press("Enter")
   await mark.fill("70")

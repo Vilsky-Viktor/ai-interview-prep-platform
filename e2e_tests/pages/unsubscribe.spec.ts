@@ -20,8 +20,8 @@ test("an invalid unsubscribe link says so and isn't indexed", async ({ page }) =
   const response = await page.goto("/unsubscribe?token=not-a-real-link");
 
   expect(response?.headers()["x-robots-tag"]).toBe("noindex");
-  await expect(page.getByText("This unsubscribe link isn't valid.")).toBeVisible();
-  await expect(page.getByRole("button", { name: "Confirm" })).toHaveCount(0);
+  await expect(page.getByTestId("link-invalid")).toHaveText("This unsubscribe link isn't valid.");
+  await expect(page.getByRole("main").getByRole("button")).toHaveCount(0);
 });
 
 test("a candidate confirms stopping a company's emails", async ({ page }) => {
@@ -35,13 +35,18 @@ test("a candidate confirms stopping a company's emails", async ({ page }) => {
   });
 
   await page.goto(companyLink(`e2e-${id}@example.com`, `e2e-${id}`, `Acme ${id}`));
-  await expect(page.getByText(`You won't get emails from Acme ${id} anymore.`)).toBeVisible();
+  const main = page.getByRole("main");
+  // It names the company the link stops.
+  await expect(main).toContainText(`Acme ${id}`);
+  const title = await main.getByRole("heading", { level: 1 }).textContent();
   // Opening the link changes nothing, as mail scanners open links too: only Confirm does.
   await page.waitForLoadState("networkidle");
   expect(posts).toEqual([]);
 
-  await page.getByRole("button", { name: "Confirm" }).click();
-  await expect(page.getByRole("heading", { name: /^You're unsubscribed/ })).toBeVisible();
+  // Confirmed: the title says it's done, and nothing is left to confirm (signed out, no settings).
+  await main.getByRole("button").click();
+  await expect(main.getByRole("heading", { level: 1 })).not.toHaveText(title!);
+  await expect(main.getByRole("button")).toHaveCount(0);
   expect(posts).toHaveLength(1);
-  await expect(page.getByText(`You won't get emails from Acme ${id} anymore.`)).toBeVisible();
+  await expect(main).toContainText(`Acme ${id}`);
 });

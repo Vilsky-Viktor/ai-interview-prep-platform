@@ -1,15 +1,17 @@
 import { expect, test } from "@playwright/test";
 
 // The page an AI app sends a user to, to allow it the use of their account, signed out. Without
-// a request it says the link expired; with one it asks to sign in first. It's never indexed.
+// a request it says the link expired; with one it asks to sign in first. It's never
+// indexed.
 test("the AI app consent page without a request says the link expired", async ({ page }) => {
   const response = await page.goto("/connect");
 
   expect(response?.headers()["x-robots-tag"]).toBe("noindex");
-  await expect(
-    page.getByText("This link has expired or was already used.", { exact: false }),
-  ).toBeVisible();
-  await expect(page.getByRole("button", { name: "Sign in to continue" })).toHaveCount(0);
+  const main = page.getByRole("main");
+  // The notice alone: no title or way to sign in.
+  await expect(main.getByRole("status")).toContainText("This link has expired or was already used.");
+  await expect(main.getByRole("heading")).toHaveCount(0);
+  await expect(main.getByRole("button")).toHaveCount(0);
 });
 
 test("the AI app consent page asks to sign in first", async ({ page }) => {
@@ -17,24 +19,23 @@ test("the AI app consent page asks to sign in first", async ({ page }) => {
   const response = await page.goto("/connect?request=e2e-unknown");
 
   expect(response?.headers()["x-robots-tag"]).toBe("noindex");
-  await expect(page.getByRole("heading", { name: "Connect an AI app to prepza" })).toBeVisible();
-  await expect(
-    page.getByText("Sign in to choose whether it can use your prepza account."),
-  ).toBeVisible();
-  await page.getByRole("button", { name: "Sign in to continue" }).click();
-  await expect(page.getByRole("dialog")).toBeVisible();
+  const main = page.getByRole("main");
+  await expect(main.getByRole("heading", { level: 1 })).toBeVisible();
+  await main.getByRole("button").click();
+  await expect(page.getByRole("dialog").getByTestId("sign-in-google")).toBeVisible();
 });
 
-// When the API names the app before sign-in (answered here in the browser), the title says
-// which app asks.
-test("the AI app consent page names the app that asks", async ({ page }) => {
-  await page.route("**/assistant/connect/e2e-request", (route) =>
-    route.fulfill({
-      json: { client_name: "E2E App", redirect_host: "e2e.example.com", known_client: true },
-    }),
-  );
-  await page.goto("/connect?request=e2e-request");
+// Signed out, the request isn't read: the API answers about it only to a signed-in user.
+test("the AI app consent page signed out doesn't read the request", async ({ page }) => {
+  const reads: string[] = [];
+  page.on("request", (request) => {
+    if (request.url().includes("/assistant/connect/")) {
+      reads.push(request.url());
+    }
+  });
 
-  await expect(page.getByRole("heading", { name: "Connect E2E App to prepza" })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Sign in to continue" })).toBeVisible();
+  await page.goto("/connect?request=e2e-request");
+  await expect(page.getByRole("main").getByRole("button")).toBeVisible();
+  await page.waitForLoadState("networkidle");
+  expect(reads).toEqual([]);
 });

@@ -11,9 +11,10 @@ test("a top-up opens the checkout the backend made", async ({ signInAs }) => {
   const company = await createCompany(owner);
 
   await visit(owner, `/companies/${company.id}/billing`);
-  await owner.getByRole("button", { name: "Top up" }).first().click();
+  await owner.getByTestId("top-up").first().click();
   const dialog = owner.getByRole("dialog");
-  const buy = dialog.getByRole("button", { name: "Top up" }).first();
+  // The first top-up's button (the products come before the dialog's Close).
+  const buy = dialog.getByRole("button").first();
   test.skip(await buy.isDisabled(), "Paddle's prices aren't set");
 
   const made = owner.waitForResponse((response) =>

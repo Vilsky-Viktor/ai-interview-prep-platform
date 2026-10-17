@@ -20,7 +20,7 @@ test("a candidate invited through the API goes back to the company's platform", 
     owner,
     "POST",
     `/v1/manage/keys?company_id=${company.id}`,
-    { name: "Careers site", expiry: "1" }
+    { name: "Careers site", expiry: "1", permissions: ["candidates:invite"] }
   )
   const headers = { Authorization: `Bearer ${key}` }
   const path = `${API_URL}/v1/interviews/${interviewId}/candidates`
@@ -52,25 +52,24 @@ test("a candidate invited through the API goes back to the company's platform", 
   const context = await browser.newContext()
   const candidate = await context.newPage()
   await visit(candidate, `/invite/${await inviteToken(email)}`)
-  await expect(candidate.getByRole("button", { name: "Sign in to start" })).toHaveCount(0)
   // The company only: no prepza header or footer.
   await expect(candidate.locator("header, footer")).toHaveCount(0)
-  await expect(candidate.getByRole("button", { name: "Accept & Start" })).toBeVisible()
+  // Its one button starts the interview, with no sign-in asked for.
+  await expect(candidate.getByText(company.name).first()).toBeVisible()
   await shot(candidate, "invitation")
-  await candidate.getByRole("button", { name: "Accept & Start" }).click()
+  await candidate.getByRole("main").getByRole("button").click()
   await expect(candidate).toHaveURL(/\/sessions\//)
-  await candidate.getByRole("button", { name: "Finish interview" }).click()
-  await candidate
-    .getByRole("dialog")
-    .getByRole("button", { name: "Finish", exact: true })
-    .click()
+  await expect(candidate.getByRole("dialog")).toHaveCount(0)
+  await candidate.getByTestId("finish-interview").click()
+  await candidate.getByRole("dialog").getByRole("button").last().click()
 
-  const back = candidate.getByRole("button", { name: `Back to ${company.name}` })
+  // Finished: the one way on is back to the company's platform, naming the company.
+  const back = candidate.getByRole("main").locator("a")
   await expect(back).toHaveAttribute(
     "href",
     `https://jobs.acme-e2e.com/done?step=2&prepza_invite=${candidateId}`
   )
-  await expect(candidate.getByRole("button", { name: "Go to interviews" })).toHaveCount(0)
+  await expect(back).toContainText(company.name)
   await expect(candidate.locator("header, footer")).toHaveCount(0)
   await shot(candidate, "finished")
   await candidate.setViewportSize({ width: 390, height: 844 })

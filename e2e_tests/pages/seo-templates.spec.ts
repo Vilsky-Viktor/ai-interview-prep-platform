@@ -4,7 +4,16 @@ import { expect, test } from "./helpers/templates";
 // What search engines see of the template pages, the sitemap and robots.txt, checked on the
 // test's own throwaway templates (helpers/templates.ts).
 
-// The two ways on are links drawn as the site's buttons.
+/** The links on a page drawn as the site's buttons with words, in order (the back arrow, an
+ * icon, isn't one of them). */
+function buttonLinks(page: import("@playwright/test").Page) {
+  return page
+    .locator("main a[role=button]:not([aria-label])")
+    .evaluateAll((links) => links.map((link) => link.getAttribute("href")));
+}
+
+// The two ways on are links drawn as the site's buttons: creating a test first, practising it
+// second.
 test("a role test page is for hiring, with the way to practise second", async ({
   page,
   addTemplate,
@@ -12,25 +21,20 @@ test("a role test page is for hiring, with the way to practise second", async ({
   const template = await addTemplate();
   await page.goto(`/tests/${template.slug}`);
 
-  await expect(page.locator("h1")).toContainText("skills test for hiring");
-  await expect(
-    page.getByRole("button", { name: /create a test for your candidates/i }),
-  ).toHaveAttribute("href", "/");
-  await expect(
-    page.getByRole("button", { name: /practise it free/i }),
-  ).toHaveAttribute("href", `/practice/${template.slug}`);
+  await expect(page.locator("h1")).toContainText(template.title);
+  expect(await buttonLinks(page)).toEqual(["/", `/practice/${template.slug}`]);
   const data = await page
     .locator('script[type="application/ld+json"]')
     .allTextContents();
   expect(data.join()).toContain('"@type":"BreadcrumbList"');
   // The site FAQ's answers to companies' questions, opening on a click; no FAQ data, as the
   // same answers repeat on every role page (/faq carries it).
-  const faq = page.locator("section", {
-    has: page.getByRole("heading", { name: /questions companies ask/i }),
-  });
+  const faq = page.locator("main section").filter({ has: page.locator("details") });
   await expect(faq.locator("details")).toHaveCount(5);
-  await faq.getByText("How much does it cost?").click();
-  await expect(faq.getByText(/credits/).first()).toBeVisible();
+  const first = faq.locator("details").first();
+  await expect(first).not.toHaveAttribute("open");
+  await first.locator("summary").click();
+  await expect(first).toHaveAttribute("open");
   expect(data.join()).not.toContain('"@type":"FAQPage"');
 });
 
@@ -128,28 +132,25 @@ test("only an indexable template's pages may be found", async ({ page, addTempla
 });
 
 // A template in another language has its pages at that language's address too: their links,
-// back to the list, to the home page and between its two pages, stay in it, and the level is
-// in the page's language.
+// back to the list, to the home page and between its two pages, stay in it, and the page (its
+// level among it) is in that language, unlike the English one.
 test("a template's page in its language keeps its links and level in it", async ({
   page,
   addTemplate,
 }) => {
   const template = await addTemplate("de");
+  const level = page.locator("main [data-slot=badge]").first();
+
+  await page.goto(`/tests/${template.slug}`);
+  const english = { heading: await page.locator("h1").textContent(), level: await level.textContent() };
 
   await page.goto(`/de/tests/${template.slug}`);
-  await expect(page.locator("h1")).toContainText("Test für Bewerber");
-  await expect(page.locator('main a[aria-label="Einstellungstests nach Rolle"]')).toHaveAttribute(
-    "href",
-    "/de/tests",
-  );
-  await expect(
-    page.getByRole("button", { name: /test für deine kandidaten erstellen/i }),
-  ).toHaveAttribute("href", "/de");
-  await expect(page.getByRole("button", { name: /kostenlos üben/i })).toHaveAttribute(
-    "href",
-    `/de/practice/${template.slug}`,
-  );
-  await expect(page.getByText(/^(grundlegend|mittel|schwer)$/)).toBeVisible();
+  await expect(page.locator("html")).toHaveAttribute("lang", "de");
+  await expect(page.locator("h1")).toContainText(template.title);
+  await expect(page.locator("h1")).not.toHaveText(english.heading!);
+  await expect(level).not.toHaveText(english.level!);
+  await expect(page.locator('main a[href="/de/tests"]')).toHaveCount(1);
+  expect(await buttonLinks(page)).toEqual(["/de", `/de/practice/${template.slug}`]);
 
   await page.goto("/de/tests");
   await expect(page.locator(`a[href="/de/tests/${template.slug}"]`)).toHaveCount(1);

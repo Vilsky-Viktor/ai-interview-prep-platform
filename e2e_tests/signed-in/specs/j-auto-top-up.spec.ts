@@ -25,19 +25,20 @@ test("an owner picks the automatic top-up's amount and level", async ({ signInAs
 
   await visit(owner, "/top-up")
   // Off, it's a button that says what it does.
-  await openDialog(owner, owner.getByRole("button", { name: "Set up automatic top-up" }))
+  await openDialog(owner, owner.getByTestId("set-up-auto-top-up"))
   const dialog = owner.getByRole("dialog")
-  await expect(dialog.getByText("Top up", { exact: true })).toBeVisible()
-  await expect(dialog.getByText("When the balance falls")).toBeVisible()
+  // Its two pills, the amount and the level, and no browser's select.
+  const pills = dialog.locator("form").getByRole("button")
+  await expect(pills).toHaveCount(2)
   await expect(owner.locator("select")).toHaveCount(0)
   await shot(owner, "dialog")
 
-  for (const name of ["Top up", "When the balance falls"]) {
-    const pill = dialog.getByRole("button", { name, exact: true })
+  for (const [index, name] of ["amount", "level"].entries()) {
+    const pill = pills.nth(index)
     await pill.click()
     const items = owner.getByRole("menu").getByRole("menuitemradio")
     await expect(items.nth(1)).toBeVisible()
-    await shot(owner, `menu-${name === "Top up" ? "amount" : "level"}`)
+    await shot(owner, `menu-${name}`)
     const picked = (await items.last().textContent()) ?? ""
     await items.last().click()
     await expect(owner.getByRole("menu")).toHaveCount(0)
@@ -66,8 +67,11 @@ test("an automatic top-up that's on shows its setting and changes from the edit 
   )
 
   await visit(owner, "/top-up")
-  await expect(owner.getByText("Automatic top-up: $50 under 500 credits")).toBeVisible()
-  await expect(owner.getByRole("button", { name: "Set up automatic top-up" })).toHaveCount(0)
-  await openDialog(owner, owner.getByRole("button", { name: "Change automatic top-up" }))
-  await expect(owner.getByRole("dialog").getByText("When the balance falls")).toBeVisible()
+  // The setting: the amount and the level it was answered with.
+  const setting = owner.getByTestId("auto-top-up-on")
+  await expect(setting).toContainText("$50")
+  await expect(setting).toContainText("500")
+  await expect(owner.getByTestId("set-up-auto-top-up")).toHaveCount(0)
+  await openDialog(owner, setting.getByRole("button"))
+  await expect(owner.getByRole("dialog").locator("form").getByRole("button")).toHaveCount(2)
 })

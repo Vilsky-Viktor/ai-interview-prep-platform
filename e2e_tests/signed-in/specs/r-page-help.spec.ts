@@ -6,19 +6,22 @@ import { openDialog, visit } from "../helpers/navigation"
 import { shot } from "../helpers/screenshots"
 import { ownerEmail, throwawayEmail } from "../helpers/users"
 
-/** Opens the page's info button, checks its dialog's title and a line of its text, and closes it. */
-async function checkHelp(page: Page, title: string, line: RegExp) {
-  const button = page.getByRole("main").getByRole("button", { name: "About this page" })
-  await openDialog(page, button)
-  const dialog = page.getByRole("dialog", { name: title })
-  await expect(dialog.getByText(line)).toBeVisible()
-  await shot(page, title.toLowerCase().replaceAll(" ", "-"))
-  await dialog.getByRole("button", { name: "Close" }).click()
+/** Opens the page's info button, checks its dialog has a guide (its lists of what to do and
+ * tips), and closes it; returns the guide's title, to tell the pages' guides apart. */
+async function checkHelp(page: Page, name: string) {
+  await openDialog(page, page.getByRole("main").getByTestId("page-help"))
+  const dialog = page.getByRole("dialog")
+  await expect(dialog.getByRole("listitem").first()).toBeVisible()
+  const title = (await dialog.getByRole("heading").first().textContent()) ?? ""
+  await shot(page, name)
+  await dialog.getByRole("button").last().click()
   await expect(dialog).toBeHidden()
+
+  return title
 }
 
 // Every page from the companies list inward has an info button under its back arrow, opening a
-// short guide to that page; the companies list's arrow goes home.
+// short guide to that page, each page its own; the companies list's arrow goes home.
 test("the info buttons explain the companies list, an interview and a candidate", async ({
   signInAs,
 }) => {
@@ -31,33 +34,28 @@ test("the info buttons explain the companies list, an interview and a candidate"
     "GET",
     `/companies/interviews/${interviewId}/candidates?sort=date&limit=5`
   )
-
-  await visit(owner, "/companies")
-  await checkHelp(owner, "Companies", /Create a company/)
-
   const interviewHref = `/companies/${company.id}/interviews/${interviewId}`
-  await visit(owner, interviewHref)
-  await checkHelp(owner, "Topics", /manage questions/)
-  // Each tab explains itself.
-  await visit(owner, `${interviewHref}?tab=candidates`)
-  await checkHelp(owner, "Candidates", /Invite candidates/)
+  // Each page, with its guide's key and its screenshot's name.
+  const pages = [
+    ["/companies", "companies", "companies"],
+    [interviewHref, "interviewTopics", "topics"],
+    [`${interviewHref}?tab=candidates`, "interviewCandidates", "candidates"],
+    [`${interviewHref}/candidates/${candidate.id}`, "candidate", "candidate-report"],
+    [`/companies/${company.id}/members`, "team", "team"],
+    ["/top-up", "topUp", "top-up"],
+    ["/settings", "settings", "settings"],
+  ]
 
-  await visit(owner, `${interviewHref}/candidates/${candidate.id}`)
-  await checkHelp(owner, "Candidate report", /Download the report/)
-  await checkHelp(owner, "Candidate report", /Copy their invite link/)
-
-  // The team's help says the join link is emailed; top up and settings have their own.
-  await visit(owner, `/companies/${company.id}/members`)
-  await checkHelp(owner, "Team", /emailed a link to join/)
-  await visit(owner, "/top-up")
-  await checkHelp(owner, "Top up", /Pick a company and a top-up/)
-  await visit(owner, "/settings")
-  await checkHelp(owner, "Settings", /delete your account/)
+  for (const [path, key, name] of pages) {
+    await visit(owner, path)
+    // The guide rounds serves for the page, which the assistant reads too.
+    const guide = await api<{ title: string }>(owner, "GET", `/rounds/help/pages/${key}`)
+    expect(await checkHelp(owner, name)).toBe(guide.title)
+  }
 
   // The companies list's back arrow goes to the home page.
   await visit(owner, "/companies")
-  const home = owner.getByRole("main").getByRole("button", { name: "Home" })
-  await expect(home).toHaveAttribute("href", "/")
+  const home = owner.getByRole("main").locator('a[href="/"]')
   await home.click()
   await expect(owner).toHaveURL(/\/$/)
 })

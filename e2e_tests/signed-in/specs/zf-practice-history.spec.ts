@@ -21,7 +21,7 @@ test("the practice history loads its older rounds as it scrolls", async ({
   signInAs,
 }) => {
   const talent = await signInAs(throwawayEmail("practice-history"));
-  const templateId = await addTemplate("E2E practice history", 1);
+  const templateId = await addTemplate("E2E practice history", 1, "practice");
 
   try {
     // One a day: the oldest, 21 days ago, is on the second page.

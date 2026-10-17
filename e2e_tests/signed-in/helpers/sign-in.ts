@@ -7,10 +7,6 @@ import { visit } from "./navigation"
 // The email boxes under the sign-in buttons to tick first; both start unticked.
 export type SignInEmails = { noUpdates?: boolean; promotions?: boolean }
 
-const EMAIL_BOXES = {
-  noUpdates: "Don't send me product updates and news",
-  promotions: "Send me offers and promotions",
-}
 
 /** A new browser signed in as `email`, through the site's own "Continue with Google" and the
  * Auth emulator's sign-in page (never real Google): an account the emulator already has is
@@ -32,9 +28,9 @@ export async function signIn(
   // A page that only asks to sign in shows the options inline.
   await visit(page, "/companies")
 
-  for (const [box, label] of Object.entries(EMAIL_BOXES)) {
-    if (emails[box as keyof SignInEmails]) {
-      const checkbox = page.getByRole("checkbox", { name: label })
+  for (const box of ["noUpdates", "promotions"] as const) {
+    if (emails[box]) {
+      const checkbox = page.getByTestId(`email-box-${box}`)
       await checkbox.click()
       await expect(checkbox).toBeChecked()
     }
@@ -77,7 +73,7 @@ async function openGooglePopup(page: Page): Promise<Page> {
   try {
     await expect(async () => {
       if (popups.length === 0) {
-        const button = page.getByRole("button", { name: /continue with google/i })
+        const button = page.getByTestId("sign-in-google")
         await expect(button).toBeEnabled({ timeout: 5_000 })
         await button.click()
       }

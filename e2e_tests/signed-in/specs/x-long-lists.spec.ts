@@ -31,21 +31,27 @@ test("an interview deleted past the first page leaves the list at once", async (
 
   await visit(owner, `/companies/${company.id}/interviews`)
   await expect(owner.getByText("E2E 22")).toBeVisible()
-  const oldest = owner.getByRole("button", { name: "Delete E2E 01" })
+  // The oldest's row; its last button deletes it.
+  const oldest = owner
+    .getByRole("main")
+    .getByRole("listitem")
+    .filter({ hasText: "E2E 01" })
+    .getByRole("button")
+    .last()
   await expect(async () => {
     await owner.mouse.wheel(0, 4000)
     await expect(oldest).toBeVisible({ timeout: 1000 })
   }).toPass({ timeout: 30_000 })
 
   await oldest.click()
-  await owner.getByRole("dialog").getByRole("button", { name: "Delete" }).click()
+  await owner.getByRole("dialog").getByRole("button").last().click()
   await expect(owner.getByRole("dialog")).toHaveCount(0)
   await expect(owner.getByText("E2E 01", { exact: true })).toHaveCount(0)
   await expect(owner.getByText("E2E 02", { exact: true })).toBeVisible()
 })
 
-// A page that fails to load (here the load balancer's own 503 page) says so with Try again,
-// and the list still loads the rest.
+// A page that fails to load (here the load balancer's own 503 page) says so in an error toast
+// whose button tries again, and the list still loads the rest.
 test("a page that fails to load can be tried again", async ({ signInAs }) => {
   const owner = await signInAs(throwawayEmail("long-list-retry"))
   const company = await longList(owner)
@@ -56,15 +62,17 @@ test("a page that fails to load can be tried again", async ({ signInAs }) => {
       : route.continue()
   )
 
+  const failed = owner.locator('[data-sonner-toast][data-type="error"]').first()
   await visit(owner, `/companies/${company.id}/interviews`)
   await expect(owner.getByText("E2E 22")).toBeVisible()
   await expect(async () => {
     await owner.mouse.wheel(0, 4000)
-    await expect(owner.getByText("Couldn't load more. Please try again.")).toBeVisible({ timeout: 1000 })
+    await expect(failed).toContainText("Couldn't load more. Please try again.", { timeout: 1000 })
   }).toPass({ timeout: 30_000 })
+  await expect(owner.getByText("E2E 01", { exact: true })).toHaveCount(0)
 
   failing = false
-  await owner.getByRole("button", { name: "Try again" }).click()
+  await failed.locator("[data-button]").click()
   await expect(async () => {
     await owner.mouse.wheel(0, 4000)
     await expect(owner.getByText("E2E 01", { exact: true })).toBeVisible({ timeout: 1000 })

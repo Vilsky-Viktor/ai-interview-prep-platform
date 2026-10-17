@@ -1,7 +1,7 @@
 import { expect, test } from "../fixtures"
 import { createCompany, createInterview } from "../helpers/api"
 import { addAtsConnection } from "../helpers/db-integrations"
-import { openDialog, visit } from "../helpers/navigation"
+import { integrationRow, openDialog, visit } from "../helpers/navigation"
 import { shot } from "../helpers/screenshots"
 import { throwawayEmail } from "../helpers/users"
 
@@ -16,22 +16,24 @@ test("an owner connects Breezy HR with one key", async ({ signInAs }) => {
   const tab = `/companies/${company.id}/integrations`
 
   await visit(owner, tab)
-  await expect(owner.getByRole("link", { name: /^Breezy HR/ })).toHaveAttribute(
-    "href",
-    `${tab}/breezy`
-  )
+  await expect(integrationRow(owner, "/breezy")).toBeVisible()
   await owner.setViewportSize({ width: 1280, height: 900 })
   await shot(owner, "list")
   await visit(owner, `${tab}/breezy`)
-  await expect(owner.getByText("Breezy HR isn't connected yet.", { exact: false })).toBeVisible()
+  // Not connected yet: no tag and no linked jobs; Instructions and Connect.
+  const main = owner.getByRole("main")
+  const actions = main.getByTestId("integration-actions").getByRole("button")
+  await expect(main.locator("[data-slot=badge]")).toHaveCount(0)
+  await expect(main.getByRole("listitem")).toHaveCount(0)
+  await expect(actions).toHaveCount(2)
 
-  // Where to make the key; Connect needs it.
-  await openDialog(owner, owner.getByRole("button", { name: "Connect" }))
+  // One key; Connect needs it.
+  await openDialog(owner, actions.last())
   const connect = owner.getByRole("dialog")
-  await expect(connect.getByText("API Keys")).toBeVisible()
-  await expect(connect.getByText("We add the web hook in Breezy HR ourselves.")).toBeVisible()
-  await expect(connect.getByRole("button", { name: "Connect" })).toBeDisabled()
-  await connect.getByLabel("API key").fill("e2e")
+  const submit = connect.locator("button[type=submit]")
+  await expect(connect.locator("form input")).toHaveCount(1)
+  await expect(submit).toBeDisabled()
+  await connect.locator("form input").fill("e2e")
   await shot(owner, "connect")
   await owner.route("**/api/ats/breezy?*", async (route) => {
     if (route.request().method() !== "PUT") {
@@ -41,16 +43,16 @@ test("an owner connects Breezy HR with one key", async ({ signInAs }) => {
     await addAtsConnection(company.id, interviewId, { invited: 1 }, "breezy")
     await route.fulfill({ status: 204 })
   })
-  await connect.getByRole("button", { name: "Connect" }).click()
+  await submit.click()
 
-  // Connected, without a dialog to follow: the page lists the linked jobs.
-  await expect(owner.getByText("connected", { exact: true }).filter({ visible: true })).toBeVisible({ timeout: 60_000 })
+  // Connected, without a dialog to follow: the tag, and the page lists the linked jobs.
+  await expect(main.locator("[data-slot=badge]").filter({ visible: true })).toBeVisible({ timeout: 60_000 })
   await expect(owner.getByRole("dialog")).toHaveCount(0)
   await expect(owner.getByText("E2E Backend developer")).toBeVisible()
   await shot(owner, "page")
 
-  // Its Instructions are the candidate flow alone.
-  await openDialog(owner, owner.getByRole("button", { name: "Instructions" }))
+  // Its Instructions are the candidate flow alone: no web hook to set up.
+  await openDialog(owner, main.getByTestId("instructions"))
   await expect(owner.getByRole("dialog").getByRole("listitem")).toHaveCount(6)
-  await expect(owner.getByText("Set up the web hook")).toHaveCount(0)
+  await expect(owner.getByRole("dialog").locator("section")).toHaveCount(0)
 })

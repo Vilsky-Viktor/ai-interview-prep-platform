@@ -1,3 +1,5 @@
+import type { Page } from "@playwright/test";
+
 import { expect, test } from "../fixtures";
 import {
   api,
@@ -11,6 +13,11 @@ import { openTab, visit } from "../helpers/navigation";
 import { shot } from "../helpers/screenshots";
 import { ownerEmail, throwawayEmail } from "../helpers/users";
 
+/** The billing page's tab of the reserved candidates, which counts them. */
+function reservedTab(page: Page) {
+  return page.getByRole("main").locator('a[href$="?tab=reserved"]');
+}
+
 // A company's billing: owners and admins see where the credits came from and went, and the
 // candidates whose credits are reserved; a viewer has no billing tab, and its address sends them
 // back to the interviews.
@@ -23,16 +30,23 @@ test("owner sees the company's billing, a viewer doesn't", async ({
     .getByRole("main")
     .getByRole("navigation")
     .getByRole("link");
+  const history = owner
+    .getByRole("main")
+    .getByRole("list")
+    .getByRole("listitem");
+  const reserved = owner.getByTestId("reserved-credits");
 
-  // A new company's history: the welcome gift.
+  // The company's last two tabs: billing, then referrals.
   await visit(owner, `/companies/${company.id}/interviews`);
-  await expect(tabs.last()).toHaveText("Referrals");
-  await expect(tabs.nth(-2)).toHaveText("Billing");
-  await openTab(owner, "Billing");
-  await expect(owner.getByText("Welcome gift")).toBeVisible();
-  await expect(owner.getByRole("link", { name: "Reserved (0)" })).toBeVisible();
+  await expect(tabs.last()).toHaveAttribute("href", /\/referrals$/);
+  await expect(tabs.nth(-2)).toHaveAttribute("href", /\/billing$/);
+  // A new company's history: the welcome gift's credits.
+  await openTab(owner, "/billing");
+  await expect(history).toHaveCount(1);
+  await expect(history).toContainText("+1,500");
+  await expect(reservedTab(owner)).toHaveText(/\b0\b/);
   // Nothing reserved yet: no "0 reserved" under the balance.
-  await expect(owner.getByText(/credits? reserved/)).toHaveCount(0);
+  await expect(reserved).toHaveCount(0);
   await shot(owner, "history");
 
   // An invited candidate holds credits until they finish.
@@ -40,9 +54,9 @@ test("owner sees the company's billing, a viewer doesn't", async ({
   const candidate = throwawayEmail("billing-candidate");
   await inviteCandidate(owner, interviewId, candidate);
   await visit(owner, `/companies/${company.id}/billing`);
-  await expect(owner.getByText("500 credits reserved")).toBeVisible();
-  await owner.getByRole("link", { name: "Reserved (1)" }).click();
-  await expect(owner).toHaveURL(/\?tab=reserved$/);
+  await expect(reserved).toContainText("500");
+  await expect(reservedTab(owner)).toHaveText(/\b1\b/);
+  await openTab(owner, "?tab=reserved");
   await expect(owner.getByText(candidate)).toBeVisible();
   await shot(owner, "reserved");
 
@@ -58,16 +72,9 @@ test("owner sees the company's billing, a viewer doesn't", async ({
   await api(page, "POST", `/companies/members/invites/${member.token}/accept`);
 
   await visit(page, `/companies/${company.id}/interviews`);
-  await expect(
-    page.getByRole("main").getByRole("navigation").getByRole("link", {
-      name: "Referrals",
-    }),
-  ).toBeVisible();
-  await expect(
-    page.getByRole("main").getByRole("navigation").getByRole("link", {
-      name: "Billing",
-    }),
-  ).toHaveCount(0);
+  const viewerTabs = page.getByRole("main").getByRole("navigation");
+  await expect(viewerTabs.locator('a[href$="/referrals"]')).toBeVisible();
+  await expect(viewerTabs.locator('a[href$="/billing"]')).toHaveCount(0);
   await shot(page, "viewer-tabs");
   await visit(page, `/companies/${company.id}/billing`);
   await expect(page).toHaveURL(
@@ -91,7 +98,8 @@ test("the history lists a top-up and a candidate's charge", async ({
   const candidate = await signInAs(email);
   await finishOneAnswer(candidate, email);
 
-  const topUp = owner.getByRole("listitem").filter({ hasText: "Top-up" });
+  // The top-up: the credits and the price the test paid.
+  const topUp = owner.getByRole("listitem").filter({ hasText: "+2,500" });
   const charge = owner.getByRole("link").filter({ hasText: email });
 
   // The charge comes once the scorecard is made.
@@ -100,10 +108,10 @@ test("the history lists a top-up and a candidate's charge", async ({
     await expect(charge).toBeVisible({ timeout: 3_000 });
   }).toPass({ timeout: 90_000 });
   await expect(topUp).toContainText("$50");
-  await expect(topUp).toContainText("+2,500");
-  await expect(topUp.getByRole("button", { name: "Invoice" })).toBeVisible();
+  // Its invoice, the row's only button.
+  await expect(topUp.getByRole("button")).toHaveCount(1);
   await expect(charge).toContainText("-500");
-  await expect(owner.getByRole("link", { name: "Reserved (0)" })).toBeVisible();
+  await expect(reservedTab(owner)).toHaveText(/\b0\b/);
   await shot(owner, "history-top-up-and-charge");
 
   await charge.click();

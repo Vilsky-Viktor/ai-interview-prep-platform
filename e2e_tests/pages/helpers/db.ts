@@ -27,8 +27,8 @@ async function withLibrary<T>(work: (client: pg.Client) => Promise<T>) {
 }
 
 /** A throwaway template with its own readable address, saved straight into the library database
- * (a real one needs an OpenAI generation). Each topic has a subtopic, two private questions and
- * one revealed. Its title is unique, so with at least 3 topics (MIN_INDEXABLE_TOPICS in
+ * (a real one needs an OpenAI generation). Each topic has a subtopic, two company questions and
+ * one practice one. Its title is unique, so with at least 3 topics (MIN_INDEXABLE_TOPICS in
  * services/library) it's indexable, and with fewer it isn't. */
 export async function addTemplate(language: string, topics: number): Promise<Template> {
   const key = randomUUID().slice(0, 8);
@@ -57,11 +57,11 @@ export async function addTemplate(language: string, topics: number): Promise<Tem
         [id, position, `E2E topic ${position + 1}`],
       );
 
-      for (const [index, stage] of ["private", "private", "revealed"].entries()) {
+      for (const [index, pool] of ["company", "company", "practice"].entries()) {
         await client.query(
-          `INSERT INTO questions (id, topic_id, position, text, options, stage)
-           VALUES (gen_random_uuid(), $1, $2, $3, $4, $5)`,
-          [topic.rows[0].id, index, `E2E question ${index + 1}?`, options, stage],
+          `INSERT INTO questions (id, topic_id, position, text, options, stage, pool)
+           VALUES (gen_random_uuid(), $1, $2, $3, $4, 'private', $5)`,
+          [topic.rows[0].id, index, `E2E question ${index + 1}?`, options, pool],
         );
       }
     }

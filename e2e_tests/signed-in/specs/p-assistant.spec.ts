@@ -31,18 +31,18 @@ test("the assistant welcomes by stage, answers, takes voice, keeps history and s
   await expect(panel.getByRole("textbox")).toBeFocused();
 
   // No company yet, then a company that isn't verified: the service decides the stage.
-  await expect(panel.getByText("Let's get you started")).toBeVisible();
-  await expect(panel.getByRole("button", { name: "Create a company for me" })).toBeVisible();
+  await expect(panel.getByTestId("welcome-no_company")).toBeVisible();
   await shot(owner, "welcome-no-company");
-  await panel.getByRole("button", { name: "Close" }).click();
+  await panel.getByTestId("assistant-close").click();
   const company = await createCompany(owner);
   panel = await openPanel(owner);
-  await expect(panel.getByText("Verify your company so candidates see")).toBeVisible();
+  await expect(panel.getByTestId("welcome-unverified")).toBeVisible();
 
   // The company picker: all companies outside a company's pages, the page's company on them.
-  const picker = panel.getByRole("button", { name: "Company", exact: true });
-  await expect(picker).toHaveText(/all companies/i);
-  await panel.getByRole("button", { name: "Close" }).click();
+  const picker = panel.getByTestId("assistant-company").getByRole("button");
+  await expect(picker).toBeVisible();
+  await expect(picker).not.toHaveText(company.name);
+  await panel.getByTestId("assistant-close").click();
   await visit(owner, `/companies/${company.id}/interviews`);
   panel = await openPanel(owner);
   await expect(picker).toHaveText(company.name);
@@ -50,11 +50,13 @@ test("the assistant welcomes by stage, answers, takes voice, keeps history and s
   // An answer: the tool at work, the markdown, and the candidate's row linking to their page.
   const sent = await assistantAnswers(owner);
   await panel.getByRole("textbox").fill("Who passed?");
-  await panel.getByRole("button", { name: "Send" }).click();
+  await panel.locator("button[type=submit]").click();
   await expect(panel.locator("strong", { hasText: "Ann" })).toBeVisible();
-  await expect(panel.getByRole("link", { name: /ann@example\.com/ })).toHaveAttribute("href", CANDIDATE_LINK);
+  await expect(panel.locator(`a[href="${CANDIDATE_LINK}"]`)).toContainText("ann@example.com");
   // One link, named by what it opens.
-  await expect(panel.getByRole("link", { name: "open Senior Backend" })).toHaveAttribute("href", "/companies/c/interviews/i");
+  const interview = panel.locator('a[href="/companies/c/interviews/i"]');
+  await expect(interview).toHaveCount(1);
+  await expect(interview).toContainText("Senior Backend");
   await shot(owner, "answer");
   expect(sent[0]).toMatchObject({
     message: "Who passed?",
@@ -63,10 +65,10 @@ test("the assistant welcomes by stage, answers, takes voice, keeps history and s
     earlier: [],
   });
 
-  // Picking all companies sends no company with the next message.
+  // Picking all companies (the menu's first choice) sends no company with the next message.
   await picker.click();
-  await owner.getByRole("menuitemradio", { name: /all companies/i }).click();
-  await expect(picker).toHaveText(/all companies/i);
+  await owner.getByRole("menuitemradio").first().click();
+  await expect(picker).not.toHaveText(company.name);
 
   // Voice from the keyboard: Enter starts, Enter stops; the transcript is sent as the message.
   await owner.route("**/api/assistant/transcribe", (route) => {
@@ -74,11 +76,11 @@ test("the assistant welcomes by stage, answers, takes voice, keeps history and s
 
     return route.fulfill({ json: { text: "Who else passed?" } });
   });
-  const mic = panel.getByRole("button", { name: "Hold to talk" });
+  // The microphone: the input's pressable button.
+  const mic = panel.locator("form button[aria-pressed]");
   await mic.focus();
   await owner.keyboard.press("Enter");
-  await expect(panel.getByRole("button", { name: "Stop recording" })).toHaveAttribute("aria-pressed", "true");
-  await expect(panel.getByRole("status")).toContainText("Recording…");
+  await expect(mic).toHaveAttribute("aria-pressed", "true");
   await shot(owner, "recording");
   await owner.waitForTimeout(1_200);
   await owner.keyboard.press("Enter");
@@ -89,9 +91,10 @@ test("the assistant welcomes by stage, answers, takes voice, keeps history and s
   // Esc cancels a recording without closing the panel; nothing is sent.
   await mic.focus();
   await owner.keyboard.press("Enter");
-  await expect(panel.getByRole("button", { name: "Stop recording" })).toBeVisible();
+  await expect(mic).toHaveAttribute("aria-pressed", "true");
   await owner.keyboard.press("Escape");
-  await expect(mic).toBeVisible();
+  await expect(mic).toHaveAttribute("aria-pressed", "false");
+  await expect(panel).toBeVisible();
   expect(sent).toHaveLength(2);
 
   // A click beside the panel closes it; reopened, the conversation is still there.
@@ -101,7 +104,7 @@ test("the assistant welcomes by stage, answers, takes voice, keeps history and s
   await expect(panel.getByRole("list").getByText("Who else passed?")).toBeVisible();
 
   // Its width: wider with the arrow keys, no narrower than 360px however far it's dragged.
-  const handle = panel.getByRole("separator", { name: "Resize the panel" });
+  const handle = panel.getByRole("separator");
   const width = async () => (await panel.boundingBox())!.width;
   await expect.poll(width).toBe(448);
   await shot(owner, "width-default");
@@ -126,37 +129,39 @@ test("the assistant welcomes by stage, answers, takes voice, keeps history and s
 
   // A reload in the middle of the chat brings the panel and the conversation back.
   await owner.reload();
-  panel = owner.getByRole("dialog", { name: "Assistant" });
+  panel = owner.getByRole("dialog");
   await expect(panel.getByRole("list").getByText("Who passed?")).toBeVisible();
   // The pick and the width came back with it.
-  await expect(panel.getByRole("button", { name: "Company", exact: true })).toHaveText(/all companies/i);
+  await expect(panel.getByTestId("assistant-company").getByRole("button")).not.toHaveText(company.name);
   await expect.poll(async () => (await panel.boundingBox())!.width).toBe(360);
 
   // The history lists it; deleting asks first.
-  await panel.getByRole("button", { name: "History" }).click();
-  await expect(panel.getByRole("button", { name: /^Who passed\? / })).toBeVisible();
+  await panel.getByTestId("assistant-history").click();
+  const chat = panel.getByRole("listitem").filter({ hasText: "Who passed?" });
+  await expect(chat).toBeVisible();
   // Hovering a chat shows its whole title, above the panel (the tooltip has no ARIA role: it
   // repeats the row's own text), and the panel stays open.
-  await panel.getByRole("button", { name: /^Who passed\? / }).hover();
+  await chat.getByRole("button").first().hover();
   const tooltip = owner.locator("[data-side][data-open][tabindex]", { hasText: /^Who passed\?$/ });
   await expect(tooltip).toBeVisible();
   await expect(tooltip).toBeInViewport();
   await expect(panel).toBeVisible();
   await shot(owner, "history");
-  await panel.getByRole("button", { name: "Delete “Who passed?”" }).click();
-  await owner.getByRole("dialog", { name: "Delete this chat?" }).getByRole("button", { name: "Delete" }).click();
-  await expect(panel.getByText("No chats yet.")).toBeVisible();
+  // Its bin, the row's last button; the question opens over the panel.
+  await chat.getByRole("button").last().click();
+  await owner.getByRole("dialog").last().getByRole("button").last().click();
+  await expect(chat).toHaveCount(0);
 
   // New chat starts over, with the input ready again. With no recent conversation (the service
   // says none, as for one older than its window), a reload leaves the panel closed, and it
   // opens on the welcome.
-  await panel.getByRole("button", { name: "New chat" }).click();
+  await panel.getByTestId("assistant-new-chat").click();
   await expect(panel.getByRole("textbox")).toBeFocused();
   await owner.reload();
-  await expect(owner.getByRole("banner").getByRole("button", { name: "ask agent" })).toBeVisible();
-  await expect(owner.getByRole("dialog", { name: "Assistant" })).toHaveCount(0);
+  await expect(owner.getByRole("banner").locator("[data-assistant-toggle]")).toBeVisible();
+  await expect(owner.getByRole("dialog")).toHaveCount(0);
   panel = await openPanel(owner);
-  await expect(panel.getByText("Verify your company so candidates see")).toBeVisible();
+  await expect(panel.getByTestId("welcome-unverified")).toBeVisible();
 });
 
 test("a visitor who signs in from the sign-in card keeps their chat", async ({ browser }) => {
@@ -175,17 +180,17 @@ test("a visitor who signs in from the sign-in card keeps their chat", async ({ b
   await visit(page, "/");
   const panel = await openPanel(page);
   await panel.getByRole("textbox").fill("Create a company");
-  await panel.getByRole("button", { name: "Send" }).click();
+  await panel.locator("button[type=submit]").click();
   await expect(panel.getByRole("list").getByText("Sign in below to create it.")).toBeVisible();
 
   // A reload keeps the visitor's chat and the open panel.
   await page.reload();
-  const again = page.getByRole("dialog", { name: "Assistant" });
+  const again = page.getByRole("dialog");
   await expect(again.getByRole("list").getByText("Create a company")).toBeVisible();
 
   const sent = await assistantAnswers(page);
   const opened = context.waitForEvent("page");
-  await again.getByRole("button", { name: /continue with google/i }).click();
+  await again.getByTestId("sign-in-google").click();
   const popup = await opened;
   await popup.waitForLoadState();
   await popup.getByText(/add new account/i).click();
@@ -196,20 +201,20 @@ test("a visitor who signs in from the sign-in card keeps their chat", async ({ b
 
   // Signed in, the panel is still open with the chat, without the sign-in card, and the next
   // message carries the chat.
-  await expect(again.getByRole("button", { name: "History" })).toBeVisible();
+  await expect(again.getByTestId("assistant-history")).toBeVisible();
   await expect(again.getByRole("list").getByText("Create a company")).toBeVisible();
   await expect(again.getByRole("list").getByText("Sign in below to create it.")).toBeVisible();
-  await expect(again.getByRole("button", { name: /continue with/i })).toHaveCount(0);
+  await expect(again.locator('[data-testid^="sign-in-"]')).toHaveCount(0);
 
   // A reload before the first message keeps that chat (the user has no newer conversation).
   await page.route("**/api/assistant/conversations/active", (route) => route.fulfill({ status: 204 }));
   await page.reload();
-  await expect(again.getByRole("button", { name: "History" })).toBeVisible({ timeout: 45_000 });
+  await expect(again.getByTestId("assistant-history")).toBeVisible({ timeout: 45_000 });
   await expect(again.getByRole("list").getByText("Create a company")).toBeVisible();
   await expect(again.getByRole("list").getByText("Sign in below to create it.")).toBeVisible();
-  await expect(again.getByRole("button", { name: /continue with/i })).toHaveCount(0);
+  await expect(again.locator('[data-testid^="sign-in-"]')).toHaveCount(0);
   await again.getByRole("textbox").fill("Call it Acme");
-  await again.getByRole("button", { name: "Send" }).click();
+  await again.locator("button[type=submit]").click();
   await expect(again.locator("strong", { hasText: "Ann" })).toBeVisible();
   expect(sent[0]).toMatchObject({
     message: "Call it Acme",

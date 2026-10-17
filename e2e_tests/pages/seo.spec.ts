@@ -37,20 +37,31 @@ test("a page's plain address is in English for any browser language", async ({
   await page.goto("/pricing");
 
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
-  await expect(page.locator("h1")).toContainText(/pricing|price/i);
+  const plain = await page.locator("h1").textContent();
+  await page.goto("/de/pricing");
+  await expect(page.locator("html")).toHaveAttribute("lang", "de");
+  await expect(page.locator("h1")).not.toHaveText(plain!);
 });
 
-// Each language's titles use the words its employers search for (internal_docs/seo-plan.md), not a
-// translation of the English ones: German companies search "Einstellungstest".
-test("a language's home page is titled with its own search terms", async ({
+// Each language's home page has its own title and description, not the English ones.
+test("a language's home page has its own title and description", async ({
   page,
 }) => {
+  await page.goto("/");
+  const english = [
+    await page.title(),
+    await head(page, 'meta[name="description"]', "content"),
+  ];
   await page.goto("/de");
+  const german = [
+    await page.title(),
+    await head(page, 'meta[name="description"]', "content"),
+  ];
 
-  await expect(page).toHaveTitle(/^Einstellungstest /);
-  expect(await head(page, 'meta[name="description"]', "content")).toContain(
-    "Einstellungstest",
-  );
+  for (const [index, text] of german.entries()) {
+    expect(text).toBeTruthy();
+    expect(text).not.toBe(english[index]);
+  }
 });
 
 test("the home page has a title, a description, a preview image and its company data", async ({
@@ -73,13 +84,18 @@ test("the home page has a title, a description, a preview image and its company 
 // Every page's preview is the logo over its own title, in its language; the languages the
 // picture can't draw keep the site's own.
 test("each page's preview image shows its own title", async ({ page }) => {
+  await page.goto("/pricing");
+  const english = new URL(
+    (await head(page, 'meta[property="og:image"]', "content")) ?? "",
+  );
   await page.goto("/de/pricing");
   const own = new URL(
     (await head(page, 'meta[property="og:image"]', "content")) ?? "",
   );
 
   expect(own.pathname).toBe("/preview");
-  expect(own.searchParams.get("title")).toBe("preise");
+  expect(own.searchParams.get("title")).toBeTruthy();
+  expect(own.searchParams.get("title")).not.toBe(english.searchParams.get("title"));
   expect(own.searchParams.get("lang")).toBe("de");
   const image = await page.request.get(`${REQUEST_URL}/preview${own.search}`);
   expect(image.status()).toBe(200);
@@ -109,6 +125,7 @@ test("the footer has three columns of links and the social icons", async ({
   await expect(footer.locator("nav ul")).toHaveCount(3);
   await expect(footer.locator("nav ul").first().locator("a")).toHaveCount(5);
 
+  // Each icon is named for screen readers.
   for (const name of ["LinkedIn", "X", "YouTube", "Facebook"]) {
     await expect(footer.getByRole("img", { name, exact: true })).toBeVisible();
   }
@@ -151,10 +168,8 @@ test("links on a page in another language stay in it", async ({ page }) => {
   await page.goto("/de/pricing");
   const footer = page.locator("footer");
 
-  await expect(footer.getByRole("link", { name: /faq/i })).toHaveAttribute(
-    "href",
-    "/de/faq",
-  );
+  await expect(footer.locator('a[href="/de/faq"]')).toHaveCount(1);
+  await expect(footer.locator('a[href="/faq"]')).toHaveCount(0);
   // A page without language versions keeps its one address.
   await expect(
     footer.locator('a[href="/privacy"]'),

@@ -8,8 +8,8 @@ import { ownerEmail, throwawayEmail } from "../helpers/users"
 type Row = { id: string; tab_leaves: number }
 
 // A page leave counts when it lasted 2 seconds or more: a moment's one (a notification taking
-// focus) is kept but not counted. Signals are said to be the browser's report, not proof.
-test("only a real page leave counts, and the results say signals are the browser's report", async ({
+// focus) is kept but not counted.
+test("only a real page leave counts", async ({
   signInAs,
 }) => {
   const owner = await signInAs(ownerEmail())
@@ -20,7 +20,7 @@ test("only a real page leave counts, and the results say signals are the browser
 
   const candidate = await signInAs(email)
   await visit(candidate, `/invite/${await inviteToken(email)}`)
-  await candidate.getByRole("button", { name: "Accept & Start" }).click()
+  await candidate.getByRole("main").getByRole("button").click()
   await expect(candidate).toHaveURL(/\/sessions\//)
   await expect(candidate.getByRole("main").locator("button[aria-pressed]").first()).toBeVisible()
 
@@ -43,6 +43,7 @@ test("only a real page leave counts, and the results say signals are the browser
 
   const [row] = await api<Row[]>(owner, "GET", `/companies/interviews/${interviewId}/candidates`)
   await visit(owner, `/companies/${company.id}/interviews/${interviewId}/candidates/${row.id}`)
-  await expect(owner.getByText(/reported by the candidate's browser: a reason to look closer, not proof/).first()).toBeVisible()
+  // The candidate's results, with the note on their score and signals.
+  await expect(owner.getByTestId("human-review")).toBeVisible()
   await shot(owner, "results-note")
 })

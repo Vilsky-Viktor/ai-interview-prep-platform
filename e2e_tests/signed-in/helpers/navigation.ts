@@ -9,15 +9,16 @@ export async function openDialog(page: Page, button: Locator) {
   }).toPass()
 }
 
-/** Opens one of a page's tabs (a company's, the admin zone's) by its name, clicking again if the
- * first click came before the page was ready for it. */
-export async function openTab(page: Page, name: string) {
-  const tab = page.getByRole("main").getByRole("navigation").getByRole("link", { name, exact: true })
+/** Opens one of a page's tabs (a company's, the admin zone's) by where it leads (`path`, the
+ * end of its address, such as "/billing" or "?tab=reserved"), clicking again if the first click
+ * came before the page was ready for it. */
+export async function openTab(page: Page, path: string) {
+  const tab = page.getByRole("main").getByRole("navigation").locator(`a[href$="${path}"]`)
   const href = await tab.getAttribute("href")
 
   await expect(async () => {
     await tab.click()
-    await expect(page).toHaveURL(new RegExp(`${href}$`), { timeout: 3_000 })
+    await expect(page).toHaveURL((url) => url.href.endsWith(href ?? path), { timeout: 3_000 })
   }).toPass()
 }
 
@@ -28,4 +29,12 @@ export async function visit(page: Page, path: string) {
     const response = await page.goto(path)
     expect(response?.status(), `${path} answers`).not.toBe(502)
   }).toPass({ timeout: 90_000, intervals: [2_000] })
+}
+
+/** An integration's row on a company's integrations tab, by the page it opens (`path`, such as
+ * "/workable", "/slack", "/api" or "/ai"). */
+export function integrationRow(page: Page, path: string) {
+  return page
+    .getByRole("listitem")
+    .filter({ has: page.locator(`a[href$="/integrations${path}"]`) })
 }

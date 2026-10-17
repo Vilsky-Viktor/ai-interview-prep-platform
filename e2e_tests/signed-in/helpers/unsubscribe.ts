@@ -1,3 +1,4 @@
+import { expect, type Page } from "@playwright/test"
 import { createHash, createHmac } from "node:crypto"
 
 import { env } from "./env"
@@ -25,4 +26,15 @@ export function companyUnsubscribePath(email: string, companyId: string, company
   const address = createHash("sha256").update(email.trim().toLowerCase()).digest("hex")
 
   return `/unsubscribe?token=${sign({ type: "company", address, company_id: companyId, company })}`
+}
+
+/** Confirms an unsubscribe link's page (its one button) and waits for the API to take it. */
+export async function confirmUnsubscribe(page: Page) {
+  const saved = page.waitForResponse(
+    (response) =>
+      response.url().includes("/notifications/unsubscribe/") &&
+      response.request().method() === "POST"
+  )
+  await page.getByRole("main").getByRole("button").click()
+  expect((await saved).ok()).toBe(true)
 }

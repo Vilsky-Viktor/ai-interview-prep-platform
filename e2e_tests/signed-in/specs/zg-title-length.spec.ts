@@ -1,5 +1,5 @@
 import { expect, test } from "../fixtures";
-import { createCompany, createInterview } from "../helpers/api";
+import { api, createCompany, createInterview } from "../helpers/api";
 import { visit } from "../helpers/navigation";
 import { throwawayEmail } from "../helpers/users";
 
@@ -14,27 +14,37 @@ test("a test's title under three characters isn't saved", async ({
   await visit(owner, `/companies/${company.id}/interviews/${interviewId}`);
   const heading = owner.getByRole("heading", { level: 1 });
   const before = await heading.innerText();
-  await heading.getByRole("button", { name: "Edit title" }).click();
+  // The pencil after the title.
+  await heading.getByRole("button").click();
   const input = owner.getByRole("textbox");
   await input.fill("ab");
   await input.press("Enter");
 
   await expect(owner.getByText("Use at least 3 characters.")).toBeVisible();
+  await expect(input).toHaveValue("ab");
   await input.press("Escape");
-  await expect(owner.getByRole("heading", { level: 1 })).toHaveText(before);
+  await expect(heading).toHaveText(before);
+  await owner.reload();
+  await expect(heading).toHaveText(before);
 });
 
 // A company name needs at least 2 characters (EY and 3M are companies): one letter is refused
-// under the field.
+// under the field, and no company is made.
 test("a one-letter company name isn't accepted", async ({ signInAs }) => {
   const owner = await signInAs(throwawayEmail("company-name-length"));
 
   await visit(owner, "/companies");
-  await owner.getByRole("button", { name: "New company" }).click();
+  await owner.getByTestId("new-company").click();
   const dialog = owner.getByRole("dialog");
-  await dialog.getByLabel("Company name").fill("A");
-  await dialog.getByRole("button", { name: "Create" }).click();
+  const name = dialog.getByRole("textbox");
+  await name.fill("A");
+  // Create, the dialog's last button.
+  await dialog.getByRole("button").last().click();
 
-  await expect(dialog.getByText("Use at least 2 characters.")).toBeVisible();
+  await expect(name).toHaveAttribute("aria-invalid", "true");
+  await expect(dialog.locator("#company-name-error")).toHaveText(
+    "Use at least 2 characters.",
+  );
   await expect(owner).toHaveURL(/\/companies$/);
+  expect(await api<unknown[]>(owner, "GET", "/companies/companies")).toEqual([]);
 });

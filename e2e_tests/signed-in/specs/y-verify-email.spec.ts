@@ -17,21 +17,18 @@ test("a candidate whose email isn't confirmed is told to confirm it", async ({ s
 
   const candidate = await signInAs(email)
   const token = await inviteToken(email)
+  const refusal = "Confirm your email first: open the link we sent you, then try again."
   await candidate.route(`**/api/companies/invites/${token}/start`, (route) =>
     route.fulfill({
       status: 403,
       contentType: "application/json",
-      body: JSON.stringify({
-        detail: "Confirm your email first: open the link we sent you, then try again.",
-      }),
+      body: JSON.stringify({ detail: refusal }),
     }),
   )
 
   await visit(candidate, `/invite/${token}`)
-  await candidate.getByRole("button", { name: "Accept & Start" }).click()
-  await expect(
-    candidate.getByText("Confirm your email first: open the link we sent you, then try again."),
-  ).toBeVisible()
+  await candidate.getByRole("main").getByRole("button").click()
+  await expect(candidate.getByText(refusal)).toBeVisible()
   await expect(candidate.getByText("This invite was sent to a different email address.")).toHaveCount(0)
   await shot(candidate, "confirm-email")
 })

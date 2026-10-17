@@ -4,6 +4,17 @@ import { api, createCompany, createInterview } from "../helpers/api";
 import { failGeneration } from "../helpers/db";
 import { ownerEmail, throwawayEmail } from "../helpers/users";
 
+// Every API permission: the test calls every route.
+const EVERY_PERMISSION = [
+  "interviews:read",
+  "interviews:create",
+  "candidates:read",
+  "candidates:invite",
+  "candidates:change",
+  "candidates:delete",
+  "credits:read",
+];
+
 // A company's platform runs its hiring through the API: it invites a candidate safely twice,
 // corrects them, gives extra time, reminds, finds them by email, reads the credits, removes
 // them, and asks for a new interview under the app's own limits.
@@ -17,7 +28,7 @@ test("the API invites, updates, reminds, finds and removes a candidate", async (
     owner,
     "POST",
     `/v1/manage/keys?company_id=${company.id}`,
-    { name: "Careers site", expiry: "1" },
+    { name: "Careers site", expiry: "1", permissions: EVERY_PERMISSION },
   );
   const headers = { Authorization: `Bearer ${key}` };
   const call = (method: string, path: string, data?: object, extra = {}) =>

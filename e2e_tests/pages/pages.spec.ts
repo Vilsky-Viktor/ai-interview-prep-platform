@@ -90,11 +90,11 @@ for (const path of PAGES) {
       ARTICLES.includes(path) ? "none" : "lowercase",
     );
     // In the interface's language: German under /de.
-    await expect(
-      page
-        .getByRole("button", { name: path.startsWith("/de") ? /anmelden/i : /sign in/i })
-        .first(),
-    ).toBeVisible();
+    await expect(page.locator("html")).toHaveAttribute(
+      "lang",
+      path.startsWith("/de") ? "de" : "en",
+    );
+    await expect(page.getByRole("banner").getByTestId("header-sign-in")).toBeVisible();
   });
 }
 
@@ -133,13 +133,9 @@ test("the sign-in dialog offers the email boxes, unticked", async ({ page }) => 
   const dialog = page.getByRole("dialog");
 
   await expect(async () => {
-    await page.getByRole("banner").getByRole("button", { name: /sign in/i }).click();
+    await page.getByRole("banner").getByTestId("header-sign-in").click();
     await expect(dialog).toBeVisible({ timeout: 2_000 });
   }).toPass();
-  await expect(
-    dialog.getByRole("checkbox", { name: "Don't send me product updates and news" }),
-  ).not.toBeChecked();
-  await expect(
-    dialog.getByRole("checkbox", { name: "Send me offers and promotions" }),
-  ).not.toBeChecked();
+  await expect(dialog.getByTestId("email-box-noUpdates")).not.toBeChecked();
+  await expect(dialog.getByTestId("email-box-promotions")).not.toBeChecked();
 });

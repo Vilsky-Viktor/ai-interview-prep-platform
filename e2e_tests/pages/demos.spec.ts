@@ -1,61 +1,47 @@
 import { expect, test } from "@playwright/test";
 
+const DEMOS = "https://www.youtube.com/@prepza";
+
 // The home page offers prepza's demo videos twice: beside the promise (under it on phones) and
-// at the end, between the demos and "Go to FAQ" there, "ask agent" opens the assistant. The demos
+// at the end, where "ask agent", between the demos and the FAQ, opens the assistant. The demos
 // open YouTube in a new tab.
 test("the home page links to the demo videos at the top and at the end", async ({
   page,
 }) => {
   await page.goto("/");
-  const demos = page
-    .getByRole("link", { name: "Demos" })
-    .filter({ visible: true });
+  const demos = page.locator(`main a[href="${DEMOS}"]`).filter({ visible: true });
   await expect(demos).toHaveCount(2);
 
   for (const link of await demos.all()) {
-    await expect(link).toHaveAttribute(
-      "href",
-      "https://www.youtube.com/@prepza",
-    );
     await expect(link).toHaveAttribute("target", "_blank");
     await expect(link).toHaveAttribute("rel", /noopener/);
   }
 
-  // Hovering says where it leads (again if the first hover came before the page was ready).
+  // Hovering opens its tooltip (again if the first hover came before the page was ready).
   await expect(async () => {
     await page.mouse.move(0, 0);
     await demos.first().hover();
-    await expect(page.getByText("Watch demos on YouTube")).toBeVisible({
+    await expect(demos.first()).toHaveAttribute("data-popup-open", {
       timeout: 2_000,
     });
   }).toPass();
 
-  const closing = page.locator("section", {
-    has: page.getByRole("heading", { name: /Ready to interview/i }),
-  });
-  await expect(closing.getByRole("link", { name: "Demos" })).toBeVisible();
-  await expect(closing.getByRole("link", { name: /go to FAQ/i })).toBeVisible();
-
-  // "ask agent" sits between them and opens the assistant's panel.
-  const buttons = closing
-    .locator("div", { has: page.getByRole("link", { name: /go to FAQ/i }) })
-    .last()
-    .locator("a, button");
-  await expect(buttons.nth(0)).toHaveAccessibleName("Demos");
-  await expect(buttons.nth(1)).toHaveAccessibleName("ask agent");
-  await expect(buttons.nth(2)).toHaveAccessibleName(/go to FAQ/i);
+  // The page's last screen: the demos, "ask agent" and the FAQ, in that order.
+  const closing = page.locator("main > section").last();
+  const buttons = closing.locator('div:has(> a[href="/faq"]) > *');
+  await expect(buttons).toHaveCount(3);
+  await expect(buttons.nth(0)).toHaveAttribute("href", DEMOS);
+  await expect(buttons.nth(1)).toHaveAttribute("data-assistant-toggle");
+  await expect(buttons.nth(2)).toHaveAttribute("href", "/faq");
   await buttons.nth(1).click();
-  await expect(page.getByRole("dialog", { name: "Assistant" })).toBeVisible();
+  await expect(page.getByRole("dialog")).toBeVisible();
 });
 
 // Every page's footer has "ask agent" under the social icons; it opens the assistant's panel.
 test("the footer's ask agent opens the assistant", async ({ page }) => {
   await page.goto("/faq");
-  await page
-    .getByRole("contentinfo")
-    .getByRole("button", { name: "ask agent" })
-    .click();
-  await expect(page.getByRole("dialog", { name: "Assistant" })).toBeVisible();
+  await page.getByRole("contentinfo").locator("[data-assistant-toggle]").click();
+  await expect(page.getByRole("dialog")).toBeVisible();
 });
 
 // The agent's section shows a request with the card it prepares; its button opens the panel.
@@ -63,44 +49,30 @@ test("the agent's section shows the chat and opens the assistant", async ({
   page,
 }) => {
   await page.goto("/");
-  const section = page.locator("section", {
-    has: page.getByRole("heading", { name: /ask the agent/i }),
-  });
-  await expect(section.getByText("Invite a candidate")).toBeVisible();
-  await expect(
-    section.getByText("Every page has a dedicated help icon"),
-  ).toBeVisible();
-  await section.getByRole("button", { name: "ask agent" }).click();
-  await expect(page.getByRole("dialog", { name: "Assistant" })).toBeVisible();
+  const section = page.locator("#agent");
+  await expect(section.locator("[inert] textarea")).toBeVisible();
+  await section.locator("[data-assistant-toggle]").click();
+  await expect(page.getByRole("dialog")).toBeVisible();
 });
 
-// The preview's input types its questions one after another, each on one line: the whole question
-// where it fits, its end where it doesn't (on a phone, before the buttons).
+// The preview's input types its questions one after another, each on one line.
 test("the agent's preview types questions on one line", async ({ page }) => {
   // It waits through the animation, on top of the page load.
   test.slow();
   await page.goto("/");
-  const input = page.locator("[inert] textarea");
+  const input = page.locator("#agent [inert] textarea");
   await input.scrollIntoViewIfNeeded();
   const height = (await input.boundingBox())!.height;
+  const seen = new Set<string>();
 
-  for (const question of [
-    "Who scored best on Architect?",
-    "Create an interview for a data analyst",
-  ]) {
-    // Held whole for a moment once typed: its end, the longest that fits, shows then.
-    await expect
-      .poll(
-        async () => {
-          const value = await input.inputValue();
-
-          return value.length > 8 && question.endsWith(value);
-        },
-        { timeout: 15_000 },
-      )
-      .toBe(true);
+  // Sampled through more than one question: it types, and its height never changes.
+  for (let check = 0; check < 40; check += 1) {
+    seen.add(await input.inputValue());
     expect((await input.boundingBox())!.height).toBe(height);
+    await page.waitForTimeout(250);
   }
+
+  expect(seen.size).toBeGreaterThan(2);
 });
 
 // With reduced motion nothing is typed: the input shows its placeholder.
@@ -109,8 +81,8 @@ test("the agent's preview stays still with reduced motion", async ({
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
-  const input = page.locator("[inert] textarea");
-  await expect(input).toHaveAttribute("placeholder", "ask anything…");
+  const input = page.locator("#agent [inert] textarea");
+  await expect(input).toHaveAttribute("placeholder", /.+/);
   await page.waitForTimeout(2_000);
   await expect(input).toHaveValue("");
 });

@@ -15,12 +15,14 @@ test("an invite that couldn't load offers to try again, and only a gone one is i
   );
 
   await page.goto("/invite/e2e-link-errors");
-  await expect(page.getByText("Something went wrong. Please try again.")).toBeVisible();
-  await expect(page.getByText("This invite isn't valid anymore.")).toHaveCount(0);
+  const failed = page.getByTestId("link-failed");
+  await expect(failed).toBeVisible();
+  await expect(page.getByTestId("link-invalid")).toHaveCount(0);
   await page.screenshot({ path: test.info().outputPath("link-failed.png") });
 
   answer = 404;
-  await page.getByRole("button", { name: "Try again" }).click();
-  await expect(page.getByText("This invite isn't valid anymore.")).toBeVisible();
+  await failed.getByRole("button").click();
+  await expect(page.getByTestId("link-invalid")).toHaveText("This invite isn't valid anymore.");
+  await expect(failed).toHaveCount(0);
   await page.screenshot({ path: test.info().outputPath("link-invalid.png") });
 });

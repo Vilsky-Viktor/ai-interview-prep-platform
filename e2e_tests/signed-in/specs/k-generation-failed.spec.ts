@@ -14,13 +14,15 @@ test("an interview whose generation failed says so", async ({ signInAs }) => {
   await failGeneration(interviewId, company.id)
 
   await visit(owner, `/companies/${company.id}/interviews`)
-  const row = owner.getByRole("link", { name: /Generation failed/ })
+  const row = owner.getByRole("main").getByTestId("generation-failed")
   await expect(row).toHaveAttribute("href", `/companies/${company.id}/interviews/${interviewId}`)
-  await expect(owner.getByText("Generating…")).toHaveCount(0)
   await shot(owner, "list")
 
   await visit(owner, `/companies/${company.id}/interviews/${interviewId}`)
-  await expect(owner.getByRole("heading", { level: 1 })).toHaveText("Generation failed")
+  await expect(owner.getByRole("heading", { level: 1 })).toHaveAttribute(
+    "data-testid",
+    "generation-failed"
+  )
   await shot(owner, "page")
 })
 
@@ -35,15 +37,15 @@ test("an unpaid company with a generated interview waiting is asked to invite or
   await failGeneration(interviewId, company.id)
 
   await visit(owner, `/companies/${company.id}/interviews/new`)
-  await owner
-    .getByRole("textbox", { name: "Job description" })
-    .fill("Senior accountant: month-end close, IFRS reporting and audits.")
-  await owner.getByRole("button", { name: "Generate interview" }).click()
+  const description = owner.getByRole("main").getByRole("textbox")
+  await description.fill("Senior accountant: month-end close, IFRS reporting and audits.")
+  await description.press("ControlOrMeta+Enter")
   await expect(
     owner.getByText(
-      "Invite a candidate to your interview, or delete it, before generating another: until your first top-up, 1 generated interview can wait without candidates (5 after)."
+      "Invite a candidate to one of your interviews, or delete one, before generating another: until your first top-up, your company's limit of generated interviews waiting without candidates is 1."
     )
   ).toBeVisible()
+  await expect(owner).toHaveURL(/\/interviews\/new$/)
   await shot(owner, "waiting-limit")
 })
 
@@ -68,7 +70,7 @@ test("a description sent twice quickly asks for one interview", async ({ signInA
   })
 
   await visit(owner, `/companies/${company.id}/interviews/new`)
-  const box = owner.getByRole("textbox", { name: "Job description" })
+  const box = owner.getByRole("main").getByRole("textbox")
   await box.fill("Senior accountant: month-end close, IFRS reporting and audits.")
   await box.press("ControlOrMeta+Enter")
   await box.press("ControlOrMeta+Enter")

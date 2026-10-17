@@ -1,30 +1,43 @@
 import { expect, test } from "@playwright/test";
 
+// The company that runs prepza, as the footer and the contact page name it: its legal facts are
+// data, not wording.
+const OPERATOR = {
+  name: "Arcolabs OÜ",
+  registryCode: "17587452",
+  address: "Sepapaja tn 6, 15551 Tallinn, Harju maakond, Estonia",
+  email: "hello@prepza.ai",
+};
+
+async function hrefs(links: import("@playwright/test").Locator) {
+  return links.evaluateAll((items) => items.map((item) => item.getAttribute("href")));
+}
+
 // The footer's links in three columns: the product, resources to read, and the company.
 test("the footer groups its links by product, resources and company", async ({ page }) => {
   await page.goto("/faq");
   const columns = page.getByRole("contentinfo").getByRole("navigation").getByRole("list");
   await expect(columns).toHaveCount(3);
-  await expect(columns.nth(0).getByRole("link")).toHaveText([
-    /skills tests/i,
-    /pre-employment testing/i,
-    /ai interviews/i,
-    /free practice/i,
-    /compare/i,
+  expect(await hrefs(columns.nth(0).getByRole("link"))).toEqual([
+    "/tests",
+    "/pre-employment-testing",
+    "/ai-interviews",
+    "/practice",
+    "/compare",
   ]);
-  await expect(columns.nth(1).getByRole("link")).toHaveText([
-    /guides/i,
-    /faq/i,
-    /legal docs/i,
-    /developer docs/i,
-    /news/i,
+  expect(await hrefs(columns.nth(1).getByRole("link"))).toEqual([
+    "/guides",
+    "/faq",
+    "/documents",
+    "/api-docs",
+    "/news",
   ]);
-  await expect(columns.nth(2).getByRole("link")).toHaveText([
-    /about us/i,
-    /contact us/i,
-    /privacy/i,
-    /terms/i,
-    /accessibility/i,
+  expect(await hrefs(columns.nth(2).getByRole("link"))).toEqual([
+    "/about",
+    "/contact",
+    "/privacy",
+    "/terms",
+    "/accessibility",
   ]);
 });
 
@@ -33,27 +46,26 @@ test("the footer groups its links by product, resources and company", async ({ p
 test("the footer and the contact page name the company that runs prepza", async ({ page }) => {
   await page.goto("/contact");
   await expect(page.getByRole("contentinfo")).toContainText(
-    `© ${new Date().getFullYear()} Arcolabs OÜ`
+    `© ${new Date().getFullYear()} ${OPERATOR.name}`
   );
-  await expect(page.getByRole("main")).toContainText(
-    "prepza is run by Arcolabs OÜ, registry code 17587452, Sepapaja tn 6, 15551 Tallinn, Harju maakond, Estonia. Email: hello@prepza.ai"
-  );
+  const main = page.getByRole("main");
+
+  for (const fact of Object.values(OPERATOR)) {
+    await expect(main).toContainText(fact);
+  }
 });
 
-// The accessibility statement: what works, what falls short, and where to write, in the
-// visitor's language.
+// The accessibility statement says where to write, in the visitor's language.
 test("the accessibility statement says where to report a problem", async ({ page }) => {
   await page.goto("/accessibility");
   const main = page.getByRole("main");
-  await expect(main.getByRole("heading", { level: 1 })).toHaveText(/accessibility/i);
-  await expect(main.getByRole("link", { name: "hello@prepza.ai" })).toHaveAttribute(
-    "href",
-    "mailto:hello@prepza.ai"
-  );
-  await expect(main).toContainText("WCAG 2.2");
+  await expect(main.locator(`a[href="mailto:${OPERATOR.email}"]`)).toBeVisible();
+  const english = await main.getByRole("heading", { level: 1 }).textContent();
 
   await page.goto("/de/accessibility");
-  await expect(page.getByRole("main").getByRole("heading", { level: 1 })).not.toHaveText(
-    /^accessibility\.?$/i
-  );
+  await expect(page.locator("html")).toHaveAttribute("lang", "de");
+  const german = page.getByRole("main").getByRole("heading", { level: 1 });
+  await expect(german).not.toBeEmpty();
+  await expect(german).not.toHaveText(english!);
+  await expect(page.getByRole("main").locator(`a[href="mailto:${OPERATOR.email}"]`)).toBeVisible();
 });

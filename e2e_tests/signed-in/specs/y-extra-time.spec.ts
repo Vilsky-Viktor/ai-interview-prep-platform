@@ -22,8 +22,10 @@ test("a candidate given extra time sees the longer time on their invite", async 
 
   const candidate = await signInAs(email)
   await visit(candidate, `/invite/${await inviteToken(email)}`)
-  const time = candidate.getByText("Time per question")
-  await expect(time).toContainText(String(MIN_QUESTION_SECONDS * 2))
-  await expect(candidate.getByRole("button", { name: "Accept & Start" })).toBeVisible()
+  // The seconds per question, the number in the paragraph above the start (the rules are a
+  // list).
+  const seconds = candidate.getByRole("main").locator("p span.tabular-nums")
+  await expect(seconds).toHaveText(String(MIN_QUESTION_SECONDS * 2))
+  await expect(candidate.getByRole("main").getByRole("button")).toBeVisible()
   await shot(candidate, "extra-time")
 })

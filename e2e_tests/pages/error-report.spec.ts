@@ -12,17 +12,21 @@ test("the error page reports what the user was doing", async ({ page }) => {
   );
 
   await page.goto("/invite/e2e-error-report");
-  await expect(page.getByRole("heading", { name: "Something went wrong" })).toBeVisible();
+  // The error page shows (its fixed wording isn't the test's).
+  await expect(page.getByTestId("error-page")).toBeVisible();
   await page.screenshot({ path: test.info().outputPath("error-page.png") });
 
-  await page.getByRole("button", { name: "Report" }).click();
+  await page.getByTestId("report-problem").click();
   const dialog = page.getByRole("dialog");
-  await expect(dialog.getByRole("button", { name: "Send" })).toBeDisabled();
+  // Nothing to send until something is written.
+  const send = dialog.locator('button[type="submit"]');
+  await expect(send).toBeDisabled();
   await dialog.getByRole("textbox").fill("Opened my invite from the email.");
   await page.waitForTimeout(400);
   await page.screenshot({ path: test.info().outputPath("report-dialog.png") });
-  await dialog.getByRole("button", { name: "Send" }).click();
-  await expect(page.getByText("Thanks, we got it.")).toBeVisible();
+  await send.click();
+  // Sent: a success notice, and the dialog closes.
+  await expect(page.locator('[data-sonner-toast][data-type="success"]')).toBeVisible();
   await expect(dialog).toHaveCount(0);
 });
 
@@ -40,11 +44,50 @@ test("Retry on the error page shows the page once it can be shown", async ({ pag
   );
 
   await page.goto("/invite/e2e-error-retry");
-  await expect(page.getByRole("heading", { name: "Something went wrong" })).toBeVisible();
+  const error = page.getByTestId("error-page");
+  await expect(error).toBeVisible();
   broken = false;
-  // A click before the page is interactive is lost, so it's repeated until the page shows.
+  // Retry is the page's first button. A click before the page is interactive is lost, so it's
+  // repeated until the invite's page (here, a gone invite) shows.
   await expect(async () => {
-    await page.getByRole("button", { name: "Try again" }).click({ timeout: 2000 });
-    await expect(page.getByText("This invite isn't valid anymore.")).toBeVisible({ timeout: 2000 });
+    await error.getByRole("button").first().click({ timeout: 2000 });
+    await expect(page.getByTestId("link-invalid")).toHaveText("This invite isn't valid anymore.", {
+      timeout: 2000,
+    });
   }).toPass();
+});
+
+// "Report" sits in the row of the other two buttons on a computer, and on its own line under them
+// on a phone.
+test("the error page's report sits beside its buttons, under them on a phone", async ({ page }) => {
+  await page.route("**/api/companies/invites/e2e-error-layout", (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({ company: { broken: true }, title: "Broken", status: "invited" }),
+    }),
+  );
+
+  for (const [size, ownLine] of [
+    [{ width: 1280, height: 800 }, false],
+    [{ width: 390, height: 844 }, true],
+  ] as const) {
+    await page.setViewportSize(size);
+    await page.goto("/invite/e2e-error-layout");
+    const error = page.getByTestId("error-page");
+    await expect(error).toBeVisible();
+    // Retry and home (a link drawn as a button), then report.
+    const retry = (await error.getByRole("button").nth(0).boundingBox())!;
+    const home = (await error.getByRole("button").nth(1).boundingBox())!;
+    const report = (await page.getByTestId("report-problem").boundingBox())!;
+
+    expect(home.y).toBe(retry.y);
+
+    if (ownLine) {
+      expect(report.y).toBeGreaterThanOrEqual(retry.y + retry.height);
+    } else {
+      expect(report.y).toBe(retry.y);
+      expect(report.x).toBeGreaterThan(home.x);
+    }
+  }
 });

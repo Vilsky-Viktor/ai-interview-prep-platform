@@ -16,23 +16,27 @@ test("the company, interview and candidate pages copy their IDs", async ({ signI
   await inviteCandidate(owner, interviewId, candidate)
   const copied = () => owner.evaluate(() => navigator.clipboard.readText())
 
+  const copyId = owner.getByTestId("copy-id")
+
   await visit(owner, `/companies/${company.id}/interviews`)
-  await owner.getByRole("button", { name: "Copy ID" }).click()
+  await copyId.click()
   // The check shows for a moment, then the copy icon again.
-  await expect(owner.getByRole("button", { name: "ID copied" })).toBeVisible()
+  await expect(copyId).toHaveAttribute("data-copied", "true")
+  await expect(copyId.locator("svg")).toHaveClass(/lucide-check/)
   expect(await copied()).toBe(company.id)
   await shot(owner, "company-copied")
-  await expect(owner.getByRole("button", { name: "Copy ID" })).toBeVisible()
+  await expect(copyId).toHaveAttribute("data-copied", "false")
+  await expect(copyId.locator("svg")).toHaveClass(/lucide-copy/)
 
   await visit(owner, `/companies/${company.id}/interviews/${interviewId}?tab=candidates`)
-  await owner.getByRole("button", { name: "Copy ID" }).click()
+  await copyId.click()
   expect(await copied()).toBe(interviewId)
   await shot(owner, "interview")
 
   await owner.getByRole("link").filter({ hasText: "quoted" }).click()
   await expect(owner.getByRole("heading", { name: candidate })).toBeVisible()
   const candidatePage = owner.url()
-  await owner.getByRole("button", { name: "Copy ID" }).click()
+  await copyId.click()
   expect(await copied()).toBe(candidatePage.split("/").pop())
   await shot(owner, "candidate")
 
@@ -40,7 +44,7 @@ test("the company, interview and candidate pages copy their IDs", async ({ signI
   await visit(owner, `/companies/${company.id}/interviews`)
   await shot(owner, "company-phone")
   await owner.goto(candidatePage)
-  await expect(owner.getByRole("button", { name: "Copy ID" })).toBeVisible()
+  await expect(copyId).toBeVisible()
   await shot(owner, "candidate-phone")
 })
 
@@ -51,15 +55,17 @@ test("Settings and the account menu copy the account's ID", async ({ signInAs })
   const copied = () => owner.evaluate(() => navigator.clipboard.readText())
 
   await visit(owner, "/settings")
-  await owner.getByRole("button", { name: "Copy ID" }).click()
+  await owner.getByRole("main").getByTestId("copy-id").click()
   const uid = await copied()
   expect(uid).toMatch(/^\w{20,}$/)
   await shot(owner, "settings")
 
-  await owner.getByRole("button", { name: "Account", exact: true }).click()
-  await owner.getByRole("menuitem", { name: "Copy ID" }).click()
+  await owner.getByTestId("account-menu").click()
+  const item = owner.getByRole("menu").getByTestId("copy-id")
+  await item.click()
   // The menu stays open to show the check mark.
-  await expect(owner.getByRole("menuitem", { name: "ID copied" })).toBeVisible()
+  await expect(item).toHaveAttribute("data-copied", "true")
+  await expect(item.locator("svg")).toHaveClass(/lucide-check/)
   expect(await copied()).toBe(uid)
   await shot(owner, "account-menu")
   await owner.keyboard.press("Escape")
@@ -82,9 +88,7 @@ test("a long email wraps on a phone", async ({ signInAs }) => {
   await owner.setViewportSize(PHONE)
   await visit(owner, `/companies/${company.id}/interviews/${interviewId}?tab=candidates`)
   await owner.getByRole("link").filter({ hasText: "averyveryverylong" }).click()
-  await expect(
-    owner.getByText("The score supports your decision", { exact: false }).first()
-  ).toBeVisible()
+  await expect(owner.getByTestId("human-review")).toBeVisible()
   // Nothing wider than the screen.
   expect(await owner.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
     PHONE.width

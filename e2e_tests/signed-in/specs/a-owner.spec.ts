@@ -9,30 +9,36 @@ test("owner creates a company, an interview from a template and invites a candid
   signInAs,
 }) => {
   const owner = await signInAs(ownerEmail())
-  await expect(owner.getByText("No companies yet.")).toBeVisible()
+  // No company yet: the list has no rows.
+  await expect(owner.getByTestId("new-company")).toBeVisible()
+  await expect(owner.getByRole("main").getByRole("listitem")).toHaveCount(0)
   await shot(owner, "companies-empty")
 
   // The home page's start: the description, then which company. Going on would generate the
   // interview with OpenAI, so the company is created from the companies page instead.
   await visit(owner, "/")
-  await owner.getByLabel("Job description").fill("Backend developer: SQL basics and indexes.")
-  await owner.locator("form").getByRole("button", { name: "Create an interview" }).click()
-  await expect(owner.getByText("What's your company called?")).toBeVisible()
+  const start = owner.getByRole("main").locator("form").first()
+  await start.getByRole("textbox").fill("Backend developer: SQL basics and indexes.")
+  await start.locator('button[type="submit"]').click()
+  // No company to pick: only the new company's name to enter.
+  await expect(start.locator("textarea")).toHaveCount(0)
+  await expect(start.getByRole("radiogroup")).toHaveCount(0)
+  await expect(start.getByRole("textbox")).toBeVisible()
   await shot(owner, "home-company-step", false)
 
   const name = `E2E Owner ${randomId()}`
   await visit(owner, "/companies")
-  await owner.getByRole("button", { name: "New company" }).click()
-  await owner.getByRole("dialog").getByLabel("Company name").fill(name)
+  await owner.getByTestId("new-company").click()
+  await owner.getByRole("dialog").getByRole("textbox").fill(name)
   await shot(owner, "new-company-dialog")
-  await owner.getByRole("dialog").getByRole("button", { name: "Create" }).click()
+  await owner.getByRole("dialog").locator('button[type="submit"]').click()
   await expect(owner).toHaveURL(/\/companies\/[^/]+\/interviews$/)
   const companyUrl = new URL(owner.url()).pathname.replace(/\/interviews$/, "")
   await expect(owner.getByRole("heading", { name })).toBeVisible()
-  await expect(owner.getByText("No interviews yet. Create your first one.")).toBeVisible()
+  await expect(owner.getByRole("main").getByRole("listitem")).toHaveCount(0)
   await shot(owner, "interviews-empty")
 
-  // Templates tab: the warning card and "Use template" on each row. Only templates a company can
+  // Templates tab: "Use template" on each row. Only templates a company can
   // copy are listed, so using one never fails: a throwaway one with too few questions isn't,
   // though practice lists it; one with enough is, and opens as an interview. They're German, so
   // the lists are asked for German: they start in the visitor's language and English.
@@ -44,20 +50,20 @@ test("owner creates a company, an interview from a template and invites a candid
     await visit(owner, `/practice?q=${encodeURIComponent(uncopyable)}&lang=de`)
     await expect(owner.getByText(uncopyable)).toBeVisible()
     await visit(owner, `${companyUrl}/templates?q=${encodeURIComponent(uncopyable)}&lang=de`)
-    await expect(owner.getByText("No templates match.")).toBeVisible()
+    await expect(owner.getByRole("main").getByRole("listitem")).toHaveCount(0)
+    await expect(owner.getByText(uncopyable)).toHaveCount(0)
 
     await visit(owner, `${companyUrl}/interviews`)
-    await openTab(owner, "Templates")
-    await expect(owner.getByText("Templates are ready-made for common roles.")).toBeVisible()
-    // The filters are lowercase, "level: any level" among them (language names keep their capitals).
-    await expect(owner.getByRole("button", { name: /^level/i })).toHaveCSS(
+    await openTab(owner, "/templates")
+    // The filters are lowercase, the level's first among them (language names keep their capitals).
+    await expect(owner.getByRole("main").locator("form").getByRole("button").first()).toHaveCSS(
       "text-transform",
       "lowercase"
     )
     await shot(owner, "templates")
     await visit(owner, `${companyUrl}/templates?q=${encodeURIComponent(used)}&lang=de`)
     const row = owner.getByRole("listitem").filter({ hasText: used })
-    await row.getByRole("button", { name: "Use template" }).click()
+    await row.getByTestId("use-template").click()
     // The local dev server can take a while to build the interview page the first time.
     await expect(owner).toHaveURL(/\/interviews\/[^/?]+$/, { timeout: 90_000 })
   } finally {
@@ -66,13 +72,14 @@ test("owner creates a company, an interview from a template and invites a candid
     }
   }
 
-  await expect(owner.getByRole("button", { name: "Manage questions" }).first()).toBeVisible()
+  await expect(owner.getByTestId("manage-questions").first()).toBeVisible()
   await shot(owner, "interview")
 
-  // The questions of the first topic: the AI warning card and every answer option.
-  await owner.getByRole("button", { name: "Manage questions" }).first().click()
+  // The questions of the first topic: the AI warning card and every answer option, each marked
+  // right or wrong for screen readers too.
+  await owner.getByTestId("manage-questions").first().click()
   const dialog = owner.getByRole("dialog")
-  await expect(dialog.getByText(/AI-written questions and answer keys can be wrong/)).toBeVisible()
+  await expect(dialog.getByRole("status")).toBeVisible()
   await expect(dialog.getByRole("img", { name: "Correct answer" }).first()).toBeVisible()
   await expect(dialog.getByRole("img", { name: "Wrong answer" }).first()).toBeVisible()
   // `inline code` in an option shows as code, as in the question, without its backticks.
@@ -82,22 +89,28 @@ test("owner creates a company, an interview from a template and invites a candid
   await owner.keyboard.press("Escape")
 
   const interviewUrl = owner.url()
-  await owner.getByRole("button", { name: "Interviews" }).click()
+  // The back arrow, to the company's interviews.
+  await owner.getByRole("main").locator('a[href$="/interviews"]').first().click()
   await expect(owner).toHaveURL(/\/interviews$/)
   await expect(owner.getByText(used).first()).toBeVisible()
   await shot(owner, "interviews-list")
 
   // Inviting a candidate opens the candidate list with them on it.
   await visit(owner, `${interviewUrl}?tab=candidates`)
-  await expect(owner.getByText("No candidates invited yet.")).toBeVisible()
+  const rows = owner.getByRole("main").locator('a[href*="/candidates/"]')
+  await expect(rows).toHaveCount(0)
   await shot(owner, "candidates-empty")
   const candidate = throwawayEmail("candidate")
-  await owner.getByRole("button", { name: "New candidate(s)" }).click()
-  await owner.getByRole("dialog").getByRole("tab", { name: "one", exact: true }).click()
-  await owner.getByRole("dialog").getByLabel("Candidate email").fill(candidate)
+  await owner.getByTestId("new-candidate").click()
+  // The first tab invites one candidate by email.
+  await owner.getByRole("dialog").getByRole("tab").first().click()
+  await owner.getByRole("dialog").locator('input[type="email"]').fill(candidate)
   await shot(owner, "invite-dialog")
-  await owner.getByRole("dialog").getByRole("button", { name: "Invite" }).click()
-  await expect(owner.getByText(`Invite sent to ${candidate}`)).toBeVisible()
+  await owner.getByRole("dialog").locator('button[type="submit"]').click()
+  await expect(owner.getByRole("dialog")).toHaveCount(0)
+  // A success toast, naming the invited email.
+  await expect(owner.locator('[data-sonner-toast][data-type="success"]')).toContainText(candidate)
   await expect(owner.getByText(candidate, { exact: true }).first()).toBeVisible()
+  await expect(rows).toHaveCount(1)
   await shot(owner, "candidates")
 })

@@ -7,17 +7,13 @@ test("the sign-in card asks about emails only on a browser not signed in before"
 }) => {
   test.setTimeout(120_000);
   await page.goto("/companies");
-  const offers = page.getByRole("checkbox", {
-    name: "Send me offers and promotions",
-  });
+  const offers = page.getByTestId("email-box-promotions");
   await expect(offers).toBeVisible();
 
   await page.evaluate(() =>
     localStorage.setItem("prepza:signed-in-before", "1"),
   );
   await page.reload();
-  await expect(
-    page.getByRole("button", { name: /continue with google/i }),
-  ).toBeVisible();
+  await expect(page.getByTestId("sign-in-google")).toBeVisible();
   await expect(offers).toBeHidden();
 });

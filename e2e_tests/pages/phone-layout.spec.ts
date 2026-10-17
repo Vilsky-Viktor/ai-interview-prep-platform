@@ -125,9 +125,9 @@ test("the footer is one centered column on phones", async ({ page }, info) => {
     expect(Math.abs(center - width / 2)).toBeLessThan(4);
   }
 
-  const icon = footer.getByRole("img", { name: "LinkedIn" }).locator("svg");
+  const icon = footer.locator('[role="img"] svg').first();
   expect((await icon.boundingBox())!.width).toBe(32);
-  await expect(footer.getByRole("button", { name: "ask agent" })).toHaveCSS(
+  await expect(footer.locator("[data-assistant-toggle]")).toHaveCSS(
     "height",
     "48px",
   );
@@ -137,11 +137,8 @@ test("the footer is one centered column on phones", async ({ page }, info) => {
 test("a dialog spans a phone's width", async ({ page }, info) => {
   test.setTimeout(120_000);
   await page.goto("/");
-  await page
-    .getByRole("button", { name: "About this page" })
-    .filter({ visible: true })
-    .click();
-  const dialog = page.getByRole("dialog", { name: "How prepza works" });
+  await page.getByTestId("page-help").filter({ visible: true }).click();
+  const dialog = page.getByRole("dialog");
   await expect(dialog).toBeVisible();
   // It finishes opening first.
   await page.waitForTimeout(400);
@@ -153,7 +150,7 @@ test("a dialog spans a phone's width", async ({ page }, info) => {
     await expect(dialog).toHaveCSS("border-top-left-radius", "0px");
     // The help fills the screen, and Close is in sight without scrolling, and after it.
     expect(Math.round(box.height)).toBe(page.viewportSize()!.height);
-    const close = dialog.getByRole("button", { name: "Close" });
+    const close = dialog.locator('[data-slot="dialog-footer"] button');
     await expect(close).toBeInViewport();
     await dialog.evaluate((element) => element.scrollBy(0, 2_000));
     await expect(close).toBeInViewport();
@@ -168,7 +165,8 @@ test("the send shortcut hint shows only without a touch screen", async ({
   page,
 }, info) => {
   await page.goto("/contact");
-  const hint = page.getByText("⌘/Ctrl + Enter to send");
+  // The hint under the message.
+  const hint = page.locator("main form textarea + p");
 
   if (isPhone(info.project.name)) {
     await expect(hint).toBeHidden();
@@ -206,15 +204,24 @@ test("the home page's box isn't focused on load", async ({ page }) => {
   await expect(page.locator("main textarea").first()).not.toBeFocused();
 });
 
-// With reduced motion the API's example shows whole, its request and its answer.
+// With reduced motion the API's example shows whole, its request and its answer: no letter is
+// held back, and it stays so.
 test("the API example shows whole with reduced motion", async ({ page }) => {
   test.setTimeout(120_000);
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
-  const example = page.locator("pre").first();
-  await expect(example).toContainText("POST /api/v1/interviews");
+  const example = page.locator("#integrations [dir=ltr]");
+  const hidden = () =>
+    example.evaluate((element) =>
+      [...element.querySelectorAll("pre .invisible")].map((part) => part.textContent).join(""),
+    );
+
+  await expect(example.locator("pre").first()).not.toBeEmpty();
+  expect(await hidden()).toBe("");
   await page.waitForTimeout(1_500);
-  await expect(example).toContainText("POST /api/v1/interviews");
+  expect(await hidden()).toBe("");
+  // The answer, under the request, isn't faded out.
+  await expect(example.locator("pre").last().locator("..")).toHaveCSS("opacity", "1");
 });
 
 // On phones a test's practice page has its level and language under the title, then its start.
@@ -230,8 +237,6 @@ test("a practice page starts under its tags on a phone", async ({
     .locator("main [data-slot=badge]")
     .first()
     .boundingBox())!;
-  const start = (await page
-    .getByRole("button", { name: "Start practice" })
-    .boundingBox())!;
+  const start = (await page.getByTestId("start-practice").boundingBox())!;
   expect(start.y).toBeGreaterThan(tags.y + tags.height);
 });

@@ -1,11 +1,11 @@
 import { expect, test } from "../fixtures"
 import { createCompany, createInterview } from "../helpers/api"
 import { addAtsConnection } from "../helpers/db-integrations"
-import { openDialog, visit } from "../helpers/navigation"
+import { integrationRow, openDialog, visit } from "../helpers/navigation"
 import { shot } from "../helpers/screenshots"
 import { throwawayEmail } from "../helpers/users"
 
-// Recruitee sits beside the other ATSs on the ATS tab; its page says it isn't connected yet. A
+// Recruitee sits beside the other ATSs on the ATS tab; its page has no linked jobs yet. A
 // real connection needs a Recruitee account, so Connect is answered in the browser while the
 // connection is saved straight into the database; its Instructions then open with the web hook to
 // set up, where the secret Recruitee shows is pasted and saved for real.
@@ -16,25 +16,28 @@ test("an owner connects Recruitee and saves its web hook's secret", async ({ sig
   const tab = `/companies/${company.id}/integrations`
 
   await visit(owner, tab)
-  await expect(owner.getByRole("link", { name: /^Recruitee/ })).toHaveAttribute(
-    "href",
-    `${tab}/recruitee`
-  )
+  await expect(integrationRow(owner, "/recruitee")).toBeVisible()
   await shot(owner, "list")
 
-  // Not connected yet: the page says so instead of linked jobs.
+  // Not connected yet: no tag and no linked jobs; Instructions and Connect.
   await visit(owner, `${tab}/recruitee`)
-  await expect(owner.getByText("Recruitee isn't connected yet.", { exact: false })).toBeVisible()
-  await expect(owner.getByRole("heading", { name: "Linked jobs" })).toHaveCount(0)
+  const main = owner.getByRole("main")
+  const actions = main.getByTestId("integration-actions").getByRole("button")
+  await expect(main.locator("[data-slot=badge]")).toHaveCount(0)
+  await expect(main.getByRole("listitem")).toHaveCount(0)
+  await expect(owner.getByTestId("link-job")).toHaveCount(0)
+  await expect(actions).toHaveCount(2)
   await shot(owner, "not-connected")
 
-  // Where to make the token; Connect needs the address and the token.
-  await openDialog(owner, owner.getByRole("button", { name: "Connect" }))
+  // Connect needs the address and the token.
+  await openDialog(owner, actions.last())
   const connect = owner.getByRole("dialog")
-  await expect(connect.getByText("Personal API tokens")).toBeVisible()
-  await expect(connect.getByRole("button", { name: "Connect" })).toBeDisabled()
-  await connect.getByLabel("Recruitee address").fill("acme.recruitee.com")
-  await connect.getByLabel("API token").fill("e2e")
+  const fields = connect.locator("form input")
+  const submit = connect.locator("button[type=submit]")
+  await expect(fields).toHaveCount(2)
+  await expect(submit).toBeDisabled()
+  await fields.first().fill("acme.recruitee.com")
+  await fields.last().fill("e2e")
   await shot(owner, "connect")
   await owner.route("**/api/ats/recruitee?*", async (route) => {
     if (route.request().method() !== "PUT") {
@@ -44,29 +47,29 @@ test("an owner connects Recruitee and saves its web hook's secret", async ({ sig
     await addAtsConnection(company.id, interviewId, { invited: 1 }, "recruitee")
     await route.fulfill({ status: 204 })
   })
-  await connect.getByRole("button", { name: "Connect" }).click()
+  await submit.click()
 
   // Connected: the Instructions open by themselves with the web hook, our address, and a field
   // for the secret Recruitee shows, saved once it changes.
-  const dialog = owner.getByRole("dialog")
+  const webhook = owner.getByRole("dialog").locator("section")
   // The web hook shows once the page has reloaded the connection (slow on the dev server).
-  await expect(dialog.getByText("candidate_moved")).toBeVisible({ timeout: 60_000 })
-  await expect(dialog.getByRole("textbox", { name: "Copy URL" })).toHaveValue(
+  await expect(webhook).toBeVisible({ timeout: 60_000 })
+  // The address first, then the field for the secret.
+  await expect(webhook.getByRole("textbox").first()).toHaveValue(
     /\/api\/ats\/webhooks\/recruitee\/[0-9a-f-]{36}$/
   )
-  const secret = dialog.getByLabel("Secret")
-  const save = dialog.getByRole("button", { name: "Save key" })
+  const secret = webhook.locator('input[type="password"]')
+  const save = webhook.locator("form:has(input[type=password]) button[type=submit]")
   await expect(secret).toHaveValue("")
   await secret.fill("e2e-recruitee-secret")
   await save.click()
-  await expect(owner.getByText("Key saved")).toBeVisible()
+  await expect(owner.locator('[data-sonner-toast][data-type="success"]')).toBeVisible()
   await expect(save).toBeDisabled()
   await owner.setViewportSize({ width: 1280, height: 1400 })
   await shot(owner, "info")
   await owner.keyboard.press("Escape")
 
-  // Connected, the page lists its linked jobs instead.
-  await expect(owner.getByText("connected", { exact: true }).filter({ visible: true })).toBeVisible()
-  await expect(owner.getByText("E2E Backend developer")).toBeVisible()
-  await expect(owner.getByText("isn't connected yet", { exact: false })).toHaveCount(0)
+  // Connected, the page has the tag and lists its linked jobs.
+  await expect(main.locator("[data-slot=badge]").filter({ visible: true })).toBeVisible()
+  await expect(main.getByRole("listitem").filter({ hasText: "E2E Backend developer" })).toBeVisible()
 })

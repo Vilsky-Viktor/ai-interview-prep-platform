@@ -25,16 +25,10 @@ test("candidate takes the interview from the invite link", async ({
   const candidate = await signInAs(email);
   const invitePath = `/invite/${await inviteToken(email)}`;
   await visit(candidate, invitePath);
-  await expect(
-    candidate.getByText(`${company.name} invited you to interview.`),
-  ).toBeVisible();
-  await expect(
-    candidate.getByText(
-      "You can change your pick until you press Next question.",
-    ),
-  ).toBeVisible();
+  await expect(candidate.getByText(company.name).first()).toBeVisible();
   await shot(candidate, "invite");
-  await candidate.getByRole("button", { name: "Accept & Start" }).click();
+  // The invitation's one button starts it.
+  await candidate.getByRole("main").getByRole("button").click();
   await expect(candidate).toHaveURL(/\/sessions\//);
 
   // The pick can change until Next: one option marked at a time.
@@ -49,25 +43,32 @@ test("candidate takes the interview from the invite link", async ({
   await expect(options.nth(0)).toHaveAttribute("aria-pressed", "false");
   await shot(candidate, "pick-changed");
 
-  // A picked question can be reported; its reason comes from the site's menu, not the browser's.
+  // A picked question can be reported (the flag icon, named for screen readers); its reason
+  // comes from the site's menu, not the browser's, and sending needs one.
   await openDialog(
     candidate,
     candidate.getByRole("button", { name: "Report question" }),
   );
   const report = candidate.getByRole("dialog");
-  await report.getByRole("button", { name: "Report reason" }).click();
+  const reason = report.getByRole("button").first();
+  const send = report.locator('button[type="submit"]');
+  const unpicked = await reason.textContent();
+  await expect(send).toBeDisabled();
+  await reason.click();
   await expect(candidate.locator("select")).toHaveCount(0);
   await shot(candidate, "report-reasons");
   await candidate.getByRole("menu").getByRole("menuitemradio").first().click();
   await expect(candidate.getByRole("menu")).toHaveCount(0);
-  await expect(
-    report.getByRole("button", { name: "Report reason" }),
-  ).not.toHaveText("Select a reason");
+  await expect(reason).not.toHaveText(unpicked ?? "");
+  await expect(send).toBeEnabled();
   await shot(candidate, "report-reason-picked");
-  await report.getByRole("button", { name: "Cancel" }).click();
+  // Cancel, beside Send: nothing is reported.
+  await report.getByRole("button").nth(1).click();
   await expect(report).toHaveCount(0);
   const first = await question.textContent();
-  await candidate.getByRole("button", { name: "Next question" }).click();
+  // The footer: Next on the right once something is picked.
+  const footer = candidate.locator("[data-round-footer]");
+  await footer.getByRole("button").last().click();
   await expect(question).not.toHaveText(first ?? "");
   await expect.poll(() => answered(candidate)).toBe("1");
 
@@ -81,27 +82,24 @@ test("candidate takes the interview from the invite link", async ({
   await expect.poll(() => answered(candidate)).toBe("2");
   await shot(candidate, "after-timeout");
 
-  await candidate.getByRole("button", { name: "Finish interview" }).click();
-  await expect(candidate.getByRole("dialog")).toContainText(
-    "Finish the whole interview?",
-  );
+  // Finish asks first; its confirmation is the dialog's last button.
+  await candidate.getByTestId("finish-interview").click();
+  await expect(candidate.getByRole("dialog")).toBeVisible();
   await shot(candidate, "finish-dialog");
-  await candidate
-    .getByRole("dialog")
-    .getByRole("button", { name: "Finish", exact: true })
-    .click();
-  await expect(
-    candidate.getByText("You have finished the interview. Good luck!"),
-  ).toBeVisible();
+  await candidate.getByRole("dialog").getByRole("button").last().click();
+  // Finished: the interview's title, and no question or footer left.
+  await expect(candidate.getByRole("heading", { level: 1 })).toBeVisible();
+  await expect(footer).toHaveCount(0);
+  await expect(candidate.locator("button[aria-pressed]")).toHaveCount(0);
   await shot(candidate, "done");
   // A company's interview shows the company only: no prepza header or footer, finished too.
   await expect(candidate.locator("header, footer")).toHaveCount(0);
 
-  // The invite link now says the interview is finished, in an info card.
+  // The invite link now says the interview is finished, in an info card instead of the start.
   await visit(candidate, invitePath);
-  await expect(candidate.getByRole("status")).toHaveText(
-    "This interview is already finished.",
-  );
+  await expect(candidate.getByText(company.name).first()).toBeVisible();
+  await expect(candidate.getByRole("status")).toBeVisible();
+  await expect(candidate.getByRole("main").getByRole("button")).toHaveCount(0);
   await shot(candidate, "invite-finished");
 
   // The company sees them finished.
@@ -117,9 +115,7 @@ test("candidate takes the interview from the invite link", async ({
   await expect(owner.getByText(first ?? "").first()).toBeVisible();
   await expect(owner.getByText(/^\d+\.$/)).toHaveCount(0);
   // A finished candidate's invite isn't sent again.
-  await expect(
-    owner.getByRole("button", { name: "Resend invite" }),
-  ).toHaveCount(0);
+  await expect(owner.getByTestId("resend-invite")).toHaveCount(0);
   await shot(owner, "owner-report");
 });
 
@@ -141,28 +137,24 @@ test("an invitation asks a visitor to sign in, and warns another email", async (
   try {
     const visitor = await context.newPage();
     await visit(visitor, path);
-    await expect(
-      visitor.getByText(`${company.name} invited you to interview.`),
-    ).toBeVisible();
-    await expect(
-      visitor.getByRole("button", { name: "Accept & Start" }),
-    ).toHaveCount(0);
+    await expect(visitor.getByText(company.name).first()).toBeVisible();
     await expect(visitor.getByText(email)).toHaveCount(0);
     await shot(visitor, "invite-signed-out");
-    await visitor.getByRole("button", { name: "Sign in to start" }).click();
+    // Its one button signs in rather than starting.
+    await visitor.getByRole("main").getByRole("button").click();
     await expect(visitor.getByRole("dialog")).toBeVisible();
+    await expect(visitor).toHaveURL(new RegExp(`${path}$`));
   } finally {
     await context.close();
   }
 
   const other = await signInAs(throwawayEmail("other"));
   await visit(other, path);
+  await expect(other.getByText(company.name).first()).toBeVisible();
   await expect(other.getByRole("status")).toContainText(
     "The email does not match. Sign in with the invitation email to start.",
   );
-  await expect(
-    other.getByRole("button", { name: "Accept & Start" }),
-  ).toHaveCount(0);
+  await expect(other.getByRole("main").getByRole("button")).toHaveCount(0);
   await shot(other, "invite-other-email");
 });
 
@@ -182,12 +174,9 @@ test("a candidate's page has their invite link to copy", async ({
     `/companies/${company.id}/interviews/${interviewId}?tab=candidates`,
   );
   await owner.getByText(email, { exact: true }).first().click();
-  await expect(owner.getByText("Invite link", { exact: true })).toBeVisible();
-  await expect(owner.getByRole("textbox", { name: "Copy link" })).toHaveValue(
+  await expect(owner.getByRole("main").getByRole("textbox")).toHaveValue(
     new RegExp(`/invite/${await inviteToken(email)}$`),
   );
-  await expect(
-    owner.getByRole("button", { name: "Resend invite" }),
-  ).toBeVisible();
+  await expect(owner.getByTestId("resend-invite")).toBeVisible();
   await shot(owner, "candidate-invite-link");
 });

@@ -39,7 +39,7 @@ test("a company's own site embeds a candidate's interview and hears it finish", 
     owner,
     "POST",
     `/v1/manage/keys?company_id=${company.id}`,
-    { name: "Careers site", expiry: "1" }
+    { name: "Careers site", expiry: "1", permissions: ["candidates:invite"] }
   )
   const invite = async (email: string, signIn: boolean) => {
     const response = await owner.request.post(
@@ -75,21 +75,26 @@ test("a company's own site embeds a candidate's interview and hears it finish", 
   const frame = site.frameLocator("iframe")
 
   // No sign-in, no prepza header or footer: the invitation, then the questions in place.
-  await expect(frame.getByRole("button", { name: "Accept & Start" })).toBeVisible()
+  // The invitation's one button starts it.
+  const start = frame.getByRole("main").getByRole("button")
+  await expect(start).toBeVisible()
   await expect(frame.locator("header, footer")).toHaveCount(0)
   // The SDK asked for the dark theme: prepza's dark colors, as the company has none of its own.
   await expect(frame.locator("html")).toHaveCSS("--background", "#0a0a0a")
   await shot(site, "invitation")
-  await frame.getByRole("button", { name: "Accept & Start" }).click()
-  await expect(frame.getByRole("button", { name: "Finish interview" })).toBeVisible({
+  await start.click()
+  await expect(frame.getByTestId("finish-interview")).toBeVisible({
     timeout: 60_000,
   })
   await expect(frame.locator("header, footer")).toHaveCount(0)
   await shot(site, "question")
-  await frame.getByRole("button", { name: "Finish interview" }).click()
-  await frame.getByRole("dialog").getByRole("button", { name: "Finish", exact: true }).click()
-  await expect(frame.getByText("You have finished the interview. Good luck!")).toBeVisible()
-  await expect(frame.getByRole("button", { name: /Back to/ })).toHaveCount(0)
+  await frame.getByTestId("finish-interview").click()
+  // The confirmation is the dialog's last button.
+  await frame.getByRole("dialog").getByRole("button").last().click()
+  // Finished: the interview's title, and no way back anywhere (the site goes on itself).
+  await expect(frame.getByRole("heading", { level: 1 })).toBeVisible()
+  await expect(frame.getByTestId("finish-interview")).toHaveCount(0)
+  await expect(frame.getByRole("main").locator("a")).toHaveCount(0)
   await expect
     .poll(() => site.evaluate(() => (window as unknown as { events: string[] }).events))
     .toEqual(["ready", "started", `finished:${candidate.id}`])

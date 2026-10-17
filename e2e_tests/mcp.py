@@ -83,13 +83,27 @@ def check(condition: bool, message: str) -> None:
 
 
 def sign_up() -> tuple[str, str, str]:
-    """A new emulator user: (local id, email, ID token)."""
+    """A new emulator user with a verified email: (local id, email, ID token)."""
     email = f"e2e-mcp-{uuid.uuid4().hex[:8]}@example.com"
     status, _, user = post_json(
         f"{AUTH}/identitytoolkit.googleapis.com/v1/accounts:signUp?key=demo",
         {"email": email, "password": "secret123", "returnSecureToken": True},
     )
     check(status == 200, f"sign-up -> {status}")
+    # Verified, as a Google sign-in's email is (making a company needs it), then signed in again
+    # for a token that says so.
+    project = env("FIREBASE_PROJECT_ID")
+    send(
+        "POST",
+        f"{AUTH}/identitytoolkit.googleapis.com/v1/projects/{project}/accounts:update",
+        json.dumps({"localId": user["localId"], "emailVerified": True}).encode(),
+        {"Authorization": "Bearer owner", "Content-Type": "application/json"},
+    )
+    status, _, user = post_json(
+        f"{AUTH}/identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=demo",
+        {"email": email, "password": "secret123", "returnSecureToken": True},
+    )
+    check(status == 200, f"sign-in -> {status}")
 
     return user["localId"], email, user["idToken"]
 
@@ -237,6 +251,27 @@ def main() -> None:
         check(any(item["name"] == name for item in companies["data"]), "the new company is listed")
         error, _ = tool(access, "delete_company", {"company_id": made["data"]["id"]})
         check(error, "delete_company is refused")
+
+        step("an API key: only with the mcp permission, only its company, only its tools")
+        company_id = made["data"]["id"]
+        keys = f"{SITE}/api/v1/manage/keys?company_id={company_id}"
+        _, _, plain = post_json(keys, {"name": "No MCP", "expiry": "1"}, id_token)
+        check(rpc(plain["key"], "tools/list")[0] == 401, "a key without mcp is refused")
+        permissions = ["mcp", "candidates:read"]
+        status, _, agent = post_json(
+            keys, {"name": "Agent", "expiry": "1", "permissions": permissions}, id_token
+        )
+        check(status == 201, f"key -> {status}")
+        status, listed = rpc(agent["key"], "tools/list")
+        names = {item["name"] for item in listed["tools"]}
+        check(status == 200 and "list_candidates" in names, f"{len(names)} key tools")
+        check(not names & {"get_me", "invite_candidate", "list_members"}, "only its tools")
+        error, own = tool(agent["key"], "get_company", {"company_id": company_id})
+        check(not error and own["data"]["id"] == company_id, f"its company {own}")
+        error, _ = tool(
+            agent["key"], "invite_candidate", {"interview_id": company_id, "email": "a@b.co"}
+        )
+        check(error, "a tool beyond its permissions is refused")
 
         step("the connection is listed for the user")
         auth = {"Authorization": f"Bearer {id_token}"}

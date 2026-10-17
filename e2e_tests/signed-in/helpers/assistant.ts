@@ -72,8 +72,8 @@ export async function assistantAnswers(page: Page) {
 }
 
 export async function openPanel(page: Page): Promise<Locator> {
-  await page.getByRole("banner").getByRole("button", { name: "ask agent" }).click();
-  const panel = page.getByRole("dialog", { name: "Assistant" });
+  await page.getByRole("banner").locator("[data-assistant-toggle]").click();
+  const panel = page.getByRole("dialog");
   await expect(panel).toBeVisible();
 
   return panel;

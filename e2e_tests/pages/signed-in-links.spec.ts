@@ -17,14 +17,13 @@ const pages = [
 for (const path of pages) {
   test(`signed out, ${path.split("?")[0]} asks to sign in`, async ({ page }) => {
     await page.goto(path);
-    await expect(page.getByRole("heading", { name: "Sign in." })).toBeVisible();
-    await expect(page.getByRole("button", { name: "Continue with Google" })).toBeVisible();
+    await expect(page.getByRole("main").getByTestId("sign-in-google")).toBeVisible();
     await expect(page.getByText("Page not found")).toHaveCount(0);
   });
 }
 
 test("a scorecard link opened signed out", async ({ page }) => {
   await page.goto(pages[0]);
-  await expect(page.getByRole("heading", { name: "Sign in." })).toBeVisible();
+  await expect(page.getByRole("main").getByTestId("sign-in-google")).toBeVisible();
   await page.screenshot({ path: test.info().outputPath("scorecard-signed-out.png") });
 });

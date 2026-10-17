@@ -8,7 +8,8 @@ import { ownerEmail, throwawayEmail } from "../helpers/users"
 // The invite dialog's three tabs: one email with a name, a list with a name beside one email,
 // and a file (its examples download; the welcome credits cover three candidates, so it isn't
 // sent: the backend's tests read CSV name columns). The list shows each name under the
-// email ("No name yet" without one), and search finds a candidate by name.
+// email ("No name yet" without one), and search finds a candidate by name. The dialog's tabs, in
+// order: one, many, upload.
 test("owner invites candidates with names three ways and finds one by name", async ({
   signInAs,
 }) => {
@@ -21,14 +22,16 @@ test("owner invites candidates with names three ways and finds one by name", asy
   const plain = throwawayEmail("plain")
   await visit(owner, list)
   const dialog = owner.getByRole("dialog")
+  const tabs = dialog.getByRole("tab")
+  const invite = dialog.locator("button[type=submit]")
 
   // Invite one: an email and its name.
-  await owner.getByRole("button", { name: "New candidate(s)" }).click()
-  await dialog.getByRole("tab", { name: "one", exact: true }).click()
-  await dialog.getByLabel("Candidate email").fill(ann)
-  await dialog.getByLabel("Name (optional)").fill("  Ann Lee ")
+  await owner.getByTestId("new-candidate").click()
+  await tabs.nth(0).click()
+  await dialog.getByRole("textbox").first().fill(ann)
+  await dialog.getByRole("textbox").nth(1).fill("  Ann Lee ")
   await shot(owner, "invite-one")
-  await dialog.getByRole("button", { name: "Invite" }).click()
+  await invite.click()
   // The dialog closes once everyone was invited; the list then shows them (read afresh, as the
   // local dev server can be slow to refresh it).
   await expect(dialog).toBeHidden({ timeout: 60_000 })
@@ -37,41 +40,37 @@ test("owner invites candidates with names three ways and finds one by name", asy
 
   // Invite many: a name beside one email, none beside the other.
   await visit(owner, list)
-  await owner.getByRole("button", { name: "New candidate(s)" }).click()
-  await dialog.getByRole("tab", { name: "many", exact: true }).click()
-  await expect(dialog.getByText("Ann Lee <ann.lee@example.com>")).toBeVisible()
-  await dialog.getByLabel("Candidate emails").fill(`Bob Stone <${bob}>\n${plain}`)
+  await owner.getByTestId("new-candidate").click()
+  await tabs.nth(1).click()
+  await dialog.getByRole("textbox").fill(`Bob Stone <${bob}>\n${plain}`)
   await shot(owner, "invite-many")
-  await dialog.getByRole("button", { name: "Invite" }).click()
+  await invite.click()
   // The dialog closes once everyone was invited; the list then shows them (read afresh, as the
   // local dev server can be slow to refresh it).
   await expect(dialog).toBeHidden({ timeout: 60_000 })
   await visit(owner, list)
   await expect(owner.getByText("Bob Stone", { exact: true })).toBeVisible()
   const plainRow = owner.getByRole("link").filter({ hasText: plain })
-  await expect(plainRow.getByText("No name yet")).toBeVisible()
-  // Its tooltip says when it's filled in, and that an owner can enter it.
-  // Hovered again until the page is interactive (the local dev server can still be compiling).
+  const noName = plainRow.getByTestId("no-name")
+  await expect(noName).toBeVisible()
+  // Its tooltip says when it's filled in, and that an owner can enter it (the tooltip has no
+  // ARIA role). Hovered again until the page is interactive (the local dev server can still be
+  // compiling).
   await expect(async () => {
     await owner.mouse.move(0, 0)
-    await plainRow.getByText("No name yet").hover()
-    await expect(
-      owner.getByText("Comes from the candidate's sign-in, or add it on their page.")
-    ).toBeVisible({ timeout: 3_000 })
+    await noName.hover()
+    await expect(owner.locator("[data-side][data-open]")).toBeVisible({ timeout: 3_000 })
   }).toPass({ timeout: 90_000 })
   await shot(owner, "no-name-tooltip")
 
   // Upload from file: the example files download, and a CSV with a name column invites.
   await visit(owner, list)
-  await owner.getByRole("button", { name: "New candidate(s)" }).click()
-  await dialog.getByRole("tab", { name: "upload", exact: true }).click()
+  await owner.getByTestId("new-candidate").click()
+  await tabs.nth(2).click()
 
-  for (const [label, file] of [
-    ["example .csv", "prepza-candidates-example.csv"],
-    ["example .txt", "prepza-candidates-example.txt"],
-  ]) {
+  for (const file of ["prepza-candidates-example.csv", "prepza-candidates-example.txt"]) {
     const download = owner.waitForEvent("download")
-    await dialog.getByRole("button", { name: label }).click()
+    await dialog.locator(`a[download][href$="/${file}"]`).click()
     expect((await download).suggestedFilename()).toBe(file)
   }
 
@@ -87,16 +86,17 @@ test("owner invites candidates with names three ways and finds one by name", asy
   await shot(owner, "candidates-with-names")
 
   // The dialog opens on the tab used last.
-  await owner.getByRole("button", { name: "New candidate(s)" }).click()
-  await expect(dialog.getByRole("tab", { name: "upload", exact: true })).toHaveAttribute(
+  await owner.getByTestId("new-candidate").click()
+  await expect(tabs.nth(2)).toHaveAttribute(
     "aria-selected",
     "true"
   )
   await owner.keyboard.press("Escape")
 
   // Search matches part of a name, in any case.
-  await owner.getByLabel("Search candidates by email or name").fill("stone")
-  await owner.getByLabel("Search candidates by email or name").press("Enter")
+  const search = owner.locator("main input[name=q]")
+  await search.fill("stone")
+  await search.press("Enter")
   await expect(owner).toHaveURL(/q=stone/)
   await expect(owner.getByText(bob, { exact: true })).toBeVisible()
   await expect(owner.getByText(ann, { exact: true })).toHaveCount(0)
@@ -113,7 +113,7 @@ test("the sign-in fills a name once and an owner's correction stays", async ({ s
   await inviteCandidate(owner, interviewId, email)
   const list = `/companies/${company.id}/interviews/${interviewId}?tab=candidates`
   await visit(owner, list)
-  await expect(owner.getByRole("link").filter({ hasText: email }).getByText("No name yet")).toBeVisible()
+  await expect(owner.getByRole("link").filter({ hasText: email }).getByTestId("no-name")).toBeVisible()
 
   const candidate = await signInAs(email, {}, "Maria Kowalska")
   const start = `/companies/invites/${await inviteToken(email)}/start`
@@ -123,15 +123,16 @@ test("the sign-in fills a name once and an owner's correction stays", async ({ s
   await owner.getByText("Maria Kowalska", { exact: true }).click()
   await expect(owner).toHaveURL(/\/candidates\/[^/?]+$/, { timeout: 90_000 })
   await expect(owner.getByRole("heading", { name: email })).toBeVisible()
-  await expect(owner.getByRole("button", { name: "Edit name" })).toBeVisible()
+  // The name's line under the email, with its pencil for an owner.
+  const nameLine = owner.locator("main h1 + div > p")
+  await expect(nameLine).toContainText("Maria Kowalska")
+  await expect(nameLine.getByRole("button")).toBeVisible()
   await shot(owner, "report-name")
 
-  await owner.getByRole("button", { name: "Edit name" }).click()
-  await owner.getByLabel("Name", { exact: true }).fill("Maria Nowak")
-  await owner.getByLabel("Name", { exact: true }).press("Enter")
-  const nameLine = owner.locator("p").filter({
-    has: owner.getByRole("button", { name: "Edit name" }),
-  })
+  await nameLine.getByRole("button").click()
+  const field = owner.locator("main h1 + div input")
+  await field.fill("Maria Nowak")
+  await field.press("Enter")
   await expect(nameLine).toContainText("Maria Nowak")
   await shot(owner, "report-name-edited")
 
@@ -152,14 +153,16 @@ test("the invite dialog says what it couldn't read", async ({ signInAs }) => {
   const dialog = owner.getByRole("dialog")
   const file = owner.locator("input[type=file]")
 
-  await owner.getByRole("button", { name: "New candidate(s)" }).click()
-  await dialog.getByRole("tab", { name: "upload", exact: true }).click()
+  const tabs = dialog.getByRole("tab")
+  const invite = dialog.locator("button[type=submit]")
+  await owner.getByTestId("new-candidate").click()
+  await tabs.nth(2).click()
   await file.setInputFiles({
     name: "candidates.xlsx",
     mimeType: "application/octet-stream",
     buffer: Buffer.from(`email\n${throwawayEmail("xlsx")}\n`),
   })
-  await dialog.getByRole("button", { name: "Invite" }).click()
+  await invite.click()
   await expect(dialog.getByText("Only CSV or TXT files.")).toBeVisible()
   await shot(owner, "wrong-file-type")
 
@@ -169,7 +172,7 @@ test("the invite dialog says what it couldn't read", async ({ signInAs }) => {
     buffer: Buffer.alloc(60_000, "a"),
   })
   await expect(dialog.getByText("The file is too large (max 50 KB).")).toBeVisible()
-  await expect(dialog.getByRole("button", { name: "Invite" })).toBeDisabled()
+  await expect(invite).toBeDisabled()
   await shot(owner, "file-too-large")
 
   // A file's unusable rows are named under it (nobody is invited from them).
@@ -178,22 +181,22 @@ test("the invite dialog says what it couldn't read", async ({ signInAs }) => {
     mimeType: "text/csv",
     buffer: Buffer.from("email,name\nJohn Smith,\nbob@example,Bob\n"),
   })
-  await dialog.getByRole("button", { name: "Invite" }).click()
+  await invite.click()
   await expect(dialog.getByText("No email found: John Smith,")).toBeVisible()
   await expect(dialog.getByText("Email isn't valid: bob@example,Bob")).toBeVisible()
   await shot(owner, "file-unusable-lines")
 
   // A list keeps only its unusable lines, each named once with its main reason.
-  await dialog.getByRole("tab", { name: "many", exact: true }).click()
+  await tabs.nth(1).click()
   const list = ["John Smith", "bob@example", "Bob <bob@example", "Ann <ann@example.com"]
-  await dialog.getByLabel("Candidate emails").fill(list.join("\n"))
-  await dialog.getByRole("button", { name: "Invite" }).click()
+  await dialog.getByRole("textbox").fill(list.join("\n"))
+  await invite.click()
   await expect(dialog.getByText("No email found: John Smith")).toBeVisible()
   await expect(dialog.getByText("Email isn't valid: bob@example", { exact: true })).toBeVisible()
   await expect(dialog.getByText("Email isn't valid: Bob <bob@example")).toBeVisible()
   await expect(
     dialog.getByText("Write the name as Name <email>: Ann <ann@example.com")
   ).toBeVisible()
-  await expect(dialog.getByLabel("Candidate emails")).toHaveValue(list.join("\n"))
+  await expect(dialog.getByRole("textbox")).toHaveValue(list.join("\n"))
   await shot(owner, "unusable-lines")
 })

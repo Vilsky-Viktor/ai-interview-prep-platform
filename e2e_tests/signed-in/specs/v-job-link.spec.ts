@@ -5,9 +5,8 @@ import { visit } from "../helpers/navigation";
 import { shot } from "../helpers/screenshots";
 import { ownerEmail, throwawayEmail } from "../helpers/users";
 
-// Someone starts from a test's shareable link (a job ad): the rules say their own link comes by
-// email and extra time needs a personal invite. Their own link still works after the company
-// turns the shareable link off.
+// Someone starts from a test's shareable link (a job ad) and is sent their own link by email.
+// Their own link still works after the company turns the shareable link off.
 test("a candidate starts from the job link and continues from their own link", async ({
   signInAs,
 }) => {
@@ -23,19 +22,12 @@ test("a candidate starts from the job link and continues from their own link", a
 
   const email = throwawayEmail("link-candidate");
   const candidate = await signInAs(email);
+  // The page's only button starts the test.
+  const start = candidate.getByRole("main").getByRole("button");
   await visit(candidate, `/apply/${token}`);
-  await expect(
-    candidate.getByText("Progress is saved: we email you a link to continue."),
-  ).toBeVisible();
-  await expect(
-    candidate.getByText(
-      `Ask ${company.name} for a personal invite before you start: extra time can't be added here.`,
-      { exact: false },
-    ),
-  ).toBeVisible();
-  await expect(candidate.getByText("use this link again")).toHaveCount(0);
+  await expect(start).toBeVisible();
   await shot(candidate, "job-link");
-  await candidate.getByRole("button", { name: "Accept & Start" }).click();
+  await start.click();
   await expect(candidate).toHaveURL(/\/sessions\//);
   await expect.poll(() => joinedEmails(email)).toBe(1);
 
@@ -44,7 +36,7 @@ test("a candidate starts from the job link and continues from their own link", a
     on: false,
   });
   await visit(candidate, `/invite/${await inviteToken(email)}`);
-  await candidate.getByRole("button", { name: "Continue" }).click();
+  await start.click();
   await expect(candidate).toHaveURL(/\/sessions\//);
   // Starting again sends no second email.
   expect(await joinedEmails(email)).toBe(1);

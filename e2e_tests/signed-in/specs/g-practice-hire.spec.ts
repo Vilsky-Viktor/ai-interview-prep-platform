@@ -16,20 +16,21 @@ test("a practice result leads to using its test in a company", async ({ signInAs
   // The result screen, even before the round is finished, offers the test for hiring.
   const round = await api<{ round_id: string }>(user, "POST", `/rounds/practice/${template.id}`)
   await visit(user, `/practice/rounds/${round.round_id}`)
-  await expect(user.getByText("Hiring for this role?")).toBeVisible()
+  const hire = user.locator(`a[href="${picker}"]`)
+  await expect(hire).toBeVisible()
   await shot(user, "result-hire")
 
   // No company yet: the choice is empty, and a new company opens on the test.
-  await user.getByRole("button", { name: "Create interview" }).click()
+  await hire.click()
   await user.waitForURL(new RegExp(`${picker}$`))
-  await expect(user.getByRole("heading", { name: "Choose a company" })).toBeVisible()
-  await expect(user.getByText("No companies yet.")).toBeVisible()
+  await expect(user.getByTestId("new-company")).toBeVisible()
+  await expect(user.getByRole("main").getByRole("listitem")).toHaveCount(0)
   await shot(user, "pick-none")
-  await user.getByRole("button", { name: "New company" }).click()
-  await user.getByLabel("Company name").fill(`E2E ${randomId()}`)
-  await user.getByRole("button", { name: "Create", exact: true }).click()
+  await user.getByTestId("new-company").click()
+  await user.getByRole("dialog").getByRole("textbox").fill(`E2E ${randomId()}`)
+  await user.getByRole("dialog").locator('button[type="submit"]').click()
   await user.waitForURL(opensTemplate)
-  await expect(user.getByRole("button", { name: "Use template" })).toBeVisible()
+  await expect(user.getByTestId("use-template")).toBeVisible()
 
   // One company: straight to the test in it.
   await visit(user, picker)
@@ -40,7 +41,7 @@ test("a practice result leads to using its test in a company", async ({ signInAs
   await visit(user, picker)
   const row = user.getByRole("link", { name: new RegExp(second.name) })
   await expect(row).toHaveAttribute("href", `/companies/${second.id}/templates/${template.id}`)
-  await expect(user.getByRole("button", { name: "Remove" })).toHaveCount(0)
+  await expect(user.getByRole("main").getByRole("listitem").getByRole("button")).toHaveCount(0)
   await shot(user, "pick-several")
 })
 
@@ -59,7 +60,8 @@ test("a finished practice lists its questions without numbers", async ({ signInA
   await api(user, "POST", `/rounds/sessions/${result.topics[0].session_id}/finish-interview`)
 
   await visit(user, `/practice/rounds/${round.round_id}`)
-  await expect(user.getByText("Good question?").first()).toBeVisible()
+  // Each question with its feedback: the report flag, named for screen readers.
+  await expect(user.getByRole("button", { name: "Report question" }).first()).toBeVisible()
   await expect(user.getByText(/^\d+\.$/)).toHaveCount(0)
   await shot(user, "practice-review")
 })

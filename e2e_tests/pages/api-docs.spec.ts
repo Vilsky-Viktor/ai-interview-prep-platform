@@ -1,58 +1,93 @@
 import { expect, test } from "@playwright/test";
 
-// The footer's "developer docs" opens the reference, read from the API itself, in four tabs: the
+// The footer's developer docs open the reference, read from the API itself, in five tabs: the
 // API (how to get a key, every route with what it returns), its web hooks, the SDK that embeds
-// the interview, and the objects.
-test("the developer docs explain the API, web hooks, the SDK and the objects", async ({ page }) => {
+// the interview, the MCP server and the objects. Names the API defines (routes, events, headers, fields) are
+// its data, so they're matched; the page's own wording isn't.
+test("the developer docs show the API, web hooks, the SDK and the objects", async ({ page }) => {
   await page.goto("/");
   // The footer's link leads to the page; opened directly, so a click before the page is ready
   // can't miss it.
-  await expect(page.locator("footer").getByRole("link", { name: "developer docs" })).toHaveAttribute("href", "/api-docs");
+  await expect(page.locator('footer a[href="/api-docs"]')).toHaveCount(1);
   await page.goto("/api-docs");
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Developer docs");
-  const tabs = page.getByRole("navigation").filter({ hasText: "Objects" });
-  await expect(tabs.getByRole("link")).toHaveText(["API", "Web hooks", "SDK", "Objects"]);
-
-  for (const title of ["getting an API key", "authentication", "rate limits and pagination", "verified companies"]) {
-    await expect(page.getByRole("heading", { level: 2, name: title }).first()).toBeVisible();
-  }
+  await expect(page.getByRole("heading", { level: 1 })).not.toBeEmpty();
+  const tabs = page.locator("main nav a");
+  const hrefs = await tabs.evaluateAll((links) => links.map((link) => link.getAttribute("href")));
+  expect(hrefs).toEqual([
+    "/api-docs",
+    "/api-docs?tab=webhooks",
+    "/api-docs?tab=sdk",
+    "/api-docs?tab=mcp",
+    "/api-docs?tab=objects",
+  ]);
+  await expect(tabs.first()).toHaveAttribute("aria-current", "page");
 
   // The steps to a key, as a numbered list.
-  await expect(page.locator("ol").first().locator("li")).toHaveCount(5);
-  // The base URL to copy and the routes.
-  await expect(page.getByRole("textbox", { name: "Copy URL" })).toHaveValue(/\/api\/v1$/);
-  const routes = page.locator("article").filter({ has: page.getByText(/^(GET|POST|PATCH|DELETE)$/) });
+  expect(await page.locator("main ol").first().locator("li").count()).toBeGreaterThan(1);
+  // The base URL to copy and the routes, each with its method.
+  await expect(page.getByRole("main").getByRole("textbox").first()).toHaveValue(/\/api\/v1$/);
+  const routes = page.locator("main article").filter({ has: page.getByText(/^(GET|POST|PATCH|DELETE)$/) });
   await expect(routes).toHaveCount(11);
-  await expect(routes.filter({ hasText: "/interviews/{interview_id}/candidates" }).first()).toBeVisible();
+  await expect(
+    routes.locator("header code").filter({ hasText: /^\/interviews\/\{interview_id\}\/candidates$/ }).first(),
+  ).toBeVisible();
   await page.screenshot({ path: test.info().outputPath("api.png"), fullPage: true });
 
   // Links are checked, then opened directly, so a click before the page is ready can't miss.
-  // A mention of the web hook opens its tab: how to check a request, and its events.
-  await expect(page.getByRole("link", { name: "web hook", exact: true })).toHaveAttribute(
-    "href",
-    "/api-docs?tab=webhooks",
-  );
+  // A mention of the web hook, in the API's text, opens its tab: how to check a request, and its
+  // events.
+  await expect(page.locator('main div[lang] a[href="/api-docs?tab=webhooks"]').first()).toBeVisible();
   await page.goto("/api-docs?tab=webhooks");
-  await expect(page.getByText("Prepza-Signature", { exact: true }).first()).toBeVisible();
-  await expect(page.getByText("candidate.finished", { exact: true }).first()).toBeVisible();
+  await expect(page.locator("main nav a").nth(1)).toHaveAttribute("aria-current", "page");
+  const code = page.locator("main code");
+  await expect(code.filter({ hasText: /^Prepza-Signature$/ }).first()).toBeVisible();
+  await expect(code.filter({ hasText: /^candidate\.finished$/ }).first()).toBeVisible();
   // A finished candidate's results never change, so nothing is sent after it.
-  await expect(page.getByText("candidate.rescored", { exact: true })).toHaveCount(0);
+  await expect(code.filter({ hasText: /^candidate\.rescored$/ })).toHaveCount(0);
   // Each event's body is shown as it's sent: its id, type and time around the data.
-  await expect(page.getByText("occurred_at", { exact: true }).first()).toBeVisible();
+  await expect(page.locator("main").getByText("occurred_at", { exact: true }).first()).toBeVisible();
   await page.screenshot({ path: test.info().outputPath("webhooks.png"), fullPage: true });
 
   // The SDK: the script and how to embed the interview.
-  await expect(tabs.getByRole("link", { name: "SDK" })).toHaveAttribute("href", "/api-docs?tab=sdk");
   await page.goto("/api-docs?tab=sdk");
-  await expect(page.locator("pre")).toContainText("Prepza.embed(");
+  await expect(page.locator("main pre").first()).toContainText("Prepza.embed(");
 
   // A type opens its object on the objects tab.
   await page.goto("/api-docs");
-  await expect(page.getByRole("link", { name: "Candidate", exact: true }).first()).toHaveAttribute(
-    "href",
-    "/api-docs?tab=objects#Candidate",
-  );
+  await expect(page.locator('main a[href="/api-docs?tab=objects#Candidate"]').first()).toBeVisible();
   await page.goto("/api-docs?tab=objects#Candidate");
   await expect(page.locator("#Candidate")).toContainText("results_url");
   await page.screenshot({ path: test.info().outputPath("objects.png"), fullPage: true });
+});
+
+// The MCP tab: the server's address on this site, the example agents in Python and TypeScript
+// (one language menu switches every example), and the tools exactly as the server lists them.
+test("the MCP tab shows the server, the example agents and the server's tools", async ({ page }) => {
+  await page.goto("/api-docs?tab=mcp");
+  // The server's own list, read the way the page reads it (the browser reaches the site).
+  const { tools } = (await page.evaluate(() =>
+    fetch("/api/assistant/mcp/tools").then((response) => response.json()),
+  )) as { tools: { name: string; key_permission: string | null }[] };
+  await expect(page.locator("main nav a").nth(3)).toHaveAttribute("aria-current", "page");
+  await expect(page.getByRole("main").getByRole("textbox").first()).toHaveValue(`${new URL(page.url()).origin}/mcp`);
+
+  // Every tool, in the server's order, with the API key permission it needs where it has one.
+  const rows = page.getByTestId("mcp-tool");
+  await expect(rows).toHaveCount(tools.length);
+  await expect(rows.locator("code:first-child")).toHaveText(tools.map((tool) => tool.name));
+  const withKey = tools.findIndex((tool) => tool.key_permission);
+  await expect(rows.nth(withKey)).toContainText(tools[withKey].key_permission!);
+
+  // The examples start in Python; picking TypeScript in one editor switches them all.
+  const menus = page.locator('main [aria-haspopup="menu"]');
+  const editors = page.locator("main pre");
+  await expect(menus.first()).toHaveText("python");
+  await expect(editors.first()).toContainText("from mcp");
+  await menus.first().click();
+  await page.getByRole("menu").getByRole("menuitemradio").nth(1).click();
+  await expect(menus.first()).toHaveText("typescript");
+  await expect(editors.first()).toContainText("@modelcontextprotocol/sdk");
+  const languages = await menus.evaluateAll((items) => items.map((item) => item.textContent?.trim()));
+  expect(new Set(languages)).toEqual(new Set(["typescript"]));
+  await page.screenshot({ path: test.info().outputPath("mcp.png"), fullPage: true });
 });

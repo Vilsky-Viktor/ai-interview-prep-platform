@@ -1,4 +1,5 @@
 import { expect, test } from "../fixtures";
+import { TOKEN_COOKIE } from "../constants";
 import { createCompany } from "../helpers/api";
 import { CONVERSATION, events, openPanel } from "../helpers/assistant";
 import { visit } from "../helpers/navigation";
@@ -56,27 +57,31 @@ test("an action runs once its card is confirmed, and asking to sign out signs ou
     });
   });
   const panel = await openPanel(owner);
+  const send = panel.locator("button[type=submit]");
   await panel.getByRole("textbox").fill("Create a company called Acme");
-  await panel.getByRole("button", { name: "Send" }).click();
+  await send.click();
 
-  // The card shows exactly what runs; Confirm runs it once.
-  await expect(panel.getByText("Create a company", { exact: true })).toBeVisible();
-  await expect(panel.getByText("Acme", { exact: true })).toBeVisible();
+  // The card shows exactly what runs; Confirm (its first button) runs it once.
+  const shown = panel.getByTestId("action-card");
+  await expect(shown.getByText("Acme", { exact: true })).toBeVisible();
+  await expect(shown.getByRole("button")).toHaveCount(2);
   await shot(owner, "action-card");
-  await panel.getByRole("button", { name: "Confirm" }).click();
-  await expect(panel.getByText("Done", { exact: true })).toBeVisible();
-  await expect(panel.getByRole("link", { name: /interviews/i })).toHaveAttribute("href", "/companies/c1/interviews");
+  await shown.getByRole("button").first().click();
+  // Done: no buttons left, and the link to what it made.
+  await expect(shown.locator('a[href="/companies/c1/interviews"]')).toBeVisible();
+  await expect(shown.getByRole("button")).toHaveCount(0);
   await expect(panel.getByRole("list").getByText("Acme is ready.")).toBeVisible();
-  await expect(panel.getByRole("button", { name: "Confirm" })).toHaveCount(0);
   expect(confirms).toBe(1);
   await shot(owner, "action-done");
 
   // Asked to sign out, the panel signs out at once and shows the visitor's welcome.
   await panel.getByRole("textbox").fill("Sign me out");
-  await panel.getByRole("button", { name: "Send" }).click();
-  await expect(owner.getByRole("banner").getByRole("button", { name: /sign in/i })).toBeVisible();
-  await expect(panel.getByRole("button", { name: "History" })).toHaveCount(0);
-  await expect(panel.getByRole("button", { name: "What is prepza?" })).toBeVisible();
+  await send.click();
+  await expect
+    .poll(async () => (await owner.context().cookies()).some((c) => c.name === TOKEN_COOKIE))
+    .toBe(false);
+  await expect(panel.getByTestId("assistant-history")).toHaveCount(0);
+  await expect(panel.getByTestId("welcome-signed_out")).toBeVisible();
 });
 
 test("a pasted secret is removed from the chat and explained, with the page it belongs on", async ({
@@ -89,14 +94,12 @@ test("a pasted secret is removed from the chat and explained, with the page it b
   // The case seen on localhost: no known format, named by the message.
   const secret = "94uf9jf394ur0fj394g3ffh3";
   await panel.getByRole("textbox").fill(`Add my secret to Greenhouse ATS integration: ${secret}`);
-  await panel.getByRole("button", { name: "Send" }).click();
+  await panel.locator("button[type=submit]").click();
 
-  await expect(panel.getByText("Message removed: it contained a secret")).toBeVisible();
+  // The message is replaced by a note; the answer refuses it, with the page to enter it on.
+  await expect(panel.getByTestId("message-removed")).toBeVisible();
   await expect(panel.getByRole("list").getByText(/Enter it yourself on the integrations page\./)).toBeVisible();
-  await expect(panel.getByRole("link", { name: "open integrations" })).toHaveAttribute(
-    "href",
-    `/companies/${company.id}/integrations`
-  );
+  await expect(panel.locator(`a[href="/companies/${company.id}/integrations"]`)).toBeVisible();
   await shot(owner, "secret-removed");
   // Nowhere on the page, nor in what the browser keeps.
   await expect(panel.getByText(secret)).toHaveCount(0);
@@ -105,6 +108,6 @@ test("a pasted secret is removed from the chat and explained, with the page it b
 
   // Nothing of it was saved: a reload brings no conversation back.
   await owner.reload();
-  await expect(owner.getByRole("banner").getByRole("button", { name: "ask agent" })).toBeVisible();
-  await expect(owner.getByRole("dialog", { name: "Assistant" })).toHaveCount(0);
+  await expect(owner.getByRole("banner").locator("[data-assistant-toggle]")).toBeVisible();
+  await expect(owner.getByRole("dialog")).toHaveCount(0);
 });

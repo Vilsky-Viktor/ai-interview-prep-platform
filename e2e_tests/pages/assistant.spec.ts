@@ -1,4 +1,4 @@
-import { expect, type Page, test } from "@playwright/test";
+import { expect, type Locator, type Page, test } from "@playwright/test";
 
 // Signed out, "ask agent" opens the assistant with FAQ answers only: the welcome for visitors,
 // an answer from the help chat (stubbed here: no OpenAI in tests), and a sign-in card when the
@@ -14,26 +14,37 @@ async function helpAnswers(page: Page, events: object[]) {
   );
 }
 
+/** The header's "ask agent". */
+function askAgent(page: Page) {
+  return page.getByRole("banner").locator("[data-assistant-toggle]");
+}
+
 async function openPanel(page: Page) {
   await page.goto("/");
-  await page.getByRole("banner").getByRole("button", { name: "ask agent" }).click();
-  const panel = page.getByRole("dialog", { name: "Assistant" });
+  await askAgent(page).click();
+  const panel = page.getByRole("dialog");
   await expect(panel).toBeVisible();
 
   return panel;
+}
+
+/** The questions the empty panel offers to tap. */
+function welcomeQuestions(panel: Locator) {
+  return panel.getByRole("list").getByRole("button");
 }
 
 test("a visitor asks the assistant about prepza", async ({ page }) => {
   await helpAnswers(page, [{ delta: "Each candidate costs " }, { delta: "**$1–3**." }]);
   const panel = await openPanel(page);
 
-  await expect(panel.getByText("Sign in to ask about your companies and candidates.")).toBeVisible();
-  await expect(panel.getByRole("button", { name: "History" })).toHaveCount(0);
-  await expect(panel.getByRole("button", { name: "Hold to talk" })).toHaveCount(0);
+  // Questions to tap, and no history or voice (both toggle buttons).
+  await expect(welcomeQuestions(panel).first()).toBeVisible();
+  await expect(panel.locator("button[aria-pressed]")).toHaveCount(0);
 
   // Open, the input is ready to type in, but not on a touch phone, where the keyboard would
   // cover the welcome.
   const field = panel.getByRole("textbox");
+
   if (test.info().project.name === "phone") {
     await expect(field).not.toBeFocused();
   } else {
@@ -41,9 +52,11 @@ test("a visitor asks the assistant about prepza", async ({ page }) => {
   }
 
   // A welcome question is sent as the message; the answer's markdown is rendered.
-  await panel.getByRole("button", { name: "How much does it cost?" }).click();
-  await expect(panel.getByRole("list").getByText("How much does it cost?")).toBeVisible();
+  const question = (await welcomeQuestions(panel).first().textContent())!;
+  await welcomeQuestions(panel).first().click();
+  await expect(panel.getByRole("list").getByText(question)).toBeVisible();
   await expect(panel.locator("strong", { hasText: "$1–3" })).toBeVisible();
+
   if (test.info().project.name !== "phone") {
     await expect(field).toBeFocused();
   }
@@ -67,14 +80,15 @@ test("a visitor asks the assistant about prepza", async ({ page }) => {
   if (test.info().project.name !== "phone") {
     await page.mouse.click(100, 500);
     await expect(panel).toHaveCount(0);
-    await page.getByRole("banner").getByRole("button", { name: "ask agent" }).click();
+    await askAgent(page).click();
     await expect(panel.locator("strong", { hasText: "$1–3" })).toBeVisible();
   }
 
-  // New chat starts over; the panel closes and comes back empty of nothing it kept.
-  await panel.getByRole("button", { name: "New chat" }).click();
-  await expect(panel.getByRole("button", { name: "What is prepza?" })).toBeVisible();
-  await panel.getByRole("button", { name: "Close" }).click();
+  // New chat starts over with the welcome; Close closes the panel.
+  await panel.getByTestId("assistant-new-chat").click();
+  await expect(welcomeQuestions(panel).first()).toBeVisible();
+  await expect(panel.locator("strong", { hasText: "$1–3" })).toHaveCount(0);
+  await panel.getByTestId("assistant-close").click();
   await expect(panel).toHaveCount(0);
 });
 
@@ -85,12 +99,12 @@ test("a visitor asking to sign in gets the sign-in card, their way first", async
   ]);
   const panel = await openPanel(page);
   await panel.getByRole("textbox").fill("sign me in with github");
-  await panel.getByRole("button", { name: "Send" }).click();
+  await panel.locator('button[type="submit"]').click();
 
   await expect(panel.getByRole("list").getByText("Sign in below with GitHub.")).toBeVisible();
-  const ways = panel.getByRole("button", { name: /continue with/i });
+  const ways = panel.locator('[data-testid^="sign-in-"]');
   await expect(ways).toHaveCount(3);
-  await expect(ways.first()).toHaveAccessibleName(/GitHub/);
+  await expect(ways.first()).toHaveAttribute("data-testid", "sign-in-github");
 });
 
 test("a reply goes back with its signature, and the next question isn't checked again", async ({ page }) => {
@@ -107,10 +121,10 @@ test("a reply goes back with its signature, and the next question isn't checked 
   });
   const panel = await openPanel(page);
   await panel.getByRole("textbox").fill("How do I start?");
-  await panel.getByRole("button", { name: "Send" }).click();
+  await panel.locator('button[type="submit"]').click();
   await expect(panel.getByRole("list").getByText("Paste it.")).toBeVisible();
   await panel.getByRole("textbox").fill("And then?");
-  await panel.getByRole("button", { name: "Send" }).click();
+  await panel.locator('button[type="submit"]').click();
   await expect.poll(() => sent.length).toBe(2);
 
   expect(sent[1].body.messages).toEqual([
@@ -132,10 +146,11 @@ test("a failed answer shows its error and Try again asks again", async ({ page }
   });
   const panel = await openPanel(page);
   await panel.getByRole("textbox").fill("Hi");
-  await panel.getByRole("button", { name: "Send" }).click();
+  await panel.locator('button[type="submit"]').click();
   await expect(panel.getByRole("list").getByText("Paused for now.")).toBeVisible();
 
-  await panel.getByRole("button", { name: "Try again" }).click();
+  // The failed answer's one button asks again.
+  await panel.getByRole("list").getByRole("button").click();
   await expect(panel.getByRole("list").getByText("Back.")).toBeVisible();
   await expect(panel.getByRole("list").getByText("Paused for now.")).toHaveCount(0);
 });
@@ -143,12 +158,13 @@ test("a failed answer shows its error and Try again asks again", async ({ page }
 test("a reload in the middle of a visitor's chat brings it back", async ({ page }) => {
   await helpAnswers(page, [{ delta: "A hiring test." }]);
   const panel = await openPanel(page);
-  await panel.getByRole("button", { name: "What is prepza?" }).click();
+  const question = (await welcomeQuestions(panel).first().textContent())!;
+  await welcomeQuestions(panel).first().click();
   await expect(panel.getByRole("list").getByText("A hiring test.")).toBeVisible();
 
   await page.reload();
-  const again = page.getByRole("dialog", { name: "Assistant" });
-  await expect(again.getByRole("list").getByText("What is prepza?")).toBeVisible();
+  const again = page.getByRole("dialog");
+  await expect(again.getByRole("list").getByText(question)).toBeVisible();
   await expect(again.getByRole("list").getByText("A hiring test.")).toBeVisible();
 
   // A chat older than the service's window (GET /config) isn't brought back.
@@ -158,15 +174,16 @@ test("a reload in the middle of a visitor's chat brings it back", async ({ page 
     sessionStorage.setItem("prepza:assistant:visitor", JSON.stringify(kept));
   });
   await page.reload();
-  await expect(page.getByRole("banner").getByRole("button", { name: "ask agent" })).toBeVisible();
+  await expect(askAgent(page)).toBeVisible();
   await expect(again).toHaveCount(0);
 
   // Opened, it's a new chat; closed, it stays closed after a reload.
-  await page.getByRole("banner").getByRole("button", { name: "ask agent" }).click();
-  await expect(again.getByRole("button", { name: "What is prepza?" })).toBeVisible();
-  await again.getByRole("button", { name: "Close" }).click();
+  await askAgent(page).click();
+  await expect(welcomeQuestions(again).first()).toBeVisible();
+  await expect(again.getByRole("list").getByText("A hiring test.")).toHaveCount(0);
+  await again.getByTestId("assistant-close").click();
   await page.reload();
-  await expect(page.getByRole("banner").getByRole("button", { name: "ask agent" })).toBeVisible();
+  await expect(askAgent(page)).toBeVisible();
   await expect(again).toHaveCount(0);
 });
 
@@ -177,18 +194,18 @@ for (const reducedMotion of ["no-preference", "reduce"] as const) {
   test(`the panel and a dialog open and close fully (${reducedMotion} motion)`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion });
     await page.goto("/");
-    const askAgent = page.getByRole("banner").getByRole("button", { name: "ask agent" });
-    await askAgent.click();
-    const panel = page.getByRole("dialog", { name: "Assistant" });
+    const toggle = askAgent(page);
+    await toggle.click();
+    const panel = page.getByRole("dialog");
     await expect(panel).toBeVisible();
     await expect(panel).toBeInViewport({ ratio: 1 });
 
-    await panel.getByRole("button", { name: "Close" }).click();
+    await panel.getByTestId("assistant-close").click();
     await expect(page.locator('[data-slot="dialog-content"]')).toHaveCount(0);
-    await expect(askAgent).toBeFocused();
+    await expect(toggle).toBeFocused();
 
     // Signed out, the header's Sign in opens the sign-in dialog, over a dimmed page.
-    const signIn = page.getByRole("banner").getByRole("button", { name: /sign in/i });
+    const signIn = page.getByRole("banner").getByTestId("header-sign-in");
     await signIn.click();
     const dialog = page.getByRole("dialog");
     await expect(dialog).toBeVisible();

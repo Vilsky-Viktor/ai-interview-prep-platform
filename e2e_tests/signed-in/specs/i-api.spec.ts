@@ -20,12 +20,15 @@ test("an owner makes an API key and adds a web hook", async ({ signInAs }) => {
   await visit(owner, `${tab}/api`)
   await shot(owner, "empty")
 
-  await openDialog(owner, owner.getByRole("button", { name: "New key" }))
+  // The open tab's action beside the docs: a new key, or a new web hook.
+  const action = owner.getByTestId("integration-actions").locator("button")
+  await openDialog(owner, action)
   await owner.getByRole("dialog").getByRole("textbox").fill("Careers site")
   // When it expires: nothing picked yet, so the key can't be made; the menu doesn't move the dialog.
-  const create = owner.getByRole("dialog").getByRole("button", { name: "New key" })
-  const expiry = owner.getByRole("dialog").getByRole("button", { name: "Expires in" })
-  await expect(expiry).toHaveText("Expires in")
+  const create = owner.getByRole("dialog").locator('button[type="submit"]')
+  const expiry = owner.getByRole("dialog").locator('[aria-haspopup="menu"]')
+  // The expiries in the API's order: 1, 3, 6 and 12 months, then never.
+  const expiries = owner.getByRole("menu").getByRole("menuitemradio")
   await expect(create).toBeDisabled()
   await owner.waitForTimeout(500)
   const closed = await owner.getByRole("dialog").boundingBox()
@@ -34,24 +37,33 @@ test("an owner makes an API key and adds a web hook", async ({ signInAs }) => {
   expect(await owner.getByRole("dialog").boundingBox()).toEqual(closed)
   await shot(owner, "expiry-menu")
   // Never expiring is allowed, with a warning under the select while it's picked.
-  const warning = owner.getByRole("dialog").getByText("A key that never expires", { exact: false })
-  await owner.getByRole("menuitemradio", { name: "Never" }).click()
+  const warning = owner.getByRole("dialog").getByRole("status")
+  await expiries.last().click()
   await expect(warning).toBeVisible()
   await shot(owner, "never-warning")
   await expiry.click()
-  await owner.getByRole("menuitemradio", { name: "12 months" }).click()
+  await expiries.nth(3).click()
   await expect(warning).toHaveCount(0)
   await expect(create).toBeEnabled()
+  // What the key may do: "Select all", then each group's permissions (interviews: read, create;
+  // candidates: read, invite, change, delete; credits: read; AI agents). A new key starts with
+  // the two reads; ticking Invite ticks Candidates read and keeps it ticked.
+  const ticks = owner.getByRole("dialog").getByRole("checkbox")
+  const checked = owner.getByRole("dialog").locator('[role=checkbox][aria-checked="true"]')
+  await expect(ticks).toHaveCount(9)
+  await expect(checked).toHaveCount(2)
+  await expect(ticks.nth(1)).toBeChecked()
+  await expect(ticks.nth(3)).toBeChecked()
+  await ticks.nth(4).click()
+  await expect(ticks.nth(4)).toBeChecked()
+  await expect(ticks.nth(3)).toBeDisabled()
   await shot(owner, "new-key")
   await create.click()
-  await expect(owner.getByRole("dialog").getByRole("textbox", { name: "Copy key" })).toHaveValue(
-    /^pz_/
-  )
+  // The key, shown this once in a field to copy.
+  const shown = owner.getByRole("dialog").getByRole("textbox")
+  await expect(shown).toHaveValue(/^pz_/)
   await shot(owner, "key-shown")
-  const key = await owner
-    .getByRole("dialog")
-    .getByRole("textbox", { name: "Copy key" })
-    .inputValue()
+  const key = await shown.inputValue()
   await owner.keyboard.press("Escape")
 
   // The key works: the company's interview, and its candidate invited through the API.
@@ -69,25 +81,61 @@ test("an owner makes an API key and adds a web hook", async ({ signInAs }) => {
     headers: { Authorization: "Bearer pz_wrong" },
   })
   expect(refused.status()).toBe(401)
+  // What the key wasn't given is refused, naming the permission it lacks.
+  const credits = await owner.request.get(`${API_URL}/v1/credits`, { headers })
+  expect(credits.status()).toBe(403)
+  expect(await credits.json()).toEqual({
+    detail: "This API key doesn't have the credits:read permission.",
+    code: "missing_permission",
+  })
 
+  // Its row shows its permissions as tags: interviews read, candidates read and invite.
+  const tags = owner.getByTestId("key-permissions").first().locator("[data-slot=badge]")
+  await expect(tags).toHaveCount(3)
   await shot(owner, "keys-tab")
 
-  // The web hooks have a tab of their own, with its own button.
-  await owner.locator("main nav").getByRole("link", { name: "web hooks" }).click()
+  // Narrowed: Invite unticked and saved, the key can't invite any more, and Invite can't be
+  // ticked again (adding one means a new key).
+  const editKey = owner.getByRole("main").getByRole("listitem").first().getByRole("button").first()
+  await openDialog(owner, editKey)
+  const keyTicks = owner.getByRole("dialog").getByRole("checkbox")
+  await expect(keyTicks).toHaveCount(8)
+  await keyTicks.nth(3).click()
+  await expect(keyTicks.nth(3)).not.toBeChecked()
+  await shot(owner, "narrow-key")
+  await owner.getByRole("dialog").getByRole("button").last().click()
+  await expect(owner.getByRole("dialog")).toHaveCount(0)
+  await expect(tags).toHaveCount(2)
+  const uninvited = await owner.request.post(
+    `${API_URL}/v1/interviews/${interviewId}/candidates`,
+    { headers, data: { email: "delivered+e2e-api-narrowed@resend.dev" } }
+  )
+  expect(uninvited.status()).toBe(403)
+  expect((await uninvited.json()).detail).toBe(
+    "This API key doesn't have the candidates:invite permission."
+  )
+  await openDialog(owner, editKey)
+  await expect(keyTicks.nth(3)).toBeDisabled()
+  await expect(keyTicks.nth(3)).not.toBeChecked()
+  await owner.keyboard.press("Escape")
+
+  // The web hooks have a tab of their own, with its own button: a dialog with no expiry.
+  await owner.locator('main nav a[href$="?tab=webhooks"]').click()
   await expect(owner).toHaveURL(/\?tab=webhooks$/)
-  await expect(owner.getByRole("button", { name: "New key" })).toHaveCount(0)
 
   // Only HTTPS addresses on the internet: anything else is refused, in a red toast.
-  await openDialog(owner, owner.getByRole("button", { name: "Add web hook" }))
+  await openDialog(owner, action)
+  await expect(expiry).toHaveCount(0)
   await owner.getByRole("dialog").getByRole("textbox").fill("http://example.com/prepza")
-  await owner.getByRole("dialog").getByRole("button", { name: "Add web hook" }).click()
-  await expect(owner.getByText("Use an HTTPS address that's reachable from the internet")).toBeVisible()
+  await create.click()
+  await expect(owner.locator('[data-sonner-toast][data-type="error"]')).toContainText(
+    "Use an HTTPS address that's reachable from the internet"
+  )
   await shot(owner, "webhook-refused")
   await owner.getByRole("dialog").getByRole("textbox").fill("https://example.com/prepza")
-  await owner.getByRole("dialog").getByRole("button", { name: "Add web hook" }).click()
-  await expect(
-    owner.getByRole("dialog").getByRole("textbox", { name: "Copy secret" })
-  ).toHaveValue(/^whsec_/)
+  await create.click()
+  // Its signing secret, shown this once.
+  await expect(owner.getByRole("dialog").getByRole("textbox")).toHaveValue(/^whsec_/)
   await shot(owner, "secret-shown")
   await owner.keyboard.press("Escape")
   await expect(owner.getByText("https://example.com/prepza")).toBeVisible()

@@ -43,32 +43,32 @@ test("the FAQ, pricing, about and contact pages have their own descriptions", as
   }
 });
 
-test("the compare hub's title doesn't repeat the site's name", async ({
-  page,
-}) => {
-  await page.goto("/compare");
+// Each page's title is its own, followed by the site's name once (the compare hub's own title
+// doesn't repeat it).
+test("pages have their own titles, naming the site once", async ({ page }) => {
+  const titles: string[] = [];
 
-  await expect(page).toHaveTitle(
-    "Pre-employment testing tools compared · prepza.",
-  );
-});
+  for (const path of ["/compare", "/documents", "/api-docs", "/pricing"]) {
+    await page.goto(path);
+    const title = await page.title();
 
-test("the documents page's title says what its documents are for", async ({
-  page,
-}) => {
-  await page.goto("/documents");
+    expect(title, path).toMatch(/^.+ · prepza\.$/);
+    expect(title.match(/prepza/g), path).toHaveLength(1);
+    titles.push(title);
+  }
 
-  await expect(page).toHaveTitle("Hiring compliance documents · prepza.");
+  expect(new Set(titles).size).toBe(titles.length);
 });
 
 // English only, like the legal pages: one address, no language versions, its own description,
-// its capitals in the preview picture, a technical article with breadcrumbs, in the sitemap.
+// its title with its capitals in the preview picture, a technical article with breadcrumbs, in
+// the sitemap.
 test("the developer docs have their description, data and place in the sitemap", async ({
   page,
 }) => {
   await page.goto("/api-docs");
 
-  await expect(page).toHaveTitle("Developer docs · prepza.");
+  const heading = await page.getByRole("heading", { level: 1 }).textContent();
   const text = (await description(page)) ?? "";
   expect(text.length).toBeGreaterThan(100);
   expect(text.length).toBeLessThanOrEqual(170);
@@ -80,7 +80,7 @@ test("the developer docs have their description, data and place in the sitemap",
     .locator('head meta[property="og:image"]')
     .first()
     .getAttribute("content");
-  expect(new URL(picture ?? "").searchParams.get("title")).toBe("Developer docs");
+  expect(new URL(picture ?? "").searchParams.get("title")).toBe(heading);
 
   const data = await structuredData(page);
   const article = data.find((item) => item["@type"] === "TechArticle");
@@ -203,16 +203,13 @@ test("the preview picture draws only signed titles, and is kept out of image sea
   expect(robots).not.toContain("Disallow: /preview");
 });
 
-test("the footer's menu is named as the footer, and its icons aren't links", async ({
+test("the footer's menu is named for screen readers, and its icons aren't links", async ({
   page,
 }) => {
   await page.goto("/pricing");
   const footer = page.locator("footer");
 
-  await expect(
-    footer.getByRole("navigation", { name: "Footer" }),
-  ).toBeVisible();
-  await expect(
-    footer.getByRole("img", { name: "LinkedIn" }).locator("xpath=ancestor::a"),
-  ).toHaveCount(0);
+  await expect(footer.getByRole("navigation")).toHaveAccessibleName(/.+/);
+  await expect(footer.locator('[role="img"]')).toHaveCount(4);
+  await expect(footer.locator('a [role="img"]')).toHaveCount(0);
 });

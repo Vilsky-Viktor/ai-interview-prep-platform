@@ -16,10 +16,9 @@ test("an owner tests a web hook and reads its delivery log", async ({ signInAs }
 
   await visit(owner, `/companies/${company.id}/integrations/api?tab=webhooks`)
   await shot(owner, "webhooks")
+  // The web hook's icon buttons, named for screen readers. The outcome comes in a toast.
   await owner.getByRole("button", { name: "Send test event" }).click()
-  await expect(
-    owner.getByText(/didn't take the test event|test event was delivered/)
-  ).toBeVisible({ timeout: 30_000 })
+  await expect(owner.locator("[data-sonner-toast]").first()).toBeVisible({ timeout: 30_000 })
   await shot(owner, "tested")
 
   await openDialog(owner, owner.getByRole("button", { name: "Delivery log" }))
@@ -31,7 +30,9 @@ test("an owner tests a web hook and reads its delivery log", async ({ signInAs }
   // Our key can't read the web hook's secret: the log says it's on prepza's side, not theirs.
   await sealWebhookSecretsElsewhere(company.id)
   await owner.getByRole("button", { name: "Send test event" }).click()
-  await expect(owner.getByText("didn't take the test event").last()).toBeVisible({ timeout: 30_000 })
+  await expect(
+    owner.locator('[data-sonner-toast][data-type="error"]').last()
+  ).toContainText("The endpoint didn't take the test event.", { timeout: 30_000 })
   await openDialog(owner, owner.getByRole("button", { name: "Delivery log" }))
   await expect(
     owner.getByRole("dialog").getByText("Not sent: a problem on prepza's side.")

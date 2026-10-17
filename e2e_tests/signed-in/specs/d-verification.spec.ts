@@ -26,54 +26,60 @@ test("company verification: pending, declined, renamed, approved", async ({
   const interviews = `/companies/${company.id}/interviews`
   await visit(owner, interviews)
 
-  await owner.getByRole("button", { name: "Verify" }).click()
-  await owner.getByRole("dialog").getByLabel("Company website").fill(domain)
+  const verify = owner.getByTestId("verify-company")
+  await verify.click()
+  await owner.getByRole("dialog").getByRole("textbox").fill(domain)
   await shot(owner, "verify-dialog")
-  await owner.getByRole("dialog").getByRole("button", { name: "Save" }).click()
+  await owner.getByRole("dialog").locator('button[type="submit"]').click()
+  // The way to verify becomes the pending badge, an icon named for screen readers, with its
+  // tooltip on hover.
   const pending = owner.getByRole("button", { name: "Pending verification" })
   await expect(pending).toBeVisible()
+  await expect(verify).toHaveCount(0)
   await pending.hover()
-  await expect(owner.getByText("Pending verification", { exact: true })).toBeVisible()
+  await expect(pending).toHaveAttribute("data-popup-open")
   await shot(owner, "pending")
 
   const superadmin = await signInSuperadmin()
+  // Waiting for review: Decline and Approve, in that order.
   let row = await requestRow(superadmin, company.name)
-  await expect(row.getByText("waiting for review")).toBeVisible()
   await expect(row.getByText(domain)).toBeVisible()
+  await expect(row.getByRole("button")).toHaveCount(2)
   await shot(superadmin, "superadmin-pending")
-  await row.getByRole("button", { name: "Decline" }).click()
+  await row.getByRole("button").first().click()
   const reason = "E2E: the website doesn't match the name."
-  await superadmin.getByRole("dialog").getByLabel("Reason (optional)").fill(reason)
+  await superadmin.getByRole("dialog").getByRole("textbox").fill(reason)
   await shot(superadmin, "decline-dialog")
-  await superadmin.getByRole("dialog").getByRole("button", { name: "Decline" }).click()
-  await expect(row.getByText("declined", { exact: true })).toBeVisible()
-  await expect(row.getByText(`Reason: ${reason}`)).toBeVisible()
+  await superadmin.getByRole("dialog").locator('button[type="submit"]').click()
+  // Decided: nothing left to choose, and the reason with it.
+  await expect(row.getByRole("button")).toHaveCount(0)
+  await expect(row.getByText(reason)).toBeVisible()
   await shot(superadmin, "superadmin-declined")
 
   // The company sees why, in the verify dialog.
   await visit(owner, interviews)
   await expect(pending).toHaveCount(0)
-  await owner.getByRole("button", { name: "Verify" }).click()
+  await verify.click()
   await expect(owner.getByRole("dialog").getByText(`Declined: ${reason}`)).toBeVisible()
   await shot(owner, "declined")
   await owner.keyboard.press("Escape")
 
-  // A rename sends it for review again; the field says so while renaming.
+  // A rename (the title's pencil, named for screen readers) sends it for review again.
   const renamed = `${company.name} Renamed`
   await owner.getByRole("heading").getByRole("button", { name: "Edit title" }).click()
-  await expect(owner.getByText("Renaming sends your company for verification again.")).toBeVisible()
+  const title = owner.getByRole("main").getByRole("textbox")
   await shot(owner, "rename-hint")
-  await owner.getByLabel("Title").fill(renamed)
-  await owner.getByLabel("Title").press("Enter")
+  await title.fill(renamed)
+  await title.press("Enter")
   await expect(owner.getByRole("heading", { name: renamed })).toBeVisible()
   await visit(owner, interviews)
   await expect(pending).toBeVisible()
   await shot(owner, "pending-again")
 
   row = await requestRow(superadmin, renamed)
-  await expect(row.getByText("waiting for review")).toBeVisible()
-  await row.getByRole("button", { name: "Approve" }).click()
-  await expect(row.getByText("approved", { exact: true })).toBeVisible()
+  await expect(row.getByRole("button")).toHaveCount(2)
+  await row.getByRole("button").last().click()
+  await expect(row.getByRole("button")).toHaveCount(0)
   await shot(superadmin, "superadmin-approved")
 
   await visit(owner, interviews)

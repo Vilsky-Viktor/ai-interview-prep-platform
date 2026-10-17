@@ -15,9 +15,9 @@ async function structuredData(page: Page) {
   return scripts.flatMap((text) => [JSON.parse(text)].flat());
 }
 
-for (const [path, language, title] of [
-  ["/news", "en", "prepza news"],
-  ["/de/news", "de", "Neuigkeiten von prepza"],
+for (const [path, language] of [
+  ["/news", "en"],
+  ["/de/news", "de"],
 ] as const) {
   test(`${path} is indexable with its title, description, addresses, data and feed`, async ({
     page,
@@ -26,8 +26,11 @@ for (const [path, language, title] of [
 
     expect(response?.status()).toBe(200);
     expect(response?.headers()["x-robots-tag"]).toBeUndefined();
-    await expect(page).toHaveTitle(`${title} · prepza.`);
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText(title);
+    await expect(page.locator("html")).toHaveAttribute("lang", language);
+    // Titled as its heading, followed by the site's name.
+    const heading = (await page.getByRole("heading", { level: 1 }).textContent()) ?? "";
+    expect(heading).not.toBe("");
+    await expect(page).toHaveTitle(`${heading} · prepza.`);
     await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
 
     const description =
@@ -56,11 +59,10 @@ for (const [path, language, title] of [
     await expect(
       page.locator('link[rel="alternate"][type="application/rss+xml"]'),
     ).toHaveAttribute("href", new RegExp(`${feed}$`));
-    await expect(
-      page.getByRole("link", {
-        name: language === "en" ? "RSS feed" : "RSS-Feed",
-      }),
-    ).toHaveAttribute("href", feed);
+    // The RSS icon links to the feed, named for screen readers.
+    const rss = page.locator(`main a[href="${feed}"]`);
+    await expect(rss).toHaveCount(1);
+    await expect(rss).toHaveAccessibleName(/.+/);
 
     const blog = (await structuredData(page)).find(
       (item) => item["@type"] === "Blog",
@@ -78,6 +80,12 @@ for (const [path, language, title] of [
       });
       expect(post.headline).toBeTruthy();
       expect(post.datePublished).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    }
+
+    // The German page is German, not the English one.
+    if (language === "de") {
+      await page.goto("/news");
+      await expect(page.getByRole("heading", { level: 1 })).not.toHaveText(heading);
     }
   });
 }
@@ -130,16 +138,10 @@ test("the sitemap lists the news page in every language but not its feed", async
 
 test("the footer links to the news page", async ({ page }) => {
   await page.goto("/");
-  const link = page
-    .getByRole("navigation", { name: "Footer" })
-    .getByRole("link", {
-      name: "News",
-    });
+  const link = page.locator('footer nav a[href="/news"]');
 
-  await expect(link).toHaveAttribute("href", "/news");
+  await expect(link).toHaveCount(1);
   await link.click();
   await expect(page).toHaveURL(/\/news$/);
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "prepza news",
-  );
+  await expect(page.locator(`main a[href="/news/rss.xml"]`)).toHaveCount(1);
 });

@@ -1,27 +1,34 @@
 import { expect, test } from "@playwright/test";
 
-// The home page's info button, beside the demos (under the promise on phones), explains how
-// prepza works in a dialog that closes again.
-test("the home page's info button explains how prepza works", async ({ page }) => {
+// The home page's info button, beside the demos (under the promise on phones), opens a guide to
+// how prepza works in a dialog that closes again.
+test("the home page's info button opens its guide", async ({ page }) => {
   // The local dev server compiles the home page on first open.
   test.setTimeout(120_000);
   await page.goto("/");
-  const button = page.getByRole("button", { name: "About this page" }).filter({ visible: true });
+  const button = page.getByTestId("page-help").filter({ visible: true });
   await expect(button).toHaveCount(1);
+  // An icon alone: its label is what screen readers read.
+  await expect(button).toHaveAccessibleName(/.+/);
 
-  // Hovering names it (again if the first hover came before the page was ready).
+  // Hovering opens its tooltip (again if the first hover came before the page was ready).
   await expect(async () => {
     await page.mouse.move(0, 0);
     await button.hover();
-    await expect(page.getByText("About this page", { exact: true })).toBeVisible({ timeout: 2_000 });
+    await expect(button).toHaveAttribute("data-popup-open", { timeout: 2_000 });
   }).toPass();
 
   await button.click();
-  const dialog = page.getByRole("dialog", { name: "How prepza works" });
+  const dialog = page.getByRole("dialog");
   await expect(dialog).toBeVisible();
-  await expect(dialog.getByText(/Paste the job description/)).toBeVisible();
-  await expect(dialog.getByText(/\$1–3 per candidate/)).toBeVisible();
+  // What it's for, then two lists: what to do there, and tips.
+  await expect(dialog.getByRole("heading").first()).not.toBeEmpty();
+  await expect(dialog.getByRole("list")).toHaveCount(2);
 
-  await dialog.getByRole("button", { name: "Close" }).click();
+  for (const list of await dialog.getByRole("list").all()) {
+    expect(await list.getByRole("listitem").count()).toBeGreaterThan(0);
+  }
+
+  await dialog.locator('[data-slot="dialog-footer"] button').click();
   await expect(dialog).toBeHidden();
 });
