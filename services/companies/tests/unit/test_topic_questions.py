@@ -2,6 +2,7 @@ import uuid
 from datetime import UTC, datetime
 
 import httpx
+from prepza_common.audit_actions import AuditAction, TargetKind
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
@@ -44,7 +45,7 @@ def interview_and_company(role):
     return interview, company
 
 
-def test_only_owner_or_admin_can_regenerate(client, monkeypatch):
+def test_only_owner_or_admin_can_regenerate(client, monkeypatch, audited):
     sign_in()
     calls = []
 
@@ -76,6 +77,9 @@ def test_only_owner_or_admin_can_regenerate(client, monkeypatch):
         assert client.post(url).status_code == expected
 
     assert calls == [("bob", True), ("bob", True)]
+    assert [event[1:] for event in audited] == [
+        ("bob", AuditAction.QUESTIONS_REGENERATED, INTERVIEW_ID, TargetKind.INTERVIEW)
+    ] * 2
 
     app.dependency_overrides.clear()
 
@@ -138,19 +142,24 @@ def test_topic_questions_come_with_their_options(client, monkeypatch):
     async def fake_company(_company_id):
         return company
 
+    # A multi-answer question: two right options.
+    question = {
+        "id": str(QUESTION_ID),
+        "text": "Explain indexes.",
+        "options": [
+            {"answer": "Faster reads", "correct": True},
+            {"answer": "Slower writes", "correct": True},
+        ],
+        "multi": True,
+        "likes": 3,
+        "dislikes": 1,
+        "reports": 0,
+    }
+
     async def fake_questions(set_id, _topic_id):
         assert set_id == interview.set_id
 
-        return [
-            {
-                "id": str(QUESTION_ID),
-                "text": "Explain indexes.",
-                "options": [{"answer": "Faster reads", "correct": True}],
-                "likes": 3,
-                "dislikes": 1,
-                "reports": 0,
-            }
-        ]
+        return [question]
 
     monkeypatch.setattr(interviews, "get", fake_interview)
     monkeypatch.setattr(companies, "get", fake_company)
@@ -159,21 +168,12 @@ def test_topic_questions_come_with_their_options(client, monkeypatch):
     response = client.get(f"/interviews/{INTERVIEW_ID}/topics/{TOPIC_ID}/questions")
 
     assert response.status_code == 200
-    assert response.json() == [
-        {
-            "id": str(QUESTION_ID),
-            "text": "Explain indexes.",
-            "options": [{"answer": "Faster reads", "correct": True}],
-            "likes": 3,
-            "dislikes": 1,
-            "reports": 0,
-        }
-    ]
+    assert response.json() == [question]
 
     app.dependency_overrides.clear()
 
 
-def test_a_manager_marks_a_questions_answer_wrong_in_one_click(client, monkeypatch):
+def test_a_manager_marks_a_questions_answer_wrong_in_one_click(client, monkeypatch, audited):
     sign_in()
     marked = []
 
@@ -205,6 +205,9 @@ def test_a_manager_marks_a_questions_answer_wrong_in_one_click(client, monkeypat
         assert client.post(url).status_code == expected
 
     assert marked == [QUESTION_ID]
+    assert [event[1:] for event in audited] == [
+        ("bob", AuditAction.ANSWER_KEY_REPORTED, INTERVIEW_ID, TargetKind.INTERVIEW)
+    ]
 
     # A question from someone else's test isn't found.
     async def elsewhere(_question_id):

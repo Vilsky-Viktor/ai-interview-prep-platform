@@ -1,6 +1,9 @@
 from enum import StrEnum
 
-from prepza_common.constants import DEFAULT_QUESTION_SECONDS  # noqa: F401 (re-exported)
+from prepza_common.constants import (  # noqa: F401 (re-exported)
+    MAX_QUESTION_SECONDS,
+    MIN_QUESTION_SECONDS,
+)
 
 
 class InterviewStatus(StrEnum):
@@ -16,9 +19,8 @@ class InterviewStatus(StrEnum):
 
 # A generation's status (as generation reports it) once it has failed and waits for a retry.
 GENERATION_FAILED_STATUS = "failed"
-# Timed interviews: the seconds each question starts with, and the range an admin can set.
-MIN_QUESTION_SECONDS = 10
-MAX_QUESTION_SECONDS = 600
+# A medium test's seconds a question are a new generated test's until its level is known.
+UNKNOWN_LEVEL = "medium"
 # The grade, in percent, a finished candidate needs to pass, and the range a company can set.
 DEFAULT_PASS_MARK = 70
 MIN_PASS_MARK = 1
@@ -30,6 +32,3 @@ DEFAULT_TOPIC_QUESTIONS = 10
 # instance for the test's page: a count that changes (a question revealed in practice is no
 # longer served) shows within it. Candidates starting always read the questions afresh.
 SET_CACHE_SECONDS = 30
-# Previews one person starts in an hour, as many as practice rounds: each creates sessions in
-# rounds, though it charges nothing.
-PREVIEWS_PER_USER_HOUR = 20

@@ -66,6 +66,8 @@ class CompanyOut(BaseModel):
     # Only the owner deletes the company, and adds, removes and changes the roles of its members.
     can_delete: bool
     can_manage_members: bool
+    # Only the owner sees the company's action log.
+    can_see_actions: bool = False
     interview_count: int
     # The logo's address on the site; None until one is set.
     logo_url: str | None = None

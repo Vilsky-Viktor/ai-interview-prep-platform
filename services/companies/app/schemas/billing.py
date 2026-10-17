@@ -31,6 +31,8 @@ class HistoryEntryOut(BaseModel):
     invoice_id: str | None
     candidate: CreditCandidateOut | None
     candidate_deleted: bool
+    # Why a superadmin adjusted the credits (reason "adjustment").
+    note: str | None = None
 
 
 class TopUpCheckoutIn(BaseModel):

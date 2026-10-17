@@ -1,4 +1,5 @@
 from datetime import UTC, datetime
+from uuid import UUID
 
 # Aliased: this module's own delete() would otherwise shadow it.
 from prepza_common import outbox
@@ -87,9 +88,14 @@ async def delete(company_id) -> None:
 
 
 async def list_for_user(
-    user_id: str, offset: int, limit: int, roles: tuple[str, ...] = tuple(Role)
+    user_id: str,
+    offset: int,
+    limit: int,
+    roles: tuple[str, ...] = tuple(Role),
+    only: str | None = None,
 ) -> list[Company]:
-    """The user's companies, only those where their role is one of `roles`."""
+    """The user's companies, only those where their role is one of `roles` (and with `only`,
+    that one company's id at most)."""
     query = (
         select(Company)
         .join(Member, Member.company_id == Company.id)
@@ -99,6 +105,9 @@ async def list_for_user(
         .offset(offset)
         .limit(limit)
     )
+
+    if only is not None:
+        query = query.where(Company.id == UUID(only))
 
     async with Session() as session:
         return list((await session.scalars(query)).unique())

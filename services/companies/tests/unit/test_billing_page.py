@@ -53,7 +53,7 @@ def clear_overrides():
     app.dependency_overrides.clear()
 
 
-def movement(reason, amount, hold_key=None, transaction_id=None, total=None):
+def movement(reason, amount, hold_key=None, transaction_id=None, total=None, note=None):
     return {
         "id": str(uuid.uuid4()),
         "amount": amount,
@@ -64,6 +64,7 @@ def movement(reason, amount, hold_key=None, transaction_id=None, total=None):
         "automatic": False,
         "transaction_id": transaction_id,
         "hold_key": hold_key,
+        "note": note,
     }
 
 
@@ -122,6 +123,24 @@ def test_the_history_names_each_candidate_and_only_a_top_up_has_an_invoice(clien
     ]
     assert (topup["total"], topup["currency"]) == ("1000", "USD")
     assert (refund["candidate_deleted"], welcome["candidate_deleted"]) == (False, False)
+
+
+def test_a_superadmins_adjustment_shows_its_note(client, monkeypatch):
+    as_member(monkeypatch, "owner")
+
+    async def history(company_id, offset, limit):
+        return [movement("adjustment", 500, note="Complaint 12"), movement("welcome", 900)]
+
+    monkeypatch.setattr(billing, "company_history", history)
+
+    adjustment, welcome = client.get(f"{COMPANY}/billing/history").json()
+
+    assert (adjustment["reason"], adjustment["amount"], adjustment["note"]) == (
+        "adjustment",
+        500,
+        "Complaint 12",
+    )
+    assert welcome["note"] is None
 
 
 def test_the_reserved_list_names_the_candidates_holding_credits(client, monkeypatch):

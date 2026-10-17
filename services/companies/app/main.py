@@ -35,6 +35,7 @@ from app.routers import (
     interview_questions,
     interviews,
     invites,
+    limits,
     links,
     logos,
     maintenance,
@@ -44,6 +45,7 @@ from app.routers import (
     schedules,
     superadmin,
     superadmin_companies,
+    superadmin_support,
     superadmin_verification,
     verification,
 )
@@ -88,6 +90,7 @@ app.include_router(bulk_invites.router)
 app.include_router(interview_generation.router)
 app.include_router(interview_questions.router)
 app.include_router(invites.router)
+app.include_router(limits.router)
 app.include_router(links.router)
 app.include_router(logos.router)
 app.include_router(reports.router)
@@ -104,6 +107,7 @@ app.include_router(pause.router)
 app.include_router(maintenance.router)
 app.include_router(superadmin.router)
 app.include_router(superadmin_companies.router)
+app.include_router(superadmin_support.router)
 app.include_router(ai_apps.router)
 app.include_router(superadmin_verification.router)
 

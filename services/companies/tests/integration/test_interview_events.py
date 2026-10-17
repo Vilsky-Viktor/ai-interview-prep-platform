@@ -12,7 +12,7 @@ from app.storage.db import Session
 async def interview():
     company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
 
-    return await interviews.create(company.id, uuid.uuid4(), "en")
+    return await interviews.create(company.id, uuid.uuid4(), "en", 60)
 
 
 async def events(event_type: str, key: str, value: str) -> list[dict]:
@@ -50,7 +50,7 @@ def test_an_interview_made_ready_twice_by_one_event_is_announced_once(run):
 
         for _ in range(2):
             await interview_generations.set_generated(
-                found.generation_id, uuid.uuid4(), "Backend", {"kind": "x"}, event_id
+                found.generation_id, uuid.uuid4(), "Backend", None, {"kind": "x"}, event_id
             )
 
         return found, await events("interview.ready", "interview_id", str(found.id))
@@ -113,7 +113,7 @@ def test_a_failed_generation_marks_its_interview_once_until_the_questions_come(r
         # an earlier run leaves the ready interview alone.
         await interview_generations.mark_failed(found.generation_id, str(uuid.uuid4()))
         await interview_generations.set_generated(
-            found.generation_id, uuid.uuid4(), "Backend", {"kind": "x"}, str(uuid.uuid4())
+            found.generation_id, uuid.uuid4(), "Backend", None, {"kind": "x"}, str(uuid.uuid4())
         )
         await interview_generations.mark_failed(found.generation_id, str(uuid.uuid4()))
 

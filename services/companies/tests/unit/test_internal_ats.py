@@ -6,6 +6,7 @@ from fastapi import HTTPException
 from prepza_common.http import bearer
 from prepza_common.service_auth import issue_token
 
+from app.constants.audit import VIA_ATS
 from app.constants.invites import RETURN_URL_OFF_DOMAIN
 from app.services import candidate_invites
 from app.services import outbox as outbox_service
@@ -44,9 +45,17 @@ def stored(monkeypatch):
         return [item for item in (READY, MAKING) if item.id in ids]
 
     async def invite(
-        interview, company, user, email, name=None, return_url=None, sign_in=True, theme=None
+        interview,
+        company,
+        user,
+        email,
+        name=None,
+        return_url=None,
+        sign_in=True,
+        theme=None,
+        via=None,
     ):
-        calls["invites"].append((interview.id, company.id, user.uid, email))
+        calls["invites"].append((interview.id, company.id, user.uid, email, via))
         calls.setdefault("names", []).append(name)
 
         return SimpleNamespace(id=uuid.UUID(int=7))
@@ -105,7 +114,8 @@ def test_ats_invites_a_candidate_as_the_member_who_connected_it(client, stored):
 
     assert response.status_code == 201
     assert response.json() == {"invite_id": str(uuid.UUID(int=7))}
-    assert stored["invites"] == [(READY.id, COMPANY.id, "ann", "Cara@example.com")]
+    # The action log shows it came through the ATS.
+    assert stored["invites"] == [(READY.id, COMPANY.id, "ann", "Cara@example.com", VIA_ATS)]
     assert stored["flushes"] == 1
 
 
@@ -152,7 +162,7 @@ def test_no_invite_during_the_pause(client, stored, monkeypatch):
 
 @pytest.mark.parametrize("code", [402, 429])
 def test_a_refused_invite_answers_with_its_refusal(client, monkeypatch, code):
-    async def refuse(*args):
+    async def refuse(*args, **kwargs):
         raise HTTPException(code, "Refused")
 
     monkeypatch.setattr(candidate_invites, "invite", refuse)

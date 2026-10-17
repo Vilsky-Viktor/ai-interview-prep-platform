@@ -1,9 +1,7 @@
 from fastapi import HTTPException, status
-from prepza_common.constants import DAY_SECONDS
 from prepza_common.rate_limit import hit, hit_emails
 from prepza_common.user import User
 
-from app.config.settings import settings
 from app.constants.reports import NO_FINISHED_CANDIDATES, NOT_A_PDF, TOO_MANY_REPORT_EMAILS
 from app.helpers.reports import is_report_pdf
 from app.integrations.redis import get_redis
@@ -24,18 +22,12 @@ async def allow_report_email(
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, NOT_A_PDF)
 
     redis = get_redis()
-    await hit_emails(
-        redis,
-        user.uid,
-        recipient,
-        settings.email_hourly_limit,
-        settings.email_daily_limit,
-        settings.email_recipient_daily_limit,
-    )
+    await hit_emails(redis, user.uid, recipient, company.id)
     await hit(
         redis,
         f"rate:report-emails:day:{company.id}",
-        settings.report_emails_per_company_day,
-        DAY_SECONDS,
+        "REPORT_EMAILS_PER_COMPANY_DAY",
         TOO_MANY_REPORT_EMAILS,
+        company_id=company.id,
+        user_id=user.uid,
     )

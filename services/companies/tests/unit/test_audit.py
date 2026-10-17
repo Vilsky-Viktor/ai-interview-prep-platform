@@ -1,10 +1,10 @@
 from datetime import UTC, datetime
 
 import pytest
+from prepza_common.audit_actions import AuditAction, TargetKind
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
-from app.constants.audit import AuditAction
 from app.constants.invites import InviteStatus
 from app.main import app
 from app.models.audit import AuditEvent
@@ -45,7 +45,7 @@ def company_of(role):
 def test_revoking_or_deleting_a_candidate_is_recorded(client, monkeypatch, audited, status, action):
     revoke(client, monkeypatch, status)
 
-    assert audited == [(COMPANY_ID, "bob", action, INVITE_ID)]
+    assert audited == [(COMPANY_ID, "bob", action, INVITE_ID, TargetKind.CANDIDATE)]
 
 
 def test_emailing_a_report_is_recorded(client, queued, audited):  # noqa: F811

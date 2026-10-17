@@ -2,10 +2,10 @@ import uuid
 from datetime import UTC, datetime
 
 import pytest
+from prepza_common.audit_actions import AuditAction, TargetKind
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
-from app.constants.audit import AuditAction
 from app.main import app
 from app.models.companies import Company, Member
 from app.models.interviews import Interview
@@ -31,13 +31,15 @@ def test_only_the_settings_sent_change(client, monkeypatch, audited):
     sign_in()
     saved = []
     # Not the defaults, so a reset to them would show.
-    interview = Interview(
-        id=INTERVIEW_ID,
-        company_id=COMPANY_ID,
-        generation_id=uuid.uuid4(),
-        set_id=None,
-        pass_mark=85,
-    )
+    fields = {
+        "id": INTERVIEW_ID,
+        "company_id": COMPANY_ID,
+        "generation_id": uuid.uuid4(),
+        "set_id": None,
+        "pass_mark": 85,
+        "question_seconds": 30,
+        "hired": False,
+    }
     company = Company(id=COMPANY_ID, name="My company", created_at=datetime.now(UTC))
     company.members = [
         Member(
@@ -50,7 +52,8 @@ def test_only_the_settings_sent_change(client, monkeypatch, audited):
     ]
 
     async def fake_interview(_interview_id):
-        return interview
+        # As read for each request, with what earlier ones saved.
+        return Interview(**{**fields, **{k: v for item in saved for k, v in item.items()}})
 
     async def fake_company(_company_id):
         return company
@@ -66,17 +69,26 @@ def test_only_the_settings_sent_change(client, monkeypatch, audited):
     assert client.patch(url, json={"hired": True}).status_code == 204
     assert client.patch(url, json={"question_seconds": 45}).status_code == 204
     assert saved == [{"hired": True}, {"question_seconds": 45}]
-    # Without a pass mark sent, nothing about it is recorded.
-    assert audited == []
+    settings_changed = (
+        COMPANY_ID,
+        "bob",
+        AuditAction.INTERVIEW_SETTINGS_CHANGED,
+        INTERVIEW_ID,
+        TargetKind.INTERVIEW,
+    )
+    # Each change is recorded; without a pass mark sent, nothing about it.
+    assert audited == [settings_changed, settings_changed]
 
     client.patch(url, json={"question_seconds": 45, "hired": True, "pass_mark": 85})
 
-    # The same pass mark isn't a change.
-    assert audited == []
+    # The same settings and pass mark aren't a change.
+    assert len(audited) == 2
 
     client.patch(url, json={"pass_mark": 80})
 
-    assert audited == [(COMPANY_ID, "bob", AuditAction.PASS_MARK_CHANGED, INTERVIEW_ID)]
+    assert audited[2:] == [
+        (COMPANY_ID, "bob", AuditAction.PASS_MARK_CHANGED, INTERVIEW_ID, TargetKind.INTERVIEW)
+    ]
     too_short = client.patch(url, json={"question_seconds": 5})
 
     assert too_short.status_code == 422

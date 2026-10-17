@@ -4,7 +4,7 @@ from fastapi import HTTPException, status
 from prepza_common.auth import CurrentUser
 from prepza_common.constants import VIA_MCP
 
-from app.constants.ai_apps import AI_APPS_OFF
+from app.constants.ai_apps import AI_APPS_OFF, KEY_OTHER_COMPANY
 from app.constants.invites import (
     COMPANY_SUSPENDED,
     INTERVIEW_UNAVAILABLE,
@@ -15,13 +15,19 @@ from app.constants.roles import EDITORS, Role
 from app.models.companies import Company, Member
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
-from app.service_auth import REQUEST_VIA
+from app.service_auth import REQUEST_COMPANY, REQUEST_VIA
 from app.storage import companies
 from app.storage import invites as invite_store
 
 
 async def require_company(user: CurrentUser, company_id: UUID) -> tuple[Company, Member]:
-    """Any member: owners, admins and viewers. Enough for reading."""
+    """Any member: owners, admins and viewers. Enough for reading. An AI agent signed in with an
+    API key reaches only the key's company (403)."""
+    key_company = REQUEST_COMPANY.get()
+
+    if key_company is not None and key_company != str(company_id):
+        raise HTTPException(status.HTTP_403_FORBIDDEN, KEY_OTHER_COMPANY)
+
     company = await companies.get(company_id)
 
     if company is None:

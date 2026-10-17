@@ -2,10 +2,10 @@ import uuid
 from datetime import UTC, datetime
 
 import httpx
+from prepza_common.audit_actions import AuditAction, TargetKind
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
-from app.constants.audit import AuditAction
 from app.integrations import generation
 from app.main import app
 from app.models.companies import Company, Member
@@ -116,7 +116,9 @@ def test_only_managers_review_topics(client, monkeypatch, audited):
 
     # Without hand edits the topics go through as null; generation then keeps its draft.
     assert calls == [{**body, "topics": None}]
-    assert audited == [(COMPANY_ID, "bob", AuditAction.TOPICS_APPROVED, INTERVIEW_ID)]
+    assert audited == [
+        (COMPANY_ID, "bob", AuditAction.TOPICS_APPROVED, INTERVIEW_ID, TargetKind.INTERVIEW)
+    ]
 
     app.dependency_overrides.clear()
 

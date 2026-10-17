@@ -43,6 +43,7 @@ def stored_invite(monkeypatch):
         company_id=uuid.uuid4(),
         generation_id=uuid.uuid4(),
         set_id=uuid.uuid4(),
+        topic_limits={},
     )
 
     async def fake_get(token):
@@ -91,9 +92,13 @@ def invite_page(monkeypatch, stored_invite):
     async def company(company_id):
         return None
 
+    async def found_set(set_id):
+        return {"topics": [{"id": str(uuid.uuid4()), "title": "Python", "question_count": 4}]}
+
     monkeypatch.setattr(routes, "attach_set", same)
     monkeypatch.setattr(routes, "interview_title", title)
     monkeypatch.setattr(routes.companies, "get", company)
+    monkeypatch.setattr(routes.set_cache, "get_set", found_set)
 
     return stored_invite
 
@@ -105,6 +110,8 @@ def test_a_visitor_sees_the_invitation_without_the_candidates_email(client, invi
     assert response.status_code == 200
     assert response.json()["title"] == "Backend"
     assert response.json()["email"] is None
+    # The set's 4 questions at 60 seconds each.
+    assert response.json()["total_minutes"] == 4
 
 
 def test_a_signed_in_visitor_sees_whose_invitation_it_is(client, invite_page):

@@ -2,6 +2,7 @@ import uuid
 from datetime import UTC, datetime
 
 import pytest
+from prepza_common.audit_actions import AuditAction, TargetKind
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
@@ -81,13 +82,16 @@ def state(result):
     return result["website_domain"], result["verified_domain"], result["verification_status"]
 
 
-def test_a_work_email_on_the_domain_sends_it_for_review_without_the_badge(client, company):
+def test_a_work_email_on_the_domain_sends_it_for_review_without_the_badge(client, company, audited):
     sign_in("ann", "ann@acme.com")
 
     result = client.put(URL, json={"website": "https://www.acme.com"}).json()
 
     assert state(result) == ("acme.com", None, "pending")
     assert company.verification_email == "ann@acme.com"
+    assert audited == [
+        (COMPANY_ID, "ann", AuditAction.VERIFICATION_REQUESTED, COMPANY_ID, TargetKind.COMPANY)
+    ]
 
 
 def test_a_personal_email_waits_until_a_work_one_opens_the_company(client, company):

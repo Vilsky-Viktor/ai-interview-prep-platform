@@ -6,12 +6,13 @@ from prepza_common.http import bearer
 from prepza_common.paging import Page
 
 from app.config.settings import settings
+from app.constants.superadmin import ACCOUNT_ID
 from app.service_auth import service_token
 
 
 async def copy_template(template_id: UUID, company_id: UUID) -> dict | None:
-    """The company's own test set made from a template: {"id", "title", "language"}, or None
-    when there's no such template."""
+    """The company's own test set made from a template: {"id", "title", "language", "level"},
+    or None when there's no such template."""
     response = await http.get_client().post(
         f"{settings.library_url}/internal/templates/{template_id}/copy",
         json={"company_id": str(company_id)},
@@ -115,6 +116,42 @@ async def get_question_context(question_id: UUID) -> dict | None:
     """The question's set and topic: {"set_id", ...}, or None when there's no such question."""
     response = await http.get_client().get(
         f"{settings.library_url}/internal/questions/{question_id}/context",
+        headers=bearer(service_token("library")),
+    )
+
+    if response.status_code == httpx.codes.NOT_FOUND:
+        return None
+
+    response.raise_for_status()
+
+    return response.json()
+
+
+async def account(user_id: str) -> dict | None:
+    """The account with that id ({"user_id", "email", "created_at"}); None when there's none, or
+    the text couldn't be an account's id."""
+    if not ACCOUNT_ID.fullmatch(user_id):
+        return None
+
+    response = await http.get_client().get(
+        f"{settings.library_url}/internal/accounts/{user_id}",
+        headers=bearer(service_token("library")),
+    )
+
+    if response.status_code == httpx.codes.NOT_FOUND:
+        return None
+
+    response.raise_for_status()
+
+    return response.json()
+
+
+async def account_by_email(email: str) -> dict | None:
+    """The account signed in with the address, as account() gives it; None when there's none.
+    The address goes in the body, which request logs don't record."""
+    response = await http.get_client().post(
+        f"{settings.library_url}/internal/accounts/lookup",
+        json={"email": email},
         headers=bearer(service_token("library")),
     )
 

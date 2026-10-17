@@ -3,6 +3,7 @@ import binascii
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, Response, status
+from prepza_common.audit_actions import AuditAction, TargetKind
 from prepza_common.auth import CurrentUser
 
 from app.constants.brand import PREPZA_COLORS, Theme
@@ -21,7 +22,7 @@ from app.schemas.logos import (
     PrepzaBrand,
 )
 from app.services.access import require_editor
-from app.storage import companies, interviews, invites
+from app.storage import audit, companies, interviews, invites
 
 # Company branding: the logo candidates see on their pages, emails and reports, and the colors
 # of their pages.
@@ -52,6 +53,9 @@ async def set_logo(company_id: UUID, body: LogoIn, user: CurrentUser) -> LogoOut
         )
 
     await companies.set_logo(company.id, *stored)
+    await audit.record(
+        company.id, user.uid, AuditAction.LOGO_CHANGED, company.id, target_kind=TargetKind.COMPANY
+    )
 
     return LogoOut(logo_url=logo_path(await companies.get(company.id)))
 
@@ -60,6 +64,9 @@ async def set_logo(company_id: UUID, body: LogoIn, user: CurrentUser) -> LogoOut
 async def remove_logo(company_id: UUID, user: CurrentUser) -> None:
     company, _ = await require_editor(user, company_id)
     await companies.set_logo(company.id, None, None)
+    await audit.record(
+        company.id, user.uid, AuditAction.LOGO_CHANGED, company.id, target_kind=TargetKind.COMPANY
+    )
 
 
 @router.get("/brand/prepza")
@@ -84,6 +91,9 @@ async def set_brand_colors(
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, problem)
 
     await companies.set_brand_colors(company.id, theme, colors)
+    await audit.record(
+        company.id, user.uid, AuditAction.BRAND_CHANGED, company.id, target_kind=TargetKind.COMPANY
+    )
 
     return BrandColorsOut(colors=body.colors)
 
@@ -94,6 +104,9 @@ async def set_brand_style(company_id: UUID, body: BrandStyle, user: CurrentUser)
     candidates' pages, the same in both themes."""
     company, _ = await require_editor(user, company_id)
     await companies.set_brand_style(company.id, body.font, body.radius, body.button_radius)
+    await audit.record(
+        company.id, user.uid, AuditAction.BRAND_CHANGED, company.id, target_kind=TargetKind.COMPANY
+    )
 
     return body
 

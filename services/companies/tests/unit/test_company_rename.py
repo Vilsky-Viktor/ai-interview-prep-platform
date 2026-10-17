@@ -2,6 +2,7 @@ import uuid
 from datetime import UTC, datetime
 
 import pytest
+from prepza_common.audit_actions import AuditAction, TargetKind
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
@@ -46,19 +47,23 @@ def sign_in(uid):
     )
 
 
-def test_a_member_renames_the_company(client, renamed):
+def test_a_member_renames_the_company(client, renamed, audited):
     sign_in("bob")
 
     assert client.patch(URL, json={"title": "  Acme Labs "}).status_code == 204
     assert renamed == ["Acme Labs"]
+    assert audited == [
+        (COMPANY_ID, "bob", AuditAction.COMPANY_RENAMED, COMPANY_ID, TargetKind.COMPANY)
+    ]
 
 
-def test_a_name_another_company_has_is_refused(client, renamed):
+def test_a_name_another_company_has_is_refused(client, renamed, audited):
     sign_in("bob")
     response = client.patch(URL, json={"title": "Taken Inc"})
 
     assert response.status_code == 409
     assert response.json()["detail"] == "A company with this name already exists."
+    assert audited == []
 
 
 def test_others_cant_rename_it(client, renamed):

@@ -2,7 +2,7 @@ import uuid
 
 from prepza_common import outbox, processed_events
 from prepza_common.notifications import NOTIFICATION_REQUESTED
-from sqlalchemy import delete, func, select, update
+from sqlalchemy import case, delete, func, select, update
 
 from app.constants.events import INTERVIEW_READY
 from app.models.events import ProcessedEvent
@@ -30,11 +30,22 @@ async def get_for_generation(generation_id: uuid.UUID) -> Interview | None:
 
 
 async def set_generated(
-    generation_id: uuid.UUID, set_id: uuid.UUID, title: str, notice: dict, event_id: str
+    generation_id: uuid.UUID,
+    set_id: uuid.UUID,
+    title: str,
+    seconds: int | None,
+    notice: dict,
+    event_id: str,
 ) -> None:
     """Stores the set and title a finished generation produced for its interview, and the
     company's notification and the interview.ready event (ats invites the candidates waiting
-    for it) with them, once per event."""
+    for it) with them, once per event. The first time it's ready, the interview takes `seconds`
+    a question (its level's; None keeps its own); after that, they're the company's."""
+    kept = Interview.question_seconds
+    question_seconds = (
+        case((Interview.ready_at.is_(None), seconds), else_=kept) if seconds else kept
+    )
+
     async with Session() as session:
         new = await processed_events.claim(session, ProcessedEvent, event_id)
         row = await session.execute(
@@ -43,6 +54,7 @@ async def set_generated(
             .values(
                 set_id=set_id,
                 title=title,
+                question_seconds=question_seconds,
                 generation_failed=False,
                 ready_at=func.coalesce(Interview.ready_at, func.now()),
             )

@@ -1,4 +1,5 @@
 from fastapi import HTTPException, status
+from prepza_common.multi_answer import multi_share
 from prepza_common.names import clean_name
 from prepza_common.user import User
 
@@ -6,6 +7,7 @@ from app.constants.invites import InviteStatus
 from app.helpers.candidates import candidate_seconds
 from app.helpers.interviews import attach_set, session_topics
 from app.integrations import library, rounds
+from app.integrations.redis import get_redis
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
 from app.schemas.invites import InviteStartOut, SessionSummary
@@ -36,7 +38,7 @@ async def start_sessions(
             "user_id": user.uid,
             "candidate_invite_id": str(invite.id),
             "question_seconds": candidate_seconds(interview.question_seconds, invite.extra_time),
-            "topics": session_topics(interview, content),
+            "topics": session_topics(interview, content, await multi_share(get_redis())),
         }
     )
 

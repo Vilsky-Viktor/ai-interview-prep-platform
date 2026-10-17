@@ -2,22 +2,24 @@ from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, Request, status
 from prepza_common.analytics import track
+from prepza_common.audit_actions import AuditAction, TargetKind
 from prepza_common.auth import CurrentUser
 from prepza_common.constants import REFERRAL_COOKIE
 from prepza_common.human_check import require_human
+from prepza_common.limits import at_most
 from prepza_common.paging import PageParams
 
 from app.config.settings import settings
 from app.constants.invites import (
     COMPANY_NAME_TAKEN,
     EMAIL_NOT_VERIFIED,
-    MAX_OWNED_COMPANIES,
     TOO_MANY_COMPANIES,
 )
 from app.constants.roles import EDITORS, Role
 from app.helpers.brand import color_sets, style_of
 from app.helpers.logos import logo_path
 from app.integrations import billing
+from app.integrations.redis import get_redis
 from app.models.companies import Company
 from app.schemas.companies import (
     CompanyBalanceOut,
@@ -29,11 +31,11 @@ from app.schemas.companies import (
     ReferralRewardOut,
 )
 from app.schemas.logos import BrandColorSets, BrandStyle
-from app.service_auth import Via
+from app.service_auth import REQUEST_COMPANY, Via
 from app.services import company_deletion, credits
 from app.services.access import can_edit, is_owner, require_company, require_editor
 from app.services.verification import verify_by_email
-from app.storage import companies, interviews
+from app.storage import audit, companies, interviews
 
 router = APIRouter(prefix="/companies", tags=["companies"])
 
@@ -48,6 +50,7 @@ def company_out(company: Company, user_id: str, interview_count: int = 0) -> Com
         can_edit=can_edit(member),
         can_delete=is_owner(member),
         can_manage_members=is_owner(member),
+        can_see_actions=is_owner(member),
         interview_count=interview_count,
         logo_url=logo_path(company),
         brand_colors=company.brand_colors,
@@ -79,10 +82,18 @@ async def create_company(
     if owned == 0 and via is None:
         await require_human(request, settings.turnstile_secret_key)
 
-    if owned >= MAX_OWNED_COMPANIES:
+    try:
+        await at_most(
+            get_redis(),
+            "MAX_OWNED_COMPANIES",
+            owned,
+            status.HTTP_429_TOO_MANY_REQUESTS,
+            TOO_MANY_COMPANIES,
+            user_id=user.uid,
+        )
+    except HTTPException:
         await track("limit_hit", user_id=user.uid, which="companies_owned")
-
-        raise HTTPException(status.HTTP_429_TOO_MANY_REQUESTS, TOO_MANY_COMPANIES)
+        raise
 
     company = await companies.create(body.name, user.uid, user.email)
 
@@ -112,6 +123,7 @@ async def create_company(
         can_edit=True,
         can_delete=True,
         can_manage_members=True,
+        can_see_actions=True,
         interview_count=0,
         created_at=company.created_at,
     )
@@ -119,7 +131,10 @@ async def create_company(
 
 @router.get("")
 async def list_companies(user: CurrentUser, page: PageParams) -> list[CompanyOut]:
-    rows = await companies.list_for_user(user.uid, page.offset, page.limit)
+    """The user's companies; for an AI agent signed in with an API key, the key's only."""
+    rows = await companies.list_for_user(
+        user.uid, page.offset, page.limit, only=REQUEST_COMPANY.get()
+    )
     totals = await interviews.counts([item.id for item in rows])
 
     return [company_out(item, user.uid, totals.get(item.id, 0)) for item in rows]
@@ -129,7 +144,9 @@ async def list_companies(user: CurrentUser, page: PageParams) -> list[CompanyOut
 async def list_credits(user: CurrentUser, page: PageParams) -> list[CompanyBalanceOut]:
     """The companies the user may top up, as an owner or admin, with their credits. Declared
     before /{company_id}, which would otherwise take "credits" as an id."""
-    rows = await companies.list_for_user(user.uid, page.offset, page.limit, EDITORS)
+    rows = await companies.list_for_user(
+        user.uid, page.offset, page.limit, EDITORS, REQUEST_COMPANY.get()
+    )
     credits = await billing.companies_credits([item.id for item in rows]) if rows else {}
 
     return [CompanyBalanceOut(id=item.id, name=item.name, **credits[str(item.id)]) for item in rows]
@@ -200,5 +217,17 @@ async def rename_company(company_id: UUID, body: CompanyRename, user: CurrentUse
     if not name:
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, "Name the company")
 
-    if name != company.name and not await companies.rename(company.id, name):
+    if name == company.name:
+        return
+
+    if not await companies.rename(company.id, name):
         raise HTTPException(status.HTTP_409_CONFLICT, COMPANY_NAME_TAKEN)
+
+    await audit.record(
+        company.id,
+        user.uid,
+        AuditAction.COMPANY_RENAMED,
+        company.id,
+        target_kind=TargetKind.COMPANY,
+        target_label=name,
+    )

@@ -2,9 +2,9 @@ import uuid
 from datetime import UTC, datetime
 
 import pytest
+from prepza_common.audit_actions import AuditAction, TargetKind
 from prepza_common.service_auth import issue_token
 
-from app.constants.audit import AuditAction
 from app.constants.invites import InviteStatus
 from app.integrations import rounds
 from app.main import app
@@ -33,11 +33,18 @@ SECTION = {
             "number": 1,
             "text": "What does len([]) return?",
             "options": ["0", "None"],
+            "multi": False,
             "correct_option_index": 0,
+            "correct_indexes": [0],
             "answer": {
                 "answer_id": str(uuid.uuid4()),
                 "option_index": 0,
+                "picks": [0],
+                "timed_out": False,
+                "right_picks": 1,
+                "wrong_picks": 0,
                 "correct": True,
+                "score": 100,
                 "seconds": 12,
                 "fast": False,
             },
@@ -154,7 +161,9 @@ def test_the_invite_link_is_there_to_copy_until_the_candidate_finishes(
 
 def test_viewing_a_finished_candidates_results_is_recorded(client, monkeypatch, audited, tracked):
     assert open_scorecard(client, monkeypatch).status_code == 200
-    assert audited == [(COMPANY_ID, "bob", AuditAction.RESULTS_VIEWED, INVITE_ID)]
+    assert audited == [
+        (COMPANY_ID, "bob", AuditAction.RESULTS_VIEWED, INVITE_ID, TargetKind.CANDIDATE)
+    ]
     assert tracked == ["results_viewed"]
 
 
@@ -165,7 +174,9 @@ def test_a_read_through_the_assistant_or_an_ai_app_is_recorded_as_such_and_not_i
     token = issue_token(via, "companies", SECRET)
 
     assert open_scorecard(client, monkeypatch, {"X-Assistant": token}).status_code == 200
-    assert audited == [(COMPANY_ID, "bob", AuditAction.RESULTS_VIEWED, INVITE_ID, via)]
+    assert audited == [
+        (COMPANY_ID, "bob", AuditAction.RESULTS_VIEWED, INVITE_ID, TargetKind.CANDIDATE, via)
+    ]
     assert tracked == []
 
 
@@ -182,7 +193,9 @@ def test_a_read_through_the_assistant_or_an_ai_app_is_recorded_as_such_and_not_i
 )
 def test_a_forged_assistant_header_is_ignored(client, monkeypatch, audited, tracked, token):
     assert open_scorecard(client, monkeypatch, {"X-Assistant": token}).status_code == 200
-    assert audited == [(COMPANY_ID, "bob", AuditAction.RESULTS_VIEWED, INVITE_ID)]
+    assert audited == [
+        (COMPANY_ID, "bob", AuditAction.RESULTS_VIEWED, INVITE_ID, TargetKind.CANDIDATE)
+    ]
     assert tracked == ["results_viewed"]
 
 

@@ -9,13 +9,14 @@ from prepza_common.user import User
 
 from app.constants.invites import InviteStatus
 from app.main import app
+from app.models.companies import Company, Member
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
 from app.routers import invites as invite_routes
 from app.routers import links as link_routes
 from app.routers import pause as pause_routes
 from app.schemas.invites import InviteStartOut
-from app.storage import interviews, invites, link_invites
+from app.storage import companies, interviews, invites, link_invites
 
 INTERVIEW = Interview(
     id=uuid.uuid4(), company_id=uuid.uuid4(), set_id=uuid.uuid4(), question_seconds=60
@@ -123,10 +124,31 @@ def test_paused_no_candidate_starts_by_link_but_one_in_the_interview_continues(
         f"/interviews/{uuid.uuid4()}/questions/{uuid.uuid4()}/regenerate",
     ],
 )
-def test_paused_previews_generations_and_regenerations_are_refused(client, path):
-    body = {"text": "Backend developer", "selected": [0]}
+def test_paused_previews_generations_and_regenerations_are_refused(
+    client, monkeypatch, limit_hits, path
+):
+    """The signed-in candidate owns the interview's company here: the routes that check the
+    pause after the interview (to record whose refusal it was) get that far."""
+    company = Company(id=INTERVIEW.company_id, name="Acme", created_at=datetime.now(UTC))
+    company.members = [Member(company_id=company.id, user_id="cand", role="owner")]
+    generated = Interview(
+        id=INTERVIEW.id, company_id=company.id, generation_id=uuid.uuid4(), set_id=uuid.uuid4()
+    )
 
-    assert client.post(path, json=body).status_code == 503
+    async def get_interview(_interview_id):
+        return generated
+
+    async def get_company(_company_id):
+        return company
+
+    monkeypatch.setattr(interviews, "get", get_interview)
+    monkeypatch.setattr(companies, "get", get_company)
+    body = {"text": "Backend developer", "selected": [0]}
+    refused = client.post(path, json=body)
+
+    assert refused.status_code == 503
+    assert refused.json()["detail"] == PAUSED
+    assert [(hit["limit"], hit["user_id"]) for hit in limit_hits] == [("PAUSED", "cand")]
 
 
 def test_anyone_reads_the_switch_and_only_a_superadmin_turns_it(client, monkeypatch):

@@ -25,18 +25,18 @@ async def ready_at(interview_id, when):
 def test_an_interview_is_ready_when_it_gets_its_questions_once(run):
     async def scenario():
         found = await company()
-        generated = await interviews.create(found.id, uuid.uuid4(), "en")
+        generated = await interviews.create(found.id, uuid.uuid4(), "en", 60)
         before = (await interviews.get(generated.id)).ready_at
         await interview_generations.set_generated(
-            generated.generation_id, uuid.uuid4(), "Backend", {}, str(uuid.uuid4())
+            generated.generation_id, uuid.uuid4(), "Backend", None, {}, str(uuid.uuid4())
         )
         first = (await interviews.get(generated.id)).ready_at
         # Regenerated questions don't move it.
         await interview_generations.set_generated(
-            generated.generation_id, uuid.uuid4(), "Backend", {}, str(uuid.uuid4())
+            generated.generation_id, uuid.uuid4(), "Backend", None, {}, str(uuid.uuid4())
         )
         second = (await interviews.get(generated.id)).ready_at
-        template = await interviews.create_from_template(found.id, uuid.uuid4(), "Design", "en")
+        template = await interviews.create_from_template(found.id, uuid.uuid4(), "Design", "en", 60)
 
         return before, first, second, (await interviews.get(template.id)).ready_at
 
@@ -52,11 +52,11 @@ def test_waiting_interviews_are_ready_ones_nobody_was_invited_to_and_ones_still_
 
     async def scenario():
         found = await company()
-        idle = await interviews.create_from_template(found.id, uuid.uuid4(), "Idle", "en")
-        invited = await interviews.create_from_template(found.id, uuid.uuid4(), "Invited", "en")
-        recent = await interviews.create_from_template(found.id, uuid.uuid4(), "Recent", "en")
-        hired = await interviews.create_from_template(found.id, uuid.uuid4(), "Hired", "en")
-        generating = await interviews.create(found.id, uuid.uuid4(), "en")
+        idle = await interviews.create_from_template(found.id, uuid.uuid4(), "Idle", "en", 60)
+        invited = await interviews.create_from_template(found.id, uuid.uuid4(), "Invited", "en", 60)
+        recent = await interviews.create_from_template(found.id, uuid.uuid4(), "Recent", "en", 60)
+        hired = await interviews.create_from_template(found.id, uuid.uuid4(), "Hired", "en", 60)
+        generating = await interviews.create(found.id, uuid.uuid4(), "en", 60)
         await invites.upsert(invited.id, "gus@example.com", "Invited", "Acme", "en")
 
         for interview in (idle, invited, hired):

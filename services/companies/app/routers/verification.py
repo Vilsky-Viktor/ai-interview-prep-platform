@@ -1,6 +1,7 @@
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
+from prepza_common.audit_actions import AuditAction, TargetKind
 from prepza_common.auth import CurrentUser
 
 from app.constants.verification import FREE_DOMAIN, NOT_A_WEBSITE
@@ -8,7 +9,7 @@ from app.helpers.verification import is_free_domain, website_domain
 from app.schemas.verification import VerificationOut, WebsiteIn
 from app.services.access import require_editor
 from app.services.verification import save_website
-from app.storage import companies, verification
+from app.storage import audit, companies, verification
 
 # Verified companies: an owner or admin gives the website and proves its domain with a verified
 # email on it (free mail services never count); a superadmin then reviews the company, and only
@@ -32,6 +33,14 @@ async def set_website(company_id: UUID, body: WebsiteIn, user: CurrentUser) -> V
             raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, FREE_DOMAIN)
 
         await save_website(company, user, domain)
+        await audit.record(
+            company.id,
+            user.uid,
+            AuditAction.VERIFICATION_REQUESTED,
+            company.id,
+            target_kind=TargetKind.COMPANY,
+            target_label=domain,
+        )
 
     saved = await companies.get(company.id)
 

@@ -2,11 +2,11 @@ import uuid
 from datetime import UTC, datetime
 
 import pytest
+from prepza_common.audit_actions import AuditAction, TargetKind
 from prepza_common.auth import current_user
 from prepza_common.service_auth import issue_token
 from prepza_common.user import User
 
-from app.constants.audit import AuditAction
 from app.constants.invites import InviteStatus
 from app.helpers.candidates import candidate_seconds
 from app.main import app
@@ -74,7 +74,9 @@ def test_a_company_sets_extra_time_before_the_candidate_starts(client, candidate
 
     assert client.put(url(invite), json={"extra_time": 50}).status_code == 204
     assert saved == {"extra_time": 50}
-    assert audited == [(COMPANY_ID, "bob", AuditAction.EXTRA_TIME_SET, invite.id)]
+    assert audited == [
+        (COMPANY_ID, "bob", AuditAction.EXTRA_TIME_SET, invite.id, TargetKind.CANDIDATE)
+    ]
     # Only the offered amounts.
     assert client.put(url(invite), json={"extra_time": 30}).status_code == 422
 
@@ -91,4 +93,6 @@ def test_extra_time_given_through_the_assistant_or_an_ai_app_is_audited_as_such(
     header = {"X-Assistant": issue_token(via, "companies", SECRET)}
 
     assert client.put(url(invite), json={"extra_time": 50}, headers=header).status_code == 204
-    assert audited == [(COMPANY_ID, "bob", AuditAction.EXTRA_TIME_SET, invite.id, via)]
+    assert audited == [
+        (COMPANY_ID, "bob", AuditAction.EXTRA_TIME_SET, invite.id, TargetKind.CANDIDATE, via)
+    ]

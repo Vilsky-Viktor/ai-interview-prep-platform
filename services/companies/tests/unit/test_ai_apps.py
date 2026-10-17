@@ -2,16 +2,16 @@ import uuid
 from datetime import UTC, datetime
 
 import pytest
+from prepza_common.audit_actions import AuditAction, TargetKind
 from prepza_common.auth import current_user
 from prepza_common.service_auth import issue_token
 from prepza_common.user import User
 
 from app.constants.ai_apps import AI_APPS_CHANGED_BY_APP, AI_APPS_OFF
-from app.constants.audit import AuditAction
 from app.main import app
 from app.models.companies import Company, Member
 from app.routers import companies as companies_router
-from app.storage import audit, companies, interviews
+from app.storage import companies, interviews
 
 SECRET = "test-secret-that-is-at-least-32-bytes"
 COMPANY_ID = uuid.uuid4()
@@ -33,16 +33,12 @@ def company(monkeypatch):
             company_id=COMPANY_ID, user_id="vic", invited_email="vic@example.com", role="viewer"
         ),
     ]
-    recorded = []
 
     async def get(_id):
         return acme
 
     async def set_ai_apps(company_id, allowed):
         acme.ai_apps_off_at = None if allowed else datetime.now(UTC)
-
-    async def record(company_id, user_id, action, target_id=None, via=None):
-        recorded.append((user_id, action, via))
 
     async def counts(_ids):
         return {}
@@ -52,12 +48,11 @@ def company(monkeypatch):
 
     monkeypatch.setattr(companies, "get", get)
     monkeypatch.setattr(companies, "set_ai_apps", set_ai_apps)
-    monkeypatch.setattr(audit, "record", record)
     monkeypatch.setattr(interviews, "counts", counts)
     monkeypatch.setattr(companies_router, "verify_by_email", verify_by_email)
     sign_in("bob")
 
-    yield acme, recorded
+    yield acme
 
     app.dependency_overrides.clear()
 
@@ -68,13 +63,14 @@ def sign_in(user_id):
     )
 
 
-def test_an_admin_turns_ai_apps_off_and_they_read_nothing_more(client, company):
-    _, recorded = company
+def test_an_admin_turns_ai_apps_off_and_they_read_nothing_more(client, company, audited):
     path = f"/companies/{COMPANY_ID}"
 
     assert client.get(path, headers=via("mcp")).json()["ai_apps_allowed"] is True
     assert client.put(f"{path}/ai-apps", json={"allowed": False}).status_code == 204
-    assert recorded == [("bob", AuditAction.AI_APPS_CHANGED, None)]
+    assert audited == [
+        (COMPANY_ID, "bob", AuditAction.AI_APPS_CHANGED, COMPANY_ID, TargetKind.COMPANY)
+    ]
 
     refused = client.get(path, headers=via("mcp"))
 

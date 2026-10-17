@@ -7,18 +7,19 @@ from fastapi import HTTPException
 from prepza_common.auth import current_user, optional_user
 from prepza_common.user import User
 
-from app.constants.invites import (
-    EMAIL_NOT_VERIFIED,
-    LINK_STARTS_PER_HOUR,
-    LINK_STARTS_PER_IP_HOUR,
-    InviteStatus,
-)
+from app.constants.invites import EMAIL_NOT_VERIFIED, InviteStatus
 from app.integrations import billing
 from app.main import app
 from app.models.interviews import Interview
 from app.routers import links
 from app.schemas.invites import InviteStartOut
 from app.storage import companies, interviews, invites, link_invites
+from tests.unit.fake_redis import FakeRedis
+
+# The limits' defaults: new candidates one link takes, and one address starts, an hour.
+LINK_STARTS_PER_HOUR = 30
+LINK_STARTS_PER_IP_HOUR = 10
+TOO_MANY_REQUESTS = "Too many requests. Try again later."
 
 INTERVIEW = Interview(
     id=uuid.uuid4(),
@@ -26,15 +27,25 @@ INTERVIEW = Interview(
     generation_id=None,
     set_id=uuid.uuid4(),
     question_seconds=60,
+    topic_limits={},
     link_token="abc",
 )
 
 
 @pytest.fixture
 def linked(monkeypatch):
-    """The link "abc" opens INTERVIEW; returns what was held and started, and a way to set the
-    candidate's current status or make billing refuse."""
-    state = {"status": None, "broke": False, "held": [], "started": [], "counts": {}}
+    """The link "abc" opens INTERVIEW; returns what was held and started, a way to set the
+    candidate's current status or make billing refuse, and the rate counters and edited limits
+    ("counts", "limits": Redis's)."""
+    redis = FakeRedis()
+    state = {
+        "status": None,
+        "broke": False,
+        "held": [],
+        "started": [],
+        "counts": redis.counts,
+        "limits": redis.limits,
+    }
 
     async def get_by_link(token):
         return INTERVIEW if token == "abc" else None
@@ -65,12 +76,6 @@ def linked(monkeypatch):
     monkeypatch.setattr(link_invites, "for_link", for_link)
     monkeypatch.setattr(billing, "hold_candidate", hold)
 
-    async def hit(redis, key, limit, window):
-        state["counts"][key] = state["counts"].get(key, 0) + 1
-
-        if state["counts"][key] > limit:
-            raise HTTPException(429, "Too many requests. Try again later.")
-
     async def details(interview):
         return {"title": "Backend", "company": "Acme", "language": "en", "logo_path": None}
 
@@ -78,7 +83,7 @@ def linked(monkeypatch):
         pass
 
     monkeypatch.setattr(links, "start_sessions", start)
-    monkeypatch.setattr(links, "hit", hit)
+    monkeypatch.setattr(links, "get_redis", lambda: redis)
     monkeypatch.setattr(links, "joined_details", details)
     monkeypatch.setattr(links.outbox_service, "flush_quietly", no_flush)
     app.dependency_overrides[current_user] = lambda: User(
@@ -159,8 +164,12 @@ def test_the_link_says_when_the_signed_in_person_already_finished(client, linked
     async def title(_interview):
         return "Backend"
 
+    async def found_set(_set_id):
+        return {"topics": [{"id": str(uuid.uuid4()), "title": "Python", "question_count": 3}]}
+
     monkeypatch.setattr(companies, "get", no_company)
     monkeypatch.setattr(links, "interview_title", title)
+    monkeypatch.setattr(links.set_cache, "get_set", found_set)
     linked["status"] = "finished"
     app.dependency_overrides[optional_user] = lambda: User(
         uid="cand", email="cand@example.com", email_verified=True
@@ -172,21 +181,47 @@ def test_the_link_says_when_the_signed_in_person_already_finished(client, linked
 
     assert signed_in["status"] == "finished"
     assert signed_out["status"] is None
+    # The set's 3 questions at 60 seconds each.
+    assert signed_out["total_minutes"] == 3
 
 
-def test_a_link_takes_a_limited_number_of_new_candidates_an_hour(client, linked):
+def test_a_link_takes_a_limited_number_of_new_candidates_an_hour(client, linked, limit_hits):
     linked["counts"][f"rate:link-starts:{INTERVIEW.id}"] = LINK_STARTS_PER_HOUR
+    refused = client.post("/links/abc/start")
 
-    assert client.post("/links/abc/start").status_code == 429
+    assert refused.status_code == 429
+    assert refused.json() == {"detail": TOO_MANY_REQUESTS}
     assert linked["held"] == []
+    assert [(hit["limit"], hit["company_id"], hit["user_id"]) for hit in limit_hits] == [
+        ("LINK_STARTS_PER_HOUR", str(INTERVIEW.company_id), "cand")
+    ]
+
+
+def test_a_links_hourly_limit_is_as_edited(client, linked):
+    linked["limits"]["LINK_STARTS_PER_HOUR"] = "2"
+    starts = [client.post("/links/abc/start").status_code for _ in range(3)]
+
+    assert starts == [200, 200, 429]
+    assert len(linked["held"]) == 2
 
 
 def test_one_address_starts_a_limited_number_of_new_candidates_an_hour(client, linked):
     for _ in range(LINK_STARTS_PER_IP_HOUR):
         assert client.post("/links/abc/start").status_code == 200
 
-    assert client.post("/links/abc/start").status_code == 429
+    refused = client.post("/links/abc/start")
+
+    assert refused.status_code == 429
+    assert refused.json() == {"detail": TOO_MANY_REQUESTS}
     assert len(linked["held"]) == LINK_STARTS_PER_IP_HOUR
+
+
+def test_one_addresss_hourly_limit_is_as_edited(client, linked, limit_hits):
+    linked["limits"]["LINK_STARTS_PER_IP_HOUR"] = "1"
+    starts = [client.post("/links/abc/start").status_code for _ in range(2)]
+
+    assert starts == [200, 429]
+    assert [hit["limit"] for hit in limit_hits] == ["LINK_STARTS_PER_IP_HOUR"]
 
 
 def test_a_candidate_already_invited_is_never_held_back_by_the_limits(client, linked):

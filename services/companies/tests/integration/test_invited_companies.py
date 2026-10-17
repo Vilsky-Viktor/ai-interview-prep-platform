@@ -9,7 +9,7 @@ def test_the_companies_that_invited_an_address_are_found_once_whatever_its_case(
 
     async def scenario():
         first, second, other = await interview(), await interview(), await interview()
-        again = await interviews.create(first.company_id, uuid.uuid4(), "en")
+        again = await interviews.create(first.company_id, uuid.uuid4(), "en", 60)
 
         for found in (first, again, second):
             await invites.upsert(found.id, address.upper(), "Backend", "Acme", "en")

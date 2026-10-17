@@ -50,7 +50,7 @@ def two_companies(monkeypatch):
     owned = company(OWNED_ID, "My company", "owner")
     joined = company(JOINED_ID, "Arcolabs", "admin")
 
-    async def fake_list(user_id, offset, limit, roles=None):
+    async def fake_list(user_id, offset, limit, roles=None, only=None):
         return [owned, joined]
 
     async def fake_get(company_id):
@@ -134,7 +134,7 @@ def test_lists_the_users_companies_with_their_credits(client, monkeypatch):
 
     asked = []
 
-    async def mine(user_id, offset, limit, roles):
+    async def mine(user_id, offset, limit, roles, only=None):
         asked.append(roles)
 
         return [company]

@@ -1,10 +1,10 @@
 from fastapi import HTTPException, status
 from prepza_common.analytics import track
+from prepza_common.audit_actions import AuditAction, TargetKind
 from prepza_common.names import clean_name
 from prepza_common.rate_limit import hit_emails
 from prepza_common.user import User
 
-from app.config.settings import settings
 from app.constants.invites import (
     ALREADY_FINISHED,
     COMPANY_SUSPENDED,
@@ -21,7 +21,7 @@ from app.models.companies import Company
 from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
 from app.services.candidate_billing import hold_again
-from app.storage import invites
+from app.storage import audit, invites
 
 
 async def invite(
@@ -33,11 +33,13 @@ async def invite(
     return_url: str | None = None,
     sign_in: bool = True,
     theme: str | None = None,
+    via: str | None = None,
 ) -> CandidateInvite:
     """Invites one candidate, or sends their invite again, with the invite email queued; `name`
     (untrusted: cleaned here) fills their name if it isn't known yet. Raises 429 over the
     member's email limits and billing's 402 when the company is out of credits, and 409 while a
-    superadmin has the company suspended (an ATS keeps its candidates waiting then)."""
+    superadmin has the company suspended (an ATS keeps its candidates waiting then). The action
+    log records it as `user`'s, through `via` when an ATS or the API sent it."""
     if company.suspended_at is not None:
         raise HTTPException(status.HTTP_409_CONFLICT, COMPANY_SUSPENDED)
 
@@ -58,14 +60,7 @@ async def invite(
         if current is None or current in NOT_STARTED:
             await billing.hold_candidate(company.id, key)
 
-        await hit_emails(
-            get_redis(),
-            user.uid,
-            f"{interview.id}:{email}",
-            settings.email_hourly_limit,
-            settings.email_daily_limit,
-            settings.email_recipient_daily_limit,
-        )
+        await hit_emails(get_redis(), user.uid, f"{interview.id}:{email}", company.id)
         title = await interview_title(interview)
 
         # A ready interview has its title; without one, no email names it wrongly.
@@ -101,6 +96,11 @@ async def invite(
 
     if current is None:
         await track("candidate_invited", user_id=user.uid, company_id=company.id)
+
+    action = AuditAction.CANDIDATE_INVITED if current is None else AuditAction.INVITE_RESENT
+    await audit.record(
+        company.id, user.uid, action, invite.id, via=via, target_kind=TargetKind.CANDIDATE
+    )
 
     return invite
 

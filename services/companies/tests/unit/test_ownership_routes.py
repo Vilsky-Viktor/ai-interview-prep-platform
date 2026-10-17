@@ -1,7 +1,7 @@
 import pytest
+from prepza_common.audit_actions import AuditAction, TargetKind
 
-from app.constants.audit import AuditAction
-from app.constants.roles import ONLY_ADMINS_OWN, OWNS_TOO_MANY
+from app.constants.roles import ONLY_ADMINS_OWN
 from app.routers import members as members_router
 from app.storage import companies, members
 from tests.unit import test_team_members
@@ -42,7 +42,9 @@ def test_the_owner_makes_a_joined_admin_the_owner(client, team, transfers, audit
 
     assert client.post(owner_url(bob)).status_code == 204
     assert made == [("ann", "bob")]
-    assert audited == [(COMPANY_ID, "ann", AuditAction.OWNERSHIP_TRANSFERRED, bob.id)]
+    assert audited == [
+        (COMPANY_ID, "ann", AuditAction.OWNERSHIP_TRANSFERRED, bob.id, TargetKind.MEMBER)
+    ]
 
 
 def test_only_a_joined_admin_owning_fewer_than_three_can_become_owner(
@@ -62,7 +64,7 @@ def test_only_a_joined_admin_owning_fewer_than_three_can_become_owner(
 
     assert [r.status_code for r in (pending, viewer, full)] == [409, 409, 409]
     assert pending.json()["detail"] == ONLY_ADMINS_OWN
-    assert full.json()["detail"] == OWNS_TOO_MANY
+    assert full.json()["detail"] == "They already own as many companies as one person may: 3."
     assert made == [] and audited == []
 
 

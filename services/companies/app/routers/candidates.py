@@ -7,7 +7,6 @@ from prepza_common.analytics import track
 from prepza_common.auth import CurrentUser
 from prepza_common.paging import PageParams
 
-from app.constants.audit import AuditAction
 from app.constants.invites import (
     EXTRA_TIME_OPTIONS,
     MAX_SEARCH_LENGTH,
@@ -39,7 +38,7 @@ async def invite_candidate(
     interview_id: UUID, body: CandidateIn, user: CurrentUser
 ) -> CandidateOut:
     interview, company, _ = await interview_for(user, interview_id, editor=True)
-    interview = await ready_for_invites(interview)
+    interview = await ready_for_invites(interview, user.uid)
 
     invite = await candidate_invites.invite(interview, company, user, str(body.email), body.name)
     await outbox_service.flush_quietly()
@@ -93,8 +92,8 @@ async def rename_candidate(
 ) -> None:
     """Owners and admins correct the name a candidate's sign-in gave, a nickname for example; a
     blank name makes it not known. The sign-in fills only a name not known, so this one stays."""
-    _, invite, _, _ = await candidate_for(user, interview_id, invite_id, editor=True)
-    await candidate_changes.rename(invite, body.name)
+    interview, invite, _, _ = await candidate_for(user, interview_id, invite_id, editor=True)
+    await candidate_changes.rename(interview, invite, body.name, user.uid)
 
 
 @router.get("/{interview_id}/candidates/{invite_id}")
@@ -119,11 +118,11 @@ async def candidate_scorecard(
     # (not through the assistant or an AI app). The audit row is written whatever happens to the
     # funnel event, which never raises.
     if invite.status == InviteStatus.FINISHED and via is not None:
-        await audit.record(company.id, user.uid, AuditAction.RESULTS_VIEWED, invite.id, via=via)
+        await audit.record_view(company.id, user.uid, invite.id, via)
     elif invite.status == InviteStatus.FINISHED:
         await asyncio.gather(
             track("results_viewed", user_id=user.uid, company_id=company.id),
-            audit.record(company.id, user.uid, AuditAction.RESULTS_VIEWED, invite.id),
+            audit.record_view(company.id, user.uid, invite.id),
         )
 
     return ScorecardOut(

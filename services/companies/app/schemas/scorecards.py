@@ -8,9 +8,19 @@ from pydantic import BaseModel
 
 class ScorecardAnswer(BaseModel):
     answer_id: UUID
-    # None when a timed question ran out first.
+    # The option picked on a single-answer question; None for a multi-answer one, and when a
+    # timed question ran out first.
     option_index: int | None
+    # Every option picked (several on a multi-answer question); empty when the time ran out.
+    picks: list[int] = []
+    timed_out: bool = False
+    # Of the options picked, how many are right and how many wrong.
+    right_picks: int | None = None
+    wrong_picks: int | None = None
+    # All points.
     correct: bool | None
+    # Points out of 100: a share for a multi-answer answer partly right.
+    score: int | None = None
     seconds: int | None = None
     # Answered faster than rounds' FAST_ANSWER_SECONDS.
     fast: bool = False
@@ -21,8 +31,12 @@ class ScorecardQuestion(BaseModel):
     number: int
     text: str
     options: list[str]
-    # Only once the question is answered.
+    # Multi-answer ("select all that apply").
+    multi: bool = False
+    # Only once the question is answered: the right option of a single-answer question, and
+    # every right option.
     correct_option_index: int | None
+    correct_indexes: list[int] | None = None
     answer: ScorecardAnswer | None
     # Page leaves and copy attempts while this question was open.
     tab_leaves: int = 0

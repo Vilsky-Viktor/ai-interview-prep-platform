@@ -3,19 +3,21 @@ from uuid import UUID, uuid4
 
 from fastapi import APIRouter, HTTPException, Query, status
 from prepza_common.analytics import track
+from prepza_common.audit_actions import AuditAction
 from prepza_common.auth import CurrentUser
-from prepza_common.constants import HOUR_SECONDS
+from prepza_common.limits import question_seconds
+from prepza_common.multi_answer import multi_share
 from prepza_common.paging import PageParams
 from prepza_common.pause import refuse_if_paused
 from prepza_common.rate_limit import hit
 
-from app.constants.audit import AuditAction
-from app.constants.interviews import PREVIEWS_PER_USER_HOUR
 from app.constants.invites import INTERVIEW_NOT_READY, MAX_SEARCH_LENGTH
 from app.helpers.interviews import (
     attach_set,
     attach_set_if_reachable,
+    interview_minutes,
     interview_out,
+    interviews_page,
     session_topics,
     topics_out,
 )
@@ -44,7 +46,7 @@ router = APIRouter(prefix="/interviews", tags=["interviews"])
 async def create_interview(
     body: InterviewCreate, company_id: UUID, user: CurrentUser
 ) -> InterviewOut:
-    await refuse_if_paused(get_redis())
+    await refuse_if_paused(get_redis(), "interview_generation", company_id, user.uid)
     company, _ = await require_editor(user, company_id)
 
     return await interview_creation.create(
@@ -63,9 +65,11 @@ async def create_from_template(
     if copy is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Template not found")
 
+    seconds = await question_seconds(get_redis(), copy["level"])
     interview = await interviews.create_from_template(
-        company.id, copy["id"], copy["title"], copy["language"]
+        company.id, copy["id"], copy["title"], copy["language"], seconds
     )
+    await audit.record_interview(interview, user.uid, AuditAction.INTERVIEW_FROM_TEMPLATE)
     await track(
         "interview_from_template", user_id=user.uid, company_id=company.id, set_id=copy["id"]
     )
@@ -84,10 +88,8 @@ async def list_interviews(
 ) -> list[InterviewOut]:
     """The company's interviews, newest first; `q` narrows them to titles containing it."""
     company, _ = await require_company(user, company_id)
-    rows = await interviews.list_for_company(company.id, page.offset, page.limit, q=q.strip())
-    totals = await candidates.counts([item.id for item in rows])
 
-    return [await interview_out(item, totals.get(item.id, 0)) for item in rows]
+    return await interviews_page(company.id, page.offset, page.limit, q.strip())
 
 
 @router.get("/{interview_id}")
@@ -100,7 +102,12 @@ async def get_interview(interview_id: UUID, user: CurrentUser) -> InterviewDetai
 
     topics = topics_out(found, interview.topic_limits) if found else []
 
-    return InterviewDetail(**base.model_dump(), topics=topics, can_edit=can_edit(member))
+    return InterviewDetail(
+        **base.model_dump(),
+        topics=topics,
+        total_minutes=interview_minutes(found, interview.topic_limits, interview.question_seconds),
+        can_edit=can_edit(member),
+    )
 
 
 @router.patch("/{interview_id}/settings", status_code=status.HTTP_204_NO_CONTENT)
@@ -109,11 +116,15 @@ async def update_settings(
 ) -> None:
     interview, _, _ = await interview_for(user, interview_id, editor=True)
     await interviews.update_settings(interview.id, body)
+    changed = (
+        body.question_seconds is not None and body.question_seconds != interview.question_seconds
+    ) or (body.hired is not None and body.hired != interview.hired)
+
+    if changed:
+        await audit.record_interview(interview, user.uid, AuditAction.INTERVIEW_SETTINGS_CHANGED)
 
     if body.pass_mark is not None and body.pass_mark != interview.pass_mark:
-        await audit.record(
-            interview.company_id, user.uid, AuditAction.PASS_MARK_CHANGED, interview.id, via=via
-        )
+        await audit.record_interview(interview, user.uid, AuditAction.PASS_MARK_CHANGED, via)
 
 
 @router.patch("/{interview_id}/title", status_code=status.HTTP_204_NO_CONTENT)
@@ -126,6 +137,7 @@ async def rename_interview(interview_id: UUID, body: TitleIn, user: CurrentUser)
 
     await library.rename_set(interview.set_id, body.title)
     await interviews.set_title(interview.id, body.title)
+    await audit.record_interview(interview, user.uid, AuditAction.INTERVIEW_RENAMED)
 
 
 @router.delete("/{interview_id}", status_code=status.HTTP_204_NO_CONTENT)
@@ -144,15 +156,22 @@ async def delete_interview(interview_id: UUID, user: CurrentUser) -> None:
     await rounds.delete_interview_data(interview.set_id)
     await library.delete_interview(interview.set_id)
     await release_unfinished(await interviews.remove(interview.id))
+    await audit.record_interview(interview, user.uid, AuditAction.INTERVIEW_DELETED)
 
 
 @router.post("/{interview_id}/preview", status_code=status.HTTP_201_CREATED)
 async def preview_interview(interview_id: UUID, user: CurrentUser) -> PreviewOut:
     """A company member takes their own test as a candidate would: free, kept out of the
     candidate list, and its answers out of the questions' statistics. Each preview is new."""
-    await refuse_if_paused(get_redis())
+    await refuse_if_paused(get_redis(), "preview", user_id=user.uid)
     interview, _, _ = await interview_for(user, interview_id)
-    await hit(get_redis(), f"rate:previews:{user.uid}", PREVIEWS_PER_USER_HOUR, HOUR_SECONDS)
+    await hit(
+        get_redis(),
+        f"rate:previews:{user.uid}",
+        "PREVIEWS_PER_USER_HOUR",
+        company_id=interview.company_id,
+        user_id=user.uid,
+    )
     interview = await attach_set(interview)
     content = await library.get_content(interview.set_id) if interview.set_id else None
 
@@ -165,7 +184,7 @@ async def preview_interview(interview_id: UUID, user: CurrentUser) -> PreviewOut
             "user_id": user.uid,
             "candidate_invite_id": str(uuid4()),
             "question_seconds": interview.question_seconds,
-            "topics": session_topics(interview, content),
+            "topics": session_topics(interview, content, await multi_share(get_redis())),
             "preview": True,
         }
     )

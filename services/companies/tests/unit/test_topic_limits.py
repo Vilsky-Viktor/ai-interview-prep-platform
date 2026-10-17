@@ -83,14 +83,15 @@ def test_unknown_topic_is_not_found(client, monkeypatch):
 
 
 def test_pick_questions_takes_a_random_subset():
-    questions = list(range(100))
-    picked = pick_questions(questions, 5)
+    options = [{"answer": "a", "correct": True}, {"answer": "b", "correct": False}]
+    questions = [{"id": index, "options": options} for index in range(100)]
+    picked = [question["id"] for question in pick_questions(questions, 5, 0.1)]
 
     assert len(picked) == 5
     assert len(set(picked)) == 5
-    assert set(picked) <= set(questions)
-    assert pick_questions(questions, 100) == questions
-    assert pick_questions(questions[:7], 10) == questions[:7]
+    assert set(picked) <= set(range(100))
+    assert pick_questions(questions, 100, 0.1) == questions
+    assert pick_questions(questions[:7], 10, 0.1) == questions[:7]
 
 
 def test_a_topic_without_a_limit_asks_the_default_number():

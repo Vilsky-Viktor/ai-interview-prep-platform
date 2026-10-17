@@ -6,7 +6,6 @@ import pytest
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
-from app.config.settings import settings
 from app.constants.reports import NO_FINISHED_CANDIDATES, TOO_MANY_REPORT_EMAILS
 from app.integrations import rounds
 from app.main import app
@@ -15,7 +14,7 @@ from app.models.interviews import Interview
 from app.models.invites import CandidateInvite
 from app.services import outbox as outbox_service
 from app.services import report_emails
-from app.storage import companies, interviews, reports
+from app.storage import audit, companies, interviews, reports
 from tests.unit import fake_candidates
 from tests.unit.fake_redis import FakeRedis
 
@@ -205,16 +204,29 @@ def test_no_report_is_emailed_before_a_candidate_finishes(client, queued, monkey
     assert queued == []
 
 
-def test_a_company_emails_a_limited_number_of_reports_a_day(client, queued, monkeypatch):
-    monkeypatch.setattr(settings, "report_emails_per_company_day", 2)
+@pytest.mark.parametrize(("edited", "most"), [(None, 20), (2, 2)])
+def test_a_company_emails_a_limited_number_of_reports_a_day(
+    client, queued, monkeypatch, limit_hits, edited, most
+):
+    redis = FakeRedis({"REPORT_EMAILS_PER_COMPANY_DAY": edited} if edited else None)
+
+    async def nothing(*args, **kwargs):
+        return None
+
+    monkeypatch.setattr(report_emails, "get_redis", lambda: redis)
+    # The action log isn't what this test checks.
+    monkeypatch.setattr(audit, "record", nothing)
 
     def send(number):
         return client.post(URL, json={"email": f"boss{number}@example.com", "pdf": PDF})
 
-    assert [send(number).status_code for number in range(2)] == [202, 202]
+    assert [send(number).status_code for number in range(most)] == [202] * most
 
-    refused = send(2)
+    refused = send(most)
 
     assert refused.status_code == 429
     assert refused.json()["detail"] == TOO_MANY_REPORT_EMAILS
-    assert len(queued) == 2
+    assert len(queued) == most
+    assert [(hit["limit"], hit["company_id"], hit["user_id"]) for hit in limit_hits] == [
+        ("REPORT_EMAILS_PER_COMPANY_DAY", str(COMPANY_ID), "bob")
+    ]

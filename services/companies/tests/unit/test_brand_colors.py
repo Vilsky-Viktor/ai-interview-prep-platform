@@ -1,4 +1,5 @@
 import pytest
+from prepza_common.audit_actions import AuditAction, TargetKind
 
 from app.constants.brand import (
     BUTTON_TEXT_UNREADABLE,
@@ -60,16 +61,20 @@ def saved(monkeypatch, company):  # noqa: F811
     return calls
 
 
-def test_an_admin_saves_one_themes_colors_or_goes_back_to_prepzas(client, saved):
+def test_an_admin_saves_one_themes_colors_or_goes_back_to_prepzas(client, saved, audited):
     sign_in("bob")
     mine = {**DARK, "primary": "#ff7a1a"}
 
     assert client.put(f"{URL}/dark", json={"colors": mine}).status_code == 200
     assert client.put(f"{URL}/light", json={"colors": None}).status_code == 200
     assert saved == [("dark", mine), ("light", None)]
+    assert (
+        audited
+        == [(COMPANY_ID, "bob", AuditAction.BRAND_CHANGED, COMPANY_ID, TargetKind.COMPANY)] * 2
+    )
 
 
-def test_unreadable_colors_and_unknown_themes_save_nothing(client, saved):
+def test_unreadable_colors_and_unknown_themes_save_nothing(client, saved, audited):
     sign_in("bob")
     unreadable_colors = {**LIGHT, "foreground": "#eeeeee"}
 
@@ -81,7 +86,7 @@ def test_unreadable_colors_and_unknown_themes_save_nothing(client, saved):
     assert (
         client.put(f"{URL}/light", json={"colors": {**LIGHT, "border": "red"}}).status_code == 422
     )
-    assert saved == []
+    assert saved == [] and audited == []
 
 
 def test_only_owners_and_admins_set_colors(client, saved):

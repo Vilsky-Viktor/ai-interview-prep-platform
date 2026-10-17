@@ -6,7 +6,7 @@ from sqlalchemy import DateTime, ForeignKey, String, Text, func
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column
 
-from app.constants.interviews import DEFAULT_PASS_MARK, DEFAULT_QUESTION_SECONDS
+from app.constants.interviews import DEFAULT_PASS_MARK
 from app.models.base import Base
 
 
@@ -39,10 +39,9 @@ class Interview(Base):
     # The shareable link's code while it's on: anyone who opens it can take the test.
     link_token: Mapped[str | None] = mapped_column(String(64), unique=True)
     # Every interview is timed: each question has question_seconds, and one left unanswered is
-    # wrong. Candidates never see their scores.
-    question_seconds: Mapped[int] = mapped_column(
-        default=DEFAULT_QUESTION_SECONDS, server_default=str(DEFAULT_QUESTION_SECONDS)
-    )
+    # wrong. Candidates never see their scores. A new test gets its level's (storage/interviews.py);
+    # the database's default is from before tests had them.
+    question_seconds: Mapped[int] = mapped_column(server_default="60")
     topic_limits: Mapped[dict[str, int]] = mapped_column(JSONB, default=dict, server_default="{}")
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC)

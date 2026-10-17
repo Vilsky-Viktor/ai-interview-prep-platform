@@ -42,7 +42,15 @@ async def page(company_id, offset: int, limit: int) -> list[HistoryEntryOut]:
                 invoice_id=row["transaction_id"] if row["reason"] == Reason.TOPUP else None,
                 candidate=candidate,
                 candidate_deleted=row["reason"] == Reason.CANDIDATE and candidate is None,
+                note=row["note"],
             )
         )
 
     return out
+
+
+async def reserved(company_id, offset: int, limit: int) -> list[CreditCandidateOut]:
+    """Candidates invited who haven't finished, whose credits are set aside, newest first."""
+    rows = await credit_invites.holding(company_id, offset, limit)
+
+    return [candidate_out(invite, interview) for invite, interview in rows]

@@ -1,6 +1,7 @@
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
+from prepza_common.audit_actions import AuditAction
 from prepza_common.auth import CurrentUser
 from prepza_common.http import passed_on
 from prepza_common.paging import PageParams
@@ -12,7 +13,7 @@ from app.integrations.redis import get_redis
 from app.models.interviews import Interview
 from app.schemas.interviews import QuestionText, ReportOut, TopicLimitIn
 from app.services.interview_access import interview_for
-from app.storage import interviews
+from app.storage import audit, interviews
 
 router = APIRouter(prefix="/interviews", tags=["interviews"])
 
@@ -62,17 +63,21 @@ async def set_topic_limit(
         )
 
     await interviews.set_topic_limit(interview.id, topic_id, body.limit)
+    await audit.record_interview(interview, user.uid, AuditAction.INTERVIEW_SETTINGS_CHANGED)
 
 
 @router.post("/{interview_id}/questions/{question_id}/regenerate")
 async def regenerate_question(interview_id: UUID, question_id: UUID, user: CurrentUser) -> dict:
-    await refuse_if_paused(get_redis())
     interview = await generated_interview(user, interview_id, editor=True)
+    await refuse_if_paused(get_redis(), "question_regeneration", interview.company_id, user.uid)
     response = await generation_api.regenerate_question(
         question_id, interview.set_id, user.uid, await billing.company_paid(interview.company_id)
     )
 
-    return passed_on(response).json()
+    question = passed_on(response).json()
+    await audit.record_interview(interview, user.uid, AuditAction.QUESTIONS_REGENERATED)
+
+    return question
 
 
 @router.post(
@@ -87,6 +92,7 @@ async def mark_wrong(interview_id: UUID, question_id: UUID, user: CurrentUser) -
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Question not found")
 
     await library.mark_wrong(question_id)
+    await audit.record_interview(interview, user.uid, AuditAction.ANSWER_KEY_REPORTED)
 
 
 @router.get("/{interview_id}/questions/{question_id}/reports")

@@ -1,9 +1,9 @@
 class FakePipeline:
-    """The SET NX + INCR transaction of prepza_common.rate_limit.hit, in memory."""
+    """The SET NX + INCRBY transaction of prepza_common.rate_limit, in memory."""
 
     def __init__(self, redis):
         self.redis = redis
-        self.keys = []
+        self.commands = []
 
     async def __aenter__(self):
         return self
@@ -12,21 +12,40 @@ class FakePipeline:
         return False
 
     def set(self, key, value, ex, nx):
-        self.redis.counts.setdefault(key, value)
+        self.commands.append(lambda: self.redis.counts.setdefault(key, value) and None)
 
-    def incr(self, key):
-        self.keys.append(key)
+    def incrby(self, key, amount):
+        def run():
+            self.redis.counts[key] = self.redis.counts.get(key, 0) + amount
+
+            return self.redis.counts[key]
+
+        self.commands.append(run)
 
     async def execute(self):
-        key = self.keys.pop()
-        self.redis.counts[key] += 1
+        results = [command() for command in self.commands]
+        self.commands = []
 
-        return [True, self.redis.counts[key]]
+        return results
 
 
 class FakeRedis:
-    def __init__(self):
+    """Counters, and the limits' edited values (`limits`, name to value) as billing keeps them."""
+
+    def __init__(self, limits: dict | None = None):
         self.counts = {}
+        self.limits = {name: str(value) for name, value in (limits or {}).items()}
 
     def pipeline(self, transaction):
         return FakePipeline(self)
+
+    async def get(self, key):
+        found = self.counts.get(key)
+
+        return None if found is None else str(found).encode()
+
+    async def exists(self, key):
+        return int(key in self.counts)
+
+    async def hgetall(self, key):
+        return {name.encode(): value.encode() for name, value in self.limits.items()}

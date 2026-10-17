@@ -6,7 +6,7 @@ from app.storage import accounts, candidates, companies, interviews, invite_prog
 
 async def invited(email: str):
     company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
-    interview = await interviews.create(company.id, uuid.uuid4(), "en")
+    interview = await interviews.create(company.id, uuid.uuid4(), "en", 60)
     invite, _ = await invites.upsert(interview.id, email, "Backend", "Acme", "en")
 
     return interview, invite
@@ -70,7 +70,7 @@ def test_a_deleted_account_takes_its_name_with_it_and_an_export_holds_it(run):
 def test_an_inviters_name_fills_an_unknown_name_and_a_known_one_stays(run):
     async def scenario():
         company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
-        interview = await interviews.create(company.id, uuid.uuid4(), "en")
+        interview = await interviews.create(company.id, uuid.uuid4(), "en", 60)
         invite, _ = await invites.upsert(interview.id, "x@example.com", "B", "A", "en", name="Xi")
         # Sent again (a redelivered ATS candidate, a list pasted again): an edit stays.
         await candidates.set_name(invite.id, "Xi Jun")
@@ -85,7 +85,7 @@ def test_an_inviters_name_fills_an_unknown_name_and_a_known_one_stays(run):
 def test_candidates_are_found_by_part_of_their_name_or_email_in_any_case(run):
     async def scenario():
         company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
-        interview = await interviews.create(company.id, uuid.uuid4(), "en")
+        interview = await interviews.create(company.id, uuid.uuid4(), "en", 60)
         await invites.upsert(interview.id, "maria@example.com", "B", "A", "en", name="Maria Ruiz")
         await invites.upsert(interview.id, "ruiz.j@example.com", "B", "A", "en")
         await invites.upsert(interview.id, "other@example.com", "B", "A", "en")
@@ -107,7 +107,7 @@ def test_candidates_are_found_by_part_of_their_name_or_email_in_any_case(run):
 def test_a_csv_lists_names_are_stored_with_its_invites(run):
     async def scenario():
         company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
-        interview = await interviews.create(company.id, uuid.uuid4(), "en")
+        interview = await interviews.create(company.id, uuid.uuid4(), "en", 60)
         text = "Vorname;Nachname;E-Mail\nAnn;Lee;ann@example.com\n;;bob@example.com\n"
 
         for email, name in read_list(text)[0]:

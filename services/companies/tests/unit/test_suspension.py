@@ -5,11 +5,9 @@ from types import SimpleNamespace
 
 import pytest
 from fastapi import HTTPException
-from prepza_common.auth import current_user
 from prepza_common.user import User
 
 from app.constants.invites import COMPANY_SUSPENDED, INTERVIEW_UNAVAILABLE, InviteStatus
-from app.main import app
 from app.models.companies import Company, Member
 from app.routers import superadmin_companies as routes
 from app.services import candidate_invites
@@ -31,20 +29,6 @@ def suspended_company() -> Company:
     company.members = [Member(company_id=COMPANY_ID, user_id="ann", role="owner")]
 
     return company
-
-
-@pytest.fixture
-def superadmin(monkeypatch):
-    """Signs in `email`; ann@example.com is the only superadmin."""
-    monkeypatch.setenv("SUPERADMIN_EMAILS", "ann@example.com")
-
-    def sign_in(email):
-        app.dependency_overrides[current_user] = lambda: User(
-            uid=email, email=email, email_verified=True
-        )
-
-    yield sign_in
-    app.dependency_overrides.clear()
 
 
 def test_only_a_superadmin_finds_and_suspends_companies(client, superadmin, monkeypatch):

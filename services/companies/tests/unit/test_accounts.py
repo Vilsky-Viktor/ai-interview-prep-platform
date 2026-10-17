@@ -227,7 +227,9 @@ def test_cloud_scheduler_runs_retention_through_its_route(client, monkeypatch):
     monkeypatch.setattr(schedules.processed_events, "forget", forget)
 
     assert client.post("/internal/schedules/retention").status_code == 204
-    # Audit events go after 24 months; the notes of processed events after Pub/Sub's redeliveries.
+    # The action log goes after 12 months; the notes of processed events after Pub/Sub's
+    # redeliveries.
     assert len(cutoffs) == 2
-    assert datetime.now(UTC) - cutoffs[0] > timedelta(days=AUDIT_RETENTION_DAYS - 1)
+    assert AUDIT_RETENTION_DAYS == 365
+    assert timedelta(days=364) < datetime.now(UTC) - cutoffs[0] < timedelta(days=366)
     assert timedelta(days=7) < datetime.now(UTC) - cutoffs[1] < timedelta(days=9)

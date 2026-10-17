@@ -1,9 +1,9 @@
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
+from prepza_common.audit_actions import AuditAction, TargetKind
 from prepza_common.auth import CurrentUser
 
-from app.constants.audit import AuditAction
 from app.constants.invites import InviteStatus
 from app.helpers.candidates import candidate_label, candidate_out
 from app.helpers.interviews import interview_title
@@ -47,7 +47,14 @@ async def email_report(
             "pdf": body.pdf,
         }
     )
-    await audit.record(company.id, user.uid, AuditAction.REPORT_EMAILED, invite.id, via=via)
+    await audit.record(
+        company.id,
+        user.uid,
+        AuditAction.REPORT_EMAILED,
+        invite.id,
+        via=via,
+        target_kind=TargetKind.CANDIDATE,
+    )
     await outbox_service.flush_quietly()
 
 
@@ -90,5 +97,5 @@ async def email_interview_report(
             "pdf": body.pdf,
         }
     )
-    await audit.record(company.id, user.uid, AuditAction.REPORT_EMAILED, interview.id, via=via)
+    await audit.record_interview(interview, user.uid, AuditAction.REPORT_EMAILED, via)
     await outbox_service.flush_quietly()

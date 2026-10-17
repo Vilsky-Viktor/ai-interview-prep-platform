@@ -1,11 +1,12 @@
 import asyncio
 import uuid
 
+from prepza_common.audit_actions import AuditAction, TargetKind
 from sqlalchemy import select
 
 from app.constants.roles import EDITORS
 from app.models.outbox import OutboxEvent
-from app.storage import companies, members
+from app.storage import audit, companies, members
 from app.storage.db import Session
 
 
@@ -32,13 +33,18 @@ def test_a_used_invite_link_still_finds_its_member_and_a_removed_admin_is_gone(r
                 )
             ).all()
 
+        logged = await audit.list_for_company(company.id, 0, 10)
         await companies.delete(company.id)
 
-        return reused, left, joined, bob.token
+        return reused, left, joined, bob.token, logged, bob.id
 
-    reused, left, joined, token = run(scenario())
+    reused, left, joined, token, logged, bob_id = run(scenario())
 
     assert reused is not None and reused[0].user_id == "bob"
+    # Joining is logged once, with the join itself, however often the link is opened.
+    assert [(row.user_id, row.action, row.target_id, row.target_kind) for row in logged] == [
+        ("bob", AuditAction.MEMBER_JOINED, bob_id, TargetKind.MEMBER)
+    ]
     assert [(row.invited_email, row.user_id, row.token) for row in left] == [
         ("ann@example.com", "ann", None),
         ("bob@example.com", "bob", token),

@@ -3,6 +3,7 @@ import uuid
 from datetime import UTC, datetime
 
 from fastapi import HTTPException
+from prepza_common.audit_actions import AuditAction, TargetKind
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
@@ -106,7 +107,7 @@ def invite_setup(monkeypatch):
 URL = f"/interviews/{INTERVIEW_ID}/candidates"
 
 
-def test_inviting_the_same_email_again_resends_the_invite(client, monkeypatch):
+def test_inviting_the_same_email_again_resends_the_invite(client, monkeypatch, audited):
     sent, used = invite_setup(monkeypatch)
     url = URL
 
@@ -121,6 +122,11 @@ def test_inviting_the_same_email_again_resends_the_invite(client, monkeypatch):
     assert re.fullmatch(rf"{INTERVIEW_ID}:[0-9a-f]{{32}}", used[0])
     assert first.json()["id"] == second.json()["id"]
     assert sent == ["carol@example.com", "carol@example.com"]
+    invite_id = uuid.UUID(first.json()["id"])
+    assert [event[2:] for event in audited] == [
+        (AuditAction.CANDIDATE_INVITED, invite_id, TargetKind.CANDIDATE),
+        (AuditAction.INVITE_RESENT, invite_id, TargetKind.CANDIDATE),
+    ]
 
     app.dependency_overrides.clear()
 

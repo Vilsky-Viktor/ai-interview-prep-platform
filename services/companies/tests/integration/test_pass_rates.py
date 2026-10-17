@@ -7,7 +7,7 @@ from app.storage import companies, interviews, invite_progress, link_invites, pa
 async def interview(grades, pass_mark=60, unfinished=0):
     """A company's interview whose candidates finished with `grades`, and `unfinished` more."""
     company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
-    found = await interviews.create(company.id, uuid.uuid4(), "en")
+    found = await interviews.create(company.id, uuid.uuid4(), "en", 60)
     await interviews.update_settings(found.id, InterviewSettings(pass_mark=pass_mark))
 
     for index, grade in enumerate(grades):

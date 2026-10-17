@@ -17,7 +17,7 @@ from app.storage import (
 async def interview():
     company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
 
-    return await interviews.create(company.id, uuid.uuid4(), "en")
+    return await interviews.create(company.id, uuid.uuid4(), "en", 60)
 
 
 async def invite(found, email):

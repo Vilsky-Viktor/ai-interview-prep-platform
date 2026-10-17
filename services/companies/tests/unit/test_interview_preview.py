@@ -60,7 +60,7 @@ def started(monkeypatch):
 
         return [{"id": str(SESSION_ID), "topic_title": "SQL", "status": "in_progress"}]
 
-    async def counted(redis, key, limit, window):
+    async def counted(redis, key, name, **whose):
         asked.append(key)
 
     monkeypatch.setattr(interview_routes, "hit", counted)
@@ -101,7 +101,7 @@ def test_someone_outside_the_company_cant(client, started):
 
 
 def test_previews_over_the_hourly_limit_are_refused(client, started, monkeypatch):
-    async def over(redis, key, limit, window):
+    async def over(redis, key, name, **whose):
         raise HTTPException(429, "Too many requests. Try again later.")
 
     monkeypatch.setattr(interview_routes, "hit", over)

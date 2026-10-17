@@ -14,7 +14,7 @@ from app.storage.db import Session
 async def interview():
     company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
 
-    return await interviews.create(company.id, uuid.uuid4(), "en")
+    return await interviews.create(company.id, uuid.uuid4(), "en", 60)
 
 
 def test_inviting_the_same_address_again_returns_the_same_invite(run):
@@ -88,9 +88,9 @@ def test_an_invite_moves_from_invited_to_in_process_to_finished(run):
 def test_only_interviews_without_a_candidate_count_as_waiting(run):
     async def scenario():
         company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
-        first = await interviews.create(company.id, uuid.uuid4(), "en")
-        await interviews.create(company.id, uuid.uuid4(), "en")
-        await interviews.create_from_template(company.id, uuid.uuid4(), "Copied", "en")
+        first = await interviews.create(company.id, uuid.uuid4(), "en", 60)
+        await interviews.create(company.id, uuid.uuid4(), "en", 60)
+        await interviews.create_from_template(company.id, uuid.uuid4(), "Copied", "en", 60)
         before = await interviews.without_candidates(company.id)
         invite, _ = await invites.upsert(first.id, "dan@example.com", "Backend", "Acme", "en")
         invited = await interviews.without_candidates(company.id)

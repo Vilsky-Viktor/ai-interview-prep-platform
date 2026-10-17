@@ -1,18 +1,14 @@
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
+from prepza_common.audit_actions import AuditAction, TargetKind
 from prepza_common.auth import CurrentUser, OptionalUser
-from prepza_common.constants import DAY_SECONDS
+from prepza_common.limits import at_most
 from prepza_common.paging import PageParams
 from prepza_common.rate_limit import hit, hit_emails
 
-from app.config.settings import settings
-from app.constants.audit import AuditAction
-from app.constants.invites import MAX_OWNED_COMPANIES
 from app.constants.roles import (
     ALREADY_INVITED,
-    MAX_PENDING_INVITES,
-    MEMBER_INVITES_PER_UNPAID_DAY,
     ONLY_ADMINS_OWN,
     OWNS_TOO_MANY,
     TOO_MANY_PENDING,
@@ -71,22 +67,23 @@ async def invite_member(company_id: UUID, body: MemberIn, user: CurrentUser) -> 
     if any(member.invited_email == email for member in company.members):
         raise HTTPException(status.HTTP_409_CONFLICT, ALREADY_INVITED)
 
-    if sum(member.user_id is None for member in company.members) >= MAX_PENDING_INVITES:
-        raise HTTPException(status.HTTP_409_CONFLICT, TOO_MANY_PENDING)
+    redis = get_redis()
+    who = {"company_id": company.id, "user_id": user.uid}
+    await at_most(
+        redis,
+        "MAX_PENDING_INVITES",
+        sum(member.user_id is None for member in company.members),
+        status.HTTP_409_CONFLICT,
+        TOO_MANY_PENDING,
+        **who,
+    )
 
     if not await billing.company_paid(company.id):
         key = f"rate:member-invites:{company.id}"
-        await hit(get_redis(), key, MEMBER_INVITES_PER_UNPAID_DAY, DAY_SECONDS)
+        await hit(redis, key, "MEMBER_INVITES_PER_UNPAID_DAY", **who)
 
     # The invite emails the member, so it counts toward the owner's email limits.
-    await hit_emails(
-        get_redis(),
-        user.uid,
-        f"member:{company.id}:{email}",
-        settings.email_hourly_limit,
-        settings.email_daily_limit,
-        settings.email_recipient_daily_limit,
-    )
+    await hit_emails(redis, user.uid, f"member:{company.id}:{email}", company.id)
     sender = {
         "company": company.name,
         "company_id": str(company.id),
@@ -100,6 +97,9 @@ async def invite_member(company_id: UUID, body: MemberIn, user: CurrentUser) -> 
     # Invited by another request at the same moment.
     if member is None:
         raise HTTPException(status.HTTP_409_CONFLICT, ALREADY_INVITED)
+    await audit.record(
+        company.id, user.uid, AuditAction.MEMBER_INVITED, member.id, target_kind=TargetKind.MEMBER
+    )
     # The email goes out now; the outbox's regular run sends it if this fails.
     await outbox_service.flush_quietly()
 
@@ -135,6 +135,13 @@ async def change_role(
         await billing.turn_off_auto_top_up(company_id, member.user_id)
 
     await members.set_role(member.id, body.role)
+    await audit.record(
+        company_id,
+        user.uid,
+        AuditAction.MEMBER_ROLE_CHANGED,
+        member.id,
+        target_kind=TargetKind.MEMBER,
+    )
 
 
 @router.post("/{member_id}/owner", status_code=status.HTTP_204_NO_CONTENT)
@@ -148,13 +155,27 @@ async def make_owner(company_id: UUID, member_id: UUID, user: CurrentUser, via: 
     if member.user_id is None or member.role != Role.ADMIN:
         raise HTTPException(status.HTTP_409_CONFLICT, ONLY_ADMINS_OWN)
 
-    if await companies.owned_count(member.user_id) >= MAX_OWNED_COMPANIES:
-        raise HTTPException(status.HTTP_409_CONFLICT, OWNS_TOO_MANY)
+    await at_most(
+        get_redis(),
+        "MAX_OWNED_COMPANIES",
+        await companies.owned_count(member.user_id),
+        status.HTTP_409_CONFLICT,
+        OWNS_TOO_MANY,
+        company_id=company.id,
+        user_id=member.user_id,
+    )
 
     if not await members.transfer_ownership(company, caller, member):
         raise HTTPException(status.HTTP_409_CONFLICT, ONLY_ADMINS_OWN)
 
-    await audit.record(company.id, user.uid, AuditAction.OWNERSHIP_TRANSFERRED, member.id, via=via)
+    await audit.record(
+        company.id,
+        user.uid,
+        AuditAction.OWNERSHIP_TRANSFERRED,
+        member.id,
+        via=via,
+        target_kind=TargetKind.MEMBER,
+    )
     await outbox_service.flush_quietly()
 
 
@@ -168,6 +189,9 @@ async def remove_member(company_id: UUID, member_id: UUID, user: CurrentUser) ->
         await billing.turn_off_auto_top_up(company_id, member.user_id)
 
     await members.remove(member.id)
+    await audit.record(
+        company_id, user.uid, AuditAction.MEMBER_REMOVED, member.id, target_kind=TargetKind.MEMBER
+    )
 
 
 @router.get("/invites/{token}")

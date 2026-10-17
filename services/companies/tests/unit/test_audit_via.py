@@ -1,29 +1,42 @@
-import importlib
-import inspect
-import pkgutil
+from uuid import uuid4
 
-from fastapi.routing import APIRoute
+from prepza_common.audit_actions import ACTION_GROUPS, MAX_TARGET_LABEL, AuditAction, TargetKind
 
-import app.routers
+from app.service_auth import REQUEST_VIA
+from app.storage import audit
 
-
-def routes() -> list[APIRoute]:
-    found = []
-
-    for module in pkgutil.iter_modules(app.routers.__path__):
-        router = getattr(importlib.import_module(f"app.routers.{module.name}"), "router", None)
-
-        if router is not None:
-            found += [route for route in router.routes if isinstance(route, APIRoute)]
-
-    return found
+COMPANY_ID = uuid4()
 
 
-def test_every_audited_route_records_what_it_came_through():
-    """An action through the in-app assistant or an AI app shows as such in the oversight log,
-    not as one done in the app: every route that writes the log takes `via`."""
-    audited = [route for route in routes() if "audit.record(" in inspect.getsource(route.endpoint)]
+def test_an_action_records_what_its_request_came_through_unless_told():
+    """An action through the in-app assistant or an AI app shows as such in the action log, not
+    as one done in the app, whichever route records it."""
+    token = REQUEST_VIA.set("mcp")
 
-    assert len(audited) >= 7
-    for route in audited:
-        assert "via" in inspect.signature(route.endpoint).parameters, route.path
+    try:
+        through_request = audit.fields(COMPANY_ID, "bob", AuditAction.LOGO_CHANGED)
+        told = audit.fields(COMPANY_ID, "bob", AuditAction.LOGO_CHANGED, via="assistant")
+    finally:
+        REQUEST_VIA.reset(token)
+
+    assert through_request["via"] == "mcp"
+    assert told["via"] == "assistant"
+    assert audit.fields(COMPANY_ID, "bob", AuditAction.LOGO_CHANGED)["via"] is None
+
+
+def test_every_action_has_a_group_and_a_long_label_is_cut():
+    assert set(ACTION_GROUPS) == set(AuditAction)
+
+    row = audit.fields(
+        COMPANY_ID,
+        "bob",
+        AuditAction.INTERVIEW_RENAMED,
+        target_kind=TargetKind.INTERVIEW,
+        target_label="x" * (MAX_TARGET_LABEL + 10),
+    )
+
+    assert (row["group"], row["target_kind"], len(row["target_label"])) == (
+        "interviews",
+        "interview",
+        MAX_TARGET_LABEL,
+    )

@@ -5,6 +5,7 @@ from fastapi import APIRouter, HTTPException, Query, status
 from prepza_common.pause import refuse_if_paused
 from prepza_common.user import User
 
+from app.constants.audit import VIA_API, VIA_ATS
 from app.constants.invites import RETURN_URL_OFF_DOMAIN, InviteStatus
 from app.helpers.return_urls import on_domain
 from app.integrations.redis import get_redis
@@ -60,7 +61,7 @@ async def invite(interview_id: UUID, body: AtsInviteIn, caller: ServiceCaller) -
     if interview.set_id is None:
         raise HTTPException(status.HTTP_409_CONFLICT, "The interview isn't ready yet")
 
-    await refuse_if_paused(get_redis())
+    await refuse_if_paused(get_redis(), "candidate_invite", interview.company_id, body.sender_id)
     company = await companies.get(interview.company_id)
     sender = member_of(company, body.sender_id)
 
@@ -78,7 +79,15 @@ async def invite(interview_id: UUID, body: AtsInviteIn, caller: ServiceCaller) -
 
     user = User(uid=body.sender_id, email="", email_verified=True)
     sent = await candidate_invites.invite(
-        interview, company, user, body.email, body.name, body.return_url, body.sign_in, body.theme
+        interview,
+        company,
+        user,
+        body.email,
+        body.name,
+        body.return_url,
+        body.sign_in,
+        body.theme,
+        via=VIA_API if caller == VIA_API else VIA_ATS,
     )
     await outbox_service.flush_quietly()
 

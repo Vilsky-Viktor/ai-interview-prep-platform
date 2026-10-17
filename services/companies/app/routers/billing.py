@@ -14,7 +14,6 @@ from app.schemas.billing import (
 )
 from app.services import credit_history
 from app.services.access import require_editor
-from app.storage import credit_invites
 
 # Owners and admins, who top up, see where the credits went; viewers don't.
 router = APIRouter(prefix="/companies/{company_id}/billing", tags=["companies"])
@@ -36,9 +35,8 @@ async def get_reserved(
 ) -> list[CreditCandidateOut]:
     """Candidates invited who haven't finished, whose credits are set aside, newest first."""
     await require_editor(user, company_id)
-    rows = await credit_invites.holding(company_id, page.offset, page.limit)
 
-    return [credit_history.candidate_out(invite, interview) for invite, interview in rows]
+    return await credit_history.reserved(company_id, page.offset, page.limit)
 
 
 @router.get("/invoice")

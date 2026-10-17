@@ -1,6 +1,7 @@
 import secrets
 
 from prepza_common import outbox
+from prepza_common.audit_actions import AuditAction, TargetKind
 from prepza_common.notifications import NOTIFICATION_REQUESTED
 from sqlalchemy import delete, select, update
 from sqlalchemy.exc import IntegrityError
@@ -10,6 +11,7 @@ from app.constants.roles import Role
 from app.helpers.notifications import member_joined, ownership_received
 from app.models.companies import Company, Member
 from app.models.outbox import OutboxEvent
+from app.storage import audit
 from app.storage.db import Session
 
 
@@ -67,6 +69,15 @@ async def accept(member: Member, company: Company, user_id: str) -> bool:
 
         if joining:
             row.user_id = user_id
+            session.add(
+                audit.row(
+                    company.id,
+                    user_id,
+                    AuditAction.MEMBER_JOINED,
+                    row.id,
+                    target_kind=TargetKind.MEMBER,
+                )
+            )
 
         # The link stays, so reopening it says it was used (and opens the company for its
         # member) instead of "invalid"; joining twice changes nothing.

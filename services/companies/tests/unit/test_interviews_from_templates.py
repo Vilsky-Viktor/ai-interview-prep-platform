@@ -2,6 +2,7 @@ import uuid
 from datetime import UTC, datetime
 
 import pytest
+from prepza_common.audit_actions import AuditAction, TargetKind
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
@@ -9,7 +10,9 @@ from app.integrations import library
 from app.main import app
 from app.models.companies import Company, Member
 from app.models.interviews import Interview
+from app.routers import interviews as routes
 from app.storage import companies, interviews
+from tests.unit.fake_redis import FakeRedis
 
 COMPANY_ID = uuid.uuid4()
 TEMPLATE_ID = uuid.uuid4()
@@ -38,10 +41,10 @@ def setup(monkeypatch):
         if template_id != TEMPLATE_ID:
             return None
 
-        return {"id": str(SET_ID), "title": "Bookkeeper", "language": "de"}
+        return {"id": str(SET_ID), "title": "Bookkeeper", "language": "de", "level": "hard"}
 
-    async def create(company_id, set_id, title, language):
-        made.append((company_id, set_id, title, language))
+    async def create(company_id, set_id, title, language, seconds):
+        made.append((company_id, set_id, title, language, seconds))
 
         return Interview(
             pass_mark=70,
@@ -52,13 +55,14 @@ def setup(monkeypatch):
             generation_failed=False,
             title=title,
             language=language,
-            question_seconds=60,
+            question_seconds=seconds,
             hired=False,
             link_token=None,
             created_at=datetime.now(UTC),
         )
 
     monkeypatch.setattr(companies, "get", get_company)
+    monkeypatch.setattr(routes, "get_redis", lambda: FakeRedis())
     monkeypatch.setattr(library, "copy_template", copy)
     monkeypatch.setattr(interviews, "create_from_template", create)
     app.dependency_overrides[current_user] = lambda: User(
@@ -77,14 +81,31 @@ def start(client, template_id=TEMPLATE_ID, company_id=COMPANY_ID):
     )
 
 
-def test_a_template_becomes_a_ready_test_with_no_generation(client, setup):
+def test_a_template_becomes_a_ready_test_with_no_generation(client, setup, audited):
     response = start(client)
 
     assert response.status_code == 201
     assert response.json()["generation_id"] is None
     assert response.json()["set_id"] == str(SET_ID)
     assert response.json()["title"] == "Bookkeeper"
-    assert setup == [(COMPANY_ID, str(SET_ID), "Bookkeeper", "de")]
+    # A hard template's test: the hard level's seconds a question.
+    assert response.json()["question_seconds"] == 75
+    assert setup == [(COMPANY_ID, str(SET_ID), "Bookkeeper", "de", 75)]
+    assert audited == [
+        (
+            COMPANY_ID,
+            "bob",
+            AuditAction.INTERVIEW_FROM_TEMPLATE,
+            uuid.UUID(response.json()["id"]),
+            TargetKind.INTERVIEW,
+        )
+    ]
+
+
+def test_the_level_seconds_are_as_set_in_controls(client, setup, monkeypatch):
+    monkeypatch.setattr(routes, "get_redis", lambda: FakeRedis({"QUESTION_SECONDS_HARD": 90}))
+
+    assert start(client).json()["question_seconds"] == 90
 
 
 def test_an_unknown_template_or_another_company_is_not_found(client, setup):

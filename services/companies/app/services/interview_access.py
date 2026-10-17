@@ -50,11 +50,11 @@ async def candidate_for(
     return interview, invite, company, member
 
 
-async def ready_for_invites(interview: Interview) -> Interview:
+async def ready_for_invites(interview: Interview, user_id: str) -> Interview:
     """The interview with its questions, for inviting: refused during the emergency pause (no
     invite, new or sent again, goes out: its candidate couldn't start) and while it has no
-    questions yet (409)."""
-    await refuse_if_paused(get_redis())
+    questions yet (409). `user_id` is the member inviting."""
+    await refuse_if_paused(get_redis(), "candidate_invite", interview.company_id, user_id)
     interview = await attach_set(interview)
 
     if interview.set_id is None:

@@ -3,6 +3,7 @@ import uuid
 from datetime import UTC, datetime
 
 import pytest
+from prepza_common.audit_actions import AuditAction, TargetKind
 from prepza_common.auth import current_user
 from prepza_common.user import User
 
@@ -64,7 +65,7 @@ def test_only_png_jpeg_and_webp_up_to_500_kb_are_logos():
     assert logo_type(b"\x89PNG\r\n\x1a\n" + b"0" * 500_001) is None
 
 
-def test_an_admin_uploads_a_logo_whose_address_changes_with_each_upload(client, company):
+def test_an_admin_uploads_a_logo_whose_address_changes_with_each_upload(client, company, audited):
     _, saved = company
     sign_in("bob")
     url = f"/companies/{COMPANY_ID}/logo"
@@ -75,15 +76,19 @@ def test_an_admin_uploads_a_logo_whose_address_changes_with_each_upload(client, 
     assert saved["logo"] == (PNG, "image/png")
     assert first["logo_url"] == f"/api/companies/companies/{COMPANY_ID}/logo?v=1"
     assert second["logo_url"].endswith("?v=2")
+    assert (
+        audited
+        == [(COMPANY_ID, "bob", AuditAction.LOGO_CHANGED, COMPANY_ID, TargetKind.COMPANY)] * 2
+    )
 
 
-def test_a_logo_that_isnt_an_image_is_refused(client, company):
+def test_a_logo_that_isnt_an_image_is_refused(client, company, audited):
     _, saved = company
     sign_in("bob")
     svg = base64.b64encode(b"<svg></svg>").decode()
 
     assert client.put(f"/companies/{COMPANY_ID}/logo", json={"image": svg}).status_code == 422
-    assert saved == {}
+    assert saved == {} and audited == []
 
 
 def test_someone_outside_the_company_cant_change_its_logo(client, company):

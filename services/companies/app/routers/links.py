@@ -3,9 +3,9 @@ from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, Request, status
 from prepza_common.analytics import track
+from prepza_common.audit_actions import AuditAction
 from prepza_common.auth import CurrentUser, OptionalUser
 from prepza_common.client_ip import client_ip
-from prepza_common.constants import HOUR_SECONDS
 from prepza_common.human_check import require_human
 from prepza_common.pause import refuse_if_paused
 from prepza_common.rate_limit import hit
@@ -15,25 +15,24 @@ from app.constants.invites import (
     EMAIL_NOT_VERIFIED,
     INTERVIEW_NOT_READY,
     LINK_CLOSED,
-    LINK_STARTS_PER_HOUR,
-    LINK_STARTS_PER_IP_HOUR,
     LINK_TOKEN_BYTES,
     NOT_STARTED,
     InviteStatus,
 )
 from app.helpers.brand import color_sets, style_of
 from app.helpers.candidates import new_hold_key
-from app.helpers.interviews import attach_set, interview_title
+from app.helpers.interviews import attach_set, interview_minutes, interview_title
 from app.helpers.logos import logo_path
 from app.integrations import billing
 from app.integrations.redis import get_redis
 from app.schemas.invites import InviteStartOut, LinkIn, LinkOut, LinkView
 from app.schemas.logos import BrandColorSets, BrandStyle
 from app.services import outbox as outbox_service
+from app.services import set_cache
 from app.services.access import refuse_if_suspended
 from app.services.candidate_start import start_sessions
 from app.services.interview_access import interview_for, ready_for_invites
-from app.storage import companies, interviews, invites, link_invites
+from app.storage import audit, companies, interviews, invites, link_invites
 
 # One link for many candidates: a company puts it in a job ad, and each person who opens it
 # takes the test as an invited candidate would.
@@ -69,10 +68,12 @@ async def set_link(interview_id: UUID, body: LinkIn, user: CurrentUser) -> LinkO
     interview, _, _ = await interview_for(user, interview_id, editor=True)
 
     if body.on:
-        await ready_for_invites(interview)
+        await ready_for_invites(interview, user.uid)
 
     token = (interview.link_token or secrets.token_urlsafe(LINK_TOKEN_BYTES)) if body.on else None
     await interviews.set_link(interview.id, token)
+    action = AuditAction.LINK_TURNED_ON if body.on else AuditAction.LINK_TURNED_OFF
+    await audit.record_interview(interview, user.uid, action)
 
     return LinkOut(link_token=token)
 
@@ -85,6 +86,7 @@ async def get_link(token: str, user: OptionalUser) -> LinkView:
     company = await companies.get(interview.company_id)
     status_now = await invites.status_of(interview.id, user.email) if user else None
     refuse_if_suspended(company, status_now)
+    found = await set_cache.get_set(interview.set_id) if interview.set_id else None
 
     return LinkView(
         title=await interview_title(interview),
@@ -94,6 +96,7 @@ async def get_link(token: str, user: OptionalUser) -> LinkView:
         brand_colors=BrandColorSets(**color_sets(company.brand_colors if company else None)),
         brand_style=BrandStyle(**style_of(company)),
         question_seconds=interview.question_seconds,
+        total_minutes=interview_minutes(found, interview.topic_limits, interview.question_seconds),
         status=status_now,
     )
 
@@ -123,16 +126,18 @@ async def start_link(token: str, user: CurrentUser, request: Request) -> InviteS
 
     # Paused, nobody starts; a candidate already in the interview may finish it.
     if current != InviteStatus.IN_PROCESS:
-        await refuse_if_paused(get_redis())
+        await refuse_if_paused(get_redis(), "interview_start", interview.company_id, user.uid)
 
     # A new candidate shows they're a person and counts toward the link's and their address's
     # hourly limits; one already invited is never held back by them.
     if current is None:
         await require_human(request, settings.turnstile_secret_key)
         redis = get_redis()
-        await hit(redis, f"rate:link-starts:{interview.id}", LINK_STARTS_PER_HOUR, HOUR_SECONDS)
+        who = {"company_id": interview.company_id, "user_id": user.uid}
+        link_key = f"rate:link-starts:{interview.id}"
+        await hit(redis, link_key, "LINK_STARTS_PER_HOUR", **who)
         address = client_ip(request)
-        await hit(redis, f"rate:link-starts:ip:{address}", LINK_STARTS_PER_IP_HOUR, HOUR_SECONDS)
+        await hit(redis, f"rate:link-starts:ip:{address}", "LINK_STARTS_PER_IP_HOUR", **who)
 
     # Credits set aside just now: a new candidate's, or an expired invite's (expiry gave them
     # back, and won't again). Anything failing before the candidate has started gives them back.

@@ -1,10 +1,10 @@
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
+from prepza_common.audit_actions import AuditAction, TargetKind
 from prepza_common.auth import CurrentUser
 
 from app.constants.ai_apps import AI_APPS_CHANGED_BY_APP
-from app.constants.audit import AuditAction
 from app.schemas.ai_apps import AiAppsIn
 from app.service_auth import Via
 from app.services.access import require_editor
@@ -22,4 +22,11 @@ async def set_ai_apps(company_id: UUID, body: AiAppsIn, user: CurrentUser, via: 
 
     company, _ = await require_editor(user, company_id)
     await companies.set_ai_apps(company.id, body.allowed)
-    await audit.record(company.id, user.uid, AuditAction.AI_APPS_CHANGED, company.id, via=via)
+    await audit.record(
+        company.id,
+        user.uid,
+        AuditAction.AI_APPS_CHANGED,
+        company.id,
+        via=via,
+        target_kind=TargetKind.COMPANY,
+    )

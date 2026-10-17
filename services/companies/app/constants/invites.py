@@ -1,14 +1,7 @@
 from enum import StrEnum
 from http import HTTPStatus
 
-from prepza_common.constants import (  # noqa: F401 (re-exported)
-    INTERVIEWS_PER_DAY,
-    INTERVIEWS_PER_DAY_UNPAID,
-    MAX_CANDIDATE_NAME_LENGTH,
-    MAX_INTERVIEWS_WITHOUT_CANDIDATES,
-    MAX_INTERVIEWS_WITHOUT_CANDIDATES_UNPAID,
-    MAX_OWNED_COMPANIES,
-)
+from prepza_common.constants import MAX_CANDIDATE_NAME_LENGTH  # noqa: F401 (re-exported)
 
 # The longest search through candidates' emails and names (an email is at most 254 characters).
 MAX_SEARCH_LENGTH = 254
@@ -46,10 +39,10 @@ CANDIDATE_RETENTION_DAYS = 365
 RETENTION_BATCH = 200
 # An invite never started this long after it was last sent expires, and its credits come back.
 INVITE_EXPIRY_DAYS = 30
-# Inviting many at once: the most emails one list may hold, and the longest text pasted or
-# uploaded (a CSV export with other columns is fine; only its emails count).
-MAX_BULK_INVITES = 100
-TOO_MANY_EMAILS = "At most 100 emails at once."
+# Inviting many at once: refused over the most emails one list may hold (the MAX_BULK_INVITES
+# limit), and over the longest text pasted or uploaded (a CSV export with other columns is fine;
+# only its emails count).
+TOO_MANY_EMAILS = "Too many emails in one list: the most is {limit}."
 NO_EMAILS = "No emails found."
 NAME_NEEDS_ONE_EMAIL = "A name goes with one email. In a list, write each as Name <email>."
 # The longest list: characters pasted, or bytes of an uploaded file (the frontend checks a file's
@@ -99,25 +92,28 @@ REMINDER_AFTER_DAYS = 3
 REMINDERS_PER_RUN = 500
 # Invites expired per batch of the daily expiry run.
 EXPIRIES_PER_BATCH = 200
-TOO_MANY_COMPANIES = "You can own at most 3 companies."
+TOO_MANY_COMPANIES = "You already own as many companies as one person may: {limit}."
 # Company names are unique across prepza, ignoring case, and short enough for a heading.
 MAX_COMPANY_NAME_LENGTH = 45
 # A company name may be as short as two letters (EY, HP, 3M), spaces at either end aside.
 MIN_COMPANY_NAME_LENGTH = 2
 COMPANY_NAME_TOO_SHORT = "Use at least 2 characters."
 COMPANY_NAME_TAKEN = "A company with this name already exists."
-TOO_MANY_INTERVIEWS = "Your company can generate up to 10 interviews a day. Try again tomorrow."
+TOO_MANY_INTERVIEWS = (
+    "Your company's daily limit of generated interviews is {limit}. Try again tomorrow."
+)
 TOO_MANY_INTERVIEWS_UNPAID = (
-    "Until your first top-up, your company can generate up to 3 interviews a day (10 after). Try "
-    "again tomorrow."
+    "Until your first top-up, your company's daily limit of generated interviews is {limit}. "
+    "Try again tomorrow."
 )
 TOO_MANY_WITHOUT_CANDIDATES = (
-    "Invite a candidate to one of your interviews, or delete one, before generating another: up "
-    "to 5 generated interviews can wait without candidates."
+    "Invite a candidate to one of your interviews, or delete one, before generating another: "
+    "your company's limit of generated interviews waiting without candidates is {limit}."
 )
 TOO_MANY_WITHOUT_CANDIDATES_UNPAID = (
-    "Invite a candidate to your interview, or delete it, before generating another: until your "
-    "first top-up, 1 generated interview can wait without candidates (5 after)."
+    "Invite a candidate to one of your interviews, or delete one, before generating another: "
+    "until your first top-up, your company's limit of generated interviews waiting without "
+    "candidates is {limit}."
 )
 # Starting an interview with an email the sign-in hasn't verified (GitHub doesn't): a link to
 # confirm it was sent when they signed in.
@@ -139,10 +135,6 @@ INTERVIEW_UNAVAILABLE = "This interview isn't available."
 LINK_CLOSED = "This interview isn't taking new candidates right now."
 # Random bytes in a shareable link's code.
 LINK_TOKEN_BYTES = 12
-# New candidates a job-ad link takes in an hour, and one address starts across all links: a
-# script with many accounts can't hold (or, picking an answer, spend) a company's credits faster.
-LINK_STARTS_PER_HOUR = 30
-LINK_STARTS_PER_IP_HOUR = 10
 
 
 # What a company can narrow its candidates to: an invite status, or a result: reached the pass

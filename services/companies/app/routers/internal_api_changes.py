@@ -37,13 +37,15 @@ async def company_candidate(company_id: UUID, interview_id: UUID, invite_id: UUI
 async def create_interview(
     company_id: UUID, body: InterviewCreate, user_id: str, caller: ServiceCaller
 ) -> InterviewOut:
-    await refuse_if_paused(get_redis())
+    await refuse_if_paused(get_redis(), "interview_generation", company_id, user_id)
     company = await companies.get(company_id)
 
     if company is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Company not found")
 
-    return await interview_creation.create(company, user_id, None, body.text, body.generate_in)
+    return await interview_creation.create(
+        company, user_id, None, body.text, body.generate_in, VIA_API
+    )
 
 
 @router.delete(
@@ -65,10 +67,11 @@ async def rename_candidate(
     interview_id: UUID,
     invite_id: UUID,
     body: CandidateNameIn,
+    user_id: str,
     caller: ServiceCaller,
 ) -> None:
-    _, invite = await company_candidate(company_id, interview_id, invite_id)
-    await candidate_changes.rename(invite, body.name)
+    interview, invite = await company_candidate(company_id, interview_id, invite_id)
+    await candidate_changes.rename(interview, invite, body.name, user_id, VIA_API)
 
 
 @router.put(
@@ -107,7 +110,7 @@ async def resend_invite(
 
     company = await companies.get(company_id)
     sender = User(uid=user_id, email="", email_verified=True)
-    await candidate_invites.invite(interview, company, sender, invite.email)
+    await candidate_invites.invite(interview, company, sender, invite.email, via=VIA_API)
     await outbox_service.flush_quietly()
 
 

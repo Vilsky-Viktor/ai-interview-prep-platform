@@ -212,3 +212,63 @@ async def company_checkout(company_id: UUID, price_id: str, buyer_id: str) -> st
     )
 
     return passed_on(response, {status.HTTP_422_UNPROCESSABLE_CONTENT}).json()["transaction_id"]
+
+
+async def purchase_owner(transaction_id: str) -> dict | None:
+    """Whose wallet a top-up's Paddle transaction paid into (`owner_type`, `owner_id`); None
+    when no top-up has it."""
+    response = await http.get_client().get(
+        f"{settings.billing_url}/internal/purchases/{transaction_id}",
+        headers=_headers(),
+    )
+
+    if response.status_code == status.HTTP_404_NOT_FOUND:
+        return None
+
+    response.raise_for_status()
+
+    return response.json()
+
+
+async def buyer_purchases(user_id: str) -> list[dict]:
+    """The company top-ups the user paid for, one per transaction, newest first (at most
+    billing's limit): {"transaction_id", "company_id", "total", "currency", "created_at"}."""
+    response = await http.get_client().get(
+        f"{settings.billing_url}/internal/purchases",
+        params={"buyer_id": user_id},
+        headers=_headers(),
+    )
+
+    response.raise_for_status()
+
+    return response.json()
+
+
+async def candidate_hold(key: str) -> str | None:
+    """Whether the credits of the invite with that key are open, charged or released; None
+    when none were held."""
+    response = await http.get_client().get(
+        f"{settings.billing_url}/internal/candidates/hold",
+        params={"key": key},
+        headers=_headers(),
+    )
+
+    if response.status_code == status.HTTP_404_NOT_FOUND:
+        return None
+
+    response.raise_for_status()
+
+    return response.json()["status"]
+
+
+async def adjust_company(company_id: UUID, amount: int, note: str, key: UUID) -> None:
+    """A superadmin's adjustment of the company's credits, once per key. Billing's refusals
+    reach the superadmin unchanged: one that would take the available balance below zero (409),
+    or an amount of zero (422)."""
+    response = await http.get_client().post(
+        f"{settings.billing_url}/internal/companies/{company_id}/adjustments",
+        json={"amount": amount, "note": note, "key": str(key)},
+        headers=_headers(),
+    )
+
+    passed_on(response, {status.HTTP_409_CONFLICT, status.HTTP_422_UNPROCESSABLE_CONTENT})

@@ -25,7 +25,7 @@ async def events_about(field: str, value: str) -> list[tuple[str, dict]]:
 def test_a_candidates_start_bounce_expiry_and_removal_are_told_once_each(run):
     async def scenario():
         company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
-        interview = await interviews.create(company.id, uuid.uuid4(), "en")
+        interview = await interviews.create(company.id, uuid.uuid4(), "en", 60)
         started, _ = await invites.upsert(interview.id, "s@example.com", "B", "A", "en")
         bounced, _ = await invites.upsert(interview.id, "b@example.com", "B", "A", "en")
         expiring, _ = await invites.upsert(interview.id, "e@example.com", "B", "A", "en")
@@ -70,9 +70,9 @@ def test_an_interview_ready_says_whose_it_is(run):
     async def scenario():
         company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
         generation = uuid.uuid4()
-        interview = await interviews.create(company.id, generation, "en")
+        interview = await interviews.create(company.id, generation, "en", 60)
         await interview_generations.set_generated(
-            generation, uuid.uuid4(), "Backend", {"kind": "x"}, "ev1"
+            generation, uuid.uuid4(), "Backend", None, {"kind": "x"}, "ev1"
         )
 
         return company, interview, await events_about("interview_id", str(interview.id))
@@ -88,7 +88,7 @@ def test_an_interview_ready_says_whose_it_is(run):
 def test_a_candidates_start_and_finish_times_are_kept_from_the_first_time(run):
     async def scenario():
         company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
-        interview = await interviews.create(company.id, uuid.uuid4(), "en")
+        interview = await interviews.create(company.id, uuid.uuid4(), "en", 60)
         invite, _ = await invites.upsert(interview.id, "t@example.com", "B", "A", "en")
         await invite_progress.start(invite.id, "u1")
         first = await invites.get(invite.id)

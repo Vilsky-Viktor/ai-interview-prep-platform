@@ -15,12 +15,15 @@ from app.schemas.interviews import InterviewSettings
 from app.storage.db import Session
 
 
-async def create(company_id, generation_id, language: str) -> Interview:
+async def create(company_id, generation_id, language: str, seconds: int) -> Interview:
+    """A generated test, waiting for its questions: `seconds` a question until its level is
+    known (interview_generations.set_generated)."""
     interview = Interview(
         company_id=company_id,
         generation_id=generation_id,
         set_id=None,
         language=language,
+        question_seconds=seconds,
     )
 
     async with Session() as session:
@@ -30,14 +33,18 @@ async def create(company_id, generation_id, language: str) -> Interview:
     return interview
 
 
-async def create_from_template(company_id, set_id, title: str, language: str) -> Interview:
-    """A test whose questions were copied from a template: ready at once, with no generation."""
+async def create_from_template(
+    company_id, set_id, title: str, language: str, seconds: int
+) -> Interview:
+    """A test whose questions were copied from a template: ready at once, with no generation,
+    `seconds` a question (its level's)."""
     interview = Interview(
         company_id=company_id,
         generation_id=None,
         set_id=set_id,
         title=title,
         language=language,
+        question_seconds=seconds,
         ready_at=datetime.now(UTC),
     )
 

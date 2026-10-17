@@ -1,8 +1,8 @@
 from fastapi import APIRouter, status
 from prepza_common.google import Invoker
-from prepza_common.pubsub import PushBody, event_of
+from prepza_common.pubsub import PushBody, event_of, occurred_at
 
-from app.services import candidate_billing, generation_events
+from app.services import audit_events, candidate_billing, generation_events
 
 router = APIRouter(prefix="/internal", tags=["internal"])
 
@@ -14,3 +14,4 @@ async def receive_event(body: PushBody) -> None:
     event_type, data, event_id = event_of(body)
     await generation_events.handle(event_type, data, event_id)
     await candidate_billing.handle(event_type, data, event_id)
+    await audit_events.handle(event_type, data, event_id, occurred_at(body))

@@ -23,7 +23,7 @@ def test_counts_only_what_the_month_added(run):
         before, before_all = await stats.stats(month), await stats.stats(None)
         before_year = await stats.stats(now.strftime("%Y"))
         company = await companies.create(f"Acme {uuid.uuid4()}", "owner", "owner@example.com")
-        found = await interviews.create(company.id, uuid.uuid4(), "en")
+        found = await interviews.create(company.id, uuid.uuid4(), "en", 60)
         finished = await link_invites.for_link(found.id, "done@example.com")
         await invite_progress.finish(finished.id, 80, False, None)
         await link_invites.for_link(found.id, "waiting@example.com")

@@ -3,6 +3,7 @@ from datetime import UTC, datetime
 
 import pytest
 from fastapi import HTTPException, status
+from prepza_common.audit_actions import AuditAction, TargetKind
 
 from app.integrations import billing
 from app.models.companies import Company, Member
@@ -91,7 +92,7 @@ def remove_url(member):
     return f"/members/{member.id}?company_id={COMPANY_ID}"
 
 
-def test_the_owner_removes_an_admin_and_their_card_stops_paying(client, team):
+def test_the_owner_removes_an_admin_and_their_card_stops_paying(client, team, audited):
     (_, bob, cid), removed, turned_off = team
     sign_in("ann@example.com", uid="ann")
 
@@ -100,9 +101,13 @@ def test_the_owner_removes_an_admin_and_their_card_stops_paying(client, team):
     assert removed == [bob.id, cid.id]
     # A pending invite has no card to stop.
     assert turned_off == ["bob"]
+    assert audited == [
+        (COMPANY_ID, "ann", AuditAction.MEMBER_REMOVED, member.id, TargetKind.MEMBER)
+        for member in (bob, cid)
+    ]
 
 
-def test_nobody_removes_the_owner_and_admins_remove_nobody(client, team):
+def test_nobody_removes_the_owner_and_admins_remove_nobody(client, team, audited):
     (owner, _, cid), removed, _ = team
     sign_in("ann@example.com", uid="ann")
 
@@ -111,7 +116,7 @@ def test_nobody_removes_the_owner_and_admins_remove_nobody(client, team):
     sign_in("bob@example.com", uid="bob")
 
     assert client.delete(remove_url(cid)).status_code == 403
-    assert removed == []
+    assert removed == [] and audited == []
 
 
 def test_the_list_says_which_rows_can_be_removed(client, team):
@@ -128,7 +133,7 @@ def role_url(member):
     return f"/members/{member.id}/role?company_id={COMPANY_ID}"
 
 
-def test_the_owner_invites_a_viewer_and_an_admin_by_default(client, team):
+def test_the_owner_invites_a_viewer_and_an_admin_by_default(client, team, audited):
     _, changed, _ = team
     sign_in("ann@example.com", uid="ann")
     url = f"/members?company_id={COMPANY_ID}"
@@ -139,6 +144,16 @@ def test_the_owner_invites_a_viewer_and_an_admin_by_default(client, team):
     assert (viewer.status_code, viewer.json()["role"]) == (201, "viewer")
     assert (admin.status_code, admin.json()["role"]) == (201, "admin")
     assert changed == [("dan@example.com", "viewer"), ("eve@example.com", "admin")]
+    assert audited == [
+        (
+            COMPANY_ID,
+            "ann",
+            AuditAction.MEMBER_INVITED,
+            uuid.UUID(row.json()["id"]),
+            TargetKind.MEMBER,
+        )
+        for row in (viewer, admin)
+    ]
     # Nobody is invited as a second owner.
     assert client.post(url, json={"email": "fay@example.com", "role": "owner"}).status_code == 422
 
@@ -165,7 +180,7 @@ def test_an_invite_emails_the_member_from_the_owner_within_their_email_limits(cl
     assert flushed
 
 
-def test_an_owner_over_their_email_limits_invites_nobody(client, team, monkeypatch):
+def test_an_owner_over_their_email_limits_invites_nobody(client, team, monkeypatch, audited):
     _, changed, _ = team
 
     async def over(*args):
@@ -177,10 +192,10 @@ def test_an_owner_over_their_email_limits_invites_nobody(client, team, monkeypat
     response = client.post(f"/members?company_id={COMPANY_ID}", json={"email": "dan@example.com"})
 
     assert response.status_code == 429
-    assert changed == []
+    assert changed == [] and audited == []
 
 
-def test_the_owner_makes_an_admin_a_viewer_and_their_card_stops_paying(client, team):
+def test_the_owner_makes_an_admin_a_viewer_and_their_card_stops_paying(client, team, audited):
     (_, bob, cid), changed, turned_off = team
     sign_in("ann@example.com", uid="ann")
 
@@ -189,9 +204,13 @@ def test_the_owner_makes_an_admin_a_viewer_and_their_card_stops_paying(client, t
     assert client.put(role_url(bob), json={"role": "admin"}).status_code == 204
     assert changed == [(bob.id, "viewer"), (cid.id, "viewer"), (bob.id, "admin")]
     assert turned_off == ["bob"]
+    assert [event[2:] for event in audited] == [
+        (AuditAction.MEMBER_ROLE_CHANGED, member.id, TargetKind.MEMBER)
+        for member in (bob, cid, bob)
+    ]
 
 
-def test_only_the_owner_changes_roles_and_never_their_own(client, team):
+def test_only_the_owner_changes_roles_and_never_their_own(client, team, audited):
     (owner, _, cid), changed, _ = team
     sign_in("ann@example.com", uid="ann")
 
@@ -200,4 +219,4 @@ def test_only_the_owner_changes_roles_and_never_their_own(client, team):
     sign_in("bob@example.com", uid="bob")
 
     assert client.put(role_url(cid), json={"role": "viewer"}).status_code == 403
-    assert changed == []
+    assert changed == [] and audited == []

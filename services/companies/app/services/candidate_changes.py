@@ -1,6 +1,6 @@
 from fastapi import HTTPException, status
+from prepza_common.audit_actions import AuditAction, TargetKind
 
-from app.constants.audit import AuditAction
 from app.constants.invites import EXTRA_TIME_STARTED, NOT_STARTED, InviteStatus
 from app.integrations import rounds
 from app.models.interviews import Interview
@@ -32,10 +32,18 @@ async def remove(
     await outbox_service.flush_quietly()
     revoked = invite.status in NOT_STARTED
     action = AuditAction.INVITE_REVOKED if revoked else AuditAction.CANDIDATE_DELETED
-    await audit.record(interview.company_id, user_id, action, invite.id, via=via)
+    await audit.record(
+        interview.company_id, user_id, action, invite.id, via=via, target_kind=TargetKind.CANDIDATE
+    )
 
 
-async def rename(invite: CandidateInvite, name: str | None) -> None:
+async def rename(
+    interview: Interview,
+    invite: CandidateInvite,
+    name: str | None,
+    user_id: str,
+    via: str | None = None,
+) -> None:
     """Corrects the name a candidate's sign-in gave, a nickname for example; none makes it not
     known. The sign-in fills only a name not known, so this one stays. A deleted candidate is
     404."""
@@ -43,6 +51,14 @@ async def rename(invite: CandidateInvite, name: str | None) -> None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Candidate not found")
 
     await candidates.set_name(invite.id, name or None)
+    await audit.record(
+        interview.company_id,
+        user_id,
+        AuditAction.CANDIDATE_RENAMED,
+        invite.id,
+        via=via,
+        target_kind=TargetKind.CANDIDATE,
+    )
 
 
 async def set_extra_time(
@@ -54,5 +70,10 @@ async def set_extra_time(
 
     await invites.set_extra_time(invite.id, extra_time)
     await audit.record(
-        interview.company_id, user_id, AuditAction.EXTRA_TIME_SET, invite.id, via=via
+        interview.company_id,
+        user_id,
+        AuditAction.EXTRA_TIME_SET,
+        invite.id,
+        via=via,
+        target_kind=TargetKind.CANDIDATE,
     )

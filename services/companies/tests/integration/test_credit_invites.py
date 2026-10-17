@@ -9,7 +9,7 @@ from app.storage.db import Session
 
 
 async def interview_of(company, title: str):
-    found = await interviews.create(company.id, uuid.uuid4(), "en")
+    found = await interviews.create(company.id, uuid.uuid4(), "en", 60)
     await interviews.set_title(found.id, title)
 
     return found

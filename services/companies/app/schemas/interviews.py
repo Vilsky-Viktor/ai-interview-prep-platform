@@ -62,6 +62,8 @@ class QuestionText(BaseModel):
     id: UUID
     text: str
     options: list[QuestionOption]
+    # Multi-answer ("select all that apply"): more than one option is right.
+    multi: bool = False
     likes: int
     dislikes: int
     reports: int
@@ -85,6 +87,9 @@ class TopicOut(BaseModel):
 
 class InterviewDetail(InterviewOut):
     topics: list[TopicOut]
+    # The whole interview at its time per question, in minutes, as a candidate sees it before
+    # starting; None while its questions aren't known.
+    total_minutes: int | None = None
     # Whether the user may change the test and its candidates: owners and admins, not viewers.
     can_edit: bool = False
 

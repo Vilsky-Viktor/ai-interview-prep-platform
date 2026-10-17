@@ -6,6 +6,7 @@ import uuid
 from datetime import UTC, datetime
 
 import pytest
+from prepza_common.audit_actions import AuditAction, TargetKind
 from prepza_common.auth import current_user
 from prepza_common.names import clean_name
 from prepza_common.user import User
@@ -128,12 +129,15 @@ def url(invite):
 
 
 @pytest.mark.parametrize("uid", ["olga", "adam"])
-def test_owners_and_admins_correct_a_candidates_name_trimmed(client, candidate, uid):
+def test_owners_and_admins_correct_a_candidates_name_trimmed(client, candidate, uid, audited):
     invite, saved = candidate
     sign_in(uid)
 
     assert client.patch(url(invite), json={"name": "  Maria Kowalska "}).status_code == 204
     assert saved == [(invite.id, "Maria Kowalska")]
+    assert [event[1:] for event in audited] == [
+        (uid, AuditAction.CANDIDATE_RENAMED, invite.id, TargetKind.CANDIDATE)
+    ]
 
 
 def test_a_blank_name_makes_it_unknown_again(client, candidate):
@@ -145,12 +149,12 @@ def test_a_blank_name_makes_it_unknown_again(client, candidate):
 
 
 @pytest.mark.parametrize("uid", ["vera", "stranger"])
-def test_viewers_and_outsiders_cant_rename_a_candidate(client, candidate, uid):
+def test_viewers_and_outsiders_cant_rename_a_candidate(client, candidate, uid, audited):
     invite, saved = candidate
     sign_in(uid)
 
     assert client.patch(url(invite), json={"name": "Maria"}).status_code in (403, 404)
-    assert saved == []
+    assert saved == [] and audited == []
 
 
 def test_a_too_long_name_is_refused(client, candidate):

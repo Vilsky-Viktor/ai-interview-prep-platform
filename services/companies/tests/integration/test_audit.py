@@ -1,10 +1,11 @@
 import uuid
 from datetime import UTC, datetime, timedelta
 
+from prepza_common.audit_actions import AuditAction
 from prepza_common.constants import DELETED_USER, VIA_ASSISTANT
 from sqlalchemy import func, select, update
 
-from app.constants.audit import AuditAction
+from app.constants.audit import AUDIT_RETENTION_DAYS
 from app.models.audit import AuditEvent
 from app.storage import accounts, audit, companies
 from app.storage.db import Session
@@ -28,7 +29,7 @@ def test_audit_events_list_newest_first_age_out_and_go_with_the_company(run):
             )
             await session.commit()
 
-        aged = await audit.delete_before(datetime.now(UTC) - timedelta(days=730))
+        aged = await audit.delete_before(datetime.now(UTC) - timedelta(days=AUDIT_RETENTION_DAYS))
         kept = await audit.list_for_company(company.id, 0, 10)
         await companies.delete(company.id)
 

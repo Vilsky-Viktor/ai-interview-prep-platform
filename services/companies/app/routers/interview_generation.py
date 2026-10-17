@@ -1,13 +1,14 @@
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, Request, status
+from prepza_common import ai_cap
+from prepza_common.audit_actions import AuditAction
 from prepza_common.auth import CurrentUser
 from prepza_common.http import passed_on
 from prepza_common.human_check import require_human
 from prepza_common.pause import refuse_if_paused
 
 from app.config.settings import settings
-from app.constants.audit import AuditAction
 from app.constants.generation import GENERATION_REFUSALS
 from app.integrations import billing
 from app.integrations import generation as generation_api
@@ -50,33 +51,36 @@ async def review_generation(
     interview_id: UUID, body: ReviewIn, user: CurrentUser, via: Via, request: Request
 ) -> dict:
     """Approved topics resume the generation, so a pause refuses it. A company that never paid
-    shows it's a person on the site first, as generating costs; the assistant and AI apps (no
-    browser) can't be asked."""
-    await refuse_if_paused(get_redis())
+    shows it's a person on the site first, as generating costs (the assistant and AI apps, with
+    no browser, can't be asked), and is refused once today's unpaid AI spend reached its cap."""
     interview = await get_interview(user, interview_id, editor=True)
+    company_id = interview.company_id
+    await refuse_if_paused(get_redis(), "interview_generation", company_id, user.uid)
 
-    if (
-        via is None
-        and settings.turnstile_secret_key
-        and not await billing.company_paid(interview.company_id)
-    ):
-        await require_human(request, settings.turnstile_secret_key)
+    if not await billing.company_paid(company_id):
+        if via is None and settings.turnstile_secret_key:
+            await require_human(request, settings.turnstile_secret_key)
+
+        await ai_cap.refuse_if_capped(get_redis(), company_id, user.uid)
 
     response = await generation_api.review(
         interview.generation_id, interview.company_id, body.model_dump()
     )
     reviewed = passed_on(response, GENERATION_REFUSALS).json()
-    await audit.record(
-        interview.company_id, user.uid, AuditAction.TOPICS_APPROVED, interview.id, via=via
-    )
+    await audit.record_interview(interview, user.uid, AuditAction.TOPICS_APPROVED, via)
 
     return reviewed
 
 
 @router.post("/{interview_id}/generation/retry")
 async def retry_generation(interview_id: UUID, user: CurrentUser) -> dict:
-    await refuse_if_paused(get_redis())
+    """Runs the generation again, so it's refused as a review is (without the person check)."""
     interview = await get_interview(user, interview_id, editor=True)
+    await refuse_if_paused(get_redis(), "interview_generation", interview.company_id, user.uid)
+
+    if not await billing.company_paid(interview.company_id):
+        await ai_cap.refuse_if_capped(get_redis(), interview.company_id, user.uid)
+
     retried = passed_on(
         await generation_api.retry(interview.generation_id, interview.company_id),
         GENERATION_REFUSALS,

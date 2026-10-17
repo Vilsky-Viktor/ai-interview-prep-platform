@@ -1,9 +1,11 @@
 import uuid
 
 from prepza_common.analytics import track
+from prepza_common.limits import question_seconds
 
 from app.constants.events import GENERATION_CANCELLED, GENERATION_COMPLETED, GENERATION_FAILED
 from app.helpers.notifications import interview_cancelled, interview_ready
+from app.integrations.redis import get_redis
 from app.services import outbox as outbox_service
 from app.storage import interview_generations
 
@@ -23,10 +25,14 @@ async def handle(event_type: str, data: dict, event_id: str) -> None:
         return
 
     if event_type == GENERATION_COMPLETED:
+        # An event from before generation sent the level keeps the seconds the test has.
+        level = data.get("level")
+        seconds = await question_seconds(get_redis(), level) if level else None
         await interview_generations.set_generated(
             generation_id,
             uuid.UUID(data["set_id"]),
             data["title"],
+            seconds,
             interview_ready(interview, data["title"]),
             event_id,
         )

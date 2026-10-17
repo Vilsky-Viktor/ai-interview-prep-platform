@@ -1,7 +1,8 @@
 import logging
-import random
+import math
 
 import httpx
+from prepza_common.multi_answer import draw
 
 from app.constants.interviews import (
     DEFAULT_TOPIC_QUESTIONS,
@@ -12,7 +13,7 @@ from app.integrations import generation as generation_api
 from app.integrations import library
 from app.models.interviews import Interview
 from app.schemas.interviews import InterviewOut, TopicOut
-from app.storage import interview_generations, interviews
+from app.storage import candidates, interview_generations, interviews
 
 logger = logging.getLogger(__name__)
 
@@ -95,6 +96,15 @@ async def interview_out(interview: Interview, candidate_count: int = 0) -> Inter
     )
 
 
+async def interviews_page(company_id, offset: int, limit: int, q: str = "") -> list[InterviewOut]:
+    """A page of the company's interviews, newest first, each with how many candidates it has;
+    `q` narrows them to titles containing it."""
+    rows = await interviews.list_for_company(company_id, offset, limit, q=q)
+    totals = await candidates.counts([item.id for item in rows])
+
+    return [await interview_out(item, totals.get(item.id, 0)) for item in rows]
+
+
 def topic_limit(limits: dict[str, int], topic_id) -> int:
     """Questions a candidate gets from the topic: the manager's number, or the default."""
     return limits.get(str(topic_id), DEFAULT_TOPIC_QUESTIONS)
@@ -113,15 +123,27 @@ def topics_out(found: dict, limits: dict[str, int]) -> list[TopicOut]:
     ]
 
 
-def pick_questions(questions: list, limit: int) -> list:
-    """Each candidate gets a fresh random subset, or every question when the topic has no more."""
+def interview_minutes(found: dict | None, limits: dict[str, int], seconds: int) -> int | None:
+    """The whole interview's time, in minutes rounded up: every question a candidate gets at
+    `seconds` each. None while the interview's questions aren't known."""
+    if not found:
+        return None
+
+    questions = sum(topic.question_limit for topic in topics_out(found, limits))
+
+    return math.ceil(questions * seconds / 60)
+
+
+def pick_questions(questions: list, limit: int, share: float) -> list:
+    """Each candidate gets a fresh random subset with `share` of multi-answer questions
+    (prepza_common.multi_answer.draw), or every question when the topic has no more."""
     if limit >= len(questions):
         return questions
 
-    return random.sample(questions, limit)
+    return draw(questions, limit, share)
 
 
-def session_topics(interview: Interview, content: dict) -> list[dict]:
+def session_topics(interview: Interview, content: dict, share: float) -> list[dict]:
     """Each topic with a fresh random subset of its questions, as rounds starts sessions."""
     return [
         {
@@ -129,7 +151,7 @@ def session_topics(interview: Interview, content: dict) -> list[dict]:
             "preparation_id": content["id"],
             "title": topic["title"],
             "questions": pick_questions(
-                topic["questions"], topic_limit(interview.topic_limits, topic["id"])
+                topic["questions"], topic_limit(interview.topic_limits, topic["id"]), share
             ),
         }
         for topic in content["topics"]
