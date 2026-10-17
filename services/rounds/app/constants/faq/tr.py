@@ -40,7 +40,7 @@ FAQ = [
     {
         "key": "charged",
         "question": "Bir aday için ne zaman ücret alınır?",
-        "answer": "Aday en az bir soruyu yanıtlayarak mülakatı bitirdiğinde ya da bir soruyu yanıtladıktan sonra onu iptal ettiğinizde. Kredileri davet ettiğinizde ayrılır; hiçbir şeyi yanıtlamadan önce onu iptal ederseniz, hiç başlamazsa ya da hiçbir şeyi yanıtlamazsa geri gelir.",
+        "answer": "Aday en az bir soruyu yanıtlamışsa: mülakatı sona erdiğinde (kendisi bitirdiğinde ya da o yokken süresi dolduğunda) veya onu iptal ettiğinizde. Bir yanıt seçilmeden süresi dolan soru sayılmaz. Kredileri davet ettiğinizde ayrılır; hiçbir şeyi yanıtlamadan önce onu iptal ederseniz, hiç başlamazsa ya da mülakatı hiçbir şey yanıtlanmadan sona ererse geri gelir.",
     },
     {
         "key": "compare_hiring",

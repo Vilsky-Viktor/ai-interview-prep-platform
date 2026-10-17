@@ -40,7 +40,7 @@ FAQ = [
     {
         "key": "charged",
         "question": "Millal kandidaadi eest tasu võetakse?",
-        "answer": "Kui ta lõpetab intervjuu ja on vastanud vähemalt ühele küsimusele või kui tühistad ta pärast seda, kui ta on ühele vastanud. Tema krediidid broneeritakse kutsumisel ja tulevad tagasi, kui tühistad ta enne, kui ta midagi vastab, kui ta ei alusta või kui ta ei vasta millelegi.",
+        "answer": "Kui ta on vastanud vähemalt ühele küsimusele: kui tema intervjuu lõpeb (ta lõpetab selle või aeg saab otsa, kui ta on eemal) või kui tühistad ta. Küsimus, mille aeg sai otsa ilma vastust valimata, ei lähe arvesse. Tema krediidid broneeritakse kutsumisel ja tulevad tagasi, kui tühistad ta enne, kui ta midagi vastab, kui ta ei alusta või kui tema intervjuu lõpeb ilma ühegi vastuseta.",
     },
     {
         "key": "compare_hiring",

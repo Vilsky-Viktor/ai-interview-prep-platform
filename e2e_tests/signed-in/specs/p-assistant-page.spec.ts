@@ -77,3 +77,25 @@ test("the assistant answers about the page and the interview on screen", async (
   expect(said).not.toContain("Olga")
   await expect(panel.getByText(/Hana/).first()).toBeVisible()
 })
+
+test("the assistant answers hiring advice from the site's guide and links it", async ({
+  signInAs,
+}) => {
+  test.skip(!env("OPENAI_API_KEY"), "No OpenAI key: the assistant can't answer")
+  test.setTimeout(180_000)
+  const owner = await signInAs(ownerEmail())
+  await visit(owner, "/companies")
+  const panel = await openPanel(owner)
+
+  const advice = await ask(owner, "Is it legal to use AI to screen candidates in the EU?")
+  expect(advice.answer).toContainEqual({
+    tool: expect.objectContaining({ name: "get_guide", state: "done" }),
+  })
+  expect(advice.answer.some((event) => event.done)).toBe(true)
+  // The guide it read, offered under the answer, opens the article.
+  const link = panel.locator('a[href*="/guides/"]')
+  await expect(link).toBeVisible()
+  await link.click()
+  await expect(owner).toHaveURL(/\/guides\/[a-z0-9-]+$/)
+  await expect(owner.getByRole("heading", { level: 1 })).toBeVisible()
+})

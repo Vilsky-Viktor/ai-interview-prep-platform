@@ -31,6 +31,8 @@ TOOL_LABELS = {
     "get_faq": "Reading the FAQ…",
     "get_page_guide": "Reading the page's guide…",
     "get_platform_guide": "Reading prepza's guide…",
+    "list_guides": "Reading the guides…",
+    "get_guide": "Reading the guide…",
     "list_topic_questions": "Reading the questions…",
     "list_question_reports": "Reading the question's reports…",
     "list_company_actions": "Reading the action log…",

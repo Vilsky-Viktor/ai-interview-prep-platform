@@ -23,8 +23,11 @@ from app.constants.help import (
     HELP_ALL_KEY,
     HELP_CHAT,
     HELP_SPEND_KEY,
+    MAX_GUIDE_SLUG_LENGTH,
     MAX_PAGE_KEY_LENGTH,
+    NO_SUCH_GUIDE,
     NO_SUCH_PAGE,
+    PAGE_ARTICLES,
     PRICES_UNAVAILABLE,
     HelpRole,
     LegalDocument,
@@ -32,6 +35,7 @@ from app.constants.help import (
 from app.constants.legal import NO_SUCH_VERSION
 from app.constants.rounds import CHAT_FAILED
 from app.helpers import legal
+from app.helpers.guide_articles import guide_article, guide_articles
 from app.helpers.help import faq_items
 from app.helpers.help_replies import reply_signature, trusted
 from app.helpers.page_guides import page_guide
@@ -39,7 +43,14 @@ from app.helpers.sign_in import secret_reply, with_sign_in
 from app.integrations import billing
 from app.integrations.redis import get_redis
 from app.schemas.contact import ContactRequest
-from app.schemas.help import FaqItemOut, HelpChatRequest, LegalOut, PageGuideOut
+from app.schemas.help import (
+    FaqItemOut,
+    GuideItemOut,
+    GuideOut,
+    HelpChatRequest,
+    LegalOut,
+    PageGuideOut,
+)
 from app.services import outbox as outbox_service
 from app.services.help import build_messages, platform_guide, record_answer, stream_reply
 from app.storage import contact as contact_store
@@ -74,14 +85,40 @@ async def get_guide(request: Request) -> str:
 async def get_page_guide(
     request: Request, key: str = Path(max_length=MAX_PAGE_KEY_LENGTH)
 ) -> PageGuideOut:
-    """A page's guide, by its key, in the page's language (English until it's translated): its
-    info button shows it, and the assistant reads it about the page the user is on; public."""
-    guide = page_guide(key, request_language(request))
+    """A page's guide, by its key, in the page's language (English until it's translated), with
+    the guide article to read more in, if any: its info button shows it, and the assistant reads
+    it about the page the user is on; public."""
+    language = request_language(request)
+    guide = page_guide(key, language)
 
     if guide is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, NO_SUCH_PAGE)
 
-    return PageGuideOut(key=key, **guide)
+    article = guide_article(PAGE_ARTICLES[key], language) if key in PAGE_ARTICLES else None
+
+    return PageGuideOut(key=key, **guide, article=article)
+
+
+@router.get("/guides")
+async def list_guides(request: Request) -> list[GuideItemOut]:
+    """The site's guide articles (hiring advice and how-tos: hiring engineers, interviewing in
+    the age of AI, AI hiring and the law, ATS integration, MCP and the API, ...), by title, in
+    the page's language where translated; public."""
+    return [GuideItemOut(**item) for item in guide_articles(request_language(request))]
+
+
+@router.get("/guides/{slug}")
+async def get_guide_article(
+    request: Request, slug: str = Path(max_length=MAX_GUIDE_SLUG_LENGTH)
+) -> GuideOut:
+    """One guide article, by its slug, with its Markdown text, in the page's language (English
+    until it's translated); public."""
+    article = guide_article(slug, request_language(request))
+
+    if article is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, NO_SUCH_GUIDE)
+
+    return GuideOut(**article)
 
 
 @router.get("/legal/{document}")

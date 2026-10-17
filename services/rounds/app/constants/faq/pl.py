@@ -40,7 +40,7 @@ FAQ = [
     {
         "key": "charged",
         "question": "Kiedy płacę za kandydata?",
-        "answer": "Gdy zakończy rozmowę, odpowiadając na co najmniej jedno pytanie, albo jeśli wycofasz go po tym, jak odpowiedział na jedno. Jego kredyty są rezerwowane przy zaproszeniu i wracają, jeśli wycofasz go, zanim na cokolwiek odpowie, jeśli nigdy nie zacznie albo jeśli na nic nie odpowie.",
+        "answer": "Jeśli odpowiedział na co najmniej jedno pytanie: gdy jego rozmowa się zakończy (sam ją zakończy albo skończy się czas, gdy go nie ma), albo gdy go wycofasz. Pytanie, którego czas minął bez wybranej odpowiedzi, się nie liczy. Jego kredyty są rezerwowane przy zaproszeniu i wracają, jeśli wycofasz go, zanim na cokolwiek odpowie, jeśli nigdy nie zacznie albo jeśli jego rozmowa zakończy się bez żadnej odpowiedzi.",
     },
     {
         "key": "compare_hiring",

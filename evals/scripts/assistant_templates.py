@@ -55,7 +55,8 @@ def fixture(title: str, topics: tuple[str, ...]) -> PreparationIn:
 
 async def main(command: str) -> None:
     if command == "create":
-        ids = [str(await templates.create_template(fixture(*item))) for item in TEMPLATES]
+        # No multi-answer questions: the candidates pick the one option starting with "Right".
+        ids = [str(await templates.create_template(fixture(*item), 0)) for item in TEMPLATES]
         IDS.parent.mkdir(parents=True, exist_ok=True)
         IDS.write_text(json.dumps(ids))
         print(f"templates added: {ids}")

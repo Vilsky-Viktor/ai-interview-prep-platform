@@ -151,12 +151,39 @@ TOOLS = {
         "method": "GET",
         "path": "/help/pages/{key}",
         "params": ["key"],
-        "fields": ["key", "title", "text", "actions", "tips"],
+        "fields": ["key", "title", "text", "actions", "tips", "article", "slug"],
         "description": (
             "A page's guide, in the user's language: what the page is for, what you can do there "
             "and tips. Pass the key of the page the user is on (named in the context), or of "
             'another page they ask about. Use it for "how do I use this page", "what can I do '
             'here" and "what is this page" questions.'
+        ),
+    },
+    "list_guides": {
+        "service": "rounds",
+        "method": "GET",
+        "path": "/help/guides",
+        "params": [],
+        "fields": ["slug", "title", "description"],
+        "description": (
+            "prepza's guide articles, by title and summary, in the user's language: in-depth "
+            "hiring advice and how-tos (how to hire and screen, what to test, the law on AI in "
+            "hiring, connecting an ATS, AI agents and the API, setting up a test). Use it for "
+            'advice, best-practice and "how should I" questions, then read the fitting one '
+            "with get_guide."
+        ),
+    },
+    "get_guide": {
+        "service": "rounds",
+        "method": "GET",
+        "path": "/help/guides/{slug}",
+        "params": ["slug"],
+        "fields": ["slug", "title", "updated", "body"],
+        # A whole article.
+        "max_length": 40_000,
+        "description": (
+            "One guide article, by its slug from list_guides, in the user's language: answer "
+            "from it, and offer it with show (page 'guide' and its slug)."
         ),
     },
     "get_platform_guide": {

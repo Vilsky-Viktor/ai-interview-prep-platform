@@ -59,3 +59,28 @@ test("the info buttons explain the companies list, an interview and a candidate"
   await home.click()
   await expect(owner).toHaveURL(/\/$/)
 })
+
+// A page whose guide names a guide article links it: the article rounds names, which opens.
+test("the candidate page's guide links its guide article", async ({ signInAs }) => {
+  const owner = await signInAs(ownerEmail())
+  const company = await createCompany(owner)
+  const interviewId = await createInterview(owner, company.id)
+  await inviteCandidate(owner, interviewId, throwawayEmail("candidate"))
+  const [candidate] = await api<{ id: string }[]>(
+    owner,
+    "GET",
+    `/companies/interviews/${interviewId}/candidates?sort=date&limit=5`
+  )
+  const guide = await api<{ article: { title: string; path: string } }>(
+    owner,
+    "GET",
+    "/rounds/help/pages/candidate"
+  )
+  await visit(owner, `/companies/${company.id}/interviews/${interviewId}/candidates/${candidate.id}`)
+  await openDialog(owner, owner.getByRole("main").getByTestId("page-help"))
+  const link = owner.getByRole("dialog").getByRole("link", { name: guide.article.title })
+  await expect(link).toHaveAttribute("href", guide.article.path)
+  await link.click()
+  await expect(owner).toHaveURL(new RegExp(`${guide.article.path}$`))
+  await expect(owner.getByRole("heading", { level: 1 })).toHaveText(guide.article.title)
+})

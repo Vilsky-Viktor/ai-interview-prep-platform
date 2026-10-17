@@ -23,6 +23,8 @@ are what the current setup (October 2026) reaches; a change that misses one need
 | **Assistant: page context** | General questions with the page context against without it: correct, right scope, right tools, and blind wins/ties/losses | Judge (`judges/assistant_pair.md`) | With ≥ without on correct and scope; wins ≥ losses |
 | | Page questions ("What can I do on this page?", "Who's best here?", "and here?" after moving) answered about that page without asking which | Judge (`judges/assistant_page.md`) | ≥ 90% |
 | | "What can I do on this page?" calls `get_page_guide` with the page's key | Counted | 100% |
+| **Assistant: guides** | Hiring-advice questions the guide articles answer, with the guide tools against without them: correct and complete against the article, blind wins/ties/losses; general questions as a guard | Judge (`judges/assistant_guide.md`, `judges/assistant_pair.md`) | With ≥ without on general questions; guide questions correct ≥ 95% |
+| | A guide question reads a guide that answers it (`get_guide`) and links it | Counted | ≥ 90% |
 | **Judge reliability** | Planted wrong keys it catches (`key_traps.json`) | `review_questions.py` | 100% |
 | | Agreement with the reference verdicts (`reviews.json`) | `review_questions.py --compare-reference` | ≥ 95% |
 
@@ -186,6 +188,23 @@ moving pages answers about the earlier page. The judge doesn't see the platform 
 how-to answers from it are judged with more noise (they move both ways between runs). Each run
 costs about $1.70: the assistant about $0.75 for both variants, the judge about $0.95.
 
+**Assistant: guides** (2026-10-17, `guides.py`, `gpt-6-luna` at low, each question 3 times in each
+variant, judged by `gpt-6.1-sol` at high): 20 hiring-advice questions the site's guide articles
+answer and 15 general ones of `assistant_questions.json` (data and how-to). "Without" is the
+assistant before the guide tools: no `list_guides` or `get_guide`, no guide instruction.
+
+| Version | Guide: correct (with / without) | Complete | Read a right guide / linked it | Guide wins / ties / losses | General: correct | Right scope | Right tools | General wins / ties / losses |
+|---|---|---|---|---|---|---|---|---|
+| Tools and a hiring-advice instruction (`results/assistant_guides_v1.json`) | 55/60 / 32/60 | 35 / 5 | 45/60 / 45/60 | 53 / 0 / 7 | 44/45 / 44/45 | 45 / 45 | 41 / 39 | 15 / 20 / 10 |
+| Also for questions about prepza's own ATS integrations, MCP and API (in use, `…_v2.json`) | **60/60 / 28/60** | **43 / 5** | **58/60 / 58/60** | **58 / 0 / 2** | **44/45 / 44/45** | **45 / 43** | **44 / 40** | **13 / 25 / 7** |
+
+In v1, "Which ATSs does prepza connect to?" and "Can I use prepza from Claude or ChatGPT?" read
+the platform guide only, which has the facts but not the guide's checklist; saying that questions
+about prepza's own integrations, MCP and API read the guide too fixed it. Two questions are
+answered by two guides each (structured interviews, a knowledge screen's length), and either
+counts. No general question called the guide tools; their differences are judge noise. A run
+costs about $1.50: the assistant about $0.63 for both variants, the judge about $0.90.
+
 ## Datasets
 
 All in `datasets/`, frozen: rebuild one only on purpose (a new domain, a new prompt generation),
@@ -200,6 +219,7 @@ note the date, and re-run the baselines on it.
 | `multi_questions.json` | 460 questions on the same subtopics, 6 of each subtopic's 10 multi-answer ("select all that apply": 2 or 3 right options of 4; 136 and 132), written by `gpt-6.1-sol` at low with the prompt of 2026-10-17 and its self-check; ids `m0000`… | `build_questions.py --per-subtopic 10 --multi 6` | about $1.60 |
 | `multi_key_traps.json` | Its 268 multi-answer questions with one option's mark flipped (with 2 right a wrong one marked, with 3 a right one unmarked), so 2 or 3 stay marked | `build_traps.py --multi --count 142` | free |
 
+| `assistant_guides.json` | The assistant's guides test: 20 hiring-advice questions, each with the page it's asked on, the guide articles that answer it and what a right answer does, and the ids of 15 general questions of `assistant_questions.json` asked as a guard | By hand | — |
 | `assistant_questions.json` | The assistant's page-context test: 8 pages (key, path, the ids the panel sends), 43 general questions asked on 6 of them (6 name an interview or candidate other than the page's), each with what a right answer does, and 9 page checks ("What can I do on this page?" on 5 pages, "Who's best here?", "How did this candidate do?", and "and here?" after moving between interviews) | By hand | — |
 
 `reviews.json` flags 4 questions as flawed (q0008, q0072, q0094, q0232). They're kept on purpose:
@@ -249,7 +269,7 @@ JUDGE_MODEL=gpt-6-luna JUDGE_EFFORT=medium evals/run.sh generation review_questi
 JUDGE_MODEL=gpt-6-luna JUDGE_EFFORT=medium evals/run.sh generation review_questions.py datasets/key_traps.json
 ```
 
-The assistant's page-context test runs in the assistant's container on throwaway data: its own two
+The assistant's page-context and guides tests run in the assistant's container on throwaway data: its own two
 templates (made in library's container, removed after), and an owner, a company with two
 interviews copied from them and three invited candidates who take them aiming at set grades
 (`assistant_fixture.py`), all deleted as a user deletes their account when the run ends. Never
@@ -258,6 +278,7 @@ the user's own local records.
 ```bash
 evals/run.sh library assistant_templates.py create
 evals/run.sh assistant page_context.py --label new-prompt      # --repeat 3, --only g01,p06
+evals/run.sh assistant guides.py --label new-prompt            # --repeat 2, --only q01,g07
 evals/run.sh library assistant_templates.py remove
 ```
 
@@ -269,6 +290,7 @@ evals/run.sh library assistant_templates.py remove
 | A verifier setting on 120 checks (`verify_test.py`) | about $0.11 on Sol |
 | Reviewing 40 questions (Sol judge, high) | about $0.50 |
 | The assistant's page-context test, 3 repeats | about $1.70 |
+| The assistant's guides test, 3 repeats | about $1.50 |
 | Code check, measurements, traps | free |
 
 Use `--sample` to review part of an interview, and judge first with the reference only when a cheaper

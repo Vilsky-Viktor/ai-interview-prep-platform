@@ -1,6 +1,7 @@
 import httpx
 
 from app.constants.show import (
+    LINK_IDS,
     MAX_ROWS,
     NOTHING_TO_SHOW,
     ONE_EACH,
@@ -21,10 +22,10 @@ async def page_name(page: str, ids: dict, token: str, language: str) -> str | No
     if page not in PAGE_NAMES:
         return None
 
-    path, field = PAGE_NAMES[page]
+    service, path, field = PAGE_NAMES[page]
 
     try:
-        response = await services.get("companies", link(path, ids) or "", {}, token, language)
+        response = await services.get(service, link(path, ids) or "", {}, token, language)
     except httpx.HTTPError:
         return None
 
@@ -85,10 +86,7 @@ async def link_block(arguments: dict, turn: Turn) -> dict | None:
     if page not in PAGES:
         return None
 
-    ids = {
-        key: arguments.get(key)
-        for key in ("company_id", "interview_id", "candidate_id", "template_id", "provider")
-    }
+    ids = {key: arguments.get(key) for key in LINK_IDS}
     ids["company_id"] = ids["company_id"] or (str(turn.company_id) if turn.company_id else None)
     url = link(PAGES[page], ids)
 

@@ -79,6 +79,11 @@ jobs:
                 changed="$changed frontend"
               fi
 
+              # rounds serves the site's guide articles from its image.
+              if echo "$files" | grep -qE '^frontend/content/([a-z]+/)?guides/'; then
+                changed="$changed rounds"
+              fi
+
               if echo "$files" | grep -q '^packages/common/'; then
                 changed="$changed common"
               fi

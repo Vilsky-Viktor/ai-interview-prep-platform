@@ -40,7 +40,7 @@ FAQ = [
     {
         "key": "charged",
         "question": "Khi nào tôi bị tính phí cho một ứng viên?",
-        "answer": "Khi ứng viên hoàn thành buổi phỏng vấn và đã trả lời ít nhất một câu hỏi, hoặc nếu bạn thu hồi ứng viên sau khi họ đã trả lời một câu. Tín dụng của họ được giữ lại khi bạn mời họ, và được hoàn lại nếu bạn thu hồi họ trước khi họ trả lời bất cứ câu nào, nếu họ không bao giờ bắt đầu, hoặc nếu họ không trả lời câu nào.",
+        "answer": "Nếu ứng viên đã trả lời ít nhất một câu hỏi: khi buổi phỏng vấn của họ kết thúc (họ tự hoàn thành, hoặc hết giờ trong lúc họ vắng mặt), hoặc khi bạn thu hồi ứng viên. Câu hỏi hết giờ mà chưa chọn câu trả lời thì không được tính. Tín dụng của họ được giữ lại khi bạn mời họ, và được hoàn lại nếu bạn thu hồi họ trước khi họ trả lời bất cứ câu nào, nếu họ không bao giờ bắt đầu, hoặc nếu buổi phỏng vấn của họ kết thúc mà không có câu nào được trả lời.",
     },
     {
         "key": "compare_hiring",

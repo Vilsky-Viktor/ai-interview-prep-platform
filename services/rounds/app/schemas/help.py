@@ -42,14 +42,6 @@ class HelpChatRequest(BaseModel):
         return self
 
 
-class PageGuideOut(BaseModel):
-    """A page's guide: what it's for (`text`), what you can do there and tips."""
-
-    key: str
-    title: str
-    text: str
-    actions: list[str]
-    tips: list[str]
 
 
 class FaqItemOut(BaseModel):
@@ -76,3 +68,33 @@ class LegalOut(BaseModel):
     in_force: str
     versions: list[str]
     sections: list[LegalSectionOut]
+
+
+class GuideItemOut(BaseModel):
+    """A guide article of the site: its title and summary in `language` (English until it's
+    translated), and where the site shows it."""
+
+    slug: str
+    language: str
+    title: str
+    description: str
+    updated: str
+    path: str
+
+
+class GuideOut(GuideItemOut):
+    """A guide article with its Markdown text."""
+
+    body: str
+
+
+class PageGuideOut(BaseModel):
+    """A page's guide: what it's for (`text`), what you can do there, tips, and the guide
+    article to read more in, if the page has one."""
+
+    key: str
+    title: str
+    text: str
+    actions: list[str]
+    tips: list[str]
+    article: GuideItemOut | None = None

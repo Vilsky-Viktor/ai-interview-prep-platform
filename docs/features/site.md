@@ -61,6 +61,7 @@ The articles are `/pre-employment-testing`, `/ai-interviews`, `/compare` and its
 - Each has a short frontmatter: `title`, `seoTitle`, `description`, `updated`.
 - `lib/content.ts` and `components/content/` show them.
 - A new file is a new page, in its hub and the sitemap.
+- The guides (`guides/` and each language's) are also what the assistant reads for hiring advice: rounds serves them from the same files (`GET /api/rounds/help/guides`, the list by title, and `GET /api/rounds/help/guides/{slug}`, one with its Markdown, in the page's language, English until translated). Its image copies `frontend/content` to the same place relative to its code as in the repo, the local stack mounts it, and CI rebuilds rounds when a guide changes, so there's one copy of each article.
 
 **Translations** live in `content/<language>/<folder>/`, under the same file name.
 

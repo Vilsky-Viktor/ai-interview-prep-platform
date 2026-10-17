@@ -88,6 +88,12 @@ for a hard one; adjustable per test. At zero the pick on screen counts; with no 
 as wrong. A test the candidate \
 leaves finishes by itself once its total time, plus 10%, has passed; unanswered questions count \
 as wrong.
+- Extra time: for a candidate who needs more time (for example because of a disability), owners \
+and admins give +25%, +50% or +100% on each question on the candidate's page, before they start; \
+no reason is recorded. Someone taking the test through a shareable link asks the company for a \
+personal invite first. The site's guide "How to time a skills test" \
+(/guides/skills-test-timing-and-extra-time) explains choosing the time per question, the number \
+of questions, the total length and extra time.
 - Any member of the company can try a test as a candidate first (the play button on the \
 interviews list or on the test's page): the same timed questions, free, and not counted as a \
 candidate.
@@ -109,10 +115,11 @@ given never change.
 Credits and billing:
 - prepza is pay as you go with credits: 1 US dollar buys 100 credits. Credits never expire. \
 There are no paid subscriptions or plans. Credits belong to a company's wallet.
-- A candidate costs credits only when they finish the test having answered at least one \
-question (see prices), or when they're revoked after answering at least one. Credits are set \
-aside when a candidate is invited and come back if they're revoked before answering anything, \
-never start, or answer nothing.
+- A candidate costs credits (see prices) once they've answered at least one question: charged \
+when their interview ends, whether they finish it or its time runs out while they're away, or \
+when they're revoked. A question whose time ran out with no answer picked doesn't count. \
+Credits are set aside when a candidate is invited and come back if they're revoked before \
+answering anything, never start, or their interview ends with nothing answered.
 - A person's first company gets free welcome credits (see prices).
 - Top up on the top-up page (account menu → Top up) with one of the fixed top-ups shown there, \
 for a company you belong to. Larger top-ups buy more credits per dollar, \

@@ -1,0 +1,204 @@
+{
+ "about": "The assistant's guides test (scripts/guides.py): `guide` questions the site's guide articles answer, each with the guides that answer it (reading any of them counts) and what a right answer does, asked with the guide tools and without them; `general` names questions of assistant_questions.json asked as a guard (their pages and expectations come from there).",
+ "guide": [
+  {
+   "id": "q01",
+   "page": "interviews",
+   "question": "What's a good process for hiring a backend engineer?",
+   "expect": "A structured sequence like the guide's: role profile/job description, CV screen for hard requirements only, a short knowledge screen, take-home or live coding, system design for senior roles, structured behavioural interview with rubrics, references, decision. Offers the guide.",
+   "guides": [
+    "hiring-engineers"
+   ]
+  },
+  {
+   "id": "q02",
+   "page": "companies",
+   "question": "Should I still do a coding exercise if I use a knowledge test?",
+   "expect": "Yes: a knowledge test checks what they know and code reading, not writing working code; prepza doesn't have candidates write or run code, so keep a take-home or live coding step after it.",
+   "guides": [
+    "hiring-engineers"
+   ]
+  },
+  {
+   "id": "q03",
+   "page": "interviews",
+   "question": "How do I make interviews fairer and more predictive?",
+   "expect": "Structured interviews: same questions for everyone, a scoring rubric per question, independent scoring before discussion; structured interviews predict far better than unstructured ones (about .42 vs .19).",
+   "guides": [
+    "hiring-engineers",
+    "skills-tests-vs-cv-screening"
+   ]
+  },
+  {
+   "id": "q04",
+   "page": "companies",
+   "question": "Candidates use ChatGPT and Copilot now. What should I test in technical interviews?",
+   "expect": "Knowledge an assistant can't supply for them: concepts and theory, reading code, debugging, judgment on trade-offs; a short knowledge screen early, then a hands-on exercise in a form that fits the team (AI-assisted pairing, code review, debugging); tell candidates up front which tools are allowed at each stage.",
+   "guides": [
+    "interviewing-in-the-age-of-ai"
+   ]
+  },
+  {
+   "id": "q05",
+   "page": "interviews",
+   "question": "Should I allow candidates to use AI tools during interviews?",
+   "expect": "Decide per stage and tell candidates up front which tools are allowed; a clear rule is fairer than guessing and makes results comparable; hands-on stages can be AI-assisted; ask in the structured interview how they use AI tools and check their output.",
+   "guides": [
+    "interviewing-in-the-age-of-ai"
+   ]
+  },
+  {
+   "id": "q06",
+   "page": "companies",
+   "question": "Is it legal to use AI to screen candidates in the EU?",
+   "expect": "Yes, within the rules: hiring tools that evaluate candidates are very likely high-risk under the AI Act (Annex III 4(a)); high-risk obligations apply from 2 December 2027; some practices like emotion inference at work are banned since 2 February 2025; the GDPR applies; a person makes the decision.",
+   "guides": [
+    "is-ai-hiring-legal-in-the-eu"
+   ]
+  },
+  {
+   "id": "q07",
+   "page": "billing",
+   "question": "What do I as an employer have to do under the EU AI Act when using an AI hiring tool?",
+   "expect": "Deployer duties (Article 26): use as instructed, assign competent human oversight, monitor and report incidents, keep logs at least six months, inform workers' representatives and workers, tell candidates; plus AI literacy (Article 4) already applies.",
+   "guides": [
+    "is-ai-hiring-legal-in-the-eu"
+   ]
+  },
+  {
+   "id": "q08",
+   "page": "companies",
+   "question": "Can I reject candidates automatically based only on their test score under GDPR?",
+   "expect": "No/risky: GDPR Article 22 gives the right not to be subject to a decision based solely on automated processing with significant effects; have a person review each result before acting; never reject on a score alone.",
+   "guides": [
+    "is-ai-hiring-legal-in-the-eu"
+   ]
+  },
+  {
+   "id": "q09",
+   "page": "companies",
+   "question": "What should I check before choosing an ATS integration for skills tests?",
+   "expect": "Points from the guide's checklist: how you connect (your own revocable key), key permissions, what triggers an invite (a chosen stage per job), where results land, what happens on a failed invite, duplicate events, signed events, retention, cost.",
+   "guides": [
+    "ats-integration-skills-tests"
+   ]
+  },
+  {
+   "id": "q10",
+   "page": "interviews",
+   "question": "When should the ATS send the test: on every new application or later?",
+   "expect": "Trigger on a specific stage you choose per job (after a hard-requirements check), not on every new application.",
+   "guides": [
+    "ats-integration-skills-tests"
+   ]
+  },
+  {
+   "id": "q11",
+   "page": "companies",
+   "question": "Which ATSs does prepza connect to and how does it work?",
+   "expect": "Workable, Greenhouse, Teamtailor, Recruitee and Breezy HR; connect with a company key on the Integrations tab; link a job and trigger stage to an interview; moving a candidate sends the invite once; results come back as a note on the candidate with grade, pass, flags and scorecard link.",
+   "guides": [
+    "ats-integration-skills-tests"
+   ]
+  },
+  {
+   "id": "q12",
+   "page": "companies",
+   "question": "What's the difference between MCP and an API?",
+   "expect": "MCP lets an AI app (Claude, ChatGPT) use a service's tools on a person's behalf in conversation; an API is for software acting on its own with code (e.g. invite from your HR system, web hooks for results). A person asking: agent or MCP; software acting the same way every time: the API.",
+   "guides": [
+    "ai-agents-mcp-and-api"
+   ]
+  },
+  {
+   "id": "q13",
+   "page": "companies",
+   "question": "Can I use prepza from Claude or ChatGPT?",
+   "expect": "Yes, through MCP: connect prepza in the AI app and it works as the user with their permissions; actions are checked/approved; or use the built-in agent or the API.",
+   "guides": [
+    "ai-agents-mcp-and-api"
+   ]
+  },
+  {
+   "id": "q14",
+   "page": "interviews",
+   "question": "Should I use the API or the built-in assistant to invite candidates automatically from our careers site?",
+   "expect": "The API (with an API key, and a web hook for results) for software acting on its own; the built-in agent is for a person asking; or an ATS integration if the ATS is supported.",
+   "guides": [
+    "ai-agents-mcp-and-api"
+   ]
+  },
+  {
+   "id": "q15",
+   "page": "companies",
+   "question": "I have 100 applicants for one role. How can I screen them quickly but fairly?",
+   "expect": "The guide's one-day plan: decide must-haves, create a short skills test from the job description and preview it, check hard requirements and invite everyone who meets them, review the top results' answers and flags, people decide the short list.",
+   "guides": [
+    "screen-100-applicants-in-a-day"
+   ]
+  },
+  {
+   "id": "q16",
+   "page": "interviews",
+   "question": "What mistakes should I avoid when screening lots of applicants with a test?",
+   "expect": "Testing nice-to-haves, a test that's too long, treating the pass mark as a wall instead of reading answers, skipping the preview, ignoring accommodations like extra time.",
+   "guides": [
+    "screen-100-applicants-in-a-day"
+   ]
+  },
+  {
+   "id": "q17",
+   "page": "companies",
+   "question": "Do skills tests predict job performance better than CVs?",
+   "expect": "Research (Schmidt & Hunter 1998; Sackett et al. 2022): job knowledge tests about .40, near structured interviews .42; years of experience only .07; CVs are good for hard requirements, weak for ranking; tests must be job-specific.",
+   "guides": [
+    "skills-tests-vs-cv-screening"
+   ]
+  },
+  {
+   "id": "q18",
+   "page": "billing",
+   "question": "Does years of experience predict how well someone will do the job?",
+   "expect": "Weakly: years of experience had a validity of about .07 in Sackett et al. 2022 (.18 in Schmidt & Hunter 1998).",
+   "guides": [
+    "skills-tests-vs-cv-screening"
+   ]
+  },
+  {
+   "id": "q19",
+   "page": "companies",
+   "question": "How long should a knowledge screening test be for engineers?",
+   "expect": "Short: a few topics with about 10 questions each, the same for everyone, so strong candidates with other offers still finish it.",
+   "guides": [
+    "hiring-engineers",
+    "skills-test-timing-and-extra-time"
+   ]
+  },
+  {
+   "id": "q20",
+   "page": "interviews",
+   "question": "When do the AI Act's rules for hiring tools start to apply?",
+   "expect": "High-risk obligations for Annex III systems (hiring tools) from 2 December 2027; prohibited practices and AI literacy since 2 February 2025; most other rules from 2 August 2026.",
+   "guides": [
+    "is-ai-hiring-legal-in-the-eu"
+   ]
+  }
+ ],
+ "general": [
+  "g01",
+  "g02",
+  "g05",
+  "g07",
+  "g08",
+  "g10",
+  "g12",
+  "g15",
+  "g21",
+  "g22",
+  "g26",
+  "g27",
+  "g33",
+  "g38",
+  "g40"
+ ]
+}

@@ -40,7 +40,7 @@ FAQ = [
     {
         "key": "charged",
         "question": "Kapan kandidat dikenai biaya?",
-        "answer": "Saat ia menyelesaikan wawancara setelah menjawab setidaknya satu pertanyaan, atau jika kamu mencabutnya setelah ia menjawab satu pertanyaan. Kreditnya disisihkan saat kamu mengundangnya, dan kembali jika kamu mencabutnya sebelum ia menjawab apa pun, jika ia tidak pernah mulai, atau jika ia tidak menjawab apa pun.",
+        "answer": "Asalkan ia sudah menjawab setidaknya satu pertanyaan: saat wawancaranya berakhir (ia menyelesaikannya, atau waktunya habis saat ia tidak ada), atau saat kamu mencabutnya. Pertanyaan yang waktunya habis tanpa jawaban yang dipilih tidak dihitung. Kreditnya disisihkan saat kamu mengundangnya, dan kembali jika kamu mencabutnya sebelum ia menjawab apa pun, jika ia tidak pernah mulai, atau jika wawancaranya berakhir tanpa ada yang dijawab.",
     },
     {
         "key": "compare_hiring",

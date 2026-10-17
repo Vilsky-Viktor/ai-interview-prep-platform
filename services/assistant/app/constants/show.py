@@ -31,13 +31,17 @@ PAGES = {
     "settings": "/settings",
     "faq": "/faq",
     "news": "/news",
+    "guide": "/guides/{slug}",
 }
-# Pages named by what they're about: the read giving the name, and its field.
+# Pages named by what they're about: the service and read giving the name, and its field.
 PAGE_NAMES = {
-    "interview": ("/interviews/{interview_id}", "title"),
-    "interview_candidates": ("/interviews/{interview_id}", "title"),
-    "company": ("/companies/{company_id}", "name"),
+    "interview": ("companies", "/interviews/{interview_id}", "title"),
+    "interview_candidates": ("companies", "/interviews/{interview_id}", "title"),
+    "company": ("companies", "/companies/{company_id}", "name"),
+    "guide": ("rounds", "/help/guides/{slug}", "title"),
 }
+# The ids a link may be filled with.
+LINK_IDS = ("company_id", "interview_id", "candidate_id", "template_id", "provider", "slug")
 
 SHOW_DEFINITION = {
     "type": "function",
@@ -74,6 +78,7 @@ SHOW_DEFINITION = {
                 "candidate_id": {"type": "string"},
                 "template_id": {"type": "string"},
                 "provider": {"type": "string"},
+                "slug": {"type": "string"},
             },
             "required": ["kind"],
             "additionalProperties": False,

@@ -36,6 +36,9 @@ FROM base AS prod
 COPY services/rounds/alembic.ini ./
 COPY services/rounds/migrations ./migrations
 COPY services/rounds/app ./app
+# The site's content, whose guide articles the help routes serve, at the same place relative to
+# the code as in the repo.
+COPY frontend/content /frontend/content
 
 # An unprivileged user that can read the code but not change it. Bytecode is compiled now, as
 # that user can't write it later.

@@ -1,5 +1,6 @@
 import re
 from enum import StrEnum
+from pathlib import Path
 
 
 class HelpRole(StrEnum):
@@ -56,3 +57,20 @@ PRICES_UNAVAILABLE = "Prices aren't available right now. Please try again in a m
 NO_SUCH_PAGE = "There's no guide for this page."
 # The longest page key a request may name.
 MAX_PAGE_KEY_LENGTH = 40
+
+# The site's guide articles, where the site keeps them: English at guides/<slug>.md, each
+# translation at <language>/guides/<slug>.md, Markdown with "key: value" frontmatter. The image
+# and the local stack put frontend/content at the same place relative to the code (repo layout).
+ARTICLES_ROOT = Path(__file__).resolve().parents[4] / "frontend" / "content"
+GUIDES_FOLDER = "guides"
+# A slug as the files are named; anything else is never read.
+GUIDE_SLUG = re.compile(r"^[a-z0-9-]+$")
+# Where the site shows a guide.
+GUIDE_PATH = "/guides/{slug}"
+NO_SUCH_GUIDE = "There's no such guide."
+MAX_GUIDE_SLUG_LENGTH = 80
+# The guide article a page's guide points to, by the page's key: its help shows it as a link.
+PAGE_ARTICLES = {
+    "interviewSettings": "skills-test-timing-and-extra-time",
+    "candidate": "skills-test-timing-and-extra-time",
+}

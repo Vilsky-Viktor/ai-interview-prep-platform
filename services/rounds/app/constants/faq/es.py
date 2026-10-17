@@ -40,7 +40,7 @@ FAQ = [
     {
         "key": "charged",
         "question": "¿Cuándo se cobra por un candidato?",
-        "answer": "Cuando termina la entrevista habiendo respondido al menos una pregunta, o si lo revocas después de que haya respondido una. Sus créditos se reservan al invitarlo y se devuelven si lo revocas antes de que responda nada, si nunca empieza o si no responde nada.",
+        "answer": "Una vez que ha respondido al menos una pregunta: cuando termina su entrevista (la termina él o se acaba el tiempo mientras está ausente) o cuando lo revocas. Una pregunta cuyo tiempo se agotó sin elegir respuesta no cuenta. Sus créditos se reservan al invitarlo y se devuelven si lo revocas antes de que responda nada, si nunca empieza o si su entrevista termina sin ninguna respuesta.",
     },
     {
         "key": "compare_hiring",

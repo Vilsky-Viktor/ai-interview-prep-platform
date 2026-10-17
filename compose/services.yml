@@ -71,6 +71,8 @@ x-rounds-source: &rounds-source
   - ./services/rounds/migrations:/services/rounds/migrations
   - ./services/rounds/alembic.ini:/services/rounds/alembic.ini:ro
   - ./packages/common/src:/packages/common/src
+  # The site's guide articles, which the help routes serve too.
+  - ./frontend/content:/frontend/content:ro
 
 x-companies-source: &companies-source
   - ./services/companies/app:/services/companies/app

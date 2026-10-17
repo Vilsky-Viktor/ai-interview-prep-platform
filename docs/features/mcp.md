@@ -52,7 +52,7 @@ An agent on a server, with no browser, signs in with a company's API key (`Autho
 - A write runs at once: the app asks the user before calling it, instead of the panel's confirmation card. It still passes the panel's checks (`app/services/mcp_tools.py`): the emergency pause, what it's about must be the user's (`subject`, else a `404`), a partial update sends only what changes (nothing to change is refused), and it counts against the user's 30 actions an hour. It runs once with a new `Idempotency-Key`.
 - A string argument holding a secret is refused with the chat's "secrets never through the chat" reply, before anything is sent.
 - A result is the tool's data as JSON (trimmed as for the model, with `shown`/`more` on a cut list) and `links` to the prepza pages that show it, absolute. An error (the service's own, in the user's language, or a limit) is a result with `isError`.
-- The server's instructions (`app/prompts/mcp.py`) tell the app to get ids from the companies tools, to use `get_platform_guide` for how-to and pricing, never to ask for secrets, and that deletions are done in prepza.
+- The server's instructions (`app/prompts/mcp.py`) tell the app to get ids from the companies tools, to use `get_platform_guide` for how-to and pricing and `list_guides` and `get_guide` for hiring advice, never to ask for secrets, and that deletions are done in prepza.
 - Streamable HTTP, stateless, with plain JSON answers: no sessions and no streams held open, so any assistant instance answers any request.
 
 ## Calling the services as the user

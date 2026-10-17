@@ -1,7 +1,7 @@
 # AI agents signed in to the MCP server with a company's API key (`pz_...`) get only the tools
 # their key's permissions allow (the api service's app/constants/permissions.py): each tool here
 # and the permission it needs. KEY_ONLY_MCP needs nothing beyond the mcp permission itself: the
-# key's company, the platform's pause, its guide and prices. Any other tool (the team, brand,
+# key's company, the platform's pause, its guides and prices. Any other tool (the team, brand,
 # settings, billing, integrations, the account) isn't listed for keys.
 
 KEY_ONLY_MCP = "mcp"
@@ -19,6 +19,8 @@ KEY_TOOLS = {
     "get_pause": KEY_ONLY_MCP,
     "get_faq": KEY_ONLY_MCP,
     "get_platform_guide": KEY_ONLY_MCP,
+    "list_guides": KEY_ONLY_MCP,
+    "get_guide": KEY_ONLY_MCP,
     "get_price_catalog": KEY_ONLY_MCP,
     "list_interviews": INTERVIEWS_READ,
     "get_interview": INTERVIEWS_READ,

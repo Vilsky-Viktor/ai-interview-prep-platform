@@ -40,7 +40,7 @@ FAQ = [
     {
         "key": "charged",
         "question": "Quando um candidato é cobrado?",
-        "answer": "Quando ele termina a entrevista tendo respondido a pelo menos uma pergunta, ou se você o revoga depois de ele ter respondido a uma. Os créditos dele são reservados quando você o convida e voltam se você o revogar antes que ele responda a qualquer coisa, se ele nunca começar ou se não responder a nada.",
+        "answer": "Desde que ele tenha respondido a pelo menos uma pergunta: quando a entrevista dele termina (ele a conclui ou o tempo acaba enquanto ele está ausente) ou quando você o revoga. Uma pergunta cujo tempo acabou sem resposta escolhida não conta. Os créditos dele são reservados quando você o convida e voltam se você o revogar antes que ele responda a qualquer coisa, se ele nunca começar ou se a entrevista dele terminar sem nenhuma resposta.",
     },
     {
         "key": "compare_hiring",

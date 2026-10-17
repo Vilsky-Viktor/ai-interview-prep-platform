@@ -777,7 +777,7 @@
      "help"
     ],
     "summary": "Get Page Guide",
-    "description": "A page's guide, by its key, in the page's language (English until it's translated): its\ninfo button shows it, and the assistant reads it about the page the user is on; public.",
+    "description": "A page's guide, by its key, in the page's language (English until it's translated), with\nthe guide article to read more in, if any: its info button shows it, and the assistant reads\nit about the page the user is on; public.",
     "operationId": "get_page_guide_help_pages__key__get",
     "parameters": [
      {
@@ -798,6 +798,76 @@
        "application/json": {
         "schema": {
          "$ref": "#/components/schemas/PageGuideOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/help/guides": {
+   "get": {
+    "tags": [
+     "help"
+    ],
+    "summary": "List Guides",
+    "description": "The site's guide articles (hiring advice and how-tos: hiring engineers, interviewing in\nthe age of AI, AI hiring and the law, ATS integration, MCP and the API, ...), by title, in\nthe page's language where translated; public.",
+    "operationId": "list_guides_help_guides_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "items": {
+          "$ref": "#/components/schemas/GuideItemOut"
+         },
+         "type": "array",
+         "title": "Response List Guides Help Guides Get"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/help/guides/{slug}": {
+   "get": {
+    "tags": [
+     "help"
+    ],
+    "summary": "Get Guide Article",
+    "description": "One guide article, by its slug, with its Markdown text, in the page's language (English\nuntil it's translated); public.",
+    "operationId": "get_guide_article_help_guides__slug__get",
+    "parameters": [
+     {
+      "name": "slug",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "maxLength": 80,
+       "title": "Slug"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GuideOut"
         }
        }
       }
@@ -1796,6 +1866,89 @@
     ],
     "title": "FaqItemOut"
    },
+   "GuideItemOut": {
+    "properties": {
+     "slug": {
+      "type": "string",
+      "title": "Slug"
+     },
+     "language": {
+      "type": "string",
+      "title": "Language"
+     },
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "description": {
+      "type": "string",
+      "title": "Description"
+     },
+     "updated": {
+      "type": "string",
+      "title": "Updated"
+     },
+     "path": {
+      "type": "string",
+      "title": "Path"
+     }
+    },
+    "type": "object",
+    "required": [
+     "slug",
+     "language",
+     "title",
+     "description",
+     "updated",
+     "path"
+    ],
+    "title": "GuideItemOut",
+    "description": "A guide article of the site: its title and summary in `language` (English until it's\ntranslated), and where the site shows it."
+   },
+   "GuideOut": {
+    "properties": {
+     "slug": {
+      "type": "string",
+      "title": "Slug"
+     },
+     "language": {
+      "type": "string",
+      "title": "Language"
+     },
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "description": {
+      "type": "string",
+      "title": "Description"
+     },
+     "updated": {
+      "type": "string",
+      "title": "Updated"
+     },
+     "path": {
+      "type": "string",
+      "title": "Path"
+     },
+     "body": {
+      "type": "string",
+      "title": "Body"
+     }
+    },
+    "type": "object",
+    "required": [
+     "slug",
+     "language",
+     "title",
+     "description",
+     "updated",
+     "path",
+     "body"
+    ],
+    "title": "GuideOut",
+    "description": "A guide article with its Markdown text."
+   },
    "HTTPValidationError": {
     "properties": {
      "detail": {
@@ -2151,6 +2304,16 @@
       },
       "type": "array",
       "title": "Tips"
+     },
+     "article": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/GuideItemOut"
+       },
+       {
+        "type": "null"
+       }
+      ]
      }
     },
     "type": "object",
@@ -2162,7 +2325,7 @@
      "tips"
     ],
     "title": "PageGuideOut",
-    "description": "A page's guide: what it's for (`text`), what you can do there and tips."
+    "description": "A page's guide: what it's for (`text`), what you can do there, tips, and the guide\narticle to read more in, if the page has one."
    },
    "PracticeRoundOut": {
     "properties": {

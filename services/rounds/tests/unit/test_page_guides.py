@@ -33,8 +33,8 @@ def test_a_guide_is_served_in_the_pages_language(client):
     german = client.get("/help/pages/billing", headers={"Accept-Language": "de"}).json()
     english = client.get("/help/pages/billing", headers={"Accept-Language": "en"}).json()
 
-    assert german == {"key": "billing", **GUIDES["de"]["billing"]}
-    assert english == {"key": "billing", **GUIDES["en"]["billing"]}
+    assert german == {"key": "billing", **GUIDES["de"]["billing"], "article": None}
+    assert english == {"key": "billing", **GUIDES["en"]["billing"], "article": None}
 
 
 def test_a_guide_not_translated_yet_is_served_in_english(client, monkeypatch):
@@ -43,7 +43,7 @@ def test_a_guide_not_translated_yet_is_served_in_english(client, monkeypatch):
 
     found = client.get("/help/pages/billing", headers={"Accept-Language": "de"}).json()
 
-    assert found == {"key": "billing", **GUIDES["en"]["billing"]}
+    assert found == {"key": "billing", **GUIDES["en"]["billing"], "article": None}
 
 
 def test_an_unknown_page_has_no_guide(client):

@@ -82,7 +82,11 @@ async def ask(
         "text": answer.content,
         "tools": [{"name": item.tool, "arguments": item.arguments} for item in answer.results],
         "shown": [
-            {"kind": block["kind"], "items": block.get("items", [])}
+            {
+                "kind": block["kind"],
+                "items": block.get("items", []),
+                "links": block.get("links", []),
+            }
             for block in answer.shown_blocks
         ],
         "error": error,

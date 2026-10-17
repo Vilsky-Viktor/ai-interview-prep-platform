@@ -10,4 +10,6 @@ export type PageGuide = {
   text: string
   actions: string[]
   tips: string[]
+  // The guide article to read more in, in the page's language where translated.
+  article: { title: string; path: string } | null
 }
