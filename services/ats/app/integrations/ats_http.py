@@ -1,12 +1,27 @@
+from contextvars import ContextVar
+from uuid import UUID
+
 import httpx
 from fastapi import HTTPException, status
 from prepza_common import http
+from prepza_common.limits import record_hit
 
 from app.constants.ats import ATS_TIMEOUT_SECONDS
 from app.integrations.errors import KeyRejected
 
 # What an ATS answers a key it refuses: wrong, revoked, expired or missing a permission.
 REJECTED = {status.HTTP_401_UNAUTHORIZED, status.HTTP_403_FORBIDDEN}
+# The company whose ATS is called, for the record of the ATS's rate limit hits: the clients take
+# only credentials, so whoever reads a connection's credentials (or connects one) sets it.
+calling_company: ContextVar[UUID | None] = ContextVar("calling_company", default=None)
+
+
+async def note_busy(response: httpx.Response, provider: str) -> None:
+    """Records the ATS's 429 (too many calls) as its rate limit's hit, for the company calling."""
+    if response.status_code == status.HTTP_429_TOO_MANY_REQUESTS:
+        company_id = calling_company.get()
+        kind = f"provider:{provider}"
+        await record_hit("ATS_RATE_LIMIT", kind=kind, scope="company", company_id=company_id)
 
 
 async def send(
@@ -16,15 +31,21 @@ async def send(
     unavailable: str,
     params: dict | None = None,
     body: dict | None = None,
+    *,
+    provider: str,
 ) -> httpx.Response:
-    """One call to an ATS's API; an ATS that doesn't answer is a 502 with `unavailable` (its
+    """One call to `provider`'s API; an ATS that doesn't answer is a 502 with `unavailable` (its
     name's "… didn't answer"), which the caller can retry."""
     try:
-        return await http.get_client().request(
+        response = await http.get_client().request(
             method, url, params=params, json=body, headers=headers, timeout=ATS_TIMEOUT_SECONDS
         )
     except httpx.HTTPError as error:
         raise HTTPException(status.HTTP_502_BAD_GATEWAY, unavailable) from error
+
+    await note_busy(response, provider)
+
+    return response
 
 
 def checked(

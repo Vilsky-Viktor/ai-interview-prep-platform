@@ -1,10 +1,13 @@
 from uuid import UUID
 
+from prepza_common import audit
+from prepza_common.audit_actions import AuditAction, TargetKind
 from sqlalchemy import delete, select, update
 from sqlalchemy.dialects.postgresql import insert
 
 from app.constants.ats import CandidateStatus
 from app.models.ats import AtsCandidate, AtsConnection, AtsJobLink
+from app.models.outbox import OutboxEvent
 from app.storage.db import Session
 
 
@@ -21,8 +24,16 @@ async def links(company_id: UUID) -> list[tuple[AtsJobLink, str]]:
         return [tuple(row) for row in (await session.execute(query)).all()]
 
 
-async def add_link(connection_id: UUID, interview_id: UUID, job: dict, stage: dict) -> UUID | None:
-    """Links a job to an interview: the link's id, or None when that job is already linked."""
+async def add_link(
+    company_id: UUID,
+    connection_id: UUID,
+    interview_id: UUID,
+    job: dict,
+    stage: dict,
+    user_id: str,
+) -> UUID | None:
+    """Links a job to an interview: the link's id, or None when that job is already linked. The
+    company's action log gets it as the member's (`user_id`)."""
     query = (
         insert(AtsJobLink)
         .values(
@@ -39,6 +50,18 @@ async def add_link(connection_id: UUID, interview_id: UUID, job: dict, stage: di
 
     async with Session() as session:
         added = await session.scalar(query)
+
+        if added is not None:
+            audit.add(
+                session,
+                OutboxEvent,
+                company_id,
+                user_id,
+                AuditAction.JOB_LINKED,
+                TargetKind.INTEGRATION,
+                target_label=job["name"],
+            )
+
         await session.commit()
 
     return added
@@ -112,21 +135,31 @@ async def subscriptions(company_id: UUID, link_id: UUID | None = None) -> list[s
         return list((await session.scalars(query)).all())
 
 
-async def remove_link(company_id: UUID, link_id: UUID) -> bool:
+async def remove_link(company_id: UUID, link_id: UUID, user_id: str) -> bool:
     """Unlinks a job of the company; False when there's no such link. Its candidates still
     waiting go with it, so nothing invites them (or sets credits aside for them) any more; the
-    invited ones stay, for writing their results back."""
+    invited ones stay, for writing their results back. The company's action log gets it as the
+    member's (`user_id`)."""
     owned = select(AtsConnection.id).where(AtsConnection.company_id == company_id)
     query = (
         delete(AtsJobLink)
         .where(AtsJobLink.id == link_id, AtsJobLink.connection_id.in_(owned))
-        .returning(AtsJobLink.id)
+        .returning(AtsJobLink.job_name)
     )
 
     async with Session() as session:
         removed = await session.scalar(query)
 
         if removed is not None:
+            audit.add(
+                session,
+                OutboxEvent,
+                company_id,
+                user_id,
+                AuditAction.JOB_UNLINKED,
+                TargetKind.INTEGRATION,
+                target_label=removed,
+            )
             await session.execute(
                 delete(AtsCandidate).where(
                     AtsCandidate.link_id.is_(None),

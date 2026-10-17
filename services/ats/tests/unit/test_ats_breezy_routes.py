@@ -67,8 +67,10 @@ def stored(monkeypatch, companies_api):
         assert connection_id == rows["connection"].id
         rows["connection"].credentials = credentials
 
-    async def disconnect(company_id, provider):
+    async def disconnect(company_id, provider, user_id=None):
         rows["connection"] = None
+        # Who disconnected it, for the action log (None when prepza undid its own connect).
+        rows.setdefault("disconnected_by", []).append(user_id)
 
     async def restore_broken(earlier):
         rows["connection"] = earlier
@@ -167,6 +169,8 @@ def test_without_its_web_hook_the_connection_doesnt_stay(client, stored, monkeyp
     assert response.status_code == 400
     assert "web hooks come with Breezy's Pro plan" in response.json()["detail"]
     assert stored["connection"] is None
+    # Disconnected as Ann's, so the company's action log shows it didn't stay.
+    assert stored["disconnected_by"] == ["ann"]
 
 
 def test_a_failed_reconnect_keeps_the_earlier_connection_marked_for_reconnecting(
@@ -204,6 +208,7 @@ def test_disconnecting_deletes_the_web_hook(client, stored):
     assert client.delete(f"/breezy?company_id={COMPANY_ID}").status_code == 204
     assert stored["deleted"] == ["w1"]
     assert stored["connection"] is None
+    assert stored["disconnected_by"] == ["ann"]
 
 
 def test_the_web_hook_answers_only_what_its_secret_signed(client, stored):

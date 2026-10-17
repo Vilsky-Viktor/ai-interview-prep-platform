@@ -112,11 +112,13 @@ def stored(monkeypatch, companies_api):
     async def connections(company_id):
         return [rows["connection"]] if rows["connection"] else []
 
-    async def disconnect(company_id, provider):
+    async def disconnect(company_id, provider, user_id=None):
         rows["connection"] = None
+        # Who disconnected it, for the action log (None when prepza undid its own connect).
+        rows.setdefault("disconnected_by", []).append(user_id)
 
-    async def add_link(connection_id, interview_id, job, stage):
-        rows["links"].append((interview_id, job["id"], stage["id"]))
+    async def add_link(company_id, connection_id, interview_id, job, stage, user_id):
+        rows["links"].append((interview_id, job["id"], stage["id"], user_id))
 
         return uuid.uuid4()
 

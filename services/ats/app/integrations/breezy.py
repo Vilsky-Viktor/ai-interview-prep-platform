@@ -1,4 +1,4 @@
-from app.constants.ats import BREEZY_API, BREEZY_STATUS_UPDATED
+from app.constants.ats import BREEZY_API, BREEZY_STATUS_UPDATED, AtsProvider
 from app.integrations.ats_http import checked, json_of, send
 
 # The credentials this client takes: the company and a personal API key, which acts as the
@@ -9,8 +9,10 @@ UNAVAILABLE = "Breezy HR didn't answer"
 
 
 async def _call(method: str, token: str, path: str, params=None, body=None):
+    headers = {"Authorization": token}
+    url = BREEZY_API + path
     response = await send(
-        method, BREEZY_API + path, {"Authorization": token}, UNAVAILABLE, params, body
+        method, url, headers, UNAVAILABLE, params, body, provider=AtsProvider.BREEZY
     )
 
     return json_of(checked(response, UNAVAILABLE))

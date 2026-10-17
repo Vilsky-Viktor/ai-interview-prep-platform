@@ -30,7 +30,8 @@ def test_a_job_links_to_one_of_the_companys_interviews(client, stored, key):
         ).status_code
         == 201
     )
-    assert stored["links"] == [(INTERVIEW_ID, "A1", "assessment")]
+    # Linked as Ann's, for the action log.
+    assert stored["links"] == [(INTERVIEW_ID, "A1", "assessment", "ann")]
     # Linking reads the one job, not the whole list again.
     assert stored["read"] == ["every job", "A1"]
     # Workable notifies this link's own address, and the subscription is kept to cancel it.

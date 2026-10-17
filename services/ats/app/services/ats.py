@@ -9,6 +9,7 @@ from app.config.settings import settings
 from app.constants.ats import ATS_NAMES, WORKABLE_WEBHOOK, WRITES, AtsProvider
 from app.integrations import breezy, workable
 from app.integrations.ats_clients import client
+from app.integrations.ats_http import calling_company
 from app.integrations.errors import KeyRejected, WriteRefused
 from app.models.ats import AtsConnection
 from app.services import outbox as outbox_service
@@ -37,7 +38,8 @@ def seal(credentials: dict) -> str:
 async def credentials(connection: AtsConnection) -> dict:
     """The connection's credentials, as its ATS's client takes them. A key that can't be read
     any more (the encryption key changed) marks the connection broken, like one the ATS
-    refuses."""
+    refuses. Its ATS's rate limit hits from here on are the connection's company's."""
+    calling_company.set(connection.company_id)
     opened = decrypt(settings.ats_encryption_key, connection.credentials)
 
     if opened is None:

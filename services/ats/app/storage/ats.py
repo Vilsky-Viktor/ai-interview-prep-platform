@@ -1,12 +1,13 @@
 from uuid import UUID
 
-from prepza_common import outbox
+from prepza_common import audit, outbox
+from prepza_common.audit_actions import AuditAction, TargetKind
 from prepza_common.constants import DELETED_USER
 from prepza_common.notifications import NOTIFICATION_REQUESTED
 from sqlalchemy import delete, func, select, update
 from sqlalchemy.dialects.postgresql import insert
 
-from app.constants.ats import ConnectionStatus
+from app.constants.ats import ATS_NAMES, ConnectionStatus
 from app.helpers.notifications import connection_broken
 from app.models.ats import AtsConnection
 from app.models.outbox import OutboxEvent
@@ -44,7 +45,8 @@ async def connect(
     language: str | None = None,
 ) -> None:
     """Saves the company's connection to `provider`, replacing an earlier one's key (a
-    reconnect keeps its linked jobs), with the connecting member's interface `language`."""
+    reconnect keeps its linked jobs), with the connecting member's interface `language`; the
+    company's action log gets it as theirs."""
     values = {
         "language": language,
         "account": account,
@@ -62,7 +64,22 @@ async def connect(
     )
 
     async with Session() as session:
+        earlier = await session.scalar(
+            select(AtsConnection.id).where(
+                AtsConnection.company_id == company_id, AtsConnection.provider == provider
+            )
+        )
         await session.execute(query)
+        action = AuditAction.ATS_RECONNECTED if earlier else AuditAction.ATS_CONNECTED
+        audit.add(
+            session,
+            OutboxEvent,
+            company_id,
+            user_id,
+            action,
+            TargetKind.INTEGRATION,
+            target_label=ATS_NAMES[provider],
+        )
         await session.commit()
 
 
@@ -192,14 +209,29 @@ async def forget_maker(user_id: str) -> None:
         await session.commit()
 
 
-async def disconnect(company_id: UUID, provider: str) -> None:
-    """Deletes the connection and its key at once; its linked jobs go with it."""
-    query = delete(AtsConnection).where(
-        AtsConnection.company_id == company_id, AtsConnection.provider == provider
+async def disconnect(company_id: UUID, provider: str, user_id: str) -> None:
+    """Deletes the connection and its key at once; its linked jobs go with it. The company's
+    action log gets it as the member's (`user_id`)."""
+    query = (
+        delete(AtsConnection)
+        .where(AtsConnection.company_id == company_id, AtsConnection.provider == provider)
+        .returning(AtsConnection.id)
     )
 
     async with Session() as session:
-        await session.execute(query)
+        removed = await session.scalar(query)
+
+        if removed is not None:
+            audit.add(
+                session,
+                OutboxEvent,
+                company_id,
+                user_id,
+                AuditAction.ATS_DISCONNECTED,
+                TargetKind.INTEGRATION,
+                target_label=ATS_NAMES[provider],
+            )
+
         await session.commit()
 
 

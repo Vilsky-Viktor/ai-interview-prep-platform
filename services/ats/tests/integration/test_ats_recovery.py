@@ -40,7 +40,9 @@ def test_invite_again_and_a_top_up_put_not_invited_candidates_back_to_waiting(ru
         interview = uuid.uuid4()
         await ats.connect(company, AtsProvider.WORKABLE, "acme", "sealed", "ann")
         connection = await ats.connection(company, AtsProvider.WORKABLE)
-        link_id = await ats_links.add_link(connection.id, interview, JOB, STAGE)
+        link_id = await ats_links.add_link(
+            connection.company_id, connection.id, interview, JOB, STAGE, "ann"
+        )
         rows = {}
 
         for name, reason in (("limit", FailReason.LIMIT), ("credits", FailReason.CREDITS)):
@@ -146,7 +148,7 @@ def test_a_failed_reconnect_puts_the_earlier_connection_back_marked_broken(run):
         interview = uuid.uuid4()
         await ats.connect(company, AtsProvider.BREEZY, "Acme", "sealed-1", "ann", "m-1")
         earlier = await ats.connection(company, AtsProvider.BREEZY)
-        await ats_links.add_link(earlier.id, interview, JOB, STAGE)
+        await ats_links.add_link(earlier.company_id, earlier.id, interview, JOB, STAGE, "ann")
         await ats.connect(company, AtsProvider.BREEZY, "Other", "sealed-2", "bob")
         await ats.restore_broken(earlier)
         found = await ats.connection(company, AtsProvider.BREEZY)
@@ -176,14 +178,16 @@ def test_an_unlinked_jobs_waiting_candidates_are_never_invited(run):
         interview = uuid.uuid4()
         await ats.connect(company, AtsProvider.WORKABLE, "acme", "sealed", "ann")
         connection = await ats.connection(company, AtsProvider.WORKABLE)
-        link_id = await ats_links.add_link(connection.id, interview, JOB, STAGE)
+        link_id = await ats_links.add_link(
+            connection.company_id, connection.id, interview, JOB, STAGE, "ann"
+        )
         await ats_candidates.add(connection.id, link_id, interview, "unlinked-wait", "w@x.com")
         invited = await ats_candidates.add(
             connection.id, link_id, interview, "unlinked-done", "d@x.com"
         )
         invite_id = uuid.uuid4()
         await ats_candidates.settle(invited.id, CandidateStatus.INVITED, invite_id=invite_id)
-        await ats_links.remove_link(company, link_id)
+        await ats_links.remove_link(company, link_id, "ann")
         found = (
             [row.candidate_id for row in await ats_candidates.recoverable()],
             [row.candidate_id for row in await ats_candidates.waiting(interview)],

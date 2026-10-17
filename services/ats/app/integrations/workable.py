@@ -7,6 +7,7 @@ from app.constants.ats import (
     WORKABLE_MAX_PAGES,
     WORKABLE_MOVED,
     WORKABLE_PAGE,
+    AtsProvider,
 )
 from app.integrations.ats_http import REJECTED, checked, json_of, send
 
@@ -29,7 +30,9 @@ async def _call(
     a 404; anything else that fails, a 502 the caller can retry)."""
     url = WORKABLE_API.format(subdomain=subdomain) + path
     headers = bearer(token)
-    response = await send(method, url, headers, UNAVAILABLE, params, body)
+    response = await send(
+        method, url, headers, UNAVAILABLE, params, body, provider=AtsProvider.WORKABLE
+    )
 
     return json_of(checked(response, UNAVAILABLE, rejected))
 

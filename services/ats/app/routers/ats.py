@@ -17,6 +17,7 @@ from app.schemas.ats import (
 )
 from app.services import ats as integrations
 from app.services import ats_candidates as ats_candidates_service
+from app.services import outbox as outbox_service
 from app.storage import ats, ats_candidates, ats_links
 
 router = APIRouter(tags=["ats"])
@@ -53,7 +54,8 @@ async def disconnect(company_id: UUID, provider: AtsProvider, user: CurrentUser)
     if connection is not None:
         await integrations.release(connection, await ats_links.subscriptions(company_id))
 
-    await ats.disconnect(company_id, provider)
+    await ats.disconnect(company_id, provider, user.uid)
+    await outbox_service.flush_quietly()
 
 
 @router.get("/{provider}/jobs")
@@ -144,7 +146,10 @@ async def add_link(company_id: UUID, body: JobLinkIn, user: CurrentUser) -> None
             status.HTTP_404_NOT_FOUND, f"That job or stage isn't in {ATS_NAMES[body.provider]}"
         )
 
-    link_id = await ats_links.add_link(connection.id, body.interview_id, job, stage)
+    link_id = await ats_links.add_link(
+        company_id, connection.id, body.interview_id, job, stage, user.uid
+    )
+    await outbox_service.flush_quietly()
 
     if link_id is None:
         raise HTTPException(status.HTTP_409_CONFLICT, "That job is already linked")
@@ -157,7 +162,9 @@ async def add_link(company_id: UUID, body: JobLinkIn, user: CurrentUser) -> None
     try:
         subscription = await integrations.subscribe(connection, link_id, job["id"], stage["id"])
     except Exception:
-        await ats_links.remove_link(company_id, link_id)
+        # Unlinked again as the member's, so the action log shows the link didn't stay.
+        await ats_links.remove_link(company_id, link_id, user.uid)
+        await outbox_service.flush_quietly()
         raise
 
     await ats_links.set_subscription(link_id, subscription)
@@ -171,8 +178,10 @@ async def remove_link(company_id: UUID, link_id: UUID, user: CurrentUser) -> Non
     if found is not None and found[1].company_id == company_id:
         await integrations.unsubscribe(found[1], await ats_links.subscriptions(company_id, link_id))
 
-    if not await ats_links.remove_link(company_id, link_id):
+    if not await ats_links.remove_link(company_id, link_id, user.uid):
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Link not found")
+
+    await outbox_service.flush_quietly()
 
 
 @router.post("/links/{link_id}/retry", status_code=status.HTTP_204_NO_CONTENT)

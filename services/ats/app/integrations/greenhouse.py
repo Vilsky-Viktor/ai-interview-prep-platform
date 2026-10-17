@@ -15,8 +15,9 @@ from app.constants.ats import (
     GREENHOUSE_PAGE,
     GREENHOUSE_TOKEN_MARGIN_SECONDS,
     GREENHOUSE_TOKEN_URL,
+    AtsProvider,
 )
-from app.integrations.ats_http import REJECTED, checked, send
+from app.integrations.ats_http import REJECTED, checked, note_busy, send
 
 # The credentials this client takes (a connection also keeps its web hook's secret key).
 KEYS = ("client_id", "client_secret")
@@ -49,6 +50,7 @@ async def _token(client_id: str, client_secret: str, fresh: bool = False) -> str
     except httpx.HTTPError as error:
         raise HTTPException(status.HTTP_502_BAD_GATEWAY, UNAVAILABLE) from error
 
+    await note_busy(response, AtsProvider.GREENHOUSE)
     checked(response, UNAVAILABLE, TOKEN_REJECTED)
     body = response.json()
     expires = time.monotonic() + body.get("expires_in", 3600) - GREENHOUSE_TOKEN_MARGIN_SECONDS
@@ -71,7 +73,9 @@ async def _call(
     for fresh in (False, True):
         token = await _token(client_id, client_secret, fresh)
         headers = bearer(token)
-        response = await send(method, url, headers, UNAVAILABLE, params, body)
+        response = await send(
+            method, url, headers, UNAVAILABLE, params, body, provider=AtsProvider.GREENHOUSE
+        )
 
         if response.status_code != status.HTTP_401_UNAUTHORIZED:
             break

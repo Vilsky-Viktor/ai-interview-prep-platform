@@ -17,6 +17,7 @@ from app.constants.ats import (
 )
 from app.helpers.ats import subdomain
 from app.integrations import breezy, companies, greenhouse, recruitee, teamtailor, workable
+from app.integrations.ats_http import calling_company
 from app.integrations.errors import KeyRejected
 from app.schemas.ats import (
     BreezyIn,
@@ -28,6 +29,7 @@ from app.schemas.ats import (
     WorkableIn,
 )
 from app.services import ats as integrations
+from app.services import outbox as outbox_service
 from app.storage import ats
 
 # Connecting each ATS, and the web hooks companies set up themselves (Greenhouse, Teamtailor,
@@ -51,6 +53,7 @@ async def connect_workable(company_id: UUID, body: WorkableIn, user: CurrentUser
     second connect replaces the key."""
     await companies.require(company_id, user.uid, editor=True)
     integrations.require_available()
+    calling_company.set(company_id)
     account = subdomain(body.account, ".workable.com")
 
     if account is None:
@@ -73,6 +76,7 @@ async def connect_workable(company_id: UUID, body: WorkableIn, user: CurrentUser
     await ats.connect(
         company_id, AtsProvider.WORKABLE, account, credentials, user.uid, member, user.language
     )
+    await outbox_service.flush_quietly()
 
 
 @router.put("/greenhouse", status_code=status.HTTP_204_NO_CONTENT)
@@ -82,6 +86,7 @@ async def connect_greenhouse(company_id: UUID, body: GreenhouseIn, user: Current
     reconnect keeps it, so the web hook goes on working."""
     await companies.require(company_id, user.uid, editor=True)
     integrations.require_available()
+    calling_company.set(company_id)
     client_id, client_secret = body.client_id.strip(), body.client_secret.strip()
 
     try:
@@ -106,6 +111,7 @@ async def connect_greenhouse(company_id: UUID, body: GreenhouseIn, user: Current
     await ats.connect(
         company_id, AtsProvider.GREENHOUSE, "", sealed, user.uid, language=user.language
     )
+    await outbox_service.flush_quietly()
 
 
 @router.put("/teamtailor", status_code=status.HTTP_204_NO_CONTENT)
@@ -115,6 +121,7 @@ async def connect_teamtailor(company_id: UUID, body: TeamtailorIn, user: Current
     keeps it."""
     await companies.require(company_id, user.uid, editor=True)
     integrations.require_available()
+    calling_company.set(company_id)
     key = body.key.strip()
 
     try:
@@ -138,6 +145,7 @@ async def connect_teamtailor(company_id: UUID, body: TeamtailorIn, user: Current
     await ats.connect(
         company_id, AtsProvider.TEAMTAILOR, company, sealed, user.uid, member, user.language
     )
+    await outbox_service.flush_quietly()
 
 
 @router.put("/recruitee", status_code=status.HTTP_204_NO_CONTENT)
@@ -147,6 +155,7 @@ async def connect_recruitee(company_id: UUID, body: RecruiteeIn, user: CurrentUs
     (Recruitee shows it); a reconnect keeps it."""
     await companies.require(company_id, user.uid, editor=True)
     integrations.require_available()
+    calling_company.set(company_id)
     account = subdomain(body.account, RECRUITEE_DOMAIN)
 
     if account is None:
@@ -173,6 +182,7 @@ async def connect_recruitee(company_id: UUID, body: RecruiteeIn, user: CurrentUs
     await ats.connect(
         company_id, AtsProvider.RECRUITEE, account, sealed, user.uid, language=user.language
     )
+    await outbox_service.flush_quietly()
 
 
 @router.put("/breezy", status_code=status.HTTP_204_NO_CONTENT)
@@ -183,6 +193,7 @@ async def connect_breezy(company_id: UUID, body: BreezyIn, user: CurrentUser) ->
     earlier connection, marked for reconnecting."""
     await companies.require(company_id, user.uid, editor=True)
     integrations.require_available()
+    calling_company.set(company_id)
     token = body.token.strip()
 
     try:
@@ -210,6 +221,7 @@ async def connect_breezy(company_id: UUID, body: BreezyIn, user: CurrentUser) ->
     await ats.connect(
         company_id, AtsProvider.BREEZY, found["name"], sealed, user.uid, language=user.language
     )
+    await outbox_service.flush_quietly()
     connection = await ats.connection(company_id, AtsProvider.BREEZY)
     url = BREEZY_WEBHOOK.format(site=settings.site_url, connection_id=connection.id)
 
@@ -219,8 +231,10 @@ async def connect_breezy(company_id: UUID, body: BreezyIn, user: CurrentUser) ->
         # Without its web hook no candidate would come: a new connection doesn't stay. An
         # earlier one gets its key back, with its linked jobs and candidates, marked for
         # reconnecting, as its own web hook may be gone already.
+        # Disconnected as the member's, so the action log shows the connection didn't stay.
         if earlier is None:
-            await ats.disconnect(company_id, AtsProvider.BREEZY)
+            await ats.disconnect(company_id, AtsProvider.BREEZY, user.uid)
+            await outbox_service.flush_quietly()
         else:
             await ats.restore_broken(earlier)
 

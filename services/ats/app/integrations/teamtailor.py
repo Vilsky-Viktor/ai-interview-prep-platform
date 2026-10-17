@@ -7,6 +7,7 @@ from app.constants.ats import (
     TEAMTAILOR_MAX_PAGES,
     TEAMTAILOR_MEDIA_TYPE,
     TEAMTAILOR_PAGE,
+    AtsProvider,
 )
 from app.integrations.ats_http import checked, json_of, send
 from app.integrations.errors import KeyRejected
@@ -25,7 +26,9 @@ async def _call(method: str, host: str, key: str, path_or_url: str, params=None,
         "Accept": TEAMTAILOR_MEDIA_TYPE,
         "Content-Type": TEAMTAILOR_MEDIA_TYPE,
     }
-    response = await send(method, url, headers, UNAVAILABLE, params, body)
+    response = await send(
+        method, url, headers, UNAVAILABLE, params, body, provider=AtsProvider.TEAMTAILOR
+    )
 
     # A rate limit stays a 429, so a web hook is answered that way (Teamtailor may send it again
     # later) rather than as a failure of ours.

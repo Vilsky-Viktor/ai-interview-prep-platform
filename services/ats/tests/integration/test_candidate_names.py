@@ -12,7 +12,7 @@ def test_an_ats_candidates_name_is_kept_once_and_a_redelivery_keeps_the_first(ru
         await ats.connect(company, AtsProvider.WORKABLE, "acme", "sealed", "ann")
         connection = await ats.connection(company, AtsProvider.WORKABLE)
         link = await ats_links.add_link(
-            connection.id, interview, {"id": "A1", "name": "Clerk"}, STAGE
+            company, connection.id, interview, {"id": "A1", "name": "Clerk"}, STAGE, "ann"
         )
         first = await ats_candidates.add(connection.id, link, interview, "c-1", "a@x.com", "Ann")
         again = await ats_candidates.add(connection.id, link, interview, "c-1", "a@x.com", "Bo")
