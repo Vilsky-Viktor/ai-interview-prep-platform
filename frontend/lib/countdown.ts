@@ -8,3 +8,11 @@ export function warningSeconds(questionSeconds: number) {
     Math.max(1, Math.floor(questionSeconds / 3))
   )
 }
+
+/** Seconds as a clock shows them: minutes and two-digit seconds ("1:05"). */
+export function clock(seconds: number) {
+  const minutes = Math.floor(seconds / 60)
+  const rest = String(seconds % 60).padStart(2, "0")
+
+  return `${minutes}:${rest}`
+}

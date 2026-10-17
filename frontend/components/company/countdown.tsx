@@ -10,17 +10,10 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { warningSeconds } from "@/lib/countdown"
+import { clock, warningSeconds } from "@/lib/countdown"
 
 function secondsUntil(end: number) {
   return Math.max(0, Math.ceil((end - Date.now()) / 1000))
-}
-
-function clock(seconds: number) {
-  const minutes = Math.floor(seconds / 60)
-  const rest = String(seconds % 60).padStart(2, "0")
-
-  return `${minutes}:${rest}`
 }
 
 /** Time left on a timed question; calls onExpire once when it reaches zero, or as soon as it

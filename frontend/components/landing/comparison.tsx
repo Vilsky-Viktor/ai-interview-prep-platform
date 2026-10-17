@@ -1,0 +1,77 @@
+import { cn } from "cn"
+import { CalendarSyncIcon, PhoneIcon, type LucideIcon } from "lucide-react"
+import { getLocale, getTranslations } from "next-intl/server"
+
+import { LandingSection, MoreLink } from "@/components/landing/section"
+import { COMPARED } from "@/constants/comparison"
+import { formatPriceRange } from "@/lib/format"
+import type { Catalog } from "@/types/billing"
+
+const ICONS: Record<
+  Exclude<(typeof COMPARED)[number], "prepza">,
+  LucideIcon
+> = {
+  phone: PhoneIcon,
+  subscription: CalendarSyncIcon,
+}
+
+/** prepza beside the usual ways to screen candidates: a card each with what it takes of your
+ * time and what you pay, prepza's last and ringed; then a link to the comparisons with other
+ * tools. prepza's price range per candidate comes from billing's catalog. */
+export async function ComparisonSection({ catalog }: { catalog: Catalog }) {
+  const t = await getTranslations("landing.comparison")
+  const locale = await getLocale()
+  const price = formatPriceRange(
+    catalog.candidate_cents_min,
+    catalog.candidate_cents_max,
+    catalog.currency,
+    locale
+  )
+
+  return (
+    <LandingSection id="compare" title={t("title")} text={t("text")}>
+      <div className="flex flex-col items-center gap-10">
+        <ul className="grid w-full gap-3 md:grid-cols-3">
+          {COMPARED.map((key) => {
+            const ours = key === "prepza"
+            const Icon = ours ? null : ICONS[key]
+
+            return (
+              <li
+                key={key}
+                className={cn(
+                  "flex flex-col gap-6 rounded-2xl bg-muted p-6 dark:bg-card",
+                  ours && "ring-2 ring-primary"
+                )}
+              >
+                <div className="flex min-h-8 items-center gap-3">
+                  {Icon && (
+                    <Icon className="size-6 shrink-0 text-muted-foreground" />
+                  )}
+                  <span className="font-heading text-xl font-medium lowercase">
+                    {t(`${key}.name`)}
+                    {ours && <span className="text-primary">.</span>}
+                  </span>
+                </div>
+                {(["time", "cost"] as const).map((fact) => (
+                  <div key={fact} className="space-y-1">
+                    <p className="text-sm text-muted-foreground">{t(fact)}</p>
+                    <p
+                      className={cn(
+                        "text-lg leading-snug font-medium",
+                        ours && "text-primary"
+                      )}
+                    >
+                      {t(`${key}.${fact}`, { price })}
+                    </p>
+                  </div>
+                ))}
+              </li>
+            )
+          })}
+        </ul>
+        <MoreLink href="/compare">{t("more")}</MoreLink>
+      </div>
+    </LandingSection>
+  )
+}

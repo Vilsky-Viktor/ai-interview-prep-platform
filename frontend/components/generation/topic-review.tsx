@@ -1,6 +1,6 @@
 "use client"
 
-import { MinusIcon, SquarePenIcon } from "lucide-react"
+import { SquarePenIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
 import type { ReactNode } from "react"
 import { useState } from "react"
@@ -13,6 +13,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { MAX_INSTRUCTIONS_LENGTH } from "@/constants/limits"
 import type { DraftTopic } from "@/types/generation"
 import { LIST_BOX } from "@/constants/lists"
+import { Dot } from "@/components/dot"
 
 type TopicReviewProps = {
   topics: DraftTopic[]
@@ -112,12 +113,7 @@ export function TopicReview({
                   <span className="block text-sm text-muted-foreground">
                     {topic.subtopics.map((subtopic, subtopicIndex) => (
                       <span key={subtopic}>
-                        {subtopicIndex > 0 && (
-                          <MinusIcon
-                            aria-hidden
-                            className="mx-1.5 inline size-3.5 align-[-2px] text-foreground/55"
-                          />
-                        )}
+                        {subtopicIndex > 0 && <Dot />}
                         {subtopic}
                       </span>
                     ))}

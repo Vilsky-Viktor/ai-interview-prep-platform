@@ -2,6 +2,7 @@ import { cn } from "cn"
 import { PlayIcon } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
+import { OUTLINE_BUTTON } from "@/components/landing/section"
 import { buttonVariants } from "@/components/ui/button"
 import {
   Tooltip,
@@ -11,8 +12,14 @@ import {
 import { DEMOS_URL } from "@/constants/landing"
 
 /** "demos": prepza's demo videos on YouTube, in a new tab, as an outline button with a play icon
- * and a tooltip saying where it leads. */
-export async function DemosButton({ className }: { className?: string }) {
+ * and a tooltip saying where it leads; `label` replaces its text. */
+export async function DemosButton({
+  label,
+  className,
+}: {
+  label?: string
+  className?: string
+}) {
   const t = await getTranslations("landing")
 
   return (
@@ -25,14 +32,15 @@ export async function DemosButton({ className }: { className?: string }) {
             rel="noopener noreferrer"
             className={cn(
               buttonVariants({ variant: "outline" }),
-              "h-12 gap-2 border-foreground/20 px-6 text-base lowercase dark:border-input",
+              OUTLINE_BUTTON,
+              "h-12 px-6 lowercase",
               className
             )}
           />
         }
       >
         <PlayIcon aria-hidden className="size-5" />
-        {t("demos")}
+        {label ?? t("demos")}
       </TooltipTrigger>
       <TooltipContent>{t("demosTooltip")}</TooltipContent>
     </Tooltip>

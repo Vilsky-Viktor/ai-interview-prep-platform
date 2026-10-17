@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from "next-intl"
 
 import { ReportActions } from "@/components/company/report-actions"
 import { REPORT_ID } from "@/constants/report"
+import { useReportTranslate } from "@/hooks/use-report-translate"
 import { reportSummary } from "@/lib/report-summary"
 import type { CandidateReportData } from "@/types/company"
 
@@ -19,21 +20,14 @@ export function CandidateReportActions({
 }) {
   const t = useTranslations("report")
   const locale = useLocale()
-  const candidates = useTranslations("candidates")
+  const translate = useReportTranslate()
 
   return (
     <ReportActions
       reportId={REPORT_ID}
       fileName={t("fileName", { email: report.email })}
       emailPath={`/companies/interviews/${interviewId}/candidates/${inviteId}/report/email`}
-      summary={reportSummary(
-        report,
-        (key, values) =>
-          ["pageLeaves", "copies", "fastAnswers"].includes(key)
-            ? candidates(key, values)
-            : t(key, values),
-        locale
-      )}
+      summary={reportSummary(report, translate, locale)}
     />
   )
 }

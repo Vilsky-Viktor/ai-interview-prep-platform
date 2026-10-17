@@ -1,7 +1,6 @@
 "use client"
 
 import { cn } from "cn"
-import { MinusIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
 
 import { gradeTone } from "@/lib/grade-tone"
@@ -15,6 +14,7 @@ import { verdict } from "@/lib/rounds"
 import type { ReviewItem } from "@/types/round"
 import { LIST_BOX } from "@/constants/lists"
 import { WARNING_TONE } from "@/constants/tones"
+import { Dot } from "@/components/dot"
 
 export function ScorecardReview({ items }: { items: ReviewItem[] }) {
   return (
@@ -94,9 +94,7 @@ function ScorecardSignals({ item }: { item: ReviewItem }) {
     <p className="flex flex-wrap items-center gap-x-1.5 text-sm text-amber-600 tabular-nums dark:text-amber-400">
       {signals.map((signal, index) => (
         <span key={String(signal)} className="flex items-center gap-x-1.5">
-          {index > 0 && (
-            <MinusIcon aria-hidden className="size-3.5 text-foreground" />
-          )}
+          {index > 0 && <Dot className="mx-0" />}
           {signal}
         </span>
       ))}

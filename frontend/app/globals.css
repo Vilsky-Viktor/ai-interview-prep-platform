@@ -185,6 +185,9 @@
   }
   body {
     @apply bg-background text-foreground;
+    /* Decorations that reach the window's edges (the hero's wires) never make the page scroll
+       sideways. */
+    overflow-x: clip;
   }
   /* On the narrowest phones (under 360px), a heading's long words (German, Russian, Polish…) break with a hyphen in the
      page's language instead of running past the screen. */
@@ -269,6 +272,44 @@
   40% {
     opacity: 1;
     transform: translateY(-3px);
+  }
+}
+
+/* The landing's arrows between two panels: each lights up in turn. */
+@keyframes light-up {
+  0%,
+  70%,
+  100% {
+    opacity: 0.25;
+  }
+  35% {
+    opacity: 1;
+  }
+}
+
+/* A landing demo pointer's click: a ring spreading out and fading. */
+@keyframes ripple {
+  from {
+    opacity: 0.7;
+    transform: scale(0.3);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+/* A landing card floating in place: a slow, small sway. */
+@keyframes source-float {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  30% {
+    transform: translate(3px, -5px);
+  }
+  65% {
+    transform: translate(-2px, 4px);
   }
 }
 

@@ -167,7 +167,7 @@ export function InviteIntro({
 }
 
 /** One time before the start: its label over a large number and its unit. */
-function TimeFact({
+export function TimeFact({
   label,
   value,
   unit,

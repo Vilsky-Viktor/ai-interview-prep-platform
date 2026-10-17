@@ -135,7 +135,7 @@
   },
   "home": {
     "title": "Test everyone\nHire the best",
-    "text": "AI turns your job description into a professional timed interview, with unique questions for every candidate. Just $2–5 per candidate."
+    "text": "AI turns your job description into a professional timed interview, with its own random questions for every candidate. Just $2–5 per candidate."
   },
   "start": {
     "placeholder": "Paste a job description, or describe the role and what a candidate should know",
@@ -800,7 +800,7 @@
     "cancelText": "It stops now, and nothing generated so far is kept.",
     "cancelling": "Cancelling…",
     "cancelFailed": "Couldn't cancel the generation. Please try again.",
-    "writing": "Writing your questions",
+    "writing": "Generating your questions",
     "drafting": "Drafting your topics",
     "writingNote": "This takes a few minutes. You can leave this page; we keep going.",
     "draftingNote": "Reading your goal and planning what to cover.",
@@ -1191,7 +1191,7 @@
       }
     },
     "more": "How it works",
-    "demos": "Demos",
+    "demos": "Video",
     "demosTooltip": "Watch demos on YouTube",
     "how": {
       "title": "Three steps to your next hire",
@@ -1403,7 +1403,205 @@
       "terms": "Terms",
       "privacy": "Privacy policy"
     },
-    "askAgent": "ask agent"
+    "askAgent": "ask agent",
+    "create": {
+      "title": "Create an interview in minutes",
+      "text": "Paste a job description and adjust the topics, or pick a ready template.",
+      "describe": "Paste your description",
+      "adjust": "Adjust the topics",
+      "ask": "Ask AI to change the topics",
+      "or": "or",
+      "fromTemplate": "From our templates"
+    },
+    "proof": {
+      "languages": "{count} languages",
+      "ready": "Ready in ~{minutes} minutes",
+      "noSubscription": "No subscription"
+    },
+    "sources": {
+      "title": "Invite candidates from everywhere",
+      "text": "Email them, publish a share link, import a file, or let your ATS, your own platform or an AI agent send them in.",
+      "labels": {
+        "ats": "Your ATS",
+        "email": "Email invites",
+        "file": "Bulk imports",
+        "link": "Shared ad link",
+        "api": "API",
+        "sdk": "SDK embed",
+        "agent": "AI agent",
+        "apps": "AI apps (MCP)"
+      },
+      "interview": "Interview",
+      "candidates": "{count, plural, one {<n>#</n> candidate} other {<n>#</n> candidates}}"
+    },
+    "candidates": {
+      "title": "What candidates see",
+      "text": "A timed interview in your brand: single choice, multi-choice and practical.",
+      "rules": {
+        "pick": "Pick one answer, or every right one where it says Select all that apply.",
+        "change": "You can change your pick until you move on.",
+        "time": "When the time runs out, the next question opens.",
+        "unanswered": "Unanswered questions count as wrong.",
+        "saved": "Your progress is saved.",
+        "extraTime": "Need more time? Ask {company} before you start.",
+        "people": "People at {company} review the results and decide.",
+        "stay": "Stay on this page until you finish."
+      }
+    },
+    "shareReports": {
+      "title": "See who's best\nShare it in seconds",
+      "text": "Every candidate's answers and grade, shared by email or chat.",
+      "chatQuestion": "Hey, has anyone passed yet?"
+    },
+    "automate": {
+      "title": "Automate your hiring",
+      "text": "Connect your platform, AI app and job boards, and get updates in Slack.",
+      "labels": {
+        "platform": "Your platform",
+        "api": "API",
+        "sdk": "SDK embed",
+        "webhook": "Web hooks",
+        "aiApp": "AI app",
+        "mcp": "MCP server",
+        "jobBoard": "Job board",
+        "link": "Shared ad link",
+        "slack": "Slack"
+      }
+    },
+    "justAsk": {
+      "title": "Just ask the agent",
+      "text": "Ask in plain words: it reads your data, answers how‑to questions and does the work after you confirm.",
+      "welcome": "How can I help you today?",
+      "questions": {
+        "stats": "How many candidates passed {interview}?",
+        "help": "How do I give a candidate extra time?",
+        "invite": "Invite {email} to {interview}"
+      },
+      "steps": {
+        "stats": "Reading the report…",
+        "help": "Reading the guide…",
+        "invite": "Preparing it for you to confirm…"
+      },
+      "answers": {
+        "stats": "{passed} of {total} candidates passed ({percent}%) at the {passMark}% pass mark. The best grade is {best}%.",
+        "help": "On the candidate's page, give them +25%, +50% or +100% of each question's time before they start. More in <link>the guide on timing and extra time</link>.",
+        "invite": "Invited {email} to {interview}."
+      },
+      "cards": {
+        "info": {
+          "title": "Info",
+          "text": "Ask about your interviews, candidates and results."
+        },
+        "help": {
+          "title": "Help",
+          "text": "How-to answers from prepza's guides, in your language."
+        },
+        "actions": {
+          "title": "Actions",
+          "text": "Invite candidates, create interviews, change settings."
+        }
+      }
+    },
+    "trustQuality": {
+      "title": "Trust, quality and compliance",
+      "text": "Questions that get better, a person who decides, documents ready.",
+      "steps": {
+        "generated": {
+          "labels": "generated",
+          "lines": "AI writes the questions."
+        },
+        "checked": {
+          "labels": "checked",
+          "lines": "A second AI checks answers blind before it's ready."
+        },
+        "answered": {
+          "labels": "answered",
+          "lines": "Candidates answer, rate questions and report problems."
+        },
+        "flagged": {
+          "labels": "flagged",
+          "lines": "Answers, votes and reports point out a weak question, even \"it's hard to read\"."
+        },
+        "rewritten": {
+          "labels": "rewritten",
+          "lines": "It's fixed or replaced, and back in the loop."
+        }
+      },
+      "cards": {
+        "person": {
+          "title": "A person decides",
+          "text": "The score supports your decision; it doesn't make it. Integrity signals are a reason to look closer, not proof."
+        },
+        "fair": {
+          "title": "Fair to every candidate",
+          "text": "The same timer and mix of question kinds, questions drawn at random for each person, extra time for those who need it."
+        },
+        "laws": {
+          "title": "Built for compliance",
+          "text": "GDPR, the EU AI Act, UK and US rules: the <documents>documents</documents> are ready for download."
+        },
+        "log": {
+          "title": "Every action on record",
+          "text": "An owner sees who did what in the company, kept safely for 12 months on EU servers."
+        }
+      }
+    },
+    "moreQuestions": {
+      "title": "More questions?",
+      "videos": "videos",
+      "faq": "FAQ",
+      "guides": "guides"
+    },
+    "closing": {
+      "title": "Create your first interview\nIt's free",
+      "start": "Create an interview"
+    },
+    "comparison": {
+      "title": "Faster than phone screens\nCheaper than subscriptions",
+      "text": "No hours on calls and no monthly fee: an interview from your job description, paid per candidate.",
+      "time": "Your time",
+      "cost": "What you pay",
+      "phone": {
+        "name": "Phone screens",
+        "time": "~30 min per candidate",
+        "cost": "Your team's hours"
+      },
+      "subscription": {
+        "name": "Testing tools",
+        "time": "Tests to pick or write for every role",
+        "cost": "A monthly fee, hiring or not"
+      },
+      "prepza": {
+        "name": "prepza",
+        "time": "~10 min per role, from your job description",
+        "cost": "{price} per candidate who answers"
+      },
+      "more": "Compare with other tools"
+    },
+    "freeToStart": {
+      "title": "Everything is free\nPay per candidate",
+      "text": "Every feature is included. A candidate costs only once they've answered at least one question.",
+      "lines": {
+        "create": "create an interview",
+        "review": "review topics with AI",
+        "invite": "invite {count} candidates",
+        "reports": "reports and sharing",
+        "connect": "ATS, API, Slack, AI agent",
+        "answered": "{count} candidates answered"
+      },
+      "total": "total",
+      "each": "({price} per candidate)",
+      "free": "{count, plural, one {# free candidate} other {# free candidates}} to start",
+      "perCandidate": "per candidate",
+      "pack": "{count} for {price}",
+      "see": "See pricing",
+      "notes": {
+        "subscription": "no subscription",
+        "unanswered": "unanswered invites cost nothing",
+        "expire": "credits never expire",
+        "refund": "unused paid credits refundable for 14 days"
+      }
+    }
   },
   "faq": {
     "title": "Frequently asked questions",

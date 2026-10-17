@@ -11,6 +11,7 @@ import type { ContentPage } from "@/lib/content"
 import { formatDay } from "@/lib/format"
 import { textDirection } from "@/lib/locale"
 import { localizeHref } from "@/lib/locale-path"
+import { endsWithQuestionMark } from "@/lib/question-mark"
 import { previewImage, siteUrl, urlLocale } from "@/lib/site"
 import { articleData, breadcrumbData } from "@/lib/structured-data"
 import type { PageHelpKey } from "@/types/page-help"
@@ -60,7 +61,7 @@ export async function ContentArticle({
         <h1
           className={cn(
             "font-heading text-4xl font-medium tracking-tight text-balance normal-case",
-            page.title.endsWith("?") && "no-dot"
+            endsWithQuestionMark(page.title) && "no-dot"
           )}
         >
           {page.title}

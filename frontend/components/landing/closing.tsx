@@ -1,3 +1,4 @@
+import { GiftIcon } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
 import { AskAgentButton } from "@/components/landing/ask-agent-button"
@@ -5,27 +6,55 @@ import { DemosButton } from "@/components/landing/demos-button"
 import { MoreLink } from "@/components/landing/section"
 import { StartButton } from "@/components/landing/start-button"
 
-/** The landing page's last screen: back to the job description box, and links to the demo videos,
- * the assistant and the FAQ. */
-export async function Closing() {
+/** The landing page's last screen: a two-line call to create the first interview, each line
+ * ending with the logo's blue dot, the button back up to the job description box and the free
+ * candidates from billing's catalog; under it, "more questions?" with a row of buttons to the
+ * agent, the demo videos, the FAQ and the guides. */
+export async function Closing({
+  freeCandidates,
+}: {
+  freeCandidates: number | null
+}) {
   const t = await getTranslations("landing")
 
   return (
-    <section className="flex min-h-[calc(100svh-3.5rem)] flex-col items-center justify-center gap-24 py-24 text-center">
-      <div className="space-y-10">
-        <h2 className="no-dot font-heading text-5xl font-medium tracking-tight sm:text-7xl">
-          {t("ready.title")}
+    <section
+      id="help"
+      className="flex min-h-[calc(100svh-3.5rem)] scroll-mt-14 flex-col items-center justify-center gap-24 py-24 text-center"
+    >
+      <div className="flex flex-col items-center gap-10">
+        <h2 className="no-dot font-heading text-[min(3rem,10.5vw)] leading-none font-medium tracking-tight text-balance sm:text-6xl">
+          {t("closing.title")
+            .split("\n")
+            .map((line) => (
+              <span key={line} className="block">
+                {line}
+                <span className="text-primary">.</span>
+              </span>
+            ))}
         </h2>
-        <StartButton label={t("ready.start")} />
+        <div className="flex flex-col items-center gap-4">
+          <StartButton label={t("closing.start")} />
+          {freeCandidates !== null && (
+            <p className="flex items-center gap-2 text-sm text-muted-foreground">
+              <GiftIcon aria-hidden className="size-4 text-primary" />
+              {t("freeToStart.free", { count: freeCandidates })}
+            </p>
+          )}
+        </div>
       </div>
-      <div className="space-y-3">
-        <h3 className="font-heading text-2xl font-medium">{t("faq.title")}</h3>
-        <p className="text-lg text-muted-foreground">{t("faq.text")}</p>
+      <div className="space-y-5">
+        <h3 className="no-dot font-heading text-2xl font-medium lowercase">
+          {t("moreQuestions.title")}
+        </h3>
         <div className="flex flex-wrap justify-center gap-3">
-          <DemosButton className="h-11" />
-          <AskAgentButton className="h-11" />
-          <MoreLink href="/faq" keepCase>
-            {t("faq.read")}
+          <AskAgentButton />
+          <DemosButton label={t("moreQuestions.videos")} />
+          <MoreLink href="/faq" keepCase className="h-12">
+            {t("moreQuestions.faq")}
+          </MoreLink>
+          <MoreLink href="/guides" className="h-12">
+            {t("moreQuestions.guides")}
           </MoreLink>
         </div>
       </div>

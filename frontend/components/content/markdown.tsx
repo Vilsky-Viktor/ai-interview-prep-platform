@@ -5,6 +5,7 @@ import remarkGfm from "remark-gfm"
 
 import { LocalizedLink } from "@/components/localized-link"
 import { MarkdownCode } from "@/components/markdown-code"
+import { endsWithQuestionMark } from "@/lib/question-mark"
 
 /** A link in the site's text: the site's own pages open in place, in the address's language;
  * others in a new tab. */
@@ -39,7 +40,7 @@ const ELEMENTS: ComponentProps<typeof ReactMarkdown>["components"] = {
     <h2
       className={cn(
         "pt-4 font-heading text-2xl font-medium normal-case",
-        String(children).endsWith("?") && "no-dot"
+        endsWithQuestionMark(String(children)) && "no-dot"
       )}
     >
       {children}

@@ -7,6 +7,7 @@ import { flushSync } from "react-dom"
 import { InterviewReport } from "@/components/company/interview-report"
 import { ReportActions } from "@/components/company/report-actions"
 import { INTERVIEW_REPORT_ID } from "@/constants/report"
+import { useReportTranslate } from "@/hooks/use-report-translate"
 import { apiFetch } from "@/lib/api"
 import { candidatesSummary } from "@/lib/report-summary"
 import type { InterviewReportData } from "@/types/company"
@@ -22,7 +23,7 @@ export function InterviewReportActions({
 }) {
   const t = useTranslations("report")
   const locale = useLocale()
-  const candidates = useTranslations("candidates")
+  const translate = useReportTranslate()
   const [report, setReport] = useState<InterviewReportData | null>(null)
 
   // Rendered at once, so the hidden report is on the page when the PDF is made from it.
@@ -44,18 +45,7 @@ export function InterviewReportActions({
         reportId={INTERVIEW_REPORT_ID}
         fileName={t("candidatesFileName", { title })}
         emailPath={`/companies/interviews/${interviewId}/report/email`}
-        summary={
-          report
-            ? candidatesSummary(
-                report,
-                (key, values) =>
-                  ["pageLeaves", "copies", "fastAnswers"].includes(key)
-                    ? candidates(key, values)
-                    : t(key, values),
-                locale
-              )
-            : ""
-        }
+        summary={report ? candidatesSummary(report, translate, locale) : ""}
         load={load}
         pages
       />

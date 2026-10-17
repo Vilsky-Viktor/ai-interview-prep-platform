@@ -1,24 +1,24 @@
 import { ArrowDownIcon } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { AdvantagesSection } from "@/components/landing/advantages"
-import { AgentSection } from "@/components/landing/agent"
-import { AtsSection } from "@/components/landing/ats"
-import { BrandSection } from "@/components/landing/brand"
+import { AutomateSection } from "@/components/landing/automate"
+import { CandidatesSection } from "@/components/landing/candidates"
 import { Closing } from "@/components/landing/closing"
-import { DemosButton } from "@/components/landing/demos-button"
-import { CompaniesSection } from "@/components/landing/companies"
-import { ControlSection } from "@/components/landing/control"
-import { HowItWorks } from "@/components/landing/how-it-works"
-import { PricingSection } from "@/components/landing/pricing"
-import { TrustSection } from "@/components/landing/trust"
-import { QualitySection } from "@/components/landing/quality"
-import { ReportsSection } from "@/components/landing/reports"
-import { InviteWaysSection } from "@/components/landing/invite-ways"
-import { TryFirstSection } from "@/components/landing/try-first"
+import { ComparisonSection } from "@/components/landing/comparison"
+import { CreateSection } from "@/components/landing/create"
+import { FreeToStartSection } from "@/components/landing/free-to-start"
+import { ShareReportsSection } from "@/components/landing/share-reports"
+import { InviteFromSection } from "@/components/landing/invite-from"
+import { JustAskSection } from "@/components/landing/just-ask"
+import { TrustQualitySection } from "@/components/landing/trust-quality"
+import { VideoButton } from "@/components/landing/video-button"
 import { JsonLd } from "@/components/json-ld"
 import { PageHelp } from "@/components/page-help"
+import { Dotted } from "@/components/dot"
+import { HeroWires } from "@/components/landing/hero-wires"
 import { StartTest } from "@/components/start-test"
+import { LOCALES } from "@/constants/i18n"
+import { READY_MINUTES } from "@/constants/landing"
 import { SITE_NAME } from "@/constants/seo"
 import { publicFetch } from "@/lib/server-api"
 import { pageMetadata, siteUrl } from "@/lib/site"
@@ -70,7 +70,7 @@ export default async function HomePage() {
                   ))}
               </h1>
               <div className="mt-2 hidden shrink-0 items-center gap-1 sm:flex">
-                <DemosButton />
+                <VideoButton />
                 <PageHelp page="landing" className="size-12" />
               </div>
             </div>
@@ -78,12 +78,31 @@ export default async function HomePage() {
               {t("text")}
             </p>
             {/* On phones the demos come under the promise. */}
-            <div className="flex items-center gap-1 sm:hidden">
-              <DemosButton />
+            <div className="flex items-center justify-center gap-1 sm:hidden">
+              <VideoButton />
               <PageHelp page="landing" className="size-12" />
             </div>
           </div>
-          <StartTest freeCandidates={freeCandidates} />
+          <div className="space-y-5">
+            {/* The box with wires from both edges of the window. */}
+            <div className="relative">
+              <HeroWires />
+              <StartTest freeCandidates={freeCandidates} />
+            </div>
+            {/* What a company gets, in short, right under the box. */}
+            <p
+              data-testid="hero-proof"
+              className="text-center text-sm text-muted-foreground"
+            >
+              <Dotted
+                items={[
+                  landing("proof.languages", { count: LOCALES.length }),
+                  landing("proof.ready", { minutes: READY_MINUTES }),
+                  landing("proof.noSubscription"),
+                ]}
+              />
+            </p>
+          </div>
         </div>
         <a
           href="#how"
@@ -93,20 +112,16 @@ export default async function HomePage() {
           <ArrowDownIcon className="size-5" />
         </a>
       </div>
-      <HowItWorks />
-      <AdvantagesSection />
-      <CompaniesSection />
-      <TryFirstSection />
-      <InviteWaysSection />
-      <ReportsSection />
-      <AgentSection />
-      <ControlSection />
-      <QualitySection />
-      <AtsSection />
-      <BrandSection />
-      <TrustSection />
-      <PricingSection />
-      <Closing />
+      <CreateSection />
+      <InviteFromSection />
+      <CandidatesSection />
+      <ShareReportsSection />
+      <AutomateSection />
+      <JustAskSection />
+      <TrustQualitySection />
+      {catalog && <ComparisonSection catalog={catalog} />}
+      {catalog && <FreeToStartSection catalog={catalog} />}
+      <Closing freeCandidates={freeCandidates} />
     </main>
   )
 }

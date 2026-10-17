@@ -1,4 +1,3 @@
-import { MinusIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
 import type { ReactNode } from "react"
 
@@ -6,6 +5,7 @@ import { Countdown } from "@/components/company/countdown"
 import { Progress } from "@/components/ui/progress"
 import type { InterviewSession } from "@/types/company"
 import type { NextQuestion } from "@/types/round"
+import { Dot } from "@/components/dot"
 
 /** The interview's header: the company's logo, the section's title and place, the question's
  * clock and the progress. */
@@ -44,10 +44,7 @@ export function SessionHeader({
             <span className="truncate">{session.topic_title}</span>
             {section.count > 1 && (
               <>
-                <MinusIcon
-                  aria-hidden
-                  className="mx-1.5 size-3.5 shrink-0 text-foreground/55"
-                />
+                <Dot />
                 <span className="shrink-0 tabular-nums">
                   {t("section", {
                     number: section.number,
@@ -69,10 +66,7 @@ export function SessionHeader({
                   paused={sending}
                   onExpire={onTimeUp}
                 />
-                <MinusIcon
-                  aria-hidden
-                  className="mx-1.5 size-3.5 text-foreground/55"
-                />
+                <Dot />
               </>
             )}
             {progress.answered} / {progress.total}

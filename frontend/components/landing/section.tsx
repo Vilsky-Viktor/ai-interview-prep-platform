@@ -4,6 +4,7 @@ import { ArrowRightIcon } from "lucide-react"
 import { KeepAcronyms } from "@/components/keep-acronyms"
 import { LocalizedLink } from "@/components/localized-link"
 import { buttonVariants } from "@/components/ui/button"
+import { endsWithQuestionMark } from "@/lib/question-mark"
 
 /** One landing section, a screen of its own: a large title and a short text, centered, and
  * its picture below. */
@@ -23,14 +24,14 @@ export function LandingSection({
   return (
     <section
       id={id}
-      className="flex min-h-[calc(100svh-3.5rem)] scroll-mt-14 flex-col justify-center gap-8 py-20 sm:py-28"
+      className="flex min-h-[calc(100svh-3.5rem)] scroll-mt-14 flex-col justify-center gap-14 py-20 sm:py-28"
     >
       <div className="mx-auto max-w-3xl space-y-4 text-center">
         {/* A title over two lines ends each with the logo's blue dot, like the hero's. */}
         <h2
           className={cn(
             "font-heading text-4xl font-medium tracking-tight text-balance sm:text-5xl",
-            title.includes("\n") && "no-dot"
+            (title.includes("\n") || endsWithQuestionMark(title)) && "no-dot"
           )}
         >
           {title.includes("\n") ? (
@@ -81,15 +82,21 @@ export function Stage({
 /** A piece of interface inside a stage: plain, with a hairline edge. */
 export const PANEL = "rounded-2xl border border-border/70 bg-background"
 
+/** The landing's outline button: the demos', the video's and a section's link onwards. */
+export const OUTLINE_BUTTON =
+  "gap-2 border-foreground/20 text-base dark:border-input"
+
 /** A link onwards from a section, as an outline button; its arrow faces the reading direction. */
 export function MoreLink({
   href,
   keepCase = false,
+  className,
   children,
 }: {
   href: string
   // For a label written in lowercase already, with an abbreviation to keep ("go to FAQ").
   keepCase?: boolean
+  className?: string
   children: React.ReactNode
 }) {
   return (
@@ -97,8 +104,10 @@ export function MoreLink({
       href={href}
       className={cn(
         buttonVariants({ variant: "outline" }),
-        "h-11 gap-2 border-foreground/20 px-6 text-base dark:border-input",
-        keepCase ? "normal-case" : "lowercase"
+        OUTLINE_BUTTON,
+        "h-11 px-6",
+        keepCase ? "normal-case" : "lowercase",
+        className
       )}
     >
       {children}
