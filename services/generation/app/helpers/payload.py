@@ -30,7 +30,7 @@ def build_preparation(
             TopicIn(
                 title=item["topic"],
                 subtopics=item["subtopics"],
-                questions=questions[: topic_size(values.get("template", False))],
+                questions=questions[: topic_size(values)],
                 embedding=embeddings[index] if embeddings else None,
             )
         )

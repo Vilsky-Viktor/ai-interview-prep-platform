@@ -52,8 +52,6 @@ locals {
         INVOKER_AUDIENCE    = local.run_url["billing"]
         PADDLE_ENVIRONMENT  = var.paddle_environment
         PADDLE_CLIENT_TOKEN = var.paddle_client_token
-        # The AI costs tab compares this month's AI spend with it.
-        MONTHLY_BUDGET = tostring(var.monthly_budget)
       },
       { for key, price in var.paddle_prices : "PADDLE_PRICE_${upper(key)}" => price },
     )

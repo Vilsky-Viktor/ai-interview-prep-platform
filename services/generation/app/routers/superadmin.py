@@ -21,6 +21,7 @@ from app.services.cancel import cancel_generation
 from app.services.regenerate import regenerate
 from app.services.retry import retry_generation
 from app.services.review import submit_review
+from app.services.topic_caps import generation_out
 from app.storage import generations
 
 # The superadmin's templates (docs/features/admin-zone.md, Templates): the same pipeline as a company's test,
@@ -51,12 +52,12 @@ async def create_template(
     )
     await tasks.enqueue(RUN_GENERATION, {"generation_id": str(generation.id)})
 
-    return GenerationOut.model_validate(generation)
+    return await generation_out(generation)
 
 
 @router.get("/generations/{generation_id}")
 async def get_generation(generation_id: UUID, superadmin: SuperadminUser) -> GenerationOut:
-    return GenerationOut.model_validate(await get_template_generation(generation_id))
+    return await generation_out(await get_template_generation(generation_id))
 
 
 @router.post("/generations/{generation_id}/review")
@@ -66,7 +67,7 @@ async def review_generation(
     await refuse_if_paused(get_redis(), TEMPLATE_GENERATION, user_id=superadmin.uid)
     generation = await get_template_generation(generation_id)
 
-    return GenerationOut.model_validate(await submit_review(generation, body))
+    return await generation_out(await submit_review(generation, body))
 
 
 @router.post("/generations/{generation_id}/retry")
@@ -74,14 +75,14 @@ async def retry(generation_id: UUID, superadmin: SuperadminUser) -> GenerationOu
     await refuse_if_paused(get_redis(), TEMPLATE_GENERATION, user_id=superadmin.uid)
     generation = await get_template_generation(generation_id)
 
-    return GenerationOut.model_validate(await retry_generation(generation))
+    return await generation_out(await retry_generation(generation))
 
 
 @router.post("/generations/{generation_id}/cancel")
 async def cancel(generation_id: UUID, superadmin: SuperadminUser) -> GenerationOut:
     generation = await get_template_generation(generation_id)
 
-    return GenerationOut.model_validate(await cancel_generation(generation))
+    return await generation_out(await cancel_generation(generation))
 
 
 @router.post("/templates/{template_id}/questions/{question_id}/regenerate")

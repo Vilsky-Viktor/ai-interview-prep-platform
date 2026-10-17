@@ -156,6 +156,19 @@ LIMITS = {
     # from a topic, that are "select all that apply" (multi_answer.py). 10% while multi-answer
     # distractors score below the 3.0 target in the evals (evals/README.md).
     "MULTI_ANSWER_PERCENT": Limit(GENERATION, 10, "percent", None, 0, 50, EVERYONE, counted=False),
+    # Questions generated for each topic: an interview's, from which each candidate gets a random
+    # subset, and a template's (30 for free practice and 60 for companies' interviews, library's
+    # PRACTICE_QUESTIONS and COMPANY_QUESTIONS). A change applies to generations started after it.
+    "INTERVIEW_QUESTIONS_PER_TOPIC": Limit(
+        GENERATION, 70, "items", None, 10, 500, EVERYONE, counted=False
+    ),
+    "TEMPLATE_QUESTIONS_PER_TOPIC": Limit(
+        GENERATION, 90, "items", None, 10, 500, EVERYONE, counted=False
+    ),
+    # Main topics an interview or template has, and subtopics a topic has (each subtopic is at
+    # least one AI call). The topic review follows them.
+    "MAX_TOPICS": Limit(GENERATION, 10, "items", None, 1, 20, EVERYONE, counted=False),
+    "MAX_SUBTOPICS": Limit(GENERATION, 5, "items", None, 1, 20, EVERYONE, counted=False),
     # Rounds: practice, interview sessions, the help chat and the contact page.
     "PRACTICE_ROUNDS_PER_HOUR": Limit(ROUNDS, 20, "calls", HOUR_SECONDS, 1, 1_000, "user"),
     "SIGNALS_PER_MINUTE": Limit(ROUNDS, 60, "calls", SIGNALS_WINDOW, 1, 1_000, "user"),
@@ -192,6 +205,8 @@ LIMITS = {
     "AI_SPEND_UNPAID_DAY": Limit(
         "billing", 15.0, "usd", DAY_SECONDS, 1.0, 500.0, "everyone", "unpaid"
     ),
+    # OpenAI spend a month the AI costs tab compares this month's with; 0: no budget.
+    "MONTHLY_BUDGET": Limit("billing", 300.0, "usd", None, 0.0, 100_000.0, EVERYONE, counted=False),
 }
 
 # The value giving each level's seconds a question.

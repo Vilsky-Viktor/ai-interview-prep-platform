@@ -23,6 +23,32 @@ def test_every_default_is_within_its_bounds_and_every_pair_is_a_limit():
 
 
 @pytest.mark.parametrize(
+    ("name", "service", "default", "lowest", "highest"),
+    [
+        ("INTERVIEW_QUESTIONS_PER_TOPIC", "generation", 70, 10, 500),
+        ("TEMPLATE_QUESTIONS_PER_TOPIC", "generation", 90, 10, 500),
+        ("MAX_TOPICS", "generation", 10, 1, 20),
+        ("MAX_SUBTOPICS", "generation", 5, 1, 20),
+        ("MONTHLY_BUDGET", "billing", 300.0, 0.0, 100_000.0),
+    ],
+)
+def test_the_question_sizes_topic_caps_and_budget_are_plain_values_in_controls(
+    name, service, default, lowest, highest
+):
+    found = LIMITS[name]
+
+    assert (found.service, found.default, found.lowest, found.highest) == (
+        service,
+        default,
+        lowest,
+        highest,
+    )
+    assert type(found.default) is type(default)
+    assert not found.counted and found.window is None
+    assert asyncio.run(limit(FakeRedis({name: str(highest)}), name)) == highest
+
+
+@pytest.mark.parametrize(
     ("edited", "seconds"), [({}, [60, 60, 75]), ({"QUESTION_SECONDS_HARD": "90.0"}, [60, 60, 90])]
 )
 def test_a_new_tests_seconds_a_question_are_its_levels_as_set_in_controls(edited, seconds):

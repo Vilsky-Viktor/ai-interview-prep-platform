@@ -3,9 +3,9 @@ import random
 import re
 
 from prepza_common.examples import has_example
+from prepza_common.limit_list import LIMITS
 from prepza_common.multi_answer import is_multi
 
-from app.config.settings import settings
 from app.constants.generation import (
     MAX_EXAMPLE_LINES,
     MAX_MULTI_CORRECT,
@@ -66,12 +66,16 @@ def merge_buckets(buckets: list[list[dict]]) -> list[dict]:
     return merged
 
 
-def topic_size(template: bool) -> int:
-    """Questions each topic gets: more for a template than for a company's test."""
-    if template:
-        return settings.template_questions_per_topic
+def topic_size_name(template: bool) -> str:
+    """The Controls value giving each topic's questions: more for a template than for a
+    company's test."""
+    return "TEMPLATE_QUESTIONS_PER_TOPIC" if template else "INTERVIEW_QUESTIONS_PER_TOPIC"
 
-    return settings.interview_questions_per_topic
+
+def topic_size(state: dict) -> int:
+    """Questions each topic of the run gets, as the run started with them (run_pipeline); a run
+    started before they were kept gets the default."""
+    return state.get("topic_size") or LIMITS[topic_size_name(state.get("template", False))].default
 
 
 def question_calls(subtopic_count: int, size: int) -> int:

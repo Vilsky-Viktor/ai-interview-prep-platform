@@ -9,7 +9,6 @@ x-billing-env: &billing-env
   # The AI costs tab names companies and accounts.
   COMPANIES_URL: http://companies:8000
   LIBRARY_URL: http://library:8000
-  MONTHLY_BUDGET: ${MONTHLY_BUDGET:-300}
   PADDLE_ENVIRONMENT: ${PADDLE_ENVIRONMENT:-sandbox}
   PADDLE_CLIENT_TOKEN: ${PADDLE_CLIENT_TOKEN:-}
   PADDLE_WEBHOOK_SECRET: ${PADDLE_WEBHOOK_SECRET:-}

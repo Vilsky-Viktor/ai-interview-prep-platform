@@ -33,6 +33,7 @@ from app.services.cancel import cancel_generation
 from app.services.regenerate import regenerate
 from app.services.retry import retry_generation
 from app.services.review import submit_review
+from app.services.topic_caps import generation_out
 from app.storage import generations
 
 router = APIRouter(prefix="/internal", tags=["internal"])
@@ -67,7 +68,7 @@ async def create_interview_generation(
     )
     await tasks.enqueue(RUN_GENERATION, {"generation_id": str(generation.id)})
 
-    return GenerationOut.model_validate(generation)
+    return await generation_out(generation)
 
 
 @router.post("/generations/statuses")
@@ -88,7 +89,7 @@ async def get_interview_generation(
     generation_id: UUID, company_id: UUID, caller: ServiceCaller
 ) -> GenerationOut:
     """For a caller that already checked the user belongs to the company."""
-    return GenerationOut.model_validate(await get_company_generation(generation_id, company_id))
+    return await generation_out(await get_company_generation(generation_id, company_id))
 
 
 @router.post("/generations/{generation_id}/review")
@@ -102,7 +103,7 @@ async def review_interview_generation(
     """For a caller that already checked the user may manage the company's interviews."""
     generation = await get_company_generation(generation_id, company_id)
 
-    return GenerationOut.model_validate(await submit_review(generation, body))
+    return await generation_out(await submit_review(generation, body))
 
 
 @router.post("/generations/{generation_id}/retry")
@@ -112,7 +113,7 @@ async def retry_interview_generation(
     """For a caller that already checked the user may manage the company's interviews."""
     generation = await get_company_generation(generation_id, company_id)
 
-    return GenerationOut.model_validate(await retry_generation(generation))
+    return await generation_out(await retry_generation(generation))
 
 
 @router.post("/generations/{generation_id}/cancel")
@@ -122,7 +123,7 @@ async def cancel_interview_generation(
     """For a caller that already checked the user may manage the company's interviews."""
     generation = await get_company_generation(generation_id, company_id)
 
-    return GenerationOut.model_validate(await cancel_generation(generation))
+    return await generation_out(await cancel_generation(generation))
 
 
 @router.post("/questions/{question_id}/regenerate")

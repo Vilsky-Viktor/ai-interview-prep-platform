@@ -112,18 +112,67 @@ def test_only_a_failed_generation_is_retried(client, monkeypatch, queued):
     assert queued == [(RUN_GENERATION, {"generation_id": str(GENERATION_ID)})]
 
 
-def test_approving_more_than_max_topics_is_rejected(client, monkeypatch):
-    fake_get(monkeypatch)
+def drafted(monkeypatch, count):
+    """A generation awaiting review with `count` drafted topics."""
+    generation = company_generation()
+    generation.topics = [{"main_topic": f"Topic {i}", "subtopics": []} for i in range(count)]
+
+    async def get(_generation_id):
+        return generation
+
+    monkeypatch.setattr(generations, "get", get)
+
+
+@pytest.mark.parametrize(("edited", "most"), [({}, 10), ({"MAX_TOPICS": "4"}, 4)])
+def test_approving_more_than_max_topics_is_rejected(client, monkeypatch, redis, edited, most):
+    """MAX_TOPICS as set in Controls now."""
+    drafted(monkeypatch, 12)
+    redis.limits.update(edited)
     url = f"/internal/generations/{GENERATION_ID}/review"
     params = {"company_id": str(COMPANY_ID)}
-    eleven = list(range(11))
 
     approve = client.post(
-        url, params=params, json={"selected": eleven, "instructions": ""}, headers=headers()
+        url,
+        params=params,
+        json={"selected": list(range(most + 1)), "instructions": ""},
+        headers=headers(),
     )
 
     assert approve.status_code == 422
-    assert "at most 10 topics" in approve.text
+    assert approve.json()["detail"] == f"Choose at most {most} topics"
+
+
+@pytest.mark.parametrize(("edited", "most"), [({}, 5), ({"MAX_SUBTOPICS": "2"}, 2)])
+def test_a_topic_edited_with_more_than_max_subtopics_is_rejected(
+    client, monkeypatch, redis, edited, most
+):
+    """MAX_SUBTOPICS as set in Controls now."""
+    drafted(monkeypatch, 1)
+    redis.limits.update(edited)
+    topic = {"main_topic": "SQL", "subtopics": [f"S{i}" for i in range(most + 1)]}
+
+    response = client.post(
+        f"/internal/generations/{GENERATION_ID}/review",
+        params={"company_id": str(COMPANY_ID)},
+        json={"selected": [0], "instructions": "", "topics": [topic]},
+        headers=headers(),
+    )
+
+    assert response.status_code == 422
+    assert response.json()["detail"] == f"A topic can have at most {most} subtopics"
+
+
+def test_the_review_page_is_told_the_caps_set_in_controls(client, monkeypatch, redis):
+    fake_get(monkeypatch)
+    redis.limits.update({"MAX_TOPICS": "6", "MAX_SUBTOPICS": "3"})
+
+    response = client.get(
+        f"/internal/generations/{GENERATION_ID}",
+        params={"company_id": str(COMPANY_ID)},
+        headers=headers(),
+    )
+
+    assert (response.json()["max_topics"], response.json()["max_subtopics"]) == (6, 3)
 
 
 def test_more_than_max_topics_is_fine_with_instructions_to_revise(client, monkeypatch):

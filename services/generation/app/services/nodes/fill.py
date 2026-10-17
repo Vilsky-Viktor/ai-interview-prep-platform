@@ -89,7 +89,7 @@ async def fill_topics(state: State) -> dict:
     """Tops up every topic that ended below its size, so each one has exactly as many questions,
     of each kind as many as it should (top_up): its share of multi-answer questions and, on
     material in a formal notation, of questions with an example."""
-    size = topic_size(state.get("template", False))
+    size = topic_size(state)
     final = []
 
     for item in state["final"]:

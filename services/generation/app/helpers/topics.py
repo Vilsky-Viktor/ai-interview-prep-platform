@@ -1,4 +1,3 @@
-from app.config.settings import settings
 from app.constants.generation import MAX_TOPIC_NAME_LENGTH
 
 
@@ -19,16 +18,14 @@ def fit_name(name: str) -> str:
     return window.rsplit(" ", 1)[0].rstrip(" ,;:-–—")
 
 
-def fit_topics(topics: list[dict]) -> list[dict]:
-    """Names within their limit, and at most MAX_SUBTOPICS subtopics: approving a draft never
-    fails on what the model made too long."""
+def fit_topics(topics: list[dict], max_subtopics: int) -> list[dict]:
+    """Names within their limit, and at most `max_subtopics` subtopics (MAX_SUBTOPICS): approving
+    a draft never fails on what the model made too long."""
     return [
         {
             **topic,
             "main_topic": fit_name(topic["main_topic"]),
-            "subtopics": [
-                fit_name(subtopic) for subtopic in topic["subtopics"][: settings.max_subtopics]
-            ],
+            "subtopics": [fit_name(subtopic) for subtopic in topic["subtopics"][:max_subtopics]],
         }
         for topic in topics
     ]

@@ -12,7 +12,7 @@ from app.constants.kinds import GenerationKind
 from app.constants.statuses import Status
 from app.helpers.payload import build_preparation
 from app.helpers.progress import track_progress
-from app.helpers.questions import topic_size
+from app.helpers.questions import topic_size, topic_size_name
 from app.integrations import library
 from app.integrations.redis import get_redis
 from app.integrations.usage import ai_run
@@ -30,31 +30,35 @@ async def run_pipeline(graph, generation: Generation, resume: dict | None) -> No
         "recursion_limit": RECURSION_LIMIT,
     }
     template = generation.kind == GenerationKind.TEMPLATE
+    values = (await graph.aget_state(config)).values
 
     if resume is not None:
         graph_input = Command(resume=resume)
-    elif (await graph.aget_state(config)).values:
+    elif values:
         # A checkpoint exists, so continue from it after a crash or a retry.
         graph_input = None
     else:
-        graph_input = {
+        # A change in Controls applies to generations started after it.
+        values = {
             "input_text": generation.text,
             "language": generation.language,
             "template": template,
+            "topic_size": await limit(get_redis(), topic_size_name(template)),
         }
+        graph_input = values
 
     # What this run used, also when it fails: a retry or a resume records its own.
     action = TEMPLATE_GENERATION if template else INTERVIEW_GENERATION
     who = {"company_id": generation.company_id, "user_id": generation.owner_uid}
 
     async with ai_run(action, subject_id=generation.id, **who) as run:
-        await stream_graph(graph, generation, graph_input, config)
+        await stream_graph(graph, generation, graph_input, config, topic_size(values))
 
         if await generations.is_cancelled(generation.id):
             run.outcome = Outcome.CUT
 
 
-async def stream_graph(graph, generation: Generation, graph_input, config: dict) -> None:
+async def stream_graph(graph, generation: Generation, graph_input, config: dict, size: int) -> None:
     progress = dict(generation.progress or {})
     paused = False
 
@@ -75,9 +79,7 @@ async def stream_graph(graph, generation: Generation, graph_input, config: dict)
 
                 continue
 
-            if track_progress(
-                progress, chunk, topic_size(generation.kind == GenerationKind.TEMPLATE)
-            ):
+            if track_progress(progress, chunk, size):
                 await generations.update(generation.id, progress=progress)
 
     if paused or await generations.is_cancelled(generation.id):

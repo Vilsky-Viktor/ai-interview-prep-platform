@@ -3,17 +3,10 @@ import asyncio
 import pytest
 from prepza_common.examples import pick
 
-from app.config.settings import settings
 from app.helpers.questions import build_options, count_examples, count_multi, missing_kinds
 from app.services.nodes import questions as questions_node
 from app.services.nodes.questions import fan_out_questions, merge_questions
 from tests.unit.fakes import EXAMPLE, MULTI_OPTIONS, OPTIONS
-
-
-@pytest.fixture(autouse=True)
-def a_fifth_multi_answer(monkeypatch):
-    """Ten questions a topic (two of them multi-answer: topics_state's share)."""
-    monkeypatch.setattr(settings, "interview_questions_per_topic", 10)
 
 
 def right(options):
@@ -94,7 +87,9 @@ def test_questions_with_an_example_are_taken_within_their_range():
 
 
 def topics_state(reused=None, **extra):
+    """Ten questions a topic, two of them multi-answer, unless `extra` says otherwise."""
     return {
+        "topic_size": 10,
         "topics": [{"main_topic": "Bookkeeping", "subtopics": ["Cash", "Payroll"]}],
         "reused": [reused or []],
         "level": "basic",
@@ -105,9 +100,7 @@ def topics_state(reused=None, **extra):
 
 
 def test_the_multi_answer_questions_a_topic_lacks_are_spread_over_its_calls(monkeypatch):
-    monkeypatch.setattr(settings, "interview_questions_per_topic", 70)
-
-    tasks = [send.arg for send in fan_out_questions(topics_state())]
+    tasks = [send.arg for send in fan_out_questions(topics_state(topic_size=70))]
     multis = [task["multi"] for task in tasks]
 
     assert len(tasks) > 1
@@ -117,7 +110,7 @@ def test_the_multi_answer_questions_a_topic_lacks_are_spread_over_its_calls(monk
 
     # Reused multi-answer questions count toward the topic's share.
     reused = [question("Proven 1", True), question("Proven 2", True), question("Proven 3")]
-    tasks = [send.arg for send in fan_out_questions(topics_state(reused))]
+    tasks = [send.arg for send in fan_out_questions(topics_state(reused, topic_size=70))]
 
     assert sum(task["multi"] for task in tasks) == 12
 
@@ -149,9 +142,7 @@ def test_merging_takes_each_kind_up_to_what_the_topic_lacks(monkeypatch):
 
 
 def test_a_third_with_an_example_is_asked_for_over_a_topics_calls(monkeypatch):
-    monkeypatch.setattr(settings, "interview_questions_per_topic", 70)
-
-    tasks = [send.arg for send in fan_out_questions(topics_state())]
+    tasks = [send.arg for send in fan_out_questions(topics_state(topic_size=70))]
     examples = [task["examples"] for task in tasks]
 
     assert sum(examples) == 23

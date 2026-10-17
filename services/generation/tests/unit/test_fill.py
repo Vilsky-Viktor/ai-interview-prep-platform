@@ -4,7 +4,6 @@ import uuid
 import pytest
 from prepza_common.multi_answer import is_multi
 
-from app.config.settings import settings
 from app.helpers.payload import build_preparation
 from app.integrations import llm
 from app.services.nodes.fill import TopicShortError, fill_topics
@@ -48,6 +47,8 @@ def state(usable, dropped=0, examples=0, share=0):
 
     return {
         "level": "basic",
+        # Ten questions a topic, as the run started with them.
+        "topic_size": 10,
         "multi_share": share,
         "title": "Bookkeeping",
         "requirements": [],
@@ -63,9 +64,7 @@ def state(usable, dropped=0, examples=0, share=0):
 
 
 @pytest.fixture(autouse=True)
-def ten_per_topic(monkeypatch):
-    """Ten questions a topic."""
-    monkeypatch.setattr(settings, "interview_questions_per_topic", 10)
+def verifier(monkeypatch):
     monkeypatch.setattr(llm, "get_verifier_llm", FakeVerifier)
 
 

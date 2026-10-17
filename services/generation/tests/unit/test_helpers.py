@@ -1,6 +1,5 @@
 import uuid
 
-from app.config.settings import settings
 from app.helpers.payload import build_preparation
 from app.helpers.progress import track_progress
 from app.helpers.questions import (
@@ -57,19 +56,16 @@ def test_clean_options_drops_options_over_the_length_limit():
     assert clean_options(["Short", "x" * 11], set(), 10) == ["Short"]
 
 
-def test_track_progress(monkeypatch):
-    monkeypatch.setattr(settings, "interview_questions_per_topic", 100)
+def test_track_progress():
     progress = {}
     # 110 questions over two subtopics: 55 each, written in 3 calls of up to 20.
     topics = [{"main_topic": "T", "subtopics": ["a", "b"]}]
 
-    assert not track_progress(
-        progress, {"generate_topics": {"topics": topics}}, settings.interview_questions_per_topic
-    )
+    assert not track_progress(progress, {"generate_topics": {"topics": topics}}, 100)
     assert track_progress(
         progress,
         {"human_review": {"topics": topics, "approved": True}},
-        settings.interview_questions_per_topic,
+        100,
     )
     assert progress["done"] == 0
     assert progress["total"] == 6
@@ -77,32 +73,31 @@ def test_track_progress(monkeypatch):
     assert progress["topics_ready"] == 0
 
     call = {"generate_questions": {"question_pool": [{"topic_index": 0}]}}
-    track_progress(progress, call, settings.interview_questions_per_topic)
+    track_progress(progress, call, 100)
 
     assert progress["done"] == 1
 
     for _ in range(5):
-        track_progress(progress, call, settings.interview_questions_per_topic)
+        track_progress(progress, call, 100)
 
     assert progress["topics_ready"] == 1
 
     track_progress(
         progress,
         {"merge_questions": {"topic_questions": [[]]}},
-        settings.interview_questions_per_topic,
+        100,
     )
 
     assert progress["done"] == progress["total"] == 6
 
 
-def test_progress_never_passes_100_percent_when_a_retry_replays_steps(monkeypatch):
-    monkeypatch.setattr(settings, "interview_questions_per_topic", 10)
+def test_progress_never_passes_100_percent_when_a_retry_replays_steps():
     topics = [{"main_topic": "T", "subtopics": ["a", "b"]}]
     progress = {}
     track_progress(
         progress,
         {"human_review": {"topics": topics, "approved": True}},
-        settings.interview_questions_per_topic,
+        10,
     )
 
     # A retry replays question steps that had already finished.
@@ -110,7 +105,7 @@ def test_progress_never_passes_100_percent_when_a_retry_replays_steps(monkeypatc
         track_progress(
             progress,
             {"generate_questions": {"question_pool": [{"topic_index": 0}]}},
-            settings.interview_questions_per_topic,
+            10,
         )
 
     assert (progress["done"], progress["total"], progress["topic_done"]) == (1, 2, [2])
@@ -118,7 +113,7 @@ def test_progress_never_passes_100_percent_when_a_retry_replays_steps(monkeypatc
     track_progress(
         progress,
         {"merge_questions": {"topic_questions": [[]]}},
-        settings.interview_questions_per_topic,
+        10,
     )
 
     assert (progress["done"], progress["total"], progress["topics_ready"]) == (2, 2, 1)
@@ -148,10 +143,10 @@ def test_build_preparation_skips_incomplete_questions():
     assert preparation.model_dump(mode="json")["generation_id"] == str(generation_id)
 
 
-def test_spare_questions_replace_dropped_ones_up_to_the_count(monkeypatch):
-    monkeypatch.setattr(settings, "interview_questions_per_topic", 2)
+def test_spare_questions_replace_dropped_ones_up_to_the_count():
     options = [{"answer": "x", "correct": True}]
     values = {
+        "topic_size": 2,
         "title": "Title",
         "level": "medium",
         "requirements": ["Python"],
@@ -204,7 +199,7 @@ def test_drafted_names_are_fitted_to_the_review_limit_at_a_word():
     assert len(fitted) <= MAX_TOPIC_NAME_LENGTH
     assert long_name.startswith(fitted) and not fitted.endswith(" ")
     assert fit_name("x" * 100) == "x" * MAX_TOPIC_NAME_LENGTH
-    assert fit_topics([{"main_topic": " SQL ", "subtopics": [long_name]}]) == [
+    assert fit_topics([{"main_topic": " SQL ", "subtopics": [long_name]}], 5) == [
         {"main_topic": "SQL", "subtopics": [fitted]}
     ]
 
@@ -230,11 +225,11 @@ def test_an_examples_block_is_tagged_with_its_language():
     )
 
 
-def test_templates_get_more_questions_per_topic(monkeypatch):
-    monkeypatch.setattr(settings, "interview_questions_per_topic", 70)
-    monkeypatch.setattr(settings, "template_questions_per_topic", 90)
-
-    assert topic_size(False) == 70
-    assert topic_size(True) == 90
+def test_a_run_holds_the_questions_per_topic_it_started_with():
+    assert topic_size({"topic_size": 40}) == 40
+    assert topic_size({"template": True, "topic_size": 120}) == 120
+    # A run started before the size was kept: the default, more for a template.
+    assert topic_size({}) == 70
+    assert topic_size({"template": True}) == 90
     # More questions per subtopic can take more calls.
-    assert question_calls(1, topic_size(True)) == 5
+    assert question_calls(1, topic_size({"template": True})) == 5

@@ -75,7 +75,7 @@ def run(kind="interview"):
         text="Job description",
         progress=None,
     )
-    asyncio.run(stream_graph(FinishedGraph(), generation, None, {}))
+    asyncio.run(stream_graph(FinishedGraph(), generation, None, {}, 10))
 
     return generation
 
@@ -132,7 +132,7 @@ def test_a_run_makes_as_many_ai_calls_at_once_as_set_in_controls(
         async def aget_state(self, config):
             return SimpleNamespace(values={})
 
-    async def stream(graph, generation, graph_input, config):
+    async def stream(graph, generation, graph_input, config, size):
         configs.append(config)
 
     async def not_cancelled(_generation_id):
@@ -147,3 +147,64 @@ def test_a_run_makes_as_many_ai_calls_at_once_as_set_in_controls(
     asyncio.run(pipeline.run_pipeline(NewGraph(), generation, None))
 
     assert configs[0]["max_concurrency"] == at_once
+
+
+@pytest.mark.parametrize(
+    ("kind", "edited", "size"),
+    [
+        ("interview", {}, 70),
+        ("template", {}, 90),
+        ("interview", {"INTERVIEW_QUESTIONS_PER_TOPIC": 40}, 40),
+        ("template", {"TEMPLATE_QUESTIONS_PER_TOPIC": 120}, 120),
+    ],
+)
+def test_a_new_run_takes_its_questions_per_topic_from_controls(
+    monkeypatch, redis, kind, edited, size
+):
+    started = []
+    redis.limits.update({name: str(value) for name, value in edited.items()})
+
+    class NewGraph:
+        async def aget_state(self, config):
+            return SimpleNamespace(values={})
+
+    async def stream(graph, generation, graph_input, config, size):
+        started.append((graph_input["topic_size"], size))
+
+    async def not_cancelled(_generation_id):
+        return False
+
+    monkeypatch.setattr(pipeline, "stream_graph", stream)
+    monkeypatch.setattr(generations, "is_cancelled", not_cancelled)
+    generation = Generation(
+        id=uuid.uuid4(), kind=kind, owner_uid="alice", company_id=COMPANY_ID, text="Job"
+    )
+
+    asyncio.run(pipeline.run_pipeline(NewGraph(), generation, None))
+
+    assert started == [(size, size)]
+
+
+def test_a_continued_run_keeps_the_size_it_started_with(monkeypatch, redis):
+    sizes = []
+    redis.limits["INTERVIEW_QUESTIONS_PER_TOPIC"] = "40"
+
+    class StartedGraph:
+        async def aget_state(self, config):
+            return SimpleNamespace(values={"input_text": "Job", "topic_size": 25})
+
+    async def stream(graph, generation, graph_input, config, size):
+        sizes.append((graph_input, size))
+
+    async def not_cancelled(_generation_id):
+        return False
+
+    monkeypatch.setattr(pipeline, "stream_graph", stream)
+    monkeypatch.setattr(generations, "is_cancelled", not_cancelled)
+    generation = Generation(
+        id=uuid.uuid4(), kind="interview", owner_uid="alice", company_id=COMPANY_ID, text="Job"
+    )
+
+    asyncio.run(pipeline.run_pipeline(StartedGraph(), generation, None))
+
+    assert sizes == [(None, 25)]

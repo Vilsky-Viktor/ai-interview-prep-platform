@@ -7,7 +7,6 @@ from datetime import UTC, datetime, timedelta
 from prepza_common.ai_cap import CAP, spent_today
 from prepza_common.limits import limit
 
-from app.config.settings import settings
 from app.constants.usage import SPEND_DAYS, TOP_SPENDERS
 from app.integrations import names
 from app.integrations.redis import get_redis
@@ -57,10 +56,10 @@ async def company_names(ids: list[str]) -> dict[str, str]:
 async def month_out() -> MonthOut:
     month = datetime.now(UTC).strftime("%Y-%m")
     spend, _, _, _, _ = await ai_costs.totals(ai_costs.in_period(month))
+    # 0: no budget, the month's spend alone.
+    budget = await limit(get_redis(), "MONTHLY_BUDGET")
 
-    return MonthOut(
-        spend=spend, budget=settings.monthly_budget, share=share(spend, settings.monthly_budget)
-    )
+    return MonthOut(spend=spend, budget=budget, share=share(spend, budget))
 
 
 async def unpaid_today() -> UnpaidTodayOut:

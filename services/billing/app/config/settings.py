@@ -11,8 +11,6 @@ class Settings(ServiceSettings):
     # The services asked for names in the AI costs tab: companies' names, accounts' emails.
     companies_url: str
     library_url: str
-    # OpenAI spend a month the AI costs tab compares this month's with (USD); 0 shows none.
-    monthly_budget: float = 0
     # Paddle: "sandbox" or "production", the client-side token for Paddle.js (public by design),
     # and the secret that signs its webhooks.
     paddle_environment: str = "sandbox"

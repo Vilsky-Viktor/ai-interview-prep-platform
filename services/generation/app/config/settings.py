@@ -1,5 +1,4 @@
 from prepza_common.settings import ServiceSettings
-from pydantic import Field
 
 from app.constants.generation import ReasoningEffort
 
@@ -20,14 +19,6 @@ class Settings(ServiceSettings):
     tasks_queue: str = ""
     invoker_service_account: str = ""
     service_secret: str
-    interview_questions_per_topic: int = Field(default=70, gt=0)
-    # Templates get more: a third is revealed for free practice at once, and the rest is copied
-    # into many companies' tests.
-    template_questions_per_topic: int = Field(default=90, gt=0)
-    # Main topics a test has, and subtopics each topic has. Every subtopic is at
-    # least one model call, so fewer of them cost less.
-    max_topics: int = Field(default=10, gt=0)
-    max_subtopics: int = Field(default=10, gt=0)
     # Each AI task has its own model and effort, so one can change without the others. Effort is
     # how hard a reasoning model thinks: "none", "minimal", "low", "medium" or "high".
     # Generation: extraction, topics, questions, answers and a re-generated question; also

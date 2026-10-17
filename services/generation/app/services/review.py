@@ -1,11 +1,18 @@
 from fastapi import HTTPException, status
+from prepza_common.i18n import TemplateError
 from prepza_common.rate_limit import hit
 
-from app.constants.generation import RUN_GENERATION, TOO_MANY_REVISIONS
+from app.constants.generation import (
+    RUN_GENERATION,
+    TOO_MANY_CHOSEN,
+    TOO_MANY_REVISIONS,
+    TOO_MANY_SUBTOPICS,
+)
 from app.integrations import tasks
 from app.integrations.redis import get_redis
 from app.models.generation import Generation
 from app.schemas.generation import ReviewRequest
+from app.services.topic_caps import topic_caps
 from app.storage import generations
 
 
@@ -17,6 +24,20 @@ async def submit_review(generation: Generation, body: ReviewRequest) -> Generati
 
     if any(not 0 <= index < drafted for index in body.selected):
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, "Choose topics from the list")
+
+    caps = await topic_caps()
+
+    # Without instructions the review approves the selection, which caps the topics. With
+    # instructions the topics are revised first, so the reviewer may ask to merge.
+    if not body.instructions.strip() and len(body.selected) > caps["max_topics"]:
+        raise TemplateError(
+            status.HTTP_422_UNPROCESSABLE_CONTENT, TOO_MANY_CHOSEN, count=caps["max_topics"]
+        )
+
+    if any(len(topic.subtopics) > caps["max_subtopics"] for topic in body.topics or []):
+        raise TemplateError(
+            status.HTTP_422_UNPROCESSABLE_CONTENT, TOO_MANY_SUBTOPICS, count=caps["max_subtopics"]
+        )
 
     if body.instructions.strip():
         await hit(

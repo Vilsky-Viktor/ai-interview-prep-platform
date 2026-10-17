@@ -50,6 +50,8 @@ class State(TypedDict):
     language: str
     # A template (public practice): extraction leaves out anything naming the company.
     template: bool
+    # Questions each topic gets, from Controls as the run started, so the whole run holds one.
+    topic_size: int
     title: str
     requirements: list[str]
     level: str

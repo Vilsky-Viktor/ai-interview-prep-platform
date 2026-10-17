@@ -7,7 +7,8 @@ from prepza_common.constants import MAX_GOAL_LENGTH  # noqa: F401 (re-exported)
 RECURSION_LIMIT = 200
 
 # A topic's or subtopic's name, drafted or edited by hand during review. How many topics and
-# subtopics a test has are settings (MAX_TOPICS, MAX_SUBTOPICS).
+# subtopics a test has, and its questions per topic, are set in the admin zone's Controls tab
+# (MAX_TOPICS, MAX_SUBTOPICS, INTERVIEW_QUESTIONS_PER_TOPIC, TEMPLATE_QUESTIONS_PER_TOPIC).
 MAX_TOPIC_NAME_LENGTH = 50
 TOPIC_ATTEMPTS = 2
 # Questions are written for this many times a topic's size, to replace the ones dropped as
@@ -65,6 +66,10 @@ FILL_SPARE_QUESTIONS = 2
 # generation's topics may be revised that way is the MAX_TOPIC_REVISIONS limit.
 MAX_INSTRUCTIONS_LENGTH = 500
 TOO_MANY_REVISIONS = "These topics can't be changed in words any more. Choose the topics to keep."
+# A review approving more topics than MAX_TOPICS, or a topic edited with more subtopics than
+# MAX_SUBTOPICS, at their current values.
+TOO_MANY_CHOSEN = "Choose at most {count} topics"
+TOO_MANY_SUBTOPICS = "A topic can have at most {count} subtopics"
 
 # A generation stops after this long: Cloud Tasks gives one request at most 30 minutes.
 JOB_TIMEOUT_SECONDS = 25 * 60

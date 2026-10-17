@@ -29,7 +29,7 @@ async def find_reused(state: State) -> dict:
     Reuse only saves cost, so any failure here means generating every question instead.
     """
     topics = state["topics"]
-    count = math.floor(topic_size(state.get("template", False)) * MAX_REUSE_SHARE)
+    count = math.floor(topic_size(state) * MAX_REUSE_SHARE)
     share = await multi_share(get_redis())
 
     try:

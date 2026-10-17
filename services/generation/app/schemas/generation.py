@@ -8,11 +8,8 @@ from pydantic import (
     ConfigDict,
     Field,
     StringConstraints,
-    computed_field,
-    model_validator,
 )
 
-from app.config.settings import settings
 from app.constants.generation import (
     MAX_GOAL_LENGTH,
     MAX_INSTRUCTIONS_LENGTH,
@@ -52,7 +49,8 @@ TopicName = Annotated[
 
 class EditedTopic(BaseModel):
     main_topic: TopicName
-    subtopics: list[TopicName] = Field(max_length=settings.max_subtopics)
+    # At most MAX_SUBTOPICS, checked with its current value (services/review.py).
+    subtopics: list[TopicName]
 
 
 class ReviewRequest(BaseModel):
@@ -60,17 +58,6 @@ class ReviewRequest(BaseModel):
     instructions: str = Field(default="", max_length=MAX_INSTRUCTIONS_LENGTH)
     # Every drafted topic, in order, with the reviewer's own edits; `selected` indexes this list.
     topics: list[EditedTopic] | None = None
-
-    @model_validator(mode="after")
-    def approve_at_most_max_topics(self):
-        """Without instructions the review approves the selection, which caps the topics.
-
-        With instructions the topics are revised first, so the reviewer may ask to merge.
-        """
-        if not self.instructions.strip() and len(self.selected) > settings.max_topics:
-            raise ValueError(f"Choose at most {settings.max_topics} topics")
-
-        return self
 
 
 class DraftTopic(BaseModel):
@@ -89,7 +76,10 @@ class GenerationProgress(BaseModel):
 
 
 class GenerationOut(BaseModel):
-    model_config = ConfigDict(from_attributes=True)
+    # Its API description lists max_topics and max_subtopics as always there: they always are.
+    model_config = ConfigDict(
+        from_attributes=True, json_schema_serialization_defaults_required=True
+    )
 
     id: UUID
     kind: GenerationKind
@@ -102,14 +92,8 @@ class GenerationOut(BaseModel):
     # What it's generated in, from the pasted text (helpers/language.py).
     language: str
 
-    @computed_field
-    @property
-    def max_topics(self) -> int:
-        """How many topics the review may approve without instructions."""
-        return settings.max_topics
-
-    @computed_field
-    @property
-    def max_subtopics(self) -> int:
-        """How many subtopics a topic may have when edited by hand during review."""
-        return settings.max_subtopics
+    # How many topics the review may approve without instructions, and how many subtopics a
+    # topic may have when edited by hand during review: Controls' current values
+    # (services/topic_caps.py).
+    max_topics: int = 0
+    max_subtopics: int = 0

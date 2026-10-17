@@ -539,14 +539,14 @@ export interface components {
       language: string
       /**
        * Max Topics
-       * @description How many topics the review may approve without instructions.
+       * @default 0
        */
-      readonly max_topics: number
+      max_topics: number
       /**
        * Max Subtopics
-       * @description How many subtopics a topic may have when edited by hand during review.
+       * @default 0
        */
-      readonly max_subtopics: number
+      max_subtopics: number
     }
     /**
      * GenerationProgress

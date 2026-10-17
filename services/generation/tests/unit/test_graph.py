@@ -9,7 +9,6 @@ from langgraph.types import Command
 from prepza_common.multi_answer import is_multi, multi_count
 from prepza_common.sets import OptionIn, QuestionIn
 
-from app.config.settings import settings
 from app.helpers.payload import build_preparation
 from app.integrations import library, llm
 from app.schemas.extraction import JobExtraction
@@ -106,11 +105,12 @@ def reusable(texts):
     return find
 
 
-async def run_graph(review=None):
+async def run_graph(review=None, size=10):
+    """The whole graph for a job, its topics reviewed with `review`, `size` questions a topic."""
     graph = build_graph(InMemorySaver())
     config = {"configurable": {"thread_id": "test"}}
     interrupts = []
-    start = {"input_text": "Job"}
+    start = {"input_text": "Job", "topic_size": size}
 
     async for chunk in graph.astream(start, config, stream_mode="updates"):
         interrupts.extend(chunk.get("__interrupt__", ()))
@@ -130,9 +130,8 @@ def test_full_graph(monkeypatch, per_topic):
     monkeypatch.setattr(llm, "get_generation_llm", lambda *_: FakeLLM())
     monkeypatch.setattr(llm, "get_embeddings", FakeEmbeddings)
     monkeypatch.setattr(library, "find_reusable", reusable([]))
-    monkeypatch.setattr(settings, "interview_questions_per_topic", per_topic)
 
-    values = asyncio.run(run_graph())
+    values = asyncio.run(run_graph(size=per_topic))
     [topic] = values["final"]
 
     assert topic["topic"] == "Python"
@@ -151,7 +150,6 @@ def test_reused_questions_come_first_and_new_ones_fill_the_rest(monkeypatch):
     monkeypatch.setattr(llm, "get_generation_llm", lambda *_: FakeLLM())
     monkeypatch.setattr(llm, "get_embeddings", FakeEmbeddings)
     monkeypatch.setattr(library, "find_reusable", reusable(["Proven 1", "Proven 2"]))
-    monkeypatch.setattr(settings, "interview_questions_per_topic", 10)
 
     values = asyncio.run(run_graph())
     [topic] = values["final"]
@@ -180,7 +178,6 @@ def test_generation_goes_on_without_reuse_when_embedding_fails(monkeypatch):
 
     monkeypatch.setattr(llm, "get_generation_llm", lambda *_: FakeLLM())
     monkeypatch.setattr(llm, "get_embeddings", BrokenEmbeddings)
-    monkeypatch.setattr(settings, "interview_questions_per_topic", 10)
 
     values = asyncio.run(run_graph())
 
@@ -192,7 +189,6 @@ def test_topics_edited_by_hand_are_used_without_a_revision(monkeypatch):
     monkeypatch.setattr(llm, "get_generation_llm", lambda *_: FakeLLM())
     monkeypatch.setattr(llm, "get_embeddings", FakeEmbeddings)
     monkeypatch.setattr(library, "find_reusable", reusable([]))
-    monkeypatch.setattr(settings, "interview_questions_per_topic", 10)
     edited = [
         {"main_topic": "Async Python", "subtopics": ["Event loop"]},
         {"main_topic": "SQL", "subtopics": ["Joins"]},

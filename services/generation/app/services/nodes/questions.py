@@ -60,7 +60,7 @@ def fan_out_questions(state: State):
     for ti, topic in enumerate(state["topics"]):
         subtopics = topic["subtopics"] or [topic["main_topic"]]
         reused = reused_questions(state, ti)
-        size = topic_size(state.get("template", False))
+        size = topic_size(state)
         missing = max(size - len(reused), 0)
         multi = min(missing, max(multi_count(size, state["multi_share"]) - count_multi(reused), 0))
         examples = min(missing, max(example_count(size) - count_examples(reused), 0))
@@ -167,7 +167,7 @@ async def merge_questions(state: State) -> dict:
         texts = [question["text"] for question in reused + merged]
         kept = await distinct_by_meaning(texts, keep_first=len(reused))
         distinct = [merged[index - len(reused)] for index in kept if index >= len(reused)]
-        size = topic_size(state.get("template", False))
+        size = topic_size(state)
         missing = max(size - len(reused), 0)
         multi = min(missing, max(multi_count(size, state["multi_share"]) - count_multi(reused), 0))
         formal = is_formal([question["text"] for question in reused + distinct])
