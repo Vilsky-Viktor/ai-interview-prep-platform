@@ -37,7 +37,7 @@ prepza gebruikt AI om op basis van je functieomschrijving een interview over vaa
 
 1. **AI leest je functieomschrijving** en haalt eruit wat een kandidaat moet weten: de eisen, het niveau en een set onderwerpen met subonderwerpen.
 2. **Jij bekijkt de onderwerpen.** Houd ze, vink ze uit, hernoem of bewerk ze, of vertel de AI in gewone taal wat er anders moet. Er wordt geen vraag geschreven tot jij akkoord geeft.
-3. **AI schrijft de vragen.** Elk onderwerp krijgt een vragenbank met meerkeuzevragen, elk met één juiste optie en drie aannemelijke foute. Bij technische onderwerpen tonen veel vragen een kort codevoorbeeld en vragen ze wat het uitvoert, wat het doet, waarom het faalt of welke wijziging het oplost. Je kunt elke vraag met haar opties openen en elke vraag die je niet bevalt opnieuw laten genereren.
+3. **AI schrijft de vragen.** Elk onderwerp krijgt een vragenbank met meerkeuzevragen met elk vier opties: de meeste hebben één juiste optie en drie aannemelijke foute, en ongeveer 1 op de 10 is een vraag waarbij je alle juiste opties aanvinkt, met 2 of 3 juiste. Bij technische onderwerpen tonen veel vragen een kort codevoorbeeld en vragen ze wat het uitvoert, wat het doet, waarom het faalt of welke wijziging het oplost. Je kunt elke vraag met haar opties openen en elke vraag die je niet bevalt opnieuw laten genereren.
 4. **Kandidaten beantwoorden vragen met tijdslimiet.** Elke kandidaat krijgt een eigen willekeurige set uit de vragenbank van elk onderwerp, in een eigen volgorde, met een aftelklok bij elke vraag.
 5. **Antwoorden worden nagekeken met een antwoordsleutel.** AI schrijft de sleutels. Een steekproef van de sleutels van elk onderwerp wordt vóór vrijgave gecontroleerd, de rest zodra een vraag wordt gemarkeerd. Het nakijken zelf volgt vaste regels, en geen AI leest of beoordeelt het antwoord van een kandidaat. Wordt een sleutel later gecorrigeerd, dan geldt de correctie voor kandidaten die daarna beginnen; eerdere resultaten veranderen niet. Snelheid, het verlaten van de pagina en kopieerpogingen zie je als signalen; ze veranderen de score niet.
 6. **Mensen beslissen.** Je ziet een gerangschikte lijst en per kandidaat een scorekaart, met elk antwoord en de tijd die het kostte. Iemand in je bedrijf bekijkt de resultaten en neemt het wervingsbesluit.
@@ -57,7 +57,7 @@ Je kunt je eigen interview ook als kandidaat proberen voordat je iemand uitnodig
 
 ## Waarom deze aanpak makkelijker uit te leggen en te controleren is
 
-**Elk resultaat is na te gaan.** Een score is het aandeel goed beantwoorde vragen. Voor elke kandidaat kun je precies laten zien welke vragen hij of zij kreeg, wat er gekozen werd, wat het juiste antwoord was en hoe lang het duurde.
+**Elk resultaat is na te gaan.** Een score is het aandeel behaalde punten: elke vraag is één punt waard, en een vraag waarbij je alle juiste opties aanvinkt levert een deel daarvan op voor elke aangevinkte juiste optie, en niets als er een foute is aangevinkt. Voor elke kandidaat kun je precies laten zien welke vragen hij of zij kreeg, wat er gekozen werd, wat het juiste antwoord was en hoe lang het duurde.
 
 **De inhoud is te controleren.** Je keurt de onderwerpen goed voordat er iets geschreven wordt, en de vragen zijn voor jou zichtbaar. Is een onderwerp geen echte functie-eis, dan kun je het verwijderen.
 

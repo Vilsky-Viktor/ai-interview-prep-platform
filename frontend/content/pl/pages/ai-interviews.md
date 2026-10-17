@@ -37,7 +37,7 @@ prepza używa AI do napisania rozmowy sprawdzającej umiejętności na podstawie
 
 1. **AI czyta Twój opis stanowiska** i wyodrębnia, co kandydat musi wiedzieć: wymagania, poziom oraz zestaw tematów z podtematami.
 2. **Przeglądasz tematy.** Zostaw je, odznacz, zmień nazwę lub edytuj albo napisz AI zwykłym tekstem, co zmienić. Żadne pytanie nie powstaje, dopóki tego nie zatwierdzisz.
-3. **AI pisze pytania.** Każdy temat dostaje pulę pytań jednokrotnego wyboru, każde z jedną poprawną odpowiedzią i trzema wiarygodnymi błędnymi. W tematach technicznych wiele pytań pokazuje krótki fragment kodu i pyta, co wypisze, co robi, dlaczego nie działa lub która zmiana go naprawi. Możesz otworzyć każde pytanie i jego odpowiedzi oraz wygenerować ponownie te, które Ci się nie podobają.
+3. **AI pisze pytania.** Każdy temat dostaje pulę pytań testowych z czterema odpowiedziami do wyboru: większość z jedną poprawną odpowiedzią i trzema wiarygodnymi błędnymi, a około 1 na 10 to pytania wielokrotnego wyboru („zaznacz wszystkie poprawne”) z 2 lub 3 poprawnymi odpowiedziami. W tematach technicznych wiele pytań pokazuje krótki fragment kodu i pyta, co wypisze, co robi, dlaczego nie działa lub która zmiana go naprawi. Możesz otworzyć każde pytanie i jego odpowiedzi oraz wygenerować ponownie te, które Ci się nie podobają.
 4. **Kandydaci odpowiadają na pytania z limitem czasu.** Każdy kandydat dostaje własny losowy zestaw z puli każdego tematu, we własnej kolejności, z odliczaniem czasu przy każdym pytaniu.
 5. **Odpowiedzi są oceniane według klucza odpowiedzi.** AI pisze klucze. Próbka kluczy z każdego tematu jest sprawdzana przed udostępnieniem, a pozostałe, gdy pytanie zostanie oznaczone. Samo ocenianie odbywa się według stałych reguł i żadna AI nie czyta ani nie ocenia odpowiedzi kandydata. Jeśli klucz zostanie później poprawiony, poprawka dotyczy kandydatów, którzy zaczną po niej; wcześniejsze wyniki się nie zmieniają. Tempo odpowiedzi, opuszczanie strony i próby kopiowania widzisz jako sygnały; nie zmieniają one wyniku.
 6. **Decydują ludzie.** Widzisz ranking i kartę wyników każdego kandydata z każdą odpowiedzią i czasem jej udzielenia. Wyniki przegląda i decyzję o zatrudnieniu podejmuje osoba z Twojej firmy.
@@ -57,7 +57,7 @@ Zanim kogokolwiek zaprosisz, możesz też odbyć własną rozmowę jako kandydat
 
 ## Dlaczego takie podejście łatwiej wyjaśnić i sprawdzić
 
-**Każdy wynik da się prześledzić.** Wynik to odsetek poprawnych odpowiedzi. Dla każdego kandydata możesz pokazać dokładnie, jakie pytania zobaczył, co wybrał, jaka była poprawna odpowiedź i ile czasu mu to zajęło.
+**Każdy wynik da się prześledzić.** Wynik to odsetek zdobytych punktów: każde pytanie jest warte jeden punkt, a pytanie wielokrotnego wyboru daje jego część za każdą zaznaczoną poprawną odpowiedź i nic, jeśli zaznaczono błędną. Dla każdego kandydata możesz pokazać dokładnie, jakie pytania zobaczył, co wybrał, jaka była poprawna odpowiedź i ile czasu mu to zajęło.
 
 **Treść można przejrzeć.** Zatwierdzasz tematy, zanim cokolwiek zostanie napisane, a pytania są dla Ciebie dostępne. Jeśli temat nie jest rzeczywistym wymaganiem stanowiska, możesz go usunąć.
 

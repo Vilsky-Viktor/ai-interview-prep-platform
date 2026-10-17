@@ -107,7 +107,19 @@
     "send": "发送",
     "thinking": "思考中…",
     "copyId": "复制 ID",
-    "idCopied": "ID 已复制"
+    "idCopied": "ID 已复制",
+    "copyCode": "复制代码",
+    "codeCopied": "代码已复制",
+    "codeLanguage": "代码语言",
+    "editor": {
+      "bold": "粗体",
+      "italic": "斜体",
+      "link": "链接",
+      "bullets": "项目符号列表",
+      "numbers": "编号列表",
+      "address": "https://…",
+      "addLink": "添加链接"
+    }
   },
   "errors": {
     "title": "出了点问题",
@@ -145,6 +157,7 @@
     "dismiss": "忽略",
     "fixSent": "已发送给校验程序，稍后将被修正或替换。",
     "actionFailed": "操作失败，请重试。",
+    "questions": "题目",
     "flagged": "已标记",
     "replaced": "已替换",
     "noFlagged": "目前没有被标记的题目。",
@@ -174,9 +187,20 @@
     "deleteTitle": "删除此模板？",
     "deleteText": "其主题和题目将被删除。公司已基于它创建的面试会保留。",
     "deleteFailed": "无法删除模板，请重试。",
+    "poolCounts": "练习 {practice} · 公司 {company}",
+    "topUp": "补齐",
+    "addQuestions": "添加题目",
+    "addQuestionsTitle": "为每个主题添加题目",
+    "addQuestionsText": "每个主题将新增这么多题目：三分之一用于练习，其余用于公司。已用此模板创建的面试保留原有题目。",
+    "addQuestionsCount": "每个主题的题目数",
+    "add": "添加",
+    "addingQuestions": "正在添加题目",
+    "questionsAdded": "题目已添加",
+    "addQuestionsFailed": "无法添加题目，请重试。",
     "passRates": "通过率",
     "controls": "控制",
     "stats": "统计",
+    "statsGeneral": "总体",
     "statsPeriod": "时段",
     "statsAllTime": "累计",
     "statsCards": {
@@ -259,11 +283,7 @@
     "deletePostText": "它会从所有语言的新闻页面中移除。",
     "postSaveFailed": "无法保存文章，请重试。",
     "postDeleteFailed": "无法删除文章，请重试。",
-    "companies": "公司",
-    "companySearch": "公司名称",
-    "companiesNotFound": "未找到公司。",
     "suspended": "已暂停",
-    "companyDetails": "{members, plural, other {# 名成员}} · 自 {date} 起",
     "suspend": "暂停",
     "unsuspend": "解除暂停",
     "unsuspended": "已解除暂停。",
@@ -296,11 +316,341 @@
     "legalSend": "邮件告知变更",
     "legalConfirmTitle": "通过邮件告知{document}的变更？",
     "legalAudience": {
-      "everyone": "所有拥有 prepza 账户的人将从次日早上起收到邮件，告知新版本自 {date} 起适用。邮件只发送一次，无法撤回。",
-      "company_editors": "每家公司的所有者和管理员将从次日早上起收到邮件，告知新版本自 {date} 起适用。邮件只发送一次，无法撤回。"
+      "everyone": "所有拥有 prepza 账户的人将从下一个发送时段（UTC 8:00 至 18:00）起收到邮件，告知新版本自 {date} 起适用，并会在通知中看到。邮件只发送一次，无法撤回。",
+      "company_editors": "每家公司的所有者和管理员将从下一个发送时段（UTC 8:00 至 18:00）起收到邮件，告知新版本自 {date} 起适用，并会在通知中看到。邮件只发送一次，无法撤回。"
     },
-    "legalAsked": "将从次日早上起通过邮件告知变更。",
-    "legalFailed": "无法发起邮件请求，请重试。"
+    "legalAsked": "将从下一个发送时段起通过邮件告知变更。",
+    "legalFailed": "无法发起邮件请求，请重试。",
+    "support": "客服",
+    "supportSearch": "ID、链接、邮箱、付款 ID 或公司名称",
+    "supportNotFound": "没有匹配结果。试试“复制 id”中的 ID、页面链接或邮箱。",
+    "supportKinds": {
+      "company": "公司",
+      "interview": "{company} 的面试",
+      "candidate": "{company} 的候选人",
+      "user": "账户"
+    },
+    "supportCreated": "创建于",
+    "supportAvailable": "可用 {available} 点数",
+    "supportHeld": "为候选人预留 {reserved}",
+    "supportTabs": {
+      "money": "点数",
+      "reserved": "预留",
+      "interviews": "面试",
+      "members": "成员",
+      "audit": "审计日志"
+    },
+    "supportNoInterviews": "还没有面试。",
+    "supportUntitled": "面试仍在生成中",
+    "supportCandidates": "{count, plural, other {# 位候选人}}",
+    "supportJoined": "已加入",
+    "supportInvited": "已邀请，尚未加入",
+    "adjustCredits": "调整点数",
+    "adjustTitle": "调整 {name} 的点数",
+    "adjustText": "正数增加点数，负数扣除点数。公司会在其账单记录中看到原因。",
+    "adjustAmount": "点数，例如 500 或 -500",
+    "adjustNote": "原因，例如“同一位候选人被扣了两次”",
+    "adjustConfirmTitle": "为 {name} 调整 {amount} 点数？",
+    "adjustConfirm": "调整",
+    "adjustBack": "返回",
+    "adjustNext": "下一步",
+    "adjusted": "点数已调整",
+    "supportNoEmail": "没有邮箱的账户",
+    "supportCompanies": "公司",
+    "supportNoCompanies": "不是任何公司的成员。",
+    "supportTopUps": "已付款的充值",
+    "supportNoTopUps": "没有充值。",
+    "supportDeletedCompany": "已删除的公司",
+    "supportNotYet": "尚未",
+    "supportFacts": {
+      "company": "公司",
+      "interview": "面试",
+      "invited": "邀请时间",
+      "lastSent": "最近一次发送邀请",
+      "started": "开始时间",
+      "finished": "完成时间",
+      "grade": "成绩",
+      "extraTime": "额外时间",
+      "signals": "诚信标记",
+      "credits": "点数",
+      "topics": "主题",
+      "questionSeconds": "每题时间",
+      "passMark": "及格线"
+    },
+    "supportPassed": "{grade}，通过",
+    "supportNotPassed": "{grade}，未通过",
+    "supportNoExtraTime": "无",
+    "supportSignals": "离开页面 {leaves} 次 · 尝试复制 {copies} 次 · 过快作答 {fast} 次",
+    "supportCredits": {
+      "held": "预留",
+      "charged": "已扣除",
+      "released": "已退回"
+    },
+    "supportGenerationFailed": "生成失败",
+    "supportSeconds": "{count, plural, other {# 秒}}",
+    "supportNoCandidates": "还没有候选人。",
+    "campaigns": "群发邮件",
+    "newCampaign": "新建群发",
+    "editCampaign": "编辑",
+    "editCampaignIn": "编辑{language}版本",
+    "campaignInEnglish": "请用英文撰写。保存后，它会被翻译成其他所有语言，发送前你可以修改其中任何一种。",
+    "campaignInLanguage": "你自己写的{language}内容，按原样发送。",
+    "campaignKind": "类型",
+    "campaignKinds": {
+      "updates": "产品更新",
+      "promotions": "优惠"
+    },
+    "campaignSubject": "主题",
+    "campaignSubjectPlaceholder": "在此输入主题…",
+    "campaignText": "正文",
+    "campaignTextPlaceholder": "在此输入正文… 按 Enter 键开始新段落。",
+    "campaignButton": "按钮文字（可选）",
+    "campaignLink": "按钮链接",
+    "campaignLinkPlaceholder": "prepza 上的按钮链接，例如 /pricing（可选）",
+    "campaignSaveFailed": "无法保存群发邮件，请重试。",
+    "noCampaigns": "暂无群发邮件。",
+    "campaignStatus": {
+      "draft": "草稿",
+      "sending": "发送中…",
+      "sent": "已发送",
+      "stopped": "已停止"
+    },
+    "campaignRowCounts": {
+      "sent": "已发送 {count}",
+      "skipped": "已跳过 {count}",
+      "failed": "失败 {count}",
+      "unsubscribed": "退订 {count}",
+      "complained": "举报垃圾邮件 {count}"
+    },
+    "campaignCounts": {
+      "pending": "等待中",
+      "sent": "已发送",
+      "skipped": "已跳过",
+      "failed": "失败",
+      "unsubscribed": "之后退订",
+      "complained": "垃圾邮件投诉"
+    },
+    "campaignRecipients": "<number>{shown}</number> {count, plural, other {位收件人}}",
+    "campaignPreviewLanguage": "预览语言",
+    "sendTest": "给我发送测试邮件",
+    "testSent": "测试邮件正在发往你的邮箱。",
+    "sendCampaign": "发送",
+    "stopCampaign": "停止",
+    "deleteCampaign": "删除群发邮件",
+    "campaignConfirm": {
+      "send": {
+        "title": "发送这封群发邮件？",
+        "text": "{count, plural, =0 {目前没有人会收到。} other {# 人将从下一个发送时段（UTC 8:00 至 18:00）起收到。发送后无法更改。}}",
+        "unknown": "所有开启了此类邮件的人都将从下一个发送时段（UTC 8:00 至 18:00）起收到。发送后无法更改。",
+        "confirm": "发送"
+      },
+      "stop": {
+        "title": "停止这封群发邮件？",
+        "text": "不会再有其他人收到。已收到的人仍会保留。",
+        "confirm": "停止"
+      },
+      "delete": {
+        "title": "删除这封群发邮件？",
+        "text": "它将在所有语言中删除。它从未发送过。",
+        "confirm": "删除"
+      }
+    },
+    "sendAsCampaign": "作为群发邮件发送",
+    "removeSuppression": "移出列表",
+    "suppressed": {
+      "bounced": "发往此地址的邮件于 {date} 被退回，因此产品邮件和通知会跳过此地址。",
+      "complained": "此地址于 {date} 将一封邮件标记为垃圾邮件，因此产品邮件和通知会跳过此地址。"
+    },
+    "aiCosts": "AI 成本",
+    "aiCards": {
+      "spend": "支出",
+      "calls": "AI 调用",
+      "month": "本月",
+      "monthOf": "本月，预算 {budget}",
+      "input": "输入 token",
+      "cached": "缓存的输入 token",
+      "output": "输出 token"
+    },
+    "aiBudgetsTitle": "今日共享预算",
+    "aiNothing": "此时段内没有数据。",
+    "aiOf": "{used} / {limit}",
+    "aiForTitle": "用于谁",
+    "aiCategories": {
+      "paid": "付费公司",
+      "unpaid": "未付费公司",
+      "no_company": "无公司",
+      "prepza": "prepza"
+    },
+    "aiActionsTitle": "按操作",
+    "aiActions": {
+      "interview_generation": "面试生成",
+      "template_generation": "模板生成",
+      "question_regeneration": "题目重新生成",
+      "template_question_regeneration": "模板题目重新生成",
+      "sample_key_check": "答案抽样检查",
+      "question_verify": "题目检查",
+      "key_check_batch": "答案批量检查",
+      "embeddings": "主题匹配",
+      "news_translation": "新闻翻译",
+      "campaign_translation": "推广活动翻译",
+      "assistant_message": "助手消息",
+      "assistant_title": "助手对话标题",
+      "transcription": "语音消息",
+      "help_chat": "帮助聊天"
+    },
+    "aiUnitCost": {
+      "interview_generation": "每场面试 {cost}",
+      "template_generation": "每次模板生成 {cost}",
+      "question_regeneration": "每道题 {cost}",
+      "template_question_regeneration": "每道题 {cost}",
+      "sample_key_check": "每次测试 {cost}",
+      "question_verify": "每道题 {cost}",
+      "key_check_batch": "每次检查 {cost}",
+      "embeddings": "每次请求 {cost}",
+      "news_translation": "每篇文章 {cost}",
+      "campaign_translation": "每次推广活动 {cost}",
+      "assistant_message": "每次对话 {cost}",
+      "assistant_title": "每次对话 {cost}",
+      "transcription": "每分钟 {cost}",
+      "help_chat": "每次调用 {cost}"
+    },
+    "aiPaid": "付费 {spend}",
+    "aiUnpaid": "未付费 {spend}",
+    "aiCalls": "{count, plural, other {# 次调用}}",
+    "aiModelsTitle": "按模型",
+    "aiTokensIn": "输入 {count}",
+    "aiCachedShare": "缓存 {share}",
+    "aiTokensOut": "输出 {count}",
+    "aiCompaniesTitle": "成本最高的公司",
+    "aiUsersTitle": "成本最高的用户",
+    "aiByMonthTitle": "按月",
+    "aiByDayTitle": "按天",
+    "limitsOursTitle": "触及的 prepza 限额",
+    "limitsProvidersTitle": "服务商的限额",
+    "limitsNoHits": "此时段内没有触及任何限额。",
+    "limitNames": {
+      "MESSAGES_PER_USER_HOUR": "每位用户每小时的助手消息数",
+      "MESSAGES_PER_USER_DAY": "每位用户每天的助手消息数",
+      "MESSAGES_PER_COMPANY_DAY": "每家公司每天的助手消息数",
+      "MESSAGES_PER_DAY": "每天的助手消息数，未付费用户合计",
+      "TOKENS_PER_USER_DAY": "每位用户每天的助手 token 数",
+      "TOKENS_PER_COMPANY_DAY": "每家公司每天的助手 token 数",
+      "TOKENS_PER_DAY": "每天的助手 token 数，未付费用户合计",
+      "TRANSCRIPTIONS_PER_USER_HOUR": "每位用户每小时的语音消息数",
+      "ACTIONS_PER_USER_HOUR": "每位用户每小时的助手操作数",
+      "MCP_CALLS_PER_USER_MINUTE": "每位用户每分钟的 AI 应用调用数",
+      "MCP_CALLS_PER_USER_DAY": "每位用户每天的 AI 应用调用数",
+      "REGISTRATIONS_PER_IP_HOUR": "每个 IP 地址每小时的 AI 应用注册数",
+      "REGISTRATIONS_PER_DAY": "每天的 AI 应用注册数，所有人合计",
+      "AUTHORIZATIONS_PER_IP_HOUR": "每个 IP 地址每小时的 AI 应用连接请求数",
+      "TOKEN_REQUESTS_PER_CLIENT_MINUTE": "每个应用每分钟的 AI 应用令牌请求数",
+      "APPROVALS_PER_USER_HOUR": "每位用户每小时允许的 AI 应用连接数",
+      "MAX_OWNED_COMPANIES": "每人可拥有的公司数",
+      "INTERVIEWS_PER_DAY": "每家公司每天生成的面试数",
+      "INTERVIEWS_PER_DAY_UNPAID": "每家未付费公司每天生成的面试数",
+      "MAX_INTERVIEWS_WITHOUT_CANDIDATES": "没有候选人而等待中的已生成面试数",
+      "MAX_INTERVIEWS_WITHOUT_CANDIDATES_UNPAID": "没有候选人而等待中的已生成面试数，未付费",
+      "PREVIEWS_PER_USER_HOUR": "每位用户每小时的面试预览数",
+      "LINK_STARTS_PER_HOUR": "每小时通过同一面试链接开始的次数",
+      "LINK_STARTS_PER_IP_HOUR": "每个 IP 地址每小时通过链接开始的次数",
+      "MAX_BULK_INVITES": "一个列表或文件中的候选人数",
+      "MAX_PENDING_INVITES": "每家公司待接受的团队邀请数",
+      "MEMBER_INVITES_PER_UNPAID_DAY": "每家未付费公司每天的团队邀请数",
+      "EMAIL_HOURLY_LIMIT": "每位用户每小时的邀请邮件数",
+      "EMAIL_DAILY_LIMIT": "每位用户每天的邀请邮件数",
+      "EMAIL_RECIPIENT_DAILY_LIMIT": "每天向同一地址发送同一测试邀请的次数",
+      "REPORT_EMAILS_PER_COMPANY_DAY": "每家公司每天的报告邮件数",
+      "GENERATION_LIMIT": "每位用户每天的生成次数",
+      "REGENERATION_LIMIT": "每位用户每天重新生成的题目数",
+      "DAILY_GENERATION_LIMIT": "每天的生成次数，未付费公司合计",
+      "MAX_TOPIC_REVISIONS": "每次生成的主题修改次数",
+      "DAILY_VERIFY_LIMIT": "每天的题目检查数",
+      "PRACTICE_ROUNDS_PER_HOUR": "每位用户每小时的练习轮数",
+      "SIGNALS_PER_MINUTE": "每场会话每分钟的诚信标记数",
+      "MAX_SIGNALS_PER_QUESTION": "每道题保留的诚信标记数",
+      "HELP_USER_LIMIT": "每个账户每小时的帮助聊天消息数",
+      "HELP_IP_LIMIT": "每个 IP 地址每小时的帮助聊天消息数",
+      "HELP_DAILY_LIMIT": "每天的帮助聊天消息数，所有人合计",
+      "HELP_TOKENS_PER_DAY": "每天的帮助聊天 token 数，所有人合计",
+      "CONTACT_IP_LIMIT": "每个 IP 地址每天的联系消息数",
+      "CONTACT_DAILY_LIMIT": "每天的联系消息数，所有人合计",
+      "RATINGS_PER_DAY": "每位用户每天的题目评分数",
+      "REPORTS_PER_DAY": "每位用户每天的题目举报数",
+      "MAX_API_KEYS": "每家公司的 API 密钥数",
+      "MAX_WEBHOOKS": "每家公司的 Webhook 数",
+      "API_REQUESTS_PER_MINUTE": "每家公司每分钟的 API 请求数",
+      "RESEND_DAILY_LIMIT": "每天通过 Resend 发送的邮件数",
+      "RESEND_RESERVE_PERCENT": "每天通过 Resend 发送的邮件中不供群发使用的保留比例",
+      "CAMPAIGNS_PER_KIND_DAY": "每种类型每天的群发次数",
+      "AI_SPEND_UNPAID_DAY": "每天的 AI 支出，未付费用户合计",
+      "QUESTION_SECONDS_BASIC": "新初级测试每题秒数",
+      "QUESTION_SECONDS_MEDIUM": "新中级测试每题秒数",
+      "QUESTION_SECONDS_HARD": "新高级测试每题秒数",
+      "GENERATION_CALLS_AT_ONCE": "每次生成的 AI 并发调用数",
+      "GENERATION_CALLS_PER_SECOND": "每秒的 AI 调用数，所有生成合计",
+      "MULTI_ANSWER_PERCENT": "“选择所有正确选项”题目在每个主题中的占比",
+      "PAUSED": "暂停期间被拒绝",
+      "OPENAI_RATE_LIMIT": "OpenAI 速率限制",
+      "OPENAI_QUOTA": "OpenAI 余额用尽",
+      "OPENAI_THROTTLED": "等待我方 OpenAI 请求限额",
+      "RESEND_RATE_LIMIT": "Resend 速率限制",
+      "RESEND_DAILY_QUOTA": "Resend 每日配额",
+      "ATS_RATE_LIMIT": "ATS 速率限制",
+      "FIREBASE_TOKEN_REFUSED": "Firebase 登录被拒绝"
+    },
+    "limitValue": "{window} {value}",
+    "limitWindows": {
+      "60": "每分钟",
+      "3600": "每小时",
+      "86400": "每天",
+      "1209600": "每次主题审核"
+    },
+    "limitKinds": {
+      "ours": "prepza",
+      "openai": "OpenAI",
+      "resend": "Resend",
+      "firebase": "Firebase",
+      "workable": "Workable",
+      "greenhouse": "Greenhouse",
+      "teamtailor": "Teamtailor",
+      "recruitee": "Recruitee",
+      "breezy": "Breezy HR"
+    },
+    "limitHitter": "{name} ({count})",
+    "limitHits": "{count, plural, other {触及 # 次}}",
+    "limitsTitle": "限额",
+    "limitsText": "按服务列出每项可用的量，以及各服务使用的数值。更改会在一分钟内生效。",
+    "limitServices": {
+      "assistant": "助手",
+      "companies": "公司",
+      "generation": "生成",
+      "rounds": "练习、会话和帮助聊天",
+      "library": "题目反馈",
+      "api": "公共 API",
+      "notifications": "邮件",
+      "billing": "AI 支出"
+    },
+    "limitAtOnce": "同时",
+    "limitScopes": {
+      "user": "每位用户",
+      "company": "每家公司",
+      "ip": "每个 IP 地址",
+      "everyone": "所有人合计"
+    },
+    "limitDefault": "默认 {value}",
+    "limitSecondsUnit": "秒",
+    "limitRecentHits": "{days} 天内{count, plural, other {触及 # 次}}",
+    "limitPaid": "付费",
+    "limitUnpaid": "未付费",
+    "limitSave": "保存",
+    "limitReset": "恢复默认值",
+    "limitSaved": "限额已保存。",
+    "limitFailed": "无法保存限额，请重试。",
+    "limitChangesTitle": "更改记录",
+    "limitNoChanges": "还没有更改过任何限额。",
+    "limitChange": "{name}：{from} → {to}",
+    "limitDefaultValue": "默认",
+    "supportAiSpend": "最近 {days} 天的 AI 成本 {spend}，{count, plural, other {# 次调用}}。"
   },
   "templates": {
     "title": "模板",
@@ -363,10 +713,12 @@
   "reportReasons": {
     "wrong_answer": "标记的答案是错误的",
     "unclear": "题目表述不清",
+    "hard_to_read": "不易阅读",
     "off_topic": "与主题无关",
     "other": "其他"
   },
   "questions": {
+    "multiChoice": "多选题",
     "goodQuestion": "这道题好吗？",
     "ratingFailed": "无法保存你的评分，请重试。",
     "helpful": "有用的题目",
@@ -413,6 +765,10 @@
     "correct": "正确",
     "incorrect": "错误",
     "notAnswered": "未回答",
+    "partlyCorrect": "部分正确",
+    "rightPicks": "正确选项 {total} 个，选对 {right} 个",
+    "wrongPicks": "{count, plural, other {# 个错误选项}}",
+    "points": "{points} / 1 分",
     "finish": "结束",
     "finishing": "正在结束…",
     "next": "下一题",
@@ -424,6 +780,7 @@
     "finishFailed": "无法结束面试，请重试。",
     "continueFailed": "无法继续，请重试。",
     "timeUp": "本题时间已到。",
+    "selectAll": "选择所有正确选项",
     "finish": "结束面试",
     "finishTitle": "结束整场面试？",
     "endsAll": "这将结束全部 {count} 个部分，而不仅是当前部分。",
@@ -498,6 +855,7 @@
     "interviews": "面试",
     "templates": "模板",
     "team": "团队",
+    "actions": "操作记录",
     "integrations": "集成",
     "referrals": "推荐",
     "brand": "品牌",
@@ -629,10 +987,12 @@
       "many": "多个",
       "file": "上传"
     },
-    "manyHint": "每行一位候选人，可带姓名，也可不带，\n每次最多 100 位：",
+    "manyHint": "每行一位候选人，可带姓名，也可不带，\n每次最多 {count} 位：",
+    "manyHintNoLimit": "每行一位候选人，可带姓名，也可不带：",
     "example": "示例",
     "uploadFile": "上传文件",
-    "fileFormats": "CSV 或 TXT，最多 100 位候选人。姓名可放在姓名列中，或写在每个邮箱旁边。",
+    "fileFormats": "CSV 或 TXT，最多 {count} 位候选人。姓名可放在姓名列中，或写在每个邮箱旁边。",
+    "fileFormatsNoLimit": "CSV 或 TXT。姓名可放在姓名列中，或写在每个邮箱旁边。",
     "fileTooLarge": "文件过大（最大 {kb} KB）。",
     "lineProblems": {
       "no_email": "未找到邮箱：{line}",
@@ -658,7 +1018,9 @@
     "fallbackTitle": "面试",
     "timePerQuestion": "每题时间：",
     "secondsUnit": "秒",
-    "pickOne": "每道题从四个选项中选择一个。",
+    "wholeInterview": "整场面试：",
+    "minutesUnit": "分钟",
+    "pickOne": "每道题从四个选项中选择一个。标有“选择所有正确选项”的题目，请勾选每个正确选项：每选对一个可获得该题的部分分数，选错则不得分。",
     "changePick": "在点击“下一题”之前，你可以更改所选答案。",
     "timeRunsOut": "题目时间用完后，将按你的选择计分并进入下一题；未作选择则计为错误。即使离开页面，计时也会继续。",
     "unanswered": "未回答的题目计为错误。",
@@ -1097,8 +1459,19 @@
       "ats_cannot_write": "{ats} 不接收候选人的结果：该密钥没有写入权限。请用有写入权限的密钥重新连接；结果会先保留，届时再发送。",
       "connection_broken": "{name} 已停止工作，需要重新连接。在此之前，{integration, select, slack {通知不会发到你的频道} other {它发来的候选人会等待，他们的结果会先保留}}。",
       "webhook_stopped": "发往 {url} 的 Webhook 已停止：添加它的成员已不再是所有者或管理员。请重新添加，以继续接收结果。",
-      "ownership_received": "你现在是“{name}”的所有者。"
-    }
+      "ownership_received": "你现在是“{name}”的所有者。",
+      "news": "新闻：{title}",
+      "legal_terms": "新条款自 {date} 起适用。",
+      "legal_privacy": "新隐私政策自 {date} 起适用。",
+      "legal_dpa": "新数据处理协议自 {date} 起适用。"
+    },
+    "legalBanner": {
+      "terms": "prepza 的条款将于 {date} 变更。",
+      "privacy": "prepza 的隐私政策将于 {date} 变更。",
+      "dpa": "数据处理协议将于 {date} 变更。"
+    },
+    "readLegal": "阅读新版本",
+    "closeLegalBanner": "关闭"
   },
   "report": {
     "download": "下载 PDF",
@@ -1135,7 +1508,7 @@
     "continue": "继续",
     "history": "你的练习记录",
     "results": "练习结果",
-    "grade": "的题目答对",
+    "grade": "得分率",
     "notFinished": "未完成",
     "noRounds": "还没有练习记录。",
     "startFailed": "无法开始练习，请重试。",
@@ -1323,7 +1696,7 @@
     "counts": "{keys, plural, other {# 个密钥}} · {webhooks, plural, other {# 个 Webhook}}",
     "docs": "开发者文档",
     "keysTitle": "API 密钥",
-    "keysText": "密钥会以创建者的身份读取你的面试和候选人，并邀请候选人。",
+    "keysText": "密钥以创建者的身份操作，只能做其权限允许的事。",
     "noKeys": "还没有密钥。",
     "newKey": "新建密钥",
     "newKeyTitle": "新建 API 密钥",
@@ -1382,7 +1755,37 @@
     "removeWebhookTitle": "删除此 Webhook？",
     "removeWebhookText": "{url} 将不再接收事件。",
     "createFailed": "无法创建。",
-    "removeFailed": "无法删除。"
+    "removeFailed": "无法删除。",
+    "selectAll": "全选",
+    "permissionGroups": {
+      "interviews": "面试",
+      "candidates": "候选人",
+      "credits": "点数",
+      "ai_agents": "AI 智能体"
+    },
+    "permissions": {
+      "interviews:read": "查看",
+      "interviews:create": "创建",
+      "candidates:read": "查看",
+      "candidates:invite": "邀请",
+      "candidates:change": "修改",
+      "candidates:delete": "删除",
+      "credits:read": "查看",
+      "mcp": "用于 AI 智能体 (MCP)"
+    },
+    "permissionLine": {
+      "interviews:read": "查看",
+      "interviews:create": "创建",
+      "candidates:read": "查看",
+      "candidates:invite": "邀请",
+      "candidates:change": "修改",
+      "candidates:delete": "删除",
+      "credits:read": "查看",
+      "mcp": "MCP"
+    },
+    "editPermissions": "编辑权限",
+    "editPermissionsText": "取消勾选“{name}”不再需要的权限。如需添加权限，请新建密钥。",
+    "permissionsFailed": "无法保存权限。"
   },
   "brand": {
     "logoTitle": "标志",
@@ -1451,7 +1854,8 @@
     "tabs": {
       "api": "API",
       "webhooks": "Webhook",
-      "sdk": "SDK"
+      "sdk": "SDK",
+      "mcp": "MCP"
     },
     "englishOnly": "此页面仅提供英文版。",
     "baseUrl": "基础 URL",
@@ -1504,6 +1908,7 @@
     "emptyTitle": "询问你的招聘",
     "emptyText": "候选人、面试、点数、集成以及 prepza 的使用方式，依据你在公司中能看到的内容作答。AI 可能出错；以其链接的页面为准。",
     "emptyTitleFaq": "询问 prepza",
+    "pageQuestion": "我在这个页面上能做什么？",
     "pages": {
       "open": "打开",
       "pricing": "价格",
@@ -1682,326 +2087,7 @@
   "pageHelp": {
     "label": "关于此页面",
     "actionsTitle": "你可以做什么",
-    "tipsTitle": "提示",
-    "landing": {
-      "title": "prepza 如何运作",
-      "text": "prepza 根据你的职位描述生成限时的选择题面试，并为每位候选人随机出一套不同的题目。",
-      "actions": [
-        "粘贴职位描述：prepza 会提出要考察的主题。",
-        "审阅主题：保留、编辑或删除，然后批准以生成题目。",
-        "通过邮件、文件或一个分享链接邀请候选人。",
-        "查看报告：候选人按成绩排序，附带每个回答和诚信标记。"
-      ],
-      "tips": [
-        "创建面试免费。每位作答的候选人收费 $2–5，最初的几位候选人免费。",
-        "邀请任何人之前，先以候选人身份试用你的面试。"
-      ]
-    },
-    "companies": {
-      "title": "公司",
-      "text": "你的公司。你在 prepza 中的一切操作都在某个公司内进行：面试、候选人、团队、点数和集成。",
-      "actions": [
-        "点击“新公司”创建公司。公司名称在 prepza 中唯一。",
-        "打开公司，处理它的面试和候选人。",
-        "移除你拥有的公司，连同其所有面试和邀请。"
-      ],
-      "tips": [
-        "你不拥有的公司旁会显示你的角色：管理员可以修改，查看者只能查看。",
-        "点数属于公司，所以每个公司单独充值。"
-      ]
-    },
-    "pickCompany": {
-      "title": "选择公司",
-      "text": "你选了一个模板。请选择要用于哪个公司：模板会作为新面试免费复制到该公司，随时可发给候选人。",
-      "actions": [
-        "选择一个公司，在其中打开模板并使用。",
-        "如果还没有公司，就新建一个，模板会在那里打开。"
-      ],
-      "tips": ["复制后，面试就归该公司所有：可随意修改题目和设置。"]
-    },
-    "interviews": {
-      "title": "面试",
-      "text": "该公司的所有面试，以及用于候选人的点数。每场面试都是根据职位描述生成的限时测试。",
-      "actions": [
-        "点击“新面试”，根据职位描述创建面试。",
-        "打开面试，查看主题、候选人和设置。",
-        "以候选人身份试用面试，或删除面试。",
-        "在余额处充值点数，或在“账单”标签页开启自动充值。"
-      ],
-      "tips": [
-        "点数不足时余额会变成橙色。没有点数时，新的邀请不会发出。",
-        "上方的标签页可进入模板、团队、集成、账单（所有者和管理员）和推荐。"
-      ]
-    },
-    "newInterview": {
-      "title": "新面试",
-      "text": "从职位描述开始一场面试。prepza 会阅读描述、提出要考察的主题，并在你批准后生成题目。",
-      "actions": [
-        "粘贴职位描述：职位、任职要求和加分项。",
-        "选择生成面试所用的语言。",
-        "生成，然后审阅建议的主题。"
-      ],
-      "tips": [
-        "描述越具体，题目就越贴合职位。",
-        "生成免费：只为作答的候选人付费。"
-      ]
-    },
-    "reviewTopics": {
-      "title": "审阅你的主题",
-      "text": "这些是 prepza 根据你的描述提出的主题。保留的每个主题都会生成一套带答案的题目。",
-      "actions": [
-        "取消勾选不需要的主题。",
-        "点击铅笔图标编辑主题名称和子主题。",
-        "用自己的话描述修改并应用，例如“添加一个关于团队领导力的主题”。",
-        "批准并生成，开始编写题目。"
-      ],
-      "tips": [
-        "主题太多时，取消勾选一些，或描述如何合并。",
-        "题目只在你批准后才会生成，所以在这里多花一分钟。"
-      ]
-    },
-    "generating": {
-      "title": "正在生成",
-      "text": "prepza 正在生成你的面试：先是主题，再是每个主题的题目。需要几分钟。",
-      "actions": [
-        "你可以离开此页面，生成会继续进行。",
-        "如果不再需要，可取消生成；已生成的内容不会保留。"
-      ],
-      "tips": ["面试就绪时你会收到通知。", "随时可从面试列表回来。"]
-    },
-    "interviewTopics": {
-      "title": "主题",
-      "text": "这场面试考察的内容：各个主题，每个主题都有子主题和独立的题库。每位候选人从每个题库中随机抽题。",
-      "actions": [
-        "打开“管理题目”，查看某个主题的题目和答案。",
-        "重新生成质量差的题目、标记错误的答案，或查看候选人对某道题的举报。",
-        "设置每位候选人从一个主题中抽取的题目数量。",
-        "以候选人身份试用面试，或删除面试。"
-      ],
-      "tips": [
-        "AI 生成的题目可能有错：邀请任何人之前，先快速浏览每个主题。",
-        "点击标题即可重命名面试。"
-      ]
-    },
-    "interviewCandidates": {
-      "title": "候选人",
-      "text": "受邀参加这场面试的所有人，以及他们的状态、进度和成绩。",
-      "actions": [
-        "邀请候选人：逐个邀请、最多 100 人的列表，或 CSV、TXT 文件。",
-        "为招聘广告开启分享链接：拿到链接的任何人都能参加面试。",
-        "按邮箱或姓名搜索，按状态筛选，按成绩或日期排序。",
-        "打开某位候选人的报告，或下载、分享全部候选人的报告。"
-      ],
-      "tips": [
-        "每位至少回答一道题的候选人都会消耗点数，包括通过链接进入的候选人。",
-        "系统会自动向候选人发送提醒。"
-      ]
-    },
-    "interviewSettings": {
-      "title": "设置",
-      "text": "这场面试对所有候选人的进行方式。",
-      "actions": [
-        "设置每题时间，单位为秒。",
-        "设置及格线：达到及格线的候选人即通过。",
-        "职位招到人后，将面试标记为已录用。"
-      ],
-      "tips": [
-        "每项设置在你离开输入框时立即保存。",
-        "候选人看不到自己的分数，只有你的团队能看到。",
-        "如果某位候选人需要更多时间，可在其页面添加额外时间。"
-      ]
-    },
-    "tryInterview": {
-      "title": "以候选人身份试用",
-      "text": "按候选人所见预览这场面试：先是说明，然后是限时题目。免费。",
-      "actions": [
-        "开始预览，像候选人一样作答。",
-        "邀请任何人之前，检查时间、措辞和答案。"
-      ],
-      "tips": [
-        "作答时请留在页面上：对候选人而言，离开页面、复制和过快作答都会被记录。"
-      ]
-    },
-    "candidate": {
-      "title": "候选人报告",
-      "text": "一位候选人的结果：成绩、是否通过，以及每个主题的得分和每个回答。",
-      "actions": [
-        "查看每个回答及诚信标记：离开页面、尝试复制和过快作答。",
-        "将报告下载为 PDF，或通过邮件分享。",
-        "在候选人开始前给予额外时间，例如因残障需要。",
-        "添加或编辑候选人的姓名。",
-        "如果邮件没有送达，可以复制其邀请链接自行发送；链接在候选人完成前一直有效。",
-        "重新发送或撤销邀请，或删除候选人及其结果。"
-      ],
-      "tips": [
-        "分数用于辅助你的决定，而不是代替你做决定。如果候选人提出要求，请安排人工复核其结果。"
-      ]
-    },
-    "templates": {
-      "title": "模板",
-      "text": "常见职位的现成面试。使用模板会将其复制到本公司，成为你自己的面试。",
-      "actions": [
-        "按职位或主题搜索，按级别和语言筛选。",
-        "打开模板，查看其主题和每个主题的题目数量。",
-        "使用模板，以它为基础开始一场面试。"
-      ],
-      "tips": [
-        "想要更贴合，请改用你自己的职位描述创建面试。",
-        "复制后，面试就归你所有：可随意修改题目和设置。"
-      ]
-    },
-    "template": {
-      "title": "模板",
-      "text": "一场现成的面试：主题、子主题以及每个主题的题目数量。",
-      "actions": [
-        "检查主题是否符合你要招聘的职位。",
-        "使用模板，将其作为新面试复制到本公司。"
-      ],
-      "tips": [
-        "复制免费；作答的候选人照常消耗点数。",
-        "如果主题不合适，请改用你的职位描述创建面试。"
-      ]
-    },
-    "team": {
-      "title": "团队",
-      "text": "负责本公司面试的成员及其角色。",
-      "actions": [
-        "通过邮箱添加成员，设为管理员或查看者：对方会收到一封含加入链接的邮件。",
-        "在管理员和查看者之间更改成员的角色。",
-        "复制待接受邀请的链接，或移除成员或邀请。"
-      ],
-      "tips": [
-        "管理员可以创建和修改面试、邀请候选人和充值。查看者可以查看面试和结果、分享报告，但不能修改任何内容。",
-        "如果移除的成员的银行卡用于自动充值，自动充值将停止。"
-      ]
-    },
-    "integrations": {
-      "title": "集成",
-      "text": "将 prepza 连接到团队已在使用的工具。每个集成都有单独的页面和设置步骤。",
-      "actions": [
-        "Slack：在频道中接收公司的通知。",
-        "ATS（Workable、Greenhouse、Teamtailor、Recruitee、Breezy HR）：你移到某个阶段的候选人会收到面试，结果会同步回 ATS。",
-        "API：用于连接你自己平台的 API 密钥和 Webhook。",
-        "AI 应用：在 Claude、ChatGPT 等 AI 应用中使用 prepza。"
-      ],
-      "tips": ["公司里的每个人都能看到集成；所有者和管理员可以修改。"]
-    },
-    "ats": {
-      "title": "ATS 集成",
-      "text": "将 ATS 中的职位关联到面试：你移到所选阶段的候选人会收到面试，结果会以评论形式回到其个人资料中。",
-      "actions": [
-        "按照说明连接你的 ATS。",
-        "关联职位：选择职位、阶段和面试，或根据职位内容新建面试。",
-        "重新邀请未被邀请的候选人，例如点数用完的时候。",
-        "取消关联职位，或断开 ATS。"
-      ],
-      "tips": [
-        "添加一个 prepza 专用阶段，例如“prepza 技能测试”，这样就不会和你的其他工具混在一起。",
-        "prepza 从不在你的 ATS 中移动或拒绝任何人。"
-      ]
-    },
-    "slack": {
-      "title": "Slack",
-      "text": "公司的通知实时发送到 Slack 频道。",
-      "actions": [
-        "将 prepza 添加到 Slack，并选择频道，例如 #hiring。",
-        "选择要发送的通知：候选人完成面试、邀请未送达、面试已就绪等。",
-        "断开连接即可停止通知，并从 Slack 中移除 prepza 应用。"
-      ],
-      "tips": [
-        "prepza 只能向该频道发消息，无法读取你的 Slack。",
-        "所有人仍可在铃铛中看到每条通知。"
-      ]
-    },
-    "api": {
-      "title": "API",
-      "text": "将你自己的平台（例如招聘官网）连接到 prepza。",
-      "actions": [
-        "创建 API 密钥：以你的身份创建面试，读取候选人及其结果，邀请、提醒、更新或移除候选人，并读取你的点数。",
-        "添加 Webhook：当候选人开始、完成（附带结果）、邀请未能送达、邀请过期或被移除时，以及面试准备就绪时，prepza 会向你的 HTTPS 地址发送带签名的通知。",
-        "向 Webhook 发送测试事件，并在投递日志中查看每次发送的结果。",
-        "删除不再使用的密钥和 Webhook。",
-        "打开开发者文档，查看所有端点和事件，以及 SDK。"
-      ],
-      "tips": [
-        "新密钥和 Webhook 的签名密钥只显示一次：请立即复制。",
-        "为每个密钥设置有效期：永不过期的密钥一旦泄露会一直可用。"
-      ]
-    },
-    "brand": {
-      "title": "品牌",
-      "text": "你的标志和颜色，显示在候选人的邀请、面试和完成页面上。",
-      "actions": [
-        "设置或更换标志。",
-        "选择字体以及卡片和按钮的圆角大小。",
-        "选择每组的颜色，并在预览中查看。",
-        "保存，或恢复 prepza 颜色。"
-      ],
-      "tips": [
-        "会让文字难以阅读的颜色无法保存，以确保每位候选人都能读清题目。",
-        "试做面试的成员也会看到你的颜色。"
-      ]
-    },
-    "referrals": {
-      "title": "推荐",
-      "text": "用本公司的推荐链接邀请其他公司使用 prepza，双方都能获得点数。",
-      "actions": ["复制或分享你的推荐链接。", "查看本公司获得的所有奖励。"],
-      "tips": [
-        "你邀请的公司首次充值（金额不限）后，双方都会获得点数。",
-        "点数归本公司所有，永不过期。"
-      ]
-    },
-    "billing": {
-      "title": "账单",
-      "text": "本公司点数的来源和去向。",
-      "actions": [
-        "充值，或设置自动充值。",
-        "查看点数被预留的候选人。",
-        "打开任意一次充值的发票。"
-      ],
-      "tips": [
-        "邀请候选人时预留其点数，候选人作答后扣除，未作答则退回。",
-        "只有所有者和管理员能看到此页面。"
-      ]
-    },
-    "aiApps": {
-      "title": "AI 应用",
-      "text": "在你的 AI 聊天中使用 prepza：向 Claude 或 ChatGPT 询问你的面试和候选人，或让它们替你做出更改。",
-      "actions": [
-        "复制服务器地址，按步骤添加到 Claude、Claude Code 或 ChatGPT。",
-        "在打开的 prepza 页面上允许该应用。",
-        "断开不再使用的应用。"
-      ],
-      "tips": [
-        "应用以你的身份在你所在的每家公司中操作。大多数应用在更改任何内容前会先询问你。",
-        "它看不到你的密码或 API 密钥，也不能删除你的账户或公司。"
-      ]
-    },
-    "topUp": {
-      "title": "充值",
-      "text": "为你担任所有者或管理员的任意公司购买点数。",
-      "actions": [
-        "选择公司和充值档位：档位越大，每位候选人的费用越低。",
-        "在 Paddle 的付款页面付款；点数几秒内到账。",
-        "打开价格页面，比较各充值档位。"
-      ],
-      "tips": [
-        "每位候选人需 500 点数：邀请时预留，作答后扣除，未作答则退回。",
-        "点数永不过期。每次充值的发票都在公司的“账单”标签页。"
-      ]
-    },
-    "settings": {
-      "title": "设置",
-      "text": "你自己的账户：prepza 与你交流所用的语言、你收到的邮件以及你的数据。",
-      "actions": [
-        "选择网站、帮助聊天和你的邮件所用的语言。",
-        "选择接收哪些可选邮件；服务类邮件，例如邀请、报告和付款问题，始终会发送。",
-        "下载 prepza 保存的所有关于你的数据，或删除你的账户。"
-      ],
-      "tips": [
-        "删除账户会同时删除只有你一人的公司。有其他成员加入的公司，需要先转给另一位所有者。"
-      ]
-    }
+    "tipsTitle": "提示"
   },
   "companyBilling": {
     "reservedTab": "已预留 ({count})",
@@ -2017,7 +2103,8 @@
       "chargeback": "拒付",
       "chargeback_reversed": "拒付撤销",
       "referral": "推荐奖励",
-      "referral_reversed": "推荐奖励已收回"
+      "referral_reversed": "推荐奖励已收回",
+      "adjustment": "prepza 调整"
     },
     "automatic": "自动充值",
     "invoice": "发票",
@@ -2040,6 +2127,7 @@
     "claudeCode": "在 Claude Code 中运行：",
     "copyCommand": "复制命令",
     "commandCopied": "命令已复制",
+    "moreApps": "Gemini CLI、Cursor、VS Code、Le Chat 以及你自己的智能体：请参阅<link>开发者文档</link>。",
     "chatgptDeveloper": "在 ChatGPT 中开启开发者模式：",
     "chatgptCreate": "回到 Apps & Connectors，选择：",
     "chatgptPaste": "命名为 {name}，粘贴服务器地址，并选择这种认证方式：",
@@ -2102,5 +2190,91 @@
       "authority": "如果你对我们的答复不满意，可以联系爱沙尼亚消费者保护和技术监管局（TTJA）。"
     },
     "reviewed": "最近审核：{date}"
+  },
+  "actionLog": {
+    "empty": "还没有操作记录。",
+    "noMatches": "没有符合这些筛选条件的操作。",
+    "formerMember": "前成员",
+    "deletedCandidate": "已删除的候选人",
+    "anyMember": "所有人",
+    "anyAction": "所有操作",
+    "member": "成员",
+    "action": "操作",
+    "from": "开始",
+    "to": "结束",
+    "groups": {
+      "interviews": "面试",
+      "candidates": "候选人",
+      "team": "团队",
+      "company": "公司",
+      "billing": "账单",
+      "integrations": "集成"
+    },
+    "actions": {
+      "interview_created": "创建了一场面试",
+      "interview_from_template": "从模板创建了一场面试",
+      "interview_deleted": "删除了一场面试",
+      "interview_renamed": "重命名了一场面试",
+      "interview_settings_changed": "更改了一场面试的设置",
+      "link_turned_on": "开启了分享链接",
+      "link_turned_off": "关闭了分享链接",
+      "questions_regenerated": "重新生成了一道题",
+      "answer_key_reported": "标记了一个答案有误",
+      "topics_approved": "批准了一场面试的主题",
+      "pass_mark_changed": "更改了及格线",
+      "candidate_invited": "邀请了一位候选人",
+      "invite_resent": "重新发送了一个邀请",
+      "invite_revoked": "撤销了一个邀请",
+      "candidate_deleted": "删除了一位候选人",
+      "candidate_renamed": "更改了一位候选人的姓名",
+      "extra_time_set": "给了一位候选人额外时间",
+      "results_viewed": "查看了一位候选人的结果",
+      "report_emailed": "通过邮件发送了一份报告",
+      "member_invited": "邀请了一位成员",
+      "member_joined": "加入了公司",
+      "member_removed": "移除了一位成员",
+      "member_role_changed": "更改了一位成员的角色",
+      "ownership_transferred": "将公司转交给了另一位所有者",
+      "company_renamed": "重命名了公司",
+      "logo_changed": "更改了标志",
+      "brand_changed": "更改了品牌颜色或风格",
+      "verification_requested": "申请了公司验证",
+      "ai_apps_changed": "允许或停用了 AI 应用",
+      "top_up_paid": "充值了点数",
+      "auto_top_up_set": "设置了自动充值",
+      "auto_top_up_changed": "更改了自动充值",
+      "auto_top_up_stopped": "停止了自动充值",
+      "ats_connected": "连接了 ATS",
+      "ats_reconnected": "重新连接了 ATS",
+      "ats_disconnected": "断开了 ATS",
+      "job_linked": "关联了 ATS 职位",
+      "job_unlinked": "取消关联了 ATS 职位",
+      "slack_connected": "连接了 Slack",
+      "slack_disconnected": "断开了 Slack",
+      "slack_notifications_changed": "更改了 Slack 通知",
+      "api_key_created": "创建了 API 密钥",
+      "api_key_deleted": "删除了 API 密钥",
+      "api_key_narrowed": "缩小了 API 密钥的权限",
+      "webhook_added": "添加了 Webhook",
+      "webhook_tested": "测试了 Webhook",
+      "webhook_deleted": "删除了 Webhook"
+    },
+    "removed": "已移除：{permissions}",
+    "permissions": {
+      "interviews:read": "查看面试",
+      "interviews:create": "创建面试",
+      "candidates:read": "查看候选人",
+      "candidates:invite": "邀请候选人",
+      "candidates:change": "修改候选人",
+      "candidates:delete": "删除候选人",
+      "credits:read": "查看点数",
+      "mcp": "用于 AI 智能体 (MCP)"
+    },
+    "via": {
+      "assistant": "通过助手",
+      "mcp": "通过 AI 应用",
+      "api": "通过 API",
+      "ats": "通过 ATS"
+    }
   }
 }

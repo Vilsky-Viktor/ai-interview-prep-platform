@@ -107,7 +107,19 @@
     "send": "送信",
     "thinking": "考え中…",
     "copyId": "IDをコピー",
-    "idCopied": "IDをコピーしました"
+    "idCopied": "IDをコピーしました",
+    "copyCode": "コードをコピー",
+    "codeCopied": "コードをコピーしました",
+    "codeLanguage": "コードの言語",
+    "editor": {
+      "bold": "太字",
+      "italic": "斜体",
+      "link": "リンク",
+      "bullets": "箇条書き",
+      "numbers": "番号付きリスト",
+      "address": "https://…",
+      "addLink": "リンクを追加"
+    }
   },
   "errors": {
     "title": "問題が発生しました",
@@ -145,6 +157,7 @@
     "dismiss": "却下",
     "fixSent": "検証システムに送りました。まもなく修正または差し替えられます。",
     "actionFailed": "うまくいきませんでした。もう一度お試しください。",
+    "questions": "問題",
     "flagged": "報告あり",
     "replaced": "差し替え済み",
     "noFlagged": "現在、報告された問題はありません。",
@@ -174,9 +187,20 @@
     "deleteTitle": "このテンプレートを削除しますか？",
     "deleteText": "トピックと問題は削除されます。これをもとに企業がすでに作成した面接は残ります。",
     "deleteFailed": "テンプレートを削除できませんでした。もう一度お試しください。",
+    "poolCounts": "練習用 {practice} · 会社用 {company}",
+    "topUp": "補充",
+    "addQuestions": "問題を追加",
+    "addQuestionsTitle": "すべてのトピックに問題を追加",
+    "addQuestionsText": "各トピックにこの数の新しい問題が追加されます。3分の1は練習用、残りは会社用です。このテンプレートから作成済みの面接の問題は変わりません。",
+    "addQuestionsCount": "トピックあたりの問題数",
+    "add": "追加",
+    "addingQuestions": "問題を追加しています",
+    "questionsAdded": "問題を追加しました",
+    "addQuestionsFailed": "問題を追加できませんでした。もう一度お試しください。",
     "passRates": "合格率",
     "controls": "コントロール",
     "stats": "統計",
+    "statsGeneral": "全般",
     "statsPeriod": "期間",
     "statsAllTime": "累計",
     "statsCards": {
@@ -259,11 +283,7 @@
     "deletePostText": "すべての言語のお知らせページから削除されます。",
     "postSaveFailed": "投稿を保存できませんでした。もう一度お試しください。",
     "postDeleteFailed": "投稿を削除できませんでした。もう一度お試しください。",
-    "companies": "会社",
-    "companySearch": "会社名",
-    "companiesNotFound": "会社が見つかりません。",
     "suspended": "停止中",
-    "companyDetails": "{members, plural, other {# 人のメンバー}} · {date} から",
     "suspend": "停止",
     "unsuspend": "停止を解除",
     "unsuspended": "停止を解除しました。",
@@ -296,11 +316,341 @@
     "legalSend": "変更をメールで通知",
     "legalConfirmTitle": "{document}の変更をメールで通知しますか？",
     "legalAudience": {
-      "everyone": "prepza のアカウントを持つ全員に、翌朝から新しいバージョンが {date} から適用される旨が届きます。送信は一度だけで、取り消せません。",
-      "company_editors": "各社のオーナーと管理者に、翌朝から新しいバージョンが {date} から適用される旨が届きます。送信は一度だけで、取り消せません。"
+      "everyone": "prepza のアカウントを持つ全員に、次の送信時間帯（UTC 8:00〜18:00）から、新しいバージョンが {date} から適用される旨が届き、通知にも表示されます。送信は一度だけで、取り消せません。",
+      "company_editors": "各社のオーナーと管理者に、次の送信時間帯（UTC 8:00〜18:00）から、新しいバージョンが {date} から適用される旨が届き、通知にも表示されます。送信は一度だけで、取り消せません。"
     },
-    "legalAsked": "翌朝から変更がメールで通知されます。",
-    "legalFailed": "メールを依頼できませんでした。もう一度お試しください。"
+    "legalAsked": "次の送信時間帯から変更がメールで通知されます。",
+    "legalFailed": "メールを依頼できませんでした。もう一度お試しください。",
+    "support": "サポート",
+    "supportSearch": "ID、リンク、メール、支払い ID、または会社名",
+    "supportNotFound": "一致するものがありません。「idをコピー」の ID、ページのリンク、またはメールアドレスでお試しください。",
+    "supportKinds": {
+      "company": "会社",
+      "interview": "{company} の面接",
+      "candidate": "{company} の候補者",
+      "user": "アカウント"
+    },
+    "supportCreated": "作成日",
+    "supportAvailable": "利用可能 {available} クレジット",
+    "supportHeld": "候補者用に確保 {reserved}",
+    "supportTabs": {
+      "money": "クレジット",
+      "reserved": "確保中",
+      "interviews": "面接",
+      "members": "メンバー",
+      "audit": "監査ログ"
+    },
+    "supportNoInterviews": "面接はまだありません。",
+    "supportUntitled": "面接を生成中",
+    "supportCandidates": "{count, plural, other {候補者 # 人}}",
+    "supportJoined": "参加済み",
+    "supportInvited": "招待済み、未参加",
+    "adjustCredits": "クレジットを調整",
+    "adjustTitle": "{name} のクレジットを調整",
+    "adjustText": "正の数でクレジットを追加し、負の数で差し引きます。理由は会社の請求履歴に表示されます。",
+    "adjustAmount": "クレジット（例: 500 または -500）",
+    "adjustNote": "理由（例:「1 人の候補者に二重請求された」）",
+    "adjustConfirmTitle": "{name} に {amount} クレジット？",
+    "adjustConfirm": "調整",
+    "adjustBack": "戻る",
+    "adjustNext": "次へ",
+    "adjusted": "クレジットを調整しました",
+    "supportNoEmail": "メールアドレスのないアカウント",
+    "supportCompanies": "会社",
+    "supportNoCompanies": "どの会社のメンバーでもありません。",
+    "supportTopUps": "支払い済みのチャージ",
+    "supportNoTopUps": "チャージはありません。",
+    "supportDeletedCompany": "削除された会社",
+    "supportNotYet": "まだ",
+    "supportFacts": {
+      "company": "会社",
+      "interview": "面接",
+      "invited": "招待日時",
+      "lastSent": "招待の最終送信日時",
+      "started": "開始日時",
+      "finished": "完了日時",
+      "grade": "スコア",
+      "extraTime": "追加時間",
+      "signals": "不正行為の兆候",
+      "credits": "クレジット",
+      "topics": "トピック",
+      "questionSeconds": "1 問あたりの時間",
+      "passMark": "合格ライン"
+    },
+    "supportPassed": "{grade}、合格",
+    "supportNotPassed": "{grade}、不合格",
+    "supportNoExtraTime": "なし",
+    "supportSignals": "ページ離脱 {leaves} 回 · コピー試行 {copies} 回 · 速すぎる回答 {fast} 件",
+    "supportCredits": {
+      "held": "確保中",
+      "charged": "消費済み",
+      "released": "返却済み"
+    },
+    "supportGenerationFailed": "生成に失敗しました",
+    "supportSeconds": "{count, plural, other {# 秒}}",
+    "supportNoCandidates": "候補者はまだいません。",
+    "campaigns": "メール配信",
+    "newCampaign": "新しい配信",
+    "editCampaign": "編集",
+    "editCampaignIn": "{language}版を編集",
+    "campaignInEnglish": "英語で書いてください。保存すると、ほかのすべての言語に翻訳され、送信前にどの言語版も変更できます。",
+    "campaignInLanguage": "{language}で書いたあなた自身の文面が、そのまま送信されます。",
+    "campaignKind": "種類",
+    "campaignKinds": {
+      "updates": "製品の最新情報",
+      "promotions": "お得な情報"
+    },
+    "campaignSubject": "件名",
+    "campaignSubjectPlaceholder": "件名を入力…",
+    "campaignText": "本文",
+    "campaignTextPlaceholder": "本文を入力… Enter で新しい段落になります。",
+    "campaignButton": "ボタンのテキスト（任意）",
+    "campaignLink": "ボタンのリンク",
+    "campaignLinkPlaceholder": "prepza 内のボタンのリンク（例: /pricing、任意）",
+    "campaignSaveFailed": "配信を保存できませんでした。もう一度お試しください。",
+    "noCampaigns": "まだ配信はありません。",
+    "campaignStatus": {
+      "draft": "下書き",
+      "sending": "送信中…",
+      "sent": "送信済み",
+      "stopped": "停止済み"
+    },
+    "campaignRowCounts": {
+      "sent": "送信 {count} 件",
+      "skipped": "スキップ {count} 件",
+      "failed": "失敗 {count} 件",
+      "unsubscribed": "配信停止 {count} 件",
+      "complained": "迷惑メール報告 {count} 件"
+    },
+    "campaignCounts": {
+      "pending": "送信待ち",
+      "sent": "送信済み",
+      "skipped": "スキップ",
+      "failed": "失敗",
+      "unsubscribed": "受信後に配信停止",
+      "complained": "迷惑メール報告"
+    },
+    "campaignRecipients": "受信者 <number>{shown}</number> {count, plural, other {人}}",
+    "campaignPreviewLanguage": "プレビューの言語",
+    "sendTest": "自分にテストメールを送る",
+    "testSent": "テストメールをあなたのアドレスに送信中です。",
+    "sendCampaign": "送信",
+    "stopCampaign": "停止",
+    "deleteCampaign": "配信を削除",
+    "campaignConfirm": {
+      "send": {
+        "title": "この配信を送信しますか？",
+        "text": "{count, plural, =0 {現在、受け取る人はいません。} other {# 人が、次の送信時間帯（UTC 8:00〜18:00）から受け取ります。送信後は変更できません。}}",
+        "unknown": "この種類のメールを受け取る設定にしているすべての人が、次の送信時間帯（UTC 8:00〜18:00）から受け取ります。送信後は変更できません。",
+        "confirm": "送信"
+      },
+      "stop": {
+        "title": "この配信を停止しますか？",
+        "text": "これ以上、誰にも送られません。すでに受け取った人の手元には残ります。",
+        "confirm": "停止"
+      },
+      "delete": {
+        "title": "この配信を削除しますか？",
+        "text": "すべての言語で削除されます。一度も送信されていません。",
+        "confirm": "削除"
+      }
+    },
+    "sendAsCampaign": "メール配信として送る",
+    "removeSuppression": "リストから外す",
+    "suppressed": {
+      "bounced": "このアドレスへのメールが {date} に届かずに戻ってきたため、製品のメールとお知らせは送信されません。",
+      "complained": "このアドレスは {date} にメールを迷惑メールとして報告したため、製品のメールとお知らせは送信されません。"
+    },
+    "aiCosts": "AI コスト",
+    "aiCards": {
+      "spend": "支出",
+      "calls": "AI 呼び出し",
+      "month": "今月",
+      "monthOf": "今月（予算 {budget}）",
+      "input": "入力トークン",
+      "cached": "キャッシュ済み入力トークン",
+      "output": "出力トークン"
+    },
+    "aiBudgetsTitle": "本日の共有予算",
+    "aiNothing": "この期間には何もありません。",
+    "aiOf": "{used} / {limit}",
+    "aiForTitle": "利用者の内訳",
+    "aiCategories": {
+      "paid": "有料の会社",
+      "unpaid": "無料の会社",
+      "no_company": "会社なし",
+      "prepza": "prepza"
+    },
+    "aiActionsTitle": "操作別",
+    "aiActions": {
+      "interview_generation": "面接の生成",
+      "template_generation": "テンプレートの生成",
+      "question_regeneration": "問題の再生成",
+      "template_question_regeneration": "テンプレートの問題の再生成",
+      "sample_key_check": "正解の抜き取り確認",
+      "question_verify": "問題の確認",
+      "key_check_batch": "正解の一括確認",
+      "embeddings": "トピックの照合",
+      "news_translation": "お知らせの翻訳",
+      "campaign_translation": "キャンペーンの翻訳",
+      "assistant_message": "アシスタントのメッセージ",
+      "assistant_title": "アシスタントのチャットタイトル",
+      "transcription": "音声メッセージ",
+      "help_chat": "ヘルプチャット"
+    },
+    "aiUnitCost": {
+      "interview_generation": "面接 1 件あたり {cost}",
+      "template_generation": "テンプレート生成 1 回あたり {cost}",
+      "question_regeneration": "1 問あたり {cost}",
+      "template_question_regeneration": "1 問あたり {cost}",
+      "sample_key_check": "テスト 1 件あたり {cost}",
+      "question_verify": "1 問あたり {cost}",
+      "key_check_batch": "確認 1 回あたり {cost}",
+      "embeddings": "リクエスト 1 件あたり {cost}",
+      "news_translation": "投稿 1 件あたり {cost}",
+      "campaign_translation": "キャンペーン 1 件あたり {cost}",
+      "assistant_message": "会話 1 件あたり {cost}",
+      "assistant_title": "会話 1 件あたり {cost}",
+      "transcription": "1 分あたり {cost}",
+      "help_chat": "呼び出し 1 回あたり {cost}"
+    },
+    "aiPaid": "有料 {spend}",
+    "aiUnpaid": "無料 {spend}",
+    "aiCalls": "{count, plural, other {呼び出し # 回}}",
+    "aiModelsTitle": "モデル別",
+    "aiTokensIn": "入力 {count}",
+    "aiCachedShare": "キャッシュ {share}",
+    "aiTokensOut": "出力 {count}",
+    "aiCompaniesTitle": "コストの高い会社",
+    "aiUsersTitle": "コストの高いユーザー",
+    "aiByMonthTitle": "月別",
+    "aiByDayTitle": "日別",
+    "limitsOursTitle": "prepza の上限への到達",
+    "limitsProvidersTitle": "外部サービスの上限",
+    "limitsNoHits": "この期間に上限に達したものはありません。",
+    "limitNames": {
+      "MESSAGES_PER_USER_HOUR": "ユーザーごとの 1 時間あたりのアシスタントメッセージ数",
+      "MESSAGES_PER_USER_DAY": "ユーザーごとの 1 日あたりのアシスタントメッセージ数",
+      "MESSAGES_PER_COMPANY_DAY": "会社ごとの 1 日あたりのアシスタントメッセージ数",
+      "MESSAGES_PER_DAY": "1 日あたりのアシスタントメッセージ数（無料ユーザーの合計）",
+      "TOKENS_PER_USER_DAY": "ユーザーごとの 1 日あたりのアシスタントのトークン数",
+      "TOKENS_PER_COMPANY_DAY": "会社ごとの 1 日あたりのアシスタントのトークン数",
+      "TOKENS_PER_DAY": "1 日あたりのアシスタントのトークン数（無料ユーザーの合計）",
+      "TRANSCRIPTIONS_PER_USER_HOUR": "ユーザーごとの 1 時間あたりの音声メッセージ数",
+      "ACTIONS_PER_USER_HOUR": "ユーザーごとの 1 時間あたりのアシスタントの操作数",
+      "MCP_CALLS_PER_USER_MINUTE": "ユーザーごとの 1 分あたりの AI アプリの呼び出し数",
+      "MCP_CALLS_PER_USER_DAY": "ユーザーごとの 1 日あたりの AI アプリの呼び出し数",
+      "REGISTRATIONS_PER_IP_HOUR": "IP アドレスごとの 1 時間あたりの AI アプリ登録数",
+      "REGISTRATIONS_PER_DAY": "1 日あたりの AI アプリ登録数（全体）",
+      "AUTHORIZATIONS_PER_IP_HOUR": "IP アドレスごとの 1 時間あたりの AI アプリ接続リクエスト数",
+      "TOKEN_REQUESTS_PER_CLIENT_MINUTE": "アプリごとの 1 分あたりの AI アプリのトークンリクエスト数",
+      "APPROVALS_PER_USER_HOUR": "ユーザーごとの 1 時間あたりに許可できる AI アプリ接続数",
+      "MAX_OWNED_COMPANIES": "1 人が所有できる会社数",
+      "INTERVIEWS_PER_DAY": "会社ごとの 1 日あたりの面接生成数",
+      "INTERVIEWS_PER_DAY_UNPAID": "無料の会社ごとの 1 日あたりの面接生成数",
+      "MAX_INTERVIEWS_WITHOUT_CANDIDATES": "候補者のいない待機中の生成済み面接数",
+      "MAX_INTERVIEWS_WITHOUT_CANDIDATES_UNPAID": "候補者のいない待機中の生成済み面接数（無料）",
+      "PREVIEWS_PER_USER_HOUR": "ユーザーごとの 1 時間あたりの面接プレビュー数",
+      "LINK_STARTS_PER_HOUR": "1 つの面接リンクからの 1 時間あたりの開始数",
+      "LINK_STARTS_PER_IP_HOUR": "IP アドレスごとの 1 時間あたりのリンクからの開始数",
+      "MAX_BULK_INVITES": "1 つのリストまたはファイルの候補者数",
+      "MAX_PENDING_INVITES": "会社ごとの保留中のチーム招待数",
+      "MEMBER_INVITES_PER_UNPAID_DAY": "無料の会社ごとの 1 日あたりのチーム招待数",
+      "EMAIL_HOURLY_LIMIT": "ユーザーごとの 1 時間あたりの招待メール数",
+      "EMAIL_DAILY_LIMIT": "ユーザーごとの 1 日あたりの招待メール数",
+      "EMAIL_RECIPIENT_DAILY_LIMIT": "同じアドレスへの同じテストの 1 日あたりの招待数",
+      "REPORT_EMAILS_PER_COMPANY_DAY": "会社ごとの 1 日あたりのレポートメール数",
+      "GENERATION_LIMIT": "ユーザーごとの 1 日あたりの生成数",
+      "REGENERATION_LIMIT": "ユーザーごとの 1 日あたりの問題の再生成数",
+      "DAILY_GENERATION_LIMIT": "1 日あたりの生成数（無料の会社の合計）",
+      "MAX_TOPIC_REVISIONS": "生成ごとのトピックの見直し回数",
+      "DAILY_VERIFY_LIMIT": "1 日あたりの問題の確認数",
+      "PRACTICE_ROUNDS_PER_HOUR": "ユーザーごとの 1 時間あたりの練習ラウンド数",
+      "SIGNALS_PER_MINUTE": "セッションごとの 1 分あたりの不正行為の兆候の数",
+      "MAX_SIGNALS_PER_QUESTION": "1 問あたりに記録する不正行為の兆候の数",
+      "HELP_USER_LIMIT": "アカウントごとの 1 時間あたりのヘルプチャットのメッセージ数",
+      "HELP_IP_LIMIT": "IP アドレスごとの 1 時間あたりのヘルプチャットのメッセージ数",
+      "HELP_DAILY_LIMIT": "1 日あたりのヘルプチャットのメッセージ数（全体）",
+      "HELP_TOKENS_PER_DAY": "1 日あたりのヘルプチャットのトークン数（全体）",
+      "CONTACT_IP_LIMIT": "IP アドレスごとの 1 日あたりのお問い合わせメッセージ数",
+      "CONTACT_DAILY_LIMIT": "1 日あたりのお問い合わせメッセージ数（全体）",
+      "RATINGS_PER_DAY": "ユーザーごとの 1 日あたりの問題の評価数",
+      "REPORTS_PER_DAY": "ユーザーごとの 1 日あたりの問題の報告数",
+      "MAX_API_KEYS": "会社ごとの API キー数",
+      "MAX_WEBHOOKS": "会社ごとの Webhook 数",
+      "API_REQUESTS_PER_MINUTE": "会社ごとの 1 分あたりの API リクエスト数",
+      "RESEND_DAILY_LIMIT": "Resend 経由の 1 日あたりのメール数",
+      "RESEND_RESERVE_PERCENT": "一括送信に使わず確保しておく、Resend 経由の 1 日あたりのメールの割合",
+      "CAMPAIGNS_PER_KIND_DAY": "種類ごとの 1 日あたりの配信数",
+      "AI_SPEND_UNPAID_DAY": "1 日あたりの AI 支出（無料ユーザーの合計）",
+      "QUESTION_SECONDS_BASIC": "新しい初級テストの 1 問あたりの秒数",
+      "QUESTION_SECONDS_MEDIUM": "新しい中級テストの 1 問あたりの秒数",
+      "QUESTION_SECONDS_HARD": "新しい上級テストの 1 問あたりの秒数",
+      "GENERATION_CALLS_AT_ONCE": "生成ごとの AI の同時呼び出し数",
+      "GENERATION_CALLS_PER_SECOND": "1 秒あたりの AI 呼び出し数（全生成の合計）",
+      "MULTI_ANSWER_PERCENT": "「当てはまるものをすべて選ぶ」問題の各トピックでの割合",
+      "PAUSED": "一時停止中に拒否",
+      "OPENAI_RATE_LIMIT": "OpenAI のレート制限",
+      "OPENAI_QUOTA": "OpenAI のクレジット不足",
+      "OPENAI_THROTTLED": "当社の OpenAI リクエスト上限による待機",
+      "RESEND_RATE_LIMIT": "Resend のレート制限",
+      "RESEND_DAILY_QUOTA": "Resend の 1 日の送信枠",
+      "ATS_RATE_LIMIT": "ATS のレート制限",
+      "FIREBASE_TOKEN_REFUSED": "Firebase のサインイン拒否"
+    },
+    "limitValue": "{window} {value}",
+    "limitWindows": {
+      "60": "1 分あたり",
+      "3600": "1 時間あたり",
+      "86400": "1 日あたり",
+      "1209600": "トピックの見直しごと"
+    },
+    "limitKinds": {
+      "ours": "prepza",
+      "openai": "OpenAI",
+      "resend": "Resend",
+      "firebase": "Firebase",
+      "workable": "Workable",
+      "greenhouse": "Greenhouse",
+      "teamtailor": "Teamtailor",
+      "recruitee": "Recruitee",
+      "breezy": "Breezy HR"
+    },
+    "limitHitter": "{name} ({count})",
+    "limitHits": "{count, plural, other {到達 # 回}}",
+    "limitsTitle": "上限",
+    "limitsText": "利用できる量と、各サービスが使う値を、サービスごとに示します。変更は 1 分以内に反映されます。",
+    "limitServices": {
+      "assistant": "アシスタント",
+      "companies": "会社",
+      "generation": "生成",
+      "rounds": "練習、セッション、ヘルプチャット",
+      "library": "問題へのフィードバック",
+      "api": "公開 API",
+      "notifications": "メール",
+      "billing": "AI 支出"
+    },
+    "limitAtOnce": "同時に",
+    "limitScopes": {
+      "user": "ユーザーごと",
+      "company": "会社ごと",
+      "ip": "IP アドレスごと",
+      "everyone": "全体の合計"
+    },
+    "limitDefault": "既定値 {value}",
+    "limitSecondsUnit": "秒",
+    "limitRecentHits": "{days} 日間で{count, plural, other {到達 # 回}}",
+    "limitPaid": "有料",
+    "limitUnpaid": "無料",
+    "limitSave": "保存",
+    "limitReset": "既定値に戻す",
+    "limitSaved": "上限を保存しました。",
+    "limitFailed": "上限を保存できませんでした。もう一度お試しください。",
+    "limitChangesTitle": "変更履歴",
+    "limitNoChanges": "変更された上限はまだありません。",
+    "limitChange": "{name}: {from} → {to}",
+    "limitDefaultValue": "既定値",
+    "supportAiSpend": "過去 {days} 日間の AI コスト {spend}、{count, plural, other {呼び出し # 回}}。"
   },
   "templates": {
     "title": "テンプレート",
@@ -363,10 +713,12 @@
   "reportReasons": {
     "wrong_answer": "正解とされている答えが間違っている",
     "unclear": "問題がわかりにくい",
+    "hard_to_read": "読みにくい",
     "off_topic": "トピックに合っていない",
     "other": "その他"
   },
   "questions": {
+    "multiChoice": "複数選択",
     "goodQuestion": "良い問題でしたか？",
     "ratingFailed": "評価を保存できませんでした。もう一度お試しください。",
     "helpful": "役に立つ問題",
@@ -413,6 +765,10 @@
     "correct": "正解",
     "incorrect": "不正解",
     "notAnswered": "未回答",
+    "partlyCorrect": "部分正解",
+    "rightPicks": "正しい選択肢 {total} 個中 {right} 個",
+    "wrongPicks": "{count, plural, other {誤った選択肢 # 個}}",
+    "points": "{points} / 1 点",
     "finish": "終了",
     "finishing": "終了中…",
     "next": "次の問題",
@@ -424,6 +780,7 @@
     "finishFailed": "面接を終了できませんでした。もう一度お試しください。",
     "continueFailed": "続けられませんでした。もう一度お試しください。",
     "timeUp": "この問題の制限時間が終了しました。",
+    "selectAll": "当てはまるものをすべて選んでください",
     "finish": "面接を終了",
     "finishTitle": "面接全体を終了しますか？",
     "endsAll": "このセクションだけでなく、{count} セクションすべてが終了します。",
@@ -498,6 +855,7 @@
     "interviews": "面接",
     "templates": "テンプレート",
     "team": "チーム",
+    "actions": "操作ログ",
     "integrations": "連携",
     "referrals": "紹介",
     "brand": "ブランド",
@@ -629,10 +987,12 @@
       "many": "複数",
       "file": "アップロード"
     },
-    "manyHint": "1行に1人。氏名は省略できます。\n一度に100人まで：",
+    "manyHint": "1行に1人。氏名は省略できます。\n一度に{count}人まで：",
+    "manyHintNoLimit": "1行に1人。氏名は省略できます：",
     "example": "例",
     "uploadFile": "ファイルをアップロード",
-    "fileFormats": "CSV または TXT、最大100人。氏名は氏名の列か、各メールアドレスの横に入力できます。",
+    "fileFormats": "CSV または TXT、最大{count}人。氏名は氏名の列か、各メールアドレスの横に入力できます。",
+    "fileFormatsNoLimit": "CSV または TXT。氏名は氏名の列か、各メールアドレスの横に入力できます。",
     "fileTooLarge": "ファイルが大きすぎます（最大 {kb} KB）。",
     "lineProblems": {
       "no_email": "メールアドレスがありません：{line}",
@@ -658,7 +1018,9 @@
     "fallbackTitle": "面接",
     "timePerQuestion": "1 問あたりの時間：",
     "secondsUnit": "秒",
-    "pickOne": "各問題で 4 つの選択肢から 1 つを選んでください。",
+    "wholeInterview": "面接全体：",
+    "minutesUnit": "分",
+    "pickOne": "各問題で 4 つの選択肢から 1 つを選んでください。「当てはまるものをすべて選んでください」とある問題では、正しい選択肢をすべてチェックしてください。正しい選択肢ごとに問題の配点の一部が得られ、誤ったチェックには点が付きません。",
     "changePick": "「次の問題」を押すまでは選択を変更できます。",
     "timeRunsOut": "問題の制限時間が過ぎると、選んだ回答が記録され次の問題が開きます。何も選んでいなければ不正解となります。ページを離れても時間は進みます。",
     "unanswered": "未回答の問題は不正解として扱われます。",
@@ -1110,8 +1472,19 @@
       "ats_cannot_write": "{ats} が候補者の結果を受け付けません。キーに書き込み権限がありません。書き込みできるキーで再接続してください。結果は保管され、その時点で送信されます。",
       "connection_broken": "{name} が動作しなくなったため、再接続が必要です。それまでは、{integration, select, slack {通知はチャンネルに届きません} other {送られてくる候補者は待機し、結果は保管されます}}。",
       "webhook_stopped": "{url} への Webhook が停止しました。追加したメンバーがオーナーまたは管理者ではなくなりました。結果を受け取り続けるには、もう一度追加してください。",
-      "ownership_received": "「{name}」のオーナーになりました。"
-    }
+      "ownership_received": "「{name}」のオーナーになりました。",
+      "news": "お知らせ：{title}",
+      "legal_terms": "新しい利用規約が {date} から適用されます。",
+      "legal_privacy": "新しいプライバシーポリシーが {date} から適用されます。",
+      "legal_dpa": "新しいデータ処理契約が {date} から適用されます。"
+    },
+    "legalBanner": {
+      "terms": "prepza の利用規約は {date} に変わります。",
+      "privacy": "prepza のプライバシーポリシーは {date} に変わります。",
+      "dpa": "データ処理契約は {date} に変わります。"
+    },
+    "readLegal": "新しい版を読む",
+    "closeLegalBanner": "閉じる"
   },
   "report": {
     "download": "PDF をダウンロード",
@@ -1148,7 +1521,7 @@
     "continue": "続ける",
     "history": "練習の履歴",
     "results": "練習の結果",
-    "grade": "の問題に正解",
+    "grade": "得点率",
     "notFinished": "未完了",
     "noRounds": "練習の履歴はまだありません。",
     "startFailed": "練習を開始できませんでした。もう一度お試しください。",
@@ -1336,7 +1709,7 @@
     "counts": "{keys, plural, other {キー # 件}} · {webhooks, plural, other {Webhook # 件}}",
     "docs": "開発者向けドキュメント",
     "keysTitle": "API キー",
-    "keysText": "キーは、作成した人として面接と候補者を読み取り、候補者を招待します。",
+    "keysText": "キーは作成した人として動作し、権限で許可されたことだけを行えます。",
     "noKeys": "キーはまだありません。",
     "newKey": "新しいキー",
     "newKeyTitle": "新しい API キー",
@@ -1395,7 +1768,37 @@
     "removeWebhookTitle": "この Webhook を削除しますか？",
     "removeWebhookText": "{url} にはイベントが届かなくなります。",
     "createFailed": "作成できませんでした。",
-    "removeFailed": "削除できませんでした。"
+    "removeFailed": "削除できませんでした。",
+    "selectAll": "すべて選択",
+    "permissionGroups": {
+      "interviews": "面接",
+      "candidates": "候補者",
+      "credits": "クレジット",
+      "ai_agents": "AI エージェント"
+    },
+    "permissions": {
+      "interviews:read": "閲覧",
+      "interviews:create": "作成",
+      "candidates:read": "閲覧",
+      "candidates:invite": "招待",
+      "candidates:change": "変更",
+      "candidates:delete": "削除",
+      "credits:read": "閲覧",
+      "mcp": "AI エージェントで使用 (MCP)"
+    },
+    "permissionLine": {
+      "interviews:read": "閲覧",
+      "interviews:create": "作成",
+      "candidates:read": "閲覧",
+      "candidates:invite": "招待",
+      "candidates:change": "変更",
+      "candidates:delete": "削除",
+      "credits:read": "閲覧",
+      "mcp": "MCP"
+    },
+    "editPermissions": "権限を編集",
+    "editPermissionsText": "「{name}」に不要になった権限のチェックを外してください。権限を追加するには、新しいキーを作成してください。",
+    "permissionsFailed": "権限を保存できませんでした。"
   },
   "brand": {
     "logoTitle": "ロゴ",
@@ -1464,7 +1867,8 @@
     "tabs": {
       "api": "API",
       "webhooks": "Webhook",
-      "sdk": "SDK"
+      "sdk": "SDK",
+      "mcp": "MCP"
     },
     "englishOnly": "このページは英語のみです。",
     "baseUrl": "ベース URL",
@@ -1517,6 +1921,7 @@
     "emptyTitle": "採用について質問",
     "emptyText": "候補者、面接、クレジット、連携、prepza の使い方について、あなたが会社で見られる情報をもとに答えます。AI は間違えることがあります。リンク先のページの内容が正確です。",
     "emptyTitleFaq": "prepza について質問",
+    "pageQuestion": "このページで何ができますか？",
     "pages": {
       "open": "開く",
       "pricing": "料金",
@@ -1695,334 +2100,7 @@
   "pageHelp": {
     "label": "このページについて",
     "actionsTitle": "できること",
-    "tipsTitle": "ヒント",
-    "landing": {
-      "title": "prepza の仕組み",
-      "text": "prepza は求人票から時間制限付きの選択式面接を作成し、候補者ごとに異なるランダムな問題を出題します。",
-      "actions": [
-        "求人票を貼り付けると、prepza が出題するトピックを提案します。",
-        "トピックを確認して残す・編集する・外すを決め、承認すると問題が作成されます。",
-        "候補者をメール、ファイル、または 1 つの共有リンクで招待します。",
-        "レポートを確認：候補者はスコア順に並び、すべての回答と不正行為の兆候が表示されます。"
-      ],
-      "tips": [
-        "面接の作成は無料です。費用は回答した候補者 1 人あたり $2–5 で、最初の数名は無料です。",
-        "誰かを招待する前に、候補者として面接を試してみましょう。"
-      ]
-    },
-    "companies": {
-      "title": "会社",
-      "text": "あなたの会社の一覧です。prepza での操作はすべて会社の中で行います：面接、候補者、チーム、クレジット、連携。",
-      "actions": [
-        "「新しい会社」で会社を作成します。会社名は prepza 全体で一意です。",
-        "会社を開いて、面接と候補者を管理します。",
-        "所有している会社を、すべての面接と招待ごと削除します。"
-      ],
-      "tips": [
-        "所有していない会社には、あなたの役割が表示されます：管理者は変更でき、閲覧者は閲覧のみです。",
-        "クレジットは会社ごとにあるため、チャージも会社ごとに行います。"
-      ]
-    },
-    "pickCompany": {
-      "title": "会社を選択",
-      "text": "テンプレートを選びました。使う会社を選んでください。テンプレートはその会社に新しい面接として無料でコピーされ、すぐに候補者へ送れます。",
-      "actions": [
-        "会社を選んでテンプレートを開き、使用します。",
-        "まだ会社がなければ新しく作成すると、そこでテンプレートが開きます。"
-      ],
-      "tips": [
-        "コピーした面接はその会社のものです。問題や設定は自由に変更できます。"
-      ]
-    },
-    "interviews": {
-      "title": "面接",
-      "text": "この会社のすべての面接と、候補者用のクレジットです。各面接は求人票から作られた時間制限付きのテストです。",
-      "actions": [
-        "「新しい面接」で求人票から面接を作成します。",
-        "面接を開いて、トピック、候補者、設定を確認します。",
-        "候補者として面接を試す、または削除します。",
-        "残高からクレジットをチャージするか、［請求］タブで自動チャージをオンにします。"
-      ],
-      "tips": [
-        "クレジットが少なくなると残高がオレンジ色になります。クレジットがないと新しい招待は送信されません。",
-        "上のタブから、テンプレート、チーム、連携、請求（オーナーと管理者）、紹介に移動できます。"
-      ]
-    },
-    "newInterview": {
-      "title": "新しい面接",
-      "text": "求人票から面接を始めます。prepza が内容を読み取って出題トピックを提案し、承認後に問題を作成します。",
-      "actions": [
-        "求人票を貼り付けます：職務内容、必須要件、歓迎要件。",
-        "面接を作成する言語を選びます。",
-        "生成し、提案されたトピックを確認します。"
-      ],
-      "tips": [
-        "求人票が具体的なほど、問題が職種に合ったものになります。",
-        "生成は無料です。費用がかかるのは回答した候補者の分だけです。"
-      ]
-    },
-    "reviewTopics": {
-      "title": "トピックを確認",
-      "text": "求人票をもとに prepza が提案したトピックです。残した各トピックに、解答付きの問題セットが作られます。",
-      "actions": [
-        "不要なトピックのチェックを外します。",
-        "鉛筆アイコンでトピック名とサブトピックを編集します。",
-        "変更内容を自分の言葉で書いて反映します。例：「チームリーダーシップのトピックを追加」。",
-        "承認して生成すると、問題が作成されます。"
-      ],
-      "tips": [
-        "トピックが多すぎる場合は、チェックを外すか、まとめ方を書いて指示しましょう。",
-        "問題は承認後に作成されるので、ここで少し時間をかけて確認しましょう。"
-      ]
-    },
-    "generating": {
-      "title": "作成中",
-      "text": "prepza が面接を作成しています。まずトピック、次に各トピックの問題です。数分かかります。",
-      "actions": [
-        "このページを離れても、生成は続きます。",
-        "不要になったら生成をキャンセルできます。それまでに作成された内容は残りません。"
-      ],
-      "tips": [
-        "面接の準備ができたらお知らせが届きます。",
-        "面接一覧からいつでも戻れます。"
-      ]
-    },
-    "interviewTopics": {
-      "title": "トピック",
-      "text": "この面接で評価する内容です。各トピックにはサブトピックと専用の問題プールがあり、候補者ごとに各プールからランダムに出題されます。",
-      "actions": [
-        "「問題を管理」を開いて、トピックの問題と解答を確認します。",
-        "質の低い問題を再生成したり、誤った解答を指摘したり、問題への候補者からの報告を確認したりできます。",
-        "各トピックから候補者 1 人に出題する問題数を設定します。",
-        "候補者として面接を試す、または削除します。"
-      ],
-      "tips": [
-        "AI が作成した問題には誤りがあることも。招待する前に各トピックにざっと目を通しましょう。",
-        "タイトルをクリックすると面接名を変更できます。"
-      ]
-    },
-    "interviewCandidates": {
-      "title": "候補者",
-      "text": "この面接に招待したすべての人と、そのステータス、進捗、スコアです。",
-      "actions": [
-        "候補者を招待：1 人ずつ、最大 100 人のリスト、または CSV・TXT ファイルで。",
-        "求人広告用に共有リンクをオンにします。リンクを知っていれば誰でも受験できます。",
-        "メールアドレスや氏名で検索し、ステータスで絞り込み、スコアや日付で並べ替えます。",
-        "候補者のレポートを開くか、全候補者のレポートをダウンロード・共有します。"
-      ],
-      "tips": [
-        "1 問以上回答した候補者ごとにクレジットを消費します。リンク経由の候補者も同じです。",
-        "候補者にはリマインダーが自動で送られます。"
-      ]
-    },
-    "interviewSettings": {
-      "title": "設定",
-      "text": "すべての候補者に共通する、この面接の進め方です。",
-      "actions": [
-        "1 問あたりの時間を秒単位で設定します。",
-        "合格ラインを設定します。到達した候補者が合格です。",
-        "ポジションが埋まったら、面接を採用済みにします。"
-      ],
-      "tips": [
-        "各設定は、入力欄から離れるとすぐに保存されます。",
-        "候補者に自分のスコアは表示されません。見られるのはチームだけです。",
-        "時間が必要な候補者には、その候補者のページで追加時間を設定します。"
-      ]
-    },
-    "tryInterview": {
-      "title": "候補者として試す",
-      "text": "候補者に表示されるとおりの面接のプレビューです：案内のあと、時間制限付きの問題が続きます。無料です。",
-      "actions": [
-        "プレビューを開始し、候補者になったつもりで回答します。",
-        "招待する前に、制限時間、文言、解答を確認します。"
-      ],
-      "tips": [
-        "回答中はページから離れないでください。候補者の場合、ページ離脱、コピー、速すぎる回答は記録されます。"
-      ]
-    },
-    "candidate": {
-      "title": "候補者のレポート",
-      "text": "1 人の候補者の結果です：スコア、合否、トピックごとのスコアとすべての回答。",
-      "actions": [
-        "不正行為の兆候（ページ離脱、コピー試行、速すぎる回答）とともに、各回答を確認します。",
-        "レポートを PDF でダウンロードするか、メールで共有します。",
-        "障がいなどの理由がある場合、開始前に追加時間を設定します。",
-        "候補者の氏名を追加・編集します。",
-        "メールが届かなかった場合に自分で送れるよう、招待リンクをコピーします。リンクは候補者が回答を終えるまで有効です。",
-        "招待を再送・取り消す、または候補者を結果ごと削除します。"
-      ],
-      "tips": [
-        "スコアは判断の材料であり、判断そのものではありません。候補者から求められたら、人が結果を確認してください。"
-      ]
-    },
-    "templates": {
-      "title": "テンプレート",
-      "text": "よくある職種向けの既製の面接です。使用すると、この会社に自社の面接としてコピーされます。",
-      "actions": [
-        "職種やトピックで検索し、レベルと言語で絞り込みます。",
-        "テンプレートを開くと、トピックと各トピックの問題数を確認できます。",
-        "テンプレートを使って面接を始めます。"
-      ],
-      "tips": [
-        "より合った面接にするには、自社の求人票から面接を作成しましょう。",
-        "コピーした面接はあなたのものです。問題や設定は自由に変更できます。"
-      ]
-    },
-    "template": {
-      "title": "テンプレート",
-      "text": "既製の面接です：トピック、サブトピック、各トピックの問題数。",
-      "actions": [
-        "トピックが採用したい職種に合っているか確認します。",
-        "テンプレートを使うと、この会社に新しい面接としてコピーされます。"
-      ],
-      "tips": [
-        "コピーは無料です。回答した候補者は通常どおりクレジットを消費します。",
-        "トピックが合わない場合は、求人票から面接を作成しましょう。"
-      ]
-    },
-    "team": {
-      "title": "チーム",
-      "text": "この会社の面接に携わるメンバーと、その役割です。",
-      "actions": [
-        "メールアドレスでメンバーを管理者または閲覧者として追加します。参加用のリンクがメールで届きます。",
-        "メンバーの役割を管理者と閲覧者の間で変更します。",
-        "保留中の招待リンクをコピーする、またはメンバーや招待を削除します。"
-      ],
-      "tips": [
-        "管理者は面接の作成・変更、候補者の招待、チャージができます。閲覧者は面接と結果の閲覧、レポートの共有ができますが、変更はできません。",
-        "自動チャージに使われているカードの持ち主をメンバーから削除すると、自動チャージは停止します。"
-      ]
-    },
-    "integrations": {
-      "title": "連携",
-      "text": "チームがすでに使っているツールと prepza をつなぎます。各連携には、設定手順を記載した専用ページがあります。",
-      "actions": [
-        "Slack：会社のお知らせをチャンネルで受け取ります。",
-        "ATS（Workable、Greenhouse、Teamtailor、Recruitee、Breezy HR）：選考ステップに移動した候補者に面接が送られ、結果が ATS に戻ります。",
-        "API：自社のプラットフォームとつなぐための API キーと Webhook。",
-        "AI アプリ：Claude や ChatGPT などの AI アプリから prepza を使います。"
-      ],
-      "tips": ["連携は会社の全員が閲覧でき、所有者と管理者が変更できます。"]
-    },
-    "ats": {
-      "title": "ATS 連携",
-      "text": "ATS の求人を面接に紐付けます。選んだ選考ステップに移動した候補者に面接が送られ、結果は候補者のプロフィールにコメントとして戻ります。",
-      "actions": [
-        "手順に従って ATS に接続します。",
-        "求人を紐付ける：求人、選考ステップ、面接を選ぶか、求人の内容から新しい面接を作成します。",
-        "クレジット切れなどで招待されなかった候補者を、もう一度招待します。",
-        "求人の紐付けを解除する、または ATS の接続を解除します。"
-      ],
-      "tips": [
-        "「prepza スキルテスト」のような prepza 専用の選考ステップを追加すれば、ほかのツールと混ざりません。",
-        "prepza が ATS で候補者を移動したり不採用にしたりすることはありません。"
-      ]
-    },
-    "slack": {
-      "title": "Slack",
-      "text": "会社のお知らせを、Slack チャンネルにリアルタイムで届けます。",
-      "actions": [
-        "prepza を Slack に追加し、#hiring などのチャンネルを選びます。",
-        "届けるお知らせを選びます：候補者の受験完了、届かなかった招待、面接の準備完了など。",
-        "接続を解除すると通知が止まり、prepza のアプリが Slack から削除されます。"
-      ],
-      "tips": [
-        "prepza はそのチャンネルに投稿するだけで、Slack の内容を読むことはできません。",
-        "すべてのお知らせは、引き続きベルアイコンから全員が確認できます。"
-      ]
-    },
-    "api": {
-      "title": "API",
-      "text": "採用サイトなど、自社のプラットフォームを prepza とつなぎます。",
-      "actions": [
-        "API キーを作成：あなたとして面接を作成し、候補者とその結果を読み取り、候補者の招待・リマインダー送信・更新・削除を行い、クレジットを読み取ります。",
-        "Webhook を追加：候補者が受験を開始・完了（結果付き）したとき、招待が届かなかったとき、招待の期限が切れたとき、削除されたとき、そして面接の準備ができたときに、署名付きであなたの HTTPS アドレスに通知します。",
-        "Webhook にテストイベントを送信し、各送信の結果を配信ログで確認します。",
-        "使わなくなった API キーと Webhook を削除します。",
-        "開発者向けドキュメントで、すべてのエンドポイントとイベント、そして SDK を確認します。"
-      ],
-      "tips": [
-        "新しいキーと Webhook のシークレットは一度しか表示されません。すぐにコピーしてください。",
-        "キーごとに有効期限を設定しましょう。期限のないキーは、漏えいしても使えるままになります。"
-      ]
-    },
-    "brand": {
-      "title": "ブランド",
-      "text": "候補者の招待、面接、完了ページに表示されるロゴとカラーです。",
-      "actions": [
-        "ロゴを設定または変更します。",
-        "フォントと、カードとボタンの丸みを選びます。",
-        "各グループのカラーを選び、プレビューで確認します。",
-        "保存するか、prepza のカラーに戻します。"
-      ],
-      "tips": [
-        "すべての候補者が質問を読めるよう、テキストが読みにくくなるカラーは保存できません。",
-        "面接を試すメンバーにも、このカラーで表示されます。"
-      ]
-    },
-    "referrals": {
-      "title": "紹介",
-      "text": "この会社の紹介リンクで他社を prepza に招待すると、双方にクレジットが付与されます。",
-      "actions": [
-        "紹介リンクをコピーまたは共有します。",
-        "この会社が受け取った特典をすべて確認します。"
-      ],
-      "tips": [
-        "招待した会社が初めてチャージすると（金額は問いません）、双方にクレジットが付与されます。",
-        "クレジットはこの会社に付与され、有効期限はありません。"
-      ]
-    },
-    "billing": {
-      "title": "請求",
-      "text": "この会社のクレジットの入手元と使い道です。",
-      "actions": [
-        "チャージするか、自動チャージを設定します。",
-        "クレジットが確保されている候補者を確認します。",
-        "各チャージの請求書を開きます。"
-      ],
-      "tips": [
-        "候補者のクレジットは招待時に確保され、回答すると消費され、回答しなければ返却されます。",
-        "このページは所有者と管理者だけが閲覧できます。"
-      ]
-    },
-    "aiApps": {
-      "title": "AI アプリ",
-      "text": "AI チャットから prepza を使えます。Claude や ChatGPT に面接や候補者について質問したり、変更を頼んだりできます。",
-      "actions": [
-        "サーバーのアドレスをコピーし、手順に沿って Claude、Claude Code、ChatGPT に追加します。",
-        "開いた prepza のページでアプリを許可します。",
-        "使わなくなったアプリの接続を解除します。"
-      ],
-      "tips": [
-        "アプリはあなたとして、所属するすべての会社で動作します。ほとんどのアプリは、何かを変更する前にあなたに確認します。",
-        "パスワードや API キーを見ることはできず、アカウントや会社を削除することもできません。"
-      ]
-    },
-    "topUp": {
-      "title": "チャージ",
-      "text": "所有者または管理者として所属している会社のクレジットを購入します。",
-      "actions": [
-        "会社とチャージ額を選びます。チャージ額が大きいほど、候補者 1 人あたりの費用が下がります。",
-        "Paddle の支払い画面で支払います。クレジットは数秒で反映されます。",
-        "料金を開いてチャージ額を比較します。"
-      ],
-      "tips": [
-        "候補者 1 人につき 500 クレジットかかります。招待時に確保され、回答すると消費され、回答しなければ返却されます。",
-        "クレジットに有効期限はありません。各チャージの請求書は会社の［請求］タブにあります。"
-      ]
-    },
-    "settings": {
-      "title": "設定",
-      "text": "あなた自身のアカウントです。prepza の表示言語、受け取るメール、あなたのデータを管理します。",
-      "actions": [
-        "サイト、ヘルプチャット、メールの言語を選びます。",
-        "受け取る任意のメールを選びます。招待、レポート、支払いの問題などのサービスメールは常に送信されます。",
-        "prepza が保存しているあなたのデータをすべてダウンロードするか、アカウントを削除します。"
-      ],
-      "tips": [
-        "アカウントを削除すると、あなただけが所属している会社も削除されます。ほかのメンバーが参加している会社には、先に別の所有者が必要です。"
-      ]
-    }
+    "tipsTitle": "ヒント"
   },
   "companyBilling": {
     "reservedTab": "確保中 ({count})",
@@ -2038,7 +2116,8 @@
       "chargeback": "チャージバック",
       "chargeback_reversed": "チャージバックの取り消し",
       "referral": "紹介特典",
-      "referral_reversed": "紹介特典の取り消し"
+      "referral_reversed": "紹介特典の取り消し",
+      "adjustment": "prepza による調整"
     },
     "automatic": "自動チャージ",
     "invoice": "請求書",
@@ -2061,6 +2140,7 @@
     "claudeCode": "Claude Code で次を実行します：",
     "copyCommand": "コマンドをコピー",
     "commandCopied": "コマンドをコピーしました",
+    "moreApps": "Gemini CLI、Cursor、VS Code、Le Chat、独自のエージェントについては<link>開発者向けドキュメント</link>をご覧ください。",
     "chatgptDeveloper": "ChatGPT で開発者モードをオンにします：",
     "chatgptCreate": "Apps & Connectors に戻り、次を選びます：",
     "chatgptPaste": "名前を {name} にし、サーバーのアドレスを貼り付けて、次の認証方式を選びます：",
@@ -2123,5 +2203,91 @@
       "authority": "回答にご満足いただけない場合は、エストニア消費者保護・技術規制庁（TTJA）にお問い合わせいただけます。"
     },
     "reviewed": "最終確認日：{date}"
+  },
+  "actionLog": {
+    "empty": "まだ操作はありません。",
+    "noMatches": "この条件に一致する操作はありません。",
+    "formerMember": "以前のメンバー",
+    "deletedCandidate": "削除された候補者",
+    "anyMember": "全員",
+    "anyAction": "すべての操作",
+    "member": "メンバー",
+    "action": "操作",
+    "from": "開始日",
+    "to": "終了日",
+    "groups": {
+      "interviews": "面接",
+      "candidates": "候補者",
+      "team": "チーム",
+      "company": "会社",
+      "billing": "請求",
+      "integrations": "連携"
+    },
+    "actions": {
+      "interview_created": "面接を作成しました",
+      "interview_from_template": "テンプレートから面接を作成しました",
+      "interview_deleted": "面接を削除しました",
+      "interview_renamed": "面接の名前を変更しました",
+      "interview_settings_changed": "面接の設定を変更しました",
+      "link_turned_on": "共有リンクをオンにしました",
+      "link_turned_off": "共有リンクをオフにしました",
+      "questions_regenerated": "質問を再生成しました",
+      "answer_key_reported": "正解の誤りを報告しました",
+      "topics_approved": "面接のトピックを承認しました",
+      "pass_mark_changed": "合格ラインを変更しました",
+      "candidate_invited": "候補者を招待しました",
+      "invite_resent": "招待を再送しました",
+      "invite_revoked": "招待を取り消しました",
+      "candidate_deleted": "候補者を削除しました",
+      "candidate_renamed": "候補者の名前を変更しました",
+      "extra_time_set": "候補者に追加時間を付与しました",
+      "results_viewed": "候補者の結果を閲覧しました",
+      "report_emailed": "レポートをメールで送信しました",
+      "member_invited": "メンバーを招待しました",
+      "member_joined": "会社に参加しました",
+      "member_removed": "メンバーを削除しました",
+      "member_role_changed": "メンバーの役割を変更しました",
+      "ownership_transferred": "会社をほかの所有者に引き継ぎました",
+      "company_renamed": "会社名を変更しました",
+      "logo_changed": "ロゴを変更しました",
+      "brand_changed": "ブランドの色またはスタイルを変更しました",
+      "verification_requested": "会社の認証を申請しました",
+      "ai_apps_changed": "AI アプリを許可または停止しました",
+      "top_up_paid": "クレジットをチャージしました",
+      "auto_top_up_set": "自動チャージを設定しました",
+      "auto_top_up_changed": "自動チャージを変更しました",
+      "auto_top_up_stopped": "自動チャージを停止しました",
+      "ats_connected": "ATS を接続しました",
+      "ats_reconnected": "ATS を再接続しました",
+      "ats_disconnected": "ATS の接続を解除しました",
+      "job_linked": "ATS の求人を紐付けました",
+      "job_unlinked": "ATS の求人の紐付けを解除しました",
+      "slack_connected": "Slack を接続しました",
+      "slack_disconnected": "Slack の接続を解除しました",
+      "slack_notifications_changed": "Slack の通知を変更しました",
+      "api_key_created": "API キーを作成しました",
+      "api_key_deleted": "API キーを削除しました",
+      "api_key_narrowed": "API キーの権限を絞りました",
+      "webhook_added": "Webhook を追加しました",
+      "webhook_tested": "Webhook をテストしました",
+      "webhook_deleted": "Webhook を削除しました"
+    },
+    "removed": "削除した権限: {permissions}",
+    "permissions": {
+      "interviews:read": "面接の閲覧",
+      "interviews:create": "面接の作成",
+      "candidates:read": "候補者の閲覧",
+      "candidates:invite": "候補者の招待",
+      "candidates:change": "候補者の変更",
+      "candidates:delete": "候補者の削除",
+      "credits:read": "クレジットの閲覧",
+      "mcp": "AI エージェントで使用 (MCP)"
+    },
+    "via": {
+      "assistant": "アシスタント経由",
+      "mcp": "AI アプリ経由",
+      "api": "API 経由",
+      "ats": "ATS 経由"
+    }
   }
 }

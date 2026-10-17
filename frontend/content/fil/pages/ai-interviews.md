@@ -37,7 +37,7 @@ Gumagamit ang prepza ng AI para sumulat ng skills interview mula sa iyong job de
 
 1. **Binabasa ng AI ang iyong job description** at kinukuha ang dapat malaman ng aplikante: ang mga requirement, ang level at isang set ng mga topic na may mga subtopic.
 2. **Nire-review mo ang mga topic.** Panatilihin, i-uncheck, palitan ang pangalan o i-edit ang mga ito, o sabihin sa AI sa simpleng text kung ano ang babaguhin. Walang tanong na isinusulat hangga't hindi mo inaaprubahan.
-3. **Isinusulat ng AI ang mga tanong.** Bawat topic ay may bank ng multiple-choice questions, bawat isa may isang tamang opsyon at tatlong kapani-paniwalang maling opsyon. Para sa mga technical topic, maraming tanong ang nagpapakita ng maikling code example at nagtatanong kung ano ang output nito, ano ang ginagawa nito, bakit ito pumapalya o aling pagbabago ang aayos dito. Mabubuksan mo ang bawat tanong at ang mga opsyon nito, at puwede mong i-generate ulit ang alinmang hindi mo gusto.
+3. **Isinusulat ng AI ang mga tanong.** Bawat topic ay may bank ng multiple-choice questions na may tig-apat na opsyon: karamihan ay may isang tamang opsyon at tatlong kapani-paniwalang maling opsyon, at mga 1 sa bawat 10 ay "piliin ang lahat ng tama", na may 2 o 3 tamang opsyon. Para sa mga technical topic, maraming tanong ang nagpapakita ng maikling code example at nagtatanong kung ano ang output nito, ano ang ginagawa nito, bakit ito pumapalya o aling pagbabago ang aayos dito. Mabubuksan mo ang bawat tanong at ang mga opsyon nito, at puwede mong i-generate ulit ang alinmang hindi mo gusto.
 4. **Sumasagot ang mga aplikante sa mga timed na tanong.** Bawat aplikante ay may sariling random na set mula sa bank ng bawat topic, sa sarili nitong pagkakasunod-sunod, na may countdown sa bawat tanong.
 5. **Mina-mark ang mga sagot ayon sa answer key.** AI ang sumusulat ng mga key; chine-check ang ilan sa bawat topic bago i-release, at ang iba kapag na-flag ang tanong. Sumusunod ang pagmamarka mismo sa nakapirming patakaran, at walang AI na bumabasa o humuhusga sa sagot ng aplikante. Kung maitama ang isang key sa ibang pagkakataon, para lang sa mga aplikanteng magsisimula pagkatapos nito ang pagtatama; hindi nagbabago ang mga naunang resulta. Ipinapakita sa iyo bilang signal ang bilis, pag-alis sa pahina at pagtatangkang mag-copy; hindi nila binabago ang score.
 6. **Tao ang nagdedesisyon.** Makikita mo ang naka-rank na listahan at scorecard bawat aplikante, kasama ang bawat sagot at oras nito. Isang tao sa iyong kumpanya ang nagre-review ng resulta at gumagawa ng hiring decision.
@@ -57,7 +57,7 @@ Puwede mo ring i-preview ang sarili mong interview bilang aplikante bago ka mag-
 
 ## Bakit mas madaling ipaliwanag at i-review ang paraang ito
 
-**Matutunton ang bawat resulta.** Ang score ay ang bahagdan ng mga tanong na nasagot nang tama. Para sa kahit sinong aplikante, maipapakita mo ang eksaktong mga tanong na nakita nila, ang pinili nila, ang tamang sagot at kung gaano katagal sila.
+**Matutunton ang bawat resulta.** Ang score ay ang bahagdan ng puntos na nakuha: bawat tanong ay isang puntos, at ang tanong na "piliin ang lahat ng tama" ay nagbibigay ng bahagi nito sa bawat tamang opsyong na-check, at wala kung may na-check na mali. Para sa kahit sinong aplikante, maipapakita mo ang eksaktong mga tanong na nakita nila, ang pinili nila, ang tamang sagot at kung gaano katagal sila.
 
 **Nare-review ang nilalaman.** Inaaprubahan mo ang mga topic bago may maisulat, at bukas sa iyo ang mga tanong. Kung hindi tunay na job requirement ang isang topic, puwede mo itong alisin.
 

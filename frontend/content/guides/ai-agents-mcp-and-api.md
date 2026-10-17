@@ -2,7 +2,7 @@
 title: "AI agents, MCP and APIs: what they are and how to use them in hiring"
 seoTitle: "AI Agents, MCP and APIs in Hiring: What They Are and How to Use Them"
 description: "What an AI agent is, what MCP and an API do, how to use them safely in hiring, and how to run prepza from its agent, from Claude and ChatGPT, or from your own platform."
-updated: "2026-10-15"
+updated: "2026-10-17"
 ---
 
 # AI agents, MCP and APIs: what they are and how to use them in hiring
@@ -84,6 +84,7 @@ Before connecting any AI app to work data, check your company's policy on AI too
 Select **ask agent** in the header of any page. The agent knows your companies, interviews, candidates, credits and integrations, and how prepza works. It answers in your language, and you can type or speak.
 
 - **It answers from your data**, with the same view you have: an admin sees what an admin sees, a viewer what a viewer sees.
+- **It knows the page you're on.** Ask "What can I do on this page?" for that page's guide, or "Who's best here?" on an interview's candidates, and it answers about that interview without asking which.
 - **It prepares changes, you confirm them.** Asked to invite candidates, it shows a card with exactly what will happen, such as "Invite 12 candidates to Backend developer". Nothing runs until you select confirm.
 - **It shows its sources.** Under an answer you get the candidates or interviews it used and a link to the page they came from.
 - **It stays on topic.** It answers about prepza and hiring with it, and declines the rest.
@@ -104,17 +105,19 @@ From then on, ask in your chat as you would ask a colleague: "In prepza, who are
 
 - **Your permissions.** It acts as you, in every company you're in, with your role in each.
 - **Credits and limits.** Inviting a candidate costs the same as in the app, and the same email limits apply.
-- **The record.** The decisions the audit log keeps (approving topics, viewing results, changing the pass mark, giving extra time, revoking a candidate, emailing a report) are marked as made through an AI app. The company's owner can read the log through the API.
+- **The record.** Everything an AI app does for you shows in the company's action log as done through an AI app, from approving topics and viewing results to giving extra time or revoking a candidate. The company's owner reads it on the company's **Action log** tab.
 - **The company decides.** Owners and admins can stop AI apps from using a company's data with **Allow AI apps in this company** on its AI apps page.
 - **What it can't do.** It can't see your password or API keys, and it can't delete your account or a company. Those stay in the app.
 
 **To disconnect,** remove the connector in your AI app, or select **Disconnect** next to it under **AI apps** on the Integrations tab. It stops working at once.
 
+**Other apps and your own agents.** The developer docs' [MCP tab](/api-docs?tab=mcp) has the steps for Gemini CLI, Cursor, VS Code and Le Chat, and complete example agents in Python and TypeScript. An agent that runs on a server, with no one there to approve a sign-in, uses a company API key with the **Use with AI agents (MCP)** permission: it works only in that company, and only with the tools the key's other permissions allow.
+
 ### 3. Your own platform, through the API
 
 For automation without AI, prepza has an API, described in its [developer docs](/api-docs).
 
-1. An owner or admin opens a company's **Integrations** tab, then **API**, and selects **New key**. Name it after the platform that will use it and choose when it expires. The key is shown once; store it somewhere safe.
+1. An owner or admin opens a company's **Integrations** tab, then **API**, and selects **New key**. Name it after the platform that will use it, choose when it expires, and tick only what it needs: a dashboard's key only reads, a careers site's key also invites. You can take permissions away later, never add them. The key is shown once; store it somewhere safe.
 2. Your platform sends requests with that key: list the company's interviews, list or read candidates with their grade, whether they passed and their integrity signals, and invite a candidate.
 3. Add a **web hook**: an address on your platform that prepza calls, signed, when a candidate starts, finishes, isn't reached, expires or is removed, and when an interview is ready, so you don't have to keep asking. The API page can send it a test event and shows its delivery log.
 

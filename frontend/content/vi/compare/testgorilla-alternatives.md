@@ -7,7 +7,7 @@ updated: "2026-10-07"
 
 # Các lựa chọn thay thế TestGorilla: mỗi công cụ phù hợp ở đâu và cách dùng kết hợp
 
-TestGorilla là nền tảng kiểm tra kỹ năng với thư viện bài kiểm tra lớn và một gói miễn phí ([trang bảng giá TestGorilla](https://www.testgorilla.com/pricing/)). Các nhóm tìm đến công cụ khác vì vài lý do phổ biến: cam kết theo năm không hợp với nhu cầu tuyển dụng không thường xuyên, họ muốn bài test lập trình thực hành, hoặc họ muốn bài kiểm tra được viết cho đúng vị trí của mình.
+TestGorilla là nền tảng kiểm tra kỹ năng với thư viện bài kiểm tra lớn và một gói miễn phí ([trang bảng giá TestGorilla](https://www.testgorilla.com/pricing/)). Các nhóm tìm đến công cụ khác vì vài lý do phổ biến: cam kết theo năm không hợp với nhu cầu tuyển dụng không thường xuyên, họ muốn bài kiểm tra lập trình thực hành, hoặc họ muốn bài kiểm tra được viết cho đúng vị trí của mình.
 
 Phần lớn các công cụ này không thay thế trực tiếp cho nhau. Chúng kiểm tra những thứ khác nhau, và nhiều quy trình tuyển dụng dùng hai công cụ cùng lúc. Riêng prepza chủ yếu mang tính bổ sung: prepza thêm một bài kiểm tra kiến thức nhanh, được viết từ mô tả công việc của bạn, trước bất kỳ công cụ nào khác bạn đang dùng. Trang này giải thích mỗi công cụ phù hợp ở đâu và cách kết hợp chúng. Các thông tin dẫn liên kết đến trang của chính từng nhà cung cấp tính đến tháng 10/2026; hãy kiểm tra chúng trước khi mua.
 
@@ -29,7 +29,7 @@ Sau đó đối chiếu mô hình giá với số lượng tuyển dụng của 
 | **TestGorilla** | Thư viện rộng: nhận thức, tính cách, ngoại ngữ, lập trình, kỹ năng theo vị trí | Gói miễn phí và gói trả phí thanh toán theo năm ([trang bảng giá](https://www.testgorilla.com/pricing/)) |
 | **prepza** | Phỏng vấn kỹ năng trắc nghiệm có tính giờ, viết từ mô tả công việc của bạn | Theo mỗi ứng viên có trả lời, không có gói đăng ký ([bảng giá](/pricing)) |
 | **CodeSignal** | Đánh giá kỹ thuật và người phỏng vấn AI; vị trí go-to-market ở gói cao hơn | Gói theo tháng hoặc theo năm kèm credit ([trang bảng giá](https://codesignal.com/pricing/)) |
-| **HackerRank** | Bài test lập trình và phỏng vấn kỹ thuật | Xem [trang bảng giá](https://www.hackerrank.com/pricing/) |
+| **HackerRank** | Bài kiểm tra lập trình và phỏng vấn kỹ thuật | Xem [trang bảng giá](https://www.hackerrank.com/pricing/) |
 | **Alooba** | Sàng lọc vị trí kỹ thuật và dữ liệu | Gói theo tháng hoặc theo năm kèm credit ([trang bảng giá](https://www.alooba.com/pricing/)) |
 | **Bryq** | Đánh giá nhận thức, tính cách và kỹ năng | Gói theo tháng hoặc theo năm ([trang bảng giá](https://www.bryq.com/pricing)) |
 | **Codility** | Đánh giá lập trình | Gói theo năm kèm credit lời mời ([trang bảng giá](https://www.codility.com/pricing/)) |

@@ -2,7 +2,7 @@
 title: "Agenci AI, MCP i API: czym są i jak wykorzystać je w rekrutacji"
 seoTitle: "Agenci AI, MCP i API w rekrutacji: czym są i jak z nich korzystać"
 description: "Czym jest agent AI, do czego służą MCP i API, jak bezpiecznie korzystać z nich w rekrutacji i jak obsługiwać prepza przez jej agenta, z Claude i ChatGPT albo z własnej platformy."
-updated: "2026-10-15"
+updated: "2026-10-17"
 ---
 
 # Agenci AI, MCP i API: czym są i jak wykorzystać je w rekrutacji
@@ -84,6 +84,7 @@ Zanim połączysz jakąkolwiek aplikację AI z danymi służbowymi, sprawdź pol
 Wybierz **zapytaj agenta** w nagłówku dowolnej strony. Agent zna Twoje firmy, rozmowy, kandydatów, kredyty i integracje oraz wie, jak działa prepza. Odpowiada w Twoim języku, a Ty możesz pisać albo mówić.
 
 - **Odpowiada na podstawie Twoich danych,** z takim samym widokiem jak Twój: administrator widzi to, co administrator, a obserwator to, co obserwator.
+- **Wie, na jakiej stronie jesteś.** Zapytaj „Co mogę zrobić na tej stronie?”, aby dostać przewodnik po tej stronie, albo „Kto jest tu najlepszy?” przy kandydatach z rozmowy, a odpowie o tej rozmowie, nie pytając, o którą chodzi.
 - **Przygotowuje zmiany, a Ty je potwierdzasz.** Poproszony o zaproszenie kandydatów pokazuje kartę z dokładnym opisem tego, co się stanie, na przykład „Zaproś 12 kandydatów na Backend developer”. Nic się nie wykona, dopóki nie wybierzesz Potwierdź.
 - **Pokazuje źródła.** Pod odpowiedzią widzisz kandydatów lub rozmowy, z których skorzystał, i link do strony, z której pochodzą.
 - **Trzyma się tematu.** Odpowiada na pytania o prepza i rekrutację z jej pomocą, a resztę odrzuca.
@@ -104,17 +105,19 @@ Od tej chwili pytaj w czacie tak, jak pytasz współpracownika: „Kto w prepza 
 
 - **Twoje uprawnienia.** Działa jako Ty, w każdej firmie, do której należysz, z Twoją rolą w każdej z nich.
 - **Kredyty i limity.** Zaproszenie kandydata kosztuje tyle samo co w aplikacji i obowiązują te same limity e-maili.
-- **Ślad.** Decyzje zapisywane w dzienniku audytu (zatwierdzanie tematów, przeglądanie wyników, zmiana progu zaliczenia, przyznanie dodatkowego czasu, wycofanie kandydata, wysłanie raportu e-mailem) są oznaczane jako podjęte przez aplikację AI. Właściciel firmy może czytać dziennik przez API.
+- **Ślad.** Wszystko, co aplikacja AI robi za Ciebie, pojawia się w dzienniku działań firmy jako zrobione przez aplikację AI, od zatwierdzania tematów i przeglądania wyników po przyznanie dodatkowego czasu czy wycofanie kandydata. Właściciel firmy czyta go na karcie **Dziennik działań** firmy.
 - **Decyduje firma.** Właściciele i administratorzy mogą zabronić aplikacjom AI korzystania z danych firmy opcją **Zezwól na aplikacje AI w tej firmie** na stronie aplikacji AI firmy.
 - **Czego nie może.** Nie widzi Twojego hasła ani kluczy API i nie może usunąć Twojego konta ani firmy. To pozostaje w aplikacji.
 
 **Aby odłączyć,** usuń konektor w swojej aplikacji AI albo wybierz **Odłącz** obok niego w sekcji **Aplikacje AI** w zakładce Integracje. Przestaje działać od razu.
 
+**Inne aplikacje i Twoi własni agenci.** [Zakładka MCP](/api-docs?tab=mcp) w dokumentacji dla deweloperów zawiera kroki dla Gemini CLI, Cursor, VS Code i Le Chat oraz kompletne przykłady agentów w językach Python i TypeScript. Agent działający na serwerze, gdzie nie ma nikogo, kto zatwierdziłby logowanie, używa klucza API firmy z uprawnieniem **Używanie z agentami AI (MCP)**: działa tylko w tej firmie i tylko z narzędziami, na które pozwalają pozostałe uprawnienia klucza.
+
 ### 3. Twoja własna platforma, przez API
 
 Do automatyzacji bez AI prepza ma API, opisane w [dokumentacji dla deweloperów](/api-docs).
 
-1. Właściciel lub administrator otwiera zakładkę **Integracje** firmy, potem **API**, i wybiera **Nowy klucz**. Nazwij go tak jak platformę, która będzie z niego korzystać, i wybierz, kiedy wygaśnie. Klucz jest wyświetlany tylko raz; przechowuj go w bezpiecznym miejscu.
+1. Właściciel lub administrator otwiera zakładkę **Integracje** firmy, potem **API**, i wybiera **Nowy klucz**. Nazwij go tak jak platformę, która będzie z niego korzystać, wybierz, kiedy wygaśnie, i zaznacz tylko to, czego potrzebuje: klucz pulpitu tylko odczytuje, a klucz strony kariery także zaprasza. Uprawnienia możesz później odebrać, ale nigdy dodać. Klucz jest wyświetlany tylko raz; przechowuj go w bezpiecznym miejscu.
 2. Twoja platforma wysyła żądania z tym kluczem: pobiera listę rozmów firmy, pobiera listę kandydatów lub dane pojedynczego kandydata z wynikiem, informacją, czy zaliczył, i sygnałami nieuczciwości, oraz zaprasza kandydata.
 3. Dodaj **webhook**: adres na Twojej platformie, który prepza wywołuje z podpisem, gdy kandydat zaczyna lub kończy, gdy zaproszenie do niego nie dotrze lub wygaśnie, gdy kandydat zostanie usunięty i gdy rozmowa jest gotowa, więc nie musisz ciągle dopytywać. Na stronie API możesz wysłać do niego zdarzenie testowe i zobaczyć jego dziennik dostarczeń.
 

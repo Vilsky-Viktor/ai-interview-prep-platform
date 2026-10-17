@@ -1,6 +1,6 @@
 # Using prepza responsibly: instructions for companies
 
-Version of 2026-10-16. Arcolabs OÜ (registry code 17587452), Sepapaja tn 6, 15551 Tallinn, Estonia; hello@prepza.ai.
+Version of 2026-10-17. Arcolabs OÜ (registry code 17587452), Sepapaja tn 6, 15551 Tallinn, Estonia; hello@prepza.ai.
 
 For owners and admins of a company on prepza. These are prepza's instructions for use under the
 EU AI Act (Art. 13). Your own duties as an employer, under the employment and data protection law
@@ -11,8 +11,9 @@ that applies to you, stay yours.
 - **Provider:** Arcolabs OÜ, above. **You** (the company that tests candidates) are the deployer.
 - **Intended purpose:** testing job candidates' knowledge for one role with a timed
   multiple-choice interview, to help the people at your company decide whom to take further. AI
-  writes the questions from your job description; you review the topics; each candidate's answers
-  are marked against a fixed answer key.
+  writes the questions from your job description (up to half of a topic may be proven questions
+  from prepza's own templates, never ones shown publicly for practice); you review the topics; each
+  candidate's answers are marked against a fixed answer key.
 - **High-risk AI system.** Under the EU AI Act, a system used to evaluate candidates is high-risk
   (Annex III point 4(a)), and prepza is treated as one. Its obligations apply from 2027-12-02;
   before then prepza signs its EU declaration of conformity and is registered in the EU database,
@@ -21,31 +22,44 @@ that applies to you, stay yours.
 
 ## 2. What a prepza grade is
 
-- The **percentage of questions answered correctly**, over every question the candidate was shown.
-  A question with nothing picked when its timer ran out counts as wrong. Candidates can change
-  their pick until they move on; only the final one is kept.
-- Each answer is marked right or wrong against the question's **answer key**. No AI marks answers,
+- The **percentage of points earned**, over every question the candidate was shown. Each question
+  is worth one point:
+  - most questions have one right option of four: 1 point when it's picked, 0 otherwise;
+  - about 1 in 10 are **"select all that apply"** (shown as such to the candidate): 2 or 3 of the
+    4 options are right and the candidate ticks every option they think is right. Any wrong option
+    ticked scores 0; otherwise the question earns the share of its right options ticked (2 of 3:
+    0.67 of a point). Each candidate gets the same share of these questions.
+
+  With single-answer questions alone, the grade is the percentage answered correctly. A question
+  with nothing picked when its timer ran out counts as wrong. Candidates can change their pick
+  until they move on; only the final one is kept.
+- Each answer is marked against the question's **answer key**. No AI marks answers,
   and nothing else (speed, page leaves, copy attempts) changes the grade. If a question's key is
   found to be wrong and corrected, the fix applies to candidates who start after it; answers
   already given, and their grades, don't change.
 - **Green or red** only compares the grade with the passing grade you set. **The ranking** sorts by
   grade, best first.
-- **Explaining a grade:** the candidate's scorecard shows every question, the option picked, right
-  or wrong, the time taken, and the integrity signals. That is everything the grade comes from.
+- **Explaining a grade:** the candidate's scorecard shows every question, the options picked, right
+  or wrong, the points of a "select all that apply" question ("2 of 3 right options · 0.67 of 1
+  point"), the time taken, and the integrity signals. That is everything the grade comes from.
 
 ## 3. Accuracy and its limits
 
-- **Declared accuracy:** a correct answer key for **at least 98% of questions**. Measured at 99%
-  in prepza's offline evaluation of 2026-10-04 (240 questions in 8 fields, checked by an AI
-  judge), with 98% of questions having exactly one defensible answer; the key checker caught 60 of
-  60 wrong keys planted on purpose. A change of model or prompt that misses the target isn't
-  released without a reason.
-- **What that means for a grade:** the grade counts right answers against the key. A key found
-  wrong is fixed for candidates who start afterwards; grades already given are never marked again,
+- **Declared accuracy:** a correct answer key for **at least 98% of questions**, single-answer and
+  "select all that apply" alike (for the latter, every option correctly marked right or wrong).
+  Measured in prepza's offline evaluations, checked by an AI judge: 99% for single-answer
+  questions (240 questions in 8 fields, 2026-10-04; 98% had exactly one defensible answer) and
+  98.5% for "select all that apply" questions (268 of them on 48 subtopics, 2026-10-17). The key
+  checker caught 60 of 60 single-answer and 263 of 263 "select all that apply" wrong keys planted
+  on purpose. Every new "select all that apply" question is also answered again blind, and dropped
+  if that answer differs from its key or it leaves a deciding condition unstated. A change of
+  model or prompt that misses the target isn't released without a reason.
+- **What that means for a grade:** the grade counts points against the key. A key found wrong is fixed for candidates who start afterwards; grades already given are never marked again,
   so a candidate may have answered a question whose key was later corrected (section 5).
 - **In use:** before an interview is ready, one answer key per topic is checked again. After 30
   answers, a question is flagged and fixed or replaced when it is answered right by 15% or fewer, by
-  95% or more, when a wrong option is picked more often than the key, when strong and weak
+  95% or more (for a "select all that apply" question, by its average points), when a wrong
+  option is picked more often than the key (than its least-picked right option), when strong and weak
   candidates get it right about equally often, or when time runs out on a quarter of its showings;
   also after 2 reports of the same problem.
 - **What a grade is not:** a measure of overall ability, experience, potential, personality or
@@ -166,13 +180,16 @@ is yours to give.
 
 ## 10. Records, retention and data requests
 
-**Records (logs).** For each candidate prepza records every question shown and when, the pick,
-right or wrong, the time taken, timeouts, page leaves and copy attempts, start and finish: the
-scorecard and its PDF report show them, and the API returns the results. An audit log records
-your members' decisions (topics approved, results viewed, reports emailed, candidates revoked or
-deleted, extra time, passing grades, ownership handed on, AI apps allowed or stopped), with whether
-they acted in the app, through the assistant or through an AI app; the owner reads it through the
-API (`GET /companies/{id}/audit`). Keep what your law requires: the EU AI Act asks you to keep
+**Records (logs).** For each candidate prepza records every question shown and when, the picks,
+right or wrong (or the points of a "select all that apply" question), the time taken, timeouts, page leaves and copy attempts, start and finish: the
+scorecard and its PDF report show them, and the API returns the results. Your company's action
+log records every action your members take: on interviews (created, renamed, settings, shareable
+link, topics approved, passing grade), on candidates (invited, revoked, deleted, renamed, extra
+time, results viewed, reports emailed), on the team, the company, billing and integrations (ATS,
+Slack, API keys and web hooks), with who acted, when, and whether they acted in the app, through
+the assistant, an AI app, the API or an ATS. The owner reads it on the company's **Action log**
+tab, filtered by member, kind of action and days, or through the API
+(`GET /companies/{id}/audit`). Keep what your law requires: the EU AI Act asks you to keep
 these records at least six months, and prepza keeps them for you as below. Download PDF reports to
 keep them longer.
 
@@ -182,7 +199,7 @@ keep them longer.
   was last sent.
 - Invites never started expire after 30 days.
 - Candidates your applicant tracking system sends (their email and ATS ids) are kept 12 months.
-- The audit log is kept 24 months.
+- The action log is kept 12 months.
 - Job description text is kept 90 days in generation records; the interview stays until you delete
   it.
 - A candidate's request to stop your company's emails is kept, as a one-way hash of their email
@@ -195,8 +212,8 @@ keep them longer.
 under the data processing agreement at prepza.ai/dpa, which is part of the terms.
 
 - **Access:** open the candidate's **scorecard page** and download their **PDF report**. Together
-  they hold everything prepza keeps about the interview: each question, their answer, right or wrong,
-  time taken, page leaves and copy attempts, and the grade. Send the PDF, with your own explanation of
+  they hold everything prepza keeps about the interview: each question, their answer (every option ticked), right or
+  wrong or the points it earned, time taken, page leaves and copy attempts, and the grade. Send the PDF, with your own explanation of
   how it was used.
 - **Erasure or objection:** on the candidate's page, revoke an unused invite, or use **Delete
   candidate** for one who started or finished: their answers and results are deleted for good, also

@@ -2,7 +2,7 @@
 title: "AI agents, MCP at APIs: ano ang mga ito at paano gamitin sa hiring"
 seoTitle: "AI Agents, MCP at APIs sa Hiring: Ano ang Mga Ito at Paano Gamitin"
 description: "Ano ang AI agent, ano ang ginagawa ng MCP at ng API, paano gamitin nang ligtas ang mga ito sa hiring, at paano patakbuhin ang prepza mula sa agent nito, mula sa Claude at ChatGPT, o mula sa sarili mong platform."
-updated: "2026-10-15"
+updated: "2026-10-17"
 ---
 
 # AI agents, MCP at APIs: ano ang mga ito at paano gamitin sa hiring
@@ -84,6 +84,7 @@ Bago ikonekta ang kahit anong AI app sa data ng trabaho, i-check ang patakaran n
 Piliin ang **magtanong sa agent** sa header ng kahit anong page. Alam ng agent ang mga kumpanya, interview, aplikante, credits at integration mo, at kung paano gumagana ang prepza. Sumasagot ito sa wika mo, at puwede kang mag-type o magsalita.
 
 - **Sumasagot ito mula sa data mo**, na may parehong access na mayroon ka: nakikita ng admin ang nakikita ng admin, ng viewer ang nakikita ng viewer.
+- **Alam nito ang page na kinaroroonan mo.** Itanong ang "Ano ang magagawa ko sa page na ito?" para sa gabay ng page na iyon, o "Sino ang pinakamahusay dito?" sa mga aplikante ng isang interview, at sasagot ito tungkol sa interview na iyon nang hindi nagtatanong kung alin.
 - **Inihahanda nito ang mga pagbabago, ikaw ang nagkukumpirma.** Kapag hiniling na mag-imbita ng mga aplikante, nagpapakita ito ng card na may eksaktong mangyayari, gaya ng "Imbitahan ang 12 aplikante sa Backend developer". Walang tatakbo hangga't hindi mo pinipili ang kumpirmahin.
 - **Ipinapakita nito ang mga source nito.** Sa ilalim ng sagot, makikita mo ang mga aplikante o interview na ginamit nito at link sa page na pinanggalingan ng mga ito.
 - **Nananatili ito sa paksa.** Sumasagot ito tungkol sa prepza at sa pagha-hire gamit ito, at tumatanggi sa iba pa.
@@ -104,17 +105,19 @@ Mula noon, magtanong sa chat mo gaya ng pagtatanong mo sa isang katrabaho: "Sa p
 
 - **Ang mga permission mo.** Kumikilos ito bilang ikaw, sa bawat kumpanyang kinabibilangan mo, gamit ang role mo sa bawat isa.
 - **Credits at mga limitasyon.** Pareho ang gastos ng pag-imbita ng aplikante gaya ng sa app, at pareho ang mga email limit na nalalapat.
-- **Ang tala.** Ang mga desisyong itinatala ng audit log (pag-apruba ng mga topic, pagtingin ng resulta, pagbago ng passing grade, pagbibigay ng dagdag na oras, pagbawi sa isang aplikante, pag-email ng report) ay minamarkahang ginawa sa pamamagitan ng AI app. Mababasa ng may-ari ng kumpanya ang log sa pamamagitan ng API.
+- **Ang tala.** Lahat ng ginagawa ng isang AI app para sa iyo ay lumalabas sa log ng aksyon ng kumpanya bilang ginawa sa pamamagitan ng AI app, mula sa pag-apruba ng mga topic at pagtingin ng resulta hanggang sa pagbibigay ng dagdag na oras o pagbawi sa isang aplikante. Binabasa ito ng may-ari ng kumpanya sa tab na **Log ng aksyon** ng kumpanya.
 - **Ang kumpanya ang magpapasya.** Mapipigilan ng mga may-ari at admin ang mga AI app sa paggamit ng data ng kumpanya gamit ang **Payagan ang mga AI app sa kumpanyang ito** sa page ng mga AI app nito.
 - **Ang hindi nito kayang gawin.** Hindi nito nakikita ang password o mga API key mo, at hindi nito kayang burahin ang account mo o ang isang kumpanya. Nananatili ang mga iyon sa app.
 
 **Para mag-disconnect,** alisin ang connector sa AI app mo, o piliin ang **I-disconnect** sa tabi nito sa ilalim ng **Mga AI app** sa tab na Mga integration. Agad itong titigil sa paggana.
 
+**Ibang app at sarili mong mga agent.** Nasa [tab na MCP](/api-docs?tab=mcp) ng dokumentasyon para sa mga developer ang mga hakbang para sa Gemini CLI, Cursor, VS Code at Le Chat, at kumpletong mga halimbawang agent sa Python at TypeScript. Ang agent na tumatakbo sa server, na walang taong mag-a-approve ng sign-in, ay gumagamit ng API key ng kumpanya na may pahintulot na **Gamitin sa mga AI agent (MCP)**: gumagana lang ito sa kumpanyang iyon, at sa mga tool lang na pinapayagan ng iba pang pahintulot ng key.
+
 ### 3. Ang sarili mong platform, gamit ang API
 
 Para sa automation na walang AI, may API ang prepza, na inilalarawan sa [dokumentasyon nito para sa mga developer](/api-docs).
 
-1. Bubuksan ng isang may-ari o admin ang tab na **Mga integration** ng isang kumpanya, pagkatapos ang **API**, at pipiliin ang **Bagong key**. Pangalanan ito ayon sa platform na gagamit nito at piliin kung kailan ito mag-e-expire. Isang beses lang ipinapakita ang key; itago ito sa ligtas na lugar.
+1. Bubuksan ng isang may-ari o admin ang tab na **Mga integration** ng isang kumpanya, pagkatapos ang **API**, at pipiliin ang **Bagong key**. Pangalanan ito ayon sa platform na gagamit nito, piliin kung kailan ito mag-e-expire, at i-check lang ang kailangan nito: nagbabasa lang ang key ng isang dashboard, at nag-iimbita rin ang key ng isang careers site. Puwede kang mag-alis ng mga pahintulot sa ibang pagkakataon, pero hindi kailanman magdagdag. Isang beses lang ipinapakita ang key; itago ito sa ligtas na lugar.
 2. Nagpapadala ang platform mo ng mga request gamit ang key na iyon: ilista ang mga interview ng kumpanya, ilista o basahin ang mga aplikante kasama ang grade nila, kung pumasa sila at ang mga integrity flag nila, at mag-imbita ng aplikante.
 3. Magdagdag ng **webhook**: isang address sa platform mo na tinatawagan ng prepza, na may signature, kapag nagsimula, natapos, hindi naabot ng imbitasyon, nag-expire ang imbitasyon, o tinanggal ang isang aplikante, at kapag handa na ang isang interview, para hindi mo na kailangang paulit-ulit na magtanong. Sa API page, puwede mo itong padalhan ng test event at makikita mo ang delivery log nito.
 

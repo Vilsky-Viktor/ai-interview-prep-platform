@@ -37,7 +37,7 @@ prepza nutzt KI, um aus deiner Stellenbeschreibung ein Interview zu Fachkenntnis
 
 1. **Die KI liest deine Stellenbeschreibung** und erkennt, was ein Kandidat wissen muss: die Anforderungen, das Niveau und eine Reihe von Themen mit Unterthemen.
 2. **Du prüfst die Themen.** Behalte sie, wähle sie ab, benenne sie um oder bearbeite sie, oder sag der KI in normalem Text, was sie ändern soll. Keine Frage wird geschrieben, bevor du zustimmst.
-3. **Die KI schreibt die Fragen.** Jedes Thema erhält einen Pool aus Multiple-Choice-Fragen mit jeweils einer richtigen und drei plausiblen falschen Optionen. Bei technischen Themen zeigen viele Fragen ein kurzes Codebeispiel und fragen, was es ausgibt, was es tut, warum es fehlschlägt oder welche Änderung es behebt. Du kannst jede Frage und ihre Optionen öffnen und jede neu generieren lassen, die dir nicht gefällt.
+3. **Die KI schreibt die Fragen.** Jedes Thema erhält einen Pool aus Multiple-Choice-Fragen mit je vier Optionen: Die meisten haben eine richtige und drei plausible falsche Optionen, etwa jede zehnte ist eine Mehrfachauswahl („alle zutreffenden auswählen“) mit 2 oder 3 richtigen Optionen. Bei technischen Themen zeigen viele Fragen ein kurzes Codebeispiel und fragen, was es ausgibt, was es tut, warum es fehlschlägt oder welche Änderung es behebt. Du kannst jede Frage und ihre Optionen öffnen und jede neu generieren lassen, die dir nicht gefällt.
 4. **Kandidaten beantworten Fragen unter Zeitvorgabe.** Jeder Kandidat erhält einen eigenen zufälligen Fragensatz aus dem Pool jedes Themas, in eigener Reihenfolge, mit einem Countdown bei jeder Frage.
 5. **Antworten werden anhand eines Lösungsschlüssels bewertet.** Die KI schreibt die Schlüssel. Eine Stichprobe der Schlüssel jedes Themas wird vor der Freigabe geprüft, die übrigen, sobald eine Frage markiert wird. Die Bewertung selbst folgt festen Regeln, und keine KI liest oder beurteilt die Antwort eines Kandidaten. Wird ein Schlüssel später korrigiert, gilt die Korrektur für Kandidaten, die danach beginnen; frühere Ergebnisse ändern sich nicht. Tempo, Verlassen der Seite und Kopierversuche werden dir als Hinweise angezeigt; sie ändern die Punktzahl nicht.
 6. **Menschen entscheiden.** Du siehst eine Rangliste und eine Auswertung pro Kandidat, mit jeder Antwort und ihrer Dauer. Eine Person in deinem Unternehmen prüft die Ergebnisse und trifft die Einstellungsentscheidung.
@@ -57,7 +57,7 @@ Du kannst dein eigenes Interview auch vorab als Kandidat ausprobieren, bevor du 
 
 ## Warum dieser Ansatz leichter zu erklären und zu prüfen ist
 
-**Jedes Ergebnis ist nachvollziehbar.** Eine Punktzahl ist der Anteil richtig beantworteter Fragen. Für jeden Kandidaten kannst du genau zeigen, welche Fragen er gesehen hat, was er gewählt hat, was die richtige Antwort war und wie lange er gebraucht hat.
+**Jedes Ergebnis ist nachvollziehbar.** Eine Punktzahl ist der Anteil der erreichten Punkte: Jede Frage zählt einen Punkt, und eine Frage mit Mehrfachauswahl bringt einen Teil davon für jede angekreuzte richtige Option, aber nichts, wenn eine falsche angekreuzt ist. Für jeden Kandidaten kannst du genau zeigen, welche Fragen er gesehen hat, was er gewählt hat, was die richtige Antwort war und wie lange er gebraucht hat.
 
 **Die Inhalte sind überprüfbar.** Du gibst die Themen frei, bevor etwas geschrieben wird, und die Fragen sind für dich einsehbar. Ist ein Thema keine echte Anforderung der Stelle, kannst du es entfernen.
 

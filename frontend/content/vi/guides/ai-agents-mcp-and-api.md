@@ -2,7 +2,7 @@
 title: "Trợ lý AI, MCP và API: là gì và cách dùng trong tuyển dụng"
 seoTitle: "Trợ lý AI (AI agent), MCP và API trong tuyển dụng: là gì và cách dùng"
 description: "Trợ lý AI là gì, MCP và API làm gì, cách dùng chúng an toàn trong tuyển dụng, và cách vận hành prepza từ trợ lý AI của nó, từ Claude và ChatGPT, hoặc từ nền tảng riêng của bạn."
-updated: "2026-10-15"
+updated: "2026-10-17"
 ---
 
 # Trợ lý AI, MCP và API: là gì và cách dùng trong tuyển dụng
@@ -84,6 +84,7 @@ Trước khi kết nối bất kỳ ứng dụng AI nào với dữ liệu công
 Chọn **hỏi trợ lý AI** ở thanh đầu trang của bất kỳ trang nào. Trợ lý biết các công ty, buổi phỏng vấn, ứng viên, credit và tích hợp của bạn, cũng như cách prepza hoạt động. Nó trả lời bằng ngôn ngữ của bạn, và bạn có thể gõ hoặc nói.
 
 - **Nó trả lời từ dữ liệu của bạn**, với cùng phạm vi bạn thấy: quản trị viên thấy những gì quản trị viên thấy, người xem thấy những gì người xem thấy.
+- **Nó biết bạn đang ở trang nào.** Hỏi "Tôi có thể làm gì trên trang này?" để xem hướng dẫn của trang đó, hoặc "Ai là người giỏi nhất ở đây?" trong danh sách ứng viên của một buổi phỏng vấn, và nó trả lời về buổi phỏng vấn đó mà không hỏi lại là buổi nào.
 - **Nó chuẩn bị thay đổi, bạn xác nhận.** Khi được yêu cầu mời ứng viên, nó hiển thị một thẻ ghi đúng những gì sẽ xảy ra, chẳng hạn "Mời 12 ứng viên tham gia Backend developer". Không có gì chạy cho đến khi bạn chọn xác nhận.
 - **Nó cho thấy nguồn.** Bên dưới câu trả lời, bạn thấy các ứng viên hoặc buổi phỏng vấn nó đã dùng và đường dẫn đến trang gốc.
 - **Nó bám sát chủ đề.** Nó trả lời về prepza và việc tuyển dụng với prepza, và từ chối những câu hỏi khác.
@@ -104,17 +105,19 @@ Từ đó trở đi, hãy hỏi trong chat như khi hỏi một đồng nghiệp
 
 - **Quyền của bạn.** Nó hành động dưới danh nghĩa của bạn, ở mọi công ty bạn tham gia, với vai trò của bạn ở từng nơi.
 - **Credit và giới hạn.** Mời một ứng viên tốn đúng như trong ứng dụng, và áp dụng cùng các giới hạn email.
-- **Ghi nhận.** Các quyết định mà nhật ký kiểm tra lưu lại (duyệt chủ đề, xem kết quả, đổi điểm đạt, cho thêm thời gian, thu hồi ứng viên, gửi báo cáo qua email) được đánh dấu là thực hiện qua ứng dụng AI. Chủ sở hữu công ty có thể đọc nhật ký qua API.
+- **Ghi nhận.** Mọi việc một ứng dụng AI làm thay bạn đều hiện trong nhật ký thao tác của công ty là đã thực hiện qua ứng dụng AI, từ duyệt chủ đề và xem kết quả đến cho thêm thời gian hay thu hồi ứng viên. Chủ sở hữu công ty xem nhật ký này trong thẻ **Nhật ký thao tác** của công ty.
 - **Công ty quyết định.** Chủ sở hữu và quản trị viên có thể ngăn ứng dụng AI dùng dữ liệu của công ty bằng **Cho phép ứng dụng AI trong công ty này** trên trang ứng dụng AI của công ty.
 - **Những gì nó không làm được.** Nó không thấy mật khẩu hay khóa API của bạn, và không thể xóa tài khoản của bạn hoặc một công ty. Những việc đó vẫn nằm trong ứng dụng.
 
 **Để ngắt kết nối,** hãy gỡ connector trong ứng dụng AI của bạn, hoặc chọn **Ngắt kết nối** bên cạnh nó trong mục **Ứng dụng AI** ở tab Tích hợp. Kết nối dừng ngay lập tức.
 
+**Ứng dụng khác và agent của riêng bạn.** [Tab MCP](/api-docs?tab=mcp) trong tài liệu cho nhà phát triển có các bước cho Gemini CLI, Cursor, VS Code và Le Chat, cùng các agent mẫu hoàn chỉnh bằng Python và TypeScript. Agent chạy trên máy chủ, không có ai để duyệt đăng nhập, sẽ dùng khóa API của công ty có quyền **Dùng với agent AI (MCP)**: agent chỉ hoạt động trong công ty đó, và chỉ với những công cụ mà các quyền khác của khóa cho phép.
+
 ### 3. Nền tảng riêng của bạn, qua API
 
 Để tự động hóa không cần AI, prepza có API, được mô tả trong [tài liệu cho nhà phát triển](/api-docs).
 
-1. Chủ sở hữu hoặc quản trị viên mở tab **Tích hợp** của một công ty, rồi **API**, và chọn **Khóa mới**. Đặt tên theo nền tảng sẽ dùng nó và chọn thời điểm hết hạn. Khóa chỉ hiển thị một lần; hãy lưu ở nơi an toàn.
+1. Chủ sở hữu hoặc quản trị viên mở tab **Tích hợp** của một công ty, rồi **API**, và chọn **Khóa mới**. Đặt tên theo nền tảng sẽ dùng nó, chọn thời điểm hết hạn và chỉ đánh dấu những gì nó cần: khóa của bảng điều khiển chỉ đọc, khóa của trang tuyển dụng còn mời ứng viên. Sau này bạn có thể bớt quyền, nhưng không bao giờ thêm được. Khóa chỉ hiển thị một lần; hãy lưu ở nơi an toàn.
 2. Nền tảng của bạn gửi yêu cầu bằng khóa đó: liệt kê các buổi phỏng vấn của công ty, liệt kê hoặc xem ứng viên cùng điểm, kết quả đạt hay không và các cảnh báo về tính trung thực, và mời ứng viên.
 3. Thêm một **webhook**: một địa chỉ trên nền tảng của bạn mà prepza gọi tới, có chữ ký, khi một ứng viên bắt đầu, làm xong, không nhận được lời mời, hết hạn lời mời hoặc bị xóa khỏi buổi phỏng vấn, và khi một buổi phỏng vấn sẵn sàng, để bạn không phải hỏi đi hỏi lại. Trang API có thể gửi cho webhook này một sự kiện thử nghiệm và hiển thị nhật ký gửi của nó.
 

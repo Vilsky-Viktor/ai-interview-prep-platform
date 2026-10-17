@@ -1,6 +1,6 @@
 # Data protection impact assessment (DPIA): template for companies using prepza
 
-Version: 2026-10-29\
+Version: 2026-11-01\
 Operator: Arcolabs OÜ (registry code 17587452), Sepapaja tn 6, 15551 Tallinn, Harju maakond, Estonia; hello@prepza.ai
 
 For companies that invite candidates through prepza. Your company is the **controller** of
@@ -38,8 +38,9 @@ multiple-choice test, as one input to a hiring decision made by **[COMPANY: who]
    system (Workable, Greenhouse, Teamtailor, Recruitee or Breezy HR) or your own systems (through
    prepza's API) invite them too. Each invited candidate signs in (Google, LinkedIn or GitHub) with
    the invited email address, and gets a random subset of questions with a timer on each.
-4. prepza marks each answer right or wrong against the question's answer key and shows you a
-   percentage grade, green or red against the passing grade you set, ranked best first, with
+4. prepza marks each answer against the question's answer key (a question is worth one point; a
+   "select all that apply" question, about 1 in 10, earns part of it for each right option ticked
+   and nothing with a wrong one) and shows you a grade, the percentage of points earned, green or red against the passing grade you set, ranked best first, with
    integrity signals.
 5. You review results and decide. prepza sends candidates no decision. If you connect them, prepza
    also sends results to your applicant tracking system (as a note), your Slack channel (the
@@ -55,7 +56,7 @@ multiple-choice test, as one input to a hiring decision made by **[COMPANY: who]
 | Category | Details |
 |---|---|
 | Identity and contact | Invited email address; name (from you, your applicant tracking system or the sign-in) and account id from sign-in; the candidate's id in your applicant tracking system, if it sent them |
-| Assessment | Questions shown, answers, right/wrong, time per answer, timeouts, topic and overall grades, pass/fail against your passing grade, rank |
+| Assessment | Questions shown, answers (every option ticked), right/wrong or points, time per answer, timeouts, topic and overall grades, pass/fail against your passing grade, rank |
 | Accommodations | Extra time you give a candidate (the amount only, never a reason) |
 | Integrity signals | Times the candidate left the page, copy attempts, answers under 3 seconds, each with the question on screen |
 | Feedback | Candidate's ratings and reports of questions (reports may include a free-text comment) |
@@ -97,7 +98,7 @@ account receives what that member asks it to read, within their role, including 
 data, under the app provider's own terms. AI apps never see the in-app notifications, and can't
 delete an account or a company. Your owners and admins decide whether members may use your
 company's data from AI apps: **Allow AI apps** on your company's AI apps page (Integrations), on
-unless they turn it off, each change recorded in your audit log. **[COMPANY]** record your
+unless they turn it off, each change recorded in your action log. **[COMPANY]** record your
 decision, and the terms you require (for example, only your organisation's business plans of
 those apps).
 
@@ -109,7 +110,7 @@ safeguards on request. Transfers to tools you connect are yours to cover.
 **Retention.** Candidate results, timings and signals: deleted automatically 12 months after the
 invite was last sent. Unstarted invites expire after 30 days. Candidates your applicant tracking
 system sends: their email, name and id there, 12 months after they arrive. Job description text in
-generation records: 90 days. Your company's audit log: 24 months. Assistant conversations: 90 days after the last message, and at once when your
+generation records: 90 days. Your company's action log: 12 months. Assistant conversations: 90 days after the last message, and at once when your
 company is deleted. AI app connections: until the member disconnects one or deletes their
 account, and 90 days after its last use. Candidates' requests to stop your emails: until your
 company is deleted.
@@ -144,8 +145,8 @@ Likelihood and severity: **[COMPANY]** to rate. Starting points from prepza:
 | Discrimination (age, disability, language, origin) | Time pressure, language, content | Knowledge questions only; questions flagged when too slow or not discriminating; extra time | |
 | Over-reliance on the grade or signals | Ranked list, green/red | All answers visible; signals as counts; no automatic decisions | |
 | Wrongful cheating suspicion | Page-leave and fast-answer signals | Shown as hints with the question on screen | |
-| Over-reliance on the assistant's summaries or comparisons | AI-written answers about candidates | It answers only from the data its tools read, says the AI can be wrong, makes no decision, and asks before every action in the app; audit log marks results read through it | |
-| Candidates' data in an AI app outside your control | A member connecting Claude, ChatGPT or another app | Only the member's own access; your owners and admins can turn AI apps off for your company; no access to the in-app notifications; deleting an account or a company is impossible through an app; connections end when disconnected or unused for 90 days; your audit log marks what came through an app | |
+| Over-reliance on the assistant's summaries or comparisons | AI-written answers about candidates | It answers only from the data its tools read, says the AI can be wrong, makes no decision, and asks before every action in the app; action log marks results read through it | |
+| Candidates' data in an AI app outside your control | A member connecting Claude, ChatGPT or another app | Only the member's own access; your owners and admins can turn AI apps off for your company; no access to the in-app notifications; deleting an account or a company is impossible through an app; connections end when disconnected or unused for 90 days; your action log marks what came through an app | |
 | Lack of transparency | Candidates don't see their grade | Privacy policy; invite page notice | |
 | Results reaching the wrong place through your tools | Applicant tracking system, Slack, API keys and web hooks | Only owners and admins connect them; keys, tokens, Slack web hooks and web hook secrets stored encrypted, API keys only as a hash; each stops working when whoever made it is no longer an owner or admin; web hooks only to public HTTPS addresses, signed; events from an applicant tracking system accepted only with its signature | |
 | Data breach | Hosting, sub-processors | Access controls, encryption by Google Cloud, error reports without emails, retention limits; prepza tells you within 48 hours where possible | |

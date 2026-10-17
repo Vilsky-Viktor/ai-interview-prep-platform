@@ -107,7 +107,19 @@
     "send": "Verzenden",
     "thinking": "Denkt na…",
     "copyId": "ID kopiëren",
-    "idCopied": "ID gekopieerd"
+    "idCopied": "ID gekopieerd",
+    "copyCode": "Code kopiëren",
+    "codeCopied": "Code gekopieerd",
+    "codeLanguage": "Programmeertaal",
+    "editor": {
+      "bold": "Vet",
+      "italic": "Cursief",
+      "link": "Link",
+      "bullets": "Lijst met opsommingstekens",
+      "numbers": "Genummerde lijst",
+      "address": "https://…",
+      "addLink": "Link toevoegen"
+    }
   },
   "errors": {
     "title": "Er ging iets mis",
@@ -145,6 +157,7 @@
     "dismiss": "Negeren",
     "fixSent": "Naar de controleur gestuurd. Zo meteen hersteld of vervangen.",
     "actionFailed": "Dat lukte niet. Probeer het opnieuw.",
+    "questions": "Vragen",
     "flagged": "Gemarkeerd",
     "replaced": "Vervangen",
     "noFlagged": "Er is nu niets gemarkeerd.",
@@ -174,9 +187,20 @@
     "deleteTitle": "Dit sjabloon verwijderen?",
     "deleteText": "De onderwerpen en vragen worden verwijderd. Interviews die bedrijven er al van hebben gemaakt, blijven bestaan.",
     "deleteFailed": "Het sjabloon kon niet worden verwijderd. Probeer het opnieuw.",
+    "poolCounts": "{practice} om te oefenen · {company} voor bedrijven",
+    "topUp": "Aanvullen",
+    "addQuestions": "Vragen toevoegen",
+    "addQuestionsTitle": "Vragen toevoegen aan elk onderwerp",
+    "addQuestionsText": "Elk onderwerp krijgt zoveel nieuwe vragen: een derde om te oefenen, de rest voor bedrijven. Interviews die al van dit sjabloon zijn gemaakt, houden hun eigen vragen.",
+    "addQuestionsCount": "Vragen per onderwerp",
+    "add": "Toevoegen",
+    "addingQuestions": "Vragen worden toegevoegd",
+    "questionsAdded": "Vragen toegevoegd",
+    "addQuestionsFailed": "De vragen konden niet worden toegevoegd. Probeer het opnieuw.",
     "passRates": "Slagingspercentages",
     "controls": "Bediening",
     "stats": "Statistieken",
+    "statsGeneral": "Algemeen",
     "statsPeriod": "Periode",
     "statsAllTime": "Totaal",
     "statsCards": {
@@ -259,11 +283,7 @@
     "deletePostText": "Het verdwijnt in alle talen van de nieuwspagina.",
     "postSaveFailed": "Het bericht kon niet worden opgeslagen. Probeer het opnieuw.",
     "postDeleteFailed": "Het bericht kon niet worden verwijderd. Probeer het opnieuw.",
-    "companies": "Bedrijven",
-    "companySearch": "Bedrijfsnaam",
-    "companiesNotFound": "Geen bedrijven gevonden.",
     "suspended": "Geschorst",
-    "companyDetails": "{members, plural, one {# lid} other {# leden}} · sinds {date}",
     "suspend": "Schorsen",
     "unsuspend": "Schorsing opheffen",
     "unsuspended": "De schorsing is opgeheven.",
@@ -296,11 +316,341 @@
     "legalSend": "Wijziging mailen",
     "legalConfirmTitle": "De wijziging in {document} mailen?",
     "legalAudience": {
-      "everyone": "Iedereen met een prepza-account krijgt hem vanaf de volgende ochtend, met de melding dat de nieuwe versie geldt vanaf {date}. Hij gaat één keer uit en kan niet worden teruggedraaid.",
-      "company_editors": "De eigenaren en beheerders van elk bedrijf krijgen hem vanaf de volgende ochtend, met de melding dat de nieuwe versie geldt vanaf {date}. Hij gaat één keer uit en kan niet worden teruggedraaid."
+      "everyone": "Iedereen met een prepza-account krijgt hem vanaf het volgende verzenduur (8:00 tot 18:00 UTC), met de melding dat de nieuwe versie geldt vanaf {date}, en ziet hem bij zijn meldingen. Hij gaat één keer uit en kan niet worden teruggedraaid.",
+      "company_editors": "De eigenaren en beheerders van elk bedrijf krijgen hem vanaf het volgende verzenduur (8:00 tot 18:00 UTC), met de melding dat de nieuwe versie geldt vanaf {date}, en zien hem bij hun meldingen. Hij gaat één keer uit en kan niet worden teruggedraaid."
     },
-    "legalAsked": "De wijziging wordt vanaf de volgende ochtend gemaild.",
-    "legalFailed": "Kon de e-mail niet aanvragen. Probeer het opnieuw."
+    "legalAsked": "De wijziging wordt vanaf het volgende verzenduur gemaild.",
+    "legalFailed": "Kon de e-mail niet aanvragen. Probeer het opnieuw.",
+    "support": "Support",
+    "supportSearch": "ID, link, e-mail, betaal-ID of bedrijfsnaam",
+    "supportNotFound": "Niets gevonden. Probeer de ID uit “id kopiëren”, de link van de pagina of een e-mailadres.",
+    "supportKinds": {
+      "company": "Bedrijf",
+      "interview": "Interview bij {company}",
+      "candidate": "Kandidaat bij {company}",
+      "user": "Account"
+    },
+    "supportCreated": "Aangemaakt",
+    "supportAvailable": "{available} credits beschikbaar",
+    "supportHeld": "{reserved} gereserveerd voor kandidaten",
+    "supportTabs": {
+      "money": "Credits",
+      "reserved": "Gereserveerd",
+      "interviews": "Interviews",
+      "members": "Leden",
+      "audit": "Auditlog"
+    },
+    "supportNoInterviews": "Nog geen interviews.",
+    "supportUntitled": "Interview wordt nog gegenereerd",
+    "supportCandidates": "{count, plural, one {# kandidaat} other {# kandidaten}}",
+    "supportJoined": "Lid",
+    "supportInvited": "Uitgenodigd, nog geen lid",
+    "adjustCredits": "Credits corrigeren",
+    "adjustTitle": "Credits van {name} corrigeren",
+    "adjustText": "Een positief aantal voegt credits toe, een negatief aantal haalt ze weg. Het bedrijf ziet de reden in zijn factureringsgeschiedenis.",
+    "adjustAmount": "Credits, zoals 500 of -500",
+    "adjustNote": "Reden, zoals “Twee keer afgeschreven voor één kandidaat”",
+    "adjustConfirmTitle": "{amount} credits voor {name}?",
+    "adjustConfirm": "Corrigeren",
+    "adjustBack": "Terug",
+    "adjustNext": "Volgende",
+    "adjusted": "Credits gecorrigeerd",
+    "supportNoEmail": "Account zonder e-mailadres",
+    "supportCompanies": "Bedrijven",
+    "supportNoCompanies": "Geen lid van een bedrijf.",
+    "supportTopUps": "Betaalde opwaarderingen",
+    "supportNoTopUps": "Geen opwaarderingen.",
+    "supportDeletedCompany": "Een verwijderd bedrijf",
+    "supportNotYet": "Nog niet",
+    "supportFacts": {
+      "company": "Bedrijf",
+      "interview": "Interview",
+      "invited": "Uitgenodigd",
+      "lastSent": "Uitnodiging laatst verstuurd",
+      "started": "Gestart",
+      "finished": "Afgerond",
+      "grade": "Score",
+      "extraTime": "Extra tijd",
+      "signals": "Integriteitssignalen",
+      "credits": "Credits",
+      "topics": "Onderwerpen",
+      "questionSeconds": "Tijd per vraag",
+      "passMark": "Slaaggrens"
+    },
+    "supportPassed": "{grade}, geslaagd",
+    "supportNotPassed": "{grade}, niet geslaagd",
+    "supportNoExtraTime": "Geen",
+    "supportSignals": "Pagina verlaten: {leaves} · Kopieerpogingen: {copies} · Te snelle antwoorden: {fast}",
+    "supportCredits": {
+      "held": "Gereserveerd",
+      "charged": "Afgeschreven",
+      "released": "Teruggegeven"
+    },
+    "supportGenerationFailed": "Genereren mislukt",
+    "supportSeconds": "{count, plural, one {# seconde} other {# seconden}}",
+    "supportNoCandidates": "Nog geen kandidaten.",
+    "campaigns": "Campagnes",
+    "newCampaign": "Nieuwe campagne",
+    "editCampaign": "Bewerken",
+    "editCampaignIn": "Bewerken in het {language}",
+    "campaignInEnglish": "Schrijf in het Engels. Na het opslaan wordt hij in alle andere talen vertaald, en je kunt elke vertaling vóór het verzenden aanpassen.",
+    "campaignInLanguage": "Je eigen tekst in het {language}, verstuurd zoals je hem schrijft.",
+    "campaignKind": "Soort",
+    "campaignKinds": {
+      "updates": "Productupdate",
+      "promotions": "Aanbieding"
+    },
+    "campaignSubject": "Onderwerp",
+    "campaignSubjectPlaceholder": "Typ hier het onderwerp…",
+    "campaignText": "Tekst",
+    "campaignTextPlaceholder": "Typ hier de tekst… Druk op Enter voor een nieuwe alinea.",
+    "campaignButton": "Knoptekst (optioneel)",
+    "campaignLink": "Knoplink",
+    "campaignLinkPlaceholder": "Knoplink op prepza, zoals /pricing (optioneel)",
+    "campaignSaveFailed": "De campagne kon niet worden opgeslagen. Probeer het opnieuw.",
+    "noCampaigns": "Nog geen campagnes.",
+    "campaignStatus": {
+      "draft": "concept",
+      "sending": "wordt verzonden…",
+      "sent": "verzonden",
+      "stopped": "gestopt"
+    },
+    "campaignRowCounts": {
+      "sent": "{count} verzonden",
+      "skipped": "{count} overgeslagen",
+      "failed": "{count} mislukt",
+      "unsubscribed": "{count} afgemeld",
+      "complained": "{count} als spam gemeld"
+    },
+    "campaignCounts": {
+      "pending": "Wachtend",
+      "sent": "Verzonden",
+      "skipped": "Overgeslagen",
+      "failed": "Mislukt",
+      "unsubscribed": "Daarna afgemeld",
+      "complained": "Spamklachten"
+    },
+    "campaignRecipients": "<number>{shown}</number> {count, plural, one {ontvanger} other {ontvangers}}",
+    "campaignPreviewLanguage": "Voorbeeld in het",
+    "sendTest": "Stuur mij een test-e-mail",
+    "testSent": "De test-e-mail is onderweg naar je adres.",
+    "sendCampaign": "Verzenden",
+    "stopCampaign": "Stoppen",
+    "deleteCampaign": "Campagne verwijderen",
+    "campaignConfirm": {
+      "send": {
+        "title": "Deze campagne verzenden?",
+        "text": "{count, plural, =0 {Op dit moment zou niemand hem krijgen.} one {# persoon krijgt hem vanaf het volgende verzenduur (8:00 tot 18:00 UTC). Daarna kan hij niet meer worden gewijzigd.} other {# personen krijgen hem vanaf het volgende verzenduur (8:00 tot 18:00 UTC). Daarna kan hij niet meer worden gewijzigd.}}",
+        "unknown": "Iedereen die dit soort e-mails heeft aangezet, krijgt hem vanaf het volgende verzenduur (8:00 tot 18:00 UTC). Daarna kan hij niet meer worden gewijzigd.",
+        "confirm": "Verzenden"
+      },
+      "stop": {
+        "title": "Deze campagne stoppen?",
+        "text": "Niemand anders krijgt hem nog. Wie hem al kreeg, houdt hem.",
+        "confirm": "Stoppen"
+      },
+      "delete": {
+        "title": "Deze campagne verwijderen?",
+        "text": "Hij wordt in alle talen verwijderd. Hij is nooit verzonden.",
+        "confirm": "Verwijderen"
+      }
+    },
+    "sendAsCampaign": "Verzenden als campagne",
+    "removeSuppression": "Van de lijst halen",
+    "suppressed": {
+      "bounced": "Een e-mail aan dit adres kwam op {date} onbestelbaar terug, dus productmails en mededelingen slaan het over.",
+      "complained": "Dit adres heeft op {date} een e-mail als spam gemarkeerd, dus productmails en mededelingen slaan het over."
+    },
+    "aiCosts": "AI-kosten",
+    "aiCards": {
+      "spend": "Uitgaven",
+      "calls": "AI-aanroepen",
+      "month": "Deze maand",
+      "monthOf": "Deze maand, van een budget van {budget}",
+      "input": "Invoertokens",
+      "cached": "Invoertokens uit de cache",
+      "output": "Uitvoertokens"
+    },
+    "aiBudgetsTitle": "Gedeelde budgetten vandaag",
+    "aiNothing": "Niets in deze periode.",
+    "aiOf": "{used} van {limit}",
+    "aiForTitle": "Voor wie het was",
+    "aiCategories": {
+      "paid": "Betalende bedrijven",
+      "unpaid": "Niet-betalende bedrijven",
+      "no_company": "Zonder bedrijf",
+      "prepza": "prepza"
+    },
+    "aiActionsTitle": "Per actie",
+    "aiActions": {
+      "interview_generation": "Interviews genereren",
+      "template_generation": "Sjablonen genereren",
+      "question_regeneration": "Vragen opnieuw genereren",
+      "template_question_regeneration": "Sjabloonvragen opnieuw genereren",
+      "sample_key_check": "Steekproefcontroles van antwoordsleutels",
+      "question_verify": "Vraagcontroles",
+      "key_check_batch": "Controles van antwoordsleutels in batches",
+      "embeddings": "Onderwerpen koppelen",
+      "news_translation": "Nieuws vertalen",
+      "campaign_translation": "Campagnes vertalen",
+      "assistant_message": "Berichten aan de assistent",
+      "assistant_title": "Titels van assistentchats",
+      "transcription": "Spraakberichten",
+      "help_chat": "Helpchat"
+    },
+    "aiUnitCost": {
+      "interview_generation": "{cost} per interview",
+      "template_generation": "{cost} per sjabloonrun",
+      "question_regeneration": "{cost} per vraag",
+      "template_question_regeneration": "{cost} per vraag",
+      "sample_key_check": "{cost} per test",
+      "question_verify": "{cost} per vraag",
+      "key_check_batch": "{cost} per controle",
+      "embeddings": "{cost} per verzoek",
+      "news_translation": "{cost} per bericht",
+      "campaign_translation": "{cost} per campagne",
+      "assistant_message": "{cost} per gesprek",
+      "assistant_title": "{cost} per gesprek",
+      "transcription": "{cost} per minuut",
+      "help_chat": "{cost} per aanroep"
+    },
+    "aiPaid": "betalend {spend}",
+    "aiUnpaid": "niet-betalend {spend}",
+    "aiCalls": "{count, plural, one {# aanroep} other {# aanroepen}}",
+    "aiModelsTitle": "Per model",
+    "aiTokensIn": "{count} in",
+    "aiCachedShare": "{share} uit de cache",
+    "aiTokensOut": "{count} uit",
+    "aiCompaniesTitle": "Duurste bedrijven",
+    "aiUsersTitle": "Duurste gebruikers",
+    "aiByMonthTitle": "Per maand",
+    "aiByDayTitle": "Per dag",
+    "limitsOursTitle": "Onze bereikte limieten",
+    "limitsProvidersTitle": "Limieten van providers",
+    "limitsNoHits": "In deze periode is geen limiet bereikt.",
+    "limitNames": {
+      "MESSAGES_PER_USER_HOUR": "Berichten aan de assistent per gebruiker per uur",
+      "MESSAGES_PER_USER_DAY": "Berichten aan de assistent per gebruiker per dag",
+      "MESSAGES_PER_COMPANY_DAY": "Berichten aan de assistent per bedrijf per dag",
+      "MESSAGES_PER_DAY": "Berichten aan de assistent per dag, niet-betalende gebruikers samen",
+      "TOKENS_PER_USER_DAY": "Assistenttokens per gebruiker per dag",
+      "TOKENS_PER_COMPANY_DAY": "Assistenttokens per bedrijf per dag",
+      "TOKENS_PER_DAY": "Assistenttokens per dag, niet-betalende gebruikers samen",
+      "TRANSCRIPTIONS_PER_USER_HOUR": "Spraakberichten per gebruiker per uur",
+      "ACTIONS_PER_USER_HOUR": "Acties van de assistent per gebruiker per uur",
+      "MCP_CALLS_PER_USER_MINUTE": "Aanroepen van AI-apps per gebruiker per minuut",
+      "MCP_CALLS_PER_USER_DAY": "Aanroepen van AI-apps per gebruiker per dag",
+      "REGISTRATIONS_PER_IP_HOUR": "Registraties van AI-apps per adres per uur",
+      "REGISTRATIONS_PER_DAY": "Registraties van AI-apps per dag, iedereen samen",
+      "AUTHORIZATIONS_PER_IP_HOUR": "Verbindingsverzoeken van AI-apps per adres per uur",
+      "TOKEN_REQUESTS_PER_CLIENT_MINUTE": "Tokenverzoeken van AI-apps per app per minuut",
+      "APPROVALS_PER_USER_HOUR": "Toegestane verbindingen van AI-apps per gebruiker per uur",
+      "MAX_OWNED_COMPANIES": "Bedrijven waarvan één persoon eigenaar mag zijn",
+      "INTERVIEWS_PER_DAY": "Gegenereerde interviews per bedrijf per dag",
+      "INTERVIEWS_PER_DAY_UNPAID": "Gegenereerde interviews per niet-betalend bedrijf per dag",
+      "MAX_INTERVIEWS_WITHOUT_CANDIDATES": "Gegenereerde interviews die zonder kandidaten wachten",
+      "MAX_INTERVIEWS_WITHOUT_CANDIDATES_UNPAID": "Gegenereerde interviews die zonder kandidaten wachten, niet-betalend",
+      "PREVIEWS_PER_USER_HOUR": "Interviewvoorbeelden per gebruiker per uur",
+      "LINK_STARTS_PER_HOUR": "Starts via de link van één interview per uur",
+      "LINK_STARTS_PER_IP_HOUR": "Starts via een link per adres per uur",
+      "MAX_BULK_INVITES": "Kandidaten in één lijst of bestand",
+      "MAX_PENDING_INVITES": "Openstaande teamuitnodigingen per bedrijf",
+      "MEMBER_INVITES_PER_UNPAID_DAY": "Teamuitnodigingen per niet-betalend bedrijf per dag",
+      "EMAIL_HOURLY_LIMIT": "Uitnodigingsmails per gebruiker per uur",
+      "EMAIL_DAILY_LIMIT": "Uitnodigingsmails per gebruiker per dag",
+      "EMAIL_RECIPIENT_DAILY_LIMIT": "Uitnodigingen naar één adres voor één test per dag",
+      "REPORT_EMAILS_PER_COMPANY_DAY": "Rapportmails per bedrijf per dag",
+      "GENERATION_LIMIT": "Generaties per gebruiker per dag",
+      "REGENERATION_LIMIT": "Opnieuw gegenereerde vragen per gebruiker per dag",
+      "DAILY_GENERATION_LIMIT": "Generaties per dag, niet-betalende bedrijven samen",
+      "MAX_TOPIC_REVISIONS": "Onderwerprevisies per generatie",
+      "DAILY_VERIFY_LIMIT": "Vraagcontroles per dag",
+      "PRACTICE_ROUNDS_PER_HOUR": "Oefenrondes per gebruiker per uur",
+      "SIGNALS_PER_MINUTE": "Integriteitssignalen per sessie per minuut",
+      "MAX_SIGNALS_PER_QUESTION": "Bewaarde integriteitssignalen per vraag",
+      "HELP_USER_LIMIT": "Helpchatberichten per account per uur",
+      "HELP_IP_LIMIT": "Helpchatberichten per adres per uur",
+      "HELP_DAILY_LIMIT": "Helpchatberichten per dag, iedereen samen",
+      "HELP_TOKENS_PER_DAY": "Helpchattokens per dag, iedereen samen",
+      "CONTACT_IP_LIMIT": "Contactberichten per adres per dag",
+      "CONTACT_DAILY_LIMIT": "Contactberichten per dag, iedereen samen",
+      "RATINGS_PER_DAY": "Vraagbeoordelingen per gebruiker per dag",
+      "REPORTS_PER_DAY": "Vraagmeldingen per gebruiker per dag",
+      "MAX_API_KEYS": "API-sleutels per bedrijf",
+      "MAX_WEBHOOKS": "Webhooks per bedrijf",
+      "API_REQUESTS_PER_MINUTE": "API-verzoeken per bedrijf per minuut",
+      "RESEND_DAILY_LIMIT": "E-mails per dag via Resend",
+      "RESEND_RESERVE_PERCENT": "Deel van de e-mails per dag via Resend dat buiten bulkverzendingen blijft",
+      "CAMPAIGNS_PER_KIND_DAY": "Campagnes per soort per dag",
+      "AI_SPEND_UNPAID_DAY": "AI-uitgaven per dag, niet-betalende gebruikers samen",
+      "QUESTION_SECONDS_BASIC": "Seconden per vraag, nieuwe tests op niveau basis",
+      "QUESTION_SECONDS_MEDIUM": "Seconden per vraag, nieuwe tests op niveau gemiddeld",
+      "QUESTION_SECONDS_HARD": "Seconden per vraag, nieuwe tests op niveau moeilijk",
+      "GENERATION_CALLS_AT_ONCE": "Gelijktijdige AI-aanroepen per generatie",
+      "GENERATION_CALLS_PER_SECOND": "AI-aanroepen per seconde, alle generaties samen",
+      "MULTI_ANSWER_PERCENT": "Vragen met ‘Kies alle juiste opties’, aandeel per onderwerp",
+      "PAUSED": "Geweigerd tijdens de pauze",
+      "OPENAI_RATE_LIMIT": "Snelheidslimiet van OpenAI",
+      "OPENAI_QUOTA": "OpenAI-tegoed op",
+      "OPENAI_THROTTLED": "Wachten op onze verzoeklimiet bij OpenAI",
+      "RESEND_RATE_LIMIT": "Snelheidslimiet van Resend",
+      "RESEND_DAILY_QUOTA": "Dagquotum van Resend",
+      "ATS_RATE_LIMIT": "Snelheidslimiet van ATS",
+      "FIREBASE_TOKEN_REFUSED": "Firebase-aanmelding geweigerd"
+    },
+    "limitValue": "{value} {window}",
+    "limitWindows": {
+      "60": "per minuut",
+      "3600": "per uur",
+      "86400": "per dag",
+      "1209600": "per onderwerpbeoordeling"
+    },
+    "limitKinds": {
+      "ours": "prepza",
+      "openai": "OpenAI",
+      "resend": "Resend",
+      "firebase": "Firebase",
+      "workable": "Workable",
+      "greenhouse": "Greenhouse",
+      "teamtailor": "Teamtailor",
+      "recruitee": "Recruitee",
+      "breezy": "Breezy HR"
+    },
+    "limitHitter": "{name} ({count})",
+    "limitHits": "{count, plural, one {# keer bereikt} other {# keer bereikt}}",
+    "limitsTitle": "Limieten",
+    "limitsText": "Hoeveel mensen mogen gebruiken en met welke waarden de services werken, per service. Een wijziging geldt binnen een minuut.",
+    "limitServices": {
+      "assistant": "Assistent",
+      "companies": "Bedrijven",
+      "generation": "Genereren",
+      "rounds": "Oefenen, sessies en helpchat",
+      "library": "Feedback op vragen",
+      "api": "Openbare API",
+      "notifications": "E-mails",
+      "billing": "AI-uitgaven"
+    },
+    "limitAtOnce": "tegelijk",
+    "limitScopes": {
+      "user": "per gebruiker",
+      "company": "per bedrijf",
+      "ip": "per adres",
+      "everyone": "iedereen samen"
+    },
+    "limitDefault": "standaard {value}",
+    "limitSecondsUnit": "s",
+    "limitRecentHits": "{count, plural, one {# keer bereikt} other {# keer bereikt}} in {days} dagen",
+    "limitPaid": "Betalend",
+    "limitUnpaid": "Niet-betalend",
+    "limitSave": "Opslaan",
+    "limitReset": "Terugzetten naar standaard",
+    "limitSaved": "Limiet opgeslagen.",
+    "limitFailed": "De limiet kon niet worden opgeslagen. Probeer het opnieuw.",
+    "limitChangesTitle": "Wijzigingen",
+    "limitNoChanges": "Er is nog geen limiet gewijzigd.",
+    "limitChange": "{name}: van {from} naar {to}",
+    "limitDefaultValue": "standaard",
+    "supportAiSpend": "AI-kosten {spend} in de afgelopen {days} dagen, {count, plural, one {# aanroep} other {# aanroepen}}."
   },
   "templates": {
     "title": "Sjablonen",
@@ -363,10 +713,12 @@
   "reportReasons": {
     "wrong_answer": "Het aangegeven antwoord is fout",
     "unclear": "De vraag is onduidelijk",
+    "hard_to_read": "De vraag is moeilijk te lezen",
     "off_topic": "De vraag past niet bij het onderwerp",
     "other": "Iets anders"
   },
   "questions": {
+    "multiChoice": "Meerdere antwoorden",
     "goodQuestion": "Goede vraag?",
     "ratingFailed": "Je beoordeling kon niet worden opgeslagen. Probeer het opnieuw.",
     "helpful": "Nuttige vraag",
@@ -413,6 +765,10 @@
     "correct": "Goed",
     "incorrect": "Fout",
     "notAnswered": "Niet beantwoord",
+    "partlyCorrect": "Deels goed",
+    "rightPicks": "{right} van {total} juiste opties",
+    "wrongPicks": "{count, plural, one {# foute optie} other {# foute opties}}",
+    "points": "{points} van 1 punt",
     "finish": "Afronden",
     "finishing": "Afronden…",
     "next": "Volgende vraag",
@@ -424,6 +780,7 @@
     "finishFailed": "Het interview kon niet worden afgerond. Probeer het opnieuw.",
     "continueFailed": "Doorgaan lukte niet. Probeer het opnieuw.",
     "timeUp": "De tijd voor deze vraag is om.",
+    "selectAll": "Kies alle juiste opties",
     "finish": "Interview afronden",
     "finishTitle": "Het hele interview afronden?",
     "endsAll": "Dit beëindigt alle {count} onderdelen, niet alleen dit onderdeel.",
@@ -498,6 +855,7 @@
     "interviews": "Interviews",
     "templates": "Sjablonen",
     "team": "Team",
+    "actions": "Actielog",
     "integrations": "Integraties",
     "referrals": "Doorverwijzingen",
     "brand": "Merk",
@@ -629,10 +987,12 @@
       "many": "meerdere",
       "file": "uploaden"
     },
-    "manyHint": "Eén kandidaat per regel, met of zonder naam,\ntot 100 tegelijk:",
+    "manyHint": "Eén kandidaat per regel, met of zonder naam,\ntot {count} tegelijk:",
+    "manyHintNoLimit": "Eén kandidaat per regel, met of zonder naam:",
     "example": "voorbeeld",
     "uploadFile": "Bestand uploaden",
-    "fileFormats": "CSV of TXT, tot 100 kandidaten. Namen kunnen in een naamkolom of naast elk e-mailadres staan.",
+    "fileFormats": "CSV of TXT, tot {count} kandidaten. Namen kunnen in een naamkolom of naast elk e-mailadres staan.",
+    "fileFormatsNoLimit": "CSV of TXT. Namen kunnen in een naamkolom of naast elk e-mailadres staan.",
     "fileTooLarge": "Het bestand is te groot (max. {kb} KB).",
     "lineProblems": {
       "no_email": "Geen e-mailadres gevonden: {line}",
@@ -657,8 +1017,10 @@
     "signInToStart": "Log in om te beginnen",
     "fallbackTitle": "een interview",
     "timePerQuestion": "Tijd per vraag:",
-    "secondsUnit": "s",
-    "pickOne": "Kies bij elke vraag een van de vier opties.",
+    "secondsUnit": "sec",
+    "wholeInterview": "Hele interview:",
+    "minutesUnit": "min",
+    "pickOne": "Kies bij elke vraag een van de vier opties. Staat er ‘Kies alle juiste opties’, vink dan elke juiste optie aan: elke juiste optie levert een deel van het punt voor de vraag op, en een foute vink levert niets op.",
     "changePick": "Je kunt je keuze wijzigen tot je op ‘Volgende vraag’ drukt.",
     "timeRunsOut": "Als de tijd van een vraag om is, telt je keuze en opent de volgende; zonder keuze telt die als fout. De klok loopt door als je weggaat.",
     "unanswered": "Onbeantwoorde vragen tellen als fout.",
@@ -1102,8 +1464,19 @@
       "ats_cannot_write": "{ats} neemt de resultaten van kandidaten niet aan: de sleutel heeft geen schrijfrechten. Verbind opnieuw met een sleutel die kan schrijven; de resultaten worden bewaard en dan verstuurd.",
       "connection_broken": "{name} werkt niet meer en moet opnieuw worden verbonden. Tot die tijd {integration, select, slack {komen meldingen niet aan in je kanaal} other {wachten de kandidaten die het stuurt, en worden hun resultaten bewaard}}.",
       "webhook_stopped": "De webhook naar {url} is gestopt: het lid dat hem heeft toegevoegd is geen eigenaar of beheerder meer. Voeg hem opnieuw toe om resultaten te blijven ontvangen.",
-      "ownership_received": "Je bent nu eigenaar van “{name}”."
-    }
+      "ownership_received": "Je bent nu eigenaar van “{name}”.",
+      "news": "Nieuws: {title}",
+      "legal_terms": "Nieuwe voorwaarden gelden vanaf {date}.",
+      "legal_privacy": "Een nieuw privacybeleid geldt vanaf {date}.",
+      "legal_dpa": "Een nieuwe verwerkersovereenkomst geldt vanaf {date}."
+    },
+    "legalBanner": {
+      "terms": "De voorwaarden van prepza veranderen op {date}.",
+      "privacy": "Het privacybeleid van prepza verandert op {date}.",
+      "dpa": "De verwerkersovereenkomst verandert op {date}."
+    },
+    "readLegal": "Lees de nieuwe versie",
+    "closeLegalBanner": "Sluiten"
   },
   "report": {
     "download": "PDF downloaden",
@@ -1140,7 +1513,7 @@
     "continue": "Doorgaan",
     "history": "Je rondes",
     "results": "Oefenresultaten",
-    "grade": "van de vragen goed",
+    "grade": "van de mogelijke punten",
     "notFinished": "niet afgerond",
     "noRounds": "Nog geen rondes.",
     "startFailed": "Het oefenen kon niet worden gestart. Probeer het opnieuw.",
@@ -1328,7 +1701,7 @@
     "counts": "{keys, plural, one {# sleutel} other {# sleutels}} · {webhooks, plural, one {# webhook} other {# webhooks}}",
     "docs": "Ontwikkelaarsdocumentatie",
     "keysTitle": "API-sleutels",
-    "keysText": "Een sleutel leest je interviews en kandidaten en nodigt kandidaten uit namens de persoon die hem heeft gemaakt.",
+    "keysText": "Een sleutel handelt als de persoon die hem heeft gemaakt, en kan alleen wat zijn rechten toestaan.",
     "noKeys": "Nog geen sleutels.",
     "newKey": "Nieuwe sleutel",
     "newKeyTitle": "Nieuwe API-sleutel",
@@ -1387,7 +1760,37 @@
     "removeWebhookTitle": "Deze webhook verwijderen?",
     "removeWebhookText": "{url} ontvangt geen gebeurtenissen meer.",
     "createFailed": "Kan niet worden gemaakt.",
-    "removeFailed": "Kan niet worden verwijderd."
+    "removeFailed": "Kan niet worden verwijderd.",
+    "selectAll": "Alles selecteren",
+    "permissionGroups": {
+      "interviews": "Interviews",
+      "candidates": "Kandidaten",
+      "credits": "Credits",
+      "ai_agents": "AI-agents"
+    },
+    "permissions": {
+      "interviews:read": "Lezen",
+      "interviews:create": "Maken",
+      "candidates:read": "Lezen",
+      "candidates:invite": "Uitnodigen",
+      "candidates:change": "Wijzigen",
+      "candidates:delete": "Verwijderen",
+      "credits:read": "Lezen",
+      "mcp": "Gebruiken met AI-agents (MCP)"
+    },
+    "permissionLine": {
+      "interviews:read": "lezen",
+      "interviews:create": "maken",
+      "candidates:read": "lezen",
+      "candidates:invite": "uitnodigen",
+      "candidates:change": "wijzigen",
+      "candidates:delete": "verwijderen",
+      "credits:read": "lezen",
+      "mcp": "MCP"
+    },
+    "editPermissions": "Rechten bewerken",
+    "editPermissionsText": "Vink uit wat “{name}” niet meer nodig heeft. Maak een nieuwe sleutel om een recht toe te voegen.",
+    "permissionsFailed": "De rechten konden niet worden opgeslagen."
   },
   "brand": {
     "logoTitle": "Logo",
@@ -1456,7 +1859,8 @@
     "tabs": {
       "api": "API",
       "webhooks": "Webhooks",
-      "sdk": "SDK"
+      "sdk": "SDK",
+      "mcp": "MCP"
     },
     "englishOnly": "Deze pagina is alleen in het Engels.",
     "baseUrl": "Basis-URL",
@@ -1509,6 +1913,7 @@
     "emptyTitle": "Vraag iets over je werving",
     "emptyText": "Kandidaten, interviews, credits, koppelingen en hoe prepza werkt, op basis van wat je in je bedrijven ziet. De AI kan zich vergissen; de pagina's waarnaar hij linkt zijn leidend.",
     "emptyTitleFaq": "Vraag iets over prepza",
+    "pageQuestion": "Wat kan ik op deze pagina doen?",
     "pages": {
       "open": "Openen",
       "pricing": "Prijzen",
@@ -1687,336 +2092,7 @@
   "pageHelp": {
     "label": "Over deze pagina",
     "actionsTitle": "Wat je kunt doen",
-    "tipsTitle": "Tips",
-    "landing": {
-      "title": "Zo werkt prepza",
-      "text": "prepza maakt van je functieomschrijving een meerkeuze-interview met tijdslimiet, met eigen willekeurige vragen voor elke kandidaat.",
-      "actions": [
-        "Plak de functieomschrijving: prepza stelt de onderwerpen voor die getest worden.",
-        "Controleer de onderwerpen: houd ze, bewerk ze of schrap ze, en keur ze dan goed om de vragen te laten schrijven.",
-        "Nodig kandidaten uit per e-mail, vanuit een bestand of met één deelbare link.",
-        "Lees de rapporten: kandidaten gerangschikt op score, met elk antwoord en integriteitssignalen."
-      ],
-      "tips": [
-        "Interviews maken is gratis. Je betaalt $2–5 per kandidaat die antwoordt, en je eerste kandidaten zijn gratis.",
-        "Probeer je interview als kandidaat voordat je iemand uitnodigt."
-      ]
-    },
-    "companies": {
-      "title": "Bedrijven",
-      "text": "Je bedrijven. Alles wat je in prepza doet, gebeurt binnen een bedrijf: de interviews, kandidaten, het team, de credits en de integraties.",
-      "actions": [
-        "Maak een bedrijf aan met “Nieuw bedrijf”. De naam is uniek binnen prepza.",
-        "Open een bedrijf om aan de interviews en kandidaten te werken.",
-        "Verwijder een bedrijf waarvan je eigenaar bent, met al zijn interviews en uitnodigingen."
-      ],
-      "tips": [
-        "Bij elk bedrijf waarvan je geen eigenaar bent, staat je rol: beheerders wijzigen dingen, kijkers kijken alleen.",
-        "Credits horen bij een bedrijf, dus elk bedrijf waardeert apart op."
-      ]
-    },
-    "pickCompany": {
-      "title": "Kies een bedrijf",
-      "text": "Je hebt een sjabloon gekozen. Kies het bedrijf waarvoor het is: het sjabloon wordt daar gekopieerd als nieuw interview, gratis en klaar om naar kandidaten te sturen.",
-      "actions": [
-        "Kies een bedrijf om het sjabloon daarin te openen en gebruik het dan.",
-        "Maak een nieuw bedrijf aan als je er nog geen hebt; het sjabloon opent daar."
-      ],
-      "tips": [
-        "Na het kopiëren is het interview van het bedrijf: pas de vragen en instellingen aan zoals je wilt."
-      ]
-    },
-    "interviews": {
-      "title": "Interviews",
-      "text": "Alle interviews van dit bedrijf en zijn credits voor kandidaten. Elk interview is een test met tijdslimiet, gemaakt van een functieomschrijving.",
-      "actions": [
-        "Maak een interview van een functieomschrijving met “Nieuw interview”.",
-        "Open een interview om de onderwerpen, kandidaten en instellingen te zien.",
-        "Probeer een interview als kandidaat, of verwijder het.",
-        "Waardeer credits op via het saldo, of zet automatisch opwaarderen aan op het tabblad Facturering."
-      ],
-      "tips": [
-        "Het saldo wordt oranje als de credits bijna op zijn. Zonder credits worden nieuwe uitnodigingen niet verstuurd.",
-        "De tabbladen hierboven leiden naar sjablonen, je team, integraties, facturering (eigenaren en beheerders) en doorverwijzingen."
-      ]
-    },
-    "newInterview": {
-      "title": "Nieuw interview",
-      "text": "Begin een interview vanuit de functieomschrijving. prepza leest die, stelt de onderwerpen voor en schrijft de vragen zodra je ze goedkeurt.",
-      "actions": [
-        "Plak de functieomschrijving: de functie, de eisen en wat een pre is.",
-        "Kies de taal waarin het interview wordt gegenereerd.",
-        "Genereer en controleer dan de voorgestelde onderwerpen."
-      ],
-      "tips": [
-        "Hoe specifieker de omschrijving, hoe beter de vragen bij de functie passen.",
-        "Genereren is gratis: je betaalt alleen voor kandidaten die antwoorden."
-      ]
-    },
-    "reviewTopics": {
-      "title": "Controleer je onderwerpen",
-      "text": "prepza heeft deze onderwerpen voorgesteld op basis van je omschrijving. Elk onderwerp dat je houdt, krijgt een eigen set vragen met antwoorden.",
-      "actions": [
-        "Vink de onderwerpen uit die je niet nodig hebt.",
-        "Bewerk de naam en subonderwerpen van een onderwerp met het potloodje.",
-        "Beschrijf wijzigingen in je eigen woorden en pas ze toe, bijvoorbeeld “voeg een onderwerp over teamleiderschap toe”.",
-        "Keur goed en genereer om de vragen te laten schrijven."
-      ],
-      "tips": [
-        "Te veel onderwerpen? Vink er een paar uit of beschrijf hoe ze samengevoegd moeten worden.",
-        "De vragen worden pas geschreven nadat je goedkeurt, dus neem hier even de tijd."
-      ]
-    },
-    "generating": {
-      "title": "Wordt gegenereerd",
-      "text": "prepza maakt je interview: eerst de onderwerpen, dan de vragen voor elk onderwerp. Dat duurt een paar minuten.",
-      "actions": [
-        "Je kunt deze pagina verlaten: het genereren gaat door.",
-        "Annuleer het genereren als je het niet meer nodig hebt; wat tot nu toe is gemaakt, wordt niet bewaard."
-      ],
-      "tips": [
-        "Je krijgt een melding als het interview klaar is.",
-        "Kom op elk moment terug via de lijst met interviews."
-      ]
-    },
-    "interviewTopics": {
-      "title": "Onderwerpen",
-      "text": "Wat dit interview test: de onderwerpen, elk met subonderwerpen en een eigen pool vragen. Elke kandidaat krijgt een willekeurige selectie uit elke pool.",
-      "actions": [
-        "Open “Vragen beheren” om de vragen en antwoorden van een onderwerp te lezen.",
-        "Genereer een zwakke vraag opnieuw, markeer een fout antwoord of lees meldingen van kandidaten over een vraag.",
-        "Stel in hoeveel vragen elke kandidaat uit een onderwerp krijgt.",
-        "Probeer het interview als kandidaat, of verwijder het."
-      ],
-      "tips": [
-        "Door AI geschreven vragen kunnen fout zijn: loop elk onderwerp even door voordat je iemand uitnodigt.",
-        "Klik op de titel om het interview een andere naam te geven."
-      ]
-    },
-    "interviewCandidates": {
-      "title": "Kandidaten",
-      "text": "Iedereen die voor dit interview is uitgenodigd, met status, voortgang en score.",
-      "actions": [
-        "Nodig kandidaten uit: één voor één, een lijst van maximaal 100, of een CSV- of TXT-bestand.",
-        "Zet de deelbare link aan voor een vacaturetekst: iedereen met de link kan het interview doen.",
-        "Zoek op e-mailadres of naam, filter op status en sorteer op score of datum.",
-        "Open het rapport van een kandidaat, of download of deel het rapport over alle kandidaten."
-      ],
-      "tips": [
-        "Elke kandidaat die minstens één vraag beantwoordt, gebruikt credits, ook kandidaten via de link.",
-        "Herinneringen gaan automatisch naar kandidaten."
-      ]
-    },
-    "interviewSettings": {
-      "title": "Instellingen",
-      "text": "Hoe dit interview verloopt voor elke kandidaat.",
-      "actions": [
-        "Stel de tijd per vraag in, in seconden.",
-        "Stel de slaaggrens in: kandidaten die die halen, zijn geslaagd.",
-        "Markeer het interview als aangenomen zodra de vacature is vervuld."
-      ],
-      "tips": [
-        "Elke instelling wordt opgeslagen zodra je het veld verlaat.",
-        "Kandidaten zien hun scores nooit; alleen je team ziet ze.",
-        "Geef een kandidaat die meer tijd nodig heeft extra tijd op zijn of haar pagina."
-      ]
-    },
-    "tryInterview": {
-      "title": "Proberen als kandidaat",
-      "text": "Een voorbeeld van dit interview precies zoals kandidaten het zien: de introductie, dan de vragen met tijdslimiet. Het is gratis.",
-      "actions": [
-        "Start het voorbeeld en antwoord zoals een kandidaat zou doen.",
-        "Controleer de timing, de formulering en de antwoorden voordat je iemand uitnodigt."
-      ],
-      "tips": [
-        "Blijf op de pagina terwijl je antwoordt: bij kandidaten worden het verlaten van de pagina, kopiëren en te snel antwoorden vastgelegd."
-      ]
-    },
-    "candidate": {
-      "title": "Kandidaatrapport",
-      "text": "De resultaten van één kandidaat: de score, of die geslaagd is, en de score per onderwerp met elk antwoord.",
-      "actions": [
-        "Lees elk antwoord, met integriteitssignalen: pagina verlaten, kopieerpogingen en te snelle antwoorden.",
-        "Download het rapport als PDF, of deel het per e-mail.",
-        "Geef extra tijd voordat de kandidaat begint, bijvoorbeeld bij een beperking.",
-        "Voeg de naam van de kandidaat toe of bewerk die.",
-        "Kopieer de uitnodigingslink om die zelf te sturen als de e-mail niet is aangekomen; hij blijft beschikbaar tot de kandidaat klaar is.",
-        "Verstuur de uitnodiging opnieuw of trek die in, of verwijder de kandidaat met de resultaten."
-      ],
-      "tips": [
-        "De score ondersteunt je beslissing, maar neemt die niet. Als de kandidaat erom vraagt, laat dan een mens het resultaat beoordelen."
-      ]
-    },
-    "templates": {
-      "title": "Sjablonen",
-      "text": "Kant-en-klare interviews voor veelvoorkomende functies. Als je er een gebruikt, wordt het als je eigen interview naar dit bedrijf gekopieerd.",
-      "actions": [
-        "Zoek op functie of onderwerp, en filter op niveau en taal.",
-        "Open een sjabloon om de onderwerpen te zien en hoeveel vragen elk onderwerp heeft.",
-        "Gebruik een sjabloon om er een interview mee te starten."
-      ],
-      "tips": [
-        "Voor een betere match maak je liever een interview van je eigen functieomschrijving.",
-        "Na het kopiëren is het interview van jou: pas de vragen en instellingen aan zoals je wilt."
-      ]
-    },
-    "template": {
-      "title": "Sjabloon",
-      "text": "Een kant-en-klaar interview: de onderwerpen, hun subonderwerpen en hoeveel vragen elk onderwerp heeft.",
-      "actions": [
-        "Controleer of de onderwerpen passen bij de functie waarvoor je werft.",
-        "Gebruik het sjabloon om het als nieuw interview naar dit bedrijf te kopiëren."
-      ],
-      "tips": [
-        "Kopiëren is gratis; kandidaten die antwoorden gebruiken zoals altijd credits.",
-        "Passen de onderwerpen niet, maak dan een interview van je functieomschrijving."
-      ]
-    },
-    "team": {
-      "title": "Team",
-      "text": "De mensen die aan de interviews van dit bedrijf werken, en hun rollen.",
-      "actions": [
-        "Voeg een lid toe per e-mail, als beheerder of kijker: die krijgt per e-mail een link om lid te worden.",
-        "Wijzig de rol van een lid tussen beheerder en kijker.",
-        "Kopieer de link van een openstaande uitnodiging, of verwijder een lid of een uitnodiging."
-      ],
-      "tips": [
-        "Beheerders maken en wijzigen interviews, nodigen kandidaten uit en waarderen op. Kijkers zien interviews en resultaten en delen rapporten, maar wijzigen niets.",
-        "Als je een lid verwijdert wiens kaart het automatisch opwaarderen betaalt, stopt het automatisch opwaarderen."
-      ]
-    },
-    "integrations": {
-      "title": "Integraties",
-      "text": "Koppel prepza aan de tools die je team al gebruikt. Elke integratie opent een eigen pagina met de stappen om die in te stellen.",
-      "actions": [
-        "Slack: ontvang de meldingen van je bedrijf in een kanaal.",
-        "ATS (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): kandidaten die je naar een fase verplaatst krijgen het interview, en hun resultaten gaan terug.",
-        "API: sleutels en webhooks om je eigen platform te koppelen.",
-        "AI-apps: gebruik prepza vanuit Claude, ChatGPT en andere AI-apps."
-      ],
-      "tips": [
-        "Iedereen in het bedrijf ziet de integraties; eigenaren en beheerders wijzigen ze."
-      ]
-    },
-    "ats": {
-      "title": "ATS-integratie",
-      "text": "Koppel een vacature in je ATS aan een interview: kandidaten die je naar een gekozen fase verplaatst krijgen het interview, en hun resultaten komen terug als opmerking op hun profiel.",
-      "actions": [
-        "Koppel je ATS volgens de instructies.",
-        "Koppel een vacature: kies de vacature, de fase en een interview, of maak een nieuw interview van de vacaturetekst.",
-        "Nodig kandidaten die niet zijn uitgenodigd opnieuw uit, bijvoorbeeld als de credits op waren.",
-        "Verwijder de koppeling met een vacature, of ontkoppel het ATS."
-      ],
-      "tips": [
-        "Voeg een fase toe alleen voor prepza, zoals “prepza-vaardighedentest”, zodat die nooit door je andere tools heen loopt.",
-        "prepza verplaatst of wijst nooit iemand af in je ATS."
-      ]
-    },
-    "slack": {
-      "title": "Slack",
-      "text": "De meldingen van je bedrijf in een Slack-kanaal, zodra ze gebeuren.",
-      "actions": [
-        "Voeg prepza toe aan Slack en kies het kanaal, bijvoorbeeld #hiring.",
-        "Kies welke meldingen daar binnenkomen: een kandidaat die klaar is, een uitnodiging die niet is afgeleverd, een interview dat klaar is en meer.",
-        "Ontkoppel om ze te stoppen en de app van prepza uit je Slack te verwijderen."
-      ],
-      "tips": [
-        "prepza kan alleen in dat kanaal posten; je Slack lezen kan het niet.",
-        "Iedereen ziet elke melding nog steeds bij het belletje."
-      ]
-    },
-    "api": {
-      "title": "API",
-      "text": "Koppel je eigen platform, zoals je vacaturesite, aan prepza.",
-      "actions": [
-        "Maak een API-sleutel aan: die maakt namens jou interviews aan, leest kandidaten en hun resultaten, nodigt ze uit, stuurt ze herinneringen, werkt ze bij of verwijdert ze, en leest je credits.",
-        "Voeg een webhook toe: prepza laat je HTTPS-adres ondertekend weten wanneer een kandidaat begint of klaar is (met de resultaten), wanneer de uitnodiging een kandidaat niet bereikt of verloopt, wanneer een kandidaat wordt verwijderd en wanneer een interview klaarstaat.",
-        "Stuur een webhook een testgebeurtenis en zie in het afleverlogboek hoe elke verzending is verlopen.",
-        "Verwijder de sleutels en webhooks die je niet meer gebruikt.",
-        "Open de ontwikkelaarsdocumentatie voor elk endpoint en elke gebeurtenis, en de SDK."
-      ],
-      "tips": [
-        "Een nieuwe sleutel en het secret van een webhook worden maar één keer getoond: kopieer ze meteen.",
-        "Kies voor elke sleutel een vervaldatum: een gelekte sleutel die nooit verloopt, blijft bruikbaar."
-      ]
-    },
-    "brand": {
-      "title": "Merk",
-      "text": "Je logo en kleuren in de uitnodiging, het interview en de afsluitende pagina van je kandidaten.",
-      "actions": [
-        "Stel het logo in of wijzig het.",
-        "Kies het lettertype en hoe rond kaarten en knoppen zijn.",
-        "Kies de kleuren van elke groep en bekijk ze in het voorbeeld.",
-        "Sla ze op, of ga terug naar de prepza-kleuren."
-      ],
-      "tips": [
-        "Kleuren waarbij tekst moeilijk leesbaar zou zijn, kunnen niet worden opgeslagen, zodat elke kandidaat de vragen kan lezen.",
-        "Teamleden die een interview uitproberen, zien het ook in jouw kleuren."
-      ]
-    },
-    "referrals": {
-      "title": "Doorverwijzingen",
-      "text": "Nodig andere bedrijven uit voor prepza met de link van dit bedrijf, en jullie krijgen allebei credits.",
-      "actions": [
-        "Kopieer of deel je doorverwijslink.",
-        "Bekijk elke beloning die dit bedrijf heeft ontvangen."
-      ],
-      "tips": [
-        "Jullie krijgen allebei credits wanneer het uitgenodigde bedrijf voor het eerst opwaardeert, met welk bedrag ook.",
-        "De credits gaan naar dit bedrijf en vervallen nooit."
-      ]
-    },
-    "billing": {
-      "title": "Facturering",
-      "text": "Waar de credits van dit bedrijf vandaan kwamen en waar ze naartoe gingen.",
-      "actions": [
-        "Waardeer op, of stel automatisch opwaarderen in.",
-        "Bekijk de kandidaten van wie de credits gereserveerd zijn.",
-        "Open de factuur van elke opwaardering."
-      ],
-      "tips": [
-        "De credits van een kandidaat worden gereserveerd bij de uitnodiging, afgeschreven zodra die antwoordt en teruggegeven als dat niet gebeurt.",
-        "Alleen eigenaren en beheerders zien deze pagina."
-      ]
-    },
-    "aiApps": {
-      "title": "AI-apps",
-      "text": "Gebruik prepza vanuit je AI-chat: vraag Claude of ChatGPT naar je interviews en kandidaten, of laat ze wijzigingen voor je doen.",
-      "actions": [
-        "Kopieer het serveradres en voeg het volgens de stappen toe aan Claude, Claude Code of ChatGPT.",
-        "Sta de app toe op de prepza-pagina die opent.",
-        "Ontkoppel een app die je niet meer gebruikt."
-      ],
-      "tips": [
-        "Een app handelt namens jou, in elk bedrijf waar je lid van bent. De meeste apps vragen het je voordat ze iets wijzigen.",
-        "Hij kan je wachtwoord en API-sleutels niet zien, en kan je account of een bedrijf niet verwijderen."
-      ]
-    },
-    "topUp": {
-      "title": "Opwaarderen",
-      "text": "Koop credits voor elk bedrijf waarvan je eigenaar of beheerder bent.",
-      "actions": [
-        "Kies een bedrijf en een opwaardering: grotere kosten minder per kandidaat.",
-        "Betaal op de betaalpagina van Paddle; de credits staan er binnen enkele seconden.",
-        "Open de prijzen om de opwaarderingen te vergelijken."
-      ],
-      "tips": [
-        "Een kandidaat kost 500 credits: gereserveerd bij de uitnodiging, afgeschreven zodra die antwoordt en teruggegeven als dat niet gebeurt.",
-        "Credits verlopen nooit. De factuur van elke opwaardering staat op het tabblad Facturering van het bedrijf."
-      ]
-    },
-    "settings": {
-      "title": "Instellingen",
-      "text": "Je eigen account: de taal waarin prepza tegen je praat, de e-mails die je krijgt en je gegevens.",
-      "actions": [
-        "Kies de taal van de site, de hulpchat en je e-mails.",
-        "Kies welke optionele e-mails je krijgt; service-e-mails, zoals uitnodigingen, rapporten en betalingsproblemen, worden altijd verstuurd.",
-        "Download alles wat prepza over je bewaart, of verwijder je account."
-      ],
-      "tips": [
-        "Als je je account verwijdert, worden de bedrijven verwijderd waarin alleen jij zit. Een bedrijf waar anderen lid van zijn geworden, heeft eerst een andere eigenaar nodig."
-      ]
-    }
+    "tipsTitle": "Tips"
   },
   "companyBilling": {
     "reservedTab": "Gereserveerd ({count})",
@@ -2032,7 +2108,8 @@
       "chargeback": "Terugboeking",
       "chargeback_reversed": "Terugboeking teruggedraaid",
       "referral": "Doorverwijsbeloning",
-      "referral_reversed": "Doorverwijsbeloning ingetrokken"
+      "referral_reversed": "Doorverwijsbeloning ingetrokken",
+      "adjustment": "Correctie door prepza"
     },
     "automatic": "Automatisch opwaarderen",
     "invoice": "Factuur",
@@ -2055,6 +2132,7 @@
     "claudeCode": "Voer in Claude Code uit:",
     "copyCommand": "Opdracht kopiëren",
     "commandCopied": "Opdracht gekopieerd",
+    "moreApps": "Gemini CLI, Cursor, VS Code, Le Chat en je eigen agents: zie de <link>ontwikkelaarsdocumentatie</link>.",
     "chatgptDeveloper": "Zet in ChatGPT de ontwikkelaarsmodus aan:",
     "chatgptCreate": "Kies daarna weer in Apps & Connectors:",
     "chatgptPaste": "Noem hem {name}, plak het serveradres en kies deze authenticatie:",
@@ -2120,5 +2198,91 @@
       "authority": "Ben je niet tevreden met ons antwoord, dan kun je contact opnemen met de Estse Autoriteit voor Consumentenbescherming en Technische Regulering (TTJA)."
     },
     "reviewed": "Laatst herzien: {date}."
+  },
+  "actionLog": {
+    "empty": "Nog geen acties.",
+    "noMatches": "Geen acties komen overeen met deze filters.",
+    "formerMember": "Een voormalig lid",
+    "deletedCandidate": "een verwijderde kandidaat",
+    "anyMember": "Iedereen",
+    "anyAction": "Alle acties",
+    "member": "Lid",
+    "action": "Actie",
+    "from": "Van",
+    "to": "Tot",
+    "groups": {
+      "interviews": "Interviews",
+      "candidates": "Kandidaten",
+      "team": "Team",
+      "company": "Bedrijf",
+      "billing": "Facturering",
+      "integrations": "Integraties"
+    },
+    "actions": {
+      "interview_created": "Maakte een interview",
+      "interview_from_template": "Maakte een interview van een sjabloon",
+      "interview_deleted": "Verwijderde een interview",
+      "interview_renamed": "Hernoemde een interview",
+      "interview_settings_changed": "Wijzigde de instellingen van een interview",
+      "link_turned_on": "Zette een deelbare link aan",
+      "link_turned_off": "Zette een deelbare link uit",
+      "questions_regenerated": "Liet een vraag opnieuw genereren",
+      "answer_key_reported": "Markeerde een antwoordsleutel als fout",
+      "topics_approved": "Keurde de onderwerpen van een interview goed",
+      "pass_mark_changed": "Wijzigde een slaaggrens",
+      "candidate_invited": "Nodigde een kandidaat uit",
+      "invite_resent": "Stuurde een uitnodiging opnieuw",
+      "invite_revoked": "Trok een uitnodiging in",
+      "candidate_deleted": "Verwijderde een kandidaat",
+      "candidate_renamed": "Wijzigde de naam van een kandidaat",
+      "extra_time_set": "Gaf een kandidaat extra tijd",
+      "results_viewed": "Bekeek de resultaten van een kandidaat",
+      "report_emailed": "Mailde een rapport",
+      "member_invited": "Nodigde een lid uit",
+      "member_joined": "Werd lid van het bedrijf",
+      "member_removed": "Verwijderde een lid",
+      "member_role_changed": "Wijzigde de rol van een lid",
+      "ownership_transferred": "Droeg het bedrijf over aan een andere eigenaar",
+      "company_renamed": "Hernoemde het bedrijf",
+      "logo_changed": "Wijzigde het logo",
+      "brand_changed": "Wijzigde de merkkleuren of -stijl",
+      "verification_requested": "Vroeg verificatie van het bedrijf aan",
+      "ai_apps_changed": "Stond AI-apps toe of stopte ze",
+      "top_up_paid": "Waardeerde credits op",
+      "auto_top_up_set": "Stelde automatisch opwaarderen in",
+      "auto_top_up_changed": "Wijzigde automatisch opwaarderen",
+      "auto_top_up_stopped": "Stopte automatisch opwaarderen",
+      "ats_connected": "Koppelde een ATS",
+      "ats_reconnected": "Koppelde een ATS opnieuw",
+      "ats_disconnected": "Ontkoppelde een ATS",
+      "job_linked": "Koppelde een ATS-vacature",
+      "job_unlinked": "Ontkoppelde een ATS-vacature",
+      "slack_connected": "Koppelde Slack",
+      "slack_disconnected": "Ontkoppelde Slack",
+      "slack_notifications_changed": "Wijzigde de meldingen van Slack",
+      "api_key_created": "Maakte een API-sleutel",
+      "api_key_deleted": "Verwijderde een API-sleutel",
+      "api_key_narrowed": "Beperkte de rechten van een API-sleutel",
+      "webhook_added": "Voegde een webhook toe",
+      "webhook_tested": "Testte een webhook",
+      "webhook_deleted": "Verwijderde een webhook"
+    },
+    "removed": "verwijderd: {permissions}",
+    "permissions": {
+      "interviews:read": "interviews lezen",
+      "interviews:create": "interviews maken",
+      "candidates:read": "kandidaten lezen",
+      "candidates:invite": "kandidaten uitnodigen",
+      "candidates:change": "kandidaten wijzigen",
+      "candidates:delete": "kandidaten verwijderen",
+      "credits:read": "credits lezen",
+      "mcp": "gebruiken met AI-agents (MCP)"
+    },
+    "via": {
+      "assistant": "via de assistent",
+      "mcp": "via een AI-app",
+      "api": "via de API",
+      "ats": "via een ATS"
+    }
   }
 }

@@ -107,7 +107,19 @@
     "send": "보내기",
     "thinking": "생각 중…",
     "copyId": "ID 복사",
-    "idCopied": "ID를 복사했습니다"
+    "idCopied": "ID를 복사했습니다",
+    "copyCode": "코드 복사",
+    "codeCopied": "코드를 복사했습니다",
+    "codeLanguage": "코드 언어",
+    "editor": {
+      "bold": "굵게",
+      "italic": "기울임꼴",
+      "link": "링크",
+      "bullets": "글머리 기호 목록",
+      "numbers": "번호 매기기 목록",
+      "address": "https://…",
+      "addLink": "링크 추가"
+    }
   },
   "errors": {
     "title": "문제가 발생했습니다",
@@ -145,6 +157,7 @@
     "dismiss": "무시",
     "fixSent": "검증기로 보냈습니다. 곧 수정되거나 교체됩니다.",
     "actionFailed": "실패했습니다. 다시 시도해 주세요.",
+    "questions": "문제",
     "flagged": "신고됨",
     "replaced": "교체됨",
     "noFlagged": "현재 신고된 문제가 없습니다.",
@@ -174,9 +187,20 @@
     "deleteTitle": "이 템플릿을 삭제할까요?",
     "deleteText": "주제와 문제가 삭제됩니다. 회사가 이미 이 템플릿으로 만든 면접은 유지됩니다.",
     "deleteFailed": "템플릿을 삭제하지 못했습니다. 다시 시도해 주세요.",
+    "poolCounts": "연습용 {practice} · 회사용 {company}",
+    "topUp": "채우기",
+    "addQuestions": "문제 추가",
+    "addQuestionsTitle": "모든 주제에 문제 추가",
+    "addQuestionsText": "각 주제에 이만큼 새 문제가 추가됩니다. 3분의 1은 연습용, 나머지는 회사용입니다. 이 템플릿으로 이미 만든 면접의 문제는 그대로 유지됩니다.",
+    "addQuestionsCount": "주제당 문제 수",
+    "add": "추가",
+    "addingQuestions": "문제 추가 중",
+    "questionsAdded": "문제를 추가했습니다",
+    "addQuestionsFailed": "문제를 추가하지 못했습니다. 다시 시도해 주세요.",
     "passRates": "합격률",
     "controls": "제어",
     "stats": "통계",
+    "statsGeneral": "일반",
     "statsPeriod": "기간",
     "statsAllTime": "전체 기간",
     "statsCards": {
@@ -259,11 +283,7 @@
     "deletePostText": "모든 언어의 소식 페이지에서 삭제됩니다.",
     "postSaveFailed": "게시물을 저장하지 못했습니다. 다시 시도해 주세요.",
     "postDeleteFailed": "게시물을 삭제하지 못했습니다. 다시 시도해 주세요.",
-    "companies": "회사",
-    "companySearch": "회사 이름",
-    "companiesNotFound": "회사를 찾지 못했습니다.",
     "suspended": "정지됨",
-    "companyDetails": "{members, plural, other {멤버 #명}} · {date}부터",
     "suspend": "정지",
     "unsuspend": "정지 해제",
     "unsuspended": "정지를 해제했습니다.",
@@ -296,11 +316,341 @@
     "legalSend": "변경 사항 이메일로 알리기",
     "legalConfirmTitle": "{document} 변경 사항을 이메일로 알릴까요?",
     "legalAudience": {
-      "everyone": "prepza 계정이 있는 모든 사람이 다음 날 아침부터 새 버전이 {date}부터 적용된다는 안내를 받습니다. 한 번만 발송되며 취소할 수 없습니다.",
-      "company_editors": "모든 회사의 소유자와 관리자가 다음 날 아침부터 새 버전이 {date}부터 적용된다는 안내를 받습니다. 한 번만 발송되며 취소할 수 없습니다."
+      "everyone": "prepza 계정이 있는 모든 사람이 다음 발송 시간(UTC 8:00~18:00)부터 새 버전이 {date}부터 적용된다는 안내를 받으며, 알림에서도 볼 수 있습니다. 한 번만 발송되며 취소할 수 없습니다.",
+      "company_editors": "모든 회사의 소유자와 관리자가 다음 발송 시간(UTC 8:00~18:00)부터 새 버전이 {date}부터 적용된다는 안내를 받으며, 알림에서도 볼 수 있습니다. 한 번만 발송되며 취소할 수 없습니다."
     },
-    "legalAsked": "다음 날 아침부터 변경 사항이 이메일로 발송됩니다.",
-    "legalFailed": "이메일을 요청하지 못했습니다. 다시 시도해 주세요."
+    "legalAsked": "다음 발송 시간부터 변경 사항이 이메일로 발송됩니다.",
+    "legalFailed": "이메일을 요청하지 못했습니다. 다시 시도해 주세요.",
+    "support": "고객 지원",
+    "supportSearch": "ID, 링크, 이메일, 결제 ID 또는 회사 이름",
+    "supportNotFound": "일치하는 항목이 없습니다. “id 복사”의 ID, 페이지 링크 또는 이메일로 시도해 보세요.",
+    "supportKinds": {
+      "company": "회사",
+      "interview": "{company}의 면접",
+      "candidate": "{company}의 지원자",
+      "user": "계정"
+    },
+    "supportCreated": "생성일",
+    "supportAvailable": "사용 가능 {available}크레딧",
+    "supportHeld": "지원자용 예약 {reserved}",
+    "supportTabs": {
+      "money": "크레딧",
+      "reserved": "예약됨",
+      "interviews": "면접",
+      "members": "멤버",
+      "audit": "감사 로그"
+    },
+    "supportNoInterviews": "아직 면접이 없습니다.",
+    "supportUntitled": "면접 생성 중",
+    "supportCandidates": "{count, plural, other {지원자 #명}}",
+    "supportJoined": "참여함",
+    "supportInvited": "초대됨, 아직 참여하지 않음",
+    "adjustCredits": "크레딧 조정",
+    "adjustTitle": "{name}의 크레딧 조정",
+    "adjustText": "양수는 크레딧을 추가하고 음수는 차감합니다. 회사는 결제 내역에서 사유를 볼 수 있습니다.",
+    "adjustAmount": "크레딧(예: 500 또는 -500)",
+    "adjustNote": "사유(예: “지원자 한 명에 대해 두 번 차감됨”)",
+    "adjustConfirmTitle": "{name}에 {amount}크레딧을 적용할까요?",
+    "adjustConfirm": "조정",
+    "adjustBack": "뒤로",
+    "adjustNext": "다음",
+    "adjusted": "크레딧이 조정되었습니다",
+    "supportNoEmail": "이메일이 없는 계정",
+    "supportCompanies": "회사",
+    "supportNoCompanies": "어느 회사의 멤버도 아닙니다.",
+    "supportTopUps": "결제된 충전",
+    "supportNoTopUps": "충전 내역이 없습니다.",
+    "supportDeletedCompany": "삭제된 회사",
+    "supportNotYet": "아직 없음",
+    "supportFacts": {
+      "company": "회사",
+      "interview": "면접",
+      "invited": "초대 일시",
+      "lastSent": "초대 마지막 발송",
+      "started": "시작 일시",
+      "finished": "완료 일시",
+      "grade": "점수",
+      "extraTime": "추가 시간",
+      "signals": "부정행위 의심 표시",
+      "credits": "크레딧",
+      "topics": "주제",
+      "questionSeconds": "문제당 시간",
+      "passMark": "합격 기준"
+    },
+    "supportPassed": "{grade}, 합격",
+    "supportNotPassed": "{grade}, 불합격",
+    "supportNoExtraTime": "없음",
+    "supportSignals": "페이지 이탈 {leaves}회 · 복사 시도 {copies}회 · 빠른 답변 {fast}개",
+    "supportCredits": {
+      "held": "예약됨",
+      "charged": "차감됨",
+      "released": "반환됨"
+    },
+    "supportGenerationFailed": "생성 실패",
+    "supportSeconds": "{count, plural, other {#초}}",
+    "supportNoCandidates": "아직 지원자가 없습니다.",
+    "campaigns": "캠페인",
+    "newCampaign": "새 캠페인",
+    "editCampaign": "편집",
+    "editCampaignIn": "{language} 버전 편집",
+    "campaignInEnglish": "영어로 작성하세요. 저장하면 다른 모든 언어로 번역되며, 보내기 전에 어느 언어 버전이든 수정할 수 있습니다.",
+    "campaignInLanguage": "직접 작성한 {language} 문구가 쓴 그대로 발송됩니다.",
+    "campaignKind": "종류",
+    "campaignKinds": {
+      "updates": "제품 업데이트",
+      "promotions": "혜택"
+    },
+    "campaignSubject": "제목",
+    "campaignSubjectPlaceholder": "여기에 제목 입력…",
+    "campaignText": "본문",
+    "campaignTextPlaceholder": "여기에 본문 입력… Enter를 누르면 새 단락이 시작됩니다.",
+    "campaignButton": "버튼 텍스트(선택)",
+    "campaignLink": "버튼 링크",
+    "campaignLinkPlaceholder": "prepza 내 버튼 링크(예: /pricing, 선택)",
+    "campaignSaveFailed": "캠페인을 저장하지 못했습니다. 다시 시도해 주세요.",
+    "noCampaigns": "아직 캠페인이 없습니다.",
+    "campaignStatus": {
+      "draft": "초안",
+      "sending": "발송 중…",
+      "sent": "발송됨",
+      "stopped": "중지됨"
+    },
+    "campaignRowCounts": {
+      "sent": "발송 {count}건",
+      "skipped": "건너뜀 {count}건",
+      "failed": "실패 {count}건",
+      "unsubscribed": "수신 거부 {count}건",
+      "complained": "스팸 신고 {count}건"
+    },
+    "campaignCounts": {
+      "pending": "대기 중",
+      "sent": "발송됨",
+      "skipped": "건너뜀",
+      "failed": "실패",
+      "unsubscribed": "이후 수신 거부",
+      "complained": "스팸 신고"
+    },
+    "campaignRecipients": "수신자 <number>{shown}</number>{count, plural, other {명}}",
+    "campaignPreviewLanguage": "미리 보기 언어",
+    "sendTest": "나에게 테스트 이메일 보내기",
+    "testSent": "테스트 이메일을 회원님의 주소로 보내고 있습니다.",
+    "sendCampaign": "보내기",
+    "stopCampaign": "중지",
+    "deleteCampaign": "캠페인 삭제",
+    "campaignConfirm": {
+      "send": {
+        "title": "이 캠페인을 보낼까요?",
+        "text": "{count, plural, =0 {지금은 받을 사람이 없습니다.} other {#명이 다음 발송 시간(UTC 8:00~18:00)부터 받습니다. 보낸 후에는 변경할 수 없습니다.}}",
+        "unknown": "이 종류의 이메일을 켜 둔 모든 사람이 다음 발송 시간(UTC 8:00~18:00)부터 받습니다. 보낸 후에는 변경할 수 없습니다.",
+        "confirm": "보내기"
+      },
+      "stop": {
+        "title": "이 캠페인을 중지할까요?",
+        "text": "더 이상 아무도 받지 않습니다. 이미 받은 사람에게는 그대로 남습니다.",
+        "confirm": "중지"
+      },
+      "delete": {
+        "title": "이 캠페인을 삭제할까요?",
+        "text": "모든 언어에서 삭제됩니다. 발송된 적이 없습니다.",
+        "confirm": "삭제"
+      }
+    },
+    "sendAsCampaign": "캠페인으로 보내기",
+    "removeSuppression": "목록에서 제거",
+    "suppressed": {
+      "bounced": "이 주소로 보낸 이메일이 {date}에 반송되어 제품 이메일과 안내가 이 주소를 건너뜁니다.",
+      "complained": "이 주소가 {date}에 이메일을 스팸으로 신고하여 제품 이메일과 안내가 이 주소를 건너뜁니다."
+    },
+    "aiCosts": "AI 비용",
+    "aiCards": {
+      "spend": "지출",
+      "calls": "AI 호출",
+      "month": "이번 달",
+      "monthOf": "이번 달, 예산 {budget} 중",
+      "input": "입력 토큰",
+      "cached": "캐시된 입력 토큰",
+      "output": "출력 토큰"
+    },
+    "aiBudgetsTitle": "오늘의 공동 예산",
+    "aiNothing": "이 기간에는 내역이 없습니다.",
+    "aiOf": "{used} / {limit}",
+    "aiForTitle": "사용 대상",
+    "aiCategories": {
+      "paid": "유료 회사",
+      "unpaid": "무료 회사",
+      "no_company": "회사 없음",
+      "prepza": "prepza"
+    },
+    "aiActionsTitle": "작업별",
+    "aiActions": {
+      "interview_generation": "면접 생성",
+      "template_generation": "템플릿 생성",
+      "question_regeneration": "문제 재생성",
+      "template_question_regeneration": "템플릿 문제 재생성",
+      "sample_key_check": "정답 표본 검토",
+      "question_verify": "문제 검토",
+      "key_check_batch": "정답 일괄 검토",
+      "embeddings": "주제 매칭",
+      "news_translation": "소식 번역",
+      "campaign_translation": "캠페인 번역",
+      "assistant_message": "어시스턴트 메시지",
+      "assistant_title": "어시스턴트 채팅 제목",
+      "transcription": "음성 메시지",
+      "help_chat": "도움말 채팅"
+    },
+    "aiUnitCost": {
+      "interview_generation": "면접당 {cost}",
+      "template_generation": "템플릿 생성 1회당 {cost}",
+      "question_regeneration": "문제당 {cost}",
+      "template_question_regeneration": "문제당 {cost}",
+      "sample_key_check": "테스트당 {cost}",
+      "question_verify": "문제당 {cost}",
+      "key_check_batch": "검토 1회당 {cost}",
+      "embeddings": "요청당 {cost}",
+      "news_translation": "게시물당 {cost}",
+      "campaign_translation": "캠페인당 {cost}",
+      "assistant_message": "대화당 {cost}",
+      "assistant_title": "대화당 {cost}",
+      "transcription": "분당 {cost}",
+      "help_chat": "호출당 {cost}"
+    },
+    "aiPaid": "유료 {spend}",
+    "aiUnpaid": "무료 {spend}",
+    "aiCalls": "{count, plural, other {호출 #회}}",
+    "aiModelsTitle": "모델별",
+    "aiTokensIn": "입력 {count}",
+    "aiCachedShare": "캐시 {share}",
+    "aiTokensOut": "출력 {count}",
+    "aiCompaniesTitle": "비용이 가장 많은 회사",
+    "aiUsersTitle": "비용이 가장 많은 사용자",
+    "aiByMonthTitle": "월별",
+    "aiByDayTitle": "일별",
+    "limitsOursTitle": "도달한 prepza 한도",
+    "limitsProvidersTitle": "외부 서비스 한도",
+    "limitsNoHits": "이 기간에 도달한 한도가 없습니다.",
+    "limitNames": {
+      "MESSAGES_PER_USER_HOUR": "사용자별 시간당 어시스턴트 메시지",
+      "MESSAGES_PER_USER_DAY": "사용자별 하루 어시스턴트 메시지",
+      "MESSAGES_PER_COMPANY_DAY": "회사별 하루 어시스턴트 메시지",
+      "MESSAGES_PER_DAY": "하루 어시스턴트 메시지, 무료 사용자 합계",
+      "TOKENS_PER_USER_DAY": "사용자별 하루 어시스턴트 토큰",
+      "TOKENS_PER_COMPANY_DAY": "회사별 하루 어시스턴트 토큰",
+      "TOKENS_PER_DAY": "하루 어시스턴트 토큰, 무료 사용자 합계",
+      "TRANSCRIPTIONS_PER_USER_HOUR": "사용자별 시간당 음성 메시지",
+      "ACTIONS_PER_USER_HOUR": "사용자별 시간당 어시스턴트 작업",
+      "MCP_CALLS_PER_USER_MINUTE": "사용자별 분당 AI 앱 호출",
+      "MCP_CALLS_PER_USER_DAY": "사용자별 하루 AI 앱 호출",
+      "REGISTRATIONS_PER_IP_HOUR": "IP 주소별 시간당 AI 앱 등록",
+      "REGISTRATIONS_PER_DAY": "하루 AI 앱 등록, 전체",
+      "AUTHORIZATIONS_PER_IP_HOUR": "IP 주소별 시간당 AI 앱 연결 요청",
+      "TOKEN_REQUESTS_PER_CLIENT_MINUTE": "앱별 분당 AI 앱 토큰 요청",
+      "APPROVALS_PER_USER_HOUR": "사용자별 시간당 허용한 AI 앱 연결",
+      "MAX_OWNED_COMPANIES": "한 사람이 소유할 수 있는 회사",
+      "INTERVIEWS_PER_DAY": "회사별 하루 면접 생성",
+      "INTERVIEWS_PER_DAY_UNPAID": "무료 회사별 하루 면접 생성",
+      "MAX_INTERVIEWS_WITHOUT_CANDIDATES": "지원자 없이 대기 중인 생성된 면접",
+      "MAX_INTERVIEWS_WITHOUT_CANDIDATES_UNPAID": "지원자 없이 대기 중인 생성된 면접, 무료",
+      "PREVIEWS_PER_USER_HOUR": "사용자별 시간당 면접 미리보기",
+      "LINK_STARTS_PER_HOUR": "면접 링크 하나로 시간당 시작",
+      "LINK_STARTS_PER_IP_HOUR": "IP 주소별 시간당 링크 시작",
+      "MAX_BULK_INVITES": "목록 또는 파일 하나의 지원자",
+      "MAX_PENDING_INVITES": "회사별 대기 중인 팀 초대",
+      "MEMBER_INVITES_PER_UNPAID_DAY": "무료 회사별 하루 팀 초대",
+      "EMAIL_HOURLY_LIMIT": "사용자별 시간당 초대 이메일",
+      "EMAIL_DAILY_LIMIT": "사용자별 하루 초대 이메일",
+      "EMAIL_RECIPIENT_DAILY_LIMIT": "한 주소로 한 테스트에 보내는 하루 초대",
+      "REPORT_EMAILS_PER_COMPANY_DAY": "회사별 하루 보고서 이메일",
+      "GENERATION_LIMIT": "사용자별 하루 생성",
+      "REGENERATION_LIMIT": "사용자별 하루 문제 재생성",
+      "DAILY_GENERATION_LIMIT": "하루 생성, 무료 회사 합계",
+      "MAX_TOPIC_REVISIONS": "생성당 주제 수정 횟수",
+      "DAILY_VERIFY_LIMIT": "하루 문제 검토",
+      "PRACTICE_ROUNDS_PER_HOUR": "사용자별 시간당 연습 라운드",
+      "SIGNALS_PER_MINUTE": "세션별 분당 부정행위 의심 표시",
+      "MAX_SIGNALS_PER_QUESTION": "문제당 저장되는 부정행위 의심 표시",
+      "HELP_USER_LIMIT": "계정별 시간당 도움말 채팅 메시지",
+      "HELP_IP_LIMIT": "IP 주소별 시간당 도움말 채팅 메시지",
+      "HELP_DAILY_LIMIT": "하루 도움말 채팅 메시지, 전체",
+      "HELP_TOKENS_PER_DAY": "하루 도움말 채팅 토큰, 전체",
+      "CONTACT_IP_LIMIT": "IP 주소별 하루 문의 메시지",
+      "CONTACT_DAILY_LIMIT": "하루 문의 메시지, 전체",
+      "RATINGS_PER_DAY": "사용자별 하루 문제 평가",
+      "REPORTS_PER_DAY": "사용자별 하루 문제 신고",
+      "MAX_API_KEYS": "회사별 API 키",
+      "MAX_WEBHOOKS": "회사별 웹훅",
+      "API_REQUESTS_PER_MINUTE": "회사별 분당 API 요청",
+      "RESEND_DAILY_LIMIT": "Resend를 통한 하루 이메일",
+      "RESEND_RESERVE_PERCENT": "대량 발송에 쓰지 않고 남겨 두는 Resend 하루 이메일 비율",
+      "CAMPAIGNS_PER_KIND_DAY": "종류별 하루 캠페인",
+      "AI_SPEND_UNPAID_DAY": "하루 AI 지출, 무료 사용자 합계",
+      "QUESTION_SECONDS_BASIC": "새 초급 테스트의 문제당 초",
+      "QUESTION_SECONDS_MEDIUM": "새 중급 테스트의 문제당 초",
+      "QUESTION_SECONDS_HARD": "새 고급 테스트의 문제당 초",
+      "GENERATION_CALLS_AT_ONCE": "생성당 동시 AI 호출",
+      "GENERATION_CALLS_PER_SECOND": "초당 AI 호출, 모든 생성 합계",
+      "MULTI_ANSWER_PERCENT": "'해당하는 것을 모두 고르는' 문제, 주제별 비율",
+      "PAUSED": "일시 중지 중 거부됨",
+      "OPENAI_RATE_LIMIT": "OpenAI 속도 제한",
+      "OPENAI_QUOTA": "OpenAI 크레딧 소진",
+      "OPENAI_THROTTLED": "자체 OpenAI 요청 한도로 대기",
+      "RESEND_RATE_LIMIT": "Resend 속도 제한",
+      "RESEND_DAILY_QUOTA": "Resend 일일 할당량",
+      "ATS_RATE_LIMIT": "ATS 속도 제한",
+      "FIREBASE_TOKEN_REFUSED": "Firebase 로그인 거부"
+    },
+    "limitValue": "{window} {value}",
+    "limitWindows": {
+      "60": "분당",
+      "3600": "시간당",
+      "86400": "하루에",
+      "1209600": "주제 검토마다"
+    },
+    "limitKinds": {
+      "ours": "prepza",
+      "openai": "OpenAI",
+      "resend": "Resend",
+      "firebase": "Firebase",
+      "workable": "Workable",
+      "greenhouse": "Greenhouse",
+      "teamtailor": "Teamtailor",
+      "recruitee": "Recruitee",
+      "breezy": "Breezy HR"
+    },
+    "limitHitter": "{name} ({count})",
+    "limitHits": "{count, plural, other {도달 #회}}",
+    "limitsTitle": "한도",
+    "limitsText": "사용할 수 있는 양과 서비스가 사용하는 값을 서비스별로 보여 줍니다. 변경 사항은 1분 안에 적용됩니다.",
+    "limitServices": {
+      "assistant": "어시스턴트",
+      "companies": "회사",
+      "generation": "생성",
+      "rounds": "연습, 세션, 도움말 채팅",
+      "library": "문제 피드백",
+      "api": "공개 API",
+      "notifications": "이메일",
+      "billing": "AI 지출"
+    },
+    "limitAtOnce": "동시에",
+    "limitScopes": {
+      "user": "사용자별",
+      "company": "회사별",
+      "ip": "IP 주소별",
+      "everyone": "전체 합계"
+    },
+    "limitDefault": "기본값 {value}",
+    "limitSecondsUnit": "초",
+    "limitRecentHits": "{days}일 동안 {count, plural, other {도달 #회}}",
+    "limitPaid": "유료",
+    "limitUnpaid": "무료",
+    "limitSave": "저장",
+    "limitReset": "기본값으로 재설정",
+    "limitSaved": "한도를 저장했습니다.",
+    "limitFailed": "한도를 저장하지 못했습니다. 다시 시도해 주세요.",
+    "limitChangesTitle": "변경 내역",
+    "limitNoChanges": "아직 변경된 한도가 없습니다.",
+    "limitChange": "{name}: {from} → {to}",
+    "limitDefaultValue": "기본값",
+    "supportAiSpend": "최근 {days}일 동안 AI 비용 {spend}, {count, plural, other {호출 #회}}."
   },
   "templates": {
     "title": "템플릿",
@@ -363,10 +713,12 @@
   "reportReasons": {
     "wrong_answer": "표시된 정답이 틀렸습니다",
     "unclear": "문제가 명확하지 않습니다",
+    "hard_to_read": "읽기 어렵습니다",
     "off_topic": "주제와 맞지 않습니다",
     "other": "기타"
   },
   "questions": {
+    "multiChoice": "복수 정답",
     "goodQuestion": "좋은 문제였나요?",
     "ratingFailed": "평점을 저장하지 못했습니다. 다시 시도해 주세요.",
     "helpful": "도움이 되는 문제",
@@ -413,6 +765,10 @@
     "correct": "정답",
     "incorrect": "오답",
     "notAnswered": "미답변",
+    "partlyCorrect": "부분 정답",
+    "rightPicks": "정답 보기 {total}개 중 {right}개",
+    "wrongPicks": "{count, plural, other {오답 보기 #개}}",
+    "points": "1점 중 {points}점",
     "finish": "종료",
     "finishing": "종료하는 중…",
     "next": "다음 문제",
@@ -424,6 +780,7 @@
     "finishFailed": "면접을 종료하지 못했습니다. 다시 시도해 주세요.",
     "continueFailed": "계속하지 못했습니다. 다시 시도해 주세요.",
     "timeUp": "이 문제의 제한 시간이 끝났습니다.",
+    "selectAll": "해당하는 것을 모두 고르세요",
     "finish": "면접 종료",
     "finishTitle": "면접 전체를 종료할까요?",
     "endsAll": "이 섹션뿐 아니라 {count}개 섹션이 모두 종료됩니다.",
@@ -498,6 +855,7 @@
     "interviews": "면접",
     "templates": "템플릿",
     "team": "팀",
+    "actions": "작업 기록",
     "integrations": "연동",
     "referrals": "추천",
     "brand": "브랜드",
@@ -629,10 +987,12 @@
       "many": "여러 명",
       "file": "업로드"
     },
-    "manyHint": "한 줄에 한 명, 이름은 넣어도 되고 빼도 됩니다.\n한 번에 최대 100명:",
+    "manyHint": "한 줄에 한 명, 이름은 넣어도 되고 빼도 됩니다.\n한 번에 최대 {count}명:",
+    "manyHintNoLimit": "한 줄에 한 명, 이름은 넣어도 되고 빼도 됩니다:",
     "example": "예시",
     "uploadFile": "파일 업로드",
-    "fileFormats": "CSV 또는 TXT, 최대 100명. 이름은 이름 열이나 각 이메일 옆에 넣을 수 있습니다.",
+    "fileFormats": "CSV 또는 TXT, 최대 {count}명. 이름은 이름 열이나 각 이메일 옆에 넣을 수 있습니다.",
+    "fileFormatsNoLimit": "CSV 또는 TXT. 이름은 이름 열이나 각 이메일 옆에 넣을 수 있습니다.",
     "fileTooLarge": "파일이 너무 큽니다(최대 {kb}KB).",
     "lineProblems": {
       "no_email": "이메일 없음: {line}",
@@ -658,7 +1018,9 @@
     "fallbackTitle": "면접",
     "timePerQuestion": "문제당 시간:",
     "secondsUnit": "초",
-    "pickOne": "문제마다 네 개의 보기 중 하나를 고르세요.",
+    "wholeInterview": "면접 전체:",
+    "minutesUnit": "분",
+    "pickOne": "문제마다 네 개의 보기 중 하나를 고르세요. '해당하는 것을 모두 고르세요'라고 표시된 문제에서는 정답인 보기를 모두 선택하세요. 정답 보기마다 문제 배점의 일부를 받고, 잘못 선택한 보기에는 점수가 없습니다.",
     "changePick": "'다음 문제'를 누르기 전까지는 선택을 바꿀 수 있습니다.",
     "timeRunsOut": "문제의 제한 시간이 끝나면 선택한 답이 제출되고 다음 문제가 열립니다. 선택하지 않았다면 오답 처리됩니다. 페이지를 나가도 시간은 계속 흐릅니다.",
     "unanswered": "답하지 않은 문제는 오답으로 처리됩니다.",
@@ -1097,8 +1459,19 @@
       "ats_cannot_write": "{ats}에서 지원자 결과를 받지 않습니다. 키에 쓰기 권한이 없습니다. 쓰기 권한이 있는 키로 다시 연결하세요. 결과는 보관되었다가 그때 전송됩니다.",
       "connection_broken": "{name} 연결이 끊겨 다시 연결해야 합니다. 그때까지 {integration, select, slack {알림이 채널로 전달되지 않습니다} other {보내오는 지원자는 대기하고, 결과는 보관됩니다}}.",
       "webhook_stopped": "{url}(으)로 가는 웹훅이 중지되었습니다. 추가한 멤버가 더 이상 소유자나 관리자가 아닙니다. 결과를 계속 받으려면 다시 추가하세요.",
-      "ownership_received": "이제 “{name}”의 소유자입니다."
-    }
+      "ownership_received": "이제 “{name}”의 소유자입니다.",
+      "news": "소식: {title}",
+      "legal_terms": "새 이용약관이 {date}부터 적용됩니다.",
+      "legal_privacy": "새 개인정보 처리방침이 {date}부터 적용됩니다.",
+      "legal_dpa": "새 데이터 처리 계약이 {date}부터 적용됩니다."
+    },
+    "legalBanner": {
+      "terms": "prepza 이용약관이 {date}에 변경됩니다.",
+      "privacy": "prepza 개인정보 처리방침이 {date}에 변경됩니다.",
+      "dpa": "데이터 처리 계약이 {date}에 변경됩니다."
+    },
+    "readLegal": "새 버전 읽기",
+    "closeLegalBanner": "닫기"
   },
   "report": {
     "download": "PDF 다운로드",
@@ -1135,7 +1508,7 @@
     "continue": "계속",
     "history": "내 연습 기록",
     "results": "연습 결과",
-    "grade": "문제 정답",
+    "grade": "득점률",
     "notFinished": "완료되지 않음",
     "noRounds": "아직 연습 기록이 없습니다.",
     "startFailed": "연습을 시작하지 못했습니다. 다시 시도해 주세요.",
@@ -1323,7 +1696,7 @@
     "counts": "{keys, plural, other {키 #개}} · {webhooks, plural, other {웹훅 #개}}",
     "docs": "개발자 문서",
     "keysTitle": "API 키",
-    "keysText": "키는 만든 사람의 권한으로 면접과 지원자를 조회하고 지원자를 초대합니다.",
+    "keysText": "키는 만든 사람으로서 동작하며, 권한이 허용하는 일만 할 수 있습니다.",
     "noKeys": "아직 키가 없습니다.",
     "newKey": "새 키",
     "newKeyTitle": "새 API 키",
@@ -1382,7 +1755,37 @@
     "removeWebhookTitle": "이 웹훅을 삭제할까요?",
     "removeWebhookText": "{url}은(는) 더 이상 이벤트를 받지 않습니다.",
     "createFailed": "만들지 못했습니다.",
-    "removeFailed": "삭제하지 못했습니다."
+    "removeFailed": "삭제하지 못했습니다.",
+    "selectAll": "모두 선택",
+    "permissionGroups": {
+      "interviews": "면접",
+      "candidates": "지원자",
+      "credits": "크레딧",
+      "ai_agents": "AI 에이전트"
+    },
+    "permissions": {
+      "interviews:read": "조회",
+      "interviews:create": "생성",
+      "candidates:read": "조회",
+      "candidates:invite": "초대",
+      "candidates:change": "변경",
+      "candidates:delete": "삭제",
+      "credits:read": "조회",
+      "mcp": "AI 에이전트에서 사용 (MCP)"
+    },
+    "permissionLine": {
+      "interviews:read": "조회",
+      "interviews:create": "생성",
+      "candidates:read": "조회",
+      "candidates:invite": "초대",
+      "candidates:change": "변경",
+      "candidates:delete": "삭제",
+      "credits:read": "조회",
+      "mcp": "MCP"
+    },
+    "editPermissions": "권한 수정",
+    "editPermissionsText": "“{name}”에 더 이상 필요 없는 권한의 선택을 해제하세요. 권한을 추가하려면 새 키를 만드세요.",
+    "permissionsFailed": "권한을 저장하지 못했습니다."
   },
   "brand": {
     "logoTitle": "로고",
@@ -1451,7 +1854,8 @@
     "tabs": {
       "api": "API",
       "webhooks": "웹훅",
-      "sdk": "SDK"
+      "sdk": "SDK",
+      "mcp": "MCP"
     },
     "englishOnly": "이 페이지는 영어로만 제공됩니다.",
     "baseUrl": "기본 URL",
@@ -1504,6 +1908,7 @@
     "emptyTitle": "채용에 대해 물어보세요",
     "emptyText": "지원자, 면접, 크레딧, 연동, prepza 사용법을 회사에서 볼 수 있는 정보로 답합니다. AI는 틀릴 수 있으며, 링크된 페이지의 내용이 기준입니다.",
     "emptyTitleFaq": "prepza에 대해 물어보세요",
+    "pageQuestion": "이 페이지에서 무엇을 할 수 있나요?",
     "pages": {
       "open": "열기",
       "pricing": "요금",
@@ -1682,336 +2087,7 @@
   "pageHelp": {
     "label": "이 페이지 정보",
     "actionsTitle": "할 수 있는 일",
-    "tipsTitle": "팁",
-    "landing": {
-      "title": "prepza 사용 방법",
-      "text": "prepza는 채용 공고로 제한 시간이 있는 객관식 면접을 만들고, 지원자마다 다른 무작위 문제를 출제합니다.",
-      "actions": [
-        "채용 공고를 붙여 넣으면 prepza가 평가할 주제를 제안합니다.",
-        "주제를 검토해 유지·편집·삭제한 뒤 승인하면 문제가 만들어집니다.",
-        "이메일, 파일 또는 하나의 공유 링크로 지원자를 초대합니다.",
-        "보고서 확인: 지원자가 점수순으로 정렬되고, 모든 답변과 부정행위 의심 표시가 표시됩니다."
-      ],
-      "tips": [
-        "면접 생성은 무료입니다. 답변한 지원자 1명당 $2–5이며, 첫 지원자들은 무료입니다.",
-        "누군가를 초대하기 전에 지원자로 면접을 체험해 보세요."
-      ]
-    },
-    "companies": {
-      "title": "회사",
-      "text": "내 회사 목록입니다. prepza의 모든 작업은 회사 안에서 이루어집니다: 면접, 지원자, 팀, 크레딧, 연동.",
-      "actions": [
-        "“새 회사”로 회사를 만듭니다. 회사 이름은 prepza 전체에서 고유합니다.",
-        "회사를 열어 면접과 지원자를 관리합니다.",
-        "내가 소유한 회사를 모든 면접과 초대와 함께 삭제합니다."
-      ],
-      "tips": [
-        "소유하지 않은 회사 옆에는 내 역할이 표시됩니다: 관리자는 변경할 수 있고, 뷰어는 보기만 합니다.",
-        "크레딧은 회사별로 있으므로 충전도 회사마다 따로 합니다."
-      ]
-    },
-    "pickCompany": {
-      "title": "회사 선택",
-      "text": "템플릿을 선택했습니다. 사용할 회사를 고르세요. 템플릿이 그 회사에 새 면접으로 무료 복사되어 바로 지원자에게 보낼 수 있습니다.",
-      "actions": [
-        "회사를 골라 그곳에서 템플릿을 열고 사용합니다.",
-        "아직 회사가 없다면 새로 만드세요. 템플릿이 그곳에서 열립니다."
-      ],
-      "tips": [
-        "복사된 면접은 그 회사의 것입니다. 문제와 설정을 자유롭게 바꿀 수 있습니다."
-      ]
-    },
-    "interviews": {
-      "title": "면접",
-      "text": "이 회사의 모든 면접과 지원자용 크레딧입니다. 각 면접은 채용 공고로 만든 제한 시간이 있는 테스트입니다.",
-      "actions": [
-        "“새 면접”으로 채용 공고에서 면접을 만듭니다.",
-        "면접을 열어 주제, 지원자, 설정을 확인합니다.",
-        "지원자로 면접을 체험하거나 삭제합니다.",
-        "잔액에서 크레딧을 충전하거나, 결제 탭에서 자동 충전을 켭니다."
-      ],
-      "tips": [
-        "크레딧이 부족해지면 잔액이 주황색으로 바뀝니다. 크레딧이 없으면 새 초대가 발송되지 않습니다.",
-        "위의 탭에서 템플릿, 팀, 연동, 결제(소유자와 관리자), 추천으로 이동할 수 있습니다."
-      ]
-    },
-    "newInterview": {
-      "title": "새 면접",
-      "text": "채용 공고로 면접을 시작합니다. prepza가 공고를 읽고 평가할 주제를 제안하며, 승인하면 문제를 만듭니다.",
-      "actions": [
-        "채용 공고를 붙여 넣으세요: 직무, 자격 요건, 우대 사항.",
-        "면접을 생성할 언어를 선택합니다.",
-        "생성한 뒤 제안된 주제를 검토합니다."
-      ],
-      "tips": [
-        "공고가 구체적일수록 문제가 직무에 더 잘 맞습니다.",
-        "생성은 무료입니다. 비용은 답변한 지원자에 대해서만 발생합니다."
-      ]
-    },
-    "reviewTopics": {
-      "title": "주제 검토",
-      "text": "채용 공고를 바탕으로 prepza가 제안한 주제입니다. 유지한 주제마다 정답이 포함된 문제 세트가 만들어집니다.",
-      "actions": [
-        "필요 없는 주제의 체크를 해제합니다.",
-        "연필 아이콘으로 주제 이름과 하위 주제를 편집합니다.",
-        "바꿀 내용을 직접 적어 적용합니다. 예: “팀 리더십 주제 추가”.",
-        "승인하고 생성하면 문제가 만들어집니다."
-      ],
-      "tips": [
-        "주제가 너무 많으면 일부의 체크를 해제하거나 합치는 방법을 적어 주세요.",
-        "문제는 승인한 뒤에만 만들어지니, 여기서 잠시 꼼꼼히 확인하세요."
-      ]
-    },
-    "generating": {
-      "title": "생성 중",
-      "text": "prepza가 면접을 만들고 있습니다. 먼저 주제를, 이어서 주제별 문제를 만듭니다. 몇 분 정도 걸립니다.",
-      "actions": [
-        "이 페이지를 떠나도 생성은 계속됩니다.",
-        "더 이상 필요 없으면 생성을 취소하세요. 지금까지 만든 내용은 남지 않습니다."
-      ],
-      "tips": [
-        "면접이 준비되면 알림을 받습니다.",
-        "면접 목록에서 언제든 다시 돌아올 수 있습니다."
-      ]
-    },
-    "interviewTopics": {
-      "title": "주제",
-      "text": "이 면접이 평가하는 내용입니다. 각 주제에는 하위 주제와 자체 문제 풀이 있으며, 지원자마다 각 풀에서 무작위로 출제됩니다.",
-      "actions": [
-        "“문제 관리”를 열어 주제의 문제와 정답을 확인합니다.",
-        "부실한 문제를 다시 생성하거나, 틀린 정답을 표시하거나, 문제에 대한 지원자의 신고를 확인합니다.",
-        "지원자 1명이 각 주제에서 받는 문제 수를 설정합니다.",
-        "지원자로 면접을 체험하거나 삭제합니다."
-      ],
-      "tips": [
-        "AI가 만든 문제는 틀릴 수 있습니다. 초대하기 전에 각 주제를 훑어보세요.",
-        "제목을 클릭하면 면접 이름을 바꿀 수 있습니다."
-      ]
-    },
-    "interviewCandidates": {
-      "title": "지원자",
-      "text": "이 면접에 초대된 모든 사람과 그 상태, 진행률, 점수입니다.",
-      "actions": [
-        "지원자 초대: 한 명씩, 최대 100명의 목록으로, 또는 CSV·TXT 파일로.",
-        "채용 공고용 공유 링크를 켜세요. 링크가 있는 누구나 면접을 볼 수 있습니다.",
-        "이메일이나 이름으로 검색하고, 상태로 필터링하고, 점수나 날짜로 정렬합니다.",
-        "지원자의 보고서를 열거나, 전체 지원자 보고서를 내려받거나 공유합니다."
-      ],
-      "tips": [
-        "한 문제 이상 답변한 지원자마다 크레딧이 사용되며, 링크로 들어온 지원자도 마찬가지입니다.",
-        "지원자에게 리마인더가 자동으로 발송됩니다."
-      ]
-    },
-    "interviewSettings": {
-      "title": "설정",
-      "text": "모든 지원자에게 적용되는 이 면접의 진행 방식입니다.",
-      "actions": [
-        "문제당 시간을 초 단위로 설정합니다.",
-        "합격 기준을 설정합니다. 기준에 도달한 지원자는 합격입니다.",
-        "포지션을 채웠다면 면접을 채용됨으로 표시합니다."
-      ],
-      "tips": [
-        "각 설정은 입력란에서 벗어나는 즉시 저장됩니다.",
-        "지원자는 자신의 점수를 볼 수 없으며, 팀만 볼 수 있습니다.",
-        "시간이 더 필요한 지원자는 그 지원자의 페이지에서 추가 시간을 주세요."
-      ]
-    },
-    "tryInterview": {
-      "title": "지원자로 체험하기",
-      "text": "지원자가 보는 그대로의 면접 미리 보기입니다. 안내 화면 다음에 제한 시간이 있는 문제가 이어집니다. 무료입니다.",
-      "actions": [
-        "미리 보기를 시작해 지원자처럼 답변합니다.",
-        "초대하기 전에 시간, 문구, 정답을 확인합니다."
-      ],
-      "tips": [
-        "답변하는 동안 페이지를 떠나지 마세요. 지원자의 경우 페이지 이탈, 복사, 너무 빠른 답변이 기록됩니다."
-      ]
-    },
-    "candidate": {
-      "title": "지원자 보고서",
-      "text": "지원자 한 명의 결과입니다: 점수, 합격 여부, 주제별 점수와 모든 답변.",
-      "actions": [
-        "부정행위 의심 표시(페이지 이탈, 복사 시도, 빠른 답변)와 함께 각 답변을 확인합니다.",
-        "보고서를 PDF로 내려받거나 이메일로 공유합니다.",
-        "장애 등의 이유가 있다면 시작 전에 추가 시간을 줍니다.",
-        "지원자의 이름을 추가하거나 편집합니다.",
-        "이메일이 도착하지 않았다면 초대 링크를 복사해 직접 보냅니다. 링크는 지원자가 마칠 때까지 유지됩니다.",
-        "초대를 다시 보내거나 취소하고, 또는 지원자를 결과와 함께 삭제합니다."
-      ],
-      "tips": [
-        "점수는 결정을 돕는 자료일 뿐, 결정을 대신하지 않습니다. 지원자가 요청하면 사람이 결과를 검토하도록 하세요."
-      ]
-    },
-    "templates": {
-      "title": "템플릿",
-      "text": "자주 뽑는 직무를 위한 기성 면접입니다. 사용하면 이 회사에 내 면접으로 복사됩니다.",
-      "actions": [
-        "직무나 주제로 검색하고, 레벨과 언어로 필터링합니다.",
-        "템플릿을 열어 주제와 주제별 문제 수를 확인합니다.",
-        "템플릿을 사용해 면접을 시작합니다."
-      ],
-      "tips": [
-        "직무에 더 잘 맞추려면 내 채용 공고로 면접을 만드세요.",
-        "복사된 면접은 내 것입니다. 문제와 설정을 자유롭게 바꿀 수 있습니다."
-      ]
-    },
-    "template": {
-      "title": "템플릿",
-      "text": "기성 면접입니다: 주제, 하위 주제, 주제별 문제 수.",
-      "actions": [
-        "주제가 채용하려는 직무에 맞는지 확인합니다.",
-        "템플릿을 사용하면 이 회사에 새 면접으로 복사됩니다."
-      ],
-      "tips": [
-        "복사는 무료이며, 답변한 지원자는 평소처럼 크레딧을 사용합니다.",
-        "주제가 맞지 않으면 채용 공고로 면접을 만드세요."
-      ]
-    },
-    "team": {
-      "title": "팀",
-      "text": "이 회사의 면접을 함께 다루는 사람들과 그 역할입니다.",
-      "actions": [
-        "이메일로 멤버를 관리자 또는 뷰어로 추가합니다. 참여 링크가 이메일로 발송됩니다.",
-        "멤버의 역할을 관리자와 뷰어 사이에서 바꿉니다.",
-        "대기 중인 초대 링크를 복사하거나, 멤버나 초대를 제거합니다."
-      ],
-      "tips": [
-        "관리자는 면접을 만들고 수정하며, 지원자를 초대하고 충전합니다. 뷰어는 면접과 결과를 보고 보고서를 공유할 수 있지만 아무것도 바꿀 수 없습니다.",
-        "자동 충전에 카드가 쓰이는 멤버를 제거하면 자동 충전이 중지됩니다."
-      ]
-    },
-    "integrations": {
-      "title": "연동",
-      "text": "팀이 이미 쓰는 도구와 prepza를 연결하세요. 연동마다 설정 방법이 담긴 별도 페이지가 있습니다.",
-      "actions": [
-        "Slack: 회사 알림을 채널에서 받습니다.",
-        "ATS(Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): 전형 단계로 옮긴 지원자에게 면접이 발송되고, 결과가 ATS로 돌아갑니다.",
-        "API: 자체 플랫폼을 연결하는 API 키와 웹훅.",
-        "AI 앱: Claude, ChatGPT 등 AI 앱에서 prepza를 사용합니다."
-      ],
-      "tips": [
-        "연동은 회사의 모든 사람이 볼 수 있고, 소유자와 관리자가 변경할 수 있습니다."
-      ]
-    },
-    "ats": {
-      "title": "ATS 연동",
-      "text": "ATS의 채용 공고를 면접에 연결하세요. 선택한 전형 단계로 옮긴 지원자에게 면접이 발송되고, 결과는 지원자 프로필에 코멘트로 돌아옵니다.",
-      "actions": [
-        "안내에 따라 ATS를 연동합니다.",
-        "채용 공고 연결: 공고, 전형 단계, 면접을 고르거나 공고 내용으로 새 면접을 만듭니다.",
-        "크레딧 소진 등으로 초대되지 않은 지원자를 다시 초대합니다.",
-        "채용 공고 연결을 끊거나 ATS 연동을 해제합니다."
-      ],
-      "tips": [
-        "“prepza 역량 테스트”처럼 prepza 전용 전형 단계를 추가하면 다른 도구와 섞이지 않습니다.",
-        "prepza는 ATS에서 지원자를 옮기거나 불합격 처리하지 않습니다."
-      ]
-    },
-    "slack": {
-      "title": "Slack",
-      "text": "회사 알림을 Slack 채널에서 실시간으로 받습니다.",
-      "actions": [
-        "prepza를 Slack에 추가하고 #hiring 같은 채널을 고릅니다.",
-        "받을 알림을 고릅니다: 지원자의 응시 완료, 전달되지 않은 초대, 면접 준비 완료 등.",
-        "연동을 해제하면 알림이 멈추고 Slack에서 prepza 앱이 제거됩니다."
-      ],
-      "tips": [
-        "prepza는 그 채널에 게시만 할 뿐, Slack 내용을 읽을 수 없습니다.",
-        "모든 알림은 여전히 종 아이콘에서 누구나 볼 수 있습니다."
-      ]
-    },
-    "api": {
-      "title": "API",
-      "text": "채용 사이트 같은 자체 플랫폼을 prepza와 연결합니다.",
-      "actions": [
-        "API 키 만들기: 내 권한으로 면접을 만들고, 지원자와 그 결과를 읽고, 지원자를 초대하고 리마인더를 보내고 수정하거나 삭제하며, 크레딧을 읽습니다.",
-        "웹훅 추가: 지원자가 응시를 시작하거나 마칠 때(결과 포함), 초대가 전달되지 않거나 만료될 때, 지원자가 삭제될 때, 그리고 면접이 준비되었을 때 prepza가 서명된 요청으로 내 HTTPS 주소에 알립니다.",
-        "웹훅에 테스트 이벤트를 보내고, 전송 기록에서 각 전송의 결과를 확인합니다.",
-        "더 이상 쓰지 않는 키와 웹훅을 삭제합니다.",
-        "개발자 문서에서 모든 엔드포인트와 이벤트, 그리고 SDK를 확인합니다."
-      ],
-      "tips": [
-        "새 키와 웹훅 시크릿은 한 번만 표시됩니다. 바로 복사하세요.",
-        "키마다 만료일을 정하세요. 만료되지 않는 키는 유출되어도 계속 쓸 수 있습니다."
-      ]
-    },
-    "brand": {
-      "title": "브랜드",
-      "text": "지원자의 초대, 면접, 완료 페이지에 표시되는 회사의 로고와 색상입니다.",
-      "actions": [
-        "로고를 설정하거나 변경합니다.",
-        "글꼴과 카드·버튼의 둥글기를 고릅니다.",
-        "각 그룹의 색상을 고르고 미리보기에서 확인합니다.",
-        "저장하거나 prepza 색상으로 되돌립니다."
-      ],
-      "tips": [
-        "모든 지원자가 질문을 읽을 수 있도록, 텍스트를 읽기 어렵게 만드는 색상은 저장할 수 없습니다.",
-        "면접을 체험하는 멤버도 이 색상으로 봅니다."
-      ]
-    },
-    "referrals": {
-      "title": "추천",
-      "text": "이 회사의 추천 링크로 다른 회사를 prepza에 초대하면 양쪽 모두 크레딧을 받습니다.",
-      "actions": [
-        "추천 링크를 복사하거나 공유합니다.",
-        "이 회사가 받은 모든 보상을 확인합니다."
-      ],
-      "tips": [
-        "초대한 회사가 금액에 상관없이 첫 충전을 하면 양쪽 모두 크레딧을 받습니다.",
-        "크레딧은 이 회사에 지급되며 만료되지 않습니다."
-      ]
-    },
-    "billing": {
-      "title": "결제",
-      "text": "이 회사의 크레딧이 어디서 들어와 어디에 쓰였는지 보여 줍니다.",
-      "actions": [
-        "충전하거나 자동 충전을 설정합니다.",
-        "크레딧이 예약된 지원자를 확인합니다.",
-        "충전 건의 인보이스를 엽니다."
-      ],
-      "tips": [
-        "지원자의 크레딧은 초대할 때 예약되고, 응답하면 차감되며, 응답하지 않으면 반환됩니다.",
-        "이 페이지는 소유자와 관리자만 볼 수 있습니다."
-      ]
-    },
-    "aiApps": {
-      "title": "AI 앱",
-      "text": "AI 채팅에서 prepza를 사용하세요. Claude나 ChatGPT에 면접과 지원자에 대해 묻거나 변경을 맡길 수 있습니다.",
-      "actions": [
-        "서버 주소를 복사해 안내에 따라 Claude, Claude Code 또는 ChatGPT에 추가합니다.",
-        "열리는 prepza 페이지에서 앱을 허용합니다.",
-        "더 이상 쓰지 않는 앱은 연동을 해제합니다."
-      ],
-      "tips": [
-        "앱은 내가 속한 모든 회사에서 나를 대신해 동작합니다. 대부분의 앱은 무엇이든 변경하기 전에 먼저 묻습니다.",
-        "비밀번호나 API 키를 볼 수 없고, 계정이나 회사를 삭제할 수 없습니다."
-      ]
-    },
-    "topUp": {
-      "title": "충전",
-      "text": "소유자 또는 관리자로 속한 회사의 크레딧을 구매합니다.",
-      "actions": [
-        "회사와 충전 금액을 고릅니다. 금액이 클수록 지원자 1명당 비용이 낮아집니다.",
-        "Paddle 결제 화면에서 결제합니다. 크레딧은 몇 초 안에 들어옵니다.",
-        "요금을 열어 충전 금액별로 비교합니다."
-      ],
-      "tips": [
-        "지원자 1명당 500크레딧이 듭니다. 초대할 때 예약되고, 응답하면 차감되며, 응답하지 않으면 반환됩니다.",
-        "크레딧은 만료되지 않습니다. 각 충전의 인보이스는 회사의 결제 탭에 있습니다."
-      ]
-    },
-    "settings": {
-      "title": "설정",
-      "text": "내 계정입니다. prepza가 사용하는 언어, 받는 이메일, 내 데이터를 관리합니다.",
-      "actions": [
-        "사이트, 도움말 채팅, 이메일의 언어를 선택합니다.",
-        "받을 선택 이메일을 고릅니다. 초대, 보고서, 결제 문제 같은 서비스 이메일은 항상 발송됩니다.",
-        "prepza가 보관하는 내 데이터를 모두 다운로드하거나 계정을 삭제합니다."
-      ],
-      "tips": [
-        "계정을 삭제하면 나만 속한 회사도 삭제됩니다. 다른 사람이 참여한 회사는 먼저 다른 소유자가 필요합니다."
-      ]
-    }
+    "tipsTitle": "팁"
   },
   "companyBilling": {
     "reservedTab": "예약됨 ({count})",
@@ -2027,7 +2103,8 @@
       "chargeback": "지불 거절",
       "chargeback_reversed": "지불 거절 취소",
       "referral": "추천 보상",
-      "referral_reversed": "추천 보상 회수"
+      "referral_reversed": "추천 보상 회수",
+      "adjustment": "prepza 조정"
     },
     "automatic": "자동 충전",
     "invoice": "인보이스",
@@ -2050,6 +2127,7 @@
     "claudeCode": "Claude Code에서 다음을 실행하세요:",
     "copyCommand": "명령어 복사",
     "commandCopied": "명령어 복사됨",
+    "moreApps": "Gemini CLI, Cursor, VS Code, Le Chat 및 직접 만든 에이전트는 <link>개발자 문서</link>를 참고하세요.",
     "chatgptDeveloper": "ChatGPT에서 개발자 모드를 켜세요:",
     "chatgptCreate": "Apps & Connectors로 돌아와 다음을 선택하세요:",
     "chatgptPaste": "이름을 {name}(으)로 지정하고 서버 주소를 붙여 넣은 뒤 이 인증 방식을 선택하세요:",
@@ -2112,5 +2190,91 @@
       "authority": "답변에 만족하지 않으시면 에스토니아 소비자보호기술규제청(TTJA)에 문의하실 수 있습니다."
     },
     "reviewed": "최종 검토일: {date}"
+  },
+  "actionLog": {
+    "empty": "아직 작업이 없습니다.",
+    "noMatches": "이 필터에 맞는 작업이 없습니다.",
+    "formerMember": "이전 멤버",
+    "deletedCandidate": "삭제된 지원자",
+    "anyMember": "모두",
+    "anyAction": "모든 작업",
+    "member": "멤버",
+    "action": "작업",
+    "from": "시작",
+    "to": "종료",
+    "groups": {
+      "interviews": "면접",
+      "candidates": "지원자",
+      "team": "팀",
+      "company": "회사",
+      "billing": "결제",
+      "integrations": "연동"
+    },
+    "actions": {
+      "interview_created": "면접을 만듦",
+      "interview_from_template": "템플릿으로 면접을 만듦",
+      "interview_deleted": "면접을 삭제함",
+      "interview_renamed": "면접 이름을 바꿈",
+      "interview_settings_changed": "면접 설정을 변경함",
+      "link_turned_on": "공유 링크를 켬",
+      "link_turned_off": "공유 링크를 끔",
+      "questions_regenerated": "질문을 다시 생성함",
+      "answer_key_reported": "정답이 틀렸다고 표시함",
+      "topics_approved": "면접 주제를 승인함",
+      "pass_mark_changed": "합격 기준을 변경함",
+      "candidate_invited": "지원자를 초대함",
+      "invite_resent": "초대를 다시 보냄",
+      "invite_revoked": "초대를 취소함",
+      "candidate_deleted": "지원자를 삭제함",
+      "candidate_renamed": "지원자 이름을 바꿈",
+      "extra_time_set": "지원자에게 추가 시간을 줌",
+      "results_viewed": "지원자의 결과를 확인함",
+      "report_emailed": "보고서를 이메일로 보냄",
+      "member_invited": "멤버를 초대함",
+      "member_joined": "회사에 합류함",
+      "member_removed": "멤버를 제거함",
+      "member_role_changed": "멤버의 역할을 변경함",
+      "ownership_transferred": "회사를 다른 소유자에게 넘김",
+      "company_renamed": "회사 이름을 바꿈",
+      "logo_changed": "로고를 변경함",
+      "brand_changed": "브랜드 색상이나 스타일을 변경함",
+      "verification_requested": "회사 인증을 요청함",
+      "ai_apps_changed": "AI 앱을 허용하거나 중지함",
+      "top_up_paid": "크레딧을 충전함",
+      "auto_top_up_set": "자동 충전을 설정함",
+      "auto_top_up_changed": "자동 충전을 변경함",
+      "auto_top_up_stopped": "자동 충전을 중지함",
+      "ats_connected": "ATS를 연동함",
+      "ats_reconnected": "ATS를 다시 연동함",
+      "ats_disconnected": "ATS 연동을 해제함",
+      "job_linked": "ATS 채용 공고를 연결함",
+      "job_unlinked": "ATS 채용 공고 연결을 해제함",
+      "slack_connected": "Slack을 연동함",
+      "slack_disconnected": "Slack 연동을 해제함",
+      "slack_notifications_changed": "Slack 알림을 변경함",
+      "api_key_created": "API 키를 만듦",
+      "api_key_deleted": "API 키를 삭제함",
+      "api_key_narrowed": "API 키의 권한을 줄임",
+      "webhook_added": "웹훅을 추가함",
+      "webhook_tested": "웹훅을 테스트함",
+      "webhook_deleted": "웹훅을 삭제함"
+    },
+    "removed": "제거된 권한: {permissions}",
+    "permissions": {
+      "interviews:read": "면접 조회",
+      "interviews:create": "면접 생성",
+      "candidates:read": "지원자 조회",
+      "candidates:invite": "지원자 초대",
+      "candidates:change": "지원자 변경",
+      "candidates:delete": "지원자 삭제",
+      "credits:read": "크레딧 조회",
+      "mcp": "AI 에이전트에서 사용 (MCP)"
+    },
+    "via": {
+      "assistant": "어시스턴트를 통해",
+      "mcp": "AI 앱을 통해",
+      "api": "API를 통해",
+      "ats": "ATS를 통해"
+    }
   }
 }

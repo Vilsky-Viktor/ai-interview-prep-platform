@@ -1,7 +1,7 @@
 ---
 title: "Các lựa chọn thay thế và bổ sung cho HackerRank để kiểm tra kiến thức kỹ thuật"
 seoTitle: "Lựa chọn thay thế HackerRank: bài kiểm tra kiến thức IT"
-description: "HackerRank và các công cụ khác phù hợp ở đâu khi kiểm tra kiến thức kỹ thuật, kể cả đọc code, và cách bài kiểm tra kiến thức kết hợp với bài test code."
+description: "HackerRank và các công cụ khác phù hợp ở đâu khi kiểm tra kiến thức kỹ thuật, kể cả đọc code, và cách bài kiểm tra kiến thức kết hợp với bài kiểm tra viết code."
 updated: "2026-10-07"
 ---
 
@@ -9,7 +9,7 @@ updated: "2026-10-07"
 
 HackerRank là một nền tảng tuyển dụng lập trình viên. Tính đến tháng 10/2026, trang web của HackerRank mô tả các bài kiểm tra sàng lọc, phỏng vấn lập trình cặp trực tiếp trên một canvas dùng chung, và một người phỏng vấn AI làm việc qua một nhiệm vụ thực tế ([hackerrank.com](https://www.hackerrank.com/)). Nếu bạn cần ứng viên viết và chạy code, một nền tảng như vậy được xây dựng cho việc đó.
 
-prepza không thay thế cho nó. prepza làm một việc khác: một bài kiểm tra trắc nghiệm có tính giờ về những gì ứng viên biết, được viết từ mô tả công việc của bạn, kể cả câu hỏi đọc code. Hai công cụ kết hợp với nhau tốt. Một cách thiết lập phổ biến là dùng prepza làm bài kiểm tra kiến thức nhanh cho mọi ứng viên, rồi bài test lập trình hoặc phỏng vấn live coding của một nền tảng dành cho lập trình viên cho những người đạt. prepza cũng bao quát các vị trí khác mà bạn tuyển trong cùng quý, như account manager, nhân viên kế toán sổ sách hay nhân viên hỗ trợ khách hàng.
+prepza không thay thế cho nó. prepza làm một việc khác: một bài kiểm tra trắc nghiệm có tính giờ về những gì ứng viên biết, được viết từ mô tả công việc của bạn, kể cả câu hỏi đọc code. Hai công cụ kết hợp với nhau tốt. Một cách thiết lập phổ biến là dùng prepza làm bài kiểm tra kiến thức nhanh cho mọi ứng viên, rồi bài kiểm tra lập trình hoặc phỏng vấn live coding của một nền tảng dành cho lập trình viên cho những người đạt. prepza cũng bao quát các vị trí khác mà bạn tuyển trong cùng quý, như account manager, nhân viên kế toán sổ sách hay nhân viên hỗ trợ khách hàng.
 
 Trang này giải thích mỗi loại công cụ phù hợp ở đâu. Các thông tin dẫn liên kết đến trang của chính từng nhà cung cấp tính đến tháng 10/2026; hãy kiểm tra chúng trước khi mua.
 
@@ -24,12 +24,12 @@ Trang này giải thích mỗi loại công cụ phù hợp ở đâu. Các thô
 
 | Công cụ | Mạnh nhất ở | Vị trí ngoài kỹ thuật | Code trong bài kiểm tra | Mô hình giá (tính đến tháng 10/2026) |
 | --- | --- | --- | --- | --- |
-| **HackerRank** | Bài test lập trình, phỏng vấn live coding và người phỏng vấn AI cho lập trình viên ([trang web](https://www.hackerrank.com/)) | Không phải trọng tâm | Ứng viên viết và chạy code | Xem [trang bảng giá](https://www.hackerrank.com/pricing/) |
+| **HackerRank** | Bài kiểm tra lập trình, phỏng vấn live coding và người phỏng vấn AI cho lập trình viên ([trang web](https://www.hackerrank.com/)) | Không phải trọng tâm | Ứng viên viết và chạy code | Xem [trang bảng giá](https://www.hackerrank.com/pricing/) |
 | **prepza** | Phỏng vấn kỹ năng trắc nghiệm có tính giờ từ mô tả công việc của bạn | Mọi vị trí | Câu hỏi đọc code (code làm gì hoặc in ra gì); không viết hay chạy code | Theo ứng viên, không có gói đăng ký ([bảng giá](/pricing)) |
 | **TestGorilla** | Thư viện bài kiểm tra rộng: kỹ năng theo vị trí, nhận thức, tính cách, ngoại ngữ, lập trình | Có | Bài kiểm tra lập trình; thử thách lập trình tùy chỉnh ở gói cao hơn | Gói miễn phí và gói theo năm ([trang bảng giá](https://www.testgorilla.com/pricing/)) |
 | **CodeSignal** | Đánh giá kỹ thuật và người phỏng vấn AI | Kinh doanh, chăm sóc khách hàng và marketing ở các gói cao hơn | Bài đánh giá lập trình | Gói theo tháng hoặc theo năm kèm credit ([trang bảng giá](https://codesignal.com/pricing/)) |
 | **Bryq** | Đánh giá nhận thức, tính cách và kỹ năng | Có | Không phải trọng tâm | Gói theo tháng hoặc theo năm ([trang bảng giá](https://www.bryq.com/pricing)) |
-| **Alooba** | Vị trí kỹ thuật và dữ liệu | Một số | Bài test lập trình phân tích dữ liệu và SQL ở gói cao hơn | Gói theo tháng hoặc theo năm kèm credit ([trang bảng giá](https://www.alooba.com/pricing/)) |
+| **Alooba** | Vị trí kỹ thuật và dữ liệu | Một số | Bài kiểm tra lập trình phân tích dữ liệu và SQL ở gói cao hơn | Gói theo tháng hoặc theo năm kèm credit ([trang bảng giá](https://www.alooba.com/pricing/)) |
 
 ## Mỗi công cụ phù hợp ở đâu
 
@@ -64,7 +64,7 @@ Các gói của Bryq bao gồm đánh giá nhận thức và tính cách, đánh
 
 ### Alooba: vị trí dữ liệu
 
-Alooba liệt kê hơn 400 bài kiểm tra sàng lọc theo vị trí trên hơn 500 kỹ năng, bao gồm bài kiểm tra phân tích dữ liệu; các gói cao hơn có thêm bài test lập trình phân tích dữ liệu và SQL ([trang bảng giá, tính đến tháng 10/2026](https://www.alooba.com/pricing/)).
+Alooba liệt kê hơn 400 bài kiểm tra sàng lọc theo vị trí trên hơn 500 kỹ năng, bao gồm bài kiểm tra phân tích dữ liệu; các gói cao hơn có thêm bài kiểm tra lập trình phân tích dữ liệu và SQL ([trang bảng giá, tính đến tháng 10/2026](https://www.alooba.com/pricing/)).
 
 - **Tốt hơn prepza khi:** vị trí phân tích và dữ liệu cần bài kiểm tra dữ liệu thực hành.
 
@@ -86,7 +86,7 @@ Giả sử trong một quý bạn tuyển 1 lập trình viên, 2 nhân viên ki
 | Giai đoạn | Vị trí lập trình viên | Vị trí kinh doanh và hỗ trợ |
 | --- | --- | --- |
 | Sàng lọc | prepza: kiến thức về stack và câu hỏi đọc code cho cả 15 ứng viên | prepza: một bài kiểm tra kiến thức từ mỗi mô tả công việc |
-| Thực hành | Bài test lập trình hoặc phỏng vấn live coding của một nền tảng dành cho lập trình viên cho 3–5 người đạt | Đóng vai hoặc mẫu công việc cho danh sách rút gọn |
+| Thực hành | Bài kiểm tra lập trình hoặc phỏng vấn live coding của một nền tảng dành cho lập trình viên cho 3–5 người đạt | Đóng vai hoặc mẫu công việc cho danh sách rút gọn |
 | Quyết định | Phỏng vấn có cấu trúc và phán đoán của con người | Phỏng vấn có cấu trúc và phán đoán của con người |
 
 Vòng sàng lọc giữ thời gian phỏng vấn của kỹ sư cho những người đã nắm được stack. Giai đoạn lập trình cho thấy họ có viết được code chạy được không, điều mà prepza không kiểm tra. Tổng chi phí của bạn phụ thuộc vào số lượng ứng viên và gói của nền tảng lập trình; xem [Cách so sánh chi phí bài kiểm tra](/compare/cheapest-pre-employment-test).

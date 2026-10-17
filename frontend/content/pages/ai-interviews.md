@@ -37,7 +37,7 @@ prepza uses AI to write a skills interview from your job description. People sta
 
 1. **AI reads your job description** and picks out what a candidate must know: the requirements, the level and a set of topics with subtopics.
 2. **You review the topics.** Keep, uncheck, rename or edit them, or tell the AI in plain text what to change. No question is written until you approve.
-3. **AI writes the questions.** Each topic gets a bank of multiple-choice questions, each with one correct option and three plausible wrong ones. For technical topics, many questions show a short code example and ask what it outputs, what it does, why it fails or which change fixes it. You can open every question and its options, and re-generate any you don't like.
+3. **AI writes the questions.** Each topic gets a bank of multiple-choice questions with four options each: most have one correct option and three plausible wrong ones, and about 1 in 10 are "select all that apply", with 2 or 3 correct options. For technical topics, many questions show a short code example and ask what it outputs, what it does, why it fails or which change fixes it. You can open every question and its options, and re-generate any you don't like.
 4. **Candidates answer timed questions.** Each candidate gets their own random set from each topic's bank, in their own order, with a countdown on every question.
 5. **Answers are marked against an answer key.** AI writes the keys. A sample of each topic's keys is checked before release, and the rest when a question is flagged. Marking itself follows fixed rules, and no AI reads or judges a candidate's answer. If a key is corrected later, the fix applies to candidates who start after it; past results don't change. Speed, page leaves and copy attempts are shown to you as signals; they don't change the score.
 6. **People decide.** You see a ranked list and a scorecard per candidate, with every answer and its timing. A person at your company reviews results and makes the hiring call.
@@ -57,7 +57,7 @@ You can also preview your own interview as a candidate before inviting anyone: t
 
 ## Why this approach is easier to explain and review
 
-**Every result can be traced.** A score is the share of questions answered correctly. For any candidate you can show the exact questions they saw, what they picked, the right answer and how long they took.
+**Every result can be traced.** A score is the share of points earned: each question is worth one point, and a "select all that apply" question earns part of it for each correct option ticked, and nothing if a wrong one is ticked. For any candidate you can show the exact questions they saw, what they picked, the right answer and how long they took.
 
 **The content is reviewable.** You approve the topics before anything is written, and the questions are open to you. If a topic isn't a real job requirement, you can remove it.
 

@@ -37,7 +37,7 @@ prepza usa l'IA per scrivere un colloquio sulle competenze a partire dalla tua d
 
 1. **L'IA legge la tua descrizione del ruolo** e individua ciò che un candidato deve sapere: i requisiti, il livello e una serie di argomenti con i relativi sottoargomenti.
 2. **Tu rivedi gli argomenti.** Mantienili, deselezionali, rinominali o modificali, oppure scrivi all'IA in linguaggio semplice cosa cambiare. Nessuna domanda viene scritta finché non approvi.
-3. **L'IA scrive le domande.** Ogni argomento riceve una serie di domande a scelta multipla, ognuna con una sola opzione corretta e tre sbagliate ma plausibili. Per gli argomenti tecnici, molte domande mostrano un breve esempio di codice e chiedono cosa stampa, cosa fa, perché fallisce o quale modifica lo corregge. Puoi aprire ogni domanda e le sue opzioni e rigenerare quelle che non ti convincono.
+3. **L'IA scrive le domande.** Ogni argomento riceve una serie di domande a scelta multipla con quattro opzioni ciascuna: la maggior parte ha una sola opzione corretta e tre sbagliate ma plausibili, e circa 1 su 10 chiede di «selezionare tutte le risposte corrette», con 2 o 3 opzioni corrette. Per gli argomenti tecnici, molte domande mostrano un breve esempio di codice e chiedono cosa stampa, cosa fa, perché fallisce o quale modifica lo corregge. Puoi aprire ogni domanda e le sue opzioni e rigenerare quelle che non ti convincono.
 4. **I candidati rispondono a domande a tempo.** Ogni candidato riceve un proprio set casuale dalla serie di domande di ciascun argomento, in un ordine tutto suo, con un conto alla rovescia su ogni domanda.
 5. **Le risposte vengono corrette in base a una chiave di correzione.** L'IA scrive le chiavi. Un campione delle chiavi di ogni argomento viene controllato prima della pubblicazione, le altre quando una domanda viene segnalata. La correzione in sé segue regole fisse, e nessuna IA legge o giudica la risposta di un candidato. Se una chiave viene corretta in seguito, la correzione vale per i candidati che iniziano dopo; i risultati passati non cambiano. Velocità, uscite dalla pagina e tentativi di copia ti vengono mostrati come segnali; non cambiano il punteggio.
 6. **Decidono le persone.** Vedi una classifica e una scheda di valutazione per ogni candidato, con ogni risposta e il relativo tempo. Una persona della tua azienda esamina i risultati e prende la decisione di assunzione.
@@ -57,7 +57,7 @@ Puoi anche provare il tuo colloquio come candidato prima di invitare qualcuno: l
 
 ## Perché questo approccio è più facile da spiegare e verificare
 
-**Ogni risultato è tracciabile.** Un punteggio è la quota di domande con risposta corretta. Per ogni candidato puoi mostrare le domande esatte che ha visto, cosa ha scelto, la risposta giusta e quanto tempo ha impiegato.
+**Ogni risultato è tracciabile.** Un punteggio è la quota di punti ottenuti: ogni domanda vale un punto, e una domanda in cui selezionare tutte le risposte corrette ne dà una parte per ogni opzione corretta selezionata, e niente se ne è selezionata una sbagliata. Per ogni candidato puoi mostrare le domande esatte che ha visto, cosa ha scelto, la risposta giusta e quanto tempo ha impiegato.
 
 **Il contenuto è verificabile.** Approvi gli argomenti prima che venga scritto qualcosa, e le domande sono consultabili. Se un argomento non è un vero requisito del lavoro, puoi eliminarlo.
 

@@ -107,7 +107,19 @@
     "send": "Send",
     "thinking": "Thinking…",
     "copyId": "Copy ID",
-    "idCopied": "ID copied"
+    "idCopied": "ID copied",
+    "copyCode": "Copy code",
+    "codeCopied": "Code copied",
+    "codeLanguage": "Code language",
+    "editor": {
+      "bold": "Bold",
+      "italic": "Italic",
+      "link": "Link",
+      "bullets": "Bulleted list",
+      "numbers": "Numbered list",
+      "address": "https://…",
+      "addLink": "Add link"
+    }
   },
   "errors": {
     "title": "Something went wrong",
@@ -145,6 +157,7 @@
     "dismiss": "Dismiss",
     "fixSent": "Sent to the verifier. It's fixed or replaced in a moment.",
     "actionFailed": "That didn't work. Please try again.",
+    "questions": "Questions",
     "flagged": "Flagged",
     "replaced": "Replaced",
     "noFlagged": "Nothing is flagged right now.",
@@ -174,9 +187,20 @@
     "deleteTitle": "Delete this template?",
     "deleteText": "Its topics and questions are deleted. Interviews companies already made from it stay.",
     "deleteFailed": "Couldn't delete the template. Please try again.",
+    "poolCounts": "{practice} practice · {company} company",
+    "topUp": "Top up",
+    "addQuestions": "Add questions",
+    "addQuestionsTitle": "Add questions to every topic",
+    "addQuestionsText": "Each topic gets this many new questions: a third for practice, the rest for companies. Interviews already made from this template keep theirs.",
+    "addQuestionsCount": "Questions per topic",
+    "add": "Add",
+    "addingQuestions": "Adding questions",
+    "questionsAdded": "Questions added",
+    "addQuestionsFailed": "Couldn't add questions. Please try again.",
     "passRates": "Pass rates",
     "controls": "Controls",
     "stats": "Stats",
+    "statsGeneral": "General",
     "statsPeriod": "Period",
     "statsAllTime": "All time",
     "statsCards": {
@@ -259,11 +283,7 @@
     "deletePostText": "It's removed from the news page in every language.",
     "postSaveFailed": "Couldn't save the post. Please try again.",
     "postDeleteFailed": "Couldn't delete the post. Please try again.",
-    "companies": "Companies",
-    "companySearch": "Company name",
-    "companiesNotFound": "No companies found.",
     "suspended": "Suspended",
-    "companyDetails": "{members, plural, one {# member} other {# members}} · since {date}",
     "suspend": "Suspend",
     "unsuspend": "Lift suspension",
     "unsuspended": "The suspension was lifted.",
@@ -296,11 +316,341 @@
     "legalSend": "Email the change",
     "legalConfirmTitle": "Email the change to the {document}?",
     "legalAudience": {
-      "everyone": "Everyone with a prepza account gets it from the next morning, saying the new version applies from {date}. It goes out once and can't be taken back.",
-      "company_editors": "Every company's owners and admins get it from the next morning, saying the new version applies from {date}. It goes out once and can't be taken back."
+      "everyone": "Everyone with a prepza account gets it from the next sending hour (8:00 to 18:00 UTC), saying the new version applies from {date}, and sees it in their notifications. It goes out once and can't be taken back.",
+      "company_editors": "Every company's owners and admins get it from the next sending hour (8:00 to 18:00 UTC), saying the new version applies from {date}, and see it in their notifications. It goes out once and can't be taken back."
     },
-    "legalAsked": "The change will be emailed from the next morning.",
-    "legalFailed": "Couldn't ask for the email. Please try again."
+    "legalAsked": "The change will be emailed from the next sending hour.",
+    "legalFailed": "Couldn't ask for the email. Please try again.",
+    "support": "Support",
+    "supportSearch": "ID, link, email, payment ID or company name",
+    "supportNotFound": "Nothing matches. Try the ID from \"copy id\", the page's link or an email.",
+    "supportKinds": {
+      "company": "Company",
+      "interview": "Interview at {company}",
+      "candidate": "Candidate at {company}",
+      "user": "Account"
+    },
+    "supportCreated": "Created",
+    "supportAvailable": "{available} credits available",
+    "supportHeld": "{reserved} held for candidates",
+    "supportTabs": {
+      "money": "Credits",
+      "reserved": "Held",
+      "interviews": "Interviews",
+      "members": "Members",
+      "audit": "Audit log"
+    },
+    "supportNoInterviews": "No interviews yet.",
+    "supportUntitled": "Interview still generating",
+    "supportCandidates": "{count, plural, one {# candidate} other {# candidates}}",
+    "supportJoined": "Joined",
+    "supportInvited": "Invited, not joined yet",
+    "adjustCredits": "Adjust credits",
+    "adjustTitle": "Adjust {name}'s credits",
+    "adjustText": "A positive amount adds credits, a negative one removes them. The company sees the reason in its billing history.",
+    "adjustAmount": "Credits, such as 500 or -500",
+    "adjustNote": "Reason, such as \"Charged twice for one candidate\"",
+    "adjustConfirmTitle": "{amount} credits for {name}?",
+    "adjustConfirm": "Adjust",
+    "adjustBack": "Back",
+    "adjustNext": "Next",
+    "adjusted": "Credits adjusted",
+    "supportNoEmail": "Account without an email",
+    "supportCompanies": "Companies",
+    "supportNoCompanies": "Not a member of any company.",
+    "supportTopUps": "Top-ups paid",
+    "supportNoTopUps": "No top-ups.",
+    "supportDeletedCompany": "A deleted company",
+    "supportNotYet": "Not yet",
+    "supportFacts": {
+      "company": "Company",
+      "interview": "Interview",
+      "invited": "Invited",
+      "lastSent": "Invite last sent",
+      "started": "Started",
+      "finished": "Finished",
+      "grade": "Grade",
+      "extraTime": "Extra time",
+      "signals": "Integrity signals",
+      "credits": "Credits",
+      "topics": "Topics",
+      "questionSeconds": "Time per question",
+      "passMark": "Passing grade"
+    },
+    "supportPassed": "{grade}, passed",
+    "supportNotPassed": "{grade}, not passed",
+    "supportNoExtraTime": "None",
+    "supportSignals": "{leaves} page leaves · {copies} copies · {fast} answers too fast",
+    "supportCredits": {
+      "held": "Held",
+      "charged": "Charged",
+      "released": "Returned"
+    },
+    "supportGenerationFailed": "Generation failed",
+    "supportSeconds": "{count, plural, one {# second} other {# seconds}}",
+    "supportNoCandidates": "No candidates yet.",
+    "campaigns": "Campaigns",
+    "newCampaign": "New campaign",
+    "editCampaign": "Edit",
+    "editCampaignIn": "Edit in {language}",
+    "campaignInEnglish": "Write in English. After you save, it's translated into every other language, and you can change any of them before sending.",
+    "campaignInLanguage": "Your own wording in {language}, sent as you write it.",
+    "campaignKind": "Kind",
+    "campaignKinds": {
+      "updates": "Product update",
+      "promotions": "Offer"
+    },
+    "campaignSubject": "Subject",
+    "campaignSubjectPlaceholder": "Subject goes here…",
+    "campaignText": "Text",
+    "campaignTextPlaceholder": "Text goes here… Press Enter for a new paragraph.",
+    "campaignButton": "Button text (optional)",
+    "campaignLink": "Button link",
+    "campaignLinkPlaceholder": "Button link on prepza, such as /pricing (optional)",
+    "campaignSaveFailed": "Couldn't save the campaign. Please try again.",
+    "noCampaigns": "No campaigns yet.",
+    "campaignStatus": {
+      "draft": "draft",
+      "sending": "sending…",
+      "sent": "sent",
+      "stopped": "stopped"
+    },
+    "campaignRowCounts": {
+      "sent": "{count} sent",
+      "skipped": "{count} skipped",
+      "failed": "{count} failed",
+      "unsubscribed": "{count} unsubscribed",
+      "complained": "{count} spam"
+    },
+    "campaignCounts": {
+      "pending": "Waiting",
+      "sent": "Sent",
+      "skipped": "Skipped",
+      "failed": "Failed",
+      "unsubscribed": "Unsubscribed after it",
+      "complained": "Spam complaints"
+    },
+    "campaignRecipients": "<number>{shown}</number> {count, plural, one {recipient} other {recipients}}",
+    "campaignPreviewLanguage": "Preview in",
+    "sendTest": "Send a test to me",
+    "testSent": "The test is on its way to your address.",
+    "sendCampaign": "Send",
+    "stopCampaign": "Stop",
+    "deleteCampaign": "Delete campaign",
+    "campaignConfirm": {
+      "send": {
+        "title": "Send this campaign?",
+        "text": "{count, plural, =0 {Nobody would get it right now.} one {# person gets it, from the next sending hour (8:00 to 18:00 UTC). It can't be changed after.} other {# people get it, from the next sending hour (8:00 to 18:00 UTC). It can't be changed after.}}",
+        "unknown": "Everyone with this kind of email turned on gets it, from the next sending hour (8:00 to 18:00 UTC). It can't be changed after.",
+        "confirm": "Send"
+      },
+      "stop": {
+        "title": "Stop this campaign?",
+        "text": "Nobody else gets it. Those who already got it keep it.",
+        "confirm": "Stop"
+      },
+      "delete": {
+        "title": "Delete this campaign?",
+        "text": "It's deleted in every language. It was never sent.",
+        "confirm": "Delete"
+      }
+    },
+    "sendAsCampaign": "Send as a campaign",
+    "removeSuppression": "Take off the list",
+    "suppressed": {
+      "bounced": "This address bounced on {date}, so product emails and notices skip it.",
+      "complained": "This address marked an email as spam on {date}, so product emails and notices skip it."
+    },
+    "aiCosts": "AI costs",
+    "aiCards": {
+      "spend": "Spend",
+      "calls": "AI calls",
+      "month": "This month",
+      "monthOf": "This month, of a {budget} budget",
+      "input": "Input tokens",
+      "cached": "Cached input tokens",
+      "output": "Output tokens"
+    },
+    "aiBudgetsTitle": "Shared budgets today",
+    "aiNothing": "Nothing in this period.",
+    "aiOf": "{used} of {limit}",
+    "aiForTitle": "Who it was for",
+    "aiCategories": {
+      "paid": "Paid companies",
+      "unpaid": "Unpaid companies",
+      "no_company": "Without a company",
+      "prepza": "prepza"
+    },
+    "aiActionsTitle": "By action",
+    "aiActions": {
+      "interview_generation": "Interview generation",
+      "template_generation": "Template generation",
+      "question_regeneration": "Question regeneration",
+      "template_question_regeneration": "Template question regeneration",
+      "sample_key_check": "Sample answer key checks",
+      "question_verify": "Question checks",
+      "key_check_batch": "Answer key checks in batches",
+      "embeddings": "Topic matching",
+      "news_translation": "News translation",
+      "campaign_translation": "Campaign translation",
+      "assistant_message": "Assistant messages",
+      "assistant_title": "Assistant chat titles",
+      "transcription": "Voice messages",
+      "help_chat": "Help chat"
+    },
+    "aiUnitCost": {
+      "interview_generation": "{cost} an interview",
+      "template_generation": "{cost} a template run",
+      "question_regeneration": "{cost} a question",
+      "template_question_regeneration": "{cost} a question",
+      "sample_key_check": "{cost} a test",
+      "question_verify": "{cost} a question",
+      "key_check_batch": "{cost} a check",
+      "embeddings": "{cost} a request",
+      "news_translation": "{cost} a post",
+      "campaign_translation": "{cost} a campaign",
+      "assistant_message": "{cost} a conversation",
+      "assistant_title": "{cost} a conversation",
+      "transcription": "{cost} a minute",
+      "help_chat": "{cost} a call"
+    },
+    "aiPaid": "paid {spend}",
+    "aiUnpaid": "unpaid {spend}",
+    "aiCalls": "{count, plural, one {# call} other {# calls}}",
+    "aiModelsTitle": "By model",
+    "aiTokensIn": "{count} in",
+    "aiCachedShare": "{share} cached",
+    "aiTokensOut": "{count} out",
+    "aiCompaniesTitle": "Companies that cost most",
+    "aiUsersTitle": "Users that cost most",
+    "aiByMonthTitle": "By month",
+    "aiByDayTitle": "By day",
+    "limitsOursTitle": "Our limits hit",
+    "limitsProvidersTitle": "Providers' limits",
+    "limitsNoHits": "No limit was hit in this period.",
+    "limitNames": {
+      "MESSAGES_PER_USER_HOUR": "Assistant messages per user an hour",
+      "MESSAGES_PER_USER_DAY": "Assistant messages per user a day",
+      "MESSAGES_PER_COMPANY_DAY": "Assistant messages per company a day",
+      "MESSAGES_PER_DAY": "Assistant messages a day, unpaid users together",
+      "TOKENS_PER_USER_DAY": "Assistant tokens per user a day",
+      "TOKENS_PER_COMPANY_DAY": "Assistant tokens per company a day",
+      "TOKENS_PER_DAY": "Assistant tokens a day, unpaid users together",
+      "TRANSCRIPTIONS_PER_USER_HOUR": "Voice messages per user an hour",
+      "ACTIONS_PER_USER_HOUR": "Assistant actions per user an hour",
+      "MCP_CALLS_PER_USER_MINUTE": "AI app calls per user a minute",
+      "MCP_CALLS_PER_USER_DAY": "AI app calls per user a day",
+      "REGISTRATIONS_PER_IP_HOUR": "AI app registrations per address an hour",
+      "REGISTRATIONS_PER_DAY": "AI app registrations a day, everyone",
+      "AUTHORIZATIONS_PER_IP_HOUR": "AI app connection requests per address an hour",
+      "TOKEN_REQUESTS_PER_CLIENT_MINUTE": "AI app token requests per app a minute",
+      "APPROVALS_PER_USER_HOUR": "AI app connections allowed per user an hour",
+      "MAX_OWNED_COMPANIES": "Companies one person may own",
+      "INTERVIEWS_PER_DAY": "Interviews generated per company a day",
+      "INTERVIEWS_PER_DAY_UNPAID": "Interviews generated per unpaid company a day",
+      "MAX_INTERVIEWS_WITHOUT_CANDIDATES": "Generated interviews waiting without candidates",
+      "MAX_INTERVIEWS_WITHOUT_CANDIDATES_UNPAID": "Generated interviews waiting without candidates, unpaid",
+      "PREVIEWS_PER_USER_HOUR": "Interview previews per user an hour",
+      "LINK_STARTS_PER_HOUR": "Starts through one interview's link an hour",
+      "LINK_STARTS_PER_IP_HOUR": "Link starts per address an hour",
+      "MAX_BULK_INVITES": "Candidates in one list or file",
+      "MAX_PENDING_INVITES": "Pending team invites per company",
+      "MEMBER_INVITES_PER_UNPAID_DAY": "Team invites per unpaid company a day",
+      "EMAIL_HOURLY_LIMIT": "Invite emails per user an hour",
+      "EMAIL_DAILY_LIMIT": "Invite emails per user a day",
+      "EMAIL_RECIPIENT_DAILY_LIMIT": "Invites to one address for one test a day",
+      "REPORT_EMAILS_PER_COMPANY_DAY": "Report emails per company a day",
+      "GENERATION_LIMIT": "Generations per user a day",
+      "REGENERATION_LIMIT": "Regenerated questions per user a day",
+      "DAILY_GENERATION_LIMIT": "Generations a day, unpaid companies together",
+      "MAX_TOPIC_REVISIONS": "Topic revisions per generation",
+      "DAILY_VERIFY_LIMIT": "Question checks a day",
+      "PRACTICE_ROUNDS_PER_HOUR": "Practice rounds per user an hour",
+      "SIGNALS_PER_MINUTE": "Integrity signals per session a minute",
+      "MAX_SIGNALS_PER_QUESTION": "Integrity signals kept per question",
+      "HELP_USER_LIMIT": "Help chat messages per account an hour",
+      "HELP_IP_LIMIT": "Help chat messages per address an hour",
+      "HELP_DAILY_LIMIT": "Help chat messages a day, everyone",
+      "HELP_TOKENS_PER_DAY": "Help chat tokens a day, everyone",
+      "CONTACT_IP_LIMIT": "Contact messages per address a day",
+      "CONTACT_DAILY_LIMIT": "Contact messages a day, everyone",
+      "RATINGS_PER_DAY": "Question ratings per user a day",
+      "REPORTS_PER_DAY": "Question reports per user a day",
+      "MAX_API_KEYS": "API keys per company",
+      "MAX_WEBHOOKS": "Web hooks per company",
+      "API_REQUESTS_PER_MINUTE": "API requests per company a minute",
+      "RESEND_DAILY_LIMIT": "Emails a day through Resend",
+      "RESEND_RESERVE_PERCENT": "Share of the Resend emails a day kept from bulk sends",
+      "CAMPAIGNS_PER_KIND_DAY": "Campaigns of each kind a day",
+      "AI_SPEND_UNPAID_DAY": "AI spend a day, unpaid users together",
+      "QUESTION_SECONDS_BASIC": "Seconds per question, new basic tests",
+      "QUESTION_SECONDS_MEDIUM": "Seconds per question, new medium tests",
+      "QUESTION_SECONDS_HARD": "Seconds per question, new hard tests",
+      "GENERATION_CALLS_AT_ONCE": "AI calls at once per generation",
+      "GENERATION_CALLS_PER_SECOND": "AI calls a second, all generations together",
+      "MULTI_ANSWER_PERCENT": "Select-all-that-apply questions, share of each topic",
+      "PAUSED": "Refused while paused",
+      "OPENAI_RATE_LIMIT": "OpenAI rate limit",
+      "OPENAI_QUOTA": "OpenAI out of credit",
+      "OPENAI_THROTTLED": "Waiting for our OpenAI request limit",
+      "RESEND_RATE_LIMIT": "Resend rate limit",
+      "RESEND_DAILY_QUOTA": "Resend daily quota",
+      "ATS_RATE_LIMIT": "ATS rate limit",
+      "FIREBASE_TOKEN_REFUSED": "Firebase sign-in refused"
+    },
+    "limitValue": "{value} {window}",
+    "limitWindows": {
+      "60": "a minute",
+      "3600": "an hour",
+      "86400": "a day",
+      "1209600": "per topic review"
+    },
+    "limitKinds": {
+      "ours": "prepza",
+      "openai": "OpenAI",
+      "resend": "Resend",
+      "firebase": "Firebase",
+      "workable": "Workable",
+      "greenhouse": "Greenhouse",
+      "teamtailor": "Teamtailor",
+      "recruitee": "Recruitee",
+      "breezy": "Breezy HR"
+    },
+    "limitHitter": "{name} ({count})",
+    "limitHits": "{count, plural, one {# hit} other {# hits}}",
+    "limitsTitle": "Limits",
+    "limitsText": "How much people may use, and the values the services work with, by service. A change is in effect within a minute.",
+    "limitServices": {
+      "assistant": "Assistant",
+      "companies": "Companies",
+      "generation": "Generation",
+      "rounds": "Practice, sessions and help chat",
+      "library": "Question feedback",
+      "api": "Public API",
+      "notifications": "Emails",
+      "billing": "AI spend"
+    },
+    "limitAtOnce": "at a time",
+    "limitScopes": {
+      "user": "per user",
+      "company": "per company",
+      "ip": "per address",
+      "everyone": "everyone together"
+    },
+    "limitDefault": "default {value}",
+    "limitSecondsUnit": "s",
+    "limitRecentHits": "{count, plural, one {# hit} other {# hits}} in {days} days",
+    "limitPaid": "Paid",
+    "limitUnpaid": "Unpaid",
+    "limitSave": "Save",
+    "limitReset": "Reset to default",
+    "limitSaved": "Limit saved.",
+    "limitFailed": "Couldn't save the limit. Please try again.",
+    "limitChangesTitle": "Changes",
+    "limitNoChanges": "No limit was changed yet.",
+    "limitChange": "{name}: {from} to {to}",
+    "limitDefaultValue": "default",
+    "supportAiSpend": "AI cost {spend} in the last {days} days, {count, plural, one {# call} other {# calls}}."
   },
   "templates": {
     "title": "Templates",
@@ -363,10 +713,12 @@
   "reportReasons": {
     "wrong_answer": "The marked answer is wrong",
     "unclear": "The question is unclear",
+    "hard_to_read": "It's hard to read",
     "off_topic": "It doesn't fit the topic",
     "other": "Something else"
   },
   "questions": {
+    "multiChoice": "Multi-choice",
     "goodQuestion": "Good question?",
     "ratingFailed": "Couldn't save your rating. Please try again.",
     "helpful": "Helpful question",
@@ -413,6 +765,10 @@
     "correct": "Correct",
     "incorrect": "Incorrect",
     "notAnswered": "Not answered",
+    "partlyCorrect": "Partly correct",
+    "rightPicks": "{right} of {total} right options",
+    "wrongPicks": "{count, plural, one {# wrong option} other {# wrong options}}",
+    "points": "{points} of 1 point",
     "finish": "Finish",
     "finishing": "Finishing…",
     "next": "Next question",
@@ -424,6 +780,7 @@
     "finishFailed": "Couldn't finish the interview. Please try again.",
     "continueFailed": "Couldn't continue. Please try again.",
     "timeUp": "Time is up for this question.",
+    "selectAll": "Select all that apply",
     "finish": "Finish interview",
     "finishTitle": "Finish the whole interview?",
     "endsAll": "This ends all {count} sections, not only this one.",
@@ -498,6 +855,7 @@
     "interviews": "Interviews",
     "templates": "Templates",
     "team": "Team",
+    "actions": "Action log",
     "integrations": "Integrations",
     "referrals": "Referrals",
     "brand": "Brand",
@@ -629,10 +987,12 @@
       "many": "many",
       "file": "upload"
     },
-    "manyHint": "One candidate per line, with or without a name,\nup to 100 at once:",
+    "manyHint": "One candidate per line, with or without a name,\nup to {count} at once:",
+    "manyHintNoLimit": "One candidate per line, with or without a name:",
     "example": "example",
     "uploadFile": "Upload a file",
-    "fileFormats": "CSV or TXT, up to 100 candidates. Names can go in a name column or beside each email.",
+    "fileFormats": "CSV or TXT, up to {count} candidates. Names can go in a name column or beside each email.",
+    "fileFormatsNoLimit": "CSV or TXT. Names can go in a name column or beside each email.",
     "fileTooLarge": "The file is too large (max {kb} KB).",
     "lineProblems": {
       "no_email": "No email found: {line}",
@@ -657,8 +1017,10 @@
     "signInToStart": "Sign in to start",
     "fallbackTitle": "an interview",
     "timePerQuestion": "Time per question:",
-    "secondsUnit": "s",
-    "pickOne": "Pick one of four options for each question.",
+    "secondsUnit": "sec",
+    "wholeInterview": "Whole interview:",
+    "minutesUnit": "min",
+    "pickOne": "Pick one of four options for each question. Where it says Select all that apply, tick every right option: each one earns part of the question's point, and a wrong tick earns none.",
     "changePick": "You can change your pick until you press Next question.",
     "timeRunsOut": "When a question's time runs out, your pick counts and the next one opens; with no pick, it counts as wrong. The clock keeps running if you leave.",
     "unanswered": "Unanswered questions count as wrong.",
@@ -1106,8 +1468,19 @@
       "ats_cannot_write": "{ats} doesn't take candidates' results: the key has no write access. Reconnect with a key that can write; results are kept and sent then.",
       "connection_broken": "{name} stopped working and needs reconnecting. Until then, {integration, select, slack {notifications don't reach your channel} other {candidates it sends wait, and their results are kept}}.",
       "webhook_stopped": "The web hook to {url} stopped: the member who added it is no longer an owner or admin. Add it again to keep getting results.",
-      "ownership_received": "You're now the owner of “{name}”."
-    }
+      "ownership_received": "You're now the owner of “{name}”.",
+      "news": "News: {title}",
+      "legal_terms": "New terms apply from {date}.",
+      "legal_privacy": "A new privacy policy applies from {date}.",
+      "legal_dpa": "A new data processing agreement applies from {date}."
+    },
+    "legalBanner": {
+      "terms": "prepza's terms change on {date}.",
+      "privacy": "prepza's privacy policy changes on {date}.",
+      "dpa": "The data processing agreement changes on {date}."
+    },
+    "readLegal": "Read the new version",
+    "closeLegalBanner": "Close"
   },
   "report": {
     "download": "Download PDF",
@@ -1144,7 +1517,7 @@
     "continue": "Continue",
     "history": "Your rounds",
     "results": "Practice results",
-    "grade": "of the questions right",
+    "grade": "of the possible points",
     "notFinished": "not finished",
     "noRounds": "No rounds yet.",
     "startFailed": "Couldn't start the practice. Please try again.",
@@ -1332,7 +1705,7 @@
     "counts": "{keys, plural, one {# key} other {# keys}} · {webhooks, plural, one {# web hook} other {# web hooks}}",
     "docs": "Developer docs",
     "keysTitle": "API keys",
-    "keysText": "A key reads your interviews and candidates and invites candidates as the person who made it.",
+    "keysText": "A key acts as the person who made it, and can do only what its permissions allow.",
     "noKeys": "No keys yet.",
     "newKey": "New key",
     "newKeyTitle": "New API key",
@@ -1391,7 +1764,37 @@
     "removeWebhookTitle": "Delete this web hook?",
     "removeWebhookText": "{url} stops getting events.",
     "createFailed": "Couldn't create it.",
-    "removeFailed": "Couldn't delete it."
+    "removeFailed": "Couldn't delete it.",
+    "selectAll": "Select all",
+    "permissionGroups": {
+      "interviews": "Interviews",
+      "candidates": "Candidates",
+      "credits": "Credits",
+      "ai_agents": "AI agents"
+    },
+    "permissions": {
+      "interviews:read": "Read",
+      "interviews:create": "Create",
+      "candidates:read": "Read",
+      "candidates:invite": "Invite",
+      "candidates:change": "Change",
+      "candidates:delete": "Delete",
+      "credits:read": "Read",
+      "mcp": "Use with AI agents (MCP)"
+    },
+    "permissionLine": {
+      "interviews:read": "read",
+      "interviews:create": "create",
+      "candidates:read": "read",
+      "candidates:invite": "invite",
+      "candidates:change": "change",
+      "candidates:delete": "delete",
+      "credits:read": "read",
+      "mcp": "MCP"
+    },
+    "editPermissions": "Edit permissions",
+    "editPermissionsText": "Untick what “{name}” no longer needs. To add a permission, make a new key.",
+    "permissionsFailed": "Couldn't save the permissions."
   },
   "brand": {
     "logoTitle": "Logo",
@@ -1460,7 +1863,8 @@
     "tabs": {
       "api": "API",
       "webhooks": "Web hooks",
-      "sdk": "SDK"
+      "sdk": "SDK",
+      "mcp": "MCP"
     },
     "englishOnly": "This page is in English only.",
     "baseUrl": "Base URL",
@@ -1513,6 +1917,7 @@
     "emptyTitle": "Ask about your hiring",
     "emptyText": "Candidates, interviews, credits, integrations and how prepza works, from what you can see in your companies. The AI can be wrong; the pages it links to are what count.",
     "emptyTitleFaq": "Ask about prepza",
+    "pageQuestion": "What can I do on this page?",
     "pages": {
       "open": "Open",
       "pricing": "Pricing",
@@ -1691,336 +2096,7 @@
   "pageHelp": {
     "label": "About this page",
     "actionsTitle": "What you can do",
-    "tipsTitle": "Tips",
-    "landing": {
-      "title": "How prepza works",
-      "text": "prepza turns your job description into a timed multiple-choice interview, with its own random questions for every candidate.",
-      "actions": [
-        "Paste the job description: prepza proposes the topics to test.",
-        "Review the topics: keep, edit or drop them, then approve to write the questions.",
-        "Invite candidates by email, from a file or with one shareable link.",
-        "Read the reports: candidates ranked by grade, with every answer and integrity flags."
-      ],
-      "tips": [
-        "Creating interviews is free. You pay $2–5 per candidate who answers, and your first candidates are free.",
-        "Try your interview as a candidate before you invite anyone."
-      ]
-    },
-    "companies": {
-      "title": "Companies",
-      "text": "Your companies. Everything you do in prepza happens inside one: its interviews, candidates, team, credits and integrations.",
-      "actions": [
-        "Create a company with “new company”. Its name is unique across prepza.",
-        "Open a company to work on its interviews and candidates.",
-        "Remove a company you own, with all its interviews and invites."
-      ],
-      "tips": [
-        "Your role shows beside each company you don't own: admins change things, viewers only look.",
-        "Credits belong to a company, so each one tops up on its own."
-      ]
-    },
-    "pickCompany": {
-      "title": "Choose a company",
-      "text": "You picked a template. Choose the company it's for: the template is copied there as a new interview, free and ready to send to candidates.",
-      "actions": [
-        "Pick a company to open the template in it, then use it.",
-        "Create a new company if you don't have one yet; the template opens there."
-      ],
-      "tips": [
-        "Once copied, the interview is the company's own: change its questions and settings as you like."
-      ]
-    },
-    "interviews": {
-      "title": "Interviews",
-      "text": "All of this company's interviews and its credits for candidates. Each interview is a timed test made from a job description.",
-      "actions": [
-        "Create an interview from a job description with “new interview”.",
-        "Open an interview to see its topics, candidates and settings.",
-        "Try an interview as a candidate, or delete it.",
-        "Top up credits from the balance, or turn on automatic top-ups on the Billing tab."
-      ],
-      "tips": [
-        "The balance turns amber when credits run low. Without credits, new invites aren't sent.",
-        "The tabs above lead to templates, your team, integrations, billing (owners and admins) and referrals."
-      ]
-    },
-    "newInterview": {
-      "title": "New interview",
-      "text": "Start an interview from the job description. prepza reads it, proposes the topics to test, and writes the questions once you approve them.",
-      "actions": [
-        "Paste the job description: the role, its requirements and nice-to-haves.",
-        "Choose the language to generate the interview in.",
-        "Generate, then review the proposed topics."
-      ],
-      "tips": [
-        "The more specific the description, the closer the questions fit the role.",
-        "Generating is free: you pay only for candidates who answer."
-      ]
-    },
-    "reviewTopics": {
-      "title": "Review your topics",
-      "text": "prepza proposed these topics from your description. Each topic you keep gets its own set of questions with answers.",
-      "actions": [
-        "Uncheck the topics you don't need.",
-        "Edit a topic's name and subtopics with its pencil.",
-        "Describe changes in your own words and apply them, for example “add a topic on team leadership”.",
-        "Approve and generate to write the questions."
-      ],
-      "tips": [
-        "With too many topics, uncheck some or describe how to merge them.",
-        "Questions are written only after you approve, so take a minute here."
-      ]
-    },
-    "generating": {
-      "title": "Generating",
-      "text": "prepza is making your interview: first the topics, then the questions for each one. It takes a few minutes.",
-      "actions": [
-        "Leave this page if you like: generation keeps going.",
-        "Cancel the generation if you no longer need it; nothing made so far is kept."
-      ],
-      "tips": [
-        "You get a notification when the interview is ready.",
-        "Come back any time from the interviews list."
-      ]
-    },
-    "interviewTopics": {
-      "title": "Topics",
-      "text": "What this interview tests: its topics, each with subtopics and its own pool of questions. Every candidate gets a random set from each pool.",
-      "actions": [
-        "Open “manage questions” to read a topic's questions and answers.",
-        "Re-generate a weak question, mark a wrong answer, or read candidates' reports on a question.",
-        "Set how many questions each candidate gets from a topic.",
-        "Try the interview as a candidate, or delete it."
-      ],
-      "tips": [
-        "AI-written questions can be wrong: skim each topic before you invite anyone.",
-        "Click the title to rename the interview."
-      ]
-    },
-    "interviewCandidates": {
-      "title": "Candidates",
-      "text": "Everyone invited to this interview, with their status, progress and grade.",
-      "actions": [
-        "Invite candidates: one at a time, a list of up to 100, or a CSV or TXT file.",
-        "Turn on the shareable link for a job ad: anyone with it can take the interview.",
-        "Search by email or name, filter by status, and sort by grade or date.",
-        "Open a candidate's report, or download or share the report on all candidates."
-      ],
-      "tips": [
-        "Each candidate who answers at least one question uses credits, including those from the link.",
-        "Reminders go to candidates automatically."
-      ]
-    },
-    "interviewSettings": {
-      "title": "Settings",
-      "text": "How this interview runs for every candidate.",
-      "actions": [
-        "Set the time each question has, in seconds.",
-        "Set the passing grade: candidates who reach it pass.",
-        "Mark the interview as hired once you've filled the role."
-      ],
-      "tips": [
-        "Each setting saves as soon as you leave its field.",
-        "Candidates never see their scores; only your team does.",
-        "For one candidate who needs more time, add extra time on their page."
-      ]
-    },
-    "tryInterview": {
-      "title": "Try as a candidate",
-      "text": "A preview of this interview just as candidates see it: the intro, then the timed questions. It's free.",
-      "actions": [
-        "Start the preview and answer as a candidate would.",
-        "Check the timing, the wording and the answers before you invite anyone."
-      ],
-      "tips": [
-        "Stay on the page while you answer: for candidates, leaving the page, copying and answering too fast are recorded."
-      ]
-    },
-    "candidate": {
-      "title": "Candidate report",
-      "text": "One candidate's results: their grade, whether they passed, and each topic's score with every answer.",
-      "actions": [
-        "Read each answer, with integrity flags: page leaves, copy attempts and fast answers.",
-        "Download the report as a PDF, or share it by email.",
-        "Give extra time before they start, for example for a disability.",
-        "Add or edit the candidate's name.",
-        "Copy their invite link to send it yourself, if the email didn't arrive; it's there until they finish.",
-        "Resend or revoke the invite, or delete the candidate with their results."
-      ],
-      "tips": [
-        "The score supports your decision; it doesn't make it. If the candidate asks, have a person review their result."
-      ]
-    },
-    "templates": {
-      "title": "Templates",
-      "text": "Ready-made interviews for common roles. Using one copies it into this company as your own interview.",
-      "actions": [
-        "Search by role or topic, and filter by level and language.",
-        "Open a template to see its topics and how many questions each has.",
-        "Use a template to start an interview from it."
-      ],
-      "tips": [
-        "For a closer fit, create an interview from your own job description instead.",
-        "Once copied, the interview is yours: change its questions and settings as you like."
-      ]
-    },
-    "template": {
-      "title": "Template",
-      "text": "A ready-made interview: its topics, their subtopics and how many questions each topic has.",
-      "actions": [
-        "Check that the topics match the role you're hiring for.",
-        "Use the template to copy it into this company as a new interview."
-      ],
-      "tips": [
-        "Copying is free; candidates who answer use credits as usual.",
-        "If the topics don't fit, create an interview from your job description instead."
-      ]
-    },
-    "team": {
-      "title": "Team",
-      "text": "The people who work on this company's interviews, and their roles.",
-      "actions": [
-        "Add a member by email, as an admin or a viewer: they're emailed a link to join.",
-        "Change a member's role between admin and viewer.",
-        "Copy a pending invite's link, or remove a member or an invite."
-      ],
-      "tips": [
-        "Admins create and change interviews, invite candidates and top up. Viewers see interviews and results and share reports, but change nothing.",
-        "Removing a member whose card pays for automatic top-ups stops those top-ups."
-      ]
-    },
-    "integrations": {
-      "title": "Integrations",
-      "text": "Connect prepza to the tools your team already uses. Each integration opens its own page with setup steps.",
-      "actions": [
-        "Slack: get your company's notifications in a channel.",
-        "ATS (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): candidates you move to a stage get the interview, and their results go back.",
-        "API: keys and web hooks to connect your own platform.",
-        "AI apps: use prepza from Claude, ChatGPT and other AI apps."
-      ],
-      "tips": [
-        "Everyone in the company sees the integrations; owners and admins change them."
-      ]
-    },
-    "ats": {
-      "title": "ATS integration",
-      "text": "Link a job in your ATS to an interview: candidates you move into a chosen stage get the interview, and their results come back as a comment on their profile.",
-      "actions": [
-        "Connect your ATS by following its instructions.",
-        "Link a job: choose the job, its stage and an interview, or make a new interview from the job's text.",
-        "Invite again candidates who weren't invited, for example when credits ran out.",
-        "Unlink a job, or disconnect the ATS."
-      ],
-      "tips": [
-        "Add a stage just for prepza, like “prepza skills test”, so it never mixes with your other tools.",
-        "prepza never moves or rejects anyone in your ATS."
-      ]
-    },
-    "slack": {
-      "title": "Slack",
-      "text": "Your company's notifications in a Slack channel, as they happen.",
-      "actions": [
-        "Add prepza to Slack and pick the channel, for example #hiring.",
-        "Choose which notifications go there: a candidate finishing, an invite that wasn't delivered, an interview being ready and more.",
-        "Disconnect to stop them and remove prepza's app from your Slack."
-      ],
-      "tips": [
-        "prepza can only post to that channel; it can't read your Slack.",
-        "Everyone still sees every notification in the bell."
-      ]
-    },
-    "api": {
-      "title": "API",
-      "text": "Connect your own platform, such as your careers site, to prepza.",
-      "actions": [
-        "Create an API key: as you, it creates interviews, reads candidates and their results, invites, reminds, updates or removes them, and reads your credits.",
-        "Add a web hook: prepza tells your HTTPS address, signed, when a candidate starts, finishes (with their results), isn't reached, expires or is removed, and when an interview is ready.",
-        "Send a web hook a test event, and see what each send got in its delivery log.",
-        "Delete the keys and web hooks you no longer use.",
-        "Open the developer docs for every endpoint and event, and the SDK."
-      ],
-      "tips": [
-        "A new key and a web hook's secret show only once: copy them right away.",
-        "Choose an expiry for each key: a leaked key that never expires stays usable."
-      ]
-    },
-    "brand": {
-      "title": "Brand",
-      "text": "Your logo and colors on your candidates' invitation, interview and finished page.",
-      "actions": [
-        "Set or change the logo.",
-        "Pick the font and how round the cards and buttons are.",
-        "Pick the colors of each group, and see them in the preview.",
-        "Save them, or go back to prepza's colors."
-      ],
-      "tips": [
-        "Colors whose text would be hard to read can't be saved, so every candidate can read the questions.",
-        "Members trying an interview see it in your colors too."
-      ]
-    },
-    "referrals": {
-      "title": "Referrals",
-      "text": "Invite other companies to prepza with this company's link, and you both earn credits.",
-      "actions": [
-        "Copy or share your referral link.",
-        "See every reward this company has received."
-      ],
-      "tips": [
-        "You both get credits when the company you invited makes its first top-up, of any amount.",
-        "Credits go to this company and never expire."
-      ]
-    },
-    "billing": {
-      "title": "Billing",
-      "text": "Where this company's credits came from and where they went.",
-      "actions": [
-        "Top up, or set up automatic top-ups.",
-        "See the candidates whose credits are reserved.",
-        "Open the invoice of any top-up."
-      ],
-      "tips": [
-        "A candidate's credits are reserved when they're invited, charged once they answer, and given back if they don't.",
-        "Only owners and admins see this page."
-      ]
-    },
-    "aiApps": {
-      "title": "AI apps",
-      "text": "Use prepza from your AI chat: ask Claude or ChatGPT about your interviews and candidates, or to make changes for you.",
-      "actions": [
-        "Copy the server address and add it to Claude, Claude Code or ChatGPT, following the steps.",
-        "Allow the app on the prepza page that opens.",
-        "Disconnect an app you no longer use."
-      ],
-      "tips": [
-        "An app acts as you, in every company you're in. Most apps ask you before they change anything.",
-        "It can't see your password or API keys, and can't delete your account or a company."
-      ]
-    },
-    "topUp": {
-      "title": "Top up",
-      "text": "Buy credits for any company you belong to as an owner or admin.",
-      "actions": [
-        "Pick a company and a top-up: larger ones cost less per candidate.",
-        "Pay in Paddle's checkout; the credits arrive within seconds.",
-        "Open pricing to compare the top-ups."
-      ],
-      "tips": [
-        "A candidate costs 500 credits: reserved when they're invited, charged once they answer, and given back if they don't.",
-        "Credits never expire. Each top-up's invoice is on the company's billing tab."
-      ]
-    },
-    "settings": {
-      "title": "Settings",
-      "text": "Your own account: the language prepza speaks to you, the emails you get, and your data.",
-      "actions": [
-        "Choose the language of the site, the help chat and your emails.",
-        "Choose which optional emails you get; service emails, such as invites, reports and billing problems, always go out.",
-        "Download everything prepza holds about you, or delete your account."
-      ],
-      "tips": [
-        "Deleting your account deletes the companies only you are in. A company others have joined needs another owner first."
-      ]
-    }
+    "tipsTitle": "Tips"
   },
   "companyBilling": {
     "reservedTab": "Reserved ({count})",
@@ -2036,7 +2112,8 @@
       "chargeback": "Chargeback",
       "chargeback_reversed": "Chargeback reversed",
       "referral": "Referral reward",
-      "referral_reversed": "Referral reward taken back"
+      "referral_reversed": "Referral reward taken back",
+      "adjustment": "Adjustment by prepza"
     },
     "automatic": "Automatic top-up",
     "invoice": "Invoice",
@@ -2059,6 +2136,7 @@
     "claudeCode": "In Claude Code, run:",
     "copyCommand": "Copy command",
     "commandCopied": "Command copied",
+    "moreApps": "Gemini CLI, Cursor, VS Code, Le Chat and your own agents: see the <link>developer docs</link>.",
     "chatgptDeveloper": "In ChatGPT, turn on developer mode:",
     "chatgptCreate": "Back in Apps & Connectors, choose:",
     "chatgptPaste": "Name it {name}, paste the server address and choose this authentication:",
@@ -2124,5 +2202,91 @@
       "authority": "If you aren't satisfied with our answer, you can contact the Estonian Consumer Protection and Technical Regulatory Authority (TTJA)."
     },
     "reviewed": "Last reviewed {date}."
+  },
+  "actionLog": {
+    "empty": "No actions yet.",
+    "noMatches": "No actions match these filters.",
+    "formerMember": "A former member",
+    "deletedCandidate": "a deleted candidate",
+    "anyMember": "Anyone",
+    "anyAction": "All actions",
+    "member": "Member",
+    "action": "Action",
+    "from": "From",
+    "to": "To",
+    "groups": {
+      "interviews": "Interviews",
+      "candidates": "Candidates",
+      "team": "Team",
+      "company": "Company",
+      "billing": "Billing",
+      "integrations": "Integrations"
+    },
+    "actions": {
+      "interview_created": "Created an interview",
+      "interview_from_template": "Created an interview from a template",
+      "interview_deleted": "Deleted an interview",
+      "interview_renamed": "Renamed an interview",
+      "interview_settings_changed": "Changed an interview's settings",
+      "link_turned_on": "Turned on a shareable link",
+      "link_turned_off": "Turned off a shareable link",
+      "questions_regenerated": "Regenerated a question",
+      "answer_key_reported": "Marked an answer key wrong",
+      "topics_approved": "Approved an interview's topics",
+      "pass_mark_changed": "Changed a passing grade",
+      "candidate_invited": "Invited a candidate",
+      "invite_resent": "Sent an invite again",
+      "invite_revoked": "Revoked an invite",
+      "candidate_deleted": "Deleted a candidate",
+      "candidate_renamed": "Changed a candidate's name",
+      "extra_time_set": "Gave a candidate extra time",
+      "results_viewed": "Viewed a candidate's results",
+      "report_emailed": "Emailed a report",
+      "member_invited": "Invited a member",
+      "member_joined": "Joined the company",
+      "member_removed": "Removed a member",
+      "member_role_changed": "Changed a member's role",
+      "ownership_transferred": "Handed the company to another owner",
+      "company_renamed": "Renamed the company",
+      "logo_changed": "Changed the logo",
+      "brand_changed": "Changed the brand colors or style",
+      "verification_requested": "Asked to verify the company",
+      "ai_apps_changed": "Allowed or stopped AI apps",
+      "top_up_paid": "Topped up credits",
+      "auto_top_up_set": "Set up automatic top-up",
+      "auto_top_up_changed": "Changed automatic top-up",
+      "auto_top_up_stopped": "Stopped automatic top-up",
+      "ats_connected": "Connected an ATS",
+      "ats_reconnected": "Reconnected an ATS",
+      "ats_disconnected": "Disconnected an ATS",
+      "job_linked": "Linked an ATS job",
+      "job_unlinked": "Unlinked an ATS job",
+      "slack_connected": "Connected Slack",
+      "slack_disconnected": "Disconnected Slack",
+      "slack_notifications_changed": "Changed Slack's notifications",
+      "api_key_created": "Created an API key",
+      "api_key_deleted": "Deleted an API key",
+      "api_key_narrowed": "Narrowed an API key's permissions",
+      "webhook_added": "Added a web hook",
+      "webhook_tested": "Tested a web hook",
+      "webhook_deleted": "Deleted a web hook"
+    },
+    "removed": "removed: {permissions}",
+    "permissions": {
+      "interviews:read": "read interviews",
+      "interviews:create": "create interviews",
+      "candidates:read": "read candidates",
+      "candidates:invite": "invite candidates",
+      "candidates:change": "change candidates",
+      "candidates:delete": "delete candidates",
+      "credits:read": "read credits",
+      "mcp": "use with AI agents (MCP)"
+    },
+    "via": {
+      "assistant": "through the assistant",
+      "mcp": "through an AI app",
+      "api": "through the API",
+      "ats": "through an ATS"
+    }
   }
 }

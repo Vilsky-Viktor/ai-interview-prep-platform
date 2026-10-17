@@ -1,6 +1,6 @@
 # Candidate notice templates
 
-Version of 2026-10-16. Arcolabs OÜ (registry code 17587452), Sepapaja tn 6, 15551 Tallinn, Estonia; hello@prepza.ai.
+Version of 2026-10-17. Arcolabs OÜ (registry code 17587452), Sepapaja tn 6, 15551 Tallinn, Estonia; hello@prepza.ai.
 
 For companies to adapt and send **before** inviting candidates to a prepza interview. Replace
 everything in [brackets]. The notice is yours to give as the employer: these templates cover what
@@ -31,7 +31,9 @@ your audit summary is published (see prepza's instructions for companies).
 >
 > **What it assesses.** A timed multiple-choice test of job knowledge in these areas, taken from
 > the job's requirements: [list topics]. Each question has a time limit of [N] seconds. Your score
-> is the percentage of questions answered correctly. The tool also records how long each answer
+> is the percentage of points earned: each question is worth one point, and on a "select all that
+> apply" question you earn part of it for each right option ticked, and nothing if you tick a
+> wrong one. The tool also records how long each answer
 > took, when you left the test page or copied text during it, and answers given too fast to have
 > read the question; [Company] may give you extra time, which is recorded without a reason.
 >
@@ -67,13 +69,16 @@ your audit summary is published (see prepza's instructions for companies).
 > **What it is.** An AI system that helps us assess candidates; under the EU AI Act it counts as a
 > high-risk AI system. [N] multiple-choice questions about [topics], with [N] seconds for each.
 > Questions were written with the help of AI from the job description, on topics our team chose.
-> Each candidate gets their own selection of questions. You can change your pick until you move to the
-> next question or finish. When a question's time runs out, your pick counts; with no pick, it
-> counts as wrong.
+> Each candidate gets their own selection of questions. Most have one right option; a "select all
+> that apply" question has 2 or 3, and you tick every one you think is right: it earns part of its
+> point for each right option ticked, and nothing if a wrong one is ticked. You can change your pick
+> until you move to the next question or finish. When a question's time runs out, your pick
+> counts; with no pick, it counts as wrong.
 >
-> **What is recorded.** Your answers, whether each was right, how long each took, when you left the
-> test page or copied text, and answers given too fast to have read the question. If we give you
-> extra time, that is recorded too, without a reason. You won't see your score.
+> **What is recorded.** Your answers (every option ticked), whether each was right or the points
+> it earned, how long each took, when you left the test page or copied text, and answers given
+> too fast to have read the question. If we give you extra time, that is recorded too, without a
+> reason. You won't see your score.
 >
 > **How we use it.** Your result is one part of our assessment, alongside [your CV / interviews].
 > A person at [Company] reviews it; no decision is made automatically. You can ask us for a human

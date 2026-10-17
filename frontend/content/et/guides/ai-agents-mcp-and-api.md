@@ -2,7 +2,7 @@
 title: "AI-agendid, MCP ja API-d: mis need on ja kuidas neid värbamisel kasutada"
 seoTitle: "AI-agendid, MCP ja API-d värbamisel: mis need on ja kuidas neid kasutada"
 description: "Mis on AI-agent, mida teevad MCP ja API, kuidas neid värbamisel turvaliselt kasutada ja kuidas juhtida prepzat selle agendi kaudu, Claude'ist ja ChatGPT-st või oma platvormilt."
-updated: "2026-10-15"
+updated: "2026-10-17"
 ---
 
 # AI-agendid, MCP ja API-d: mis need on ja kuidas neid värbamisel kasutada
@@ -84,6 +84,7 @@ Enne kui ühendad mõne AI-rakenduse tööandmetega, kontrolli oma ettevõtte AI
 Vali mis tahes lehe päises **küsi agendilt**. Agent tunneb sinu ettevõtteid, intervjuusid, kandidaate, krediite ja integratsioone ning teab, kuidas prepza töötab. Ta vastab sinu keeles ning sa võid kirjutada või rääkida.
 
 - **Ta vastab sinu andmete põhjal,** sama vaatega kui sinul: administraator näeb seda, mida administraator, vaataja seda, mida vaataja.
+- **Ta teab, millisel lehel sa oled.** Küsi „Mida ma sellel lehel teha saan?“, et saada selle lehe juhend, või intervjuu kandidaatide juures „Kes on siin parim?“, ja ta vastab just selle intervjuu kohta, küsimata, millist sa mõtled.
 - **Ta valmistab muudatused ette, sina kinnitad.** Kui palud tal kandidaate kutsuda, näitab ta kaarti, kus on täpselt kirjas, mis juhtub, näiteks „Kutsu 12 kandidaati intervjuule Backend developer“. Midagi ei käivitu enne, kui valid Kinnita.
 - **Ta näitab oma allikaid.** Vastuse all näed kandidaate või intervjuusid, mida ta kasutas, ja linki lehele, kust need pärinevad.
 - **Ta püsib teemas.** Ta vastab küsimustele prepza ja sellega värbamise kohta ning ütleb ülejäänust ära.
@@ -104,17 +105,19 @@ Edaspidi küsi oma vestluses nii, nagu küsiksid kolleegilt: „Kes on prepzas k
 
 - **Sinu õigused.** Ta tegutseb sinu nimel igas ettevõttes, kuhu kuulud, sinu rolliga igas neist.
 - **Krediidid ja piirangud.** Kandidaadi kutsumine maksab sama palju kui rakenduses ja kehtivad samad e-kirjade piirangud.
-- **Logi.** Otsused, mida auditilogi talletab (teemade kinnitamine, tulemuste vaatamine, lävendi muutmine, lisaaja andmine, kandidaadi tühistamine, aruande saatmine e-postiga), märgitakse tehisintellekti rakenduse kaudu tehtuks. Ettevõtte omanik saab logi lugeda API kaudu.
+- **Logi.** Kõik, mida tehisintellekti rakendus sinu eest teeb, kuvatakse ettevõtte toimingute logis tehisintellekti rakenduse kaudu tehtuna, alates teemade kinnitamisest ja tulemuste vaatamisest kuni lisaaja andmise või kandidaadi tühistamiseni. Ettevõtte omanik loeb seda ettevõtte vahekaardil **Toimingute logi**.
 - **Ettevõte otsustab.** Omanikud ja administraatorid saavad keelata tehisintellekti rakendustel ettevõtte andmete kasutamise valikuga **Luba selles ettevõttes tehisintellekti rakendused** ettevõtte tehisintellekti rakenduste lehel.
 - **Mida ta teha ei saa.** Ta ei näe sinu parooli ega API-võtmeid ning ei saa kustutada sinu kontot ega ettevõtet. Need jäävad rakendusse.
 
 **Ühenduse katkestamiseks** eemalda konnektor oma AI-rakenduses või vali selle kõrval **Katkesta ühendus** vahekaardi Integratsioonid jaotises **AI-rakendused**. See lakkab kohe töötamast.
 
+**Muud rakendused ja sinu oma agendid.** Arendajate dokumentatsiooni [MCP-vahekaardil](/api-docs?tab=mcp) on sammud rakenduste Gemini CLI, Cursor, VS Code ja Le Chat jaoks ning täielikud näidisagendid keeltes Python ja TypeScript. Serveris töötav agent, mille sisselogimist pole kellelgi kinnitada, kasutab ettevõtte API-võtit õigusega **Kasutamine AI-agentidega (MCP)**: see töötab ainult selles ettevõttes ja ainult nende tööriistadega, mida võtme ülejäänud õigused lubavad.
+
 ### 3. Sinu oma platvorm, API kaudu
 
 Automaatikaks ilma AI-ta on prepzal API, mida kirjeldab selle [arendajate dokumentatsioon](/api-docs).
 
-1. Omanik või administraator avab ettevõtte vahekaardi **Integratsioonid**, siis **API**, ja valib **Uus võti**. Pane sellele nimeks platvorm, mis seda kasutama hakkab, ja vali, millal see aegub. Võtit näidatakse ainult üks kord; hoia seda turvalises kohas.
+1. Omanik või administraator avab ettevõtte vahekaardi **Integratsioonid**, siis **API**, ja valib **Uus võti**. Pane sellele nimeks platvorm, mis seda kasutama hakkab, vali, millal see aegub, ja märgi ainult see, mida see vajab: töölaua võti ainult loeb, karjäärilehe võti ka kutsub. Õigusi saad hiljem ära võtta, kuid mitte kunagi lisada. Võtit näidatakse ainult üks kord; hoia seda turvalises kohas.
 2. Sinu platvorm saadab selle võtmega päringuid: näitab ettevõtte intervjuusid, näitab või loeb kandidaate koos nende hinde, läbimise ja aususe märgetega ning kutsub kandidaadi.
 3. Lisa **webhook**: aadress sinu platvormil, mida prepza kutsub allkirjastatult kui kandidaat alustab, lõpetab, kutse ei jõua temani, tema kutse aegub või ta eemaldatakse, ning kui intervjuu on valmis, et sa ei peaks pidevalt järele küsima. API lehelt saad sellele saata testsündmuse ja näha selle saatmislogi.
 

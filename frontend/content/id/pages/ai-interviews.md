@@ -37,7 +37,7 @@ prepza memakai AI untuk menulis wawancara keterampilan dari deskripsi pekerjaanm
 
 1. **AI membaca deskripsi pekerjaanmu** dan mengambil apa yang wajib diketahui kandidat: persyaratan, level, dan sekumpulan topik beserta subtopiknya.
 2. **Kamu meninjau topiknya.** Pertahankan, hapus centang, ganti nama, atau ubah topik, atau beri tahu AI dengan teks biasa apa yang perlu diubah. Tidak ada soal yang ditulis sebelum kamu menyetujuinya.
-3. **AI menulis soalnya.** Setiap topik mendapat bank soal pilihan ganda, masing-masing dengan satu opsi benar dan tiga opsi salah yang masuk akal. Untuk topik teknis, banyak soal menampilkan contoh kode singkat dan menanyakan apa hasilnya, apa fungsinya, kenapa gagal, atau perubahan mana yang memperbaikinya. Kamu bisa membuka setiap soal beserta opsinya, dan membuat ulang soal yang tidak kamu sukai.
+3. **AI menulis soalnya.** Setiap topik mendapat bank soal pilihan ganda dengan empat opsi per soal: sebagian besar punya satu opsi benar dan tiga opsi salah yang masuk akal, dan sekitar 1 dari 10 soal berjenis "pilih semua yang benar", dengan 2 atau 3 opsi benar. Untuk topik teknis, banyak soal menampilkan contoh kode singkat dan menanyakan apa hasilnya, apa fungsinya, kenapa gagal, atau perubahan mana yang memperbaikinya. Kamu bisa membuka setiap soal beserta opsinya, dan membuat ulang soal yang tidak kamu sukai.
 4. **Kandidat menjawab soal berbatas waktu.** Setiap kandidat mendapat set acaknya sendiri dari bank soal tiap topik, dengan urutannya sendiri, dan hitung mundur di setiap soal.
 5. **Jawaban dinilai berdasarkan kunci jawaban.** AI menulis kunci jawaban; sebagian kunci di tiap topik diperiksa sebelum dirilis, sisanya diperiksa saat soalnya ditandai. Penilaiannya sendiri mengikuti aturan tetap, dan tidak ada AI yang membaca atau menilai jawaban kandidat. Kalau sebuah kunci jawaban dikoreksi belakangan, koreksinya berlaku untuk kandidat yang mulai setelahnya; hasil sebelumnya tidak berubah. Kecepatan, meninggalkan halaman, dan percobaan menyalin ditampilkan kepadamu sebagai sinyal; semua itu tidak mengubah skor.
 6. **Manusia yang memutuskan.** Kamu melihat daftar peringkat dan scorecard per kandidat, lengkap dengan setiap jawaban dan waktunya. Orang di perusahaanmu meninjau hasilnya dan membuat keputusan rekrutmen.
@@ -57,7 +57,7 @@ Kamu juga bisa melihat pratinjau wawancaramu sendiri sebagai kandidat sebelum me
 
 ## Kenapa pendekatan ini lebih mudah dijelaskan dan ditinjau
 
-**Setiap hasil bisa ditelusuri.** Skor adalah persentase soal yang dijawab dengan benar. Untuk kandidat mana pun, kamu bisa menunjukkan soal persis yang mereka lihat, jawaban yang mereka pilih, jawaban yang benar, dan berapa lama waktu yang mereka pakai.
+**Setiap hasil bisa ditelusuri.** Skor adalah persentase poin yang diperoleh: setiap soal bernilai satu poin, dan soal "pilih semua yang benar" memberi sebagian poinnya untuk setiap opsi benar yang dicentang, dan nol jika ada opsi salah yang dicentang. Untuk kandidat mana pun, kamu bisa menunjukkan soal persis yang mereka lihat, jawaban yang mereka pilih, jawaban yang benar, dan berapa lama waktu yang mereka pakai.
 
 **Isinya bisa ditinjau.** Kamu menyetujui topik sebelum apa pun ditulis, dan soal-soalnya terbuka untukmu. Kalau sebuah topik bukan persyaratan kerja yang sebenarnya, kamu bisa menghapusnya.
 

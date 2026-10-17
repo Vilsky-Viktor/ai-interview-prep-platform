@@ -37,7 +37,7 @@ A prepza usa IA para escrever uma entrevista de habilidades a partir da sua desc
 
 1. **A IA lê a sua descrição da vaga** e identifica o que um candidato precisa saber: os requisitos, o nível e um conjunto de tópicos com subtópicos.
 2. **Você revisa os tópicos.** Mantenha, desmarque, renomeie ou edite, ou diga à IA em texto livre o que mudar. Nenhuma pergunta é escrita antes da sua aprovação.
-3. **A IA escreve as perguntas.** Cada tópico recebe um banco de perguntas de múltipla escolha, cada uma com uma opção correta e três erradas, mas plausíveis. Em tópicos técnicos, muitas perguntas mostram um pequeno exemplo de código e perguntam o que ele imprime, o que faz, por que falha ou qual mudança o corrige. Você pode abrir cada pergunta e suas opções e gerar novamente as que não gostar.
+3. **A IA escreve as perguntas.** Cada tópico recebe um banco de perguntas de múltipla escolha com quatro opções cada: a maioria tem uma opção correta e três erradas, mas plausíveis, e cerca de 1 em cada 10 pede para "selecionar todas as corretas", com 2 ou 3 opções corretas. Em tópicos técnicos, muitas perguntas mostram um pequeno exemplo de código e perguntam o que ele imprime, o que faz, por que falha ou qual mudança o corrige. Você pode abrir cada pergunta e suas opções e gerar novamente as que não gostar.
 4. **Os candidatos respondem perguntas com tempo cronometrado.** Cada candidato recebe seu próprio conjunto aleatório do banco de cada tópico, em ordem própria, com contagem regressiva em cada pergunta.
 5. **As respostas são corrigidas com base em um gabarito.** A IA escreve os gabaritos. Uma amostra dos gabaritos de cada tópico é verificada antes da liberação, e os demais quando uma pergunta é sinalizada. A correção em si segue regras fixas, e nenhuma IA lê ou julga a resposta de um candidato. Se um gabarito for corrigido depois, a correção vale para os candidatos que começarem depois dela; os resultados anteriores não mudam. Velocidade, saídas da página e tentativas de cópia aparecem para você como sinais; elas não mudam a pontuação.
 6. **Pessoas decidem.** Você vê uma lista ordenada e uma ficha de avaliação por candidato, com cada resposta e seu tempo. Uma pessoa da sua empresa revisa os resultados e toma a decisão de contratação.
@@ -57,7 +57,7 @@ Você também pode testar a sua própria entrevista como candidato antes de conv
 
 ## Por que essa abordagem é mais fácil de explicar e revisar
 
-**Todo resultado pode ser rastreado.** A pontuação é a proporção de perguntas respondidas corretamente. Para qualquer candidato, você pode mostrar exatamente quais perguntas ele viu, o que escolheu, qual era a resposta certa e quanto tempo levou.
+**Todo resultado pode ser rastreado.** A pontuação é a proporção de pontos obtidos: cada pergunta vale um ponto, e uma de "selecionar todas as corretas" dá uma parte dele por opção correta marcada, e nada se uma errada for marcada. Para qualquer candidato, você pode mostrar exatamente quais perguntas ele viu, o que escolheu, qual era a resposta certa e quanto tempo levou.
 
 **O conteúdo pode ser revisado.** Você aprova os tópicos antes de qualquer coisa ser escrita, e as perguntas ficam abertas para você. Se um tópico não for um requisito real da vaga, você pode removê-lo.
 

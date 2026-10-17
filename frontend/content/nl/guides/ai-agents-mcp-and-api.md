@@ -2,7 +2,7 @@
 title: "AI-agents, MCP en API's: wat het zijn en hoe je ze inzet bij werving en selectie"
 seoTitle: "AI-agents, MCP en API's bij werving: wat het zijn en hoe je ze inzet"
 description: "Wat een AI-agent is, wat MCP en een API doen, hoe je ze veilig inzet bij werving en selectie, en hoe je prepza bedient via de eigen agent, vanuit Claude en ChatGPT of vanuit je eigen platform."
-updated: "2026-10-15"
+updated: "2026-10-17"
 ---
 
 # AI-agents, MCP en API's: wat het zijn en hoe je ze inzet bij werving en selectie
@@ -84,6 +84,7 @@ Controleer voordat je een AI-app aan werkgegevens koppelt het beleid van je bedr
 Kies **vraag de agent** in de kop van elke pagina. De agent kent je bedrijven, interviews, kandidaten, credits en integraties, en weet hoe prepza werkt. Hij antwoordt in jouw taal, en je kunt typen of spreken.
 
 - **Hij antwoordt vanuit je gegevens,** met hetzelfde zicht als jij: een beheerder ziet wat een beheerder ziet, een kijker wat een kijker ziet.
+- **Hij weet op welke pagina je bent.** Vraag "Wat kan ik op deze pagina doen?" voor de uitleg bij die pagina, of "Wie is hier de beste?" bij de kandidaten van een interview, en hij antwoordt over dat interview zonder te vragen welk.
 - **Hij bereidt wijzigingen voor, jij bevestigt ze.** Vraag je hem kandidaten uit te nodigen, dan toont hij een kaart met precies wat er gaat gebeuren, zoals "12 kandidaten uitnodigen voor Backend developer". Er gebeurt niets totdat je Bevestigen kiest.
 - **Hij laat zijn bronnen zien.** Onder een antwoord zie je de kandidaten of interviews die hij gebruikte en een link naar de pagina waar ze vandaan komen.
 - **Hij blijft bij het onderwerp.** Hij beantwoordt vragen over prepza en werven met prepza, en slaat de rest af.
@@ -104,17 +105,19 @@ Vanaf dan vraag je in je chat wat je ook een collega zou vragen: "Wie zijn in pr
 
 - **Je rechten.** Hij handelt namens jou, in elk bedrijf waar je lid van bent, met je rol in elk ervan.
 - **Credits en limieten.** Een kandidaat uitnodigen kost hetzelfde als in de app, en dezelfde e-maillimieten gelden.
-- **De registratie.** De beslissingen die het auditlog bewaart (onderwerpen goedkeuren, resultaten bekijken, de slaaggrens wijzigen, extra tijd geven, een kandidaat intrekken, een rapport mailen) worden gemarkeerd als genomen via een AI-app. De eigenaar van het bedrijf kan het log via de API lezen.
+- **De registratie.** Alles wat een AI-app voor je doet, verschijnt in het actielog van het bedrijf als gedaan via een AI-app, van onderwerpen goedkeuren en resultaten bekijken tot extra tijd geven of een kandidaat intrekken. De eigenaar van het bedrijf leest het op het tabblad **Actielog** van het bedrijf.
 - **Het bedrijf beslist.** Eigenaren en beheerders kunnen AI-apps het gebruik van de gegevens van een bedrijf ontzeggen met **AI-apps toestaan in dit bedrijf** op de pagina AI-apps van het bedrijf.
 - **Wat hij niet kan.** Hij kan je wachtwoord en API-sleutels niet zien, en kan je account of een bedrijf niet verwijderen. Dat blijft in de app.
 
 **Om te ontkoppelen** verwijder je de connector in je AI-app, of kies je **Ontkoppelen** ernaast onder **AI-apps** op het tabblad Integraties. Hij werkt dan meteen niet meer.
 
+**Andere apps en je eigen agents.** Het [MCP-tabblad](/api-docs?tab=mcp) van de ontwikkelaarsdocumentatie heeft de stappen voor Gemini CLI, Cursor, VS Code en Le Chat, en complete voorbeeldagents in Python en TypeScript. Een agent die op een server draait, zonder iemand die een aanmelding kan goedkeuren, gebruikt een API-sleutel van het bedrijf met het recht **Gebruiken met AI-agents (MCP)**: hij werkt alleen in dat bedrijf, en alleen met de tools die de andere rechten van de sleutel toestaan.
+
 ### 3. Je eigen platform, via de API
 
 Voor automatisering zonder AI heeft prepza een API, beschreven in de [ontwikkelaarsdocumentatie](/api-docs).
 
-1. Een eigenaar of beheerder opent het tabblad **Integraties** van een bedrijf, dan **API**, en kiest **Nieuwe sleutel**. Geef hem de naam van het platform dat hem gaat gebruiken en kies wanneer hij verloopt. De sleutel wordt één keer getoond; bewaar hem op een veilige plek.
+1. Een eigenaar of beheerder opent het tabblad **Integraties** van een bedrijf, dan **API**, en kiest **Nieuwe sleutel**. Geef hem de naam van het platform dat hem gaat gebruiken, kies wanneer hij verloopt en vink alleen aan wat hij nodig heeft: de sleutel van een dashboard leest alleen, die van een vacaturesite nodigt ook uit. Rechten kun je later intrekken, maar nooit toevoegen. De sleutel wordt één keer getoond; bewaar hem op een veilige plek.
 2. Je platform stuurt verzoeken met die sleutel: de interviews van het bedrijf ophalen, kandidaten ophalen of opvragen met hun score, of ze geslaagd zijn en hun integriteitssignalen, en een kandidaat uitnodigen.
 3. Voeg een **webhook** toe: een adres op je platform dat prepza ondertekend aanroept wanneer een kandidaat begint of klaar is, wanneer de uitnodiging een kandidaat niet bereikt of verloopt, wanneer een kandidaat wordt verwijderd en wanneer een interview klaarstaat, zodat je niet steeds hoeft te vragen. Op de API-pagina kun je er een testgebeurtenis naartoe sturen en zie je het afleverlogboek.
 

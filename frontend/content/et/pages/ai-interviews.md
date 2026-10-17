@@ -37,7 +37,7 @@ prepza kirjutab AI abil sinu töökuulutuse põhjal oskuste intervjuu. Mida test
 
 1. **AI loeb sinu töökuulutust** ja toob välja, mida kandidaat peab teadma: nõuded, taseme ning teemad koos alateemadega.
 2. **Sina vaatad teemad üle.** Jäta alles, eemalda linnuke, nimeta ümber või muuda neid või kirjuta AI-le tavalise tekstiga, mida muuta. Ühtegi küsimust ei kirjutata enne, kui oled teemad heaks kiitnud.
-3. **AI kirjutab küsimused.** Iga teema jaoks luuakse valikvastustega küsimuste pank: igas küsimuses üks õige ja kolm usutavat valet vastusevarianti. Tehnilistes teemades näitavad paljud küsimused lühikest koodinäidet ja küsivad, mida see väljastab, mida see teeb, miks see ebaõnnestub või milline muudatus selle parandab. Saad iga küsimuse koos vastusevariantidega avada ja need, mis ei meeldi, uuesti luua.
+3. **AI kirjutab küsimused.** Iga teema jaoks luuakse valikvastustega küsimuste pank, igas küsimuses neli vastusevarianti: enamikus üks õige ja kolm usutavat valet, umbes iga kümnes on „vali kõik õiged“ küsimus, milles on 2 või 3 õiget varianti. Tehnilistes teemades näitavad paljud küsimused lühikest koodinäidet ja küsivad, mida see väljastab, mida see teeb, miks see ebaõnnestub või milline muudatus selle parandab. Saad iga küsimuse koos vastusevariantidega avada ja need, mis ei meeldi, uuesti luua.
 4. **Kandidaadid vastavad ajapiiranguga küsimustele.** Iga kandidaat saab iga teema pangast oma juhusliku valiku, oma järjekorras ja iga küsimuse juures on taimer.
 5. **Vastuseid kontrollitakse vastusevõtme järgi.** AI kirjutab võtmed; igast teemast kontrollitakse enne avaldamist valim võtmeid, ülejäänuid siis, kui küsimusest teatatakse. Hindamine ise käib kindlate reeglite järgi ja ükski AI ei loe ega hinda kandidaadi vastust. Kui võtit hiljem parandatakse, kehtib parandus kandidaatidele, kes alustavad pärast seda; varasemad tulemused ei muutu. Kiirust, lehelt lahkumisi ja kopeerimiskatseid näidatakse sulle signaalidena; tulemust need ei muuda.
 6. **Otsustavad inimesed.** Näed järjestatud nimekirja ja iga kandidaadi hindamislehte koos kõigi vastuste ja ajakuluga. Tulemused vaatab üle ja värbamisotsuse teeb inimene sinu ettevõttest.
@@ -57,7 +57,7 @@ Enne kellegi kutsumist saad oma intervjuu ka ise kandidaadina läbi teha: samad 
 
 ## Miks seda lähenemist on lihtsam selgitada ja üle vaadata
 
-**Iga tulemust saab jälgida.** Tulemus on õigesti vastatud küsimuste osakaal. Iga kandidaadi kohta saad näidata täpselt, milliseid küsimusi ta nägi, mida ta valis, mis oli õige vastus ja kui kaua tal aega kulus.
+**Iga tulemust saab jälgida.** Tulemus on teenitud punktide osakaal: iga küsimus annab ühe punkti ja „vali kõik õiged“ küsimus annab osa sellest iga märgitud õige variandi eest, kuid mitte midagi, kui märgitud on vale variant. Iga kandidaadi kohta saad näidata täpselt, milliseid küsimusi ta nägi, mida ta valis, mis oli õige vastus ja kui kaua tal aega kulus.
 
 **Sisu saab üle vaadata.** Kiidad teemad heaks enne, kui midagi kirjutatakse, ja küsimused on sulle avatud. Kui teema ei ole tegelik töönõue, saad selle eemaldada.
 

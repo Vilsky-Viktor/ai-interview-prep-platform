@@ -37,7 +37,7 @@ prepza, iş tanımınızdan bir beceri mülakatı yazmak için yapay zekâ kulla
 
 1. **Yapay zekâ iş tanımınızı okur** ve adayın bilmesi gerekenleri çıkarır: gereklilikler, seviye ve alt konularıyla birlikte bir konu seti.
 2. **Konuları siz gözden geçirirsiniz.** Tutun, işaretini kaldırın, yeniden adlandırın veya düzenleyin ya da neyin değişeceğini yapay zekâya düz metinle söyleyin. Siz onaylamadan hiçbir soru yazılmaz.
-3. **Soruları yapay zekâ yazar.** Her konu için, her birinde bir doğru ve üç akla yatkın yanlış seçenek bulunan çoktan seçmeli sorulardan oluşan bir havuz hazırlanır. Teknik konularda birçok soru kısa bir kod örneği gösterir ve bunun ne çıktı verdiğini, ne yaptığını, neden hata verdiğini ya da hangi değişikliğin sorunu düzelttiğini sorar. Her soruyu ve seçeneklerini açabilir, beğenmediklerinizi yeniden oluşturabilirsiniz.
+3. **Soruları yapay zekâ yazar.** Her konu için dört seçenekli çoktan seçmeli sorulardan oluşan bir havuz hazırlanır: çoğunda bir doğru ve üç akla yatkın yanlış seçenek bulunur, yaklaşık 10 sorudan 1'i ise 2 ya da 3 doğru seçeneği olan "doğru olanların hepsini seçin" sorusudur. Teknik konularda birçok soru kısa bir kod örneği gösterir ve bunun ne çıktı verdiğini, ne yaptığını, neden hata verdiğini ya da hangi değişikliğin sorunu düzelttiğini sorar. Her soruyu ve seçeneklerini açabilir, beğenmediklerinizi yeniden oluşturabilirsiniz.
 4. **Adaylar süreli soruları yanıtlar.** Her aday, her konunun havuzundan kendi sırasıyla, kendine ait rastgele bir set alır; her soruda geri sayım vardır.
 5. **Yanıtlar cevap anahtarına göre değerlendirilir.** Anahtarları yapay zekâ yazar; her konudan bir örneklem yayından önce kontrol edilir, diğerleri ise bir soru bildirildiğinde. Değerlendirmenin kendisi sabit kurallara göre yapılır ve hiçbir yapay zekâ adayın yanıtını okumaz veya yargılamaz. Bir anahtar sonradan düzeltilirse düzeltme, sonrasında başlayan adaylar için geçerli olur; geçmiş sonuçlar değişmez. Hız, sayfadan ayrılmalar ve kopyalama girişimleri size sinyal olarak gösterilir; puanı değiştirmez.
 6. **Kararı insanlar verir.** Sıralı bir liste ve her aday için her yanıtı ve süresini gösteren bir değerlendirme kartı görürsünüz. Şirketinizden bir kişi sonuçları inceler ve işe alım kararını verir.
@@ -57,7 +57,7 @@ Kimseyi davet etmeden önce kendi mülakatınızı aday gözüyle de önizleyebi
 
 ## Bu yaklaşım neden açıklaması ve incelemesi daha kolay
 
-**Her sonucun izi sürülebilir.** Puan, doğru yanıtlanan soruların oranıdır. Herhangi bir aday için gördüğü soruları, neyi seçtiğini, doğru yanıtı ve ne kadar sürdüğünü tam olarak gösterebilirsiniz.
+**Her sonucun izi sürülebilir.** Puan, kazanılan puanların oranıdır: her soru bir puan değerindedir; "doğru olanların hepsini seçin" sorusu işaretlenen her doğru seçenek için bu puanın bir kısmını verir, yanlış bir seçenek işaretlenirse hiç puan vermez. Herhangi bir aday için gördüğü soruları, neyi seçtiğini, doğru yanıtı ve ne kadar sürdüğünü tam olarak gösterebilirsiniz.
 
 **İçerik incelenebilir.** Herhangi bir şey yazılmadan önce konuları siz onaylarsınız ve sorular size açıktır. Bir konu işin gerçek bir gerekliliği değilse onu kaldırabilirsiniz.
 

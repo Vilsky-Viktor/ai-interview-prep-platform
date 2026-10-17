@@ -37,7 +37,7 @@ prepza utilise l'IA pour rédiger un entretien de compétences à partir de votr
 
 1. **L'IA lit votre fiche de poste** et repère ce qu'un candidat doit savoir : les exigences, le niveau et une série de thèmes avec leurs sous-thèmes.
 2. **Vous vérifiez les thèmes.** Gardez-les, décochez-les, renommez-les ou modifiez-les, ou dites à l'IA en texte libre ce qu'il faut changer. Aucune question n'est rédigée avant votre validation.
-3. **L'IA rédige les questions.** Chaque thème reçoit une banque de questions à choix multiples, chacune avec une bonne réponse et trois mauvaises réponses plausibles. Pour les thèmes techniques, de nombreuses questions montrent un court exemple de code et demandent ce qu'il affiche, ce qu'il fait, pourquoi il échoue ou quelle modification le corrige. Vous pouvez ouvrir chaque question et ses options, et régénérer celles qui ne vous plaisent pas.
+3. **L'IA rédige les questions.** Chaque thème reçoit une banque de questions à choix multiples, chacune avec quatre réponses proposées : la plupart ont une bonne réponse et trois mauvaises réponses plausibles, et environ 1 sur 10 demande de « cocher toutes les bonnes réponses », avec 2 ou 3 bonnes réponses. Pour les thèmes techniques, de nombreuses questions montrent un court exemple de code et demandent ce qu'il affiche, ce qu'il fait, pourquoi il échoue ou quelle modification le corrige. Vous pouvez ouvrir chaque question et ses options, et régénérer celles qui ne vous plaisent pas.
 4. **Les candidats répondent à des questions chronométrées.** Chaque candidat reçoit sa propre série aléatoire tirée de la banque de chaque thème, dans son propre ordre, avec un compte à rebours pour chaque question.
 5. **Les réponses sont notées d'après un corrigé.** L'IA rédige les corrigés. Un échantillon des corrigés de chaque thème est vérifié avant la mise en ligne, les autres dès qu'une question est signalée. La notation elle-même suit des règles fixes, et aucune IA ne lit ni ne juge la réponse d'un candidat. Si un corrigé est rectifié par la suite, la rectification s'applique aux candidats qui commencent après elle ; les résultats passés ne changent pas. La vitesse, les sorties de la page et les tentatives de copie vous sont présentées comme des signaux ; elles ne modifient pas le score.
 6. **Des personnes décident.** Vous voyez une liste classée et une fiche d'évaluation par candidat, avec chaque réponse et son temps. Une personne de votre entreprise examine les résultats et prend la décision d'embauche.
@@ -57,7 +57,7 @@ Vous pouvez aussi essayer votre propre entretien en tant que candidat avant d'in
 
 ## Pourquoi cette approche est plus facile à expliquer et à contrôler
 
-**Chaque résultat est traçable.** Un score est la part de questions auxquelles le candidat a bien répondu. Pour chaque candidat, vous pouvez montrer exactement les questions qu'il a vues, ce qu'il a choisi, la bonne réponse et le temps qu'il a mis.
+**Chaque résultat est traçable.** Un score est la part des points obtenus : chaque question vaut un point, et une question où il faut cocher toutes les bonnes réponses en rapporte une part pour chaque bonne réponse cochée, et rien si une mauvaise est cochée. Pour chaque candidat, vous pouvez montrer exactement les questions qu'il a vues, ce qu'il a choisi, la bonne réponse et le temps qu'il a mis.
 
 **Le contenu peut être contrôlé.** Vous validez les thèmes avant que quoi que ce soit ne soit rédigé, et les questions vous sont accessibles. Si un thème ne correspond pas à une réelle exigence du poste, vous pouvez le retirer.
 

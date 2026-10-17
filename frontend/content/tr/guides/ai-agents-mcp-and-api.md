@@ -2,7 +2,7 @@
 title: "Yapay zekâ asistanları, MCP ve API'ler: nedir ve işe alımda nasıl kullanılır"
 seoTitle: "İşe Alımda Yapay Zekâ Asistanları, MCP ve API'ler: Nedir, Nasıl Kullanılır"
 description: "Yapay zekâ asistanı nedir, MCP ve API ne işe yarar, işe alımda güvenle nasıl kullanılır ve prepza'yı kendi asistanından, Claude ve ChatGPT'den ya da kendi platformunuzdan nasıl kullanırsınız."
-updated: "2026-10-15"
+updated: "2026-10-17"
 ---
 
 # Yapay zekâ asistanları, MCP ve API'ler: nedir ve işe alımda nasıl kullanılır
@@ -84,6 +84,7 @@ Herhangi bir yapay zekâ uygulamasını iş verilerine bağlamadan önce şirket
 Herhangi bir sayfanın üst kısmında **asistana sor**'u seçin. Asistan şirketlerinizi, mülakatlarınızı, adaylarınızı, kredilerinizi ve entegrasyonlarınızı, ayrıca prepza'nın nasıl çalıştığını bilir. Sizin dilinizde yanıt verir; yazarak veya konuşarak sorabilirsiniz.
 
 - **Verilerinize göre yanıtlar,** sizinle aynı görünümle: bir yönetici bir yöneticinin gördüğünü, bir görüntüleyici bir görüntüleyicinin gördüğünü görür.
+- **Hangi sayfada olduğunuzu bilir.** O sayfanın rehberi için "Bu sayfada neler yapabilirim?" diye sorun ya da bir mülakatın adaylarındayken "Burada en iyisi kim?" diye sorun; hangisi olduğunu sormadan o mülakat hakkında yanıt verir.
 - **Değişiklikleri o hazırlar, siz onaylarsınız.** Aday davet etmesini istediğinizde, ne olacağını tam olarak gösteren bir kart sunar; örneğin "Backend geliştirici mülakatına 12 aday davet et". Siz Onayla'yı seçene kadar hiçbir şey çalışmaz.
 - **Kaynaklarını gösterir.** Bir yanıtın altında kullandığı adayları veya mülakatları ve geldikleri sayfanın bağlantısını görürsünüz.
 - **Konunun dışına çıkmaz.** prepza ve onunla işe alım hakkında yanıt verir, gerisini reddeder.
@@ -104,17 +105,19 @@ Bundan sonra sohbetinizde bir iş arkadaşınıza sorar gibi sorun: "prepza'da �
 
 - **Yetkileriniz.** Bağlantı, üyesi olduğunuz her şirkette, her birindeki rolünüzle sizin adınıza çalışır.
 - **Krediler ve sınırlar.** Bir adayı davet etmek uygulamadakiyle aynı tutardadır ve aynı e-posta sınırları geçerlidir.
-- **Kayıt.** Denetim günlüğünün tuttuğu kararlar (konuları onaylama, sonuçları görüntüleme, geçme notunu değiştirme, ek süre verme, bir adayı iptal etme, rapor e-postalama) bir yapay zekâ uygulaması üzerinden yapılmış olarak işaretlenir. Şirketin sahibi günlüğü API üzerinden okuyabilir.
+- **Kayıt.** Bir yapay zekâ uygulamasının sizin için yaptığı her şey, konuları onaylamaktan sonuçları görüntülemeye, ek süre vermekten bir adayı iptal etmeye kadar, şirketin işlem kaydında bir yapay zekâ uygulaması üzerinden yapılmış olarak görünür. Şirketin sahibi bunu şirketin **İşlem kaydı** sekmesinde okur.
 - **Karar şirketin.** Sahipler ve yöneticiler, şirketin yapay zekâ uygulamaları sayfasındaki **Bu şirkette yapay zekâ uygulamalarına izin ver** ile bu uygulamaların şirket verilerini kullanmasını durdurabilir.
 - **Yapamadıkları.** Şifrenizi veya API anahtarlarınızı göremez, hesabınızı veya bir şirketi silemez. Bunlar uygulamada kalır.
 
 **Bağlantıyı kaldırmak için** yapay zekâ uygulamanızda bağlayıcıyı silin ya da Entegrasyonlar sekmesindeki **Yapay zekâ uygulamaları** altında yanındaki **Bağlantıyı kes**'i seçin. Hemen çalışmayı bırakır.
 
+**Diğer uygulamalar ve kendi ajanlarınız.** Geliştirici belgelerindeki [MCP sekmesi](/api-docs?tab=mcp), Gemini CLI, Cursor, VS Code ve Le Chat için adımları ve Python ile TypeScript'te eksiksiz örnek ajanları içerir. Bir sunucuda çalışan ve oturum açmayı onaylayacak kimsenin olmadığı bir ajan, **Yapay zekâ ajanlarıyla kullanma (MCP)** yetkisine sahip bir şirket API anahtarı kullanır: yalnızca o şirkette ve yalnızca anahtarın diğer yetkilerinin izin verdiği araçlarla çalışır.
+
 ### 3. API ile kendi platformunuz
 
 Yapay zekâ olmadan otomasyon için prepza'nın [geliştirici belgelerinde](/api-docs) açıklanan bir API'si vardır.
 
-1. Bir sahip veya yönetici, bir şirketin **Entegrasyonlar** sekmesini, ardından **API**'yi açar ve **Yeni anahtar**'ı seçer. Anahtara onu kullanacak platformun adını verin ve ne zaman sona ereceğini seçin. Anahtar yalnızca bir kez gösterilir; güvenli bir yerde saklayın.
+1. Bir sahip veya yönetici, bir şirketin **Entegrasyonlar** sekmesini, ardından **API**'yi açar ve **Yeni anahtar**'ı seçer. Anahtara onu kullanacak platformun adını verin, ne zaman sona ereceğini seçin ve yalnızca ihtiyaç duyduklarını işaretleyin: bir panonun anahtarı yalnızca okur, bir kariyer sitesinin anahtarı davet de eder. Yetkileri daha sonra kaldırabilirsiniz ama asla ekleyemezsiniz. Anahtar yalnızca bir kez gösterilir; güvenli bir yerde saklayın.
 2. Platformunuz bu anahtarla istek gönderir: şirketin mülakatlarını listeler, adayları notları, geçip geçmedikleri ve dürüstlük uyarılarıyla birlikte listeler veya okur ve bir adayı davet eder.
 3. Bir **webhook** ekleyin: bir aday başladığında, bitirdiğinde, daveti kendisine ulaşamadığında, davetinin süresi dolduğunda veya kaldırıldığında ve bir mülakat hazır olduğunda prepza'nın imzalı olarak çağırdığı, platformunuzdaki bir adres; böylece sürekli sormanız gerekmez. API sayfası ona bir test olayı gönderebilir ve teslim günlüğünü gösterir.
 

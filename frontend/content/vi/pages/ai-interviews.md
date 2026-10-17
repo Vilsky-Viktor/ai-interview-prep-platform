@@ -1,7 +1,7 @@
 ---
 title: "Phỏng vấn AI: là gì và cách dùng công bằng"
 seoTitle: "AI trong tuyển dụng: phỏng vấn AI, rủi ro và cách dùng"
-description: "Ứng dụng AI trong tuyển dụng: chatbot phỏng vấn AI, phân tích video, bài test tạo tự động. Cách prepza dùng trắc nghiệm tính giờ và điều cần tuân thủ."
+description: "Ứng dụng AI trong tuyển dụng: chatbot phỏng vấn AI, phân tích video, bài kiểm tra tạo tự động. Cách prepza dùng trắc nghiệm tính giờ và điều cần tuân thủ."
 updated: "2026-10-07"
 ---
 
@@ -37,7 +37,7 @@ prepza dùng AI để viết một buổi phỏng vấn kỹ năng từ mô tả
 
 1. **AI đọc mô tả công việc của bạn** và chọn ra những gì ứng viên phải biết: các yêu cầu, cấp độ và một bộ chủ đề kèm chủ đề con.
 2. **Bạn duyệt các chủ đề.** Giữ, bỏ chọn, đổi tên hoặc chỉnh sửa, hoặc bảo AI bằng lời cần thay đổi gì. Không câu hỏi nào được viết cho đến khi bạn duyệt.
-3. **AI viết câu hỏi.** Mỗi chủ đề có một ngân hàng câu hỏi trắc nghiệm, mỗi câu có một đáp án đúng và ba đáp án sai nhưng hợp lý. Với chủ đề kỹ thuật, nhiều câu hỏi đưa ra một đoạn code ngắn và hỏi nó in ra gì, làm gì, vì sao lỗi hoặc thay đổi nào sửa được nó. Bạn có thể mở mọi câu hỏi và các phương án, và tạo lại bất kỳ câu nào bạn không thích.
+3. **AI viết câu hỏi.** Mỗi chủ đề có một ngân hàng câu hỏi trắc nghiệm, mỗi câu có bốn phương án: phần lớn có một đáp án đúng và ba đáp án sai nhưng hợp lý, còn khoảng 1 trong 10 câu là dạng "chọn tất cả đáp án đúng", với 2 hoặc 3 đáp án đúng. Với chủ đề kỹ thuật, nhiều câu hỏi đưa ra một đoạn code ngắn và hỏi nó in ra gì, làm gì, vì sao lỗi hoặc thay đổi nào sửa được nó. Bạn có thể mở mọi câu hỏi và các phương án, và tạo lại bất kỳ câu nào bạn không thích.
 4. **Ứng viên trả lời câu hỏi có tính giờ.** Mỗi ứng viên nhận bộ câu hỏi ngẫu nhiên của riêng mình từ ngân hàng của mỗi chủ đề, theo thứ tự riêng, với đồng hồ đếm ngược cho mọi câu hỏi.
 5. **Câu trả lời được chấm theo đáp án.** AI viết đáp án. Một phần đáp án của mỗi chủ đề được kiểm tra trước khi phát hành, phần còn lại được kiểm tra khi câu hỏi bị đánh dấu. Bản thân việc chấm điểm theo quy tắc cố định, và không có AI nào đọc hay đánh giá câu trả lời của ứng viên. Nếu sau này một đáp án được sửa, bản sửa áp dụng cho các ứng viên bắt đầu sau đó; kết quả trước đó không thay đổi. Tốc độ, việc rời trang và các lần cố sao chép được hiển thị cho bạn như các tín hiệu; chúng không làm thay đổi điểm số.
 6. **Con người quyết định.** Bạn thấy một danh sách xếp hạng và bảng điểm cho từng ứng viên, với mọi câu trả lời và thời gian trả lời. Một người ở công ty bạn xem kết quả và đưa ra quyết định tuyển dụng.
@@ -57,7 +57,7 @@ Bạn cũng có thể xem trước buổi phỏng vấn của mình với tư c�
 
 ## Vì sao cách tiếp cận này dễ giải thích và dễ xem xét hơn
 
-**Mọi kết quả đều truy vết được.** Điểm số là tỷ lệ câu trả lời đúng. Với bất kỳ ứng viên nào, bạn có thể cho xem chính xác các câu hỏi họ đã thấy, phương án họ chọn, đáp án đúng và thời gian họ đã dùng.
+**Mọi kết quả đều truy vết được.** Điểm số là tỷ lệ điểm đạt được: mỗi câu hỏi có một điểm, câu "chọn tất cả đáp án đúng" được một phần điểm cho mỗi đáp án đúng đã chọn, và không được điểm nào nếu chọn một đáp án sai. Với bất kỳ ứng viên nào, bạn có thể cho xem chính xác các câu hỏi họ đã thấy, phương án họ chọn, đáp án đúng và thời gian họ đã dùng.
 
 **Nội dung có thể xem xét.** Bạn duyệt các chủ đề trước khi có bất cứ thứ gì được viết, và bạn xem được các câu hỏi. Nếu một chủ đề không phải yêu cầu thực sự của công việc, bạn có thể bỏ nó.
 

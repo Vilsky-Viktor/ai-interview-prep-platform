@@ -2,7 +2,7 @@
 title: "KI-Agenten, MCP und APIs: was sie sind und wie du sie im Recruiting nutzt"
 seoTitle: "KI-Agenten, MCP und APIs im Recruiting: was sie sind und wie du sie nutzt"
 description: "Was ein KI-Agent ist, was MCP und eine API leisten, wie du sie im Recruiting sicher einsetzt und wie du prepza über seinen Agenten, aus Claude und ChatGPT oder von deiner eigenen Plattform aus steuerst."
-updated: "2026-10-15"
+updated: "2026-10-17"
 ---
 
 # KI-Agenten, MCP und APIs: was sie sind und wie du sie im Recruiting nutzt
@@ -84,6 +84,7 @@ Bevor du eine KI-App mit Arbeitsdaten verbindest, prüf die Richtlinie deines Un
 Wähle **agent fragen** in der Kopfzeile einer beliebigen Seite. Der Agent kennt deine Unternehmen, Interviews, Kandidaten, Credits und Integrationen und weiß, wie prepza funktioniert. Er antwortet in deiner Sprache, und du kannst tippen oder sprechen.
 
 - **Er antwortet aus deinen Daten,** mit derselben Sicht wie du: Ein Admin sieht, was ein Admin sieht, ein Betrachter, was ein Betrachter sieht.
+- **Er kennt die Seite, auf der du bist.** Frag „Was kann ich auf dieser Seite tun?“, um die Anleitung zu dieser Seite zu bekommen, oder „Wer ist hier am besten?“ bei den Kandidaten eines Interviews, und er antwortet zu genau diesem Interview, ohne nachzufragen, welches gemeint ist.
 - **Er bereitet Änderungen vor, du bestätigst sie.** Bittest du ihn, Kandidaten einzuladen, zeigt er eine Karte mit genau dem, was passieren wird, etwa „12 Kandidaten zu Backend developer einladen“. Nichts läuft, bevor du Bestätigen wählst.
 - **Er zeigt seine Quellen.** Unter einer Antwort siehst du die Kandidaten oder Interviews, die er genutzt hat, und einen Link zur Seite, von der sie stammen.
 - **Er bleibt beim Thema.** Er antwortet zu prepza und zum Recruiting damit und lehnt alles andere ab.
@@ -104,17 +105,19 @@ Ab dann fragst du in deinem Chat so, wie du einen Kollegen fragen würdest: „W
 
 - **Deine Berechtigungen.** Er handelt als du, in jedem Unternehmen, in dem du bist, mit deiner Rolle in jedem davon.
 - **Credits und Limits.** Einen Kandidaten einzuladen kostet dasselbe wie in der App, und es gelten dieselben E-Mail-Limits.
-- **Die Nachvollziehbarkeit.** Die Entscheidungen, die das Audit-Log festhält (Themen freigeben, Ergebnisse ansehen, die Bestehensgrenze ändern, Zusatzzeit geben, einen Kandidaten widerrufen, einen Bericht per E-Mail senden), werden als über eine KI-App getroffen markiert. Der Inhaber des Unternehmens kann das Log über die API lesen.
+- **Die Nachvollziehbarkeit.** Alles, was eine KI-App für dich tut, erscheint im Aktionsprotokoll des Unternehmens als über eine KI-App erledigt, vom Freigeben von Themen und Ansehen von Ergebnissen bis zum Geben von Zusatzzeit oder Widerrufen eines Kandidaten. Der Inhaber des Unternehmens liest es im Tab **Aktionsprotokoll** des Unternehmens.
 - **Das Unternehmen entscheidet.** Inhaber und Admins können KI-Apps mit **KI-Apps in diesem Unternehmen erlauben** auf der Seite „KI-Apps“ des Unternehmens von dessen Daten ausschließen.
 - **Was er nicht kann.** Er sieht weder dein Passwort noch deine API-Schlüssel und kann weder dein Konto noch ein Unternehmen löschen. Das bleibt in der App.
 
 **Zum Trennen** entferne den Konnektor in deiner KI-App oder wähle **Trennen** daneben unter **KI-Apps** im Tab Integrationen. Er funktioniert sofort nicht mehr.
 
+**Andere Apps und deine eigenen Agenten.** Der [MCP-Tab](/api-docs?tab=mcp) der Entwicklerdokumentation enthält die Schritte für Gemini CLI, Cursor, VS Code und Le Chat sowie vollständige Beispiel-Agenten in Python und TypeScript. Ein Agent, der auf einem Server läuft, wo niemand eine Anmeldung bestätigen kann, nutzt einen API-Schlüssel des Unternehmens mit der Berechtigung **Mit KI-Agenten nutzen (MCP)**: Er funktioniert nur in diesem Unternehmen und nur mit den Tools, die die übrigen Berechtigungen des Schlüssels erlauben.
+
 ### 3. Deine eigene Plattform, über die API
 
 Für Automatisierung ohne KI hat prepza eine API, beschrieben in der [Entwicklerdokumentation](/api-docs).
 
-1. Ein Inhaber oder Admin öffnet den Tab **Integrationen** eines Unternehmens, dann **API**, und wählt **Neuer Schlüssel**. Benenne ihn nach der Plattform, die ihn nutzen wird, und wähle, wann er abläuft. Der Schlüssel wird nur einmal angezeigt; bewahre ihn sicher auf.
+1. Ein Inhaber oder Admin öffnet den Tab **Integrationen** eines Unternehmens, dann **API**, und wählt **Neuer Schlüssel**. Benenne ihn nach der Plattform, die ihn nutzen wird, wähle, wann er abläuft, und setze nur die Häkchen, die er braucht: Der Schlüssel eines Dashboards liest nur, der einer Karriereseite lädt auch ein. Berechtigungen kannst du später entziehen, aber nie hinzufügen. Der Schlüssel wird nur einmal angezeigt; bewahre ihn sicher auf.
 2. Deine Plattform sendet Anfragen mit diesem Schlüssel: die Interviews des Unternehmens auflisten, Kandidaten mit ihrem Ergebnis, ob sie bestanden haben, und ihren Hinweisen zur Integrität auflisten oder abrufen und einen Kandidaten einladen.
 3. Füge einen **Webhook** hinzu: eine Adresse auf deiner Plattform, die prepza signiert aufruft, wenn ein Kandidat beginnt, fertig ist, seine Einladung nicht zugestellt werden kann oder abläuft oder er entfernt wird, und wenn ein Interview bereit ist, damit du nicht ständig nachfragen musst. Auf der API-Seite kannst du ihm ein Testereignis senden und sein Zustellprotokoll sehen.
 

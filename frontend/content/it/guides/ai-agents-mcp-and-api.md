@@ -2,7 +2,7 @@
 title: "Agenti IA, MCP e API: cosa sono e come usarli nella selezione del personale"
 seoTitle: "Agenti IA, MCP e API nella selezione del personale: cosa sono e come usarli"
 description: "Cos'è un agente IA, a cosa servono MCP e un'API, come usarli in sicurezza nella selezione del personale e come gestire prepza dal suo agente, da Claude e ChatGPT o dalla tua piattaforma."
-updated: "2026-10-15"
+updated: "2026-10-17"
 ---
 
 # Agenti IA, MCP e API: cosa sono e come usarli nella selezione del personale
@@ -84,6 +84,7 @@ Prima di collegare qualsiasi app di IA a dati di lavoro, verifica la policy dell
 Seleziona **chiedi all'agente** nell'intestazione di qualsiasi pagina. L'agente conosce le tue aziende, i colloqui, i candidati, i crediti e le integrazioni, e sa come funziona prepza. Risponde nella tua lingua, e puoi scrivere o parlare.
 
 - **Risponde con i tuoi dati**, con la stessa visibilità che hai tu: un amministratore vede quello che vede un amministratore, un visualizzatore quello che vede un visualizzatore.
+- **Sa in quale pagina ti trovi.** Chiedi «Cosa posso fare in questa pagina?» per la guida di quella pagina, oppure «Chi è il migliore qui?» sui candidati di un colloquio, e risponde su quel colloquio senza chiederti quale.
 - **Prepara le modifiche, tu le confermi.** Se gli chiedi di invitare candidati, mostra una scheda con esattamente quello che succederà, per esempio «Invita 12 candidati a Backend developer». Non parte nulla finché non selezioni Conferma.
 - **Mostra le sue fonti.** Sotto una risposta trovi i candidati o i colloqui che ha usato e un link alla pagina da cui provengono.
 - **Resta in tema.** Risponde su prepza e sulla selezione del personale con prepza, e declina il resto.
@@ -104,17 +105,19 @@ Da quel momento, chiedi nella chat come faresti con un collega: «In prepza, chi
 
 - **I tuoi permessi.** Agisce a tuo nome, in ogni azienda di cui fai parte, con il tuo ruolo in ciascuna.
 - **Crediti e limiti.** Invitare un candidato costa come nell'app, e valgono gli stessi limiti di email.
-- **La tracciabilità.** Le decisioni che il registro di audit conserva (approvare argomenti, vedere risultati, cambiare la soglia di superamento, concedere tempo extra, revocare un candidato, inviare un report per email) sono segnate come prese tramite un'app di IA. Il proprietario dell'azienda può leggere il registro tramite l'API.
+- **La tracciabilità.** Tutto ciò che un'app di IA fa per te compare nel registro attività dell'azienda come fatto tramite un'app di IA, dall'approvare argomenti e vedere risultati al concedere tempo extra o revocare un candidato. Il proprietario dell'azienda lo legge nella scheda **Registro attività** dell'azienda.
 - **Decide l'azienda.** Proprietari e amministratori possono impedire alle app di IA di usare i dati di un'azienda con **Consenti le app di IA in questa azienda** nella sua pagina delle app di IA.
 - **Cosa non può fare.** Non può vedere la tua password né le tue chiavi API, e non può eliminare il tuo account o un'azienda. Queste operazioni restano nell'app.
 
 **Per scollegarlo,** rimuovi il connettore nella tua app di IA, oppure seleziona **Scollega** accanto a esso in **App IA**, nella scheda Integrazioni. Smette di funzionare subito.
 
+**Altre app e i tuoi agenti.** La [scheda MCP](/api-docs?tab=mcp) della documentazione per sviluppatori contiene i passaggi per Gemini CLI, Cursor, VS Code e Le Chat, e agenti di esempio completi in Python e TypeScript. Un agente che gira su un server, senza nessuno che approvi un accesso, usa una chiave API dell'azienda con il permesso **Uso con agenti IA (MCP)**: funziona solo in quell'azienda e solo con gli strumenti consentiti dagli altri permessi della chiave.
+
 ### 3. La tua piattaforma, tramite l'API
 
 Per automazioni senza IA, prepza ha un'API, descritta nella sua [documentazione per sviluppatori](/api-docs).
 
-1. Un proprietario o un amministratore apre la scheda **Integrazioni** di un'azienda, poi **API**, e seleziona **Nuova chiave**. Dalle il nome della piattaforma che la userà e scegli quando scade. La chiave viene mostrata una sola volta: conservala in un posto sicuro.
+1. Un proprietario o un amministratore apre la scheda **Integrazioni** di un'azienda, poi **API**, e seleziona **Nuova chiave**. Dalle il nome della piattaforma che la userà, scegli quando scade e spunta solo ciò che le serve: la chiave di una dashboard legge soltanto, quella di un sito carriere invita anche. Potrai togliere permessi in seguito, mai aggiungerne. La chiave viene mostrata una sola volta: conservala in un posto sicuro.
 2. La tua piattaforma invia richieste con quella chiave: elencare i colloqui dell'azienda, elencare o leggere i candidati con il loro punteggio, se hanno superato il test e le segnalazioni di integrità, e invitare un candidato.
 3. Aggiungi un **webhook**: un indirizzo sulla tua piattaforma che prepza chiama, con una firma, quando un candidato inizia, termina o viene rimosso, quando il suo invito non gli arriva o scade, e quando un colloquio è pronto, così non devi continuare a chiedere. La pagina API può inviargli un evento di test e ne mostra il registro delle consegne.
 

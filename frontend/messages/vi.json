@@ -107,7 +107,19 @@
     "send": "Gửi",
     "thinking": "Đang suy nghĩ…",
     "copyId": "Sao chép ID",
-    "idCopied": "Đã sao chép ID"
+    "idCopied": "Đã sao chép ID",
+    "copyCode": "Sao chép mã",
+    "codeCopied": "Đã sao chép mã",
+    "codeLanguage": "Ngôn ngữ lập trình",
+    "editor": {
+      "bold": "In đậm",
+      "italic": "In nghiêng",
+      "link": "Liên kết",
+      "bullets": "Danh sách dấu đầu dòng",
+      "numbers": "Danh sách đánh số",
+      "address": "https://…",
+      "addLink": "Thêm liên kết"
+    }
   },
   "errors": {
     "title": "Đã xảy ra lỗi",
@@ -145,6 +157,7 @@
     "dismiss": "Bỏ qua",
     "fixSent": "Đã gửi cho bộ kiểm duyệt. Câu hỏi sẽ được sửa hoặc thay thế trong giây lát.",
     "actionFailed": "Không thành công. Vui lòng thử lại.",
+    "questions": "Câu hỏi",
     "flagged": "Bị đánh dấu",
     "replaced": "Đã thay thế",
     "noFlagged": "Hiện không có gì bị đánh dấu.",
@@ -174,9 +187,20 @@
     "deleteTitle": "Xóa mẫu này?",
     "deleteText": "Các chủ đề và câu hỏi của mẫu sẽ bị xóa. Những buổi phỏng vấn mà công ty đã tạo từ mẫu vẫn được giữ lại.",
     "deleteFailed": "Không thể xóa mẫu. Vui lòng thử lại.",
+    "poolCounts": "{practice} luyện tập · {company} công ty",
+    "topUp": "Bổ sung",
+    "addQuestions": "Thêm câu hỏi",
+    "addQuestionsTitle": "Thêm câu hỏi cho mọi chủ đề",
+    "addQuestionsText": "Mỗi chủ đề nhận thêm số câu hỏi mới này: một phần ba để luyện tập, phần còn lại cho công ty. Các buổi phỏng vấn đã tạo từ mẫu này vẫn giữ câu hỏi của chúng.",
+    "addQuestionsCount": "Số câu hỏi mỗi chủ đề",
+    "add": "Thêm",
+    "addingQuestions": "Đang thêm câu hỏi",
+    "questionsAdded": "Đã thêm câu hỏi",
+    "addQuestionsFailed": "Không thể thêm câu hỏi. Vui lòng thử lại.",
     "passRates": "Tỷ lệ đạt",
     "controls": "Điều khiển",
     "stats": "Thống kê",
+    "statsGeneral": "Tổng quan",
     "statsPeriod": "Khoảng thời gian",
     "statsAllTime": "Tất cả",
     "statsCards": {
@@ -259,11 +283,7 @@
     "deletePostText": "Bài đăng sẽ bị gỡ khỏi trang tin tức ở mọi ngôn ngữ.",
     "postSaveFailed": "Không lưu được bài đăng. Vui lòng thử lại.",
     "postDeleteFailed": "Không xóa được bài đăng. Vui lòng thử lại.",
-    "companies": "Công ty",
-    "companySearch": "Tên công ty",
-    "companiesNotFound": "Không tìm thấy công ty nào.",
     "suspended": "Đã tạm ngưng",
-    "companyDetails": "{members, plural, other {# thành viên}} · từ {date}",
     "suspend": "Tạm ngưng",
     "unsuspend": "Bỏ tạm ngưng",
     "unsuspended": "Đã bỏ tạm ngưng.",
@@ -296,11 +316,341 @@
     "legalSend": "Gửi email về thay đổi",
     "legalConfirmTitle": "Gửi email về thay đổi của {document}?",
     "legalAudience": {
-      "everyone": "Mọi người có tài khoản prepza sẽ nhận được từ sáng hôm sau, cho biết phiên bản mới áp dụng từ {date}. Chỉ gửi một lần và không thể thu hồi.",
-      "company_editors": "Chủ sở hữu và quản trị viên của mọi công ty sẽ nhận được từ sáng hôm sau, cho biết phiên bản mới áp dụng từ {date}. Chỉ gửi một lần và không thể thu hồi."
+      "everyone": "Mọi người có tài khoản prepza sẽ nhận được từ giờ gửi tiếp theo (8:00 đến 18:00 UTC), cho biết phiên bản mới áp dụng từ {date}, và thấy nó trong thông báo của mình. Chỉ gửi một lần và không thể thu hồi.",
+      "company_editors": "Chủ sở hữu và quản trị viên của mọi công ty sẽ nhận được từ giờ gửi tiếp theo (8:00 đến 18:00 UTC), cho biết phiên bản mới áp dụng từ {date}, và thấy nó trong thông báo của mình. Chỉ gửi một lần và không thể thu hồi."
     },
-    "legalAsked": "Thay đổi sẽ được gửi email từ sáng hôm sau.",
-    "legalFailed": "Không thể yêu cầu gửi email. Vui lòng thử lại."
+    "legalAsked": "Thay đổi sẽ được gửi email từ giờ gửi tiếp theo.",
+    "legalFailed": "Không thể yêu cầu gửi email. Vui lòng thử lại.",
+    "support": "Hỗ trợ",
+    "supportSearch": "ID, liên kết, email, ID thanh toán hoặc tên công ty",
+    "supportNotFound": "Không tìm thấy kết quả. Hãy thử ID từ “sao chép id”, liên kết của trang hoặc một email.",
+    "supportKinds": {
+      "company": "Công ty",
+      "interview": "Phỏng vấn tại {company}",
+      "candidate": "Ứng viên tại {company}",
+      "user": "Tài khoản"
+    },
+    "supportCreated": "Ngày tạo",
+    "supportAvailable": "{available} credit khả dụng",
+    "supportHeld": "{reserved} giữ lại cho ứng viên",
+    "supportTabs": {
+      "money": "Credit",
+      "reserved": "Đang giữ",
+      "interviews": "Phỏng vấn",
+      "members": "Thành viên",
+      "audit": "Nhật ký kiểm tra"
+    },
+    "supportNoInterviews": "Chưa có buổi phỏng vấn nào.",
+    "supportUntitled": "Buổi phỏng vấn vẫn đang được tạo",
+    "supportCandidates": "{count, plural, other {# ứng viên}}",
+    "supportJoined": "Đã tham gia",
+    "supportInvited": "Đã mời, chưa tham gia",
+    "adjustCredits": "Điều chỉnh credit",
+    "adjustTitle": "Điều chỉnh credit của {name}",
+    "adjustText": "Số dương sẽ cộng credit, số âm sẽ trừ credit. Công ty thấy lý do trong lịch sử thanh toán của mình.",
+    "adjustAmount": "Credit, ví dụ 500 hoặc -500",
+    "adjustNote": "Lý do, ví dụ “Bị trừ hai lần cho một ứng viên”",
+    "adjustConfirmTitle": "{amount} credit cho {name}?",
+    "adjustConfirm": "Điều chỉnh",
+    "adjustBack": "Quay lại",
+    "adjustNext": "Tiếp",
+    "adjusted": "Đã điều chỉnh credit",
+    "supportNoEmail": "Tài khoản không có email",
+    "supportCompanies": "Công ty",
+    "supportNoCompanies": "Không là thành viên của công ty nào.",
+    "supportTopUps": "Lần nạp đã thanh toán",
+    "supportNoTopUps": "Chưa có lần nạp nào.",
+    "supportDeletedCompany": "Một công ty đã bị xóa",
+    "supportNotYet": "Chưa",
+    "supportFacts": {
+      "company": "Công ty",
+      "interview": "Phỏng vấn",
+      "invited": "Đã mời",
+      "lastSent": "Lần gửi lời mời gần nhất",
+      "started": "Bắt đầu",
+      "finished": "Hoàn thành",
+      "grade": "Điểm",
+      "extraTime": "Thêm thời gian",
+      "signals": "Cảnh báo hành vi bất thường",
+      "credits": "Credit",
+      "topics": "Chủ đề",
+      "questionSeconds": "Thời gian mỗi câu",
+      "passMark": "Điểm đạt"
+    },
+    "supportPassed": "{grade}, đạt",
+    "supportNotPassed": "{grade}, không đạt",
+    "supportNoExtraTime": "Không có",
+    "supportSignals": "{leaves} lần rời trang · {copies} lần thử sao chép · {fast} câu trả lời quá nhanh",
+    "supportCredits": {
+      "held": "Đang giữ",
+      "charged": "Đã trừ",
+      "released": "Đã hoàn lại"
+    },
+    "supportGenerationFailed": "Tạo thất bại",
+    "supportSeconds": "{count, plural, other {# giây}}",
+    "supportNoCandidates": "Chưa có ứng viên nào.",
+    "campaigns": "Chiến dịch",
+    "newCampaign": "Chiến dịch mới",
+    "editCampaign": "Sửa",
+    "editCampaignIn": "Sửa bản {language}",
+    "campaignInEnglish": "Hãy viết bằng tiếng Anh. Sau khi lưu, chiến dịch được dịch sang mọi ngôn ngữ khác và bạn có thể sửa bất kỳ bản nào trước khi gửi.",
+    "campaignInLanguage": "Nội dung của riêng bạn bằng {language}, được gửi đúng như bạn viết.",
+    "campaignKind": "Loại",
+    "campaignKinds": {
+      "updates": "Cập nhật sản phẩm",
+      "promotions": "Ưu đãi"
+    },
+    "campaignSubject": "Tiêu đề",
+    "campaignSubjectPlaceholder": "Nhập tiêu đề ở đây…",
+    "campaignText": "Nội dung",
+    "campaignTextPlaceholder": "Nhập nội dung ở đây… Nhấn Enter để bắt đầu đoạn mới.",
+    "campaignButton": "Chữ trên nút (không bắt buộc)",
+    "campaignLink": "Liên kết của nút",
+    "campaignLinkPlaceholder": "Liên kết của nút trên prepza, ví dụ /pricing (không bắt buộc)",
+    "campaignSaveFailed": "Không lưu được chiến dịch. Vui lòng thử lại.",
+    "noCampaigns": "Chưa có chiến dịch nào.",
+    "campaignStatus": {
+      "draft": "bản nháp",
+      "sending": "đang gửi…",
+      "sent": "đã gửi",
+      "stopped": "đã dừng"
+    },
+    "campaignRowCounts": {
+      "sent": "{count} đã gửi",
+      "skipped": "{count} bỏ qua",
+      "failed": "{count} thất bại",
+      "unsubscribed": "{count} hủy đăng ký",
+      "complained": "{count} báo spam"
+    },
+    "campaignCounts": {
+      "pending": "Đang chờ",
+      "sent": "Đã gửi",
+      "skipped": "Bỏ qua",
+      "failed": "Thất bại",
+      "unsubscribed": "Hủy đăng ký sau đó",
+      "complained": "Báo cáo spam"
+    },
+    "campaignRecipients": "<number>{shown}</number> {count, plural, other {người nhận}}",
+    "campaignPreviewLanguage": "Xem trước bằng",
+    "sendTest": "Gửi email thử cho tôi",
+    "testSent": "Email thử đang được gửi đến địa chỉ của bạn.",
+    "sendCampaign": "Gửi",
+    "stopCampaign": "Dừng",
+    "deleteCampaign": "Xóa chiến dịch",
+    "campaignConfirm": {
+      "send": {
+        "title": "Gửi chiến dịch này?",
+        "text": "{count, plural, =0 {Hiện chưa có ai nhận được.} other {# người sẽ nhận được, bắt đầu từ giờ gửi tiếp theo (8:00 đến 18:00 UTC). Sau đó không thể thay đổi.}}",
+        "unknown": "Mọi người đã bật loại email này sẽ nhận được, bắt đầu từ giờ gửi tiếp theo (8:00 đến 18:00 UTC). Sau đó không thể thay đổi.",
+        "confirm": "Gửi"
+      },
+      "stop": {
+        "title": "Dừng chiến dịch này?",
+        "text": "Không ai khác nhận được nữa. Những người đã nhận vẫn giữ nó.",
+        "confirm": "Dừng"
+      },
+      "delete": {
+        "title": "Xóa chiến dịch này?",
+        "text": "Chiến dịch bị xóa ở mọi ngôn ngữ. Nó chưa từng được gửi.",
+        "confirm": "Xóa"
+      }
+    },
+    "sendAsCampaign": "Gửi dưới dạng chiến dịch",
+    "removeSuppression": "Gỡ khỏi danh sách",
+    "suppressed": {
+      "bounced": "Email gửi đến địa chỉ này bị trả lại vào {date}, nên email về sản phẩm và thông báo sẽ bỏ qua địa chỉ này.",
+      "complained": "Địa chỉ này đã đánh dấu một email là spam vào {date}, nên email về sản phẩm và thông báo sẽ bỏ qua địa chỉ này."
+    },
+    "aiCosts": "Chi phí AI",
+    "aiCards": {
+      "spend": "Chi tiêu",
+      "calls": "Lượt gọi AI",
+      "month": "Tháng này",
+      "monthOf": "Tháng này, trên ngân sách {budget}",
+      "input": "Token đầu vào",
+      "cached": "Token đầu vào được lưu đệm",
+      "output": "Token đầu ra"
+    },
+    "aiBudgetsTitle": "Ngân sách chung hôm nay",
+    "aiNothing": "Không có gì trong khoảng thời gian này.",
+    "aiOf": "{used} trên {limit}",
+    "aiForTitle": "Dành cho ai",
+    "aiCategories": {
+      "paid": "Công ty đã thanh toán",
+      "unpaid": "Công ty chưa thanh toán",
+      "no_company": "Không thuộc công ty nào",
+      "prepza": "prepza"
+    },
+    "aiActionsTitle": "Theo thao tác",
+    "aiActions": {
+      "interview_generation": "Tạo buổi phỏng vấn",
+      "template_generation": "Tạo mẫu",
+      "question_regeneration": "Tạo lại câu hỏi",
+      "template_question_regeneration": "Tạo lại câu hỏi của mẫu",
+      "sample_key_check": "Kiểm tra đáp án trên mẫu thử",
+      "question_verify": "Kiểm tra câu hỏi",
+      "key_check_batch": "Kiểm tra đáp án theo lô",
+      "embeddings": "Khớp chủ đề",
+      "news_translation": "Dịch tin tức",
+      "campaign_translation": "Dịch chiến dịch",
+      "assistant_message": "Tin nhắn trợ lý",
+      "assistant_title": "Tiêu đề cuộc trò chuyện với trợ lý",
+      "transcription": "Tin nhắn thoại",
+      "help_chat": "Chat hỗ trợ"
+    },
+    "aiUnitCost": {
+      "interview_generation": "{cost} mỗi buổi phỏng vấn",
+      "template_generation": "{cost} mỗi lần tạo mẫu",
+      "question_regeneration": "{cost} mỗi câu hỏi",
+      "template_question_regeneration": "{cost} mỗi câu hỏi",
+      "sample_key_check": "{cost} mỗi bài kiểm tra",
+      "question_verify": "{cost} mỗi câu hỏi",
+      "key_check_batch": "{cost} mỗi lần kiểm tra",
+      "embeddings": "{cost} mỗi yêu cầu",
+      "news_translation": "{cost} mỗi bài đăng",
+      "campaign_translation": "{cost} mỗi chiến dịch",
+      "assistant_message": "{cost} mỗi cuộc trò chuyện",
+      "assistant_title": "{cost} mỗi cuộc trò chuyện",
+      "transcription": "{cost} mỗi phút",
+      "help_chat": "{cost} mỗi lượt gọi"
+    },
+    "aiPaid": "đã thanh toán {spend}",
+    "aiUnpaid": "chưa thanh toán {spend}",
+    "aiCalls": "{count, plural, other {# lượt gọi}}",
+    "aiModelsTitle": "Theo mô hình",
+    "aiTokensIn": "{count} vào",
+    "aiCachedShare": "{share} lưu đệm",
+    "aiTokensOut": "{count} ra",
+    "aiCompaniesTitle": "Công ty tốn chi phí nhất",
+    "aiUsersTitle": "Người dùng tốn chi phí nhất",
+    "aiByMonthTitle": "Theo tháng",
+    "aiByDayTitle": "Theo ngày",
+    "limitsOursTitle": "Giới hạn của chúng tôi đã bị chạm",
+    "limitsProvidersTitle": "Giới hạn của nhà cung cấp",
+    "limitsNoHits": "Không có giới hạn nào bị chạm trong khoảng thời gian này.",
+    "limitNames": {
+      "MESSAGES_PER_USER_HOUR": "Tin nhắn trợ lý mỗi người dùng mỗi giờ",
+      "MESSAGES_PER_USER_DAY": "Tin nhắn trợ lý mỗi người dùng mỗi ngày",
+      "MESSAGES_PER_COMPANY_DAY": "Tin nhắn trợ lý mỗi công ty mỗi ngày",
+      "MESSAGES_PER_DAY": "Tin nhắn trợ lý mỗi ngày, tổng mọi người dùng chưa thanh toán",
+      "TOKENS_PER_USER_DAY": "Token trợ lý mỗi người dùng mỗi ngày",
+      "TOKENS_PER_COMPANY_DAY": "Token trợ lý mỗi công ty mỗi ngày",
+      "TOKENS_PER_DAY": "Token trợ lý mỗi ngày, tổng mọi người dùng chưa thanh toán",
+      "TRANSCRIPTIONS_PER_USER_HOUR": "Tin nhắn thoại mỗi người dùng mỗi giờ",
+      "ACTIONS_PER_USER_HOUR": "Thao tác của trợ lý mỗi người dùng mỗi giờ",
+      "MCP_CALLS_PER_USER_MINUTE": "Lượt gọi từ ứng dụng AI mỗi người dùng mỗi phút",
+      "MCP_CALLS_PER_USER_DAY": "Lượt gọi từ ứng dụng AI mỗi người dùng mỗi ngày",
+      "REGISTRATIONS_PER_IP_HOUR": "Lượt đăng ký ứng dụng AI mỗi địa chỉ mỗi giờ",
+      "REGISTRATIONS_PER_DAY": "Lượt đăng ký ứng dụng AI mỗi ngày, tất cả mọi người",
+      "AUTHORIZATIONS_PER_IP_HOUR": "Yêu cầu kết nối ứng dụng AI mỗi địa chỉ mỗi giờ",
+      "TOKEN_REQUESTS_PER_CLIENT_MINUTE": "Yêu cầu token của ứng dụng AI mỗi ứng dụng mỗi phút",
+      "APPROVALS_PER_USER_HOUR": "Kết nối ứng dụng AI được cho phép mỗi người dùng mỗi giờ",
+      "MAX_OWNED_COMPANIES": "Số công ty một người được sở hữu",
+      "INTERVIEWS_PER_DAY": "Buổi phỏng vấn được tạo mỗi công ty mỗi ngày",
+      "INTERVIEWS_PER_DAY_UNPAID": "Buổi phỏng vấn được tạo mỗi công ty chưa thanh toán mỗi ngày",
+      "MAX_INTERVIEWS_WITHOUT_CANDIDATES": "Buổi phỏng vấn đã tạo đang chờ mà chưa có ứng viên",
+      "MAX_INTERVIEWS_WITHOUT_CANDIDATES_UNPAID": "Buổi phỏng vấn đã tạo đang chờ mà chưa có ứng viên, chưa thanh toán",
+      "PREVIEWS_PER_USER_HOUR": "Lượt xem trước phỏng vấn mỗi người dùng mỗi giờ",
+      "LINK_STARTS_PER_HOUR": "Lượt bắt đầu qua liên kết của một buổi phỏng vấn mỗi giờ",
+      "LINK_STARTS_PER_IP_HOUR": "Lượt bắt đầu qua liên kết mỗi địa chỉ mỗi giờ",
+      "MAX_BULK_INVITES": "Ứng viên trong một danh sách hoặc tệp",
+      "MAX_PENDING_INVITES": "Lời mời vào nhóm đang chờ mỗi công ty",
+      "MEMBER_INVITES_PER_UNPAID_DAY": "Lời mời vào nhóm mỗi công ty chưa thanh toán mỗi ngày",
+      "EMAIL_HOURLY_LIMIT": "Email mời mỗi người dùng mỗi giờ",
+      "EMAIL_DAILY_LIMIT": "Email mời mỗi người dùng mỗi ngày",
+      "EMAIL_RECIPIENT_DAILY_LIMIT": "Lời mời đến một địa chỉ cho một buổi phỏng vấn mỗi ngày",
+      "REPORT_EMAILS_PER_COMPANY_DAY": "Email báo cáo mỗi công ty mỗi ngày",
+      "GENERATION_LIMIT": "Lượt tạo mỗi người dùng mỗi ngày",
+      "REGENERATION_LIMIT": "Câu hỏi được tạo lại mỗi người dùng mỗi ngày",
+      "DAILY_GENERATION_LIMIT": "Lượt tạo mỗi ngày, tổng mọi công ty chưa thanh toán",
+      "MAX_TOPIC_REVISIONS": "Lần sửa chủ đề mỗi lần tạo",
+      "DAILY_VERIFY_LIMIT": "Lượt kiểm tra câu hỏi mỗi ngày",
+      "PRACTICE_ROUNDS_PER_HOUR": "Lượt luyện tập mỗi người dùng mỗi giờ",
+      "SIGNALS_PER_MINUTE": "Cảnh báo hành vi bất thường mỗi phiên làm bài mỗi phút",
+      "MAX_SIGNALS_PER_QUESTION": "Cảnh báo hành vi bất thường được lưu mỗi câu hỏi",
+      "HELP_USER_LIMIT": "Tin nhắn chat hỗ trợ mỗi tài khoản mỗi giờ",
+      "HELP_IP_LIMIT": "Tin nhắn chat hỗ trợ mỗi địa chỉ mỗi giờ",
+      "HELP_DAILY_LIMIT": "Tin nhắn chat hỗ trợ mỗi ngày, tất cả mọi người",
+      "HELP_TOKENS_PER_DAY": "Token chat hỗ trợ mỗi ngày, tất cả mọi người",
+      "CONTACT_IP_LIMIT": "Tin nhắn liên hệ mỗi địa chỉ mỗi ngày",
+      "CONTACT_DAILY_LIMIT": "Tin nhắn liên hệ mỗi ngày, tất cả mọi người",
+      "RATINGS_PER_DAY": "Lượt đánh giá câu hỏi mỗi người dùng mỗi ngày",
+      "REPORTS_PER_DAY": "Lượt báo cáo câu hỏi mỗi người dùng mỗi ngày",
+      "MAX_API_KEYS": "Khóa API mỗi công ty",
+      "MAX_WEBHOOKS": "Webhook mỗi công ty",
+      "API_REQUESTS_PER_MINUTE": "Yêu cầu API mỗi công ty mỗi phút",
+      "RESEND_DAILY_LIMIT": "Email mỗi ngày qua Resend",
+      "RESEND_RESERVE_PERCENT": "Phần email mỗi ngày qua Resend được giữ lại, không dùng cho gửi hàng loạt",
+      "CAMPAIGNS_PER_KIND_DAY": "Chiến dịch mỗi loại mỗi ngày",
+      "AI_SPEND_UNPAID_DAY": "Chi tiêu AI mỗi ngày, tổng mọi người dùng chưa thanh toán",
+      "QUESTION_SECONDS_BASIC": "Số giây mỗi câu hỏi, bài kiểm tra mới cấp độ cơ bản",
+      "QUESTION_SECONDS_MEDIUM": "Số giây mỗi câu hỏi, bài kiểm tra mới cấp độ trung bình",
+      "QUESTION_SECONDS_HARD": "Số giây mỗi câu hỏi, bài kiểm tra mới cấp độ khó",
+      "GENERATION_CALLS_AT_ONCE": "Lượt gọi AI cùng lúc mỗi lần tạo",
+      "GENERATION_CALLS_PER_SECOND": "Lượt gọi AI mỗi giây, tổng mọi lần tạo",
+      "MULTI_ANSWER_PERCENT": "Câu hỏi \"Chọn tất cả phương án đúng\", tỷ lệ trong mỗi chủ đề",
+      "PAUSED": "Bị từ chối khi đang tạm dừng",
+      "OPENAI_RATE_LIMIT": "Giới hạn tốc độ của OpenAI",
+      "OPENAI_QUOTA": "OpenAI hết credit",
+      "OPENAI_THROTTLED": "Chờ giới hạn yêu cầu OpenAI của chúng tôi",
+      "RESEND_RATE_LIMIT": "Giới hạn tốc độ của Resend",
+      "RESEND_DAILY_QUOTA": "Hạn mức hằng ngày của Resend",
+      "ATS_RATE_LIMIT": "Giới hạn tốc độ của ATS",
+      "FIREBASE_TOKEN_REFUSED": "Firebase từ chối đăng nhập"
+    },
+    "limitValue": "{value} {window}",
+    "limitWindows": {
+      "60": "mỗi phút",
+      "3600": "mỗi giờ",
+      "86400": "mỗi ngày",
+      "1209600": "mỗi lần xem xét chủ đề"
+    },
+    "limitKinds": {
+      "ours": "prepza",
+      "openai": "OpenAI",
+      "resend": "Resend",
+      "firebase": "Firebase",
+      "workable": "Workable",
+      "greenhouse": "Greenhouse",
+      "teamtailor": "Teamtailor",
+      "recruitee": "Recruitee",
+      "breezy": "Breezy HR"
+    },
+    "limitHitter": "{name} ({count})",
+    "limitHits": "{count, plural, other {# lần chạm}}",
+    "limitsTitle": "Giới hạn",
+    "limitsText": "Mức sử dụng được phép và các giá trị mà dịch vụ dùng, theo từng dịch vụ. Thay đổi có hiệu lực trong vòng một phút.",
+    "limitServices": {
+      "assistant": "Trợ lý",
+      "companies": "Công ty",
+      "generation": "Tạo phỏng vấn và mẫu",
+      "rounds": "Luyện tập, phiên làm bài và chat hỗ trợ",
+      "library": "Phản hồi về câu hỏi",
+      "api": "API công khai",
+      "notifications": "Email",
+      "billing": "Chi tiêu AI"
+    },
+    "limitAtOnce": "cùng lúc",
+    "limitScopes": {
+      "user": "mỗi người dùng",
+      "company": "mỗi công ty",
+      "ip": "mỗi địa chỉ",
+      "everyone": "mọi người cộng lại"
+    },
+    "limitDefault": "mặc định {value}",
+    "limitSecondsUnit": "giây",
+    "limitRecentHits": "{count, plural, other {# lần chạm}} trong {days} ngày",
+    "limitPaid": "Đã thanh toán",
+    "limitUnpaid": "Chưa thanh toán",
+    "limitSave": "Lưu",
+    "limitReset": "Đặt lại mặc định",
+    "limitSaved": "Đã lưu giới hạn.",
+    "limitFailed": "Không thể lưu giới hạn. Vui lòng thử lại.",
+    "limitChangesTitle": "Thay đổi",
+    "limitNoChanges": "Chưa có giới hạn nào được thay đổi.",
+    "limitChange": "{name}: {from} thành {to}",
+    "limitDefaultValue": "mặc định",
+    "supportAiSpend": "Chi phí AI {spend} trong {days} ngày qua, {count, plural, other {# lượt gọi}}."
   },
   "templates": {
     "title": "Mẫu",
@@ -363,10 +713,12 @@
   "reportReasons": {
     "wrong_answer": "Đáp án được đánh dấu là sai",
     "unclear": "Câu hỏi không rõ ràng",
+    "hard_to_read": "Khó đọc",
     "off_topic": "Không phù hợp với chủ đề",
     "other": "Lý do khác"
   },
   "questions": {
+    "multiChoice": "Nhiều đáp án",
     "goodQuestion": "Câu hỏi hay chứ?",
     "ratingFailed": "Không thể lưu đánh giá. Vui lòng thử lại.",
     "helpful": "Câu hỏi hữu ích",
@@ -413,6 +765,10 @@
     "correct": "Đúng",
     "incorrect": "Sai",
     "notAnswered": "Chưa trả lời",
+    "partlyCorrect": "Đúng một phần",
+    "rightPicks": "{right} trên {total} phương án đúng",
+    "wrongPicks": "{count, plural, other {# phương án sai}}",
+    "points": "{points} trên 1 điểm",
     "finish": "Kết thúc",
     "finishing": "Đang kết thúc…",
     "next": "Câu tiếp theo",
@@ -424,6 +780,7 @@
     "finishFailed": "Không thể kết thúc buổi phỏng vấn. Vui lòng thử lại.",
     "continueFailed": "Không thể tiếp tục. Vui lòng thử lại.",
     "timeUp": "Đã hết thời gian cho câu này.",
+    "selectAll": "Chọn tất cả phương án đúng",
     "finish": "Kết thúc phỏng vấn",
     "finishTitle": "Kết thúc toàn bộ buổi phỏng vấn?",
     "endsAll": "Thao tác này kết thúc cả {count} phần, không chỉ phần này.",
@@ -498,6 +855,7 @@
     "interviews": "Phỏng vấn",
     "templates": "Mẫu",
     "team": "Nhóm",
+    "actions": "Nhật ký thao tác",
     "integrations": "Tích hợp",
     "referrals": "Giới thiệu",
     "brand": "Thương hiệu",
@@ -629,10 +987,12 @@
       "many": "nhiều người",
       "file": "tải lên"
     },
-    "manyHint": "Mỗi dòng một ứng viên, có hoặc không kèm họ tên,\ntối đa 100 người mỗi lần:",
+    "manyHint": "Mỗi dòng một ứng viên, có hoặc không kèm họ tên,\ntối đa {count} người mỗi lần:",
+    "manyHintNoLimit": "Mỗi dòng một ứng viên, có hoặc không kèm họ tên:",
     "example": "ví dụ",
     "uploadFile": "Tải tệp lên",
-    "fileFormats": "CSV hoặc TXT, tối đa 100 ứng viên. Họ tên có thể nằm trong cột tên hoặc cạnh mỗi email.",
+    "fileFormats": "CSV hoặc TXT, tối đa {count} ứng viên. Họ tên có thể nằm trong cột tên hoặc cạnh mỗi email.",
+    "fileFormatsNoLimit": "CSV hoặc TXT. Họ tên có thể nằm trong cột tên hoặc cạnh mỗi email.",
     "fileTooLarge": "Tệp quá lớn (tối đa {kb} KB).",
     "lineProblems": {
       "no_email": "Không tìm thấy email: {line}",
@@ -658,7 +1018,9 @@
     "fallbackTitle": "một buổi phỏng vấn",
     "timePerQuestion": "Thời gian mỗi câu:",
     "secondsUnit": "giây",
-    "pickOne": "Chọn một trong bốn phương án ở mỗi câu.",
+    "wholeInterview": "Toàn bộ buổi phỏng vấn:",
+    "minutesUnit": "phút",
+    "pickOne": "Chọn một trong bốn phương án ở mỗi câu. Ở câu có ghi Chọn tất cả phương án đúng, hãy đánh dấu mọi phương án đúng: mỗi phương án đúng được một phần điểm của câu, còn đánh dấu sai không được điểm.",
     "changePick": "Bạn có thể đổi lựa chọn cho đến khi nhấn Câu tiếp theo.",
     "timeRunsOut": "Khi hết thời gian của một câu, lựa chọn của bạn được tính và câu tiếp theo mở ra; nếu chưa chọn, câu đó tính là sai. Đồng hồ vẫn chạy nếu bạn rời đi.",
     "unanswered": "Câu chưa trả lời được tính là sai.",
@@ -723,8 +1085,8 @@
     "topUp": "Nạp credit"
   },
   "site": {
-    "description": "Bài test tuyển dụng có tính giờ, tạo từ mô tả công việc của bạn: mỗi ứng viên nhận câu hỏi ngẫu nhiên riêng, kèm bảng điểm và báo cáo. $2–5 mỗi ứng viên.",
-    "homeTitle": "Bài test tuyển dụng tạo từ mô tả công việc của bạn"
+    "description": "Bài kiểm tra tuyển dụng có tính giờ, tạo từ mô tả công việc của bạn: mỗi ứng viên nhận câu hỏi ngẫu nhiên riêng, kèm bảng điểm và báo cáo. $2–5 mỗi ứng viên.",
+    "homeTitle": "Bài kiểm tra tuyển dụng tạo từ mô tả công việc của bạn"
   },
   "legal": {
     "englishOnly": "Phiên bản này chỉ có bằng tiếng Anh.",
@@ -1048,7 +1410,7 @@
     "title": "Liên hệ với chúng tôi",
     "intro": "Bạn có câu hỏi, ý tưởng, đề xuất hợp tác hoặc gặp sự cố? Hãy viết cho chúng tôi, chúng tôi sẽ trả lời qua email.",
     "idHint": "Bạn viết về một công ty, buổi phỏng vấn, ứng viên hay tài khoản của mình? Hãy dán ID của nó: “sao chép id” nằm dưới tên, còn ID tài khoản của bạn nằm trong menu tài khoản.",
-    "description": "Liên hệ đội ngũ prepza: câu hỏi về bài test tuyển dụng, ý tưởng, đề xuất hợp tác hoặc sự cố. Chúng tôi trả lời qua email.",
+    "description": "Liên hệ đội ngũ prepza: câu hỏi về bài kiểm tra tuyển dụng, ý tưởng, đề xuất hợp tác hoặc sự cố. Chúng tôi trả lời qua email.",
     "name": "Tên",
     "email": "Email",
     "message": "Tin nhắn",
@@ -1102,8 +1464,19 @@
       "ats_cannot_write": "{ats} không nhận kết quả của ứng viên: khóa không có quyền ghi. Hãy kết nối lại bằng khóa có quyền ghi; kết quả được giữ lại và sẽ gửi khi đó.",
       "connection_broken": "{name} đã ngừng hoạt động và cần kết nối lại. Cho đến lúc đó, {integration, select, slack {thông báo sẽ không đến kênh của bạn} other {các ứng viên mà nó gửi sẽ chờ, và kết quả của họ được giữ lại}}.",
       "webhook_stopped": "Web hook tới {url} đã dừng: thành viên thêm nó không còn là chủ sở hữu hay quản trị viên. Hãy thêm lại để tiếp tục nhận kết quả.",
-      "ownership_received": "Bạn giờ là chủ sở hữu của “{name}”."
-    }
+      "ownership_received": "Bạn giờ là chủ sở hữu của “{name}”.",
+      "news": "Tin tức: {title}",
+      "legal_terms": "Điều khoản mới áp dụng từ {date}.",
+      "legal_privacy": "Chính sách quyền riêng tư mới áp dụng từ {date}.",
+      "legal_dpa": "Thỏa thuận xử lý dữ liệu mới áp dụng từ {date}."
+    },
+    "legalBanner": {
+      "terms": "Điều khoản của prepza thay đổi vào {date}.",
+      "privacy": "Chính sách quyền riêng tư của prepza thay đổi vào {date}.",
+      "dpa": "Thỏa thuận xử lý dữ liệu thay đổi vào {date}."
+    },
+    "readLegal": "Đọc phiên bản mới",
+    "closeLegalBanner": "Đóng"
   },
   "report": {
     "download": "Tải PDF",
@@ -1140,7 +1513,7 @@
     "continue": "Tiếp tục",
     "history": "Các lượt của bạn",
     "results": "Kết quả luyện tập",
-    "grade": "số câu trả lời đúng",
+    "grade": "số điểm tối đa",
     "notFinished": "chưa hoàn thành",
     "noRounds": "Chưa có lượt nào.",
     "startFailed": "Không thể bắt đầu luyện tập. Vui lòng thử lại.",
@@ -1194,11 +1567,11 @@
     "intro": "Hướng dẫn thực tế cho nhà quản lý tuyển dụng: sàng lọc ứng viên, bài kiểm tra kỹ năng và dùng AI trong tuyển dụng một cách công bằng, hợp pháp."
   },
   "tests": {
-    "title": "Bài test tuyển dụng theo vị trí",
+    "title": "Bài kiểm tra tuyển dụng theo vị trí",
     "intro": "Bài kiểm tra kỹ năng có giới hạn thời gian, dựng sẵn cho các vị trí phổ biến. Dùng nguyên bản hoặc tạo bài kiểm tra từ mô tả công việc của riêng bạn.",
     "heading": "Bài kiểm tra kỹ năng {role} để tuyển dụng",
-    "pageTitle": "Bài test tuyển dụng {role}",
-    "pageDescription": "Bài test tuyển dụng {role} có tính giờ để đánh giá năng lực ứng viên, gồm {count, plural, other {# chủ đề}}. Mỗi ứng viên nhận bộ câu hỏi ngẫu nhiên riêng. $2–5 mỗi ứng viên.",
+    "pageTitle": "Bài kiểm tra tuyển dụng {role}",
+    "pageDescription": "Bài kiểm tra tuyển dụng {role} có tính giờ để đánh giá năng lực ứng viên, gồm {count, plural, other {# chủ đề}}. Mỗi ứng viên nhận bộ câu hỏi ngẫu nhiên riêng. $2–5 mỗi ứng viên.",
     "lead": "Bài kiểm tra trắc nghiệm có giới hạn thời gian về kỹ năng của vị trí này. Mỗi ứng viên nhận bộ câu hỏi ngẫu nhiên riêng, có tính giờ cho từng câu, và bạn nhận bảng điểm với mọi câu trả lời cùng thời gian làm. $2–5 mỗi ứng viên, không cần gói đăng ký.",
     "create": "Tạo bài kiểm tra cho ứng viên của bạn",
     "practise": "Luyện tập miễn phí",
@@ -1328,7 +1701,7 @@
     "counts": "{keys, plural, other {# khóa}} · {webhooks, plural, other {# webhook}}",
     "docs": "Tài liệu cho nhà phát triển",
     "keysTitle": "Khóa API",
-    "keysText": "Khóa có thể đọc các buổi phỏng vấn và ứng viên của bạn, đồng thời mời ứng viên với tư cách người đã tạo khóa.",
+    "keysText": "Khóa hoạt động với tư cách người đã tạo khóa và chỉ làm được những gì quyền của khóa cho phép.",
     "noKeys": "Chưa có khóa nào.",
     "newKey": "Khóa mới",
     "newKeyTitle": "Khóa API mới",
@@ -1387,7 +1760,37 @@
     "removeWebhookTitle": "Xóa webhook này?",
     "removeWebhookText": "{url} sẽ không nhận sự kiện nữa.",
     "createFailed": "Không tạo được.",
-    "removeFailed": "Không xóa được."
+    "removeFailed": "Không xóa được.",
+    "selectAll": "Chọn tất cả",
+    "permissionGroups": {
+      "interviews": "Phỏng vấn",
+      "candidates": "Ứng viên",
+      "credits": "Credit",
+      "ai_agents": "Agent AI"
+    },
+    "permissions": {
+      "interviews:read": "Xem",
+      "interviews:create": "Tạo",
+      "candidates:read": "Xem",
+      "candidates:invite": "Mời",
+      "candidates:change": "Thay đổi",
+      "candidates:delete": "Xóa",
+      "credits:read": "Xem",
+      "mcp": "Dùng với agent AI (MCP)"
+    },
+    "permissionLine": {
+      "interviews:read": "xem",
+      "interviews:create": "tạo",
+      "candidates:read": "xem",
+      "candidates:invite": "mời",
+      "candidates:change": "thay đổi",
+      "candidates:delete": "xóa",
+      "credits:read": "xem",
+      "mcp": "MCP"
+    },
+    "editPermissions": "Sửa quyền",
+    "editPermissionsText": "Bỏ chọn những gì “{name}” không còn cần. Để thêm quyền, hãy tạo khóa mới.",
+    "permissionsFailed": "Không lưu được quyền."
   },
   "brand": {
     "logoTitle": "Logo",
@@ -1456,7 +1859,8 @@
     "tabs": {
       "api": "API",
       "webhooks": "Webhook",
-      "sdk": "SDK"
+      "sdk": "SDK",
+      "mcp": "MCP"
     },
     "englishOnly": "Trang này chỉ có bằng tiếng Anh.",
     "baseUrl": "URL gốc",
@@ -1509,6 +1913,7 @@
     "emptyTitle": "Hỏi về việc tuyển dụng của bạn",
     "emptyText": "Ứng viên, phỏng vấn, credit, tích hợp và cách prepza hoạt động, dựa trên những gì bạn thấy trong các công ty của mình. AI có thể sai; các trang mà nó liên kết mới là chính xác.",
     "emptyTitleFaq": "Hỏi về prepza",
+    "pageQuestion": "Tôi có thể làm gì trên trang này?",
     "pages": {
       "open": "Mở",
       "pricing": "Bảng giá",
@@ -1687,336 +2092,7 @@
   "pageHelp": {
     "label": "Về trang này",
     "actionsTitle": "Bạn có thể làm gì",
-    "tipsTitle": "Mẹo",
-    "landing": {
-      "title": "prepza hoạt động thế nào",
-      "text": "prepza biến mô tả công việc của bạn thành một buổi phỏng vấn trắc nghiệm có giới hạn thời gian, mỗi ứng viên nhận bộ câu hỏi ngẫu nhiên riêng.",
-      "actions": [
-        "Dán mô tả công việc: prepza đề xuất các chủ đề cần kiểm tra.",
-        "Duyệt các chủ đề: giữ, sửa hoặc bỏ, rồi phê duyệt để tạo câu hỏi.",
-        "Mời ứng viên qua email, từ tệp hoặc bằng một liên kết chia sẻ.",
-        "Xem báo cáo: ứng viên được xếp theo điểm, kèm mọi câu trả lời và cảnh báo hành vi bất thường."
-      ],
-      "tips": [
-        "Tạo buổi phỏng vấn miễn phí. Bạn trả $2–5 cho mỗi ứng viên trả lời, và những ứng viên đầu tiên được miễn phí.",
-        "Hãy thử buổi phỏng vấn với vai trò ứng viên trước khi mời ai."
-      ]
-    },
-    "companies": {
-      "title": "Công ty",
-      "text": "Các công ty của bạn. Mọi việc bạn làm trong prepza đều diễn ra trong một công ty: buổi phỏng vấn, ứng viên, nhóm, credit và tích hợp.",
-      "actions": [
-        "Tạo công ty bằng “Công ty mới”. Tên công ty là duy nhất trên prepza.",
-        "Mở một công ty để làm việc với các buổi phỏng vấn và ứng viên của công ty đó.",
-        "Xóa công ty bạn sở hữu, cùng mọi buổi phỏng vấn và lời mời."
-      ],
-      "tips": [
-        "Vai trò của bạn hiện bên cạnh mỗi công ty bạn không sở hữu: quản trị viên được thay đổi, người xem chỉ được xem.",
-        "Credit thuộc về từng công ty, nên mỗi công ty nạp credit riêng."
-      ]
-    },
-    "pickCompany": {
-      "title": "Chọn công ty",
-      "text": "Bạn đã chọn một mẫu. Hãy chọn công ty sẽ dùng mẫu: mẫu được sao chép vào đó thành một buổi phỏng vấn mới, miễn phí và sẵn sàng gửi cho ứng viên.",
-      "actions": [
-        "Chọn một công ty để mở mẫu trong đó, rồi dùng mẫu.",
-        "Tạo công ty mới nếu bạn chưa có; mẫu sẽ mở ở đó."
-      ],
-      "tips": [
-        "Sau khi sao chép, buổi phỏng vấn thuộc về công ty: tùy ý thay đổi câu hỏi và cài đặt."
-      ]
-    },
-    "interviews": {
-      "title": "Phỏng vấn",
-      "text": "Tất cả buổi phỏng vấn của công ty này và credit dành cho ứng viên. Mỗi buổi phỏng vấn là một bài kiểm tra có giới hạn thời gian, tạo từ mô tả công việc.",
-      "actions": [
-        "Tạo buổi phỏng vấn từ mô tả công việc bằng “Buổi phỏng vấn mới”.",
-        "Mở một buổi phỏng vấn để xem chủ đề, ứng viên và cài đặt.",
-        "Thử buổi phỏng vấn với vai trò ứng viên, hoặc xóa nó.",
-        "Nạp credit từ số dư, hoặc bật tự động nạp ở thẻ Thanh toán."
-      ],
-      "tips": [
-        "Số dư chuyển màu cam khi sắp hết credit. Khi hết credit, lời mời mới sẽ không được gửi.",
-        "Các thẻ phía trên dẫn tới mẫu, nhóm, tích hợp, thanh toán (chủ sở hữu và quản trị viên) và giới thiệu."
-      ]
-    },
-    "newInterview": {
-      "title": "Buổi phỏng vấn mới",
-      "text": "Bắt đầu một buổi phỏng vấn từ mô tả công việc. prepza đọc mô tả, đề xuất các chủ đề cần kiểm tra và viết câu hỏi khi bạn phê duyệt.",
-      "actions": [
-        "Dán mô tả công việc: vị trí, yêu cầu bắt buộc và điểm cộng.",
-        "Chọn ngôn ngữ để tạo buổi phỏng vấn.",
-        "Tạo, rồi duyệt các chủ đề được đề xuất."
-      ],
-      "tips": [
-        "Mô tả càng cụ thể, câu hỏi càng sát với vị trí.",
-        "Tạo miễn phí: bạn chỉ trả cho ứng viên trả lời."
-      ]
-    },
-    "reviewTopics": {
-      "title": "Duyệt các chủ đề",
-      "text": "prepza đề xuất các chủ đề này từ mô tả của bạn. Mỗi chủ đề bạn giữ lại sẽ có bộ câu hỏi kèm đáp án riêng.",
-      "actions": [
-        "Bỏ chọn các chủ đề bạn không cần.",
-        "Sửa tên chủ đề và các chủ đề con bằng biểu tượng bút chì.",
-        "Mô tả thay đổi bằng lời của bạn rồi áp dụng, ví dụ “thêm một chủ đề về lãnh đạo nhóm”.",
-        "Phê duyệt và tạo để viết câu hỏi."
-      ],
-      "tips": [
-        "Nếu có quá nhiều chủ đề, hãy bỏ chọn bớt hoặc mô tả cách gộp chúng.",
-        "Câu hỏi chỉ được viết sau khi bạn phê duyệt, nên hãy dành một phút ở đây."
-      ]
-    },
-    "generating": {
-      "title": "Đang tạo",
-      "text": "prepza đang tạo buổi phỏng vấn của bạn: trước là các chủ đề, sau đó là câu hỏi cho từng chủ đề. Việc này mất vài phút.",
-      "actions": [
-        "Bạn có thể rời trang này: quá trình tạo vẫn tiếp tục.",
-        "Hủy quá trình tạo nếu không còn cần; những gì đã tạo sẽ không được giữ lại."
-      ],
-      "tips": [
-        "Bạn sẽ nhận thông báo khi buổi phỏng vấn sẵn sàng.",
-        "Quay lại bất cứ lúc nào từ danh sách buổi phỏng vấn."
-      ]
-    },
-    "interviewTopics": {
-      "title": "Chủ đề",
-      "text": "Những gì buổi phỏng vấn này kiểm tra: các chủ đề, mỗi chủ đề có các chủ đề con và ngân hàng câu hỏi riêng. Mỗi ứng viên nhận một bộ ngẫu nhiên từ từng ngân hàng.",
-      "actions": [
-        "Mở “Quản lý câu hỏi” để đọc câu hỏi và đáp án của một chủ đề.",
-        "Tạo lại câu hỏi chưa tốt, đánh dấu đáp án sai, hoặc đọc báo cáo của ứng viên về một câu hỏi.",
-        "Đặt số câu hỏi mỗi ứng viên nhận từ một chủ đề.",
-        "Thử buổi phỏng vấn với vai trò ứng viên, hoặc xóa nó."
-      ],
-      "tips": [
-        "Câu hỏi do AI viết có thể sai: hãy đọc lướt từng chủ đề trước khi mời ai.",
-        "Nhấp vào tiêu đề để đổi tên buổi phỏng vấn."
-      ]
-    },
-    "interviewCandidates": {
-      "title": "Ứng viên",
-      "text": "Mọi người được mời vào buổi phỏng vấn này, cùng trạng thái, tiến độ và điểm của họ.",
-      "actions": [
-        "Mời ứng viên: từng người một, danh sách tối đa 100 người, hoặc tệp CSV hay TXT.",
-        "Bật liên kết chia sẻ cho tin tuyển dụng: bất kỳ ai có liên kết đều có thể làm bài phỏng vấn.",
-        "Tìm theo email hoặc tên, lọc theo trạng thái, và sắp xếp theo điểm hoặc ngày.",
-        "Mở báo cáo của một ứng viên, hoặc tải xuống hay chia sẻ báo cáo về tất cả ứng viên."
-      ],
-      "tips": [
-        "Mỗi ứng viên trả lời ít nhất một câu sẽ dùng credit, kể cả ứng viên đến từ liên kết.",
-        "Lời nhắc được gửi tới ứng viên tự động."
-      ]
-    },
-    "interviewSettings": {
-      "title": "Cài đặt",
-      "text": "Cách buổi phỏng vấn này diễn ra với mọi ứng viên.",
-      "actions": [
-        "Đặt thời gian cho mỗi câu hỏi, tính bằng giây.",
-        "Đặt điểm đạt: ứng viên đạt mức này là đậu.",
-        "Đánh dấu buổi phỏng vấn là đã tuyển khi bạn đã tuyển được người cho vị trí."
-      ],
-      "tips": [
-        "Mỗi cài đặt được lưu ngay khi bạn rời khỏi ô nhập.",
-        "Ứng viên không bao giờ thấy điểm của mình; chỉ nhóm của bạn thấy.",
-        "Với ứng viên cần thêm thời gian, hãy thêm thời gian trên trang của họ."
-      ]
-    },
-    "tryInterview": {
-      "title": "Thử với vai trò ứng viên",
-      "text": "Bản xem trước buổi phỏng vấn đúng như ứng viên thấy: phần giới thiệu, rồi các câu hỏi có giới hạn thời gian. Miễn phí.",
-      "actions": [
-        "Bắt đầu xem trước và trả lời như một ứng viên.",
-        "Kiểm tra thời gian, cách diễn đạt và đáp án trước khi mời ai."
-      ],
-      "tips": [
-        "Hãy ở lại trang khi trả lời: với ứng viên, việc rời trang, sao chép và trả lời quá nhanh đều được ghi lại."
-      ]
-    },
-    "candidate": {
-      "title": "Báo cáo ứng viên",
-      "text": "Kết quả của một ứng viên: điểm, có đạt hay không, và điểm từng chủ đề kèm mọi câu trả lời.",
-      "actions": [
-        "Đọc từng câu trả lời, kèm cảnh báo hành vi bất thường: rời trang, thử sao chép và trả lời quá nhanh.",
-        "Tải báo cáo xuống dưới dạng PDF, hoặc chia sẻ qua email.",
-        "Cho thêm thời gian trước khi họ bắt đầu, ví dụ vì khuyết tật.",
-        "Thêm hoặc sửa họ tên ứng viên.",
-        "Sao chép liên kết mời của ứng viên để tự gửi nếu email không đến; liên kết vẫn dùng được cho đến khi họ làm xong.",
-        "Gửi lại hoặc thu hồi lời mời, hoặc xóa ứng viên cùng kết quả của họ."
-      ],
-      "tips": [
-        "Điểm hỗ trợ quyết định của bạn chứ không thay bạn quyết định. Nếu ứng viên yêu cầu, hãy để một người xem xét lại kết quả của họ."
-      ]
-    },
-    "templates": {
-      "title": "Mẫu",
-      "text": "Các buổi phỏng vấn soạn sẵn cho những vị trí phổ biến. Dùng một mẫu sẽ sao chép nó vào công ty này thành buổi phỏng vấn của riêng bạn.",
-      "actions": [
-        "Tìm theo vị trí hoặc chủ đề, và lọc theo cấp bậc và ngôn ngữ.",
-        "Mở một mẫu để xem các chủ đề và số câu hỏi của mỗi chủ đề.",
-        "Dùng mẫu để bắt đầu một buổi phỏng vấn từ mẫu đó."
-      ],
-      "tips": [
-        "Để sát hơn, hãy tạo buổi phỏng vấn từ mô tả công việc của chính bạn.",
-        "Sau khi sao chép, buổi phỏng vấn là của bạn: tùy ý thay đổi câu hỏi và cài đặt."
-      ]
-    },
-    "template": {
-      "title": "Mẫu",
-      "text": "Một buổi phỏng vấn soạn sẵn: các chủ đề, chủ đề con và số câu hỏi của mỗi chủ đề.",
-      "actions": [
-        "Kiểm tra xem các chủ đề có khớp với vị trí bạn đang tuyển không.",
-        "Dùng mẫu để sao chép nó vào công ty này thành một buổi phỏng vấn mới."
-      ],
-      "tips": [
-        "Sao chép miễn phí; ứng viên trả lời vẫn dùng credit như thường lệ.",
-        "Nếu các chủ đề không phù hợp, hãy tạo buổi phỏng vấn từ mô tả công việc của bạn."
-      ]
-    },
-    "team": {
-      "title": "Nhóm",
-      "text": "Những người làm việc với các buổi phỏng vấn của công ty này, và vai trò của họ.",
-      "actions": [
-        "Thêm thành viên qua email, với vai trò quản trị viên hoặc người xem: họ sẽ nhận email có liên kết để tham gia.",
-        "Đổi vai trò của thành viên giữa quản trị viên và người xem.",
-        "Sao chép liên kết của lời mời đang chờ, hoặc xóa thành viên hay lời mời."
-      ],
-      "tips": [
-        "Quản trị viên tạo và thay đổi buổi phỏng vấn, mời ứng viên và nạp credit. Người xem thấy buổi phỏng vấn và kết quả, chia sẻ báo cáo, nhưng không thay đổi được gì.",
-        "Xóa thành viên có thẻ đang dùng để tự động nạp sẽ dừng việc tự động nạp."
-      ]
-    },
-    "integrations": {
-      "title": "Tích hợp",
-      "text": "Kết nối prepza với các công cụ nhóm bạn đang dùng. Mỗi tích hợp có trang riêng với các bước thiết lập.",
-      "actions": [
-        "Slack: nhận thông báo của công ty trong một kênh.",
-        "ATS (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): ứng viên bạn chuyển sang một giai đoạn sẽ nhận buổi phỏng vấn, và kết quả được gửi ngược lại.",
-        "API: khóa và webhook để kết nối nền tảng của riêng bạn.",
-        "Ứng dụng AI: dùng prepza từ Claude, ChatGPT và các ứng dụng AI khác."
-      ],
-      "tips": [
-        "Mọi người trong công ty đều thấy các tích hợp; chủ sở hữu và quản trị viên thay đổi chúng."
-      ]
-    },
-    "ats": {
-      "title": "Tích hợp ATS",
-      "text": "Liên kết một tin tuyển dụng trong ATS với một buổi phỏng vấn: ứng viên bạn chuyển vào giai đoạn đã chọn sẽ nhận buổi phỏng vấn, và kết quả quay về dưới dạng bình luận trên hồ sơ của họ.",
-      "actions": [
-        "Kết nối ATS của bạn theo hướng dẫn.",
-        "Liên kết tin tuyển dụng: chọn tin, giai đoạn và buổi phỏng vấn, hoặc tạo buổi phỏng vấn mới từ nội dung tin.",
-        "Mời lại những ứng viên chưa được mời, ví dụ khi hết credit.",
-        "Hủy liên kết tin tuyển dụng, hoặc ngắt kết nối ATS."
-      ],
-      "tips": [
-        "Thêm một giai đoạn riêng cho prepza, chẳng hạn “Kiểm tra kỹ năng prepza”, để không bao giờ lẫn với các công cụ khác của bạn.",
-        "prepza không bao giờ chuyển hay loại ai trong ATS của bạn."
-      ]
-    },
-    "slack": {
-      "title": "Slack",
-      "text": "Thông báo của công ty bạn trong một kênh Slack, ngay khi chúng xảy ra.",
-      "actions": [
-        "Thêm prepza vào Slack và chọn kênh, ví dụ #hiring.",
-        "Chọn những thông báo được gửi tới đó: ứng viên làm xong, lời mời không gửi được, buổi phỏng vấn đã sẵn sàng và hơn nữa.",
-        "Ngắt kết nối để dừng thông báo và gỡ ứng dụng prepza khỏi Slack của bạn."
-      ],
-      "tips": [
-        "prepza chỉ có thể đăng vào kênh đó; nó không thể đọc Slack của bạn.",
-        "Mọi người vẫn thấy mọi thông báo ở biểu tượng chuông."
-      ]
-    },
-    "api": {
-      "title": "API",
-      "text": "Kết nối nền tảng của riêng bạn, chẳng hạn trang tuyển dụng, với prepza.",
-      "actions": [
-        "Tạo khóa API: thay mặt bạn, khóa này tạo buổi phỏng vấn, đọc ứng viên và kết quả của họ, mời, nhắc, cập nhật hoặc xóa ứng viên, và đọc số credit của bạn.",
-        "Thêm webhook: prepza báo tới địa chỉ HTTPS của bạn, có chữ ký, khi ứng viên bắt đầu, làm xong (kèm kết quả), không nhận được lời mời, hết hạn lời mời hoặc bị xóa khỏi buổi phỏng vấn, và khi một buổi phỏng vấn sẵn sàng.",
-        "Gửi sự kiện thử nghiệm tới một webhook và xem kết quả của từng lần gửi trong nhật ký gửi.",
-        "Xóa các khóa và webhook bạn không dùng nữa.",
-        "Mở tài liệu cho nhà phát triển để xem mọi endpoint, sự kiện và SDK."
-      ],
-      "tips": [
-        "Khóa mới và khóa bí mật của webhook chỉ hiện một lần: hãy sao chép ngay.",
-        "Đặt thời hạn cho mỗi khóa: khóa bị lộ mà không bao giờ hết hạn thì vẫn dùng được mãi."
-      ]
-    },
-    "brand": {
-      "title": "Thương hiệu",
-      "text": "Logo và màu của bạn trên lời mời, buổi phỏng vấn và trang hoàn tất của ứng viên.",
-      "actions": [
-        "Đặt hoặc đổi logo.",
-        "Chọn phông chữ và độ bo góc của thẻ và nút.",
-        "Chọn màu cho từng nhóm và xem trong bản xem trước.",
-        "Lưu lại, hoặc quay về màu của prepza."
-      ],
-      "tips": [
-        "Không thể lưu những màu khiến chữ khó đọc, để mọi ứng viên đều đọc được câu hỏi.",
-        "Thành viên dùng thử buổi phỏng vấn cũng thấy màu của bạn."
-      ]
-    },
-    "referrals": {
-      "title": "Giới thiệu",
-      "text": "Mời các công ty khác dùng prepza bằng liên kết của công ty này, và cả hai bên đều nhận credit.",
-      "actions": [
-        "Sao chép hoặc chia sẻ liên kết giới thiệu của bạn.",
-        "Xem mọi phần thưởng công ty này đã nhận."
-      ],
-      "tips": [
-        "Cả hai bên nhận credit khi công ty bạn mời nạp credit lần đầu, với bất kỳ số tiền nào.",
-        "Credit được cộng cho công ty này và không bao giờ hết hạn."
-      ]
-    },
-    "billing": {
-      "title": "Thanh toán",
-      "text": "Credit của công ty này đến từ đâu và đã dùng vào đâu.",
-      "actions": [
-        "Nạp credit, hoặc thiết lập tự động nạp.",
-        "Xem các ứng viên đang được giữ credit.",
-        "Mở hóa đơn của bất kỳ lần nạp nào."
-      ],
-      "tips": [
-        "Credit cho một ứng viên được giữ lại khi mời, bị trừ khi ứng viên trả lời và được hoàn lại nếu không.",
-        "Chỉ chủ sở hữu và quản trị viên thấy trang này."
-      ]
-    },
-    "aiApps": {
-      "title": "Ứng dụng AI",
-      "text": "Dùng prepza ngay trong chat AI của bạn: hỏi Claude hoặc ChatGPT về các buổi phỏng vấn và ứng viên của bạn, hoặc nhờ chúng thực hiện thay đổi giúp bạn.",
-      "actions": [
-        "Sao chép địa chỉ máy chủ và thêm vào Claude, Claude Code hoặc ChatGPT theo các bước.",
-        "Cho phép ứng dụng trên trang prepza vừa mở.",
-        "Ngắt kết nối ứng dụng bạn không còn dùng."
-      ],
-      "tips": [
-        "Ứng dụng hành động thay mặt bạn, trong mọi công ty bạn tham gia. Hầu hết ứng dụng hỏi bạn trước khi thay đổi bất cứ điều gì.",
-        "Ứng dụng không thể xem mật khẩu hay khóa API của bạn, và không thể xóa tài khoản của bạn hay một công ty."
-      ]
-    },
-    "topUp": {
-      "title": "Nạp credit",
-      "text": "Mua credit cho bất kỳ công ty nào mà bạn là chủ sở hữu hoặc quản trị viên.",
-      "actions": [
-        "Chọn công ty và gói nạp: gói càng lớn thì chi phí cho mỗi ứng viên càng thấp.",
-        "Thanh toán trên trang thanh toán của Paddle; credit sẽ vào trong vài giây.",
-        "Mở bảng giá để so sánh các gói nạp."
-      ],
-      "tips": [
-        "Mỗi ứng viên tốn 500 credit: được giữ lại khi mời, bị trừ khi ứng viên trả lời và được hoàn lại nếu không.",
-        "Credit không bao giờ hết hạn. Hóa đơn của mỗi lần nạp nằm ở thẻ Thanh toán của công ty."
-      ]
-    },
-    "settings": {
-      "title": "Cài đặt",
-      "text": "Tài khoản của riêng bạn: ngôn ngữ prepza dùng với bạn, các email bạn nhận và dữ liệu của bạn.",
-      "actions": [
-        "Chọn ngôn ngữ của trang web, chat hỗ trợ và email của bạn.",
-        "Chọn những email không bắt buộc bạn muốn nhận; email dịch vụ, như lời mời, báo cáo và sự cố thanh toán, luôn được gửi.",
-        "Tải xuống mọi thứ prepza lưu về bạn, hoặc xóa tài khoản."
-      ],
-      "tips": [
-        "Xóa tài khoản sẽ xóa các công ty chỉ có mình bạn. Công ty đã có người khác tham gia cần có chủ sở hữu khác trước."
-      ]
-    }
+    "tipsTitle": "Mẹo"
   },
   "companyBilling": {
     "reservedTab": "Đang giữ ({count})",
@@ -2032,7 +2108,8 @@
       "chargeback": "Bồi hoàn thẻ",
       "chargeback_reversed": "Hủy bồi hoàn thẻ",
       "referral": "Thưởng giới thiệu",
-      "referral_reversed": "Thu hồi thưởng giới thiệu"
+      "referral_reversed": "Thu hồi thưởng giới thiệu",
+      "adjustment": "Điều chỉnh từ prepza"
     },
     "automatic": "Tự động nạp",
     "invoice": "Hóa đơn",
@@ -2055,6 +2132,7 @@
     "claudeCode": "Trong Claude Code, chạy:",
     "copyCommand": "Sao chép lệnh",
     "commandCopied": "Đã sao chép lệnh",
+    "moreApps": "Gemini CLI, Cursor, VS Code, Le Chat và agent của riêng bạn: xem <link>tài liệu cho nhà phát triển</link>.",
     "chatgptDeveloper": "Trong ChatGPT, bật chế độ nhà phát triển:",
     "chatgptCreate": "Quay lại Apps & Connectors, chọn:",
     "chatgptPaste": "Đặt tên là {name}, dán địa chỉ máy chủ và chọn kiểu xác thực này:",
@@ -2120,5 +2198,91 @@
       "authority": "Nếu không hài lòng với câu trả lời của chúng tôi, bạn có thể liên hệ Cơ quan Bảo vệ Người tiêu dùng và Quản lý Kỹ thuật Estonia (TTJA)."
     },
     "reviewed": "Xem xét lần cuối: {date}."
+  },
+  "actionLog": {
+    "empty": "Chưa có thao tác nào.",
+    "noMatches": "Không có thao tác nào khớp với các bộ lọc này.",
+    "formerMember": "Một cựu thành viên",
+    "deletedCandidate": "một ứng viên đã bị xóa",
+    "anyMember": "Bất kỳ ai",
+    "anyAction": "Tất cả thao tác",
+    "member": "Thành viên",
+    "action": "Thao tác",
+    "from": "Từ",
+    "to": "Đến",
+    "groups": {
+      "interviews": "Phỏng vấn",
+      "candidates": "Ứng viên",
+      "team": "Nhóm",
+      "company": "Công ty",
+      "billing": "Thanh toán",
+      "integrations": "Tích hợp"
+    },
+    "actions": {
+      "interview_created": "Đã tạo một buổi phỏng vấn",
+      "interview_from_template": "Đã tạo một buổi phỏng vấn từ mẫu",
+      "interview_deleted": "Đã xóa một buổi phỏng vấn",
+      "interview_renamed": "Đã đổi tên một buổi phỏng vấn",
+      "interview_settings_changed": "Đã đổi cài đặt của một buổi phỏng vấn",
+      "link_turned_on": "Đã bật một liên kết chia sẻ",
+      "link_turned_off": "Đã tắt một liên kết chia sẻ",
+      "questions_regenerated": "Đã tạo lại một câu hỏi",
+      "answer_key_reported": "Đã đánh dấu một đáp án là sai",
+      "topics_approved": "Đã duyệt chủ đề của một buổi phỏng vấn",
+      "pass_mark_changed": "Đã đổi một điểm đạt",
+      "candidate_invited": "Đã mời một ứng viên",
+      "invite_resent": "Đã gửi lại một lời mời",
+      "invite_revoked": "Đã thu hồi một lời mời",
+      "candidate_deleted": "Đã xóa một ứng viên",
+      "candidate_renamed": "Đã đổi tên một ứng viên",
+      "extra_time_set": "Đã cho một ứng viên thêm thời gian",
+      "results_viewed": "Đã xem kết quả của một ứng viên",
+      "report_emailed": "Đã gửi báo cáo qua email",
+      "member_invited": "Đã mời một thành viên",
+      "member_joined": "Đã tham gia công ty",
+      "member_removed": "Đã xóa một thành viên",
+      "member_role_changed": "Đã đổi vai trò của một thành viên",
+      "ownership_transferred": "Đã chuyển giao công ty cho chủ sở hữu khác",
+      "company_renamed": "Đã đổi tên công ty",
+      "logo_changed": "Đã đổi logo",
+      "brand_changed": "Đã đổi màu sắc hoặc phong cách thương hiệu",
+      "verification_requested": "Đã yêu cầu xác minh công ty",
+      "ai_apps_changed": "Đã cho phép hoặc dừng ứng dụng AI",
+      "top_up_paid": "Đã nạp credit",
+      "auto_top_up_set": "Đã thiết lập tự động nạp",
+      "auto_top_up_changed": "Đã thay đổi tự động nạp",
+      "auto_top_up_stopped": "Đã dừng tự động nạp",
+      "ats_connected": "Đã kết nối một ATS",
+      "ats_reconnected": "Đã kết nối lại một ATS",
+      "ats_disconnected": "Đã ngắt kết nối một ATS",
+      "job_linked": "Đã liên kết một tin tuyển dụng ATS",
+      "job_unlinked": "Đã bỏ liên kết một tin tuyển dụng ATS",
+      "slack_connected": "Đã kết nối Slack",
+      "slack_disconnected": "Đã ngắt kết nối Slack",
+      "slack_notifications_changed": "Đã đổi thông báo Slack",
+      "api_key_created": "Đã tạo một khóa API",
+      "api_key_deleted": "Đã xóa một khóa API",
+      "api_key_narrowed": "Đã thu hẹp quyền của một khóa API",
+      "webhook_added": "Đã thêm một webhook",
+      "webhook_tested": "Đã thử một webhook",
+      "webhook_deleted": "Đã xóa một webhook"
+    },
+    "removed": "đã bỏ: {permissions}",
+    "permissions": {
+      "interviews:read": "xem buổi phỏng vấn",
+      "interviews:create": "tạo buổi phỏng vấn",
+      "candidates:read": "xem ứng viên",
+      "candidates:invite": "mời ứng viên",
+      "candidates:change": "thay đổi ứng viên",
+      "candidates:delete": "xóa ứng viên",
+      "credits:read": "xem credit",
+      "mcp": "dùng với agent AI (MCP)"
+    },
+    "via": {
+      "assistant": "qua trợ lý",
+      "mcp": "qua một ứng dụng AI",
+      "api": "qua API",
+      "ats": "qua một ATS"
+    }
   }
 }

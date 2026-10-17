@@ -107,7 +107,19 @@
     "send": "Kirim",
     "thinking": "Sedang berpikir…",
     "copyId": "Salin ID",
-    "idCopied": "ID disalin"
+    "idCopied": "ID disalin",
+    "copyCode": "Salin kode",
+    "codeCopied": "Kode disalin",
+    "codeLanguage": "Bahasa pemrograman",
+    "editor": {
+      "bold": "Tebal",
+      "italic": "Miring",
+      "link": "Tautan",
+      "bullets": "Daftar berpoin",
+      "numbers": "Daftar bernomor",
+      "address": "https://…",
+      "addLink": "Tambahkan tautan"
+    }
   },
   "errors": {
     "title": "Terjadi kesalahan",
@@ -145,6 +157,7 @@
     "dismiss": "Abaikan",
     "fixSent": "Dikirim ke pemeriksa. Soal akan diperbaiki atau diganti sebentar lagi.",
     "actionFailed": "Tidak berhasil. Coba lagi.",
+    "questions": "Soal",
     "flagged": "Ditandai",
     "replaced": "Diganti",
     "noFlagged": "Tidak ada yang ditandai saat ini.",
@@ -174,9 +187,20 @@
     "deleteTitle": "Hapus templat ini?",
     "deleteText": "Topik dan soalnya akan dihapus. Wawancara yang sudah dibuat perusahaan dari templat ini tetap ada.",
     "deleteFailed": "Templat tidak bisa dihapus. Coba lagi.",
+    "poolCounts": "{practice} latihan · {company} perusahaan",
+    "topUp": "Lengkapi",
+    "addQuestions": "Tambah soal",
+    "addQuestionsTitle": "Tambah soal ke setiap topik",
+    "addQuestionsText": "Setiap topik mendapat soal baru sebanyak ini: sepertiga untuk latihan, sisanya untuk perusahaan. Wawancara yang sudah dibuat dari templat ini tetap memakai soalnya sendiri.",
+    "addQuestionsCount": "Soal per topik",
+    "add": "Tambah",
+    "addingQuestions": "Menambahkan soal",
+    "questionsAdded": "Soal ditambahkan",
+    "addQuestionsFailed": "Soal tidak bisa ditambahkan. Coba lagi.",
     "passRates": "Tingkat kelulusan",
     "controls": "Kontrol",
     "stats": "Statistik",
+    "statsGeneral": "Umum",
     "statsPeriod": "Periode",
     "statsAllTime": "Sepanjang waktu",
     "statsCards": {
@@ -259,11 +283,7 @@
     "deletePostText": "Postingan dihapus dari halaman berita di semua bahasa.",
     "postSaveFailed": "Postingan tidak dapat disimpan. Silakan coba lagi.",
     "postDeleteFailed": "Postingan tidak dapat dihapus. Silakan coba lagi.",
-    "companies": "Perusahaan",
-    "companySearch": "Nama perusahaan",
-    "companiesNotFound": "Tidak ada perusahaan yang ditemukan.",
     "suspended": "Ditangguhkan",
-    "companyDetails": "{members, plural, other {# anggota}} · sejak {date}",
     "suspend": "Tangguhkan",
     "unsuspend": "Cabut penangguhan",
     "unsuspended": "Penangguhan dicabut.",
@@ -296,11 +316,341 @@
     "legalSend": "Email perubahannya",
     "legalConfirmTitle": "Email perubahan pada {document}?",
     "legalAudience": {
-      "everyone": "Semua pemilik akun prepza menerimanya mulai pagi berikutnya, berisi bahwa versi baru berlaku mulai {date}. Dikirim sekali dan tidak bisa ditarik kembali.",
-      "company_editors": "Pemilik dan admin setiap perusahaan menerimanya mulai pagi berikutnya, berisi bahwa versi baru berlaku mulai {date}. Dikirim sekali dan tidak bisa ditarik kembali."
+      "everyone": "Semua pemilik akun prepza menerimanya mulai jam pengiriman berikutnya (08.00–18.00 UTC), berisi bahwa versi baru berlaku mulai {date}, dan melihatnya di notifikasi mereka. Dikirim sekali dan tidak bisa ditarik kembali.",
+      "company_editors": "Pemilik dan admin setiap perusahaan menerimanya mulai jam pengiriman berikutnya (08.00–18.00 UTC), berisi bahwa versi baru berlaku mulai {date}, dan melihatnya di notifikasi mereka. Dikirim sekali dan tidak bisa ditarik kembali."
     },
-    "legalAsked": "Perubahan akan diemail mulai pagi berikutnya.",
-    "legalFailed": "Tidak bisa meminta email. Silakan coba lagi."
+    "legalAsked": "Perubahan akan diemail mulai jam pengiriman berikutnya.",
+    "legalFailed": "Tidak bisa meminta email. Silakan coba lagi.",
+    "support": "Dukungan",
+    "supportSearch": "ID, tautan, email, ID pembayaran, atau nama perusahaan",
+    "supportNotFound": "Tidak ada yang cocok. Coba ID dari “salin id”, tautan halaman, atau email.",
+    "supportKinds": {
+      "company": "Perusahaan",
+      "interview": "Wawancara di {company}",
+      "candidate": "Kandidat di {company}",
+      "user": "Akun"
+    },
+    "supportCreated": "Dibuat",
+    "supportAvailable": "{available} kredit tersedia",
+    "supportHeld": "{reserved} dicadangkan untuk kandidat",
+    "supportTabs": {
+      "money": "Kredit",
+      "reserved": "Dicadangkan",
+      "interviews": "Wawancara",
+      "members": "Anggota",
+      "audit": "Log audit"
+    },
+    "supportNoInterviews": "Belum ada wawancara.",
+    "supportUntitled": "Wawancara masih dibuat",
+    "supportCandidates": "{count, plural, other {# kandidat}}",
+    "supportJoined": "Bergabung",
+    "supportInvited": "Diundang, belum bergabung",
+    "adjustCredits": "Sesuaikan kredit",
+    "adjustTitle": "Sesuaikan kredit {name}",
+    "adjustText": "Jumlah positif menambah kredit, jumlah negatif menguranginya. Perusahaan melihat alasannya di riwayat tagihannya.",
+    "adjustAmount": "Kredit, misalnya 500 atau -500",
+    "adjustNote": "Alasan, misalnya “Dipotong dua kali untuk satu kandidat”",
+    "adjustConfirmTitle": "{amount} kredit untuk {name}?",
+    "adjustConfirm": "Sesuaikan",
+    "adjustBack": "Kembali",
+    "adjustNext": "Lanjut",
+    "adjusted": "Kredit disesuaikan",
+    "supportNoEmail": "Akun tanpa email",
+    "supportCompanies": "Perusahaan",
+    "supportNoCompanies": "Bukan anggota perusahaan mana pun.",
+    "supportTopUps": "Isi ulang yang dibayar",
+    "supportNoTopUps": "Belum ada isi ulang.",
+    "supportDeletedCompany": "Perusahaan yang sudah dihapus",
+    "supportNotYet": "Belum",
+    "supportFacts": {
+      "company": "Perusahaan",
+      "interview": "Wawancara",
+      "invited": "Diundang",
+      "lastSent": "Undangan terakhir dikirim",
+      "started": "Dimulai",
+      "finished": "Selesai",
+      "grade": "Nilai",
+      "extraTime": "Waktu tambahan",
+      "signals": "Tanda integritas",
+      "credits": "Kredit",
+      "topics": "Topik",
+      "questionSeconds": "Waktu per soal",
+      "passMark": "Nilai lulus"
+    },
+    "supportPassed": "{grade}, lulus",
+    "supportNotPassed": "{grade}, tidak lulus",
+    "supportNoExtraTime": "Tidak ada",
+    "supportSignals": "{leaves} kali meninggalkan halaman · {copies} percobaan menyalin · {fast} jawaban terlalu cepat",
+    "supportCredits": {
+      "held": "Dicadangkan",
+      "charged": "Ditagihkan",
+      "released": "Dikembalikan"
+    },
+    "supportGenerationFailed": "Gagal dibuat",
+    "supportSeconds": "{count, plural, other {# detik}}",
+    "supportNoCandidates": "Belum ada kandidat.",
+    "campaigns": "Kampanye",
+    "newCampaign": "Kampanye baru",
+    "editCampaign": "Ubah",
+    "editCampaignIn": "Ubah versi {language}",
+    "campaignInEnglish": "Tulis dalam bahasa Inggris. Setelah disimpan, kampanye diterjemahkan ke semua bahasa lain, dan kamu bisa mengubah versi mana pun sebelum dikirim.",
+    "campaignInLanguage": "Teksmu sendiri dalam {language}, dikirim persis seperti yang kamu tulis.",
+    "campaignKind": "Jenis",
+    "campaignKinds": {
+      "updates": "Pembaruan produk",
+      "promotions": "Penawaran"
+    },
+    "campaignSubject": "Subjek",
+    "campaignSubjectPlaceholder": "Tulis subjek di sini…",
+    "campaignText": "Teks",
+    "campaignTextPlaceholder": "Tulis teks di sini… Tekan Enter untuk paragraf baru.",
+    "campaignButton": "Teks tombol (opsional)",
+    "campaignLink": "Tautan tombol",
+    "campaignLinkPlaceholder": "Tautan tombol di prepza, misalnya /pricing (opsional)",
+    "campaignSaveFailed": "Kampanye tidak dapat disimpan. Silakan coba lagi.",
+    "noCampaigns": "Belum ada kampanye.",
+    "campaignStatus": {
+      "draft": "draf",
+      "sending": "mengirim…",
+      "sent": "terkirim",
+      "stopped": "dihentikan"
+    },
+    "campaignRowCounts": {
+      "sent": "{count} terkirim",
+      "skipped": "{count} dilewati",
+      "failed": "{count} gagal",
+      "unsubscribed": "{count} berhenti berlangganan",
+      "complained": "{count} ditandai spam"
+    },
+    "campaignCounts": {
+      "pending": "Menunggu",
+      "sent": "Terkirim",
+      "skipped": "Dilewati",
+      "failed": "Gagal",
+      "unsubscribed": "Berhenti berlangganan setelahnya",
+      "complained": "Laporan spam"
+    },
+    "campaignRecipients": "<number>{shown}</number> {count, plural, other {penerima}}",
+    "campaignPreviewLanguage": "Pratinjau dalam",
+    "sendTest": "Kirim email uji ke saya",
+    "testSent": "Email uji sedang dalam perjalanan ke alamatmu.",
+    "sendCampaign": "Kirim",
+    "stopCampaign": "Hentikan",
+    "deleteCampaign": "Hapus kampanye",
+    "campaignConfirm": {
+      "send": {
+        "title": "Kirim kampanye ini?",
+        "text": "{count, plural, =0 {Saat ini tidak ada yang akan menerimanya.} other {# orang menerimanya mulai jam pengiriman berikutnya (08.00–18.00 UTC). Setelah itu tidak bisa diubah.}}",
+        "unknown": "Semua orang yang mengaktifkan jenis email ini menerimanya mulai jam pengiriman berikutnya (08.00–18.00 UTC). Setelah itu tidak bisa diubah.",
+        "confirm": "Kirim"
+      },
+      "stop": {
+        "title": "Hentikan kampanye ini?",
+        "text": "Tidak ada orang lain yang menerimanya. Yang sudah menerimanya tetap menyimpannya.",
+        "confirm": "Hentikan"
+      },
+      "delete": {
+        "title": "Hapus kampanye ini?",
+        "text": "Kampanye dihapus di semua bahasa. Kampanye ini belum pernah dikirim.",
+        "confirm": "Hapus"
+      }
+    },
+    "sendAsCampaign": "Kirim sebagai kampanye",
+    "removeSuppression": "Keluarkan dari daftar",
+    "suppressed": {
+      "bounced": "Email ke alamat ini terpental pada {date}, jadi email produk dan pemberitahuan tidak dikirim ke alamat ini.",
+      "complained": "Alamat ini menandai email sebagai spam pada {date}, jadi email produk dan pemberitahuan tidak dikirim ke alamat ini."
+    },
+    "aiCosts": "Biaya AI",
+    "aiCards": {
+      "spend": "Pengeluaran",
+      "calls": "Panggilan AI",
+      "month": "Bulan ini",
+      "monthOf": "Bulan ini, dari anggaran {budget}",
+      "input": "Token input",
+      "cached": "Token input dari cache",
+      "output": "Token output"
+    },
+    "aiBudgetsTitle": "Anggaran bersama hari ini",
+    "aiNothing": "Tidak ada apa pun di periode ini.",
+    "aiOf": "{used} dari {limit}",
+    "aiForTitle": "Untuk siapa",
+    "aiCategories": {
+      "paid": "Perusahaan yang sudah membayar",
+      "unpaid": "Perusahaan yang belum membayar",
+      "no_company": "Tanpa perusahaan",
+      "prepza": "prepza"
+    },
+    "aiActionsTitle": "Per tindakan",
+    "aiActions": {
+      "interview_generation": "Pembuatan wawancara",
+      "template_generation": "Pembuatan templat",
+      "question_regeneration": "Pembuatan ulang soal",
+      "template_question_regeneration": "Pembuatan ulang soal templat",
+      "sample_key_check": "Pemeriksaan kunci jawaban sampel",
+      "question_verify": "Pemeriksaan soal",
+      "key_check_batch": "Pemeriksaan kunci jawaban per batch",
+      "embeddings": "Pencocokan topik",
+      "news_translation": "Penerjemahan berita",
+      "campaign_translation": "Penerjemahan kampanye",
+      "assistant_message": "Pesan asisten",
+      "assistant_title": "Judul obrolan asisten",
+      "transcription": "Pesan suara",
+      "help_chat": "Chat bantuan"
+    },
+    "aiUnitCost": {
+      "interview_generation": "{cost} per wawancara",
+      "template_generation": "{cost} per pembuatan templat",
+      "question_regeneration": "{cost} per soal",
+      "template_question_regeneration": "{cost} per soal",
+      "sample_key_check": "{cost} per tes",
+      "question_verify": "{cost} per soal",
+      "key_check_batch": "{cost} per pemeriksaan",
+      "embeddings": "{cost} per permintaan",
+      "news_translation": "{cost} per postingan",
+      "campaign_translation": "{cost} per kampanye",
+      "assistant_message": "{cost} per percakapan",
+      "assistant_title": "{cost} per percakapan",
+      "transcription": "{cost} per menit",
+      "help_chat": "{cost} per panggilan"
+    },
+    "aiPaid": "sudah membayar {spend}",
+    "aiUnpaid": "belum membayar {spend}",
+    "aiCalls": "{count, plural, other {# panggilan}}",
+    "aiModelsTitle": "Per model",
+    "aiTokensIn": "{count} masuk",
+    "aiCachedShare": "{share} dari cache",
+    "aiTokensOut": "{count} keluar",
+    "aiCompaniesTitle": "Perusahaan dengan biaya terbesar",
+    "aiUsersTitle": "Pengguna dengan biaya terbesar",
+    "aiByMonthTitle": "Per bulan",
+    "aiByDayTitle": "Per hari",
+    "limitsOursTitle": "Batas kami yang tercapai",
+    "limitsProvidersTitle": "Batas penyedia",
+    "limitsNoHits": "Tidak ada batas yang tercapai di periode ini.",
+    "limitNames": {
+      "MESSAGES_PER_USER_HOUR": "Pesan asisten per pengguna per jam",
+      "MESSAGES_PER_USER_DAY": "Pesan asisten per pengguna per hari",
+      "MESSAGES_PER_COMPANY_DAY": "Pesan asisten per perusahaan per hari",
+      "MESSAGES_PER_DAY": "Pesan asisten per hari, gabungan pengguna yang belum membayar",
+      "TOKENS_PER_USER_DAY": "Token asisten per pengguna per hari",
+      "TOKENS_PER_COMPANY_DAY": "Token asisten per perusahaan per hari",
+      "TOKENS_PER_DAY": "Token asisten per hari, gabungan pengguna yang belum membayar",
+      "TRANSCRIPTIONS_PER_USER_HOUR": "Pesan suara per pengguna per jam",
+      "ACTIONS_PER_USER_HOUR": "Tindakan asisten per pengguna per jam",
+      "MCP_CALLS_PER_USER_MINUTE": "Panggilan aplikasi AI per pengguna per menit",
+      "MCP_CALLS_PER_USER_DAY": "Panggilan aplikasi AI per pengguna per hari",
+      "REGISTRATIONS_PER_IP_HOUR": "Pendaftaran aplikasi AI per alamat per jam",
+      "REGISTRATIONS_PER_DAY": "Pendaftaran aplikasi AI per hari, semua orang",
+      "AUTHORIZATIONS_PER_IP_HOUR": "Permintaan koneksi aplikasi AI per alamat per jam",
+      "TOKEN_REQUESTS_PER_CLIENT_MINUTE": "Permintaan token aplikasi AI per aplikasi per menit",
+      "APPROVALS_PER_USER_HOUR": "Koneksi aplikasi AI yang diizinkan per pengguna per jam",
+      "MAX_OWNED_COMPANIES": "Perusahaan yang boleh dimiliki satu orang",
+      "INTERVIEWS_PER_DAY": "Wawancara yang dibuat per perusahaan per hari",
+      "INTERVIEWS_PER_DAY_UNPAID": "Wawancara yang dibuat per perusahaan yang belum membayar per hari",
+      "MAX_INTERVIEWS_WITHOUT_CANDIDATES": "Wawancara yang dibuat dan menunggu tanpa kandidat",
+      "MAX_INTERVIEWS_WITHOUT_CANDIDATES_UNPAID": "Wawancara yang dibuat dan menunggu tanpa kandidat, belum membayar",
+      "PREVIEWS_PER_USER_HOUR": "Pratinjau wawancara per pengguna per jam",
+      "LINK_STARTS_PER_HOUR": "Mulai lewat tautan satu wawancara per jam",
+      "LINK_STARTS_PER_IP_HOUR": "Mulai lewat tautan per alamat per jam",
+      "MAX_BULK_INVITES": "Kandidat dalam satu daftar atau file",
+      "MAX_PENDING_INVITES": "Undangan tim yang tertunda per perusahaan",
+      "MEMBER_INVITES_PER_UNPAID_DAY": "Undangan tim per perusahaan yang belum membayar per hari",
+      "EMAIL_HOURLY_LIMIT": "Email undangan per pengguna per jam",
+      "EMAIL_DAILY_LIMIT": "Email undangan per pengguna per hari",
+      "EMAIL_RECIPIENT_DAILY_LIMIT": "Undangan ke satu alamat untuk satu wawancara per hari",
+      "REPORT_EMAILS_PER_COMPANY_DAY": "Email laporan per perusahaan per hari",
+      "GENERATION_LIMIT": "Pembuatan per pengguna per hari",
+      "REGENERATION_LIMIT": "Soal yang dibuat ulang per pengguna per hari",
+      "DAILY_GENERATION_LIMIT": "Pembuatan per hari, gabungan perusahaan yang belum membayar",
+      "MAX_TOPIC_REVISIONS": "Revisi topik per pembuatan",
+      "DAILY_VERIFY_LIMIT": "Pemeriksaan soal per hari",
+      "PRACTICE_ROUNDS_PER_HOUR": "Sesi latihan per pengguna per jam",
+      "SIGNALS_PER_MINUTE": "Tanda integritas per sesi per menit",
+      "MAX_SIGNALS_PER_QUESTION": "Tanda integritas yang disimpan per soal",
+      "HELP_USER_LIMIT": "Pesan chat bantuan per akun per jam",
+      "HELP_IP_LIMIT": "Pesan chat bantuan per alamat per jam",
+      "HELP_DAILY_LIMIT": "Pesan chat bantuan per hari, semua orang",
+      "HELP_TOKENS_PER_DAY": "Token chat bantuan per hari, semua orang",
+      "CONTACT_IP_LIMIT": "Pesan kontak per alamat per hari",
+      "CONTACT_DAILY_LIMIT": "Pesan kontak per hari, semua orang",
+      "RATINGS_PER_DAY": "Penilaian soal per pengguna per hari",
+      "REPORTS_PER_DAY": "Laporan soal per pengguna per hari",
+      "MAX_API_KEYS": "Kunci API per perusahaan",
+      "MAX_WEBHOOKS": "Webhook per perusahaan",
+      "API_REQUESTS_PER_MINUTE": "Permintaan API per perusahaan per menit",
+      "RESEND_DAILY_LIMIT": "Email per hari lewat Resend",
+      "RESEND_RESERVE_PERCENT": "Porsi email per hari lewat Resend yang disisihkan dari pengiriman massal",
+      "CAMPAIGNS_PER_KIND_DAY": "Kampanye tiap jenis per hari",
+      "AI_SPEND_UNPAID_DAY": "Pengeluaran AI per hari, gabungan pengguna yang belum membayar",
+      "QUESTION_SECONDS_BASIC": "Detik per soal, tes baru level dasar",
+      "QUESTION_SECONDS_MEDIUM": "Detik per soal, tes baru level menengah",
+      "QUESTION_SECONDS_HARD": "Detik per soal, tes baru level sulit",
+      "GENERATION_CALLS_AT_ONCE": "Panggilan AI sekaligus per pembuatan",
+      "GENERATION_CALLS_PER_SECOND": "Panggilan AI per detik, gabungan semua pembuatan",
+      "MULTI_ANSWER_PERCENT": "Soal \"Pilih semua jawaban yang benar\", porsi di setiap topik",
+      "PAUSED": "Ditolak selama dijeda",
+      "OPENAI_RATE_LIMIT": "Batas laju OpenAI",
+      "OPENAI_QUOTA": "Kredit OpenAI habis",
+      "OPENAI_THROTTLED": "Menunggu batas permintaan OpenAI kami",
+      "RESEND_RATE_LIMIT": "Batas laju Resend",
+      "RESEND_DAILY_QUOTA": "Kuota harian Resend",
+      "ATS_RATE_LIMIT": "Batas laju ATS",
+      "FIREBASE_TOKEN_REFUSED": "Firebase menolak proses masuk"
+    },
+    "limitValue": "{value} {window}",
+    "limitWindows": {
+      "60": "per menit",
+      "3600": "per jam",
+      "86400": "per hari",
+      "1209600": "per tinjauan topik"
+    },
+    "limitKinds": {
+      "ours": "prepza",
+      "openai": "OpenAI",
+      "resend": "Resend",
+      "firebase": "Firebase",
+      "workable": "Workable",
+      "greenhouse": "Greenhouse",
+      "teamtailor": "Teamtailor",
+      "recruitee": "Recruitee",
+      "breezy": "Breezy HR"
+    },
+    "limitHitter": "{name} ({count})",
+    "limitHits": "{count, plural, other {# kali tercapai}}",
+    "limitsTitle": "Batas",
+    "limitsText": "Seberapa banyak orang boleh memakai, dan nilai yang dipakai layanan, per layanan. Perubahan berlaku dalam satu menit.",
+    "limitServices": {
+      "assistant": "Asisten",
+      "companies": "Perusahaan",
+      "generation": "Pembuatan",
+      "rounds": "Latihan, sesi, dan chat bantuan",
+      "library": "Masukan soal",
+      "api": "API publik",
+      "notifications": "Email",
+      "billing": "Pengeluaran AI"
+    },
+    "limitAtOnce": "sekaligus",
+    "limitScopes": {
+      "user": "per pengguna",
+      "company": "per perusahaan",
+      "ip": "per alamat",
+      "everyone": "semua orang digabung"
+    },
+    "limitDefault": "bawaan {value}",
+    "limitSecondsUnit": "dtk",
+    "limitRecentHits": "{count, plural, other {# kali tercapai}} dalam {days} hari",
+    "limitPaid": "Sudah membayar",
+    "limitUnpaid": "Belum membayar",
+    "limitSave": "Simpan",
+    "limitReset": "Kembalikan ke bawaan",
+    "limitSaved": "Batas disimpan.",
+    "limitFailed": "Batas tidak bisa disimpan. Coba lagi.",
+    "limitChangesTitle": "Perubahan",
+    "limitNoChanges": "Belum ada batas yang diubah.",
+    "limitChange": "{name}: {from} menjadi {to}",
+    "limitDefaultValue": "bawaan",
+    "supportAiSpend": "Biaya AI {spend} dalam {days} hari terakhir, {count, plural, other {# panggilan}}."
   },
   "templates": {
     "title": "Templat",
@@ -363,10 +713,12 @@
   "reportReasons": {
     "wrong_answer": "Jawaban yang ditandai salah",
     "unclear": "Soalnya tidak jelas",
+    "hard_to_read": "Sulit dibaca",
     "off_topic": "Tidak sesuai dengan topik",
     "other": "Lainnya"
   },
   "questions": {
+    "multiChoice": "Pilihan ganda kompleks",
     "goodQuestion": "Soal yang bagus?",
     "ratingFailed": "Penilaianmu tidak bisa disimpan. Coba lagi.",
     "helpful": "Soal yang membantu",
@@ -413,6 +765,10 @@
     "correct": "Benar",
     "incorrect": "Salah",
     "notAnswered": "Belum dijawab",
+    "partlyCorrect": "Sebagian benar",
+    "rightPicks": "{right} dari {total} pilihan jawaban benar",
+    "wrongPicks": "{count, plural, other {# pilihan jawaban salah}}",
+    "points": "{points} dari 1 poin",
     "finish": "Selesai",
     "finishing": "Menyelesaikan…",
     "next": "Soal berikutnya",
@@ -424,6 +780,7 @@
     "finishFailed": "Wawancara tidak bisa diselesaikan. Coba lagi.",
     "continueFailed": "Tidak bisa melanjutkan. Coba lagi.",
     "timeUp": "Waktu untuk soal ini sudah habis.",
+    "selectAll": "Pilih semua jawaban yang benar",
     "finish": "Selesaikan wawancara",
     "finishTitle": "Selesaikan seluruh wawancara?",
     "endsAll": "Ini menyelesaikan semua {count} bagian, bukan hanya yang ini.",
@@ -498,6 +855,7 @@
     "interviews": "Wawancara",
     "templates": "Templat",
     "team": "Tim",
+    "actions": "Log tindakan",
     "integrations": "Integrasi",
     "referrals": "Referal",
     "brand": "Merek",
@@ -629,10 +987,12 @@
       "many": "banyak",
       "file": "unggah"
     },
-    "manyHint": "Satu kandidat per baris, dengan atau tanpa nama,\nhingga 100 sekaligus:",
+    "manyHint": "Satu kandidat per baris, dengan atau tanpa nama,\nhingga {count} sekaligus:",
+    "manyHintNoLimit": "Satu kandidat per baris, dengan atau tanpa nama:",
     "example": "contoh",
     "uploadFile": "Unggah file",
-    "fileFormats": "CSV atau TXT, hingga 100 kandidat. Nama bisa ditulis di kolom nama atau di samping setiap email.",
+    "fileFormats": "CSV atau TXT, hingga {count} kandidat. Nama bisa ditulis di kolom nama atau di samping setiap email.",
+    "fileFormatsNoLimit": "CSV atau TXT. Nama bisa ditulis di kolom nama atau di samping setiap email.",
     "fileTooLarge": "File terlalu besar (maks. {kb} KB).",
     "lineProblems": {
       "no_email": "Email tidak ditemukan: {line}",
@@ -658,7 +1018,9 @@
     "fallbackTitle": "sebuah wawancara",
     "timePerQuestion": "Waktu per soal:",
     "secondsUnit": "dtk",
-    "pickOne": "Pilih salah satu dari empat pilihan jawaban di setiap soal.",
+    "wholeInterview": "Seluruh wawancara:",
+    "minutesUnit": "mnt",
+    "pickOne": "Pilih salah satu dari empat pilihan jawaban di setiap soal. Jika tertulis Pilih semua jawaban yang benar, centang setiap jawaban yang benar: masing-masing memberi sebagian poin soal, dan centang yang salah tidak memberi poin.",
     "changePick": "Kamu bisa mengubah pilihanmu sampai menekan Soal berikutnya.",
     "timeRunsOut": "Saat waktu sebuah soal habis, pilihanmu dihitung dan soal berikutnya terbuka; tanpa pilihan, soal itu dihitung salah. Waktu tetap berjalan meski kamu pergi.",
     "unanswered": "Soal yang tidak dijawab dihitung salah.",
@@ -1106,8 +1468,19 @@
       "ats_cannot_write": "{ats} tidak menerima hasil kandidat: kunci tidak punya akses tulis. Hubungkan ulang dengan kunci yang bisa menulis; hasil disimpan dan dikirim saat itu.",
       "connection_broken": "{name} berhenti berfungsi dan perlu dihubungkan ulang. Sampai saat itu, {integration, select, slack {notifikasi tidak sampai ke kanalmu} other {kandidat yang dikirimnya menunggu, dan hasil mereka disimpan}}.",
       "webhook_stopped": "Web hook ke {url} dihentikan: anggota yang menambahkannya bukan lagi pemilik atau admin. Tambahkan lagi agar tetap menerima hasil.",
-      "ownership_received": "Kamu sekarang pemilik “{name}”."
-    }
+      "ownership_received": "Kamu sekarang pemilik “{name}”.",
+      "news": "Berita: {title}",
+      "legal_terms": "Ketentuan baru berlaku mulai {date}.",
+      "legal_privacy": "Kebijakan privasi baru berlaku mulai {date}.",
+      "legal_dpa": "Perjanjian pemrosesan data baru berlaku mulai {date}."
+    },
+    "legalBanner": {
+      "terms": "Ketentuan prepza berubah pada {date}.",
+      "privacy": "Kebijakan privasi prepza berubah pada {date}.",
+      "dpa": "Perjanjian pemrosesan data berubah pada {date}."
+    },
+    "readLegal": "Baca versi baru",
+    "closeLegalBanner": "Tutup"
   },
   "report": {
     "download": "Unduh PDF",
@@ -1144,7 +1517,7 @@
     "continue": "Lanjutkan",
     "history": "Sesi latihanmu",
     "results": "Hasil latihan",
-    "grade": "soal dijawab benar",
+    "grade": "dari poin maksimal",
     "notFinished": "belum selesai",
     "noRounds": "Belum ada sesi latihan.",
     "startFailed": "Latihan tidak bisa dimulai. Coba lagi.",
@@ -1332,7 +1705,7 @@
     "counts": "{keys, plural, other {# kunci}} · {webhooks, plural, other {# webhook}}",
     "docs": "Dokumentasi pengembang",
     "keysTitle": "Kunci API",
-    "keysText": "Kunci membaca wawancara dan kandidatmu, serta mengundang kandidat atas nama orang yang membuatnya.",
+    "keysText": "Kunci bertindak sebagai orang yang membuatnya, dan hanya bisa melakukan apa yang diizinkan hak aksesnya.",
     "noKeys": "Belum ada kunci.",
     "newKey": "Kunci baru",
     "newKeyTitle": "Kunci API baru",
@@ -1391,7 +1764,37 @@
     "removeWebhookTitle": "Hapus webhook ini?",
     "removeWebhookText": "{url} tidak akan menerima event lagi.",
     "createFailed": "Gagal membuat.",
-    "removeFailed": "Gagal menghapus."
+    "removeFailed": "Gagal menghapus.",
+    "selectAll": "Pilih semua",
+    "permissionGroups": {
+      "interviews": "Wawancara",
+      "candidates": "Kandidat",
+      "credits": "Kredit",
+      "ai_agents": "Agen AI"
+    },
+    "permissions": {
+      "interviews:read": "Lihat",
+      "interviews:create": "Buat",
+      "candidates:read": "Lihat",
+      "candidates:invite": "Undang",
+      "candidates:change": "Ubah",
+      "candidates:delete": "Hapus",
+      "credits:read": "Lihat",
+      "mcp": "Pakai dengan agen AI (MCP)"
+    },
+    "permissionLine": {
+      "interviews:read": "lihat",
+      "interviews:create": "buat",
+      "candidates:read": "lihat",
+      "candidates:invite": "undang",
+      "candidates:change": "ubah",
+      "candidates:delete": "hapus",
+      "credits:read": "lihat",
+      "mcp": "MCP"
+    },
+    "editPermissions": "Ubah hak akses",
+    "editPermissionsText": "Hapus centang pada yang tidak lagi dibutuhkan “{name}”. Untuk menambah hak akses, buat kunci baru.",
+    "permissionsFailed": "Hak akses tidak bisa disimpan."
   },
   "brand": {
     "logoTitle": "Logo",
@@ -1460,7 +1863,8 @@
     "tabs": {
       "api": "API",
       "webhooks": "Webhook",
-      "sdk": "SDK"
+      "sdk": "SDK",
+      "mcp": "MCP"
     },
     "englishOnly": "Halaman ini hanya tersedia dalam bahasa Inggris.",
     "baseUrl": "URL dasar",
@@ -1513,6 +1917,7 @@
     "emptyTitle": "Tanyakan tentang rekrutmenmu",
     "emptyText": "Kandidat, wawancara, kredit, integrasi, dan cara kerja prepza, dari apa yang bisa kamu lihat di perusahaanmu. AI bisa keliru; yang berlaku adalah halaman yang ditautkannya.",
     "emptyTitleFaq": "Tanyakan tentang prepza",
+    "pageQuestion": "Apa yang bisa saya lakukan di halaman ini?",
     "pages": {
       "open": "Buka",
       "pricing": "Harga",
@@ -1632,7 +2037,7 @@
         "create_webhook": "Tambah webhook",
         "remove_webhook": "Hapus webhook",
         "remove_api_key": "Hapus kunci API",
-        "start_practice": "Mulai ronde latihan",
+        "start_practice": "Mulai sesi latihan",
         "create_interview": "Buat wawancara dari deskripsi pekerjaan",
         "create_interview_from_template": "Buat wawancara dari templat",
         "delete_interview": "Hapus wawancara",
@@ -1691,336 +2096,7 @@
   "pageHelp": {
     "label": "Tentang halaman ini",
     "actionsTitle": "Yang bisa kamu lakukan",
-    "tipsTitle": "Tips",
-    "landing": {
-      "title": "Cara kerja prepza",
-      "text": "prepza mengubah deskripsi pekerjaanmu menjadi wawancara pilihan ganda berbatas waktu, dengan soal acak tersendiri untuk setiap kandidat.",
-      "actions": [
-        "Tempel deskripsi pekerjaan: prepza mengusulkan topik yang akan diuji.",
-        "Tinjau topiknya: pertahankan, ubah, atau buang, lalu setujui untuk menulis soalnya.",
-        "Undang kandidat lewat email, dari file, atau dengan satu tautan yang bisa dibagikan.",
-        "Baca laporannya: kandidat diurutkan berdasarkan nilai, dengan setiap jawaban dan tanda integritas."
-      ],
-      "tips": [
-        "Membuat wawancara gratis. Kamu membayar $2–5 per kandidat yang menjawab, dan kandidat pertamamu gratis.",
-        "Coba wawancaramu sebagai kandidat sebelum mengundang siapa pun."
-      ]
-    },
-    "companies": {
-      "title": "Perusahaan",
-      "text": "Perusahaanmu. Semua yang kamu lakukan di prepza terjadi di dalam satu perusahaan: wawancara, kandidat, tim, kredit, dan integrasinya.",
-      "actions": [
-        "Buat perusahaan dengan “Perusahaan baru”. Namanya unik di seluruh prepza.",
-        "Buka perusahaan untuk mengelola wawancara dan kandidatnya.",
-        "Hapus perusahaan milikmu, beserta semua wawancara dan undangannya."
-      ],
-      "tips": [
-        "Peranmu tampil di samping setiap perusahaan yang bukan milikmu: admin bisa mengubah, pelihat hanya melihat.",
-        "Kredit dimiliki perusahaan, jadi setiap perusahaan diisi ulang sendiri-sendiri."
-      ]
-    },
-    "pickCompany": {
-      "title": "Pilih perusahaan",
-      "text": "Kamu memilih templat. Pilih perusahaan tujuannya: templat disalin ke sana sebagai wawancara baru, gratis dan siap dikirim ke kandidat.",
-      "actions": [
-        "Pilih perusahaan untuk membuka templat di sana, lalu pakai templatnya.",
-        "Buat perusahaan baru jika belum punya; templat akan terbuka di sana."
-      ],
-      "tips": [
-        "Setelah disalin, wawancara menjadi milik perusahaan: ubah soal dan pengaturannya sesukamu."
-      ]
-    },
-    "interviews": {
-      "title": "Wawancara",
-      "text": "Semua wawancara perusahaan ini dan kreditnya untuk kandidat. Setiap wawancara adalah tes berbatas waktu yang dibuat dari deskripsi pekerjaan.",
-      "actions": [
-        "Buat wawancara dari deskripsi pekerjaan dengan “Wawancara baru”.",
-        "Buka wawancara untuk melihat topik, kandidat, dan pengaturannya.",
-        "Coba wawancara sebagai kandidat, atau hapus.",
-        "Isi ulang kredit dari saldo, atau aktifkan isi ulang otomatis di tab Tagihan."
-      ],
-      "tips": [
-        "Saldo berubah kuning saat kredit hampir habis. Tanpa kredit, undangan baru tidak dikirim.",
-        "Tab di atas mengarah ke templat, tim, integrasi, tagihan (pemilik dan admin), dan referal."
-      ]
-    },
-    "newInterview": {
-      "title": "Wawancara baru",
-      "text": "Mulai wawancara dari deskripsi pekerjaan. prepza membacanya, mengusulkan topik yang akan diuji, dan menulis soal setelah kamu menyetujuinya.",
-      "actions": [
-        "Tempel deskripsi pekerjaan: posisinya, persyaratannya, dan nilai tambah yang diharapkan.",
-        "Pilih bahasa wawancara yang akan dibuat.",
-        "Buat, lalu tinjau topik yang diusulkan."
-      ],
-      "tips": [
-        "Makin spesifik deskripsinya, makin pas soalnya dengan posisi.",
-        "Pembuatan gratis: kamu hanya membayar untuk kandidat yang menjawab."
-      ]
-    },
-    "reviewTopics": {
-      "title": "Tinjau topikmu",
-      "text": "prepza mengusulkan topik ini dari deskripsimu. Setiap topik yang kamu pertahankan mendapat set soal sendiri beserta jawabannya.",
-      "actions": [
-        "Hapus centang topik yang tidak kamu perlukan.",
-        "Ubah nama topik dan subtopiknya dengan ikon pensil.",
-        "Jelaskan perubahan dengan kata-katamu sendiri lalu terapkan, misalnya “tambahkan topik tentang kepemimpinan tim”.",
-        "Setujui dan buat untuk menulis soalnya."
-      ],
-      "tips": [
-        "Jika topiknya terlalu banyak, hapus centang beberapa atau jelaskan cara menggabungkannya.",
-        "Soal baru ditulis setelah kamu menyetujui, jadi luangkan waktu sebentar di sini."
-      ]
-    },
-    "generating": {
-      "title": "Sedang dibuat",
-      "text": "prepza sedang membuat wawancaramu: pertama topik, lalu soal untuk tiap topik. Ini butuh beberapa menit.",
-      "actions": [
-        "Tinggalkan halaman ini jika mau: pembuatan tetap berjalan.",
-        "Batalkan pembuatan jika tidak diperlukan lagi; tidak ada yang disimpan dari yang sudah dibuat."
-      ],
-      "tips": [
-        "Kamu akan mendapat notifikasi saat wawancara siap.",
-        "Kembali kapan saja dari daftar wawancara."
-      ]
-    },
-    "interviewTopics": {
-      "title": "Topik",
-      "text": "Yang diuji wawancara ini: topiknya, masing-masing dengan subtopik dan kumpulan soalnya sendiri. Setiap kandidat mendapat set acak dari tiap kumpulan.",
-      "actions": [
-        "Buka “Kelola soal” untuk membaca soal dan jawaban sebuah topik.",
-        "Buat ulang soal yang lemah, tandai jawaban yang salah, atau baca laporan kandidat tentang sebuah soal.",
-        "Atur berapa soal yang didapat setiap kandidat dari sebuah topik.",
-        "Coba wawancara sebagai kandidat, atau hapus."
-      ],
-      "tips": [
-        "Soal buatan AI bisa salah: periksa sekilas setiap topik sebelum mengundang siapa pun.",
-        "Klik judul untuk mengganti nama wawancara."
-      ]
-    },
-    "interviewCandidates": {
-      "title": "Kandidat",
-      "text": "Semua yang diundang ke wawancara ini, dengan status, progres, dan nilainya.",
-      "actions": [
-        "Undang kandidat: satu per satu, daftar hingga 100, atau file CSV atau TXT.",
-        "Aktifkan tautan yang bisa dibagikan untuk iklan lowongan: siapa pun yang memilikinya bisa mengikuti wawancara.",
-        "Cari berdasarkan email atau nama, filter berdasarkan status, dan urutkan berdasarkan nilai atau tanggal.",
-        "Buka laporan kandidat, atau unduh atau bagikan laporan semua kandidat."
-      ],
-      "tips": [
-        "Setiap kandidat yang menjawab setidaknya satu soal memakai kredit, termasuk yang datang dari tautan.",
-        "Pengingat dikirim ke kandidat secara otomatis."
-      ]
-    },
-    "interviewSettings": {
-      "title": "Pengaturan",
-      "text": "Cara wawancara ini berjalan untuk setiap kandidat.",
-      "actions": [
-        "Atur waktu untuk setiap soal, dalam detik.",
-        "Atur nilai lulus: kandidat yang mencapainya dinyatakan lulus.",
-        "Tandai wawancara sebagai diterima setelah posisinya terisi."
-      ],
-      "tips": [
-        "Setiap pengaturan tersimpan begitu kamu meninggalkan kolomnya.",
-        "Kandidat tidak pernah melihat skornya; hanya timmu yang melihat.",
-        "Untuk kandidat yang butuh waktu lebih, tambahkan waktu ekstra di halamannya."
-      ]
-    },
-    "tryInterview": {
-      "title": "Coba sebagai kandidat",
-      "text": "Pratinjau wawancara ini persis seperti yang dilihat kandidat: pengantar, lalu soal berbatas waktu. Gratis.",
-      "actions": [
-        "Mulai pratinjau dan jawab seperti kandidat.",
-        "Periksa waktu, kata-kata, dan jawabannya sebelum mengundang siapa pun."
-      ],
-      "tips": [
-        "Tetap di halaman saat menjawab: untuk kandidat, meninggalkan halaman, menyalin, dan menjawab terlalu cepat akan dicatat."
-      ]
-    },
-    "candidate": {
-      "title": "Laporan kandidat",
-      "text": "Hasil satu kandidat: nilainya, apakah lulus, dan skor tiap topik dengan setiap jawaban.",
-      "actions": [
-        "Baca setiap jawaban, dengan tanda integritas: meninggalkan halaman, upaya menyalin, dan jawaban cepat.",
-        "Unduh laporan sebagai PDF, atau bagikan lewat email.",
-        "Beri waktu ekstra sebelum kandidat mulai, misalnya karena disabilitas.",
-        "Tambah atau ubah nama kandidat.",
-        "Salin tautan undangannya untuk kamu kirim sendiri jika email tidak sampai; tautan ini tersedia sampai kandidat selesai.",
-        "Kirim ulang atau cabut undangan, atau hapus kandidat beserta hasilnya."
-      ],
-      "tips": [
-        "Skor mendukung keputusanmu, bukan menggantikannya. Jika kandidat memintanya, minta seseorang meninjau hasilnya."
-      ]
-    },
-    "templates": {
-      "title": "Templat",
-      "text": "Wawancara siap pakai untuk posisi umum. Memakai templat akan menyalinnya ke perusahaan ini sebagai wawancaramu sendiri.",
-      "actions": [
-        "Cari berdasarkan posisi atau topik, dan filter berdasarkan level dan bahasa.",
-        "Buka templat untuk melihat topiknya dan jumlah soal tiap topik.",
-        "Pakai templat untuk memulai wawancara darinya."
-      ],
-      "tips": [
-        "Agar lebih pas, buat wawancara dari deskripsi pekerjaanmu sendiri.",
-        "Setelah disalin, wawancara itu milikmu: ubah soal dan pengaturannya sesukamu."
-      ]
-    },
-    "template": {
-      "title": "Templat",
-      "text": "Wawancara siap pakai: topiknya, subtopiknya, dan jumlah soal tiap topik.",
-      "actions": [
-        "Pastikan topiknya cocok dengan posisi yang sedang kamu rekrut.",
-        "Pakai templat untuk menyalinnya ke perusahaan ini sebagai wawancara baru."
-      ],
-      "tips": [
-        "Menyalin gratis; kandidat yang menjawab memakai kredit seperti biasa.",
-        "Jika topiknya tidak cocok, buat wawancara dari deskripsi pekerjaanmu sendiri."
-      ]
-    },
-    "team": {
-      "title": "Tim",
-      "text": "Orang-orang yang mengelola wawancara perusahaan ini, dan perannya.",
-      "actions": [
-        "Tambah anggota lewat email, sebagai admin atau pelihat: mereka akan menerima email berisi tautan untuk bergabung.",
-        "Ubah peran anggota antara admin dan pelihat.",
-        "Salin tautan undangan yang tertunda, atau hapus anggota atau undangan."
-      ],
-      "tips": [
-        "Admin membuat dan mengubah wawancara, mengundang kandidat, dan mengisi ulang kredit. Pelihat melihat wawancara dan hasil serta membagikan laporan, tetapi tidak mengubah apa pun.",
-        "Menghapus anggota yang kartunya membayar isi ulang otomatis akan menghentikan isi ulang tersebut."
-      ]
-    },
-    "integrations": {
-      "title": "Integrasi",
-      "text": "Hubungkan prepza ke alat yang sudah dipakai timmu. Setiap integrasi membuka halamannya sendiri dengan langkah penyiapan.",
-      "actions": [
-        "Slack: terima notifikasi perusahaanmu di sebuah channel.",
-        "ATS (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): kandidat yang kamu pindahkan ke suatu tahap mendapat wawancara, dan hasilnya dikirim balik.",
-        "API: kunci dan webhook untuk menghubungkan platformmu sendiri.",
-        "Aplikasi AI: pakai prepza dari Claude, ChatGPT, dan aplikasi AI lainnya."
-      ],
-      "tips": [
-        "Semua orang di perusahaan bisa melihat integrasi; pemilik dan admin yang mengubahnya."
-      ]
-    },
-    "ats": {
-      "title": "Integrasi ATS",
-      "text": "Tautkan lowongan di ATS-mu ke sebuah wawancara: kandidat yang kamu pindahkan ke tahap pilihan mendapat wawancara, dan hasilnya kembali sebagai komentar di profilnya.",
-      "actions": [
-        "Hubungkan ATS-mu dengan mengikuti petunjuknya.",
-        "Tautkan lowongan: pilih lowongan, tahapnya, dan wawancara, atau buat wawancara baru dari teks lowongan.",
-        "Undang ulang kandidat yang belum terundang, misalnya saat kredit habis.",
-        "Lepas tautan lowongan, atau putuskan ATS."
-      ],
-      "tips": [
-        "Tambahkan tahap khusus untuk prepza, misalnya “Tes keterampilan prepza”, supaya tidak pernah tercampur dengan alat lainmu.",
-        "prepza tidak pernah memindahkan atau menolak siapa pun di ATS-mu."
-      ]
-    },
-    "slack": {
-      "title": "Slack",
-      "text": "Notifikasi perusahaanmu di channel Slack, begitu terjadi.",
-      "actions": [
-        "Tambahkan prepza ke Slack dan pilih channel-nya, misalnya #hiring.",
-        "Pilih notifikasi yang dikirim ke sana: kandidat selesai, undangan yang tidak terkirim, wawancara siap, dan lainnya.",
-        "Putuskan untuk menghentikannya dan menghapus aplikasi prepza dari Slack-mu."
-      ],
-      "tips": [
-        "prepza hanya bisa memposting ke channel itu; prepza tidak bisa membaca Slack-mu.",
-        "Semua orang tetap melihat setiap notifikasi di ikon lonceng."
-      ]
-    },
-    "api": {
-      "title": "API",
-      "text": "Hubungkan platformmu sendiri, seperti situs karier, ke prepza.",
-      "actions": [
-        "Buat kunci API: atas namamu, kunci ini membuat wawancara, membaca kandidat dan hasilnya, mengundang, mengingatkan, memperbarui, atau menghapus mereka, serta membaca kreditmu.",
-        "Tambahkan webhook: prepza memberi tahu alamat HTTPS-mu, dengan tanda tangan, saat kandidat mulai, selesai (beserta hasilnya), atau dihapus, saat undangannya tidak sampai atau kedaluwarsa, dan saat wawancara siap.",
-        "Kirim event uji ke webhook, dan lihat hasil setiap pengiriman di log pengirimannya.",
-        "Hapus kunci dan webhook yang tidak lagi kamu pakai.",
-        "Buka dokumentasi pengembang untuk setiap endpoint dan event, serta SDK."
-      ],
-      "tips": [
-        "Kunci baru dan secret webhook hanya ditampilkan sekali: segera salin.",
-        "Pilih masa berlaku untuk setiap kunci: kunci bocor yang tidak pernah kedaluwarsa tetap bisa dipakai."
-      ]
-    },
-    "brand": {
-      "title": "Merek",
-      "text": "Logo dan warnamu di undangan, wawancara, dan halaman selesai kandidatmu.",
-      "actions": [
-        "Pasang atau ganti logo.",
-        "Pilih font dan seberapa lengkung kartu dan tombol.",
-        "Pilih warna tiap grup, dan lihat di pratinjau.",
-        "Simpan, atau kembali ke warna prepza."
-      ],
-      "tips": [
-        "Warna yang membuat teks sulit dibaca tidak bisa disimpan, agar setiap kandidat bisa membaca pertanyaannya.",
-        "Anggota yang mencoba wawancara juga melihatnya dengan warnamu."
-      ]
-    },
-    "referrals": {
-      "title": "Referal",
-      "text": "Undang perusahaan lain ke prepza dengan tautan perusahaan ini, dan kalian berdua mendapat kredit.",
-      "actions": [
-        "Salin atau bagikan tautan referalmu.",
-        "Lihat setiap hadiah yang sudah diterima perusahaan ini."
-      ],
-      "tips": [
-        "Kalian berdua mendapat kredit saat perusahaan yang kamu undang melakukan isi ulang pertamanya, berapa pun jumlahnya.",
-        "Kredit masuk ke perusahaan ini dan tidak pernah kedaluwarsa."
-      ]
-    },
-    "billing": {
-      "title": "Tagihan",
-      "text": "Dari mana kredit perusahaan ini berasal dan ke mana perginya.",
-      "actions": [
-        "Isi ulang, atau atur isi ulang otomatis.",
-        "Lihat kandidat yang kreditnya dicadangkan.",
-        "Buka faktur dari isi ulang mana pun."
-      ],
-      "tips": [
-        "Kredit kandidat dicadangkan saat ia diundang, dipotong setelah ia menjawab, dan dikembalikan jika tidak.",
-        "Hanya pemilik dan admin yang bisa melihat halaman ini."
-      ]
-    },
-    "aiApps": {
-      "title": "Aplikasi AI",
-      "text": "Pakai prepza dari chat AI-mu: tanya Claude atau ChatGPT tentang wawancara dan kandidatmu, atau minta mereka membuat perubahan untukmu.",
-      "actions": [
-        "Salin alamat server dan tambahkan ke Claude, Claude Code, atau ChatGPT sesuai langkah-langkahnya.",
-        "Izinkan aplikasinya di halaman prepza yang terbuka.",
-        "Putuskan aplikasi yang tidak kamu pakai lagi."
-      ],
-      "tips": [
-        "Aplikasi bertindak sebagai kamu, di setiap perusahaan tempatmu bergabung. Sebagian besar aplikasi bertanya dulu sebelum mengubah apa pun.",
-        "Aplikasi tidak bisa melihat kata sandi atau kunci API-mu, dan tidak bisa menghapus akunmu atau perusahaan."
-      ]
-    },
-    "topUp": {
-      "title": "Isi ulang",
-      "text": "Beli kredit untuk perusahaan mana pun tempat kamu menjadi pemilik atau admin.",
-      "actions": [
-        "Pilih perusahaan dan paket isi ulang: paket yang lebih besar lebih murah per kandidat.",
-        "Bayar di halaman pembayaran Paddle; kredit masuk dalam hitungan detik.",
-        "Buka harga untuk membandingkan paket isi ulang."
-      ],
-      "tips": [
-        "Satu kandidat memakan 500 kredit: dicadangkan saat ia diundang, dipotong setelah ia menjawab, dan dikembalikan jika tidak.",
-        "Kredit tidak pernah kedaluwarsa. Faktur setiap isi ulang ada di tab Tagihan perusahaan."
-      ]
-    },
-    "settings": {
-      "title": "Pengaturan",
-      "text": "Akunmu sendiri: bahasa yang dipakai prepza denganmu, email yang kamu terima, dan datamu.",
-      "actions": [
-        "Pilih bahasa untuk situs, chat bantuan, dan email yang kamu terima.",
-        "Pilih email opsional mana yang kamu terima; email layanan, seperti undangan, laporan, dan masalah pembayaran, selalu dikirim.",
-        "Unduh semua yang disimpan prepza tentangmu, atau hapus akunmu."
-      ],
-      "tips": [
-        "Menghapus akunmu juga menghapus perusahaan yang hanya berisi kamu. Perusahaan yang sudah diikuti orang lain perlu pemilik lain terlebih dahulu."
-      ]
-    }
+    "tipsTitle": "Tips"
   },
   "companyBilling": {
     "reservedTab": "Dicadangkan ({count})",
@@ -2036,7 +2112,8 @@
       "chargeback": "Chargeback",
       "chargeback_reversed": "Chargeback dibatalkan",
       "referral": "Hadiah referal",
-      "referral_reversed": "Hadiah referal ditarik"
+      "referral_reversed": "Hadiah referal ditarik",
+      "adjustment": "Penyesuaian oleh prepza"
     },
     "automatic": "Isi ulang otomatis",
     "invoice": "Faktur",
@@ -2059,6 +2136,7 @@
     "claudeCode": "Di Claude Code, jalankan:",
     "copyCommand": "Salin perintah",
     "commandCopied": "Perintah tersalin",
+    "moreApps": "Gemini CLI, Cursor, VS Code, Le Chat, dan agenmu sendiri: lihat <link>dokumentasi pengembang</link>.",
     "chatgptDeveloper": "Di ChatGPT, aktifkan mode developer:",
     "chatgptCreate": "Kembali di Apps & Connectors, pilih:",
     "chatgptPaste": "Beri nama {name}, tempel alamat server, lalu pilih autentikasi ini:",
@@ -2124,5 +2202,91 @@
       "authority": "Jika kamu tidak puas dengan jawaban kami, kamu bisa menghubungi Otoritas Perlindungan Konsumen dan Regulasi Teknis Estonia (TTJA)."
     },
     "reviewed": "Terakhir ditinjau: {date}."
+  },
+  "actionLog": {
+    "empty": "Belum ada tindakan.",
+    "noMatches": "Tidak ada tindakan yang cocok dengan filter ini.",
+    "formerMember": "Mantan anggota",
+    "deletedCandidate": "kandidat yang sudah dihapus",
+    "anyMember": "Siapa saja",
+    "anyAction": "Semua tindakan",
+    "member": "Anggota",
+    "action": "Tindakan",
+    "from": "Dari",
+    "to": "Sampai",
+    "groups": {
+      "interviews": "Wawancara",
+      "candidates": "Kandidat",
+      "team": "Tim",
+      "company": "Perusahaan",
+      "billing": "Tagihan",
+      "integrations": "Integrasi"
+    },
+    "actions": {
+      "interview_created": "Membuat wawancara",
+      "interview_from_template": "Membuat wawancara dari template",
+      "interview_deleted": "Menghapus wawancara",
+      "interview_renamed": "Mengganti nama wawancara",
+      "interview_settings_changed": "Mengubah pengaturan wawancara",
+      "link_turned_on": "Menyalakan tautan yang bisa dibagikan",
+      "link_turned_off": "Mematikan tautan yang bisa dibagikan",
+      "questions_regenerated": "Membuat ulang pertanyaan",
+      "answer_key_reported": "Menandai kunci jawaban salah",
+      "topics_approved": "Menyetujui topik wawancara",
+      "pass_mark_changed": "Mengubah nilai lulus",
+      "candidate_invited": "Mengundang kandidat",
+      "invite_resent": "Mengirim ulang undangan",
+      "invite_revoked": "Mencabut undangan",
+      "candidate_deleted": "Menghapus kandidat",
+      "candidate_renamed": "Mengubah nama kandidat",
+      "extra_time_set": "Memberi kandidat waktu tambahan",
+      "results_viewed": "Melihat hasil kandidat",
+      "report_emailed": "Mengirim laporan lewat email",
+      "member_invited": "Mengundang anggota",
+      "member_joined": "Bergabung dengan perusahaan",
+      "member_removed": "Menghapus anggota",
+      "member_role_changed": "Mengubah peran anggota",
+      "ownership_transferred": "Menyerahkan perusahaan ke pemilik lain",
+      "company_renamed": "Mengganti nama perusahaan",
+      "logo_changed": "Mengubah logo",
+      "brand_changed": "Mengubah warna atau gaya merek",
+      "verification_requested": "Meminta verifikasi perusahaan",
+      "ai_apps_changed": "Mengizinkan atau menghentikan aplikasi AI",
+      "top_up_paid": "Mengisi ulang kredit",
+      "auto_top_up_set": "Mengatur isi ulang otomatis",
+      "auto_top_up_changed": "Mengubah isi ulang otomatis",
+      "auto_top_up_stopped": "Menghentikan isi ulang otomatis",
+      "ats_connected": "Menghubungkan ATS",
+      "ats_reconnected": "Menghubungkan ulang ATS",
+      "ats_disconnected": "Memutuskan ATS",
+      "job_linked": "Menautkan lowongan ATS",
+      "job_unlinked": "Melepaskan tautan lowongan ATS",
+      "slack_connected": "Menghubungkan Slack",
+      "slack_disconnected": "Memutuskan Slack",
+      "slack_notifications_changed": "Mengubah notifikasi Slack",
+      "api_key_created": "Membuat kunci API",
+      "api_key_deleted": "Menghapus kunci API",
+      "api_key_narrowed": "Mempersempit hak akses kunci API",
+      "webhook_added": "Menambahkan webhook",
+      "webhook_tested": "Menguji webhook",
+      "webhook_deleted": "Menghapus webhook"
+    },
+    "removed": "dihapus: {permissions}",
+    "permissions": {
+      "interviews:read": "lihat wawancara",
+      "interviews:create": "buat wawancara",
+      "candidates:read": "lihat kandidat",
+      "candidates:invite": "undang kandidat",
+      "candidates:change": "ubah kandidat",
+      "candidates:delete": "hapus kandidat",
+      "credits:read": "lihat kredit",
+      "mcp": "pakai dengan agen AI (MCP)"
+    },
+    "via": {
+      "assistant": "lewat asisten",
+      "mcp": "lewat aplikasi AI",
+      "api": "lewat API",
+      "ats": "lewat ATS"
+    }
   }
 }

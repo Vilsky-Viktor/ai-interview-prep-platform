@@ -107,7 +107,19 @@
     "send": "Invia",
     "thinking": "Sta pensando…",
     "copyId": "Copia ID",
-    "idCopied": "ID copiato"
+    "idCopied": "ID copiato",
+    "copyCode": "Copia codice",
+    "codeCopied": "Codice copiato",
+    "codeLanguage": "Linguaggio del codice",
+    "editor": {
+      "bold": "Grassetto",
+      "italic": "Corsivo",
+      "link": "Link",
+      "bullets": "Elenco puntato",
+      "numbers": "Elenco numerato",
+      "address": "https://…",
+      "addLink": "Aggiungi link"
+    }
   },
   "errors": {
     "title": "Qualcosa è andato storto",
@@ -145,6 +157,7 @@
     "dismiss": "Ignora",
     "fixSent": "Inviata al verificatore. Verrà corretta o sostituita tra poco.",
     "actionFailed": "Non ha funzionato. Riprova.",
+    "questions": "Domande",
     "flagged": "Segnalate",
     "replaced": "Sostituite",
     "noFlagged": "Al momento non c'è nulla di segnalato.",
@@ -174,9 +187,20 @@
     "deleteTitle": "Eliminare questo modello?",
     "deleteText": "I suoi argomenti e le sue domande vengono eliminati. I colloqui che le aziende ne hanno già ricavato restano.",
     "deleteFailed": "Impossibile eliminare il modello. Riprova.",
+    "poolCounts": "{practice} per le simulazioni · {company} per le aziende",
+    "topUp": "Completa",
+    "addQuestions": "Aggiungi domande",
+    "addQuestionsTitle": "Aggiungi domande a ogni argomento",
+    "addQuestionsText": "Ogni argomento riceve questo numero di nuove domande: un terzo per le simulazioni, il resto per le aziende. I colloqui già creati da questo modello mantengono le loro.",
+    "addQuestionsCount": "Domande per argomento",
+    "add": "Aggiungi",
+    "addingQuestions": "Aggiunta delle domande",
+    "questionsAdded": "Domande aggiunte",
+    "addQuestionsFailed": "Impossibile aggiungere le domande. Riprova.",
     "passRates": "Tassi di superamento",
     "controls": "Controlli",
     "stats": "Statistiche",
+    "statsGeneral": "Generale",
     "statsPeriod": "Periodo",
     "statsAllTime": "Da sempre",
     "statsCards": {
@@ -259,11 +283,7 @@
     "deletePostText": "Sparisce dalla pagina delle novità in tutte le lingue.",
     "postSaveFailed": "Impossibile salvare il post. Riprova.",
     "postDeleteFailed": "Impossibile eliminare il post. Riprova.",
-    "companies": "Aziende",
-    "companySearch": "Nome dell'azienda",
-    "companiesNotFound": "Nessuna azienda trovata.",
     "suspended": "Sospesa",
-    "companyDetails": "{members, plural, one {# membro} other {# membri}} · dal {date}",
     "suspend": "Sospendi",
     "unsuspend": "Revoca la sospensione",
     "unsuspended": "La sospensione è stata revocata.",
@@ -296,11 +316,341 @@
     "legalSend": "Comunica la modifica",
     "legalConfirmTitle": "Comunicare via email la modifica a: {document}?",
     "legalAudience": {
-      "everyone": "Chiunque abbia un account prepza la riceve dalla mattina successiva, con l'indicazione che la nuova versione si applica dal {date}. Parte una volta sola e non si può annullare.",
-      "company_editors": "I proprietari e gli amministratori di ogni azienda la ricevono dalla mattina successiva, con l'indicazione che la nuova versione si applica dal {date}. Parte una volta sola e non si può annullare."
+      "everyone": "Chiunque abbia un account prepza la riceve a partire dalla prossima ora di invio (dalle 8:00 alle 18:00 UTC), con l'indicazione che la nuova versione si applica dal {date}, e la vede tra le sue notifiche. Parte una volta sola e non si può annullare.",
+      "company_editors": "I proprietari e gli amministratori di ogni azienda la ricevono a partire dalla prossima ora di invio (dalle 8:00 alle 18:00 UTC), con l'indicazione che la nuova versione si applica dal {date}, e la vedono tra le loro notifiche. Parte una volta sola e non si può annullare."
     },
-    "legalAsked": "La modifica sarà comunicata via email dalla mattina successiva.",
-    "legalFailed": "Impossibile richiedere l'invio. Riprova."
+    "legalAsked": "La modifica sarà comunicata via email a partire dalla prossima ora di invio.",
+    "legalFailed": "Impossibile richiedere l'invio. Riprova.",
+    "support": "Assistenza",
+    "supportSearch": "ID, link, email, ID pagamento o nome dell'azienda",
+    "supportNotFound": "Nessun risultato. Prova l'ID di «copia id», il link della pagina o un'email.",
+    "supportKinds": {
+      "company": "Azienda",
+      "interview": "Colloquio presso {company}",
+      "candidate": "Candidato presso {company}",
+      "user": "Account"
+    },
+    "supportCreated": "Creata",
+    "supportAvailable": "{available} crediti disponibili",
+    "supportHeld": "{reserved} riservati ai candidati",
+    "supportTabs": {
+      "money": "Crediti",
+      "reserved": "Riservati",
+      "interviews": "Colloqui",
+      "members": "Membri",
+      "audit": "Registro attività"
+    },
+    "supportNoInterviews": "Ancora nessun colloquio.",
+    "supportUntitled": "Colloquio ancora in generazione",
+    "supportCandidates": "{count, plural, one {# candidato} other {# candidati}}",
+    "supportJoined": "Entrato",
+    "supportInvited": "Invitato, non ancora entrato",
+    "adjustCredits": "Rettifica crediti",
+    "adjustTitle": "Rettifica i crediti di {name}",
+    "adjustText": "Un importo positivo aggiunge crediti, uno negativo li toglie. L'azienda vede il motivo nella cronologia della fatturazione.",
+    "adjustAmount": "Crediti, ad esempio 500 o -500",
+    "adjustNote": "Motivo, ad esempio «Addebitato due volte per un candidato»",
+    "adjustConfirmTitle": "{amount} crediti per {name}?",
+    "adjustConfirm": "Rettifica",
+    "adjustBack": "Indietro",
+    "adjustNext": "Avanti",
+    "adjusted": "Crediti rettificati",
+    "supportNoEmail": "Account senza email",
+    "supportCompanies": "Aziende",
+    "supportNoCompanies": "Non è membro di nessuna azienda.",
+    "supportTopUps": "Ricariche pagate",
+    "supportNoTopUps": "Nessuna ricarica.",
+    "supportDeletedCompany": "Un'azienda eliminata",
+    "supportNotYet": "Non ancora",
+    "supportFacts": {
+      "company": "Azienda",
+      "interview": "Colloquio",
+      "invited": "Invito",
+      "lastSent": "Ultimo invio dell'invito",
+      "started": "Inizio",
+      "finished": "Fine",
+      "grade": "Punteggio",
+      "extraTime": "Tempo extra",
+      "signals": "Segnalazioni di integrità",
+      "credits": "Crediti",
+      "topics": "Argomenti",
+      "questionSeconds": "Tempo per domanda",
+      "passMark": "Soglia di superamento"
+    },
+    "supportPassed": "{grade}, superato",
+    "supportNotPassed": "{grade}, non superato",
+    "supportNoExtraTime": "Nessuno",
+    "supportSignals": "Uscite dalla pagina: {leaves} · Tentativi di copia: {copies} · Risposte troppo veloci: {fast}",
+    "supportCredits": {
+      "held": "Riservati",
+      "charged": "Addebitati",
+      "released": "Restituiti"
+    },
+    "supportGenerationFailed": "Generazione non riuscita",
+    "supportSeconds": "{count, plural, one {# secondo} other {# secondi}}",
+    "supportNoCandidates": "Ancora nessun candidato.",
+    "campaigns": "Campagne",
+    "newCampaign": "Nuova campagna",
+    "editCampaign": "Modifica",
+    "editCampaignIn": "Modifica in {language}",
+    "campaignInEnglish": "Scrivi in inglese. Dopo il salvataggio viene tradotta in tutte le altre lingue e puoi modificarne una qualsiasi prima dell'invio.",
+    "campaignInLanguage": "Il tuo testo in {language}, inviato così come lo scrivi.",
+    "campaignKind": "Tipo",
+    "campaignKinds": {
+      "updates": "Novità sul prodotto",
+      "promotions": "Offerta"
+    },
+    "campaignSubject": "Oggetto",
+    "campaignSubjectPlaceholder": "Scrivi qui l'oggetto…",
+    "campaignText": "Testo",
+    "campaignTextPlaceholder": "Scrivi qui il testo… Premi Invio per un nuovo paragrafo.",
+    "campaignButton": "Testo del pulsante (facoltativo)",
+    "campaignLink": "Link del pulsante",
+    "campaignLinkPlaceholder": "Link del pulsante su prepza, ad esempio /pricing (facoltativo)",
+    "campaignSaveFailed": "Impossibile salvare la campagna. Riprova.",
+    "noCampaigns": "Ancora nessuna campagna.",
+    "campaignStatus": {
+      "draft": "bozza",
+      "sending": "invio in corso…",
+      "sent": "inviata",
+      "stopped": "fermata"
+    },
+    "campaignRowCounts": {
+      "sent": "{count} inviate",
+      "skipped": "{count} saltate",
+      "failed": "{count} non riuscite",
+      "unsubscribed": "{count} disiscritti",
+      "complained": "{count} segnalate come spam"
+    },
+    "campaignCounts": {
+      "pending": "In attesa",
+      "sent": "Inviate",
+      "skipped": "Saltate",
+      "failed": "Non riuscite",
+      "unsubscribed": "Disiscritti dopo l'invio",
+      "complained": "Segnalazioni di spam"
+    },
+    "campaignRecipients": "<number>{shown}</number> {count, plural, one {destinatario} other {destinatari}}",
+    "campaignPreviewLanguage": "Anteprima in",
+    "sendTest": "Inviami un'email di prova",
+    "testSent": "L'email di prova sta arrivando al tuo indirizzo.",
+    "sendCampaign": "Invia",
+    "stopCampaign": "Ferma",
+    "deleteCampaign": "Elimina campagna",
+    "campaignConfirm": {
+      "send": {
+        "title": "Inviare questa campagna?",
+        "text": "{count, plural, =0 {Al momento non la riceverebbe nessuno.} one {# persona la riceve a partire dalla prossima ora di invio (dalle 8:00 alle 18:00 UTC). Dopo non si può più modificare.} other {# persone la ricevono a partire dalla prossima ora di invio (dalle 8:00 alle 18:00 UTC). Dopo non si può più modificare.}}",
+        "unknown": "Chiunque abbia attivato questo tipo di email la riceve a partire dalla prossima ora di invio (dalle 8:00 alle 18:00 UTC). Dopo non si può più modificare.",
+        "confirm": "Invia"
+      },
+      "stop": {
+        "title": "Fermare questa campagna?",
+        "text": "Nessun altro la riceve. Chi l'ha già ricevuta la conserva.",
+        "confirm": "Ferma"
+      },
+      "delete": {
+        "title": "Eliminare questa campagna?",
+        "text": "Viene eliminata in tutte le lingue. Non è mai stata inviata.",
+        "confirm": "Elimina"
+      }
+    },
+    "sendAsCampaign": "Invia come campagna",
+    "removeSuppression": "Togli dalla lista",
+    "suppressed": {
+      "bounced": "Un'email a questo indirizzo è stata respinta il {date}, quindi le email sul prodotto e gli avvisi non gli vengono più inviati.",
+      "complained": "Questo indirizzo ha segnalato un'email come spam il {date}, quindi le email sul prodotto e gli avvisi non gli vengono più inviati."
+    },
+    "aiCosts": "Costi dell'IA",
+    "aiCards": {
+      "spend": "Spesa",
+      "calls": "Chiamate all'IA",
+      "month": "Questo mese",
+      "monthOf": "Questo mese, su un budget di {budget}",
+      "input": "Token di input",
+      "cached": "Token di input in cache",
+      "output": "Token di output"
+    },
+    "aiBudgetsTitle": "Budget condivisi oggi",
+    "aiNothing": "Niente in questo periodo.",
+    "aiOf": "{used} su {limit}",
+    "aiForTitle": "Per chi",
+    "aiCategories": {
+      "paid": "Aziende paganti",
+      "unpaid": "Aziende non paganti",
+      "no_company": "Senza azienda",
+      "prepza": "prepza"
+    },
+    "aiActionsTitle": "Per azione",
+    "aiActions": {
+      "interview_generation": "Generazione di colloqui",
+      "template_generation": "Generazione di modelli",
+      "question_regeneration": "Rigenerazione di domande",
+      "template_question_regeneration": "Rigenerazione di domande dei modelli",
+      "sample_key_check": "Controlli a campione delle chiavi di correzione",
+      "question_verify": "Controlli delle domande",
+      "key_check_batch": "Controlli delle chiavi di correzione in blocco",
+      "embeddings": "Abbinamento degli argomenti",
+      "news_translation": "Traduzione delle novità",
+      "campaign_translation": "Traduzione delle campagne",
+      "assistant_message": "Messaggi all'assistente",
+      "assistant_title": "Titoli delle chat con l'assistente",
+      "transcription": "Messaggi vocali",
+      "help_chat": "Chat di aiuto"
+    },
+    "aiUnitCost": {
+      "interview_generation": "{cost} per colloquio",
+      "template_generation": "{cost} per generazione di modello",
+      "question_regeneration": "{cost} per domanda",
+      "template_question_regeneration": "{cost} per domanda",
+      "sample_key_check": "{cost} per test",
+      "question_verify": "{cost} per domanda",
+      "key_check_batch": "{cost} per controllo",
+      "embeddings": "{cost} per richiesta",
+      "news_translation": "{cost} per post",
+      "campaign_translation": "{cost} per campagna",
+      "assistant_message": "{cost} per conversazione",
+      "assistant_title": "{cost} per conversazione",
+      "transcription": "{cost} al minuto",
+      "help_chat": "{cost} per chiamata"
+    },
+    "aiPaid": "paganti {spend}",
+    "aiUnpaid": "non paganti {spend}",
+    "aiCalls": "{count, plural, one {# chiamata} other {# chiamate}}",
+    "aiModelsTitle": "Per modello",
+    "aiTokensIn": "{count} in input",
+    "aiCachedShare": "{share} in cache",
+    "aiTokensOut": "{count} in output",
+    "aiCompaniesTitle": "Aziende che costano di più",
+    "aiUsersTitle": "Utenti che costano di più",
+    "aiByMonthTitle": "Per mese",
+    "aiByDayTitle": "Per giorno",
+    "limitsOursTitle": "I nostri limiti raggiunti",
+    "limitsProvidersTitle": "Limiti dei fornitori",
+    "limitsNoHits": "Nessun limite raggiunto in questo periodo.",
+    "limitNames": {
+      "MESSAGES_PER_USER_HOUR": "Messaggi all'assistente per utente all'ora",
+      "MESSAGES_PER_USER_DAY": "Messaggi all'assistente per utente al giorno",
+      "MESSAGES_PER_COMPANY_DAY": "Messaggi all'assistente per azienda al giorno",
+      "MESSAGES_PER_DAY": "Messaggi all'assistente al giorno, tutti gli utenti non paganti insieme",
+      "TOKENS_PER_USER_DAY": "Token dell'assistente per utente al giorno",
+      "TOKENS_PER_COMPANY_DAY": "Token dell'assistente per azienda al giorno",
+      "TOKENS_PER_DAY": "Token dell'assistente al giorno, tutti gli utenti non paganti insieme",
+      "TRANSCRIPTIONS_PER_USER_HOUR": "Messaggi vocali per utente all'ora",
+      "ACTIONS_PER_USER_HOUR": "Azioni dell'assistente per utente all'ora",
+      "MCP_CALLS_PER_USER_MINUTE": "Chiamate delle app IA per utente al minuto",
+      "MCP_CALLS_PER_USER_DAY": "Chiamate delle app IA per utente al giorno",
+      "REGISTRATIONS_PER_IP_HOUR": "Registrazioni di app IA per indirizzo all'ora",
+      "REGISTRATIONS_PER_DAY": "Registrazioni di app IA al giorno, tutti insieme",
+      "AUTHORIZATIONS_PER_IP_HOUR": "Richieste di collegamento di app IA per indirizzo all'ora",
+      "TOKEN_REQUESTS_PER_CLIENT_MINUTE": "Richieste di token delle app IA per app al minuto",
+      "APPROVALS_PER_USER_HOUR": "Collegamenti di app IA consentiti per utente all'ora",
+      "MAX_OWNED_COMPANIES": "Aziende che una persona può possedere",
+      "INTERVIEWS_PER_DAY": "Colloqui generati per azienda al giorno",
+      "INTERVIEWS_PER_DAY_UNPAID": "Colloqui generati per azienda non pagante al giorno",
+      "MAX_INTERVIEWS_WITHOUT_CANDIDATES": "Colloqui generati in attesa senza candidati",
+      "MAX_INTERVIEWS_WITHOUT_CANDIDATES_UNPAID": "Colloqui generati in attesa senza candidati, aziende non paganti",
+      "PREVIEWS_PER_USER_HOUR": "Anteprime dei colloqui per utente all'ora",
+      "LINK_STARTS_PER_HOUR": "Avvii tramite il link di un colloquio all'ora",
+      "LINK_STARTS_PER_IP_HOUR": "Avvii tramite link per indirizzo all'ora",
+      "MAX_BULK_INVITES": "Candidati in una lista o in un file",
+      "MAX_PENDING_INVITES": "Inviti al team in sospeso per azienda",
+      "MEMBER_INVITES_PER_UNPAID_DAY": "Inviti al team per azienda non pagante al giorno",
+      "EMAIL_HOURLY_LIMIT": "Email di invito per utente all'ora",
+      "EMAIL_DAILY_LIMIT": "Email di invito per utente al giorno",
+      "EMAIL_RECIPIENT_DAILY_LIMIT": "Inviti a uno stesso indirizzo per uno stesso test al giorno",
+      "REPORT_EMAILS_PER_COMPANY_DAY": "Email dei report per azienda al giorno",
+      "GENERATION_LIMIT": "Generazioni per utente al giorno",
+      "REGENERATION_LIMIT": "Domande rigenerate per utente al giorno",
+      "DAILY_GENERATION_LIMIT": "Generazioni al giorno, tutte le aziende non paganti insieme",
+      "MAX_TOPIC_REVISIONS": "Revisioni degli argomenti per generazione",
+      "DAILY_VERIFY_LIMIT": "Controlli delle domande al giorno",
+      "PRACTICE_ROUNDS_PER_HOUR": "Simulazioni per utente all'ora",
+      "SIGNALS_PER_MINUTE": "Segnalazioni di integrità per sessione al minuto",
+      "MAX_SIGNALS_PER_QUESTION": "Segnalazioni di integrità conservate per domanda",
+      "HELP_USER_LIMIT": "Messaggi alla chat di aiuto per account all'ora",
+      "HELP_IP_LIMIT": "Messaggi alla chat di aiuto per indirizzo all'ora",
+      "HELP_DAILY_LIMIT": "Messaggi alla chat di aiuto al giorno, tutti insieme",
+      "HELP_TOKENS_PER_DAY": "Token della chat di aiuto al giorno, tutti insieme",
+      "CONTACT_IP_LIMIT": "Messaggi di contatto per indirizzo al giorno",
+      "CONTACT_DAILY_LIMIT": "Messaggi di contatto al giorno, tutti insieme",
+      "RATINGS_PER_DAY": "Valutazioni delle domande per utente al giorno",
+      "REPORTS_PER_DAY": "Segnalazioni di domande per utente al giorno",
+      "MAX_API_KEYS": "Chiavi API per azienda",
+      "MAX_WEBHOOKS": "Webhook per azienda",
+      "API_REQUESTS_PER_MINUTE": "Richieste API per azienda al minuto",
+      "RESEND_DAILY_LIMIT": "Email al giorno tramite Resend",
+      "RESEND_RESERVE_PERCENT": "Quota delle email giornaliere tramite Resend tenuta fuori dagli invii massivi",
+      "CAMPAIGNS_PER_KIND_DAY": "Campagne di ciascun tipo al giorno",
+      "AI_SPEND_UNPAID_DAY": "Spesa per l'IA al giorno, tutti gli utenti non paganti insieme",
+      "QUESTION_SECONDS_BASIC": "Secondi per domanda, nuovi test di livello base",
+      "QUESTION_SECONDS_MEDIUM": "Secondi per domanda, nuovi test di livello intermedio",
+      "QUESTION_SECONDS_HARD": "Secondi per domanda, nuovi test di livello difficile",
+      "GENERATION_CALLS_AT_ONCE": "Chiamate all'IA contemporanee per generazione",
+      "GENERATION_CALLS_PER_SECOND": "Chiamate all'IA al secondo, tutte le generazioni insieme",
+      "MULTI_ANSWER_PERCENT": "Domande «Seleziona tutte le opzioni corrette», quota di ogni argomento",
+      "PAUSED": "Rifiutati durante la pausa",
+      "OPENAI_RATE_LIMIT": "Limite di frequenza di OpenAI",
+      "OPENAI_QUOTA": "Credito OpenAI esaurito",
+      "OPENAI_THROTTLED": "In attesa del nostro limite di richieste OpenAI",
+      "RESEND_RATE_LIMIT": "Limite di frequenza di Resend",
+      "RESEND_DAILY_QUOTA": "Quota giornaliera di Resend",
+      "ATS_RATE_LIMIT": "Limite di frequenza dell'ATS",
+      "FIREBASE_TOKEN_REFUSED": "Accesso Firebase rifiutato"
+    },
+    "limitValue": "{value} {window}",
+    "limitWindows": {
+      "60": "al minuto",
+      "3600": "all'ora",
+      "86400": "al giorno",
+      "1209600": "per revisione degli argomenti"
+    },
+    "limitKinds": {
+      "ours": "prepza",
+      "openai": "OpenAI",
+      "resend": "Resend",
+      "firebase": "Firebase",
+      "workable": "Workable",
+      "greenhouse": "Greenhouse",
+      "teamtailor": "Teamtailor",
+      "recruitee": "Recruitee",
+      "breezy": "Breezy HR"
+    },
+    "limitHitter": "{name} ({count})",
+    "limitHits": "{count, plural, one {raggiunto # volta} other {raggiunto # volte}}",
+    "limitsTitle": "Limiti",
+    "limitsText": "Quanto si può usare e i valori con cui lavorano i servizi, per servizio. Una modifica entra in vigore entro un minuto.",
+    "limitServices": {
+      "assistant": "Assistente",
+      "companies": "Aziende",
+      "generation": "Generazione",
+      "rounds": "Simulazioni, sessioni e chat di aiuto",
+      "library": "Feedback sulle domande",
+      "api": "API pubblica",
+      "notifications": "Email",
+      "billing": "Spesa per l'IA"
+    },
+    "limitAtOnce": "alla volta",
+    "limitScopes": {
+      "user": "per utente",
+      "company": "per azienda",
+      "ip": "per indirizzo",
+      "everyone": "tutti insieme"
+    },
+    "limitDefault": "predefinito {value}",
+    "limitSecondsUnit": "s",
+    "limitRecentHits": "{count, plural, one {raggiunto # volta} other {raggiunto # volte}} in {days} giorni",
+    "limitPaid": "Paganti",
+    "limitUnpaid": "Non paganti",
+    "limitSave": "Salva",
+    "limitReset": "Ripristina il predefinito",
+    "limitSaved": "Limite salvato.",
+    "limitFailed": "Impossibile salvare il limite. Riprova.",
+    "limitChangesTitle": "Modifiche",
+    "limitNoChanges": "Ancora nessun limite modificato.",
+    "limitChange": "{name}: da {from} a {to}",
+    "limitDefaultValue": "predefinito",
+    "supportAiSpend": "Costo dell'IA {spend} negli ultimi {days} giorni, {count, plural, one {# chiamata} other {# chiamate}}."
   },
   "templates": {
     "title": "Modelli",
@@ -363,10 +713,12 @@
   "reportReasons": {
     "wrong_answer": "La risposta indicata è sbagliata",
     "unclear": "La domanda non è chiara",
+    "hard_to_read": "È difficile da leggere",
     "off_topic": "Non c'entra con l'argomento",
     "other": "Altro"
   },
   "questions": {
+    "multiChoice": "Risposta multipla",
     "goodQuestion": "Domanda utile?",
     "ratingFailed": "Impossibile salvare la valutazione. Riprova.",
     "helpful": "Domanda utile",
@@ -413,6 +765,10 @@
     "correct": "Corretta",
     "incorrect": "Sbagliata",
     "notAnswered": "Senza risposta",
+    "partlyCorrect": "Parzialmente corretta",
+    "rightPicks": "Opzioni corrette: {right} su {total}",
+    "wrongPicks": "{count, plural, one {# opzione sbagliata} other {# opzioni sbagliate}}",
+    "points": "Punteggio: {points} su 1",
     "finish": "Termina",
     "finishing": "Chiusura…",
     "next": "Domanda successiva",
@@ -424,6 +780,7 @@
     "finishFailed": "Impossibile terminare il colloquio. Riprova.",
     "continueFailed": "Impossibile continuare. Riprova.",
     "timeUp": "Il tempo per questa domanda è scaduto.",
+    "selectAll": "Seleziona tutte le opzioni corrette",
     "finish": "Termina il colloquio",
     "finishTitle": "Terminare l'intero colloquio?",
     "endsAll": "In questo modo terminano tutte le {count} sezioni, non solo questa.",
@@ -498,6 +855,7 @@
     "interviews": "Colloqui",
     "templates": "Modelli",
     "team": "Team",
+    "actions": "Registro attività",
     "integrations": "Integrazioni",
     "referrals": "Referral",
     "brand": "Brand",
@@ -629,10 +987,12 @@
       "many": "più",
       "file": "carica"
     },
-    "manyHint": "Un candidato per riga, con o senza nome,\nfino a 100 alla volta:",
+    "manyHint": "Un candidato per riga, con o senza nome,\nfino a {count} alla volta:",
+    "manyHintNoLimit": "Un candidato per riga, con o senza nome:",
     "example": "esempio",
     "uploadFile": "Carica un file",
-    "fileFormats": "CSV o TXT, fino a 100 candidati. I nomi possono stare in una colonna del nome o accanto a ogni email.",
+    "fileFormats": "CSV o TXT, fino a {count} candidati. I nomi possono stare in una colonna del nome o accanto a ogni email.",
+    "fileFormatsNoLimit": "CSV o TXT. I nomi possono stare in una colonna del nome o accanto a ogni email.",
     "fileTooLarge": "Il file è troppo grande (max {kb} KB).",
     "lineProblems": {
       "no_email": "Nessuna email trovata: {line}",
@@ -657,8 +1017,10 @@
     "signInToStart": "Accedi per iniziare",
     "fallbackTitle": "un colloquio",
     "timePerQuestion": "Tempo per domanda:",
-    "secondsUnit": "s",
-    "pickOne": "Per ogni domanda scegli una delle quattro opzioni.",
+    "secondsUnit": "sec",
+    "wholeInterview": "Colloquio completo:",
+    "minutesUnit": "min",
+    "pickOne": "Per ogni domanda scegli una delle quattro opzioni. Dove compare «Seleziona tutte le opzioni corrette», spunta ogni opzione corretta: ognuna vale una parte del punto della domanda, e una spunta sbagliata non vale nulla.",
     "changePick": "Puoi cambiare la tua scelta finché non premi «Domanda successiva».",
     "timeRunsOut": "Quando il tempo di una domanda scade, conta la tua scelta e si apre la successiva; senza scelta, conta come sbagliata. Il tempo continua a scorrere anche se esci.",
     "unanswered": "Le domande senza risposta contano come sbagliate.",
@@ -1106,8 +1468,19 @@
       "ats_cannot_write": "{ats} non accetta i risultati dei candidati: la chiave non ha accesso in scrittura. Ricollegalo con una chiave che può scrivere; i risultati vengono conservati e inviati allora.",
       "connection_broken": "{name} ha smesso di funzionare e va ricollegato. Fino ad allora, {integration, select, slack {le notifiche non arrivano al tuo canale} other {i candidati che invia restano in attesa e i loro risultati vengono conservati}}.",
       "webhook_stopped": "Il webhook verso {url} si è fermato: il membro che l'ha aggiunto non è più proprietario né amministratore. Aggiungilo di nuovo per continuare a ricevere i risultati.",
-      "ownership_received": "Ora sei il proprietario di «{name}»."
-    }
+      "ownership_received": "Ora sei il proprietario di «{name}».",
+      "news": "Novità: {title}",
+      "legal_terms": "I nuovi termini si applicano dal {date}.",
+      "legal_privacy": "Una nuova informativa sulla privacy si applica dal {date}.",
+      "legal_dpa": "Un nuovo accordo sul trattamento dei dati si applica dal {date}."
+    },
+    "legalBanner": {
+      "terms": "I termini di prepza cambiano il {date}.",
+      "privacy": "L'informativa sulla privacy di prepza cambia il {date}.",
+      "dpa": "L'accordo sul trattamento dei dati cambia il {date}."
+    },
+    "readLegal": "Leggi la nuova versione",
+    "closeLegalBanner": "Chiudi"
   },
   "report": {
     "download": "Scarica PDF",
@@ -1144,7 +1517,7 @@
     "continue": "Continua",
     "history": "Le tue simulazioni",
     "results": "Risultati della simulazione",
-    "grade": "delle domande corrette",
+    "grade": "dei punti possibili",
     "notFinished": "non terminato",
     "noRounds": "Ancora nessuna simulazione.",
     "startFailed": "Impossibile avviare la simulazione. Riprova.",
@@ -1332,7 +1705,7 @@
     "counts": "{keys, plural, one {# chiave} other {# chiavi}} · {webhooks, plural, one {# webhook} other {# webhook}}",
     "docs": "Documentazione per sviluppatori",
     "keysTitle": "Chiavi API",
-    "keysText": "Una chiave legge i tuoi colloqui e candidati e invita candidati a nome della persona che l'ha creata.",
+    "keysText": "Una chiave agisce come la persona che l'ha creata e può fare solo ciò che i suoi permessi consentono.",
     "noKeys": "Ancora nessuna chiave.",
     "newKey": "Nuova chiave",
     "newKeyTitle": "Nuova chiave API",
@@ -1391,7 +1764,37 @@
     "removeWebhookTitle": "Eliminare questo webhook?",
     "removeWebhookText": "{url} non riceverà più eventi.",
     "createFailed": "Impossibile crearlo.",
-    "removeFailed": "Impossibile eliminarlo."
+    "removeFailed": "Impossibile eliminarlo.",
+    "selectAll": "Seleziona tutto",
+    "permissionGroups": {
+      "interviews": "Colloqui",
+      "candidates": "Candidati",
+      "credits": "Crediti",
+      "ai_agents": "Agenti IA"
+    },
+    "permissions": {
+      "interviews:read": "Lettura",
+      "interviews:create": "Creazione",
+      "candidates:read": "Lettura",
+      "candidates:invite": "Invito",
+      "candidates:change": "Modifica",
+      "candidates:delete": "Eliminazione",
+      "credits:read": "Lettura",
+      "mcp": "Uso con agenti IA (MCP)"
+    },
+    "permissionLine": {
+      "interviews:read": "lettura",
+      "interviews:create": "creazione",
+      "candidates:read": "lettura",
+      "candidates:invite": "invito",
+      "candidates:change": "modifica",
+      "candidates:delete": "eliminazione",
+      "credits:read": "lettura",
+      "mcp": "MCP"
+    },
+    "editPermissions": "Modifica permessi",
+    "editPermissionsText": "Togli la spunta a ciò che non serve più a «{name}». Per aggiungere un permesso, crea una nuova chiave.",
+    "permissionsFailed": "Impossibile salvare i permessi."
   },
   "brand": {
     "logoTitle": "Logo",
@@ -1460,7 +1863,8 @@
     "tabs": {
       "api": "API",
       "webhooks": "Webhook",
-      "sdk": "SDK"
+      "sdk": "SDK",
+      "mcp": "MCP"
     },
     "englishOnly": "Questa pagina è disponibile solo in inglese.",
     "baseUrl": "URL di base",
@@ -1513,6 +1917,7 @@
     "emptyTitle": "Chiedi delle tue assunzioni",
     "emptyText": "Candidati, colloqui, crediti, integrazioni e come funziona prepza, in base a ciò che vedi nelle tue aziende. L'IA può sbagliare; fanno fede le pagine a cui rimanda.",
     "emptyTitleFaq": "Chiedi di prepza",
+    "pageQuestion": "Cosa posso fare in questa pagina?",
     "pages": {
       "open": "Apri",
       "pricing": "Prezzi",
@@ -1691,336 +2096,7 @@
   "pageHelp": {
     "label": "Informazioni su questa pagina",
     "actionsTitle": "Cosa puoi fare",
-    "tipsTitle": "Suggerimenti",
-    "landing": {
-      "title": "Come funziona prepza",
-      "text": "prepza trasforma la descrizione del ruolo in un colloquio a scelta multipla a tempo, con domande casuali diverse per ogni candidato.",
-      "actions": [
-        "Incolla la descrizione del ruolo: prepza propone gli argomenti da valutare.",
-        "Rivedi gli argomenti: tienili, modificali o eliminali, poi approvali per far scrivere le domande.",
-        "Invita i candidati via email, da un file o con un unico link condivisibile.",
-        "Leggi i report: candidati ordinati per punteggio, con ogni risposta e le segnalazioni di integrità."
-      ],
-      "tips": [
-        "Creare colloqui è gratis. Paghi $2–5 per ogni candidato che risponde, e i tuoi primi candidati sono gratis.",
-        "Prova il tuo colloquio come candidato prima di invitare qualcuno."
-      ]
-    },
-    "companies": {
-      "title": "Aziende",
-      "text": "Le tue aziende. Tutto ciò che fai in prepza avviene dentro un'azienda: i suoi colloqui, candidati, team, crediti e integrazioni.",
-      "actions": [
-        "Crea un'azienda con «Nuova azienda». Il suo nome è unico in prepza.",
-        "Apri un'azienda per lavorare sui suoi colloqui e candidati.",
-        "Rimuovi un'azienda di cui sei proprietario, con tutti i suoi colloqui e inviti."
-      ],
-      "tips": [
-        "Accanto a ogni azienda di cui non sei proprietario compare il tuo ruolo: gli amministratori modificano, i visualizzatori possono solo guardare.",
-        "I crediti appartengono a un'azienda, quindi ognuna si ricarica separatamente."
-      ]
-    },
-    "pickCompany": {
-      "title": "Scegli un'azienda",
-      "text": "Hai scelto un modello. Scegli l'azienda a cui è destinato: il modello viene copiato lì come nuovo colloquio, gratis e pronto da inviare ai candidati.",
-      "actions": [
-        "Scegli un'azienda per aprirvi il modello, poi usalo.",
-        "Crea una nuova azienda se non ne hai ancora una; il modello si apre lì."
-      ],
-      "tips": [
-        "Una volta copiato, il colloquio appartiene all'azienda: modifica domande e impostazioni come preferisci."
-      ]
-    },
-    "interviews": {
-      "title": "Colloqui",
-      "text": "Tutti i colloqui di questa azienda e i suoi crediti per i candidati. Ogni colloquio è un test a tempo creato da una descrizione del ruolo.",
-      "actions": [
-        "Crea un colloquio da una descrizione del ruolo con «Nuovo colloquio».",
-        "Apri un colloquio per vederne argomenti, candidati e impostazioni.",
-        "Prova un colloquio come candidato, oppure eliminalo.",
-        "Ricarica i crediti dal saldo, o attiva la ricarica automatica nella scheda Fatturazione."
-      ],
-      "tips": [
-        "Il saldo diventa ambra quando i crediti stanno per finire. Senza crediti, i nuovi inviti non vengono inviati.",
-        "Le schede in alto portano a modelli, team, integrazioni, fatturazione (proprietari e amministratori) e referral."
-      ]
-    },
-    "newInterview": {
-      "title": "Nuovo colloquio",
-      "text": "Crea un colloquio dalla descrizione del ruolo. prepza la legge, propone gli argomenti da valutare e scrive le domande dopo che li approvi.",
-      "actions": [
-        "Incolla la descrizione del ruolo: la posizione, i requisiti e i requisiti preferenziali.",
-        "Scegli la lingua in cui generare il colloquio.",
-        "Genera, poi rivedi gli argomenti proposti."
-      ],
-      "tips": [
-        "Più la descrizione è specifica, più le domande si adattano al ruolo.",
-        "Generare è gratis: paghi solo per i candidati che rispondono."
-      ]
-    },
-    "reviewTopics": {
-      "title": "Rivedi i tuoi argomenti",
-      "text": "prepza ha proposto questi argomenti dalla tua descrizione. Ogni argomento che tieni riceve il suo insieme di domande con risposte.",
-      "actions": [
-        "Deseleziona gli argomenti che non ti servono.",
-        "Modifica il nome e i sottoargomenti di un argomento con la sua matita.",
-        "Descrivi le modifiche con parole tue e applicale, ad esempio «aggiungi un argomento sulla leadership del team».",
-        "Approva e genera per far scrivere le domande."
-      ],
-      "tips": [
-        "Se gli argomenti sono troppi, deselezionane alcuni o descrivi come unirli.",
-        "Le domande vengono scritte solo dopo la tua approvazione, quindi prenditi un minuto qui."
-      ]
-    },
-    "generating": {
-      "title": "In generazione",
-      "text": "prepza sta creando il tuo colloquio: prima gli argomenti, poi le domande per ciascuno. Ci vuole qualche minuto.",
-      "actions": [
-        "Puoi lasciare questa pagina: la generazione continua.",
-        "Annulla la generazione se non ti serve più; nulla di quanto creato finora viene conservato."
-      ],
-      "tips": [
-        "Ricevi una notifica quando il colloquio è pronto.",
-        "Torna quando vuoi dall'elenco dei colloqui."
-      ]
-    },
-    "interviewTopics": {
-      "title": "Argomenti",
-      "text": "Cosa valuta questo colloquio: i suoi argomenti, ognuno con sottoargomenti e un proprio insieme di domande. Ogni candidato riceve una selezione casuale da ciascun insieme.",
-      "actions": [
-        "Apri «Gestisci domande» per leggere le domande e le risposte di un argomento.",
-        "Rigenera una domanda debole, segna una risposta sbagliata o leggi le segnalazioni dei candidati su una domanda.",
-        "Stabilisci quante domande riceve ogni candidato da un argomento.",
-        "Prova il colloquio come candidato, oppure eliminalo."
-      ],
-      "tips": [
-        "Le domande scritte dall'IA possono essere sbagliate: scorri ogni argomento prima di invitare qualcuno.",
-        "Fai clic sul titolo per rinominare il colloquio."
-      ]
-    },
-    "interviewCandidates": {
-      "title": "Candidati",
-      "text": "Tutte le persone invitate a questo colloquio, con stato, avanzamento e punteggio.",
-      "actions": [
-        "Invita i candidati: uno alla volta, un elenco fino a 100, o un file CSV o TXT.",
-        "Attiva il link condivisibile per un annuncio di lavoro: chiunque lo abbia può sostenere il colloquio.",
-        "Cerca per email o nome, filtra per stato e ordina per punteggio o data.",
-        "Apri il report di un candidato, oppure scarica o condividi il report su tutti i candidati."
-      ],
-      "tips": [
-        "Ogni candidato che risponde ad almeno una domanda consuma crediti, compresi quelli arrivati dal link.",
-        "I promemoria vengono inviati ai candidati automaticamente."
-      ]
-    },
-    "interviewSettings": {
-      "title": "Impostazioni",
-      "text": "Come si svolge questo colloquio per ogni candidato.",
-      "actions": [
-        "Imposta il tempo per domanda, in secondi.",
-        "Imposta la soglia di superamento: i candidati che la raggiungono superano il colloquio.",
-        "Segna il colloquio come assunto quando hai coperto la posizione."
-      ],
-      "tips": [
-        "Ogni impostazione viene salvata appena esci dal suo campo.",
-        "I candidati non vedono mai i loro punteggi; li vede solo il tuo team.",
-        "Per un candidato che ha bisogno di più tempo, aggiungi tempo extra nella sua pagina."
-      ]
-    },
-    "tryInterview": {
-      "title": "Prova come candidato",
-      "text": "Un'anteprima di questo colloquio esattamente come lo vedono i candidati: l'introduzione, poi le domande a tempo. È gratis.",
-      "actions": [
-        "Avvia l'anteprima e rispondi come farebbe un candidato.",
-        "Controlla i tempi, la formulazione e le risposte prima di invitare qualcuno."
-      ],
-      "tips": [
-        "Resta sulla pagina mentre rispondi: per i candidati vengono registrati l'uscita dalla pagina, la copia e le risposte troppo veloci."
-      ]
-    },
-    "candidate": {
-      "title": "Report del candidato",
-      "text": "I risultati di un candidato: il punteggio, se ha superato il colloquio e il punteggio di ogni argomento con ogni risposta.",
-      "actions": [
-        "Leggi ogni risposta, con le segnalazioni di integrità: uscite dalla pagina, tentativi di copia e risposte troppo veloci.",
-        "Scarica il report in PDF o condividilo via email.",
-        "Concedi tempo extra prima che inizi, ad esempio per una disabilità.",
-        "Aggiungi o modifica il nome del candidato.",
-        "Copia il suo link d'invito per inviarlo tu, se l'email non è arrivata; resta disponibile finché il candidato non ha finito.",
-        "Invia di nuovo o revoca l'invito, oppure elimina il candidato con i suoi risultati."
-      ],
-      "tips": [
-        "Il punteggio supporta la tua decisione, non la prende al posto tuo. Se il candidato lo chiede, fai rivedere il suo risultato da una persona."
-      ]
-    },
-    "templates": {
-      "title": "Modelli",
-      "text": "Colloqui pronti per i ruoli più comuni. Usarne uno lo copia in questa azienda come tuo colloquio.",
-      "actions": [
-        "Cerca per ruolo o argomento, e filtra per livello e lingua.",
-        "Apri un modello per vederne gli argomenti e quante domande ha ciascuno.",
-        "Usa un modello per avviare un colloquio a partire da esso."
-      ],
-      "tips": [
-        "Per un risultato più mirato, crea invece un colloquio dalla tua descrizione del ruolo.",
-        "Una volta copiato, il colloquio è tuo: modifica domande e impostazioni come preferisci."
-      ]
-    },
-    "template": {
-      "title": "Modello",
-      "text": "Un colloquio pronto: i suoi argomenti, i loro sottoargomenti e quante domande ha ogni argomento.",
-      "actions": [
-        "Verifica che gli argomenti corrispondano al ruolo per cui stai assumendo.",
-        "Usa il modello per copiarlo in questa azienda come nuovo colloquio."
-      ],
-      "tips": [
-        "Copiare è gratis; i candidati che rispondono consumano crediti come sempre.",
-        "Se gli argomenti non vanno bene, crea invece un colloquio dalla tua descrizione del ruolo."
-      ]
-    },
-    "team": {
-      "title": "Team",
-      "text": "Le persone che lavorano ai colloqui di questa azienda e i loro ruoli.",
-      "actions": [
-        "Aggiungi un membro via email, come amministratore o visualizzatore: riceverà via email un link per unirsi.",
-        "Cambia il ruolo di un membro tra amministratore e visualizzatore.",
-        "Copia il link di un invito in sospeso, oppure rimuovi un membro o un invito."
-      ],
-      "tips": [
-        "Gli amministratori creano e modificano i colloqui, invitano i candidati e ricaricano i crediti. I visualizzatori vedono colloqui e risultati e condividono i report, ma non modificano nulla.",
-        "Rimuovere un membro la cui carta paga le ricariche automatiche interrompe quelle ricariche."
-      ]
-    },
-    "integrations": {
-      "title": "Integrazioni",
-      "text": "Collega prepza agli strumenti che il tuo team usa già. Ogni integrazione apre una propria pagina con i passaggi di configurazione.",
-      "actions": [
-        "Slack: ricevi le notifiche della tua azienda in un canale.",
-        "ATS (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): i candidati che sposti in una fase ricevono il colloquio, e i loro risultati tornano indietro.",
-        "API: chiavi e webhook per collegare la tua piattaforma.",
-        "App IA: usa prepza da Claude, ChatGPT e altre app di IA."
-      ],
-      "tips": [
-        "Tutti nell'azienda vedono le integrazioni; proprietari e amministratori le modificano."
-      ]
-    },
-    "ats": {
-      "title": "Integrazione ATS",
-      "text": "Collega una posizione del tuo ATS a un colloquio: i candidati che sposti nella fase scelta ricevono il colloquio, e i loro risultati tornano come commento sul loro profilo.",
-      "actions": [
-        "Collega il tuo ATS seguendo le sue istruzioni.",
-        "Collega una posizione: scegli la posizione, la sua fase e un colloquio, oppure crea un nuovo colloquio dal testo della posizione.",
-        "Invita di nuovo i candidati che non sono stati invitati, ad esempio quando i crediti erano finiti.",
-        "Rimuovi il collegamento di una posizione, oppure scollega l'ATS."
-      ],
-      "tips": [
-        "Aggiungi una fase solo per prepza, come «Test delle competenze prepza», così non si mescola mai con gli altri tuoi strumenti.",
-        "prepza non sposta né scarta mai nessuno nel tuo ATS."
-      ]
-    },
-    "slack": {
-      "title": "Slack",
-      "text": "Le notifiche della tua azienda in un canale Slack, in tempo reale.",
-      "actions": [
-        "Aggiungi prepza a Slack e scegli il canale, ad esempio #hiring.",
-        "Scegli quali notifiche arrivano lì: un candidato che finisce, un invito non consegnato, un colloquio pronto e altro.",
-        "Scollega per fermarle e rimuovere l'app di prepza dal tuo Slack."
-      ],
-      "tips": [
-        "prepza può solo pubblicare in quel canale; non può leggere il tuo Slack.",
-        "Tutti continuano a vedere ogni notifica nella campanella."
-      ]
-    },
-    "api": {
-      "title": "API",
-      "text": "Collega a prepza la tua piattaforma, ad esempio il tuo sito carriere.",
-      "actions": [
-        "Crea una chiave API: a tuo nome, crea colloqui, legge i candidati e i loro risultati, li invita, invia loro promemoria, li aggiorna o li rimuove, e legge i tuoi crediti.",
-        "Aggiungi un webhook: prepza avvisa il tuo indirizzo HTTPS, con firma, quando un candidato inizia, termina (con i suoi risultati) o viene rimosso, quando il suo invito non gli arriva o scade, e quando un colloquio è pronto.",
-        "Invia un evento di test a un webhook e guarda nel suo registro delle consegne com'è andato ogni invio.",
-        "Elimina le chiavi e i webhook che non usi più.",
-        "Apri la documentazione per sviluppatori con ogni endpoint ed evento, e l'SDK."
-      ],
-      "tips": [
-        "Una nuova chiave e il secret di un webhook vengono mostrati una sola volta: copiali subito.",
-        "Scegli una scadenza per ogni chiave: una chiave trapelata che non scade mai resta utilizzabile."
-      ]
-    },
-    "brand": {
-      "title": "Brand",
-      "text": "Il tuo logo e i tuoi colori nell'invito, nel colloquio e nella pagina finale dei tuoi candidati.",
-      "actions": [
-        "Imposta o cambia il logo.",
-        "Scegli il carattere e quanto sono arrotondati schede e pulsanti.",
-        "Scegli i colori di ogni gruppo e guardali nell'anteprima.",
-        "Salvali, o torna ai colori di prepza."
-      ],
-      "tips": [
-        "I colori che renderebbero il testo difficile da leggere non si possono salvare, così ogni candidato può leggere le domande.",
-        "Anche i membri del team che provano un colloquio lo vedono con i tuoi colori."
-      ]
-    },
-    "referrals": {
-      "title": "Referral",
-      "text": "Invita altre aziende su prepza con il link di questa azienda, e ricevete entrambi crediti.",
-      "actions": [
-        "Copia o condividi il tuo link referral.",
-        "Vedi ogni premio ricevuto da questa azienda."
-      ],
-      "tips": [
-        "Ricevete entrambi crediti quando l'azienda invitata fa la sua prima ricarica, di qualsiasi importo.",
-        "I crediti vanno a questa azienda e non scadono mai."
-      ]
-    },
-    "billing": {
-      "title": "Fatturazione",
-      "text": "Da dove sono arrivati i crediti di questa azienda e dove sono andati.",
-      "actions": [
-        "Ricarica, o imposta la ricarica automatica.",
-        "Vedi i candidati i cui crediti sono riservati.",
-        "Apri la fattura di qualsiasi ricarica."
-      ],
-      "tips": [
-        "I crediti di un candidato vengono riservati quando lo inviti, addebitati quando risponde e restituiti se non risponde.",
-        "Solo proprietari e amministratori vedono questa pagina."
-      ]
-    },
-    "aiApps": {
-      "title": "App IA",
-      "text": "Usa prepza dalla tua chat di IA: chiedi a Claude o ChatGPT dei tuoi colloqui e candidati, o di fare modifiche al posto tuo.",
-      "actions": [
-        "Copia l'indirizzo del server e aggiungilo a Claude, Claude Code o ChatGPT seguendo i passaggi.",
-        "Consenti l'accesso all'app nella pagina di prepza che si apre.",
-        "Scollega un'app che non usi più."
-      ],
-      "tips": [
-        "Un'app agisce a tuo nome, in ogni azienda di cui fai parte. La maggior parte delle app ti chiede conferma prima di cambiare qualsiasi cosa.",
-        "Non può vedere la tua password né le tue chiavi API, né eliminare il tuo account o un'azienda."
-      ]
-    },
-    "topUp": {
-      "title": "Ricarica",
-      "text": "Acquista crediti per qualsiasi azienda di cui sei proprietario o amministratore.",
-      "actions": [
-        "Scegli un'azienda e una ricarica: quelle più grandi costano meno per candidato.",
-        "Paga sulla pagina di pagamento di Paddle; i crediti arrivano in pochi secondi.",
-        "Apri i prezzi per confrontare le ricariche."
-      ],
-      "tips": [
-        "Un candidato costa 500 crediti: riservati quando lo inviti, addebitati quando risponde e restituiti se non risponde.",
-        "I crediti non scadono. La fattura di ogni ricarica è nella scheda Fatturazione dell'azienda."
-      ]
-    },
-    "settings": {
-      "title": "Impostazioni",
-      "text": "Il tuo account: la lingua in cui prepza ti parla, le email che ricevi e i tuoi dati.",
-      "actions": [
-        "Scegli la lingua del sito, della chat di assistenza e delle tue email.",
-        "Scegli quali email facoltative ricevere; le email di servizio, come inviti, report e problemi di pagamento, vengono sempre inviate.",
-        "Scarica tutto ciò che prepza conserva su di te o elimina il tuo account."
-      ],
-      "tips": [
-        "Eliminare il tuo account elimina le aziende in cui ci sei solo tu. Un'azienda a cui si sono uniti altri ha prima bisogno di un altro proprietario."
-      ]
-    }
+    "tipsTitle": "Suggerimenti"
   },
   "companyBilling": {
     "reservedTab": "Riservati ({count})",
@@ -2036,7 +2112,8 @@
       "chargeback": "Chargeback",
       "chargeback_reversed": "Chargeback annullato",
       "referral": "Premio referral",
-      "referral_reversed": "Premio referral revocato"
+      "referral_reversed": "Premio referral revocato",
+      "adjustment": "Rettifica di prepza"
     },
     "automatic": "Ricarica automatica",
     "invoice": "Fattura",
@@ -2059,6 +2136,7 @@
     "claudeCode": "In Claude Code, esegui:",
     "copyCommand": "Copia comando",
     "commandCopied": "Comando copiato",
+    "moreApps": "Gemini CLI, Cursor, VS Code, Le Chat e i tuoi agenti: consulta la <link>documentazione per sviluppatori</link>.",
     "chatgptDeveloper": "In ChatGPT, attiva la modalità sviluppatore:",
     "chatgptCreate": "Di nuovo in Apps & Connectors, scegli:",
     "chatgptPaste": "Chiamalo {name}, incolla l'indirizzo del server e scegli questa autenticazione:",
@@ -2124,5 +2202,91 @@
       "authority": "Se la nostra risposta non ti soddisfa, puoi rivolgerti all'Autorità estone per la tutela dei consumatori e la regolamentazione tecnica (TTJA)."
     },
     "reviewed": "Ultima revisione: {date}."
+  },
+  "actionLog": {
+    "empty": "Ancora nessuna azione.",
+    "noMatches": "Nessuna azione corrisponde a questi filtri.",
+    "formerMember": "Un ex membro",
+    "deletedCandidate": "un candidato eliminato",
+    "anyMember": "Chiunque",
+    "anyAction": "Tutte le azioni",
+    "member": "Membro",
+    "action": "Azione",
+    "from": "Dal",
+    "to": "Al",
+    "groups": {
+      "interviews": "Colloqui",
+      "candidates": "Candidati",
+      "team": "Team",
+      "company": "Azienda",
+      "billing": "Fatturazione",
+      "integrations": "Integrazioni"
+    },
+    "actions": {
+      "interview_created": "Ha creato un colloquio",
+      "interview_from_template": "Ha creato un colloquio da un modello",
+      "interview_deleted": "Ha eliminato un colloquio",
+      "interview_renamed": "Ha rinominato un colloquio",
+      "interview_settings_changed": "Ha modificato le impostazioni di un colloquio",
+      "link_turned_on": "Ha attivato un link condivisibile",
+      "link_turned_off": "Ha disattivato un link condivisibile",
+      "questions_regenerated": "Ha rigenerato una domanda",
+      "answer_key_reported": "Ha segnalato una chiave di correzione errata",
+      "topics_approved": "Ha approvato gli argomenti di un colloquio",
+      "pass_mark_changed": "Ha cambiato una soglia di superamento",
+      "candidate_invited": "Ha invitato un candidato",
+      "invite_resent": "Ha inviato di nuovo un invito",
+      "invite_revoked": "Ha revocato un invito",
+      "candidate_deleted": "Ha eliminato un candidato",
+      "candidate_renamed": "Ha cambiato il nome di un candidato",
+      "extra_time_set": "Ha dato tempo extra a un candidato",
+      "results_viewed": "Ha visto i risultati di un candidato",
+      "report_emailed": "Ha inviato un report via email",
+      "member_invited": "Ha invitato un membro",
+      "member_joined": "Si è unito all'azienda",
+      "member_removed": "Ha rimosso un membro",
+      "member_role_changed": "Ha cambiato il ruolo di un membro",
+      "ownership_transferred": "Ha ceduto l'azienda a un altro proprietario",
+      "company_renamed": "Ha rinominato l'azienda",
+      "logo_changed": "Ha cambiato il logo",
+      "brand_changed": "Ha cambiato i colori o lo stile del brand",
+      "verification_requested": "Ha chiesto la verifica dell'azienda",
+      "ai_apps_changed": "Ha consentito o bloccato le app di IA",
+      "top_up_paid": "Ha ricaricato i crediti",
+      "auto_top_up_set": "Ha impostato la ricarica automatica",
+      "auto_top_up_changed": "Ha modificato la ricarica automatica",
+      "auto_top_up_stopped": "Ha interrotto la ricarica automatica",
+      "ats_connected": "Ha collegato un ATS",
+      "ats_reconnected": "Ha ricollegato un ATS",
+      "ats_disconnected": "Ha scollegato un ATS",
+      "job_linked": "Ha collegato un'offerta dell'ATS",
+      "job_unlinked": "Ha scollegato un'offerta dell'ATS",
+      "slack_connected": "Ha collegato Slack",
+      "slack_disconnected": "Ha scollegato Slack",
+      "slack_notifications_changed": "Ha cambiato le notifiche di Slack",
+      "api_key_created": "Ha creato una chiave API",
+      "api_key_deleted": "Ha eliminato una chiave API",
+      "api_key_narrowed": "Ha ridotto i permessi di una chiave API",
+      "webhook_added": "Ha aggiunto un webhook",
+      "webhook_tested": "Ha testato un webhook",
+      "webhook_deleted": "Ha eliminato un webhook"
+    },
+    "removed": "rimossi: {permissions}",
+    "permissions": {
+      "interviews:read": "leggere i colloqui",
+      "interviews:create": "creare colloqui",
+      "candidates:read": "leggere i candidati",
+      "candidates:invite": "invitare candidati",
+      "candidates:change": "modificare i candidati",
+      "candidates:delete": "eliminare candidati",
+      "credits:read": "leggere i crediti",
+      "mcp": "usare con agenti IA (MCP)"
+    },
+    "via": {
+      "assistant": "tramite l'assistente",
+      "mcp": "tramite un'app di IA",
+      "api": "tramite l'API",
+      "ats": "tramite un ATS"
+    }
   }
 }

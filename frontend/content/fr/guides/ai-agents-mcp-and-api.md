@@ -2,7 +2,7 @@
 title: "Agents IA, MCP et API : ce que c'est et comment s'en servir dans le recrutement"
 seoTitle: "Agents IA, MCP et API dans le recrutement : définition et usages"
 description: "Ce qu'est un agent IA, à quoi servent MCP et une API, comment les utiliser en toute sécurité dans le recrutement, et comment piloter prepza depuis son agent, depuis Claude et ChatGPT ou depuis votre propre plateforme."
-updated: "2026-10-15"
+updated: "2026-10-17"
 ---
 
 # Agents IA, MCP et API : ce que c'est et comment s'en servir dans le recrutement
@@ -84,6 +84,7 @@ Avant de connecter une application d'IA à des données professionnelles, vérif
 Sélectionnez **demander à l'agent** dans l'en-tête de n'importe quelle page. L'agent connaît vos entreprises, entretiens, candidats, crédits et intégrations, ainsi que le fonctionnement de prepza. Il répond dans votre langue, et vous pouvez écrire ou parler.
 
 - **Il répond à partir de vos données**, avec la même vue que vous : un admin voit ce que voit un admin, un lecteur ce que voit un lecteur.
+- **Il sait sur quelle page vous êtes.** Demandez « Que puis-je faire sur cette page ? » pour obtenir le guide de cette page, ou « Qui est le meilleur ici ? » sur les candidats d'un entretien, et il répond sur cet entretien sans vous demander lequel.
 - **Il prépare les modifications, vous les confirmez.** Si vous lui demandez d'inviter des candidats, il affiche une carte qui montre exactement ce qui va se passer, par exemple « Inviter 12 candidats à Backend developer ». Rien ne s'exécute tant que vous n'avez pas sélectionné Confirmer.
 - **Il montre ses sources.** Sous une réponse, vous trouvez les candidats ou entretiens qu'il a utilisés et un lien vers la page d'où ils viennent.
 - **Il reste dans son sujet.** Il répond sur prepza et sur le recrutement avec prepza, et décline le reste.
@@ -104,17 +105,19 @@ Ensuite, posez vos questions dans la conversation comme vous le feriez à un col
 
 - **Vos permissions.** Il agit en votre nom, dans chaque entreprise dont vous êtes membre, avec votre rôle dans chacune.
 - **Crédits et limites.** Inviter un candidat coûte la même chose que dans l'application, et les mêmes limites d'e-mails s'appliquent.
-- **La traçabilité.** Les décisions que garde le journal d'audit (valider des thèmes, consulter des résultats, changer le seuil de réussite, accorder du temps supplémentaire, révoquer un candidat, envoyer un rapport par e-mail) sont marquées comme prises via une app d'IA. Le propriétaire de l'entreprise peut lire le journal via l'API.
+- **La traçabilité.** Tout ce qu'une app d'IA fait pour vous apparaît dans le journal des actions de l'entreprise comme fait via une app d'IA, de la validation des thèmes et la consultation des résultats à l'octroi de temps supplémentaire ou la révocation d'un candidat. Le propriétaire de l'entreprise le consulte dans l'onglet **Journal des actions** de l'entreprise.
 - **L'entreprise décide.** Les propriétaires et administrateurs peuvent empêcher les apps d'IA d'utiliser les données d'une entreprise avec **Autoriser les apps d'IA dans cette entreprise** sur sa page des apps d'IA.
 - **Ce qu'il ne peut pas faire.** Il ne peut pas voir votre mot de passe ni vos clés API, et il ne peut pas supprimer votre compte ni une entreprise. Ces actions restent dans l'application.
 
 **Pour vous déconnecter,** supprimez le connecteur dans votre application d'IA, ou sélectionnez **Déconnecter** à côté de celui-ci sous **Apps IA**, dans l'onglet Intégrations. Il cesse de fonctionner immédiatement.
 
+**Autres applications et vos propres agents.** L'[onglet MCP](/api-docs?tab=mcp) de la documentation développeurs donne les étapes pour Gemini CLI, Cursor, VS Code et Le Chat, ainsi que des exemples complets d'agents en Python et TypeScript. Un agent qui tourne sur un serveur, sans personne pour approuver une connexion, utilise une clé API de l'entreprise avec l'autorisation **Utiliser avec des agents IA (MCP)** : il ne fonctionne que dans cette entreprise, et seulement avec les outils que permettent les autres autorisations de la clé.
+
 ### 3. Votre propre plateforme, via l'API
 
 Pour une automatisation sans IA, prepza propose une API, décrite dans sa [documentation développeurs](/api-docs).
 
-1. Un propriétaire ou un admin ouvre l'onglet **Intégrations** d'une entreprise, puis **API**, et sélectionne **Nouvelle clé**. Donnez-lui le nom de la plateforme qui l'utilisera et choisissez sa date d'expiration. La clé ne s'affiche qu'une fois ; conservez-la en lieu sûr.
+1. Un propriétaire ou un admin ouvre l'onglet **Intégrations** d'une entreprise, puis **API**, et sélectionne **Nouvelle clé**. Donnez-lui le nom de la plateforme qui l'utilisera, choisissez sa date d'expiration et cochez uniquement ce dont elle a besoin : la clé d'un tableau de bord ne fait que lire, celle d'un site carrières invite aussi. Vous pourrez retirer des autorisations plus tard, jamais en ajouter. La clé ne s'affiche qu'une fois ; conservez-la en lieu sûr.
 2. Votre plateforme envoie des requêtes avec cette clé : lister les entretiens de l'entreprise, lister ou consulter les candidats avec leur note, s'ils ont réussi et leurs alertes d'intégrité, et inviter un candidat.
 3. Ajoutez un **webhook** : une adresse sur votre plateforme que prepza appelle, avec une signature, quand un candidat commence, termine ou est retiré, quand son invitation n'a pas pu lui parvenir ou a expiré, et quand un entretien est prêt, pour ne pas avoir à demander sans cesse. La page API peut lui envoyer un événement de test et affiche son journal des envois.
 

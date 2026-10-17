@@ -107,7 +107,19 @@
     "send": "Wyślij",
     "thinking": "Myślę…",
     "copyId": "Kopiuj ID",
-    "idCopied": "Skopiowano ID"
+    "idCopied": "Skopiowano ID",
+    "copyCode": "Kopiuj kod",
+    "codeCopied": "Skopiowano kod",
+    "codeLanguage": "Język kodu",
+    "editor": {
+      "bold": "Pogrubienie",
+      "italic": "Kursywa",
+      "link": "Link",
+      "bullets": "Lista punktowana",
+      "numbers": "Lista numerowana",
+      "address": "https://…",
+      "addLink": "Dodaj link"
+    }
   },
   "errors": {
     "title": "Coś poszło nie tak",
@@ -145,6 +157,7 @@
     "dismiss": "Odrzuć",
     "fixSent": "Wysłano do weryfikatora. Za chwilę zostanie naprawione lub zastąpione.",
     "actionFailed": "Nie udało się. Spróbuj ponownie.",
+    "questions": "Pytania",
     "flagged": "Oznaczone",
     "replaced": "Zastąpione",
     "noFlagged": "Obecnie nic nie jest oznaczone.",
@@ -174,9 +187,20 @@
     "deleteTitle": "Usunąć ten szablon?",
     "deleteText": "Jego tematy i pytania zostaną usunięte. Rozmowy, które firmy już z niego utworzyły, pozostaną.",
     "deleteFailed": "Nie udało się usunąć szablonu. Spróbuj ponownie.",
+    "poolCounts": "{practice} do ćwiczeń · {company} dla firm",
+    "topUp": "Uzupełnij",
+    "addQuestions": "Dodaj pytania",
+    "addQuestionsTitle": "Dodaj pytania do każdego tematu",
+    "addQuestionsText": "Każdy temat dostanie tyle nowych pytań: jedną trzecią do ćwiczeń, resztę dla firm. Rozmowy już utworzone z tego szablonu zachowają swoje.",
+    "addQuestionsCount": "Pytań na temat",
+    "add": "Dodaj",
+    "addingQuestions": "Dodawanie pytań",
+    "questionsAdded": "Dodano pytania",
+    "addQuestionsFailed": "Nie udało się dodać pytań. Spróbuj ponownie.",
     "passRates": "Zdawalność",
     "controls": "Sterowanie",
     "stats": "Statystyki",
+    "statsGeneral": "Ogólne",
     "statsPeriod": "Okres",
     "statsAllTime": "Łącznie",
     "statsCards": {
@@ -259,11 +283,7 @@
     "deletePostText": "Zniknie ze strony aktualności we wszystkich językach.",
     "postSaveFailed": "Nie udało się zapisać wpisu. Spróbuj ponownie.",
     "postDeleteFailed": "Nie udało się usunąć wpisu. Spróbuj ponownie.",
-    "companies": "Firmy",
-    "companySearch": "Nazwa firmy",
-    "companiesNotFound": "Nie znaleziono firm.",
     "suspended": "Zawieszona",
-    "companyDetails": "{members, plural, one {# członek} few {# członków} many {# członków} other {# członka}} · od {date}",
     "suspend": "Zawieś",
     "unsuspend": "Cofnij zawieszenie",
     "unsuspended": "Zawieszenie cofnięto.",
@@ -296,11 +316,341 @@
     "legalSend": "Wyślij informację o zmianie",
     "legalConfirmTitle": "Wysłać e-mailem informację o zmianie: {document}?",
     "legalAudience": {
-      "everyone": "Każdy, kto ma konto w prepza, otrzyma ją od następnego ranka, z informacją, że nowa wersja obowiązuje od {date}. Wysyłamy ją raz i nie można jej cofnąć.",
-      "company_editors": "Właściciele i administratorzy każdej firmy otrzymają ją od następnego ranka, z informacją, że nowa wersja obowiązuje od {date}. Wysyłamy ją raz i nie można jej cofnąć."
+      "everyone": "Każdy, kto ma konto w prepza, otrzyma ją od najbliższej godziny wysyłki (od 8:00 do 18:00 UTC), z informacją, że nowa wersja obowiązuje od {date}, i zobaczy ją w swoich powiadomieniach. Wysyłamy ją raz i nie można jej cofnąć.",
+      "company_editors": "Właściciele i administratorzy każdej firmy otrzymają ją od najbliższej godziny wysyłki (od 8:00 do 18:00 UTC), z informacją, że nowa wersja obowiązuje od {date}, i zobaczą ją w swoich powiadomieniach. Wysyłamy ją raz i nie można jej cofnąć."
     },
-    "legalAsked": "Informacja o zmianie zostanie wysłana od następnego ranka.",
-    "legalFailed": "Nie udało się zlecić wysyłki. Spróbuj ponownie."
+    "legalAsked": "Informacja o zmianie zostanie wysłana od najbliższej godziny wysyłki.",
+    "legalFailed": "Nie udało się zlecić wysyłki. Spróbuj ponownie.",
+    "support": "Wsparcie",
+    "supportSearch": "ID, link, e-mail, ID płatności lub nazwa firmy",
+    "supportNotFound": "Brak wyników. Spróbuj ID z „kopiuj id”, linku do strony lub adresu e-mail.",
+    "supportKinds": {
+      "company": "Firma",
+      "interview": "Rozmowa w {company}",
+      "candidate": "Kandydat w {company}",
+      "user": "Konto"
+    },
+    "supportCreated": "Utworzono",
+    "supportAvailable": "Dostępne kredyty: {available}",
+    "supportHeld": "Zarezerwowane dla kandydatów: {reserved}",
+    "supportTabs": {
+      "money": "Kredyty",
+      "reserved": "Zarezerwowane",
+      "interviews": "Rozmowy",
+      "members": "Członkowie",
+      "audit": "Dziennik zdarzeń"
+    },
+    "supportNoInterviews": "Nie ma jeszcze rozmów.",
+    "supportUntitled": "Rozmowa jest jeszcze generowana",
+    "supportCandidates": "{count, plural, one {# kandydat} few {# kandydaci} many {# kandydatów} other {# kandydata}}",
+    "supportJoined": "Dołączył(a)",
+    "supportInvited": "Zaproszono, jeszcze nie dołączył(a)",
+    "adjustCredits": "Koryguj kredyty",
+    "adjustTitle": "Korekta kredytów: {name}",
+    "adjustText": "Dodatnia liczba dodaje kredyty, ujemna je odejmuje. Firma widzi powód w historii rozliczeń.",
+    "adjustAmount": "Kredyty, np. 500 lub -500",
+    "adjustNote": "Powód, np. „Pobrano dwa razy za jednego kandydata”",
+    "adjustConfirmTitle": "{amount} kredytów dla {name}?",
+    "adjustConfirm": "Koryguj",
+    "adjustBack": "Wstecz",
+    "adjustNext": "Dalej",
+    "adjusted": "Kredyty skorygowane",
+    "supportNoEmail": "Konto bez adresu e-mail",
+    "supportCompanies": "Firmy",
+    "supportNoCompanies": "Nie należy do żadnej firmy.",
+    "supportTopUps": "Opłacone doładowania",
+    "supportNoTopUps": "Brak doładowań.",
+    "supportDeletedCompany": "Usunięta firma",
+    "supportNotYet": "Jeszcze nie",
+    "supportFacts": {
+      "company": "Firma",
+      "interview": "Rozmowa",
+      "invited": "Zaproszenie",
+      "lastSent": "Ostatnie wysłanie zaproszenia",
+      "started": "Rozpoczęcie",
+      "finished": "Ukończenie",
+      "grade": "Wynik",
+      "extraTime": "Dodatkowy czas",
+      "signals": "Ostrzeżenia o podejrzanych zachowaniach",
+      "credits": "Kredyty",
+      "topics": "Tematy",
+      "questionSeconds": "Czas na pytanie",
+      "passMark": "Próg zaliczenia"
+    },
+    "supportPassed": "{grade}, zaliczone",
+    "supportNotPassed": "{grade}, niezaliczone",
+    "supportNoExtraTime": "Brak",
+    "supportSignals": "Opuszczenia strony: {leaves} · Próby kopiowania: {copies} · Zbyt szybkie odpowiedzi: {fast}",
+    "supportCredits": {
+      "held": "Zarezerwowane",
+      "charged": "Pobrane",
+      "released": "Zwrócone"
+    },
+    "supportGenerationFailed": "Generowanie nie powiodło się",
+    "supportSeconds": "{count, plural, one {# sekunda} few {# sekundy} many {# sekund} other {# sekundy}}",
+    "supportNoCandidates": "Brak kandydatów.",
+    "campaigns": "Kampanie",
+    "newCampaign": "Nowa kampania",
+    "editCampaign": "Edytuj",
+    "editCampaignIn": "Edytuj wersję: {language}",
+    "campaignInEnglish": "Pisz po angielsku. Po zapisaniu kampania zostanie przetłumaczona na wszystkie pozostałe języki, a przed wysłaniem możesz zmienić każdą z wersji.",
+    "campaignInLanguage": "Twoja własna treść w wersji: {language}, wysyłana dokładnie tak, jak ją napiszesz.",
+    "campaignKind": "Rodzaj",
+    "campaignKinds": {
+      "updates": "Nowość o produkcie",
+      "promotions": "Oferta"
+    },
+    "campaignSubject": "Temat",
+    "campaignSubjectPlaceholder": "Tu wpisz temat…",
+    "campaignText": "Treść",
+    "campaignTextPlaceholder": "Tu wpisz treść… Naciśnij Enter, aby zacząć nowy akapit.",
+    "campaignButton": "Tekst przycisku (opcjonalnie)",
+    "campaignLink": "Link przycisku",
+    "campaignLinkPlaceholder": "Link przycisku w prepza, np. /pricing (opcjonalnie)",
+    "campaignSaveFailed": "Nie udało się zapisać kampanii. Spróbuj ponownie.",
+    "noCampaigns": "Na razie brak kampanii.",
+    "campaignStatus": {
+      "draft": "szkic",
+      "sending": "wysyłanie…",
+      "sent": "wysłana",
+      "stopped": "zatrzymana"
+    },
+    "campaignRowCounts": {
+      "sent": "wysłane: {count}",
+      "skipped": "pominięte: {count}",
+      "failed": "nieudane: {count}",
+      "unsubscribed": "wypisani: {count}",
+      "complained": "oznaczone jako spam: {count}"
+    },
+    "campaignCounts": {
+      "pending": "Oczekujące",
+      "sent": "Wysłane",
+      "skipped": "Pominięte",
+      "failed": "Nieudane",
+      "unsubscribed": "Wypisali się po niej",
+      "complained": "Zgłoszenia spamu"
+    },
+    "campaignRecipients": "<number>{shown}</number> {count, plural, one {odbiorca} few {odbiorców} many {odbiorców} other {odbiorcy}}",
+    "campaignPreviewLanguage": "Podgląd w wersji",
+    "sendTest": "Wyślij mi testowy e-mail",
+    "testSent": "Testowy e-mail jest już w drodze na Twój adres.",
+    "sendCampaign": "Wyślij",
+    "stopCampaign": "Zatrzymaj",
+    "deleteCampaign": "Usuń kampanię",
+    "campaignConfirm": {
+      "send": {
+        "title": "Wysłać tę kampanię?",
+        "text": "{count, plural, =0 {Teraz nikt by jej nie otrzymał.} other {Odbiorcy: #. Otrzymają ją od najbliższej godziny wysyłki (od 8:00 do 18:00 UTC). Potem nie można jej zmienić.}}",
+        "unknown": "Otrzyma ją każdy, kto ma włączony ten rodzaj e-maili, od najbliższej godziny wysyłki (od 8:00 do 18:00 UTC). Potem nie można jej zmienić.",
+        "confirm": "Wyślij"
+      },
+      "stop": {
+        "title": "Zatrzymać tę kampanię?",
+        "text": "Nikt więcej jej nie otrzyma. Ci, którzy już ją dostali, zachowają ją.",
+        "confirm": "Zatrzymaj"
+      },
+      "delete": {
+        "title": "Usunąć tę kampanię?",
+        "text": "Zostanie usunięta we wszystkich językach. Nigdy nie została wysłana.",
+        "confirm": "Usuń"
+      }
+    },
+    "sendAsCampaign": "Wyślij jako kampanię",
+    "removeSuppression": "Usuń z listy",
+    "suppressed": {
+      "bounced": "E-mail na ten adres wrócił jako niedoręczony {date}, więc e-maile o produkcie i powiadomienia go pomijają.",
+      "complained": "Ten adres oznaczył e-mail jako spam {date}, więc e-maile o produkcie i powiadomienia go pomijają."
+    },
+    "aiCosts": "Koszty AI",
+    "aiCards": {
+      "spend": "Wydatki",
+      "calls": "Wywołania AI",
+      "month": "Ten miesiąc",
+      "monthOf": "Ten miesiąc, z budżetu {budget}",
+      "input": "Tokeny wejściowe",
+      "cached": "Tokeny wejściowe z pamięci podręcznej",
+      "output": "Tokeny wyjściowe"
+    },
+    "aiBudgetsTitle": "Wspólne budżety dzisiaj",
+    "aiNothing": "Nic w tym okresie.",
+    "aiOf": "{used} z {limit}",
+    "aiForTitle": "Dla kogo",
+    "aiCategories": {
+      "paid": "Płacące firmy",
+      "unpaid": "Niepłacące firmy",
+      "no_company": "Bez firmy",
+      "prepza": "prepza"
+    },
+    "aiActionsTitle": "Według działania",
+    "aiActions": {
+      "interview_generation": "Generowanie rozmów",
+      "template_generation": "Generowanie szablonów",
+      "question_regeneration": "Ponowne generowanie pytań",
+      "template_question_regeneration": "Ponowne generowanie pytań w szablonach",
+      "sample_key_check": "Wyrywkowe sprawdzanie kluczy odpowiedzi",
+      "question_verify": "Sprawdzanie pytań",
+      "key_check_batch": "Sprawdzanie kluczy odpowiedzi w partiach",
+      "embeddings": "Dopasowywanie tematów",
+      "news_translation": "Tłumaczenie aktualności",
+      "campaign_translation": "Tłumaczenie kampanii",
+      "assistant_message": "Wiadomości do asystenta",
+      "assistant_title": "Tytuły czatów z asystentem",
+      "transcription": "Wiadomości głosowe",
+      "help_chat": "Czat pomocy"
+    },
+    "aiUnitCost": {
+      "interview_generation": "{cost} za rozmowę",
+      "template_generation": "{cost} za uruchomienie szablonu",
+      "question_regeneration": "{cost} za pytanie",
+      "template_question_regeneration": "{cost} za pytanie",
+      "sample_key_check": "{cost} za test",
+      "question_verify": "{cost} za pytanie",
+      "key_check_batch": "{cost} za sprawdzenie",
+      "embeddings": "{cost} za żądanie",
+      "news_translation": "{cost} za wpis",
+      "campaign_translation": "{cost} za kampanię",
+      "assistant_message": "{cost} za czat",
+      "assistant_title": "{cost} za czat",
+      "transcription": "{cost} za minutę",
+      "help_chat": "{cost} za wywołanie"
+    },
+    "aiPaid": "płacące {spend}",
+    "aiUnpaid": "niepłacące {spend}",
+    "aiCalls": "{count, plural, one {# wywołanie} few {# wywołania} many {# wywołań} other {# wywołania}}",
+    "aiModelsTitle": "Według modelu",
+    "aiTokensIn": "{count} na wejściu",
+    "aiCachedShare": "{share} z pamięci podręcznej",
+    "aiTokensOut": "{count} na wyjściu",
+    "aiCompaniesTitle": "Firmy o najwyższych kosztach",
+    "aiUsersTitle": "Użytkownicy o najwyższych kosztach",
+    "aiByMonthTitle": "Według miesięcy",
+    "aiByDayTitle": "Według dni",
+    "limitsOursTitle": "Osiągnięte nasze limity",
+    "limitsProvidersTitle": "Limity dostawców",
+    "limitsNoHits": "W tym okresie nie osiągnięto żadnego limitu.",
+    "limitNames": {
+      "MESSAGES_PER_USER_HOUR": "Wiadomości do asystenta na użytkownika na godzinę",
+      "MESSAGES_PER_USER_DAY": "Wiadomości do asystenta na użytkownika dziennie",
+      "MESSAGES_PER_COMPANY_DAY": "Wiadomości do asystenta na firmę dziennie",
+      "MESSAGES_PER_DAY": "Wiadomości do asystenta dziennie, niepłacący użytkownicy łącznie",
+      "TOKENS_PER_USER_DAY": "Tokeny asystenta na użytkownika dziennie",
+      "TOKENS_PER_COMPANY_DAY": "Tokeny asystenta na firmę dziennie",
+      "TOKENS_PER_DAY": "Tokeny asystenta dziennie, niepłacący użytkownicy łącznie",
+      "TRANSCRIPTIONS_PER_USER_HOUR": "Wiadomości głosowe na użytkownika na godzinę",
+      "ACTIONS_PER_USER_HOUR": "Działania asystenta na użytkownika na godzinę",
+      "MCP_CALLS_PER_USER_MINUTE": "Wywołania z aplikacji AI na użytkownika na minutę",
+      "MCP_CALLS_PER_USER_DAY": "Wywołania z aplikacji AI na użytkownika dziennie",
+      "REGISTRATIONS_PER_IP_HOUR": "Rejestracje aplikacji AI na adres na godzinę",
+      "REGISTRATIONS_PER_DAY": "Rejestracje aplikacji AI dziennie, wszyscy łącznie",
+      "AUTHORIZATIONS_PER_IP_HOUR": "Prośby o połączenie aplikacji AI na adres na godzinę",
+      "TOKEN_REQUESTS_PER_CLIENT_MINUTE": "Żądania tokenów aplikacji AI na aplikację na minutę",
+      "APPROVALS_PER_USER_HOUR": "Zezwolenia na połączenie aplikacji AI na użytkownika na godzinę",
+      "MAX_OWNED_COMPANIES": "Firmy, których właścicielem może być jedna osoba",
+      "INTERVIEWS_PER_DAY": "Wygenerowane rozmowy na firmę dziennie",
+      "INTERVIEWS_PER_DAY_UNPAID": "Wygenerowane rozmowy na niepłacącą firmę dziennie",
+      "MAX_INTERVIEWS_WITHOUT_CANDIDATES": "Wygenerowane rozmowy czekające bez kandydatów",
+      "MAX_INTERVIEWS_WITHOUT_CANDIDATES_UNPAID": "Wygenerowane rozmowy czekające bez kandydatów, niepłacące",
+      "PREVIEWS_PER_USER_HOUR": "Podglądy rozmów na użytkownika na godzinę",
+      "LINK_STARTS_PER_HOUR": "Rozpoczęcia przez link jednej rozmowy na godzinę",
+      "LINK_STARTS_PER_IP_HOUR": "Rozpoczęcia przez link na adres na godzinę",
+      "MAX_BULK_INVITES": "Kandydaci na jednej liście lub w jednym pliku",
+      "MAX_PENDING_INVITES": "Oczekujące zaproszenia do zespołu na firmę",
+      "MEMBER_INVITES_PER_UNPAID_DAY": "Zaproszenia do zespołu na niepłacącą firmę dziennie",
+      "EMAIL_HOURLY_LIMIT": "E-maile z zaproszeniami na użytkownika na godzinę",
+      "EMAIL_DAILY_LIMIT": "E-maile z zaproszeniami na użytkownika dziennie",
+      "EMAIL_RECIPIENT_DAILY_LIMIT": "Zaproszenia na jeden adres do jednego testu dziennie",
+      "REPORT_EMAILS_PER_COMPANY_DAY": "E-maile z raportami na firmę dziennie",
+      "GENERATION_LIMIT": "Generowania na użytkownika dziennie",
+      "REGENERATION_LIMIT": "Ponownie wygenerowane pytania na użytkownika dziennie",
+      "DAILY_GENERATION_LIMIT": "Generowania dziennie, niepłacące firmy łącznie",
+      "MAX_TOPIC_REVISIONS": "Poprawki tematów na jedno generowanie",
+      "DAILY_VERIFY_LIMIT": "Sprawdzenia pytań dziennie",
+      "PRACTICE_ROUNDS_PER_HOUR": "Podejścia ćwiczeniowe na użytkownika na godzinę",
+      "SIGNALS_PER_MINUTE": "Ostrzeżenia o podejrzanych zachowaniach na sesję na minutę",
+      "MAX_SIGNALS_PER_QUESTION": "Zapisywane ostrzeżenia o podejrzanych zachowaniach na pytanie",
+      "HELP_USER_LIMIT": "Wiadomości na czacie pomocy na konto na godzinę",
+      "HELP_IP_LIMIT": "Wiadomości na czacie pomocy na adres na godzinę",
+      "HELP_DAILY_LIMIT": "Wiadomości na czacie pomocy dziennie, wszyscy łącznie",
+      "HELP_TOKENS_PER_DAY": "Tokeny czatu pomocy dziennie, wszyscy łącznie",
+      "CONTACT_IP_LIMIT": "Wiadomości kontaktowe na adres dziennie",
+      "CONTACT_DAILY_LIMIT": "Wiadomości kontaktowe dziennie, wszyscy łącznie",
+      "RATINGS_PER_DAY": "Oceny pytań na użytkownika dziennie",
+      "REPORTS_PER_DAY": "Zgłoszenia pytań na użytkownika dziennie",
+      "MAX_API_KEYS": "Klucze API na firmę",
+      "MAX_WEBHOOKS": "Webhooki na firmę",
+      "API_REQUESTS_PER_MINUTE": "Żądania API na firmę na minutę",
+      "RESEND_DAILY_LIMIT": "E-maile dziennie przez Resend",
+      "RESEND_RESERVE_PERCENT": "Część dziennych e-maili przez Resend zachowana poza wysyłkami masowymi",
+      "CAMPAIGNS_PER_KIND_DAY": "Kampanie każdego rodzaju dziennie",
+      "AI_SPEND_UNPAID_DAY": "Wydatki na AI dziennie, niepłacący użytkownicy łącznie",
+      "QUESTION_SECONDS_BASIC": "Sekundy na pytanie, nowe testy na poziomie podstawowym",
+      "QUESTION_SECONDS_MEDIUM": "Sekundy na pytanie, nowe testy na poziomie średnim",
+      "QUESTION_SECONDS_HARD": "Sekundy na pytanie, nowe testy na poziomie trudnym",
+      "GENERATION_CALLS_AT_ONCE": "Jednoczesne wywołania AI na jedno generowanie",
+      "GENERATION_CALLS_PER_SECOND": "Wywołania AI na sekundę, wszystkie generowania łącznie",
+      "MULTI_ANSWER_PERCENT": "Pytania „Zaznacz wszystkie poprawne odpowiedzi”, udział w każdym temacie",
+      "PAUSED": "Odrzucone podczas wstrzymania",
+      "OPENAI_RATE_LIMIT": "Limit szybkości OpenAI",
+      "OPENAI_QUOTA": "Brak środków w OpenAI",
+      "OPENAI_THROTTLED": "Oczekiwanie na nasz limit żądań w OpenAI",
+      "RESEND_RATE_LIMIT": "Limit szybkości Resend",
+      "RESEND_DAILY_QUOTA": "Dzienny limit Resend",
+      "ATS_RATE_LIMIT": "Limit szybkości ATS",
+      "FIREBASE_TOKEN_REFUSED": "Logowanie przez Firebase odrzucone"
+    },
+    "limitValue": "{value} {window}",
+    "limitWindows": {
+      "60": "na minutę",
+      "3600": "na godzinę",
+      "86400": "dziennie",
+      "1209600": "na przegląd tematów"
+    },
+    "limitKinds": {
+      "ours": "prepza",
+      "openai": "OpenAI",
+      "resend": "Resend",
+      "firebase": "Firebase",
+      "workable": "Workable",
+      "greenhouse": "Greenhouse",
+      "teamtailor": "Teamtailor",
+      "recruitee": "Recruitee",
+      "breezy": "Breezy HR"
+    },
+    "limitHitter": "{name} ({count})",
+    "limitHits": "{count, plural, one {# osiągnięcie} few {# osiągnięcia} many {# osiągnięć} other {# osiągnięcia}}",
+    "limitsTitle": "Limity",
+    "limitsText": "Ile można korzystać i z jakimi wartościami pracują usługi, według usługi. Zmiana zaczyna obowiązywać w ciągu minuty.",
+    "limitServices": {
+      "assistant": "Asystent",
+      "companies": "Firmy",
+      "generation": "Generowanie",
+      "rounds": "Ćwiczenia, sesje i czat pomocy",
+      "library": "Opinie o pytaniach",
+      "api": "Publiczne API",
+      "notifications": "E-maile",
+      "billing": "Wydatki na AI"
+    },
+    "limitAtOnce": "naraz",
+    "limitScopes": {
+      "user": "na użytkownika",
+      "company": "na firmę",
+      "ip": "na adres",
+      "everyone": "wszyscy łącznie"
+    },
+    "limitDefault": "domyślnie {value}",
+    "limitSecondsUnit": "s",
+    "limitRecentHits": "{count, plural, one {# osiągnięcie} few {# osiągnięcia} many {# osiągnięć} other {# osiągnięcia}} w ciągu {days} dni",
+    "limitPaid": "Płacące",
+    "limitUnpaid": "Niepłacące",
+    "limitSave": "Zapisz",
+    "limitReset": "Przywróć domyślną wartość",
+    "limitSaved": "Limit zapisany.",
+    "limitFailed": "Nie udało się zapisać limitu. Spróbuj ponownie.",
+    "limitChangesTitle": "Zmiany",
+    "limitNoChanges": "Żaden limit nie został jeszcze zmieniony.",
+    "limitChange": "{name}: z {from} na {to}",
+    "limitDefaultValue": "domyślnie",
+    "supportAiSpend": "Koszt AI {spend} w ciągu ostatnich {days} dni, {count, plural, one {# wywołanie} few {# wywołania} many {# wywołań} other {# wywołania}}."
   },
   "templates": {
     "title": "Szablony",
@@ -363,10 +713,12 @@
   "reportReasons": {
     "wrong_answer": "Zaznaczona odpowiedź jest błędna",
     "unclear": "Pytanie jest niejasne",
+    "hard_to_read": "Trudno się je czyta",
     "off_topic": "Nie pasuje do tematu",
     "other": "Coś innego"
   },
   "questions": {
+    "multiChoice": "Wielokrotny wybór",
     "goodQuestion": "Dobre pytanie?",
     "ratingFailed": "Nie udało się zapisać oceny. Spróbuj ponownie.",
     "helpful": "Pomocne pytanie",
@@ -413,6 +765,10 @@
     "correct": "Poprawna",
     "incorrect": "Błędna",
     "notAnswered": "Bez odpowiedzi",
+    "partlyCorrect": "Częściowo poprawna",
+    "rightPicks": "Poprawne odpowiedzi: {right} z {total}",
+    "wrongPicks": "{count, plural, one {# błędna odpowiedź} few {# błędne odpowiedzi} many {# błędnych odpowiedzi} other {# błędnej odpowiedzi}}",
+    "points": "{points} z 1 pkt",
     "finish": "Zakończ",
     "finishing": "Kończenie…",
     "next": "Następne pytanie",
@@ -424,6 +780,7 @@
     "finishFailed": "Nie udało się zakończyć rozmowy. Spróbuj ponownie.",
     "continueFailed": "Nie udało się kontynuować. Spróbuj ponownie.",
     "timeUp": "Czas na to pytanie minął.",
+    "selectAll": "Zaznacz wszystkie poprawne odpowiedzi",
     "finish": "Zakończ rozmowę",
     "finishTitle": "Zakończyć całą rozmowę?",
     "endsAll": "To zakończy wszystkie sekcje ({count}), nie tylko tę.",
@@ -498,6 +855,7 @@
     "interviews": "Rozmowy",
     "templates": "Szablony",
     "team": "Zespół",
+    "actions": "Dziennik działań",
     "integrations": "Integracje",
     "referrals": "Polecenia",
     "brand": "Marka",
@@ -629,10 +987,12 @@
       "many": "kilku",
       "file": "prześlij"
     },
-    "manyHint": "Jeden kandydat w wierszu, z imieniem i nazwiskiem lub bez,\ndo 100 naraz:",
+    "manyHint": "Jeden kandydat w wierszu, z imieniem i nazwiskiem lub bez,\ndo {count} naraz:",
+    "manyHintNoLimit": "Jeden kandydat w wierszu, z imieniem i nazwiskiem lub bez:",
     "example": "przykład",
     "uploadFile": "Prześlij plik",
-    "fileFormats": "CSV lub TXT, do 100 kandydatów. Imiona i nazwiska mogą być w osobnej kolumnie lub obok każdego adresu.",
+    "fileFormats": "CSV lub TXT, do {count} kandydatów. Imiona i nazwiska mogą być w osobnej kolumnie lub obok każdego adresu.",
+    "fileFormatsNoLimit": "CSV lub TXT. Imiona i nazwiska mogą być w osobnej kolumnie lub obok każdego adresu.",
     "fileTooLarge": "Plik jest za duży (maks. {kb} KB).",
     "lineProblems": {
       "no_email": "Nie znaleziono adresu e-mail: {line}",
@@ -657,8 +1017,10 @@
     "signInToStart": "Zaloguj się, aby zacząć",
     "fallbackTitle": "rozmowa",
     "timePerQuestion": "Czas na pytanie:",
-    "secondsUnit": "s",
-    "pickOne": "W każdym pytaniu wybierz jedną z czterech odpowiedzi.",
+    "secondsUnit": "sek.",
+    "wholeInterview": "Cała rozmowa:",
+    "minutesUnit": "min",
+    "pickOne": "W każdym pytaniu wybierz jedną z czterech odpowiedzi. Tam, gdzie widnieje „Zaznacz wszystkie poprawne odpowiedzi”, zaznacz każdą poprawną odpowiedź: każda daje część punktu za pytanie, a błędne zaznaczenie nie daje nic.",
     "changePick": "Możesz zmienić wybór, dopóki nie naciśniesz „Następne pytanie”.",
     "timeRunsOut": "Gdy czas na pytanie minie, liczy się Twój wybór i otwiera się następne; bez wyboru pytanie liczy się jako błędne. Czas płynie, nawet jeśli wyjdziesz.",
     "unanswered": "Pytania bez odpowiedzi liczą się jako błędne.",
@@ -1106,8 +1468,19 @@
       "ats_cannot_write": "{ats} nie przyjmuje wyników kandydatów: klucz nie ma uprawnień do zapisu. Połącz ponownie kluczem, który może zapisywać; wyniki są przechowywane i zostaną wtedy wysłane.",
       "connection_broken": "{name} przestał działać i trzeba go połączyć ponownie. Do tego czasu {integration, select, slack {powiadomienia nie trafiają na Twój kanał} other {przesłani przez niego kandydaci czekają, a ich wyniki są przechowywane}}.",
       "webhook_stopped": "Webhook do {url} został zatrzymany: członek, który go dodał, nie jest już właścicielem ani administratorem. Dodaj go ponownie, aby dalej otrzymywać wyniki.",
-      "ownership_received": "Jesteś teraz właścicielem firmy „{name}”."
-    }
+      "ownership_received": "Jesteś teraz właścicielem firmy „{name}”.",
+      "news": "Aktualności: {title}",
+      "legal_terms": "Nowy regulamin obowiązuje od {date}.",
+      "legal_privacy": "Nowa polityka prywatności obowiązuje od {date}.",
+      "legal_dpa": "Nowa umowa powierzenia przetwarzania danych obowiązuje od {date}."
+    },
+    "legalBanner": {
+      "terms": "Regulamin prepza zmienia się {date}.",
+      "privacy": "Polityka prywatności prepza zmienia się {date}.",
+      "dpa": "Umowa powierzenia przetwarzania danych zmienia się {date}."
+    },
+    "readLegal": "Przeczytaj nową wersję",
+    "closeLegalBanner": "Zamknij"
   },
   "report": {
     "download": "Pobierz PDF",
@@ -1144,7 +1517,7 @@
     "continue": "Kontynuuj",
     "history": "Twoje podejścia",
     "results": "Wyniki ćwiczeń",
-    "grade": "poprawnych odpowiedzi",
+    "grade": "możliwych punktów",
     "notFinished": "nieukończone",
     "noRounds": "Nie ma jeszcze podejść.",
     "startFailed": "Nie udało się rozpocząć ćwiczeń. Spróbuj ponownie.",
@@ -1332,7 +1705,7 @@
     "counts": "{keys, plural, one {# klucz} few {# klucze} many {# kluczy} other {# klucza}} · {webhooks, plural, one {# webhook} few {# webhooki} many {# webhooków} other {# webhooka}}",
     "docs": "Dokumentacja dla deweloperów",
     "keysTitle": "Klucze API",
-    "keysText": "Klucz odczytuje Twoje rozmowy i kandydatów oraz zaprasza kandydatów w imieniu osoby, która go utworzyła.",
+    "keysText": "Klucz działa jako osoba, która go utworzyła, i może robić tylko to, na co pozwalają jego uprawnienia.",
     "noKeys": "Nie ma jeszcze kluczy.",
     "newKey": "Nowy klucz",
     "newKeyTitle": "Nowy klucz API",
@@ -1391,7 +1764,37 @@
     "removeWebhookTitle": "Usunąć ten webhook?",
     "removeWebhookText": "{url} przestanie otrzymywać zdarzenia.",
     "createFailed": "Nie udało się utworzyć.",
-    "removeFailed": "Nie udało się usunąć."
+    "removeFailed": "Nie udało się usunąć.",
+    "selectAll": "Zaznacz wszystko",
+    "permissionGroups": {
+      "interviews": "Rozmowy",
+      "candidates": "Kandydaci",
+      "credits": "Kredyty",
+      "ai_agents": "Agenci AI"
+    },
+    "permissions": {
+      "interviews:read": "Odczyt",
+      "interviews:create": "Tworzenie",
+      "candidates:read": "Odczyt",
+      "candidates:invite": "Zapraszanie",
+      "candidates:change": "Zmiana",
+      "candidates:delete": "Usuwanie",
+      "credits:read": "Odczyt",
+      "mcp": "Używanie z agentami AI (MCP)"
+    },
+    "permissionLine": {
+      "interviews:read": "odczyt",
+      "interviews:create": "tworzenie",
+      "candidates:read": "odczyt",
+      "candidates:invite": "zapraszanie",
+      "candidates:change": "zmiana",
+      "candidates:delete": "usuwanie",
+      "credits:read": "odczyt",
+      "mcp": "MCP"
+    },
+    "editPermissions": "Edytuj uprawnienia",
+    "editPermissionsText": "Odznacz to, czego „{name}” już nie potrzebuje. Aby dodać uprawnienie, utwórz nowy klucz.",
+    "permissionsFailed": "Nie udało się zapisać uprawnień."
   },
   "brand": {
     "logoTitle": "Logo",
@@ -1460,7 +1863,8 @@
     "tabs": {
       "api": "API",
       "webhooks": "Webhooki",
-      "sdk": "SDK"
+      "sdk": "SDK",
+      "mcp": "MCP"
     },
     "englishOnly": "Ta strona jest dostępna tylko po angielsku.",
     "baseUrl": "Bazowy URL",
@@ -1513,6 +1917,7 @@
     "emptyTitle": "Zapytaj o swoją rekrutację",
     "emptyText": "Kandydaci, rozmowy, kredyty, integracje i to, jak działa prepza, na podstawie tego, co widzisz w swoich firmach. AI może się mylić; wiążące są strony, do których odsyła.",
     "emptyTitleFaq": "Zapytaj o prepza",
+    "pageQuestion": "Co mogę zrobić na tej stronie?",
     "pages": {
       "open": "Otwórz",
       "pricing": "Cennik",
@@ -1691,336 +2096,7 @@
   "pageHelp": {
     "label": "O tej stronie",
     "actionsTitle": "Co możesz zrobić",
-    "tipsTitle": "Wskazówki",
-    "landing": {
-      "title": "Jak działa prepza",
-      "text": "prepza zamienia opis stanowiska w rozmowę na czas z pytaniami wielokrotnego wyboru, z osobnym losowym zestawem pytań dla każdego kandydata.",
-      "actions": [
-        "Wklej opis stanowiska: prepza zaproponuje tematy do sprawdzenia.",
-        "Przejrzyj tematy: zostaw, edytuj lub usuń je, a potem zatwierdź, by powstały pytania.",
-        "Zaproś kandydatów e-mailem, z pliku albo jednym linkiem do udostępnienia.",
-        "Czytaj raporty: kandydaci uszeregowani według wyniku, z każdą odpowiedzią i ostrzeżeniami o podejrzanych zachowaniach."
-      ],
-      "tips": [
-        "Tworzenie rozmów jest bezpłatne. Płacisz $2–5 za kandydata, który odpowiada, a pierwsi kandydaci są za darmo.",
-        "Wypróbuj rozmowę jako kandydat, zanim kogokolwiek zaprosisz."
-      ]
-    },
-    "companies": {
-      "title": "Firmy",
-      "text": "Twoje firmy. Wszystko, co robisz w prepza, dzieje się w jednej z nich: jej rozmowy, kandydaci, zespół, kredyty i integracje.",
-      "actions": [
-        "Utwórz firmę przyciskiem „Nowa firma”. Jej nazwa jest unikalna w całym prepza.",
-        "Otwórz firmę, by pracować nad jej rozmowami i kandydatami.",
-        "Usuń firmę, której jesteś właścicielem, razem ze wszystkimi rozmowami i zaproszeniami."
-      ],
-      "tips": [
-        "Przy firmach, których nie jesteś właścicielem, widać Twoją rolę: administratorzy wprowadzają zmiany, obserwatorzy tylko przeglądają.",
-        "Kredyty należą do firmy, więc każdą doładowuje się osobno."
-      ]
-    },
-    "pickCompany": {
-      "title": "Wybierz firmę",
-      "text": "Wybrano szablon. Wybierz firmę, dla której jest przeznaczony: szablon zostanie do niej skopiowany jako nowa rozmowa, za darmo i gotowa do wysłania kandydatom.",
-      "actions": [
-        "Wybierz firmę, by otworzyć w niej szablon, a potem go użyj.",
-        "Utwórz nową firmę, jeśli jeszcze jej nie masz; szablon otworzy się w niej."
-      ],
-      "tips": [
-        "Po skopiowaniu rozmowa należy do firmy: zmieniaj jej pytania i ustawienia, jak chcesz."
-      ]
-    },
-    "interviews": {
-      "title": "Rozmowy",
-      "text": "Wszystkie rozmowy tej firmy i jej kredyty na kandydatów. Każda rozmowa to test na czas utworzony z opisu stanowiska.",
-      "actions": [
-        "Utwórz rozmowę z opisu stanowiska przyciskiem „Nowa rozmowa”.",
-        "Otwórz rozmowę, by zobaczyć jej tematy, kandydatów i ustawienia.",
-        "Wypróbuj rozmowę jako kandydat albo ją usuń.",
-        "Doładuj kredyty przy saldzie albo włącz automatyczne doładowanie na karcie Rozliczenia."
-      ],
-      "tips": [
-        "Saldo zmienia kolor na bursztynowy, gdy kredytów jest mało. Bez kredytów nowe zaproszenia nie są wysyłane.",
-        "Karty powyżej prowadzą do szablonów, zespołu, integracji, rozliczeń (dla właścicieli i administratorów) i poleceń."
-      ]
-    },
-    "newInterview": {
-      "title": "Nowa rozmowa",
-      "text": "Zacznij rozmowę od opisu stanowiska. prepza go przeczyta, zaproponuje tematy do sprawdzenia i napisze pytania, gdy je zatwierdzisz.",
-      "actions": [
-        "Wklej opis stanowiska: rolę, wymagania i mile widziane umiejętności.",
-        "Wybierz język, w którym ma powstać rozmowa.",
-        "Wygeneruj, a potem przejrzyj proponowane tematy."
-      ],
-      "tips": [
-        "Im bardziej konkretny opis, tym lepiej pytania pasują do roli.",
-        "Generowanie jest bezpłatne: płacisz tylko za kandydatów, którzy odpowiadają."
-      ]
-    },
-    "reviewTopics": {
-      "title": "Przejrzyj tematy",
-      "text": "prepza zaproponowała te tematy na podstawie Twojego opisu. Każdy zostawiony temat dostaje własny zestaw pytań z odpowiedziami.",
-      "actions": [
-        "Odznacz tematy, których nie potrzebujesz.",
-        "Edytuj nazwę tematu i podtematy ołówkiem przy nim.",
-        "Opisz zmiany własnymi słowami i je zastosuj, np. „dodaj temat o przywództwie w zespole”.",
-        "Zatwierdź i wygeneruj, by powstały pytania."
-      ],
-      "tips": [
-        "Gdy tematów jest za dużo, odznacz część albo opisz, jak je połączyć.",
-        "Pytania powstają dopiero po zatwierdzeniu, więc poświęć tu chwilę."
-      ]
-    },
-    "generating": {
-      "title": "Generowanie",
-      "text": "prepza tworzy Twoją rozmowę: najpierw tematy, potem pytania do każdego z nich. To potrwa kilka minut.",
-      "actions": [
-        "Możesz opuścić tę stronę: generowanie trwa dalej.",
-        "Anuluj generowanie, jeśli już go nie potrzebujesz; nic z tego, co powstało, nie zostanie zachowane."
-      ],
-      "tips": [
-        "Dostaniesz powiadomienie, gdy rozmowa będzie gotowa.",
-        "Wróć tu w każdej chwili z listy rozmów."
-      ]
-    },
-    "interviewTopics": {
-      "title": "Tematy",
-      "text": "Co sprawdza ta rozmowa: jej tematy, każdy z podtematami i własną pulą pytań. Każdy kandydat dostaje losowy zestaw z każdej puli.",
-      "actions": [
-        "Otwórz „Zarządzaj pytaniami”, by przeczytać pytania i odpowiedzi tematu.",
-        "Wygeneruj ponownie słabe pytanie, oznacz błędną odpowiedź albo przeczytaj zgłoszenia kandydatów do pytania.",
-        "Ustaw, ile pytań z tematu dostaje każdy kandydat.",
-        "Wypróbuj rozmowę jako kandydat albo ją usuń."
-      ],
-      "tips": [
-        "Pytania napisane przez AI mogą zawierać błędy: przejrzyj każdy temat, zanim kogokolwiek zaprosisz.",
-        "Kliknij tytuł, by zmienić nazwę rozmowy."
-      ]
-    },
-    "interviewCandidates": {
-      "title": "Kandydaci",
-      "text": "Wszyscy zaproszeni na tę rozmowę, z ich statusem, postępem i wynikiem.",
-      "actions": [
-        "Zaproś kandydatów: pojedynczo, listą do 100 osób albo plikiem CSV lub TXT.",
-        "Włącz link do udostępnienia do ogłoszenia o pracę: każdy, kto go ma, może przejść rozmowę.",
-        "Szukaj po e-mailu lub imieniu i nazwisku, filtruj po statusie i sortuj po wyniku lub dacie.",
-        "Otwórz raport kandydata albo pobierz lub udostępnij raport o wszystkich kandydatach."
-      ],
-      "tips": [
-        "Każdy kandydat, który odpowie na co najmniej jedno pytanie, zużywa kredyty, także ten z linku.",
-        "Przypomnienia trafiają do kandydatów automatycznie."
-      ]
-    },
-    "interviewSettings": {
-      "title": "Ustawienia",
-      "text": "Jak ta rozmowa przebiega dla każdego kandydata.",
-      "actions": [
-        "Ustaw czas na każde pytanie, w sekundach.",
-        "Ustaw próg zaliczenia: kandydaci, którzy go osiągną, przechodzą.",
-        "Oznacz rozmowę jako zakończoną zatrudnieniem, gdy obsadzisz stanowisko."
-      ],
-      "tips": [
-        "Każde ustawienie zapisuje się, gdy tylko opuścisz jego pole.",
-        "Kandydaci nigdy nie widzą swoich wyników; widzi je tylko Twój zespół.",
-        "Jeśli jeden kandydat potrzebuje więcej czasu, dodaj mu dodatkowy czas na jego stronie."
-      ]
-    },
-    "tryInterview": {
-      "title": "Wypróbuj jako kandydat",
-      "text": "Podgląd tej rozmowy dokładnie tak, jak widzą ją kandydaci: wstęp, a potem pytania na czas. Jest bezpłatny.",
-      "actions": [
-        "Rozpocznij podgląd i odpowiadaj tak, jak zrobiłby to kandydat.",
-        "Sprawdź czas, sformułowania i odpowiedzi, zanim kogokolwiek zaprosisz."
-      ],
-      "tips": [
-        "Nie opuszczaj strony podczas odpowiadania: u kandydatów opuszczenie strony, kopiowanie i zbyt szybkie odpowiedzi są rejestrowane."
-      ]
-    },
-    "candidate": {
-      "title": "Raport kandydata",
-      "text": "Wyniki jednego kandydata: jego wynik, czy zaliczył, oraz wynik z każdego tematu z każdą odpowiedzią.",
-      "actions": [
-        "Przeczytaj każdą odpowiedź z ostrzeżeniami o podejrzanych zachowaniach: opuszczeniami strony, próbami kopiowania i szybkimi odpowiedziami.",
-        "Pobierz raport jako PDF albo udostępnij go e-mailem.",
-        "Daj dodatkowy czas, zanim kandydat zacznie, np. z powodu niepełnosprawności.",
-        "Dodaj lub edytuj imię i nazwisko kandydata.",
-        "Skopiuj link z zaproszeniem, aby wysłać go samodzielnie, jeśli e-mail nie dotarł; jest dostępny, dopóki kandydat nie skończy.",
-        "Wyślij zaproszenie ponownie lub je wycofaj albo usuń kandydata razem z jego wynikami."
-      ],
-      "tips": [
-        "Wynik wspiera Twoją decyzję, ale jej nie podejmuje. Jeśli kandydat o to poprosi, niech jego wynik sprawdzi człowiek."
-      ]
-    },
-    "templates": {
-      "title": "Szablony",
-      "text": "Gotowe rozmowy dla popularnych ról. Użycie szablonu kopiuje go do tej firmy jako Twoją własną rozmowę.",
-      "actions": [
-        "Szukaj według roli lub tematu i filtruj po poziomie i języku.",
-        "Otwórz szablon, by zobaczyć jego tematy i liczbę pytań w każdym.",
-        "Użyj szablonu, by zacząć od niego rozmowę."
-      ],
-      "tips": [
-        "Dla lepszego dopasowania utwórz raczej rozmowę z własnego opisu stanowiska.",
-        "Po skopiowaniu rozmowa jest Twoja: zmieniaj jej pytania i ustawienia, jak chcesz."
-      ]
-    },
-    "template": {
-      "title": "Szablon",
-      "text": "Gotowa rozmowa: jej tematy, ich podtematy i liczba pytań w każdym temacie.",
-      "actions": [
-        "Sprawdź, czy tematy pasują do roli, na którą rekrutujesz.",
-        "Użyj szablonu, by skopiować go do tej firmy jako nową rozmowę."
-      ],
-      "tips": [
-        "Kopiowanie jest bezpłatne; kandydaci, którzy odpowiadają, zużywają kredyty jak zwykle.",
-        "Jeśli tematy nie pasują, utwórz raczej rozmowę z opisu stanowiska."
-      ]
-    },
-    "team": {
-      "title": "Zespół",
-      "text": "Osoby, które pracują nad rozmowami tej firmy, i ich role.",
-      "actions": [
-        "Dodaj członka zespołu e-mailem jako administratora lub obserwatora: dostanie e-mailem link, by dołączyć.",
-        "Zmień rolę członka zespołu między administratorem a obserwatorem.",
-        "Skopiuj link oczekującego zaproszenia albo usuń członka zespołu lub zaproszenie."
-      ],
-      "tips": [
-        "Administratorzy tworzą i zmieniają rozmowy, zapraszają kandydatów i doładowują kredyty. Obserwatorzy widzą rozmowy i wyniki oraz udostępniają raporty, ale niczego nie zmieniają.",
-        "Usunięcie członka zespołu, którego karta opłaca automatyczne doładowania, wyłącza te doładowania."
-      ]
-    },
-    "integrations": {
-      "title": "Integracje",
-      "text": "Połącz prepza z narzędziami, których Twój zespół już używa. Każda integracja ma własną stronę z instrukcją konfiguracji.",
-      "actions": [
-        "Slack: powiadomienia firmy na wybranym kanale.",
-        "ATS (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): kandydaci przeniesieni na wybrany etap dostają rozmowę, a ich wyniki wracają do ATS.",
-        "API: klucze i webhooki do połączenia własnej platformy.",
-        "Aplikacje AI: korzystaj z prepza w Claude, ChatGPT i innych aplikacjach AI."
-      ],
-      "tips": [
-        "Integracje widzą wszyscy w firmie; zmieniać je mogą właściciele i administratorzy."
-      ]
-    },
-    "ats": {
-      "title": "Integracja z ATS",
-      "text": "Powiąż ofertę w ATS z rozmową: kandydaci przeniesieni na wybrany etap dostają rozmowę, a ich wyniki wracają jako komentarz w ich profilu.",
-      "actions": [
-        "Połącz swój ATS według jego instrukcji.",
-        "Powiąż ofertę: wybierz ofertę, etap i rozmowę albo utwórz nową rozmowę z treści oferty.",
-        "Zaproś ponownie kandydatów, którzy nie zostali zaproszeni, np. gdy skończyły się kredyty.",
-        "Usuń powiązanie oferty albo odłącz ATS."
-      ],
-      "tips": [
-        "Dodaj etap tylko dla prepza, np. „Test umiejętności prepza”, żeby nigdy nie mieszał się z innymi narzędziami.",
-        "prepza nigdy nikogo nie przenosi ani nie odrzuca w Twoim ATS."
-      ]
-    },
-    "slack": {
-      "title": "Slack",
-      "text": "Powiadomienia firmy na kanale Slacka, na bieżąco.",
-      "actions": [
-        "Dodaj prepza do Slacka i wybierz kanał, np. #hiring.",
-        "Wybierz, które powiadomienia tam trafiają: kandydat kończy rozmowę, zaproszenie nie dotarło, rozmowa jest gotowa i inne.",
-        "Odłącz, by je wyłączyć i usunąć aplikację prepza ze Slacka."
-      ],
-      "tips": [
-        "prepza może tylko publikować na tym kanale; nie może czytać Twojego Slacka.",
-        "Wszyscy nadal widzą każde powiadomienie pod dzwonkiem."
-      ]
-    },
-    "api": {
-      "title": "API",
-      "text": "Połącz z prepza własną platformę, np. stronę kariery.",
-      "actions": [
-        "Utwórz klucz API: w Twoim imieniu tworzy rozmowy, odczytuje kandydatów i ich wyniki, zaprasza ich, wysyła im przypomnienia, aktualizuje lub usuwa ich oraz odczytuje Twoje kredyty.",
-        "Dodaj webhook: prepza powiadamia Twój adres HTTPS, z podpisem, gdy kandydat zaczyna lub kończy (wraz z wynikami), gdy zaproszenie do niego nie dotrze lub wygaśnie, gdy kandydat zostanie usunięty i gdy rozmowa jest gotowa.",
-        "Wyślij do webhooka zdarzenie testowe i sprawdź w dzienniku dostarczeń, jak poszła każda wysyłka.",
-        "Usuń klucze i webhooki, których już nie używasz.",
-        "Otwórz dokumentację dla deweloperów ze wszystkimi endpointami i zdarzeniami oraz SDK."
-      ],
-      "tips": [
-        "Nowy klucz i sekret webhooka są pokazywane tylko raz: skopiuj je od razu.",
-        "Ustaw termin ważności każdego klucza: wyciekły klucz bez terminu ważności można używać bez końca."
-      ]
-    },
-    "brand": {
-      "title": "Marka",
-      "text": "Twoje logo i kolory w zaproszeniu, rozmowie i na stronie końcowej Twoich kandydatów.",
-      "actions": [
-        "Ustaw lub zmień logo.",
-        "Wybierz czcionkę i zaokrąglenie kart oraz przycisków.",
-        "Wybierz kolory każdej grupy i zobacz je w podglądzie.",
-        "Zapisz je albo wróć do kolorów prepza."
-      ],
-      "tips": [
-        "Kolorów, przy których tekst byłby trudny do odczytania, nie da się zapisać, żeby każdy kandydat mógł przeczytać pytania.",
-        "Członkowie zespołu, którzy wypróbowują rozmowę, też widzą ją w Twoich kolorach."
-      ]
-    },
-    "referrals": {
-      "title": "Polecenia",
-      "text": "Zapraszaj inne firmy do prepza linkiem tej firmy, a obie firmy dostaną kredyty.",
-      "actions": [
-        "Skopiuj lub udostępnij swój link polecający.",
-        "Zobacz wszystkie nagrody, które ta firma otrzymała."
-      ],
-      "tips": [
-        "Obie firmy dostają kredyty, gdy zaproszona firma zrobi pierwsze doładowanie, na dowolną kwotę.",
-        "Kredyty trafiają do tej firmy i nigdy nie wygasają."
-      ]
-    },
-    "billing": {
-      "title": "Rozliczenia",
-      "text": "Skąd pochodzą kredyty tej firmy i na co zostały wykorzystane.",
-      "actions": [
-        "Doładuj albo ustaw automatyczne doładowanie.",
-        "Zobacz kandydatów, dla których kredyty są zarezerwowane.",
-        "Otwórz fakturę dowolnego doładowania."
-      ],
-      "tips": [
-        "Kredyty kandydata są rezerwowane przy zaproszeniu, pobierane, gdy odpowie, i zwracane, jeśli nie odpowie.",
-        "Tę stronę widzą tylko właściciele i administratorzy."
-      ]
-    },
-    "aiApps": {
-      "title": "Aplikacje AI",
-      "text": "Korzystaj z prepza w swoim czacie AI: pytaj Claude lub ChatGPT o swoje rozmowy i kandydatów albo zlecaj im zmiany.",
-      "actions": [
-        "Skopiuj adres serwera i dodaj go do Claude, Claude Code lub ChatGPT zgodnie z instrukcją.",
-        "Zezwól aplikacji na dostęp na stronie prepza, która się otworzy.",
-        "Odłącz aplikację, której już nie używasz."
-      ],
-      "tips": [
-        "Aplikacja działa w Twoim imieniu, w każdej firmie, do której należysz. Większość aplikacji pyta Cię, zanim cokolwiek zmieni.",
-        "Nie widzi Twojego hasła ani kluczy API i nie może usunąć Twojego konta ani firmy."
-      ]
-    },
-    "topUp": {
-      "title": "Doładowanie",
-      "text": "Kupuj kredyty dla każdej firmy, w której jesteś właścicielem lub administratorem.",
-      "actions": [
-        "Wybierz firmę i doładowanie: większe kosztują mniej za kandydata.",
-        "Zapłać na stronie płatności Paddle; kredyty pojawią się w kilka sekund.",
-        "Otwórz cennik, by porównać doładowania."
-      ],
-      "tips": [
-        "Kandydat kosztuje 500 kredytów: są rezerwowane przy zaproszeniu, pobierane, gdy odpowie, i zwracane, jeśli nie odpowie.",
-        "Kredyty nie wygasają. Faktura każdego doładowania jest na karcie Rozliczenia firmy."
-      ]
-    },
-    "settings": {
-      "title": "Ustawienia",
-      "text": "Twoje własne konto: język, w którym prepza się do Ciebie zwraca, e-maile, które dostajesz, i Twoje dane.",
-      "actions": [
-        "Wybierz język strony, czatu pomocy i Twoich e-maili.",
-        "Wybierz, które opcjonalne e-maile dostajesz; e-maile serwisowe, takie jak zaproszenia, raporty i problemy z płatnościami, są wysyłane zawsze.",
-        "Pobierz wszystko, co prepza przechowuje na Twój temat, albo usuń konto."
-      ],
-      "tips": [
-        "Usunięcie konta usuwa firmy, w których jesteś tylko Ty. Firma, do której dołączyli inni, potrzebuje najpierw innego właściciela."
-      ]
-    }
+    "tipsTitle": "Wskazówki"
   },
   "companyBilling": {
     "reservedTab": "Zarezerwowane ({count})",
@@ -2036,7 +2112,8 @@
       "chargeback": "Obciążenie zwrotne",
       "chargeback_reversed": "Cofnięte obciążenie zwrotne",
       "referral": "Nagroda za polecenie",
-      "referral_reversed": "Cofnięta nagroda za polecenie"
+      "referral_reversed": "Cofnięta nagroda za polecenie",
+      "adjustment": "Korekta od prepza"
     },
     "automatic": "Automatyczne doładowanie",
     "invoice": "Faktura",
@@ -2059,6 +2136,7 @@
     "claudeCode": "W Claude Code uruchom:",
     "copyCommand": "Kopiuj polecenie",
     "commandCopied": "Skopiowano polecenie",
+    "moreApps": "Gemini CLI, Cursor, VS Code, Le Chat i Twoi własni agenci: zobacz <link>dokumentację dla deweloperów</link>.",
     "chatgptDeveloper": "W ChatGPT włącz tryb dewelopera:",
     "chatgptCreate": "Wróć do Apps & Connectors i wybierz:",
     "chatgptPaste": "Nazwij go {name}, wklej adres serwera i wybierz to uwierzytelnianie:",
@@ -2124,5 +2202,91 @@
       "authority": "Jeśli nasza odpowiedź Cię nie zadowala, możesz zwrócić się do Estońskiego Urzędu Ochrony Konsumentów i Regulacji Technicznych (TTJA)."
     },
     "reviewed": "Ostatni przegląd: {date}."
+  },
+  "actionLog": {
+    "empty": "Nie ma jeszcze żadnych działań.",
+    "noMatches": "Żadne działania nie pasują do tych filtrów.",
+    "formerMember": "Były członek zespołu",
+    "deletedCandidate": "usunięty kandydat",
+    "anyMember": "Wszyscy",
+    "anyAction": "Wszystkie działania",
+    "member": "Członek zespołu",
+    "action": "Działanie",
+    "from": "Od",
+    "to": "Do",
+    "groups": {
+      "interviews": "Rozmowy",
+      "candidates": "Kandydaci",
+      "team": "Zespół",
+      "company": "Firma",
+      "billing": "Rozliczenia",
+      "integrations": "Integracje"
+    },
+    "actions": {
+      "interview_created": "Utworzył(a) rozmowę",
+      "interview_from_template": "Utworzył(a) rozmowę z szablonu",
+      "interview_deleted": "Usunął(-ęła) rozmowę",
+      "interview_renamed": "Zmienił(a) nazwę rozmowy",
+      "interview_settings_changed": "Zmienił(a) ustawienia rozmowy",
+      "link_turned_on": "Włączył(a) link do udostępnienia",
+      "link_turned_off": "Wyłączył(a) link do udostępnienia",
+      "questions_regenerated": "Wygenerował(a) pytanie od nowa",
+      "answer_key_reported": "Oznaczył(a) klucz odpowiedzi jako błędny",
+      "topics_approved": "Zatwierdził(a) tematy rozmowy",
+      "pass_mark_changed": "Zmienił(a) próg zaliczenia",
+      "candidate_invited": "Zaprosił(a) kandydata",
+      "invite_resent": "Ponownie wysłał(a) zaproszenie",
+      "invite_revoked": "Wycofał(a) zaproszenie",
+      "candidate_deleted": "Usunął(-ęła) kandydata",
+      "candidate_renamed": "Zmienił(a) imię i nazwisko kandydata",
+      "extra_time_set": "Dał(a) kandydatowi dodatkowy czas",
+      "results_viewed": "Wyświetlił(a) wyniki kandydata",
+      "report_emailed": "Wysłał(a) raport e-mailem",
+      "member_invited": "Zaprosił(a) członka zespołu",
+      "member_joined": "Dołączył(a) do firmy",
+      "member_removed": "Usunął(-ęła) członka zespołu",
+      "member_role_changed": "Zmienił(a) rolę członka zespołu",
+      "ownership_transferred": "Przekazał(a) firmę innemu właścicielowi",
+      "company_renamed": "Zmienił(a) nazwę firmy",
+      "logo_changed": "Zmienił(a) logo",
+      "brand_changed": "Zmienił(a) kolory lub styl marki",
+      "verification_requested": "Poprosił(a) o weryfikację firmy",
+      "ai_apps_changed": "Zezwolił(a) na aplikacje AI lub je zablokował(a)",
+      "top_up_paid": "Doładował(a) kredyty",
+      "auto_top_up_set": "Ustawił(a) automatyczne doładowanie",
+      "auto_top_up_changed": "Zmienił(a) automatyczne doładowanie",
+      "auto_top_up_stopped": "Wyłączył(a) automatyczne doładowanie",
+      "ats_connected": "Połączył(a) ATS",
+      "ats_reconnected": "Ponownie połączył(a) ATS",
+      "ats_disconnected": "Odłączył(a) ATS",
+      "job_linked": "Powiązał(a) ofertę z ATS",
+      "job_unlinked": "Odłączył(a) ofertę z ATS",
+      "slack_connected": "Połączył(a) Slacka",
+      "slack_disconnected": "Odłączył(a) Slacka",
+      "slack_notifications_changed": "Zmienił(a) powiadomienia Slacka",
+      "api_key_created": "Utworzył(a) klucz API",
+      "api_key_deleted": "Usunął(-ęła) klucz API",
+      "api_key_narrowed": "Ograniczył(a) uprawnienia klucza API",
+      "webhook_added": "Dodał(a) webhook",
+      "webhook_tested": "Przetestował(a) webhook",
+      "webhook_deleted": "Usunął(-ęła) webhook"
+    },
+    "removed": "usunięto: {permissions}",
+    "permissions": {
+      "interviews:read": "odczyt rozmów",
+      "interviews:create": "tworzenie rozmów",
+      "candidates:read": "odczyt kandydatów",
+      "candidates:invite": "zapraszanie kandydatów",
+      "candidates:change": "zmiana kandydatów",
+      "candidates:delete": "usuwanie kandydatów",
+      "credits:read": "odczyt kredytów",
+      "mcp": "używanie z agentami AI (MCP)"
+    },
+    "via": {
+      "assistant": "przez asystenta",
+      "mcp": "przez aplikację AI",
+      "api": "przez API",
+      "ats": "przez ATS"
+    }
   }
 }

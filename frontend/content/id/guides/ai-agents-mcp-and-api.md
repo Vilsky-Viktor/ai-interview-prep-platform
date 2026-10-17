@@ -2,7 +2,7 @@
 title: "Agen AI, MCP, dan API: apa itu dan cara memakainya dalam rekrutmen"
 seoTitle: "Agen AI, MCP, dan API dalam Rekrutmen: Apa Itu dan Cara Memakainya"
 description: "Apa itu agen AI, apa fungsi MCP dan API, cara memakainya dengan aman dalam rekrutmen, dan cara menjalankan prepza dari agennya, dari Claude dan ChatGPT, atau dari platformmu sendiri."
-updated: "2026-10-15"
+updated: "2026-10-17"
 ---
 
 # Agen AI, MCP, dan API: apa itu dan cara memakainya dalam rekrutmen
@@ -84,6 +84,7 @@ Sebelum menghubungkan aplikasi AI apa pun ke data kerja, cek kebijakan perusahaa
 Pilih **tanya agen** di header halaman mana pun. Agen mengenal perusahaan, wawancara, kandidat, kredit, dan integrasimu, serta cara kerja prepza. Ia menjawab dalam bahasamu, dan kamu bisa mengetik atau berbicara.
 
 - **Ia menjawab dari datamu**, dengan akses yang sama seperti kamu: admin melihat apa yang dilihat admin, pelihat melihat apa yang dilihat pelihat.
+- **Ia tahu halaman yang sedang kamu buka.** Tanyakan "Apa yang bisa saya lakukan di halaman ini?" untuk panduan halaman itu, atau "Siapa yang terbaik di sini?" di kandidat sebuah wawancara, dan ia menjawab tentang wawancara itu tanpa bertanya yang mana.
 - **Ia menyiapkan perubahan, kamu yang mengonfirmasi.** Saat diminta mengundang kandidat, ia menampilkan kartu berisi persis apa yang akan terjadi, misalnya "Undang 12 kandidat ke Backend developer". Tidak ada yang dijalankan sampai kamu memilih konfirmasi.
 - **Ia menunjukkan sumbernya.** Di bawah jawaban, kamu melihat kandidat atau wawancara yang dipakainya dan tautan ke halaman asalnya.
 - **Ia tetap pada topik.** Ia menjawab tentang prepza dan rekrutmen dengan prepza, dan menolak hal lainnya.
@@ -104,17 +105,19 @@ Setelah itu, bertanyalah di chat seperti kamu bertanya kepada rekan kerja: "Di p
 
 - **Izinmu.** Ia bertindak atas namamu, di setiap perusahaan tempatmu bergabung, dengan peranmu di masing-masing.
 - **Kredit dan batas.** Mengundang kandidat biayanya sama seperti di aplikasi, dan batas email yang sama berlaku.
-- **Catatan.** Keputusan yang disimpan log audit (menyetujui topik, melihat hasil, mengubah nilai lulus, memberi waktu tambahan, mencabut kandidat, mengemail laporan) ditandai sebagai dibuat melalui aplikasi AI. Pemilik perusahaan bisa membaca log itu melalui API.
+- **Catatan.** Semua yang dilakukan aplikasi AI untukmu muncul di log tindakan perusahaan sebagai dilakukan melalui aplikasi AI, mulai dari menyetujui topik dan melihat hasil hingga memberi waktu tambahan atau mencabut kandidat. Pemilik perusahaan membacanya di tab **Log tindakan** perusahaan.
 - **Perusahaan yang menentukan.** Pemilik dan admin bisa menghentikan aplikasi AI memakai data perusahaan dengan **Izinkan aplikasi AI di perusahaan ini** di halaman aplikasi AI perusahaan.
 - **Yang tidak bisa dilakukannya.** Ia tidak bisa melihat kata sandi atau kunci API-mu, dan tidak bisa menghapus akunmu atau perusahaan. Hal-hal itu tetap di aplikasi.
 
 **Untuk memutuskan,** hapus konektornya di aplikasi AI-mu, atau pilih **Putuskan** di sebelahnya di bagian **Aplikasi AI** pada tab Integrasi. Koneksinya langsung berhenti.
 
+**Aplikasi lain dan agenmu sendiri.** [Tab MCP](/api-docs?tab=mcp) di dokumentasi pengembang berisi langkah-langkah untuk Gemini CLI, Cursor, VS Code, dan Le Chat, serta contoh agen lengkap dalam Python dan TypeScript. Agen yang berjalan di server, tanpa ada orang yang menyetujui proses masuk, memakai kunci API perusahaan dengan hak akses **Pakai dengan agen AI (MCP)**: agen itu hanya bekerja di perusahaan tersebut, dan hanya dengan alat yang diizinkan oleh hak akses lain pada kunci itu.
+
 ### 3. Platformmu sendiri, lewat API
 
 Untuk otomatisasi tanpa AI, prepza punya API, yang dijelaskan di [dokumentasi pengembang](/api-docs)-nya.
 
-1. Pemilik atau admin membuka tab **Integrasi** sebuah perusahaan, lalu **API**, dan memilih **Kunci baru**. Beri nama sesuai platform yang akan memakainya dan pilih kapan kunci itu kedaluwarsa. Kunci hanya ditampilkan sekali; simpan di tempat yang aman.
+1. Pemilik atau admin membuka tab **Integrasi** sebuah perusahaan, lalu **API**, dan memilih **Kunci baru**. Beri nama sesuai platform yang akan memakainya, pilih kapan kunci itu kedaluwarsa, dan centang hanya yang dibutuhkannya: kunci dasbor hanya membaca, kunci situs karier juga mengundang. Hak akses bisa dikurangi nanti, tetapi tidak pernah bisa ditambah. Kunci hanya ditampilkan sekali; simpan di tempat yang aman.
 2. Platformmu mengirim permintaan dengan kunci itu: menampilkan daftar wawancara perusahaan, menampilkan daftar atau membaca kandidat beserta nilainya, lulus atau tidak, dan tanda integritasnya, serta mengundang kandidat.
 3. Tambahkan **webhook**: alamat di platformmu yang dipanggil prepza, dengan tanda tangan, saat kandidat mulai, selesai, atau dihapus, saat undangannya tidak sampai atau kedaluwarsa, dan saat wawancara siap, sehingga kamu tidak perlu terus-menerus bertanya. Halaman API dapat mengirim event uji ke webhook ini dan menampilkan log pengirimannya.
 
