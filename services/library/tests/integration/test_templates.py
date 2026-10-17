@@ -1,9 +1,9 @@
 import uuid
-from datetime import UTC, datetime, timedelta
 
-from app.constants.reuse import MIN_REUSE_ANSWERS, RETIRE_AFTER_ANSWERS
-from app.storage import answer_stats, bank, preparations, quality, reuse, templates
-from tests.integration.factories import direction, interview
+from app.constants.reuse import MIN_REUSE_ANSWERS
+from app.constants.sets import Pool
+from app.storage import answer_stats, preparations, quality, reuse, templates
+from tests.integration.factories import COPYABLE, direction, interview
 
 
 def test_templates_are_searched_and_filtered_and_keep_their_embeddings(run):
@@ -65,7 +65,7 @@ def test_templates_are_found_by_a_topic_or_a_subtopic_too(run):
 
 def test_a_template_is_copied_into_a_company_test_and_stays_a_template(run):
     async def scenario():
-        template = await interview("Bookkeeper", template=True, questions=15)
+        template = await interview("Bookkeeper", template=True, questions=COPYABLE)
         copy = await templates.copy_template(template, "company-9")
         missing = await templates.copy_template(copy.id, "company-9")
 
@@ -81,7 +81,7 @@ def test_a_template_is_copied_into_a_company_test_and_stays_a_template(run):
     assert template.kind == "template"
     assert (copy.kind, copy.owner_type, copy.owner_id) == ("interview", "company", "company-9")
     assert copy.title == "Bookkeeper"
-    # Of the template's 15 questions, every third went straight to practice: 10 private copied.
+    # Of the template's 40 questions, 30 went to practice: its 10 company ones were copied.
     assert [count for _, count in topics] == [10]
     # A company's test isn't a template, so it can't be copied in turn.
     assert missing is None
@@ -91,9 +91,9 @@ def test_companies_see_only_the_templates_they_can_copy(run):
     word = uuid.uuid4().hex[:8]
 
     async def scenario():
-        # 15 questions leave 10 private, enough to copy; 12 leave 8, too few.
-        full = await interview(f"Full {word}", template=True, questions=15)
-        short = await interview(f"Short {word}", template=True, questions=12)
+        # 40 questions leave 10 for companies, enough to copy; 38 leave 8, too few.
+        full = await interview(f"Full {word}", template=True, questions=COPYABLE)
+        short = await interview(f"Short {word}", template=True, questions=COPYABLE - 2)
 
         def titles(rows):
             return sorted(row.title for row in rows)
@@ -113,9 +113,9 @@ def test_companies_see_only_the_templates_they_can_copy(run):
     assert full_copied and short_refused
 
 
-def test_a_template_reveals_a_third_and_its_copies_remember_their_originals(run):
+def test_a_template_splits_its_questions_and_copies_take_only_company_ones(run):
     async def scenario():
-        template = await interview("Nurse", template=True, questions=15)
+        template = await interview("Nurse", template=True, questions=COPYABLE)
         copy = await templates.copy_template(template, "company-3")
         original = await preparations.get_content(template)
         copied = await preparations.get_content(copy.id)
@@ -124,78 +124,45 @@ def test_a_template_reveals_a_third_and_its_copies_remember_their_originals(run)
 
     original, copied = run(scenario())
 
-    assert [question.stage for question in original] == ["private", "private", "revealed"] * 5
-    private = [question.id for question in original if question.stage == "private"]
-    assert [question.source_question_id for question in copied] == private
+    assert [question.pool for question in original] == ["practice"] * 30 + ["company"] * 10
+    company = [question.id for question in original if question.pool == Pool.COMPANY]
+    assert [question.source_question_id for question in copied] == company
+    # A company interview's own questions have no pool.
+    assert {question.pool for question in copied} == {None}
 
 
-def test_the_bank_offers_only_proven_private_template_questions(run):
+def test_the_bank_offers_only_proven_company_template_questions(run):
     async def scenario():
         template = await interview(
-            "Bank accountant", level="hard", template=True, questions=3, embedding=direction(1)
+            "Bank accountant", level="hard", template=True, questions=32, embedding=direction(1)
         )
         # A company test on the same subject isn't part of the bank.
         await interview("Company accountant", level="hard", questions=3, embedding=direction(1))
-        content = await preparations.get_content(template)
-        private, unproven, revealed = content.topics[0].questions
+        questions = (await preparations.get_content(template)).topics[0].questions
+        practice, (company, unproven) = questions[0], questions[30:]
 
-        for question in (private, revealed):
+        for question in (company, practice):
             for _ in range(MIN_REUSE_ANSWERS):
                 await answer_stats.record_answer(
-                    str(uuid.uuid4()), question.id, question.text, "right", True
+                    str(uuid.uuid4()), question.id, question.text, ["right"], 1.0
                 )
 
         found = await reuse.find(direction(1), "hard", "en", 10)
 
-        return found, private.id, unproven.id, revealed.id
+        return found, company.id, unproven.id, practice.id
 
-    found, private, unproven, revealed = run(scenario())
+    found, company, unproven, practice = run(scenario())
     ids = [question_id for question_id, _, _ in found]
 
-    assert private in ids
-    assert unproven not in ids and revealed not in ids
-
-
-def test_bank_questions_retire_after_enough_answers_and_are_revealed_once_idle(run):
-    async def scenario():
-        template = await interview("Electrician", template=True, questions=15)
-        busy, quiet = (await preparations.get_content(template)).topics[0].questions[:2]
-        # One company's test has a copy of each.
-        await templates.copy_template(template, "company-7")
-
-        for question in (busy, quiet):
-            for _ in range(RETIRE_AFTER_ANSWERS):
-                await answer_stats.record_answer(
-                    str(uuid.uuid4()), question.id, question.text, "right", True
-                )
-
-        now = datetime.now(UTC)
-        # Both have served enough candidates; the copies were used just now.
-        first = await bank.move_stages(now - timedelta(days=90))
-        after_first = await preparations.get_content(template)
-        # As if 90 quiet days had passed: no copy used since.
-        second = await bank.move_stages(now + timedelta(seconds=1))
-        after_second = await preparations.get_content(template)
-
-        return (
-            first,
-            [q.stage for q in after_first.topics[0].questions[:2]],
-            second,
-            [q.stage for q in after_second.topics[0].questions[:2]],
-        )
-
-    first, stages_first, second, stages_second = run(scenario())
-
-    assert stages_first == ["retiring", "retiring"]
-    assert stages_second == ["revealed", "revealed"]
-    assert first[0] >= 2 and second[1] >= 2
+    assert company in ids
+    assert unproven not in ids and practice not in ids
 
 
 def test_finished_topics_count_strong_weak_and_timeouts_for_copies_and_originals(run):
     from app.services.answer_events import handle
 
     async def scenario():
-        template = await interview("Chemist", template=True, questions=15)
+        template = await interview("Chemist", template=True, questions=COPYABLE)
         copy = await templates.copy_template(template, "company-8")
         question = (await preparations.get_content(copy.id)).topics[0].questions[0]
         result = {
@@ -224,33 +191,17 @@ def test_finished_topics_count_strong_weak_and_timeouts_for_copies_and_originals
         assert stats.timeouts == 1
 
 
-def test_a_new_template_never_reveals_questions_reused_from_the_bank(run):
+def test_a_new_template_never_puts_questions_reused_from_the_bank_in_practice(run):
     from prepza_common.sets import PreparationIn
-    from sqlalchemy import select
-
-    from app.constants.sets import Stage
-    from app.models.sets import Question, Topic
-    from app.storage.db import Session
-
-    async def questions_of(set_id):
-        async with Session() as session:
-            rows = await session.scalars(
-                select(Question)
-                .join(Topic, Topic.id == Question.topic_id)
-                .where(Topic.set_id == set_id)
-                .order_by(Question.position)
-            )
-
-            return list(rows)
 
     async def scenario():
-        older = await interview("Older template", template=True, questions=6)
-        private = [row for row in await questions_of(older) if row.stage == Stage.PRIVATE]
+        older = await interview("Older template", template=True, questions=33)
+        company = (await preparations.get_content(older)).topics[0].questions[30:]
         option = [{"answer": "right", "correct": True}, {"answer": "wrong", "correct": False}]
         reused = [
-            {"text": row.text, "options": option, "source_id": str(row.id)} for row in private[:3]
+            {"text": row.text, "options": option, "source_id": str(row.id)} for row in company
         ]
-        fresh = [{"text": f"New question {index}?", "options": option} for index in range(3)]
+        fresh = [{"text": f"New question {index}?", "options": option} for index in range(31)]
         newer = await templates.create_template(
             PreparationIn.model_validate(
                 {
@@ -263,14 +214,14 @@ def test_a_new_template_never_reveals_questions_reused_from_the_bank(run):
                     "requirements": [],
                     "topics": [{"title": "Python", "subtopics": [], "questions": reused + fresh}],
                 }
-            )
+            ),
+            0.1,
         )
 
-        return await questions_of(newer)
+        return (await preparations.get_content(newer)).topics[0].questions
 
     rows = run(scenario())
-    revealed = [row for row in rows if row.stage == Stage.REVEALED]
 
-    # A third of its own new questions go to practice; the reused ones stay private.
-    assert [row.source_question_id for row in revealed] == [None]
-    assert all(row.stage == Stage.PRIVATE for row in rows if row.source_question_id)
+    # Its first 30 fresh questions go to practice; the reused ones and the 31st to companies.
+    assert [row.pool for row in rows] == ["company"] * 3 + ["practice"] * 30 + ["company"]
+    assert all(row.source_question_id for row in rows[:3])

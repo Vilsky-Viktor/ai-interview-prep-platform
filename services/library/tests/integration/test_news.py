@@ -3,11 +3,14 @@ from datetime import date
 import httpx
 from prepza_common.auth import current_user
 from prepza_common.user import User
+from sqlalchemy import select
 
 from app.integrations import generation
 from app.main import app
+from app.models.outbox import OutboxEvent
 from app.schemas.news import NewsIn, NewsTranslationIn
 from app.storage import news
+from app.storage.db import Session
 
 
 def post(title, day, text="Text."):
@@ -121,3 +124,38 @@ def test_the_admin_tab_and_the_public_page_end_to_end(run, monkeypatch):
     assert [row["title"] for row in after] == ["Hello ja"]
     assert [(row["id"], row["translated"]) for row in tab] == [(created["id"], True)]
     assert empty == []
+
+
+def test_a_post_tells_everyones_bell_and_its_deletion_takes_the_notification_back(run):
+    async def events_about(news_id):
+        async with Session() as session:
+            rows = await session.execute(
+                select(OutboxEvent.event_type, OutboxEvent.data).where(
+                    # The deletion names the post; the notification carries it in its data.
+                    (OutboxEvent.data["news_id"].astext == str(news_id))
+                    | (OutboxEvent.data["data"]["news_id"].astext == str(news_id))
+                )
+            )
+
+            return sorted((event_type, data.get("recipient")) for event_type, data in rows)
+
+    async def scenario():
+        created = await news.create(post("In the bell", date(2026, 10, 16)))
+        await news.save_translations(
+            created.id,
+            created.title,
+            created.text,
+            {"de": NewsTranslationIn(title="Im Glöckchen", text="T")},
+        )
+        titles = await news.titles([created.id], "de"), await news.titles([created.id], "fr")
+        await news.remove(created.id)
+        await news.remove(created.id)
+
+        return titles, await events_about(created.id), await news.titles([created.id], "de")
+
+    titles, events, gone = run(scenario())
+
+    assert [list(found.values()) for found in titles] == [["Im Glöckchen"], ["In the bell"]]
+    # Removed twice, announced once.
+    assert events == [("news.deleted", None), ("notification.requested", "all")]
+    assert gone == {}

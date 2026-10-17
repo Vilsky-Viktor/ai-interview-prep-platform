@@ -46,6 +46,18 @@ class NewsSourceOut(BaseModel):
     missing: list[str]
 
 
+class NewsTitlesIn(BaseModel):
+    """Posts the bell names (notifications), and the reader's language."""
+
+    news_ids: list[UUID]
+    language: Language
+
+
+class NewsTitlesOut(BaseModel):
+    # By post id; deleted posts are left out.
+    titles: dict[str, str]
+
+
 class NewsTranslationIn(BaseModel):
     title: NewsTitle
     text: NewsText

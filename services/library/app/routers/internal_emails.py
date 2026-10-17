@@ -1,8 +1,9 @@
 import asyncio
+from typing import Literal
 
 from fastapi import APIRouter
 
-from app.constants.emails import ConsentSource
+from app.constants.emails import ConsentSource, EmailSetting
 from app.schemas.emails import (
     EmailPreferencesOut,
     RecipientsIn,
@@ -18,8 +19,14 @@ router = APIRouter(prefix="/internal/users", tags=["internal"])
 
 
 @router.get("/ids")
-async def user_ids(caller: ServiceCaller) -> UserIdsOut:
-    """Notifications, for a notice about the terms or the privacy policy: every account."""
+async def user_ids(
+    caller: ServiceCaller, setting: Literal["updates", "promotions"] | None = None
+) -> UserIdsOut:
+    """Notifications: every account, for a notice about the terms or the privacy policy; with a
+    `setting`, the users who have it on (a campaign's product updates or offers)."""
+    if setting is not None:
+        return UserIdsOut(user_ids=await emails.ids_with(EmailSetting(setting)))
+
     return UserIdsOut(user_ids=await asyncio.to_thread(all_user_ids))
 
 

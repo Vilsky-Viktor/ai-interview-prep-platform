@@ -25,20 +25,20 @@ def delete_sign_in(user_id: str) -> None:
 
 
 async def account_by_email(email: str) -> firebase_auth.UserRecord | None:
-    """The account signed in with the address, whatever its case; None when there's none."""
+    """The account signed in with the address, whatever its case; None when there's none, or the
+    text couldn't be an address."""
     try:
         return await asyncio.to_thread(firebase_auth.get_user_by_email, email.strip().lower())
-    except firebase_auth.UserNotFoundError:
+    except (firebase_auth.UserNotFoundError, ValueError):
         return None
 
 
-async def account_exists(user_id: str) -> bool:
+async def account_by_id(user_id: str) -> firebase_auth.UserRecord | None:
+    """The account with that id; None when there's none, or the id couldn't be one."""
     try:
-        await asyncio.to_thread(firebase_auth.get_user, user_id)
-    except firebase_auth.UserNotFoundError:
-        return False
-
-    return True
+        return await asyncio.to_thread(firebase_auth.get_user, user_id)
+    except (firebase_auth.UserNotFoundError, ValueError):
+        return None
 
 
 async def set_language(user: User, language: Language) -> None:

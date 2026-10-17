@@ -1,10 +1,15 @@
 import uuid
 
+from prepza_common import outbox
 from prepza_common.constants import DEFAULT_LANGUAGE, LANGUAGES
+from prepza_common.notifications import NOTIFICATION_REQUESTED
 from sqlalchemy import delete, func, select
 from sqlalchemy.dialects.postgresql import insert
 
+from app.constants.events import NEWS_DELETED
+from app.helpers.notifications import news_notification
 from app.models.news import News, NewsTranslation
+from app.models.outbox import OutboxEvent
 from app.schemas.news import NewsIn, NewsTranslationIn
 from app.storage.db import Session
 
@@ -56,9 +61,11 @@ async def get(news_id: uuid.UUID) -> News | None:
 
 
 async def create(post: NewsIn) -> News:
+    """Saves the post with its notification for everyone, in one transaction."""
     async with Session() as session:
-        row = News(**post.model_dump())
+        row = News(id=uuid.uuid4(), **post.model_dump())
         session.add(row)
+        outbox.add(session, OutboxEvent, NOTIFICATION_REQUESTED, news_notification(row))
         await session.commit()
         await session.refresh(row)
 
@@ -88,10 +95,31 @@ async def update(news_id: uuid.UUID, post: NewsIn) -> tuple[News, bool] | None:
 
 
 async def remove(news_id: uuid.UUID) -> None:
-    """Deletes the post with its translations; safe to repeat."""
+    """Deletes the post with its translations, and its notification goes too (NEWS_DELETED,
+    in the same transaction); safe to repeat."""
     async with Session() as session:
-        await session.execute(delete(News).where(News.id == news_id))
+        removed = await session.scalar(delete(News).where(News.id == news_id).returning(News.id))
+
+        if removed is not None:
+            outbox.add(session, OutboxEvent, NEWS_DELETED, {"news_id": str(news_id)})
+
         await session.commit()
+
+
+async def titles(news_ids: list[uuid.UUID], language: str) -> dict[str, str]:
+    """The posts' titles in `language`, in English where it has no translation; deleted posts
+    are left out."""
+    query = (
+        select(News.id, func.coalesce(NewsTranslation.title, News.title))
+        .outerjoin(
+            NewsTranslation,
+            (NewsTranslation.news_id == News.id) & (NewsTranslation.language == language),
+        )
+        .where(News.id.in_(news_ids))
+    )
+
+    async with Session() as session:
+        return {str(news_id): title for news_id, title in await session.execute(query)}
 
 
 async def missing_languages(news_id: uuid.UUID) -> list[str]:

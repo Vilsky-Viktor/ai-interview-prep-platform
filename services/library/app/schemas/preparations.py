@@ -15,6 +15,8 @@ class QuestionText(BaseModel):
     id: UUID
     text: str
     options: list[OptionIn]
+    # Multi-answer ("select all that apply"): more than one option is right.
+    multi: bool = False
     likes: int = 0
     dislikes: int = 0
     reports: int = 0

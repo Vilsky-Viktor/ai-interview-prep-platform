@@ -1,7 +1,9 @@
 import uuid
 
 import pytest
+from prepza_common.ai_constants import LIMIT_HIT
 from prepza_common.http import bearer
+from prepza_common.limit_list import LIMITS
 
 from app.storage import feedback
 from tests.unit.fake_redis import FakeRedis
@@ -48,3 +50,32 @@ def test_a_candidate_rates_a_question_and_reads_it_back(client, monkeypatch):
     assert saved.json() == {"value": -1}
     # Every vote goes to the quality review, which may flag the question.
     assert reviewed == [QUESTION_ID, QUESTION_ID]
+
+
+@pytest.mark.parametrize("edited", [None, 3])
+def test_a_users_ratings_are_limited_a_day(client, monkeypatch, redis, published, edited):
+    """At the limit's edited value, or its default when it isn't edited."""
+    allowed = edited or LIMITS["RATINGS_PER_DAY"].default
+
+    if edited:
+        redis.limits["RATINGS_PER_DAY"] = str(edited)
+
+    async def fake_rate(question_id, user_id, value):
+        pass
+
+    async def fake_review(question_id):
+        pass
+
+    monkeypatch.setattr(feedback, "rate_question", fake_rate)
+    monkeypatch.setattr("app.routers.internal_feedback.review", fake_review)
+    body = {"user_id": "voter", "value": 1}
+
+    for _ in range(allowed):
+        url = f"/internal/questions/{uuid.uuid4()}/rating"
+        assert client.put(url, json=body, headers=AUTH).status_code == 204
+
+    url = f"/internal/questions/{uuid.uuid4()}/rating"
+    assert client.put(url, json=body, headers=AUTH).status_code == 429
+    assert [(event, data["limit"], data["user_id"]) for event, data in published] == [
+        (LIMIT_HIT, "RATINGS_PER_DAY", "voter")
+    ]

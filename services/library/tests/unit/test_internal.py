@@ -1,12 +1,13 @@
 import uuid
 from datetime import UTC, datetime, timedelta
+from types import SimpleNamespace
 
 import jwt
 from prepza_common.http import bearer
 
 from app.constants.sets import SetKind
 from app.models.sets import QuestionSet
-from app.storage import preparations
+from app.storage import preparations, templates
 
 GENERATION_ID = uuid.uuid4()
 PAYLOAD = {
@@ -106,3 +107,26 @@ def test_rejects_wrong_secret(client):
 
 def test_rejects_expired_token(client):
     assert post(client, token(lifetime=-10)).status_code == 401
+
+
+def test_a_template_copy_carries_its_level_for_the_tests_seconds_a_question(client, monkeypatch):
+    copy = SimpleNamespace(id=uuid.uuid4(), title="Backend", language="de", level="hard")
+
+    async def copy_template(template_id, company_id):
+        return copy
+
+    monkeypatch.setattr(templates, "copy_template", copy_template)
+
+    response = client.post(
+        f"/internal/templates/{uuid.uuid4()}/copy",
+        json={"company_id": "company-1"},
+        headers=bearer(token()),
+    )
+
+    assert response.status_code == 201
+    assert response.json() == {
+        "id": str(copy.id),
+        "title": "Backend",
+        "language": "de",
+        "level": "hard",
+    }

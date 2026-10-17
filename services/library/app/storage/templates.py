@@ -5,7 +5,8 @@ from sqlalchemy import Text, and_, cast, func, or_, select, text
 from sqlalchemy.orm import aliased, selectinload
 
 from app.constants.reuse import MIN_COPY_QUESTIONS
-from app.constants.sets import PLATFORM_OWNER, REVEALED_EVERY, OwnerType, SetKind, Stage
+from app.constants.sets import PLATFORM_OWNER, OwnerType, Pool, SetKind
+from app.helpers.pools import assign_pools
 from app.helpers.search import escape_like
 from app.helpers.slugs import slugify, unique_slug
 from app.models.sets import Question, QuestionSet, Topic
@@ -18,8 +19,9 @@ COPY_EMBEDDING_SQL = text(
 )
 
 
-async def create_template(payload: PreparationIn) -> uuid.UUID:
-    """An admin's template, with its topics' embeddings for the question bank."""
+async def create_template(payload: PreparationIn, share: float) -> uuid.UUID:
+    """An admin's template, with its topics' embeddings for the question bank; `share` of each
+    topic's practice questions are multi-answer (assign_pools)."""
     question_set = QuestionSet(
         generation_id=payload.generation_id,
         kind=SetKind.TEMPLATE,
@@ -34,15 +36,8 @@ async def create_template(payload: PreparationIn) -> uuid.UUID:
         topic_count=len(payload.topics),
     )
 
-    # About a third of each topic's own new questions goes straight to practice; the rest start
-    # private. Questions reused from the bank stay private: they may still be in companies'
-    # interviews, and practice shows the answers.
     for topic in question_set.topics:
-        fresh = [question for question in topic.questions if question.source_question_id is None]
-
-        for index, question in enumerate(fresh):
-            if index % REVEALED_EVERY == REVEALED_EVERY - 1:
-                question.stage = Stage.REVEALED
+        assign_pools(topic.questions, share)
 
     async with Session() as session:
         question_set.slug = await free_slug(session, slugify(payload.title))
@@ -99,7 +94,7 @@ async def duplicate_ids(ids: list[uuid.UUID]) -> set[uuid.UUID]:
 
 
 async def sample_questions(template_id: uuid.UUID, limit: int) -> list[tuple[Question, str]]:
-    """Up to `limit` revealed questions with their topic's title, spread across topics: each
+    """Up to `limit` practice questions with their topic's title, spread across topics: each
     topic's first, in topic order, then each one's second, and so on."""
     rank = (
         func.row_number().over(partition_by=Question.topic_id, order_by=Question.position)
@@ -107,7 +102,7 @@ async def sample_questions(template_id: uuid.UUID, limit: int) -> list[tuple[Que
     ranked = (
         select(Question.id, rank, Topic.position.label("topic_position"))
         .join(Topic, Topic.id == Question.topic_id)
-        .where(Topic.set_id == template_id, Question.stage == Stage.REVEALED)
+        .where(Topic.set_id == template_id, Question.pool == Pool.PRACTICE)
         .subquery()
     )
     query = (
@@ -124,9 +119,8 @@ async def sample_questions(template_id: uuid.UUID, limit: int) -> list[tuple[Que
 
 async def copy_template(template_id: uuid.UUID, company_id: str) -> QuestionSet | None:
     """A company's own test made from a template, with no generation: its topics with their
-    private questions and embeddings, each question remembering its original so its answers
-    count there too. Topics with fewer than MIN_COPY_QUESTIONS private questions left are
-    skipped. None when there's no such template, or none of its topics is left."""
+    company questions and embeddings, each question remembering its original so its answers
+    count there too. Topics with fewer than MIN_COPY_QUESTIONS company questions are skipped. None when there's no such template, or none of its topics is left."""
     query = (
         select(QuestionSet)
         .where(QuestionSet.id == template_id, QuestionSet.kind == SetKind.TEMPLATE)
@@ -142,10 +136,10 @@ async def copy_template(template_id: uuid.UUID, company_id: str) -> QuestionSet 
         kept = []
 
         for topic in template.topics:
-            private = [q for q in topic.questions if q.stage == Stage.PRIVATE]
+            company = [q for q in topic.questions if q.pool == Pool.COMPANY]
 
-            if len(private) >= MIN_COPY_QUESTIONS:
-                kept.append((topic, private))
+            if len(company) >= MIN_COPY_QUESTIONS:
+                kept.append((topic, company))
 
         if not kept:
             return None
@@ -172,10 +166,10 @@ async def copy_template(template_id: uuid.UUID, company_id: str) -> QuestionSet 
                             options=q.options,
                             source_question_id=q.id,
                         )
-                        for q in private
+                        for q in company
                     ],
                 )
-                for position, (topic, private) in enumerate(kept)
+                for position, (topic, company) in enumerate(kept)
             ],
         )
         session.add(copy)
@@ -199,14 +193,14 @@ async def list_templates(
 ) -> list[QuestionSet]:
     """Newest first; `q` matches anywhere in the title, a topic's title or a subtopic, and no
     languages means every one. `copyable` keeps only the templates copy_template can copy: with
-    a topic that has at least MIN_COPY_QUESTIONS private questions left."""
+    a topic that has at least MIN_COPY_QUESTIONS company questions."""
     filters = [QuestionSet.kind == SetKind.TEMPLATE]
 
     if copyable:
         full_topics = (
             select(Question.topic_id)
             .join(Topic, Topic.id == Question.topic_id)
-            .where(Topic.set_id == QuestionSet.id, Question.stage == Stage.PRIVATE)
+            .where(Topic.set_id == QuestionSet.id, Question.pool == Pool.COMPANY)
             .group_by(Question.topic_id)
             .having(func.count() >= MIN_COPY_QUESTIONS)
             .exists()

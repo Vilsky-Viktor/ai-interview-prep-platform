@@ -21,11 +21,12 @@ async def handle(event_id: str, event_type: str, data: dict) -> None:
     # since a retry would fail the same way until it's dead-lettered.
     try:
         if event_type == ANSWER_RECORDED:
+            # Events from before multi-answer questions carry one option and no credit.
             answer = (
                 uuid.UUID(data["question_id"]),
                 data["question_text"],
-                data["option"],
-                data["correct"],
+                list(data.get("options") or [data["option"]]),
+                float(data.get("credit", 1.0 if data["correct"] else 0.0)),
             )
 
         if event_type == SESSION_SCORED:

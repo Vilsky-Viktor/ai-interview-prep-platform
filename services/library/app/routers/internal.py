@@ -1,9 +1,12 @@
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
+from prepza_common.examples import has_example
+from prepza_common.multi_answer import is_multi, multi_share
 from prepza_common.paging import PageParams
 from prepza_common.sets import PreparationIn
 
+from app.integrations.redis import get_redis
 from app.schemas.feedback import ReportOut
 from app.schemas.preparations import (
     CreatedOut,
@@ -36,7 +39,10 @@ async def create_template(body: PreparationIn, caller: ServiceCaller) -> Created
     """A retried save from the same generation returns the template it already made."""
     existing = await preparations.find_by_generation(body.generation_id)
 
-    return CreatedOut(id=existing or await templates.create_template(body))
+    if existing:
+        return CreatedOut(id=existing)
+
+    return CreatedOut(id=await templates.create_template(body, await multi_share(get_redis())))
 
 
 @router.post("/templates/{template_id}/copy", status_code=status.HTTP_201_CREATED)
@@ -49,7 +55,7 @@ async def copy_template(
     if copy is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Template not found")
 
-    return TemplateCopyOut(id=copy.id, title=copy.title, language=copy.language)
+    return TemplateCopyOut(id=copy.id, title=copy.title, language=copy.language, level=copy.level)
 
 
 @router.delete("/interviews/{set_id}", status_code=status.HTTP_204_NO_CONTENT)
@@ -105,6 +111,7 @@ async def get_set_content(set_id: UUID, caller: ServiceCaller) -> SetContent:
     return SetContent(
         id=question_set.id,
         title=question_set.title,
+        level=question_set.level,
         topics=[
             SetTopicOut(
                 id=topic.id,
@@ -160,6 +167,7 @@ async def get_question_context(question_id: UUID, caller: ServiceCaller) -> Ques
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Question not found")
 
     question_set, topic = found
+    question = next(item for item in topic.questions if item.id == question_id)
 
     return QuestionContext(
         set_id=question_set.id,
@@ -169,7 +177,9 @@ async def get_question_context(question_id: UUID, caller: ServiceCaller) -> Ques
         language=question_set.language,
         topic=topic.title,
         subtopics=topic.subtopics,
-        existing=[question.text for question in topic.questions],
+        existing=[item.text for item in topic.questions],
+        multi=is_multi(question.options),
+        example=has_example(question.text),
     )
 
 

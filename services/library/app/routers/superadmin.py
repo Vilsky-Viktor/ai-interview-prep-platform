@@ -8,14 +8,15 @@ from prepza_common.superadmin import SuperadminUser
 from prepza_common.user import Language, Level
 
 from app.constants.sets import SetKind
+from app.helpers.pools import missing
 from app.models.sets import QuestionSet
 from app.schemas.feedback import ReportOut
-from app.schemas.preparations import QuestionText, TitleIn, TopicOut
-from app.schemas.templates import TemplateOut, TemplateSummary
+from app.schemas.preparations import QuestionText, TitleIn
+from app.schemas.templates import PooledTemplateOut, PoolTopicOut, TemplateSummary
 from app.services import quality as quality_service
 from app.services.questions import question_texts
 from app.services.templates import summaries
-from app.storage import feedback, preparations
+from app.storage import feedback, pools, preparations
 from app.storage import templates as template_storage
 
 # The superadmin's templates (docs/features/admin-zone.md, Templates); everyone else gets "not found".
@@ -47,19 +48,26 @@ async def list_templates(
 
 
 @router.get("/{template_id}")
-async def get_template_detail(template_id: UUID, superadmin: SuperadminUser) -> TemplateOut:
+async def get_template_detail(template_id: UUID, superadmin: SuperadminUser) -> PooledTemplateOut:
+    """Its topics with their practice and company question counts, and whether a top-up has
+    anything to write."""
     template = await get_template(template_id)
-    topics = await preparations.get_topics(template_id)
+    topics = await pools.topic_counts(template_id)
     [summary] = await summaries([template])
 
-    return TemplateOut(
+    return PooledTemplateOut(
         **summary.model_dump(),
         topics=[
-            TopicOut(
-                id=topic.id, title=topic.title, subtopics=topic.subtopics, question_count=count
+            PoolTopicOut(
+                id=topic.id,
+                title=topic.title,
+                subtopics=topic.subtopics,
+                practice_count=practice,
+                company_count=company,
             )
-            for topic, count in topics
+            for topic, practice, company in topics
         ],
+        short=any(any(missing(practice, company)) for _, practice, company in topics),
     )
 
 

@@ -1,5 +1,6 @@
 from datetime import UTC, datetime
 
+from prepza_common.constants import GUEST_UID_PREFIX
 from sqlalchemy import select
 from sqlalchemy.dialects.postgresql import insert
 
@@ -34,6 +35,18 @@ async def preferences_of(user_ids: list[str]) -> dict[str, dict[str, bool]]:
         found = {row.user_id: row for row in await session.scalars(query)}
 
     return {user_id: as_dict(found.get(user_id)) for user_id in user_ids}
+
+
+async def ids_with(setting: EmailSetting) -> list[str]:
+    """The users who have the setting on, never a company's guest candidate. Only users with
+    stored preferences: product updates and offers are off by default."""
+    query = select(EmailPreferences.user_id).where(
+        getattr(EmailPreferences, setting).is_(True),
+        EmailPreferences.user_id.not_like(f"{GUEST_UID_PREFIX}%"),
+    )
+
+    async with Session() as session:
+        return list(await session.scalars(query))
 
 
 async def change(

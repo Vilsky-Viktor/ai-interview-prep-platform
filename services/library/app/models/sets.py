@@ -6,7 +6,6 @@ from sqlalchemy import DateTime, ForeignKey, Index, String, Text, func
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.constants.sets import Stage
 from app.models.base import Base
 
 
@@ -68,8 +67,12 @@ class Question(Base):
     position: Mapped[int]
     text: Mapped[str] = mapped_column(Text)
     options: Mapped[list] = mapped_column(JSONB)
-    # A template question's stage in the bank (constants/sets.py Stage); private elsewhere.
-    stage: Mapped[str] = mapped_column(String(16), default=Stage.PRIVATE)
+    # A template question's pool (constants/sets.py Pool), fixed when it's created; none for a
+    # company interview's own questions.
+    pool: Mapped[str | None] = mapped_column(String(16))
+    # The bank's old stages, replaced by `pool` (migration 0027) and no longer read or written;
+    # kept for a rollback's older code, and dropped in a later release.
+    stage: Mapped[str] = mapped_column(String(16), default="private")
     # A company test's copy of a bank question: its answers count for the original too.
     source_question_id: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("questions.id", ondelete="SET NULL"), index=True

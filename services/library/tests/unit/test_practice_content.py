@@ -9,27 +9,28 @@ from tests.unit.test_internal import token
 TEMPLATE_ID = uuid.uuid4()
 
 
-def question(stage, text):
+def question(pool, text):
     return SimpleNamespace(
         id=uuid.uuid4(),
         text=text,
-        stage=stage,
+        pool=pool,
         options=[{"answer": "a", "correct": True}, {"answer": "b", "correct": False}],
     )
 
 
-def test_practice_gets_only_revealed_questions_and_skips_empty_topics(client, monkeypatch):
+def test_practice_gets_only_practice_questions_and_skips_empty_topics(client, monkeypatch):
     template = SimpleNamespace(
         id=TEMPLATE_ID,
         kind="template",
         title="Backend",
+        level="hard",
         topics=[
             SimpleNamespace(
                 id=uuid.uuid4(),
                 title="Python",
-                questions=[question("revealed", "Open?"), question("private", "Secret?")],
+                questions=[question("practice", "Open?"), question("company", "Secret?")],
             ),
-            SimpleNamespace(id=uuid.uuid4(), title="SQL", questions=[question("private", "S?")]),
+            SimpleNamespace(id=uuid.uuid4(), title="SQL", questions=[question("company", "S?")]),
         ],
     )
 
@@ -42,6 +43,8 @@ def test_practice_gets_only_revealed_questions_and_skips_empty_topics(client, mo
     found = client.get(f"/internal/templates/{TEMPLATE_ID}/practice", headers=headers).json()
     missing = client.get(f"/internal/templates/{uuid.uuid4()}/practice", headers=headers)
 
+    # Rounds gives each question the seconds of the template's level.
+    assert found["level"] == "hard"
     assert [topic["title"] for topic in found["topics"]] == ["Python"]
     assert [q["text"] for q in found["topics"][0]["questions"]] == ["Open?"]
     assert missing.status_code == 404

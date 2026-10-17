@@ -1,3 +1,4 @@
+import json
 import uuid
 
 from prepza_common import processed_events
@@ -8,21 +9,26 @@ from app.models.events import ProcessedEvent
 from app.models.sets import Question
 from app.storage.db import Session
 
-# Counts one answer. Only when the question still has the text that was answered: an answer
-# to a question since re-generated belongs to its old content, not the new one. Returns how often
-# the question has been shown: answered or timed out.
+# Counts one answer: its credit (1 when right, 0 when wrong, a share of 1 for a multi-answer one
+# partly right) and one pick for each option picked (:picks, {"option text": 1}). Only when the
+# question still has the text that was answered: an answer to a question since re-generated
+# belongs to its old content, not the new one. Returns how often the question has been shown:
+# answered or timed out.
 RECORD_ANSWER_SQL = text(
     """
     INSERT INTO question_stats (question_id, answers, correct, option_picks, updated_at)
-    SELECT id, 1, CAST(:correct AS integer), jsonb_build_object(CAST(:option AS text), 1), now()
+    SELECT id, 1, CAST(:credit AS double precision), CAST(:picks AS jsonb), now()
     FROM questions
     WHERE id = :question_id AND text = :question_text
     ON CONFLICT (question_id) DO UPDATE SET
         answers = question_stats.answers + 1,
         correct = question_stats.correct + EXCLUDED.correct,
-        option_picks = question_stats.option_picks || jsonb_build_object(
-            CAST(:option AS text),
-            coalesce((question_stats.option_picks ->> CAST(:option AS text))::int, 0) + 1
+        option_picks = question_stats.option_picks || (
+            SELECT coalesce(jsonb_object_agg(
+                picked.key,
+                coalesce((question_stats.option_picks ->> picked.key)::int, 0) + 1
+            ), '{}'::jsonb)
+            FROM jsonb_each(EXCLUDED.option_picks) AS picked
         ),
         updated_at = now()
     RETURNING answers + timeouts
@@ -38,8 +44,9 @@ RECORD_RESULT_SQL = text(
         strong_answers, strong_correct, weak_answers, weak_correct, timeouts
     )
     SELECT id, 0, 0, '{}'::jsonb, now(),
-        CAST(:strong AS integer), CAST(:strong_correct AS integer),
-        CAST(:weak AS integer), CAST(:weak_correct AS integer), CAST(:timed_out AS integer)
+        CAST(:strong AS integer), CAST(:strong_correct AS double precision),
+        CAST(:weak AS integer), CAST(:weak_correct AS double precision),
+        CAST(:timed_out AS integer)
     FROM questions
     WHERE id = :question_id AND text = :question_text
     ON CONFLICT (question_id) DO UPDATE SET
@@ -51,6 +58,11 @@ RECORD_RESULT_SQL = text(
         updated_at = now()
     """
 )
+
+
+def credit(result: dict) -> float:
+    """An answer's credit from 0 to 1; events from before multi-answer questions have none."""
+    return float(result.get("credit", 1.0 if result["correct"] else 0.0))
 
 
 async def with_sources(
@@ -70,10 +82,10 @@ async def with_sources(
 
 
 async def record_answer(
-    event_id: str, question_id: uuid.UUID, question_text: str, option: str, correct: bool
+    event_id: str, question_id: uuid.UUID, question_text: str, options: list[str], credit: float
 ) -> dict[uuid.UUID, int] | None:
-    """Counts one answer for the question and its bank original, in one transaction and once
-    per event. How often each counted question has now been shown, or None when the event was
+    """Counts one answer (the options picked, and its credit from 0 to 1) for the question and
+    its bank original, in one transaction and once per event. How often each counted question has now been shown, or None when the event was
     counted before. A question whose text has changed since isn't counted."""
     async with Session() as session:
         if not await processed_events.claim(session, ProcessedEvent, event_id):
@@ -89,8 +101,8 @@ async def record_answer(
                 {
                     "question_id": answered,
                     "question_text": question_text,
-                    "option": option,
-                    "correct": int(correct),
+                    "picks": json.dumps(dict.fromkeys(options, 1)),
+                    "credit": credit,
                 },
             )
 
@@ -106,7 +118,8 @@ async def record_results(
     event_id: str, group: str | None, results: list[dict]
 ) -> list[uuid.UUID] | None:
     """Counts one finished topic's results ({"question_id", "question_text", "correct",
-    "timed_out"}) for each question and its bank original, in one transaction and once per
+    "credit", "timed_out"}; events from before multi-answer questions have no credit: 1 when
+    correct) for each question and its bank original, in one transaction and once per
     event. `group` is the candidate's: strong, weak, or None in between (not counted there).
     The questions counted, or None when the event was counted before."""
     async with Session() as session:
@@ -133,9 +146,9 @@ async def record_results(
                     "question_id": answered,
                     "question_text": result["question_text"],
                     "strong": int(group == "strong"),
-                    "strong_correct": int(group == "strong" and result["correct"]),
+                    "strong_correct": credit(result) if group == "strong" else 0.0,
                     "weak": int(group == "weak"),
-                    "weak_correct": int(group == "weak" and result["correct"]),
+                    "weak_correct": credit(result) if group == "weak" else 0.0,
                     "timed_out": int(result["timed_out"]),
                 },
             )

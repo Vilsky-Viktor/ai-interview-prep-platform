@@ -4,10 +4,10 @@ from alembic import command
 from alembic.config import Config
 from sqlalchemy import select
 
-from app.constants.sets import Stage
+from app.constants.sets import Pool
 from app.models.sets import QuestionSet
 from app.storage import preparations, templates
-from tests.integration.factories import direction, interview
+from tests.integration.factories import COPYABLE, direction, interview, question_ids, set_pool
 
 
 def test_a_template_gets_a_free_slug_and_is_found_by_it(run):
@@ -61,12 +61,17 @@ def test_the_migration_gives_existing_templates_unique_slugs_oldest_first(run):
     assert len(template_slugs) == len(set(template_slugs))
 
 
-def test_the_sample_has_at_most_ten_revealed_questions_spread_across_topics(run):
+def test_the_sample_has_at_most_ten_practice_questions_spread_across_topics(run):
     async def scenario():
         template = await interview(
-            "Sample", template=True, questions=30, topic_embeddings=[direction(1), direction(0, 1)]
+            "Sample",
+            template=True,
+            questions=COPYABLE,
+            topic_embeddings=[direction(1), direction(0, 1)],
         )
+        # An older template can be left with no practice questions after the migration.
         empty = await interview("Sample empty", template=True, questions=2)
+        await set_pool(await question_ids(empty), Pool.COMPANY)
 
         return (
             await templates.sample_questions(template, 10),
@@ -76,7 +81,7 @@ def test_the_sample_has_at_most_ten_revealed_questions_spread_across_topics(run)
     sample, empty = run(scenario())
 
     assert len(sample) == 10
-    assert all(question.stage == Stage.REVEALED for question, _ in sample)
+    assert all(question.pool == Pool.PRACTICE for question, _ in sample)
     assert [topic for _, topic in sample[:4]] == ["Python 0", "Python 1", "Python 0", "Python 1"]
     assert empty == []
 

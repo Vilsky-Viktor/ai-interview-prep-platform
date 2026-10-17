@@ -1,7 +1,9 @@
 import uuid
 
 import pytest
+from prepza_common.ai_constants import LIMIT_HIT
 from prepza_common.http import bearer
+from prepza_common.limit_list import LIMITS
 
 from app.storage import feedback
 from tests.unit.fake_redis import FakeRedis
@@ -53,8 +55,33 @@ def test_a_candidates_second_report_is_rejected(client, monkeypatch):
     }
 
 
-def test_a_users_reports_are_limited_a_day(client, monkeypatch):
-    from app.constants.feedback import REPORTS_PER_DAY
+def test_a_question_reported_as_hard_to_read_is_saved_with_that_reason(client, monkeypatch):
+    saved = []
+
+    async def fake_report(question_id, user_id, reason, comment):
+        saved.append((question_id, user_id, reason))
+
+        return True
+
+    async def fake_review(question_id):
+        pass
+
+    monkeypatch.setattr(feedback, "report_question", fake_report)
+    monkeypatch.setattr("app.routers.internal_feedback.review", fake_review)
+    url = f"/internal/questions/{QUESTION_ID}/reports"
+    body = {"user_id": "ann", "reason": "hard_to_read"}
+
+    assert client.post(url, json=body, headers=AUTH).status_code == 201
+    assert saved == [(QUESTION_ID, "ann", "hard_to_read")]
+
+
+@pytest.mark.parametrize("edited", [None, 2])
+def test_a_users_reports_are_limited_a_day(client, monkeypatch, redis, published, edited):
+    """At the limit's edited value, or its default when it isn't edited."""
+    allowed = edited or LIMITS["REPORTS_PER_DAY"].default
+
+    if edited:
+        redis.limits["REPORTS_PER_DAY"] = str(edited)
 
     async def fake_report(question_id, user_id, reason, comment):
         return True
@@ -66,9 +93,12 @@ def test_a_users_reports_are_limited_a_day(client, monkeypatch):
     monkeypatch.setattr("app.routers.internal_feedback.review", fake_review)
     body = {"user_id": "spammer", "reason": "unclear"}
 
-    for _ in range(REPORTS_PER_DAY):
+    for _ in range(allowed):
         url = f"/internal/questions/{uuid.uuid4()}/reports"
         assert client.post(url, json=body, headers=AUTH).status_code == 201
 
     url = f"/internal/questions/{uuid.uuid4()}/reports"
     assert client.post(url, json=body, headers=AUTH).status_code == 429
+    assert [(event, data["limit"], data["user_id"]) for event, data in published] == [
+        (LIMIT_HIT, "REPORTS_PER_DAY", "spammer")
+    ]

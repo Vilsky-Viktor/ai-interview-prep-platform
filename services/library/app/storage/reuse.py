@@ -4,10 +4,10 @@ from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.constants.reuse import MAX_TOPIC_DISTANCE, MIN_REUSE_ANSWERS
-from app.constants.sets import SetKind, Stage
+from app.constants.sets import Pool, SetKind
 from app.storage.db import Session
 
-# The bank: proven private questions of templates of the level whose topic is close to the new
+# The bank: proven company questions of templates of the level whose topic is close to the new
 # one. The same text can sit in several templates; each is offered once, from its closest topic.
 # The templates of the level and language are found first (ix_sets_kind_level_language), so
 # distances are measured only to their topics, never to every company test's.
@@ -24,7 +24,7 @@ FIND_SQL = text(
         JOIN questions q ON q.topic_id = t.id
         JOIN question_stats qs ON qs.question_id = q.id
         WHERE t.embedding <=> CAST(:embedding AS vector) <= :max_distance
-            AND q.stage = :stage AND qs.flag IS NULL AND qs.answers >= :min_answers
+            AND q.pool = :pool AND qs.flag IS NULL AND qs.answers >= :min_answers
         ORDER BY q.text, distance
     ) candidates
     ORDER BY distance, answers DESC
@@ -83,7 +83,7 @@ async def find(
     params = {
         "embedding": as_vector(embedding),
         "kind": SetKind.TEMPLATE,
-        "stage": Stage.PRIVATE,
+        "pool": Pool.COMPANY,
         "level": level,
         "language": language,
         "max_distance": MAX_TOPIC_DISTANCE,

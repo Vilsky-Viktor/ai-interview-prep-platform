@@ -6,6 +6,7 @@ from prepza_common.superadmin import SuperadminUser
 
 from app.models.news import News
 from app.schemas.news import AdminNewsOut, NewsIn
+from app.services import outbox as outbox_service
 from app.services.news import send_to_translator
 from app.storage import news
 
@@ -35,6 +36,7 @@ async def list_news(superadmin: SuperadminUser, page: PageParams) -> list[AdminN
 @router.post("", status_code=status.HTTP_201_CREATED)
 async def create_news(body: NewsIn, superadmin: SuperadminUser) -> AdminNewsOut:
     post = await news.create(body)
+    await outbox_service.flush_quietly()
     await send_to_translator(post.id)
 
     return admin_post(post, 0)
@@ -61,3 +63,4 @@ async def update_news(news_id: UUID, body: NewsIn, superadmin: SuperadminUser) -
 @router.delete("/{news_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_news(news_id: UUID, superadmin: SuperadminUser) -> None:
     await news.remove(news_id)
+    await outbox_service.flush_quietly()

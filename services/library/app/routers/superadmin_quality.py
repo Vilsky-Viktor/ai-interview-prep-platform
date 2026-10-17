@@ -80,7 +80,7 @@ async def flagged_template_question(question_id: UUID) -> str:
 @router.post("/{question_id}/fix", status_code=status.HTTP_202_ACCEPTED)
 async def fix_now(question_id: UUID, superadmin: SuperadminUser) -> None:
     """Sends the question to the verifier at once; it fixes or replaces it in the background."""
-    await refuse_if_paused(get_redis())
+    await refuse_if_paused(get_redis(), "question_fix", user_id=superadmin.uid)
     flag = await flagged_template_question(question_id)
     await generation.verify_question(question_id, flag, now=True)
 

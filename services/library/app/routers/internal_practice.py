@@ -2,19 +2,19 @@ from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
 
-from app.constants.sets import SetKind, Stage
+from app.constants.sets import Pool, SetKind
 from app.schemas.preparations import QuestionOut
 from app.schemas.sets import SetContent, SetTopicOut
 from app.service_auth import ServiceCaller
 from app.storage import preparations
 
-# Free practice for talents: only a template's revealed questions, never its private ones.
+# Free practice for talents: only a template's practice questions, never its company ones.
 router = APIRouter(prefix="/internal", tags=["internal"])
 
 
 @router.get("/templates/{template_id}/practice")
 async def practice_content(template_id: UUID, caller: ServiceCaller) -> SetContent:
-    """The template's revealed questions, with answers, by topic; topics without any are left
+    """The template's practice questions, with answers, by topic; topics without any are left
     out. Rounds picks each practice round's questions from them."""
     template = await preparations.get_content(template_id)
 
@@ -28,7 +28,7 @@ async def practice_content(template_id: UUID, caller: ServiceCaller) -> SetConte
             questions=[
                 QuestionOut(id=question.id, text=question.text, options=question.options)
                 for question in topic.questions
-                if question.stage == Stage.REVEALED
+                if question.pool == Pool.PRACTICE
             ],
         )
         for topic in template.topics
@@ -37,5 +37,6 @@ async def practice_content(template_id: UUID, caller: ServiceCaller) -> SetConte
     return SetContent(
         id=template.id,
         title=template.title,
+        level=template.level,
         topics=[topic for topic in topics if topic.questions],
     )

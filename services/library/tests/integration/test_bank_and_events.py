@@ -2,11 +2,10 @@ import uuid
 from datetime import UTC, datetime, timedelta
 
 from prepza_common import processed_events
-from sqlalchemy import text, update
+from sqlalchemy import text
 
-from app.constants.sets import Stage
+from app.constants.sets import Pool
 from app.models.events import ProcessedEvent
-from app.models.sets import Question
 from app.services.answer_events import handle
 from app.storage import (
     accounts,
@@ -17,15 +16,7 @@ from app.storage import (
     templates,
 )
 from app.storage.db import Session
-from tests.integration.factories import direction, interview
-
-
-async def set_stage(question_ids, stage):
-    async with Session() as session:
-        await session.execute(
-            update(Question).where(Question.id.in_(question_ids)).values(stage=stage)
-        )
-        await session.commit()
+from tests.integration.factories import COPYABLE, direction, interview, set_pool
 
 
 async def embedding_of(topic_id):
@@ -37,15 +28,15 @@ async def embedding_of(topic_id):
 
 def test_an_answer_is_counted_once_however_often_its_event_arrives(run):
     async def scenario():
-        template = await interview("Welder", template=True, questions=15)
+        template = await interview("Welder", template=True, questions=COPYABLE)
         copy = await templates.copy_template(template, "company-11")
         question = (await preparations.get_content(copy.id)).topics[0].questions[0]
         event_id = str(uuid.uuid4())
         first = await answer_stats.record_answer(
-            event_id, question.id, question.text, "right", True
+            event_id, question.id, question.text, ["right"], 1.0
         )
         again = await answer_stats.record_answer(
-            event_id, question.id, question.text, "right", True
+            event_id, question.id, question.text, ["right"], 1.0
         )
         _, copy_stats, *_ = await quality.load(question.id)
         _, original_stats, *_ = await quality.load(question.source_question_id)
@@ -90,13 +81,13 @@ def test_old_notes_of_processed_events_are_forgotten(run):
         template = await interview("Roofer", template=True, questions=3)
         question = (await preparations.get_content(template)).topics[0].questions[0]
         event_id = str(uuid.uuid4())
-        await answer_stats.record_answer(event_id, question.id, question.text, "right", True)
+        await answer_stats.record_answer(event_id, question.id, question.text, ["right"], 1.0)
         forgotten = await processed_events.forget(
             Session, ProcessedEvent, datetime.now(UTC) + timedelta(seconds=1)
         )
         # Forgotten, it would count again: only events past Pub/Sub's redeliveries are dropped.
         again = await answer_stats.record_answer(
-            event_id, question.id, question.text, "right", True
+            event_id, question.id, question.text, ["right"], 1.0
         )
 
         return forgotten, again
@@ -107,12 +98,13 @@ def test_old_notes_of_processed_events_are_forgotten(run):
     assert again is not None
 
 
-def test_a_company_test_stops_serving_a_copy_once_its_original_is_revealed(run):
+def test_a_copy_made_before_the_pools_of_a_now_practice_question_is_not_served(run):
     async def scenario():
-        template = await interview("Baker", template=True, questions=15)
+        template = await interview("Baker", template=True, questions=COPYABLE)
         copy = await templates.copy_template(template, "company-12")
         copied = (await preparations.get_content(copy.id)).topics[0].questions
-        await set_stage([copied[0].source_question_id], Stage.REVEALED)
+        # The migration put a question revealed after it was copied into practice.
+        await set_pool([copied[0].source_question_id], Pool.PRACTICE)
 
         return (
             copied[0].id,
@@ -120,9 +112,9 @@ def test_a_company_test_stops_serving_a_copy_once_its_original_is_revealed(run):
             [count for _, count in await preparations.get_topics(copy.id)],
         )
 
-    revealed_copy, served, counts = run(scenario())
+    practice_copy, served, counts = run(scenario())
 
-    assert revealed_copy not in served
+    assert practice_copy not in served
     assert len(served) == 9
     assert counts == [9]
 
@@ -130,15 +122,19 @@ def test_a_company_test_stops_serving_a_copy_once_its_original_is_revealed(run):
 def test_thin_template_topics_are_left_out_of_a_copy_which_keeps_their_embeddings(run):
     async def scenario():
         template = await interview(
-            "Mason", template=True, questions=15, topic_embeddings=[direction(1), direction(2)]
+            "Mason",
+            template=True,
+            questions=COPYABLE,
+            topic_embeddings=[direction(1), direction(2)],
         )
         content = await preparations.get_content(template)
-        worn = [q.id for q in content.topics[1].questions if q.stage == Stage.PRIVATE][:6]
-        await set_stage(worn, Stage.RETIRING)
+        # As an older template's topic can be, after the migration: with 4 company questions.
+        company = [q.id for q in content.topics[1].questions if q.pool == Pool.COMPANY]
+        await set_pool(company[:6], Pool.PRACTICE)
         copy = await templates.copy_template(template, "company-13")
         topics = await preparations.get_topics(copy.id)
-        await set_stage(
-            [q.id for q in content.topics[0].questions if q.stage == Stage.PRIVATE], Stage.RETIRING
+        await set_pool(
+            [q.id for q in content.topics[0].questions if q.pool == Pool.COMPANY], Pool.PRACTICE
         )
         nothing_left = await templates.copy_template(template, "company-13")
 
@@ -152,7 +148,7 @@ def test_thin_template_topics_are_left_out_of_a_copy_which_keeps_their_embedding
 
     topics, topic_count, copied, original, nothing_left = run(scenario())
 
-    # The second topic has 4 private questions left, fewer than a candidate gets by default.
+    # The second topic has 4 company questions, fewer than a candidate gets by default.
     assert topics == [("Python 0", 10)]
     assert topic_count == 1
     assert copied is not None and copied == original
@@ -208,13 +204,13 @@ def test_a_replaced_question_starts_its_own_statistics(run):
     async def scenario():
         set_id = await interview("Rewritten", questions=1)
         question = (await preparations.get_content(set_id)).topics[0].questions[0]
-        await answer_stats.record_answer(str(uuid.uuid4()), question.id, question.text, "a", True)
+        await answer_stats.record_answer(str(uuid.uuid4()), question.id, question.text, ["a"], 1.0)
         await preparations.replace_question(
             question.id, "A clearer question?", [{"answer": "Yes", "correct": True}]
         )
         _, replaced, *_ = await quality.load(question.id)
         late = await answer_stats.record_answer(
-            str(uuid.uuid4()), question.id, question.text, "a", True
+            str(uuid.uuid4()), question.id, question.text, ["a"], 1.0
         )
 
         return replaced, late

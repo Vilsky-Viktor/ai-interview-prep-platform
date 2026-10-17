@@ -1,7 +1,7 @@
 import uuid
 from datetime import UTC, datetime
 
-from sqlalchemy import DateTime, ForeignKey, String, Text
+from sqlalchemy import DateTime, Float, ForeignKey, String, Text
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -17,15 +17,17 @@ class QuestionStats(Base):
         ForeignKey("questions.id", ondelete="CASCADE"), primary_key=True
     )
     answers: Mapped[int] = mapped_column(default=0)
-    correct: Mapped[int] = mapped_column(default=0)
-    # Times each option was picked, keyed by its text: {"option text": count}.
+    # Points earned: 1 for a right answer, a share of 1 for a multi-answer one partly right.
+    correct: Mapped[float] = mapped_column(Float, default=0)
+    # Times each option was picked (each one ticked, for a multi-answer question), keyed by its
+    # text: {"option text": count}.
     option_picks: Mapped[dict] = mapped_column(JSONB, default=dict)
     # Answers by candidates who scored well on the topic, and by ones who scored poorly, and how
     # many of each were right: a question both get right as often doesn't separate them.
     strong_answers: Mapped[int] = mapped_column(default=0)
-    strong_correct: Mapped[int] = mapped_column(default=0)
+    strong_correct: Mapped[float] = mapped_column(Float, default=0)
     weak_answers: Mapped[int] = mapped_column(default=0)
-    weak_correct: Mapped[int] = mapped_column(default=0)
+    weak_correct: Mapped[float] = mapped_column(Float, default=0)
     # Times a candidate ran out of time on it.
     timeouts: Mapped[int] = mapped_column(default=0)
     # A QualityFlag while the question waits for the verifier.
@@ -51,7 +53,7 @@ class QuestionRevision(Base):
     text: Mapped[str] = mapped_column(Text)
     options: Mapped[list] = mapped_column(JSONB)
     answers: Mapped[int]
-    correct: Mapped[int]
+    correct: Mapped[float] = mapped_column(Float)
     option_picks: Mapped[dict] = mapped_column(JSONB)
     likes: Mapped[int]
     dislikes: Mapped[int]

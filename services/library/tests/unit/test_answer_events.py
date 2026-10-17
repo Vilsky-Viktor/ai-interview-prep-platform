@@ -27,7 +27,9 @@ RECORDED = {
     "question_id": str(QUESTION_ID),
     "question_text": "Which account is debited?",
     "option": "Cash",
+    "options": ["Cash"],
     "correct": True,
+    "credit": 1.0,
 }
 
 
@@ -49,21 +51,44 @@ def no_reviews(monkeypatch):
     return reviewed
 
 
-def test_recorded_answer_goes_into_the_question_statistics(client, monkeypatch, no_reviews):
+@pytest.fixture
+def stored(monkeypatch):
+    """The answers record_answer was given."""
     stored = []
 
-    async def record_answer(event_id, question_id, question_text, option, correct):
-        stored.append((event_id, question_id, question_text, option, correct))
+    async def record_answer(event_id, question_id, question_text, options, credit):
+        stored.append((event_id, question_id, question_text, options, credit))
 
         return {question_id: MIN_ANSWERS}
 
     monkeypatch.setattr(answer_stats, "record_answer", record_answer)
 
+    return stored
+
+
+def test_recorded_answer_goes_into_the_question_statistics(client, stored, no_reviews):
     response = client.post("/internal/events", json=push("answer.recorded", RECORDED))
 
     assert response.status_code == 204
-    assert stored == [("1", QUESTION_ID, "Which account is debited?", "Cash", True)]
+    assert stored == [("1", QUESTION_ID, "Which account is debited?", ["Cash"], 1.0)]
     assert no_reviews == [QUESTION_ID]
+
+
+def test_a_multi_answer_answer_counts_every_option_ticked_and_its_credit(client, stored):
+    partly = RECORDED | {"options": ["Cash", "Bank"], "correct": False, "credit": 2 / 3}
+
+    client.post("/internal/events", json=push("answer.recorded", partly))
+
+    assert stored == [("1", QUESTION_ID, "Which account is debited?", ["Cash", "Bank"], 2 / 3)]
+
+
+@pytest.mark.parametrize(("correct", "credit"), [(True, 1.0), (False, 0.0)])
+def test_an_event_from_before_multi_answer_questions_still_counts(client, stored, correct, credit):
+    old = {key: value for key, value in RECORDED.items() if key not in ("options", "credit")}
+
+    client.post("/internal/events", json=push("answer.recorded", old | {"correct": correct}))
+
+    assert stored == [("1", QUESTION_ID, "Which account is debited?", ["Cash"], credit)]
 
 
 def test_an_answer_isnt_reviewed_before_the_question_has_enough_to_say(

@@ -1,4 +1,4 @@
-from prepza_common.notifications import NotificationKind, Recipient, notification
+from prepza_common.notifications import EVERYONE, NotificationKind, Recipient, notification
 
 
 def question_notification(question_set, topic: str, kind: NotificationKind) -> dict:
@@ -12,4 +12,18 @@ def question_notification(question_set, topic: str, kind: NotificationKind) -> d
         f"/companies/{question_set.owner_id}/interviews",
         title=question_set.title,
         topic=topic,
+    )
+
+
+def news_notification(post) -> dict:
+    """One notification for everyone, opening the post on the news page; the bell shows its
+    title in each user's language (notifications asks for it)."""
+    return notification(
+        Recipient.ALL,
+        EVERYONE,
+        NotificationKind.NEWS,
+        f"/news#{post.id}",
+        key=str(post.id),
+        news_id=str(post.id),
+        title=post.title,
     )

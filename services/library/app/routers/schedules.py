@@ -6,12 +6,10 @@ from prepza_common import processed_events
 from prepza_common.google import Invoker
 
 from app.constants.events import PROCESSED_EVENT_DAYS
-from app.constants.reuse import REVEAL_AFTER_IDLE_DAYS
 from app.models.events import ProcessedEvent
 from app.services import news as news_service
 from app.services import outbox as outbox_service
 from app.services import quality as quality_service
-from app.storage import bank
 from app.storage.db import Session
 
 logger = logging.getLogger(__name__)
@@ -27,13 +25,11 @@ async def flush_outbox() -> None:
 
 
 @router.post("/bank", status_code=status.HTTP_204_NO_CONTENT)
-async def move_bank_stages() -> None:
-    """Daily, from Cloud Scheduler: bank questions move one way, private to retiring to
-    revealed (constants/sets.py Stage). The same daily run sends flags the verifier hasn't acted
-    on to it again, and forgets old notes of processed events."""
+async def daily_housekeeping() -> None:
+    """Daily, from Cloud Scheduler: sends flags the verifier hasn't acted on to it again, news
+    posts still missing translations to be translated again, and forgets old notes of processed
+    events."""
     now = datetime.now(UTC)
-    retired, revealed = await bank.move_stages(now - timedelta(days=REVEAL_AFTER_IDLE_DAYS))
-    logger.info("Bank: %d questions retired, %d revealed", retired, revealed)
     resent = await quality_service.resend_stale_flags()
     logger.info("Sent %d flagged questions to the verifier again", resent)
     untranslated = await news_service.resend_untranslated()

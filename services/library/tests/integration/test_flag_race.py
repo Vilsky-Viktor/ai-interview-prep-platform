@@ -32,7 +32,7 @@ def test_two_reviews_at_once_flag_a_question_once(run):
 
             if answered:
                 await answer_stats.record_answer(
-                    "race-event", question.id, question.text, "a", True
+                    "race-event", question.id, question.text, ["a"], 1.0
                 )
 
             notice = {"kind": "question_flagged", "key": f"flag:{question.id}"}

@@ -43,8 +43,10 @@ def test_two_wrong_answer_reports_flag_the_key():
     assert flag(reports={"wrong_answer": 1}) is None
 
 
-def test_unclear_off_topic_and_disliked_questions_are_rewritten():
+def test_unclear_hard_to_read_off_topic_and_disliked_questions_are_rewritten():
     assert flag(reports={"unclear": 2}) == QualityFlag.REWRITE
+    assert flag(reports={"hard_to_read": 2}) == QualityFlag.REWRITE
+    assert flag(reports={"hard_to_read": 1}) is None
     assert flag(reports={"off_topic": 2}) == QualityFlag.REWRITE
     assert flag(likes=1, dislikes=3) == QualityFlag.REWRITE
     assert flag(likes=2, dislikes=3) is None

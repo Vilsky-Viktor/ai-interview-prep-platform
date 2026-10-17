@@ -26,4 +26,6 @@ class SetContent(BaseModel):
 
     id: UUID
     title: str
+    # basic, medium or hard: a practice round's seconds a question come from it.
+    level: str
     topics: list[SetTopicOut]

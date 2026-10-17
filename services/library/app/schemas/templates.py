@@ -33,6 +33,8 @@ class TemplateCopyOut(BaseModel):
     id: UUID
     title: str
     language: str
+    # basic, medium or hard: the test's seconds a question come from it.
+    level: str
 
 
 class TemplateFiltersOut(BaseModel):
@@ -47,9 +49,25 @@ class TemplateOut(TemplateSummary):
 
 
 class SampleQuestionOut(BaseModel):
-    """A revealed question of a template, with its answer, shown on its public practice page."""
+    """A practice question of a template, with its answer, shown on its public practice page."""
 
     id: UUID
     topic: str
     text: str
     options: list[OptionIn]
+
+
+class PoolTopicOut(BaseModel):
+    """A template topic as its superadmin page shows it: its questions by pool."""
+
+    id: UUID
+    title: str
+    subtopics: list[str]
+    practice_count: int
+    company_count: int
+
+
+class PooledTemplateOut(TemplateSummary):
+    topics: list[PoolTopicOut]
+    # Whether a topic lacks practice or company questions, so a top-up has something to write.
+    short: bool

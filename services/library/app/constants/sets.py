@@ -16,17 +16,19 @@ class OwnerType(StrEnum):
 PLATFORM_OWNER = "prepza"
 
 
-class Stage(StrEnum):
-    """A template question's place in the bank; it only ever moves forward."""
+class Pool(StrEnum):
+    """Which readers a template question is for: fixed when it's created and never changed.
+    A company interview's own questions have none."""
 
-    # Used in company tests only; its answer is never shown.
-    PRIVATE = "private"
-    # Served enough candidates: new tests stop taking it, tests that have it keep it.
-    RETIRING = "retiring"
-    # No active test has it any more: free practice for talents, shown with its answer.
-    REVEALED = "revealed"
+    # Free practice and the role pages' sample questions: public, shown with answers.
+    PRACTICE = "practice"
+    # Company interviews copied from the template, and the bank new generations reuse from;
+    # never shown publicly.
+    COMPANY = "company"
 
 
-# A new template reveals every REVEALED_EVERY-th question of each topic at once, so practice has
-# questions from the start (about a third); the rest start private.
-REVEALED_EVERY = 3
+# What each topic of a template is meant to hold. A new template's questions reused from the
+# bank are company questions; of its fresh ones, the first PRACTICE_QUESTIONS (spread across its
+# subtopics, as generation lists them round-robin) go to practice and the rest to companies.
+PRACTICE_QUESTIONS = 30
+COMPANY_QUESTIONS = 60

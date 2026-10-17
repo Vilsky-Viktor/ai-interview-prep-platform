@@ -6,7 +6,7 @@ from prepza_common.sets import PreparationIn
 from sqlalchemy import delete, func, select, update
 from sqlalchemy.orm import aliased, selectinload
 
-from app.constants.sets import OwnerType, SetKind, Stage
+from app.constants.sets import OwnerType, Pool, SetKind
 from app.helpers.notifications import question_notification
 from app.models.outbox import OutboxEvent
 from app.models.quality import QuestionStats
@@ -16,14 +16,14 @@ from app.storage.db import Session
 
 
 def served():
-    """A question candidates can be given: not a copy of a bank question that has since been
-    revealed, with its answer, in free practice. The bank reveals one only after no test has used
-    it for a long time, but a test can stay open longer than that."""
+    """A question candidates can be given: not a copy of a practice question, shown with its
+    answer in free practice. Copies are only ever made of company questions; this leaves out
+    copies made before the pools of questions that were revealed since (migration 0027)."""
     source = aliased(Question)
 
     return ~(
         select(source.id)
-        .where(source.id == Question.source_question_id, source.stage == Stage.REVEALED)
+        .where(source.id == Question.source_question_id, source.pool == Pool.PRACTICE)
         .exists()
     )
 

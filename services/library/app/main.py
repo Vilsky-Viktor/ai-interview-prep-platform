@@ -14,6 +14,9 @@ from app.config.settings import settings
 from app.integrations.redis import get_redis
 from app.routers import (
     internal,
+    internal_accounts,
+    internal_additions,
+    internal_code,
     internal_emails,
     internal_events,
     internal_feedback,
@@ -65,6 +68,8 @@ app.include_router(templates.router)
 app.include_router(news.router)
 app.include_router(internal.router)
 app.include_router(internal_emails.router)
+app.include_router(internal_accounts.router)
+app.include_router(internal_additions.router)
 app.include_router(schedules.router)
 app.include_router(internal_events.router)
 app.include_router(internal_feedback.router)
@@ -72,6 +77,7 @@ app.include_router(internal_news.router)
 app.include_router(internal_practice.router)
 app.include_router(internal_quality.router)
 app.include_router(internal_reuse.router)
+app.include_router(internal_code.router)
 
 
 app.include_router(health_router(engine))

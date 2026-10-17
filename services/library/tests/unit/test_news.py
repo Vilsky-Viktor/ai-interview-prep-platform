@@ -10,6 +10,7 @@ from prepza_common.constants import MAX_NEWS_TEXT_LENGTH, MAX_NEWS_TITLE_LENGTH
 from prepza_common.http import bearer
 from prepza_common.user import User
 
+from app.helpers.notifications import news_notification
 from app.integrations import generation
 from app.main import app
 from app.services import news as news_service
@@ -231,3 +232,35 @@ def test_posts_still_missing_a_translation_are_sent_again(monkeypatch):
 
     assert asyncio.run(news_service.resend_untranslated()) == 1
     assert sent == [POST_ID]
+
+
+def test_a_new_post_is_one_notification_for_everyone_naming_it():
+    event = news_notification(post_row())
+
+    assert event == {
+        "recipient": "all",
+        "recipient_id": "everyone",
+        "kind": "news",
+        "link": f"/news#{POST_ID}",
+        "data": {"news_id": str(POST_ID), "title": BODY["title"]},
+        "key": f"news:{POST_ID}",
+    }
+
+
+def test_the_bell_asks_for_titles_in_the_readers_language(client, monkeypatch):
+    asked = []
+
+    async def titles(news_ids, language):
+        asked.append((news_ids, language))
+
+        return {str(POST_ID): "Üben auf Thai"}
+
+    monkeypatch.setattr(news, "titles", titles)
+    body = {"news_ids": [str(POST_ID)], "language": "de"}
+
+    assert client.post("/internal/news/titles", json=body).status_code == 401
+
+    response = client.post("/internal/news/titles", json=body, headers=bearer(service_token()))
+
+    assert response.json() == {"titles": {str(POST_ID): "Üben auf Thai"}}
+    assert asked == [([POST_ID], "de")]

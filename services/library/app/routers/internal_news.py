@@ -2,12 +2,19 @@ from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
 
-from app.schemas.news import NewsSourceOut, NewsTranslationsIn
+from app.schemas.news import NewsSourceOut, NewsTitlesIn, NewsTitlesOut, NewsTranslationsIn
 from app.service_auth import ServiceCaller
 from app.storage import news
 
-# News posts' translations, written by generation (its translate-news job).
+# News posts' translations, written by generation (its translate-news job), and their titles
+# for the bell (notifications).
 router = APIRouter(prefix="/internal/news", tags=["internal"])
+
+
+@router.post("/titles")
+async def news_titles(body: NewsTitlesIn, caller: ServiceCaller) -> NewsTitlesOut:
+    """The posts' titles in the reader's language, in English until it's translated."""
+    return NewsTitlesOut(titles=await news.titles(body.news_ids, body.language))
 
 
 @router.get("/{news_id}")

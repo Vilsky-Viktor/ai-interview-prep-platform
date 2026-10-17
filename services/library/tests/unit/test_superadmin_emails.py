@@ -11,6 +11,8 @@ from app.main import app
 from app.storage import emails
 
 ACCOUNT = SimpleNamespace(uid="ann", email="ann@example.com")
+# A company's guest candidate: an account without an address.
+GUEST = SimpleNamespace(uid="guest-1", email=None)
 
 
 @pytest.fixture
@@ -30,6 +32,9 @@ def signed_in(monkeypatch):
         return ACCOUNT
 
     def get_user(uid):
+        if uid == GUEST.uid:
+            return GUEST
+
         if uid != ACCOUNT.uid:
             raise firebase_auth.UserNotFoundError("none")
 
@@ -71,6 +76,35 @@ def test_a_superadmin_finds_an_account_by_its_address_whatever_its_case(client, 
 
 def test_an_address_without_an_account_finds_none(client, signed_in):
     response = client.post("/superadmin/emails/lookup", json={"email": "zoe@example.com"})
+
+    assert response.json() == {"account": None}
+
+
+def test_a_superadmin_opens_an_accounts_email_settings_by_its_id(client, signed_in, caplog):
+    with caplog.at_level(logging.INFO):
+        response = client.get("/superadmin/emails/accounts/ann")
+
+    assert response.status_code == 200
+    assert response.json() == {
+        "user_id": "ann",
+        "email": "ann@example.com",
+        "preferences": DEFAULTS,
+    }
+    assert "user ann viewed by superadmin sam" in caplog.text
+    assert "ann@example.com" not in caplog.text
+
+
+@pytest.mark.parametrize("user_id", ["gone", "guest-1"])
+def test_an_id_without_an_account_to_email_is_not_found(client, signed_in, user_id):
+    assert client.get(f"/superadmin/emails/accounts/{user_id}").status_code == 404
+
+
+def test_text_that_cannot_be_an_address_finds_no_account(client, signed_in, monkeypatch):
+    def invalid(email):
+        raise ValueError("Malformed email address string")
+
+    monkeypatch.setattr(firebase_auth, "get_user_by_email", invalid)
+    response = client.post("/superadmin/emails/lookup", json={"email": "ann@ example"})
 
     assert response.json() == {"account": None}
 
@@ -127,8 +161,9 @@ def test_anyone_else_gets_not_found(client, signed_in):
 
     lookup = client.post("/superadmin/emails/lookup", json={"email": "ann@example.com"})
     change = client.put("/superadmin/emails/ann/preferences", json={"changes": {"updates": False}})
+    account = client.get("/superadmin/emails/accounts/ann")
 
-    assert (lookup.status_code, change.status_code) == (404, 404)
+    assert (lookup.status_code, change.status_code, account.status_code) == (404, 404, 404)
     assert (signed_in.asked, signed_in.changes) == ([], [])
 
 

@@ -16,8 +16,9 @@ from app.constants.quality import (
 
 
 def wrong_key(options: list[dict], option_picks: dict[str, int]) -> bool:
-    """A wrong option is picked more often than the one marked correct."""
-    right = sum(option_picks.get(option["answer"], 0) for option in options if option["correct"])
+    """A wrong option is picked more often than one marked correct (for a multi-answer question,
+    than the right option ticked least often)."""
+    right = min(option_picks.get(option["answer"], 0) for option in options if option["correct"])
 
     return any(
         option_picks.get(option["answer"], 0) > right for option in options if not option["correct"]
@@ -44,7 +45,8 @@ def score_group(final_score: int | None) -> str | None:
 
 
 def no_separation(stats) -> bool:
-    """Strong and weak candidates get it right about as often: it says nothing about them."""
+    """Strong and weak candidates get it right about as often (by credit, for a multi-answer
+    question): it says nothing about them."""
     if stats.strong_answers < MIN_GROUP_ANSWERS or stats.weak_answers < MIN_GROUP_ANSWERS:
         return False
 
@@ -64,14 +66,16 @@ def too_slow(stats) -> bool:
 def flag_for(
     options: list[dict],
     answers: int,
-    correct: int,
+    correct: float,
     option_picks: dict[str, int],
     reports: dict[str, int],
     likes: int,
     dislikes: int,
     unhelpful: bool = False,
 ) -> QualityFlag | None:
-    """The most serious problem the answers and feedback show, or None. `unhelpful`: it doesn't
+    """The most serious problem the answers and feedback show, or None. `correct` is the credit
+    the answers earned, so too hard and too easy read the average credit of a multi-answer
+    question as the share right of a single-answer one. `unhelpful`: it doesn't
     separate strong candidates from weak ones, or it's too slow to read (no_separation,
     too_slow); both ask for a rewrite."""
     answered = answers >= MIN_ANSWERS
@@ -83,6 +87,7 @@ def flag_for(
 
     if (
         reports.get(ReportReason.UNCLEAR, 0) >= REPORTS_TO_FLAG
+        or reports.get(ReportReason.HARD_TO_READ, 0) >= REPORTS_TO_FLAG
         or reports.get(ReportReason.OFF_TOPIC, 0) >= REPORTS_TO_FLAG
         or (dislikes >= DISLIKES_TO_FLAG and dislikes >= 2 * likes)
         or (answered and correct <= answers * TOO_HARD_RATE)

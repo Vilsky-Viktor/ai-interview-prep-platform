@@ -20,8 +20,8 @@ from app.services.templates import summaries
 from app.storage import preparations, templates
 
 # Templates: public, for the practice pages search engines index and for companies to start a
-# test from. Topics, and a sample of the revealed questions practice shows anyway; never the
-# private ones. Only superadmins change them.
+# test from. Topics, and a sample of the practice questions practice shows anyway; never the
+# company ones. Only superadmins change them.
 router = APIRouter(prefix="/templates", tags=["templates"])
 
 
@@ -96,8 +96,8 @@ async def get_template(key: str) -> TemplateOut:
 
 @router.get("/{key}/sample")
 async def sample_questions(key: str) -> list[SampleQuestionOut]:
-    """A few of the template's revealed questions, with answers, spread across its topics, for
-    its practice page. Private and retiring questions are never shown."""
+    """A few of the template's practice questions, with answers, spread across its topics, for
+    its practice page. Company questions are never shown."""
     template = await find_template(key)
     rows = await templates.sample_questions(template.id, SAMPLE_QUESTIONS)
 

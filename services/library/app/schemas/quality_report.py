@@ -15,7 +15,7 @@ class FlaggedQuestionOut(BaseModel):
     # A template's questions can be fixed now or dismissed here; a company's only viewed.
     actionable: bool
     answers: int
-    correct: int
+    correct: float
     reports: int
     set_title: str
     # A template, or a company's test.
@@ -34,7 +34,7 @@ class ReplacedQuestionOut(BaseModel):
     text: str
     options: list[OptionIn]
     answers: int
-    correct: int
+    correct: float
     reports: int
     set_title: str
     set_kind: str
