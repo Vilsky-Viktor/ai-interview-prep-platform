@@ -14,6 +14,9 @@ logger = logging.getLogger(__name__)
 
 OURS = "ours"
 EVERYONE = "everyone"
+# The last values read from Redis, kept for as long as the instance runs, for when Redis is down.
+LAST_READ_KEY = f"{LIMITS_KEY}:last"
+LAST_READ_SECONDS = 10 * 365 * 24 * 60 * 60
 
 
 def parsed(raw: dict) -> dict[str, float]:
@@ -33,7 +36,9 @@ def parsed(raw: dict) -> dict[str, float]:
 
 async def current_values(redis) -> dict[str, float]:
     """The edited values, read from Redis at most every LIMITS_CACHE_SECONDS per instance. With
-    Redis down, none: every limit is at its default."""
+    Redis down, the last values this instance read, so a running service keeps the Controls
+    values through an outage; an instance that never read them has none: every limit at its
+    default."""
     values = memory_cache.get(LIMITS_KEY)
 
     if values is not None:
@@ -41,9 +46,10 @@ async def current_values(redis) -> dict[str, float]:
 
     try:
         values = parsed(await redis.hgetall(LIMITS_KEY))
+        memory_cache.put(LAST_READ_KEY, values, LAST_READ_SECONDS)
     except Exception:
-        logger.warning("Couldn't read the limits; using their defaults", exc_info=True)
-        values = {}
+        logger.warning("Couldn't read the limits; using the last ones read", exc_info=True)
+        values = memory_cache.get(LAST_READ_KEY) or {}
 
     memory_cache.put(LIMITS_KEY, values, LIMITS_CACHE_SECONDS)
 

@@ -226,7 +226,7 @@ Beside the limits, in the same groups, are the plain values the services work wi
 
 Below them, our providers' limits, read-only with their hits, and the latest 50 changes: who, which limit, from what to what, when.
 
-The values live in billing's `limit_settings` (only changed limits have a row), and every change in `limit_changes`. Billing writes them to the Redis hash `limits:values` on every change, at its start and every 5 minutes (`/internal/schedules/limits`), so a Redis wipe heals itself. Each service reads a limit with `limits.limit(redis, NAME)`, keeping the hash at most 30 seconds, so a change is in effect within that; with Redis down, every limit is at its default.
+The values live in billing's `limit_settings` (only changed limits have a row), and every change in `limit_changes`. Billing writes them to the Redis hash `limits:values` on every change, at its start and every 5 minutes (`/internal/schedules/limits`), so a Redis wipe heals itself. Each service reads a limit with `limits.limit(redis, NAME)`, keeping the hash at most 30 seconds, so a change is in effect within that; with Redis down, a service keeps the values it last read (only while Redis is down; one started during the outage uses the defaults).
 
 ```
 GET    /billing/superadmin/limits

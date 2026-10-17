@@ -50,8 +50,17 @@ def test_a_value_that_isnt_a_number_falls_back_to_the_default():
     assert asyncio.run(limit(redis, "MAX_API_KEYS")) == LIMITS["MAX_API_KEYS"].default
 
 
-def test_with_redis_down_every_limit_is_at_its_default():
+def test_with_redis_down_and_nothing_read_before_every_limit_is_at_its_default():
     assert asyncio.run(limit(DownRedis(), "MAX_WEBHOOKS")) == LIMITS["MAX_WEBHOOKS"].default
+
+
+def test_with_redis_down_the_last_values_read_stay_in_effect(monkeypatch):
+    now = time.monotonic()
+    monkeypatch.setattr(time, "monotonic", lambda: now)
+    asyncio.run(limit(FakeRedis({"MAX_WEBHOOKS": "40"}), "MAX_WEBHOOKS"))
+    monkeypatch.setattr(time, "monotonic", lambda: now + LIMITS_CACHE_SECONDS + 1)
+
+    assert asyncio.run(limit(DownRedis(), "MAX_WEBHOOKS")) == 40
 
 
 def test_a_change_is_in_effect_once_the_cached_values_expire(monkeypatch):
