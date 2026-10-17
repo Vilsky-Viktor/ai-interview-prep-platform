@@ -39,20 +39,27 @@ locals {
     # reminders from 8:00; each again three hours later, catching up on what the first missed.
     member-digest    = { service = "notifications", path = "/internal/schedules/digest", cron = "* 7,10 * * *" }
     member-reminders = { service = "notifications", path = "/internal/schedules/reminders", cron = "* 8,11 * * *" }
-    # Notices of a legal document's change a superadmin asked for, in the morning after (UTC),
-    # the same way; at least 14 days before the change applies.
-    legal-notices = { service = "notifications", path = "/internal/schedules/legal-notices", cron = "* 9,12 * * *" }
+    # Emails to many users (legal notices, campaigns): every minute from 8:00 to 18:59 UTC, each
+    # run sending the next pending recipients for 40 seconds.
+    bulk-emails = { service = "notifications", path = "/internal/schedules/bulk", cron = "* 8-18 * * *" }
     # ATS candidates still waiting or whose invite stalled, results kept while a connection was
     # broken or the ATS failed, and candidates past their retention.
     ats-recover = { service = "ats", path = "/internal/schedules/recover", cron = "*/10 * * * *" }
     # Events companies' web hooks didn't take, sent again with backoff.
     webhook-retries = { service = "api", path = "/internal/schedules/webhook-retries", cron = "*/5 * * * *" }
     # Events not published right after their change (the outbox).
-    library-outbox    = { service = "library", path = "/internal/schedules/outbox", cron = "* * * * *" }
-    companies-outbox  = { service = "companies", path = "/internal/schedules/outbox", cron = "* * * * *" }
-    rounds-outbox     = { service = "rounds", path = "/internal/schedules/outbox", cron = "* * * * *" }
-    generation-outbox = { service = "generation-worker", path = "/internal/schedules/outbox", cron = "* * * * *" }
-    ats-outbox        = { service = "ats", path = "/internal/schedules/outbox", cron = "* * * * *" }
+    library-outbox       = { service = "library", path = "/internal/schedules/outbox", cron = "* * * * *" }
+    companies-outbox     = { service = "companies", path = "/internal/schedules/outbox", cron = "* * * * *" }
+    rounds-outbox        = { service = "rounds", path = "/internal/schedules/outbox", cron = "* * * * *" }
+    generation-outbox    = { service = "generation-worker", path = "/internal/schedules/outbox", cron = "* * * * *" }
+    ats-outbox           = { service = "ats", path = "/internal/schedules/outbox", cron = "* * * * *" }
+    billing-outbox       = { service = "billing", path = "/internal/schedules/outbox", cron = "* * * * *" }
+    notifications-outbox = { service = "notifications", path = "/internal/schedules/outbox", cron = "* * * * *" }
+    api-outbox           = { service = "api", path = "/internal/schedules/outbox", cron = "* * * * *" }
+    # The edited limits written to Redis again, so a Redis wipe heals itself; AI usage and limit
+    # hits past 13 months, and limit changes past 24.
+    billing-limits    = { service = "billing", path = "/internal/schedules/limits", cron = "*/5 * * * *" }
+    billing-retention = { service = "billing", path = "/internal/schedules/retention", cron = "30 4 * * *" }
     # Interviews whose time ran out after the candidate left.
     interview-expiry = { service = "rounds", path = "/internal/schedules/expire-interviews", cron = "* * * * *" }
   }

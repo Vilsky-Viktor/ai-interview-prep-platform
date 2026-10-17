@@ -3,7 +3,13 @@
 
 x-billing-env: &billing-env
   DATABASE_URL: postgresql://prepza:${POSTGRES_PASSWORD}@postgres:5432/billing
+  # The limits' values every service reads, and the unpaid AI spend cap's counter.
+  REDIS_URL: redis://redis:6379
   SERVICE_SECRET: ${SERVICE_SECRET}
+  # The AI costs tab names companies and accounts.
+  COMPANIES_URL: http://companies:8000
+  LIBRARY_URL: http://library:8000
+  MONTHLY_BUDGET: ${MONTHLY_BUDGET:-300}
   PADDLE_ENVIRONMENT: ${PADDLE_ENVIRONMENT:-sandbox}
   PADDLE_CLIENT_TOKEN: ${PADDLE_CLIENT_TOKEN:-}
   PADDLE_WEBHOOK_SECRET: ${PADDLE_WEBHOOK_SECRET:-}
@@ -135,6 +141,8 @@ services:
     depends_on:
       billing-migrate:
         condition: service_completed_successfully
+      redis:
+        condition: service_healthy
 
   notifications-migrate:
     extends: {file: compose/base.yml, service: migrate}

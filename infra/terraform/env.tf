@@ -32,10 +32,9 @@ locals {
       ASSISTANT_URL = local.run_url["assistant"]
     }
     generation = {
-      INVOKER_AUDIENCE       = local.run_url["generation"]
-      DAILY_GENERATION_LIMIT = tostring(var.daily_generation_limit)
-      WORKER_URL             = local.run_url["generation-worker"]
-      TASKS_QUEUE            = google_cloud_tasks_queue.generation.id
+      INVOKER_AUDIENCE = local.run_url["generation"]
+      WORKER_URL       = local.run_url["generation-worker"]
+      TASKS_QUEUE      = google_cloud_tasks_queue.generation.id
     }
     generation-worker = {
       INVOKER_AUDIENCE = local.run_url["generation-worker"]
@@ -53,6 +52,8 @@ locals {
         INVOKER_AUDIENCE    = local.run_url["billing"]
         PADDLE_ENVIRONMENT  = var.paddle_environment
         PADDLE_CLIENT_TOKEN = var.paddle_client_token
+        # The AI costs tab compares this month's AI spend with it.
+        MONTHLY_BUDGET = tostring(var.monthly_budget)
       },
       { for key, price in var.paddle_prices : "PADDLE_PRICE_${upper(key)}" => price },
     )

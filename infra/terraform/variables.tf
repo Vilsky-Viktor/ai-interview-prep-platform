@@ -39,12 +39,6 @@ variable "db_high_availability" {
   default     = false
 }
 
-variable "daily_generation_limit" {
-  description = "New generations a day for companies that never topped up, together: a ceiling on LLM spending (about $1.50 a test); 0 turns it off."
-  type        = number
-  default     = 100
-}
-
 variable "mail_from" {
   description = "Sender of service emails (invites, reports, billing), on a domain verified in Resend."
   type        = string
@@ -163,7 +157,7 @@ variable "bing_site_verification" {
 }
 
 variable "ai_spend_alert_hourly" {
-  description = "Alert when generation's OpenAI spend in one hour is above this, in USD."
+  description = "Alert when all AI calls' OpenAI spend in one hour is above this, in USD."
   type        = number
   default     = 20
 }

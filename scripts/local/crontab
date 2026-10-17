@@ -12,8 +12,9 @@
 # hour each morning, and again for a catch-up hour three hours later.
 * 7,10 * * * curl -s -X POST http://notifications:8000/internal/schedules/digest
 * 8,11 * * * curl -s -X POST http://notifications:8000/internal/schedules/reminders
-# Notices of a legal document's change a superadmin asked for (notifications).
-* 9,12 * * * curl -s -X POST http://notifications:8000/internal/schedules/legal-notices
+# Emails to many users, legal notices and campaigns (notifications), every minute from 8:00 to
+# 18:59 UTC.
+* 8-18 * * * curl -s -X POST http://notifications:8000/internal/schedules/bulk
 # ATS candidates whose invite stalled, and old ones (the ats service), every 10 minutes.
 */10 * * * * curl -s -X POST http://ats:8000/internal/schedules/recover
 # Events companies' web hooks didn't take (the api service), every 5 minutes.
@@ -24,5 +25,12 @@
 * * * * * curl -s -X POST http://rounds:8000/internal/schedules/outbox
 * * * * * curl -s -X POST http://generation-worker:8000/internal/schedules/outbox
 * * * * * curl -s -X POST http://ats:8000/internal/schedules/outbox
+* * * * * curl -s -X POST http://billing:8000/internal/schedules/outbox
+* * * * * curl -s -X POST http://notifications:8000/internal/schedules/outbox
+* * * * * curl -s -X POST http://api:8000/internal/schedules/outbox
+# The edited limits written to Redis again (billing), every 5 minutes, and old AI usage, limit
+# hits and limit changes deleted, daily.
+*/5 * * * * curl -s -X POST http://billing:8000/internal/schedules/limits
+30 4 * * * curl -s -X POST http://billing:8000/internal/schedules/retention
 # Interviews whose time ran out after the candidate left, every minute.
 * * * * * curl -s -X POST http://rounds:8000/internal/schedules/expire-interviews

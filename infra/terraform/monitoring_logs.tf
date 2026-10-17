@@ -1,5 +1,5 @@
 # Alerts counted from the services' own logs (log-based metrics), by email to var.alert_email:
-# Redis or OpenAI failing, generation's AI spend running high, generation tasks failing, and
+# Redis or OpenAI failing, AI spend running high, AI stopped for many, generation tasks failing, and
 # emails not delivered.
 
 resource "google_logging_metric" "redis_errors" {
@@ -23,24 +23,63 @@ resource "google_logging_metric" "openai_errors" {
   }
 }
 
-# Each generation run logs what it spent ("Generation <id> (<kind>) spent $1.23; ...").
-resource "google_logging_metric" "generation_spend" {
-  name            = "prepza_generation_spend"
-  filter          = "resource.type=\"cloud_run_revision\" AND jsonPayload.message:\"spent $\""
-  value_extractor = "REGEXP_EXTRACT(jsonPayload.message, \"spent \\\\$([0-9.]+)\")"
+# Every AI call logs what it cost ("AI used: action=... cost=$0.001234"), by action.
+resource "google_logging_metric" "ai_spend" {
+  name            = "prepza_ai_spend"
+  filter          = "resource.type=\"cloud_run_revision\" AND jsonPayload.message:\"AI used: \""
+  value_extractor = "REGEXP_EXTRACT(jsonPayload.message, \"cost=\\\\$([0-9.]+)\")"
+  label_extractors = {
+    action = "REGEXP_EXTRACT(jsonPayload.message, \"action=(\\\\S+)\")"
+  }
 
   metric_descriptor {
     metric_kind = "DELTA"
     value_type  = "DISTRIBUTION"
     unit        = "USD"
+
+    labels {
+      key        = "action"
+      value_type = "STRING"
+    }
   }
 
   bucket_options {
     exponential_buckets {
       num_finite_buckets = 20
       growth_factor      = 2
-      scale              = 0.01
+      scale              = 0.0001
     }
+  }
+}
+
+# Every refusal by a limit, ours or a provider's ("Limit hit: limit=NAME ..."), by limit.
+resource "google_logging_metric" "limit_hits" {
+  name   = "prepza_limit_hits"
+  filter = "resource.type=\"cloud_run_revision\" AND jsonPayload.message:\"Limit hit: \""
+  label_extractors = {
+    limit = "REGEXP_EXTRACT(jsonPayload.message, \"limit=(\\\\S+)\")"
+  }
+
+  metric_descriptor {
+    metric_kind = "DELTA"
+    value_type  = "INT64"
+
+    labels {
+      key        = "limit"
+      value_type = "STRING"
+    }
+  }
+}
+
+# What stops AI for many at once: a shared limit used up (for everyone), OpenAI's account out of
+# money, and the unpaid users' daily AI spend cap near (80%) or reached.
+resource "google_logging_metric" "ai_stopped" {
+  name   = "prepza_ai_stopped"
+  filter = "resource.type=\"cloud_run_revision\" AND (jsonPayload.message:\"Shared limit used up\" OR jsonPayload.message:\"OpenAI quota exhausted\" OR jsonPayload.message:\"Unpaid AI spend\")"
+
+  metric_descriptor {
+    metric_kind = "DELTA"
+    value_type  = "INT64"
   }
 }
 
@@ -103,13 +142,22 @@ locals {
     }
     spend = {
       name      = "prepza AI spend high"
-      condition = "Generation spent over var.ai_spend_alert_hourly USD in an hour"
-      filter    = "metric.type=\"logging.googleapis.com/user/${google_logging_metric.generation_spend.name}\" AND resource.type=\"cloud_run_revision\""
+      condition = "AI calls cost over var.ai_spend_alert_hourly USD in an hour"
+      filter    = "metric.type=\"logging.googleapis.com/user/${google_logging_metric.ai_spend.name}\" AND resource.type=\"cloud_run_revision\""
       # The sum of the logged amounts, a distribution's values.
       aligner   = "ALIGN_SUM"
       threshold = var.ai_spend_alert_hourly
       window    = "3600s"
-      text      = "Generation's OpenAI spend in the last hour is above the alert level. Check the generation runs in the logs (each logs what it spent) for a loop or abuse, and the daily caps."
+      text      = "OpenAI spend in the last hour is above the alert level. The admin zone's AI costs tab shows which action, company or user it was; each call logs \"AI used\" with its cost. Look for a loop or abuse, and the limits in Controls."
+    }
+    ai_stopped = {
+      name      = "prepza AI stopped for many"
+      condition = "A shared limit used up, OpenAI out of credit, or unpaid AI spend at 80% of its daily cap"
+      filter    = "metric.type=\"logging.googleapis.com/user/${google_logging_metric.ai_stopped.name}\" AND resource.type=\"cloud_run_revision\""
+      aligner   = "ALIGN_DELTA"
+      threshold = 0
+      window    = "300s"
+      text      = "Check the logs for the line: \"Shared limit used up\" (a limit for everyone was reached: raise it in Controls if it's real use), \"OpenAI quota exhausted\" (top up the OpenAI account: every AI call fails), \"Unpaid AI spend near the daily cap\" (raise AI_SPEND_UNPAID_DAY in Controls before unpaid users are refused) or \"reached the daily cap\" (they are refused until midnight UTC)."
     }
     generations = {
       name      = "prepza generations failing"
