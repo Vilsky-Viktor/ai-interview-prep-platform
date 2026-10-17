@@ -142,3 +142,17 @@ def test_the_history_and_invoice_need_a_service_token(client):
         ).status_code
         == 401
     )
+
+
+def test_a_top_ups_transaction_says_whose_wallet_it_paid_into(client, monkeypatch):
+    async def for_transaction(transaction):
+        return ("company", "acme", 1_000, "1000") if transaction == "txn_01" else None
+
+    monkeypatch.setattr(purchases, "for_transaction", for_transaction)
+
+    found = client.get("/internal/purchases/txn_01", headers=AUTH)
+    unknown = client.get("/internal/purchases/txn_02", headers=AUTH)
+
+    assert found.json() == {"owner_type": "company", "owner_id": "acme"}
+    assert unknown.status_code == 404
+    assert client.get("/internal/purchases/txn_01").status_code == 401

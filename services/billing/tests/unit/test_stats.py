@@ -1,22 +1,6 @@
 import pytest
-from prepza_common.auth import current_user
-from prepza_common.user import User
 
-from app.main import app
 from app.storage import stats
-
-
-@pytest.fixture
-def signed_in(monkeypatch):
-    monkeypatch.setenv("SUPERADMIN_EMAILS", "ann@example.com")
-
-    def sign_in(email):
-        app.dependency_overrides[current_user] = lambda: User(
-            uid=email, email=email, email_verified=True
-        )
-
-    yield sign_in
-    app.dependency_overrides.clear()
 
 
 def test_superadmin_gets_the_counts_of_the_month_asked(client, monkeypatch, signed_in):

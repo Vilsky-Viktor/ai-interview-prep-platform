@@ -33,6 +33,7 @@ def history_entry_out(entry: Entry) -> HistoryEntryOut:
         total=entry.total,
         currency=entry.currency,
         automatic=entry.automatic,
+        note=entry.note,
         transaction_id=transaction_id(entry),
         hold_key=hold_key,
     )

@@ -146,6 +146,12 @@ async def release(key: str) -> None:
         await session.commit()
 
 
+async def hold_status(key: str) -> str | None:
+    """Whether the hold is open, charged or released; None when there's none."""
+    async with Session() as session:
+        return await session.scalar(select(Hold.status).where(Hold.key == key))
+
+
 async def open_hold(session: AsyncSession, key: str) -> Hold | None:
     """The open hold, locked. Its wallet is locked first, as everywhere else (reserve, deleting
     a company), so two transactions never wait on each other's lock."""
@@ -179,9 +185,10 @@ async def add(
     total: str | None = None,
     currency: str | None = None,
     automatic: bool = False,
+    note: str | None = None,
 ) -> bool:
     """Records one movement and applies it to the balance, once per key; a top-up, refund or
-    chargeback with the money it moved."""
+    chargeback with the money it moved, an adjustment with its note."""
     new = await session.scalar(
         insert(Entry)
         .values(
@@ -193,6 +200,7 @@ async def add(
             total=total,
             currency=currency,
             automatic=automatic,
+            note=note,
         )
         .on_conflict_do_nothing()
         .returning(Entry.id)
@@ -206,5 +214,24 @@ async def add(
         .where(Wallet.owner_type == owner_type, Wallet.owner_id == owner_id)
         .values(balance=Wallet.balance + amount)
     )
+
+    return True
+
+
+async def adjust(owner_type: str, owner_id: str, amount: int, key: str, note: str) -> bool:
+    """A superadmin's adjustment, once per key; False, changing nothing, when it would take the
+    available balance (not counting credits set aside for candidates) below zero."""
+    async with Session() as session, session.begin():
+        await ensure(session, owner_type, owner_id)
+        wallet = await session.scalar(
+            select(Wallet)
+            .where(Wallet.owner_type == owner_type, Wallet.owner_id == owner_id)
+            .with_for_update()
+        )
+
+        if wallet.balance - wallet.reserved + amount < 0:
+            return False
+
+        await add(session, owner_type, owner_id, amount, key, Reason.ADJUSTMENT, note=note)
 
     return True

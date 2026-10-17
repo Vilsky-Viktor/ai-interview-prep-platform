@@ -1,0 +1,97 @@
+"""Every AI call and limit hit the services record, stored once each (by event id)."""
+
+from datetime import datetime, timedelta
+
+from prepza_common.ai_constants import PREPZA_ACTIONS, Category
+from sqlalchemy import delete, exists, select, update
+from sqlalchemy.dialects.postgresql import insert
+
+from app.constants.products import OwnerType
+from app.models.billing import Purchase
+from app.models.limits import LimitChange
+from app.models.usage import AiUsage, LimitHit
+from app.storage.db import Session
+
+USAGE_FIELDS = (
+    "action",
+    "service",
+    "model",
+    "input_tokens",
+    "cached_input_tokens",
+    "output_tokens",
+    "audio_seconds",
+    "cost_usd",
+    "company_id",
+    "user_id",
+    "subject_id",
+    "outcome",
+)
+HIT_FIELDS = ("limit", "kind", "scope", "company_id", "user_id", "what")
+
+
+def category_of(action: str, company_id: str | None, paid: bool) -> Category:
+    if company_id:
+        return Category.PAID if paid else Category.UNPAID
+
+    return Category.PREPZA if action in PREPZA_ACTIONS else Category.NO_COMPANY
+
+
+async def store_usage(event_id: str, occurred_at: datetime, data: dict) -> Category | None:
+    """Stores one AI call, deciding who it was for: a company that had topped up by the call's
+    time is paid. None when the event was stored before."""
+    values = {field: data.get(field) for field in USAGE_FIELDS}
+    company_id = values["company_id"]
+
+    async with Session() as session:
+        paid = company_id is not None and await session.scalar(
+            select(
+                exists().where(
+                    Purchase.owner_type == OwnerType.COMPANY,
+                    Purchase.owner_id == company_id,
+                    Purchase.created_at <= occurred_at,
+                )
+            )
+        )
+        category = category_of(values["action"], company_id, bool(paid))
+        stored = await session.scalar(
+            insert(AiUsage)
+            .values(event_id=event_id, occurred_at=occurred_at, category=category, **values)
+            .on_conflict_do_nothing(index_elements=["event_id"])
+            .returning(AiUsage.id)
+        )
+        await session.commit()
+
+    return category if stored is not None else None
+
+
+async def store_hit(event_id: str, occurred_at: datetime, data: dict) -> None:
+    values = {field: data.get(field) for field in HIT_FIELDS}
+
+    async with Session() as session:
+        await session.execute(
+            insert(LimitHit)
+            .values(event_id=event_id, occurred_at=occurred_at, **values)
+            .on_conflict_do_nothing(index_elements=["event_id"])
+        )
+        await session.commit()
+
+
+async def forget(column: str, value: str) -> None:
+    """Empties a deleted account's or company's id in both tables; the costs and hits stay."""
+    async with Session() as session:
+        for model in (AiUsage, LimitHit):
+            field = getattr(model, column)
+            await session.execute(update(model).where(field == value).values({column: None}))
+
+        await session.commit()
+
+
+async def drop_old(now: datetime, usage_days: int, changes_days: int) -> None:
+    async with Session() as session:
+        for model in (AiUsage, LimitHit):
+            before = now - timedelta(days=usage_days)
+            await session.execute(delete(model).where(model.occurred_at < before))
+
+        before = now - timedelta(days=changes_days)
+        await session.execute(delete(LimitChange).where(LimitChange.changed_at < before))
+        await session.commit()

@@ -11,6 +11,9 @@ os.environ.setdefault("FIREBASE_PROJECT_ID", "demo-test")
 os.environ.setdefault("GOOGLE_CLOUD_PROJECT", "demo-test")
 os.environ.setdefault("DATABASE_URL", "postgresql://test:test@localhost/test")
 os.environ.setdefault("SERVICE_SECRET", "test-secret-that-is-at-least-32-bytes")
+os.environ.setdefault("REDIS_URL", "redis://localhost:6379/15")
+os.environ.setdefault("COMPANIES_URL", "http://companies.test")
+os.environ.setdefault("LIBRARY_URL", "http://library.test")
 os.environ.setdefault("LIBRARY_SERVICE_SECRET", "test-secret-that-is-at-least-32-bytes")
 os.environ.setdefault("GENERATION_SERVICE_SECRET", "test-secret-that-is-at-least-32-bytes")
 os.environ.setdefault("ROUNDS_SERVICE_SECRET", "test-secret-that-is-at-least-32-bytes")
@@ -41,3 +44,4 @@ def no_publishing(monkeypatch):
         return None
 
     monkeypatch.setattr(pubsub, "publish", published)
+    monkeypatch.setattr(pubsub, "publish_batch", published)

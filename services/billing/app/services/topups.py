@@ -9,6 +9,7 @@ from app.constants.notifications import TOP_UP_LINK
 from app.constants.products import PADDLE_API_ORIGIN, OwnerType
 from app.helpers.credits import credits_for
 from app.services import auto_top_ups, credit_events
+from app.services import outbox as outbox_service
 from app.services.catalog import price_cents_for
 from app.services.referrals import reward_after_top_up
 from app.storage import ledger, purchases
@@ -84,6 +85,7 @@ async def handle_completed(data: dict) -> None:
         await reward_after_top_up(owner_type, owner_id, data["id"])
 
         if granted:
+            await outbox_service.flush_quietly()
             await credit_events.credits_added(owner_type, owner_id)
             await track(
                 "topped_up",

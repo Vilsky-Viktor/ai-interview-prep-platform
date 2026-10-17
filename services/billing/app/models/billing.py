@@ -103,6 +103,8 @@ class Entry(Base):
     total: Mapped[str | None] = mapped_column(Text)
     currency: Mapped[str | None] = mapped_column(String(3))
     automatic: Mapped[bool] = mapped_column(default=False, server_default="false")
+    # A superadmin's adjustment: why, as the company's history shows it.
+    note: Mapped[str | None] = mapped_column(Text)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )

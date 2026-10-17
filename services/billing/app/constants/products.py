@@ -4,6 +4,9 @@ from enum import StrEnum
 
 from app.constants.credits import CANDIDATE_CREDITS
 
+# The admin zone's support tab lists at most this many of a person's top-ups, newest first.
+MAX_BUYER_PURCHASES = 100
+
 
 class OwnerType(StrEnum):
     """Whose wallet; only companies have one."""

@@ -1,7 +1,7 @@
 from datetime import datetime
 from uuid import UUID
 
-from prepza_common.constants import MAX_PAGE_SIZE
+from prepza_common.constants import MAX_ADJUSTMENT, MAX_ADJUSTMENT_NOTE, MAX_PAGE_SIZE
 from pydantic import BaseModel, Field
 
 
@@ -64,6 +64,16 @@ class LowCompanyOut(BaseModel):
 
 class LowCompaniesOut(BaseModel):
     companies: list[LowCompanyOut]
+
+
+class AdjustmentIn(BaseModel):
+    """A superadmin's adjustment of a company's credits: `amount` adds (positive) or removes
+    (negative); `note` says why, as the company's history shows it; `key` makes a repeated
+    request count once."""
+
+    amount: int = Field(ge=-MAX_ADJUSTMENT, le=MAX_ADJUSTMENT)
+    note: str = Field(min_length=1, max_length=MAX_ADJUSTMENT_NOTE)
+    key: UUID
 
 
 class OwnersIn(BaseModel):
@@ -150,9 +160,34 @@ class HistoryEntryOut(BaseModel):
     automatic: bool
     transaction_id: str | None
     hold_key: str | None
+    # A superadmin's adjustment: why.
+    note: str | None = None
+
+
+class PurchaseOwnerOut(BaseModel):
+    """Whose wallet a top-up's transaction paid into."""
+
+    owner_type: str
+    owner_id: str
 
 
 class InvoiceOut(BaseModel):
     """A temporary link to the transaction's invoice PDF."""
 
     url: str
+
+
+class BuyerPurchaseOut(BaseModel):
+    """A top-up someone paid for into a company: `total` in minor units, tax included."""
+
+    transaction_id: str
+    company_id: str
+    total: str
+    currency: str
+    created_at: datetime
+
+
+class HoldOut(BaseModel):
+    """Credits set aside for one piece of work: open, charged or released."""
+
+    status: str

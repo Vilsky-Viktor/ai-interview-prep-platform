@@ -13,6 +13,11 @@ REFERRAL_CODE_BYTES = 6
 
 NOT_ENOUGH = "Not enough credits. Top up to continue."
 
+# A superadmin's adjustment (its limits are in prepza_common.constants) removing credits the
+# company has set aside for candidates, or doesn't have; or moving none.
+ADJUSTMENT_BELOW_ZERO = "That would take the available balance below zero."
+ADJUSTMENT_ZERO = "The amount can't be zero."
+
 
 class Reason:
     """Why credits moved, as the history shows it."""
@@ -28,6 +33,8 @@ class Reason:
     REFERRAL = "referral"
     # The top-up that paid a referral was refunded in full or charged back: both rewards go back.
     REFERRAL_REVERSED = "referral_reversed"
+    # A superadmin added or removed credits, with a note saying why (a complaint, say).
+    ADJUSTMENT = "adjustment"
 
 
 # Paddle's adjustments of a top-up.

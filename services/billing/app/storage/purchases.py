@@ -1,11 +1,14 @@
 from datetime import datetime
 
+from prepza_common import audit
+from prepza_common.audit_actions import AuditAction, TargetKind
 from sqlalchemy import delete, func, select, update
 from sqlalchemy.dialects.postgresql import insert
 
 from app.constants.credits import Reason
 from app.constants.products import OwnerType
 from app.models.billing import Entry, Hold, Purchase, Wallet
+from app.models.outbox import OutboxEvent
 from app.storage import referrals
 from app.storage.db import Session
 from app.storage.ledger import add, ensure
@@ -61,6 +64,19 @@ async def grant(
             currency,
             automatic,
         )
+
+        # A member's own top-up goes to the company's action log; an automatic one isn't theirs.
+        if owner_type == OwnerType.COMPANY and buyer_id and not automatic:
+            audit.add(
+                session,
+                OutboxEvent,
+                owner_id,
+                buyer_id,
+                AuditAction.TOP_UP_PAID,
+                TargetKind.COMPANY,
+                owner_id,
+            )
+
         await session.commit()
 
         return True
@@ -165,6 +181,27 @@ async def purchases_of(user_id: str) -> list[Purchase]:
 
     async with Session() as session:
         return list(await session.scalars(query))
+
+
+async def bought_by(user_id: str, limit: int) -> list:
+    """The company top-ups the user paid for, one per transaction, newest first: each
+    transaction's lines share its total."""
+    query = (
+        select(
+            Purchase.transaction_id,
+            Purchase.owner_id,
+            Purchase.total,
+            Purchase.currency,
+            func.min(Purchase.created_at).label("created_at"),
+        )
+        .where(Purchase.buyer_id == user_id, Purchase.owner_type == OwnerType.COMPANY)
+        .group_by(Purchase.transaction_id, Purchase.owner_id, Purchase.total, Purchase.currency)
+        .order_by(func.min(Purchase.created_at).desc())
+        .limit(limit)
+    )
+
+    async with Session() as session:
+        return list(await session.execute(query))
 
 
 async def forget_buyer(user_id: str) -> None:

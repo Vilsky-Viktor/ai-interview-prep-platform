@@ -115,3 +115,18 @@ def test_a_company_has_paid_once_it_topped_up(run):
         return await purchases.paid(COMPANY, acme), await purchases.paid(COMPANY, other)
 
     assert run(scenario()) == (True, False)
+
+
+def test_a_top_ups_transaction_finds_the_wallet_it_paid_into(run):
+    acme = company()
+    txn = f"txn_{uuid.uuid4().hex}"
+
+    async def scenario():
+        await purchases.grant(COMPANY, acme, 1_000, 1, txn, TOPUP.key, "ann", "1000", "USD", NOW)
+
+        return await purchases.for_transaction(txn), await purchases.for_transaction("txn_none")
+
+    found, unknown = run(scenario())
+
+    assert found[:2] == (COMPANY, acme)
+    assert unknown is None

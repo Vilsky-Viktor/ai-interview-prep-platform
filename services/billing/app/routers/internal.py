@@ -3,19 +3,30 @@ from fastapi.encoders import jsonable_encoder
 from prepza_common.analytics import track
 from prepza_common.paging import PageParams
 
-from app.constants.credits import CANDIDATE_CREDITS, CANDIDATE_PREFIX, NOT_ENOUGH, Reason
-from app.constants.products import TOP_UP_UNAVAILABLE, OwnerType
+from app.constants.credits import (
+    ADJUSTMENT_BELOW_ZERO,
+    ADJUSTMENT_ZERO,
+    CANDIDATE_CREDITS,
+    CANDIDATE_PREFIX,
+    NOT_ENOUGH,
+    Reason,
+)
+from app.constants.products import MAX_BUYER_PURCHASES, TOP_UP_UNAVAILABLE, OwnerType
 from app.helpers.history import history_entry_out
 from app.helpers.wallets import balance_out
 from app.integrations import paddle
 from app.schemas.billing import (
+    AdjustmentIn,
     BalanceOut,
+    BuyerPurchaseOut,
     HistoryEntryOut,
+    HoldOut,
     InvoiceOut,
     LowCompaniesOut,
     LowCompanyOut,
     OwnersIn,
     PaidOut,
+    PurchaseOwnerOut,
     ReferralOut,
     TopUpCheckoutIn,
     TopUpCheckoutOut,
@@ -26,7 +37,7 @@ from app.services import auto_top_ups
 from app.services.catalog import price_cents_for
 from app.services.referrals import referral_out
 from app.storage import auto_top_ups as auto_top_up_rows
-from app.storage import history, ledger, purchases, referrals
+from app.storage import history, ledger, purchases, referrals, usage
 
 router = APIRouter(prefix="/internal", tags=["internal"])
 
@@ -64,6 +75,18 @@ async def charge_candidate(key: str, caller: ServiceCaller) -> None:
 @router.post("/candidates/release", status_code=status.HTTP_204_NO_CONTENT)
 async def release_candidate(key: str, caller: ServiceCaller) -> None:
     await ledger.release(CANDIDATE_PREFIX + key)
+
+
+@router.get("/candidates/hold")
+async def candidate_hold(key: str, caller: ServiceCaller) -> HoldOut:
+    """Whether a candidate's credits are set aside, charged or given back, for the admin zone's
+    support tab; 404 when none were held."""
+    found = await ledger.hold_status(CANDIDATE_PREFIX + key)
+
+    if found is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Not found")
+
+    return HoldOut(status=found)
 
 
 @router.post("/companies/{company_id}/welcome", status_code=status.HTTP_204_NO_CONTENT)
@@ -113,6 +136,20 @@ async def company_history(
     return [history_entry_out(row) for row in rows]
 
 
+@router.post("/companies/{company_id}/adjustments", status_code=status.HTTP_204_NO_CONTENT)
+async def adjust_company(company_id: str, body: AdjustmentIn, caller: ServiceCaller) -> None:
+    """A superadmin adds or removes credits (companies checks who and logs it). Safe to repeat
+    with the same key; refused when it would take the available balance below zero."""
+    if body.amount == 0:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, ADJUSTMENT_ZERO)
+
+    note = body.note.strip()
+    key = f"adjustment:{body.key}"
+
+    if not await ledger.adjust(OwnerType.COMPANY, company_id, body.amount, key, note):
+        raise HTTPException(status.HTTP_409_CONFLICT, ADJUSTMENT_BELOW_ZERO)
+
+
 @router.get("/companies/{company_id}/invoice")
 async def company_invoice(
     company_id: str, transaction_id: str, caller: ServiceCaller
@@ -122,6 +159,36 @@ async def company_invoice(
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Not found")
 
     return InvoiceOut(url=await paddle.invoice_url(transaction_id))
+
+
+@router.get("/purchases")
+async def buyer_purchases(buyer_id: str, caller: ServiceCaller) -> list[BuyerPurchaseOut]:
+    """The company top-ups someone paid for, one per transaction, newest first, at most
+    MAX_BUYER_PURCHASES, for the admin zone's support tab."""
+    return [
+        BuyerPurchaseOut(
+            transaction_id=row.transaction_id,
+            company_id=row.owner_id,
+            total=row.total,
+            currency=row.currency,
+            created_at=row.created_at,
+        )
+        for row in await purchases.bought_by(buyer_id, MAX_BUYER_PURCHASES)
+    ]
+
+
+@router.get("/purchases/{transaction_id}")
+async def purchase_owner(transaction_id: str, caller: ServiceCaller) -> PurchaseOwnerOut:
+    """Whose wallet a top-up's Paddle transaction paid into, for the admin zone's support
+    search; 404 when no top-up has that transaction."""
+    bought = await purchases.for_transaction(transaction_id)
+
+    if bought is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Not found")
+
+    owner_type, owner_id, _, _ = bought
+
+    return PurchaseOwnerOut(owner_type=owner_type, owner_id=owner_id)
 
 
 @router.post("/companies/credits")
@@ -152,14 +219,17 @@ async def low_companies(caller: ServiceCaller) -> LowCompaniesOut:
 async def delete_company(company_id: str, caller: ServiceCaller) -> None:
     await auto_top_ups.turn_off(OwnerType.COMPANY, company_id)
     await purchases.delete_company(company_id)
+    # Its AI costs and limit hits stay, without the company.
+    await usage.forget("company_id", company_id)
 
 
 @router.delete("/users/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_user(user_id: str, caller: ServiceCaller) -> None:
-    """The user's purchases for their companies stay for bookkeeping, without their id; any
-    automatic top-up paid with their card goes off."""
+    """The user's purchases for their companies stay for bookkeeping, without their id, and so
+    do their AI costs and limit hits; any automatic top-up paid with their card goes off."""
     await auto_top_ups.forget_buyer(user_id)
     await purchases.forget_buyer(user_id)
+    await usage.forget("user_id", user_id)
 
 
 @router.post("/users/{user_id}/export")
