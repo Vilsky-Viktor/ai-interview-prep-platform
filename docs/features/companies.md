@@ -6,7 +6,7 @@ A company is where a hiring team works: its interviews, candidates, credits and 
 
 - Company names are unique across prepza, ignoring case.
 - A company can be renamed.
-- One person can own at most 3 companies.
+- One person can own at most 3 companies (`MAX_OWNED_COMPANIES`, by default; see [Admin zone](admin-zone.md#limits)).
 
 ## Team
 
@@ -22,7 +22,7 @@ The companies service enforces the roles: `require_editor` answers 403 to a view
 
 ### Handing the company on
 
-The owner can make an admin who has joined the owner: the role picker on that admin's row has an **owner** choice (`can_own` in the team list says who), which asks to confirm first (`POST /companies/members/{id}/owner`). In one transaction the admin becomes the owner and the owner an admin, only while both are still what was read, so a company never has two owners or none. Someone who already owns 3 companies can't become an owner of another (409). The new owner gets a bell notification (`ownership_received`), and the audit log records it (`ownership_transferred`). An automatic top-up keeps charging the card of whoever set it up. It isn't one of the assistant's or AI apps' tools.
+The owner can make an admin who has joined the owner: the role picker on that admin's row has an **owner** choice (`can_own` in the team list says who), which asks to confirm first (`POST /companies/members/{id}/owner`). In one transaction the admin becomes the owner and the owner an admin, only while both are still what was read, so a company never has two owners or none. Someone who already owns 3 companies can't become an owner of another (409). The new owner gets a bell notification (`ownership_received`), and the [action log](#action-log) records it (`ownership_transferred`). An automatic top-up keeps charging the card of whoever set it up. It isn't one of the assistant's or AI apps' tools.
 
 ### Deleting an account that owns companies
 
@@ -73,34 +73,38 @@ Until a company is verified, its invite pages and its invite and reminder emails
 
 ## Suspension
 
-A superadmin can suspend a company from the admin zone (see [Admin zone](admin-zone.md#companies)), and lift the suspension later. While it's suspended:
+A superadmin can suspend a company from the admin zone (see [Admin zone](admin-support.md)), and lift the suspension later. While it's suspended:
 
 - its members still see it, with a notice saying so, but nothing in it can be changed,
 - it invites nobody: new candidates are refused (an ATS keeps them waiting until the suspension is lifted),
 - candidates who haven't started find its invites and shareable link invalid; those already in an interview can finish it.
 
-## Audit log
+## Action log
 
-The companies service records the human decisions taken in a company, as evidence of human oversight: who took each one, what it was, on which interview or candidate, and when.
+Every action a company's members take on it is logged: who took it, what it was and what it was about, when, and what it came through. The owner reads it on the company's **Action log** tab (after Billing; admins and viewers have neither the tab nor its page, which sends them to the company), newest first, loading more on scroll. Each row: the action and its target, then who (the member's email, or "A former member"), the date and time to the minute in the viewer's time zone, and through what. Filters, kept in the address: a member (one who joined), a group of actions, and a range of days (the page sends the chosen days' bounds in the viewer's time zone as instants; companies filters).
 
-| Recorded | When |
+| Group | Actions |
 |---|---|
-| Topics approved | A member approves an interview's topics |
-| Results viewed | A member opens a candidate's results |
-| Report emailed | A member emails a candidate's or an interview's report |
-| Candidate deleted / invite revoked | A member revokes a candidate (see [Candidates](candidates.md#revoking-a-candidate)) |
-| Extra time set | A member gives a candidate extra time |
-| Pass mark changed | A member changes an interview's pass mark |
-| Ownership transferred | The owner makes an admin the owner |
-| AI apps allowed or stopped | An owner or admin changes **Allow AI apps** (see [AI apps](mcp.md#tools)) |
+| Interviews | created (from a description or a template), deleted, renamed, settings changed (time per question, a topic's question count, hired), shareable link on or off, a question regenerated, an answer key marked wrong, topics approved, passing grade changed |
+| Candidates | invited, invite sent again, revoked, deleted, name changed, extra time given, results viewed, report emailed |
+| Team | member invited, joined, removed, role changed, ownership handed on |
+| Company | renamed, logo, brand colors or style, website sent for verification, AI apps allowed or stopped |
+| Billing | a member's top-up paid, automatic top-up set up, changed or stopped |
+| Integrations | an ATS connected, reconnected or disconnected, a job linked or unlinked; Slack connected, disconnected or its notifications changed; an API key created, deleted or its permissions narrowed (with what was taken away); a web hook added, tested or deleted |
 
-An event also says what it came through (`via`): empty when a member acted in the app, `assistant` when the in-app assistant did it for them, `mcp` when an AI app connected over MCP did, and `api` when an API key did, as the member who made it (a candidate removed, extra time set), for every event: results viewed, topics approved, the pass mark changed, a candidate revoked or removed, extra time set and a report emailed. Companies trusts that only from a service token the assistant signs (the `X-Assistant` header, checked like other service calls); a missing or invalid one counts as the app. A view through the assistant isn't counted as the "results viewed" step of the sign-up funnel.
+**How it's recorded.** Companies records its own actions (`storage/audit.py`), the joining of a member in the same transaction as the join. Billing, ats, notifications and api save theirs in their outbox in the change's own transaction (`prepza_common.audit.add`, event `audit.recorded`), so an action is sent exactly when its change is saved, and retried until companies stores it (each service's outbox is flushed after the request and every minute). Companies stores an event once however often it comes (its id is unique in `audit_events.event_id`), at the time it happened rather than when it arrived, so a late event keeps its place; an event for a company deleted meanwhile is dropped. A member's views of one candidate's results are one row a day (UTC), moved to the latest view (a partial unique index and an upsert, so views at once make one row).
 
-Only the owner can read the log, newest first, with `via`, through `GET /companies/{id}/audit`; the app has no page for it. Events are kept for 24 months, then the daily retention job deletes them, and they go with the company when it's removed. When a member deletes their account, their events stay with the company without their id (`deleted-user`); their data export lists them.
+**What it keeps.** Each row has the group (the action filter's column), `target_kind` and `target_id`, and a `target_label` only for what isn't a person (an interview's title, an API key's name, a web hook's site, an ATS's or Slack channel's name), as it was then, so a deleted interview still reads. People are never copied in: candidates' and members' emails are looked up when the log is read (as the support page does), so a deleted candidate shows as such and the log never keeps a candidate's email.
+
+**Through what (`via`).** Empty when a member acted in the app, `assistant` when the in-app assistant did it for them, `mcp` when an AI app connected over MCP did (with the key's id, `key_id`, when it was an agent signed in with an API key: [API keys](mcp.md#api-keys)), `api` when an API key did, as the member who made it, and `ats` when an ATS sent a candidate, invited as the member who connected it. Companies trusts that only from a service token the assistant signs (the `X-Assistant` header, checked like other service calls); a missing or invalid one counts as the app. A view through the assistant isn't counted as the "results viewed" step of the sign-up funnel.
+
+**Reading it.** `GET /companies/{id}/actions?member_id&group&from&to&offset&limit` for the page; `GET /companies/{id}/audit` (the same actions, without who and what, also with an API key) stays for AI agents. Both are for the owner only: admins and viewers get 403, others 404. Actions are kept for 12 months, then the daily retention job deletes them, and they go with the company when it's removed. When a member deletes their account, their actions stay with the company without their id (`deleted-user`); their data export lists them.
 
 ## Page guides
 
-Every page from the companies list inward has an info button (a question mark in a badge, labelled "About this page"): under the back arrow in the page margin, or right after the arrow on narrower screens. It opens a short guide to that page: what it's for, what you can do there and a tip or two. The companies list, each company tab (interviews, templates, team, integrations, brand, billing, referrals), each interview tab (topics, candidates, settings), a new interview and its topic review and generation, the preview, a candidate's report, a template, choosing a company for a template, the ATS, Slack, API and AI apps pages, and the top-up page and Settings each have their own, in every language. The companies list's back arrow goes to the home page.
+Every page from the companies list inward has an info button (a question mark in a badge, labelled "About this page"): under the back arrow in the page margin, or right after the arrow on narrower screens. It opens a short guide to that page: what it's for, what you can do there and a tip or two. The companies list, each company tab (interviews, templates, team, action log, integrations, brand, billing, referrals), each interview tab (topics, candidates, settings), a new interview and its topic review and generation, the preview, a candidate's report, a template, choosing a company for a template, the ATS, Slack, API and AI apps pages, and the top-up page and Settings each have their own, in every language. The companies list's back arrow goes to the home page.
+
+The guides live in rounds, beside the FAQ (`services/rounds/app/page_guides/<language>.json`, by the page's key from `prepza_common.page_keys`), and `GET /api/rounds/help/pages/{key}` serves one in the page's language (English until it's translated; an unknown key is a 404). The info button's dialog and the assistant read the same route, so there's one text. Every page where the assistant's panel opens has a guide, also the ones without an info button (practice, pricing, news, the articles and guides, the FAQ, the documents and legal pages, and so on): each page registers its key (`usePageKey`, the info button, or `PageKey`), which the panel sends with each message (see [the assistant](assistant.md#the-page-the-user-is-on)). The admin zone has none.
 
 ## Related pages
 

@@ -46,7 +46,7 @@ Each section has a picture of the real interface, several of them animated. Pric
 
 - what the test covers,
 - the way to create a test,
-- up to 5 of its revealed questions with answers as examples, and a link to free practice,
+- up to 5 of its practice questions with answers as examples, and a link to free practice,
 - "questions companies ask": the FAQ's answers on cost, charging, cheating, what candidates see and languages. It has no FAQ structured data; `/faq` carries that.
 
 Addresses use the template's slug (see [Templates and practice](templates-and-practice.md#slugs)); an old address by id moves there for good.
@@ -78,6 +78,7 @@ The help chat (rounds' `POST /help/chat`) answers signed-out visitors in the [as
 
 - It answers only from the platform guide, the FAQ, the prices, the terms and the privacy policy, and keeps to prepza and hiring with it, like the assistant (`prepza_common.scope.SCOPE_RULE`).
 - It answers in the page's language.
+- Each question carries the key of the page it's asked on: the chat reads that page's guide, so "this page" and "here" mean it (see [page guides](companies.md#page-guides)). Every page with the panel has a guide, the public ones (pricing, practice, news, the articles, the FAQ, the documents) too; rounds serves them at `GET /api/rounds/help/pages/{key}`, which the info buttons read.
 - A visitor shows they're a person ([the "I'm not a robot" check](../architecture.md#the-im-not-a-robot-check)) until their conversation has a reply.
 - An answer's tokens count against the day's budget however it ends: estimated (about 4 characters each) when the model was cut short and reported none.
 - Nothing of the conversation is stored: the panel sends it whole each time. Each reply ends with its signature (`{"done": true, "signature"}`, an HMAC of its text with the service's secret), which the panel sends back with it; the model reads every question but only the replies the chat signed, so a reply the page made up can't steer it, and only a signed reply spares the check.
@@ -85,14 +86,19 @@ The help chat (rounds' `POST /help/chat`) answers signed-out visitors in the [as
 - A visitor asking to sign in or sign up, or to do something that needs an account (create a company, …), gets a sign-in card in the panel (the site's own sign-in buttons, the way they named first): the model starts its reply with a `[[sign_in:<provider>]]` marker, which the service turns into a `{"block": {"kind": "sign_in", "provider"}}` event.
 - The same knowledge, with the FAQ in the page's language, is served as text at `GET /api/rounds/help/guide` (public, kept for 5 minutes per language); the in-app assistant reads it to answer questions about prepza.
 
-| Limit | Where it's set | Value |
+Every limit but an answer's length and Cloud Armor's is one of `prepza_common.limit_list`'s: it starts at its default, and a superadmin changes it in the admin zone's Controls tab (see [Admin zone](admin-zone.md#limits)).
+
+| Limit | Where it's set | Default |
 |---|---|---|
-| Messages an hour per account | `HELP_USER_LIMIT` setting | 30 |
-| Questions an hour per address | `HELP_IP_LIMIT` constant (`services/rounds/app/constants/help.py`) | 60 |
-| Questions a day in all | `HELP_DAILY_LIMIT` setting | 5,000 |
+| Messages an hour per account | `HELP_USER_LIMIT` | 30 |
+| Questions an hour per address | `HELP_IP_LIMIT` | 60 |
+| Questions a day in all | `HELP_DAILY_LIMIT` | 5,000 |
 | An answer's length, in tokens | `HELP_MAX_OUTPUT_TOKENS` constant | 1,500 |
-| Tokens a day in all (input and output, counted after each answer; a started answer finishes) | `HELP_TOKENS_PER_DAY` constant | 50,000,000 |
+| Tokens a day in all (input and output, counted after each answer; a started answer finishes) | `HELP_TOKENS_PER_DAY` | 50,000,000 |
+| AI spend a day of unpaid companies and people without a company, the help chat's visitors included (503 until midnight UTC once reached) | `AI_SPEND_UNPAID_DAY` | $15 |
 | Questions per 10 minutes per IP, at the edge (Google Cloud only) | Cloud Armor (Terraform) | 20 |
+
+Each answer is recorded with its tokens and cost as a `help_chat` AI call (see [Credits and payments](billing.md#ai-usage-and-limit-hits)).
 
 The chat's model is set in [Generation settings](../generation.md#models).
 
@@ -102,7 +108,7 @@ The chat's model is set in [Generation settings](../generation.md#models).
 - **Languages:** each version is written in English, the binding text (each document's intro says so), and translated into the other 22 languages. A page shows its language's translation, saying it's a translation with a link to the English (`?language=en`); Arabic, Hebrew and Persian read right to left. Translations sit next to the English copy, at `app/legal_versions/<document>/<version>/<language>.json` in rounds, and a test requires every language for each current version, with the English's sections, paragraphs and items, and its addresses, links, numbers and dates. An older version without translations shows in English, saying so.
 - **Versions:** each document's version is the day it applies from (`LEGAL_VERSIONS` in `prepza_common.constants`), and may come after the day it's published. Each page says "In force since …", or "Applies from …" with a link to the version in force now. Every published version stays readable (`/terms?version=2026-10-10`, which says it was replaced), listed under **All versions**. Rounds keeps a copy of each in `app/legal_versions/<document>/<version>.json`, the current one too, and a test fails when a text changes without a new version: give it one, then run `python -m app.legal_archive` in rounds. Rounds decides which version applies today and whether the one shown is in force, upcoming or replaced.
 - **Acceptance:** signing up accepts the terms in force (the sign-in says so, and that the privacy policy was read), and library keeps that version and when (`terms_acceptances`; in the data export, deleted with the account). A company keeps the DPA version in force when it was made (`companies.dpa_version`), which its owner accepted with the terms. A later version applies after its notice; the terms say that using prepza after that day accepts it.
-- **Notices:** a significant change is emailed at least 14 days before it applies, from the admin zone (see [Legal notices](admin-zone.md#legal-notices)).
+- **Notices:** a significant change is emailed at least 14 days before it applies, from the admin zone (see [Legal notices](admin-zone.md#legal-notices)). It goes in the bell too, and until it applies a thin banner above every page tells signed-in users from when, with a link to it; closing it keeps it closed in that browser for that version (see [Notifications](notifications.md#legal-notices)).
 - The contact address in them, hello@prepza.ai, is put together in the browser, so the page's HTML doesn't hold it for bots to collect.
 
 ## Documents for companies
@@ -123,14 +129,19 @@ After changing one, rebuild the files in `frontend/public/documents` and commit 
 
 ## Developer docs
 
-The `/api-docs` page ("developer docs" in the footer) is the public API's reference, in English only, like the legal pages. It reads the API's OpenAPI description on each request (`lib/openapi.ts`, `components/api-docs/`) and shows it in four tabs (`?tab=`, `constants/api-docs.ts`), the description split at its `# ` titles:
+The `/api-docs` page ("developer docs" in the footer) is the public API's reference, in English only, like the legal pages. It reads the API's OpenAPI description on each request (`lib/openapi.ts`, `components/api-docs/`) and shows it in five tabs (`?tab=`, `constants/api-docs.ts`), the description split at its `# ` titles, except MCP's:
 
 - **API** (the page's own address): getting a key, authentication, limits, errors, sending candidates from your own platform and verified companies, then the base URL and each route with its parameters, body, result and errors;
 - **web hooks**: signatures and delivery, then the `candidate.finished` event;
 - **SDK**: embedding the interview with the hosted script, with a code example;
+- **MCP**: connecting AI apps and one's own agents to prepza's MCP server, with example agents in Python and TypeScript and the server's tools (its own English text in `constants/mcp-docs.ts` and `content/mcp/`; see [AI apps over MCP](mcp.md#connecting));
 - **objects**: what the routes and the web hook return; a type anywhere links to its object here.
 
-The description's text may hold bold, inline code, links (`[text](/api-docs?tab=sdk)`: the API tab links its mentions of the web hook and of embedding to their tabs) and code blocks. See [Public API](api.md).
+The description's text may hold bold, inline code, links (`[text](/api-docs?tab=sdk)`: the API tab links its mentions of the web hook and of embedding to their tabs) and code blocks, each with its language ("```python"); code blocks that follow each other are one example in several languages, such as the routes' examples in curl, Python and JavaScript (`app/constants/docs.py` in the api service). See [Public API](api.md).
+
+### Code
+
+Code anywhere on the site shows in one editor (`components/code-editor.tsx`): a header with its language and a copy button, then numbered lines in the language's colors (shiki's GitHub themes, light and dark, loaded on first use; plain until then or for a language shiki doesn't know). An example in several languages gets a language menu in the header instead, and picking one switches every editor on the page that has it (kept while the tab stays open, `lib/code-language.ts`). The developer docs, the articles and the assistant's answers (Markdown code blocks, `components/markdown-code.tsx`) use it, and so does a question's example in interviews and practice, without the header (`lib/question-text.ts` reads the block's language from its fence).
 
 ## Contact us
 
@@ -139,8 +150,7 @@ The description's text may hold bold, inline code, links (`[text](/api-docs?tab=
 - The message is emailed to hello@prepza.ai (`CONTACT_EMAIL` in notifications).
 - The visitor's address is the reply-to, so answering the email answers them.
 - The sender shows they're a person first ([the "I'm not a robot" check](../architecture.md#the-im-not-a-robot-check)).
-- At most 5 messages a day per address (the `CONTACT_IP_LIMIT` constant in `services/rounds/app/constants/contact.py`).
-- At most 200 a day in all (the `CONTACT_DAILY_LIMIT` setting).
+- At most 5 messages a day per address (`CONTACT_IP_LIMIT`) and 200 a day in all (`CONTACT_DAILY_LIMIT`) by default; both are edited in the admin zone's Controls tab.
 
 ### IDs to quote
 
@@ -160,6 +170,7 @@ The FAQ ("How do I report a problem?") and the help chat and assistant's guide s
 - Posts are written in English and translated into every other language after they're saved. Each language's page (`/de/news`, …) shows its translation, or the English post while there's none.
 - The first page is rendered on the server; the next loads when you scroll near the end (library's public `GET /news?offset=&limit=`, in the `Accept-Language` language, no sign-in).
 - Posts are read fresh on every request, not through the public data cache, so a new, changed or deleted post shows at once (`lib/news-posts.ts`).
+- **In the bell:** each post reaches every signed-in user's bell, named in their language, opening it here; deleting the post takes it back (see [Notifications](notifications.md#the-bell)). News isn't emailed by itself: a superadmin can send a post as a product update to those who chose them.
 - **Search engines:** its own title and meta description in each language, canonical and hreflang addresses for every language, the link-preview picture, and structured data: a `Blog` with the page's posts as `BlogPosting`s by prepza (`newsData` in `lib/structured-data.ts`). The sitemap lists it in every language, dated by its newest post.
 - **RSS:** `/news/rss.xml` (and `/de/news/rss.xml`, … in each language, with the same translations) is an RSS 2.0 feed of the newest 50 posts: each with its title, its text as plain text, its day and its id as the guid, linking to its place on that language's news page (`#<id>`). The page names it in its head and links it with the large RSS icon on the right of its title. It isn't in the sitemap.
 

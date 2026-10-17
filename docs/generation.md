@@ -25,10 +25,15 @@ job text -> extract requirements and level -> draft topics          (both cached
 - Companies hears how an interview's generation ends through events: `generation.completed` stores its questions and title, `generation.failed` (a failed run, or one the sweeper finds stuck) marks it as failed until a retry, and `generation.cancelled` removes it. Interview lists read only what these stored and never ask generation; an interview's own page asks once, in case an event hasn't come yet, and shows what companies knows when generation can't answer.
 - The title the model gives is cut to 70 characters (`MAX_TITLE_LENGTH`), what editing a title allows, so saving the questions never fails on it.
 - A generation can be cancelled at any step.
-- Every LLM call of the pipeline shares one rate limit across the API and all workers (`LLM_REQUESTS_PER_SECOND`).
+- A generation makes up to `GENERATION_CALLS_AT_ONCE` AI calls at once (24 by default), and every LLM call of the pipeline shares one rate limit across the API and all workers (`GENERATION_CALLS_PER_SECOND`, 24 a second by default, counted in Redis). Both are values in the admin zone's Controls (see [Admin zone](features/admin-zone.md#limits)), read within 30 seconds of a change; OpenAI allows our account 5,000 requests and 1M tokens a minute, and a full template uses about 380k tokens. The help chat isn't held to the rate, so it stays responsive during big generations.
 - An LLM call silent for 5 minutes has hung (`LLM_TIMEOUT_SECONDS`) and is tried again at most twice (`LLM_MAX_RETRIES`): quick failures recover, and a stuck call gives up well within a run's 25 minutes.
 - Regenerating one question has 110 seconds to write it (`REGENERATE_TIMEOUT_SECONDS`), under the 120 companies waits; past that the old question stays and the company is told to try again, so a retry never makes two replacements.
+- `generation.completed` carries the test's level, which gives a generated test its level's seconds a question (see [Interviews](features/interviews.md#settings)).
 - The worker also translates news posts into every language, with the generation model (`INTERVIEW_MODEL`), as a `translate-news` job (see [Admin zone](features/admin-zone.md#news)).
+
+### Prompts
+
+Prompts are task wording only, never a persona, and work for any field: they name no technology, standard or field (the kinds of material are described generically, such as "a lookup over stored records" or "the standard, law, framework or version in use"), and questions are driven by the topic, subtopic and level, never the job's role. A unit test keeps a list of such names out of every generation prompt (`test_generation_prompts_name_no_technology_standard_or_field`).
 
 ### Topics
 
@@ -36,31 +41,61 @@ The topic draft has up to `MAX_TOPICS` main topics, that number included: one fo
 
 ### Question length
 
-A question, its example and its four options are read and answered within one minute, also by someone reading in a language that isn't their own. Every prompt that writes or rewrites a question says so (`READING_RULES` in `app/prompts/question_rules.py`):
+A capable candidate at the test's level reads a question, its example and its four options and answers within one minute, also when reading in a language that isn't their own; only the hardest (hard level, several steps of reasoning, or select all that apply) may take up to a minute and a half, never more. Every prompt that writes or rewrites a question says so (`READING_RULES` in `app/prompts/question_rules.py`):
 
 - the question at most 40 words (50 at the hard level), in one or two short, plain sentences, with only what the answer depends on;
-- an example at most 8 short lines;
+- an example at most 8 short lines, and only the lines the answer depends on: no setup or boilerplate that doesn't change it, short names, the fewest records or values that still make the case, and one piece (one file) unless the question is about several working together;
+- a scenario or worked example with only the details the answer depends on;
 - each option at most 10 words.
+
+A question is hard because of the reasoning it needs, never because of its length.
 
 A question that still comes back far over is dropped, and the topic's top-up writes another (`readable` in `app/helpers/questions.py`): its sentences over 400 characters (`MAX_QUESTION_CHARS`), its example over 10 lines (`MAX_EXAMPLE_LINES`), or an option over 100 characters (`MAX_OPTION_CHARS`). A rewritten question (a member's or the quality checks') is held to the same limits.
 
+### Examples and their language
+
+On a topic about material written in a formal notation (instructions a machine runs, a lookup over stored records, commands, settings files, text-matching patterns), about a third of the questions show an example and ask what it produces, what it does, why it fails or which change fixes it. It's held both ways (`prepza_common.examples`):
+
+- each question call is asked for its share: exactly a third of its questions with an example when the subtopic is about such material, otherwise none (`QUESTIONS_PROMPT`);
+- each topic keeps 30–40% with an example (`MIN_EXAMPLE_SHARE`, `MAX_EXAMPLE_SHARE`; 27–36 of a template's 90), and each of a template's pools its share too (9–12 of the 30 practice questions, 18–24 of the 60 company ones, `pool_share`). A topic counts as being about such material when at least 15% of its questions came with an example in a notation the site colors (`FORMAL_SHARE`; a table's rows are `text` and don't count). Other topics, such as nursing or a language for travel, are never asked for examples and only held to the 40% ceiling;
+- the top-up writes each kind that's missing apart (single- or multi-answer, with an example or without), and the last round makes up anything still missing with single-answer questions without one, so a topic isn't failed for its mix. A superadmin's addition gives each pool its share the same way, and a regenerated question shows an example exactly when the one it replaces did.
+
+The model gives a question's example apart from its sentences, with the example's notation (`example_language`: one of `CodeLanguage` in `app/constants/code.py`, shiki's names, or `text` for a table's rows or plain prose). One that shows several files gets the notation most of it is written in, never `text`. The stored question is its sentences, then the example in a fenced block tagged with it ("```python", `with_example`), so the site shows it in an editor with that language's colors (`components/code-editor.tsx`).
+
+Questions saved before examples were tagged get their language once from a job, which asks the model in batches of 20 (`TAG_BATCH_SIZE`) and tags each question's first untagged block through library (`GET /internal/code/untagged`, `PUT /internal/code/languages`). It only picks questions whose first block has no language, so running it again is safe. With `--text` it checks the blocks tagged `text` instead (`?text=true`, page by page): one the model names a notation for gets it (an example of several files used to be `text`), and genuine plain text, such as a table's rows, stays as it is:
+
+```bash
+docker compose exec generation uv run --no-sync python -m app.jobs.tag_code_languages
+docker compose exec generation uv run --no-sync python -m app.jobs.tag_code_languages --text
+```
+
+### Select all that apply
+
+About 1 in 10 questions of every topic (`MULTI_ANSWER_PERCENT`, 10% by default, a value in the admin zone's Controls) are "select all that apply": 4 options of which 2 or 3 are right, never all 4. The rest have one right option and three wrong ones. Each topic's calls are asked for their share of them, and the top-up writes any that are missing; when a topic still lacks them after its last top-up, single-answer questions make up the rest. One run keeps the share it started its questions with (`multi_share` in its state). Each option of a multi-answer question must be clearly right or wrong by itself, under conditions the question states (`MULTI_ANSWER_RULES` in `app/prompts/question_rules.py`). Regenerating a question keeps its kind.
+
+Every new multi-answer question is checked before it's kept (`app/services/key_self_check.py`): the verifier answers it blind (no option marked, a new order) and names any condition the question leaves unstated that decides an option. A question whose blind answer differs from its key, or that leaves a condition open, is dropped and the top-up writes another. Single-answer keys already reach the target without it. Measured key accuracy: 98.5% for multi-answer questions and 99% for single-answer ones (see [evals/README.md](../evals/README.md)). The share is to go up to 0.2 once real answers confirm the multi-answer keys.
+
+Each candidate's draw from a topic, and each practice round's, has the same share of multi-answer questions, made up with the other kind when a topic has too few. How they're scored is in [Interviews](features/interviews.md#questions).
+
 ### Cost
 
-Each run of the pipeline logs what it spent: the input and output tokens by model, and the estimated USD at the prices in `prepza_common.constants.MODEL_PRICES` (cached input counted at the full price). A generation logs two runs, the topic draft and the questions after review, and a retry or a resume logs its own.
+Every AI call is recorded by `prepza_common.ai_usage.record`: its action (`ACTIONS` in `prepza_common.ai_constants`: `interview_generation`, `template_generation`, `question_regeneration`, `question_verify`, `embeddings`, …), model, tokens and cost in USD at the prices in `ai_constants.MODEL_PRICES` (cached input at its own price, Batch API calls at half), who it was for and whether it ended `ok`, `cut` or `failed`. In generation, a run (a generation's topic draft or its questions, one regenerated question, a quality check) records once per model when it ends, failed runs too; a call that got no answer counts with estimated tokens. A retry or a resume records its own.
+
+Each record is one log line ("AI used: …", the `prepza_ai_spend` metric and the **prepza AI spend high** alert) and an `ai.used` event that billing stores for the admin zone's AI costs page (see [Credits and payments](features/billing.md#ai-usage-and-limit-hits)).
 
 ## Reusing proven questions
 
-The question bank is the superadmins' templates; their stages (private, retiring, revealed) are in [Templates and practice](features/templates-and-practice.md#the-question-bank).
+The question bank is the superadmins' templates' company questions; their pools (practice and company) are in [Templates and practice](features/templates-and-practice.md#the-question-bank). Practice questions are public, so they're never reused.
 
 - Reused questions fill at most half of a new interview's topic.
-- Only proven private questions qualify: from templates of the same level and language, answered at least 5 times, never flagged.
+- Only proven company questions qualify: from templates of the same level and language, answered at least 5 times, never flagged.
 - Template topics keep embeddings, so proven questions on similar topics can be found (pgvector).
 
 ## Question quality
 
 ### Before an interview is ready
 
-Before a new interview or template is ready, the verifier checks one random answer key a topic, and fixes or replaces what's wrong (`KEY_CHECKS_PER_TOPIC`, about $0.001 a check).
+Before a new interview or template is ready, the verifier checks one random answer key a topic, and fixes or replaces what's wrong (`KEY_CHECKS_PER_TOPIC`, about $0.001 a check). Every new multi-answer question has also passed its own check as it was written (see [Select all that apply](#select-all-that-apply)).
 
 A company's owners and admins can also mark a question's answer wrong in one click, which sends it to the verifier at once.
 
@@ -75,9 +110,11 @@ Rounds publish every answer. Library keeps per-question stats (answers, correct,
 
 | Flag | When | What the verifier does |
 |---|---|---|
-| `wrong_key` | 2 "wrong answer" reports, or a wrong option picked more than the marked one (after 30 answers) | Checks the key through OpenAI's Batch API (half price, every 10 minutes; a batch that expires or fails keeps the results it has, and only the rest go out again; checks a finished batch left without a result are made at once, at most 20 a run, the rest in the next batch): keeps the question, moves the key, or replaces it. The check sees the question, its options and the reports' reasons, never how often each option was picked (the popular answer can be wrong). A key moves only when a second, blind check (no option marked, a new order) names the same option; otherwise the question is replaced, so no future candidate is marked on an uncertain key |
-| `rewrite` | 2 "unclear" or "off topic" reports, 3+ dislikes at twice the likes, or ≤ 15% correct | Writes a new question in its place |
+| `wrong_key` | 2 "wrong answer" reports, or a wrong option picked more than the marked one (for a multi-answer question, more than the right option ticked least often; after 30 answers) | Checks the key through OpenAI's Batch API (half price, every 10 minutes; a batch that expires or fails keeps the results it has, and only the rest go out again; checks a finished batch left without a result are made at once, at most 20 a run, the rest in the next batch): keeps the question, moves the key (for a multi-answer question, to another set of 2 or 3 right options), or replaces it. The check sees the question, its options and the reports' reasons, never how often each option was picked (the popular answer can be wrong). A key moves only when a second, blind check (no option marked, a new order) names the same option (or the same set); otherwise the question is replaced, so no future candidate is marked on an uncertain key |
+| `rewrite` | 2 "unclear", "hard to read" or "off topic" reports, 3+ dislikes at twice the likes, or ≤ 15% correct | Writes a new question in its place, of the same kind and with an example when the old one had one, told what users reported: for "hard to read", simpler wording, a cleanly laid-out example with only the lines it needs, tagged with its notation; for "unclear", every condition stated; for "off topic", on the topic (`REPORT_GUIDANCE` in `app/prompts/regenerate.py`) |
 | `weak_options` | A wrong option almost nobody picks, or ≥ 95% correct | Writes new options for the same question |
+
+For a multi-answer question, "correct" is the share of the question's point the answers earned (2 of 3 right options ticked and no wrong one: 0.67), so "too hard", "too easy" and the strong/weak separation read its average points as a single-answer question's share right. Each ticked option counts as a pick.
 
 ### Fixes
 
@@ -87,19 +124,18 @@ Rounds publish every answer. Library keeps per-question stats (answers, correct,
 - A fixed template question fixes its copies in companies' interviews too, the same way: every copy that still holds the original's content, so not one a company changed or one fixed on its own. Each company gets the "question fixed" notification. A template question rewritten without a flag leaves its copies as they are.
 - A replacement question must differ in meaning from every question already in the topic, checked by embeddings like the pipeline's duplicate step.
 
-Superadmins see flagged and replaced questions on the admin zone's Flagged and Replaced tabs (see [Admin zone](features/admin-zone.md#flagged-and-replaced)).
+Superadmins see flagged and replaced questions on the admin zone's Questions tab, under Flagged and Replaced (see [Admin zone](features/admin-zone.md#questions)).
 
 ## Generation settings
 
-These settings in `.env` shape every generation. Terraform passes none of them to Google Cloud (of generation's settings it passes only `DAILY_GENERATION_LIMIT`, under [Rate limits](#rate-limits)), so production runs on the defaults below (see [infra/README.md](../infra/README.md#notes)).
+These settings in `.env` shape every generation. Terraform passes none of them to Google Cloud, so production runs on the defaults below (see [infra/README.md](../infra/README.md#notes)).
 
 | Setting | Default | What it sets |
 |---|---|---|
 | `MAX_TOPICS` | 10 | Main topics an interview or template has. The review page follows it |
 | `MAX_SUBTOPICS` | 10 | Subtopics per topic; every subtopic is at least one model call. The review page follows it |
 | `INTERVIEW_QUESTIONS_PER_TOPIC` | 70 | Questions per topic of a company's interview, from which each candidate gets a random subset |
-| `TEMPLATE_QUESTIONS_PER_TOPIC` | 90 | Questions per topic of a template; a third is revealed for free practice, the rest is copied into companies' interviews |
-| `LLM_REQUESTS_PER_SECOND` | 8 | Generation's LLM requests a second, shared by the API and every worker through Redis; 0 turns it off. The help chat isn't limited by it, so it stays responsive during big generations |
+| `TEMPLATE_QUESTIONS_PER_TOPIC` | 90 | Questions per topic of a template: 30 for free practice and 60 for companies' interviews (library's `PRACTICE_QUESTIONS` and `COMPANY_QUESTIONS`) |
 | `LANGSMITH_TRACING`, `LANGSMITH_API_KEY`, `LANGSMITH_PROJECT`, `LANGSMITH_ENDPOINT` | Off | Trace generation, help chat and assistant calls to LangSmith; the endpoint is the key's region (US by default, `https://eu.api.smith.langchain.com` for EU) |
 
 ## Models
@@ -125,17 +161,18 @@ Every generation runs on `gpt-6.1-sol` at low. In testing ([evals/README.md](../
 
 ## Rate limits
 
-| Limit | Where it's set | Default |
-|---|---|---|
-| Generations per account in the window (0 turns it off) | `GENERATION_LIMIT` setting | 20 |
-| The window for the per-account limits | `GENERATION_WINDOW_SECONDS` setting | A day |
-| Re-generated questions per account in the same window (0 turns it off) | `REGENERATION_LIMIT` setting | 100 |
-| New generations and regenerated questions a day for companies that never topped up, together, a ceiling on LLM spending (0 turns it off); a company that paid isn't held to it, so free sign-ups can't use it up for paying ones | `DAILY_GENERATION_LIMIT` setting | 100 |
-| Revisions in words per topic review; after that, topics are only chosen by checkbox | `MAX_TOPIC_REVISIONS` constant (`services/generation/app/constants/generation.py`) | 10 |
-| Verifier jobs a day for everyone together; a superadmin's "Fix now" isn't counted | `DAILY_VERIFY_LIMIT` constant (`services/generation/app/constants/quality.py`) | 300 |
-| Question reports per user a day (library) | `REPORTS_PER_DAY` constant (`services/library/app/constants/feedback.py`) | 30 |
-| Thumbs (ratings) per user a day (library) | `RATINGS_PER_DAY` constant (`services/library/app/constants/feedback.py`) | 200 |
+Each limit is one of `prepza_common.limit_list.LIMITS`, with its default; a superadmin changes its number in the admin zone's Controls tab (see [Admin zone](features/admin-zone.md#limits)), and generation reads the current one (`limits.limit`). Its window stays as it is.
 
-Settings come from `.env` (or Terraform in the cloud); constants change only in the code.
+| Limit | Name | Default |
+|---|---|---|
+| Generations per account a day | `GENERATION_LIMIT` | 20 |
+| Re-generated questions per account a day | `REGENERATION_LIMIT` | 100 |
+| New generations and regenerated questions a day for companies that never topped up, together, a ceiling on AI spending; a company that paid isn't held to it, so free sign-ups can't use it up for paying ones | `DAILY_GENERATION_LIMIT` | 100 |
+| Revisions in words per topic review; after that, topics are only chosen by checkbox | `MAX_TOPIC_REVISIONS` | 10 |
+| Verifier jobs a day for everyone together; a superadmin's "Fix now" isn't counted | `DAILY_VERIFY_LIMIT` | 300 |
+| Question reports per user a day (library) | `REPORTS_PER_DAY` | 30 |
+| Thumbs (ratings) per user a day (library) | `RATINGS_PER_DAY` | 200 |
+
+Above them all, the daily AI spend cap for unpaid companies and people without a company (`AI_SPEND_UNPAID_DAY`, $15 a UTC day by default): once their AI calls of the day (generations, regenerations, the assistant and the help chat) have cost that much, generating for an unpaid company answers 503 ("AI features are paused for today…") until midnight UTC. Paid companies and prepza's own work (templates, quality checks, news) aren't counted or held to it. Billing adds each call's cost to the day's Redis counter (`spend:ai:unpaid:<date>`) as it stores it; with Redis down, nothing is refused.
 
 Email limits are in [Candidates](features/candidates.md#email-limits).

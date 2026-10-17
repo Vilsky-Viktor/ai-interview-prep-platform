@@ -10,7 +10,7 @@ Timed knowledge interviews for hiring, made from a job description or a ready-ma
 
 ## Features
 
-- **Interviews from a job description:** the AI proposes topics, the company reviews them for free, then each topic gets a bank of multiple-choice questions.
+- **Interviews from a job description:** the AI proposes topics, the company reviews them for free, then each topic gets a bank of multiple-choice questions, about 1 in 10 of them "select all that apply", scored by points; on a topic about code, queries or commands about a third show a short example, and each is written to be read and answered within a minute (a minute and a half for the hardest).
 - **Ready-made templates:** copy an interview by role, level and language at once, for free.
 - **Timed and fair:** each candidate gets their own random questions, with a server-enforced countdown on every one.
 - **Scorecards and reports:** grades against a pass mark, integrity flags, and PDF reports to download, email or share.
@@ -20,13 +20,14 @@ Timed knowledge interviews for hiring, made from a job description or a ready-ma
 - **Questions that fix themselves:** answers, votes and reports flag weak questions, and a verifier fixes them.
 - **ATS integrations:** candidates from Workable, Greenhouse, Teamtailor, Recruitee and Breezy HR are invited automatically, and results go back.
 - **Slack:** a company picks a channel and which of its notifications go there.
-- **Public API:** API keys to list interviews, invite candidates (also straight from a company's own platform: no sign-in, no emails, back to that platform at the end, or the interview embedded in its own page with prepza's SDK, on a verified company's website) and read results, and signed web hooks when a candidate starts, finishes, isn't reached, expires or is removed, or an interview is ready, with a test send and a delivery log; the developer docs on the site cover the API, web hooks, the SDK and the objects.
-- **AI apps over MCP:** Claude, ChatGPT and other AI apps connect at `/mcp` once the user allows them, and read and change what the user can, with the user's permissions.
+- **Public API:** API keys, each with only the permissions ticked for it (narrowed later, never widened), to list interviews, invite candidates (also straight from a company's own platform: no sign-in, no emails, back to that platform at the end, or the interview embedded in its own page with prepza's SDK, on a verified company's website) and read results, and signed web hooks when a candidate starts, finishes, isn't reached, expires or is removed, or an interview is ready, with a test send and a delivery log; the developer docs on the site cover the API, web hooks, the SDK, the MCP server and the objects.
+- **AI apps over MCP:** Claude, ChatGPT and other AI apps connect at `/mcp` once the user allows them, and read and change what the user can, with the user's permissions; an agent on a server signs in with a company API key that has the MCP permission, limited to its company and its permissions. The developer docs' MCP tab shows how, with example agents in Python and TypeScript.
 - **Pay per candidate:** credits that never expire, $2–5 per candidate, with no paid subscription (an optional automatic top-up saves the card with Paddle as a $0 subscription).
-- **Free practice:** people preparing for a role practise on the templates' revealed questions.
+- **Free practice:** people preparing for a role practise on the templates' practice questions, which companies' interviews never use.
 - **23 languages:** the interface, generated interviews, emails and news posts.
-- **News:** a public news page; posts are written in English in the admin zone and translated automatically.
-- **Admin zone:** templates, news, question quality, verification, pass rates, stats, and the pause and maintenance switches.
+- **News:** a public news page and every user's bell; posts are written in English in the admin zone and translated automatically.
+- **Campaigns:** product updates and offers emailed to the users who chose them, written in the admin zone, translated and sent through one bulk sender that legal notices share, with its own suppression list.
+- **Admin zone:** templates, news, campaigns, question quality, verification, support (finding an account, a company, an interview or a candidate; a company's credits and history, adjusting them; an account's companies, top-ups, email settings and whether its address is on the suppression list; a candidate's progress, credits and the company emails stopped for them; a company's and an account's AI cost), pass rates, stats, AI costs (by action, model and who it was for, the shared budgets and the limits hit), the pause and maintenance switches, and every usage limit, editable.
 
 ## Quick start
 
@@ -50,13 +51,14 @@ Then open the app at http://localhost:8090. Sign-in uses the Firebase Auth emula
 | [Interviews](docs/features/interviews.md) | Making an interview, topic review, the interview page and its settings, preview |
 | [Candidates](docs/features/candidates.md) | Invites, the shareable link, taking an interview, timing, scorecards, reports |
 | [Templates and practice](docs/features/templates-and-practice.md) | The question bank, copying templates, slugs, free practice |
-| [Credits and payments](docs/features/billing.md) | Credits, top-ups, automatic top-up, referrals, a company's billing tab, setting up Paddle |
+| [Credits and payments](docs/features/billing.md) | Credits, top-ups, automatic top-up, referrals, a company's billing tab, AI usage and limit hits, setting up Paddle |
 | [ATS integrations](docs/features/ats.md) | Connecting Workable, Greenhouse, Teamtailor, Recruitee and Breezy HR, linked jobs, results back to the ATS |
-| [Public API](docs/features/api.md) | API keys and their expiry, the routes, invites without sign-in, return addresses and themes, signed web hooks, the SDK that embeds the interview, the API page and the developer docs |
-| [Notifications and emails](docs/features/notifications.md) | The bell, emails, Slack, setting up Resend and Slack |
+| [Public API](docs/features/api.md) | API keys, their expiry and permissions, the routes, invites without sign-in, return addresses and themes, signed web hooks, the SDK that embeds the interview, the API page and the developer docs |
+| [Notifications and emails](docs/features/notifications.md) | The bell, emails, legal notices and campaigns, Slack, setting up Resend and Slack |
 | [In-app assistant](docs/features/assistant.md) | The "ask agent" panel: answers about a user's companies and about prepza (FAQ answers when signed out), voice input, its limits, retention and tools |
-| [AI apps over MCP](docs/features/mcp.md) | Connecting Claude, ChatGPT and other AI apps: the consent page, OAuth, the tools, connections, limits |
-| [Admin zone](docs/features/admin-zone.md) | Superadmins' templates, news, quality, pass rates, stats, pause and maintenance mode |
+| [AI apps over MCP](docs/features/mcp.md) | Connecting Claude, ChatGPT and other AI apps, and agents with an API key: the consent page, OAuth, the tools, connections, limits, the developer docs' MCP tab |
+| [Admin zone](docs/features/admin-zone.md) | Superadmins' templates, news, campaigns, quality, support, pass rates, stats, AI costs, pause and maintenance mode, limits |
+| [Admin zone: Support](docs/features/admin-support.md) | Finding an account, company, interview or candidate from a complaint, their support pages, credits, suspension, stopping emails, logs |
 | [Public site](docs/features/site.md) | Home page, skills tests, articles, FAQ, legal pages, contact, SEO |
 | [Languages](docs/features/languages.md) | The 23 languages, language addresses, fonts, right-to-left |
 

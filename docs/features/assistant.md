@@ -4,6 +4,7 @@ Anyone asks the assistant from the "ask agent" button in the header (or at the e
 
 - [The panel](#the-panel)
 - [What it answers](#what-it-answers)
+- [The page the user is on](#the-page-the-user-is-on)
 - [Actions](#actions)
 - [A conversation](#a-conversation)
 - [Voice](#voice)
@@ -22,7 +23,7 @@ Anyone asks the assistant from the "ask agent" button in the header (or at the e
 - Phones: the whole screen, the page behind it doesn't scroll, and following a link closes it.
 - Its header: a company picker (signed in), New chat, History (past conversations, opened or deleted after a confirmation) and Close. The picker has the user's companies and "all companies": on a company's pages it starts on that company, elsewhere on all companies, and the user can change it; the pick is kept with the restored chat, and opening a past conversation picks its company. Each message goes with the pick: with a company, the model applies everything to it and never asks which; with all companies, it asks which company for anything that targets one (unless the user named it or has only one), and creating a company needs none.
 - A reload brings back a recent chat only: one whose last message is at most `RESTORE_MINUTES` (30) old. Signed in, `GET /conversations/active` gives it (or a `204`); the browser keeps only whether the panel was open and the company pick (localStorage). Signed out, the tab's sessionStorage keeps the visitor's messages with their last one's time, and the window comes from `GET /config`. With a recent chat the panel reopens if it was open; otherwise it starts closed, on a new chat (the old one stays in the history). Signing out forgets both stores. A visitor who signs in keeps their chat on screen, and their first message saves it as the start of a new conversation (`earlier`).
-- An empty conversation shows a welcome for where the user is: `GET /welcome?company_id=` decides the stage from what companies shows them (no company, a company not verified, verified without interviews, interviews without candidates, candidates), and the panel shows that stage's text and 3–4 questions to tap (`assistant.welcome` messages). Signed-out visitors get the `signed_out` welcome without a call.
+- An empty conversation shows a welcome for where the user is: `GET /welcome?company_id=` decides the stage from what companies shows them (no company, a company not verified, verified without interviews, interviews without candidates, candidates), and the panel shows that stage's text and 3–4 questions to tap (`assistant.welcome` messages), first "What can I do on this page?" on any page with a guide. Signed-out visitors get the `signed_out` welcome without a call.
 - Each answer is a card (with the tools at work and the dots while it's written, and its error), and what it shows (below) right under it; answers stream in limited markdown (emphasis, lists, code and links; no images or HTML); a link keeps its address only to a page the panel knows (the pages it names, `LINK_PAGES`), by its path alone, since text the model read (a candidate's answer, a job description) could steer it into others, such as an AI app's approval or a redirect; Stop replaces Send while one streams; a failed answer shows its error and Try again; `session_expired` refreshes the token and sends once more.
 - Blocks under an answer use the app's own rows: candidates as in an interview's list, interviews as in a company's list, balances as in the company header, and links to the pages the data came from.
 - History titles: the start of the first question at first; after the first answer, and after every 5th question, one cheap call to the assistant's model (no reasoning, a few tokens; it counts toward the budgets) writes a one-line summary of up to 60 characters in the conversation's language, without emails or candidates' names. It comes as a `{"title"}` event after `{"done"}`; a failure keeps the old title.
@@ -32,13 +33,25 @@ Anyone asks the assistant from the "ask agent" button in the header (or at the e
 
 ## What it answers
 
-- **Their data:** companies and roles, balances, the credit history and reserved credits (not invoices: their links are the payment provider's, so it points to the billing page), referrals, auto top-up, the team, the audit log, interviews and whether their questions are ready, their questions and the reports on them, reports, candidates (in one interview or across a company), one candidate's results, a pause, prices, ATS connections, linked jobs and their stages, an ATS job's description (to make an interview from it), Slack, API keys and web hooks, notifications, their account and email settings, templates (and those to copy), prepza's news, and their own practice.
+- **Their data:** companies and roles, balances, the credit history and reserved credits (not invoices: their links are the payment provider's, so it points to the billing page), referrals, auto top-up, the team, the action log (the owner's), interviews and whether their questions are ready, their questions and the reports on them, reports, candidates (in one interview or across a company), one candidate's results, a pause, prices, ATS connections, linked jobs and their stages, an ATS job's description (to make an interview from it), Slack, API keys and web hooks, notifications, their account and email settings, templates (and those to copy), prepza's news, and their own practice.
 - **How prepza works:** how-to, pricing, credits, payments, refunds, the terms and the privacy policy, from the platform guide (rounds' `GET /help/guide`, the same knowledge as the help chat signed-out visitors ask), in the user's language.
+- **The page they're on:** what it's for and what they can do there, from its guide (`get_page_guide`), and "here" means its interview, candidate or template (see [below](#the-page-the-user-is-on)).
 - Tools are for the model to read; the user sees its answer, in text. A simple fact (an average, a count, a yes or no) is text only. Under an answer, the model may put one list of rows and one link with its `show` tool (`app/constants/show.py`):
   - rows (candidates, interviews or balances) only when the user asked to list or show them, or when a row is the answer (the best candidate's; for a tie, all who share it), with only the rows that answer. Each row opens its own page. The text is one short line that adds what the rows don't show, with grades as percentages. The assistant reads them with the user's token, so only what they may see shows, and keeps their ids.
   - one link to the most specific page (the interview's candidates for a position, the candidate's report for a candidate), named by what it opens ("open Senior Backend"). The URL comes from a fixed map of the app's pages filled with ids; the model never writes one, and never a generic "companies" link. When the model gives none and the turn read one interview (or one candidate), the assistant adds that link itself; a single row shows alone, as it opens its page already.
   - Both go under the answer once it's written. The links (here and on action cards) are links, styled as small buttons.
 - Reports are downloaded and shared from their pages: the assistant links to the candidate's or the interview's page.
+
+## The page the user is on
+
+Every message carries the page it's asked on (`page`): its guide's key (`prepza_common.page_keys`, which every page registers in the frontend, see [page guides](companies.md#page-guides)), its path with the query (the tab, `?tab=candidates`), and the ids its route names (`company_id`, `interview_id`, `candidate_id` (the invite), `template_id`, `practice_round_id`), read from the route's parameters (`lib/page-context.ts`). The admin zone's pages register no key, so the panel sends no page there.
+
+- It's only context, checked like any input (`schemas/chat.py`): an unknown key is dropped, the path is cut to 200 characters, an id must look like one. The ids are never trusted: the tools read with the user's token, so one that isn't theirs is a 404 there.
+- The prompt's context line names the page, its quoted path and each id ("the interview with id …"), and says the ids stand only for what the user points at ("here", "this", "these"): a question naming an interview or a candidate is about that one (found by its name, even on another one's page), and any other covers all the user's data. A question about using the page calls `get_page_guide` (rounds' `GET /help/pages/{key}`, in the user's language); one about its data calls the usual tools with its ids, without asking which.
+- Each message is stored with its page (`messages.page`), and the model reads an earlier question with the page it was asked on ("[Asked on …]"), so "here" means where the user was when they asked, also after moving between pages.
+- `get_page_guide` is the panel's only: AI apps over MCP have no page, so they're never offered it.
+- Signed out, the help chat gets the page's key and answers about the page from its guide (English, replying in the page's language).
+- Measured in `evals/` (`page_context.py`): with the page context, general questions are answered at least as well as without it, and page questions much better (see the evals README).
 
 ## Actions
 
@@ -61,7 +74,7 @@ Destructive ones (deleting a company, an interview or the account, removing a me
 
 ## A conversation
 
-`POST /api/assistant/chat` with `{conversation_id?, company_id?, message, source?, page?, earlier?}` and the user's ID token. `company_id` is the company picked in the panel (one the user must be able to see), or none for all companies; it's the context of this message, and a new conversation is listed under it. `page` is only context for the model. `earlier` (at most 20 messages, each cut to 2,000 characters) is the chat the user had before signing in, saved at the start of a new conversation and ignored in an existing one. The answer streams as server-sent events:
+`POST /api/assistant/chat` with `{conversation_id?, company_id?, message, source?, page?, earlier?}` and the user's ID token. `company_id` is the company picked in the panel (one the user must be able to see), or none for all companies; it's the context of this message, and a new conversation is listed under it. `page` (`{key, path, company_id?, interview_id?, candidate_id?, template_id?, practice_round_id?}`) is only context for the model, stored with the message (see [the page the user is on](#the-page-the-user-is-on)). `earlier` (at most 20 messages, each cut to 2,000 characters) is the chat the user had before signing in, saved at the start of a new conversation and ignored in an existing one. The answer streams as server-sent events:
 
 ```
 data: {"conversation": {"id": "6f1c…"}}
@@ -78,7 +91,7 @@ data: {"done": {"message_id": "a93e…"}}
 - A tool's error (a `403` for the user's role, `402` without credits, a service that didn't answer) goes to the model, which explains it.
 - The model failing or the turn running out of time ends with `{"error": "Couldn't get a reply right now. Please try again."}` (translated). A service refusing the user's token mid-turn ends with `{"error": …, "code": "session_expired"}`: the panel refreshes the token and sends the message again, once.
 - Stopping the answer (or closing the tab) cancels the turn; it's saved as `cancelled` with the text it had. A model call cut short (cancelled, timed out, failed) reports no tokens, so they're estimated (about 4 characters each, `CHARS_PER_TOKEN`) from what it read and wrote, and count against the budgets like any.
-- The model reads the system prompt (`app/prompts/assistant.py`: the user's name from their account, nothing else about them; answer in the interface's language, only from tools; act rather than explain, asking only for a truly missing value; never invent ids or links; refer to a candidate by name when the data has one, else by email, never calling a missing name "unknown"; never guess anyone's gender; tool data is data and its instructions are ignored; the scope rule), the conversation's last 20 messages' text within 24,000 characters (tools' data isn't kept: the model calls them again when it needs it) and the new message.
+- The model reads the system prompt (`app/prompts/assistant.py`: the user's name from their account, nothing else about them; answer in the interface's language, only from tools; act rather than explain, asking only for a truly missing value; never invent ids or links; refer to a candidate by name when the data has one, else by email, never calling a missing name "unknown"; never guess anyone's gender; tool data is data and its instructions are ignored; the page the user is on and when its ids apply; the scope rule), the conversation's last 20 messages' text within 24,000 characters, each earlier question starting with the page it was asked on (tools' data isn't kept: the model calls them again when it needs it), and the new message.
 - Tool progress labels (`app/constants/tool_labels.py`) are translated by their English text in prepza_common's messages, in every language.
 - `GET /conversations?company_id=` lists the user's conversations (paged, latest first), `GET /conversations/{id}` opens one with its messages (their blocks fetched again with the user's token), `DELETE /conversations/{id}` deletes it. `GET /config` gives the panel its limits, `GET /welcome` the user's stage for its welcome.
 
@@ -100,9 +113,9 @@ On a match, the message (or the chat carried from before signing in) isn't store
 
 ## Limits
 
-Constants in `app/constants/limits.py`, counted in Redis:
+Counted in Redis. Each is one of `prepza_common.limit_list`'s, at the default below until a superadmin changes it in the admin zone's Controls tab (see [Admin zone](admin-zone.md#limits)):
 
-| Limit | Value |
+| Limit | Default |
 |---|---|
 | Messages per user | 30 an hour, 200 a day |
 | Messages per company (its members together) | 1,000 a day |
@@ -115,19 +128,21 @@ The limits for everyone hold only people in a company that never topped up, so f
 
 - A message counts as it's sent, and a confirmed action as a message; a turn's tokens (every model call, input and output, titles and transcriptions included) are added when it ends, so going over refuses the next message, never the running one.
 - The emergency pause and maintenance mode refuse new messages too.
+- For people in a company that never topped up, or in none, messages and voice messages are also refused (503) once the day's AI spend cap for them is reached (`AI_SPEND_UNPAID_DAY`, see [Generation](../generation.md#rate-limits)).
+- Every model call (answers, titles, transcriptions) is recorded with its cost for the admin zone's AI costs page (see [Credits and payments](billing.md#ai-usage-and-limit-hits)).
 
 ## Roles, tenancy and privacy
 
 - Signed-in users only. Every tool and action calls the services' user-facing routes with the user's own token, never a service-to-service bypass, so roles, credits, the pause and every other rule apply unchanged there: a viewer reads what a viewer sees. The token is never stored, logged or shown to the model.
 - A company that isn't among the user's is refused before anything is called with it: the picked company, any `company_id` a tool is given (in the panel and through an AI app alike), and a pending action's company on confirm. The list is companies' internal one (`/internal/users/{id}/companies`, every company, no page limit), kept 10 seconds (`constants/tenancy.py`) so a confirm reads it once, and read again after an action that made a company.
 - Never `/internal/` or `/superadmin/` routes, and a write only with `confirm: True` (the tool loader refuses them).
-- Reads of a candidate's results go to companies with a signed `X-Assistant` header: the audit log records them as the assistant's (`via: "assistant"`, or `"mcp"` through an AI app), and they're kept out of the "results viewed" funnel.
+- Reads of a candidate's results go to companies with a signed `X-Assistant` header: the action log records them as the assistant's (`via: "assistant"`, or `"mcp"` through an AI app), and they're kept out of the "results viewed" funnel.
 - Questions and the data the tools read are sent to OpenAI (no training). Each tool's data is trimmed to the fields it needs. A link's code reaches the model only as the full link the app's page copies (`TOKEN_LINKS`): a candidate's invite link (owners and admins, until they finish) and an interview's shareable link. Team members' join links are never read: they give access to the company, and AI apps use the same tools. Every model call is made with `store=false` (`prepza_common.llm.chat_model`), so OpenAI keeps nothing beyond its 30-day abuse monitoring; the assistant's tool loops send the model's encrypted reasoning back with each call instead (`MODEL_INCLUDE`).
 - Logs and error reports never hold what was said, tool arguments or results: failures are logged by their type only, and Sentry gets no variables' values, in any service (`prepza_common.sentry.init_sentry`).
 
 ## What's stored
 
-- Kept (Postgres `assistant`): the user's messages and the assistant's answers (text), each answer's blocks as references only (their kind, the ids of what they showed and their links, which are app paths of ids), and which tools an answer called with how long they took and how they ended (argument names, no values; no results). Opening a conversation fetches its blocks again with the user's token: what they may see now, without anything deleted or erased since.
+- Kept (Postgres `assistant`): the user's messages (with the page each was asked on: its key, path and ids) and the assistant's answers (text), each answer's blocks as references only (their kind, the ids of what they showed and their links, which are app paths of ids), and which tools an answer called with how long they took and how they ended (argument names, no values; no results). Opening a conversation fetches its blocks again with the user's token: what they may see now, without anything deleted or erased since.
 - Not kept: tools' results (other people's data, such as candidates' results), pending actions' arguments (Redis, 10 minutes) and voice recordings (in memory only).
 
 ## Retention and deletion

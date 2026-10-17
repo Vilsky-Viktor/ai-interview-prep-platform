@@ -28,6 +28,11 @@ Only what matters, for every member of a company:
 
 Companies' verification decisions reach only the owner and admins, one notification each, as viewers can't act on them (see [Companies](companies.md#verification)).
 
+For everyone, one notification each (recipient `all`, a single row, not one per user): a user's bell shows those newer than their account (library's `GET /internal/accounts/{id}`, kept an hour), read and seen like their own, and announced live to every open tab.
+
+- **News:** a published news post ("News: <title>", opening it on the news page). The bell names it in the user's language (library's `POST /internal/news/titles`), in English until it's translated; a post deleted meanwhile isn't shown. Library saves the notification with the post in its outbox, and deleting the post sends `news.deleted`, which removes it. News has no email setting: the bell isn't email. A post can still be emailed by hand as a product update (see [Campaigns](#campaigns)).
+- **Legal changes:** when a notice of new terms or a new privacy policy is sent ("New terms apply from <date>", opening the document). The DPA's notice goes to each company owner's and admin's own bell instead.
+
 A member who accepts their team invite is announced to the owner, who invited them: "{email} joined “{company}” as a viewer" (or an admin), opening the company's Team tab. It's saved with the join itself, once per member, and isn't posted to Slack or in the digest.
 
 ## Slack
@@ -102,7 +107,7 @@ Invites and reminders from a company prepza hasn't verified say so in a small li
 
 `SITE_URL` is the site address that links in emails point to; emails link only there (no shorteners or tracking redirects).
 
-- **Two senders:** service emails come from `MAIL_FROM`, and the emails a user may turn off (the digest and reminders) from `MAIL_FROM_UPDATES`, on a subdomain of its own, so spam complaints about them can't hurt the service emails' reputation. The DNS records both need are in [infra/README.md](../../infra/README.md#email-deliverability).
+- **Two senders:** service emails come from `MAIL_FROM`, and the emails a user may turn off (the digest, reminders and campaigns) from `MAIL_FROM_UPDATES`, on a subdomain of its own, so spam complaints about them can't hurt the service emails' reputation. The DNS records both need are in [infra/README.md](../../infra/README.md#email-deliverability).
 - **Replies** go to the member who shared a report (when their email is verified), to the visitor for contact messages, and otherwise to `CONTACT_EMAIL`, prepza's inbox, rather than to an unread no-reply address.
 - **Headers:** every email has `Auto-Submitted: auto-generated` (no out-of-office replies); only those the recipient may stop carry the one-click unsubscribe headers (see [Unsubscribing](#unsubscribing)).
 
@@ -148,7 +153,7 @@ A link opens `/unsubscribe?token=…` (no sign-in, not indexed): it says what st
 - A user's link turns the setting (or the digest's four kinds) off in `library`, logged with the source `unsubscribe`. Marking the digest or reminders as spam does the same: those emails are tagged with the user and what they are, and Resend's `email.complained` webhook (see [Undelivered emails](#undelivered-emails)) turns that email off as its link would.
 - A candidate's link is kept in notifications (`candidate_opt_outs`, by the address's hash). An invite to an address that stopped the company's emails isn't sent, and the company sees it as undelivered, as with a bounce. A reminder isn't sent when the address stopped the company's emails or that interview's reminders; the company isn't told. An opt-out stays when the company erases the candidate, and goes with the company.
 
-Someone who asks by email instead: a superadmin turns their settings off, or stops or resumes a company's emails to their address, on the admin zone's [Emails](admin-zone.md#emails) tab. Companies' invites tell which companies invited the address (`POST /internal/invites/companies`, the address in the body).
+Someone who asks by email instead: a superadmin turns their settings off, or stops or resumes a company's emails to their address, on the admin zone's [Support](admin-support.md#emails) tab (an account's page, or a candidate's). Companies' invites tell which companies invited the address (`POST /internal/invites/companies`, the address in the body).
 
 Changing `EMAIL_LINK_SECRET` breaks the links in emails already sent; opt-outs already made stay.
 
@@ -162,9 +167,37 @@ Without `RESEND_API_KEY`, emails go to `SMTP_HOST` and `SMTP_PORT`: Mailpit loca
 
 With `RESEND_API_KEY` set, a message sent from the local contact page reaches the real `CONTACT_EMAIL` inbox.
 
-### Legal notices
+### Emails to many users
 
-A notice of a significant change to the terms, the privacy policy or the DPA, asked for in the admin zone (see [Legal notices](admin-zone.md#legal-notices)). It's a service email, sent whatever the email settings, in each recipient's language: the terms and privacy notices to every account (library's `GET /internal/users/ids`, read from Firebase), the DPA's to every company's joined owners and admins (companies' `GET /internal/companies/editors`). It says the day the new version applies and links to it. `POST /internal/schedules/legal-notices` sends them every minute from 9:00 UTC for an hour, like the digest, claiming each user once per version (`legal_terms`, `legal_privacy`, `legal_dpa` in the sent log); a run that finishes before its time marks the notice sent (`legal_notices.sent_at`).
+Legal notices and campaigns go through one bulk sender (`services/bulk.py`):
+
+- **Recipients are worked out once,** when a send starts, and saved (`bulk_sends`, one row a send; `bulk_recipients`, one row per user, unique per send). Each run then takes the next pending rows rather than reading every account again; addresses, languages and settings are read 100 at a time just before sending, so a changed address or a deleted account counts. Guest candidates are never recipients.
+- **Schedule:** `POST /internal/schedules/bulk` every minute from 8:00 to 18:59 UTC (`infra/terraform/jobs.tf`, `scripts/local/crontab`). A run sends for 40 seconds, one email every 0.6 seconds, about 2,400 an hour, so a large send finishes the same day.
+- **Never twice:** a row is claimed under a lock (`FOR UPDATE SKIP LOCKED`), so two runs at once never send the same one; Resend's idempotency key is `bulk/<send>/<user>`. A run that dies halfway leaves its row pending, and the next run sends it under the same key.
+- **Failures:** a failed send is tried again in two later runs, then marked `failed` with the reason; one Resend refuses for good fails at once. A 429 from Resend stops the run, and the next one goes on.
+- **Daily quota:** bulk emails stop for the day at Resend's daily quota (`RESEND_DAILY_LIMIT`) less the share kept for invites and other service emails (`RESEND_RESERVE_PERCENT`, 20% by default; both editable in the admin zone's Controls); the rest go the next day, and the limit hit is recorded.
+- **Skipped,** with the reason: an account or address that's gone (`gone`), an address on the suppression list (`suppressed`), a campaign's setting turned off since it started (`unsubscribed`), a stopped or deleted campaign (`stopped`).
+- A send is finished once nothing is pending. Deleting an account removes its rows.
+
+#### Legal notices
+
+A notice of a significant change to the terms, the privacy policy or the DPA, asked for in the admin zone (see [Legal notices](admin-zone.md#legal-notices)). It's a service email, sent whatever the email settings, in each recipient's language: the terms and privacy notices to every account (library's `GET /internal/users/ids`), the DPA's to every company's joined owners and admins (companies' `GET /internal/companies/editors`). It says the day the new version applies and links to it. Asking twice, or two superadmins at once, starts it once. It also goes in the bell (see [The bell](#the-bell)).
+
+Until the new version applies, the site shows a thin banner above the page to whom it concerns (`GET /me/legal-changes`: the terms and the privacy policy to everyone, the DPA to those it was sent to), with a link to it. Closing it keeps it closed in that browser for that version.
+
+#### Campaigns
+
+Product updates and offers, written by a superadmin in the admin zone (see [Campaigns](admin-zone.md#campaigns)) and sent at once, without scheduling:
+
+- **Recipients:** users with that setting on (`updates` or `promotions`, library's `GET /internal/users/ids?setting=`), never candidates; checked again when each email goes out. Promotions never reach soft opt-in users, as their setting stays off until they tick it.
+- **The email** is an optional email from `MAIL_FROM_UPDATES` in the user's language (English until translated), with the unsubscribe link and one-click headers of that one setting. The text is Markdown (bold, italic, links, lists), rendered with inline styles; raw HTML stays text and unsafe links (`javascript:`) aren't links (`helpers/markdown.py`). The button opens a page on the site, or the site.
+- **At most `CAMPAIGNS_PER_KIND_DAY` campaigns a day per kind** (UTC; 1 by default, editable in the admin zone's Controls): the kind is locked while one is marked sent, so a double click or two superadmins at once can't pass the limit.
+- **Counts:** sent, skipped, failed, unsubscribed after it (the user's last campaign of that kind) and spam complaints (Resend's tag carries the send's id).
+- **Translation:** saving the English asks generation to translate it into the other 22 languages (a `translate-campaign` job); a changed English drops the old translations, and a translation that arrives for an English changed meanwhile is dropped. A language edited by hand keeps its wording.
+
+#### The suppression list
+
+Resend's `email.bounced` and `email.complained` for any email to a user (not a candidate's invite, which is the company's) put the address on prepza's own suppression list (`suppressed_addresses`), kept as its SHA-256 with the reason and the date, never in the clear. Bulk sends skip those addresses. A complaint also turns that email's setting off, as before. A superadmin sees it, and takes it off the list, on the account's support page.
 
 ### Failed sends
 
@@ -176,7 +209,7 @@ A notice of a significant change to the terms, the privacy policy or the DPA, as
 
 ### Undelivered emails
 
-To show invites whose email bounced or was marked as spam ("Email not delivered" in the candidate list), and to turn off the digest or reminders for a user who marked them as spam:
+To show invites whose email bounced or was marked as spam ("Email not delivered" in the candidate list), to turn off an optional email for a user who marked it as spam, and to keep the suppression list:
 
 1. Add a webhook at resend.com/webhooks pointing at `https://<your domain>/api/notifications/webhooks/resend`, with the events `email.bounced`, `email.complained` and `email.suppressed`.
 2. Put its signing secret (`whsec_...`) in `.env` as `RESEND_WEBHOOK_SECRET`.

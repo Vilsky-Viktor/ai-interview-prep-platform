@@ -11,7 +11,7 @@ There are two ways to start:
 
 For each topic, set how many questions it asks each candidate: 10 by default, drawn from the topic's 70.
 
-Generating an interview is free. Until its first top-up, a company can have 1 generated interview waiting without a candidate before it generates another, and generates at most 3 a day; after it, 5 waiting and 10 a day. Interviews copied from templates don't count, and retrying a failed generation isn't a new one (see [Credits and payments](billing.md)).
+Generating an interview is free. Until its first top-up, a company can have 1 generated interview waiting without a candidate before it generates another, and generates at most 3 a day; after it, 5 waiting and 10 a day. These are the defaults, which a superadmin can change in the admin zone ([Admin zone](admin-zone.md#limits)); until midnight UTC, the unpaid users' daily AI spend cap can also stop generating for a company that never topped up ([Generation](../generation.md#rate-limits)). Interviews copied from templates don't count, and retrying a failed generation isn't a new one (see [Credits and payments](billing.md)).
 
 ### Reviewing the topics
 
@@ -26,7 +26,11 @@ A review takes at most 10 revisions in words; after that, topics are only chosen
 ### Questions
 
 - Every topic gets a bank of multiple-choice questions.
-- Each question has one correct option and three plausible wrong ones.
+- Each question has four options. Most have one correct option and three plausible wrong ones.
+- About 1 in 10 are "select all that apply" (`MULTI_ANSWER_PERCENT`, see [Generation](../generation.md#select-all-that-apply)): 2 or 3 of the 4 options are right, and the candidate ticks every right one. Each candidate's draw from a topic has the same share. The question shows a multi-choice tag and a hint to select all that apply, never how many are right.
+- A single-answer question scores 0 or 1 point. A "select all that apply" question scores 0 if any wrong option is ticked; otherwise it earns the share of its right options ticked (2 of 3: 0.67 of a point).
+- A grade is the percentage of points earned over every question the candidate was shown; for single-answer questions alone, that's the percentage answered correctly.
+- Question lists label "select all that apply" questions; scorecards and practice reviews show the options ticked, which were right, and the question's points ("2 of 3 right options · 0.67 of 1 point").
 - Owners and admins can re-generate individual questions.
 - An interview's questions page always shows each question with its answer options.
 - Questions improve on their own: candidates' answers, votes and reports flag weak ones, and a background verifier fixes or replaces them (see [Question quality](../generation.md#question-quality)).
@@ -45,7 +49,7 @@ An interview's page has three tabs:
 
 ### Settings
 
-- **Time per question:** 60 seconds by default, adjustable per interview (see [Timing](candidates.md#timing)).
+- **Time per question:** a new test starts with its level's: 60 seconds for a basic or medium one, 75 for a hard one, by default (`QUESTION_SECONDS_BASIC`, `_MEDIUM`, `_HARD`, values in the admin zone's Controls). A template's copy gets them at once; a generated test when its questions are ready, the first time only. Adjustable per interview (see [Timing](candidates.md#timing)); a change in Controls reaches only new tests.
 - **Pass mark:** 70% by default, from 1 to 100. Grades show green or red against it.
 - **Mark as hired:** marks the interview as hired and stops its shareable link at once.
 
@@ -67,7 +71,7 @@ Any company member can preview an interview as a candidate, with the play button
 - It is free.
 - It is kept out of the candidate list.
 - Its answers are kept out of the questions' statistics.
-- A person starts at most 20 previews an hour, as many as practice rounds (`PREVIEWS_PER_USER_HOUR`).
+- A person starts at most 20 previews an hour, as many as practice rounds (`PREVIEWS_PER_USER_HOUR`, by default).
 
 ## Lists and text fields
 

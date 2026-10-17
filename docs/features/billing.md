@@ -9,6 +9,7 @@ Companies pay per candidate from a wallet of credits. There's no paid subscripti
 - [A company's billing tab](#a-companys-billing-tab)
 - [Refunds and chargebacks](#refunds-and-chargebacks)
 - [Deleting a company](#deleting-a-company)
+- [AI usage and limit hits](#ai-usage-and-limit-hits)
 - [Setting up Paddle](#setting-up-paddle)
 
 ## Credits
@@ -86,7 +87,7 @@ Owners and admins see a company's **billing** tab, before referrals; viewers don
   - a refund, a chargeback, a chargeback reversed: the money it moved;
   - a referral reward, a referral reward taken back, the welcome gift.
 
-Billing's history entries keep the money a top-up, refund or chargeback moved (`total`, in minor units, and `currency`) and whether a top-up was automatic; entries from before that was kept have the money of their top-up only. Companies' `GET /companies/{id}/billing/history`, `/billing/reserved` and `/billing/invoice?transaction_id=` serve the tab: the history comes from billing's internal `GET /internal/companies/{id}/history`, its candidates are matched to their invites by the key of their credits in one query, and the invoice from `GET /internal/companies/{id}/invoice`, which checks the transaction topped up that company.
+Billing's history entries keep the money a top-up, refund or chargeback moved (`total`, in minor units, and `currency`) and whether a top-up was automatic, and a superadmin's adjustment (reason `adjustment`, see [Admin zone](admin-support.md)) its `note`; entries from before that was kept have the money of their top-up only. Companies' `GET /companies/{id}/billing/history`, `/billing/reserved` and `/billing/invoice?transaction_id=` serve the tab: the history comes from billing's internal `GET /internal/companies/{id}/history`, its candidates are matched to their invites by the key of their credits in one query, and the invoice from `GET /internal/companies/{id}/invoice`, which checks the transaction topped up that company.
 
 ## Refunds and chargebacks
 
@@ -95,6 +96,40 @@ Refunds and chargebacks in Paddle take back the credits they bought.
 ## Deleting a company
 
 Deleting a company deletes its credits: billing's internal `DELETE /internal/companies/{id}` removes the wallet, its holds and its history, and turns off automatic top-up. Purchases stay on record, and nothing is refunded; a refund Paddle makes later takes back only the referral reward the top-up paid. Before it's deleted, the owner sees how many credits are lost: the remove dialog, and the assistant's delete card, read the company's balance (`GET /companies/{id}/credits`, whose `candidates` is how many candidates the available credits pay for, worked out by billing) and add "Its 900 credits (about 3 candidates) will be lost and aren't refunded." when there are any.
+
+## AI usage and limit hits
+
+Billing keeps what AI costs and who hits which limit, for the admin zone's AI costs page and Limits (see [Admin zone](admin-zone.md#ai-costs)):
+
+- **`ai_usage`:** one row per AI call (or per model of one generation run): its action, service, model, input, cached input and output tokens (or audio seconds), cost in USD, company and user (either may be empty), what it was for (`subject_id`: a generation, a conversation, a question), outcome (`ok`, `cut`, `failed`) and when it happened.
+- **`limit_hits`:** one row per refusal, ours or a provider's: the limit, its kind (`ours` or `provider:<name>`), its scope (user, company, ip or everyone), the company and user, and what was refused. An IP is never stored.
+- **`limit_settings`** and **`limit_changes`:** the limits a superadmin changed, and every change with who made it (see [Admin zone](admin-zone.md#limits)).
+
+The services record each AI call (`prepza_common.ai_usage.record`) and each refusal (`prepza_common.limits.record_hit`) as a log line and an event on the `events` topic, `ai.used` or `limit.hit`, which Pub/Sub pushes to billing's `POST /internal/events`. A record's publish is tried 3 times, then given up with a log line; the log line still carries the cost, so the `prepza_ai_spend` metric and its alert stay whole.
+
+- **Idempotent:** the event id is unique in both tables, so a redelivered event changes nothing.
+- **Order:** each row keeps the call's own time, so the order events arrive in doesn't matter.
+- **Failures:** an error answers 5xx and Pub/Sub delivers the event again, then dead-letters it as any other.
+
+Who a call was for is decided as it's stored: a call for a company is **paid** if the company had a purchase by the call's time, **unpaid** otherwise; a call without a company is **prepza**'s when its action is prepza's own work (`PREPZA_ACTIONS`: templates, quality checks, batches, embeddings, news and campaign translations) and **no company** otherwise (the help chat's visitors, candidates, people without a company). Billing then adds an unpaid or no-company call's cost to the day's unpaid AI spend in Redis (`spend:ai:unpaid:<date>`), which the services check against the `AI_SPEND_UNPAID_DAY` cap before their AI calls for those users (`prepza_common.ai_cap`); it logs once when the day passes 80% of the cap and once when it reaches it.
+
+- **Kept:** `ai_usage` and `limit_hits` 13 months, for year-on-year comparison, and `limit_changes` 24 months, by the daily `/internal/schedules/retention`.
+- **Deleted accounts and companies:** deleting an account (`DELETE /internal/users/{id}`) or a company (`DELETE /internal/companies/{id}`) empties its id in both tables; the costs and hits stay.
+
+```
+GET    /superadmin/ai-costs?period=         # the AI costs page
+GET    /superadmin/limit-hits?period=
+GET    /superadmin/ai-spend?company_id=|user_id=   # 30 days, for a support page
+GET    /superadmin/limits
+PUT    /superadmin/limits/{name}
+DELETE /superadmin/limits/{name}
+GET    /superadmin/limits/changes
+POST   /internal/events                     # Pub/Sub
+POST   /internal/schedules/limits           # every 5 minutes
+POST   /internal/schedules/retention        # daily
+```
+
+To fill in the top lists' names, billing asks companies for companies' names and library for accounts' emails. `MONTHLY_BUDGET` (USD a month, from Terraform's `monthly_budget`) is what the page compares the month's spend with.
 
 ## Setting up Paddle
 

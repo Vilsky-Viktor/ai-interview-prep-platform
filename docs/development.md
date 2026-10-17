@@ -52,6 +52,7 @@ Settings are described with the feature they shape:
 | `EMAIL_LINK_SECRET` | [Notifications and emails](features/notifications.md#unsubscribing) |
 | Email limits | [Candidates](features/candidates.md#email-limits) |
 | Help chat and contact form limits | [Public site](features/site.md#faq-and-help-chat) |
+| Every usage limit (not a setting: edited in the admin zone), `MONTHLY_BUDGET` | [Admin zone](features/admin-zone.md#limits), [Credits and payments](features/billing.md#ai-usage-and-limit-hits) |
 | `ATS_ENCRYPTION_KEY` | [ATS integrations](features/ats.md#connecting-an-ats) |
 | `API_ENCRYPTION_KEY` | [Public API](features/api.md#settings) |
 | `FIREBASE_WEB_API_KEY` (AI apps over MCP) | [AI apps over MCP](features/mcp.md#settings) |
@@ -80,7 +81,10 @@ Firebase Auth emulators, Mailpit), `services.yml` (library, generation, rounds, 
 scheduler); each API service and its migrations extend `base.yml`. Together they:
 
 - builds each image's `dev` target,
-- mounts the source, so servers reload on change,
+- mounts the source, so servers reload on change (a server reloads only once its open requests
+  end: a code change during a generation leaves `generation-worker` finishing that run first, and
+  until then it takes no new job; one started meanwhile is lost locally and waits in "queued", so
+  start it again after the run),
 - enables the Firebase emulator,
 - runs Google's Pub/Sub emulator and a small `scheduler` container (see [Architecture](architecture.md#background-work)).
 
@@ -100,6 +104,11 @@ cd frontend && pnpm api-types
 
 # Give template topics without an embedding one
 docker compose exec generation uv run --no-sync python -m app.jobs.embed_templates
+
+# Tag the language of question examples saved before they were tagged (once after deploying it)
+docker compose exec generation uv run --no-sync python -m app.jobs.tag_code_languages
+# Re-tag "text" examples that are in a notation after all (examples of several files; once)
+docker compose exec generation uv run --no-sync python -m app.jobs.tag_code_languages --text
 
 # Rebuild the documents for companies after changing their sources
 ./scripts/documents/build.sh   # needs uv (for pandoc) and Docker (Chromium prints the PDFs)

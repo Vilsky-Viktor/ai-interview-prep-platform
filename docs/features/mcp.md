@@ -4,6 +4,7 @@ A user connects prepza to their own AI app (Claude, ChatGPT, Claude Code, or any
 
 - [Connecting](#connecting)
 - [The authorization flow](#the-authorization-flow)
+- [API keys](#api-keys)
 - [Tools](#tools)
 - [Calling the services as the user](#calling-the-services-as-the-user)
 - [Connections and tokens](#connections-and-tokens)
@@ -14,9 +15,10 @@ A user connects prepza to their own AI app (Claude, ChatGPT, Claude Code, or any
 
 ## Connecting
 
-- The server's address is `<SITE_URL>/mcp` (`https://prepza.ai/mcp`). The company's Integrations → AI apps page shows it with the steps for Claude (Settings → Connectors → Add custom connector) and ChatGPT (Settings → Apps & Connectors, developer mode), and Claude Code's one line: `claude mcp add --transport http prepza <SITE_URL>/mcp`.
+- The server's address is `<SITE_URL>/mcp` (`https://prepza.ai/mcp`). The company's Integrations → AI apps page shows it with the steps for Claude (Settings → Connectors → Add custom connector) and ChatGPT (Settings → Apps & Connectors, developer mode), and Claude Code's one line: `claude mcp add --transport http prepza <SITE_URL>/mcp`, and links to the developer docs for the rest.
+- The developer docs' **MCP** tab (`/api-docs?tab=mcp`, English like the rest of the docs) has it all: the server and both ways to sign in, the same steps for Claude and ChatGPT (the AI apps page's own sections, `components/company/ai-apps-setup.tsx`), Gemini CLI, Cursor, VS Code with GitHub Copilot and Le Chat, example agents in Python and TypeScript (a shared sign-in file, then LangGraph, LangChain and LlamaIndex, each pinning the versions it was run with; the files in `frontend/content/mcp/` are what the tab shows), the rules an agent meets, and every tool with its hints and the API key permission it needs. Tools and limits come from the server itself (`GET /api/assistant/mcp/tools`: the listed tools' names, descriptions, hints and `key_permission`, and the limits; public, no user data, cached an hour), so the tab never drifts from it.
 - The app opens prepza's consent page, `/connect?request=…`, in the browser. A signed-out user signs in there first (the request is read only signed in). A request that expires (its 10 minutes include signing in) or was already answered shows the expired state, also when it runs out while the page is open. The page names the app, the site it returns to (`redirect_host`) and the user's account, lists what it can do, and has Allow and Deny. An app whose site prepza doesn't know gets a warning.
-- The app is known by the site it returns to, not by the name it gives itself (`app/constants/mcp.py` `KNOWN_CLIENTS`): `claude.ai` and `claude.com` are Claude, `chatgpt.com` is ChatGPT. An app on the user's own computer (a `localhost` or `127.0.0.1` address: Claude Code, Claude Desktop, MCP Inspector) is known too and named as it says, since its code never leaves that computer. Any other site is unknown, named as it says.
+- The app is known by the site it returns to, not by the name it gives itself (`app/constants/mcp.py` `KNOWN_CLIENTS`, `KNOWN_SCHEMES`): `claude.ai` and `claude.com` are Claude, `chatgpt.com` is ChatGPT, `chat.mistral.ai` is Le Chat, `vscode.dev` (its `/redirect`) and the `vscode://` scheme are VS Code, and `cursor://` is Cursor. Only `https` sites and exactly these schemes count. An app on the user's own computer (a `localhost` or `127.0.0.1` address: Claude Code, Claude Desktop, MCP Inspector) is known too and named as it says, since its code never leaves that computer. Any other site is unknown, named as it says.
 - A connection belongs to the account, not to a company: the app acts in every company the user is in. The AI apps page lists the user's connected apps (name, site, when connected and last used) on every company's Integrations tab, and Disconnect stops one at once.
 
 ## The authorization flow
@@ -30,6 +32,17 @@ OAuth 2.1 with PKCE (`S256`) and dynamic client registration, from the MCP SDK's
 5. `POST /token` exchanges the code with the PKCE verifier for an access token (1 hour) and a refresh token (90 days). The code works once.
 6. A refresh replaces both tokens; the old refresh token then gets `invalid_grant`. Of two refreshes with one token only the first wins. The replaced token is remembered with when (`previous_refresh_hash`, `refreshed_at`): used again within a minute (`REFRESH_REUSE_GRACE_SECONDS`), it's an app refreshing twice at once and only refused; later, it's likely a stolen copy, and the connection is revoked, so the app asks the user again (OAuth 2.1).
 7. `POST /revoke` (the app removed there) deletes the connection.
+
+## API keys
+
+An agent on a server, with no browser, signs in with a company's API key (`Authorization: Bearer pz_...`) instead of OAuth.
+
+- Only a key with the **mcp** permission works here (ticked when it's made; [Permissions](api.md#permissions)); any other gets the same `401` as an unknown token, so OAuth apps notice nothing.
+- The assistant's token check (`app/services/oauth_provider.py`) sends `pzm_` tokens to its own OAuth storage and `pz_` ones to the api service's `POST /internal/keys/verify` (`app/integrations/api_keys.py`), which checks the key as the API does: expired, deleted, or its maker no longer an owner or admin, it doesn't work.
+- It acts as the member who made it, in its company only. The tools it's offered and may call are the ones its other permissions allow (`app/constants/key_tools.py`, a permission for each tool; the company's own details, the pause, the guide and prices need only `mcp`). The team, brand, settings, billing, integrations and the account's own tools are never listed for a key; one called anyway answers "This API key doesn't have the <permission> permission." or that there's no such tool. So `mcp` with `candidates:read` alone is a read-only agent.
+- Kept to its company where membership is checked, not only in the assistant: the signed `X-Assistant` header carries the key's company and id, and companies refuses any other company with a `403` ("This API key works only in its own company.", `services/access.py`); the companies list answers only the key's.
+- Its calls count against the company's API limit (60 a minute across its keys, shared with the API), and its maker's 30 writes an hour apply too. A company that turned AI apps off refuses keys too.
+- Its actions are audited `via: "mcp"` with the key's id (`audit_events.key_id`, companies migration 0046), so the action log tells a key from an app; the funnel records `client: "api_key"`.
 
 ## Tools
 
@@ -55,9 +68,9 @@ The tools call the other services' user-facing routes exactly as the panel does,
 
 ## Limits
 
-Constants in `app/constants/limits.py`, counted in Redis; with Redis down they're skipped rather than refusing everything.
+Counted in Redis; with Redis down they're skipped rather than refusing everything. Each is one of `prepza_common.limit_list`'s, at the default below until a superadmin changes it in the admin zone's Controls tab (see [Admin zone](admin-zone.md#limits)); the developer docs' MCP tab reads the current calls and writes limits from the assistant.
 
-| Limit | Value |
+| Limit | Default |
 |---|---|
 | Calls of a user's apps | 60 a minute, 3,000 a day |
 | Writes (with the panel's actions) | 30 a user an hour |
@@ -71,7 +84,7 @@ The services' own limits (generation, emails, credits) apply as they do in the a
 ## Audit and analytics
 
 - Calls to companies carry the signed `X-Assistant` header issued as `mcp`: a candidate's results read through an app are audited with `via: "mcp"` and kept out of the "results viewed" funnel.
-- Funnel events (`internal_docs/measurement.md`): `mcp_connected {client}`, `mcp_disconnected {by: user|client}`, `mcp_action {tool, ok}` for writes, and `mcp_active {client}` at most once a day for each user and app (`client` is `claude`, `chatgpt` or `other`).
+- Funnel events (`internal_docs/measurement.md`): `mcp_connected {client}`, `mcp_disconnected {by: user|client}`, `mcp_action {tool, ok}` for writes, and `mcp_active {client}` at most once a day for each user and app (`client` is `claude`, `chatgpt`, `le_chat`, `cursor`, `vscode`, `api_key` or `other`).
 
 ## Routes
 
@@ -83,6 +96,7 @@ The services' own limits (generation, emails, credits) apply as they do in the a
 | `/authorize`, `/token`, `/register`, `/revoke` | OAuth |
 | `/api/assistant/connect/{id}` (`GET`, `…/approve`, `…/deny`) | The consent page's API (Firebase token) |
 | `/api/assistant/connections` (`GET`, `DELETE …/{id}`) | The user's connected apps (Firebase token) |
+| `/api/assistant/mcp/tools` | The listed tools and the limits, for the developer docs (public) |
 
 The root paths are exact matches in the gateway (`gateway/nginx.conf`) and the load balancer (`infra/terraform/locals.tf` `mcp_paths`), sent to the assistant as they are; no frontend page may use them.
 

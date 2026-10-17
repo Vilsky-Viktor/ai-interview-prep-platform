@@ -6,7 +6,7 @@ The admin zone is for superadmins: prepza's own team, not a company's admins.
 - Only they see the Admin zone in the account menu.
 - Everyone else gets "not found" from its pages and routes.
 
-It has ten tabs, in this order: [Templates](#templates), [News](#news), [Flagged](#flagged-and-replaced), [Replaced](#flagged-and-replaced), [Pass rates](#pass-rates), [Verification](#verification), [Companies](#companies), [Stats](#stats), [Emails](#emails) and [Controls](#controls). On a phone the row scrolls sideways.
+It has nine tabs, in this order: [Templates](#templates), [News](#news), [Campaigns](#campaigns), [Questions](#questions), [Pass rates](#pass-rates), [Verification](#verification), [Support](#support), [Stats](#stats) and [Controls](#controls). On a phone the row scrolls sideways. Questions and Stats each have a row of tabs of their own under the main one.
 
 ## Templates
 
@@ -15,13 +15,16 @@ Ready-made interviews by role (see [Templates and practice](templates-and-practi
 - Generated from a role description, through the same topic review as a company's interview.
 - Titles never name a company.
 - Can be renamed, checked question by question, re-generated or deleted.
+- Each topic shows how many practice and company questions it has ("30 practice · 60 company", see [the pools](templates-and-practice.md#the-question-bank)).
+- **Top up** (while a topic is short of either) and **Add questions** (a number for every topic, 30 by default) write more in the background, with the run's progress on the page; see [Adding questions](templates-and-practice.md#adding-questions).
 
 ## News
 
 The posts on the public [news page](site.md#news), newest first, like the templates list.
 
 - **New post** opens a dialog: a title (up to 120 characters), a date (today unless changed) and the text (up to 500 characters, with a live count of the characters left). Library checks the limits (`MAX_NEWS_TITLE_LENGTH`, `MAX_NEWS_TEXT_LENGTH` in `prepza_common.constants`); the form only shows them.
-- Posts are written in English only. Each row's pencil opens the same dialog to edit it; its bin deletes it after asking.
+- Posts are written in English only. Each row's pencil opens the same dialog to edit it; its bin deletes it after asking. Its send button, **Send as a campaign**, makes a new product update campaign from the post (its title, text and a button to it) and opens it to check and send.
+- A published post goes in every user's bell (see [Notifications](notifications.md#the-bell)); deleting it takes it back.
 - Each row says "translated" once the post is in every other language, "translating…" until then.
 
 **Translation:** after a save, library asks generation (`POST /internal/news/{id}/translate`), which queues a worker job (Cloud Tasks). The job reads the post and the languages it lacks from library, translates it into each with the generation model (meaning, not words: each language's hiring terms; "prepza" and product and ATS names kept), and saves those that worked (`PUT /internal/news/{id}/translations`).
@@ -33,7 +36,24 @@ The posts on the public [news page](site.md#news), newest first, like the templa
 
 Routes (library): `GET/POST /superadmin/news`, `PUT/DELETE /superadmin/news/{id}`.
 
-## Flagged and replaced
+## Campaigns
+
+Product updates and offers emailed to the users who chose them (how they're sent: [Notifications](notifications.md#campaigns)). The list looks like the news tab: each campaign's subject, kind, day and, once sent, its counts, with a badge for where it stands (draft, sending, sent, stopped). **New campaign** opens a dialog: the kind, a subject, the text in an editor with bold, italic, links and lists (stored as Markdown), and an optional button with a link to a page on the site. Notifications checks the limits and that the link is on the site.
+
+A campaign's page shows the email exactly as it's sent, in any of the 23 languages, and, before sending, how many users would get it (the setting on, an address, not suppressed). A draft can be edited (in English, which is translated again, or one language's own wording), deleted, tested (**Send a test to me**, to the superadmin's own address) and sent: **Send** asks to confirm with that number and starts at once. Once sent it can't be changed; while it's going out, **Stop** skips everyone not sent yet. Its page then shows waiting, sent, skipped, failed, unsubscribed after it and spam complaints. At most `CAMPAIGNS_PER_KIND_DAY` campaigns of each kind go out a day (1 by default, a limit in [Controls](#limits)); one more is refused (409, "Today's limit of campaigns of this kind (1) is reached. Send the next one tomorrow.") and counted as a hit.
+
+```
+GET/POST   /notifications/superadmin/campaigns
+GET/PUT/DELETE /notifications/superadmin/campaigns/{id}
+PUT        /notifications/superadmin/campaigns/{id}/texts/{language}
+GET        /notifications/superadmin/campaigns/{id}/preview?language=   /recipients
+POST       /notifications/superadmin/campaigns/{id}/test?language=   /send   /stop
+POST       /notifications/superadmin/campaigns/from-news/{news_id}
+```
+
+## Questions
+
+Two tabs of its own, at `/superadmin/questions/flagged` and `/superadmin/questions/replaced` (the older `/superadmin/flagged` and `/superadmin/replaced` lead there):
 
 - **Flagged:** the flagged questions, each to fix now or dismiss. A superadmin's "Fix now" isn't counted towards the verifier's daily limit.
 - **Replaced:** the questions the verifier replaced.
@@ -45,15 +65,11 @@ See [Question quality](../generation.md#question-quality) for how questions get 
 
 Companies waiting for review of their name and website (see [Companies](companies.md#verification)).
 
-## Companies
+## Support
 
-For a company that impersonates another or abuses prepza. It lists the 50 newest companies, or those whose name contains the search, each with its members and when it was made. Each one can be:
+For a complaint about an account, a company's top-ups or spending, an interview or a candidate, for someone who asks prepza to stop its emails, and for a company that impersonates another or abuses prepza. A search finds what the complaint is about; its page shows what support needs, and puts a company's credits right. A candidate's questions and answers are never shown: only facts about them.
 
-- **suspended,** after a confirmation (see [Companies](companies.md#suspension)), and the suspension lifted,
-- **renamed,**
-- **deleted,** after a confirmation, with everything it has, as its owner would delete it.
-
-Each action is logged with the superadmin who did it.
+See [Admin zone: Support](admin-support.md): the search, the pages of an account, a company, an interview and a candidate, emails and logs.
 
 ## Pass rates
 
@@ -68,7 +84,9 @@ It sorts by lowest pass rate or most finished first. It marks the interviews out
 
 ## Stats
 
-Ten numbers as cards:
+Two tabs of its own: **General** (`/superadmin/stats/general`, below) and **AI costs** (`/superadmin/stats/ai-costs`). The older `/superadmin/stats` opens General, and `/superadmin/ai-costs` AI costs.
+
+General has ten numbers as cards:
 
 1. users who signed up,
 2. companies created,
@@ -102,9 +120,31 @@ GET /superadmin/stats                  # all time
 
 So the numbers are what is stored now: deleted companies and candidates past retention aren't counted.
 
+### AI costs
+
+What AI cost and why, for the same period as General (the choice is shared). Billing works it out from `ai_usage` and `limit_hits` (see [Credits and payments](billing.md#ai-usage-and-limit-hits)); the page only shows it:
+
+1. **Totals:** spend in USD, AI calls, input, cached input and output tokens, and this month's spend against the monthly budget (the `MONTHLY_BUDGET` setting; without one, the month's spend alone).
+2. **Who it was for:** paid companies, unpaid companies, people without a company and prepza's own work (templates, quality checks, batches, news), each with its spend and share.
+3. **By action:** each action's calls, spend, paid and unpaid spend, and what one cost: one interview generation, one assistant message, one minute of transcription.
+4. **By model:** calls, tokens and spend, with the share of input read from OpenAI's cache.
+5. **Companies and users that cost most:** 20 of each, by spend, each opening its support page.
+6. **By day,** for a month, or **by month,** for a year or all time.
+7. **Shared budgets today:** today's (UTC) use of each limit for everyone: generation's new generations and quality checks, the assistant's messages and tokens, the help chat's questions and tokens, and the unpaid users' AI spend against its cap (`AI_SPEND_UNPAID_DAY`). Each owning service reads its own Redis counters.
+8. **Limits hit:** ours and our providers' (OpenAI's rate limit and quota, waits in generation's own request limiter, Resend's, the ATSs', Firebase's), each with its hits in the period, its current value, and the 5 companies and users that hit it most, opening their support pages.
+
+A service that doesn't answer leaves its part out.
+
+```
+GET /billing/superadmin/ai-costs?period=          # 1 to 6
+GET /billing/superadmin/limit-hits?period=        # 8
+GET /{generate|assistant|rounds}/superadmin/budgets   # 7
+GET /billing/superadmin/ai-spend?company_id=|user_id=  # the support pages' line
+```
+
 ## Controls
 
-Two switches, the emergency pause and maintenance mode, and the legal notices.
+Two switches, the emergency pause and maintenance mode, the legal notices and the limits.
 
 ### Emergency pause
 
@@ -143,7 +183,7 @@ These stay open, so no event, job or payment is lost:
 - unsubscribing (`/unsubscribe/` in notifications, and its page): an email's one-click link must always work,
 - the legal texts (`/help/legal/` in rounds, and the privacy, terms, DPA, documents and accessibility pages; `MAINTENANCE_OPEN_PAGES` in the frontend).
 
-Billing has no Redis and isn't switched; its only public route is the price catalog.
+Billing isn't switched; its only public route is the price catalog.
 
 Turning it on first asks to confirm, showing the number of candidates in an interview right now (a question shown in the last 15 minutes), whose time stops meanwhile.
 
@@ -157,33 +197,40 @@ One row per legal document (terms, privacy policy, data processing agreement): i
 
 - the terms and the privacy policy to every account, the DPA to every company's owners and admins (the API says which: `audience`),
 - only for a version that applies at least 14 days from now (`LEGAL_NOTICE_DAYS`), and once per version: notifications refuses otherwise, and the row says why,
-- from the next morning's runs (every minute from 9:00 UTC for an hour, and again from 12:00 to catch up, as the digest), each going on where the last stopped and nobody getting it twice (the sent log), until everyone has it.
+- through the bulk sender, from the next sending hour (every minute from 8:00 to 18:59 UTC), nobody getting it twice, until everyone has it; it goes in the bell at once, and the site shows a banner until the version applies (see [Notifications](notifications.md#legal-notices)).
 
 ```
 GET  /notifications/superadmin/legal-notices
 POST /notifications/superadmin/legal-notices/{terms|privacy|dpa}
 ```
 
-## Emails
+### Limits
 
-Stops the emails prepza sends to an address, for someone who asked by email rather than with a link (see [Unsubscribing](notifications.md#unsubscribing)).
+Every usage limit of ours, grouped by the service that enforces it (`prepza_common.limit_list.LIMITS`): the assistant, companies, generation, rounds, library, the API, notifications (Resend's emails a day, campaigns of each kind a day) and billing (the unpaid users' daily AI spend cap). Each shows:
 
-- **Find:** an email address, whatever its case. It's sent in the request body, never in a page or API address, which logs record.
-- **prepza account:** whether an account signs in with that address (library asks Firebase). If so, its email settings, as Settings → Emails shows them, each changed at once, and "Turn off all optional emails". Service emails can't be turned off. Product updates and offers can only be turned off here: consent to marketing is the user's own, so turning one on is refused ("Only the person can turn on product updates and offers.").
-- **Emails from companies:** the companies that invited the address (companies' invites) or whose emails it stopped, by name, each "Emails are sent", "All emails stopped" (by a superadmin), "They stopped all emails themselves" (from an email's link) or "Reminders stopped for N invites":
-  - "Stop emails" stops every email from that company to the address, only for a company that invited it.
-  - "Resume emails" lets them through again (the person changed their mind), only after a superadmin's stop. The person's own stops, of all the company's emails or of an invite's reminders, stay: only they made them, and the row has no button for them.
+- its name, window (an hour, a day, … or "at a time" for a count of what exists, such as API keys) and whom it counts (a user, a company, an address or everyone),
+- its default and its hits in the last 7 days, so a change's effect shows,
+- a field with its current value and **Save**, and **Reset to default** once it's changed; a limit with an unpaid counterpart (interviews a day, interviews waiting without candidates) shows both, paid and unpaid.
 
-Both are safe to repeat. A company that's gone isn't listed.
+Only the number changes; the window stays. Billing refuses a value outside the limit's lowest and highest (422, "Use a value from … to …."), so a typo can't make it 0 or a billion; counts are whole numbers, USD keeps its cents. Saving the default removes the change.
+
+Beside the limits, in the same groups, are the plain values the services work with (`counted=False` in the list): nothing counts against them, so they show only their default, with no window or hits, and are saved, reset and recorded the same way. A value in seconds shows "s" in its field, a share "%".
+
+| Value | Default | Range | What it sets |
+|---|---|---|---|
+| `QUESTION_SECONDS_BASIC`, `_MEDIUM`, `_HARD` | 60, 60, 75 s | 10–600 | The seconds a question of a new test of that level starts with, and of a practice round on a template of that level. Existing tests keep theirs. |
+| `GENERATION_CALLS_AT_ONCE` | 24 | 1–64 | The AI calls one generation (or a template's top-up) makes at once. |
+| `GENERATION_CALLS_PER_SECOND` | 24 | 1–80 | The AI calls a second of every generation together, shared through Redis; OpenAI allows our account 5,000 requests and 1M tokens a minute. |
+| `MULTI_ANSWER_PERCENT` | 10% | 0–50 | The share of each topic, and of each draw from it, that is "select all that apply" (see [Generation](../generation.md#select-all-that-apply)). |
+| `RESEND_RESERVE_PERCENT` | 20% | 0–90 | The share of `RESEND_DAILY_LIMIT` bulk sends leave for invites and other service emails. |
+
+Below them, our providers' limits, read-only with their hits, and the latest 50 changes: who, which limit, from what to what, when.
+
+The values live in billing's `limit_settings` (only changed limits have a row), and every change in `limit_changes`. Billing writes them to the Redis hash `limits:values` on every change, at its start and every 5 minutes (`/internal/schedules/limits`), so a Redis wipe heals itself. Each service reads a limit with `limits.limit(redis, NAME)`, keeping the hash at most 30 seconds, so a change is in effect within that; with Redis down, every limit is at its default.
 
 ```
-POST /library/superadmin/emails/lookup                     {email}
-PUT  /library/superadmin/emails/{user_id}/preferences      {changes}
-POST /notifications/superadmin/candidate-opt-outs/lookup   {email}
-PUT  /notifications/superadmin/candidate-opt-outs          {email, company_id, stopped}
+GET    /billing/superadmin/limits
+PUT    /billing/superadmin/limits/{name}      {"value"}
+DELETE /billing/superadmin/limits/{name}      # back to its default
+GET    /billing/superadmin/limits/changes
 ```
-
-What's logged:
-
-- A settings change goes to the consent log (`email_consents`) with the source `admin` and the superadmin's id (`changed_by`), and to library's logs.
-- Stopping or resuming a company's emails goes to notifications' logs with the superadmin's id, the company and the address's hash, never the address.

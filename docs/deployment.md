@@ -23,13 +23,15 @@ docker build --target prod -t prepza-frontend \
 
 Never set `FIREBASE_AUTH_EMULATOR_HOST` in production.
 
-Terraform passes only one generation setting to Google Cloud, `DAILY_GENERATION_LIMIT` (its `daily_generation_limit` variable, default 100); production runs on the defaults of the others (see [Generation settings](generation.md#generation-settings) and [infra/README.md](../infra/README.md#notes)). The assistant runs on its defaults too (`ASSISTANT_MODEL`, `ASSISTANT_REASONING_EFFORT`, `ASSISTANT_RETENTION_DAYS`); its usage limits are constants in its code (see [The in-app assistant](features/assistant.md#limits)). It gets `SITE_URL` and `FIREBASE_WEB_API_KEY` (the `firebase_web_api_key` variable) for AI apps over MCP, whose endpoint and OAuth paths the load balancer sends to it at the site's root; its account needs to read Firebase accounts and sign as itself (`infra/terraform/iam.tf`, see [AI apps over MCP](features/mcp.md)).
+Terraform passes none of generation's settings to Google Cloud; production runs on their defaults (see [Generation settings](generation.md#generation-settings) and [infra/README.md](../infra/README.md#notes)). The assistant runs on its defaults too (`ASSISTANT_MODEL`, `ASSISTANT_REASONING_EFFORT`, `ASSISTANT_RETENTION_DAYS`). It gets `SITE_URL` and `FIREBASE_WEB_API_KEY` (the `firebase_web_api_key` variable) for AI apps over MCP, whose endpoint and OAuth paths the load balancer sends to it at the site's root; its account needs to read Firebase accounts and sign as itself (`infra/terraform/iam.tf`, see [AI apps over MCP](features/mcp.md)). Usage limits, and the values tuned with them (seconds a question by level, generation's AI calls at once and a second, the multi-answer share, the share of Resend's quota kept from bulk sends), aren't settings: each starts at its default in `prepza_common.limit_list` and a superadmin changes it in the admin zone's Controls tab ([Admin zone](features/admin-zone.md#limits)). Billing gets `MONTHLY_BUDGET` (the `monthly_budget` variable), which the AI costs page compares the month's AI spend with.
 
 ## Migrations
 
 - Run each API's migrations once before it starts: `uv run --no-sync alembic upgrade head`.
 - Each of the 9 API services has them (library, generation, rounds, companies, billing, notifications, ats, api, assistant); the generation worker and the bell stream share generation's and notifications' databases. In Google Cloud, each runs as a `<service>-migrate` job, after the `db-roles` job that gives each service its own database user.
 - Migrations only go forward, so keep them additive for rollbacks to stay safe.
+- **Waiting to be dropped:** a table a migration replaced stays until no version that reads it can be rolled back to; then a later migration drops it.
+  - notifications `legal_notices`: copied into `bulk_sends` by 0009. Once every deployed version and any rollback target is at 0009 or later (no running code imports it), add a migration that drops it; its `downgrade` recreates the empty table. Check first that every row has its `bulk_sends` copy (`kind = 'legal_' || document`, `about = version`).
 
 ## Error reporting
 

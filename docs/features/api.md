@@ -3,6 +3,7 @@
 A company can connect its own platform to prepza through the public API: list its interviews, invite candidates, read their results, and hear when a candidate finishes through a web hook. The reference is on the site at `/api-docs` (linked in the footer), read from the API's own OpenAPI description, so it always matches it.
 
 - [Keys](#keys)
+- [Permissions](#permissions)
 - [The API](#the-api)
 - [Web hooks](#web-hooks)
 - [The API page](#the-api-page)
@@ -11,11 +12,34 @@ A company can connect its own platform to prepza through the public API: list it
 
 ## Keys
 
-- An owner or admin makes a key on the company's **Integrations** tab → **API** → **API keys** → **New key**: a name, and when it expires (in 1, 3, 6 or 12 months, or never; "never" shows a warning that a leaked key stays usable until deleted).
+- An owner or admin makes a key on the company's **Integrations** tab → **API** → **API keys** → **New key**: a name, when it expires (in 1, 3, 6 or 12 months, or never; "never" shows a warning that a leaked key stays usable until deleted), and what it may do ([Permissions](#permissions)).
 - The key (`pz_...`) is shown once. prepza keeps only its SHA-256 hash and its first characters, to tell keys apart.
 - A key belongs to one company and acts as the member who made it: invites go out under that member's email limits. It stops working when it expires, when it's deleted, or when that member is no longer an owner or admin there (`401`; the api service rechecks that at most once a minute per instance).
-- A company can have up to 10 keys, and all its keys together can make 60 requests a minute (`429` over it). Keys and web hooks are added one at a time per company (a Postgres advisory lock), so two added at once can't pass the limit. If Redis is down, requests go through without the limit rather than failing (logged).
+- A company can have up to 10 keys, and all its keys together can make 60 requests a minute (`429` over it); these are the defaults of `MAX_API_KEYS` and `API_REQUESTS_PER_MINUTE`, which a superadmin can change ([Admin zone](admin-zone.md#limits)). Keys and web hooks are added one at a time per company (a Postgres advisory lock), so two added at once can't pass the limit. If Redis is down, requests go through without the limit rather than failing (logged).
 - Deleting the company deletes its keys and web hooks; deleting an account deletes the keys and web hooks that member made.
+- A key with the **mcp** permission also signs an AI agent in to prepza's MCP server, on the same terms (see [AI apps over MCP](mcp.md#api-keys)).
+
+## Permissions
+
+Each key may do only what was ticked when it was made, so a key for a dashboard only reads and a leaked key can do as little as possible. The permissions (`app/constants/permissions.py`), by what they touch:
+
+| Group | Permission | Routes |
+|---|---|---|
+| Interviews | `interviews:read` | `GET /interviews`, `GET /interviews/{id}` |
+| | `interviews:create` | `POST /interviews` |
+| Candidates | `candidates:read` | `GET /interviews/{id}/candidates`, `…/{candidate_id}`, `GET /candidates?email=` |
+| | `candidates:invite` | `POST /interviews/{id}/candidates`, `…/resend` |
+| | `candidates:change` | `PATCH …/{candidate_id}` (name, extra time) |
+| | `candidates:delete` | `DELETE …/{candidate_id}` |
+| Credits | `credits:read` | `GET /credits` |
+| AI agents | `mcp` | Signing in to the MCP server (`/mcp`) |
+
+- A new key starts with `interviews:read` and `candidates:read` ticked (`DEFAULT_PERMISSIONS`, which the API page's form starts from); at least one is needed.
+- A permission that changes something comes with reading what it changes (`IMPLIED`): ticking `candidates:invite` ticks `candidates:read`, and the form keeps it ticked. The api service applies the rule and answers the groups, the implied reads and the defaults (`GET /manage`); the form only shows them.
+- Each public route declares its permission (`needs()` in `app/auth.py`, beside the key's check), and the API docs name it on the route. A key without it gets `403` with `{"detail": "This API key doesn't have the <permission> permission.", "code": "missing_permission"}`. A test fails on a public route that declares none.
+- **Narrowing only.** An owner or admin unticks permissions on a key's row (**Edit permissions**, `PATCH /manage/keys/{id}` with `permissions`), keeping at least one. Adding one is refused (`409`, "A key's permissions can only be narrowed; make a new key to add one."), so a leaked key never gains power: a new permission means a new key. The key is locked while it changes, and the change applies only while the new set is within the key's current one, so two narrowings at once can't add back what the other took. A narrowing that takes something away goes to the company's [action log](companies.md#action-log) as "Narrowed an API key's permissions", with the key's name, what was taken away and who did it.
+- Keys made before permissions existed have every API permission but `mcp` (api migration 0005), so they work as before and their reach never grows.
+- Web hooks have no permissions: they're added in the app and send what they send.
 
 ## The API
 
@@ -55,17 +79,22 @@ Everything is under `https://<domain>/api/v1`, with `Authorization: Bearer pz_..
 - Testing and the delivery log: on each web hook row of the API page, owners and admins **send test event** (`POST /manage/webhooks/{id}/test`, a signed `test` event sent at once, the answer saying whether it was taken), and every member opens its **delivery log** (`GET /manage/webhooks/{id}/log`): its latest 20 sends (`webhook_attempts`, `WEBHOOK_LOG_KEPT`), each with the event's type, when, whether it was taken and what happened ("delivered", "skipped", the status answered, or the error's name), no candidate's data.
 - A web hook whose address no longer leads to the public internet is skipped. One whose secret can't be read (its key gone from `API_ENCRYPTION_KEY`) counts as a failed send, logged "secret unreadable" (the delivery log says "Not sent: a problem on prepza's side.") and retried, so it shows as failing and its events go out once the key is back. An address whose lookup fails counts as a failed send and is retried. A candidate or interview deleted since is told to nobody; if the companies service can't answer for now, the event fails and Pub/Sub retries it, and nothing has been sent yet.
 
+## In the action log
+
+A key created, deleted or narrowed, and a web hook added, tested or deleted, go to the company's [action log](companies.md#action-log) as the member's, named by the key's name or the web hook's site only (its path can carry a secret). Api saves each in its outbox in the change's own transaction (`prepza_common.audit.add`, event `audit.recorded`), publishes it right after the request and every minute (`api-outbox`), and companies stores it once.
+
 ## The API page
 
 `/companies/<id>/integrations/api`, from the **API** row on the integrations tab (which shows how many keys and web hooks the company has):
 
 - Two tabs, **API keys** and **web hooks**, each a list with its own button in the title row (**new key**, **add web hook**) for owners and admins, next to **developer docs**.
-- A key shows its first characters, when it was made, when it expires (or that it expired), and when it was last used (noted at most once a minute). Viewers see the lists without the buttons, and each web hook's address only up to its site (`https://hooks.zapier.com/…`): the rest of a Zapier or Make address works like a password.
+- A key shows its first characters, when it was made, when it expires (or that it expired), when it was last used (noted at most once a minute), and its permissions, one group a line. Owners and admins narrow them from the row ([Permissions](#permissions)). Viewers see the lists without the buttons, and each web hook's address only up to its site (`https://hooks.zapier.com/…`): the rest of a Zapier or Make address works like a password.
 
 ## How it's built
 
 - The `api` service (`services/api`) owns the keys, web hooks, deliveries and retries in its own database. It has no business rules of its own: interviews, candidates and invites come from companies' internal routes (`/internal/companies/{id}/interviews/...` and `/internal/interviews/{id}/invites`).
 - It's reached at `/api/v1/` (the gateway locally, the load balancer's `v1` path in Google Cloud). The management routes (`/api/v1/manage`, for the API page, signed in with Firebase) and the internal ones are left out of the public OpenAPI.
+- `POST /internal/keys/verify` checks a key for the assistant's MCP server exactly as the API does (the same expiry, maker and rate-limit checks, counted against the company's API limit) and answers its id, company, maker and permissions.
 - It consumes companies' `candidate.*` events and `interview.ready` (web hooks) and `company.deleted` (deletes the company's keys and web hooks).
 
 ## Settings

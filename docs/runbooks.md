@@ -1,6 +1,6 @@
 # Runbooks
 
-What to do when a provider fails, a generation hangs or a deploy's migration fails. Each runbook says how you notice, what prepza already does by itself, the steps, and how to know it's over. The alerts are the ones in `infra/terraform/monitoring*.tf` (see [infra/README.md](../infra/README.md#bootstrap-once), step 5); the names below are their titles in the alert emails.
+What to do when a provider fails, a generation hangs, a deploy's migration fails or AI spending runs high. Each runbook says how you notice, what prepza already does by itself, the steps, and how to know it's over. The alerts are the ones in `infra/terraform/monitoring*.tf` (see [infra/README.md](../infra/README.md#bootstrap-once), step 5); the names below are their titles in the alert emails.
 
 - [Before you start](#before-you-start)
 - [Paddle down](#paddle-down)
@@ -9,12 +9,14 @@ What to do when a provider fails, a generation hangs or a deploy's migration fai
 - [A stuck generation](#a-stuck-generation)
 - [A failed migration during a deploy](#a-failed-migration-during-a-deploy)
 - [Redis down](#redis-down)
+- [AI spend high or AI stopped](#ai-spend-high-or-ai-stopped)
 
 ## Before you start
 
 - **The switches** are in the admin zone: **Admin zone → Controls** (`/superadmin/controls`). The emergency pause answers new interviews, invites, practice, previews, generations, the help chat and the assistant with a 503; maintenance mode closes the whole site but keeps `/internal/` and `/webhooks/` open, so no event, job or payment is lost ([Admin zone](features/admin-zone.md#controls)).
 - **Both switches live in Redis.** With Redis down they count as off and can't be turned on ([Admin zone](features/admin-zone.md#emergency-pause)).
-- **Billing isn't switched** by maintenance mode: it has no Redis ([Admin zone](features/admin-zone.md#maintenance-mode)).
+- **Billing isn't switched** by maintenance mode ([Admin zone](features/admin-zone.md#maintenance-mode)).
+- **The limits** are in **Admin zone → Controls → Limits**: each one's value, its default and its hits in the last 7 days; a change is in effect within 30 seconds ([Admin zone](features/admin-zone.md#limits)). **Admin zone → Stats → AI costs** (`/superadmin/stats/ai-costs`) shows what AI cost, by action, model, company and user, today's shared budgets and the limits hit ([Admin zone](features/admin-zone.md#ai-costs)).
 - **Logs:** every command below assumes `gcloud config set project prepza-prod` and the region `europe-west1`. A service's recent errors:
   ```bash
   gcloud logging read 'resource.type="cloud_run_revision" AND resource.labels.service_name="billing" AND severity>=ERROR' --freshness=1h --limit=50
@@ -87,7 +89,7 @@ What to do when a provider fails, a generation hangs or a deploy's migration fai
 **How you notice**
 
 - **prepza events waiting:** an event waits unhandled for over 15 minutes, here on notifications' subscription ([monitoring_backlog.tf](../infra/terraform/monitoring_backlog.tf)).
-- **prepza scheduled job failed:** the morning runs (digest, reminders, legal notices) fail on an email they can't send ([member_sends.py](../services/notifications/app/services/member_sends.py)).
+- **prepza scheduled job failed:** the morning runs (digest, reminders) fail on an email they can't send; the bulk sender's runs (legal notices, campaigns) don't: a failed email is tried again in two later runs, then marked failed on its send ([bulk.py](../services/notifications/app/services/bulk.py)) ([member_sends.py](../services/notifications/app/services/member_sends.py)).
 - **prepza server errors** may fire too: a failed email answers Pub/Sub with a 500.
 - After several hours: **prepza events dead-lettered**.
 - **prepza emails bouncing** (more bounces or spam marks than `email_bounce_alert_hourly` in an hour) and **prepza web hook signature refused** with `resend` in the log aren't outages: the first is about the addresses or the content (see the alert's text in [monitoring_logs.tf](../infra/terraform/monitoring_logs.tf)), the second a wrong `resend-webhook-secret`.
@@ -110,7 +112,7 @@ What to do when a provider fails, a generation hangs or a deploy's migration fai
    ```
 3. If Resend is down, wait: Pub/Sub keeps retrying for several hours. Nothing needs switching.
 4. If **prepza events dead-lettered** fires, replay the dead-lettered events once Resend is back, with the loop in [infra/README.md](../infra/README.md#notes) ("Dead-lettered events"). A replay more than 24 hours after an email's first attempt isn't covered by Resend's idempotency key, so an email that went through but wasn't confirmed could arrive twice.
-5. Morning emails that didn't go out within their hour go out in its catch-up hour, three hours later (digest 10:00, reminders 11:00, legal notices 12:00 UTC; [jobs.tf](../infra/terraform/jobs.tf)); the digest covers the same 24 hours ([digest.py](../services/notifications/app/services/digest.py)). If Resend is still down then, they wait for the next day.
+5. Morning emails that didn't go out within their hour go out in its catch-up hour, three hours later (digest 10:00, reminders 11:00 UTC; [jobs.tf](../infra/terraform/jobs.tf)); the bulk sender's runs go on every minute until 18:59 UTC, and what's left waits for the next day; the digest covers the same 24 hours ([digest.py](../services/notifications/app/services/digest.py)). If Resend is still down then, they wait for the next day.
 
 **Resolved when** notifications' subscription has no backlog (**prepza events waiting** closes), `events-dead-letter` is empty, and a test invite to your own address arrives.
 
@@ -181,6 +183,31 @@ What to do when a provider fails, a generation hangs or a deploy's migration fai
 
 **What happens:** the emergency pause and maintenance mode count as off and can't be turned on ([pause.py](../packages/common/src/prepza_common/pause.py), [Admin zone](features/admin-zone.md#controls)); rate limits refuse or let the request through uncounted, by limit ([rate_limit.py](../packages/common/src/prepza_common/rate_limit.py)); live updates fail (the alert's text). Services retry a command whose connection dropped ([infra/README.md](../infra/README.md#bootstrap-once), step 4).
 
-**What to do:** check Upstash's status and its plan's command limit, and the `redis-url` secret, as in [infra/README.md](../infra/README.md) (the Upstash paragraph at the top and bootstrap step 4). A flushed or replaced Redis lifts the pause, maintenance mode and the day's generation cap: turn the switches on again if they were on.
+**What to do:** check Upstash's status and its plan's command limit, and the `redis-url` secret, as in [infra/README.md](../infra/README.md) (the Upstash paragraph at the top and bootstrap step 4). While Redis is down, every limit is at its default (an edited value isn't read) and the unpaid users' daily AI spend cap refuses nothing. A flushed or replaced Redis lifts the pause and maintenance mode, and starts the day's counts over (the shared budgets, the unpaid AI spend): turn the switches on again if they were on. Edited limits come back by themselves within 5 minutes, from billing's database (`billing-limits` job).
 
 **Resolved when** the alert closes and the services log no new `redis.exceptions` errors.
+
+## AI spend high or AI stopped
+
+**How you notice**
+
+- **prepza AI spend high:** all AI calls together cost over `ai_spend_alert_hourly` (default $20) in an hour, from the `prepza_ai_spend` metric: every call logs "AI used: action=… cost=$…" ([ai_usage.py](../packages/common/src/prepza_common/ai_usage.py), [monitoring_logs.tf](../infra/terraform/monitoring_logs.tf)).
+- **prepza AI stopped for many:** one of these lines was logged ([monitoring_logs.tf](../infra/terraform/monitoring_logs.tf)):
+  - **"Unpaid AI spend near the daily cap"**: unpaid companies and people without a company spent 80% of today's cap (`AI_SPEND_UNPAID_DAY`, $15 by default);
+  - **"Unpaid AI spend reached the daily cap"**: their AI features (generation, the assistant, the help chat) answer 503, "AI features are paused for today…", until midnight UTC; paid companies go on;
+  - **"OpenAI quota exhausted"**: OpenAI refused a call with `insufficient_quota`, the account is out of money, and every AI call fails;
+  - **"Shared limit used up: limit=NAME"**: a limit for everyone (such as `DAILY_GENERATION_LIMIT`, `TOKENS_PER_DAY`, `HELP_TOKENS_PER_DAY`) was reached, so that use stops for everyone it holds until its window ends.
+
+**What the system does by itself:** nothing is paused. The cap and the shared limits refuse until midnight UTC (or their window's end) and then let calls through again; the counts start over each day.
+
+**What to do**
+
+1. Open **Admin zone → Stats → AI costs** for today's month: **By action**, **Companies that cost most** and **Users that cost most** show where the money went, and **Shared budgets today** how full each is. To read the log lines:
+   ```bash
+   gcloud logging read 'resource.type="cloud_run_revision" AND (jsonPayload.message:"Unpaid AI spend" OR jsonPayload.message:"Shared limit used up" OR jsonPayload.message:"OpenAI quota exhausted")' --freshness=1h --limit=20
+   ```
+2. **Real use** (more sign-ups, a busy day): raise the limit in **Controls → Limits**: `AI_SPEND_UNPAID_DAY` at 80%, before anyone is refused, or the shared limit named in the log line. Lower it again later if you like; every change is kept with who made it.
+3. **Abuse or a loop** (one company or user far ahead, the same action again and again): open its support page from the list. Suspend a company that abuses prepza ([Admin zone](features/admin-support.md)); lower the per-user or per-company limit it uses; for a runaway generation or job, see [A stuck generation](#a-stuck-generation). If the money keeps going, turn on the emergency pause.
+4. **"OpenAI quota exhausted":** top up the OpenAI account (or raise its monthly limit) in OpenAI's dashboard at once. Nothing needs restarting: the next call goes through. Failed generations wait for their owners' **Retry**, as in [OpenAI down](#openai-down).
+
+**Resolved when** the hourly spend is back under the alert level, the log lines stop, and the alerts close.
