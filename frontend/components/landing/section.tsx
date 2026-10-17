@@ -55,33 +55,6 @@ export function LandingSection({
   )
 }
 
-/** The soft panel a section's picture sits on. Screen readers skip the picture unless it holds
- * real links (`decorative={false}`); `wide` gives room for two pictures side by side. On phones
- * it spans the screen, out to its edges, with square corners. */
-export function Stage({
-  wide = false,
-  decorative = true,
-  children,
-}: {
-  wide?: boolean
-  decorative?: boolean
-  children: React.ReactNode
-}) {
-  return (
-    <div
-      aria-hidden={decorative}
-      className="-mx-6 flex justify-center bg-muted/60 px-5 py-10 sm:mx-0 sm:rounded-[2rem] sm:px-12 dark:bg-muted/30"
-    >
-      <div className={wide ? "w-full max-w-4xl" : "w-full max-w-2xl"}>
-        {children}
-      </div>
-    </div>
-  )
-}
-
-/** A piece of interface inside a stage: plain, with a hairline edge. */
-export const PANEL = "rounded-2xl border border-border/70 bg-background"
-
 /** The landing's outline button: the demos', the video's and a section's link onwards. */
 export const OUTLINE_BUTTON =
   "gap-2 border-foreground/20 text-base dark:border-input"
