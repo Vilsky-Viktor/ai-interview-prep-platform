@@ -30,12 +30,12 @@ FAQ = [
     {
         "key": "cheating",
         "question": "I candidati possono usare l'IA o cercare le risposte?",
-        "answer": "Ogni candidato riceve domande casuali tutte sue, in un ordine tutto suo, con un timer su ogni domanda gestito dal nostro server, quindi c'è poco tempo per cercare le risposte o chiedere a un'IA. Le schede di valutazione mostrano anche quando un candidato ha lasciato la pagina, copiato del testo o risposto troppo in fretta per aver letto la domanda.",
+        "answer": "Ogni candidato riceve domande casuali tutte sue, in un ordine tutto suo, con [un timer su ogni domanda](/guides/skills-test-timing-and-extra-time) gestito dal nostro server, quindi c'è poco tempo per cercare le risposte o chiedere a un'IA. Le schede di valutazione mostrano anche quando un candidato ha lasciato la pagina, copiato del testo o risposto troppo in fretta per aver letto la domanda.",
     },
     {
         "key": "cost",
         "question": "Quanto costa?",
-        "answer": "Generare colloqui è gratis. Ogni candidato che risponde ad almeno una domanda costa {candidate} crediti ({candidate_dollars} $), e meno con i crediti di ricariche più grandi, fino a 2 $. La tua prima azienda riceve {company} crediti gratuiti, sufficienti per i suoi primi {company_candidates} candidati. La pagina dei prezzi elenca ogni prezzo.",
+        "answer": "Generare colloqui è gratis. Ogni candidato che risponde ad almeno una domanda costa {candidate} crediti ({candidate_dollars} $), e meno con i crediti di ricariche più grandi, fino a 2 $. La tua prima azienda riceve {company} crediti gratuiti, sufficienti per i suoi primi {company_candidates} candidati. La [pagina dei prezzi](/pricing) elenca ogni prezzo.",
     },
     {
         "key": "charged",
@@ -55,7 +55,7 @@ FAQ = [
     {
         "key": "refunds",
         "question": "Posso avere un rimborso?",
-        "answer": "Sì, per i crediti acquistati negli ultimi 14 giorni e non ancora spesi: tramite Paddle o scrivendoci. I crediti gratuiti, come il regalo di benvenuto, non sono rimborsabili. I termini riportano i dettagli.",
+        "answer": "Sì, per i crediti acquistati negli ultimi 14 giorni e non ancora spesi: tramite Paddle o scrivendoci. I crediti gratuiti, come il regalo di benvenuto, non sono rimborsabili. I [termini](/terms) riportano i dettagli.",
     },
     {
         "key": "scorecards",
@@ -75,12 +75,12 @@ FAQ = [
     {
         "key": "integrations",
         "question": "prepza funziona con il mio ATS o con altri strumenti?",
-        "answer": "Sì, senza costi aggiuntivi. Collega Workable, Greenhouse, Teamtailor, Recruitee o Breezy HR nella scheda Integrazioni della tua azienda: i candidati che sposti in una fase ricevono il colloquio, e i loro risultati tornano nell'ATS. Slack può pubblicare le notifiche della tua azienda in un canale, e l'API permette alla tua piattaforma di creare colloqui, invitare e gestire candidati e ricevere i loro risultati, con ogni chiave API limitata a ciò che spunti per lei; consulta la Documentazione API.",
+        "answer": "Sì, senza costi aggiuntivi. Collega Workable, Greenhouse, Teamtailor, Recruitee o Breezy HR nella scheda Integrazioni della tua azienda: i candidati che sposti in una fase ricevono il colloquio, e i loro risultati tornano nell'ATS ([come collegare i test di competenze al tuo ATS](/guides/ats-integration-skills-tests)). Slack può pubblicare le notifiche della tua azienda in un canale, e l'API permette alla tua piattaforma di creare colloqui, invitare e gestire candidati e ricevere i loro risultati, con ogni chiave API limitata a ciò che spunti per lei; consulta la [Documentazione API](/api-docs).",
     },
     {
         "key": "ai_apps",
         "question": "Posso usare prepza da Claude, ChatGPT o da un mio agente IA?",
-        "answer": "Sì. Aggiungi prepza a Claude o ChatGPT come connettore (i passaggi sono nella scheda Integrazioni della tua azienda) e consenti l'accesso su prepza. L'app lavora quindi con le tue aziende, i colloqui e i risultati dei candidati a tuo nome, con i tuoi permessi; la maggior parte delle app ti chiede conferma prima di modificare qualcosa. L'account o un'azienda si eliminano solo in prepza. Ciò che l'app legge arriva al suo fornitore, secondo i termini di quell'app. Puoi scollegarla in qualsiasi momento nella stessa scheda. Si collegano anche altre app di IA e gli agenti che crei tu: la scheda MCP della documentazione per sviluppatori ha i passaggi e agenti di esempio, e un agente su un server può accedere con una chiave API che ha il permesso per gli agenti IA.",
+        "answer": "Sì. Aggiungi prepza a Claude o ChatGPT come connettore (i passaggi sono nella scheda Integrazioni della tua azienda) e consenti l'accesso su prepza. L'app lavora quindi con le tue aziende, i colloqui e i risultati dei candidati a tuo nome, con i tuoi permessi; la maggior parte delle app ti chiede conferma prima di modificare qualcosa. L'account o un'azienda si eliminano solo in prepza. Ciò che l'app legge arriva al suo fornitore, secondo i termini di quell'app. Puoi scollegarla in qualsiasi momento nella stessa scheda. Si collegano anche altre app di IA e gli agenti che crei tu: la [scheda MCP](/api-docs?tab=mcp) della documentazione per sviluppatori ha i passaggi e agenti di esempio, e un agente su un server può accedere con una chiave API che ha il permesso per gli agenti IA. La [guida ad agenti IA, MCP e API](/guides/ai-agents-mcp-and-api) spiega a cosa serve ciascuno.",
     },
     {
         "key": "candidates",
@@ -100,7 +100,7 @@ FAQ = [
     {
         "key": "privacy",
         "question": "Cosa succede alle descrizioni dei ruoli e alle risposte?",
-        "answer": "Le descrizioni dei ruoli servono a creare i colloqui della tua azienda, e le risposte dei candidati a valutarli per la tua azienda. prepza usa anche le risposte aggregate, senza identificare nessuno, per misurare e migliorare la qualità delle domande. L'informativa sulla privacy spiega cosa conserviamo, per quanto tempo e i diritti di ciascuno.",
+        "answer": "Le descrizioni dei ruoli servono a creare i colloqui della tua azienda, e le risposte dei candidati a valutarli per la tua azienda. prepza usa anche le risposte aggregate, senza identificare nessuno, per misurare e migliorare la qualità delle domande. L'[informativa sulla privacy](/privacy) spiega cosa conserviamo, per quanto tempo e i diritti di ciascuno.",
     },
     {
         "key": "emails",
@@ -115,6 +115,6 @@ FAQ = [
     {
         "key": "report",
         "question": "Come segnalo un problema?",
-        "answer": "Scrivici dalla pagina dei contatti e incolla l'ID di ciò di cui si tratta: «copia id» è sotto il nome di un'azienda, di un colloquio o di un candidato, e quello del tuo account è nel menu dell'account e nelle Impostazioni. Con l'ID lo troviamo subito.",
+        "answer": "Scrivici dalla [pagina dei contatti](/contact) e incolla l'ID di ciò di cui si tratta: «copia id» è sotto il nome di un'azienda, di un colloquio o di un candidato, e quello del tuo account è nel menu dell'account e nelle Impostazioni. Con l'ID lo troviamo subito.",
     },
 ]

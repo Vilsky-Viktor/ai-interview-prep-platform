@@ -75,6 +75,8 @@ The articles are `/pre-employment-testing`, `/ai-interviews`, `/compare` and its
 
 `/faq` has the common questions, in the interface language, with today's prices; its intro points to the assistant ("ask agent" in the header) for anything else. Without prices (billing not answering), rounds refuses the FAQ (503) instead of building it with blanks: the site keeps showing the last good page, a role page leaves its FAQ section out, and the help chat answers without prices.
 
+The questions are in `services/rounds/app/constants/faq/<language>.py`; a question not translated yet shows in English. An answer is plain text that may link to the site's own pages as `[text](/path)` (a guide, pricing, the API docs, ...): the page shows it as a link that opens in the same tab, in the address's language (`components/faq-list.tsx`, `FAQ_MARKDOWN` in `lib/markdown.ts`). Only a path on the site becomes a link; any other target stays its text, and the rest of the answer is shown as text. Every language links the same pages as English, in the same order (`tests/unit/test_faq.py`). The FAQ's structured data has each answer as plain text, its links as their text; the help chat and the assistant read the answers with their links as written.
+
 The help chat (rounds' `POST /help/chat`) answers signed-out visitors in the [assistant's panel](assistant.md#the-panel):
 
 - It answers only from the platform guide, the FAQ, the prices, the terms and the privacy policy, and keeps to prepza and hiring with it, like the assistant (`prepza_common.scope.SCOPE_RULE`).

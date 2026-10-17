@@ -125,6 +125,19 @@ test("the FAQ page's structured data lists its questions", async ({ page }) => {
   );
 
   expect(faq.mainEntity.length).toBeGreaterThan(0);
+  // An answer with a link reads as the page shows it: the link's text, without its address.
+  const linked = page
+    .getByRole("main")
+    .locator("details")
+    .filter({ has: page.locator('a[href="/pricing"]') });
+  const question = (await linked.locator("summary").textContent())!.trim();
+  const shown = (await linked.locator("summary + *").textContent())!.trim();
+  const entry = faq.mainEntity.find(
+    (item: { name: string }) => item.name === question,
+  );
+
+  expect(entry.acceptedAnswer.text).toBe(shown);
+  expect(JSON.stringify(faq)).not.toContain("](");
 });
 
 test("an article names its picture, language and date, and shows the date as words", async ({

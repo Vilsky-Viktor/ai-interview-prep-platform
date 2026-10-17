@@ -30,12 +30,12 @@ FAQ = [
     {
         "key": "cheating",
         "question": "Adaylar yapay zekâ kullanabilir ya da cevapları arayabilir mi?",
-        "answer": "Her aday kendi sırasında kendi rastgele sorularını alır ve her sorunun sunucumuzun tuttuğu bir süresi vardır, bu yüzden cevapları aramaya ya da yapay zekâya sormaya pek zaman kalmaz. Değerlendirme kartı ayrıca adayın sayfadan ne zaman ayrıldığını, metin kopyaladığını ya da soruyu okumuş olamayacak kadar hızlı cevap verdiğini gösterir.",
+        "answer": "Her aday kendi sırasında kendi rastgele sorularını alır ve her sorunun sunucumuzun tuttuğu [bir süre sınırı](/guides/skills-test-timing-and-extra-time) vardır, bu yüzden cevapları aramaya ya da yapay zekâya sormaya pek zaman kalmaz. Değerlendirme kartı ayrıca adayın sayfadan ne zaman ayrıldığını, metin kopyaladığını ya da soruyu okumuş olamayacak kadar hızlı cevap verdiğini gösterir.",
     },
     {
         "key": "cost",
         "question": "Ücreti ne kadar?",
-        "answer": "Mülakat oluşturmak ücretsizdir. En az bir soruyu cevaplayan her aday {candidate} kredi ({candidate_dollars} $) tutar; daha büyük yüklemelerden gelen kredilerle daha az, 2 $'a kadar. İlk şirketiniz {company} ücretsiz kredi alır; bu, ilk {company_candidates} adayı için yeterlidir. Fiyatlar sayfasında tüm fiyatlar yer alır.",
+        "answer": "Mülakat oluşturmak ücretsizdir. En az bir soruyu cevaplayan her aday {candidate} kredi ({candidate_dollars} $) tutar; daha büyük yüklemelerden gelen kredilerle daha az, 2 $'a kadar. İlk şirketiniz {company} ücretsiz kredi alır; bu, ilk {company_candidates} adayı için yeterlidir. [Fiyatlar sayfasında](/pricing) tüm fiyatlar yer alır.",
     },
     {
         "key": "charged",
@@ -55,7 +55,7 @@ FAQ = [
     {
         "key": "refunds",
         "question": "Para iadesi alabilir miyim?",
-        "answer": "Evet, son 14 gün içinde satın aldığınız ve harcamadığınız krediler için: Paddle üzerinden veya bize yazarak. Hoş geldin hediyesi gibi ücretsiz krediler iade edilmez. Ayrıntılar koşullarda yer alır.",
+        "answer": "Evet, son 14 gün içinde satın aldığınız ve harcamadığınız krediler için: Paddle üzerinden veya bize yazarak. Hoş geldin hediyesi gibi ücretsiz krediler iade edilmez. Ayrıntılar [koşullarda](/terms) yer alır.",
     },
     {
         "key": "scorecards",
@@ -75,12 +75,12 @@ FAQ = [
     {
         "key": "integrations",
         "question": "prepza, ATS'imle veya diğer araçlarla çalışır mı?",
-        "answer": "Evet, ek ücret olmadan. Workable, Greenhouse, Teamtailor, Recruitee veya Breezy HR'ı şirketinizin Entegrasyonlar sekmesinden bağlayın: bir aşamaya taşıdığınız adaylar mülakatı alır ve sonuçları ATS'ye geri gönderilir. Slack, şirketinizin bildirimlerini bir kanala gönderebilir; API ise kendi platformunuzun mülakat oluşturmasını, adayları davet edip yönetmesini ve sonuçlarını almasını sağlar; her API anahtarı yalnızca onun için işaretlediğiniz işlemleri yapabilir. Ayrıntılar için API belgeleri sayfasına bakın.",
+        "answer": "Evet, ek ücret olmadan. Workable, Greenhouse, Teamtailor, Recruitee veya Breezy HR'ı şirketinizin Entegrasyonlar sekmesinden bağlayın: bir aşamaya taşıdığınız adaylar mülakatı alır ve sonuçları ATS'ye geri gönderilir ([beceri testlerini ATS'nize nasıl bağlarsınız](/guides/ats-integration-skills-tests)). Slack, şirketinizin bildirimlerini bir kanala gönderebilir; API ise kendi platformunuzun mülakat oluşturmasını, adayları davet edip yönetmesini ve sonuçlarını almasını sağlar; her API anahtarı yalnızca onun için işaretlediğiniz işlemleri yapabilir. Ayrıntılar için [API belgeleri](/api-docs) sayfasına bakın.",
     },
     {
         "key": "ai_apps",
         "question": "prepza'yı Claude, ChatGPT veya kendi yapay zekâ ajanımdan kullanabilir miyim?",
-        "answer": "Evet. prepza'yı Claude veya ChatGPT'ye bağlayıcı olarak ekleyin (adımlar şirketinizin Entegrasyonlar sekmesinde) ve prepza'da izin verin. Uygulama bundan sonra sizin adınıza ve sizin yetkilerinizle şirketleriniz, mülakatlarınız ve adayların sonuçlarıyla çalışır; çoğu uygulama bir şeyi değiştirmeden önce size sorar. Hesabınızı veya bir şirketi yalnızca prepza'da silebilirsiniz. Uygulamanın okuduğu veriler, o uygulamanın koşullarına göre sağlayıcısına ulaşır. Bağlantıyı istediğiniz zaman aynı sekmeden kesebilirsiniz. Diğer yapay zekâ uygulamaları ve kendi geliştirdiğiniz ajanlar da bağlanabilir: geliştirici belgelerindeki MCP sekmesinde adımlar ve örnek ajanlar vardır; sunucuda çalışan bir ajan, yapay zekâ ajanları yetkisine sahip bir API anahtarıyla oturum açabilir.",
+        "answer": "Evet. prepza'yı Claude veya ChatGPT'ye bağlayıcı olarak ekleyin (adımlar şirketinizin Entegrasyonlar sekmesinde) ve prepza'da izin verin. Uygulama bundan sonra sizin adınıza ve sizin yetkilerinizle şirketleriniz, mülakatlarınız ve adayların sonuçlarıyla çalışır; çoğu uygulama bir şeyi değiştirmeden önce size sorar. Hesabınızı veya bir şirketi yalnızca prepza'da silebilirsiniz. Uygulamanın okuduğu veriler, o uygulamanın koşullarına göre sağlayıcısına ulaşır. Bağlantıyı istediğiniz zaman aynı sekmeden kesebilirsiniz. Diğer yapay zekâ uygulamaları ve kendi geliştirdiğiniz ajanlar da bağlanabilir: geliştirici belgelerindeki [MCP sekmesinde](/api-docs?tab=mcp) adımlar ve örnek ajanlar vardır; sunucuda çalışan bir ajan, yapay zekâ ajanları yetkisine sahip bir API anahtarıyla oturum açabilir. [Yapay zekâ ajanları, MCP ve API'ler rehberi](/guides/ai-agents-mcp-and-api) her birinin ne işe yaradığını açıklar.",
     },
     {
         "key": "candidates",
@@ -100,7 +100,7 @@ FAQ = [
     {
         "key": "privacy",
         "question": "İş tanımları ve cevaplara ne olur?",
-        "answer": "İş tanımları şirketinizin mülakatlarını hazırlamak, adayların cevapları ise onları şirketiniz adına puanlamak için kullanılır. prepza ayrıca cevapları birleştirilmiş şekilde ve kimseyi tanımlamadan, soruların kalitesini ölçmek ve iyileştirmek için kullanır. Gizlilik politikası neleri, ne kadar süre sakladığımızı ve herkesin haklarını açıklar.",
+        "answer": "İş tanımları şirketinizin mülakatlarını hazırlamak, adayların cevapları ise onları şirketiniz adına puanlamak için kullanılır. prepza ayrıca cevapları birleştirilmiş şekilde ve kimseyi tanımlamadan, soruların kalitesini ölçmek ve iyileştirmek için kullanır. [Gizlilik politikası](/privacy) neleri, ne kadar süre sakladığımızı ve herkesin haklarını açıklar.",
     },
     {
         "key": "emails",
@@ -115,6 +115,6 @@ FAQ = [
     {
         "key": "report",
         "question": "Bir sorunu nasıl bildiririm?",
-        "answer": "İletişim sayfasından bize yazın ve konu olan şeyin ID'sini yapıştırın: “id'yi kopyala” bir şirketin, mülakatın veya adayın adının altında, hesabınızınki ise hesap menüsünde ve Ayarlar'da. ID sayesinde onu hemen buluruz.",
+        "answer": "[İletişim sayfasından](/contact) bize yazın ve konu olan şeyin ID'sini yapıştırın: “id'yi kopyala” bir şirketin, mülakatın veya adayın adının altında, hesabınızınki ise hesap menüsünde ve Ayarlar'da. ID sayesinde onu hemen buluruz.",
     },
 ]

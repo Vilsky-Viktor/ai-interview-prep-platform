@@ -1,3 +1,4 @@
+import re
 import string
 
 from prepza_common.constants import LANGUAGES
@@ -6,6 +7,9 @@ from app.constants.faq import FAQS, with_english
 from app.constants.faq.de import FAQ as GERMAN
 from app.constants.help import PRICES_UNAVAILABLE
 from tests.unit.test_help import CATALOG, fake_catalog
+
+# A link in an answer: [text](/path), to one of the site's own pages.
+LINK = re.compile(r"\[([^\[\]]+)\]\((/[^/\s()][^\s()]*)\)")
 
 
 def test_every_faq_asks_the_english_questions_with_the_same_placeholders():
@@ -97,3 +101,40 @@ def test_faq_groups_large_numbers_as_its_language_does(client, monkeypatch):
     german = client.get("/help/faq", headers={"Accept-Language": "de"}).json()
 
     assert "1.500" in next(item["answer"] for item in german if item["key"] == "cost")
+
+
+def test_faq_links_lead_to_the_english_pages_in_every_language():
+    """An answer's links are the site's own pages, the same ones as in English, each with its
+    text; no bracket is left outside a link, so nothing shows as broken markup."""
+
+    def paths(faq):
+        return {item["key"]: LINK.findall(item["answer"]) for item in faq}
+
+    english = {key: [path for _, path in links] for key, links in paths(FAQS["en"]).items()}
+
+    assert any(english.values())
+
+    for language, faq in FAQS.items():
+        for key, links in paths(faq).items():
+            assert [path for _, path in links] == english[key], (language, key)
+            assert all(text.strip() for text, _ in links), (language, key)
+
+        for item in faq:
+            rest = LINK.sub("", item["answer"])
+
+            assert not re.search(r"[\[\]]|\]\(", rest), (language, item["key"])
+
+
+def test_the_help_chat_reads_faq_links_as_their_text_and_page(client, monkeypatch):
+    from prepza_common import memory_cache
+
+    from app.helpers.help import faq_items
+
+    monkeypatch.setattr(memory_cache, "_entries", {})
+    monkeypatch.setattr("app.services.help.billing.catalog", fake_catalog(CATALOG))
+    cost = next(item for item in faq_items("en", CATALOG) if item["key"] == "cost")
+
+    guide = client.get("/help/guide").text
+
+    assert "/pricing" in [path for _, path in LINK.findall(cost["answer"])]
+    assert f"Q: {cost['question']}\nA: {cost['answer']}" in guide

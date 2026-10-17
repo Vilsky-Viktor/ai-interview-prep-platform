@@ -1,28 +1,28 @@
 ---
-title: "Yapay zekâ asistanları, MCP ve API'ler: nedir ve işe alımda nasıl kullanılır"
-seoTitle: "İşe Alımda Yapay Zekâ Asistanları, MCP ve API'ler: Nedir, Nasıl Kullanılır"
-description: "Yapay zekâ asistanı nedir, MCP ve API ne işe yarar, işe alımda güvenle nasıl kullanılır ve prepza'yı kendi asistanından, Claude ve ChatGPT'den ya da kendi platformunuzdan nasıl kullanırsınız."
+title: "Yapay zekâ ajanları, MCP ve API'ler: nedir ve işe alımda nasıl kullanılır"
+seoTitle: "İşe Alımda Yapay Zekâ Ajanları, MCP ve API'ler: Nedir, Nasıl Kullanılır"
+description: "Yapay zekâ ajanı nedir, MCP ve API ne işe yarar, işe alımda güvenle nasıl kullanılır ve prepza'yı kendi asistanından, Claude ve ChatGPT'den ya da kendi platformunuzdan nasıl kullanırsınız."
 updated: "2026-10-17"
 ---
 
-# Yapay zekâ asistanları, MCP ve API'ler: nedir ve işe alımda nasıl kullanılır
+# Yapay zekâ ajanları, MCP ve API'ler: nedir ve işe alımda nasıl kullanılır
 
-Çoğu kişi yapay zekâyla ilk kez bir sohbet penceresinde tanıştı: siz sorarsınız, o yanıtlar. Bir yapay zekâ asistanı (AI agent) bir adım öteye gider. Araçlarınızda bilgi arayabilir ve siz istediğinizde onlarda işlem yapabilir: bir mülakat oluşturmak, bir aday listesini davet etmek, geçen hafta en yüksek puanı kimin aldığını söylemek gibi. Model Context Protocol (MCP), zaten kullandığınız Claude veya ChatGPT gibi yapay zekâ sohbetinin bu tür araçlara bağlanmasını sağlayan standarttır. API ise yazılımların arada yapay zekâ olmadan birbiriyle konuşmasının daha eski ve daha kesin yoludur.
+Çoğu kişi yapay zekâyla ilk kez bir sohbet penceresinde tanıştı: siz sorarsınız, o yanıtlar. Bir yapay zekâ ajanı (AI agent) bir adım öteye gider. Araçlarınızda bilgi arayabilir ve siz istediğinizde onlarda işlem yapabilir: bir mülakat oluşturmak, bir aday listesini davet etmek, geçen hafta en yüksek puanı kimin aldığını söylemek gibi. Model Context Protocol (MCP), zaten kullandığınız Claude veya ChatGPT gibi yapay zekâ sohbetinin bu tür araçlara bağlanmasını sağlayan standarttır. API ise yazılımların arada yapay zekâ olmadan birbiriyle konuşmasının daha eski ve daha kesin yoludur.
 
 Bu rehber üçünü de sade bir dille, işe alımda ne işe yaradıklarını, nelere dikkat etmeniz gerektiğini ve prepza ile nasıl kullanacağınızı anlatıyor.
 
-## Yapay zekâ asistanı nedir
+## Yapay zekâ ajanı nedir
 
-Bir sohbet botu yalnızca metin yazar. Asistan ise **araçlara** sahip bir dil modelidir: "bu mülakatın adaylarını listele" veya "bu e-posta adresini davet et" gibi, çağırabileceği küçük ve net tanımlı işlemler. Bir şey sorduğunuzda asistan hangi araçları kullanacağına karar verir, onların döndürdüğünü okur ve yanıtını hafızasına göre değil, buna göre verir.
+Bir sohbet botu yalnızca metin yazar. Ajan ise **araçlara** sahip bir dil modelidir: "bu mülakatın adaylarını listele" veya "bu e-posta adresini davet et" gibi, çağırabileceği küçük ve net tanımlı işlemler. Bir şey sorduğunuzda ajan hangi araçları kullanacağına karar verir, onların döndürdüğünü okur ve yanıtını hafızasına göre değil, buna göre verir.
 
-| Sohbet botu | Yapay zekâ asistanı |
+| Sohbet botu | Yapay zekâ ajanı |
 | --- | --- |
 | Eğitimde öğrendiklerine göre yanıtlar | Araçlarla okunan güncel verilerinize göre yanıtlar |
 | Bir şeyin nasıl yapılacağını yalnızca anlatabilir | Siz isteyip izin verdiğinizde onu yapabilir |
 | Bilmediğinde tahmin yürütür | Bakar ya da yapamayacağını söyler |
 | Tek bir pencerede yaşar | Bağladığınız araçların içinde çalışır |
 
-Bir asistanı işe yarar kılan araçlardır; güvenli olup olmadığını belirleyen de yine onlardır. İyi bir asistan yalnızca kendisine verilen araçları, yalnızca sizin yetkilerinizle kullanabilir ve yalnızca sizin istediğinizi yapar.
+Bir ajanı işe yarar kılan araçlardır; güvenli olup olmadığını belirleyen de yine onlardır. İyi bir ajan yalnızca kendisine verilen araçları, yalnızca sizin yetkilerinizle kullanabilir ve yalnızca sizin istediğinizi yapar.
 
 ## MCP nedir
 
@@ -52,14 +52,14 @@ Süreçte bir insan varsa asistanı veya MCP'yi kullanın. Kendi sisteminizin ad
 
 ## İşe alımda ne işe yarar
 
-İşe alımda farklı araçlara dağılmış çok sayıda küçük, tekrarlayan adım vardır. Asistan tam olarak bunlarda iyidir:
+İşe alımda farklı araçlara dağılmış çok sayıda küçük, tekrarlayan adım vardır. Yapay zekâ ajanı tam olarak bunlarda iyidir:
 
 - **Süreçle ilgili sorular.** "Senior Backend için bu hafta hangi adaylar geçti?", "Mülakatına henüz başlamayan kim var?", "Veri analisti pozisyonunda ortalama notumuz ne?"
 - **Kurulum.** "Bu iş tanımından bir mülakat oluştur", "Geçme notunu %70 yap", "Bu adaya %50 ek süre ver."
 - **Toplu işler.** "Bu 12 kişiyi Frontend mülakatına davet et"; liste doğrudan bir e-postadan veya tablodan yapıştırılarak.
 - **Kaynakları birleştirmek.** Claude veya ChatGPT'de prepza'yı bağlı diğer araçlarınız ve dosyalarınızla birlikte kullanabilirsiniz: belgelerinizdeki bir iş tanımını mülakatın konularıyla karşılaştırabilir ya da kısa listedeki adaylara bir mesaj taslağı hazırlayabilirsiniz.
 
-Yapmaması gereken şey ise işe alım kararını vermektir. Not, bir insanın değerlendirmesini destekler, onun yerini almaz. Asistandan sıralamasını, özetlemesini ve hazırlamasını isteyin, kararı bir insana bırakın. Bunun hukuken neden de önemli olduğu için [AB'de yapay zekâ ile işe alım yasal mı?](/guides/is-ai-hiring-legal-in-the-eu) yazısına bakın.
+Yapmaması gereken şey ise işe alım kararını vermektir. Not, bir insanın değerlendirmesini destekler, onun yerini almaz. Ajandan sıralamasını, özetlemesini ve hazırlamasını isteyin, kararı bir insana bırakın. Bunun hukuken neden de önemli olduğu için [AB'de yapay zekâ ile işe alım yasal mı?](/guides/is-ai-hiring-legal-in-the-eu) yazısına bakın.
 
 ## Nelere dikkat etmeli
 
@@ -67,7 +67,7 @@ Bir yapay zekâyı işe alım verilerinize bağlamak, bir iş arkadaşınıza er
 
 | Risk | Ne işe yarar |
 | --- | --- |
-| Asistan kastetmediğiniz bir şey yapar | Değişiklikler önce sizin onayınızı gerektirir ve yalnızca istediğinizi yapar |
+| Ajan kastetmediğiniz bir şey yapar | Değişiklikler önce sizin onayınızı gerektirir ve yalnızca istediğinizi yapar |
 | Görmesi gerekenden fazlasını görür | Sizin adınıza çalışır: sizin gördüğünüzü görür, fazlasını değil |
 | Verilerin içine gizlenmiş talimatlar | Adayların adları, cevapları ve belgeleri veridir, asla uyulacak talimat değildir |
 | Gizli bilgiler sohbete düşer | API anahtarları ve şifreler asla sohbetten geçmez |
@@ -153,8 +153,8 @@ Birlikte de çalışırlar. Bir ekip davetleri İK sisteminden API ile gönderir
 - **Adıyla söyleyin.** "Senior Backend mülakatı", "o mülakat"tan daha iyi sonuç verir.
 - **Önemli olduğunda her seferinde tek bir adım isteyin.** Sonucu kontrol edin, sonra bir sonrakini isteyin.
 - **İzin vermeden önce onay isteğini okuyun.** Neyin çalışacağını tam olarak gösterir.
-- **Bir sayının nereden geldiğini sorun.** İyi bir asistan arkasındaki adayları veya sayfayı gösterebilir.
-- **Kararları insanlara bırakın.** Asistanı bulmak, sıralamak ve hazırlamak için kullanın; kararı siz verin.
+- **Bir sayının nereden geldiğini sorun.** İyi bir ajan arkasındaki adayları veya sayfayı gösterebilir.
+- **Kararları insanlara bırakın.** Ajanı bulmak, sıralamak ve hazırlamak için kullanın; kararı siz verin.
 
 ## Fiyatlandırma
 

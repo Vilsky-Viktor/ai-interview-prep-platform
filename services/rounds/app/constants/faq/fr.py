@@ -30,12 +30,12 @@ FAQ = [
     {
         "key": "cheating",
         "question": "Les candidats peuvent-ils utiliser une IA ou chercher les réponses ?",
-        "answer": "Chaque candidat reçoit ses propres questions aléatoires, dans son propre ordre, avec un minuteur sur chaque question contrôlé par notre serveur, il a donc peu de temps pour chercher les réponses ou demander à une IA. Les résultats montrent aussi quand un candidat a quitté la page, copié du texte ou répondu trop vite pour avoir lu la question.",
+        "answer": "Chaque candidat reçoit ses propres questions aléatoires, dans son propre ordre, avec [un minuteur sur chaque question](/guides/skills-test-timing-and-extra-time) contrôlé par notre serveur, il a donc peu de temps pour chercher les réponses ou demander à une IA. Les résultats montrent aussi quand un candidat a quitté la page, copié du texte ou répondu trop vite pour avoir lu la question.",
     },
     {
         "key": "cost",
         "question": "Combien ça coûte ?",
-        "answer": "La génération d'entretiens est gratuite. Chaque candidat qui répond à au moins une question coûte {candidate} crédits ({candidate_dollars} $), et moins avec les crédits de recharges plus importantes, jusqu'à 2 $. Votre première entreprise reçoit {company} crédits gratuits, de quoi couvrir ses {company_candidates} premiers candidats. La page des tarifs indique tous les prix.",
+        "answer": "La génération d'entretiens est gratuite. Chaque candidat qui répond à au moins une question coûte {candidate} crédits ({candidate_dollars} $), et moins avec les crédits de recharges plus importantes, jusqu'à 2 $. Votre première entreprise reçoit {company} crédits gratuits, de quoi couvrir ses {company_candidates} premiers candidats. La [page des tarifs](/pricing) indique tous les prix.",
     },
     {
         "key": "charged",
@@ -55,7 +55,7 @@ FAQ = [
     {
         "key": "refunds",
         "question": "Puis-je être remboursé ?",
-        "answer": "Oui, pour les crédits achetés au cours des 14 derniers jours et non dépensés : via Paddle ou en nous écrivant. Les crédits offerts, comme le cadeau de bienvenue, ne sont pas remboursés. Les conditions donnent les détails.",
+        "answer": "Oui, pour les crédits achetés au cours des 14 derniers jours et non dépensés : via Paddle ou en nous écrivant. Les crédits offerts, comme le cadeau de bienvenue, ne sont pas remboursés. Les [conditions](/terms) donnent les détails.",
     },
     {
         "key": "scorecards",
@@ -75,12 +75,12 @@ FAQ = [
     {
         "key": "integrations",
         "question": "prepza fonctionne-t-il avec mon ATS ou d'autres outils ?",
-        "answer": "Oui, sans frais supplémentaires. Connectez Workable, Greenhouse, Teamtailor, Recruitee ou Breezy HR dans l'onglet Intégrations de votre entreprise : les candidats que vous déplacez vers une étape reçoivent l'entretien, et leurs résultats reviennent dans l'ATS. Slack peut publier les notifications de votre entreprise dans un canal, et l'API permet à votre propre plateforme de créer des entretiens, d'inviter et de gérer des candidats et de recevoir leurs résultats, chaque clé API étant limitée à ce que vous cochez pour elle ; consultez la Documentation de l'API.",
+        "answer": "Oui, sans frais supplémentaires. Connectez Workable, Greenhouse, Teamtailor, Recruitee ou Breezy HR dans l'onglet Intégrations de votre entreprise : les candidats que vous déplacez vers une étape reçoivent l'entretien, et leurs résultats reviennent dans l'ATS ([comment connecter vos tests de compétences à votre ATS](/guides/ats-integration-skills-tests)). Slack peut publier les notifications de votre entreprise dans un canal, et l'API permet à votre propre plateforme de créer des entretiens, d'inviter et de gérer des candidats et de recevoir leurs résultats, chaque clé API étant limitée à ce que vous cochez pour elle ; consultez la [Documentation de l'API](/api-docs).",
     },
     {
         "key": "ai_apps",
         "question": "Puis-je utiliser prepza depuis Claude, ChatGPT ou mon propre agent IA ?",
-        "answer": "Oui. Ajoutez prepza à Claude ou ChatGPT comme connecteur (les étapes sont dans l'onglet Intégrations de votre entreprise) et autorisez-le sur prepza. L'application travaille alors avec vos entreprises, vos entretiens et les résultats des candidats en votre nom, avec vos droits ; la plupart des applications vous demandent avant de modifier quoi que ce soit. La suppression de votre compte ou d'une entreprise se fait uniquement dans prepza. Ce que l'application lit parvient à son fournisseur, selon les conditions de cette application. Vous pouvez la déconnecter à tout moment dans le même onglet. D'autres applications d'IA et les agents que vous créez vous-même peuvent aussi se connecter : l'onglet MCP de la documentation développeurs donne les étapes et des exemples d'agents, et un agent sur un serveur peut se connecter avec une clé API dotée de l'autorisation pour les agents IA.",
+        "answer": "Oui. Ajoutez prepza à Claude ou ChatGPT comme connecteur (les étapes sont dans l'onglet Intégrations de votre entreprise) et autorisez-le sur prepza. L'application travaille alors avec vos entreprises, vos entretiens et les résultats des candidats en votre nom, avec vos droits ; la plupart des applications vous demandent avant de modifier quoi que ce soit. La suppression de votre compte ou d'une entreprise se fait uniquement dans prepza. Ce que l'application lit parvient à son fournisseur, selon les conditions de cette application. Vous pouvez la déconnecter à tout moment dans le même onglet. D'autres applications d'IA et les agents que vous créez vous-même peuvent aussi se connecter : l'[onglet MCP](/api-docs?tab=mcp) de la documentation développeurs donne les étapes et des exemples d'agents, et un agent sur un serveur peut se connecter avec une clé API dotée de l'autorisation pour les agents IA. Le [guide des agents IA, du MCP et des API](/guides/ai-agents-mcp-and-api) explique à quoi sert chacun.",
     },
     {
         "key": "candidates",
@@ -100,7 +100,7 @@ FAQ = [
     {
         "key": "privacy",
         "question": "Que deviennent les fiches de poste et les réponses ?",
-        "answer": "Les fiches de poste servent à créer les entretiens de votre entreprise, et les réponses des candidats à les noter pour votre entreprise. prepza utilise aussi les réponses agrégées, sans identifier personne, pour mesurer et améliorer la qualité des questions. La politique de confidentialité explique ce que nous conservons, pendant combien de temps, et les droits de chacun.",
+        "answer": "Les fiches de poste servent à créer les entretiens de votre entreprise, et les réponses des candidats à les noter pour votre entreprise. prepza utilise aussi les réponses agrégées, sans identifier personne, pour mesurer et améliorer la qualité des questions. La [politique de confidentialité](/privacy) explique ce que nous conservons, pendant combien de temps, et les droits de chacun.",
     },
     {
         "key": "emails",
@@ -115,6 +115,6 @@ FAQ = [
     {
         "key": "report",
         "question": "Comment signaler un problème ?",
-        "answer": "Écrivez-nous depuis la page de contact et collez l'ID de ce qui est concerné : « copier l'id » se trouve sous le nom d'une entreprise, d'un entretien ou d'un candidat, et celui de votre compte dans le menu de votre compte et dans les Paramètres. Avec l'ID, nous le retrouvons aussitôt.",
+        "answer": "Écrivez-nous depuis la [page de contact](/contact) et collez l'ID de ce qui est concerné : « copier l'id » se trouve sous le nom d'une entreprise, d'un entretien ou d'un candidat, et celui de votre compte dans le menu de votre compte et dans les Paramètres. Avec l'ID, nous le retrouvons aussitôt.",
     },
 ]

@@ -29,12 +29,12 @@ FAQ = [
     {
         "key": "cheating",
         "question": "Can candidates use AI or look up the answers?",
-        "answer": "Every candidate gets their own random questions in their own order, with a timer on each question that our server keeps, so there's little time to look answers up or ask an AI. The scorecard also shows when a candidate left the page, copied text, or answered too fast to have read the question.",
+        "answer": "Every candidate gets their own random questions in their own order, with [a timer on each question](/guides/skills-test-timing-and-extra-time) that our server keeps, so there's little time to look answers up or ask an AI. The scorecard also shows when a candidate left the page, copied text, or answered too fast to have read the question.",
     },
     {
         "key": "cost",
         "question": "How much does it cost?",
-        "answer": "Generating interviews is free. Each candidate who answers at least one question costs {candidate} credits (${candidate_dollars}), and less with credits from larger top-ups, down to $2. Your first company gets {company} free credits, enough for its first {company_candidates} candidates. The pricing page lists every price.",
+        "answer": "Generating interviews is free. Each candidate who answers at least one question costs {candidate} credits (${candidate_dollars}), and less with credits from larger top-ups, down to $2. Your first company gets {company} free credits, enough for its first {company_candidates} candidates. The [pricing page](/pricing) lists every price.",
     },
     {
         "key": "charged",
@@ -54,7 +54,7 @@ FAQ = [
     {
         "key": "refunds",
         "question": "Can I get a refund?",
-        "answer": "Yes, for credits you bought in the last 14 days and haven't spent: through Paddle, or by writing to us. Free credits, such as the welcome gift, aren't refunded. The terms have the details.",
+        "answer": "Yes, for credits you bought in the last 14 days and haven't spent: through Paddle, or by writing to us. Free credits, such as the welcome gift, aren't refunded. The [terms](/terms) have the details.",
     },
     {
         "key": "scorecards",
@@ -74,12 +74,12 @@ FAQ = [
     {
         "key": "integrations",
         "question": "Does prepza work with my ATS or other tools?",
-        "answer": "Yes, at no extra cost. Connect Workable, Greenhouse, Teamtailor, Recruitee or Breezy HR on your company's Integrations tab: candidates you move to a stage get the interview, and their results go back to the ATS. Slack can post your company's notifications to a channel, and the API lets your own platform create interviews, invite and manage candidates and receive their results, with each API key limited to what you tick for it; see the API docs.",
+        "answer": "Yes, at no extra cost. Connect Workable, Greenhouse, Teamtailor, Recruitee or Breezy HR on your company's Integrations tab: candidates you move to a stage get the interview, and their results go back to the ATS ([how to connect skills tests to your ATS](/guides/ats-integration-skills-tests)). Slack can post your company's notifications to a channel, and the API lets your own platform create interviews, invite and manage candidates and receive their results, with each API key limited to what you tick for it; see the [API docs](/api-docs).",
     },
     {
         "key": "ai_apps",
         "question": "Can I use prepza from Claude, ChatGPT or my own AI agent?",
-        "answer": "Yes. Add prepza to Claude or ChatGPT as a connector (the steps are on your company's Integrations tab) and allow it on prepza. The app then works with your companies, interviews and candidates' results as you, with your permissions; most apps ask you before they change anything. Deleting your account or a company is done only in prepza. What the app reads reaches its provider under that app's terms. You can disconnect it at any time on the same tab. Other AI apps and agents you build yourself connect too: the developer docs' MCP tab has the steps and example agents, and an agent on a server can sign in with an API key that has the AI agents permission.",
+        "answer": "Yes. Add prepza to Claude or ChatGPT as a connector (the steps are on your company's Integrations tab) and allow it on prepza. The app then works with your companies, interviews and candidates' results as you, with your permissions; most apps ask you before they change anything. Deleting your account or a company is done only in prepza. What the app reads reaches its provider under that app's terms. You can disconnect it at any time on the same tab. Other AI apps and agents you build yourself connect too: the developer docs' [MCP tab](/api-docs?tab=mcp) has the steps and example agents, and an agent on a server can sign in with an API key that has the AI agents permission. The [guide to AI agents, MCP and APIs](/guides/ai-agents-mcp-and-api) explains what each is for.",
     },
     {
         "key": "candidates",
@@ -99,7 +99,7 @@ FAQ = [
     {
         "key": "privacy",
         "question": "What happens to job descriptions and answers?",
-        "answer": "Job descriptions are used to build your company's interviews, and candidates' answers to score them for your company. prepza also uses answers combined, without identifying anyone, to measure and improve the quality of questions. The privacy policy explains what we keep, for how long, and everyone's rights.",
+        "answer": "Job descriptions are used to build your company's interviews, and candidates' answers to score them for your company. prepza also uses answers combined, without identifying anyone, to measure and improve the quality of questions. The [privacy policy](/privacy) explains what we keep, for how long, and everyone's rights.",
     },
     {
         "key": "emails",
@@ -114,6 +114,6 @@ FAQ = [
     {
         "key": "report",
         "question": "How do I report a problem?",
-        "answer": "Write to us on the contact page and paste the ID of what it's about: \"copy id\" is under the name of a company, an interview or a candidate, and your account's is in your account menu and in Settings. With the ID we find it at once.",
+        "answer": "Write to us on the [contact page](/contact) and paste the ID of what it's about: \"copy id\" is under the name of a company, an interview or a candidate, and your account's is in your account menu and in Settings. With the ID we find it at once.",
     },
 ]

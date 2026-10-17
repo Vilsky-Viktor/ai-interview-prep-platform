@@ -30,12 +30,12 @@ FAQ = [
     {
         "key": "cheating",
         "question": "Ứng viên có thể dùng AI hoặc tra cứu đáp án không?",
-        "answer": "Mỗi ứng viên nhận bộ câu hỏi ngẫu nhiên riêng theo thứ tự riêng, với thời gian giới hạn cho từng câu do máy chủ của chúng tôi theo dõi, nên có rất ít thời gian để tra cứu đáp án hay hỏi AI. Bảng điểm cũng cho thấy khi ứng viên rời trang, sao chép văn bản hoặc trả lời quá nhanh để kịp đọc câu hỏi.",
+        "answer": "Mỗi ứng viên nhận bộ câu hỏi ngẫu nhiên riêng theo thứ tự riêng, với [thời gian giới hạn cho từng câu](/guides/skills-test-timing-and-extra-time) do máy chủ của chúng tôi theo dõi, nên có rất ít thời gian để tra cứu đáp án hay hỏi AI. Bảng điểm cũng cho thấy khi ứng viên rời trang, sao chép văn bản hoặc trả lời quá nhanh để kịp đọc câu hỏi.",
     },
     {
         "key": "cost",
         "question": "Chi phí bao nhiêu?",
-        "answer": "Tạo buổi phỏng vấn là miễn phí. Mỗi ứng viên trả lời ít nhất một câu hỏi tốn {candidate} credit ({candidate_dollars} $), và rẻ hơn với credit từ các lần nạp lớn hơn, xuống tới 2 $. Công ty đầu tiên của bạn nhận {company} credit miễn phí, đủ cho {company_candidates} ứng viên đầu tiên. Trang bảng giá liệt kê mọi mức giá.",
+        "answer": "Tạo buổi phỏng vấn là miễn phí. Mỗi ứng viên trả lời ít nhất một câu hỏi tốn {candidate} credit ({candidate_dollars} $), và rẻ hơn với credit từ các lần nạp lớn hơn, xuống tới 2 $. Công ty đầu tiên của bạn nhận {company} credit miễn phí, đủ cho {company_candidates} ứng viên đầu tiên. [Trang bảng giá](/pricing) liệt kê mọi mức giá.",
     },
     {
         "key": "charged",
@@ -55,7 +55,7 @@ FAQ = [
     {
         "key": "refunds",
         "question": "Tôi có được hoàn tiền không?",
-        "answer": "Có, với credit bạn mua trong 14 ngày gần nhất và chưa dùng: qua Paddle hoặc bằng cách viết cho chúng tôi. Credit miễn phí, như quà chào mừng, không được hoàn. Chi tiết có trong điều khoản.",
+        "answer": "Có, với credit bạn mua trong 14 ngày gần nhất và chưa dùng: qua Paddle hoặc bằng cách viết cho chúng tôi. Credit miễn phí, như quà chào mừng, không được hoàn. Chi tiết có trong [điều khoản](/terms).",
     },
     {
         "key": "scorecards",
@@ -75,12 +75,12 @@ FAQ = [
     {
         "key": "integrations",
         "question": "prepza có hoạt động với ATS hoặc các công cụ khác của tôi không?",
-        "answer": "Có, không mất thêm phí. Kết nối Workable, Greenhouse, Teamtailor, Recruitee hoặc Breezy HR trong tab Tích hợp của công ty bạn: ứng viên bạn chuyển sang một giai đoạn sẽ nhận buổi phỏng vấn, và kết quả được gửi lại ATS. Slack có thể đăng thông báo của công ty vào một kênh, còn API cho phép nền tảng của riêng bạn tạo buổi phỏng vấn, mời và quản lý ứng viên, và nhận kết quả của họ, mỗi khóa API chỉ làm được những gì bạn đánh dấu cho nó; xem Tài liệu API.",
+        "answer": "Có, không mất thêm phí. Kết nối Workable, Greenhouse, Teamtailor, Recruitee hoặc Breezy HR trong tab Tích hợp của công ty bạn: ứng viên bạn chuyển sang một giai đoạn sẽ nhận buổi phỏng vấn, và kết quả được gửi lại ATS ([cách kết nối bài kiểm tra kỹ năng với ATS](/guides/ats-integration-skills-tests)). Slack có thể đăng thông báo của công ty vào một kênh, còn API cho phép nền tảng của riêng bạn tạo buổi phỏng vấn, mời và quản lý ứng viên, và nhận kết quả của họ, mỗi khóa API chỉ làm được những gì bạn đánh dấu cho nó; xem [Tài liệu API](/api-docs).",
     },
     {
         "key": "ai_apps",
         "question": "Tôi có thể dùng prepza từ Claude, ChatGPT hoặc agent AI của riêng tôi không?",
-        "answer": "Có. Thêm prepza vào Claude hoặc ChatGPT dưới dạng trình kết nối (các bước có trong tab Tích hợp của công ty bạn) rồi cho phép trên prepza. Sau đó, ứng dụng sẽ thay mặt bạn, với quyền của bạn, làm việc với các công ty, buổi phỏng vấn và kết quả của ứng viên; hầu hết ứng dụng sẽ hỏi bạn trước khi thay đổi bất cứ điều gì. Tài khoản hoặc công ty chỉ có thể xóa trong prepza. Dữ liệu ứng dụng đọc được sẽ đến nhà cung cấp của ứng dụng đó theo điều khoản của ứng dụng. Bạn có thể ngắt kết nối bất cứ lúc nào trong cùng tab. Các ứng dụng AI khác và agent do bạn tự xây dựng cũng kết nối được: tab MCP trong tài liệu cho nhà phát triển có các bước và agent mẫu, và agent chạy trên máy chủ có thể đăng nhập bằng khóa API có quyền dành cho agent AI.",
+        "answer": "Có. Thêm prepza vào Claude hoặc ChatGPT dưới dạng trình kết nối (các bước có trong tab Tích hợp của công ty bạn) rồi cho phép trên prepza. Sau đó, ứng dụng sẽ thay mặt bạn, với quyền của bạn, làm việc với các công ty, buổi phỏng vấn và kết quả của ứng viên; hầu hết ứng dụng sẽ hỏi bạn trước khi thay đổi bất cứ điều gì. Tài khoản hoặc công ty chỉ có thể xóa trong prepza. Dữ liệu ứng dụng đọc được sẽ đến nhà cung cấp của ứng dụng đó theo điều khoản của ứng dụng. Bạn có thể ngắt kết nối bất cứ lúc nào trong cùng tab. Các ứng dụng AI khác và agent do bạn tự xây dựng cũng kết nối được: [tab MCP](/api-docs?tab=mcp) trong tài liệu cho nhà phát triển có các bước và agent mẫu, và agent chạy trên máy chủ có thể đăng nhập bằng khóa API có quyền dành cho agent AI. [Hướng dẫn về agent AI, MCP và API](/guides/ai-agents-mcp-and-api) giải thích mỗi thứ dùng để làm gì.",
     },
     {
         "key": "candidates",
@@ -100,7 +100,7 @@ FAQ = [
     {
         "key": "privacy",
         "question": "Mô tả công việc và câu trả lời được xử lý thế nào?",
-        "answer": "Mô tả công việc được dùng để tạo các buổi phỏng vấn của công ty bạn, và câu trả lời của ứng viên để chấm điểm cho công ty bạn. prepza cũng sử dụng câu trả lời ở dạng tổng hợp, không nhận dạng bất kỳ ai, để đo lường và cải thiện chất lượng câu hỏi. Chính sách quyền riêng tư giải thích chúng tôi lưu gì, trong bao lâu, và quyền của mọi người.",
+        "answer": "Mô tả công việc được dùng để tạo các buổi phỏng vấn của công ty bạn, và câu trả lời của ứng viên để chấm điểm cho công ty bạn. prepza cũng sử dụng câu trả lời ở dạng tổng hợp, không nhận dạng bất kỳ ai, để đo lường và cải thiện chất lượng câu hỏi. [Chính sách quyền riêng tư](/privacy) giải thích chúng tôi lưu gì, trong bao lâu, và quyền của mọi người.",
     },
     {
         "key": "emails",
@@ -115,6 +115,6 @@ FAQ = [
     {
         "key": "report",
         "question": "Làm sao để báo cáo sự cố?",
-        "answer": "Hãy viết cho chúng tôi qua trang liên hệ và dán ID của đối tượng liên quan: “sao chép id” nằm dưới tên của công ty, buổi phỏng vấn hoặc ứng viên, còn ID tài khoản của bạn nằm trong menu tài khoản và trong Cài đặt. Có ID, chúng tôi tìm thấy ngay.",
+        "answer": "Hãy viết cho chúng tôi qua [trang liên hệ](/contact) và dán ID của đối tượng liên quan: “sao chép id” nằm dưới tên của công ty, buổi phỏng vấn hoặc ứng viên, còn ID tài khoản của bạn nằm trong menu tài khoản và trong Cài đặt. Có ID, chúng tôi tìm thấy ngay.",
     },
 ]

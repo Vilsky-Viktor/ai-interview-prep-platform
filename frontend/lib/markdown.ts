@@ -1,6 +1,6 @@
 import type { Options } from "react-markdown"
 
-import { answerHref } from "@/lib/assistant"
+import { answerHref, inAppHref } from "@/lib/assistant"
 
 // The markdown an assistant's answer may use: text, emphasis, lists, code and links. Anything
 // else (images, tables, headings, raw HTML) shows as its text, or not at all.
@@ -25,4 +25,19 @@ export const ANSWER_MARKDOWN: Options = {
   unwrapDisallowed: true,
   skipHtml: true,
   urlTransform: (url) => answerHref(url),
+}
+
+/** react-markdown's options for a FAQ answer: plain text with links to the site's own pages
+ * ("[pricing](/pricing)"); any other link, and anything else, shows as its text. */
+export const FAQ_MARKDOWN: Options = {
+  allowedElements: ["p", "a"],
+  allowElement: (element) =>
+    element.tagName !== "a" || !!element.properties.href,
+  unwrapDisallowed: true,
+  urlTransform: (url) => inAppHref(url),
+}
+
+/** A FAQ answer as plain text: each link becomes its text. */
+export function plainAnswer(text: string) {
+  return text.replace(/\[([^\]]*)\]\([^)]*\)/g, "$1")
 }

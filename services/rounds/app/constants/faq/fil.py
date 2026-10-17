@@ -30,12 +30,12 @@ FAQ = [
     {
         "key": "cheating",
         "question": "Puwede bang gumamit ng AI ang mga aplikante o hanapin ang mga sagot?",
-        "answer": "Bawat aplikante ay may sariling random na mga tanong sa sarili nilang pagkakasunod-sunod, may timer sa bawat tanong na binabantayan ng aming server, kaya kaunti lang ang oras para maghanap ng sagot o magtanong sa AI. Ipinapakita rin ng scorecard ng aplikante kung kailan siya umalis sa page, kumopya ng text, o sumagot nang masyadong mabilis para nabasa ang tanong.",
+        "answer": "Bawat aplikante ay may sariling random na mga tanong sa sarili nilang pagkakasunod-sunod, may [timer sa bawat tanong](/guides/skills-test-timing-and-extra-time) na binabantayan ng aming server, kaya kaunti lang ang oras para maghanap ng sagot o magtanong sa AI. Ipinapakita rin ng scorecard ng aplikante kung kailan siya umalis sa page, kumopya ng text, o sumagot nang masyadong mabilis para nabasa ang tanong.",
     },
     {
         "key": "cost",
         "question": "Magkano ito?",
-        "answer": "Libre ang paggawa ng interview. Bawat aplikanteng sumagot ng kahit isang tanong ay {candidate} credits (${candidate_dollars}), at mas mura gamit ang credits mula sa mas malalaking top-up, hanggang $2. Makakatanggap ang iyong unang kumpanya ng {company} libreng credits, sapat para sa unang {company_candidates} aplikante nito. Nakalista sa pricing page ang bawat presyo.",
+        "answer": "Libre ang paggawa ng interview. Bawat aplikanteng sumagot ng kahit isang tanong ay {candidate} credits (${candidate_dollars}), at mas mura gamit ang credits mula sa mas malalaking top-up, hanggang $2. Makakatanggap ang iyong unang kumpanya ng {company} libreng credits, sapat para sa unang {company_candidates} aplikante nito. Nakalista sa [pricing page](/pricing) ang bawat presyo.",
     },
     {
         "key": "charged",
@@ -55,7 +55,7 @@ FAQ = [
     {
         "key": "refunds",
         "question": "Puwede ba akong ma-refund?",
-        "answer": "Oo, para sa credits na binili mo sa nakaraang 14 na araw at hindi pa nagagastos: sa Paddle o sa pagsulat sa amin. Hindi nire-refund ang libreng credits, gaya ng welcome gift. Nasa terms ang mga detalye.",
+        "answer": "Oo, para sa credits na binili mo sa nakaraang 14 na araw at hindi pa nagagastos: sa Paddle o sa pagsulat sa amin. Hindi nire-refund ang libreng credits, gaya ng welcome gift. Nasa [terms](/terms) ang mga detalye.",
     },
     {
         "key": "scorecards",
@@ -75,12 +75,12 @@ FAQ = [
     {
         "key": "integrations",
         "question": "Gumagana ba ang prepza sa ATS ko o sa iba pang tool?",
-        "answer": "Oo, nang walang dagdag na bayad. I-connect ang Workable, Greenhouse, Teamtailor, Recruitee o Breezy HR sa tab na Mga integration ng iyong kumpanya: makukuha ng mga aplikanteng ililipat mo sa isang stage ang interview, at babalik sa ATS ang mga resulta nila. Kayang i-post ng Slack ang mga notification ng iyong kumpanya sa isang channel, at sa pamamagitan ng API, makakagawa ang sarili mong platform ng mga interview, makakapag-imbita at makakapamahala ng mga aplikante, at makakatanggap ng mga resulta nila, at limitado ang bawat API key sa kung ano ang i-check mo para rito; tingnan ang Dokumentasyon ng API.",
+        "answer": "Oo, nang walang dagdag na bayad. I-connect ang Workable, Greenhouse, Teamtailor, Recruitee o Breezy HR sa tab na Mga integration ng iyong kumpanya: makukuha ng mga aplikanteng ililipat mo sa isang stage ang interview, at babalik sa ATS ang mga resulta nila ([paano ikonekta ang skills tests sa iyong ATS](/guides/ats-integration-skills-tests)). Kayang i-post ng Slack ang mga notification ng iyong kumpanya sa isang channel, at sa pamamagitan ng API, makakagawa ang sarili mong platform ng mga interview, makakapag-imbita at makakapamahala ng mga aplikante, at makakatanggap ng mga resulta nila, at limitado ang bawat API key sa kung ano ang i-check mo para rito; tingnan ang [Dokumentasyon ng API](/api-docs).",
     },
     {
         "key": "ai_apps",
         "question": "Puwede ko bang gamitin ang prepza mula sa Claude, ChatGPT o sarili kong AI agent?",
-        "answer": "Oo. Idagdag ang prepza sa Claude o ChatGPT bilang connector (nasa tab na Mga integration ng iyong kumpanya ang mga hakbang) at payagan ito sa prepza. Pagkatapos, gagamitin ng app ang iyong mga kumpanya, interview at resulta ng mga aplikante bilang ikaw, gamit ang mga pahintulot mo; karamihan sa mga app ay nagtatanong muna bago may baguhin. Sa prepza lang mabubura ang account mo o ang isang kumpanya. Ang nababasa ng app ay napupunta sa provider nito, ayon sa mga tuntunin ng app na iyon. Puwede mo itong i-disconnect anumang oras sa parehong tab. Puwede ring kumonekta ang ibang AI app at mga agent na ikaw mismo ang gumawa: nasa tab na MCP ng dokumentasyon para sa mga developer ang mga hakbang at mga halimbawang agent, at puwedeng mag-sign in ang agent sa server gamit ang API key na may pahintulot para sa mga AI agent.",
+        "answer": "Oo. Idagdag ang prepza sa Claude o ChatGPT bilang connector (nasa tab na Mga integration ng iyong kumpanya ang mga hakbang) at payagan ito sa prepza. Pagkatapos, gagamitin ng app ang iyong mga kumpanya, interview at resulta ng mga aplikante bilang ikaw, gamit ang mga pahintulot mo; karamihan sa mga app ay nagtatanong muna bago may baguhin. Sa prepza lang mabubura ang account mo o ang isang kumpanya. Ang nababasa ng app ay napupunta sa provider nito, ayon sa mga tuntunin ng app na iyon. Puwede mo itong i-disconnect anumang oras sa parehong tab. Puwede ring kumonekta ang ibang AI app at mga agent na ikaw mismo ang gumawa: nasa [tab na MCP](/api-docs?tab=mcp) ng dokumentasyon para sa mga developer ang mga hakbang at mga halimbawang agent, at puwedeng mag-sign in ang agent sa server gamit ang API key na may pahintulot para sa mga AI agent. Ipinapaliwanag ng [gabay sa AI agents, MCP at APIs](/guides/ai-agents-mcp-and-api) kung para saan ang bawat isa.",
     },
     {
         "key": "candidates",
@@ -100,7 +100,7 @@ FAQ = [
     {
         "key": "privacy",
         "question": "Ano ang nangyayari sa mga job description at mga sagot?",
-        "answer": "Ginagamit ang mga job description para buuin ang mga interview ng iyong kumpanya, at ang mga sagot ng aplikante para i-score ang mga ito para sa iyong kumpanya. Ginagamit din ng prepza ang mga sagot nang pinagsama-sama at nang hindi kinikilala ang sinuman, para sukatin at pahusayin ang kalidad ng mga tanong. Ipinapaliwanag ng privacy policy kung ano ang itinatago namin, gaano katagal, at ang mga karapatan ng lahat.",
+        "answer": "Ginagamit ang mga job description para buuin ang mga interview ng iyong kumpanya, at ang mga sagot ng aplikante para i-score ang mga ito para sa iyong kumpanya. Ginagamit din ng prepza ang mga sagot nang pinagsama-sama at nang hindi kinikilala ang sinuman, para sukatin at pahusayin ang kalidad ng mga tanong. Ipinapaliwanag ng [privacy policy](/privacy) kung ano ang itinatago namin, gaano katagal, at ang mga karapatan ng lahat.",
     },
     {
         "key": "emails",
@@ -115,6 +115,6 @@ FAQ = [
     {
         "key": "report",
         "question": "Paano ako mag-uulat ng problema?",
-        "answer": "Sumulat sa amin sa page na Makipag-ugnayan at i-paste ang ID ng tinutukoy mo: nasa ilalim ng pangalan ng kumpanya, interview o aplikante ang “kopyahin ang id”, at nasa menu ng account mo at sa Mga setting ang ID ng iyong account. Sa ID, agad namin itong mahahanap.",
+        "answer": "Sumulat sa amin sa [page na Makipag-ugnayan](/contact) at i-paste ang ID ng tinutukoy mo: nasa ilalim ng pangalan ng kumpanya, interview o aplikante ang “kopyahin ang id”, at nasa menu ng account mo at sa Mga setting ang ID ng iyong account. Sa ID, agad namin itong mahahanap.",
     },
 ]

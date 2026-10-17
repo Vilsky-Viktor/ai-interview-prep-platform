@@ -30,12 +30,12 @@ FAQ = [
     {
         "key": "cheating",
         "question": "Kunnen kandidaten AI gebruiken of de antwoorden opzoeken?",
-        "answer": "Elke kandidaat krijgt eigen willekeurige vragen in een eigen volgorde, met een timer bij elke vraag die onze server bijhoudt, dus er is weinig tijd om antwoorden op te zoeken of het een AI te vragen. De resultaten laten ook zien wanneer een kandidaat de pagina verliet, tekst kopieerde of te snel antwoordde om de vraag te hebben gelezen.",
+        "answer": "Elke kandidaat krijgt eigen willekeurige vragen in een eigen volgorde, met [een timer bij elke vraag](/guides/skills-test-timing-and-extra-time) die onze server bijhoudt, dus er is weinig tijd om antwoorden op te zoeken of het een AI te vragen. De resultaten laten ook zien wanneer een kandidaat de pagina verliet, tekst kopieerde of te snel antwoordde om de vraag te hebben gelezen.",
     },
     {
         "key": "cost",
         "question": "Wat kost het?",
-        "answer": "Interviews genereren is gratis. Elke kandidaat die minstens één vraag beantwoordt, kost {candidate} credits ({candidate_dollars} $), en minder met credits uit grotere opwaarderingen, tot 2 $. Je eerste bedrijf krijgt {company} gratis credits, genoeg voor de eerste {company_candidates} kandidaten. De prijzenpagina toont elke prijs.",
+        "answer": "Interviews genereren is gratis. Elke kandidaat die minstens één vraag beantwoordt, kost {candidate} credits ({candidate_dollars} $), en minder met credits uit grotere opwaarderingen, tot 2 $. Je eerste bedrijf krijgt {company} gratis credits, genoeg voor de eerste {company_candidates} kandidaten. De [prijzenpagina](/pricing) toont elke prijs.",
     },
     {
         "key": "charged",
@@ -55,7 +55,7 @@ FAQ = [
     {
         "key": "refunds",
         "question": "Kan ik mijn geld terugkrijgen?",
-        "answer": "Ja, voor credits die je de afgelopen 14 dagen hebt gekocht en nog niet hebt besteed: via Paddle of door ons te schrijven. Gratis credits, zoals het welkomstcadeau, worden niet terugbetaald. De voorwaarden geven de details.",
+        "answer": "Ja, voor credits die je de afgelopen 14 dagen hebt gekocht en nog niet hebt besteed: via Paddle of door ons te schrijven. Gratis credits, zoals het welkomstcadeau, worden niet terugbetaald. De [voorwaarden](/terms) geven de details.",
     },
     {
         "key": "scorecards",
@@ -75,12 +75,12 @@ FAQ = [
     {
         "key": "integrations",
         "question": "Werkt prepza met mijn ATS of andere tools?",
-        "answer": "Ja, zonder extra kosten. Koppel Workable, Greenhouse, Teamtailor, Recruitee of Breezy HR op het tabblad Integraties van je bedrijf: kandidaten die je naar een fase verplaatst, krijgen het interview, en hun resultaten gaan terug naar het ATS. Slack kan de meldingen van je bedrijf in een kanaal plaatsen, en met de API kan je eigen platform interviews aanmaken, kandidaten uitnodigen en beheren en hun resultaten ontvangen, waarbij elke API-sleutel alleen mag wat je ervoor aanvinkt; zie de API-documentatie.",
+        "answer": "Ja, zonder extra kosten. Koppel Workable, Greenhouse, Teamtailor, Recruitee of Breezy HR op het tabblad Integraties van je bedrijf: kandidaten die je naar een fase verplaatst, krijgen het interview, en hun resultaten gaan terug naar het ATS ([zo koppel je vaardigheidstests aan je ATS](/guides/ats-integration-skills-tests)). Slack kan de meldingen van je bedrijf in een kanaal plaatsen, en met de API kan je eigen platform interviews aanmaken, kandidaten uitnodigen en beheren en hun resultaten ontvangen, waarbij elke API-sleutel alleen mag wat je ervoor aanvinkt; zie de [API-documentatie](/api-docs).",
     },
     {
         "key": "ai_apps",
         "question": "Kan ik prepza vanuit Claude, ChatGPT of mijn eigen AI-agent gebruiken?",
-        "answer": "Ja. Voeg prepza als connector toe aan Claude of ChatGPT (de stappen staan op het tabblad Integraties van je bedrijf) en sta het toe in prepza. De app werkt dan namens jou en met jouw rechten met je bedrijven, interviews en de resultaten van kandidaten; de meeste apps vragen het je voordat ze iets wijzigen. Je account of een bedrijf verwijder je alleen in prepza. Wat de app leest, gaat naar de aanbieder ervan, onder de voorwaarden van die app. Je kunt de app altijd ontkoppelen op hetzelfde tabblad. Ook andere AI-apps en agents die je zelf bouwt kunnen verbinden: het MCP-tabblad van de ontwikkelaarsdocumentatie heeft de stappen en voorbeeldagents, en een agent op een server kan zich aanmelden met een API-sleutel die het recht voor AI-agents heeft.",
+        "answer": "Ja. Voeg prepza als connector toe aan Claude of ChatGPT (de stappen staan op het tabblad Integraties van je bedrijf) en sta het toe in prepza. De app werkt dan namens jou en met jouw rechten met je bedrijven, interviews en de resultaten van kandidaten; de meeste apps vragen het je voordat ze iets wijzigen. Je account of een bedrijf verwijder je alleen in prepza. Wat de app leest, gaat naar de aanbieder ervan, onder de voorwaarden van die app. Je kunt de app altijd ontkoppelen op hetzelfde tabblad. Ook andere AI-apps en agents die je zelf bouwt kunnen verbinden: het [MCP-tabblad](/api-docs?tab=mcp) van de ontwikkelaarsdocumentatie heeft de stappen en voorbeeldagents, en een agent op een server kan zich aanmelden met een API-sleutel die het recht voor AI-agents heeft. De [gids over AI-agents, MCP en API's](/guides/ai-agents-mcp-and-api) legt uit waarvoor elk ervan dient.",
     },
     {
         "key": "candidates",
@@ -100,7 +100,7 @@ FAQ = [
     {
         "key": "privacy",
         "question": "Wat gebeurt er met functieomschrijvingen en antwoorden?",
-        "answer": "Functieomschrijvingen worden gebruikt om de interviews van jouw bedrijf te maken, en de antwoorden van kandidaten om ze voor jouw bedrijf te beoordelen. prepza gebruikt antwoorden ook samengevoegd, zonder iemand te identificeren, om de kwaliteit van vragen te meten en te verbeteren. Het privacybeleid legt uit wat we bewaren, hoe lang en welke rechten iedereen heeft.",
+        "answer": "Functieomschrijvingen worden gebruikt om de interviews van jouw bedrijf te maken, en de antwoorden van kandidaten om ze voor jouw bedrijf te beoordelen. prepza gebruikt antwoorden ook samengevoegd, zonder iemand te identificeren, om de kwaliteit van vragen te meten en te verbeteren. Het [privacybeleid](/privacy) legt uit wat we bewaren, hoe lang en welke rechten iedereen heeft.",
     },
     {
         "key": "emails",
@@ -115,6 +115,6 @@ FAQ = [
     {
         "key": "report",
         "question": "Hoe meld ik een probleem?",
-        "answer": "Schrijf ons via de contactpagina en plak de ID van waar het om gaat: “id kopiëren” staat onder de naam van een bedrijf, een interview of een kandidaat, en die van je account in je accountmenu en in Instellingen. Met de ID vinden we het meteen.",
+        "answer": "Schrijf ons via de [contactpagina](/contact) en plak de ID van waar het om gaat: “id kopiëren” staat onder de naam van een bedrijf, een interview of een kandidaat, en die van je account in je accountmenu en in Instellingen. Met de ID vinden we het meteen.",
     },
 ]

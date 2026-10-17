@@ -30,12 +30,12 @@ FAQ = [
     {
         "key": "cheating",
         "question": "Czy kandydaci mogą korzystać z AI albo szukać odpowiedzi?",
-        "answer": "Każdy kandydat dostaje własne losowe pytania we własnej kolejności, z limitem czasu na każde pytanie pilnowanym przez nasz serwer, więc zostaje niewiele czasu na szukanie odpowiedzi czy pytanie AI. Wyniki pokazują też, kiedy kandydat opuścił stronę, skopiował tekst albo odpowiedział zbyt szybko, by przeczytać pytanie.",
+        "answer": "Każdy kandydat dostaje własne losowe pytania we własnej kolejności, z [limitem czasu na każde pytanie](/guides/skills-test-timing-and-extra-time) pilnowanym przez nasz serwer, więc zostaje niewiele czasu na szukanie odpowiedzi czy pytanie AI. Wyniki pokazują też, kiedy kandydat opuścił stronę, skopiował tekst albo odpowiedział zbyt szybko, by przeczytać pytanie.",
     },
     {
         "key": "cost",
         "question": "Ile to kosztuje?",
-        "answer": "Generowanie rozmów jest darmowe. Każdy kandydat, który odpowie na co najmniej jedno pytanie, kosztuje {candidate} kredytów ({candidate_dollars} $), a mniej z kredytami z większych doładowań, nawet 2 $. Twoja pierwsza firma dostaje {company} darmowych kredytów, co wystarczy na pierwszych {company_candidates} kandydatów. Wszystkie ceny są na stronie cennika.",
+        "answer": "Generowanie rozmów jest darmowe. Każdy kandydat, który odpowie na co najmniej jedno pytanie, kosztuje {candidate} kredytów ({candidate_dollars} $), a mniej z kredytami z większych doładowań, nawet 2 $. Twoja pierwsza firma dostaje {company} darmowych kredytów, co wystarczy na pierwszych {company_candidates} kandydatów. Wszystkie ceny są na [stronie cennika](/pricing).",
     },
     {
         "key": "charged",
@@ -55,7 +55,7 @@ FAQ = [
     {
         "key": "refunds",
         "question": "Czy mogę dostać zwrot?",
-        "answer": "Tak, za kredyty kupione w ciągu ostatnich 14 dni i jeszcze niewydane: przez Paddle lub pisząc do nas. Darmowe kredyty, takie jak prezent powitalny, nie podlegają zwrotowi. Szczegóły są w regulaminie.",
+        "answer": "Tak, za kredyty kupione w ciągu ostatnich 14 dni i jeszcze niewydane: przez Paddle lub pisząc do nas. Darmowe kredyty, takie jak prezent powitalny, nie podlegają zwrotowi. Szczegóły są w [regulaminie](/terms).",
     },
     {
         "key": "scorecards",
@@ -75,12 +75,12 @@ FAQ = [
     {
         "key": "integrations",
         "question": "Czy prepza działa z moim ATS lub innymi narzędziami?",
-        "answer": "Tak, bez dodatkowych opłat. Połącz Workable, Greenhouse, Teamtailor, Recruitee lub Breezy HR w zakładce Integracje swojej firmy: kandydaci, których przeniesiesz na etap, dostają rozmowę, a ich wyniki wracają do ATS. Slack może publikować powiadomienia firmy na kanale, a API pozwala Twojej własnej platformie tworzyć rozmowy, zapraszać kandydatów i zarządzać nimi oraz odbierać ich wyniki, a każdy klucz API może tylko to, co dla niego zaznaczysz; zobacz: Dokumentacja API.",
+        "answer": "Tak, bez dodatkowych opłat. Połącz Workable, Greenhouse, Teamtailor, Recruitee lub Breezy HR w zakładce Integracje swojej firmy: kandydaci, których przeniesiesz na etap, dostają rozmowę, a ich wyniki wracają do ATS ([jak połączyć testy umiejętności z ATS](/guides/ats-integration-skills-tests)). Slack może publikować powiadomienia firmy na kanale, a API pozwala Twojej własnej platformie tworzyć rozmowy, zapraszać kandydatów i zarządzać nimi oraz odbierać ich wyniki, a każdy klucz API może tylko to, co dla niego zaznaczysz; zobacz: [Dokumentacja API](/api-docs).",
     },
     {
         "key": "ai_apps",
         "question": "Czy mogę korzystać z prepza w Claude, ChatGPT lub we własnym agencie AI?",
-        "answer": "Tak. Dodaj prepza do Claude lub ChatGPT jako konektor (kroki znajdziesz w zakładce Integracje swojej firmy) i zezwól na dostęp w prepza. Aplikacja działa wtedy w Twoim imieniu i z Twoimi uprawnieniami na Twoich firmach, rozmowach i wynikach kandydatów; większość aplikacji pyta Cię o zgodę, zanim cokolwiek zmieni. Konto lub firmę usuniesz tylko w prepza. To, co aplikacja odczyta, trafia do jej dostawcy na warunkach tej aplikacji. Możesz ją odłączyć w każdej chwili w tej samej zakładce. Połączyć można też inne aplikacje AI i agentów, których tworzysz samodzielnie: zakładka MCP w dokumentacji dla deweloperów zawiera kroki i przykłady agentów, a agent na serwerze może się logować kluczem API z uprawnieniem do agentów AI.",
+        "answer": "Tak. Dodaj prepza do Claude lub ChatGPT jako konektor (kroki znajdziesz w zakładce Integracje swojej firmy) i zezwól na dostęp w prepza. Aplikacja działa wtedy w Twoim imieniu i z Twoimi uprawnieniami na Twoich firmach, rozmowach i wynikach kandydatów; większość aplikacji pyta Cię o zgodę, zanim cokolwiek zmieni. Konto lub firmę usuniesz tylko w prepza. To, co aplikacja odczyta, trafia do jej dostawcy na warunkach tej aplikacji. Możesz ją odłączyć w każdej chwili w tej samej zakładce. Połączyć można też inne aplikacje AI i agentów, których tworzysz samodzielnie: [zakładka MCP](/api-docs?tab=mcp) w dokumentacji dla deweloperów zawiera kroki i przykłady agentów, a agent na serwerze może się logować kluczem API z uprawnieniem do agentów AI. [Przewodnik po agentach AI, MCP i API](/guides/ai-agents-mcp-and-api) wyjaśnia, do czego służy każde z nich.",
     },
     {
         "key": "candidates",
@@ -100,7 +100,7 @@ FAQ = [
     {
         "key": "privacy",
         "question": "Co dzieje się z opisami stanowisk i odpowiedziami?",
-        "answer": "Opisy stanowisk służą do tworzenia rozmów Twojej firmy, a odpowiedzi kandydatów do ich oceny na potrzeby Twojej firmy. prepza wykorzystuje też odpowiedzi w formie zagregowanej, bez identyfikowania kogokolwiek, do mierzenia i poprawy jakości pytań. Polityka prywatności wyjaśnia, co przechowujemy, jak długo i jakie prawa przysługują każdemu.",
+        "answer": "Opisy stanowisk służą do tworzenia rozmów Twojej firmy, a odpowiedzi kandydatów do ich oceny na potrzeby Twojej firmy. prepza wykorzystuje też odpowiedzi w formie zagregowanej, bez identyfikowania kogokolwiek, do mierzenia i poprawy jakości pytań. [Polityka prywatności](/privacy) wyjaśnia, co przechowujemy, jak długo i jakie prawa przysługują każdemu.",
     },
     {
         "key": "emails",
@@ -115,6 +115,6 @@ FAQ = [
     {
         "key": "report",
         "question": "Jak zgłosić problem?",
-        "answer": "Napisz do nas na stronie kontaktowej i wklej ID tego, czego dotyczy sprawa: „kopiuj id” jest pod nazwą firmy, rozmowy lub kandydata, a ID Twojego konta — w menu konta i w Ustawieniach. Dzięki ID od razu to znajdziemy.",
+        "answer": "Napisz do nas na [stronie kontaktowej](/contact) i wklej ID tego, czego dotyczy sprawa: „kopiuj id” jest pod nazwą firmy, rozmowy lub kandydata, a ID Twojego konta — w menu konta i w Ustawieniach. Dzięki ID od razu to znajdziemy.",
     },
 ]

@@ -1,28 +1,28 @@
 ---
-title: "Trợ lý AI, MCP và API: là gì và cách dùng trong tuyển dụng"
-seoTitle: "Trợ lý AI (AI agent), MCP và API trong tuyển dụng: là gì và cách dùng"
-description: "Trợ lý AI là gì, MCP và API làm gì, cách dùng chúng an toàn trong tuyển dụng, và cách vận hành prepza từ trợ lý AI của nó, từ Claude và ChatGPT, hoặc từ nền tảng riêng của bạn."
+title: "Agent AI, MCP và API: là gì và cách dùng trong tuyển dụng"
+seoTitle: "Agent AI, MCP và API trong tuyển dụng: là gì và cách dùng"
+description: "Agent AI là gì, MCP và API làm gì, cách dùng chúng an toàn trong tuyển dụng, và cách vận hành prepza từ trợ lý AI của nó, từ Claude và ChatGPT, hoặc từ nền tảng riêng của bạn."
 updated: "2026-10-17"
 ---
 
-# Trợ lý AI, MCP và API: là gì và cách dùng trong tuyển dụng
+# Agent AI, MCP và API: là gì và cách dùng trong tuyển dụng
 
-Hầu hết mọi người làm quen với AI lần đầu qua một cửa sổ chat: bạn hỏi, AI trả lời. Trợ lý AI (AI agent) tiến thêm một bước. Nó có thể tra cứu trong các công cụ của bạn và, khi bạn yêu cầu, thực hiện việc trong đó: tạo một buổi phỏng vấn, mời cả một danh sách ứng viên, cho bạn biết ai đạt điểm cao nhất tuần trước. Model Context Protocol (MCP) là tiêu chuẩn cho phép ứng dụng chat AI bạn đang dùng, như Claude hay ChatGPT, kết nối với những công cụ như vậy. Còn API là cách lâu đời hơn và chính xác hơn để phần mềm giao tiếp với phần mềm, không có AI ở giữa.
+Hầu hết mọi người làm quen với AI lần đầu qua một cửa sổ chat: bạn hỏi, AI trả lời. Agent AI tiến thêm một bước. Nó có thể tra cứu trong các công cụ của bạn và, khi bạn yêu cầu, thực hiện việc trong đó: tạo một buổi phỏng vấn, mời cả một danh sách ứng viên, cho bạn biết ai đạt điểm cao nhất tuần trước. Model Context Protocol (MCP) là tiêu chuẩn cho phép ứng dụng chat AI bạn đang dùng, như Claude hay ChatGPT, kết nối với những công cụ như vậy. Còn API là cách lâu đời hơn và chính xác hơn để phần mềm giao tiếp với phần mềm, không có AI ở giữa.
 
 Hướng dẫn này giải thích cả ba bằng ngôn ngữ dễ hiểu: chúng hữu ích gì trong tuyển dụng, cần lưu ý điều gì, và cách dùng chúng với prepza.
 
-## Trợ lý AI là gì
+## Agent AI là gì
 
-Chatbot chỉ viết ra văn bản. Trợ lý AI là một mô hình ngôn ngữ có **công cụ (tools)**: những thao tác nhỏ, được định nghĩa rõ ràng mà nó được phép gọi, chẳng hạn "liệt kê ứng viên của buổi phỏng vấn này" hay "mời email này". Khi bạn hỏi, trợ lý quyết định dùng công cụ nào, đọc kết quả trả về và trả lời dựa trên đó, chứ không dựa vào trí nhớ.
+Chatbot chỉ viết ra văn bản. Agent AI là một mô hình ngôn ngữ có **công cụ (tools)**: những thao tác nhỏ, được định nghĩa rõ ràng mà nó được phép gọi, chẳng hạn "liệt kê ứng viên của buổi phỏng vấn này" hay "mời email này". Khi bạn hỏi, agent quyết định dùng công cụ nào, đọc kết quả trả về và trả lời dựa trên đó, chứ không dựa vào trí nhớ.
 
-| Chatbot | Trợ lý AI |
+| Chatbot | Agent AI |
 | --- | --- |
 | Trả lời từ những gì đã học khi huấn luyện | Trả lời từ dữ liệu hiện tại của bạn, được đọc qua công cụ |
 | Chỉ có thể mô tả cách làm một việc | Có thể làm việc đó, khi bạn yêu cầu và cho phép |
 | Đoán khi không biết | Tra cứu, hoặc nói rằng nó không làm được |
 | Chỉ nằm trong một cửa sổ | Làm việc bên trong các công cụ bạn kết nối với nó |
 
-Chính các công cụ làm nên giá trị của trợ lý AI, và cũng quyết định nó an toàn hay không. Một trợ lý tốt chỉ dùng được những công cụ được cấp, chỉ trong phạm vi quyền của bạn, và chỉ làm những gì bạn yêu cầu.
+Chính các công cụ làm nên giá trị của agent AI, và cũng quyết định nó an toàn hay không. Một agent tốt chỉ dùng được những công cụ được cấp, chỉ trong phạm vi quyền của bạn, và chỉ làm những gì bạn yêu cầu.
 
 ## MCP là gì
 
@@ -52,14 +52,14 @@ Hãy dùng trợ lý AI hoặc MCP khi có người trực tiếp tham gia. Hãy
 
 ## Hữu ích gì trong tuyển dụng
 
-Tuyển dụng có rất nhiều bước nhỏ, lặp đi lặp lại, nằm rải rác trên nhiều công cụ. Trợ lý AI làm tốt chính những việc đó:
+Tuyển dụng có rất nhiều bước nhỏ, lặp đi lặp lại, nằm rải rác trên nhiều công cụ. Agent AI làm tốt chính những việc đó:
 
 - **Câu hỏi về quy trình tuyển dụng của bạn.** "Những ứng viên Senior Backend nào đã đạt trong tuần này?", "Ai chưa bắt đầu buổi phỏng vấn?", "Điểm trung bình của chúng ta cho vị trí data analyst là bao nhiêu?"
 - **Thiết lập.** "Tạo buổi phỏng vấn từ mô tả công việc này", "Đặt điểm đạt là 70%", "Cho ứng viên này thêm 50% thời gian."
 - **Việc hàng loạt.** "Mời 12 người này tham gia buổi phỏng vấn frontend", dán thẳng từ email hoặc bảng tính.
 - **Kết hợp nhiều nguồn.** Trong Claude hoặc ChatGPT, bạn có thể kết hợp prepza với các công cụ và tệp khác đã kết nối: so sánh mô tả công việc trong tài liệu của bạn với các chủ đề của buổi phỏng vấn, hoặc soạn tin nhắn cho các ứng viên lọt vào danh sách rút gọn.
 
-Điều nó không nên làm là đưa ra quyết định tuyển dụng. Điểm số hỗ trợ đánh giá của con người, không thay thế nó. Hãy để trợ lý sắp xếp, tóm tắt và chuẩn bị, còn quyết định thì để con người đưa ra. Xem [Dùng AI trong tuyển dụng có hợp pháp ở EU không?](/guides/is-ai-hiring-legal-in-the-eu) để hiểu vì sao điều đó cũng quan trọng về mặt pháp lý.
+Điều nó không nên làm là đưa ra quyết định tuyển dụng. Điểm số hỗ trợ đánh giá của con người, không thay thế nó. Hãy để agent sắp xếp, tóm tắt và chuẩn bị, còn quyết định thì để con người đưa ra. Xem [Dùng AI trong tuyển dụng có hợp pháp ở EU không?](/guides/is-ai-hiring-legal-in-the-eu) để hiểu vì sao điều đó cũng quan trọng về mặt pháp lý.
 
 ## Cần lưu ý điều gì
 
@@ -67,7 +67,7 @@ Kết nối AI với dữ liệu tuyển dụng cần được cân nhắc cẩn
 
 | Rủi ro | Điều giúp ích |
 | --- | --- |
-| Trợ lý làm điều bạn không có ý định | Thay đổi cần bạn duyệt trước, và nó chỉ làm đúng điều bạn yêu cầu |
+| Agent làm điều bạn không có ý định | Thay đổi cần bạn duyệt trước, và nó chỉ làm đúng điều bạn yêu cầu |
 | Nó thấy nhiều hơn mức cần thiết | Nó hành động dưới danh nghĩa của bạn: thấy những gì bạn thấy, không hơn |
 | Chỉ dẫn ẩn trong dữ liệu | Tên, câu trả lời và tài liệu của ứng viên là dữ liệu, không bao giờ là chỉ dẫn để làm theo |
 | Thông tin bí mật lọt vào chat | Khóa API và mật khẩu không bao giờ đi qua chat |
@@ -153,8 +153,8 @@ Chúng cũng có thể dùng cùng nhau. Một nhóm có thể gửi lời mời
 - **Gọi đúng tên.** "Buổi phỏng vấn Senior Backend" hiệu quả hơn "buổi phỏng vấn đó".
 - **Yêu cầu từng bước một** khi việc đó quan trọng. Kiểm tra kết quả, rồi mới yêu cầu bước tiếp theo.
 - **Đọc yêu cầu phê duyệt trước khi cho phép.** Nó cho thấy chính xác những gì sẽ chạy.
-- **Hỏi một con số từ đâu ra.** Một trợ lý tốt có thể chỉ ra các ứng viên hoặc trang đứng sau con số đó.
-- **Để con người quyết định.** Dùng trợ lý AI để tìm, sắp xếp và chuẩn bị; còn quyết định là của bạn.
+- **Hỏi một con số từ đâu ra.** Một agent tốt có thể chỉ ra các ứng viên hoặc trang đứng sau con số đó.
+- **Để con người quyết định.** Dùng agent AI để tìm, sắp xếp và chuẩn bị; còn quyết định là của bạn.
 
 ## Giá
 

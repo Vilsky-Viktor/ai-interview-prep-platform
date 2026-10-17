@@ -30,12 +30,12 @@ FAQ = [
     {
         "key": "cheating",
         "question": "Können Kandidaten KI nutzen oder die Antworten nachschlagen?",
-        "answer": "Jeder Kandidat bekommt eigene, zufällige Fragen in eigener Reihenfolge, mit einem Zeitlimit für jede Frage, das unser Server überwacht, also bleibt wenig Zeit, Antworten nachzuschlagen oder eine KI zu fragen. Die Auswertung zeigt außerdem, wann ein Kandidat die Seite verlassen, Text kopiert oder zu schnell geantwortet hat, um die Frage gelesen zu haben.",
+        "answer": "Jeder Kandidat bekommt eigene, zufällige Fragen in eigener Reihenfolge, mit [einem Zeitlimit für jede Frage](/guides/skills-test-timing-and-extra-time), das unser Server überwacht, also bleibt wenig Zeit, Antworten nachzuschlagen oder eine KI zu fragen. Die Auswertung zeigt außerdem, wann ein Kandidat die Seite verlassen, Text kopiert oder zu schnell geantwortet hat, um die Frage gelesen zu haben.",
     },
     {
         "key": "cost",
         "question": "Was kostet es?",
-        "answer": "Interviews zu generieren ist kostenlos. Jeder Kandidat, der mindestens eine Frage beantwortet, kostet {candidate} Credits ({candidate_dollars} $), mit Credits aus größeren Aufladungen weniger, bis hinunter auf 2 $. Dein erstes Unternehmen bekommt {company} kostenlose Credits, genug für seine ersten {company_candidates} Kandidaten. Auf der Preisseite stehen alle Preise.",
+        "answer": "Interviews zu generieren ist kostenlos. Jeder Kandidat, der mindestens eine Frage beantwortet, kostet {candidate} Credits ({candidate_dollars} $), mit Credits aus größeren Aufladungen weniger, bis hinunter auf 2 $. Dein erstes Unternehmen bekommt {company} kostenlose Credits, genug für seine ersten {company_candidates} Kandidaten. Auf der [Preisseite](/pricing) stehen alle Preise.",
     },
     {
         "key": "charged",
@@ -55,7 +55,7 @@ FAQ = [
     {
         "key": "refunds",
         "question": "Kann ich mein Geld zurückbekommen?",
-        "answer": "Ja, für Credits, die du in den letzten 14 Tagen gekauft und noch nicht ausgegeben hast: über Paddle oder indem du uns schreibst. Gratis-Credits wie das Willkommensgeschenk werden nicht erstattet. Details stehen in den Bedingungen.",
+        "answer": "Ja, für Credits, die du in den letzten 14 Tagen gekauft und noch nicht ausgegeben hast: über Paddle oder indem du uns schreibst. Gratis-Credits wie das Willkommensgeschenk werden nicht erstattet. Details stehen in den [Bedingungen](/terms).",
     },
     {
         "key": "scorecards",
@@ -75,12 +75,12 @@ FAQ = [
     {
         "key": "integrations",
         "question": "Funktioniert prepza mit meinem ATS oder anderen Tools?",
-        "answer": "Ja, ohne Aufpreis. Verbinde Workable, Greenhouse, Teamtailor, Recruitee oder Breezy HR im Tab Integrationen deines Unternehmens: Kandidaten, die du in eine Phase verschiebst, bekommen das Interview, und ihre Ergebnisse gehen zurück an das ATS. Slack kann die Benachrichtigungen deines Unternehmens in einem Kanal posten, und über die API kann deine eigene Plattform Interviews erstellen, Kandidaten einladen und verwalten und ihre Ergebnisse empfangen, wobei jeder API-Schlüssel nur darf, was du für ihn ankreuzt; siehe API-Dokumentation.",
+        "answer": "Ja, ohne Aufpreis. Verbinde Workable, Greenhouse, Teamtailor, Recruitee oder Breezy HR im Tab Integrationen deines Unternehmens: Kandidaten, die du in eine Phase verschiebst, bekommen das Interview, und ihre Ergebnisse gehen zurück an das ATS ([so verbindest du Fachtests mit deinem ATS](/guides/ats-integration-skills-tests)). Slack kann die Benachrichtigungen deines Unternehmens in einem Kanal posten, und über die API kann deine eigene Plattform Interviews erstellen, Kandidaten einladen und verwalten und ihre Ergebnisse empfangen, wobei jeder API-Schlüssel nur darf, was du für ihn ankreuzt; siehe [API-Dokumentation](/api-docs).",
     },
     {
         "key": "ai_apps",
         "question": "Kann ich prepza aus Claude, ChatGPT oder meinem eigenen KI-Agenten heraus nutzen?",
-        "answer": "Ja. Füge prepza in Claude oder ChatGPT als Connector hinzu (die Schritte stehen im Tab Integrationen deines Unternehmens) und lass es in prepza zu. Die App arbeitet dann in deinem Namen und mit deinen Berechtigungen mit deinen Unternehmen, Interviews und den Ergebnissen der Kandidaten; die meisten Apps fragen dich, bevor sie etwas ändern. Dein Konto oder ein Unternehmen löschst du nur in prepza. Was die App liest, geht nach den Bedingungen dieser App an ihren Anbieter. Du kannst sie jederzeit im selben Tab trennen. Auch andere KI-Apps und selbst gebaute Agenten lassen sich verbinden: Im MCP-Tab der Entwicklerdokumentation stehen die Schritte und Beispiel-Agenten, und ein Agent auf einem Server kann sich mit einem API-Schlüssel anmelden, der die Berechtigung für KI-Agenten hat.",
+        "answer": "Ja. Füge prepza in Claude oder ChatGPT als Connector hinzu (die Schritte stehen im Tab Integrationen deines Unternehmens) und lass es in prepza zu. Die App arbeitet dann in deinem Namen und mit deinen Berechtigungen mit deinen Unternehmen, Interviews und den Ergebnissen der Kandidaten; die meisten Apps fragen dich, bevor sie etwas ändern. Dein Konto oder ein Unternehmen löschst du nur in prepza. Was die App liest, geht nach den Bedingungen dieser App an ihren Anbieter. Du kannst sie jederzeit im selben Tab trennen. Auch andere KI-Apps und selbst gebaute Agenten lassen sich verbinden: Im [MCP-Tab](/api-docs?tab=mcp) der Entwicklerdokumentation stehen die Schritte und Beispiel-Agenten, und ein Agent auf einem Server kann sich mit einem API-Schlüssel anmelden, der die Berechtigung für KI-Agenten hat. Der [Leitfaden zu KI-Agenten, MCP und APIs](/guides/ai-agents-mcp-and-api) erklärt, wofür jedes davon gedacht ist.",
     },
     {
         "key": "candidates",
@@ -100,7 +100,7 @@ FAQ = [
     {
         "key": "privacy",
         "question": "Was passiert mit Stellenbeschreibungen und Antworten?",
-        "answer": "Stellenbeschreibungen werden genutzt, um die Interviews deines Unternehmens zu erstellen, und die Antworten der Kandidaten, um sie für dein Unternehmen zu bewerten. Außerdem nutzt prepza die Antworten zusammengefasst und ohne Identifizierung einzelner Personen, um die Qualität der Fragen zu messen und zu verbessern. Die Datenschutzerklärung erklärt, was wir speichern, wie lange und welche Rechte alle haben.",
+        "answer": "Stellenbeschreibungen werden genutzt, um die Interviews deines Unternehmens zu erstellen, und die Antworten der Kandidaten, um sie für dein Unternehmen zu bewerten. Außerdem nutzt prepza die Antworten zusammengefasst und ohne Identifizierung einzelner Personen, um die Qualität der Fragen zu messen und zu verbessern. Die [Datenschutzerklärung](/privacy) erklärt, was wir speichern, wie lange und welche Rechte alle haben.",
     },
     {
         "key": "emails",
@@ -115,6 +115,6 @@ FAQ = [
     {
         "key": "report",
         "question": "Wie melde ich ein Problem?",
-        "answer": "Schreib uns über die Kontaktseite und füge die ID dessen ein, worum es geht: „id kopieren“ steht unter dem Namen eines Unternehmens, eines Interviews oder eines Kandidaten, die ID deines Kontos im Kontomenü und in den Einstellungen. Mit der ID finden wir es sofort.",
+        "answer": "Schreib uns über die [Kontaktseite](/contact) und füge die ID dessen ein, worum es geht: „id kopieren“ steht unter dem Namen eines Unternehmens, eines Interviews oder eines Kandidaten, die ID deines Kontos im Kontomenü und in den Einstellungen. Mit der ID finden wir es sofort.",
     },
 ]

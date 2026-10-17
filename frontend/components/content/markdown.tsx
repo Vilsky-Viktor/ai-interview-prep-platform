@@ -1,10 +1,35 @@
 import { cn } from "cn"
-import type { ComponentProps } from "react"
+import type { ComponentProps, ReactNode } from "react"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 
 import { LocalizedLink } from "@/components/localized-link"
 import { MarkdownCode } from "@/components/markdown-code"
+
+/** A link in the site's text: the site's own pages open in place, in the address's language;
+ * others in a new tab. */
+export function SiteLink({
+  href = "",
+  children,
+}: {
+  href?: string
+  children?: ReactNode
+}) {
+  return href.startsWith("/") ? (
+    <LocalizedLink href={href} className="text-primary hover:underline">
+      {children}
+    </LocalizedLink>
+  ) : (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-primary hover:underline"
+    >
+      {children}
+    </a>
+  )
+}
 
 // The site's text styles for each Markdown element, as on the legal pages. Headings keep their
 // capitals (names such as TestGorilla or EU), unlike the site's lowercase headings.
@@ -41,22 +66,7 @@ const ELEMENTS: ComponentProps<typeof ReactMarkdown>["components"] = {
   strong: ({ children }) => (
     <strong className="font-medium text-foreground">{children}</strong>
   ),
-  // The site's own pages open in place, in the address's language; others in a new tab.
-  a: ({ href = "", children }) =>
-    href.startsWith("/") ? (
-      <LocalizedLink href={href} className="text-primary hover:underline">
-        {children}
-      </LocalizedLink>
-    ) : (
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-primary hover:underline"
-      >
-        {children}
-      </a>
-    ),
+  a: SiteLink,
   pre: ({ children }) => <MarkdownCode>{children}</MarkdownCode>,
   table: ({ children }) => (
     <div className="overflow-x-auto rounded-2xl border">

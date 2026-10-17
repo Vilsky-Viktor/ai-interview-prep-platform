@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server"
 
 import { FaqList } from "@/components/faq-list"
 import { JsonLd } from "@/components/json-ld"
+import { plainAnswer } from "@/lib/markdown"
 import { publicFetch } from "@/lib/server-api"
 import { pageMetadata } from "@/lib/site"
 import type { FaqItem } from "@/types/help"
@@ -24,7 +25,7 @@ export default async function FaqPage() {
     mainEntity: items.map((item) => ({
       "@type": "Question",
       name: item.question,
-      acceptedAnswer: { "@type": "Answer", text: item.answer },
+      acceptedAnswer: { "@type": "Answer", text: plainAnswer(item.answer) },
     })),
   }
 

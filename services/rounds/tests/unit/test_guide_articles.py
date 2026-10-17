@@ -1,5 +1,4 @@
 import pytest
-
 from prepza_common.page_keys import PAGE_KEYS
 
 from app.constants import help as help_constants

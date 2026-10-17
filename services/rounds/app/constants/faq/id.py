@@ -30,12 +30,12 @@ FAQ = [
     {
         "key": "cheating",
         "question": "Bisakah kandidat memakai AI atau mencari jawabannya?",
-        "answer": "Setiap kandidat mendapat soal acak sendiri dengan urutan sendiri, dengan batas waktu di tiap soal yang dijaga server kami, jadi hanya ada sedikit waktu untuk mencari jawaban atau bertanya ke AI. Scorecard juga menunjukkan saat kandidat meninggalkan halaman, menyalin teks, atau menjawab terlalu cepat untuk sempat membaca soal.",
+        "answer": "Setiap kandidat mendapat soal acak sendiri dengan urutan sendiri, dengan [batas waktu di tiap soal](/guides/skills-test-timing-and-extra-time) yang dijaga server kami, jadi hanya ada sedikit waktu untuk mencari jawaban atau bertanya ke AI. Scorecard juga menunjukkan saat kandidat meninggalkan halaman, menyalin teks, atau menjawab terlalu cepat untuk sempat membaca soal.",
     },
     {
         "key": "cost",
         "question": "Berapa biayanya?",
-        "answer": "Membuat wawancara gratis. Setiap kandidat yang menjawab setidaknya satu soal seharga {candidate} kredit (${candidate_dollars}), dan lebih murah dengan kredit dari isi ulang yang lebih besar, hingga $2. Perusahaan pertamamu mendapat {company} kredit gratis, cukup untuk {company_candidates} kandidat pertamanya. Halaman harga mencantumkan semua harga.",
+        "answer": "Membuat wawancara gratis. Setiap kandidat yang menjawab setidaknya satu soal seharga {candidate} kredit (${candidate_dollars}), dan lebih murah dengan kredit dari isi ulang yang lebih besar, hingga $2. Perusahaan pertamamu mendapat {company} kredit gratis, cukup untuk {company_candidates} kandidat pertamanya. [Halaman harga](/pricing) mencantumkan semua harga.",
     },
     {
         "key": "charged",
@@ -55,7 +55,7 @@ FAQ = [
     {
         "key": "refunds",
         "question": "Bisakah aku mendapat pengembalian dana?",
-        "answer": "Bisa, untuk kredit yang kamu beli dalam 14 hari terakhir dan belum dipakai: lewat Paddle atau dengan menulis kepada kami. Kredit gratis, seperti hadiah sambutan, tidak dikembalikan. Rinciannya ada di ketentuan.",
+        "answer": "Bisa, untuk kredit yang kamu beli dalam 14 hari terakhir dan belum dipakai: lewat Paddle atau dengan menulis kepada kami. Kredit gratis, seperti hadiah sambutan, tidak dikembalikan. Rinciannya ada di [ketentuan](/terms).",
     },
     {
         "key": "scorecards",
@@ -75,12 +75,12 @@ FAQ = [
     {
         "key": "integrations",
         "question": "Apakah prepza bisa dipakai dengan ATS atau tools lain yang saya gunakan?",
-        "answer": "Bisa, tanpa biaya tambahan. Hubungkan Workable, Greenhouse, Teamtailor, Recruitee, atau Breezy HR di tab Integrasi perusahaanmu: kandidat yang kamu pindahkan ke suatu tahap mendapat wawancara, dan hasilnya dikirim kembali ke ATS. Slack bisa memposting notifikasi perusahaanmu ke sebuah channel, dan API memungkinkan platformmu sendiri membuat wawancara, mengundang dan mengelola kandidat, serta menerima hasil mereka, dengan setiap kunci API terbatas pada yang kamu centang untuknya; lihat Dokumentasi API.",
+        "answer": "Bisa, tanpa biaya tambahan. Hubungkan Workable, Greenhouse, Teamtailor, Recruitee, atau Breezy HR di tab Integrasi perusahaanmu: kandidat yang kamu pindahkan ke suatu tahap mendapat wawancara, dan hasilnya dikirim kembali ke ATS ([cara menghubungkan tes keterampilan ke ATS-mu](/guides/ats-integration-skills-tests)). Slack bisa memposting notifikasi perusahaanmu ke sebuah channel, dan API memungkinkan platformmu sendiri membuat wawancara, mengundang dan mengelola kandidat, serta menerima hasil mereka, dengan setiap kunci API terbatas pada yang kamu centang untuknya; lihat [Dokumentasi API](/api-docs).",
     },
     {
         "key": "ai_apps",
         "question": "Bisakah saya memakai prepza dari Claude, ChatGPT, atau agen AI saya sendiri?",
-        "answer": "Bisa. Tambahkan prepza ke Claude atau ChatGPT sebagai konektor (langkah-langkahnya ada di tab Integrasi perusahaanmu), lalu izinkan di prepza. Setelah itu, aplikasi bekerja dengan perusahaan, wawancara, dan hasil kandidatmu atas namamu, dengan hak aksesmu; sebagian besar aplikasi bertanya dulu sebelum mengubah apa pun. Akun atau perusahaan hanya bisa dihapus di prepza. Apa yang dibaca aplikasi sampai ke penyedianya sesuai ketentuan aplikasi tersebut. Kamu bisa memutuskan sambungannya kapan saja di tab yang sama. Aplikasi AI lain dan agen yang kamu buat sendiri juga bisa terhubung: tab MCP di dokumentasi pengembang berisi langkah-langkah dan contoh agen, dan agen di server bisa masuk dengan kunci API yang punya hak akses agen AI.",
+        "answer": "Bisa. Tambahkan prepza ke Claude atau ChatGPT sebagai konektor (langkah-langkahnya ada di tab Integrasi perusahaanmu), lalu izinkan di prepza. Setelah itu, aplikasi bekerja dengan perusahaan, wawancara, dan hasil kandidatmu atas namamu, dengan hak aksesmu; sebagian besar aplikasi bertanya dulu sebelum mengubah apa pun. Akun atau perusahaan hanya bisa dihapus di prepza. Apa yang dibaca aplikasi sampai ke penyedianya sesuai ketentuan aplikasi tersebut. Kamu bisa memutuskan sambungannya kapan saja di tab yang sama. Aplikasi AI lain dan agen yang kamu buat sendiri juga bisa terhubung: [tab MCP](/api-docs?tab=mcp) di dokumentasi pengembang berisi langkah-langkah dan contoh agen, dan agen di server bisa masuk dengan kunci API yang punya hak akses agen AI. [Panduan tentang agen AI, MCP, dan API](/guides/ai-agents-mcp-and-api) menjelaskan kegunaan masing-masing.",
     },
     {
         "key": "candidates",
@@ -100,7 +100,7 @@ FAQ = [
     {
         "key": "privacy",
         "question": "Apa yang terjadi pada deskripsi pekerjaan dan jawaban?",
-        "answer": "Deskripsi pekerjaan dipakai untuk membuat wawancara perusahaanmu, dan jawaban kandidat untuk menilainya bagi perusahaanmu. prepza juga menggunakan jawaban secara gabungan, tanpa mengidentifikasi siapa pun, untuk mengukur dan meningkatkan kualitas soal. Kebijakan privasi menjelaskan apa yang kami simpan, berapa lama, dan hak setiap orang.",
+        "answer": "Deskripsi pekerjaan dipakai untuk membuat wawancara perusahaanmu, dan jawaban kandidat untuk menilainya bagi perusahaanmu. prepza juga menggunakan jawaban secara gabungan, tanpa mengidentifikasi siapa pun, untuk mengukur dan meningkatkan kualitas soal. [Kebijakan privasi](/privacy) menjelaskan apa yang kami simpan, berapa lama, dan hak setiap orang.",
     },
     {
         "key": "emails",
@@ -115,6 +115,6 @@ FAQ = [
     {
         "key": "report",
         "question": "Bagaimana cara melaporkan masalah?",
-        "answer": "Tulis pesan kepada kami di halaman kontak dan tempelkan ID hal yang kamu maksud: “salin id” ada di bawah nama perusahaan, wawancara, atau kandidat, dan ID akunmu ada di menu akun serta di Pengaturan. Dengan ID itu, kami langsung menemukannya.",
+        "answer": "Tulis pesan kepada kami di [halaman kontak](/contact) dan tempelkan ID hal yang kamu maksud: “salin id” ada di bawah nama perusahaan, wawancara, atau kandidat, dan ID akunmu ada di menu akun serta di Pengaturan. Dengan ID itu, kami langsung menemukannya.",
     },
 ]

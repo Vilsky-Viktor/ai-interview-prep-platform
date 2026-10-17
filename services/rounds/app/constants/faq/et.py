@@ -30,12 +30,12 @@ FAQ = [
     {
         "key": "cheating",
         "question": "Kas kandidaadid saavad kasutada tehisaru või vastuseid otsida?",
-        "answer": "Iga kandidaat saab oma juhuslikud küsimused oma järjekorras ja igal küsimusel on ajapiirang, mida jälgib meie server, nii et vastuste otsimiseks või tehisarult küsimiseks jääb vähe aega. Kandidaadi tulemused näitavad ka, millal kandidaat lehelt lahkus, teksti kopeeris või vastas liiga kiiresti, et küsimust lugeda.",
+        "answer": "Iga kandidaat saab oma juhuslikud küsimused oma järjekorras ja igal küsimusel on [ajapiirang](/guides/skills-test-timing-and-extra-time), mida jälgib meie server, nii et vastuste otsimiseks või tehisarult küsimiseks jääb vähe aega. Kandidaadi tulemused näitavad ka, millal kandidaat lehelt lahkus, teksti kopeeris või vastas liiga kiiresti, et küsimust lugeda.",
     },
     {
         "key": "cost",
         "question": "Kui palju see maksab?",
-        "answer": "Intervjuude loomine on tasuta. Iga kandidaat, kes vastab vähemalt ühele küsimusele, maksab {candidate} krediiti ({candidate_dollars} $), ja suuremate juurdelaadimiste krediitidega vähem, kuni 2 $. Sinu esimene ettevõte saab {company} tasuta krediiti, millest piisab tema esimese {company_candidates} kandidaadi jaoks. Hinnalehel on kõik hinnad.",
+        "answer": "Intervjuude loomine on tasuta. Iga kandidaat, kes vastab vähemalt ühele küsimusele, maksab {candidate} krediiti ({candidate_dollars} $), ja suuremate juurdelaadimiste krediitidega vähem, kuni 2 $. Sinu esimene ettevõte saab {company} tasuta krediiti, millest piisab tema esimese {company_candidates} kandidaadi jaoks. [Hinnalehel](/pricing) on kõik hinnad.",
     },
     {
         "key": "charged",
@@ -55,7 +55,7 @@ FAQ = [
     {
         "key": "refunds",
         "question": "Kas saan raha tagasi?",
-        "answer": "Jah, viimase 14 päeva jooksul ostetud ja kulutamata krediitide eest: Paddle'i kaudu või meile kirjutades. Tasuta krediite, näiteks tervituskingitust, ei hüvitata. Üksikasjad on tingimustes.",
+        "answer": "Jah, viimase 14 päeva jooksul ostetud ja kulutamata krediitide eest: Paddle'i kaudu või meile kirjutades. Tasuta krediite, näiteks tervituskingitust, ei hüvitata. Üksikasjad on [tingimustes](/terms).",
     },
     {
         "key": "scorecards",
@@ -75,12 +75,12 @@ FAQ = [
     {
         "key": "integrations",
         "question": "Kas prepza töötab minu ATS-i või muude tööriistadega?",
-        "answer": "Jah, ilma lisatasuta. Ühenda Workable, Greenhouse, Teamtailor, Recruitee või Breezy HR oma ettevõtte vahekaardil Integratsioonid: kandidaadid, kelle viid etappi, saavad intervjuu ja nende tulemused lähevad tagasi ATS-i. Slack saab postitada sinu ettevõtte teavitusi kanalisse ja API kaudu saab sinu enda platvorm luua intervjuusid, kandidaate kutsuda ja hallata ning nende tulemusi vastu võtta, kusjuures iga API-võti saab teha ainult seda, mille talle märgid; vaata: API dokumentatsioon.",
+        "answer": "Jah, ilma lisatasuta. Ühenda Workable, Greenhouse, Teamtailor, Recruitee või Breezy HR oma ettevõtte vahekaardil Integratsioonid: kandidaadid, kelle viid etappi, saavad intervjuu ja nende tulemused lähevad tagasi ATS-i ([kuidas ühendada oskustestid ATS-iga](/guides/ats-integration-skills-tests)). Slack saab postitada sinu ettevõtte teavitusi kanalisse ja API kaudu saab sinu enda platvorm luua intervjuusid, kandidaate kutsuda ja hallata ning nende tulemusi vastu võtta, kusjuures iga API-võti saab teha ainult seda, mille talle märgid; vaata [API dokumentatsiooni](/api-docs).",
     },
     {
         "key": "ai_apps",
         "question": "Kas saan prepzat kasutada Claude'i, ChatGPT või oma AI-agendi kaudu?",
-        "answer": "Jah. Lisa prepza Claude'i või ChatGPT-sse konnektorina (sammud on sinu ettevõtte vahekaardil Integratsioonid) ja luba see prepzas. Seejärel töötab rakendus sinu nimel ja sinu õigustega sinu ettevõtete, intervjuude ja kandidaatide tulemustega; enamik rakendusi küsib sinult enne, kui midagi muudab. Oma kontot või ettevõtet saad kustutada ainult prepzas. See, mida rakendus loeb, jõuab selle rakenduse tingimuste alusel tema pakkujani. Ühenduse saad igal ajal samal vahekaardil katkestada. Ühendada saab ka teisi AI-rakendusi ja ise loodud agente: arendajate dokumentatsiooni MCP-vahekaardil on sammud ja näidisagendid ning serveris töötav agent saab sisse logida API-võtmega, millel on AI-agentide õigus.",
+        "answer": "Jah. Lisa prepza Claude'i või ChatGPT-sse konnektorina (sammud on sinu ettevõtte vahekaardil Integratsioonid) ja luba see prepzas. Seejärel töötab rakendus sinu nimel ja sinu õigustega sinu ettevõtete, intervjuude ja kandidaatide tulemustega; enamik rakendusi küsib sinult enne, kui midagi muudab. Oma kontot või ettevõtet saad kustutada ainult prepzas. See, mida rakendus loeb, jõuab selle rakenduse tingimuste alusel tema pakkujani. Ühenduse saad igal ajal samal vahekaardil katkestada. Ühendada saab ka teisi AI-rakendusi ja ise loodud agente: arendajate dokumentatsiooni [MCP-vahekaardil](/api-docs?tab=mcp) on sammud ja näidisagendid ning serveris töötav agent saab sisse logida API-võtmega, millel on AI-agentide õigus. [Juhend AI-agentide, MCP ja API-de kohta](/guides/ai-agents-mcp-and-api) selgitab, milleks igaüks neist on.",
     },
     {
         "key": "candidates",
@@ -100,7 +100,7 @@ FAQ = [
     {
         "key": "privacy",
         "question": "Mis saab töökuulutustest ja vastustest?",
-        "answer": "Töökuulutusi kasutatakse sinu ettevõtte intervjuude loomiseks ja kandidaatide vastuseid nende hindamiseks sinu ettevõtte jaoks. prepza kasutab vastuseid ka koondatult ja kedagi tuvastamata, et mõõta ja parandada küsimuste kvaliteeti. Privaatsuspoliitika selgitab, mida me säilitame, kui kaua ja millised on kõigi õigused.",
+        "answer": "Töökuulutusi kasutatakse sinu ettevõtte intervjuude loomiseks ja kandidaatide vastuseid nende hindamiseks sinu ettevõtte jaoks. prepza kasutab vastuseid ka koondatult ja kedagi tuvastamata, et mõõta ja parandada küsimuste kvaliteeti. [Privaatsuspoliitika](/privacy) selgitab, mida me säilitame, kui kaua ja millised on kõigi õigused.",
     },
     {
         "key": "emails",
@@ -115,6 +115,6 @@ FAQ = [
     {
         "key": "report",
         "question": "Kuidas probleemist teada anda?",
-        "answer": "Kirjuta meile kontaktilehel ja kleebi selle ID, millest jutt käib: „kopeeri id“ on ettevõtte, intervjuu või kandidaadi nime all, sinu konto oma aga kontomenüüs ja seadetes. ID järgi leiame selle kohe üles.",
+        "answer": "Kirjuta meile [kontaktilehel](/contact) ja kleebi selle ID, millest jutt käib: „kopeeri id“ on ettevõtte, intervjuu või kandidaadi nime all, sinu konto oma aga kontomenüüs ja seadetes. ID järgi leiame selle kohe üles.",
     },
 ]

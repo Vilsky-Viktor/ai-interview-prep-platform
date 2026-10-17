@@ -42,8 +42,6 @@ class HelpChatRequest(BaseModel):
         return self
 
 
-
-
 class FaqItemOut(BaseModel):
     key: str
     question: str
