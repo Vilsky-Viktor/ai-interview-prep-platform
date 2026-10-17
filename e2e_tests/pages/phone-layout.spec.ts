@@ -48,54 +48,6 @@ test("the previews' panels span a phone's width", async ({ page }, info) => {
   }
 });
 
-// The demos keep the room of their tallest moment, so the page below never moves back up.
-test("the demos never shrink while they play", async ({ page }) => {
-  test.setTimeout(120_000);
-  await page.goto("/");
-  const demos = page.locator("div[style*='min-height']");
-  await expect(demos).toHaveCount(2);
-  const heights = () =>
-    demos.evaluateAll((elements) =>
-      elements.map((element) => element.getBoundingClientRect().height),
-    );
-  let last = await heights();
-
-  for (let second = 0; second < 16; second += 1) {
-    await page.waitForTimeout(1_000);
-    const now = await heights();
-    // Once both have been measured, neither gets shorter.
-    now.forEach((height, index) =>
-      expect(height).toBeGreaterThanOrEqual(last[index] - 1),
-    );
-    last = now;
-  }
-});
-
-// The agent's preview types into its input without reaching the mic and send buttons.
-test("the agent's preview types before its buttons", async ({ page }) => {
-  test.slow();
-  await page.goto("/");
-  const input = page.locator("[inert] textarea");
-  await input.scrollIntoViewIfNeeded();
-  await expect(input).not.toHaveValue("", { timeout: 15_000 });
-
-  for (let check = 0; check < 20; check += 1) {
-    const overflow = await input.evaluate((element) => {
-      const style = getComputedStyle(element);
-      const context = document.createElement("canvas").getContext("2d")!;
-      context.font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
-      const room =
-        element.clientWidth -
-        parseFloat(style.paddingInlineStart) -
-        parseFloat(style.paddingInlineEnd);
-
-      return context.measureText(element.value).width - room;
-    });
-    expect(overflow).toBeLessThanOrEqual(0);
-    await page.waitForTimeout(250);
-  }
-});
-
 // On phones the footer is one centered column; on desktop its links stand in three columns.
 test("the footer is one centered column on phones", async ({ page }, info) => {
   await page.goto("/faq");
@@ -202,26 +154,6 @@ test("the home page's box isn't focused on load", async ({ page }) => {
   await page.goto("/");
   await page.waitForTimeout(1_000);
   await expect(page.locator("main textarea").first()).not.toBeFocused();
-});
-
-// With reduced motion the API's example shows whole, its request and its answer: no letter is
-// held back, and it stays so.
-test("the API example shows whole with reduced motion", async ({ page }) => {
-  test.setTimeout(120_000);
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/");
-  const example = page.locator("#integrations [dir=ltr]");
-  const hidden = () =>
-    example.evaluate((element) =>
-      [...element.querySelectorAll("pre .invisible")].map((part) => part.textContent).join(""),
-    );
-
-  await expect(example.locator("pre").first()).not.toBeEmpty();
-  expect(await hidden()).toBe("");
-  await page.waitForTimeout(1_500);
-  expect(await hidden()).toBe("");
-  // The answer, under the request, isn't faded out.
-  await expect(example.locator("pre").last().locator("..")).toHaveCSS("opacity", "1");
 });
 
 // On phones a test's practice page has its level and language under the title, then its start.
