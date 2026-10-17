@@ -6,7 +6,7 @@
      "sessions"
     ],
     "summary": "Add Signal",
-    "description": "The candidate's browser reports leaving the page or copying, saved with the question on\nscreen so the scorecard can show where it happened; and coming back, with how long the leave\nlasted, which decides whether it counts (helpers/integrity.py).",
+    "description": "The candidate's browser reports leaving the page or copying, saved with the question on\nscreen so the scorecard can show where it happened; and coming back, with how long the leave\nlasted, which decides whether it counts (helpers/integrity.py). Only in a company's\ninterview: a practice round or a preview records none, as no one assesses them.",
     "operationId": "add_signal_sessions__session_id__signals_post",
     "security": [
      {
@@ -771,6 +771,50 @@
     }
    }
   },
+  "/help/pages/{key}": {
+   "get": {
+    "tags": [
+     "help"
+    ],
+    "summary": "Get Page Guide",
+    "description": "A page's guide, by its key, in the page's language (English until it's translated): its\ninfo button shows it, and the assistant reads it about the page the user is on; public.",
+    "operationId": "get_page_guide_help_pages__key__get",
+    "parameters": [
+     {
+      "name": "key",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "maxLength": 40,
+       "title": "Key"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PageGuideOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
   "/help/legal/{document}": {
    "get": {
     "tags": [
@@ -1290,6 +1334,37 @@
     }
    }
   },
+  "/superadmin/budgets": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Get Budgets",
+    "description": "How much of the help chat's shared daily budgets is used today, for the AI costs tab.",
+    "operationId": "get_budgets_superadmin_budgets_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "items": {
+          "$ref": "#/components/schemas/BudgetOut"
+         },
+         "type": "array",
+         "title": "Response Get Budgets Superadmin Budgets Get"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
   "/internal/users/{user_id}": {
    "delete": {
     "tags": [
@@ -1498,18 +1573,41 @@
       "title": "Question Id"
      },
      "option_index": {
-      "type": "integer",
-      "exclusiveMaximum": 4.0,
-      "minimum": 0.0,
+      "anyOf": [
+       {
+        "type": "integer",
+        "exclusiveMaximum": 4.0,
+        "minimum": 0.0
+       },
+       {
+        "type": "null"
+       }
+      ],
       "title": "Option Index"
+     },
+     "picks": {
+      "anyOf": [
+       {
+        "items": {
+         "type": "integer"
+        },
+        "type": "array",
+        "maxItems": 4,
+        "minItems": 1
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Picks"
      }
     },
     "type": "object",
     "required": [
-     "question_id",
-     "option_index"
+     "question_id"
     ],
-    "title": "AnswerCreate"
+    "title": "AnswerCreate",
+    "description": "The option picked on a single-answer question, or the options ticked on a multi-answer\none (\"select all that apply\")."
    },
    "AnswerView": {
     "properties": {
@@ -1529,6 +1627,41 @@
       ],
       "title": "Option Index"
      },
+     "picks": {
+      "items": {
+       "type": "integer"
+      },
+      "type": "array",
+      "title": "Picks",
+      "default": []
+     },
+     "timed_out": {
+      "type": "boolean",
+      "title": "Timed Out",
+      "default": false
+     },
+     "right_picks": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Right Picks"
+     },
+     "wrong_picks": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Wrong Picks"
+     },
      "correct": {
       "anyOf": [
        {
@@ -1539,6 +1672,17 @@
        }
       ],
       "title": "Correct"
+     },
+     "score": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Score"
      },
      "seconds": {
       "anyOf": [
@@ -1564,6 +1708,42 @@
      "correct"
     ],
     "title": "AnswerView"
+   },
+   "BudgetOut": {
+    "properties": {
+     "name": {
+      "type": "string",
+      "title": "Name"
+     },
+     "used": {
+      "type": "number",
+      "title": "Used"
+     },
+     "limit": {
+      "type": "number",
+      "title": "Limit"
+     },
+     "unit": {
+      "type": "string",
+      "title": "Unit"
+     },
+     "share": {
+      "type": "number",
+      "title": "Share",
+      "description": "Of the limit, the share used, 0 to 1 (more once over it).",
+      "readOnly": true
+     }
+    },
+    "type": "object",
+    "required": [
+     "name",
+     "used",
+     "limit",
+     "unit",
+     "share"
+    ],
+    "title": "BudgetOut",
+    "description": "How much of a shared daily budget (a limit for everyone) is used today, for the admin\nzone's AI costs tab: each owning service's GET /superadmin/budgets."
    },
    "ContactRequest": {
     "properties": {
@@ -1639,6 +1819,18 @@
       "maxItems": 200,
       "minItems": 1,
       "title": "Messages"
+     },
+     "page": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 40
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Page"
      }
     },
     "type": "object",
@@ -1646,7 +1838,7 @@
      "messages"
     ],
     "title": "HelpChatRequest",
-    "description": "The conversation so far, ending with the new question; the page keeps it."
+    "description": "The conversation so far, ending with the new question; the page keeps it. `page`: the\nkey of the page the visitor asks on, whose guide the answer reads (an unknown one is\nignored)."
    },
    "HelpMessage": {
     "properties": {
@@ -1887,6 +2079,11 @@
       "type": "array",
       "title": "Options"
      },
+     "multi": {
+      "type": "boolean",
+      "title": "Multi",
+      "default": false
+     },
      "seconds_left": {
       "anyOf": [
        {
@@ -1926,6 +2123,46 @@
      "correct"
     ],
     "title": "Option"
+   },
+   "PageGuideOut": {
+    "properties": {
+     "key": {
+      "type": "string",
+      "title": "Key"
+     },
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "text": {
+      "type": "string",
+      "title": "Text"
+     },
+     "actions": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Actions"
+     },
+     "tips": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Tips"
+     }
+    },
+    "type": "object",
+    "required": [
+     "key",
+     "title",
+     "text",
+     "actions",
+     "tips"
+    ],
+    "title": "PageGuideOut",
+    "description": "A page's guide: what it's for (`text`), what you can do there and tips."
    },
    "PracticeRoundOut": {
     "properties": {
@@ -2253,6 +2490,11 @@
       "type": "array",
       "title": "Options"
      },
+     "multi": {
+      "type": "boolean",
+      "title": "Multi",
+      "default": false
+     },
      "correct_option_index": {
       "anyOf": [
        {
@@ -2263,6 +2505,20 @@
        }
       ],
       "title": "Correct Option Index"
+     },
+     "correct_indexes": {
+      "anyOf": [
+       {
+        "items": {
+         "type": "integer"
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Correct Indexes"
      },
      "answer": {
       "anyOf": [
@@ -2295,7 +2551,7 @@
      "answer"
     ],
     "title": "ReviewItem",
-    "description": "One question of a round. The correct option only once it's answered."
+    "description": "One question of a round. The correct options only once it's answered."
    },
    "RoundStatus": {
     "type": "string",

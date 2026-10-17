@@ -22,8 +22,10 @@ from app.routers import (
     events,
     internal_accounts,
     mcp,
+    mcp_docs,
     oauth,
     schedules,
+    superadmin,
     transcribe,
 )
 from app.services.registry import tools
@@ -66,6 +68,8 @@ app.include_router(events.router)
 app.include_router(schedules.router)
 app.include_router(internal_accounts.router)
 app.include_router(connect.router)
+app.include_router(mcp_docs.router)
+app.include_router(superadmin.router)
 # AI apps (Claude, ChatGPT, ...): the MCP endpoint and its authorization server, at the site's
 # root (the gateway sends those exact paths here).
 app.router.routes.extend([*oauth.routes(), *mcp.routes()])

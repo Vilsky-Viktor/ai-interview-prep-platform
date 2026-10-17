@@ -2,6 +2,9 @@
 MCP_INSTRUCTIONS = """\
 prepza screens job candidates with short, timed multiple-choice tests made from a job \
 description; companies create the tests (interviews), invite candidates and read their results. \
+A question has four options: one correct, or for a "select all that apply" question (marked \
+multi) 2 or 3, which earns part of its point for each right option ticked and none with a wrong \
+one. \
 These tools act as the signed-in user, with exactly their permissions, in every company they \
 belong to.
 

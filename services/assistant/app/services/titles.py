@@ -1,8 +1,13 @@
 import logging
 
 from langchain_core.messages import HumanMessage, SystemMessage
+from prepza_common import ai_usage
+from prepza_common.ai_constants import Outcome
 from prepza_common.constants import LANGUAGES
+from prepza_common.llm import estimated_input
 
+from app.config.settings import settings
+from app.constants.ai_usage import TITLE_ACTION
 from app.constants.titles import MAX_TITLE_LENGTH, TITLE_SOURCE_CHARACTERS
 from app.helpers.history import history
 from app.helpers.titles import clean_title, should_title
@@ -29,17 +34,23 @@ async def refresh(turn: Turn) -> str | None:
         for message in history(earlier, TITLE_SOURCE_CHARACTERS)
     )
     system = TITLE_SYSTEM.format(length=MAX_TITLE_LENGTH, language=LANGUAGES[turn.language])
+    prompt = [SystemMessage(content=system), HumanMessage(content=chat)]
+    who = {"company_id": turn.company_id, "user_id": turn.user_id}
+    recorded = {**who, "subject_id": turn.conversation_id}
 
     try:
-        reply = await llm.get_title_model().ainvoke(
-            [SystemMessage(content=system), HumanMessage(content=chat)]
-        )
+        reply = await llm.get_title_model().ainvoke(prompt)
     except Exception as failure:  # noqa: BLE001 - logged by its type only
         logger.error("A conversation's title failed: %s", type(failure).__name__)
+        await ai_usage.provider_refused(failure, TITLE_ACTION, **who)
+        usage = {"input_tokens": estimated_input(prompt)}
+        model = settings.assistant_model
+        await ai_usage.record(TITLE_ACTION, model, usage, outcome=Outcome.FAILED, **recorded)
 
         return None
 
     usage = reply.usage_metadata or {}
+    await ai_usage.record(TITLE_ACTION, settings.assistant_model, usage, **recorded)
     tokens = usage.get("input_tokens", 0) + usage.get("output_tokens", 0)
     await limits.record(get_redis(), turn.user_id, turn.company_id, tokens)
     title = clean_title(reply.text)

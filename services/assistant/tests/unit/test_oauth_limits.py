@@ -16,8 +16,8 @@ def counted(monkeypatch):
     """The limits counted, without Redis; nothing is over them."""
     keys = []
 
-    async def hit(redis, key, limit, window):
-        keys.append(key)
+    async def hit(redis, key, name):
+        keys.append((key, name))
 
     monkeypatch.setattr(oauth_limits, "hit_or_skip", hit)
 
@@ -53,11 +53,11 @@ def test_requests_to_connect_are_counted_per_address(client, counted, monkeypatc
     }
     client.get("/authorize", params=query, follow_redirects=False)
 
-    assert counted == ["rate:assistant:mcp:authorize:testclient"]
+    assert counted == [("rate:assistant:mcp:authorize:testclient", "AUTHORIZATIONS_PER_IP_HOUR")]
 
 
 def test_too_many_requests_to_connect_from_one_address_are_refused(client, monkeypatch):
-    async def over(redis, key, limit, window):
+    async def over(redis, key, name):
         raise HTTPException(429, "Too many requests. Try again later.")
 
     monkeypatch.setattr(oauth_limits, "hit_or_skip", over)

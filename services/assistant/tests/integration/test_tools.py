@@ -29,3 +29,14 @@ def test_a_forged_token_is_refused_downstream(run):
     result = run(call_tool("list_companies", {}, "forged", "en", None))
 
     assert result.status_code == 401
+
+
+def test_a_page_id_that_isnt_the_users_gets_a_404_from_the_tools(run, token):
+    """The page's ids are only context: a tool reads with the user's token, so an interview or a
+    candidate that isn't theirs is refused there."""
+    interview, invite = str(uuid.uuid4()), str(uuid.uuid4())
+    found = run(call_tool("get_interview", {"interview_id": interview}, token, "en", None))
+    arguments = {"interview_id": interview, "invite_id": invite}
+    scorecard = run(call_tool("get_scorecard", arguments, token, "en", None))
+
+    assert (found.status_code, scorecard.status_code) == (404, 404)

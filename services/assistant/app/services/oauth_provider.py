@@ -17,6 +17,7 @@ from prepza_common.tokens import hashed
 from app.config.settings import settings
 from app.constants.limits import MAX_REGISTRATION_BYTES, MAX_STATE_LENGTH
 from app.constants.mcp import (
+    API_KEY_PREFIX,
     CONNECT_PATH,
     MCP_SCOPE,
     REFRESH_REUSE_GRACE_SECONDS,
@@ -25,6 +26,7 @@ from app.helpers.mcp_clients import describe_client, refused_redirect
 from app.helpers.oauth import funnel_client, new_tokens, resource_url
 from app.models.oauth import McpGrant
 from app.models.oauth_tokens import Access, Code, Refresh
+from app.services.mcp_keys import key_access
 from app.services.oauth_limits import limit_tokens
 from app.storage import oauth, oauth_requests
 
@@ -179,6 +181,10 @@ class Provider:
         return token
 
     async def load_access_token(self, token: str) -> Access | None:
+        """An app's access token, or an AI agent's company API key."""
+        if token.startswith(API_KEY_PREFIX):
+            return await key_access(token)
+
         grant = await oauth.by_access(hashed(token))
 
         if grant is None or grant.access_expires_at <= datetime.now(UTC):
@@ -196,7 +202,11 @@ class Provider:
         )
 
     async def revoke_token(self, token: Access | Refresh) -> None:
-        """The app disconnects itself (it was removed there): the connection goes."""
+        """The app disconnects itself (it was removed there): the connection goes. An API key
+        is deleted in prepza only."""
+        if token.grant_id is None:
+            return
+
         removed = await oauth.remove(UUID(token.grant_id))
 
         if removed is not None:

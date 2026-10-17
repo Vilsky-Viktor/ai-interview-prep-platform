@@ -22,3 +22,7 @@ AUDIO_TOO_LARGE = "The recording is too long."
 AUDIO_NOT_SUPPORTED = "This recording format isn't supported."
 NOTHING_HEARD = "Couldn't hear anything. Try again."
 TRANSCRIBE_FAILED = "Couldn't turn the recording into text. Please try again."
+# A recording's length when OpenAI doesn't report it: its size over this rate (32 kbit/s, speech
+# in Opus as browsers record it), at most MAX_AUDIO_SECONDS. Higher bitrates read as longer, so
+# its cost is overestimated rather than missed.
+AUDIO_BYTES_PER_SECOND = 4_000

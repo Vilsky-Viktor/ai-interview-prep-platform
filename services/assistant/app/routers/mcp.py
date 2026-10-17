@@ -20,7 +20,7 @@ from app.services.oauth_provider import Provider
 
 
 async def list_tools(ctx, params) -> types.ListToolsResult:
-    return types.ListToolsResult(tools=mcp_tools.listed())
+    return types.ListToolsResult(tools=mcp_tools.listed(ctx.request.user.access_token))
 
 
 async def call_tool(ctx, params: types.CallToolRequestParams) -> types.CallToolResult:

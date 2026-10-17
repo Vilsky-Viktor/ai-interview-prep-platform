@@ -1,79 +1,62 @@
 import asyncio
 
 import pytest
-from fastapi import HTTPException
-from prepza_common import rate_limit
 
-from app.constants.limits import (
-    MESSAGES_PER_COMPANY_DAY,
-    MESSAGES_PER_DAY,
-    MESSAGES_PER_USER_DAY,
-    MESSAGES_PER_USER_HOUR,
-    TOKENS_PER_COMPANY_DAY,
-    TOKENS_PER_DAY,
-    TOKENS_PER_USER_DAY,
-    TRANSCRIPTIONS_PER_USER_HOUR,
-)
 from app.services import limits
+from tests.unit.fake_redis import FakeRedis
 
 COMPANY = "8c1d2b8e-1a2b-4c3d-8e9f-0a1b2c3d4e5f"
 
 
 @pytest.fixture
 def counted(monkeypatch):
-    """The counters and budgets each call reads, in order."""
+    """The cap, counters and budgets each call reads, in order, with the limits by name."""
     made = []
 
-    async def hit(redis, key, limit, window):
-        made.append(("hit", key, limit))
+    async def hit(redis, key, name, *, company_id=None, user_id=None):
+        made.append(("hit", key, name))
 
-    async def spend(redis, key, amount, limit, window):
-        made.append(("spend", key, amount, limit))
+    async def spend(redis, key, amount, name, *, company_id=None, user_id=None):
+        made.append(("spend", key, amount, name))
+
+    async def capped(redis, company_id=None, user_id=None):
+        made.append(("cap", company_id, user_id))
 
     async def unpaid(redis, company_id):
         return False
 
     monkeypatch.setattr(limits, "hit", hit)
     monkeypatch.setattr(limits, "spend", spend)
+    monkeypatch.setattr(limits, "refuse_if_capped", capped)
     monkeypatch.setattr(limits, "company_paid", unpaid)
 
     return made
 
 
-def test_a_message_checks_every_budget_then_counts_against_every_limit(counted):
+def test_a_message_checks_the_cap_every_budget_then_counts_against_every_limit(counted):
     asyncio.run(limits.check(None, "ann", COMPANY))
 
     assert counted == [
-        ("spend", "spend:assistant:user:ann", 0, TOKENS_PER_USER_DAY),
-        ("spend", f"spend:assistant:company:{COMPANY}", 0, TOKENS_PER_COMPANY_DAY),
-        ("spend", "spend:assistant:all", 0, TOKENS_PER_DAY),
-        ("hit", "rate:assistant:hour:ann", MESSAGES_PER_USER_HOUR),
-        ("hit", "rate:assistant:day:ann", MESSAGES_PER_USER_DAY),
-        ("hit", f"rate:assistant:company:{COMPANY}", MESSAGES_PER_COMPANY_DAY),
-        ("hit", "rate:assistant:all", MESSAGES_PER_DAY),
+        ("cap", COMPANY, "ann"),
+        ("spend", "spend:assistant:user:ann", 0, "TOKENS_PER_USER_DAY"),
+        ("spend", f"spend:assistant:company:{COMPANY}", 0, "TOKENS_PER_COMPANY_DAY"),
+        ("spend", "spend:assistant:all", 0, "TOKENS_PER_DAY"),
+        ("hit", "rate:assistant:hour:ann", "MESSAGES_PER_USER_HOUR"),
+        ("hit", "rate:assistant:day:ann", "MESSAGES_PER_USER_DAY"),
+        ("hit", f"rate:assistant:company:{COMPANY}", "MESSAGES_PER_COMPANY_DAY"),
+        ("hit", "rate:assistant:all", "MESSAGES_PER_DAY"),
     ]
 
 
-def test_a_company_that_paid_isnt_held_to_everyones_limits(counted, monkeypatch):
+def test_a_company_that_paid_isnt_held_to_everyones_limits_or_the_cap(counted, monkeypatch):
     async def paid(redis, company_id):
         return True
 
     monkeypatch.setattr(limits, "company_paid", paid)
     asyncio.run(limits.check(None, "ann", COMPANY))
 
-    assert not any(item[1].endswith(":all") for item in counted)
-    assert ("hit", f"rate:assistant:company:{COMPANY}", MESSAGES_PER_COMPANY_DAY) in counted
-
-
-class FakeRedis:
-    def __init__(self):
-        self.values = {}
-
-    async def get(self, key):
-        return self.values.get(key)
-
-    async def set(self, key, value, ex):
-        self.values[key] = value
+    assert not any(item[0] == "cap" or item[1].endswith(":all") for item in counted)
+    assert ("hit", f"rate:assistant:company:{COMPANY}", "MESSAGES_PER_COMPANY_DAY") in counted
 
 
 def test_whether_a_company_paid_is_asked_of_billing_once_in_a_while(monkeypatch):
@@ -96,40 +79,62 @@ def test_whether_a_company_paid_is_asked_of_billing_once_in_a_while(monkeypatch)
 def test_without_a_company_only_the_users_and_everyones_count(counted):
     asyncio.run(limits.check(None, "ann", None))
 
-    assert not any("company" in item[1] for item in counted)
+    assert ("cap", None, "ann") in counted
+    assert not any("company" in str(item[1]) for item in counted)
 
 
-def test_a_turns_tokens_are_added_and_going_over_never_fails_the_turn(monkeypatch):
-    added = []
+def test_a_turns_tokens_are_added_to_every_budget(monkeypatch):
+    async def unpaid(redis, company_id):
+        return False
 
-    async def spend(redis, key, amount, limit, window):
-        added.append((key, amount))
+    monkeypatch.setattr(limits, "company_paid", unpaid)
+    redis = FakeRedis()
+    asyncio.run(limits.record(redis, "ann", COMPANY, 1_234))
 
-        if "user" in key:
-            raise HTTPException(429, "over")
+    assert redis.values == {
+        "spend:assistant:user:ann": 1_234,
+        f"spend:assistant:company:{COMPANY}": 1_234,
+        "spend:assistant:all": 1_234,
+    }
 
-        if "all" in key:
+
+def test_going_over_a_budget_or_redis_down_never_fails_the_turn(monkeypatch):
+    class Down(FakeRedis):
+        def pipeline(self, transaction=True):
             raise ConnectionError("Redis is down")
 
     async def unpaid(redis, company_id):
         return False
 
-    monkeypatch.setattr(rate_limit, "spend", spend)
     monkeypatch.setattr(limits, "company_paid", unpaid)
-    asyncio.run(limits.record(None, "ann", COMPANY, 1_234))
+    over = FakeRedis({"TOKENS_PER_USER_DAY": 10_000})
+    over.values["spend:assistant:user:ann"] = 10_000
 
-    assert added == [
-        ("spend:assistant:user:ann", 1_234),
-        (f"spend:assistant:company:{COMPANY}", 1_234),
-        ("spend:assistant:all", 1_234),
-    ]
+    asyncio.run(limits.record(over, "ann", COMPANY, 5_000))
+    asyncio.run(limits.record(Down(), "ann", COMPANY, 5_000))
+
+    assert over.values["spend:assistant:user:ann"] == 15_000
 
 
-def test_a_voice_message_checks_the_users_and_everyones_budgets_and_its_own_limit(counted):
-    asyncio.run(limits.check_transcription(None, "ann"))
+def test_a_voice_message_checks_the_cap_the_users_and_everyones_budgets_and_its_own_limit(
+    counted,
+):
+    asyncio.run(limits.check_transcription(None, "ann", frozenset({COMPANY})))
 
     assert counted == [
-        ("spend", "spend:assistant:user:ann", 0, TOKENS_PER_USER_DAY),
-        ("spend", "spend:assistant:all", 0, TOKENS_PER_DAY),
-        ("hit", "rate:assistant:transcribe:hour:ann", TRANSCRIPTIONS_PER_USER_HOUR),
+        ("cap", None, "ann"),
+        ("spend", "spend:assistant:user:ann", 0, "TOKENS_PER_USER_DAY"),
+        ("spend", "spend:assistant:all", 0, "TOKENS_PER_DAY"),
+        ("hit", "rate:assistant:transcribe:hour:ann", "TRANSCRIPTIONS_PER_USER_HOUR"),
     ]
+
+
+def test_a_voice_message_of_someone_in_a_company_that_paid_isnt_capped(counted, monkeypatch):
+    async def paid(redis, company_id):
+        return str(company_id) == COMPANY
+
+    monkeypatch.setattr(limits, "company_paid", paid)
+    other = "1c1d2b8e-1a2b-4c3d-8e9f-0a1b2c3d4e5f"
+    asyncio.run(limits.check_transcription(None, "ann", frozenset({other, COMPANY})))
+
+    assert not any(item[0] == "cap" for item in counted)

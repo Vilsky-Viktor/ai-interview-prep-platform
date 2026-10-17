@@ -51,6 +51,7 @@
      "companies"
     ],
     "summary": "List Companies",
+    "description": "The user's companies; for an AI agent signed in with an API key, the key's only.",
     "operationId": "list_companies_companies_get",
     "security": [
      {
@@ -465,7 +466,7 @@
      "companies"
     ],
     "summary": "List Audit Events",
-    "description": "The company's recorded human decisions, newest first; for the owner only.",
+    "description": "Every action the company's members took, newest first; for the owner only.",
     "operationId": "list_audit_events_companies__company_id__audit_get",
     "security": [
      {
@@ -522,6 +523,153 @@
           "$ref": "#/components/schemas/AuditEventOut"
          },
          "title": "Response List Audit Events Companies  Company Id  Audit Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/companies/{company_id}/actions": {
+   "get": {
+    "tags": [
+     "companies"
+    ],
+    "summary": "List Actions",
+    "description": "The company's action log, newest first, each action with who took it and what it was\nabout; for the owner only. Only one member's (`member_id`, a joined member), one group's, or\nthose from `from` and before `to`.",
+    "operationId": "list_actions_companies__company_id__actions_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     },
+     {
+      "name": "member_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "format": "uuid"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Member Id"
+      }
+     },
+     {
+      "name": "group",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "$ref": "#/components/schemas/AuditGroup"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Group"
+      }
+     },
+     {
+      "name": "from",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "format": "date-time"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "From"
+      }
+     },
+     {
+      "name": "to",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "format": "date-time"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "To"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/ActionOut"
+         },
+         "title": "Response List Actions Companies  Company Id  Actions Get"
         }
        }
       }
@@ -2437,7 +2585,7 @@
      "interviews"
     ],
     "summary": "Review Generation",
-    "description": "Approved topics resume the generation, so a pause refuses it. A company that never paid\nshows it's a person on the site first, as generating costs; the assistant and AI apps (no\nbrowser) can't be asked.",
+    "description": "Approved topics resume the generation, so a pause refuses it. A company that never paid\nshows it's a person on the site first, as generating costs (the assistant and AI apps, with\nno browser, can't be asked), and is refused once today's unpaid AI spend reached its cap.",
     "operationId": "review_generation_interviews__interview_id__generation_review_post",
     "security": [
      {
@@ -2498,6 +2646,7 @@
      "interviews"
     ],
     "summary": "Retry Generation",
+    "description": "Runs the generation again, so it's refused as a review is (without the person check).",
     "operationId": "retry_generation_interviews__interview_id__generation_retry_post",
     "security": [
      {
@@ -3055,6 +3204,43 @@
       }
      }
     }
+   }
+  },
+  "/limits": {
+   "get": {
+    "tags": [
+     "limits"
+    ],
+    "summary": "Get Limits",
+    "description": "For any signed-in user: the limits' current values, as edited in the admin zone.",
+    "operationId": "get_limits_limits_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/LimitsOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
    }
   },
   "/interviews/{interview_id}/link": {
@@ -4657,6 +4843,15 @@
        "format": "uuid",
        "title": "Invite Id"
       }
+     },
+     {
+      "name": "user_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "User Id"
+      }
      }
     ],
     "requestBody": {
@@ -5897,6 +6092,753 @@
     }
    }
   },
+  "/superadmin/support/search": {
+   "post": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Search",
+    "description": "What a link, an id, a Paddle transaction, an email address or part of a company's name\nleads to, at most SUPPORT_RESULTS.",
+    "operationId": "search_superadmin_support_search_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/SupportSearchIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SupportSearchOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/superadmin/support/companies/{company_id}": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Get Company",
+    "operationId": "get_company_superadmin_support_companies__company_id__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SupportCompanyOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/support/companies/{company_id}/history": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Get History",
+    "description": "Every movement of the company's credits, newest first, as its billing tab shows them.",
+    "operationId": "get_history_superadmin_support_companies__company_id__history_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/HistoryEntryOut"
+         },
+         "title": "Response Get History Superadmin Support Companies  Company Id  History Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/support/companies/{company_id}/reserved": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Get Reserved",
+    "operationId": "get_reserved_superadmin_support_companies__company_id__reserved_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/CreditCandidateOut"
+         },
+         "title": "Response Get Reserved Superadmin Support Companies  Company Id  Reserved Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/support/companies/{company_id}/interviews": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Get Interviews",
+    "operationId": "get_interviews_superadmin_support_companies__company_id__interviews_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/InterviewOut"
+         },
+         "title": "Response Get Interviews Superadmin Support Companies  Company Id  Interviews Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/support/companies/{company_id}/audit": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Get Audit",
+    "description": "The company's action log, newest first, as its owner sees it.",
+    "operationId": "get_audit_superadmin_support_companies__company_id__audit_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/ActionOut"
+         },
+         "title": "Response Get Audit Superadmin Support Companies  Company Id  Audit Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/support/companies/{company_id}/invoice": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Get Invoice",
+    "description": "A temporary link to the invoice of one of the company's top-ups.",
+    "operationId": "get_invoice_superadmin_support_companies__company_id__invoice_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     },
+     {
+      "name": "transaction_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Transaction Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/InvoiceOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/support/companies/{company_id}/adjustments": {
+   "post": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Adjust Credits",
+    "description": "Adds or removes credits with a note the company's history shows; safe to repeat with the\nsame key. Billing refuses taking the available balance below zero (409).",
+    "operationId": "adjust_credits_superadmin_support_companies__company_id__adjustments_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/SupportAdjustmentIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/support/users/{user_id}": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Get User",
+    "description": "The account with that id (as \"copy id\" gives it): its companies and the top-ups it paid\nfor. 404 when there's neither an account nor a membership.",
+    "operationId": "get_user_superadmin_support_users__user_id__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "user_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "User Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SupportUserOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/support/candidates/{invite_id}": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Get Candidate",
+    "operationId": "get_candidate_superadmin_support_candidates__invite_id__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "invite_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Invite Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SupportCandidateOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/support/interviews/{interview_id}": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Get Interview",
+    "operationId": "get_interview_superadmin_support_interviews__interview_id__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SupportInterviewOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/support/interviews/{interview_id}/candidates": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Get Interview Candidates",
+    "description": "The interview's candidates, newest first.",
+    "operationId": "get_interview_candidates_superadmin_support_interviews__interview_id__candidates_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "interview_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Interview Id"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/SupportCandidateRowOut"
+         },
+         "title": "Response Get Interview Candidates Superadmin Support Interviews  Interview Id  Candidates Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
   "/companies/{company_id}/ai-apps": {
    "put": {
     "tags": [
@@ -6167,6 +7109,123 @@
     ],
     "title": "AccountDeletionOut"
    },
+   "ActionOut": {
+    "properties": {
+     "user_id": {
+      "type": "string",
+      "title": "User Id"
+     },
+     "action": {
+      "type": "string",
+      "title": "Action"
+     },
+     "target_id": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "uuid"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Target Id"
+     },
+     "via": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Via"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     },
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "group": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Group"
+     },
+     "user_email": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "User Email"
+     },
+     "target_kind": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Target Kind"
+     },
+     "target": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Target"
+     },
+     "removed": {
+      "anyOf": [
+       {
+        "items": {
+         "type": "string"
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Removed"
+     }
+    },
+    "type": "object",
+    "required": [
+     "user_id",
+     "action",
+     "target_id",
+     "created_at",
+     "id",
+     "group",
+     "user_email",
+     "target_kind",
+     "target"
+    ],
+    "title": "ActionOut",
+    "description": "A row of a company's action log (its owner's tab, the admin zone's support page): its\ngroup, who took it (`user_email`, None once they're no longer a member), and what it was\nabout: `target_kind` and `target` (a candidate's or member's email, an interview's title, an\nAPI key's name, a web hook's host, an integration's name; None for the company itself, or a\nperson who's gone), and what it took away (`removed`: an API key's narrowed permissions)."
+   },
    "AdminInviteOut": {
     "properties": {
      "company_name": {
@@ -6359,6 +7418,18 @@
      "created_at"
     ],
     "title": "AuditEventOut"
+   },
+   "AuditGroup": {
+    "type": "string",
+    "enum": [
+     "interviews",
+     "candidates",
+     "team",
+     "company",
+     "billing",
+     "integrations"
+    ],
+    "title": "AuditGroup"
    },
    "AutoTopUpIn": {
     "properties": {
@@ -7390,6 +8461,11 @@
       "type": "boolean",
       "title": "Can Manage Members"
      },
+     "can_see_actions": {
+      "type": "boolean",
+      "title": "Can See Actions",
+      "default": false
+     },
      "interview_count": {
       "type": "integer",
       "title": "Interview Count"
@@ -7873,6 +8949,17 @@
      "candidate_deleted": {
       "type": "boolean",
       "title": "Candidate Deleted"
+     },
+     "note": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Note"
      }
     },
     "type": "object",
@@ -8079,6 +9166,17 @@
       },
       "type": "array",
       "title": "Topics"
+     },
+     "total_minutes": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Total Minutes"
      },
      "can_edit": {
       "type": "boolean",
@@ -8416,6 +9514,17 @@
       "type": "integer",
       "title": "Question Seconds"
      },
+     "total_minutes": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Total Minutes"
+     },
      "guest": {
       "type": "boolean",
       "title": "Guest",
@@ -8503,6 +9612,20 @@
     ],
     "title": "InvoiceOut",
     "description": "A temporary link to the invoice PDF."
+   },
+   "LimitsOut": {
+    "properties": {
+     "max_bulk_invites": {
+      "type": "integer",
+      "title": "Max Bulk Invites"
+     }
+    },
+    "type": "object",
+    "required": [
+     "max_bulk_invites"
+    ],
+    "title": "LimitsOut",
+    "description": "The current limits the site's texts quote: the most emails one list may invite."
    },
    "LineProblemOut": {
     "properties": {
@@ -8619,6 +9742,17 @@
      "question_seconds": {
       "type": "integer",
       "title": "Question Seconds"
+     },
+     "total_minutes": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Total Minutes"
      },
      "status": {
       "anyOf": [
@@ -9122,6 +10256,11 @@
       "type": "array",
       "title": "Options"
      },
+     "multi": {
+      "type": "boolean",
+      "title": "Multi",
+      "default": false
+     },
      "likes": {
       "type": "integer",
       "title": "Likes"
@@ -9346,6 +10485,41 @@
       ],
       "title": "Option Index"
      },
+     "picks": {
+      "items": {
+       "type": "integer"
+      },
+      "type": "array",
+      "title": "Picks",
+      "default": []
+     },
+     "timed_out": {
+      "type": "boolean",
+      "title": "Timed Out",
+      "default": false
+     },
+     "right_picks": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Right Picks"
+     },
+     "wrong_picks": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Wrong Picks"
+     },
      "correct": {
       "anyOf": [
        {
@@ -9356,6 +10530,17 @@
        }
       ],
       "title": "Correct"
+     },
+     "score": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Score"
      },
      "seconds": {
       "anyOf": [
@@ -9556,6 +10741,11 @@
       "type": "array",
       "title": "Options"
      },
+     "multi": {
+      "type": "boolean",
+      "title": "Multi",
+      "default": false
+     },
      "correct_option_index": {
       "anyOf": [
        {
@@ -9566,6 +10756,20 @@
        }
       ],
       "title": "Correct Option Index"
+     },
+     "correct_indexes": {
+      "anyOf": [
+       {
+        "items": {
+         "type": "integer"
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Correct Indexes"
      },
      "answer": {
       "anyOf": [
@@ -9814,6 +11018,671 @@
      "created_at"
     ],
     "title": "SuperadminCompanyOut"
+   },
+   "SupportAdjustmentIn": {
+    "properties": {
+     "amount": {
+      "type": "integer",
+      "maximum": 1000000.0,
+      "minimum": -1000000.0,
+      "title": "Amount"
+     },
+     "note": {
+      "type": "string",
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Note"
+     },
+     "key": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Key"
+     }
+    },
+    "type": "object",
+    "required": [
+     "amount",
+     "note",
+     "key"
+    ],
+    "title": "SupportAdjustmentIn",
+    "description": "Credits a superadmin adds (positive) or removes (negative), with the reason the company's\nhistory shows; `key` makes a repeated request count once."
+   },
+   "SupportCandidateOut": {
+    "properties": {
+     "invite_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Invite Id"
+     },
+     "email": {
+      "type": "string",
+      "title": "Email"
+     },
+     "name": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Name"
+     },
+     "status": {
+      "type": "string",
+      "title": "Status"
+     },
+     "company_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Company Id"
+     },
+     "company_name": {
+      "type": "string",
+      "title": "Company Name"
+     },
+     "interview_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Interview Id"
+     },
+     "interview_title": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Interview Title"
+     },
+     "invited_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Invited At"
+     },
+     "last_sent_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Sent At"
+     },
+     "started_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Started At"
+     },
+     "finished_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Finished At"
+     },
+     "grade": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Grade"
+     },
+     "passed": {
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Passed"
+     },
+     "extra_time": {
+      "type": "integer",
+      "title": "Extra Time"
+     },
+     "signals": {
+      "$ref": "#/components/schemas/SupportSignalsOut"
+     },
+     "credits": {
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "held",
+         "charged",
+         "released"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Credits"
+     }
+    },
+    "type": "object",
+    "required": [
+     "invite_id",
+     "email",
+     "name",
+     "status",
+     "company_id",
+     "company_name",
+     "interview_id",
+     "interview_title",
+     "invited_at",
+     "last_sent_at",
+     "started_at",
+     "finished_at",
+     "grade",
+     "passed",
+     "extra_time",
+     "signals",
+     "credits"
+    ],
+    "title": "SupportCandidateOut",
+    "description": "A candidate as support sees them, without their questions or answers. `extra_time` is a\npercentage of each question's time; `credits` says whether billing holds, charged or gave\nback their credits (None when it never held any)."
+   },
+   "SupportCandidateRowOut": {
+    "properties": {
+     "invite_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Invite Id"
+     },
+     "email": {
+      "type": "string",
+      "title": "Email"
+     },
+     "name": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Name"
+     },
+     "status": {
+      "type": "string",
+      "title": "Status"
+     },
+     "grade": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Grade"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "invite_id",
+     "email",
+     "name",
+     "status",
+     "grade",
+     "created_at"
+    ],
+    "title": "SupportCandidateRowOut",
+    "description": "A row of an interview's candidates."
+   },
+   "SupportCompanyOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "name": {
+      "type": "string",
+      "title": "Name"
+     },
+     "verification_status": {
+      "$ref": "#/components/schemas/VerificationStatus"
+     },
+     "verified_domain": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Verified Domain"
+     },
+     "suspended": {
+      "type": "boolean",
+      "title": "Suspended"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     },
+     "members": {
+      "items": {
+       "$ref": "#/components/schemas/SupportMemberOut"
+      },
+      "type": "array",
+      "title": "Members"
+     },
+     "balance": {
+      "type": "integer",
+      "title": "Balance"
+     },
+     "reserved": {
+      "type": "integer",
+      "title": "Reserved"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "name",
+     "verification_status",
+     "verified_domain",
+     "suspended",
+     "created_at",
+     "members",
+     "balance",
+     "reserved"
+    ],
+    "title": "SupportCompanyOut",
+    "description": "A company as support sees it: its people, and its credits (`reserved` is set aside for\ncandidates who haven't finished)."
+   },
+   "SupportInterviewOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "title": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Title"
+     },
+     "status": {
+      "type": "string",
+      "title": "Status"
+     },
+     "company_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Company Id"
+     },
+     "company_name": {
+      "type": "string",
+      "title": "Company Name"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     },
+     "generation_id": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "uuid"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Generation Id"
+     },
+     "generation_failed": {
+      "type": "boolean",
+      "title": "Generation Failed"
+     },
+     "topics": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Topics"
+     },
+     "question_seconds": {
+      "type": "integer",
+      "title": "Question Seconds"
+     },
+     "pass_mark": {
+      "type": "integer",
+      "title": "Pass Mark"
+     },
+     "candidate_count": {
+      "type": "integer",
+      "title": "Candidate Count"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "title",
+     "status",
+     "company_id",
+     "company_name",
+     "created_at",
+     "generation_id",
+     "generation_failed",
+     "topics",
+     "question_seconds",
+     "pass_mark",
+     "candidate_count"
+    ],
+    "title": "SupportInterviewOut",
+    "description": "An interview as support sees it: its topics by name, never its questions."
+   },
+   "SupportKind": {
+    "type": "string",
+    "enum": [
+     "company",
+     "interview",
+     "candidate",
+     "user"
+    ],
+    "title": "SupportKind",
+    "description": "What a support search result is."
+   },
+   "SupportMemberOut": {
+    "properties": {
+     "email": {
+      "type": "string",
+      "title": "Email"
+     },
+     "role": {
+      "type": "string",
+      "title": "Role"
+     },
+     "user_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "User Id"
+     }
+    },
+    "type": "object",
+    "required": [
+     "email",
+     "role",
+     "user_id"
+    ],
+    "title": "SupportMemberOut",
+    "description": "An owner, admin or viewer; `user_id` is None until an invited one joins."
+   },
+   "SupportResultOut": {
+    "properties": {
+     "kind": {
+      "$ref": "#/components/schemas/SupportKind"
+     },
+     "id": {
+      "type": "string",
+      "title": "Id"
+     },
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "company_id": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "uuid"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Company Id"
+     },
+     "company_name": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Company Name"
+     }
+    },
+    "type": "object",
+    "required": [
+     "kind",
+     "id",
+     "title"
+    ],
+    "title": "SupportResultOut",
+    "description": "An account (its id the account's, its title the account's address), or a company, an\ninterview or a candidate (an invite, its title the candidate's email) with the company it\nbelongs to; an account belongs to none."
+   },
+   "SupportSearchIn": {
+    "properties": {
+     "query": {
+      "type": "string",
+      "maxLength": 300,
+      "minLength": 1,
+      "title": "Query"
+     }
+    },
+    "type": "object",
+    "required": [
+     "query"
+    ],
+    "title": "SupportSearchIn",
+    "description": "A link or path from prepza's site, an id (an account's, a company's, an interview's, a\ncandidate's or a Paddle transaction's), an email address, or part of a company's name."
+   },
+   "SupportSearchOut": {
+    "properties": {
+     "results": {
+      "items": {
+       "$ref": "#/components/schemas/SupportResultOut"
+      },
+      "type": "array",
+      "title": "Results"
+     }
+    },
+    "type": "object",
+    "required": [
+     "results"
+    ],
+    "title": "SupportSearchOut"
+   },
+   "SupportSignalsOut": {
+    "properties": {
+     "tab_leaves": {
+      "type": "integer",
+      "title": "Tab Leaves"
+     },
+     "copies": {
+      "type": "integer",
+      "title": "Copies"
+     },
+     "fast_answers": {
+      "type": "integer",
+      "title": "Fast Answers"
+     }
+    },
+    "type": "object",
+    "required": [
+     "tab_leaves",
+     "copies",
+     "fast_answers"
+    ],
+    "title": "SupportSignalsOut",
+    "description": "How many integrity signals the candidate gave: page leaves, copy attempts and answers\npicked too fast to have read."
+   },
+   "SupportTopUpOut": {
+    "properties": {
+     "transaction_id": {
+      "type": "string",
+      "title": "Transaction Id"
+     },
+     "company_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Company Id"
+     },
+     "company_name": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Company Name"
+     },
+     "total": {
+      "type": "string",
+      "title": "Total"
+     },
+     "currency": {
+      "type": "string",
+      "title": "Currency"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "transaction_id",
+     "company_id",
+     "company_name",
+     "total",
+     "currency",
+     "created_at"
+    ],
+    "title": "SupportTopUpOut",
+    "description": "A top-up the account paid for into a company: `total` in minor units, tax included;\n`company_name` None once the company is deleted."
+   },
+   "SupportUserCompanyOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "name": {
+      "type": "string",
+      "title": "Name"
+     },
+     "role": {
+      "type": "string",
+      "title": "Role"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "name",
+     "role"
+    ],
+    "title": "SupportUserCompanyOut",
+    "description": "A company the account is a member of, with its role there."
+   },
+   "SupportUserOut": {
+    "properties": {
+     "user_id": {
+      "type": "string",
+      "title": "User Id"
+     },
+     "email": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Email"
+     },
+     "created_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Created At"
+     },
+     "companies": {
+      "items": {
+       "$ref": "#/components/schemas/SupportUserCompanyOut"
+      },
+      "type": "array",
+      "title": "Companies"
+     },
+     "top_ups": {
+      "items": {
+       "$ref": "#/components/schemas/SupportTopUpOut"
+      },
+      "type": "array",
+      "title": "Top Ups"
+     }
+    },
+    "type": "object",
+    "required": [
+     "user_id",
+     "email",
+     "created_at",
+     "companies",
+     "top_ups"
+    ],
+    "title": "SupportUserOut",
+    "description": "An account as support sees it: `email` and `created_at` None once the account is gone\n(its memberships may outlive it), or when its sign-in has none."
    },
    "Theme": {
     "type": "string",

@@ -38,21 +38,30 @@ def row_link(kind: str, ref: dict, company_id: str | None) -> str | None:
     return link(PAGES[page], {"company_id": company_id, **ref})
 
 
+def kept_ref(kind: str, ref: dict) -> dict:
+    """A row as it's kept and read again (live_blocks): a candidate by "id" within its
+    interview, an interview by "id"."""
+    if kind == "candidate_rows":
+        return {"id": ref["candidate_id"], "interview_id": ref["interview_id"]}
+
+    if kind == "interview":
+        return {"id": ref["interview_id"]}
+
+    return ref
+
+
 async def rows_block(arguments: dict, turn: Turn) -> dict | None:
     """The rows the model chose, as the user may see them now (read with their token); None
     when none of them is."""
     kind, keys = ROW_KINDS[arguments["kind"]]
-    refs = [
+    chosen = [
         {key: str(row.get(key, "")) for key in keys}
         for row in (arguments.get("rows") or [])[:MAX_ROWS]
         if all(SAFE_ID.match(str(row.get(key, ""))) for key in keys)
     ]
-    # An interview's candidates are read by its id; a candidate's ref uses "id".
-    if kind == "candidate_rows":
-        refs = [{"id": ref["candidate_id"], "interview_id": ref["interview_id"]} for ref in refs]
-
     company_id = arguments.get("company_id") or (str(turn.company_id) if turn.company_id else None)
-    links = [row_link(kind, {**ref, "candidate_id": ref.get("id")}, company_id) for ref in refs]
+    links = [row_link(kind, ref, company_id) for ref in chosen]
+    refs = [kept_ref(kind, ref) for ref in chosen]
     block = {"kind": kind, "refs": refs, "links": links}
     found = await items_for(block, turn.token, turn.language)
     kept = [(item, url) for item, url in zip(found, links, strict=True) if item]

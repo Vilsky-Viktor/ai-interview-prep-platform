@@ -3,7 +3,6 @@ from uuid import UUID
 
 import httpx
 from fastapi import HTTPException, status
-from prepza_common.constants import HOUR_SECONDS
 from prepza_common.i18n import translate
 from prepza_common.pause import refuse_if_paused
 from prepza_common.rate_limit import hit
@@ -20,7 +19,6 @@ from app.constants.actions_flow import (
     SUBJECT_NOT_FOUND,
 )
 from app.constants.chat import SESSION_EXPIRED
-from app.constants.limits import ACTIONS_PER_USER_HOUR
 from app.helpers.arguments import fill_path, problems
 from app.integrations import services
 from app.integrations.redis import get_redis
@@ -137,9 +135,10 @@ async def checked_arguments(
     return arguments, current
 
 
-async def count_action(redis, user_id: str) -> None:
+async def count_action(redis, user_id: str, company_id: object | None = None) -> None:
     """Counts one write of the user's, in the panel or an AI app; over the hourly limit, a 429."""
-    await hit(redis, f"rate:assistant:actions:{user_id}", ACTIONS_PER_USER_HOUR, HOUR_SECONDS)
+    key = f"rate:assistant:actions:{user_id}"
+    await hit(redis, key, "ACTIONS_PER_USER_HOUR", company_id=company_id, user_id=user_id)
 
 
 async def prepare(tool: Tool, arguments: dict, turn: Turn) -> ToolResult:
@@ -234,10 +233,10 @@ async def run(
     the user's companies, its result and the card's new state. `referral`, the referral cookie of
     the user's browser, goes with it to companies."""
     redis = get_redis()
-    await refuse_if_paused(redis)
+    await refuse_if_paused(redis, "assistant_action", user_id=user.uid)
     pending = await owned_action(conversation_id, action_id, user, token, language)
     company_id = UUID(pending["company_id"]) if pending["company_id"] else None
-    await count_action(redis, user.uid)
+    await count_action(redis, user.uid, company_id)
     await limits.check(redis, user.uid, company_id)
     pending = await claim(action_id)
     tool = tools()[pending["tool"]]

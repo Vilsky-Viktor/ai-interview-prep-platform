@@ -5,6 +5,7 @@ from app.integrations import services
 from app.services import actions
 from app.storage import actions as store
 from tests.unit.actions_setup import COMPANY
+from tests.unit.fake_redis import FakeRedis
 
 
 class Writes(list):
@@ -15,61 +16,6 @@ class Writes(list):
     def __init__(self):
         super().__init__()
         self.referrals = []
-
-
-class Pipeline:
-    """Runs its commands one by one on the fake."""
-
-    def __init__(self, redis):
-        self.redis = redis
-        self.commands = []
-
-    async def __aenter__(self):
-        return self
-
-    async def __aexit__(self, *exc):
-        return False
-
-    def set(self, *args, **kwargs):
-        self.commands.append(self.redis.set(*args, **kwargs))
-
-    def sadd(self, *args):
-        pass
-
-    def expire(self, *args):
-        pass
-
-    async def execute(self):
-        for command in self.commands:
-            await command
-
-
-class FakeRedis:
-    """Redis's strings with their expiry, as the actions use them."""
-
-    def __init__(self):
-        self.values = {}
-        self.expiry = {}
-
-    async def set(self, key, value, ex=None, nx=False):
-        if nx and key in self.values:
-            return None
-
-        self.values[key] = value
-        self.expiry[key] = ex
-
-        return True
-
-    async def get(self, key):
-        return self.values.get(key)
-
-    def pipeline(self, transaction=True):
-        return Pipeline(self)
-
-    async def getdel(self, key):
-        self.expiry.pop(key, None)
-
-        return self.values.pop(key, None)
 
 
 @pytest.fixture

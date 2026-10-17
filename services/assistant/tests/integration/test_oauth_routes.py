@@ -7,10 +7,10 @@ from urllib.parse import parse_qs, urlparse
 import pytest
 from prepza_common.auth import current_user
 from prepza_common.constants import HOUR_SECONDS, RATE_LIMITED
+from prepza_common.limit_list import LIMITS
 from prepza_common.tokens import hashed
 from prepza_common.user import User
 
-from app.constants.limits import APPROVALS_PER_USER_HOUR
 from app.constants.mcp import CONNECT_COOKIE
 from app.integrations.redis import get_redis
 from app.main import app
@@ -105,7 +105,7 @@ def test_allowing_apps_over_the_hourly_limit_is_refused_and_the_request_stays(ru
 
     async def scenario():
         # Allowed just under the limit already this hour.
-        await get_redis().set(key, APPROVALS_PER_USER_HOUR - 1, ex=HOUR_SECONDS)
+        await get_redis().set(key, LIMITS["APPROVALS_PER_USER_HOUR"].default - 1, ex=HOUR_SECONDS)
         last = await approve(first)
         over = await approve(second)
         waiting = await oauth_requests.take_request(second)

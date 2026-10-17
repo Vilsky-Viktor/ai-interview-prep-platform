@@ -6,7 +6,7 @@
      "notifications"
     ],
     "summary": "Get Feed",
-    "description": "The bell: the latest notifications, the user's own and their companies', and how many\ncame since they last opened it; `fresh` reads the companies again (right after joining).",
+    "description": "The bell: the latest notifications, the user's own, their companies' and everyone's\nnewer than their account, and how many came since they last opened it, in their language;\n`fresh` reads the companies again (right after joining).",
     "operationId": "get_feed_me_get",
     "security": [
      {
@@ -47,6 +47,37 @@
       }
      }
     }
+   }
+  },
+  "/me/legal-changes": {
+   "get": {
+    "tags": [
+     "notifications"
+    ],
+    "summary": "Legal Changes",
+    "description": "The legal documents' new versions noticed and not yet in force that concern the user,\nfor the site's banner until they apply.",
+    "operationId": "legal_changes_me_legal_changes_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "items": {
+          "$ref": "#/components/schemas/LegalChangeOut"
+         },
+         "type": "array",
+         "title": "Response Legal Changes Me Legal Changes Get"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
    }
   },
   "/me/seen": {
@@ -172,7 +203,7 @@
      "internal"
     ],
     "summary": "Delete User",
-    "description": "Library, deleting an account: the user's own notifications go, and companies'\nnotifications about them as a candidate (their email and grade), and owners' notifications\nthat they joined a company (their email); the Slack channels they\nconnected stay with their companies, without their id, and each company is told they need\nreconnecting. The log of digests and reminders\nsent to them goes too.",
+    "description": "Library, deleting an account: the user's own notifications go, and companies'\nnotifications about them as a candidate (their email and grade), and owners' notifications\nthat they joined a company (their email); the Slack channels they\nconnected stay with their companies, without their id, and each company is told they need\nreconnecting. The log of digests and reminders\nsent to them goes too, and their rows in bulk sends (legal notices, campaigns).",
     "operationId": "delete_user_internal_users__user_id__delete",
     "security": [
      {
@@ -736,7 +767,7 @@
      "superadmin"
     ],
     "summary": "Send Notice",
-    "description": "Emails the change to the document's current version, from the next morning's run.",
+    "description": "Emails the change to the document's current version from the next sending hour, and puts\nit in the bell.",
     "operationId": "send_notice_superadmin_legal_notices__document__post",
     "security": [
      {
@@ -759,6 +790,908 @@
       }
      }
     ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/campaigns": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "List Campaigns",
+    "description": "Newest first, with each sent one's counts.",
+    "operationId": "list_campaigns_superadmin_campaigns_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "description": "Number of items to skip",
+       "default": 0,
+       "title": "Offset"
+      },
+      "description": "Number of items to skip"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "description": "Number of items to return, up to 100",
+       "default": 100,
+       "title": "Limit"
+      },
+      "description": "Number of items to return, up to 100"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/CampaignRowOut"
+         },
+         "title": "Response List Campaigns Superadmin Campaigns Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "post": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Create Campaign",
+    "operationId": "create_campaign_superadmin_campaigns_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CampaignIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CampaignOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/campaigns/from-news/{news_id}": {
+   "post": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Campaign From News",
+    "description": "A new product update with the news post's title, text and a button to it.",
+    "operationId": "campaign_from_news_superadmin_campaigns_from_news__news_id__post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "news_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "News Id"
+      }
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CampaignOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/campaigns/{campaign_id}": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Get Campaign",
+    "operationId": "get_campaign_superadmin_campaigns__campaign_id__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "campaign_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Campaign Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CampaignOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "put": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Update Campaign",
+    "description": "Until it's sent; a changed English text is translated again.",
+    "operationId": "update_campaign_superadmin_campaigns__campaign_id__put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "campaign_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Campaign Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CampaignIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CampaignOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "delete": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Delete Campaign",
+    "description": "Only one not sent yet.",
+    "operationId": "delete_campaign_superadmin_campaigns__campaign_id__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "campaign_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Campaign Id"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/campaigns/{campaign_id}/texts/{language}": {
+   "put": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Set Campaign Texts",
+    "description": "One other language's own wording, until it's sent.",
+    "operationId": "set_campaign_texts_superadmin_campaigns__campaign_id__texts__language__put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "campaign_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Campaign Id"
+      }
+     },
+     {
+      "name": "language",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "enum": [
+        "en",
+        "ru",
+        "uk",
+        "es",
+        "pt",
+        "de",
+        "fr",
+        "it",
+        "pl",
+        "nl",
+        "tr",
+        "ar",
+        "he",
+        "fa",
+        "ja",
+        "zh",
+        "ko",
+        "hi",
+        "id",
+        "th",
+        "vi",
+        "fil",
+        "et"
+       ],
+       "type": "string",
+       "title": "Language"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CampaignTexts"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CampaignOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/campaigns/{campaign_id}/recipients": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Count Recipients",
+    "operationId": "count_recipients_superadmin_campaigns__campaign_id__recipients_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "campaign_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Campaign Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RecipientsOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/campaigns/{campaign_id}/preview": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Preview Campaign",
+    "description": "The email as a user in that language gets it.",
+    "operationId": "preview_campaign_superadmin_campaigns__campaign_id__preview_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "campaign_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Campaign Id"
+      }
+     },
+     {
+      "name": "language",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "enum": [
+        "en",
+        "ru",
+        "uk",
+        "es",
+        "pt",
+        "de",
+        "fr",
+        "it",
+        "pl",
+        "nl",
+        "tr",
+        "ar",
+        "he",
+        "fa",
+        "ja",
+        "zh",
+        "ko",
+        "hi",
+        "id",
+        "th",
+        "vi",
+        "fil",
+        "et"
+       ],
+       "type": "string",
+       "default": "en",
+       "title": "Language"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PreviewOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/campaigns/{campaign_id}/test": {
+   "post": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Send Test",
+    "description": "The email in that language to the superadmin's own address.",
+    "operationId": "send_test_superadmin_campaigns__campaign_id__test_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "campaign_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Campaign Id"
+      }
+     },
+     {
+      "name": "language",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "enum": [
+        "en",
+        "ru",
+        "uk",
+        "es",
+        "pt",
+        "de",
+        "fr",
+        "it",
+        "pl",
+        "nl",
+        "tr",
+        "ar",
+        "he",
+        "fa",
+        "ja",
+        "zh",
+        "ko",
+        "hi",
+        "id",
+        "th",
+        "vi",
+        "fil",
+        "et"
+       ],
+       "type": "string",
+       "default": "en",
+       "title": "Language"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/campaigns/{campaign_id}/send": {
+   "post": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Send Campaign",
+    "description": "Starts it at once; it can't be changed after. At most one of each kind a day.",
+    "operationId": "send_campaign_superadmin_campaigns__campaign_id__send_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "campaign_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Campaign Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CampaignOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/campaigns/{campaign_id}/stop": {
+   "post": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Stop Campaign",
+    "description": "Its remaining recipients aren't sent it.",
+    "operationId": "stop_campaign_superadmin_campaigns__campaign_id__stop_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "campaign_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Campaign Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CampaignOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/suppressed/lookup": {
+   "post": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Look Up",
+    "operationId": "look_up_superadmin_suppressed_lookup_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/UserEmailIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SuppressionOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/superadmin/suppressed/remove": {
+   "post": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Remove",
+    "description": "Safe to repeat.",
+    "operationId": "remove_superadmin_suppressed_remove_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/UserEmailIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SuppressionOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/internal/campaigns/{campaign_id}": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Get Campaign Source",
+    "description": "Its English texts and the languages it lacks; none once it's sent.",
+    "operationId": "get_campaign_source_internal_campaigns__campaign_id__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "campaign_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Campaign Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CampaignSourceOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/campaigns/{campaign_id}/translations": {
+   "put": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Save Campaign Translations",
+    "description": "Safe to repeat; translations of an older text, or of a campaign sent or deleted since,\nare dropped, and a language edited by hand keeps its wording.",
+    "operationId": "save_campaign_translations_internal_campaigns__campaign_id__translations_put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "campaign_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Campaign Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CampaignTranslationsIn"
+       }
+      }
+     }
+    },
     "responses": {
      "204": {
       "description": "Successful Response"
@@ -806,14 +1739,29 @@
     }
    }
   },
-  "/internal/schedules/legal-notices": {
+  "/internal/schedules/bulk": {
    "post": {
     "tags": [
      "schedules"
     ],
-    "summary": "Legal",
-    "description": "Every minute for an hour each morning, from Cloud Scheduler: the legal notices asked for,\neach going on where the last run stopped; nobody gets one twice.",
-    "operationId": "legal_internal_schedules_legal_notices_post",
+    "summary": "Bulk",
+    "description": "Every minute from 08:00 to 18:59 UTC, from Cloud Scheduler: legal notices and campaigns,\neach run going on where the last one stopped; nobody gets one twice.",
+    "operationId": "bulk_internal_schedules_bulk_post",
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     }
+    }
+   }
+  },
+  "/internal/schedules/outbox": {
+   "post": {
+    "tags": [
+     "schedules"
+    ],
+    "summary": "Flush Outbox",
+    "description": "Every minute, from Cloud Scheduler: publishes events that weren't published right after\ntheir change.",
+    "operationId": "flush_outbox_internal_schedules_outbox_post",
     "responses": {
      "204": {
       "description": "Successful Response"
@@ -824,6 +1772,409 @@
  },
  "components": {
   "schemas": {
+   "CampaignCounts": {
+    "properties": {
+     "pending": {
+      "type": "integer",
+      "title": "Pending"
+     },
+     "sent": {
+      "type": "integer",
+      "title": "Sent"
+     },
+     "skipped": {
+      "type": "integer",
+      "title": "Skipped"
+     },
+     "failed": {
+      "type": "integer",
+      "title": "Failed"
+     },
+     "unsubscribed": {
+      "type": "integer",
+      "title": "Unsubscribed"
+     },
+     "complained": {
+      "type": "integer",
+      "title": "Complained"
+     }
+    },
+    "type": "object",
+    "required": [
+     "pending",
+     "sent",
+     "skipped",
+     "failed",
+     "unsubscribed",
+     "complained"
+    ],
+    "title": "CampaignCounts"
+   },
+   "CampaignIn": {
+    "properties": {
+     "subject": {
+      "type": "string",
+      "maxLength": 120,
+      "minLength": 1,
+      "title": "Subject"
+     },
+     "text": {
+      "type": "string",
+      "maxLength": 2000,
+      "minLength": 1,
+      "title": "Text"
+     },
+     "button": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 40
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Button"
+     },
+     "kind": {
+      "type": "string",
+      "enum": [
+       "updates",
+       "promotions"
+      ],
+      "title": "Kind"
+     },
+     "link": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 300
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Link"
+     }
+    },
+    "type": "object",
+    "required": [
+     "subject",
+     "text",
+     "kind"
+    ],
+    "title": "CampaignIn",
+    "description": "A campaign as a superadmin writes it, in English: a product update or an offer, and the\npage on the site its button opens."
+   },
+   "CampaignOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "kind": {
+      "type": "string",
+      "enum": [
+       "updates",
+       "promotions"
+      ],
+      "title": "Kind"
+     },
+     "subject": {
+      "type": "string",
+      "title": "Subject"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     },
+     "sent_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Sent At"
+     },
+     "translated": {
+      "type": "boolean",
+      "title": "Translated"
+     },
+     "status": {
+      "type": "string",
+      "enum": [
+       "draft",
+       "sending",
+       "sent",
+       "stopped"
+      ],
+      "title": "Status"
+     },
+     "counts": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/CampaignCounts"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "link": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Link"
+     },
+     "texts": {
+      "additionalProperties": {
+       "$ref": "#/components/schemas/CampaignTexts"
+      },
+      "type": "object",
+      "title": "Texts"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "kind",
+     "subject",
+     "created_at",
+     "sent_at",
+     "translated",
+     "status",
+     "counts",
+     "link",
+     "texts"
+    ],
+    "title": "CampaignOut"
+   },
+   "CampaignRowOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "kind": {
+      "type": "string",
+      "enum": [
+       "updates",
+       "promotions"
+      ],
+      "title": "Kind"
+     },
+     "subject": {
+      "type": "string",
+      "title": "Subject"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     },
+     "sent_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Sent At"
+     },
+     "translated": {
+      "type": "boolean",
+      "title": "Translated"
+     },
+     "status": {
+      "type": "string",
+      "enum": [
+       "draft",
+       "sending",
+       "sent",
+       "stopped"
+      ],
+      "title": "Status"
+     },
+     "counts": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/CampaignCounts"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "kind",
+     "subject",
+     "created_at",
+     "sent_at",
+     "translated",
+     "status",
+     "counts"
+    ],
+    "title": "CampaignRowOut",
+    "description": "A campaign in the list: its English subject, whether every language has its texts, where\nit stands (a draft, being sent, sent to everyone, or stopped) and once it's sent, its\ncounts."
+   },
+   "CampaignSourceOut": {
+    "properties": {
+     "subject": {
+      "type": "string",
+      "title": "Subject"
+     },
+     "text": {
+      "type": "string",
+      "title": "Text"
+     },
+     "button": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Button"
+     },
+     "missing": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Missing"
+     }
+    },
+    "type": "object",
+    "required": [
+     "subject",
+     "text",
+     "button",
+     "missing"
+    ],
+    "title": "CampaignSourceOut",
+    "description": "A campaign to translate (generation): its English texts and the languages it lacks."
+   },
+   "CampaignTexts": {
+    "properties": {
+     "subject": {
+      "type": "string",
+      "maxLength": 120,
+      "minLength": 1,
+      "title": "Subject"
+     },
+     "text": {
+      "type": "string",
+      "maxLength": 2000,
+      "minLength": 1,
+      "title": "Text"
+     },
+     "button": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 40
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Button"
+     }
+    },
+    "type": "object",
+    "required": [
+     "subject",
+     "text"
+    ],
+    "title": "CampaignTexts",
+    "description": "A campaign in one language: its subject (also the email's heading), its text (in Markdown:\nthe editor's bold, italic, links and lists) and its button's text."
+   },
+   "CampaignTranslationsIn": {
+    "properties": {
+     "subject": {
+      "type": "string",
+      "title": "Subject"
+     },
+     "text": {
+      "type": "string",
+      "title": "Text"
+     },
+     "button": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Button"
+     },
+     "translations": {
+      "additionalProperties": {
+       "$ref": "#/components/schemas/CampaignTexts"
+      },
+      "propertyNames": {
+       "enum": [
+        "en",
+        "ru",
+        "uk",
+        "es",
+        "pt",
+        "de",
+        "fr",
+        "it",
+        "pl",
+        "nl",
+        "tr",
+        "ar",
+        "he",
+        "fa",
+        "ja",
+        "zh",
+        "ko",
+        "hi",
+        "id",
+        "th",
+        "vi",
+        "fil",
+        "et"
+       ]
+      },
+      "type": "object",
+      "title": "Translations"
+     }
+    },
+    "type": "object",
+    "required": [
+     "subject",
+     "text",
+     "button",
+     "translations"
+    ],
+    "title": "CampaignTranslationsIn",
+    "description": "Translations of the campaign's English texts (subject, text, button): saved only while it\nstill reads so and isn't sent."
+   },
    "CandidateOptOutIn": {
     "properties": {
      "email": {
@@ -932,6 +2283,25 @@
     "type": "object",
     "title": "HTTPValidationError"
    },
+   "LegalChangeOut": {
+    "properties": {
+     "document": {
+      "type": "string",
+      "title": "Document"
+     },
+     "version": {
+      "type": "string",
+      "title": "Version"
+     }
+    },
+    "type": "object",
+    "required": [
+     "document",
+     "version"
+    ],
+    "title": "LegalChangeOut",
+    "description": "A document's new version, noticed and applying from `version` (a day)."
+   },
    "LegalNoticeOut": {
     "properties": {
      "document": {
@@ -1012,6 +2382,24 @@
     "title": "NotificationOut",
     "description": "What the bell shows: `kind` picks the text, `data` fills it, `link` opens the page."
    },
+   "PreviewOut": {
+    "properties": {
+     "subject": {
+      "type": "string",
+      "title": "Subject"
+     },
+     "html": {
+      "type": "string",
+      "title": "Html"
+     }
+    },
+    "type": "object",
+    "required": [
+     "subject",
+     "html"
+    ],
+    "title": "PreviewOut"
+   },
    "PushBody": {
     "properties": {
      "message": {
@@ -1066,6 +2454,20 @@
      "messageId"
     ],
     "title": "PushMessage"
+   },
+   "RecipientsOut": {
+    "properties": {
+     "count": {
+      "type": "integer",
+      "title": "Count"
+     }
+    },
+    "type": "object",
+    "required": [
+     "count"
+    ],
+    "title": "RecipientsOut",
+    "description": "Who the campaign would reach now: users with its setting on, not suppressed, with an\naddress."
    },
    "SlackKindsIn": {
     "properties": {
@@ -1158,6 +2560,40 @@
      "url"
     ],
     "title": "SlackStartOut"
+   },
+   "SuppressionOut": {
+    "properties": {
+     "reason": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Reason"
+     },
+     "created_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Created At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "reason",
+     "created_at"
+    ],
+    "title": "SuppressionOut",
+    "description": "The address's place on the suppression list; both None when it isn't on it."
    },
    "UnsubscribeOut": {
     "properties": {

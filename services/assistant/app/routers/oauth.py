@@ -14,11 +14,6 @@ from starlette.requests import Request
 from starlette.responses import JSONResponse, Response
 from starlette.routing import Route
 
-from app.constants.limits import (
-    AUTHORIZATIONS_PER_IP_HOUR,
-    REGISTRATIONS_PER_DAY,
-    REGISTRATIONS_PER_IP_HOUR,
-)
 from app.constants.mcp import (
     AUTH_METHODS,
     AUTHORIZATION_METADATA_PATH,
@@ -83,12 +78,14 @@ def routes() -> list[Route]:
                 route.app,
                 "register",
                 "invalid_client_metadata",
-                REGISTRATIONS_PER_IP_HOUR,
-                REGISTRATIONS_PER_DAY,
+                "REGISTRATIONS_PER_IP_HOUR",
+                "REGISTRATIONS_PER_DAY",
             )
             route = Route(route.path, endpoint=limited, methods=["POST", "OPTIONS"])
         elif route.path == AUTHORIZATION_PATH:
-            limited = Limited(route.app, "authorize", "invalid_request", AUTHORIZATIONS_PER_IP_HOUR)
+            limited = Limited(
+                route.app, "authorize", "invalid_request", "AUTHORIZATIONS_PER_IP_HOUR"
+            )
             route = Route(route.path, endpoint=GuardAuthorize(limited), methods=["GET", "POST"])
         elif route.path == REVOCATION_PATH:
             handler = cors_middleware(revoke, ["POST", "OPTIONS"])

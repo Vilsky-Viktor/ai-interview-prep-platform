@@ -6,7 +6,7 @@
      "Interviews"
     ],
     "summary": "List interviews",
-    "description": "Returns your company's interviews, newest first; with `updated_since`, the ones that\nchanged since, oldest change first.",
+    "description": "Returns your company's interviews, newest first; with `updated_since`, the ones that\nchanged since, oldest change first.\n\nNeeds the `interviews:read` permission.",
     "operationId": "list_interviews_interviews_get",
     "security": [
      {
@@ -98,6 +98,9 @@
      "401": {
       "description": "The API key is missing, invalid or expired, or its creator can no longer use it"
      },
+     "403": {
+      "description": "The API key doesn't have the permission the endpoint needs (`code` is `missing_permission`)"
+     },
      "429": {
       "description": "Your company's keys exceeded 60 requests per minute"
      },
@@ -118,7 +121,7 @@
      "Interviews"
     ],
     "summary": "Create an interview",
-    "description": "Makes an interview from a job description, as the key's creator would. Its questions take\na few minutes: until `ready` is true, it can't take candidates; the `interview.ready` web\nhook event says when it is.",
+    "description": "Makes an interview from a job description, as the key's creator would. Its questions take\na few minutes: until `ready` is true, it can't take candidates; the `interview.ready` web\nhook event says when it is.\n\nNeeds the `interviews:create` permission.",
     "operationId": "create_interview_interviews_post",
     "security": [
      {
@@ -170,6 +173,9 @@
      "401": {
       "description": "The API key is missing, invalid or expired, or its creator can no longer use it"
      },
+     "403": {
+      "description": "The API key doesn't have the permission the endpoint needs (`code` is `missing_permission`)"
+     },
      "429": {
       "description": "Your company has as many interviews without candidates as it may, or made as many today as it may"
      },
@@ -191,7 +197,7 @@
      "Interviews"
     ],
     "summary": "Get an interview",
-    "description": "Returns one of your company's interviews.",
+    "description": "Returns one of your company's interviews.\n\nNeeds the `interviews:read` permission.",
     "operationId": "get_interview_interviews__interview_id__get",
     "security": [
      {
@@ -224,6 +230,9 @@
      "401": {
       "description": "The API key is missing, invalid or expired, or its creator can no longer use it"
      },
+     "403": {
+      "description": "The API key doesn't have the permission the endpoint needs (`code` is `missing_permission`)"
+     },
      "429": {
       "description": "Your company's keys exceeded 60 requests per minute"
      },
@@ -250,7 +259,7 @@
      "Candidates"
     ],
     "summary": "List candidates",
-    "description": "Returns the interview's candidates with their progress and results, newest first; with\n`updated_since`, the ones that changed since, oldest change first.",
+    "description": "Returns the interview's candidates with their progress and results, newest first; with\n`updated_since`, the ones that changed since, oldest change first.\n\nNeeds the `candidates:read` permission.",
     "operationId": "list_candidates_interviews__interview_id__candidates_get",
     "security": [
      {
@@ -352,6 +361,9 @@
      "401": {
       "description": "The API key is missing, invalid or expired, or its creator can no longer use it"
      },
+     "403": {
+      "description": "The API key doesn't have the permission the endpoint needs (`code` is `missing_permission`)"
+     },
      "429": {
       "description": "Your company's keys exceeded 60 requests per minute"
      },
@@ -376,7 +388,7 @@
      "Candidates"
     ],
     "summary": "Invite a candidate",
-    "description": "Invites the candidate to the interview on behalf of the key's creator and reserves credits\nfor them, with their name if given. By default prepza emails the invitation and the\ncandidate signs in with that email; with `sign_in` false, your platform sends them to the\nresponse's `invite_url`, which opens the interview without signing in. With a `return_url`,\nthe finished page takes the candidate back to your platform. Inviting an address that was\nalready invited sends the invitation again, if emails are on; one who already finished is\nreturned as they are, without an email.",
+    "description": "Invites the candidate to the interview on behalf of the key's creator and reserves credits\nfor them, with their name if given. By default prepza emails the invitation and the\ncandidate signs in with that email; with `sign_in` false, your platform sends them to the\nresponse's `invite_url`, which opens the interview without signing in. With a `return_url`,\nthe finished page takes the candidate back to your platform. Inviting an address that was\nalready invited sends the invitation again, if emails are on; one who already finished is\nreturned as they are, without an email.\n\nNeeds the `candidates:invite` permission.",
     "operationId": "invite_candidate_interviews__interview_id__candidates_post",
     "security": [
      {
@@ -438,6 +450,9 @@
      "401": {
       "description": "The API key is missing, invalid or expired, or its creator can no longer use it"
      },
+     "403": {
+      "description": "The API key doesn't have the permission the endpoint needs (`code` is `missing_permission`)"
+     },
      "429": {
       "description": "The key's creator reached their email limits, or the key its rate limit"
      },
@@ -466,7 +481,7 @@
      "Candidates"
     ],
     "summary": "Get a candidate",
-    "description": "Returns one candidate of the interview with their progress and results.",
+    "description": "Returns one candidate of the interview with their progress and results.\n\nNeeds the `candidates:read` permission.",
     "operationId": "get_candidate_interviews__interview_id__candidates__candidate_id__get",
     "security": [
      {
@@ -509,6 +524,9 @@
      "401": {
       "description": "The API key is missing, invalid or expired, or its creator can no longer use it"
      },
+     "403": {
+      "description": "The API key doesn't have the permission the endpoint needs (`code` is `missing_permission`)"
+     },
      "429": {
       "description": "Your company's keys exceeded 60 requests per minute"
      },
@@ -532,7 +550,7 @@
      "Interviews"
     ],
     "summary": "Update a candidate",
-    "description": "Corrects the candidate's name, or gives them extra time on each question before they\nstart, as an accommodation.",
+    "description": "Corrects the candidate's name, or gives them extra time on each question before they\nstart, as an accommodation.\n\nNeeds the `candidates:change` permission.",
     "operationId": "update_candidate_interviews__interview_id__candidates__candidate_id__patch",
     "security": [
      {
@@ -585,6 +603,9 @@
      "401": {
       "description": "The API key is missing, invalid or expired, or its creator can no longer use it"
      },
+     "403": {
+      "description": "The API key doesn't have the permission the endpoint needs (`code` is `missing_permission`)"
+     },
      "429": {
       "description": "Your company's keys exceeded 60 requests per minute"
      },
@@ -604,7 +625,7 @@
      "Interviews"
     ],
     "summary": "Remove a candidate",
-    "description": "Withdraws an invite the candidate hasn't used yet: its link stops working and its credits\ncome back. A candidate who started is erased for good, with their answers and results, for\nexample when they ask to have their data deleted; one who answered at least one question is\ncharged. Your web hooks get `candidate.removed`.",
+    "description": "Withdraws an invite the candidate hasn't used yet: its link stops working and its credits\ncome back. A candidate who started is erased for good, with their answers and results, for\nexample when they ask to have their data deleted; one who answered at least one question is\ncharged. Your web hooks get `candidate.removed`.\n\nNeeds the `candidates:delete` permission.",
     "operationId": "remove_candidate_interviews__interview_id__candidates__candidate_id__delete",
     "security": [
      {
@@ -640,6 +661,9 @@
      "401": {
       "description": "The API key is missing, invalid or expired, or its creator can no longer use it"
      },
+     "403": {
+      "description": "The API key doesn't have the permission the endpoint needs (`code` is `missing_permission`)"
+     },
      "429": {
       "description": "Your company's keys exceeded 60 requests per minute"
      },
@@ -665,7 +689,7 @@
      "Interviews"
     ],
     "summary": "Send the invitation again",
-    "description": "Emails the candidate their invitation again, as a reminder; an expired invitation comes\nback to life for another 30 days.",
+    "description": "Emails the candidate their invitation again, as a reminder; an expired invitation comes\nback to life for another 30 days.\n\nNeeds the `candidates:invite` permission.",
     "operationId": "resend_invite_interviews__interview_id__candidates__candidate_id__resend_post",
     "security": [
      {
@@ -701,6 +725,9 @@
      "401": {
       "description": "The API key is missing, invalid or expired, or its creator can no longer use it"
      },
+     "403": {
+      "description": "The API key doesn't have the permission the endpoint needs (`code` is `missing_permission`)"
+     },
      "429": {
       "description": "The key's creator reached their email limits"
      },
@@ -729,7 +756,7 @@
      "Company"
     ],
     "summary": "Find a candidate by email",
-    "description": "The candidates invited with this email in any of your company's interviews, newest\nfirst, each with its interview's `interview_id`.",
+    "description": "The candidates invited with this email in any of your company's interviews, newest\nfirst, each with its interview's `interview_id`.\n\nNeeds the `candidates:read` permission.",
     "operationId": "find_candidates_candidates_get",
     "security": [
      {
@@ -768,6 +795,9 @@
      "401": {
       "description": "The API key is missing, invalid or expired, or its creator can no longer use it"
      },
+     "403": {
+      "description": "The API key doesn't have the permission the endpoint needs (`code` is `missing_permission`)"
+     },
      "429": {
       "description": "Your company's keys exceeded 60 requests per minute"
      },
@@ -790,7 +820,7 @@
      "Company"
     ],
     "summary": "Read your credits",
-    "description": "Your company's credits: a candidate costs 500, set aside when they're invited.",
+    "description": "Your company's credits: a candidate costs 500, set aside when they're invited.\n\nNeeds the `credits:read` permission.",
     "operationId": "get_credits_credits_get",
     "responses": {
      "200": {
@@ -805,6 +835,9 @@
      },
      "401": {
       "description": "The API key is missing, invalid or expired, or its creator can no longer use it"
+     },
+     "403": {
+      "description": "The API key doesn't have the permission the endpoint needs (`code` is `missing_permission`)"
      },
      "429": {
       "description": "Your company's keys exceeded 60 requests per minute"
@@ -925,6 +958,73 @@
    }
   },
   "/manage/keys/{key_id}": {
+   "patch": {
+    "tags": [
+     "manage"
+    ],
+    "summary": "Narrow Key",
+    "description": "Owners and admins take permissions away from a key; adding one is refused.",
+    "operationId": "narrow_key_manage_keys__key_id__patch",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "key_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Key Id"
+      }
+     },
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/KeyPermissionsIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/KeyOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
    "delete": {
     "tags": [
      "manage"
@@ -1231,13 +1331,43 @@
       },
       "type": "array",
       "title": "Webhooks"
+     },
+     "permission_groups": {
+      "additionalProperties": {
+       "items": {
+        "$ref": "#/components/schemas/Permission"
+       },
+       "type": "array"
+      },
+      "type": "object",
+      "title": "Permission Groups"
+     },
+     "implied": {
+      "additionalProperties": {
+       "$ref": "#/components/schemas/Permission"
+      },
+      "propertyNames": {
+       "$ref": "#/components/schemas/Permission"
+      },
+      "type": "object",
+      "title": "Implied"
+     },
+     "default_permissions": {
+      "items": {
+       "$ref": "#/components/schemas/Permission"
+      },
+      "type": "array",
+      "title": "Default Permissions"
      }
     },
     "type": "object",
     "required": [
      "keys",
      "expiries",
-     "webhooks"
+     "webhooks",
+     "permission_groups",
+     "implied",
+     "default_permissions"
     ],
     "title": "ApiSettingsOut"
    },
@@ -1781,6 +1911,14 @@
      },
      "expiry": {
       "$ref": "#/components/schemas/KeyExpiry"
+     },
+     "permissions": {
+      "items": {
+       "$ref": "#/components/schemas/Permission"
+      },
+      "type": "array",
+      "minItems": 1,
+      "title": "Permissions"
      }
     },
     "type": "object",
@@ -1837,6 +1975,13 @@
        }
       ],
       "title": "Last Used At"
+     },
+     "permissions": {
+      "items": {
+       "$ref": "#/components/schemas/Permission"
+      },
+      "type": "array",
+      "title": "Permissions"
      }
     },
     "type": "object",
@@ -1847,9 +1992,27 @@
      "created_at",
      "expires_at",
      "expired",
-     "last_used_at"
+     "last_used_at",
+     "permissions"
     ],
     "title": "KeyOut"
+   },
+   "KeyPermissionsIn": {
+    "properties": {
+     "permissions": {
+      "items": {
+       "$ref": "#/components/schemas/Permission"
+      },
+      "type": "array",
+      "minItems": 1,
+      "title": "Permissions"
+     }
+    },
+    "type": "object",
+    "required": [
+     "permissions"
+    ],
+    "title": "KeyPermissionsIn"
    },
    "NewKeyOut": {
     "properties": {
@@ -1899,6 +2062,13 @@
       ],
       "title": "Last Used At"
      },
+     "permissions": {
+      "items": {
+       "$ref": "#/components/schemas/Permission"
+      },
+      "type": "array",
+      "title": "Permissions"
+     },
      "key": {
       "type": "string",
       "title": "Key"
@@ -1913,6 +2083,7 @@
      "expires_at",
      "expired",
      "last_used_at",
+     "permissions",
      "key"
     ],
     "title": "NewKeyOut"
@@ -1956,6 +2127,20 @@
      "secret"
     ],
     "title": "NewWebhookOut"
+   },
+   "Permission": {
+    "type": "string",
+    "enum": [
+     "interviews:read",
+     "interviews:create",
+     "candidates:read",
+     "candidates:invite",
+     "candidates:change",
+     "candidates:delete",
+     "credits:read",
+     "mcp"
+    ],
+    "title": "Permission"
    },
    "RemovedEvent": {
     "properties": {

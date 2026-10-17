@@ -1,5 +1,5 @@
 # More reads (see tools.py for the entries' keys): an interview's questions and their reports,
-# the company's audit log, its credit history and reserved credits, the user's email settings,
+# the company's action log, its credit history and reserved credits, the user's email settings,
 # templates to copy, an ATS job's stages and text, prepza's news and the user's own practice.
 
 from prepza_common.constants import MAX_GOAL_LENGTH
@@ -13,7 +13,18 @@ DETAIL_TOOLS = {
         "method": "GET",
         "path": "/interviews/{interview_id}/topics/{topic_id}/questions",
         "params": ["interview_id", "topic_id"],
-        "fields": ["id", "text", "options", "likes", "dislikes", "reports"],
+        # Fields are kept at every level: "answer" and "correct" are each option's.
+        "fields": [
+            "id",
+            "text",
+            "options",
+            "answer",
+            "correct",
+            "multi",
+            "likes",
+            "dislikes",
+            "reports",
+        ],
         "max_items": 30,
     },
     "list_question_reports": {
@@ -23,12 +34,22 @@ DETAIL_TOOLS = {
         "params": ["interview_id", "question_id", "offset", "limit"],
         "fields": ["id", "reason", "comment", "created_at"],
     },
-    "list_audit_events": {
+    # The owner's only: who did what in the company, filtered by member, group and days.
+    "list_company_actions": {
         "service": "companies",
         "method": "GET",
-        "path": "/companies/{company_id}/audit",
-        "params": ["company_id", "offset", "limit"],
-        "fields": ["user_id", "action", "target_id", "via", "created_at"],
+        "path": "/companies/{company_id}/actions",
+        "params": ["company_id", "member_id", "group", "from", "to", "offset", "limit"],
+        "fields": [
+            "action",
+            "group",
+            "user_email",
+            "target_kind",
+            "target",
+            "removed",
+            "via",
+            "created_at",
+        ],
     },
     # Never an invoice: its temporary link is the payment provider's (the billing page has it).
     "list_credit_history": {

@@ -3,11 +3,13 @@ from uuid import UUID
 from fastapi import APIRouter, Request
 from fastapi.responses import StreamingResponse
 from prepza_common.i18n import request_language
+from prepza_common.limits import limit
 from prepza_common.sse import event_stream
 
 from app.auth import UserWithToken
 from app.constants.chat import MAX_MESSAGE_LENGTH, RESTORE_MINUTES
-from app.constants.limits import MAX_AUDIO_SECONDS, MESSAGES_PER_USER_DAY, MESSAGES_PER_USER_HOUR
+from app.constants.limits import MAX_AUDIO_SECONDS
+from app.integrations.redis import get_redis
 from app.schemas.chat import ChatRequest, ConfigOut, WelcomeOut
 from app.services import turns
 from app.services.welcome import welcome_stage
@@ -32,12 +34,14 @@ async def chat(body: ChatRequest, request: Request, auth: UserWithToken) -> Stre
 @router.get("/config")
 async def config() -> ConfigOut:
     """The limits the panel keeps to; public, as the panel asks it signed out too."""
+    redis = get_redis()
+
     return ConfigOut(
         restore_minutes=RESTORE_MINUTES,
         max_message_length=MAX_MESSAGE_LENGTH,
         max_audio_seconds=MAX_AUDIO_SECONDS,
-        messages_per_hour=MESSAGES_PER_USER_HOUR,
-        messages_per_day=MESSAGES_PER_USER_DAY,
+        messages_per_hour=await limit(redis, "MESSAGES_PER_USER_HOUR"),
+        messages_per_day=await limit(redis, "MESSAGES_PER_USER_DAY"),
     )
 
 

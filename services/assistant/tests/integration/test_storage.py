@@ -8,9 +8,10 @@ from datetime import UTC, datetime, timedelta
 import httpx
 import pytest
 from fastapi import HTTPException
+from prepza_common import memory_cache
+from prepza_common.limit_list import LIMITS_KEY
 from sqlalchemy import update
 
-from app.constants.limits import MESSAGES_PER_USER_HOUR, TOKENS_PER_USER_DAY
 from app.integrations.redis import get_redis
 from app.main import app
 from app.models.conversations import Conversation
@@ -94,31 +95,39 @@ def test_company_deleted_deletes_its_conversations_once_and_again_changes_nothin
     assert sorted(item.title for item in left) == ["About another", "About none"]
 
 
-def test_the_limits_count_in_redis(run):
+def test_the_limits_count_in_redis_at_their_edited_values(run, published, monkeypatch):
     user = f"limits-{uuid.uuid4().hex[:8]}"
+    monkeypatch.setattr(memory_cache, "_entries", {})
 
     async def scenario():
         redis = get_redis()
+        # As billing keeps the values edited in the admin zone.
+        await redis.hset(
+            LIMITS_KEY, mapping={"MESSAGES_PER_USER_HOUR": 3, "TOKENS_PER_USER_DAY": 10_000}
+        )
 
-        for _ in range(MESSAGES_PER_USER_HOUR):
-            await limits.check(redis, user, None)
+        try:
+            for _ in range(3):
+                await limits.check(redis, user, None)
 
-        with pytest.raises(HTTPException) as over_messages:
-            await limits.check(redis, user, None)
+            with pytest.raises(HTTPException) as over_messages:
+                await limits.check(redis, user, None)
 
-        spender = f"{user}-spender"
-        await limits.check(redis, spender, None)
-        await limits.record(redis, spender, None, TOKENS_PER_USER_DAY + 1)
-
-        with pytest.raises(HTTPException) as over_budget:
+            spender = f"{user}-spender"
             await limits.check(redis, spender, None)
+            await limits.record(redis, spender, None, 10_001)
 
-        # Everyone's totals, so repeated runs don't fill them.
-        await redis.delete("spend:assistant:all", "rate:assistant:all")
+            with pytest.raises(HTTPException) as over_budget:
+                await limits.check(redis, spender, None)
+        finally:
+            # Everyone's totals, so repeated runs don't fill them.
+            await redis.delete(LIMITS_KEY, "spend:assistant:all", "rate:assistant:all")
 
         return over_messages.value.status_code, over_budget.value.status_code
 
     assert run(scenario()) == (429, 429)
+    hits = [(data["limit"], data["user_id"]) for kind, data in published if kind == "limit.hit"]
+    assert hits == [("MESSAGES_PER_USER_HOUR", user), ("TOKENS_PER_USER_DAY", f"{user}-spender")]
 
 
 def test_a_visitors_chat_starts_the_new_conversation_in_its_order(run):

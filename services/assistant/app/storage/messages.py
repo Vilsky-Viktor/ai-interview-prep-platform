@@ -9,11 +9,17 @@ from app.models.conversations import Conversation, Message, ToolCall, now
 from app.storage.db import Session
 
 
-async def add_question(conversation_id: UUID, content: str, source: Source) -> Message:
-    """The user's message; the conversation isn't idle from now."""
+async def add_question(
+    conversation_id: UUID, content: str, source: Source, page: dict | None = None
+) -> Message:
+    """The user's message, with the page it was asked on; the conversation isn't idle from now."""
     async with Session() as session:
         message = Message(
-            conversation_id=conversation_id, role=Role.USER, source=source, content=content
+            conversation_id=conversation_id,
+            role=Role.USER,
+            source=source,
+            content=content,
+            page=page,
         )
         session.add(message)
         await _touch(session, conversation_id)
@@ -136,6 +142,7 @@ async def export(user_id: str) -> list[dict]:
                 "source": message.source,
                 "content": message.content,
                 "blocks": message.blocks,
+                "page": message.page,
                 "status": message.status,
                 "at": message.created_at,
             }

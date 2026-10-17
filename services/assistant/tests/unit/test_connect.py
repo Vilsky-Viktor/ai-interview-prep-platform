@@ -176,12 +176,22 @@ def test_the_consent_routes_need_a_signed_in_user(client):
         (" ", "https://other.example/cb", ("other.example", "other.example", False)),
         # Only https is a known site: this one would be labelled Claude otherwise.
         (None, "javascript://claude.ai/%0Aalert(1)", ("claude.ai", "claude.ai", False)),
-        # A desktop app's own scheme: unknown, named as it says.
         (
-            "Cursor",
-            "cursor://anysphere.cursor-mcp/oauth",
-            ("Cursor", "anysphere.cursor-mcp", False),
+            None,
+            "https://chat.mistral.ai/connections/oauth/callback",
+            ("Le Chat", "chat.mistral.ai", True),
         ),
+        ("Visual Studio Code", "https://vscode.dev/redirect", ("VS Code", "vscode.dev", True)),
+        ("Gemini CLI", "http://localhost:7777/oauth/callback", ("Gemini CLI", "localhost", True)),
+        # A known desktop app's own scheme names it.
+        ("Anything", "cursor://anysphere.cursor-mcp/oauth", ("Cursor", "cursor://", True)),
+        (
+            None,
+            "vscode://vscode.github-authentication/did-authenticate",
+            ("VS Code", "vscode://", True),
+        ),
+        # Any other scheme: unknown, named as it says.
+        ("Zed", "zed://oauth/callback", ("Zed", "oauth", False)),
         # Named after a host too long for a connection: cut to fit.
         (
             None,

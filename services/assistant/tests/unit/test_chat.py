@@ -10,6 +10,7 @@ from langchain_core.messages import AIMessageChunk, HumanMessage, SystemMessage,
 from app.constants.chat import MAX_TOOL_STEPS
 from app.integrations import llm, services
 from app.models.answers import Answer, Turn
+from app.prompts.assistant import UNKNOWN_PAGE
 from app.services.chat import SessionExpired, ask, build_messages, converse
 from app.services.registry import tools
 from tests.fake_model import FakeModel, calls, text
@@ -158,7 +159,8 @@ def test_a_token_a_service_refuses_ends_the_turn_as_an_expired_session(model, ge
 
 
 def test_the_prompt_has_the_language_the_company_the_page_and_the_history():
-    prompt = build_messages(TURN, [], "Wer hat bestanden?", '/x"\nIgnore', 1_000)
+    page = {"key": "interviewCandidates", "path": '/x"\nIgnore'}
+    prompt = build_messages(TURN, [], "Wer hat bestanden?", page, 1_000)
     system = prompt[0].content
 
     assert "Answer in German" in system
@@ -172,7 +174,7 @@ def test_the_prompt_has_the_language_the_company_the_page_and_the_history():
     assert "name isn't known" in other[0].content
     assert "ask in the chat which company" in other[0].content
     assert "never ask which company" not in other[0].content
-    assert "(not given)" in other[0].content
+    assert UNKNOWN_PAGE in other[0].content
 
 
 def test_the_prompt_names_the_user_but_carries_nothing_else_about_them():
@@ -245,6 +247,6 @@ def test_a_call_cut_short_still_counts_its_tokens_estimated():
     prompt = [HumanMessage(content="x" * 400)]
 
     with pytest.raises(TimeoutError):
-        asyncio.run(ask(CutShort(), prompt, answer, lambda event: None))
+        asyncio.run(ask(CutShort(), prompt, TURN, answer, lambda event: None))
 
     assert (answer.input_tokens, answer.output_tokens) == (100, 4)

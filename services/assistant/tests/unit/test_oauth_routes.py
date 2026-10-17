@@ -46,8 +46,8 @@ def test_an_app_registers_without_a_secret_within_the_limits(client, monkeypatch
     async def save_client(client_id, info):
         saved.append(info)
 
-    async def hit(redis, key, limit, window):
-        counted.append(key)
+    async def hit(redis, key, name):
+        counted.append((key, name))
 
     monkeypatch.setattr(oauth, "save_client", save_client)
     monkeypatch.setattr(oauth_limits, "hit_or_skip", hit)
@@ -62,11 +62,14 @@ def test_an_app_registers_without_a_secret_within_the_limits(client, monkeypatch
     assert response.status_code == 201
     assert response.json().get("client_secret") is None
     assert saved[0]["client_name"] == "Claude Code" and saved[0]["scope"] == "prepza"
-    assert counted == ["rate:assistant:mcp:register:testclient", "rate:assistant:mcp:register"]
+    assert counted == [
+        ("rate:assistant:mcp:register:testclient", "REGISTRATIONS_PER_IP_HOUR"),
+        ("rate:assistant:mcp:register", "REGISTRATIONS_PER_DAY"),
+    ]
 
 
 def test_registering_too_often_is_refused(client, monkeypatch):
-    async def over(redis, key, limit, window):
+    async def over(redis, key, name):
         raise HTTPException(429, "Too many requests. Try again later.")
 
     monkeypatch.setattr(oauth_limits, "hit_or_skip", over)

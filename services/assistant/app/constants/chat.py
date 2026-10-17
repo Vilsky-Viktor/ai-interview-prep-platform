@@ -24,9 +24,11 @@ class ToolState(StrEnum):
     FAILED = "failed"
 
 
-# A message the user sends, and the page they're on (context for the model only).
+# A message the user sends, and the page they're on (context for the model only): its path with
+# the query (cut to this length) and the ids it's about, each an id's characters only.
 MAX_MESSAGE_LENGTH = 2_000
 MAX_PAGE_LENGTH = 200
+PAGE_ID_PATTERN = r"^[A-Za-z0-9_-]{1,64}$"
 # A chat the panel brings back after a reload: one whose last message is at most this old;
 # an older one stays in the history and the panel starts a new chat.
 RESTORE_MINUTES = 30

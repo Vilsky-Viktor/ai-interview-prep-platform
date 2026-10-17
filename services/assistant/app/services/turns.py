@@ -9,6 +9,7 @@ from prepza_common.secrets_check import secret_in
 from prepza_common.sse import KEEP_ALIVE, sse_event
 from prepza_common.user import User
 
+from app.constants.ai_usage import MESSAGE_ACTION
 from app.constants.chat import (
     CHAT_FAILED,
     HISTORY_CHARACTERS,
@@ -48,7 +49,7 @@ async def start(body: ChatRequest, user: User, token: str, language: str) -> Asy
         return secret_reply(secret, body, language)
 
     redis = get_redis()
-    await refuse_if_paused(redis)
+    await refuse_if_paused(redis, MESSAGE_ACTION, user_id=user.uid)
     conversation = None
     company_id = body.company_id
 
@@ -68,10 +69,11 @@ async def start(body: ChatRequest, user: User, token: str, language: str) -> Asy
             await messages.add_earlier(conversation.id, body.earlier)
 
     earlier = await messages.recent(conversation.id, HISTORY_MESSAGES)
-    await messages.add_question(conversation.id, body.message, body.source)
+    page = body.page.model_dump(exclude_none=True) if body.page else None
+    await messages.add_question(conversation.id, body.message, body.source, page)
     turn = Turn(conversation.id, user.uid, company_id, token, language, companies, user.name)
 
-    return stream(turn, build_messages(turn, earlier, body.message, body.page, HISTORY_CHARACTERS))
+    return stream(turn, build_messages(turn, earlier, body.message, page, HISTORY_CHARACTERS))
 
 
 async def stream(turn: Turn, prompt: list, first: dict | None = None) -> AsyncIterator[str]:

@@ -206,3 +206,12 @@ def test_a_write_answered_without_a_body_reads_as_nothing():
     )
 
     assert read(tool, response, 20)[1] is None
+
+
+def test_a_topics_questions_tell_the_model_which_are_multi_answer(calls):
+    options = [{"answer": "a", "correct": True}, {"answer": "b", "correct": True}]
+    question = {"id": "q1", "text": "Which?", "options": options, "multi": True, "likes": 0}
+    calls.answer = answer(json=[question | {"position": 3}])
+    result = run("list_topic_questions", {"interview_id": INTERVIEW, "topic_id": COMPANY})
+
+    assert result.content["data"] == [question]

@@ -88,6 +88,37 @@ def test_a_failed_title_keeps_the_old_one(stored, monkeypatch):
     assert kept == []
 
 
+def test_a_title_is_recorded_as_its_own_ai_call(stored, monkeypatch, published):
+    reply = AIMessage(
+        content="Backend hiring",
+        usage_metadata={"input_tokens": 30, "output_tokens": 4, "total_tokens": 34},
+    )
+    monkeypatch.setattr(titles.llm, "get_title_model", lambda: TitleModel(reply))
+    asyncio.run(titles.refresh(TURN))
+
+    [(kind, data)] = published
+    assert kind == "ai.used"
+    assert (data["action"], data["input_tokens"], data["output_tokens"]) == (
+        "assistant_title",
+        30,
+        4,
+    )
+    assert (data["user_id"], data["subject_id"], data["outcome"]) == (
+        "ann",
+        str(TURN.conversation_id),
+        "ok",
+    )
+
+
+def test_a_failed_title_is_recorded_as_failed(stored, monkeypatch, published):
+    monkeypatch.setattr(titles.llm, "get_title_model", lambda: TitleModel(RuntimeError("down")))
+    asyncio.run(titles.refresh(TURN))
+
+    [(kind, data)] = published
+    assert (kind, data["action"], data["outcome"]) == ("ai.used", "assistant_title", "failed")
+    assert data["input_tokens"] > 0
+
+
 def test_no_call_between_the_trigger_points(stored, monkeypatch):
     stored_questions = 3
     monkeypatch.setattr(titles.messages, "count_questions", lambda _: _count(stored_questions))

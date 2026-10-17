@@ -6,7 +6,7 @@ from datetime import UTC, datetime
 import mcp_types as types
 from fastapi import HTTPException
 from prepza_common.analytics import track
-from prepza_common.constants import DAY_SECONDS, MINUTE_SECONDS, VIA_MCP
+from prepza_common.constants import DAY_SECONDS, VIA_MCP
 from prepza_common.i18n import translate
 from prepza_common.pause import refuse_if_paused
 from prepza_common.rate_limit import hit_or_skip
@@ -15,14 +15,11 @@ from prepza_common.user import User
 
 from app.config.settings import settings
 from app.constants.chat import COMPANY_NOT_FOUND
-from app.constants.limits import (
-    MCP_CALLS_PER_USER_DAY,
-    MCP_CALLS_PER_USER_MINUTE,
-)
 from app.constants.mcp import (
     ACCOUNT_GONE,
     ACTIVE_KEY,
     EXCLUDED_TOOL,
+    KEY_FUNNEL_CLIENT,
     MCP_EXCLUDED,
     MCP_UNLISTED,
     UPDATE_LANGUAGE,
@@ -32,9 +29,11 @@ from app.helpers.mcp_schema import mcp_tool
 from app.helpers.oauth import funnel_client
 from app.integrations import firebase_tokens
 from app.integrations.redis import get_redis
+from app.integrations.services import KEY_CLAIMS
 from app.models.oauth_tokens import Access
 from app.models.tools import Tool
 from app.services.actions import checked_arguments, count_action
+from app.services.mcp_keys import key_may_use, key_refusal
 from app.services.registry import tools
 from app.services.tenancy import foreign_company, user_companies
 from app.services.tool_calls import call_tool
@@ -43,10 +42,12 @@ from app.storage import oauth
 logger = logging.getLogger(__name__)
 
 
-def listed() -> list[types.Tool]:
-    """Every tool an AI app may call."""
+def listed(access: Access | None = None) -> list[types.Tool]:
+    """Every tool an AI app may call; for an API key, those its permissions allow."""
     return [
-        mcp_tool(tool) for name, tool in tools().items() if name not in MCP_EXCLUDED | MCP_UNLISTED
+        mcp_tool(tool)
+        for name, tool in tools().items()
+        if name not in MCP_EXCLUDED | MCP_UNLISTED and (access is None or key_may_use(access, name))
     ]
 
 
@@ -64,18 +65,20 @@ async def count_call(user_id: str) -> None:
     """Counts one call of the user's apps; over a limit, a 429. With Redis down, not counted."""
     redis = get_redis()
     minute = f"rate:assistant:mcp:minute:{user_id}"
-    await hit_or_skip(redis, minute, MCP_CALLS_PER_USER_MINUTE, MINUTE_SECONDS)
+    await hit_or_skip(redis, minute, "MCP_CALLS_PER_USER_MINUTE", user_id=user_id)
     day = f"rate:assistant:mcp:day:{user_id}"
-    await hit_or_skip(redis, day, MCP_CALLS_PER_USER_DAY, DAY_SECONDS)
+    await hit_or_skip(redis, day, "MCP_CALLS_PER_USER_DAY", user_id=user_id)
 
 
 async def mark_active(access: Access) -> None:
-    """The connection's last use, and the funnel's mcp_active once a day for each user and app.
-    Neither ever fails the call."""
-    client = funnel_client(access.client_name)
+    """The connection's last use (an API key's is the api service's), and the funnel's
+    mcp_active once a day for each user and app. Neither ever fails the call."""
+    client = KEY_FUNNEL_CLIENT if access.key_id else funnel_client(access.client_name)
 
     try:
-        await oauth.used(uuid.UUID(access.grant_id), datetime.now(UTC))
+        if access.grant_id:
+            await oauth.used(uuid.UUID(access.grant_id), datetime.now(UTC))
+
         key = ACTIVE_KEY.format(user_id=access.subject, client=client)
 
         if await get_redis().set(key, 1, ex=DAY_SECONDS, nx=True):
@@ -89,9 +92,10 @@ async def checked_write(tool: Tool, arguments: dict, user: User, token: str) -> 
     the user may see, with only what changes, within their hourly actions. Otherwise an
     HTTPException saying why not."""
     redis = get_redis()
-    await refuse_if_paused(redis)
+    company_id = arguments.get("company_id")
+    await refuse_if_paused(redis, "mcp_action", company_id, user.uid)
     arguments, _ = await checked_arguments(tool, arguments, token, user.language)
-    await count_action(redis, user.uid)
+    await count_action(redis, user.uid, company_id)
 
     return arguments
 
@@ -108,6 +112,9 @@ async def call(name: str, arguments: dict, access: Access) -> types.CallToolResu
     if tool is None:
         return error_result(UNKNOWN_TOOL)
 
+    if not key_may_use(access, name):
+        return error_result(key_refusal(name))
+
     signed_in = await firebase_tokens.sign_in(access.subject)
 
     if signed_in is None:
@@ -120,12 +127,20 @@ async def call(name: str, arguments: dict, access: Access) -> types.CallToolResu
     if secret_in(texts) is not None:
         return error_result(translate(SECRET_REMOVED, user.language))
 
+    # An API key's company: companies refuses any other one (the X-Assistant header).
+    if access.key_id:
+        KEY_CLAIMS.set({"company": access.company_id, "key": access.key_id})
+
     try:
         await count_call(user.uid)
         await mark_active(access)
+        companies = (
+            frozenset({access.company_id}) if access.key_id else await user_companies(user.uid)
+        )
 
-        # As in the app's panel: a company that isn't one of the user's isn't called at all.
-        if foreign_company(arguments, await user_companies(user.uid)):
+        # As in the app's panel: a company that isn't one of the user's (or the key's) isn't
+        # called at all.
+        if foreign_company(arguments, companies):
             return error_result(translate(COMPANY_NOT_FOUND, user.language))
 
         if tool.method != "GET":

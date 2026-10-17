@@ -93,6 +93,52 @@
       }
      }
     }
+   },
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Candidate Hold",
+    "description": "Whether a candidate's credits are set aside, charged or given back, for the admin zone's\nsupport tab; 404 when none were held.",
+    "operationId": "candidate_hold_internal_candidates_hold_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "key",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Key"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HoldOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
    }
   },
   "/internal/candidates/charge": {
@@ -513,6 +559,57 @@
     }
    }
   },
+  "/internal/companies/{company_id}/adjustments": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Adjust Company",
+    "description": "A superadmin adds or removes credits (companies checks who and logs it). Safe to repeat\nwith the same key; refused when it would take the available balance below zero.",
+    "operationId": "adjust_company_internal_companies__company_id__adjustments_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/AdjustmentIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
   "/internal/companies/{company_id}/invoice": {
    "get": {
     "tags": [
@@ -553,6 +650,106 @@
        "application/json": {
         "schema": {
          "$ref": "#/components/schemas/InvoiceOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/purchases": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Buyer Purchases",
+    "description": "The company top-ups someone paid for, one per transaction, newest first, at most\nMAX_BUYER_PURCHASES, for the admin zone's support tab.",
+    "operationId": "buyer_purchases_internal_purchases_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "buyer_id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Buyer Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/BuyerPurchaseOut"
+         },
+         "title": "Response Buyer Purchases Internal Purchases Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/purchases/{transaction_id}": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Purchase Owner",
+    "description": "Whose wallet a top-up's Paddle transaction paid into, for the admin zone's support\nsearch; 404 when no top-up has that transaction.",
+    "operationId": "purchase_owner_internal_purchases__transaction_id__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "transaction_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Transaction Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PurchaseOwnerOut"
         }
        }
       }
@@ -694,7 +891,7 @@
      "internal"
     ],
     "summary": "Delete User",
-    "description": "The user's purchases for their companies stay for bookkeeping, without their id; any\nautomatic top-up paid with their card goes off.",
+    "description": "The user's purchases for their companies stay for bookkeeping, without their id, and so\ndo their AI costs and limit hits; any automatic top-up paid with their card goes off.",
     "operationId": "delete_user_internal_users__user_id__delete",
     "security": [
      {
@@ -1000,10 +1197,556 @@
      }
     }
    }
+  },
+  "/superadmin/ai-costs": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Get Ai Costs",
+    "description": "What AI cost, all time or in one year or month, and why.",
+    "operationId": "get_ai_costs_superadmin_ai_costs_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "period",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "pattern": "^\\d{4}(-(0[1-9]|1[0-2]))?$"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Period"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/AiCostsOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/limit-hits": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Get Limit Hits",
+    "operationId": "get_limit_hits_superadmin_limit_hits_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "period",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "pattern": "^\\d{4}(-(0[1-9]|1[0-2]))?$"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Period"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/LimitHitListsOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/ai-spend": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Get Ai Spend",
+    "description": "One company's or user's AI spend lately, for its support page.",
+    "operationId": "get_ai_spend_superadmin_ai_spend_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Company Id"
+      }
+     },
+     {
+      "name": "user_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "User Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/AiSpendOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/superadmin/limits": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Get Limits",
+    "operationId": "get_limits_superadmin_limits_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/LimitsOut"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/superadmin/limits/changes": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Get Changes",
+    "description": "The latest changes, newest first.",
+    "operationId": "get_changes_superadmin_limits_changes_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "items": {
+          "$ref": "#/components/schemas/LimitChangeOut"
+         },
+         "type": "array",
+         "title": "Response Get Changes Superadmin Limits Changes Get"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/superadmin/limits/{name}": {
+   "put": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Set Limit",
+    "description": "A value out of the limit's bounds is refused (422).",
+    "operationId": "set_limit_superadmin_limits__name__put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "name",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Name"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/LimitIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/LimitsOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "delete": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Reset Limit",
+    "operationId": "reset_limit_superadmin_limits__name__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "name",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Name"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/LimitsOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/events": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Receive Event",
+    "description": "Pub/Sub pushes the services' records of AI calls and limit hits here.",
+    "operationId": "receive_event_internal_events_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/PushBody"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
   }
  },
  "components": {
   "schemas": {
+   "ActionOut": {
+    "properties": {
+     "spend": {
+      "type": "number",
+      "title": "Spend"
+     },
+     "calls": {
+      "type": "integer",
+      "title": "Calls"
+     },
+     "action": {
+      "type": "string",
+      "title": "Action"
+     },
+     "units": {
+      "type": "number",
+      "title": "Units"
+     },
+     "unit_cost": {
+      "type": "number",
+      "title": "Unit Cost"
+     },
+     "paid_spend": {
+      "type": "number",
+      "title": "Paid Spend"
+     },
+     "unpaid_spend": {
+      "type": "number",
+      "title": "Unpaid Spend"
+     }
+    },
+    "type": "object",
+    "required": [
+     "spend",
+     "calls",
+     "action",
+     "units",
+     "unit_cost",
+     "paid_spend",
+     "unpaid_spend"
+    ],
+    "title": "ActionOut"
+   },
+   "AdjustmentIn": {
+    "properties": {
+     "amount": {
+      "type": "integer",
+      "maximum": 1000000.0,
+      "minimum": -1000000.0,
+      "title": "Amount"
+     },
+     "note": {
+      "type": "string",
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Note"
+     },
+     "key": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Key"
+     }
+    },
+    "type": "object",
+    "required": [
+     "amount",
+     "note",
+     "key"
+    ],
+    "title": "AdjustmentIn",
+    "description": "A superadmin's adjustment of a company's credits: `amount` adds (positive) or removes\n(negative); `note` says why, as the company's history shows it; `key` makes a repeated\nrequest count once."
+   },
+   "AiCostsOut": {
+    "properties": {
+     "totals": {
+      "$ref": "#/components/schemas/TotalsOut"
+     },
+     "month": {
+      "$ref": "#/components/schemas/MonthOut"
+     },
+     "unpaid_today": {
+      "$ref": "#/components/schemas/UnpaidTodayOut"
+     },
+     "categories": {
+      "items": {
+       "$ref": "#/components/schemas/CategoryOut"
+      },
+      "type": "array",
+      "title": "Categories"
+     },
+     "actions": {
+      "items": {
+       "$ref": "#/components/schemas/ActionOut"
+      },
+      "type": "array",
+      "title": "Actions"
+     },
+     "models": {
+      "items": {
+       "$ref": "#/components/schemas/ModelOut"
+      },
+      "type": "array",
+      "title": "Models"
+     },
+     "companies": {
+      "items": {
+       "$ref": "#/components/schemas/SpenderOut"
+      },
+      "type": "array",
+      "title": "Companies"
+     },
+     "users": {
+      "items": {
+       "$ref": "#/components/schemas/SpenderOut"
+      },
+      "type": "array",
+      "title": "Users"
+     },
+     "by_month": {
+      "type": "boolean",
+      "title": "By Month"
+     },
+     "days": {
+      "items": {
+       "$ref": "#/components/schemas/DayOut"
+      },
+      "type": "array",
+      "title": "Days"
+     }
+    },
+    "type": "object",
+    "required": [
+     "totals",
+     "month",
+     "unpaid_today",
+     "categories",
+     "actions",
+     "models",
+     "companies",
+     "users",
+     "by_month",
+     "days"
+    ],
+    "title": "AiCostsOut"
+   },
+   "AiSpendOut": {
+    "properties": {
+     "spend": {
+      "type": "number",
+      "title": "Spend"
+     },
+     "calls": {
+      "type": "integer",
+      "title": "Calls"
+     },
+     "days": {
+      "type": "integer",
+      "title": "Days"
+     }
+    },
+    "type": "object",
+    "required": [
+     "spend",
+     "calls",
+     "days"
+    ],
+    "title": "AiSpendOut",
+    "description": "A company's or user's AI spend over the last SPEND_DAYS days, for its support page."
+   },
    "AutoTopUpIn": {
     "properties": {
      "product": {
@@ -1130,6 +1873,41 @@
     ],
     "title": "BalanceOut"
    },
+   "BuyerPurchaseOut": {
+    "properties": {
+     "transaction_id": {
+      "type": "string",
+      "title": "Transaction Id"
+     },
+     "company_id": {
+      "type": "string",
+      "title": "Company Id"
+     },
+     "total": {
+      "type": "string",
+      "title": "Total"
+     },
+     "currency": {
+      "type": "string",
+      "title": "Currency"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "transaction_id",
+     "company_id",
+     "total",
+     "currency",
+     "created_at"
+    ],
+    "title": "BuyerPurchaseOut",
+    "description": "A top-up someone paid for into a company: `total` in minor units, tax included."
+   },
    "CandidatePriceOut": {
     "properties": {
      "from_dollars": {
@@ -1219,6 +1997,34 @@
     "title": "CatalogOut",
     "description": "What the pricing page and Paddle.js need. Prices are decided here, not in the client."
    },
+   "CategoryOut": {
+    "properties": {
+     "spend": {
+      "type": "number",
+      "title": "Spend"
+     },
+     "calls": {
+      "type": "integer",
+      "title": "Calls"
+     },
+     "category": {
+      "type": "string",
+      "title": "Category"
+     },
+     "share": {
+      "type": "number",
+      "title": "Share"
+     }
+    },
+    "type": "object",
+    "required": [
+     "spend",
+     "calls",
+     "category",
+     "share"
+    ],
+    "title": "CategoryOut"
+   },
    "CheckoutOut": {
     "properties": {
      "price_id": {
@@ -1240,6 +2046,25 @@
     ],
     "title": "CheckoutOut",
     "description": "The Paddle checkout to open: its price and the custom data to send with it."
+   },
+   "DayOut": {
+    "properties": {
+     "day": {
+      "type": "string",
+      "format": "date",
+      "title": "Day"
+     },
+     "spend": {
+      "type": "number",
+      "title": "Spend"
+     }
+    },
+    "type": "object",
+    "required": [
+     "day",
+     "spend"
+    ],
+    "title": "DayOut"
    },
    "HTTPValidationError": {
     "properties": {
@@ -1321,6 +2146,17 @@
        }
       ],
       "title": "Hold Key"
+     },
+     "note": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Note"
      }
     },
     "type": "object",
@@ -1338,6 +2174,50 @@
     "title": "HistoryEntryOut",
     "description": "One movement of a wallet's credits. `total` (minor units, tax included) and `currency`\nare what a top-up cost or an adjustment moved, when known; `transaction_id` is the Paddle\ntransaction of a top-up or adjustment, and `hold_key` the key of a candidate's credits."
    },
+   "HitterOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "title": "Id"
+     },
+     "name": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Name"
+     },
+     "hits": {
+      "type": "integer",
+      "title": "Hits"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "name",
+     "hits"
+    ],
+    "title": "HitterOut"
+   },
+   "HoldOut": {
+    "properties": {
+     "status": {
+      "type": "string",
+      "title": "Status"
+     }
+    },
+    "type": "object",
+    "required": [
+     "status"
+    ],
+    "title": "HoldOut",
+    "description": "Credits set aside for one piece of work: open, charged or released."
+   },
    "InvoiceOut": {
     "properties": {
      "url": {
@@ -1351,6 +2231,298 @@
     ],
     "title": "InvoiceOut",
     "description": "A temporary link to the transaction's invoice PDF."
+   },
+   "LimitChangeOut": {
+    "properties": {
+     "name": {
+      "type": "string",
+      "title": "Name"
+     },
+     "old_value": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Old Value"
+     },
+     "new_value": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "New Value"
+     },
+     "changed_by_email": {
+      "type": "string",
+      "title": "Changed By Email"
+     },
+     "changed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Changed At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "name",
+     "old_value",
+     "new_value",
+     "changed_by_email",
+     "changed_at"
+    ],
+    "title": "LimitChangeOut"
+   },
+   "LimitHitListsOut": {
+    "properties": {
+     "ours": {
+      "items": {
+       "$ref": "#/components/schemas/LimitHitsOut"
+      },
+      "type": "array",
+      "title": "Ours"
+     },
+     "providers": {
+      "items": {
+       "$ref": "#/components/schemas/LimitHitsOut"
+      },
+      "type": "array",
+      "title": "Providers"
+     }
+    },
+    "type": "object",
+    "required": [
+     "ours",
+     "providers"
+    ],
+    "title": "LimitHitListsOut"
+   },
+   "LimitHitsOut": {
+    "properties": {
+     "limit": {
+      "type": "string",
+      "title": "Limit"
+     },
+     "kind": {
+      "type": "string",
+      "title": "Kind"
+     },
+     "scope": {
+      "type": "string",
+      "title": "Scope"
+     },
+     "value": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Value"
+     },
+     "unit": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Unit"
+     },
+     "window": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Window"
+     },
+     "hits": {
+      "type": "integer",
+      "title": "Hits"
+     },
+     "companies": {
+      "items": {
+       "$ref": "#/components/schemas/HitterOut"
+      },
+      "type": "array",
+      "title": "Companies"
+     },
+     "users": {
+      "items": {
+       "$ref": "#/components/schemas/HitterOut"
+      },
+      "type": "array",
+      "title": "Users"
+     }
+    },
+    "type": "object",
+    "required": [
+     "limit",
+     "kind",
+     "scope",
+     "value",
+     "unit",
+     "window",
+     "hits",
+     "companies",
+     "users"
+    ],
+    "title": "LimitHitsOut"
+   },
+   "LimitIn": {
+    "properties": {
+     "value": {
+      "type": "number",
+      "minimum": 0.0,
+      "title": "Value"
+     }
+    },
+    "type": "object",
+    "required": [
+     "value"
+    ],
+    "title": "LimitIn"
+   },
+   "LimitOut": {
+    "properties": {
+     "name": {
+      "type": "string",
+      "title": "Name"
+     },
+     "service": {
+      "type": "string",
+      "title": "Service"
+     },
+     "value": {
+      "type": "number",
+      "title": "Value"
+     },
+     "default": {
+      "type": "number",
+      "title": "Default"
+     },
+     "changed": {
+      "type": "boolean",
+      "title": "Changed"
+     },
+     "unit": {
+      "type": "string",
+      "title": "Unit"
+     },
+     "window": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Window"
+     },
+     "lowest": {
+      "type": "number",
+      "title": "Lowest"
+     },
+     "highest": {
+      "type": "number",
+      "title": "Highest"
+     },
+     "scope": {
+      "type": "string",
+      "title": "Scope"
+     },
+     "audience": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Audience"
+     },
+     "counted": {
+      "type": "boolean",
+      "title": "Counted"
+     },
+     "hits": {
+      "type": "integer",
+      "title": "Hits"
+     },
+     "unpaid": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/LimitOut"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "type": "object",
+    "required": [
+     "name",
+     "service",
+     "value",
+     "default",
+     "changed",
+     "unit",
+     "window",
+     "lowest",
+     "highest",
+     "scope",
+     "audience",
+     "counted",
+     "hits"
+    ],
+    "title": "LimitOut"
+   },
+   "LimitsOut": {
+    "properties": {
+     "limits": {
+      "items": {
+       "$ref": "#/components/schemas/LimitOut"
+      },
+      "type": "array",
+      "title": "Limits"
+     },
+     "providers": {
+      "items": {
+       "$ref": "#/components/schemas/ProviderLimitOut"
+      },
+      "type": "array",
+      "title": "Providers"
+     },
+     "hits_days": {
+      "type": "integer",
+      "title": "Hits Days"
+     }
+    },
+    "type": "object",
+    "required": [
+     "limits",
+     "providers",
+     "hits_days"
+    ],
+    "title": "LimitsOut"
    },
    "LowCompaniesOut": {
     "properties": {
@@ -1386,6 +2558,72 @@
     ],
     "title": "LowCompanyOut"
    },
+   "ModelOut": {
+    "properties": {
+     "spend": {
+      "type": "number",
+      "title": "Spend"
+     },
+     "calls": {
+      "type": "integer",
+      "title": "Calls"
+     },
+     "input_tokens": {
+      "type": "integer",
+      "title": "Input Tokens"
+     },
+     "cached_input_tokens": {
+      "type": "integer",
+      "title": "Cached Input Tokens"
+     },
+     "output_tokens": {
+      "type": "integer",
+      "title": "Output Tokens"
+     },
+     "model": {
+      "type": "string",
+      "title": "Model"
+     },
+     "cached_share": {
+      "type": "number",
+      "title": "Cached Share"
+     }
+    },
+    "type": "object",
+    "required": [
+     "spend",
+     "calls",
+     "input_tokens",
+     "cached_input_tokens",
+     "output_tokens",
+     "model",
+     "cached_share"
+    ],
+    "title": "ModelOut"
+   },
+   "MonthOut": {
+    "properties": {
+     "spend": {
+      "type": "number",
+      "title": "Spend"
+     },
+     "budget": {
+      "type": "number",
+      "title": "Budget"
+     },
+     "share": {
+      "type": "number",
+      "title": "Share"
+     }
+    },
+    "type": "object",
+    "required": [
+     "spend",
+     "budget",
+     "share"
+    ],
+    "title": "MonthOut"
+   },
    "OwnersIn": {
     "properties": {
      "owner_ids": {
@@ -1415,6 +2653,103 @@
      "paid"
     ],
     "title": "PaidOut"
+   },
+   "ProviderLimitOut": {
+    "properties": {
+     "name": {
+      "type": "string",
+      "title": "Name"
+     },
+     "provider": {
+      "type": "string",
+      "title": "Provider"
+     },
+     "hits": {
+      "type": "integer",
+      "title": "Hits"
+     }
+    },
+    "type": "object",
+    "required": [
+     "name",
+     "provider",
+     "hits"
+    ],
+    "title": "ProviderLimitOut"
+   },
+   "PurchaseOwnerOut": {
+    "properties": {
+     "owner_type": {
+      "type": "string",
+      "title": "Owner Type"
+     },
+     "owner_id": {
+      "type": "string",
+      "title": "Owner Id"
+     }
+    },
+    "type": "object",
+    "required": [
+     "owner_type",
+     "owner_id"
+    ],
+    "title": "PurchaseOwnerOut",
+    "description": "Whose wallet a top-up's transaction paid into."
+   },
+   "PushBody": {
+    "properties": {
+     "message": {
+      "$ref": "#/components/schemas/PushMessage"
+     },
+     "subscription": {
+      "type": "string",
+      "title": "Subscription"
+     }
+    },
+    "type": "object",
+    "required": [
+     "message",
+     "subscription"
+    ],
+    "title": "PushBody",
+    "description": "What Pub/Sub sends to a push endpoint."
+   },
+   "PushMessage": {
+    "properties": {
+     "data": {
+      "type": "string",
+      "title": "Data",
+      "default": ""
+     },
+     "attributes": {
+      "additionalProperties": {
+       "type": "string"
+      },
+      "type": "object",
+      "title": "Attributes",
+      "default": {}
+     },
+     "messageId": {
+      "type": "string",
+      "title": "Messageid"
+     },
+     "publishTime": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Publishtime"
+     }
+    },
+    "type": "object",
+    "required": [
+     "messageId"
+    ],
+    "title": "PushMessage"
    },
    "ReferralOut": {
     "properties": {
@@ -1472,6 +2807,41 @@
     ],
     "title": "ReferralRewardOut",
     "description": "A company that came through the link and topped up, so both got the reward."
+   },
+   "SpenderOut": {
+    "properties": {
+     "spend": {
+      "type": "number",
+      "title": "Spend"
+     },
+     "calls": {
+      "type": "integer",
+      "title": "Calls"
+     },
+     "id": {
+      "type": "string",
+      "title": "Id"
+     },
+     "name": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Name"
+     }
+    },
+    "type": "object",
+    "required": [
+     "spend",
+     "calls",
+     "id",
+     "name"
+    ],
+    "title": "SpenderOut"
    },
    "StatsOut": {
     "properties": {
@@ -1577,6 +2947,62 @@
      "price_id"
     ],
     "title": "TopUpOut"
+   },
+   "TotalsOut": {
+    "properties": {
+     "spend": {
+      "type": "number",
+      "title": "Spend"
+     },
+     "calls": {
+      "type": "integer",
+      "title": "Calls"
+     },
+     "input_tokens": {
+      "type": "integer",
+      "title": "Input Tokens"
+     },
+     "cached_input_tokens": {
+      "type": "integer",
+      "title": "Cached Input Tokens"
+     },
+     "output_tokens": {
+      "type": "integer",
+      "title": "Output Tokens"
+     }
+    },
+    "type": "object",
+    "required": [
+     "spend",
+     "calls",
+     "input_tokens",
+     "cached_input_tokens",
+     "output_tokens"
+    ],
+    "title": "TotalsOut"
+   },
+   "UnpaidTodayOut": {
+    "properties": {
+     "spend": {
+      "type": "number",
+      "title": "Spend"
+     },
+     "cap": {
+      "type": "number",
+      "title": "Cap"
+     },
+     "share": {
+      "type": "number",
+      "title": "Share"
+     }
+    },
+    "type": "object",
+    "required": [
+     "spend",
+     "cap",
+     "share"
+    ],
+    "title": "UnpaidTodayOut"
    },
    "ValidationError": {
     "properties": {

@@ -56,6 +56,14 @@ def test_only_the_rows_the_model_chose_are_shown_and_kept_as_ids(companies):
     assert "ann@example.com" not in str(block["ref"])
 
 
+def test_interview_rows_are_read_and_kept_by_the_interviews_id(companies):
+    _, block = run({"kind": "interviews", "rows": [{"interview_id": "i1"}]})
+
+    assert [item["title"] for item in block["items"]] == ["Senior Backend"]
+    assert block["links"] == [f"/companies/{COMPANY}/interviews/i1"]
+    assert block["ref"]["refs"] == [{"id": "i1"}]
+
+
 def test_a_link_is_built_from_the_app_map_and_named_by_what_it_opens(companies):
     _, block = run({"kind": "link", "page": "interview", "interview_id": "i1"})
 

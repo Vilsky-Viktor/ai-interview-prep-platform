@@ -317,6 +317,7 @@
      "superadmin"
     ],
     "summary": "Get Template Detail",
+    "description": "Its topics with their practice and company question counts, and whether a top-up has\nanything to write.",
     "operationId": "get_template_detail_superadmin_templates__template_id__get",
     "security": [
      {
@@ -341,7 +342,7 @@
       "content": {
        "application/json": {
         "schema": {
-         "$ref": "#/components/schemas/TemplateOut"
+         "$ref": "#/components/schemas/PooledTemplateOut"
         }
        }
       }
@@ -697,6 +698,54 @@
       "HTTPBearer": []
      }
     ]
+   }
+  },
+  "/superadmin/emails/accounts/{user_id}": {
+   "get": {
+    "tags": [
+     "superadmin"
+    ],
+    "summary": "Get Account",
+    "description": "The account with that id (the support tab's user page), with its email settings; 404\nwhen there's none, or it has no address to email (a company's guest candidate).",
+    "operationId": "get_account_superadmin_emails_accounts__user_id__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "user_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "User Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/EmailAccountOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
    }
   },
   "/superadmin/emails/{user_id}/preferences": {
@@ -1762,7 +1811,7 @@
      "templates"
     ],
     "summary": "Sample Questions",
-    "description": "A few of the template's revealed questions, with answers, spread across its topics, for\nits practice page. Private and retiring questions are never shown.",
+    "description": "A few of the template's practice questions, with answers, spread across its topics, for\nits practice page. Company questions are never shown.",
     "operationId": "sample_questions_templates__key__sample_get",
     "parameters": [
      {
@@ -2467,8 +2516,35 @@
      "internal"
     ],
     "summary": "User Ids",
-    "description": "Notifications, for a notice about the terms or the privacy policy: every account.",
+    "description": "Notifications: every account, for a notice about the terms or the privacy policy; with a\n`setting`, the users who have it on (a campaign's product updates or offers).",
     "operationId": "user_ids_internal_users_ids_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "setting",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "enum": [
+          "updates",
+          "promotions"
+         ],
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Setting"
+      }
+     }
+    ],
     "responses": {
      "200": {
       "description": "Successful Response",
@@ -2479,13 +2555,18 @@
         }
        }
       }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
      }
-    },
-    "security": [
-     {
-      "HTTPBearer": []
-     }
-    ]
+    }
    }
   },
   "/internal/users/{user_id}/unsubscribe": {
@@ -2593,6 +2674,217 @@
     ]
    }
   },
+  "/internal/accounts/{user_id}": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Get Account",
+    "description": "404 when there's no account with that id.",
+    "operationId": "get_account_internal_accounts__user_id__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "user_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "User Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/AccountOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/accounts/lookup": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Look Up",
+    "description": "The account signed in with the address, whatever its case; 404 when there's none.",
+    "operationId": "look_up_internal_accounts_lookup_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/UserEmailIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/AccountOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/internal/templates/{template_id}/additions": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Addition Context",
+    "description": "Each topic with every question's text, and what it lacks of each pool.",
+    "operationId": "addition_context_internal_templates__template_id__additions_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "template_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Template Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/AdditionContext"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/templates/{template_id}/questions": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Add Questions",
+    "description": "Saves the new questions of every topic at once; each topic's new question ids, for the\nanswer-key checks. Interviews already copied from the template don't change.",
+    "operationId": "add_questions_internal_templates__template_id__questions_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "template_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "title": "Template Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/AddedQuestionsIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "type": "array",
+          "items": {
+           "type": "string",
+           "format": "uuid"
+          }
+         },
+         "title": "Response Add Questions Internal Templates  Template Id  Questions Post"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
   "/internal/schedules/outbox": {
    "post": {
     "tags": [
@@ -2613,9 +2905,9 @@
     "tags": [
      "schedules"
     ],
-    "summary": "Move Bank Stages",
-    "description": "Daily, from Cloud Scheduler: bank questions move one way, private to retiring to\nrevealed (constants/sets.py Stage). The same daily run sends flags the verifier hasn't acted\non to it again, and forgets old notes of processed events.",
-    "operationId": "move_bank_stages_internal_schedules_bank_post",
+    "summary": "Daily Housekeeping",
+    "description": "Daily, from Cloud Scheduler: sends flags the verifier hasn't acted on to it again, news\nposts still missing translations to be translated again, and forgets old notes of processed\nevents.",
+    "operationId": "daily_housekeeping_internal_schedules_bank_post",
     "responses": {
      "204": {
       "description": "Successful Response"
@@ -2879,6 +3171,53 @@
     }
    }
   },
+  "/internal/news/titles": {
+   "post": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "News Titles",
+    "description": "The posts' titles in the reader's language, in English until it's translated.",
+    "operationId": "news_titles_internal_news_titles_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/NewsTitlesIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/NewsTitlesOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
   "/internal/news/{news_id}": {
    "get": {
     "tags": [
@@ -2985,7 +3324,7 @@
      "internal"
     ],
     "summary": "Practice Content",
-    "description": "The template's revealed questions, with answers, by topic; topics without any are left\nout. Rounds picks each practice round's questions from them.",
+    "description": "The template's practice questions, with answers, by topic; topics without any are left\nout. Rounds picks each practice round's questions from them.",
     "operationId": "practice_content_internal_templates__template_id__practice_get",
     "security": [
      {
@@ -3166,7 +3505,7 @@
      "internal"
     ],
     "summary": "Find Reusable",
-    "description": "Proven private bank questions on a similar topic, for a new generation.",
+    "description": "Proven company bank questions on a similar topic, for a new generation.",
     "operationId": "find_reusable_internal_reuse_post",
     "requestBody": {
      "content": {
@@ -3308,10 +3647,277 @@
      }
     ]
    }
+  },
+  "/internal/code/untagged": {
+   "get": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "List Untagged Code",
+    "description": "Questions whose example has no language yet, or with `text` the ones tagged \"text\", in id\norder after `after`: for generation's tag_code_languages job.",
+    "operationId": "list_untagged_code_internal_code_untagged_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 100,
+       "minimum": 1,
+       "default": 100,
+       "title": "Limit"
+      }
+     },
+     {
+      "name": "text",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "boolean",
+       "default": false,
+       "title": "Text"
+      }
+     },
+     {
+      "name": "after",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "format": "uuid"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "After"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/UntaggedQuestion"
+         },
+         "title": "Response List Untagged Code Internal Code Untagged Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/code/languages": {
+   "put": {
+    "tags": [
+     "internal"
+    ],
+    "summary": "Save Code Languages",
+    "description": "Each listed question's example gets its language; with `text`, ones tagged \"text\".",
+    "operationId": "save_code_languages_internal_code_languages_put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "text",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "boolean",
+       "default": false,
+       "title": "Text"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "type": "array",
+        "items": {
+         "$ref": "#/components/schemas/CodeLanguageIn"
+        },
+        "title": "Body"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "Successful Response"
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
   }
  },
  "components": {
   "schemas": {
+   "AccountOut": {
+    "properties": {
+     "user_id": {
+      "type": "string",
+      "title": "User Id"
+     },
+     "email": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Email"
+     },
+     "created_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Created At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "user_id",
+     "email",
+     "created_at"
+    ],
+    "title": "AccountOut",
+    "description": "A prepza account, for the admin zone's support tab: `email` is None for an account\nwithout one (a company's guest candidate), `created_at` when Firebase doesn't say."
+   },
+   "AddedQuestionsIn": {
+    "properties": {
+     "topics": {
+      "items": {
+       "$ref": "#/components/schemas/TopicAdditionIn"
+      },
+      "type": "array",
+      "title": "Topics"
+     }
+    },
+    "type": "object",
+    "required": [
+     "topics"
+    ],
+    "title": "AddedQuestionsIn",
+    "description": "Questions generation adds to a template's topics, saved in one go."
+   },
+   "AdditionContext": {
+    "properties": {
+     "level": {
+      "type": "string",
+      "title": "Level"
+     },
+     "language": {
+      "type": "string",
+      "title": "Language"
+     },
+     "topics": {
+      "items": {
+       "$ref": "#/components/schemas/AdditionTopic"
+      },
+      "type": "array",
+      "title": "Topics"
+     }
+    },
+    "type": "object",
+    "required": [
+     "level",
+     "language",
+     "topics"
+    ],
+    "title": "AdditionContext",
+    "description": "A template's topics, for adding questions to them (library's internal_additions.py)."
+   },
+   "AdditionTopic": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "subtopics": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Subtopics"
+     },
+     "texts": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Texts"
+     },
+     "practice_missing": {
+      "type": "integer",
+      "title": "Practice Missing"
+     },
+     "company_missing": {
+      "type": "integer",
+      "title": "Company Missing"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "title",
+     "subtopics",
+     "texts",
+     "practice_missing",
+     "company_missing"
+    ],
+    "title": "AdditionTopic",
+    "description": "A template topic, as generation needs it to add questions to it."
+   },
    "AdminEmailChangesIn": {
     "properties": {
      "changes": {
@@ -3373,6 +3979,26 @@
      "translated"
     ],
     "title": "AdminNewsOut"
+   },
+   "CodeLanguageIn": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "language": {
+      "type": "string",
+      "pattern": "^[a-z0-9+#-]{1,20}$",
+      "title": "Language"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "language"
+    ],
+    "title": "CodeLanguageIn"
    },
    "CreatedOut": {
     "properties": {
@@ -3548,7 +4174,7 @@
       "title": "Answers"
      },
      "correct": {
-      "type": "integer",
+      "type": "number",
       "title": "Correct"
      },
      "reports": {
@@ -3820,6 +4446,70 @@
     "title": "NewsSourceOut",
     "description": "A post to translate (generation): its English text and the languages it lacks."
    },
+   "NewsTitlesIn": {
+    "properties": {
+     "news_ids": {
+      "items": {
+       "type": "string",
+       "format": "uuid"
+      },
+      "type": "array",
+      "title": "News Ids"
+     },
+     "language": {
+      "type": "string",
+      "enum": [
+       "en",
+       "ru",
+       "uk",
+       "es",
+       "pt",
+       "de",
+       "fr",
+       "it",
+       "pl",
+       "nl",
+       "tr",
+       "ar",
+       "he",
+       "fa",
+       "ja",
+       "zh",
+       "ko",
+       "hi",
+       "id",
+       "th",
+       "vi",
+       "fil",
+       "et"
+      ],
+      "title": "Language"
+     }
+    },
+    "type": "object",
+    "required": [
+     "news_ids",
+     "language"
+    ],
+    "title": "NewsTitlesIn",
+    "description": "Posts the bell names (notifications), and the reader's language."
+   },
+   "NewsTitlesOut": {
+    "properties": {
+     "titles": {
+      "additionalProperties": {
+       "type": "string"
+      },
+      "type": "object",
+      "title": "Titles"
+     }
+    },
+    "type": "object",
+    "required": [
+     "titles"
+    ],
+    "title": "NewsTitlesOut"
+   },
    "NewsTranslationIn": {
     "properties": {
      "title": {
@@ -3913,6 +4603,120 @@
      "correct"
     ],
     "title": "OptionIn"
+   },
+   "PoolTopicOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "subtopics": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Subtopics"
+     },
+     "practice_count": {
+      "type": "integer",
+      "title": "Practice Count"
+     },
+     "company_count": {
+      "type": "integer",
+      "title": "Company Count"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "title",
+     "subtopics",
+     "practice_count",
+     "company_count"
+    ],
+    "title": "PoolTopicOut",
+    "description": "A template topic as its superadmin page shows it: its questions by pool."
+   },
+   "PooledTemplateOut": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "slug": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Slug"
+     },
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "level": {
+      "type": "string",
+      "title": "Level"
+     },
+     "language": {
+      "type": "string",
+      "title": "Language"
+     },
+     "topic_count": {
+      "type": "integer",
+      "title": "Topic Count"
+     },
+     "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+     },
+     "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Updated At"
+     },
+     "indexable": {
+      "type": "boolean",
+      "title": "Indexable",
+      "default": false
+     },
+     "topics": {
+      "items": {
+       "$ref": "#/components/schemas/PoolTopicOut"
+      },
+      "type": "array",
+      "title": "Topics"
+     },
+     "short": {
+      "type": "boolean",
+      "title": "Short"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "slug",
+     "title",
+     "level",
+     "language",
+     "topic_count",
+     "created_at",
+     "updated_at",
+     "topics",
+     "short"
+    ],
+    "title": "PooledTemplateOut"
    },
    "PreparationIn": {
     "properties": {
@@ -4065,6 +4869,16 @@
       },
       "type": "array",
       "title": "Existing"
+     },
+     "multi": {
+      "type": "boolean",
+      "title": "Multi",
+      "default": false
+     },
+     "example": {
+      "type": "boolean",
+      "title": "Example",
+      "default": false
      }
     },
     "type": "object",
@@ -4256,6 +5070,11 @@
       "type": "array",
       "title": "Options"
      },
+     "multi": {
+      "type": "boolean",
+      "title": "Multi",
+      "default": false
+     },
      "likes": {
       "type": "integer",
       "title": "Likes",
@@ -4369,7 +5188,7 @@
       "title": "Answers"
      },
      "correct": {
-      "type": "integer",
+      "type": "number",
       "title": "Correct"
      },
      "reports": {
@@ -4473,6 +5292,7 @@
     "enum": [
      "wrong_answer",
      "unclear",
+     "hard_to_read",
      "off_topic",
      "other"
     ],
@@ -4569,7 +5389,7 @@
      "options"
     ],
     "title": "SampleQuestionOut",
-    "description": "A revealed question of a template, with its answer, shown on its public practice page."
+    "description": "A practice question of a template, with its answer, shown on its public practice page."
    },
    "SetContent": {
     "properties": {
@@ -4581,6 +5401,10 @@
      "title": {
       "type": "string",
       "title": "Title"
+     },
+     "level": {
+      "type": "string",
+      "title": "Level"
      },
      "topics": {
       "items": {
@@ -4594,6 +5418,7 @@
     "required": [
      "id",
      "title",
+     "level",
      "topics"
     ],
     "title": "SetContent",
@@ -4765,13 +5590,18 @@
      "language": {
       "type": "string",
       "title": "Language"
+     },
+     "level": {
+      "type": "string",
+      "title": "Level"
      }
     },
     "type": "object",
     "required": [
      "id",
      "title",
-     "language"
+     "language",
+     "level"
     ],
     "title": "TemplateCopyOut",
     "description": "The company's new test set."
@@ -4950,6 +5780,37 @@
     ],
     "title": "TitleIn"
    },
+   "TopicAdditionIn": {
+    "properties": {
+     "topic_id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Topic Id"
+     },
+     "practice": {
+      "items": {
+       "$ref": "#/components/schemas/QuestionIn"
+      },
+      "type": "array",
+      "title": "Practice"
+     },
+     "company": {
+      "items": {
+       "$ref": "#/components/schemas/QuestionIn"
+      },
+      "type": "array",
+      "title": "Company"
+     }
+    },
+    "type": "object",
+    "required": [
+     "topic_id",
+     "practice",
+     "company"
+    ],
+    "title": "TopicAdditionIn",
+    "description": "New questions for one topic of a template, by the pool each goes to."
+   },
    "TopicEmbedding": {
     "properties": {
      "id": {
@@ -5091,6 +5952,25 @@
     ],
     "title": "UnsubscribeIn",
     "description": "The settings an unsubscribe link turns off."
+   },
+   "UntaggedQuestion": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+     },
+     "text": {
+      "type": "string",
+      "title": "Text"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "text"
+    ],
+    "title": "UntaggedQuestion"
    },
    "UserEmailIn": {
     "properties": {

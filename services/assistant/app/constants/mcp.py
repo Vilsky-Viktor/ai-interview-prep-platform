@@ -45,13 +45,36 @@ KNOWN_CLIENTS = {
     "claude.ai": "Claude",
     "claude.com": "Claude",
     "chatgpt.com": "ChatGPT",
+    "chat.mistral.ai": "Le Chat",
+    # VS Code on the web returns through vscode.dev/redirect.
+    "vscode.dev": "VS Code",
 }
+# Desktop apps known by their own scheme (cursor://...), exactly these.
+KNOWN_SCHEMES = {"cursor": "Cursor", "vscode": "VS Code"}
 # An app on the user's own computer (Claude Code, Claude Desktop, MCP Inspector): its code never
 # leaves that computer, so it's known too, named as it says.
 LOOPBACK_HOSTS = ("localhost", "127.0.0.1", "[::1]", "::1")
 LOCAL_APP = "Local app"
 # What the funnel calls each app.
-FUNNEL_CLIENTS = {"Claude": "claude", "ChatGPT": "chatgpt"}
+FUNNEL_CLIENTS = {
+    "Claude": "claude",
+    "ChatGPT": "chatgpt",
+    "Le Chat": "le_chat",
+    "Cursor": "cursor",
+    "VS Code": "vscode",
+}
+
+# An AI agent on a server signs in with a company's API key instead (the api service's, which
+# checks it): it acts as the key's maker, in the key's company only, if the key has the mcp
+# permission (constants/key_tools.py lists the tools each permission allows).
+API_KEY_PREFIX = "pz_"
+KEY_MCP_PERMISSION = "mcp"
+VERIFY_KEY_PATH = "/internal/keys/verify"
+KEY_CLIENT_NAME = "API key"
+KEY_FUNNEL_CLIENT = "api_key"
+KEY_MISSING_PERMISSION = "This API key doesn't have the {permission} permission."
+# The developer docs' list of the tools (routers/mcp_docs.py) is cached this long.
+TOOLS_CACHE_SECONDS = 60 * 60
 
 # A request to connect once it's answered or expired, and a connection that isn't the user's:
 # the consent page and the connections list say what it means.
@@ -78,8 +101,9 @@ EXCLUDED_TOOL = (
     "This can only be done in prepza itself: deleting an account or a company can't be undone."
 )
 # Tools an app doesn't see at all: the bell names candidates of every company the user is in,
-# past the companies that don't allow AI apps (companies refuses those on its own routes).
-MCP_UNLISTED = frozenset({"list_notifications"})
+# past the companies that don't allow AI apps (companies refuses those on its own routes); a
+# page's guide is about the page the user is on in prepza, and an app has none.
+MCP_UNLISTED = frozenset({"list_notifications", "get_page_guide"})
 # What an app reads when the connection's account is gone or disabled.
 ACCOUNT_GONE = "This prepza account no longer exists or is disabled."
 # The tool that changes the user's language: their kept sign-in is dropped after it, so the next
@@ -94,3 +118,6 @@ MAX_KEEP_SECONDS = 300
 ID_TOKEN_CACHE_KEY = "mcp:id-token:{uid}"
 # Firebase's sign-in API, where an AI app's calls get the user's ID token.
 IDENTITY_TOOLKIT = "https://identitytoolkit.googleapis.com/v1"
+# Its errors when it refuses for its own limits rather than for the token (they may be followed
+# by " : <detail>").
+FIREBASE_LIMIT_ERRORS = ("TOO_MANY_ATTEMPTS_TRY_LATER", "QUOTA_EXCEEDED", "RESOURCE_EXHAUSTED")

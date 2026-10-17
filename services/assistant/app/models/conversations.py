@@ -44,6 +44,9 @@ class Message(Base):
     # What the panel shows under an answer, as references: each block's kind, its items' ids and
     # its links; the items are fetched again when the conversation is opened.
     blocks: Mapped[list] = mapped_column(JSONB, default=list)
+    # The page a user's message was asked on: its key, path and the ids it's about; None for an
+    # answer, or a message sent from no known page.
+    page: Mapped[dict | None] = mapped_column(JSONB)
     # "complete", "cancelled" (stopped, with its partial text) or "failed".
     status: Mapped[str] = mapped_column(String(16), default="complete")
     input_tokens: Mapped[int] = mapped_column(Integer, default=0)

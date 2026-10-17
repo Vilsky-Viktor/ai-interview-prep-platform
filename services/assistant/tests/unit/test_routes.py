@@ -8,13 +8,15 @@ from fastapi import HTTPException
 from prepza_common.user import User
 
 from app.auth import user_with_token
-from app.constants.limits import MAX_AUDIO_SECONDS, MESSAGES_PER_USER_HOUR
+from app.constants.limits import MAX_AUDIO_SECONDS
 from app.integrations import services
 from app.main import app
 from app.models.conversations import Conversation
+from app.routers import chat as chat_router
 from app.services import conversations as conversation_service
 from app.services import events, turns
 from app.storage import conversations
+from tests.unit.fake_redis import FakeRedis
 
 COMPANY = uuid.UUID("8c1d2b8e-1a2b-4c3d-8e9f-0a1b2c3d4e5f")
 ANN = User(uid="ann", email="ann@example.com", email_verified=True)
@@ -61,7 +63,7 @@ def test_a_message_too_long_is_refused_in_the_users_language(client, signed_in):
 def test_paused_or_over_a_limit_is_refused_before_anything_is_saved(
     client, signed_in, created, monkeypatch
 ):
-    async def paused(redis):
+    async def paused(redis, what, company_id=None, user_id=None):
         raise HTTPException(503, "paused")
 
     monkeypatch.setattr(turns, "refuse_if_paused", paused)
@@ -70,7 +72,7 @@ def test_paused_or_over_a_limit_is_refused_before_anything_is_saved(
     async def over(redis, user_id, company_id):
         raise HTTPException(429, "over")
 
-    async def not_paused(redis):
+    async def not_paused(redis, what, company_id=None, user_id=None):
         pass
 
     async def companies(user_id, fresh=False):
@@ -86,7 +88,7 @@ def test_paused_or_over_a_limit_is_refused_before_anything_is_saved(
 def test_a_new_conversation_only_about_a_company_the_user_can_see(
     client, signed_in, created, monkeypatch
 ):
-    async def not_paused(redis):
+    async def not_paused(redis, what, company_id=None, user_id=None):
         pass
 
     async def companies(user_id, fresh=False):
@@ -100,13 +102,22 @@ def test_a_new_conversation_only_about_a_company_the_user_can_see(
     assert created == []
 
 
-def test_the_panel_reads_its_limits_signed_out_too(client):
+def test_the_panel_reads_its_limits_signed_out_too(client, monkeypatch):
+    monkeypatch.setattr(chat_router, "get_redis", lambda: FakeRedis())
     config = client.get("/config").json()
 
     assert config["restore_minutes"] == 30
     assert config["max_message_length"] == 2_000
     assert config["max_audio_seconds"] == MAX_AUDIO_SECONDS
-    assert config["messages_per_hour"] == MESSAGES_PER_USER_HOUR
+    assert (config["messages_per_hour"], config["messages_per_day"]) == (30, 200)
+
+
+def test_the_panel_reads_the_message_limits_as_edited(client, monkeypatch):
+    edited = FakeRedis({"MESSAGES_PER_USER_HOUR": 12, "MESSAGES_PER_USER_DAY": 90})
+    monkeypatch.setattr(chat_router, "get_redis", lambda: edited)
+    config = client.get("/config").json()
+
+    assert (config["messages_per_hour"], config["messages_per_day"]) == (12, 90)
 
 
 def test_signed_out_and_unsigned_calls_are_refused(client):

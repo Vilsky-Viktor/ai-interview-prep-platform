@@ -11,6 +11,7 @@ from prepza_common.user import User
 from app.constants.actions_flow import NOTHING_TO_CHANGE, SUBJECT_NOT_FOUND
 from app.constants.chat import COMPANY_NOT_FOUND
 from app.constants.mcp import ACCOUNT_GONE, EXCLUDED_TOOL
+from app.constants.tool_calls import UNKNOWN_TOOL
 from app.helpers.mcp_schema import mcp_tool
 from app.integrations import firebase_tokens, services
 from app.models.oauth_tokens import Access
@@ -82,10 +83,11 @@ def called(name: str, arguments: dict) -> tuple[bool, dict]:
     return result.is_error, json.loads(result.content[0].text)
 
 
-def test_every_tool_but_the_deletions_and_the_bell_is_listed():
+def test_every_tool_but_the_deletions_the_bell_and_the_page_guide_is_listed():
     names = {tool.name for tool in mcp_tools.listed()}
+    hidden = {"delete_account", "delete_company", "list_notifications", "get_page_guide"}
 
-    assert names == set(tools()) - {"delete_account", "delete_company", "list_notifications"}
+    assert names == set(tools()) - hidden
 
 
 def test_a_tool_is_listed_with_its_parameters_and_hints():
@@ -128,6 +130,8 @@ def test_the_account_and_company_deletion_are_refused(calls):
     assert called("delete_account", {}) == (True, {"error": EXCLUDED_TOOL})
     # The bell names candidates past the companies that don't allow AI apps.
     assert called("list_notifications", {})[0] is True
+    # A page's guide is about the page the user is on in prepza; an app has none.
+    assert called("get_page_guide", {"key": "billing"}) == (True, {"error": UNKNOWN_TOOL})
     assert calls == []
 
 

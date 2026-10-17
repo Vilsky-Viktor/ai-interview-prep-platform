@@ -1,3 +1,4 @@
+import asyncio
 import json
 from collections.abc import Callable
 from datetime import UTC, datetime
@@ -9,23 +10,29 @@ from langchain_core.messages import (
     SystemMessage,
     ToolMessage,
 )
+from prepza_common import ai_usage
+from prepza_common.ai_constants import Outcome
 from prepza_common.constants import LANGUAGES
 from prepza_common.i18n import translate
 from prepza_common.llm import estimated_input, estimated_tokens
 from prepza_common.scope import SCOPE_RULE
 
+from app.config.settings import settings
+from app.constants.ai_usage import MESSAGE_ACTION
 from app.constants.chat import COMPANY_NOT_FOUND, MAX_TOOL_STEPS, ToolState
 from app.constants.client_tools import SIGN_OUT, SIGN_OUT_DEFINITION, SIGN_OUT_FOR_MODEL
 from app.constants.show import SHOW, SHOW_DEFINITION
 from app.constants.tool_calls import INVALID_ARGUMENTS
 from app.constants.tool_labels import ACTION_LABEL, TOOL_LABELS, UNKNOWN_TOOL_LABEL
 from app.helpers.history import history
+from app.helpers.page_context import describe_page
 from app.integrations import llm
 from app.models.answers import Answer, Turn
 from app.models.tools import ToolResult
 from app.prompts.assistant import (
     ASSISTANT_SYSTEM,
     COMPANY_CONTEXT,
+    CURRENT_PAGE,
     NO_COMPANY_CONTEXT,
     NO_USER_NAME,
     UNKNOWN_PAGE,
@@ -46,10 +53,11 @@ class SessionExpired(Exception):
 
 
 def build_messages(
-    turn: Turn, earlier: list, message: str, page: str | None, room: int
+    turn: Turn, earlier: list, message: str, page: dict | None, room: int
 ) -> list[BaseMessage]:
-    """The instructions, the conversation's latest messages within `room` characters (see
-    helpers/history.py) and the new message."""
+    """The instructions with the page the user asks on (`page`, as stored with the message), the
+    conversation's latest messages within `room` characters (see helpers/history.py) and the
+    new message."""
     company = (
         COMPANY_CONTEXT.format(company_id=turn.company_id)
         if turn.company_id
@@ -59,15 +67,18 @@ def build_messages(
         language=LANGUAGES[turn.language],
         today=datetime.now(UTC).date().isoformat(),
         company=company,
-        # Quoted: the page is the client's text.
-        page=json.dumps(page) if page else UNKNOWN_PAGE,
+        page=CURRENT_PAGE.format(page=describe_page(page)) if page else UNKNOWN_PAGE,
         scope=SCOPE_RULE,
         user=USER_CONTEXT.format(name=json.dumps(turn.user_name))
         if turn.user_name
         else NO_USER_NAME,
     )
 
-    return [SystemMessage(content=system), *history(earlier, room), HumanMessage(content=message)]
+    return [
+        SystemMessage(content=system),
+        *history(earlier, room, with_pages=True),
+        HumanMessage(content=message),
+    ]
 
 
 async def converse(messages: list[BaseMessage], turn: Turn, answer: Answer, emit: Emit) -> None:
@@ -81,7 +92,7 @@ async def converse(messages: list[BaseMessage], turn: Turn, answer: Answer, emit
     for step in range(MAX_TOOL_STEPS + 1):
         last = step == MAX_TOOL_STEPS
         bound = model.bind_tools(definitions, tool_choice="none" if last else "auto")
-        reply = await ask(bound, messages, answer, emit)
+        reply = await ask(bound, messages, turn, answer, emit)
         calls = [*reply.tool_calls, *reply.invalid_tool_calls]
 
         if last or not calls:
@@ -91,11 +102,14 @@ async def converse(messages: list[BaseMessage], turn: Turn, answer: Answer, emit
         messages += await run_tools(calls, turn, answer, emit)
 
 
-async def ask(model, messages: list[BaseMessage], answer: Answer, emit: Emit) -> AIMessageChunk:
-    """One model call: its text streams to the panel as it comes; its tokens are counted, and
-    estimated when the call is cut short (cancelled, timed out, failed), which reports none,
-    though the model read the messages and wrote what came."""
+async def ask(
+    model, messages: list[BaseMessage], turn: Turn, answer: Answer, emit: Emit
+) -> AIMessageChunk:
+    """One model call: its text streams to the panel as it comes; its tokens are counted and
+    recorded, and estimated when the call is cut short (cancelled, timed out, failed), which
+    reports none, though the model read the messages and wrote what came."""
     reply = AIMessageChunk(content="")
+    outcome = Outcome.OK
 
     try:
         async for chunk in model.astream(messages):
@@ -104,15 +118,31 @@ async def ask(model, messages: list[BaseMessage], answer: Answer, emit: Emit) ->
             if chunk.text:
                 answer.parts.append(chunk.text)
                 emit({"delta": chunk.text})
+    except asyncio.CancelledError:
+        outcome = Outcome.CUT
+
+        raise
+    except Exception as error:
+        outcome = Outcome.FAILED
+        await ai_usage.provider_refused(error, MESSAGE_ACTION, turn.company_id, turn.user_id)
+
+        raise
     finally:
-        if reply.usage_metadata:
-            answer.input_tokens += reply.usage_metadata["input_tokens"]
-            answer.output_tokens += reply.usage_metadata["output_tokens"]
-        else:
-            answer.input_tokens += estimated_input(messages)
-            answer.output_tokens += estimated_tokens(
-                str(reply.content) + str(reply.tool_call_chunks)
-            )
+        usage = reply.usage_metadata or {
+            "input_tokens": estimated_input(messages),
+            "output_tokens": estimated_tokens(str(reply.content) + str(reply.tool_call_chunks)),
+        }
+        answer.input_tokens += usage["input_tokens"]
+        answer.output_tokens += usage["output_tokens"]
+        await ai_usage.record(
+            MESSAGE_ACTION,
+            settings.assistant_model,
+            usage,
+            company_id=turn.company_id,
+            user_id=turn.user_id,
+            subject_id=turn.conversation_id,
+            outcome=outcome,
+        )
 
     return reply
 

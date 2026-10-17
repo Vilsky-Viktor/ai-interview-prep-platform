@@ -1,4 +1,5 @@
 from mcp.server.auth.provider import AccessToken, AuthorizationCode, RefreshToken
+from pydantic import Field
 
 
 class Code(AuthorizationCode):
@@ -13,5 +14,11 @@ class Refresh(RefreshToken):
 
 
 class Access(AccessToken):
-    grant_id: str
+    """An app's access (its connection, grant_id), or an AI agent's API key: the key's id, its
+    company and permissions."""
+
     client_name: str
+    grant_id: str | None = None
+    key_id: str | None = None
+    company_id: str | None = None
+    permissions: list[str] = Field(default_factory=list)

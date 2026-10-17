@@ -18,6 +18,9 @@ from app.storage import conversations, messages
 from app.storage.db import Session
 from tests.fake_model import FakeModel, calls, text
 
+PAGE = {"key": "companies", "path": "/companies"}
+SETTINGS = {"key": "settings", "path": "/settings"}
+
 
 def events(body: str) -> list[dict]:
     return [json.loads(line[5:]) for line in body.splitlines() if line.startswith("data:")]
@@ -44,10 +47,10 @@ def test_a_conversation_is_streamed_saved_listed_exported_and_deleted(run, user,
 
     async def scenario():
         async with client() as api:
-            first = await api.post("/chat", json={"message": "My companies?"}, headers=headers)
-            first = events(first.text)
+            body = {"message": "My companies?", "page": PAGE}
+            first = events((await api.post("/chat", json=body, headers=headers)).text)
             conversation_id = first[0]["conversation"]["id"]
-            body = {"conversation_id": conversation_id, "message": "And now?", "page": "/companies"}
+            body = {"conversation_id": conversation_id, "message": "And now?", "page": SETTINGS}
             second = events((await api.post("/chat", json=body, headers=headers)).text)
             listed = (await api.get("/conversations", headers=headers)).json()
             opened = (await api.get(f"/conversations/{conversation_id}", headers=headers)).json()
@@ -78,6 +81,11 @@ def test_a_conversation_is_streamed_saved_listed_exported_and_deleted(run, user,
     assert second[-1]["done"]["message_id"] == opened["messages"][-1]["id"]
     # The second turn's model reads the stored text only: tools' data isn't kept.
     assert not [m for m in model.prompts[2] if isinstance(m, ToolMessage)]
+    # Each question is kept with the page it was asked on; the next turn reads the earlier one
+    # with its page, and is on its own page.
+    assert (stored[0].page, stored[2].page) == (PAGE, SETTINGS)
+    assert model.prompts[2][1].content.startswith('[Asked on the page "companies" ')
+    assert 'the page "settings"' in model.prompts[2][0].content
     assert first[-1] == {"title": "Your companies"}
     assert [item["title"] for item in listed] == ["Your companies"]
     assert [(m["role"], m["content"], m["status"]) for m in opened["messages"]] == [

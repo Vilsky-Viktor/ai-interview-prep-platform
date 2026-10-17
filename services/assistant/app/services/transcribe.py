@@ -2,10 +2,13 @@ import logging
 
 from fastapi import HTTPException, Request, status
 from openai import OpenAIError
+from prepza_common import ai_usage
+from prepza_common.ai_constants import Outcome
 from prepza_common.pause import refuse_if_paused
 from prepza_common.secrets_check import SECRET_IN_VOICE, find_secret
 
 from app.config.settings import settings
+from app.constants.ai_usage import TRANSCRIPTION_ACTION
 from app.constants.transcribe import (
     AUDIO_FILES,
     AUDIO_NOT_SUPPORTED,
@@ -15,9 +18,11 @@ from app.constants.transcribe import (
     TRANSCRIBE_FAILED,
     TRANSCRIBE_LANGUAGES,
 )
+from app.helpers.audio import audio_seconds
 from app.integrations.llm import get_openai
 from app.integrations.redis import get_redis
 from app.services import limits
+from app.services.tenancy import user_companies
 
 logger = logging.getLogger(__name__)
 
@@ -45,7 +50,7 @@ async def transcribe(request: Request, user_id: str, language: str) -> str:
     Its tokens count against the user's budgets. The audio and the text are never kept or
     logged."""
     redis = get_redis()
-    await refuse_if_paused(redis)
+    await refuse_if_paused(redis, TRANSCRIPTION_ACTION, user_id=user_id)
     content_type = request.headers.get("content-type", "").split(";")[0].strip().lower()
     file_name = AUDIO_FILES.get(content_type)
 
@@ -57,19 +62,31 @@ async def transcribe(request: Request, user_id: str, language: str) -> str:
     if not audio:
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, NOTHING_HEARD)
 
-    await limits.check_transcription(redis, user_id)
+    await limits.check_transcription(redis, user_id, await user_companies(user_id))
+    model = settings.transcribe_model
 
     try:
         result = await get_openai().audio.transcriptions.create(
-            model=settings.transcribe_model,
+            model=model,
             file=(file_name, audio, content_type),
             language=TRANSCRIBE_LANGUAGES.get(language, language),
         )
     except OpenAIError as error:
         # The error's type only: its message may quote the request.
         logger.warning("A transcription failed: %s", type(error).__name__)
+        await ai_usage.provider_refused(error, TRANSCRIPTION_ACTION, user_id=user_id)
+        seconds = audio_seconds(None, len(audio))
+        await ai_usage.record(
+            TRANSCRIPTION_ACTION,
+            model,
+            audio_seconds=seconds,
+            user_id=user_id,
+            outcome=Outcome.FAILED,
+        )
         raise HTTPException(status.HTTP_502_BAD_GATEWAY, TRANSCRIBE_FAILED)
 
+    seconds = audio_seconds(getattr(result, "usage", None), len(audio))
+    await ai_usage.record(TRANSCRIPTION_ACTION, model, audio_seconds=seconds, user_id=user_id)
     tokens = getattr(getattr(result, "usage", None), "total_tokens", 0) or 0
     await limits.record(redis, user_id, None, tokens)
     text = result.text.strip()

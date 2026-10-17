@@ -146,6 +146,19 @@ TOOLS = {
         "max_items": 100,
         "max_length": 2_000,
     },
+    "get_page_guide": {
+        "service": "rounds",
+        "method": "GET",
+        "path": "/help/pages/{key}",
+        "params": ["key"],
+        "fields": ["key", "title", "text", "actions", "tips"],
+        "description": (
+            "A page's guide, in the user's language: what the page is for, what you can do there "
+            "and tips. Pass the key of the page the user is on (named in the context), or of "
+            'another page they ask about. Use it for "how do I use this page", "what can I do '
+            'here" and "what is this page" questions.'
+        ),
+    },
     "get_platform_guide": {
         "service": "rounds",
         "method": "GET",

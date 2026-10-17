@@ -1,17 +1,32 @@
 import asyncio
 
 from firebase_admin import auth as firebase_auth
+from firebase_admin.exceptions import ResourceExhaustedError
 from prepza_common import http, memory_cache
 from prepza_common.auth import verify
+from prepza_common.limits import record_hit
 from prepza_common.user import User
 
 from app.config.settings import settings
 from app.constants.mcp import (
     EXPIRY_MARGIN_SECONDS,
+    FIREBASE_LIMIT_ERRORS,
     ID_TOKEN_CACHE_KEY,
     IDENTITY_TOOLKIT,
     MAX_KEEP_SECONDS,
 )
+
+
+async def refused_for_limits(response, user_id: str) -> None:
+    """Records Firebase refusing a sign-in for its own limits (a 429, too many attempts, a
+    quota), not for a bad token."""
+    try:
+        message = response.json().get("error", {}).get("message", "")
+    except ValueError:
+        message = ""
+
+    if response.status_code == 429 or message.startswith(FIREBASE_LIMIT_ERRORS):
+        await record_hit("FIREBASE_TOKEN_REFUSED", kind="provider:firebase", user_id=user_id)
 
 
 def identity_url() -> str:
@@ -36,6 +51,10 @@ async def sign_in(uid: str) -> tuple[User, str] | None:
         account = await asyncio.to_thread(firebase_auth.get_user, uid)
     except firebase_auth.UserNotFoundError:
         return None
+    except ResourceExhaustedError:
+        await record_hit("FIREBASE_TOKEN_REFUSED", kind="provider:firebase", user_id=uid)
+
+        raise
 
     if account.disabled:
         return None
@@ -46,6 +65,10 @@ async def sign_in(uid: str) -> tuple[User, str] | None:
         params={"key": settings.firebase_web_api_key},
         json={"token": custom.decode(), "returnSecureToken": True},
     )
+
+    if response.is_error:
+        await refused_for_limits(response, uid)
+
     response.raise_for_status()
     found = response.json()
     user = verify(found["idToken"])

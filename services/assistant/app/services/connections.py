@@ -4,12 +4,10 @@ from uuid import UUID
 from fastapi import HTTPException, status
 from mcp.server.auth.provider import construct_redirect_uri
 from prepza_common.analytics import track
-from prepza_common.constants import HOUR_SECONDS
 from prepza_common.rate_limit import hit
 from prepza_common.tokens import new_token
 from prepza_common.user import User
 
-from app.constants.limits import APPROVALS_PER_USER_HOUR
 from app.constants.mcp import CODE_BYTES, CODE_SECONDS, NOT_FOUND, OTHER_BROWSER
 from app.integrations.redis import get_redis
 from app.models.oauth import McpGrant
@@ -35,9 +33,8 @@ async def approve(request_id: str, user: User, marked: str | None) -> str:
     if marked != request_id:
         raise HTTPException(status.HTTP_403_FORBIDDEN, OTHER_BROWSER)
 
-    await hit(
-        get_redis(), f"rate:assistant:mcp:approve:{user.uid}", APPROVALS_PER_USER_HOUR, HOUR_SECONDS
-    )
+    key = f"rate:assistant:mcp:approve:{user.uid}"
+    await hit(get_redis(), key, "APPROVALS_PER_USER_HOUR", user_id=user.uid)
     found = await taken(request_id)
     code, code_hash = new_token("", CODE_BYTES)
     kept = {**found, "user_id": user.uid, "expires_at": time.time() + CODE_SECONDS}

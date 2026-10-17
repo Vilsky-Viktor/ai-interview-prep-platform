@@ -3,7 +3,7 @@ from types import SimpleNamespace
 import httpx
 import pytest
 from fastapi import HTTPException
-from openai import APIConnectionError
+from openai import APIConnectionError, RateLimitError
 from prepza_common.user import User
 
 from app.auth import user_with_token
@@ -30,10 +30,10 @@ def openai(monkeypatch):
 
         return answer
 
-    async def not_paused(redis):
+    async def not_paused(redis, what, company_id=None, user_id=None):
         pass
 
-    async def check_transcription(redis, user_id):
+    async def check_transcription(redis, user_id, company_ids):
         pass
 
     async def record(redis, user_id, company_id, tokens):
@@ -104,14 +104,50 @@ def test_openai_failing_is_a_502_and_nothing_is_logged_of_the_recording(client, 
     assert "secret-audio" not in caplog.text
 
 
+def test_a_transcription_is_recorded_with_its_audio_seconds(client, openai, published):
+    openai.answer.usage = SimpleNamespace(total_tokens=42, seconds=7.5)
+    client.post("/transcribe", content=b"opus", headers=WEBM)
+
+    [(kind, data)] = published
+    assert kind == "ai.used"
+    assert (data["action"], data["model"], data["audio_seconds"]) == (
+        "transcription",
+        "gpt-4o-mini-transcribe",
+        7.5,
+    )
+    assert (data["user_id"], data["company_id"], data["outcome"]) == ("ann", None, "ok")
+    assert data["cost_usd"] > 0
+
+
+def test_openai_out_of_money_is_recorded_as_its_limit_and_the_call_as_failed(
+    client, openai, published
+):
+    request = httpx.Request("POST", "https://api.openai.com")
+    openai.answer.text = RateLimitError(
+        "quota",
+        response=httpx.Response(429, request=request),
+        body={"code": "insufficient_quota"},
+    )
+    response = client.post("/transcribe", content=b"opus", headers=WEBM)
+
+    assert response.status_code == 502
+    hits = [data for kind, data in published if kind == "limit.hit"]
+    assert [(hit["limit"], hit["kind"], hit["what"], hit["user_id"]) for hit in hits] == [
+        ("OPENAI_QUOTA", "provider:openai", "transcription", "ann")
+    ]
+    [used] = [data for kind, data in published if kind == "ai.used"]
+    assert (used["action"], used["outcome"], used["user_id"]) == ("transcription", "failed", "ann")
+    assert used["audio_seconds"] > 0
+
+
 def test_paused_or_over_a_limit_is_refused_before_openai(client, openai, monkeypatch):
-    async def over(redis, user_id):
+    async def over(redis, user_id, company_ids):
         raise HTTPException(429, "over")
 
     monkeypatch.setattr(transcribe.limits, "check_transcription", over)
     assert client.post("/transcribe", content=b"opus", headers=WEBM).status_code == 429
 
-    async def paused(redis):
+    async def paused(redis, what, company_id=None, user_id=None):
         raise HTTPException(503, "paused")
 
     monkeypatch.setattr(transcribe, "refuse_if_paused", paused)

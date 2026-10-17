@@ -1,47 +1,21 @@
-# How much the assistant may be used; over a limit, a 429 before anything runs. Messages are
-# counted as they're sent; spending in tokens (input and output, every model call of a turn),
-# added after each turn, so a turn already started always finishes.
+# How much the assistant may be used: the limits themselves are prepza_common.limit_list's (read
+# by name with limits.limit), so they can be edited in the admin zone. Messages are counted as
+# they're sent; spending in tokens (input and output, every model call of a turn), added after
+# each turn, so a turn already started always finishes.
 
-MESSAGES_PER_USER_HOUR = 30
-MESSAGES_PER_USER_DAY = 200
-# One company's members together, and everyone.
-MESSAGES_PER_COMPANY_DAY = 1_000
-MESSAGES_PER_DAY = 20_000
-
-# A turn reading the platform guide uses about 30,000 tokens; most use a few thousand.
-TOKENS_PER_USER_DAY = 2_000_000
-TOKENS_PER_COMPANY_DAY = 6_000_000
-TOKENS_PER_DAY = 200_000_000
-# The limits for everyone (MESSAGES_PER_DAY, TOKENS_PER_DAY) hold only people working for a
-# company that never topped up, so free accounts can't use them up for paying ones. Whether a
-# company paid is asked of billing at most this often.
+# The limits for everyone (MESSAGES_PER_DAY, TOKENS_PER_DAY) and the daily AI spend cap hold only
+# people working for a company that never topped up, so free accounts can't use them up for
+# paying ones. Whether a company paid is asked of billing at most this often.
 PAID_CACHE_SECONDS = 600
+# Keys of the budgets for everyone, which the admin zone shows as used today.
+ALL_TOKENS_KEY = "spend:assistant:all"
+ALL_MESSAGES_KEY = "rate:assistant:all"
 
 # The longest voice message (the panel stops recording then).
 MAX_AUDIO_SECONDS = 60
-# Voice messages a user may have transcribed in an hour (each also counts as a message once sent;
-# this one counts the ones too short or silent to send as well).
-TRANSCRIPTIONS_PER_USER_HOUR = 60
-# Actions a user may confirm in an hour.
-ACTIONS_PER_USER_HOUR = 30
 
-# AI apps connected over MCP (constants/mcp.py): calls a user's apps may make together, a minute
-# and a day; their actions count against ACTIONS_PER_USER_HOUR too.
-MCP_CALLS_PER_USER_MINUTE = 60
-MCP_CALLS_PER_USER_DAY = 3_000
-# Apps registering themselves, from one address in an hour, and from everywhere in a day. Claude
-# and ChatGPT register from their own servers, so one address stands for many people.
-# The daily cap is above what one address can reach (300 x 24), so one can't block everyone.
-REGISTRATIONS_PER_IP_HOUR = 300
-REGISTRATIONS_PER_DAY = 20_000
-# Requests to connect (/authorize) from one address in an hour.
-AUTHORIZATIONS_PER_IP_HOUR = 120
 # The most an app's registration may take (its JSON), and the longest `state` it sends with a
 # request: both are kept (in Postgres for 30 days, in Redis for 10 minutes). Real ones are far
 # smaller.
 MAX_REGISTRATION_BYTES = 4_000
 MAX_STATE_LENGTH = 512
-# Token requests (a code or a refresh exchanged) of one app in a minute.
-TOKEN_REQUESTS_PER_CLIENT_MINUTE = 30
-# Connections a user may allow in an hour.
-APPROVALS_PER_USER_HOUR = 20

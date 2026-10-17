@@ -4,6 +4,7 @@ from types import SimpleNamespace
 import httpx
 import pytest
 from firebase_admin import auth as firebase_auth
+from firebase_admin.exceptions import ResourceExhaustedError
 from prepza_common import http, memory_cache
 from prepza_common.user import User
 
@@ -17,9 +18,13 @@ ANN = User(uid="ann", email="ann@example.com", email_verified=True, language="de
 @pytest.fixture
 def firebase(monkeypatch):
     """Firebase's accounts and sign-in API: every sign-in posted."""
-    state = SimpleNamespace(accounts={"ann": False}, posts=[])
+    signed = {"idToken": "id-token", "expiresIn": "3600"}
+    state = SimpleNamespace(accounts={"ann": False}, posts=[], reply=(200, signed), lookup=None)
 
     def get_user(uid):
+        if state.lookup is not None:
+            raise state.lookup
+
         if uid not in state.accounts:
             raise firebase_auth.UserNotFoundError("gone")
 
@@ -30,9 +35,9 @@ def firebase(monkeypatch):
             state.posts.append((url, params, json))
             request = httpx.Request("POST", url)
 
-            return httpx.Response(
-                200, json={"idToken": "id-token", "expiresIn": "3600"}, request=request
-            )
+            status, body = state.reply
+
+            return httpx.Response(status, json=body, request=request)
 
     monkeypatch.setattr(firebase_auth, "get_user", get_user)
     monkeypatch.setattr(firebase_auth, "create_custom_token", lambda uid: b"custom")
@@ -98,3 +103,46 @@ def test_the_emulator_is_used_locally_and_google_otherwise(monkeypatch):
 
     assert local == "http://firebase-auth:9199/identitytoolkit.googleapis.com/v1"
     assert firebase_tokens.identity_url() == "https://identitytoolkit.googleapis.com/v1"
+
+
+def refusals(published) -> list[tuple]:
+    return [
+        (data["limit"], data["kind"], data["user_id"])
+        for kind, data in published
+        if kind == "limit.hit"
+    ]
+
+
+@pytest.mark.parametrize(
+    "status, body",
+    [
+        (429, {}),
+        (400, {"error": {"message": "TOO_MANY_ATTEMPTS_TRY_LATER"}}),
+        (400, {"error": {"message": "QUOTA_EXCEEDED : Exceeded quota"}}),
+    ],
+)
+def test_firebase_refusing_a_sign_in_for_its_limits_is_recorded(firebase, published, status, body):
+    firebase.reply = (status, body)
+
+    with pytest.raises(httpx.HTTPStatusError):
+        asyncio.run(firebase_tokens.sign_in("ann"))
+
+    assert refusals(published) == [("FIREBASE_TOKEN_REFUSED", "provider:firebase", "ann")]
+
+
+def test_firebase_refusing_a_bad_token_isnt_a_limit_hit(firebase, published):
+    firebase.reply = (400, {"error": {"message": "INVALID_CUSTOM_TOKEN"}})
+
+    with pytest.raises(httpx.HTTPStatusError):
+        asyncio.run(firebase_tokens.sign_in("ann"))
+
+    assert refusals(published) == []
+
+
+def test_firebase_out_of_quota_reading_the_account_is_recorded(firebase, published):
+    firebase.lookup = ResourceExhaustedError("quota", None)
+
+    with pytest.raises(ResourceExhaustedError):
+        asyncio.run(firebase_tokens.sign_in("ann"))
+
+    assert refusals(published) == [("FIREBASE_TOKEN_REFUSED", "provider:firebase", "ann")]

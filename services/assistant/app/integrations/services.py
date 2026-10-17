@@ -1,3 +1,5 @@
+from contextvars import ContextVar
+
 import httpx
 from prepza_common import http
 from prepza_common.constants import REFERRAL_COOKIE, VIA_ASSISTANT
@@ -11,6 +13,10 @@ from app.constants.tool_calls import (
     TOOL_TIMEOUT_SECONDS,
 )
 from app.service_auth import service_token
+
+# For the MCP call being handled when an AI agent signed in with an API key: the key's company
+# and id, which companies' X-Assistant header carries (it refuses any other company).
+KEY_CLAIMS: ContextVar[dict | None] = ContextVar("key_claims", default=None)
 
 
 async def get(
@@ -38,7 +44,7 @@ async def send(
     headers = {**bearer(token), "Accept-Language": language}
 
     if service == "companies":
-        headers[ASSISTANT_HEADER] = service_token("companies", via)
+        headers[ASSISTANT_HEADER] = service_token("companies", via, KEY_CLAIMS.get())
 
         # The referral link the user came through (their browser's cookie): a company the
         # assistant creates for them counts for the referrer, as one made on the site does.
