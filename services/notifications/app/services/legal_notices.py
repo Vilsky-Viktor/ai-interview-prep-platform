@@ -1,10 +1,9 @@
-import time
 from datetime import UTC, datetime, timedelta
 
 from fastapi import HTTPException, status
 from prepza_common.constants import LEGAL_VERSIONS
 
-from app.config.settings import settings
+from app.constants.bulk import LEGAL_KINDS
 from app.constants.legal_notices import (
     ALREADY_ASKED,
     EVERYONE,
@@ -12,10 +11,9 @@ from app.constants.legal_notices import (
     TOO_LATE,
     LegalNoticeState,
 )
-from app.helpers.member_emails import legal_email
-from app.integrations import companies, library
-from app.services.member_sends import deadline, send_once
-from app.storage import legal_notices
+from app.services.bulk import prepare_now
+from app.services.bulk_content import document_of
+from app.storage import bulk_recipients, bulk_sends
 
 
 def earliest_version(today) -> str:
@@ -23,18 +21,25 @@ def earliest_version(today) -> str:
     return (today + timedelta(days=LEGAL_NOTICE_DAYS)).isoformat()
 
 
+def kind_of(document: str) -> str:
+    return f"legal_{document}"
+
+
 async def states() -> list[dict]:
     """Each document's current version, and where its notice stands."""
-    asked = {(row.document, row.version): row for row in await legal_notices.all_notices()}
+    asked = {
+        (document_of(send.kind), send.about): send
+        for send in await bulk_sends.of_kinds(list(LEGAL_KINDS))
+    }
     today = datetime.now(UTC).date()
     earliest = earliest_version(today)
     found = []
 
     for document, version in LEGAL_VERSIONS.items():
-        row = asked.get((document, version))
+        send = asked.get((document, version))
 
-        if row is not None:
-            state = LegalNoticeState.SENT if row.sent_at else LegalNoticeState.SENDING
+        if send is not None:
+            state = LegalNoticeState.SENT if send.finished_at else LegalNoticeState.SENDING
         elif version <= today.isoformat():
             state = LegalNoticeState.IN_FORCE
         elif version < earliest:
@@ -52,45 +57,32 @@ async def states() -> list[dict]:
 
 async def ask(document: str, user_id: str) -> None:
     """A superadmin asks for the email about the document's current version: refused when it
-    applies sooner than LEGAL_NOTICE_DAYS from now, or was asked for already."""
+    applies sooner than LEGAL_NOTICE_DAYS from now, or was asked for already. Its recipients
+    are worked out now, and it goes in their bell; the sending hours' runs email it."""
     version = LEGAL_VERSIONS[document]
 
     if version < earliest_version(datetime.now(UTC).date()):
         raise HTTPException(status.HTTP_409_CONFLICT, TOO_LATE)
 
-    if not await legal_notices.ask(document, version, user_id):
+    if await bulk_sends.start(kind_of(document), version, user_id) is None:
         raise HTTPException(status.HTTP_409_CONFLICT, ALREADY_ASKED)
 
+    await prepare_now(kind_of(document), version)
 
-async def send_legal_notices(now: datetime) -> int:
-    """Each notice asked for and not yet sent to everyone: to every account (the terms, the
-    privacy policy) or every company's owner and admin (the DPA), once each. A run that ends
-    before its time is up has sent them all."""
-    stop = deadline()
-    sent = 0
 
-    for notice in await legal_notices.all_notices():
-        if notice.sent_at is not None:
+async def upcoming(user_id: str) -> list[dict]:
+    """The legal changes noticed and not yet in force that concern the user, for the site's
+    banner: the terms and the privacy policy for everyone, the DPA for those it was sent to."""
+    today = datetime.now(UTC).date().isoformat()
+    found = []
+
+    for send in await bulk_sends.of_kinds(list(LEGAL_KINDS)):
+        document = document_of(send.kind)
+
+        if send.about <= today or LEGAL_VERSIONS.get(document) != send.about:
             continue
 
-        ids = await (library.user_ids() if notice.document in EVERYONE else companies.editor_ids())
-        jobs = [
-            (
-                recipient["user_id"],
-                [notice.version],
-                email_for(recipient, notice.document, notice.version),
-            )
-            for recipient in await library.recipients(ids)
-        ]
-        sent += await send_once(f"legal_{notice.document}", now.date(), 1, jobs, stop)
+        if document in EVERYONE or await bulk_recipients.is_recipient(send.id, user_id):
+            found.append({"document": document, "version": send.about})
 
-        if time.monotonic() > stop:
-            break
-
-        await legal_notices.sent(notice.document, notice.version)
-
-    return sent
-
-
-def email_for(recipient: dict, document: str, version: str):
-    return lambda new: legal_email(recipient, document, version, settings.site_url)
+    return found

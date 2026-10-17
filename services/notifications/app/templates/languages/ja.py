@@ -164,6 +164,26 @@ TEXTS = {
         "button": "新しい契約を読む",
         "footer": "このメールは、prepza で会社の所有者または管理者であるため {email} に送信されました。会社との契約に関するお知らせのため、メール設定にかかわらず送信されます。",
     },
+    # Campaigns (services/campaign_sends.py), named after the setting they need: a superadmin's
+    # subject and text, and its button's text, or "open_site" when it has none.
+    "updates": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "prepza を開く",
+        "footer": "このメールは、prepza から製品の最新情報とニュースを受け取る設定にしているため {email} に送信されました。",
+    },
+    "promotions": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "prepza を開く",
+        "footer": "このメールは、prepza からキャンペーンとお得な情報を受け取る設定にしているため {email} に送信されました。",
+    },
     "top_up_failed": {
         "subject": "{company} の自動チャージに失敗しました",
         "preheader": "カードに請求できませんでした。候補者の招待を続けるにはチャージしてください。",

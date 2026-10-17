@@ -227,12 +227,13 @@ def test_only_known_kinds_are_saved(client, monkeypatch):
     async def get(company_id):
         return SimpleNamespace()
 
-    async def set_kinds(company_id, kinds):
-        chosen.append(kinds)
+    async def set_kinds(company_id, kinds, user_id):
+        chosen.append((kinds, user_id))
 
     monkeypatch.setattr(storage, "get", get)
     monkeypatch.setattr(storage, "set_kinds", set_kinds)
     body = {"kinds": ["interview_ready", "made_up", "candidate_finished"]}
 
     assert client.put(f"/slack/kinds?company_id={C1}", json=body).status_code == 204
-    assert chosen == [["candidate_finished", "interview_ready"]]
+    # Saved as the member's change, for the action log.
+    assert chosen == [(["candidate_finished", "interview_ready"], "u1")]

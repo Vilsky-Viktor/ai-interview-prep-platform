@@ -24,6 +24,7 @@ async def list_notices(superadmin: SuperadminUser) -> list[LegalNoticeOut]:
 async def send_notice(
     document: Literal["terms", "privacy", "dpa"], superadmin: SuperadminUser
 ) -> None:
-    """Emails the change to the document's current version, from the next morning's run."""
+    """Emails the change to the document's current version from the next sending hour, and puts
+    it in the bell."""
     await legal_notices.ask(document, superadmin.uid)
     logger.warning("Superadmin %s asked for the %s change's notice", superadmin.uid, document)

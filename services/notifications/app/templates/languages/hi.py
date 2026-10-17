@@ -231,6 +231,26 @@ TEXTS = {
             "चाहे जो हों, यह भेजा जाता है।"
         ),
     },
+    # Campaigns (services/campaign_sends.py), named after the setting they need: a superadmin's
+    # subject and text, and its button's text, or "open_site" when it has none.
+    "updates": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "prepza खोलें",
+        "footer": "यह ईमेल {email} पर भेजा गया क्योंकि आपने prepza से प्रोडक्ट अपडेट और खबरें पाना चुना है।",
+    },
+    "promotions": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "prepza खोलें",
+        "footer": "यह ईमेल {email} पर भेजा गया क्योंकि आपने prepza से ऑफ़र और प्रमोशन पाना चुना है।",
+    },
     "top_up_failed": {
         "subject": "{company} का ऑटो टॉप अप नहीं हो सका",
         "preheader": ("कार्ड से भुगतान नहीं लिया जा सका। उम्मीदवारों को इनवाइट करते रहने के लिए टॉप अप करें।"),

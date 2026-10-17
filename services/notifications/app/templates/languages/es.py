@@ -236,6 +236,32 @@ TEXTS = {
             "envía sin importar tu configuración de correo."
         ),
     },
+    # Campaigns (services/campaign_sends.py), named after the setting they need: a superadmin's
+    # subject and text, and its button's text, or "open_site" when it has none.
+    "updates": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "Abrir prepza",
+        "footer": (
+            "Este correo se envió a {email} porque elegiste recibir novedades del producto de"
+            " prepza."
+        ),
+    },
+    "promotions": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "Abrir prepza",
+        "footer": (
+            "Este correo se envió a {email} porque elegiste recibir ofertas y promociones de"
+            " prepza."
+        ),
+    },
     "top_up_failed": {
         "subject": "Falló la recarga automática de {company}",
         "preheader": "No se pudo cobrar a la tarjeta. Recarga para seguir invitando a candidatos.",

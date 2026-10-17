@@ -1,7 +1,7 @@
 from datetime import UTC, datetime, timedelta
 
 from prepza_common.notifications import NotificationKind, Recipient
-from sqlalchemy import delete, func, select, tuple_
+from sqlalchemy import and_, delete, func, or_, select, tuple_
 from sqlalchemy.dialects.postgresql import insert
 
 from app.constants.notifications import (
@@ -18,8 +18,15 @@ from app.storage.db import Session
 Recipients = list[tuple[str, str]]
 
 
-def for_recipients(recipients: Recipients):
-    return tuple_(Notification.recipient, Notification.recipient_id).in_(recipients)
+def for_recipients(recipients: Recipients, since: datetime | None = None):
+    """The recipients' notifications, and with `since` (when the user's account was made) the
+    notifications for everyone that came after it."""
+    own = tuple_(Notification.recipient, Notification.recipient_id).in_(recipients)
+
+    if since is None:
+        return own
+
+    return or_(own, and_(Notification.recipient == Recipient.ALL, Notification.created_at > since))
 
 
 async def add(event_id: str, event: dict) -> bool:
@@ -130,12 +137,14 @@ async def prune(session, event: dict, now: datetime) -> None:
     await session.execute(delete(Received).where(Received.event_id.in_(expired_events)))
 
 
-async def latest(recipients: Recipients, limit: int | None) -> list[Notification]:
-    """Newest first; all of them when `limit` is None."""
+async def latest(
+    recipients: Recipients, limit: int | None, since: datetime | None = None
+) -> list[Notification]:
+    """Newest first; all of them when `limit` is None. With `since`, everyone's too."""
     async with Session() as session:
         rows = await session.scalars(
             select(Notification)
-            .where(for_recipients(recipients))
+            .where(for_recipients(recipients, since))
             .order_by(Notification.created_at.desc())
             .limit(limit)
         )
@@ -161,11 +170,13 @@ async def companies_activity(
         return list(rows)
 
 
-async def unread_count(recipients: Recipients, user_id: str) -> int:
+async def unread_count(recipients: Recipients, user_id: str, since: datetime | None = None) -> int:
     """Everything newer than when the user last opened the bell."""
     async with Session() as session:
         seen_at = await session.scalar(select(Seen.seen_at).where(Seen.user_id == user_id))
-        query = select(func.count()).select_from(Notification).where(for_recipients(recipients))
+        query = (
+            select(func.count()).select_from(Notification).where(for_recipients(recipients, since))
+        )
 
         if seen_at is not None:
             query = query.where(Notification.created_at > seen_at)
@@ -248,5 +259,18 @@ async def remove_company(company_id: str) -> None:
             insert(Received)
             .values(event_id=deleted_key(recipient), received_at=datetime.now(UTC))
             .on_conflict_do_nothing(index_elements=["event_id"])
+        )
+        await session.commit()
+
+
+async def remove_news(news_id: str) -> None:
+    """A deleted news post's notification goes. Safe to repeat."""
+    async with Session() as session:
+        await session.execute(
+            delete(Notification).where(
+                Notification.recipient == Recipient.ALL,
+                Notification.kind == NotificationKind.NEWS,
+                Notification.data["news_id"].astext == news_id,
+            )
         )
         await session.commit()

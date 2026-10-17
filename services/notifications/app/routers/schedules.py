@@ -6,8 +6,9 @@ from prepza_common.google import Invoker
 
 from app.constants.member_emails import SENT_KEEP_DAYS
 from app.integrations.resend import ResendBusy
+from app.services import outbox as outbox_service
+from app.services.bulk import send_bulk
 from app.services.digest import send_digests
-from app.services.legal_notices import send_legal_notices
 from app.services.reminders import send_reminders
 from app.storage import sent_emails
 
@@ -31,11 +32,11 @@ async def reminders() -> None:
     await sent_emails.forget(datetime.now(UTC).date() - timedelta(days=SENT_KEEP_DAYS))
 
 
-@router.post("/legal-notices", status_code=status.HTTP_204_NO_CONTENT)
-async def legal() -> None:
-    """Every minute for an hour each morning, from Cloud Scheduler: the legal notices asked for,
-    each going on where the last run stopped; nobody gets one twice."""
-    await run("legal notices", send_legal_notices)
+@router.post("/bulk", status_code=status.HTTP_204_NO_CONTENT)
+async def bulk() -> None:
+    """Every minute from 08:00 to 18:59 UTC, from Cloud Scheduler: legal notices and campaigns,
+    each run going on where the last one stopped; nobody gets one twice."""
+    await run("bulk emails", send_bulk)
 
 
 async def run(name: str, send) -> None:
@@ -49,3 +50,10 @@ async def run(name: str, send) -> None:
 
     if count:
         logger.info("Sent %d %s", count, name)
+
+
+@router.post("/outbox", status_code=status.HTTP_204_NO_CONTENT)
+async def flush_outbox() -> None:
+    """Every minute, from Cloud Scheduler: publishes events that weren't published right after
+    their change."""
+    await outbox_service.flush()

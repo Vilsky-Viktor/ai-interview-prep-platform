@@ -15,11 +15,14 @@ from app.integrations.redis import get_redis
 from app.routers import (
     events,
     internal_accounts,
+    internal_campaigns,
     me,
     schedules,
     slack,
     superadmin,
+    superadmin_campaigns,
     superadmin_legal,
+    superadmin_suppressed,
     unsubscribe,
     webhooks,
 )
@@ -56,6 +59,9 @@ app.include_router(slack.router)
 app.include_router(unsubscribe.router)
 app.include_router(superadmin.router)
 app.include_router(superadmin_legal.router)
+app.include_router(superadmin_campaigns.router)
+app.include_router(superadmin_suppressed.router)
+app.include_router(internal_campaigns.router)
 app.include_router(schedules.router)
 
 

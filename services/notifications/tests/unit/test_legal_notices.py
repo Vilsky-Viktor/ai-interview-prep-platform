@@ -8,77 +8,74 @@ from prepza_common.user import User
 
 from app.constants.legal_notices import ALREADY_ASKED, TOO_LATE
 from app.main import app
-from app.services import delivery, legal_notices
-from app.storage import legal_notices as notices_store
-from app.storage import sent_emails
+from app.services import bulk, bulk_content, legal_notices
+from app.storage import bulk_recipients, bulk_sends, notifications
 
 TODAY = datetime.now(UTC).date()
 LATER = (TODAY + timedelta(days=20)).isoformat()
 SOON = (TODAY + timedelta(days=3)).isoformat()
 
 
-def person(user_id, language="en"):
-    return {"user_id": user_id, "email": f"{user_id}@example.com", "language": language}
-
-
 @pytest.fixture
 def notices(monkeypatch):
-    """The versions, the notices asked for, the recipients and delivery, faked."""
-    state = SimpleNamespace(asked={}, sent=[], marked=[], claims=[])
+    """The versions, the sends, the recipients and the bell, faked."""
+    state = SimpleNamespace(sends={}, prepared={}, bell=[], announced=[])
     monkeypatch.setattr(
         legal_notices,
         "LEGAL_VERSIONS",
         {"terms": LATER, "privacy": SOON, "dpa": TODAY.isoformat()},
     )
 
-    async def all_notices():
-        return [
-            SimpleNamespace(document=document, version=version, sent_at=sent_at)
-            for (document, version), sent_at in state.asked.items()
-        ]
+    async def start(kind, about, asked_by):
+        if (kind, about) in state.sends:
+            return None
 
-    async def ask(document, version, user_id):
-        if (document, version) in state.asked:
-            return False
+        state.sends[(kind, about)] = SimpleNamespace(
+            id=f"{kind}-{about}", kind=kind, about=about, finished_at=None
+        )
 
-        state.asked[(document, version)] = None
+        return state.sends[(kind, about)].id
+
+    async def of_kinds(kinds):
+        return [send for send in state.sends.values() if send.kind in kinds]
+
+    async def get(kind, about):
+        return state.sends.get((kind, about))
+
+    async def prepare(send_id, user_ids):
+        state.prepared[send_id] = user_ids
 
         return True
 
-    async def mark_sent(document, version):
-        state.marked.append(document)
-        state.asked[(document, version)] = datetime.now(UTC)
+    async def is_recipient(send_id, user_id):
+        return user_id in state.prepared.get(send_id, [])
 
-    async def user_ids():
-        return ["ann", "bob"]
+    async def user_ids(setting=None):
+        return ["ann", "bob", "guest-1"]
 
     async def editor_ids():
         return ["ann"]
 
-    async def recipients(ids):
-        return [person(user_id, "de" if user_id == "bob" else "en") for user_id in ids]
+    async def add(event_id, event):
+        if event_id in [key for key, _ in state.bell]:
+            return False
 
-    async def claim(user_id, kind, today, every_days, items=()):
-        state.claims.append((user_id, kind, list(items)))
+        state.bell.append((event_id, event))
 
-        return list(items)
+        return True
 
-    async def send(email, key):
-        state.sent.append(email)
+    async def announce(recipient, recipient_id):
+        state.announced.append((recipient, recipient_id))
 
-    monkeypatch.setattr(notices_store, "all_notices", all_notices)
-    monkeypatch.setattr(notices_store, "ask", ask)
-    monkeypatch.setattr(notices_store, "sent", mark_sent)
-    monkeypatch.setattr(legal_notices.library, "user_ids", user_ids)
-    monkeypatch.setattr(legal_notices.library, "recipients", recipients)
-    monkeypatch.setattr(legal_notices.companies, "editor_ids", editor_ids)
-    monkeypatch.setattr(sent_emails, "claim", claim)
-    monkeypatch.setattr(delivery, "send", send)
-
-    async def no_wait(_seconds):
-        return None
-
-    monkeypatch.setattr("app.services.member_sends.asyncio.sleep", no_wait)
+    monkeypatch.setattr(bulk_sends, "start", start)
+    monkeypatch.setattr(bulk_sends, "of_kinds", of_kinds)
+    monkeypatch.setattr(bulk_sends, "get", get)
+    monkeypatch.setattr(bulk_sends, "prepare", prepare)
+    monkeypatch.setattr(bulk_recipients, "is_recipient", is_recipient)
+    monkeypatch.setattr(bulk_content.library, "user_ids", user_ids)
+    monkeypatch.setattr(bulk_content.companies, "editor_ids", editor_ids)
+    monkeypatch.setattr(notifications, "add", add)
+    monkeypatch.setattr(bulk_content, "announce", announce)
 
     return state
 
@@ -101,30 +98,59 @@ def test_a_notice_is_asked_for_once_and_at_least_14_days_ahead(notices):
     assert (again.value.detail, soon.value.detail) == (ALREADY_ASKED, TOO_LATE)
     assert states()["terms"] == "sending"
 
+    notices.sends[("legal_terms", LATER)].finished_at = datetime.now(UTC)
 
-def test_the_terms_go_to_everyone_and_the_dpa_to_owners_and_admins_once(notices):
+    assert states()["terms"] == "sent"
+
+
+def test_the_terms_go_to_every_account_once_and_in_everyones_bell(notices):
+    asyncio.run(legal_notices.ask("terms", "sam"))
+
+    assert notices.prepared == {f"legal_terms-{LATER}": ["ann", "bob"]}
+    [(_, event)] = notices.bell
+    assert (event["recipient"], event["kind"], event["link"], event["data"]) == (
+        "all",
+        "legal_terms",
+        "/terms",
+        {"date": LATER},
+    )
+    assert notices.announced == [("all", "everyone")]
+
+    # Working them out again (a run after a failed start) adds nothing to the bell.
+    send = notices.sends[("legal_terms", LATER)]
+    asyncio.run(bulk.prepare(send))
+
+    assert len(notices.bell) == 1
+
+
+def test_the_dpa_goes_to_owners_and_admins_each_in_their_own_bell(notices):
+    legal_notices.LEGAL_VERSIONS["dpa"] = LATER
+    asyncio.run(legal_notices.ask("dpa", "sam"))
+
+    assert notices.prepared == {f"legal_dpa-{LATER}": ["ann"]}
+    assert [(event["recipient"], event["recipient_id"]) for _, event in notices.bell] == [
+        ("user", "ann")
+    ]
+
+
+def test_the_banner_shows_changes_noticed_until_they_apply_to_whom_they_concern(notices):
     legal_notices.LEGAL_VERSIONS["dpa"] = LATER
     asyncio.run(legal_notices.ask("terms", "sam"))
     asyncio.run(legal_notices.ask("dpa", "sam"))
 
-    sent = asyncio.run(legal_notices.send_legal_notices(datetime.now(UTC)))
-
-    assert sent == 3
-    ann = sorted(email.subject for email in notices.sent if email.to == "ann@example.com")
-    assert ann == [
-        f"We're updating prepza's data processing agreement on {LATER}",
-        f"We're updating prepza's terms on {LATER}",
+    assert asyncio.run(legal_notices.upcoming("ann")) == [
+        {"document": "terms", "version": LATER},
+        {"document": "dpa", "version": LATER},
     ]
-    assert [email.to for email in notices.sent].count("bob@example.com") == 1
-    # Each names its version, so nobody gets it twice.
-    assert {(claim[1], *claim[2]) for claim in notices.claims} == {
-        ("legal_terms", LATER),
-        ("legal_dpa", LATER),
-    }
-    assert sorted(notices.marked) == ["dpa", "terms"]
-    assert states()["terms"] == "sent"
-    # A later run has nothing left to send.
-    assert asyncio.run(legal_notices.send_legal_notices(datetime.now(UTC))) == 0
+    assert asyncio.run(legal_notices.upcoming("bob")) == [{"document": "terms", "version": LATER}]
+
+    # Once it applies, no banner.
+    legal_notices.LEGAL_VERSIONS["terms"] = TODAY.isoformat()
+    notices.sends[("legal_terms", TODAY.isoformat())] = SimpleNamespace(
+        id="t", kind="legal_terms", about=TODAY.isoformat(), finished_at=None
+    )
+
+    assert asyncio.run(legal_notices.upcoming("bob")) == []
 
 
 def test_only_a_superadmin_sees_and_asks_for_notices(client, notices, monkeypatch):

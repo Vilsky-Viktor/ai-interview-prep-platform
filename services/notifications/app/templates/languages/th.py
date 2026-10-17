@@ -162,6 +162,26 @@ TEXTS = {
         "button": "อ่านข้อตกลงฉบับใหม่",
         "footer": "อีเมลนี้ส่งถึง {email} เนื่องจากคุณเป็นเจ้าของหรือผู้ดูแลของบริษัทบน prepza อีเมลนี้เป็นการแจ้งเกี่ยวกับข้อตกลงระหว่างเรากับบริษัทของคุณ จึงส่งเสมอไม่ว่าการตั้งค่าอีเมลของคุณจะเป็นอย่างไร",
     },
+    # Campaigns (services/campaign_sends.py), named after the setting they need: a superadmin's
+    # subject and text, and its button's text, or "open_site" when it has none.
+    "updates": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "เปิด prepza",
+        "footer": "อีเมลนี้ส่งถึง {email} เนื่องจากคุณเลือกรับข่าวสารและอัปเดตผลิตภัณฑ์จาก prepza",
+    },
+    "promotions": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "เปิด prepza",
+        "footer": "อีเมลนี้ส่งถึง {email} เนื่องจากคุณเลือกรับข้อเสนอและโปรโมชันจาก prepza",
+    },
     "top_up_failed": {
         "subject": "เติมเครดิตอัตโนมัติของ {company} ไม่สำเร็จ",
         "preheader": "เรียกเก็บเงินจากบัตรไม่สำเร็จ เติมเครดิตเพื่อเชิญผู้สมัครต่อ",

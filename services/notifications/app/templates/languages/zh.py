@@ -159,6 +159,26 @@ TEXTS = {
         "button": "阅读新协议",
         "footer": "这封邮件发送到 {email}，因为你是 prepza 上某个公司的所有者或管理员。这是关于我们与你公司之间协议的通知，因此无论你的邮件设置如何都会发送。",
     },
+    # Campaigns (services/campaign_sends.py), named after the setting they need: a superadmin's
+    # subject and text, and its button's text, or "open_site" when it has none.
+    "updates": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "打开 prepza",
+        "footer": "这封邮件发送到 {email}，因为你选择了接收 prepza 的产品更新与新闻。",
+    },
+    "promotions": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "打开 prepza",
+        "footer": "这封邮件发送到 {email}，因为你选择了接收 prepza 的优惠与促销。",
+    },
     "top_up_failed": {
         "subject": "{company} 的自动充值失败",
         "preheader": "无法从银行卡扣款。充值后才能继续邀请候选人。",

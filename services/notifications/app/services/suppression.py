@@ -1,0 +1,51 @@
+# prepza's own suppression list: addresses that bounced for good or marked an email as spam,
+# which bulk sends skip. Kept as hashes; a superadmin sees and removes one on an account's page.
+import logging
+import uuid
+
+from app.constants.bulk import SEND_TAG, SuppressionReason
+from app.constants.webhooks import (
+    BOUNCED_EVENT,
+    CANDIDATE_INVITE_KIND,
+    COMPLAINED_EVENT,
+    ID_TAG,
+    KIND_TAG,
+)
+from app.helpers.unsubscribe import address_hash
+from app.storage import bulk_recipients, suppressed
+
+logger = logging.getLogger(__name__)
+
+REASONS = {BOUNCED_EVENT: SuppressionReason.BOUNCED, COMPLAINED_EVENT: SuppressionReason.COMPLAINED}
+
+
+async def from_webhook(event: dict) -> None:
+    """A hard bounce or a spam complaint about an email to a member (not a candidate's invite,
+    which is a company's) suppresses its addresses; a complaint about a campaign counts against
+    it. Safe to repeat: Resend may send the web hook again."""
+    reason = REASONS.get(event.get("type"))
+    data = event.get("data") or {}
+    tags = data.get("tags") or {}
+
+    if reason is None or tags.get(KIND_TAG) == CANDIDATE_INVITE_KIND:
+        return
+
+    for address in data.get("to") or []:
+        await suppressed.add(address_hash(address), reason)
+
+    if reason == SuppressionReason.COMPLAINED and tags.get(SEND_TAG) and tags.get(ID_TAG):
+        await bulk_recipients.mark_complained(uuid.UUID(tags[SEND_TAG]), tags[ID_TAG])
+
+
+async def lookup(email: str) -> dict | None:
+    """Whether the address is suppressed: why and since when."""
+    row = await suppressed.get(address_hash(email))
+
+    return {"reason": row.reason, "created_at": row.created_at} if row else None
+
+
+async def remove(email: str, superadmin_id: str) -> None:
+    """Bulk sends reach the address again; logged with its hash, never the address."""
+    address = address_hash(email)
+    await suppressed.remove(address)
+    logger.warning("Superadmin %s removed %s from the suppression list", superadmin_id, address)

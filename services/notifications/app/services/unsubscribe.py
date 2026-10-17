@@ -1,6 +1,6 @@
 from app.constants.unsubscribe import USER_SETTINGS, UnsubscribeType
 from app.integrations import library
-from app.storage import opt_outs
+from app.storage import bulk_recipients, opt_outs
 
 
 async def apply(payload: dict) -> None:
@@ -10,6 +10,10 @@ async def apply(payload: dict) -> None:
 
     if kind in USER_SETTINGS:
         await library.unsubscribe(payload["user_id"], USER_SETTINGS[kind])
+
+        # Counted against the last campaign of that kind the user got.
+        if kind in (UnsubscribeType.UPDATES, UnsubscribeType.PROMOTIONS):
+            await bulk_recipients.mark_unsubscribed(payload["user_id"], kind)
 
         return
 

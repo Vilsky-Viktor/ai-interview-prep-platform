@@ -9,6 +9,7 @@ from prepza_common import http
 from prepza_common.notifications import NotificationKind, Recipient, notification
 
 from app.config.settings import settings
+from app.constants.member_emails import DIGEST_HOUR
 from app.integrations import smtp
 from app.services import digest, reminders
 from app.storage import notifications, sent_emails
@@ -153,8 +154,9 @@ def test_the_digest_tells_yesterdays_activity_once_in_the_users_language(run, ou
 
     async def scenario():
         await notifications.add(str(uuid.uuid4()), event)
-        # The run in the next hour covers it; a second run that hour sends nothing more.
-        later = now + timedelta(hours=1)
+        # The run at the next DIGEST_HOUR covers it, whatever the time now; a second run that
+        # hour sends nothing more.
+        later = now if now.hour < DIGEST_HOUR else now + timedelta(days=1)
         first = await digest.send_digests(later)
         second = await digest.send_digests(later)
 

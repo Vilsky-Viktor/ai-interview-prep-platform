@@ -1,7 +1,8 @@
 # Notices of a significant change to a legal document (prepza_common LEGAL_VERSIONS): a
 # superadmin decides a change is significant and asks for its email, which goes out at least
 # LEGAL_NOTICE_DAYS before the new version applies (the DPA promises 14 days for a new
-# sub-processor), on the morning schedule, until everyone has it.
+# sub-processor), through the bulk sender (constants/bulk.py) in its sending hours, until everyone
+# has it.
 from enum import StrEnum
 
 LEGAL_NOTICE_DAYS = 14

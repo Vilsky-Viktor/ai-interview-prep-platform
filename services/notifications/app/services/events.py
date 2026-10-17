@@ -9,6 +9,7 @@ from app.constants.events import (
     COMPANY_DELETED,
     CONTACT_SENT,
     MEMBER_INVITED,
+    NEWS_DELETED,
     NOTIFICATION_REQUESTED,
     REPORT_SHARED,
 )
@@ -125,6 +126,9 @@ async def handle(event_type: str, data: dict, event_id: str) -> None:
 
     if event_type == CANDIDATE_REMOVED:
         await notifications.remove_candidate(data["email"], data["company_id"])
+
+    if event_type == NEWS_DELETED:
+        await notifications.remove_news(data["news_id"])
 
     if event_type == CONTACT_SENT:
         await deliver(contact_email(data, settings.contact_email), event_id)

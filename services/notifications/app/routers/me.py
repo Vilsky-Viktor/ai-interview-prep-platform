@@ -1,9 +1,12 @@
-from fastapi import APIRouter, status
+from fastapi import APIRouter, Request, status
 from fastapi.responses import StreamingResponse
 from prepza_common.auth import CurrentUser
+from prepza_common.i18n import request_language
 from prepza_common.sse import event_stream
 
+from app.schemas.legal_notices import LegalChangeOut
 from app.schemas.notifications import FeedOut
+from app.services import legal_notices
 from app.services.feed import feed, open_stream
 from app.storage import notifications
 
@@ -11,10 +14,18 @@ router = APIRouter(prefix="/me", tags=["notifications"])
 
 
 @router.get("")
-async def get_feed(user: CurrentUser, fresh: bool = False) -> FeedOut:
-    """The bell: the latest notifications, the user's own and their companies', and how many
-    came since they last opened it; `fresh` reads the companies again (right after joining)."""
-    return await feed(user.uid, fresh)
+async def get_feed(user: CurrentUser, request: Request, fresh: bool = False) -> FeedOut:
+    """The bell: the latest notifications, the user's own, their companies' and everyone's
+    newer than their account, and how many came since they last opened it, in their language;
+    `fresh` reads the companies again (right after joining)."""
+    return await feed(user.uid, request_language(request), fresh)
+
+
+@router.get("/legal-changes")
+async def legal_changes(user: CurrentUser) -> list[LegalChangeOut]:
+    """The legal documents' new versions noticed and not yet in force that concern the user,
+    for the site's banner until they apply."""
+    return [LegalChangeOut(**item) for item in await legal_notices.upcoming(user.uid)]
 
 
 @router.post("/seen", status_code=status.HTTP_204_NO_CONTENT)

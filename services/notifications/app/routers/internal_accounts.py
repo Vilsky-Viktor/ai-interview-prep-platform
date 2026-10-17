@@ -6,7 +6,7 @@ from prepza_common.user import UserEmailIn
 from app.schemas.notifications import NotificationOut
 from app.service_auth import ServiceCaller
 from app.services import slack as slack_service
-from app.storage import notifications, sent_emails, slack
+from app.storage import bulk_recipients, notifications, sent_emails, slack
 
 router = APIRouter(prefix="/internal", tags=["internal"])
 
@@ -18,9 +18,10 @@ async def delete_user(user_id: str, body: UserEmailIn, caller: ServiceCaller) ->
     that they joined a company (their email); the Slack channels they
     connected stay with their companies, without their id, and each company is told they need
     reconnecting. The log of digests and reminders
-    sent to them goes too."""
+    sent to them goes too, and their rows in bulk sends (legal notices, campaigns)."""
     await notifications.remove_user(user_id)
     await sent_emails.remove_user(user_id)
+    await bulk_recipients.remove_user(user_id)
     await notifications.remove_candidate(body.email)
     await notifications.remove_member(body.email)
 

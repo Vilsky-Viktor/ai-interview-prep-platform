@@ -24,6 +24,7 @@ from app.helpers.slack import message, read_state, signed_state
 from app.integrations import companies, slack
 from app.integrations.redis import get_redis
 from app.schemas.slack import SlackOut
+from app.services import outbox as outbox_service
 from app.services.feed import announce
 from app.storage import notifications
 from app.storage import slack as storage
@@ -112,18 +113,21 @@ async def finish(code: str | None, state: str, error: str | None) -> str:
         user_id,
     )
 
+    await outbox_service.flush_quietly()
+
     if earlier is not None:
         await remove_app(earlier.token)
 
     return f"{page}?slack=connected"
 
 
-async def set_kinds(company_id: str, kinds: list[str]) -> None:
+async def set_kinds(company_id: str, kinds: list[str], user_id: str) -> None:
     if await storage.get(company_id) is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Slack isn't connected")
 
     chosen = [kind for kind in map(str, SLACK_KINDS) if kind in kinds]
-    await storage.set_kinds(company_id, chosen)
+    await storage.set_kinds(company_id, chosen, user_id)
+    await outbox_service.flush_quietly()
 
 
 async def remove_app(sealed_token: str) -> None:
@@ -136,13 +140,14 @@ async def remove_app(sealed_token: str) -> None:
         await slack.revoke(token)
 
 
-async def disconnect(company_id: str) -> None:
+async def disconnect(company_id: str, user_id: str | None = None) -> None:
     """Removes the channel, then prepza's app from the workspace (as far as Slack answers) unless
-    another company still uses it."""
+    another company still uses it. A member's (`user_id`) goes to the company's action log."""
     found = await storage.get(company_id)
 
     if found is not None:
-        await storage.remove(company_id)
+        await storage.remove(company_id, user_id)
+        await outbox_service.flush_quietly()
         await remove_app(found.token)
 
 

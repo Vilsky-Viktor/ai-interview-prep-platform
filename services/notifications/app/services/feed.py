@@ -2,15 +2,18 @@ import asyncio
 import logging
 import time
 from collections.abc import AsyncIterator
+from datetime import datetime
 
 import httpx
 from fastapi import HTTPException, status
 from prepza_common import memory_cache
 from prepza_common.constants import RATE_LIMITED
-from prepza_common.notifications import Recipient
+from prepza_common.notifications import EVERYONE, NotificationKind, Recipient
 from prepza_common.sse import sse_event
 
 from app.constants.notifications import (
+    ACCOUNT_CREATED_KEY,
+    ACCOUNT_CREATED_SECONDS,
     CHANNEL,
     COMPANY_IDS_KEY,
     COMPANY_IDS_SECONDS,
@@ -21,7 +24,7 @@ from app.constants.notifications import (
     STREAM_RETRY_SECONDS,
     STREAM_SLOT_SECONDS,
 )
-from app.integrations import companies
+from app.integrations import companies, library
 from app.integrations.redis import get_redis
 from app.integrations.subscription import listening
 from app.schemas.notifications import FeedOut, NotificationOut
@@ -53,13 +56,60 @@ async def recipients_of(user_id: str, fresh: bool = False) -> tuple[Recipients, 
     return [own, *((Recipient.COMPANY, company_id) for company_id in ids)], True
 
 
-async def feed(user_id: str, fresh: bool = False) -> FeedOut:
+async def account_created(user_id: str) -> datetime | None:
+    """When the user's account was made, from library (kept ACCOUNT_CREATED_SECONDS, as it
+    never changes): the notifications for everyone that came after it are theirs too. None
+    while library doesn't answer, or doesn't know: then the bell shows only their own."""
+    key = ACCOUNT_CREATED_KEY.format(user_id=user_id)
+    created = memory_cache.get(key)
+
+    if created is None:
+        try:
+            created = await library.account_created(user_id)
+        except httpx.HTTPError as error:
+            logger.warning("Library didn't say when %s's account was made: %s", user_id, error)
+
+            return None
+
+        if created is not None:
+            memory_cache.put(key, created, ACCOUNT_CREATED_SECONDS)
+
+    return created
+
+
+async def in_language(items: list[NotificationOut], language: str) -> list[NotificationOut]:
+    """News posts are named in the reader's language (English until translated), and a post
+    deleted meanwhile isn't shown. While library doesn't answer, they keep their English title."""
+    ids = [item.data["news_id"] for item in items if item.kind == NotificationKind.NEWS]
+
+    if not ids:
+        return items
+
+    try:
+        titles = await library.news_titles(ids, language)
+    except httpx.HTTPError as error:
+        logger.warning("Library didn't name the news posts: %s", error)
+
+        return items
+
+    return [
+        item.model_copy(update={"data": {**item.data, "title": titles[item.data["news_id"]]}})
+        if item.kind == NotificationKind.NEWS
+        else item
+        for item in items
+        if item.kind != NotificationKind.NEWS or item.data["news_id"] in titles
+    ]
+
+
+async def feed(user_id: str, language: str, fresh: bool = False) -> FeedOut:
     recipients, _ = await recipients_of(user_id, fresh)
-    items = await notifications.latest(recipients, DROPDOWN_LIMIT)
+    since = await account_created(user_id)
+    items = await notifications.latest(recipients, DROPDOWN_LIMIT, since)
+    shown = [NotificationOut.model_validate(item) for item in items]
 
     return FeedOut(
-        items=[NotificationOut.model_validate(item) for item in items],
-        unread=await notifications.unread_count(recipients, user_id),
+        items=await in_language(shown, language),
+        unread=await notifications.unread_count(recipients, user_id, since),
     )
 
 
@@ -75,7 +125,11 @@ async def changes(user_id: str, fresh: bool = False) -> AsyncIterator[str]:
     instance's tabs share one Redis subscription. It ends after STREAM_REFRESH_SECONDS (or
     STREAM_RETRY_SECONDS without the companies), and the tab reconnects with what's current."""
     recipients, complete = await recipients_of(user_id, fresh)
-    channels = [CHANNEL.format(recipient=kind, recipient_id=id_) for kind, id_ in recipients]
+    # Everyone's notifications are announced to every open tab.
+    everyone = (Recipient.ALL, EVERYONE)
+    channels = [
+        CHANNEL.format(recipient=kind, recipient_id=id_) for kind, id_ in [*recipients, everyone]
+    ]
     ends_at = time.monotonic() + (STREAM_REFRESH_SECONDS if complete else STREAM_RETRY_SECONDS)
 
     async with listening(channels) as heard:

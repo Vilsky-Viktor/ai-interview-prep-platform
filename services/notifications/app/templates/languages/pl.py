@@ -235,6 +235,32 @@ TEXTS = {
             "więc jest wysyłane niezależnie od Twoich ustawień e-maili."
         ),
     },
+    # Campaigns (services/campaign_sends.py), named after the setting they need: a superadmin's
+    # subject and text, and its button's text, or "open_site" when it has none.
+    "updates": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "Otwórz prepza",
+        "footer": (
+            "Ta wiadomość została wysłana na {email}, ponieważ chcesz otrzymywać od prepza nowości"
+            " o produkcie i aktualności."
+        ),
+    },
+    "promotions": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "Otwórz prepza",
+        "footer": (
+            "Ta wiadomość została wysłana na {email}, ponieważ chcesz otrzymywać od prepza oferty i"
+            " promocje."
+        ),
+    },
     "top_up_failed": {
         "subject": "Automatyczne doładowanie dla {company} nie powiodło się",
         "preheader": "Nie udało się obciążyć karty. Doładuj, aby dalej zapraszać kandydatów.",

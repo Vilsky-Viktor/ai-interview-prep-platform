@@ -1,0 +1,156 @@
+# Campaigns as superadmins write them: in English, translated by generation, and changeable per
+# language until they're sent.
+import logging
+import uuid
+
+from fastapi import HTTPException, status
+from prepza_common.constants import DEFAULT_LANGUAGE
+
+from app.constants.bulk import BulkKind
+from app.constants.campaigns import (
+    ALREADY_SENT,
+    LINK_NOT_ON_SITE,
+    NEWS_BUTTON,
+    NEWS_LINK,
+    NO_BUTTON_TEXT,
+)
+from app.integrations import generation, library
+from app.models.campaigns import Campaign
+from app.schemas.campaigns import CampaignIn, CampaignOut, CampaignRowOut, CampaignTexts
+from app.storage import bulk_sends, campaigns
+
+logger = logging.getLogger(__name__)
+
+NOT_FOUND = "Not found"
+
+
+def english_of(body: CampaignTexts) -> dict:
+    return {"subject": body.subject, "text": body.text, "button": body.button or None}
+
+
+def checked(body: CampaignIn) -> CampaignIn:
+    """The button opens a page on the site, and has a text when it has a link."""
+    if body.link and (not body.link.startswith("/") or body.link.startswith("//")):
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, LINK_NOT_ON_SITE)
+
+    if body.link and not body.button:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, NO_BUTTON_TEXT)
+
+    return body
+
+
+def refused(outcome) -> None:
+    """A storage answer that refuses: gone (None) or already sent."""
+    if outcome is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, NOT_FOUND)
+
+    if outcome == ALREADY_SENT:
+        raise HTTPException(status.HTTP_409_CONFLICT, ALREADY_SENT)
+
+
+async def send_to_translator(campaign_id: uuid.UUID) -> None:
+    """Never raises: the campaign is saved first, and saving it again sends it again."""
+    try:
+        await generation.translate_campaign(str(campaign_id))
+    except Exception:
+        logger.exception("Couldn't send campaign %s to be translated", campaign_id)
+
+
+async def out(campaign: Campaign) -> CampaignOut:
+    _, texts = await campaigns.get(campaign.id)
+    row = await row_out(campaign, texts[DEFAULT_LANGUAGE]["subject"], len(texts))
+
+    return CampaignOut(**row.model_dump(), link=campaign.link, texts=texts)
+
+
+def status_of(send) -> str:
+    if send is None:
+        return "draft"
+
+    if send.stopped_at:
+        return "stopped"
+
+    return "sent" if send.finished_at else "sending"
+
+
+async def row_out(campaign: Campaign, subject: str, languages: int) -> CampaignRowOut:
+    send = await bulk_sends.get(campaign.kind, str(campaign.id)) if campaign.sent_at else None
+    counts = (await bulk_sends.counts([send.id])).get(send.id) if send else None
+
+    return CampaignRowOut(
+        id=campaign.id,
+        kind=campaign.kind,
+        subject=subject,
+        created_at=campaign.created_at,
+        sent_at=campaign.sent_at,
+        translated=languages > len(campaigns.OTHER_LANGUAGES),
+        status=status_of(send),
+        counts=counts if send and send.prepared_at else None,
+    )
+
+
+async def list_campaigns(offset: int, limit: int) -> list[CampaignRowOut]:
+    rows = await campaigns.list_campaigns(offset, limit)
+
+    return [await row_out(campaign, subject, languages) for campaign, subject, languages in rows]
+
+
+async def get(campaign_id: uuid.UUID) -> CampaignOut:
+    found = await campaigns.get(campaign_id)
+    refused(found)
+
+    return await out(found[0])
+
+
+async def create(body: CampaignIn, user_id: str) -> CampaignOut:
+    body = checked(body)
+    campaign = await campaigns.create(body.kind, body.link or None, user_id, english_of(body))
+    await send_to_translator(campaign.id)
+
+    return await out(campaign)
+
+
+async def from_news(news_id: uuid.UUID, user_id: str) -> CampaignOut:
+    """A new product update made from a news post: its title, text and a button to it."""
+    post = await library.news_post(str(news_id))
+
+    if post is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, NOT_FOUND)
+
+    body = CampaignIn(
+        kind=BulkKind.UPDATES.value,
+        subject=post["title"],
+        text=post["text"],
+        button=NEWS_BUTTON,
+        link=NEWS_LINK.format(news_id=news_id),
+    )
+
+    return await create(body, user_id)
+
+
+async def update(campaign_id: uuid.UUID, body: CampaignIn) -> CampaignOut:
+    """A changed English text is translated again; a new kind or link alone keeps the other
+    languages."""
+    body = checked(body)
+    saved = await campaigns.update(campaign_id, body.kind, body.link or None, english_of(body))
+    refused(saved)
+    campaign, changed = saved
+
+    if changed:
+        await send_to_translator(campaign_id)
+
+    return await out(campaign)
+
+
+async def set_texts(campaign_id: uuid.UUID, language: str, body: CampaignTexts) -> CampaignOut:
+    """One language's own wording; English is changed through update, which translates again."""
+    if language == DEFAULT_LANGUAGE:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, NOT_FOUND)
+
+    refused(await campaigns.set_texts(campaign_id, language, english_of(body)) or "ok")
+
+    return await get(campaign_id)
+
+
+async def remove(campaign_id: uuid.UUID) -> None:
+    refused(await campaigns.remove(campaign_id) or "ok")

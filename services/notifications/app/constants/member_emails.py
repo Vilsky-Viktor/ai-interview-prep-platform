@@ -5,17 +5,12 @@ from enum import StrEnum
 
 
 class MemberEmail(StrEnum):
-    """What a sent email was, in the sent log: the daily digest, one kind of reminder, or a
-    legal notice."""
+    """What a sent email was, in the sent log: the daily digest, or one kind of reminder."""
 
     DIGEST = "digest"
     LOW_CREDITS = "low_credits"
     NO_CANDIDATES = "no_candidates"
     REVIEW_WAITING = "review_waiting"
-    # A notice of a change to a legal document, one kind each.
-    LEGAL_TERMS = "legal_terms"
-    LEGAL_PRIVACY = "legal_privacy"
-    LEGAL_DPA = "legal_dpa"
 
 
 # Other services take at most this many ids in one call.

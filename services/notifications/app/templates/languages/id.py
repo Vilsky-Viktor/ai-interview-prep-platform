@@ -232,6 +232,32 @@ TEXTS = {
             "selalu dikirim apa pun pengaturan emailmu."
         ),
     },
+    # Campaigns (services/campaign_sends.py), named after the setting they need: a superadmin's
+    # subject and text, and its button's text, or "open_site" when it has none.
+    "updates": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "Buka prepza",
+        "footer": (
+            "Email ini dikirim ke {email} karena kamu memilih menerima pembaruan produk dan berita"
+            " dari prepza."
+        ),
+    },
+    "promotions": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "Buka prepza",
+        "footer": (
+            "Email ini dikirim ke {email} karena kamu memilih menerima penawaran dan promosi dari"
+            " prepza."
+        ),
+    },
     "top_up_failed": {
         "subject": "Isi ulang otomatis untuk {company} gagal",
         "preheader": "Kartu tidak dapat ditagih. Isi ulang untuk terus mengundang kandidat.",

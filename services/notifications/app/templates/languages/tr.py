@@ -237,6 +237,32 @@ TEXTS = {
             "bildirim olduğundan e-posta ayarlarınızdan bağımsız olarak gönderilir."
         ),
     },
+    # Campaigns (services/campaign_sends.py), named after the setting they need: a superadmin's
+    # subject and text, and its button's text, or "open_site" when it has none.
+    "updates": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "prepza'yı aç",
+        "footer": (
+            "Bu e-posta {email} adresine, prepza'dan ürün güncellemeleri ve haberler almayı"
+            " seçtiğiniz için gönderildi."
+        ),
+    },
+    "promotions": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "prepza'yı aç",
+        "footer": (
+            "Bu e-posta {email} adresine, prepza'dan teklifler ve kampanyalar almayı seçtiğiniz"
+            " için gönderildi."
+        ),
+    },
     "top_up_failed": {
         "subject": "{company} için otomatik yükleme başarısız oldu",
         "preheader": "Karttan ödeme alınamadı. Aday davet etmeye devam etmek için kredi yükleyin.",

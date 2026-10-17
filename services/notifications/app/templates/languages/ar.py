@@ -208,6 +208,26 @@ TEXTS = {
             "بشأن اتفاقيتنا مع شركتك، لذا تُرسل بغض النظر عن إعدادات البريد لديك."
         ),
     },
+    # Campaigns (services/campaign_sends.py), named after the setting they need: a superadmin's
+    # subject and text, and its button's text, or "open_site" when it has none.
+    "updates": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "افتح prepza",
+        "footer": "أُرسلت هذه الرسالة إلى {email} لأنك اخترت تلقي تحديثات المنتج والأخبار من prepza.",
+    },
+    "promotions": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "افتح prepza",
+        "footer": "أُرسلت هذه الرسالة إلى {email} لأنك اخترت تلقي العروض والتخفيضات من prepza.",
+    },
     "top_up_failed": {
         "subject": "فشل الشحن التلقائي لـ {company}",
         "preheader": "تعذّر الخصم من البطاقة. اشحن رصيدك لمواصلة دعوة المرشحين.",

@@ -1,11 +1,14 @@
 from datetime import UTC, datetime, timedelta
 
+from prepza_common import audit
+from prepza_common.audit_actions import AuditAction, TargetKind
 from prepza_common.constants import DELETED_USER
 from sqlalchemy import delete, select, update
 from sqlalchemy.dialects.postgresql import insert
 
 from app.constants.notifications import EXPIRED_PER_PRUNE, KEEP_DAYS
 from app.constants.slack import SlackStatus
+from app.models.outbox import OutboxEvent
 from app.models.slack import SlackConnection, SlackPost
 from app.storage.db import Session
 
@@ -24,7 +27,8 @@ async def tokens() -> list[str]:
 async def connect(
     company_id: str, team: str, channel: str, webhook: str, token: str, kinds: list, user_id: str
 ) -> None:
-    """Saves the company's channel, replacing an earlier one; the kinds it chose stay."""
+    """Saves the company's channel, replacing an earlier one; the kinds it chose stay. The
+    company's action log gets it as `user_id`'s."""
     values = {
         "team": team,
         "channel": channel,
@@ -41,14 +45,41 @@ async def connect(
 
     async with Session() as session:
         await session.execute(query)
+        audit.add(
+            session,
+            OutboxEvent,
+            company_id,
+            user_id,
+            AuditAction.SLACK_CONNECTED,
+            TargetKind.INTEGRATION,
+            target_label=channel,
+        )
         await session.commit()
 
 
-async def set_kinds(company_id: str, kinds: list) -> None:
-    query = update(SlackConnection).where(SlackConnection.company_id == company_id)
+async def set_kinds(company_id: str, kinds: list, user_id: str) -> None:
+    """The company's action log gets it as `user_id`'s, when the company has a channel."""
+    query = (
+        update(SlackConnection)
+        .where(SlackConnection.company_id == company_id)
+        .values(kinds=kinds)
+        .returning(SlackConnection.channel)
+    )
 
     async with Session() as session:
-        await session.execute(query.values(kinds=kinds))
+        channel = await session.scalar(query)
+
+        if channel is not None:
+            audit.add(
+                session,
+                OutboxEvent,
+                company_id,
+                user_id,
+                AuditAction.SLACK_NOTIFICATIONS_CHANGED,
+                TargetKind.INTEGRATION,
+                target_label=channel,
+            )
+
         await session.commit()
 
 
@@ -102,11 +133,28 @@ async def forget_maker(user_id: str) -> list[str]:
     return stopped
 
 
-async def remove(company_id: str) -> None:
+async def remove(company_id: str, user_id: str | None = None) -> None:
+    """A member's (`user_id`) goes to the company's action log."""
+    query = (
+        delete(SlackConnection)
+        .where(SlackConnection.company_id == company_id)
+        .returning(SlackConnection.channel)
+    )
+
     async with Session() as session:
-        await session.execute(
-            delete(SlackConnection).where(SlackConnection.company_id == company_id)
-        )
+        channel = await session.scalar(query)
+
+        if channel is not None and user_id is not None:
+            audit.add(
+                session,
+                OutboxEvent,
+                company_id,
+                user_id,
+                AuditAction.SLACK_DISCONNECTED,
+                TargetKind.INTEGRATION,
+                target_label=channel,
+            )
+
         await session.commit()
 
 

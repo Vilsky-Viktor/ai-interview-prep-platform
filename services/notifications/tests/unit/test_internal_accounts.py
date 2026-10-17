@@ -1,7 +1,7 @@
 from prepza_common.service_auth import issue_token
 
 from app.models.slack import SlackConnection
-from app.storage import notifications, sent_emails, slack
+from app.storage import bulk_recipients, notifications, sent_emails, slack
 
 HEADERS = {
     "Authorization": f"Bearer {issue_token('library', 'notifications', 'test-secret-that-is-at-least-32-bytes')}"
@@ -35,7 +35,12 @@ def test_deleting_an_account_reads_the_email_from_the_body_and_forgets_their_cha
         done.append(("sent", user_id))
 
     monkeypatch.setattr(slack, "forget_maker", forget_maker)
+
+    async def forget_bulk(user_id):
+        done.append(("bulk", user_id))
+
     monkeypatch.setattr(sent_emails, "remove_user", forget_sent)
+    monkeypatch.setattr(bulk_recipients, "remove_user", forget_bulk)
 
     response = client.request(
         "DELETE", "/internal/users/u1", json={"email": "ann@example.com"}, headers=HEADERS
@@ -45,6 +50,7 @@ def test_deleting_an_account_reads_the_email_from_the_body_and_forgets_their_cha
     assert done == [
         ("own", "u1"),
         ("sent", "u1"),
+        ("bulk", "u1"),
         ("candidate", "ann@example.com"),
         ("member", "ann@example.com"),
         ("slack", "u1"),

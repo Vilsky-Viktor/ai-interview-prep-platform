@@ -230,6 +230,32 @@ TEXTS = {
             "isso é enviado independentemente das suas configurações de e-mail."
         ),
     },
+    # Campaigns (services/campaign_sends.py), named after the setting they need: a superadmin's
+    # subject and text, and its button's text, or "open_site" when it has none.
+    "updates": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "Abrir a prepza",
+        "footer": (
+            "Este e-mail foi enviado para {email} porque você escolheu receber novidades do produto"
+            " e notícias da prepza."
+        ),
+    },
+    "promotions": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "Abrir a prepza",
+        "footer": (
+            "Este e-mail foi enviado para {email} porque você escolheu receber ofertas e promoções"
+            " da prepza."
+        ),
+    },
     "top_up_failed": {
         "subject": "A recarga automática de {company} falhou",
         "preheader": (

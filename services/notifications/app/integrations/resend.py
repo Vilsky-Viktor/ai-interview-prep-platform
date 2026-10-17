@@ -1,9 +1,15 @@
 from fastapi import status
 from prepza_common import http
 from prepza_common.http import bearer
+from prepza_common.limits import record_hit
 
 from app.config.settings import settings
-from app.constants.email import RESEND_EMAILS_URL, RESEND_REFUSED, SEND_TIMEOUT_S
+from app.constants.email import (
+    RESEND_DAILY_QUOTA_ERROR,
+    RESEND_EMAILS_URL,
+    RESEND_REFUSED,
+    SEND_TIMEOUT_S,
+)
 from app.models.email import Email
 
 
@@ -12,7 +18,17 @@ class EmailRefused(Exception):
 
 
 class ResendBusy(Exception):
-    """Over Resend's per-second limit (a burst of invites): nothing was sent, a retry will."""
+    """Over Resend's per-second limit (a burst of invites) or its daily quota: nothing was sent,
+    a retry will."""
+
+
+def quota_used(response) -> bool:
+    """Whether Resend's 429 is for its daily quota rather than its per-second limit: its error's
+    name says so."""
+    try:
+        return response.json().get("name") == RESEND_DAILY_QUOTA_ERROR
+    except ValueError:
+        return False
 
 
 async def send(email: Email, idempotency_key: str) -> None:
@@ -45,6 +61,9 @@ async def send(email: Email, idempotency_key: str) -> None:
     )
 
     if response.status_code == status.HTTP_429_TOO_MANY_REQUESTS:
+        name = "RESEND_DAILY_QUOTA" if quota_used(response) else "RESEND_RATE_LIMIT"
+        await record_hit(name, kind="provider:resend", scope="everyone")
+
         raise ResendBusy()
 
     if response.status_code in RESEND_REFUSED:

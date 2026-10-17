@@ -238,6 +238,32 @@ TEXTS = {
             "поэтому оно отправляется независимо от настроек писем."
         ),
     },
+    # Campaigns (services/campaign_sends.py), named after the setting they need: a superadmin's
+    # subject and text, and its button's text, or "open_site" when it has none.
+    "updates": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "Открыть prepza",
+        "footer": (
+            "Это письмо отправлено на {email}, потому что вы решили получать новости продукта от"
+            " prepza."
+        ),
+    },
+    "promotions": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "Открыть prepza",
+        "footer": (
+            "Это письмо отправлено на {email}, потому что вы решили получать предложения и акции от"
+            " prepza."
+        ),
+    },
     "top_up_failed": {
         "subject": "Автопополнение для {company} не удалось",
         "preheader": (

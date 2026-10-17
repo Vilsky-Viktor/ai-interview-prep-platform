@@ -244,6 +244,32 @@ TEXTS = {
             "Unternehmen und wird daher unabhängig von deinen E-Mail-Einstellungen gesendet."
         ),
     },
+    # Campaigns (services/campaign_sends.py), named after the setting they need: a superadmin's
+    # subject and text, and its button's text, or "open_site" when it has none.
+    "updates": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "prepza öffnen",
+        "footer": (
+            "Diese E-Mail wurde an {email} gesendet, weil du Produkt-Updates und Neuigkeiten von"
+            " prepza erhalten möchtest."
+        ),
+    },
+    "promotions": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "prepza öffnen",
+        "footer": (
+            "Diese E-Mail wurde an {email} gesendet, weil du Angebote und Aktionen von prepza"
+            " erhalten möchtest."
+        ),
+    },
     "top_up_failed": {
         "subject": "Automatisches Aufladen für {company} fehlgeschlagen",
         "preheader": (

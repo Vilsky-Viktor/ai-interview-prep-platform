@@ -34,7 +34,7 @@ class Settings(ServiceSettings):
     # Library keeps each user's email settings; an unsubscribe link turns them off there.
     library_url: str
     # Billing says which companies run low on credits, and generation which topics wait for a
-    # review: the reminders.
+    # review: the reminders. Generation also translates campaigns.
     billing_url: str
     generation_url: str
     # prepza's Slack app (api.slack.com: incoming-webhook scope), and the Fernet key that seals

@@ -4,6 +4,7 @@ import json
 import httpx
 import pytest
 from prepza_common import http
+from prepza_common.ai_constants import LIMIT_HIT
 
 from app.config.settings import settings
 from app.helpers.member_emails import digest_email
@@ -100,7 +101,7 @@ def test_a_failing_resend_answers_with_an_error_so_pub_sub_retries(run, outside)
     assert post_events(run, push("report.shared", REPORT)) == [500]
 
 
-def test_a_burst_over_resends_limit_is_retried_without_a_server_error(run, outside):
+def test_a_burst_over_resends_limit_is_retried_without_a_server_error(run, outside, published):
     outside["resend"] = 429
     busy = post_events(run, push("candidate.invited", INVITE, outbox_id="outbox-9"))
     outside["resend"] = 200
@@ -110,6 +111,10 @@ def test_a_burst_over_resends_limit_is_retried_without_a_server_error(run, outsi
     # Pub/Sub retries a 429 with backoff; the retry sends it, under the same key.
     assert (busy, retried) == ([429], [204])
     assert keys == {"events/outbox-9"}
+    # Resend's limit is recorded as its own.
+    assert [(data["limit"], data["kind"]) for kind, data in published if kind == LIMIT_HIT] == [
+        ("RESEND_RATE_LIMIT", "provider:resend")
+    ]
 
 
 def test_an_invite_resend_refuses_is_marked_undelivered_and_not_retried(run, outside):

@@ -11,3 +11,10 @@ class LegalNoticeOut(BaseModel):
     state: LegalNoticeState
     # Who it goes to: every account, or every company's owners and admins.
     audience: Literal["everyone", "company_editors"]
+
+
+class LegalChangeOut(BaseModel):
+    """A document's new version, noticed and applying from `version` (a day)."""
+
+    document: str
+    version: str

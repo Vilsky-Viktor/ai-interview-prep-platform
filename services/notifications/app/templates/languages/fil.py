@@ -247,6 +247,32 @@ TEXTS = {
             "ipinapadala ito anuman ang iyong email settings."
         ),
     },
+    # Campaigns (services/campaign_sends.py), named after the setting they need: a superadmin's
+    # subject and text, and its button's text, or "open_site" when it has none.
+    "updates": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "Buksan ang prepza",
+        "footer": (
+            "Ipinadala ang email na ito sa {email} dahil pinili mong makatanggap ng mga update at"
+            " balita tungkol sa produkto mula sa prepza."
+        ),
+    },
+    "promotions": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "Buksan ang prepza",
+        "footer": (
+            "Ipinadala ang email na ito sa {email} dahil pinili mong makatanggap ng mga alok at"
+            " promo mula sa prepza."
+        ),
+    },
     "top_up_failed": {
         "subject": "Pumalya ang awtomatikong top-up para sa {company}",
         "preheader": (

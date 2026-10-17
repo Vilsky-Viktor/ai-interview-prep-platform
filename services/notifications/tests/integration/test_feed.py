@@ -10,7 +10,7 @@ from prepza_common.notifications import (
 )
 
 from app.constants.notifications import DROPDOWN_LIMIT
-from app.integrations import companies, subscription
+from app.integrations import companies, library, subscription
 from app.services import events, feed
 from app.storage import notifications
 from tests.integration.factories import company, finished
@@ -24,7 +24,11 @@ def member_of(monkeypatch):
     async def company_ids(user_id):
         return memberships.get(user_id, [])
 
+    async def account_created(user_id):
+        """Unknown to library: only the user's own and their companies' notifications."""
+
     monkeypatch.setattr(companies, "company_ids", company_ids)
+    monkeypatch.setattr(library, "account_created", account_created)
 
     return memberships
 
@@ -44,7 +48,7 @@ def test_the_feed_holds_the_users_and_their_companies_notifications(run, member_
         await notifications.add(str(uuid.uuid4()), finished(mine))
         await notifications.add(str(uuid.uuid4()), finished(other))
 
-        return await feed.feed(user)
+        return await feed.feed(user, "en")
 
     result = run(scenario())
 
@@ -62,7 +66,7 @@ def test_the_dropdown_shows_the_latest_few(run, member_of):
         for number in range(DROPDOWN_LIMIT + 2):
             await notifications.add(str(uuid.uuid4()), own(user, str(number)))
 
-        return await feed.feed(user)
+        return await feed.feed(user, "en")
 
     result = run(scenario())
 
@@ -79,10 +83,10 @@ def test_opening_the_bell_reads_everything_so_far_for_that_user_only(run, member
     async def scenario():
         await notifications.add(str(uuid.uuid4()), finished(shared, "Backend"))
         await notifications.mark_seen(ann)
-        after_seen = (await feed.feed(ann)).unread
+        after_seen = (await feed.feed(ann, "en")).unread
         await notifications.add(str(uuid.uuid4()), finished(shared, "Frontend"))
 
-        return after_seen, (await feed.feed(ann)).unread, (await feed.feed(bob)).unread
+        return after_seen, (await feed.feed(ann, "en")).unread, (await feed.feed(bob, "en")).unread
 
     assert run(scenario()) == (0, 1, 2)
 

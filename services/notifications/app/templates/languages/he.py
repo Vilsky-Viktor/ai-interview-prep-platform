@@ -211,6 +211,26 @@ TEXTS = {
             "הודעה על ההסכם שלנו עם החברה שלכם, ולכן היא נשלחת בלי קשר להגדרות האימייל שלכם."
         ),
     },
+    # Campaigns (services/campaign_sends.py), named after the setting they need: a superadmin's
+    # subject and text, and its button's text, or "open_site" when it has none.
+    "updates": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "פתיחת prepza",
+        "footer": "הודעה זו נשלחה אל {email} כי בחרתם לקבל מ-prepza עדכוני מוצר וחדשות.",
+    },
+    "promotions": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "פתיחת prepza",
+        "footer": "הודעה זו נשלחה אל {email} כי בחרתם לקבל מ-prepza מבצעים והטבות.",
+    },
     "top_up_failed": {
         "subject": "הטעינה האוטומטית נכשלה עבור {company}",
         "preheader": "לא ניתן היה לחייב את הכרטיס. טענו כדי להמשיך להזמין מועמדים.",

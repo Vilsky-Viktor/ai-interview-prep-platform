@@ -9,6 +9,7 @@ from prepza_common.constants import LANGUAGES
 
 from app.config.settings import settings
 from app.constants.unsubscribe import UnsubscribeType
+from app.helpers.campaign_emails import campaign_email
 from app.helpers.emails import (
     candidate_invite_email,
     candidate_reminder_email,
@@ -67,8 +68,20 @@ EMAILS_SENT = {
         ),
         True,
     ),
+    "campaign": (
+        lambda: campaign_email(
+            "updates",
+            RECIPIENT,
+            {"en": {"subject": "News", "text": "Hi.", "button": "See"}},
+            "/news",
+            SITE,
+            SECRET,
+            "s1",
+        ),
+        True,
+    ),
 }
-OPTIONAL = {"digest", "reminders"}
+OPTIONAL = {"digest", "reminders", "campaign"}
 
 
 @pytest.mark.parametrize("name", EMAILS_SENT)
@@ -161,6 +174,10 @@ def placeholders(language: str) -> dict:
         "count": 2,
         "available": 5,
         "days": 3,
+        # A campaign's own texts.
+        "subject": "Code questions",
+        "preheader": "Now with code.",
+        "button": "See it",
     }
 
 
@@ -180,7 +197,7 @@ def test_every_email_in_every_language_has_a_full_text_part_and_links_only_to_th
     email = render(kind, data, f"{SITE}/invite/t", links, [("Acme", rows)] if rows else [])
 
     # The language has the email itself, not an English stand-in.
-    assert texts["heading"] in email.text
+    assert texts["heading"].format(**data) in email.text
     assert f'lang="{language}"' in email.html
     # The text part says everything the HTML does: its lines, every link, and nothing unfilled.
     assert "{" not in email.text and "{" not in email.html

@@ -232,6 +232,29 @@ TEXTS = {
             "saadetakse see sõltumata sinu e-kirjade seadetest."
         ),
     },
+    # Campaigns (services/campaign_sends.py), named after the setting they need: a superadmin's
+    # subject and text, and its button's text, or "open_site" when it has none.
+    "updates": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "Ava prepza",
+        "footer": "See e-kiri saadeti aadressile {email}, sest valisid prepzalt tooteuudiste saamise.",
+    },
+    "promotions": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "Ava prepza",
+        "footer": (
+            "See e-kiri saadeti aadressile {email}, sest valisid prepzalt pakkumiste ja kampaaniate"
+            " saamise."
+        ),
+    },
     "top_up_failed": {
         "subject": "Automaatne juurdelaadimine ebaõnnestus: {company}",
         "preheader": "Kaardilt ei saanud makset võtta. Laadi juurde, et kandidaate edasi kutsuda.",

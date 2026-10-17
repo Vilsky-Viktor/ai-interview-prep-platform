@@ -13,6 +13,7 @@ dependencies = [
     "psycopg[binary]>=3.3.6",
     "sqlalchemy[asyncio]>=2.1.1",
     "redis>=8.1.0",
+    "markdown-it-py>=4",
 ]
 
 [tool.uv.sources]

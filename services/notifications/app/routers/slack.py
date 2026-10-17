@@ -37,10 +37,10 @@ async def callback(state: str, code: str | None = None, error: str | None = None
 @router.put("/kinds", status_code=status.HTTP_204_NO_CONTENT)
 async def set_kinds(company_id: UUID, body: SlackKindsIn, user: CurrentUser) -> None:
     await companies.require(str(company_id), user.uid, editor=True)
-    await slack.set_kinds(str(company_id), body.kinds)
+    await slack.set_kinds(str(company_id), body.kinds, user.uid)
 
 
 @router.delete("", status_code=status.HTTP_204_NO_CONTENT)
 async def disconnect(company_id: UUID, user: CurrentUser) -> None:
     await companies.require(str(company_id), user.uid, editor=True)
-    await slack.disconnect(str(company_id))
+    await slack.disconnect(str(company_id), user.uid)

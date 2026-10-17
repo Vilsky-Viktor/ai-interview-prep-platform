@@ -11,6 +11,7 @@ from app.config.settings import settings
 from app.helpers.emails import candidate_invite_email
 from app.helpers.webhooks import signature_valid
 from app.integrations import companies, library
+from app.storage import suppressed
 
 # Svix's published example (docs.svix.com, "Verifying Webhooks Manually"), not a real secret. Put
 # together from parts so secret scanners don't take the literal for a leaked key.
@@ -71,7 +72,13 @@ def reported(monkeypatch):
 
     monkeypatch.setattr(settings, "resend_webhook_secret", SECRET)
     monkeypatch.setattr(companies, "invite_undelivered", fake_invite)
+
+    # The suppression list has its own tests (test_bell_for_everyone.py).
+    async def fake_suppress(address, reason):
+        return None
+
     monkeypatch.setattr(library, "unsubscribe", fake_unsubscribe)
+    monkeypatch.setattr(suppressed, "add", fake_suppress)
 
     return calls
 

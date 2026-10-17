@@ -208,6 +208,32 @@ TEXTS = {
             " whatever your email settings."
         ),
     },
+    # Campaigns (services/campaign_sends.py), named after the setting they need: a superadmin's
+    # subject and text, and its button's text, or "open_site" when it has none.
+    "updates": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "Open prepza",
+        "footer": (
+            "This email was sent to {email} because you chose to get product updates and news"
+            " from prepza."
+        ),
+    },
+    "promotions": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "Open prepza",
+        "footer": (
+            "This email was sent to {email} because you chose to get offers and promotions"
+            " from prepza."
+        ),
+    },
     "top_up_failed": {
         "subject": "Automatic top-up failed for {company}",
         "preheader": "The card couldn't be charged. Top up to keep inviting candidates.",

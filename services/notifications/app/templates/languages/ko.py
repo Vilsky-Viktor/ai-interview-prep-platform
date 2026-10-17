@@ -164,6 +164,26 @@ TEXTS = {
         "button": "새 계약 보기",
         "footer": "prepza에서 회사의 소유자 또는 관리자이므로 {email}(으)로 이 이메일이 발송되었습니다. 회사와의 계약에 관한 안내이므로 이메일 설정과 관계없이 발송됩니다.",
     },
+    # Campaigns (services/campaign_sends.py), named after the setting they need: a superadmin's
+    # subject and text, and its button's text, or "open_site" when it has none.
+    "updates": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "prepza 열기",
+        "footer": "prepza의 제품 업데이트 및 소식을 받기로 선택하셨으므로 {email}(으)로 이 이메일이 발송되었습니다.",
+    },
+    "promotions": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "prepza 열기",
+        "footer": "prepza의 혜택 및 프로모션을 받기로 선택하셨으므로 {email}(으)로 이 이메일이 발송되었습니다.",
+    },
     "top_up_failed": {
         "subject": "{company}의 자동 충전에 실패했습니다",
         "preheader": "카드 결제에 실패했습니다. 지원자를 계속 초대하려면 충전하세요.",

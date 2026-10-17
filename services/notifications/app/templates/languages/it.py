@@ -231,6 +231,32 @@ TEXTS = {
             "quindi viene inviata indipendentemente dalle tue impostazioni email."
         ),
     },
+    # Campaigns (services/campaign_sends.py), named after the setting they need: a superadmin's
+    # subject and text, and its button's text, or "open_site" when it has none.
+    "updates": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "Apri prepza",
+        "footer": (
+            "Questa email è stata inviata a {email} perché hai scelto di ricevere novità sul"
+            " prodotto e notizie da prepza."
+        ),
+    },
+    "promotions": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "Apri prepza",
+        "footer": (
+            "Questa email è stata inviata a {email} perché hai scelto di ricevere offerte e"
+            " promozioni da prepza."
+        ),
+    },
     "top_up_failed": {
         "subject": "Ricarica automatica non riuscita per {company}",
         "preheader": (

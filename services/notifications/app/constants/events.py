@@ -17,3 +17,5 @@ CONTACT_SENT = "contact.sent"
 COMPANY_DELETED = "company.deleted"
 # Companies: a company erased a candidate; its notifications about them go.
 CANDIDATE_REMOVED = "candidate.removed"
+# Library: a news post was deleted; its notification for everyone goes.
+NEWS_DELETED = "news.deleted"

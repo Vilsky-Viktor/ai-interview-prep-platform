@@ -9,7 +9,7 @@ from app.helpers.emails import candidate_reminder_email
 from app.helpers.unsubscribe import address_hash, candidate_token, user_token
 from app.integrations import library, smtp
 from app.services import events
-from app.storage import opt_outs
+from app.storage import bulk_recipients, opt_outs
 
 ANN = address_hash("ann@example.com")
 INVITE = {
@@ -51,8 +51,12 @@ def applied(monkeypatch):
     async def add(address, company_id, invite_id=None):
         calls.append(("opt_out", address, company_id, invite_id))
 
+    async def mark_unsubscribed(user_id, kind):
+        calls.append(("campaign", user_id, kind))
+
     monkeypatch.setattr(library, "unsubscribe", unsubscribe)
     monkeypatch.setattr(opt_outs, "add", add)
+    monkeypatch.setattr(bulk_recipients, "mark_unsubscribed", mark_unsubscribed)
 
     return calls
 
@@ -96,7 +100,8 @@ def test_a_forged_link_is_not_found(client, applied):
 )
 def test_confirming_applies_the_link(client, applied, kind, expected):
     assert client.post(f"/unsubscribe/{token(kind)}").status_code == 204
-    assert applied == [expected]
+    # A campaign's setting is also counted against the campaign (tested below).
+    assert [call for call in applied if call[0] != "campaign"] == [expected]
 
 
 def test_a_mail_clients_one_click_post_applies_it_without_the_page(client, applied):
@@ -107,7 +112,7 @@ def test_a_mail_clients_one_click_post_applies_it_without_the_page(client, appli
     )
 
     assert response.status_code == 204
-    assert applied == [("library", "ann", ["updates"])]
+    assert applied == [("library", "ann", ["updates"]), ("campaign", "ann", "updates")]
 
 
 @pytest.fixture

@@ -9,20 +9,24 @@ from app.constants.webhooks import (
     UNDELIVERED_EVENTS,
 )
 from app.integrations import companies
+from app.services.suppression import from_webhook
 from app.services.unsubscribe import apply
 
 logger = logging.getLogger(__name__)
 
 
 async def handle(event: dict) -> None:
-    """Tells the invite's owner its email wasn't delivered, and turns off an optional email the
-    user marked as spam; other events and untagged emails aren't ours to act on."""
+    """Tells the invite's owner its email wasn't delivered, turns off an optional email the user
+    marked as spam, and keeps a member's address that bounced or complained off bulk sends;
+    other events and untagged emails aren't ours to act on."""
     if event.get("type") not in UNDELIVERED_EVENTS:
         return
 
     tags = (event.get("data") or {}).get("tags") or {}
     # Counted for the bounce alert (infra/terraform/monitoring_logs.tf); no address, only its kind.
     logger.info("Email not delivered (%s): %s", event["type"], tags.get(KIND_TAG, "untagged"))
+
+    await from_webhook(event)
 
     if event["type"] == COMPLAINED_EVENT:
         await complained(tags)

@@ -241,6 +241,29 @@ TEXTS = {
             "bạn nên luôn được gửi, bất kể cài đặt email của bạn."
         ),
     },
+    # Campaigns (services/campaign_sends.py), named after the setting they need: a superadmin's
+    # subject and text, and its button's text, or "open_site" when it has none.
+    "updates": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "Mở prepza",
+        "footer": (
+            "Email này được gửi đến {email} vì bạn đã chọn nhận cập nhật sản phẩm và tin tức từ"
+            " prepza."
+        ),
+    },
+    "promotions": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "Mở prepza",
+        "footer": "Email này được gửi đến {email} vì bạn đã chọn nhận ưu đãi và khuyến mãi từ prepza.",
+    },
     "top_up_failed": {
         "subject": "Tự động nạp cho {company} không thành công",
         "preheader": "Không trừ tiền được từ thẻ. Hãy nạp thêm để tiếp tục mời ứng viên.",

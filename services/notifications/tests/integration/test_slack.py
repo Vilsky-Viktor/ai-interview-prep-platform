@@ -102,7 +102,7 @@ def test_reconnecting_replaces_the_channel_and_keeps_the_kinds(run):
 
     async def scenario():
         await connect(company_id)
-        await storage.set_kinds(company_id, ["interview_ready"])
+        await storage.set_kinds(company_id, ["interview_ready"], "u1")
         assert await storage.mark_broken(company_id)
         # Already broken: it didn't stop working now.
         assert not await storage.mark_broken(company_id)

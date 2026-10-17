@@ -42,3 +42,7 @@ COMPANY_IDS_KEY = "notifications:company-ids:{user_id}"
 # own notifications.
 STREAM_REFRESH_SECONDS = 300
 STREAM_RETRY_SECONDS = 60
+# When a user's account was made (library), kept this long: everyone's notifications newer than
+# it are theirs.
+ACCOUNT_CREATED_SECONDS = 3600
+ACCOUNT_CREATED_KEY = "notifications:account-created:{user_id}"

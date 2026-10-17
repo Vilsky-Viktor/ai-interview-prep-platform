@@ -226,6 +226,32 @@ TEXTS = {
             "تنظیمات ایمیل شما فرستاده می‌شود."
         ),
     },
+    # Campaigns (services/campaign_sends.py), named after the setting they need: a superadmin's
+    # subject and text, and its button's text, or "open_site" when it has none.
+    "updates": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "باز کردن prepza",
+        "footer": (
+            "این ایمیل به {email} فرستاده شد چون شما دریافت تازه‌های محصول و اخبار prepza را انتخاب"
+            " کرده‌اید."
+        ),
+    },
+    "promotions": {
+        "subject": "{subject}",
+        "preheader": "{preheader}",
+        "heading": "{subject}",
+        "lines": [],
+        "button": "{button}",
+        "open_site": "باز کردن prepza",
+        "footer": (
+            "این ایمیل به {email} فرستاده شد چون شما دریافت پیشنهادها و تخفیف‌های prepza را انتخاب"
+            " کرده‌اید."
+        ),
+    },
     "top_up_failed": {
         "subject": "شارژ خودکار برای {company} ناموفق بود",
         "preheader": "برداشت از کارت ممکن نشد. برای ادامه دعوت از متقاضیان شارژ کنید.",

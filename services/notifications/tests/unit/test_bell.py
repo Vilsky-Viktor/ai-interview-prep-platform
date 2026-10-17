@@ -13,6 +13,7 @@ from app.models.notifications import Notification
 from app.services import events, feed
 from app.storage import notifications
 
+MADE = datetime(2026, 10, 1, tzinfo=UTC)
 EVENT = notification(
     "company", "c1", NotificationKind.CANDIDATE_FINISHED, "/companies/c1", email="a@b.c"
 )
@@ -71,8 +72,8 @@ def test_the_bell_shows_the_users_and_their_companies_notifications(client, monk
     async def fake_companies(user_id):
         return ["c1"]
 
-    async def fake_latest(recipients, limit):
-        asked["recipients"], asked["limit"] = recipients, limit
+    async def fake_latest(recipients, limit, since):
+        asked["recipients"], asked["limit"], asked["since"] = recipients, limit, since
 
         return [
             Notification(
@@ -84,16 +85,25 @@ def test_the_bell_shows_the_users_and_their_companies_notifications(client, monk
             )
         ]
 
-    async def fake_unread(recipients, user_id):
+    async def fake_unread(recipients, user_id, since):
         return 3
+
+    async def fake_created(user_id):
+        return MADE
 
     monkeypatch.setattr(feed.companies, "company_ids", fake_companies)
     monkeypatch.setattr(notifications, "latest", fake_latest)
     monkeypatch.setattr(notifications, "unread_count", fake_unread)
+    monkeypatch.setattr(feed.library, "account_created", fake_created)
 
     body = client.get("/me").json()
 
-    assert asked == {"recipients": [("user", "u1"), ("company", "c1")], "limit": 10}
+    # Everyone's notifications too, newer than the account.
+    assert asked == {
+        "recipients": [("user", "u1"), ("company", "c1")],
+        "limit": 10,
+        "since": MADE,
+    }
     assert body["unread"] == 3
     assert body["items"][0]["kind"] == "candidate_finished"
     assert body["items"][0]["data"] == {"email": "a@b.c"}

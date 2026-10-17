@@ -4,11 +4,14 @@ from alembic import context
 from prepza_common.db import sqlalchemy_url
 from sqlalchemy import create_engine
 
-import app.models.legal_notices
+import app.models.bulk
+import app.models.campaigns
 import app.models.notifications
 import app.models.opt_outs
+import app.models.outbox
 import app.models.sent_emails
-import app.models.slack  # noqa: F401
+import app.models.slack
+import app.models.suppressed  # noqa: F401
 from app.config.settings import settings
 from app.models.base import Base
 
