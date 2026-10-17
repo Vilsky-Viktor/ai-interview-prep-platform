@@ -5,6 +5,7 @@ import { BadgeQuestionMarkIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useState } from "react"
 
+import { LocalizedLink } from "@/components/localized-link"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -25,9 +26,9 @@ import { apiErrorMessage, apiFetch } from "@/lib/api"
 import type { PageGuide, PageHelpKey } from "@/types/page-help"
 
 /** A page's info button: a muted icon that opens a short guide to the page, which rounds serves
- * (the assistant reads the same): what it's for, what you can do there and a tip or two. It also
- * registers the page's key for the assistant. `className` places it; BackLink puts it under its
- * arrow. */
+ * (the assistant reads the same): what it's for, what you can do there, a tip or two and, on some
+ * pages, a guide article to read more in. It also registers the page's key for the assistant.
+ * `className` places it; BackLink puts it under its arrow. */
 export function PageHelp({
   page,
   className,
@@ -95,6 +96,14 @@ export function PageHelp({
             <p className="text-base text-muted-foreground">{shown.text}</p>
             <HelpList title={t("actionsTitle")} items={shown.actions} />
             <HelpList title={t("tipsTitle")} items={shown.tips} />
+            {shown.article && (
+              <LocalizedLink
+                href={shown.article.path}
+                className="text-base text-primary hover:underline"
+              >
+                {shown.article.title}
+              </LocalizedLink>
+            )}
           </>
         ) : (
           <p
