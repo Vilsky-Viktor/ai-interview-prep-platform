@@ -1,0 +1,70 @@
+import asyncio
+
+import openai
+import pytest
+from prepza_common.ai_constants import AI_USED, LIMIT_HIT
+
+from app.constants.actions import KEY_CHECK_BATCH
+from app.integrations import openai_batch
+from app.services import key_check_batches
+from tests.unit.fake_ai import MODEL, refused
+from tests.unit.fake_redis import FakeRedis
+from tests.unit.test_key_check_batches import KEPT, FakeStore, library_with
+
+
+def test_a_finished_batchs_usage_is_recorded_once_at_batch_price(events, monkeypatch):
+    store = FakeStore({KEPT: "batch-1"})
+    store.install(monkeypatch)
+    library_with(monkeypatch, {KEPT})
+
+    async def status(batch_id):
+        return "completed", "file-1"
+
+    async def results(file_id):
+        return {str(KEPT): '{"correct_indexes": [1]}'}, [(MODEL, {"input_tokens": 1_000_000})]
+
+    async def applied(*args):
+        pass
+
+    redis = FakeRedis()
+    monkeypatch.setattr(key_check_batches, "get_redis", lambda: redis)
+    monkeypatch.setattr(openai_batch, "status", status)
+    monkeypatch.setattr(openai_batch, "results", results)
+    monkeypatch.setattr(key_check_batches, "apply_key_check", applied)
+
+    asyncio.run(key_check_batches.collect_finished())
+    # A run that stopped halfway reads the same batch again.
+    store.rows[KEPT] = "batch-1"
+    asyncio.run(key_check_batches.collect_finished())
+
+    [data] = [data for kind, data in events if kind == AI_USED]
+    assert (data["action"], data["model"], data["input_tokens"]) == (
+        KEY_CHECK_BATCH,
+        MODEL,
+        1_000_000,
+    )
+    # A million tokens in at $2, at half price.
+    assert data["cost_usd"] == pytest.approx(1.0)
+
+
+def test_openai_refusing_a_batch_is_recorded_as_its_limit_hit(events, monkeypatch):
+    store = FakeStore({KEPT: None})
+    store.install(monkeypatch)
+    library_with(monkeypatch, {KEPT})
+
+    async def submit(requests):
+        raise refused("rate_limit_exceeded")
+
+    monkeypatch.setattr(openai_batch, "submit", submit)
+
+    with pytest.raises(openai.RateLimitError):
+        asyncio.run(key_check_batches.submit_pending())
+
+    [hit] = [data for kind, data in events if kind == LIMIT_HIT]
+    assert (hit["limit"], hit["kind"], hit["what"]) == (
+        "OPENAI_RATE_LIMIT",
+        "provider:openai",
+        KEY_CHECK_BATCH,
+    )
+    # Still waiting, for the next run.
+    assert store.rows == {KEPT: None}

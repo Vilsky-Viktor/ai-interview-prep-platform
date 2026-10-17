@@ -2,7 +2,8 @@ from typing import Literal
 
 from prepza_common.constants import MAX_GOAL_LENGTH  # noqa: F401 (re-exported)
 
-MAX_CONCURRENCY = 8
+# How many AI calls one generation makes at once, and how many a second all of them together,
+# are set in the admin zone's Controls tab (GENERATION_CALLS_AT_ONCE, GENERATION_CALLS_PER_SECOND).
 RECURSION_LIMIT = 200
 
 # A topic's or subtopic's name, drafted or edited by hand during review. How many topics and
@@ -37,7 +38,10 @@ LLM_TIMEOUT_SECONDS = 300
 LLM_MAX_RETRIES = 2
 # What OpenAI accepts for a reasoning model's effort; the settings pick one (see config).
 ReasoningEffort = Literal["none", "minimal", "low", "medium", "high"]
-DISTRACTORS = 3
+# Every question has this many options: one correct, or for a multi-answer ("select all that
+# apply") question 2 or 3 of them, never all (prepza_common.multi_answer).
+MAX_MULTI_CORRECT = 3
+OPTIONS = 4
 # A question, its example and its four options are read and answered within a minute, also by
 # someone reading in a language that isn't their own (prompts/question_rules.py READING_RULES).
 # The prompts ask for less; these catch what went far over, and the question is dropped.
@@ -57,10 +61,9 @@ FILL_ATTEMPTS = 3
 # spare saves a round when one comes back a duplicate.
 FILL_SPARE_QUESTIONS = 2
 
-# The changes a reviewer describes in words during topic review, and how many times one
-# generation's topics may be revised that way.
+# The changes a reviewer describes in words during topic review; how many times one
+# generation's topics may be revised that way is the MAX_TOPIC_REVISIONS limit.
 MAX_INSTRUCTIONS_LENGTH = 500
-MAX_TOPIC_REVISIONS = 10
 TOO_MANY_REVISIONS = "These topics can't be changed in words any more. Choose the topics to keep."
 
 # A generation stops after this long: Cloud Tasks gives one request at most 30 minutes.
@@ -72,6 +75,7 @@ CLOUD_TASKS_URL = "https://cloudtasks.googleapis.com"
 RUN_GENERATION = "/internal/jobs/run-generation"
 VERIFY_QUESTION = "/internal/jobs/verify-question"
 TRANSLATE_NEWS = "/internal/jobs/translate-news"
+TRANSLATE_CAMPAIGN = "/internal/jobs/translate-campaign"
 # A running job updates its row as it goes; one untouched for longer than a job may run has lost
 # its worker. The margin covers the last update coming a little before the timeout.
 STUCK_AFTER_SECONDS = JOB_TIMEOUT_SECONDS + 10 * 60

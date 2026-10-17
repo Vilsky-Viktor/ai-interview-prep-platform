@@ -2,10 +2,13 @@ import logging
 import math
 
 from prepza_common.constants import DEFAULT_LANGUAGE
+from prepza_common.multi_answer import multi_share
 
 from app.constants.reuse import MAX_REUSE_SHARE
 from app.helpers.questions import topic_size
-from app.integrations import library, llm
+from app.integrations import library
+from app.integrations.redis import get_redis
+from app.integrations.usage import embed
 from app.models.state import State
 from app.schemas.library import ReuseIn
 
@@ -20,22 +23,21 @@ def topic_text(topic: dict) -> str:
 
 
 async def find_reused(state: State) -> dict:
-    """Embeds the approved topics and takes proven questions from similar public topics.
+    """Embeds the approved topics and takes proven questions from similar public topics; and
+    sets the run's share of multi-answer questions.
 
     Reuse only saves cost, so any failure here means generating every question instead.
     """
     topics = state["topics"]
-    share = MAX_REUSE_SHARE
-    count = math.floor(topic_size(state.get("template", False)) * share)
+    count = math.floor(topic_size(state.get("template", False)) * MAX_REUSE_SHARE)
+    share = await multi_share(get_redis())
 
     try:
-        embeddings = await llm.get_embeddings().aembed_documents(
-            [topic_text(topic) for topic in topics]
-        )
+        embeddings = await embed([topic_text(topic) for topic in topics])
     except Exception:
         logger.exception("Couldn't embed the topics")
 
-        return {"topic_embeddings": [], "reused": [[] for _ in topics]}
+        return {"topic_embeddings": [], "reused": [[] for _ in topics], "multi_share": share}
 
     reused = []
     # A bank question goes into one topic of a test at most, even when two topics are alike; the
@@ -64,4 +66,4 @@ async def find_reused(state: State) -> dict:
         taken.update(question.text for question in found)
         reused.append([question.model_dump(mode="json") for question in found])
 
-    return {"topic_embeddings": embeddings, "reused": reused}
+    return {"topic_embeddings": embeddings, "reused": reused, "multi_share": share}

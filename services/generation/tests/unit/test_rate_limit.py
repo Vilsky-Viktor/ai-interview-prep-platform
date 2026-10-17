@@ -2,86 +2,46 @@ import asyncio
 
 import pytest
 from fastapi import HTTPException
+from prepza_common.limit_list import LIMITS
 from prepza_common.rate_limit import hit
 
+from tests.unit.fake_redis import FakeRedis
 
-class FakePipeline:
-    def __init__(self, redis):
-        self.redis = redis
-        self.commands = []
-
-    async def __aenter__(self):
-        return self
-
-    async def __aexit__(self, *exc):
-        return False
-
-    def set(self, key: str, value: int, ex: int, nx: bool):
-        self.commands.append(("set", key, value, ex, nx))
-
-    def incr(self, key: str):
-        self.commands.append(("incr", key))
-
-    async def execute(self) -> list:
-        results = []
-
-        for command in self.commands:
-            if command[0] == "set":
-                _, key, value, ex, nx = command
-                created = not (nx and key in self.redis.counts)
-
-                if created:
-                    self.redis.counts[key] = value
-                    self.redis.ttls[key] = ex
-
-                results.append(created)
-            else:
-                self.redis.counts[command[1]] += 1
-                results.append(self.redis.counts[command[1]])
-
-        return results
+KEY = "rate:generations:u1"
 
 
-class FakeRedis:
-    def __init__(self):
-        self.counts: dict[str, int] = {}
-        self.ttls: dict[str, int] = {}
+def test_hit_allows_up_to_the_limits_edited_value_within_its_window():
+    redis = FakeRedis({"GENERATION_LIMIT": 2})
+    asyncio.run(hit(redis, KEY, "GENERATION_LIMIT"))
+    asyncio.run(hit(redis, KEY, "GENERATION_LIMIT"))
 
-    def pipeline(self, transaction: bool):
-        return FakePipeline(self)
-
-
-def test_hit_allows_up_to_the_limit():
-    redis = FakeRedis()
-    asyncio.run(hit(redis, "rate:generations:u1", 2, 60))
-    asyncio.run(hit(redis, "rate:generations:u1", 2, 60))
-
-    assert redis.counts["rate:generations:u1"] == 2
-    assert redis.ttls["rate:generations:u1"] == 60
+    assert redis.counts[KEY] == 2
+    assert redis.expiries[KEY] == LIMITS["GENERATION_LIMIT"].window
 
 
 def test_hit_rejects_over_the_limit():
-    redis = FakeRedis()
-    asyncio.run(hit(redis, "rate:generations:u1", 1, 60))
+    redis = FakeRedis({"GENERATION_LIMIT": 1})
+    asyncio.run(hit(redis, KEY, "GENERATION_LIMIT"))
 
     with pytest.raises(HTTPException) as error:
-        asyncio.run(hit(redis, "rate:generations:u1", 1, 60))
+        asyncio.run(hit(redis, KEY, "GENERATION_LIMIT"))
 
     assert error.value.status_code == 429
 
 
-def test_hit_skips_when_limit_is_zero():
+def test_without_an_edited_value_the_default_holds():
     redis = FakeRedis()
-    asyncio.run(hit(redis, "rate:generations:u1", 0, 60))
+    redis.counts[KEY] = LIMITS["GENERATION_LIMIT"].default
 
-    assert redis.counts == {}
+    with pytest.raises(HTTPException):
+        asyncio.run(hit(redis, KEY, "GENERATION_LIMIT"))
 
 
 def test_hit_keeps_the_first_expiry():
-    redis = FakeRedis()
-    asyncio.run(hit(redis, "rate:generations:u1", 5, 60))
-    redis.ttls["rate:generations:u1"] = 30
-    asyncio.run(hit(redis, "rate:generations:u1", 5, 60))
+    redis = FakeRedis({"GENERATION_LIMIT": 5})
+    asyncio.run(hit(redis, KEY, "GENERATION_LIMIT"))
+    redis.expiries[KEY] = 30
+    asyncio.run(hit(redis, KEY, "GENERATION_LIMIT"))
 
-    assert redis.counts["rate:generations:u1"] == 2
-    assert redis.ttls["rate:generations:u1"] == 30
+    assert redis.counts[KEY] == 2
+    assert redis.expiries[KEY] == 30

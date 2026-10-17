@@ -1,14 +1,43 @@
-from app.prompts.question_rules import LEVEL_GUIDE, PRACTICE_GUIDE, READING_RULES
+from app.prompts.question_rules import (
+    LEVEL_GUIDE,
+    MULTI_ANSWER_RULES,
+    PRACTICE_GUIDE,
+    READING_RULES,
+    SINGLE_ANSWER_RULES,
+)
+
+# The kind of question to write: the kind of the one it replaces.
+SINGLE_ANSWER_KIND = "It is a single-answer question.\n" + SINGLE_ANSWER_RULES
+MULTI_ANSWER_KIND = (
+    "It is a select-all-that-apply question: 2 or 3 of its 4 options are correct.\n"
+    + MULTI_ANSWER_RULES
+)
+
+# Whether it shows an example: as the one it replaces does (prepza_common.examples).
+WITH_EXAMPLE = "It comes with an example (see the practice rules)."
+WITHOUT_EXAMPLE = "It has no example."
+
+# What users reported about the question it replaces, by report reason (library's
+# ReportReason), so the new one avoids it. A reason without guidance here adds nothing.
+REPORT_GUIDANCE = {
+    "unclear": "It was unclear: say exactly what is asked and state every condition the answer "
+    "depends on.",
+    "hard_to_read": "It was hard to read: use short, simple sentences and common words; an "
+    "example is laid out cleanly, with only the lines it needs, and tagged with the notation it "
+    "is written in.",
+    "off_topic": "It was off the topic: ask about the topic and subtopics below.",
+}
+REPORTS = "What users reported about the question it replaces, to avoid in the new one:\n{reports}"
 
 REGENERATE_PROMPT = (
     """Write ONE new multiple-choice interview question for the topic below.
-The candidate answers by picking one of four short options. It replaces a question the
-interviewer did not like, so it must be clearly different from every existing question below.
+It replaces a question the interviewer did not like, so it must be clearly different from every
+existing question below.
 
+{kind}
+{example}
+{reports}
 Rules:
-- Exactly one clearly correct answer that can be stated concisely.
-- Avoid questions that several answers could fit, such as asking for "a" tool, keyword,
-  or step when several take part. Ask for the one that is specifically right.
 - Never ask the candidate to write, explain, describe, list, or give an example in their own
   words.
 - Do not repeat, rephrase or narrow down any existing question; cover a different angle.
@@ -19,10 +48,10 @@ Rules:
 - Return only the question and, if it shows one, its example. The options are written in a
   separate step, so never list choices (A., B., C., D.) in the question text, and do not add
   numbering.
-- Write the question as plain sentences. Text whose layout matters, such as a program, a query,
-  a command, a formula or a file, never goes into the sentences: it goes into example, exactly
+- Write the question as plain sentences. Text whose layout matters, such as instructions, a
+  lookup, a command, a formula or a file, never goes into the sentences: it goes into example, exactly
   as it would be typed, one statement per line, with real line breaks and indentation. It is
-  shown under the question. A question that refers to an example ("this query", "the command
+  shown under the question. A question that refers to an example ("these lines", "the command
   below") always has one in example.
 - Write formulas and short expressions inline in plain text with proper symbols
   (for example a² + b² = c², ≤, √, π), not in a block.

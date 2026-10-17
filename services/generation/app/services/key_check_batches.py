@@ -1,16 +1,22 @@
 import logging
 
+from prepza_common import ai_usage
 from pydantic import ValidationError
 
 from app.config.settings import settings
+from app.constants.actions import KEY_CHECK_BATCH, QUESTION_VERIFY
 from app.constants.generation import MAX_OUTPUT_TOKENS
 from app.constants.quality import (
+    BATCH_RECORDED_KEY,
+    BATCH_RECORDED_SECONDS,
     BATCH_RETRY_STATUSES,
     MAX_BATCH_KEY_CHECKS,
     MAX_DIRECT_KEY_CHECKS,
     QualityFlag,
 )
 from app.integrations import library, openai_batch
+from app.integrations.redis import get_redis
+from app.integrations.usage import ai_run
 from app.models.key_checks import KeyCheck as KeyCheckRow
 from app.schemas.verify import KeyCheck
 from app.services.verify import apply_key_check, check_key, key_check_prompt, marked_answer
@@ -71,7 +77,13 @@ async def submit_pending() -> None:
         await key_checks.remove(gone)
 
     if requests:
-        batch_id = await openai_batch.submit(requests)
+        try:
+            batch_id = await openai_batch.submit(requests)
+        except Exception as error:
+            await ai_usage.provider_refused(error, KEY_CHECK_BATCH)
+
+            raise
+
         await key_checks.set_batch([check.question_id for check in sent], batch_id)
         logger.info("Sent %d key checks in batch %s", len(requests), batch_id)
 
@@ -101,6 +113,17 @@ async def apply_reply(check: KeyCheckRow, reply: str | None) -> None:
         await apply_key_check(check.question_id, question, context, result)
 
 
+async def record_batch(batch_id: str, used: list[tuple[str, dict]]) -> None:
+    """Each request's usage, once a batch."""
+    key = f"{BATCH_RECORDED_KEY}:{batch_id}"
+
+    if not used or not await get_redis().set(key, 1, nx=True, ex=BATCH_RECORDED_SECONDS):
+        return
+
+    for model, usage in used:
+        await ai_usage.record(KEY_CHECK_BATCH, model, usage, batch=True)
+
+
 async def collect_finished() -> None:
     """Applies the results of finished batches. A failed or expired batch's results are applied
     too, and its checks without one go out in the next batch. A finished batch's checks without
@@ -115,7 +138,8 @@ async def collect_finished() -> None:
             continue
 
         checks = await key_checks.in_batch(batch_id)
-        replies = await openai_batch.results(output_file_id) if output_file_id else {}
+        replies, used = await openai_batch.results(output_file_id) if output_file_id else ({}, [])
+        await record_batch(batch_id, used)
 
         for check in checks:
             reply = replies.get(str(check.question_id))
@@ -129,7 +153,9 @@ async def collect_finished() -> None:
                 direct += 1
 
             try:
-                await apply_reply(check, reply)
+                # Applying a reply may call the verifier again, at full price.
+                async with ai_run(QUESTION_VERIFY, subject_id=check.question_id):
+                    await apply_reply(check, reply)
             except Exception:
                 logger.exception("Key check of question %s failed", check.question_id)
                 await key_checks.set_batch([check.question_id], None)

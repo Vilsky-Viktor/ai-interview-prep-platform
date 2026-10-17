@@ -58,15 +58,15 @@ class FakeLLM:
         return self.results.pop(0) if len(self.results) > 1 else self.results[0]
 
 
-def record(monkeypatch, verdict=None, flag=None, confirmation=None):
-    """Fakes the library and the models; the library's question carries `flag`."""
+def record(monkeypatch, verdict=None, flag=None, confirmation=None, quality=question):
+    """Fakes the library and the models; the library's question (`quality`) carries `flag`."""
     calls = []
 
     async def fake_context(_question_id):
         return context()
 
     async def fake_quality(_question_id):
-        return question().model_copy(update={"flag": flag})
+        return quality().model_copy(update={"flag": flag})
 
     async def fake_keep(question_id):
         calls.append(("keep", question_id))
@@ -74,7 +74,7 @@ def record(monkeypatch, verdict=None, flag=None, confirmation=None):
     async def fake_replace(question_id, new):
         calls.append(("replace", new.text, [option.correct for option in new.options]))
 
-    async def fake_regenerate(question_id, _context):
+    async def fake_regenerate(question_id, _context, reasons=None):
         calls.append(("regenerate", question_id))
 
     fake_llm = FakeLLM(verdict, *([confirmation] if confirmation else []))
@@ -94,7 +94,7 @@ def test_a_wrong_key_is_moved_once_a_blind_second_check_agrees(monkeypatch):
     # The marked option is listed first, so "Debit cash" is number 1; the blind check lists the
     # options in their own order, where it's number 0.
     calls, fake_llm = record(
-        monkeypatch, KeyCheck(correct_index=1), confirmation=KeyCheck(correct_index=0)
+        monkeypatch, KeyCheck(correct_indexes=[1]), confirmation=KeyCheck(correct_indexes=[0])
     )
 
     asyncio.run(check_key(QUESTION_ID, question(), context()))
@@ -114,7 +114,7 @@ def test_a_key_the_second_check_doesnt_agree_on_replaces_the_question(monkeypatc
     # The first check says "Debit cash", the blind one "Debit revenue": nothing moves the key,
     # so no future candidate is marked on an uncertain key.
     calls, _ = record(
-        monkeypatch, KeyCheck(correct_index=1), confirmation=KeyCheck(correct_index=2)
+        monkeypatch, KeyCheck(correct_indexes=[1]), confirmation=KeyCheck(correct_indexes=[2])
     )
 
     asyncio.run(check_key(QUESTION_ID, question(), context()))
@@ -123,7 +123,7 @@ def test_a_key_the_second_check_doesnt_agree_on_replaces_the_question(monkeypatc
 
 
 def test_a_confirmed_key_keeps_the_question(monkeypatch):
-    calls, _ = record(monkeypatch, KeyCheck(correct_index=0))
+    calls, _ = record(monkeypatch, KeyCheck(correct_indexes=[0]))
 
     asyncio.run(check_key(QUESTION_ID, question(), context()))
 
@@ -131,7 +131,7 @@ def test_a_confirmed_key_keeps_the_question(monkeypatch):
 
 
 def test_a_question_without_one_right_option_is_replaced(monkeypatch):
-    calls, _ = record(monkeypatch, KeyCheck(correct_index=None))
+    calls, _ = record(monkeypatch, KeyCheck(correct_indexes=None))
 
     asyncio.run(check_key(QUESTION_ID, question(), context()))
 
@@ -139,7 +139,7 @@ def test_a_question_without_one_right_option_is_replaced(monkeypatch):
 
 
 def test_a_wrong_key_waits_for_the_next_batch(monkeypatch):
-    calls, fake_llm = record(monkeypatch, KeyCheck(correct_index=1), QualityFlag.WRONG_KEY)
+    calls, fake_llm = record(monkeypatch, KeyCheck(correct_indexes=[1]), QualityFlag.WRONG_KEY)
     queued = []
 
     async def fake_add(question_id, text, marked):
@@ -163,13 +163,27 @@ def test_a_flagged_rewrite_replaces_the_question(monkeypatch):
     assert calls == [("regenerate", QUESTION_ID)]
 
 
+def test_a_rewrite_hands_the_reported_reasons_to_the_new_question(monkeypatch):
+    record(monkeypatch, flag=QualityFlag.REWRITE)
+    handed = []
+
+    async def fake_regenerate(question_id, _context, reasons=None):
+        handed.append(reasons)
+
+    monkeypatch.setattr(verify_service, "regenerate", fake_regenerate)
+
+    asyncio.run(verify(QUESTION_ID, QualityFlag.REWRITE))
+
+    assert handed == [["wrong_answer"]]
+
+
 def test_weak_options_are_written_again_for_the_same_question(monkeypatch):
     calls, _ = record(monkeypatch, flag=QualityFlag.WEAK_OPTIONS)
     answers = AnswerList(
         answers=[
             AnswerItem(
                 id=0,
-                correct_option="Debit cash",
+                correct_options=["Debit cash"],
                 distractors=["Credit cash", "Debit capital", "Credit revenue"],
                 ambiguous=False,
             )

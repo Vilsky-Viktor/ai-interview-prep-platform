@@ -1,59 +1,42 @@
-import asyncio
-import logging
 from uuid import UUID
 
-from langchain_core.messages import HumanMessage
 from prepza_common.constants import MAX_NEWS_TEXT_LENGTH, MAX_NEWS_TITLE_LENGTH
 
+from app.constants.actions import NEWS_TRANSLATION
 from app.helpers.prompts import language_name
-from app.integrations import library, llm
+from app.integrations import library
+from app.integrations.usage import ai_run
 from app.prompts.news import NEWS_TRANSLATION_PROMPT
 from app.schemas.news import NewsSource, TranslatedNews
+from app.services.translations import translate_fields, translate_missing
 
-logger = logging.getLogger(__name__)
+LIMITS = {"title": MAX_NEWS_TITLE_LENGTH, "text": MAX_NEWS_TEXT_LENGTH}
 
 
 async def translate_one(source: NewsSource, language: str) -> TranslatedNews:
     """The post in `language`; raises when the model fails or writes past the post's limits."""
-    structured_llm = llm.get_generation_llm().with_structured_output(TranslatedNews)
     prompt = NEWS_TRANSLATION_PROMPT.format(
         language=language_name(language), title=source.title, text=source.text
     )
-    result: TranslatedNews = await structured_llm.ainvoke([HumanMessage(content=prompt)])
-    title, text = result.title.strip(), result.text.strip()
 
-    if not title or not text:
-        raise ValueError(f"Empty {language} translation")
-
-    if len(title) > MAX_NEWS_TITLE_LENGTH or len(text) > MAX_NEWS_TEXT_LENGTH:
-        raise ValueError(f"The {language} translation is too long")
-
-    return TranslatedNews(title=title, text=text)
+    return await translate_fields(TranslatedNews, prompt, LIMITS, language)
 
 
 async def translate_news(news_id: UUID) -> None:
-    """Translates the post into each language it lacks and saves those that worked. Raises when
-    a language failed, so Cloud Tasks runs the job again for the ones still missing; until then
-    those languages show the English post. Safe to repeat: a translated language is skipped."""
+    """Translates the post into each language it lacks and saves those that worked; raises when
+    a language failed, so the job runs again. A translated language is skipped."""
     source = await library.get_news_source(news_id)
 
     if source is None or not source.missing:
         return
 
-    results = await asyncio.gather(
-        *(translate_one(source, language) for language in source.missing),
-        return_exceptions=True,
-    )
-    done = {}
-
-    for language, result in zip(source.missing, results, strict=True):
-        if isinstance(result, BaseException):
-            logger.warning("Couldn't translate news post %s into %s: %s", news_id, language, result)
-        else:
-            done[language] = result
-
-    if done:
+    async def save(done: dict[str, TranslatedNews]) -> None:
         await library.save_news_translations(news_id, source, done)
 
-    if len(done) < len(source.missing):
-        raise RuntimeError(f"News post {news_id}: {len(source.missing) - len(done)} languages left")
+    async with ai_run(NEWS_TRANSLATION, subject_id=news_id):
+        await translate_missing(
+            f"news post {news_id}",
+            source.missing,
+            lambda language: translate_one(source, language),
+            save,
+        )

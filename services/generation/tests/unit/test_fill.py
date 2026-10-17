@@ -2,54 +2,53 @@ import asyncio
 import uuid
 
 import pytest
+from prepza_common.multi_answer import is_multi
 
 from app.config.settings import settings
 from app.helpers.payload import build_preparation
 from app.integrations import llm
-from app.schemas.questions import QuestionItem, QuestionItemList
 from app.services.nodes.fill import TopicShortError, fill_topics
-
-OPTIONS = [{"answer": "Right", "correct": True}, {"answer": "Wrong", "correct": False}]
+from tests.unit.fakes import EXAMPLE, OPTIONS, FakeVerifier, asked_examples, asked_multi, items
 
 
 class FakeStructured:
-    def __init__(self, schema, questions, prompts):
+    def __init__(self, questions, prompts, writes_multi):
         self.questions = questions
         self.prompts = prompts
+        self.writes_multi = writes_multi
 
     async def ainvoke(self, messages):
-        self.prompts.append(messages[-1].content)
+        prompt = messages[-1].content
+        self.prompts.append(prompt)
+        multi = asked_multi(prompt) if self.writes_multi else 0
 
-        return QuestionItemList(
-            items=[
-                QuestionItem(
-                    question=text,
-                    example=None,
-                    correct_option="Right",
-                    distractors=["A", "B", "C"],
-                    ambiguous=False,
-                )
-                for text in self.questions
-            ]
-        )
+        return items(self.questions, multi, asked_examples(prompt))
 
 
 class FakeLLM:
-    def __init__(self, questions):
+    """Writes `questions` every call, as many multi-answer as asked unless `writes_multi` is
+    off."""
+
+    def __init__(self, questions, writes_multi=True):
         self.questions = questions
+        self.writes_multi = writes_multi
         self.prompts = []
 
     def with_structured_output(self, schema):
-        return FakeStructured(schema, self.questions, self.prompts)
+        return FakeStructured(self.questions, self.prompts, self.writes_multi)
 
 
-def state(usable, dropped=0):
-    """One topic with `usable` answered questions and `dropped` ones that have no options."""
-    questions = [f"Question {i}" for i in range(usable + dropped)]
+def state(usable, dropped=0, examples=0, share=0):
+    """One topic with `usable` answered questions, the first `examples` of them with an example,
+    and `dropped` ones that have no options; `share` of a topic is multi-answer."""
+    questions = [
+        f"Question {i}" + (EXAMPLE if i < examples else "") for i in range(usable + dropped)
+    ]
     options = [OPTIONS] * usable + [[]] * dropped
 
     return {
         "level": "basic",
+        "multi_share": share,
         "title": "Bookkeeping",
         "requirements": [],
         "final": [
@@ -65,7 +64,9 @@ def state(usable, dropped=0):
 
 @pytest.fixture(autouse=True)
 def ten_per_topic(monkeypatch):
+    """Ten questions a topic."""
     monkeypatch.setattr(settings, "interview_questions_per_topic", 10)
+    monkeypatch.setattr(llm, "get_verifier_llm", FakeVerifier)
 
 
 def test_a_short_topic_is_filled_to_exactly_its_size(monkeypatch):
@@ -99,3 +100,55 @@ def test_a_topic_that_cannot_be_filled_fails_the_generation(monkeypatch):
         asyncio.run(fill_topics(state(usable=8)))
 
     assert len(fake.prompts) == 3
+
+
+def test_a_short_topic_is_topped_up_with_each_kind_it_lacks(monkeypatch):
+    # Two of ten are multi-answer; seven single-answer ones lack one single and two multi.
+    fake = FakeLLM(["Question 0", "New 1", "New 2", "New 3"])
+    monkeypatch.setattr(llm, "get_generation_llm", lambda *_: fake)
+
+    [item] = asyncio.run(fill_topics(state(usable=7, share=0.2)))["final"]
+
+    assert item["questions"][7:] == ["New 1", "New 2", "New 3"]
+    assert [is_multi(options) for options in item["answer_options"][7:]] == [False, True, True]
+    # One call asks only for single-answer questions, the other only for multi-answer ones.
+    assert [asked_multi(prompt) for prompt in fake.prompts] == [0, 4]
+
+
+def test_multi_answer_questions_that_never_come_are_made_up_with_single_in_the_last_round(
+    monkeypatch,
+):
+    fake = FakeLLM(["New 1", "New 2", "New 3", "New 4", "New 5"], writes_multi=False)
+    monkeypatch.setattr(llm, "get_generation_llm", lambda *_: fake)
+
+    [item] = asyncio.run(fill_topics(state(usable=8, share=0.2)))["final"]
+
+    assert len(item["questions"]) == 10
+    assert not any(is_multi(options) for options in item["answer_options"])
+    # Two rounds ask for the multi-answer ones; the last asks for single-answer ones instead.
+    assert [asked_multi(prompt) for prompt in fake.prompts] == [4, 4, 0]
+
+
+def test_a_topic_on_formal_material_is_topped_up_with_the_examples_it_lacks(monkeypatch):
+    # Two of seven show code, so the topic is held to at least 3 of 10 with an example.
+    fake = FakeLLM(["New 1", "New 2", "New 3", "New 4", "New 5"])
+    monkeypatch.setattr(llm, "get_generation_llm", lambda *_: fake)
+
+    [item] = asyncio.run(fill_topics(state(usable=7, examples=2)))["final"]
+
+    shown = [text for text in item["questions"] if "```" in text]
+
+    assert len(item["questions"]) == 10
+    assert len(shown) == 3
+    # One call asks only for ones with an example, the other only for ones without.
+    assert sorted(asked_examples(prompt) for prompt in fake.prompts) == [0, 3]
+
+
+def test_a_topic_on_other_material_is_never_asked_for_examples(monkeypatch):
+    fake = FakeLLM(["New 1", "New 2", "New 3", "New 4", "New 5"])
+    monkeypatch.setattr(llm, "get_generation_llm", lambda *_: fake)
+
+    [item] = asyncio.run(fill_topics(state(usable=7)))["final"]
+
+    assert len(item["questions"]) == 10
+    assert [asked_examples(prompt) for prompt in fake.prompts] == [0]

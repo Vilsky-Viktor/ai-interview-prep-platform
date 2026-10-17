@@ -3,21 +3,23 @@ import logging
 from langchain_core.messages import HumanMessage
 from openai import LengthFinishReasonError
 
-from app.constants.generation import ANSWER_ATTEMPTS, DISTRACTORS, MAX_OPTION_CHARS
+from app.constants.generation import ANSWER_ATTEMPTS, MAX_OPTION_CHARS, OPTIONS
 from app.helpers.prompts import language_name
 from app.helpers.questions import build_options
 from app.integrations import llm
 from app.models.state import AnswerTask
-from app.prompts.answers import ANSWERS_PROMPT
+from app.prompts.answers import ANSWERS_PROMPT, MULTI_ANSWER_KIND, SINGLE_ANSWER_KIND
 from app.schemas.questions import AnswerList
 
 logger = logging.getLogger(__name__)
 
 
 async def generate_answers(task: AnswerTask) -> dict:
-    """Options for questions that already exist: a re-generated question, or new options for one."""
+    """Options for questions that already exist: a re-generated question, or new options for one,
+    of the kind the task asks for (`multi`: select-all-that-apply)."""
     structured_llm = llm.get_generation_llm().with_structured_output(AnswerList)
     questions = task["questions"]
+    multi = task.get("multi", False)
     done: dict = {}
     pending = list(range(len(questions)))
 
@@ -29,7 +31,8 @@ async def generate_answers(task: AnswerTask) -> dict:
         prompt = ANSWERS_PROMPT.format(
             level=task["level"],
             topic=task["topic"],
-            distractors=DISTRACTORS,
+            kind=MULTI_ANSWER_KIND if multi else SINGLE_ANSWER_KIND,
+            options=OPTIONS,
             max_chars=MAX_OPTION_CHARS,
             language=language_name(task.get("language")),
             questions="\n".join(f"[{i}] {questions[i]}" for i in pending),
@@ -52,7 +55,7 @@ async def generate_answers(task: AnswerTask) -> dict:
 
                 continue
 
-            options = build_options(item.correct_option, item.distractors)
+            options = build_options(item.correct_options, item.distractors, multi)
 
             # Options that don't qualify count as incomplete, so the next attempt retries them.
             if options:

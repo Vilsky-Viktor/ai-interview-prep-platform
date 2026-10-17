@@ -30,11 +30,8 @@ def get_verifier_llm() -> ChatOpenAI:
 
 
 @cache
-def get_rate_limiter() -> SharedRateLimiter | None:
-    if settings.llm_requests_per_second == 0:
-        return None
-
-    return SharedRateLimiter(settings.llm_requests_per_second)
+def get_rate_limiter() -> SharedRateLimiter:
+    return SharedRateLimiter()
 
 
 @cache

@@ -37,10 +37,24 @@ async def status(batch_id: str) -> tuple[str, str | None]:
     return batch.status, batch.output_file_id
 
 
-async def results(file_id: str) -> dict[str, str | None]:
-    """The reply text per custom id; None for a request that failed."""
+def usage_of(body: dict) -> dict:
+    """A reply's usage as LangChain reports a call's: input, cached input and output tokens."""
+    usage = body.get("usage") or {}
+    cached = (usage.get("prompt_tokens_details") or {}).get("cached_tokens", 0)
+
+    return {
+        "input_tokens": usage.get("prompt_tokens", 0),
+        "output_tokens": usage.get("completion_tokens", 0),
+        "input_token_details": {"cache_read": cached or 0},
+    }
+
+
+async def results(file_id: str) -> tuple[dict[str, str | None], list[tuple[str, dict]]]:
+    """The reply text per custom id, None for a request that failed; and the model and usage of
+    each request that reported one."""
     content = await get_client().files.content(file_id)
     replies = {}
+    used = []
 
     for line in content.text.splitlines():
         if not line.strip():
@@ -53,4 +67,7 @@ async def results(file_id: str) -> dict[str, str | None]:
         reply = choices[0].get("message", {}).get("content")
         replies[item["custom_id"]] = reply if response.get("status_code") == 200 else None
 
-    return replies
+        if body.get("usage"):
+            used.append((body.get("model", ""), usage_of(body)))
+
+    return replies, used

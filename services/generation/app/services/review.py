@@ -1,13 +1,7 @@
 from fastapi import HTTPException, status
-from prepza_common.constants import DAY_SECONDS
 from prepza_common.rate_limit import hit
 
-from app.constants.generation import (
-    MAX_TOPIC_REVISIONS,
-    REVIEW_EXPIRY_DAYS,
-    RUN_GENERATION,
-    TOO_MANY_REVISIONS,
-)
+from app.constants.generation import RUN_GENERATION, TOO_MANY_REVISIONS
 from app.integrations import tasks
 from app.integrations.redis import get_redis
 from app.models.generation import Generation
@@ -28,9 +22,10 @@ async def submit_review(generation: Generation, body: ReviewRequest) -> Generati
         await hit(
             get_redis(),
             f"rate:revisions:{generation.id}",
-            MAX_TOPIC_REVISIONS,
-            REVIEW_EXPIRY_DAYS * DAY_SECONDS,
+            "MAX_TOPIC_REVISIONS",
             TOO_MANY_REVISIONS,
+            company_id=generation.company_id,
+            user_id=generation.owner_uid,
         )
 
     if not await generations.claim_review(generation.id):

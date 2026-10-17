@@ -3,7 +3,6 @@ import uuid
 import pytest
 from prepza_common.constants import LANGUAGES
 
-from app.config.settings import settings
 from app.models.generation import Generation
 from app.storage import generations
 from tests.unit.test_internal_generations import headers
@@ -13,7 +12,7 @@ COMPANY_ID = uuid.uuid4()
 
 @pytest.fixture
 def queue(monkeypatch):
-    """No rate limit, and generations that are recorded, not run."""
+    """Generations that are recorded, not run."""
     created = []
 
     async def fake_create(owner_uid, text, company_id=None, language="en", generation_id=None):
@@ -29,7 +28,6 @@ def queue(monkeypatch):
             language=language,
         )
 
-    monkeypatch.setattr(settings, "generation_limit", 0)
     monkeypatch.setattr(generations, "create", fake_create)
 
     return created

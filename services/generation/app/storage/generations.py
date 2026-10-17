@@ -5,6 +5,7 @@ from prepza_common import outbox
 from prepza_common.constants import DEFAULT_LANGUAGE
 from sqlalchemy import String, and_, bindparam, or_, select, text
 from sqlalchemy import update as sql_update
+from sqlalchemy.exc import IntegrityError
 
 from app.constants.events import GENERATION_CANCELLED
 from app.constants.kinds import GenerationKind
@@ -37,6 +38,45 @@ async def create(
         await session.commit()
 
         return generation
+
+
+async def create_addition(
+    owner_uid: str, template_id: uuid.UUID, language: str, question_count: int | None
+) -> Generation | None:
+    """A question addition to a template, queued; None while another one for it is queued or
+    running (the unique index ix_generations_one_addition_per_template)."""
+    try:
+        async with Session() as session:
+            generation = Generation(
+                owner_uid=owner_uid,
+                kind=GenerationKind.TEMPLATE_QUESTIONS,
+                text="",
+                language=language,
+                status=Status.QUEUED,
+                preparation_id=template_id,
+                question_count=question_count,
+            )
+            session.add(generation)
+            await session.commit()
+
+            return generation
+    except IntegrityError:
+        return None
+
+
+async def latest_addition(template_id: uuid.UUID) -> Generation | None:
+    query = (
+        select(Generation)
+        .where(
+            Generation.kind == GenerationKind.TEMPLATE_QUESTIONS,
+            Generation.preparation_id == template_id,
+        )
+        .order_by(Generation.created_at.desc())
+        .limit(1)
+    )
+
+    async with Session() as session:
+        return await session.scalar(query)
 
 
 async def get(generation_id: uuid.UUID) -> Generation | None:

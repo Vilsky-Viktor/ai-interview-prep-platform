@@ -5,7 +5,7 @@ from app.helpers.payload import build_preparation
 from app.helpers.progress import track_progress
 from app.helpers.questions import (
     build_options,
-    clean_distractors,
+    clean_options,
     merge_buckets,
     question_calls,
     split_count,
@@ -32,11 +32,13 @@ def test_choices_listed_in_the_question_are_stripped():
 
 
 def test_options_need_a_short_correct_answer_and_three_distractors():
-    options = build_options(" Right ", ["W1", "W2", "W3", "W4"])
+    options = build_options([" Right "], ["W1", "W2", "W3", "W4"])
 
     assert sorted(option["answer"] for option in options) == ["Right", "W1", "W2", "W3"]
-    assert build_options("Right", ["W1", "W2"]) is None
-    assert build_options("x" * 251, ["W1", "W2", "W3"]) is None
+    assert [option["answer"] for option in options if option["correct"]] == ["Right"]
+    assert build_options(["Right"], ["W1", "W2"]) is None
+    assert build_options(["x" * 251], ["W1", "W2", "W3"]) is None
+    assert build_options([], ["W1", "W2", "W3", "W4"]) is None
 
 
 def test_counts_are_split_evenly():
@@ -44,12 +46,15 @@ def test_counts_are_split_evenly():
     assert split_count(2, 3) == [1, 1, 0]
 
 
-def test_clean_distractors_drops_correct_and_duplicates():
-    assert clean_distractors([" Wrong ", "wrong", "Right", ""], "right", 250) == ["Wrong"]
+def test_clean_options_drops_taken_ones_and_duplicates():
+    taken = {"right"}
+
+    assert clean_options([" Wrong ", "wrong", "Right", ""], taken, 250) == ["Wrong"]
+    assert taken == {"right", "wrong"}
 
 
-def test_clean_distractors_drops_options_over_the_length_limit():
-    assert clean_distractors(["Short", "x" * 11], "Right", 10) == ["Short"]
+def test_clean_options_drops_options_over_the_length_limit():
+    assert clean_options(["Short", "x" * 11], set(), 10) == ["Short"]
 
 
 def test_track_progress(monkeypatch):
@@ -165,31 +170,6 @@ def test_spare_questions_replace_dropped_ones_up_to_the_count(monkeypatch):
     assert [q.text for q in preparation.topics[0].questions] == ["q1", "q2"]
 
 
-def test_question_prompts_ask_for_pick_one_questions_without_engineering_terms():
-    from app.prompts.answers import ANSWERS_PROMPT
-    from app.prompts.extraction import EXTRACTION_SYSTEM
-    from app.prompts.questions import QUESTIONS_PROMPT
-    from app.prompts.regenerate import REGENERATE_PROMPT
-    from app.prompts.topics import REVISION_PROMPT, TOPICS_PROMPT
-
-    prompts = [
-        ANSWERS_PROMPT,
-        EXTRACTION_SYSTEM,
-        QUESTIONS_PROMPT,
-        REGENERATE_PROMPT,
-        TOPICS_PROMPT,
-        REVISION_PROMPT,
-    ]
-
-    for prompt in prompts:
-        for word in ("debug", "software", "engineer", "code", "technical", "technology"):
-            assert word not in prompt.lower(), word
-
-    assert "multiple-choice" in QUESTIONS_PROMPT
-    assert "multiple-choice" in REGENERATE_PROMPT
-    assert "3-5 sentences" not in ANSWERS_PROMPT
-
-
 def test_worker_skips_a_generation_cancelled_while_queued(monkeypatch):
     import asyncio
     import uuid
@@ -242,6 +222,12 @@ def test_an_example_goes_under_its_question_in_a_block():
     # A question that already shows a block keeps it, and one with nothing left isn't kept.
     assert with_example("See:\n```\nx\n```", "y") == "See:\n```\nx\n```"
     assert with_example("", "print(1)") == ""
+
+
+def test_an_examples_block_is_tagged_with_its_language():
+    assert with_example("What does this print?", "print(1)", "python") == (
+        "What does this print?\n```python\nprint(1)\n```"
+    )
 
 
 def test_templates_get_more_questions_per_topic(monkeypatch):

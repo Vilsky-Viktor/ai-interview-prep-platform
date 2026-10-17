@@ -1,5 +1,5 @@
 EXTRACTION_SYSTEM = """
-You extract interview-relevant requirements from a job posting.
+Extract the interview-relevant requirements from the job posting.
 
 1. requirements: extract EVERY skill, tool, concept, qualification, and responsibility from ALL
    sections, including required, preferred, nice-to-have, and day-to-day duties.
@@ -12,13 +12,13 @@ You extract interview-relevant requirements from a job posting.
      one the text prefers.
      NO (different tools or concepts serving different purposes) -> keep EACH as a separate item.
    - The line must always produce at least one item.
-   Examples (from different fields):
-     "CRM tools (Salesforce, HubSpot, Pipedrive, or similar)"
-       -> "CRM tools (Salesforce)"                      # interchangeable
-     "Accounting standards such as IFRS or US GAAP"
-       -> "Accounting standards (IFRS)"                 # interchangeable
-     "Marketing channels such as email, SEO, paid ads, or events"
-       -> "Email marketing", "SEO", "Paid ads", "Events" # different purposes
+   Examples (the names stand for any field's own):
+     "Tools of kind X (Tool A, Tool B, Tool C, or similar)"
+       -> "Tools of kind X (Tool A)"                    # interchangeable
+     "Standards such as Standard A or Standard B"
+       -> "Standards (Standard A)"                      # interchangeable
+     "Channels such as channel A, channel B, channel C, or channel D"
+       -> "Channel A", "Channel B", "Channel C", "Channel D" # different purposes
    - Items joined by "and", or distinct concepts in a list, are always separate.
 3. Skip non-professional content (culture statements, perks, generic company slogans).
 4. level: basic | medium | hard, based on the required seniority, years of experience, and

@@ -1,14 +1,27 @@
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, Request, status
+from prepza_common.ai_cap import refuse_if_capped
 from prepza_common.pause import refuse_if_paused
 from prepza_common.rate_limit import hit
 
-from app.config.settings import settings
-from app.constants.generation import RUN_GENERATION, TRANSLATE_NEWS, VERIFY_QUESTION
+from app.constants.actions import (
+    CAMPAIGN_TRANSLATION,
+    NEWS_TRANSLATION,
+    QUESTION_REGENERATION,
+    QUESTION_VERIFY,
+)
+from app.constants.generation import (
+    RUN_GENERATION,
+    TRANSLATE_CAMPAIGN,
+    TRANSLATE_NEWS,
+    VERIFY_QUESTION,
+)
 from app.helpers.language import text_language
+from app.helpers.questions import set_company
 from app.integrations import library, tasks
 from app.integrations.redis import get_redis
+from app.integrations.usage import ai_run
 from app.models.generation import Generation
 from app.schemas.generation import GenerationOut, InterviewGenerationCreate, ReviewRequest
 from app.schemas.regenerate import RegeneratedOut, RegenerateIn
@@ -39,13 +52,13 @@ async def create_interview_generation(
     body: InterviewGenerationCreate, caller: ServiceCaller, request: Request
 ) -> GenerationOut:
     """A company's test; companies charges per candidate, so generating it is free."""
-    await hit(
-        get_redis(),
-        f"rate:generations:{body.owner_uid}",
-        settings.generation_limit,
-        settings.generation_window_seconds,
-    )
-    await use_daily_budget(body.paid)
+    who = {"company_id": body.company_id, "user_id": body.owner_uid}
+
+    if not body.paid:
+        await refuse_if_capped(get_redis(), **who)
+
+    await hit(get_redis(), f"rate:generations:{body.owner_uid}", "GENERATION_LIMIT", **who)
+    await use_daily_budget(body.paid, **who)
     generation = await generations.create(
         body.owner_uid,
         body.text,
@@ -122,14 +135,16 @@ async def regenerate_interview_question(
     if context is None or context.set_id != body.set_id:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Question not found")
 
-    await hit(
-        get_redis(),
-        f"rate:regenerations:{body.user_id}",
-        settings.regeneration_limit,
-        settings.generation_window_seconds,
-    )
-    await use_daily_budget(body.paid)
-    question = await regenerate(question_id, context)
+    who = {"company_id": set_company(context), "user_id": body.user_id}
+
+    if not body.paid:
+        await refuse_if_capped(get_redis(), **who)
+
+    await hit(get_redis(), f"rate:regenerations:{body.user_id}", "REGENERATION_LIMIT", **who)
+    await use_daily_budget(body.paid, **who)
+
+    async with ai_run(QUESTION_REGENERATION, subject_id=question_id, **who):
+        question = await regenerate(question_id, context)
 
     if question is None:
         raise HTTPException(status.HTTP_502_BAD_GATEWAY, "Couldn't generate a new question")
@@ -144,7 +159,7 @@ async def verify_question(
     """The library flagged the question; the worker checks it and fixes or replaces it. Past
     the daily cap or while paused the call is refused, and the library sends the flag again
     later."""
-    await refuse_if_paused(get_redis())
+    await refuse_if_paused(get_redis(), QUESTION_VERIFY)
 
     if not body.now:
         await use_verify_budget()
@@ -158,5 +173,13 @@ async def verify_question(
 async def translate_news(news_id: UUID, caller: ServiceCaller) -> None:
     """The library saved a news post; the worker translates it into the languages it lacks.
     While paused the call is refused, and the library sends the post again later."""
-    await refuse_if_paused(get_redis())
+    await refuse_if_paused(get_redis(), NEWS_TRANSLATION)
     await tasks.enqueue(TRANSLATE_NEWS, {"news_id": str(news_id)})
+
+
+@router.post("/campaigns/{campaign_id}/translate", status_code=status.HTTP_202_ACCEPTED)
+async def translate_campaign(campaign_id: UUID, caller: ServiceCaller) -> None:
+    """Notifications saved a campaign; the worker translates it into the languages it lacks.
+    While paused the call is refused, and saving the campaign again sends it again."""
+    await refuse_if_paused(get_redis(), CAMPAIGN_TRANSLATION)
+    await tasks.enqueue(TRANSLATE_CAMPAIGN, {"campaign_id": str(campaign_id)})

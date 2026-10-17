@@ -91,6 +91,8 @@ def test_finished_interview_is_announced_to_companies(published):
                 "company_id": str(COMPANY_ID),
                 "set_id": str(SET_ID),
                 "title": "Bookkeeper interview",
+                # Companies gives the test this level's seconds a question.
+                "level": "basic",
             },
         )
     ]
@@ -117,3 +119,31 @@ def test_a_set_saved_after_a_cancel_is_deleted(published, monkeypatch):
     run()
 
     assert deleted == [SET_ID]
+
+
+@pytest.mark.parametrize(("edited", "at_once"), [({}, 24), ({"GENERATION_CALLS_AT_ONCE": 6}, 6)])
+def test_a_run_makes_as_many_ai_calls_at_once_as_set_in_controls(
+    monkeypatch, redis, edited, at_once
+):
+    configs = []
+    redis.limits.update({name: str(value) for name, value in edited.items()})
+
+    class NewGraph:
+        async def aget_state(self, config):
+            return SimpleNamespace(values={})
+
+    async def stream(graph, generation, graph_input, config):
+        configs.append(config)
+
+    async def not_cancelled(_generation_id):
+        return False
+
+    monkeypatch.setattr(pipeline, "stream_graph", stream)
+    monkeypatch.setattr(generations, "is_cancelled", not_cancelled)
+    generation = Generation(
+        id=uuid.uuid4(), kind="interview", owner_uid="alice", company_id=COMPANY_ID, text="Job"
+    )
+
+    asyncio.run(pipeline.run_pipeline(NewGraph(), generation, None))
+
+    assert configs[0]["max_concurrency"] == at_once

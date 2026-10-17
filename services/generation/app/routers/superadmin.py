@@ -1,20 +1,22 @@
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, status
+from prepza_common.limit_schemas import BudgetOut
 from prepza_common.pause import refuse_if_paused
 from prepza_common.rate_limit import hit
 from prepza_common.superadmin import SuperadminUser
 
-from app.config.settings import settings
+from app.constants.actions import TEMPLATE_GENERATION, TEMPLATE_QUESTION_REGENERATION
 from app.constants.generation import RUN_GENERATION
 from app.constants.kinds import GenerationKind
 from app.helpers.language import text_language
 from app.integrations import library, tasks
 from app.integrations.redis import get_redis
+from app.integrations.usage import ai_run
 from app.models.generation import Generation
 from app.schemas.generation import GenerationOut, ReviewRequest, TemplateGenerationCreate
 from app.schemas.regenerate import RegeneratedOut
-from app.services.budget import use_daily_budget
+from app.services.budget import budgets, use_daily_budget
 from app.services.cancel import cancel_generation
 from app.services.regenerate import regenerate
 from app.services.retry import retry_generation
@@ -39,8 +41,8 @@ async def get_template_generation(generation_id: UUID) -> Generation:
 async def create_template(
     body: TemplateGenerationCreate, superadmin: SuperadminUser
 ) -> GenerationOut:
-    await refuse_if_paused(get_redis())
-    await use_daily_budget()
+    await refuse_if_paused(get_redis(), TEMPLATE_GENERATION, user_id=superadmin.uid)
+    await use_daily_budget(user_id=superadmin.uid)
     generation = await generations.create(
         superadmin.uid,
         body.text,
@@ -61,7 +63,7 @@ async def get_generation(generation_id: UUID, superadmin: SuperadminUser) -> Gen
 async def review_generation(
     generation_id: UUID, body: ReviewRequest, superadmin: SuperadminUser
 ) -> GenerationOut:
-    await refuse_if_paused(get_redis())
+    await refuse_if_paused(get_redis(), TEMPLATE_GENERATION, user_id=superadmin.uid)
     generation = await get_template_generation(generation_id)
 
     return GenerationOut.model_validate(await submit_review(generation, body))
@@ -69,7 +71,7 @@ async def review_generation(
 
 @router.post("/generations/{generation_id}/retry")
 async def retry(generation_id: UUID, superadmin: SuperadminUser) -> GenerationOut:
-    await refuse_if_paused(get_redis())
+    await refuse_if_paused(get_redis(), TEMPLATE_GENERATION, user_id=superadmin.uid)
     generation = await get_template_generation(generation_id)
 
     return GenerationOut.model_validate(await retry_generation(generation))
@@ -86,21 +88,27 @@ async def cancel(generation_id: UUID, superadmin: SuperadminUser) -> GenerationO
 async def regenerate_question(
     template_id: UUID, question_id: UUID, superadmin: SuperadminUser
 ) -> RegeneratedOut:
-    await refuse_if_paused(get_redis())
+    await refuse_if_paused(get_redis(), TEMPLATE_QUESTION_REGENERATION, user_id=superadmin.uid)
     context = await library.get_question_context(question_id)
 
     if context is None or context.set_id != template_id or context.kind != "template":
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Question not found")
 
-    await hit(
-        get_redis(),
-        f"rate:regenerations:{superadmin.uid}",
-        settings.regeneration_limit,
-        settings.generation_window_seconds,
-    )
-    question = await regenerate(question_id, context)
+    key = f"rate:regenerations:{superadmin.uid}"
+    await hit(get_redis(), key, "REGENERATION_LIMIT", user_id=superadmin.uid)
+
+    async with ai_run(
+        TEMPLATE_QUESTION_REGENERATION, user_id=superadmin.uid, subject_id=question_id
+    ):
+        question = await regenerate(question_id, context)
 
     if question is None:
         raise HTTPException(status.HTTP_502_BAD_GATEWAY, "Couldn't generate a new question")
 
     return question
+
+
+@router.get("/budgets")
+async def get_budgets(superadmin: SuperadminUser) -> list[BudgetOut]:
+    """How much of generation's shared daily budgets is used today (the AI costs tab)."""
+    return await budgets()

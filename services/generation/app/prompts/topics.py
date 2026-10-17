@@ -4,11 +4,11 @@ Rules:
 - Requirements are not subtopics. Turn each one into the knowledge an interview would test:
   concepts, tools, methods and practices a candidate can be quizzed on. Never copy a
   requirement's wording.
-  Examples (from different fields):
-    "5+ years of backend development in Rust"
-      -> "Ownership and borrowing", "Lifetimes", "Error handling with Result", "Async Rust"
-    "3+ years managing B2B sales with a CRM"
-      -> "Sales pipeline stages", "Lead qualification frameworks", "CRM forecasting"
+  Examples (the names stand for any field's own):
+    "5+ years of hands-on work with Tool X"
+      -> "Tool X's core concepts", "Configuring Tool X", "Troubleshooting Tool X"
+    "3+ years running process Y with Method Z"
+      -> "Stages of process Y", "Method Z in practice", "Measuring process Y"
 - Leave out years of experience, seniority, commitment, motivation and similar phrasing; they
   can't be tested. Use only the skill they refer to.
 - Every requirement's skill must be covered by at least one subtopic. Never drop one.
@@ -31,7 +31,7 @@ Requirements:
 {requirements}
 """
 
-REVISION_PROMPT = """You are re-planning a job test's topics after a reviewer's feedback.
+REVISION_PROMPT = """Re-plan a job test's topics after a reviewer's feedback.
 
 Produce the complete, best set of topics that covers the current topics plus everything the
 instructions ask for, in up to {max_topics} main topics ({max_topics} included). Re-plan the

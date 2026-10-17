@@ -3,6 +3,7 @@ import logging
 import time
 
 from langchain_core.rate_limiters import BaseRateLimiter
+from prepza_common.limits import EVERYONE, limit, record_hit
 
 from app.constants.generation import LLM_RATE_KEY
 from app.integrations.redis import get_redis
@@ -11,24 +12,26 @@ logger = logging.getLogger(__name__)
 
 
 class SharedRateLimiter(BaseRateLimiter):
-    """At most `per_second` LLM requests a second across every generation process.
+    """At most GENERATION_CALLS_PER_SECOND LLM requests a second (as set in the Controls tab)
+    across every generation process.
 
     Counted in Redis per second, so the API and all workers share one budget. Chat (rounds)
     isn't limited here, which keeps it ahead of bulk generation.
     """
-
-    def __init__(self, per_second: int):
-        self.per_second = per_second
 
     def acquire(self, *, blocking: bool = True) -> bool:
         # Every call here is async; a sync call isn't held back.
         return True
 
     async def aacquire(self, *, blocking: bool = True) -> bool:
+        waited = False
+
         while True:
             second = int(time.time())
 
             try:
+                per_second = await limit(get_redis(), "GENERATION_CALLS_PER_SECOND")
+
                 async with get_redis().pipeline(transaction=True) as pipe:
                     pipe.incr(f"{LLM_RATE_KEY}:{second}")
                     pipe.expire(f"{LLM_RATE_KEY}:{second}", 2)
@@ -39,10 +42,15 @@ class SharedRateLimiter(BaseRateLimiter):
 
                 return True
 
-            if count <= self.per_second:
+            if count <= per_second:
                 return True
 
             if not blocking:
                 return False
+
+            # Waiting for our own limit on OpenAI's requests, recorded once a request.
+            if not waited:
+                waited = True
+                await record_hit("OPENAI_THROTTLED", kind="provider:openai", scope=EVERYONE)
 
             await asyncio.sleep(max(0.0, second + 1 - time.time()))

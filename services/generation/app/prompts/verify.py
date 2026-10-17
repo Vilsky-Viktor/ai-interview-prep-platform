@@ -1,10 +1,19 @@
+# The key check is told the question's kind: a single-answer question has exactly one correct
+# option, a select-all-that-apply one 2 or 3 (prepza_common.multi_answer).
+SINGLE_ANSWER_KEY = """This is a single-answer question. Return correct_indexes: a list with the
+number of the one option that is correct for the question exactly as written. Return null when
+none of the options is correct, or when more than one could be defended as correct."""
+
+MULTI_ANSWER_KEY = """This is a select-all-that-apply question: 2 or 3 of its 4 options are
+correct, never all of them. Judge each option on its own. Return correct_indexes: the numbers of
+every option that is correct for the question exactly as written. Return null when fewer than two
+or all four are correct, or when any option could be defended both as correct and as wrong."""
+
 VERIFY_PROMPT = """Check the multiple-choice interview question below. People who answered it, or
-reported it, suggest the option marked correct may be wrong. Judge it on the facts alone: the
+reported it, suggest the options marked correct may be wrong. Judge it on the facts alone: the
 reports only explain why it's being checked, they don't decide what is right.
 
-Return correct_index: the number of the one option that is correct for the question exactly as
-written. Return null when none of the options is correct, or when more than one could be
-defended as correct.
+{kind}
 
 Level: {level}
 Topic: {topic}
@@ -12,7 +21,7 @@ Topic: {topic}
 Question:
 {question}
 
-Options (marked one first):
+Options (marked ones first):
 {options}
 
 Reports from users (reason: how many):
@@ -23,9 +32,31 @@ Reports from users (reason: how many):
 # the answer can't lean on the first check's or on a position.
 CONFIRM_PROMPT = """Answer the multiple-choice interview question below on the facts alone.
 
-Return correct_index: the number of the one option that is correct for the question exactly as
-written. Return null when none of the options is correct, or when more than one could be
-defended as correct.
+{kind}
+
+Level: {level}
+Topic: {topic}
+
+Question:
+{question}
+
+Options:
+{options}
+"""
+
+# The self-check of a new select-all-that-apply question, before it's kept: a blind answer, as
+# CONFIRM_PROMPT's, and whether the question leaves open a condition that decides an option.
+SELF_CHECK_PROMPT = """Answer the select-all-that-apply interview question below on the facts
+alone, then check whether it can be answered with certainty.
+
+{kind}
+
+Then return open_condition: a few words naming a condition the question leaves unstated that
+decides whether some option is right or wrong, so the option could flip under one reasonable
+reading and not another: the standard, law, framework or version in use; which substance,
+target, party, role, object or value in the scenario is meant; the order or timing of events;
+a region or register of a language; or a case such as two values being equal. Null when every
+such condition is stated or no reasonable reading flips an option.
 
 Level: {level}
 Topic: {topic}

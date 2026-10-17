@@ -23,8 +23,10 @@ KEY_CHECK_LOCK_SECONDS = 30 * 60
 # A new test's or template's answer keys checked by the verifier before it's ready: this many
 # random questions a topic (about $0.001 each).
 KEY_CHECKS_PER_TOPIC = 1
-# Verifier jobs a day, for everyone together: a ceiling on what flags can spend on rewrites
-# (a few cents each). A superadmin's "Fix now" isn't counted.
-DAILY_VERIFY_LIMIT = 300
+# Verifier jobs a day, for everyone together (the DAILY_VERIFY_LIMIT limit): a ceiling on what
+# flags can spend on rewrites (a few cents each). A superadmin's "Fix now" isn't counted.
 VERIFY_BUDGET_KEY = "budget:verify"
 VERIFY_PAUSED = "Today's limit for question checks is reached; the question is checked later."
+# A finished batch's usage is recorded once: a run that stopped halfway reads the batch again.
+BATCH_RECORDED_KEY = "recorded:key-check-batch"
+BATCH_RECORDED_SECONDS = 7 * 24 * 60 * 60

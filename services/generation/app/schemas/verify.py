@@ -26,7 +26,18 @@ class QuestionQuality(BaseModel):
 
 
 class KeyCheck(BaseModel):
-    correct_index: int | None = Field(
-        description="The number of the one option that is correct, or null when none of them "
-        "is correct or more than one could be defended as correct."
+    correct_indexes: list[int] | None = Field(
+        description="The numbers of the options that are correct, as the question's kind asks: "
+        "one for a single-answer question, two or more for a select-all-that-apply one. Null "
+        "when no such answer can be given with certainty."
+    )
+
+
+class SelfCheck(KeyCheck):
+    """A new multi-answer question's self-check: its key, found blind, and any condition left
+    open that decides an option (prompts/verify.py SELF_CHECK_PROMPT)."""
+
+    open_condition: str | None = Field(
+        description="A few words naming an unstated condition that decides whether some option "
+        "is right or wrong, or null when there is none."
     )

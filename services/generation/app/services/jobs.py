@@ -3,9 +3,11 @@ import logging
 import uuid
 
 from app.constants.generation import GENERATION_FAILED, GENERATION_STOPPED, JOB_TIMEOUT_SECONDS
+from app.constants.kinds import GenerationKind
 from app.constants.statuses import Status
 from app.helpers.events import failed_event
 from app.services import outbox as outbox_service
+from app.services.additions import run_addition
 from app.services.pipeline import run_pipeline
 from app.storage import generations
 
@@ -26,8 +28,14 @@ async def run_generation(graph, generation_id: uuid.UUID, resume: dict | None) -
     if generation is None:
         return
 
+    # Questions added to a template have no topics to draft or review: no graph.
+    if generation.kind == GenerationKind.TEMPLATE_QUESTIONS:
+        run = run_addition(generation)
+    else:
+        run = run_pipeline(graph, generation, resume)
+
     try:
-        await asyncio.wait_for(run_pipeline(graph, generation, resume), JOB_TIMEOUT_SECONDS)
+        await asyncio.wait_for(run, JOB_TIMEOUT_SECONDS)
     except TimeoutError:
         logger.error("Generation %s ran out of time", generation_id)
         error = GENERATION_STOPPED

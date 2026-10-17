@@ -39,7 +39,8 @@ def items(*texts):
             QuestionItem(
                 question=text,
                 example=None,
-                correct_option="Right",
+                example_language=None,
+                correct_options=["Right"],
                 distractors=["A", "B", "C"],
                 ambiguous=False,
             )
@@ -85,7 +86,9 @@ def test_subtopic_that_always_loops_adds_nothing_instead_of_failing(monkeypatch)
 def test_looping_options_call_is_retried(monkeypatch):
     answers = AnswerList(
         answers=[
-            AnswerItem(id=0, correct_option="Right", distractors=["A", "B", "C"], ambiguous=False)
+            AnswerItem(
+                id=0, correct_options=["Right"], distractors=["A", "B", "C"], ambiguous=False
+            )
         ]
     )
     fake = FakeLLM([too_long(), answers])

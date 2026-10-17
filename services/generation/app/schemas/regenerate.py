@@ -14,6 +14,10 @@ class QuestionContext(BaseModel):
     topic: str
     subtopics: list[str]
     existing: list[str]
+    # The question is multi-answer ("select all that apply"): its replacement is too.
+    multi: bool = False
+    # The question shows an example (prepza_common.examples): its replacement does too.
+    example: bool = False
 
 
 class RegenerateIn(BaseModel):

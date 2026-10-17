@@ -1,34 +1,35 @@
-import logging
 import uuid
 from contextlib import aclosing
 
-from langchain_core.callbacks import get_usage_metadata_callback
 from langgraph.types import Command
-from prepza_common.llm import call_cost
+from prepza_common.ai_constants import Outcome
+from prepza_common.limits import limit
 
+from app.constants.actions import INTERVIEW_GENERATION, TEMPLATE_GENERATION
 from app.constants.events import GENERATION_COMPLETED
-from app.constants.generation import MAX_CONCURRENCY, RECURSION_LIMIT
+from app.constants.generation import RECURSION_LIMIT
 from app.constants.kinds import GenerationKind
 from app.constants.statuses import Status
 from app.helpers.payload import build_preparation
 from app.helpers.progress import track_progress
 from app.helpers.questions import topic_size
 from app.integrations import library
+from app.integrations.redis import get_redis
+from app.integrations.usage import ai_run
 from app.models.generation import Generation
 from app.services import outbox as outbox_service
 from app.services.sample_checks import check_sample
 from app.storage import generations
-
-logger = logging.getLogger(__name__)
 
 
 async def run_pipeline(graph, generation: Generation, resume: dict | None) -> None:
     """Runs the graph until it pauses for review or finishes, keeping the row up to date."""
     config = {
         "configurable": {"thread_id": str(generation.id)},
-        "max_concurrency": MAX_CONCURRENCY,
+        "max_concurrency": await limit(get_redis(), "GENERATION_CALLS_AT_ONCE"),
         "recursion_limit": RECURSION_LIMIT,
     }
+    template = generation.kind == GenerationKind.TEMPLATE
 
     if resume is not None:
         graph_input = Command(resume=resume)
@@ -39,32 +40,18 @@ async def run_pipeline(graph, generation: Generation, resume: dict | None) -> No
         graph_input = {
             "input_text": generation.text,
             "language": generation.language,
-            "template": generation.kind == GenerationKind.TEMPLATE,
+            "template": template,
         }
 
-    # What this run spent, also when it fails: a retry or a resume logs its own.
-    with get_usage_metadata_callback() as usage:
-        try:
-            await stream_graph(graph, generation, graph_input, config)
-        finally:
-            log_cost(generation, usage.usage_metadata)
+    # What this run used, also when it fails: a retry or a resume records its own.
+    action = TEMPLATE_GENERATION if template else INTERVIEW_GENERATION
+    who = {"company_id": generation.company_id, "user_id": generation.owner_uid}
 
+    async with ai_run(action, subject_id=generation.id, **who) as run:
+        await stream_graph(graph, generation, graph_input, config)
 
-def log_cost(generation: Generation, usage_by_model: dict) -> None:
-    """The tokens and the estimated USD of one run (the topics, or the questions after review),
-    key checks included; models without a known price are left out of the USD."""
-    cost = sum(call_cost(name, usage) or 0 for name, usage in usage_by_model.items())
-    tokens = {
-        name: (usage.get("input_tokens", 0), usage.get("output_tokens", 0))
-        for name, usage in usage_by_model.items()
-    }
-    logger.info(
-        "Generation %s (%s) spent $%.2f; input and output tokens by model: %s",
-        generation.id,
-        generation.kind,
-        cost,
-        tokens,
-    )
+        if await generations.is_cancelled(generation.id):
+            run.outcome = Outcome.CUT
 
 
 async def stream_graph(graph, generation: Generation, graph_input, config: dict) -> None:
@@ -118,6 +105,8 @@ async def stream_graph(graph, generation: Generation, graph_input, config: dict)
             "company_id": str(generation.company_id),
             "set_id": str(set_id),
             "title": payload.title,
+            # Companies gives the test its level's seconds a question.
+            "level": payload.level,
         },
     )
     await finish(generation.id, set_id, completed)

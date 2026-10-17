@@ -18,6 +18,11 @@ class QuestionTask(TypedDict):
     subtopic_index: int
     subtopic: str
     count: int
+    # How many of `count` are multi-answer ("select all that apply").
+    multi: int
+    # How many of `count` come with an example when the subtopic is about material in a formal
+    # notation (prepza_common.examples).
+    examples: int
     level: str
     # Questions the topic already has, reused from other tests.
     existing: list[str]
@@ -35,6 +40,8 @@ class AnswerTask(TypedDict):
     questions: list[str]
     level: str
     language: str
+    # Select-all-that-apply questions: every question keeps its kind.
+    multi: bool
 
 
 class State(TypedDict):
@@ -57,4 +64,7 @@ class State(TypedDict):
     # Per topic, in the topic order: its embedding, and questions reused as they are.
     topic_embeddings: list[list[float]]
     reused: list[list[dict]]
+    # The share of each topic's questions that are multi-answer, as it was when the questions
+    # started (prepza_common.multi_answer.multi_share), so the whole run holds one.
+    multi_share: float
     final: list[dict]

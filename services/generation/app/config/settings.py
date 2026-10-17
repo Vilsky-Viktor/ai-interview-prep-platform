@@ -11,6 +11,8 @@ class Settings(ServiceSettings):
     database_url: str
     redis_url: str
     library_url: str
+    # Notifications keeps the campaigns this service translates.
+    notifications_url: str = "http://notifications:8000"
     # Where Cloud Tasks (or, locally, the API itself) sends jobs.
     worker_url: str = "http://generation-worker:8000"
     # Google Cloud only: the queue ("projects/<p>/locations/<l>/queues/<q>") and the service
@@ -29,22 +31,12 @@ class Settings(ServiceSettings):
     # Each AI task has its own model and effort, so one can change without the others. Effort is
     # how hard a reasoning model thinks: "none", "minimal", "low", "medium" or "high".
     # Generation: extraction, topics, questions, answers and a re-generated question; also
-    # translates news posts.
+    # translates news posts and campaigns.
     interview_model: str = "gpt-6.1-sol"
     interview_reasoning_effort: ReasoningEffort = "low"
     # Checks answer keys, at once and in batches: rare, and it must be right.
     verify_model: str = "gpt-6.1-sol"
     verify_reasoning_effort: ReasoningEffort = "medium"
-    generation_limit: int = Field(default=20, ge=0)
-    generation_window_seconds: int = Field(default=86_400, gt=0)
-    regeneration_limit: int = Field(default=100, ge=0)
-    # New generations (and regenerated questions) a day for companies that never topped up,
-    # together: a ceiling on LLM spending (about $1.50 a test, so roughly $150 a day). 0 turns it
-    # off.
-    daily_generation_limit: int = Field(default=100, ge=0)
-    # LLM requests a second across the API and every worker; 0 turns the limit off. The default
-    # stays under OpenAI's 500 requests a minute on its first tier.
-    llm_requests_per_second: int = Field(default=8, ge=0)
 
 
 settings = Settings()

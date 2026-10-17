@@ -3,9 +3,10 @@ import uuid
 
 import pytest
 from fastapi import HTTPException
+from prepza_common.limit_list import LIMITS, REVIEW_SECONDS
 from prepza_common.sets import QuestionIn
 
-from app.constants.generation import MAX_TOPIC_REVISIONS
+from app.constants.generation import TOO_MANY_REVISIONS
 from app.integrations import library, llm
 from app.models.generation import Generation
 from app.schemas.generation import ReviewRequest
@@ -21,38 +22,6 @@ def awaiting_review():
         status="awaiting_review",
         topics=[{"main_topic": "Python", "subtopics": []}, {"main_topic": "SQL", "subtopics": []}],
     )
-
-
-class CountingRedis:
-    """prepza_common.rate_limit.hit's SET NX + INCR, counted per key."""
-
-    def __init__(self):
-        self.counts = {}
-
-    def pipeline(self, transaction):
-        return CountingPipeline(self.counts)
-
-
-class CountingPipeline:
-    def __init__(self, counts):
-        self.counts = counts
-
-    async def __aenter__(self):
-        return self
-
-    async def __aexit__(self, *args):
-        return False
-
-    def set(self, key, value, ex, nx):
-        self.key = key
-
-    def incr(self, key):
-        pass
-
-    async def execute(self):
-        self.counts[self.key] = self.counts.get(self.key, 0) + 1
-
-        return [True, self.counts[self.key]]
 
 
 @pytest.fixture
@@ -82,22 +51,35 @@ def test_a_selection_outside_the_drafted_topics_is_refused(claimed):
     assert claimed == []
 
 
-def test_topics_are_revised_in_words_a_limited_number_of_times(claimed, monkeypatch):
-    redis = CountingRedis()
-    monkeypatch.setattr(review, "get_redis", lambda: redis)
+def test_topics_are_revised_in_words_up_to_the_limits_edited_value(claimed, redis):
+    redis.limits["MAX_TOPIC_REVISIONS"] = "3"
     generation = awaiting_review()
     body = ReviewRequest(selected=[0], instructions="Merge them")
 
-    for _ in range(MAX_TOPIC_REVISIONS):
+    for _ in range(3):
         asyncio.run(review.submit_review(generation, body))
 
     with pytest.raises(HTTPException) as limited:
         asyncio.run(review.submit_review(generation, body))
 
     assert limited.value.status_code == 429
+    assert limited.value.detail == TOO_MANY_REVISIONS
+    # Counted over the review's life.
+    assert list(redis.expiries.values()) == [REVIEW_SECONDS]
     # Approving without instructions isn't limited.
     asyncio.run(review.submit_review(generation, ReviewRequest(selected=[0])))
-    assert len(claimed) == MAX_TOPIC_REVISIONS + 1
+    assert len(claimed) == 4
+
+
+def test_topic_revisions_stop_at_the_default_limit(claimed, redis):
+    generation = awaiting_review()
+    redis.counts[f"rate:revisions:{generation.id}"] = LIMITS["MAX_TOPIC_REVISIONS"].default
+    body = ReviewRequest(selected=[0], instructions="Merge them")
+
+    with pytest.raises(HTTPException):
+        asyncio.run(review.submit_review(generation, body))
+
+    assert claimed == []
 
 
 def test_a_bank_question_goes_into_one_topic_of_a_test_only(monkeypatch):

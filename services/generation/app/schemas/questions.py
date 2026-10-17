@@ -1,12 +1,37 @@
 from pydantic import BaseModel, Field
 
-from app.constants.generation import DISTRACTORS, MAX_OPTION_CHARS
+from app.constants.code import CodeLanguage
+from app.constants.generation import MAX_OPTION_CHARS, OPTIONS
 
 EXAMPLE = (
-    "The program, query, command, formula or file the question is about, exactly as it would be "
-    "typed, with real line breaks and indentation and without a Markdown fence; for a query, the "
-    "table's few rows first. Null when the question shows none. Never null when the question "
-    'refers to one, such as "this query" or "the file below". At most 8 short lines.'
+    "What the question shows, such as instructions, a lookup, a command, a formula or a file, "
+    "exactly as it would be typed, with real line breaks and indentation and without a Markdown "
+    "fence; when it acts on stored records, those few records first. Only the lines the answer "
+    "depends on, one piece unless the question is about several working together. Null when the "
+    'question shows none. Never null when the question refers to one, such as "these lines" or '
+    '"the file below". At most 8 short lines.'
+)
+EXAMPLE_LANGUAGE = (
+    "The notation the example is written in, for its colors. One that shows several files gets "
+    'the notation most of it is written in, never "text". "text" only for one in no listed '
+    "notation, such as a table's rows or plain prose. Null when there is no example."
+)
+
+
+CORRECT_OPTIONS = (
+    "The correct options: exactly one for a single-answer question; 2 or 3 for a "
+    "select-all-that-apply question, never all of them. Each as concise as possible while complete "
+    f"and accurate, never longer than {MAX_OPTION_CHARS} characters."
+)
+DISTRACTORS_TEXT = (
+    f"The incorrect options, so that there are {OPTIONS} options in all, each at most "
+    f"{MAX_OPTION_CHARS} characters, plausible, in the same form as the correct ones and about "
+    "as long, never noticeably shorter."
+)
+AMBIGUOUS = (
+    "True if the key could be argued: for a single-answer question, more than one option could "
+    "be defended as correct; for a select-all-that-apply one, any option could be defended as "
+    "correct and as incorrect alike. The question is then dropped."
 )
 
 
@@ -16,19 +41,10 @@ class QuestionItem(BaseModel):
         "(50 for a hard one), without numbering, listed choices or the example."
     )
     example: str | None = Field(description=EXAMPLE)
-    correct_option: str = Field(
-        description="The correct answer, as concise as possible while complete and accurate, "
-        f"never longer than {MAX_OPTION_CHARS} characters."
-    )
-    distractors: list[str] = Field(
-        description=f"Exactly {DISTRACTORS} plausible but incorrect options, each at most "
-        f"{MAX_OPTION_CHARS} characters, in the same form as correct_option and about as long "
-        "as it, never noticeably shorter."
-    )
-    ambiguous: bool = Field(
-        description="True if more than one of the options could be defended as a correct "
-        "answer to the question as written; the question is then dropped."
-    )
+    example_language: CodeLanguage | None = Field(description=EXAMPLE_LANGUAGE)
+    correct_options: list[str] = Field(description=CORRECT_OPTIONS)
+    distractors: list[str] = Field(description=DISTRACTORS_TEXT)
+    ambiguous: bool = Field(description=AMBIGUOUS)
 
 
 class QuestionItemList(BaseModel):
@@ -41,23 +57,14 @@ class NewQuestion(BaseModel):
         "40 words (50 for a hard one), without numbering or the example."
     )
     example: str | None = Field(description=EXAMPLE)
+    example_language: CodeLanguage | None = Field(description=EXAMPLE_LANGUAGE)
 
 
 class AnswerItem(BaseModel):
     id: int = Field(description="The id of the question being answered, copied exactly.")
-    correct_option: str = Field(
-        description="The correct answer, as concise as possible while complete and accurate, "
-        f"never longer than {MAX_OPTION_CHARS} characters. Used as a multiple-choice option."
-    )
-    distractors: list[str] = Field(
-        description=f"Exactly {DISTRACTORS} plausible but incorrect options, each at most "
-        f"{MAX_OPTION_CHARS} characters, in the same form as correct_option and about as long "
-        "as it, never noticeably shorter."
-    )
-    ambiguous: bool = Field(
-        description="True if more than one of the options could be defended as a correct "
-        "answer to the question as written; the question is then dropped."
-    )
+    correct_options: list[str] = Field(description=CORRECT_OPTIONS)
+    distractors: list[str] = Field(description=DISTRACTORS_TEXT)
+    ambiguous: bool = Field(description=AMBIGUOUS)
 
 
 class AnswerList(BaseModel):

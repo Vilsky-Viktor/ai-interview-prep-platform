@@ -2,7 +2,7 @@ import logging
 import operator
 
 from app.constants.generation import DUPLICATE_DISTANCE
-from app.integrations import llm
+from app.integrations.usage import embed
 
 logger = logging.getLogger(__name__)
 
@@ -13,7 +13,7 @@ async def distinct_by_meaning(texts: list[str], keep_first: int = 0) -> list[int
     The first `keep_first` texts are always kept. Without embeddings, every text is kept.
     """
     try:
-        vectors = await llm.get_embeddings().aembed_documents(texts)
+        vectors = await embed(texts)
     except Exception:
         logger.exception("Couldn't embed questions to drop duplicates")
 

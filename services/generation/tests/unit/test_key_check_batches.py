@@ -7,6 +7,8 @@ from app.models.key_checks import KeyCheck as KeyCheckRow
 from app.services import key_check_batches
 from app.storage import key_checks
 from tests.unit.test_verify import TEXT, context, question
+from tests.unit.test_verify_multi import TEXT as MULTI_TEXT
+from tests.unit.test_verify_multi import multi_answer as multi_answer_question
 
 KEPT = uuid.uuid4()
 GONE = uuid.uuid4()
@@ -98,10 +100,10 @@ def test_a_finished_batch_is_applied_and_bad_replies_are_checked_right_away(monk
         return "completed", "file-1"
 
     async def fake_results(file_id):
-        return {str(KEPT): '{"correct_index": 0}', str(other): None}
+        return {str(KEPT): '{"correct_indexes": [0]}', str(other): None}, []
 
     async def fake_apply(question_id, question, context, result):
-        applied.append((question_id, result.correct_index))
+        applied.append((question_id, result.correct_indexes))
 
     async def fake_check_now(question_id, question, context):
         applied.append((question_id, "checked now"))
@@ -113,7 +115,7 @@ def test_a_finished_batch_is_applied_and_bad_replies_are_checked_right_away(monk
 
     asyncio.run(key_check_batches.collect_finished())
 
-    assert sorted(applied, key=str) == sorted([(KEPT, 0), (other, "checked now")], key=str)
+    assert sorted(applied, key=str) == sorted([(KEPT, [0]), (other, "checked now")], key=str)
     assert store.rows == {}
 
 
@@ -142,7 +144,7 @@ def test_an_expired_batchs_results_apply_and_only_the_rest_go_out_again(monkeypa
         return "expired", "file-1"
 
     async def fake_results(file_id):
-        return {str(KEPT): '{"correct_index": 0}'}
+        return {str(KEPT): '{"correct_indexes": [0]}'}, []
 
     async def fake_apply(question_id, question, context, result):
         applied.append(question_id)
@@ -205,7 +207,7 @@ def test_a_result_for_a_question_fixed_or_rekeyed_since_is_dropped(monkeypatch):
         applied.append(question_id)
 
     monkeypatch.setattr(key_check_batches, "apply_key_check", fake_apply)
-    reply = '{"correct_index": 1}'
+    reply = '{"correct_indexes": [1]}'
 
     # Kept or fixed since (or this result was applied already): no longer flagged for its key.
     library_with(monkeypatch, {KEPT}, flag=None)
@@ -218,3 +220,28 @@ def test_a_result_for_a_question_fixed_or_rekeyed_since_is_dropped(monkeypatch):
     asyncio.run(key_check_batches.apply_reply(row(KEPT, None), reply))
 
     assert applied == [KEPT, KEPT]
+
+
+def test_a_batched_result_for_a_multi_answer_question_applies_to_its_marked_set(monkeypatch):
+    applied = []
+
+    async def fake_apply(question_id, question, context, result):
+        applied.append((question_id, result.correct_indexes))
+
+    async def multi_answer(question_id):
+        return multi_answer_question().model_copy(update={"flag": QualityFlag.WRONG_KEY})
+
+    library_with(monkeypatch, {KEPT})
+    monkeypatch.setattr(library, "get_question_quality", multi_answer)
+    monkeypatch.setattr(key_check_batches, "apply_key_check", fake_apply)
+    reply = '{"correct_indexes": [0, 2]}'
+
+    def queued(marked):
+        return KeyCheckRow(question_id=KEPT, question_text=MULTI_TEXT, marked_answer=marked)
+
+    # Queued against one of its marked options only, or another set: its key moved since.
+    asyncio.run(key_check_batches.apply_reply(queued("Debit cash"), reply))
+    asyncio.run(key_check_batches.apply_reply(queued("Debit cash\nCredit revenue"), reply))
+    asyncio.run(key_check_batches.apply_reply(queued("Debit cash\nCredit cash"), reply))
+
+    assert applied == [(KEPT, [0, 2])]

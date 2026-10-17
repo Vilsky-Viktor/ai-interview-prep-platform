@@ -12,7 +12,8 @@ import logging
 from prepza_common.logging import configure_logging
 
 from app.constants.reuse import EMBEDDING_BATCH_SIZE
-from app.integrations import library, llm
+from app.integrations import library
+from app.integrations.usage import embed
 from app.services.nodes.reuse import topic_text
 
 logger = logging.getLogger(__name__)
@@ -25,7 +26,7 @@ async def embed_templates() -> int:
         texts = [
             topic_text({"main_topic": t["title"], "subtopics": t["subtopics"]}) for t in topics
         ]
-        vectors = await llm.get_embeddings().aembed_documents(texts)
+        vectors = await embed(texts)
         await library.save_embeddings(
             {topic["id"]: vector for topic, vector in zip(topics, vectors)}
         )

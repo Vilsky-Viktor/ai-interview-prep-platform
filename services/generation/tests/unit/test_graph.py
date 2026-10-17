@@ -6,16 +6,18 @@ from typing import ClassVar
 import pytest
 from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.types import Command
+from prepza_common.multi_answer import is_multi, multi_count
 from prepza_common.sets import OptionIn, QuestionIn
 
 from app.config.settings import settings
 from app.helpers.payload import build_preparation
 from app.integrations import library, llm
 from app.schemas.extraction import JobExtraction
-from app.schemas.questions import QuestionItem, QuestionItemList
+from app.schemas.questions import QuestionItemList
 from app.schemas.topics import TopicList, TopicStructure
 from app.services.graph import build_graph
 from app.storage import draft_cache
+from tests.unit.fakes import FakeVerifier, asked_multi, items, question_item
 from tests.unit.test_draft_cache import FakeRedis
 
 
@@ -45,18 +47,11 @@ class FakeStructured:
             f"{subtopic} / {focus} / {i}" for i in range(count - 1)
         ]
 
-        return QuestionItemList(
-            items=[
-                QuestionItem(
-                    question=text,
-                    example=None,
-                    correct_option="Right",
-                    distractors=["W1", "W2", "W3"],
-                    ambiguous=False,
-                )
-                for text in texts
-            ]
-        )
+        # The rephrasing is single-answer; the first of the rest are as many multi-answer
+        # questions as asked for.
+        written = items(texts[1:], asked_multi(prompt))
+
+        return QuestionItemList(items=[question_item(texts[0]), *written.items])
 
 
 class FakeLLM:
@@ -70,6 +65,13 @@ class FakeLLM:
 @pytest.fixture(autouse=True)
 def no_cache(monkeypatch):
     monkeypatch.setattr(draft_cache, "get_redis", lambda: FakeRedis(down=True))
+
+
+@pytest.fixture(autouse=True)
+def a_tenth_multi_answer(monkeypatch):
+    """A tenth of every topic is multi-answer (MULTI_ANSWER_PERCENT's default), and their keys
+    hold."""
+    monkeypatch.setattr(llm, "get_verifier_llm", FakeVerifier)
 
 
 class FakeEmbeddings:
@@ -137,6 +139,9 @@ def test_full_graph(monkeypatch, per_topic):
     assert len(topic["questions"]) == per_topic
     assert sum(text.startswith("Same meaning") for text in topic["questions"]) == 1
     assert all(len(options) == 4 for options in topic["answer_options"])
+    assert sum(is_multi(options) for options in topic["answer_options"]) == multi_count(
+        per_topic, 0.1
+    )
     assert (
         len(build_preparation(uuid.uuid4(), "uid", "text", values).topics[0].questions) == per_topic
     )

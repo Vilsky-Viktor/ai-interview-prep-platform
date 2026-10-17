@@ -3,7 +3,7 @@ from uuid import UUID
 import httpx
 from prepza_common import http
 from prepza_common.http import bearer
-from prepza_common.sets import PreparationIn, QuestionIn
+from prepza_common.sets import AddedQuestionsIn, AdditionContext, PreparationIn, QuestionIn
 
 from app.config.settings import settings
 from app.schemas.library import ReuseIn
@@ -31,6 +31,35 @@ async def _create(kind: str, preparation: PreparationIn) -> UUID:
     response.raise_for_status()
 
     return UUID(response.json()["id"])
+
+
+async def get_addition_context(template_id: UUID) -> AdditionContext | None:
+    """A template's topics with their questions' texts and what each pool lacks; None when
+    there's no such template."""
+    response = await http.get_client().get(
+        f"{settings.library_url}/internal/templates/{template_id}/additions",
+        headers=bearer(service_token("library")),
+    )
+
+    if response.status_code == httpx.codes.NOT_FOUND:
+        return None
+
+    response.raise_for_status()
+
+    return AdditionContext.model_validate(response.json())
+
+
+async def add_questions(template_id: UUID, added: AddedQuestionsIn) -> list[list[UUID]]:
+    """Saves new questions in a template's topics, all at once; each topic's new ids."""
+    response = await http.get_client().post(
+        f"{settings.library_url}/internal/templates/{template_id}/questions",
+        json=added.model_dump(mode="json"),
+        headers=bearer(service_token("library")),
+    )
+
+    response.raise_for_status()
+
+    return [[UUID(question_id) for question_id in topic] for topic in response.json()]
 
 
 async def delete_set(set_id: UUID) -> None:
@@ -120,6 +149,32 @@ async def save_embeddings(embeddings: dict[str, list[float]]) -> None:
     response = await http.get_client().put(
         f"{settings.library_url}/internal/embeddings",
         json=[{"id": topic_id, "embedding": value} for topic_id, value in embeddings.items()],
+        headers=bearer(service_token("library")),
+    )
+
+    response.raise_for_status()
+
+
+async def untagged_code(limit: int, text: bool = False, after: str | None = None) -> list[dict]:
+    """Questions whose example has no language yet, or with `text` the ones tagged "text", in id
+    order after `after`: [{"id", "text"}]."""
+    params = {"limit": limit, "text": text} | ({"after": after} if after else {})
+    response = await http.get_client().get(
+        f"{settings.library_url}/internal/code/untagged",
+        params=params,
+        headers=bearer(service_token("library")),
+    )
+
+    response.raise_for_status()
+
+    return response.json()
+
+
+async def save_code_languages(languages: dict[str, str], text: bool = False) -> None:
+    response = await http.get_client().put(
+        f"{settings.library_url}/internal/code/languages",
+        params={"text": text},
+        json=[{"id": question_id, "language": value} for question_id, value in languages.items()],
         headers=bearer(service_token("library")),
     )
 

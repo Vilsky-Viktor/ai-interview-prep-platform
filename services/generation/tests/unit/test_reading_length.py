@@ -1,7 +1,4 @@
 import asyncio
-import logging
-import uuid
-from types import SimpleNamespace
 
 from app.constants.generation import MAX_EXAMPLE_LINES, MAX_OPTION_CHARS, MAX_QUESTION_CHARS
 from app.helpers.questions import readable
@@ -10,7 +7,6 @@ from app.prompts.questions import QUESTIONS_PROMPT
 from app.prompts.regenerate import REGENERATE_PROMPT
 from app.schemas.questions import QuestionItem, QuestionItemList
 from app.services.nodes.questions import generate_questions
-from app.services.pipeline import log_cost
 from app.services.regenerate import regenerate
 from tests.unit.test_regenerate import QUESTION_ID, FakeEmbeddings, context
 from tests.unit.test_regenerate import FakeLLM as RegenerateLLM
@@ -40,7 +36,8 @@ def item(question, example=None, correct="Right"):
     return QuestionItem(
         question=question,
         example=example,
-        correct_option=correct,
+        example_language="python" if example else None,
+        correct_options=[correct],
         distractors=["A", "B", "C"],
         ambiguous=False,
     )
@@ -80,13 +77,3 @@ def test_a_rewritten_question_too_long_to_read_is_written_again(monkeypatch):
     result = asyncio.run(regenerate(QUESTION_ID, context()))
 
     assert result.text == "How do you cancel an asyncio task?"
-
-
-def test_each_run_logs_what_it_spent(caplog):
-    generation = SimpleNamespace(id=uuid.uuid4(), kind="template")
-    usage = {"gpt-6.1-sol": {"input_tokens": 500_000, "output_tokens": 100_000}}
-
-    with caplog.at_level(logging.INFO):
-        log_cost(generation, usage)
-
-    assert f"Generation {generation.id} (template) spent $2.00" in caplog.text
