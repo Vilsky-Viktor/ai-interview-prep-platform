@@ -60,7 +60,7 @@ FAQ = [
     {
         "key": "scorecards",
         "question": "Que montrent les fiches d'évaluation des candidats ?",
-        "answer": "Chaque réponse, si elle était juste et le temps qu'elle a pris. Les notes s'affichent en vert ou en rouge par rapport au seuil de réussite que vous avez fixé pour l'entretien. Les fiches signalent aussi les réponses trop rapides pour avoir lu la question, les sorties de la page et les tentatives de copie.",
+        "answer": "Chaque réponse, si elle était juste et le temps qu'elle a pris. La note est le pourcentage de points obtenus : chaque question vaut un point, et une question où il faut cocher toutes les bonnes réponses en rapporte une part pour chaque bonne réponse cochée, et rien si une mauvaise est cochée. Les notes s'affichent en vert ou en rouge par rapport au seuil de réussite que vous avez fixé pour l'entretien. Les fiches signalent aussi les réponses trop rapides pour avoir lu la question, les sorties de la page et les tentatives de copie.",
     },
     {
         "key": "reports",
@@ -68,14 +68,19 @@ FAQ = [
         "answer": "Oui. Téléchargez un rapport PDF pour un candidat ou pour tous les candidats d'un entretien, envoyez-le par e-mail directement depuis prepza, ou envoyez un court résumé sur WhatsApp, Telegram, Viber ou LINE.",
     },
     {
+        "key": "action_log",
+        "question": "Puis-je voir qui a fait quoi dans mon entreprise ?",
+        "answer": "Oui, si vous êtes propriétaire de l'entreprise. Son onglet Journal des actions liste tout ce que ses membres ont fait, du plus récent au plus ancien : inviter ou retirer des candidats, consulter des résultats, modifier les entretiens, l'équipe, la facturation et les intégrations, avec qui l'a fait, quand, et si l'assistant, une application d'IA ou l'API l'a fait en son nom. Vous pouvez le filtrer par membre, type d'action et dates. Les actions sont conservées 12 mois.",
+    },
+    {
         "key": "integrations",
         "question": "prepza fonctionne-t-il avec mon ATS ou d'autres outils ?",
-        "answer": "Oui, sans frais supplémentaires. Connectez Workable, Greenhouse, Teamtailor, Recruitee ou Breezy HR dans l'onglet Intégrations de votre entreprise : les candidats que vous déplacez vers une étape reçoivent l'entretien, et leurs résultats reviennent dans l'ATS. Slack peut publier les notifications de votre entreprise dans un canal, et l'API permet à votre propre plateforme de créer des entretiens, d'inviter et de gérer des candidats et de recevoir leurs résultats ; consultez la Documentation de l'API.",
+        "answer": "Oui, sans frais supplémentaires. Connectez Workable, Greenhouse, Teamtailor, Recruitee ou Breezy HR dans l'onglet Intégrations de votre entreprise : les candidats que vous déplacez vers une étape reçoivent l'entretien, et leurs résultats reviennent dans l'ATS. Slack peut publier les notifications de votre entreprise dans un canal, et l'API permet à votre propre plateforme de créer des entretiens, d'inviter et de gérer des candidats et de recevoir leurs résultats, chaque clé API étant limitée à ce que vous cochez pour elle ; consultez la Documentation de l'API.",
     },
     {
         "key": "ai_apps",
-        "question": "Puis-je utiliser prepza depuis Claude ou ChatGPT ?",
-        "answer": "Oui. Ajoutez prepza à Claude ou ChatGPT comme connecteur (les étapes sont dans l'onglet Intégrations de votre entreprise) et autorisez-le sur prepza. L'application travaille alors avec vos entreprises, vos entretiens et les résultats des candidats en votre nom, avec vos droits ; la plupart des applications vous demandent avant de modifier quoi que ce soit. La suppression de votre compte ou d'une entreprise se fait uniquement dans prepza. Ce que l'application lit parvient à son fournisseur, selon les conditions de cette application. Vous pouvez la déconnecter à tout moment dans le même onglet.",
+        "question": "Puis-je utiliser prepza depuis Claude, ChatGPT ou mon propre agent IA ?",
+        "answer": "Oui. Ajoutez prepza à Claude ou ChatGPT comme connecteur (les étapes sont dans l'onglet Intégrations de votre entreprise) et autorisez-le sur prepza. L'application travaille alors avec vos entreprises, vos entretiens et les résultats des candidats en votre nom, avec vos droits ; la plupart des applications vous demandent avant de modifier quoi que ce soit. La suppression de votre compte ou d'une entreprise se fait uniquement dans prepza. Ce que l'application lit parvient à son fournisseur, selon les conditions de cette application. Vous pouvez la déconnecter à tout moment dans le même onglet. D'autres applications d'IA et les agents que vous créez vous-même peuvent aussi se connecter : l'onglet MCP de la documentation développeurs donne les étapes et des exemples d'agents, et un agent sur un serveur peut se connecter avec une clé API dotée de l'autorisation pour les agents IA.",
     },
     {
         "key": "candidates",
@@ -100,7 +105,7 @@ FAQ = [
     {
         "key": "emails",
         "question": "Quels e-mails prepza envoie-t-il, et comment les arrêter ?",
-        "answer": "Les e-mails de service, comme les invitations, les rapports, les problèmes de paiement et les modifications de nos conditions, sont toujours envoyés. Les autres, comme le récapitulatif d'activité quotidien, les rappels et les nouveautés du produit, se choisissent dans les Paramètres, sous E-mails, ou s'arrêtent avec le lien « Se désabonner » de chaque e-mail. Les candidats peuvent arrêter les e-mails de votre entreprise, ou les rappels d'un entretien, avec les liens de leurs invitations et rappels.",
+        "answer": "Les e-mails de service, comme les invitations, les rapports, les problèmes de paiement et les modifications de nos conditions, sont toujours envoyés. Les autres, comme le récapitulatif d'activité quotidien, les rappels et les nouveautés du produit, se choisissent dans les Paramètres, sous E-mails, ou s'arrêtent avec le lien « Se désabonner » de chaque e-mail. Les candidats peuvent arrêter les e-mails de votre entreprise, ou les rappels d'un entretien, avec les liens de leurs invitations et rappels. Les actualités de prepza s'affichent dans vos notifications, la cloche en haut ; les plus importantes arrivent aussi par e-mail comme nouveauté du produit, uniquement tant que ce réglage est activé.",
     },
     {
         "key": "delete",

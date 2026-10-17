@@ -7,6 +7,7 @@ from app.constants.help import (
     MAX_HELP_MESSAGE_LENGTH,
     MAX_HELP_MESSAGES,
     MAX_HELP_QUESTION_LENGTH,
+    MAX_PAGE_KEY_LENGTH,
     QUESTION_TOO_LONG,
     SIGNATURE_LENGTH,
     HelpRole,
@@ -21,9 +22,12 @@ class HelpMessage(BaseModel):
 
 
 class HelpChatRequest(BaseModel):
-    """The conversation so far, ending with the new question; the page keeps it."""
+    """The conversation so far, ending with the new question; the page keeps it. `page`: the
+    key of the page the visitor asks on, whose guide the answer reads (an unknown one is
+    ignored)."""
 
     messages: list[HelpMessage] = Field(min_length=1, max_length=MAX_HELP_MESSAGES)
+    page: str | None = Field(default=None, max_length=MAX_PAGE_KEY_LENGTH)
 
     @model_validator(mode="after")
     def ends_with_question(self):
@@ -36,6 +40,16 @@ class HelpChatRequest(BaseModel):
             raise ValueError(QUESTION_TOO_LONG)
 
         return self
+
+
+class PageGuideOut(BaseModel):
+    """A page's guide: what it's for (`text`), what you can do there and tips."""
+
+    key: str
+    title: str
+    text: str
+    actions: list[str]
+    tips: list[str]
 
 
 class FaqItemOut(BaseModel):

@@ -1,7 +1,10 @@
 from fastapi import APIRouter
+from prepza_common.limit_schemas import BudgetOut
 from prepza_common.stats import Period, StatsOut
 from prepza_common.superadmin import SuperadminUser
 
+from app.integrations.redis import get_redis
+from app.services import help as help_service
 from app.storage import stats
 
 # The superadmin's stats; everyone else gets "not found".
@@ -14,3 +17,9 @@ async def get_stats(superadmin: SuperadminUser, period: Period = None) -> StatsO
     month, for the stats tab."""
 
     return StatsOut(counts=await stats.stats(period))
+
+
+@router.get("/budgets")
+async def get_budgets(superadmin: SuperadminUser) -> list[BudgetOut]:
+    """How much of the help chat's shared daily budgets is used today, for the AI costs tab."""
+    return await help_service.budgets(get_redis())

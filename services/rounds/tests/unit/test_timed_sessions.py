@@ -130,7 +130,9 @@ def test_a_question_within_its_time_is_left_alone(monkeypatch):
 
 
 def test_no_answer_once_the_question_timed_out():
-    timed_out = Answer(question_id=QUESTION_ID, option_index=None, correct=False, score=0)
+    timed_out = Answer(
+        question_id=QUESTION_ID, option_index=None, timed_out=True, correct=False, score=0
+    )
     row = timed(shown_seconds_ago=40, answers=[timed_out])
 
     with pytest.raises(HTTPException) as error:

@@ -31,7 +31,6 @@ def checks(monkeypatch):
     monkeypatch.setattr(help_routes, "require_human", require_human)
     monkeypatch.setattr(help_routes.billing, "catalog", fake_catalog(CATALOG))
     monkeypatch.setattr(help_routes, "stream_reply", fake_stream)
-    monkeypatch.setattr(help_routes, "hit", nothing)
     monkeypatch.setattr(help_routes.contact_store, "save", nothing)
     monkeypatch.setattr(help_routes.outbox_service, "flush_quietly", nothing)
 

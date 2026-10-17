@@ -60,7 +60,7 @@ FAQ = [
     {
         "key": "scorecards",
         "question": "Mida kandidaatide tulemused näitavad?",
-        "answer": "Iga vastust, kas see oli õige ja kui kaua see aega võttis. Hinded on rohelised või punased vastavalt läbimise lävele, mille intervjuule määrasid. Tulemused märgivad ka vastused, mis anti liiga kiiresti, et küsimust lugeda, korrad, kui kandidaat lehelt lahkus, ja kopeerimiskatsed.",
+        "answer": "Iga vastust, kas see oli õige ja kui kaua see aega võttis. Hinne on teenitud punktide protsent: iga küsimus annab ühe punkti ja „vali kõik õiged“ küsimus annab osa sellest iga märgitud õige variandi eest, kuid mitte midagi, kui märgitud on vale variant. Hinded on rohelised või punased vastavalt läbimise lävele, mille intervjuule määrasid. Tulemused märgivad ka vastused, mis anti liiga kiiresti, et küsimust lugeda, korrad, kui kandidaat lehelt lahkus, ja kopeerimiskatsed.",
     },
     {
         "key": "reports",
@@ -68,14 +68,19 @@ FAQ = [
         "answer": "Jah. Laadi alla PDF-aruanne ühe kandidaadi või intervjuu kõigi kandidaatide kohta, saada see e-postiga otse prepzast või saada lühike kokkuvõte WhatsAppis, Telegramis, Viberis või LINE'is.",
     },
     {
+        "key": "action_log",
+        "question": "Kas saan näha, kes minu ettevõttes mida tegi?",
+        "answer": "Jah, kui oled ettevõtte omanik. Selle vahekaardil Toimingute logi on kõik, mida liikmed tegid, uuemad eespool: kandidaatide kutsumine või eemaldamine, tulemuste vaatamine ning intervjuude, meeskonna, arvelduse ja integratsioonide muutmine, koos sellega, kes ja millal seda tegi ning kas assistent, AI-rakendus või API tegi seda tema nimel. Saad seda filtreerida liikme, toimingu liigi ja kuupäevade järgi. Toiminguid hoitakse 12 kuud.",
+    },
+    {
         "key": "integrations",
         "question": "Kas prepza töötab minu ATS-i või muude tööriistadega?",
-        "answer": "Jah, ilma lisatasuta. Ühenda Workable, Greenhouse, Teamtailor, Recruitee või Breezy HR oma ettevõtte vahekaardil Integratsioonid: kandidaadid, kelle viid etappi, saavad intervjuu ja nende tulemused lähevad tagasi ATS-i. Slack saab postitada sinu ettevõtte teavitusi kanalisse ja API kaudu saab sinu enda platvorm luua intervjuusid, kandidaate kutsuda ja hallata ning nende tulemusi vastu võtta; vaata: API dokumentatsioon.",
+        "answer": "Jah, ilma lisatasuta. Ühenda Workable, Greenhouse, Teamtailor, Recruitee või Breezy HR oma ettevõtte vahekaardil Integratsioonid: kandidaadid, kelle viid etappi, saavad intervjuu ja nende tulemused lähevad tagasi ATS-i. Slack saab postitada sinu ettevõtte teavitusi kanalisse ja API kaudu saab sinu enda platvorm luua intervjuusid, kandidaate kutsuda ja hallata ning nende tulemusi vastu võtta, kusjuures iga API-võti saab teha ainult seda, mille talle märgid; vaata: API dokumentatsioon.",
     },
     {
         "key": "ai_apps",
-        "question": "Kas saan prepzat kasutada Claude'i või ChatGPT kaudu?",
-        "answer": "Jah. Lisa prepza Claude'i või ChatGPT-sse konnektorina (sammud on sinu ettevõtte vahekaardil Integratsioonid) ja luba see prepzas. Seejärel töötab rakendus sinu nimel ja sinu õigustega sinu ettevõtete, intervjuude ja kandidaatide tulemustega; enamik rakendusi küsib sinult enne, kui midagi muudab. Oma kontot või ettevõtet saad kustutada ainult prepzas. See, mida rakendus loeb, jõuab selle rakenduse tingimuste alusel tema pakkujani. Ühenduse saad igal ajal samal vahekaardil katkestada.",
+        "question": "Kas saan prepzat kasutada Claude'i, ChatGPT või oma AI-agendi kaudu?",
+        "answer": "Jah. Lisa prepza Claude'i või ChatGPT-sse konnektorina (sammud on sinu ettevõtte vahekaardil Integratsioonid) ja luba see prepzas. Seejärel töötab rakendus sinu nimel ja sinu õigustega sinu ettevõtete, intervjuude ja kandidaatide tulemustega; enamik rakendusi küsib sinult enne, kui midagi muudab. Oma kontot või ettevõtet saad kustutada ainult prepzas. See, mida rakendus loeb, jõuab selle rakenduse tingimuste alusel tema pakkujani. Ühenduse saad igal ajal samal vahekaardil katkestada. Ühendada saab ka teisi AI-rakendusi ja ise loodud agente: arendajate dokumentatsiooni MCP-vahekaardil on sammud ja näidisagendid ning serveris töötav agent saab sisse logida API-võtmega, millel on AI-agentide õigus.",
     },
     {
         "key": "candidates",
@@ -100,7 +105,7 @@ FAQ = [
     {
         "key": "emails",
         "question": "Milliseid e-kirju prepza saadab ja kuidas neid peatada?",
-        "answer": "Teenusekirjad, nagu kutsed, aruanded, makseprobleemid ja meie tingimuste muudatused, saadetakse alati. Ülejäänud, näiteks igapäevase tegevuste kokkuvõtte, meeldetuletused ja tooteuudised, valid seadetes jaotises E-kirjad või peatad iga kirja lingiga „Loobu tellimusest“. Kandidaadid saavad sinu ettevõtte kirjad või ühe intervjuu meeldetuletused peatada oma kutsetes ja meeldetuletustes olevate linkidega.",
+        "answer": "Teenusekirjad, nagu kutsed, aruanded, makseprobleemid ja meie tingimuste muudatused, saadetakse alati. Ülejäänud, näiteks igapäevase tegevuste kokkuvõtte, meeldetuletused ja tooteuudised, valid seadetes jaotises E-kirjad või peatad iga kirja lingiga „Loobu tellimusest“. Kandidaadid saavad sinu ettevõtte kirjad või ühe intervjuu meeldetuletused peatada oma kutsetes ja meeldetuletustes olevate linkidega. prepza uudised on sinu teavitustes, ülaosas oleva kella all; olulisemad uudised tulevad ka e-kirjaga tooteuudisena, kuid ainult siis, kui see seade on sees.",
     },
     {
         "key": "delete",

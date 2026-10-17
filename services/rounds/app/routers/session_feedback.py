@@ -22,8 +22,14 @@ async def require_session_question(session_id: UUID, question_id: UUID, user: Cu
 
 
 def passed_through(response: httpx.Response) -> Response:
-    """Keeps the library's 409 (already rated or reported) and validation errors for the client."""
-    passed_on(response, {status.HTTP_409_CONFLICT, status.HTTP_422_UNPROCESSABLE_CONTENT})
+    """Keeps the library's 409 (already rated or reported), validation errors and 429 (its daily
+    ratings or reports limit) for the client."""
+    kept = {
+        status.HTTP_409_CONFLICT,
+        status.HTTP_422_UNPROCESSABLE_CONTENT,
+        status.HTTP_429_TOO_MANY_REQUESTS,
+    }
+    passed_on(response, kept)
 
     return Response(response.content, response.status_code, media_type="application/json")
 

@@ -24,26 +24,20 @@ def test_visitors_send_contact_messages(client, monkeypatch):
     ]
 
 
-def test_contact_messages_are_limited_per_address_and_in_all(client, monkeypatch):
-    keys = []
-
-    async def record(redis, key, limit, window):
-        keys.append(key)
-
+def test_contact_messages_are_limited_per_address_and_in_all(client, monkeypatch, redis):
     async def fake_save(data):
         return None
 
     async def fake_flush():
         return None
 
-    monkeypatch.setattr("app.routers.help.hit", record)
     monkeypatch.setattr("app.routers.help.contact_store.save", fake_save)
     monkeypatch.setattr("app.routers.help.outbox_service.flush_quietly", fake_flush)
     body = {"name": "Ann", "email": "ann@example.com", "message": "Hi"}
 
     client.post("/help/contact", json=body)
 
-    assert keys == ["rate:contact:ip:testclient", "rate:contact:all"]
+    assert redis.counts == {"rate:contact:ip:testclient": 1, "rate:contact:all": 1}
 
 
 def test_contact_messages_need_every_field(client):

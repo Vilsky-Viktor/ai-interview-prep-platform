@@ -27,7 +27,9 @@ def section(answered=False, status="in_progress"):
         candidate_invite_id=INVITE_ID,
         topic_title="Python",
         status=status,
-        questions=[{"id": str(question_id), "text": "Q?", "options": [{"answer": "A"}]}],
+        questions=[
+            {"id": str(question_id), "text": "Q?", "options": [{"answer": "A", "correct": True}]}
+        ],
         final_score=None,
         started_at=datetime.now(UTC),
         finished_at=None,
@@ -187,6 +189,6 @@ def test_a_question_whose_time_ran_out_counts_as_wrong_before_the_next_step(inte
     step = asyncio.run(interview_flow.interview_step(rows[1], CANDIDATE))
 
     # The section's only question counted as wrong, which finished it; the next one opens.
-    assert [(answer.option_index, answer.score) for answer in saved] == [(None, 0)]
+    assert [(answer.timed_out, answer.score) for answer in saved] == [(True, 0)]
     assert step.session.id == rows[1].id
     assert [topic.status for topic in step.topics] == ["finished", "in_progress"]

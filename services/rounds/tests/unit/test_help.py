@@ -1,7 +1,8 @@
+import asyncio
 import json
 
 from firebase_admin import auth as firebase_auth
-from prepza_common.constants import MAX_OWNED_COMPANIES
+from prepza_common.limit_list import LIMITS
 
 from app.config.settings import settings
 from app.constants.help import (
@@ -13,7 +14,7 @@ from app.constants.terms import TERMS_SECTIONS
 from app.helpers.help import guide
 from app.helpers.help_replies import reply_signature
 from app.schemas.help import HelpMessage
-from app.services.help import build_messages
+from app.services.help import build_messages, guide_limits
 
 CATALOG = {
     "environment": "sandbox",
@@ -21,6 +22,7 @@ CATALOG = {
     "candidate_credits": 500,
     "welcome_company": 1500,
 }
+MAX_COMPANIES = LIMITS["MAX_OWNED_COMPANIES"].default
 
 
 def fake_catalog(catalog):
@@ -40,11 +42,11 @@ def test_legal_documents_are_served(client):
     assert client.get("/help/legal/cookies").status_code == 422
 
 
-def test_the_chat_knows_the_platform_prices_and_documents():
+def test_the_chat_knows_the_platform_prices_and_documents(redis):
     question = [HelpMessage(role="user", content="How do refunds work?")]
-    system = build_messages(question, "de", CATALOG)[0].content
+    system = asyncio.run(build_messages(question, "de", CATALOG))[0].content
 
-    assert f"can own up to {MAX_OWNED_COMPANIES}" in system
+    assert f"can own up to {MAX_COMPANIES}" in system
     assert "Refunds: you can ask for a refund" in system
     assert "Who is responsible" in system
     assert '"candidate_credits": 500' in system
@@ -52,7 +54,7 @@ def test_the_chat_knows_the_platform_prices_and_documents():
     assert system.endswith(
         "Reply in German, the language of the page, unless the user writes in another language."
     )
-    assert "{" not in guide()
+    assert "{" not in guide(asyncio.run(guide_limits(redis)))
 
 
 def test_a_long_conversation_sends_only_its_latest_messages():
@@ -60,7 +62,7 @@ def test_a_long_conversation_sends_only_its_latest_messages():
         HelpMessage(role="user" if index % 2 == 0 else "assistant", content=f"message {index}")
         for index in range(30)
     ] + [HelpMessage(role="user", content="last question")]
-    messages = build_messages(conversation, "en", None)
+    messages = asyncio.run(build_messages(conversation, "en", None))
 
     assert len(messages) == 1 + HELP_HISTORY_MESSAGES + 1
     assert messages[-1].content == "last question"
@@ -76,7 +78,7 @@ def test_long_earlier_messages_are_left_out_but_the_question_stays():
         HelpMessage(role="assistant", content=long),
         HelpMessage(role="user", content="last question"),
     ]
-    messages = build_messages(conversation, "en", None)
+    messages = asyncio.run(build_messages(conversation, "en", None))
 
     # The latest long answer and the question before it fit; the earlier long one doesn't.
     assert [message.content for message in messages[1:]] == ["again", long, "last question"]
@@ -143,16 +145,10 @@ def test_the_chat_needs_a_question_last_and_not_too_long(client):
     assert "Die Frage ist zu lang." in response.text
 
 
-def test_accounts_addresses_and_the_daily_total_are_limited(client, monkeypatch):
-    keys = []
-
-    async def record(redis, key, limit, window):
-        keys.append(key)
-
+def test_accounts_addresses_and_the_daily_total_are_limited(client, monkeypatch, redis):
     async def fake_stream(messages, used=None):
         yield "ok"
 
-    monkeypatch.setattr("app.routers.help.hit", record)
     monkeypatch.setattr("app.routers.help.billing.catalog", fake_catalog(None))
     monkeypatch.setattr("app.routers.help.stream_reply", fake_stream)
     monkeypatch.setattr(firebase_auth, "verify_id_token", lambda token: {"uid": "u1"})
@@ -164,13 +160,13 @@ def test_accounts_addresses_and_the_daily_total_are_limited(client, monkeypatch)
     forwarded = {"X-Forwarded-For": "1.1.1.1, 203.0.113.7, 35.191.0.1"}
     client.post("/help/chat", json=body, headers={"Authorization": "Bearer token", **forwarded})
 
-    assert keys == [
-        "rate:help:ip:testclient",
-        "rate:help:all",
-        "rate:help:u1",
-        "rate:help:ip:203.0.113.7",
-        "rate:help:all",
-    ]
+    counted = {key: count for key, count in redis.counts.items() if key.startswith("rate:")}
+    assert counted == {
+        "rate:help:ip:testclient": 1,
+        "rate:help:all": 2,
+        "rate:help:u1": 1,
+        "rate:help:ip:203.0.113.7": 1,
+    }
 
 
 def test_billings_prices_are_kept_for_a_while(monkeypatch):
@@ -197,13 +193,13 @@ def test_billings_prices_are_kept_for_a_while(monkeypatch):
     assert len(calls) == 1
 
 
-def test_the_chat_and_the_platform_guide_share_one_text():
+def test_the_chat_and_the_platform_guide_share_one_text(redis):
     from app.helpers.help import knowledge
 
     question = [HelpMessage(role="user", content="How do refunds work?")]
-    system = build_messages(question, "de", CATALOG)[0].content
+    system = asyncio.run(build_messages(question, "de", CATALOG))[0].content
 
-    assert knowledge("en", CATALOG) in system
+    assert knowledge("en", CATALOG, asyncio.run(guide_limits(redis))) in system
 
 
 def test_the_platform_guide_is_served_in_the_pages_language(client, monkeypatch):
@@ -229,7 +225,7 @@ def test_the_platform_guide_is_served_in_the_pages_language(client, monkeypatch)
     assert german.headers["content-type"].startswith("text/plain")
     assert f"Q: {FAQS['de'][0]['question']}" in german.text
     assert f"Q: {FAQS['en'][0]['question']}" in english.text
-    assert f"can own up to {MAX_OWNED_COMPANIES}" in german.text
+    assert f"can own up to {MAX_COMPANIES}" in german.text
     assert "secret-token" not in german.text
     # Kept per language: the second German request is built from memory.
     assert len(calls) == 2
@@ -239,7 +235,7 @@ def test_the_help_chat_keeps_to_prepza_like_the_assistant_and_offers_sign_in_for
     from prepza_common.scope import SCOPE_RULE
 
     question = [HelpMessage(role="user", content="Write me a poem")]
-    system = build_messages(question, "en", CATALOG)[0].content
+    system = asyncio.run(build_messages(question, "en", CATALOG))[0].content
 
     assert SCOPE_RULE in system
     assert "create a company or an interview" in system

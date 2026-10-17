@@ -11,6 +11,7 @@ def timed_out(session_id, question_id):
         session_id=session_id,
         question_id=question_id,
         option_index=None,
+        timed_out=True,
         correct=False,
         score=0,
         seconds=30,

@@ -58,3 +58,31 @@ def test_candidate_rates_only_own_session_questions(client, monkeypatch):
     assert calls[0] == (QUESTION_ID, "cand", 1)
 
     app.dependency_overrides.clear()
+
+
+def test_the_librarys_daily_limit_reaches_the_candidate(client, monkeypatch):
+    row = owned_session()
+
+    async def fake_get(_session_id):
+        return row
+
+    async def fake_report(question_id, user_id, reason, comment):
+        return httpx.Response(
+            429,
+            json={"detail": "Too many requests. Try again later."},
+            request=httpx.Request("POST", "http://library"),
+        )
+
+    monkeypatch.setattr(sessions, "get", fake_get)
+    monkeypatch.setattr(feedback, "report", fake_report)
+    app.dependency_overrides[current_user] = lambda: User(
+        uid="cand", email="cand@example.com", email_verified=True
+    )
+
+    response = client.post(
+        f"/sessions/{row.id}/questions/{QUESTION_ID}/reports", json={"reason": "wrong_answer"}
+    )
+
+    app.dependency_overrides.clear()
+    assert response.status_code == 429
+    assert response.json() == {"detail": "Too many requests. Try again later."}

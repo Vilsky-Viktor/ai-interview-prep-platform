@@ -104,10 +104,8 @@ async def scores_for_invites(invite_ids: list[uuid.UUID]) -> dict[uuid.UUID, dic
             invite,
             func.count(Answer.id),
             func.sum(Answer.score),
-            func.count(Answer.id).filter(
-                Answer.option_index.is_not(None), Answer.seconds < FAST_ANSWER_SECONDS
-            ),
-            func.count(Answer.id).filter(Answer.option_index.is_not(None)),
+            func.count(Answer.id).filter(~Answer.timed_out, Answer.seconds < FAST_ANSWER_SECONDS),
+            func.count(Answer.id).filter(~Answer.timed_out),
         )
         .join(Answer, Answer.session_id == Session.id)
         .where(chosen)
@@ -240,9 +238,7 @@ async def finish(session_id: uuid.UUID) -> None:
             outbox.add(session, OutboxEvent, SESSION_SCORED, scored(finishing))
 
         if all(row.status == RoundStatus.FINISHED for row in sections):
-            picked = sum(
-                1 for row in sections for answer in row.answers if answer.option_index is not None
-            )
+            picked = sum(1 for row in sections for answer in row.answers if not answer.timed_out)
             outbox.add(
                 session,
                 OutboxEvent,

@@ -1,5 +1,4 @@
 from prepza_common.settings import ServiceSettings
-from pydantic import Field
 
 
 class Settings(ServiceSettings):
@@ -19,13 +18,6 @@ class Settings(ServiceSettings):
     # How hard it thinks: "none" (which also lets it take a temperature), "minimal", "low",
     # "medium" or "high".
     help_reasoning_effort: str = "none"
-    # The FAQ page's help chat is free and open to visitors: messages per signed-in account an
-    # hour, and in all a day, which caps what it can cost. Cloud Armor limits each visitor's IP.
-    help_user_limit: int = Field(default=30, ge=0)
-    help_daily_limit: int = Field(default=5_000, ge=0)
-    # Contact page messages a day in all, so a flood can't bury the inbox. Cloud Armor limits
-    # each visitor's IP.
-    contact_daily_limit: int = Field(default=200, ge=0)
 
 
 settings = Settings()

@@ -60,7 +60,7 @@ FAQ = [
     {
         "key": "scorecards",
         "question": "Apa yang ditampilkan scorecard?",
-        "answer": "Setiap jawaban, apakah benar, dan berapa lama waktunya. Nilai tampil hijau atau merah dibanding nilai lulus yang kamu tetapkan untuk wawancara. Scorecard juga menandai jawaban yang terlalu cepat untuk sempat membaca soal, saat kandidat meninggalkan halaman, dan upaya menyalin.",
+        "answer": 'Setiap jawaban, apakah benar, dan berapa lama waktunya. Nilai adalah persentase poin yang diperoleh: setiap soal bernilai satu poin, dan soal "pilih semua yang benar" memberi sebagian poinnya untuk setiap opsi benar yang dicentang, dan nol jika ada opsi salah yang dicentang. Nilai tampil hijau atau merah dibanding nilai lulus yang kamu tetapkan untuk wawancara. Scorecard juga menandai jawaban yang terlalu cepat untuk sempat membaca soal, saat kandidat meninggalkan halaman, dan upaya menyalin.',
     },
     {
         "key": "reports",
@@ -68,14 +68,19 @@ FAQ = [
         "answer": "Bisa. Unduh laporan PDF untuk satu kandidat atau semua kandidat sebuah wawancara, kirim lewat email langsung dari prepza, atau kirim ringkasan singkat di WhatsApp, Telegram, Viber, atau LINE.",
     },
     {
+        "key": "action_log",
+        "question": "Bisakah aku melihat siapa melakukan apa di perusahaanku?",
+        "answer": "Bisa, jika kamu pemilik perusahaan. Tab Log tindakan perusahaan itu mencantumkan semua yang dilakukan anggotanya, dari yang terbaru: mengundang atau menghapus kandidat, melihat hasil, serta mengubah wawancara, tim, tagihan, dan integrasi, lengkap dengan siapa yang melakukannya, kapan, dan apakah asisten, aplikasi AI, atau API yang melakukannya atas nama mereka. Kamu bisa memfilternya berdasarkan anggota, jenis tindakan, dan tanggal. Tindakan disimpan selama 12 bulan.",
+    },
+    {
         "key": "integrations",
         "question": "Apakah prepza bisa dipakai dengan ATS atau tools lain yang saya gunakan?",
-        "answer": "Bisa, tanpa biaya tambahan. Hubungkan Workable, Greenhouse, Teamtailor, Recruitee, atau Breezy HR di tab Integrasi perusahaanmu: kandidat yang kamu pindahkan ke suatu tahap mendapat wawancara, dan hasilnya dikirim kembali ke ATS. Slack bisa memposting notifikasi perusahaanmu ke sebuah channel, dan API memungkinkan platformmu sendiri membuat wawancara, mengundang dan mengelola kandidat, serta menerima hasil mereka; lihat Dokumentasi API.",
+        "answer": "Bisa, tanpa biaya tambahan. Hubungkan Workable, Greenhouse, Teamtailor, Recruitee, atau Breezy HR di tab Integrasi perusahaanmu: kandidat yang kamu pindahkan ke suatu tahap mendapat wawancara, dan hasilnya dikirim kembali ke ATS. Slack bisa memposting notifikasi perusahaanmu ke sebuah channel, dan API memungkinkan platformmu sendiri membuat wawancara, mengundang dan mengelola kandidat, serta menerima hasil mereka, dengan setiap kunci API terbatas pada yang kamu centang untuknya; lihat Dokumentasi API.",
     },
     {
         "key": "ai_apps",
-        "question": "Bisakah saya memakai prepza dari Claude atau ChatGPT?",
-        "answer": "Bisa. Tambahkan prepza ke Claude atau ChatGPT sebagai konektor (langkah-langkahnya ada di tab Integrasi perusahaanmu), lalu izinkan di prepza. Setelah itu, aplikasi bekerja dengan perusahaan, wawancara, dan hasil kandidatmu atas namamu, dengan hak aksesmu; sebagian besar aplikasi bertanya dulu sebelum mengubah apa pun. Akun atau perusahaan hanya bisa dihapus di prepza. Apa yang dibaca aplikasi sampai ke penyedianya sesuai ketentuan aplikasi tersebut. Kamu bisa memutuskan sambungannya kapan saja di tab yang sama.",
+        "question": "Bisakah saya memakai prepza dari Claude, ChatGPT, atau agen AI saya sendiri?",
+        "answer": "Bisa. Tambahkan prepza ke Claude atau ChatGPT sebagai konektor (langkah-langkahnya ada di tab Integrasi perusahaanmu), lalu izinkan di prepza. Setelah itu, aplikasi bekerja dengan perusahaan, wawancara, dan hasil kandidatmu atas namamu, dengan hak aksesmu; sebagian besar aplikasi bertanya dulu sebelum mengubah apa pun. Akun atau perusahaan hanya bisa dihapus di prepza. Apa yang dibaca aplikasi sampai ke penyedianya sesuai ketentuan aplikasi tersebut. Kamu bisa memutuskan sambungannya kapan saja di tab yang sama. Aplikasi AI lain dan agen yang kamu buat sendiri juga bisa terhubung: tab MCP di dokumentasi pengembang berisi langkah-langkah dan contoh agen, dan agen di server bisa masuk dengan kunci API yang punya hak akses agen AI.",
     },
     {
         "key": "candidates",
@@ -105,7 +110,7 @@ FAQ = [
     {
         "key": "delete",
         "question": "Bisakah aku menghapus akunku?",
-        "answer": "Bisa, di Pengaturan. Akun dan datamu dihapus, dan sebelumnya kamu bisa mengunduh salinan datamu.",
+        "answer": "Bisa, di Pengaturan. Akun dan datamu dihapus, dan sebelumnya kamu bisa mengunduh salinan datamu. Berita prepza muncul di notifikasimu, ikon lonceng di bagian atas; berita penting juga dikirim lewat email sebagai pembaruan produk, hanya selama pengaturan itu aktif.",
     },
     {
         "key": "report",

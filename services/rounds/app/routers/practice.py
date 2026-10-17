@@ -4,15 +4,14 @@ from uuid import UUID
 from fastapi import APIRouter, HTTPException, status
 from prepza_common import memory_cache
 from prepza_common.auth import CurrentUser
-from prepza_common.constants import HOUR_SECONDS
+from prepza_common.limits import question_seconds
+from prepza_common.multi_answer import multi_share
 from prepza_common.paging import PageParams
 from prepza_common.pause import refuse_if_paused
 from prepza_common.rate_limit import hit
 
 from app.constants.practice import (
     NO_PRACTICE_QUESTIONS,
-    PRACTICE_QUESTION_SECONDS,
-    PRACTICE_ROUNDS_PER_HOUR,
     PRACTICE_SIZE_CACHE_SECONDS,
 )
 from app.helpers.practice import (
@@ -34,14 +33,15 @@ from app.schemas.practice import (
 from app.storage import practice_sessions, sessions
 
 # Free practice for talents: timed rounds on a template's revealed questions, up to
-# PRACTICE_ROUNDS_PER_HOUR, each with fresh random questions and every right answer shown after.
+# the PRACTICE_ROUNDS_PER_HOUR limit, each with fresh random questions and every right answer shown after.
 router = APIRouter(prefix="/practice", tags=["practice"])
 
 
 @router.post("/{template_id}", status_code=status.HTTP_201_CREATED)
 async def start_practice(template_id: UUID, user: CurrentUser) -> PracticeStartOut:
-    await refuse_if_paused(get_redis())
-    await hit(get_redis(), f"rate:practice:{user.uid}", PRACTICE_ROUNDS_PER_HOUR, HOUR_SECONDS)
+    redis = get_redis()
+    await refuse_if_paused(redis, "practice", user_id=user.uid)
+    await hit(redis, f"rate:practice:{user.uid}", "PRACTICE_ROUNDS_PER_HOUR", user_id=user.uid)
     content = await library.practice_content(template_id)
 
     if content is None:
@@ -57,8 +57,8 @@ async def start_practice(template_id: UUID, user: CurrentUser) -> PracticeStartO
     rows = await sessions.create_many(
         user.uid,
         round_id,
-        practice_topics(content),
-        PRACTICE_QUESTION_SECONDS,
+        practice_topics(content, await multi_share(redis)),
+        await question_seconds(redis, content["level"]),
         preview=repeat,
         practice=True,
     )

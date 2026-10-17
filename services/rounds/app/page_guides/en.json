@@ -1,0 +1,669 @@
+{
+  "landing": {
+    "title": "How prepza works",
+    "text": "prepza turns your job description into a timed multiple-choice interview, with its own random questions for every candidate.",
+    "actions": [
+      "Paste the job description: prepza proposes the topics to test.",
+      "Review the topics: keep, edit or drop them, then approve to write the questions.",
+      "Invite candidates by email, from a file or with one shareable link.",
+      "Read the reports: candidates ranked by grade, with every answer and integrity flags."
+    ],
+    "tips": [
+      "Creating interviews is free. You pay $2–5 per candidate who answers, and your first candidates are free.",
+      "Try your interview as a candidate before you invite anyone."
+    ]
+  },
+  "companies": {
+    "title": "Companies",
+    "text": "Your companies. Everything you do in prepza happens inside one: its interviews, candidates, team, credits and integrations.",
+    "actions": [
+      "Create a company with “new company”. Its name is unique across prepza.",
+      "Open a company to work on its interviews and candidates.",
+      "Remove a company you own, with all its interviews and invites."
+    ],
+    "tips": [
+      "Your role shows beside each company you don't own: admins change things, viewers only look.",
+      "Credits belong to a company, so each one tops up on its own."
+    ]
+  },
+  "pickCompany": {
+    "title": "Choose a company",
+    "text": "You picked a template. Choose the company it's for: the template is copied there as a new interview, free and ready to send to candidates.",
+    "actions": [
+      "Pick a company to open the template in it, then use it.",
+      "Create a new company if you don't have one yet; the template opens there."
+    ],
+    "tips": [
+      "Once copied, the interview is the company's own: change its questions and settings as you like."
+    ]
+  },
+  "interviews": {
+    "title": "Interviews",
+    "text": "All of this company's interviews and its credits for candidates. Each interview is a timed test made from a job description.",
+    "actions": [
+      "Create an interview from a job description with “new interview”.",
+      "Open an interview to see its topics, candidates and settings.",
+      "Try an interview as a candidate, or delete it.",
+      "Top up credits from the balance, or turn on automatic top-ups on the Billing tab."
+    ],
+    "tips": [
+      "The balance turns amber when credits run low. Without credits, new invites aren't sent.",
+      "The tabs above lead to templates, your team, integrations, billing (owners and admins) and referrals."
+    ]
+  },
+  "newInterview": {
+    "title": "New interview",
+    "text": "Start an interview from the job description. prepza reads it, proposes the topics to test, and writes the questions once you approve them.",
+    "actions": [
+      "Paste the job description: the role, its requirements and nice-to-haves.",
+      "Choose the language to generate the interview in.",
+      "Generate, then review the proposed topics."
+    ],
+    "tips": [
+      "The more specific the description, the closer the questions fit the role.",
+      "Generating is free: you pay only for candidates who answer."
+    ]
+  },
+  "reviewTopics": {
+    "title": "Review your topics",
+    "text": "prepza proposed these topics from your description. Each topic you keep gets its own set of questions with answers.",
+    "actions": [
+      "Uncheck the topics you don't need.",
+      "Edit a topic's name and subtopics with its pencil.",
+      "Describe changes in your own words and apply them, for example “add a topic on team leadership”.",
+      "Approve and generate to write the questions."
+    ],
+    "tips": [
+      "With too many topics, uncheck some or describe how to merge them.",
+      "Questions are written only after you approve, so take a minute here."
+    ]
+  },
+  "generating": {
+    "title": "Generating",
+    "text": "prepza is making your interview: first the topics, then the questions for each one. It takes a few minutes.",
+    "actions": [
+      "Leave this page if you like: generation keeps going.",
+      "Cancel the generation if you no longer need it; nothing made so far is kept."
+    ],
+    "tips": [
+      "You get a notification when the interview is ready.",
+      "Come back any time from the interviews list."
+    ]
+  },
+  "interviewTopics": {
+    "title": "Topics",
+    "text": "What this interview tests: its topics, each with subtopics and its own pool of questions. Every candidate gets a random set from each pool.",
+    "actions": [
+      "Open “manage questions” to read a topic's questions and answers.",
+      "Re-generate a weak question, mark a wrong answer, or read candidates' reports on a question.",
+      "Set how many questions each candidate gets from a topic.",
+      "Try the interview as a candidate, or delete it."
+    ],
+    "tips": [
+      "AI-written questions can be wrong: skim each topic before you invite anyone.",
+      "Click the title to rename the interview."
+    ]
+  },
+  "interviewCandidates": {
+    "title": "Candidates",
+    "text": "Everyone invited to this interview, with their status, progress and grade.",
+    "actions": [
+      "Invite candidates: one at a time, a list, or a CSV or TXT file.",
+      "Turn on the shareable link for a job ad: anyone with it can take the interview.",
+      "Search by email or name, filter by status, and sort by grade or date.",
+      "Open a candidate's report, or download or share the report on all candidates."
+    ],
+    "tips": [
+      "Each candidate who answers at least one question uses credits, including those from the link.",
+      "Reminders go to candidates automatically."
+    ]
+  },
+  "interviewSettings": {
+    "title": "Settings",
+    "text": "How this interview runs for every candidate.",
+    "actions": [
+      "Set the time each question has, in seconds.",
+      "Set the passing grade: candidates who reach it pass.",
+      "Mark the interview as hired once you've filled the role."
+    ],
+    "tips": [
+      "Each setting saves as soon as you leave its field.",
+      "Candidates never see their scores; only your team does.",
+      "For one candidate who needs more time, add extra time on their page."
+    ]
+  },
+  "tryInterview": {
+    "title": "Try as a candidate",
+    "text": "A preview of this interview just as candidates see it: the intro, then the timed questions. It's free.",
+    "actions": [
+      "Start the preview and answer as a candidate would.",
+      "Check the timing, the wording and the answers before you invite anyone."
+    ],
+    "tips": [
+      "Stay on the page while you answer: for candidates, leaving the page, copying and answering too fast are recorded."
+    ]
+  },
+  "candidate": {
+    "title": "Candidate report",
+    "text": "One candidate's results: their grade, whether they passed, and each topic's score with every answer.",
+    "actions": [
+      "Read each answer, with integrity flags: page leaves, copy attempts and fast answers.",
+      "Download the report as a PDF, or share it by email.",
+      "Give extra time before they start, for example for a disability.",
+      "Add or edit the candidate's name.",
+      "Copy their invite link to send it yourself, if the email didn't arrive; it's there until they finish.",
+      "Resend or revoke the invite, or delete the candidate with their results."
+    ],
+    "tips": [
+      "The score supports your decision; it doesn't make it. If the candidate asks, have a person review their result.",
+      "A grade is the percentage of points earned: each question is worth one point, and a \"select all that apply\" question earns part of it for each right option ticked, and nothing if a wrong one is ticked."
+    ]
+  },
+  "templates": {
+    "title": "Templates",
+    "text": "Ready-made interviews for common roles. Using one copies it into this company as your own interview.",
+    "actions": [
+      "Search by role or topic, and filter by level and language.",
+      "Open a template to see its topics and how many questions each has.",
+      "Use a template to start an interview from it."
+    ],
+    "tips": [
+      "For a closer fit, create an interview from your own job description instead.",
+      "Once copied, the interview is yours: change its questions and settings as you like."
+    ]
+  },
+  "template": {
+    "title": "Template",
+    "text": "A ready-made interview: its topics, their subtopics and how many questions each topic has.",
+    "actions": [
+      "Check that the topics match the role you're hiring for.",
+      "Use the template to copy it into this company as a new interview."
+    ],
+    "tips": [
+      "Copying is free; candidates who answer use credits as usual.",
+      "If the topics don't fit, create an interview from your job description instead."
+    ]
+  },
+  "team": {
+    "title": "Team",
+    "text": "The people who work on this company's interviews, and their roles.",
+    "actions": [
+      "Add a member by email, as an admin or a viewer: they're emailed a link to join.",
+      "Change a member's role between admin and viewer.",
+      "Copy a pending invite's link, or remove a member or an invite."
+    ],
+    "tips": [
+      "Admins create and change interviews, invite candidates and top up. Viewers see interviews and results and share reports, but change nothing.",
+      "Removing a member whose card pays for automatic top-ups stops those top-ups."
+    ]
+  },
+  "actions": {
+    "title": "Action log",
+    "text": "Everything the company's members did, newest first: what they did and to what, who did it, when, and whether the assistant, an AI app, the API or an ATS did it for them. Only the owner sees it.",
+    "actions": [
+      "Show one member's actions, or one kind: interviews, candidates, team, company, billing or integrations.",
+      "Show the actions between two days."
+    ],
+    "tips": [
+      "Actions are kept for 12 months.",
+      "People aren't kept in the log: a deleted candidate shows as such, and a member who left as a former member.",
+      "A member's views of one candidate's results show once a day, at the latest view."
+    ]
+  },
+  "integrations": {
+    "title": "Integrations",
+    "text": "Connect prepza to the tools your team already uses. Each integration opens its own page with setup steps.",
+    "actions": [
+      "Slack: get your company's notifications in a channel.",
+      "ATS (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): candidates you move to a stage get the interview, and their results go back.",
+      "API: keys and web hooks to connect your own platform.",
+      "AI apps: use prepza from Claude, ChatGPT and other AI apps."
+    ],
+    "tips": [
+      "Everyone in the company sees the integrations; owners and admins change them."
+    ]
+  },
+  "ats": {
+    "title": "ATS integration",
+    "text": "Link a job in your ATS to an interview: candidates you move into a chosen stage get the interview, and their results come back as a comment on their profile.",
+    "actions": [
+      "Connect your ATS by following its instructions.",
+      "Link a job: choose the job, its stage and an interview, or make a new interview from the job's text.",
+      "Invite again candidates who weren't invited, for example when credits ran out.",
+      "Unlink a job, or disconnect the ATS."
+    ],
+    "tips": [
+      "Add a stage just for prepza, like “prepza skills test”, so it never mixes with your other tools.",
+      "prepza never moves or rejects anyone in your ATS."
+    ]
+  },
+  "slack": {
+    "title": "Slack",
+    "text": "Your company's notifications in a Slack channel, as they happen.",
+    "actions": [
+      "Add prepza to Slack and pick the channel, for example #hiring.",
+      "Choose which notifications go there: a candidate finishing, an invite that wasn't delivered, an interview being ready and more.",
+      "Disconnect to stop them and remove prepza's app from your Slack."
+    ],
+    "tips": [
+      "prepza can only post to that channel; it can't read your Slack.",
+      "Everyone still sees every notification in the bell."
+    ]
+  },
+  "api": {
+    "title": "API",
+    "text": "Connect your own platform, such as your careers site, to prepza.",
+    "actions": [
+      "Create an API key and tick only what it needs: reading or creating interviews; reading, inviting, changing or removing candidates; reading your credits; or use with AI agents (MCP). It acts as you.",
+      "Add a web hook: prepza tells your HTTPS address, signed, when a candidate starts, finishes (with their results), isn't reached, expires or is removed, and when an interview is ready.",
+      "Send a web hook a test event, and see what each send got in its delivery log.",
+      "Delete the keys and web hooks you no longer use.",
+      "Open the developer docs for every endpoint and event, and the SDK."
+    ],
+    "tips": [
+      "A new key and a web hook's secret show only once: copy them right away.",
+      "Choose an expiry for each key: a leaked key that never expires stays usable.",
+      "You can untick a key's permissions later, but never add one: for more, make a new key."
+    ]
+  },
+  "aiApps": {
+    "title": "AI apps",
+    "text": "Use prepza from your AI chat: ask Claude or ChatGPT about your interviews and candidates, or to make changes for you.",
+    "actions": [
+      "Copy the server address and add it to Claude, Claude Code or ChatGPT, following the steps; the developer docs cover other apps and your own agents.",
+      "Allow the app on the prepza page that opens.",
+      "Disconnect an app you no longer use."
+    ],
+    "tips": [
+      "An app acts as you, in every company you're in. Most apps ask you before they change anything.",
+      "It can't see your password or API keys, and can't delete your account or a company."
+    ]
+  },
+  "referrals": {
+    "title": "Referrals",
+    "text": "Invite other companies to prepza with this company's link, and you both earn credits.",
+    "actions": [
+      "Copy or share your referral link.",
+      "See every reward this company has received."
+    ],
+    "tips": [
+      "You both get credits when the company you invited makes its first top-up, of any amount.",
+      "Credits go to this company and never expire."
+    ]
+  },
+  "brand": {
+    "title": "Brand",
+    "text": "Your logo and colors on your candidates' invitation, interview and finished page.",
+    "actions": [
+      "Set or change the logo.",
+      "Pick the font and how round the cards and buttons are.",
+      "Pick the colors of each group, and see them in the preview.",
+      "Save them, or go back to prepza's colors."
+    ],
+    "tips": [
+      "Colors whose text would be hard to read can't be saved, so every candidate can read the questions.",
+      "Members trying an interview see it in your colors too."
+    ]
+  },
+  "billing": {
+    "title": "Billing",
+    "text": "Where this company's credits came from and where they went.",
+    "actions": [
+      "Top up, or set up automatic top-ups.",
+      "See the candidates whose credits are reserved.",
+      "Open the invoice of any top-up."
+    ],
+    "tips": [
+      "A candidate's credits are reserved when they're invited, charged once they answer, and given back if they don't.",
+      "Only owners and admins see this page."
+    ]
+  },
+  "topUp": {
+    "title": "Top up",
+    "text": "Buy credits for any company you belong to as an owner or admin.",
+    "actions": [
+      "Pick a company and a top-up: larger ones cost less per candidate.",
+      "Pay in Paddle's checkout; the credits arrive within seconds.",
+      "Open pricing to compare the top-ups."
+    ],
+    "tips": [
+      "A candidate costs 500 credits: reserved when they're invited, charged once they answer, and given back if they don't.",
+      "Credits never expire. Each top-up's invoice is on the company's billing tab."
+    ]
+  },
+  "settings": {
+    "title": "Settings",
+    "text": "Your own account: the language prepza speaks to you, the emails you get, and your data.",
+    "actions": [
+      "Choose the language of the site, the help chat and your emails.",
+      "Choose which optional emails you get; service emails, such as invites, reports and billing problems, always go out.",
+      "Download everything prepza holds about you, or delete your account."
+    ],
+    "tips": [
+      "Deleting your account deletes the companies only you are in. A company others have joined needs another owner first."
+    ]
+  },
+  "join": {
+    "title": "Company invite",
+    "text": "You were invited to join a company's team on prepza, to work on its interviews and candidates.",
+    "actions": [
+      "Sign in with the email the invitation was sent to.",
+      "Join the company: it then appears in your companies.",
+      "Open the company if you've already joined it."
+    ],
+    "tips": [
+      "Signed in with another email? Sign out and sign in with the invited one; the invite only works for it.",
+      "Your role, admin or viewer, is the one the person who invited you chose."
+    ]
+  },
+  "connect": {
+    "title": "Connect an AI app",
+    "text": "An AI app asks to use your prepza account. Here you choose whether it may.",
+    "actions": [
+      "Sign in, if you aren't yet, to see which app is asking.",
+      "Read what the app can and can't do with your account.",
+      "Allow the app, or deny it; either way you go back to the app."
+    ],
+    "tips": [
+      "When prepza doesn't know the app, allow it only if you started connecting it yourself.",
+      "Disconnect an app any time in a company's Integrations, under AI apps.",
+      "A link that has expired or was already used no longer works: start connecting again from your AI app."
+    ]
+  },
+  "news": {
+    "title": "News",
+    "text": "What's new at prepza: new features, improvements and updates, newest first.",
+    "actions": [
+      "Scroll down to read older news.",
+      "Follow the news in your feed reader with the RSS link at the top."
+    ],
+    "tips": [
+      "News shows in your notifications; turn on product updates in your settings to get the major ones by email too."
+    ]
+  },
+  "practice": {
+    "title": "Free practice",
+    "text": "Free timed practice interviews for common roles, for anyone preparing for a job interview.",
+    "actions": [
+      "Search by role or topic, and filter by level and language.",
+      "Open a practice interview to see its topics and start it."
+    ],
+    "tips": [
+      "Until you choose languages, the list shows your site language and English.",
+      "Practice is private: no company sees your results."
+    ]
+  },
+  "practiceTest": {
+    "title": "Practice interview",
+    "text": "One free practice interview: its level, language, length and the topics it covers.",
+    "actions": [
+      "Start a practice round; sign in first if you aren't yet.",
+      "See how far your latest round got on each topic.",
+      "Open your past rounds with the history button beside “start practice”.",
+      "Hiring for this role? Create an interview from it for your own candidates."
+    ],
+    "tips": [
+      "Each round is timed, like a real interview; once done, you see your grade and every right answer.",
+      "Practise as often as you like: it's free."
+    ]
+  },
+  "practiceHistory": {
+    "title": "Your rounds",
+    "text": "Every round you've taken of this practice interview, newest first, with its progress and grade.",
+    "actions": [
+      "Open a round to see its results and every answer.",
+      "Practise again to start a new round."
+    ],
+    "tips": [
+      "Compare your grades over time to see where you're improving."
+    ]
+  },
+  "practiceRound": {
+    "title": "Practice results",
+    "text": "One practice round's results: your grade, each topic's score, and every question with its right answers and your picks; a \"select all that apply\" question also shows the points it earned.",
+    "actions": [
+      "Read each question, its right answers and what you picked.",
+      "Rate a question, or report it if its answer is wrong; reported questions get checked and fixed.",
+      "Continue a round you haven't finished.",
+      "Practise again, or open your past rounds."
+    ],
+    "tips": [
+      "Whatever you picked when a question's time runs out still counts; a question left with nothing picked, or never reached, counts as wrong.",
+      "Hiring for this role? Create an interview from it for your own candidates."
+    ]
+  },
+  "pricing": {
+    "title": "Pricing",
+    "text": "What prepza costs: generating interviews is free, and you pay per candidate who answers, with no subscription.",
+    "actions": [
+      "See today's price per candidate, and the lower prices for larger top-ups.",
+      "See how many first candidates are free.",
+      "See the credits you earn by inviting another company.",
+      "Top up a company's credits."
+    ],
+    "tips": [
+      "Credits never expire.",
+      "A candidate who doesn't answer any question costs nothing."
+    ]
+  },
+  "tests": {
+    "title": "Skills tests by role",
+    "text": "Ready-made timed skills tests for common roles, to use as they are or as a start.",
+    "actions": [
+      "Search by role or topic, and filter by level and language.",
+      "Open a test to see what it checks, with sample questions."
+    ],
+    "tips": [
+      "Until you choose languages, the list shows your site language and English.",
+      "For a closer fit, create a test from your own job description on the home page."
+    ]
+  },
+  "test": {
+    "title": "Role skills test",
+    "text": "A ready-made timed skills test for one role: what it checks, sample questions, and how to use it with your candidates.",
+    "actions": [
+      "See the topics and subtopics it tests.",
+      "Read sample questions with their right answers.",
+      "Create a test for your candidates from your job description.",
+      "Practise it yourself for free, as a candidate would.",
+      "Read answers to the questions companies ask before testing candidates."
+    ],
+    "tips": [
+      "Your candidates get their own random questions, never the samples shown here."
+    ]
+  },
+  "aiInterviews": {
+    "title": "AI interviews",
+    "text": "A guide to the kinds of AI interview tools, how prepza's approach works, and the compliance basics.",
+    "actions": [
+      "Compare chatbot, video and generated-test interview tools.",
+      "Read, step by step, how prepza makes and marks an interview, and what it never does.",
+      "Read the basics of the EU AI Act, the GDPR and US rules for AI in hiring.",
+      "Create a test for your candidates from the card at the end."
+    ],
+    "tips": [
+      "It's a summary, not legal advice: check with your own counsel."
+    ]
+  },
+  "preEmploymentTesting": {
+    "title": "Pre-employment testing",
+    "text": "A plain guide for hiring teams to pre-employment tests: the types, when they help, fairness and the law, and choosing a tool.",
+    "actions": [
+      "Read which types of tests exist and when each one helps.",
+      "Read the fairness and legal basics.",
+      "See what to look for in a testing tool, and how prepza does it.",
+      "Create a test for your candidates from the card at the end."
+    ],
+    "tips": [
+      "It's a summary, not legal advice: check with your own counsel."
+    ]
+  },
+  "compare": {
+    "title": "Compare prepza",
+    "text": "Sourced comparisons of prepza with other pre-employment testing tools: how tests are made, what they cost and when each fits better.",
+    "actions": [
+      "Open a comparison to read it."
+    ],
+    "tips": [
+      "Each comparison shows when it was last updated."
+    ]
+  },
+  "comparison": {
+    "title": "Comparison",
+    "text": "How prepza compares with other tools on one question: how tests are made, what they cost and when each one fits better.",
+    "actions": [
+      "Read the comparison and follow its links to the sources.",
+      "Create a test for your candidates from the card at the end.",
+      "Go back to every comparison with the link above the title."
+    ],
+    "tips": [
+      "Prices and features change: the date under the title shows when the page was last updated."
+    ]
+  },
+  "guides": {
+    "title": "Guides for hiring",
+    "text": "Practical guides for hiring managers: screening applicants, skills tests, and using AI in hiring fairly and legally.",
+    "actions": [
+      "Open a guide to read it."
+    ],
+    "tips": [
+      "Each guide shows when it was last updated."
+    ]
+  },
+  "guide": {
+    "title": "Guide",
+    "text": "A practical guide for hiring managers on one topic.",
+    "actions": [
+      "Read the guide and follow its links to sources and related pages.",
+      "Create a test for your candidates from the card at the end.",
+      "Go back to every guide with the link above the title."
+    ],
+    "tips": [
+      "Legal topics are summaries, not legal advice: check with your own counsel."
+    ]
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "text": "Answers to common questions about prepza: interviews, candidates, prices and credits, results, integrations, languages and your data.",
+    "actions": [
+      "Click a question to open its answer."
+    ],
+    "tips": [
+      "Didn't find your answer? Ask the AI assistant at the top of the page, or write to us from the contact page.",
+      "Prices in the answers are always today's."
+    ]
+  },
+  "about": {
+    "title": "About us",
+    "text": "Who makes prepza and why: interviews made from a job description that any team can afford, and free practice for anyone.",
+    "actions": [
+      "Read why prepza exists and how it approaches hiring.",
+      "Read a word from the founder, and open his LinkedIn profile."
+    ],
+    "tips": [
+      "To write to the team, use the contact page."
+    ]
+  },
+  "contact": {
+    "title": "Contact us",
+    "text": "Write to the prepza team with a question, an idea, a partnership offer or something that isn't working.",
+    "actions": [
+      "Fill in your name, your email and your message, then send it.",
+      "Paste the ID of the company, interview, candidate or account it's about, so we find it at once."
+    ],
+    "tips": [
+      "The “copy id” link is under a company's, an interview's or a candidate's name; your account's ID is in your account menu.",
+      "We reply to the email you give."
+    ]
+  },
+  "apiDocs": {
+    "title": "Developer docs",
+    "text": "Everything you need to connect your own platform or AI agent to prepza, read from the API itself so it always matches it.",
+    "actions": [
+      "API: how to sign in, the base URL and every endpoint with its parameters, body, response and errors.",
+      "Web hooks: the events prepza sends to your address and what each one carries.",
+      "SDK: how to embed the interview on your own site.",
+      "MCP: how to connect an AI app or your own agent, and the tools it gets.",
+      "Objects: every object the API returns, field by field."
+    ],
+    "tips": [
+      "Create API keys and web hooks in a company's Integrations, under API.",
+      "The docs are in English only."
+    ]
+  },
+  "accessibility": {
+    "title": "Accessibility",
+    "text": "How prepza works for people with disabilities, what still falls short, and how to tell us.",
+    "actions": [
+      "See what prepza does for accessibility, such as themes, phone layouts and keyboard use.",
+      "See what falls short, such as timed questions.",
+      "Write to us by email if something is hard to use or you need it in another form."
+    ],
+    "tips": [
+      "Taking a company's interview and need more time? Ask the company for extra time before you start; you don't have to say why."
+    ]
+  },
+  "documents": {
+    "title": "Legal docs",
+    "text": "Documents for companies that assess candidates with prepza: instructions, templates and the data processing agreement.",
+    "actions": [
+      "Download the instructions for companies: what a grade means, human review, passing grades and extra time.",
+      "Download editable notice templates to send candidates before you invite them.",
+      "Download the DPIA template, with prepza's part filled in, to complete.",
+      "Download the data processing agreement, or read it online."
+    ],
+    "tips": [
+      "The documents are in English only."
+    ]
+  },
+  "terms": {
+    "title": "Terms",
+    "text": "The terms for using prepza: accounts, companies, credits and payments, tests for candidates, acceptable use and liability.",
+    "actions": [
+      "Read the version in force, with the day it applies from.",
+      "Open an earlier or upcoming version from the list of versions at the end.",
+      "Switch to the English text when you read a translation."
+    ],
+    "tips": [
+      "Only the English text is binding."
+    ]
+  },
+  "privacy": {
+    "title": "Privacy",
+    "text": "How prepza collects, uses and protects the personal data of companies, their members and candidates, and the rights you have.",
+    "actions": [
+      "Read the version in force, with the day it applies from.",
+      "Open an earlier or upcoming version from the list of versions at the end.",
+      "Switch to the English text when you read a translation."
+    ],
+    "tips": [
+      "Only the English text is binding.",
+      "To get a copy of your data or delete your account, open your settings."
+    ]
+  },
+  "dpa": {
+    "title": "Data processing agreement",
+    "text": "The agreement between prepza and companies that test candidates: what prepza processes on your behalf and how.",
+    "actions": [
+      "Read the version in force, with the day it applies from.",
+      "Open an earlier or upcoming version from the list of versions at the end.",
+      "Switch to the English text when you read a translation."
+    ],
+    "tips": [
+      "It's part of the terms.",
+      "Only the English text is binding; a PDF copy is on the legal docs page."
+    ]
+  },
+  "unsubscribe": {
+    "title": "Unsubscribe",
+    "text": "Stop one kind of email from prepza, as named on the page.",
+    "actions": [
+      "Read which emails the link stops.",
+      "Confirm to unsubscribe; opening the link alone changes nothing.",
+      "Open your email settings afterwards to change other emails."
+    ],
+    "tips": [
+      "Service emails, such as team invites, reports and billing problems, still go out."
+    ]
+  }
+}

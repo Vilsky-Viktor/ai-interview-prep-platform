@@ -60,7 +60,7 @@ FAQ = [
     {
         "key": "scorecards",
         "question": "Bảng điểm cho thấy gì?",
-        "answer": "Mọi câu trả lời, đúng hay sai và mất bao lâu. Điểm hiện màu xanh hoặc đỏ so với điểm đạt bạn đặt cho buổi phỏng vấn. Bảng điểm cũng đánh dấu các câu trả lời quá nhanh để kịp đọc câu hỏi, những lần ứng viên rời trang và các lần định sao chép.",
+        "answer": 'Mọi câu trả lời, đúng hay sai và mất bao lâu. Điểm là tỷ lệ phần trăm điểm đạt được: mỗi câu hỏi có một điểm, câu "chọn tất cả đáp án đúng" được một phần điểm cho mỗi đáp án đúng đã chọn, và không được điểm nào nếu chọn một đáp án sai. Điểm hiện màu xanh hoặc đỏ so với điểm đạt bạn đặt cho buổi phỏng vấn. Bảng điểm cũng đánh dấu các câu trả lời quá nhanh để kịp đọc câu hỏi, những lần ứng viên rời trang và các lần định sao chép.',
     },
     {
         "key": "reports",
@@ -68,14 +68,19 @@ FAQ = [
         "answer": "Có. Tải xuống báo cáo PDF cho một ứng viên hoặc cho tất cả ứng viên của một buổi phỏng vấn, gửi qua email thẳng từ prepza, hoặc gửi bản tóm tắt ngắn qua WhatsApp, Telegram, Viber hay LINE.",
     },
     {
+        "key": "action_log",
+        "question": "Tôi có thể xem ai đã làm gì trong công ty mình không?",
+        "answer": "Có, nếu bạn là chủ sở hữu công ty. Tab Nhật ký thao tác của công ty liệt kê mọi việc các thành viên đã làm, mới nhất trước: mời hoặc xóa ứng viên, xem kết quả, thay đổi buổi phỏng vấn, nhóm, thanh toán và tích hợp, kèm theo ai đã làm, khi nào, và trợ lý, một ứng dụng AI hay API có làm thay họ không. Bạn có thể lọc theo thành viên, loại thao tác và ngày. Các thao tác được lưu trong 12 tháng.",
+    },
+    {
         "key": "integrations",
         "question": "prepza có hoạt động với ATS hoặc các công cụ khác của tôi không?",
-        "answer": "Có, không mất thêm phí. Kết nối Workable, Greenhouse, Teamtailor, Recruitee hoặc Breezy HR trong tab Tích hợp của công ty bạn: ứng viên bạn chuyển sang một giai đoạn sẽ nhận buổi phỏng vấn, và kết quả được gửi lại ATS. Slack có thể đăng thông báo của công ty vào một kênh, còn API cho phép nền tảng của riêng bạn tạo buổi phỏng vấn, mời và quản lý ứng viên, và nhận kết quả của họ; xem Tài liệu API.",
+        "answer": "Có, không mất thêm phí. Kết nối Workable, Greenhouse, Teamtailor, Recruitee hoặc Breezy HR trong tab Tích hợp của công ty bạn: ứng viên bạn chuyển sang một giai đoạn sẽ nhận buổi phỏng vấn, và kết quả được gửi lại ATS. Slack có thể đăng thông báo của công ty vào một kênh, còn API cho phép nền tảng của riêng bạn tạo buổi phỏng vấn, mời và quản lý ứng viên, và nhận kết quả của họ, mỗi khóa API chỉ làm được những gì bạn đánh dấu cho nó; xem Tài liệu API.",
     },
     {
         "key": "ai_apps",
-        "question": "Tôi có thể dùng prepza từ Claude hoặc ChatGPT không?",
-        "answer": "Có. Thêm prepza vào Claude hoặc ChatGPT dưới dạng trình kết nối (các bước có trong tab Tích hợp của công ty bạn) rồi cho phép trên prepza. Sau đó, ứng dụng sẽ thay mặt bạn, với quyền của bạn, làm việc với các công ty, buổi phỏng vấn và kết quả của ứng viên; hầu hết ứng dụng sẽ hỏi bạn trước khi thay đổi bất cứ điều gì. Tài khoản hoặc công ty chỉ có thể xóa trong prepza. Dữ liệu ứng dụng đọc được sẽ đến nhà cung cấp của ứng dụng đó theo điều khoản của ứng dụng. Bạn có thể ngắt kết nối bất cứ lúc nào trong cùng tab.",
+        "question": "Tôi có thể dùng prepza từ Claude, ChatGPT hoặc agent AI của riêng tôi không?",
+        "answer": "Có. Thêm prepza vào Claude hoặc ChatGPT dưới dạng trình kết nối (các bước có trong tab Tích hợp của công ty bạn) rồi cho phép trên prepza. Sau đó, ứng dụng sẽ thay mặt bạn, với quyền của bạn, làm việc với các công ty, buổi phỏng vấn và kết quả của ứng viên; hầu hết ứng dụng sẽ hỏi bạn trước khi thay đổi bất cứ điều gì. Tài khoản hoặc công ty chỉ có thể xóa trong prepza. Dữ liệu ứng dụng đọc được sẽ đến nhà cung cấp của ứng dụng đó theo điều khoản của ứng dụng. Bạn có thể ngắt kết nối bất cứ lúc nào trong cùng tab. Các ứng dụng AI khác và agent do bạn tự xây dựng cũng kết nối được: tab MCP trong tài liệu cho nhà phát triển có các bước và agent mẫu, và agent chạy trên máy chủ có thể đăng nhập bằng khóa API có quyền dành cho agent AI.",
     },
     {
         "key": "candidates",
@@ -105,7 +110,7 @@ FAQ = [
     {
         "key": "delete",
         "question": "Tôi có thể xóa tài khoản không?",
-        "answer": "Có, trong Cài đặt. Tài khoản và dữ liệu của bạn bị xóa, và trước đó bạn có thể tải xuống bản sao dữ liệu.",
+        "answer": "Có, trong Cài đặt. Tài khoản và dữ liệu của bạn bị xóa, và trước đó bạn có thể tải xuống bản sao dữ liệu. Tin tức của prepza hiển thị trong thông báo của bạn, biểu tượng chuông ở trên cùng; tin quan trọng cũng được gửi qua email dưới dạng cập nhật sản phẩm, chỉ khi cài đặt đó đang bật.",
     },
     {
         "key": "report",

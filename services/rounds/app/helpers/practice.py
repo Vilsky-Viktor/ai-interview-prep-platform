@@ -1,5 +1,6 @@
-import random
 from itertools import groupby
+
+from prepza_common.multi_answer import draw
 
 from app.constants.practice import PRACTICE_TOPIC_QUESTIONS
 from app.constants.rounds import RoundStatus
@@ -14,16 +15,15 @@ from app.schemas.practice import (
 )
 
 
-def practice_topics(content: dict) -> list[TopicQuestions]:
-    """A round's questions: up to PRACTICE_TOPIC_QUESTIONS from each topic, fresh at random."""
+def practice_topics(content: dict, share: float) -> list[TopicQuestions]:
+    """A round's questions: up to PRACTICE_TOPIC_QUESTIONS from each topic, fresh at random, with
+    `share` of multi-answer ones (prepza_common.multi_answer.draw)."""
     return [
         TopicQuestions(
             id=topic["id"],
             preparation_id=content["id"],
             title=topic["title"],
-            questions=random.sample(
-                topic["questions"], min(PRACTICE_TOPIC_QUESTIONS, len(topic["questions"]))
-            ),
+            questions=draw(topic["questions"], PRACTICE_TOPIC_QUESTIONS, share),
         )
         for topic in content["topics"]
     ]
@@ -57,9 +57,7 @@ def round_out(rows: list, title: str | None) -> PracticeRoundOut:
         title=title,
         finished=finished,
         grade=grade,
-        answered=sum(
-            1 for row in rows for answer in row.answers if answer.option_index is not None
-        ),
+        answered=sum(1 for row in rows for answer in row.answers if not answer.timed_out),
         total=sum(len(row.questions) for row in rows),
         started_at=rows[0].started_at,
         open_session_id=open_row.id if open_row else None,

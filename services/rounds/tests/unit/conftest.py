@@ -1,6 +1,21 @@
+import base64
+import json
+
 import pytest
+from prepza_common import memory_cache, pubsub
 
 from app.storage import session_expiry
+from tests.unit.fake_redis import FakeRedis
+
+# The modules that reach Redis, which unit tests replace.
+REDIS_USERS = [
+    "app.routers.help",
+    "app.routers.practice",
+    "app.routers.sessions",
+    "app.routers.superadmin",
+    "app.services.help",
+    "app.storage.signals",
+]
 
 
 @pytest.fixture(autouse=True)
@@ -15,26 +30,29 @@ def nothing_expired(monkeypatch):
 
 
 @pytest.fixture(autouse=True)
-def no_rate_limits(monkeypatch):
-    """Rate limits count in Redis, which unit tests don't have; a test that checks them
-    replaces `hit` itself."""
+def redis(monkeypatch):
+    """Redis in memory: the limits count in it, and a test edits a limit in `limits`. Each test
+    reads the limits afresh, not a value an earlier test cached."""
+    fake = FakeRedis()
+    monkeypatch.setattr(memory_cache, "_entries", {})
 
-    async def allowed(redis, key, limit, window):
-        return None
+    for module in REDIS_USERS:
+        monkeypatch.setattr(f"{module}.get_redis", lambda: fake)
 
-    monkeypatch.setattr("app.routers.help.hit", allowed)
-    monkeypatch.setattr("app.routers.practice.hit", allowed)
+    return fake
 
 
 @pytest.fixture(autouse=True)
-def help_spending(monkeypatch):
-    """The help chat's token budget, without Redis: every amount spent, in order."""
-    spent = []
+def published(monkeypatch):
+    """The events published (AI calls and limit hits), as (type, data); nothing reaches
+    Pub/Sub."""
+    sent = []
 
-    async def spend(redis, key, amount, limit, window, message=None):
-        spent.append((key, amount))
+    async def publish_batch(messages, timeout=None):
+        for message in messages:
+            data = json.loads(base64.b64decode(message["data"]))
+            sent.append((message["attributes"]["type"], data))
 
-    monkeypatch.setattr("app.routers.help.spend", spend)
-    monkeypatch.setattr("app.services.help.add_spent", spend)
+    monkeypatch.setattr(pubsub, "publish_batch", publish_batch)
 
-    return spent
+    return sent

@@ -1,5 +1,7 @@
 import random
 
+from prepza_common.multi_answer import is_multi
+
 from app.schemas.rounds import NextQuestion
 
 
@@ -14,6 +16,7 @@ def next_question(row) -> NextQuestion | None:
                 number=number,
                 text=question["text"],
                 options=[option["answer"] for option in question["options"]],
+                multi=is_multi(question["options"]),
             )
 
     return None
@@ -23,8 +26,9 @@ def find_question(row, question_id: str) -> dict | None:
     return next((q for q in row.questions if q["id"] == question_id), None)
 
 
-def correct_option_index(question: dict) -> int:
-    return next(i for i, option in enumerate(question["options"]) if option["correct"])
+def correct_indexes(question: dict) -> list[int]:
+    """Every right option's place; one for a single-answer question."""
+    return [i for i, option in enumerate(question["options"]) if option["correct"]]
 
 
 def shuffled(questions: list[dict]) -> list[dict]:

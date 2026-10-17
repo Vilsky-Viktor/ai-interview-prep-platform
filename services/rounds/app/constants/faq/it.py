@@ -60,7 +60,7 @@ FAQ = [
     {
         "key": "scorecards",
         "question": "Cosa mostrano le schede di valutazione?",
-        "answer": "Ogni risposta, se era giusta e quanto tempo ha richiesto. I punteggi compaiono in verde o in rosso rispetto alla soglia di superamento che hai impostato per il colloquio. Le schede segnalano anche risposte troppo veloci per aver letto la domanda, le uscite dalla pagina e i tentativi di copia.",
+        "answer": "Ogni risposta, se era giusta e quanto tempo ha richiesto. Il punteggio è la percentuale di punti ottenuti: ogni domanda vale un punto, e una domanda in cui selezionare tutte le risposte corrette ne dà una parte per ogni opzione corretta selezionata, e niente se ne è selezionata una sbagliata. I punteggi compaiono in verde o in rosso rispetto alla soglia di superamento che hai impostato per il colloquio. Le schede segnalano anche risposte troppo veloci per aver letto la domanda, le uscite dalla pagina e i tentativi di copia.",
     },
     {
         "key": "reports",
@@ -68,14 +68,19 @@ FAQ = [
         "answer": "Sì. Scarica un report PDF per un candidato o per tutti i candidati di un colloquio, invialo via email direttamente da prepza, oppure manda un breve riepilogo su WhatsApp, Telegram, Viber o LINE.",
     },
     {
+        "key": "action_log",
+        "question": "Posso vedere chi ha fatto cosa nella mia azienda?",
+        "answer": "Sì, se sei il proprietario dell'azienda. La sua scheda Registro attività elenca tutto ciò che hanno fatto i membri, dal più recente: invitare o rimuovere candidati, vedere i risultati, modificare colloqui, team, fatturazione e integrazioni, con chi l'ha fatto, quando e se l'ha fatto per suo conto l'assistente, un'app di IA o l'API. Puoi filtrarlo per membro, tipo di azione e date. Le attività vengono conservate per 12 mesi.",
+    },
+    {
         "key": "integrations",
         "question": "prepza funziona con il mio ATS o con altri strumenti?",
-        "answer": "Sì, senza costi aggiuntivi. Collega Workable, Greenhouse, Teamtailor, Recruitee o Breezy HR nella scheda Integrazioni della tua azienda: i candidati che sposti in una fase ricevono il colloquio, e i loro risultati tornano nell'ATS. Slack può pubblicare le notifiche della tua azienda in un canale, e l'API permette alla tua piattaforma di creare colloqui, invitare e gestire candidati e ricevere i loro risultati; consulta la Documentazione API.",
+        "answer": "Sì, senza costi aggiuntivi. Collega Workable, Greenhouse, Teamtailor, Recruitee o Breezy HR nella scheda Integrazioni della tua azienda: i candidati che sposti in una fase ricevono il colloquio, e i loro risultati tornano nell'ATS. Slack può pubblicare le notifiche della tua azienda in un canale, e l'API permette alla tua piattaforma di creare colloqui, invitare e gestire candidati e ricevere i loro risultati, con ogni chiave API limitata a ciò che spunti per lei; consulta la Documentazione API.",
     },
     {
         "key": "ai_apps",
-        "question": "Posso usare prepza da Claude o ChatGPT?",
-        "answer": "Sì. Aggiungi prepza a Claude o ChatGPT come connettore (i passaggi sono nella scheda Integrazioni della tua azienda) e consenti l'accesso su prepza. L'app lavora quindi con le tue aziende, i colloqui e i risultati dei candidati a tuo nome, con i tuoi permessi; la maggior parte delle app ti chiede conferma prima di modificare qualcosa. L'account o un'azienda si eliminano solo in prepza. Ciò che l'app legge arriva al suo fornitore, secondo i termini di quell'app. Puoi scollegarla in qualsiasi momento nella stessa scheda.",
+        "question": "Posso usare prepza da Claude, ChatGPT o da un mio agente IA?",
+        "answer": "Sì. Aggiungi prepza a Claude o ChatGPT come connettore (i passaggi sono nella scheda Integrazioni della tua azienda) e consenti l'accesso su prepza. L'app lavora quindi con le tue aziende, i colloqui e i risultati dei candidati a tuo nome, con i tuoi permessi; la maggior parte delle app ti chiede conferma prima di modificare qualcosa. L'account o un'azienda si eliminano solo in prepza. Ciò che l'app legge arriva al suo fornitore, secondo i termini di quell'app. Puoi scollegarla in qualsiasi momento nella stessa scheda. Si collegano anche altre app di IA e gli agenti che crei tu: la scheda MCP della documentazione per sviluppatori ha i passaggi e agenti di esempio, e un agente su un server può accedere con una chiave API che ha il permesso per gli agenti IA.",
     },
     {
         "key": "candidates",
@@ -105,7 +110,7 @@ FAQ = [
     {
         "key": "delete",
         "question": "Posso eliminare il mio account?",
-        "answer": "Sì, nelle Impostazioni. Il tuo account e i tuoi dati vengono eliminati, e prima puoi scaricarne una copia.",
+        "answer": "Sì, nelle Impostazioni. Il tuo account e i tuoi dati vengono eliminati, e prima puoi scaricarne una copia. Le novità di prepza compaiono nelle tue notifiche, la campanella in alto; quelle più importanti arrivano anche via email come novità sul prodotto, solo finché quell'impostazione è attiva.",
     },
     {
         "key": "report",

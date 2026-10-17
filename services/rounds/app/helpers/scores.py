@@ -1,4 +1,21 @@
-from app.constants.rounds import RoundStatus
+from app.constants.rounds import CORRECT_SCORE, RoundStatus
+
+
+def answer_score(right: list[int], picked: list[int]) -> int:
+    """An answer's points out of CORRECT_SCORE: none with any wrong option picked, else the share
+    of the right options picked (2 of 3: 67). A single-answer question scores all or nothing."""
+    if not picked or any(pick not in right for pick in picked):
+        return 0
+
+    return round(CORRECT_SCORE * len(picked) / len(right))
+
+
+def picked_options(answer) -> list[int]:
+    """The options an answer picked: its ticks, its one pick, or none when its time ran out."""
+    if answer.picks is not None:
+        return list(answer.picks)
+
+    return [] if answer.option_index is None else [answer.option_index]
 
 
 def interview_finished(statuses: list[str]) -> bool:
@@ -29,7 +46,8 @@ def final_score(scores: list[int], total: int) -> int:
 
 def scored(row) -> dict:
     """The session.scored event of a finished section: its score, and for each question the
-    candidate saw, whether they got it right or ran out of time."""
+    candidate saw, whether they got it all right, the credit they earned (0 to 1: a share for a
+    multi-answer one partly right) or ran out of time."""
     texts = {question["id"]: question["text"] for question in row.questions}
 
     return {
@@ -39,7 +57,8 @@ def scored(row) -> dict:
                 "question_id": str(answer.question_id),
                 "question_text": texts.get(str(answer.question_id), ""),
                 "correct": answer.correct,
-                "timed_out": answer.option_index is None,
+                "credit": answer.score / CORRECT_SCORE,
+                "timed_out": answer.timed_out,
             }
             for answer in row.answers
         ],

@@ -39,8 +39,9 @@ def database():
 
 @pytest.fixture
 def run():
-    """Runs a coroutine on a fresh event loop; the pool is emptied after, as its connections
-    belong to that loop."""
+    """Runs a coroutine on a fresh event loop; the pool and the Redis client are dropped after,
+    as their connections belong to that loop."""
+    from app.integrations.redis import get_redis
     from app.storage.db import engine
 
     def run(coroutine):
@@ -49,7 +50,17 @@ def run():
                 return await coroutine
             finally:
                 await engine.dispose()
+                get_redis.cache_clear()
 
         return asyncio.run(wrapped())
 
     return run
+
+
+@pytest.fixture(autouse=True)
+def fresh_limits(monkeypatch):
+    """The limits are read from Redis (database 15, see scripts/integration.sh) afresh in each
+    test, not as an earlier test cached them."""
+    from prepza_common import memory_cache
+
+    monkeypatch.setattr(memory_cache, "_entries", {})

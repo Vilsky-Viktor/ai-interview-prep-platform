@@ -4,7 +4,7 @@ from fastapi import APIRouter
 from prepza_common.auth import CurrentUser
 from prepza_common.rate_limit import hit
 
-from app.constants.integrity import SIGNALS_PER_MINUTE, SIGNALS_WINDOW_SECONDS, IntegritySignal
+from app.constants.integrity import IntegritySignal
 from app.constants.rounds import TIME_GRACE_SECONDS, RoundStatus
 from app.helpers.sessions import next_session_question
 from app.integrations.redis import get_redis
@@ -28,7 +28,7 @@ async def add_signal(session_id: UUID, body: SignalIn, user: CurrentUser) -> Non
     if row.status != RoundStatus.IN_PROGRESS or row.practice or row.preview:
         return
 
-    await hit(get_redis(), f"rate:signals:{row.id}", SIGNALS_PER_MINUTE, SIGNALS_WINDOW_SECONDS)
+    await hit(get_redis(), f"rate:signals:{row.id}", "SIGNALS_PER_MINUTE", user_id=user.uid)
 
     if body.kind == IntegritySignal.TAB_RETURN:
         if body.seconds is not None:

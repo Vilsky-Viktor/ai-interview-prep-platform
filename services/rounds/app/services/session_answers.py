@@ -4,7 +4,8 @@ from fastapi import HTTPException, status
 
 from app.constants.events import ANSWER_RECORDED
 from app.constants.rounds import CORRECT_SCORE, TIME_UP, RoundStatus
-from app.helpers.rounds import correct_option_index, find_question
+from app.helpers.rounds import correct_indexes, find_question
+from app.helpers.scores import answer_score, picked_options
 from app.helpers.sessions import answer_seconds, next_session_question
 from app.models.answers import Answer
 from app.models.sessions import Session
@@ -15,15 +16,20 @@ from app.storage import sessions
 
 
 def recorded(answer: Answer, question: dict) -> tuple[str, dict]:
-    """The event telling library which option was picked, for the question's statistics; it's
-    saved with the answer (see storage add_answer) and published right after."""
+    """The event telling library which options were picked and the credit earned, for the
+    question's statistics; it's saved with the answer (see storage add_answer) and published
+    right after. `option` (the first pick) stays while library may still read only it."""
+    options = [question["options"][index]["answer"] for index in picked_options(answer)]
+
     return (
         ANSWER_RECORDED,
         {
             "question_id": str(answer.question_id),
             "question_text": question["text"],
-            "option": question["options"][answer.option_index]["answer"],
+            "option": options[0],
+            "options": options,
             "correct": answer.correct,
+            "credit": answer.score / CORRECT_SCORE,
         },
     )
 
@@ -41,12 +47,23 @@ def checked_answer(row, body: AnswerCreate) -> tuple[Answer, dict]:
     if any(answer.question_id == body.question_id for answer in row.answers):
         raise HTTPException(status.HTTP_409_CONFLICT, "Question already answered")
 
-    correct = body.option_index == correct_option_index(question)
+    right = correct_indexes(question)
+    multi = len(right) > 1
+    picked = body.picked()
+
+    # A single-answer question takes one pick; a multi-answer one any ticks.
+    if not multi and len(picked) != 1:
+        raise HTTPException(
+            status.HTTP_422_UNPROCESSABLE_CONTENT, "Pick one option for this question."
+        )
+
+    score = answer_score(right, picked)
     answer = Answer(
         question_id=body.question_id,
-        option_index=body.option_index,
-        correct=correct,
-        score=CORRECT_SCORE if correct else 0,
+        option_index=None if multi else picked[0],
+        picks=picked if multi else None,
+        correct=score == CORRECT_SCORE,
+        score=score,
     )
 
     return answer, question
@@ -54,12 +71,12 @@ def checked_answer(row, body: AnswerCreate) -> tuple[Answer, dict]:
 
 async def submit_session_answer(row: Session, body: AnswerCreate) -> SessionAnswerResult:
     """Candidates see whether they were right only when the interview shares results. The same
-    pick sent again (it was saved, but its reply was lost on the way) is answered as before
+    pick (or the same ticks) sent again (it was saved, but its reply was lost on the way) is answered as before
     rather than refused, even once it finished the section, so the candidate doesn't think it
     was lost; a different pick for an answered question is still refused."""
     saved = next((item for item in row.answers if item.question_id == body.question_id), None)
 
-    if saved is not None and saved.option_index == body.option_index:
+    if saved is not None and picked_options(saved) == body.picked():
         return SessionAnswerResult(
             answer_id=saved.id, answered=len(row.answers), total=len(row.questions)
         )
@@ -67,10 +84,7 @@ async def submit_session_answer(row: Session, body: AnswerCreate) -> SessionAnsw
     if row.status != RoundStatus.IN_PROGRESS:
         raise HTTPException(status.HTTP_409_CONFLICT, "This section is finished")
 
-    if any(
-        answer.question_id == body.question_id and answer.option_index is None
-        for answer in row.answers
-    ):
+    if any(answer.question_id == body.question_id and answer.timed_out for answer in row.answers):
         raise HTTPException(status.HTTP_409_CONFLICT, TIME_UP)
 
     shown = next_session_question(row)

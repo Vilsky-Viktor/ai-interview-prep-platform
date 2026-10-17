@@ -66,7 +66,8 @@ def test_answer_records_the_seconds_since_the_question_was_shown(monkeypatch):
     saved = []
 
     async def fake_add(answer, event=None):
-        answer.id = uuid4()
+        # As saving fills in the column defaults.
+        answer.id, answer.timed_out = uuid4(), False
         saved.append(answer)
 
         return True

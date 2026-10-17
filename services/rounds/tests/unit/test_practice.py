@@ -4,6 +4,8 @@ from types import SimpleNamespace
 
 import pytest
 from prepza_common.auth import current_user
+from prepza_common.constants import RATE_LIMITED
+from prepza_common.limit_list import LIMITS
 from prepza_common.user import User
 
 from app.integrations import library
@@ -22,6 +24,7 @@ def content(questions_per_topic):
     return {
         "id": str(TEMPLATE_ID),
         "title": "Backend",
+        "level": "medium",
         "topics": [
             {
                 "id": str(uuid.uuid4()),
@@ -57,6 +60,8 @@ def section(status, answers=(), user_id="ann"):
                 id=uuid.uuid4(),
                 question_id=uuid.UUID(question_id),
                 option_index=0,
+                picks=None,
+                timed_out=False,
                 correct=True,
                 score=100,
                 seconds=20,
@@ -111,6 +116,35 @@ def test_a_round_takes_up_to_ten_fresh_questions_a_topic_and_only_the_first_coun
     client.post(f"/practice/{TEMPLATE_ID}")
 
     assert created["preview"] is True
+
+
+@pytest.mark.parametrize(("level", "edited", "seconds"), [("hard", None, 75), ("basic", 45, 45)])
+def test_a_rounds_questions_have_the_seconds_of_the_templates_level(
+    client, monkeypatch, redis, level, edited, seconds
+):
+    """As a company's new test of that level has them: as set in Controls, or the default."""
+    created = {}
+
+    if edited:
+        redis.limits[f"QUESTION_SECONDS_{level.upper()}"] = edited
+
+    async def fake_content(template_id):
+        return {**content(10), "level": level}
+
+    async def fake_create(user_id, round_id, topics, seconds, preview=False, practice=False):
+        created["seconds"] = seconds
+
+        return [SimpleNamespace(id=uuid.uuid4())]
+
+    async def fake_practiced(user_id, template_id):
+        return False
+
+    monkeypatch.setattr(library, "practice_content", fake_content)
+    monkeypatch.setattr(sessions, "create_many", fake_create)
+    monkeypatch.setattr(practice_sessions, "practiced", fake_practiced)
+
+    assert client.post(f"/practice/{TEMPLATE_ID}").status_code == 201
+    assert created["seconds"] == seconds
 
 
 def test_a_test_without_practice_questions_says_so(client, monkeypatch):
@@ -227,3 +261,37 @@ def test_anyone_sees_how_many_questions_a_round_has(client, monkeypatch):
 
     # Kept for a while: library isn't asked again.
     assert client.get(f"/practice/{template_id}/size").json() == {"questions": 14}
+
+
+@pytest.mark.parametrize("edited", [None, 3])
+def test_a_talent_starts_a_limited_number_of_rounds_an_hour(
+    client, monkeypatch, redis, published, edited
+):
+    """At the limit's edited value, or its default when it isn't edited."""
+    allowed = edited or LIMITS["PRACTICE_ROUNDS_PER_HOUR"].default
+
+    if edited:
+        redis.limits["PRACTICE_ROUNDS_PER_HOUR"] = edited
+
+    async def fake_content(template_id):
+        return content(10)
+
+    async def fake_create(user_id, round_id, topics, seconds, preview=False, practice=False):
+        return [SimpleNamespace(id=uuid.uuid4())]
+
+    async def fake_practiced(user_id, template_id):
+        return False
+
+    monkeypatch.setattr(library, "practice_content", fake_content)
+    monkeypatch.setattr(sessions, "create_many", fake_create)
+    monkeypatch.setattr(practice_sessions, "practiced", fake_practiced)
+
+    started = [client.post(f"/practice/{TEMPLATE_ID}").status_code for _ in range(allowed)]
+    refused = client.post(f"/practice/{TEMPLATE_ID}")
+
+    assert started == [201] * allowed
+    assert refused.status_code == 429
+    assert refused.json()["detail"] == RATE_LIMITED
+    assert [(data["limit"], data["user_id"]) for _, data in published] == [
+        ("PRACTICE_ROUNDS_PER_HOUR", "ann")
+    ]

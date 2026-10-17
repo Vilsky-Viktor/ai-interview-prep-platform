@@ -13,7 +13,7 @@ async def for_sets(set_ids: list[uuid.UUID]) -> dict[uuid.UUID, list[int]]:
     query = (
         select(
             Session.interview_set_id,
-            func.count(Answer.id).filter(Answer.option_index.is_(None)),
+            func.count(Answer.id).filter(Answer.timed_out),
             func.count(Answer.id),
         )
         .join(Answer, Answer.session_id == Session.id)

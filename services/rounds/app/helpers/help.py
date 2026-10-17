@@ -1,16 +1,7 @@
 import json
 
 from babel.numbers import format_decimal
-from prepza_common.constants import (
-    CREDITS_PER_DOLLAR,
-    DEFAULT_QUESTION_SECONDS,
-    INTERVIEWS_PER_DAY,
-    INTERVIEWS_PER_DAY_UNPAID,
-    LANGUAGES,
-    MAX_INTERVIEWS_WITHOUT_CANDIDATES,
-    MAX_INTERVIEWS_WITHOUT_CANDIDATES_UNPAID,
-    MAX_OWNED_COMPANIES,
-)
+from prepza_common.constants import CREDITS_PER_DOLLAR, LANGUAGES
 
 from app.constants.faq import FAQS
 from app.constants.help import FAQ_EXAMPLE_CANDIDATES
@@ -22,14 +13,10 @@ from app.prompts.help import HELP_KNOWLEDGE, PLATFORM_GUIDE
 CATALOG_INTERNALS = {"environment", "client_token"}
 
 
-def guide() -> str:
+def guide(limits: dict) -> str:
+    """The platform guide, naming `limits` (services/help.py's guide_limits) as they are now."""
     return PLATFORM_GUIDE.format(
-        max_companies=MAX_OWNED_COMPANIES,
-        interviews_per_day=INTERVIEWS_PER_DAY,
-        interviews_per_day_unpaid=INTERVIEWS_PER_DAY_UNPAID,
-        waiting_interviews=MAX_INTERVIEWS_WITHOUT_CANDIDATES,
-        waiting_interviews_unpaid=MAX_INTERVIEWS_WITHOUT_CANDIDATES_UNPAID,
-        question_seconds=DEFAULT_QUESTION_SECONDS,
+        **limits,
         language_count=len(LANGUAGES),
         languages=", ".join(LANGUAGES.values()),
     )
@@ -117,12 +104,12 @@ def legal_text(intro: str, sections: list[dict]) -> str:
     return "\n".join(parts)
 
 
-def knowledge(language: str, catalog: dict | None) -> str:
+def knowledge(language: str, catalog: dict | None, limits: dict) -> str:
     """What prepza's help answers from: the platform guide, the FAQ in `language`, the prices,
     the terms and the privacy policy. The help chat's prompt holds it, and the in-app assistant
     reads it from GET /help/guide."""
     return HELP_KNOWLEDGE.format(
-        guide=guide(),
+        guide=guide(limits),
         faq=faq_text(language, catalog),
         prices=prices_text(catalog),
         terms=legal_text(TERMS_INTRO, TERMS_SECTIONS),

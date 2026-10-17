@@ -60,7 +60,7 @@ FAQ = [
     {
         "key": "scorecards",
         "question": "Ano ang ipinapakita ng scorecard ng aplikante?",
-        "answer": "Bawat sagot, kung tama ito at gaano katagal ito. Berde o pula ang mga grade batay sa passing grade na itinakda mo para sa interview. Nagfa-flag din ang scorecard ng mga sagot na masyadong mabilis para nabasa ang tanong, mga pagkakataong umalis ang aplikante sa page, at mga pagtatangkang mangopya.",
+        "answer": 'Bawat sagot, kung tama ito at gaano katagal ito. Ang grade ay ang porsiyento ng puntos na nakuha: bawat tanong ay isang puntos, at ang tanong na "piliin ang lahat ng tama" ay nagbibigay ng bahagi nito sa bawat tamang opsyong na-check, at wala kung may na-check na mali. Berde o pula ang mga grade batay sa passing grade na itinakda mo para sa interview. Nagfa-flag din ang scorecard ng mga sagot na masyadong mabilis para nabasa ang tanong, mga pagkakataong umalis ang aplikante sa page, at mga pagtatangkang mangopya.',
     },
     {
         "key": "reports",
@@ -68,14 +68,19 @@ FAQ = [
         "answer": "Oo. Mag-download ng PDF report para sa isang aplikante o para sa lahat ng aplikante ng isang interview, i-email ito direkta mula sa prepza, o magpadala ng maikling buod sa WhatsApp, Telegram, Viber o LINE.",
     },
     {
+        "key": "action_log",
+        "question": "Puwede ko bang makita kung sino ang gumawa ng ano sa kumpanya ko?",
+        "answer": "Oo, kung ikaw ang may-ari ng kumpanya. Nakalista sa tab na Log ng aksyon nito ang lahat ng ginawa ng mga miyembro nito, simula sa pinakabago: pag-imbita o pag-alis ng mga aplikante, pagtingin sa mga resulta, at pagbabago sa mga interview, sa team, sa billing at sa mga integration, kasama kung sino ang gumawa, kailan, at kung ang assistant, isang AI app o ang API ang gumawa nito para sa kanila. Puwede mo itong i-filter ayon sa miyembro, uri ng aksyon at petsa. Itinatago ang mga aksyon nang 12 buwan.",
+    },
+    {
         "key": "integrations",
         "question": "Gumagana ba ang prepza sa ATS ko o sa iba pang tool?",
-        "answer": "Oo, nang walang dagdag na bayad. I-connect ang Workable, Greenhouse, Teamtailor, Recruitee o Breezy HR sa tab na Mga integration ng iyong kumpanya: makukuha ng mga aplikanteng ililipat mo sa isang stage ang interview, at babalik sa ATS ang mga resulta nila. Kayang i-post ng Slack ang mga notification ng iyong kumpanya sa isang channel, at sa pamamagitan ng API, makakagawa ang sarili mong platform ng mga interview, makakapag-imbita at makakapamahala ng mga aplikante, at makakatanggap ng mga resulta nila; tingnan ang Dokumentasyon ng API.",
+        "answer": "Oo, nang walang dagdag na bayad. I-connect ang Workable, Greenhouse, Teamtailor, Recruitee o Breezy HR sa tab na Mga integration ng iyong kumpanya: makukuha ng mga aplikanteng ililipat mo sa isang stage ang interview, at babalik sa ATS ang mga resulta nila. Kayang i-post ng Slack ang mga notification ng iyong kumpanya sa isang channel, at sa pamamagitan ng API, makakagawa ang sarili mong platform ng mga interview, makakapag-imbita at makakapamahala ng mga aplikante, at makakatanggap ng mga resulta nila, at limitado ang bawat API key sa kung ano ang i-check mo para rito; tingnan ang Dokumentasyon ng API.",
     },
     {
         "key": "ai_apps",
-        "question": "Puwede ko bang gamitin ang prepza mula sa Claude o ChatGPT?",
-        "answer": "Oo. Idagdag ang prepza sa Claude o ChatGPT bilang connector (nasa tab na Mga integration ng iyong kumpanya ang mga hakbang) at payagan ito sa prepza. Pagkatapos, gagamitin ng app ang iyong mga kumpanya, interview at resulta ng mga aplikante bilang ikaw, gamit ang mga pahintulot mo; karamihan sa mga app ay nagtatanong muna bago may baguhin. Sa prepza lang mabubura ang account mo o ang isang kumpanya. Ang nababasa ng app ay napupunta sa provider nito, ayon sa mga tuntunin ng app na iyon. Puwede mo itong i-disconnect anumang oras sa parehong tab.",
+        "question": "Puwede ko bang gamitin ang prepza mula sa Claude, ChatGPT o sarili kong AI agent?",
+        "answer": "Oo. Idagdag ang prepza sa Claude o ChatGPT bilang connector (nasa tab na Mga integration ng iyong kumpanya ang mga hakbang) at payagan ito sa prepza. Pagkatapos, gagamitin ng app ang iyong mga kumpanya, interview at resulta ng mga aplikante bilang ikaw, gamit ang mga pahintulot mo; karamihan sa mga app ay nagtatanong muna bago may baguhin. Sa prepza lang mabubura ang account mo o ang isang kumpanya. Ang nababasa ng app ay napupunta sa provider nito, ayon sa mga tuntunin ng app na iyon. Puwede mo itong i-disconnect anumang oras sa parehong tab. Puwede ring kumonekta ang ibang AI app at mga agent na ikaw mismo ang gumawa: nasa tab na MCP ng dokumentasyon para sa mga developer ang mga hakbang at mga halimbawang agent, at puwedeng mag-sign in ang agent sa server gamit ang API key na may pahintulot para sa mga AI agent.",
     },
     {
         "key": "candidates",
@@ -105,7 +110,7 @@ FAQ = [
     {
         "key": "delete",
         "question": "Puwede ko bang burahin ang account ko?",
-        "answer": "Oo, sa Settings. Buburahin ang account at data mo, at puwede mo munang i-download ang kopya ng data mo.",
+        "answer": "Oo, sa Settings. Buburahin ang account at data mo, at puwede mo munang i-download ang kopya ng data mo. Lumalabas ang mga balita ng prepza sa iyong mga notification, ang kampana sa itaas; ipinapadala rin sa email ang mahahalagang balita bilang update tungkol sa produkto, habang naka-on lang ang setting na iyon.",
     },
     {
         "key": "report",

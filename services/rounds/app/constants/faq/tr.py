@@ -60,7 +60,7 @@ FAQ = [
     {
         "key": "scorecards",
         "question": "Değerlendirme kartları neleri gösterir?",
-        "answer": "Her cevabı, doğru olup olmadığını ve ne kadar sürdüğünü. Notlar, mülakat için belirlediğiniz geçme notuna göre yeşil ya da kırmızı görünür. Değerlendirme kartı ayrıca okunamayacak kadar hızlı verilen cevapları, adayın sayfadan ayrıldığı anları ve kopyalama girişimlerini işaretler.",
+        "answer": 'Her cevabı, doğru olup olmadığını ve ne kadar sürdüğünü. Not, kazanılan puanların yüzdesidir: her soru bir puan değerindedir; "doğru olanların hepsini seçin" sorusu işaretlenen her doğru seçenek için bu puanın bir kısmını verir, yanlış bir seçenek işaretlenirse hiç puan vermez. Notlar, mülakat için belirlediğiniz geçme notuna göre yeşil ya da kırmızı görünür. Değerlendirme kartı ayrıca okunamayacak kadar hızlı verilen cevapları, adayın sayfadan ayrıldığı anları ve kopyalama girişimlerini işaretler.',
     },
     {
         "key": "reports",
@@ -68,14 +68,19 @@ FAQ = [
         "answer": "Evet. Tek bir aday ya da bir mülakatın tüm adayları için PDF raporu indirin, doğrudan prepza'dan e-postayla gönderin ya da WhatsApp, Telegram, Viber veya LINE'da kısa bir özet gönderin.",
     },
     {
+        "key": "action_log",
+        "question": "Şirketimde kimin ne yaptığını görebilir miyim?",
+        "answer": "Evet, şirketin sahibiyseniz. Şirketin İşlem kaydı sekmesi, üyelerinin yaptığı her şeyi en yeniden başlayarak listeler: aday davet etme veya kaldırma, sonuçları görüntüleme ve mülakatlarda, ekipte, faturalandırmada ve entegrasyonlarda yapılan değişiklikler; bunu kimin, ne zaman yaptığı ve asistanın, bir yapay zekâ uygulamasının veya API'nin onun adına yapıp yapmadığıyla birlikte. Kaydı üyeye, işlem türüne ve tarihlere göre filtreleyebilirsiniz. İşlemler 12 ay saklanır.",
+    },
+    {
         "key": "integrations",
         "question": "prepza, ATS'imle veya diğer araçlarla çalışır mı?",
-        "answer": "Evet, ek ücret olmadan. Workable, Greenhouse, Teamtailor, Recruitee veya Breezy HR'ı şirketinizin Entegrasyonlar sekmesinden bağlayın: bir aşamaya taşıdığınız adaylar mülakatı alır ve sonuçları ATS'ye geri gönderilir. Slack, şirketinizin bildirimlerini bir kanala gönderebilir; API ise kendi platformunuzun mülakat oluşturmasını, adayları davet edip yönetmesini ve sonuçlarını almasını sağlar. Ayrıntılar için API belgeleri sayfasına bakın.",
+        "answer": "Evet, ek ücret olmadan. Workable, Greenhouse, Teamtailor, Recruitee veya Breezy HR'ı şirketinizin Entegrasyonlar sekmesinden bağlayın: bir aşamaya taşıdığınız adaylar mülakatı alır ve sonuçları ATS'ye geri gönderilir. Slack, şirketinizin bildirimlerini bir kanala gönderebilir; API ise kendi platformunuzun mülakat oluşturmasını, adayları davet edip yönetmesini ve sonuçlarını almasını sağlar; her API anahtarı yalnızca onun için işaretlediğiniz işlemleri yapabilir. Ayrıntılar için API belgeleri sayfasına bakın.",
     },
     {
         "key": "ai_apps",
-        "question": "prepza'yı Claude veya ChatGPT'den kullanabilir miyim?",
-        "answer": "Evet. prepza'yı Claude veya ChatGPT'ye bağlayıcı olarak ekleyin (adımlar şirketinizin Entegrasyonlar sekmesinde) ve prepza'da izin verin. Uygulama bundan sonra sizin adınıza ve sizin yetkilerinizle şirketleriniz, mülakatlarınız ve adayların sonuçlarıyla çalışır; çoğu uygulama bir şeyi değiştirmeden önce size sorar. Hesabınızı veya bir şirketi yalnızca prepza'da silebilirsiniz. Uygulamanın okuduğu veriler, o uygulamanın koşullarına göre sağlayıcısına ulaşır. Bağlantıyı istediğiniz zaman aynı sekmeden kesebilirsiniz.",
+        "question": "prepza'yı Claude, ChatGPT veya kendi yapay zekâ ajanımdan kullanabilir miyim?",
+        "answer": "Evet. prepza'yı Claude veya ChatGPT'ye bağlayıcı olarak ekleyin (adımlar şirketinizin Entegrasyonlar sekmesinde) ve prepza'da izin verin. Uygulama bundan sonra sizin adınıza ve sizin yetkilerinizle şirketleriniz, mülakatlarınız ve adayların sonuçlarıyla çalışır; çoğu uygulama bir şeyi değiştirmeden önce size sorar. Hesabınızı veya bir şirketi yalnızca prepza'da silebilirsiniz. Uygulamanın okuduğu veriler, o uygulamanın koşullarına göre sağlayıcısına ulaşır. Bağlantıyı istediğiniz zaman aynı sekmeden kesebilirsiniz. Diğer yapay zekâ uygulamaları ve kendi geliştirdiğiniz ajanlar da bağlanabilir: geliştirici belgelerindeki MCP sekmesinde adımlar ve örnek ajanlar vardır; sunucuda çalışan bir ajan, yapay zekâ ajanları yetkisine sahip bir API anahtarıyla oturum açabilir.",
     },
     {
         "key": "candidates",
@@ -105,7 +110,7 @@ FAQ = [
     {
         "key": "delete",
         "question": "Hesabımı silebilir miyim?",
-        "answer": "Evet, Ayarlar'dan. Hesabınız ve verileriniz silinir; öncesinde verilerinizin bir kopyasını indirebilirsiniz.",
+        "answer": "Evet, Ayarlar'dan. Hesabınız ve verileriniz silinir; öncesinde verilerinizin bir kopyasını indirebilirsiniz. prepza'nın haberleri, üstteki zil simgesinde, yani bildirimlerinizde görünür; önemli haberler ayrıca ürün güncellemesi olarak e-postayla da gelir, ancak yalnızca bu ayar açıkken.",
     },
     {
         "key": "report",

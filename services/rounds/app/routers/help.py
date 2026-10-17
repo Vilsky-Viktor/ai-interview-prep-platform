@@ -1,15 +1,17 @@
 import logging
 
 import anyio
-from fastapi import APIRouter, HTTPException, Query, Request, status
+from fastapi import APIRouter, HTTPException, Path, Query, Request, status
 from fastapi.responses import PlainTextResponse, StreamingResponse
+from prepza_common import ai_cap
+from prepza_common.ai_constants import Outcome
+from prepza_common.ai_usage import provider_refused
 from prepza_common.analytics import track
 from prepza_common.auth import OptionalUser
 from prepza_common.client_ip import client_ip
-from prepza_common.constants import DAY_SECONDS, DEFAULT_LANGUAGE, HOUR_SECONDS, LEGAL_VERSIONS
+from prepza_common.constants import DEFAULT_LANGUAGE, LEGAL_VERSIONS
 from prepza_common.human_check import require_human
 from prepza_common.i18n import request_language, translate
-from prepza_common.llm import estimated_input, estimated_tokens
 from prepza_common.pause import refuse_if_paused
 from prepza_common.rate_limit import hit, spend
 from prepza_common.secrets_check import secret_in
@@ -17,11 +19,12 @@ from prepza_common.sse import event_stream, sse_event
 from prepza_common.user import Language
 
 from app.config.settings import settings
-from app.constants.contact import CONTACT_IP_LIMIT
 from app.constants.help import (
-    HELP_IP_LIMIT,
+    HELP_ALL_KEY,
+    HELP_CHAT,
     HELP_SPEND_KEY,
-    HELP_TOKENS_PER_DAY,
+    MAX_PAGE_KEY_LENGTH,
+    NO_SUCH_PAGE,
     PRICES_UNAVAILABLE,
     HelpRole,
     LegalDocument,
@@ -31,13 +34,14 @@ from app.constants.rounds import CHAT_FAILED
 from app.helpers import legal
 from app.helpers.help import faq_items
 from app.helpers.help_replies import reply_signature, trusted
+from app.helpers.page_guides import page_guide
 from app.helpers.sign_in import secret_reply, with_sign_in
 from app.integrations import billing
 from app.integrations.redis import get_redis
 from app.schemas.contact import ContactRequest
-from app.schemas.help import FaqItemOut, HelpChatRequest, LegalOut
+from app.schemas.help import FaqItemOut, HelpChatRequest, LegalOut, PageGuideOut
 from app.services import outbox as outbox_service
-from app.services.help import build_messages, platform_guide, record_spend, stream_reply
+from app.services.help import build_messages, platform_guide, record_answer, stream_reply
 from app.storage import contact as contact_store
 
 logger = logging.getLogger(__name__)
@@ -64,6 +68,20 @@ async def get_guide(request: Request) -> str:
     """Everything prepza's help chat answers from, as text: how prepza works and how to use it,
     the FAQ in the page's language, today's prices, the terms and the privacy policy; public."""
     return await platform_guide(request_language(request))
+
+
+@router.get("/pages/{key}")
+async def get_page_guide(
+    request: Request, key: str = Path(max_length=MAX_PAGE_KEY_LENGTH)
+) -> PageGuideOut:
+    """A page's guide, by its key, in the page's language (English until it's translated): its
+    info button shows it, and the assistant reads it about the page the user is on; public."""
+    guide = page_guide(key, request_language(request))
+
+    if guide is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, NO_SUCH_PAGE)
+
+    return PageGuideOut(key=key, **guide)
 
 
 @router.get("/legal/{document}")
@@ -110,7 +128,8 @@ async def help_chat(
         return event_stream(secret_reply(language))
 
     redis = get_redis()
-    await refuse_if_paused(redis)
+    user_id = user.uid if user else None
+    await refuse_if_paused(redis, HELP_CHAT, user_id=user_id)
     conversation = trusted(body.messages, settings.service_secret)
 
     # A visitor shows they're a person once, until the chat has a reply: the chat has no id to
@@ -119,38 +138,43 @@ async def help_chat(
         await require_human(request, settings.turnstile_secret_key)
 
     if user:
-        await hit(redis, f"rate:help:{user.uid}", settings.help_user_limit, HOUR_SECONDS)
+        await hit(redis, f"rate:help:{user.uid}", "HELP_USER_LIMIT", user_id=user_id)
 
-    await hit(redis, f"rate:help:ip:{client_ip(request)}", HELP_IP_LIMIT, HOUR_SECONDS)
-    await hit(redis, "rate:help:all", settings.help_daily_limit, DAY_SECONDS)
+    await hit(redis, f"rate:help:ip:{client_ip(request)}", "HELP_IP_LIMIT")
+    await hit(redis, HELP_ALL_KEY, "HELP_DAILY_LIMIT", user_id=user_id)
     # The day's token budget, checked before the answer and counted after it.
-    await spend(redis, HELP_SPEND_KEY, 0, HELP_TOKENS_PER_DAY, DAY_SECONDS)
+    await spend(redis, HELP_SPEND_KEY, 0, "HELP_TOKENS_PER_DAY", user_id=user_id)
+    # The help chat is never a paid company's, so the unpaid AI spend cap always applies.
+    await ai_cap.refuse_if_capped(redis, user_id=user_id)
 
-    messages = build_messages(conversation, language, await billing.catalog())
+    messages = await build_messages(conversation, language, await billing.catalog(), body.page)
     used: dict = {}
 
     async def events():
         reply = ""
+        # Until the answer is written whole, a visitor leaving cut it short.
+        outcome = Outcome.CUT
 
         try:
             async for event in with_sign_in(stream_reply(messages, used)):
                 reply += event.get("delta", "")
                 yield sse_event(event)
-        except Exception:
+
+            outcome = Outcome.OK
+        except Exception as error:
+            outcome = Outcome.FAILED
             logger.exception("Help chat failed")
+            await provider_refused(error, HELP_CHAT, user_id=user_id)
             yield sse_event({"error": translate(CHAT_FAILED, language)})
 
             return
         finally:
-            # However the answer ends (written, failed, the visitor gone), its tokens count:
-            # estimated when the model was cut short and reported none. Shielded, as a visitor
-            # leaving cancels the request.
-            tokens = used.get("tokens") or estimated_input(messages) + estimated_tokens(reply)
-
+            # However the answer ends, its call is recorded and its tokens count. Shielded, as a
+            # visitor leaving cancels the request.
             with anyio.CancelScope(shield=True):
-                await record_spend(redis, tokens)
+                await record_answer(redis, messages, reply, used.get("usage"), outcome, user_id)
 
-        await track("help_chat_turn", user_id=user.uid if user else None, turn=len(body.messages))
+        await track("help_chat_turn", user_id=user_id, turn=len(body.messages))
 
         # The page sends it back with the reply, which the next answer then reads.
         yield sse_event(
@@ -166,7 +190,7 @@ async def contact(body: ContactRequest, request: Request) -> None:
     sender shows they're a person."""
     await require_human(request, settings.turnstile_secret_key)
     redis = get_redis()
-    await hit(redis, f"rate:contact:ip:{client_ip(request)}", CONTACT_IP_LIMIT, DAY_SECONDS)
-    await hit(redis, "rate:contact:all", settings.contact_daily_limit, DAY_SECONDS)
+    await hit(redis, f"rate:contact:ip:{client_ip(request)}", "CONTACT_IP_LIMIT")
+    await hit(redis, "rate:contact:all", "CONTACT_DAILY_LIMIT")
     await contact_store.save({**body.model_dump(), "language": request_language(request)})
     await outbox_service.flush_quietly()

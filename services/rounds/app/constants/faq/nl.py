@@ -60,7 +60,7 @@ FAQ = [
     {
         "key": "scorecards",
         "question": "Wat laat een scorekaart zien?",
-        "answer": "Elk antwoord, of het goed was en hoe lang het duurde. Scores zijn groen of rood ten opzichte van de slaaggrens die je voor het interview hebt ingesteld. De scorekaart markeert ook antwoorden die te snel waren om de vraag te hebben gelezen, keren dat de kandidaat de pagina verliet, en kopieerpogingen.",
+        "answer": "Elk antwoord, of het goed was en hoe lang het duurde. De score is het percentage behaalde punten: elke vraag is één punt waard, en een vraag waarbij je alle juiste opties aanvinkt levert een deel daarvan op voor elke aangevinkte juiste optie, en niets als er een foute is aangevinkt. Scores zijn groen of rood ten opzichte van de slaaggrens die je voor het interview hebt ingesteld. De scorekaart markeert ook antwoorden die te snel waren om de vraag te hebben gelezen, keren dat de kandidaat de pagina verliet, en kopieerpogingen.",
     },
     {
         "key": "reports",
@@ -68,14 +68,19 @@ FAQ = [
         "answer": "Ja. Download een PDF-rapport voor één kandidaat of voor alle kandidaten van een interview, mail het rechtstreeks vanuit prepza, of stuur een korte samenvatting via WhatsApp, Telegram, Viber of LINE.",
     },
     {
+        "key": "action_log",
+        "question": "Kan ik zien wie wat heeft gedaan in mijn bedrijf?",
+        "answer": "Ja, als je eigenaar van het bedrijf bent. Het tabblad Actielog toont alles wat de leden hebben gedaan, nieuwste eerst: kandidaten uitnodigen of verwijderen, resultaten bekijken, en interviews, het team, de facturering en integraties wijzigen, met wie het deed, wanneer en of de assistent, een AI-app of de API het namens diegene deed. Je kunt filteren op lid, soort actie en datums. Acties worden 12 maanden bewaard.",
+    },
+    {
         "key": "integrations",
         "question": "Werkt prepza met mijn ATS of andere tools?",
-        "answer": "Ja, zonder extra kosten. Koppel Workable, Greenhouse, Teamtailor, Recruitee of Breezy HR op het tabblad Integraties van je bedrijf: kandidaten die je naar een fase verplaatst, krijgen het interview, en hun resultaten gaan terug naar het ATS. Slack kan de meldingen van je bedrijf in een kanaal plaatsen, en met de API kan je eigen platform interviews aanmaken, kandidaten uitnodigen en beheren en hun resultaten ontvangen; zie de API-documentatie.",
+        "answer": "Ja, zonder extra kosten. Koppel Workable, Greenhouse, Teamtailor, Recruitee of Breezy HR op het tabblad Integraties van je bedrijf: kandidaten die je naar een fase verplaatst, krijgen het interview, en hun resultaten gaan terug naar het ATS. Slack kan de meldingen van je bedrijf in een kanaal plaatsen, en met de API kan je eigen platform interviews aanmaken, kandidaten uitnodigen en beheren en hun resultaten ontvangen, waarbij elke API-sleutel alleen mag wat je ervoor aanvinkt; zie de API-documentatie.",
     },
     {
         "key": "ai_apps",
-        "question": "Kan ik prepza vanuit Claude of ChatGPT gebruiken?",
-        "answer": "Ja. Voeg prepza als connector toe aan Claude of ChatGPT (de stappen staan op het tabblad Integraties van je bedrijf) en sta het toe in prepza. De app werkt dan namens jou en met jouw rechten met je bedrijven, interviews en de resultaten van kandidaten; de meeste apps vragen het je voordat ze iets wijzigen. Je account of een bedrijf verwijder je alleen in prepza. Wat de app leest, gaat naar de aanbieder ervan, onder de voorwaarden van die app. Je kunt de app altijd ontkoppelen op hetzelfde tabblad.",
+        "question": "Kan ik prepza vanuit Claude, ChatGPT of mijn eigen AI-agent gebruiken?",
+        "answer": "Ja. Voeg prepza als connector toe aan Claude of ChatGPT (de stappen staan op het tabblad Integraties van je bedrijf) en sta het toe in prepza. De app werkt dan namens jou en met jouw rechten met je bedrijven, interviews en de resultaten van kandidaten; de meeste apps vragen het je voordat ze iets wijzigen. Je account of een bedrijf verwijder je alleen in prepza. Wat de app leest, gaat naar de aanbieder ervan, onder de voorwaarden van die app. Je kunt de app altijd ontkoppelen op hetzelfde tabblad. Ook andere AI-apps en agents die je zelf bouwt kunnen verbinden: het MCP-tabblad van de ontwikkelaarsdocumentatie heeft de stappen en voorbeeldagents, en een agent op een server kan zich aanmelden met een API-sleutel die het recht voor AI-agents heeft.",
     },
     {
         "key": "candidates",
@@ -100,7 +105,7 @@ FAQ = [
     {
         "key": "emails",
         "question": "Welke e-mails stuurt prepza, en hoe stop ik ze?",
-        "answer": "Service-e-mails, zoals uitnodigingen, rapporten, betalingsproblemen en wijzigingen in onze voorwaarden, worden altijd verstuurd. De rest, zoals het dagelijkse activiteitenoverzicht, herinneringen en productupdates, kies je in Instellingen, onder E-mails, of stop je met de link 'Afmelden' in elke e-mail. Kandidaten kunnen de e-mails van je bedrijf, of de herinneringen voor een interview, stoppen met de links in hun uitnodigingen en herinneringen.",
+        "answer": "Service-e-mails, zoals uitnodigingen, rapporten, betalingsproblemen en wijzigingen in onze voorwaarden, worden altijd verstuurd. De rest, zoals het dagelijkse activiteitenoverzicht, herinneringen en productupdates, kies je in Instellingen, onder E-mails, of stop je met de link 'Afmelden' in elke e-mail. Kandidaten kunnen de e-mails van je bedrijf, of de herinneringen voor een interview, stoppen met de links in hun uitnodigingen en herinneringen. Nieuws van prepza staat bij je meldingen, de bel bovenaan; het belangrijkste nieuws komt ook per e-mail als productupdate, alleen zolang die instelling aan staat.",
     },
     {
         "key": "delete",

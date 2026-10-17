@@ -40,6 +40,7 @@ async def get_owned_session(session_id: UUID, user: User, grace_seconds: int = 0
                     session_id=row.id,
                     question_id=question.question_id,
                     option_index=None,
+                    timed_out=True,
                     correct=False,
                     score=0,
                     seconds=row.question_seconds,

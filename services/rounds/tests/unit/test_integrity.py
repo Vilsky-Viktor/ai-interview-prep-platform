@@ -3,18 +3,17 @@ from datetime import UTC, datetime
 from uuid import uuid4
 
 import pytest
-from fastapi import HTTPException
 from fastapi.testclient import TestClient
 from prepza_common.auth import current_user
+from prepza_common.constants import RATE_LIMITED
+from prepza_common.limit_list import LIMITS
 from prepza_common.user import User
 
-from app.constants.integrity import SIGNALS_PER_MINUTE
 from app.helpers.review import add_signals, build_review
 from app.main import app
 from app.models.answers import Answer
 from app.models.sessions import Session
 from app.models.signals import Signal
-from app.routers import sessions as sessions_router
 from app.schemas.library import TopicQuestions
 from app.storage import sessions, signals
 
@@ -50,6 +49,7 @@ def session(seconds):
                 correct=True,
                 score=100,
                 seconds=seconds,
+                timed_out=False,
             )
         ],
     )
@@ -95,7 +95,8 @@ def test_each_candidate_gets_their_own_option_order(monkeypatch):
     assert len(orders) > 1
 
 
-def test_the_browser_reports_signals(monkeypatch):
+@pytest.mark.parametrize("edited", [None, 5])
+def test_the_browser_reports_signals(monkeypatch, redis, published, edited):
     row = session(seconds=10)
     row.answers = []
     row.question_shown_at = datetime.now(UTC)
@@ -107,17 +108,14 @@ def test_the_browser_reports_signals(monkeypatch):
     async def fake_add_signal(session_id, question_id, kind):
         counted.append((question_id, kind))
 
-    hits = []
+    # At the limit's edited value, or its default when it isn't edited.
+    allowed = edited or LIMITS["SIGNALS_PER_MINUTE"].default
 
-    async def hit(redis, key, limit, window):
-        hits.append(key)
-
-        if len(hits) > SIGNALS_PER_MINUTE:
-            raise HTTPException(429, "Too many requests. Try again later.")
+    if edited:
+        redis.limits["SIGNALS_PER_MINUTE"] = edited
 
     monkeypatch.setattr(sessions, "get", fake_get)
     monkeypatch.setattr(signals, "add_signal", fake_add_signal)
-    monkeypatch.setattr(sessions_router, "hit", hit)
     app.dependency_overrides[current_user] = lambda: User(
         uid="cand", email="cand@example.com", email_verified=True
     )
@@ -128,7 +126,7 @@ def test_the_browser_reports_signals(monkeypatch):
         bad = client.post(f"/sessions/{row.id}/signals", json={"kind": "other"})
 
         # A browser (or a script) reporting too often in a minute is refused, and saves nothing.
-        for _ in range(SIGNALS_PER_MINUTE - 1):
+        for _ in range(allowed - 1):
             client.post(f"/sessions/{row.id}/signals", json={"kind": "copy"})
 
         flooded = client.post(f"/sessions/{row.id}/signals", json={"kind": "copy"})
@@ -139,7 +137,11 @@ def test_the_browser_reports_signals(monkeypatch):
     assert bad.status_code == 422
     assert counted[0] == (QUESTION_ID, "tab_leave")
     assert flooded.status_code == 429
-    assert len(counted) == SIGNALS_PER_MINUTE
+    assert flooded.json()["detail"] == RATE_LIMITED
+    assert len(counted) == allowed
+    assert [(data["limit"], data["user_id"]) for _, data in published] == [
+        ("SIGNALS_PER_MINUTE", "cand")
+    ]
 
 
 def test_signals_are_counted_on_their_question():
@@ -186,13 +188,9 @@ def test_coming_back_records_how_long_the_leave_lasted(monkeypatch):
     async def fake_set_away(session_id, seconds):
         calls.append(("away", seconds))
 
-    async def hit(redis, key, limit, window):
-        return None
-
     monkeypatch.setattr(sessions, "get", fake_get)
     monkeypatch.setattr(signals, "add_signal", fake_add_signal)
     monkeypatch.setattr(signals, "set_away", fake_set_away)
-    monkeypatch.setattr(sessions_router, "hit", hit)
     app.dependency_overrides[current_user] = lambda: User(
         uid="cand", email="cand@example.com", email_verified=True
     )

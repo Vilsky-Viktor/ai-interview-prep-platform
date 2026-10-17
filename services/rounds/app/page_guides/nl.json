@@ -1,0 +1,669 @@
+{
+  "landing": {
+    "title": "Zo werkt prepza",
+    "text": "prepza maakt van je functieomschrijving een meerkeuze-interview met tijdslimiet, met eigen willekeurige vragen voor elke kandidaat.",
+    "actions": [
+      "Plak de functieomschrijving: prepza stelt de onderwerpen voor die getest worden.",
+      "Controleer de onderwerpen: houd ze, bewerk ze of schrap ze, en keur ze dan goed om de vragen te laten schrijven.",
+      "Nodig kandidaten uit per e-mail, vanuit een bestand of met één deelbare link.",
+      "Lees de rapporten: kandidaten gerangschikt op score, met elk antwoord en integriteitssignalen."
+    ],
+    "tips": [
+      "Interviews maken is gratis. Je betaalt $2–5 per kandidaat die antwoordt, en je eerste kandidaten zijn gratis.",
+      "Probeer je interview als kandidaat voordat je iemand uitnodigt."
+    ]
+  },
+  "companies": {
+    "title": "Bedrijven",
+    "text": "Je bedrijven. Alles wat je in prepza doet, gebeurt binnen een bedrijf: de interviews, kandidaten, het team, de credits en de integraties.",
+    "actions": [
+      "Maak een bedrijf aan met “Nieuw bedrijf”. De naam is uniek binnen prepza.",
+      "Open een bedrijf om aan de interviews en kandidaten te werken.",
+      "Verwijder een bedrijf waarvan je eigenaar bent, met al zijn interviews en uitnodigingen."
+    ],
+    "tips": [
+      "Bij elk bedrijf waarvan je geen eigenaar bent, staat je rol: beheerders wijzigen dingen, kijkers kijken alleen.",
+      "Credits horen bij een bedrijf, dus elk bedrijf waardeert apart op."
+    ]
+  },
+  "pickCompany": {
+    "title": "Kies een bedrijf",
+    "text": "Je hebt een sjabloon gekozen. Kies het bedrijf waarvoor het is: het sjabloon wordt daar gekopieerd als nieuw interview, gratis en klaar om naar kandidaten te sturen.",
+    "actions": [
+      "Kies een bedrijf om het sjabloon daarin te openen en gebruik het dan.",
+      "Maak een nieuw bedrijf aan als je er nog geen hebt; het sjabloon opent daar."
+    ],
+    "tips": [
+      "Na het kopiëren is het interview van het bedrijf: pas de vragen en instellingen aan zoals je wilt."
+    ]
+  },
+  "interviews": {
+    "title": "Interviews",
+    "text": "Alle interviews van dit bedrijf en zijn credits voor kandidaten. Elk interview is een test met tijdslimiet, gemaakt van een functieomschrijving.",
+    "actions": [
+      "Maak een interview van een functieomschrijving met “Nieuw interview”.",
+      "Open een interview om de onderwerpen, kandidaten en instellingen te zien.",
+      "Probeer een interview als kandidaat, of verwijder het.",
+      "Waardeer credits op via het saldo, of zet automatisch opwaarderen aan op het tabblad Facturering."
+    ],
+    "tips": [
+      "Het saldo wordt oranje als de credits bijna op zijn. Zonder credits worden nieuwe uitnodigingen niet verstuurd.",
+      "De tabbladen hierboven leiden naar sjablonen, je team, integraties, facturering (eigenaren en beheerders) en doorverwijzingen."
+    ]
+  },
+  "newInterview": {
+    "title": "Nieuw interview",
+    "text": "Begin een interview vanuit de functieomschrijving. prepza leest die, stelt de onderwerpen voor en schrijft de vragen zodra je ze goedkeurt.",
+    "actions": [
+      "Plak de functieomschrijving: de functie, de eisen en wat een pre is.",
+      "Kies de taal waarin het interview wordt gegenereerd.",
+      "Genereer en controleer dan de voorgestelde onderwerpen."
+    ],
+    "tips": [
+      "Hoe specifieker de omschrijving, hoe beter de vragen bij de functie passen.",
+      "Genereren is gratis: je betaalt alleen voor kandidaten die antwoorden."
+    ]
+  },
+  "reviewTopics": {
+    "title": "Controleer je onderwerpen",
+    "text": "prepza heeft deze onderwerpen voorgesteld op basis van je omschrijving. Elk onderwerp dat je houdt, krijgt een eigen set vragen met antwoorden.",
+    "actions": [
+      "Vink de onderwerpen uit die je niet nodig hebt.",
+      "Bewerk de naam en subonderwerpen van een onderwerp met het potloodje.",
+      "Beschrijf wijzigingen in je eigen woorden en pas ze toe, bijvoorbeeld “voeg een onderwerp over teamleiderschap toe”.",
+      "Keur goed en genereer om de vragen te laten schrijven."
+    ],
+    "tips": [
+      "Te veel onderwerpen? Vink er een paar uit of beschrijf hoe ze samengevoegd moeten worden.",
+      "De vragen worden pas geschreven nadat je goedkeurt, dus neem hier even de tijd."
+    ]
+  },
+  "generating": {
+    "title": "Wordt gegenereerd",
+    "text": "prepza maakt je interview: eerst de onderwerpen, dan de vragen voor elk onderwerp. Dat duurt een paar minuten.",
+    "actions": [
+      "Je kunt deze pagina verlaten: het genereren gaat door.",
+      "Annuleer het genereren als je het niet meer nodig hebt; wat tot nu toe is gemaakt, wordt niet bewaard."
+    ],
+    "tips": [
+      "Je krijgt een melding als het interview klaar is.",
+      "Kom op elk moment terug via de lijst met interviews."
+    ]
+  },
+  "interviewTopics": {
+    "title": "Onderwerpen",
+    "text": "Wat dit interview test: de onderwerpen, elk met subonderwerpen en een eigen pool vragen. Elke kandidaat krijgt een willekeurige selectie uit elke pool.",
+    "actions": [
+      "Open “Vragen beheren” om de vragen en antwoorden van een onderwerp te lezen.",
+      "Genereer een zwakke vraag opnieuw, markeer een fout antwoord of lees meldingen van kandidaten over een vraag.",
+      "Stel in hoeveel vragen elke kandidaat uit een onderwerp krijgt.",
+      "Probeer het interview als kandidaat, of verwijder het."
+    ],
+    "tips": [
+      "Door AI geschreven vragen kunnen fout zijn: loop elk onderwerp even door voordat je iemand uitnodigt.",
+      "Klik op de titel om het interview een andere naam te geven."
+    ]
+  },
+  "interviewCandidates": {
+    "title": "Kandidaten",
+    "text": "Iedereen die voor dit interview is uitgenodigd, met status, voortgang en score.",
+    "actions": [
+      "Nodig kandidaten uit: één voor één, een lijst van maximaal 100, of een CSV- of TXT-bestand.",
+      "Zet de deelbare link aan voor een vacaturetekst: iedereen met de link kan het interview doen.",
+      "Zoek op e-mailadres of naam, filter op status en sorteer op score of datum.",
+      "Open het rapport van een kandidaat, of download of deel het rapport over alle kandidaten."
+    ],
+    "tips": [
+      "Elke kandidaat die minstens één vraag beantwoordt, gebruikt credits, ook kandidaten via de link.",
+      "Herinneringen gaan automatisch naar kandidaten."
+    ]
+  },
+  "interviewSettings": {
+    "title": "Instellingen",
+    "text": "Hoe dit interview verloopt voor elke kandidaat.",
+    "actions": [
+      "Stel de tijd per vraag in, in seconden.",
+      "Stel de slaaggrens in: kandidaten die die halen, zijn geslaagd.",
+      "Markeer het interview als aangenomen zodra de vacature is vervuld."
+    ],
+    "tips": [
+      "Elke instelling wordt opgeslagen zodra je het veld verlaat.",
+      "Kandidaten zien hun scores nooit; alleen je team ziet ze.",
+      "Geef een kandidaat die meer tijd nodig heeft extra tijd op zijn of haar pagina."
+    ]
+  },
+  "tryInterview": {
+    "title": "Proberen als kandidaat",
+    "text": "Een voorbeeld van dit interview precies zoals kandidaten het zien: de introductie, dan de vragen met tijdslimiet. Het is gratis.",
+    "actions": [
+      "Start het voorbeeld en antwoord zoals een kandidaat zou doen.",
+      "Controleer de timing, de formulering en de antwoorden voordat je iemand uitnodigt."
+    ],
+    "tips": [
+      "Blijf op de pagina terwijl je antwoordt: bij kandidaten worden het verlaten van de pagina, kopiëren en te snel antwoorden vastgelegd."
+    ]
+  },
+  "candidate": {
+    "title": "Kandidaatrapport",
+    "text": "De resultaten van één kandidaat: de score, of die geslaagd is, en de score per onderwerp met elk antwoord.",
+    "actions": [
+      "Lees elk antwoord, met integriteitssignalen: pagina verlaten, kopieerpogingen en te snelle antwoorden.",
+      "Download het rapport als PDF, of deel het per e-mail.",
+      "Geef extra tijd voordat de kandidaat begint, bijvoorbeeld bij een beperking.",
+      "Voeg de naam van de kandidaat toe of bewerk die.",
+      "Kopieer de uitnodigingslink om die zelf te sturen als de e-mail niet is aangekomen; hij blijft beschikbaar tot de kandidaat klaar is.",
+      "Verstuur de uitnodiging opnieuw of trek die in, of verwijder de kandidaat met de resultaten."
+    ],
+    "tips": [
+      "De score ondersteunt je beslissing, maar neemt die niet. Als de kandidaat erom vraagt, laat dan een mens het resultaat beoordelen.",
+      "De score is het percentage behaalde punten: elke vraag is één punt waard, en een vraag waarbij je alle juiste opties aanvinkt levert een deel daarvan op voor elke aangevinkte juiste optie, en niets als er een foute is aangevinkt."
+    ]
+  },
+  "templates": {
+    "title": "Sjablonen",
+    "text": "Kant-en-klare interviews voor veelvoorkomende functies. Als je er een gebruikt, wordt het als je eigen interview naar dit bedrijf gekopieerd.",
+    "actions": [
+      "Zoek op functie of onderwerp, en filter op niveau en taal.",
+      "Open een sjabloon om de onderwerpen te zien en hoeveel vragen elk onderwerp heeft.",
+      "Gebruik een sjabloon om er een interview mee te starten."
+    ],
+    "tips": [
+      "Voor een betere match maak je liever een interview van je eigen functieomschrijving.",
+      "Na het kopiëren is het interview van jou: pas de vragen en instellingen aan zoals je wilt."
+    ]
+  },
+  "template": {
+    "title": "Sjabloon",
+    "text": "Een kant-en-klaar interview: de onderwerpen, hun subonderwerpen en hoeveel vragen elk onderwerp heeft.",
+    "actions": [
+      "Controleer of de onderwerpen passen bij de functie waarvoor je werft.",
+      "Gebruik het sjabloon om het als nieuw interview naar dit bedrijf te kopiëren."
+    ],
+    "tips": [
+      "Kopiëren is gratis; kandidaten die antwoorden gebruiken zoals altijd credits.",
+      "Passen de onderwerpen niet, maak dan een interview van je functieomschrijving."
+    ]
+  },
+  "team": {
+    "title": "Team",
+    "text": "De mensen die aan de interviews van dit bedrijf werken, en hun rollen.",
+    "actions": [
+      "Voeg een lid toe per e-mail, als beheerder of kijker: die krijgt per e-mail een link om lid te worden.",
+      "Wijzig de rol van een lid tussen beheerder en kijker.",
+      "Kopieer de link van een openstaande uitnodiging, of verwijder een lid of een uitnodiging."
+    ],
+    "tips": [
+      "Beheerders maken en wijzigen interviews, nodigen kandidaten uit en waarderen op. Kijkers zien interviews en resultaten en delen rapporten, maar wijzigen niets.",
+      "Als je een lid verwijdert wiens kaart het automatisch opwaarderen betaalt, stopt het automatisch opwaarderen."
+    ]
+  },
+  "actions": {
+    "title": "Actielog",
+    "text": "Alles wat de leden van het bedrijf deden, nieuwste eerst: wat ze deden en waaraan, wie het deed, wanneer, en of de assistent, een AI-app, de API of een ATS het voor hen deed. Alleen de eigenaar ziet het.",
+    "actions": [
+      "Toon de acties van één lid, of van één soort: interviews, kandidaten, team, bedrijf, facturering of integraties.",
+      "Toon de acties tussen twee dagen."
+    ],
+    "tips": [
+      "Acties worden 12 maanden bewaard.",
+      "Personen worden niet in de log bewaard: een verwijderde kandidaat staat er als zodanig, en een lid dat vertrok als voormalig lid.",
+      "Als een lid de resultaten van één kandidaat bekijkt, staat dat er één keer per dag, met de laatste keer."
+    ]
+  },
+  "integrations": {
+    "title": "Integraties",
+    "text": "Koppel prepza aan de tools die je team al gebruikt. Elke integratie opent een eigen pagina met de stappen om die in te stellen.",
+    "actions": [
+      "Slack: ontvang de meldingen van je bedrijf in een kanaal.",
+      "ATS (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): kandidaten die je naar een fase verplaatst krijgen het interview, en hun resultaten gaan terug.",
+      "API: sleutels en webhooks om je eigen platform te koppelen.",
+      "AI-apps: gebruik prepza vanuit Claude, ChatGPT en andere AI-apps."
+    ],
+    "tips": [
+      "Iedereen in het bedrijf ziet de integraties; eigenaren en beheerders wijzigen ze."
+    ]
+  },
+  "ats": {
+    "title": "ATS-integratie",
+    "text": "Koppel een vacature in je ATS aan een interview: kandidaten die je naar een gekozen fase verplaatst krijgen het interview, en hun resultaten komen terug als opmerking op hun profiel.",
+    "actions": [
+      "Koppel je ATS volgens de instructies.",
+      "Koppel een vacature: kies de vacature, de fase en een interview, of maak een nieuw interview van de vacaturetekst.",
+      "Nodig kandidaten die niet zijn uitgenodigd opnieuw uit, bijvoorbeeld als de credits op waren.",
+      "Verwijder de koppeling met een vacature, of ontkoppel het ATS."
+    ],
+    "tips": [
+      "Voeg een fase toe alleen voor prepza, zoals “prepza-vaardighedentest”, zodat die nooit door je andere tools heen loopt.",
+      "prepza verplaatst of wijst nooit iemand af in je ATS."
+    ]
+  },
+  "slack": {
+    "title": "Slack",
+    "text": "De meldingen van je bedrijf in een Slack-kanaal, zodra ze gebeuren.",
+    "actions": [
+      "Voeg prepza toe aan Slack en kies het kanaal, bijvoorbeeld #hiring.",
+      "Kies welke meldingen daar binnenkomen: een kandidaat die klaar is, een uitnodiging die niet is afgeleverd, een interview dat klaar is en meer.",
+      "Ontkoppel om ze te stoppen en de app van prepza uit je Slack te verwijderen."
+    ],
+    "tips": [
+      "prepza kan alleen in dat kanaal posten; je Slack lezen kan het niet.",
+      "Iedereen ziet elke melding nog steeds bij het belletje."
+    ]
+  },
+  "api": {
+    "title": "API",
+    "text": "Koppel je eigen platform, zoals je vacaturesite, aan prepza.",
+    "actions": [
+      "Maak een API-sleutel aan en vink alleen aan wat hij nodig heeft: interviews lezen of maken; kandidaten lezen, uitnodigen, wijzigen of verwijderen; je credits lezen; of gebruiken met AI-agents (MCP). Hij handelt namens jou.",
+      "Voeg een webhook toe: prepza laat je HTTPS-adres ondertekend weten wanneer een kandidaat begint of klaar is (met de resultaten), wanneer de uitnodiging een kandidaat niet bereikt of verloopt, wanneer een kandidaat wordt verwijderd en wanneer een interview klaarstaat.",
+      "Stuur een webhook een testgebeurtenis en zie in het afleverlogboek hoe elke verzending is verlopen.",
+      "Verwijder de sleutels en webhooks die je niet meer gebruikt.",
+      "Open de ontwikkelaarsdocumentatie voor elk endpoint en elke gebeurtenis, en de SDK."
+    ],
+    "tips": [
+      "Een nieuwe sleutel en het secret van een webhook worden maar één keer getoond: kopieer ze meteen.",
+      "Kies voor elke sleutel een vervaldatum: een gelekte sleutel die nooit verloopt, blijft bruikbaar.",
+      "Je kunt de rechten van een sleutel later uitvinken, maar nooit een recht toevoegen: maak voor meer een nieuwe sleutel."
+    ]
+  },
+  "aiApps": {
+    "title": "AI-apps",
+    "text": "Gebruik prepza vanuit je AI-chat: vraag Claude of ChatGPT naar je interviews en kandidaten, of laat ze wijzigingen voor je doen.",
+    "actions": [
+      "Kopieer het serveradres en voeg het volgens de stappen toe aan Claude, Claude Code of ChatGPT; andere apps en je eigen agents staan in de ontwikkelaarsdocumentatie.",
+      "Sta de app toe op de prepza-pagina die opent.",
+      "Ontkoppel een app die je niet meer gebruikt."
+    ],
+    "tips": [
+      "Een app handelt namens jou, in elk bedrijf waar je lid van bent. De meeste apps vragen het je voordat ze iets wijzigen.",
+      "Hij kan je wachtwoord en API-sleutels niet zien, en kan je account of een bedrijf niet verwijderen."
+    ]
+  },
+  "referrals": {
+    "title": "Doorverwijzingen",
+    "text": "Nodig andere bedrijven uit voor prepza met de link van dit bedrijf, en jullie krijgen allebei credits.",
+    "actions": [
+      "Kopieer of deel je doorverwijslink.",
+      "Bekijk elke beloning die dit bedrijf heeft ontvangen."
+    ],
+    "tips": [
+      "Jullie krijgen allebei credits wanneer het uitgenodigde bedrijf voor het eerst opwaardeert, met welk bedrag ook.",
+      "De credits gaan naar dit bedrijf en vervallen nooit."
+    ]
+  },
+  "brand": {
+    "title": "Merk",
+    "text": "Je logo en kleuren in de uitnodiging, het interview en de afsluitende pagina van je kandidaten.",
+    "actions": [
+      "Stel het logo in of wijzig het.",
+      "Kies het lettertype en hoe rond kaarten en knoppen zijn.",
+      "Kies de kleuren van elke groep en bekijk ze in het voorbeeld.",
+      "Sla ze op, of ga terug naar de prepza-kleuren."
+    ],
+    "tips": [
+      "Kleuren waarbij tekst moeilijk leesbaar zou zijn, kunnen niet worden opgeslagen, zodat elke kandidaat de vragen kan lezen.",
+      "Teamleden die een interview uitproberen, zien het ook in jouw kleuren."
+    ]
+  },
+  "billing": {
+    "title": "Facturering",
+    "text": "Waar de credits van dit bedrijf vandaan kwamen en waar ze naartoe gingen.",
+    "actions": [
+      "Waardeer op, of stel automatisch opwaarderen in.",
+      "Bekijk de kandidaten van wie de credits gereserveerd zijn.",
+      "Open de factuur van elke opwaardering."
+    ],
+    "tips": [
+      "De credits van een kandidaat worden gereserveerd bij de uitnodiging, afgeschreven zodra die antwoordt en teruggegeven als dat niet gebeurt.",
+      "Alleen eigenaren en beheerders zien deze pagina."
+    ]
+  },
+  "topUp": {
+    "title": "Opwaarderen",
+    "text": "Koop credits voor elk bedrijf waarvan je eigenaar of beheerder bent.",
+    "actions": [
+      "Kies een bedrijf en een opwaardering: grotere kosten minder per kandidaat.",
+      "Betaal op de betaalpagina van Paddle; de credits staan er binnen enkele seconden.",
+      "Open de prijzen om de opwaarderingen te vergelijken."
+    ],
+    "tips": [
+      "Een kandidaat kost 500 credits: gereserveerd bij de uitnodiging, afgeschreven zodra die antwoordt en teruggegeven als dat niet gebeurt.",
+      "Credits verlopen nooit. De factuur van elke opwaardering staat op het tabblad Facturering van het bedrijf."
+    ]
+  },
+  "settings": {
+    "title": "Instellingen",
+    "text": "Je eigen account: de taal waarin prepza tegen je praat, de e-mails die je krijgt en je gegevens.",
+    "actions": [
+      "Kies de taal van de site, de hulpchat en je e-mails.",
+      "Kies welke optionele e-mails je krijgt; service-e-mails, zoals uitnodigingen, rapporten en betalingsproblemen, worden altijd verstuurd.",
+      "Download alles wat prepza over je bewaart, of verwijder je account."
+    ],
+    "tips": [
+      "Als je je account verwijdert, worden de bedrijven verwijderd waarin alleen jij zit. Een bedrijf waar anderen lid van zijn geworden, heeft eerst een andere eigenaar nodig."
+    ]
+  },
+  "join": {
+    "title": "Uitnodiging van een bedrijf",
+    "text": "Je bent uitgenodigd om lid te worden van het team van een bedrijf op prepza, om aan de interviews en kandidaten te werken.",
+    "actions": [
+      "Log in met het e-mailadres waarnaar de uitnodiging is gestuurd.",
+      "Word lid van het bedrijf: het staat dan bij je bedrijven.",
+      "Open het bedrijf als je al lid bent."
+    ],
+    "tips": [
+      "Ingelogd met een ander e-mailadres? Log uit en log in met het uitgenodigde adres; de uitnodiging werkt alleen daarvoor.",
+      "Je rol, beheerder of kijker, is gekozen door degene die je heeft uitgenodigd."
+    ]
+  },
+  "connect": {
+    "title": "Een AI-app koppelen",
+    "text": "Een AI-app vraagt om je prepza-account te gebruiken. Hier kies je of dat mag.",
+    "actions": [
+      "Log in, als je dat nog niet hebt gedaan, om te zien welke app het vraagt.",
+      "Lees wat de app wel en niet met je account kan doen.",
+      "Sta de app toe of weiger hem; in beide gevallen ga je terug naar de app."
+    ],
+    "tips": [
+      "Als prepza de app niet kent, sta hem dan alleen toe als je het koppelen zelf hebt gestart.",
+      "Ontkoppel een app op elk moment in de Integraties van een bedrijf, onder AI-apps.",
+      "Een link die verlopen is of al is gebruikt, werkt niet meer: begin opnieuw met koppelen vanuit je AI-app."
+    ]
+  },
+  "news": {
+    "title": "Nieuws",
+    "text": "Wat er nieuw is bij prepza: nieuwe functies, verbeteringen en updates, het nieuwste eerst.",
+    "actions": [
+      "Scroll naar beneden om ouder nieuws te lezen.",
+      "Volg het nieuws in je feedreader met de RSS-link bovenaan."
+    ],
+    "tips": [
+      "Nieuws verschijnt in je meldingen; zet productupdates aan in je instellingen om de belangrijkste ook per e-mail te krijgen."
+    ]
+  },
+  "practice": {
+    "title": "Gratis oefenen",
+    "text": "Gratis oefeninterviews met tijdslimiet voor veelvoorkomende functies, voor iedereen die zich voorbereidt op een sollicitatiegesprek.",
+    "actions": [
+      "Zoek op functie of onderwerp, en filter op niveau en taal.",
+      "Open een oefeninterview om de onderwerpen te zien en het te starten."
+    ],
+    "tips": [
+      "Zolang je geen talen kiest, toont de lijst de taal van de site en Engels.",
+      "Oefenen is privé: geen enkel bedrijf ziet je resultaten."
+    ]
+  },
+  "practiceTest": {
+    "title": "Oefeninterview",
+    "text": "Eén gratis oefeninterview: het niveau, de taal, de lengte en de onderwerpen die het behandelt.",
+    "actions": [
+      "Start een oefenronde; log eerst in als je dat nog niet hebt gedaan.",
+      "Zie hoe ver je in je laatste ronde per onderwerp bent gekomen.",
+      "Open je eerdere rondes met de geschiedenisknop naast “Oefenen starten”.",
+      "Werf je voor deze functie? Maak er een interview van voor je eigen kandidaten."
+    ],
+    "tips": [
+      "Elke ronde heeft een tijdslimiet, net als een echt interview; daarna zie je je score en elk juist antwoord.",
+      "Oefen zo vaak als je wilt: het is gratis."
+    ]
+  },
+  "practiceHistory": {
+    "title": "Je rondes",
+    "text": "Elke ronde die je van dit oefeninterview hebt gedaan, de nieuwste eerst, met de voortgang en score.",
+    "actions": [
+      "Open een ronde om de resultaten en elk antwoord te zien.",
+      "Oefen opnieuw om een nieuwe ronde te starten."
+    ],
+    "tips": [
+      "Vergelijk je scores door de tijd heen om te zien waar je beter wordt."
+    ]
+  },
+  "practiceRound": {
+    "title": "Oefenresultaten",
+    "text": "De resultaten van één oefenronde: je score, de score per onderwerp en elke vraag met de juiste antwoorden en wat je koos; bij een vraag waarbij je alle juiste opties aanvinkt, zie je ook de behaalde punten.",
+    "actions": [
+      "Lees elke vraag, de juiste antwoorden en wat je koos.",
+      "Beoordeel een vraag, of meld hem als het antwoord fout is; gemelde vragen worden gecontroleerd en verbeterd.",
+      "Ga verder met een ronde die je nog niet hebt afgemaakt.",
+      "Oefen opnieuw, of open je eerdere rondes."
+    ],
+    "tips": [
+      "Wat je had aangevinkt toen de tijd van een vraag op was, telt gewoon mee; een vraag zonder iets aangevinkt, of die je nooit hebt bereikt, telt als fout.",
+      "Werf je voor deze functie? Maak er een interview van voor je eigen kandidaten."
+    ]
+  },
+  "pricing": {
+    "title": "Prijzen",
+    "text": "Wat prepza kost: interviews genereren is gratis, en je betaalt per kandidaat die antwoordt, zonder abonnement.",
+    "actions": [
+      "Bekijk de huidige prijs per kandidaat, en de lagere prijzen bij grotere opwaarderingen.",
+      "Bekijk hoeveel eerste kandidaten gratis zijn.",
+      "Bekijk de credits die je verdient door een ander bedrijf uit te nodigen.",
+      "Waardeer de credits van een bedrijf op."
+    ],
+    "tips": [
+      "Credits verlopen nooit.",
+      "Een kandidaat die geen enkele vraag beantwoordt, kost niets."
+    ]
+  },
+  "tests": {
+    "title": "Selectietesten per functie",
+    "text": "Kant-en-klare vaardigheidstests met tijdslimiet voor veelvoorkomende functies, om te gebruiken zoals ze zijn of als begin.",
+    "actions": [
+      "Zoek op functie of onderwerp, en filter op niveau en taal.",
+      "Open een test om te zien wat hij toetst, met voorbeeldvragen."
+    ],
+    "tips": [
+      "Zolang je geen talen kiest, toont de lijst de taal van de site en Engels.",
+      "Voor een betere match maak je op de startpagina een test van je eigen functieomschrijving."
+    ]
+  },
+  "test": {
+    "title": "Vaardigheidstest voor een functie",
+    "text": "Een kant-en-klare vaardigheidstest met tijdslimiet voor één functie: wat hij toetst, voorbeeldvragen en hoe je hem gebruikt met je kandidaten.",
+    "actions": [
+      "Bekijk de onderwerpen en subonderwerpen die hij test.",
+      "Lees voorbeeldvragen met de juiste antwoorden.",
+      "Maak een test voor je kandidaten van je functieomschrijving.",
+      "Oefen hem zelf gratis, zoals een kandidaat dat zou doen.",
+      "Lees antwoorden op de vragen die bedrijven stellen voordat ze kandidaten testen."
+    ],
+    "tips": [
+      "Je kandidaten krijgen hun eigen willekeurige vragen, nooit de voorbeelden die hier staan."
+    ]
+  },
+  "aiInterviews": {
+    "title": "AI-interviews",
+    "text": "Een gids over de soorten AI-interviewtools, hoe de aanpak van prepza werkt en de basis van compliance.",
+    "actions": [
+      "Vergelijk interviewtools met een chatbot, met video en met gegenereerde tests.",
+      "Lees stap voor stap hoe prepza een interview maakt en beoordeelt, en wat het nooit doet.",
+      "Lees de basis van de Europese AI-verordening, de AVG en de Amerikaanse regels voor AI bij werving.",
+      "Maak een test voor je kandidaten met de kaart aan het einde."
+    ],
+    "tips": [
+      "Dit is een samenvatting, geen juridisch advies: overleg met je eigen jurist."
+    ]
+  },
+  "preEmploymentTesting": {
+    "title": "Selectietests",
+    "text": "Een heldere gids over selectietests voor wervingsteams: de soorten, wanneer ze helpen, eerlijkheid en de wet, en het kiezen van een tool.",
+    "actions": [
+      "Lees welke soorten tests er zijn en wanneer elk soort helpt.",
+      "Lees de basis over eerlijkheid en de wet.",
+      "Bekijk waar je op let bij een testtool, en hoe prepza het doet.",
+      "Maak een test voor je kandidaten met de kaart aan het einde."
+    ],
+    "tips": [
+      "Dit is een samenvatting, geen juridisch advies: overleg met je eigen jurist."
+    ]
+  },
+  "compare": {
+    "title": "prepza vergeleken",
+    "text": "Vergelijkingen met bronnen van prepza en andere tools voor selectietests: hoe tests worden gemaakt, wat ze kosten en wanneer welke beter past.",
+    "actions": [
+      "Open een vergelijking om die te lezen."
+    ],
+    "tips": [
+      "Elke vergelijking toont wanneer die voor het laatst is bijgewerkt."
+    ]
+  },
+  "comparison": {
+    "title": "Vergelijking",
+    "text": "Hoe prepza zich op één punt verhoudt tot andere tools: hoe tests worden gemaakt, wat ze kosten en wanneer welke beter past.",
+    "actions": [
+      "Lees de vergelijking en volg de links naar de bronnen.",
+      "Maak een test voor je kandidaten met de kaart aan het einde.",
+      "Ga terug naar alle vergelijkingen met de link boven de titel."
+    ],
+    "tips": [
+      "Prijzen en functies veranderen: de datum onder de titel toont wanneer de pagina voor het laatst is bijgewerkt."
+    ]
+  },
+  "guides": {
+    "title": "Gidsen voor werving",
+    "text": "Praktische gidsen voor hiring managers: sollicitanten screenen, vaardigheidstests, en AI eerlijk en volgens de wet inzetten bij werving.",
+    "actions": [
+      "Open een gids om die te lezen."
+    ],
+    "tips": [
+      "Elke gids toont wanneer die voor het laatst is bijgewerkt."
+    ]
+  },
+  "guide": {
+    "title": "Gids",
+    "text": "Een praktische gids voor hiring managers over één onderwerp.",
+    "actions": [
+      "Lees de gids en volg de links naar bronnen en verwante pagina's.",
+      "Maak een test voor je kandidaten met de kaart aan het einde.",
+      "Ga terug naar alle gidsen met de link boven de titel."
+    ],
+    "tips": [
+      "Juridische onderwerpen zijn samenvattingen, geen juridisch advies: overleg met je eigen jurist."
+    ]
+  },
+  "faq": {
+    "title": "Veelgestelde vragen",
+    "text": "Antwoorden op veelgestelde vragen over prepza: interviews, kandidaten, prijzen en credits, resultaten, integraties, talen en je gegevens.",
+    "actions": [
+      "Klik op een vraag om het antwoord te openen."
+    ],
+    "tips": [
+      "Je antwoord niet gevonden? Vraag het de AI-assistent bovenaan de pagina, of schrijf ons via de contactpagina.",
+      "De prijzen in de antwoorden zijn altijd die van vandaag."
+    ]
+  },
+  "about": {
+    "title": "Over ons",
+    "text": "Wie prepza maakt en waarom: interviews op basis van een functieomschrijving die elk team kan betalen, en gratis oefenen voor iedereen.",
+    "actions": [
+      "Lees waarom prepza bestaat en hoe het werving aanpakt.",
+      "Lees een woord van de oprichter, en open zijn LinkedIn-profiel."
+    ],
+    "tips": [
+      "Gebruik de contactpagina om het team te schrijven."
+    ]
+  },
+  "contact": {
+    "title": "Neem contact op",
+    "text": "Schrijf het prepza-team met een vraag, een idee, een voorstel voor samenwerking of iets wat niet werkt.",
+    "actions": [
+      "Vul je naam, je e-mailadres en je bericht in, en verstuur het.",
+      "Plak de ID van het bedrijf, interview, de kandidaat of het account waar het om gaat, zodat we het meteen vinden."
+    ],
+    "tips": [
+      "De link “ID kopiëren” staat onder de naam van een bedrijf, een interview of een kandidaat; de ID van je account staat in je accountmenu.",
+      "We antwoorden op het e-mailadres dat je opgeeft."
+    ]
+  },
+  "apiDocs": {
+    "title": "Ontwikkelaarsdocumentatie",
+    "text": "Alles wat je nodig hebt om je eigen platform of AI-agent aan prepza te koppelen, rechtstreeks uit de API gelezen zodat het altijd klopt.",
+    "actions": [
+      "API: hoe je inlogt, de basis-URL en elk endpoint met parameters, body, response en fouten.",
+      "Webhooks: de gebeurtenissen die prepza naar je adres stuurt en wat elke gebeurtenis bevat.",
+      "SDK: hoe je het interview in je eigen site insluit.",
+      "MCP: hoe je een AI-app of je eigen agent koppelt, en welke tools die krijgt.",
+      "Objecten: elk object dat de API teruggeeft, veld voor veld."
+    ],
+    "tips": [
+      "Maak API-sleutels en webhooks aan in de Integraties van een bedrijf, onder API.",
+      "De documentatie is alleen in het Engels."
+    ]
+  },
+  "accessibility": {
+    "title": "Toegankelijkheid",
+    "text": "Hoe prepza werkt voor mensen met een beperking, waar het nog tekortschiet en hoe je het ons laat weten.",
+    "actions": [
+      "Bekijk wat prepza doet voor toegankelijkheid, zoals thema's, opmaak voor de telefoon en bediening met het toetsenbord.",
+      "Bekijk waar het tekortschiet, zoals bij vragen met tijdslimiet.",
+      "Mail ons als iets moeilijk te gebruiken is of als je het in een andere vorm nodig hebt."
+    ],
+    "tips": [
+      "Doe je het interview van een bedrijf en heb je meer tijd nodig? Vraag het bedrijf om extra tijd voordat je begint; je hoeft niet te zeggen waarom."
+    ]
+  },
+  "documents": {
+    "title": "Juridische documenten",
+    "text": "Documenten voor bedrijven die kandidaten beoordelen met prepza: instructies, sjablonen en de verwerkersovereenkomst.",
+    "actions": [
+      "Download de instructies voor bedrijven: wat een score betekent, menselijke beoordeling, slaaggrenzen en extra tijd.",
+      "Download bewerkbare sjablonen voor kennisgevingen om kandidaten te sturen voordat je ze uitnodigt.",
+      "Download het DPIA-sjabloon, met het deel van prepza al ingevuld, om aan te vullen.",
+      "Download de verwerkersovereenkomst, of lees die online."
+    ],
+    "tips": [
+      "De documenten zijn alleen in het Engels."
+    ]
+  },
+  "terms": {
+    "title": "Voorwaarden",
+    "text": "De voorwaarden voor het gebruik van prepza: accounts, bedrijven, credits en betalingen, tests voor kandidaten, aanvaardbaar gebruik en aansprakelijkheid.",
+    "actions": [
+      "Lees de geldende versie, met de dag vanaf wanneer die geldt.",
+      "Open een eerdere of komende versie uit de lijst met versies aan het einde.",
+      "Schakel over naar de Engelse tekst als je een vertaling leest."
+    ],
+    "tips": [
+      "Alleen de Engelse tekst is bindend."
+    ]
+  },
+  "privacy": {
+    "title": "Privacy",
+    "text": "Hoe prepza de persoonsgegevens van bedrijven, hun leden en kandidaten verzamelt, gebruikt en beschermt, en welke rechten je hebt.",
+    "actions": [
+      "Lees de geldende versie, met de dag vanaf wanneer die geldt.",
+      "Open een eerdere of komende versie uit de lijst met versies aan het einde.",
+      "Schakel over naar de Engelse tekst als je een vertaling leest."
+    ],
+    "tips": [
+      "Alleen de Engelse tekst is bindend.",
+      "Open je instellingen om een kopie van je gegevens te krijgen of je account te verwijderen."
+    ]
+  },
+  "dpa": {
+    "title": "Verwerkersovereenkomst",
+    "text": "De overeenkomst tussen prepza en bedrijven die kandidaten testen: wat prepza namens jou verwerkt en hoe.",
+    "actions": [
+      "Lees de geldende versie, met de dag vanaf wanneer die geldt.",
+      "Open een eerdere of komende versie uit de lijst met versies aan het einde.",
+      "Schakel over naar de Engelse tekst als je een vertaling leest."
+    ],
+    "tips": [
+      "Ze maakt deel uit van de voorwaarden.",
+      "Alleen de Engelse tekst is bindend; een pdf-kopie staat op de pagina met juridische documenten."
+    ]
+  },
+  "unsubscribe": {
+    "title": "Afmelden",
+    "text": "Stop met één soort e-mail van prepza, zoals op de pagina staat.",
+    "actions": [
+      "Lees welke e-mails de link stopt.",
+      "Bevestig om je af te melden; alleen de link openen verandert niets.",
+      "Open daarna je e-mailinstellingen om andere e-mails te wijzigen."
+    ],
+    "tips": [
+      "Service-e-mails, zoals teamuitnodigingen, rapporten en betalingsproblemen, worden nog steeds verstuurd."
+    ]
+  }
+}

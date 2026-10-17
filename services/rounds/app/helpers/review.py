@@ -1,6 +1,7 @@
 from app.constants.integrity import FAST_ANSWER_SECONDS, IntegritySignal
 from app.helpers.integrity import counted_leave
-from app.helpers.rounds import correct_option_index
+from app.helpers.rounds import correct_indexes
+from app.helpers.scores import picked_options
 from app.schemas.review import AnswerView, ReviewItem
 
 
@@ -29,22 +30,30 @@ def build_review(round_, reveal_all: bool = False) -> list[ReviewItem]:
 
     for number, question in enumerate(round_.questions, start=1):
         answer = answers.get(question["id"])
+        correct = correct_indexes(question)
+        right = correct if answer or reveal_all else None
+        multi = len(correct) > 1
         items.append(
             ReviewItem(
                 question_id=question["id"],
                 number=number,
                 text=question["text"],
                 options=[option["answer"] for option in question["options"]],
-                correct_option_index=(
-                    correct_option_index(question) if answer or reveal_all else None
-                ),
+                multi=multi,
+                correct_option_index=right[0] if right and not multi else None,
+                correct_indexes=right,
                 answer=(
                     AnswerView(
                         answer_id=answer.id,
                         option_index=answer.option_index,
+                        picks=picked_options(answer),
+                        timed_out=answer.timed_out,
+                        right_picks=sum(pick in correct for pick in picked_options(answer)),
+                        wrong_picks=sum(pick not in correct for pick in picked_options(answer)),
                         correct=answer.correct,
+                        score=answer.score,
                         seconds=answer.seconds,
-                        fast=answer.option_index is not None
+                        fast=not answer.timed_out
                         and answer.seconds is not None
                         and answer.seconds < FAST_ANSWER_SECONDS,
                     )

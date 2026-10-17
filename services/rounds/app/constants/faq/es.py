@@ -60,7 +60,7 @@ FAQ = [
     {
         "key": "scorecards",
         "question": "¿Qué muestran las fichas de evaluación?",
-        "answer": "Cada respuesta, si fue correcta y cuánto tardó. Las notas se ven en verde o rojo según la nota de aprobado que fijaste para la entrevista. Las fichas también señalan respuestas demasiado rápidas para haber leído la pregunta, las veces que el candidato salió de la página y los intentos de copiar.",
+        "answer": "Cada respuesta, si fue correcta y cuánto tardó. La nota es el porcentaje de puntos obtenidos: cada pregunta vale un punto, y una de «selecciona todas las correctas» da una parte por cada opción correcta marcada, y nada si se marca una incorrecta. Las notas se ven en verde o rojo según la nota de aprobado que fijaste para la entrevista. Las fichas también señalan respuestas demasiado rápidas para haber leído la pregunta, las veces que el candidato salió de la página y los intentos de copiar.",
     },
     {
         "key": "reports",
@@ -68,14 +68,19 @@ FAQ = [
         "answer": "Sí. Descarga un informe PDF de un candidato o de todos los candidatos de una entrevista, envíalo por correo directamente desde prepza o manda un breve resumen por WhatsApp, Telegram, Viber o LINE.",
     },
     {
+        "key": "action_log",
+        "question": "¿Puedo ver quién hizo qué en mi empresa?",
+        "answer": "Sí, si eres el propietario de la empresa. Su pestaña Registro de acciones muestra todo lo que hicieron sus miembros, de lo más reciente a lo más antiguo: invitar o quitar candidatos, ver resultados y cambiar las entrevistas, el equipo, la facturación y las integraciones, con quién lo hizo, cuándo y si lo hizo en su nombre el asistente, una app de IA o la API. Puedes filtrarlo por miembro, tipo de acción y fechas. Las acciones se guardan durante 12 meses.",
+    },
+    {
         "key": "integrations",
         "question": "¿prepza funciona con mi ATS u otras herramientas?",
-        "answer": "Sí, sin coste adicional. Conecta Workable, Greenhouse, Teamtailor, Recruitee o Breezy HR en la pestaña Integraciones de tu empresa: los candidatos que muevas a una etapa reciben la entrevista, y sus resultados vuelven al ATS. Slack puede publicar las notificaciones de tu empresa en un canal, y la API permite que tu propia plataforma cree entrevistas, invite y gestione candidatos y reciba sus resultados; consulta la Documentación de la API.",
+        "answer": "Sí, sin coste adicional. Conecta Workable, Greenhouse, Teamtailor, Recruitee o Breezy HR en la pestaña Integraciones de tu empresa: los candidatos que muevas a una etapa reciben la entrevista, y sus resultados vuelven al ATS. Slack puede publicar las notificaciones de tu empresa en un canal, y la API permite que tu propia plataforma cree entrevistas, invite y gestione candidatos y reciba sus resultados, con cada clave de API limitada a lo que marques para ella; consulta la Documentación de la API.",
     },
     {
         "key": "ai_apps",
-        "question": "¿Puedo usar prepza desde Claude o ChatGPT?",
-        "answer": "Sí. Añade prepza a Claude o ChatGPT como conector (los pasos están en la pestaña Integraciones de tu empresa) y permítelo en prepza. A partir de ahí, la app trabaja con tus empresas, entrevistas y los resultados de los candidatos en tu nombre, con tus permisos; la mayoría de las apps te preguntan antes de cambiar nada. Tu cuenta o una empresa solo se eliminan en prepza. Lo que la app lee llega a su proveedor según las condiciones de esa app. Puedes desconectarla en cualquier momento en la misma pestaña.",
+        "question": "¿Puedo usar prepza desde Claude, ChatGPT o mi propio agente de IA?",
+        "answer": "Sí. Añade prepza a Claude o ChatGPT como conector (los pasos están en la pestaña Integraciones de tu empresa) y permítelo en prepza. A partir de ahí, la app trabaja con tus empresas, entrevistas y los resultados de los candidatos en tu nombre, con tus permisos; la mayoría de las apps te preguntan antes de cambiar nada. Tu cuenta o una empresa solo se eliminan en prepza. Lo que la app lee llega a su proveedor según las condiciones de esa app. Puedes desconectarla en cualquier momento en la misma pestaña. También se pueden conectar otras apps de IA y agentes que crees tú mismo: la pestaña MCP de la documentación para desarrolladores tiene los pasos y agentes de ejemplo, y un agente en un servidor puede iniciar sesión con una clave de API que tenga el permiso de agentes de IA.",
     },
     {
         "key": "candidates",
@@ -100,7 +105,7 @@ FAQ = [
     {
         "key": "emails",
         "question": "¿Qué correos envía prepza y cómo dejo de recibirlos?",
-        "answer": "Los correos del servicio, como invitaciones, informes, problemas de pago y cambios en nuestros términos, se envían siempre. El resto, como el resumen de actividad diario, los recordatorios y las novedades del producto, lo eliges en Ajustes, en Correos, o lo detienes con el enlace «Cancelar la suscripción» de cada correo. Los candidatos pueden dejar de recibir los correos de tu empresa, o los recordatorios de una entrevista, con los enlaces de sus invitaciones y recordatorios.",
+        "answer": "Los correos del servicio, como invitaciones, informes, problemas de pago y cambios en nuestros términos, se envían siempre. El resto, como el resumen de actividad diario, los recordatorios y las novedades del producto, lo eliges en Ajustes, en Correos, o lo detienes con el enlace «Cancelar la suscripción» de cada correo. Los candidatos pueden dejar de recibir los correos de tu empresa, o los recordatorios de una entrevista, con los enlaces de sus invitaciones y recordatorios. Las novedades de prepza aparecen en tus notificaciones, la campana de arriba; las más importantes también llegan por correo como novedad del producto, solo mientras ese ajuste esté activado.",
     },
     {
         "key": "delete",

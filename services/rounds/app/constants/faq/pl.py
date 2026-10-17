@@ -60,7 +60,7 @@ FAQ = [
     {
         "key": "scorecards",
         "question": "Co pokazują karty wyników?",
-        "answer": "Każdą odpowiedź, czy była poprawna i ile trwała. Wyniki są oznaczone na zielono lub na czerwono względem progu zaliczenia ustawionego dla rozmowy. Karty wyników oznaczają też odpowiedzi zbyt szybkie, by przeczytać pytanie, opuszczenia strony i próby kopiowania.",
+        "answer": "Każdą odpowiedź, czy była poprawna i ile trwała. Wynik to odsetek zdobytych punktów: każde pytanie jest warte jeden punkt, a pytanie wielokrotnego wyboru („zaznacz wszystkie poprawne”) daje jego część za każdą zaznaczoną poprawną odpowiedź i nic, jeśli zaznaczono błędną. Wyniki są oznaczone na zielono lub na czerwono względem progu zaliczenia ustawionego dla rozmowy. Karty wyników oznaczają też odpowiedzi zbyt szybkie, by przeczytać pytanie, opuszczenia strony i próby kopiowania.",
     },
     {
         "key": "reports",
@@ -68,14 +68,19 @@ FAQ = [
         "answer": "Tak. Pobierz raport PDF dla jednego kandydata lub dla wszystkich kandydatów rozmowy, wyślij go e-mailem prosto z prepza albo prześlij krótkie podsumowanie przez WhatsApp, Telegram, Viber lub LINE.",
     },
     {
+        "key": "action_log",
+        "question": "Czy mogę zobaczyć, kto co zrobił w mojej firmie?",
+        "answer": "Tak, jeśli jesteś właścicielem firmy. Zakładka Dziennik działań firmy pokazuje wszystko, co zrobili członkowie zespołu, od najnowszych: zapraszanie lub usuwanie kandydatów, przeglądanie wyników oraz zmiany w rozmowach, zespole, rozliczeniach i integracjach, wraz z tym, kto i kiedy to zrobił oraz czy zrobił to w jego imieniu asystent, aplikacja AI czy API. Możesz go filtrować według członka zespołu, rodzaju działania i dat. Działania są przechowywane przez 12 miesięcy.",
+    },
+    {
         "key": "integrations",
         "question": "Czy prepza działa z moim ATS lub innymi narzędziami?",
-        "answer": "Tak, bez dodatkowych opłat. Połącz Workable, Greenhouse, Teamtailor, Recruitee lub Breezy HR w zakładce Integracje swojej firmy: kandydaci, których przeniesiesz na etap, dostają rozmowę, a ich wyniki wracają do ATS. Slack może publikować powiadomienia firmy na kanale, a API pozwala Twojej własnej platformie tworzyć rozmowy, zapraszać kandydatów i zarządzać nimi oraz odbierać ich wyniki; zobacz: Dokumentacja API.",
+        "answer": "Tak, bez dodatkowych opłat. Połącz Workable, Greenhouse, Teamtailor, Recruitee lub Breezy HR w zakładce Integracje swojej firmy: kandydaci, których przeniesiesz na etap, dostają rozmowę, a ich wyniki wracają do ATS. Slack może publikować powiadomienia firmy na kanale, a API pozwala Twojej własnej platformie tworzyć rozmowy, zapraszać kandydatów i zarządzać nimi oraz odbierać ich wyniki, a każdy klucz API może tylko to, co dla niego zaznaczysz; zobacz: Dokumentacja API.",
     },
     {
         "key": "ai_apps",
-        "question": "Czy mogę korzystać z prepza w Claude lub ChatGPT?",
-        "answer": "Tak. Dodaj prepza do Claude lub ChatGPT jako konektor (kroki znajdziesz w zakładce Integracje swojej firmy) i zezwól na dostęp w prepza. Aplikacja działa wtedy w Twoim imieniu i z Twoimi uprawnieniami na Twoich firmach, rozmowach i wynikach kandydatów; większość aplikacji pyta Cię o zgodę, zanim cokolwiek zmieni. Konto lub firmę usuniesz tylko w prepza. To, co aplikacja odczyta, trafia do jej dostawcy na warunkach tej aplikacji. Możesz ją odłączyć w każdej chwili w tej samej zakładce.",
+        "question": "Czy mogę korzystać z prepza w Claude, ChatGPT lub we własnym agencie AI?",
+        "answer": "Tak. Dodaj prepza do Claude lub ChatGPT jako konektor (kroki znajdziesz w zakładce Integracje swojej firmy) i zezwól na dostęp w prepza. Aplikacja działa wtedy w Twoim imieniu i z Twoimi uprawnieniami na Twoich firmach, rozmowach i wynikach kandydatów; większość aplikacji pyta Cię o zgodę, zanim cokolwiek zmieni. Konto lub firmę usuniesz tylko w prepza. To, co aplikacja odczyta, trafia do jej dostawcy na warunkach tej aplikacji. Możesz ją odłączyć w każdej chwili w tej samej zakładce. Połączyć można też inne aplikacje AI i agentów, których tworzysz samodzielnie: zakładka MCP w dokumentacji dla deweloperów zawiera kroki i przykłady agentów, a agent na serwerze może się logować kluczem API z uprawnieniem do agentów AI.",
     },
     {
         "key": "candidates",
@@ -100,7 +105,7 @@ FAQ = [
     {
         "key": "emails",
         "question": "Jakie e-maile wysyła prepza i jak je wyłączyć?",
-        "answer": "E-maile serwisowe, takie jak zaproszenia, raporty, problemy z płatnością i zmiany naszego regulaminu, są wysyłane zawsze. Resztę, na przykład codzienne podsumowanie aktywności, przypomnienia i nowości o produkcie, wybierasz w Ustawieniach, w sekcji E-maile, albo wyłączasz linkiem „Wypisz się” w każdym e-mailu. Kandydaci mogą wyłączyć e-maile od Twojej firmy lub przypomnienia o danej rozmowie linkami w zaproszeniach i przypomnieniach.",
+        "answer": "E-maile serwisowe, takie jak zaproszenia, raporty, problemy z płatnością i zmiany naszego regulaminu, są wysyłane zawsze. Resztę, na przykład codzienne podsumowanie aktywności, przypomnienia i nowości o produkcie, wybierasz w Ustawieniach, w sekcji E-maile, albo wyłączasz linkiem „Wypisz się” w każdym e-mailu. Kandydaci mogą wyłączyć e-maile od Twojej firmy lub przypomnienia o danej rozmowie linkami w zaproszeniach i przypomnieniach. Aktualności prepza pojawiają się w Twoich powiadomieniach, pod dzwonkiem u góry; najważniejsze przychodzą też e-mailem jako nowości o produkcie, ale tylko wtedy, gdy to ustawienie jest włączone.",
     },
     {
         "key": "delete",

@@ -25,15 +25,15 @@ HELP_HISTORY_MESSAGES = 10
 # The page's conversation can't be checked, so the model sees at most this many characters of
 # it before the question, the latest messages first.
 HELP_HISTORY_CHARACTERS = 8_000
-# Help chat questions an hour from one visitor's address. Cloud Armor limits each address too;
-# this holds wherever the service runs.
-HELP_IP_LIMIT = 60
-# An answer's longest, in tokens (its reasoning included), and the tokens all help chats may use
-# in a day together (input and output, counted after each answer): a ceiling on what the public
-# chat costs. A spent budget refuses new questions (429); a started answer always finishes.
+# An answer's longest, in tokens (its reasoning included). The tokens all help chats used today
+# together (input and output, counted after each answer) are kept under HELP_SPEND_KEY, against
+# the HELP_TOKENS_PER_DAY limit: a spent budget refuses new questions (429); a started answer
+# always finishes. Every question counts under HELP_ALL_KEY, against HELP_DAILY_LIMIT.
 HELP_MAX_OUTPUT_TOKENS = 1_500
-HELP_TOKENS_PER_DAY = 50_000_000
 HELP_SPEND_KEY = "spend:help:all"
+HELP_ALL_KEY = "rate:help:all"
+# What the help chat's AI calls are recorded as, and what it is called when the pause refuses it.
+HELP_CHAT = "help_chat"
 # How long billing's prices are kept for the FAQ and the chat before they're asked again.
 CATALOG_KEY = "billing-catalog"
 CATALOG_CACHE_SECONDS = 5 * 60
@@ -51,3 +51,8 @@ SIGN_IN_PREFIX = "[[sign_in"
 
 # The FAQ names today's prices; without them (billing not answering) it isn't served.
 PRICES_UNAVAILABLE = "Prices aren't available right now. Please try again in a minute."
+
+# A page's guide asked for by a key that isn't a page's (GET /help/pages/{key}).
+NO_SUCH_PAGE = "There's no guide for this page."
+# The longest page key a request may name.
+MAX_PAGE_KEY_LENGTH = 40

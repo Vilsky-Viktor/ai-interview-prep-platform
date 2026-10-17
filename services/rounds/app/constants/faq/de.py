@@ -60,7 +60,7 @@ FAQ = [
     {
         "key": "scorecards",
         "question": "Was zeigen die Auswertungen?",
-        "answer": "Jede Antwort, ob sie richtig war und wie lange sie gedauert hat. Ergebnisse erscheinen grün oder rot, gemessen an der Bestehensgrenze, die du für das Interview festgelegt hast. Außerdem markieren die Auswertungen Antworten, die zu schnell waren, um die Frage gelesen zu haben, wann der Kandidat die Seite verlassen hat und Kopierversuche.",
+        "answer": "Jede Antwort, ob sie richtig war und wie lange sie gedauert hat. Das Ergebnis ist der Anteil der erreichten Punkte: Jede Frage zählt einen Punkt, und eine Frage mit Mehrfachauswahl bringt einen Teil davon für jede angekreuzte richtige Option, aber nichts, wenn eine falsche angekreuzt ist. Ergebnisse erscheinen grün oder rot, gemessen an der Bestehensgrenze, die du für das Interview festgelegt hast. Außerdem markieren die Auswertungen Antworten, die zu schnell waren, um die Frage gelesen zu haben, wann der Kandidat die Seite verlassen hat und Kopierversuche.",
     },
     {
         "key": "reports",
@@ -68,14 +68,19 @@ FAQ = [
         "answer": "Ja. Lade einen PDF-Bericht für einen Kandidaten oder für alle Kandidaten eines Interviews herunter, sende ihn direkt aus prepza per E-Mail oder schick eine kurze Zusammenfassung über WhatsApp, Telegram, Viber oder LINE.",
     },
     {
+        "key": "action_log",
+        "question": "Kann ich sehen, wer in meinem Unternehmen was gemacht hat?",
+        "answer": "Ja, wenn du Inhaber des Unternehmens bist. Sein Tab Aktionsprotokoll listet alles, was seine Mitglieder getan haben, das Neueste zuerst: Kandidaten einladen oder entfernen, Ergebnisse ansehen und Interviews, das Team, die Abrechnung und Integrationen ändern, jeweils damit, wer es getan hat, wann und ob der Assistent, eine KI-App oder die API es in seinem Namen getan hat. Du kannst es nach Mitglied, Art der Aktion und Datum filtern. Aktionen werden 12 Monate lang aufbewahrt.",
+    },
+    {
         "key": "integrations",
         "question": "Funktioniert prepza mit meinem ATS oder anderen Tools?",
-        "answer": "Ja, ohne Aufpreis. Verbinde Workable, Greenhouse, Teamtailor, Recruitee oder Breezy HR im Tab Integrationen deines Unternehmens: Kandidaten, die du in eine Phase verschiebst, bekommen das Interview, und ihre Ergebnisse gehen zurück an das ATS. Slack kann die Benachrichtigungen deines Unternehmens in einem Kanal posten, und über die API kann deine eigene Plattform Interviews erstellen, Kandidaten einladen und verwalten und ihre Ergebnisse empfangen; siehe API-Dokumentation.",
+        "answer": "Ja, ohne Aufpreis. Verbinde Workable, Greenhouse, Teamtailor, Recruitee oder Breezy HR im Tab Integrationen deines Unternehmens: Kandidaten, die du in eine Phase verschiebst, bekommen das Interview, und ihre Ergebnisse gehen zurück an das ATS. Slack kann die Benachrichtigungen deines Unternehmens in einem Kanal posten, und über die API kann deine eigene Plattform Interviews erstellen, Kandidaten einladen und verwalten und ihre Ergebnisse empfangen, wobei jeder API-Schlüssel nur darf, was du für ihn ankreuzt; siehe API-Dokumentation.",
     },
     {
         "key": "ai_apps",
-        "question": "Kann ich prepza aus Claude oder ChatGPT heraus nutzen?",
-        "answer": "Ja. Füge prepza in Claude oder ChatGPT als Connector hinzu (die Schritte stehen im Tab Integrationen deines Unternehmens) und lass es in prepza zu. Die App arbeitet dann in deinem Namen und mit deinen Berechtigungen mit deinen Unternehmen, Interviews und den Ergebnissen der Kandidaten; die meisten Apps fragen dich, bevor sie etwas ändern. Dein Konto oder ein Unternehmen löschst du nur in prepza. Was die App liest, geht nach den Bedingungen dieser App an ihren Anbieter. Du kannst sie jederzeit im selben Tab trennen.",
+        "question": "Kann ich prepza aus Claude, ChatGPT oder meinem eigenen KI-Agenten heraus nutzen?",
+        "answer": "Ja. Füge prepza in Claude oder ChatGPT als Connector hinzu (die Schritte stehen im Tab Integrationen deines Unternehmens) und lass es in prepza zu. Die App arbeitet dann in deinem Namen und mit deinen Berechtigungen mit deinen Unternehmen, Interviews und den Ergebnissen der Kandidaten; die meisten Apps fragen dich, bevor sie etwas ändern. Dein Konto oder ein Unternehmen löschst du nur in prepza. Was die App liest, geht nach den Bedingungen dieser App an ihren Anbieter. Du kannst sie jederzeit im selben Tab trennen. Auch andere KI-Apps und selbst gebaute Agenten lassen sich verbinden: Im MCP-Tab der Entwicklerdokumentation stehen die Schritte und Beispiel-Agenten, und ein Agent auf einem Server kann sich mit einem API-Schlüssel anmelden, der die Berechtigung für KI-Agenten hat.",
     },
     {
         "key": "candidates",
@@ -100,7 +105,7 @@ FAQ = [
     {
         "key": "emails",
         "question": "Welche E-Mails sendet prepza und wie stelle ich sie ab?",
-        "answer": "Service-E-Mails wie Einladungen, Berichte, Zahlungsprobleme und Änderungen unserer Bedingungen werden immer gesendet. Alles andere, etwa die tägliche Aktivitätsübersicht, Erinnerungen und Produkt-Updates, wählst du in den Einstellungen unter E-Mails oder stellst es mit dem Link „Abmelden“ in jeder E-Mail ab. Kandidaten können die E-Mails deines Unternehmens oder die Erinnerungen zu einem Interview mit den Links in ihren Einladungen und Erinnerungen abstellen.",
+        "answer": "Service-E-Mails wie Einladungen, Berichte, Zahlungsprobleme und Änderungen unserer Bedingungen werden immer gesendet. Alles andere, etwa die tägliche Aktivitätsübersicht, Erinnerungen und Produkt-Updates, wählst du in den Einstellungen unter E-Mails oder stellst es mit dem Link „Abmelden“ in jeder E-Mail ab. Kandidaten können die E-Mails deines Unternehmens oder die Erinnerungen zu einem Interview mit den Links in ihren Einladungen und Erinnerungen abstellen. Neuigkeiten von prepza erscheinen in deinen Benachrichtigungen, der Glocke oben; die wichtigsten kommen außerdem als Produkt-Update per E-Mail, aber nur, solange diese Einstellung an ist.",
     },
     {
         "key": "delete",

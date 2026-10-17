@@ -36,8 +36,8 @@ def test_a_finished_section_reports_each_shown_questions_result():
             {"id": str(unseen), "text": "Q3?"},
         ],
         answers=[
-            SimpleNamespace(question_id=answered, option_index=1, correct=True),
-            SimpleNamespace(question_id=timed_out, option_index=None, correct=False),
+            SimpleNamespace(question_id=answered, correct=True, score=100, timed_out=False),
+            SimpleNamespace(question_id=timed_out, correct=False, score=0, timed_out=True),
         ],
     )
 
@@ -48,12 +48,14 @@ def test_a_finished_section_reports_each_shown_questions_result():
                 "question_id": str(answered),
                 "question_text": "Q1?",
                 "correct": True,
+                "credit": 1.0,
                 "timed_out": False,
             },
             {
                 "question_id": str(timed_out),
                 "question_text": "Q2?",
                 "correct": False,
+                "credit": 0.0,
                 "timed_out": True,
             },
         ],

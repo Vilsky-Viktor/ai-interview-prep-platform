@@ -12,6 +12,7 @@ def answer(row, index, timed_out):
         session_id=row.id,
         question_id=uuid.UUID(question["id"]),
         option_index=None if timed_out else option_index(question, True),
+        timed_out=timed_out,
         correct=not timed_out,
         score=0 if timed_out else 100,
         seconds=30,

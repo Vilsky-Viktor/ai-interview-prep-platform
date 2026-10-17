@@ -1,0 +1,669 @@
+{
+  "landing": {
+    "title": "Jak działa prepza",
+    "text": "prepza zamienia opis stanowiska w rozmowę na czas z pytaniami wielokrotnego wyboru, z osobnym losowym zestawem pytań dla każdego kandydata.",
+    "actions": [
+      "Wklej opis stanowiska: prepza zaproponuje tematy do sprawdzenia.",
+      "Przejrzyj tematy: zostaw, edytuj lub usuń je, a potem zatwierdź, by powstały pytania.",
+      "Zaproś kandydatów e-mailem, z pliku albo jednym linkiem do udostępnienia.",
+      "Czytaj raporty: kandydaci uszeregowani według wyniku, z każdą odpowiedzią i ostrzeżeniami o podejrzanych zachowaniach."
+    ],
+    "tips": [
+      "Tworzenie rozmów jest bezpłatne. Płacisz $2–5 za kandydata, który odpowiada, a pierwsi kandydaci są za darmo.",
+      "Wypróbuj rozmowę jako kandydat, zanim kogokolwiek zaprosisz."
+    ]
+  },
+  "companies": {
+    "title": "Firmy",
+    "text": "Twoje firmy. Wszystko, co robisz w prepza, dzieje się w jednej z nich: jej rozmowy, kandydaci, zespół, kredyty i integracje.",
+    "actions": [
+      "Utwórz firmę przyciskiem „Nowa firma”. Jej nazwa jest unikalna w całym prepza.",
+      "Otwórz firmę, by pracować nad jej rozmowami i kandydatami.",
+      "Usuń firmę, której jesteś właścicielem, razem ze wszystkimi rozmowami i zaproszeniami."
+    ],
+    "tips": [
+      "Przy firmach, których nie jesteś właścicielem, widać Twoją rolę: administratorzy wprowadzają zmiany, obserwatorzy tylko przeglądają.",
+      "Kredyty należą do firmy, więc każdą doładowuje się osobno."
+    ]
+  },
+  "pickCompany": {
+    "title": "Wybierz firmę",
+    "text": "Wybrano szablon. Wybierz firmę, dla której jest przeznaczony: szablon zostanie do niej skopiowany jako nowa rozmowa, za darmo i gotowa do wysłania kandydatom.",
+    "actions": [
+      "Wybierz firmę, by otworzyć w niej szablon, a potem go użyj.",
+      "Utwórz nową firmę, jeśli jeszcze jej nie masz; szablon otworzy się w niej."
+    ],
+    "tips": [
+      "Po skopiowaniu rozmowa należy do firmy: zmieniaj jej pytania i ustawienia, jak chcesz."
+    ]
+  },
+  "interviews": {
+    "title": "Rozmowy",
+    "text": "Wszystkie rozmowy tej firmy i jej kredyty na kandydatów. Każda rozmowa to test na czas utworzony z opisu stanowiska.",
+    "actions": [
+      "Utwórz rozmowę z opisu stanowiska przyciskiem „Nowa rozmowa”.",
+      "Otwórz rozmowę, by zobaczyć jej tematy, kandydatów i ustawienia.",
+      "Wypróbuj rozmowę jako kandydat albo ją usuń.",
+      "Doładuj kredyty przy saldzie albo włącz automatyczne doładowanie na karcie Rozliczenia."
+    ],
+    "tips": [
+      "Saldo zmienia kolor na bursztynowy, gdy kredytów jest mało. Bez kredytów nowe zaproszenia nie są wysyłane.",
+      "Karty powyżej prowadzą do szablonów, zespołu, integracji, rozliczeń (dla właścicieli i administratorów) i poleceń."
+    ]
+  },
+  "newInterview": {
+    "title": "Nowa rozmowa",
+    "text": "Zacznij rozmowę od opisu stanowiska. prepza go przeczyta, zaproponuje tematy do sprawdzenia i napisze pytania, gdy je zatwierdzisz.",
+    "actions": [
+      "Wklej opis stanowiska: rolę, wymagania i mile widziane umiejętności.",
+      "Wybierz język, w którym ma powstać rozmowa.",
+      "Wygeneruj, a potem przejrzyj proponowane tematy."
+    ],
+    "tips": [
+      "Im bardziej konkretny opis, tym lepiej pytania pasują do roli.",
+      "Generowanie jest bezpłatne: płacisz tylko za kandydatów, którzy odpowiadają."
+    ]
+  },
+  "reviewTopics": {
+    "title": "Przejrzyj tematy",
+    "text": "prepza zaproponowała te tematy na podstawie Twojego opisu. Każdy zostawiony temat dostaje własny zestaw pytań z odpowiedziami.",
+    "actions": [
+      "Odznacz tematy, których nie potrzebujesz.",
+      "Edytuj nazwę tematu i podtematy ołówkiem przy nim.",
+      "Opisz zmiany własnymi słowami i je zastosuj, np. „dodaj temat o przywództwie w zespole”.",
+      "Zatwierdź i wygeneruj, by powstały pytania."
+    ],
+    "tips": [
+      "Gdy tematów jest za dużo, odznacz część albo opisz, jak je połączyć.",
+      "Pytania powstają dopiero po zatwierdzeniu, więc poświęć tu chwilę."
+    ]
+  },
+  "generating": {
+    "title": "Generowanie",
+    "text": "prepza tworzy Twoją rozmowę: najpierw tematy, potem pytania do każdego z nich. To potrwa kilka minut.",
+    "actions": [
+      "Możesz opuścić tę stronę: generowanie trwa dalej.",
+      "Anuluj generowanie, jeśli już go nie potrzebujesz; nic z tego, co powstało, nie zostanie zachowane."
+    ],
+    "tips": [
+      "Dostaniesz powiadomienie, gdy rozmowa będzie gotowa.",
+      "Wróć tu w każdej chwili z listy rozmów."
+    ]
+  },
+  "interviewTopics": {
+    "title": "Tematy",
+    "text": "Co sprawdza ta rozmowa: jej tematy, każdy z podtematami i własną pulą pytań. Każdy kandydat dostaje losowy zestaw z każdej puli.",
+    "actions": [
+      "Otwórz „Zarządzaj pytaniami”, by przeczytać pytania i odpowiedzi tematu.",
+      "Wygeneruj ponownie słabe pytanie, oznacz błędną odpowiedź albo przeczytaj zgłoszenia kandydatów do pytania.",
+      "Ustaw, ile pytań z tematu dostaje każdy kandydat.",
+      "Wypróbuj rozmowę jako kandydat albo ją usuń."
+    ],
+    "tips": [
+      "Pytania napisane przez AI mogą zawierać błędy: przejrzyj każdy temat, zanim kogokolwiek zaprosisz.",
+      "Kliknij tytuł, by zmienić nazwę rozmowy."
+    ]
+  },
+  "interviewCandidates": {
+    "title": "Kandydaci",
+    "text": "Wszyscy zaproszeni na tę rozmowę, z ich statusem, postępem i wynikiem.",
+    "actions": [
+      "Zaproś kandydatów: pojedynczo, listą do 100 osób albo plikiem CSV lub TXT.",
+      "Włącz link do udostępnienia do ogłoszenia o pracę: każdy, kto go ma, może przejść rozmowę.",
+      "Szukaj po e-mailu lub imieniu i nazwisku, filtruj po statusie i sortuj po wyniku lub dacie.",
+      "Otwórz raport kandydata albo pobierz lub udostępnij raport o wszystkich kandydatach."
+    ],
+    "tips": [
+      "Każdy kandydat, który odpowie na co najmniej jedno pytanie, zużywa kredyty, także ten z linku.",
+      "Przypomnienia trafiają do kandydatów automatycznie."
+    ]
+  },
+  "interviewSettings": {
+    "title": "Ustawienia",
+    "text": "Jak ta rozmowa przebiega dla każdego kandydata.",
+    "actions": [
+      "Ustaw czas na każde pytanie, w sekundach.",
+      "Ustaw próg zaliczenia: kandydaci, którzy go osiągną, przechodzą.",
+      "Oznacz rozmowę jako zakończoną zatrudnieniem, gdy obsadzisz stanowisko."
+    ],
+    "tips": [
+      "Każde ustawienie zapisuje się, gdy tylko opuścisz jego pole.",
+      "Kandydaci nigdy nie widzą swoich wyników; widzi je tylko Twój zespół.",
+      "Jeśli jeden kandydat potrzebuje więcej czasu, dodaj mu dodatkowy czas na jego stronie."
+    ]
+  },
+  "tryInterview": {
+    "title": "Wypróbuj jako kandydat",
+    "text": "Podgląd tej rozmowy dokładnie tak, jak widzą ją kandydaci: wstęp, a potem pytania na czas. Jest bezpłatny.",
+    "actions": [
+      "Rozpocznij podgląd i odpowiadaj tak, jak zrobiłby to kandydat.",
+      "Sprawdź czas, sformułowania i odpowiedzi, zanim kogokolwiek zaprosisz."
+    ],
+    "tips": [
+      "Nie opuszczaj strony podczas odpowiadania: u kandydatów opuszczenie strony, kopiowanie i zbyt szybkie odpowiedzi są rejestrowane."
+    ]
+  },
+  "candidate": {
+    "title": "Raport kandydata",
+    "text": "Wyniki jednego kandydata: jego wynik, czy zaliczył, oraz wynik z każdego tematu z każdą odpowiedzią.",
+    "actions": [
+      "Przeczytaj każdą odpowiedź z ostrzeżeniami o podejrzanych zachowaniach: opuszczeniami strony, próbami kopiowania i szybkimi odpowiedziami.",
+      "Pobierz raport jako PDF albo udostępnij go e-mailem.",
+      "Daj dodatkowy czas, zanim kandydat zacznie, np. z powodu niepełnosprawności.",
+      "Dodaj lub edytuj imię i nazwisko kandydata.",
+      "Skopiuj link z zaproszeniem, aby wysłać go samodzielnie, jeśli e-mail nie dotarł; jest dostępny, dopóki kandydat nie skończy.",
+      "Wyślij zaproszenie ponownie lub je wycofaj albo usuń kandydata razem z jego wynikami."
+    ],
+    "tips": [
+      "Wynik wspiera Twoją decyzję, ale jej nie podejmuje. Jeśli kandydat o to poprosi, niech jego wynik sprawdzi człowiek.",
+      "Wynik to odsetek zdobytych punktów: każde pytanie jest warte jeden punkt, a pytanie wielokrotnego wyboru („zaznacz wszystkie poprawne”) daje jego część za każdą zaznaczoną poprawną odpowiedź i nic, jeśli zaznaczono błędną."
+    ]
+  },
+  "templates": {
+    "title": "Szablony",
+    "text": "Gotowe rozmowy dla popularnych ról. Użycie szablonu kopiuje go do tej firmy jako Twoją własną rozmowę.",
+    "actions": [
+      "Szukaj według roli lub tematu i filtruj po poziomie i języku.",
+      "Otwórz szablon, by zobaczyć jego tematy i liczbę pytań w każdym.",
+      "Użyj szablonu, by zacząć od niego rozmowę."
+    ],
+    "tips": [
+      "Dla lepszego dopasowania utwórz raczej rozmowę z własnego opisu stanowiska.",
+      "Po skopiowaniu rozmowa jest Twoja: zmieniaj jej pytania i ustawienia, jak chcesz."
+    ]
+  },
+  "template": {
+    "title": "Szablon",
+    "text": "Gotowa rozmowa: jej tematy, ich podtematy i liczba pytań w każdym temacie.",
+    "actions": [
+      "Sprawdź, czy tematy pasują do roli, na którą rekrutujesz.",
+      "Użyj szablonu, by skopiować go do tej firmy jako nową rozmowę."
+    ],
+    "tips": [
+      "Kopiowanie jest bezpłatne; kandydaci, którzy odpowiadają, zużywają kredyty jak zwykle.",
+      "Jeśli tematy nie pasują, utwórz raczej rozmowę z opisu stanowiska."
+    ]
+  },
+  "team": {
+    "title": "Zespół",
+    "text": "Osoby, które pracują nad rozmowami tej firmy, i ich role.",
+    "actions": [
+      "Dodaj członka zespołu e-mailem jako administratora lub obserwatora: dostanie e-mailem link, by dołączyć.",
+      "Zmień rolę członka zespołu między administratorem a obserwatorem.",
+      "Skopiuj link oczekującego zaproszenia albo usuń członka zespołu lub zaproszenie."
+    ],
+    "tips": [
+      "Administratorzy tworzą i zmieniają rozmowy, zapraszają kandydatów i doładowują kredyty. Obserwatorzy widzą rozmowy i wyniki oraz udostępniają raporty, ale niczego nie zmieniają.",
+      "Usunięcie członka zespołu, którego karta opłaca automatyczne doładowania, wyłącza te doładowania."
+    ]
+  },
+  "actions": {
+    "title": "Dziennik działań",
+    "text": "Wszystko, co zrobili członkowie zespołu firmy, od najnowszych: co zrobili i z czym, kto to zrobił, kiedy oraz czy zrobił to za nich asystent, aplikacja AI, API lub ATS. Widzi go tylko właściciel.",
+    "actions": [
+      "Pokaż działania jednego członka zespołu lub jednego rodzaju: rozmowy, kandydaci, zespół, firma, rozliczenia lub integracje.",
+      "Pokaż działania z okresu między dwoma dniami."
+    ],
+    "tips": [
+      "Działania są przechowywane przez 12 miesięcy.",
+      "Dziennik nie przechowuje osób: usunięty kandydat jest pokazany jako usunięty kandydat, a członek, który odszedł, jako były członek zespołu.",
+      "Wyświetlenia wyników jednego kandydata przez członka zespołu pojawiają się raz dziennie, z czasem ostatniego wyświetlenia."
+    ]
+  },
+  "integrations": {
+    "title": "Integracje",
+    "text": "Połącz prepza z narzędziami, których Twój zespół już używa. Każda integracja ma własną stronę z instrukcją konfiguracji.",
+    "actions": [
+      "Slack: powiadomienia firmy na wybranym kanale.",
+      "ATS (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR): kandydaci przeniesieni na wybrany etap dostają rozmowę, a ich wyniki wracają do ATS.",
+      "API: klucze i webhooki do połączenia własnej platformy.",
+      "Aplikacje AI: korzystaj z prepza w Claude, ChatGPT i innych aplikacjach AI."
+    ],
+    "tips": [
+      "Integracje widzą wszyscy w firmie; zmieniać je mogą właściciele i administratorzy."
+    ]
+  },
+  "ats": {
+    "title": "Integracja z ATS",
+    "text": "Powiąż ofertę w ATS z rozmową: kandydaci przeniesieni na wybrany etap dostają rozmowę, a ich wyniki wracają jako komentarz w ich profilu.",
+    "actions": [
+      "Połącz swój ATS według jego instrukcji.",
+      "Powiąż ofertę: wybierz ofertę, etap i rozmowę albo utwórz nową rozmowę z treści oferty.",
+      "Zaproś ponownie kandydatów, którzy nie zostali zaproszeni, np. gdy skończyły się kredyty.",
+      "Usuń powiązanie oferty albo odłącz ATS."
+    ],
+    "tips": [
+      "Dodaj etap tylko dla prepza, np. „Test umiejętności prepza”, żeby nigdy nie mieszał się z innymi narzędziami.",
+      "prepza nigdy nikogo nie przenosi ani nie odrzuca w Twoim ATS."
+    ]
+  },
+  "slack": {
+    "title": "Slack",
+    "text": "Powiadomienia firmy na kanale Slacka, na bieżąco.",
+    "actions": [
+      "Dodaj prepza do Slacka i wybierz kanał, np. #hiring.",
+      "Wybierz, które powiadomienia tam trafiają: kandydat kończy rozmowę, zaproszenie nie dotarło, rozmowa jest gotowa i inne.",
+      "Odłącz, by je wyłączyć i usunąć aplikację prepza ze Slacka."
+    ],
+    "tips": [
+      "prepza może tylko publikować na tym kanale; nie może czytać Twojego Slacka.",
+      "Wszyscy nadal widzą każde powiadomienie pod dzwonkiem."
+    ]
+  },
+  "api": {
+    "title": "API",
+    "text": "Połącz z prepza własną platformę, np. stronę kariery.",
+    "actions": [
+      "Utwórz klucz API i zaznacz tylko to, czego potrzebuje: odczyt lub tworzenie rozmów; odczyt, zapraszanie, zmianę lub usuwanie kandydatów; odczyt Twoich kredytów; albo używanie z agentami AI (MCP). Działa w Twoim imieniu.",
+      "Dodaj webhook: prepza powiadamia Twój adres HTTPS, z podpisem, gdy kandydat zaczyna lub kończy (wraz z wynikami), gdy zaproszenie do niego nie dotrze lub wygaśnie, gdy kandydat zostanie usunięty i gdy rozmowa jest gotowa.",
+      "Wyślij do webhooka zdarzenie testowe i sprawdź w dzienniku dostarczeń, jak poszła każda wysyłka.",
+      "Usuń klucze i webhooki, których już nie używasz.",
+      "Otwórz dokumentację dla deweloperów ze wszystkimi endpointami i zdarzeniami oraz SDK."
+    ],
+    "tips": [
+      "Nowy klucz i sekret webhooka są pokazywane tylko raz: skopiuj je od razu.",
+      "Ustaw termin ważności każdego klucza: wyciekły klucz bez terminu ważności można używać bez końca.",
+      "Uprawnienia klucza możesz później odznaczyć, ale nigdy nie dodasz nowego: jeśli potrzebujesz więcej, utwórz nowy klucz."
+    ]
+  },
+  "aiApps": {
+    "title": "Aplikacje AI",
+    "text": "Korzystaj z prepza w swoim czacie AI: pytaj Claude lub ChatGPT o swoje rozmowy i kandydatów albo zlecaj im zmiany.",
+    "actions": [
+      "Skopiuj adres serwera i dodaj go do Claude, Claude Code lub ChatGPT zgodnie z instrukcją; inne aplikacje i własnych agentów opisuje dokumentacja dla deweloperów.",
+      "Zezwól aplikacji na dostęp na stronie prepza, która się otworzy.",
+      "Odłącz aplikację, której już nie używasz."
+    ],
+    "tips": [
+      "Aplikacja działa w Twoim imieniu, w każdej firmie, do której należysz. Większość aplikacji pyta Cię, zanim cokolwiek zmieni.",
+      "Nie widzi Twojego hasła ani kluczy API i nie może usunąć Twojego konta ani firmy."
+    ]
+  },
+  "referrals": {
+    "title": "Polecenia",
+    "text": "Zapraszaj inne firmy do prepza linkiem tej firmy, a obie firmy dostaną kredyty.",
+    "actions": [
+      "Skopiuj lub udostępnij swój link polecający.",
+      "Zobacz wszystkie nagrody, które ta firma otrzymała."
+    ],
+    "tips": [
+      "Obie firmy dostają kredyty, gdy zaproszona firma zrobi pierwsze doładowanie, na dowolną kwotę.",
+      "Kredyty trafiają do tej firmy i nigdy nie wygasają."
+    ]
+  },
+  "brand": {
+    "title": "Marka",
+    "text": "Twoje logo i kolory w zaproszeniu, rozmowie i na stronie końcowej Twoich kandydatów.",
+    "actions": [
+      "Ustaw lub zmień logo.",
+      "Wybierz czcionkę i zaokrąglenie kart oraz przycisków.",
+      "Wybierz kolory każdej grupy i zobacz je w podglądzie.",
+      "Zapisz je albo wróć do kolorów prepza."
+    ],
+    "tips": [
+      "Kolorów, przy których tekst byłby trudny do odczytania, nie da się zapisać, żeby każdy kandydat mógł przeczytać pytania.",
+      "Członkowie zespołu, którzy wypróbowują rozmowę, też widzą ją w Twoich kolorach."
+    ]
+  },
+  "billing": {
+    "title": "Rozliczenia",
+    "text": "Skąd pochodzą kredyty tej firmy i na co zostały wykorzystane.",
+    "actions": [
+      "Doładuj albo ustaw automatyczne doładowanie.",
+      "Zobacz kandydatów, dla których kredyty są zarezerwowane.",
+      "Otwórz fakturę dowolnego doładowania."
+    ],
+    "tips": [
+      "Kredyty kandydata są rezerwowane przy zaproszeniu, pobierane, gdy odpowie, i zwracane, jeśli nie odpowie.",
+      "Tę stronę widzą tylko właściciele i administratorzy."
+    ]
+  },
+  "topUp": {
+    "title": "Doładowanie",
+    "text": "Kupuj kredyty dla każdej firmy, w której jesteś właścicielem lub administratorem.",
+    "actions": [
+      "Wybierz firmę i doładowanie: większe kosztują mniej za kandydata.",
+      "Zapłać na stronie płatności Paddle; kredyty pojawią się w kilka sekund.",
+      "Otwórz cennik, by porównać doładowania."
+    ],
+    "tips": [
+      "Kandydat kosztuje 500 kredytów: są rezerwowane przy zaproszeniu, pobierane, gdy odpowie, i zwracane, jeśli nie odpowie.",
+      "Kredyty nie wygasają. Faktura każdego doładowania jest na karcie Rozliczenia firmy."
+    ]
+  },
+  "settings": {
+    "title": "Ustawienia",
+    "text": "Twoje własne konto: język, w którym prepza się do Ciebie zwraca, e-maile, które dostajesz, i Twoje dane.",
+    "actions": [
+      "Wybierz język strony, czatu pomocy i Twoich e-maili.",
+      "Wybierz, które opcjonalne e-maile dostajesz; e-maile serwisowe, takie jak zaproszenia, raporty i problemy z płatnościami, są wysyłane zawsze.",
+      "Pobierz wszystko, co prepza przechowuje na Twój temat, albo usuń konto."
+    ],
+    "tips": [
+      "Usunięcie konta usuwa firmy, w których jesteś tylko Ty. Firma, do której dołączyli inni, potrzebuje najpierw innego właściciela."
+    ]
+  },
+  "join": {
+    "title": "Zaproszenie do firmy",
+    "text": "Zaproszono Cię do zespołu firmy w prepza, do pracy nad jej rozmowami i kandydatami.",
+    "actions": [
+      "Zaloguj się adresem e-mail, na który przyszło zaproszenie.",
+      "Dołącz do firmy: pojawi się wtedy wśród Twoich firm.",
+      "Otwórz firmę, jeśli już do niej należysz."
+    ],
+    "tips": [
+      "Zalogowano Cię innym adresem e-mail? Wyloguj się i zaloguj adresem z zaproszenia; zaproszenie działa tylko dla niego.",
+      "Twoją rolę, administratora lub obserwatora, wybrała osoba, która Cię zaprosiła."
+    ]
+  },
+  "connect": {
+    "title": "Połącz aplikację AI",
+    "text": "Aplikacja AI prosi o dostęp do Twojego konta prepza. Tutaj decydujesz, czy go dać.",
+    "actions": [
+      "Zaloguj się, jeśli trzeba, by zobaczyć, która aplikacja prosi o dostęp.",
+      "Przeczytaj, co aplikacja może, a czego nie może robić z Twoim kontem.",
+      "Zezwól aplikacji albo odmów; w obu przypadkach wrócisz do aplikacji."
+    ],
+    "tips": [
+      "Jeśli prepza nie zna aplikacji, zezwól tylko wtedy, gdy to Ty rozpoczynasz jej łączenie.",
+      "Odłączysz aplikację w każdej chwili w zakładce Integracje → Aplikacje AI firmy.",
+      "Link, który wygasł albo został już użyty, przestaje działać: zacznij łączenie od nowa w swojej aplikacji AI."
+    ]
+  },
+  "news": {
+    "title": "Aktualności",
+    "text": "Co nowego w prepza: nowe funkcje, ulepszenia i aktualizacje, od najnowszych.",
+    "actions": [
+      "Przewiń w dół, by przeczytać starsze aktualności.",
+      "Śledź aktualności w czytniku RSS dzięki linkowi do kanału RSS na górze."
+    ],
+    "tips": [
+      "Aktualności pojawiają się w Twoich powiadomieniach; włącz w ustawieniach nowości o produkcie, by najważniejsze dostawać też e-mailem."
+    ]
+  },
+  "practice": {
+    "title": "Darmowe ćwiczenia",
+    "text": "Darmowe próbne rozmowy na czas dla popularnych ról, dla każdego, kto przygotowuje się do rozmowy kwalifikacyjnej.",
+    "actions": [
+      "Szukaj według roli lub tematu i filtruj po poziomie i języku.",
+      "Otwórz próbną rozmowę, by zobaczyć jej tematy i ją rozpocząć."
+    ],
+    "tips": [
+      "Dopóki nie wybierzesz języków, lista pokazuje język strony i angielski.",
+      "Ćwiczenia są prywatne: żadna firma nie widzi Twoich wyników."
+    ]
+  },
+  "practiceTest": {
+    "title": "Próbna rozmowa",
+    "text": "Jedna darmowa próbna rozmowa: jej poziom, język, długość i tematy, które obejmuje.",
+    "actions": [
+      "Zacznij podejście; najpierw się zaloguj, jeśli trzeba.",
+      "Zobacz swój postęp w każdym temacie w ostatnim podejściu.",
+      "Otwórz swoje poprzednie podejścia przyciskiem historii obok „Zacznij ćwiczyć”.",
+      "Rekrutujesz na to stanowisko? Utwórz na jej podstawie rozmowę dla swoich kandydatów."
+    ],
+    "tips": [
+      "Każde podejście jest na czas, jak prawdziwa rozmowa; po zakończeniu zobaczysz swój wynik i wszystkie poprawne odpowiedzi.",
+      "Ćwicz, ile chcesz: to nic nie kosztuje."
+    ]
+  },
+  "practiceHistory": {
+    "title": "Twoje podejścia",
+    "text": "Wszystkie Twoje podejścia do tej próbnej rozmowy, od najnowszych, z postępem i wynikiem.",
+    "actions": [
+      "Otwórz podejście, by zobaczyć jego wyniki i każdą odpowiedź.",
+      "Ćwicz ponownie, by zacząć nowe podejście."
+    ],
+    "tips": [
+      "Porównuj swoje wyniki w czasie, by widzieć, w czym robisz postępy."
+    ]
+  },
+  "practiceRound": {
+    "title": "Wyniki ćwiczeń",
+    "text": "Wyniki jednego podejścia: Twój wynik, wynik z każdego tematu i każde pytanie z poprawnymi odpowiedziami i Twoimi wyborami; przy pytaniu „zaznacz wszystkie poprawne” widać też zdobyte za nie punkty.",
+    "actions": [
+      "Przeczytaj każde pytanie, jego poprawne odpowiedzi i swoje wybory.",
+      "Oceń pytanie albo zgłoś je, jeśli jego odpowiedź jest błędna; zgłoszone pytania są sprawdzane i poprawiane.",
+      "Kontynuuj nieukończone podejście.",
+      "Ćwicz ponownie albo otwórz swoje poprzednie podejścia."
+    ],
+    "tips": [
+      "To, co masz zaznaczone, gdy skończy się czas na pytanie, nadal się liczy; pytanie bez zaznaczonej odpowiedzi lub takie, do którego nie dotrzesz, liczy się jako błędne.",
+      "Rekrutujesz na to stanowisko? Utwórz na jej podstawie rozmowę dla swoich kandydatów."
+    ]
+  },
+  "pricing": {
+    "title": "Cennik",
+    "text": "Ile kosztuje prepza: generowanie rozmów jest bezpłatne, a płacisz za każdego kandydata, który odpowiada, bez abonamentu.",
+    "actions": [
+      "Zobacz aktualną cenę za kandydata i niższe ceny przy większych doładowaniach.",
+      "Zobacz, ilu pierwszych kandydatów jest za darmo.",
+      "Zobacz kredyty, które dostajesz za zaproszenie innej firmy.",
+      "Doładuj kredyty firmy."
+    ],
+    "tips": [
+      "Kredyty nie wygasają.",
+      "Kandydat, który nie odpowie na żadne pytanie, nic nie kosztuje."
+    ]
+  },
+  "tests": {
+    "title": "Testy rekrutacyjne według stanowiska",
+    "text": "Gotowe testy umiejętności na czas dla popularnych ról, do użycia bez zmian albo jako punkt wyjścia.",
+    "actions": [
+      "Szukaj według roli lub tematu i filtruj po poziomie i języku.",
+      "Otwórz test, by zobaczyć, co sprawdza, wraz z przykładowymi pytaniami."
+    ],
+    "tips": [
+      "Dopóki nie wybierzesz języków, lista pokazuje język strony i angielski.",
+      "Dla lepszego dopasowania utwórz test z własnego opisu stanowiska na stronie głównej."
+    ]
+  },
+  "test": {
+    "title": "Test umiejętności dla roli",
+    "text": "Gotowy test umiejętności na czas dla jednej roli: co sprawdza, przykładowe pytania i jak użyć go ze swoimi kandydatami.",
+    "actions": [
+      "Zobacz tematy i podtematy, które sprawdza.",
+      "Przeczytaj przykładowe pytania z poprawnymi odpowiedziami.",
+      "Utwórz test dla swoich kandydatów z opisu stanowiska.",
+      "Rozwiąż go za darmo, tak jak zrobiłby to kandydat.",
+      "Przeczytaj odpowiedzi na pytania, które firmy zadają przed testowaniem kandydatów."
+    ],
+    "tips": [
+      "Twoi kandydaci dostają własne losowe pytania, nigdy przykłady pokazane tutaj."
+    ]
+  },
+  "aiInterviews": {
+    "title": "Rozmowy z AI",
+    "text": "Przewodnik po rodzajach narzędzi do rozmów z AI, podejściu prepza i podstawach zgodności z przepisami.",
+    "actions": [
+      "Porównaj narzędzia do rozmów: chatboty, wideo i generowane testy.",
+      "Przeczytaj krok po kroku, jak prepza tworzy i ocenia rozmowę oraz czego nigdy nie robi.",
+      "Przeczytaj podstawy unijnego aktu w sprawie AI (AI Act), RODO i przepisów USA o AI w rekrutacji.",
+      "Utwórz test dla swoich kandydatów z karty na końcu."
+    ],
+    "tips": [
+      "To podsumowanie, a nie porada prawna: skonsultuj się z własnym prawnikiem."
+    ]
+  },
+  "preEmploymentTesting": {
+    "title": "Testy rekrutacyjne",
+    "text": "Przystępny poradnik o testach rekrutacyjnych dla zespołów rekrutacyjnych: rodzaje, kiedy pomagają, równe traktowanie i prawo oraz wybór narzędzia.",
+    "actions": [
+      "Przeczytaj, jakie są rodzaje testów i kiedy każdy z nich pomaga.",
+      "Przeczytaj podstawy równego traktowania i przepisów.",
+      "Zobacz, na co zwracać uwagę w narzędziu do testów i jak robi to prepza.",
+      "Utwórz test dla swoich kandydatów z karty na końcu."
+    ],
+    "tips": [
+      "To podsumowanie, a nie porada prawna: skonsultuj się z własnym prawnikiem."
+    ]
+  },
+  "compare": {
+    "title": "Porównaj prepza",
+    "text": "Porównania prepza z innymi narzędziami do testów rekrutacyjnych, ze źródłami: jak powstają testy, ile kosztują i kiedy które lepiej pasuje.",
+    "actions": [
+      "Otwórz porównanie, by je przeczytać."
+    ],
+    "tips": [
+      "Przy każdym porównaniu widać datę ostatniej aktualizacji."
+    ]
+  },
+  "comparison": {
+    "title": "Porównanie",
+    "text": "Jak prepza wypada na tle innych narzędzi w jednej kwestii: jak powstają testy, ile kosztują i kiedy które lepiej pasuje.",
+    "actions": [
+      "Przeczytaj porównanie i przejdź za linkami do źródeł.",
+      "Utwórz test dla swoich kandydatów z karty na końcu.",
+      "Wróć do wszystkich porównań linkiem nad tytułem."
+    ],
+    "tips": [
+      "Ceny i funkcje się zmieniają: data pod tytułem pokazuje ostatnią aktualizację strony."
+    ]
+  },
+  "guides": {
+    "title": "Poradniki rekrutacyjne",
+    "text": "Praktyczne poradniki dla menedżerów rekrutujących: selekcja kandydatów, testy umiejętności oraz uczciwe i zgodne z prawem korzystanie z AI w rekrutacji.",
+    "actions": [
+      "Otwórz poradnik, by go przeczytać."
+    ],
+    "tips": [
+      "Przy każdym poradniku widać datę ostatniej aktualizacji."
+    ]
+  },
+  "guide": {
+    "title": "Poradnik",
+    "text": "Praktyczny poradnik dla menedżerów rekrutujących na jeden temat.",
+    "actions": [
+      "Przeczytaj poradnik i przejdź za linkami do źródeł i powiązanych stron.",
+      "Utwórz test dla swoich kandydatów z karty na końcu.",
+      "Wróć do wszystkich poradników linkiem nad tytułem."
+    ],
+    "tips": [
+      "Tematy prawne to podsumowania, a nie porada prawna: skonsultuj się z własnym prawnikiem."
+    ]
+  },
+  "faq": {
+    "title": "Często zadawane pytania",
+    "text": "Odpowiedzi na częste pytania o prepza: rozmowy, kandydaci, ceny i kredyty, wyniki, integracje, języki i Twoje dane.",
+    "actions": [
+      "Kliknij pytanie, by otworzyć odpowiedź."
+    ],
+    "tips": [
+      "Nie ma tu Twojej odpowiedzi? Zapytaj asystenta AI na górze strony albo napisz do nas ze strony kontaktowej.",
+      "Ceny w odpowiedziach są zawsze aktualne."
+    ]
+  },
+  "about": {
+    "title": "O nas",
+    "text": "Kto tworzy prepza i po co: rozmowy z opisu stanowiska, na które stać każdy zespół, i darmowe ćwiczenia dla każdego.",
+    "actions": [
+      "Przeczytaj, po co istnieje prepza i jakie ma podejście do rekrutacji.",
+      "Przeczytaj słowo od założyciela i otwórz jego profil na LinkedIn."
+    ],
+    "tips": [
+      "Aby napisać do zespołu, skorzystaj ze strony kontaktowej."
+    ]
+  },
+  "contact": {
+    "title": "Skontaktuj się z nami",
+    "text": "Napisz do zespołu prepza z pytaniem, pomysłem, propozycją współpracy albo gdy coś nie działa.",
+    "actions": [
+      "Wpisz imię, adres e-mail i wiadomość, a potem ją wyślij.",
+      "Wklej ID firmy, rozmowy, kandydata lub konta, którego to dotyczy, byśmy od razu je znaleźli."
+    ],
+    "tips": [
+      "Link „kopiuj id” jest pod nazwą firmy lub rozmowy i pod imieniem kandydata; ID Twojego konta jest w menu konta.",
+      "Odpowiadamy na podany adres e-mail."
+    ]
+  },
+  "apiDocs": {
+    "title": "Dokumentacja dla deweloperów",
+    "text": "Wszystko, czego potrzebujesz, by połączyć z prepza własną platformę lub agenta AI. Dokumentacja powstaje z samego API, więc zawsze jest z nim zgodna.",
+    "actions": [
+      "API: jak się uwierzytelnić, bazowy URL i każdy endpoint z parametrami, treścią żądania, odpowiedzią i błędami.",
+      "Webhooki: zdarzenia, które prepza wysyła na Twój adres, i co zawiera każde z nich.",
+      "SDK: jak osadzić rozmowę na własnej stronie.",
+      "MCP: jak połączyć aplikację AI lub własnego agenta i jakie narzędzia dostaje.",
+      "Obiekty: każdy obiekt zwracany przez API, pole po polu."
+    ],
+    "tips": [
+      "Klucze API i webhooki utworzysz w zakładce Integracje firmy, w sekcji API.",
+      "Dokumentacja jest dostępna tylko po angielsku."
+    ]
+  },
+  "accessibility": {
+    "title": "Dostępność",
+    "text": "Jak prepza działa dla osób z niepełnosprawnościami, czego jeszcze brakuje i jak nam o tym powiedzieć.",
+    "actions": [
+      "Zobacz, co prepza robi dla dostępności, np. motywy, układ na telefon i obsługa klawiaturą.",
+      "Zobacz, czego jeszcze brakuje, np. przy pytaniach na czas.",
+      "Napisz do nas e-mailem, jeśli coś jest trudne w użyciu albo potrzebujesz tego w innej formie."
+    ],
+    "tips": [
+      "Masz przejść rozmowę firmy i potrzebujesz więcej czasu? Poproś firmę o dodatkowy czas przed rozpoczęciem; nie musisz podawać powodu."
+    ]
+  },
+  "documents": {
+    "title": "Dokumenty prawne",
+    "text": "Dokumenty dla firm, które oceniają kandydatów z prepza: instrukcje, szablony i umowa powierzenia przetwarzania danych.",
+    "actions": [
+      "Pobierz instrukcje dla firm: co oznacza wynik, weryfikacja przez człowieka, próg zaliczenia i dodatkowy czas.",
+      "Pobierz edytowalne szablony informacji, które wyślesz kandydatom przed zaproszeniem.",
+      "Pobierz szablon DPIA z wypełnioną częścią prepza, by go uzupełnić.",
+      "Pobierz umowę powierzenia przetwarzania danych albo przeczytaj ją online."
+    ],
+    "tips": [
+      "Dokumenty są dostępne tylko po angielsku."
+    ]
+  },
+  "terms": {
+    "title": "Regulamin",
+    "text": "Zasady korzystania z prepza: konta, firmy, kredyty i płatności, testy dla kandydatów, dozwolone użycie i odpowiedzialność.",
+    "actions": [
+      "Przeczytaj obowiązującą wersję wraz z datą, od której obowiązuje.",
+      "Otwórz wcześniejszą lub przyszłą wersję z listy wersji na końcu.",
+      "Przełącz się na tekst angielski, gdy czytasz tłumaczenie."
+    ],
+    "tips": [
+      "Wiążący jest tylko tekst angielski."
+    ]
+  },
+  "privacy": {
+    "title": "Prywatność",
+    "text": "Jak prepza zbiera, wykorzystuje i chroni dane osobowe firm, ich członków i kandydatów oraz jakie masz prawa.",
+    "actions": [
+      "Przeczytaj obowiązującą wersję wraz z datą, od której obowiązuje.",
+      "Otwórz wcześniejszą lub przyszłą wersję z listy wersji na końcu.",
+      "Przełącz się na tekst angielski, gdy czytasz tłumaczenie."
+    ],
+    "tips": [
+      "Wiążący jest tylko tekst angielski.",
+      "Aby pobrać kopię swoich danych lub usunąć konto, otwórz ustawienia."
+    ]
+  },
+  "dpa": {
+    "title": "Umowa powierzenia przetwarzania danych",
+    "text": "Umowa między prepza a firmami, które testują kandydatów: co prepza przetwarza w Twoim imieniu i jak.",
+    "actions": [
+      "Przeczytaj obowiązującą wersję wraz z datą, od której obowiązuje.",
+      "Otwórz wcześniejszą lub przyszłą wersję z listy wersji na końcu.",
+      "Przełącz się na tekst angielski, gdy czytasz tłumaczenie."
+    ],
+    "tips": [
+      "Jest częścią regulaminu.",
+      "Wiążący jest tylko tekst angielski; kopia w PDF jest na stronie dokumentów prawnych."
+    ]
+  },
+  "unsubscribe": {
+    "title": "Wypisz się",
+    "text": "Zrezygnuj z jednego rodzaju e-maili od prepza, wskazanego na stronie.",
+    "actions": [
+      "Sprawdź, które e-maile wyłącza link.",
+      "Potwierdź, by się wypisać; samo otwarcie linku niczego nie zmienia.",
+      "Potem otwórz ustawienia e-maili, by zmienić inne e-maile."
+    ],
+    "tips": [
+      "E-maile serwisowe, takie jak zaproszenia do zespołu, raporty i problemy z płatnościami, nadal będą wysyłane."
+    ]
+  }
+}

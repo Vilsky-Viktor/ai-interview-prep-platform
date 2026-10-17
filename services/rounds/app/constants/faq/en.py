@@ -59,7 +59,7 @@ FAQ = [
     {
         "key": "scorecards",
         "question": "What do scorecards show?",
-        "answer": "Every answer, whether it was right and how long it took. Grades show green or red against the passing grade you set for the interview. Scorecards also flag answers too fast to have been read, times the candidate left the page, and copy attempts.",
+        "answer": 'Every answer, whether it was right and how long it took. A grade is the percentage of points earned: each question is worth one point, and a "select all that apply" question earns part of it for each right option ticked, and nothing if a wrong one is ticked. Grades show green or red against the passing grade you set for the interview. Scorecards also flag answers too fast to have been read, times the candidate left the page, and copy attempts.',
     },
     {
         "key": "reports",
@@ -67,14 +67,19 @@ FAQ = [
         "answer": "Yes. Download a PDF report for one candidate or for all of an interview's candidates, email it straight from prepza, or send a short summary on WhatsApp, Telegram, Viber or LINE.",
     },
     {
+        "key": "action_log",
+        "question": "Can I see who did what in my company?",
+        "answer": "Yes, if you own the company. Its Action log tab lists everything its members did, newest first: inviting or removing candidates, viewing results, changing interviews, the team, billing and integrations, with who did it, when, and whether the assistant, an AI app or the API did it for them. You can filter it by member, kind of action and dates. Actions are kept for 12 months.",
+    },
+    {
         "key": "integrations",
         "question": "Does prepza work with my ATS or other tools?",
-        "answer": "Yes, at no extra cost. Connect Workable, Greenhouse, Teamtailor, Recruitee or Breezy HR on your company's Integrations tab: candidates you move to a stage get the interview, and their results go back to the ATS. Slack can post your company's notifications to a channel, and the API lets your own platform create interviews, invite and manage candidates and receive their results; see the API docs.",
+        "answer": "Yes, at no extra cost. Connect Workable, Greenhouse, Teamtailor, Recruitee or Breezy HR on your company's Integrations tab: candidates you move to a stage get the interview, and their results go back to the ATS. Slack can post your company's notifications to a channel, and the API lets your own platform create interviews, invite and manage candidates and receive their results, with each API key limited to what you tick for it; see the API docs.",
     },
     {
         "key": "ai_apps",
-        "question": "Can I use prepza from Claude or ChatGPT?",
-        "answer": "Yes. Add prepza to Claude or ChatGPT as a connector (the steps are on your company's Integrations tab) and allow it on prepza. The app then works with your companies, interviews and candidates' results as you, with your permissions; most apps ask you before they change anything. Deleting your account or a company is done only in prepza. What the app reads reaches its provider under that app's terms. You can disconnect it at any time on the same tab.",
+        "question": "Can I use prepza from Claude, ChatGPT or my own AI agent?",
+        "answer": "Yes. Add prepza to Claude or ChatGPT as a connector (the steps are on your company's Integrations tab) and allow it on prepza. The app then works with your companies, interviews and candidates' results as you, with your permissions; most apps ask you before they change anything. Deleting your account or a company is done only in prepza. What the app reads reaches its provider under that app's terms. You can disconnect it at any time on the same tab. Other AI apps and agents you build yourself connect too: the developer docs' MCP tab has the steps and example agents, and an agent on a server can sign in with an API key that has the AI agents permission.",
     },
     {
         "key": "candidates",
@@ -99,7 +104,7 @@ FAQ = [
     {
         "key": "emails",
         "question": "Which emails does prepza send, and how do I stop them?",
-        "answer": "Service emails, such as invites, reports, billing problems and changes to our terms, are always sent. The rest, such as the daily activity digest, reminders and product updates, you choose in Settings, under Emails, or stop with the Unsubscribe link in each email. Candidates can stop your company's emails, or an interview's reminders, with the links in their invites and reminders.",
+        "answer": "Service emails, such as invites, reports, billing problems and changes to our terms, are always sent. The rest, such as the daily activity digest, reminders and product updates, you choose in Settings, under Emails, or stop with the Unsubscribe link in each email. Candidates can stop your company's emails, or an interview's reminders, with the links in their invites and reminders. prepza's news shows in your notifications, the bell at the top; the major news also comes by email as a product update, only while that setting is on.",
     },
     {
         "key": "delete",
