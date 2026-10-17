@@ -113,11 +113,11 @@ Setiap soal dalam satu wawancara punya waktu yang sama. Sekitar 1 dari 10 soal b
 ### Jumlah soal
 
 - **Setiap topik dalam wawancara yang dibuat otomatis punya bank berisi 70 soal,** dan satu wawancara punya paling banyak 10 topik, yang kamu setujui sebelum soal apa pun ditulis.
-- **Secara default setiap kandidat mendapat 10 soal per topik,** berupa set acak dari bank dengan urutannya sendiri, dengan porsi soal "pilih semua jawaban yang benar" yang sama. Kamu bisa menetapkan jumlah yang berbeda untuk setiap topik.
+- **Secara default setiap kandidat mendapat 10 soal per topik,** berupa set acak dari bank dengan urutannya sendiri, dengan porsi soal "pilih semua jawaban yang benar" yang sama. Kamu bisa menetapkan jumlah yang berbeda untuk setiap topik. Atur ke 0 untuk mengeluarkan sebuah topik; setidaknya satu topik tetap punya soal.
 
 ### Total durasi
 
-Sebelum mulai, kandidat melihat waktu per soal dan waktu seluruh wawancara dalam menit, dibulatkan ke atas: jumlah soal yang mereka dapat dari semua topik, dikali detik per soal. Dengan pengaturan default, tiga topik paling lama 30 menit, atau 38 pada wawancara sulit.
+Sebelum mulai, kandidat melihat waktu per soal dan waktu seluruh wawancara dalam menit, dibulatkan ke atas: jumlah soal yang mereka dapat dari semua topik, dikali detik per soal. Dengan pengaturan default, tiga topik paling lama 30 menit, atau 38 pada wawancara sulit. Di tab topik wawancara, kamu melihat total soal, waktu per soal, dan waktu seluruh wawancara, yang diperbarui setiap kali kamu mengubahnya.
 
 ### Waktu tambahan
 

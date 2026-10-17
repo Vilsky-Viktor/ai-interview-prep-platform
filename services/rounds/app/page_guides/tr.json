@@ -97,12 +97,13 @@
     "actions": [
       "Bir konunun sorularını ve cevaplarını okumak için “Soruları yönet”i açın.",
       "Zayıf bir soruyu yeniden oluşturun, yanlış bir cevabı işaretleyin veya adayların bir soruyla ilgili bildirimlerini okuyun.",
-      "Her adayın bir konudan kaç soru alacağını belirleyin.",
+      "Her adayın bir konudan kaç soru alacağını belirleyin; 0, konuyu yeni adaylar için dışarıda bırakır.",
       "Mülakatı aday olarak deneyin veya silin."
     ],
     "tips": [
       "Yapay zekânın yazdığı sorular hatalı olabilir: kimseyi davet etmeden önce her konuya göz atın.",
-      "Mülakatı yeniden adlandırmak için başlığa tıklayın."
+      "Mülakatı yeniden adlandırmak için başlığa tıklayın.",
+      "Üstteki kartlar her adayın alacaklarını toplar: toplam soru, soru başına süre ve mülakatın tamamının süresi. Her değişiklikle güncellenir."
     ]
   },
   "interviewCandidates": {

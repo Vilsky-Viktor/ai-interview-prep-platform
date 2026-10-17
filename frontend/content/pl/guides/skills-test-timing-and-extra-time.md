@@ -113,11 +113,11 @@ Każde pytanie w rozmowie ma ten sam czas. Mniej więcej 1 na 10 to pytanie typu
 ### Liczba pytań
 
 - **Każdy temat wygenerowanej rozmowy ma pulę 70 pytań,** a rozmowa ma najwyżej 10 tematów, które zatwierdzasz, zanim powstanie jakiekolwiek pytanie.
-- **Każdy kandydat dostaje domyślnie 10 pytań z każdego tematu,** losowy zestaw z puli we własnej kolejności, z takim samym udziałem pytań typu „Zaznacz wszystkie poprawne odpowiedzi”. Dla każdego tematu możesz ustawić inną liczbę.
+- **Każdy kandydat dostaje domyślnie 10 pytań z każdego tematu,** losowy zestaw z puli we własnej kolejności, z takim samym udziałem pytań typu „Zaznacz wszystkie poprawne odpowiedzi”. Dla każdego tematu możesz ustawić inną liczbę. Ustaw 0, by pominąć temat; co najmniej jeden temat zachowuje swoje pytania.
 
 ### Łączna długość
 
-Przed startem kandydaci widzą czas na pytanie i czas całej rozmowy w minutach, zaokrąglony w górę: pytania, które dostają ze wszystkich tematów, razy sekundy na pytanie. Przy wartościach domyślnych trzy tematy zajmują najwyżej 30 minut, a w trudnej rozmowie 38.
+Przed startem kandydaci widzą czas na pytanie i czas całej rozmowy w minutach, zaokrąglony w górę: pytania, które dostają ze wszystkich tematów, razy sekundy na pytanie. Przy wartościach domyślnych trzy tematy zajmują najwyżej 30 minut, a w trudnej rozmowie 38. Na karcie tematów rozmowy widzisz łączną liczbę pytań, czas na pytanie i czas całej rozmowy, aktualizowane przy każdej zmianie.
 
 ### Dodatkowy czas
 

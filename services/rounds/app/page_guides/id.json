@@ -97,12 +97,13 @@
     "actions": [
       "Buka “Kelola soal” untuk membaca soal dan jawaban sebuah topik.",
       "Buat ulang soal yang lemah, tandai jawaban yang salah, atau baca laporan kandidat tentang sebuah soal.",
-      "Atur berapa soal yang didapat setiap kandidat dari sebuah topik.",
+      "Atur berapa soal yang didapat setiap kandidat dari sebuah topik; 0 mengeluarkan topik itu untuk kandidat baru.",
       "Coba wawancara sebagai kandidat, atau hapus."
     ],
     "tips": [
       "Soal buatan AI bisa salah: periksa sekilas setiap topik sebelum mengundang siapa pun.",
-      "Klik judul untuk mengganti nama wawancara."
+      "Klik judul untuk mengganti nama wawancara.",
+      "Kartu di atas menjumlahkan yang didapat setiap kandidat: total soal, waktu per soal, dan waktu seluruh wawancara. Kartu ini ikut berubah setiap ada perubahan."
     ]
   },
   "interviewCandidates": {

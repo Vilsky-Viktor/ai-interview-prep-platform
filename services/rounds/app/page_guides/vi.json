@@ -97,12 +97,13 @@
     "actions": [
       "Mở “Quản lý câu hỏi” để đọc câu hỏi và đáp án của một chủ đề.",
       "Tạo lại câu hỏi chưa tốt, đánh dấu đáp án sai, hoặc đọc báo cáo của ứng viên về một câu hỏi.",
-      "Đặt số câu hỏi mỗi ứng viên nhận từ một chủ đề.",
+      "Đặt số câu hỏi mỗi ứng viên nhận từ một chủ đề; đặt 0 để bỏ chủ đề đó với ứng viên mới.",
       "Thử buổi phỏng vấn với vai trò ứng viên, hoặc xóa nó."
     ],
     "tips": [
       "Câu hỏi do AI viết có thể sai: hãy đọc lướt từng chủ đề trước khi mời ai.",
-      "Nhấp vào tiêu đề để đổi tên buổi phỏng vấn."
+      "Nhấp vào tiêu đề để đổi tên buổi phỏng vấn.",
+      "Các thẻ ở trên cộng lại những gì mỗi ứng viên nhận được: tổng số câu hỏi, thời gian mỗi câu và thời gian của toàn bộ buổi phỏng vấn. Chúng thay đổi theo mỗi chỉnh sửa."
     ]
   },
   "interviewCandidates": {

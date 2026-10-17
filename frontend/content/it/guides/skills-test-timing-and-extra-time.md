@@ -113,11 +113,11 @@ Tutte le domande di un colloquio hanno lo stesso tempo. Circa 1 su 10 è una dom
 ### Numero di domande
 
 - **Ogni argomento di un colloquio generato ha una banca di 70 domande,** e un colloquio ha al massimo 10 argomenti, che approvi tu prima che venga scritta qualsiasi domanda.
-- **Ogni candidato riceve 10 domande per argomento come impostazione predefinita,** un set casuale dalla banca nel proprio ordine, con la stessa quota di domande «Seleziona tutte le opzioni corrette». Puoi impostare un numero diverso per ogni argomento.
+- **Ogni candidato riceve 10 domande per argomento come impostazione predefinita,** un set casuale dalla banca nel proprio ordine, con la stessa quota di domande «Seleziona tutte le opzioni corrette». Puoi impostare un numero diverso per ogni argomento. Impostalo a 0 per escludere un argomento; almeno un argomento mantiene le sue domande.
 
 ### Durata totale
 
-Prima di iniziare, i candidati vedono il tempo per domanda e il tempo dell'intero colloquio in minuti, arrotondato per eccesso: le domande che ricevono da tutti gli argomenti per i secondi per domanda. Con i valori predefiniti, tre argomenti richiedono al massimo 30 minuti, o 38 in un colloquio difficile.
+Prima di iniziare, i candidati vedono il tempo per domanda e il tempo dell'intero colloquio in minuti, arrotondato per eccesso: le domande che ricevono da tutti gli argomenti per i secondi per domanda. Con i valori predefiniti, tre argomenti richiedono al massimo 30 minuti, o 38 in un colloquio difficile. Nella scheda degli argomenti del colloquio vedi le domande totali, il tempo per domanda e la durata dell'intero colloquio, aggiornati a ogni modifica.
 
 ### Tempo extra
 

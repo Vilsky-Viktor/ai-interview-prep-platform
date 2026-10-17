@@ -9,7 +9,7 @@ There are two ways to start:
 - **From a template:** pick a ready-made interview, searchable by role, level and language. It is copied at once, for free. The list shows only templates that can still be copied (see [Templates and practice](templates-and-practice.md#copying-a-template)).
 - **From a job description:** paste it or describe the role. The AI extracts the requirements and proposes topics.
 
-For each topic, set how many questions it asks each candidate: 10 by default, drawn from the topic's 70.
+For each topic, set how many questions it asks each candidate: 10 by default, drawn from the topic's 70 (`INTERVIEW_QUESTIONS_PER_TOPIC`, a value in the admin zone's Controls), from 0 to the whole bank. A topic at 0 is left out: new candidates never see it, and it counts in no grade. The last topic with questions can't be set to 0 ("An interview needs at least one topic with questions."), and candidates who already started keep the questions drawn at their start.
 
 Generating an interview is free. Until its first top-up, a company can have 1 generated interview waiting without a candidate before it generates another, and generates at most 3 a day; after it, 5 waiting and 10 a day. These are the defaults, which a superadmin can change in the admin zone ([Admin zone](admin-zone.md#limits)); until midnight UTC, the unpaid users' daily AI spend cap can also stop generating for a company that never topped up ([Generation](../generation.md#rate-limits)). Interviews copied from templates don't count, and retrying a failed generation isn't a new one (see [Credits and payments](billing.md)).
 
@@ -43,7 +43,7 @@ An interview's page has three tabs:
 
 | Tab | Who sees it | What it holds |
 |---|---|---|
-| **topics** | Every member | The interview's topics and questions |
+| **topics** | Every member | What the interview adds up to for each candidate (total questions, time per question and the whole interview's minutes, as companies counts them, which follow each change), then the interview's topics and questions, each with its number of questions for each candidate |
 | **candidates** | Every member | The candidate list (see [Candidates](candidates.md#the-candidate-list)) |
 | **settings** | Owners and admins | Time per question, pass mark and "Mark as hired", each saved as it changes; the API (`PATCH /interviews/{id}/settings`) changes only the settings sent, so the assistant and AI apps can change one alone |
 

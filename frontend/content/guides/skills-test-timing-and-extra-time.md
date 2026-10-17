@@ -113,11 +113,11 @@ Every question in an interview has the same time. About 1 in 10 are "select all 
 ### Number of questions
 
 - **Each topic of a generated interview has a bank of 70 questions,** and an interview has at most 10 topics, which you approve before any question is written.
-- **Each candidate gets 10 questions per topic by default,** a random set from the bank in their own order, with the same share of "select all that apply" questions. You can set a different number for each topic.
+- **Each candidate gets 10 questions per topic by default,** a random set from the bank in their own order, with the same share of "select all that apply" questions. You can set a different number for each topic. Set it to 0 to leave a topic out; at least one topic keeps its questions.
 
 ### Total length
 
-Before starting, candidates see the time per question and the whole interview's time in minutes, rounded up: the questions they get from every topic, times the seconds per question. With the defaults, three topics take at most 30 minutes, or 38 on a hard interview.
+Before starting, candidates see the time per question and the whole interview's time in minutes, rounded up: the questions they get from every topic, times the seconds per question. With the defaults, three topics take at most 30 minutes, or 38 on a hard interview. On the interview's topics tab you see the total questions, the time per question and the whole interview's time, updated as you change them.
 
 ### Extra time
 

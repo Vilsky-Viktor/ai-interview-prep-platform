@@ -113,11 +113,11 @@ Todas as perguntas de uma entrevista têm o mesmo tempo. Cerca de 1 em cada 10 �
 ### Número de perguntas
 
 - **Cada tópico de uma entrevista gerada tem um banco de 70 perguntas,** e uma entrevista tem no máximo 10 tópicos, que você aprova antes de qualquer pergunta ser escrita.
-- **Cada candidato recebe 10 perguntas por tópico por padrão,** um conjunto aleatório do banco em uma ordem própria, com a mesma proporção de perguntas de "Marque todas as opções corretas". Você pode definir um número diferente para cada tópico.
+- **Cada candidato recebe 10 perguntas por tópico por padrão,** um conjunto aleatório do banco em uma ordem própria, com a mesma proporção de perguntas de "Marque todas as opções corretas". Você pode definir um número diferente para cada tópico. Coloque 0 para deixar um tópico de fora; pelo menos um tópico mantém suas questões.
 
 ### Duração total
 
-Antes de começar, os candidatos veem o tempo por pergunta e o tempo da entrevista inteira em minutos, arredondado para cima: as perguntas que recebem de todos os tópicos vezes os segundos por pergunta. Com os padrões, três tópicos levam no máximo 30 minutos, ou 38 em uma entrevista difícil.
+Antes de começar, os candidatos veem o tempo por pergunta e o tempo da entrevista inteira em minutos, arredondado para cima: as perguntas que recebem de todos os tópicos vezes os segundos por pergunta. Com os padrões, três tópicos levam no máximo 30 minutos, ou 38 em uma entrevista difícil. Na aba de tópicos da entrevista, você vê o total de questões, o tempo por questão e o tempo da entrevista completa, atualizados a cada mudança.
 
 ### Tempo extra
 

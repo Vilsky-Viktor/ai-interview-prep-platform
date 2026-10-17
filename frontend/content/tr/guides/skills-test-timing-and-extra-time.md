@@ -113,11 +113,11 @@ Bir mülakattaki her sorunun süresi aynıdır. Yaklaşık 10 sorudan 1'i, 2 ya 
 ### Soru sayısı
 
 - **Oluşturulan bir mülakattaki her konunun 70 soruluk bir havuzu vardır** ve bir mülakatta en fazla 10 konu bulunur; bu konuları siz, herhangi bir soru yazılmadan önce onaylarsınız.
-- **Her aday varsayılan olarak konu başına 10 soru alır:** havuzdan kendine özgü sırayla gelen rastgele bir set, aynı oranda "doğru olanların tümünü seçin" sorusuyla. Her konu için farklı bir sayı belirleyebilirsiniz.
+- **Her aday varsayılan olarak konu başına 10 soru alır:** havuzdan kendine özgü sırayla gelen rastgele bir set, aynı oranda "doğru olanların tümünü seçin" sorusuyla. Her konu için farklı bir sayı belirleyebilirsiniz. Bir konuyu dışarıda bırakmak için 0 yapın; en az bir konunun soruları kalır.
 
 ### Toplam uzunluk
 
-Adaylar başlamadan önce soru başına süreyi ve tüm mülakatın süresini yukarı yuvarlanmış dakika olarak görür: her konudan aldıkları sorular çarpı soru başına saniye. Varsayılanlarla üç konu en fazla 30 dakika, zor bir mülakatta ise 38 dakika sürer.
+Adaylar başlamadan önce soru başına süreyi ve tüm mülakatın süresini yukarı yuvarlanmış dakika olarak görür: her konudan aldıkları sorular çarpı soru başına saniye. Varsayılanlarla üç konu en fazla 30 dakika, zor bir mülakatta ise 38 dakika sürer. Mülakatın konular sekmesinde toplam soruyu, soru başına süreyi ve mülakatın tamamının süresini görürsünüz; her değişiklikle güncellenir.
 
 ### Ek süre
 

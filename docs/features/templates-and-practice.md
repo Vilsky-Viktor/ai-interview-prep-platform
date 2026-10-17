@@ -72,4 +72,4 @@ A practice test's page and its result both offer the template for hiring. The bu
 ## Related pages
 
 - [Public site](site.md#skills-tests-by-role): the skills test page each template gets.
-- [Generation](../generation.md#generation-settings): `TEMPLATE_QUESTIONS_PER_TOPIC` and the other generation settings.
+- [Generation](../generation.md#generation-settings): `TEMPLATE_QUESTIONS_PER_TOPIC` and the other values that shape a generation, set in the admin zone's Controls.

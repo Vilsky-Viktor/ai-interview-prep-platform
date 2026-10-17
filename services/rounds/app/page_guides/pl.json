@@ -97,12 +97,13 @@
     "actions": [
       "Otwórz „Zarządzaj pytaniami”, by przeczytać pytania i odpowiedzi tematu.",
       "Wygeneruj ponownie słabe pytanie, oznacz błędną odpowiedź albo przeczytaj zgłoszenia kandydatów do pytania.",
-      "Ustaw, ile pytań z tematu dostaje każdy kandydat.",
+      "Ustaw, ile pytań z tematu dostaje każdy kandydat; 0 pomija temat dla nowych kandydatów.",
       "Wypróbuj rozmowę jako kandydat albo ją usuń."
     ],
     "tips": [
       "Pytania napisane przez AI mogą zawierać błędy: przejrzyj każdy temat, zanim kogokolwiek zaprosisz.",
-      "Kliknij tytuł, by zmienić nazwę rozmowy."
+      "Kliknij tytuł, by zmienić nazwę rozmowy.",
+      "Karty na górze sumują to, co dostaje każdy kandydat: łączną liczbę pytań, czas na pytanie i czas całej rozmowy. Zmieniają się po każdej zmianie."
     ]
   },
   "interviewCandidates": {

@@ -113,11 +113,11 @@ Pareho ang oras ng bawat tanong sa isang interview. Mga 1 sa 10 ang "piliin ang 
 ### Bilang ng tanong
 
 - **May bank na 70 tanong ang bawat topic ng isang generated na interview,** at hanggang 10 topic ang isang interview, na inaaprubahan mo bago isulat ang anumang tanong.
-- **Bilang default, 10 tanong bawat topic ang nakukuha ng bawat aplikante,** isang random na set mula sa bank sa sarili nilang pagkakasunod-sunod, na may parehong bahagi ng mga tanong na "piliin ang lahat ng tamang opsyon". Puwede kang magtakda ng ibang bilang para sa bawat topic.
+- **Bilang default, 10 tanong bawat topic ang nakukuha ng bawat aplikante,** isang random na set mula sa bank sa sarili nilang pagkakasunod-sunod, na may parehong bahagi ng mga tanong na "piliin ang lahat ng tamang opsyon". Puwede kang magtakda ng ibang bilang para sa bawat topic. Gawin itong 0 para hindi isama ang isang topic; may tanong pa rin ang kahit isang topic.
 
 ### Kabuuang haba
 
-Bago magsimula, nakikita ng mga aplikante ang oras bawat tanong at ang oras ng buong interview sa minuto, naka-round up: ang mga tanong na nakukuha nila mula sa bawat topic, times ang segundo bawat tanong. Sa mga default, hanggang 30 minuto ang tatlong topic, o 38 sa hard na interview.
+Bago magsimula, nakikita ng mga aplikante ang oras bawat tanong at ang oras ng buong interview sa minuto, naka-round up: ang mga tanong na nakukuha nila mula sa bawat topic, times ang segundo bawat tanong. Sa mga default, hanggang 30 minuto ang tatlong topic, o 38 sa hard na interview. Sa tab ng mga topic ng interview, makikita mo ang kabuuang tanong, ang oras bawat tanong at ang oras ng buong interview, na nagbabago habang binabago mo ang mga ito.
 
 ### Dagdag na oras
 

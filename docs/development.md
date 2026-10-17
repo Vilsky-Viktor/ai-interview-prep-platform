@@ -52,7 +52,7 @@ Settings are described with the feature they shape:
 | `EMAIL_LINK_SECRET` | [Notifications and emails](features/notifications.md#unsubscribing) |
 | Email limits | [Candidates](features/candidates.md#email-limits) |
 | Help chat and contact form limits | [Public site](features/site.md#faq-and-help-chat) |
-| Every usage limit (not a setting: edited in the admin zone), `MONTHLY_BUDGET` | [Admin zone](features/admin-zone.md#limits), [Credits and payments](features/billing.md#ai-usage-and-limit-hits) |
+| Every usage limit and the values tuned with them, such as the questions generated per topic, the topic caps and the monthly AI budget (not settings: edited in the admin zone) | [Admin zone](features/admin-zone.md#limits), [Credits and payments](features/billing.md#ai-usage-and-limit-hits) |
 | `ATS_ENCRYPTION_KEY` | [ATS integrations](features/ats.md#connecting-an-ats) |
 | `API_ENCRYPTION_KEY` | [Public API](features/api.md#settings) |
 | `FIREBASE_WEB_API_KEY` (AI apps over MCP) | [AI apps over MCP](features/mcp.md#settings) |

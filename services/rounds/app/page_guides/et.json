@@ -97,12 +97,13 @@
     "actions": [
       "Ava „Halda küsimusi“, et lugeda teema küsimusi ja vastuseid.",
       "Loo nõrk küsimus uuesti, märgi vale vastus või loe kandidaatide teateid küsimuse kohta.",
-      "Määra, mitu küsimust iga kandidaat teemast saab.",
+      "Määra, mitu küsimust iga kandidaat teemast saab; 0 jätab teema uutele kandidaatidele välja.",
       "Proovi intervjuud kandidaadina või kustuta see."
     ],
     "tips": [
       "Tehisintellekti kirjutatud küsimustes võib olla vigu: sirvi iga teema läbi, enne kui kedagi kutsud.",
-      "Klõpsa pealkirjal, et intervjuu ümber nimetada."
+      "Klõpsa pealkirjal, et intervjuu ümber nimetada.",
+      "Ülal olevad kaardid liidavad kokku, mida iga kandidaat saab: küsimusi kokku, aja küsimuse kohta ja kogu intervjuu aja. Need muutuvad iga muudatusega."
     ]
   },
   "interviewCandidates": {

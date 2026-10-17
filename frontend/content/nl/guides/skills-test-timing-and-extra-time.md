@@ -113,11 +113,11 @@ Elke vraag in een interview heeft dezelfde tijd. Ongeveer 1 op de 10 is een vraa
 ### Aantal vragen
 
 - **Elk onderwerp van een gegenereerd interview heeft een vragenbank van 70 vragen,** en een interview heeft hooguit 10 onderwerpen, die je goedkeurt voordat er ook maar één vraag wordt geschreven.
-- **Elke kandidaat krijgt standaard 10 vragen per onderwerp,** een willekeurige set uit de vragenbank in een eigen volgorde, met hetzelfde aandeel vragen met "Kies alle juiste opties". Je kunt per onderwerp een ander aantal instellen.
+- **Elke kandidaat krijgt standaard 10 vragen per onderwerp,** een willekeurige set uit de vragenbank in een eigen volgorde, met hetzelfde aandeel vragen met "Kies alle juiste opties". Je kunt per onderwerp een ander aantal instellen. Zet het op 0 om een onderwerp weg te laten; minstens één onderwerp houdt zijn vragen.
 
 ### Totale duur
 
-Voordat ze beginnen, zien kandidaten de tijd per vraag en de tijd voor het hele interview in minuten, naar boven afgerond: de vragen die ze uit alle onderwerpen krijgen, maal de seconden per vraag. Met de standaardinstellingen duren drie onderwerpen hooguit 30 minuten, of 38 bij een moeilijk interview.
+Voordat ze beginnen, zien kandidaten de tijd per vraag en de tijd voor het hele interview in minuten, naar boven afgerond: de vragen die ze uit alle onderwerpen krijgen, maal de seconden per vraag. Met de standaardinstellingen duren drie onderwerpen hooguit 30 minuten, of 38 bij een moeilijk interview. Op het tabblad onderwerpen van het interview zie je het totaal aantal vragen, de tijd per vraag en de tijd van het hele interview, bijgewerkt bij elke wijziging.
 
 ### Extra tijd
 

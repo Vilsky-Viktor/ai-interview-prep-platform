@@ -113,11 +113,11 @@ Jede Frage in einem Interview hat dieselbe Zeit. Etwa jede zehnte ist eine Frage
 ### Anzahl der Fragen
 
 - **Jedes Thema eines generierten Interviews hat einen Pool von 70 Fragen,** und ein Interview hat höchstens 10 Themen, die du freigibst, bevor eine Frage geschrieben wird.
-- **Jeder Kandidat erhält standardmäßig 10 Fragen pro Thema,** einen zufälligen Satz aus dem Pool in eigener Reihenfolge, mit demselben Anteil an Fragen mit „Alle zutreffenden Optionen auswählen“. Du kannst für jedes Thema eine andere Anzahl festlegen.
+- **Jeder Kandidat erhält standardmäßig 10 Fragen pro Thema,** einen zufälligen Satz aus dem Pool in eigener Reihenfolge, mit demselben Anteil an Fragen mit „Alle zutreffenden Optionen auswählen“. Du kannst für jedes Thema eine andere Anzahl festlegen. Mit 0 lässt du ein Thema weg; mindestens ein Thema behält seine Fragen.
 
 ### Gesamtdauer
 
-Vor dem Start sehen Kandidaten die Zeit pro Frage und die Zeit für das ganze Interview in Minuten, aufgerundet: die Fragen, die sie aus allen Themen erhalten, mal die Sekunden pro Frage. Mit den Standardwerten dauern drei Themen höchstens 30 Minuten, bei einem schweren Interview 38.
+Vor dem Start sehen Kandidaten die Zeit pro Frage und die Zeit für das ganze Interview in Minuten, aufgerundet: die Fragen, die sie aus allen Themen erhalten, mal die Sekunden pro Frage. Mit den Standardwerten dauern drei Themen höchstens 30 Minuten, bei einem schweren Interview 38. Auf dem Themen-Tab des Interviews siehst du die Fragen insgesamt, die Zeit pro Frage und die Zeit des ganzen Interviews, aktualisiert bei jeder Änderung.
 
 ### Zusätzliche Zeit
 

@@ -113,11 +113,11 @@ Toutes les questions d'un entretien ont le même temps. Environ 1 sur 10 est une
 ### Nombre de questions
 
 - **Chaque thème d'un entretien généré dispose d'une banque de 70 questions,** et un entretien compte au plus 10 thèmes, que vous validez avant qu'une question ne soit rédigée.
-- **Chaque candidat reçoit 10 questions par thème par défaut,** une série aléatoire tirée de la banque, dans son propre ordre, avec la même part de questions « Cochez toutes les bonnes réponses ». Vous pouvez fixer un nombre différent pour chaque thème.
+- **Chaque candidat reçoit 10 questions par thème par défaut,** une série aléatoire tirée de la banque, dans son propre ordre, avec la même part de questions « Cochez toutes les bonnes réponses ». Vous pouvez fixer un nombre différent pour chaque thème. Mettez-le à 0 pour retirer un thème ; au moins un thème garde ses questions.
 
 ### Durée totale
 
-Avant de commencer, les candidats voient le temps par question et la durée de tout l'entretien en minutes, arrondie à l'unité supérieure : les questions qu'ils reçoivent de tous les thèmes, multipliées par les secondes par question. Avec les valeurs par défaut, trois thèmes prennent au plus 30 minutes, ou 38 pour un entretien difficile.
+Avant de commencer, les candidats voient le temps par question et la durée de tout l'entretien en minutes, arrondie à l'unité supérieure : les questions qu'ils reçoivent de tous les thèmes, multipliées par les secondes par question. Avec les valeurs par défaut, trois thèmes prennent au plus 30 minutes, ou 38 pour un entretien difficile. Dans l'onglet des thèmes de l'entretien, vous voyez le total des questions, le temps par question et la durée de l'entretien complet, mis à jour à chaque changement.
 
 ### Temps supplémentaire
 

@@ -97,12 +97,13 @@
     "actions": [
       "Buksan ang “pamahalaan ang mga tanong” para mabasa ang mga tanong at sagot ng isang topic.",
       "I-regenerate ang mahinang tanong, markahan ang maling sagot, o basahin ang mga report ng aplikante tungkol sa isang tanong.",
-      "Itakda kung ilang tanong mula sa isang topic ang makukuha ng bawat aplikante.",
+      "Itakda kung ilang tanong mula sa isang topic ang makukuha ng bawat aplikante; sa 0, hindi na kasama ang topic para sa mga bagong aplikante.",
       "Subukan ang interview bilang aplikante, o burahin ito."
     ],
     "tips": [
       "Puwedeng mali ang mga tanong na isinulat ng AI: silipin ang bawat topic bago ka mag-imbita.",
-      "I-click ang pamagat para palitan ang pangalan ng interview."
+      "I-click ang pamagat para palitan ang pangalan ng interview.",
+      "Ipinapakita ng mga card sa itaas ang kabuuan ng makukuha ng bawat aplikante: kabuuang tanong, oras bawat tanong at oras ng buong interview. Sumusunod ang mga ito sa bawat pagbabago."
     ]
   },
   "interviewCandidates": {

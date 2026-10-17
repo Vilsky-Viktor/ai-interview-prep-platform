@@ -113,11 +113,11 @@ Intervjuu kõigil küsimustel on sama aeg. Umbes 1 küsimus 10-st on tüüpi „
 ### Küsimuste arv
 
 - **Loodud intervjuu igal teemal on 70 küsimusega pank** ja intervjuus on kuni 10 teemat, mille sa kinnitad enne, kui ühtegi küsimust kirjutatakse.
-- **Iga kandidaat saab vaikimisi 10 küsimust teema kohta,** juhusliku valiku pangast oma järjekorras, sama osakaaluga „vali kõik sobivad variandid“ küsimusi. Igale teemale saad määrata erineva arvu.
+- **Iga kandidaat saab vaikimisi 10 küsimust teema kohta,** juhusliku valiku pangast oma järjekorras, sama osakaaluga „vali kõik sobivad variandid“ küsimusi. Igale teemale saad määrata erineva arvu. Teema väljajätmiseks määra 0; vähemalt ühel teemal jäävad küsimused alles.
 
 ### Kogupikkus
 
-Enne alustamist näevad kandidaadid aega küsimuse kohta ja kogu intervjuu aega minutites, ülespoole ümardatuna: küsimused, mille nad igast teemast saavad, korda sekundid küsimuse kohta. Vaikeseadetega võtavad kolm teemat kõige rohkem 30 minutit või raske intervjuu puhul 38.
+Enne alustamist näevad kandidaadid aega küsimuse kohta ja kogu intervjuu aega minutites, ülespoole ümardatuna: küsimused, mille nad igast teemast saavad, korda sekundid küsimuse kohta. Vaikeseadetega võtavad kolm teemat kõige rohkem 30 minutit või raske intervjuu puhul 38. Intervjuu teemade vahekaardil näed küsimusi kokku, aega küsimuse kohta ja kogu intervjuu aega, mis muutuvad iga muudatusega.
 
 ### Lisaaeg
 

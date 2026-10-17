@@ -113,11 +113,11 @@ Mọi câu hỏi trong một buổi phỏng vấn có cùng thời gian. Khoản
 ### Số câu hỏi
 
 - **Mỗi chủ đề của một buổi phỏng vấn được tạo tự động có ngân hàng 70 câu hỏi,** và một buổi phỏng vấn có tối đa 10 chủ đề, do bạn duyệt trước khi bất kỳ câu hỏi nào được viết.
-- **Mặc định mỗi ứng viên nhận 10 câu mỗi chủ đề,** một bộ ngẫu nhiên từ ngân hàng theo thứ tự riêng của họ, với cùng tỷ lệ câu "chọn tất cả phương án đúng". Bạn có thể đặt số câu khác cho từng chủ đề.
+- **Mặc định mỗi ứng viên nhận 10 câu mỗi chủ đề,** một bộ ngẫu nhiên từ ngân hàng theo thứ tự riêng của họ, với cùng tỷ lệ câu "chọn tất cả phương án đúng". Bạn có thể đặt số câu khác cho từng chủ đề. Đặt 0 để bỏ một chủ đề; ít nhất một chủ đề vẫn giữ câu hỏi.
 
 ### Tổng thời lượng
 
-Trước khi bắt đầu, ứng viên thấy thời gian mỗi câu và thời gian của cả buổi phỏng vấn tính bằng phút, làm tròn lên: số câu họ nhận từ mọi chủ đề, nhân số giây mỗi câu. Với mặc định, ba chủ đề mất tối đa 30 phút, hoặc 38 phút với buổi phỏng vấn khó.
+Trước khi bắt đầu, ứng viên thấy thời gian mỗi câu và thời gian của cả buổi phỏng vấn tính bằng phút, làm tròn lên: số câu họ nhận từ mọi chủ đề, nhân số giây mỗi câu. Với mặc định, ba chủ đề mất tối đa 30 phút, hoặc 38 phút với buổi phỏng vấn khó. Trên thẻ chủ đề của buổi phỏng vấn, bạn thấy tổng số câu hỏi, thời gian mỗi câu và thời gian của toàn bộ buổi phỏng vấn, cập nhật theo mỗi thay đổi.
 
 ### Thời gian cộng thêm
 

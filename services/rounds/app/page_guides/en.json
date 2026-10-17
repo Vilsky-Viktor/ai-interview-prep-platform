@@ -97,12 +97,13 @@
     "actions": [
       "Open “manage questions” to read a topic's questions and answers.",
       "Re-generate a weak question, mark a wrong answer, or read candidates' reports on a question.",
-      "Set how many questions each candidate gets from a topic.",
+      "Set how many questions each candidate gets from a topic; 0 leaves the topic out for new candidates.",
       "Try the interview as a candidate, or delete it."
     ],
     "tips": [
       "AI-written questions can be wrong: skim each topic before you invite anyone.",
-      "Click the title to rename the interview."
+      "Click the title to rename the interview.",
+      "The cards at the top add up what each candidate gets: the total questions, the time per question and the whole interview's time. They follow every change."
     ]
   },
   "interviewCandidates": {

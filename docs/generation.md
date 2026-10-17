@@ -37,7 +37,7 @@ Prompts are task wording only, never a persona, and work for any field: they nam
 
 ### Topics
 
-The topic draft has up to `MAX_TOPICS` main topics, that number included: one for each distinct subject the job's requirements cover. Distinct subjects are merged only when there are more of them than the limit.
+The topic draft has up to `MAX_TOPICS` main topics (set in Controls, see [Generation settings](#generation-settings)), that number included: one for each distinct subject the job's requirements cover. Distinct subjects are merged only when there are more of them than the limit.
 
 ### Question length
 
@@ -128,14 +128,19 @@ Superadmins see flagged and replaced questions on the admin zone's Questions tab
 
 ## Generation settings
 
-These settings in `.env` shape every generation. Terraform passes none of them to Google Cloud, so production runs on the defaults below (see [infra/README.md](../infra/README.md#notes)).
+Four values shape every generation. They aren't settings: each starts at its default in `prepza_common.limit_list` and a superadmin changes it in the admin zone's Controls tab ([Admin zone](features/admin-zone.md#limits)), in effect within 30 seconds. A run takes its questions per topic when it starts and keeps them to its end, also through a retry or a resume; a change applies to generations started after it. The topic caps are read when the topics are drafted or revised, and when a review is sent.
+
+| Value | Default | Range | What it sets |
+|---|---|---|---|
+| `MAX_TOPICS` | 10 | 1–20 | Main topics an interview or template has. The review page follows it; approving more without instructions is refused ("Choose at most {count} topics") |
+| `MAX_SUBTOPICS` | 5 | 1–20 | Subtopics per topic; every subtopic is at least one model call. The review page follows it; a topic edited with more is refused ("A topic can have at most {count} subtopics") |
+| `INTERVIEW_QUESTIONS_PER_TOPIC` | 70 | 10–500 | Questions per topic of a company's interview, from which each candidate gets a random subset |
+| `TEMPLATE_QUESTIONS_PER_TOPIC` | 90 | 10–500 | Questions per topic of a template: 30 for free practice and 60 for companies' interviews (library's `PRACTICE_QUESTIONS` and `COMPANY_QUESTIONS`) |
+
+These settings in `.env` trace generation. Terraform doesn't pass them to Google Cloud (see [infra/README.md](../infra/README.md#notes)).
 
 | Setting | Default | What it sets |
 |---|---|---|
-| `MAX_TOPICS` | 10 | Main topics an interview or template has. The review page follows it |
-| `MAX_SUBTOPICS` | 10 | Subtopics per topic; every subtopic is at least one model call. The review page follows it |
-| `INTERVIEW_QUESTIONS_PER_TOPIC` | 70 | Questions per topic of a company's interview, from which each candidate gets a random subset |
-| `TEMPLATE_QUESTIONS_PER_TOPIC` | 90 | Questions per topic of a template: 30 for free practice and 60 for companies' interviews (library's `PRACTICE_QUESTIONS` and `COMPANY_QUESTIONS`) |
 | `LANGSMITH_TRACING`, `LANGSMITH_API_KEY`, `LANGSMITH_PROJECT`, `LANGSMITH_ENDPOINT` | Off | Trace generation, help chat and assistant calls to LangSmith; the endpoint is the key's region (US by default, `https://eu.api.smith.langchain.com` for EU) |
 
 ## Models

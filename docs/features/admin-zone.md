@@ -124,7 +124,7 @@ So the numbers are what is stored now: deleted companies and candidates past ret
 
 What AI cost and why, for the same period as General (the choice is shared). Billing works it out from `ai_usage` and `limit_hits` (see [Credits and payments](billing.md#ai-usage-and-limit-hits)); the page only shows it:
 
-1. **Totals:** spend in USD, AI calls, input, cached input and output tokens, and this month's spend against the monthly budget (the `MONTHLY_BUDGET` setting; without one, the month's spend alone).
+1. **Totals:** spend in USD, AI calls, input, cached input and output tokens, and this month's spend against the monthly budget (`MONTHLY_BUDGET` in Controls, see [Limits](#limits); at 0, the month's spend alone).
 2. **Who it was for:** paid companies, unpaid companies, people without a company and prepza's own work (templates, quality checks, batches, news), each with its spend and share.
 3. **By action:** each action's calls, spend, paid and unpaid spend, and what one cost: one interview generation, one assistant message, one minute of transcription.
 4. **By model:** calls, tokens and spend, with the share of input read from OpenAI's cache.
@@ -222,6 +222,9 @@ Beside the limits, in the same groups, are the plain values the services work wi
 | `GENERATION_CALLS_AT_ONCE` | 24 | 1–64 | The AI calls one generation (or a template's top-up) makes at once. |
 | `GENERATION_CALLS_PER_SECOND` | 24 | 1–80 | The AI calls a second of every generation together, shared through Redis; OpenAI allows our account 5,000 requests and 1M tokens a minute. |
 | `MULTI_ANSWER_PERCENT` | 10% | 0–50 | The share of each topic, and of each draw from it, that is "select all that apply" (see [Generation](../generation.md#select-all-that-apply)). |
+| `INTERVIEW_QUESTIONS_PER_TOPIC`, `TEMPLATE_QUESTIONS_PER_TOPIC` | 70, 90 | 10–500 | The questions generated for each topic of a company's interview and of a template. A generation takes them when it starts (see [Generation](../generation.md#generation-settings)). |
+| `MAX_TOPICS`, `MAX_SUBTOPICS` | 10, 5 | 1–20 | The topics an interview or template has, and the subtopics a topic has; the topic review follows them. |
+| `MONTHLY_BUDGET` | $300 | 0–100,000 | The AI spend a month the AI costs tab compares this month's with; 0: no budget. |
 | `RESEND_RESERVE_PERCENT` | 20% | 0–90 | The share of `RESEND_DAILY_LIMIT` bulk sends leave for invites and other service emails. |
 
 Below them, our providers' limits, read-only with their hits, and the latest 50 changes: who, which limit, from what to what, when.

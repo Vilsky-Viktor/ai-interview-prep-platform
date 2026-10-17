@@ -97,12 +97,13 @@
     "actions": [
       "Abre «Gestionar preguntas» para leer las preguntas y respuestas de un tema.",
       "Regenera una pregunta floja, marca una respuesta incorrecta o lee los reportes de los candidatos sobre una pregunta.",
-      "Define cuántas preguntas recibe cada candidato de un tema.",
+      "Define cuántas preguntas recibe cada candidato de un tema; con 0, el tema queda fuera para los nuevos candidatos.",
       "Prueba la entrevista como candidato o elimínala."
     ],
     "tips": [
       "Las preguntas escritas por IA pueden tener errores: repasa cada tema antes de invitar a nadie.",
-      "Haz clic en el título para cambiar el nombre de la entrevista."
+      "Haz clic en el título para cambiar el nombre de la entrevista.",
+      "Las tarjetas de arriba suman lo que recibe cada candidato: el total de preguntas, el tiempo por pregunta y el tiempo de toda la entrevista. Se actualizan con cada cambio."
     ]
   },
   "interviewCandidates": {

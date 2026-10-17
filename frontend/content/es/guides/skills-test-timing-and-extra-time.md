@@ -113,11 +113,11 @@ Todas las preguntas de una entrevista tienen el mismo tiempo. Aproximadamente 1 
 ### Número de preguntas
 
 - **Cada tema de una entrevista generada tiene un banco de 70 preguntas,** y una entrevista tiene como máximo 10 temas, que tú apruebas antes de que se redacte ninguna pregunta.
-- **Cada candidato recibe por defecto 10 preguntas por tema,** un conjunto aleatorio del banco en su propio orden, con la misma proporción de preguntas de «Selecciona todas las opciones que correspondan». Puedes fijar un número distinto para cada tema.
+- **Cada candidato recibe por defecto 10 preguntas por tema,** un conjunto aleatorio del banco en su propio orden, con la misma proporción de preguntas de «Selecciona todas las opciones que correspondan». Puedes fijar un número distinto para cada tema. Ponlo en 0 para dejar un tema fuera; al menos un tema conserva sus preguntas.
 
 ### Duración total
 
-Antes de empezar, los candidatos ven el tiempo por pregunta y el tiempo de toda la entrevista en minutos, redondeado hacia arriba: las preguntas que reciben de todos los temas por los segundos por pregunta. Con los valores por defecto, tres temas duran como máximo 30 minutos, o 38 en una entrevista difícil.
+Antes de empezar, los candidatos ven el tiempo por pregunta y el tiempo de toda la entrevista en minutos, redondeado hacia arriba: las preguntas que reciben de todos los temas por los segundos por pregunta. Con los valores por defecto, tres temas duran como máximo 30 minutos, o 38 en una entrevista difícil. En la pestaña de temas de la entrevista ves el total de preguntas, el tiempo por pregunta y el de toda la entrevista, actualizados con cada cambio.
 
 ### Tiempo extra
 

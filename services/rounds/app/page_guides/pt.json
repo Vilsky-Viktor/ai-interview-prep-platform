@@ -97,12 +97,13 @@
     "actions": [
       "Abra “Gerenciar questões” para ler as questões e respostas de um tópico.",
       "Gere novamente uma questão fraca, marque uma resposta errada ou leia os reportes dos candidatos sobre uma questão.",
-      "Defina quantas questões cada candidato recebe de um tópico.",
+      "Defina quantas questões cada candidato recebe de um tópico; com 0, o tópico fica de fora para novos candidatos.",
       "Experimente a entrevista como candidato ou exclua-a."
     ],
     "tips": [
       "Questões escritas por IA podem estar erradas: dê uma olhada em cada tópico antes de convidar alguém.",
-      "Clique no título para renomear a entrevista."
+      "Clique no título para renomear a entrevista.",
+      "Os cartões no topo somam o que cada candidato recebe: o total de questões, o tempo por questão e o tempo da entrevista completa. Eles acompanham cada mudança."
     ]
   },
   "interviewCandidates": {

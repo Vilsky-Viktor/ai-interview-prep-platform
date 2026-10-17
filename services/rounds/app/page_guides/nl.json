@@ -97,12 +97,13 @@
     "actions": [
       "Open “Vragen beheren” om de vragen en antwoorden van een onderwerp te lezen.",
       "Genereer een zwakke vraag opnieuw, markeer een fout antwoord of lees meldingen van kandidaten over een vraag.",
-      "Stel in hoeveel vragen elke kandidaat uit een onderwerp krijgt.",
+      "Stel in hoeveel vragen elke kandidaat uit een onderwerp krijgt; met 0 valt het onderwerp weg voor nieuwe kandidaten.",
       "Probeer het interview als kandidaat, of verwijder het."
     ],
     "tips": [
       "Door AI geschreven vragen kunnen fout zijn: loop elk onderwerp even door voordat je iemand uitnodigt.",
-      "Klik op de titel om het interview een andere naam te geven."
+      "Klik op de titel om het interview een andere naam te geven.",
+      "De kaarten bovenaan tellen op wat elke kandidaat krijgt: het totaal aantal vragen, de tijd per vraag en de tijd van het hele interview. Ze volgen elke wijziging."
     ]
   },
   "interviewCandidates": {

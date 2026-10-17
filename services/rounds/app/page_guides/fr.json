@@ -97,12 +97,13 @@
     "actions": [
       "Ouvrez « Gérer les questions » pour lire les questions et les réponses d'un thème.",
       "Régénérez une question faible, signalez une réponse erronée ou lisez les signalements des candidats sur une question.",
-      "Définissez combien de questions chaque candidat reçoit d'un thème.",
+      "Définissez combien de questions chaque candidat reçoit d'un thème ; à 0, le thème est retiré pour les nouveaux candidats.",
       "Essayez l'entretien en tant que candidat, ou supprimez-le."
     ],
     "tips": [
       "Les questions rédigées par l'IA peuvent être fausses : parcourez chaque thème avant d'inviter qui que ce soit.",
-      "Cliquez sur le titre pour renommer l'entretien."
+      "Cliquez sur le titre pour renommer l'entretien.",
+      "Les cartes en haut additionnent ce que reçoit chaque candidat : le total des questions, le temps par question et la durée de l'entretien complet. Elles suivent chaque changement."
     ]
   },
   "interviewCandidates": {

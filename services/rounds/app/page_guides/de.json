@@ -97,12 +97,13 @@
     "actions": [
       "Öffne „Fragen verwalten“, um die Fragen und Antworten eines Themas zu lesen.",
       "Generiere eine schwache Frage neu, markiere eine falsche Antwort oder lies Meldungen von Kandidaten zu einer Frage.",
-      "Lege fest, wie viele Fragen jeder Kandidat aus einem Thema bekommt.",
+      "Lege fest, wie viele Fragen jeder Kandidat aus einem Thema bekommt; mit 0 fällt das Thema für neue Kandidaten weg.",
       "Probiere das Interview als Kandidat aus oder lösche es."
     ],
     "tips": [
       "Von KI geschriebene Fragen können falsch sein: Überfliege jedes Thema, bevor du jemanden einlädst.",
-      "Klicke auf den Titel, um das Interview umzubenennen."
+      "Klicke auf den Titel, um das Interview umzubenennen.",
+      "Die Karten oben zählen zusammen, was jeder Kandidat bekommt: Fragen insgesamt, Zeit pro Frage und die Zeit des gesamten Interviews. Sie folgen jeder Änderung."
     ]
   },
   "interviewCandidates": {
