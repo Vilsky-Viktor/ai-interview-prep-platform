@@ -1,16 +1,17 @@
 {
   "landing": {
     "title": "Come funziona prepza",
-    "text": "prepza trasforma la descrizione del ruolo in un colloquio a scelta multipla a tempo, con domande casuali diverse per ogni candidato.",
+    "text": "prepza trasforma la descrizione del ruolo in un colloquio a tempo, con domande casuali diverse per ogni candidato. Questa pagina mostra tutto il percorso, dalla creazione di un colloquio alla condivisione dei risultati.",
     "actions": [
-      "Incolla la descrizione del ruolo: prepza propone gli argomenti da valutare.",
-      "Rivedi gli argomenti: tienili, modificali o eliminali, poi approvali per far scrivere le domande.",
-      "Invita i candidati via email, da un file o con un unico link condivisibile.",
-      "Leggi i report: candidati ordinati per punteggio, con ogni risposta e le segnalazioni di integrità."
+      "Incolla la descrizione del ruolo nel riquadro in alto, oppure scegli un modello pronto; regola gli argomenti, e le domande vengono scritte e verificate per te.",
+      "Invita i candidati via email, da un file, con un link condivisibile nel tuo annuncio di lavoro, oppure dal tuo ATS, dalla tua piattaforma o da un agente IA.",
+      "Leggi i report: le risposte e il punteggio di ogni candidato, condivisi via email o in chat con un clic.",
+      "Collega la tua piattaforma, la tua app IA e i siti di annunci di lavoro, ricevi aggiornamenti in Slack o chiedi all'agente di fare il lavoro per te."
     ],
     "tips": [
       "Creare colloqui è gratis. Paghi $2–5 per ogni candidato che risponde, e i tuoi primi candidati sono gratis.",
-      "Prova il tuo colloquio come candidato prima di invitare qualcuno."
+      "Prova il tuo colloquio come candidato prima di invitare qualcuno.",
+      "Guarda il video in alto per un breve tour; le FAQ e le guide sono in fondo alla pagina."
     ]
   },
   "companies": {

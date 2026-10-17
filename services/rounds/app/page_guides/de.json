@@ -1,16 +1,17 @@
 {
   "landing": {
     "title": "So funktioniert prepza",
-    "text": "prepza macht aus deiner Stellenbeschreibung ein Multiple-Choice-Interview mit Zeitlimit, mit eigenen zufälligen Fragen für jeden Kandidaten.",
+    "text": "prepza macht aus deiner Stellenbeschreibung ein Interview mit Zeitlimit, mit eigenen zufälligen Fragen für jeden Kandidaten. Diese Seite zeigt den ganzen Weg, vom Erstellen eines Interviews bis zum Teilen der Ergebnisse.",
     "actions": [
-      "Füge die Stellenbeschreibung ein: prepza schlägt die Themen vor, die getestet werden.",
-      "Prüfe die Themen: behalte, bearbeite oder streiche sie und bestätige sie dann, damit die Fragen geschrieben werden.",
-      "Lade Kandidaten per E-Mail, aus einer Datei oder mit einem Link zum Teilen ein.",
-      "Lies die Berichte: Kandidaten nach Ergebnis sortiert, mit jeder Antwort und Integritätshinweisen."
+      "Füge die Stellenbeschreibung oben in das Feld ein oder wähle eine fertige Vorlage; passe die Themen an, und die Fragen werden für dich geschrieben und geprüft.",
+      "Lade Kandidaten per E-Mail, aus einer Datei, mit einem teilbaren Link in deiner Stellenanzeige oder über dein ATS, deine eigene Plattform oder einen KI-Agenten ein.",
+      "Lies die Berichte: die Antworten und das Ergebnis jedes Kandidaten, mit einem Klick per E-Mail oder Chat geteilt.",
+      "Verbinde deine Plattform, deine KI-App und Jobbörsen, erhalte Updates in Slack oder bitte den Agenten, die Arbeit für dich zu erledigen."
     ],
     "tips": [
       "Interviews zu erstellen ist kostenlos. Du zahlst $2–5 pro Kandidat, der antwortet, und deine ersten Kandidaten sind kostenlos.",
-      "Probiere dein Interview als Kandidat aus, bevor du jemanden einlädst."
+      "Probiere dein Interview als Kandidat aus, bevor du jemanden einlädst.",
+      "Sieh dir oben das Video für einen kurzen Rundgang an; die FAQ und die Ratgeber findest du unten auf der Seite."
     ]
   },
   "companies": {

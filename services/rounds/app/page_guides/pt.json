@@ -1,16 +1,17 @@
 {
   "landing": {
     "title": "Como a prepza funciona",
-    "text": "A prepza transforma a descrição da vaga em uma entrevista de múltipla escolha cronometrada, com questões aleatórias próprias para cada candidato.",
+    "text": "A prepza transforma a descrição da vaga em uma entrevista cronometrada, com questões aleatórias próprias para cada candidato. Esta página mostra todo o processo, da criação de uma entrevista ao compartilhamento dos resultados.",
     "actions": [
-      "Cole a descrição da vaga: a prepza propõe os tópicos a avaliar.",
-      "Revise os tópicos: mantenha, edite ou descarte, depois aprove para gerar as questões.",
-      "Convide candidatos por e-mail, a partir de um arquivo ou com um único link compartilhável.",
-      "Leia os relatórios: candidatos classificados por nota, com cada resposta e alertas de integridade."
+      "Cole a descrição da vaga na caixa no topo ou escolha um modelo pronto; ajuste os tópicos, e as questões são escritas e verificadas para você.",
+      "Convide candidatos por e-mail, a partir de um arquivo, com um link compartilhável no seu anúncio de vaga, ou pelo seu ATS, pela sua própria plataforma ou por um agente de IA.",
+      "Leia os relatórios: as respostas e a nota de cada candidato, compartilhadas por e-mail ou chat com um clique.",
+      "Conecte sua plataforma, seu app de IA e os sites de vagas, receba atualizações no Slack ou peça ao agente para fazer o trabalho por você."
     ],
     "tips": [
       "Criar entrevistas é grátis. Você paga $2–5 por candidato que responde, e seus primeiros candidatos são grátis.",
-      "Experimente sua entrevista como candidato antes de convidar alguém."
+      "Experimente sua entrevista como candidato antes de convidar alguém.",
+      "Assista ao vídeo no topo para um tour rápido; as FAQ e os guias ficam no fim da página."
     ]
   },
   "companies": {

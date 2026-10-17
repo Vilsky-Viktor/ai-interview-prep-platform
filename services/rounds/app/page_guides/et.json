@@ -1,16 +1,17 @@
 {
   "landing": {
     "title": "Kuidas prepza töötab",
-    "text": "prepza teeb sinu töökuulutusest ajapiiranguga valikvastustega intervjuu, kus igal kandidaadil on omad juhuslikud küsimused.",
+    "text": "prepza teeb sinu töökuulutusest ajapiiranguga intervjuu, kus igal kandidaadil on omad juhuslikud küsimused. See leht näitab kogu teed, intervjuu loomisest tulemuste jagamiseni.",
     "actions": [
-      "Kleebi töökuulutus: prepza pakub välja teemad, mida testida.",
-      "Vaata teemad üle: jäta alles, muuda või eemalda need ja kinnita, et küsimused kirjutataks.",
-      "Kutsu kandidaate e-kirjaga, failist või ühe jagatava lingiga.",
-      "Loe aruandeid: kandidaadid hinde järgi järjestatud, iga vastuse ja märgetega kahtlase käitumise kohta."
+      "Kleebi töökuulutus üleval olevasse kasti või vali valmis mall; kohanda teemasid ja küsimused kirjutatakse ning kontrollitakse sinu eest.",
+      "Kutsu kandidaate e-kirjaga, failist, töökuulutuses oleva jagamislingiga või oma ATS-i, oma platvormi või AI-agendi kaudu.",
+      "Loe aruandeid: iga kandidaadi vastused ja hinne, jagatud ühe klikiga e-kirja või vestluse kaudu.",
+      "Ühenda oma platvorm, AI-rakendus ja tööportaalid, saa uuendusi Slackis või palu agendil töö sinu eest ära teha."
     ],
     "tips": [
       "Intervjuude loomine on tasuta. Maksad $2–5 iga vastava kandidaadi eest ja esimesed kandidaadid on tasuta.",
-      "Proovi intervjuud kandidaadina, enne kui kedagi kutsud."
+      "Proovi intervjuud kandidaadina, enne kui kedagi kutsud.",
+      "Vaata lühikese ülevaate saamiseks üleval olevat videot; KKK ja juhendid on lehe allosas."
     ]
   },
   "companies": {

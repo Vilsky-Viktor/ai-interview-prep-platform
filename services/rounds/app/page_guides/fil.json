@@ -1,16 +1,17 @@
 {
   "landing": {
     "title": "Paano gumagana ang prepza",
-    "text": "Ginagawa ng prepza ang iyong job description na isang interview na multiple choice at may oras, na may sariling random na mga tanong para sa bawat aplikante.",
+    "text": "Ginagawa ng prepza ang iyong job description na isang interview na may oras, na may sariling random na mga tanong para sa bawat aplikante. Ipinapakita ng page na ito ang buong proseso, mula sa paggawa ng interview hanggang sa pag-share ng mga resulta.",
     "actions": [
-      "I-paste ang job description: magmumungkahi ang prepza ng mga topic na susubukin.",
-      "I-review ang mga topic: panatilihin, i-edit o alisin ang mga ito, saka aprubahan para maisulat ang mga tanong.",
-      "Mag-imbita ng mga aplikante sa email, mula sa file o gamit ang isang link na puwedeng i-share.",
-      "Basahin ang mga report: naka-ranggo ayon sa grade ang mga aplikante, kasama ang bawat sagot at mga integrity flag."
+      "I-paste ang job description sa box sa itaas, o pumili ng handang template; ayusin ang mga topic, at isusulat at susuriin ang mga tanong para sa iyo.",
+      "Mag-imbita ng mga aplikante sa email, mula sa file, gamit ang share link sa iyong job ad, o mula sa iyong ATS, sarili mong platform o isang AI agent.",
+      "Basahin ang mga report: ang mga sagot at grade ng bawat aplikante, ishine-share sa email o chat sa isang click.",
+      "Ikonekta ang iyong platform, AI app at mga job board, makatanggap ng mga update sa Slack, o ipagawa sa agent ang trabaho para sa iyo."
     ],
     "tips": [
       "Libre ang paggawa ng interview. Magbabayad ka ng $2–5 bawat aplikanteng sumasagot, at libre ang mga una mong aplikante.",
-      "Subukan ang iyong interview bilang aplikante bago ka mag-imbita."
+      "Subukan ang iyong interview bilang aplikante bago ka mag-imbita.",
+      "Panoorin ang video sa itaas para sa maikling tour; nasa ibaba ng page ang FAQ at ang mga gabay."
     ]
   },
   "companies": {

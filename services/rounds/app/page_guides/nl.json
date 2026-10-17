@@ -1,16 +1,17 @@
 {
   "landing": {
     "title": "Zo werkt prepza",
-    "text": "prepza maakt van je functieomschrijving een meerkeuze-interview met tijdslimiet, met eigen willekeurige vragen voor elke kandidaat.",
+    "text": "prepza maakt van je functieomschrijving een interview met tijdslimiet, met eigen willekeurige vragen voor elke kandidaat. Deze pagina laat het hele proces zien, van het maken van een interview tot het delen van de resultaten.",
     "actions": [
-      "Plak de functieomschrijving: prepza stelt de onderwerpen voor die getest worden.",
-      "Controleer de onderwerpen: houd ze, bewerk ze of schrap ze, en keur ze dan goed om de vragen te laten schrijven.",
-      "Nodig kandidaten uit per e-mail, vanuit een bestand of met één deelbare link.",
-      "Lees de rapporten: kandidaten gerangschikt op score, met elk antwoord en integriteitssignalen."
+      "Plak de functieomschrijving in het vak bovenaan of kies een kant-en-klaar sjabloon; pas de onderwerpen aan, en de vragen worden voor je geschreven en gecontroleerd.",
+      "Nodig kandidaten uit per e-mail, vanuit een bestand, met een deelbare link in je vacature, of vanuit je ATS, je eigen platform of een AI-agent.",
+      "Lees de rapporten: de antwoorden en score van elke kandidaat, met één klik gedeeld per e-mail of chat.",
+      "Koppel je platform, je AI-app en vacaturesites, krijg updates in Slack, of vraag de agent om het werk voor je te doen."
     ],
     "tips": [
       "Interviews maken is gratis. Je betaalt $2–5 per kandidaat die antwoordt, en je eerste kandidaten zijn gratis.",
-      "Probeer je interview als kandidaat voordat je iemand uitnodigt."
+      "Probeer je interview als kandidaat voordat je iemand uitnodigt.",
+      "Bekijk de video bovenaan voor een korte rondleiding; de FAQ en de gidsen staan onderaan de pagina."
     ]
   },
   "companies": {

@@ -1,16 +1,17 @@
 {
   "landing": {
     "title": "prepza nasıl çalışır",
-    "text": "prepza iş tanımınızı süreli, çoktan seçmeli bir mülakata dönüştürür; her aday kendi rastgele sorularını alır.",
+    "text": "prepza iş tanımınızı süreli bir mülakata dönüştürür; her aday kendi rastgele sorularını alır. Bu sayfa, mülakat oluşturmaktan sonuçları paylaşmaya kadar tüm süreci anlatır.",
     "actions": [
-      "İş tanımını yapıştırın: prepza ölçülecek konuları önerir.",
-      "Konuları inceleyin: tutun, düzenleyin veya çıkarın, ardından soruların yazılması için onaylayın.",
-      "Adayları e-postayla, bir dosyadan veya tek bir paylaşılabilir bağlantıyla davet edin.",
-      "Raporları okuyun: adaylar nota göre sıralanır, her cevap ve dürüstlük uyarılarıyla birlikte."
+      "İş tanımını üstteki kutuya yapıştırın veya hazır bir şablon seçin; konuları düzenleyin, sorular sizin için yazılıp kontrol edilsin.",
+      "Adayları e-postayla, bir dosyadan, iş ilanınızdaki paylaşım bağlantısıyla ya da ATS'nizden, kendi platformunuzdan veya bir yapay zekâ ajanından davet edin.",
+      "Raporları okuyun: her adayın cevapları ve notu, tek tıkla e-postayla ya da sohbette paylaşılır.",
+      "Platformunuzu, yapay zekâ uygulamanızı ve iş ilanı sitelerini bağlayın, güncellemeleri Slack'te alın ya da işi sizin yerinize yapmasını asistandan isteyin."
     ],
     "tips": [
       "Mülakat oluşturmak ücretsizdir. Cevap veren her aday için $2–5 ödersiniz ve ilk adaylarınız ücretsizdir.",
-      "Kimseyi davet etmeden önce mülakatınızı aday olarak deneyin."
+      "Kimseyi davet etmeden önce mülakatınızı aday olarak deneyin.",
+      "Kısa bir tanıtım için üstteki videoyu izleyin; SSS ve rehberler sayfanın altında."
     ]
   },
   "companies": {

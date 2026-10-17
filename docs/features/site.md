@@ -15,30 +15,26 @@ The pages anyone can open without signing in, and how search engines see them. E
 
 ## Home page
 
-The first screen: "Test everyone. Hire the best.", a "Demos" button with a play icon beside it (under the text on phones) to prepza's YouTube channel, with an info button next to it that explains in a dialog how prepza works (the steps and the price per candidate), and the box to paste a job description. Submitting it:
+The first screen: "Test everyone. Hire the best.", one sentence on what prepza does and its price per candidate, a "video" button with a play icon beside it (under the text on phones) that plays prepza's video in a window on the page (YouTube's no-cookie player, loaded only when the window opens), an info button next to it that explains in a dialog how prepza works, and the box to paste a job description. From tablets up, thin wires run from the window's edges into the box and out of it, with candidates moving along them. Under the box, a short line of facts: the number of languages, how long an interview takes to be ready, and no subscription. Submitting the box:
 
 1. signs you in if needed,
 2. asks which company the interview is for (or its name, for a first company),
 3. starts the generation.
 
-Below, a landing page walks through prepza, one section per screen:
+Below, the page follows a company's hiring, one section per screen, each with a short title, one sentence and a live picture that plays while it's on screen:
 
-- how it works,
-- why prepza: six advantages at a glance (ready in minutes, any role, harder to cheat, no subscription, ranked results, 23 languages),
-- seeing who knows the job,
-- trying it before your candidates do (free templates and a preview),
-- four ways to invite candidates: by email, from a list or file, a shareable link for a job ad, and from an ATS,
-- sharing results,
-- asking the agent: the assistant's panel inviting a candidate, with its input typing more requests one after another (a placeholder only, with reduced motion), and "ask agent" to open it,
-- topic review,
-- questions that fix themselves,
-- the tools prepza works with: the ATSs (Workable, Greenhouse, Teamtailor, Recruitee, Breezy HR) and Slack as their logos, the API and MCP as their mark and name, the API as an example request with a link to its docs, and what each connects (your ATS, your own platform through the API, your AI chat such as Claude or ChatGPT through MCP),
-- a verified brand,
-- fair to candidates and safe for your data: what's true about human review, answer keys, AI training, extra time, candidate notices and data, data retention and hosting, payments and the documents, with links to the documents, terms and privacy policy (no compliance badges),
-- pricing ("Pay per candidate": interviews and the first candidates free, then a price per candidate, with no subscription),
-- a closing call to action: "Create an interview", then the demos and the FAQ ("Demos" with "Go to FAQ" beside it).
+- **Create an interview in minutes:** a job description typed in, its topics adjusted by hand and by asking the AI; or, beside it, a template found and used.
+- **Invite candidates from everywhere:** the interview in the middle, wired to every way candidates come in: your ATS, email invites, bulk imports, a share link in a job ad, the API, the embedded SDK, an AI agent and AI apps over MCP, with candidates counted in as they arrive.
+- **What candidates see:** the invitation in the company's brand with the interview's rules, then a single-choice, a multi-choice ("Select all that apply") and a practical question answered.
+- **See who's best, share it in seconds:** an interview's candidates and report emailed, then a candidate's report shared to a chat as a text summary; then "Create an interview", which goes back up to the job description box, ready to type.
+- **Automate your hiring:** your platform (API, SDK embed, web hooks), an AI app (MCP server) and a job board (share link) wired to prepza, and Slack getting the updates.
+- **Just ask the agent:** the assistant's panel answering how many candidates passed, how to give extra time (from a guide) and inviting a candidate once confirmed, beside what it does: info, help and actions.
+- **Trust, quality and compliance:** the loop that keeps questions good (generated, checked blind by a second AI, answered and rated by candidates, flagged, rewritten), then four cards: a person decides, fair to every candidate, built for compliance (with a link to the documents) and every action on record.
+- **Faster than phone screens, cheaper than subscriptions:** phone screens, testing tools and prepza side by side, by your time and what you pay, with prepza's price range per candidate and a link to the comparisons with other tools.
+- **Everything is free, pay per candidate:** a receipt for a whole interview where every step costs nothing and only the candidates who answered are paid for, at the top-up with the lowest price per candidate; beside it the free candidates to start, every top-up with its price per candidate (the receipt's marked), "Create an interview" and "See pricing", and the small print (no subscription, unanswered invites cost nothing, credits never expire, unused paid credits refundable for 14 days).
+- **The closing screen:** "Create your first interview. It's free." with "Create an interview" and the free candidates, then "More questions?" with buttons to ask the agent, the demo videos on YouTube, the FAQ and the guides.
 
-Each section has a picture of the real interface, several of them animated. Prices come from billing, so they follow any change. Signed-in users see the landing page too. On phones the pictures' gray panels reach the screen's edges, and an animated picture keeps the height of its tallest moment, so the page below never moves back up.
+Prices, the price range and the free candidates come from billing's catalog, so they follow any change; without the catalog the page shows without the comparison and the pricing sections. Nothing in the pictures is real data. Signed-in users see the landing page too. On phones every picture fits the screen and the pictures' soft bands reach its edges. With reduced motion every picture shows a still, complete frame.
 
 ## Skills tests by role
 

@@ -1,16 +1,17 @@
 {
   "landing": {
     "title": "How prepza works",
-    "text": "prepza turns your job description into a timed multiple-choice interview, with its own random questions for every candidate.",
+    "text": "prepza turns your job description into a timed interview, with its own random questions for every candidate. This page walks through it, from creating an interview to sharing the results.",
     "actions": [
-      "Paste the job description: prepza proposes the topics to test.",
-      "Review the topics: keep, edit or drop them, then approve to write the questions.",
-      "Invite candidates by email, from a file or with one shareable link.",
-      "Read the reports: candidates ranked by grade, with every answer and integrity flags."
+      "Paste the job description in the box at the top, or pick a ready template; adjust the topics, and the questions are written and checked for you.",
+      "Invite candidates by email, from a file, with a share link in your job ad, or from your ATS, your own platform or an AI agent.",
+      "Read the reports: every candidate's answers and grade, shared by email or chat in a click.",
+      "Connect your platform, AI app and job boards, get updates in Slack, or ask the agent to do the work for you."
     ],
     "tips": [
       "Creating interviews is free. You pay $2–5 per candidate who answers, and your first candidates are free.",
-      "Try your interview as a candidate before you invite anyone."
+      "Try your interview as a candidate before you invite anyone.",
+      "Watch the video at the top for a short tour; the FAQ and the guides are at the bottom of the page."
     ]
   },
   "companies": {

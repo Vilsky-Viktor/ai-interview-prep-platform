@@ -1,16 +1,17 @@
 {
   "landing": {
     "title": "Comment fonctionne prepza",
-    "text": "prepza transforme votre description de poste en un entretien chronométré à choix multiples, avec des questions aléatoires propres à chaque candidat.",
+    "text": "prepza transforme votre description de poste en un entretien chronométré, avec des questions aléatoires propres à chaque candidat. Cette page présente tout le parcours, de la création d'un entretien au partage des résultats.",
     "actions": [
-      "Collez la description du poste : prepza propose les thèmes à évaluer.",
-      "Relisez les thèmes : gardez-les, modifiez-les ou retirez-les, puis validez pour faire rédiger les questions.",
-      "Invitez des candidats par e-mail, à partir d'un fichier ou avec un seul lien de partage.",
-      "Lisez les rapports : les candidats classés par note, avec chaque réponse et les alertes d'intégrité."
+      "Collez la description du poste dans le champ en haut, ou choisissez un modèle prêt à l'emploi ; ajustez les thèmes, et les questions sont rédigées et vérifiées pour vous.",
+      "Invitez des candidats par e-mail, à partir d'un fichier, avec un lien à partager dans votre annonce, ou depuis votre ATS, votre propre plateforme ou un agent IA.",
+      "Lisez les rapports : les réponses et la note de chaque candidat, partagées par e-mail ou par chat en un clic.",
+      "Connectez votre plateforme, votre app IA et les sites d'emploi, recevez les nouvelles dans Slack, ou demandez à l'agent de faire le travail pour vous."
     ],
     "tips": [
       "Créer des entretiens est gratuit. Vous payez $2–5 par candidat qui répond, et vos premiers candidats sont gratuits.",
-      "Essayez votre entretien en tant que candidat avant d'inviter qui que ce soit."
+      "Essayez votre entretien en tant que candidat avant d'inviter qui que ce soit.",
+      "Regardez la vidéo en haut pour une courte visite ; la FAQ et les guides sont en bas de la page."
     ]
   },
   "companies": {

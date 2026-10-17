@@ -1,16 +1,17 @@
 {
   "landing": {
     "title": "Jak działa prepza",
-    "text": "prepza zamienia opis stanowiska w rozmowę na czas z pytaniami wielokrotnego wyboru, z osobnym losowym zestawem pytań dla każdego kandydata.",
+    "text": "prepza zamienia opis stanowiska w rozmowę na czas, z osobnym losowym zestawem pytań dla każdego kandydata. Ta strona pokazuje cały proces, od utworzenia rozmowy po udostępnienie wyników.",
     "actions": [
-      "Wklej opis stanowiska: prepza zaproponuje tematy do sprawdzenia.",
-      "Przejrzyj tematy: zostaw, edytuj lub usuń je, a potem zatwierdź, by powstały pytania.",
-      "Zaproś kandydatów e-mailem, z pliku albo jednym linkiem do udostępnienia.",
-      "Czytaj raporty: kandydaci uszeregowani według wyniku, z każdą odpowiedzią i ostrzeżeniami o podejrzanych zachowaniach."
+      "Wklej opis stanowiska w polu na górze albo wybierz gotowy szablon; dopasuj tematy, a pytania zostaną za Ciebie napisane i sprawdzone.",
+      "Zaproś kandydatów e-mailem, z pliku, linkiem w ogłoszeniu o pracę albo przez swój ATS, swoją platformę lub agenta AI.",
+      "Czytaj raporty: odpowiedzi i wynik każdego kandydata, udostępniane jednym kliknięciem e-mailem lub na czacie.",
+      "Połącz swoją platformę, aplikację AI i portale z ofertami pracy, otrzymuj powiadomienia na Slacku albo poproś agenta, by zrobił to za Ciebie."
     ],
     "tips": [
       "Tworzenie rozmów jest bezpłatne. Płacisz $2–5 za kandydata, który odpowiada, a pierwsi kandydaci są za darmo.",
-      "Wypróbuj rozmowę jako kandydat, zanim kogokolwiek zaprosisz."
+      "Wypróbuj rozmowę jako kandydat, zanim kogokolwiek zaprosisz.",
+      "Obejrzyj wideo na górze, by zobaczyć krótki przegląd; FAQ i poradniki są na dole strony."
     ]
   },
   "companies": {

@@ -1,16 +1,17 @@
 {
   "landing": {
     "title": "Cara kerja prepza",
-    "text": "prepza mengubah deskripsi pekerjaanmu menjadi wawancara pilihan ganda berbatas waktu, dengan soal acak tersendiri untuk setiap kandidat.",
+    "text": "prepza mengubah deskripsi pekerjaanmu menjadi wawancara berbatas waktu, dengan soal acak tersendiri untuk setiap kandidat. Halaman ini menunjukkan semua langkahnya, dari membuat wawancara sampai membagikan hasilnya.",
     "actions": [
-      "Tempel deskripsi pekerjaan: prepza mengusulkan topik yang akan diuji.",
-      "Tinjau topiknya: pertahankan, ubah, atau buang, lalu setujui untuk menulis soalnya.",
-      "Undang kandidat lewat email, dari file, atau dengan satu tautan yang bisa dibagikan.",
-      "Baca laporannya: kandidat diurutkan berdasarkan nilai, dengan setiap jawaban dan tanda integritas."
+      "Tempel deskripsi pekerjaan di kotak paling atas, atau pilih templat siap pakai; sesuaikan topiknya, dan soalnya ditulis serta diperiksa untukmu.",
+      "Undang kandidat lewat email, dari file, dengan tautan berbagi di iklan lowonganmu, atau dari ATS-mu, platformmu sendiri, atau agen AI.",
+      "Baca laporannya: jawaban dan nilai setiap kandidat, dibagikan lewat email atau chat dengan sekali klik.",
+      "Hubungkan platformmu, aplikasi AI, dan situs lowongan kerja, dapatkan kabar terbaru di Slack, atau minta agen mengerjakannya untukmu."
     ],
     "tips": [
       "Membuat wawancara gratis. Kamu membayar $2–5 per kandidat yang menjawab, dan kandidat pertamamu gratis.",
-      "Coba wawancaramu sebagai kandidat sebelum mengundang siapa pun."
+      "Coba wawancaramu sebagai kandidat sebelum mengundang siapa pun.",
+      "Tonton video di bagian atas untuk tur singkat; Tanya jawab dan panduan ada di bagian bawah halaman."
     ]
   },
   "companies": {
