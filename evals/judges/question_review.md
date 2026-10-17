@@ -5,15 +5,23 @@ at which option is marked.
 Question:
 {question}
 
-Options (the one marked [correct] is the intended answer):
+Options (those marked [correct] are the intended answers; with more than one marked, it is a
+select-all-that-apply question, where the candidate ticks every correct option):
 {options}
 
 Return:
-- key_correct: the option marked correct is actually correct.
-- single_correct: exactly one option can be defended as correct.
+- key_correct: the options marked correct are exactly the ones that are correct: none of them is
+  wrong and no unmarked option is correct.
+- single_correct: the key can't be argued: with one option marked, exactly one option can be
+  defended as correct; with several marked, each option on its own is clearly correct or clearly
+  wrong for the question as written.
 - distractors: 1-5, how tempting the wrong options are to someone who half-knows the subject
-  (1 obviously wrong, 5 convincing).
+  (1 obviously wrong, 5 convincing); for a select-all-that-apply question, how tempting it is to
+  tick a wrong option or to leave a right one out (1 the key is obvious, 5 only someone who knows
+  the subject gets every option right).
 - clarity: 1-5, how clear and unambiguous the question is.
 - relevance: 1-5, how useful it is for preparing for this topic at this level (too easy or too
   hard for the level scores lower).
+- seconds: how many seconds a capable candidate at this level needs to read the question, its
+  example and every option, work out the answer and pick it, under exam conditions.
 - issue: the main problem in a few words, or empty.

@@ -78,6 +78,15 @@ def correct_option(item: dict) -> str:
     return next(option["answer"] for option in item["options"] if option["correct"])
 
 
+def correct_options(item: dict) -> set[str]:
+    return {option["answer"] for option in item["options"] if option["correct"]}
+
+
+def is_multi(item: dict) -> bool:
+    """A select-all-that-apply question: more than one option marked correct."""
+    return len(correct_options(item)) > 1
+
+
 def options_text(item: dict) -> str:
     return "\n".join(
         f"- {option['answer']}{' [correct]' if option['correct'] else ''}"

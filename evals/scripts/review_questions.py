@@ -2,6 +2,7 @@
 
     evals/run.sh generation review_questions.py datasets/questions.json [--sample 40]
     evals/run.sh generation review_questions.py datasets/key_traps.json        # catch rate
+    evals/run.sh generation review_questions.py datasets/multi_questions.json  # multi-answer
     evals/run.sh generation review_questions.py results/test_x.json --sample 40  # a new test
     evals/run.sh generation review_questions.py datasets/questions.json --save-reference
     JUDGE_MODEL=gpt-6-luna evals/run.sh generation review_questions.py datasets/questions.json \\
@@ -21,7 +22,8 @@ from common import (
     JUDGE_EFFORT,
     JUDGE_MODEL,
     RESULTS,
-    correct_option,
+    correct_options,
+    is_multi,
     judge,
     load,
     options_text,
@@ -34,33 +36,62 @@ from pydantic import BaseModel, Field
 
 
 class Review(BaseModel):
-    key_correct: bool = Field(description="The option marked correct is actually correct")
-    single_correct: bool = Field(description="Exactly one option can be defended as correct")
+    key_correct: bool = Field(
+        description="The options marked correct are exactly the ones that are correct"
+    )
+    # Named for single-answer questions, where it means exactly one defensible option; for a
+    # multi-answer one, every option is clearly right or clearly wrong.
+    single_correct: bool = Field(description="The key can't be argued (see the prompt)")
     distractors: int = Field(ge=1, le=5, description="How tempting the wrong options are")
     clarity: int = Field(ge=1, le=5, description="How clear and unambiguous the question is")
     relevance: int = Field(ge=1, le=5, description="How useful it is at this level")
+    seconds: int = Field(description="Seconds a capable candidate needs to read and answer it")
     issue: str = Field(description="The main problem in a few words, or empty")
 
 
-def measure(items: list[dict]) -> dict:
-    """What can be counted without a judge."""
-    longest = 0
+def longest_is_correct(items: list[dict]) -> str:
+    """How often the longest option is a correct one, and how often it would be if length gave
+    nothing away: 25% with one correct option of four, the share of correct options with more."""
+    longest = chance = 0
 
     for item in items:
         sizes = [len(option["answer"]) for option in item["options"]]
-        correct = len(correct_option(item))
-        longest += correct == max(sizes) and sizes.count(correct) == 1
+        longest += any(
+            option["correct"]
+            and len(option["answer"]) == max(sizes)
+            and sizes.count(max(sizes)) == 1
+            for option in item["options"]
+        )
+        chance += len(correct_options(item)) / len(item["options"])
 
-    return {
+    return f"{100 * longest / len(items):.0f}% (by chance {100 * chance / len(items):.0f}%)"
+
+
+def measure(items: list[dict]) -> dict:
+    """What can be counted without a judge; single- and multi-answer questions apart."""
+    single = [item for item in items if not is_multi(item)]
+    multi = [item for item in items if is_multi(item)]
+    measured = {
         "questions": len(items),
+        "multi_answer": len(multi),
         "question_chars": round(statistics.mean(len(item["question"]) for item in items)),
         "option_chars": round(
             statistics.mean(len(o["answer"]) for item in items for o in item["options"])
         ),
-        # About 25% when the correct option's length gives nothing away.
-        "correct_is_longest": f"{100 * longest / len(items):.0f}%",
         "with_example": f"{100 * sum('```' in item['question'] for item in items) / len(items):.0f}%",
     }
+
+    if single:
+        # About 25% when the correct option's length gives nothing away.
+        measured["correct_is_longest"] = longest_is_correct(single)
+
+    if multi:
+        measured["multi_correct_is_longest"] = longest_is_correct(multi)
+        measured["multi_correct_counts"] = {
+            n: sum(len(correct_options(item)) == n for item in multi) for n in (2, 3)
+        }
+
+    return measured
 
 
 async def review(llm, item: dict) -> dict:
@@ -75,18 +106,31 @@ async def review(llm, item: dict) -> dict:
     return {"id": item["id"], **result.model_dump()}
 
 
-def summary(reviews: list[dict]) -> dict:
-    share = lambda key: f"{100 * sum(r[key] for r in reviews) / len(reviews):.0f}%"
+def summary(reviews: list[dict], items: dict[str, dict]) -> dict:
+    share = lambda rows, key: f"{100 * sum(r[key] for r in rows) / len(rows):.1f}%"
     mean = lambda key: round(statistics.mean(r[key] for r in reviews), 2)
-
-    return {
+    result = {
         "reviewed": len(reviews),
-        "key_correct": share("key_correct"),
-        "single_correct": share("single_correct"),
+        "key_correct": share(reviews, "key_correct"),
+        "single_correct": share(reviews, "single_correct"),
         "distractors": mean("distractors"),
         "clarity": mean("clarity"),
         "relevance": mean("relevance"),
     }
+
+    # Each kind's key accuracy apart: multi-answer keys must reach the same target.
+    for kind, rows in (
+        ("single", [r for r in reviews if not is_multi(items[r["id"]])]),
+        ("multi", [r for r in reviews if is_multi(items[r["id"]])]),
+    ):
+        if rows and len(rows) < len(reviews):
+            result[f"{kind}_answer"] = {
+                "reviewed": len(rows),
+                "key_correct": share(rows, "key_correct"),
+                "unarguable_key": share(rows, "single_correct"),
+            }
+
+    return result
 
 
 def compare(reviews: list[dict], items: dict[str, dict]) -> None:
@@ -124,7 +168,8 @@ async def main(
             return await review(llm, item)
 
     reviews = await asyncio.gather(*(one(item) for item in chosen))
-    print(f"judged by {JUDGE_MODEL} ({JUDGE_EFFORT}):", summary(reviews))
+    by_id = {item["id"]: item for item in items}
+    print(f"judged by {JUDGE_MODEL} ({JUDGE_EFFORT}):", summary(reviews, by_id))
     name = path.replace("/", "_").removesuffix(".json")
     save(RESULTS / f"reviews_{name}_{JUDGE_MODEL}_{JUDGE_EFFORT}.json", reviews)
 
@@ -138,7 +183,7 @@ async def main(
         )
 
     if compare_reference or any("expected_key_correct" in item for item in chosen):
-        compare(reviews, {item["id"]: item for item in items})
+        compare(reviews, by_id)
 
     for r in reviews:
         if not r["key_correct"] or not r["single_correct"]:

@@ -5,6 +5,7 @@ library. Question reuse and the draft cache are off, so every run makes every ca
     evals/run.sh generation generate_tests.py python_backend senior_accountant
     MODEL=gpt-6-luna EFFORT=low evals/run.sh generation generate_tests.py --all --label luna
     OVERSAMPLE=1.0 evals/run.sh generation generate_tests.py python_backend --label oversample-1.0
+    evals/run.sh generation generate_tests.py typescript_node --template --label t   # 90 a topic
 
 Writes results/test_<domain>_<label>.json in the question format the other scripts read. At 70
 questions a topic a test costs about $0.07-0.20 on gpt-6-luna at high, about $1.00 on
@@ -20,18 +21,23 @@ from common import DATASETS, RESULTS, cost, generation_models, load, save
 from langchain_core.callbacks import get_usage_metadata_callback
 from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.types import Command
+from prepza_common.limits import limit
+from prepza_common.multi_answer import multi_share
 
 import app.helpers.questions as question_helpers
 import app.services.graph as graph_module
 import app.services.nodes.fill as fill_node
 import app.services.nodes.questions as questions_node
 from app.config.settings import settings
-from app.constants.generation import MAX_CONCURRENCY, RECURSION_LIMIT
+from app.constants.generation import RECURSION_LIMIT
+from app.integrations.redis import get_redis
 from app.storage import draft_cache
 
 
 async def no_reuse(state):
-    return {"topic_embeddings": [], "reused": [[] for _ in state["topics"]]}
+    share = await multi_share(get_redis())
+
+    return {"topic_embeddings": [], "reused": [[] for _ in state["topics"]], "multi_share": share}
 
 
 async def no_cache(*_args):
@@ -55,11 +61,11 @@ def tune(fill_calls: list) -> None:
     fill_node.generate_questions = counted
 
 
-async def generate(domain: dict, fill_calls: list) -> tuple[list[dict], dict]:
+async def generate(domain: dict, fill_calls: list, template: bool) -> tuple[list[dict], dict]:
     graph = graph_module.build_graph(InMemorySaver())
     config = {
         "configurable": {"thread_id": str(uuid.uuid4())},
-        "max_concurrency": MAX_CONCURRENCY,
+        "max_concurrency": await limit(get_redis(), "GENERATION_CALLS_AT_ONCE"),
         "recursion_limit": RECURSION_LIMIT,
     }
     started = time.monotonic()
@@ -69,6 +75,7 @@ async def generate(domain: dict, fill_calls: list) -> tuple[list[dict], dict]:
             {
                 "input_text": domain["text"],
                 "language": "en",
+                "template": template,
             },
             config,
         )
@@ -114,7 +121,7 @@ async def generate(domain: dict, fill_calls: list) -> tuple[list[dict], dict]:
     return items, run
 
 
-async def main(domain_ids: list[str], label: str) -> None:
+async def main(domain_ids: list[str], label: str, template: bool) -> None:
     models = generation_models(settings)
     fill_calls = []
     tune(fill_calls)
@@ -125,7 +132,7 @@ async def main(domain_ids: list[str], label: str) -> None:
 
     for domain_id in domain_ids:
         fill_calls.clear()
-        items, run = await generate(domains[domain_id], fill_calls)
+        items, run = await generate(domains[domain_id], fill_calls, template)
         run["model"] = models
         run["oversample"] = questions_node.QUESTION_OVERSAMPLE
         save(RESULTS / f"test_{domain_id}_{label}.json", {"run": run, "items": items})
@@ -142,8 +149,9 @@ if __name__ == "__main__":
     parser.add_argument("domains", nargs="*", help="domain ids from datasets/inputs.json")
     parser.add_argument("--all", action="store_true", help="every domain")
     parser.add_argument("--label", default="run", help="names the result files")
+    parser.add_argument("--template", action="store_true", help="a template's topic size")
     args = parser.parse_args()
     chosen = (
         [d["id"] for d in load(DATASETS / "inputs.json")["domains"]] if args.all else args.domains
     )
-    asyncio.run(main(chosen, args.label))
+    asyncio.run(main(chosen, args.label, args.template))

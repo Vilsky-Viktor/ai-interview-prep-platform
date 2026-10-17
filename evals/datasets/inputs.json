@@ -31,6 +31,34 @@
    ]
   },
   {
+   "id": "typescript_node",
+   "kind": "job",
+   "level": "hard",
+   "text": "Senior TypeScript / Node.js Engineer\n\nWe run the booking backend and web app of a travel marketplace. You'll own Node.js services and the typed frontend that talks to them.\n\nWhat you'll do\n- Design and build REST APIs in Node.js and TypeScript; version them and handle errors consistently.\n- Model domain types with generics, discriminated unions and type guards.\n- Keep services fast under load: the event loop, streams, worker threads and memory.\n- Manage packages and builds: ES modules and CommonJS, package.json exports, tsconfig.\n- Write tests with Vitest and Playwright and review pull requests.\n\nWhat you bring\n- 6+ years of JavaScript, 4+ of TypeScript in production.\n- Deep knowledge of Node.js internals, promises and async/await.\n- Experience designing APIs used by other teams.",
+   "topics": [
+    {
+     "topic": "TypeScript Type System",
+     "subtopics": [
+      "Generics and conditional types",
+      "Narrowing and discriminated unions"
+     ]
+    },
+    {
+     "topic": "Node.js Runtime",
+     "subtopics": [
+      "Event loop, promises and microtasks",
+      "ES modules, CommonJS and package.json exports"
+     ]
+    },
+    {
+     "topic": "API Design",
+     "subtopics": [
+      "REST errors, versioning and pagination"
+     ]
+    }
+   ]
+  },
+  {
    "id": "marketing_manager",
    "kind": "job",
    "level": "hard",

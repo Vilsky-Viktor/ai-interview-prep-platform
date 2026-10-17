@@ -2,7 +2,7 @@
 # Runs an offline test script inside a service container of the local stack, which has the
 # service's code, packages and OpenAI key, then copies new datasets and results back.
 #
-#   evals/run.sh <generation|generation-worker|rounds> <script.py> [arguments]
+#   evals/run.sh <generation|generation-worker|rounds|library|assistant> <script.py> [arguments]
 #
 # generation-worker has generation's code too: a second container, so two tests can run at once.
 # MODEL, EFFORT, JUDGE_MODEL, JUDGE_EFFORT and OVERSAMPLE are passed through when set.

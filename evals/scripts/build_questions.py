@@ -7,61 +7,87 @@ Costs about $0.50-1 on gpt-6.1-sol (48 subtopics), $0.09 on gpt-6-luna at high.
 To test another model or effort on the same subtopics, without touching the frozen dataset:
     MODEL=gpt-6-luna EFFORT=high evals/run.sh generation build_questions.py --label luna-high
 writes results/questions_<label>.json, which review_questions.py and check_code.py read; --level hard
-builds only the hard domains' questions."""
+builds only the hard domains' questions.
+
+Multi-answer ("select all that apply") questions: --multi N asks for N of each subtopic's questions
+as multi-answer, the rest single-answer, and without --label writes datasets/multi_questions.json:
+    evals/run.sh generation build_questions.py --multi 3"""
 
 import argparse
 import asyncio
 import time
+from collections import Counter
 from datetime import UTC, datetime
 
-from common import DATASETS, RESULTS, cost, generation_models, load, save
+from common import DATASETS, RESULTS, cost, generation_models, is_multi, load, save
 from langchain_core.callbacks import get_usage_metadata_callback
 from langchain_core.messages import HumanMessage
+from prepza_common.examples import example_count
 
 from app.config.settings import settings
-from app.constants.generation import DISTRACTORS, MAX_OPTION_CHARS
+from app.constants.generation import MAX_OPTION_CHARS, OPTIONS
 from app.helpers.questions import build_options, with_example
 from app.integrations import llm
 from app.prompts.questions import QUESTIONS_PROMPT
 from app.schemas.questions import QuestionItemList
+from app.services.key_self_check import self_check
 from app.services.nodes.questions import focus_for
 
+# Multi-answer questions the self-check saw, and dropped by reason, over the run.
+CHECKED = [0]
+DROPPED = Counter()
 
-async def subtopic_questions(domain: dict, topic: str, subtopic: str, count: int) -> list[dict]:
+
+async def subtopic_questions(
+    domain: dict, topic: str, subtopic: str, count: int, multi: int
+) -> list[dict]:
     prompt = QUESTIONS_PROMPT.format(
         level=domain["level"],
         topic=topic,
         subtopic=subtopic,
         focus=focus_for(0, 1),
         count=count,
-        distractors=DISTRACTORS,
+        multi=multi,
+        examples=example_count(count),
+        options=OPTIONS,
         max_chars=MAX_OPTION_CHARS,
         existing="None",
         language="English",
     )
     structured = llm.get_generation_llm().with_structured_output(QuestionItemList)
     result = await structured.ainvoke([HumanMessage(content=prompt)])
-    items = []
+    written = []
 
     for item in result.items:
-        options = None if item.ambiguous else build_options(item.correct_option, item.distractors)
+        options = None if item.ambiguous else build_options(item.correct_options, item.distractors)
 
         if options:
-            items.append(
-                {
-                    "domain": domain["id"],
-                    "level": domain["level"],
-                    "topic": topic,
-                    "subtopic": subtopic,
-                    "question": with_example(item.question, item.example),
-                    "options": options,
-                }
-            )
+            text = with_example(item.question, item.example, item.example_language)
+            written.append({"text": text, "options": options})
+
+    # The service's own self-check: multi-answer keys a blind check doesn't confirm are dropped.
+    reasons = await asyncio.gather(
+        *(self_check(question, topic, domain["level"]) for question in written)
+    )
+    DROPPED.update(reason for reason in reasons if reason)
+    CHECKED[0] += sum(is_multi(question) for question in written)
+    kept = [question for question, reason in zip(written, reasons) if reason is None]
+    items = [
+        {
+            "domain": domain["id"],
+            "level": domain["level"],
+            "topic": topic,
+            "subtopic": subtopic,
+            "question": question["text"],
+            "options": question["options"],
+        }
+        for question in kept
+    ]
 
     return items[:count]
 
 
-async def main(per_subtopic: int, label: str | None, level: str | None) -> None:
+async def main(per_subtopic: int, multi: int, label: str | None, level: str | None) -> None:
     models = generation_models(settings)
     domains = load(DATASETS / "inputs.json")["domains"]
     calls = [
@@ -75,7 +101,7 @@ async def main(per_subtopic: int, label: str | None, level: str | None) -> None:
 
     async def one(call):
         async with limit:
-            return await subtopic_questions(*call, per_subtopic)
+            return await subtopic_questions(*call, per_subtopic, multi)
 
     started = time.monotonic()
 
@@ -85,12 +111,15 @@ async def main(per_subtopic: int, label: str | None, level: str | None) -> None:
     items = [item for batch in batches for item in batch]
 
     for index, item in enumerate(items):
-        item["id"] = f"q{index:04d}"
+        # Multi-answer datasets' ids differ from questions.json's, whose reference verdicts
+        # review_questions.py compares with by id.
+        item["id"] = f"{'m' if multi else 'q'}{index:04d}"
 
     seconds = round(time.monotonic() - started)
     spent = sum(cost(name, metadata) for name, metadata in usage.usage_metadata.items())
+    dataset = "multi_questions.json" if multi else "questions.json"
     save(
-        RESULTS / f"questions_{label}.json" if label else DATASETS / "questions.json",
+        RESULTS / f"questions_{label}.json" if label else DATASETS / dataset,
         {
             "about": "Reference questions, frozen: build_questions.py writes them with the "
             "generation prompt of the date below. Reviewed in reviews.json; altered in "
@@ -100,13 +129,18 @@ async def main(per_subtopic: int, label: str | None, level: str | None) -> None:
             "items": items,
         },
     )
-    print(f"{models}: {len(items)} questions from {len(calls)} subtopics, ${spent:.2f}, {seconds}s")
+    multis = sum(is_multi(item) for item in items)
+    print(
+        f"{models}: {len(items)} questions ({multis} multi-answer; {CHECKED[0]} self-checked, "
+        f"dropped {dict(DROPPED)}) from {len(calls)} subtopics, ${spent:.2f}, {seconds}s"
+    )
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--per-subtopic", type=int, default=5)
+    parser.add_argument("--multi", type=int, default=0, help="multi-answer ones a subtopic")
     parser.add_argument("--label", help="write results/questions_<label>.json instead")
     parser.add_argument("--level", help="only the domains of this level (with --label)")
     args = parser.parse_args()
-    asyncio.run(main(args.per_subtopic, args.label, args.level))
+    asyncio.run(main(args.per_subtopic, args.multi, args.label, args.level))
